@@ -1,0 +1,24 @@
+.word-list-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.word-list-search {
+  flex: 1;
+  min-width: 200px;
+}
+
+.word-list-filters {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.word-list-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}

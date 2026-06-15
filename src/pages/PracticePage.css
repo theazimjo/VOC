@@ -1,0 +1,213 @@
+.practice-page {
+  padding: var(--space-lg);
+}
+
+.practice-source-selector {
+  margin-bottom: var(--space-2xl);
+}
+
+.practice-source-selector h2 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+}
+
+.source-tabs {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.source-tab {
+  padding: 10px 20px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.source-tab:hover {
+  border-color: var(--accent-1);
+  color: var(--text-primary);
+}
+
+.source-tab.active {
+  background: var(--accent-gradient);
+  border-color: transparent;
+  color: white;
+}
+
+.source-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.source-option {
+  padding: var(--space-md);
+  background: var(--bg-glass);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+}
+
+.source-option:hover {
+  border-color: var(--accent-1);
+}
+
+.source-option.selected {
+  border-color: var(--accent-1);
+  background: var(--accent-1-dim);
+}
+
+.source-option .source-option-icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-xs);
+}
+
+.source-option .source-option-name {
+  font-weight: 600;
+  font-size: var(--font-sm);
+}
+
+.source-option .source-option-count {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+/* Word Count Selector */
+.word-count-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.word-count-selector label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.word-count-options {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.word-count-btn {
+  padding: 6px 16px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.word-count-btn:hover {
+  border-color: var(--accent-1);
+  color: var(--text-primary);
+}
+
+.word-count-btn.active {
+  background: var(--accent-gradient);
+  border-color: transparent;
+  color: white;
+}
+
+.practice-start-btn {
+  margin-top: var(--space-md);
+}
+
+/* Practice Session */
+.practice-session {
+  position: relative;
+}
+
+.practice-back-btn {
+  margin-bottom: var(--space-lg);
+}
+
+/* Results Screen */
+.practice-results {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.practice-results .result-icon {
+  font-size: 4rem;
+  margin-bottom: var(--space-lg);
+}
+
+.practice-results h2 {
+  font-size: var(--font-3xl);
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.practice-results p {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-lg);
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.result-stat {
+  padding: var(--space-md);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.result-stat .value {
+  font-size: var(--font-2xl);
+  font-weight: 800;
+}
+
+.result-stat .label {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.result-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .practice-page {
+    padding: var(--space-md);
+  }
+
+  .source-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-stats {
+    grid-template-columns: 1fr;
+  }
+}

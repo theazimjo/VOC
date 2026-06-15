@@ -1,0 +1,30 @@
+/* ========== LAYOUT ========== */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-content {
+  flex: 1;
+  margin-top: var(--navbar-height);
+  padding: var(--space-xl);
+  transition: margin-left var(--transition-slow);
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+.layout-content--expanded {
+  margin-left: var(--sidebar-width);
+}
+
+.layout-content--collapsed {
+  margin-left: var(--sidebar-collapsed);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .layout-content {
+    margin-left: 0 !important;
+    padding: var(--space-md);
+  }
+}

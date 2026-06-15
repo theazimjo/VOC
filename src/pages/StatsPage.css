@@ -1,0 +1,183 @@
+.stats-page {
+  padding: var(--space-lg);
+}
+
+.stats-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.stats-overview .stat-card {
+  text-align: center;
+}
+
+.stats-overview .stat-card .stat-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.stats-overview .stat-card .stat-card-value {
+  font-size: var(--font-3xl);
+}
+
+.stats-section {
+  margin-bottom: var(--space-2xl);
+}
+
+.stats-section h2 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+}
+
+/* Mastery Distribution */
+.mastery-chart {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-end;
+  height: 200px;
+  padding: var(--space-lg);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.mastery-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.mastery-bar {
+  width: 100%;
+  max-width: 60px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  transition: height var(--transition-slow);
+  min-height: 4px;
+}
+
+.mastery-bar-label {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mastery-bar-count {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Source Stats */
+.source-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.source-stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.source-stat-item .source-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.source-stat-item .source-icon {
+  font-size: 1.5rem;
+}
+
+.source-stat-item .source-name {
+  font-weight: 600;
+}
+
+.source-stat-item .source-count {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.source-stat-item .source-mastery {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.source-stat-item .source-mastery-bar {
+  width: 100px;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.source-stat-item .source-mastery-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--accent-gradient);
+  transition: width var(--transition-slow);
+}
+
+.source-stat-item .source-mastery-text {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--accent-2);
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Part of Speech breakdown */
+.pos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-sm);
+}
+
+.pos-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.pos-item .pos-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.pos-item .pos-count {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--accent-1);
+}
+
+@media (max-width: 768px) {
+  .stats-page {
+    padding: var(--space-md);
+  }
+
+  .mastery-chart {
+    height: 150px;
+  }
+
+  .source-stat-item .source-mastery-bar {
+    width: 60px;
+  }
+}

@@ -1,0 +1,241 @@
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { useAuth } from '../contexts/AuthContext';
+import { useBooks } from '../hooks/useBooks';
+import { usePacks } from '../hooks/usePacks';
+import './StatsPage.css';
+
+export default function StatsPage() {
+  const { user } = useAuth();
+  const { books } = useBooks();
+  const { packs } = usePacks();
+  const [allWords, setAllWords] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) return;
+
+    let words = [];
+    
+    // Extract nested words from books
+    books.forEach(book => {
+      const wordsObj = book.words || {};
+      Object.keys(wordsObj).forEach(wordId => {
+        words.push({
+          id: wordId,
+          ...wordsObj[wordId],
+          source: book.title,
+          sourceType: 'books',
+          sourceIcon: '📖'
+        });
+      });
+    });
+
+    // Extract nested words from packs
+    packs.forEach(pack => {
+      const wordsObj = pack.words || {};
+      Object.keys(wordsObj).forEach(wordId => {
+        words.push({
+          id: wordId,
+          ...wordsObj[wordId],
+          source: pack.name,
+          sourceType: 'packs',
+          sourceIcon: pack.icon || '📦'
+        });
+      });
+    });
+
+    setAllWords(words);
+    setLoading(false);
+  }, [user, books, packs]);
+
+  // Stats calculations
+
+  const totalWords = allWords.length;
+  const masteredWords = allWords.filter(w => (w.mastery || 0) >= 80).length;
+  const learningWords = allWords.filter(w => (w.mastery || 0) > 0 && (w.mastery || 0) < 80).length;
+  const newWords = allWords.filter(w => (w.mastery || 0) === 0).length;
+  const dueNow = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= new Date()).length;
+  const avgMastery = totalWords > 0 ? Math.round(allWords.reduce((s, w) => s + (w.mastery || 0), 0) / totalWords) : 0;
+
+  // Mastery distribution
+  const masteryBuckets = [
+    { label: '0-20%', min: 0, max: 20, color: 'var(--error)' },
+    { label: '20-40%', min: 20, max: 40, color: 'var(--warning)' },
+    { label: '40-60%', min: 40, max: 60, color: 'var(--accent-2)' },
+    { label: '60-80%', min: 60, max: 80, color: 'var(--accent-3)' },
+    { label: '80-100%', min: 80, max: 101, color: 'var(--success)' },
+  ];
+
+  const bucketCounts = masteryBuckets.map(b => ({
+    ...b,
+    count: allWords.filter(w => (w.mastery || 0) >= b.min && (w.mastery || 0) < b.max).length
+  }));
+
+  const maxBucketCount = Math.max(...bucketCounts.map(b => b.count), 1);
+
+  // Source stats
+  const sourceMap = {};
+  allWords.forEach(w => {
+    if (!sourceMap[w.source]) {
+      sourceMap[w.source] = { name: w.source, icon: w.sourceIcon, words: [], type: w.sourceType };
+    }
+    sourceMap[w.source].words.push(w);
+  });
+  const sources = Object.values(sourceMap).map(s => ({
+    ...s,
+    count: s.words.length,
+    avgMastery: Math.round(s.words.reduce((sum, w) => sum + (w.mastery || 0), 0) / s.words.length)
+  })).sort((a, b) => b.count - a.count);
+
+  // Part of speech breakdown
+  const posMap = {};
+  allWords.forEach(w => {
+    const pos = w.partOfSpeech || 'unknown';
+    posMap[pos] = (posMap[pos] || 0) + 1;
+  });
+  const posItems = Object.entries(posMap).sort((a, b) => b[1] - a[1]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  if (loading) {
+    return (
+      <div className="stats-page">
+        <div className="page-header"><h1>📈 Statistika</h1></div>
+        <div className="empty-state"><p>Yuklanmoqda...</p></div>
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      className="stats-page"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div className="page-header" variants={itemVariants}>
+        <h1>📈 Statistika</h1>
+      </motion.div>
+
+      {/* Overview Stats */}
+      <motion.div className="stats-overview" variants={itemVariants}>
+        <div className="stat-card">
+          <div className="stat-card-icon">📝</div>
+          <div className="stat-card-value">{totalWords}</div>
+          <div className="stat-card-label">Jami so'zlar</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-card-icon">🏆</div>
+          <div className="stat-card-value">{masteredWords}</div>
+          <div className="stat-card-label">O'zlashtirilgan</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-card-icon">📖</div>
+          <div className="stat-card-value">{learningWords}</div>
+          <div className="stat-card-label">O'rganilmoqda</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-card-icon">🆕</div>
+          <div className="stat-card-value">{newWords}</div>
+          <div className="stat-card-label">Yangi</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-card-icon">🧠</div>
+          <div className="stat-card-value">{dueNow}</div>
+          <div className="stat-card-label">Takrorlash kerak</div>
+        </div>
+        <div className="stat-card">
+          <div className="stat-card-icon">📊</div>
+          <div className="stat-card-value">{avgMastery}%</div>
+          <div className="stat-card-label">O'rtacha daraja</div>
+        </div>
+      </motion.div>
+
+      {/* Mastery Distribution Chart */}
+      {totalWords > 0 && (
+        <motion.div className="stats-section" variants={itemVariants}>
+          <h2>📊 O'zlashtirish darajasi taqsimoti</h2>
+          <div className="mastery-chart">
+            {bucketCounts.map((bucket, idx) => (
+              <div className="mastery-bar-group" key={idx}>
+                <div className="mastery-bar-count">{bucket.count}</div>
+                <motion.div
+                  className="mastery-bar"
+                  style={{ background: bucket.color }}
+                  initial={{ height: 0 }}
+                  animate={{ height: `${(bucket.count / maxBucketCount) * 100}%` }}
+                  transition={{ delay: idx * 0.1, duration: 0.6, ease: 'easeOut' }}
+                />
+                <div className="mastery-bar-label">{bucket.label}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Source Stats */}
+      {sources.length > 0 && (
+        <motion.div className="stats-section" variants={itemVariants}>
+          <h2>📚 Manbalar bo'yicha</h2>
+          <div className="source-stats-list">
+            {sources.map((source, idx) => (
+              <motion.div
+                className="source-stat-item"
+                key={source.name}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.05 }}
+              >
+                <div className="source-info">
+                  <span className="source-icon">{source.icon}</span>
+                  <div>
+                    <div className="source-name">{source.name}</div>
+                    <div className="source-count">{source.count} ta so'z</div>
+                  </div>
+                </div>
+                <div className="source-mastery">
+                  <div className="source-mastery-bar">
+                    <div className="source-mastery-fill" style={{ width: `${source.avgMastery}%` }} />
+                  </div>
+                  <span className="source-mastery-text">{source.avgMastery}%</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Part of Speech */}
+      {posItems.length > 0 && (
+        <motion.div className="stats-section" variants={itemVariants}>
+          <h2>🏷️ So'z turlari</h2>
+          <div className="pos-grid">
+            {posItems.map(([pos, count]) => (
+              <div className="pos-item" key={pos}>
+                <span className="pos-label">{pos}</span>
+                <span className="pos-count">{count}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+      {totalWords === 0 && (
+        <div className="empty-state">
+          <div className="empty-state-icon">📊</div>
+          <h3>Hali ma'lumot yo'q</h3>
+          <p>So'zlar qo'shganingizda statistika bu yerda paydo bo'ladi</p>
+        </div>
+      )}
+    </motion.div>
+  );
+}

@@ -1,0 +1,15 @@
+.word-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.word-form-full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .word-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

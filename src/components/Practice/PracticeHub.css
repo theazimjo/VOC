@@ -1,0 +1,55 @@
+.practice-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.practice-mode-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.practice-mode-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-1);
+  box-shadow: var(--shadow-glow);
+}
+
+.practice-mode-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-sm);
+}
+
+.practice-mode-title {
+  font-size: var(--font-xl);
+  font-weight: 700;
+}
+
+.practice-mode-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  margin-bottom: var(--space-md);
+}
+
+.practice-mode-badge {
+  background: var(--bg-tertiary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+}
+
+.practice-mode-card:hover .practice-mode-badge {
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+}

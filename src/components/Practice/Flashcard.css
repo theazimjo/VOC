@@ -1,0 +1,136 @@
+.flashcard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 400px;
+}
+
+.flashcard-progress {
+  width: 100%;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.flashcard-progress span {
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.flashcard-scene {
+  width: 100%;
+  height: 350px;
+  perspective: 1000px;
+  cursor: pointer;
+  margin-bottom: var(--space-xl);
+}
+
+.flashcard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--transition-spring);
+}
+
+.flashcard.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.flashcard-front {
+  background: var(--bg-secondary);
+}
+
+.flashcard-back {
+  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+  transform: rotateY(180deg);
+}
+
+.flashcard-word {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: var(--space-md);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.flashcard-translation {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  color: var(--success);
+}
+
+.flashcard-def {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.flashcard-example {
+  font-size: var(--font-lg);
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+.flashcard-actions {
+  display: flex;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.flashcard-actions .btn {
+  flex: 1;
+}
+
+.flashcard-hint {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-lg);
+}
+
+.btn-speak-card {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow);
+  z-index: 10;
+}
+
+.btn-speak-card:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--accent-2);
+  transform: scale(1.1);
+}
+
