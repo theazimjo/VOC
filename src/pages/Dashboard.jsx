@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
@@ -17,8 +18,27 @@ export default function Dashboard() {
   const [totalWords, setTotalWords] = useState(0);
   const [masteredWords, setMasteredWords] = useState(0);
   const [dueWords, setDueWords] = useState(0);
+  const [activeWordsCount, setActiveWordsCount] = useState(0);
+  const [profile, setProfile] = useState({ xp: 0, streak: 0 });
   const [diagResult, setDiagResult] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) return;
+    const profileRef = ref(db, `users/${user.uid}/profile`);
+    const unsubscribe = onValue(profileRef, (snap) => {
+      if (snap.exists()) {
+        const val = snap.val();
+        setProfile({
+          xp: val.xp || 0,
+          streak: val.streak || 0,
+          lastActiveDate: val.lastActiveDate || '',
+          ...val
+        });
+      }
+    });
+    return () => unsubscribe();
+  }, [user]);
 
   useEffect(() => {
     if (!user) return;
@@ -68,10 +88,14 @@ export default function Dashboard() {
     });
 
     setTotalWords(allWords.length);
-    setMasteredWords(allWords.filter(w => w.mastery >= 80).length);
+    setMasteredWords(allWords.filter(w => (w.mastery || 0) >= 80).length);
     
     const now = new Date();
     setDueWords(allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now).length);
+
+    // Active words: mastery >= 75 or has custom sentence
+    const activeCount = allWords.filter(w => (w.mastery || 0) >= 75 || (w.customSentence && w.customSentence.trim() !== '')).length;
+    setActiveWordsCount(activeCount);
 
     // Sort by addedAt and take recent 5
     allWords.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
@@ -109,10 +133,53 @@ export default function Dashboard() {
       initial="hidden"
       animate="visible"
     >
-      {/* Greeting */}
-      <motion.div className="dashboard-greeting" variants={itemVariants}>
-        <h1>{getGreeting()}, <span>{displayName}</span>! 👋</h1>
-        <p>Bugun yangi so'zlar o'rganishga tayyormisiz?</p>
+      {/* Greeting & Gamification Badges */}
+      <motion.div className="dashboard-banner-card" variants={itemVariants}>
+        <div className="banner-mesh-bg"></div>
+        <div className="banner-content">
+          <span className="banner-sub">Xush kelibsiz</span>
+          <h1 className="banner-title">
+            {getGreeting()}, <span>{displayName}</span>! 👋
+          </h1>
+          <p className="banner-text">
+            Bugun yangi so'zlarni zabt etish va bilimingizni yanada mustahkamlashga tayyormisiz? Kunlik darslarni yakunlab, streakingizni saqlang!
+          </p>
+          <div className="banner-actions">
+            <button className="btn btn-primary btn-lg" onClick={() => navigate('/practice')}>
+              Darsni Boshlash 🚀
+            </button>
+          </div>
+        </div>
+        
+        <div className="dashboard-game-stats">
+          <motion.div 
+            className="game-stat-badge streak-badge" 
+            title="Kunlik seriya (Streak)"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+          >
+            <span className="badge-icon">🔥</span>
+            <span className="badge-text">{profile.streak} kun</span>
+          </motion.div>
+          <motion.div 
+            className="game-stat-badge xp-badge" 
+            title="Jami tajriba (XP)"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+          >
+            <span className="badge-icon">⚡</span>
+            <span className="badge-text">{profile.xp} XP</span>
+          </motion.div>
+          <motion.div 
+            className="game-stat-badge level-badge" 
+            title="Foydalanuvchi darajasi"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+          >
+            <span className="badge-icon">👑</span>
+            <span className="badge-text">LVL {Math.floor(profile.xp / 500) + 1}</span>
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* Diagnostic Warning */}
@@ -171,9 +238,9 @@ export default function Dashboard() {
           <div className="stat-card-label">Jami so'zlar</div>
         </motion.div>
         <motion.div className="stat-card" whileHover={{ y: -4 }}>
-          <div className="stat-card-icon">📚</div>
-          <div className="stat-card-value">{books.length}</div>
-          <div className="stat-card-label">Kitoblar</div>
+          <div className="stat-card-icon">🔥</div>
+          <div className="stat-card-value">{activeWordsCount}</div>
+          <div className="stat-card-label">Faol so'zlar</div>
         </motion.div>
         <motion.div className="stat-card" whileHover={{ y: -4 }}>
           <div className="stat-card-icon">🏆</div>
@@ -181,9 +248,19 @@ export default function Dashboard() {
           <div className="stat-card-label">O'zlashtirilgan</div>
         </motion.div>
         <motion.div className="stat-card" whileHover={{ y: -4 }}>
+          <div className="stat-card-icon">📚</div>
+          <div className="stat-card-value">{books.length}</div>
+          <div className="stat-card-label">Kitoblar</div>
+        </motion.div>
+        <motion.div className="stat-card" whileHover={{ y: -4 }}>
           <div className="stat-card-icon">📦</div>
           <div className="stat-card-value">{packs.length}</div>
           <div className="stat-card-label">To'plamlar</div>
+        </motion.div>
+        <motion.div className="stat-card" whileHover={{ y: -4 }}>
+          <div className="stat-card-icon">🧠</div>
+          <div className="stat-card-value">{dueWords}</div>
+          <div className="stat-card-label">Takrorlash kerak</div>
         </motion.div>
       </motion.div>
 

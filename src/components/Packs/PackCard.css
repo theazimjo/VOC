@@ -6,17 +6,44 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  transition: all var(--transition-base);
+  transition: all var(--transition-spring);
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .pack-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--border-light);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px);
+  border-color: var(--accent-2);
+  box-shadow: 
+    0 12px 28px rgba(0, 0, 0, 0.4),
+    0 0 20px hsla(200, 90%, 55%, 0.1);
   color: inherit;
+}
+
+/* Shiny reflection sweep */
+.pack-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.15),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: 0.75s ease-in-out;
+  z-index: 4;
+}
+
+.pack-card:hover::before {
+  left: 150%;
 }
 
 .pack-card-top {

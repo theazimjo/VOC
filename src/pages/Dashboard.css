@@ -2,26 +2,87 @@
   padding: var(--space-lg);
 }
 
-.dashboard-greeting {
+/* Banner Card Styling */
+.dashboard-banner-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, hsla(265, 80%, 30%, 0.15), hsla(200, 80%, 25%, 0.15));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl) var(--space-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-xl);
   margin-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(124, 58, 237, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 }
 
-.dashboard-greeting h1 {
-  font-size: var(--font-4xl);
-  font-weight: 800;
+/* Glowing mesh gradient background */
+.banner-mesh-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 10% 20%, hsla(265, 90%, 65%, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, hsla(200, 90%, 55%, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, hsla(170, 80%, 50%, 0.08) 0%, transparent 50%);
+  filter: blur(20px);
+  pointer-events: none;
+  animation: banner-mesh-pulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes banner-mesh-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.08); opacity: 1; }
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+}
+
+.banner-sub {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-3);
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+
+.banner-title {
+  font-size: var(--font-3xl);
+  font-weight: 900;
+  line-height: 1.2;
   margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
 }
 
-.dashboard-greeting h1 span {
+.banner-title span {
   background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-weight: 900;
 }
 
-.dashboard-greeting p {
+.banner-text {
+  font-size: var(--font-md);
   color: var(--text-secondary);
-  font-size: var(--font-lg);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+  max-width: 520px;
+}
+
+.banner-actions {
+  display: flex;
+  gap: var(--space-md);
 }
 
 /* Stats Grid */
@@ -243,10 +304,6 @@
     padding: var(--space-md);
   }
 
-  .dashboard-greeting h1 {
-    font-size: var(--font-2xl);
-  }
-
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
@@ -288,4 +345,74 @@
   .recent-word-item {
     padding: var(--space-sm) var(--space-md);
   }
+
+  .dashboard-banner-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .banner-title {
+    font-size: var(--font-2xl);
+  }
+
+  .dashboard-game-stats {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .game-stat-badge {
+    flex: 1;
+    justify-content: center;
+    padding: 6px 10px;
+    font-size: var(--font-xs);
+  }
+}
+
+/* Gamification Badges */
+.dashboard-game-stats {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.game-stat-badge {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--font-sm);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(8px);
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+
+.game-stat-badge:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-light);
+}
+
+.streak-badge {
+  color: hsl(20, 100%, 65%);
+  background: hsla(20, 100%, 60%, 0.12);
+  border-color: hsla(20, 100%, 60%, 0.35);
+}
+
+.xp-badge {
+  color: hsl(45, 100%, 60%);
+  background: hsla(45, 100%, 55%, 0.12);
+  border-color: hsla(45, 100%, 55%, 0.35);
+}
+
+.level-badge {
+  color: hsl(265, 100%, 75%);
+  background: hsla(265, 100%, 70%, 0.12);
+  border-color: hsla(265, 100%, 70%, 0.35);
 }

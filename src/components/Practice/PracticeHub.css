@@ -20,9 +20,11 @@
 }
 
 .practice-mode-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent-1);
-  box-shadow: var(--shadow-glow);
+  transform: translateY(-8px);
+  border-color: var(--mode-glow-color, var(--accent-1));
+  box-shadow: 
+    0 12px 28px rgba(0, 0, 0, 0.45), 
+    0 0 24px var(--mode-glow-color, var(--accent-1-dim));
 }
 
 .practice-mode-icon {

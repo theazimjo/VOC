@@ -58,6 +58,11 @@ export default function StatsPage() {
   const dueNow = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= new Date()).length;
   const avgMastery = totalWords > 0 ? Math.round(allWords.reduce((s, w) => s + (w.mastery || 0), 0) / totalWords) : 0;
 
+  const activeWords = allWords.filter(w => (w.mastery || 0) >= 75 || (w.customSentence && w.customSentence.trim() !== '')).length;
+  const passiveWords = totalWords - activeWords;
+  const activePercent = totalWords > 0 ? Math.round((activeWords / totalWords) * 100) : 0;
+  const passivePercent = totalWords > 0 ? 100 - activePercent : 0;
+
   // Mastery distribution
   const masteryBuckets = [
     { label: '0-20%', min: 0, max: 20, color: 'var(--error)' },
@@ -139,9 +144,9 @@ export default function StatsPage() {
           <div className="stat-card-label">O'zlashtirilgan</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-icon">📖</div>
-          <div className="stat-card-value">{learningWords}</div>
-          <div className="stat-card-label">O'rganilmoqda</div>
+          <div className="stat-card-icon">🔥</div>
+          <div className="stat-card-value">{activeWords}</div>
+          <div className="stat-card-label">Faol so'zlar</div>
         </div>
         <div className="stat-card">
           <div className="stat-card-icon">🆕</div>
@@ -178,6 +183,39 @@ export default function StatsPage() {
                 <div className="mastery-bar-label">{bucket.label}</div>
               </div>
             ))}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Active vs Passive Vocabulary Split */}
+      {totalWords > 0 && (
+        <motion.div className="stats-section" variants={itemVariants}>
+          <h2>🔥 Faol va Passiv so'zlar tarkibi</h2>
+          <div className="vocabulary-split-card">
+            <div className="vocabulary-split-progress">
+              <div className="progress-bar-segment active-segment" style={{ width: `${activePercent}%` }} title={`Faol so'zlar: ${activePercent}%`}>
+                {activePercent >= 10 && `${activePercent}%`}
+              </div>
+              <div className="progress-bar-segment passive-segment" style={{ width: `${passivePercent}%` }} title={`Passiv so'zlar: ${passivePercent}%`}>
+                {passivePercent >= 10 && `${passivePercent}%`}
+              </div>
+            </div>
+            <div className="vocabulary-split-legend">
+              <div className="legend-item">
+                <span className="legend-dot active-dot"></span>
+                <span className="legend-text">
+                  <strong>Faol so'zlar (Active): {activeWords} ta</strong>
+                  <p>Imlo, talaffuz mashqlaridan o'tgan yoki shaxsiy gap tuzilgan so'zlar.</p>
+                </span>
+              </div>
+              <div className="legend-item">
+                <span className="legend-dot passive-dot"></span>
+                <span className="legend-text">
+                  <strong>Passiv so'zlar (Passive): {passiveWords} ta</strong>
+                  <p>Yangi qo'shilgan yoki hali to'liq nutqiy amaliyotda ishlatilmagan so'zlar.</p>
+                </span>
+              </div>
+            </div>
           </div>
         </motion.div>
       )}

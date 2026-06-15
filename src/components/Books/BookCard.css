@@ -6,25 +6,66 @@
   padding: var(--space-xl) var(--space-lg);
   position: relative;
   overflow: hidden;
-  transition: all var(--transition-base);
-  box-shadow: var(--shadow);
+  transition: all var(--transition-spring);
+  box-shadow: 
+    0 10px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
   height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .book-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-8px) rotateY(-5deg);
+  box-shadow: 
+    12px 16px 28px rgba(0, 0, 0, 0.4),
+    0 0 30px hsla(265, 90%, 65%, 0.1);
   color: inherit;
+}
+
+/* Subtle book spine highlight */
+.book-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 14px;
+  background: linear-gradient(to right, rgba(255,255,255,0.18), rgba(0,0,0,0.22) 30%, rgba(255,255,255,0.06) 60%, transparent);
+  z-index: 3;
+}
+
+/* Shiny reflection sweep */
+.book-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: 0.75s ease-in-out;
+  z-index: 4;
+}
+
+.book-card:hover::before {
+  left: 150%;
 }
 
 .book-card-bg {
   position: absolute;
   inset: 0;
   z-index: 1;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: opacity var(--transition-base);
 }
 

@@ -1,0 +1,286 @@
+.learning-path-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-lg) 0;
+  width: 100%;
+}
+
+.learning-path-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  z-index: 10;
+}
+
+.learning-path-header h2 {
+  font-size: var(--font-3xl);
+  font-weight: 900;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.learning-path-header p {
+  color: var(--text-secondary);
+  font-size: var(--font-md);
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+.learning-path-header .btn {
+  margin-top: var(--space-sm);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.learning-path-header .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25);
+}
+
+.learning-path-tree {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px; /* distance between lessons */
+  width: 100%;
+  max-width: 400px;
+  padding: var(--space-xl) 0;
+}
+
+/* Glowing Neon Curved SVG Winding Path */
+.path-svg {
+  transition: all var(--transition-slow);
+}
+
+.path-node-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 2;
+}
+
+/* Duolingo Winding Alignment */
+.path-left {
+  transform: translateX(-55px);
+}
+
+.path-right {
+  transform: translateX(55px);
+}
+
+.path-center {
+  transform: translateX(0);
+}
+
+/* Circular Node Styles */
+.path-node {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 4px solid var(--border);
+  background: var(--bg-glass-strong);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: var(--shadow);
+  transition: all var(--transition-spring);
+}
+
+/* Locked State */
+.path-node.locked {
+  background: var(--bg-tertiary);
+  border-color: var(--border-light);
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.path-node.locked .node-icon {
+  font-size: 1.8rem;
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+/* Active State (Pulsating Ring) */
+.path-node.active {
+  border-color: var(--accent-1);
+  background: var(--accent-gradient);
+  box-shadow: 0 8px 24px hsla(265, 90%, 65%, 0.3), var(--shadow-glow);
+}
+
+.path-node.active::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 2px solid var(--accent-1);
+  border-radius: 50%;
+  animation: pulse-ring 2s infinite;
+  opacity: 0.6;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.path-node.active .node-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Completed State (Gold / Crowns) */
+.path-node.completed {
+  border-color: hsl(45, 100%, 65%);
+  background: linear-gradient(135deg, hsl(45, 100%, 50%), hsl(35, 100%, 50%));
+  box-shadow: 0 8px 20px hsla(45, 100%, 50%, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.path-node.completed .node-icon {
+  animation: float-crown 3s ease-in-out infinite alternate;
+}
+
+@keyframes float-crown {
+  0% { transform: translateY(0) scale(1); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+  100% { transform: translateY(-4px) scale(1.05); filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4)); }
+}
+
+.node-icon {
+  font-size: 2.2rem;
+  z-index: 2;
+  user-select: none;
+}
+
+/* Node Badge (Dars Nomeri) */
+.node-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  z-index: 3;
+}
+
+.path-node.completed .node-badge {
+  border-color: hsl(45, 100%, 50%);
+  color: hsl(45, 100%, 55%);
+}
+
+.path-node.active .node-badge {
+  border-color: var(--accent-1);
+  color: var(--accent-1);
+}
+
+/* Duolingo Glassmorphic Tooltip */
+.lesson-tooltip {
+  position: absolute;
+  top: 96px;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  width: 300px;
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(124, 58, 237, 0.12);
+  z-index: 100;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  animation: tooltip-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes tooltip-in {
+  from { opacity: 0; transform: scale(0.9) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.lesson-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background: var(--bg-glass-strong);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+}
+
+.lesson-tooltip h3 {
+  font-size: var(--font-lg);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.lesson-tooltip-words {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.lesson-words-preview {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tooltip-actions {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.tooltip-actions .btn {
+  padding: 8px 16px;
+  font-size: var(--font-sm);
+}
+
+@media (max-width: 600px) {
+  .path-left {
+    transform: translateX(-40px);
+  }
+
+  .path-right {
+    transform: translateX(40px);
+  }
+
+  .path-node {
+    width: 76px;
+    height: 76px;
+  }
+}

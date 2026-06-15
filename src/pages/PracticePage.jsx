@@ -12,13 +12,17 @@ import SpellingGame from '../components/Practice/SpellingGame';
 import MatchGame from '../components/Practice/MatchGame';
 import QuizGame from '../components/Practice/QuizGame';
 import SpacedRepetition from '../components/Practice/SpacedRepetition';
+import DictationGame from '../components/Practice/DictationGame';
+import PronounceGame from '../components/Practice/PronounceGame';
+import LearningPath from '../components/Practice/LearningPath';
+import UnifiedLesson from '../components/Practice/UnifiedLesson';
 import './PracticePage.css';
 
 export default function PracticePage() {
   const { user } = useAuth();
   const { books } = useBooks();
   const { packs } = usePacks();
-  const [step, setStep] = useState('source'); // 'source' | 'mode' | 'practice' | 'results'
+  const [step, setStep] = useState('source'); // 'source' | 'path' | 'lesson' | 'mode' | 'practice' | 'results'
   const [sourceType, setSourceType] = useState('books');
   const [selectedSource, setSelectedSource] = useState(null);
   const [selectedMode, setSelectedMode] = useState(null);
@@ -26,36 +30,59 @@ export default function PracticePage() {
   const [practiceWords, setPracticeWords] = useState([]);
   const [results, setResults] = useState(null);
 
+  // Roadmap States
+  const [sourceWords, setSourceWords] = useState([]);
+  const [completedLessons, setCompletedLessons] = useState({});
+  const [selectedLesson, setSelectedLesson] = useState(null);
+
   const sources = sourceType === 'books' ? books : packs;
 
-  const loadWords = async () => {
-    if (!selectedSource || !user) return [];
+  const loadWordsAndLessons = async () => {
+    if (!selectedSource || !user) return { words: [], lessons: {} };
+    
     const wordsRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/words`);
-    const snap = await get(wordsRef);
+    const wordsSnap = await get(wordsRef);
     let words = [];
-    if (snap.exists()) {
-      snap.forEach(childSnap => {
+    if (wordsSnap.exists()) {
+      wordsSnap.forEach(childSnap => {
         words.push({ id: childSnap.key, ...childSnap.val() });
       });
     }
-    return words;
+
+    const completedRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/completedLessons`);
+    const completedSnap = await get(completedRef);
+    let lessons = {};
+    if (completedSnap.exists()) {
+      lessons = completedSnap.val();
+    }
+
+    return { words, lessons };
+  };
+
+  const handleSelectSourceComplete = async () => {
+    const { words, lessons } = await loadWordsAndLessons();
+    if (words.length === 0) {
+      alert("Bu manbada so'zlar yo'q!");
+      return;
+    }
+    setSourceWords(words);
+    setCompletedLessons(lessons);
+    setStep('path');
   };
 
   const handleStartPractice = async (mode) => {
     setSelectedMode(mode);
-    const words = await loadWords();
     
-    if (words.length === 0) {
+    if (sourceWords.length === 0) {
       alert("Bu manbada so'zlar yo'q!");
       return;
     }
 
     let selected;
     if (mode === 'spaced') {
-      // For spaced repetition, use all words (it filters due words internally)
-      selected = words;
+      selected = sourceWords;
     } else {
-      const shuffled = shuffleArray(words);
+      const shuffled = shuffleArray(sourceWords);
       selected = wordCount === 'all' ? shuffled : shuffled.slice(0, Number(wordCount));
     }
 
@@ -73,14 +100,15 @@ export default function PracticePage() {
     }
   };
 
-
   const handleComplete = (resultData) => {
     setResults(resultData);
     setStep('results');
   };
 
   const handleBack = () => {
-    if (step === 'mode') setStep('source');
+    if (step === 'path') setStep('source');
+    else if (step === 'lesson') setStep('path');
+    else if (step === 'mode') setStep('path');
     else if (step === 'practice') setStep('mode');
     else if (step === 'results') setStep('mode');
   };
@@ -104,6 +132,8 @@ export default function PracticePage() {
       case 'spelling': return <SpellingGame {...props} />;
       case 'match': return <MatchGame {...props} />;
       case 'quiz': return <QuizGame {...props} />;
+      case 'dictation': return <DictationGame {...props} />;
+      case 'pronounce': return <PronounceGame {...props} />;
       case 'spaced': return <SpacedRepetition {...props} />;
       default: return null;
     }
@@ -190,7 +220,7 @@ export default function PracticePage() {
                     </div>
                     <button
                       className="btn btn-primary btn-lg practice-start-btn"
-                      onClick={() => setStep('mode')}
+                      onClick={handleSelectSourceComplete}
                     >
                       Davom etish →
                     </button>
@@ -206,6 +236,52 @@ export default function PracticePage() {
                 <p>Avval {sourceType === 'books' ? 'kitob' : "to'plam"} qo'shing va so'zlar kiriting</p>
               </div>
             )}
+          </motion.div>
+        )}
+
+        {/* Step 1.5: Learning Path */}
+        {step === 'path' && (
+          <motion.div
+            key="path"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{ width: '100%' }}
+          >
+            <LearningPath
+              words={sourceWords}
+              completedLessons={completedLessons}
+              onSelectLesson={(lesson) => {
+                setSelectedLesson(lesson);
+                setStep('lesson');
+              }}
+              onStartFreePractice={() => {
+                setStep('mode');
+              }}
+            />
+          </motion.div>
+        )}
+
+        {/* Step 1.6: Unified Lesson */}
+        {step === 'lesson' && selectedLesson && (
+          <motion.div
+            key="lesson"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{ width: '100%' }}
+          >
+            <UnifiedLesson
+              lesson={selectedLesson}
+              sourceType={sourceType}
+              sourceId={selectedSource.id}
+              onComplete={async () => {
+                const { words, lessons } = await loadWordsAndLessons();
+                setSourceWords(words);
+                setCompletedLessons(lessons);
+                setStep('path');
+              }}
+            />
           </motion.div>
         )}
 

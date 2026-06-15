@@ -37,10 +37,15 @@ export default function WordCard({ word, onEdit, onDelete }) {
         </div>
 
         
-        {(word.definition || word.example) && (
+        {(word.definition || word.example || word.customSentence) && (
           <div className="word-details">
             {word.definition && <div>Def: {word.definition}</div>}
             {word.example && <div className="word-example">"{word.example}"</div>}
+            {word.customSentence && (
+              <div className="word-custom-sentence" style={{ marginTop: '6px', color: 'var(--success)', fontWeight: '500', fontSize: 'var(--font-sm)' }}>
+                ✍️ O'zingiz tuzgan gap: "{word.customSentence}"
+              </div>
+            )}
           </div>
         )}
       </div>

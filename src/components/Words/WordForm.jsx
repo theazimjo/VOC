@@ -10,7 +10,8 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
     definition: '',
     example: '',
     notes: '',
-    partOfSpeech: 'noun'
+    partOfSpeech: 'noun',
+    customSentence: ''
   });
 
   useEffect(() => {
@@ -21,7 +22,8 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
         definition: editWord.definition || '',
         example: editWord.example || '',
         notes: editWord.notes || '',
-        partOfSpeech: editWord.partOfSpeech || 'noun'
+        partOfSpeech: editWord.partOfSpeech || 'noun',
+        customSentence: editWord.customSentence || ''
       });
     } else {
       setFormData({
@@ -30,7 +32,8 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
         definition: '',
         example: '',
         notes: '',
-        partOfSpeech: 'noun'
+        partOfSpeech: 'noun',
+        customSentence: ''
       });
     }
   }, [editWord, isOpen]);
@@ -117,6 +120,17 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                     value={formData.example} 
                     onChange={e => setFormData({...formData, example: e.target.value})} 
                     placeholder="Ushbu so'z qatnashgan gap"
+                    style={{ minHeight: '60px' }}
+                  />
+                </div>
+
+                <div className="input-group word-form-full">
+                  <label>O'zingiz tuzgan gap (Faol so'zlik uchun)</label>
+                  <textarea 
+                    className="textarea" 
+                    value={formData.customSentence} 
+                    onChange={e => setFormData({...formData, customSentence: e.target.value})} 
+                    placeholder="So'zni faollashtirish uchun mustaqil gap tuzib kiriting"
                     style={{ minHeight: '60px' }}
                   />
                 </div>

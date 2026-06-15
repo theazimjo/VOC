@@ -1,0 +1,178 @@
+.pronounce-container {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pronounce-card {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-lg);
+  margin-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.pronounce-target-word {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--accent-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.btn-speak-target {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.btn-speak-target:hover {
+  transform: scale(1.15);
+  color: var(--accent-2);
+}
+
+.pronounce-translation {
+  font-size: var(--font-xl);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
+}
+
+.pronounce-error {
+  color: var(--error);
+  font-size: var(--font-sm);
+  background: var(--error-dim);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+  width: 100%;
+}
+
+.recognition-state-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: 140px;
+  justify-content: center;
+}
+
+.mic-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent-gradient-2);
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-glow);
+  transition: all var(--transition-base);
+}
+
+.mic-button:hover:not(:disabled) {
+  transform: scale(1.08);
+}
+
+.mic-button.listening {
+  background: var(--success);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
+}
+
+.listening-status {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.listening-status.instruction {
+  color: var(--text-muted);
+  font-weight: normal;
+}
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  height: 24px;
+}
+
+.equalizer .bar {
+  width: 4px;
+  height: 100%;
+  background-color: white;
+  animation: bounce 0.8s ease-in-out infinite alternate;
+}
+
+.equalizer .bar:nth-child(1) { animation-delay: 0.1s; }
+.equalizer .bar:nth-child(2) { animation-delay: 0.3s; }
+.equalizer .bar:nth-child(3) { animation-delay: 0.2s; }
+.equalizer .bar:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  from { height: 4px; }
+  to { height: 24px; }
+}
+
+.pronounce-feedback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  text-align: center;
+}
+
+.pronounce-feedback.success {
+  color: var(--success);
+  font-weight: 700;
+  font-size: var(--font-lg);
+}
+
+.pronounce-feedback.error {
+  color: var(--error);
+  font-weight: 700;
+  font-size: var(--font-md);
+}
+
+.heard-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-weight: normal;
+  margin-top: 4px;
+}
+
+.pronounce-action-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 600px) {
+  .pronounce-card {
+    padding: var(--space-lg) var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .pronounce-target-word {
+    font-size: 2.2rem;
+  }
+
+  .mic-button {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+}
