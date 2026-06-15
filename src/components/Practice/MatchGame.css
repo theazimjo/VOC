@@ -64,10 +64,10 @@
 
 @media (max-width: 600px) {
   .match-grid {
-    gap: var(--space-sm);
+    gap: var(--space-xs);
   }
   .match-item {
-    font-size: var(--font-md);
-    padding: var(--space-md);
+    font-size: var(--font-sm);
+    padding: var(--space-sm) var(--space-xs);
   }
 }

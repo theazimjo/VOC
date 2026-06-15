@@ -53,3 +53,35 @@
   background: var(--accent-1-dim);
   color: var(--accent-1);
 }
+
+@media (max-width: 768px) {
+  .practice-hub-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .practice-mode-card {
+    padding: var(--space-md) var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .practice-mode-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .practice-mode-title {
+    font-size: var(--font-md);
+  }
+
+  .practice-mode-desc {
+    font-size: var(--font-xs);
+    margin-bottom: var(--space-xs);
+  }
+
+  .practice-mode-badge {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+}

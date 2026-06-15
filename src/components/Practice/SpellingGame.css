@@ -62,3 +62,26 @@
   font-weight: 700;
   font-size: var(--font-lg);
 }
+
+@media (max-width: 600px) {
+  .spelling-card {
+    padding: var(--space-lg) var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .spelling-target {
+    font-size: var(--font-xl);
+    margin-bottom: var(--space-xs);
+  }
+
+  .spelling-hint {
+    font-size: var(--font-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .spelling-input {
+    font-size: var(--font-lg);
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+}

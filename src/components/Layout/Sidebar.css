@@ -237,13 +237,14 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .sidebar {
-    transform: translateX(-100%);
+    left: -260px;
     width: var(--sidebar-width) !important;
     box-shadow: var(--shadow-lg);
+    transition: left var(--transition-slow) !important;
   }
 
   .sidebar.mobile-open {
-    transform: translateX(0);
+    left: 0;
   }
 
   .sidebar-overlay.visible {

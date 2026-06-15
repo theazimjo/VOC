@@ -79,7 +79,23 @@
 }
 
 @media (max-width: 600px) {
+  .quiz-question-card {
+    padding: var(--space-lg) var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .quiz-question {
+    font-size: 2.2rem;
+    margin-bottom: var(--space-xs);
+  }
+
   .quiz-options {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .quiz-option {
+    padding: var(--space-md) var(--space-sm);
+    font-size: var(--font-md);
   }
 }

@@ -78,3 +78,21 @@
   font-size: var(--font-sm);
   margin-bottom: var(--space-md);
 }
+
+@media (max-width: 600px) {
+  .profile-card {
+    padding: var(--space-lg) var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .danger-zone {
+    padding: var(--space-md);
+  }
+}

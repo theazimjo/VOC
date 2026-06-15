@@ -134,3 +134,45 @@
   transform: scale(1.1);
 }
 
+@media (max-width: 600px) {
+  .flashcard-container {
+    min-height: 320px;
+  }
+
+  .flashcard-scene {
+    height: 260px;
+    margin-bottom: var(--space-md);
+  }
+
+  .flashcard-face {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .flashcard-word {
+    font-size: 2rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .flashcard-translation {
+    font-size: 1.6rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .flashcard-def {
+    font-size: var(--font-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .flashcard-example {
+    font-size: var(--font-sm);
+  }
+
+  .btn-speak-card {
+    width: 36px;
+    height: 36px;
+    top: 12px;
+    right: 12px;
+    font-size: 1rem;
+  }
+}
+

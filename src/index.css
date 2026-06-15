@@ -570,19 +570,109 @@ a:hover {
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   :root {
-    --sidebar-width: 0px;
-    --font-3xl: 1.75rem;
-    --font-4xl: 2rem;
-    --font-5xl: 2.5rem;
+    
+    /* Smaller typography on mobile */
+    --font-xs: 0.7rem;
+    --font-sm: 0.8rem;
+    --font-md: 0.9rem;
+    --font-lg: 1rem;
+    --font-xl: 1.1rem;
+    --font-2xl: 1.25rem;
+    --font-3xl: 1.5rem;
+    --font-4xl: 1.75rem;
+    --font-5xl: 2.2rem;
+
+    /* Smaller spacing on mobile */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-2xl: 32px;
+    --space-3xl: 40px;
+    
+    /* Smaller border-radius on mobile */
+    --radius-md: 8px;
+    --radius-lg: 10px;
+    --radius-xl: 16px;
+  }
+
+  .layout-content {
+    padding: var(--space-md) !important;
   }
 
   .grid-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
   }
 
   .page-header {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+  
+  /* Compact button padding on mobile */
+  .btn {
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+  }
+  .btn-lg {
+    padding: 10px 20px;
+  }
+  .btn-sm {
+    padding: 5px 10px;
+  }
+  .btn-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .btn-icon.btn-sm {
+    width: 28px;
+    height: 28px;
+  }
+  
+  /* Compact input padding on mobile */
+  .input, .textarea, .select {
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  /* Compact card padding on mobile */
+  .card-body {
+    padding: var(--space-md);
+  }
+
+  /* Compact Book Cards */
+  .book-card {
+    height: 150px !important;
+    padding: var(--space-md) var(--space-md) !important;
+  }
+  .book-card-icon {
+    font-size: 2rem !important;
+    top: var(--space-md) !important;
+    right: var(--space-md) !important;
+  }
+  .book-card-title {
+    font-size: var(--font-lg) !important;
+  }
+
+  /* Compact Pack Cards */
+  .pack-card {
+    padding: var(--space-md) !important;
+  }
+  .pack-card-icon {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.6rem !important;
+    border-radius: var(--radius-sm) !important;
+  }
+  .pack-card-title {
+    font-size: var(--font-lg) !important;
+  }
+  .pack-card-desc {
+    margin-bottom: var(--space-md) !important;
   }
 }
 

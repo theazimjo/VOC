@@ -249,9 +249,43 @@
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .stats-grid .stat-card {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .stats-grid .stat-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .stats-grid .stat-card-value {
+    font-size: var(--font-xl);
+  }
+
+  .stats-grid .stat-card-label {
+    font-size: var(--font-xs);
   }
 
   .quick-actions {
     grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .quick-action-card {
+    padding: var(--space-sm) var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .quick-action-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  .recent-word-item {
+    padding: var(--space-sm) var(--space-md);
   }
 }
