@@ -236,4 +236,10 @@
   .navbar-search {
     max-width: none;
   }
+
+  @media (max-width: 500px) {
+    .navbar-search {
+      display: none;
+    }
+  }
 }
