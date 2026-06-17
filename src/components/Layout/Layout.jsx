@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import BottomNav from './BottomNav';
+import ParticleCanvas from '../Particles/ParticleCanvas';
 import './Layout.css';
 
 export default function Layout() {
@@ -23,6 +24,8 @@ export default function Layout() {
 
   return (
     <div className="layout">
+      <ParticleCanvas />
+      
       <Sidebar
         collapsed={collapsed}
         onToggle={handleToggleSidebar}
@@ -47,3 +50,4 @@ export default function Layout() {
     </div>
   );
 }
+

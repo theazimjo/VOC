@@ -1,0 +1,365 @@
+.settings-page {
+  padding: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn var(--transition-base);
+}
+
+.settings-header-section {
+  margin-bottom: var(--space-xl);
+}
+
+.settings-title {
+  font-size: var(--font-3xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.settings-subtitle {
+  color: var(--text-secondary);
+  font-size: var(--font-md);
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settings-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+}
+
+.settings-card h2 {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.themes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Theme button cards */
+.theme-item-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-base);
+  width: 100%;
+}
+
+.theme-item-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-1);
+  transform: translateY(-2px);
+}
+
+.theme-item-btn.active {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--accent-1);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Theme previews */
+.theme-preview-box {
+  width: 100px;
+  height: 65px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.theme-preview-box .preview-nav {
+  height: 8px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.theme-preview-box .preview-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.theme-preview-box .preview-line-long {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  width: 80%;
+}
+
+.theme-preview-box .preview-line-short {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  width: 50%;
+}
+
+.theme-preview-box .preview-chips {
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.theme-preview-box .preview-chip {
+  width: 14px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* Specific Preview Theme Colors */
+.theme-preview-box[data-preview-theme="ios"] {
+  background: #09090e;
+}
+.theme-preview-box[data-preview-theme="ios"] .preview-chip.chip-1 { background: #007aff; }
+.theme-preview-box[data-preview-theme="ios"] .preview-chip.chip-2 { background: #34c759; }
+
+.theme-preview-box[data-preview-theme="android"] {
+  background: #141118;
+}
+.theme-preview-box[data-preview-theme="android"] .preview-chip.chip-1 { background: #d0bcff; }
+.theme-preview-box[data-preview-theme="android"] .preview-chip.chip-2 { background: #a8efe0; }
+
+.theme-preview-box[data-preview-theme="god-of-war"] {
+  background: #0d0808;
+  border-color: rgba(185, 28, 28, 0.3);
+}
+.theme-preview-box[data-preview-theme="god-of-war"] .preview-chip.chip-1 { background: #b91c1c; }
+.theme-preview-box[data-preview-theme="god-of-war"] .preview-chip.chip-2 { background: #d97706; }
+
+.theme-preview-box[data-preview-theme="halo"] {
+  background: #0a0f0c;
+  border-color: rgba(6, 182, 212, 0.3);
+}
+.theme-preview-box[data-preview-theme="halo"] .preview-chip.chip-1 { background: #06b6d4; }
+.theme-preview-box[data-preview-theme="halo"] .preview-chip.chip-2 { background: #22c55e; }
+
+.theme-preview-box[data-preview-theme="cyberpunk"] {
+  background: #0c0814;
+  border-color: #f43f5e;
+}
+.theme-preview-box[data-preview-theme="cyberpunk"] .preview-chip.chip-1 { background: #ec4899; }
+.theme-preview-box[data-preview-theme="cyberpunk"] .preview-chip.chip-2 { background: #06b6d4; }
+
+.theme-preview-box[data-preview-theme="kingdom-come"] {
+  background: #19140e;
+  border-color: #ca8a04;
+}
+.theme-preview-box[data-preview-theme="kingdom-come"] .preview-chip.chip-1 { background: #ca8a04; }
+.theme-preview-box[data-preview-theme="kingdom-come"] .preview-chip.chip-2 { background: #b45309; }
+
+.theme-preview-box[data-preview-theme="resident-evil"] {
+  background: #0a0a0a;
+  border-color: #b91c1c;
+}
+.theme-preview-box[data-preview-theme="resident-evil"] .preview-chip.chip-1 { background: #b91c1c; }
+.theme-preview-box[data-preview-theme="resident-evil"] .preview-chip.chip-2 { background: #15803d; }
+
+.theme-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.theme-name {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.active-badge {
+  background: var(--accent-1);
+  color: #fff;
+  font-size: var(--font-xs);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.theme-desc {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+/* Setting options layout */
+.setting-option-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) 0;
+}
+
+.setting-option-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+}
+
+.option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 80%;
+}
+
+.option-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.option-desc {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.settings-divider {
+  border: 0;
+  height: 1px;
+  background: var(--border-light);
+  margin: 4px 0;
+}
+
+/* Switch Toggle Switch */
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-round {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: .4s;
+  border-radius: 34px;
+  border: 1px solid var(--border);
+}
+
+.slider-round:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input:checked + .slider-round {
+  background-color: var(--accent-1);
+  border-color: var(--accent-1);
+}
+
+input:checked + .slider-round:before {
+  transform: translateX(22px);
+}
+
+input:disabled + .slider-round {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Font Size Selector */
+.font-size-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.font-size-btn {
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.font-size-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-1);
+}
+
+.font-size-btn.active {
+  background: var(--accent-1);
+  color: #fff;
+  border-color: var(--accent-1);
+}
+
+.settings-warning-alert {
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  color: var(--accent-3);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-xs);
+  margin-top: var(--space-sm);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

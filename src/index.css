@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Nunito:wght@300;400;600;700;800&family=Cinzel:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;600;800;900&family=MedievalSharp&family=Oswald:wght@300;400;600;700&display=swap');
 
 /* ========== CSS RESET & BASE ========== */
 *, *::before, *::after {
@@ -7,54 +7,59 @@
   box-sizing: border-box;
 }
 
+/* Font size configurations */
+html[data-font-size="small"] {
+  font-size: 14px;
+}
+html[data-font-size="normal"] {
+  font-size: 16px;
+}
+html[data-font-size="large"] {
+  font-size: 19px;
+}
+
 :root {
-  /* Backgrounds (Teal-Slate Obsidian for eye rest and focus) */
-  --bg-primary: hsl(210, 25%, 7%);
-  --bg-secondary: hsl(210, 20%, 11%);
-  --bg-tertiary: hsl(210, 18%, 15%);
-  --bg-glass: hsla(210, 20%, 15%, 0.6);
-  --bg-glass-hover: hsla(210, 20%, 18%, 0.7);
-  --bg-glass-strong: hsla(210, 20%, 16%, 0.85);
+  /* Default = iOS */
+  --bg-primary: hsl(220, 14%, 6%);
+  --bg-secondary: hsl(220, 12%, 11%);
+  --bg-tertiary: hsl(220, 10%, 16%);
+  --bg-glass: rgba(22, 22, 28, 0.6);
+  --bg-glass-hover: rgba(30, 30, 38, 0.7);
+  --bg-glass-strong: rgba(22, 22, 28, 0.85);
 
-  /* Accents (Focus Teal, Retention Sage Green, Recall Amber Gold) */
-  --accent-1: hsl(175, 75%, 45%);
-  --accent-1-dim: hsla(175, 75%, 45%, 0.15);
-  --accent-2: hsl(145, 55%, 55%);
-  --accent-2-dim: hsla(145, 55%, 55%, 0.15);
-  --accent-3: hsl(38, 85%, 55%);
-  --accent-3-dim: hsla(38, 85%, 55%, 0.15);
-  --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  --accent-gradient-2: linear-gradient(135deg, var(--accent-2), var(--accent-3));
-  --accent-gradient-3: linear-gradient(135deg, var(--accent-1), var(--accent-3));
+  --accent-1: hsl(210, 100%, 52%);
+  --accent-1-dim: rgba(59, 130, 246, 0.15);
+  --accent-2: hsl(120, 100%, 40%);
+  --accent-2-dim: rgba(34, 197, 94, 0.15);
+  --accent-3: hsl(35, 100%, 50%);
+  --accent-3-dim: rgba(249, 115, 22, 0.15);
+  --accent-gradient: var(--accent-1);
+  --accent-gradient-2: var(--accent-2);
+  --accent-gradient-3: var(--accent-1);
 
-  /* Text (Warm off-whites and cool grays for optimal contrast) */
-  --text-primary: hsl(210, 15%, 95%);
-  --text-secondary: hsl(210, 12%, 65%);
-  --text-muted: hsl(210, 10%, 45%);
+  --text-primary: hsl(220, 15%, 96%);
+  --text-secondary: hsl(220, 10%, 75%);
+  --text-muted: hsl(220, 8%, 55%);
 
-  /* Status */
-  --success: hsl(145, 65%, 45%);
-  --success-dim: hsla(145, 65%, 45%, 0.15);
-  --error: hsl(355, 70%, 55%);
-  --error-dim: hsla(355, 70%, 55%, 0.15);
-  --warning: hsl(38, 90%, 55%);
-  --warning-dim: hsla(38, 90%, 55%, 0.15);
+  --success: hsl(120, 90%, 45%);
+  --success-dim: rgba(34, 197, 94, 0.15);
+  --error: hsl(354, 90%, 55%);
+  --error-dim: rgba(239, 68, 68, 0.15);
+  --warning: hsl(35, 90%, 50%);
+  --warning-dim: rgba(249, 115, 22, 0.15);
 
-  /* Borders & Shadows */
-  --border: hsla(210, 20%, 25%, 0.4);
-  --border-light: hsla(210, 20%, 35%, 0.25);
-  --shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3);
-  --shadow-lg: 0 16px 48px hsla(0, 0%, 0%, 0.4);
-  --shadow-glow: 0 0 40px hsla(175, 75%, 45%, 0.12);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.04);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.1);
 
-  /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-full: 9999px;
 
-  /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -63,8 +68,7 @@
   --space-2xl: 48px;
   --space-3xl: 64px;
 
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-xs: 0.75rem;
   --font-sm: 0.875rem;
   --font-md: 1rem;
@@ -75,17 +79,219 @@
   --font-4xl: 2.5rem;
   --font-5xl: 3.5rem;
 
-  /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
   --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Layout */
   --sidebar-width: 260px;
   --sidebar-collapsed: 72px;
   --navbar-height: 64px;
 }
+
+/* iOS theme (explicit selector) */
+[data-theme="ios"] {
+  --bg-primary: hsl(220, 14%, 6%);
+  --bg-secondary: hsl(220, 12%, 11%);
+  --bg-tertiary: hsl(220, 10%, 16%);
+  --bg-glass: rgba(22, 22, 28, 0.6);
+  --bg-glass-hover: rgba(30, 30, 38, 0.7);
+  --bg-glass-strong: rgba(22, 22, 28, 0.85);
+  --accent-1: hsl(210, 100%, 52%);
+  --accent-2: hsl(120, 100%, 40%);
+  --accent-3: hsl(35, 100%, 50%);
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.04);
+}
+
+/* Android theme */
+[data-theme="android"] {
+  --bg-primary: hsl(260, 10%, 8%);
+  --bg-secondary: hsl(260, 8%, 13%);
+  --bg-tertiary: hsl(260, 6%, 18%);
+  --bg-glass: rgba(30, 26, 36, 0.7);
+  --bg-glass-hover: rgba(42, 38, 50, 0.8);
+  --bg-glass-strong: rgba(30, 26, 36, 0.9);
+  --accent-1: hsl(262, 60%, 75%); /* Pastel Lavender */
+  --accent-2: hsl(160, 40%, 65%); /* Pastel Mint */
+  --accent-3: hsl(30, 65%, 70%);  /* Pastel Orange */
+  --accent-gradient: var(--accent-1);
+  --accent-gradient-2: var(--accent-2);
+  --accent-gradient-3: var(--accent-1);
+  --font-family: 'Nunito', 'Google Sans', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-light: rgba(255, 255, 255, 0.03);
+}
+
+/* God of War theme */
+[data-theme="god-of-war"] {
+  --bg-primary: hsl(0, 10%, 5%);
+  --bg-secondary: hsl(0, 8%, 10%);
+  --bg-tertiary: hsl(0, 12%, 14%);
+  --bg-glass: rgba(20, 12, 12, 0.8);
+  --bg-glass-hover: rgba(32, 18, 18, 0.9);
+  --bg-glass-strong: rgba(20, 12, 12, 0.95);
+  --accent-1: hsl(0, 80%, 45%); /* Kratos Blood Red */
+  --accent-2: hsl(36, 75%, 50%); /* Norse Gold/Amber */
+  --accent-3: hsl(200, 15%, 60%); /* Leviathan Frost Blue/Silver */
+  --accent-gradient: var(--accent-1);
+  --accent-gradient-2: var(--accent-2);
+  --accent-gradient-3: var(--accent-1);
+  --font-family: 'Cinzel', serif;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --border: rgba(185, 28, 28, 0.35);
+  --border-light: rgba(185, 28, 28, 0.15);
+  --shadow-glow: 0 0 30px rgba(185, 28, 28, 0.15);
+  --text-primary: hsl(0, 5%, 92%);
+  --text-secondary: hsl(0, 3%, 72%);
+  --text-muted: hsl(0, 2%, 52%);
+}
+
+/* Halo theme */
+[data-theme="halo"] {
+  --bg-primary: hsl(145, 16%, 6%);
+  --bg-secondary: hsl(145, 14%, 11%);
+  --bg-tertiary: hsl(145, 12%, 15%);
+  --bg-glass: rgba(16, 26, 20, 0.75);
+  --bg-glass-hover: rgba(24, 38, 30, 0.85);
+  --bg-glass-strong: rgba(16, 26, 20, 0.9);
+  --accent-1: hsl(180, 100%, 45%); /* Cortana Blue Hologram */
+  --accent-2: hsl(135, 70%, 45%);  /* Master Chief Green */
+  --accent-3: hsl(42, 100%, 50%);  /* Spartan Orange Energy */
+  --accent-gradient: var(--accent-1);
+  --accent-gradient-2: var(--accent-2);
+  --accent-gradient-3: var(--accent-1);
+  --font-family: 'Rajdhani', sans-serif;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --border: rgba(6, 182, 212, 0.3);
+  --border-light: rgba(6, 182, 212, 0.1);
+  --shadow-glow: 0 0 30px rgba(6, 182, 212, 0.2);
+}
+
+/* Cyberpunk theme */
+[data-theme="cyberpunk"] {
+  --bg-primary: hsl(260, 25%, 5%);
+  --bg-secondary: hsl(260, 20%, 9%);
+  --bg-tertiary: hsl(260, 16%, 13%);
+  --bg-glass: rgba(12, 8, 20, 0.85);
+  --bg-glass-hover: rgba(20, 14, 30, 0.9);
+  --bg-glass-strong: rgba(12, 8, 20, 0.95);
+  --accent-1: hsl(325, 100%, 55%); /* Cyberpunk Magenta */
+  --accent-2: hsl(180, 100%, 50%); /* Neon Cyan */
+  --accent-3: hsl(50, 100%, 50%);  /* Cyberpunk Yellow */
+  --accent-gradient: var(--accent-1);
+  --accent-gradient-2: var(--accent-2);
+  --accent-gradient-3: var(--accent-1);
+  --font-family: 'Orbitron', sans-serif;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --border: rgba(244, 63, 94, 0.45);
+  --border-light: rgba(34, 211, 238, 0.25);
+  --shadow-glow: 0 0 25px rgba(244, 63, 94, 0.25);
+  --text-primary: #00ffcc;
+  --text-secondary: #ff007f;
+  --text-muted: #ffff00;
+}
+
+/* Kingdom Come theme */
+[data-theme="kingdom-come"] {
+  --bg-primary: hsl(32, 24%, 7%);
+  --bg-secondary: hsl(32, 20%, 12%);
+  --bg-tertiary: hsl(32, 16%, 16%);
+  --bg-glass: rgba(38, 30, 22, 0.75);
+  --bg-glass-hover: rgba(50, 40, 30, 0.85);
+  --bg-glass-strong: rgba(38, 30, 22, 0.9);
+  --accent-1: hsl(43, 75%, 48%);  /* Medieval Gold */
+  --accent-2: hsl(24, 60%, 40%);  /* Leather/Clay */
+  --accent-3: hsl(115, 20%, 35%); /* Leaf Green */
+  --accent-gradient: var(--accent-1);
+  --accent-gradient-2: var(--accent-2);
+  --accent-gradient-3: var(--accent-1);
+  --font-family: 'MedievalSharp', 'Cinzel', serif;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --border: rgba(202, 138, 4, 0.3);
+  --border-light: rgba(202, 138, 4, 0.12);
+  --shadow-glow: 0 0 30px rgba(202, 138, 4, 0.1);
+  --text-primary: hsl(35, 30%, 90%);
+  --text-secondary: hsl(35, 15%, 72%);
+  --text-muted: hsl(35, 10%, 55%);
+}
+
+/* Resident Evil theme */
+[data-theme="resident-evil"] {
+  --bg-primary: hsl(0, 0%, 4%);
+  --bg-secondary: hsl(0, 0%, 8%);
+  --bg-tertiary: hsl(0, 0%, 12%);
+  --bg-glass: rgba(12, 12, 12, 0.9);
+  --bg-glass-hover: rgba(20, 20, 20, 0.95);
+  --bg-glass-strong: rgba(10, 10, 10, 0.98);
+  --accent-1: hsl(0, 85%, 40%);   /* Umbrella Red */
+  --accent-2: hsl(125, 60%, 35%);  /* Virus Green */
+  --accent-3: hsl(210, 20%, 35%);  /* Biohazard Gray */
+  --accent-gradient: var(--accent-1);
+  --accent-gradient-2: var(--accent-2);
+  --accent-gradient-3: var(--accent-1);
+  --font-family: 'Oswald', sans-serif;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --border: rgba(185, 28, 28, 0.55);
+  --border-light: rgba(185, 28, 28, 0.25);
+  --shadow-glow: 0 0 30px rgba(185, 28, 28, 0.25);
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --text-muted: #737373;
+}
+
+/* Auto disabled toast */
+.perf-disabled-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid var(--accent-3);
+  color: var(--text-primary);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  z-index: 9999;
+  box-shadow: var(--shadow-lg);
+  animation: slideInUp 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 
 html {
   font-size: 16px;
@@ -182,14 +388,14 @@ a:hover {
 }
 
 .btn-cards {
-  background: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(280, 87%, 50%));
+  background: var(--accent-1);
   color: white;
-  box-shadow: 0 4px 16px hsla(271, 75%, 45%, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .btn-cards:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px hsla(271, 75%, 45%, 0.4);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
@@ -780,3 +986,295 @@ a:hover {
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
 }
+
+/* ========== THEME SPECIFIC SHAPES & BRANDING ========== */
+
+/* 1. CYBERPUNK THEME SHAPES */
+[data-theme="cyberpunk"] body {
+  background: var(--bg-primary);
+  background-image: linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+[data-theme="cyberpunk"] .sidebar,
+[data-theme="cyberpunk"] .navbar,
+[data-theme="cyberpunk"] .card,
+[data-theme="cyberpunk"] .settings-card,
+[data-theme="cyberpunk"] .book-card,
+[data-theme="cyberpunk"] .pack-card,
+[data-theme="cyberpunk"] .word-card,
+[data-theme="cyberpunk"] .practice-card,
+[data-theme="cyberpunk"] .stats-card,
+[data-theme="cyberpunk"] .practice-session-header,
+[data-theme="cyberpunk"] .login-card,
+[data-theme="cyberpunk"] .register-card {
+  border: 2px solid var(--accent-1) !important;
+  clip-path: polygon(0px 0px, calc(100% - 15px) 0px, 100% 15px, 100% 100%, 15px 100%, 0px calc(100% - 15px)) !important;
+  box-shadow: 4px 4px 0px var(--accent-3) !important;
+  background: var(--bg-glass-strong) !important;
+  border-radius: 0px !important;
+}
+[data-theme="cyberpunk"] .btn {
+  border: 1px solid var(--accent-2) !important;
+  clip-path: polygon(8px 0%, 100% 0%, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0% 100%, 0% 8px) !important;
+  text-transform: uppercase !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.5px !important;
+  box-shadow: 3px 3px 0px var(--accent-1) !important;
+  border-radius: 0px !important;
+}
+[data-theme="cyberpunk"] .btn-primary {
+  background: var(--accent-1) !important;
+  color: #000 !important;
+}
+[data-theme="cyberpunk"] .btn-primary:hover {
+  background: var(--accent-2) !important;
+  color: #000 !important;
+  box-shadow: -3px -3px 0px var(--accent-3) !important;
+}
+
+/* 2. GOD OF WAR THEME SHAPES */
+[data-theme="god-of-war"] body {
+  background: radial-gradient(circle at center, #1c0909 0%, #050202 100%);
+  background-image: radial-gradient(circle at center, rgba(185, 28, 28, 0.05) 0%, transparent 80%);
+}
+[data-theme="god-of-war"] .sidebar,
+[data-theme="god-of-war"] .navbar,
+[data-theme="god-of-war"] .card,
+[data-theme="god-of-war"] .settings-card,
+[data-theme="god-of-war"] .book-card,
+[data-theme="god-of-war"] .pack-card,
+[data-theme="god-of-war"] .word-card,
+[data-theme="god-of-war"] .practice-card,
+[data-theme="god-of-war"] .stats-card,
+[data-theme="god-of-war"] .practice-session-header,
+[data-theme="god-of-war"] .login-card,
+[data-theme="god-of-war"] .register-card {
+  border: 2px solid #581c1c !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(185, 28, 28, 0.2) !important;
+  background: linear-gradient(135deg, rgba(20, 10, 10, 0.95), rgba(10, 5, 5, 0.95)) !important;
+  border-radius: 6px !important;
+}
+[data-theme="god-of-war"] .btn {
+  border: 2px solid var(--accent-2) !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4) !important;
+  text-shadow: 1px 1px 2px #000 !important;
+  border-radius: 4px !important;
+}
+[data-theme="god-of-war"] .btn-primary {
+  background: linear-gradient(180deg, #991b1b, #450a0a) !important;
+  color: #eaeaea !important;
+  border-color: #ef4444 !important;
+}
+[data-theme="god-of-war"] .btn-primary:hover {
+  background: linear-gradient(180deg, #ef4444, #7f1d1d) !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.6) !important;
+  transform: translateY(-2px);
+}
+[data-theme="god-of-war"] h1, 
+[data-theme="god-of-war"] h2, 
+[data-theme="god-of-war"] h3 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+/* 3. HALO THEME SHAPES */
+[data-theme="halo"] body {
+  background: radial-gradient(circle at top right, #091a14 0%, #030605 100%);
+}
+[data-theme="halo"] .sidebar,
+[data-theme="halo"] .navbar,
+[data-theme="halo"] .card,
+[data-theme="halo"] .settings-card,
+[data-theme="halo"] .book-card,
+[data-theme="halo"] .pack-card,
+[data-theme="halo"] .word-card,
+[data-theme="halo"] .practice-card,
+[data-theme="halo"] .stats-card,
+[data-theme="halo"] .practice-session-header,
+[data-theme="halo"] .login-card,
+[data-theme="halo"] .register-card {
+  border: 1px solid rgba(6, 182, 212, 0.4) !important;
+  box-shadow: inset 0 0 15px rgba(6, 182, 212, 0.15), 0 0 25px rgba(6, 182, 212, 0.05) !important;
+  border-radius: 4px !important;
+  background: rgba(10, 16, 14, 0.92) !important;
+}
+[data-theme="halo"] .btn {
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  border: 1px solid var(--accent-1) !important;
+  background: rgba(6, 182, 212, 0.05) !important;
+  border-radius: 3px !important;
+}
+[data-theme="halo"] .btn-primary {
+  background: rgba(6, 182, 212, 0.2) !important;
+  color: #fff !important;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.3) !important;
+}
+[data-theme="halo"] .btn-primary:hover {
+  background: rgba(6, 182, 212, 0.45) !important;
+  box-shadow: 0 0 22px rgba(6, 182, 212, 0.7) !important;
+}
+
+/* 4. KINGDOM COME THEME SHAPES */
+[data-theme="kingdom-come"] body {
+  background: radial-gradient(circle, #231c14 0%, #0e0a07 100%);
+  background-image: radial-gradient(rgba(202, 138, 4, 0.02) 2px, transparent 0);
+  background-size: 30px 30px;
+}
+[data-theme="kingdom-come"] .sidebar,
+[data-theme="kingdom-come"] .navbar,
+[data-theme="kingdom-come"] .card,
+[data-theme="kingdom-come"] .settings-card,
+[data-theme="kingdom-come"] .book-card,
+[data-theme="kingdom-come"] .pack-card,
+[data-theme="kingdom-come"] .word-card,
+[data-theme="kingdom-come"] .practice-card,
+[data-theme="kingdom-come"] .stats-card,
+[data-theme="kingdom-come"] .practice-session-header,
+[data-theme="kingdom-come"] .login-card,
+[data-theme="kingdom-come"] .register-card {
+  border: 3px double #a16207 !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.65), inset 0 0 40px rgba(161, 98, 7, 0.08) !important;
+  background: linear-gradient(135deg, rgba(42, 33, 23, 0.95), rgba(30, 23, 16, 0.95)) !important;
+  border-radius: 12px !important;
+}
+[data-theme="kingdom-come"] .btn {
+  border: 1px solid var(--accent-1) !important;
+  font-family: 'Cinzel', serif !important;
+  border-radius: 6px !important;
+}
+[data-theme="kingdom-come"] .btn-primary {
+  background: linear-gradient(to bottom, #d97706, #78350f) !important;
+  color: #fef3c7 !important;
+  border-color: #ca8a04 !important;
+}
+[data-theme="kingdom-come"] .btn-primary:hover {
+  background: linear-gradient(to bottom, #f59e0b, #92400e) !important;
+}
+
+/* 5. RESIDENT EVIL THEME SHAPES */
+[data-theme="resident-evil"] body {
+  background: #000;
+  background-image: radial-gradient(rgba(185, 28, 28, 0.03) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+[data-theme="resident-evil"] .sidebar,
+[data-theme="resident-evil"] .navbar,
+[data-theme="resident-evil"] .card,
+[data-theme="resident-evil"] .settings-card,
+[data-theme="resident-evil"] .book-card,
+[data-theme="resident-evil"] .pack-card,
+[data-theme="resident-evil"] .word-card,
+[data-theme="resident-evil"] .practice-card,
+[data-theme="resident-evil"] .stats-card,
+[data-theme="resident-evil"] .practice-session-header,
+[data-theme="resident-evil"] .login-card,
+[data-theme="resident-evil"] .register-card {
+  border: 1.5px solid #660000 !important;
+  box-shadow: inset 0 0 20px rgba(185, 28, 28, 0.2), 0 8px 30px rgba(0, 0, 0, 0.95) !important;
+  background: rgba(8, 8, 8, 0.97) !important;
+  border-radius: 3px !important;
+}
+[data-theme="resident-evil"] .btn {
+  border: 1.5px solid #dc2626 !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  border-radius: 2px !important;
+}
+[data-theme="resident-evil"] .btn-primary {
+  background: #7f1d1d !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(185, 28, 28, 0.5) !important;
+}
+[data-theme="resident-evil"] .btn-primary:hover {
+  background: #dc2626 !important;
+  box-shadow: 0 0 25px rgba(220, 38, 38, 0.8) !important;
+}
+[data-theme="resident-evil"] h1, 
+[data-theme="resident-evil"] h2, 
+[data-theme="resident-evil"] h3 {
+  text-transform: uppercase;
+  color: #dc2626 !important;
+  letter-spacing: 1.5px;
+}
+
+/* 6. ANDROID MATERIAL SHAPES */
+[data-theme="android"] body {
+  background: radial-gradient(circle at 50% 50%, #15121a 0%, #0a080d 100%);
+}
+[data-theme="android"] .sidebar,
+[data-theme="android"] .navbar,
+[data-theme="android"] .card,
+[data-theme="android"] .settings-card,
+[data-theme="android"] .book-card,
+[data-theme="android"] .pack-card,
+[data-theme="android"] .word-card,
+[data-theme="android"] .practice-card,
+[data-theme="android"] .stats-card,
+[data-theme="android"] .practice-session-header,
+[data-theme="android"] .login-card,
+[data-theme="android"] .register-card {
+  border-radius: var(--radius-xl) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
+  background: rgba(30, 26, 36, 0.85) !important;
+}
+[data-theme="android"] .btn {
+  border-radius: var(--radius-full) !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 7. iOS SHAPES */
+[data-theme="ios"] .sidebar,
+[data-theme="ios"] .navbar,
+[data-theme="ios"] .card,
+[data-theme="ios"] .settings-card,
+[data-theme="ios"] .book-card,
+[data-theme="ios"] .pack-card,
+[data-theme="ios"] .word-card,
+[data-theme="ios"] .practice-card,
+[data-theme="ios"] .stats-card,
+[data-theme="ios"] .practice-session-header,
+[data-theme="ios"] .login-card,
+[data-theme="ios"] .register-card {
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 20px !important;
+  background: rgba(15, 15, 20, 0.45) !important; /* Premium clear glass */
+}
+[data-theme="ios"] .btn {
+  border-radius: 12px !important;
+}
+[data-theme="ios"] .btn-primary {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #fff !important;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+[data-theme="ios"] .btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, hsl(210, 100%, 52%), hsl(35, 100%, 50%));
+  opacity: 0.2; /* 20% opacity gradient */
+  z-index: -1;
+  transition: opacity var(--transition-base);
+}
+[data-theme="ios"] .btn-primary:hover::before {
+  opacity: 0.35; /* Subtle glow raise on hover */
+}
+
+

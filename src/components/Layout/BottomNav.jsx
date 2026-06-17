@@ -1,13 +1,64 @@
 import { NavLink } from 'react-router-dom';
+import { useTheme } from '../../contexts/ThemeContext';
 import './BottomNav.css';
 
-const navItems = [
-  { to: '/',         icon: '📊', label: 'Dashboard' },
-  { to: '/library',  icon: '📚', label: 'Kutubxona' },
-  { to: '/stats',    icon: '📈', label: 'Statistika' },
-];
-
 export default function BottomNav() {
+  const { theme } = useTheme();
+
+  // Themed icons map
+  const themeIcons = {
+    ios: {
+      dashboard: '📊',
+      library: '📚',
+      stats: '📈',
+      settings: '⚙️'
+    },
+    android: {
+      dashboard: '🤖',
+      library: '📖',
+      stats: '📊',
+      settings: '⚙️'
+    },
+    'god-of-war': {
+      dashboard: 'Ω',
+      library: '📜',
+      stats: '⚔️',
+      settings: '🛡️'
+    },
+    halo: {
+      dashboard: '🛸',
+      library: '💾',
+      stats: '🔋',
+      settings: '🔧'
+    },
+    cyberpunk: {
+      dashboard: '📟',
+      library: '💾',
+      stats: '⚡',
+      settings: '⚙️'
+    },
+    'kingdom-come': {
+      dashboard: '🏰',
+      library: '📜',
+      stats: '🏹',
+      settings: '🔑'
+    },
+    'resident-evil': {
+      dashboard: '☣️',
+      library: '📁',
+      stats: '🩸',
+      settings: '🔧'
+    }
+  };
+
+  const icons = themeIcons[theme] || themeIcons.ios;
+
+  const navItems = [
+    { to: '/',         icon: icons.dashboard, label: 'Dashboard' },
+    { to: '/library',  icon: icons.library,   label: 'Kutubxona' },
+    { to: '/stats',    icon: icons.stats,     label: 'Statistika' }
+  ];
+
   return (
     <nav className="bottom-nav">
       {navItems.map((item) => (
@@ -26,3 +77,4 @@ export default function BottomNav() {
     </nav>
   );
 }
+

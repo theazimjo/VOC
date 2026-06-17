@@ -10,6 +10,9 @@ function getAudioContext() {
 
 export function playSound(type) {
   try {
+    const audioEnabled = localStorage.getItem('voc-audio') !== 'false';
+    if (!audioEnabled) return;
+
     const ctx = getAudioContext();
     if (ctx.state === 'suspended') {
       ctx.resume();

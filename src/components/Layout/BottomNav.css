@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   height: 64px;
-  background: hsla(230, 25%, 8%, 0.85);
+  background: var(--bg-glass-strong);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid var(--border);

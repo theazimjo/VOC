@@ -1,0 +1,92 @@
+export const particleConfigs = {
+  ios: {
+    type: 'orbs',
+    count: 12,
+    minSize: 80,
+    maxSize: 220,
+    minSpeedY: -0.1,
+    maxSpeedY: 0.1,
+    minSpeedX: -0.1,
+    maxSpeedX: 0.1,
+    colors: ['rgba(255, 255, 255, 0.03)', 'rgba(59, 130, 246, 0.03)', 'rgba(147, 51, 234, 0.02)'],
+    blur: true
+  },
+  android: {
+    type: 'material',
+    count: 25,
+    minSize: 15,
+    maxSize: 40,
+    minSpeedY: -0.2,
+    maxSpeedY: -0.05,
+    minSpeedX: -0.1,
+    maxSpeedX: 0.1,
+    colors: ['rgba(244, 67, 54, 0.05)', 'rgba(33, 150, 243, 0.05)', 'rgba(76, 175, 80, 0.05)', 'rgba(255, 235, 59, 0.05)'],
+    blur: false
+  },
+  'god-of-war': {
+    type: 'embers',
+    count: 60,
+    minSize: 2,
+    maxSize: 6,
+    minSpeedY: -1.2,
+    maxSpeedY: -0.4,
+    minSpeedX: -0.3,
+    maxSpeedX: 0.3,
+    colors: ['rgba(239, 68, 68, 0.4)', 'rgba(249, 115, 22, 0.35)', 'rgba(251, 146, 60, 0.25)'],
+    blur: false,
+    wind: 0.1,
+    wobble: true
+  },
+  halo: {
+    type: 'hexagons',
+    count: 15,
+    minSize: 12,
+    maxSize: 32,
+    minSpeedY: -0.15,
+    maxSpeedY: 0.15,
+    minSpeedX: -0.15,
+    maxSpeedX: 0.15,
+    colors: ['rgba(6, 182, 212, 0.15)', 'rgba(34, 197, 94, 0.1)', 'rgba(59, 130, 246, 0.08)'],
+    blur: false,
+    wireframe: true
+  },
+  cyberpunk: {
+    type: 'digital',
+    count: 45,
+    minSize: 1,
+    maxSize: 3,
+    minSpeedY: 1.5,
+    maxSpeedY: 4.5,
+    minSpeedX: 0,
+    maxSpeedX: 0,
+    colors: ['rgba(244, 63, 94, 0.4)', 'rgba(34, 211, 238, 0.4)', 'rgba(234, 179, 8, 0.3)'],
+    blur: false,
+    lines: true
+  },
+  'kingdom-come': {
+    type: 'dust',
+    count: 35,
+    minSize: 3,
+    maxSize: 10,
+    minSpeedY: -0.25,
+    maxSpeedY: -0.05,
+    minSpeedX: -0.2,
+    maxSpeedX: 0.2,
+    colors: ['rgba(202, 138, 4, 0.15)', 'rgba(139, 92, 26, 0.12)', 'rgba(180, 83, 9, 0.08)'],
+    blur: true,
+    leaves: true
+  },
+  'resident-evil': {
+    type: 'spores',
+    count: 30,
+    minSize: 4,
+    maxSize: 14,
+    minSpeedY: -0.4,
+    maxSpeedY: 0.1,
+    minSpeedX: -0.25,
+    maxSpeedX: 0.25,
+    colors: ['rgba(13, 148, 136, 0.2)', 'rgba(185, 28, 28, 0.15)', 'rgba(0, 0, 0, 0.3)'],
+    blur: true,
+    pulse: true
+  }
+};

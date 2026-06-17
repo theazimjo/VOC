@@ -129,6 +129,14 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
                   <span>👤</span> Profil
                 </Link>
 
+                <Link
+                  to="/settings"
+                  className="navbar-dropdown-item"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <span>⚙️</span> Sozlamalar
+                </Link>
+
                 <button
                   className="navbar-dropdown-item danger"
                   onClick={handleLogout}

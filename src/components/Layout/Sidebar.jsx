@@ -1,16 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import './Sidebar.css';
 
 const navItems = [
   { to: '/',         icon: '📊', label: 'Dashboard' },
   { to: '/library',  icon: '📚', label: 'Kutubxona' },
   { to: '/stats',    icon: '📈', label: 'Statistika' },
+  { to: '/settings', icon: '⚙️', label: 'Sozlamalar' },
 ];
 
 export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user, logout } = useAuth();
+  const { theme } = useTheme();
 
   const handleLogout = async () => {
     try {
@@ -47,8 +50,49 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
       >
         {/* Header */}
         <div className="sidebar-header">
-          <div className="sidebar-logo">
-            {collapsed ? 'V' : 'VOC'}
+          <div className={`sidebar-logo theme-${theme}`}>
+            {theme === 'ios' && (
+              <>
+                <span style={{ marginRight: '8px' }}></span>
+                {!collapsed && <span>VOC iOS</span>}
+              </>
+            )}
+            {theme === 'android' && (
+              <>
+                <span style={{ marginRight: '8px' }}>🤖</span>
+                {!collapsed && <span>Material</span>}
+              </>
+            )}
+            {theme === 'god-of-war' && (
+              <>
+                <span style={{ marginRight: '8px', color: '#b91c1c', fontWeight: 'bold' }}>Ω</span>
+                {!collapsed && <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: '1px' }}>RAGNARÖK</span>}
+              </>
+            )}
+            {theme === 'halo' && (
+              <>
+                <span style={{ marginRight: '8px', color: '#06b6d4' }}>🛡️</span>
+                {!collapsed && <span style={{ fontFamily: "'Rajdhani', sans-serif", letterSpacing: '1.5px' }}>VOC-UNSC</span>}
+              </>
+            )}
+            {theme === 'cyberpunk' && (
+              <>
+                <span style={{ marginRight: '8px', color: '#f43f5e', textShadow: '0 0 8px #f43f5e' }}>⚡</span>
+                {!collapsed && <span style={{ fontFamily: "'Orbitron', sans-serif", textTransform: 'uppercase', color: '#00ffcc' }}>Glitch_</span>}
+              </>
+            )}
+            {theme === 'kingdom-come' && (
+              <>
+                <span style={{ marginRight: '8px', color: '#ca8a04' }}>⚜️</span>
+                {!collapsed && <span style={{ fontFamily: "'MedievalSharp', serif", fontStyle: 'italic' }}>Chronicles</span>}
+              </>
+            )}
+            {theme === 'resident-evil' && (
+              <>
+                <span style={{ marginRight: '8px', color: '#dc2626' }}>☣️</span>
+                {!collapsed && <span style={{ fontFamily: "'Oswald', sans-serif", color: '#dc2626', letterSpacing: '1px' }}>UMBRELLA</span>}
+              </>
+            )}
           </div>
           <button
             className="sidebar-toggle"
