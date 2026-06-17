@@ -27,6 +27,50 @@
   overflow-x: auto;
 }
 
+.json-sample-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.json-sample-label {
+  font-family: var(--font-sans, sans-serif);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-muted, var(--text-secondary));
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.btn-copy-sample {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: var(--font-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.btn-copy-sample:hover {
+  background: var(--accent-1);
+  border-color: var(--accent-1);
+  color: #fff;
+}
+
+.btn-copy-sample.copied {
+  background: var(--success, #22c55e);
+  border-color: var(--success, #22c55e);
+  color: #fff;
+}
+
 .json-sample pre {
   margin: 0;
 }
+

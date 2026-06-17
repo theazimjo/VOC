@@ -15,6 +15,67 @@ export function shuffleArray(arr) {
 }
 
 /**
+ * Weighted word selection — harder/less-known words appear more often.
+ *
+ * Weight formula (higher = more likely to be selected):
+ *   - mastery 0–5:       (6 - mastery)  → range 6..1
+ *   - easeFactor ~1.3–3: (3 - easeFactor + 1) → lower ease = higher weight
+ *   - overdue nextReview: words whose review date has passed get a +2 bonus
+ *
+ * If count >= words.length (or count === 'all'), every word is included once
+ * but the ORDER is still weighted (hardest first).
+ *
+ * @param {Array}        words  - full word list
+ * @param {number|'all'} count  - how many words to pick
+ * @returns {Array}             - selected words (shuffled within equal-weight tiers)
+ */
+export function weightedSelectWords(words, count) {
+  if (!words || words.length === 0) return [];
+
+  const now = Date.now();
+
+  const weighted = words.map(w => {
+    const mastery     = typeof w.mastery === 'number' ? w.mastery : 0;
+    const easeFactor  = typeof w.easeFactor === 'number' ? w.easeFactor : 2.5;
+    const nextReview  = w.nextReview ? new Date(w.nextReview).getTime() : 0;
+    const isOverdue   = nextReview > 0 && nextReview <= now;
+
+    // Higher weight = harder / less-known word
+    const weight =
+      (6 - mastery)                        // 6 (new) … 1 (mastered)
+      + Math.max(0, 3 - easeFactor)        // 0 … ~1.7
+      + (isOverdue ? 2 : 0);               // overdue bonus
+
+    return { word: w, weight };
+  });
+
+  const total = count === 'all' ? words.length : Math.min(Number(count), words.length);
+
+  // Weighted sampling WITHOUT replacement
+  const pool = [...weighted];
+  const selected = [];
+
+  while (selected.length < total && pool.length > 0) {
+    const totalWeight = pool.reduce((sum, item) => sum + item.weight, 0);
+    let rand = Math.random() * totalWeight;
+    let chosenIdx = pool.length - 1; // fallback
+
+    for (let i = 0; i < pool.length; i++) {
+      rand -= pool[i].weight;
+      if (rand <= 0) {
+        chosenIdx = i;
+        break;
+      }
+    }
+
+    selected.push(pool[chosenIdx].word);
+    pool.splice(chosenIdx, 1);
+  }
+
+  return selected;
+}
+
+/**
  * Format date for display
  */
 export function formatDate(dateStr) {

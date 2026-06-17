@@ -6,7 +6,7 @@ import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
-import { shuffleArray, speakWord } from '../utils/helpers';
+import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import PracticeHub from '../components/Practice/PracticeHub';
 import Flashcard from '../components/Practice/Flashcard';
@@ -150,10 +150,11 @@ export default function PracticePage() {
 
     let selected;
     if (mode === 'spaced') {
+      // Spaced repetition uses its own ordering logic
       selected = sourceWords;
     } else {
-      const shuffled = shuffleArray(sourceWords);
-      selected = wordCount === 'all' ? shuffled : shuffled.slice(0, Number(wordCount));
+      // Weighted selection: harder / less-known words are more likely to be chosen
+      selected = weightedSelectWords(sourceWords, wordCount);
     }
 
     setPracticeWords(selected);
