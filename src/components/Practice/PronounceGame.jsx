@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './PronounceGame.css';
@@ -7,10 +7,13 @@ import './PronounceGame.css';
 export default function PronounceGame({ words, onComplete, onUpdateWord }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isListening, setIsListening] = useState(false);
-  const [status, setStatus] = useState('playing'); // playing, correct, wrong, unsupported
+  const [status, setStatus] = useState('playing'); // playing, correct, wrong, unsupported, skipped
+  const [answered, setAnswered] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
   const [heardText, setHeardText] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-  const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
   const recognitionRef = useRef(null);
 
   const currentWord = words[currentIndex];
@@ -63,7 +66,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
   }, [currentIndex]);
 
   const startListening = () => {
-    if (status !== 'playing' || isListening) return;
+    if (answered || isListening || status === 'unsupported') return;
     setErrorMsg('');
     try {
       recognitionRef.current.start();
@@ -76,10 +79,14 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
     const target = currentWord.word.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
     const spoken = speech.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
 
-    const isCorrect = spoken === target;
+    const correct = spoken === target;
 
-    if (isCorrect) {
+    if (correct) {
       setStatus('correct');
+      setAnswered(true);
+      setIsCorrect(true);
+      setCorrectCount(c => c + 1);
+
       const sm2Data = calculateNextReview(
         5, // Active perfect quality
         currentWord.easeFactor || 2.5, 
@@ -87,22 +94,18 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
         currentWord.reviewCount || 0
       );
       await onUpdateWord(currentWord.id, sm2Data);
-
-      const newResults = {
-        correctCount: results.correctCount + 1,
-        incorrectCount: results.incorrectCount
-      };
-      setResults(newResults);
-
-      setTimeout(() => {
-        advance(newResults);
-      }, 1500);
     } else {
       setStatus('wrong');
     }
   };
 
   const handleSkip = async () => {
+    if (answered) return;
+    setAnswered(true);
+    setIsCorrect(false);
+    setStatus('skipped');
+    setIncorrectCount(c => c + 1);
+
     const sm2Data = calculateNextReview(
       1, // Failed
       currentWord.easeFactor || 2.5, 
@@ -110,13 +113,6 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
       currentWord.reviewCount || 0
     );
     await onUpdateWord(currentWord.id, sm2Data);
-
-    const newResults = {
-      correctCount: results.correctCount,
-      incorrectCount: results.incorrectCount + 1
-    };
-    setResults(newResults);
-    advance(newResults);
   };
 
   const handleRetry = () => {
@@ -125,115 +121,169 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
     setErrorMsg('');
   };
 
-  const advance = (newResults) => {
+  const handleNext = () => {
     if (currentIndex < words.length - 1) {
       setCurrentIndex(prev => prev + 1);
       setStatus('playing');
       setHeardText('');
+      setErrorMsg('');
+      setAnswered(false);
+      setIsCorrect(false);
     } else {
-      onComplete({ totalWords: words.length, ...newResults });
+      onComplete({
+        totalWords: words.length,
+        correctCount,
+        incorrectCount: status === 'unsupported' ? incorrectCount + 1 : incorrectCount
+      });
     }
+  };
+
+  const handleUnsupportedSkip = async () => {
+    setIncorrectCount(c => c + 1);
+    const sm2Data = calculateNextReview(
+      1, 
+      currentWord.easeFactor || 2.5, 
+      currentWord.interval || 0, 
+      currentWord.reviewCount || 0
+    );
+    await onUpdateWord(currentWord.id, sm2Data);
+    handleNext();
   };
 
   if (!currentWord) return null;
 
+  const isLast = currentIndex === words.length - 1;
+
   return (
     <div className="pronounce-container">
-      <div className="flashcard-progress">
-        <span>{currentIndex + 1}</span> / {words.length}
+      {/* Progress bar */}
+      <div className="pronounce-progress-track">
+        <div className="pronounce-progress-fill" style={{ width: `${(currentIndex / words.length) * 100}%` }} />
+      </div>
+      <div className="pronounce-progress-label">
+        <span>{currentIndex + 1} / {words.length}</span>
+        {status !== 'unsupported' && (
+          <button 
+            className="btn-pronounce-speak-target" 
+            type="button" 
+            onClick={() => speakWord(currentWord.word)}
+            title="Tinglash"
+          >
+            🔊 Tinglash
+          </button>
+        )}
       </div>
 
-      <motion.div 
-        className="pronounce-card"
-        animate={status === 'wrong' ? { x: [-10, 10, -10, 10, 0] } : {}}
-        transition={{ duration: 0.4 }}
-      >
-        <div className="pronounce-target-word">
-          {currentWord.word}
-          <button 
-            type="button" 
-            className="btn-speak-target" 
-            onClick={() => speakWord(currentWord.word)}
-            title="Talaffuzini eshitish"
-          >
-            🔊
-          </button>
-        </div>
-        <div className="pronounce-translation">{currentWord.translation}</div>
-
-        {errorMsg && <div className="pronounce-error">{errorMsg}</div>}
-
-        <div className="recognition-state-wrapper">
-          {status === 'playing' && (
-            <button 
-              type="button"
-              className={`mic-button ${isListening ? 'listening' : ''}`}
-              onClick={startListening}
-              disabled={isListening}
-            >
-              {isListening ? (
-                <div className="equalizer">
-                  <span className="bar"></span>
-                  <span className="bar"></span>
-                  <span className="bar"></span>
-                  <span className="bar"></span>
-                </div>
-              ) : (
-                '🎙️'
-              )}
-            </button>
+      <AnimatePresence mode="wait">
+        <motion.div 
+          key={currentIndex}
+          className={`pronounce-card ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
+          animate={status === 'wrong' ? { x: [-10, 10, -10, 10, 0] } : {}}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="pronounce-card-label">Talaffuz qiling (inglizcha)</div>
+          <div className="pronounce-target-word">
+            {currentWord.word}
+          </div>
+          <div className="pronounce-translation">{currentWord.translation}</div>
+          {currentWord.definition && (
+            <div className="pronounce-definition">{currentWord.definition}</div>
           )}
 
-          {isListening && <div className="listening-status">Eshitmoqdaman... Gapiring</div>}
-          {!isListening && status === 'playing' && (
-            <div className="listening-status instruction">Tugmani bosing va so'zni inglizcha ayting</div>
-          )}
+          {errorMsg && <div className="pronounce-error">{errorMsg}</div>}
 
-          {status === 'correct' && (
-            <div className="pronounce-feedback success">
-              <span className="feedback-icon">🎉</span>
-              <div>Ajoyib talaffuz!</div>
-            </div>
-          )}
+          <div className="recognition-state-wrapper">
+            {!answered && status !== 'unsupported' && (
+              <>
+                <button 
+                  type="button"
+                  className={`mic-button ${isListening ? 'listening' : ''}`}
+                  onClick={startListening}
+                  disabled={isListening}
+                >
+                  {isListening ? (
+                    <div className="equalizer">
+                      <span className="bar"></span>
+                      <span className="bar"></span>
+                      <span className="bar"></span>
+                      <span className="bar"></span>
+                    </div>
+                  ) : (
+                    '🎙️'
+                  )}
+                </button>
 
-          {status === 'wrong' && (
-            <div className="pronounce-feedback error">
-              <span className="feedback-icon">❌</span>
-              <div>
-                Nomaqbul talaffuz
+                {isListening ? (
+                  <div className="listening-status text-pulse">Eshitmoqdaman... Gapiring</div>
+                ) : (
+                  <div className="listening-status instruction">
+                    {status === 'wrong' 
+                      ? "Nutqni qayta urinib ko'ring yoki keyingisiga o'ting" 
+                      : "Mikrofon tugmasini bosing va gapiring"
+                    }
+                  </div>
+                )}
+              </>
+            )}
+
+            {/* Banners inside the card for immediate clean feedback */}
+            {answered && isCorrect && (
+              <div className="pronounce-feedback-banner correct">
+                <span className="pf-icon">✨</span> Ajoyib talaffuz!
+              </div>
+            )}
+
+            {answered && !isCorrect && (
+              <div className="pronounce-feedback-banner wrong">
+                <span className="pf-icon">❌</span> {status === 'skipped' ? "O'tkazib yuborildi" : "Nomaqbul talaffuz"}
                 {heardText && (
                   <div className="heard-text">
                     Biz eshitdik: <strong>"{heardText}"</strong>
                   </div>
                 )}
               </div>
+            )}
+
+            {status === 'unsupported' && (
+              <div className="pronounce-feedback-banner unsupported">
+                ℹ️ Nutqni aniqlash ushbu brauzerda qo'llab-quvvatlanmaydi
+              </div>
+            )}
+          </div>
+
+          {/* Action buttons inside the card when incorrect to allow retrying */}
+          {!answered && status === 'wrong' && (
+            <div className="pronounce-action-buttons">
+              <button type="button" className="btn btn-secondary" onClick={handleRetry}>
+                🔄 Qayta urinish
+              </button>
+              <button type="button" className="btn btn-ghost" onClick={handleSkip}>
+                ⏩ O'tkazib yuborish
+              </button>
             </div>
           )}
-        </div>
+        </motion.div>
+      </AnimatePresence>
 
-        {status === 'wrong' && (
-          <div className="pronounce-action-buttons">
-            <button type="button" className="btn btn-secondary" onClick={handleRetry}>
-              🔄 Qayta urinish
+      {/* Action Row */}
+      <div className="pronounce-actions">
+        {!answered ? (
+          status === 'playing' && (
+            <button type="button" className="btn btn-ghost" onClick={handleSkip} disabled={isListening}>
+              Bilmadim (o'tkazib yuborish)
             </button>
-            <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-              ⏩ O'tkazib yuborish
-            </button>
-          </div>
-        )}
-
-        {status === 'unsupported' && (
-          <button type="button" className="btn btn-primary" onClick={handleSkip}>
-            Tushunarli, o'tkazib yuborish
+          )
+        ) : (
+          <button type="button" className="btn-pronounce-next" onClick={handleNext}>
+            {isLast ? 'Natijalar →' : 'Keyingisi →'}
           </button>
         )}
-      </motion.div>
-
-      {status === 'playing' && (
-        <button type="button" className="btn btn-ghost" onClick={handleSkip} disabled={isListening}>
-          Bilmadim (O'tkazib yuborish)
-        </button>
-      )}
+        {status === 'unsupported' && (
+          <button type="button" className="btn-pronounce-next" onClick={handleUnsupportedSkip}>
+            {isLast ? 'Natijalar →' : 'Keyingisi →'}
+          </button>
+        )}
+      </div>
     </div>
   );
 }

@@ -32,15 +32,24 @@ export default function PracticePage() {
   const [practiceWords, setPracticeWords] = useState([]);
   const [results, setResults] = useState(null);
   const [sourceWords, setSourceWords] = useState([]);
+  const [sourceLoaded, setSourceLoaded] = useState(false);
+
+  // Reset sourceLoaded when url parameters change
+  useEffect(() => {
+    setSourceLoaded(false);
+  }, [urlSourceType, urlSourceId]);
 
   // Load parameterized source if available
   useEffect(() => {
+    if (sourceLoaded) return;
+
     if (urlSourceType && urlSourceId && !booksLoading && !packsLoading) {
       const activeList = urlSourceType === 'books' ? books : packs;
       const foundSource = activeList.find(s => s.id === urlSourceId);
       if (foundSource) {
         setSourceType(urlSourceType);
         setSelectedSource(foundSource);
+        setSourceLoaded(true);
         
         // Fetch words for this source
         const fetchWords = async () => {
@@ -66,7 +75,7 @@ export default function PracticePage() {
         navigate('/library');
       }
     }
-  }, [urlSourceType, urlSourceId, booksLoading, packsLoading, books, packs, user, navigate]);
+  }, [urlSourceType, urlSourceId, booksLoading, packsLoading, books, packs, user, navigate, sourceLoaded]);
 
   // Warn before closing tab during active practice
   useEffect(() => {

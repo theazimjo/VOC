@@ -66,7 +66,6 @@ export default function Flashcard({ words, onComplete, onUpdateWord }) {
       </div>
       <div className="flashcard-progress">
         <span><span className="flashcard-progress-num">{currentIndex + 1}</span> / {words.length}</span>
-        <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>Space — ag'darish</span>
       </div>
 
       {/* Card scene */}

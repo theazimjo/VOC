@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { shuffleArray, speakWord } from '../../utils/helpers';
 import { calculateNextReview } from '../../utils/sm2';
@@ -7,16 +7,21 @@ import './QuizGame.css';
 export default function QuizGame({ words, onComplete, onUpdateWord }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null); // the chosen option text
+  const [answered, setAnswered] = useState(false);            // explicit answered flag
+  const [timedOut, setTimedOut] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
-  const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
 
   const currentWord = words[currentIndex];
 
+  // Autoplay pronunciation
   useEffect(() => {
     if (currentWord) speakWord(currentWord.word);
   }, [currentIndex, currentWord]);
 
+  // Build options when word changes
   useEffect(() => {
     if (!currentWord) return;
     const correctOption = currentWord.translation;
@@ -25,21 +30,32 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
     while (wrongOptions.length < 3) wrongOptions.push(`Variant ${wrongOptions.length + 1}`);
     setOptions(shuffleArray([correctOption, ...wrongOptions]));
     setSelectedOption(null);
+    setAnswered(false);
+    setTimedOut(false);
     setTimeLeft(15);
-  }, [currentIndex, currentWord, words]);
+  }, [currentIndex]);
 
+  // Timer — only ticks when not yet answered
   useEffect(() => {
-    if (timeLeft > 0 && !selectedOption) {
-      const id = setTimeout(() => setTimeLeft(t => t - 1), 1000);
-      return () => clearTimeout(id);
-    } else if (timeLeft === 0 && !selectedOption) {
-      handleSelect(null);
+    if (answered) return;
+    if (timeLeft <= 0) {
+      // Time's up — mark as wrong without selecting any option
+      setTimedOut(true);
+      setAnswered(true);
+      setIncorrectCount(c => c + 1);
+      const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
+      onUpdateWord(currentWord.id, sm2Data);
+      return;
     }
-  }, [timeLeft, selectedOption]);
+    const id = setTimeout(() => setTimeLeft(t => t - 1), 1000);
+    return () => clearTimeout(id);
+  }, [timeLeft, answered]);
 
-  const handleSelect = async (option) => {
-    if (selectedOption !== null) return;
+  const handleSelect = useCallback(async (option) => {
+    if (answered) return;
     setSelectedOption(option);
+    setAnswered(true);
+
     const isCorrect = option === currentWord.translation;
     const sm2Data = calculateNextReview(
       isCorrect ? 4 : 1,
@@ -48,11 +64,10 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
       currentWord.reviewCount || 0
     );
     await onUpdateWord(currentWord.id, sm2Data);
-    setResults(prev => ({
-      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
-      incorrectCount: prev.incorrectCount + (isCorrect ? 0 : 1)
-    }));
-  };
+
+    if (isCorrect) setCorrectCount(c => c + 1);
+    else setIncorrectCount(c => c + 1);
+  }, [answered, currentWord, onUpdateWord]);
 
   const handleNext = () => {
     if (currentIndex < words.length - 1) {
@@ -60,27 +75,22 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
     } else {
       onComplete({
         totalWords: words.length,
-        correctCount: results.correctCount + (selectedOption === currentWord.translation ? 0 : 0),
-        incorrectCount: results.incorrectCount
+        correctCount,
+        incorrectCount
       });
-      onComplete({ totalWords: words.length, ...results });
     }
-  };
-
-  // Recalculate final results correctly on last word
-  const handleNextFinal = () => {
-    onComplete({ totalWords: words.length, ...results });
   };
 
   if (!currentWord) return null;
 
+  const isCorrectAnswer = selectedOption === currentWord.translation;
   const isLast = currentIndex === words.length - 1;
 
   return (
     <div className="quiz-container">
       {/* Progress bar */}
       <div className="quiz-progress-track">
-        <div className="quiz-progress-fill" style={{ width: `${((currentIndex) / words.length) * 100}%` }} />
+        <div className="quiz-progress-fill" style={{ width: `${(currentIndex / words.length) * 100}%` }} />
       </div>
       <div className="quiz-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
@@ -106,6 +116,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
               className="btn-speak-quiz"
               onClick={() => speakWord(currentWord.word)}
               title="Talaffuz"
+              type="button"
             >🔊</button>
           </div>
           {currentWord.definition && (
@@ -127,7 +138,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
       <div className="quiz-options">
         {options.map((opt, idx) => {
           let state = 'idle';
-          if (selectedOption !== null) {
+          if (answered) {
             if (opt === currentWord.translation) state = 'correct';
             else if (opt === selectedOption) state = 'wrong';
             else state = 'dimmed';
@@ -137,25 +148,26 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
               key={`${currentIndex}-${idx}`}
               className={`quiz-option ${state}`}
               onClick={() => handleSelect(opt)}
-              disabled={selectedOption !== null}
+              disabled={answered}
+              type="button"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.06 }}
-              whileHover={!selectedOption ? { scale: 1.02 } : {}}
-              whileTap={!selectedOption ? { scale: 0.97 } : {}}
+              whileHover={!answered ? { scale: 1.02 } : {}}
+              whileTap={!answered ? { scale: 0.97 } : {}}
             >
               <span className="quiz-option-letter">{['A', 'B', 'C', 'D'][idx]}</span>
               <span className="quiz-option-text">{opt}</span>
-              {selectedOption !== null && state === 'correct' && <span className="quiz-option-icon">✓</span>}
-              {selectedOption !== null && state === 'wrong' && <span className="quiz-option-icon">✗</span>}
+              {answered && state === 'correct' && <span className="quiz-option-icon">✓</span>}
+              {answered && state === 'wrong'   && <span className="quiz-option-icon">✗</span>}
             </motion.button>
           );
         })}
       </div>
 
-      {/* Next button — only appears after answering */}
+      {/* Feedback + Next — only after answering */}
       <AnimatePresence>
-        {selectedOption !== null && (
+        {answered && (
           <motion.div
             className="quiz-next-row"
             initial={{ opacity: 0, y: 16 }}
@@ -163,14 +175,18 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <div className={`quiz-feedback ${selectedOption === currentWord.translation ? 'correct' : 'wrong'}`}>
-              {selectedOption === currentWord.translation
-                ? "✨ To'g'ri!"
-                : `❌ Javob: ${currentWord.translation}`}
+            <div className={`quiz-feedback ${timedOut ? 'wrong' : isCorrectAnswer ? 'correct' : 'wrong'}`}>
+              {timedOut
+                ? `⏰ Vaqt tugadi! Javob: ${currentWord.translation}`
+                : isCorrectAnswer
+                  ? "✨ To'g'ri!"
+                  : `❌ Javob: ${currentWord.translation}`
+              }
             </div>
             <button
+              type="button"
               className="btn-quiz-next"
-              onClick={isLast ? handleNextFinal : handleNext}
+              onClick={handleNext}
             >
               {isLast ? 'Natijalar →' : 'Keyingisi →'}
             </button>

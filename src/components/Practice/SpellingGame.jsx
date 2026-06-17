@@ -7,61 +7,70 @@ import './SpellingGame.css';
 export default function SpellingGame({ words, onComplete, onUpdateWord }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
-  const [status, setStatus] = useState('playing'); // playing | correct | wrong
-  const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
+  const [answered, setAnswered] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
   const [scrambled, setScrambled] = useState('');
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
   const inputRef = useRef(null);
 
   const currentWord = words[currentIndex];
 
   useEffect(() => {
-    if (currentWord) {
-      setScrambled(currentWord.word.split('').sort(() => 0.5 - Math.random()).join(' '));
-      speakWord(currentWord.translation); // Speak the translation so user writes the word
-    }
-  }, [currentIndex, currentWord]);
+    if (!currentWord) return;
+    setScrambled(currentWord.word.split('').sort(() => 0.5 - Math.random()).join(' '));
+    setInput('');
+    setAnswered(false);
+    setIsCorrect(false);
+  }, [currentIndex]);
 
   useEffect(() => {
-    if (inputRef.current && status === 'playing') inputRef.current.focus();
-  }, [currentIndex, status]);
+    if (inputRef.current && !answered) {
+      inputRef.current.focus();
+    }
+  }, [currentIndex, answered]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!input.trim() || status !== 'playing') return;
+  const submitAnswer = async (overrideWord) => {
+    if (answered) return;
+    const submittedInput = overrideWord ?? input;
+    if (!submittedInput.trim()) return;
 
-    const isCorrect = input.toLowerCase().trim() === currentWord.word.toLowerCase();
-    setStatus(isCorrect ? 'correct' : 'wrong');
+    const correct = submittedInput.toLowerCase().trim() === currentWord.word.toLowerCase();
+    setAnswered(true);
+    setIsCorrect(correct);
 
     const sm2Data = calculateNextReview(
-      isCorrect ? 4 : 1,
+      correct ? 4 : 1,
       currentWord.easeFactor || 2.5,
       currentWord.interval || 0,
       currentWord.reviewCount || 0
     );
     await onUpdateWord(currentWord.id, sm2Data);
 
-    setResults(prev => ({
-      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
-      incorrectCount: prev.incorrectCount + (isCorrect ? 0 : 1)
-    }));
+    if (correct) setCorrectCount(c => c + 1);
+    else setIncorrectCount(c => c + 1);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitAnswer();
   };
 
   const handleSkip = async () => {
-    if (status !== 'playing') return;
+    if (answered) return;
     setInput(currentWord.word);
-    setStatus('wrong');
+    setAnswered(true);
+    setIsCorrect(false);
     const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
     await onUpdateWord(currentWord.id, sm2Data);
-    setResults(prev => ({ ...prev, incorrectCount: prev.incorrectCount + 1 }));
+    setIncorrectCount(c => c + 1);
   };
 
   const handleNext = () => {
     if (currentIndex < words.length - 1) {
       setCurrentIndex(prev => prev + 1);
-      setInput('');
-      setStatus('playing');
     } else {
-      onComplete({ totalWords: words.length, ...results });
+      onComplete({ totalWords: words.length, correctCount, incorrectCount });
     }
   };
 
@@ -77,7 +86,7 @@ export default function SpellingGame({ words, onComplete, onUpdateWord }) {
       </div>
       <div className="spelling-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
-        <button className="btn-spell-speak" onClick={() => speakWord(currentWord.word)}>
+        <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word)}>
           🔊 Eshitish
         </button>
       </div>
@@ -86,7 +95,7 @@ export default function SpellingGame({ words, onComplete, onUpdateWord }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          className={`spelling-card ${status !== 'playing' ? status : ''}`}
+          className={`spelling-card ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
@@ -104,29 +113,30 @@ export default function SpellingGame({ words, onComplete, onUpdateWord }) {
             <input
               ref={inputRef}
               type="text"
-              className={`spelling-input ${status !== 'playing' ? status : ''}`}
+              className={`spelling-input ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
               value={input}
-              onChange={e => setInput(e.target.value)}
-              disabled={status !== 'playing'}
+              onChange={e => !answered && setInput(e.target.value)}
+              disabled={answered}
               autoComplete="off"
               autoCorrect="off"
               spellCheck="false"
               placeholder="So'zni yozing..."
             />
-            {status === 'playing' && (
-              <button type="submit" className="btn-spell-submit">Tekshirish ✓</button>
+            {!answered && (
+              <button type="submit" className="btn-spell-submit">
+                Tekshirish ✓
+              </button>
             )}
           </form>
 
           <AnimatePresence>
-            {status !== 'playing' && (
+            {answered && (
               <motion.div
-                className={`spelling-feedback-banner ${status}`}
+                className={`spelling-feedback-banner ${isCorrect ? 'correct' : 'wrong'}`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
               >
-                {status === 'correct'
+                {isCorrect
                   ? <><span className="sf-icon">✨</span> To'g'ri! Zo'r!</>
                   : <><span className="sf-icon">❌</span> Javob: <strong>{currentWord.word}</strong></>
                 }
@@ -138,12 +148,12 @@ export default function SpellingGame({ words, onComplete, onUpdateWord }) {
 
       {/* Action row */}
       <div className="spelling-actions">
-        {status === 'playing' ? (
-          <button className="btn btn-ghost" onClick={handleSkip}>
+        {!answered ? (
+          <button type="button" className="btn btn-ghost" onClick={handleSkip}>
             Bilmadim (o'tkazib yuborish)
           </button>
         ) : (
-          <button className="btn-spell-next" onClick={handleNext}>
+          <button type="button" className="btn-spell-next" onClick={handleNext}>
             {isLast ? 'Natijalar →' : 'Keyingisi →'}
           </button>
         )}
