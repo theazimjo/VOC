@@ -22,31 +22,50 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
   const [error, setError] = useState('');
   const [isImporting, setIsImporting] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [importProgress, setImportProgress] = useState(null);
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(SAMPLE_JSON);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Fallback for older browsers / non-HTTPS
-      const ta = document.createElement('textarea');
-      ta.value = SAMPLE_JSON;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+  const handleCopy = () => {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(SAMPLE_JSON)
+        .then(() => {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        })
+        .catch(err => {
+          console.error('Clipboard API failed, trying fallback: ', err);
+          fallbackCopy(SAMPLE_JSON);
+        });
+    } else {
+      fallbackCopy(SAMPLE_JSON);
     }
+  };
+
+  const fallbackCopy = (text) => {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'absolute';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } else {
+        console.warn('Fallback copy was not successful');
+      }
+    } catch (err) {
+      console.error('Fallback copy failed: ', err);
+    }
+    document.body.removeChild(ta);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setImportProgress(null);
 
     if (!jsonText.trim()) {
       setError("Iltimos, JSON ma'lumotni kiriting.");
@@ -54,10 +73,15 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
     }
 
     try {
-      const parsedData = JSON.parse(jsonText);
+      let parsedData;
+      try {
+        parsedData = JSON.parse(jsonText);
+      } catch (jsonErr) {
+        throw new Error("Noto'g'ri JSON formati! Qavslar, qo'shtirnoqlar yoki vergullarni tekshiring.");
+      }
 
       if (!Array.isArray(parsedData)) {
-        throw new Error("JSON ma'lumot array (ro'yxat) ko'rinishida bo'lishi kerak: [...]");
+        throw new Error("JSON ma'lumot ro'yxat (array) ko'rinishida bo'lishi kerak: [...]");
       }
 
       const validWords = [];
@@ -77,14 +101,21 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
       }
 
       setIsImporting(true);
-      await onImport(validWords);
+      setImportProgress({ added: 0, remaining: validWords.length, total: validWords.length });
+
+      await onImport(validWords, (added, remaining) => {
+        setImportProgress({ added, remaining, total: validWords.length });
+      });
+
       setIsImporting(false);
+      setImportProgress(null);
       setJsonText('');
       onClose();
 
     } catch (err) {
-      setError("JSON formatida xatolik: " + err.message);
+      setError(err.message);
       setIsImporting(false);
+      setImportProgress(null);
     }
   };
 
@@ -100,10 +131,30 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            style={{ position: 'relative' }}
           >
+            {isImporting && importProgress && (
+              <div className="import-progress-overlay">
+                <div className="import-progress-card">
+                  <div className="import-spinner" />
+                  <h3>So'zlar qo'shilmoqda...</h3>
+                  <div className="import-progress-bar-track">
+                    <div 
+                      className="import-progress-bar-fill" 
+                      style={{ width: `${(importProgress.added / importProgress.total) * 100}%` }}
+                    />
+                  </div>
+                  <div className="import-progress-counts">
+                    <span>Qo'shildi: <strong>{importProgress.added} ta</strong></span>
+                    <span>Qoldi: <strong>{importProgress.remaining} / {importProgress.total} ta</strong></span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="modal-header">
               <h2>JSON orqali ko'p so'z qo'shish</h2>
-              <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
+              <button className="btn btn-ghost btn-icon" onClick={onClose} disabled={isImporting}>✕</button>
             </div>
 
             <form onSubmit={handleSubmit}>

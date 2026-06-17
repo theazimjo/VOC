@@ -44,7 +44,8 @@ export function calculateNextReview(quality, previousEaseFactor, previousInterva
     nextReview: nextReview.toISOString(),
     reviewCount: quality < 3 ? 0 : reviewCount + 1,
     mastery: calculateMastery(quality, reviewCount, newEaseFactor),
-    lastReviewed: now.toISOString()
+    lastReviewed: now.toISOString(),
+    quality
   };
 }
 

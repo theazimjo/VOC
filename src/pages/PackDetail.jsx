@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePacks } from '../hooks/usePacks';
 import { useWords } from '../hooks/useWords';
-import { levelOptions } from '../utils/helpers';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
@@ -14,7 +13,7 @@ export default function PackDetail() {
   const { packId } = useParams();
   const navigate = useNavigate();
   const { getPack } = usePacks();
-  const { words, loading, addWord, updateWord, deleteWord } = useWords('packs', packId);
+  const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
   
   const [pack, setPack] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
@@ -45,10 +44,8 @@ export default function PackDetail() {
     setShowWordForm(true);
   };
 
-  const handleBulkImport = async (newWords) => {
-    for (const wordData of newWords) {
-      await addWord(wordData);
-    }
+  const handleBulkImport = async (newWords, onProgress) => {
+    await bulkAddWords(newWords, onProgress);
   };
 
   const handleDeleteWord = async (wordId) => {
@@ -58,8 +55,6 @@ export default function PackDetail() {
   };
 
   if (!pack) return <div className="empty-state">Yuklanmoqda...</div>;
-
-  const levelInfo = levelOptions.find(l => l.value === pack.level) || levelOptions[0];
 
   return (
     <motion.div
@@ -80,9 +75,6 @@ export default function PackDetail() {
             <h1>{pack.name}</h1>
             {pack.description && <p>{pack.description}</p>}
             <div className="book-stats">
-              <span className="book-stat-badge" style={{ color: levelInfo.color, borderColor: levelInfo.color }}>
-                {levelInfo.label}
-              </span>
               <span className="book-stat-badge">📝 {words.length} ta so'z</span>
             </div>
           </div>

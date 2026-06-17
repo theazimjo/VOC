@@ -152,6 +152,70 @@ export function useWords(collectionType, collectionId) {
     [user, collectionType, collectionId]
   );
 
-  return { words, loading, addWord, updateWord, deleteWord, getWord };
+  // Add multiple words in batch chunks (extremely efficient)
+  const bulkAddWords = useCallback(
+    async (wordsList, onProgress) => {
+      const wordsRef = getWordsRef();
+      const parentRef = getParentRef();
+      if (!wordsRef || !parentRef || !wordsList || wordsList.length === 0) return;
+
+      const total = wordsList.length;
+      const batchSize = 25;
+
+      for (let i = 0; i < total; i += batchSize) {
+        const chunk = wordsList.slice(i, i + batchSize);
+        const updates = {};
+
+        chunk.forEach(wordData => {
+          const newWordRef = push(wordsRef);
+          const newWordId = newWordRef.key;
+
+          updates[`${newWordId}`] = {
+            word: wordData.word || '',
+            translation: wordData.translation || '',
+            definition: wordData.definition || '',
+            example: wordData.example || '',
+            notes: wordData.notes || '',
+            partOfSpeech: wordData.partOfSpeech || 'noun',
+            addedAt: new Date().toISOString(),
+            mastery: 0,
+            easeFactor: 2.5,
+            interval: 0,
+            reviewCount: 0,
+            nextReview: null,
+            lastReviewed: null
+          };
+        });
+
+        // Write batch chunk update to RTDB
+        await update(wordsRef, updates);
+
+        const added = Math.min(i + batchSize, total);
+        const remaining = total - added;
+        if (onProgress) {
+          onProgress(added, remaining);
+        }
+
+        // Delay to allow UI rendering and smooth progress animation
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+
+      // Update parent wordCount exactly once at the end
+      try {
+        const parentSnap = await get(parentRef);
+        if (parentSnap.exists()) {
+          const currentData = parentSnap.val();
+          const wordsObj = currentData.words || {};
+          const currentCount = Object.keys(wordsObj).length;
+          await update(parentRef, { wordCount: currentCount });
+        }
+      } catch (err) {
+        console.warn("Failed to update parent wordCount after bulk import:", err);
+      }
+    },
+    [getWordsRef, getParentRef]
+  );
+
+  return { words, loading, addWord, updateWord, deleteWord, getWord, bulkAddWords };
 }
 

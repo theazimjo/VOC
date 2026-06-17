@@ -164,8 +164,23 @@ export default function PracticePage() {
   const handleUpdateWord = async (wordId, data) => {
     if (!user || !selectedSource) return;
     try {
+      const word = sourceWords.find(w => w.id === wordId);
+      const prevWrongCount = word ? (word.wrongCount || 0) : 0;
+
+      let finalData = { ...data };
+      if (typeof data.quality === 'number') {
+        if (data.quality < 4) {
+          finalData.wrongCount = prevWrongCount + 1;
+        } else {
+          finalData.wrongCount = Math.max(0, prevWrongCount - 1);
+        }
+      }
+
       const wordRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/words/${wordId}`);
-      await update(wordRef, data);
+      await update(wordRef, finalData);
+
+      // Sync local state immediately so weights are updated for future picks
+      setSourceWords(prev => prev.map(w => w.id === wordId ? { ...w, ...finalData } : w));
     } catch (e) {
       console.error('Error updating word:', e);
     }

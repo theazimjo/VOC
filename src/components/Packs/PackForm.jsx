@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { packIcons, levelOptions, bookColors } from '../../utils/helpers';
+import { packIcons, bookColors } from '../../utils/helpers';
 import './PackForm.css';
 
 export default function PackForm({ isOpen, onClose, onSave, editPack = null, onDelete = null }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [icon, setIcon] = useState(packIcons[0]);
-  const [level, setLevel] = useState('beginner');
   const [color, setColor] = useState(bookColors[0]);
 
   useEffect(() => {
@@ -15,13 +14,11 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setName(editPack.name || '');
       setDescription(editPack.description || '');
       setIcon(editPack.icon || packIcons[0]);
-      setLevel(editPack.level || 'beginner');
       setColor(editPack.color || bookColors[0]);
     } else {
       setName('');
       setDescription('');
       setIcon(packIcons[Math.floor(Math.random() * packIcons.length)]);
-      setLevel('beginner');
       setColor(bookColors[Math.floor(Math.random() * bookColors.length)]);
     }
   }, [editPack, isOpen]);
@@ -29,7 +26,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onSave({ name, description, icon, level, color });
+    onSave({ name, description, icon, color });
   };
 
   if (!isOpen) return null;
@@ -73,22 +70,6 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     onChange={e => setDescription(e.target.value)} 
                     placeholder="To'plam haqida qisqacha ma'lumot..."
                   />
-                </div>
-
-                <div className="input-group">
-                  <label>Daraja</label>
-                  <div className="level-selector">
-                    {levelOptions.map((lvl) => (
-                      <div 
-                        key={lvl.value}
-                        className={`level-option ${level === lvl.value ? 'selected' : ''}`}
-                        style={level === lvl.value ? { color: lvl.color } : {}}
-                        onClick={() => setLevel(lvl.value)}
-                      >
-                        {lvl.label}
-                      </div>
-                    ))}
-                  </div>
                 </div>
 
                 <div className="input-group">

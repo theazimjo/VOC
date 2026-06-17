@@ -39,12 +39,19 @@ export function weightedSelectWords(words, count) {
     const easeFactor  = typeof w.easeFactor === 'number' ? w.easeFactor : 2.5;
     const nextReview  = w.nextReview ? new Date(w.nextReview).getTime() : 0;
     const isOverdue   = nextReview > 0 && nextReview <= now;
+    const wrongCount  = typeof w.wrongCount === 'number' ? w.wrongCount : 0;
 
-    // Higher weight = harder / less-known word
+    // Convert mastery percentage (0-100) to a weight contribution
+    // mastery = 0 (new) gives high weight (6)
+    // mastery = 100 (mastered) gives low weight (0)
+    const masteryWeight = ((100 - mastery) / 100) * 6;
+
+    // Higher weight = harder / less-known word / more mistakes
     const weight =
-      (6 - mastery)                        // 6 (new) … 1 (mastered)
+      masteryWeight                        // 6 (new) … 0 (mastered)
       + Math.max(0, 3 - easeFactor)        // 0 … ~1.7
-      + (isOverdue ? 2 : 0);               // overdue bonus
+      + (isOverdue ? 2 : 0)                // overdue bonus
+      + (wrongCount * 3);                  // mistake weight boost: +3 per mistake!
 
     return { word: w, weight };
   });
@@ -57,6 +64,15 @@ export function weightedSelectWords(words, count) {
 
   while (selected.length < total && pool.length > 0) {
     const totalWeight = pool.reduce((sum, item) => sum + item.weight, 0);
+    
+    // Safety check: if all weights are zero or negative, pick uniformly
+    if (totalWeight <= 0) {
+      const chosenIdx = Math.floor(Math.random() * pool.length);
+      selected.push(pool[chosenIdx].word);
+      pool.splice(chosenIdx, 1);
+      continue;
+    }
+
     let rand = Math.random() * totalWeight;
     let chosenIdx = pool.length - 1; // fallback
 

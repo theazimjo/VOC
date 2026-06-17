@@ -1,11 +1,9 @@
 import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { levelOptions } from '../../utils/helpers';
 import './PackCard.css';
 
 export default function PackCard({ pack, onLongPress }) {
-  const levelInfo = levelOptions.find(l => l.value === pack.level) || levelOptions[0];
   const [isLongPress, setIsLongPress] = useState(false);
   const timerRef = useRef(null);
 
@@ -67,12 +65,6 @@ export default function PackCard({ pack, onLongPress }) {
         <div className="pack-card-info-container">
           <div className="pack-card-header-line">
             <h3 className="pack-card-title">{pack.name}</h3>
-            <span 
-              className="pack-card-level-badge" 
-              style={{ color: levelInfo.color, background: `${levelInfo.color}15` }}
-            >
-              {levelInfo.label}
-            </span>
           </div>
           {pack.description && <p className="pack-card-desc">{pack.description}</p>}
         </div>

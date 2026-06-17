@@ -13,7 +13,7 @@ export default function BookDetail() {
   const { bookId } = useParams();
   const navigate = useNavigate();
   const { getBook } = useBooks();
-  const { words, loading, addWord, updateWord, deleteWord } = useWords('books', bookId);
+  const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('books', bookId);
   
   const [book, setBook] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
@@ -44,10 +44,8 @@ export default function BookDetail() {
     setShowWordForm(true);
   };
 
-  const handleBulkImport = async (newWords) => {
-    for (const wordData of newWords) {
-      await addWord(wordData);
-    }
+  const handleBulkImport = async (newWords, onProgress) => {
+    await bulkAddWords(newWords, onProgress);
   };
 
   const handleDeleteWord = async (wordId) => {
