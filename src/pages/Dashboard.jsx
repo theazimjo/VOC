@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ref, onValue } from 'firebase/database';
-import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
@@ -17,25 +15,7 @@ export default function Dashboard() {
   const [totalWords, setTotalWords] = useState(0);
   const [masteredWords, setMasteredWords] = useState(0);
   const [dueWords, setDueWords] = useState(0);
-  const [profile, setProfile] = useState({ xp: 0, streak: 0 });
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!user) return;
-    const profileRef = ref(db, `users/${user.uid}/profile`);
-    const unsubscribe = onValue(profileRef, (snap) => {
-      if (snap.exists()) {
-        const val = snap.val();
-        setProfile({
-          xp: val.xp || 0,
-          streak: val.streak || 0,
-          lastActiveDate: val.lastActiveDate || '',
-          ...val
-        });
-      }
-    });
-    return () => unsubscribe();
-  }, [user]);
 
   useEffect(() => {
     if (!user) return;
@@ -111,113 +91,55 @@ export default function Dashboard() {
       initial="hidden"
       animate="visible"
     >
-      {/* Greeting & Gamification Badges */}
-      <motion.div className="dashboard-banner-card" variants={itemVariants}>
-        <div className="banner-mesh-bg"></div>
-        <div className="banner-content">
-          <span className="banner-sub">Xush kelibsiz</span>
-          <h1 className="banner-title">
-            {getGreeting()}, <span>{displayName}</span>! 👋
-          </h1>
-          <p className="banner-text">
-            Streakingizni saqlab qolish va XP yig'ish uchun bugungi darslarni yakunlang!
-          </p>
-          <div className="banner-actions">
-            <button className="btn btn-primary btn-lg" onClick={() => navigate('/practice')}>
-              Mashqni Boshlash 🚀
-            </button>
-          </div>
+      {/* 1. Compact Stats Summary Card at the top */}
+      <motion.div className="dashboard-summary-card" variants={itemVariants}>
+        <div className="summary-card-glow"></div>
+        <div className="summary-card-header">
+          <span className="summary-greeting">{getGreeting()}, {displayName}! 👋</span>
         </div>
         
-        <div className="dashboard-game-stats">
-          <motion.div 
-            className="game-stat-badge streak-badge" 
-            title="Kunlik seriya (Streak)"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-          >
-            <span className="badge-icon">🔥</span>
-            <span className="badge-text">{profile.streak} kun</span>
-          </motion.div>
-          <motion.div 
-            className="game-stat-badge xp-badge" 
-            title="Jami tajriba (XP)"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-          >
-            <span className="badge-icon">⚡</span>
-            <span className="badge-text">{profile.xp} XP</span>
-          </motion.div>
-          <motion.div 
-            className="game-stat-badge level-badge" 
-            title="Foydalanuvchi darajasi"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-          >
-            <span className="badge-icon">👑</span>
-            <span className="badge-text">LVL {Math.floor(profile.xp / 500) + 1}</span>
-          </motion.div>
+        <div className="summary-stats-row">
+          <div className="summary-stat-item">
+            <span className="stat-label">Jami so'zlarim</span>
+            <span className="stat-value indigo-gradient-text">{totalWords} ta</span>
+          </div>
+          <div className="summary-stat-divider"></div>
+          <div className="summary-stat-item">
+            <span className="stat-label">O'zlashtirilgan</span>
+            <span className="stat-value gold-gradient-text">{masteredWords} ta</span>
+          </div>
+        </div>
+
+        <div className="summary-progress-wrapper">
+          <div className="summary-progress-bar">
+            <motion.div 
+              className="summary-progress-fill" 
+              initial={{ width: 0 }}
+              animate={{ width: `${masteryPercent}%` }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
+          </div>
+          <div className="summary-progress-labels">
+            <span>Progress</span>
+            <span>{masteryPercent}% o'zlashtirildi</span>
+          </div>
         </div>
       </motion.div>
 
-      {/* 3-metric Stats Grid */}
-      <motion.div className="stats-grid" variants={itemVariants}>
-        {/* Total Words */}
-        <motion.div className="stat-card stat-card-indigo" whileHover={{ y: -6 }}>
-          <div className="stat-card-bg-glow"></div>
-          <div className="stat-card-icon">📚</div>
-          <div className="stat-card-value">{totalWords}</div>
-          <div className="stat-card-label">Lug'at hajmi (so'z)</div>
-        </motion.div>
-
-        {/* Mastered Words */}
-        <motion.div className="stat-card stat-card-gold" whileHover={{ y: -6 }}>
-          <div className="stat-card-bg-glow"></div>
-          <div className="stat-card-icon">🏆</div>
-          <div className="stat-card-value">{masteredWords}</div>
-          <div className="stat-card-label">O'zlashtirilgan so'zlar</div>
-          
-          <div className="stat-progress-container">
-            <div className="stat-progress-bar">
-              <motion.div 
-                className="stat-progress-fill" 
-                initial={{ width: 0 }}
-                animate={{ width: `${masteryPercent}%` }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              />
-            </div>
-            <span className="stat-progress-text">{masteryPercent}% o'zlashtirildi</span>
-          </div>
-        </motion.div>
-
-        {/* Practice/Due Status */}
-        <motion.div 
-          className={`stat-card ${dueWords > 0 ? 'stat-card-warning clickable-card' : 'stat-card-success'}`} 
-          whileHover={{ y: -6 }}
-          onClick={() => dueWords > 0 && navigate('/practice')}
-          title={dueWords > 0 ? "Mashq qilish uchun bosing" : ""}
-          style={{ cursor: dueWords > 0 ? 'pointer' : 'default' }}
+      {/* 2. Prominent Action Button directly below */}
+      <motion.div className="dashboard-action-wrapper" variants={itemVariants}>
+        <button 
+          className={`btn-practice-primary ${dueWords > 0 ? 'pulse-border' : ''}`}
+          onClick={() => navigate('/mixed-practice')}
         >
-          <div className="stat-card-bg-glow"></div>
-          <div className="stat-card-icon">{dueWords > 0 ? '🧠' : '🎉'}</div>
-          
-          {dueWords > 0 ? (
-            <>
-              <div className="stat-card-value text-warning pulse-value">{dueWords} ta</div>
-              <div className="stat-card-label">Takrorlanadigan so'zlar bor</div>
-              <div className="stat-status-badge badge-warning-pulsing">Mashq darsi tayyor →</div>
-            </>
-          ) : (
-            <>
-              <div className="stat-card-value text-success">Tayyor!</div>
-              <div className="stat-card-label">Hamma so'zlar takrorlandi</div>
-              <div className="stat-status-badge badge-success-static">Hammasi o'zlashtirildi ✓</div>
-            </>
-          )}
-        </motion.div>
+          <span className="btn-practice-content">
+            Mashq qilish 🚀 
+            {dueWords > 0 && <span className="btn-practice-badge">{dueWords} ta takrorlash</span>}
+          </span>
+        </button>
       </motion.div>
 
-      {/* Recent Words */}
+      {/* 3. Recent Words */}
       <motion.div className="dashboard-section" variants={itemVariants}>
         <div className="dashboard-section-header">
           <h2>🕐 Oxirgi qo'shilgan so'zlar</h2>

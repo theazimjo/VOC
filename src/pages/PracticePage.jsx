@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
@@ -14,26 +15,58 @@ import QuizGame from '../components/Practice/QuizGame';
 import SpacedRepetition from '../components/Practice/SpacedRepetition';
 import DictationGame from '../components/Practice/DictationGame';
 import PronounceGame from '../components/Practice/PronounceGame';
-import LearningPath from '../components/Practice/LearningPath';
-import UnifiedLesson from '../components/Practice/UnifiedLesson';
 import './PracticePage.css';
 
 export default function PracticePage() {
+  const { sourceType: urlSourceType, sourceId: urlSourceId } = useParams();
+  const navigate = useNavigate();
   const { user } = useAuth();
-  const { books } = useBooks();
-  const { packs } = usePacks();
-  const [step, setStep] = useState('source'); // 'source' | 'path' | 'lesson' | 'mode' | 'practice' | 'results'
+  const { books, loading: booksLoading } = useBooks();
+  const { packs, loading: packsLoading } = usePacks();
+  
+  const [step, setStep] = useState('source'); // 'source' | 'mode' | 'practice' | 'results'
   const [sourceType, setSourceType] = useState('books');
   const [selectedSource, setSelectedSource] = useState(null);
   const [selectedMode, setSelectedMode] = useState(null);
   const [wordCount, setWordCount] = useState(10);
   const [practiceWords, setPracticeWords] = useState([]);
   const [results, setResults] = useState(null);
-
-  // Roadmap States
   const [sourceWords, setSourceWords] = useState([]);
-  const [completedLessons, setCompletedLessons] = useState({});
-  const [selectedLesson, setSelectedLesson] = useState(null);
+
+  // Load parameterized source if available
+  useEffect(() => {
+    if (urlSourceType && urlSourceId && !booksLoading && !packsLoading) {
+      const activeList = urlSourceType === 'books' ? books : packs;
+      const foundSource = activeList.find(s => s.id === urlSourceId);
+      if (foundSource) {
+        setSourceType(urlSourceType);
+        setSelectedSource(foundSource);
+        
+        // Fetch words for this source
+        const fetchWords = async () => {
+          if (!user) return;
+          const wordsRef = ref(db, `users/${user.uid}/${urlSourceType}/${urlSourceId}/words`);
+          const wordsSnap = await get(wordsRef);
+          let words = [];
+          if (wordsSnap.exists()) {
+            wordsSnap.forEach(childSnap => {
+              words.push({ id: childSnap.key, ...childSnap.val() });
+            });
+          }
+          if (words.length === 0) {
+            alert("Bu manbada so'zlar yo'q! Avval so'zlar qo'shing.");
+            navigate(urlSourceType === 'books' ? `/books/${urlSourceId}` : `/packs/${urlSourceId}`);
+            return;
+          }
+          setSourceWords(words);
+          setStep('mode');
+        };
+        fetchWords();
+      } else {
+        navigate('/library');
+      }
+    }
+  }, [urlSourceType, urlSourceId, booksLoading, packsLoading, books, packs, user, navigate]);
 
   const sources = sourceType === 'books' ? books : packs;
 
@@ -55,16 +88,8 @@ export default function PracticePage() {
       return;
     }
 
-    const completedRef = ref(db, `users/${user.uid}/${sourceType}/${source.id}/completedLessons`);
-    const completedSnap = await get(completedRef);
-    let lessons = {};
-    if (completedSnap.exists()) {
-      lessons = completedSnap.val();
-    }
-
     setSourceWords(words);
-    setCompletedLessons(lessons);
-    setStep('path');
+    setStep('mode');
   };
 
   const reloadWordsAndLessons = async () => {
@@ -77,14 +102,7 @@ export default function PracticePage() {
         words.push({ id: childSnap.key, ...childSnap.val() });
       });
     }
-    const completedRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/completedLessons`);
-    const completedSnap = await get(completedRef);
-    let lessons = {};
-    if (completedSnap.exists()) {
-      lessons = completedSnap.val();
-    }
     setSourceWords(words);
-    setCompletedLessons(lessons);
   };
 
   const handleStartPractice = async (mode) => {
@@ -123,9 +141,13 @@ export default function PracticePage() {
   };
 
   const handleBack = () => {
-    if (step === 'path') setStep('source');
-    else if (step === 'lesson') setStep('path');
-    else if (step === 'mode') setStep('path');
+    if (step === 'mode') {
+      if (urlSourceId) {
+        navigate(urlSourceType === 'books' ? `/books/${urlSourceId}` : `/packs/${urlSourceId}`);
+      } else {
+        setStep('source');
+      }
+    }
     else if (step === 'practice') setStep('mode');
     else if (step === 'results') setStep('mode');
   };
@@ -134,7 +156,11 @@ export default function PracticePage() {
     setSelectedMode(null);
     setResults(null);
     setPracticeWords([]);
-    setStep('source');
+    if (urlSourceId) {
+      setStep('mode');
+    } else {
+      setStep('source');
+    }
   };
 
   const renderPracticeMode = () => {
@@ -156,208 +182,171 @@ export default function PracticePage() {
     }
   };
 
+  const pageLoading = booksLoading || packsLoading;
+
   return (
     <div className="practice-page">
       <div className="page-header">
-        <h1>🎮 Mashq</h1>
-        {step !== 'source' && (
+        <h1>🎮 Mashq {selectedSource && `(${selectedSource.title || selectedSource.name})`}</h1>
+        {(step !== 'source' || urlSourceId) && (
           <button className="btn btn-ghost" onClick={handleBack}>
             ← Orqaga
           </button>
         )}
       </div>
 
-      <AnimatePresence mode="wait">
-        {/* Step 1: Select Source */}
-        {step === 'source' && (
-          <motion.div
-            key="source"
-            className="practice-source-selector"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            
-            <div className="source-tabs-container">
-              <div className="source-tabs">
-                <button
-                  className={`source-tab ${sourceType === 'books' ? 'active' : ''}`}
-                  onClick={() => { setSourceType('books'); setSelectedSource(null); }}
-                >
-                  📚 Kitoblar
-                </button>
-                <button
-                  className={`source-tab ${sourceType === 'packs' ? 'active' : ''}`}
-                  onClick={() => { setSourceType('packs'); setSelectedSource(null); }}
-                >
-                  To'plamlar
-                </button>
-              </div>
-            </div>
-
-            {sources.length > 0 ? (
-              <div className="source-list">
-                {sources.map(source => (
+      {pageLoading ? (
+        <div className="empty-state"><p>Yuklanmoqda...</p></div>
+      ) : (
+        <AnimatePresence mode="wait">
+          {/* Step 1: Select Source */}
+          {step === 'source' && (
+            <motion.div
+              key="source"
+              className="practice-source-selector"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              <h2>📖 Manbani tanlang</h2>
+              
+              <div className="source-tabs-container">
+                <div className="source-tabs">
                   <button
-                    key={source.id}
-                    className="source-option"
-                    onClick={() => handleSelectSource(source)}
+                    className={`source-tab ${sourceType === 'books' ? 'active' : ''}`}
+                    onClick={() => { setSourceType('books'); setSelectedSource(null); }}
                   >
-                    <div className="source-option-icon">
-                      {sourceType === 'books' ? '📖' : (source.icon || '📦')}
-                    </div>
-                    <div className="source-option-info">
-                      <div className="source-option-name">
-                        {source.title || source.name}
-                      </div>
-                      <div className="source-option-count">
-                        {source.wordCount || 0} ta so'z
-                      </div>
-                    </div>
-                    <div className="source-option-arrow">→</div>
+                    📚 Kitoblar
                   </button>
-                ))}
-              </div>
-            ) : (
-              <div className="empty-state">
-                <div className="empty-state-icon">{sourceType === 'books' ? '📚' : '📦'}</div>
-                <h3>
-                  {sourceType === 'books' ? 'Kitoblar topilmadi' : "To'plamlar topilmadi"}
-                </h3>
-                <p>Avval {sourceType === 'books' ? 'kitob' : "to'plam"} qo'shing va so'zlar kiriting</p>
-              </div>
-            )}
-          </motion.div>
-        )}
-
-        {/* Step 1.5: Learning Path */}
-        {step === 'path' && (
-          <motion.div
-            key="path"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            style={{ width: '100%' }}
-          >
-            <LearningPath
-              words={sourceWords}
-              completedLessons={completedLessons}
-              onSelectLesson={(lesson) => {
-                setSelectedLesson(lesson);
-                setStep('lesson');
-              }}
-              onStartFreePractice={() => {
-                setStep('mode');
-              }}
-            />
-          </motion.div>
-        )}
-
-        {/* Step 1.6: Unified Lesson */}
-        {step === 'lesson' && selectedLesson && (
-          <motion.div
-            key="lesson"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            style={{ width: '100%' }}
-          >
-            <UnifiedLesson
-              lesson={selectedLesson}
-              sourceType={sourceType}
-              sourceId={selectedSource.id}
-              onComplete={async () => {
-                await reloadWordsAndLessons();
-                setStep('path');
-              }}
-            />
-          </motion.div>
-        )}
-
-        {/* Step 2: Select Mode */}
-        {step === 'mode' && (
-          <motion.div
-            key="mode"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            {/* Word Count Selector for Free Practice */}
-            <div className="practice-word-count-bar">
-              <span className="practice-word-count-label">🔢 Mashq qilish uchun so'zlar soni:</span>
-              <div className="word-count-options">
-                {[5, 10, 20, 'all'].map(count => (
                   <button
-                    key={count}
-                    className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
-                    onClick={() => setWordCount(count)}
+                    className={`source-tab ${sourceType === 'packs' ? 'active' : ''}`}
+                    onClick={() => { setSourceType('packs'); setSelectedSource(null); }}
                   >
-                    {count === 'all' ? 'Barchasi' : `${count} ta`}
+                    To'plamlar
                   </button>
-                ))}
+                </div>
               </div>
-            </div>
-            <PracticeHub onSelectMode={handleStartPractice} />
-          </motion.div>
-        )}
 
-        {/* Step 3: Practice */}
-        {step === 'practice' && (
-          <motion.div
-            key="practice"
-            className="practice-session"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            {renderPracticeMode()}
-          </motion.div>
-        )}
+              {sources.length > 0 ? (
+                <div className="source-list">
+                  {sources.map(source => (
+                    <button
+                      key={source.id}
+                      className="source-option"
+                      onClick={() => handleSelectSource(source)}
+                    >
+                      <div className="source-option-icon">
+                        {sourceType === 'books' ? '📖' : (source.icon || '📦')}
+                      </div>
+                      <div className="source-option-info">
+                        <div className="source-option-name">
+                          {source.title || source.name}
+                        </div>
+                        <div className="source-option-count">
+                          {source.wordCount || 0} ta so'z
+                        </div>
+                      </div>
+                      <div className="source-option-arrow">→</div>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="empty-state">
+                  <div className="empty-state-icon">{sourceType === 'books' ? '📚' : '📦'}</div>
+                  <h3>
+                    {sourceType === 'books' ? 'Kitoblar topilmadi' : "To'plamlar topilmadi"}
+                  </h3>
+                  <p>Avval {sourceType === 'books' ? 'kitob' : "to'plam"} qo'shing va so'zlar kiriting</p>
+                </div>
+              )}
+            </motion.div>
+          )}
 
-        {/* Step 4: Results */}
-        {step === 'results' && results && (
-          <motion.div
-            key="results"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="practice-results">
-              <div className="result-icon">
-                {results.correctCount / results.totalWords >= 0.8 ? '🎉' : 
-                 results.correctCount / results.totalWords >= 0.5 ? '👍' : '💪'}
-              </div>
-              <h2>
-                {results.correctCount / results.totalWords >= 0.8 ? 'Ajoyib!' :
-                 results.correctCount / results.totalWords >= 0.5 ? 'Yaxshi!' : 'Davom eting!'}
-              </h2>
-              <p>Mashq yakunlandi</p>
-              <div className="result-stats">
-                <div className="result-stat">
-                  <div className="value" style={{ color: 'var(--accent-2)' }}>{results.totalWords}</div>
-                  <div className="label">Jami so'zlar</div>
-                </div>
-                <div className="result-stat">
-                  <div className="value" style={{ color: 'var(--success)' }}>{results.correctCount}</div>
-                  <div className="label">To'g'ri</div>
-                </div>
-                <div className="result-stat">
-                  <div className="value" style={{ color: 'var(--error)' }}>{results.incorrectCount}</div>
-                  <div className="label">Noto'g'ri</div>
+          {/* Step 2: Select Mode */}
+          {step === 'mode' && (
+            <motion.div
+              key="mode"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              {/* Word Count Selector for Free Practice */}
+              <div className="practice-word-count-bar">
+                <span className="practice-word-count-label">🔢 Mashq qilish uchun so'zlar soni:</span>
+                <div className="word-count-options">
+                  {[5, 10, 20, 'all'].map(count => (
+                    <button
+                      key={count}
+                      className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
+                      onClick={() => setWordCount(count)}
+                    >
+                      {count === 'all' ? 'Barchasi' : `${count} ta`}
+                    </button>
+                  ))}
                 </div>
               </div>
-              <div className="result-actions">
-                <button className="btn btn-primary" onClick={() => { setStep('mode'); }}>
-                  Yana mashq →
-                </button>
-                <button className="btn btn-secondary" onClick={handleReset}>
-                  Bosh sahifa
-                </button>
+              <PracticeHub onSelectMode={handleStartPractice} />
+            </motion.div>
+          )}
+
+          {/* Step 3: Practice */}
+          {step === 'practice' && (
+            <motion.div
+              key="practice"
+              className="practice-session"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              {renderPracticeMode()}
+            </motion.div>
+          )}
+
+          {/* Step 4: Results */}
+          {step === 'results' && results && (
+            <motion.div
+              key="results"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className="practice-results">
+                <div className="result-icon">
+                  {results.correctCount / results.totalWords >= 0.8 ? '🎉' : 
+                   results.correctCount / results.totalWords >= 0.5 ? '👍' : '💪'}
+                </div>
+                <h2>
+                  {results.correctCount / results.totalWords >= 0.8 ? 'Ajoyib!' :
+                   results.correctCount / results.totalWords >= 0.5 ? 'Yaxshi!' : 'Davom eting!'}
+                </h2>
+                <p>Mashq yakunlandi</p>
+                <div className="result-stats">
+                  <div className="result-stat">
+                    <div className="value" style={{ color: 'var(--accent-2)' }}>{results.totalWords}</div>
+                    <div className="label">Jami so'zlar</div>
+                  </div>
+                  <div className="result-stat">
+                    <div className="value" style={{ color: 'var(--success)' }}>{results.correctCount}</div>
+                    <div className="label">To'g'ri</div>
+                  </div>
+                  <div className="result-stat">
+                    <div className="value" style={{ color: 'var(--error)' }}>{results.incorrectCount}</div>
+                    <div className="label">Noto'g'ri</div>
+                  </div>
+                </div>
+                <div className="result-actions">
+                  <button className="btn btn-primary" onClick={() => { setStep('mode'); }}>
+                    Yana mashq →
+                  </button>
+                  <button className="btn btn-secondary" onClick={handleReset}>
+                    Mashq boshiga
+                  </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
     </div>
   );
 }

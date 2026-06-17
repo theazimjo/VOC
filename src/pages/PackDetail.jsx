@@ -6,20 +6,19 @@ import { useWords } from '../hooks/useWords';
 import { levelOptions } from '../utils/helpers';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
-import PackForm from '../components/Packs/PackForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
+import SpeedDialFAB from '../components/Words/SpeedDialFAB';
 import './PackDetail.css';
 
 export default function PackDetail() {
   const { packId } = useParams();
   const navigate = useNavigate();
-  const { getPack, updatePack, deletePack } = usePacks();
+  const { getPack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord } = useWords('packs', packId);
   
   const [pack, setPack] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
-  const [showPackForm, setShowPackForm] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
 
   useEffect(() => {
@@ -30,12 +29,6 @@ export default function PackDetail() {
     };
     fetchPack();
   }, [packId, getPack, navigate]);
-
-  const handleSavePackDetails = async (data) => {
-    await updatePack(packId, data);
-    setPack(prev => ({ ...prev, ...data }));
-    setShowPackForm(false);
-  };
 
   const handleSaveWord = async (data) => {
     if (editingWord) {
@@ -53,7 +46,6 @@ export default function PackDetail() {
   };
 
   const handleBulkImport = async (newWords) => {
-    // We add them sequentially
     for (const wordData of newWords) {
       await addWord(wordData);
     }
@@ -62,13 +54,6 @@ export default function PackDetail() {
   const handleDeleteWord = async (wordId) => {
     if (window.confirm("Rostdan ham bu so'zni o'chirmoqchimisiz?")) {
       await deleteWord(wordId);
-    }
-  };
-
-  const handleDeletePack = async () => {
-    if (window.confirm("To'plamni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
-      await deletePack(packId);
-      navigate('/library?tab=packs');
     }
   };
 
@@ -82,6 +67,12 @@ export default function PackDetail() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
+      <div className="detail-back-navigation">
+        <button className="btn-back" onClick={() => navigate('/library?tab=packs')}>
+          ← Kutubxona
+        </button>
+      </div>
+
       <div className="pack-detail-header" style={{ borderBottom: `4px solid ${pack.color || 'var(--accent-1)'}` }}>
         <div className="pack-detail-info">
           <div className="pack-detail-icon">{pack.icon}</div>
@@ -97,12 +88,9 @@ export default function PackDetail() {
           </div>
         </div>
         <div className="pack-detail-actions">
-          <button className="btn btn-secondary" onClick={() => navigate('/library?tab=packs')}>Orqaga</button>
-          <button className="btn btn-secondary" onClick={() => setShowBulkImportForm(true)}>+ JSON Import</button>
-          <button className="btn btn-primary" onClick={() => { setEditingWord(null); setShowWordForm(true); }}>
-            + So'z qo'shish
+          <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
+            🎮 Mashq qilish
           </button>
-          <button className="btn btn-secondary btn-icon" onClick={() => setShowPackForm(true)} title="Tahrirlash">✏️</button>
         </div>
       </div>
 
@@ -111,14 +99,6 @@ export default function PackDetail() {
         onEdit={handleEditWord} 
         onDelete={handleDeleteWord} 
         loading={loading}
-      />
-
-      <PackForm
-        isOpen={showPackForm}
-        onClose={() => setShowPackForm(false)}
-        onSave={handleSavePackDetails}
-        editPack={pack}
-        onDelete={handleDeletePack}
       />
 
       <WordForm
@@ -132,6 +112,11 @@ export default function PackDetail() {
         isOpen={showBulkImportForm}
         onClose={() => setShowBulkImportForm(false)}
         onImport={handleBulkImport}
+      />
+
+      <SpeedDialFAB
+        onAddWord={() => { setEditingWord(null); setShowWordForm(true); }}
+        onImportJson={() => setShowBulkImportForm(true)}
       />
     </motion.div>
   );

@@ -6,7 +6,6 @@ import './Sidebar.css';
 const navItems = [
   { to: '/',         icon: '📊', label: 'Dashboard' },
   { to: '/library',  icon: '📚', label: 'Kutubxona' },
-  { to: '/practice', icon: '🎮', label: 'Mashq' },
   { to: '/stats',    icon: '📈', label: 'Statistika' },
 ];
 

@@ -11,6 +11,7 @@ import PracticePage from './pages/PracticePage';
 import StatsPage from './pages/StatsPage';
 import ProfilePage from './pages/ProfilePage';
 import LibraryPage from './pages/LibraryPage';
+import MixedPractice from './pages/MixedPractice';
 
 export default function App() {
   return (
@@ -31,6 +32,8 @@ export default function App() {
               <Route path="/packs" element={<Navigate to="/library?tab=packs" replace />} />
               <Route path="/packs/:packId" element={<PackDetail />} />
               <Route path="/practice" element={<PracticePage />} />
+              <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />
+              <Route path="/mixed-practice" element={<MixedPractice />} />
               <Route path="/stats" element={<StatsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>

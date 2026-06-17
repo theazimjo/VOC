@@ -11,37 +11,65 @@ import { bookColors, packIcons } from '../utils/helpers';
 import './LibraryPage.css';
 
 export default function LibraryPage() {
-  const { books, loading: booksLoading, addBook } = useBooks();
-  const { packs, loading: packsLoading, addPack } = usePacks();
+  const { books, loading: booksLoading, addBook, updateBook, deleteBook } = useBooks();
+  const { packs, loading: packsLoading, addPack, updatePack, deletePack } = usePacks();
   const [searchParams, setSearchParams] = useSearchParams();
   
   // Tabs: 'books' or 'packs'
   const activeTab = searchParams.get('tab') === 'packs' ? 'packs' : 'books';
   const [showBookForm, setShowBookForm] = useState(false);
   const [showPackForm, setShowPackForm] = useState(false);
+  const [editingBook, setEditingBook] = useState(null);
+  const [editingPack, setEditingPack] = useState(null);
 
   const setActiveTab = (tabName) => {
     setSearchParams({ tab: tabName });
   };
 
   const handleSaveBook = async (data) => {
-    await addBook({
-      title: data.title,
-      author: data.author || '',
-      coverColor: data.coverColor || bookColors[Math.floor(Math.random() * bookColors.length)],
-    });
+    if (editingBook) {
+      await updateBook(editingBook.id, data);
+    } else {
+      await addBook({
+        title: data.title,
+        author: data.author || '',
+        coverColor: data.coverColor || bookColors[Math.floor(Math.random() * bookColors.length)],
+      });
+    }
     setShowBookForm(false);
+    setEditingBook(null);
+  };
+
+  const handleDeleteBook = async () => {
+    if (editingBook && window.confirm("Kitobni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
+      await deleteBook(editingBook.id);
+      setShowBookForm(false);
+      setEditingBook(null);
+    }
   };
 
   const handleSavePack = async (data) => {
-    await addPack({
-      name: data.name,
-      description: data.description || '',
-      color: data.color || 'var(--accent-gradient)',
-      icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
-      level: data.level || 'beginner',
-    });
+    if (editingPack) {
+      await updatePack(editingPack.id, data);
+    } else {
+      await addPack({
+        name: data.name,
+        description: data.description || '',
+        color: data.color || 'var(--accent-gradient)',
+        icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
+        level: data.level || 'beginner',
+      });
+    }
     setShowPackForm(false);
+    setEditingPack(null);
+  };
+
+  const handleDeletePack = async () => {
+    if (editingPack && window.confirm("To'plamni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
+      await deletePack(editingPack.id);
+      setShowPackForm(false);
+      setEditingPack(null);
+    }
   };
 
   const handleAddClick = () => {
@@ -113,9 +141,9 @@ export default function LibraryPage() {
               transition={{ duration: 0.2 }}
             >
               {activeTab === 'books' ? (
-                <BookList books={books} />
+                <BookList books={books} onEditBook={(book) => { setEditingBook(book); setShowBookForm(true); }} />
               ) : (
-                <PackList packs={packs} />
+                <PackList packs={packs} onEditPack={(pack) => { setEditingPack(pack); setShowPackForm(true); }} />
               )}
             </motion.div>
           </AnimatePresence>
@@ -148,14 +176,18 @@ export default function LibraryPage() {
       {/* Forms */}
       <BookForm
         isOpen={showBookForm}
-        onClose={() => setShowBookForm(false)}
+        onClose={() => { setShowBookForm(false); setEditingBook(null); }}
         onSave={handleSaveBook}
+        editBook={editingBook}
+        onDelete={handleDeleteBook}
       />
 
       <PackForm
         isOpen={showPackForm}
-        onClose={() => setShowPackForm(false)}
+        onClose={() => { setShowPackForm(false); setEditingPack(null); }}
         onSave={handleSavePack}
+        editPack={editingPack}
+        onDelete={handleDeletePack}
       />
     </motion.div>
   );

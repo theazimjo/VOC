@@ -1,0 +1,117 @@
+.speed-dial-container {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-md);
+  z-index: 999;
+}
+
+.speed-dial-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.speed-dial-action {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  color: var(--text-primary);
+  transition: all var(--transition-base);
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
+}
+
+.speed-dial-action:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--accent-2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px hsla(200, 90%, 55%, 0.2);
+}
+
+.speed-dial-action-label {
+  font-size: var(--font-sm);
+  font-weight: 600;
+}
+
+.speed-dial-action-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speed-dial-trigger {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 8px 24px hsla(265, 90%, 65%, 0.4),
+    0 0 0 4px hsla(265, 90%, 65%, 0.15);
+  transition: all var(--transition-base);
+}
+
+.speed-dial-trigger-icon {
+  font-size: 2.2rem;
+  color: white;
+  font-weight: 300;
+  line-height: 1;
+  transition: transform var(--transition-base);
+  display: inline-block;
+  margin-top: -4px; /* visual center alignment for plus sign */
+}
+
+.speed-dial-trigger.open {
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+.speed-dial-trigger.open .speed-dial-trigger-icon {
+  transform: rotate(135deg);
+  color: var(--text-primary);
+  margin-top: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .speed-dial-container {
+    bottom: 84px; /* 64px BottomNav height + 20px space */
+    right: 20px;
+    gap: var(--space-sm);
+  }
+
+  .speed-dial-trigger {
+    width: 50px;
+    height: 50px;
+    box-shadow: 
+      0 6px 20px hsla(265, 90%, 65%, 0.4),
+      0 0 0 3px hsla(265, 90%, 65%, 0.12);
+  }
+
+  .speed-dial-trigger-icon {
+    font-size: 1.8rem;
+    margin-top: -3px;
+  }
+
+  .speed-dial-action {
+    padding: 8px 14px;
+  }
+}

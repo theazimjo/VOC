@@ -5,20 +5,19 @@ import { useBooks } from '../hooks/useBooks';
 import { useWords } from '../hooks/useWords';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
-import BookForm from '../components/Books/BookForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
+import SpeedDialFAB from '../components/Words/SpeedDialFAB';
 import './BookDetail.css';
 
 export default function BookDetail() {
   const { bookId } = useParams();
   const navigate = useNavigate();
-  const { getBook, updateBook, deleteBook } = useBooks();
+  const { getBook } = useBooks();
   const { words, loading, addWord, updateWord, deleteWord } = useWords('books', bookId);
   
   const [book, setBook] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
-  const [showBookForm, setShowBookForm] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
 
   useEffect(() => {
@@ -29,12 +28,6 @@ export default function BookDetail() {
     };
     fetchBook();
   }, [bookId, getBook, navigate]);
-
-  const handleSaveBookDetails = async (data) => {
-    await updateBook(bookId, data);
-    setBook(prev => ({ ...prev, ...data }));
-    setShowBookForm(false);
-  };
 
   const handleSaveWord = async (data) => {
     if (editingWord) {
@@ -52,7 +45,6 @@ export default function BookDetail() {
   };
 
   const handleBulkImport = async (newWords) => {
-    // We add them sequentially to respect any potential rate limits
     for (const wordData of newWords) {
       await addWord(wordData);
     }
@@ -61,13 +53,6 @@ export default function BookDetail() {
   const handleDeleteWord = async (wordId) => {
     if (window.confirm("Rostdan ham bu so'zni o'chirmoqchimisiz?")) {
       await deleteWord(wordId);
-    }
-  };
-
-  const handleDeleteBook = async () => {
-    if (window.confirm("Kitobni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
-      await deleteBook(bookId);
-      navigate('/library?tab=books');
     }
   };
 
@@ -83,6 +68,12 @@ export default function BookDetail() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
+      <div className="detail-back-navigation">
+        <button className="btn-back" onClick={() => navigate('/library?tab=books')}>
+          ← Kutubxona
+        </button>
+      </div>
+
       <div className="book-detail-header">
         <div className="book-detail-bg" style={{ background: book.coverColor || 'var(--accent-gradient)' }}></div>
         <div className="book-detail-info">
@@ -94,12 +85,9 @@ export default function BookDetail() {
           </div>
         </div>
         <div className="book-detail-actions">
-          <button className="btn btn-secondary" onClick={() => navigate('/library?tab=books')}>Orqaga</button>
-          <button className="btn btn-secondary" onClick={() => setShowBulkImportForm(true)}>+ JSON Import</button>
-          <button className="btn btn-primary" onClick={() => { setEditingWord(null); setShowWordForm(true); }}>
-            + So'z qo'shish
+          <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/books/${bookId}`)}>
+            🎮 Mashq qilish
           </button>
-          <button className="btn btn-secondary btn-icon" onClick={() => setShowBookForm(true)} title="Tahrirlash">✏️</button>
         </div>
       </div>
 
@@ -108,14 +96,6 @@ export default function BookDetail() {
         onEdit={handleEditWord} 
         onDelete={handleDeleteWord} 
         loading={loading}
-      />
-
-      <BookForm
-        isOpen={showBookForm}
-        onClose={() => setShowBookForm(false)}
-        onSave={handleSaveBookDetails}
-        editBook={book}
-        onDelete={handleDeleteBook}
       />
 
       <WordForm
@@ -129,6 +109,11 @@ export default function BookDetail() {
         isOpen={showBulkImportForm}
         onClose={() => setShowBulkImportForm(false)}
         onImport={handleBulkImport}
+      />
+
+      <SpeedDialFAB
+        onAddWord={() => { setEditingWord(null); setShowWordForm(true); }}
+        onImportJson={() => setShowBulkImportForm(true)}
       />
     </motion.div>
   );
