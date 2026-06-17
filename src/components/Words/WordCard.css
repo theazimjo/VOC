@@ -3,9 +3,10 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-md) var(--space-lg);
+  padding-right: 84px; /* Room for absolute actions */
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   transition: all var(--transition-base);
   position: relative;
 }
@@ -48,10 +49,14 @@
 }
 
 .word-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
   display: flex;
   gap: var(--space-xs);
   opacity: 0;
   transition: opacity var(--transition-fast);
+  z-index: 5;
 }
 
 .word-card:hover .word-actions {

@@ -25,6 +25,7 @@
 @media (max-width: 768px) {
   .layout-content {
     margin-left: 0 !important;
-    padding: var(--space-md);
+    padding: var(--space-md) !important;
+    padding-bottom: calc(64px + var(--space-md)) !important; /* Space for BottomNav */
   }
 }

@@ -230,7 +230,7 @@
   }
 
   .navbar-hamburger {
-    display: flex;
+    display: none !important;
   }
 
   .navbar-search {

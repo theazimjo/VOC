@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { bookColors } from '../../utils/helpers';
 import './BookForm.css';
 
-export default function BookForm({ isOpen, onClose, onSave, editBook = null }) {
+export default function BookForm({ isOpen, onClose, onSave, editBook = null, onDelete = null }) {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [coverColor, setCoverColor] = useState(bookColors[0]);
@@ -85,9 +85,24 @@ export default function BookForm({ isOpen, onClose, onSave, editBook = null }) {
                 </div>
               </div>
               
-              <div className="modal-footer">
-                <button type="button" className="btn btn-ghost" onClick={onClose}>Bekor qilish</button>
-                <button type="submit" className="btn btn-primary">Saqlash</button>
+              <div className="modal-footer" style={{ justifyContent: editBook ? 'space-between' : 'flex-end', width: '100%' }}>
+                {editBook && onDelete && (
+                  <button 
+                    type="button" 
+                    className="btn btn-danger" 
+                    onClick={() => {
+                      if (window.confirm("Rostdan ham bu kitobni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
+                        onDelete();
+                      }
+                    }}
+                  >
+                    🗑 O'chirish
+                  </button>
+                )}
+                <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+                  <button type="button" className="btn btn-ghost" onClick={onClose}>Bekor qilish</button>
+                  <button type="submit" className="btn btn-primary">Saqlash</button>
+                </div>
               </div>
             </form>
           </motion.div>

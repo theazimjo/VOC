@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
+import BottomNav from './BottomNav';
 import './Layout.css';
 
 export default function Layout() {
@@ -41,6 +42,8 @@ export default function Layout() {
       >
         <Outlet />
       </main>
+
+      <BottomNav />
     </div>
   );
 }

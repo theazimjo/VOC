@@ -5,6 +5,7 @@ import { useBooks } from '../hooks/useBooks';
 import { useWords } from '../hooks/useWords';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
+import BookForm from '../components/Books/BookForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
 import './BookDetail.css';
 
@@ -17,6 +18,7 @@ export default function BookDetail() {
   const [book, setBook] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
+  const [showBookForm, setShowBookForm] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
 
   useEffect(() => {
@@ -27,6 +29,12 @@ export default function BookDetail() {
     };
     fetchBook();
   }, [bookId, getBook, navigate]);
+
+  const handleSaveBookDetails = async (data) => {
+    await updateBook(bookId, data);
+    setBook(prev => ({ ...prev, ...data }));
+    setShowBookForm(false);
+  };
 
   const handleSaveWord = async (data) => {
     if (editingWord) {
@@ -91,7 +99,7 @@ export default function BookDetail() {
           <button className="btn btn-primary" onClick={() => { setEditingWord(null); setShowWordForm(true); }}>
             + So'z qo'shish
           </button>
-          <button className="btn btn-danger btn-icon" onClick={handleDeleteBook}>🗑</button>
+          <button className="btn btn-secondary btn-icon" onClick={() => setShowBookForm(true)} title="Tahrirlash">✏️</button>
         </div>
       </div>
 
@@ -100,6 +108,14 @@ export default function BookDetail() {
         onEdit={handleEditWord} 
         onDelete={handleDeleteWord} 
         loading={loading}
+      />
+
+      <BookForm
+        isOpen={showBookForm}
+        onClose={() => setShowBookForm(false)}
+        onSave={handleSaveBookDetails}
+        editBook={book}
+        onDelete={handleDeleteBook}
       />
 
       <WordForm

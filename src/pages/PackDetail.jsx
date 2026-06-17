@@ -6,6 +6,7 @@ import { useWords } from '../hooks/useWords';
 import { levelOptions } from '../utils/helpers';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
+import PackForm from '../components/Packs/PackForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
 import './PackDetail.css';
 
@@ -18,6 +19,7 @@ export default function PackDetail() {
   const [pack, setPack] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
+  const [showPackForm, setShowPackForm] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
 
   useEffect(() => {
@@ -28,6 +30,12 @@ export default function PackDetail() {
     };
     fetchPack();
   }, [packId, getPack, navigate]);
+
+  const handleSavePackDetails = async (data) => {
+    await updatePack(packId, data);
+    setPack(prev => ({ ...prev, ...data }));
+    setShowPackForm(false);
+  };
 
   const handleSaveWord = async (data) => {
     if (editingWord) {
@@ -94,7 +102,7 @@ export default function PackDetail() {
           <button className="btn btn-primary" onClick={() => { setEditingWord(null); setShowWordForm(true); }}>
             + So'z qo'shish
           </button>
-          <button className="btn btn-danger btn-icon" onClick={handleDeletePack}>🗑</button>
+          <button className="btn btn-secondary btn-icon" onClick={() => setShowPackForm(true)} title="Tahrirlash">✏️</button>
         </div>
       </div>
 
@@ -103,6 +111,14 @@ export default function PackDetail() {
         onEdit={handleEditWord} 
         onDelete={handleDeleteWord} 
         loading={loading}
+      />
+
+      <PackForm
+        isOpen={showPackForm}
+        onClose={() => setShowPackForm(false)}
+        onSave={handleSavePackDetails}
+        editPack={pack}
+        onDelete={handleDeletePack}
       />
 
       <WordForm
