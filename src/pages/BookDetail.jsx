@@ -25,7 +25,7 @@ export default function BookDetail() {
     const fetchBook = async () => {
       const b = await getBook(bookId);
       if (b) setBook(b);
-      else navigate('/books');
+      else navigate('/library?tab=books');
     };
     fetchBook();
   }, [bookId, getBook, navigate]);
@@ -67,7 +67,7 @@ export default function BookDetail() {
   const handleDeleteBook = async () => {
     if (window.confirm("Kitobni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
       await deleteBook(bookId);
-      navigate('/books');
+      navigate('/library?tab=books');
     }
   };
 
@@ -94,7 +94,7 @@ export default function BookDetail() {
           </div>
         </div>
         <div className="book-detail-actions">
-          <button className="btn btn-secondary" onClick={() => navigate('/books')}>Orqaga</button>
+          <button className="btn btn-secondary" onClick={() => navigate('/library?tab=books')}>Orqaga</button>
           <button className="btn btn-secondary" onClick={() => setShowBulkImportForm(true)}>+ JSON Import</button>
           <button className="btn btn-primary" onClick={() => { setEditingWord(null); setShowWordForm(true); }}>
             + So'z qo'shish

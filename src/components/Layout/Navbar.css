@@ -237,6 +237,17 @@
     max-width: none;
   }
 
+  .navbar-avatar-btn {
+    width: 30px !important;
+    height: 30px !important;
+    font-size: var(--font-xs) !important;
+    border-width: 1.5px !important;
+  }
+
+  .navbar-dropdown {
+    top: calc(100% + 4px) !important;
+  }
+
   @media (max-width: 500px) {
     .navbar-search {
       display: none;

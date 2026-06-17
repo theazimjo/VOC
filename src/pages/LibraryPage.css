@@ -1,0 +1,123 @@
+.library-page {
+  padding: var(--space-lg);
+  min-height: 100%;
+}
+
+/* Tabs Bar (Capsule style) */
+.library-tabs-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--space-xl);
+}
+
+.library-tabs {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  width: 100%;
+  max-width: 320px;
+  position: relative;
+}
+
+.library-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  position: relative;
+  transition: color var(--transition-base);
+  outline: none;
+  flex: 1;
+  border-radius: var(--radius-full);
+}
+
+.library-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.library-tab-btn.active {
+  color: white;
+}
+
+/* Active tab pill sliding background container */
+.active-tab-pill {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 12px hsla(265, 90%, 65%, 0.25);
+  z-index: 0;
+}
+
+.tab-label,
+.tab-count-badge {
+  position: relative;
+  z-index: 1;
+}
+
+/* Count badge inside tab */
+.tab-count-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  font-weight: 700;
+  transition: all var(--transition-base);
+}
+
+.library-tab-btn:hover .tab-count-badge {
+  color: var(--text-secondary);
+  border-color: var(--border-light);
+}
+
+.library-tab-btn.active .tab-count-badge {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: transparent;
+  color: white;
+}
+
+/* Content overrides for unified list view */
+.library-page .grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .library-page {
+    padding: var(--space-md);
+    padding-bottom: calc(64px + var(--space-lg)); /* Prevent BottomNav overlap */
+  }
+
+  .library-tabs-container {
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .library-tabs {
+    max-width: none; /* Take full width on mobile */
+  }
+
+  .library-tab-btn {
+    padding: 8px 12px;
+    font-size: var(--font-xs);
+  }
+
+  /* Force single-column lists on mobile to let horizontal cards expand */
+  .library-page .grid-cards {
+    grid-template-columns: 1fr !important;
+    gap: var(--space-sm) !important;
+  }
+}

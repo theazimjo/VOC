@@ -26,7 +26,7 @@ export default function PackDetail() {
     const fetchPack = async () => {
       const p = await getPack(packId);
       if (p) setPack(p);
-      else navigate('/packs');
+      else navigate('/library?tab=packs');
     };
     fetchPack();
   }, [packId, getPack, navigate]);
@@ -68,7 +68,7 @@ export default function PackDetail() {
   const handleDeletePack = async () => {
     if (window.confirm("To'plamni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
       await deletePack(packId);
-      navigate('/packs');
+      navigate('/library?tab=packs');
     }
   };
 
@@ -97,7 +97,7 @@ export default function PackDetail() {
           </div>
         </div>
         <div className="pack-detail-actions">
-          <button className="btn btn-secondary" onClick={() => navigate('/packs')}>Orqaga</button>
+          <button className="btn btn-secondary" onClick={() => navigate('/library?tab=packs')}>Orqaga</button>
           <button className="btn btn-secondary" onClick={() => setShowBulkImportForm(true)}>+ JSON Import</button>
           <button className="btn btn-primary" onClick={() => { setEditingWord(null); setShowWordForm(true); }}>
             + So'z qo'shish

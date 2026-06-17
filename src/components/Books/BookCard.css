@@ -1,118 +1,112 @@
-.book-card {
-  display: block;
+.book-card-horizontal {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   text-decoration: none;
   color: inherit;
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl) var(--space-lg);
+  transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
-  transition: all var(--transition-spring);
-  box-shadow: 
-    0 10px 24px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  height: 200px;
+}
+
+.book-card-horizontal:hover {
+  border-color: var(--accent-1);
+  background: var(--bg-glass-hover);
+  box-shadow: var(--shadow-sm), 0 0 20px hsla(265, 90%, 65%, 0.08);
+}
+
+/* Colored book spine indicator on the left edge */
+.book-card-cover-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+}
+
+.book-card-icon-container {
+  font-size: 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.book-card-info-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-.book-card:hover {
-  transform: translateY(-8px) rotateY(-5deg);
-  box-shadow: 
-    12px 16px 28px rgba(0, 0, 0, 0.4),
-    0 0 30px hsla(265, 90%, 65%, 0.1);
-  color: inherit;
-}
-
-/* Subtle book spine highlight */
-.book-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 14px;
-  background: linear-gradient(to right, rgba(255,255,255,0.18), rgba(0,0,0,0.22) 30%, rgba(255,255,255,0.06) 60%, transparent);
-  z-index: 3;
-}
-
-/* Shiny reflection sweep */
-.book-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  transform: skewX(-25deg);
-  transition: 0.75s ease-in-out;
-  z-index: 4;
-}
-
-.book-card:hover::before {
-  left: 150%;
-}
-
-.book-card-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  opacity: 0.85;
-  transition: opacity var(--transition-base);
-}
-
-.book-card:hover .book-card-bg {
-  opacity: 1;
-}
-
-.book-card-content {
-  position: relative;
-  z-index: 2;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-
-.book-card-icon {
-  font-size: 3rem;
-  position: absolute;
-  top: var(--space-lg);
-  right: var(--space-lg);
-  z-index: 2;
-  opacity: 0.8;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
 }
 
 .book-card-title {
-  font-size: var(--font-xl);
-  font-weight: 800;
-  margin-bottom: var(--space-xs);
-  color: white;
+  font-weight: 700;
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .book-card-author {
-  font-size: var(--font-sm);
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: var(--space-md);
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.book-card-stats {
+.book-card-meta-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-md);
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
-.book-card-badge {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  padding: 4px 10px;
+.book-card-badge-compact {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
   border-radius: var(--radius-full);
   font-size: var(--font-xs);
-  color: white;
+  color: var(--text-secondary);
   font-weight: 600;
+}
+
+.book-card-arrow {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: transform var(--transition-base), color var(--transition-base);
+}
+
+.book-card-horizontal:hover .book-card-arrow {
+  color: var(--accent-1);
+  transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+  .book-card-horizontal {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .book-card-icon-container {
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
+  }
 }

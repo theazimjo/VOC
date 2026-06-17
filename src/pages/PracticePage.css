@@ -10,108 +10,165 @@
   font-size: var(--font-xl);
   font-weight: 700;
   margin-bottom: var(--space-lg);
+  color: var(--text-primary);
+}
+
+/* Source Tab Switcher (Capsule style) */
+.source-tabs-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--space-xl);
 }
 
 .source-tabs {
-  display: flex;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-lg);
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  width: 100%;
+  max-width: 320px;
 }
 
 .source-tab {
-  padding: 10px 20px;
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  flex: 1;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-full);
   color: var(--text-secondary);
   font-family: var(--font-family);
   font-size: var(--font-sm);
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
+  text-align: center;
 }
 
 .source-tab:hover {
-  border-color: var(--accent-1);
   color: var(--text-primary);
 }
 
 .source-tab.active {
   background: var(--accent-gradient);
-  border-color: transparent;
   color: white;
+  box-shadow: 0 4px 12px hsla(265, 90%, 65%, 0.25);
 }
 
+/* Horizontal Source List Options */
 .source-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-sm);
-  margin-bottom: var(--space-lg);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
 }
 
 .source-option {
-  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
   background: var(--bg-glass);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  width: 100%;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  text-align: center;
-  font-family: var(--font-family);
-  color: var(--text-primary);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
 }
 
 .source-option:hover {
   border-color: var(--accent-1);
+  transform: translateX(4px);
+  background: var(--bg-glass-hover);
+  box-shadow: var(--shadow-sm), 0 0 20px hsla(265, 90%, 65%, 0.08);
 }
 
-.source-option.selected {
-  border-color: var(--accent-1);
-  background: var(--accent-1-dim);
+.source-option-icon {
+  font-size: 1.6rem;
+  background: rgba(255, 255, 255, 0.04);
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
-.source-option .source-option-icon {
-  font-size: 1.5rem;
-  margin-bottom: var(--space-xs);
+.source-option-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0; /* Enable ellipsis if needed */
 }
 
-.source-option .source-option-name {
-  font-weight: 600;
-  font-size: var(--font-sm);
+.source-option-name {
+  font-weight: 700;
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.source-option .source-option-count {
+.source-option-count {
   font-size: var(--font-xs);
   color: var(--text-secondary);
 }
 
-/* Word Count Selector */
-.word-count-selector {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
+.source-option-arrow {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: auto;
+  transition: transform var(--transition-base), color var(--transition-base);
 }
 
-.word-count-selector label {
+.source-option:hover .source-option-arrow {
+  color: var(--accent-1);
+  transform: translateX(3px);
+}
+
+/* Word Count Selector for Free Practice */
+.practice-word-count-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-xl);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.practice-word-count-label {
   font-size: var(--font-sm);
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .word-count-options {
   display: flex;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
 .word-count-btn {
-  padding: 6px 16px;
-  background: var(--bg-glass);
+  flex: 1;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   color: var(--text-secondary);
   font-family: var(--font-family);
   font-size: var(--font-sm);
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
@@ -125,10 +182,7 @@
   background: var(--accent-gradient);
   border-color: transparent;
   color: white;
-}
-
-.practice-start-btn {
-  margin-top: var(--space-md);
+  box-shadow: 0 4px 12px hsla(265, 90%, 65%, 0.2);
 }
 
 /* Practice Session */
@@ -136,60 +190,62 @@
   position: relative;
 }
 
-.practice-back-btn {
-  margin-bottom: var(--space-lg);
-}
-
 /* Results Screen */
 .practice-results {
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
-  padding: var(--space-2xl);
+  padding: var(--space-2xl) var(--space-lg);
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-.practice-results .result-icon {
-  font-size: 4rem;
-  margin-bottom: var(--space-lg);
+.result-icon {
+  font-size: 3.5rem;
+  margin-bottom: var(--space-md);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
 }
 
 .practice-results h2 {
-  font-size: var(--font-3xl);
+  font-size: var(--font-2xl);
   font-weight: 800;
-  margin-bottom: var(--space-sm);
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 2px;
 }
 
 .practice-results p {
   color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
-}
-
-.result-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
   margin-bottom: var(--space-xl);
 }
 
+.result-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
 .result-stat {
-  padding: var(--space-md);
-  background: var(--bg-glass);
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-sm);
+  border-radius: var(--radius-lg);
 }
 
 .result-stat .value {
-  font-size: var(--font-2xl);
-  font-weight: 800;
+  font-size: var(--font-xl);
+  font-weight: 850;
+  margin-bottom: 2px;
 }
 
 .result-stat .label {
   font-size: var(--font-xs);
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .result-actions {
@@ -201,13 +257,51 @@
 @media (max-width: 768px) {
   .practice-page {
     padding: var(--space-md);
+    padding-bottom: calc(64px + var(--space-lg)); /* Prevent BottomNav overlap */
+  }
+
+  .source-tabs-container {
+    justify-content: center;
+  }
+
+  .source-tabs {
+    max-width: none; /* Take full width on mobile */
   }
 
   .source-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .source-option {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .source-option-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+
+  .practice-word-count-bar {
+    padding: var(--space-md);
+  }
+
+  .word-count-options {
+    gap: var(--space-xs);
+  }
+
+  .word-count-btn {
+    padding: 6px 4px;
+    font-size: var(--font-xs);
   }
 
   .result-stats {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .result-stat {
+    padding: var(--space-sm);
   }
 }

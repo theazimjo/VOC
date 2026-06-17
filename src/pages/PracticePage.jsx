@@ -37,10 +37,11 @@ export default function PracticePage() {
 
   const sources = sourceType === 'books' ? books : packs;
 
-  const loadWordsAndLessons = async () => {
-    if (!selectedSource || !user) return { words: [], lessons: {} };
-    
-    const wordsRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/words`);
+  const handleSelectSource = async (source) => {
+    setSelectedSource(source);
+    if (!user) return;
+
+    const wordsRef = ref(db, `users/${user.uid}/${sourceType}/${source.id}/words`);
     const wordsSnap = await get(wordsRef);
     let words = [];
     if (wordsSnap.exists()) {
@@ -49,25 +50,41 @@ export default function PracticePage() {
       });
     }
 
-    const completedRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/completedLessons`);
+    if (words.length === 0) {
+      alert("Bu manbada so'zlar yo'q! Avval Kutubxonadan so'zlar qo'shing.");
+      return;
+    }
+
+    const completedRef = ref(db, `users/${user.uid}/${sourceType}/${source.id}/completedLessons`);
     const completedSnap = await get(completedRef);
     let lessons = {};
     if (completedSnap.exists()) {
       lessons = completedSnap.val();
     }
 
-    return { words, lessons };
-  };
-
-  const handleSelectSourceComplete = async () => {
-    const { words, lessons } = await loadWordsAndLessons();
-    if (words.length === 0) {
-      alert("Bu manbada so'zlar yo'q!");
-      return;
-    }
     setSourceWords(words);
     setCompletedLessons(lessons);
     setStep('path');
+  };
+
+  const reloadWordsAndLessons = async () => {
+    if (!selectedSource || !user) return;
+    const wordsRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/words`);
+    const wordsSnap = await get(wordsRef);
+    let words = [];
+    if (wordsSnap.exists()) {
+      wordsSnap.forEach(childSnap => {
+        words.push({ id: childSnap.key, ...childSnap.val() });
+      });
+    }
+    const completedRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/completedLessons`);
+    const completedSnap = await get(completedRef);
+    let lessons = {};
+    if (completedSnap.exists()) {
+      lessons = completedSnap.val();
+    }
+    setSourceWords(words);
+    setCompletedLessons(lessons);
   };
 
   const handleStartPractice = async (mode) => {
@@ -160,73 +177,47 @@ export default function PracticePage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            <h2>📖 Manbani tanlang</h2>
             
-            <div className="source-tabs">
-              <button
-                className={`source-tab ${sourceType === 'books' ? 'active' : ''}`}
-                onClick={() => { setSourceType('books'); setSelectedSource(null); }}
-              >
-                📚 Kitoblar
-              </button>
-              <button
-                className={`source-tab ${sourceType === 'packs' ? 'active' : ''}`}
-                onClick={() => { setSourceType('packs'); setSelectedSource(null); }}
-              >
-                📦 To'plamlar
-              </button>
+            <div className="source-tabs-container">
+              <div className="source-tabs">
+                <button
+                  className={`source-tab ${sourceType === 'books' ? 'active' : ''}`}
+                  onClick={() => { setSourceType('books'); setSelectedSource(null); }}
+                >
+                  📚 Kitoblar
+                </button>
+                <button
+                  className={`source-tab ${sourceType === 'packs' ? 'active' : ''}`}
+                  onClick={() => { setSourceType('packs'); setSelectedSource(null); }}
+                >
+                  To'plamlar
+                </button>
+              </div>
             </div>
 
             {sources.length > 0 ? (
-              <>
-                <div className="source-list">
-                  {sources.map(source => (
-                    <button
-                      key={source.id}
-                      className={`source-option ${selectedSource?.id === source.id ? 'selected' : ''}`}
-                      onClick={() => setSelectedSource(source)}
-                    >
-                      <div className="source-option-icon">
-                        {sourceType === 'books' ? '📖' : (source.icon || '📦')}
-                      </div>
+              <div className="source-list">
+                {sources.map(source => (
+                  <button
+                    key={source.id}
+                    className="source-option"
+                    onClick={() => handleSelectSource(source)}
+                  >
+                    <div className="source-option-icon">
+                      {sourceType === 'books' ? '📖' : (source.icon || '📦')}
+                    </div>
+                    <div className="source-option-info">
                       <div className="source-option-name">
                         {source.title || source.name}
                       </div>
                       <div className="source-option-count">
                         {source.wordCount || 0} ta so'z
                       </div>
-                    </button>
-                  ))}
-                </div>
-
-                {selectedSource && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                  >
-                    <div className="word-count-selector">
-                      <label>So'zlar soni:</label>
-                      <div className="word-count-options">
-                        {[5, 10, 20, 'all'].map(count => (
-                          <button
-                            key={count}
-                            className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
-                            onClick={() => setWordCount(count)}
-                          >
-                            {count === 'all' ? 'Barchasi' : count}
-                          </button>
-                        ))}
-                      </div>
                     </div>
-                    <button
-                      className="btn btn-primary btn-lg practice-start-btn"
-                      onClick={handleSelectSourceComplete}
-                    >
-                      Davom etish →
-                    </button>
-                  </motion.div>
-                )}
-              </>
+                    <div className="source-option-arrow">→</div>
+                  </button>
+                ))}
+              </div>
             ) : (
               <div className="empty-state">
                 <div className="empty-state-icon">{sourceType === 'books' ? '📚' : '📦'}</div>
@@ -276,9 +267,7 @@ export default function PracticePage() {
               sourceType={sourceType}
               sourceId={selectedSource.id}
               onComplete={async () => {
-                const { words, lessons } = await loadWordsAndLessons();
-                setSourceWords(words);
-                setCompletedLessons(lessons);
+                await reloadWordsAndLessons();
                 setStep('path');
               }}
             />
@@ -293,6 +282,21 @@ export default function PracticePage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
+            {/* Word Count Selector for Free Practice */}
+            <div className="practice-word-count-bar">
+              <span className="practice-word-count-label">🔢 Mashq qilish uchun so'zlar soni:</span>
+              <div className="word-count-options">
+                {[5, 10, 20, 'all'].map(count => (
+                  <button
+                    key={count}
+                    className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
+                    onClick={() => setWordCount(count)}
+                  >
+                    {count === 'all' ? 'Barchasi' : `${count} ta`}
+                  </button>
+                ))}
+              </div>
+            </div>
             <PracticeHub onSelectMode={handleStartPractice} />
           </motion.div>
         )}

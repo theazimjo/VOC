@@ -574,6 +574,7 @@ a:hover {
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   :root {
+    --navbar-height: 48px;
     
     /* Smaller typography on mobile */
     --font-xs: 0.7rem;

@@ -10,8 +10,7 @@ import PackDetail from './pages/PackDetail';
 import PracticePage from './pages/PracticePage';
 import StatsPage from './pages/StatsPage';
 import ProfilePage from './pages/ProfilePage';
-import BooksPage from './pages/BooksPage';
-import PacksPage from './pages/PacksPage';
+import LibraryPage from './pages/LibraryPage';
 
 export default function App() {
   return (
@@ -26,9 +25,10 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/books" element={<BooksPage />} />
+              <Route path="/library" element={<LibraryPage />} />
+              <Route path="/books" element={<Navigate to="/library?tab=books" replace />} />
               <Route path="/books/:bookId" element={<BookDetail />} />
-              <Route path="/packs" element={<PacksPage />} />
+              <Route path="/packs" element={<Navigate to="/library?tab=packs" replace />} />
               <Route path="/packs/:packId" element={<PackDetail />} />
               <Route path="/practice" element={<PracticePage />} />
               <Route path="/stats" element={<StatsPage />} />
