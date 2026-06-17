@@ -28,8 +28,9 @@ export default function PacksPage() {
     >
       <div className="page-header">
         <h1>📦 So'z to'plamlari</h1>
-        <button className="btn btn-primary" onClick={() => setShowForm(true)}>
-          + To'plam yaratish
+        <button className="btn btn-primary btn-add-floating" onClick={() => setShowForm(true)}>
+          <span className="btn-text">+ To'plam yaratish</span>
+          <span className="btn-icon-mobile">+</span>
         </button>
       </div>
 

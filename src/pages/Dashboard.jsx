@@ -142,7 +142,7 @@ export default function Dashboard() {
             {getGreeting()}, <span>{displayName}</span>! 👋
           </h1>
           <p className="banner-text">
-            Bugun yangi so'zlarni zabt etish va bilimingizni yanada mustahkamlashga tayyormisiz? Kunlik darslarni yakunlab, streakingizni saqlang!
+            Streakingizni saqlab qolish va XP yig'ish uchun bugungi darslarni yakunlang!
           </p>
           <div className="banner-actions">
             <button className="btn btn-primary btn-lg" onClick={() => navigate('/practice')}>
@@ -196,7 +196,9 @@ export default function Dashboard() {
             color: 'hsl(0, 80%, 75%)',
             display: 'flex',
             gap: 'var(--space-md)',
-            alignItems: 'flex-start'
+            alignItems: 'flex-start',
+            position: 'relative',
+            zIndex: 1
           }}
         >
           <span style={{ fontSize: '1.5rem', lineHeight: '1' }}>⚠️</span>
@@ -214,91 +216,33 @@ export default function Dashboard() {
         </motion.div>
       )}
 
-      {/* Due Words Alert */}
-      {dueWords > 0 && (
-        <motion.div className="due-words-alert" variants={itemVariants}>
-          <div className="due-words-alert-text">
-            <span className="icon">🧠</span>
-            <div>
-              <h3>{dueWords} ta so'z takrorlashni kutmoqda</h3>
-              <p>Spaced repetition bilan so'zlarni mustahkamlang</p>
-            </div>
-          </div>
-          <button className="btn btn-primary" onClick={() => navigate('/practice')}>
-            Takrorlash →
-          </button>
-        </motion.div>
-      )}
-
-      {/* Stats Grid */}
+      {/* Simplified 3-metric Stats Grid */}
       <motion.div className="stats-grid" variants={itemVariants}>
         <motion.div className="stat-card" whileHover={{ y: -4 }}>
-          <div className="stat-card-icon">📝</div>
+          <div className="stat-card-icon">📚</div>
           <div className="stat-card-value">{totalWords}</div>
-          <div className="stat-card-label">Jami so'zlar</div>
-        </motion.div>
-        <motion.div className="stat-card" whileHover={{ y: -4 }}>
-          <div className="stat-card-icon">🔥</div>
-          <div className="stat-card-value">{activeWordsCount}</div>
-          <div className="stat-card-label">Faol so'zlar</div>
+          <div className="stat-card-label">Lug'at hajmi (so'z)</div>
         </motion.div>
         <motion.div className="stat-card" whileHover={{ y: -4 }}>
           <div className="stat-card-icon">🏆</div>
-          <div className="stat-card-value">{masteredWords}</div>
-          <div className="stat-card-label">O'zlashtirilgan</div>
+          <div className="stat-card-value">
+            {masteredWords} <span className="stat-card-sub">/ {totalWords}</span>
+          </div>
+          <div className="stat-card-label">O'zlashtirilgan so'zlar</div>
         </motion.div>
-        <motion.div className="stat-card" whileHover={{ y: -4 }}>
-          <div className="stat-card-icon">📚</div>
-          <div className="stat-card-value">{books.length}</div>
-          <div className="stat-card-label">Kitoblar</div>
-        </motion.div>
-        <motion.div className="stat-card" whileHover={{ y: -4 }}>
-          <div className="stat-card-icon">📦</div>
-          <div className="stat-card-value">{packs.length}</div>
-          <div className="stat-card-label">To'plamlar</div>
-        </motion.div>
-        <motion.div className="stat-card" whileHover={{ y: -4 }}>
+        <motion.div 
+          className={`stat-card ${dueWords > 0 ? 'clickable-card' : ''}`} 
+          whileHover={dueWords > 0 ? { y: -4 } : {}}
+          onClick={() => dueWords > 0 && navigate('/practice')}
+          title={dueWords > 0 ? "Takrorlashni boshlash uchun bosing" : ""}
+          style={{ cursor: dueWords > 0 ? 'pointer' : 'default' }}
+        >
           <div className="stat-card-icon">🧠</div>
-          <div className="stat-card-value">{dueWords}</div>
-          <div className="stat-card-label">Takrorlash kerak</div>
+          <div className="stat-card-value" style={{ color: dueWords > 0 ? 'var(--warning)' : 'var(--success)' }}>
+            {dueWords > 0 ? `${dueWords} ta` : 'Hamma so\'z tayyor! 🎉'}
+          </div>
+          <div className="stat-card-label">Takrorlash uchun</div>
         </motion.div>
-      </motion.div>
-
-      {/* Quick Actions */}
-      <motion.div variants={itemVariants}>
-        <div className="dashboard-section-header">
-          <h2>⚡ Tezkor harakatlar</h2>
-        </div>
-        <div className="quick-actions">
-          <Link to="/books" className="quick-action-card">
-            <div className="quick-action-icon" style={{ background: 'var(--accent-1-dim)' }}>📚</div>
-            <div className="quick-action-text">
-              <h3>Kitob qo'shish</h3>
-              <p>Yangi kitob uchun so'zlar to'plami yarating</p>
-            </div>
-          </Link>
-          <Link to="/packs" className="quick-action-card">
-            <div className="quick-action-icon" style={{ background: 'var(--accent-2-dim)' }}>📦</div>
-            <div className="quick-action-text">
-              <h3>To'plam yaratish</h3>
-              <p>Mavzu bo'yicha so'zlarni guruhlang</p>
-            </div>
-          </Link>
-          <Link to="/practice" className="quick-action-card">
-            <div className="quick-action-icon" style={{ background: 'var(--accent-3-dim)' }}>🎮</div>
-            <div className="quick-action-text">
-              <h3>Mashq qilish</h3>
-              <p>5 xil usulda so'zlarni o'rganing</p>
-            </div>
-          </Link>
-          <Link to="/stats" className="quick-action-card">
-            <div className="quick-action-icon" style={{ background: 'var(--warning-dim)' }}>📈</div>
-            <div className="quick-action-text">
-              <h3>Statistika</h3>
-              <p>O'rganish jarayoningizni kuzating</p>
-            </div>
-          </Link>
-        </div>
       </motion.div>
 
       {/* Recent Words */}

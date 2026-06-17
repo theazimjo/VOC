@@ -26,8 +26,9 @@ export default function BooksPage() {
     >
       <div className="page-header">
         <h1>📚 Kitoblar</h1>
-        <button className="btn btn-primary" onClick={() => setShowForm(true)}>
-          + Kitob qo'shish
+        <button className="btn btn-primary btn-add-floating" onClick={() => setShowForm(true)}>
+          <span className="btn-text">+ Kitob qo'shish</span>
+          <span className="btn-icon-mobile">+</span>
         </button>
       </div>
 

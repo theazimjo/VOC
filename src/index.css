@@ -235,6 +235,10 @@ a:hover {
   height: 32px;
 }
 
+.btn-icon-mobile {
+  display: none;
+}
+
 /* ========== INPUTS ========== */
 .input-group {
   display: flex;
@@ -673,6 +677,42 @@ a:hover {
   }
   .pack-card-desc {
     margin-bottom: var(--space-md) !important;
+  }
+
+  /* FAB mobile style overrides */
+  .btn-add-floating {
+    position: fixed !important;
+    bottom: 84px !important; /* 64px BottomNav height + 20px space */
+    right: 20px !important;
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    font-size: 2rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 
+      0 6px 20px hsla(265, 90%, 65%, 0.4),
+      0 0 0 4px hsla(265, 90%, 65%, 0.15) !important;
+    z-index: 99 !important;
+    transform: none !important;
+  }
+
+  .btn-add-floating:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 
+      0 8px 24px hsla(265, 90%, 65%, 0.5),
+      0 0 0 6px hsla(265, 90%, 65%, 0.2) !important;
+  }
+
+  .btn-add-floating .btn-text {
+    display: none !important;
+  }
+
+  .btn-add-floating .btn-icon-mobile {
+    display: block !important;
+    line-height: 1 !important;
   }
 }
 
