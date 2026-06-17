@@ -262,3 +262,30 @@
   .flashcard-rating-btn .rating-emoji { font-size: 1.1rem; }
   .btn-speak-card { width: 36px; height: 36px; top: 12px; right: 12px; font-size: 0.9rem; }
 }
+
+/* ─── Part of Speech Badge ─── */
+.fc-pos-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  margin-bottom: var(--space-sm);
+  border: 1px solid transparent;
+  backdrop-filter: blur(8px);
+}
+
+/* Colour-coded per POS */
+.fc-pos-noun        { background: hsla(220, 80%, 55%, 0.18); color: hsl(220, 90%, 70%); border-color: hsla(220, 80%, 55%, 0.35); }
+.fc-pos-verb        { background: hsla(145, 65%, 45%, 0.18); color: hsl(145, 70%, 60%); border-color: hsla(145, 65%, 45%, 0.35); }
+.fc-pos-adjective   { background: hsla(38,  90%, 55%, 0.18); color: hsl(38,  95%, 65%); border-color: hsla(38,  90%, 55%, 0.35); }
+.fc-pos-adverb      { background: hsla(280, 70%, 55%, 0.18); color: hsl(280, 80%, 72%); border-color: hsla(280, 70%, 55%, 0.35); }
+.fc-pos-preposition { background: hsla(175, 60%, 45%, 0.18); color: hsl(175, 70%, 60%); border-color: hsla(175, 60%, 45%, 0.35); }
+.fc-pos-conjunction { background: hsla(340, 70%, 55%, 0.18); color: hsl(340, 80%, 70%); border-color: hsla(340, 70%, 55%, 0.35); }
+.fc-pos-pronoun     { background: hsla(200, 80%, 50%, 0.18); color: hsl(200, 90%, 68%); border-color: hsla(200, 80%, 50%, 0.35); }
+.fc-pos-interjection{ background: hsla(20,  80%, 55%, 0.18); color: hsl(20,  90%, 68%); border-color: hsla(20,  80%, 55%, 0.35); }
+.fc-pos-phrase      { background: hsla(160, 60%, 45%, 0.18); color: hsl(160, 70%, 60%); border-color: hsla(160, 60%, 45%, 0.35); }
+.fc-pos-idiom       { background: hsla(310, 60%, 50%, 0.18); color: hsl(310, 70%, 70%); border-color: hsla(310, 60%, 50%, 0.35); }
+

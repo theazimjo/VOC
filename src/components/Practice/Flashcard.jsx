@@ -4,6 +4,30 @@ import { calculateNextReview, responseToQuality } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './Flashcard.css';
 
+// Short Uzbek labels for each part of speech
+const POS_LABELS = {
+  noun:          { label: 'ot',        abbr: 'n.' },
+  verb:          { label: 'fe\u02bcl',   abbr: 'v.' },
+  adjective:     { label: 'sifat',     abbr: 'adj.' },
+  adverb:        { label: 'ravish',    abbr: 'adv.' },
+  preposition:   { label: 'predlog',  abbr: 'prep.' },
+  conjunction:   { label: 'bog\u02bclovchi', abbr: 'conj.' },
+  pronoun:       { label: 'olmosh',   abbr: 'pron.' },
+  interjection:  { label: 'undov',    abbr: 'int.' },
+  phrase:        { label: 'ibora',    abbr: 'phr.' },
+  idiom:         { label: 'idiom',    abbr: 'idiom' },
+};
+
+function PosBadge({ pos }) {
+  if (!pos) return null;
+  const info = POS_LABELS[pos] || { label: pos, abbr: pos };
+  return (
+    <span className={`fc-pos-badge fc-pos-${pos}`} title={info.label}>
+      {info.abbr}
+    </span>
+  );
+}
+
 export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -89,6 +113,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer })
                 onClick={e => { e.stopPropagation(); speakWord(currentWord.word); }}
                 title="Talaffuz qilish"
               >🔊</button>
+              <PosBadge pos={currentWord.partOfSpeech} />
               <div className="flashcard-word">{currentWord.word}</div>
               <div className="flashcard-hint">
                 Bosing yoki <span className="flashcard-hint-key">Space</span> tugmasini bosing
@@ -97,6 +122,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer })
 
             {/* Back */}
             <div className="flashcard-face flashcard-back">
+              <PosBadge pos={currentWord.partOfSpeech} />
               <div className="flashcard-translation">{currentWord.translation}</div>
               {currentWord.definition && (
                 <div className="flashcard-def">{currentWord.definition}</div>
