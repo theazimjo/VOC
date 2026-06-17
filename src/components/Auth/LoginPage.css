@@ -162,7 +162,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: box-shadow var(--transition-base), transform var(--transition-base);
-  box-shadow: 0 4px 20px hsla(265, 90%, 65%, 0.35);
+  box-shadow: 0 4px 20px hsla(175, 75%, 45%, 0.35);
   margin-top: var(--space-sm);
   position: relative;
   overflow: hidden;
@@ -170,7 +170,7 @@
 
 .auth-submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px hsla(265, 90%, 65%, 0.5);
+  box-shadow: 0 6px 28px hsla(175, 75%, 45%, 0.5);
 }
 
 .auth-submit:active:not(:disabled) {

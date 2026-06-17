@@ -37,7 +37,7 @@
   background: var(--bg-glass-hover);
   border-color: var(--accent-2);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px hsla(200, 90%, 55%, 0.2);
+  box-shadow: 0 4px 12px hsla(145, 55%, 55%, 0.2);
 }
 
 .speed-dial-action-label {
@@ -63,8 +63,8 @@
   align-items: center;
   justify-content: center;
   box-shadow: 
-    0 8px 24px hsla(265, 90%, 65%, 0.4),
-    0 0 0 4px hsla(265, 90%, 65%, 0.15);
+    0 8px 24px hsla(175, 75%, 45%, 0.4),
+    0 0 0 4px hsla(175, 75%, 45%, 0.15);
   transition: all var(--transition-base);
 }
 
@@ -102,8 +102,8 @@
     width: 50px;
     height: 50px;
     box-shadow: 
-      0 6px 20px hsla(265, 90%, 65%, 0.4),
-      0 0 0 3px hsla(265, 90%, 65%, 0.12);
+      0 6px 20px hsla(175, 75%, 45%, 0.4),
+      0 0 0 3px hsla(175, 75%, 45%, 0.12);
   }
 
   .speed-dial-trigger-icon {

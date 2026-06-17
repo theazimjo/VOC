@@ -16,7 +16,7 @@
 .book-card-horizontal:hover {
   border-color: var(--accent-1);
   background: var(--bg-glass-hover);
-  box-shadow: var(--shadow-sm), 0 0 20px hsla(265, 90%, 65%, 0.08);
+  box-shadow: var(--shadow-sm), 0 0 20px hsla(175, 75%, 45%, 0.08);
 }
 
 /* Colored book spine indicator on the left edge */

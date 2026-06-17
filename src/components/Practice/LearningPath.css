@@ -116,7 +116,7 @@
 .path-node.active {
   border-color: var(--accent-1);
   background: var(--accent-gradient);
-  box-shadow: 0 8px 24px hsla(265, 90%, 65%, 0.3), var(--shadow-glow);
+  box-shadow: 0 8px 24px hsla(175, 75%, 45%, 0.3), var(--shadow-glow);
 }
 
 .path-node.active::after {

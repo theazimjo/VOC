@@ -1,127 +1,279 @@
+/* ─── Dictation Container ─── */
 .dictation-container {
-  max-width: 500px;
+  max-width: 560px;
+  width: 100%;
   margin: 0 auto;
-  text-align: center;
-}
-
-.dictation-card {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-2xl) var(--space-lg);
-  margin-bottom: var(--space-xl);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-  align-items: center;
+  gap: var(--space-lg);
 }
 
-.audio-trigger-wrapper {
-  margin-bottom: var(--space-sm);
+/* ─── Progress ─── */
+.dictation-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.dictation-progress-fill {
+  height: 100%;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+.dictation-progress-label {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-top: -8px;
+}
+
+/* ─── Card ─── */
+.dictation-card {
+  background: var(--bg-glass-strong);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-xl);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: center;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.dictation-card.correct {
+  border-color: var(--success);
+  box-shadow: var(--shadow-lg), 0 0 30px hsla(145, 65%, 45%, 0.2);
+}
+.dictation-card.wrong {
+  border-color: var(--error);
+  box-shadow: var(--shadow-lg), 0 0 30px hsla(355, 70%, 55%, 0.2);
+}
+
+/* ─── Audio button ─── */
+.dictation-audio-section {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-play-audio {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-sm);
-}
-
-.btn-play-audio {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: var(--accent-gradient);
-  border: none;
-  font-size: 2.5rem;
-  color: white;
+  background: var(--bg-glass);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl) var(--space-2xl);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-glow);
-  transition: all var(--transition-fast);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-family: var(--font-family);
 }
-
 .btn-play-audio:hover {
-  transform: scale(1.08);
+  border-color: var(--accent-2);
+  background: hsla(200, 90%, 55%, 0.08);
+  transform: scale(1.06);
+  box-shadow: 0 0 30px hsla(200, 90%, 55%, 0.2);
 }
-
-.audio-trigger-text {
+.btn-play-audio:active {
+  transform: scale(0.97);
+}
+.audio-icon {
+  font-size: 3rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 12px hsla(200, 90%, 55%, 0.5));
+  animation: audio-pulse 2s ease-in-out infinite;
+}
+@keyframes audio-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px hsla(200, 90%, 55%, 0.4)); }
+  50%       { filter: drop-shadow(0 0 20px hsla(200, 90%, 55%, 0.7)); }
+}
+.audio-label {
   font-size: var(--font-sm);
+  font-weight: 600;
   color: var(--text-secondary);
-  font-weight: 500;
 }
 
-.dictation-translation-hint,
-.dictation-letters-hint {
-  padding: 8px 16px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+/* ─── Hint chips row ─── */
+.dictation-hints-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  justify-content: center;
+  min-height: 0;
+}
+
+.dictation-hint-chip {
+  border-radius: var(--radius-full);
+  padding: 6px 16px;
   font-size: var(--font-sm);
-  color: var(--text-primary);
-  width: 100%;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.dictation-hint-chip.translation {
+  background: hsla(265, 80%, 60%, 0.12);
+  border-color: hsla(265, 80%, 60%, 0.4);
+  color: hsl(265, 80%, 75%);
+}
+.dictation-hint-chip.letters {
+  background: hsla(38, 90%, 55%, 0.1);
+  border-color: hsla(38, 90%, 55%, 0.4);
+  color: hsl(38, 90%, 70%);
+  font-family: 'Courier New', monospace;
+  letter-spacing: 3px;
 }
 
+/* ─── Form ─── */
 .dictation-form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  align-items: center;
+  gap: var(--space-md);
 }
 
 .dictation-input {
-  font-size: var(--font-lg);
+  font-size: var(--font-xl);
   text-align: center;
-  padding: var(--space-md);
-  background: var(--bg-tertiary);
+  padding: var(--space-md) var(--space-lg);
+  letter-spacing: 1px;
+  background: var(--bg-secondary);
   border: 2px solid var(--border);
   border-radius: var(--radius-lg);
   color: var(--text-primary);
   width: 100%;
-  transition: all 0.3s;
+  transition: all var(--transition-base);
+  font-weight: 600;
+  font-family: var(--font-family);
 }
-
+.dictation-input::placeholder { color: var(--text-muted); font-size: var(--font-md); }
 .dictation-input:focus {
   border-color: var(--accent-1);
   outline: none;
-  box-shadow: 0 0 15px hsla(265, 90%, 65%, 0.3);
+  box-shadow: 0 0 20px hsla(175, 75%, 45%, 0.25);
+  background: var(--bg-tertiary);
 }
-
 .dictation-input.correct {
   border-color: var(--success);
   color: var(--success);
+  background: var(--success-dim);
+}
+.dictation-input.wrong {
+  border-color: var(--error);
+  color: var(--error);
+  background: var(--error-dim);
 }
 
-.dictation-input.wrong {
+.btn-dictation-submit {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 32px;
+  font-size: var(--font-md);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 14px hsla(175, 75%, 45%, 0.3);
+}
+.btn-dictation-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-dictation-submit:not(:disabled):hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px hsla(175, 75%, 45%, 0.4);
+}
+
+/* ─── Feedback Banner ─── */
+.dictation-feedback-banner {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-md);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+.dictation-feedback-banner.correct {
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+.dictation-feedback-banner.wrong {
+  background: var(--error-dim);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+/* ─── Hint buttons ─── */
+.dictation-hint-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-hint {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 14px;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all var(--transition-fast);
+}
+.btn-hint:hover:not(:disabled) {
+  border-color: var(--accent-1);
+  color: var(--text-primary);
+  background: var(--bg-glass-hover);
+}
+.btn-hint:disabled { opacity: 0.4; cursor: default; }
+
+.btn-hint-reveal {
+  border-color: hsla(355, 70%, 55%, 0.4);
+  color: var(--error);
+}
+.btn-hint-reveal:hover:not(:disabled) {
+  background: var(--error-dim);
   border-color: var(--error);
   color: var(--error);
 }
 
-.dictation-feedback {
-  min-height: 30px;
-  font-weight: 700;
+/* ─── Next button ─── */
+.btn-dictation-next {
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 36px;
   font-size: var(--font-md);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 14px hsla(175, 75%, 45%, 0.3);
+  width: 100%;
+}
+.btn-dictation-next:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px hsla(175, 75%, 45%, 0.4);
 }
 
-.dictation-hints-actions {
-  display: flex;
-  gap: var(--space-sm);
-  justify-content: center;
-}
-
+/* ─── Responsive ─── */
 @media (max-width: 600px) {
-  .dictation-card {
-    padding: var(--space-lg) var(--space-md);
-    margin-bottom: var(--space-md);
-  }
-
-  .btn-play-audio {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
-  }
-
-  .dictation-input {
-    font-size: var(--font-md);
-    padding: var(--space-sm);
-  }
+  .dictation-card { padding: var(--space-lg) var(--space-md); }
+  .btn-play-audio { padding: var(--space-lg) var(--space-xl); }
+  .audio-icon { font-size: 2.4rem; }
+  .dictation-input { font-size: var(--font-lg); padding: var(--space-sm) var(--space-md); }
 }

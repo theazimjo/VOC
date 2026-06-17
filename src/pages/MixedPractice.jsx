@@ -130,6 +130,28 @@ export default function MixedPractice() {
     }
   }, [currentIdx, step, hasAnswered]);
 
+  // Warn before closing tab during active practice
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (step === 'practice') {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [step]);
+
+  const handleExit = () => {
+    if (step === 'practice') {
+      if (window.confirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.")) {
+        navigate('/');
+      }
+    } else {
+      navigate('/');
+    }
+  };
+
   const handleUpdateWordStats = async (wordObj, isCorrect) => {
     if (!user) return;
     try {
@@ -219,14 +241,24 @@ export default function MixedPractice() {
         <AnimatePresence mode="wait">
           {/* Step 1: Practice Session */}
           {step === 'practice' && questions.length > 0 && (
-            <motion.div
-              key={currentIdx}
-              className="mixed-practice-card"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.25 }}
-            >
+            <div className="mixed-practice-container">
+              <div className="practice-session-header">
+                <span className="practice-session-title">
+                  🚀 Aralash Mashq (Mixed Practice)
+                </span>
+                <button className="btn-exit-practice" onClick={handleExit} title="Mashqdan chiqish">
+                  ✕ Chiqish
+                </button>
+              </div>
+
+              <motion.div
+                key={currentIdx}
+                className="mixed-practice-card"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.25 }}
+              >
               {/* Progress bar */}
               <div className="practice-progress-bar-container">
                 <div className="progress-bar-label">
@@ -369,6 +401,7 @@ export default function MixedPractice() {
                 </motion.div>
               )}
             </motion.div>
+            </div>
           )}
 
           {/* Step 2: Results Summary */}

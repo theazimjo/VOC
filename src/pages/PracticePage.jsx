@@ -68,6 +68,18 @@ export default function PracticePage() {
     }
   }, [urlSourceType, urlSourceId, booksLoading, packsLoading, books, packs, user, navigate]);
 
+  // Warn before closing tab during active practice
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (step === 'practice') {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [step]);
+
   const sources = sourceType === 'books' ? books : packs;
 
   const handleSelectSource = async (source) => {
@@ -141,6 +153,13 @@ export default function PracticePage() {
   };
 
   const handleBack = () => {
+    if (step === 'practice') {
+      if (window.confirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.")) {
+        setStep('mode');
+      }
+      return;
+    }
+
     if (step === 'mode') {
       if (urlSourceId) {
         navigate(urlSourceType === 'books' ? `/books/${urlSourceId}` : `/packs/${urlSourceId}`);
@@ -148,7 +167,6 @@ export default function PracticePage() {
         setStep('source');
       }
     }
-    else if (step === 'practice') setStep('mode');
     else if (step === 'results') setStep('mode');
   };
 
@@ -298,7 +316,17 @@ export default function PracticePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              {renderPracticeMode()}
+              <div className="practice-session-header">
+                <span className="practice-session-title">
+                  {selectedSource && `${selectedSource.title || selectedSource.name}`} — {selectedMode === 'flashcard' ? '🎴 Flashcard' : selectedMode === 'spelling' ? '✍️ Imlo' : selectedMode === 'match' ? '🔀 Juftlik' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🗣️ Dictation' : selectedMode === 'pronounce' ? '🎤 Talaffuz' : selectedMode === 'spaced' ? '🧠 Spaced Repetition' : 'Mashq'}
+                </span>
+                <button className="btn-exit-practice" onClick={handleBack} title="Mashqdan chiqish">
+                  ✕ Chiqish
+                </button>
+              </div>
+              <div className="practice-session-content">
+                {renderPracticeMode()}
+              </div>
             </motion.div>
           )}
 

@@ -52,7 +52,7 @@
 .source-tab.active {
   background: var(--accent-gradient);
   color: white;
-  box-shadow: 0 4px 12px hsla(265, 90%, 65%, 0.25);
+  box-shadow: 0 4px 12px hsla(175, 75%, 45%, 0.25);
 }
 
 /* Horizontal Source List Options */
@@ -83,7 +83,7 @@
   border-color: var(--accent-1);
   transform: translateX(4px);
   background: var(--bg-glass-hover);
-  box-shadow: var(--shadow-sm), 0 0 20px hsla(265, 90%, 65%, 0.08);
+  box-shadow: var(--shadow-sm), 0 0 20px hsla(175, 75%, 45%, 0.08);
 }
 
 .source-option-icon {
@@ -182,12 +182,85 @@
   background: var(--accent-gradient);
   border-color: transparent;
   color: white;
-  box-shadow: 0 4px 12px hsla(265, 90%, 65%, 0.2);
+  box-shadow: 0 4px 12px hsla(175, 75%, 45%, 0.2);
 }
 
-/* Practice Session */
+/* Practice Session (Immersive Fullscreen) */
 .practice-session {
-  position: relative;
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xl);
+  overflow-y: auto;
+}
+
+.practice-session-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--bg-glass-strong);
+  border-bottom: 1px solid var(--border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  backdrop-filter: blur(12px);
+}
+
+.practice-session-title {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: var(--font-md);
+}
+
+.btn-exit-practice {
+  background: var(--error-dim);
+  color: var(--error);
+  border: 1px solid var(--error);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: var(--font-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.btn-exit-practice:hover {
+  background: var(--error);
+  color: white;
+  box-shadow: 0 0 12px hsla(355, 70%, 55%, 0.3);
+}
+
+.practice-session-content {
+  margin-top: 80px; /* Space to clear fixed header */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .practice-session {
+    padding: var(--space-md);
+  }
+  .practice-session-header {
+    padding: var(--space-sm) var(--space-md);
+  }
+  .practice-session-content {
+    margin-top: 60px;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* Results Screen */

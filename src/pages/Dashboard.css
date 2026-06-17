@@ -22,7 +22,7 @@
   right: -10%;
   width: 150px;
   height: 150px;
-  background: radial-gradient(circle, hsla(265, 90%, 65%, 0.06), transparent 70%);
+  background: radial-gradient(circle, hsla(175, 75%, 45%, 0.06), transparent 70%);
   pointer-events: none;
 }
 
@@ -129,7 +129,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-base);
-  box-shadow: 0 4px 20px hsla(265, 90%, 65%, 0.25);
+  box-shadow: 0 4px 20px hsla(175, 75%, 45%, 0.25);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -141,7 +141,7 @@
 
 .btn-practice-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px hsla(265, 90%, 65%, 0.35);
+  box-shadow: 0 8px 28px hsla(175, 75%, 45%, 0.35);
 }
 
 .btn-practice-primary:active {
@@ -171,8 +171,8 @@
 }
 
 @keyframes practice-btn-pulse {
-  0% { box-shadow: 0 4px 15px hsla(265, 90%, 65%, 0.2), 0 0 0 0px hsla(265, 90%, 65%, 0.3); }
-  100% { box-shadow: 0 8px 30px hsla(265, 90%, 65%, 0.4), 0 0 0 6px hsla(265, 90%, 65%, 0); }
+  0% { box-shadow: 0 4px 15px hsla(175, 75%, 45%, 0.2), 0 0 0 0px hsla(175, 75%, 45%, 0.3); }
+  100% { box-shadow: 0 8px 30px hsla(175, 75%, 45%, 0.4), 0 0 0 6px hsla(175, 75%, 45%, 0); }
 }
 
 /* 3. Sections & Lists */

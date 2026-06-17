@@ -55,7 +55,7 @@
   inset: 0;
   background: var(--accent-gradient);
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 12px hsla(265, 90%, 65%, 0.25);
+  box-shadow: 0 4px 12px hsla(175, 75%, 45%, 0.25);
   z-index: 0;
 }
 

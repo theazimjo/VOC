@@ -1,21 +1,50 @@
 .mixed-practice-page {
-  padding: var(--space-lg);
-  min-height: 100vh;
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xl);
+  overflow-y: auto;
+}
+
+.mixed-practice-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px; /* Space to clear header */
+  width: 100%;
 }
 
 /* Practice Card Container */
 .mixed-practice-card {
   max-width: 540px;
+  width: 100%;
   margin: 0 auto;
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
-  box-shadow: var(--shadow-lg), 0 0 40px rgba(124, 58, 237, 0.04);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .mixed-practice-page {
+    padding: var(--space-md);
+  }
+  .mixed-practice-container {
+    margin-top: 60px;
+  }
+  .mixed-practice-card {
+    padding: var(--space-lg);
+  }
 }
 
 /* Progress Bar */
@@ -174,14 +203,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px hsla(200, 90%, 55%, 0.25);
+  box-shadow: 0 4px 15px hsla(145, 55%, 55%, 0.25);
   transition: all var(--transition-base);
   outline: none;
 }
 
 .audio-play-btn:hover {
   transform: scale(1.06);
-  box-shadow: 0 6px 20px hsla(200, 90%, 55%, 0.35);
+  box-shadow: 0 6px 20px hsla(145, 55%, 55%, 0.35);
 }
 
 .audio-play-btn:active {

@@ -9,47 +9,47 @@ export default function PracticeHub({ onSelectMode }) {
       title: 'Flashcards',
       desc: "Kartochkalarni ag'darib vizual xotirani mashq qiling",
       badge: 'Barcha darajalar',
-      glowColor: 'hsl(200, 90%, 55%)' // Blue
+      glowColor: 'hsl(200, 90%, 55%)'
     },
     {
       id: 'spelling',
       icon: '✍️',
       title: 'Imlo Mashqi',
       desc: "Eshitish va xotiradan so'zlarni to'g'ri yozishni mashq qiling",
-      badge: 'Min 3 ta so\'z',
-      glowColor: 'hsl(265, 90%, 65%)' // Purple
+      badge: "Min 3 ta so'z",
+      glowColor: 'hsl(265, 90%, 65%)'
     },
     {
       id: 'match',
       icon: '🔀',
       title: 'Juftlikni Top',
       desc: "Inglizcha so'zni uning tarjimasiga moslashtiring",
-      badge: 'Min 4 ta so\'z',
-      glowColor: 'hsl(150, 80%, 45%)' // Emerald
+      badge: "Min 4 ta so'z",
+      glowColor: 'hsl(150, 80%, 45%)'
     },
     {
       id: 'quiz',
       icon: '📝',
       title: 'Test',
       desc: "To'rtta variantdan to'g'ri tarjimani tezkorlik bilan tanlang",
-      badge: 'Min 4 ta so\'z',
-      glowColor: 'hsl(38, 95%, 55%)' // Amber
+      badge: "Min 4 ta so'z",
+      glowColor: 'hsl(38, 95%, 55%)'
     },
     {
       id: 'dictation',
       icon: '🎧',
-      title: 'Dictation',
+      title: 'Diktant',
       desc: "So'zni faqat eshitgan holda inglizcha imlosini yozing",
-      badge: 'Min 3 ta so\'z',
-      glowColor: 'hsl(245, 80%, 65%)' // Violet
+      badge: "Min 3 ta so'z",
+      glowColor: 'hsl(245, 80%, 65%)'
     },
     {
       id: 'pronounce',
       icon: '🎙️',
-      title: 'Talaffuz Mashqi',
+      title: 'Talaffuz',
       desc: "Mikrofonga talaffuz qilib, so'zlashuv qobiliyatini oshiring",
-      badge: 'Min 1 ta so\'z',
-      glowColor: 'hsl(340, 85%, 60%)' // Rose
+      badge: "Min 1 ta so'z",
+      glowColor: 'hsl(340, 85%, 60%)'
     },
     {
       id: 'spaced',
@@ -57,15 +57,15 @@ export default function PracticeHub({ onSelectMode }) {
       title: 'Takrorlash (SM-2)',
       desc: "Ilmiy tasdiqlangan interval takrorlash algoritmi yordamida yod oling",
       badge: 'Kunlik vazifa',
-      glowColor: 'hsl(180, 85%, 50%)' // Cyan
+      glowColor: 'hsl(180, 85%, 50%)'
     }
   ];
 
   return (
     <div className="practice-hub">
       <h2>🎮 Mashq rejimini tanlang</h2>
-      <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-xl)' }}>O'zingizga qulay usulda so'zlarni xotirangizga muhrlang</p>
-      
+      <p>O'zingizga qulay usulda so'zlarni xotirangizga muhrlang</p>
+
       <div className="practice-hub-grid">
         {modes.map((mode, idx) => (
           <motion.div
@@ -73,14 +73,20 @@ export default function PracticeHub({ onSelectMode }) {
             className="practice-mode-card"
             onClick={() => onSelectMode(mode.id)}
             style={{ '--mode-glow-color': mode.glowColor }}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.08 }}
+            transition={{ delay: idx * 0.07, duration: 0.4 }}
+            whileTap={{ scale: 0.97 }}
           >
-            <div className="practice-mode-icon" style={{ textShadow: `0 0 15px ${mode.glowColor}40` }}>{mode.icon}</div>
+            <div className="practice-mode-icon-wrap">
+              <span className="practice-mode-icon">{mode.icon}</span>
+            </div>
             <h3 className="practice-mode-title">{mode.title}</h3>
             <p className="practice-mode-desc">{mode.desc}</p>
-            <span className="practice-mode-badge">{mode.badge}</span>
+            <div className="practice-mode-footer">
+              <span className="practice-mode-badge">{mode.badge}</span>
+              <span className="practice-mode-arrow">→</span>
+            </div>
           </motion.div>
         ))}
       </div>
