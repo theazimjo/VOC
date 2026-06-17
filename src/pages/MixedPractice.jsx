@@ -7,6 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import { shuffleArray } from '../utils/helpers';
+import { playSound, triggerVibration } from '../utils/feedback';
 import './MixedPractice.css';
 
 export default function MixedPractice() {
@@ -191,6 +192,8 @@ export default function MixedPractice() {
     
     if (isRight) setCorrectCount(prev => prev + 1);
     setHasAnswered(true);
+    playSound(isRight ? 'correct' : 'wrong');
+    triggerVibration(isRight ? 'correct' : 'wrong');
     handleUpdateWordStats(questions[currentIdx].word, isRight);
   };
 
@@ -206,6 +209,8 @@ export default function MixedPractice() {
     
     if (isRight) setCorrectCount(prev => prev + 1);
     setHasAnswered(true);
+    playSound(isRight ? 'correct' : 'wrong');
+    triggerVibration(isRight ? 'correct' : 'wrong');
     handleUpdateWordStats(questions[currentIdx].word, isRight);
   };
 
@@ -217,6 +222,8 @@ export default function MixedPractice() {
       setSelectedOption(null);
     } else {
       setStep('results');
+      playSound('victory');
+      triggerVibration('victory');
     }
   };
 
@@ -301,7 +308,8 @@ export default function MixedPractice() {
                             onClick={() => handleQuizAnswer(option)}
                             disabled={hasAnswered}
                           >
-                            {option}
+                            <span className="quiz-opt-letter">{['A', 'B', 'C', 'D'][idx]}</span>
+                            <span className="quiz-opt-text">{option}</span>
                           </button>
                         );
                       })}
@@ -433,14 +441,25 @@ export default function MixedPractice() {
               {/* Mistakes review */}
               {questions.some(q => !q.isCorrect) && (
                 <div className="mistakes-review-container">
-                  <h3>Mistakes Review:</h3>
+                  <h3>Xatolarni ko'rib chiqish:</h3>
                   <div className="mistakes-list">
                     {questions.filter(q => !q.isCorrect).map((q, idx) => (
                       <div key={idx} className="mistake-item">
-                        <span className="mistake-word">{q.word.word}</span>
-                        <span className="mistake-divider">/</span>
-                        <span className="mistake-translation">{q.word.translation}</span>
-                        <span className="mistake-your-answer">Siz: <del>{q.userAnswer || '(bo\'sh)'}</del></span>
+                        <div className="mistake-word-group">
+                          <span className="mistake-word">{q.word.word}</span>
+                          <span className="mistake-translation">{q.word.translation}</span>
+                        </div>
+                        <span className="mistake-your-answer">
+                          Siz: <del>{q.userAnswer || '(javobsiz)'}</del>
+                        </span>
+                        <button
+                          className="btn-speak-mistake"
+                          onClick={() => speakWord(q.word.word)}
+                          title="Talaffuzni eshitish"
+                          type="button"
+                        >
+                          🔊
+                        </button>
                       </div>
                     ))}
                   </div>
