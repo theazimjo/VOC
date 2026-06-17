@@ -12,7 +12,7 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  z-index: 90;
+  z-index: 200;
   transition: left var(--transition-slow);
 }
 
@@ -130,13 +130,15 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  min-width: 200px;
+  min-width: 220px;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-light);
   overflow: hidden;
-  z-index: 110;
+  z-index: 9999;
+  /* Ensure it always renders on top regardless of stacking contexts */
+  isolation: isolate;
 }
 
 .navbar-dropdown-header {
@@ -227,6 +229,7 @@
   .navbar {
     left: 0 !important;
     padding: 0 var(--space-md);
+    z-index: 200;
   }
 
   .navbar-hamburger {
@@ -238,19 +241,27 @@
   }
 
   .navbar-avatar-btn {
-    width: 30px !important;
-    height: 30px !important;
+    width: 32px !important;
+    height: 32px !important;
     font-size: var(--font-xs) !important;
     border-width: 1.5px !important;
   }
 
+  /* On mobile, use fixed position so dropdown isn't clipped by any parent */
   .navbar-dropdown {
-    top: calc(100% + 4px) !important;
+    position: fixed !important;
+    top: var(--navbar-height) !important;
+    right: var(--space-md) !important;
+    left: auto !important;
+    min-width: min(260px, calc(100vw - 32px)) !important;
+    max-height: calc(100vh - var(--navbar-height) - 80px) !important;
+    overflow-y: auto !important;
+    z-index: 9999 !important;
   }
+}
 
-  @media (max-width: 500px) {
-    .navbar-search {
-      display: none;
-    }
+@media (max-width: 500px) {
+  .navbar-search {
+    display: none;
   }
 }

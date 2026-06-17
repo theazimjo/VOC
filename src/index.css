@@ -997,7 +997,6 @@ a:hover {
   background-size: 25px 25px;
 }
 [data-theme="cyberpunk"] .sidebar,
-[data-theme="cyberpunk"] .navbar,
 [data-theme="cyberpunk"] .card,
 [data-theme="cyberpunk"] .settings-card,
 [data-theme="cyberpunk"] .book-card,
@@ -1011,6 +1010,13 @@ a:hover {
   border: 2px solid var(--accent-1) !important;
   clip-path: polygon(0px 0px, calc(100% - 15px) 0px, 100% 15px, 100% 100%, 15px 100%, 0px calc(100% - 15px)) !important;
   box-shadow: 4px 4px 0px var(--accent-3) !important;
+  background: var(--bg-glass-strong) !important;
+  border-radius: 0px !important;
+}
+
+[data-theme="cyberpunk"] .navbar {
+  border-bottom: 2px solid var(--accent-1) !important;
+  box-shadow: 0 4px 20px rgba(244, 63, 94, 0.2) !important;
   background: var(--bg-glass-strong) !important;
   border-radius: 0px !important;
 }

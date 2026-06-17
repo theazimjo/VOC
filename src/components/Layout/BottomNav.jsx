@@ -56,7 +56,8 @@ export default function BottomNav() {
   const navItems = [
     { to: '/',         icon: icons.dashboard, label: 'Dashboard' },
     { to: '/library',  icon: icons.library,   label: 'Kutubxona' },
-    { to: '/stats',    icon: icons.stats,     label: 'Statistika' }
+    { to: '/grammar',  icon: '📖',            label: 'Grammatika' },
+    { to: '/stats',    icon: icons.stats,     label: 'Statistika' },
   ];
 
   return (

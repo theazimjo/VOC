@@ -15,6 +15,8 @@ import LibraryPage from './pages/LibraryPage';
 import MixedPractice from './pages/MixedPractice';
 import CardsMode from './pages/CardsMode';
 import Settings from './pages/Settings';
+import GrammarPage from './pages/GrammarPage';
+import GrammarTopic from './pages/GrammarTopic';
 
 export default function App() {
   return (
@@ -42,6 +44,8 @@ export default function App() {
                 <Route path="/stats" element={<StatsPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/grammar" element={<GrammarPage />} />
+                <Route path="/grammar/:level/:topicId" element={<GrammarTopic />} />
               </Route>
             </Route>
 
