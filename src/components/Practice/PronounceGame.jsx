@@ -4,7 +4,7 @@ import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './PronounceGame.css';
 
-export default function PronounceGame({ words, onComplete, onUpdateWord }) {
+export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswer }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isListening, setIsListening] = useState(false);
   const [status, setStatus] = useState('playing'); // playing, correct, wrong, unsupported, skipped
@@ -86,6 +86,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
       setAnswered(true);
       setIsCorrect(true);
       setCorrectCount(c => c + 1);
+      if (onAnswer) onAnswer(currentWord, true);
 
       const sm2Data = calculateNextReview(
         5, // Active perfect quality
@@ -96,6 +97,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
       await onUpdateWord(currentWord.id, sm2Data);
     } else {
       setStatus('wrong');
+      if (onAnswer) onAnswer(currentWord, false);
     }
   };
 
@@ -105,6 +107,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
     setIsCorrect(false);
     setStatus('skipped');
     setIncorrectCount(c => c + 1);
+    if (onAnswer) onAnswer(currentWord, false);
 
     const sm2Data = calculateNextReview(
       1, // Failed
@@ -140,6 +143,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord }) {
 
   const handleUnsupportedSkip = async () => {
     setIncorrectCount(c => c + 1);
+    if (onAnswer) onAnswer(currentWord, false);
     const sm2Data = calculateNextReview(
       1, 
       currentWord.easeFactor || 2.5, 

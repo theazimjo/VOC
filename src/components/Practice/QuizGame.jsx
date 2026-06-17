@@ -4,7 +4,7 @@ import { shuffleArray, speakWord } from '../../utils/helpers';
 import { calculateNextReview } from '../../utils/sm2';
 import './QuizGame.css';
 
-export default function QuizGame({ words, onComplete, onUpdateWord }) {
+export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null); // the chosen option text
@@ -29,10 +29,6 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
     const wrongOptions = shuffleArray(otherWords).slice(0, 3).map(w => w.translation);
     while (wrongOptions.length < 3) wrongOptions.push(`Variant ${wrongOptions.length + 1}`);
     setOptions(shuffleArray([correctOption, ...wrongOptions]));
-    setSelectedOption(null);
-    setAnswered(false);
-    setTimedOut(false);
-    setTimeLeft(15);
   }, [currentIndex]);
 
   // Timer — only ticks when not yet answered
@@ -43,6 +39,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
       setTimedOut(true);
       setAnswered(true);
       setIncorrectCount(c => c + 1);
+      if (onAnswer) onAnswer(currentWord, false);
       const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
       onUpdateWord(currentWord.id, sm2Data);
       return;
@@ -57,6 +54,8 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
     setAnswered(true);
 
     const isCorrect = option === currentWord.translation;
+    if (onAnswer) onAnswer(currentWord, isCorrect);
+    
     const sm2Data = calculateNextReview(
       isCorrect ? 4 : 1,
       currentWord.easeFactor || 2.5,
@@ -67,11 +66,16 @@ export default function QuizGame({ words, onComplete, onUpdateWord }) {
 
     if (isCorrect) setCorrectCount(c => c + 1);
     else setIncorrectCount(c => c + 1);
-  }, [answered, currentWord, onUpdateWord]);
+  }, [answered, currentWord, onUpdateWord, onAnswer]);
 
   const handleNext = () => {
     if (currentIndex < words.length - 1) {
       setCurrentIndex(prev => prev + 1);
+      setSelectedOption(null);
+      setAnswered(false);
+      setTimedOut(false);
+      setTimeLeft(15);
+      setOptions([]);
     } else {
       onComplete({
         totalWords: words.length,

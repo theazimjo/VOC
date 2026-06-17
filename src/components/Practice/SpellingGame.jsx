@@ -4,7 +4,7 @@ import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './SpellingGame.css';
 
-export default function SpellingGame({ words, onComplete, onUpdateWord }) {
+export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
@@ -38,6 +38,7 @@ export default function SpellingGame({ words, onComplete, onUpdateWord }) {
     const correct = submittedInput.toLowerCase().trim() === currentWord.word.toLowerCase();
     setAnswered(true);
     setIsCorrect(correct);
+    if (onAnswer) onAnswer(currentWord, correct);
 
     const sm2Data = calculateNextReview(
       correct ? 4 : 1,
@@ -61,6 +62,7 @@ export default function SpellingGame({ words, onComplete, onUpdateWord }) {
     setInput(currentWord.word);
     setAnswered(true);
     setIsCorrect(false);
+    if (onAnswer) onAnswer(currentWord, false);
     const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
     await onUpdateWord(currentWord.id, sm2Data);
     setIncorrectCount(c => c + 1);

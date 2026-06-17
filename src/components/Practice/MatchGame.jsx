@@ -4,7 +4,7 @@ import { shuffleArray } from '../../utils/helpers';
 import { calculateNextReview } from '../../utils/sm2';
 import './MatchGame.css';
 
-export default function MatchGame({ words, onComplete, onUpdateWord }) {
+export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer }) {
   const [leftItems, setLeftItems] = useState([]);
   const [rightItems, setRightItems] = useState([]);
   const [selectedLeft, setSelectedLeft] = useState(null);
@@ -35,6 +35,7 @@ export default function MatchGame({ words, onComplete, onUpdateWord }) {
         if (word) {
           const sm2Data = calculateNextReview(4, word.easeFactor || 2.5, word.interval || 0, word.reviewCount || 0);
           onUpdateWord(word.id, sm2Data);
+          if (onAnswer) onAnswer(word, true);
         }
 
         if (newMatched.length === leftItems.length) {
@@ -54,6 +55,7 @@ export default function MatchGame({ words, onComplete, onUpdateWord }) {
         if (word) {
           const sm2Data = calculateNextReview(1, word.easeFactor || 2.5, word.interval || 0, word.reviewCount || 0);
           onUpdateWord(word.id, sm2Data);
+          if (onAnswer) onAnswer(word, false);
         }
         setTimeout(() => {
           setSelectedLeft(null);

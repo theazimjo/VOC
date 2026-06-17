@@ -4,7 +4,7 @@ import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './DictationGame.css';
 
-export default function DictationGame({ words, onComplete, onUpdateWord }) {
+export default function DictationGame({ words, onComplete, onUpdateWord, onAnswer }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [status, setStatus] = useState('playing'); // playing | correct | wrong
@@ -35,6 +35,7 @@ export default function DictationGame({ words, onComplete, onUpdateWord }) {
 
     const isCorrect = input.toLowerCase().trim() === currentWord.word.toLowerCase();
     setStatus(isCorrect ? 'correct' : 'wrong');
+    if (onAnswer) onAnswer(currentWord, isCorrect);
 
     const sm2Data = calculateNextReview(
       isCorrect ? 4 : 1,
@@ -53,6 +54,7 @@ export default function DictationGame({ words, onComplete, onUpdateWord }) {
     if (status !== 'playing') return;
     setInput(currentWord.word);
     setStatus('wrong');
+    if (onAnswer) onAnswer(currentWord, false);
     const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
     await onUpdateWord(currentWord.id, sm2Data);
     setResults(prev => ({ ...prev, incorrectCount: prev.incorrectCount + 1 }));

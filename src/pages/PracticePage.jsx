@@ -6,7 +6,8 @@ import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
-import { shuffleArray } from '../utils/helpers';
+import { shuffleArray, speakWord } from '../utils/helpers';
+import { playSound, triggerVibration } from '../utils/feedback';
 import PracticeHub from '../components/Practice/PracticeHub';
 import Flashcard from '../components/Practice/Flashcard';
 import SpellingGame from '../components/Practice/SpellingGame';
@@ -33,6 +34,7 @@ export default function PracticePage() {
   const [results, setResults] = useState(null);
   const [sourceWords, setSourceWords] = useState([]);
   const [sourceLoaded, setSourceLoaded] = useState(false);
+  const [wrongWords, setWrongWords] = useState([]);
 
   // Reset sourceLoaded when url parameters change
   useEffect(() => {
@@ -80,13 +82,24 @@ export default function PracticePage() {
   // Warn before closing tab during active practice
   useEffect(() => {
     const handleBeforeUnload = (e) => {
-      if (step === 'practice') {
+      if (step === 'practice' || step === 'intro') {
         e.preventDefault();
         e.returnValue = '';
       }
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [step]);
+
+  // Intro shape transition timer
+  useEffect(() => {
+    if (step !== 'intro') return;
+    
+    const timerId = setTimeout(() => {
+      setStep('practice');
+    }, 2400);
+
+    return () => clearTimeout(timerId);
   }, [step]);
 
   const sources = sourceType === 'books' ? books : packs;
@@ -128,6 +141,7 @@ export default function PracticePage() {
 
   const handleStartPractice = async (mode) => {
     setSelectedMode(mode);
+    setWrongWords([]);
     
     if (sourceWords.length === 0) {
       alert("Bu manbada so'zlar yo'q!");
@@ -143,7 +157,7 @@ export default function PracticePage() {
     }
 
     setPracticeWords(selected);
-    setStep('practice');
+    setStep('intro');
   };
 
   const handleUpdateWord = async (wordId, data) => {
@@ -156,13 +170,29 @@ export default function PracticePage() {
     }
   };
 
+  const handleAnswer = (word, isCorrect) => {
+    if (isCorrect) {
+      playSound('correct');
+      triggerVibration('correct');
+    } else {
+      playSound('wrong');
+      triggerVibration('wrong');
+      setWrongWords(prev => {
+        if (prev.some(w => w.id === word.id)) return prev;
+        return [...prev, word];
+      });
+    }
+  };
+
   const handleComplete = (resultData) => {
+    playSound('victory');
+    triggerVibration('victory');
     setResults(resultData);
     setStep('results');
   };
 
   const handleBack = () => {
-    if (step === 'practice') {
+    if (step === 'practice' || step === 'intro') {
       if (window.confirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.")) {
         setStep('mode');
       }
@@ -183,6 +213,7 @@ export default function PracticePage() {
     setSelectedMode(null);
     setResults(null);
     setPracticeWords([]);
+    setWrongWords([]);
     if (urlSourceId) {
       setStep('mode');
     } else {
@@ -195,6 +226,7 @@ export default function PracticePage() {
       words: practiceWords,
       onComplete: handleComplete,
       onUpdateWord: handleUpdateWord,
+      onAnswer: handleAnswer
     };
 
     switch (selectedMode) {
@@ -316,6 +348,87 @@ export default function PracticePage() {
             </motion.div>
           )}
 
+          {/* Step 2.5: Intro Shape Loader */}
+          {step === 'intro' && (
+            <motion.div
+              key="intro"
+              className="practice-intro-screen"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="intro-card">
+                <div className="intro-mode-icon">
+                  {selectedMode === 'flashcard' ? '🎴' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'dictation' ? '🎧' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'spaced' ? '🧠' : '🎮'}
+                </div>
+                <h2>
+                  {selectedMode === 'flashcard' ? 'Flashcards' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'dictation' ? 'Diktant' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'spaced' ? 'Takrorlash' : 'Mashq'}
+                </h2>
+                <p>{practiceWords.length} ta so'z tayyorlandi</p>
+                
+                {/* Duolingo style playful shape loader */}
+                <div className="duolingo-loader">
+                  <motion.div 
+                    className="duolingo-shape shape-circle"
+                    animate={{ 
+                      y: [0, -30, 0],
+                      scale: [1, 1.2, 0.9, 1],
+                    }}
+                    transition={{
+                      duration: 0.9,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0
+                    }}
+                  />
+                  <motion.div 
+                    className="duolingo-shape shape-square"
+                    animate={{ 
+                      y: [0, -30, 0],
+                      rotate: [0, 180, 360],
+                      scale: [1, 0.9, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 0.9,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.18
+                    }}
+                  />
+                  <motion.div 
+                    className="duolingo-shape shape-triangle"
+                    animate={{ 
+                      y: [0, -30, 0],
+                      rotate: [0, -120, -240, -360],
+                      scale: [1, 1.2, 0.9, 1],
+                    }}
+                    transition={{
+                      duration: 0.9,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.36
+                    }}
+                  />
+                  <motion.div 
+                    className="duolingo-shape shape-diamond"
+                    animate={{ 
+                      y: [0, -30, 0],
+                      scale: [1, 0.9, 1.3, 1],
+                    }}
+                    transition={{
+                      duration: 0.9,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.54
+                    }}
+                  />
+                </div>
+                <div className="duolingo-loader-text">Mashq tayyorlanmoqda...</div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Step 3: Practice */}
           {step === 'practice' && (
             <motion.div
@@ -327,7 +440,7 @@ export default function PracticePage() {
             >
               <div className="practice-session-header">
                 <span className="practice-session-title">
-                  {selectedSource && `${selectedSource.title || selectedSource.name}`} — {selectedMode === 'flashcard' ? '🎴 Flashcard' : selectedMode === 'spelling' ? '✍️ Imlo' : selectedMode === 'match' ? '🔀 Juftlik' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🗣️ Dictation' : selectedMode === 'pronounce' ? '🎤 Talaffuz' : selectedMode === 'spaced' ? '🧠 Spaced Repetition' : 'Mashq'}
+                  {selectedSource && `${selectedSource.title || selectedSource.name}`} — {selectedMode === 'flashcard' ? '🎴 Flashcard' : selectedMode === 'spelling' ? '✍️ Imlo' : selectedMode === 'match' ? '🔀 Juftlik' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🎧 Diktant' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : 'Mashq'}
                 </span>
                 <button className="btn-exit-practice" onClick={handleBack} title="Mashqdan chiqish">
                   ✕ Chiqish
@@ -371,12 +484,41 @@ export default function PracticePage() {
                     <div className="label">Noto'g'ri</div>
                   </div>
                 </div>
+
+                {/* Mistakes / weaknesses analysis */}
+                {wrongWords.length > 0 ? (
+                  <div className="results-mistakes-container">
+                    <div className="results-mistakes-title">
+                      📉 Takrorlash tavsiya etiladi (xatolar):
+                    </div>
+                    <div className="results-mistake-list">
+                      {wrongWords.map(word => (
+                        <div key={word.id} className="results-mistake-item">
+                          <div className="results-mistake-info">
+                            <span className="results-mistake-word">{word.word}</span>
+                            <span className="results-mistake-translation">{word.translation}</span>
+                          </div>
+                          <button
+                            type="button"
+                            className="btn-speak-mistake"
+                            onClick={() => speakWord(word.word)}
+                            title="Tinglash"
+                          >
+                            🔊
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="perfect-score-banner">
+                    🏆 Mukammal natija! Hech qanday xatolikka yo'l qo'yilmadi.
+                  </div>
+                )}
+
                 <div className="result-actions">
-                  <button className="btn btn-primary" onClick={() => { setStep('mode'); }}>
-                    Yana mashq →
-                  </button>
-                  <button className="btn btn-secondary" onClick={handleReset}>
-                    Mashq boshiga
+                  <button className="btn-results-back" onClick={handleReset}>
+                    Mashq menyusiga qaytish
                   </button>
                 </div>
               </div>

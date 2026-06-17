@@ -4,7 +4,7 @@ import { calculateNextReview, responseToQuality } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './Flashcard.css';
 
-export default function Flashcard({ words, onComplete, onUpdateWord }) {
+export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
@@ -33,6 +33,8 @@ export default function Flashcard({ words, onComplete, onUpdateWord }) {
 
   const handleRate = async (rating) => {
     const isCorrect = rating !== 'again';
+    if (onAnswer) onAnswer(currentWord, isCorrect);
+    
     const quality = responseToQuality(rating);
     const sm2Data = calculateNextReview(
       quality,

@@ -4,7 +4,7 @@ import { calculateNextReview, getDueWords } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './SpacedRepetition.css';
 
-export default function SpacedRepetition({ words, onComplete, onUpdateWord }) {
+export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAnswer }) {
   const [dueWords, setDueWords] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -23,6 +23,8 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord }) {
 
   const handleRate = async (quality) => {
     const isCorrect = quality >= 3;
+    if (onAnswer) onAnswer(currentWord, isCorrect);
+    
     const sm2Data = calculateNextReview(
       quality,
       currentWord.easeFactor || 2.5,

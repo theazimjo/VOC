@@ -323,8 +323,236 @@
 
 .result-actions {
   display: flex;
-  gap: var(--space-md);
   justify-content: center;
+  margin-top: var(--space-lg);
+  width: 100%;
+}
+
+.btn-results-back {
+  width: 100%;
+  max-width: 300px;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 14px 28px;
+  font-size: var(--font-md);
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--accent-1-dim);
+  transition: all var(--transition-base);
+}
+
+.btn-results-back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-1-dim);
+}
+
+.btn-results-back:active {
+  transform: translateY(0);
+}
+
+/* Practice Intro Countdown Screen */
+.practice-intro-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+}
+
+.intro-card {
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-xl);
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.intro-mode-icon {
+  font-size: 3.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  margin-bottom: var(--space-sm);
+  box-shadow: var(--shadow-glow);
+}
+
+.intro-card h2 {
+  font-size: var(--font-xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.intro-card p {
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  margin: 0;
+}
+
+/* Playful Duolingo Shape Loader styles */
+.duolingo-loader {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  height: 60px;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+}
+
+.duolingo-shape {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.shape-circle {
+  border-radius: 50%;
+  background: var(--accent-1);
+  box-shadow: 0 4px 15px var(--accent-1-dim);
+}
+
+.shape-square {
+  background: var(--accent-3);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+
+.shape-triangle {
+  background: var(--success);
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.2);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.shape-diamond {
+  background: hsl(340, 85%, 60%);
+  box-shadow: 0 4px 15px rgba(244, 63, 94, 0.2);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+.duolingo-loader-text {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  animation: text-pulse-anim 1.2s infinite ease-in-out alternate;
+  margin-top: var(--space-md);
+}
+
+/* Results Mistakes / Weaknesses Analysis */
+.results-mistakes-container {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  text-align: left;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  max-height: 250px;
+  overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.results-mistakes-title {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--error);
+  margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.results-mistake-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.results-mistake-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  gap: var(--space-sm);
+}
+
+.results-mistake-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.results-mistake-word {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+}
+
+.results-mistake-translation {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+}
+
+.btn-speak-mistake {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.btn-speak-mistake:hover {
+  color: var(--accent-1);
+  background: rgba(255, 255, 255, 0.05);
+  transform: scale(1.1);
+}
+
+.perfect-score-banner {
+  background: rgba(74, 222, 128, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.15);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  color: var(--success);
+  font-weight: 600;
+  font-size: var(--font-sm);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
