@@ -83,6 +83,9 @@ export default function BookDetail() {
           </div>
         </div>
         <div className="book-detail-actions">
+          <button className="btn btn-cards" onClick={() => navigate(`/cards/books/${bookId}`)}>
+            🃏 Cards Mode
+          </button>
           <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/books/${bookId}`)}>
             🎮 Mashq qilish
           </button>

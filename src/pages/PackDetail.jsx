@@ -80,6 +80,9 @@ export default function PackDetail() {
           </div>
         </div>
         <div className="pack-detail-actions">
+          <button className="btn btn-cards" onClick={() => navigate(`/cards/packs/${packId}`)}>
+            🃏 Cards Mode
+          </button>
           <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
             🎮 Mashq qilish
           </button>

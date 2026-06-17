@@ -12,6 +12,7 @@ import StatsPage from './pages/StatsPage';
 import ProfilePage from './pages/ProfilePage';
 import LibraryPage from './pages/LibraryPage';
 import MixedPractice from './pages/MixedPractice';
+import CardsMode from './pages/CardsMode';
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
               <Route path="/practice" element={<PracticePage />} />
               <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />
               <Route path="/mixed-practice" element={<MixedPractice />} />
+              <Route path="/cards/:sourceType/:sourceId" element={<CardsMode />} />
               <Route path="/stats" element={<StatsPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Route>

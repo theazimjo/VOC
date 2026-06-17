@@ -1,0 +1,363 @@
+/* ─── Root ─── */
+.sc-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0 var(--space-xl);
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100%;
+}
+
+/* ─── Progress ─── */
+.sc-progress-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.sc-progress-count {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.sc-progress-track {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.sc-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  border-radius: var(--radius-full);
+}
+
+/* ─── Score row ─── */
+.sc-score-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--space-xs);
+}
+
+.sc-score {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+}
+
+.sc-score--blue {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.sc-score--green {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* ─── Deck ─── */
+.sc-deck {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Card wrapper ─── */
+.sc-wrapper {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.sc-wrapper--top {
+  cursor: grab;
+}
+
+.sc-wrapper--top:active {
+  cursor: grabbing;
+}
+
+.sc-wrapper--stack {
+  pointer-events: none;
+}
+
+/* ─── Direction overlays ─── */
+.sc-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-start;
+  padding: var(--space-lg);
+}
+
+.sc-overlay--right {
+  background: rgba(34, 197, 94, 0.25);
+  border: 3px solid rgba(34, 197, 94, 0.7);
+  justify-content: flex-end;
+}
+
+.sc-overlay--left {
+  background: rgba(59, 130, 246, 0.25);
+  border: 3px solid rgba(59, 130, 246, 0.7);
+  justify-content: flex-start;
+}
+
+.sc-dir-badge {
+  font-size: var(--font-md);
+  font-weight: 800;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.01em;
+}
+
+.sc-dir-badge--right {
+  background: rgba(34, 197, 94, 0.9);
+  color: #fff;
+}
+
+.sc-dir-badge--left {
+  background: rgba(59, 130, 246, 0.9);
+  color: #fff;
+}
+
+/* ─── Card (3D flip) ─── */
+.sc-card {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 24px;
+  user-select: none;
+}
+
+.sc-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* ─── Card faces ─── */
+.sc-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  gap: var(--space-md);
+}
+
+.sc-front {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.sc-front--muted {
+  background: var(--bg-tertiary);
+  opacity: 0.7;
+}
+
+.sc-back {
+  background: linear-gradient(135deg, hsl(250, 60%, 18%), hsl(220, 60%, 14%));
+  border: 1px solid rgba(124, 58, 237, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 40px rgba(124, 58, 237, 0.15);
+  transform: rotateY(180deg);
+}
+
+/* ─── Front content ─── */
+.sc-speak-btn {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background 0.15s;
+  z-index: 2;
+}
+
+.sc-speak-btn:hover {
+  background: var(--accent-1);
+  border-color: var(--accent-1);
+}
+
+.sc-pos {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-2);
+  background: rgba(124, 58, 237, 0.12);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+}
+
+.sc-word {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.sc-flip-hint {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+}
+
+.sc-swipe-hint {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--space-lg);
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ─── Back content ─── */
+.sc-translation {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.sc-def {
+  font-size: var(--font-sm);
+  color: rgba(255, 255, 255, 0.65);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.sc-example {
+  font-size: var(--font-sm);
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ─── Action buttons ─── */
+.sc-btn-row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.sc-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 24px;
+  border-radius: var(--radius-xl);
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: var(--font-xs);
+  letter-spacing: 0.02em;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.sc-btn:active {
+  transform: scale(0.94);
+}
+
+.sc-btn-icon {
+  font-size: 1.4rem;
+}
+
+.sc-btn--unknown {
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+  flex: 1;
+}
+
+.sc-btn--unknown:hover {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: #60a5fa;
+}
+
+.sc-btn--flip {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  color: var(--text-secondary);
+  flex: 0.7;
+}
+
+.sc-btn--flip:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.sc-btn--known {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #4ade80;
+  flex: 1;
+}
+
+.sc-btn--known:hover {
+  background: rgba(34, 197, 94, 0.22);
+  border-color: #4ade80;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .sc-deck {
+    height: 340px;
+  }
+  .sc-card {
+    height: 340px;
+  }
+  .sc-word {
+    font-size: 2.2rem;
+  }
+  .sc-translation {
+    font-size: 2rem;
+  }
+  .sc-btn {
+    padding: 12px 16px;
+  }
+}

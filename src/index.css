@@ -181,6 +181,17 @@ a:hover {
   box-shadow: 0 6px 24px hsla(175, 75%, 45%, 0.4);
 }
 
+.btn-cards {
+  background: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(280, 87%, 50%));
+  color: white;
+  box-shadow: 0 4px 16px hsla(271, 75%, 45%, 0.3);
+}
+
+.btn-cards:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px hsla(271, 75%, 45%, 0.4);
+}
+
 .btn-secondary {
   background: var(--bg-glass);
   color: var(--text-primary);

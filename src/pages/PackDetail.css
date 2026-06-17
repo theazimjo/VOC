@@ -1,5 +1,5 @@
 .pack-detail-page {
-  padding: 0;
+  padding: var(--space-sm) 0;
 }
 
 .pack-detail-header {

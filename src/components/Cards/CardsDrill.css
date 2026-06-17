@@ -1,0 +1,539 @@
+/* ─── Root ─── */
+.cd-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0 var(--space-xl);
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ─── Progress & Header Stats ─── */
+.cd-progress-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.cd-header-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cd-progress-label {
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.cd-progress-label strong {
+  color: var(--text-primary);
+}
+
+.cd-streak-badge {
+  background: linear-gradient(135deg, #ff6b6b, #ff8787);
+  color: white;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-sm);
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cd-progress-track {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.cd-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #7c3aed);
+  border-radius: var(--radius-full);
+}
+
+/* ─── Card ─── */
+.cd-card {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Clue Header ─── */
+.cd-clue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.cd-pos-tag {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.12);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.cd-speak-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.cd-speak-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.cd-speak-btn--large {
+  font-size: var(--font-lg);
+  padding: 8px 16px;
+}
+
+/* ─── Translation & Meanings ─── */
+.cd-translation-display {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-align: center;
+  margin: var(--space-sm) 0 0;
+  line-height: 1.2;
+}
+
+.cd-definition-display {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cd-example-display {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+  border-left: 3px solid rgba(124, 58, 237, 0.3);
+  padding-left: var(--space-md);
+  margin: 0 var(--space-md);
+}
+
+.cd-divider {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-sm) 0;
+}
+
+/* ─── Exercise Common ─── */
+.cd-instruction {
+  display: block;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+/* ─── Quiz Layout ─── */
+.cd-quiz-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .cd-quiz-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cd-quiz-opt-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: var(--font-md);
+  font-weight: 600;
+}
+
+.cd-quiz-opt-btn:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.04);
+}
+
+.cd-quiz-index {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.cd-quiz-text {
+  flex: 1;
+}
+
+.cd-quiz-opt-btn.is-correct {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+  color: #4ade80;
+}
+
+.cd-quiz-opt-btn.is-correct .cd-quiz-index {
+  background: #22c55e;
+  color: white;
+  border-color: #22c55e;
+}
+
+.cd-quiz-opt-btn.is-wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  color: #f87171;
+}
+
+.cd-quiz-opt-btn.is-wrong .cd-quiz-index {
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+}
+
+.cd-quiz-opt-btn.is-dimmed {
+  opacity: 0.4;
+}
+
+/* ─── Scramble Layout ─── */
+.cd-assembled-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 52px;
+  padding: var(--space-xs);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: var(--space-md);
+}
+
+.cd-scramble-slot {
+  width: 38px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: lowercase;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.cd-scramble-slot.has-letter {
+  background: var(--bg-tertiary);
+  border-color: var(--text-muted);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.cd-scramble-slot.is-wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  animation: shake 0.5s;
+}
+
+.cd-pool-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--space-md);
+}
+
+.cd-pool-letter {
+  width: 38px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border);
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: lowercase;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cd-pool-letter.is-used {
+  opacity: 0.15;
+  cursor: default;
+  box-shadow: none;
+}
+
+.cd-scramble-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.cd-btn-sm {
+  padding: 8px 16px;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Spelling Layout ─── */
+.cd-spelling-hint-visual {
+  text-align: center;
+  margin-bottom: var(--space-md);
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.cd-spelling-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.cd-spelling-input {
+  width: 100%;
+  padding: 14px var(--space-lg);
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.2s;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.cd-spelling-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+.cd-spelling-input.is-correct {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.04);
+}
+
+.cd-spelling-input.is-wrong {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.04);
+  animation: shake 0.5s;
+}
+
+.cd-spelling-actions {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.cd-spelling-actions button {
+  flex: 1;
+}
+
+/* ─── Correction Card (Mistakes Review) ─── */
+.cd-correction-card {
+  width: 100%;
+  background: rgba(239, 68, 68, 0.04);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  border-radius: 24px;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  box-shadow: 0 16px 40px rgba(239, 68, 68, 0.1);
+  text-align: center;
+}
+
+.cd-corr-header {
+  margin-bottom: var(--space-xs);
+}
+
+.cd-corr-warning {
+  color: #ef4444;
+  font-weight: 800;
+  font-size: var(--font-md);
+  display: block;
+}
+
+.cd-corr-desc {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.cd-corr-word-display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.cd-corr-word {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.cd-corr-translation {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.cd-correction-input {
+  width: 100%;
+  padding: 14px var(--space-lg);
+  background: var(--bg-tertiary);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.cd-correction-input:focus {
+  outline: none;
+  border-color: #ef4444;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+.cd-corr-progress-hint {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  height: 20px;
+}
+
+.cd-corr-status {
+  color: var(--text-muted);
+}
+
+.cd-corr-status.success {
+  color: #22c55e;
+}
+
+.cd-corr-skip {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-top: var(--space-sm);
+}
+
+/* ─── Status Banners ─── */
+.cd-status-banner {
+  text-align: center;
+  font-weight: 700;
+  font-size: var(--font-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  margin-top: var(--space-sm);
+  width: 100%;
+}
+
+.cd-status-banner.is-correct {
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.cd-status-banner.is-wrong {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ─── Keyframe Animations ─── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+  20%, 40%, 60%, 80% { transform: translateX(6px); }
+}
+
+/* ─── Responsive Styles ─── */
+@media (max-width: 480px) {
+  .cd-card {
+    padding: var(--space-lg);
+  }
+
+  .cd-translation-display {
+    font-size: 1.8rem;
+  }
+
+  .cd-scramble-slot,
+  .cd-pool-letter {
+    width: 32px;
+    height: 38px;
+    font-size: var(--font-md);
+  }
+}
+
