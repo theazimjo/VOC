@@ -144,22 +144,18 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
             transition={{ duration: 0.25 }}
           >
             <button className="sr-rating-btn again" onClick={() => handleRate(1)}>
-              <span className="sr-rate-emoji">😰</span>
               <span className="sr-rate-label">Qayta</span>
               <span className="sr-rate-time">{getNextIntervalText(1)}</span>
             </button>
             <button className="sr-rating-btn hard" onClick={() => handleRate(3)}>
-              <span className="sr-rate-emoji">🤔</span>
               <span className="sr-rate-label">Qiyin</span>
               <span className="sr-rate-time">{getNextIntervalText(3)}</span>
             </button>
             <button className="sr-rating-btn good" onClick={() => handleRate(4)}>
-              <span className="sr-rate-emoji">👍</span>
               <span className="sr-rate-label">Yaxshi</span>
               <span className="sr-rate-time">{getNextIntervalText(4)}</span>
             </button>
             <button className="sr-rating-btn easy" onClick={() => handleRate(5)}>
-              <span className="sr-rate-emoji">⚡</span>
               <span className="sr-rate-label">Oson</span>
               <span className="sr-rate-time">{getNextIntervalText(5)}</span>
             </button>

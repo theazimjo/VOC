@@ -138,19 +138,15 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer })
       {/* Rating buttons — visible only when flipped */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
         <button className="flashcard-rating-btn again" onClick={() => handleRate('again')}>
-          <span className="rating-emoji">😰</span>
           <span className="rating-label">Bilmadim</span>
         </button>
         <button className="flashcard-rating-btn hard" onClick={() => handleRate('hard')}>
-          <span className="rating-emoji">🤔</span>
           <span className="rating-label">Qiyin</span>
         </button>
         <button className="flashcard-rating-btn good" onClick={() => handleRate('good')}>
-          <span className="rating-emoji">✅</span>
           <span className="rating-label">Bilaman</span>
         </button>
         <button className="flashcard-rating-btn easy" onClick={() => handleRate('easy')}>
-          <span className="rating-emoji">⚡</span>
           <span className="rating-label">Oson</span>
         </button>
       </div>
