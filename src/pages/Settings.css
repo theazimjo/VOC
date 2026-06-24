@@ -158,41 +158,6 @@
 .theme-preview-box[data-preview-theme="android"] .preview-chip.chip-1 { background: #d0bcff; }
 .theme-preview-box[data-preview-theme="android"] .preview-chip.chip-2 { background: #a8efe0; }
 
-.theme-preview-box[data-preview-theme="god-of-war"] {
-  background: #0d0808;
-  border-color: rgba(185, 28, 28, 0.3);
-}
-.theme-preview-box[data-preview-theme="god-of-war"] .preview-chip.chip-1 { background: #b91c1c; }
-.theme-preview-box[data-preview-theme="god-of-war"] .preview-chip.chip-2 { background: #d97706; }
-
-.theme-preview-box[data-preview-theme="halo"] {
-  background: #0a0f0c;
-  border-color: rgba(6, 182, 212, 0.3);
-}
-.theme-preview-box[data-preview-theme="halo"] .preview-chip.chip-1 { background: #06b6d4; }
-.theme-preview-box[data-preview-theme="halo"] .preview-chip.chip-2 { background: #22c55e; }
-
-.theme-preview-box[data-preview-theme="cyberpunk"] {
-  background: #0c0814;
-  border-color: #f43f5e;
-}
-.theme-preview-box[data-preview-theme="cyberpunk"] .preview-chip.chip-1 { background: #ec4899; }
-.theme-preview-box[data-preview-theme="cyberpunk"] .preview-chip.chip-2 { background: #06b6d4; }
-
-.theme-preview-box[data-preview-theme="kingdom-come"] {
-  background: #19140e;
-  border-color: #ca8a04;
-}
-.theme-preview-box[data-preview-theme="kingdom-come"] .preview-chip.chip-1 { background: #ca8a04; }
-.theme-preview-box[data-preview-theme="kingdom-come"] .preview-chip.chip-2 { background: #b45309; }
-
-.theme-preview-box[data-preview-theme="resident-evil"] {
-  background: #0a0a0a;
-  border-color: #b91c1c;
-}
-.theme-preview-box[data-preview-theme="resident-evil"] .preview-chip.chip-1 { background: #b91c1c; }
-.theme-preview-box[data-preview-theme="resident-evil"] .preview-chip.chip-2 { background: #15803d; }
-
 .theme-info {
   display: flex;
   flex-direction: column;

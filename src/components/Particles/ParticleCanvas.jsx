@@ -36,9 +36,6 @@ export default function ParticleCanvas() {
 
     const config = particleConfigs[theme] || particleConfigs.ios;
 
-    // Runes for God of War theme
-    const gowRunes = ['ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ', 'ᚷ', 'ᚹ', 'ᚺ', 'ᚾ', 'ᛁ', 'ᛃ', 'ᛇ', 'ᛈ', 'ᛉ', 'ᛊ', 'ᛏ', 'ᛒ', 'ᛖ', 'ᛗ', 'ᛚ', 'ᛜ', 'ᛞ', 'ᛟ'];
-
     const initParticles = () => {
       particles.current = [];
       const count = config.count;
@@ -50,52 +47,12 @@ export default function ParticleCanvas() {
           vx: config.minSpeedX + Math.random() * (config.maxSpeedX - config.minSpeedX),
           vy: config.minSpeedY + Math.random() * (config.maxSpeedY - config.minSpeedY),
           color: config.colors[Math.floor(Math.random() * config.colors.length)],
-          wobble: Math.random() * Math.PI * 2,
-          wobbleSpeed: 0.01 + Math.random() * 0.03,
-          pulse: Math.random() * Math.PI * 2,
-          pulseSpeed: 0.005 + Math.random() * 0.015,
-          shape: config.type === 'material' ? ['circle', 'square', 'pill'][Math.floor(Math.random() * 3)] : null,
-          rune: config.type === 'embers' && Math.random() < 0.2 ? gowRunes[Math.floor(Math.random() * gowRunes.length)] : null,
-          rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() - 0.5) * 0.02
+          shape: config.type === 'material' ? ['circle', 'square', 'pill'][Math.floor(Math.random() * 3)] : null
         });
       }
     };
 
     initParticles();
-
-    const drawHexagon = (c, x, y, size) => {
-      c.beginPath();
-      for (let side = 0; side < 6; side++) {
-        c.lineTo(
-          x + size * Math.cos((side * 2 * Math.PI) / 6),
-          y + size * Math.sin((side * 2 * Math.PI) / 6)
-        );
-      }
-      c.closePath();
-    };
-
-    const drawLeaf = (c, x, y, size, rotation) => {
-      c.save();
-      c.translate(x, y);
-      c.rotate(rotation);
-      c.beginPath();
-      c.moveTo(0, -size / 2);
-      c.quadraticCurveTo(size / 3, -size / 6, 0, size / 2);
-      c.quadraticCurveTo(-size / 3, -size / 6, 0, -size / 2);
-      c.closePath();
-      c.restore();
-    };
-
-    const drawRune = (c, x, y, rune, size, color) => {
-      c.save();
-      c.font = `${size}px monospace`;
-      c.fillStyle = color;
-      c.shadowBlur = 8;
-      c.shadowColor = 'rgba(239, 68, 68, 0.6)';
-      c.fillText(rune, x, y);
-      c.restore();
-    };
 
     const updateAndDraw = () => {
       // FPS monitoring to prevent performance degradation on low-end devices
@@ -126,21 +83,6 @@ export default function ParticleCanvas() {
         p.x += p.vx;
         p.y += p.vy;
 
-        if (config.wind) {
-          p.x += config.wind;
-        }
-
-        if (config.wobble) {
-          p.wobble += p.wobbleSpeed;
-          p.x += Math.sin(p.wobble) * 0.4;
-        }
-
-        if (config.pulse) {
-          p.pulse += p.pulseSpeed;
-        }
-
-        p.rotation += p.rotationSpeed;
-
         // Wrap boundaries
         if (p.x < -p.size * 2) p.x = width + p.size;
         if (p.x > width + p.size * 2) p.x = -p.size;
@@ -153,92 +95,32 @@ export default function ParticleCanvas() {
         // Handle blur effect at canvas layer if supported and needed
         if (config.blur && theme === 'ios') {
           ctx.filter = 'blur(40px)';
-        } else if (config.blur && theme === 'kingdom-come') {
-          ctx.filter = 'blur(2px)';
-        } else if (config.blur && theme === 'resident-evil') {
-          ctx.filter = 'blur(6px)';
         }
-
-        let sizeMultiplier = 1;
-        if (config.pulse) {
-          sizeMultiplier = 0.85 + Math.sin(p.pulse) * 0.15;
-        }
-
-        const size = p.size * sizeMultiplier;
 
         ctx.fillStyle = p.color;
-        ctx.strokeStyle = p.color;
-        ctx.lineWidth = 1.5;
 
         switch (config.type) {
           case 'orbs':
             ctx.beginPath();
-            ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fill();
             break;
 
           case 'material':
             ctx.beginPath();
             if (p.shape === 'square') {
-              ctx.rect(p.x - size / 2, p.y - size / 2, size, size);
+              ctx.rect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
             } else if (p.shape === 'pill') {
-              ctx.roundRect(p.x - size, p.y - size / 2, size * 2, size, size / 2);
+              ctx.roundRect(p.x - p.size, p.y - p.size / 2, p.size * 2, p.size, p.size / 2);
             } else {
-              ctx.arc(p.x, p.y, size / 2, 0, Math.PI * 2);
+              ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
             }
-            ctx.fill();
-            break;
-
-          case 'embers':
-            if (p.rune) {
-              drawRune(ctx, p.x, p.y, p.rune, size * 1.5, p.color);
-            } else {
-              ctx.beginPath();
-              ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-              ctx.fill();
-            }
-            break;
-
-          case 'hexagons':
-            drawHexagon(ctx, p.x, p.y, size);
-            if (config.wireframe) {
-              ctx.stroke();
-            } else {
-              ctx.fill();
-            }
-            break;
-
-          case 'digital':
-            ctx.beginPath();
-            ctx.rect(p.x, p.y, p.size, p.size * 12);
-            ctx.fill();
-            break;
-
-          case 'dust':
-            if (p.shape === 'circle') {
-              ctx.beginPath();
-              ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-              ctx.fill();
-            } else {
-              drawLeaf(ctx, p.x, p.y, size * 1.5, p.rotation);
-              ctx.fill();
-            }
-            break;
-
-          case 'spores':
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-            ctx.fill();
-            // Draw a tiny inner nucleus
-            ctx.fillStyle = p.color.replace(/[\d.]+\)$/g, '0.5)');
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, size / 3, 0, Math.PI * 2);
             ctx.fill();
             break;
 
           default:
             ctx.beginPath();
-            ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fill();
         }
 

@@ -64,36 +64,6 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                 {!collapsed && <span>Material</span>}
               </>
             )}
-            {theme === 'god-of-war' && (
-              <>
-                <span style={{ marginRight: '8px', color: '#b91c1c', fontWeight: 'bold' }}>Ω</span>
-                {!collapsed && <span style={{ fontFamily: "'Cinzel', serif", letterSpacing: '1px' }}>RAGNARÖK</span>}
-              </>
-            )}
-            {theme === 'halo' && (
-              <>
-                <span style={{ marginRight: '8px', color: '#06b6d4' }}>🛡️</span>
-                {!collapsed && <span style={{ fontFamily: "'Rajdhani', sans-serif", letterSpacing: '1.5px' }}>VOC-UNSC</span>}
-              </>
-            )}
-            {theme === 'cyberpunk' && (
-              <>
-                <span style={{ marginRight: '8px', color: '#f43f5e', textShadow: '0 0 8px #f43f5e' }}>⚡</span>
-                {!collapsed && <span style={{ fontFamily: "'Orbitron', sans-serif", textTransform: 'uppercase', color: '#00ffcc' }}>Glitch_</span>}
-              </>
-            )}
-            {theme === 'kingdom-come' && (
-              <>
-                <span style={{ marginRight: '8px', color: '#ca8a04' }}>⚜️</span>
-                {!collapsed && <span style={{ fontFamily: "'MedievalSharp', serif", fontStyle: 'italic' }}>Chronicles</span>}
-              </>
-            )}
-            {theme === 'resident-evil' && (
-              <>
-                <span style={{ marginRight: '8px', color: '#dc2626' }}>☣️</span>
-                {!collapsed && <span style={{ fontFamily: "'Oswald', sans-serif", color: '#dc2626', letterSpacing: '1px' }}>UMBRELLA</span>}
-              </>
-            )}
           </div>
           <button
             className="sidebar-toggle"

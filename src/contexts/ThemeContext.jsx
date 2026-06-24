@@ -4,16 +4,14 @@ const ThemeContext = createContext();
 
 export const themes = [
   { id: 'ios', name: 'iOS Style', desc: 'Minimalistik, yumshoq oyna va nafis o\'tishlar' },
-  { id: 'android', name: 'Android Material', desc: 'Material You dizayn tili va organik shakllar' },
-  { id: 'god-of-war', name: 'God of War', desc: 'Runa toshlari, olov va qon rangli qadimiy mavzu' },
-  { id: 'halo', name: 'Halo Space', desc: 'Yorqin gologrammalar, futuristik harbiy interfeys' },
-  { id: 'cyberpunk', name: 'Cyberpunk 2077', desc: 'Neon ranglar, raqamli yomg\'ir va glitch effektlari' },
-  { id: 'kingdom-come', name: 'Kingdom Come', desc: 'O\'rta asrlar pergamenti, oltin va barglar' },
-  { id: 'resident-evil', name: 'Resident Evil', desc: 'Zombi virusi sporasi, biohazard va qorong\'u atmosfera' }
+  { id: 'android', name: 'Android Material', desc: 'Material You dizayn tili va organik shakllar' }
 ];
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => localStorage.getItem('voc-theme') || 'ios');
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('voc-theme') || 'ios';
+    return ['ios', 'android'].includes(saved) ? saved : 'ios';
+  });
   const [particlesEnabled, setParticlesEnabled] = useState(() => {
     const saved = localStorage.getItem('voc-particles');
     return saved !== null ? saved === 'true' : true;

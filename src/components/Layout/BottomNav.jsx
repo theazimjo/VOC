@@ -18,36 +18,6 @@ export default function BottomNav() {
       library: '📖',
       stats: '📊',
       settings: '⚙️'
-    },
-    'god-of-war': {
-      dashboard: 'Ω',
-      library: '📜',
-      stats: '⚔️',
-      settings: '🛡️'
-    },
-    halo: {
-      dashboard: '🛸',
-      library: '💾',
-      stats: '🔋',
-      settings: '🔧'
-    },
-    cyberpunk: {
-      dashboard: '📟',
-      library: '💾',
-      stats: '⚡',
-      settings: '⚙️'
-    },
-    'kingdom-come': {
-      dashboard: '🏰',
-      library: '📜',
-      stats: '🏹',
-      settings: '🔑'
-    },
-    'resident-evil': {
-      dashboard: '☣️',
-      library: '📁',
-      stats: '🩸',
-      settings: '🔧'
     }
   };
 
