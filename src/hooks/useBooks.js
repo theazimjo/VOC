@@ -5,7 +5,13 @@ import { useAuth } from '../contexts/AuthContext';
 
 export function useBooks() {
   const { user } = useAuth();
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState(() => {
+    if (typeof window !== 'undefined' && user) {
+      const cached = localStorage.getItem(`voc-cache-books-${user.uid}`);
+      return cached ? JSON.parse(cached) : [];
+    }
+    return [];
+  });
   const [loading, setLoading] = useState(true);
 
   // Real-time listener for books
@@ -16,7 +22,15 @@ export function useBooks() {
       return;
     }
 
-    setLoading(true);
+    // Load from cache first
+    const cached = localStorage.getItem(`voc-cache-books-${user.uid}`);
+    if (cached) {
+      setBooks(JSON.parse(cached));
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+
     const booksRef = ref(db, `users/${user.uid}/books`);
 
     const unsubscribe = onValue(
@@ -41,6 +55,10 @@ export function useBooks() {
 
         // Sort by createdAt desc
         booksData.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        
+        // Cache data
+        localStorage.setItem(`voc-cache-books-${user.uid}`, JSON.stringify(booksData));
+        
         setBooks(booksData);
         setLoading(false);
       },

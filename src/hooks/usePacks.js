@@ -5,7 +5,13 @@ import { useAuth } from '../contexts/AuthContext';
 
 export function usePacks() {
   const { user } = useAuth();
-  const [packs, setPacks] = useState([]);
+  const [packs, setPacks] = useState(() => {
+    if (typeof window !== 'undefined' && user) {
+      const cached = localStorage.getItem(`voc-cache-packs-${user.uid}`);
+      return cached ? JSON.parse(cached) : [];
+    }
+    return [];
+  });
   const [loading, setLoading] = useState(true);
 
   // Real-time listener for packs
@@ -16,7 +22,15 @@ export function usePacks() {
       return;
     }
 
-    setLoading(true);
+    // Load from cache first
+    const cached = localStorage.getItem(`voc-cache-packs-${user.uid}`);
+    if (cached) {
+      setPacks(JSON.parse(cached));
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+
     const packsRef = ref(db, `users/${user.uid}/packs`);
 
     const unsubscribe = onValue(
@@ -39,6 +53,10 @@ export function usePacks() {
 
         // Sort by createdAt desc
         packsData.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        
+        // Cache data
+        localStorage.setItem(`voc-cache-packs-${user.uid}`, JSON.stringify(packsData));
+        
         setPacks(packsData);
         setLoading(false);
       },

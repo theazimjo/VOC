@@ -5,7 +5,13 @@ import { useAuth } from '../contexts/AuthContext';
 
 export function useWords(collectionType, collectionId) {
   const { user } = useAuth();
-  const [words, setWords] = useState([]);
+  const [words, setWords] = useState(() => {
+    if (typeof window !== 'undefined' && user && collectionType && collectionId) {
+      const cached = localStorage.getItem(`voc-cache-words-${user.uid}-${collectionType}-${collectionId}`);
+      return cached ? JSON.parse(cached) : [];
+    }
+    return [];
+  });
   const [loading, setLoading] = useState(true);
 
   // Build the words reference path in RTDB
@@ -28,7 +34,16 @@ export function useWords(collectionType, collectionId) {
       return;
     }
 
-    setLoading(true);
+    // Load from cache first
+    const cacheKey = `voc-cache-words-${user.uid}-${collectionType}-${collectionId}`;
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      setWords(JSON.parse(cached));
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+
     const wordsRef = getWordsRef();
 
     const unsubscribe = onValue(
@@ -44,6 +59,10 @@ export function useWords(collectionType, collectionId) {
 
         // Sort by addedAt descending
         wordsData.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
+        
+        // Cache data
+        localStorage.setItem(cacheKey, JSON.stringify(wordsData));
+        
         setWords(wordsData);
         setLoading(false);
       },

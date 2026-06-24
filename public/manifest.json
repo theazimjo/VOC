@@ -1,0 +1,18 @@
+{
+  "name": "VOC - So'z O'rganish",
+  "short_name": "VOC",
+  "description": "So'zlarni spaced repetition va grammatika bilan oson o'rganing",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090e",
+  "theme_color": "#007aff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
