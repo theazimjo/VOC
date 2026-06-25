@@ -69,44 +69,76 @@ export function useGrammarStats() {
   }, [user]);
 
   const saveGrammarResult = useCallback(
-    async (level, topicId, topicTitle, score, totalQuestions) => {
+    async (level, topicId, topicTitle, score, totalQuestions, exerciseId) => {
       if (!user) return;
 
       const completedAt = new Date().toISOString();
       const wrongCount = totalQuestions - score;
 
+      // 1. History entry
       const historyRef = ref(db, `users/${user.uid}/grammar/history`);
       const newHistoryRef = push(historyRef);
       const historyItem = {
         level,
         topicId,
         topicTitle,
+        exerciseId,
         score,
         totalQuestions,
         wrongCount,
         completedAt,
       };
-
       await set(newHistoryRef, historyItem);
 
-      const topicRef = ref(db, `users/${user.uid}/grammar/topics/${topicId}`);
-      const snap = await get(topicRef);
-      let bestScore = score;
-      let timesCompleted = 1;
+      // 2. Save exercise stats
+      const exerciseRef = ref(db, `users/${user.uid}/grammar/topics/${topicId}/exercises/${exerciseId}`);
+      const exerciseSnap = await get(exerciseRef);
+      let exerciseBestScore = score;
+      let exerciseTimesCompleted = 1;
 
-      if (snap.exists()) {
-        const currentVal = snap.val();
-        bestScore = Math.max(currentVal.bestScore || 0, score);
-        timesCompleted = (currentVal.timesCompleted || 0) + 1;
+      if (exerciseSnap.exists()) {
+        const val = exerciseSnap.val();
+        exerciseBestScore = Math.max(val.bestScore || 0, score);
+        exerciseTimesCompleted = (val.timesCompleted || 0) + 1;
+      }
+
+      const exerciseData = {
+        bestScore: exerciseBestScore,
+        totalQuestions,
+        wrongCount: totalQuestions - exerciseBestScore,
+        completedAt,
+        timesCompleted: exerciseTimesCompleted
+      };
+      await set(exerciseRef, exerciseData);
+
+      // 3. Load all exercises to calculate overall best score and total questions
+      const exercisesRef = ref(db, `users/${user.uid}/grammar/topics/${topicId}/exercises`);
+      const exercisesSnap = await get(exercisesRef);
+      let overallBestScore = exerciseBestScore;
+      let overallTotalQuestions = totalQuestions;
+      
+      if (exercisesSnap.exists()) {
+        const exMap = exercisesSnap.val() || {};
+        overallBestScore = Object.values(exMap).reduce((sum, ex) => sum + (ex.bestScore || 0), 0);
+        overallTotalQuestions = Object.values(exMap).reduce((sum, ex) => sum + (ex.totalQuestions || 20), 0);
+      }
+
+      // 4. Update overall topic details
+      const topicRef = ref(db, `users/${user.uid}/grammar/topics/${topicId}`);
+      const topicSnap = await get(topicRef);
+      let topicTimesCompleted = 1;
+      if (topicSnap.exists()) {
+        const currentVal = topicSnap.val();
+        topicTimesCompleted = (currentVal.timesCompleted || 0) + 1;
       }
 
       const topicData = {
         level,
         topicTitle,
-        bestScore,
-        totalQuestions,
+        bestScore: overallBestScore,
+        totalQuestions: overallTotalQuestions,
         completedAt,
-        timesCompleted,
+        timesCompleted: topicTimesCompleted,
       };
 
       await set(topicRef, topicData);

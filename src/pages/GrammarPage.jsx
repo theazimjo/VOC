@@ -45,11 +45,23 @@ export default function GrammarPage() {
   const completedTopicsOfLevel = Object.values(grammarStats?.topics || {}).filter(
     (t) => t.level === activeLevel
   );
-  const completedCount = completedTopicsOfLevel.length;
-  const averageAccuracy = completedCount > 0
+
+  let completedExercisesCount = 0;
+  completedTopicsOfLevel.forEach((t) => {
+    if (t.exercises) {
+      completedExercisesCount += Object.keys(t.exercises).length;
+    } else {
+      // fallback for old stats structure where exercises didn't exist
+      completedExercisesCount += 1;
+    }
+  });
+
+  const totalExercisesOfLevel = topics.length * 8;
+
+  const averageAccuracy = completedTopicsOfLevel.length > 0
     ? Math.round(
         completedTopicsOfLevel.reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) /
-        completedCount
+        completedTopicsOfLevel.length
       )
     : 0;
 
@@ -90,8 +102,8 @@ export default function GrammarPage() {
           </div>
           <div className="grammar-stat-divider" />
           <div className="grammar-stat-chip">
-            <span className="grammar-stat-num">{topics.length * 30}</span>
-            <span className="grammar-stat-lbl">savol</span>
+            <span className="grammar-stat-num">{totalExercisesOfLevel}</span>
+            <span className="grammar-stat-lbl">mashq</span>
           </div>
           <div className="grammar-stat-divider" />
           <div className="grammar-stat-chip">
@@ -103,8 +115,8 @@ export default function GrammarPage() {
         {/* User Specific Progress for this Level */}
         <div className="grammar-user-stats">
           <div className="user-stat-card">
-            <span className="user-stat-value">{completedCount} / {topics.length}</span>
-            <span className="user-stat-label">Mavzular yechildi</span>
+            <span className="user-stat-value">{completedExercisesCount} / {totalExercisesOfLevel}</span>
+            <span className="user-stat-label">Mashqlar yechildi</span>
           </div>
           <div className="user-stat-card">
             <span className="user-stat-value">{averageAccuracy}%</span>
@@ -161,6 +173,7 @@ export default function GrammarPage() {
           {topics.length > 0 ? (
             topics.map((topic) => {
               const topicStats = grammarStats?.topics?.[topic.id];
+              const completedExCount = topicStats?.exercises ? Object.keys(topicStats.exercises).length : 0;
 
               return (
                 <motion.div
@@ -189,11 +202,11 @@ export default function GrammarPage() {
                   </div>
                   <div className="topic-card-meta">
                     <span className="topic-badge topic-badge-questions">
-                      📝 {topic.questions?.length || 30} ta savol
+                      📚 8 ta mashq
                     </span>
-                    {topicStats ? (
+                    {completedExCount > 0 ? (
                       <span className="topic-badge topic-badge-completed">
-                        ✅ Natija: {topicStats.bestScore}/{topicStats.totalQuestions} ({Math.round((topicStats.bestScore / topicStats.totalQuestions) * 100)}%)
+                        ✅ {completedExCount} / 8 yechildi
                       </span>
                     ) : (
                       <span className="topic-badge topic-badge-todo">

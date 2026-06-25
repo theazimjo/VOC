@@ -21,6 +21,13 @@
   margin-left: var(--sidebar-collapsed);
 }
 
+.layout-content--test-mode {
+  margin-left: 0 !important;
+  margin-top: 0 !important;
+  padding: var(--space-md) !important;
+  min-height: 100vh !important;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .layout-content {

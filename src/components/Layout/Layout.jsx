@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import BottomNav from './BottomNav';
@@ -9,6 +9,7 @@ import './Layout.css';
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   const handleToggleSidebar = useCallback(() => {
     setCollapsed((prev) => !prev);
@@ -21,6 +22,21 @@ export default function Layout() {
   const handleMobileClose = useCallback(() => {
     setMobileOpen(false);
   }, []);
+
+  // Check if we are in grammar test mode (e.g., "/grammar/beginner/topicId/1")
+  const segments = location.pathname.split('/').filter(Boolean);
+  const isTestMode = segments.length === 4 && segments[0] === 'grammar';
+
+  if (isTestMode) {
+    return (
+      <div className="layout layout--test-mode">
+        <ParticleCanvas />
+        <main className="layout-content layout-content--test-mode">
+          <Outlet />
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="layout">

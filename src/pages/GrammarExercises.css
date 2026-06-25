@@ -1,0 +1,382 @@
+/* ==========================================
+   GRAMMAR EXERCISES TIMELINE PAGE
+   ========================================== */
+
+.grammar-exercises-page {
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--space-2xl);
+  position: relative;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* Orange/Amber Header - matching the picture */
+.exercises-header {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: #ffffff;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  position: relative;
+  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.2);
+  z-index: 10;
+}
+
+/* Back button */
+.header-back-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 4px var(--space-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+}
+
+.header-back-btn:hover {
+  transform: translateX(-3px);
+}
+
+.header-title-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.header-topic-title {
+  font-size: var(--font-md);
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.header-icon-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Timeline Container */
+.exercises-timeline-container {
+  flex: 1;
+  padding: var(--space-lg) var(--space-md);
+  position: relative;
+}
+
+/* Vertical line connecting circles */
+.timeline-line {
+  position: absolute;
+  left: 45px; /* aligned with center of circles */
+  top: var(--space-lg);
+  bottom: var(--space-lg);
+  width: 3px;
+  background: var(--border);
+  z-index: 1;
+}
+
+.exercises-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Card wrapper */
+.exercise-item-card {
+  display: flex;
+  align-items: center;
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  gap: var(--space-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  backdrop-filter: blur(10px);
+}
+
+/* Completed exercise style */
+.exercise-item-card.completed {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Hover effect for playable items */
+.exercise-item-card:hover:not(.locked) {
+  transform: translateY(-2px);
+  border-color: var(--accent-1);
+  box-shadow: var(--shadow);
+}
+
+/* Active Highlight Style - matching the user's picture (Exercise 5) */
+.exercise-item-card.active {
+  background: linear-gradient(135deg, #84CC16, #65A30D); /* Bright Lime/Green */
+  border-color: #84CC16;
+  color: #ffffff !important;
+  box-shadow: 0 10px 20px rgba(132, 204, 22, 0.3);
+}
+
+.exercise-item-card.active .exercise-title {
+  color: #ffffff !important;
+}
+
+.exercise-item-card.active .questions-count {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.exercise-item-card.active .circle-placeholder {
+  background: #ffffff !important;
+  color: #65A30D !important;
+  border-color: #ffffff !important;
+  font-weight: 800;
+}
+
+/* Locked items style */
+.exercise-item-card.locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(80%);
+}
+
+/* Timeline Circle container */
+.timeline-circle-container {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  z-index: 3;
+}
+
+/* Simple circular placeholder */
+.circle-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+}
+
+/* Progress circular ring */
+.progress-ring-wrapper {
+  width: 58px;
+  height: 58px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: var(--bg-secondary);
+  stroke: var(--border);
+  stroke-width: 3.5;
+}
+
+.progress-ring-fill {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.6s ease;
+}
+
+.circle-inner-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.circle-inner-text .number {
+  font-size: var(--font-sm);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.circle-inner-text .percent {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+/* Card details styling */
+.exercise-card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.exercise-title {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 6px 0;
+  transition: color var(--transition-base);
+}
+
+.exercise-meta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.meta-item {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.scores-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-xs);
+  font-weight: 600;
+}
+
+.score-correct-count,
+.score-wrong-count {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* Card right items */
+.card-chevron {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.active-badge {
+  background: #ffffff;
+  color: #65A30D;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Loading & Error States */
+.grammar-exercises-page.loading,
+.grammar-exercises-page.error {
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-3xl) var(--space-xl);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--accent-1);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--space-md);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Exercise type badge */
+.exercise-type-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* Locked icon */
+.locked-icon {
+  font-size: 1.2rem;
+  color: #3f3f46;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Update circle to show icon instead of just number */
+.circle-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #3f3f46;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #6b7280;
+  background: #0a0a0a;
+  transition: all 0.2s ease;
+}
+
+.exercise-item-card.active .circle-placeholder {
+  border-width: 2px;
+  box-shadow: 0 0 12px rgba(245,158,11,0.2);
+}
+
+.circle-inner-text .ex-icon {
+  font-size: 1rem;
+  display: block;
+  text-align: center;
+  line-height: 1;
+}
