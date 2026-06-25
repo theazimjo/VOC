@@ -28,6 +28,7 @@ export default function BottomNav() {
     { to: '/library',  icon: icons.library,   label: 'Kutubxona' },
     { to: '/grammar',  icon: '📖',            label: 'Grammatika' },
     { to: '/stories',  icon: '✨',            label: 'Hikoyalar' },
+    { to: '/witcher',  icon: '⚔️',            label: 'Witcher' },
   ];
 
   return (

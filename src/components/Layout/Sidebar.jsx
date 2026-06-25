@@ -9,8 +9,10 @@ const navItems = [
   { to: '/library',  icon: '📚', label: 'Kutubxona' },
   { to: '/grammar',  icon: '📖', label: 'Grammatika' },
   { to: '/stories',  icon: '✨', label: 'Hikoyalar' },
+  { to: '/witcher',  icon: '⚔️', label: 'Witcher' },
   { to: '/settings', icon: '⚙️', label: 'Sozlamalar' },
 ];
+
 
 export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user, logout } = useAuth();

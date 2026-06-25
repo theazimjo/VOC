@@ -1,0 +1,964 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   WITCHER GAME — Full Dark Fantasy UI
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600;700&display=swap');
+
+/* ── Root & Base ─────────────────────────────────────────────────────────── */
+.wg-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050508;
+  font-family: 'Inter', sans-serif;
+  color: #e8e0d0;
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
+}
+
+.wg-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Fog overlay ─────────────────────────────────────────────────────────── */
+.wg-fog {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 70%);
+  pointer-events: none;
+  animation: fog-drift 8s ease-in-out infinite alternate;
+}
+
+@keyframes fog-drift {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(1.04); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MENU SCREEN
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wg-menu {
+  justify-content: center;
+  align-items: center;
+}
+
+.wg-menu-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  filter: brightness(0.55) saturate(0.9);
+}
+
+.wg-menu-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 16px;
+  width: 100%;
+  max-width: 700px;
+}
+
+.wg-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.wg-logo-main {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  background: linear-gradient(135deg, #c4a84a 0%, #f5d78e 50%, #c4a84a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 0 24px rgba(196,168,74,0.5));
+  animation: logo-pulse 4s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(196,168,74,0.4)); }
+  50%       { filter: drop-shadow(0 0 40px rgba(196,168,74,0.7)); }
+}
+
+.wg-logo-sub {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  color: rgba(232,224,208,0.55);
+  text-transform: uppercase;
+}
+
+/* ── Save cards on menu ─────────────────────────────────────────────────── */
+.wg-menu-saves {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wg-save-card {
+  flex: 1;
+  min-width: 160px;
+  max-width: 220px;
+  background: rgba(10,8,20,0.82);
+  border: 1px solid rgba(196,168,74,0.2);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  backdrop-filter: blur(16px);
+  transition: border-color 0.2s;
+}
+
+.wg-save-card:hover { border-color: rgba(196,168,74,0.5); }
+
+.wg-save-card.empty { align-items: center; justify-content: center; min-height: 140px; }
+
+.wg-save-ep {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #c4a84a;
+  text-transform: uppercase;
+}
+
+.wg-save-info {
+  display: flex;
+  gap: 10px;
+  font-size: 0.78rem;
+  color: rgba(232,224,208,0.7);
+  flex-wrap: wrap;
+}
+
+.wg-save-date {
+  font-size: 0.65rem;
+  color: rgba(232,224,208,0.4);
+}
+
+.wg-save-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.wg-save-new {
+  background: none;
+  border: 1px dashed rgba(196,168,74,0.3);
+  border-radius: 12px;
+  color: rgba(196,168,74,0.7);
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+.wg-save-new:hover {
+  background: rgba(196,168,74,0.07);
+  border-color: #c4a84a;
+  color: #c4a84a;
+}
+
+.wg-save-plus {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.wg-save-slot-num {
+  font-size: 0.65rem;
+  color: rgba(196,168,74,0.5);
+}
+
+.wg-menu-btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Shared Buttons ─────────────────────────────────────────────────────── */
+.wg-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+
+.wg-btn-primary {
+  background: linear-gradient(135deg, #b8960a, #c4a84a);
+  color: #0a0808;
+}
+.wg-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,168,74,0.4); }
+
+.wg-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(196,168,74,0.4);
+  color: #c4a84a;
+}
+.wg-btn-outline:hover { background: rgba(196,168,74,0.1); }
+
+.wg-btn-ghost {
+  background: transparent;
+  color: rgba(232,224,208,0.5);
+  font-size: 0.75rem;
+}
+.wg-btn-ghost:hover { color: rgba(232,224,208,0.85); }
+
+.wg-btn-danger {
+  background: rgba(192,57,43,0.8);
+  color: white;
+}
+.wg-btn-danger:hover { background: #c0392b; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SAVE SELECT SCREEN
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wg-saves-screen { justify-content: center; align-items: center; }
+
+.wg-saves-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.3);
+}
+
+.wg-saves-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.wg-saves-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  color: #c4a84a;
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+.wg-saves-grid {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wg-save-select-card {
+  flex: 1;
+  min-width: 160px;
+  max-width: 200px;
+  background: rgba(10,8,20,0.85);
+  border: 1px solid rgba(196,168,74,0.25);
+  border-radius: 16px;
+  padding: 24px 18px;
+  cursor: pointer;
+  transition: all 0.22s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+  color: #e8e0d0;
+}
+.wg-save-select-card:hover { border-color: #c4a84a; transform: translateY(-3px); }
+.wg-save-select-card.has-data { border-color: rgba(231,76,60,0.3); }
+
+.wg-save-select-num { font-family: 'Cinzel', serif; font-size: 0.7rem; color: #c4a84a; letter-spacing: 0.15em; }
+.wg-save-select-warn { font-size: 0.72rem; color: #e74c3c; }
+.wg-save-select-ep { font-size: 0.8rem; font-weight: 600; }
+.wg-save-select-date { font-size: 0.65rem; color: rgba(232,224,208,0.4); }
+.wg-save-select-empty { font-size: 0.85rem; color: rgba(196,168,74,0.6); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NARRATIVE SCREEN
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wg-narrative { cursor: pointer; }
+
+.wg-scene-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.8s ease;
+}
+
+.wg-scene-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5,5,8,0.35) 0%,
+    rgba(5,5,8,0.1)  40%,
+    rgba(5,5,8,0.6)  70%,
+    rgba(5,5,8,0.92) 100%
+  );
+}
+
+/* HUD */
+.wg-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(5,5,8,0.7) 0%, transparent 100%);
+}
+
+.wg-hud-ep {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: rgba(196,168,74,0.7);
+  text-transform: uppercase;
+}
+
+.wg-hud-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wg-hud-hp-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.wg-hud-hp-label { font-size: 0.72rem; }
+.wg-hud-hp-bar {
+  width: 80px;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.wg-hud-hp-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+.wg-hud-hp-val {
+  font-size: 0.68rem;
+  color: rgba(232,224,208,0.6);
+  min-width: 48px;
+}
+.wg-hud-gold {
+  font-size: 0.72rem;
+  color: #c4a84a;
+}
+
+/* Portrait */
+.wg-portrait {
+  position: absolute;
+  bottom: 130px;
+  left: 16px;
+  z-index: 20;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(196,168,74,0.5);
+  box-shadow: 0 0 20px rgba(0,0,0,0.7), 0 0 0 1px rgba(196,168,74,0.2);
+}
+.wg-portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Text Box */
+.wg-textbox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 22px 24px 28px 24px;
+  background: linear-gradient(to top, rgba(5,5,8,0.97) 0%, rgba(5,5,8,0.88) 70%, transparent 100%);
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wg-textbox.cliffhanger {
+  background: linear-gradient(to top, rgba(120,30,30,0.97) 0%, rgba(60,10,10,0.9) 70%, transparent 100%);
+  border-top: 1px solid rgba(231,76,60,0.3);
+}
+
+.wg-speaker-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: #c4a84a;
+  text-transform: uppercase;
+  margin-left: 108px;
+}
+
+.wg-cliffhanger-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: #e74c3c;
+  text-transform: uppercase;
+}
+
+.wg-text {
+  margin: 0;
+  line-height: 1.72;
+  max-width: 680px;
+}
+
+.wg-text.narration {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #e8e0d0;
+}
+
+.wg-text.dialogue {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #f5f0e8;
+  font-style: italic;
+  margin-left: 108px;
+}
+
+.wg-text.cliffhanger-text {
+  color: #f0c0b0;
+  font-size: clamp(1rem, 2.5vw, 1.12rem);
+  white-space: pre-line;
+}
+
+.wg-cursor {
+  display: inline-block;
+  margin-left: 1px;
+  animation: blink 0.8s steps(1) infinite;
+  color: #c4a84a;
+  font-weight: 100;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.wg-advance-hint {
+  align-self: flex-end;
+  font-size: 0.75rem;
+  color: rgba(196,168,74,0.5);
+  animation: hint-pulse 1.8s ease-in-out infinite;
+  margin-top: 4px;
+}
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+.wg-cliffhanger-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: rgba(240,192,176,0.6);
+}
+
+/* ── Choice Box ─────────────────────────────────────────────────────────── */
+.wg-choicebox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 20px 20px 32px;
+  background: linear-gradient(to top, rgba(5,5,8,0.98) 0%, rgba(5,5,8,0.93) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wg-choice-type {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.wg-choice-prompt {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1rem;
+  color: rgba(232,224,208,0.8);
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.wg-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wg-choice-btn {
+  background: rgba(15,12,25,0.85);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: all 0.2s;
+  text-align: left;
+  border-left: 3px solid var(--tag-color, #c4a84a);
+}
+.wg-choice-btn:hover {
+  background: rgba(30,24,50,0.9);
+  border-color: var(--tag-color, #c4a84a);
+  transform: translateX(4px);
+  box-shadow: -4px 0 12px rgba(0,0,0,0.4);
+}
+
+.wg-choice-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: #0a0808;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wg-choice-text {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 0.97rem;
+  color: #e8e0d0;
+  line-height: 1.45;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   COMBAT SCREEN
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wg-combat {
+  background: #050508;
+  flex-direction: column;
+}
+
+.wg-combat.shake {
+  animation: screen-shake 0.35s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes screen-shake {
+  10%,90%  { transform: translate(-3px, 0); }
+  20%,80%  { transform: translate(4px, 0); }
+  30%,50%,70% { transform: translate(-4px, 0); }
+  40%,60%  { transform: translate(4px, 0); }
+}
+
+.wg-combat-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(60,10,10,0.6) 0%, rgba(5,5,8,1) 70%);
+}
+
+/* Combat result overlay */
+.wg-combat-result {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  backdrop-filter: blur(4px);
+}
+.wg-combat-result.victory { background: rgba(10,40,10,0.85); }
+.wg-combat-result.defeat  { background: rgba(40,5,5,0.88); }
+.wg-result-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.5rem;
+  color: #c4a84a;
+}
+.wg-result-sub { font-size: 1rem; color: rgba(232,224,208,0.7); }
+
+/* Arena */
+.wg-combat-arena {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 10px;
+}
+
+.wg-combatant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 200px;
+}
+
+.wg-combatant-sprite {
+  font-size: clamp(3rem, 10vw, 5rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(196,168,74,0.4));
+  animation: idle-bob 2.5s ease-in-out infinite;
+}
+@keyframes idle-bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+.enemy-sprite { animation: enemy-idle 2s ease-in-out infinite; }
+@keyframes enemy-idle {
+  0%, 100% { transform: translateY(0) scaleX(1); }
+  50%       { transform: translateY(-5px) scaleX(1.02); }
+}
+.enemy-sprite.telegraph {
+  animation: telegraph-pulse 0.4s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(231,76,60,0.8));
+}
+@keyframes telegraph-pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.12); }
+}
+
+.wg-combatant-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: #c4a84a;
+  text-transform: uppercase;
+}
+
+.wg-enemy-desc {
+  font-size: 0.65rem;
+  color: rgba(232,224,208,0.4);
+  font-style: italic;
+  text-align: center;
+  min-height: 20px;
+}
+
+.wg-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 160px;
+}
+.wg-bar-label {
+  font-size: 0.62rem;
+  color: rgba(232,224,208,0.5);
+  min-width: 18px;
+  text-align: right;
+}
+.wg-bar {
+  flex: 1;
+  height: 7px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.wg-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+.wg-bar-fill.hp       { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+.wg-bar-fill.stamina  { background: linear-gradient(90deg, #2980b9, #3498db); }
+.wg-bar-fill.enemy-hp { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+.wg-bar-val { font-size: 0.6rem; color: rgba(232,224,208,0.5); min-width: 44px; }
+
+.wg-sign-charges {
+  display: flex;
+  gap: 5px;
+  margin-top: 2px;
+}
+.wg-charge { font-size: 0.75rem; color: rgba(232,224,208,0.2); transition: color 0.2s; }
+.wg-charge.active { color: #8e44ad; filter: drop-shadow(0 0 4px #8e44ad); }
+
+.wg-enemy-queue {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+.wg-enemy-pip { font-size: 1rem; opacity: 0.3; }
+.wg-enemy-pip.active { opacity: 1; }
+.wg-enemy-pip.dead   { opacity: 0.15; filter: grayscale(1); }
+
+.wg-vs {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  color: rgba(196,168,74,0.3);
+  flex-shrink: 0;
+}
+
+/* Combat Log */
+.wg-combat-log {
+  position: relative;
+  z-index: 10;
+  height: 90px;
+  overflow-y: auto;
+  padding: 8px 20px;
+  background: rgba(0,0,0,0.5);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  scrollbar-width: none;
+}
+.wg-combat-log::-webkit-scrollbar { display: none; }
+.wg-log-entry {
+  font-size: 0.75rem;
+  color: rgba(232,224,208,0.7);
+  line-height: 1.4;
+}
+.wg-log-entry:last-child { color: #e8e0d0; }
+
+/* Action Bar */
+.wg-action-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  padding: 12px 12px 20px;
+  background: rgba(5,5,8,0.95);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wg-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: rgba(30,24,50,0.9);
+  border: 1px solid rgba(196,168,74,0.2);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.18s;
+  color: #e8e0d0;
+  font-size: 1.4rem;
+  min-width: 58px;
+}
+.wg-action-btn span { font-size: 0.6rem; letter-spacing: 0.05em; color: rgba(232,224,208,0.65); }
+.wg-action-btn:hover:not(:disabled) {
+  background: rgba(60,45,90,0.95);
+  border-color: #c4a84a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+.wg-action-btn:disabled { opacity: 0.28; cursor: not-allowed; }
+.wg-action-btn.heavy  { border-color: rgba(230,126,34,0.3); }
+.wg-action-btn.sign   { border-color: rgba(142,68,173,0.4); }
+.wg-action-btn.igni   { border-color: rgba(231,76,60,0.4); }
+.wg-action-btn.parry  { border-color: rgba(41,128,185,0.4); }
+.wg-action-btn.potion { border-color: rgba(39,174,96,0.4); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EPISODE SELECT SCREEN
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wg-episodes {
+  overflow-y: auto;
+  background: #060408;
+}
+
+.wg-episodes-bg {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(70,30,10,0.4) 0%, rgba(6,4,8,1) 60%);
+  pointer-events: none;
+}
+
+.wg-episodes-content {
+  position: relative;
+  z-index: 10;
+  padding: 24px 16px 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wg-episodes-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.3rem;
+  color: #c4a84a;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.wg-act-group { display: flex; flex-direction: column; gap: 10px; }
+
+.wg-act-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: rgba(196,168,74,0.6);
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(196,168,74,0.15);
+  padding-bottom: 6px;
+}
+
+.wg-ep-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.wg-ep-card {
+  background: rgba(15,10,25,0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  min-height: 70px;
+  text-align: center;
+}
+.wg-ep-card.unlocked:hover {
+  background: rgba(30,22,50,0.9);
+  border-color: rgba(196,168,74,0.4);
+  transform: translateY(-2px);
+}
+.wg-ep-card.locked { opacity: 0.4; cursor: not-allowed; }
+.wg-ep-card.current { border-color: #c4a84a; box-shadow: 0 0 12px rgba(196,168,74,0.2); }
+.wg-ep-card.written { border-color: rgba(39,174,96,0.4); }
+
+.wg-ep-num {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(196,168,74,0.7);
+}
+.wg-ep-name {
+  font-size: 0.65rem;
+  color: rgba(232,224,208,0.6);
+  line-height: 1.3;
+}
+.wg-ep-lock { position: absolute; top: 6px; right: 6px; font-size: 0.65rem; }
+.wg-ep-cur  { position: absolute; top: 6px; left: 6px; font-size: 0.65rem; color: #c4a84a; }
+.wg-ep-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 0.52rem;
+  background: rgba(39,174,96,0.25);
+  color: #27ae60;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   GAME OVER
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wg-gameover {
+  background: radial-gradient(ellipse at 50% 50%, rgba(80,0,0,0.6) 0%, rgba(5,5,8,1) 70%);
+  align-items: center;
+  justify-content: center;
+}
+
+.wg-gameover-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 32px;
+}
+
+.wg-gameover-skull {
+  font-size: 4rem;
+  animation: skull-pulse 2s ease-in-out infinite;
+  filter: grayscale(0.5);
+}
+@keyframes skull-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50%       { transform: scale(1.08); opacity: 1; }
+}
+
+.wg-gameover-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2rem;
+  color: #c0392b;
+}
+
+.wg-gameover-sub {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1rem;
+  color: rgba(232,224,208,0.5);
+  font-style: italic;
+}
+
+.wg-gameover-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  align-items: center;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MOBILE ADJUSTMENTS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .wg-portrait { width: 70px; height: 70px; bottom: 120px; }
+  .wg-text.dialogue { margin-left: 86px; }
+  .wg-speaker-name { margin-left: 86px; }
+  .wg-menu-saves { flex-direction: column; align-items: center; }
+  .wg-save-card { max-width: 100%; }
+  .wg-action-btn { min-width: 48px; padding: 8px 10px; font-size: 1.2rem; }
+  .wg-combat-arena { padding: 12px; }
+  .wg-combatant-sprite { font-size: 2.8rem; }
+  .wg-logo-main { font-size: 2.5rem; }
+}

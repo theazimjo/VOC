@@ -19,6 +19,7 @@ import GrammarPage from './pages/GrammarPage';
 import GrammarTopic from './pages/GrammarTopic';
 import GrammarExercises from './pages/GrammarExercises';
 import StoryPage from './pages/StoryPage';
+import WitcherGame from './pages/WitcherGame';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             {/* Public routes */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/witcher" element={<WitcherGame />} />
             
             {/* Protected routes */}
             <Route element={<ProtectedRoute />}>
