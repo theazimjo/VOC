@@ -289,6 +289,18 @@ export default function StoryPage() {
     };
   }, [activeStory]);
 
+  // Pre-load voices on mount to ensure availability on mobile
+  useEffect(() => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      const handleVoicesChanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+      window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
+      return () => window.speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
+    }
+  }, []);
+
   const handleWordClick = (wordObj, e) => {
     e.stopPropagation();
     const rect = e.currentTarget.getBoundingClientRect();
@@ -396,26 +408,32 @@ export default function StoryPage() {
     // Load available voices
     const voices = window.speechSynthesis.getVoices();
     if (voices.length > 0) {
+      const enVoices = voices.filter(v => v.lang.toLowerCase().startsWith('en'));
+      
       let selectedVoice = null;
+      const femaleKeywords = ['female', 'zira', 'samantha', 'hazel', 'karen', 'moira', 'tessa', 'veena', 'kathy', 'victoria', 'siri', 'susan'];
+      const maleKeywords = ['male', 'david', 'mark', 'george', 'daniel', 'aaron', 'arthur', 'gordon', 'rishi', 'fred', 'alex', 'albert', 'oliver', 'jarvis', 'tom'];
+
       if (charInfo.gender === 'female') {
-        selectedVoice = voices.find(v => v.lang.startsWith('en') && (
-          v.name.toLowerCase().includes('female') || 
-          v.name.toLowerCase().includes('zira') || 
-          v.name.toLowerCase().includes('samantha') || 
-          v.name.toLowerCase().includes('hazel')
-        ));
+        selectedVoice = enVoices.find(v => {
+          const name = v.name.toLowerCase();
+          return femaleKeywords.some(kw => name.includes(kw));
+        });
+        if (!selectedVoice && enVoices.length > 0) {
+          selectedVoice = enVoices[0];
+        }
       } else {
-        selectedVoice = voices.find(v => v.lang.startsWith('en') && (
-          v.name.toLowerCase().includes('male') || 
-          v.name.toLowerCase().includes('david') || 
-          v.name.toLowerCase().includes('mark') || 
-          v.name.toLowerCase().includes('george')
-        ));
+        selectedVoice = enVoices.find(v => {
+          const name = v.name.toLowerCase();
+          return maleKeywords.some(kw => name.includes(kw));
+        });
+        if (!selectedVoice && enVoices.length > 1) {
+          selectedVoice = enVoices[1]; // fallback to a different voice than index 0 (female)
+        } else if (!selectedVoice && enVoices.length > 0) {
+          selectedVoice = enVoices[0];
+        }
       }
       
-      if (!selectedVoice) {
-        selectedVoice = voices.find(v => v.lang.startsWith('en'));
-      }
       if (selectedVoice) utterance.voice = selectedVoice;
     }
 
