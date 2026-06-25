@@ -16,16 +16,16 @@
   overflow: hidden;
 }
 
-/* Orange/Amber Header - matching the picture */
+/* Neutral Header - matching theme */
 .exercises-header {
-  background: linear-gradient(135deg, #F59E0B, #D97706);
-  color: #ffffff;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
   padding: var(--space-md) var(--space-lg);
   display: flex;
   align-items: center;
   gap: var(--space-md);
   position: relative;
-  box-shadow: 0 4px 15px rgba(217, 119, 6, 0.2);
   z-index: 10;
 }
 
@@ -33,7 +33,7 @@
 .header-back-btn {
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 1.6rem;
   cursor: pointer;
   padding: 4px var(--space-xs);
@@ -58,7 +58,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  opacity: 0.9;
+  color: var(--text-muted);
 }
 
 .header-topic-title {
@@ -76,7 +76,7 @@
 .header-icon-btn {
   background: transparent;
   border: none;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 1.1rem;
   cursor: pointer;
   padding: 6px;
@@ -88,7 +88,7 @@
 }
 
 .header-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--bg-tertiary);
 }
 
 /* Timeline Container */
@@ -98,13 +98,17 @@
   position: relative;
 }
 
+.timeline-wrapper {
+  position: relative;
+}
+
 /* Vertical line connecting circles */
 .timeline-line {
   position: absolute;
   left: 45px; /* aligned with center of circles */
-  top: var(--space-lg);
-  bottom: var(--space-lg);
-  width: 3px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
   background: var(--border);
   z-index: 1;
 }
@@ -143,28 +147,7 @@
   box-shadow: var(--shadow);
 }
 
-/* Active Highlight Style - matching the user's picture (Exercise 5) */
-.exercise-item-card.active {
-  background: linear-gradient(135deg, #84CC16, #65A30D); /* Bright Lime/Green */
-  border-color: #84CC16;
-  color: #ffffff !important;
-  box-shadow: 0 10px 20px rgba(132, 204, 22, 0.3);
-}
-
-.exercise-item-card.active .exercise-title {
-  color: #ffffff !important;
-}
-
-.exercise-item-card.active .questions-count {
-  color: rgba(255, 255, 255, 0.9) !important;
-}
-
-.exercise-item-card.active .circle-placeholder {
-  background: #ffffff !important;
-  color: #65A30D !important;
-  border-color: #ffffff !important;
-  font-weight: 800;
-}
+/* Remove active override rules */
 
 /* Locked items style */
 .exercise-item-card.locked {
@@ -186,16 +169,15 @@
 
 /* Simple circular placeholder */
 .circle-placeholder {
-  width: 48px;
-  height: 48px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
-  background: var(--bg-secondary);
-  border: 3px solid var(--border);
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-md);
-  font-weight: 700;
+  font-size: 1.4rem;
   color: var(--text-secondary);
   transition: all var(--transition-base);
 }
@@ -344,6 +326,7 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-bottom: 2px;
+  color: var(--accent-1); /* Thematic blue color instead of multi-colored style */
 }
 
 /* Locked icon */
@@ -354,24 +337,52 @@
   flex-shrink: 0;
 }
 
-/* Update circle to show icon instead of just number */
-.circle-placeholder {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid #3f3f46;
+/* Progress Card Style */
+.exercises-progress-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  color: #6b7280;
-  background: #0a0a0a;
-  transition: all 0.2s ease;
+  flex-direction: column;
+  gap: var(--space-sm);
+  z-index: 5;
+  position: relative;
+  box-shadow: var(--shadow);
 }
 
-.exercise-item-card.active .circle-placeholder {
-  border-width: 2px;
-  box-shadow: 0 0 12px rgba(245,158,11,0.2);
+.progress-card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-card-label {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.progress-card-value {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--accent-1);
+}
+
+.progress-card-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-card-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--accent-1);
+  transition: width 0.3s ease;
 }
 
 .circle-inner-text .ex-icon {

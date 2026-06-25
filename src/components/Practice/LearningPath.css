@@ -115,18 +115,18 @@
 /* Active State (Pulsating Ring) */
 .path-node.active {
   border-color: var(--accent-1);
-  background: var(--accent-gradient);
-  box-shadow: 0 8px 24px hsla(175, 75%, 45%, 0.3), var(--shadow-glow);
+  background: var(--accent-1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .path-node.active::after {
   content: '';
   position: absolute;
-  inset: -8px;
+  inset: -6px;
   border: 2px solid var(--accent-1);
   border-radius: 50%;
   animation: pulse-ring 2s infinite;
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 @keyframes pulse-ring {

@@ -64,15 +64,29 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
           animate={{ opacity: 1, scale: 1 }}
         >
           <div className="sr-empty-icon">🎉</div>
-          <h2>Hozircha takrorlanadigan so'z yo'q!</h2>
-          <p>Siz barcha vazifalarni bajardingiz. Keyinroq yana tekshirib ko'ring.</p>
-          <button
-            className="sr-reveal-btn"
-            style={{ marginTop: 'var(--space-md)' }}
-            onClick={() => onComplete({ totalWords: 0, correctCount: 0, incorrectCount: 0 })}
-          >
-            Ortga qaytish
-          </button>
+          <h2>Takrorlash muddati kelgan so'zlar yo'q!</h2>
+          <p style={{ fontSize: 'var(--font-sm)', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: 'var(--space-md)' }}>
+            Spaced Repetition (SM-2) algoritmiga ko'ra bugun barcha so'zlarni o'z vaqtida takrorladingiz. Yangi o'rganilgan so'zlar keyinroq takrorlash uchun avtomatik rejalashtiriladi.
+          </p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', width: '100%', marginTop: 'var(--space-sm)' }}>
+            <button
+              className="sr-reveal-btn"
+              onClick={() => {
+                // Force load all words to review
+                setDueWords(words);
+              }}
+            >
+              🔄 Barchasini baribir takrorlash
+            </button>
+            <button
+              className="btn btn-secondary"
+              style={{ padding: '12px', borderRadius: 'var(--radius-md)', fontWeight: 600 }}
+              onClick={() => onComplete({ totalWords: 0, correctCount: 0, incorrectCount: 0 })}
+            >
+              Ortga qaytish
+            </button>
+          </div>
         </motion.div>
       </div>
     );

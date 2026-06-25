@@ -8,6 +8,7 @@ import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
+import { calculateNextReview } from '../utils/sm2';
 import PracticeHub from '../components/Practice/PracticeHub';
 import Flashcard from '../components/Practice/Flashcard';
 import SpellingGame from '../components/Practice/SpellingGame';
@@ -35,6 +36,15 @@ export default function PracticePage() {
   const [sourceWords, setSourceWords] = useState([]);
   const [sourceLoaded, setSourceLoaded] = useState(false);
   const [wrongWords, setWrongWords] = useState([]);
+  const [customModal, setCustomModal] = useState({ show: false, type: 'alert', message: '', onConfirm: null, onCancel: null });
+
+  const showAlert = (message, onClose = null) => {
+    setCustomModal({ show: true, type: 'alert', message, onConfirm: onClose, onCancel: null });
+  };
+
+  const showConfirm = (message, onConfirm, onCancel = null) => {
+    setCustomModal({ show: true, type: 'confirm', message, onConfirm, onCancel });
+  };
 
   // Reset sourceLoaded when url parameters change
   useEffect(() => {
@@ -65,8 +75,9 @@ export default function PracticePage() {
             });
           }
           if (words.length === 0) {
-            alert("Bu manbada so'zlar yo'q! Avval so'zlar qo'shing.");
-            navigate(urlSourceType === 'books' ? `/books/${urlSourceId}` : `/packs/${urlSourceId}`);
+            showAlert("Bu manbada so'zlar yo'q! Avval so'zlar qo'shing.", () => {
+              navigate(urlSourceType === 'books' ? `/books/${urlSourceId}` : `/packs/${urlSourceId}`);
+            });
             return;
           }
           setSourceWords(words);
@@ -118,7 +129,7 @@ export default function PracticePage() {
     }
 
     if (words.length === 0) {
-      alert("Bu manbada so'zlar yo'q! Avval Kutubxonadan so'zlar qo'shing.");
+      showAlert("Bu manbada so'zlar yo'q! Avval Kutubxonadan so'zlar qo'shing.");
       return;
     }
 
@@ -144,7 +155,7 @@ export default function PracticePage() {
     setWrongWords([]);
     
     if (sourceWords.length === 0) {
-      alert("Bu manbada so'zlar yo'q!");
+      showAlert("Bu manbada so'zlar yo'q!");
       return;
     }
 
@@ -165,11 +176,25 @@ export default function PracticePage() {
     if (!user || !selectedSource) return;
     try {
       const word = sourceWords.find(w => w.id === wordId);
-      const prevWrongCount = word ? (word.wrongCount || 0) : 0;
+      if (!word) return;
+
+      const prevWrongCount = word.wrongCount || 0;
 
       let finalData = { ...data };
       if (typeof data.quality === 'number') {
-        if (data.quality < 4) {
+        const quality = data.quality;
+        const safeSm2Data = calculateNextReview(
+          quality,
+          word.easeFactor || 2.5,
+          word.interval || 0,
+          word.reviewCount || 0,
+          word.lastReviewed,
+          word.nextReview
+        );
+        
+        finalData = { ...finalData, ...safeSm2Data };
+
+        if (quality < 4) {
           finalData.wrongCount = prevWrongCount + 1;
         } else {
           finalData.wrongCount = Math.max(0, prevWrongCount - 1);
@@ -209,9 +234,9 @@ export default function PracticePage() {
 
   const handleBack = () => {
     if (step === 'practice' || step === 'intro') {
-      if (window.confirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.")) {
+      showConfirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.", () => {
         setStep('mode');
-      }
+      });
       return;
     }
 
@@ -242,7 +267,8 @@ export default function PracticePage() {
       words: practiceWords,
       onComplete: handleComplete,
       onUpdateWord: handleUpdateWord,
-      onAnswer: handleAnswer
+      onAnswer: handleAnswer,
+      sourceName: selectedSource?.title || selectedSource?.name || "Kutubxona"
     };
 
     switch (selectedMode) {
@@ -261,13 +287,15 @@ export default function PracticePage() {
 
   return (
     <div className="practice-page">
-      <div className="page-header">
-        <h1>🎮 Mashq {selectedSource && `(${selectedSource.title || selectedSource.name})`}</h1>
-        {(step !== 'source' || urlSourceId) && (
-          <button className="btn btn-ghost" onClick={handleBack}>
-            ← Orqaga
+      <div className="practice-page-header">
+        {(step !== 'source' && step !== 'results' || (urlSourceId && step !== 'results')) && (
+          <button className="clean-back-arrow" onClick={handleBack} title="Orqaga">
+            ←
           </button>
         )}
+        <h1>
+          🎮 Mashq {selectedSource && `(${selectedSource.title || selectedSource.name})`}
+        </h1>
       </div>
 
       {pageLoading ? (
@@ -454,13 +482,14 @@ export default function PracticePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <div className="practice-session-header">
-                <span className="practice-session-title">
-                  {selectedSource && `${selectedSource.title || selectedSource.name}`} — {selectedMode === 'flashcard' ? '🎴 Flashcard' : selectedMode === 'spelling' ? '✍️ Imlo' : selectedMode === 'match' ? '🔀 Juftlik' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🎧 Diktant' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : 'Mashq'}
-                </span>
-                <button className="btn-exit-practice" onClick={handleBack} title="Mashqdan chiqish">
-                  ✕ Chiqish
+              <div className="practice-session-header clean-quiz-header">
+                <button className="clean-back-arrow" onClick={handleBack} title="Mashqdan chiqish">
+                  ←
                 </button>
+                <h1 className="clean-quiz-title">
+                  {selectedMode === 'flashcard' ? '🎴 Flashcard' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🎧 Diktant' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : 'Mashq'}
+                </h1>
+                <div style={{ width: '40px', opacity: 0 }}></div> {/* spacer to center title */}
               </div>
               <div className="practice-session-content">
                 {renderPracticeMode()}
@@ -541,6 +570,51 @@ export default function PracticePage() {
             </motion.div>
           )}
         </AnimatePresence>
+      )}
+      {customModal.show && (
+        <div className="custom-alert-overlay">
+          <div className="custom-alert-card">
+            <div className="custom-alert-icon">
+              {customModal.type === 'confirm' ? '❓' : '⚠️'}
+            </div>
+            <p className="custom-alert-message">{customModal.message}</p>
+            
+            {customModal.type === 'confirm' ? (
+              <div className="custom-alert-actions" style={{ display: 'flex', gap: 'var(--space-sm)', width: '100%' }}>
+                <button 
+                  className="btn btn-secondary" 
+                  style={{ flex: 1, padding: '12px' }}
+                  onClick={() => {
+                    setCustomModal(prev => ({ ...prev, show: false }));
+                    if (customModal.onCancel) customModal.onCancel();
+                  }}
+                >
+                  Yo'q
+                </button>
+                <button 
+                  className="btn btn-primary" 
+                  style={{ flex: 1, padding: '12px' }}
+                  onClick={() => {
+                    setCustomModal(prev => ({ ...prev, show: false }));
+                    if (customModal.onConfirm) customModal.onConfirm();
+                  }}
+                >
+                  Ha
+                </button>
+              </div>
+            ) : (
+              <button 
+                className="btn btn-primary custom-alert-btn" 
+                onClick={() => {
+                  setCustomModal(prev => ({ ...prev, show: false }));
+                  if (customModal.onConfirm) customModal.onConfirm();
+                }}
+              >
+                Tushunarli
+              </button>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

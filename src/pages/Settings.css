@@ -147,16 +147,32 @@
 
 /* Specific Preview Theme Colors */
 .theme-preview-box[data-preview-theme="ios"] {
-  background: #09090e;
+  background: #fafafa;
+  border-color: rgba(0, 0, 0, 0.1);
 }
-.theme-preview-box[data-preview-theme="ios"] .preview-chip.chip-1 { background: #007aff; }
-.theme-preview-box[data-preview-theme="ios"] .preview-chip.chip-2 { background: #34c759; }
+.theme-preview-box[data-preview-theme="ios"] .preview-nav {
+  background: rgba(0, 0, 0, 0.08);
+}
+.theme-preview-box[data-preview-theme="ios"] .preview-line-long,
+.theme-preview-box[data-preview-theme="ios"] .preview-line-short {
+  background: rgba(0, 0, 0, 0.12);
+}
+.theme-preview-box[data-preview-theme="ios"] .preview-chip.chip-1 { background: #00a2e8; }
+.theme-preview-box[data-preview-theme="ios"] .preview-chip.chip-2 { background: #22c55e; }
 
 .theme-preview-box[data-preview-theme="android"] {
-  background: #141118;
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.1);
 }
-.theme-preview-box[data-preview-theme="android"] .preview-chip.chip-1 { background: #d0bcff; }
-.theme-preview-box[data-preview-theme="android"] .preview-chip.chip-2 { background: #a8efe0; }
+.theme-preview-box[data-preview-theme="android"] .preview-nav {
+  background: rgba(255, 255, 255, 0.08);
+}
+.theme-preview-box[data-preview-theme="android"] .preview-line-long,
+.theme-preview-box[data-preview-theme="android"] .preview-line-short {
+  background: rgba(255, 255, 255, 0.12);
+}
+.theme-preview-box[data-preview-theme="android"] .preview-chip.chip-1 { background: #3b82f6; }
+.theme-preview-box[data-preview-theme="android"] .preview-chip.chip-2 { background: #10b981; }
 
 .theme-info {
   display: flex;

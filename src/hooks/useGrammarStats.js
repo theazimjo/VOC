@@ -132,16 +132,12 @@ export function useGrammarStats() {
         topicTimesCompleted = (currentVal.timesCompleted || 0) + 1;
       }
 
-      const topicData = {
-        level,
-        topicTitle,
-        bestScore: overallBestScore,
-        totalQuestions: overallTotalQuestions,
-        completedAt,
-        timesCompleted: topicTimesCompleted,
-      };
-
-      await set(topicRef, topicData);
+      await set(ref(db, `users/${user.uid}/grammar/topics/${topicId}/level`), level);
+      await set(ref(db, `users/${user.uid}/grammar/topics/${topicId}/topicTitle`), topicTitle);
+      await set(ref(db, `users/${user.uid}/grammar/topics/${topicId}/bestScore`), overallBestScore);
+      await set(ref(db, `users/${user.uid}/grammar/topics/${topicId}/totalQuestions`), overallTotalQuestions);
+      await set(ref(db, `users/${user.uid}/grammar/topics/${topicId}/completedAt`), completedAt);
+      await set(ref(db, `users/${user.uid}/grammar/topics/${topicId}/timesCompleted`), topicTimesCompleted);
     },
     [user]
   );

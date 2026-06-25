@@ -11,39 +11,92 @@
  * 5 - Perfect response
  */
 
-export function calculateNextReview(quality, previousEaseFactor, previousInterval, reviewCount) {
+export function calculateNextReview(quality, previousEaseFactorOrWord, previousInterval, reviewCount, lastReviewed, nextReview) {
+  let easeFactor = 2.5;
+  let interval = 0;
+  let revCount = 0;
+  let lastRev = null;
+  let nextRev = null;
+
+  if (typeof previousEaseFactorOrWord === 'object' && previousEaseFactorOrWord !== null) {
+    const word = previousEaseFactorOrWord;
+    easeFactor = word.easeFactor ?? 2.5;
+    interval = word.interval ?? 0;
+    revCount = word.reviewCount ?? 0;
+    lastRev = word.lastReviewed ?? null;
+    nextRev = word.nextReview ?? null;
+  } else {
+    easeFactor = previousEaseFactorOrWord ?? 2.5;
+    interval = previousInterval ?? 0;
+    revCount = reviewCount ?? 0;
+    lastRev = lastReviewed ?? null;
+    nextRev = nextReview ?? null;
+  }
+
   // Ensure quality is in range 0-5
   quality = Math.max(0, Math.min(5, Math.round(quality)));
 
-  let newEaseFactor = previousEaseFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+  const now = new Date();
   
-  // Minimum ease factor is 1.3
-  if (newEaseFactor < 1.3) newEaseFactor = 1.3;
+  // Same day check: check if lastRev is today (in local timezone)
+  const isSameDay = lastRev && new Date(lastRev).toDateString() === now.toDateString();
+  
+  // Due check: due if nextReview is null/missing or <= now
+  const isDue = !nextRev || new Date(nextRev) <= now;
+  const isEarly = !isDue;
 
-  let newInterval;
-  
+  let newEaseFactor = easeFactor;
+  let newInterval = interval;
+  let newReviewCount = revCount;
+  let nextReviewStr = nextRev;
+
   if (quality < 3) {
-    // Failed - reset interval
+    // Failed - reset interval and review count
     newInterval = 1;
+    newReviewCount = 0;
+    newEaseFactor = easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+    if (newEaseFactor < 1.3) newEaseFactor = 1.3;
+    
+    const nextReviewDate = new Date(now.getTime() + newInterval * 24 * 60 * 60 * 1000);
+    nextReviewStr = nextReviewDate.toISOString();
   } else {
-    if (reviewCount === 0) {
-      newInterval = 1;
-    } else if (reviewCount === 1) {
-      newInterval = 6;
+    if (isSameDay) {
+      // Same day correct review: do not change anything except lastReviewed
+      // Keep nextReviewStr as is
+    } else if (isEarly) {
+      // Early correct review: do not increase interval or reviewCount
+      // Keep nextReviewStr as is
     } else {
-      newInterval = Math.round(previousInterval * newEaseFactor);
+      // Normal due review
+      newEaseFactor = easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+      if (newEaseFactor < 1.3) newEaseFactor = 1.3;
+
+      if (revCount === 0) {
+        newInterval = 1;
+      } else if (revCount === 1) {
+        newInterval = 6;
+      } else {
+        newInterval = Math.round(interval * newEaseFactor);
+      }
+      newReviewCount = revCount + 1;
+      
+      const nextReviewDate = new Date(now.getTime() + newInterval * 24 * 60 * 60 * 1000);
+      nextReviewStr = nextReviewDate.toISOString();
     }
   }
 
-  const now = new Date();
-  const nextReview = new Date(now.getTime() + newInterval * 24 * 60 * 60 * 1000);
+  // If nextReviewStr is still null, set it
+  if (!nextReviewStr) {
+    const nextReviewDate = new Date(now.getTime() + newInterval * 24 * 60 * 60 * 1000);
+    nextReviewStr = nextReviewDate.toISOString();
+  }
 
   return {
     easeFactor: Math.round(newEaseFactor * 100) / 100,
     interval: newInterval,
-    nextReview: nextReview.toISOString(),
-    reviewCount: quality < 3 ? 0 : reviewCount + 1,
-    mastery: calculateMastery(quality, reviewCount, newEaseFactor),
+    nextReview: nextReviewStr,
+    reviewCount: newReviewCount,
+    mastery: calculateMastery(quality, newReviewCount, newEaseFactor),
     lastReviewed: now.toISOString(),
     quality
   };

@@ -28,7 +28,7 @@ function PosBadge({ pos }) {
   );
 }
 
-export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer }) {
+export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, sourceName }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
@@ -84,14 +84,19 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer })
 
   if (!currentWord) return null;
 
+  const progressPct = words.length > 0 ? (currentIndex / words.length) * 100 : 0;
+
   return (
-    <div className="flashcard-container">
-      {/* Progress */}
-      <div className="flashcard-progress-track">
-        <div className="flashcard-progress-fill" style={{ width: `${(currentIndex / words.length) * 100}%` }} />
+    <div className="flashcard-container clean-theme">
+      {/* Subtle Progress Bar */}
+      <div className="topic-progress-track clean-track">
+        <div
+          className="topic-progress-fill"
+          style={{ width: `${progressPct}%` }}
+        />
       </div>
-      <div className="flashcard-progress">
-        <span><span className="flashcard-progress-num">{currentIndex + 1}</span> / {words.length}</span>
+      <div className="flashcard-progress" style={{ width: '100%', textAlign: 'right', marginTop: '-8px', marginBottom: '8px', fontSize: 'var(--font-sm)', color: 'var(--text-secondary)', fontWeight: 600 }}>
+        <span>{currentIndex + 1} / {words.length}</span>
       </div>
 
       {/* Card scene */}
@@ -144,7 +149,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer })
           <span className="rating-label">Qiyin</span>
         </button>
         <button className="flashcard-rating-btn good" onClick={() => handleRate('good')}>
-          <span className="rating-label">Bilaman</span>
+          <span className="rating-label">Yaxshi</span>
         </button>
         <button className="flashcard-rating-btn easy" onClick={() => handleRate('easy')}>
           <span className="rating-label">Oson</span>

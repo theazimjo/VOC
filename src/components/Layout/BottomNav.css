@@ -41,7 +41,7 @@
 }
 
 .bottom-nav-link.active {
-  color: white;
+  color: var(--accent-1);
   position: relative;
 }
 

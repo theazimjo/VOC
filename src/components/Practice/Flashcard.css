@@ -39,7 +39,7 @@
 /* ─── Scene ─── */
 .flashcard-scene {
   width: 100%;
-  height: 320px;
+  height: 350px;
   perspective: 1200px;
   cursor: pointer;
 }
@@ -63,49 +63,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-2xl);
+  padding: var(--space-md) var(--space-lg);
   text-align: center;
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
-  border: 2px solid var(--border);
-  overflow: hidden;
-}
-.flashcard-face::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% -20%, rgba(255,255,255,0.04), transparent 60%);
-  pointer-events: none;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  overflow-y: auto; /* Scroll if content overflows */
 }
 
 .flashcard-front {
-  background: var(--bg-glass-strong);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--bg-secondary);
 }
 
 .flashcard-back {
-  background: linear-gradient(145deg, hsl(175, 30%, 14%), hsl(200, 25%, 12%));
-  border-color: hsla(175, 75%, 45%, 0.3);
+  background: var(--bg-secondary);
   transform: rotateY(180deg);
 }
 
 /* ─── Card content ─── */
 .flashcard-word {
-  font-size: 3.2rem;
+  font-size: 2.3rem;
   font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1.15;
+  color: var(--text-primary);
+  line-height: 1.2;
   margin-bottom: var(--space-md);
 }
 
 .flashcard-translation {
-  font-size: 2.6rem;
-  font-weight: 800;
+  font-size: 1.9rem;
+  font-weight: 850;
   color: var(--success);
-  text-shadow: 0 0 30px hsla(145, 65%, 45%, 0.4);
   margin-bottom: var(--space-md);
 }
 
@@ -118,12 +105,12 @@
 }
 
 .flashcard-example {
-  font-size: var(--font-md);
+  font-size: var(--font-sm);
   font-style: italic;
   color: var(--text-secondary);
   max-width: 380px;
   line-height: 1.5;
-  background: rgba(255,255,255,0.03);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-md);
@@ -138,7 +125,7 @@
   gap: 6px;
 }
 .flashcard-hint-key {
-  background: rgba(255,255,255,0.06);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1px 6px;
@@ -151,25 +138,24 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  background: rgba(255,255,255,0.06);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: all var(--transition-fast);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
   z-index: 10;
 }
 .btn-speak-card:hover {
   background: var(--bg-glass-hover);
-  border-color: var(--accent-2);
-  transform: scale(1.12);
-  box-shadow: 0 0 14px hsla(200, 90%, 55%, 0.25);
+  border-color: var(--accent-1);
+  transform: scale(1.08);
 }
 
 /* ─── Rating Buttons ─── */
@@ -192,76 +178,70 @@
   align-items: center;
   gap: 4px;
   padding: var(--space-md) var(--space-sm);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   font-family: var(--font-family);
   font-weight: 700;
   font-size: var(--font-sm);
   cursor: pointer;
-  transition: all 0.2s ease;
-  border: 2px solid transparent;
+  transition: all var(--transition-base);
+  border: 1px solid var(--border);
 }
-.flashcard-rating-btn .rating-emoji { font-size: 1.4rem; line-height: 1; }
-.flashcard-rating-btn .rating-label { font-size: var(--font-xs); opacity: 0.85; }
+.flashcard-rating-btn .rating-label { font-size: var(--font-xs); }
 
 .flashcard-rating-btn.again {
-  background: var(--error-dim);
+  background: var(--bg-secondary);
   color: var(--error);
   border-color: var(--error);
 }
 .flashcard-rating-btn.again:hover {
   background: var(--error);
   color: white;
-  box-shadow: 0 6px 20px hsla(355, 70%, 55%, 0.35);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .flashcard-rating-btn.hard {
-  background: var(--warning-dim);
+  background: var(--bg-secondary);
   color: var(--warning);
   border-color: var(--warning);
 }
 .flashcard-rating-btn.hard:hover {
   background: var(--warning);
   color: white;
-  box-shadow: 0 6px 20px hsla(38, 90%, 55%, 0.35);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .flashcard-rating-btn.good {
-  background: var(--success-dim);
+  background: var(--bg-secondary);
   color: var(--success);
   border-color: var(--success);
 }
 .flashcard-rating-btn.good:hover {
   background: var(--success);
   color: white;
-  box-shadow: 0 6px 20px hsla(145, 65%, 45%, 0.35);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .flashcard-rating-btn.easy {
-  background: hsla(200, 90%, 55%, 0.12);
-  color: hsl(200, 90%, 65%);
-  border-color: hsl(200, 90%, 55%);
+  background: var(--bg-secondary);
+  color: var(--accent-1);
+  border-color: var(--accent-1);
 }
 .flashcard-rating-btn.easy:hover {
-  background: hsl(200, 90%, 55%);
+  background: var(--accent-1);
   color: white;
-  box-shadow: 0 6px 20px hsla(200, 90%, 55%, 0.35);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
-
 /* ─── Responsive ─── */
 @media (max-width: 600px) {
-  .flashcard-scene { height: 250px; }
-  .flashcard-face { padding: var(--space-lg) var(--space-md); }
-  .flashcard-word { font-size: 2.2rem; }
-  .flashcard-translation { font-size: 2rem; }
+  .flashcard-scene { height: 290px; }
+  .flashcard-face { padding: var(--space-md) var(--space-sm); }
+  .flashcard-word { font-size: 1.8rem; }
+  .flashcard-translation { font-size: 1.5rem; }
   .flashcard-actions { gap: var(--space-sm); }
   .flashcard-rating-btn { padding: var(--space-sm) var(--space-xs); font-size: var(--font-xs); }
-  .flashcard-rating-btn .rating-emoji { font-size: 1.1rem; }
   .btn-speak-card { width: 36px; height: 36px; top: 12px; right: 12px; font-size: 0.9rem; }
 }
+
 
 /* ─── Part of Speech Badge ─── */
 .fc-pos-badge {

@@ -55,40 +55,40 @@ html[data-font-size="large"] {
 }
 
 :root {
-  /* Default = iOS */
-  --bg-primary: hsl(220, 14%, 6%);
-  --bg-secondary: hsl(220, 12%, 11%);
-  --bg-tertiary: hsl(220, 10%, 16%);
-  --bg-glass: rgba(22, 22, 28, 0.6);
-  --bg-glass-hover: rgba(30, 30, 38, 0.7);
-  --bg-glass-strong: rgba(22, 22, 28, 0.85);
+  /* Default = iOS (Palitra A - Duolingo Uslubi - Light Mode) */
+  --bg-primary: hsl(0, 0%, 98%);
+  --bg-secondary: hsl(0, 0%, 100%);
+  --bg-tertiary: hsl(210, 20%, 96%);
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-hover: rgba(240, 240, 250, 0.85);
+  --bg-glass-strong: rgba(255, 255, 255, 0.95);
 
-  --accent-1: hsl(210, 100%, 52%);
-  --accent-1-dim: rgba(59, 130, 246, 0.15);
-  --accent-2: hsl(120, 100%, 40%);
-  --accent-2-dim: rgba(34, 197, 94, 0.15);
-  --accent-3: hsl(35, 100%, 50%);
-  --accent-3-dim: rgba(249, 115, 22, 0.15);
+  --accent-1: hsl(195, 100%, 42%);      /* Havorang (Light Blue) */
+  --accent-1-dim: rgba(0, 162, 232, 0.08);
+  --accent-2: hsl(142, 70%, 45%);       /* Och yashil (Light Green) */
+  --accent-2-dim: rgba(34, 197, 94, 0.08);
+  --accent-3: hsl(30, 100%, 50%);        /* To'q sariq (Orange) */
+  --accent-3-dim: rgba(249, 115, 22, 0.08);
   --accent-gradient: var(--accent-1);
   --accent-gradient-2: var(--accent-2);
   --accent-gradient-3: var(--accent-1);
 
-  --text-primary: hsl(220, 15%, 96%);
-  --text-secondary: hsl(220, 10%, 75%);
-  --text-muted: hsl(220, 8%, 55%);
+  --text-primary: hsl(220, 15%, 15%);    /* Dark gray text */
+  --text-secondary: hsl(220, 10%, 40%);  /* Medium gray text */
+  --text-muted: hsl(220, 8%, 60%);       /* Muted gray text */
 
-  --success: hsl(120, 90%, 45%);
-  --success-dim: rgba(34, 197, 94, 0.15);
+  --success: hsl(142, 70%, 45%);
+  --success-dim: rgba(34, 197, 94, 0.08);
   --error: hsl(354, 90%, 55%);
-  --error-dim: rgba(239, 68, 68, 0.15);
-  --warning: hsl(35, 90%, 50%);
-  --warning-dim: rgba(249, 115, 22, 0.15);
+  --error-dim: rgba(239, 68, 68, 0.08);
+  --warning: hsl(30, 100%, 50%);
+  --warning-dim: rgba(249, 115, 22, 0.08);
 
-  --border: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.04);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.55);
-  --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.1);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.04);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.07);
+  --shadow-glow: 0 2px 8px rgba(0, 0, 0, 0.03);
 
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -125,47 +125,62 @@ html[data-font-size="large"] {
   --navbar-height: 64px;
 }
 
-/* iOS theme (explicit selector) */
+/* iOS theme (explicit selector) -> Palitra A (Duolingo Style - Light Mode) */
 [data-theme="ios"] {
-  --bg-primary: hsl(220, 14%, 6%);
-  --bg-secondary: hsl(220, 12%, 11%);
-  --bg-tertiary: hsl(220, 10%, 16%);
-  --bg-glass: rgba(22, 22, 28, 0.6);
-  --bg-glass-hover: rgba(30, 30, 38, 0.7);
-  --bg-glass-strong: rgba(22, 22, 28, 0.85);
-  --accent-1: hsl(210, 100%, 52%);
-  --accent-2: hsl(120, 100%, 40%);
-  --accent-3: hsl(35, 100%, 50%);
+  --bg-primary: hsl(0, 0%, 98%);
+  --bg-secondary: hsl(0, 0%, 100%);
+  --bg-tertiary: hsl(210, 20%, 96%);
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-hover: rgba(240, 240, 250, 0.85);
+  --bg-glass-strong: rgba(255, 255, 255, 0.95);
+  --accent-1: hsl(195, 100%, 42%);      /* Havorang */
+  --accent-2: hsl(142, 70%, 45%);       /* Och yashil */
+  --accent-3: hsl(30, 100%, 50%);        /* To'q sariq */
+  --accent-1-dim: rgba(0, 162, 232, 0.08);
+  --accent-2-dim: rgba(34, 197, 94, 0.08);
+  --accent-3-dim: rgba(249, 115, 22, 0.08);
+  --text-primary: hsl(220, 15%, 15%);
+  --text-secondary: hsl(220, 10%, 40%);
+  --text-muted: hsl(220, 8%, 60%);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.04);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.07);
+  --shadow-glow: 0 2px 8px rgba(0, 0, 0, 0.03);
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-xl: 28px;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.04);
 }
 
-/* Android theme */
+/* Android theme -> Palitra B (Akademik Uslub - Navy Blue Dark Mode) */
 [data-theme="android"] {
-  --bg-primary: hsl(260, 10%, 8%);
-  --bg-secondary: hsl(260, 8%, 13%);
-  --bg-tertiary: hsl(260, 6%, 18%);
-  --bg-glass: rgba(30, 26, 36, 0.7);
-  --bg-glass-hover: rgba(42, 38, 50, 0.8);
-  --bg-glass-strong: rgba(30, 26, 36, 0.9);
-  --accent-1: hsl(262, 60%, 75%); /* Pastel Lavender */
-  --accent-2: hsl(160, 40%, 65%); /* Pastel Mint */
-  --accent-3: hsl(30, 65%, 70%);  /* Pastel Orange */
-  --accent-gradient: var(--accent-1);
-  --accent-gradient-2: var(--accent-2);
-  --accent-gradient-3: var(--accent-1);
+  --bg-primary: hsl(222, 47%, 11%);       /* To'q ko'k / Navy Blue */
+  --bg-secondary: hsl(222, 40%, 15%);     /* Och kulrang fon vazifasida / Slate */
+  --bg-tertiary: hsl(222, 35%, 20%);
+  --bg-glass: rgba(15, 23, 42, 0.65);
+  --bg-glass-hover: rgba(30, 41, 59, 0.75);
+  --bg-glass-strong: rgba(15, 23, 42, 0.85);
+  --accent-1: hsl(215, 100%, 55%);
+  --accent-2: hsl(160, 84%, 39%);        /* Zümrüd yashili */
+  --accent-3: hsl(38, 92%, 50%);         /* Amber/Gold */
+  --accent-1-dim: rgba(59, 130, 246, 0.15);
+  --accent-2-dim: rgba(16, 185, 129, 0.15);
+  --accent-3-dim: rgba(245, 158, 11, 0.15);
+  --text-primary: hsl(210, 40%, 98%);
+  --text-secondary: hsl(215, 25%, 80%);
+  --text-muted: hsl(215, 15%, 60%);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.04);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 4px 12px rgba(0, 0, 0, 0.15);
   --font-family: 'Nunito', 'Google Sans', sans-serif;
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
-  --border: rgba(255, 255, 255, 0.06);
-  --border-light: rgba(255, 255, 255, 0.03);
 }
 
 
@@ -871,11 +886,6 @@ a:hover {
   75% { transform: translateX(8px); }
 }
 
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px hsla(175, 75%, 45%, 0.2); }
-  50% { box-shadow: 0 0 40px hsla(175, 75%, 45%, 0.4); }
-}
-
 .animate-fade-in {
   animation: fadeIn 0.4s ease forwards;
 }
@@ -888,18 +898,9 @@ a:hover {
   animation: float 3s ease-in-out infinite;
 }
 
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
 /* ========== THEME SPECIFIC SHAPES & BRANDING ========== */
 
-
-
-/* 6. ANDROID MATERIAL SHAPES */
-[data-theme="android"] body {
-  background: radial-gradient(circle at 50% 50%, #15121a 0%, #0a080d 100%);
-}
+/* 6. ANDROID MATERIAL SHAPES (Academic Navy Blue) */
 [data-theme="android"] .sidebar,
 [data-theme="android"] .navbar,
 [data-theme="android"] .card,
@@ -913,17 +914,17 @@ a:hover {
 [data-theme="android"] .login-card,
 [data-theme="android"] .register-card {
   border-radius: var(--radius-xl) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
-  background: rgba(30, 26, 36, 0.85) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  background: var(--bg-glass-strong) !important;
 }
 [data-theme="android"] .btn {
   border-radius: var(--radius-full) !important;
   font-weight: 700 !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid var(--border) !important;
 }
 
-/* 7. iOS SHAPES */
+/* 7. iOS SHAPES (Duolingo Style - Light Mode) */
 [data-theme="ios"] .sidebar,
 [data-theme="ios"] .navbar,
 [data-theme="ios"] .card,
@@ -936,37 +937,25 @@ a:hover {
 [data-theme="ios"] .practice-session-header,
 [data-theme="ios"] .login-card,
 [data-theme="ios"] .register-card {
-  backdrop-filter: blur(40px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
   border-radius: 20px !important;
-  background: rgba(15, 15, 20, 0.45) !important; /* Premium clear glass */
+  background: var(--bg-glass-strong) !important;
 }
 [data-theme="ios"] .btn {
   border-radius: 12px !important;
 }
 [data-theme="ios"] .btn-primary {
-  background: rgba(255, 255, 255, 0.08) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  color: #fff !important;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  background: var(--accent-2) !important; /* Light green primary button */
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2) !important;
 }
-[data-theme="ios"] .btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, hsl(210, 100%, 52%), hsl(35, 100%, 50%));
-  opacity: 0.2; /* 20% opacity gradient */
-  z-index: -1;
-  transition: opacity var(--transition-base);
-}
-[data-theme="ios"] .btn-primary:hover::before {
-  opacity: 0.35; /* Subtle glow raise on hover */
+[data-theme="ios"] .btn-primary:hover {
+  background: hsl(142, 70%, 40%) !important;
+  box-shadow: 0 6px 16px rgba(34, 197, 94, 0.3) !important;
 }
 
 

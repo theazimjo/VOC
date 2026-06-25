@@ -134,30 +134,12 @@ export default function LearningPath({ words, completedLessons = {}, onSelectLes
                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
               </filter>
             </defs>
-            {/* Outer glowing path */}
+            {/* Clean dashed connection path */}
             <path
               d={generatePathD()}
               fill="none"
               stroke="url(#path-grad)"
-              strokeWidth="12"
-              strokeLinecap="round"
-              filter="url(#glow)"
-              style={{ opacity: 0.4 }}
-            />
-            {/* Dark contrast separator */}
-            <path
-              d={generatePathD()}
-              fill="none"
-              stroke="var(--bg-primary)"
-              strokeWidth="14"
-              strokeLinecap="round"
-            />
-            {/* Dashed core path */}
-            <path
-              d={generatePathD()}
-              fill="none"
-              stroke="url(#path-grad)"
-              strokeWidth="4"
+              strokeWidth="6"
               strokeLinecap="round"
               strokeDasharray="8,8"
             />

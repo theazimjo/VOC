@@ -56,7 +56,7 @@ export default function GrammarPage() {
     }
   });
 
-  const totalExercisesOfLevel = topics.length * 8;
+  const totalExercisesOfLevel = topics.length * 6;
 
   const averageAccuracy = completedTopicsOfLevel.length > 0
     ? Math.round(
@@ -202,11 +202,11 @@ export default function GrammarPage() {
                   </div>
                   <div className="topic-card-meta">
                     <span className="topic-badge topic-badge-questions">
-                      📚 8 ta mashq
+                      📚 6 ta mashq
                     </span>
                     {completedExCount > 0 ? (
                       <span className="topic-badge topic-badge-completed">
-                        ✅ {completedExCount} / 8 yechildi
+                        ✅ {completedExCount} / 6 yechildi
                       </span>
                     ) : (
                       <span className="topic-badge topic-badge-todo">
