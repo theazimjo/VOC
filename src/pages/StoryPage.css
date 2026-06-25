@@ -54,15 +54,39 @@
   to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* Tabs switcher */
-.stories-tabs-wrapper {
-  margin: var(--space-md) 0 var(--space-lg);
+/* ── Compact top row: title + tabs ──────────────── */
+
+.stories-top-row {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-sm);
+}
+
+.stories-page-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.stories-top-row .stories-tabs-wrapper {
+  flex: 1;
+  margin: 0;
+}
+
+/* ── Tab Switcher ─────────────────────────────── */
+
+.stories-tabs-wrapper {
+  margin: var(--space-sm) 0 0;
+  display: flex;
 }
 
 .stories-tabs {
   display: flex;
+  width: 100%;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -71,26 +95,134 @@
 }
 
 .story-tab-btn {
+  flex: 1;
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  padding: 10px 20px;
+  padding: 10px 12px;
   border-radius: 10px;
   font-family: var(--font-family);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .story-tab-btn.active {
-  background: var(--bg-glass-strong);
-  color: var(--accent-1);
-  box-shadow: var(--shadow-sm);
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
 }
 
 .story-tab-btn:hover:not(.active) {
   color: var(--text-primary);
+  background: var(--bg-glass);
+}
+
+/* ── Difficulty Filter Row ────────────────────── */
+.stories-filter-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 8px;
+  margin: var(--space-sm) 0 var(--space-md);
+  padding-bottom: 4px;
+  /* hide scrollbar but allow scroll */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.stories-filter-row::-webkit-scrollbar { display: none; }
+
+.story-filter-btn {
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-family: var(--font-family);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.story-filter-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-1);
+  background: var(--bg-glass);
+}
+
+.story-filter-btn.active {
+  background: var(--accent-gradient) !important;
+  color: white !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+}
+
+/* O'qilgan (Read) Badge & Styles */
+.story-card-read-badge {
+  font-size: 0.7rem;
+  font-weight: 750;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.story-card--read {
+  opacity: 0.85;
+}
+
+.story-card--read::before {
+  opacity: 0.4; /* dim down the glow border */
+}
+
+/* Empty State */
+.stories-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-top: var(--space-lg);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+  animation: float-icon 3s ease-in-out infinite;
+}
+
+.stories-empty-state h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.stories-empty-state p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 320px;
+}
+
+@keyframes float-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 /* Stories Grid */
