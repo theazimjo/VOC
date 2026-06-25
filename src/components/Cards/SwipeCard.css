@@ -172,7 +172,7 @@
 .sc-front {
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-lg), 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .sc-front--muted {
@@ -181,9 +181,9 @@
 }
 
 .sc-back {
-  background: linear-gradient(135deg, hsl(250, 60%, 18%), hsl(220, 60%, 14%));
-  border: 1px solid rgba(124, 58, 237, 0.4);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 40px rgba(124, 58, 237, 0.15);
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent-1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.08);
   transform: rotateY(180deg);
 }
 
@@ -255,21 +255,21 @@
 .sc-translation {
   font-size: 2.6rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-primary);
   text-align: center;
   line-height: 1.1;
 }
 
 .sc-def {
   font-size: var(--font-sm);
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--text-secondary);
   text-align: center;
   line-height: 1.5;
 }
 
 .sc-example {
   font-size: var(--font-sm);
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   font-style: italic;
   text-align: center;
   line-height: 1.4;

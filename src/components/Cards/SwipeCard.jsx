@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
 import { speakWord } from '../../utils/helpers';
+import { playSound, triggerVibration } from '../../utils/feedback';
 import './SwipeCard.css';
 
 const SWIPE_THRESHOLD = 90;
@@ -129,6 +130,11 @@ export default function SwipeCard({ words, onComplete }) {
   const handleSwipe = useCallback((dir, motionX) => {
     if (exiting || !currentWord) return;
     setExiting(true);
+
+    // Audio and haptics feedback
+    const isCorrect = dir === 'right';
+    playSound(isCorrect ? 'correct' : 'wrong');
+    triggerVibration(isCorrect ? 'correct' : 'wrong');
 
     const targetX = dir === 'right' ? 1000 : -1000;
     if (motionX) {

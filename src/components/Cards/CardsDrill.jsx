@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { shuffleArray, speakWord } from '../../utils/helpers';
+import { playSound, triggerVibration } from '../../utils/feedback';
 import './CardsDrill.css';
 
 export default function CardsDrill({ words, allWords, onComplete }) {
@@ -193,6 +194,8 @@ export default function CardsDrill({ words, allWords, onComplete }) {
   const handleAnswerCorrect = () => {
     setStatus('correct');
     speakWord(current.word);
+    playSound('correct');
+    triggerVibration('correct');
     
     const newStreak = isCorrectFirstTry ? streak + 1 : streak;
     setStreak(newStreak);
@@ -209,6 +212,8 @@ export default function CardsDrill({ words, allWords, onComplete }) {
     setStatus('wrong');
     setIsCorrectFirstTry(false);
     setStreak(0); // Break streak
+    playSound('wrong');
+    triggerVibration('wrong');
 
     // Play buzz sound or shake
     setTimeout(() => {

@@ -130,6 +130,14 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
                 </Link>
 
                 <Link
+                  to="/stats"
+                  className="navbar-dropdown-item"
+                  onClick={() => setDropdownOpen(false)}
+                >
+                  <span>📈</span> Statistika
+                </Link>
+
+                <Link
                   to="/settings"
                   className="navbar-dropdown-item"
                   onClick={() => setDropdownOpen(false)}

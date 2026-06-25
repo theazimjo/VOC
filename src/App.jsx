@@ -18,6 +18,7 @@ import Settings from './pages/Settings';
 import GrammarPage from './pages/GrammarPage';
 import GrammarTopic from './pages/GrammarTopic';
 import GrammarExercises from './pages/GrammarExercises';
+import StoryPage from './pages/StoryPage';
 
 export default function App() {
   return (
@@ -42,6 +43,8 @@ export default function App() {
                 <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />
                 <Route path="/mixed-practice" element={<MixedPractice />} />
                 <Route path="/cards/:sourceType/:sourceId" element={<CardsMode />} />
+                <Route path="/stories" element={<StoryPage />} />
+                <Route path="/stories/:storyId" element={<StoryPage />} />
                 <Route path="/stats" element={<StatsPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<Settings />} />

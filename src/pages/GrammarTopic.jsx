@@ -1,15 +1,113 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { getQuestionsForExercise, getExerciseType } from '../utils/grammarHelpers';
 import './GrammarTopic.css';
 
+// ─── AUDIO + HAPTIC HELPERS ─────────────────────────────────────────────────
+function playCorrectSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const t = ctx.currentTime;
+    // Two-tone chime: C5 → E5
+    [523.25, 659.25].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, t + i * 0.12);
+      gain.gain.setValueAtTime(0, t + i * 0.12);
+      gain.gain.linearRampToValueAtTime(0.3, t + i * 0.12 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + i * 0.12 + 0.35);
+      osc.start(t + i * 0.12);
+      osc.stop(t + i * 0.12 + 0.35);
+    });
+    setTimeout(() => ctx.close(), 800);
+  } catch (_) {}
+}
+
+function playWrongSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const t = ctx.currentTime;
+    // Low buzzing dip
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(200, t);
+    osc.frequency.linearRampToValueAtTime(120, t + 0.25);
+    gain.gain.setValueAtTime(0.25, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+    osc.start(t); osc.stop(t + 0.3);
+    setTimeout(() => ctx.close(), 600);
+  } catch (_) {}
+}
+
+function playFinishedSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const t = ctx.currentTime;
+    // Uplifting arpeggio: C4 -> E4 -> G4 -> C5
+    [261.63, 329.63, 392.00, 523.25].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, t + i * 0.1);
+      gain.gain.setValueAtTime(0, t + i * 0.1);
+      gain.gain.linearRampToValueAtTime(0.25, t + i * 0.1 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + i * 0.1 + 0.4);
+      osc.start(t + i * 0.1);
+      osc.stop(t + i * 0.1 + 0.45);
+    });
+    setTimeout(() => ctx.close(), 1200);
+  } catch (_) {}
+}
+
+function vibrate(pattern) {
+  if (navigator.vibrate) navigator.vibrate(pattern);
+}
+
+// ─── EXIT CONFIRM MODAL ──────────────────────────────────────────────────────
+function ExitModal({ onConfirm, onCancel }) {
+  return (
+    <div className="gt-exit-overlay" onClick={onCancel}>
+      <div className="gt-exit-modal" onClick={e => e.stopPropagation()}>
+        <div className="gt-exit-icon">🚪</div>
+        <h2 className="gt-exit-title">Chiqib ketasizmi?</h2>
+        <p className="gt-exit-desc">
+          Mashq tugallanmadi. Natijalar saqlanmaydi.
+        </p>
+        <div className="gt-exit-actions">
+          <button className="gt-exit-btn confirm" onClick={onConfirm}>
+            Ha, chiqish
+          </button>
+          <button className="gt-exit-btn cancel" onClick={onCancel}>
+            Davom etish
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── SCRAMBLED SENTENCE EXERCISE ────────────────────────────────────────────
 function ScrambledExercise({ question, answered, onAnswer }) {
   const [selected, setSelected] = useState([]);
-  const [shuffledWords] = useState(() => [...question.words].sort(() => Math.random() - 0.5));
   const [isCorrect, setIsCorrect] = useState(null);
+
+  // Generate words from the correct answer to guarantee that all words are present
+  // and match the answer exactly.
+  const [shuffledWords] = useState(() => {
+    const rawAnswer = question.answer || '';
+    const wordsFromAnswer = rawAnswer.split(/\s+/).filter(Boolean).map(word => {
+      // Remove trailing punctuation: .,?!
+      return word.replace(/[.,?!]+$/, "");
+    });
+    return [...wordsFromAnswer].sort(() => Math.random() - 0.5);
+  });
 
   const toggleWord = (word, fromSelected) => {
     if (answered || isCorrect !== null) return;
@@ -27,8 +125,17 @@ function ScrambledExercise({ question, answered, onAnswer }) {
   };
 
   const checkAnswer = () => {
+    const normalize = (str) => {
+      if (!str) return '';
+      return str
+        .toLowerCase()
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    };
+
     const userAnswer = selected.join(' ');
-    const correct = userAnswer.trim() === (question.answer || '').trim();
+    const correct = normalize(userAnswer) === normalize(question.answer || '');
     setIsCorrect(correct);
     onAnswer(correct);
   };
@@ -109,7 +216,17 @@ export default function GrammarTopic() {
   const [answers, setAnswers] = useState([]); // { questionId, selected, correct }
   const [showExplanation, setShowExplanation] = useState(false);
   const [sessionKey, setSessionKey] = useState(0);
+  const [showExitModal, setShowExitModal] = useState(false);
   const progressRef = useRef(null);
+
+  const handleExitRequest = useCallback(() => {
+    setShowExitModal(true);
+  }, []);
+
+  const handleExitConfirm = useCallback(() => {
+    setShowExitModal(false);
+    navigate(`/grammar/${level}/${topicId}`);
+  }, [navigate, level, topicId]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -138,6 +255,8 @@ export default function GrammarTopic() {
 
   useEffect(() => {
     if (finished && topic && totalQ > 0) {
+      playFinishedSound();
+      vibrate([100, 50, 100, 50, 150]);
       saveGrammarResult(level, topicId, topic.title, score, totalQ, exerciseId)
         .catch((err) => console.error("Error saving grammar result:", err));
     }
@@ -151,8 +270,12 @@ export default function GrammarTopic() {
 
     const isCorrect = idx === question.correct;
     if (isCorrect) {
+      playCorrectSound();
+      vibrate([50, 30, 50]);
       setScore((s) => s + 1);
     } else {
+      playWrongSound();
+      vibrate([200]);
       setWrongCount((w) => w + 1);
     }
     setAnswers((prev) => [
@@ -349,9 +472,17 @@ export default function GrammarTopic() {
   // ─── QUIZ SCREEN ───────────────────────────────────────────────────────────
   return (
     <div className="grammar-topic-page clean-theme">
+      {/* Exit Confirmation Modal */}
+      {showExitModal && (
+        <ExitModal
+          onConfirm={handleExitConfirm}
+          onCancel={() => setShowExitModal(false)}
+        />
+      )}
+
       {/* Clean Header Bar */}
       <div className="clean-quiz-header">
-        <button className="clean-back-arrow" onClick={() => navigate(`/grammar/${level}/${topicId}`)} title="Orqaga">
+        <button className="clean-back-arrow" onClick={handleExitRequest} title="Orqaga">
           ←
         </button>
         <h1 className="clean-quiz-title">{getExerciseType(exerciseId).icon} Exercise {exerciseId}</h1>
@@ -392,21 +523,26 @@ export default function GrammarTopic() {
       )}
 
       {!question.situation && (
-        <p className="clean-question-text">{question.text || question.answer}</p>
+        <p className="clean-question-text">
+          {parseInt(exerciseId, 10) === 3 
+            ? "Berilgan so'zlardan to'g'ri gap hosil qiling:" 
+            : (question.text || question.answer)}
+        </p>
       )}
 
       {/* Scrambled Sentence Exercise */}
-      {parseInt(exerciseId) === 3 && question.words ? (
+      {parseInt(exerciseId, 10) === 3 ? (
         <ScrambledExercise
+          key={question.id || currentQ}
           question={question}
           answered={answered}
           onAnswer={(isCorrect) => {
             setAnswered(true);
-            if (isCorrect) setScore(s => s + 1);
-            else setWrongCount(w => w + 1);
+            if (isCorrect) { playCorrectSound(); vibrate([50, 30, 50]); setScore(s => s + 1); }
+            else { playWrongSound(); vibrate([200]); setWrongCount(w => w + 1); }
             setAnswers(prev => [...prev, {
               questionId: question.id,
-              questionText: `Arrange: ${question.words.join(' ')}`,
+              questionText: `Gap yig'ish mashqi`,
               selected: 0,
               correct: 0,
               isCorrect,

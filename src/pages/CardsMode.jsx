@@ -6,6 +6,7 @@ import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import SwipeCard from '../components/Cards/SwipeCard';
 import CardsDrill from '../components/Cards/CardsDrill';
+import { playSound, triggerVibration } from '../utils/feedback';
 import './CardsMode.css';
 
 const PAGE_VARIANTS = {
@@ -28,14 +29,30 @@ export default function CardsMode() {
   const [unknownWords, setUnknownWords] = useState([]);
   const [drillResults, setDrillResults] = useState(null);
   const [error, setError]       = useState(null);
+  const [customModal, setCustomModal] = useState({ show: false, type: 'confirm', message: '', onConfirm: null });
 
-  const handleBack = () => {
+  const navigateAway = () => {
     if (sourceType === 'books' && sourceId) {
       navigate(`/books/${sourceId}`);
     } else if (sourceType === 'packs' && sourceId) {
       navigate(`/packs/${sourceId}`);
     } else {
       navigate(-1);
+    }
+  };
+
+  const handleBack = () => {
+    if (step === 'swipe' || step === 'drill') {
+      setCustomModal({
+        show: true,
+        type: 'confirm',
+        message: "Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.",
+        onConfirm: () => {
+          navigateAway();
+        }
+      });
+    } else {
+      navigateAway();
     }
   };
 
@@ -116,12 +133,16 @@ export default function CardsMode() {
     if (unknown.length > 0) {
       setStep('drill');
     } else {
+      playSound('victory');
+      triggerVibration('victory');
       setStep('results');
     }
   };
 
   const handleDrillComplete = (results) => {
     setDrillResults(results);
+    playSound('victory');
+    triggerVibration('victory');
     setStep('results');
   };
 
@@ -145,14 +166,13 @@ export default function CardsMode() {
   return (
     <div className="cm-root">
       <div className="cm-header">
-        <button className="cm-back-btn" onClick={handleBack} type="button">
-          ← Orqaga
+        <button className="clean-back-arrow" onClick={handleBack} type="button" style={{ marginRight: '4px' }}>
+          ←
         </button>
         <div className="cm-title-area">
           <span className="cm-badge">🃏 Cards Mode</span>
           {source && <h1 className="cm-title">{source.title}</h1>}
         </div>
-        <div className="cm-header-spacer" />
       </div>
 
       {(step === 'swipe' || step === 'drill' || step === 'results') && (
@@ -201,12 +221,8 @@ export default function CardsMode() {
                 <p className="cm-db-subtitle">
                   So'zlarni o'ngga va chapga surish orqali oson o'rganing.
                 </p>
-
-                <div className="cm-db-stats">
-                  <div className="cm-db-stat-item">
-                    <span className="cm-db-stat-val">{allWords.length}</span>
-                    <span className="cm-db-stat-lbl">Jami so'zlar</span>
-                  </div>
+                <div className="cm-db-words-badge">
+                  📊 Jami: <strong>{allWords.length}</strong> ta so'z
                 </div>
 
                 <div className="cm-db-options">
@@ -322,9 +338,54 @@ export default function CardsMode() {
               </div>
             </motion.div>
           )}
-
         </AnimatePresence>
       </div>
+
+      {customModal.show && (
+        <div className="custom-alert-overlay">
+          <div className="custom-alert-card">
+            <div className="custom-alert-icon">
+              {customModal.type === 'confirm' ? '❓' : '⚠️'}
+            </div>
+            <p className="custom-alert-message">{customModal.message}</p>
+            
+            {customModal.type === 'confirm' ? (
+              <div className="custom-alert-actions" style={{ display: 'flex', gap: 'var(--space-sm)', width: '100%' }}>
+                <button 
+                  className="btn btn-secondary" 
+                  style={{ flex: 1, padding: '12px', borderRadius: 'var(--radius-md)', fontWeight: 600 }}
+                  onClick={() => setCustomModal(prev => ({ ...prev, show: false }))}
+                  type="button"
+                >
+                  Yo'q
+                </button>
+                <button 
+                  className="btn btn-primary" 
+                  style={{ flex: 1, padding: '12px', borderRadius: 'var(--radius-md)', fontWeight: 600 }}
+                  onClick={() => {
+                    setCustomModal(prev => ({ ...prev, show: false }));
+                    if (customModal.onConfirm) customModal.onConfirm();
+                  }}
+                  type="button"
+                >
+                  Ha
+                </button>
+              </div>
+            ) : (
+              <button 
+                className="btn btn-primary custom-alert-btn" 
+                onClick={() => {
+                  setCustomModal(prev => ({ ...prev, show: false }));
+                  if (customModal.onConfirm) customModal.onConfirm();
+                }}
+                type="button"
+              >
+                Tushunarli
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

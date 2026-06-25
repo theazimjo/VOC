@@ -202,8 +202,8 @@
 }
 
 .cd-quiz-opt-btn:hover:not(:disabled) {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.04);
+  border-color: var(--accent-1);
+  background: var(--accent-1-dim);
 }
 
 .cd-quiz-index {
@@ -371,8 +371,8 @@
 
 .cd-spelling-input:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+  border-color: var(--accent-1);
+  box-shadow: 0 0 10px var(--accent-1-dim);
 }
 
 .cd-spelling-input.is-correct {
