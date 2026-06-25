@@ -239,7 +239,6 @@ export default function StoryPage() {
     }
   }, [activeStory]);
   const [selectedWord, setSelectedWord] = useState(null);
-  const [popoverPos, setPopoverPos] = useState({ x: 0, y: 0 });
   const [selectedPackId, setSelectedPackId] = useState('');
   const [showAddToPack, setShowAddToPack] = useState(false);
   const [toast, setToast] = useState(null);
@@ -305,8 +304,12 @@ export default function StoryPage() {
     const showAbove = spaceAbove >= estimatedPopoverHeight + 12;
     const y = showAbove ? rect.top - 8 : rect.bottom + 8;
 
-    setPopoverPos({ x, y, showAbove });
-    setSelectedWord(wordObj);
+    setSelectedWord({
+      ...wordObj,
+      x,
+      y,
+      showAbove
+    });
     setShowAddToPack(false);
     speakWord(wordObj.id);
   };
@@ -791,38 +794,43 @@ export default function StoryPage() {
       {/* Global fixed popover — rendered outside scroll containers to prevent clipping */}
       {selectedWord && (
         <div
-          className="story-word-popover story-word-popover--fixed"
-          ref={popoverRef}
           style={{
             position: 'fixed',
-            left: popoverPos.x,
-            top: popoverPos.y,
-            transform: popoverPos.showAbove ? 'translateY(-100%)' : 'translateY(0)',
+            left: selectedWord.x,
+            top: selectedWord.y,
+            transform: selectedWord.showAbove ? 'translateY(-100%)' : 'translateY(0)',
             zIndex: 99999,
+            pointerEvents: 'none',
           }}
-          onClick={e => e.stopPropagation()}
         >
-          <div className="popover-header-row">
-            <span className="popover-word">{selectedWord.id}</span>
-            <span className="popover-pos">[{selectedWord.pos}]</span>
-            <button className="popover-speak-btn" onClick={(e) => { e.stopPropagation(); speakWord(selectedWord.id); }} title="Talaffuz">🔊</button>
-          </div>
-          <div className="popover-translation"><strong>Tarjimasi:</strong> {selectedWord.translation}</div>
-          {selectedWord.definition && <div className="popover-definition"><em>{selectedWord.definition}</em></div>}
-          <div className="popover-actions">
-            {!showAddToPack ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <button className="popover-add-btn" onClick={(e) => { e.stopPropagation(); handleAddToPack(); }}>➕ "Hikoyalarim"ga qo'shish</button>
-                <button className="popover-secondary-btn" onClick={(e) => { e.stopPropagation(); setShowAddToPack(true); }}>Boshqa to'plamni tanlash</button>
-              </div>
-            ) : (
-              <div className="popover-pack-selector-row" onClick={e => e.stopPropagation()}>
-                <select className="popover-select" value={selectedPackId} onChange={(e) => setSelectedPackId(e.target.value)}>
-                  {packs.map(pack => <option key={pack.id} value={pack.id}>{pack.icon} {pack.name}</option>)}
-                </select>
-                <button className="popover-confirm-btn" onClick={() => handleAddToPack(selectedPackId)}>Qo'shish</button>
-              </div>
-            )}
+          <div
+            className={`story-word-popover ${selectedWord.showAbove ? 'story-word-popover--above' : 'story-word-popover--below'}`}
+            ref={popoverRef}
+            style={{ pointerEvents: 'auto' }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="popover-header-row">
+              <span className="popover-word">{selectedWord.id}</span>
+              <span className="popover-pos">[{selectedWord.pos}]</span>
+              <button className="popover-speak-btn" onClick={(e) => { e.stopPropagation(); speakWord(selectedWord.id); }} title="Talaffuz">🔊</button>
+            </div>
+            <div className="popover-translation"><strong>Tarjimasi:</strong> {selectedWord.translation}</div>
+            {selectedWord.definition && <div className="popover-definition"><em>{selectedWord.definition}</em></div>}
+            <div className="popover-actions">
+              {!showAddToPack ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <button className="popover-add-btn" onClick={(e) => { e.stopPropagation(); handleAddToPack(); }}>➕ "Hikoyalarim"ga qo'shish</button>
+                  <button className="popover-secondary-btn" onClick={(e) => { e.stopPropagation(); setShowAddToPack(true); }}>Boshqa to'plamni tanlash</button>
+                </div>
+              ) : (
+                <div className="popover-pack-selector-row" onClick={e => e.stopPropagation()}>
+                  <select className="popover-select" value={selectedPackId} onChange={(e) => setSelectedPackId(e.target.value)}>
+                    {packs.map(pack => <option key={pack.id} value={pack.id}>{pack.icon} {pack.name}</option>)}
+                  </select>
+                  <button className="popover-confirm-btn" onClick={() => handleAddToPack(selectedPackId)}>Qo'shish</button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

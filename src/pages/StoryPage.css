@@ -793,20 +793,75 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--border);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  z-index: 99999;
   text-align: left;
   line-height: 1.35;
   font-family: var(--font-family);
-  animation: popover-slide-up 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative; /* for caret pseudo-elements */
+  animation: popover-entrance 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.story-word-popover--fixed::after {
-  display: none;
+.story-word-popover--above {
+  transform-origin: bottom center;
+  margin-bottom: 8px;
 }
 
-@keyframes popover-slide-up {
-  from { opacity: 0; transform: translate(-50%, 8px) scale(0.95); }
-  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.story-word-popover--below {
+  transform-origin: top center;
+  margin-top: 8px;
+}
+
+/* Caret Arrows with matching 1px border */
+.story-word-popover--above::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 9px 9px 0 9px;
+  border-style: solid;
+  border-color: var(--border) transparent transparent transparent;
+  z-index: 1;
+}
+
+.story-word-popover--above::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0 8px;
+  border-style: solid;
+  border-color: var(--bg-glass-strong) transparent transparent transparent;
+  z-index: 2;
+}
+
+.story-word-popover--below::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 9px 9px 9px;
+  border-style: solid;
+  border-color: transparent transparent var(--border) transparent;
+  z-index: 1;
+}
+
+.story-word-popover--below::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: transparent transparent var(--bg-glass-strong) transparent;
+  z-index: 2;
+}
+
+@keyframes popover-entrance {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .popover-header-row {
