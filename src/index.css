@@ -1,4 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Nunito:wght@300;400;600;700;800&family=Cinzel:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;600;800;900&family=MedievalSharp&family=Oswald:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-glass: var(--bg-glass);
+  --color-bg-glass-hover: var(--bg-glass-hover);
+  --color-bg-glass-strong: var(--bg-glass-strong);
+  
+  --color-accent-1: var(--accent-1);
+  --color-accent-1-dim: var(--accent-1-dim);
+  --color-accent-2: var(--accent-2);
+  --color-accent-2-dim: var(--accent-2-dim);
+  --color-accent-3: var(--accent-3);
+  --color-accent-3-dim: var(--accent-3-dim);
+  
+  --color-txt-primary: var(--text-primary);
+  --color-txt-secondary: var(--text-secondary);
+  --color-txt-muted: var(--text-muted);
+
+  --color-success: var(--success);
+  --color-success-dim: var(--success-dim);
+  --color-error: var(--error);
+  --color-error-dim: var(--error-dim);
+  --color-warning: var(--warning);
+  --color-warning-dim: var(--warning-dim);
+
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
 
 /* ========== CSS RESET & BASE ========== */
 *, *::before, *::after {

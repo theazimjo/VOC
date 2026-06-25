@@ -96,6 +96,9 @@ export default function Dashboard() {
         <div className="summary-card-glow"></div>
         <div className="summary-card-header">
           <span className="summary-greeting">{getGreeting()}, {displayName}! 👋</span>
+          <span className="ml-3 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-accent-1-dim text-accent-1 border border-accent-1/20 animate-pulse">
+            Tailwind v4 Active
+          </span>
         </div>
         
         <div className="summary-stats-row">
