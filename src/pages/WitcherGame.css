@@ -962,3 +962,109 @@
   .wg-combatant-sprite { font-size: 2.8rem; }
   .wg-logo-main { font-size: 2.5rem; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   IN-GAME SAVE & PORTRAITS ADDITIONS
+   ───────────────────────────────────────────────────────────────────────────── */
+.wg-save-toast {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: rgba(10, 8, 20, 0.95);
+  border: 1px solid #c4a84a;
+  color: #e8e0d0;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6), 0 0 10px rgba(196,168,74,0.25);
+  pointer-events: none;
+}
+
+.wg-hud-save-btn {
+  background: rgba(30, 24, 50, 0.7);
+  border: 1px solid rgba(196, 168, 74, 0.3);
+  color: #e8e0d0;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+.wg-hud-save-btn:hover {
+  background: rgba(196, 168, 74, 0.2);
+  border-color: #c4a84a;
+  transform: translateY(-1px);
+}
+
+.wg-save-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 8, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.wg-save-picker {
+  background: rgba(15, 10, 25, 0.95);
+  border: 2px solid #c4a84a;
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(196,168,74,0.3);
+}
+
+.wg-save-picker-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: #c4a84a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wg-save-picker-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.wg-save-picker-btn {
+  background: rgba(30, 24, 50, 0.8);
+  border: 1px solid rgba(196, 168, 74, 0.3);
+  border-radius: 8px;
+  color: #e8e0d0;
+  padding: 12px;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: 0.88rem;
+  transition: all 0.2s;
+  text-align: center;
+}
+.wg-save-picker-btn:hover {
+  background: rgba(196, 168, 74, 0.15);
+  border-color: #c4a84a;
+}
+
+.wg-combat-enemy-img {
+  width: clamp(70px, 12vw, 100px);
+  height: clamp(70px, 12vw, 100px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #c4a84a;
+  box-shadow: 0 0 15px rgba(196, 168, 74, 0.4);
+}
+

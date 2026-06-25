@@ -11,11 +11,19 @@ import './WitcherGame.css';
 const BG_IMAGES = {
   village: '/witcher/village_night.png',
   swamp:   '/witcher/swamp_night.png',
+  cave:    '/witcher/cave_interior.png',
   menu:    '/witcher/menu_bg.png',
 };
 const PORTRAITS = {
-  esh:   '/witcher/esh_portrait.png',
-  elder: '/witcher/esh_portrait.png', // placeholder until we generate more portraits
+  esh:          '/witcher/esh_portrait.png',
+  elder:        '/witcher/elder_portrait.png',
+  timur:        '/witcher/timur_portrait.png',
+  cursed_woman: '/witcher/cursed_woman_portrait.png',
+  drowner:      '/witcher/drowner_portrait.png',
+};
+const ENEMY_IMAGES = {
+  'Drowner':       '/witcher/drowner_portrait.png',
+  'Drowner Elder': '/witcher/drowner_portrait.png',
 };
 const CHOICE_TYPE_LABELS = {
   flavor:  { label: 'Dialogue Choice', color: '#4a9eff' },
@@ -36,6 +44,8 @@ export default function WitcherGame() {
   const [textComplete, setTextComplete] = useState(false);
   const [combatSetup, setCombatSetup] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
+  const [saveToast, setSaveToast]     = useState(null); // 'saved' | 'error' | null
+  const [showSaveSlots, setShowSaveSlots] = useState(false);
   const typeRef = useRef(null);
 
   const episode     = getEpisode(episodeId);
@@ -132,6 +142,25 @@ export default function WitcherGame() {
     setScreen('gameover');
   };
 
+  // ── In-game Save ─────────────────────────────────────────────────────────────
+  const doSave = (slot) => {
+    const data = { ...gameState, currentEpisode: episodeId, nodeIndex };
+    saveGame(slot, data);
+    autoSave(data);
+    setSaves(listSaves());
+    setSaveToast('saved');
+    setShowSaveSlots(false);
+    setTimeout(() => setSaveToast(null), 2000);
+  };
+
+  const handleSaveBtn = () => {
+    if (activeSaveSlot !== null) {
+      doSave(activeSaveSlot);
+    } else {
+      setShowSaveSlots(v => !v);
+    }
+  };
+
   // ── Episode complete ─────────────────────────────────────────────────────────
   const handleEpisodeComplete = () => {
     setScreen('menu');
@@ -174,7 +203,7 @@ export default function WitcherGame() {
       <AnimatePresence mode="wait">
         {screen === 'menu'      && <MenuScreen      key="menu"      saves={saves} onNewGame={() => setScreen('saves')} onLoad={loadSlot} onEpisodes={() => setScreen('episodes')} onBack={() => navigate('/')} showDelete={showDeleteConfirm} setShowDelete={setShowDeleteConfirm} onDeleteConfirm={handleDeleteSave} />}
         {screen === 'saves'     && <SaveSelectScreen key="saves"    saves={saves} onSelect={startNewGame} onLoad={loadSlot} onBack={() => setScreen('menu')} showDelete={showDeleteConfirm} setShowDelete={setShowDeleteConfirm} onDeleteConfirm={handleDeleteSave} />}
-        {screen === 'narrative' && <NarrativeScreen  key="narrative" node={currentNode} episode={episode} displayText={displayText} textComplete={textComplete} bg={currentBg} gameState={gameState} onChoice={handleChoice} />}
+        {screen === 'narrative' && <NarrativeScreen  key="narrative" node={currentNode} episode={episode} displayText={displayText} textComplete={textComplete} bg={currentBg} gameState={gameState} onChoice={handleChoice} onSave={handleSaveBtn} saveToast={saveToast} showSaveSlots={showSaveSlots} onPickSlot={doSave} onCloseSaveSlots={() => setShowSaveSlots(false)} />}
         {screen === 'combat'    && <CombatScreen      key="combat"   setup={combatSetup} gameState={gameState} onWin={handleCombatWin} onLose={handleCombatLose} />}
         {screen === 'episodes'  && <EpisodeSelectScreen key="episodes" gameState={gameState} onSelect={(id) => { setEpisodeId(id); setNodeIndex(0); setScreen('narrative'); }} onBack={() => setScreen('menu')} />}
         {screen === 'gameover'  && <GameOverScreen   key="gameover"  onRetry={() => { setNodeIndex(combatSetup?.nodeIndex ?? 0); setScreen('narrative'); }} onMenu={() => setScreen('menu')} />}
@@ -283,18 +312,52 @@ function SaveSelectScreen({ saves, onSelect, onBack }) {
 // ─────────────────────────────────────────────────────────────────────────────
 // NARRATIVE SCREEN
 // ─────────────────────────────────────────────────────────────────────────────
-function NarrativeScreen({ node, episode, displayText, textComplete, bg, gameState, onChoice }) {
+function NarrativeScreen({ node, episode, displayText, textComplete, bg, gameState, onChoice, onSave, saveToast, showSaveSlots, onPickSlot, onCloseSaveSlots }) {
   if (!node) return null;
-  const isChoice     = node.type === 'choice';
-  const isDialogue   = node.type === 'dialogue';
+  const isChoice      = node.type === 'choice';
+  const isDialogue    = node.type === 'dialogue';
   const isCliffhanger = node.type === 'cliffhanger';
-  const choiceMeta   = isChoice ? CHOICE_TYPE_LABELS[node.choiceType] : null;
+  const choiceMeta    = isChoice ? CHOICE_TYPE_LABELS[node.choiceType] : null;
 
   return (
     <motion.div className="wg-screen wg-narrative" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       {/* Background */}
       <div className="wg-scene-bg" style={{ backgroundImage: `url('${BG_IMAGES[bg] ?? BG_IMAGES.village}')` }} />
       <div className="wg-scene-overlay" />
+
+      {/* Save Toast */}
+      <AnimatePresence>
+        {saveToast && (
+          <motion.div className="wg-save-toast"
+            initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
+          >
+            💾 Saved!
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Save Slot Picker (when no active slot) */}
+      <AnimatePresence>
+        {showSaveSlots && (
+          <motion.div className="wg-save-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={e => { e.stopPropagation(); onCloseSaveSlots(); }}
+          >
+            <motion.div className="wg-save-picker" initial={{ scale: 0.9 }} animate={{ scale: 1 }}
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="wg-save-picker-title">Save to slot</div>
+              <div className="wg-save-picker-slots">
+                {[0,1,2].map(slot => (
+                  <button key={slot} className="wg-save-picker-btn" onClick={() => onPickSlot(slot)}>
+                    <span>Slot {slot + 1}</span>
+                  </button>
+                ))}
+              </div>
+              <button className="wg-btn wg-btn-ghost" onClick={onCloseSaveSlots}>Cancel</button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* HUD */}
       <div className="wg-hud">
@@ -303,6 +366,7 @@ function NarrativeScreen({ node, episode, displayText, textComplete, bg, gameSta
           <div className="wg-hud-stats">
             <HpBar current={gameState.character.currentHp} max={gameState.character.maxHp} />
             <span className="wg-hud-gold">💰 {gameState.character.gold}g</span>
+            <button className="wg-hud-save-btn" onClick={e => { e.stopPropagation(); onSave(); }} title="Save game">💾</button>
           </div>
         )}
       </div>
@@ -576,7 +640,11 @@ function CombatScreen({ setup, gameState, onWin, onLose }) {
         {/* Enemy side */}
         <div className="wg-combatant enemy-side">
           <div className={`wg-combatant-sprite enemy-sprite ${telegraph === 'heavy' ? 'telegraph' : ''}`}>
-            {enemy?.icon ?? '👹'}
+            {ENEMY_IMAGES[enemy?.name] ? (
+              <img src={ENEMY_IMAGES[enemy?.name]} alt={enemy?.name} className="wg-combat-enemy-img" />
+            ) : (
+              enemy?.icon ?? '👹'
+            )}
           </div>
           <div className="wg-combatant-name">{enemy?.name ?? '—'}</div>
           <div className="wg-enemy-desc">{enemy?.description ?? ''}</div>

@@ -94,7 +94,7 @@ export const ep01 = {
     },
     {
       id: 'n11', type: 'dialogue', bg: 'village',
-      speaker: 'Timur', portrait: 'esh', emotion: 'scared',
+      speaker: 'Timur', portrait: 'timur', emotion: 'scared',
       text: '"I saw one of them. The things that took Aliya. I was hiding in the reeds when they came."',
     },
     {
@@ -104,7 +104,7 @@ export const ep01 = {
     },
     {
       id: 'n13', type: 'dialogue', bg: 'village',
-      speaker: 'Timur', portrait: 'esh', emotion: 'scared',
+      speaker: 'Timur', portrait: 'timur', emotion: 'scared',
       text: '"It had a woman\'s hair. Long and black and wet. But its hands—" He held up both palms. "Wrong. Like fish bones wrapped in grey skin. It walked into the water and the water just let it in."',
     },
 
@@ -250,21 +250,18 @@ export const ep01 = {
       id: 'n24', type: 'narration', bg: 'swamp',
       text: 'He went in.',
     },
-    {
-      id: 'n25', type: 'narration', bg: 'swamp',
+    { id: 'n25', type: 'narration', bg: 'cave',
       text: "Children's shoes. A torn headscarf embroidered with yellow thread. A carved wooden horse, worn smooth by many small hands. Arranged in a careful row on a dry ledge. As if someone was keeping them safe.",
     },
-    {
-      id: 'n26', type: 'narration', bg: 'swamp',
+    { id: 'n26', type: 'narration', bg: 'cave',
       text: 'He heard breathing. Deep in the cave. Not a child\'s.',
     },
-    {
-      id: 'n27', type: 'narration', bg: 'swamp',
+    { id: 'n27', type: 'narration', bg: 'cave',
       text: 'She was crouched in the furthest corner—wrapped in river reeds and silt, barely human in outline. A woman. Perhaps forty. Her nails were too long. Her eyes caught his lamp light and did not reflect it the way eyes should.',
     },
     {
-      id: 'n28', type: 'dialogue', bg: 'swamp',
-      speaker: 'Cursed Woman', portrait: 'esh', emotion: 'resigned',
+      id: 'n28', type: 'dialogue', bg: 'cave',
+      speaker: 'Cursed Woman', portrait: 'cursed_woman', emotion: 'resigned',
       text: '"...I know what you are. I heard the water change when you fought them. You have come to kill me, then. Do it quickly."',
     },
     {
@@ -272,8 +269,8 @@ export const ep01 = {
       text: 'Her voice was almost normal. Almost.',
     },
     {
-      id: 'n30', type: 'dialogue', bg: 'swamp',
-      speaker: 'Cursed Woman', portrait: 'esh', emotion: 'desperate',
+      id: 'n30', type: 'dialogue', bg: 'cave',
+      speaker: 'Cursed Woman', portrait: 'cursed_woman', emotion: 'desperate',
       text: '"I do not take them to hurt them. I cannot stop my hands after dark—I feel them moving and I cannot stop it. But I keep the children safe. In the back. Just look. Please just look."',
     },
     {
@@ -281,8 +278,8 @@ export const ep01 = {
       text: 'Past her, behind a natural partition of rock, Esh found them. Four children. Frightened. Thin. Alive. Sleeping on dry straw beside a small, smokeless flame she had somehow kept burning for them.',
     },
     {
-      id: 'n32', type: 'dialogue', bg: 'swamp',
-      speaker: 'Cursed Woman', portrait: 'esh', emotion: 'sad',
+      id: 'n32', type: 'dialogue', bg: 'cave',
+      speaker: 'Cursed Woman', portrait: 'cursed_woman', emotion: 'sad',
       text: '"I was Tokhir\'s wife," she whispered. "Before the river spirit took root in me. Twelve years ago. He thinks I drowned. He does not know I am still in here—behind it."',
     },
     {
