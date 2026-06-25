@@ -3,12 +3,15 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
+import { useGrammarStats } from '../hooks/useGrammarStats';
+import { grammarData } from '../data/grammarData';
 import './StatsPage.css';
 
 export default function StatsPage() {
   const { user } = useAuth();
   const { books } = useBooks();
   const { packs } = usePacks();
+  const { stats: grammarStats, loading: grammarLoading } = useGrammarStats();
   const [allWords, setAllWords] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -101,6 +104,21 @@ export default function StatsPage() {
   });
   const posItems = Object.entries(posMap).sort((a, b) => b[1] - a[1]);
 
+  // Grammar calculations
+  const uniqueGrammarTopics = Object.keys(grammarStats?.topics || {}).length;
+  const averageGrammarAccuracy = uniqueGrammarTopics > 0 
+    ? Math.round(Object.values(grammarStats.topics).reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) / uniqueGrammarTopics) 
+    : 0;
+
+  const beginnerTotal = grammarData.beginner?.topics?.length || 0;
+  const beginnerCompleted = Object.values(grammarStats?.topics || {}).filter(t => t.level === 'beginner').length;
+
+  const intermediateTotal = grammarData.intermediate?.topics?.length || 0;
+  const intermediateCompleted = Object.values(grammarStats?.topics || {}).filter(t => t.level === 'intermediate').length;
+
+  const advancedTotal = grammarData.advanced?.topics?.length || 0;
+  const advancedCompleted = Object.values(grammarStats?.topics || {}).filter(t => t.level === 'advanced').length;
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.08 } }
@@ -111,7 +129,9 @@ export default function StatsPage() {
     visible: { opacity: 1, y: 0 }
   };
 
-  if (loading) {
+  const pageLoading = loading || grammarLoading;
+
+  if (pageLoading) {
     return (
       <div className="stats-page">
         <div className="page-header"><h1>📈 Statistika</h1></div>
@@ -267,11 +287,138 @@ export default function StatsPage() {
         </motion.div>
       )}
 
-      {totalWords === 0 && (
+      {/* Grammar Stats Section */}
+      <motion.div className="stats-section grammar-stats-section" variants={itemVariants}>
+        <h2>📖 Grammatika statistikasi</h2>
+
+        {grammarStats?.history?.length > 0 ? (
+          <>
+            <div className="grammar-overview-cards">
+              <div className="grammar-overview-card">
+                <span className="card-val">{grammarStats.history.length}</span>
+                <span className="card-lbl">Jami urinishlar</span>
+              </div>
+              <div className="grammar-overview-card">
+                <span className="card-val">{uniqueGrammarTopics}</span>
+                <span className="card-lbl">Yechilgan mavzular</span>
+              </div>
+              <div className="grammar-overview-card">
+                <span className="card-val">{averageGrammarAccuracy}%</span>
+                <span className="card-lbl">O'rtacha to'g'rilik</span>
+              </div>
+            </div>
+
+            <div className="grammar-levels-progress">
+              <h3>Darajalar bo'yicha progress</h3>
+              
+              {/* Beginner */}
+              <div className="level-progress-item">
+                <div className="level-info">
+                  <span className="level-name">Beginner (Boshlang'ich)</span>
+                  <span className="level-count">{beginnerCompleted} / {beginnerTotal}</span>
+                </div>
+                <div className="level-progress-bar">
+                  <div 
+                    className="level-progress-fill beginner-fill" 
+                    style={{ width: `${beginnerTotal > 0 ? (beginnerCompleted / beginnerTotal) * 100 : 0}%` }} 
+                  />
+                </div>
+              </div>
+
+              {/* Intermediate */}
+              {intermediateTotal > 0 && (
+                <div className="level-progress-item">
+                  <div className="level-info">
+                    <span className="level-name">Intermediate (O'rta)</span>
+                    <span className="level-count">{intermediateCompleted} / {intermediateTotal}</span>
+                  </div>
+                  <div className="level-progress-bar">
+                    <div 
+                      className="level-progress-fill intermediate-fill" 
+                      style={{ width: `${intermediateTotal > 0 ? (intermediateCompleted / intermediateTotal) * 100 : 0}%` }} 
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Advanced */}
+              {advancedTotal > 0 && (
+                <div className="level-progress-item">
+                  <div className="level-info">
+                    <span className="level-name">Advanced (Yuqori)</span>
+                    <span className="level-count">{advancedCompleted} / {advancedTotal}</span>
+                  </div>
+                  <div className="level-progress-bar">
+                    <div 
+                      className="level-progress-fill advanced-fill" 
+                      style={{ width: `${advancedTotal > 0 ? (advancedCompleted / advancedTotal) * 100 : 0}%` }} 
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Test History */}
+            <div className="grammar-history-table-wrapper">
+              <h3>Oxirgi test urinishlari</h3>
+              <table className="grammar-history-table">
+                <thead>
+                  <tr>
+                    <th>Mavzu</th>
+                    <th>Daraja</th>
+                    <th>Natija</th>
+                    <th>To'g'rilik</th>
+                    <th>Sana</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {grammarStats.history.slice(0, 5).map((attempt, idx) => {
+                    const pct = Math.round((attempt.score / attempt.totalQuestions) * 100);
+                    const formattedDate = attempt.completedAt 
+                      ? new Date(attempt.completedAt).toLocaleDateString('uz-UZ', {
+                          month: 'short',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit'
+                        })
+                      : '';
+                    
+                    return (
+                      <tr key={attempt.id || idx}>
+                        <td><strong>{attempt.topicTitle}</strong></td>
+                        <td>
+                          <span className={`level-badge ${attempt.level}`}>
+                            {attempt.level === 'beginner' ? 'Beginner' : attempt.level === 'intermediate' ? 'Intermediate' : 'Advanced'}
+                          </span>
+                        </td>
+                        <td>{attempt.score} / {attempt.totalQuestions}</td>
+                        <td>
+                          <span className={`accuracy-badge ${pct >= 80 ? 'high' : pct >= 50 ? 'medium' : 'low'}`}>
+                            {pct}%
+                          </span>
+                        </td>
+                        <td className="date-cell">{formattedDate}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : (
+          <div className="grammar-empty-stats">
+            <span className="empty-icon">📝</span>
+            <p>Siz hali grammatika testlarini topshirmadingiz.</p>
+            <p>Grammatika sahifasiga o'tib, bilimingizni sinab ko'ring!</p>
+          </div>
+        )}
+      </motion.div>
+
+      {totalWords === 0 && (!grammarStats?.history || grammarStats.history.length === 0) && (
         <div className="empty-state">
           <div className="empty-state-icon">📊</div>
           <h3>Hali ma'lumot yo'q</h3>
-          <p>So'zlar qo'shganingizda statistika bu yerda paydo bo'ladi</p>
+          <p>So'zlar qo'shganingizda yoki grammatika mashq qilganingizda statistika bu yerda paydo bo'ladi</p>
         </div>
       )}
     </motion.div>

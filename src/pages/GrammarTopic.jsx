@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../data/grammarData';
+import { useGrammarStats } from '../hooks/useGrammarStats';
 import './GrammarTopic.css';
 
 export default function GrammarTopic() {
   const { level = 'beginner', topicId } = useParams();
   const navigate = useNavigate();
+  const { saveGrammarResult } = useGrammarStats();
 
   const levelData = grammarData[level];
   const topic = levelData?.topics?.find((t) => t.id === topicId);
@@ -42,6 +44,13 @@ export default function GrammarTopic() {
   const totalQ = questions.length;
   const question = questions[currentQ];
   const progressPct = totalQ > 0 ? ((currentQ) / totalQ) * 100 : 0;
+
+  useEffect(() => {
+    if (finished && topic && totalQ > 0) {
+      saveGrammarResult(level, topicId, topic.title, score, totalQ)
+        .catch((err) => console.error("Error saving grammar result:", err));
+    }
+  }, [finished, level, topicId, topic, score, totalQ, saveGrammarResult]);
 
   const handleSelect = (idx) => {
     if (answered) return;

@@ -386,3 +386,81 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================
+   USER GRAMMAR STATS & COMPLETED BADGES
+   ========================================= */
+
+.grammar-user-stats {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  width: 100%;
+}
+
+.grammar-user-stats .user-stat-card {
+  flex: 1;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+
+.grammar-user-stats .user-stat-card .user-stat-value {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--accent-1);
+}
+
+.grammar-user-stats .user-stat-card .user-stat-label {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Topic Card Badges */
+.topic-badge-completed {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #10b981 !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+
+.topic-badge-todo {
+  background: rgba(107, 114, 128, 0.1) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* Completed Card Styling */
+.grammar-topic-card.completed {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+.grammar-topic-card.completed .card-accent-line {
+  background: linear-gradient(90deg, #10b981, #34d399) !important;
+}
+
+.grammar-topic-card.completed:hover {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15), var(--shadow-lg) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grammar-user-stats {
+    flex-direction: row;
+    gap: var(--space-sm);
+  }
+  .grammar-user-stats .user-stat-card {
+    padding: var(--space-xs) var(--space-sm);
+  }
+  .grammar-user-stats .user-stat-card .user-stat-value {
+    font-size: var(--font-md);
+  }
+}

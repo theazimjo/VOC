@@ -424,3 +424,216 @@
     padding: var(--space-md);
   }
 }
+
+/* =========================================
+   GRAMMAR STATISTICS STYLES
+   ========================================= */
+
+.grammar-stats-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.grammar-overview-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+}
+
+.grammar-overview-card {
+  text-align: center;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  backdrop-filter: blur(8px);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.grammar-overview-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-1);
+  box-shadow: var(--shadow-glow), var(--shadow);
+}
+
+.grammar-overview-card .card-val {
+  display: block;
+  font-size: var(--font-2xl);
+  font-weight: 800;
+  color: var(--accent-1);
+  margin-bottom: var(--space-xs);
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.grammar-overview-card .card-lbl {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.grammar-levels-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.grammar-levels-progress h3,
+.grammar-history-table-wrapper h3 {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.level-progress-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.level-progress-item .level-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.level-progress-item .level-name {
+  color: var(--text-primary);
+}
+
+.level-progress-bar {
+  height: 10px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.level-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.beginner-fill {
+  background: linear-gradient(90deg, #10B981, #34D399) !important;
+}
+
+.intermediate-fill {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) !important;
+}
+
+.advanced-fill {
+  background: linear-gradient(90deg, #EF4444, #F87171) !important;
+}
+
+/* History Table Wrapper */
+.grammar-history-table-wrapper {
+  overflow-x: auto;
+  margin-top: var(--space-md);
+}
+
+.grammar-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+}
+
+.grammar-history-table th,
+.grammar-history-table td {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.grammar-history-table th {
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: var(--font-xs);
+  letter-spacing: 0.05em;
+}
+
+.grammar-history-table tbody tr {
+  transition: background var(--transition-base);
+}
+
+.grammar-history-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.grammar-history-table .date-cell {
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Badges */
+.level-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.level-badge.beginner {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #10B981 !important;
+}
+
+.level-badge.intermediate {
+  background: rgba(124, 58, 237, 0.1) !important;
+  color: var(--accent-1) !important;
+}
+
+.level-badge.advanced {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #EF4444 !important;
+}
+
+.accuracy-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: var(--font-xs);
+}
+
+.accuracy-badge.high {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #10B981 !important;
+}
+
+.accuracy-badge.medium {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #F59E0B !important;
+}
+
+.accuracy-badge.low {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #EF4444 !important;
+}
+
+.grammar-empty-stats {
+  text-align: center;
+  padding: var(--space-xl) 0;
+  color: var(--text-secondary);
+}
+
+.grammar-empty-stats .empty-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-md);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}

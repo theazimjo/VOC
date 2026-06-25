@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { grammarData } from '../data/grammarData';
+import { useGrammarStats } from '../hooks/useGrammarStats';
 import './GrammarPage.css';
 
 const LEVELS = [
@@ -36,8 +37,21 @@ const headerVariants = {
 export default function GrammarPage() {
   const navigate = useNavigate();
   const [activeLevel, setActiveLevel] = useState('beginner');
+  const { stats: grammarStats } = useGrammarStats();
 
   const topics = grammarData[activeLevel]?.topics ?? [];
+
+  // Calculate statistics for the active level
+  const completedTopicsOfLevel = Object.values(grammarStats?.topics || {}).filter(
+    (t) => t.level === activeLevel
+  );
+  const completedCount = completedTopicsOfLevel.length;
+  const averageAccuracy = completedCount > 0
+    ? Math.round(
+        completedTopicsOfLevel.reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) /
+        completedCount
+      )
+    : 0;
 
   const handleTopicClick = (topicId) => {
     navigate(`/grammar/${activeLevel}/${topicId}`);
@@ -67,6 +81,8 @@ export default function GrammarPage() {
             </p>
           </div>
         </div>
+
+        {/* Global Level Stats */}
         <div className="grammar-header-stats">
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">{topics.length}</span>
@@ -81,6 +97,18 @@ export default function GrammarPage() {
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">3</span>
             <span className="grammar-stat-lbl">daraja</span>
+          </div>
+        </div>
+
+        {/* User Specific Progress for this Level */}
+        <div className="grammar-user-stats">
+          <div className="user-stat-card">
+            <span className="user-stat-value">{completedCount} / {topics.length}</span>
+            <span className="user-stat-label">Mavzular yechildi</span>
+          </div>
+          <div className="user-stat-card">
+            <span className="user-stat-value">{averageAccuracy}%</span>
+            <span className="user-stat-label">O'rtacha natija</span>
           </div>
         </div>
       </motion.div>
@@ -131,41 +159,54 @@ export default function GrammarPage() {
           exit={{ opacity: 0, y: -10, transition: { duration: 0.18 } }}
         >
           {topics.length > 0 ? (
-            topics.map((topic) => (
-              <motion.div
-                key={topic.id}
-                className="grammar-topic-card"
-                variants={cardVariants}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleTopicClick(topic.id)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && handleTopicClick(topic.id)}
-              >
-                <div className="card-accent-line" />
-                <div className="card-top-row">
-                  <div className="topic-card-icon">{topic.icon}</div>
-                  <span className="topic-arrow">→</span>
-                </div>
-                <div className="card-body">
-                  <h3 className="topic-card-title">{topic.title}</h3>
-                  <p className="topic-card-desc">
-                    {topic.guide
-                      ? topic.guide.slice(0, 80) + (topic.guide.length > 80 ? '…' : '')
-                      : topic.description ?? ''}
-                  </p>
-                </div>
-                <div className="topic-card-meta">
-                  <span className="topic-badge topic-badge-questions">
-                    📝 {topic.questionCount ?? 30} ta savol
-                  </span>
-                  {topic.tag && (
-                    <span className="topic-badge topic-badge-tag">{topic.tag}</span>
-                  )}
-                </div>
-              </motion.div>
-            ))
+            topics.map((topic) => {
+              const topicStats = grammarStats?.topics?.[topic.id];
+
+              return (
+                <motion.div
+                  key={topic.id}
+                  className={`grammar-topic-card ${topicStats ? 'completed' : ''}`}
+                  variants={cardVariants}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => handleTopicClick(topic.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && handleTopicClick(topic.id)}
+                >
+                  <div className="card-accent-line" />
+                  <div className="card-top-row">
+                    <div className="topic-card-icon">{topic.icon}</div>
+                    <span className="topic-arrow">→</span>
+                  </div>
+                  <div className="card-body">
+                    <h3 className="topic-card-title">{topic.title}</h3>
+                    <p className="topic-card-desc">
+                      {topic.guide
+                        ? topic.guide.slice(0, 80) + (topic.guide.length > 80 ? '…' : '')
+                        : topic.description ?? ''}
+                    </p>
+                  </div>
+                  <div className="topic-card-meta">
+                    <span className="topic-badge topic-badge-questions">
+                      📝 {topic.questions?.length || 30} ta savol
+                    </span>
+                    {topicStats ? (
+                      <span className="topic-badge topic-badge-completed">
+                        ✅ Natija: {topicStats.bestScore}/{topicStats.totalQuestions} ({Math.round((topicStats.bestScore / topicStats.totalQuestions) * 100)}%)
+                      </span>
+                    ) : (
+                      <span className="topic-badge topic-badge-todo">
+                        ⏳ Boshlanmagan
+                      </span>
+                    )}
+                    {topic.tag && (
+                      <span className="topic-badge topic-badge-tag">{topic.tag}</span>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })
           ) : (
             <motion.div
               className="grammar-empty-state"
