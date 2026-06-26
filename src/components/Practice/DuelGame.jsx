@@ -30,172 +30,135 @@ const DEFAULT_POOL = [
 ];
 
 export default function DuelGame({ words, onComplete, user }) {
-  const [roomId, setRoomId] = useState(null);
-  const [isHost, setIsHost] = useState(false);
-  const [queuing, setQueuing] = useState(false);
-  const [roomState, setRoomState] = useState(null);
-  const [errorMsg, setErrorMsg] = useState('');
-  
-  const [timeLeft, setTimeLeft] = useState(10);
+  // ── Refs (never stale in closures) ──────────────────────────────────────
+  const roomIdRef   = useRef(null);
+  const isHostRef   = useRef(false);
+  const wordsRef    = useRef(words);
+  const roomStateRef = useRef(null);
+  const hasAnsweredRef = useRef(false);
+  const soundPlayedRef = useRef(false);
+
+  useEffect(() => { wordsRef.current = words; }, [words]);
+
+  // ── React state (for rendering) ─────────────────────────────────────────
+  const [roomId, setRoomId]           = useState(null);
+  const [queuing, setQueuing]         = useState(false);
+  const [roomState, setRoomState]     = useState(null);
+  const [errorMsg, setErrorMsg]       = useState('');
+  const [timeLeft, setTimeLeft]       = useState(10);
   const [hasAnswered, setHasAnswered] = useState(false);
   const [selectedAnswerIdx, setSelectedAnswerIdx] = useState(null);
-  const [showRoundResults, setShowRoundResults] = useState(false);
+  const [showRoundResults, setShowRoundResults]   = useState(false);
   const [disconnectedPartner, setDisconnectedPartner] = useState(false);
 
-  const wordsRef = useRef(words);
-  useEffect(() => {
-    wordsRef.current = words;
-  }, [words]);
-
-  // Handle Matchmaking
+  // ── Matchmaking on mount ─────────────────────────────────────────────────
   useEffect(() => {
     if (!user) return;
     findMatch();
-    
-    return () => {
-      // Clean up listeners and database nodes when leaving
-      leaveRoom();
-    };
-  }, [user]);
+    return () => { leaveRoom(); };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── Leave / cleanup ──────────────────────────────────────────────────────
   const leaveRoom = async () => {
-    if (roomId) {
-      const roomRef = ref(db, `practice_rooms/${roomId}`);
-      if (isHost) {
-        set(roomRef, null); // delete room
-      } else {
-        set(ref(db, `practice_rooms/${roomId}/player2`), null); // Challenger leaves
-      }
-      
-      // Clean up my ticket from queue if it is still there
-      const matchmakerRef = ref(db, 'practice_matchmaker');
-      await runTransaction(matchmakerRef, (currentData) => {
-        if (currentData && currentData.uid === user.uid) {
-          return null; // delete only if it's my ticket
-        }
-        return currentData; // otherwise don't modify
-      });
+    const rid = roomIdRef.current;
+    if (!rid) return;
+    const roomRef = ref(db, `practice_rooms/${rid}`);
+    if (isHostRef.current) {
+      set(roomRef, null);
+    } else {
+      set(ref(db, `practice_rooms/${rid}/player2`), null);
     }
+    const matchmakerRef = ref(db, 'practice_matchmaker');
+    await runTransaction(matchmakerRef, (cur) =>
+      cur && cur.uid === user.uid ? null : cur
+    );
   };
 
+  // ── Matchmaking ──────────────────────────────────────────────────────────
   const findMatch = async () => {
     setQueuing(true);
     setErrorMsg('');
     setDisconnectedPartner(false);
     try {
       const matchmakerRef = ref(db, 'practice_matchmaker');
-      const myDisplayName = user.displayName || user.email?.split('@')[0] || 'O\'yinchi';
-      
+      const myName = user.displayName || user.email?.split('@')[0] || 'O\'yinchi';
       const newRoomId = 'room_' + Math.random().toString(36).substring(2, 10);
-      const myTicket = {
-        uid: user.uid,
-        name: myDisplayName,
-        roomId: newRoomId,
-        timestamp: Date.now()
-      };
+      const myTicket = { uid: user.uid, name: myName, roomId: newRoomId, timestamp: Date.now() };
 
       let takenTicket = null;
-
-      const result = await runTransaction(matchmakerRef, (currentData) => {
-        if (currentData === null) {
-          // Empty matchmaking queue, I'll place my ticket
-          return myTicket;
-        } else if (currentData.uid === user.uid) {
-          // It's already my ticket, keep it there
-          return myTicket;
-        } else {
-          // Someone else's ticket is there, I'll take it and remove it
-          takenTicket = currentData;
-          return null; // deletes the ticket from queue
-        }
+      const result = await runTransaction(matchmakerRef, (cur) => {
+        if (!cur)                  { return myTicket; }
+        if (cur.uid === user.uid)  { return myTicket; }
+        takenTicket = cur;
+        return null;
       });
 
       if (result.committed) {
-        if (takenTicket === null) {
-          // No ticket was taken, meaning I am the Host
+        if (!takenTicket) {
+          // I am the Host
           onDisconnect(matchmakerRef).remove();
-          setIsHost(true);
+          roomIdRef.current = newRoomId;
+          isHostRef.current = true;
           setRoomId(newRoomId);
-          setupRoomAsHost(newRoomId, myDisplayName);
+          setupRoomAsHost(newRoomId, myName);
         } else {
-          // We successfully took another player's ticket, meaning I am the Challenger
+          // I am the Challenger
           const hostRoomId = takenTicket.roomId;
-          setIsHost(false);
+          roomIdRef.current = hostRoomId;
+          isHostRef.current = false;
           setRoomId(hostRoomId);
-          joinRoomAsChallenger(hostRoomId, myDisplayName);
+          joinRoomAsChallenger(hostRoomId, myName);
         }
       } else {
-        // Transaction not committed, retry
-        setTimeout(() => findMatch(), 1000);
+        setTimeout(findMatch, 1000);
       }
     } catch (e) {
       console.error(e);
-      setErrorMsg('Matchmaking jarayonida xatolik yuz berdi. Qayta urinib ko\'ring.');
+      setErrorMsg('Matchmaking jarayonida xatolik yuz berdi.');
       setQueuing(false);
     }
   };
 
+  // ── Host: create room ────────────────────────────────────────────────────
   const setupRoomAsHost = async (rid, hostName) => {
     const roomRef = ref(db, `practice_rooms/${rid}`);
-    
-    // Select 10 words
-    let selectedWords = [];
     const sourceWords = wordsRef.current;
+
+    let selected = [];
     if (sourceWords && sourceWords.length >= 4) {
-      const shuffled = [...sourceWords].sort(() => Math.random() - 0.5);
-      selectedWords = shuffled.slice(0, 10);
+      selected = [...sourceWords].sort(() => Math.random() - 0.5).slice(0, 10);
     }
-    
-    if (selectedWords.length < 10) {
-      const defaults = [...DEFAULT_POOL].sort(() => Math.random() - 0.5);
-      for (const d of defaults) {
-        if (selectedWords.length >= 10) break;
-        if (!selectedWords.some(w => w.word.toLowerCase() === d.word.toLowerCase())) {
-          selectedWords.push({
-            id: 'def_' + Math.random().toString(36).substring(2, 6),
-            ...d
-          });
+    if (selected.length < 10) {
+      const pool = [...DEFAULT_POOL].sort(() => Math.random() - 0.5);
+      for (const d of pool) {
+        if (selected.length >= 10) break;
+        if (!selected.some(w => w.word.toLowerCase() === d.word.toLowerCase())) {
+          selected.push({ id: 'def_' + Math.random().toString(36).substring(2, 6), ...d });
         }
       }
     }
 
-    const duelWords = selectedWords.map(w => {
+    const allPool = (sourceWords && sourceWords.length >= 4) ? sourceWords : DEFAULT_POOL;
+    const duelWords = selected.map(w => {
       const distractors = [];
-      const allPossibleWords = (sourceWords && sourceWords.length >= 4) ? sourceWords : DEFAULT_POOL;
-      const shuffledAll = [...allPossibleWords].sort(() => Math.random() - 0.5);
-      
-      for (const item of shuffledAll) {
+      const shuffled = [...allPool].sort(() => Math.random() - 0.5);
+      for (const item of shuffled) {
         if (distractors.length >= 3) break;
         const trans = item.translation || item.uzbek;
         if (trans && trans.toLowerCase() !== w.translation.toLowerCase() && !distractors.includes(trans)) {
           distractors.push(trans);
         }
       }
-
       while (distractors.length < 3) {
         distractors.push('Tarjima ' + Math.random().toString(36).substring(2, 6));
       }
-
       const options = [w.translation, ...distractors].sort(() => Math.random() - 0.5);
-      const correctIndex = options.indexOf(w.translation);
-
-      return {
-        word: w.word,
-        definition: w.definition || '',
-        example: w.example || '',
-        options: options,
-        correct: correctIndex
-      };
+      return { word: w.word, definition: w.definition || '', options, correct: options.indexOf(w.translation) };
     });
 
-    const roomState = {
+    const initState = {
       status: 'waiting',
-      player1: {
-        uid: user.uid,
-        name: hostName,
-        score: 0,
-        answers: {}
-      },
+      player1: { uid: user.uid, name: hostName, score: 0, answers: {} },
       player2: null,
       currentRound: 0,
       totalRounds: 10,
@@ -204,189 +167,168 @@ export default function DuelGame({ words, onComplete, user }) {
       lastUpdated: Date.now()
     };
 
-    await set(roomRef, roomState);
+    await set(roomRef, initState);
     onDisconnect(roomRef).remove();
 
-    // Listen to player2
+    // When challenger joins, start the game
     const p2Ref = ref(db, `practice_rooms/${rid}/player2`);
     onValue(p2Ref, (snap) => {
       if (snap.exists() && snap.val() !== null) {
-        update(roomRef, {
-          status: 'ongoing',
-          roundStartTime: Date.now()
-        });
+        update(roomRef, { status: 'ongoing', roundStartTime: Date.now() });
       }
     });
 
     listenToRoom(rid);
   };
 
-  const joinRoomAsChallenger = async (rid, challengerName) => {
-    const roomRef = ref(db, `practice_rooms/${rid}`);
-    const challenger = {
-      uid: user.uid,
-      name: challengerName,
-      score: 0,
-      answers: {}
-    };
-
-    await set(ref(db, `practice_rooms/${rid}/player2`), challenger);
+  // ── Challenger: join room ────────────────────────────────────────────────
+  const joinRoomAsChallenger = async (rid, name) => {
+    await set(ref(db, `practice_rooms/${rid}/player2`), { uid: user.uid, name, score: 0, answers: {} });
     onDisconnect(ref(db, `practice_rooms/${rid}/player2`)).remove();
-
     listenToRoom(rid);
   };
 
+  // ── Listen to room changes ───────────────────────────────────────────────
   const listenToRoom = (rid) => {
-    const roomRef = ref(db, `practice_rooms/${rid}`);
-    
-    onValue(roomRef, (snap) => {
+    onValue(ref(db, `practice_rooms/${rid}`), (snap) => {
       const state = snap.val();
       if (!state) {
-        // Host closed room or connection failed
         setRoomState(null);
         setDisconnectedPartner(true);
         return;
       }
-      
-      // If ongoing, check if opponent disconnected
-      if (state.status === 'ongoing') {
-        const isPlayer1 = state.player1.uid === user.uid;
-        if (isPlayer1 && !state.player2) {
-          setDisconnectedPartner(true);
-          return;
-        }
+      if (state.status === 'ongoing' && state.player1.uid === user.uid && !state.player2) {
+        setDisconnectedPartner(true);
+        return;
       }
-
+      roomStateRef.current = state;
       setRoomState(state);
       setQueuing(false);
     });
   };
 
-  // Timer effect
+  // ── Timer: runs when round changes ───────────────────────────────────────
   useEffect(() => {
     if (!roomState || roomState.status !== 'ongoing') return;
 
+    // Reset answer state for the new round
+    hasAnsweredRef.current = false;
     setHasAnswered(false);
     setSelectedAnswerIdx(null);
+    setShowRoundResults(false);
 
-    const activeWordObj = roomState.words[roomState.currentRound];
-    if (activeWordObj) {
-      speakWord(activeWordObj.word);
-    }
+    const word = roomState.words[roomState.currentRound];
+    if (word) speakWord(word.word);
+
+    const startTime = roomState.roundStartTime;
 
     const interval = setInterval(() => {
-      const elapsed = (Date.now() - roomState.roundStartTime) / 1000;
+      const elapsed = (Date.now() - startTime) / 1000;
       const remaining = Math.max(0, 10 - Math.floor(elapsed));
       setTimeLeft(remaining);
 
       if (remaining <= 0) {
         clearInterval(interval);
-        // Timeout auto submit
-        handleSelectAnswer(-1, true);
+        if (!hasAnsweredRef.current) {
+          submitAnswer(-1, true);
+        }
       }
     }, 200);
 
     return () => clearInterval(interval);
-  }, [roomState?.currentRound, roomState?.status]);
+  }, [roomState?.currentRound, roomState?.status, roomState?.roundStartTime]);
 
-  // Round results & advance round effect
+  // ── Round advance: runs when BOTH players have answered ──────────────────
   useEffect(() => {
     if (!roomState || roomState.status !== 'ongoing') return;
+    if (!roomState.player2) return; // wait for player2
 
-    const p1Answer = roomState.player1.answers?.[roomState.currentRound];
-    const p2Answer = roomState.player2.answers?.[roomState.currentRound];
+    const round = roomState.currentRound;
+    const p1Ans = roomState.player1?.answers?.[round];
+    const p2Ans = roomState.player2?.answers?.[round];
 
-    if (p1Answer && p2Answer) {
-      setShowRoundResults(true);
+    if (!p1Ans || !p2Ans) return; // not both answered yet
 
-      const timer = setTimeout(async () => {
-        if (isHost) {
-          const nextRound = roomState.currentRound + 1;
-          const isFinished = nextRound >= roomState.totalRounds;
-          
-          await update(ref(db, `practice_rooms/${roomId}`), {
-            currentRound: nextRound,
-            status: isFinished ? 'finished' : 'ongoing',
-            roundStartTime: Date.now()
-          });
-        }
-        setShowRoundResults(false);
-      }, 2800);
+    setShowRoundResults(true);
 
-      return () => clearTimeout(timer);
-    }
-  }, [roomState?.player1?.answers, roomState?.player2?.answers, roomState?.currentRound]);
-
-  // End-game audio/vibration feedback
-  const soundPlayedRef = useRef(false);
-  useEffect(() => {
-    if (roomState?.status === 'finished') {
-      if (!soundPlayedRef.current) {
-        soundPlayedRef.current = true;
-        const isPlayer1 = roomState.player1?.uid === user.uid;
-        const myData = isPlayer1 ? roomState.player1 : roomState.player2;
-        const opData = isPlayer1 ? roomState.player2 : roomState.player1;
-        const iWon = myData?.score > opData?.score;
-        const isDraw = myData?.score === opData?.score;
-        if (isDraw || iWon) {
-          playSound('victory');
-          triggerVibration('victory');
-        } else {
-          playSound('wrong');
-          triggerVibration('wrong');
-        }
+    const timer = setTimeout(async () => {
+      setShowRoundResults(false);
+      if (isHostRef.current) {
+        const rid = roomIdRef.current;
+        const nextRound = round + 1;
+        const isFinished = nextRound >= (roomState.totalRounds || 10);
+        await update(ref(db, `practice_rooms/${rid}`), {
+          currentRound: nextRound,
+          status: isFinished ? 'finished' : 'ongoing',
+          roundStartTime: Date.now()
+        });
       }
-    } else {
+    }, 2500);
+
+    return () => clearTimeout(timer);
+    // Stringify answers so React can diff properly
+  }, [
+    JSON.stringify(roomState?.player1?.answers),
+    JSON.stringify(roomState?.player2?.answers),
+    roomState?.currentRound
+  ]);
+
+  // ── End-game sounds ──────────────────────────────────────────────────────
+  useEffect(() => {
+    if (roomState?.status === 'finished' && !soundPlayedRef.current) {
+      soundPlayedRef.current = true;
+      const amP1 = roomState.player1?.uid === user.uid;
+      const mine = amP1 ? roomState.player1 : roomState.player2;
+      const opp  = amP1 ? roomState.player2 : roomState.player1;
+      const won  = (mine?.score || 0) > (opp?.score || 0);
+      const draw = (mine?.score || 0) === (opp?.score || 0);
+      if (won || draw) { playSound('victory'); triggerVibration('victory'); }
+      else             { playSound('wrong');   triggerVibration('wrong'); }
+    } else if (roomState?.status !== 'finished') {
       soundPlayedRef.current = false;
     }
-  }, [roomState?.status, user?.uid]);
+  }, [roomState?.status]);
 
-  const handleSelectAnswer = async (idx, isTimeout = false) => {
-    if (hasAnswered) return;
+  // ── Submit answer ────────────────────────────────────────────────────────
+  const submitAnswer = async (idx, isTimeout = false) => {
+    if (hasAnsweredRef.current) return;
+    hasAnsweredRef.current = true;
     setHasAnswered(true);
     setSelectedAnswerIdx(idx);
 
-    const isPlayer1 = roomState.player1.uid === user.uid;
-    const playerKey = isPlayer1 ? 'player1' : 'player2';
+    const state = roomStateRef.current;
+    if (!state) return;
 
-    const activeWordObj = roomState.words[roomState.currentRound];
-    const isCorrect = !isTimeout && idx === activeWordObj.correct;
+    const amP1      = state.player1.uid === user.uid;
+    const playerKey = amP1 ? 'player1' : 'player2';
+    const word      = state.words[state.currentRound];
+    const isCorrect = !isTimeout && idx === word.correct;
 
     let points = 0;
     if (isCorrect) {
-      // Speed bonus: max 200 pts, min 100 pts
       points = Math.round(100 + (timeLeft * 10));
-      playSound('correct');
-      triggerVibration('correct');
+      playSound('correct'); triggerVibration('correct');
     } else {
-      playSound('wrong');
-      triggerVibration('wrong');
+      playSound('wrong'); triggerVibration('wrong');
     }
 
-    const answersRef = ref(db, `practice_rooms/${roomId}/${playerKey}/answers/${roomState.currentRound}`);
-    await set(answersRef, {
-      choiceIdx: idx,
-      points,
-      correct: isCorrect
+    const rid = roomIdRef.current;
+    await set(ref(db, `practice_rooms/${rid}/${playerKey}/answers/${state.currentRound}`), {
+      choiceIdx: idx, points, correct: isCorrect
     });
-
-    const scoreRef = ref(db, `practice_rooms/${roomId}/${playerKey}/score`);
-    await runTransaction(scoreRef, (currentScore) => {
-      return (currentScore || 0) + points;
-    });
+    await runTransaction(ref(db, `practice_rooms/${rid}/${playerKey}/score`), (cur) => (cur || 0) + points);
   };
 
+  const handleSelectAnswer = (idx) => submitAnswer(idx, false);
+
+  // ── Return to lobby ──────────────────────────────────────────────────────
   const handleReturnLobby = () => {
     leaveRoom();
     setRoomId(null);
     setRoomState(null);
     setQueuing(false);
     setErrorMsg('');
-    onComplete({
-      totalWords: roomState?.totalRounds || 10,
-      correctCount: 0,
-      incorrectCount: 0
-    });
+    onComplete({ totalWords: 10, correctCount: 0, incorrectCount: 0 });
   };
 
   // Render Queueing Screen
