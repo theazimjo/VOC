@@ -23,12 +23,11 @@ export default function Layout() {
     setMobileOpen(false);
   }, []);
 
-  // Check if we are in grammar test mode or active story mode
+  // Check if we are in grammar test mode
   const segments = location.pathname.split('/').filter(Boolean);
   const isTestMode = segments.length === 4 && segments[0] === 'grammar';
-  const isStoryActive = segments[0] === 'stories' && segments.length > 1;
 
-  if (isTestMode || isStoryActive) {
+  if (isTestMode) {
     return (
       <div className="layout layout--test-mode">
         <ParticleCanvas />

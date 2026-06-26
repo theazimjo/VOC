@@ -27,8 +27,7 @@ export default function BottomNav() {
     { to: '/',         icon: icons.dashboard, label: 'Dashboard' },
     { to: '/library',  icon: icons.library,   label: 'Kutubxona' },
     { to: '/grammar',  icon: '📖',            label: 'Grammatika' },
-    { to: '/stories',  icon: '✨',            label: 'Hikoyalar' },
-    { to: '/witcher',  icon: '⚔️',            label: 'Witcher' },
+    { to: '/settings', icon: icons.settings,  label: 'Sozlamalar' },
   ];
 
   return (

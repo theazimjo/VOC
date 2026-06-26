@@ -9,8 +9,6 @@ const navItems = [
   { to: '/',         icon: '📊', label: 'Dashboard' },
   { to: '/library',  icon: '📚', label: 'Kutubxona' },
   { to: '/grammar',  icon: '📖', label: 'Grammatika' },
-  { to: '/stories',  icon: '✨', label: 'Hikoyalar' },
-  { to: '/witcher',  icon: '⚔️', label: 'Witcher' },
   { to: '/settings', icon: '⚙️', label: 'Sozlamalar' },
 ];
 
