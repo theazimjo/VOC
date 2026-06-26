@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, GraduationCap, Settings } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap } from 'lucide-react';
 import './BottomNav.css';
 
 export default function BottomNav() {
@@ -7,7 +7,6 @@ export default function BottomNav() {
     { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/library',  icon: BookOpen,        label: 'Kutubxona' },
     { to: '/grammar',  icon: GraduationCap,   label: 'Grammatika' },
-    { to: '/settings', icon: Settings,        label: 'Sozlamalar' },
   ];
 
   return (
