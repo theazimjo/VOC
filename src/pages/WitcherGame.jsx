@@ -48,10 +48,40 @@ export default function WitcherGame() {
   const [showSaveSlots, setShowSaveSlots] = useState(false);
   const typeRef = useRef(null);
 
+  const [voiceoverEnabled, setVoiceoverEnabled] = useState(() => {
+    return localStorage.getItem('witcher_voiceover') !== 'false';
+  });
+  const activeAudioRef = useRef(null);
+
   const episode     = getEpisode(episodeId);
   const nodes       = episode?.nodes ?? [];
   const currentNode = nodes[nodeIndex] ?? null;
   const currentBg   = currentNode?.bg ?? 'village';
+
+  // ── Voiceover Narration Player ──────────────────────────────────────────────
+  useEffect(() => {
+    if (activeAudioRef.current) {
+      activeAudioRef.current.pause();
+      activeAudioRef.current = null;
+    }
+
+    if (!currentNode || screen !== 'narrative') return;
+
+    const hasText = !!(currentNode.text || currentNode.prompt);
+    if (!hasText || !voiceoverEnabled) return;
+
+    const audioUrl = `/witcher/audio/${episodeId}/${currentNode.id}.mp3`;
+    const audio = new Audio(audioUrl);
+    activeAudioRef.current = audio;
+
+    audio.play().catch(err => {
+      console.warn("Failed to play voiceover:", err);
+    });
+
+    return () => {
+      audio.pause();
+    };
+  }, [nodeIndex, episodeId, screen, voiceoverEnabled, currentNode]);
 
   // ── Typewriter ──────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -203,7 +233,14 @@ export default function WitcherGame() {
       <AnimatePresence mode="wait">
         {screen === 'menu'      && <MenuScreen      key="menu"      saves={saves} onNewGame={() => setScreen('saves')} onLoad={loadSlot} onEpisodes={() => setScreen('episodes')} onBack={() => navigate('/')} showDelete={showDeleteConfirm} setShowDelete={setShowDeleteConfirm} onDeleteConfirm={handleDeleteSave} />}
         {screen === 'saves'     && <SaveSelectScreen key="saves"    saves={saves} onSelect={startNewGame} onLoad={loadSlot} onBack={() => setScreen('menu')} showDelete={showDeleteConfirm} setShowDelete={setShowDeleteConfirm} onDeleteConfirm={handleDeleteSave} />}
-        {screen === 'narrative' && <NarrativeScreen  key="narrative" node={currentNode} episode={episode} displayText={displayText} textComplete={textComplete} bg={currentBg} gameState={gameState} onChoice={handleChoice} onSave={handleSaveBtn} saveToast={saveToast} showSaveSlots={showSaveSlots} onPickSlot={doSave} onCloseSaveSlots={() => setShowSaveSlots(false)} />}
+        {screen === 'narrative' && <NarrativeScreen  key="narrative" node={currentNode} episode={episode} displayText={displayText} textComplete={textComplete} bg={currentBg} gameState={gameState} onChoice={handleChoice} onSave={handleSaveBtn} saveToast={saveToast} showSaveSlots={showSaveSlots} onPickSlot={doSave} onCloseSaveSlots={() => setShowSaveSlots(false)} voiceoverEnabled={voiceoverEnabled} onToggleVoiceover={() => {
+          const next = !voiceoverEnabled;
+          setVoiceoverEnabled(next);
+          localStorage.setItem('witcher_voiceover', String(next));
+          if (!next && activeAudioRef.current) {
+            activeAudioRef.current.pause();
+          }
+        }} />}
         {screen === 'combat'    && <CombatScreen      key="combat"   setup={combatSetup} gameState={gameState} onWin={handleCombatWin} onLose={handleCombatLose} />}
         {screen === 'episodes'  && <EpisodeSelectScreen key="episodes" gameState={gameState} onSelect={(id) => { setEpisodeId(id); setNodeIndex(0); setScreen('narrative'); }} onBack={() => setScreen('menu')} />}
         {screen === 'gameover'  && <GameOverScreen   key="gameover"  onRetry={() => { setNodeIndex(combatSetup?.nodeIndex ?? 0); setScreen('narrative'); }} onMenu={() => setScreen('menu')} />}
@@ -312,7 +349,7 @@ function SaveSelectScreen({ saves, onSelect, onBack }) {
 // ─────────────────────────────────────────────────────────────────────────────
 // NARRATIVE SCREEN
 // ─────────────────────────────────────────────────────────────────────────────
-function NarrativeScreen({ node, episode, displayText, textComplete, bg, gameState, onChoice, onSave, saveToast, showSaveSlots, onPickSlot, onCloseSaveSlots }) {
+function NarrativeScreen({ node, episode, displayText, textComplete, bg, gameState, onChoice, onSave, saveToast, showSaveSlots, onPickSlot, onCloseSaveSlots, voiceoverEnabled, onToggleVoiceover }) {
   if (!node) return null;
   const isChoice      = node.type === 'choice';
   const isDialogue    = node.type === 'dialogue';
@@ -366,6 +403,9 @@ function NarrativeScreen({ node, episode, displayText, textComplete, bg, gameSta
           <div className="wg-hud-stats">
             <HpBar current={gameState.character.currentHp} max={gameState.character.maxHp} />
             <span className="wg-hud-gold">💰 {gameState.character.gold}g</span>
+            <button className={`wg-hud-voice-btn ${voiceoverEnabled ? 'active' : 'muted'}`} onClick={e => { e.stopPropagation(); onToggleVoiceover(); }} title="Toggle Voiceover">
+              {voiceoverEnabled ? '🔊' : '🔇'}
+            </button>
             <button className="wg-hud-save-btn" onClick={e => { e.stopPropagation(); onSave(); }} title="Save game">💾</button>
           </div>
         )}
@@ -616,7 +656,7 @@ function CombatScreen({ setup, gameState, onWin, onLose }) {
         {/* Player side */}
         <div className="wg-combatant player-side">
           <div className="wg-combatant-sprite">🧙‍♂️</div>
-          <div className="wg-combatant-name">Esh</div>
+          <div className="wg-combatant-name">Geralt</div>
           <div className="wg-bar-row">
             <span className="wg-bar-label">HP</span>
             <div className="wg-bar"><div className="wg-bar-fill hp" style={{ width: `${playerHpPct}%` }} /></div>

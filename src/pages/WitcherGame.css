@@ -1068,3 +1068,27 @@
   box-shadow: 0 0 15px rgba(196, 168, 74, 0.4);
 }
 
+.wg-hud-voice-btn {
+  background: rgba(30, 24, 50, 0.7);
+  border: 1px solid rgba(196, 168, 74, 0.3);
+  color: #e8e0d0;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+.wg-hud-voice-btn:hover {
+  background: rgba(196, 168, 74, 0.2);
+  border-color: #c4a84a;
+  transform: translateY(-1px);
+}
+.wg-hud-voice-btn.muted {
+  opacity: 0.45;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+

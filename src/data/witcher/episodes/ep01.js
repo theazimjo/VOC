@@ -1,13 +1,13 @@
 // ─── EPISODE 01: SWAMP MISTS ─────────────────────────────────────────────────
-// Act I | ~1,450 words | 4 choices (2 flavor, 1 tactical, 1 moral) | 1 combat
+// Act I | ~2,500 words | 4 choices (2 flavor, 1 tactical, 1 moral) | 1 combat
 
 export const ep01 = {
   id: 'ep01',
   title: 'Swamp Mists',
   actNumber: 1,
   actTitle: 'Act I — Contracts of the Misty Valley',
-  readTime: '10 min',
-  summary: 'Esh arrives at Yakshar village, where children have been vanishing into the swamp at night. He tracks the culprit to a limestone cave—and finds something far more complicated than a simple monster.',
+  readTime: '12 min',
+  summary: 'Geralt of Rivia arrives at Yakshar village, where children have been vanishing into the swamp at night. He tracks the culprit to a limestone cave—and finds something far more complicated than a simple monster.',
   nodes: [
 
     // ══════════════════════════════════════════════════════
@@ -15,44 +15,44 @@ export const ep01 = {
     // ══════════════════════════════════════════════════════
     {
       id: 'n01', type: 'narration', bg: 'village',
-      text: 'The mud road from the eastern steppes ended here—at the crooked gate of Yakshar, the last village before the Botqoqlik swamp swallowed the land.',
+      text: 'The narrow mud road winding from the vast, wind-swept eastern steppes finally ended here, dissolving into the wet, gnarled roots and grey fog of Yakshar. It was a bleak, forgotten settlement of low wooden huts, serving as the final vanguard of humanity before the endless, choking expanse of the Botqoqlik swamp swallowed the earth. The air here was heavy, thick with the stench of stagnant water, decaying peat, and a quiet, suffocating dread that hung over the peat-fired chimneys.',
     },
     {
       id: 'n02', type: 'narration', bg: 'village',
-      text: 'Esh rode in at dusk. The villagers moved aside without a word. They knew what the twin blades meant. They had sent for one, after all.',
+      text: 'Geralt rode in at dusk, the steady clop of his horse’s hooves muffled by the thick mud. The villagers, wrapped in heavy woolens against the damp chill, moved aside without a word, their eyes tracing the two swords crossed on his back—one steel for men, one silver for monsters. They knew what the twin blades meant, and why he had come. They had pooled their meager coins to hire a witcher, after all.',
     },
     {
       id: 'n03', type: 'narration', bg: 'village',
-      text: 'He counted faces through the fog. Too few children. Too many locked shutters. The village well had a thick rope knotted across its mouth—something he had never seen before.',
+      text: 'Geralt counted faces through the creeping fog. Too few children played in the mud. Too many wooden shutters were heavily barred from the inside, locked against the dark. Near the center of the square, the village well had a thick, heavy rope knotted tightly across its wooden mouth—a crude attempt to seal off whatever might crawl up from the deep, damp dark below.',
     },
     {
       id: 'n04', type: 'dialogue', bg: 'village',
       speaker: 'Elder Tokhir', portrait: 'elder', emotion: 'worried',
-      text: '"Witcher. Thank the old gods you came. I am Elder Tokhir. Please follow me quickly—there is much to tell, and very little time before dark."',
+      text: '"Witcher. Thank the old gods you came. I am Elder Tokhir. Please follow me quickly—there is much to tell, and very little time before dark. The mists are already rising, and when the mists come, we are no longer safe."',
     },
     {
       id: 'n05', type: 'narration', bg: 'village',
-      text: "The elder's house smelled of dried herbs and old fear. Unrolled maps of the swamp covered the table. Three red circles marked the last known disappearance sites—all clustered near the northern reed beds.",
+      text: "The elder's house smelled of dried lavender, mutton fat, and old, cold fear. Unrolled maps of the surrounding marshlands covered the creaking wooden table, weighted down by stones. Three crude red circles marked the last known disappearance sites—all clustered dangerously close to the northern reed beds where the water grew deep and dark.",
     },
     {
       id: 'n06', type: 'dialogue', bg: 'village',
       speaker: 'Elder Tokhir', portrait: 'elder', emotion: 'worried',
-      text: '"Eleven days. Four children taken—always at night, always from the swamp\'s edge. We hear the water move. We see nothing else."',
+      text: '"Eleven days now. Four children taken—always in the dead of night, always from the very edge of the swamp. We hear the water move, a sickening splash, and then nothing. We see nothing else. They vanish like smoke in the wind."',
     },
     {
       id: 'n07', type: 'dialogue', bg: 'village',
       speaker: 'Elder Tokhir', portrait: 'elder', emotion: 'fearful',
-      text: '"We hired two sellswords before you. One did not return. The other came back—but he does not speak anymore. He sits and stares at the wall."',
+      text: '"We hired two mercenary sellswords before you. One went into the swamp and did not return; we found his shield floating in the reeds three days later. The other came back—but he does not speak anymore. He sits by the hearth, shivering, staring blankly at the wall as if his soul was stripped away."',
     },
     {
       id: 'n08', type: 'narration', bg: 'village',
-      text: 'Esh studied the map. The disappearances formed a half-circle around a limestone shelf—an area local charts labeled only as "the cold shelf." He had seen patterns like this before.',
+      text: 'Geralt studied the map, his golden, cat-like eyes scanning the red markings. The disappearances formed a distinct half-circle around a limestone shelf—an area local charts labeled only as "the cold shelf." He had seen patterns like this before. It wasn’t a random hunting ground; it was a territory being guarded.',
     },
 
     // ── FLAVOR CHOICE 1 ──────────────────────────────────
     {
       id: 'c1', type: 'choice', bg: 'village', choiceType: 'flavor',
-      prompt: 'Tokhir watches you with desperate eyes, waiting. How do you respond?',
+      prompt: 'Tokhir watches you with desperate, bloodshot eyes, waiting. How do you respond?',
       options: [
         {
           id: 'c1_a',
@@ -66,7 +66,7 @@ export const ep01 = {
         },
         {
           id: 'c1_b',
-          label: '"Payment first, elder. Discuss that—then I will decide if your problem is worth my time."',
+          label: '"Payment first, elder. Let’s discuss the gold—then I will decide if your problem is worth my time."',
           tag: 'Cold',
           tagColor: '#7f8c8d',
           consequences: [
@@ -79,33 +79,33 @@ export const ep01 = {
     {
       id: 'n09a', type: 'narration', bg: 'village',
       condition: { flag: 'c1_choice', value: 'a' },
-      text: "Something in Esh's measured tone loosened Tokhir's shoulders. The elder poured two cups of black tea and began to talk—slowly at first, then all at once.",
+      text: "Something in Geralt's measured, calm tone loosened Tokhir's shoulders. The elder poured two cups of hot, bitter black tea with trembling hands and began to talk—slowly at first, then all at once, spilling details of the cold wind that always preceded the attacks.",
     },
     {
       id: 'n09b', type: 'narration', bg: 'village',
       condition: { flag: 'c1_choice', value: 'b' },
-      text: "Tokhir's jaw tightened. But he placed a coin purse on the table without argument. He had learned not to argue with men who carried two swords.",
+      text: "Tokhir's jaw tightened in frustration, but he placed a heavy, dirty leather coin purse on the wooden table without argument. He knew he had no choice—one does not haggle with a witcher when the shadows are long.",
     },
 
     // ── TIMUR THE BOY ────────────────────────────────────
     {
       id: 'n10', type: 'narration', bg: 'village',
-      text: 'A door cracked open at the far end of the room. A boy—perhaps nine, barefoot despite the cold floor—peered around the wooden frame.',
+      text: 'A door creaked open at the far end of the dim room. A boy—perhaps nine years old, barefoot despite the cold floorboards—peered around the wooden frame, clutching a small wooden toy.',
     },
     {
       id: 'n11', type: 'dialogue', bg: 'village',
       speaker: 'Timur', portrait: 'timur', emotion: 'scared',
-      text: '"I saw one of them. The things that took Aliya. I was hiding in the reeds when they came."',
+      text: '"I saw one of them. The things that took Aliya. I was hiding in the reeds near the well when they came. They rose out of the water like drowned dead men."',
     },
     {
       id: 'n12', type: 'dialogue', bg: 'village',
       speaker: 'Elder Tokhir', portrait: 'elder', emotion: 'worried',
-      text: '"Timur, go back to your mother—"',
+      text: '"Timur, go back to your mother—the witcher is busy, and children should not speak of such horrors."',
     },
     {
       id: 'n13', type: 'dialogue', bg: 'village',
       speaker: 'Timur', portrait: 'timur', emotion: 'scared',
-      text: '"It had a woman\'s hair. Long and black and wet. But its hands—" He held up both palms. "Wrong. Like fish bones wrapped in grey skin. It walked into the water and the water just let it in."',
+      text: '"No, ota, I must tell him! It had a woman\'s hair—long and black and dripping wet. But its hands..." He held up both palms, shivering. "They were wrong. Like fish bones wrapped in grey skin, with claws. It walked into the black water and the water just let it in."',
     },
 
     // ── FLAVOR CHOICE 2 ──────────────────────────────────
@@ -115,7 +115,7 @@ export const ep01 = {
       options: [
         {
           id: 'c2_a',
-          label: '"Come closer. Tell me—what did it smell like?"',
+          label: '"Come closer, boy. Tell me—what did the air smell like when it passed?"',
           tag: 'Thorough',
           tagColor: '#3498db',
           consequences: [
@@ -125,7 +125,7 @@ export const ep01 = {
         },
         {
           id: 'c2_b',
-          label: '"Children see shapes in the dark. Elder—show me where the last tracks were found."',
+          label: '"Children see shapes in the dark. Elder—show me where the last tracks were found on the bank."',
           tag: 'Dismissive',
           tagColor: '#7f8c8d',
           consequences: [
@@ -138,12 +138,12 @@ export const ep01 = {
     {
       id: 'n14a', type: 'narration', bg: 'village',
       condition: { flag: 'c2_choice', value: 'a' },
-      text: 'The boy screwed up his face. "Sour," he said finally. "Like curdled milk. And river clay—the deep kind. Cold. Like something that never gets warm, even in summer."',
+      text: 'The boy screwed up his face in concentration. "Sour," he whispered finally. "Like curdled milk. And cold river clay—the deep, foul kind from the bottom. It felt like something that never gets warm, even in the middle of summer."',
     },
     {
       id: 'n14b', type: 'narration', bg: 'village',
       condition: { flag: 'c2_choice', value: 'b' },
-      text: "Tokhir pointed at the map's northern edge. Behind the closed door, Esh heard the boy's small feet pad away. The witcher filed the child's account somewhere behind his eyes and let it sit.",
+      text: "Tokhir pointed to the map's northern edge where the marsh mud was softest. Behind the closed door, Geralt heard the boy's small feet pad away. The witcher filed the child's description away and prepared to hunt.",
     },
 
     // ══════════════════════════════════════════════════════
@@ -151,47 +151,47 @@ export const ep01 = {
     // ══════════════════════════════════════════════════════
     {
       id: 'n15', type: 'narration', bg: 'swamp',
-      text: 'Esh left the village at midnight. The swamp exhaled cold air the moment he crossed the reed line—the kind of cold that had nothing to do with the season.',
+      text: 'Geralt left the village at midnight. The swamp exhaled a cold, putrid breath the moment he crossed the thick reed line—a deep, unnatural chill that had nothing to do with the night air and everything to do with magic.',
     },
     {
       id: 'n16', type: 'narration', bg: 'swamp',
-      text: 'He found the first trace thirty paces from the water\'s edge. Not footprints. Drag marks. Something heavy had been pulled toward the black water, flanked by two sets of webbed claw marks.',
+      text: 'He found the first trace thirty paces into the marsh. It wasn’t a footprint, but a wide drag mark in the mud. Something heavy had been pulled toward the black, stagnant water, flanked on both sides by deep, webbed claw marks.',
     },
     {
       id: 'n17', type: 'narration', bg: 'swamp',
-      text: 'Drowners. He had known from the standing water in the footprints near the well. What he hadn\'t known was how many.',
+      text: 'Drowners. He had suspected it from the mud near the village well. These foul creatures, born of the spirits of drowned men, were vicious pack hunters. But usually, they didn’t coordinate snatching children from houses.',
     },
     {
       id: 'n17a', type: 'narration', bg: 'swamp',
       condition: { flag: 'c2_clue', value: true },
-      text: 'Then the scent reached him—sour milk and cold river clay, exactly as the boy described. Strong. Recent. He turned north-northeast and moved faster.',
+      text: 'Suddenly, the scent reached his sensitive witcher nose—sour milk and cold river clay, exactly as Timur had described. It was fresh and strong. Geralt adjusted his grip on his steel sword and moved silently through the reeds.',
     },
     {
       id: 'n17b', type: 'narration', bg: 'swamp',
       condition: { flag: 'c2_clue', value: false },
-      text: 'He almost missed the scent trail. Faint—rot beneath the frog-song. He crouched and spent a full minute parsing the cold air before the direction became clear.',
+      text: 'Without the boy’s clue, he almost missed the scent trail. It was faint—just a trace of rot beneath the heavy swamp gas. He crouched in the dark, parsing the cold air for a full minute before the direction became clear.',
     },
     {
       id: 'n18', type: 'narration', bg: 'swamp',
-      text: 'He waded through knee-deep water, steel sword drawn. The silver blade stayed sheathed. Drowners were creatures of flesh—silver would be wasted on them.',
+      text: 'He waded through knee-deep water, his steel sword drawn. The silver blade stayed sheathed on his back. Drowners were creatures of flesh and bone—silver would be wasted on their slimy skins; steel was what they feared.',
     },
     {
       id: 'n19', type: 'narration', bg: 'swamp',
-      text: 'The water was perfectly still. Then it wasn\'t.',
+      text: 'The black water around him was perfectly still. The frog-song suddenly died, replaced by a tense, heavy silence. Then, the surface broke.',
     },
     {
       id: 'n20', type: 'narration', bg: 'swamp',
-      text: 'Three shapes rose from the black surface—long-limbed, pale-skinned, eyes like green lanterns burning under six feet of dark water. Their mouths opened far too wide to be human.',
+      text: 'Three pale, hunched shapes rose from the black water—long-limbed, grey-skinned, with eyes like sickly green lanterns. Their mouths split open in a silent, needle-toothed shriek as they saw him.',
     },
 
     // ── TACTICAL CHOICE ──────────────────────────────────
     {
       id: 'c3', type: 'choice', bg: 'swamp', choiceType: 'tactical',
-      prompt: 'Three Drowners. Twenty paces. One breath to decide.',
+      prompt: 'Three Drowners. They are fast, closing the distance. You have one breath to decide.',
       options: [
         {
           id: 'c3_a',
-          label: '⚡ Cast Aard — a concussive wave to stagger them before they close.',
+          label: '⚡ Cast Aard — a blast of telekinetic force to knock them back and stagger them.',
           tag: 'Tactical',
           tagColor: '#8e44ad',
           consequences: [
@@ -201,7 +201,7 @@ export const ep01 = {
         },
         {
           id: 'c3_b',
-          label: '⚔️ Draw both blades and charge. Steel meets flesh.',
+          label: '⚔️ Draw steel and charge. Meet their aggression with a flurry of silver-hued steel.',
           tag: 'Aggressive',
           tagColor: '#e67e22',
           consequences: [
@@ -214,12 +214,12 @@ export const ep01 = {
     {
       id: 'n21a', type: 'narration', bg: 'swamp',
       condition: { flag: 'tactical_aard', value: true },
-      text: 'Esh thrust his palm forward. The Aard sign detonated as a burst of invisible force—the lead Drowner tumbled backward, crashing into the other two. Three seconds of advantage. He used all of them.',
+      text: 'Geralt thrust his left hand forward, fingers forming the sign of Aard. A blast of compressed air exploded outward. The lead Drowner crashed back into its pack. Seizing the three seconds of chaos, Geralt struck.',
     },
     {
       id: 'n21b', type: 'narration', bg: 'swamp',
       condition: { flag: 'tactical_aard', value: false },
-      text: 'He burst forward through the knee-deep water, closing the gap before the creatures fully surfaced. First blade connected before they had their footing.',
+      text: 'Geralt lunged forward through the splashing water, meeting them head-on. His steel blade cut a silver arc in the dark, slicing through the first creature before it could swing its webbed claws.',
     },
 
     // ── COMBAT ────────────────────────────────────────────
@@ -240,61 +240,64 @@ export const ep01 = {
     // ══════════════════════════════════════════════════════
     {
       id: 'n22', type: 'narration', bg: 'swamp',
-      text: 'Esh cleaned the blade on a tuft of dry reeds at the water\'s edge. His hands did not shake. They hadn\'t shaken since he was nineteen. He wasn\'t sure that was a good thing.',
+      text: 'Geralt cleaned the dark blood from his blade on a tuft of dry reeds. His hands did not shake. They hadn’t shaken since the trials of his youth. He wondered, not for the first time, if that was a blessing or a curse.',
     },
     {
       id: 'n23', type: 'narration', bg: 'swamp',
-      text: 'Beyond the waterline, half-submerged in the limestone shelf, a cave entrance gaped in the rock face. Old. Used often. The smell from it was overwhelming—sour and cold and wrong.',
+      text: 'Beyond the tall reeds, embedded in the limestone shelf, a dark cave mouth gaped like a wound. It was old, and the mud at the entrance was trodden smooth. The air venting from within was ice-cold, smelling of wet earth and rot.',
     },
     {
       id: 'n24', type: 'narration', bg: 'swamp',
-      text: 'He went in.',
+      text: 'Geralt sheathed his blade and stepped inside, lighting a small torch. The flame flickered, casting long, dancing shadows on the wet limestone walls.',
     },
-    { id: 'n25', type: 'narration', bg: 'cave',
-      text: "Children's shoes. A torn headscarf embroidered with yellow thread. A carved wooden horse, worn smooth by many small hands. Arranged in a careful row on a dry ledge. As if someone was keeping them safe.",
+    {
+      id: 'n25', type: 'narration', bg: 'cave',
+      text: "On a dry stone ledge, he found children's belongings: small leather shoes, a torn yellow scarf, and a carved wooden horse. They were arranged in a neat, careful row—not discarded, but kept like precious treasures.",
     },
-    { id: 'n26', type: 'narration', bg: 'cave',
-      text: 'He heard breathing. Deep in the cave. Not a child\'s.',
+    {
+      id: 'n26', type: 'narration', bg: 'cave',
+      text: 'Geralt heard low, raspy breathing from the back of the cavern. It was heavy, wet, and distinctly non-human. He drew his silver blade—a curse was close.',
     },
-    { id: 'n27', type: 'narration', bg: 'cave',
-      text: 'She was crouched in the furthest corner—wrapped in river reeds and silt, barely human in outline. A woman. Perhaps forty. Her nails were too long. Her eyes caught his lamp light and did not reflect it the way eyes should.',
+    {
+      id: 'n27', type: 'narration', bg: 'cave',
+      text: 'She was crouched in the shadows, wrapped in rotting reeds and mud. Her face was half-human, but her fingers ended in long, bone-like claws. Her eyes caught the torchlight, glowing with a faint, tragic green light.',
     },
     {
       id: 'n28', type: 'dialogue', bg: 'cave',
       speaker: 'Cursed Woman', portrait: 'cursed_woman', emotion: 'resigned',
-      text: '"...I know what you are. I heard the water change when you fought them. You have come to kill me, then. Do it quickly."',
+      text: '"...I know what you are. I heard the water change when you cut down the drowners outside. You have come to end me, then. Go on, witcher. Do it quickly."',
     },
     {
       id: 'n29', type: 'narration', bg: 'swamp',
-      text: 'Her voice was almost normal. Almost.',
+      text: 'Her voice was rough, scraping against the stone walls, but it was sane. There was a human soul trapped beneath the rotting skin and scales of the curse.',
     },
     {
       id: 'n30', type: 'dialogue', bg: 'cave',
       speaker: 'Cursed Woman', portrait: 'cursed_woman', emotion: 'desperate',
-      text: '"I do not take them to hurt them. I cannot stop my hands after dark—I feel them moving and I cannot stop it. But I keep the children safe. In the back. Just look. Please just look."',
+      text: '"I do not take the children to hurt them. I cannot control my hands when the sun sets—the river spirit claims my body. But I keep them safe here, in the back. I feed them. Please, look. Just look at them."',
     },
     {
       id: 'n31', type: 'narration', bg: 'swamp',
-      text: 'Past her, behind a natural partition of rock, Esh found them. Four children. Frightened. Thin. Alive. Sleeping on dry straw beside a small, smokeless flame she had somehow kept burning for them.',
+      text: 'Geralt stepped past her, silver sword ready. Behind a partition of rock, he found them—the four missing children. They were thin and scared, but unharmed, sleeping soundly on dry straw beside a tiny, smokeless campfire.',
     },
     {
       id: 'n32', type: 'dialogue', bg: 'cave',
       speaker: 'Cursed Woman', portrait: 'cursed_woman', emotion: 'sad',
-      text: '"I was Tokhir\'s wife," she whispered. "Before the river spirit took root in me. Twelve years ago. He thinks I drowned. He does not know I am still in here—behind it."',
+      text: '"I was Tokhir\'s wife," she whispered, a tear cleaning a path through the mud on her cheek. "Before the river spirit took me twelve years ago. He thinks I drowned. He does not know I am still here—alive behind the beast."',
     },
     {
       id: 'n33', type: 'narration', bg: 'swamp',
-      text: 'Esh looked at the children. He looked at her ruined hands. He looked at the wooden horse in the dirt between them. He looked back at her.',
+      text: 'Geralt looked at the sleeping children. He looked at her clawed, wet hands. He looked at the silver sword in his hand, then sheathed it. The situation was far more complex than a simple beast hunt.',
     },
 
     // ── MAJOR MORAL CHOICE ───────────────────────────────
     {
       id: 'c4', type: 'choice', bg: 'swamp', choiceType: 'moral',
-      prompt: 'The silver blade is at your hip. The children need to leave tonight.',
+      prompt: 'The silver blade is at your side. The children must go home tonight. What is your choice?',
       options: [
         {
           id: 'c4_a',
-          label: '⚔️ Draw the silver sword. End the curse—and the cursed. It is the only mercy this world allows.',
+          label: '⚔️ Draw silver and slay her. End the curse and the beast. It is the only mercy this cruel world allows.',
           tag: 'Ruthless',
           tagColor: '#c0392b',
           consequences: [
@@ -306,7 +309,7 @@ export const ep01 = {
         },
         {
           id: 'c4_b',
-          label: '🛡️ Sheathe the blade. Every curse has a root—find it and cut it. She is still in there.',
+          label: '🛡️ Sheathe your sword. Every curse has a root—find it and lift it. She deserves a chance.',
           tag: 'Merciful',
           tagColor: '#27ae60',
           consequences: [
@@ -323,48 +326,48 @@ export const ep01 = {
     {
       id: 'n34a', type: 'narration', bg: 'swamp',
       condition: { flag: 'ep1_killed_woman', value: true },
-      text: "The silver blade caught no moonlight in the cave's dark. It did not need to. What was done was done in a single breath—more mercy than the river spirit deserved.",
+      text: "The silver blade caught no light in the dark cavern. It was over in a single, clean strike—a witcher's mercy. What was done was done, and the beast would steal no more children.",
     },
     {
       id: 'n34b', type: 'narration', bg: 'swamp',
       condition: { flag: 'ep1_spared_woman', value: true },
-      text: 'Esh sat down in the dirt across from her. "Tell me everything about the night it began," he said. "Leave nothing out. We have until the children wake."',
+      text: 'Geralt sat down in the dirt across from her, sheathing his sword. "Tell me everything about the night you were taken," he said, his voice flat but calm. "Leave nothing out. We have until dawn before the children wake."',
     },
     {
       id: 'n34c', type: 'narration', bg: 'swamp',
       condition: { flag: 'ep1_spared_woman', value: true },
-      text: 'She told him about the rune carved into the limestone beneath the village well—and about the man who carved it.',
+      text: 'She spoke of a dark rite performed twelve years ago, and a strange rune carved into the stone beneath the village well—placed there by someone she trusted.',
     },
     {
       id: 'n35', type: 'narration', bg: 'village',
-      text: 'He carried the first child out of the cave as dawn broke over the swamp. Pink light on black water—the only beautiful thing in this place.',
+      text: 'Geralt carried the youngest child in his arms as they walked out of the swamp. Behind them, the pink light of dawn broke over the dark waters—a rare, silent beauty in a cursed land.',
     },
     {
       id: 'n36', type: 'narration', bg: 'village',
-      text: 'The village was waiting at the tree line. Someone had lit every torch they owned.',
+      text: 'The villagers were waiting at the marsh edge, holding flickering torches. They gasped as the figures emerged from the morning mist.',
     },
     {
       id: 'n37', type: 'dialogue', bg: 'village',
       speaker: 'Elder Tokhir', portrait: 'elder', emotion: 'relieved',
-      text: '"They\'re alive. You—you actually brought them back." He dropped to both knees in the mud. "Name your price. Anything you want."',
+      text: '"They\'re alive. You... you actually brought them back." The old man fell to his knees in the wet mud, weeping. "Name your price, witcher. We will pay whatever you ask."',
     },
     {
       id: 'n37b', type: 'narration', bg: 'village',
       condition: { flag: 'ep1_killed_woman', value: true },
-      text: "Esh accepted the payment without a word about the cave's other occupant. Some things were better left in the dark.",
+      text: "Geralt accepted the bag of coins, saying nothing of the beast's true identity. Some secrets were better left buried in the swamp's dark waters.",
     },
     {
       id: 'n37c', type: 'narration', bg: 'village',
       condition: { flag: 'ep1_spared_woman', value: true },
-      text: '"There is something beneath your well," Esh said. "A rune in the limestone. Do not touch it until I return." Tokhir stared at him. He did not explain further.',
+      text: '"There is a rune beneath your well," Geralt said, his voice cold. "Do not touch it, and do not let anyone near it until I return." Tokhir stared at him in confusion, but dared not ask questions.',
     },
     {
       id: 'n38', type: 'narration', bg: 'village',
-      text: 'He accepted the payment without counting it and walked back to the road alone, as he always did.',
+      text: 'Geralt secured the purse to his saddle without counting the coins. He mounted his horse and turned back toward the main road, riding alone into the morning fog.',
     },
     {
       id: 'n39', type: 'narration', bg: 'village',
-      text: 'The mist was burning off the swamp behind him. A new day over old mud.',
+      text: 'Behind him, the mist was slowly burning off the marsh. A new day rose over the old, dark waters of Botqoqlik, but the witcher knew the danger was far from over.',
     },
 
     // ══════════════════════════════════════════════════════
@@ -372,11 +375,11 @@ export const ep01 = {
     // ══════════════════════════════════════════════════════
     {
       id: 'n40', type: 'narration', bg: 'village',
-      text: 'He was ten paces onto the eastern road when the arrow struck the dead tree beside his head. Not a warning—too precise for that. Too calm.',
+      text: 'He was barely ten paces onto the eastern highway when a black-feathered arrow struck the dead tree beside his head. It wasn’t a wild shot—it was fired with terrifying precision, pinning a rolled parchment to the bark.',
     },
     {
       id: 'cliff1', type: 'cliffhanger', bg: 'village',
-      text: 'Pinned to the bark by a black-feathered shaft: a rolled piece of parchment, sealed in dark wax stamped with the royal crest of the Northern Kingdom—a crown above two crossed blades. Someone had watched the entire night. They had seen everything. And they had written only three words inside:\n\n"We need you."',
+      text: 'Geralt pulled the arrow free. The parchment was sealed with dark, red wax bearing the royal crest of the Northern Kingdom—a crown above crossed swords. Inside, a single line was written in elegant, dark ink:\n\n"We need you, Geralt."',
       nextEpisode: 'ep02',
     },
   ],
