@@ -633,12 +633,12 @@ const PLAYER_DECK = [
   { id: 'p_crin_1', name: 'Crinfrid Reavers', strength: 6, row: 'ranged', type: 'unit', icon: '🏹', image: '/witcher/swamp_night.png', description: 'Dragon hunters.' },
   { id: 'p_treb_1', name: 'Siege Trebuchet', strength: 8, row: 'siege', type: 'unit', icon: '⚙️', image: '/witcher/cave_interior.png', description: 'Devastating siege engine.' },
   { id: 'p_cat_1', name: 'Catapult', strength: 8, row: 'siege', type: 'unit', icon: '⚙️', image: '/witcher/cave_interior.png', description: 'Launches giant burning rocks.' },
-  { id: 'p_horn_1', name: 'Commander\'s Horn', strength: 0, row: 'special', type: 'horn', icon: '🎺', image: '', description: 'Doubles strength of a row.' },
-  { id: 'p_decoy_1', name: 'Decoy', strength: 0, row: 'special', type: 'decoy', icon: '🔄', image: '', description: 'Swap unit card back to hand.' },
-  { id: 'p_frost', name: 'Biting Frost', strength: 0, row: 'weather', type: 'weather', icon: '❄️', image: '', description: 'Sets Melee units to 1 strength.' },
-  { id: 'p_fog', name: 'Impenetrable Fog', strength: 0, row: 'weather', type: 'weather', icon: '🌫️', description: 'Sets Ranged units to 1 strength.' },
-  { id: 'p_rain', name: 'Torrential Rain', strength: 0, row: 'weather', type: 'weather', icon: '🌧️', image: '', description: 'Sets Siege units to 1 strength.' },
-  { id: 'p_clear', name: 'Clear Weather', strength: 0, row: 'weather', type: 'weather', icon: '☀️', image: '', description: 'Removes all weather conditions.' }
+  { id: 'p_horn_1', name: 'Commander\'s Horn', strength: 0, row: 'special', type: 'horn', icon: '🎺', image: '/witcher/gwent_horn.png', description: 'Doubles strength of a row.' },
+  { id: 'p_decoy_1', name: 'Decoy', strength: 0, row: 'special', type: 'decoy', icon: '🔄', image: '/witcher/gwent_decoy.png', description: 'Swap unit card back to hand.' },
+  { id: 'p_frost', name: 'Biting Frost', strength: 0, row: 'weather', type: 'weather', icon: '❄️', image: '/witcher/gwent_frost.png', description: 'Sets Melee units to 1 strength.' },
+  { id: 'p_fog', name: 'Impenetrable Fog', strength: 0, row: 'weather', type: 'weather', icon: '🌫️', image: '/witcher/gwent_fog.png', description: 'Sets Ranged units to 1 strength.' },
+  { id: 'p_rain', name: 'Torrential Rain', strength: 0, row: 'weather', type: 'weather', icon: '🌧️', image: '/witcher/gwent_rain.png', description: 'Sets Siege units to 1 strength.' },
+  { id: 'p_clear', name: 'Clear Weather', strength: 0, row: 'weather', type: 'weather', icon: '☀️', image: '/witcher/gwent_clear.png', description: 'Removes all weather conditions.' }
 ];
 
 const ENEMY_DECK = [
@@ -655,8 +655,8 @@ const ENEMY_DECK = [
   { id: 'e_foglet', name: 'Foglet', strength: 4, row: 'ranged', type: 'unit', icon: '👻', image: '/witcher/swamp_night.png', description: 'Lures prey into fog.' },
   { id: 'e_garg', name: 'Gargoyle', strength: 6, row: 'siege', type: 'unit', icon: '🗿', image: '/witcher/cave_interior.png', description: 'Living stone sentinel.' },
   { id: 'e_harpy', name: 'Harpy', strength: 4, row: 'ranged', type: 'unit', icon: '🦅', image: '/witcher/swamp_night.png', description: 'Scavenger bird.' },
-  { id: 'e_frost', name: 'Biting Frost', strength: 0, row: 'weather', type: 'weather', icon: '❄️', image: '', description: 'Sets Melee units to 1 strength.' },
-  { id: 'e_horn', name: 'Commander\'s Horn', strength: 0, row: 'special', type: 'horn', icon: '🎺', image: '', description: 'Doubles strength of a row.' },
+  { id: 'e_frost', name: 'Biting Frost', strength: 0, row: 'weather', type: 'weather', icon: '❄️', image: '/witcher/gwent_frost.png', description: 'Sets Melee units to 1 strength.' },
+  { id: 'e_horn', name: 'Commander\'s Horn', strength: 0, row: 'special', type: 'horn', icon: '🎺', image: '/witcher/gwent_horn.png', description: 'Doubles strength of a row.' },
 ];
 
 const shuffleDeck = (deck) => [...deck].sort(() => Math.random() - 0.5);
