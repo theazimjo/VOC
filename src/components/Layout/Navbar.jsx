@@ -8,7 +8,12 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [imageError, setImageError] = useState(false);
   const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [user?.photoURL]);
 
   // Monitor online status
   useEffect(() => {
@@ -98,8 +103,8 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
             onClick={() => setDropdownOpen((prev) => !prev)}
             aria-label="Profil menyusi"
           >
-            {user?.photoURL ? (
-              <img src={user.photoURL} alt={user.displayName || 'Avatar'} />
+            {user?.photoURL && !imageError ? (
+              <img src={user.photoURL} alt={user.displayName || 'Avatar'} onError={() => setImageError(true)} />
             ) : (
               getInitials()
             )}

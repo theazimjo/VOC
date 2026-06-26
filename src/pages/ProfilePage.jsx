@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,11 @@ export default function ProfilePage() {
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [user?.photoURL]);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -45,8 +50,8 @@ export default function ProfilePage() {
 
       <div className="profile-card">
         <div className="profile-avatar">
-          {user?.photoURL ? (
-            <img src={user.photoURL} alt="Avatar" />
+          {user?.photoURL && !imageError ? (
+            <img src={user.photoURL} alt="Avatar" onError={() => setImageError(true)} />
           ) : (
             getInitial()
           )}
