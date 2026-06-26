@@ -17,6 +17,7 @@ import QuizGame from '../components/Practice/QuizGame';
 import SpacedRepetition from '../components/Practice/SpacedRepetition';
 import DictationGame from '../components/Practice/DictationGame';
 import PronounceGame from '../components/Practice/PronounceGame';
+import DuelGame from '../components/Practice/DuelGame';
 import './PracticePage.css';
 
 export default function PracticePage() {
@@ -154,6 +155,12 @@ export default function PracticePage() {
     setSelectedMode(mode);
     setWrongWords([]);
     
+    if (mode === 'duel') {
+      setPracticeWords(sourceWords);
+      setStep('practice');
+      return;
+    }
+
     if (sourceWords.length === 0) {
       showAlert("Bu manbada so'zlar yo'q!");
       return;
@@ -279,6 +286,7 @@ export default function PracticePage() {
       case 'dictation': return <DictationGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
       case 'spaced': return <SpacedRepetition {...props} />;
+      case 'duel': return <DuelGame words={practiceWords} onComplete={handleComplete} user={user} />;
       default: return null;
     }
   };

@@ -58,6 +58,14 @@ export default function PracticeHub({ onSelectMode }) {
       desc: "Ilmiy tasdiqlangan interval takrorlash algoritmi yordamida yod oling",
       badge: 'Kunlik vazifa',
       glowColor: 'hsl(180, 85%, 50%)'
+    },
+    {
+      id: 'duel',
+      icon: '⚔️',
+      title: 'Onlayn Jang (Duel)',
+      desc: 'Boshqa o\'yinchilar bilan real-vaqtda so\'z yodlash bo\'yicha bellashing',
+      badge: 'Multiplayer 👤vs👤',
+      glowColor: 'hsl(360, 85%, 55%)'
     }
   ];
 
