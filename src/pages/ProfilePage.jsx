@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useAvatar } from '../hooks/useAvatar';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
@@ -10,11 +11,7 @@ export default function ProfilePage() {
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
-  const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    setImageError(false);
-  }, [user?.photoURL]);
+  const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -50,8 +47,8 @@ export default function ProfilePage() {
 
       <div className="profile-card">
         <div className="profile-avatar">
-          {user?.photoURL && !imageError ? (
-            <img src={user.photoURL} alt="Avatar" onError={() => setImageError(true)} />
+          {avatarSrc && !avatarError ? (
+            <img src={avatarSrc} alt="Avatar" />
           ) : (
             getInitial()
           )}

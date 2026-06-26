@@ -442,8 +442,10 @@ export default function DuelGame({ words, onComplete, user }) {
 
   if (!roomState) return null;
 
-  const myData = isPlayer1 ? roomState.player1 : roomState.player2;
-  const opData = isPlayer1 ? roomState.player2 : roomState.player1;
+  // Derive identity from roomState directly — isHost state may lag behind
+  const isPlayer1 = roomState.player1?.uid === user.uid;
+  const myData = isPlayer1 ? roomState.player1 : (roomState.player2 || roomState.player1);
+  const opData = isPlayer1 ? (roomState.player2 || roomState.player1) : roomState.player1;
 
   if (roomState.status === 'finished') {
     const iWon = myData.score > opData.score;

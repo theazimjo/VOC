@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useAvatar } from '../../hooks/useAvatar';
 import './Sidebar.css';
 
 const navItems = [
@@ -18,11 +18,7 @@ const navItems = [
 export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user, logout } = useAuth();
   const { theme } = useTheme();
-  const [imageError, setImageError] = useState(false);
-
-  useEffect(() => {
-    setImageError(false);
-  }, [user?.photoURL]);
+  const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
 
   const handleLogout = async () => {
     try {
@@ -105,8 +101,8 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
         {/* Footer — user info */}
         <div className="sidebar-footer">
           <div className="sidebar-avatar">
-            {user?.photoURL && !imageError ? (
-              <img src={user.photoURL} alt={user.displayName || 'Avatar'} onError={() => setImageError(true)} />
+            {avatarSrc && !avatarError ? (
+              <img src={avatarSrc} alt={user.displayName || 'Avatar'} />
             ) : (
               getInitials()
             )}

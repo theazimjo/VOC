@@ -2,18 +2,15 @@ import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import { useAvatar } from '../../hooks/useAvatar';
 import './Navbar.css';
 
 export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [imageError, setImageError] = useState(false);
+  const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
   const dropdownRef = useRef(null);
-
-  useEffect(() => {
-    setImageError(false);
-  }, [user?.photoURL]);
 
   // Monitor online status
   useEffect(() => {
@@ -103,8 +100,8 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
             onClick={() => setDropdownOpen((prev) => !prev)}
             aria-label="Profil menyusi"
           >
-            {user?.photoURL && !imageError ? (
-              <img src={user.photoURL} alt={user.displayName || 'Avatar'} onError={() => setImageError(true)} />
+            {avatarSrc && !avatarError ? (
+              <img src={avatarSrc} alt={user.displayName || 'Avatar'} />
             ) : (
               getInitials()
             )}
