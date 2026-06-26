@@ -1,0 +1,182 @@
+[
+  {
+    "word": "Geralt",
+    "start": 0.1,
+    "end": 0.5
+  },
+  {
+    "word": "stepped",
+    "start": 0.5125,
+    "end": 0.8875
+  },
+  {
+    "word": "past",
+    "start": 0.9,
+    "end": 1.25
+  },
+  {
+    "word": "her",
+    "start": 1.2625,
+    "end": 1.4
+  },
+  {
+    "word": "silver",
+    "start": 1.675,
+    "end": 2.0875
+  },
+  {
+    "word": "sword",
+    "start": 2.1,
+    "end": 2.4
+  },
+  {
+    "word": "ready",
+    "start": 2.4125,
+    "end": 2.825
+  },
+  {
+    "word": "Behind",
+    "start": 3.6875,
+    "end": 4.0625
+  },
+  {
+    "word": "a",
+    "start": 4.075,
+    "end": 4.125
+  },
+  {
+    "word": "partition",
+    "start": 4.1375,
+    "end": 4.625
+  },
+  {
+    "word": "of",
+    "start": 4.6375,
+    "end": 4.75
+  },
+  {
+    "word": "rock",
+    "start": 4.7625,
+    "end": 5.15
+  },
+  {
+    "word": "he",
+    "start": 5.375,
+    "end": 5.475
+  },
+  {
+    "word": "found",
+    "start": 5.4875,
+    "end": 5.8125
+  },
+  {
+    "word": "them",
+    "start": 5.825,
+    "end": 6.05
+  },
+  {
+    "word": "the",
+    "start": 6.3125,
+    "end": 6.4125
+  },
+  {
+    "word": "four",
+    "start": 6.425,
+    "end": 6.7
+  },
+  {
+    "word": "missing",
+    "start": 6.7125,
+    "end": 7.075
+  },
+  {
+    "word": "children",
+    "start": 7.0875,
+    "end": 7.6375
+  },
+  {
+    "word": "They",
+    "start": 8.5,
+    "end": 8.675
+  },
+  {
+    "word": "were",
+    "start": 8.6875,
+    "end": 8.825
+  },
+  {
+    "word": "thin",
+    "start": 8.8375,
+    "end": 9.1625
+  },
+  {
+    "word": "and",
+    "start": 9.175,
+    "end": 9.3
+  },
+  {
+    "word": "scared",
+    "start": 9.3125,
+    "end": 9.7625
+  },
+  {
+    "word": "but",
+    "start": 9.9875,
+    "end": 10.15
+  },
+  {
+    "word": "unharmed",
+    "start": 10.1625,
+    "end": 10.75
+  },
+  {
+    "word": "sleeping",
+    "start": 10.975,
+    "end": 11.4375
+  },
+  {
+    "word": "soundly",
+    "start": 11.45,
+    "end": 11.924999999999999
+  },
+  {
+    "word": "on",
+    "start": 11.9375,
+    "end": 12.0375
+  },
+  {
+    "word": "dry",
+    "start": 12.05,
+    "end": 12.3125
+  },
+  {
+    "word": "straw",
+    "start": 12.325,
+    "end": 12.712499999999999
+  },
+  {
+    "word": "beside",
+    "start": 12.725,
+    "end": 13.125
+  },
+  {
+    "word": "a",
+    "start": 13.1375,
+    "end": 13.1875
+  },
+  {
+    "word": "tiny",
+    "start": 13.2,
+    "end": 13.625
+  },
+  {
+    "word": "smokeless",
+    "start": 13.8875,
+    "end": 14.362499999999999
+  },
+  {
+    "word": "campfire",
+    "start": 14.375,
+    "end": 15.0875
+  }
+]

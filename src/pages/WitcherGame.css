@@ -337,53 +337,180 @@
   left: 0;
   right: 0;
   z-index: 20;
-  padding: 14px 20px;
+  padding: 14px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(to bottom, rgba(5,5,8,0.7) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(12, 10, 18, 0.92) 0%, rgba(8, 6, 12, 0.8) 100%);
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, transparent, rgba(196, 168, 74, 0.5) 20%, rgba(245, 215, 142, 0.8) 50%, rgba(196, 168, 74, 0.5) 80%, transparent) 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wg-hud-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.wg-medallion-svg {
+  color: #f5d78e;
+  filter: drop-shadow(0 0 8px rgba(245, 215, 142, 0.5));
+  animation: medallion-glow 4s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+
+@keyframes medallion-glow {
+  0% { filter: drop-shadow(0 0 6px rgba(245, 215, 142, 0.3)); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 14px rgba(245, 215, 142, 0.75)); transform: scale(1.03); }
 }
 
 .wg-hud-ep {
   font-family: 'Cinzel', serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  color: rgba(196,168,74,0.7);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #f5d78e;
+  text-shadow: 0 0 8px rgba(245, 215, 142, 0.3);
   text-transform: uppercase;
 }
 
 .wg-hud-stats {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 22px;
 }
 
 .wg-hud-hp-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  background: rgba(5, 5, 8, 0.6);
+  padding: 5px 14px;
+  border-radius: 30px;
+  border: 1px solid rgba(196, 168, 74, 0.25);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
-.wg-hud-hp-label { font-size: 0.72rem; }
+
+.wg-hud-hp-row.low-hp {
+  border-color: rgba(231, 76, 60, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 12px rgba(231, 76, 60, 0.5);
+  background: rgba(30, 5, 5, 0.6);
+  animation: pulse-border 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 6px rgba(231, 76, 60, 0.3); }
+  100% { box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 16px rgba(231, 76, 60, 0.7); }
+}
+
+.wg-hud-hp-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wg-heart-svg {
+  color: #e74c3c;
+  filter: drop-shadow(0 0 6px rgba(231, 76, 60, 0.8));
+  transition: transform 0.2s ease;
+}
+
+.wg-hud-hp-row:hover .wg-heart-svg {
+  transform: scale(1.15);
+}
+
 .wg-hud-hp-bar {
-  width: 80px;
-  height: 6px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 3px;
+  width: 100px;
+  height: 9px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
 }
+
 .wg-hud-hp-fill {
   height: 100%;
-  border-radius: 3px;
-  transition: width 0.4s ease, background 0.4s ease;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #8a0303 0%, #d32f2f 70%, #ff5252 100%);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 0 8px rgba(211, 47, 47, 0.6);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .wg-hud-hp-val {
-  font-size: 0.68rem;
-  color: rgba(232,224,208,0.6);
-  min-width: 48px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #e8e0d0;
+  min-width: 55px;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
+
 .wg-hud-gold {
-  font-size: 0.72rem;
-  color: #c4a84a;
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #f5d78e;
+  text-shadow: 0 0 8px rgba(245, 215, 142, 0.4);
+  background: rgba(5, 5, 8, 0.6);
+  padding: 5px 14px;
+  border-radius: 30px;
+  border: 1px solid rgba(196, 168, 74, 0.25);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 2px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.wg-hud-gold:hover {
+  border-color: #f5d78e;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 12px rgba(245, 215, 142, 0.4);
+}
+
+.wg-coin-svg {
+  color: #f5d78e;
+  filter: drop-shadow(0 0 4px rgba(245, 215, 142, 0.6));
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wg-hud-gold:hover .wg-coin-svg {
+  transform: rotate(360deg);
+}
+
+.wg-hud-voice-btn, .wg-hud-save-btn {
+  background: rgba(15, 12, 22, 0.85);
+  border: 1px solid rgba(196, 168, 74, 0.35);
+  color: #f5d78e;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.wg-hud-voice-btn:hover, .wg-hud-save-btn:hover {
+  background: rgba(196, 168, 74, 0.2);
+  border-color: #f5d78e;
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 0 15px rgba(245, 215, 142, 0.6), 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.wg-hud-voice-btn.muted {
+  opacity: 0.45;
+  border-color: rgba(232, 224, 208, 0.2);
+  color: rgba(232, 224, 208, 0.4);
+  background: rgba(5, 5, 8, 0.6);
+  box-shadow: none;
 }
 
 /* Portrait */
@@ -462,6 +589,35 @@
   color: #f0c0b0;
   font-size: clamp(1rem, 2.5vw, 1.12rem);
   white-space: pre-line;
+}
+
+/* Word Highlighting */
+.wg-word {
+  transition: color 0.18s ease, opacity 0.18s ease, text-shadow 0.18s ease, transform 0.18s ease;
+  display: inline-block;
+  margin-right: 0.28em;
+}
+.wg-word.read {
+  color: #e8e0d0;
+  opacity: 1;
+}
+.wg-text.dialogue .wg-word.read {
+  color: #f5f0e8;
+  opacity: 1;
+}
+.wg-word.active {
+  color: #f5d78e;
+  opacity: 1;
+  text-shadow: 0 0 10px rgba(245, 215, 142, 0.8), 0 0 20px rgba(245, 215, 142, 0.4);
+  transform: scale(1.04);
+}
+.wg-word.future {
+  color: #e8e0d0;
+  opacity: 0.38;
+}
+.wg-text.dialogue .wg-word.future {
+  color: #f5f0e8;
+  opacity: 0.38;
 }
 
 .wg-cursor {
@@ -572,227 +728,581 @@
    COMBAT SCREEN
    ══════════════════════════════════════════════════════════════════════════ */
 
-.wg-combat {
-  background: #050508;
-  flex-direction: column;
-}
+/* ══════════════════════════════════════════════════════════════════════════
+   GWENT MINI-GAME SCREEN
+   ══════════════════════════════════════════════════════════════════════════ */
 
-.wg-combat.shake {
-  animation: screen-shake 0.35s cubic-bezier(.36,.07,.19,.97) both;
-}
-@keyframes screen-shake {
-  10%,90%  { transform: translate(-3px, 0); }
-  20%,80%  { transform: translate(4px, 0); }
-  30%,50%,70% { transform: translate(-4px, 0); }
-  40%,60%  { transform: translate(4px, 0); }
-}
-
-.wg-combat-bg {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 30%, rgba(60,10,10,0.6) 0%, rgba(5,5,8,1) 70%);
-}
-
-/* Combat result overlay */
-.wg-combat-result {
-  position: absolute;
-  inset: 0;
-  z-index: 100;
+.wg-gwent {
+  background: #09080c;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
 }
-.wg-combat-result.victory { background: rgba(10,40,10,0.85); }
-.wg-combat-result.defeat  { background: rgba(40,5,5,0.88); }
-.wg-result-title {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 2.5rem;
-  color: #c4a84a;
-}
-.wg-result-sub { font-size: 1rem; color: rgba(232,224,208,0.7); }
 
-/* Arena */
-.wg-combat-arena {
+.gwent-board {
+  display: flex;
+  flex: 1;
+  width: 100%;
   position: relative;
   z-index: 10;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 20px;
-  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.wg-combatant {
+/* Left Scores Sidebar */
+.gwent-sidebar {
+  width: 100px;
+  background: rgba(12, 10, 18, 0.95);
+  border-right: 1px solid rgba(196, 168, 74, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 8px;
+  align-items: center;
+  z-index: 15;
+}
+
+.gwent-sidebar-player {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  flex: 1;
-  max-width: 200px;
+  gap: 4px;
+  width: 100%;
+  position: relative;
 }
 
-.wg-combatant-sprite {
-  font-size: clamp(3rem, 10vw, 5rem);
-  line-height: 1;
-  filter: drop-shadow(0 0 12px rgba(196,168,74,0.4));
-  animation: idle-bob 2.5s ease-in-out infinite;
-}
-@keyframes idle-bob {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-6px); }
-}
-
-.enemy-sprite { animation: enemy-idle 2s ease-in-out infinite; }
-@keyframes enemy-idle {
-  0%, 100% { transform: translateY(0) scaleX(1); }
-  50%       { transform: translateY(-5px) scaleX(1.02); }
-}
-.enemy-sprite.telegraph {
-  animation: telegraph-pulse 0.4s ease-in-out infinite;
-  filter: drop-shadow(0 0 16px rgba(231,76,60,0.8));
-}
-@keyframes telegraph-pulse {
-  0%, 100% { transform: scale(1); }
-  50%       { transform: scale(1.12); }
-}
-
-.wg-combatant-name {
+.gwent-sb-name {
   font-family: 'Cinzel', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  color: #c4a84a;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  color: rgba(232, 224, 208, 0.65);
+  text-align: center;
   text-transform: uppercase;
 }
 
-.wg-enemy-desc {
-  font-size: 0.65rem;
-  color: rgba(232,224,208,0.4);
-  font-style: italic;
-  text-align: center;
-  min-height: 20px;
-}
-
-.wg-bar-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-  max-width: 160px;
-}
-.wg-bar-label {
-  font-size: 0.62rem;
-  color: rgba(232,224,208,0.5);
-  min-width: 18px;
-  text-align: right;
-}
-.wg-bar {
-  flex: 1;
-  height: 7px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-.wg-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.4s ease;
-}
-.wg-bar-fill.hp       { background: linear-gradient(90deg, #27ae60, #2ecc71); }
-.wg-bar-fill.stamina  { background: linear-gradient(90deg, #2980b9, #3498db); }
-.wg-bar-fill.enemy-hp { background: linear-gradient(90deg, #c0392b, #e74c3c); }
-.wg-bar-val { font-size: 0.6rem; color: rgba(232,224,208,0.5); min-width: 44px; }
-
-.wg-sign-charges {
-  display: flex;
-  gap: 5px;
-  margin-top: 2px;
-}
-.wg-charge { font-size: 0.75rem; color: rgba(232,224,208,0.2); transition: color 0.2s; }
-.wg-charge.active { color: #8e44ad; filter: drop-shadow(0 0 4px #8e44ad); }
-
-.wg-enemy-queue {
-  display: flex;
-  gap: 4px;
-  margin-top: 4px;
-}
-.wg-enemy-pip { font-size: 1rem; opacity: 0.3; }
-.wg-enemy-pip.active { opacity: 1; }
-.wg-enemy-pip.dead   { opacity: 0.15; filter: grayscale(1); }
-
-.wg-vs {
+.gwent-sb-score {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 1.1rem;
-  color: rgba(196,168,74,0.3);
-  flex-shrink: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #c4a84a;
+  filter: drop-shadow(0 0 6px rgba(196, 168, 74, 0.3));
 }
 
-/* Combat Log */
-.wg-combat-log {
-  position: relative;
-  z-index: 10;
-  height: 90px;
-  overflow-y: auto;
-  padding: 8px 20px;
-  background: rgba(0,0,0,0.5);
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+.gwent-sb-gems {
+  display: flex;
+  gap: 3px;
+}
+
+.gwent-gem {
+  font-size: 0.75rem;
+  filter: drop-shadow(0 0 3px rgba(231, 76, 60, 0.4));
+  transition: opacity 0.3s;
+}
+.gwent-gem.dead {
+  opacity: 0.15;
+  filter: grayscale(1);
+}
+
+.gwent-pass-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  background: rgba(230, 126, 34, 0.85);
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #d35400;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  pointer-events: none;
+}
+
+.gwent-weather-slots {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  scrollbar-width: none;
+  gap: 6px;
+  background: rgba(255,255,255,0.03);
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
 }
-.wg-combat-log::-webkit-scrollbar { display: none; }
-.wg-log-entry {
-  font-size: 0.75rem;
-  color: rgba(232,224,208,0.7);
-  line-height: 1.4;
-}
-.wg-log-entry:last-child { color: #e8e0d0; }
 
-/* Action Bar */
-.wg-action-bar {
-  position: relative;
-  z-index: 10;
+.weather-pip {
+  font-size: 1rem;
+  opacity: 0.15;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.weather-pip.active {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px #52b3d9);
+}
+
+.gwent-round-indicator {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  color: #c4a84a;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Battlefield Center */
+.gwent-battlefield {
+  flex: 1;
   display: flex;
-  gap: 8px;
-  padding: 12px 12px 20px;
-  background: rgba(5,5,8,0.95);
-  flex-wrap: wrap;
+  flex-direction: column;
+  background: radial-gradient(circle at 50% 50%, rgba(20, 16, 28, 0.6) 0%, rgba(8, 7, 12, 1) 90%);
+  position: relative;
+}
+
+.gwent-board-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.gwent-board-side.enemy-side {
+  border-bottom: 2px dashed rgba(196, 168, 74, 0.15);
+  justify-content: flex-end;
+}
+.gwent-board-side.player-side {
+  justify-content: flex-start;
+}
+
+/* Gwent Rows */
+.gwent-row {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  position: relative;
+  padding: 0 16px 0 60px;
+  transition: background 0.4s;
+}
+.gwent-row.weather-active {
+  background: rgba(82, 179, 217, 0.06);
+}
+
+.gwent-horn-slot {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  transition: all 0.25s;
+}
+.gwent-horn-slot.active {
+  background: rgba(196, 168, 74, 0.12);
+  border: 1px solid #c4a84a;
+  box-shadow: 0 0 8px rgba(196,168,74,0.3);
+}
+.gwent-horn-slot.selectable {
+  border-color: #27ae60;
+  background: rgba(46, 204, 113, 0.15);
+  cursor: pointer;
+  animation: pulse-green 1s infinite alternate;
+}
+
+.gwent-row-score {
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(12,10,18,0.9);
+  border: 1px solid rgba(196,168,74,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: #e8e0d0;
+}
+
+.gwent-row-cards {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.gwent-row-cards::-webkit-scrollbar { display: none; }
+
+/* Small Board Card */
+.gwent-board-card {
+  width: 42px;
+  height: 48px;
+  background: rgba(30, 26, 45, 0.85);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2px;
+  font-size: 0.52rem;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: all 0.2s;
+  cursor: default;
+}
+.gwent-board-card.hero {
+  border-color: #c4a84a;
+  box-shadow: 0 0 6px rgba(196, 168, 74, 0.4);
+  background: linear-gradient(135deg, #1b1625 0%, #291e0a 100%);
+}
+.gwent-board-card.decoyable {
+  border-color: #e67e22;
+  box-shadow: 0 0 6px rgba(230, 126, 34, 0.5);
+  cursor: pointer;
+  animation: pulse-orange 1s infinite alternate;
+}
+
+.gwent-card-val {
+  font-weight: 900;
+  color: #e8e0d0;
+}
+.gwent-board-card.hero .gwent-card-val {
+  color: #c4a84a;
+}
+
+.gwent-card-art {
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.gwent-card-name-text {
+  font-size: 0.35rem;
+  color: rgba(232, 224, 208, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Right Decks Panel */
+.gwent-decks-panel {
+  width: 90px;
+  background: rgba(12, 10, 18, 0.95);
+  border-left: 1px solid rgba(196, 168, 74, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 6px;
+  align-items: center;
+  z-index: 15;
+}
+
+.gwent-deck-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.55rem;
+  color: rgba(232,224,208,0.5);
+}
+.gwent-deck-display span:first-child {
+  font-size: 1.4rem;
+}
+
+.gwent-pass-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  color: #0c0a12;
+  background: linear-gradient(135deg, #c4a84a 0%, #a2862d 100%);
+  border: 1px solid #816616;
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.gwent-pass-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(196,168,74,0.25);
+  filter: brightness(1.1);
+}
+.gwent-pass-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  background: #25222d;
+  color: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.05);
+}
+
+/* Combat Log at bottom */
+.gwent-log-panel {
+  height: 52px;
+  background: rgba(5,5,8,0.92);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding: 4px 12px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 10;
+}
+.gwent-log-panel::-webkit-scrollbar { display: none; }
+
+.gwent-log-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gwent-log-row {
+  font-size: 0.62rem;
+  line-height: 1.3;
+}
+.gwent-log-row.log-status { color: #8e44ad; font-weight: bold; }
+.gwent-log-row.log-player { color: #f5d78e; }
+.gwent-log-row.log-enemy  { color: #e74c3c; }
+
+/* Hand scroll area */
+.gwent-hand-area {
+  height: 105px;
+  background: rgba(12, 10, 18, 0.98);
+  border-top: 1px solid rgba(196, 168, 74, 0.2);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  z-index: 15;
+}
+
+.gwent-hand-scroll {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding: 6px 0;
+  width: 100%;
+}
+
+.gwent-hand-card {
+  flex-shrink: 0;
+  width: 66px;
+  height: 88px;
+  background: rgba(25, 20, 35, 0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  position: relative;
+}
+.gwent-hand-card.hero {
+  border-color: #c4a84a;
+  box-shadow: 0 0 10px rgba(196, 168, 74, 0.45);
+  background: linear-gradient(135deg, #1f182c 0%, #30230b 100%);
+}
+.gwent-hand-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  border-color: #c4a84a;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+  z-index: 20;
+}
+
+.gwent-card-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #e8e0d0;
+}
+.gwent-hand-card.hero .gwent-card-top {
+  color: #c4a84a;
+}
+
+.gwent-card-icon-art {
+  font-size: 1.3rem;
+  text-align: center;
+  margin: 2px 0;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+}
+
+.gwent-card-bottom-name {
+  font-size: 0.42rem;
+  color: rgba(232, 224, 208, 0.7);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Modal Overlay */
+.gwent-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.wg-action-btn {
+.gwent-modal {
+  background: #110e16;
+  border: 1px solid #c4a84a;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  background: rgba(30,24,50,0.9);
-  border: 1px solid rgba(196,168,74,0.2);
-  border-radius: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  transition: all 0.18s;
-  color: #e8e0d0;
-  font-size: 1.4rem;
-  min-width: 58px;
+  gap: 12px;
 }
-.wg-action-btn span { font-size: 0.6rem; letter-spacing: 0.05em; color: rgba(232,224,208,0.65); }
-.wg-action-btn:hover:not(:disabled) {
-  background: rgba(60,45,90,0.95);
-  border-color: #c4a84a;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+
+.gwent-modal-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  color: #c4a84a;
+  text-align: center;
+  border-bottom: 1px solid rgba(196, 168, 74, 0.2);
+  padding-bottom: 6px;
+  text-transform: uppercase;
 }
-.wg-action-btn:disabled { opacity: 0.28; cursor: not-allowed; }
-.wg-action-btn.heavy  { border-color: rgba(230,126,34,0.3); }
-.wg-action-btn.sign   { border-color: rgba(142,68,173,0.4); }
-.wg-action-btn.igni   { border-color: rgba(231,76,60,0.4); }
-.wg-action-btn.parry  { border-color: rgba(41,128,185,0.4); }
-.wg-action-btn.potion { border-color: rgba(39,174,96,0.4); }
+
+.gwent-modal-grid {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+.gwent-modal-grid .modal-pick:hover {
+  border-color: #27ae60;
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.4);
+}
+
+/* Weather Overlays */
+.gwent-weather-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: opacity 0.5s;
+}
+
+.frost-overlay {
+  background: radial-gradient(circle, rgba(82, 179, 217, 0.0) 30%, rgba(82, 179, 217, 0.15) 100%);
+  border: 4px solid rgba(174, 214, 241, 0.12);
+  animation: freeze-shimmer 4s infinite alternate;
+}
+
+.fog-overlay {
+  background: rgba(255, 255, 255, 0.05);
+  filter: blur(4px);
+  animation: fog-drift 20s linear infinite;
+}
+
+.rain-overlay {
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(82, 179, 217, 0.05));
+  animation: rain-fall 0.8s linear infinite;
+}
+
+@keyframes freeze-shimmer {
+  0% { opacity: 0.7; }
+  100% { opacity: 1.0; }
+}
+@keyframes fog-drift {
+  0% { transform: translateX(-5%); }
+  50% { transform: translateX(5%); }
+  100% { transform: translateX(-5%); }
+}
+@keyframes rain-fall {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 20px 400px; }
+}
+
+@keyframes pulse-green {
+  from { box-shadow: 0 0 4px rgba(46,204,113,0.3); }
+  to   { box-shadow: 0 0 12px rgba(46,204,113,0.7); }
+}
+
+@keyframes pulse-orange {
+  from { box-shadow: 0 0 4px rgba(230,126,34,0.3); }
+  to   { box-shadow: 0 0 12px rgba(230,126,34,0.7); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   NARRATIVE POLISH & VIGNETTES
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.wg-narrative-damage-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(192, 57, 43, 0.35);
+  pointer-events: none;
+  animation: flash-anim 0.45s ease-out forwards;
+}
+
+@keyframes flash-anim {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.wg-low-hp-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  box-shadow: inset 0 0 50px rgba(192, 57, 43, 0.65);
+  animation: vignette-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes vignette-pulse {
+  0%, 100% { box-shadow: inset 0 0 35px rgba(192, 57, 43, 0.45); }
+  50%       { box-shadow: inset 0 0 55px rgba(192, 57, 43, 0.75); }
+}
+
+/* Medallion rattle warning */
+.rattle-active {
+  animation: medallion-rattle-anim 0.25s linear infinite;
+  color: #ff3333 !important;
+  filter: drop-shadow(0 0 10px rgba(255, 51, 51, 0.8)) !important;
+}
+
+@keyframes medallion-rattle-anim {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20%       { transform: translate(-1.5px, 0.5px) rotate(-1.5deg); }
+  40%       { transform: translate(1px, -1px) rotate(1deg); }
+  60%       { transform: translate(-1px, -0.5px) rotate(-1deg); }
+  80%       { transform: translate(1.5px, 1px) rotate(1.5deg); }
+}
+
+/* Add shake class to root when narrativeShake is active */
+.wg-root.shake {
+  animation: narrative-shake-anim 0.45s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes narrative-shake-anim {
+  10%, 90% { transform: translate3d(-1.5px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-2px, 0, 0); }
+  40%, 60% { transform: translate3d(2px, 0, 0); }
+}
+
 
 /* ══════════════════════════════════════════════════════════════════════════
    EPISODE SELECT SCREEN
@@ -961,6 +1471,59 @@
   .wg-combat-arena { padding: 12px; }
   .wg-combatant-sprite { font-size: 2.8rem; }
   .wg-logo-main { font-size: 2.5rem; }
+
+  /* HUD Mobile Responsive Design */
+  .wg-hud {
+    padding: 8px 12px;
+  }
+  .wg-hud-ep {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    max-width: 90px;
+  }
+  .wg-medallion-svg {
+    width: 28px;
+    height: 28px;
+  }
+  .wg-hud-left {
+    gap: 8px;
+  }
+  .wg-hud-stats {
+    gap: 8px;
+  }
+  .wg-hud-hp-row {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+  .wg-hud-hp-bar {
+    width: 60px;
+    height: 8px;
+  }
+  .wg-hud-hp-fill {
+    border-radius: 4px;
+  }
+  .wg-hud-hp-val {
+    display: none; /* hide numeric health text on mobile to save space */
+  }
+  .wg-hud-gold {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+    gap: 4px;
+  }
+  .wg-hud-voice-btn, .wg-hud-save-btn {
+    width: 30px;
+    height: 30px;
+  }
+  .wg-hud-voice-btn svg, .wg-hud-save-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .wg-hud-ep {
+    display: none; /* hide text title on extremely small screens */
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -982,25 +1545,7 @@
   pointer-events: none;
 }
 
-.wg-hud-save-btn {
-  background: rgba(30, 24, 50, 0.7);
-  border: 1px solid rgba(196, 168, 74, 0.3);
-  color: #e8e0d0;
-  border-radius: 8px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: all 0.2s;
-}
-.wg-hud-save-btn:hover {
-  background: rgba(196, 168, 74, 0.2);
-  border-color: #c4a84a;
-  transform: translateY(-1px);
-}
+/* wg-hud-save-btn styles moved to top */
 
 .wg-save-overlay {
   position: absolute;
@@ -1068,27 +1613,264 @@
   box-shadow: 0 0 15px rgba(196, 168, 74, 0.4);
 }
 
-.wg-hud-voice-btn {
-  background: rgba(30, 24, 50, 0.7);
-  border: 1px solid rgba(196, 168, 74, 0.3);
-  color: #e8e0d0;
-  border-radius: 8px;
-  width: 32px;
-  height: 32px;
+/* wg-hud-voice-btn styles moved to top */
+
+/* ==========================================================================
+   GWENT MINI-GAME HUD UPGRADES & POLISH
+   ========================================================================== */
+
+/* Card images styling */
+.gwent-board-card.has-img,
+.gwent-hand-card.has-img,
+.modal-pick.has-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Active Turn Banner */
+.gwent-turn-banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0;
+  background: rgba(12, 10, 18, 0.85);
+  border-bottom: 1px solid rgba(196, 168, 74, 0.15);
+  width: 100%;
+}
+
+.gwent-turn-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  padding: 4px 16px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.gwent-turn-badge.player-turn {
+  background: linear-gradient(135deg, rgba(196, 168, 74, 0.25) 0%, rgba(162, 134, 45, 0.1) 100%);
+  border: 1px solid #c4a84a;
+  color: #f5d78e;
+  animation: turn-glow-gold 2s infinite alternate;
+}
+
+.gwent-turn-badge.enemy-turn {
+  background: linear-gradient(135deg, rgba(192, 57, 43, 0.25) 0%, rgba(150, 40, 27, 0.1) 100%);
+  border: 1px solid #c0392b;
+  color: #ff8b8b;
+  animation: turn-glow-red 2s infinite alternate;
+}
+
+@keyframes turn-glow-gold {
+  0% { box-shadow: 0 0 4px rgba(196, 168, 74, 0.2); }
+  100% { box-shadow: 0 0 12px rgba(196, 168, 74, 0.5); }
+}
+
+@keyframes turn-glow-red {
+  0% { box-shadow: 0 0 4px rgba(192, 57, 43, 0.2); }
+  100% { box-shadow: 0 0 12px rgba(192, 57, 43, 0.5); }
+}
+
+/* Row Labels Tag style */
+.gwent-row-label-tag {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Cinzel', serif;
+  font-size: 0.5rem;
+  color: rgba(232, 224, 208, 0.45);
+  letter-spacing: 0.1em;
+  background: rgba(12, 10, 18, 0.85);
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 0.95rem;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.5);
+}
+
+.gwent-row:hover .gwent-row-label-tag {
+  color: #c4a84a;
+  border-color: rgba(196,168,74,0.3);
   transition: all 0.2s;
 }
-.wg-hud-voice-btn:hover {
-  background: rgba(196, 168, 74, 0.2);
-  border-color: #c4a84a;
-  transform: translateY(-1px);
+
+/* Card description bar styling */
+.gwent-description-bar {
+  background: rgba(10, 8, 15, 0.95);
+  border-top: 1px solid rgba(196, 168, 74, 0.15);
+  border-bottom: 1px solid rgba(196, 168, 74, 0.15);
+  padding: 8px 16px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
 }
-.wg-hud-voice-btn.muted {
-  opacity: 0.45;
-  border-color: rgba(255, 255, 255, 0.15);
+
+.gwent-desc-content {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 0.78rem;
+  color: #e8e0d0;
+  line-height: 1.3;
+}
+
+.gwent-desc-name {
+  font-family: 'Cinzel', serif;
+  color: #c4a84a;
+  font-weight: bold;
+  margin-right: 6px;
+  letter-spacing: 0.05em;
+}
+
+.gwent-desc-text {
+  font-style: italic;
+  color: rgba(232, 224, 208, 0.85);
+}
+
+.gwent-desc-placeholder {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 0.75rem;
+  color: rgba(232, 224, 208, 0.4);
+  font-style: italic;
+}
+
+/* Round End Proceed Modal and Overlay */
+.gwent-round-result-modal {
+  background: linear-gradient(135deg, #16121f 0%, #0d0a13 100%);
+  border: 2px solid #c4a84a;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.85), 0 0 20px rgba(196, 168, 74, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: modal-enter 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes modal-enter {
+  0% { transform: scale(0.9) translateY(10px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.gwent-rm-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: #c4a84a;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+  border-bottom: 1px solid rgba(196, 168, 74, 0.2);
+  padding-bottom: 8px;
+  width: 100%;
+}
+
+.gwent-rm-scores {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.gwent-rm-player-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.gwent-rm-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  color: rgba(232, 224, 208, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.gwent-rm-val {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #e8e0d0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.gwent-rm-player-score.enemy .gwent-rm-val {
+  color: #e74c3c;
+}
+
+.gwent-rm-vs {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  color: rgba(196, 168, 74, 0.45);
+  font-weight: bold;
+}
+
+.gwent-rm-banner {
+  background: rgba(12, 10, 18, 0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 10px 16px;
+  border-radius: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.gwent-rm-banner-text {
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.gwent-rm-banner-text.player-win {
+  color: #f1c40f;
+  text-shadow: 0 0 8px rgba(241, 196, 15, 0.3);
+}
+
+.gwent-rm-banner-text.enemy-win {
+  color: #e74c3c;
+  text-shadow: 0 0 8px rgba(231, 76, 60, 0.3);
+}
+
+.gwent-rm-banner-text.draw-win {
+  color: #95a5a6;
+}
+
+.gwent-rm-proceed-btn {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: #0c0a12;
+  background: linear-gradient(135deg, #c4a84a 0%, #a2862d 100%);
+  border: 1px solid #816616;
+  border-radius: 6px;
+  padding: 10px 28px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.gwent-rm-proceed-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(196, 168, 74, 0.35);
+  filter: brightness(1.08);
 }
 

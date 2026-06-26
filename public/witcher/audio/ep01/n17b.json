@@ -1,0 +1,207 @@
+[
+  {
+    "word": "Without",
+    "start": 0.1,
+    "end": 0.5125
+  },
+  {
+    "word": "the",
+    "start": 0.525,
+    "end": 0.6125
+  },
+  {
+    "word": "boy\u2019s",
+    "start": 0.625,
+    "end": 0.95
+  },
+  {
+    "word": "clue",
+    "start": 0.9625,
+    "end": 1.325
+  },
+  {
+    "word": "he",
+    "start": 1.6,
+    "end": 1.725
+  },
+  {
+    "word": "almost",
+    "start": 1.7375,
+    "end": 2.1125
+  },
+  {
+    "word": "missed",
+    "start": 2.125,
+    "end": 2.4
+  },
+  {
+    "word": "the",
+    "start": 2.4125,
+    "end": 2.5
+  },
+  {
+    "word": "scent",
+    "start": 2.5125,
+    "end": 2.7750000000000004
+  },
+  {
+    "word": "trail",
+    "start": 2.7875,
+    "end": 3.2625
+  },
+  {
+    "word": "It",
+    "start": 4.125,
+    "end": 4.2625
+  },
+  {
+    "word": "was",
+    "start": 4.275,
+    "end": 4.45
+  },
+  {
+    "word": "faint",
+    "start": 4.4625,
+    "end": 4.825
+  },
+  {
+    "word": "just",
+    "start": 5.075,
+    "end": 5.325
+  },
+  {
+    "word": "a",
+    "start": 5.3375,
+    "end": 5.3875
+  },
+  {
+    "word": "trace",
+    "start": 5.4,
+    "end": 5.75
+  },
+  {
+    "word": "of",
+    "start": 5.7625,
+    "end": 5.8625
+  },
+  {
+    "word": "rot",
+    "start": 5.875,
+    "end": 6.1
+  },
+  {
+    "word": "beneath",
+    "start": 6.1125,
+    "end": 6.4375
+  },
+  {
+    "word": "the",
+    "start": 6.45,
+    "end": 6.5375000000000005
+  },
+  {
+    "word": "heavy",
+    "start": 6.55,
+    "end": 6.85
+  },
+  {
+    "word": "swamp",
+    "start": 6.8625,
+    "end": 7.2375
+  },
+  {
+    "word": "gas",
+    "start": 7.25,
+    "end": 7.8
+  },
+  {
+    "word": "He",
+    "start": 8.6625,
+    "end": 8.8375
+  },
+  {
+    "word": "crouched",
+    "start": 8.85,
+    "end": 9.299999999999999
+  },
+  {
+    "word": "in",
+    "start": 9.3125,
+    "end": 9.3625
+  },
+  {
+    "word": "the",
+    "start": 9.375,
+    "end": 9.475
+  },
+  {
+    "word": "dark",
+    "start": 9.4875,
+    "end": 9.912500000000001
+  },
+  {
+    "word": "parsing",
+    "start": 10.15,
+    "end": 10.525
+  },
+  {
+    "word": "the",
+    "start": 10.5375,
+    "end": 10.625
+  },
+  {
+    "word": "cold",
+    "start": 10.6375,
+    "end": 11.0125
+  },
+  {
+    "word": "air",
+    "start": 11.025,
+    "end": 11.25
+  },
+  {
+    "word": "for",
+    "start": 11.2625,
+    "end": 11.4375
+  },
+  {
+    "word": "a",
+    "start": 11.45,
+    "end": 11.5
+  },
+  {
+    "word": "full",
+    "start": 11.5125,
+    "end": 11.774999999999999
+  },
+  {
+    "word": "minute",
+    "start": 11.7875,
+    "end": 12.0625
+  },
+  {
+    "word": "before",
+    "start": 12.075,
+    "end": 12.424999999999999
+  },
+  {
+    "word": "the",
+    "start": 12.4375,
+    "end": 12.525
+  },
+  {
+    "word": "direction",
+    "start": 12.5375,
+    "end": 13.0125
+  },
+  {
+    "word": "became",
+    "start": 13.025,
+    "end": 13.375
+  },
+  {
+    "word": "clear",
+    "start": 13.3875,
+    "end": 13.862499999999999
+  }
+]

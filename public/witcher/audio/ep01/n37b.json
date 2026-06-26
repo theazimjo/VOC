@@ -1,0 +1,122 @@
+[
+  {
+    "word": "Geralt",
+    "start": 0.1,
+    "end": 0.5625
+  },
+  {
+    "word": "accepted",
+    "start": 0.575,
+    "end": 1.0375
+  },
+  {
+    "word": "the",
+    "start": 1.05,
+    "end": 1.1375
+  },
+  {
+    "word": "bag",
+    "start": 1.15,
+    "end": 1.4749999999999999
+  },
+  {
+    "word": "of",
+    "start": 1.4875,
+    "end": 1.5875000000000001
+  },
+  {
+    "word": "coins",
+    "start": 1.6,
+    "end": 2.0875
+  },
+  {
+    "word": "saying",
+    "start": 2.35,
+    "end": 2.7125
+  },
+  {
+    "word": "nothing",
+    "start": 2.725,
+    "end": 3.0875
+  },
+  {
+    "word": "of",
+    "start": 3.1,
+    "end": 3.1750000000000003
+  },
+  {
+    "word": "the",
+    "start": 3.1875,
+    "end": 3.275
+  },
+  {
+    "word": "beast's",
+    "start": 3.2875,
+    "end": 3.7375000000000003
+  },
+  {
+    "word": "true",
+    "start": 3.75,
+    "end": 4.0125
+  },
+  {
+    "word": "identity",
+    "start": 4.025,
+    "end": 4.65
+  },
+  {
+    "word": "Some",
+    "start": 5.5125,
+    "end": 5.8625
+  },
+  {
+    "word": "secrets",
+    "start": 5.875,
+    "end": 6.35
+  },
+  {
+    "word": "were",
+    "start": 6.3625,
+    "end": 6.475
+  },
+  {
+    "word": "better",
+    "start": 6.4875,
+    "end": 6.75
+  },
+  {
+    "word": "left",
+    "start": 6.7625,
+    "end": 7.05
+  },
+  {
+    "word": "buried",
+    "start": 7.0625,
+    "end": 7.4
+  },
+  {
+    "word": "in",
+    "start": 7.4125,
+    "end": 7.475
+  },
+  {
+    "word": "the",
+    "start": 7.4875,
+    "end": 7.55
+  },
+  {
+    "word": "swamp's",
+    "start": 7.5625,
+    "end": 7.9875
+  },
+  {
+    "word": "dark",
+    "start": 8.0,
+    "end": 8.2625
+  },
+  {
+    "word": "waters",
+    "start": 8.275,
+    "end": 8.8625
+  }
+]

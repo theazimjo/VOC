@@ -1,0 +1,277 @@
+[
+  {
+    "word": "We",
+    "start": 0.1,
+    "end": 0.2875
+  },
+  {
+    "word": "hired",
+    "start": 0.3,
+    "end": 0.6625
+  },
+  {
+    "word": "two",
+    "start": 0.675,
+    "end": 0.875
+  },
+  {
+    "word": "mercenary",
+    "start": 0.8875,
+    "end": 1.4125
+  },
+  {
+    "word": "sellswords",
+    "start": 1.425,
+    "end": 2.0875
+  },
+  {
+    "word": "before",
+    "start": 2.1,
+    "end": 2.4125
+  },
+  {
+    "word": "you",
+    "start": 2.425,
+    "end": 2.7874999999999996
+  },
+  {
+    "word": "One",
+    "start": 3.65,
+    "end": 3.9625
+  },
+  {
+    "word": "went",
+    "start": 3.975,
+    "end": 4.2125
+  },
+  {
+    "word": "into",
+    "start": 4.225,
+    "end": 4.4875
+  },
+  {
+    "word": "the",
+    "start": 4.5,
+    "end": 4.5875
+  },
+  {
+    "word": "swamp",
+    "start": 4.6,
+    "end": 4.9125
+  },
+  {
+    "word": "and",
+    "start": 4.925,
+    "end": 5.0125
+  },
+  {
+    "word": "did",
+    "start": 5.025,
+    "end": 5.1625000000000005
+  },
+  {
+    "word": "not",
+    "start": 5.175,
+    "end": 5.3875
+  },
+  {
+    "word": "return",
+    "start": 5.4,
+    "end": 5.825
+  },
+  {
+    "word": "we",
+    "start": 6.0125,
+    "end": 6.125
+  },
+  {
+    "word": "found",
+    "start": 6.1375,
+    "end": 6.4625
+  },
+  {
+    "word": "his",
+    "start": 6.475,
+    "end": 6.6
+  },
+  {
+    "word": "shield",
+    "start": 6.6125,
+    "end": 6.925
+  },
+  {
+    "word": "floating",
+    "start": 6.9375,
+    "end": 7.35
+  },
+  {
+    "word": "in",
+    "start": 7.3625,
+    "end": 7.425
+  },
+  {
+    "word": "the",
+    "start": 7.4375,
+    "end": 7.525
+  },
+  {
+    "word": "reeds",
+    "start": 7.5375,
+    "end": 7.875
+  },
+  {
+    "word": "three",
+    "start": 7.8875,
+    "end": 8.15
+  },
+  {
+    "word": "days",
+    "start": 8.1625,
+    "end": 8.5
+  },
+  {
+    "word": "later",
+    "start": 8.5125,
+    "end": 8.962499999999999
+  },
+  {
+    "word": "The",
+    "start": 9.825,
+    "end": 10.0
+  },
+  {
+    "word": "other",
+    "start": 10.0125,
+    "end": 10.212499999999999
+  },
+  {
+    "word": "came",
+    "start": 10.225,
+    "end": 10.487499999999999
+  },
+  {
+    "word": "back",
+    "start": 10.5,
+    "end": 10.8125
+  },
+  {
+    "word": "but",
+    "start": 11.0125,
+    "end": 11.112499999999999
+  },
+  {
+    "word": "he",
+    "start": 11.125,
+    "end": 11.2625
+  },
+  {
+    "word": "does",
+    "start": 11.275,
+    "end": 11.475
+  },
+  {
+    "word": "not",
+    "start": 11.4875,
+    "end": 11.675
+  },
+  {
+    "word": "speak",
+    "start": 11.6875,
+    "end": 12.0375
+  },
+  {
+    "word": "anymore",
+    "start": 12.05,
+    "end": 12.537500000000001
+  },
+  {
+    "word": "He",
+    "start": 13.4,
+    "end": 13.5625
+  },
+  {
+    "word": "sits",
+    "start": 13.575,
+    "end": 13.837499999999999
+  },
+  {
+    "word": "by",
+    "start": 13.85,
+    "end": 14.0
+  },
+  {
+    "word": "the",
+    "start": 14.0125,
+    "end": 14.1
+  },
+  {
+    "word": "hearth",
+    "start": 14.1125,
+    "end": 14.537500000000001
+  },
+  {
+    "word": "shivering",
+    "start": 14.7375,
+    "end": 15.162500000000001
+  },
+  {
+    "word": "staring",
+    "start": 15.3375,
+    "end": 15.8
+  },
+  {
+    "word": "blankly",
+    "start": 15.8125,
+    "end": 16.275
+  },
+  {
+    "word": "at",
+    "start": 16.2875,
+    "end": 16.35
+  },
+  {
+    "word": "the",
+    "start": 16.3625,
+    "end": 16.4375
+  },
+  {
+    "word": "wall",
+    "start": 16.45,
+    "end": 16.775
+  },
+  {
+    "word": "as",
+    "start": 16.7875,
+    "end": 16.887500000000003
+  },
+  {
+    "word": "if",
+    "start": 16.9,
+    "end": 17.0125
+  },
+  {
+    "word": "his",
+    "start": 17.025,
+    "end": 17.1875
+  },
+  {
+    "word": "soul",
+    "start": 17.2,
+    "end": 17.525
+  },
+  {
+    "word": "was",
+    "start": 17.5375,
+    "end": 17.675
+  },
+  {
+    "word": "stripped",
+    "start": 17.6875,
+    "end": 18.0125
+  },
+  {
+    "word": "away",
+    "start": 18.025,
+    "end": 18.424999999999997
+  }
+]

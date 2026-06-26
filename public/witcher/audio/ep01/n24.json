@@ -1,0 +1,117 @@
+[
+  {
+    "word": "Geralt",
+    "start": 0.1,
+    "end": 0.525
+  },
+  {
+    "word": "sheathed",
+    "start": 0.5375,
+    "end": 0.8875
+  },
+  {
+    "word": "his",
+    "start": 0.9,
+    "end": 1.0625
+  },
+  {
+    "word": "blade",
+    "start": 1.075,
+    "end": 1.4375
+  },
+  {
+    "word": "and",
+    "start": 1.45,
+    "end": 1.5625
+  },
+  {
+    "word": "stepped",
+    "start": 1.575,
+    "end": 1.9249999999999998
+  },
+  {
+    "word": "inside",
+    "start": 1.9375,
+    "end": 2.5
+  },
+  {
+    "word": "lighting",
+    "start": 2.725,
+    "end": 3.0625
+  },
+  {
+    "word": "a",
+    "start": 3.075,
+    "end": 3.1375
+  },
+  {
+    "word": "small",
+    "start": 3.15,
+    "end": 3.5
+  },
+  {
+    "word": "torch",
+    "start": 3.5125,
+    "end": 4.0625
+  },
+  {
+    "word": "The",
+    "start": 4.925,
+    "end": 5.0625
+  },
+  {
+    "word": "flame",
+    "start": 5.075,
+    "end": 5.4125000000000005
+  },
+  {
+    "word": "flickered",
+    "start": 5.425,
+    "end": 5.925
+  },
+  {
+    "word": "casting",
+    "start": 6.125,
+    "end": 6.5875
+  },
+  {
+    "word": "long",
+    "start": 6.6,
+    "end": 6.949999999999999
+  },
+  {
+    "word": "dancing",
+    "start": 7.175,
+    "end": 7.5874999999999995
+  },
+  {
+    "word": "shadows",
+    "start": 7.6,
+    "end": 8.0875
+  },
+  {
+    "word": "on",
+    "start": 8.1,
+    "end": 8.2125
+  },
+  {
+    "word": "the",
+    "start": 8.225,
+    "end": 8.299999999999999
+  },
+  {
+    "word": "wet",
+    "start": 8.3125,
+    "end": 8.5375
+  },
+  {
+    "word": "limestone",
+    "start": 8.55,
+    "end": 9.15
+  },
+  {
+    "word": "walls",
+    "start": 9.1625,
+    "end": 9.737499999999999
+  }
+]

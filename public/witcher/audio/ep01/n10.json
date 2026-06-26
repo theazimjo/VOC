@@ -1,0 +1,167 @@
+[
+  {
+    "word": "A",
+    "start": 0.1,
+    "end": 0.2625
+  },
+  {
+    "word": "door",
+    "start": 0.275,
+    "end": 0.575
+  },
+  {
+    "word": "creaked",
+    "start": 0.5875,
+    "end": 0.95
+  },
+  {
+    "word": "open",
+    "start": 0.9625,
+    "end": 1.2625
+  },
+  {
+    "word": "at",
+    "start": 1.275,
+    "end": 1.3499999999999999
+  },
+  {
+    "word": "the",
+    "start": 1.3625,
+    "end": 1.45
+  },
+  {
+    "word": "far",
+    "start": 1.4625,
+    "end": 1.8499999999999999
+  },
+  {
+    "word": "end",
+    "start": 1.8625,
+    "end": 2.0125
+  },
+  {
+    "word": "of",
+    "start": 2.025,
+    "end": 2.0875
+  },
+  {
+    "word": "the",
+    "start": 2.1,
+    "end": 2.1875
+  },
+  {
+    "word": "dim",
+    "start": 2.2,
+    "end": 2.4375
+  },
+  {
+    "word": "room",
+    "start": 2.45,
+    "end": 2.8000000000000003
+  },
+  {
+    "word": "A",
+    "start": 3.6625,
+    "end": 3.8000000000000003
+  },
+  {
+    "word": "boy",
+    "start": 3.8125,
+    "end": 4.175
+  },
+  {
+    "word": "perhaps",
+    "start": 4.475,
+    "end": 4.8999999999999995
+  },
+  {
+    "word": "nine",
+    "start": 4.9125,
+    "end": 5.199999999999999
+  },
+  {
+    "word": "years",
+    "start": 5.2125,
+    "end": 5.4625
+  },
+  {
+    "word": "old",
+    "start": 5.475,
+    "end": 5.7875
+  },
+  {
+    "word": "barefoot",
+    "start": 6.0375,
+    "end": 6.4624999999999995
+  },
+  {
+    "word": "despite",
+    "start": 6.475,
+    "end": 6.9125
+  },
+  {
+    "word": "the",
+    "start": 6.925,
+    "end": 7.0125
+  },
+  {
+    "word": "cold",
+    "start": 7.025,
+    "end": 7.325
+  },
+  {
+    "word": "floorboards",
+    "start": 7.3375,
+    "end": 8.0625
+  },
+  {
+    "word": "peered",
+    "start": 8.375,
+    "end": 8.625
+  },
+  {
+    "word": "around",
+    "start": 8.6375,
+    "end": 8.9125
+  },
+  {
+    "word": "the",
+    "start": 8.925,
+    "end": 9.0
+  },
+  {
+    "word": "wooden",
+    "start": 9.0125,
+    "end": 9.2625
+  },
+  {
+    "word": "frame",
+    "start": 9.275,
+    "end": 9.725
+  },
+  {
+    "word": "clutching",
+    "start": 9.9625,
+    "end": 10.3625
+  },
+  {
+    "word": "a",
+    "start": 10.375,
+    "end": 10.425
+  },
+  {
+    "word": "small",
+    "start": 10.4375,
+    "end": 10.875
+  },
+  {
+    "word": "wooden",
+    "start": 10.8875,
+    "end": 11.1625
+  },
+  {
+    "word": "toy",
+    "start": 11.175,
+    "end": 11.5875
+  }
+]

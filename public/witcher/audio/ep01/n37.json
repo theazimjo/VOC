@@ -1,0 +1,152 @@
+[
+  {
+    "word": "They're",
+    "start": 0.1,
+    "end": 0.3375
+  },
+  {
+    "word": "alive",
+    "start": 0.35,
+    "end": 0.9249999999999999
+  },
+  {
+    "word": "You",
+    "start": 1.7875,
+    "end": 2.0375
+  },
+  {
+    "word": "you",
+    "start": 2.2375,
+    "end": 2.375
+  },
+  {
+    "word": "actually",
+    "start": 2.3875,
+    "end": 2.7625
+  },
+  {
+    "word": "brought",
+    "start": 2.775,
+    "end": 3.05
+  },
+  {
+    "word": "them",
+    "start": 3.0625,
+    "end": 3.2125
+  },
+  {
+    "word": "back",
+    "start": 3.225,
+    "end": 3.6625
+  },
+  {
+    "word": "The",
+    "start": 4.525,
+    "end": 4.7125
+  },
+  {
+    "word": "old",
+    "start": 4.725,
+    "end": 4.9375
+  },
+  {
+    "word": "man",
+    "start": 4.95,
+    "end": 5.1875
+  },
+  {
+    "word": "fell",
+    "start": 5.2,
+    "end": 5.4625
+  },
+  {
+    "word": "to",
+    "start": 5.475,
+    "end": 5.5625
+  },
+  {
+    "word": "his",
+    "start": 5.575,
+    "end": 5.775
+  },
+  {
+    "word": "knees",
+    "start": 5.7875,
+    "end": 6.0249999999999995
+  },
+  {
+    "word": "in",
+    "start": 6.0375,
+    "end": 6.1125
+  },
+  {
+    "word": "the",
+    "start": 6.125,
+    "end": 6.1875
+  },
+  {
+    "word": "wet",
+    "start": 6.2,
+    "end": 6.4375
+  },
+  {
+    "word": "mud",
+    "start": 6.45,
+    "end": 6.7375
+  },
+  {
+    "word": "weeping",
+    "start": 6.9125,
+    "end": 7.4375
+  },
+  {
+    "word": "Name",
+    "start": 8.3,
+    "end": 8.625
+  },
+  {
+    "word": "your",
+    "start": 8.6375,
+    "end": 8.7875
+  },
+  {
+    "word": "price",
+    "start": 8.8,
+    "end": 9.3625
+  },
+  {
+    "word": "witcher",
+    "start": 9.5,
+    "end": 10.0
+  },
+  {
+    "word": "We",
+    "start": 10.8625,
+    "end": 11.05
+  },
+  {
+    "word": "will",
+    "start": 11.0625,
+    "end": 11.2
+  },
+  {
+    "word": "pay",
+    "start": 11.2125,
+    "end": 11.4625
+  },
+  {
+    "word": "whatever",
+    "start": 11.475,
+    "end": 11.85
+  },
+  {
+    "word": "you",
+    "start": 11.8625,
+    "end": 12.037500000000001
+  },
+  {
+    "word": "ask",
+    "start": 12.05,
+    "end": 12.537500000000001
+  }
+]

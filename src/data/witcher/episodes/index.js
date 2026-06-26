@@ -21,7 +21,7 @@ const stub = (id, num, title, act, actTitle, summary) => ({
 export const EPISODES = {
   ep01,
   ep02: stub('ep02', 2,  'The Cursed Mother',       1, 'Act I — Contracts of the Misty Valley',     'Geralt investigates the rune beneath the village well—and discovers who carved it twelve years ago.'),
-  ep03: stub('ep03', 3,  "The Elder's Secret",       1, 'Act I — Contracts of the Misty Valley',     'Depending on past choices, Elder Tokhir tries to repay his debt—or eliminate the one person who knows his shame.'),
+  ep03: stub('ep03', 3,  "The Elder's Secret",       1, 'Act I — Contracts of the Misty Valley',     'Depending on past choices, Elder Hadrick tries to repay his debt—or eliminate the one person who knows his shame.'),
   ep04: stub('ep04', 4,  'Breath of the Forest',     1, 'Act I — Contracts of the Misty Valley',     'On the road north, Geralt crosses paths with Sitora—a sorceress protecting a forest spirit that has begun attacking loggers.'),
   ep05: stub('ep05', 5,  'A Deal with Leshy',        1, 'Act I — Contracts of the Misty Valley',     'Geralt meets the ancient forest guardian. Kill it for the loggers—or protect the old wood at a human cost.'),
   ep06: stub('ep06', 6,  'Blood at the Tavern',      1, 'Act I — Contracts of the Misty Valley',     'A bar fight escalates when local soldiers recognize the witcher from a bounty notice.'),

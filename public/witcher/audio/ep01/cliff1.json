@@ -1,0 +1,202 @@
+[
+  {
+    "word": "Geralt",
+    "start": 0.1,
+    "end": 0.5
+  },
+  {
+    "word": "pulled",
+    "start": 0.5125,
+    "end": 0.7749999999999999
+  },
+  {
+    "word": "the",
+    "start": 0.7875,
+    "end": 0.875
+  },
+  {
+    "word": "arrow",
+    "start": 0.8875,
+    "end": 1.25
+  },
+  {
+    "word": "free",
+    "start": 1.2625,
+    "end": 1.725
+  },
+  {
+    "word": "The",
+    "start": 2.5875,
+    "end": 2.725
+  },
+  {
+    "word": "parchment",
+    "start": 2.7375,
+    "end": 3.2249999999999996
+  },
+  {
+    "word": "was",
+    "start": 3.2375,
+    "end": 3.3874999999999997
+  },
+  {
+    "word": "sealed",
+    "start": 3.4,
+    "end": 3.7375
+  },
+  {
+    "word": "with",
+    "start": 3.75,
+    "end": 3.9
+  },
+  {
+    "word": "dark",
+    "start": 3.9125,
+    "end": 4.3
+  },
+  {
+    "word": "red",
+    "start": 4.55,
+    "end": 4.7749999999999995
+  },
+  {
+    "word": "wax",
+    "start": 4.7875,
+    "end": 5.1625
+  },
+  {
+    "word": "bearing",
+    "start": 5.175,
+    "end": 5.5
+  },
+  {
+    "word": "the",
+    "start": 5.5125,
+    "end": 5.6000000000000005
+  },
+  {
+    "word": "royal",
+    "start": 5.6125,
+    "end": 5.975
+  },
+  {
+    "word": "crest",
+    "start": 5.9875,
+    "end": 6.35
+  },
+  {
+    "word": "of",
+    "start": 6.3625,
+    "end": 6.4125
+  },
+  {
+    "word": "the",
+    "start": 6.425,
+    "end": 6.4875
+  },
+  {
+    "word": "Northern",
+    "start": 6.5,
+    "end": 6.8625
+  },
+  {
+    "word": "Kingdom",
+    "start": 6.875,
+    "end": 7.275
+  },
+  {
+    "word": "a",
+    "start": 7.6,
+    "end": 7.6499999999999995
+  },
+  {
+    "word": "crown",
+    "start": 7.6625,
+    "end": 7.9875
+  },
+  {
+    "word": "above",
+    "start": 8.0,
+    "end": 8.35
+  },
+  {
+    "word": "crossed",
+    "start": 8.3625,
+    "end": 8.75
+  },
+  {
+    "word": "swords",
+    "start": 8.7625,
+    "end": 9.337499999999999
+  },
+  {
+    "word": "Inside",
+    "start": 10.2,
+    "end": 10.85
+  },
+  {
+    "word": "a",
+    "start": 11.1,
+    "end": 11.1625
+  },
+  {
+    "word": "single",
+    "start": 11.175,
+    "end": 11.55
+  },
+  {
+    "word": "line",
+    "start": 11.5625,
+    "end": 11.85
+  },
+  {
+    "word": "was",
+    "start": 11.8625,
+    "end": 12.05
+  },
+  {
+    "word": "written",
+    "start": 12.0625,
+    "end": 12.375
+  },
+  {
+    "word": "in",
+    "start": 12.3875,
+    "end": 12.549999999999999
+  },
+  {
+    "word": "elegant",
+    "start": 12.5625,
+    "end": 13.025
+  },
+  {
+    "word": "dark",
+    "start": 13.25,
+    "end": 13.55
+  },
+  {
+    "word": "ink",
+    "start": 13.5625,
+    "end": 13.825
+  },
+  {
+    "word": "We",
+    "start": 14.1375,
+    "end": 14.2875
+  },
+  {
+    "word": "need",
+    "start": 14.3,
+    "end": 14.5625
+  },
+  {
+    "word": "you",
+    "start": 14.575,
+    "end": 14.799999999999999
+  },
+  {
+    "word": "Geralt",
+    "start": 15.0625,
+    "end": 15.5875
+  }
+]

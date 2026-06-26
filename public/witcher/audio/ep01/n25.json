@@ -1,0 +1,182 @@
+[
+  {
+    "word": "On",
+    "start": 0.1,
+    "end": 0.2875
+  },
+  {
+    "word": "a",
+    "start": 0.3,
+    "end": 0.3625
+  },
+  {
+    "word": "dry",
+    "start": 0.375,
+    "end": 0.65
+  },
+  {
+    "word": "stone",
+    "start": 0.6625,
+    "end": 1.05
+  },
+  {
+    "word": "ledge",
+    "start": 1.0625,
+    "end": 1.475
+  },
+  {
+    "word": "he",
+    "start": 1.7,
+    "end": 1.8
+  },
+  {
+    "word": "found",
+    "start": 1.8125,
+    "end": 2.15
+  },
+  {
+    "word": "children's",
+    "start": 2.1625,
+    "end": 2.6
+  },
+  {
+    "word": "belongings",
+    "start": 2.6125,
+    "end": 3.2624999999999997
+  },
+  {
+    "word": "small",
+    "start": 3.525,
+    "end": 3.9375
+  },
+  {
+    "word": "leather",
+    "start": 3.95,
+    "end": 4.2
+  },
+  {
+    "word": "shoes",
+    "start": 4.2125,
+    "end": 4.6875
+  },
+  {
+    "word": "a",
+    "start": 4.95,
+    "end": 5.025
+  },
+  {
+    "word": "torn",
+    "start": 5.0375,
+    "end": 5.324999999999999
+  },
+  {
+    "word": "yellow",
+    "start": 5.3375,
+    "end": 5.612500000000001
+  },
+  {
+    "word": "scarf",
+    "start": 5.625,
+    "end": 6.1125
+  },
+  {
+    "word": "and",
+    "start": 6.3625,
+    "end": 6.475
+  },
+  {
+    "word": "a",
+    "start": 6.4875,
+    "end": 6.55
+  },
+  {
+    "word": "carved",
+    "start": 6.5625,
+    "end": 6.925
+  },
+  {
+    "word": "wooden",
+    "start": 6.9375,
+    "end": 7.2
+  },
+  {
+    "word": "horse",
+    "start": 7.2125,
+    "end": 7.75
+  },
+  {
+    "word": "They",
+    "start": 8.6125,
+    "end": 8.8
+  },
+  {
+    "word": "were",
+    "start": 8.8125,
+    "end": 8.95
+  },
+  {
+    "word": "arranged",
+    "start": 8.9625,
+    "end": 9.475
+  },
+  {
+    "word": "in",
+    "start": 9.4875,
+    "end": 9.5625
+  },
+  {
+    "word": "a",
+    "start": 9.575,
+    "end": 9.612499999999999
+  },
+  {
+    "word": "neat",
+    "start": 9.625,
+    "end": 10.0
+  },
+  {
+    "word": "careful",
+    "start": 10.2375,
+    "end": 10.675
+  },
+  {
+    "word": "row",
+    "start": 10.6875,
+    "end": 10.9625
+  },
+  {
+    "word": "not",
+    "start": 11.2875,
+    "end": 11.475
+  },
+  {
+    "word": "discarded",
+    "start": 11.4875,
+    "end": 12.075000000000001
+  },
+  {
+    "word": "but",
+    "start": 12.325,
+    "end": 12.487499999999999
+  },
+  {
+    "word": "kept",
+    "start": 12.5,
+    "end": 12.8
+  },
+  {
+    "word": "like",
+    "start": 12.8125,
+    "end": 13.0125
+  },
+  {
+    "word": "precious",
+    "start": 13.025,
+    "end": 13.4375
+  },
+  {
+    "word": "treasures",
+    "start": 13.45,
+    "end": 14.1
+  }
+]
