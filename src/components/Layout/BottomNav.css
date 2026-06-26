@@ -32,7 +32,9 @@
 }
 
 .bottom-nav-icon {
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform var(--transition-fast);
 }
 

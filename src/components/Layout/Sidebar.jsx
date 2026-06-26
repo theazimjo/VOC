@@ -3,13 +3,14 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAvatar } from '../../hooks/useAvatar';
+import { LayoutDashboard, BookOpen, GraduationCap, Settings } from 'lucide-react';
 import './Sidebar.css';
 
 const navItems = [
-  { to: '/',         icon: '📊', label: 'Dashboard' },
-  { to: '/library',  icon: '📚', label: 'Kutubxona' },
-  { to: '/grammar',  icon: '📖', label: 'Grammatika' },
-  { to: '/settings', icon: '⚙️', label: 'Sozlamalar' },
+  { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
+  { to: '/library',  icon: BookOpen,        label: 'Kutubxona' },
+  { to: '/grammar',  icon: GraduationCap,   label: 'Grammatika' },
+  { to: '/settings', icon: Settings,        label: 'Sozlamalar' },
 ];
 
 
@@ -56,7 +57,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
           <div className={`sidebar-logo theme-${theme}`}>
             {theme === 'ios' && (
               <>
-                <span style={{ marginRight: '8px' }}></span>
+                <span style={{ marginRight: '8px' }}>🍎</span>
                 {!collapsed && <span>VOC iOS</span>}
               </>
             )}
@@ -79,21 +80,26 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
 
         {/* Navigation */}
         <nav className="sidebar-nav">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === '/'}
-              className={({ isActive }) =>
-                `sidebar-link ${isActive ? 'active' : ''}`
-              }
-              onClick={onMobileClose}
-              title={collapsed ? item.label : undefined}
-            >
-              <span className="sidebar-link-icon">{item.icon}</span>
-              <span className="sidebar-link-text">{item.label}</span>
-            </NavLink>
-          ))}
+          {navItems.map((item) => {
+            const IconComponent = item.icon;
+            return (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === '/'}
+                className={({ isActive }) =>
+                  `sidebar-link ${isActive ? 'active' : ''}`
+                }
+                onClick={onMobileClose}
+                title={collapsed ? item.label : undefined}
+              >
+                <span className="sidebar-link-icon">
+                  <IconComponent size={20} strokeWidth={2.2} />
+                </span>
+                <span className="sidebar-link-text">{item.label}</span>
+              </NavLink>
+            );
+          })}
         </nav>
 
         {/* Footer — user info */}
