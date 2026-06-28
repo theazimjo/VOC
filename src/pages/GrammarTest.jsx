@@ -43,6 +43,10 @@ export default function GrammarTest() {
   // Time spent tracking
   const [timeSpent, setTimeSpent] = useState(0); // in seconds
 
+  // Attempts History state
+  const [attempts, setAttempts] = useState([]);
+  const [viewingPastAttempt, setViewingPastAttempt] = useState(null);
+
   // ─── SETTINGS & CONNECTIONS ────────────────────────────────────────────────
   const [apiEndpoint, setApiEndpoint] = useState(() => {
     return localStorage.getItem('lm_studio_endpoint') || 'http://localhost:1234/v1';
@@ -51,7 +55,7 @@ export default function GrammarTest() {
   const [isApiChecking, setIsApiChecking] = useState(false);
   const [apiStatus, setApiStatus] = useState({ checked: false, connected: false, error: '' });
 
-  // Load high scores and compute stats
+  // Load high scores, compute stats and load attempts
   useEffect(() => {
     const scores = {};
     let totalScore = 0;
@@ -72,10 +76,15 @@ export default function GrammarTest() {
       totalTaken: count,
       avgScore: count > 0 ? Math.round(totalScore / count) : 0
     });
+
+    const savedAttempts = localStorage.getItem('grammar_test_attempts');
+    setAttempts(savedAttempts ? JSON.parse(savedAttempts) : []);
   }, [stage]);
 
   // Synchronize state with route params
   useEffect(() => {
+    if (viewingPastAttempt) return; // Do not overwrite if viewing past attempt
+
     if (testId) {
       const foundExam = EXAMS_LIST.find(e => e.id === testId);
       if (foundExam) {
@@ -93,7 +102,7 @@ export default function GrammarTest() {
       setSections([]);
       setStage('list');
     }
-  }, [testId, navigate]);
+  }, [testId, navigate, viewingPastAttempt]);
 
   // Save endpoint
   useEffect(() => {
@@ -372,11 +381,32 @@ export default function GrammarTest() {
 
     const percent = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
     
+    // Save high score
     const savedScore = localStorage.getItem(`grammar_test_score_${activeTest.id}`);
     const prevBest = savedScore ? parseInt(savedScore, 10) : -1;
     if (percent > prevBest) {
       localStorage.setItem(`grammar_test_score_${activeTest.id}`, String(percent));
     }
+
+    // Save to attempts history
+    const attempt = {
+      id: `attempt_${Date.now()}`,
+      testId: activeTest.id,
+      testTitle: activeTest.title,
+      score: percent,
+      totalScore: totalScore.toFixed(1),
+      totalQuestions: totalQuestions,
+      timeSpent: 30 * 60 - timeLeft,
+      takenAt: new Date().toISOString(),
+      answers: { ...answers },
+      grades: { ...finalGradesMap }
+    };
+
+    const savedAttempts = localStorage.getItem('grammar_test_attempts');
+    const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
+    attemptsList.unshift(attempt);
+    localStorage.setItem('grammar_test_attempts', JSON.stringify(attemptsList));
+    setAttempts(attemptsList);
   };
 
   const evaluateWithLMStudio = async (questionText, referenceText, studentAnswerText, modelName) => {
@@ -498,6 +528,60 @@ Evaluate the answer and return the JSON.`;
     return `${remainingSecs} soniya`;
   };
 
+  // Helper to format attempt date
+  const formatDate = (isoStr) => {
+    const d = new Date(isoStr);
+    const day = d.getDate().toString().padStart(2, '0');
+    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+    const year = d.getFullYear();
+    const hours = d.getHours().toString().padStart(2, '0');
+    const minutes = d.getMinutes().toString().padStart(2, '0');
+    return `${day}.${month}.${year} ${hours}:${minutes}`;
+  };
+
+  // Helper to get variant letter A, B, C...
+  const getVariantLetter = (testId) => {
+    const idx = EXAMS_LIST.findIndex(e => e.id === testId);
+    return idx !== -1 ? String.fromCharCode(65 + idx) : '?';
+  };
+
+  // View a past attempt details
+  const handleViewAttempt = (attempt) => {
+    const foundExam = EXAMS_LIST.find(e => e.id === attempt.testId);
+    if (foundExam) {
+      setActiveTest(foundExam);
+      setSections(foundExam.sections);
+      setAnswers(attempt.answers);
+      setGrades(attempt.grades);
+      setTimeSpent(attempt.timeSpent);
+      setViewingPastAttempt(attempt.id);
+      setStage('results');
+      playSound('correct');
+    }
+  };
+
+  // Delete an attempt from history
+  const handleDeleteAttempt = (attemptId, e) => {
+    e.stopPropagation();
+    if (window.confirm("Ushbu urinish tarixini o'chirishni xohlaysizmi?")) {
+      const savedAttempts = localStorage.getItem('grammar_test_attempts');
+      const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
+      const filtered = attemptsList.filter(a => a.id !== attemptId);
+      localStorage.setItem('grammar_test_attempts', JSON.stringify(filtered));
+      setAttempts(filtered);
+      playSound('wrong');
+    }
+  };
+
+  // Exit result view
+  const handleExitResults = () => {
+    if (viewingPastAttempt) {
+      setViewingPastAttempt(null);
+    } else {
+      navigate('/grammar-test');
+    }
+  };
+
   return (
     <div className="grammar-test-layout">
 
@@ -524,7 +608,7 @@ Evaluate the answer and return the JSON.`;
 
           <div className="gt-dashboard-main-row">
             
-            {/* Left side: Premium Folder Cards List */}
+            {/* Left side: Premium Folder Cards List & Exam History */}
             <div className="gt-folders-section">
               <h3 className="section-title">Papka to'plamlari</h3>
               
@@ -557,6 +641,62 @@ Evaluate the answer and return the JSON.`;
                     </div>
                   </div>
                 </motion.div>
+              </div>
+
+              {/* Urinishlar Tarixi (Attempts History) */}
+              <div className="gt-history-section" style={{ marginTop: '40px' }}>
+                <h3 className="section-title">Imtihonlar Tarixi</h3>
+                {attempts.length === 0 ? (
+                  <div className="gt-empty-history">
+                    <p>Hozircha topshirilgan imtihonlar tarixi mavjud emas.</p>
+                  </div>
+                ) : (
+                  <div className="gt-history-list">
+                    {attempts.map((att) => (
+                      <div 
+                        key={att.id} 
+                        className="gt-history-item"
+                        onClick={() => handleViewAttempt(att)}
+                      >
+                        <div className="history-meta">
+                          <span className="history-badge-letter">
+                            {getVariantLetter(att.testId)}
+                          </span>
+                          <div className="history-info">
+                            <h4>{att.testTitle}</h4>
+                            <span className="date-span">📅 {formatDate(att.takenAt)}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="history-stats">
+                          <div className="score-badge-wrap">
+                            <span className={`score-percent-badge ${att.score >= 90 ? 'excellent' : att.score >= 70 ? 'good' : att.score >= 50 ? 'satisfactory' : 'retry'}`}>
+                              {att.score}%
+                            </span>
+                            <span className="score-details">{att.totalScore} / {att.totalQuestions} ball</span>
+                          </div>
+                          <span className="time-badge">⏱️ {Math.round(att.timeSpent / 60)} daq</span>
+                          
+                          <div className="history-actions">
+                            <button 
+                              className="btn btn-secondary compact btn-view-history"
+                              onClick={() => handleViewAttempt(att)}
+                            >
+                              Ko'rish
+                            </button>
+                            <button 
+                              className="btn-delete-history"
+                              onClick={(e) => handleDeleteAttempt(att.id, e)}
+                              title="O'chirish"
+                            >
+                              🗑️
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -1132,7 +1272,7 @@ Evaluate the answer and return the JSON.`;
             {/* Header section with Trophy card & primary metrics */}
             <div className="gt-results-hero">
               <div className="results-hero-left">
-                <span className="res-hero-badge">📊 Imtihon Yakunlandi</span>
+                <span className="res-hero-badge">📊 {viewingPastAttempt ? "Urinish Tafsilotlari" : "Imtihon Yakunlandi"}</span>
                 <h2>{rating.title}</h2>
                 <p>Natijalaringiz tahlili va to'g'rilik ko'rsatkichi bilan tanishing.</p>
               </div>
@@ -1337,16 +1477,18 @@ Evaluate the answer and return the JSON.`;
             <div className="gt-results-actions-footer">
               <button 
                 className="btn btn-secondary" 
-                onClick={() => navigate('/grammar-test')}
+                onClick={handleExitResults}
               >
                 ← Variantlar ro'yxatiga qaytish
               </button>
-              <button 
-                className="btn btn-primary" 
-                onClick={handleRestartTest}
-              >
-                🔄 Qayta topshirib ko'rish
-              </button>
+              {!viewingPastAttempt && (
+                <button 
+                  className="btn btn-primary" 
+                  onClick={handleRestartTest}
+                >
+                  🔄 Qayta topshirib ko'rish
+                </button>
+              )}
             </div>
 
           </motion.div>
