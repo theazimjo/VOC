@@ -576,3 +576,204 @@ export const EXAMS_LIST = [
     ]
   }
 ];
+
+// ─── THREE IELTS GRAMMAR TESTS DATA ──────────────────────────────────────────
+export const IELTS_EXAMS_LIST = [
+  {
+    id: 'ielts_1',
+    title: 'IELTS Academic - Variant A',
+    description: 'Academic style, passive voice, complex sentence linking, describing trends and academic summaries.',
+    sections: [
+      {
+        id: 'mistakes',
+        title: '1. Correct the Mistakes',
+        description: 'Academic gap errors. Find the grammar mistakes in formal/academic sentences and correct them.',
+        questions: [
+          { id: 1, original: 'Although the population increased, but the resources decreased.', reference: 'Although the population increased, resources decreased. / The population increased, but resources decreased.', topic: 'Conjunctions / Sentence structure' },
+          { id: 2, original: 'The chart displays about the export figures of agricultural goods.', reference: 'The chart displays the export figures of agricultural goods. / The chart shows the export figures of agricultural goods.', topic: 'Academic reporting verbs' },
+          { id: 3, original: 'It is essential that governments should supports renewable energy.', reference: 'It is essential that governments support renewable energy. / It is essential that governments should support renewable energy.', topic: 'Subjunctives' },
+          { id: 4, original: 'The percentage of students who plays sports decreased.', reference: 'The percentage of students who play sports decreased.', topic: 'Subject-verb agreement' },
+          { id: 5, original: 'In contrast of the previous year, sales declined in 2020.', reference: 'In contrast to the previous year, sales declined in 2020. / In contrast with the previous year, sales declined in 2020.', topic: 'Prepositions' },
+          { id: 6, original: 'The number of people went to university rose.', reference: 'The number of people who went to university rose. / The number of people going to university rose.', topic: 'Relative clauses' },
+          { id: 7, original: 'She suggested to implement a new carbon tax policy.', reference: 'She suggested implementing a new carbon tax policy. / She suggested that a new carbon tax policy should be implemented.', topic: 'Gerunds / Infinitives' },
+          { id: 8, original: 'This is the most highest figure recorded.', reference: 'This is the highest figure recorded.', topic: 'Superlatives' },
+          { id: 9, original: 'Less people attended the lecture than expected.', reference: 'Fewer people attended the lecture than expected.', topic: 'Quantifiers' },
+          { id: 10, original: 'The research was did by a team of scientists.', reference: 'The research was conducted by a team of scientists. / The research was done by a team of scientists.', topic: 'Passive voice verbs' }
+        ]
+      },
+      {
+        id: 'gaps',
+        title: '2. Fill in the Gaps',
+        description: 'Complete the sentences using formal IELTS structures (modals, passives, transitions).',
+        questions: [
+          { id: 1, text: 'Due to the economic recession, the company _______________ (force) to lay off employees last year.', type: 'text', correct: 'was forced', topic: 'Passive voice' },
+          { id: 2, text: 'The graph shows the number of cars __________ were manufactured in Europe.', type: 'choice', options: ['who', 'which', 'whose', 'where'], correct: 'which', topic: 'Relative clauses' },
+          { id: 3, text: '__________ the high prices, consumers continued to buy organic food.', type: 'choice', options: ['Although', 'Despite', 'In spite', 'However'], correct: 'Despite', topic: 'Contrast linkers' },
+          { id: 4, text: 'The data reveals that the rate of recycling has risen _______________ (significance) since 2010.', type: 'text', correct: 'significantly', topic: 'Trend adverbs' },
+          { id: 5, text: 'By the end of next decade, scientists _______________ (develop) a cure for the virus.', type: 'text', correct: 'will have developed', topic: 'Future perfect' },
+          { id: 6, text: 'It is highly likely __________ the temperature will continue to rise.', type: 'choice', options: ['that', 'which', 'for', 'to'], correct: 'that', topic: 'Reporting clauses' },
+          { id: 7, text: 'Not only did the sales decrease, but the production cost _______________ (increase) as well.', type: 'text', correct: 'increased', topic: 'Inversions' },
+          { id: 8, text: 'The figures _______________ (analyze) before the final report was published.', type: 'text', correct: 'were analyzed', topic: 'Passive voice' },
+          { id: 9, text: 'There was a sharp rise __________ the number of graduates.', type: 'choice', options: ['in', 'of', 'on', 'with'], correct: 'in', topic: 'Prepositions' },
+          { id: 10, text: 'The company, __________ CEO recently resigned, is facing bankruptcy.', type: 'choice', options: ['whose', 'which', 'who', 'whom'], correct: 'whose', topic: 'Relative pronouns' }
+        ]
+      },
+      {
+        id: 'translate',
+        title: '3. Translate Test',
+        description: 'Translate formal/academic Uzbek sentences into academic English. (LM Studio baholaydi)',
+        questions: [
+          { id: 1, uzbek: 'Narxlar oshganiga qaramay, talab yuqoriligicha qoldi.', reference: 'Despite the increase in prices, demand remained high. / Although prices increased, demand remained high.', topic: 'Contrast linkers' },
+          { id: 2, uzbek: 'Ushbu hisobotda iqlim o\'zgarishining ta\'siri muhokama qilinadi.', reference: 'This report discusses the effects of climate change. / The impact of climate change is discussed in this report.', topic: 'Academic reporting' },
+          { id: 3, uzbek: 'Ushbu ma\'lumotlar shuni ko\'rsatadiki, ishsizlik darajasi keskin pasaygan.', reference: 'This data shows that the unemployment rate has declined sharply. / The data indicates that the unemployment rate decreased dramatically.', topic: 'Describing trends' },
+          { id: 4, uzbek: 'Yangi qonun kelgusi yilning yanvar oyidan joriy qilinadi.', reference: 'The new law will be introduced in January next year. / The new regulation will be implemented starting next January.', topic: 'Passive voice / Future' },
+          { id: 5, uzbek: 'Qayta tiklanadigan energiya manbalari atrof-muhit ifloslanishini sezilarli darajada kamaytiradi.', reference: 'Renewable energy sources significantly reduce environmental pollution.', topic: 'Academic vocabulary' }
+        ]
+      },
+      {
+        id: 'reorder',
+        title: '4. Reorder the Words',
+        description: 'Formulate grammatically correct complex academic sentences.',
+        questions: [
+          { id: 1, scrambled: ['the', 'increased', 'sharply', 'number', 'of', 'tourists'], answer: 'The number of tourists increased sharply.', topic: 'Trend syntax' },
+          { id: 2, scrambled: ['while', 'increased', 'exports', 'imports', 'declined'], answer: 'While exports increased, imports declined.', topic: 'Comparison linking' },
+          { id: 3, scrambled: ['is', 'argued', 'that', 'education', 'should', 'be', 'free', 'it'], answer: 'It is argued that education should be free.', topic: 'Passive reporting clauses' },
+          { id: 4, scrambled: ['factors', 'led', 'to', 'this', 'crisis', 'several'], answer: 'Several factors led to this crisis.', topic: 'Cause and effect' },
+          { id: 5, scrambled: ['majority', 'a', 'of', 'participants', 'agreed', 'with', 'the', 'decision'], answer: 'A majority of participants agreed with the decision.', topic: 'Formal quantifiers' }
+        ]
+      },
+      {
+        id: 'production',
+        title: '5. Open Academic Production',
+        description: 'Write academic sentences expressing data and arguments.',
+        questions: [
+          { id: 1, prompt: 'Write a sentence describing a chart trend using a verb + adverb combination (e.g. decreased dramatically, fluctuated wildly)', referencePattern: 'Graph trends description (e.g. Sales fluctuated wildly in the second quarter.)', topic: 'Trend description' },
+          { id: 2, prompt: 'Write an academic sentence using "Despite" or "In spite of" followed by a noun phrase.', referencePattern: 'Concession clause (e.g. Despite the lack of funding, the research was completed.)', topic: 'Concession structures' },
+          { id: 3, prompt: 'Write a passive sentence using a reporting verb (e.g., "It is widely believed that...")', referencePattern: 'Passive reporting structures (e.g. It is believed that technology enhances learning.)', topic: 'Formal voice' }
+        ]
+      },
+      {
+        id: 'inged',
+        title: '6. Academic Participles',
+        description: 'Choose the appropriate participle forms for academic descriptions.',
+        questions: [
+          { id: 1, text: 'The graph depicts the _______________ rate of urban growth.', options: ['accelerating', 'accelerated'], correct: 'accelerating', topic: 'Active participle' },
+          { id: 2, text: 'Participants _______________ in the study were aged between 18 and 25.', options: ['involving', 'involved'], correct: 'involved', topic: 'Passive participle' },
+          { id: 3, text: 'The results, _______________ last week, surprised many researchers.', options: ['publishing', 'published'], correct: 'published', topic: 'Reduced relative clauses' },
+          { id: 4, text: 'With rising temperatures _______________ polar ice, sea levels are rising.', options: ['melting', 'melted'], correct: 'melting', topic: 'Active causes' },
+          { id: 5, text: 'A _______________ amount of resources was allocated to the project.', options: ['limiting', 'limited'], correct: 'limited', topic: 'Adjectival passive' }
+        ]
+      },
+      {
+        id: 'reading',
+        title: '7. Reading Summary Completion',
+        description: 'Read the short text and answer academic comprehension questions.',
+        passage: 'The process of urbanization has accelerated rapidly over the last fifty years. In 1970, only 37% of the global population lived in cities. By 2020, this figure had risen to over 56%, and it is projected to reach 68% by 2050. This shift is primarily driven by industrial development and better job opportunities in urban centers.',
+        questions: [
+          { id: 1, question: 'What was the urbanization rate in 1970?', reference: '37% / 37 percent', topic: 'Data identification' },
+          { id: 2, question: 'What percentage is predicted for 2050?', reference: '68% / 68 percent', topic: 'Projections' },
+          { id: 3, question: 'What is the main driver of this urban shift?', reference: 'industrial development and better job opportunities / industrial development', topic: 'Cause extraction' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'ielts_2',
+    title: 'IELTS Academic - Variant B',
+    description: 'Academic syntax, passive voices, complex prepositions, describing trends, cause and effect structures.',
+    sections: [
+      {
+        id: 'mistakes',
+        title: '1. Correct the Mistakes',
+        description: 'Find grammar errors in formal/academic sentences and correct them.',
+        questions: [
+          { id: 1, original: 'Although the sales rose, however the profits dropped.', reference: 'Although the sales rose, the profits dropped. / Sales rose; however, profits dropped.', topic: 'Contrast links' },
+          { id: 2, original: 'The graph gives information about how many energy was consumed.', reference: 'The graph gives information about how much energy was consumed.', topic: 'Quantifiers' },
+          { id: 3, original: 'It is crucial that the policy is implemented immediately.', reference: 'It is crucial that the policy be implemented immediately. / It is crucial that the policy is implemented immediately.', topic: 'Subjunctives' },
+          { id: 4, original: 'A range of reasons explain this dramatic increase.', reference: 'A range of reasons explains this dramatic increase.', topic: 'Subject-verb agreement' },
+          { id: 5, original: 'Prices decreased of 10 percent last year.', reference: 'Prices decreased by 10 percent last year.', topic: 'Prepositions' },
+          { id: 6, original: 'The number of student attending school has grown.', reference: 'The number of students attending school has grown.', topic: 'Plurals' },
+          { id: 7, original: 'They recommend to invest in solar power.', reference: 'They recommend investing in solar power. / They recommend that we should invest in solar power.', topic: 'Gerunds' },
+          { id: 8, original: 'The temperature rose more fast than before.', reference: 'The temperature rose faster than before.', topic: 'Comparatives' },
+          { id: 9, original: 'Most of people agree with this viewpoint.', reference: 'Most people agree with this viewpoint. / Most of the people agree with this viewpoint.', topic: 'Quantifiers' },
+          { id: 10, original: 'The experiment was carried out by using old equipment.', reference: 'The experiment was carried out using old equipment.', topic: 'Gerund phrase links' }
+        ]
+      },
+      {
+        id: 'gaps',
+        title: '2. Fill in the Gaps',
+        description: 'Complete the sentences using formal IELTS structures.',
+        questions: [
+          { id: 1, text: 'This phenomenon _______________ (observe) in multiple studies over the past decade.', type: 'text', correct: 'has been observed', topic: 'Present perfect passive' },
+          { id: 2, text: 'The region, __________ suffers from frequent droughts, is agricultural.', type: 'choice', options: ['who', 'which', 'where', 'whose'], correct: 'which', topic: 'Relative clauses' },
+          { id: 3, text: '__________ the budget cuts, the department succeeded in completing the project.', type: 'choice', options: ['Although', 'In spite', 'Despite', 'Even though'], correct: 'Despite', topic: 'Contrast transitions' },
+          { id: 4, text: 'The graph reveals that production has fallen _______________ (dramatic).', type: 'text', correct: 'dramatically', topic: 'Trend adverbs' },
+          { id: 5, text: 'By next December, the new highway _______________ (build).', type: 'text', correct: 'will have been built', topic: 'Future perfect passive' },
+          { id: 6, text: 'There is no doubt __________ education leads to better employment opportunities.', type: 'choice', options: ['that', 'what', 'if', 'about'], correct: 'that', topic: 'Noun clauses' },
+          { id: 7, text: 'No sooner had the policy been introduced __________ public protests began.', type: 'choice', options: ['than', 'then', 'when', 'that'], correct: 'than', topic: 'Inverted structures' },
+          { id: 8, text: 'A database _______________ (create) to store patient details next month.', type: 'text', correct: 'will be created', topic: 'Future passive' },
+          { id: 9, text: 'There was a substantial drop __________ the inflation rate.', type: 'choice', options: ['in', 'at', 'on', 'of'], correct: 'in', topic: 'Prepositions' },
+          { id: 10, text: 'The country __________ economy is heavily dependent on oil is seeking alternatives.', type: 'choice', options: ['whose', 'which', 'its', 'where'], correct: 'whose', topic: 'Relative clauses' }
+        ]
+      },
+      {
+        id: 'translate',
+        title: '3. Translate Test',
+        description: 'Translate formal/academic Uzbek sentences into academic English. (LM Studio baholaydi)',
+        questions: [
+          { id: 1, uzbek: 'Moliyaviy yordam yo\'qligiga qaramay, tadqiqot yakunlandi.', reference: 'Despite the lack of financial support, the research was completed. / In spite of the absence of funding, the study was finished.', topic: 'Contrast links' },
+          { id: 2, uzbek: 'Bu tadqiqot global isishning sabablarini o\'rganishga qaratilgan.', reference: 'This study aims to examine the causes of global warming. / This research is focused on investigating the causes of global warming.', topic: 'Academic reporting' },
+          { id: 3, uzbek: 'Ishlab chiqarish hajmi o\'tgan oyda keskin ko\'tarildi.', reference: 'The volume of production rose sharply last month. / Production figures increased dramatically in the previous month.', topic: 'Describing trends' },
+          { id: 4, uzbek: 'Yangi texnologiyalar kelajakda atrof-muhitni asrashga yordam beradi deb hisoblanadi.', reference: 'It is believed that new technologies will help to preserve the environment in the future.', topic: 'Passive reporting / Future' },
+          { id: 5, uzbek: 'Soliqlarning oshishi iste\'molchilar xarajatlarini sezilarli darajada kamaytirdi.', reference: 'The increase in taxes significantly reduced consumer spending.', topic: 'Academic vocabulary' }
+        ]
+      },
+      {
+        id: 'reorder',
+        title: '4. Reorder the Words',
+        description: 'Formulate grammatically correct complex academic sentences.',
+        questions: [
+          { id: 1, scrambled: ['dropped', 'significantly', 'number', 'the', 'of', 'unemployed', 'people'], answer: 'The number of unemployed people dropped significantly.', topic: 'Trend syntax' },
+          { id: 2, scrambled: ['whereas', 'grew', 'imports', 'fell', 'exports'], answer: 'Whereas imports grew, exports fell.', altAnswer: 'Exports fell whereas imports grew.', topic: 'Comparison linking' },
+          { id: 3, scrambled: ['is', 'assumed', 'that', 'warming', 'global', 'human-made', 'is', 'it'], answer: 'It is assumed that global warming is human-made.', topic: 'Passive reporting clauses' },
+          { id: 4, scrambled: ['consequences', 'had', 'severe', 'this', 'decision'], answer: 'This decision had severe consequences.', topic: 'Cause and effect' },
+          { id: 5, scrambled: ['percentage', 'a', 'small', 'of', 'citizens', 'voted'], answer: 'A small percentage of citizens voted.', topic: 'Formal quantifiers' }
+        ]
+      },
+      {
+        id: 'production',
+        title: '5. Open Academic Production',
+        description: 'Write academic sentences expressing data and arguments.',
+        questions: [
+          { id: 1, prompt: 'Write a sentence describing a chart trend using a noun + adjective combination (e.g. there was a dramatic decline, a gradual increase)', referencePattern: 'Graph trends description (e.g. There was a gradual increase in oil consumption.)', topic: 'Trend description' },
+          { id: 2, prompt: 'Write an academic sentence using "In contrast to" or "Compared with" to compare two figures.', referencePattern: 'Comparison clause (e.g. In contrast to Europe, Asia experienced high growth.)', topic: 'Comparison structures' },
+          { id: 3, prompt: 'Write an inverted academic sentence starting with "Not only..."', referencePattern: 'Inverted sentence structure (e.g. Not only did they lose the match, but they also lost their captain.)', topic: 'Advanced syntax' }
+        ]
+      },
+      {
+        id: 'inged',
+        title: '6. Academic Participles',
+        description: 'Choose the appropriate participle forms for academic descriptions.',
+        questions: [
+          { id: 1, text: 'There is a _______________ demand for renewable energy sources.', options: ['growing', 'grown'], correct: 'growing', topic: 'Active participle' },
+          { id: 2, text: 'The data _______________ in the graph covers a ten-year period.', options: ['presenting', 'presented'], correct: 'presented', topic: 'Passive participle' },
+          { id: 3, text: 'Scientists, _______________ the sample under a microscope, found bacteria.', options: ['examining', 'examined'], correct: 'examining', topic: 'Active participle clause' },
+          { id: 4, text: 'With rising sea levels _______________ coastal areas, residents are moving.', options: ['threatening', 'threatened'], correct: 'threatening', topic: 'Active causes' },
+          { id: 5, text: 'A _______________ amount of energy is lost during transmission.', options: ['significant', 'significated'], correct: 'significant', topic: 'Academic adjectives' }
+        ]
+      },
+      {
+        id: 'reading',
+        title: '7. Reading Summary Completion',
+        description: 'Read the short text and answer academic comprehension questions.',
+        passage: 'Global energy demand has grown by 85% since 1990, driven by rapid industrialization in developing countries. While fossil fuels remain the dominant source, accounting for 78% of consumption, solar and wind power are expanding at an unprecedented rate, increasing by 20% annually over the last decade.',
+        questions: [
+          { id: 1, question: 'By how much has global energy demand grown since 1990?', reference: '85% / 85 percent', topic: 'Data identification' },
+          { id: 2, question: 'What percentage of energy consumption comes from fossil fuels?', reference: '78% / 78 percent', topic: 'Data identification' },
+          { id: 3, question: 'What is the annual growth rate of solar and wind power?', reference: '20% / 20 percent', topic: 'Projections / Trends' }
+        ]
+      }
+    ]
+  }
+];
+

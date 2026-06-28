@@ -91,6 +91,7 @@ export default function Dashboard() {
       initial="hidden"
       animate="visible"
     >
+
       {/* 1. Compact Stats Summary Card at the top */}
       <motion.div className="dashboard-summary-card" variants={itemVariants}>
         <div className="summary-card-glow"></div>

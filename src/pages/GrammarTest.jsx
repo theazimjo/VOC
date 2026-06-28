@@ -2,7 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound, triggerVibration } from '../utils/feedback';
-import { EXAMS_LIST } from '../data/examData';
+import { EXAMS_LIST, IELTS_EXAMS_LIST } from '../data/examData';
+import { 
+  ref, 
+  set, 
+  push, 
+  onValue, 
+  remove 
+} from 'firebase/database';
+import { db } from '../firebase';
+import { useAuth } from '../contexts/AuthContext';
 import { 
   Folder, 
   Award, 
@@ -24,8 +33,9 @@ import './GrammarTest.css';
 export default function GrammarTest() {
   const navigate = useNavigate();
   const { testId } = useParams();
+  const { user } = useAuth();
 
-  // ─── STAGES: 'list' | 'folder_detail' | 'intro' | 'testing' | 'evaluating' | 'self-grade' | 'results' ───
+  // ─── STAGES: 'list' | 'folder_detail' | 'intro' | 'testing' | 'evaluating' | 'results' ───
   const [stage, setStage] = useState('list');
   const [activeTest, setActiveTest] = useState(null);
   const [sections, setSections] = useState([]);
@@ -43,9 +53,14 @@ export default function GrammarTest() {
   // Time spent tracking
   const [timeSpent, setTimeSpent] = useState(0); // in seconds
 
+  // Category selection tab: 'level' | 'ielts'
+  const [examCategory, setExamCategory] = useState('level');
+
   // Attempts History state
   const [attempts, setAttempts] = useState([]);
   const [viewingPastAttempt, setViewingPastAttempt] = useState(null);
+  const [currentAttemptId, setCurrentAttemptId] = useState(null);
+  const [isRetryingAttemptId, setIsRetryingAttemptId] = useState(null);
 
   // ─── SETTINGS & CONNECTIONS ────────────────────────────────────────────────
   const [apiEndpoint, setApiEndpoint] = useState(() => {
@@ -55,39 +70,80 @@ export default function GrammarTest() {
   const [isApiChecking, setIsApiChecking] = useState(false);
   const [apiStatus, setApiStatus] = useState({ checked: false, connected: false, error: '' });
 
-  // Load high scores, compute stats and load attempts
+  // Load attempts history (Firebase if logged in, otherwise localStorage)
+  useEffect(() => {
+    if (user) {
+      const attemptsRef = ref(db, `users/${user.uid}/grammar/complex_attempts`);
+      const unsubscribe = onValue(attemptsRef, (snapshot) => {
+        const val = snapshot.val() || {};
+        const attemptsList = [];
+        Object.keys(val).forEach((key) => {
+          attemptsList.push({
+            id: key,
+            ...val[key]
+          });
+        });
+        // Sort attempts by date descending
+        attemptsList.sort((a, b) => new Date(b.takenAt || 0) - new Date(a.takenAt || 0));
+        setAttempts(attemptsList);
+      }, (error) => {
+        console.error("Error listening to grammar attempts from Firebase:", error);
+      });
+      return () => unsubscribe();
+    } else {
+      const savedAttempts = localStorage.getItem('grammar_test_attempts');
+      setAttempts(savedAttempts ? JSON.parse(savedAttempts) : []);
+    }
+  }, [user, stage]);
+
+  // Recalculate stats and high scores whenever attempts state changes
   useEffect(() => {
     const scores = {};
-    let totalScore = 0;
-    let count = 0;
+    const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
 
-    EXAMS_LIST.forEach(exam => {
+    // 1. First, load old local high scores for backward compatibility
+    ALL_EXAMS.forEach(exam => {
       const saved = localStorage.getItem(`grammar_test_score_${exam.id}`);
       if (saved !== null) {
-        const val = parseInt(saved, 10);
-        scores[exam.id] = val;
-        totalScore += val;
-        count++;
+        scores[exam.id] = parseInt(saved, 10);
+      }
+    });
+
+    // 2. Merge with computed scores from attempts history
+    attempts.forEach(att => {
+      const prev = scores[att.testId] || 0;
+      if (att.score > prev) {
+        scores[att.testId] = att.score;
       }
     });
 
     setHighScores(scores);
-    setStats({
-      totalTaken: count,
-      avgScore: count > 0 ? Math.round(totalScore / count) : 0
-    });
 
-    const savedAttempts = localStorage.getItem('grammar_test_attempts');
-    setAttempts(savedAttempts ? JSON.parse(savedAttempts) : []);
-  }, [stage]);
+    // Compute unique variants taken and average score
+    const uniqueTestsTaken = new Set(attempts.map(a => a.testId)).size;
+    const totalScorePercent = attempts.reduce((acc, a) => acc + a.score, 0);
+    const avgScore = attempts.length > 0 ? Math.round(totalScorePercent / attempts.length) : 0;
+
+    setStats({
+      totalTaken: uniqueTestsTaken,
+      avgScore: avgScore
+    });
+  }, [attempts]);
 
   // Synchronize state with route params
   useEffect(() => {
     if (viewingPastAttempt) return; // Do not overwrite if viewing past attempt
 
     if (testId) {
-      const foundExam = EXAMS_LIST.find(e => e.id === testId);
+      const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
+      const foundExam = ALL_EXAMS.find(e => e.id === testId);
       if (foundExam) {
+        // Auto select correct category based on testId prefix
+        if (testId.startsWith('ielts_')) {
+          setExamCategory('ielts');
+        } else {
+          setExamCategory('level');
+        }
         setActiveTest(foundExam);
         setSections(foundExam.sections);
         setStage((prev) => {
@@ -116,8 +172,6 @@ export default function GrammarTest() {
   
   // ─── EVALUATION RESULTS STATE ──────────────────────────────────────────────
   const [grades, setGrades] = useState({});
-  const [selfGradeQueue, setSelfGradeQueue] = useState([]);
-  const [currentSelfGradeIdx, setCurrentSelfGradeIdx] = useState(0);
 
   const activeSection = sections[activeSectionIdx];
   const timerRef = useRef(null);
@@ -176,9 +230,6 @@ export default function GrammarTest() {
     setAnswers({});
     setReorderSelections({});
     setGrades({});
-    setSelfGradeQueue([]);
-    setCurrentSelfGradeIdx(0);
-    setTimeLeft(30 * 60);
     navigate(`/grammar-test/run/${exam.id}`);
     playSound('correct');
   };
@@ -187,8 +238,6 @@ export default function GrammarTest() {
     setAnswers({});
     setReorderSelections({});
     setGrades({});
-    setSelfGradeQueue([]);
-    setCurrentSelfGradeIdx(0);
     setTimeLeft(30 * 60);
     setStage('intro');
   };
@@ -252,25 +301,28 @@ export default function GrammarTest() {
           const isCorrect = userVal.toLowerCase() === q.correct.toLowerCase();
           tempGrades[key] = {
             score: isCorrect ? 1.0 : 0.0,
-            feedback: isCorrect ? 'Perfect!' : `Correct answer: "${q.correct}"`
+            feedback: isCorrect ? 'Perfect!' : `Correct answer: "${q.correct}"`,
+            pending: false
           };
         } else if (section.id === 'gaps' && q.type === 'text') {
           const isCorrect = userVal.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"") === q.correct.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
           tempGrades[key] = {
             score: isCorrect ? 1.0 : 0.0,
-            feedback: isCorrect ? 'Perfect!' : `Correct answer: "${q.correct}"`
+            feedback: isCorrect ? 'Perfect!' : `Correct answer: "${q.correct}"`,
+            pending: false
           };
         } else if (section.id === 'inged') {
           const isCorrect = userVal.toLowerCase() === q.correct.toLowerCase();
           tempGrades[key] = {
             score: isCorrect ? 1.0 : 0.0,
-            feedback: isCorrect ? 'Correct!' : `Correct answer: "${q.correct}"`
+            feedback: isCorrect ? 'Correct!' : `Correct answer: "${q.correct}"`,
+            pending: false
           };
         } else if (section.id === 'mistakes') {
           const cleanUser = userVal.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
           const cleanRef = q.reference.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
           if (cleanUser === cleanRef) {
-            tempGrades[key] = { score: 1.0, feedback: 'Correct!' };
+            tempGrades[key] = { score: 1.0, feedback: 'Correct!', pending: false };
           } else {
             writtenToEvaluate.push({
               key,
@@ -288,7 +340,8 @@ export default function GrammarTest() {
           const isCorrect = cleanUser === cleanRef || (cleanAlt && cleanUser === cleanAlt);
           tempGrades[key] = {
             score: isCorrect ? 1.0 : 0.0,
-            feedback: isCorrect ? 'Correct order!' : `Expected: "${q.answer}"`
+            feedback: isCorrect ? 'Correct order!' : `Expected: "${q.answer}"`,
+            pending: false
           };
         } else {
           writtenToEvaluate.push({
@@ -322,75 +375,71 @@ export default function GrammarTest() {
         }
       }
     } catch (e) {
-      console.warn("Direct local connection check failed. Falling back to self-grading.", e);
+      console.warn("Direct local connection check failed during submit.", e);
     }
 
-    if (lmStudioConnected && writtenToEvaluate.length > 0) {
-      const apiGrades = { ...tempGrades };
-      const pendingSelfGrade = [];
+    const apiGrades = { ...tempGrades };
+    let hasPendingGrading = false;
 
-      for (let i = 0; i < writtenToEvaluate.length; i++) {
-        const item = writtenToEvaluate[i];
-        if (item.answer === '') {
-          apiGrades[item.key] = { score: 0, feedback: 'Bo\'sh qoldirilgan javob.' };
-          continue;
-        }
+    // Loop through the written questions and evaluate them
+    for (let i = 0; i < writtenToEvaluate.length; i++) {
+      const item = writtenToEvaluate[i];
+      if (item.answer === '') {
+        apiGrades[item.key] = { score: 0, feedback: 'Bo\'sh qoldirilgan javob.', pending: false };
+        continue;
+      }
 
+      if (lmStudioConnected) {
         try {
           const result = await evaluateWithLMStudio(item.question, item.reference, item.answer, resolvedModelName);
-          apiGrades[item.key] = result;
+          apiGrades[item.key] = { ...result, pending: false };
         } catch (e) {
           console.error("Direct LLM grading failed for question:", item.key, e);
-          pendingSelfGrade.push(item);
+          apiGrades[item.key] = { score: null, feedback: 'Tekshirilmagan (Ulanish xatosi)', pending: true };
+          hasPendingGrading = true;
         }
-      }
-
-      setGrades(apiGrades);
-      finalizeScores(apiGrades);
-
-      if (pendingSelfGrade.length > 0) {
-        setSelfGradeQueue(pendingSelfGrade);
-        setStage('self-grade');
       } else {
-        setStage('results');
-      }
-    } else {
-      if (writtenToEvaluate.length > 0) {
-        setSelfGradeQueue(writtenToEvaluate);
-        setStage('self-grade');
-      } else {
-        finalizeScores(tempGrades);
-        setStage('results');
+        apiGrades[item.key] = { score: null, feedback: 'Tekshirilmagan (Server offline)', pending: true };
+        hasPendingGrading = true;
       }
     }
+
+    setGrades(apiGrades);
+    finalizeScores(apiGrades, hasPendingGrading ? 'pending' : 'completed');
+    setStage('results');
   };
 
-  const finalizeScores = (finalGradesMap) => {
+  const finalizeScores = async (finalGradesMap, forcedStatus) => {
     let totalQuestions = 0;
     let totalScore = 0;
+    let hasPending = forcedStatus === 'pending';
 
     sections.forEach((s) => {
       s.questions.forEach((q) => {
         totalQuestions++;
         const gradeObj = finalGradesMap[`${s.id}_${q.id}`];
-        if (gradeObj && typeof gradeObj.score === 'number') {
-          totalScore += gradeObj.score;
+        if (gradeObj) {
+          if (gradeObj.score !== null && !gradeObj.pending) {
+            totalScore += gradeObj.score;
+          } else {
+            hasPending = true;
+          }
+        } else {
+          hasPending = true;
         }
       });
     });
 
     const percent = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
     
-    // Save high score
+    // Save high score locally
     const savedScore = localStorage.getItem(`grammar_test_score_${activeTest.id}`);
     const prevBest = savedScore ? parseInt(savedScore, 10) : -1;
     if (percent > prevBest) {
       localStorage.setItem(`grammar_test_score_${activeTest.id}`, String(percent));
     }
 
-    // Save to attempts history
-    const attempt = {
-      id: `attempt_${Date.now()}`,
+    const attemptData = {
       testId: activeTest.id,
       testTitle: activeTest.title,
       score: percent,
@@ -399,14 +448,32 @@ export default function GrammarTest() {
       timeSpent: 30 * 60 - timeLeft,
       takenAt: new Date().toISOString(),
       answers: { ...answers },
-      grades: { ...finalGradesMap }
+      grades: { ...finalGradesMap },
+      status: hasPending ? 'pending' : 'completed'
     };
 
-    const savedAttempts = localStorage.getItem('grammar_test_attempts');
-    const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
-    attemptsList.unshift(attempt);
-    localStorage.setItem('grammar_test_attempts', JSON.stringify(attemptsList));
-    setAttempts(attemptsList);
+    if (user) {
+      try {
+        const attemptsRef = ref(db, `users/${user.uid}/grammar/complex_attempts`);
+        const newAttemptRef = push(attemptsRef);
+        setCurrentAttemptId(newAttemptRef.key);
+        await set(newAttemptRef, attemptData);
+      } catch (err) {
+        console.error("Failed to save attempt to Firebase:", err);
+      }
+    } else {
+      const attemptId = `attempt_${Date.now()}`;
+      setCurrentAttemptId(attemptId);
+      const attempt = {
+        id: attemptId,
+        ...attemptData
+      };
+      const savedAttempts = localStorage.getItem('grammar_test_attempts');
+      const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
+      attemptsList.unshift(attempt);
+      localStorage.setItem('grammar_test_attempts', JSON.stringify(attemptsList));
+      setAttempts(attemptsList);
+    }
   };
 
   const evaluateWithLMStudio = async (questionText, referenceText, studentAnswerText, modelName) => {
@@ -454,46 +521,30 @@ Evaluate the answer and return the JSON.`;
     };
   };
 
-  const handleSelfGradeSubmit = (score, comment) => {
-    const currentItem = selfGradeQueue[currentSelfGradeIdx];
-    const newGrades = {
-      ...grades,
-      [currentItem.key]: {
-        score: score,
-        feedback: `O'zingiz baholadingiz: ${comment}`
-      }
-    };
-    setGrades(newGrades);
-
-    if (currentSelfGradeIdx + 1 < selfGradeQueue.length) {
-      setCurrentSelfGradeIdx(prev => prev + 1);
-      playSound('correct');
-    } else {
-      finalizeScores(newGrades);
-      playSound('victory');
-      setStage('results');
-    }
-  };
-
   const getScoreSummary = () => {
     let totalQuestions = 0;
     let totalScore = 0;
     let correctCount = 0;
     let partialCount = 0;
     let wrongCount = 0;
+    let pendingCount = 0;
 
     sections.forEach((s) => {
       s.questions.forEach((q) => {
         totalQuestions++;
         const gradeObj = grades[`${s.id}_${q.id}`];
-        if (gradeObj && typeof gradeObj.score === 'number') {
-          totalScore += gradeObj.score;
-          if (gradeObj.score >= 0.9) {
-            correctCount++;
-          } else if (gradeObj.score > 0.1) {
-            partialCount++;
-          } else {
-            wrongCount++;
+        if (gradeObj) {
+          if (gradeObj.score === null || gradeObj.pending) {
+            pendingCount++;
+          } else if (typeof gradeObj.score === 'number') {
+            totalScore += gradeObj.score;
+            if (gradeObj.score >= 0.9) {
+              correctCount++;
+            } else if (gradeObj.score > 0.1) {
+              partialCount++;
+            } else {
+              wrongCount++;
+            }
           }
         } else {
           wrongCount++;
@@ -508,7 +559,8 @@ Evaluate the answer and return the JSON.`;
       percent,
       correctCount,
       partialCount,
-      wrongCount
+      wrongCount,
+      pendingCount
     };
   };
 
@@ -541,34 +593,169 @@ Evaluate the answer and return the JSON.`;
 
   // Helper to get variant letter A, B, C...
   const getVariantLetter = (testId) => {
+    const ieltsIdx = IELTS_EXAMS_LIST.findIndex(e => e.id === testId);
+    if (ieltsIdx !== -1) return `IELTS ${String.fromCharCode(65 + ieltsIdx)}`;
+
     const idx = EXAMS_LIST.findIndex(e => e.id === testId);
     return idx !== -1 ? String.fromCharCode(65 + idx) : '?';
   };
 
   // View a past attempt details
   const handleViewAttempt = (attempt) => {
-    const foundExam = EXAMS_LIST.find(e => e.id === attempt.testId);
+    const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
+    const foundExam = ALL_EXAMS.find(e => e.id === attempt.testId);
     if (foundExam) {
       setActiveTest(foundExam);
       setSections(foundExam.sections);
       setAnswers(attempt.answers);
       setGrades(attempt.grades);
       setTimeSpent(attempt.timeSpent);
+      setCurrentAttemptId(attempt.id);
       setViewingPastAttempt(attempt.id);
       setStage('results');
       playSound('correct');
     }
   };
 
+  // Retry grading for pending evaluations in an attempt
+  const handleRetryGrading = async (attempt, e) => {
+    if (e) e.stopPropagation();
+    setIsRetryingAttemptId(attempt.id);
+    playSound('correct');
+
+    try {
+      // 1. Check local LM Studio connection first
+      const connResponse = await fetch(`${apiEndpoint}/models`, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!connResponse.ok) throw new Error("LM Studio offline");
+      const connData = await connResponse.json();
+      const resolvedModelName = connData.data?.[0]?.id || apiModel;
+
+      // 2. Identify pending questions in this attempt
+      const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
+      const foundExam = ALL_EXAMS.find(exam => exam.id === attempt.testId);
+      if (!foundExam) throw new Error("Exam variant not found");
+
+      const updatedGrades = { ...attempt.grades };
+      let updatedAnswers = { ...attempt.answers };
+      let newlyGradedCount = 0;
+
+      // Loop through all sections and questions
+      for (const section of foundExam.sections) {
+        for (const q of section.questions) {
+          const key = `${section.id}_${q.id}`;
+          const gradeObj = updatedGrades[key];
+
+          // If the grade is pending/null or marked pending
+          if (!gradeObj || gradeObj.score === null || gradeObj.pending) {
+            const userVal = (updatedAnswers[key] || '').trim();
+            if (userVal === '') {
+              updatedGrades[key] = { score: 0, feedback: 'Bo\'sh qoldirilgan javob.', pending: false };
+              newlyGradedCount++;
+              continue;
+            }
+
+            const questionText = section.id === 'translate' ? `Translate Uzbek: "${q.uzbek}" into English` : (q.prompt || q.question);
+            const referenceText = q.reference || q.referencePattern;
+
+            try {
+              const result = await evaluateWithLMStudio(questionText, referenceText, userVal, resolvedModelName);
+              updatedGrades[key] = { ...result, pending: false };
+              newlyGradedCount++;
+            } catch (err) {
+              console.error(`Failed to retry grade for ${key}:`, err);
+            }
+          }
+        }
+      }
+
+      if (newlyGradedCount > 0) {
+        // Recalculate percent and totals
+        let totalQuestions = 0;
+        let totalScore = 0;
+        let hasPending = false;
+
+        foundExam.sections.forEach(s => {
+          s.questions.forEach(q => {
+            totalQuestions++;
+            const g = updatedGrades[`${s.id}_${q.id}`];
+            if (g && g.score !== null && !g.pending) {
+              totalScore += g.score;
+            } else {
+              hasPending = true;
+            }
+          });
+        });
+
+        const percent = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
+
+        const updatedAttemptData = {
+          testId: attempt.testId,
+          testTitle: attempt.testTitle,
+          score: percent,
+          totalScore: totalScore.toFixed(1),
+          totalQuestions: totalQuestions,
+          timeSpent: attempt.timeSpent,
+          takenAt: attempt.takenAt,
+          answers: attempt.answers,
+          grades: updatedGrades,
+          status: hasPending ? 'pending' : 'completed'
+        };
+
+        if (user) {
+          const attemptRef = ref(db, `users/${user.uid}/grammar/complex_attempts/${attempt.id}`);
+          await set(attemptRef, updatedAttemptData);
+        } else {
+          // LocalStorage update
+          const savedAttempts = localStorage.getItem('grammar_test_attempts');
+          const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
+          const index = attemptsList.findIndex(a => a.id === attempt.id);
+          if (index !== -1) {
+            attemptsList[index] = { id: attempt.id, ...updatedAttemptData };
+            localStorage.setItem('grammar_test_attempts', JSON.stringify(attemptsList));
+            setAttempts(attemptsList);
+          }
+        }
+
+        if (viewingPastAttempt === attempt.id) {
+          setGrades(updatedGrades);
+        }
+
+        alert(`Tekshirish yakunlandi! Jami ${newlyGradedCount} ta savol baholandi.`);
+        playSound('victory');
+      } else {
+        alert("Barcha savollar allaqachon baholangan yoki ulanish yana muvaffaqiyatsiz bo'ldi.");
+      }
+
+    } catch (e) {
+      console.error(e);
+      alert("LM Studio serveriga ulanib bo'lmadi! Server yoqilganligini tekshiring.");
+      playSound('wrong');
+    } finally {
+      setIsRetryingAttemptId(null);
+    }
+  };
+
   // Delete an attempt from history
-  const handleDeleteAttempt = (attemptId, e) => {
+  const handleDeleteAttempt = async (attemptId, e) => {
     e.stopPropagation();
     if (window.confirm("Ushbu urinish tarixini o'chirishni xohlaysizmi?")) {
-      const savedAttempts = localStorage.getItem('grammar_test_attempts');
-      const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
-      const filtered = attemptsList.filter(a => a.id !== attemptId);
-      localStorage.setItem('grammar_test_attempts', JSON.stringify(filtered));
-      setAttempts(filtered);
+      if (user) {
+        try {
+          const attemptRef = ref(db, `users/${user.uid}/grammar/complex_attempts/${attemptId}`);
+          await remove(attemptRef);
+        } catch (err) {
+          console.error("Failed to delete attempt from Firebase:", err);
+        }
+      } else {
+        const savedAttempts = localStorage.getItem('grammar_test_attempts');
+        const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
+        const filtered = attemptsList.filter(a => a.id !== attemptId);
+        localStorage.setItem('grammar_test_attempts', JSON.stringify(filtered));
+        setAttempts(filtered);
+      }
       playSound('wrong');
     }
   };
@@ -581,6 +768,9 @@ Evaluate the answer and return the JSON.`;
       navigate('/grammar-test');
     }
   };
+
+  const currentAttempt = attempts.find(a => a.id === currentAttemptId);
+  const isPending = currentAttempt && currentAttempt.status === 'pending';
 
   return (
     <div className="grammar-test-layout">
@@ -606,6 +796,22 @@ Evaluate the answer and return the JSON.`;
             </div>
           </div>
 
+          {/* Segmented Category Tabbar */}
+          <div className="gt-category-tabs">
+            <button 
+              className={`gt-cat-tab ${examCategory === 'level' ? 'active' : ''}`}
+              onClick={() => { setExamCategory('level'); playSound('correct'); }}
+            >
+              1-Level Exam
+            </button>
+            <button 
+              className={`gt-cat-tab ${examCategory === 'ielts' ? 'active' : ''}`}
+              onClick={() => { setExamCategory('ielts'); playSound('correct'); }}
+            >
+              2-IELTS Exam
+            </button>
+          </div>
+
           <div className="gt-dashboard-main-row">
             
             {/* Left side: Premium Folder Cards List & Exam History */}
@@ -613,39 +819,102 @@ Evaluate the answer and return the JSON.`;
               <h3 className="section-title">Papka to'plamlari</h3>
               
               <div className="gt-folders-grid-list">
-                <motion.div 
-                  className="gt-premium-folder-item"
-                  whileHover={{ scale: 1.01, y: -4 }}
-                  whileTap={{ scale: 0.99 }}
-                  onClick={() => {
-                    setStage('folder_detail');
-                    playSound('correct');
-                  }}
-                >
-                  <div className="folder-tab" />
-                  <div className="folder-body-card">
-                    <div className="folder-icon-wrapper">
-                      <Folder className="folder-icon-svg" />
-                    </div>
-                    <div className="folder-card-meta">
-                      <h3>Imtihon 1.2</h3>
-                      <p className="folder-meta-desc-desktop">Present Continuous, Articles, Numerals, Adverbs, Comparison</p>
-                      
-                      <div className="folder-footer-meta">
-                        <span className="badge-meta">📑 5 ta variant</span>
-                        <span className="badge-level">Intermediate</span>
+                {examCategory === 'level' ? (
+                  <motion.div 
+                    className="gt-premium-folder-item"
+                    whileHover={{ scale: 1.01, y: -4 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={() => {
+                      setStage('folder_detail');
+                      playSound('correct');
+                    }}
+                  >
+                    <div className="folder-tab" />
+                    <div className="folder-body-card">
+                      <div className="folder-icon-wrapper">
+                        <Folder className="folder-icon-svg" />
+                      </div>
+                      <div className="folder-card-meta">
+                        <h3>Imtihon 1.2</h3>
+                        <p className="folder-meta-desc-desktop">Present Continuous, Articles, Numerals, Adverbs, Comparison</p>
+                        
+                        <div className="folder-footer-meta">
+                          <span className="badge-meta">📑 5 ta variant</span>
+                          <span className="badge-level">Intermediate</span>
+                        </div>
+                      </div>
+                      <div className="folder-chevron">
+                        <ChevronRight size={22} />
                       </div>
                     </div>
-                    <div className="folder-chevron">
-                      <ChevronRight size={22} />
-                    </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                ) : (
+                  <>
+                    <motion.div 
+                      className="gt-premium-folder-item ielts-folder"
+                      whileHover={{ scale: 1.01, y: -4 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => {
+                        setStage('folder_detail');
+                        playSound('correct');
+                      }}
+                    >
+                      <div className="folder-tab ielts" />
+                      <div className="folder-body-card">
+                        <div className="folder-icon-wrapper ielts">
+                          <Folder className="folder-icon-svg ielts" />
+                        </div>
+                        <div className="folder-card-meta">
+                          <h3>IELTS Academic Grammar</h3>
+                          <p className="folder-meta-desc-desktop">Academic style, passive reporting, describing trends, concession linkers</p>
+                          
+                          <div className="folder-footer-meta">
+                            <span className="badge-meta ielts">📑 2 ta variant</span>
+                            <span className="badge-level ielts">C1 Advanced</span>
+                          </div>
+                        </div>
+                        <div className="folder-chevron">
+                          <ChevronRight size={22} />
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* IELTS Full Mock Test Simulation Card */}
+                    <motion.div 
+                      className="gt-premium-folder-item ielts-folder full-mock-card"
+                      whileHover={{ scale: 1.01, y: -4 }}
+                      whileTap={{ scale: 0.99 }}
+                      onClick={() => {
+                        navigate('/ielts-exam');
+                        playSound('correct');
+                      }}
+                    >
+                      <div className="folder-tab ielts" style={{ background: 'linear-gradient(135deg, #ef4444, #b91c1c)' }} />
+                      <div className="folder-body-card" style={{ borderLeftColor: '#ef4444' }}>
+                        <div className="folder-icon-wrapper ielts" style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}>
+                          <Award className="folder-icon-svg" />
+                        </div>
+                        <div className="folder-card-meta">
+                          <h3>IELTS Full Mock Test</h3>
+                          <p className="folder-meta-desc-desktop">Listening, Reading, Writing, Speaking simulation. Grade and get your overall band score.</p>
+                          
+                          <div className="folder-footer-meta">
+                            <span className="badge-meta ielts" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}>📋 4 bo'lim</span>
+                            <span className="badge-level ielts" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}>Official Standard</span>
+                          </div>
+                        </div>
+                        <div className="folder-chevron">
+                          <ChevronRight size={22} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
               </div>
 
               {/* Urinishlar Tarixi (Attempts History) */}
               <div className="gt-history-section" style={{ marginTop: '40px' }}>
-                <h3 className="section-title">Imtihonlar Tarixi</h3>
+                <h3 className="section-title">Imtihonlar Tarixi {user && <span style={{ fontSize: '0.8rem', textTransform: 'none', color: '#10B981', marginLeft: '6px' }}>☁️ Cloud Synced</span>}</h3>
                 {attempts.length === 0 ? (
                   <div className="gt-empty-history">
                     <p>Hozircha topshirilgan imtihonlar tarixi mavjud emas.</p>
@@ -659,7 +928,7 @@ Evaluate the answer and return the JSON.`;
                         onClick={() => handleViewAttempt(att)}
                       >
                         <div className="history-meta">
-                          <span className="history-badge-letter">
+                          <span className={`history-badge-letter ${att.testId.startsWith('ielts_') ? 'ielts' : ''}`}>
                             {getVariantLetter(att.testId)}
                           </span>
                           <div className="history-info">
@@ -670,14 +939,23 @@ Evaluate the answer and return the JSON.`;
                         
                         <div className="history-stats">
                           <div className="score-badge-wrap">
-                            <span className={`score-percent-badge ${att.score >= 90 ? 'excellent' : att.score >= 70 ? 'good' : att.score >= 50 ? 'satisfactory' : 'retry'}`}>
-                              {att.score}%
+                            <span className={`score-percent-badge ${att.status === 'pending' ? 'retry' : att.score >= 90 ? 'excellent' : att.score >= 70 ? 'good' : att.score >= 50 ? 'satisfactory' : 'retry'}`}>
+                              {att.score}% {att.status === 'pending' && '⏳'}
                             </span>
                             <span className="score-details">{att.totalScore} / {att.totalQuestions} ball</span>
                           </div>
                           <span className="time-badge">⏱️ {Math.round(att.timeSpent / 60)} daq</span>
                           
                           <div className="history-actions">
+                            {att.status === 'pending' && (
+                              <button 
+                                className={`btn btn-primary compact btn-retry-history ${isRetryingAttemptId === att.id ? 'loading' : ''}`}
+                                onClick={(e) => handleRetryGrading(att, e)}
+                                disabled={isRetryingAttemptId === att.id}
+                              >
+                                {isRetryingAttemptId === att.id ? 'Tekshirilmoqda...' : '🔄 Tekshirish'}
+                              </button>
+                            )}
                             <button 
                               className="btn btn-secondary compact btn-view-history"
                               onClick={() => handleViewAttempt(att)}
@@ -707,7 +985,7 @@ Evaluate the answer and return the JSON.`;
               <div className="gt-stats-glass-card">
                 <div className="stat-circle-row">
                   <div className="stat-circle-box">
-                    <span className="number">{stats.totalTaken} / 5</span>
+                    <span className="number">{stats.totalTaken} / {EXAMS_LIST.length + IELTS_EXAMS_LIST.length}</span>
                     <span className="label">Topshirildi</span>
                   </div>
                   <div className="stat-circle-box primary">
@@ -752,15 +1030,15 @@ Evaluate the answer and return the JSON.`;
               <ArrowLeft size={18} /> Orqaga
             </button>
             <div className="header-nav-title-group">
-              <div className="breadcrumbs">Bosh sahifa &gt; Imtihonlar &gt; Imtihon 1.2</div>
-              <h2>📁 Imtihon 1.2 Variantlari</h2>
+              <div className="breadcrumbs">Bosh sahifa &gt; Imtihonlar &gt; {examCategory === 'level' ? 'Imtihon 1.2' : 'IELTS Academic'}</div>
+              <h2>📁 {examCategory === 'level' ? 'Imtihon 1.2 Variantlari' : 'IELTS Academic Variantlari'}</h2>
               <p>Mavjud test variantlaridan birini tanlang va bilimingizni sinab ko'ring.</p>
             </div>
           </div>
 
           {/* Variants Grid */}
           <div className="gt-variants-inside-grid">
-            {EXAMS_LIST.map((exam, index) => {
+            {(examCategory === 'level' ? EXAMS_LIST : IELTS_EXAMS_LIST).map((exam, index) => {
               const bestScore = highScores[exam.id];
               const isPassed = bestScore !== undefined;
               const letter = String.fromCharCode(65 + index);
@@ -768,16 +1046,16 @@ Evaluate the answer and return the JSON.`;
               return (
                 <motion.div 
                   key={exam.id} 
-                  className={`gt-variant-card-v2 ${isPassed ? 'passed' : ''}`}
+                  className={`gt-variant-card-v2 ${isPassed ? 'passed' : ''} ${examCategory === 'ielts' ? 'ielts' : ''}`}
                   whileHover={{ y: -2, boxShadow: '0 8px 25px rgba(99, 102, 241, 0.12)' }}
                 >
                   {/* Left Side Icon for Mobile / Visual touch */}
-                  <div className="v2-letter-avatar">
+                  <div className={`v2-letter-avatar ${examCategory === 'ielts' ? 'ielts' : ''}`}>
                     {letter}
                   </div>
 
                   <div className="v2-card-header">
-                    <span className="v2-badge">Variant {letter}</span>
+                    <span className={`v2-badge ${examCategory === 'ielts' ? 'ielts' : ''}`}>Variant {letter}</span>
                     <div className="v2-score-badge">
                       {isPassed ? (
                         <span className="score-achieved-pill">
@@ -792,7 +1070,7 @@ Evaluate the answer and return the JSON.`;
                   <div className="v2-card-body">
                     <h4>{exam.title}</h4>
                     <p className="v2-desc">
-                      30 daqiqa vaqt limiti. Gapdagi xatolarni topish, to'g'ri so'z tartibi, tarjimalar va ochiq yozma insho savollari.
+                      {exam.description}
                     </p>
 
                     <div className="v2-mobile-status">
@@ -806,7 +1084,7 @@ Evaluate the answer and return the JSON.`;
                     <div className="v2-features-list">
                       <span>⏱️ 30 daqiqa</span>
                       <span>🧠 AI baholash</span>
-                      <span>📝 7 ta bo'lim</span>
+                      <span>📝 {exam.sections?.length} ta bo'lim</span>
                     </div>
                   </div>
 
@@ -837,13 +1115,27 @@ Evaluate the answer and return the JSON.`;
             Bu test sizning quyidagi mavzulardagi bilimingizni har tomonlama tekshiradi:
           </p>
           <div className="gt-topics-grid">
-            <span>🔹 Present Continuous</span>
-            <span>🔹 Articles (a, an, the)</span>
-            <span>🔹 Numerals</span>
-            <span>🔹 Adverbs</span>
-            <span>🔹 As ... as comparison</span>
-            <span>🔹 Degrees of adjectives</span>
-            <span>🔹 Irregular adjectives</span>
+            {examCategory === 'level' ? (
+              <>
+                <span>🔹 Present Continuous</span>
+                <span>🔹 Articles (a, an, the)</span>
+                <span>🔹 Numerals</span>
+                <span>🔹 Adverbs</span>
+                <span>🔹 As ... as comparison</span>
+                <span>🔹 Degrees of adjectives</span>
+                <span>🔹 Irregular adjectives</span>
+              </>
+            ) : (
+              <>
+                <span>🔹 Academic Passive Voice</span>
+                <span>🔹 Complex Concession Linkers</span>
+                <span>🔹 Graph Describing Vocabulary</span>
+                <span>🔹 Academic Report Transformations</span>
+                <span>🔹 Advanced Relative Clauses</span>
+                <span>🔹 Subject-Verb Agreement (Inversion)</span>
+                <span>🔹 Participle Clauses</span>
+              </>
+            )}
           </div>
 
           <div className="gt-alert-info">
@@ -877,7 +1169,7 @@ Evaluate the answer and return the JSON.`;
                 {apiStatus.connected ? (
                   <span>✅ Ulandi! Model: <strong>{apiModel}</strong></span>
                 ) : (
-                  <span>❌ {apiStatus.error} (Yoziladigan javoblar o'z-o'zini baholash orqali baholanadi)</span>
+                  <span>❌ {apiStatus.error} (Yoziladigan javoblar buffering orqali keyinroq tekshirish uchun saqlanadi)</span>
                 )}
               </div>
             )}
@@ -1205,59 +1497,6 @@ Evaluate the answer and return the JSON.`;
         </motion.div>
       )}
 
-      {/* ─── STAGE 4: SELF GRADING PANEL (FALLBACK) ─────────────────────────────── */}
-      {stage === 'self-grade' && (
-        <motion.div
-          className="gt-card gt-self-grade-card"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-        >
-          <div className="gt-badge warning">O'z-o'zini baholash</div>
-          <h2>Yozma javoblarni baholash ({currentSelfGradeIdx + 1} / {selfGradeQueue.length})</h2>
-          <p className="gt-self-desc">
-            Local LM Studio faollashtirilmagan yoki ulanishda xato bo'ldi. Quyidagi javobingizni namunaviy javobga solishtirib o'zingiz baholang.
-          </p>
-
-          <div className="self-grade-preview">
-            <div className="self-label">Savol / Topshiriq:</div>
-            <div className="self-content-box question-view">
-              {selfGradeQueue[currentSelfGradeIdx]?.question}
-            </div>
-
-            <div className="self-label">Sizning javobingiz:</div>
-            <div className="self-content-box user-answer-view">
-              {selfGradeQueue[currentSelfGradeIdx]?.answer || <em>[Javob yozilmagan]</em>}
-            </div>
-
-            <div className="self-label">Namunaviy to'g'ri javob:</div>
-            <div className="self-content-box reference-view">
-              {selfGradeQueue[currentSelfGradeIdx]?.reference}
-            </div>
-          </div>
-
-          <div className="self-grade-actions">
-            <button 
-              className="btn btn-danger compact" 
-              onClick={() => handleSelfGradeSubmit(0.0, "Noto'g'ri (0%)")}
-            >
-              ❌ Noto'g'ri (0%)
-            </button>
-            <button 
-              className="btn btn-secondary compact" 
-              onClick={() => handleSelfGradeSubmit(0.5, "Qisman to'g'ri (50%)")}
-            >
-              ⚠️ Yarim to'g'ri (50%)
-            </button>
-            <button 
-              className="btn btn-success compact" 
-              onClick={() => handleSelfGradeSubmit(1.0, "To'g'ri (100%)")}
-            >
-              ✅ To'g'ri (100%)
-            </button>
-          </div>
-        </motion.div>
-      )}
-
       {/* ─── STAGE 5: RESULTS SCOREBOARD SCREEN (REDESIGNED V2) ────────────────── */}
       {stage === 'results' && (() => {
         const statsObj = getScoreSummary();
@@ -1286,6 +1525,23 @@ Evaluate the answer and return the JSON.`;
               </div>
             </div>
 
+            {/* Warning if attempt has pending evaluations */}
+            {isPending && (
+              <div className="gt-pending-alert-box">
+                <div className="alert-text">
+                  <span>⚠️ <strong>Tekshirilmagan yozma javoblar mavjud!</strong></span>
+                  <p>LM Studio serveri o'chirilgan yoki ulanishda xatolik bo'lgani sababli, ayrim yozma javoblar baholanmay qoldi.</p>
+                </div>
+                <button 
+                  className={`btn btn-primary compact btn-retry-eval ${isRetryingAttemptId === currentAttemptId ? 'loading' : ''}`}
+                  onClick={(e) => handleRetryGrading(currentAttempt, e)}
+                  disabled={isRetryingAttemptId === currentAttemptId}
+                >
+                  {isRetryingAttemptId === currentAttemptId ? 'Tekshirilmoqda...' : '🔄 Hozir qayta tekshirish'}
+                </button>
+              </div>
+            )}
+
             {/* Metrics cards grid */}
             <div className="results-metrics-grid">
               {/* Correct answers summary card */}
@@ -1301,6 +1557,9 @@ Evaluate the answer and return the JSON.`;
                     <span className="br-item orange">🟡 {statsObj.partialCount} qisman</span>
                   )}
                   <span className="br-item red">🔴 {statsObj.wrongCount} xato</span>
+                  {statsObj.pendingCount > 0 && (
+                    <span className="br-item orange">⏳ {statsObj.pendingCount} kutilmoqda</span>
+                  )}
                 </div>
                 <p className="desc-meta">Jami to'plangan ball: <strong>{statsObj.score} ball</strong></p>
               </div>
@@ -1335,9 +1594,17 @@ Evaluate the answer and return the JSON.`;
                 {sections.map((sec, idx) => {
                   let secTotal = 0;
                   let secCorrect = 0;
+                  let secPending = 0;
                   sec.questions.forEach(q => {
                     secTotal++;
-                    secCorrect += (grades[`${sec.id}_${q.id}`]?.score || 0);
+                    const g = grades[`${sec.id}_${q.id}`];
+                    if (g) {
+                      if (g.score === null || g.pending) {
+                        secPending++;
+                      } else {
+                        secCorrect += g.score;
+                      }
+                    }
                   });
                   const isCurrent = activeResultSecIdx === idx;
                   
@@ -1349,7 +1616,9 @@ Evaluate the answer and return the JSON.`;
                     >
                       <span className="num-badge">{idx + 1}</span>
                       <span className="title">{sec.title.split('. ')[1] || sec.title}</span>
-                      <span className="score">({secCorrect.toFixed(1)}/{secTotal})</span>
+                      <span className="score">
+                        ({secCorrect.toFixed(1)}{secPending > 0 ? ` + ${secPending}⏳` : ''}/{secTotal})
+                      </span>
                     </button>
                   );
                 })}
@@ -1371,13 +1640,18 @@ Evaluate the answer and return the JSON.`;
                     {sections[activeResultSecIdx]?.questions.map((q) => {
                       const key = `${sections[activeResultSecIdx].id}_${q.id}`;
                       const userVal = answers[key] || '';
-                      const gradeObj = grades[key] || { score: 0, feedback: '' };
-                      const isCorrect = gradeObj.score >= 0.9;
-                      const isPartial = gradeObj.score > 0.1 && gradeObj.score < 0.9;
+                      const gradeObj = grades[key] || { score: 0, feedback: '', pending: false };
+                      
+                      const isPendingItem = gradeObj.score === null || gradeObj.pending;
+                      const isCorrect = !isPendingItem && gradeObj.score >= 0.9;
+                      const isPartial = !isPendingItem && gradeObj.score > 0.1 && gradeObj.score < 0.9;
 
                       let statusClass = 'wrong';
                       let StatusIcon = XCircle;
-                      if (isCorrect) {
+                      if (isPendingItem) {
+                        statusClass = 'pending-item';
+                        StatusIcon = Clock;
+                      } else if (isCorrect) {
                         statusClass = 'correct';
                         StatusIcon = CheckCircle2;
                       } else if (isPartial) {
@@ -1389,7 +1663,9 @@ Evaluate the answer and return the JSON.`;
                         <div key={q.id} className={`gt-result-detail-card-item ${statusClass}`}>
                           <div className="card-item-header">
                             <span className="question-number">Savol #{q.id} ({q.topic})</span>
-                            <span className="score-label-pill">{gradeObj.score.toFixed(1)} ball</span>
+                            <span className="score-label-pill">
+                              {isPendingItem ? '⏳ Tekshirilmagan' : `${gradeObj.score.toFixed(1)} ball`}
+                            </span>
                           </div>
 
                           {/* Specific rendering per question type */}
@@ -1399,7 +1675,7 @@ Evaluate the answer and return the JSON.`;
                               <div className="detail-texts-block">
                                 <div className="txt-line wrong"><strong>Original xato gap:</strong> ❌ {q.original}</div>
                                 <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && <div className="txt-line ref"><strong>Namunaviy shakli:</strong> "{q.reference}"</div>}
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Namunaviy shakli:</strong> "{q.reference}"</div>}
                               </div>
                             )}
 
@@ -1408,7 +1684,7 @@ Evaluate the answer and return the JSON.`;
                               <div className="detail-texts-block">
                                 <div className="txt-line"><strong>Savol:</strong> {q.text}</div>
                                 <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && <div className="txt-line ref"><strong>Kutilgan to'g'ri javob:</strong> "{q.correct}"</div>}
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan to'g'ri javob:</strong> "{q.correct}"</div>}
                               </div>
                             )}
 
@@ -1417,7 +1693,7 @@ Evaluate the answer and return the JSON.`;
                               <div className="detail-texts-block">
                                 <div className="txt-line uz"><strong>O'zbekcha gap:</strong> 🇺🇿 {q.uzbek}</div>
                                 <div className="txt-line user"><strong>Sizning tarjimangiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                <div className="txt-line ref"><strong>Namunaviy to'g'ri variant:</strong> "{q.reference}"</div>
+                                {!isPendingItem && <div className="txt-line ref"><strong>Namunaviy to'g'ri variant:</strong> "{q.reference}"</div>}
                               </div>
                             )}
 
@@ -1426,7 +1702,7 @@ Evaluate the answer and return the JSON.`;
                               <div className="detail-texts-block">
                                 <div className="txt-line scrambled"><strong>Aralash so'zlar:</strong> {q.scrambled.join(' / ')}</div>
                                 <div className="txt-line user"><strong>Tuzgan gapingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && <div className="txt-line ref"><strong>Kutilgan:</strong> "{q.answer}"</div>}
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan:</strong> "{q.answer}"</div>}
                               </div>
                             )}
 
@@ -1443,7 +1719,7 @@ Evaluate the answer and return the JSON.`;
                               <div className="detail-texts-block">
                                 <div className="txt-line"><strong>Gap:</strong> {q.text}</div>
                                 <div className="txt-line user"><strong>Sizning tanlovingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && <div className="txt-line ref"><strong>Kutilgan javob:</strong> "{q.correct}"</div>}
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan javob:</strong> "{q.correct}"</div>}
                               </div>
                             )}
 
@@ -1452,7 +1728,7 @@ Evaluate the answer and return the JSON.`;
                               <div className="detail-texts-block">
                                 <div className="txt-line question"><strong>Savol:</strong> ❓ {q.question}</div>
                                 <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && <div className="txt-line ref"><strong>Javob kaliti:</strong> "{q.reference}"</div>}
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Javob kaliti:</strong> "{q.reference}"</div>}
                               </div>
                             )}
 

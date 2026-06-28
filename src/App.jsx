@@ -19,6 +19,7 @@ import GrammarPage from './pages/GrammarPage';
 import GrammarTopic from './pages/GrammarTopic';
 import GrammarExercises from './pages/GrammarExercises';
 import GrammarTest from './pages/GrammarTest';
+import IeltsFullExam from './pages/IeltsFullExam';
 
 export default function App() {
   return (
@@ -51,6 +52,7 @@ export default function App() {
                 <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
                 <Route path="/grammar-test" element={<GrammarTest />} />
                 <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
+                <Route path="/ielts-exam" element={<IeltsFullExam />} />
               </Route>
             </Route>
 
