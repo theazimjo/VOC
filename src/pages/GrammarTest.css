@@ -77,16 +77,6 @@
   line-height: 1.5;
 }
 
-.hero-decor-orbs {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -614,57 +604,6 @@
   margin-bottom: 12px;
 }
 
-/* Cloud Relay UI details */
-.gt-cloud-relay-status-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 0.85rem;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.status-label-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-secondary);
-}
-
-.status-label-wrap svg.icon-spin {
-  animation: spin 3s linear infinite;
-  color: #10B981;
-}
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
-
-.relay-online-pill {
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  color: #10B981;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.relay-offline-pill {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-secondary);
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
 .gt-config-inputs {
   display: flex;
   gap: var(--space-sm);
@@ -688,71 +627,6 @@
 
 .gt-api-status.success { color: #10B981; }
 .gt-api-status.fail { color: #EF4444; }
-
-/* Guide style rules */
-.mobile-guide-toggle-row {
-  margin-top: 12px;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.06);
-  padding-top: 10px;
-}
-
-.btn-link-guide {
-  background: none;
-  border: none;
-  color: var(--accent-1);
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.btn-link-guide:hover {
-  text-decoration: underline;
-  color: white;
-}
-
-.mobile-connection-instructions {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border);
-  padding: var(--space-md);
-  border-radius: 12px;
-  margin-top: var(--space-sm);
-  font-size: 0.825rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
-  overflow: hidden;
-}
-
-.mobile-connection-instructions ol {
-  padding-left: 18px;
-  margin: 0;
-}
-
-.mobile-connection-instructions li {
-  margin-bottom: 8px;
-}
-
-.mobile-connection-instructions li:last-child {
-  margin-bottom: 0;
-}
-
-.mobile-connection-instructions ul {
-  padding-left: 14px;
-  margin-top: 4px;
-  list-style-type: circle;
-}
-
-.mobile-connection-instructions code {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: white;
-  font-family: monospace;
-  font-size: 0.8rem;
-}
 
 .gt-intro-actions {
   display: flex;

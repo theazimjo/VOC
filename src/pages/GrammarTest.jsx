@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound, triggerVibration } from '../utils/feedback';
 import { EXAMS_LIST } from '../data/examData';
-import { useAIRelay } from '../hooks/useAIRelay';
 import { 
   Folder, 
   Award, 
@@ -18,17 +17,13 @@ import {
   Clock,
   CheckCircle2,
   XCircle,
-  AlertCircle,
-  Cpu
+  AlertCircle
 } from 'lucide-react';
 import './GrammarTest.css';
 
 export default function GrammarTest() {
   const navigate = useNavigate();
   const { testId } = useParams();
-
-  // Global Remote Firestore AI Relay
-  const { relayStatus, sendRelayRequest } = useAIRelay();
 
   // ─── STAGES: 'list' | 'folder_detail' | 'intro' | 'testing' | 'evaluating' | 'self-grade' | 'results' ───
   const [stage, setStage] = useState('list');
@@ -48,20 +43,9 @@ export default function GrammarTest() {
   // Time spent tracking
   const [timeSpent, setTimeSpent] = useState(0); // in seconds
 
-  // Guide toggle
-  const [showMobileGuide, setShowMobileGuide] = useState(false);
-
   // ─── SETTINGS & CONNECTIONS ────────────────────────────────────────────────
   const [apiEndpoint, setApiEndpoint] = useState(() => {
-    const saved = localStorage.getItem('lm_studio_endpoint');
-    if (saved) return saved;
-    
-    // Auto-detect host IP if accessed via IP (on mobile)
-    const hostname = window.location.hostname;
-    if (hostname && hostname !== 'localhost' && hostname !== '127.0.0.1' && !hostname.endsWith('.local') && /^[0-9.]+$/.test(hostname)) {
-      return `http://${hostname}:1234/v1`;
-    }
-    return 'http://localhost:1234/v1';
+    return localStorage.getItem('lm_studio_endpoint') || 'http://localhost:1234/v1';
   });
   const [apiModel, setApiModel] = useState('local-model');
   const [isApiChecking, setIsApiChecking] = useState(false);
@@ -311,8 +295,8 @@ export default function GrammarTest() {
 
     setGrades(tempGrades);
 
-    // 1. Direct LM Studio Connection Check (on this device)
-    let directConnected = false;
+    // DYNAMIC AUTO-DETECTION: Check if LM Studio is running right now
+    let lmStudioConnected = false;
     let resolvedModelName = apiModel;
 
     try {
@@ -325,15 +309,14 @@ export default function GrammarTest() {
         if (data.data && data.data.length > 0) {
           resolvedModelName = data.data[0].id;
           setApiModel(resolvedModelName);
-          directConnected = true;
+          lmStudioConnected = true;
         }
       }
     } catch (e) {
-      console.warn("Direct local grading blocked or failed. Trying remote AI relay...");
+      console.warn("Direct local connection check failed. Falling back to self-grading.", e);
     }
 
-    if (directConnected && writtenToEvaluate.length > 0) {
-      // Evaluate directly using direct network requests
+    if (lmStudioConnected && writtenToEvaluate.length > 0) {
       const apiGrades = { ...tempGrades };
       const pendingSelfGrade = [];
 
@@ -362,41 +345,7 @@ export default function GrammarTest() {
       } else {
         setStage('results');
       }
-    } 
-    // 2. REMOTE FIRESTORE AI RELAY (If direct local fails but computer is active in Firestore)
-    else if (relayStatus.active && writtenToEvaluate.length > 0) {
-      const apiGrades = { ...tempGrades };
-      const pendingSelfGrade = [];
-
-      for (let i = 0; i < writtenToEvaluate.length; i++) {
-        const item = writtenToEvaluate[i];
-        if (item.answer === '') {
-          apiGrades[item.key] = { score: 0, feedback: 'Bo\'sh qoldirilgan javob.' };
-          continue;
-        }
-
-        try {
-          // Route the question to the computer over Firestore
-          const result = await sendRelayRequest(item.question, item.reference, item.answer);
-          apiGrades[item.key] = result;
-        } catch (e) {
-          console.error("Remote Relay grading failed for question:", item.key, e);
-          pendingSelfGrade.push(item);
-        }
-      }
-
-      setGrades(apiGrades);
-      finalizeScores(apiGrades);
-
-      if (pendingSelfGrade.length > 0) {
-        setSelfGradeQueue(pendingSelfGrade);
-        setStage('self-grade');
-      } else {
-        setStage('results');
-      }
-    } 
-    // 3. FALLBACK TO MANUAL SELF-GRADING (No active server or relay)
-    else {
+    } else {
       if (writtenToEvaluate.length > 0) {
         setSelfGradeQueue(writtenToEvaluate);
         setStage('self-grade');
@@ -767,26 +716,6 @@ Evaluate the answer and return the JSON.`;
             <p>
               Tarjimalar va ochiq yozma mashqlarni AI tekshirishi uchun local kompyuteringizda <strong>LM Studio</strong> serverini yoqing.
             </p>
-
-            {/* Remote Cloud Relay Status Indicator */}
-            <div className="gt-cloud-relay-status-row">
-              <div className="status-label-wrap">
-                <Cpu size={16} className={relayStatus.active ? "icon-spin" : ""} />
-                <strong>Masofaviy Bog'lanish (Cloud Relay):</strong>
-              </div>
-              <div className="status-val-wrap">
-                {relayStatus.active ? (
-                  <span className="relay-online-pill">
-                    🟢 FAOL (Model: {relayStatus.model})
-                  </span>
-                ) : (
-                  <span className="relay-offline-pill">
-                    ⚪ KUTILMOQDA (Komp. kuting yoki local kiring)
-                  </span>
-                )}
-              </div>
-            </div>
-
             <div className="gt-config-inputs">
               <input
                 type="text"
@@ -808,52 +737,10 @@ Evaluate the answer and return the JSON.`;
                 {apiStatus.connected ? (
                   <span>✅ Ulandi! Model: <strong>{apiModel}</strong></span>
                 ) : (
-                  <span>❌ {apiStatus.error}</span>
+                  <span>❌ {apiStatus.error} (Yoziladigan javoblar o'z-o'zini baholash orqali baholanadi)</span>
                 )}
               </div>
             )}
-
-            {/* Mobile Connection Guide Toggle */}
-            <div className="mobile-guide-toggle-row">
-              <button 
-                type="button" 
-                className="btn-link-guide" 
-                onClick={() => setShowMobileGuide(!showMobileGuide)}
-              >
-                📱 Browser cheklovlari va ulanish yechimlari {showMobileGuide ? '▲' : '▼'}
-              </button>
-            </div>
-
-            <AnimatePresence>
-              {showMobileGuide && (
-                <motion.div 
-                  className="mobile-connection-instructions"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                >
-                  <p style={{marginBottom: '8px'}}>
-                    Chrome browser xavfsizlik siyosati (Private Network Access / Mixed Content) sababli, production HTTPS bo'lgan saytdan (Vercel) local <code>http://localhost:1234</code> manzilga to'g'ridan-to'g'ri so'rov yuborishni bloklashi mumkin. Quyidagi yechimlardan birini ishlating:
-                  </p>
-                  <ol>
-                    <li>
-                      <strong>1-usul (Tavsiya etiladi): Saytni local ochish</strong>
-                      <ul>
-                        <li>Kompyuterda terminalda <code>npm run dev</code> ni yoqing va local <code>http://localhost:5173</code> manzilga kiring.</li>
-                        <li>Local origin bo'lgani uchun browser local LM Studio'ga ulanishni 100% bloklamaydi va Firebase orqali telefon bilan masofaviy aloqa darhol ishlaydi!</li>
-                      </ul>
-                    </li>
-                    <li>
-                      <strong>2-usul: ngrok (HTTPS) orqali ulanish</strong>
-                      <ul>
-                        <li>Kompyuterda terminalda <code>ngrok http 1234</code> deb yozib LM Studio serverini tashqi internetga chiqaring.</li>
-                        <li>Olingan xavfsiz <code>https://...</code> manzilni tepadagi LM Studio maydoniga yozing. U HTTPS bo'lgani uchun browser uni aslo bloklamaydi.</li>
-                      </ul>
-                    </li>
-                  </ol>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
 
           <div className="gt-intro-actions">
