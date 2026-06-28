@@ -4,16 +4,12 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import BottomNav from './BottomNav';
 import ParticleCanvas from '../Particles/ParticleCanvas';
-import { useAIRelay } from '../../hooks/useAIRelay';
 import './Layout.css';
 
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-
-  // Initialize global AI relay (enables computer to acts as remote grader in background)
-  useAIRelay();
 
   const handleToggleSidebar = useCallback(() => {
     setCollapsed((prev) => !prev);

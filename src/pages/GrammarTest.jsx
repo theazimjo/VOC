@@ -171,7 +171,7 @@ export default function GrammarTest() {
       setApiStatus({
         checked: true,
         connected: false,
-        error: 'LM Studio ulanmadi. Local API yoqilganligini tekshiring.'
+        error: 'LM Studio ulanmadi. CORS (Private Network Access) yoki HTTPS cheklovlarini ko\'rib chiqing.'
       });
       playSound('wrong');
     } finally {
@@ -329,7 +329,7 @@ export default function GrammarTest() {
         }
       }
     } catch (e) {
-      console.warn("Direct connection check failed. Trying remote AI relay...");
+      console.warn("Direct local grading blocked or failed. Trying remote AI relay...");
     }
 
     if (directConnected && writtenToEvaluate.length > 0) {
@@ -781,7 +781,7 @@ Evaluate the answer and return the JSON.`;
                   </span>
                 ) : (
                   <span className="relay-offline-pill">
-                    ⚪ KUTILMOQDA (Komp. kuting yoki ochiq qoldiring)
+                    ⚪ KUTILMOQDA (Komp. kuting yoki local kiring)
                   </span>
                 )}
               </div>
@@ -820,7 +820,7 @@ Evaluate the answer and return the JSON.`;
                 className="btn-link-guide" 
                 onClick={() => setShowMobileGuide(!showMobileGuide)}
               >
-                📱 Telefonda kompyuterga ulanish yo'riqnomasi {showMobileGuide ? '▲' : '▼'}
+                📱 Browser cheklovlari va ulanish yechimlari {showMobileGuide ? '▲' : '▼'}
               </button>
             </div>
 
@@ -832,21 +832,22 @@ Evaluate the answer and return the JSON.`;
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                 >
+                  <p style={{marginBottom: '8px'}}>
+                    Chrome browser xavfsizlik siyosati (Private Network Access / Mixed Content) sababli, production HTTPS bo'lgan saytdan (Vercel) local <code>http://localhost:1234</code> manzilga to'g'ridan-to'g'ri so'rov yuborishni bloklashi mumkin. Quyidagi yechimlardan birini ishlating:
+                  </p>
                   <ol>
                     <li>
-                      <strong>Bulutli Bog'lanish (Simsiz, bitta Wi-Fi shart emas!):</strong>
+                      <strong>1-usul (Tavsiya etiladi): Saytni local ochish</strong>
                       <ul>
-                        <li>Kompyuter va telefoningizga <strong>bitta akkaunt</strong> bilan kiring.</li>
-                        <li>Kompyuteringizda saytni ochib qo'ying va LM Studio serverini yoqing.</li>
-                        <li>Dastur orqa fonda bog'lanish yaratadi va telefoningizdagi javoblarni avtomatik qabul qilib baholaydi!</li>
+                        <li>Kompyuterda terminalda <code>npm run dev</code> ni yoqing va local <code>http://localhost:5173</code> manzilga kiring.</li>
+                        <li>Local origin bo'lgani uchun browser local LM Studio'ga ulanishni 100% bloklamaydi va Firebase orqali telefon bilan masofaviy aloqa darhol ishlaydi!</li>
                       </ul>
                     </li>
                     <li>
-                      <strong>Mahalliy ulanish (Bitta Wi-Fi orqali tezroq):</strong>
+                      <strong>2-usul: ngrok (HTTPS) orqali ulanish</strong>
                       <ul>
-                        <li>Telefon va kompyuter bitta Wi-Fi tarmog'ida bo'lsin.</li>
-                        <li>LM Studio'da <strong>Server Port Bind Address</strong> ni <code>0.0.0.0</code> qiling, CORSni yoqing.</li>
-                        <li>Kompyuter IP manzilini yozing (masalan: <code>http://192.168.1.15:1234/v1</code>).</li>
+                        <li>Kompyuterda terminalda <code>ngrok http 1234</code> deb yozib LM Studio serverini tashqi internetga chiqaring.</li>
+                        <li>Olingan xavfsiz <code>https://...</code> manzilni tepadagi LM Studio maydoniga yozing. U HTTPS bo'lgani uchun browser uni aslo bloklamaydi.</li>
                       </ul>
                     </li>
                   </ol>
