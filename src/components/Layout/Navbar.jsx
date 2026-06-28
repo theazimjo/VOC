@@ -71,17 +71,6 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
         ☰
       </button>
 
-      {/* Search */}
-      <div className="navbar-search">
-        <span className="navbar-search-icon">🔍</span>
-        <input
-          type="text"
-          className="navbar-search-input"
-          placeholder="So'z, kitob yoki to'plam qidirish…"
-          readOnly
-        />
-      </div>
-
       {/* Right side */}
       <div className="navbar-right">
         {!isOnline && (

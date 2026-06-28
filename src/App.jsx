@@ -18,6 +18,7 @@ import Settings from './pages/Settings';
 import GrammarPage from './pages/GrammarPage';
 import GrammarTopic from './pages/GrammarTopic';
 import GrammarExercises from './pages/GrammarExercises';
+import GrammarTest from './pages/GrammarTest';
 
 export default function App() {
   return (
@@ -48,6 +49,8 @@ export default function App() {
                 <Route path="/grammar" element={<GrammarPage />} />
                 <Route path="/grammar/:level/:topicId" element={<GrammarExercises />} />
                 <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
+                <Route path="/grammar-test" element={<GrammarTest />} />
+                <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
               </Route>
             </Route>
 

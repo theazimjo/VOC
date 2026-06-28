@@ -4,12 +4,16 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import BottomNav from './BottomNav';
 import ParticleCanvas from '../Particles/ParticleCanvas';
+import { useAIRelay } from '../../hooks/useAIRelay';
 import './Layout.css';
 
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+
+  // Initialize global AI relay (enables computer to acts as remote grader in background)
+  useAIRelay();
 
   const handleToggleSidebar = useCallback(() => {
     setCollapsed((prev) => !prev);
@@ -23,9 +27,10 @@ export default function Layout() {
     setMobileOpen(false);
   }, []);
 
-  // Check if we are in grammar test mode
+  // Check if we are in grammar test mode or actively running a complex test
   const segments = location.pathname.split('/').filter(Boolean);
-  const isTestMode = segments.length === 4 && segments[0] === 'grammar';
+  const isTestMode = (segments.length === 4 && segments[0] === 'grammar') || 
+                     (segments[0] === 'grammar-test' && segments[1] === 'run');
 
   if (isTestMode) {
     return (

@@ -3,13 +3,14 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, Settings } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings } from 'lucide-react';
 import './Sidebar.css';
 
 const navItems = [
   { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/library',  icon: BookOpen,        label: 'Kutubxona' },
   { to: '/grammar',  icon: GraduationCap,   label: 'Grammatika' },
+  { to: '/grammar-test', icon: Trophy,       label: 'Imtihon' },
   { to: '/settings', icon: Settings,        label: 'Sozlamalar' },
 ];
 
