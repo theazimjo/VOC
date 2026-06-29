@@ -27,44 +27,37 @@ export default function Layout() {
   const segments = location.pathname.split('/').filter(Boolean);
   const isTestMode = (segments.length === 4 && segments[0] === 'grammar') || 
                      (segments[0] === 'grammar-test' && segments[1] === 'run') ||
-                     (segments[0] === 'ielts-exam');
-
-  if (isTestMode) {
-    return (
-      <div className="layout layout--test-mode">
-        <ParticleCanvas />
-        <main className="layout-content layout-content--test-mode">
-          <Outlet />
-        </main>
-      </div>
-    );
-  }
+                     (segments[0] === 'ielts-exam' && segments[1] === 'run');
 
   return (
-    <div className="layout">
+    <div className={`layout ${isTestMode ? 'layout--test-mode' : ''}`}>
       <ParticleCanvas />
       
-      <Sidebar
-        collapsed={collapsed}
-        onToggle={handleToggleSidebar}
-        mobileOpen={mobileOpen}
-        onMobileClose={handleMobileClose}
-      />
+      {!isTestMode && (
+        <Sidebar
+          collapsed={collapsed}
+          onToggle={handleToggleSidebar}
+          mobileOpen={mobileOpen}
+          onMobileClose={handleMobileClose}
+        />
+      )}
 
-      <Navbar
-        sidebarCollapsed={collapsed}
-        onHamburgerClick={handleHamburgerClick}
-      />
+      {!isTestMode && (
+        <Navbar
+          sidebarCollapsed={collapsed}
+          onHamburgerClick={handleHamburgerClick}
+        />
+      )}
 
       <main
         className={`layout-content ${
-          collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'
+          isTestMode ? 'layout-content--test-mode' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded')
         }`}
       >
         <Outlet />
       </main>
 
-      <BottomNav />
+      {!isTestMode && <BottomNav />}
     </div>
   );
 }

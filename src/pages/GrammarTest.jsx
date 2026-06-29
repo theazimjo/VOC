@@ -878,39 +878,32 @@ Evaluate the answer and return the JSON.`;
                         </div>
                       </div>
                     </motion.div>
-
-                    {/* IELTS Full Mock Test Simulation Card */}
-                    <motion.div 
-                      className="gt-premium-folder-item ielts-folder full-mock-card"
-                      whileHover={{ scale: 1.01, y: -4 }}
-                      whileTap={{ scale: 0.99 }}
-                      onClick={() => {
-                        navigate('/ielts-exam');
-                        playSound('correct');
-                      }}
-                    >
-                      <div className="folder-tab ielts" style={{ background: 'linear-gradient(135deg, #ef4444, #b91c1c)' }} />
-                      <div className="folder-body-card" style={{ borderLeftColor: '#ef4444' }}>
-                        <div className="folder-icon-wrapper ielts" style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}>
-                          <Award className="folder-icon-svg" />
-                        </div>
-                        <div className="folder-card-meta">
-                          <h3>IELTS Full Mock Test</h3>
-                          <p className="folder-meta-desc-desktop">Listening, Reading, Writing, Speaking simulation. Grade and get your overall band score.</p>
-                          
-                          <div className="folder-footer-meta">
-                            <span className="badge-meta ielts" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}>📋 4 bo'lim</span>
-                            <span className="badge-level ielts" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}>Official Standard</span>
-                          </div>
-                        </div>
-                        <div className="folder-chevron">
-                          <ChevronRight size={22} />
-                        </div>
-                      </div>
-                    </motion.div>
                   </>
                 )}
               </div>
+
+              {/* Compact & beautiful IELTS Academic Mock Simulator banner at the bottom of the folders section */}
+              <motion.div 
+                className="gt-compact-ielts-banner"
+                whileHover={{ scale: 1.01, y: -2 }}
+                whileTap={{ scale: 0.99 }}
+                onClick={() => {
+                  navigate('/ielts-exam');
+                  playSound('correct');
+                }}
+              >
+                <div className="ielts-banner-icon-box">
+                  <Award size={22} />
+                </div>
+                <div className="ielts-banner-content">
+                  <h4>IELTS Academic Mock Simulator</h4>
+                  <p>Listening, Reading, Writing va Speaking bo'limlaridan iborat to'liq imtihon simulyatsiyasi</p>
+                </div>
+                <div className="ielts-banner-action">
+                  <span className="ielts-banner-badge">📋 4 ta bo'lim</span>
+                  <button className="btn btn-primary compact">Topshirish 🚀</button>
+                </div>
+              </motion.div>
 
               {/* Urinishlar Tarixi (Attempts History) */}
               <div className="gt-history-section" style={{ marginTop: '40px' }}>

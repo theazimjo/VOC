@@ -1,15 +1,14 @@
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound } from '../utils/feedback';
 import { IELTS_FULL_EXAM } from '../data/ieltsFullExamData';
-import { ref, set, push, onValue, update } from 'firebase/database';
+import { ref, set, push, onValue } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import {
-  Headphones, BookOpen, PenTool, Mic, Play, Pause, Square,
-  ChevronRight, ArrowLeft, Timer, CheckCircle, Clock, Award,
-  BarChart3, Send, Volume2, AlertCircle, Loader2, Home, RotateCcw
+  Play, Square, ChevronRight, ArrowLeft, Timer, CheckCircle, Clock, Award,
+  Send, Volume2, AlertCircle, Loader2, Home, RotateCcw, BookMarked, Mic
 } from 'lucide-react';
 import './IeltsFullExam.css';
 
@@ -120,86 +119,124 @@ function BarChartSVG({ chartData }) {
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function IeltsFullExam() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
   const exam = IELTS_FULL_EXAM;
 
-  // ─── Core State ────────────────────────────────────────────────────────────
-  const [stage, setStage] = useState('hub'); // hub | listening | reading | writing | speaking | evaluating | final_results
-  const [sectionResults, setSectionResults] = useState({});
-  const [completedSections, setCompletedSections] = useState([]);
+  // Helper to fetch from localStorage safely during state initialization
+  const loadSavedState = (key, defaultVal) => {
+    try {
+      const savedRaw = localStorage.getItem(SESSION_KEY);
+      if (savedRaw) {
+        const saved = JSON.parse(savedRaw);
+        if (saved && saved[key] !== undefined) {
+          return saved[key];
+        }
+      }
+    } catch (e) {
+      console.warn('Corrupted state data in localStorage, resetting cache:', e);
+      localStorage.removeItem(SESSION_KEY);
+    }
+    return defaultVal;
+  };
 
-  // ─── Timer ─────────────────────────────────────────────────────────────────
-  const [timeLeft, setTimeLeft] = useState(0);
-  const timerRef = useRef(null);
+  // ─── Core States (Lazy Initialization) ──────────────────────────────────────
+  const [stage, setStage] = useState(() => {
+    const isRunningPath = window.location.pathname.endsWith('/run');
+    if (isRunningPath) {
+      return loadSavedState('stage', 'hub');
+    }
+    return 'hub';
+  });
 
-  // ─── LM Studio ─────────────────────────────────────────────────────────────
-  const [apiEndpoint, setApiEndpoint] = useState(() =>
-    localStorage.getItem('lm_studio_endpoint') || 'http://localhost:1234/v1'
-  );
-  const [apiModel, setApiModel] = useState('local-model');
-  const [apiConnected, setApiConnected] = useState(false);
-  const [apiChecking, setApiChecking] = useState(false);
+  const [sectionResults, setSectionResults] = useState(() => loadSavedState('sectionResults', {}));
+  const [completedSections, setCompletedSections] = useState(() => loadSavedState('completedSections', []));
+  const [timeLeft, setTimeLeft] = useState(() => loadSavedState('timeLeft', 0));
 
   // ─── Listening State ───────────────────────────────────────────────────────
-  const [listeningPart, setListeningPart] = useState(0);
-  const [listeningAnswers, setListeningAnswers] = useState({});
+  const [listeningPart, setListeningPart] = useState(() => loadSavedState('listeningPart', 0));
+  const [listeningAnswers, setListeningAnswers] = useState(() => loadSavedState('listeningAnswers', {}));
   const [audioPlaying, setAudioPlaying] = useState(false);
-  const [audioPlayed, setAudioPlayed] = useState({});
+  const [audioPlayed, setAudioPlayed] = useState(() => loadSavedState('audioPlayed', {}));
   const [audioProgress, setAudioProgress] = useState(0);
   const audioInstanceRef = useRef(null);
+  const timerRef = useRef(null);
 
   // ─── Reading State ─────────────────────────────────────────────────────────
-  const [readingPassage, setReadingPassage] = useState(0);
-  const [readingAnswers, setReadingAnswers] = useState({});
+  const [readingPassage, setReadingPassage] = useState(() => loadSavedState('readingPassage', 0));
+  const [readingAnswers, setReadingAnswers] = useState(() => loadSavedState('readingAnswers', {}));
 
   // ─── Writing State ─────────────────────────────────────────────────────────
-  const [writingTask, setWritingTask] = useState(0);
-  const [writingTexts, setWritingTexts] = useState({ task1: '', task2: '' });
+  const [writingTask, setWritingTask] = useState(() => loadSavedState('writingTask', 0));
+  const [writingTexts, setWritingTexts] = useState(() => loadSavedState('writingTexts', { task1: '', task2: '' }));
 
   // ─── Speaking State ────────────────────────────────────────────────────────
-  const [speakingPart, setSpeakingPart] = useState(0);
-  const [speakingStep, setSpeakingStep] = useState(0);
-  const [speakingPhase, setSpeakingPhase] = useState('idle'); // idle | prep | recording | done
+  const [speakingPart, setSpeakingPart] = useState(() => loadSavedState('speakingPart', 0));
+  const [speakingStep, setSpeakingStep] = useState(() => loadSavedState('speakingStep', 0));
+  const [speakingPhase, setSpeakingPhase] = useState(() => loadSavedState('speakingPhase', 'idle'));
+  const [speakingTimer, setSpeakingTimer] = useState(() => loadSavedState('speakingTimer', 0));
+  const [speakingTimerMax, setSpeakingTimerMax] = useState(() => loadSavedState('speakingTimerMax', 0));
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const [chatMessages, setChatMessages] = useState([]);
-  const [speakingTranscripts, setSpeakingTranscripts] = useState([]);
+  const [chatMessages, setChatMessages] = useState(() => loadSavedState('chatMessages', []));
+  const [speakingTranscripts, setSpeakingTranscripts] = useState(() => loadSavedState('speakingTranscripts', []));
   const recognitionRef = useRef(null);
   const [prepTimeLeft, setPrepTimeLeft] = useState(0);
-  const prepTimerRef = useRef(null);
+
+  // ─── Transcript Mirror Ref for Timer ───────────────────────────────────────
+  const transcriptRef = useRef('');
+  useEffect(() => {
+    transcriptRef.current = transcript;
+  }, [transcript]);
 
   // ─── History State ─────────────────────────────────────────────────────────
   const [examHistory, setExamHistory] = useState([]);
-  const [isRetryingId, setIsRetryingId] = useState(null);
-  const [viewingHistory, setViewingHistory] = useState(null); // Clicked history record details
+  const [viewingHistory, setViewingHistory] = useState(null);
 
   // ─── Evaluating State ──────────────────────────────────────────────────────
   const [evalStep, setEvalStep] = useState('');
-  const [evalError, setEvalError] = useState('');
 
   // ─── Results Tab ───────────────────────────────────────────────────────────
   const [resultsTab, setResultsTab] = useState(0);
 
-  // ─── Fullscreen State ──────────────────────────────────────────────────────
-  const [isFullscreen, setIsFullscreen] = useState(false);
-
   // ─── Session Resume State ───────────────────────────────────────────────────
   const [pendingSession, setPendingSession] = useState(null);
 
-  // ═══ Check for saved session on mount ═══
+  const isRunningRoute = location.pathname.endsWith('/run');
+
+  // ═══ Check for saved session on mount / handle direct run route access ═══
   useEffect(() => {
     const savedRaw = localStorage.getItem(SESSION_KEY);
+    const isRunningPath = window.location.pathname.endsWith('/run');
+
     if (savedRaw) {
       try {
         const saved = JSON.parse(savedRaw);
         if (saved && saved.stage && saved.stage !== 'hub' && saved.stage !== 'final_results') {
-          setPendingSession(saved);
+          if (!isRunningPath) {
+            setPendingSession(saved);
+          }
         }
       } catch (e) {
         console.error('Failed to parse saved IELTS session:', e);
       }
+    } else {
+      if (isRunningPath) {
+        navigate('/ielts-exam', { replace: true });
+      }
     }
-  }, []);
+  }, [navigate]);
+
+  // ═══ Sync URL route with the active exam stage ═══
+  useEffect(() => {
+    const isExamStage = ['listening', 'reading', 'writing', 'speaking', 'evaluating', 'final_results'].includes(stage);
+
+    if (isExamStage && !isRunningRoute) {
+      navigate('/ielts-exam/run', { replace: true });
+    } else if (!isExamStage && isRunningRoute) {
+      navigate('/ielts-exam', { replace: true });
+    }
+  }, [stage, isRunningRoute, navigate]);
 
   // ═══ Resume saved session ═══
   const resumeSession = () => {
@@ -219,12 +256,15 @@ export default function IeltsFullExam() {
     if (saved.speakingPart !== undefined) setSpeakingPart(saved.speakingPart);
     if (saved.speakingStep !== undefined) setSpeakingStep(saved.speakingStep);
     if (saved.speakingPhase) setSpeakingPhase(saved.speakingPhase);
+    if (saved.speakingTimer !== undefined) setSpeakingTimer(saved.speakingTimer);
+    if (saved.speakingTimerMax !== undefined) setSpeakingTimerMax(saved.speakingTimerMax);
     if (saved.transcript !== undefined) setTranscript(saved.transcript);
     if (saved.chatMessages) setChatMessages(saved.chatMessages);
     if (saved.speakingTranscripts) setSpeakingTranscripts(saved.speakingTranscripts);
     setPendingSession(null);
-    setIsFullscreen(true);
     playSound('correct');
+
+    navigate('/ielts-exam/run', { replace: true });
   };
 
   // ═══ Dismiss saved session ═══
@@ -254,29 +294,32 @@ export default function IeltsFullExam() {
       speakingPart,
       speakingStep,
       speakingPhase,
+      speakingTimer,
+      speakingTimerMax,
       transcript,
       chatMessages,
       speakingTranscripts,
       savedAt: Date.now(),
       ...override
     };
-    localStorage.setItem(SESSION_KEY, JSON.stringify(stateToSave));
+    try {
+      localStorage.setItem(SESSION_KEY, JSON.stringify(stateToSave));
+    } catch (e) {
+      console.warn('Failed to persist session to localStorage:', e);
+    }
   }, [
     sectionResults, completedSections, timeLeft, listeningPart, listeningAnswers,
     audioPlayed, readingPassage, readingAnswers, writingTask, writingTexts,
-    speakingPart, speakingStep, speakingPhase, transcript, chatMessages, speakingTranscripts
+    speakingPart, speakingStep, speakingPhase, speakingTimer, speakingTimerMax,
+    transcript, chatMessages, speakingTranscripts
   ]);
 
-  // Save session when typing in textareas or changing answers
+  // Save session state changes
   useEffect(() => {
     if (stage !== 'hub' && stage !== 'final_results' && stage !== 'evaluating') {
       persistSessionState(stage);
     }
-  }, [
-    stage, listeningAnswers, readingAnswers, writingTexts, speakingTranscripts,
-    chatMessages, timeLeft, listeningPart, readingPassage, speakingPart, speakingStep,
-    speakingPhase, audioPlayed, persistSessionState
-  ]);
+  }, [stage, speakingPart, speakingStep, speakingPhase, listeningPart, readingPassage, writingTask]);
 
   // ═══ Load exam history ═══
   useEffect(() => {
@@ -292,31 +335,7 @@ export default function IeltsFullExam() {
     }
   }, [user]);
 
-  // ═══ Save LM Studio endpoint ═══
-  useEffect(() => {
-    localStorage.setItem('lm_studio_endpoint', apiEndpoint);
-  }, [apiEndpoint]);
-
-  // ═══ Check LM Studio Connection ═══
-  const checkConnection = async () => {
-    setApiChecking(true);
-    try {
-      const res = await fetch(`${apiEndpoint}/models`);
-      if (!res.ok) throw new Error('HTTP Error');
-      const data = await res.json();
-      const model = data.data?.[0]?.id || 'local-model';
-      setApiModel(model);
-      setApiConnected(true);
-      playSound('correct');
-    } catch {
-      setApiConnected(false);
-      playSound('wrong');
-    } finally {
-      setApiChecking(false);
-    }
-  };
-
-  // ═══ Start Exam ═══
+  // ═══ Start Full Exam ═══
   const startExam = () => {
     localStorage.removeItem(SESSION_KEY);
     setSectionResults({});
@@ -333,10 +352,26 @@ export default function IeltsFullExam() {
     setSpeakingStep(0);
     setAudioPlayed({});
     setTimeLeft(SECTION_CONFIG.listening.time);
-    setIsFullscreen(true);
+    
+    const initSession = {
+      stage: 'listening',
+      timeLeft: SECTION_CONFIG.listening.time,
+      completedSections: [],
+      sectionResults: {},
+      savedAt: Date.now()
+    };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(initSession));
+    
     setStage('listening');
     playSound('correct');
   };
+
+  // Trigger speaking part initialization when entering speaking stage
+  useEffect(() => {
+    if (stage === 'speaking' && speakingPart === 0 && speakingStep === 0 && chatMessages.length === 0) {
+      startSpeakingPart(0);
+    }
+  }, [stage]);
 
   // ═══ Handle Section Timeout ═══
   const handleSectionTimeout = () => {
@@ -345,7 +380,7 @@ export default function IeltsFullExam() {
     else if (stage === 'writing') submitWriting();
   };
 
-  // ═══ Timer Effect ═══
+  // ─── Timer Effect ─────────────────────────────────────────────────────────
   useEffect(() => {
     if (['listening', 'reading', 'writing'].includes(stage) && timeLeft > 0) {
       timerRef.current = setInterval(() => {
@@ -395,7 +430,7 @@ export default function IeltsFullExam() {
     };
 
     audio.onerror = () => {
-      console.warn("Audio file failed to load, marking as done");
+      console.warn("Audio file failed to load");
       setAudioPlaying(false);
       setAudioPlayed(prev => {
         const next = { ...prev, [`part${partIdx}`]: true };
@@ -406,7 +441,7 @@ export default function IeltsFullExam() {
     };
 
     audio.play().catch((e) => {
-      console.error("Audio playback error:", e);
+      console.error("audio playback error", e);
       setAudioPlaying(false);
       audioInstanceRef.current = null;
     });
@@ -424,14 +459,6 @@ export default function IeltsFullExam() {
     }
     setAudioPlaying(false);
   };
-
-  useEffect(() => {
-    return () => {
-      if (audioInstanceRef.current) {
-        audioInstanceRef.current.pause();
-      }
-    };
-  }, []);
 
   const setListeningAnswer = (partIdx, qId, value) => {
     setListeningAnswers(prev => ({
@@ -478,9 +505,7 @@ export default function IeltsFullExam() {
     playSound('correct');
   };
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // READING LOGIC
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ═══ READING LOGIC ═══
   const setReadingAnswer = (passageIdx, qId, value) => {
     setReadingAnswers(prev => ({
       ...prev,
@@ -525,76 +550,20 @@ export default function IeltsFullExam() {
     playSound('correct');
   };
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // WRITING EVALUATION LOGIC (WITH TIMEOUT AND OFFLINE RETRY FALLBACK)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ═══ WRITING LOGIC ═══
   const submitWriting = async () => {
     clearInterval(timerRef.current);
     persistSessionState('writing');
 
-    setStage('evaluating');
-    setEvalStep('Writing topshiriqlarini tekshirish uchun ulanish o\'rnatilmoqda...');
-    setEvalError('');
-
-    let band = 5.0;
-    let feedback = {};
-    let isPending = false;
-
-    const fetchWithTimeout = (url, options, timeout = 8000) => {
-      return Promise.race([
-        fetch(url, options),
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('Ulanish vaqti tugadi (Timeout)')), timeout)
-        )
-      ]);
-    };
-
-    try {
-      const res = await fetchWithTimeout(`${apiEndpoint}/models`, { method: 'GET' }, 4000);
-      if (res.ok) {
-        const data = await res.json();
-        const model = data.data?.[0]?.id || apiModel;
-
-        setEvalStep('Writing Task 1 (Grafik/Jadval tavsifi) baholanmoqda...');
-        const t1Result = await gradeWritingTaskWithTimeout(
-          exam.writing.task1.prompt,
-          writingTexts.task1,
-          'Task 1',
-          150,
-          model,
-          fetchWithTimeout
-        );
-
-        setEvalStep('Writing Task 2 (Insho/Essay) baholanmoqda...');
-        const t2Result = await gradeWritingTaskWithTimeout(
-          exam.writing.task2.fullPrompt,
-          writingTexts.task2,
-          'Task 2',
-          250,
-          model,
-          fetchWithTimeout
-        );
-
-        band = Math.round(((t1Result.band + t2Result.band * 2) / 3) * 2) / 2;
-        feedback = { task1: t1Result, task2: t2Result, status: 'completed' };
-      } else {
-        throw new Error('Server models list fetch failed');
-      }
-    } catch (e) {
-      console.warn('Writing grading offline/failed, saving as pending:', e);
-      isPending = true;
-      feedback = {
-        status: 'pending',
-        task1: { band: 5.0, feedback: 'LM Studio server offline yoki ulanishda xato. Keyinroq qayta tekshirishingiz mumkin.', criteria: {} },
-        task2: { band: 5.0, feedback: 'LM Studio server offline yoki ulanishda xato. Keyinroq qayta tekshirishingiz mumkin.', criteria: {} }
-      };
-      band = 5.0;
-    }
-
+    // Instantly save as pending for admin checking
     const result = {
-      band,
-      feedback,
-      isPending,
+      band: 0,
+      feedback: {
+        status: 'pending',
+        task1: { band: 0, feedback: 'Writing topshiriqlari topshirildi. Admin tekshirishi kutilmoqda.', criteria: {} },
+        task2: { band: 0, feedback: 'Writing topshiriqlari topshirildi. Admin tekshirishi kutilmoqda.', criteria: {} }
+      },
+      isPending: true,
       task1Text: writingTexts.task1,
       task2Text: writingTexts.task2,
       task1Words: countWords(writingTexts.task1),
@@ -629,102 +598,132 @@ export default function IeltsFullExam() {
     playSound('correct');
   };
 
-  const gradeWritingTaskWithTimeout = async (prompt, text, taskLabel, minWords, model, fetchFn) => {
-    const wordCount = countWords(text);
-    if (wordCount < 20) {
-      return { band: 2.0, feedback: 'Javob juda qisqa (20 so\'zdan kam).', criteria: { taskAchievement: 2, coherence: 2, lexicalResource: 2, grammar: 2 } };
-    }
-
-    const systemPrompt = `You are an IELTS Writing examiner. Grade this ${taskLabel} response.
-Evaluate based on 4 criteria: Task Achievement, Coherence and Cohesion, Lexical Resource, Grammatical Range and Accuracy.
-The student wrote ${wordCount} words (Target is ${minWords}).
-Return ONLY valid JSON:
-{"band": <number 1.0-9.0 in 0.5 increments>, "taskAchievement": <band>, "coherence": <band>, "lexicalResource": <band>, "grammar": <band>, "feedback": "<2-3 sentence feedback in English>"}`;
-
-    const res = await fetchFn(`${apiEndpoint}/chat/completions`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: `Task Prompt: ${prompt}\n\nStudent's Response:\n${text}` }
-        ],
-        temperature: 0.2,
-        max_tokens: 300
-      })
-    }, 12000);
-
-    const data = await res.json();
-    const raw = data.choices?.[0]?.message?.content || '{}';
-    const jsonMatch = raw.match(/\{[\s\S]*\}/);
-    if (jsonMatch) {
-      const parsed = JSON.parse(jsonMatch[0]);
-      return {
-        band: parsed.band || 5.0,
-        feedback: parsed.feedback || '',
-        criteria: {
-          taskAchievement: parsed.taskAchievement || 5.0,
-          coherence: parsed.coherence || 5.0,
-          lexicalResource: parsed.lexicalResource || 5.0,
-          grammar: parsed.grammar || 5.0
-        }
-      };
-    }
-    throw new Error('Writing parser JSON failure');
-  };
-
   // ═══════════════════════════════════════════════════════════════════════════
-  // SPEAKING LOGIC
+  // SPEAKING LOGIC (TIMED, VOICE SYNTHESIS, AUTO PROGRESS)
   // ═══════════════════════════════════════════════════════════════════════════
+  
+  // Timer Countdown Effect for Student Speaking (Pure Decrement Only)
+  useEffect(() => {
+    let subInterval = null;
+    if (stage === 'speaking' && speakingPhase === 'student_speaking' && speakingTimer > 0) {
+      subInterval = setInterval(() => {
+        setSpeakingTimer(prev => prev - 1);
+      }, 1000);
+    }
+    return () => {
+      if (subInterval) clearInterval(subInterval);
+    };
+  }, [stage, speakingPhase, speakingTimer > 0]);
+
+  // Handle Student Speaking Timer Timeout (React Side Effect)
+  useEffect(() => {
+    if (stage === 'speaking' && speakingPhase === 'student_speaking' && speakingTimer === 0) {
+      advanceSpeaking(transcriptRef.current);
+    }
+  }, [speakingTimer, stage, speakingPhase]);
+
+  // Prep Timer Countdown (Pure Decrement Only)
+  useEffect(() => {
+    let interval = null;
+    if (stage === 'speaking' && speakingPhase === 'prep' && prepTimeLeft > 0) {
+      interval = setInterval(() => {
+        setPrepTimeLeft(prev => prev - 1);
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [stage, speakingPhase, prepTimeLeft > 0]);
+
+  // Handle Prep Timeout (React Side Effect)
+  useEffect(() => {
+    if (stage === 'speaking' && speakingPhase === 'prep' && prepTimeLeft === 0) {
+      setChatMessages(msgs => [...msgs, {
+        role: 'examiner',
+        text: 'Your preparation time is over. Please start speaking now.'
+      }]);
+      setSpeakingStep(1);
+      startStudentSpeakingPhase(1, 1);
+    }
+  }, [prepTimeLeft, stage, speakingPhase]);
+
+
   const startSpeakingPart = (partNum) => {
     const partData = partNum === 0 ? exam.speaking.part1
       : partNum === 1 ? exam.speaking.part2
       : exam.speaking.part3;
 
     if (partNum === 0) {
+      setSpeakingPart(0);
+      setSpeakingStep(0);
+      setSpeakingPhase('examiner_speaking');
       const firstQ = partData.questions[0];
       setChatMessages([{ role: 'examiner', text: firstQ }]);
-      setSpeakingStep(0);
-      setSpeakingPhase('idle');
+      speakLoudly(firstQ, 0, 0);
     } else if (partNum === 1) {
+      setSpeakingPart(1);
+      setSpeakingStep(0);
       setChatMessages([{
         role: 'examiner',
         text: `Here is your cue card topic. You have 1 minute to prepare, then speak for 1-2 minutes.\n\n📝 Topic: ${partData.cueCard.topic}\n\nYou should talk about:\n${partData.cueCard.points.map(p => `• ${p}`).join('\n')}`
       }]);
       setSpeakingPhase('prep');
       setPrepTimeLeft(partData.prepTime || 60);
-
-      if (prepTimerRef.current) clearInterval(prepTimerRef.current);
-      prepTimerRef.current = setInterval(() => {
-        setPrepTimeLeft(prev => {
-          if (prev <= 1) {
-            clearInterval(prepTimerRef.current);
-            setSpeakingPhase('idle');
-            setChatMessages(msgs => [...msgs, {
-              role: 'examiner',
-              text: 'Tayyorlanish vaqtingiz tugadi. Iltimos, gapirishni boshlang (mikrofonni yoqing).'
-            }]);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
     } else {
+      setSpeakingPart(2);
+      setSpeakingStep(0);
+      setSpeakingPhase('examiner_speaking');
       const firstQ = partData.questions[0];
       setChatMessages(msgs => [...msgs, {
         role: 'examiner',
-        text: `Keling, uchinchi bo'limga o'tamiz. Siz bilan ushbu mavzu yuzasidan chuqurroq fikr almashamiz.\n\nSavol: ${firstQ}`
+        text: `Let's move on to Part 3. I would like to ask you some more general questions related to this topic.\n\nQuestion: ${firstQ}`
       }]);
-      setSpeakingStep(0);
-      setSpeakingPhase('idle');
+      speakLoudly(firstQ, 2, 0);
     }
+  };
+
+  const speakLoudly = (text, pNum, sNum) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.95;
+
+      utterance.onend = () => {
+        startStudentSpeakingPhase(pNum, sNum);
+      };
+      utterance.onerror = (e) => {
+        console.warn('SpeechSynthesis error, auto starting speaking phase', e);
+        startStudentSpeakingPhase(pNum, sNum);
+      };
+      window.speechSynthesis.speak(utterance);
+    } else {
+      setTimeout(() => {
+        startStudentSpeakingPhase(pNum, sNum);
+      }, 4000);
+    }
+  };
+
+  const startStudentSpeakingPhase = (pNum, sNum) => {
+    setSpeakingPhase('student_speaking');
+    const maxTime = pNum === 0 ? 35 : (pNum === 1 && sNum === 1) ? 120 : 45;
+    setSpeakingTimer(maxTime);
+    setSpeakingTimerMax(maxTime);
+    
+    // Add 300ms delay to let TTS cancel cleanly before opening mic
+    setTimeout(() => {
+      startRecording();
+    }, 300);
   };
 
   const startRecording = () => {
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
       alert('Speech Recognition not supported in this browser. Please use Chrome or Edge.');
       return;
+    }
+
+    if (recognitionRef.current) {
+      try { recognitionRef.current.stop(); } catch (e) {}
     }
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -735,6 +734,11 @@ Return ONLY valid JSON:
 
     let finalTranscript = '';
 
+    recognition.onstart = () => {
+      console.log('Speech recognition started successfully');
+      setIsRecording(true);
+    };
+
     recognition.onresult = (event) => {
       let interim = '';
       for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -744,27 +748,31 @@ Return ONLY valid JSON:
           interim += event.results[i][0].transcript;
         }
       }
-      setTranscript(finalTranscript + interim);
+      const currentText = finalTranscript + interim;
+      setTranscript(currentText);
     };
 
     recognition.onerror = (event) => {
-      console.error('Speech recognition error:', event.error);
+      console.error('Speech recognition error event:', event.error, event);
       if (event.error !== 'no-speech') {
         setIsRecording(false);
       }
     };
 
     recognition.onend = () => {
-      if (isRecording) {
-        try { recognition.start(); } catch {}
-      }
+      console.log('Speech recognition ended');
+      setIsRecording(false);
     };
 
-    recognition.start();
-    recognitionRef.current = recognition;
-    setIsRecording(true);
-    setTranscript('');
-    playSound('correct');
+    try {
+      recognition.start();
+      recognitionRef.current = recognition;
+      setIsRecording(true);
+      setTranscript('');
+      playSound('correct');
+    } catch (e) {
+      console.error('Failed to start speech recognition:', e);
+    }
   };
 
   const stopRecording = () => {
@@ -779,18 +787,24 @@ Return ONLY valid JSON:
     setIsRecording(false);
   };
 
-  const submitSpeakingAnswer = () => {
-    if (!transcript.trim()) return;
+  const handleManualSpeakingSubmit = () => {
+    advanceSpeaking(transcript);
+  };
 
+  const advanceSpeaking = (studentText) => {
     stopRecording();
-    const currentText = transcript.trim();
 
-    setChatMessages(msgs => [...msgs, { role: 'student', text: currentText }]);
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+    }
+
+    const textToSave = (studentText || '').trim() || '(No response)';
+    setChatMessages(msgs => [...msgs, { role: 'student', text: textToSave }]);
     
     const newTranscripts = [...speakingTranscripts, {
       part: speakingPart,
       step: speakingStep,
-      text: currentText
+      text: textToSave
     }];
     setSpeakingTranscripts(newTranscripts);
     setTranscript('');
@@ -800,10 +814,14 @@ Return ONLY valid JSON:
       : exam.speaking.part3;
 
     if (speakingPart === 1) {
-      if (speakingPhase !== 'done') {
+      if (speakingStep === 1) {
+        // Move to Part 2 follow up question
+        setSpeakingStep(2);
+        setSpeakingPhase('examiner_speaking');
         setChatMessages(msgs => [...msgs, { role: 'examiner', text: partData.followUp }]);
-        setSpeakingPhase('done');
-      } else {
+        speakLoudly(partData.followUp, 1, 2);
+      } else if (speakingStep === 2) {
+        // Move to Part 3
         setSpeakingPart(2);
         setSpeakingStep(0);
         startSpeakingPart(2);
@@ -816,7 +834,10 @@ Return ONLY valid JSON:
 
     if (nextStep < questions.length) {
       setSpeakingStep(nextStep);
-      setChatMessages(msgs => [...msgs, { role: 'examiner', text: questions[nextStep] }]);
+      setSpeakingPhase('examiner_speaking');
+      const nextQ = questions[nextStep];
+      setChatMessages(msgs => [...msgs, { role: 'examiner', text: nextQ }]);
+      speakLoudly(nextQ, speakingPart, nextStep);
     } else {
       if (speakingPart === 0) {
         setSpeakingPart(1);
@@ -829,72 +850,20 @@ Return ONLY valid JSON:
   };
 
   const submitSpeaking = async (finalTranscripts = speakingTranscripts) => {
-    if (prepTimerRef.current) clearInterval(prepTimerRef.current);
     stopRecording();
 
     setStage('evaluating');
-    setEvalStep('Speaking audio yozuvlari tahlil qilinmoqda...');
-    setEvalError('');
+    setEvalStep('Speaking responses are being uploaded to the admin portal...');
 
-    let band = 5.0;
-    let feedback = '';
-    let isPending = false;
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-    const fetchWithTimeout = (url, options, timeout = 12000) => {
-      return Promise.race([
-        fetch(url, options),
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('LM Studio ulanish vaqti tugadi (Timeout)')), timeout)
-        )
-      ]);
+    const result = {
+      band: 0,
+      feedback: 'Speaking responses submitted. Grading is pending admin review.',
+      isPending: true,
+      transcripts: finalTranscripts
     };
 
-    try {
-      const conn = await fetchWithTimeout(`${apiEndpoint}/models`, { method: 'GET' }, 4000);
-      if (conn.ok) {
-        const data = await conn.json();
-        const model = data.data?.[0]?.id || apiModel;
-
-        const allTranscript = finalTranscripts.map(t =>
-          `Part ${t.part + 1}, Question ${t.step + 1}: ${t.text}`
-        ).join('\n\n');
-
-        const gradeRes = await fetchWithTimeout(`${apiEndpoint}/chat/completions`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model,
-            messages: [
-              {
-                role: 'system',
-                content: `You are an IELTS Speaking examiner. Grade Speaking performance. Return valid JSON only:
-{"band": <number 1.0-9.0>, "fluency": <band>, "lexical": <band>, "grammar": <band>, "pronunciation": <band>, "feedback": "<feedback>"}`
-              },
-              { role: 'user', content: `Candidate Transcript:\n${allTranscript}` }
-            ],
-            temperature: 0.2,
-            max_tokens: 300
-          })
-        }, 12000);
-
-        const gradeData = await gradeRes.json();
-        const raw = gradeData.choices?.[0]?.message?.content || '{}';
-        const jsonMatch = raw.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          const parsed = JSON.parse(jsonMatch[0]);
-          band = parsed.band || 5.0;
-          feedback = parsed.feedback || '';
-        }
-      } else {
-        throw new Error('Speaking grading server connection issue');
-      }
-    } catch (e) {
-      console.warn('Speaking evaluation offline, saving as pending:', e);
-      isPending = true;
-      feedback = 'LM Studio server offline yoki ulanishda xato. Keyinroq qayta tekshirishingiz mumkin.';
-    }
-
-    const result = { band, feedback, isPending, transcripts: finalTranscripts };
     const finalResults = { ...sectionResults, speaking: result };
     setSectionResults(finalResults);
     setCompletedSections(prev => [...prev, 'speaking']);
@@ -904,32 +873,32 @@ Return ONLY valid JSON:
     playSound('victory');
   };
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SAVE EXAM RECORD TO DATABASE
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ═══ Save Results to Cloud (Firebase) ═══
   const saveExamToFirebase = async (allResults) => {
     const listeningBand = allResults.listening?.band || 0;
     const readingBand = allResults.reading?.band || 0;
     const writingBand = allResults.writing?.band || 0;
     const speakingBand = allResults.speaking?.band || 0;
+    
     const overallBand = Math.round(((listeningBand + readingBand + writingBand + speakingBand) / 4) * 2) / 2;
 
     const examData = {
       examId: exam.id,
       examTitle: exam.title,
       overallBand,
+      isPracticeMode: false,
       listeningBand,
       readingBand,
       writingBand,
       speakingBand,
-      listeningDetails: { correct: allResults.listening?.correct || 0, total: allResults.listening?.total || 40 },
-      readingDetails: { correct: allResults.reading?.correct || 0, total: allResults.reading?.total || 40 },
-      writingDetails: allResults.writing?.feedback || { status: 'pending' },
-      writingIsPending: allResults.writing?.isPending || false,
+      listeningDetails: allResults.listening ? { correct: allResults.listening.correct, total: allResults.listening.total } : null,
+      readingDetails: allResults.reading ? { correct: allResults.reading.correct, total: allResults.reading.total } : null,
+      writingDetails: allResults.writing?.feedback || null,
+      writingIsPending: true,
       writingTask1Text: allResults.writing?.task1Text || '',
       writingTask2Text: allResults.writing?.task2Text || '',
       speakingFeedback: allResults.speaking?.feedback || '',
-      speakingIsPending: allResults.speaking?.isPending || false,
+      speakingIsPending: true,
       speakingTranscripts: allResults.speaking?.transcripts || [],
       takenAt: new Date().toISOString()
     };
@@ -937,7 +906,24 @@ Return ONLY valid JSON:
     if (user) {
       try {
         const examsRef = ref(db, `users/${user.uid}/ielts/full_exams`);
-        await set(push(examsRef), examData);
+        const newExamRef = push(examsRef);
+        const examKey = newExamRef.key;
+        
+        const fullExamData = { ...examData, id: examKey };
+        await set(newExamRef, fullExamData);
+
+        // Save globally to admin control path ielts_submissions
+        const submissionRef = ref(db, `ielts_submissions/${examKey}`);
+        await set(submissionRef, {
+          id: examKey,
+          userId: user.uid,
+          userEmail: user.email || '',
+          userName: user.displayName || 'User',
+          status: 'pending',
+          takenAt: examData.takenAt,
+          examData: fullExamData,
+          ...fullExamData
+        });
       } catch (e) {
         console.error('Failed to save exam to Firebase:', e);
       }
@@ -948,157 +934,6 @@ Return ONLY valid JSON:
     localStorage.setItem('ielts_full_exams', JSON.stringify(savedExams.slice(0, 20)));
 
     localStorage.removeItem(SESSION_KEY);
-  };
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // RETRY GRADING (FROM DASHBOARD)
-  // ═══════════════════════════════════════════════════════════════════════════
-  const handleRetryGrading = async (exRecord) => {
-    if (!exRecord || isRetryingId) return;
-    setIsRetryingId(exRecord.id);
-    playSound('correct');
-
-    try {
-      const conn = await fetch(`${apiEndpoint}/models`);
-      if (!conn.ok) throw new Error('LM Studio offline');
-      const data = await conn.json();
-      const model = data.data?.[0]?.id || apiModel;
-
-      let updatedWritingDetails = { ...exRecord.writingDetails };
-      let updatedSpeakingFeedback = exRecord.speakingFeedback;
-      let newWritingBand = exRecord.writingBand;
-      let newSpeakingBand = exRecord.speakingBand;
-      let wPending = exRecord.writingIsPending;
-      let sPending = exRecord.speakingIsPending;
-
-      if (wPending || exRecord.writingDetails?.status === 'pending') {
-        const t1Result = await gradeWritingTaskWithTimeout(
-          exam.writing.task1.prompt,
-          exRecord.writingTask1Text || '',
-          'Task 1',
-          150,
-          model,
-          fetch
-        );
-        const t2Result = await gradeWritingTaskWithTimeout(
-          exam.writing.task2.fullPrompt,
-          exRecord.writingTask2Text || '',
-          'Task 2',
-          250,
-          model,
-          fetch
-        );
-        newWritingBand = Math.round(((t1Result.band + t2Result.band * 2) / 3) * 2) / 2;
-        updatedWritingDetails = { task1: t1Result, task2: t2Result, status: 'completed' };
-        wPending = false;
-      }
-
-      if (sPending || exRecord.speakingFeedback?.includes('offline')) {
-        const allTranscript = (exRecord.speakingTranscripts || []).map(t =>
-          `Part ${t.part + 1}, Question ${t.step + 1}: ${t.text}`
-        ).join('\n\n');
-
-        const gradeRes = await fetch(`${apiEndpoint}/chat/completions`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model,
-            messages: [
-              {
-                role: 'system',
-                content: `You are an IELTS Speaking examiner. Grade Speaking performance. Return valid JSON only.`
-              },
-              { role: 'user', content: allTranscript }
-            ]
-          })
-        });
-        const gradeData = await gradeRes.json();
-        const raw = gradeData.choices?.[0]?.message?.content || '{}';
-        const jsonMatch = raw.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          const parsed = JSON.parse(jsonMatch[0]);
-          newSpeakingBand = parsed.band || 5.0;
-          updatedSpeakingFeedback = parsed.feedback || '';
-          sPending = false;
-        }
-      }
-
-      const overallBand = Math.round(((exRecord.listeningBand + exRecord.readingBand + newWritingBand + newSpeakingBand) / 4) * 2) / 2;
-
-      if (user && exRecord.id) {
-        const itemRef = ref(db, `users/${user.uid}/ielts/full_exams/${exRecord.id}`);
-        await update(itemRef, {
-          overallBand,
-          writingBand: newWritingBand,
-          speakingBand: newSpeakingBand,
-          writingDetails: updatedWritingDetails,
-          writingIsPending: wPending,
-          speakingFeedback: updatedSpeakingFeedback,
-          speakingIsPending: sPending
-        });
-      }
-
-      const savedExams = JSON.parse(localStorage.getItem('ielts_full_exams') || '[]');
-      const itemIdx = savedExams.findIndex(x => x.takenAt === exRecord.takenAt);
-      if (itemIdx !== -1) {
-        savedExams[itemIdx] = {
-          ...savedExams[itemIdx],
-          overallBand,
-          writingBand: newWritingBand,
-          speakingBand: newSpeakingBand,
-          writingDetails: updatedWritingDetails,
-          writingIsPending: wPending,
-          speakingFeedback: updatedSpeakingFeedback,
-          speakingIsPending: sPending
-        };
-        localStorage.setItem('ielts_full_exams', JSON.stringify(savedExams));
-      }
-
-      alert('Baholash muvaffaqiyatli yakunlandi!');
-      playSound('correct');
-    } catch (e) {
-      alert(`Ulanishda xato: ${e.message}. LM Studio ishlayotganligini tekshiring.`);
-      playSound('wrong');
-    } finally {
-      setIsRetryingId(null);
-    }
-  };
-
-  const skipGradingAndSave = () => {
-    if (stage !== 'evaluating') return;
-
-    const lResult = sectionResults.listening || { band: 0, correct: 0, total: 40 };
-    const rResult = sectionResults.reading || { band: 0, correct: 0, total: 40 };
-    
-    const wResult = sectionResults.writing || {
-      band: 5.0,
-      isPending: true,
-      feedback: { status: 'pending' },
-      task1Text: writingTexts.task1,
-      task2Text: writingTexts.task2,
-      task1Words: countWords(writingTexts.task1),
-      task2Words: countWords(writingTexts.task2),
-      timeSpent: 0
-    };
-
-    const sResult = sectionResults.speaking || {
-      band: 5.0,
-      isPending: true,
-      feedback: 'LM Studio ulanishi o\'rnatilmadi. Natijani keyinroq qayta tekshirishingiz mumkin.',
-      transcripts: speakingTranscripts
-    };
-
-    const overallResults = {
-      listening: lResult,
-      reading: rResult,
-      writing: wResult,
-      speaking: sResult
-    };
-
-    setSectionResults(overallResults);
-    saveExamToFirebase(overallResults);
-    setStage('final_results');
-    playSound('victory');
   };
 
   const getOverallBand = () => {
@@ -1115,11 +950,8 @@ Return ONLY valid JSON:
     return `${d.getDate().toString().padStart(2,'0')}.${(d.getMonth()+1).toString().padStart(2,'0')}.${d.getFullYear()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
   };
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // RENDER SECTIONS
-  // ═══════════════════════════════════════════════════════════════════════════
   return (
-    <div className={`ielts-exam-layout ${isFullscreen ? 'ielts-fullscreen' : ''}`}>
+    <div className={`ielts-exam-layout ${isRunningRoute ? 'ielts-fullscreen' : ''}`}>
       <div className="ielts-main-card">
         <AnimatePresence mode="wait">
           {/* ════════ HISTORY DETAIL REVIEW ════════ */}
@@ -1129,48 +961,61 @@ Return ONLY valid JSON:
             >
               <div className="ielts-results-hero" style={{ background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(99, 102, 241, 0.04))', borderColor: 'rgba(139, 92, 246, 0.2)' }}>
                 <div className="overall-band-circle" style={{ borderColor: '#8b5cf6', background: 'rgba(139, 92, 246, 0.04)' }}>
-                  <span className="overall-band-value" style={{ color: '#8b5cf6' }}>{viewingHistory.overallBand}</span>
-                  <span className="overall-band-label">Overall Band</span>
+                  <span className="overall-band-value" style={{ color: '#8b5cf6' }}>
+                    {viewingHistory.writingIsPending || viewingHistory.speakingIsPending ? '⏳' : viewingHistory.overallBand?.toFixed(1) || '5.0'}
+                  </span>
+                  <span className="overall-band-label">
+                    {viewingHistory.writingIsPending || viewingHistory.speakingIsPending ? 'Evaluating' : 'Overall Band'}
+                  </span>
                 </div>
-                <h2>Imtihon Natijalari Review</h2>
-                <p>Topshirilgan sana: {formatDate(viewingHistory.takenAt)}</p>
+                <h2>Exam Results Review</h2>
+                <p>Taken on: {formatDate(viewingHistory.takenAt)}</p>
+                {(viewingHistory.writingIsPending || viewingHistory.speakingIsPending) && (
+                  <p style={{ color: '#f59e0b', fontSize: '0.85rem', marginTop: '6px', fontWeight: 'bold' }}>
+                    ⚠️ Your writing and speaking responses are currently being evaluated by the administrator.
+                  </p>
+                )}
               </div>
 
               <div className="ielts-band-grid">
                 <div className="ielts-band-card listening">
                   <div className="band-card-icon">🎧</div>
                   <div className="band-card-title">Listening</div>
-                  <div className="band-card-score" style={{ color: '#3b82f6' }}>{viewingHistory.listeningBand?.toFixed(1)}</div>
-                  <div className="band-card-detail">{viewingHistory.listeningDetails?.correct || 0} / 40 to'g'ri</div>
+                  <div className="band-card-score" style={{ color: '#3b82f6' }}>{viewingHistory.listeningBand ? viewingHistory.listeningBand.toFixed(1) : '—'}</div>
+                  {viewingHistory.listeningDetails && (
+                    <div className="band-card-detail">{viewingHistory.listeningDetails.correct} / {viewingHistory.listeningDetails.total}</div>
+                  )}
                 </div>
                 <div className="ielts-band-card reading">
                   <div className="band-card-icon">📖</div>
                   <div className="band-card-title">Reading</div>
-                  <div className="band-card-score" style={{ color: '#10b981' }}>{viewingHistory.readingBand?.toFixed(1)}</div>
-                  <div className="band-card-detail">{viewingHistory.readingDetails?.correct || 0} / 40 to'g'ri</div>
+                  <div className="band-card-score" style={{ color: '#10b981' }}>{viewingHistory.readingBand ? viewingHistory.readingBand.toFixed(1) : '—'}</div>
+                  {viewingHistory.readingDetails && (
+                    <div className="band-card-detail">{viewingHistory.readingDetails.correct} / {viewingHistory.readingDetails.total}</div>
+                  )}
                 </div>
                 <div className="ielts-band-card writing">
                   <div className="band-card-icon">✍️</div>
                   <div className="band-card-title">Writing</div>
-                  <div className="band-card-score" style={{ color: '#f59e0b' }}>{viewingHistory.writingBand?.toFixed(1)}</div>
-                  <div className="band-card-detail">
-                    {viewingHistory.writingIsPending ? 'Pending' : 'Baholangan'}
+                  <div className="band-card-score" style={{ color: '#f59e0b' }}>
+                    {viewingHistory.writingIsPending ? '⏳' : viewingHistory.writingBand ? viewingHistory.writingBand.toFixed(1) : '—'}
                   </div>
+                  <div className="band-card-detail">{viewingHistory.writingIsPending ? 'Pending Evaluation' : 'Graded'}</div>
                 </div>
                 <div className="ielts-band-card speaking">
                   <div className="band-card-icon">🎤</div>
                   <div className="band-card-title">Speaking</div>
-                  <div className="band-card-score" style={{ color: '#8b5cf6' }}>{viewingHistory.speakingBand?.toFixed(1)}</div>
-                  <div className="band-card-detail">
-                    {viewingHistory.speakingIsPending ? 'Pending' : 'Baholangan'}
+                  <div className="band-card-score" style={{ color: '#8b5cf6' }}>
+                    {viewingHistory.speakingIsPending ? '⏳' : viewingHistory.speakingBand ? viewingHistory.speakingBand.toFixed(1) : '—'}
                   </div>
+                  <div className="band-card-detail">{viewingHistory.speakingIsPending ? 'Pending Evaluation' : 'Graded'}</div>
                 </div>
               </div>
 
               <div className="ielts-results-details">
                 <div className="results-tabs">
-                  <button className={`results-tab ${resultsTab === 0 ? 'active' : ''}`} onClick={() => setResultsTab(0)}>✍️ Writing Tahlili</button>
-                  <button className={`results-tab ${resultsTab === 1 ? 'active' : ''}`} onClick={() => setResultsTab(1)}>🎤 Speaking Tahlili</button>
+                  <button className={`results-tab ${resultsTab === 0 ? 'active' : ''}`} onClick={() => setResultsTab(0)}>✍️ Writing Feedback</button>
+                  <button className={`results-tab ${resultsTab === 1 ? 'active' : ''}`} onClick={() => setResultsTab(1)}>🎤 Speaking Feedback</button>
                 </div>
 
                 <div className="results-detail-body">
@@ -1178,9 +1023,9 @@ Return ONLY valid JSON:
                     <div>
                       {viewingHistory.writingIsPending ? (
                         <p style={{ color: '#f59e0b', textAlign: 'center', padding: '20px' }}>
-                          Writing bo'limi hali baholanmagan. Mahalliy LM Studio serveringizni yoqib, "🔄 Tekshirish" tugmasi orqali baholang.
+                          Writing tasks submitted. Comprehensive examiner feedback will appear here once graded.
                         </p>
-                      ) : (
+                      ) : viewingHistory.writingDetails ? (
                         <div>
                           {['task1', 'task2'].map(taskKey => {
                             const fb = viewingHistory.writingDetails?.[taskKey];
@@ -1191,10 +1036,10 @@ Return ONLY valid JSON:
                                   {taskKey === 'task1' ? 'Task 1 (Report)' : 'Task 2 (Essay)'} — Band {fb.band?.toFixed(1) || '5.0'}
                                 </h4>
                                 <div style={{ background: 'var(--bg-secondary)', padding: '12px', borderRadius: '8px', marginBottom: '12px', fontSize: '0.82rem', whiteSpace: 'pre-wrap', border: '1px solid var(--border-light)', maxHeight: '180px', overflowY: 'auto' }}>
-                                  <strong>Sizning matn:</strong><br />{text}
+                                  <strong>Your Text:</strong><br />{text}
                                 </div>
                                 <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                                  <strong>Examiner fikri:</strong> {fb.feedback}
+                                  <strong>Examiner Feedback:</strong> {fb.feedback}
                                 </p>
                                 {fb.criteria && Object.keys(fb.criteria).length > 0 && (
                                   <div className="writing-criteria-grid">
@@ -1210,6 +1055,8 @@ Return ONLY valid JSON:
                             ) : null;
                           })}
                         </div>
+                      ) : (
+                        <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No writing task data available.</p>
                       )}
                     </div>
                   )}
@@ -1218,15 +1065,15 @@ Return ONLY valid JSON:
                     <div>
                       {viewingHistory.speakingIsPending ? (
                         <p style={{ color: '#f59e0b', textAlign: 'center', padding: '20px' }}>
-                          Speaking bo'limi hali baholanmagan. Mahalliy LM Studio serveringizni yoqib, "🔄 Tekshirish" tugmasi orqali baholang.
+                          Speaking audio recorded. Feedback will be populated once graded by the administrator.
                         </p>
-                      ) : (
+                      ) : viewingHistory.speakingFeedback ? (
                         <div>
                           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-                            <strong>Examiner bahosi va tavsiyalari:</strong><br />
+                            <strong>Examiner Evaluation & Suggestions:</strong><br />
                             {viewingHistory.speakingFeedback}
                           </p>
-                          <h4 style={{ marginBottom: '12px', fontSize: '0.85rem' }}>Suhbat Transkripti:</h4>
+                          <h4 style={{ marginBottom: '12px', fontSize: '0.85rem' }}>Interview Transcript:</h4>
                           {viewingHistory.speakingTranscripts?.map((t, i) => (
                             <div key={i} className="result-question-item correct" style={{ borderLeftColor: '#8b5cf6' }}>
                               <span className="result-q-number" style={{ background: 'rgba(139,92,246,0.12)', color: '#8b5cf6' }}>
@@ -1241,6 +1088,8 @@ Return ONLY valid JSON:
                             </div>
                           ))}
                         </div>
+                      ) : (
+                        <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>No speaking task data available.</p>
                       )}
                     </div>
                   )}
@@ -1248,7 +1097,7 @@ Return ONLY valid JSON:
               </div>
 
               <button className="ielts-home-btn" onClick={() => setViewingHistory(null)}>
-                <ArrowLeft size={16} /> Tarix ro'yxatiga qaytish
+                <ArrowLeft size={16} /> Return to History
               </button>
             </motion.div>
           )}
@@ -1261,20 +1110,20 @@ Return ONLY valid JSON:
               {pendingSession && (
                 <div className="ielts-session-resume">
                   <div className="session-resume-icon">📋</div>
-                  <h3>Davom ettirilmagan imtihon mavjud</h3>
+                  <h3>Unfinished Exam Session Found</h3>
                   <p>
-                    Sizda yakunlanmagan faol IELTS imtihon sessiyasi bor. Qolgan joyingizdan davom ettirishni xohlaysizmi?
+                    You have an incomplete active IELTS session. Would you like to resume where you left off?
                   </p>
                   <div className="session-resume-info">
-                    <span>Bo'lim: <strong>{SECTION_CONFIG[pendingSession.stage]?.label || pendingSession.stage}</strong></span>
-                    <span>Vaqt: <strong>{fmtTime(pendingSession.timeLeft || 0)}</strong></span>
+                    <span>Section: <strong>{SECTION_CONFIG[pendingSession.stage]?.label || pendingSession.stage}</strong></span>
+                    <span>Time Left: <strong>{fmtTime(pendingSession.timeLeft || 0)}</strong></span>
                   </div>
                   <div className="session-resume-actions">
                     <button className="session-resume-btn continue" onClick={resumeSession}>
-                      ▶ Davom etish
+                      ▶ Resume Session
                     </button>
                     <button className="session-resume-btn cancel" onClick={dismissSession}>
-                      ✕ O'chirib yuborish
+                      ✕ Discard
                     </button>
                   </div>
                 </div>
@@ -1284,9 +1133,9 @@ Return ONLY valid JSON:
                 <div className="hero-orb hero-orb-1" />
                 <div className="hero-orb hero-orb-2" />
                 <div className="ielts-hero-content">
-                  <span className="ielts-hero-badge">📋 IELTS ACADEMIC</span>
+                  <span className="ielts-hero-badge">🏆 IELTS ACADEMIC</span>
                   <h2>IELTS Academic Mock Simulator</h2>
-                  <p>Haqiqiy kompyuterlashtirilgan IELTS imtihon formatida imtihon topshiring. Ballaer va tahlillar imtihon oxirida batafsil taqdim etiladi.</p>
+                  <p>Authentic mock test environment. Submissions are saved to your profile and graded by the administration.</p>
                 </div>
               </div>
 
@@ -1296,8 +1145,8 @@ Return ONLY valid JSON:
                     <div className="section-icon">{SECTION_CONFIG[sec].icon}</div>
                     <h4>{SECTION_CONFIG[sec].label}</h4>
                     <div className="section-meta">
-                      {Math.floor(SECTION_CONFIG[sec].time / 60)} daqiqa
-                      {sec !== 'speaking' && ` • ${SECTION_CONFIG[sec].questions} savol`}
+                      {Math.floor(SECTION_CONFIG[sec].time / 60)} mins
+                      {sec !== 'speaking' && ` • ${SECTION_CONFIG[sec].questions} questions`}
                     </div>
                   </div>
                 ))}
@@ -1305,52 +1154,31 @@ Return ONLY valid JSON:
 
               <div className="ielts-start-area">
                 <button className="ielts-start-btn" onClick={startExam}>
-                  🚀 Imtihonni boshlash
+                  🚀 Start Exam Simulation
                 </button>
-              </div>
-
-              <div className="ielts-connection">
-                <h3><Volume2 size={16} /> LM Studio (AI Examiner) Sozlamalari</h3>
-                <div className="conn-row">
-                  <input
-                    className="conn-input"
-                    value={apiEndpoint}
-                    onChange={(e) => setApiEndpoint(e.target.value)}
-                    placeholder="http://localhost:1234/v1"
-                  />
-                  <button className="conn-btn" onClick={checkConnection} disabled={apiChecking}>
-                    {apiChecking ? 'Ulanmoqda...' : 'Ulanish'}
-                  </button>
-                </div>
-                {apiConnected && (
-                  <div className="conn-status connected">✅ Ulangan: {apiModel}</div>
-                )}
               </div>
 
               {examHistory.length > 0 && (
                 <div className="ielts-history">
-                  <h3><Clock size={16} /> Imtihon natijalari tarixi</h3>
-                  {examHistory.map(ex => (
-                    <div key={ex.id} className="ielts-history-item" style={{ cursor: 'pointer' }} onClick={() => setViewingHistory(ex)}>
-                      <div className="hist-info">
-                        <h4>{ex.examTitle || 'IELTS Mock Test'}</h4>
-                        <p>{formatDate(ex.takenAt)} • L:{ex.listeningBand} R:{ex.readingBand} W:{ex.writingBand} S:{ex.speakingBand}</p>
+                  <h3><Clock size={16} /> Exam Results History</h3>
+                  {examHistory.map(ex => {
+                    const isPending = ex.writingIsPending || ex.speakingIsPending;
+                    return (
+                      <div key={ex.id} className="ielts-history-item" style={{ cursor: 'pointer' }} onClick={() => setViewingHistory(ex)}>
+                        <div className="hist-info">
+                          <h4>{ex.examTitle || 'IELTS Mock Test'}</h4>
+                          <p>{formatDate(ex.takenAt)} • L:{ex.listeningBand ? ex.listeningBand.toFixed(1) : '—'} R:{ex.readingBand ? ex.readingBand.toFixed(1) : '—'} W:{ex.writingBand ? ex.writingBand.toFixed(1) : '—'} S:{ex.speakingBand ? ex.speakingBand.toFixed(1) : '—'}</p>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }} onClick={e => e.stopPropagation()}>
+                          {isPending ? (
+                            <span className="status-pending-tag" style={{ fontSize: '0.75rem', background: 'rgba(245,158,11,0.15)', color: '#f59e0b', padding: '4px 10px', borderRadius: '12px', fontWeight: 'bold' }}>⏳ Evaluating</span>
+                          ) : (
+                            <div className="hist-band" style={{ fontWeight: 'bold' }}>{ex.overallBand ? ex.overallBand.toFixed(1) : '5.0'}</div>
+                          )}
+                        </div>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }} onClick={e => e.stopPropagation()}>
-                        {(ex.writingIsPending || ex.speakingIsPending) && (
-                          <button
-                            className="conn-btn"
-                            style={{ padding: '6px 12px', fontSize: '0.75rem', background: '#f59e0b' }}
-                            onClick={() => handleRetryGrading(ex)}
-                            disabled={isRetryingId === ex.id}
-                          >
-                            {isRetryingId === ex.id ? 'Baholanmoqda...' : '🔄 Tekshirish'}
-                          </button>
-                        )}
-                        <div className="hist-band">{ex.overallBand}</div>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </motion.div>
@@ -1410,11 +1238,11 @@ Return ONLY valid JSON:
                             <div className="audio-progress-fill" style={{ width: `${audioProgress}%` }} />
                           </div>
                           {audioPlayed[`part${listeningPart}`] ? (
-                            <span className="audio-done-badge">✅ Eshitib bo'lindi (Faqat 1 marta ruxsat beriladi)</span>
+                            <span className="audio-done-badge">✅ Audio Played (Allowed only once)</span>
                           ) : audioPlaying ? (
-                            <span className="audio-once-badge info">🔊 Hozir eshittirilmoqda... To'xtatib bo'lmaydi.</span>
+                            <span className="audio-once-badge info">🔊 Playing audio... Cannot be paused.</span>
                           ) : (
-                            <span className="audio-once-badge">⚠️ Diqqat! Eshittirish faqat 1 marta qo'yiladi.</span>
+                            <span className="audio-once-badge">⚠️ Notice: Audio can only be listened to once.</span>
                           )}
                         </div>
                       </div>
@@ -1429,7 +1257,7 @@ Return ONLY valid JSON:
                                 {(q.type === 'gap_fill' || q.type === 'summary_completion') && (
                                   <input
                                     className="question-input"
-                                    placeholder="Bo'shliqni to'ldiring..."
+                                    placeholder="Fill in the blank..."
                                     value={listeningAnswers[`p${listeningPart}_q${q.id}`] || ''}
                                     onChange={(e) => setListeningAnswer(listeningPart, q.id, e.target.value)}
                                   />
@@ -1460,11 +1288,11 @@ Return ONLY valid JSON:
               <div className="ielts-submit-section">
                 {listeningPart < 3 && (
                   <button className="ielts-next-part-btn" onClick={() => { stopAudio(); setListeningPart(p => p + 1); }}>
-                    Keyingi Part <ChevronRight size={16} />
+                    Next Part <ChevronRight size={16} />
                   </button>
                 )}
                 <button className="ielts-submit-btn" onClick={() => submitListening()}>
-                  Listeningni yakunlash →
+                  Submit Listening →
                 </button>
               </div>
             </motion.div>
@@ -1486,7 +1314,7 @@ Return ONLY valid JSON:
               </div>
 
               <div className="ielts-part-tabs">
-                {exam.reading.passages.map((p, i) => (
+                {Array.from({ length: 3 }).map((_, i) => (
                   <button
                     key={i}
                     className={`ielts-part-tab ${readingPassage === i ? 'active' : ''}`}
@@ -1552,7 +1380,7 @@ Return ONLY valid JSON:
                                   {(q.type === 'gap_fill' || q.type === 'summary_completion') && (
                                     <input
                                       className="question-input"
-                                      placeholder="Javob..."
+                                      placeholder="Your answer..."
                                       value={readingAnswers[`r${readingPassage}_q${q.id}`] || ''}
                                       onChange={(e) => setReadingAnswer(readingPassage, q.id, e.target.value)}
                                     />
@@ -1568,7 +1396,7 @@ Return ONLY valid JSON:
                                         value={readingAnswers[`r${readingPassage}_q${q.id}`] || ''}
                                         onChange={(e) => setReadingAnswer(readingPassage, q.id, e.target.value)}
                                       >
-                                        <option value="">-- Sarlavha --</option>
+                                        <option value="">-- Heading --</option>
                                         {(q.headings || []).map((h, hi) => (
                                           <option key={hi} value={h}>{h}</option>
                                         ))}
@@ -1589,11 +1417,11 @@ Return ONLY valid JSON:
               <div className="ielts-submit-section">
                 {readingPassage < 2 && (
                   <button className="ielts-next-part-btn" onClick={() => setReadingPassage(p => p + 1)}>
-                    Keyingi Passage <ChevronRight size={16} />
+                    Next Passage <ChevronRight size={16} />
                   </button>
                 )}
                 <button className="ielts-submit-btn" onClick={() => submitReading()}>
-                  Readingni yakunlash →
+                  Submit Reading →
                 </button>
               </div>
             </motion.div>
@@ -1616,174 +1444,161 @@ Return ONLY valid JSON:
 
               <div className="ielts-part-tabs">
                 <button className={`ielts-part-tab ${writingTask === 0 ? 'active' : ''}`} onClick={() => setWritingTask(0)}>
-                  Task 1 (150+ so'z)
+                  Task 1 (150+ words)
                 </button>
                 <button className={`ielts-part-tab ${writingTask === 1 ? 'active' : ''}`} onClick={() => setWritingTask(1)}>
-                  Task 2 (250+ so'z)
+                  Task 2 (250+ words)
                 </button>
               </div>
 
               <div className="ielts-section-body ielts-writing-body">
-                {writingTask === 0 ? (
-                  <div className="ielts-writing-area">
-                    <div className="ielts-chart-container">
-                      <h4>{exam.writing.task1.title}</h4>
-                      <BarChartSVG chartData={exam.writing.task1.chartData} />
-                    </div>
+                {(() => {
+                  const task = (writingTask === 0 ? exam.writing.task1 : exam.writing.task2);
+                  const isTask1 = (writingTask === 0);
 
-                    <div className="ielts-writing-prompt">
-                      {exam.writing.task1.prompt}
-                    </div>
+                  return (
+                    <div className="ielts-writing-area">
+                      {isTask1 && task.chartData && (
+                        <div className="ielts-chart-container">
+                          <h4>{task.title}</h4>
+                          <BarChartSVG chartData={task.chartData} />
+                        </div>
+                      )}
 
-                    <textarea
-                      className="ielts-writing-textarea"
-                      placeholder="Javobingizni shu yerga kiriting... (minimal 150 ta so'z)"
-                      value={writingTexts.task1}
-                      onChange={(e) => setWritingTexts(prev => ({ ...prev, task1: e.target.value }))}
-                    />
-                    <div className="ielts-word-counter">
-                      <span className={`word-count-current ${countWords(writingTexts.task1) >= 150 ? 'word-count-met' : 'word-count-low'}`}>
-                        {countWords(writingTexts.task1)} so'z
-                      </span>
-                      <span className="word-count-target">Min: 150 so'z</span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="ielts-writing-area">
-                    <div className="ielts-writing-prompt">
-                      <strong>{exam.writing.task2.title}</strong>
-                      <br /><br />
-                      {exam.writing.task2.fullPrompt}
-                    </div>
+                      <div className="ielts-writing-prompt">
+                        {isTask1 ? task.prompt : task.fullPrompt}
+                      </div>
 
-                    <textarea
-                      className="ielts-writing-textarea"
-                      placeholder="Inshoingizni (essay) shu yerga kiriting... (minimal 250 ta so'z)"
-                      value={writingTexts.task2}
-                      onChange={(e) => setWritingTexts(prev => ({ ...prev, task2: e.target.value }))}
-                    />
-                    <div className="ielts-word-counter">
-                      <span className={`word-count-current ${countWords(writingTexts.task2) >= 250 ? 'word-count-met' : 'word-count-low'}`}>
-                        {countWords(writingTexts.task2)} so'z
-                      </span>
-                      <span className="word-count-target">Min: 250 so'z</span>
+                      <textarea
+                        className="ielts-writing-textarea"
+                        placeholder={`Type your response here... (minimum ${isTask1 ? 150 : 250} words)`}
+                        value={isTask1 ? writingTexts.task1 : writingTexts.task2}
+                        onChange={(e) => setWritingTexts(prev => ({ 
+                          ...prev, 
+                          [isTask1 ? 'task1' : 'task2']: e.target.value 
+                        }))}
+                      />
+                      <div className="ielts-word-counter">
+                        <span className={`word-count-current ${countWords(isTask1 ? writingTexts.task1 : writingTexts.task2) >= (isTask1 ? 150 : 250) ? 'word-count-met' : 'word-count-low'}`}>
+                          {countWords(isTask1 ? writingTexts.task1 : writingTexts.task2)} words
+                        </span>
+                        <span className="word-count-target">Min: {isTask1 ? 150 : 250} words</span>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
               </div>
 
               <div className="ielts-submit-section">
                 {writingTask === 0 && (
                   <button className="ielts-next-part-btn" onClick={() => setWritingTask(1)}>
-                    Task 2 ga o'tish <ChevronRight size={16} />
+                    Proceed to Task 2 <ChevronRight size={16} />
                   </button>
                 )}
                 <button className="ielts-submit-btn" onClick={() => submitWriting()}>
-                  Writingni yakunlash →
+                  Submit Writing →
                 </button>
               </div>
             </motion.div>
           )}
 
-          {/* ════════ SPEAKING ════════ */}
+          {/* ════════ SPEAKING (IMMERSIVE INTERVIEW DESIGN) ════════ */}
           {stage === 'speaking' && !viewingHistory && (
-            <motion.div key="speaking" className="ielts-section-layout"
-              initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
+            <motion.div key="speaking" className="ielts-immersive-speaking"
+              initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
             >
-              <div className="ielts-section-header">
-                <div className="header-left">
-                  <span className="section-badge speaking-badge">🎤 SPEAKING</span>
-                  <h3>Part {speakingPart + 1} / 3</h3>
+              {/* Immersive Header */}
+              <div className="speaking-immersive-header">
+                <div className="immersive-header-left">
+                  <span className="speaking-badge-pill">🎤 IELTS Speaking Part {speakingPart + 1}</span>
+                  <span className="speaking-progress-text">
+                    {speakingPart === 1 ? 'Cue Card Phase' : `Question ${speakingStep + 1} of ${speakingPart === 0 ? exam.speaking.part1.questions.length : exam.speaking.part3.questions.length}`}
+                  </span>
                 </div>
-              </div>
-
-              <div className="ielts-part-tabs">
-                {['Part 1: Interview', 'Part 2: Long Turn', 'Part 3: Discussion'].map((label, i) => (
-                  <button
-                    key={i}
-                    className={`ielts-part-tab ${speakingPart === i ? 'active' : ''} ${i < speakingPart ? 'completed' : ''}`}
-                    disabled
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="ielts-section-body ielts-speaking-body">
-                {speakingPhase === 'prep' && (
-                  <div className="speaking-prep-timer">
-                    <div className="prep-timer-circle">
-                      <span className="timer-value">{prepTimeLeft}</span>
-                      <span className="timer-label">soniya</span>
-                    </div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                      Tayyorlanish vaqti. Cue-card yuzasidan insho g'oyalarini o'ylab turing.
-                    </p>
+                
+                {speakingPhase === 'student_speaking' && speakingTimer > 0 && (
+                  <div className="speaking-circular-timer">
+                    <Timer size={14} />
+                    <span>{speakingTimer}s</span>
                   </div>
                 )}
+              </div>
 
-                <div className="speaking-main-layout">
-                  <div className="speaking-examiner-card">
-                    <div className="examiner-avatar-wrapper">
-                      <div className="avatar-pulse-ring" />
-                      <div className="examiner-avatar-circle">🎓</div>
+              {/* Immersive Body */}
+              <div className="speaking-immersive-body">
+                {speakingPhase === 'prep' ? (
+                  <div className="speaking-immersive-prep">
+                    <div className="prep-circular-card">
+                      <div className="prep-time-number">{prepTimeLeft}</div>
+                      <div className="prep-time-label">seconds left</div>
                     </div>
-                    <h4>Dr. Sarah Jenkins</h4>
-                    <p>IELTS Senior Examiner</p>
-                    
-                    {isRecording && (
-                      <div className="speaking-waveform">
-                        <div className="wave-bar" />
-                        <div className="wave-bar" />
-                        <div className="wave-bar" />
-                        <div className="wave-bar" />
-                        <div className="wave-bar" />
+                    <div className="prep-topic-card">
+                      <h3>Part 2: Cue Card Topic</h3>
+                      <p className="cue-card-topic-text">📝 {exam.speaking.part2.cueCard.topic}</p>
+                      <div className="cue-card-points-list">
+                        {exam.speaking.part2.cueCard.points.map((p, i) => (
+                          <div key={i} className="cue-point-item">✓ {p}</div>
+                        ))}
                       </div>
-                    )}
+                    </div>
                   </div>
-
-                  <div className="speaking-interaction-pane">
-                    <div className="speaking-chat-bubbles">
-                      {chatMessages.map((msg, i) => (
-                        <div key={i} className={`chat-bubble ${msg.role}`}>
-                          <div className="msg-text">{msg.text}</div>
-                        </div>
-                      ))}
+                ) : (
+                  <div className="speaking-immersive-main">
+                    {/* Examiner Center View */}
+                    <div className="speaking-avatar-center">
+                      <div className={`avatar-glow-ring ${speakingPhase === 'examiner_speaking' ? 'active-speaking' : 'listening-mode'}`} />
+                      <div className="avatar-circle-large">🎓</div>
+                      <h4 className="avatar-examiner-name">Dr. Sarah Jenkins</h4>
+                      <p className="avatar-examiner-status">
+                        {speakingPhase === 'examiner_speaking' ? '🔊 Speaking...' : '🟢 Listening to you...'}
+                      </p>
                     </div>
 
-                    {(isRecording || transcript) && (
-                      <div className="speaking-transcript-bubble">
-                        <span className="transcript-badge">Yozib olinmoqda (STT):</span>
-                        <p>{transcript || 'Gapiring, tizim eshitmoqda...'}</p>
-                      </div>
-                    )}
+                    {/* Question Subtitles */}
+                    <div className="speaking-question-subtitles">
+                      {chatMessages[chatMessages.length - 1]?.role === 'examiner' ? (
+                        <h2>"{chatMessages[chatMessages.length - 1]?.text}"</h2>
+                      ) : (
+                        <h2>"{chatMessages[chatMessages.length - 2]?.text || 'Examiner question'}"</h2>
+                      )}
+                    </div>
 
-                    {speakingPhase !== 'prep' && (
-                      <div className="speaking-controls-area">
-                        <button
-                          className={`speaking-mic-button ${isRecording ? 'recording' : ''}`}
-                          onClick={isRecording ? stopRecording : startRecording}
-                        >
-                          {isRecording ? <Square size={24} /> : <Mic size={24} />}
-                        </button>
-                        
-                        <div className="speaking-action-hint">
-                          {isRecording ? (
-                            <span className="pulse-text" style={{ color: '#ef4444' }}>🔴 Mikrofonga javobni gapiring. Yakunlash uchun to'xtating.</span>
-                          ) : (
-                            <span>🎤 Javob berish uchun mikrofonga bosing va gapiring.</span>
-                          )}
-                        </div>
-
-                        {transcript.trim() && !isRecording && (
-                          <button className="speaking-send-btn" onClick={submitSpeakingAnswer}>
-                            Javobni yuborish <Send size={14} />
-                          </button>
+                    {/* Live Transcript / STT */}
+                    {speakingPhase === 'student_speaking' && (
+                      <div className="speaking-live-transcript-card">
+                        {transcript ? (
+                          <p className="transcript-live-text">"{transcript}"</p>
+                        ) : (
+                          <p className="transcript-placeholder-text">
+                            Please speak, the microphone is active...
+                          </p>
                         )}
                       </div>
                     )}
+
+                    {/* Controls Footer */}
+                    {speakingPhase === 'student_speaking' && (
+                      <div className="speaking-immersive-controls">
+                        <div className="wave-animation-container">
+                          <div className={`wave-bar-pill ${isRecording ? 'animating' : ''}`} />
+                          <div className={`wave-bar-pill ${isRecording ? 'animating' : ''}`} style={{ animationDelay: '0.1s' }} />
+                          <div className={`wave-bar-pill ${isRecording ? 'animating' : ''}`} style={{ animationDelay: '0.2s' }} />
+                          <div className={`wave-bar-pill ${isRecording ? 'animating' : ''}`} style={{ animationDelay: '0.3s' }} />
+                          <div className={`wave-bar-pill ${isRecording ? 'animating' : ''}`} style={{ animationDelay: '0.4s' }} />
+                        </div>
+
+                        <button 
+                          className="speaking-action-next-btn"
+                          onClick={handleManualSpeakingSubmit}
+                          title="Proceed to the next question"
+                        >
+                          <span>Next Question</span>
+                          <ChevronRight size={18} />
+                        </button>
+                      </div>
+                    )}
                   </div>
-                </div>
+                )}
               </div>
             </motion.div>
           )}
@@ -1794,17 +1609,13 @@ Return ONLY valid JSON:
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             >
               <Loader2 className="evaluating-spinner animate-spin" size={64} style={{ color: 'var(--accent-1)' }} />
-              <h2>Natijalar tahlil qilinmoqda</h2>
+              <h2>Submitting Responses</h2>
               <p className="eval-status-text">{evalStep}</p>
               
               <div className="evaluating-hint-box">
                 <AlertCircle size={16} />
-                <span>Tekshirish uchun mahalliy LM Studio ulanishi ishlatiladi. Baholash 10-15 soniya vaqt olishi mumkin.</span>
+                <span>Your responses are being secure-transmitted to the admin panel for grading.</span>
               </div>
-
-              <button className="ielts-home-btn" onClick={skipGradingAndSave} style={{ marginTop: '20px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', borderColor: '#f59e0b' }}>
-                <RotateCcw size={16} /> Baholashni o'tkazib yuborish (Keyinroq tekshirish)
-              </button>
             </motion.div>
           )}
 
@@ -1815,151 +1626,50 @@ Return ONLY valid JSON:
             >
               <div className="ielts-results-hero">
                 <div className="overall-band-circle">
-                  <span className="overall-band-value">{getOverallBand()}</span>
-                  <span className="overall-band-label">Overall Band</span>
+                  <span className="overall-band-value">⏳</span>
+                  <span className="overall-band-label">Evaluating</span>
                 </div>
-                <h2>Imtihon Muvaffaqiyatli Yakunlandi</h2>
-                <p>Natijalar tahlil qilindi va cloud profilga sinxronlashtirildi.</p>
+                <h2>Exam Simulation Completed</h2>
+                <p>Your responses have been successfully submitted. Once graded by the administrator, your official band scores will be released.</p>
               </div>
 
               <div className="ielts-band-grid">
-                {SECTIONS.map(sec => (
-                  <div key={sec} className={`ielts-band-card ${sec}`}>
-                    <div className="band-card-icon">{SECTION_CONFIG[sec].icon}</div>
-                    <div className="band-card-title">{SECTION_CONFIG[sec].label}</div>
-                    <div className="band-card-score">
-                      {sectionResults[sec]?.band?.toFixed(1) || '5.0'}
+                <div className="ielts-band-card listening">
+                  <div className="band-card-icon">🎧</div>
+                  <div className="band-card-title">Listening</div>
+                  <div className="band-card-score">{sectionResults.listening?.band ? sectionResults.listening.band.toFixed(1) : '—'}</div>
+                  {sectionResults.listening && (
+                    <div className="band-card-detail">
+                      {sectionResults.listening.correct} / {sectionResults.listening.total} correct
                     </div>
-                    {(sec === 'listening' || sec === 'reading') && (
-                      <div className="band-card-detail">
-                        {sectionResults[sec]?.correct || 0} / 40 to'g'ri
-                      </div>
-                    )}
-                    {sec === 'writing' && (
-                      <div className="band-card-detail">
-                        {sectionResults[sec]?.isPending ? (
-                          <span style={{ color: '#f59e0b' }}>Pending</span>
-                        ) : (
-                          <span>Baholandi</span>
-                        )}
-                      </div>
-                    )}
-                    {sec === 'speaking' && (
-                      <div className="band-card-detail">
-                        {sectionResults[sec]?.isPending ? (
-                          <span style={{ color: '#f59e0b' }}>Pending</span>
-                        ) : (
-                          <span>Baholandi</span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              <div className="ielts-results-details">
-                <div className="results-tabs">
-                  {SECTIONS.map((sec, i) => (
-                    <button
-                      key={sec}
-                      className={`results-tab ${resultsTab === i ? 'active' : ''}`}
-                      onClick={() => setResultsTab(i)}
-                    >
-                      {SECTION_CONFIG[sec].icon} {SECTION_CONFIG[sec].label}
-                    </button>
-                  ))}
+                  )}
                 </div>
-
-                <div className="results-detail-body">
-                  {resultsTab === 0 && sectionResults.listening && (
-                    <div>
-                      {sectionResults.listening.details?.map((d, i) => (
-                        <div key={i} className={`result-question-item ${d.isCorrect ? 'correct' : 'wrong'}`}>
-                          <span className="result-q-number">{d.questionId}</span>
-                          <div className="result-q-content">
-                            <p className="q-text">{d.text}</p>
-                            <p className="q-answer">
-                              <span className="user-answer">Sizning javob: <strong>{d.userAnswer || '—'}</strong></span>
-                              {!d.isCorrect && (
-                                <span className="correct-answer"> • To'g'ri javob: <strong>{d.correctAnswer}</strong></span>
-                              )}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
+                <div className="ielts-band-card reading">
+                  <div className="band-card-icon">📖</div>
+                  <div className="band-card-title">Reading</div>
+                  <div className="band-card-score">{sectionResults.reading?.band ? sectionResults.reading.band.toFixed(1) : '—'}</div>
+                  {sectionResults.reading && (
+                    <div className="band-card-detail">
+                      {sectionResults.reading.correct} / {sectionResults.reading.total} correct
                     </div>
                   )}
-
-                  {resultsTab === 1 && sectionResults.reading && (
-                    <div>
-                      {sectionResults.reading.details?.map((d, i) => (
-                        <div key={i} className={`result-question-item ${d.isCorrect ? 'correct' : 'wrong'}`}>
-                          <span className="result-q-number">{d.questionId}</span>
-                          <div className="result-q-content">
-                            <p className="q-text">{d.text}</p>
-                            <p className="q-answer">
-                              <span className="user-answer">Sizning javob: <strong>{d.userAnswer || '—'}</strong></span>
-                              {!d.isCorrect && (
-                                <span className="correct-answer"> • To'g'ri javob: <strong>{d.correctAnswer}</strong></span>
-                              )}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {resultsTab === 2 && sectionResults.writing && (
-                    <div>
-                      {['task1', 'task2'].map(taskKey => {
-                        const fb = sectionResults.writing.feedback?.[taskKey];
-                        return fb ? (
-                          <div key={taskKey} className="writing-result-feedback" style={{ marginBottom: '16px' }}>
-                            <h4 style={{ marginBottom: '8px' }}>
-                              {taskKey === 'task1' ? 'Task 1 (Report)' : 'Task 2 (Essay)'} — Band {fb.band?.toFixed(1) || '5.0'}
-                            </h4>
-                            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '12px' }}>{fb.feedback}</p>
-                            {fb.criteria && Object.keys(fb.criteria).length > 0 && (
-                              <div className="writing-criteria-grid">
-                                {Object.entries(fb.criteria).map(([key, val]) => (
-                                  <div key={key} className="criteria-item">
-                                    <h5>{key.replace(/([A-Z])/g, ' $1').trim()}</h5>
-                                    <span className="criteria-score">{typeof val === 'number' ? val.toFixed(1) : val}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ) : null;
-                      })}
-                    </div>
-                  )}
-
-                  {resultsTab === 3 && sectionResults.speaking && (
-                    <div>
-                      <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-                        {sectionResults.speaking.feedback || 'Speaking baholash natijasi mavjud emas.'}
-                      </p>
-                      {sectionResults.speaking.transcripts?.map((t, i) => (
-                        <div key={i} className="result-question-item correct" style={{ borderLeftColor: '#8b5cf6' }}>
-                          <span className="result-q-number" style={{ background: 'rgba(139,92,246,0.12)', color: '#8b5cf6' }}>
-                            {i + 1}
-                          </span>
-                          <div className="result-q-content">
-                            <p className="q-text" style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                              Part {t.part + 1}, Question {t.step + 1}
-                            </p>
-                            <p className="q-answer" style={{ fontSize: '0.82rem' }}>"{t.text}"</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                </div>
+                <div className="ielts-band-card writing">
+                  <div className="band-card-icon">✍️</div>
+                  <div className="band-card-title">Writing</div>
+                  <div className="band-card-score">⏳</div>
+                  <div className="band-card-detail">Evaluating</div>
+                </div>
+                <div className="ielts-band-card speaking">
+                  <div className="band-card-icon">🎤</div>
+                  <div className="band-card-title">Speaking</div>
+                  <div className="band-card-score">⏳</div>
+                  <div className="band-card-detail">Evaluating</div>
                 </div>
               </div>
 
               <button className="ielts-home-btn" onClick={() => { localStorage.removeItem(SESSION_KEY); setStage('hub'); }}>
-                <Home size={16} /> Bosh sahifaga qaytish
+                <Home size={16} /> Return to Home
               </button>
             </motion.div>
           )}

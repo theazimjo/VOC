@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const CACHE_KEY_PREFIX = "avatar_cache_";
 
@@ -18,10 +18,27 @@ export function useAvatar(photoURL) {
 
   const [avatarSrc, setAvatarSrc] = useState(() => {
     if (!photoURL) return null;
-    try { return localStorage.getItem(cacheKey) || null; } catch { return null; }
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        if (cached === 'tainted') return photoURL;
+        if (cached === 'error') return null;
+        return cached;
+      }
+    } catch {
+      return null;
+    }
+    return null;
   });
 
-  const [avatarError, setAvatarError] = useState(!photoURL);
+  const [avatarError, setAvatarError] = useState(() => {
+    if (!photoURL) return true;
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached === 'error') return true;
+    } catch { /* ignore */ }
+    return false;
+  });
 
   useEffect(() => {
     if (!photoURL) {
@@ -34,8 +51,16 @@ export function useAvatar(photoURL) {
     try {
       const cached = localStorage.getItem(cacheKey);
       if (cached) {
-        setAvatarSrc(cached);
-        setAvatarError(false);
+        if (cached === 'tainted') {
+          setAvatarSrc(photoURL);
+          setAvatarError(false);
+        } else if (cached === 'error') {
+          setAvatarSrc(null);
+          setAvatarError(true);
+        } else {
+          setAvatarSrc(cached);
+          setAvatarError(false);
+        }
         return;
       }
     } catch { /* ignore */ }
@@ -56,13 +81,16 @@ export function useAvatar(photoURL) {
         setAvatarSrc(dataURL);
         setAvatarError(false);
       } catch {
-        // CORS tainted canvas — fall back to direct URL this session only
+        // CORS tainted canvas — save 'tainted' state so we don't try to draw on canvas again
+        try { localStorage.setItem(cacheKey, 'tainted'); } catch { /* ignore */ }
         setAvatarSrc(photoURL);
         setAvatarError(false);
       }
     };
     img.onerror = () => {
       if (cancelled) return;
+      // Save 'error' state so we don't make requests to broken URL again
+      try { localStorage.setItem(cacheKey, 'error'); } catch { /* ignore */ }
       setAvatarSrc(null);
       setAvatarError(true);
     };

@@ -20,6 +20,7 @@ import GrammarTopic from './pages/GrammarTopic';
 import GrammarExercises from './pages/GrammarExercises';
 import GrammarTest from './pages/GrammarTest';
 import IeltsFullExam from './pages/IeltsFullExam';
+import AdminDashboard from './pages/AdminDashboard';
 
 export default function App() {
   return (
@@ -53,6 +54,8 @@ export default function App() {
                 <Route path="/grammar-test" element={<GrammarTest />} />
                 <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
                 <Route path="/ielts-exam" element={<IeltsFullExam />} />
+                <Route path="/ielts-exam/run" element={<IeltsFullExam />} />
+                <Route path="/admin" element={<AdminDashboard />} />
               </Route>
             </Route>
 

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, BookMarked } from 'lucide-react';
 import './Sidebar.css';
 
 const navItems = [
@@ -101,6 +101,34 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
               </NavLink>
             );
           })}
+
+          {/* IELTS Mock Link */}
+          <NavLink
+            to="/ielts-exam"
+            className={({ isActive }) => `sidebar-link ielts-sidebar-link ${isActive ? 'active' : ''}`}
+            onClick={onMobileClose}
+            title={collapsed ? 'IELTS Mock' : undefined}
+            style={{ marginTop: 'auto', borderTop: '1px solid var(--border-light)', paddingTop: '10px' }}
+          >
+            <span className="sidebar-link-icon" style={{ color: '#ef4444' }}>
+              <BookMarked size={20} strokeWidth={2.2} />
+            </span>
+            <span className="sidebar-link-text" style={{ fontWeight: '600' }}>IELTS Mock</span>
+          </NavLink>
+
+         {/* Admin Link */}
+         {user?.email?.toLowerCase() === 'azimjonxolmirzayev30@gmail.com' && (
+           <NavLink
+             to="/admin"
+             className={({ isActive }) => `sidebar-link admin-sidebar-link ${isActive ? 'active' : ''}`}
+             onClick={onMobileClose}
+             title={collapsed ? 'Admin Panel' : undefined}
+             style={{ borderTop: '1px solid var(--border-light)', paddingTop: '10px' }}
+           >
+             <span className="sidebar-link-icon">🛠️</span>
+             <span className="sidebar-link-text" style={{ fontWeight: '600' }}>Admin Panel</span>
+           </NavLink>
+         )}
         </nav>
 
         {/* Footer — user info */}

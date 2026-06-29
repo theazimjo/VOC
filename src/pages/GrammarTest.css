@@ -33,14 +33,15 @@
 
 .gt-welcome-hero {
   position: relative;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0.03) 100%);
-  border: 1.5px solid rgba(99, 102, 241, 0.25);
-  border-radius: 24px;
-  padding: var(--space-xl) var(--space-lg);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(139, 92, 246, 0.06) 50%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1.5px solid rgba(139, 92, 246, 0.35);
+  border-radius: 28px;
+  padding: 42px 36px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
   display: flex;
   align-items: center;
+  backdrop-filter: blur(10px);
 }
 
 .hero-content {
@@ -103,37 +104,37 @@
 /* ─── CATEGORY TABBAR SYSTEM ──────────────────────────────────────────────── */
 .gt-category-tabs {
   display: flex;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  padding: 5px;
-  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px;
+  border-radius: 18px;
   width: fit-content;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.05);
   align-self: flex-start;
+  margin-bottom: 5px;
 }
 
 .gt-cat-tab {
   background: transparent;
-  border: 1px solid transparent;
+  border: none;
   color: var(--text-secondary);
-  padding: 8px 24px;
-  font-size: 0.95rem;
+  padding: 10px 28px;
+  font-size: 0.92rem;
   font-weight: 700;
-  border-radius: 10px;
+  border-radius: 14px;
   cursor: pointer;
-  transition: all var(--transition-fast) ease-in-out;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .gt-cat-tab:hover {
   color: white;
-  background: rgba(255, 255, 255, 0.02);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .gt-cat-tab.active {
-  background: rgba(99, 102, 241, 0.15);
-  border-color: rgba(99, 102, 241, 0.25);
-  color: var(--accent-1);
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.05);
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
 }
 
 /* ─── DASHBOARD GRID ROW ─────────────────────────────────────────────────── */
@@ -173,52 +174,54 @@
 /* Stunning Folder card representation */
 .gt-premium-folder-item {
   position: relative;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .gt-premium-folder-item .folder-tab {
-  width: 120px;
-  height: 24px;
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.3) 0%, rgba(99, 102, 241, 0.15) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  width: 130px;
+  height: 28px;
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.4) 0%, rgba(139, 92, 246, 0.2) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
   border-bottom: none;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 14px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 18px;
   position: absolute;
-  top: -23px;
-  left: 24px;
+  top: -27px;
+  left: 20px;
   z-index: 1;
 }
 
 .gt-premium-folder-item .folder-tab.ielts {
-  background: linear-gradient(90deg, rgba(6, 182, 212, 0.3) 0%, rgba(6, 182, 212, 0.15) 100%);
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.4) 0%, rgba(14, 116, 144, 0.2) 100%);
 }
 
 .gt-premium-folder-item .folder-body-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  border-radius: 24px;
   border-top-left-radius: 0;
-  padding: var(--space-lg);
+  padding: 24px;
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  gap: 20px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 2;
   position: relative;
 }
 
 .gt-premium-folder-item:hover .folder-body-card {
-  border-color: rgba(99, 102, 241, 0.4);
-  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.18), 0 0 0 1px rgba(99, 102, 241, 0.25);
+  transform: translateY(-4px) scale(1.005);
 }
 
 .gt-premium-folder-item.ielts-folder:hover .folder-body-card {
-  border-color: rgba(6, 182, 212, 0.4);
-  box-shadow: 0 15px 35px rgba(6, 182, 212, 0.15);
+  border-color: rgba(6, 182, 212, 0.55);
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.18), 0 0 0 1px rgba(6, 182, 212, 0.25);
+  transform: translateY(-4px) scale(1.005);
 }
 
 .folder-icon-wrapper {
@@ -320,16 +323,16 @@
 
 /* Stats Glass Card side panel */
 .gt-stats-glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(30, 41, 59, 0.75) 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: var(--space-lg);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: 24px;
 }
 
 .stat-circle-row {
@@ -1598,21 +1601,39 @@
 }
 
 .gt-history-item {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  background: rgba(30, 41, 59, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 16px;
-  padding: 12px 16px;
+  padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.gt-history-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.gt-history-item:hover::before {
+  background: #6366f1;
 }
 
 .gt-history-item:hover {
-  border-color: rgba(99, 102, 241, 0.3);
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.45);
+  background: rgba(30, 41, 59, 0.7);
+  transform: translateX(4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .history-meta {
@@ -2007,5 +2028,93 @@
   .history-actions {
     flex: 1;
     justify-content: flex-end;
+  }
+}
+
+/* --- IELTS COMPACT BANNER CARD --- */
+.gt-compact-ielts-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(185, 28, 28, 0.04) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.gt-compact-ielts-banner:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(185, 28, 28, 0.06) 100%);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.08);
+}
+
+.ielts-banner-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ielts-banner-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.ielts-banner-content h4 {
+  font-size: 1rem;
+  font-weight: 750;
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+
+.ielts-banner-content p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ielts-banner-action {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ielts-banner-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .gt-compact-ielts-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px;
+  }
+  .ielts-banner-action {
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  .ielts-banner-content p {
+    white-space: normal;
   }
 }
