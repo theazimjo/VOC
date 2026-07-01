@@ -26,8 +26,7 @@ export default function Layout() {
   // Check if we are in grammar test mode or actively running a complex test
   const segments = location.pathname.split('/').filter(Boolean);
   const isTestMode = (segments.length === 4 && segments[0] === 'grammar') || 
-                     (segments[0] === 'grammar-test' && segments[1] === 'run') ||
-                     (segments[0] === 'ielts-exam' && segments[1] === 'run');
+                     (segments[0] === 'grammar-test' && segments[1] === 'run');
 
   return (
     <div className={`layout ${isTestMode ? 'layout--test-mode' : ''}`}>

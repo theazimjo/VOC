@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playSound, triggerVibration } from '../utils/feedback';
-import { EXAMS_LIST, IELTS_EXAMS_LIST } from '../data/examData';
+import { EXAMS_LIST } from '../data/examData';
 import { 
   ref, 
   set, 
@@ -99,7 +99,7 @@ export default function GrammarTest() {
   // Recalculate stats and high scores whenever attempts state changes
   useEffect(() => {
     const scores = {};
-    const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
+    const ALL_EXAMS = EXAMS_LIST;
 
     // 1. First, load old local high scores for backward compatibility
     ALL_EXAMS.forEach(exam => {
@@ -135,15 +135,10 @@ export default function GrammarTest() {
     if (viewingPastAttempt) return; // Do not overwrite if viewing past attempt
 
     if (testId) {
-      const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
+      const ALL_EXAMS = EXAMS_LIST;
       const foundExam = ALL_EXAMS.find(e => e.id === testId);
       if (foundExam) {
-        // Auto select correct category based on testId prefix
-        if (testId.startsWith('ielts_')) {
-          setExamCategory('ielts');
-        } else {
-          setExamCategory('level');
-        }
+        setExamCategory('level');
         setActiveTest(foundExam);
         setSections(foundExam.sections);
         setStage((prev) => {
@@ -593,16 +588,13 @@ Evaluate the answer and return the JSON.`;
 
   // Helper to get variant letter A, B, C...
   const getVariantLetter = (testId) => {
-    const ieltsIdx = IELTS_EXAMS_LIST.findIndex(e => e.id === testId);
-    if (ieltsIdx !== -1) return `IELTS ${String.fromCharCode(65 + ieltsIdx)}`;
-
     const idx = EXAMS_LIST.findIndex(e => e.id === testId);
     return idx !== -1 ? String.fromCharCode(65 + idx) : '?';
   };
 
   // View a past attempt details
   const handleViewAttempt = (attempt) => {
-    const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
+    const ALL_EXAMS = EXAMS_LIST;
     const foundExam = ALL_EXAMS.find(e => e.id === attempt.testId);
     if (foundExam) {
       setActiveTest(foundExam);
@@ -634,7 +626,7 @@ Evaluate the answer and return the JSON.`;
       const resolvedModelName = connData.data?.[0]?.id || apiModel;
 
       // 2. Identify pending questions in this attempt
-      const ALL_EXAMS = [...EXAMS_LIST, ...IELTS_EXAMS_LIST];
+      const ALL_EXAMS = EXAMS_LIST;
       const foundExam = ALL_EXAMS.find(exam => exam.id === attempt.testId);
       if (!foundExam) throw new Error("Exam variant not found");
 
@@ -796,22 +788,6 @@ Evaluate the answer and return the JSON.`;
             </div>
           </div>
 
-          {/* Segmented Category Tabbar */}
-          <div className="gt-category-tabs">
-            <button 
-              className={`gt-cat-tab ${examCategory === 'level' ? 'active' : ''}`}
-              onClick={() => { setExamCategory('level'); playSound('correct'); }}
-            >
-              1-Level Exam
-            </button>
-            <button 
-              className={`gt-cat-tab ${examCategory === 'ielts' ? 'active' : ''}`}
-              onClick={() => { setExamCategory('ielts'); playSound('correct'); }}
-            >
-              2-IELTS Exam
-            </button>
-          </div>
-
           <div className="gt-dashboard-main-row">
             
             {/* Left side: Premium Folder Cards List & Exam History */}
@@ -819,91 +795,35 @@ Evaluate the answer and return the JSON.`;
               <h3 className="section-title">Papka to'plamlari</h3>
               
               <div className="gt-folders-grid-list">
-                {examCategory === 'level' ? (
-                  <motion.div 
-                    className="gt-premium-folder-item"
-                    whileHover={{ scale: 1.01, y: -4 }}
-                    whileTap={{ scale: 0.99 }}
-                    onClick={() => {
-                      setStage('folder_detail');
-                      playSound('correct');
-                    }}
-                  >
-                    <div className="folder-tab" />
-                    <div className="folder-body-card">
-                      <div className="folder-icon-wrapper">
-                        <Folder className="folder-icon-svg" />
-                      </div>
-                      <div className="folder-card-meta">
-                        <h3>Imtihon 1.2</h3>
-                        <p className="folder-meta-desc-desktop">Present Continuous, Articles, Numerals, Adverbs, Comparison</p>
-                        
-                        <div className="folder-footer-meta">
-                          <span className="badge-meta">📑 5 ta variant</span>
-                          <span className="badge-level">Intermediate</span>
-                        </div>
-                      </div>
-                      <div className="folder-chevron">
-                        <ChevronRight size={22} />
+                <motion.div 
+                  className="gt-premium-folder-item"
+                  whileHover={{ scale: 1.01, y: -4 }}
+                  whileTap={{ scale: 0.99 }}
+                  onClick={() => {
+                    setStage('folder_detail');
+                    playSound('correct');
+                  }}
+                >
+                  <div className="folder-tab" />
+                  <div className="folder-body-card">
+                    <div className="folder-icon-wrapper">
+                      <Folder className="folder-icon-svg" />
+                    </div>
+                    <div className="folder-card-meta">
+                      <h3>Imtihon 1.2</h3>
+                      <p className="folder-meta-desc-desktop">Present Continuous, Articles, Numerals, Adverbs, Comparison</p>
+                      
+                      <div className="folder-footer-meta">
+                        <span className="badge-meta">📑 5 ta variant</span>
+                        <span className="badge-level">Intermediate</span>
                       </div>
                     </div>
-                  </motion.div>
-                ) : (
-                  <>
-                    <motion.div 
-                      className="gt-premium-folder-item ielts-folder"
-                      whileHover={{ scale: 1.01, y: -4 }}
-                      whileTap={{ scale: 0.99 }}
-                      onClick={() => {
-                        setStage('folder_detail');
-                        playSound('correct');
-                      }}
-                    >
-                      <div className="folder-tab ielts" />
-                      <div className="folder-body-card">
-                        <div className="folder-icon-wrapper ielts">
-                          <Folder className="folder-icon-svg ielts" />
-                        </div>
-                        <div className="folder-card-meta">
-                          <h3>IELTS Academic Grammar</h3>
-                          <p className="folder-meta-desc-desktop">Academic style, passive reporting, describing trends, concession linkers</p>
-                          
-                          <div className="folder-footer-meta">
-                            <span className="badge-meta ielts">📑 2 ta variant</span>
-                            <span className="badge-level ielts">C1 Advanced</span>
-                          </div>
-                        </div>
-                        <div className="folder-chevron">
-                          <ChevronRight size={22} />
-                        </div>
-                      </div>
-                    </motion.div>
-                  </>
-                )}
+                    <div className="folder-chevron">
+                      <ChevronRight size={22} />
+                    </div>
+                  </div>
+                </motion.div>
               </div>
-
-              {/* Compact & beautiful IELTS Academic Mock Simulator banner at the bottom of the folders section */}
-              <motion.div 
-                className="gt-compact-ielts-banner"
-                whileHover={{ scale: 1.01, y: -2 }}
-                whileTap={{ scale: 0.99 }}
-                onClick={() => {
-                  navigate('/ielts-exam');
-                  playSound('correct');
-                }}
-              >
-                <div className="ielts-banner-icon-box">
-                  <Award size={22} />
-                </div>
-                <div className="ielts-banner-content">
-                  <h4>IELTS Academic Mock Simulator</h4>
-                  <p>Listening, Reading, Writing va Speaking bo'limlaridan iborat to'liq imtihon simulyatsiyasi</p>
-                </div>
-                <div className="ielts-banner-action">
-                  <span className="ielts-banner-badge">📋 4 ta bo'lim</span>
-                  <button className="btn btn-primary compact">Topshirish 🚀</button>
-                </div>
-              </motion.div>
 
               {/* Urinishlar Tarixi (Attempts History) */}
               <div className="gt-history-section" style={{ marginTop: '40px' }}>
@@ -978,7 +898,7 @@ Evaluate the answer and return the JSON.`;
               <div className="gt-stats-glass-card">
                 <div className="stat-circle-row">
                   <div className="stat-circle-box">
-                    <span className="number">{stats.totalTaken} / {EXAMS_LIST.length + IELTS_EXAMS_LIST.length}</span>
+                    <span className="number">{stats.totalTaken} / {EXAMS_LIST.length}</span>
                     <span className="label">Topshirildi</span>
                   </div>
                   <div className="stat-circle-box primary">
@@ -1023,15 +943,15 @@ Evaluate the answer and return the JSON.`;
               <ArrowLeft size={18} /> Orqaga
             </button>
             <div className="header-nav-title-group">
-              <div className="breadcrumbs">Bosh sahifa &gt; Imtihonlar &gt; {examCategory === 'level' ? 'Imtihon 1.2' : 'IELTS Academic'}</div>
-              <h2>📁 {examCategory === 'level' ? 'Imtihon 1.2 Variantlari' : 'IELTS Academic Variantlari'}</h2>
+              <div className="breadcrumbs">Bosh sahifa &gt; Imtihonlar &gt; Imtihon 1.2</div>
+              <h2>📁 Imtihon 1.2 Variantlari</h2>
               <p>Mavjud test variantlaridan birini tanlang va bilimingizni sinab ko'ring.</p>
             </div>
           </div>
 
           {/* Variants Grid */}
           <div className="gt-variants-inside-grid">
-            {(examCategory === 'level' ? EXAMS_LIST : IELTS_EXAMS_LIST).map((exam, index) => {
+            {EXAMS_LIST.map((exam, index) => {
               const bestScore = highScores[exam.id];
               const isPassed = bestScore !== undefined;
               const letter = String.fromCharCode(65 + index);
@@ -1039,16 +959,16 @@ Evaluate the answer and return the JSON.`;
               return (
                 <motion.div 
                   key={exam.id} 
-                  className={`gt-variant-card-v2 ${isPassed ? 'passed' : ''} ${examCategory === 'ielts' ? 'ielts' : ''}`}
+                  className={`gt-variant-card-v2 ${isPassed ? 'passed' : ''}`}
                   whileHover={{ y: -2, boxShadow: '0 8px 25px rgba(99, 102, 241, 0.12)' }}
                 >
                   {/* Left Side Icon for Mobile / Visual touch */}
-                  <div className={`v2-letter-avatar ${examCategory === 'ielts' ? 'ielts' : ''}`}>
+                  <div className="v2-letter-avatar">
                     {letter}
                   </div>
 
                   <div className="v2-card-header">
-                    <span className={`v2-badge ${examCategory === 'ielts' ? 'ielts' : ''}`}>Variant {letter}</span>
+                    <span className="v2-badge">Variant {letter}</span>
                     <div className="v2-score-badge">
                       {isPassed ? (
                         <span className="score-achieved-pill">
@@ -1108,27 +1028,13 @@ Evaluate the answer and return the JSON.`;
             Bu test sizning quyidagi mavzulardagi bilimingizni har tomonlama tekshiradi:
           </p>
           <div className="gt-topics-grid">
-            {examCategory === 'level' ? (
-              <>
-                <span>🔹 Present Continuous</span>
-                <span>🔹 Articles (a, an, the)</span>
-                <span>🔹 Numerals</span>
-                <span>🔹 Adverbs</span>
-                <span>🔹 As ... as comparison</span>
-                <span>🔹 Degrees of adjectives</span>
-                <span>🔹 Irregular adjectives</span>
-              </>
-            ) : (
-              <>
-                <span>🔹 Academic Passive Voice</span>
-                <span>🔹 Complex Concession Linkers</span>
-                <span>🔹 Graph Describing Vocabulary</span>
-                <span>🔹 Academic Report Transformations</span>
-                <span>🔹 Advanced Relative Clauses</span>
-                <span>🔹 Subject-Verb Agreement (Inversion)</span>
-                <span>🔹 Participle Clauses</span>
-              </>
-            )}
+            <span>🔹 Present Continuous</span>
+            <span>🔹 Articles (a, an, the)</span>
+            <span>🔹 Numerals</span>
+            <span>🔹 Adverbs</span>
+            <span>🔹 As ... as comparison</span>
+            <span>🔹 Degrees of adjectives</span>
+            <span>🔹 Irregular adjectives</span>
           </div>
 
           <div className="gt-alert-info">
