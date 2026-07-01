@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { grammarData } from '../data/grammarData';
+import { grammarData, germanGrammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
+import { playSound } from '../utils/feedback';
 import './GrammarPage.css';
 
 const LEVELS = [
@@ -38,13 +39,30 @@ export default function GrammarPage() {
   const navigate = useNavigate();
   const [activeLevel, setActiveLevel] = useState('beginner');
   const { stats: grammarStats } = useGrammarStats();
+  const [lang, setLang] = useState(() => {
+    return localStorage.getItem('grammar_language') || 'en';
+  });
 
-  const topics = grammarData[activeLevel]?.topics ?? [];
+  const currentData = lang === 'en' ? grammarData : germanGrammarData;
+  const topics = currentData[activeLevel]?.topics ?? [];
+
+  const handleLangChange = (newLang) => {
+    setLang(newLang);
+    localStorage.setItem('grammar_language', newLang);
+    playSound('correct');
+    if (newLang === 'de' && activeLevel !== 'beginner') {
+      setActiveLevel('beginner');
+    }
+  };
 
   // Calculate statistics for the active level
-  const completedTopicsOfLevel = Object.values(grammarStats?.topics || {}).filter(
-    (t) => t.level === activeLevel
-  );
+  const completedTopicsOfLevel = Object.entries(grammarStats?.topics || {})
+    .filter(([topicId, t]) => {
+      const isLvl = t.level === activeLevel;
+      const isDe = topicId.startsWith('de-');
+      return isLvl && (lang === 'de' ? isDe : !isDe);
+    })
+    .map(([_, t]) => t);
 
   let completedExercisesCount = 0;
   completedTopicsOfLevel.forEach((t) => {
@@ -86,11 +104,31 @@ export default function GrammarPage() {
         <div className="grammar-header-glow" />
         <div className="grammar-header-content">
           <div className="grammar-header-icon">📖</div>
-          <div>
-            <h1 className="grammar-title">Grammatika</h1>
+          <div className="grammar-header-titles">
+            <h1 className="grammar-title">
+              {lang === 'en' ? 'Grammatika' : 'Deutsche Grammatik'}
+            </h1>
             <p className="grammar-subtitle">
-              Ingliz tili grammatikasini bosqichma-bosqich o'rganing
+              {lang === 'en' 
+                ? "Ingliz tili grammatikasini bosqichma-bosqich o'rganing" 
+                : "Nemis tili grammatikasini bosqichma-bosqich o'rganing"}
             </p>
+          </div>
+
+          {/* Premium Language Switcher */}
+          <div className="grammar-lang-selector">
+            <button 
+              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
+              onClick={() => handleLangChange('en')}
+            >
+              🇬🇧 English
+            </button>
+            <button 
+              className={`lang-btn ${lang === 'de' ? 'active' : ''}`}
+              onClick={() => handleLangChange('de')}
+            >
+              🇩🇪 German
+            </button>
           </div>
         </div>
 

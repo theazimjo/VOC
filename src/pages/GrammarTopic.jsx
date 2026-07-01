@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { grammarData } from '../data/grammarData';
+import { grammarData, germanGrammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { getQuestionsForExercise, getExerciseType } from '../utils/grammarHelpers';
 import './GrammarTopic.css';
@@ -203,7 +203,10 @@ export default function GrammarTopic() {
   const navigate = useNavigate();
   const { saveGrammarResult } = useGrammarStats();
 
-  const levelData = grammarData[level];
+  const lang = localStorage.getItem('grammar_language') || 'en';
+  const currentData = lang === 'en' ? grammarData : germanGrammarData;
+
+  const levelData = currentData[level];
   const topic = levelData?.topics?.find((t) => t.id === topicId);
 
   const [showGuide, setShowGuide] = useState(false);

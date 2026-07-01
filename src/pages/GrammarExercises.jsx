@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { grammarData } from '../data/grammarData';
+import { grammarData, germanGrammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { getExerciseType } from '../utils/grammarHelpers';
 import './GrammarExercises.css';
@@ -11,7 +11,10 @@ export default function GrammarExercises() {
   const navigate = useNavigate();
   const { stats: grammarStats, loading } = useGrammarStats();
 
-  const levelData = grammarData[level];
+  const lang = localStorage.getItem('grammar_language') || 'en';
+  const currentData = lang === 'en' ? grammarData : germanGrammarData;
+
+  const levelData = currentData[level];
   const topic = levelData?.topics?.find((t) => t.id === topicId);
 
   useEffect(() => {
@@ -61,9 +64,9 @@ export default function GrammarExercises() {
   };
 
   const getLevelLabel = () => {
-    if (level === 'beginner') return 'Elementary';
-    if (level === 'intermediate') return 'Intermediate';
-    return 'Advanced';
+    if (level === 'beginner') return lang === 'en' ? 'Elementary' : 'Anfänger';
+    if (level === 'intermediate') return lang === 'en' ? 'Intermediate' : 'Mittelstufe';
+    return lang === 'en' ? 'Advanced' : 'Fortgeschrittene';
   };
 
   const completedCount = Object.keys(exercisesData).length;

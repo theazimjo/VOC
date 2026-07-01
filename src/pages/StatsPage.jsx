@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
-import { grammarData } from '../data/grammarData';
+import { grammarData, germanGrammarData } from '../data/grammarData';
 import './StatsPage.css';
 
 export default function StatsPage() {
@@ -105,19 +105,29 @@ export default function StatsPage() {
   const posItems = Object.entries(posMap).sort((a, b) => b[1] - a[1]);
 
   // Grammar calculations
-  const uniqueGrammarTopics = Object.keys(grammarStats?.topics || {}).length;
+  const lang = localStorage.getItem('grammar_language') || 'en';
+  const currentData = lang === 'en' ? grammarData : germanGrammarData;
+
+  const filteredTopics = Object.entries(grammarStats?.topics || {})
+    .filter(([topicId, t]) => {
+      const isDe = topicId.startsWith('de-');
+      return lang === 'de' ? isDe : !isDe;
+    })
+    .map(([_, t]) => t);
+
+  const uniqueGrammarTopics = filteredTopics.length;
   const averageGrammarAccuracy = uniqueGrammarTopics > 0 
-    ? Math.round(Object.values(grammarStats.topics).reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) / uniqueGrammarTopics) 
+    ? Math.round(filteredTopics.reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) / uniqueGrammarTopics) 
     : 0;
 
-  const beginnerTotal = grammarData.beginner?.topics?.length || 0;
-  const beginnerCompleted = Object.values(grammarStats?.topics || {}).filter(t => t.level === 'beginner').length;
+  const beginnerTotal = currentData.beginner?.topics?.length || 0;
+  const beginnerCompleted = filteredTopics.filter(t => t.level === 'beginner').length;
 
-  const intermediateTotal = grammarData.intermediate?.topics?.length || 0;
-  const intermediateCompleted = Object.values(grammarStats?.topics || {}).filter(t => t.level === 'intermediate').length;
+  const intermediateTotal = currentData.intermediate?.topics?.length || 0;
+  const intermediateCompleted = filteredTopics.filter(t => t.level === 'intermediate').length;
 
-  const advancedTotal = grammarData.advanced?.topics?.length || 0;
-  const advancedCompleted = Object.values(grammarStats?.topics || {}).filter(t => t.level === 'advanced').length;
+  const advancedTotal = currentData.advanced?.topics?.length || 0;
+  const advancedCompleted = filteredTopics.filter(t => t.level === 'advanced').length;
 
   const containerVariants = {
     hidden: { opacity: 0 },

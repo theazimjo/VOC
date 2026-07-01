@@ -3367,3 +3367,214 @@ His-tuyg'u, fikrlash va egalikni bildiruvchi fe'llar odatda continuous zamonlard
     ]
   }
 };
+
+// ─── GERMAN GRAMMAR TESTS DATA ─────────────────────────────────────────
+export const germanGrammarData = {
+  beginner: {
+    label: `Beginner (Anfänger)`,
+    topics: [
+      {
+        id: `de-sentence-structure`,
+        title: `Normaler Satzbau (Gap tuzilishi)`,
+        icon: `📝`,
+        guide: `## Nemis tilida gap tuzilishi (Satzbau)
+        
+Nemis tilida eng muhim qoida: **Tuslangan fe'l har doim ikkinchi o'rinda (Position 2) turadi!**
+
+### 1. Oddiy to'g'ri gap tartibi (Hauptsatz)
+Gap har doim Ega (Subject) bilan boshlanishi shart emas. Agar gap boshqa bo'lak bilan boshlansa ham, fe'l ikkinchi o'rinda qoladi va Ega fe'ldan keyin keladi (Inversion).
+
+• **Ich** *lerne* heute Deutsch. (Men bugun nemis tili o'rganyapman.) -> Ega birinchi o'rinda
+• **Heute** *lerne* **ich** Deutsch. (Bugun men nemis tili o'rganyapman.) -> Fe'l baribir 2-o'rinda!
+
+### 2. So'roq gaplar (Fragesatz)
+Nemis tilida so'roq gaplar ikki xil bo'ladi:
+
+**A. W-Fragen (Maxsus so'roq gaplar)**
+So'roq olmoshi (Wer, Was, Wie, Wo) birinchi o'rinda keladi, fe'l esa ikkinchi o'rinda qoladi:
+• **Wo** *wohnst* du? (Siz qayerda yashaysiz?)
+• **Was** *machst* du? (Siz nima qilyapsiz?)
+
+**B. Ja/Nein-Fragen (Umumiy so'roq gaplar)**
+Bunday gaplarda **fe'l birinchi o'ringa** o'tadi, ega esa ikkinchi o'rinda keladi:
+• *Lernst* du Deutsch? (Nemis tili o'rganyapsanmi?)
+• *Spielst* du Fußball? (Futbol o'ynaysanmi?)
+
+### 3. Inkor gaplar (Negation - nicht / kein)
+• **Kein** ismi turkumi (otlar) bilan ishlatiladi: Ich habe *keinen* Hund. (Mening itim yo'q.)
+• **Nicht** fe'llar, sifatlar va butun gapni inkor qilish uchun ishlatiladi: Ich spiele *nicht*. (Men o'ynamayapman.)`,
+        questions: [
+          { id: 1, text: `Qaysi gapda so'z tartibi to'g'ri yozilgan?`, options: [`Ich Deutsch lerne.`, `Ich lerne Deutsch.`, `Lerne ich Deutsch.`, `Deutsch ich lerne.`], correct: 1, explanation: `Nemis tilida tasdiq gapda fe'l har doim 2-o'rinda keladi: Ich (1) lerne (2) Deutsch (3).` },
+          { id: 2, text: `Qaysi gapda "Heute" (bugun) so'zi to'g'ri ishlatilgan?`, options: [`Heute ich gehe nach Hause.`, `Heute gehe ich nach Hause.`, `Heute gehe nach Hause ich.`, `Ich gehe heute nach Hause.`], correct: 1, explanation: `"Heute" boshida kelsa ham, fe'l (gehe) 2-o'rinda qoladi, ega (ich) esa 3-o'ringa o'tadi (Inversion).` },
+          { id: 3, text: `Umumiy (Ha/Yo'q) so'roq gapini toping:`, options: [`Wo wohnst du?`, `Wohnst du hier?`, `Du wohnst hier?`, `Wer wohnt hier?`], correct: 1, explanation: `Ja/Nein (Ha/Yo'q) so'roq gaplarida fe'l (wohnst) har doim gap boshida (1-o'rinda) keladi.` },
+          { id: 4, text: `W-Frage (so'roq so'zli gap) qoidasini toping:`, options: [`Was machst du?`, `Machst was du?`, `Was du machst?`, `Machst du was?`], correct: 0, explanation: `W-Fragen so'roq gapida so'roq so'zi (Was) 1-o'rinda, fe'l (machst) 2-o'rinda keladi.` },
+          { id: 5, text: `"Ich spiele nicht gern Fußball" gapining ma'nosi nima?`, options: [`Men futbol o'ynashni yaxshi ko'raman.`, `Men futbol o'ynashni yomon ko'raman / xoxlamayman.`, `Men faqat futbol o'ynayman.`, `Men futbol o'ynamoqchiman.`], correct: 1, explanation: `"nicht gern" - yoqtirmaslikni, xoxlamaslikni bildiradi.` },
+          { id: 6, text: `To'g'ri inkor gapni tanlang (Men ishlamayapman):`, options: [`Ich nicht arbeite.`, `Ich arbeite nicht.`, `Nicht arbeite ich.`, `Ich arbeite kein.`], correct: 1, explanation: `Fe'lni inkor qilish uchun "nicht" fe'ldan keyin (yoki gap oxirida) ishlatiladi.` },
+          { id: 7, text: `___ trinken Sie Kaffee?`, options: [`Trinken`, `Kaffee`, `Trinkst`, `Trinkt`], correct: 0, explanation: `So'roq gapda fe'l boshida keladi. "Sie" (Siz) uchun fe'l shakli "Trinken" bo'ladi.` },
+          { id: 8, text: `"Wir lernen heute Deutsch." gapini "Heute" bilan boshlang:`, options: [`Heute wir lernen Deutsch.`, `Heute lernen wir Deutsch.`, `Heute lernen Deutsch wir.`, `Heute Deutsch lernen wir.`], correct: 1, explanation: `Inversion qoidasiga ko'ra: Heute (1) lernen (2) wir (3) Deutsch (4).` },
+          { id: 9, text: `Qaysi so'roq olmoshi "qayerda" ma'nosini beradi?`, options: [`Wer`, `Was`, `Wo`, `Wie`], correct: 2, explanation: `Nemis tilida "Wo" - qayerda, "Wer" - kim, "Was" - nima, "Wie" - qanday deganidir.` },
+          { id: 10, text: `To'g'ri gapni tanlang:`, options: [`Mein Bruder spielt Tennis.`, `Mein Bruder Tennis spielt.`, `Spielt mein Bruder Tennis.`, `Mein Bruder spielt Tennis nicht.`], correct: 0, explanation: `Subject (Mein Bruder) + Verb (spielt) + Object (Tennis).` }
+        ],
+        fillBlanks: [
+          { id: 1, text: `Ich ___ aus Usbekistan.`, options: [`bist`, `ist`, `bin`, `sind`], correct: 2, explanation: `"Ich" (men) olmoshi uchun "sein" (bo'lmoq) fe'lining hozirgi zamon shakli "bin" bo'ladi.` },
+          { id: 2, text: `Wo ___ du?`, options: [`wohne`, `wohnst`, `wohnen`, `wohnt`], correct: 1, explanation: `"du" (sen) uchun fe'l oxiriga "-st" qo'shimchasi qo'shiladi: wohnst.` },
+          { id: 3, text: `Heute ___ wir nach Berlin.`, options: [`fahren`, `fährst`, `fahrt`, `fahre`], correct: 0, explanation: `"wir" (biz) uchun fe'l o'zgarmaydi (infinitiv): fahren. "Heute" esa fe'ldan oldin keladi.` },
+          { id: 4, text: `___ Sie Deutsch?`, options: [`Sprechen`, `Sprichst`, `Sprichst du`, `Sprecht`], correct: 0, explanation: `"Sie" (Siz - hurmat ma'nosida) uchun fe'l infinitiv shaklda keladi: Sprechen.` },
+          { id: 5, text: `Was ___ er?`, options: [`macht`, `machen`, `machst`, `mache`], correct: 0, explanation: `"er" (u - o'g'il bola) uchun fe'l oxiriga "-t" qo'shiladi: macht.` },
+          { id: 6, text: `Das ___ ein Buch.`, options: [`ist`, `sind`, `bin`, `bist`], correct: 0, explanation: `Das (u - birlikda) uchun "ist" (bo'lmoq) shakli ishlatiladi.` },
+          { id: 7, text: `Ich spiele ___ Tennis.`, options: [`nicht`, `kein`, `keine`, `keinen`], correct: 0, explanation: `Sport yoki o'yinlarni inkor qilishda "nicht" ishlatiladi: Ich spiele nicht Tennis.` },
+          { id: 8, text: `Wir ___ eine Katze.`, options: [`habe`, `hast`, `haben`, `hat`], correct: 2, explanation: `"wir" (biz) uchun "haben" (bor bo'lmoq) fe'li "haben" bo'ladi.` },
+          { id: 9, text: `Kommst ___ aus Taschkent?`, options: [`er`, `sie`, `du`, `ihr`], correct: 2, explanation: `Fe'ldagi "-st" qo'shimchasi "du" (sen) olmoshiga mos keladi: Kommst du...?` },
+          { id: 10, text: `Sie (plural) ___ Fußball.`, options: [`spielt`, `spielen`, `spielst`, `spiele`], correct: 1, explanation: `"sie" (ular - ko'plikda) uchun fe'l shakli "spielen" (o'ynamoq) bo'ladi.` }
+        ],
+        scrambled: [
+          { id: 1, words: [`deutsch`, `ich`, `lerne`, `gerne`], answer: `Ich lerne gerne Deutsch.`, explanation: `Ega (Ich) + Fe'l (lerne) + ravish (gerne) + to'ldiruvchi (Deutsch).` },
+          { id: 2, words: [`wohnen`, `wir`, `in`, `taschkent`], answer: `Wir wohnen in Taschkent.`, explanation: `Ega (Wir) + Fe'l (wohnen) + o'rin holi (in Taschkent).` },
+          { id: 3, words: [`spielst`, `tennis`, `du`, `heute`], answer: `Spielst du heute Tennis?`, explanation: `So'roq gapda fe'l (Spielst) birinchi o'ringa o'tadi.` },
+          { id: 4, words: [`heute`, `wir`, `gehen`, `kino`, `ins`], answer: `Heute gehen wir ins Kino.`, explanation: `Inversion: Heute + gehen + wir + ins Kino.` },
+          { id: 5, words: [`hast`, `einen`, `hund`, `du`], answer: `Hast du einen Hund?`, explanation: `So'roq gap: Hast (fe'l) + du (ega) + einen Hund (to'ldiruvchi).` }
+        ]
+      },
+      {
+        id: `de-articles`,
+        title: `Artikel und Pronomen (Artikllar va olmoshlar)`,
+        icon: `🎒`,
+        guide: `## Nemis tilida artikllar (Artikel)
+        
+Nemis tilida barcha otlarning o'z jinsi (rod) bo'ladi va otdan oldin keladigan artikllar Nominativ (bosh kelishik) kelishigida quyidagicha belgilanadi:
+
+### 1. Aniq artikllar (Bestimmter Artikel)
+Bular ma'lum, aniq narsalar uchun ishlatiladi:
+• **der** - Erkak jinsi -> **der** Vater (ota), **der** Tisch (stol)
+• **die** - Ayol jinsi -> **die** Mutter (ona), **die** Tasche (sumka)
+• **das** - O'rta jins -> **das** Kind (bola), **das** Buch (kitob)
+• **die** - Ko'plik (Plural) -> **die** Kinder (bolalar), **die** Bücher (kitoblar)
+
+### 2. Noaniq artikllar (Unbestimmter Artikel)
+Noma'lum, birinchi marta tilga olinayotgan narsalar uchun ishlatiladi ("bitta" ma'nosida):
+• **ein** (muzskoy) -> ein Mann (bitta erkak)
+• **eine** (jenskiy) -> eine Frau (bitta ayol)
+• **ein** (sredniy) -> ein Buch (bitta kitob)
+*Ko'plikda noaniq artikl ishlatilmaydi!*
+
+### 3. Kishilik olmoshlari (Personalpronomen)
+• **ich** (men)
+• **du** (sen)
+• **er** (u - o'g'il bola)
+• **sie** (u - qiz bola)
+• **es** (u - neytral)
+• **wir** (biz)
+• **ihr** (sizlar)
+• **sie** (ular)
+• **Sie** (Siz - hurmat ma'nosida)`,
+        questions: [
+          { id: 1, text: `"Buch" (kitob) so'zining artiklini toping:`, options: [`der`, `die`, `das`, `den`], correct: 2, explanation: `Buch o'rta jinsga (neuter) tegishli bo'lib, uning artikli "das" bo'ladi: das Buch.` },
+          { id: 2, text: `"Frau" (ayol) so'zining aniq artiklini tanlang:`, options: [`der`, `die`, `das`, `ein`], correct: 1, explanation: `Frau ayol jinsiga (feminine) mansub, shuning uchun "die" artikli ishlatiladi: die Frau.` },
+          { id: 3, text: `"Vater" (ota) so'zining noaniq artikli qaysi?`, options: [`ein`, `eine`, `einen`, `kein`], correct: 0, explanation: `Vater erkak jinsida (der Vater), uning noaniq artikli "ein" bo'ladi: ein Vater.` },
+          { id: 4, text: `Ko'plikdagi otlarning aniq artikli har doim qaysi bo'ladi?`, options: [`der`, `die`, `das`, `den`], correct: 1, explanation: `Nemis tilida jinsidan qat'i nazar ko'plikdagi barcha otlarning aniq artikli "die" bo'ladi.` },
+          { id: 5, text: `"Kind" (bola) so'zining artiklini aniqlang:`, options: [`der`, `die`, `das`, `ein`], correct: 2, explanation: `Kind o'rta jinsga tegishli bo'lgani uchun uning artikli "das" bo'ladi: das Kind.` },
+          { id: 6, text: `"sie" (kichik harfda) olmoshi qanday tarjima qilinadi?`, options: [`men`, `biz`, `u (ayol jinsi) yoki ular`, `Siz (hurmat)`], correct: 2, explanation: `"sie" - u (ayol jinsida) yoki ular (ko'plikda) deganidir. Bosh harfdagi "Sie" esa "Siz" demakdir.` },
+          { id: 7, text: `"Ihr" olmoshining ma'nosi nima?`, options: [`Biz`, `Sizlar (senlar)`, `Ular`, `Siz (hurmat)`], correct: 1, explanation: `"ihr" - sizlar (do'stona ko'plik ma'nosida) degani.` },
+          { id: 8, text: `Erkak kishiga nisbatan qaysi kishilik olmoshi ishlatiladi?`, options: [`er`, `sie`, `es`, `ihr`], correct: 0, explanation: `"er" (u) erkak jinsiga nisbatan ishlatiladi.` },
+          { id: 9, text: `Sumka (Tasche) so'zining noaniq artiklini tanlang:`, options: [`ein`, `eine`, `einen`, `das`], correct: 1, explanation: `Tasche ayol jinsiga tegishli (die Tasche), uning noaniq artikli "eine" bo'ladi.` },
+          { id: 10, text: `Qaysi qatordagi otlarning hammasi "der" artikliga ega?`, options: [`Mutter, Schwester`, `Mann, Tisch, Apfel`, `Buch, Auto, Kind`, `Schule, Tasche`], correct: 1, explanation: `Mann (erkak), Tisch (stol), Apfel (olma) - hammasi muzskoy (der) artikliga ega.` }
+        ],
+        fillBlanks: [
+          { id: 1, text: `Das ist ___ Tisch (masculine).`, options: [`ein`, `eine`, `das`, `die`], correct: 0, explanation: `Tisch erkak jinsiga mansub, shuning uchun noaniq artikli "ein" bo'ladi.` },
+          { id: 2, text: `Das ist ___ Lampe (feminine).`, options: [`ein`, `eine`, `der`, `das`], correct: 1, explanation: `Lampe ayol jinsiga mansub bo'lib, uning noaniq artikli "eine" bo'ladi.` },
+          { id: 3, text: `Hier ist ___ Auto (neuter).`, options: [`der`, `die`, `ein`, `eine`], correct: 2, explanation: `Auto o'rta jinsda (das Auto), shuning uchun noaniq artikli "ein" bo'ladi.` },
+          { id: 4, text: `Wo sind ___ Kinder (plural)?`, options: [`der`, `die`, `das`, `ein`], correct: 1, explanation: `Ko'plik otlar uchun faqat "die" aniq artikli ishlatiladi.` },
+          { id: 5, text: `___ Apfel ist rot.`, options: [`Der`, `Die`, `Das`, `Ein`], correct: 0, explanation: `Apfel (olma) - muzskoy. Bosh kelishikdagi aniq artikli "Der" bo'ladi.` },
+          { id: 6, text: `___ Mutter kocht Suppe.`, options: [`Der`, `Die`, `Das`, `Eine`], correct: 1, explanation: `Mutter (ona) - jenskiy. Aniq artikli "Die" bo'ladi.` },
+          { id: 7, text: `___ Auto ist sehr schnell.`, options: [`Der`, `Die`, `Das`, `Ein`], correct: 2, explanation: `Auto (mashina) - sredniy jinsda. Aniq artikli "Das" bo'ladi.` },
+          { id: 8, text: `Hallo, wer bist ___?`, options: [`ich`, `du`, `er`, `wir`], correct: 1, explanation: `"bist" fe'li faqat "du" (sen) kishilik olmoshiga mos keladi: wer bist du?` },
+          { id: 9, text: `___ lernen Deutsch in der Schule.`, options: [`Ich`, `Wir`, `Er`, `Ihr`], correct: 1, explanation: `"lernen" (infinitiv) fe'l shakliga "Wir" (biz) mos keladi: Wir lernen.` },
+          { id: 10, text: `Wie alt bist ___ (you)?`, options: [`er`, `du`, `sie`, `es`], correct: 1, explanation: `"bist" fe'l formasi "du" (sen) bilan ishlatiladi.` }
+        ],
+        scrambled: [
+          { id: 1, words: [`ist`, `das`, `auto`, `ein`], answer: `Das ist ein Auto.`, explanation: `Das (bu) + ist (bo'lmoq) + ein Auto (bitta mashina).` },
+          { id: 2, words: [`die`, `sind`, `taschen`, `hier`], answer: `Die Taschen sind hier.`, explanation: `Die Taschen (ko'plik) + sind (bo'lmoq) + hier (shu yerda).` },
+          { id: 3, words: [`das`, `rot`, `buch`, `ist`], answer: `Das Buch ist rot.`, explanation: `Das Buch (kitob) + ist (bo'lmoq) + rot (qizil).` },
+          { id: 4, words: [`eine`, `haben`, `wir`, `katze`], answer: `Wir haben eine Katze.`, explanation: `Wir (ega) + haben (fe'l) + eine Katze (to'ldiruvchi).` },
+          { id: 5, words: [`ist`, `der`, `tisch`, `alt`], answer: `Der Tisch ist alt.`, explanation: `Der Tisch (stol) + ist (bo'lmoq) + alt (eski).` }
+        ]
+      },
+      {
+        id: `de-conjugation`,
+        title: `Verben im Präsens (Fe'llarni tuslash)`,
+        icon: `⚡`,
+        guide: `## Nemis tilida fe'llarni hozirgi zamonda tuslash (Konjugation)
+        
+Nemis tilida hozirgi zamon (Präsens) fe'llarini tuslash uchun fe'l negiziga (stam) maxsus shaxs-son qo'shimchalari qo'shiladi. 
+
+Ot-fe'llar infinitivda odatda **-en** bilan tugaydi (masalan: *lernen*, *spielen*, *wohnen*). Tuslash uchun **-en** olib tashlanadi va shaxslarga ko'ra quyidagi qo'shimchalar qo'shiladi:
+
+### 1. Muntazam fe'llar tuslanishi (masalan: lernen - o'rganmoq)
+• **ich** (men) -> negiz + **-e** -> ich lern**e**
+• **du** (sen) -> negiz + **-st** -> du lern**st**
+• **er/sie/es** (u) -> negiz + **-t** -> er lern**t**
+• **wir** (biz) -> negiz + **-en** -> wir lern**en**
+• **ihr** (sizlar) -> negiz + **-t** -> ihr lern**t**
+• **sie/Sie** (ular/Siz) -> negiz + **-en** -> sie lern**en**
+
+### 2. Eng muhim yordamchi fe'llar (Irregular)
+Ushbu ikki fe'l qoidasiz tuslanadi va ularni yodlash shart:
+
+**A. sein (bo'lmoq / to be)**
+• ich **bin**
+• du **bist**
+• er/sie/es **ist**
+• wir **sind**
+• ihr **seid**
+• sie/Sie **sind**
+
+**B. haben (bor bo'lmoq / to have)**
+• ich **habe**
+• du **hast**
+• er/sie/es **hat**
+• wir **haben**
+• ihr **habt**
+• sie/Sie **haben**`,
+        questions: [
+          { id: 1, text: `"lernen" (o'rganmoq) fe'lining "ich" uchun shaklini tanlang:`, options: [`lernt`, `lernst`, `lerne`, `lernen`], correct: 2, explanation: `"ich" (men) olmoshi uchun fe'l oxiriga "-e" qo'shimchasi qo'shiladi: lerne.` },
+          { id: 2, text: `"spielen" (o'ynamoq) fe'lini "du" uchun tuslang:`, options: [`spiele`, `spielst`, `spielt`, `spielen`], correct: 1, explanation: `"du" (sen) olmoshi uchun fe'l oxiriga "-st" qo'shiladi: spielst.` },
+          { id: 3, text: `"er" (u) uchun "wohnen" (yashamoq) fe'lini to'g'ri tuslang:`, options: [`wohne`, `wohnst`, `wohnt`, `wohnen`], correct: 2, explanation: `"er/sie/es" (u) olmoshlari uchun fe'l oxiriga "-t" qo'shiladi: wohnt.` },
+          { id: 4, text: `"haben" (bor bo'lmoq) fe'lini "du" uchun tuslang:`, options: [`habe`, `hast`, `hat`, `haben`], correct: 1, explanation: `"haben" fe'li du uchun "hast" shaklini oladi (irregular).` },
+          { id: 5, text: `"sein" (bo'lmoq) fe'lini "ihr" (sizlar) uchun tuslang:`, options: [`sind`, `ist`, `bin`, `seid`], correct: 3, explanation: `"sein" fe'li ihr uchun "seid" shaklida bo'ladi.` },
+          { id: 6, text: `"Wir ___ Deutsch lernen." gapida qaysi tus to'g'ri?`, options: [`wollen`, `will`, `wollt`, `wollst`], correct: 0, explanation: `"wir" (biz) uchun fe'l infinitivda qoladi: wollen.` },
+          { id: 7, text: `Qaysi fe'l shakli "haben" fe'lining "er" (u) shakliga mos keladi?`, options: [`habe`, `hast`, `hat`, `haben`], correct: 2, explanation: `"er/sie/es" uchun "haben" fe'li "hat" bo'ladi.` },
+          { id: 8, text: `To'g'ri gapni tanlang:`, options: [`Ihr lernen Deutsch.`, `Ihr lernt Deutsch.`, `Ihr lernst Deutsch.`, `Ihr lerne Deutsch.`], correct: 1, explanation: `"ihr" (sizlar) uchun fe'lga "-t" qo'shiladi: lernt.` },
+          { id: 9, text: `"kommen" (kelmoq) fe'lini "sie" (ular) uchun tuslang:`, options: [`komme`, `kommst`, `kommt`, `kommen`], correct: 3, explanation: `"sie" (ular) uchun fe'l infinitivda qoladi: kommen.` },
+          { id: 10, text: `"sein" fe'lining "wir" shakli qaysi?`, options: [`bin`, `bist`, `ist`, `sind`], correct: 3, explanation: `"wir" (biz) uchun sein fe'li "sind" bo'ladi.` }
+        ],
+        fillBlanks: [
+          { id: 1, text: `Ich ___ aus Taschkent.`, options: [`komme`, `kommst`, `kommt`, `kommen`], correct: 0, explanation: `Ich uchun komme (kelaman) fe'li ishlatiladi.` },
+          { id: 2, text: `Er ___ in Berlin.`, options: [`wohne`, `wohnst`, `wohnt`, `wohnen`], correct: 2, explanation: `Er uchun wohnt (yashaydi) fe'li ishlatiladi.` },
+          { id: 3, text: `Wir ___ ein Haus.`, options: [`habe`, `hast`, `haben`, `hat`], correct: 2, explanation: `Wir uchun haben (bor) fe'li ishlatiladi.` },
+          { id: 4, text: `___ du heute Zeit?`, options: [`Habe`, `Hast`, `Hat`, `Haben`], correct: 1, explanation: `du uchun hast fe'li ishlatiladi. So'roq gapda boshida keladi.` },
+          { id: 5, text: `Ihr ___ Fußball.`, options: [`spiele`, `spielst`, `spielt`, `spielen`], correct: 2, explanation: `Ihr uchun spielt (o'ynaysizlar) fe'li ishlatiladi.` },
+          { id: 6, text: `Sie (Siz - hurmat) ___ sehr nett.`, options: [`bin`, `bist`, `ist`, `sind`], correct: 3, explanation: `Sie (hurmat) uchun sein fe'li "sind" shaklida keladi.` },
+          { id: 7, text: `Ich ___ Durst.`, options: [`habe`, `hast`, `haben`, `hat`], correct: 0, explanation: `Ich uchun habe (bor) fe'li ishlatiladi.` },
+          { id: 8, text: `Mein Vater ___ Arzt.`, options: [`ist`, `sind`, `bin`, `bist`], correct: 0, explanation: `Mein Vater (u - ota) singular uchinchi shaxs bo'lgani uchun "ist" bo'ladi.` },
+          { id: 9, text: `___ du Deutsch?`, options: [`Lerne`, `Lernst`, `Lernt`, `Lernen`], correct: 1, explanation: `du uchun lernst shakli to'g'ri keladi.` },
+          { id: 10, text: `Sie (she) ___ Deutsch.`, options: [`lerne`, `lernst`, `lernt`, `lernen`], correct: 2, explanation: `sie (u - qiz bola) uchinchi shaxs birlik, shuning uchun "lernt" bo'ladi.` }
+        ],
+        scrambled: [
+          { id: 1, words: [`bin`, `ich`, `student`], answer: `Ich bin Student.`, explanation: `Ich (ega) + bin (fe'l) + Student (ot).` },
+          { id: 2, words: [`hast`, `du`, `zeit`, `heute`], answer: `Hast du heute Zeit?`, explanation: `So'roq gap: Hast (fe'l) + du (ega) + heute (vaqt) + Zeit (ot).` },
+          { id: 3, words: [`deutsch`, `wir`, `lernen`], answer: `Wir lernen Deutsch.`, explanation: `Wir (ega) + lernen (fe'l) + Deutsch (to'ldiruvchi).` },
+          { id: 4, words: [`in`, `wohnt`, `er`, `berlin`], answer: `Er wohnt in Berlin.`, explanation: `Er (ega) + wohnt (fe'l) + in Berlin (joy).` },
+          { id: 5, words: [`tennis`, `spielt`, `ihr`], answer: `Spielt ihr Tennis?`, explanation: `So'roq gap: Spielt (fe'l) + ihr (ega) + Tennis (ot).` }
+        ]
+      }
+    ]
+  },
+  intermediate: {
+    label: `Intermediate (Mittelstufe)`,
+    topics: []
+  },
+  advanced: {
+    label: `Advanced (Fortgeschrittene)`,
+    topics: []
+  }
+};
