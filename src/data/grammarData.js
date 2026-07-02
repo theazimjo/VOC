@@ -3364,6 +3364,181 @@ His-tuyg'u, fikrlash va egalikni bildiruvchi fe'llar odatda continuous zamonlard
           { id: 20, situation: 'Discussing general animal love.', dialogue: 'A: Look! The birds ___ in our garden.\nB: Oh, they are beautiful!', options: ['sing', 'singing', 'are singing', 'is singing'], correct: 2, explanation: 'Plural subject "birds" uses "are singing".' }
         ]
       },
+      {
+        id: "present-simple",
+        title: "Present Simple",
+        icon: "⏰",
+        guide: `## Present Simple (Oddiy hozirgi zamon)
+
+Present Simple takrorlanib turadigan doimiy ish-harakatlar, odatlar, faktlar va umumiy haqiqatlarni ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **Positive (+)**: Subject + Verb (-s/es)
+  - I/You/We/They **play** tennis.
+  - He/She/It **plays** tennis. (Uchinchi shaxs birlikda fe'lga **-s** yoki **-es** qo'shiladi)
+• **Negative (-)**: Subject + do not (don't) / does not (doesn't) + Verb
+  - I **don't like** coffee.
+  - She **doesn't watch** TV. (Inkor gapda fe'lning asil shakli ishlatiladi, -s qo'shilmaydi)
+• **Question (?)**: Do / Does + Subject + Verb?
+  - **Do you speak** English?
+  - **Does he live** here?
+
+## 2. Uchinchi shaxs uchun imlo qoidalari (-s / -es / -ies)
+• Ko'pgina fe'llarga shunchaki **-s** qo'shiladi:
+  - work -> works, live -> lives, read -> reads
+• Fe'l **-ch, -sh, -ss, -x, -z, -o** bilan tugasa, **-es** qo'shiladi:
+  - watch -> watches, wash -> washes, pass -> passes, go -> goes, do -> does
+• Fe'l undosh + **-y** bilan tugasa, **-y** harfi **-i** ga o'zgaradi va **-es** qo'shiladi:
+  - study -> studies, fly -> flies, try -> tries
+  - *(Lekin unli + y bo'lsa, shunchaki -s qo'shiladi: play -> plays, buy -> buys)*
+
+## 3. Ishlatilishi (Usage)
+1. **Kundalik tartib va takrorlanadigan harakatlar (Habits & Routines)**:
+   - I get up at 7 o'clock every day. (Men har kuni soat 7 da turaman)
+   - They go to the gym on Mondays.
+2. **Umumiy faktlar va ilmiy haqiqatlar (Facts & General Truths)**:
+   - The sun rises in the east. (Quyosh sharqdan chiqadi)
+   - Water boils at 100°C.
+3. **Doimiy holatlar (Permanent States)**:
+   - He lives in London. (U Londonda yashaydi - bu doimiy holat)
+
+## 4. Signal so'zlar (Time Adverbs)
+Bu zamon bilan ko'pincha quyidagi payt ravishlari keladi:
+• always (har doim), usually (odatda), often (tez-tez), sometimes (ba'zida), never (hech qachon), every day/week/month (har kuni/hafta/oy).`,
+        questions: [
+          { id: 1, text: "He ___ to the gym every Monday.", options: ["go", "goes", "going", "went"], correct: 1, explanation: "Third person singular 'he' requires 'goes' in Present Simple." },
+          { id: 2, text: "I ___ not like cold weather.", options: ["am", "do", "does", "is"], correct: 1, explanation: "First person pronoun 'I' uses 'do not' (don't) for negation." },
+          { id: 3, text: "___ she speak Spanish?", options: ["Do", "Does", "Is", "Are"], correct: 1, explanation: "Questions with singular 'she' start with 'Does'." },
+          { id: 4, text: "The sun ___ in the east.", options: ["rises", "rise", "rising", "rose"], correct: 0, explanation: "A scientific fact uses Present Simple singular: 'rises'." },
+          { id: 5, text: "They ___ in Tashkent.", options: ["lives", "live", "living", "are live"], correct: 1, explanation: "Plural subject 'they' uses the base form 'live'." },
+          { id: 6, text: "My sister ___ English at university.", options: ["studies", "studying", "study", "studyed"], correct: 0, explanation: "Consonant + y changes to -ies: 'studies' for 'my sister'." },
+          { id: 7, text: "He ___ watch TV in the morning.", options: ["doesn't", "don't", "isn't", "not"], correct: 0, explanation: "Third person singular negation requires 'doesn't'." },
+          { id: 8, text: "Do you ___ near here?", options: ["live", "lives", "living", "lived"], correct: 0, explanation: "After do/does, the base form of the verb is used: 'live'." },
+          { id: 9, text: "Water ___ at 100 degrees Celsius.", options: ["boils", "boil", "boiling", "boiled"], correct: 0, explanation: "General truth uses Present Simple singular: 'boils'." },
+          { id: 10, text: "My parents ___ in a big house.", options: ["lives", "live", "living", "are living"], correct: 1, explanation: "Plural subject 'parents' takes 'live'." },
+          { id: 11, text: "___ they play football on Sundays?", options: ["Do", "Does", "Are", "Is"], correct: 0, explanation: "Plural questions with 'they' start with 'Do'." },
+          { id: 12, text: "She always ___ her homework in the evening.", options: ["does", "do", "doing", "did"], correct: 0, explanation: "Third person singular 'she' takes 'does'." },
+          { id: 13, text: "We ___ have a car.", options: ["don't", "doesn't", "aren't", "not"], correct: 0, explanation: "Plural negative with 'we' uses 'don't'." },
+          { id: 14, text: "He ___ hard every day.", options: ["works", "work", "working", "worked"], correct: 0, explanation: "Singular subject 'he' takes 'works'." },
+          { id: 15, text: "What time ___ the train leave?", options: ["does", "do", "is", "are"], correct: 0, explanation: "Singular subject 'the train' takes 'does'." },
+          { id: 16, text: "I usually ___ up at 6 AM.", options: ["get", "gets", "getting", "got"], correct: 0, explanation: "First person 'I' takes 'get'." },
+          { id: 17, text: "She ___ coffee. She hates it.", options: ["doesn't drink", "don't drink", "isn't drinking", "drinks not"], correct: 0, explanation: "Negative form: 'doesn't drink'." },
+          { id: 18, text: "___ it snow here in winter?", options: ["Does", "Do", "Is", "Are"], correct: 0, explanation: "Singular 'it' takes 'Does'." },
+          { id: 19, text: "My friend ___ beautiful pictures.", options: ["draws", "draw", "drawing", "drawed"], correct: 0, explanation: "Singular 'my friend' takes 'draws'." },
+          { id: 20, text: "They never ___ late for class.", options: ["arrive", "arrives", "arriving", "are arrive"], correct: 0, explanation: "Plural 'they' takes 'arrive'." }
+        ],
+        fillBlanks: [
+          { id: 1, text: "She ___ (like) chocolate very much.", options: ["likes", "like", "liking", "liked"], correct: 0, explanation: "Third person singular adds '-s'." },
+          { id: 2, text: "I do not ___ (drink) coffee.", options: ["drink", "drinks", "drinking", "drank"], correct: 0, explanation: "Use base form after do not." },
+          { id: 3, text: "___ (do) he live in London?", options: ["Does", "Do", "Is", "Are"], correct: 0, explanation: "Use Does for singular 'he' in questions." },
+          { id: 4, text: "They ___ (study) German at school.", options: ["study", "studies", "studying", "studied"], correct: 0, explanation: "Plural subject takes base form." },
+          { id: 5, text: "The shop ___ (open) at 9 AM.", options: ["opens", "open", "opening", "opened"], correct: 0, explanation: "Singular subject 'the shop' takes 'opens'." },
+          { id: 6, text: "We do not ___ (play) football on weekdays.", options: ["play", "plays", "playing", "played"], correct: 0, explanation: "Base form after do not." },
+          { id: 7, text: "___ (do) you want some water?", options: ["Do", "Does", "Are", "Is"], correct: 0, explanation: "Use 'Do' with 'you'." },
+          { id: 8, text: "He ___ (wash) his car every weekend.", options: ["washes", "wash", "washs", "washing"], correct: 0, explanation: "Verbs ending in -sh add '-es' for singular." },
+          { id: 9, text: "My mother ___ (teach) English.", options: ["teaches", "teach", "teachys", "teaching"], correct: 0, explanation: "Verbs ending in -ch add '-es'." },
+          { id: 10, text: "They do not ___ (speak) Russian.", options: ["speak", "speaks", "speaking", "spoke"], correct: 0, explanation: "Base form after do not." },
+          { id: 11, text: "___ (do) it rain a lot here?", options: ["Does", "Do", "Is", "Are"], correct: 0, explanation: "Singular 'it' takes 'Does'." },
+          { id: 12, text: "My father ___ (work) in a bank.", options: ["works", "work", "working", "worked"], correct: 0, explanation: "Singular 'my father' takes 'works'." },
+          { id: 13, text: "Cats ___ (hate) water.", options: ["hate", "hates", "hating", "hated"], correct: 0, explanation: "Plural subject 'cats' takes 'hate'." },
+          { id: 14, text: "She ___ (go) to bed late.", options: ["goes", "go", "going", "went"], correct: 0, explanation: "Verbs ending in -o add '-es'." },
+          { id: 15, text: "I ___ (have) two brothers.", options: ["have", "has", "having", "had"], correct: 0, explanation: "Subject 'I' takes 'have'." },
+          { id: 16, text: "He ___ (has) a nice car.", options: ["has", "have", "haves", "had"], correct: 0, explanation: "'have' changes to 'has' for third person singular." },
+          { id: 17, text: "___ (do) the classes start at 8 AM?", options: ["Do", "Does", "Are", "Is"], correct: 0, explanation: "Plural 'classes' takes 'Do'." },
+          { id: 18, text: "We ___ (live) in a small town.", options: ["live", "lives", "living", "lived"], correct: 0, explanation: "Subject 'we' takes 'live'." },
+          { id: 19, text: "She does not ___ (know) the answer.", options: ["know", "knows", "knowing", "knew"], correct: 0, explanation: "Base form after does not." },
+          { id: 20, text: "The earth ___ (go) around the sun.", options: ["goes", "go", "going", "went"], correct: 0, explanation: "General truth: singular subject takes 'goes'." }
+        ],
+        scrambled: [
+          { id: 1, words: ["every", "goes", "he", "gym", "to", "day", "the"], answer: "he goes to the gym every day", explanation: "Subject + verb + place + time expression." },
+          { id: 2, words: ["like", "not", "I", "do", "cold", "milk"], answer: "I do not like cold milk", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 3, words: ["she", "where", "does", "live", "?"], answer: "where does she live", explanation: "Question word + auxiliary + subject + verb." },
+          { id: 4, words: ["rises", "sun", "the", "in", "east", "the"], answer: "the sun rises in the east", explanation: "Subject + verb + place prepositional phrase." },
+          { id: 5, words: ["speak", "do", "English", "they", "?"], answer: "do they speak English", explanation: "Auxiliary + subject + verb + object." },
+          { id: 6, words: ["studies", "my", "sister", "a", "lot"], answer: "my sister studies a lot", explanation: "Subject + verb + modifier." },
+          { id: 7, words: ["he", "coffee", "drink", "not", "does"], answer: "he does not drink coffee", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 8, words: ["you", "do", "near", "here", "live", "?"], answer: "do you live near here", explanation: "Auxiliary + subject + verb + place." },
+          { id: 9, words: ["boils", "water", "100", "at", "degrees"], answer: "water boils at 100 degrees", explanation: "Subject + verb + prepositional phrase." },
+          { id: 10, words: ["in", "they", "live", "Tashkent"], answer: "they live in Tashkent", explanation: "Subject + verb + place." },
+          { id: 11, words: ["play", "on", "football", "they", "do", "Sundays", "?"], answer: "do they play football on Sundays", explanation: "Auxiliary + subject + verb + object + time." },
+          { id: 12, words: ["always", "does", "her", "she", "homework"], answer: "she always does her homework", explanation: "Subject + frequency adverb + verb + object." },
+          { id: 13, words: ["a", "have", "we", "car", "not", "do"], answer: "we do not have a car", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 14, words: ["hard", "works", "every", "he", "day"], answer: "he works hard every day", explanation: "Subject + verb + adverb + time." },
+          { id: 15, words: ["what", "does", "train", "the", "leave", "time", "?"], answer: "what time does the train leave", explanation: "Question phrase + auxiliary + subject + verb." },
+          { id: 16, words: ["get", "up", "usually", "I", "6", "at", "AM"], answer: "I usually get up at 6 AM", explanation: "Subject + frequency adverb + verb + prepositional phrase." },
+          { id: 17, words: ["drink", "not", "she", "does", "tea"], answer: "she does not drink tea", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 18, words: ["snow", "does", "it", "here", "?"], answer: "does it snow here", explanation: "Auxiliary + subject + verb + place." },
+          { id: 19, words: ["my", "friend", "pictures", "draws", "nice"], answer: "my friend draws nice pictures", explanation: "Subject + verb + adjective-noun object." },
+          { id: 20, words: ["never", "they", "late", "arrive"], answer: "they never arrive late", explanation: "Subject + frequency adverb + verb + adverb." }
+        ],
+        errorCorrection: [
+          { id: 1, text: "He work in a bank.", options: ["He", "work", "in a", "bank"], correct: 1, wrongPart: "work", correction: "works", explanation: "Singular subject 'he' requires 'works' (adds -s)." },
+          { id: 2, text: "I does not like tea.", options: ["I", "does not", "like", "tea"], correct: 1, wrongPart: "does not", correction: "do not", explanation: "Subject 'I' uses 'do not' (don't)." },
+          { id: 3, text: "Does she lives in London?", options: ["Does", "she", "lives", "in London"], correct: 2, wrongPart: "lives", correction: "live", explanation: "After does, use base verb form 'live' without -s." },
+          { id: 4, text: "They goes to school by bus.", options: ["They", "goes", "to school", "by bus"], correct: 1, wrongPart: "goes", correction: "go", explanation: "Plural subject 'they' takes base form 'go'." },
+          { id: 5, text: "Water boil at 100 degrees.", options: ["Water", "boil", "at 100", "degrees"], correct: 1, wrongPart: "boil", correction: "boils", explanation: "Countable/uncountable facts take singular verb: 'boils'." },
+          { id: 6, text: "My sister study history.", options: ["My sister", "study", "history", "No error"], correct: 1, wrongPart: "study", correction: "studies", explanation: "Singular subject takes 'studies' (-y changes to -ies)." },
+          { id: 7, text: "We doesn't have a dog.", options: ["We", "doesn't", "have", "a dog"], correct: 1, wrongPart: "doesn't", correction: "don't", explanation: "Plural subject 'we' takes 'don't'." },
+          { id: 8, text: "Do he play video games?", options: ["Do", "he", "play", "video games"], correct: 0, wrongPart: "Do", correction: "Does", explanation: "Singular subject 'he' starts question with 'Does'." },
+          { id: 9, text: "The sun rise in the east.", options: ["The sun", "rise", "in the", "east"], correct: 1, wrongPart: "rise", correction: "rises", explanation: "Singular subject 'the sun' takes 'rises'." },
+          { id: 10, text: "She watch TV every night.", options: ["She", "watch", "TV", "every night"], correct: 1, wrongPart: "watch", correction: "watches", explanation: "Verbs ending in -ch add '-es': 'watches'." },
+          { id: 11, text: "They don't likes onions.", options: ["They", "don't", "likes", "onions"], correct: 2, wrongPart: "likes", correction: "like", explanation: "Use base form 'like' after don't." },
+          { id: 12, text: "Where do she work?", options: ["Where", "do", "she", "work"], correct: 1, wrongPart: "do", correction: "does", explanation: "Singular subject 'she' takes auxiliary 'does'." },
+          { id: 13, text: "I am live in Tashkent.", options: ["I", "am live", "in", "Tashkent"], correct: 1, wrongPart: "am live", correction: "live", explanation: "Do not use 'am' with action verbs in Present Simple: 'I live'." },
+          { id: 14, text: "He does his homework always.", options: ["He", "does", "his homework", "always"], correct: 3, wrongPart: "always", correction: "always does", explanation: "Adverbs of frequency go before the main verb." },
+          { id: 15, text: "The train leave at 8 AM.", options: ["The train", "leave", "at 8", "AM"], correct: 1, wrongPart: "leave", correction: "leaves", explanation: "Singular 'the train' takes 'leaves'." },
+          { id: 16, text: "Do they has any children?", options: ["Do", "they", "has", "any children"], correct: 2, wrongPart: "has", correction: "have", explanation: "Question form uses base verb 'have'." },
+          { id: 17, text: "She teachs French.", options: ["She", "teachs", "French", "No error"], correct: 1, wrongPart: "teachs", correction: "teaches", explanation: "Verbs ending in -ch add '-es': 'teaches'." },
+          { id: 18, text: "We plays tennis together.", options: ["We", "plays", "tennis", "together"], correct: 1, wrongPart: "plays", correction: "play", explanation: "Plural 'we' takes base form 'play'." },
+          { id: 19, text: "He don't know my phone number.", options: ["He", "don't", "know", "my number"], correct: 1, wrongPart: "don't", correction: "doesn't", explanation: "Singular subject 'he' takes 'doesn't'." },
+          { id: 20, text: "The earth go around the sun.", options: ["The earth", "go", "around", "the sun"], correct: 1, wrongPart: "go", correction: "goes", explanation: "Singular 'the earth' takes 'goes'." }
+        ],
+        transform: [
+          { id: 1, text: "Make negative: 'He lives in Tashkent.'", options: ["He not lives in Tashkent.", "He doesn't live in Tashkent.", "He doesn't lives in Tashkent.", "He don't live in Tashkent."], correct: 1, explanation: "Use doesn't + base verb: 'He doesn't live in Tashkent'." },
+          { id: 2, text: "Make question: 'She works hard.'", options: ["Does she works hard?", "Do she work hard?", "Does she work hard?", "Works she hard?"], correct: 2, explanation: "Use Does + subject + base verb: 'Does she work hard?'." },
+          { id: 3, text: "Transform to negative: 'They play football.'", options: ["They don't play football.", "They doesn't play football.", "They don't plays football.", "They not play football."], correct: 0, explanation: "Plural subject uses don't: 'They don't play football'." },
+          { id: 4, text: "Make question: 'You speak French.'", options: ["Do you speak French?", "Does you speak French?", "Do you speaks French?", "Speak you French?"], correct: 0, explanation: "Use Do + subject + base verb: 'Do you speak French?'." },
+          { id: 5, text: "Transform to negative: 'I drink coffee.'", options: ["I doesn't drink coffee.", "I don't drink coffee.", "I am not drink coffee.", "I not drink coffee."], correct: 1, explanation: "Use don't + base verb: 'I don't drink coffee'." },
+          { id: 6, text: "Make question: 'It rains a lot here.'", options: ["Does it rain a lot here?", "Do it rain a lot here?", "Does it rains a lot here?", "Is it rain a lot here?"], correct: 0, explanation: "Use Does + subject + base verb: 'Does it rain a lot here?'." },
+          { id: 7, text: "Transform to negative: 'My sister studies law.'", options: ["My sister doesn't study law.", "My sister doesn't studies law.", "My sister don't study law.", "My sister not studies law."], correct: 0, explanation: "Use doesn't + base verb: 'My sister doesn't study law'." },
+          { id: 8, text: "Make question: 'They want some tea.'", options: ["Do they want some tea?", "Does they want some tea?", "Do they wants some tea?", "Want they some tea?"], correct: 0, explanation: "Use Do + subject + base verb: 'Do they want some tea?'." },
+          { id: 9, text: "Transform to negative: 'We live here.'", options: ["We doesn't live here.", "We don't live here.", "We not live here.", "We don't lives here."], correct: 1, explanation: "Use don't + base verb: 'We don't live here'." },
+          { id: 10, text: "Make question: 'He reads books.'", options: ["Does he reads books?", "Does he read books?", "Do he read books?", "Reads he books?"], correct: 1, explanation: "Use Does + subject + base verb: 'Does he read books?'." },
+          { id: 11, text: "Transform to negative: 'Water boils at 90 degrees.'", options: ["Water doesn't boil at 90 degrees.", "Water doesn't boils at 90 degrees.", "Water don't boil at 90 degrees.", "Water not boils at 90 degrees."], correct: 0, explanation: "Use doesn't + base verb: 'Water doesn't boil at 90 degrees'." },
+          { id: 12, text: "Make question: 'You need a pen.'", options: ["Do you need a pen?", "Does you need a pen?", "Do you needs a pen?", "Need you a pen?"], correct: 0, explanation: "Use Do + subject + base verb: 'Do you need a pen?'." },
+          { id: 13, text: "Transform to negative: 'The train leaves at 5.'", options: ["The train doesn't leave at 5.", "The train doesn't leaves at 5.", "The train don't leave at 5.", "The train not leaves at 5."], correct: 0, explanation: "Use doesn't + base verb: 'The train doesn't leave at 5'." },
+          { id: 14, text: "Make question: 'She washes her hair every day.'", options: ["Does she wash her hair every day?", "Does she washes her hair every day?", "Do she wash her hair every day?", "Washes she her hair every day?"], correct: 0, explanation: "Use Does + subject + base verb: 'Does she wash her hair every day?'." },
+          { id: 15, text: "Transform to negative: 'My parents work in Samarkand.'", options: ["My parents don't work in Samarkand.", "My parents doesn't work in Samarkand.", "My parents don't works in Samarkand.", "My parents not work in Samarkand."], correct: 0, explanation: "Plural subject uses don't: 'My parents don't work in Samarkand'." },
+          { id: 16, text: "Make question: 'The shop opens early.'", options: ["Does the shop open early?", "Does the shop opens early?", "Do the shop open early?", "Opens the shop early?"], correct: 0, explanation: "Use Does + subject + base verb: 'Does the shop open early?'." },
+          { id: 17, text: "Transform to negative: 'I watch comedies.'", options: ["I don't watch comedies.", "I doesn't watch comedies.", "I am not watch comedies.", "I not watch comedies."], correct: 0, explanation: "Use don't + base verb: 'I don't watch comedies'." },
+          { id: 18, text: "Make question: 'They speak German.'", options: ["Do they speak German?", "Does they speak German?", "Do they speaks German?", "Speak they German?"], correct: 0, explanation: "Use Do + subject + base verb: 'Do they speak German?'." },
+          { id: 19, text: "Transform to negative: 'It snows in April.'", options: ["It doesn't snow in April.", "It doesn't snows in April.", "It don't snow in April.", "It not snows in April."], correct: 0, explanation: "Use doesn't + base verb: 'It doesn't snow in April'." },
+          { id: 20, text: "Make question: 'We have homework.'", options: ["Do we have homework?", "Does we have homework?", "Do we has homework?", "Have we homework?"], correct: 0, explanation: "Use Do + subject + base verb: 'Do we have homework?'." }
+        ],
+        dialogue: [
+          { id: 1, situation: "Talking about daily routines.", dialogue: "A: What time do you wake up?\nB: I usually ___ up at 7 AM.", options: ["get", "gets", "getting", "got"], correct: 0, explanation: "I + get (base form)." },
+          { id: 2, situation: "Asking about language skills.", dialogue: "A: Does your brother speak English?\nB: Yes, he ___ English very well.", options: ["speaks", "speak", "speaking", "spoke"], correct: 0, explanation: "He + speaks (adds -s)." },
+          { id: 3, situation: "Meeting a new person.", dialogue: "A: Where do you live?\nB: I ___ in Tashkent.", options: ["live", "lives", "living", "lived"], correct: 0, explanation: "I + live (base form)." },
+          { id: 4, situation: "Asking about someone's job.", dialogue: "A: What does your mother do?\nB: She ___ in a school.", options: ["works", "work", "working", "worked"], correct: 0, explanation: "She + works (adds -s)." },
+          { id: 5, situation: "Discussing transport.", dialogue: "A: How do they go to work?\nB: They usually ___ the subway.", options: ["take", "takes", "taking", "took"], correct: 0, explanation: "They + take (base form)." },
+          { id: 6, situation: "Asking about likes and dislikes.", dialogue: "A: Do you like tea?\nB: No, I ___ like tea. I prefer coffee.", options: ["don't", "doesn't", "aren't", "not"], correct: 0, explanation: "I + don't (do not) for negative." },
+          { id: 7, situation: "Talking about a sibling.", dialogue: "A: Does he play football?\nB: No, he ___ play football. He plays tennis.", options: ["doesn't", "don't", "isn't", "not"], correct: 0, explanation: "He + doesn't (does not) for negative." },
+          { id: 8, situation: "Inquiring about shop hours.", dialogue: "A: When ___ the supermarkets open here?\nB: Usually at 8 AM.", options: ["do", "does", "are", "is"], correct: 0, explanation: "Plural 'supermarkets' takes auxiliary 'do'." },
+          { id: 9, situation: "Discussing weekends.", dialogue: "A: What do you do on weekends?\nB: We often ___ a movie together.", options: ["watch", "watches", "watching", "watched"], correct: 0, explanation: "We + watch (base form)." },
+          { id: 10, situation: "Asking about the weather.", dialogue: "A: Does it rain much in summer?\nB: No, it rarely ___ in summer.", options: ["rains", "rain", "running", "rained"], correct: 0, explanation: "It + rains (adds -s)." },
+          { id: 11, situation: "Asking about a dog.", dialogue: "A: Does your dog bark at guests?\nB: No, it ___ bark at anyone.", options: ["doesn't", "don't", "isn't", "not"], correct: 0, explanation: "It + doesn't." },
+          { id: 12, situation: "Talking about study schedules.", dialogue: "A: When do you study?\nB: I always ___ in the afternoon.", options: ["study", "studies", "studying", "studied"], correct: 0, explanation: "I + study." },
+          { id: 13, situation: "Discussing parent occupations.", dialogue: "A: Where do your parents work?\nB: They ___ in a hospital.", options: ["work", "works", "working", "worked"], correct: 0, explanation: "They + work." },
+          { id: 14, situation: "Asking about a train timetable.", dialogue: "A: What time ___ the last train arrive?\nB: At midnight.", options: ["does", "do", "is", "are"], correct: 0, explanation: "Singular 'train' takes 'does'." },
+          { id: 15, situation: "Discussing sports habits.", dialogue: "A: Does your friend play tennis?\nB: Yes, she ___ every Sunday.", options: ["plays", "play", "playing", "played"], correct: 0, explanation: "She + plays." },
+          { id: 16, situation: "Talking about a favorite meal.", dialogue: "A: Do you eat breakfast?\nB: Yes, I always ___ eggs.", options: ["eat", "eats", "eating", "ate"], correct: 0, explanation: "I + eat." },
+          { id: 17, situation: "Discussing cleaning duties.", dialogue: "A: Who washes the dishes?\nB: My brother always ___ them.", options: ["washes", "wash", "washs", "washing"], correct: 0, explanation: "Singular subject 'my brother' takes 'washes'." },
+          { id: 18, situation: "Talking about a cat.", dialogue: "A: Where does your cat sleep?\nB: It usually ___ on my bed.", options: ["sleeps", "sleep", "sleeping", "slept"], correct: 0, explanation: "It + sleeps." },
+          { id: 19, situation: "Talking about university study.", dialogue: "A: Does John study history?\nB: No, he ___ computer science.", options: ["studies", "study", "studying", "studyed"], correct: 0, explanation: "He + studies." },
+          { id: 20, situation: "Chatting about travel.", dialogue: "A: How often do they travel?\nB: They ___ abroad every year.", options: ["go", "goes", "going", "went"], correct: 0, explanation: "They + go." }
+        ]
+      },
+
     ]
   }
 };
