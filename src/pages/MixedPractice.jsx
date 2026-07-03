@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ref, update } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
-import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
@@ -12,7 +11,6 @@ import './MixedPractice.css';
 
 export default function MixedPractice() {
   const { user } = useAuth();
-  const { books, loading: booksLoading } = useBooks();
   const { packs, loading: packsLoading } = usePacks();
   const navigate = useNavigate();
 
@@ -26,26 +24,12 @@ export default function MixedPractice() {
   const [correctCount, setCorrectCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Extract and combine all words from all books and packs
+  // Extract all words from all packs
   useEffect(() => {
-    if (booksLoading || packsLoading) return;
+    if (packsLoading) return;
     if (!user) return;
 
     let allWords = [];
-
-    // Extract book words
-    books.forEach(book => {
-      const wordsObj = book.words || {};
-      Object.keys(wordsObj).forEach(wordId => {
-        allWords.push({
-          id: wordId,
-          ...wordsObj[wordId],
-          source: book.title,
-          sourceType: 'books',
-          sourceId: book.id
-        });
-      });
-    });
 
     // Extract pack words
     packs.forEach(pack => {
@@ -63,7 +47,7 @@ export default function MixedPractice() {
 
     setMixedWordsPool(allWords);
     setLoading(false);
-  }, [user, books, packs, booksLoading, packsLoading]);
+  }, [user, packs, packsLoading]);
 
   // Generate question queue
   const startSession = (wordsPool) => {
@@ -227,7 +211,7 @@ export default function MixedPractice() {
     }
   };
 
-  const pageLoading = loading || booksLoading || packsLoading;
+  const pageLoading = loading || packsLoading;
 
   return (
     <div className="mixed-practice-page">

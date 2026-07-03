@@ -60,3 +60,9 @@
   border-color: currentColor;
   background: var(--bg-tertiary);
 }
+
+.icon-swatch.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}

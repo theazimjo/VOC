@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
-import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import { getMasteryLevel } from '../utils/sm2';
 import './Dashboard.css';
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { books } = useBooks();
   const { packs } = usePacks();
   const [recentWords, setRecentWords] = useState([]);
   const [totalWords, setTotalWords] = useState(0);
@@ -21,19 +19,6 @@ export default function Dashboard() {
     if (!user) return;
 
     let allWords = [];
-
-    // Extract nested words from books
-    books.forEach(book => {
-      const wordsObj = book.words || {};
-      Object.keys(wordsObj).forEach(wordId => {
-        allWords.push({
-          id: wordId,
-          ...wordsObj[wordId],
-          source: book.title,
-          sourceType: 'book'
-        });
-      });
-    });
 
     // Extract nested words from packs
     packs.forEach(pack => {
@@ -57,7 +42,7 @@ export default function Dashboard() {
     // Sort by addedAt and take recent 5
     allWords.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
     setRecentWords(allWords.slice(0, 5));
-  }, [user, books, packs]);
+  }, [user, packs]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();

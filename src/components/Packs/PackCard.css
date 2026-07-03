@@ -11,6 +11,8 @@
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  width: 100%;
+  min-width: 0;
 }
 
 .pack-card-horizontal:hover {
@@ -54,7 +56,9 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .pack-card-title {
@@ -65,6 +69,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
 }
 
 .pack-card-level-badge {
@@ -83,6 +89,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 100%;
 }
 
 .pack-card-meta-container {

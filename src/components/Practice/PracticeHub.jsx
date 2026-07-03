@@ -1,8 +1,21 @@
 import { motion } from 'framer-motion';
 import './PracticeHub.css';
 
-export default function PracticeHub({ onSelectMode }) {
-  const modes = [
+export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
+  const modes = [];
+
+  if (isIrregularVerbs) {
+    modes.push({
+      id: 'irregular-verbs',
+      icon: '⚡',
+      title: "Fe'llar Trenajyori",
+      desc: "Noto'g'ri fe'llarning V1, V2, V3 shakllarini yozib mashq qiling",
+      badge: 'Tavsiya etiladi 🌟',
+      glowColor: 'hsl(165, 85%, 50%)'
+    });
+  }
+
+  modes.push(
     {
       id: 'flashcard',
       icon: '🎴',
@@ -67,7 +80,7 @@ export default function PracticeHub({ onSelectMode }) {
       badge: 'Multiplayer 👤vs👤',
       glowColor: 'hsl(360, 85%, 55%)'
     }
-  ];
+  );
 
   return (
     <div className="practice-hub">

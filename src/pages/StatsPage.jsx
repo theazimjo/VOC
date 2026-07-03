@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
-import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { grammarData, germanGrammarData } from '../data/grammarData';
@@ -9,7 +8,6 @@ import './StatsPage.css';
 
 export default function StatsPage() {
   const { user } = useAuth();
-  const { books } = useBooks();
   const { packs } = usePacks();
   const { stats: grammarStats, loading: grammarLoading } = useGrammarStats();
   const [allWords, setAllWords] = useState([]);
@@ -19,20 +17,6 @@ export default function StatsPage() {
     if (!user) return;
 
     let words = [];
-    
-    // Extract nested words from books
-    books.forEach(book => {
-      const wordsObj = book.words || {};
-      Object.keys(wordsObj).forEach(wordId => {
-        words.push({
-          id: wordId,
-          ...wordsObj[wordId],
-          source: book.title,
-          sourceType: 'books',
-          sourceIcon: '📖'
-        });
-      });
-    });
 
     // Extract nested words from packs
     packs.forEach(pack => {
@@ -50,7 +34,7 @@ export default function StatsPage() {
 
     setAllWords(words);
     setLoading(false);
-  }, [user, books, packs]);
+  }, [user, packs]);
 
   // Stats calculations
 

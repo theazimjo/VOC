@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
-import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
@@ -18,17 +17,17 @@ import SpacedRepetition from '../components/Practice/SpacedRepetition';
 import DictationGame from '../components/Practice/DictationGame';
 import PronounceGame from '../components/Practice/PronounceGame';
 import DuelGame from '../components/Practice/DuelGame';
+import IrregularVerbsTrainer from '../components/Practice/IrregularVerbsTrainer';
 import './PracticePage.css';
 
 export default function PracticePage() {
   const { sourceType: urlSourceType, sourceId: urlSourceId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { books, loading: booksLoading } = useBooks();
   const { packs, loading: packsLoading } = usePacks();
   
-  const [step, setStep] = useState('source'); // 'source' | 'mode' | 'practice' | 'results'
-  const [sourceType, setSourceType] = useState('books');
+  const [step, setStep] = useState(urlSourceId ? 'loading' : 'source'); // 'loading' | 'source' | 'mode' | 'practice' | 'results'
+  const [sourceType, setSourceType] = useState('packs');
   const [selectedSource, setSelectedSource] = useState(null);
   const [selectedMode, setSelectedMode] = useState(null);
   const [wordCount, setWordCount] = useState(10);
@@ -37,6 +36,7 @@ export default function PracticePage() {
   const [sourceWords, setSourceWords] = useState([]);
   const [sourceLoaded, setSourceLoaded] = useState(false);
   const [wrongWords, setWrongWords] = useState([]);
+  const [randomIntroWord, setRandomIntroWord] = useState(null);
   const [customModal, setCustomModal] = useState({ show: false, type: 'alert', message: '', onConfirm: null, onCancel: null });
 
   const showAlert = (message, onClose = null) => {
@@ -47,6 +47,8 @@ export default function PracticePage() {
     setCustomModal({ show: true, type: 'confirm', message, onConfirm, onCancel });
   };
 
+  const resolvedSourceType = urlSourceType === 'books' ? 'packs' : (urlSourceType || 'packs');
+
   // Reset sourceLoaded when url parameters change
   useEffect(() => {
     setSourceLoaded(false);
@@ -54,20 +56,19 @@ export default function PracticePage() {
 
   // Load parameterized source if available
   useEffect(() => {
-    if (sourceLoaded) return;
+    if (sourceLoaded || !user) return; // Wait for user info to load before executing search and fetch
 
-    if (urlSourceType && urlSourceId && !booksLoading && !packsLoading) {
-      const activeList = urlSourceType === 'books' ? books : packs;
-      const foundSource = activeList.find(s => s.id === urlSourceId);
+    if (resolvedSourceType && urlSourceId && !packsLoading) {
+      const foundSource = packs.find(s => s.id === urlSourceId);
       if (foundSource) {
-        setSourceType(urlSourceType);
+        setStep('loading');
+        setSourceType('packs');
         setSelectedSource(foundSource);
         setSourceLoaded(true);
         
         // Fetch words for this source
         const fetchWords = async () => {
-          if (!user) return;
-          const wordsRef = ref(db, `users/${user.uid}/${urlSourceType}/${urlSourceId}/words`);
+          const wordsRef = ref(db, `users/${user.uid}/packs/${urlSourceId}/words`);
           const wordsSnap = await get(wordsRef);
           let words = [];
           if (wordsSnap.exists()) {
@@ -77,19 +78,26 @@ export default function PracticePage() {
           }
           if (words.length === 0) {
             showAlert("Bu manbada so'zlar yo'q! Avval so'zlar qo'shing.", () => {
-              navigate(urlSourceType === 'books' ? `/books/${urlSourceId}` : `/packs/${urlSourceId}`);
+              navigate(`/packs/${urlSourceId}`);
             });
             return;
           }
           setSourceWords(words);
-          setStep('mode');
+          
+          if (foundSource.name === 'Irregular Verbs') {
+            setSelectedMode('irregular-verbs');
+            setPracticeWords(words);
+            setStep('intro');
+          } else {
+            setStep('mode');
+          }
         };
         fetchWords();
       } else {
         navigate('/library');
       }
     }
-  }, [urlSourceType, urlSourceId, booksLoading, packsLoading, books, packs, user, navigate, sourceLoaded]);
+  }, [urlSourceType, resolvedSourceType, urlSourceId, packsLoading, packs, user, navigate, sourceLoaded]);
 
   // Warn before closing tab during active practice
   useEffect(() => {
@@ -109,10 +117,18 @@ export default function PracticePage() {
     
     const timerId = setTimeout(() => {
       setStep('practice');
-    }, 2400);
+    }, 3200); // slightly longer loading time to allow reading the tip
 
     return () => clearTimeout(timerId);
   }, [step]);
+
+  // Choose a random word for the loading screen tip
+  useEffect(() => {
+    if (step === 'intro' && practiceWords.length > 0) {
+      const idx = Math.floor(Math.random() * practiceWords.length);
+      setRandomIntroWord(practiceWords[idx]);
+    }
+  }, [step, practiceWords]);
 
   const sources = sourceType === 'books' ? books : packs;
 
@@ -135,7 +151,13 @@ export default function PracticePage() {
     }
 
     setSourceWords(words);
-    setStep('mode');
+    if (source.name === 'Irregular Verbs') {
+      setSelectedMode('irregular-verbs');
+      setPracticeWords(words);
+      setStep('intro');
+    } else {
+      setStep('mode');
+    }
   };
 
   const reloadWordsAndLessons = async () => {
@@ -242,30 +264,55 @@ export default function PracticePage() {
   const handleBack = () => {
     if (step === 'practice' || step === 'intro') {
       showConfirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.", () => {
-        setStep('mode');
+        if (selectedSource?.name === 'Irregular Verbs') {
+          if (urlSourceId) {
+            navigate(`/packs/${urlSourceId}`);
+          } else {
+            setStep('source');
+          }
+        } else {
+          setStep('mode');
+        }
       });
       return;
     }
 
     if (step === 'mode') {
       if (urlSourceId) {
-        navigate(urlSourceType === 'books' ? `/books/${urlSourceId}` : `/packs/${urlSourceId}`);
+        navigate(`/packs/${urlSourceId}`);
       } else {
         setStep('source');
       }
     }
-    else if (step === 'results') setStep('mode');
+    else if (step === 'results') {
+      if (selectedSource?.name === 'Irregular Verbs') {
+        if (urlSourceId) {
+          navigate(`/packs/${urlSourceId}`);
+        } else {
+          setStep('source');
+        }
+      } else {
+        setStep('mode');
+      }
+    }
   };
 
   const handleReset = () => {
-    setSelectedMode(null);
     setResults(null);
-    setPracticeWords([]);
     setWrongWords([]);
-    if (urlSourceId) {
-      setStep('mode');
+    
+    if (selectedSource?.name === 'Irregular Verbs') {
+      setSelectedMode('irregular-verbs');
+      setPracticeWords(sourceWords);
+      setStep('intro');
     } else {
-      setStep('source');
+      setSelectedMode(null);
+      setPracticeWords([]);
+      if (urlSourceId) {
+        setStep('mode');
+      } else {
+        setStep('source');
+      }
     }
   };
 
@@ -287,11 +334,12 @@ export default function PracticePage() {
       case 'pronounce': return <PronounceGame {...props} />;
       case 'spaced': return <SpacedRepetition {...props} />;
       case 'duel': return <DuelGame words={practiceWords} onComplete={handleComplete} user={user} />;
+      case 'irregular-verbs': return <IrregularVerbsTrainer {...props} />;
       default: return null;
     }
   };
 
-  const pageLoading = booksLoading || packsLoading;
+  const pageLoading = packsLoading;
 
   return (
     <div className="practice-page">
@@ -306,7 +354,7 @@ export default function PracticePage() {
         </h1>
       </div>
 
-      {pageLoading ? (
+      {(pageLoading || step === 'loading') ? (
         <div className="empty-state"><p>Yuklanmoqda...</p></div>
       ) : (
         <AnimatePresence mode="wait">
@@ -319,39 +367,22 @@ export default function PracticePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <h2>📖 Manbani tanlang</h2>
-              
-              <div className="source-tabs-container">
-                <div className="source-tabs">
-                  <button
-                    className={`source-tab ${sourceType === 'books' ? 'active' : ''}`}
-                    onClick={() => { setSourceType('books'); setSelectedSource(null); }}
-                  >
-                    📚 Kitoblar
-                  </button>
-                  <button
-                    className={`source-tab ${sourceType === 'packs' ? 'active' : ''}`}
-                    onClick={() => { setSourceType('packs'); setSelectedSource(null); }}
-                  >
-                    To'plamlar
-                  </button>
-                </div>
-              </div>
+              <h2>📦 To'plamni tanlang</h2>
 
-              {sources.length > 0 ? (
+              {packs.length > 0 ? (
                 <div className="source-list">
-                  {sources.map(source => (
+                  {packs.map(source => (
                     <button
                       key={source.id}
                       className="source-option"
                       onClick={() => handleSelectSource(source)}
                     >
                       <div className="source-option-icon">
-                        {sourceType === 'books' ? '📖' : (source.icon || '📦')}
+                        {source.icon || '📦'}
                       </div>
                       <div className="source-option-info">
                         <div className="source-option-name">
-                          {source.title || source.name}
+                          {source.name}
                         </div>
                         <div className="source-option-count">
                           {source.wordCount || 0} ta so'z
@@ -363,11 +394,9 @@ export default function PracticePage() {
                 </div>
               ) : (
                 <div className="empty-state">
-                  <div className="empty-state-icon">{sourceType === 'books' ? '📚' : '📦'}</div>
-                  <h3>
-                    {sourceType === 'books' ? 'Kitoblar topilmadi' : "To'plamlar topilmadi"}
-                  </h3>
-                  <p>Avval {sourceType === 'books' ? 'kitob' : "to'plam"} qo'shing va so'zlar kiriting</p>
+                  <div className="empty-state-icon">📦</div>
+                  <h3>To'plamlar topilmadi</h3>
+                  <p>Avval to'plam yarating va so'zlar kiriting</p>
                 </div>
               )}
             </motion.div>
@@ -396,7 +425,7 @@ export default function PracticePage() {
                   ))}
                 </div>
               </div>
-              <PracticeHub onSelectMode={handleStartPractice} />
+              <PracticeHub onSelectMode={handleStartPractice} isIrregularVerbs={selectedSource?.id === 'irregular-verbs' || selectedSource?.isIrregularVerbs} />
             </motion.div>
           )}
 
@@ -412,71 +441,30 @@ export default function PracticePage() {
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">
-                  {selectedMode === 'flashcard' ? '🎴' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'dictation' ? '🎧' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'spaced' ? '🧠' : '🎮'}
+                  {selectedMode === 'flashcard' ? '🎴' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'dictation' ? '🎧' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'spaced' ? '🧠' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? 'Flashcards' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'dictation' ? 'Diktant' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'spaced' ? 'Takrorlash' : 'Mashq'}
+                  {selectedMode === 'flashcard' ? 'Flashcards' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'dictation' ? 'Diktant' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'spaced' ? 'Takrorlash' : selectedMode === 'irregular-verbs' ? "Fe'llar Trenajyori" : 'Mashq'}
                 </h2>
                 <p>{practiceWords.length} ta so'z tayyorlandi</p>
                 
-                {/* Duolingo style playful shape loader */}
-                <div className="duolingo-loader">
-                  <motion.div 
-                    className="duolingo-shape shape-circle"
-                    animate={{ 
-                      y: [0, -30, 0],
-                      scale: [1, 1.2, 0.9, 1],
-                    }}
-                    transition={{
-                      duration: 0.9,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0
-                    }}
-                  />
-                  <motion.div 
-                    className="duolingo-shape shape-square"
-                    animate={{ 
-                      y: [0, -30, 0],
-                      rotate: [0, 180, 360],
-                      scale: [1, 0.9, 1.2, 1],
-                    }}
-                    transition={{
-                      duration: 0.9,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.18
-                    }}
-                  />
-                  <motion.div 
-                    className="duolingo-shape shape-triangle"
-                    animate={{ 
-                      y: [0, -30, 0],
-                      rotate: [0, -120, -240, -360],
-                      scale: [1, 1.2, 0.9, 1],
-                    }}
-                    transition={{
-                      duration: 0.9,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.36
-                    }}
-                  />
-                  <motion.div 
-                    className="duolingo-shape shape-diamond"
-                    animate={{ 
-                      y: [0, -30, 0],
-                      scale: [1, 0.9, 1.3, 1],
-                    }}
-                    transition={{
-                      duration: 0.9,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.54
-                    }}
-                  />
-                </div>
-                <div className="duolingo-loader-text">Mashq tayyorlanmoqda...</div>
+                {/* Random word learning tip loader */}
+                {randomIntroWord && (
+                  <div className="intro-random-word-box">
+                    <div className="intro-word-label">💡 Kun so'zi (Foydali ma'lumot):</div>
+                    <div className="intro-word-phrase">
+                      <span className="intro-word-en">"{randomIntroWord.word}"</span> 
+                      <span className="intro-word-connector"> means </span> 
+                      <span className="intro-word-uz">"{randomIntroWord.translation}"</span>
+                    </div>
+                    {randomIntroWord.example && (
+                      <p className="intro-word-example">
+                        Misol: <em>{randomIntroWord.example.split('/')[0].trim()}</em>
+                      </p>
+                    )}
+                  </div>
+                )}
+                <div className="duolingo-loader-text" style={{ marginTop: 'var(--space-md)' }}>Mashq tayyorlanmoqda...</div>
               </div>
             </motion.div>
           )}

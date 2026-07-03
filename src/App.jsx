@@ -6,7 +6,6 @@ import RegisterPage from './components/Auth/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Layout from './components/Layout/Layout';
 import Dashboard from './pages/Dashboard';
-import BookDetail from './pages/BookDetail';
 import PackDetail from './pages/PackDetail';
 import PracticePage from './pages/PracticePage';
 import StatsPage from './pages/StatsPage';
@@ -35,9 +34,9 @@ export default function App() {
               <Route element={<Layout />}>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/library" element={<LibraryPage />} />
-                <Route path="/books" element={<Navigate to="/library?tab=books" replace />} />
-                <Route path="/books/:bookId" element={<BookDetail />} />
-                <Route path="/packs" element={<Navigate to="/library?tab=packs" replace />} />
+                <Route path="/books" element={<Navigate to="/library" replace />} />
+                <Route path="/books/:bookId" element={<Navigate to="/packs/:bookId" replace />} />
+                <Route path="/packs" element={<Navigate to="/library" replace />} />
                 <Route path="/packs/:packId" element={<PackDetail />} />
                 <Route path="/practice" element={<PracticePage />} />
                 <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />

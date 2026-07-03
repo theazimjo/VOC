@@ -9,6 +9,8 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const [icon, setIcon] = useState(packIcons[0]);
   const [color, setColor] = useState(bookColors[0]);
 
+  const isLocked = editPack && editPack.name === 'Irregular Verbs';
+
   useEffect(() => {
     if (editPack) {
       setName(editPack.name || '');
@@ -49,6 +51,21 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
             
             <form onSubmit={handleSubmit}>
               <div className="modal-body flex-col gap-md">
+                {isLocked && (
+                  <div style={{
+                    background: 'rgba(20, 184, 166, 0.05)',
+                    border: '1px solid rgba(20, 184, 166, 0.2)',
+                    borderRadius: 'var(--radius-lg)',
+                    padding: 'var(--space-sm) var(--space-md)',
+                    fontSize: 'var(--font-xs)',
+                    color: 'var(--accent-1)',
+                    lineHeight: '1.4',
+                    marginBottom: 'var(--space-sm)'
+                  }}>
+                    ℹ️ Ushbu tayyor to'plamning nomi va ikonkasini o'zgartirib bo'lmaydi. Uni faqat o'chirishingiz mumkin.
+                  </div>
+                )}
+
                 <div className="input-group">
                   <label>To'plam nomi *</label>
                   <input 
@@ -59,6 +76,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     placeholder="Masalan: IELTS Vocabulary"
                     required 
                     autoFocus
+                    disabled={isLocked}
                   />
                 </div>
                 
@@ -78,8 +96,8 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     {packIcons.map((icn, idx) => (
                       <div 
                         key={idx}
-                        className={`icon-swatch ${icon === icn ? 'selected' : ''}`}
-                        onClick={() => setIcon(icn)}
+                        className={`icon-swatch ${icon === icn ? 'selected' : ''} ${isLocked && icon !== icn ? 'disabled' : ''}`}
+                        onClick={() => !isLocked && setIcon(icn)}
                       >
                         {icn}
                       </div>
