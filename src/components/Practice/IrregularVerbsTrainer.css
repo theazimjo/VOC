@@ -1,4 +1,5 @@
 .irregular-trainer-container {
+  width: 100%;
   max-width: 620px !important;
   margin: 0 auto;
   padding: 0 var(--space-sm);
@@ -71,6 +72,8 @@
 }
 
 .study-card {
+  width: 100%;
+  box-sizing: border-box;
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
   border-radius: 14px;
@@ -92,64 +95,66 @@
   letter-spacing: -0.01em;
 }
 
-.study-card-columns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.study-card-col {
+.study-card-rows-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  background: rgba(120, 120, 128, 0.05);
+  width: 100%;
+  background: rgba(120, 120, 128, 0.04);
   border: 1px solid var(--border-light);
-  border-radius: 10px;
-  padding: 12px 8px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.study-card-row-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
   transition: background-color var(--transition-fast);
 }
 
-.study-card-col:hover {
+.study-card-row-item:last-child {
+  border-bottom: none;
+}
+
+.study-card-row-item:hover {
   background: rgba(120, 120, 128, 0.08);
 }
 
-.study-col-title {
-  font-size: 0.6rem;
+.study-row-title {
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-  text-align: center;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
 }
 
-.study-col-val {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  text-align: center;
-  letter-spacing: -0.01em;
+.study-row-val {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--accent-1, #007aff);
+  letter-spacing: -0.015em;
 }
 
 .study-card-example-box {
   width: 100%;
-  background: rgba(120, 120, 128, 0.03);
+  background: rgba(120, 120, 128, 0.02);
   border: 1px solid var(--border-light);
-  border-radius: 12px;
-  padding: 14px;
+  border-radius: 14px;
+  padding: 18px 20px;
   box-sizing: border-box;
   margin-bottom: 20px;
 }
 
 .example-label {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--accent-1, #007aff);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .example-sentences {
@@ -159,33 +164,33 @@
 }
 
 .example-sentence-item {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .example-sentence-item strong {
   color: var(--accent-1, #007aff);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .btn-speak-study-card {
-  background: var(--segmented-bg, rgba(120, 120, 128, 0.12));
-  border: none;
+  background: var(--segmented-bg, rgba(120, 120, 128, 0.08));
+  border: 1px solid var(--border-light);
   color: var(--text-primary);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 10px 22px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  transition: all var(--transition-fast) ease;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .btn-speak-study-card:hover {
-  background: rgba(120, 120, 128, 0.2);
+  background: rgba(120, 120, 128, 0.15);
 }
 
 .study-card-footer {

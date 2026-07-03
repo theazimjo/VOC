@@ -4,7 +4,7 @@ import { calculateNextReview, getDueWords } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './SpacedRepetition.css';
 
-export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAnswer }) {
+export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
   const [dueWords, setDueWords] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -16,6 +16,12 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
   }, [words]);
 
   const currentWord = dueWords[currentIndex];
+
+  useEffect(() => {
+    if (onProgress && dueWords) {
+      onProgress(currentIndex, dueWords.length);
+    }
+  }, [currentIndex, dueWords, onProgress]);
 
   useEffect(() => {
     if (currentWord) speakWord(currentWord.word);
@@ -57,31 +63,18 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
 
   if (dueWords.length === 0) {
     return (
-      <div className="sr-container">
+      <div className="sr-container empty">
         <motion.div
-          className="sr-empty"
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
+          className="sr-empty-card"
         >
           <div className="sr-empty-icon">🎉</div>
-          <h2>Takrorlash muddati kelgan so'zlar yo'q!</h2>
-          <p style={{ fontSize: 'var(--font-sm)', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: 'var(--space-md)' }}>
-            Spaced Repetition (SM-2) algoritmiga ko'ra bugun barcha so'zlarni o'z vaqtida takrorladingiz. Yangi o'rganilgan so'zlar keyinroq takrorlash uchun avtomatik rejalashtiriladi.
-          </p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-sm)', width: '100%', marginTop: 'var(--space-sm)' }}>
-            <button
-              className="sr-reveal-btn"
-              onClick={() => {
-                // Force load all words to review
-                setDueWords(words);
-              }}
-            >
-              🔄 Barchasini baribir takrorlash
-            </button>
-            <button
-              className="btn btn-secondary"
-              style={{ padding: '12px', borderRadius: 'var(--radius-md)', fontWeight: 600 }}
+          <h3>Hammasi o'rganildi!</h3>
+          <p>Hozircha takrorlash uchun so'zlar yo'q. Keyinroq qaytib ko'ring.</p>
+          <div className="result-actions" style={{ justifyContent: 'center', display: 'flex', gap: '10px', marginTop: '16px' }}>
+            <button 
+              className="btn btn-primary" 
               onClick={() => onComplete({ totalWords: 0, correctCount: 0, incorrectCount: 0 })}
             >
               Ortga qaytish
@@ -96,10 +89,6 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
 
   return (
     <div className="sr-container">
-      {/* Progress */}
-      <div className="sr-progress-track">
-        <div className="sr-progress-fill" style={{ width: `${(currentIndex / dueWords.length) * 100}%` }} />
-      </div>
       <div className="sr-progress-label">
         <span><strong>{currentIndex + 1}</strong> / {dueWords.length}</span>
         <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>🧠 Spaced Repetition</span>

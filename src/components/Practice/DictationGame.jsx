@@ -4,7 +4,7 @@ import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './DictationGame.css';
 
-export default function DictationGame({ words, onComplete, onUpdateWord, onAnswer }) {
+export default function DictationGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [status, setStatus] = useState('playing'); // playing | correct | wrong
@@ -15,6 +15,13 @@ export default function DictationGame({ words, onComplete, onUpdateWord, onAnswe
   const inputRef = useRef(null);
 
   const currentWord = words[currentIndex];
+
+  // Report progress
+  useEffect(() => {
+    if (onProgress && words) {
+      onProgress(currentIndex, words.length);
+    }
+  }, [currentIndex, words, onProgress]);
 
   useEffect(() => {
     if (!currentWord) return;
@@ -75,10 +82,6 @@ export default function DictationGame({ words, onComplete, onUpdateWord, onAnswe
 
   return (
     <div className="dictation-container">
-      {/* Progress */}
-      <div className="dictation-progress-track">
-        <div className="dictation-progress-fill" style={{ width: `${(currentIndex / words.length) * 100}%` }} />
-      </div>
       <div className="dictation-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
       </div>

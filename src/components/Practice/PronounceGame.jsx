@@ -4,7 +4,7 @@ import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './PronounceGame.css';
 
-export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswer }) {
+export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isListening, setIsListening] = useState(false);
   const [status, setStatus] = useState('playing'); // playing, correct, wrong, unsupported, skipped
@@ -17,6 +17,13 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
   const recognitionRef = useRef(null);
 
   const currentWord = words[currentIndex];
+
+  // Report progress
+  useEffect(() => {
+    if (onProgress && words) {
+      onProgress(currentIndex, words.length);
+    }
+  }, [currentIndex, words, onProgress]);
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -160,10 +167,6 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
 
   return (
     <div className="pronounce-container">
-      {/* Progress bar */}
-      <div className="pronounce-progress-track">
-        <div className="pronounce-progress-fill" style={{ width: `${(currentIndex / words.length) * 100}%` }} />
-      </div>
       <div className="pronounce-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
         {status !== 'unsupported' && (

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { playSound } from '../../utils/feedback';
 import './IrregularVerbsTrainer.css';
 
-export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName }) {
+export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName, onProgress }) {
   const [sessionVerbs, setSessionVerbs] = useState([]);
   const [subStep, setSubStep] = useState('study'); // 'study' | 'practice'
   const [studyIndex, setStudyIndex] = useState(0);
@@ -39,6 +39,17 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     const targets = correctOption.toLowerCase().split('/').map(t => t.trim());
     return targets.includes(cleaned);
   };
+
+  // Report progress
+  useEffect(() => {
+    if (onProgress) {
+      if (subStep === 'study' && sessionVerbs) {
+        onProgress(studyIndex, sessionVerbs.length || words.length);
+      } else if (subStep === 'practice' && sessionVerbs) {
+        onProgress(currentIndex, sessionVerbs.length);
+      }
+    }
+  }, [subStep, studyIndex, currentIndex, sessionVerbs, words, onProgress]);
 
   // Speak verbs
   const speakVerbs = (v1, v2, v3) => {
@@ -340,9 +351,6 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
         <div className="study-flow">
           <div className="practice-card-header study-header">
             <span className="practice-source-badge">📚 Fe'llarni o'rganish ({studyIndex + 1}/{sessionVerbs.length})</span>
-            <button className="btn-skip-study" onClick={() => setSubStep('practice')}>
-              Mashqni boshlash 🚀
-            </button>
           </div>
 
           <AnimatePresence mode="wait">
@@ -358,19 +366,19 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                 {sessionVerbs[studyIndex].translation}
               </div>
 
-              {/* 3 Columns Display */}
-              <div className="study-card-columns">
-                <div className="study-card-col">
-                  <span className="study-col-title">V1 (Infinitive)</span>
-                  <span className="study-col-val">{sessionVerbs[studyIndex].v1}</span>
+              {/* iOS-Style Grouped Rows for V1, V2, V3 */}
+              <div className="study-card-rows-list">
+                <div className="study-card-row-item">
+                  <span className="study-row-title">V1 (Infinitive)</span>
+                  <span className="study-row-val">{sessionVerbs[studyIndex].v1}</span>
                 </div>
-                <div className="study-card-col">
-                  <span className="study-col-title">V2 (Past Simple)</span>
-                  <span className="study-col-val">{sessionVerbs[studyIndex].v2}</span>
+                <div className="study-card-row-item">
+                  <span className="study-row-title">V2 (Past Simple)</span>
+                  <span className="study-row-val">{sessionVerbs[studyIndex].v2}</span>
                 </div>
-                <div className="study-card-col">
-                  <span className="study-col-title">V3 (Past Participle)</span>
-                  <span className="study-col-val">{sessionVerbs[studyIndex].v3}</span>
+                <div className="study-card-row-item">
+                  <span className="study-row-title">V3 (Past Participle)</span>
+                  <span className="study-row-val">{sessionVerbs[studyIndex].v3}</span>
                 </div>
               </div>
 
@@ -447,14 +455,6 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
             <div className="practice-progress-text">
               Savol: {currentIndex + 1} / {sessionVerbs.length}
             </div>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="practice-progress-bar">
-            <div 
-              className="practice-progress-fill" 
-              style={{ width: `${((currentIndex + 1) / sessionVerbs.length) * 100}%` }}
-            />
           </div>
 
           <div className="trainer-board">

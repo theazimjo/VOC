@@ -29,12 +29,19 @@ function PosBadge({ pos }) {
   );
 }
 
-export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, sourceName }) {
+export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, sourceName, onProgress }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
 
   const currentWord = words[currentIndex];
+
+  // Report progress
+  useEffect(() => {
+    if (onProgress && words) {
+      onProgress(currentIndex, words.length);
+    }
+  }, [currentIndex, words, onProgress]);
 
   // Autoplay pronunciation on card switch
   useEffect(() => {
@@ -85,18 +92,9 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
 
   if (!currentWord) return null;
 
-  const progressPct = words.length > 0 ? (currentIndex / words.length) * 100 : 0;
-
   return (
     <div className="flashcard-container clean-theme">
-      {/* Subtle Progress Bar */}
-      <div className="topic-progress-track clean-track">
-        <div
-          className="topic-progress-fill"
-          style={{ width: `${progressPct}%` }}
-        />
-      </div>
-      <div className="flashcard-progress" style={{ width: '100%', textAlign: 'right', marginTop: '-8px', marginBottom: '8px', fontSize: 'var(--font-sm)', color: 'var(--text-secondary)', fontWeight: 600 }}>
+      <div className="flashcard-progress" style={{ width: '100%', textAlign: 'left', marginBottom: '8px', fontSize: 'var(--font-sm)', color: 'var(--text-secondary)', fontWeight: 600 }}>
         <span>{currentIndex + 1} / {words.length}</span>
       </div>
 

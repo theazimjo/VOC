@@ -30,6 +30,7 @@ export default function PackDetail() {
   }, [packId, getPack, navigate]);
 
   const handleSaveWord = async (data) => {
+    if (pack?.name === 'Irregular Verbs') return;
     if (editingWord) {
       await updateWord(editingWord.id, data);
     } else {
@@ -40,15 +41,18 @@ export default function PackDetail() {
   };
 
   const handleEditWord = (word) => {
+    if (pack?.name === 'Irregular Verbs') return;
     setEditingWord(word);
     setShowWordForm(true);
   };
 
   const handleBulkImport = async (newWords, onProgress) => {
+    if (pack?.name === 'Irregular Verbs') return;
     await bulkAddWords(newWords, onProgress);
   };
 
   const handleDeleteWord = async (wordId) => {
+    if (pack?.name === 'Irregular Verbs') return;
     if (window.confirm("Rostdan ham bu so'zni o'chirmoqchimisiz?")) {
       await deleteWord(wordId);
     }
@@ -96,6 +100,7 @@ export default function PackDetail() {
         onEdit={handleEditWord} 
         onDelete={handleDeleteWord} 
         loading={loading}
+        readOnly={pack.name === 'Irregular Verbs'}
       />
 
       <WordForm
@@ -111,10 +116,12 @@ export default function PackDetail() {
         onImport={handleBulkImport}
       />
 
-      <SpeedDialFAB
-        onAddWord={() => { setEditingWord(null); setShowWordForm(true); }}
-        onImportJson={() => setShowBulkImportForm(true)}
-      />
+      {pack.name !== 'Irregular Verbs' && (
+        <SpeedDialFAB
+          onAddWord={() => { setEditingWord(null); setShowWordForm(true); }}
+          onImportJson={() => setShowBulkImportForm(true)}
+        />
+      )}
     </motion.div>
   );
 }
