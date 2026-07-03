@@ -422,7 +422,7 @@
   transform: scale(0.98);
 }
 
-/* Practice Intro Countdown Screen */
+/* Practice Intro Countdown Screen - Duolingo Style Immersive Fullscreen */
 .practice-intro-screen {
   position: fixed;
   inset: 0;
@@ -431,18 +431,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-md);
+  padding: var(--space-xl);
 }
 
 .intro-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  max-width: 420px;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  max-width: 480px;
   width: 100%;
   text-align: center;
-  box-shadow: var(--shadow);
+  box-shadow: none !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -450,29 +450,36 @@
 }
 
 .intro-mode-icon {
-  font-size: 2.8rem;
-  background: var(--bg-tertiary);
-  width: 76px;
-  height: 76px;
+  font-size: 3.8rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(0, 122, 255, 0.1));
+  border: 2px solid rgba(0, 122, 255, 0.2);
+  width: 108px;
+  height: 108px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  border: 1px solid var(--border-light);
-  margin-bottom: var(--space-xs);
+  border-radius: 32px; /* iOS squircle look */
+  margin-bottom: var(--space-sm);
+  animation: duolingo-bounce 2s ease-in-out infinite;
+}
+
+@keyframes duolingo-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .intro-card h2 {
-  font-size: var(--font-lg);
-  font-weight: 800;
+  font-size: 1.8rem;
+  font-weight: 850;
   color: var(--text-primary);
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .intro-card p {
   color: var(--text-secondary);
-  font-size: var(--font-sm);
+  font-size: 1rem;
+  font-weight: 500;
   margin: 0;
 }
 

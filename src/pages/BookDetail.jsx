@@ -54,7 +54,14 @@ export default function BookDetail() {
     }
   };
 
-  if (!book) return <div className="empty-state">Yuklanmoqda...</div>;
+  if (!book) {
+    return (
+      <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
+        <div className="ios-spinner-ring"></div>
+        <span>Yuklanmoqda...</span>
+      </div>
+    );
+  }
 
   const avgMastery = words.length > 0 
     ? Math.round(words.reduce((sum, w) => sum + (w.mastery || 0), 0) / words.length)

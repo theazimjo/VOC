@@ -218,7 +218,10 @@ export default function MixedPractice() {
     
 
       {pageLoading ? (
-        <div className="empty-state"><p>Yuklanmoqda...</p></div>
+        <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
+          <div className="ios-spinner-ring"></div>
+          <span>Yuklanmoqda...</span>
+        </div>
       ) : mixedWordsPool.length === 0 ? (
         <div className="empty-state">
           <div className="empty-state-icon">🎮</div>

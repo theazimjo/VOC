@@ -351,7 +351,10 @@ export default function PracticePage() {
       </div>
 
       {(pageLoading || step === 'loading') ? (
-        <div className="empty-state"><p>Yuklanmoqda...</p></div>
+        <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-2xl)' }}>
+          <div className="ios-spinner-ring"></div>
+          <span>Yuklanmoqda...</span>
+        </div>
       ) : (
         <AnimatePresence mode="wait">
           {/* Step 1: Select Source */}
@@ -444,23 +447,10 @@ export default function PracticePage() {
                 </h2>
                 <p>{practiceWords.length} ta so'z tayyorlandi</p>
                 
-                {/* Random word learning tip loader */}
-                {randomIntroWord && (
-                  <div className="intro-random-word-box">
-                    <div className="intro-word-label">💡 Kun so'zi (Foydali ma'lumot):</div>
-                    <div className="intro-word-phrase">
-                      <span className="intro-word-en">"{randomIntroWord.word}"</span> 
-                      <span className="intro-word-connector"> means </span> 
-                      <span className="intro-word-uz">"{randomIntroWord.translation}"</span>
-                    </div>
-                    {randomIntroWord.example && (
-                      <p className="intro-word-example">
-                        Misol: <em>{randomIntroWord.example.split('/')[0].trim()}</em>
-                      </p>
-                    )}
-                  </div>
-                )}
-                <div className="duolingo-loader-text" style={{ marginTop: 'var(--space-md)' }}>Mashq tayyorlanmoqda...</div>
+                <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
+                  <div className="ios-spinner-ring"></div>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Mashq tayyorlanmoqda...</span>
+                </div>
               </div>
             </motion.div>
           )}

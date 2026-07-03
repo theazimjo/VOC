@@ -207,7 +207,10 @@ export default function LibraryPage() {
       {/* Content wrapper */}
       <div className="library-content">
         {isLoading ? (
-          <div className="empty-state"><p>Yuklanmoqda...</p></div>
+          <div className="ios-activity-indicator" style={{ marginTop: '50px' }}>
+            <div className="ios-spinner-ring"></div>
+            <span>Yuklanmoqda...</span>
+          </div>
         ) : (
           <AnimatePresence mode="wait">
             <motion.div

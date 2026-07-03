@@ -129,7 +129,10 @@ export default function StatsPage() {
     return (
       <div className="stats-page">
         <div className="page-header"><h1>📈 Statistika</h1></div>
-        <div className="empty-state"><p>Yuklanmoqda...</p></div>
+        <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
+          <div className="ios-spinner-ring"></div>
+          <span>Yuklanmoqda...</span>
+        </div>
       </div>
     );
   }

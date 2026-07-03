@@ -58,7 +58,14 @@ export default function PackDetail() {
     }
   };
 
-  if (!pack) return <div className="empty-state">Yuklanmoqda...</div>;
+  if (!pack) {
+    return (
+      <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
+        <div className="ios-spinner-ring"></div>
+        <span>Yuklanmoqda...</span>
+      </div>
+    );
+  }
 
   return (
     <motion.div

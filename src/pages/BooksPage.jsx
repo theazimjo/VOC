@@ -33,7 +33,10 @@ export default function BooksPage() {
       </div>
 
       {loading ? (
-        <div className="empty-state"><p>Yuklanmoqda...</p></div>
+        <div className="ios-activity-indicator" style={{ marginTop: '50px' }}>
+          <div className="ios-spinner-ring"></div>
+          <span>Yuklanmoqda...</span>
+        </div>
       ) : books.length > 0 ? (
         <BookList books={books} />
       ) : (

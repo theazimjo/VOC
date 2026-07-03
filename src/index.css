@@ -1064,4 +1064,35 @@ a:hover {
   to { opacity: 1; transform: scale(1); }
 }
 
+/* ==========================================================================
+   iOS STANDARD ACTIVITY INDICATOR (SPINNER)
+   ========================================================================== */
+.ios-activity-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.ios-spinner-ring {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(120, 120, 128, 0.15);
+  border-top-color: var(--accent-1, #007aff);
+  border-radius: 50%;
+  animation: ios-spinner-spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes ios-spinner-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 

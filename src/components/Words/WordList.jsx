@@ -8,7 +8,14 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly })
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('date-desc');
 
-  if (loading) return <div>Yuklanmoqda...</div>;
+  if (loading) {
+    return (
+      <div className="ios-activity-indicator">
+        <div className="ios-spinner-ring"></div>
+        <span>Yuklanmoqda...</span>
+      </div>
+    );
+  }
 
   if (words.length === 0) {
     return (

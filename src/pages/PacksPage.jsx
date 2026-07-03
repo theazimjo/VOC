@@ -35,7 +35,10 @@ export default function PacksPage() {
       </div>
 
       {loading ? (
-        <div className="empty-state"><p>Yuklanmoqda...</p></div>
+        <div className="ios-activity-indicator" style={{ marginTop: '50px' }}>
+          <div className="ios-spinner-ring"></div>
+          <span>Yuklanmoqda...</span>
+        </div>
       ) : packs.length > 0 ? (
         <PackList packs={packs} />
       ) : (
