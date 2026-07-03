@@ -38,6 +38,7 @@ export default function PracticePage() {
   const [wrongWords, setWrongWords] = useState([]);
   const [randomIntroWord, setRandomIntroWord] = useState(null);
   const [customModal, setCustomModal] = useState({ show: false, type: 'alert', message: '', onConfirm: null, onCancel: null });
+  const [progressPct, setProgressPct] = useState(0);
 
   const showAlert = (message, onClose = null) => {
     setCustomModal({ show: true, type: 'alert', message, onConfirm: onClose, onCancel: null });
@@ -176,6 +177,7 @@ export default function PracticePage() {
   const handleStartPractice = async (mode) => {
     setSelectedMode(mode);
     setWrongWords([]);
+    setProgressPct(0);
     
     if (mode === 'duel') {
       setPracticeWords(sourceWords);
@@ -300,6 +302,7 @@ export default function PracticePage() {
   const handleReset = () => {
     setResults(null);
     setWrongWords([]);
+    setProgressPct(0);
     
     if (selectedSource?.name === 'Irregular Verbs') {
       setSelectedMode('irregular-verbs');
@@ -322,7 +325,8 @@ export default function PracticePage() {
       onComplete: handleComplete,
       onUpdateWord: handleUpdateWord,
       onAnswer: handleAnswer,
-      sourceName: selectedSource?.title || selectedSource?.name || "Kutubxona"
+      sourceName: selectedSource?.title || selectedSource?.name || "Kutubxona",
+      onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
 
     switch (selectedMode) {
@@ -483,9 +487,17 @@ export default function PracticePage() {
                   ←
                 </button>
                 <h1 className="clean-quiz-title">
-                  {selectedMode === 'flashcard' ? '🎴 Flashcard' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🎧 Diktant' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : 'Mashq'}
+                  {selectedMode === 'flashcard' ? '🎴 Flashcards' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🎧 Diktant' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : 'Mashq'}
                 </h1>
-                <div style={{ width: '40px', opacity: 0 }}></div> {/* spacer to center title */}
+                <div style={{ width: '40px', opacity: 0 }}></div>
+                
+                {/* Clean Progress bar inside the header rectangle along the bottom edge */}
+                <div className="practice-header-progress-track">
+                  <div 
+                    className="practice-header-progress-fill" 
+                    style={{ width: `${progressPct}%` }}
+                  />
+                </div>
               </div>
               <div className="practice-session-content">
                 {renderPracticeMode()}

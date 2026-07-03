@@ -4,7 +4,7 @@ import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './SpellingGame.css';
 
-export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer }) {
+export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
@@ -15,6 +15,13 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
   const inputRef = useRef(null);
 
   const currentWord = words[currentIndex];
+
+  // Report progress
+  useEffect(() => {
+    if (onProgress && words) {
+      onProgress(currentIndex, words.length);
+    }
+  }, [currentIndex, words, onProgress]);
 
   useEffect(() => {
     if (!currentWord) return;
@@ -82,10 +89,6 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
 
   return (
     <div className="spelling-container">
-      {/* Progress */}
-      <div className="spelling-progress-track">
-        <div className="spelling-progress-fill" style={{ width: `${(currentIndex / words.length) * 100}%` }} />
-      </div>
       <div className="spelling-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
         <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word)}>

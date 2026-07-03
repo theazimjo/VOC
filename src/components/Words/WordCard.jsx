@@ -4,7 +4,7 @@ import { partOfSpeechOptions, speakWord } from '../../utils/helpers';
 import { Volume2, Edit2, Trash2 } from 'lucide-react';
 import './WordCard.css';
 
-export default function WordCard({ word, onEdit, onDelete }) {
+export default function WordCard({ word, onEdit, onDelete, readOnly }) {
   const masteryInfo = getMasteryLevel(word.mastery || 0);
   const pos = partOfSpeechOptions.find(p => p.value === word.partOfSpeech) || partOfSpeechOptions[0];
 
@@ -59,22 +59,24 @@ export default function WordCard({ word, onEdit, onDelete }) {
         )}
       </div>
 
-      <div className="word-actions">
-        <button 
-          className="btn-action-icon edit" 
-          onClick={() => onEdit(word)}
-          title="Tahrirlash"
-        >
-          <Edit2 size={14} strokeWidth={2.5} />
-        </button>
-        <button 
-          className="btn-action-icon delete" 
-          onClick={() => onDelete(word.id)}
-          title="O'chirish"
-        >
-          <Trash2 size={14} strokeWidth={2.5} />
-        </button>
-      </div>
+      {!readOnly && (
+        <div className="word-actions">
+          <button 
+            className="btn-action-icon edit" 
+            onClick={() => onEdit(word)}
+            title="Tahrirlash"
+          >
+            <Edit2 size={14} strokeWidth={2.5} />
+          </button>
+          <button 
+            className="btn-action-icon delete" 
+            onClick={() => onDelete(word.id)}
+            title="O'chirish"
+          >
+            <Trash2 size={14} strokeWidth={2.5} />
+          </button>
+        </div>
+      )}
     </motion.div>
   );
 }

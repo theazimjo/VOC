@@ -4,7 +4,7 @@ import { Search } from 'lucide-react';
 import WordCard from './WordCard';
 import './WordList.css';
 
-export default function WordList({ words, onEdit, onDelete, loading }) {
+export default function WordList({ words, onEdit, onDelete, loading, readOnly }) {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('date-desc');
 
@@ -66,6 +66,7 @@ export default function WordList({ words, onEdit, onDelete, loading }) {
               word={word} 
               onEdit={onEdit} 
               onDelete={onDelete} 
+              readOnly={readOnly}
             />
           ))}
         </AnimatePresence>

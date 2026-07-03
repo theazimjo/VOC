@@ -4,7 +4,7 @@ import { shuffleArray, speakWord } from '../../utils/helpers';
 import { calculateNextReview } from '../../utils/sm2';
 import './QuizGame.css';
 
-export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer }) {
+export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null); // the chosen option text
@@ -15,6 +15,13 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer }) 
   const [incorrectCount, setIncorrectCount] = useState(0);
 
   const currentWord = words[currentIndex];
+
+  // Report progress
+  useEffect(() => {
+    if (onProgress && words) {
+      onProgress(currentIndex, words.length);
+    }
+  }, [currentIndex, words, onProgress]);
 
   // Autoplay pronunciation
   useEffect(() => {
@@ -92,10 +99,6 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer }) 
 
   return (
     <div className="quiz-container">
-      {/* Progress bar */}
-      <div className="quiz-progress-track">
-        <div className="quiz-progress-fill" style={{ width: `${(currentIndex / words.length) * 100}%` }} />
-      </div>
       <div className="quiz-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
         <span className={`quiz-timer ${timeLeft <= 4 ? 'danger' : timeLeft <= 8 ? 'warning' : ''}`}>
