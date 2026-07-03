@@ -20,7 +20,6 @@ export default function Dashboard() {
 
     let allWords = [];
 
-    // Extract nested words from packs
     packs.forEach(pack => {
       const wordsObj = pack.words || {};
       Object.keys(wordsObj).forEach(wordId => {
@@ -35,104 +34,99 @@ export default function Dashboard() {
 
     setTotalWords(allWords.length);
     setMasteredWords(allWords.filter(w => (w.mastery || 0) >= 80).length);
-    
+
     const now = new Date();
     setDueWords(allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now).length);
 
-    // Sort by addedAt and take recent 5
     allWords.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
-    setRecentWords(allWords.slice(0, 5));
+    setRecentWords(allWords.slice(0, 6));
   }, [user, packs]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 6) return "Assalomu alaykum";
-    if (hour < 12) return "Xayrli tong";
-    if (hour < 18) return "Xayrli kun";
-    return "Xayrli kech";
+    if (hour < 6)  return 'Assalomu alaykum';
+    if (hour < 12) return 'Xayrli tong';
+    if (hour < 18) return 'Xayrli kun';
+    return 'Xayrli kech';
   };
 
   const displayName = user?.displayName || user?.email?.split('@')[0] || 'Foydalanuvchi';
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-  };
-
   const masteryPercent = totalWords > 0 ? Math.round((masteredWords / totalWords) * 100) : 0;
 
+  const fadeUp = (delay = 0) => ({
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.38, delay, ease: [0.22, 1, 0.36, 1] }
+  });
+
   return (
-    <motion.div 
-      className="dashboard"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <div className="dashboard">
 
-      {/* 1. Compact Stats Summary Card at the top */}
-      <motion.div className="dashboard-summary-card" variants={itemVariants}>
-        <div className="summary-card-glow"></div>
-        <div className="summary-card-header">
-          <span className="summary-greeting">{getGreeting()}, {displayName}! 👋</span>
-          <span className="ml-3 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-accent-1-dim text-accent-1 border border-accent-1/20 animate-pulse">
-            Tailwind v4 Active
-          </span>
-        </div>
-        
-        <div className="summary-stats-row">
-          <div className="summary-stat-item">
-            <span className="stat-label">Jami so'zlarim</span>
-            <span className="stat-value indigo-gradient-text">{totalWords} ta</span>
-          </div>
-          <div className="summary-stat-divider"></div>
-          <div className="summary-stat-item">
-            <span className="stat-label">O'zlashtirilgan</span>
-            <span className="stat-value gold-gradient-text">{masteredWords} ta</span>
-          </div>
-        </div>
+      {/* ── Greeting ── */}
+      <motion.div className="dash-greeting-section" {...fadeUp(0)}>
+        <div className="dash-greeting">{getGreeting()} 👋</div>
+        <div className="dash-name">{displayName}</div>
+        <div className="dash-subtitle">Bugun qancha so'z o'rganasiz?</div>
+      </motion.div>
 
-        <div className="summary-progress-wrapper">
-          <div className="summary-progress-bar">
-            <motion.div 
-              className="summary-progress-fill" 
-              initial={{ width: 0 }}
-              animate={{ width: `${masteryPercent}%` }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            />
-          </div>
-          <div className="summary-progress-labels">
-            <span>Progress</span>
-            <span>{masteryPercent}% o'zlashtirildi</span>
-          </div>
+      {/* ── Stats Row ── */}
+      <motion.div className="dash-stats-row" {...fadeUp(0.07)}>
+        <div className="dash-stat-card">
+          <div className="dash-stat-icon">📚</div>
+          <div className={`dash-stat-value blue`}>{totalWords}</div>
+          <div className="dash-stat-label">Jami so'z</div>
+        </div>
+        <div className="dash-stat-card">
+          <div className="dash-stat-icon">✅</div>
+          <div className={`dash-stat-value green`}>{masteredWords}</div>
+          <div className="dash-stat-label">O'zlashtirilgan</div>
+        </div>
+        <div className="dash-stat-card">
+          <div className="dash-stat-icon">🔔</div>
+          <div className={`dash-stat-value orange`}>{dueWords}</div>
+          <div className="dash-stat-label">Takrorlash</div>
         </div>
       </motion.div>
 
-      {/* 2. Prominent Action Button directly below */}
-      <motion.div className="dashboard-action-wrapper" variants={itemVariants}>
-        <button 
+      {/* ── Progress Bar ── */}
+      <motion.div className="dash-progress-card" {...fadeUp(0.12)}>
+        <div className="dash-progress-header">
+          <span className="dash-progress-title">O'zlashtirish darajasi</span>
+          <span className="dash-progress-pct">{masteryPercent}%</span>
+        </div>
+        <div className="dash-progress-track">
+          <motion.div
+            className="dash-progress-fill"
+            initial={{ width: 0 }}
+            animate={{ width: `${masteryPercent}%` }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </div>
+      </motion.div>
+
+      {/* ── CTA Button ── */}
+      <motion.div className="dash-cta-section" {...fadeUp(0.16)}>
+        <button
           className={`btn-practice-primary ${dueWords > 0 ? 'pulse-border' : ''}`}
           onClick={() => navigate('/mixed-practice')}
+          id="dashboard-practice-btn"
         >
-          <span className="btn-practice-content">
-            Mashq qilish 🚀 
-            {dueWords > 0 && <span className="btn-practice-badge">{dueWords} ta takrorlash</span>}
-          </span>
+          Mashq qilish 🚀
+          {dueWords > 0 && (
+            <span className="btn-practice-badge">{dueWords} ta takrorlash</span>
+          )}
         </button>
       </motion.div>
 
-      {/* 3. Recent Words */}
-      <motion.div className="dashboard-section" variants={itemVariants}>
+      {/* ── Recent Words ── */}
+      <motion.div className="dashboard-section" {...fadeUp(0.2)}>
         <div className="dashboard-section-header">
-          <h2>🕐 Oxirgi qo'shilgan so'zlar</h2>
+          <h2>Oxirgi qo'shilgan so'zlar</h2>
+          <Link to="/library" style={{ fontSize: 'var(--font-sm)', color: 'var(--accent-1)', fontWeight: 600 }}>
+            Barchasi →
+          </Link>
         </div>
+
         {recentWords.length > 0 ? (
           <div className="recent-words-list">
             {recentWords.map((word, idx) => {
@@ -141,19 +135,16 @@ export default function Dashboard() {
                 <motion.div
                   key={word.id}
                   className="recent-word-item"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05 }}
-                  whileHover={{ x: 6 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.22 + idx * 0.04 }}
                 >
+                  <div className="word-mastery-icon" style={{ boxShadow: `0 0 8px ${masteryInfo.color}22` }}>
+                    {masteryInfo.icon}
+                  </div>
                   <div className="word-info">
-                    <span className="word-mastery-icon" style={{ textShadow: `0 0 10px ${masteryInfo.color}` }}>
-                      {masteryInfo.icon}
-                    </span>
-                    <div>
-                      <div className="word-text">{word.word}</div>
-                      <div className="word-translation">{word.translation}</div>
-                    </div>
+                    <div className="word-text">{word.word}</div>
+                    <div className="word-translation">{word.translation}</div>
                   </div>
                   <div className="word-meta">
                     <span className="word-source-badge">{word.source}</span>
@@ -166,14 +157,17 @@ export default function Dashboard() {
             })}
           </div>
         ) : (
-          <div className="empty-state">
-            <div className="empty-state-icon">📝</div>
+          <div className="dash-empty-state">
+            <div className="dash-empty-icon">📝</div>
             <h3>Hali so'z qo'shilmagan</h3>
-            <p>Kutubxonadan kitob yoki to'plam ochib, birinchi so'zingizni qo'shing!</p>
-            <Link to="/library" className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>Kutubxonaga o'tish →</Link>
+            <p>Kutubxonadan to'plam ochib, birinchi so'zingizni qo'shing!</p>
+            <Link to="/library" className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
+              Kutubxonaga o'tish →
+            </Link>
           </div>
         )}
       </motion.div>
-    </motion.div>
+
+    </div>
   );
 }

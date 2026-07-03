@@ -1,70 +1,80 @@
+/* ═══════════════════════════════════════════
+   BOTTOM NAV — iOS Tab Bar Style
+   ═══════════════════════════════════════════ */
+
 .bottom-nav {
   display: none;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 64px;
+  /* iOS safe area support */
+  height: calc(60px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--bg-glass-strong);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-top: 1px solid var(--border);
   z-index: 100;
   justify-content: space-around;
-  align-items: center;
-  padding: 0 var(--space-sm);
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+  align-items: stretch;
+  box-shadow: 0 -1px 0 var(--border);
 }
 
+/* ── Each Nav Item ───────────────────────── */
 .bottom-nav-link {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  color: var(--text-secondary);
+  gap: 4px;
+  color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 600;
-  transition: all var(--transition-fast);
+  letter-spacing: 0.01em;
   flex: 1;
-  height: 100%;
+  padding: 8px 4px 6px;
+  transition: color var(--transition-fast);
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* ── Icon Wrapper ─────────────────────────── */
 .bottom-nav-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform var(--transition-fast);
+  width: 36px;
+  height: 28px;
+  border-radius: 10px;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
 }
 
+/* ── Label ─────────────────────────────────── */
+.bottom-nav-label {
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+/* ── Hover (Desktop Touch Preview) ─────────── */
 .bottom-nav-link:hover {
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
+/* ── Active State ──────────────────────────── */
 .bottom-nav-link.active {
   color: var(--accent-1);
-  position: relative;
 }
 
 .bottom-nav-link.active .bottom-nav-icon {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 0 8px var(--accent-1));
+  background: var(--accent-1-dim);
+  transform: scale(1.05);
 }
 
-/* Glowing top indicator line for active item */
-.bottom-nav-link.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 20%;
-  right: 20%;
-  height: 3px;
-  background: var(--accent-gradient);
-  border-radius: 0 0 3px 3px;
-  box-shadow: 0 2px 10px var(--accent-1);
-}
-
+/* ── Show on Mobile ────────────────────────── */
 @media (max-width: 768px) {
   .bottom-nav {
     display: flex;

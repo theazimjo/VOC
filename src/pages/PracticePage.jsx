@@ -570,16 +570,12 @@ export default function PracticePage() {
       {customModal.show && (
         <div className="custom-alert-overlay">
           <div className="custom-alert-card">
-            <div className="custom-alert-icon">
-              {customModal.type === 'confirm' ? '❓' : '⚠️'}
-            </div>
             <p className="custom-alert-message">{customModal.message}</p>
             
             {customModal.type === 'confirm' ? (
-              <div className="custom-alert-actions" style={{ display: 'flex', gap: 'var(--space-sm)', width: '100%' }}>
+              <div className="custom-alert-actions-row">
                 <button 
-                  className="btn btn-secondary" 
-                  style={{ flex: 1, padding: '12px' }}
+                  className="custom-alert-btn" 
                   onClick={() => {
                     setCustomModal(prev => ({ ...prev, show: false }));
                     if (customModal.onCancel) customModal.onCancel();
@@ -588,8 +584,8 @@ export default function PracticePage() {
                   Yo'q
                 </button>
                 <button 
-                  className="btn btn-primary" 
-                  style={{ flex: 1, padding: '12px' }}
+                  className="custom-alert-btn" 
+                  style={{ fontWeight: '700' }}
                   onClick={() => {
                     setCustomModal(prev => ({ ...prev, show: false }));
                     if (customModal.onConfirm) customModal.onConfirm();
@@ -600,7 +596,8 @@ export default function PracticePage() {
               </div>
             ) : (
               <button 
-                className="btn btn-primary custom-alert-btn" 
+                className="custom-alert-btn" 
+                style={{ fontWeight: '700' }}
                 onClick={() => {
                   setCustomModal(prev => ({ ...prev, show: false }));
                   if (customModal.onConfirm) customModal.onConfirm();

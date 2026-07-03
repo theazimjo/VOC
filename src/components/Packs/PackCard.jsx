@@ -59,7 +59,13 @@ export default function PackCard({ pack, onLongPress }) {
           className="pack-card-color-indicator" 
           style={{ background: pack.color || 'var(--accent-gradient)' }}
         />
-        <div className="pack-card-icon-container" style={{ boxShadow: `0 0 15px ${pack.color}15` }}>
+        <div 
+          className="pack-card-icon-container" 
+          style={{ 
+            backgroundColor: pack.color ? `${pack.color}18` : 'rgba(255, 255, 255, 0.04)',
+            borderColor: pack.color ? `${pack.color}35` : 'var(--border)'
+          }}
+        >
           {pack.icon}
         </div>
         <div className="pack-card-info-container">
@@ -70,7 +76,7 @@ export default function PackCard({ pack, onLongPress }) {
         </div>
         <div className="pack-card-meta-container">
           <span className="pack-card-badge-compact">{pack.wordCount || 0} ta so'z</span>
-          <span className="pack-card-arrow">→</span>
+          <span className="pack-card-arrow">›</span>
         </div>
       </Link>
     </motion.div>

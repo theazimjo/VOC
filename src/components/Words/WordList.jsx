@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Search } from 'lucide-react';
 import WordCard from './WordCard';
 import './WordList.css';
 
@@ -37,7 +38,7 @@ export default function WordList({ words, onEdit, onDelete, loading }) {
     <div>
       <div className="word-list-controls">
         <div className="search-bar word-list-search">
-          <span className="search-icon">🔍</span>
+          <span className="search-icon"><Search size={16} strokeWidth={2.4} /></span>
           <input 
             type="text" 
             className="input" 

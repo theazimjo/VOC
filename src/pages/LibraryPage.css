@@ -3,19 +3,19 @@
   min-height: 100%;
 }
 
-/* Tabs Bar (Capsule style) */
+/* Tabs Bar (iOS Segmented Control style) */
 .library-tabs-container {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
 }
 
 .library-tabs {
   display: inline-flex;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  padding: 4px;
+  background: var(--segmented-bg, rgba(120, 120, 128, 0.2));
+  border: none;
+  border-radius: 9px;
+  padding: 2px;
   width: 100%;
   max-width: 320px;
   position: relative;
@@ -24,21 +24,21 @@
 .library-tab-btn {
   background: transparent;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   color: var(--text-secondary);
   font-family: var(--font-family);
-  font-size: var(--font-sm);
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   position: relative;
   transition: color var(--transition-base);
   outline: none;
   flex: 1;
-  border-radius: var(--radius-full);
+  border-radius: 7px;
 }
 
 .library-tab-btn:hover {
@@ -46,16 +46,16 @@
 }
 
 .library-tab-btn.active {
-  color: white;
+  color: var(--text-primary);
 }
 
 /* Active tab pill sliding background container */
 .active-tab-pill {
   position: absolute;
   inset: 0;
-  background: var(--accent-gradient);
-  border-radius: var(--radius-full);
-  box-shadow: 0 4px 12px hsla(175, 75%, 45%, 0.25);
+  background: var(--segmented-active-bg, rgba(255, 255, 255, 0.12));
+  border-radius: 7px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   z-index: 0;
 }
 
@@ -67,11 +67,11 @@
 
 /* Count badge inside tab */
 .tab-count-badge {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
-  padding: 1px 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  padding: 1px 6px;
   border-radius: var(--radius-full);
-  font-size: var(--font-xs);
+  font-size: 0.7rem;
   color: var(--text-muted);
   font-weight: 700;
   transition: all var(--transition-base);
@@ -79,13 +79,11 @@
 
 .library-tab-btn:hover .tab-count-badge {
   color: var(--text-secondary);
-  border-color: var(--border-light);
 }
 
 .library-tab-btn.active .tab-count-badge {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: transparent;
-  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
 }
 
 /* Content overrides for unified list view */

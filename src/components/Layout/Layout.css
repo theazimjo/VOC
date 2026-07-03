@@ -33,6 +33,6 @@
   .layout-content {
     margin-left: 0 !important;
     padding: var(--space-md) !important;
-    padding-bottom: calc(64px + var(--space-md)) !important; /* Space for BottomNav */
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + var(--space-md)) !important; /* iOS BottomNav */
   }
 }

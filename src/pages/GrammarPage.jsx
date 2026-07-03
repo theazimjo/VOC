@@ -108,11 +108,7 @@ export default function GrammarPage() {
             <h1 className="grammar-title">
               {lang === 'en' ? 'Grammatika' : 'Deutsche Grammatik'}
             </h1>
-            <p className="grammar-subtitle">
-              {lang === 'en' 
-                ? "Ingliz tili grammatikasini bosqichma-bosqich o'rganing" 
-                : "Nemis tili grammatikasini bosqichma-bosqich o'rganing"}
-            </p>
+          
           </div>
 
           {/* Premium Language Switcher */}

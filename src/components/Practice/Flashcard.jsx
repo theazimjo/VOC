@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Volume2 } from 'lucide-react';
 import { calculateNextReview, responseToQuality } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './Flashcard.css';
@@ -117,7 +118,9 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
                 className="btn-speak-card"
                 onClick={e => { e.stopPropagation(); speakWord(currentWord.word); }}
                 title="Talaffuz qilish"
-              >🔊</button>
+              >
+                <Volume2 size={18} strokeWidth={2.4} />
+              </button>
               <PosBadge pos={currentWord.partOfSpeech} />
               <div className="flashcard-word">{currentWord.word}</div>
               <div className="flashcard-hint">

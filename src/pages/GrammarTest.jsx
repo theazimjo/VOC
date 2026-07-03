@@ -26,7 +26,13 @@ import {
   Clock,
   CheckCircle2,
   XCircle,
-  AlertCircle
+  AlertCircle,
+  Trash2,
+  RefreshCw,
+  Calendar,
+  FileText,
+  Brain,
+  Cloud
 } from 'lucide-react';
 import './GrammarTest.css';
 
@@ -55,12 +61,16 @@ export default function GrammarTest() {
 
   // Category selection tab: 'level' | 'ielts'
   const [examCategory, setExamCategory] = useState('level');
-
   // Attempts History state
   const [attempts, setAttempts] = useState([]);
   const [viewingPastAttempt, setViewingPastAttempt] = useState(null);
   const [currentAttemptId, setCurrentAttemptId] = useState(null);
   const [isRetryingAttemptId, setIsRetryingAttemptId] = useState(null);
+
+  // Admin and Notification States
+  const [pendingAttempts, setPendingAttempts] = useState([]);
+  const [adminJsonInput, setAdminJsonInput] = useState({});
+  const [newlyGradedAttempt, setNewlyGradedAttempt] = useState(null);
 
   // ─── SETTINGS & CONNECTIONS ────────────────────────────────────────────────
   const [apiEndpoint, setApiEndpoint] = useState(() => {
@@ -83,8 +93,16 @@ export default function GrammarTest() {
             ...val[key]
           });
         });
-        // Sort attempts by date descending
         attemptsList.sort((a, b) => new Date(b.takenAt || 0) - new Date(a.takenAt || 0));
+
+        // Check for newly graded attempts not yet shown to user
+        const newlyGraded = attemptsList.find(
+          a => a.status === 'completed' && a.notified === false
+        );
+        if (newlyGraded) {
+          setNewlyGradedAttempt(newlyGraded);
+        }
+
         setAttempts(attemptsList);
       }, (error) => {
         console.error("Error listening to grammar attempts from Firebase:", error);
@@ -95,6 +113,22 @@ export default function GrammarTest() {
       setAttempts(savedAttempts ? JSON.parse(savedAttempts) : []);
     }
   }, [user, stage]);
+
+  // Load pending attempts for admin
+  useEffect(() => {
+    if (user && user.email === 'azimjonxolmirzayev30@gmail.com') {
+      const pendingRef = ref(db, 'grammar_pending_attempts');
+      const unsubscribe = onValue(pendingRef, (snapshot) => {
+        const val = snapshot.val() || {};
+        const list = Object.keys(val).map(k => ({ id: k, ...val[k] }));
+        list.sort((a, b) => new Date(b.takenAt || 0) - new Date(a.takenAt || 0));
+        setPendingAttempts(list);
+      });
+      return () => unsubscribe();
+    } else {
+      setPendingAttempts([]);
+    }
+  }, [user]);
 
   // Recalculate stats and high scores whenever attempts state changes
   useEffect(() => {
@@ -352,56 +386,19 @@ export default function GrammarTest() {
 
     setGrades(tempGrades);
 
-    // DYNAMIC AUTO-DETECTION: Check if LM Studio is running right now
-    let lmStudioConnected = false;
-    let resolvedModelName = apiModel;
-
-    try {
-      const response = await fetch(`${apiEndpoint}/models`, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        if (data.data && data.data.length > 0) {
-          resolvedModelName = data.data[0].id;
-          setApiModel(resolvedModelName);
-          lmStudioConnected = true;
-        }
-      }
-    } catch (e) {
-      console.warn("Direct local connection check failed during submit.", e);
-    }
-
+    // Mark all open-ended questions as pending (to be graded by teacher)
     const apiGrades = { ...tempGrades };
-    let hasPendingGrading = false;
-
-    // Loop through the written questions and evaluate them
-    for (let i = 0; i < writtenToEvaluate.length; i++) {
-      const item = writtenToEvaluate[i];
+    writtenToEvaluate.forEach((item) => {
       if (item.answer === '') {
-        apiGrades[item.key] = { score: 0, feedback: 'Bo\'sh qoldirilgan javob.', pending: false };
-        continue;
-      }
-
-      if (lmStudioConnected) {
-        try {
-          const result = await evaluateWithLMStudio(item.question, item.reference, item.answer, resolvedModelName);
-          apiGrades[item.key] = { ...result, pending: false };
-        } catch (e) {
-          console.error("Direct LLM grading failed for question:", item.key, e);
-          apiGrades[item.key] = { score: null, feedback: 'Tekshirilmagan (Ulanish xatosi)', pending: true };
-          hasPendingGrading = true;
-        }
+        apiGrades[item.key] = { score: 0.0, feedback: 'Bo\'sh qoldirilgan javob.', pending: false };
       } else {
-        apiGrades[item.key] = { score: null, feedback: 'Tekshirilmagan (Server offline)', pending: true };
-        hasPendingGrading = true;
+        apiGrades[item.key] = { score: null, feedback: 'Tekshirilmoqda...', pending: true };
       }
-    }
+    });
 
     setGrades(apiGrades);
-    finalizeScores(apiGrades, hasPendingGrading ? 'pending' : 'completed');
-    setStage('results');
+    await finalizeScores(apiGrades, 'pending');
+    setStage('submitted');
   };
 
   const finalizeScores = async (finalGradesMap, forcedStatus) => {
@@ -444,25 +441,34 @@ export default function GrammarTest() {
       takenAt: new Date().toISOString(),
       answers: { ...answers },
       grades: { ...finalGradesMap },
-      status: hasPending ? 'pending' : 'completed'
+      status: 'pending',
+      notified: false
     };
 
     if (user) {
       try {
         const attemptsRef = ref(db, `users/${user.uid}/grammar/complex_attempts`);
         const newAttemptRef = push(attemptsRef);
-        setCurrentAttemptId(newAttemptRef.key);
+        const attemptId = newAttemptRef.key;
+        setCurrentAttemptId(attemptId);
         await set(newAttemptRef, attemptData);
+
+        // Write to global admin pending node
+        const pendingRef = ref(db, `grammar_pending_attempts/${attemptId}`);
+        await set(pendingRef, {
+          id: attemptId,
+          userId: user.uid,
+          studentEmail: user.email,
+          studentName: user.displayName || user.email.split('@')[0],
+          ...attemptData
+        });
       } catch (err) {
         console.error("Failed to save attempt to Firebase:", err);
       }
     } else {
       const attemptId = `attempt_${Date.now()}`;
       setCurrentAttemptId(attemptId);
-      const attempt = {
-        id: attemptId,
-        ...attemptData
-      };
+      const attempt = { id: attemptId, ...attemptData };
       const savedAttempts = localStorage.getItem('grammar_test_attempts');
       const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
       attemptsList.unshift(attempt);
@@ -594,14 +600,18 @@ Evaluate the answer and return the JSON.`;
 
   // View a past attempt details
   const handleViewAttempt = (attempt) => {
+    if (attempt.status === 'pending') {
+      alert("Natijalar hali baholanmagan. O'qituvchi baholashini kuting!");
+      return;
+    }
     const ALL_EXAMS = EXAMS_LIST;
     const foundExam = ALL_EXAMS.find(e => e.id === attempt.testId);
     if (foundExam) {
       setActiveTest(foundExam);
       setSections(foundExam.sections);
-      setAnswers(attempt.answers);
-      setGrades(attempt.grades);
-      setTimeSpent(attempt.timeSpent);
+      setAnswers(attempt.answers || {});
+      setGrades(attempt.grades || {});
+      setTimeSpent(attempt.timeSpent || 0);
       setCurrentAttemptId(attempt.id);
       setViewingPastAttempt(attempt.id);
       setStage('results');
@@ -609,126 +619,152 @@ Evaluate the answer and return the JSON.`;
     }
   };
 
-  // Retry grading for pending evaluations in an attempt
-  const handleRetryGrading = async (attempt, e) => {
-    if (e) e.stopPropagation();
-    setIsRetryingAttemptId(attempt.id);
+  // Copy AI grading prompt for admin
+  const handleCopyPrompt = (attempt) => {
+    const foundExam = EXAMS_LIST.find(e => e.id === attempt.testId);
+    if (!foundExam) return;
+
+    const questionsToGrade = [];
+    foundExam.sections.forEach(sec => {
+      sec.questions.forEach(q => {
+        const key = `${sec.id}_${q.id}`;
+        const gradeObj = attempt.grades ? attempt.grades[key] : null;
+        if (gradeObj && (gradeObj.pending || gradeObj.score === null)) {
+          questionsToGrade.push({
+            key,
+            section: sec.title,
+            question: sec.id === 'translate'
+              ? `Translate Uzbek: "${q.uzbek}" into English`
+              : sec.id === 'mistakes'
+                ? `Correct the mistake in: "${q.original}"`
+                : (q.prompt || q.question),
+            reference: q.reference || q.referencePattern || q.answer,
+            studentAnswer: attempt.answers ? (attempt.answers[key] || '') : ''
+          });
+        }
+      });
+    });
+
+    const promptObj = {
+      attemptId: attempt.id,
+      userId: attempt.userId,
+      studentEmail: attempt.studentEmail,
+      testTitle: attempt.testTitle,
+      questionsToGrade
+    };
+
+    const exampleGrades = questionsToGrade
+      .map(q => `    "${q.key}": { "score": 1.0, "feedback": "Comment here" }`)
+      .join(',\n');
+
+    const promptText =
+`Siz ingliz tili o'qituvchisi va imtihon baholovchi AIsiz.
+Quyidagi talabaning ingliz tili grammatikasi imtihonidagi ochiq yozma javoblarini namunaviy javoblar (reference) bilan solishtirib, har biriga 0.0 dan 1.0 gacha ball (score) va qisqa fikr-mulohaza (feedback) yozing.
+
+Taqdim etilayotgan ma'lumotlar:
+${JSON.stringify(promptObj, null, 2)}
+
+Javobni FAQAT va FAQAT quyidagi JSON formatda qaytaring (hech qanday qo'shimcha matn yoki tushuntirishlarsiz):
+{
+  "attemptId": "${attempt.id}",
+  "userId": "${attempt.userId}",
+  "grades": {
+${exampleGrades}
+  }
+}`;
+
+    navigator.clipboard.writeText(promptText);
+    alert("AI uchun prompt buferga nusxalandi! Uni ChatGPT / Gemini / Claude'ga tashlang.");
     playSound('correct');
+  };
+
+  // Submit AI-graded JSON result from admin panel
+  const handleSubmitGrading = async (attempt) => {
+    const rawText = adminJsonInput[attempt.id];
+    if (!rawText) {
+      alert("Iltimos, avval AI javobini (JSON) tashlang!");
+      return;
+    }
 
     try {
-      // 1. Check local LM Studio connection first
-      const connResponse = await fetch(`${apiEndpoint}/models`, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
+      const parsed = JSON.parse(rawText.trim());
+      if (!parsed.grades || !parsed.attemptId) {
+        alert("JSON formati noto'g'ri! 'attemptId' va 'grades' bo'lishi kerak.");
+        return;
+      }
+
+      const updatedGrades = { ...(attempt.grades || {}) };
+      Object.keys(parsed.grades).forEach(key => {
+        if (updatedGrades[key]) {
+          updatedGrades[key] = {
+            score: parseFloat(parsed.grades[key].score),
+            feedback: parsed.grades[key].feedback,
+            pending: false
+          };
+        }
       });
-      if (!connResponse.ok) throw new Error("LM Studio offline");
-      const connData = await connResponse.json();
-      const resolvedModelName = connData.data?.[0]?.id || apiModel;
 
-      // 2. Identify pending questions in this attempt
-      const ALL_EXAMS = EXAMS_LIST;
-      const foundExam = ALL_EXAMS.find(exam => exam.id === attempt.testId);
-      if (!foundExam) throw new Error("Exam variant not found");
+      const foundExam = EXAMS_LIST.find(e => e.id === attempt.testId);
+      if (!foundExam) throw new Error('Exam not found');
 
-      const updatedGrades = { ...attempt.grades };
-      let updatedAnswers = { ...attempt.answers };
-      let newlyGradedCount = 0;
-
-      // Loop through all sections and questions
-      for (const section of foundExam.sections) {
-        for (const q of section.questions) {
-          const key = `${section.id}_${q.id}`;
-          const gradeObj = updatedGrades[key];
-
-          // If the grade is pending/null or marked pending
-          if (!gradeObj || gradeObj.score === null || gradeObj.pending) {
-            const userVal = (updatedAnswers[key] || '').trim();
-            if (userVal === '') {
-              updatedGrades[key] = { score: 0, feedback: 'Bo\'sh qoldirilgan javob.', pending: false };
-              newlyGradedCount++;
-              continue;
-            }
-
-            const questionText = section.id === 'translate' ? `Translate Uzbek: "${q.uzbek}" into English` : (q.prompt || q.question);
-            const referenceText = q.reference || q.referencePattern;
-
-            try {
-              const result = await evaluateWithLMStudio(questionText, referenceText, userVal, resolvedModelName);
-              updatedGrades[key] = { ...result, pending: false };
-              newlyGradedCount++;
-            } catch (err) {
-              console.error(`Failed to retry grade for ${key}:`, err);
-            }
-          }
-        }
-      }
-
-      if (newlyGradedCount > 0) {
-        // Recalculate percent and totals
-        let totalQuestions = 0;
-        let totalScore = 0;
-        let hasPending = false;
-
-        foundExam.sections.forEach(s => {
-          s.questions.forEach(q => {
-            totalQuestions++;
-            const g = updatedGrades[`${s.id}_${q.id}`];
-            if (g && g.score !== null && !g.pending) {
-              totalScore += g.score;
-            } else {
-              hasPending = true;
-            }
-          });
+      let totalQuestions = 0;
+      let totalScore = 0;
+      foundExam.sections.forEach(s => {
+        s.questions.forEach(q => {
+          totalQuestions++;
+          const g = updatedGrades[`${s.id}_${q.id}`];
+          if (g && g.score !== null && !g.pending) totalScore += g.score;
         });
+      });
 
-        const percent = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
+      const percent = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
 
-        const updatedAttemptData = {
-          testId: attempt.testId,
-          testTitle: attempt.testTitle,
-          score: percent,
-          totalScore: totalScore.toFixed(1),
-          totalQuestions: totalQuestions,
-          timeSpent: attempt.timeSpent,
-          takenAt: attempt.takenAt,
-          answers: attempt.answers,
-          grades: updatedGrades,
-          status: hasPending ? 'pending' : 'completed'
-        };
+      // Update student's Firebase node
+      const studentRef = ref(db, `users/${attempt.userId}/grammar/complex_attempts/${attempt.id}`);
+      await set(studentRef, {
+        ...attempt,
+        score: percent,
+        totalScore: totalScore.toFixed(1),
+        grades: updatedGrades,
+        status: 'completed',
+        notified: false
+      });
 
-        if (user) {
-          const attemptRef = ref(db, `users/${user.uid}/grammar/complex_attempts/${attempt.id}`);
-          await set(attemptRef, updatedAttemptData);
-        } else {
-          // LocalStorage update
-          const savedAttempts = localStorage.getItem('grammar_test_attempts');
-          const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
-          const index = attemptsList.findIndex(a => a.id === attempt.id);
-          if (index !== -1) {
-            attemptsList[index] = { id: attempt.id, ...updatedAttemptData };
-            localStorage.setItem('grammar_test_attempts', JSON.stringify(attemptsList));
-            setAttempts(attemptsList);
-          }
-        }
+      // Remove from global admin pending node
+      const pendingRef = ref(db, `grammar_pending_attempts/${attempt.id}`);
+      await remove(pendingRef);
 
-        if (viewingPastAttempt === attempt.id) {
-          setGrades(updatedGrades);
-        }
-
-        alert(`Tekshirish yakunlandi! Jami ${newlyGradedCount} ta savol baholandi.`);
-        playSound('victory');
-      } else {
-        alert("Barcha savollar allaqachon baholangan yoki ulanish yana muvaffaqiyatsiz bo'ldi.");
-      }
-
+      setAdminJsonInput(prev => { const c = { ...prev }; delete c[attempt.id]; return c; });
+      alert("Natijalar saqlandi va talabaga yuborildi!");
+      playSound('victory');
     } catch (e) {
       console.error(e);
-      alert("LM Studio serveriga ulanib bo'lmadi! Server yoqilganligini tekshiring.");
+      alert("JSON tahlilida xatolik! AI to'g'ri JSON qaytarganini tekshiring.");
       playSound('wrong');
-    } finally {
-      setIsRetryingAttemptId(null);
     }
   };
+
+  // Dismiss the graded notification modal
+  const handleDismissNotification = async (shouldView) => {
+    if (!newlyGradedAttempt) return;
+    const attemptCopy = { ...newlyGradedAttempt };
+    setNewlyGradedAttempt(null);
+
+    if (user) {
+      try {
+        const notifiedRef = ref(db, `users/${user.uid}/grammar/complex_attempts/${attemptCopy.id}/notified`);
+        await set(notifiedRef, true);
+      } catch (e) {
+        console.error('Failed to mark attempt as notified:', e);
+      }
+    }
+
+    if (shouldView) {
+      handleViewAttempt(attemptCopy);
+    }
+  };
+
+
 
   // Delete an attempt from history
   const handleDeleteAttempt = async (attemptId, e) => {
@@ -776,7 +812,7 @@ Evaluate the answer and return the JSON.`;
         >
           <div className="gt-welcome-hero">
             <div className="hero-content">
-              <span className="hero-badge">🎓 English Level Exam</span>
+              <span className="hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Award size={12} /> English Level Exam</span>
               <h2>Grammatika Kompleks Imtihonlari</h2>
               <p>
                 Variantlar yordamida o'z bilimingizni professional darajada sinab ko'ring va natijalarni real vaqtda AI yordamida baholang.
@@ -814,7 +850,7 @@ Evaluate the answer and return the JSON.`;
                       <p className="folder-meta-desc-desktop">Present Continuous, Articles, Numerals, Adverbs, Comparison</p>
                       
                       <div className="folder-footer-meta">
-                        <span className="badge-meta">📑 5 ta variant</span>
+                        <span className="badge-meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={10} /> 5 ta variant</span>
                         <span className="badge-level">Intermediate</span>
                       </div>
                     </div>
@@ -827,7 +863,7 @@ Evaluate the answer and return the JSON.`;
 
               {/* Urinishlar Tarixi (Attempts History) */}
               <div className="gt-history-section" style={{ marginTop: '40px' }}>
-                <h3 className="section-title">Imtihonlar Tarixi {user && <span style={{ fontSize: '0.8rem', textTransform: 'none', color: '#10B981', marginLeft: '6px' }}>☁️ Cloud Synced</span>}</h3>
+                <h3 className="section-title">Imtihonlar Tarixi {user && <span style={{ fontSize: '0.8rem', textTransform: 'none', color: '#10B981', marginLeft: '6px', display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Cloud size={13} /> Cloud Synced</span>}</h3>
                 {attempts.length === 0 ? (
                   <div className="gt-empty-history">
                     <p>Hozircha topshirilgan imtihonlar tarixi mavjud emas.</p>
@@ -835,53 +871,44 @@ Evaluate the answer and return the JSON.`;
                 ) : (
                   <div className="gt-history-list">
                     {attempts.map((att) => (
-                      <div 
-                        key={att.id} 
+                      <div
+                        key={att.id}
                         className="gt-history-item"
                         onClick={() => handleViewAttempt(att)}
                       >
-                        <div className="history-meta">
+                        <div className="history-main-content">
                           <span className={`history-badge-letter ${att.testId.startsWith('ielts_') ? 'ielts' : ''}`}>
                             {getVariantLetter(att.testId)}
                           </span>
                           <div className="history-info">
                             <h4>{att.testTitle}</h4>
-                            <span className="date-span">📅 {formatDate(att.takenAt)}</span>
+                            <div className="history-subtitle">
+                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Calendar size={11} /> {formatDate(att.takenAt)}</span>
+                              <span className="dot-divider">•</span>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {Math.round(att.timeSpent / 60)} daq</span>
+                            </div>
                           </div>
                         </div>
-                        
-                        <div className="history-stats">
-                          <div className="score-badge-wrap">
-                            <span className={`score-percent-badge ${att.status === 'pending' ? 'retry' : att.score >= 90 ? 'excellent' : att.score >= 70 ? 'good' : att.score >= 50 ? 'satisfactory' : 'retry'}`}>
-                              {att.score}% {att.status === 'pending' && '⏳'}
+
+                        <div className="history-right-content">
+                          <div className="score-wrap-ios">
+                            <span className={`score-percent-badge-ios ${att.status === 'pending' ? 'pending' : att.score >= 90 ? 'excellent' : att.score >= 70 ? 'good' : att.score >= 50 ? 'satisfactory' : 'fail'}`}>
+                              {att.status === 'pending' ? 'Kutilmoqda' : `${att.score}%`}
                             </span>
-                            <span className="score-details">{att.totalScore} / {att.totalQuestions} ball</span>
-                          </div>
-                          <span className="time-badge">⏱️ {Math.round(att.timeSpent / 60)} daq</span>
-                          
-                          <div className="history-actions">
-                            {att.status === 'pending' && (
-                              <button 
-                                className={`btn btn-primary compact btn-retry-history ${isRetryingAttemptId === att.id ? 'loading' : ''}`}
-                                onClick={(e) => handleRetryGrading(att, e)}
-                                disabled={isRetryingAttemptId === att.id}
-                              >
-                                {isRetryingAttemptId === att.id ? 'Tekshirilmoqda...' : '🔄 Tekshirish'}
-                              </button>
+                            {att.status !== 'pending' && (
+                              <span className="score-details-ios">{att.totalScore}/{att.totalQuestions} ball</span>
                             )}
-                            <button 
-                              className="btn btn-secondary compact btn-view-history"
-                              onClick={() => handleViewAttempt(att)}
-                            >
-                              Ko'rish
-                            </button>
-                            <button 
-                              className="btn-delete-history"
+                          </div>
+
+                          <div className="history-actions-ios" onClick={(e) => e.stopPropagation()}>
+                            <button
+                              className="btn-delete-history-ios"
                               onClick={(e) => handleDeleteAttempt(att.id, e)}
                               title="O'chirish"
                             >
-                              🗑️
+                              <Trash2 size={14} />
                             </button>
+                            <ChevronRight size={16} className="chevron-ios" />
                           </div>
                         </div>
                       </div>
@@ -891,10 +918,69 @@ Evaluate the answer and return the JSON.`;
               </div>
             </div>
 
-            {/* Right side: Personal Performance / Stats card */}
+            {/* Right side: Stats + Admin Panel */}
             <div className="gt-stats-section">
+
+              {/* Admin Panel - only for azimjonxolmirzayev30@gmail.com */}
+              {user && user.email === 'azimjonxolmirzayev30@gmail.com' && (
+                <div className="gt-admin-panel">
+                  <h3 className="section-title admin-title">
+                    <Sparkles size={14} />
+                    {pendingAttempts.length > 0 && (
+                      <span className="admin-badge-count">{pendingAttempts.length}</span>
+                    )}
+                  </h3>
+                  <div className="gt-stats-glass-card">
+                    {pendingAttempts.length === 0 ? (
+                      <div className="admin-empty-state">
+                        <CheckCircle2 size={24} className="admin-empty-icon" />
+                        <p>Barcha imtihonlar baholangan</p>
+                      </div>
+                    ) : (
+                      <div className="admin-pending-list">
+                        {pendingAttempts.map(att => (
+                          <div key={att.id} className="admin-pending-card">
+                            <div className="admin-card-header">
+                              <div className="admin-student-info">
+                                <span className="admin-student-name">{att.studentName}</span>
+                                <span className="admin-student-email">{att.studentEmail}</span>
+                              </div>
+                              <span className="history-badge-letter" style={{ width: '28px', height: '28px', fontSize: '0.7rem' }}>
+                                {getVariantLetter(att.testId)}
+                              </span>
+                            </div>
+                            <div className="admin-card-meta">
+                              <Calendar size={10} /> {formatDate(att.takenAt)}
+                              &nbsp;&nbsp;•&nbsp;&nbsp;
+                              <Clock size={10} /> {Math.round((att.timeSpent || 0) / 60)} daq
+                            </div>
+                            <button
+                              className="btn-admin-copy"
+                              onClick={() => handleCopyPrompt(att)}
+                            >
+                              <Sparkles size={12} /> Prompt nusxalash
+                            </button>
+                            <textarea
+                              className="admin-json-textarea"
+                              placeholder='AI dan olingan JSON ni bu yerga tashlang...'
+                              value={adminJsonInput[att.id] || ''}
+                              onChange={(e) => setAdminJsonInput(prev => ({ ...prev, [att.id]: e.target.value }))}
+                            />
+                            <button
+                              className="btn-admin-submit"
+                              onClick={() => handleSubmitGrading(att)}
+                            >
+                              <CheckCircle2 size={12} /> Natijani saqlash
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               <h3 className="section-title">Sizning ko'rsatkichlaringiz</h3>
-              
               <div className="gt-stats-glass-card">
                 <div className="stat-circle-row">
                   <div className="stat-circle-box">
@@ -904,23 +990,6 @@ Evaluate the answer and return the JSON.`;
                   <div className="stat-circle-box primary">
                     <span className="number">{stats.avgScore}%</span>
                     <span className="label">O'rtacha Ball</span>
-                  </div>
-                </div>
-
-                <div className="stat-list-items">
-                  <div className="stat-list-row">
-                    <div className="icon-wrap"><Award size={18} /></div>
-                    <div className="text-wrap">
-                      <h4>Sinfingiz</h4>
-                      <p>Sizning joriy reytingingiz: Boshlang'ich</p>
-                    </div>
-                  </div>
-                  <div className="stat-list-row">
-                    <div className="icon-wrap"><TrendingUp size={18} /></div>
-                    <div className="text-wrap">
-                      <h4>Progress faollik</h4>
-                      <p>O'tgan haftaga nisbatan yuqori sur'at</p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -943,9 +1012,7 @@ Evaluate the answer and return the JSON.`;
               <ArrowLeft size={18} /> Orqaga
             </button>
             <div className="header-nav-title-group">
-              <div className="breadcrumbs">Bosh sahifa &gt; Imtihonlar &gt; Imtihon 1.2</div>
-              <h2>📁 Imtihon 1.2 Variantlari</h2>
-              <p>Mavjud test variantlaridan birini tanlang va bilimingizni sinab ko'ring.</p>
+              <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Folder size={22} /> Imtihon 1.2 Variantlari</h2>
             </div>
           </div>
 
@@ -988,16 +1055,16 @@ Evaluate the answer and return the JSON.`;
 
                     <div className="v2-mobile-status">
                       {isPassed ? (
-                        <span className="m-score-val">✅ Eng yaxshi natija: <strong>{bestScore}%</strong></span>
+                        <span className="m-score-val" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><CheckCircle size={12} /> Eng yaxshi natija: <strong>{bestScore}%</strong></span>
                       ) : (
-                        <span className="m-score-pending">⏳ Topshirilmagan</span>
+                        <span className="m-score-pending" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Clock size={12} /> Topshirilmagan</span>
                       )}
                     </div>
 
                     <div className="v2-features-list">
-                      <span>⏱️ 30 daqiqa</span>
-                      <span>🧠 AI baholash</span>
-                      <span>📝 {exam.sections?.length} ta bo'lim</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> 30 daqiqa</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Brain size={11} /> AI baholash</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={11} /> {exam.sections?.length} ta bo'lim</span>
                     </div>
                   </div>
 
@@ -1022,56 +1089,26 @@ Evaluate the answer and return the JSON.`;
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
         >
-          <div className="gt-badge">🏆 {activeTest?.title}</div>
+          <div className="gt-badge" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <Award size={12} /> {activeTest?.title}
+          </div>
           <h1>English Grammar Complex Test</h1>
           <p className="gt-subtitle">
             Bu test sizning quyidagi mavzulardagi bilimingizni har tomonlama tekshiradi:
           </p>
           <div className="gt-topics-grid">
-            <span>🔹 Present Continuous</span>
-            <span>🔹 Articles (a, an, the)</span>
-            <span>🔹 Numerals</span>
-            <span>🔹 Adverbs</span>
-            <span>🔹 As ... as comparison</span>
-            <span>🔹 Degrees of adjectives</span>
-            <span>🔹 Irregular adjectives</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Present Continuous</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Articles (a, an, the)</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Numerals</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Adverbs</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> As ... as comparison</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Degrees of adjectives</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Irregular adjectives</span>
           </div>
 
-          <div className="gt-alert-info">
-            ⏱️ <strong>Vaqt limiti:</strong> 30 daqiqa. Javoblarni yozib tugatgach, "Testni topshirish" ni bosing.
-          </div>
-
-          {/* Local LM Studio Config Box */}
-          <div className="gt-lm-config">
-            <h3>🤖 AI baholash tizimi sozlamalari</h3>
-            <p>
-              Tarjimalar va ochiq yozma mashqlarni AI tekshirishi uchun local kompyuteringizda <strong>LM Studio</strong> serverini yoqing.
-            </p>
-            <div className="gt-config-inputs">
-              <input
-                type="text"
-                value={apiEndpoint}
-                onChange={(e) => setApiEndpoint(e.target.value)}
-                placeholder="http://localhost:1234/v1"
-              />
-              <button
-                onClick={handleCheckConnection}
-                disabled={isApiChecking}
-                className="btn btn-secondary compact"
-              >
-                {isApiChecking ? 'Ulanmoqda...' : 'Ulanishni tekshirish'}
-              </button>
-            </div>
-            
-            {apiStatus.checked && (
-              <div className={`gt-api-status ${apiStatus.connected ? 'success' : 'fail'}`}>
-                {apiStatus.connected ? (
-                  <span>✅ Ulandi! Model: <strong>{apiModel}</strong></span>
-                ) : (
-                  <span>❌ {apiStatus.error} (Yoziladigan javoblar buffering orqali keyinroq tekshirish uchun saqlanadi)</span>
-                )}
-              </div>
-            )}
+          <div className="gt-alert-info" style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+            <Clock size={16} style={{ marginTop: '2px', flexShrink: 0 }} />
+            <span><strong>Vaqt limiti:</strong> 30 daqiqa. Javoblarni yozib tugatgach, "Testni topshirish" ni bosing.</span>
           </div>
 
           <div className="gt-intro-actions">
@@ -1085,13 +1122,53 @@ Evaluate the answer and return the JSON.`;
         </motion.div>
       )}
 
+      {/* ─── STAGE: SUBMITTED (waiting for results) ──────────────────────────── */}
+      {stage === 'submitted' && (
+        <motion.div
+          className="gt-submitted-screen"
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="submitted-icon-ring">
+            <div className="submitted-icon-pulse" />
+            <CheckCircle2 size={48} className="submitted-check-icon" />
+          </div>
+          <h2>Imtihon topshirildi!</h2>
+          <p className="submitted-subtitle">
+            Javoblaringiz o'qituvchiga yuborildi. Baholanganidan so'ng natijangiz bu yerda ko'rinadi.
+          </p>
+          <div className="submitted-info-card">
+            <div className="submitted-info-row">
+              <span className="submitted-info-label">Variant:</span>
+              <span className="submitted-info-value">{activeTest?.title}</span>
+            </div>
+            <div className="submitted-info-row">
+              <span className="submitted-info-label">Vaqt:</span>
+              <span className="submitted-info-value">{Math.round((30 * 60 - timeLeft) / 60)} daqiqa</span>
+            </div>
+            <div className="submitted-info-row">
+              <span className="submitted-info-label">Holat:</span>
+              <span className="submitted-status-pill">Baholanmoqda...</span>
+            </div>
+          </div>
+          <button
+            className="btn btn-secondary"
+            onClick={() => { setStage('list'); navigate('/grammar-test'); }}
+          >
+            Bosh sahifaga qaytish
+          </button>
+        </motion.div>
+      )}
+
+
       {/* ─── STAGE 2: THE ACTIVE TEST ─────────────────────────────────────────── */}
       {stage === 'testing' && (
         <div className="gt-testing-grid">
           {/* Left panel: Side Section Navigation */}
           <div className="gt-nav-sidebar">
             <div className="gt-timer-box">
-              <span className="timer-icon">⏳</span>
+              <span className="timer-icon" style={{ display: 'flex', alignItems: 'center' }}><Timer size={20} /></span>
               <span className="timer-val">{formatTime(timeLeft)}</span>
               <div className="timer-progress-bg">
                 <div 
@@ -1114,8 +1191,12 @@ Evaluate the answer and return the JSON.`;
               ))}
             </div>
 
-            <button className="btn btn-danger gt-submit-btn" onClick={() => handleSubmitTest(false)}>
-              Testni topshirish 📥
+            <button 
+              className="btn btn-danger gt-submit-btn" 
+              onClick={() => handleSubmitTest(false)}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
+            >
+              Testni topshirish <CheckCircle size={14} />
             </button>
           </div>
 
@@ -1140,7 +1221,9 @@ Evaluate the answer and return the JSON.`;
                     return (
                       <div key={q.id} className="gt-question-box mistake-box">
                         <div className="q-badge">Gap #{q.id}</div>
-                        <div className="q-sentence wrong-sentence">❌ {q.original}</div>
+                        <div className="q-sentence wrong-sentence" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <XCircle size={16} className="text-red" style={{ flexShrink: 0 }} /> {q.original}
+                        </div>
                         <input
                           type="text"
                           className="gt-input-text"
@@ -1199,7 +1282,7 @@ Evaluate the answer and return the JSON.`;
                     return (
                       <div key={q.id} className="gt-question-box translate-box">
                         <div className="q-badge">Gap #{q.id}</div>
-                        <div className="q-sentence uz-sentence">🇺🇿 {q.uzbek}</div>
+                        <div className="q-sentence uz-sentence">Uzbek: {q.uzbek}</div>
                         <textarea
                           className="gt-textarea"
                           rows={2}
@@ -1262,7 +1345,7 @@ Evaluate the answer and return the JSON.`;
                           
                           {selectedList.length > 0 && (
                             <button className="gt-clear-reorder" onClick={() => handleReorderClear(key)}>
-                              🔄 Tozalash
+                              Tozalash
                             </button>
                           )}
                         </div>
@@ -1280,7 +1363,7 @@ Evaluate the answer and return the JSON.`;
                     return (
                       <div key={q.id} className="gt-question-box production-box">
                         <div className="q-badge">Mashq #{q.id}</div>
-                        <div className="q-sentence">✍️ {q.prompt}</div>
+                        <div className="q-sentence">Write: {q.prompt}</div>
                         <textarea
                           className="gt-textarea"
                           rows={3}
@@ -1334,7 +1417,7 @@ Evaluate the answer and return the JSON.`;
                       return (
                         <div key={q.id} className="gt-question-box reading-question-box">
                           <div className="q-badge">Savol #{q.id}</div>
-                          <div className="q-sentence">❓ {q.question}</div>
+                          <div className="q-sentence">Question: {q.question}</div>
                           <input
                             type="text"
                             className="gt-input-text"
@@ -1370,8 +1453,9 @@ Evaluate the answer and return the JSON.`;
                   <button
                     className="btn btn-success"
                     onClick={() => handleSubmitTest(false)}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                   >
-                    Testni topshirish 📥
+                    Testni topshirish <CheckCircle size={14} />
                   </button>
                 )}
               </div>
@@ -1410,7 +1494,7 @@ Evaluate the answer and return the JSON.`;
             {/* Header section with Trophy card & primary metrics */}
             <div className="gt-results-hero">
               <div className="results-hero-left">
-                <span className="res-hero-badge">📊 {viewingPastAttempt ? "Urinish Tafsilotlari" : "Imtihon Yakunlandi"}</span>
+                <span className="res-hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Award size={13} /> {viewingPastAttempt ? "Urinish Tafsilotlari" : "Imtihon Yakunlandi"}</span>
                 <h2>{rating.title}</h2>
                 <p>Natijalaringiz tahlili va to'g'rilik ko'rsatkichi bilan tanishing.</p>
               </div>
@@ -1436,7 +1520,7 @@ Evaluate the answer and return the JSON.`;
                   onClick={(e) => handleRetryGrading(currentAttempt, e)}
                   disabled={isRetryingAttemptId === currentAttemptId}
                 >
-                  {isRetryingAttemptId === currentAttemptId ? 'Tekshirilmoqda...' : '🔄 Hozir qayta tekshirish'}
+                  {isRetryingAttemptId === currentAttemptId ? 'Tekshirilmoqda...' : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}><RefreshCw size={12} /> Hozir qayta tekshirish</span>}
                 </button>
               </div>
             )}
@@ -1451,13 +1535,13 @@ Evaluate the answer and return the JSON.`;
                   <span className="slash-val">/ {statsObj.total} ta savol</span>
                 </div>
                 <div className="score-breakdown-row">
-                  <span className="br-item green">🟢 {statsObj.correctCount} to'liq</span>
+                  <span className="br-item green" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><CheckCircle2 size={11} /> {statsObj.correctCount} to'liq</span>
                   {statsObj.partialCount > 0 && (
-                    <span className="br-item orange">🟡 {statsObj.partialCount} qisman</span>
+                    <span className="br-item orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><AlertCircle size={11} /> {statsObj.partialCount} qisman</span>
                   )}
-                  <span className="br-item red">🔴 {statsObj.wrongCount} xato</span>
+                  <span className="br-item red" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><XCircle size={11} /> {statsObj.wrongCount} xato</span>
                   {statsObj.pendingCount > 0 && (
-                    <span className="br-item orange">⏳ {statsObj.pendingCount} kutilmoqda</span>
+                    <span className="br-item orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {statsObj.pendingCount} kutilmoqda</span>
                   )}
                 </div>
                 <p className="desc-meta">Jami to'plangan ball: <strong>{statsObj.score} ball</strong></p>
@@ -1477,7 +1561,7 @@ Evaluate the answer and return the JSON.`;
               <div className="res-metric-card">
                 <span className="lbl">Natija reytingi</span>
                 <div className={`rating-indicator-text ${rating.className}`}>
-                  {statsObj.percent >= 70 ? 'Muvaffaqiyatli! 🎉' : 'Ko\'proq takrorlang! 📚'}
+                  {statsObj.percent >= 70 ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle size={16} /> Muvaffaqiyatli!</span> : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Ko\'proq takrorlang!</span>}
                 </div>
                 <p className="desc-meta">Intermediate saviyasidagi natija darajasi.</p>
               </div>
@@ -1516,7 +1600,7 @@ Evaluate the answer and return the JSON.`;
                       <span className="num-badge">{idx + 1}</span>
                       <span className="title">{sec.title.split('. ')[1] || sec.title}</span>
                       <span className="score">
-                        ({secCorrect.toFixed(1)}{secPending > 0 ? ` + ${secPending}⏳` : ''}/{secTotal})
+                        ({secCorrect.toFixed(1)}{secPending > 0 ? ` + ${secPending}` : ''}/{secTotal})
                       </span>
                     </button>
                   );
@@ -1538,8 +1622,8 @@ Evaluate the answer and return the JSON.`;
                   <div className="detail-questions-scroll-area">
                     {sections[activeResultSecIdx]?.questions.map((q) => {
                       const key = `${sections[activeResultSecIdx].id}_${q.id}`;
-                      const userVal = answers[key] || '';
-                      const gradeObj = grades[key] || { score: 0, feedback: '', pending: false };
+                      const userVal = (answers && answers[key]) || '';
+                      const gradeObj = (grades && grades[key]) || { score: 0, feedback: '', pending: false };
                       
                       const isPendingItem = gradeObj.score === null || gradeObj.pending;
                       const isCorrect = !isPendingItem && gradeObj.score >= 0.9;
@@ -1563,7 +1647,7 @@ Evaluate the answer and return the JSON.`;
                           <div className="card-item-header">
                             <span className="question-number">Savol #{q.id} ({q.topic})</span>
                             <span className="score-label-pill">
-                              {isPendingItem ? '⏳ Tekshirilmagan' : `${gradeObj.score.toFixed(1)} ball`}
+                              {isPendingItem ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Clock size={11} /> Tekshirilmagan</span> : `${gradeObj.score.toFixed(1)} ball`}
                             </span>
                           </div>
 
@@ -1572,7 +1656,7 @@ Evaluate the answer and return the JSON.`;
                             {/* Correct mistakes specific */}
                             {sections[activeResultSecIdx].id === 'mistakes' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line wrong"><strong>Original xato gap:</strong> ❌ {q.original}</div>
+                                <div className="txt-line wrong" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><strong>Original xato gap:</strong> <XCircle size={14} style={{ flexShrink: 0 }} /> {q.original}</div>
                                 <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
                                 {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Namunaviy shakli:</strong> "{q.reference}"</div>}
                               </div>
@@ -1590,7 +1674,7 @@ Evaluate the answer and return the JSON.`;
                             {/* Translate specific */}
                             {sections[activeResultSecIdx].id === 'translate' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line uz"><strong>O'zbekcha gap:</strong> 🇺🇿 {q.uzbek}</div>
+                                <div className="txt-line uz"><strong>O'zbekcha gap:</strong> {q.uzbek}</div>
                                 <div className="txt-line user"><strong>Sizning tarjimangiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
                                 {!isPendingItem && <div className="txt-line ref"><strong>Namunaviy to'g'ri variant:</strong> "{q.reference}"</div>}
                               </div>
@@ -1625,7 +1709,7 @@ Evaluate the answer and return the JSON.`;
                             {/* Reading specific */}
                             {sections[activeResultSecIdx].id === 'reading' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line question"><strong>Savol:</strong> ❓ {q.question}</div>
+                                <div className="txt-line question"><strong>Savol:</strong> {q.question}</div>
                                 <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
                                 {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Javob kaliti:</strong> "{q.reference}"</div>}
                               </div>
@@ -1634,7 +1718,6 @@ Evaluate the answer and return the JSON.`;
                             {/* Feedback comment if present */}
                             {gradeObj.feedback && (
                               <div className="q-feedback-comment">
-                                <span className="comment-lbl">O'qituvchi taqrizi:</span>
                                 <p className="comment-content">"{gradeObj.feedback}"</p>
                               </div>
                             )}
@@ -1657,18 +1740,64 @@ Evaluate the answer and return the JSON.`;
                 ← Variantlar ro'yxatiga qaytish
               </button>
               {!viewingPastAttempt && (
-                <button 
-                  className="btn btn-primary" 
-                  onClick={handleRestartTest}
-                >
-                  🔄 Qayta topshirib ko'rish
-                </button>
+                  <button 
+                    className="btn btn-primary" 
+                    onClick={handleRestartTest}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                  >
+                    <RefreshCw size={14} /> Qayta topshirib ko'rish
+                  </button>
               )}
             </div>
 
           </motion.div>
         );
       })()}
+
+      {/* iOS NOTIFICATION MODAL: Newly Graded Attempt */}
+      {newlyGradedAttempt && (
+        <div className="gt-notif-overlay" onClick={() => handleDismissNotification(false)}>
+          <motion.div
+            className="gt-notif-modal"
+            initial={{ opacity: 0, y: 60, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 40, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="gt-notif-icon-ring">
+              <Award size={26} className="gt-notif-icon" />
+            </div>
+            <div className="gt-notif-body">
+              <h3 className="gt-notif-title">Natijangiz tayyor! 🎉</h3>
+              <p className="gt-notif-desc">
+                <strong>{newlyGradedAttempt.testTitle}</strong> imtihoni baholandi.
+                Natijangizni ko&apos;rishni xohlaysizmi?
+              </p>
+              <div className="gt-notif-score-row">
+                <span className={`gt-notif-score-badge ${newlyGradedAttempt.score >= 90 ? 'excellent' : newlyGradedAttempt.score >= 70 ? 'good' : newlyGradedAttempt.score >= 50 ? 'satisfactory' : 'fail'}`}>
+                  {newlyGradedAttempt.score}%
+                </span>
+                <span className="gt-notif-score-meta">{newlyGradedAttempt.totalScore} / {newlyGradedAttempt.totalQuestions} ball</span>
+              </div>
+            </div>
+            <div className="gt-notif-actions">
+              <button
+                className="gt-notif-btn-primary"
+                onClick={() => handleDismissNotification(true)}
+              >
+                Natijangizni ko&apos;rish
+              </button>
+              <button
+                className="gt-notif-btn-secondary"
+                onClick={() => handleDismissNotification(false)}
+              >
+                Keyinroq
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

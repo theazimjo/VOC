@@ -1,3 +1,7 @@
+/* ==========================================================================
+   MIXED PRACTICE — iOS HIG STYLE
+   ========================================================================== */
+
 .mixed-practice-page {
   position: fixed;
   inset: 0;
@@ -9,20 +13,18 @@
   overflow-y: auto;
 }
 
-/* ─── Immersive Header ─── */
+/* ─── Immersive Header ────────────────────────────────────────────────────── */
 .practice-session-header {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 70px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--space-xl);
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  padding: 0 var(--space-md);
+  background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
   z-index: 10;
 }
@@ -37,22 +39,22 @@
 }
 
 .btn-exit-practice {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   font-size: var(--font-xs);
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: var(--radius-lg);
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all var(--transition-fast);
   font-family: inherit;
 }
 
 .btn-exit-practice:hover {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.4);
-  color: #ff6b6b;
+  background: var(--error-dim);
+  border-color: var(--error);
+  color: var(--error);
 }
 
 .mixed-practice-container {
@@ -61,22 +63,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 80px; /* Space to clear header */
+  margin-top: 70px;
   width: 100%;
 }
 
-/* Practice Card Container */
+/* ─── Practice Card Container ─────────────────────────────────────────────── */
 .mixed-practice-card {
-  max-width: 540px;
+  max-width: 500px;
   width: 100%;
   margin: 0 auto;
-  background: var(--bg-glass-strong);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-lg), var(--shadow-glow);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
 }
@@ -89,13 +89,13 @@
     margin-top: 60px;
   }
   .mixed-practice-card {
-    padding: var(--space-lg);
+    padding: var(--space-md);
   }
 }
 
-/* Progress Bar */
+/* ─── Progress Bar ────────────────────────────────────────────────────────── */
 .practice-progress-bar-container {
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
 }
 
 .progress-bar-label {
@@ -109,76 +109,67 @@
 .progress-bar-track {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
   border-radius: var(--radius-full);
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: var(--accent-gradient-2);
+  background: var(--accent-1);
   border-radius: var(--radius-full);
   transition: width var(--transition-base);
 }
 
-/* Question Content */
+/* ─── Question Content ────────────────────────────────────────────────────── */
 .question-content {
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-}
-
-.quiz-question,
-.spelling-question,
-.dictation-question {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
   gap: var(--space-md);
 }
 
 .question-prompt {
   font-size: var(--font-xs);
-  color: var(--text-secondary);
-  font-weight: 600;
+  color: var(--text-muted);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: var(--space-xs);
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
   display: block;
 }
 
 .question-word {
-  font-size: var(--font-2xl);
-  font-weight: 900;
+  font-size: 1.8rem;
+  font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0;
-  line-height: 1.2;
+  line-height: 1.25;
   word-break: break-word;
 }
 
-/* Quiz Option Button grid */
+/* ─── Quiz Option Buttons (iOS HIG Style) ─────────────────────────────────── */
 .quiz-options-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
   width: 100%;
 }
 
 .quiz-option-btn {
   width: 100%;
-  padding: var(--space-md);
-  background: rgba(255, 255, 255, 0.03);
-  border: 2px solid var(--border);
-  border-radius: var(--radius-lg);
+  padding: 14px var(--space-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   color: var(--text-primary);
   font-family: var(--font-family);
   font-size: var(--font-sm);
   font-weight: 600;
   text-align: left;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-fast) ease;
   outline: none;
   display: flex;
   align-items: center;
@@ -189,11 +180,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
   font-size: var(--font-xs);
   font-weight: 700;
   color: var(--text-muted);
@@ -205,40 +196,39 @@
 }
 
 .quiz-option-btn:hover:not(:disabled) {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.04);
+  background: var(--bg-glass-hover);
 }
 
 .quiz-option-btn.correct {
-  background: rgba(34, 197, 94, 0.08);
-  border-color: #22c55e;
-  color: #4ade80;
+  background: var(--success-dim);
+  border-color: var(--success);
+  color: var(--success);
 }
 
 .quiz-option-btn.correct .quiz-opt-letter {
-  background: #22c55e;
+  background: var(--success);
   color: white;
-  border-color: #22c55e;
+  border-color: var(--success);
 }
 
 .quiz-option-btn.incorrect {
-  background: rgba(239, 68, 68, 0.08);
-  border-color: #ef4444;
-  color: #f87171;
+  background: var(--error-dim);
+  border-color: var(--error);
+  color: var(--error);
 }
 
 .quiz-option-btn.incorrect .quiz-opt-letter {
-  background: #ef4444;
+  background: var(--error);
   color: white;
-  border-color: #ef4444;
+  border-color: var(--error);
 }
 
 .quiz-option-btn.disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: default;
 }
 
-/* Spelling / Input Form */
+/* ─── Spelling / Input Form ───────────────────────────────────────────────── */
 .spelling-form {
   display: flex;
   flex-direction: column;
@@ -248,10 +238,10 @@
 
 .spelling-input {
   width: 100%;
-  padding: var(--space-md);
-  background: rgba(255, 255, 255, 0.03);
+  padding: 14px var(--space-md);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   color: var(--text-primary);
   font-family: var(--font-family);
   font-size: var(--font-md);
@@ -262,44 +252,57 @@
 .spelling-input:focus:not(:disabled) {
   border-color: var(--accent-1);
   box-shadow: 0 0 0 3px var(--accent-1-dim);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-secondary);
 }
 
 .submit-btn {
   width: 100%;
-  padding: var(--space-md);
-  border-radius: var(--radius-lg);
+  padding: 14px;
+  border-radius: var(--radius-md);
   font-size: var(--font-sm);
+  font-weight: 700;
+  background: var(--accent-1);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-/* Dictation */
+.submit-btn:hover {
+  filter: brightness(1.06);
+}
+
+.submit-btn:active {
+  transform: scale(0.985);
+}
+
+/* ─── Dictation / Audio Player ────────────────────────────────────────────── */
 .audio-player-container {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .audio-play-btn {
-  width: 56px;
-  height: 56px;
-  background: var(--accent-gradient-2);
+  width: 48px;
+  height: 48px;
+  background: var(--accent-1);
   border: none;
   border-radius: 50%;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px hsla(145, 55%, 55%, 0.25);
-  transition: all var(--transition-base);
+  transition: all var(--transition-fast) ease;
   outline: none;
+  box-shadow: 0 2px 8px rgba(0, 162, 232, 0.2);
 }
 
 .audio-play-btn:hover {
-  transform: scale(1.06);
-  box-shadow: 0 6px 20px hsla(145, 55%, 55%, 0.35);
+  transform: scale(1.04);
 }
 
 .audio-play-btn:active {
@@ -312,74 +315,40 @@
   font-weight: 500;
 }
 
-/* ─── Empty State ─── */
-.empty-state {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: var(--space-md);
-  max-width: 420px;
-  margin: 100px auto 0;
-  padding: var(--space-xl);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-}
-
-.empty-state-icon {
-  font-size: 4rem;
-  margin-bottom: var(--space-xs);
-}
-
-.empty-state h3 {
-  font-size: var(--font-lg);
-  color: var(--text-primary);
-  font-weight: 700;
-  margin: 0;
-}
-
-.empty-state p {
-  font-size: var(--font-sm);
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Feedback Footer bar */
+/* ─── Feedback Footer bar ─────────────────────────────────────────────────── */
 .feedback-footer {
-  margin: 0 calc(-1 * var(--space-xl)) calc(-1 * var(--space-xl));
-  padding: var(--space-lg) var(--space-xl);
+  margin: 0 calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg));
+  padding: var(--space-md) var(--space-lg);
   border-top: 1px solid var(--border);
-  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .feedback-footer.correct {
-  background: hsla(145, 70%, 50%, 0.08);
-  border-top-color: hsla(145, 70%, 50%, 0.2);
+  background: rgba(34, 197, 94, 0.08);
+  border-top-color: rgba(34, 197, 94, 0.2);
 }
 
 .feedback-footer.incorrect {
-  background: hsla(0, 80%, 60%, 0.08);
-  border-top-color: hsla(0, 80%, 60%, 0.2);
+  background: rgba(239, 68, 68, 0.08);
+  border-top-color: rgba(239, 68, 68, 0.2);
 }
 
 .feedback-content {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--space-md);
 }
 
-.feedback-icon {
-  font-size: 1.8rem;
-  line-height: 1;
+.feedback-text-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
 }
 
-.feedback-text {
-  flex: 1;
+.feedback-icon {
+  font-size: 1.4rem;
+  line-height: 1;
 }
 
 .feedback-text h4 {
@@ -405,91 +374,90 @@
 .btn-next {
   background: var(--text-primary);
   color: var(--bg-primary);
-  padding: var(--space-sm) var(--space-lg);
+  padding: 10px 20px;
   border-radius: var(--radius-md);
   font-weight: 700;
   font-size: var(--font-sm);
   flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
 }
 
 .btn-next:hover {
-  transform: translateY(-2px);
-  background: white;
+  filter: brightness(1.08);
 }
 
-/* Results Card */
+/* ─── Results Card ────────────────────────────────────────────────────────── */
 .practice-results-card {
-  max-width: 500px;
+  max-width: 440px;
   margin: 0 auto;
   text-align: center;
-  padding: var(--space-2xl) var(--space-xl);
-  background: var(--bg-glass-strong);
+  padding: var(--space-xl);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
 }
 
 .results-score-badge {
   display: inline-flex;
   align-items: baseline;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  padding: var(--space-md) var(--space-xl);
-  border-radius: var(--radius-lg);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
   margin-bottom: var(--space-sm);
 }
 
 .results-score-badge .score-value {
-  font-size: 2.8rem;
-  font-weight: 900;
-  color: var(--accent-3);
+  font-size: 2.2rem;
+  font-weight: 850;
+  color: var(--accent-1);
   line-height: 1;
 }
 
 .results-score-badge .score-slash {
-  font-size: var(--font-xl);
+  font-size: var(--font-md);
   color: var(--text-muted);
   margin: 0 4px;
 }
 
 .results-score-badge .score-total {
-  font-size: var(--font-lg);
+  font-size: var(--font-sm);
   color: var(--text-secondary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .results-label {
   font-size: var(--font-sm);
   color: var(--text-secondary);
   font-weight: 600;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .results-subtitle {
-  color: var(--text-secondary);
-  margin-bottom: var(--space-xl);
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
 }
 
 /* Mistakes review */
 .mistakes-review-container {
   text-align: left;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md) var(--space-lg);
-  margin-bottom: var(--space-2xl);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .mistakes-review-container h3 {
-  font-size: var(--font-sm);
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--error);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.04em;
 }
 
 .mistakes-list {
@@ -506,9 +474,9 @@
   align-items: center;
   gap: var(--space-sm);
   padding: 8px 12px;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
   margin-bottom: var(--space-xs);
 }
 
@@ -519,8 +487,7 @@
 .mistake-word-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
+  gap: 1px;
 }
 
 .mistake-word {
@@ -546,30 +513,29 @@
 }
 
 .btn-speak-mistake {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
   color: var(--text-secondary);
   cursor: pointer;
-  font-size: var(--font-sm);
-  padding: 6px;
+  font-size: var(--font-xs);
+  padding: 5px;
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all var(--transition-fast);
   outline: none;
 }
 
 .btn-speak-mistake:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-glass-hover);
   color: var(--text-primary);
-  border-color: var(--text-muted);
 }
 
 .result-actions {
   display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-xl);
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
   width: 100%;
 }
 
@@ -581,40 +547,39 @@
 @media (max-width: 768px) {
   .mixed-practice-page {
     padding: var(--space-md);
-    padding-bottom: calc(64px + var(--space-lg)); /* Prevent BottomNav overlap */
+    padding-bottom: calc(64px + var(--space-lg));
   }
 
   .mixed-practice-card {
-    padding: var(--space-md) var(--space-md) 0 var(--space-md);
+    padding: var(--space-md);
   }
 
   .question-word {
-    font-size: var(--font-2xl);
-    margin-bottom: var(--space-md);
+    font-size: 1.5rem;
   }
 
   .question-content {
-    min-height: 200px;
+    min-height: auto;
   }
 
   .feedback-footer {
-    margin: 0 calc(-1 * var(--space-md)) 0;
+    margin: 0 calc(-1 * var(--space-md)) calc(-1 * var(--space-md));
     padding: var(--space-md);
   }
 
   .feedback-content {
-    flex-direction: column;
-    gap: var(--space-sm);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
   }
 
   .btn-next {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
+    width: auto;
+    padding: 8px 16px;
   }
 
   .practice-results-card {
-    padding: var(--space-xl) var(--space-md);
+    padding: var(--space-md);
   }
 }

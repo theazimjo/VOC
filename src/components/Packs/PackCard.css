@@ -101,25 +101,26 @@
 }
 
 .pack-card-badge-compact {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-  font-size: var(--font-xs);
-  color: var(--text-secondary);
-  font-weight: 600;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .pack-card-arrow {
   color: var(--text-muted);
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1;
+  opacity: 0.7;
   transition: transform var(--transition-base), color var(--transition-base);
 }
 
 .pack-card-horizontal:hover .pack-card-arrow {
   color: var(--accent-1);
-  transform: translateX(3px);
+  transform: translateX(2px);
 }
 
 @media (max-width: 768px) {
