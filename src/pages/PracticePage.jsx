@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
@@ -54,6 +54,10 @@ export default function PracticePage() {
     setSourceLoaded(false);
   }, [urlSourceType, urlSourceId]);
 
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const querySubStep = queryParams.get('subStep');
+
   // Load parameterized source if available
   useEffect(() => {
     if (sourceLoaded || !user) return; // Wait for user info to load before executing search and fetch
@@ -84,9 +88,21 @@ export default function PracticePage() {
           }
           setSourceWords(words);
           
-          if (foundSource.name === 'Irregular Verbs') {
-            setSelectedMode('irregular-verbs');
-            setPracticeWords(words);
+          const queryParams = new URLSearchParams(search);
+          const queryMode = queryParams.get('mode');
+          const queryCount = queryParams.get('count');
+          const querySubStep = queryParams.get('subStep');
+          
+          const mode = queryMode || (foundSource.name === 'Irregular Verbs' ? 'irregular-verbs' : null);
+          const count = queryCount ? (queryCount === 'all' ? null : parseInt(queryCount, 10)) : (foundSource.name === 'Irregular Verbs' && mode === 'irregular-verbs' && querySubStep === 'practice' ? 10 : null);
+          
+          if (mode) {
+            setSelectedMode(mode);
+            let selected = [...words];
+            if (count && selected.length > count) {
+              selected = shuffleArray(selected).slice(0, count);
+            }
+            setPracticeWords(selected);
             setStep('intro');
           } else {
             setStep('mode');
@@ -97,7 +113,7 @@ export default function PracticePage() {
         navigate('/library');
       }
     }
-  }, [urlSourceType, resolvedSourceType, urlSourceId, packsLoading, packs, user, navigate, sourceLoaded]);
+  }, [urlSourceType, resolvedSourceType, urlSourceId, packsLoading, packs, user, navigate, sourceLoaded, search]);
 
   // Warn before closing tab during active practice
   useEffect(() => {
@@ -318,6 +334,7 @@ export default function PracticePage() {
       onComplete: handleComplete,
       onUpdateWord: handleUpdateWord,
       onAnswer: handleAnswer,
+      onExit: handleBack,
       sourceName: selectedSource?.title || selectedSource?.name || "Kutubxona",
       onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
@@ -330,7 +347,7 @@ export default function PracticePage() {
       case 'dictation': return <DictationGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
       case 'spaced': return <SpacedRepetition {...props} />;
-      case 'irregular-verbs': return <IrregularVerbsTrainer {...props} />;
+      case 'irregular-verbs': return <IrregularVerbsTrainer {...props} initialSubStep={querySubStep} />;
       default: return null;
     }
   };
@@ -350,15 +367,25 @@ export default function PracticePage() {
         </h1>
       </div>
 
-      {(pageLoading || step === 'loading') ? (
-        <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-2xl)' }}>
-          <div className="ios-spinner-ring"></div>
-          <span>Yuklanmoqda...</span>
-        </div>
-      ) : (
-        <AnimatePresence mode="wait">
-          {/* Step 1: Select Source */}
-          {step === 'source' && (
+      <div className="practice-steps-container">
+        {/* Step 0: Loading Indicator */}
+        {(pageLoading || step === 'loading') && (
+          <motion.div
+            key="main-page-loader"
+            className="ios-activity-indicator"
+            style={{ marginTop: 'var(--space-2xl)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <div className="ios-spinner-ring"></div>
+            <span>Yuklanmoqda...</span>
+          </motion.div>
+        )}
+
+        {/* Step 1: Select Source */}
+        {!pageLoading && step === 'source' && (
             <motion.div
               key="source"
               className="practice-source-selector"
@@ -402,7 +429,7 @@ export default function PracticePage() {
           )}
 
           {/* Step 2: Select Mode */}
-          {step === 'mode' && (
+          {!pageLoading && step === 'mode' && (
             <motion.div
               key="mode"
               initial={{ opacity: 0, y: 20 }}
@@ -429,7 +456,7 @@ export default function PracticePage() {
           )}
 
           {/* Step 2.5: Intro Shape Loader */}
-          {step === 'intro' && (
+          {!pageLoading && step === 'intro' && (
             <motion.div
               key="intro"
               className="practice-intro-screen"
@@ -456,7 +483,7 @@ export default function PracticePage() {
           )}
 
           {/* Step 3: Practice */}
-          {step === 'practice' && (
+          {!pageLoading && step === 'practice' && (
             <motion.div
               key="practice"
               className="practice-session"
@@ -488,7 +515,7 @@ export default function PracticePage() {
           )}
 
           {/* Step 4: Results */}
-          {step === 'results' && results && (
+          {!pageLoading && step === 'results' && results && (
             <motion.div
               key="results"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -559,8 +586,7 @@ export default function PracticePage() {
               </div>
             </motion.div>
           )}
-        </AnimatePresence>
-      )}
+      </div>
       {customModal.show && (
         <div className="custom-alert-overlay">
           <div className="custom-alert-card">

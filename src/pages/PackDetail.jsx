@@ -91,14 +91,31 @@ export default function PackDetail() {
           </div>
         </div>
         <div className="pack-detail-actions">
-          {pack.name !== 'Irregular Verbs' && (
-            <button className="btn btn-cards" onClick={() => navigate(`/cards/packs/${packId}`)}>
-              🃏 Cards Mode
-            </button>
+          {pack.name === 'Irregular Verbs' ? (
+            <>
+              <button 
+                className="btn btn-cards" 
+                onClick={() => navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=study`)}
+              >
+                🃏 Flashkart
+              </button>
+              <button 
+                className="btn btn-primary btn-mashq" 
+                onClick={() => navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=practice&count=10`)}
+              >
+                ⚡ Mashq qilish
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="btn btn-cards" onClick={() => navigate(`/cards/packs/${packId}`)}>
+                🃏 Cards Mode
+              </button>
+              <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
+                🎮 Mashq qilish
+              </button>
+            </>
           )}
-          <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
-            🎮 Mashq qilish
-          </button>
         </div>
       </div>
 

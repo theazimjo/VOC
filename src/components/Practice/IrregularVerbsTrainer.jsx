@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { playSound } from '../../utils/feedback';
 import './IrregularVerbsTrainer.css';
 
-export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName, onProgress }) {
+export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName, onProgress, initialSubStep, onExit }) {
   const [sessionVerbs, setSessionVerbs] = useState([]);
-  const [subStep, setSubStep] = useState('study'); // 'study' | 'practice'
+  const [subStep, setSubStep] = useState(initialSubStep || 'study'); // 'study' | 'practice'
   const [studyIndex, setStudyIndex] = useState(0);
 
   // Practice States
@@ -106,7 +106,6 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     setChecked(false);
 
     // Randomize question type: 0 (Table fill), 1 (Shuffled order), 2 (Sentence context choice)
-    // We only choose Type 2 if a sentence could be successfully parsed
     const parsedSentence = parseSentenceQuestion(verb);
     let chosenType = Math.floor(Math.random() * 3); // 0, 1 or 2
     if (chosenType === 2 && !parsedSentence) {
@@ -178,18 +177,15 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
         const targets = check.val.split('/').map(t => t.trim());
         for (const t of targets) {
           if (wordsInSentence.includes(t)) {
-            // Found a match! Blank it out in the original sentence
             const regex = new RegExp(`\\b${t}\\b`, 'i');
             const questionText = sentence.replace(regex, '<strong>_______</strong>');
             
-            // Choices are V1, V2, V3 shuffled
             const choices = [
               { label: 'V1', text: verb.v1 },
               { label: 'V2', text: verb.v2 },
               { label: 'V3', text: verb.v3 }
             ];
             
-            // Track correct choice index
             const correctIndex = choices.findIndex(c => c.label.toLowerCase() === check.key);
 
             return {
@@ -279,18 +275,16 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     if (isCorrectChoice) {
       const updatedButtons = [...orderButtons];
       updatedButtons[btnIdx].clicked = true;
-      updatedButtons[btnIdx].clickedIndex = orderStep; // V1/V2/V3 display badge index
+      updatedButtons[btnIdx].clickedIndex = orderStep; 
       setOrderButtons(updatedButtons);
 
       if (orderStep === 2) {
-        // Correctly sorted V1, V2, V3!
         setChecked(true);
         processResult(!orderFailed);
       } else {
         setOrderStep(prev => prev + 1);
       }
     } else {
-      // Wrong click! Flash incorrect and mark failed
       setOrderFailed(true);
       playSound('wrong');
     }
@@ -350,41 +344,42 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       {subStep === 'study' && (
         <div className="study-flow">
           <div className="practice-card-header study-header">
-            <span className="practice-source-badge">📚 Fe'llarni o'rganish ({studyIndex + 1}/{sessionVerbs.length})</span>
+            <span className="practice-source-badge">Fe'llarni O'rganish</span>
+            <span className="practice-source-badge">{studyIndex + 1} / {sessionVerbs.length}</span>
           </div>
 
           <AnimatePresence mode="wait">
             <motion.div
               key={studyIndex}
               className="study-card"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
               transition={{ duration: 0.2 }}
             >
               <div className="study-card-uz-title">
                 {sessionVerbs[studyIndex].translation}
               </div>
 
-              {/* iOS-Style Grouped Rows for V1, V2, V3 */}
+              {/* iOS-Style Grouped Rows */}
               <div className="study-card-rows-list">
                 <div className="study-card-row-item">
-                  <span className="study-row-title">V1 (Infinitive)</span>
+                  <span className="study-row-title">Infinitive</span>
                   <span className="study-row-val">{sessionVerbs[studyIndex].v1}</span>
                 </div>
                 <div className="study-card-row-item">
-                  <span className="study-row-title">V2 (Past Simple)</span>
+                  <span className="study-row-title">Past Simple</span>
                   <span className="study-row-val">{sessionVerbs[studyIndex].v2}</span>
                 </div>
                 <div className="study-card-row-item">
-                  <span className="study-row-title">V3 (Past Participle)</span>
+                  <span className="study-row-title">Past Participle</span>
                   <span className="study-row-val">{sessionVerbs[studyIndex].v3}</span>
                 </div>
               </div>
 
               {sessionVerbs[studyIndex].example && (
                 <div className="study-card-example-box">
-                  <div className="example-label">Gaplarda qo'llanilishi:</div>
+                  <div className="example-label">Misol uchun</div>
                   <div className="example-sentences">
                     {sessionVerbs[studyIndex].example.split('/').map((s, i) => {
                       const trimmed = s.trim();
@@ -408,7 +403,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                         <div 
                           key={i} 
                           className="example-sentence-item" 
-                          dangerouslySetInnerHTML={{ __html: `💡 ${highlighted}` }}
+                          dangerouslySetInnerHTML={{ __html: highlighted }}
                         />
                       );
                     })}
@@ -416,12 +411,15 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                 </div>
               )}
 
-              {/* Speak button inside card */}
               <button 
                 className="btn-speak-study-card" 
                 onClick={() => speakVerbs(sessionVerbs[studyIndex].v1, sessionVerbs[studyIndex].v2, sessionVerbs[studyIndex].v3)}
               >
-                🔊 Talaffuzni eshitish
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{marginRight: '6px'}}>
+                  <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 001.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 011.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 11-1.06-1.06 8.25 8.25 0 000-11.668.75.75 0 010-1.06z"/>
+                  <path d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z"/>
+                </svg>
+                Ovozli eshitish
               </button>
             </motion.div>
           </AnimatePresence>
@@ -429,16 +427,15 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
           <div className="study-card-footer">
             <button 
               className="btn btn-secondary" 
-              onClick={handlePrevStudyCard}
-              disabled={studyIndex === 0}
+              onClick={studyIndex === 0 ? onExit : handlePrevStudyCard}
             >
-              Oldingi
+              {studyIndex === 0 ? "Chiqish" : "Orqaga"}
             </button>
             <button 
               className="btn btn-primary" 
               onClick={handleNextStudyCard}
             >
-              {studyIndex + 1 === sessionVerbs.length ? "Mashqni boshlash 🚀" : "Keyingisi"}
+              {studyIndex + 1 === sessionVerbs.length ? "Boshlash" : "Keyingisi"}
             </button>
           </div>
         </div>
@@ -449,11 +446,10 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       {/* -------------------------------------------------------- */}
       {subStep === 'practice' && (
         <div>
-          {/* Top Header */}
-          <div className="practice-card-header">
-            <span className="practice-source-badge">⚡ Noto'g'ri fe'llar trenajyori</span>
-            <div className="practice-progress-text">
-              Savol: {currentIndex + 1} / {sessionVerbs.length}
+          <div className="practice-card-header study-header">
+            <span className="practice-source-badge">Amaliyot</span>
+            <div className="practice-source-badge">
+              {currentIndex + 1} of {sessionVerbs.length}
             </div>
           </div>
 
@@ -463,18 +459,17 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
             {/* GAME TYPE 0: TABLE FILL-IN */}
             {/* ------------------------------------ */}
             {qType === 0 && (
-              <div className="game-type-wrap">
+              <div className="game-type-wrap" style={{ width: '100%' }}>
                 <div className="verb-uz-translation">
                   <span>{currentVerb.translation}</span>
                 </div>
                 <div className="trainer-instruction">
-                  Fe'lning qolgan shakllarini yozib to'ldiring:
+                  Qolgan shakllarini to'ldiring
                 </div>
 
                 <div className="trainer-grid">
-                  {/* V1 Column */}
                   <div className="trainer-col">
-                    <label className="trainer-col-label">V1 (Infinitive)</label>
+                    <label className="trainer-col-label">V1</label>
                     <input
                       ref={v1Ref}
                       type="text"
@@ -483,17 +478,16 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       onChange={(e) => handleTableInputChange('v1', e.target.value)}
                       onKeyDown={(e) => handleTableKeyPress(e, 'v1')}
                       disabled={tablePrefillType === 1 || checked}
-                      placeholder={tablePrefillType === 1 ? "" : "?"}
+                      placeholder={tablePrefillType === 1 ? "" : "Infinitive"}
                       autoComplete="off"
                       autoCorrect="off"
-                      autoCapitalize="off"
+                      autoCapitalize="none"
                       spellCheck="false"
                     />
                   </div>
 
-                  {/* V2 Column */}
                   <div className="trainer-col">
-                    <label className="trainer-col-label">V2 (Past Simple)</label>
+                    <label className="trainer-col-label">V2</label>
                     <input
                       ref={v2Ref}
                       type="text"
@@ -502,17 +496,16 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       onChange={(e) => handleTableInputChange('v2', e.target.value)}
                       onKeyDown={(e) => handleTableKeyPress(e, 'v2')}
                       disabled={tablePrefillType === 2 || checked}
-                      placeholder={tablePrefillType === 2 ? "" : "?"}
+                      placeholder={tablePrefillType === 2 ? "" : "Past"}
                       autoComplete="off"
                       autoCorrect="off"
-                      autoCapitalize="off"
+                      autoCapitalize="none"
                       spellCheck="false"
                     />
                   </div>
 
-                  {/* V3 Column */}
                   <div className="trainer-col">
-                    <label className="trainer-col-label">V3 (Past Participle)</label>
+                    <label className="trainer-col-label">V3</label>
                     <input
                       ref={v3Ref}
                       type="text"
@@ -521,10 +514,10 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       onChange={(e) => handleTableInputChange('v3', e.target.value)}
                       onKeyDown={(e) => handleTableKeyPress(e, 'v3')}
                       disabled={tablePrefillType === 3 || checked}
-                      placeholder={tablePrefillType === 3 ? "" : "?"}
+                      placeholder={tablePrefillType === 3 ? "" : "Participle"}
                       autoComplete="off"
                       autoCorrect="off"
-                      autoCapitalize="off"
+                      autoCapitalize="none"
                       spellCheck="false"
                     />
                   </div>
@@ -541,10 +534,9 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   <span>{currentVerb.translation}</span>
                 </div>
                 <div className="trainer-instruction">
-                  Fe'llarni tartib bilan ketma-ket bosing: <strong>V1 → V2 → V3</strong>
+                  Tartib bilan bosing: V1 → V2 → V3
                 </div>
 
-                {/* Shuffled button grid */}
                 <div className="order-grid">
                   {orderButtons.map((btn, idx) => (
                     <button
@@ -553,7 +545,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       onClick={() => handleOrderClick(btn, idx)}
                       disabled={btn.clicked || checked}
                     >
-                      <span className="order-btn-text">{btn.text}</span>
+                      <span>{btn.text}</span>
                       {btn.clicked && (
                         <span className="order-badge">
                           V{btn.clickedIndex + 1}
@@ -563,7 +555,6 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   ))}
                 </div>
 
-                {/* Progress helper */}
                 <div className="order-sequence-indicator">
                   <span className={`seq-dot ${orderStep >= 1 || checked ? 'active' : ''}`}>{checked || orderStep >= 1 ? currentVerb.v1 : 'V1'}</span>
                   <span className="seq-arrow">→</span>
@@ -581,10 +572,10 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
               <div className="game-type-wrap" style={{ width: '100%' }}>
                 <div 
                   className="sentence-text-question" 
-                  dangerouslySetInnerHTML={{ __html: `"${sentenceQuestion.questionText}"` }} 
+                  dangerouslySetInnerHTML={{ __html: sentenceQuestion.questionText }} 
                 />
                 <div className="trainer-instruction">
-                  Gapdagi bo'shliq o'rniga mos keluvchi to'g'ri fe'l shaklini tanlang:
+                  Mos tushuvchi fe'lni tanlang
                 </div>
 
                 <div className="choices-grid">
@@ -620,11 +611,11 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
               {checked && (
                 <motion.div
                   className="trainer-reveal-box"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                 >
-                  <div className="reveal-title">To'g'ri shakllar:</div>
+                  <div className="reveal-title">To'g'ri Javob</div>
                   <div className="reveal-forms">
                     <span className="reveal-form-item">{currentVerb.v1}</span>
                     <span className="reveal-divider">→</span>
@@ -634,7 +625,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   </div>
                   {currentVerb.example && (
                     <div className="reveal-example">
-                      💡 <em>{currentVerb.example}</em>
+                      {currentVerb.example}
                     </div>
                   )}
                 </motion.div>
@@ -644,19 +635,18 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
             {/* Footer Buttons */}
             <div className="trainer-footer">
               {!checked ? (
-                // Only show submit button for table fill, the other two check automatically on click/sort
                 qType === 0 ? (
                   <button className="btn btn-primary btn-submit-trainer" onClick={handleTableSubmit}>
                     Tekshirish
                   </button>
                 ) : qType === 1 ? (
                   <button className="btn btn-ghost btn-submit-trainer" onClick={handleOrderSkipReveal}>
-                    Javobni ko'rish
+                    Javobni Ko'rish
                   </button>
                 ) : null
               ) : (
-                <button className="btn btn-success btn-submit-trainer animate-pulse" onClick={handleNextQuestion}>
-                  {currentIndex + 1 === sessionVerbs.length ? "Natijalarni ko'rish" : "Keyingisi"}
+                <button className="btn btn-success btn-submit-trainer" onClick={handleNextQuestion}>
+                  {currentIndex + 1 === sessionVerbs.length ? "Natija" : "Davom Etish"}
                 </button>
               )}
             </div>
