@@ -1,7 +1,7 @@
 {
-  "name": "VOC - So'z O'rganish",
+  "name": "VOC",
   "short_name": "VOC",
-  "description": "So'zlarni spaced repetition va grammatika bilan oson o'rganing",
+  "description": "Learn",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#09090e",

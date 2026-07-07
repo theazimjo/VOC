@@ -2,38 +2,50 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
-import './LoginPage.css';
-import './RegisterPage.css';
+import './LoginPage.css'; // Asosiy iOS stillar
+import './RegisterPage.css'; // Parol indikatori uchun stillar
 
+// Subtle, smooth ambient animations for the orbs (iOS style)
 const orbVariants = {
   animate: (i) => ({
-    x: [0, 30 * Math.sin(i * 1.2), -20 * Math.cos(i), 0],
-    y: [0, -25 * Math.cos(i * 0.8), 35 * Math.sin(i), 0],
-    scale: [1, 1.08, 0.95, 1],
+    x: [0, 20 * Math.sin(i * 1.2), -15 * Math.cos(i), 0],
+    y: [0, -20 * Math.cos(i * 0.8), 25 * Math.sin(i), 0],
+    scale: [1, 1.05, 0.98, 1],
     transition: {
-      duration: 12 + i * 3,
+      duration: 15 + i * 2,
       repeat: Infinity,
       ease: 'easeInOut',
     },
   }),
 };
 
+// iOS style spring entrance for the card
 const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.96 },
+  hidden: { opacity: 0, y: 30, scale: 0.98 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { 
+      type: "spring", 
+      damping: 25, 
+      stiffness: 300 
+    },
   },
 };
 
+// Cascading entrance for inputs
 const inputVariants = {
-  hidden: { opacity: 0, x: -20 },
+  hidden: { opacity: 0, y: 15 },
   visible: (i) => ({
     opacity: 1,
-    x: 0,
-    transition: { delay: 0.25 + i * 0.08, duration: 0.4, ease: 'easeOut' },
+    y: 0,
+    transition: { 
+      delay: 0.1 + i * 0.08, 
+      type: "spring", 
+      damping: 20, 
+      stiffness: 300 
+    },
   }),
 };
 
@@ -121,7 +133,7 @@ export default function RegisterPage() {
   if (loading) {
     return (
       <div className="auth-page">
-        <div className="auth-spinner" style={{ width: 40, height: 40 }} />
+        <div className="auth-spinner" style={{ borderColor: 'rgba(0,0,0,0.1)', borderTopColor: '#007aff', width: 40, height: 40 }} />
       </div>
     );
   }
@@ -153,9 +165,9 @@ export default function RegisterPage() {
         {/* Brand */}
         <motion.div
           className="auth-brand"
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div className="auth-logo">VOC</div>
           <p className="auth-tagline">Yangi akkaunt yaratish</p>
@@ -166,10 +178,10 @@ export default function RegisterPage() {
           {error && (
             <motion.div
               className="auth-error"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25 }}
+              initial={{ opacity: 0, height: 0, marginTop: 0 }}
+              animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
+              exit={{ opacity: 0, height: 0, marginTop: 0 }}
+              transition={{ duration: 0.2 }}
             >
               <span>⚠️</span> {error}
             </motion.div>
@@ -238,9 +250,10 @@ export default function RegisterPage() {
           {/* Password strength */}
           {password.length > 0 && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
               transition={{ duration: 0.2 }}
+              style={{ padding: '0 4px' }}
             >
               <div className="auth-password-strength">
                 {[1, 2, 3].map((bar) => (
@@ -285,7 +298,7 @@ export default function RegisterPage() {
             initial="hidden"
             animate="visible"
             custom={4}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{ scale: 0.96 }}
           >
             {submitting ? <span className="auth-spinner" /> : 'Ro\'yxatdan o\'tish'}
           </motion.button>
@@ -296,7 +309,7 @@ export default function RegisterPage() {
           className="auth-footer"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
+          transition={{ delay: 0.5 }}
         >
           Akkauntingiz bormi?{' '}
           <Link to="/login">Kirish</Link>
