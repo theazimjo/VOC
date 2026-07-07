@@ -64,7 +64,7 @@ export default function Dashboard() {
 
       {/* ── Greeting ── */}
       <motion.div className="dash-greeting-section" {...fadeUp(0)}>
-        <div className="dash-greeting">{getGreeting()} 👋</div>
+        <div className="dash-greeting">{getGreeting()}</div>
         <div className="dash-name">{displayName}</div>
         <div className="dash-subtitle">Bugun qancha so'z o'rganasiz?</div>
       </motion.div>
@@ -73,17 +73,17 @@ export default function Dashboard() {
       <motion.div className="dash-stats-row" {...fadeUp(0.07)}>
         <div className="dash-stat-card">
           <div className="dash-stat-icon">📚</div>
-          <div className={`dash-stat-value blue`}>{totalWords}</div>
+          <div className="dash-stat-value blue">{totalWords}</div>
           <div className="dash-stat-label">Jami so'z</div>
         </div>
         <div className="dash-stat-card">
           <div className="dash-stat-icon">✅</div>
-          <div className={`dash-stat-value green`}>{masteredWords}</div>
+          <div className="dash-stat-value green">{masteredWords}</div>
           <div className="dash-stat-label">O'zlashtirilgan</div>
         </div>
         <div className="dash-stat-card">
           <div className="dash-stat-icon">🔔</div>
-          <div className={`dash-stat-value orange`}>{dueWords}</div>
+          <div className="dash-stat-value orange">{dueWords}</div>
           <div className="dash-stat-label">Takrorlash</div>
         </div>
       </motion.div>
@@ -111,20 +111,18 @@ export default function Dashboard() {
           onClick={() => navigate('/mixed-practice')}
           id="dashboard-practice-btn"
         >
-          Mashq qilish 🚀
+          Mashq qilish
           {dueWords > 0 && (
             <span className="btn-practice-badge">{dueWords} ta takrorlash</span>
           )}
         </button>
       </motion.div>
 
-      {/* ── Recent Words ── */}
+      {/* ── Recent Words (iOS Inset Grouped List) ── */}
       <motion.div className="dashboard-section" {...fadeUp(0.2)}>
         <div className="dashboard-section-header">
-          <h2>Oxirgi qo'shilgan so'zlar</h2>
-          <Link to="/library" style={{ fontSize: 'var(--font-sm)', color: 'var(--accent-1)', fontWeight: 600 }}>
-            Barchasi →
-          </Link>
+          <h2>Oxirgi so'zlar</h2>
+          <Link to="/library" className="ios-link">Barchasi</Link>
         </div>
 
         {recentWords.length > 0 ? (
@@ -139,7 +137,7 @@ export default function Dashboard() {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.22 + idx * 0.04 }}
                 >
-                  <div className="word-mastery-icon" style={{ boxShadow: `0 0 8px ${masteryInfo.color}22` }}>
+                  <div className="word-mastery-icon" style={{ backgroundColor: `${masteryInfo.color}15`, color: masteryInfo.color }}>
                     {masteryInfo.icon}
                   </div>
                   <div className="word-info">
@@ -147,10 +145,10 @@ export default function Dashboard() {
                     <div className="word-translation">{word.translation}</div>
                   </div>
                   <div className="word-meta">
-                    <span className="word-source-badge">{word.source}</span>
                     <span className="word-mastery-percent" style={{ color: masteryInfo.color }}>
                       {word.mastery || 0}%
                     </span>
+                    <span className="word-chevron">›</span>
                   </div>
                 </motion.div>
               );
@@ -161,8 +159,8 @@ export default function Dashboard() {
             <div className="dash-empty-icon">📝</div>
             <h3>Hali so'z qo'shilmagan</h3>
             <p>Kutubxonadan to'plam ochib, birinchi so'zingizni qo'shing!</p>
-            <Link to="/library" className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
-              Kutubxonaga o'tish →
+            <Link to="/library" className="btn-practice-primary empty-btn">
+              Kutubxonaga o'tish
             </Link>
           </div>
         )}
