@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { shuffleArray, speakWord } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
+import { gradientForWord } from '../../utils/cardGradients';
 import './CardsDrill.css';
 
 export default function CardsDrill({ words, allWords, onComplete }) {
@@ -35,6 +36,10 @@ export default function CardsDrill({ words, allWords, onComplete }) {
   const correctionRef = useRef(null);
 
   const current = words[index];
+  const gradients = useMemo(
+    () => words.map((w, i) => gradientForWord(w.id, i)),
+    [words]
+  );
 
   // Set up the challenge for the current word
   useEffect(() => {
@@ -499,63 +504,65 @@ export default function CardsDrill({ words, allWords, onComplete }) {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
           >
-            {/* Clue card information */}
-            <div className="cd-clue-header">
-              <span className="cd-pos-tag">{current.partOfSpeech || 'so\'z'}</span>
-              <button
-                className="cd-speak-btn"
-                onClick={handlePronounce}
-                title="Talaffuzni eshitish"
-                type="button"
-              >
-                🔊 Eshitish
-              </button>
+            {/* Clue zone — vivid gradient, matches the SwipeCard for this word */}
+            <div className="cd-clue-zone" style={{ background: gradients[index] }}>
+              <div className="cd-clue-header">
+                <span className="cd-pos-tag">{current.partOfSpeech || 'so\'z'}</span>
+                <button
+                  className="cd-speak-btn"
+                  onClick={handlePronounce}
+                  title="Talaffuzni eshitish"
+                  type="button"
+                >
+                  🔊 Eshitish
+                </button>
+              </div>
+
+              <h3 className="cd-translation-display">{current.translation}</h3>
+
+              {current.definition && (
+                <p className="cd-definition-display">{current.definition}</p>
+              )}
+
+              {current.example && (
+                <p className="cd-example-display">
+                  <em>"{current.example}"</em>
+                </p>
+              )}
             </div>
 
-            <h3 className="cd-translation-display">{current.translation}</h3>
-            
-            {current.definition && (
-              <p className="cd-definition-display">{current.definition}</p>
-            )}
+            {/* Exercise zone — frosted panel, holds the interactive challenge */}
+            <div className="cd-exercise-zone">
+              <div className="cd-exercise-area">
+                {challengeType === 'quiz' && renderQuiz()}
+                {challengeType === 'scramble' && renderScramble()}
+                {challengeType === 'spelling' && renderSpelling()}
+              </div>
 
-            {current.example && (
-              <p className="cd-example-display">
-                <em>"{current.example}"</em>
-              </p>
-            )}
-
-            <hr className="cd-divider" />
-
-            {/* Exercise dynamic area */}
-            <div className="cd-exercise-area">
-              {challengeType === 'quiz' && renderQuiz()}
-              {challengeType === 'scramble' && renderScramble()}
-              {challengeType === 'spelling' && renderSpelling()}
+              {/* Status Banners */}
+              <AnimatePresence>
+                {status === 'correct' && (
+                  <motion.div
+                    className="cd-status-banner is-correct"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    🎉 Barakalla! To'g'ri!
+                  </motion.div>
+                )}
+                {status === 'wrong' && (
+                  <motion.div
+                    className="cd-status-banner is-wrong"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    ❌ Noto'g'ri javob!
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-
-            {/* Status Banners */}
-            <AnimatePresence>
-              {status === 'correct' && (
-                <motion.div
-                  className="cd-status-banner is-correct"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                >
-                  🎉 Barakalla! To'g'ri!
-                </motion.div>
-              )}
-              {status === 'wrong' && (
-                <motion.div
-                  className="cd-status-banner is-wrong"
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                >
-                  ❌ Noto'g'ri javob!
-                </motion.div>
-              )}
-            </AnimatePresence>
           </motion.div>
         ) : (
           renderCorrection()

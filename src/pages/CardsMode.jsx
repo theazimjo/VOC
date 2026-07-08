@@ -256,34 +256,38 @@ export default function CardsMode() {
           {step === 'dashboard' && (
             <motion.div key="dashboard" className="cm-dashboard-container" {...PAGE_VARIANTS}>
               <div className="cm-dashboard-card">
-                <div className="cm-db-icon">🃏</div>
-                <h2 className="cm-db-title">Cards Mode-ga xush kelibsiz!</h2>
-                <p className="cm-db-subtitle">
-                  So'zlarni o'ngga va chapga surish orqali oson o'rganing.
-                </p>
-                <div className="cm-db-words-badge">
-                  📊 Jami: <strong>{allWords.length}</strong> ta so'z
+                <div className="cm-db-hero">
+                  <div className="cm-db-icon">🃏</div>
                 </div>
-
-                <div className="cm-db-options">
-                  <label className="cm-option-label">O'rganiladigan so'zlar soni:</label>
-                  <div className="cm-count-selector">
-                    {[5, 10, 20, 0].map(count => (
-                      <button
-                        key={count}
-                        className={`cm-count-btn ${Number(wordLimit) === count ? 'is-active' : ''}`}
-                        onClick={() => setWordLimit(count)}
-                        type="button"
-                      >
-                        {count === 0 ? 'Barchasi' : `${count} ta`}
-                      </button>
-                    ))}
+                <div className="cm-db-body">
+                  <h2 className="cm-db-title">Cards Mode-ga xush kelibsiz!</h2>
+                  <p className="cm-db-subtitle">
+                    So'zlarni o'ngga va chapga surish orqali oson o'rganing.
+                  </p>
+                  <div className="cm-db-words-badge">
+                    📊 Jami: <strong>{allWords.length}</strong> ta so'z
                   </div>
-                </div>
 
-                <button className="btn btn-primary cm-start-btn" onClick={handleStartSession}>
-                  O'rganishni boshlash 🚀
-                </button>
+                  <div className="cm-db-options">
+                    <label className="cm-option-label">O'rganiladigan so'zlar soni:</label>
+                    <div className="cm-count-selector">
+                      {[5, 10, 20, 0].map(count => (
+                        <button
+                          key={count}
+                          className={`cm-count-btn ${Number(wordLimit) === count ? 'is-active' : ''}`}
+                          onClick={() => setWordLimit(count)}
+                          type="button"
+                        >
+                          {count === 0 ? 'Barchasi' : `${count} ta`}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button className="btn btn-primary cm-start-btn" onClick={handleStartSession}>
+                    O'rganishni boshlash 🚀
+                  </button>
+                </div>
               </div>
             </motion.div>
           )}

@@ -417,27 +417,45 @@
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: var(--space-xl) var(--space-lg);
   width: 100%;
   max-width: 420px;
   text-align: center;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.25), var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cm-db-hero {
+  width: 100%;
+  padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+  background: linear-gradient(145deg, #4E54C8 0%, #00B4DB 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cm-db-icon {
+  font-size: 2.2rem;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px; /* squircle look */
+}
+
+.cm-db-body {
+  width: 100%;
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-md);
-}
-
-.cm-db-icon {
-  font-size: 2rem;
-  background: var(--accent-1-dim);
-  width: 64px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px; /* iOS squircle look */
-  margin-bottom: 2px;
 }
 
 .cm-db-title {

@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
 import { speakWord } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
+import { gradientForWord } from '../../utils/cardGradients';
 import './SwipeCard.css';
 
 const SWIPE_THRESHOLD = 90;
@@ -13,11 +14,11 @@ const POS_ABBR = {
   interjection: 'int.', phrase: 'phr.', idiom: 'idiom'
 };
 
-function TopCard({ word, onSwipe, onFlip, isFlipped }) {
+function TopCard({ word, gradient, onSwipe, onToggleReveal, isRevealed }) {
   const x = useMotionValue(0);
-  const rotate = useTransform(x, [-220, 220], [-18, 18]);
-  const greenOp = useTransform(x, [20, SWIPE_THRESHOLD], [0, 1]);
-  const blueOp  = useTransform(x, [-SWIPE_THRESHOLD, -20], [1, 0]);
+  const rotate = useTransform(x, [-220, 220], [-14, 14]);
+  const knownOp   = useTransform(x, [20, SWIPE_THRESHOLD], [0, 1]);
+  const unknownOp = useTransform(x, [-SWIPE_THRESHOLD, -20], [1, 0]);
 
   const handleDragEnd = (_, info) => {
     const { x: ox } = info.offset;
@@ -41,52 +42,53 @@ function TopCard({ word, onSwipe, onFlip, isFlipped }) {
       animate={{ scale: 1, opacity: 1, y: 0 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
     >
-      {/* Direction overlays */}
-      <motion.div className="sc-overlay sc-overlay--right" style={{ opacity: greenOp }}>
-        <span className="sc-dir-badge sc-dir-badge--right">✅ Bilaman</span>
-      </motion.div>
-      <motion.div className="sc-overlay sc-overlay--left" style={{ opacity: blueOp }}>
-        <span className="sc-dir-badge sc-dir-badge--left">❌ Bilmayman</span>
-      </motion.div>
+      <div className="sc-card" style={{ background: gradient }}>
+        {/* Direction stamps (Tinder-style LIKE/NOPE) */}
+        <motion.div className="sc-stamp sc-stamp--known" style={{ opacity: knownOp }}>BILAMAN</motion.div>
+        <motion.div className="sc-stamp sc-stamp--unknown" style={{ opacity: unknownOp }}>BILMAYMAN</motion.div>
 
-      {/* Card body with flip */}
-      <div
-        className={`sc-card ${isFlipped ? 'is-flipped' : ''}`}
-        onClick={onFlip}
-      >
-        {/* Front */}
-        <div className="sc-face sc-front">
-          <button
-            className="sc-speak-btn"
-            type="button"
-            onClick={e => { e.stopPropagation(); speakWord(word.word); }}
-          >🔊</button>
-          {word.partOfSpeech && (
-            <span className="sc-pos">{POS_ABBR[word.partOfSpeech] || word.partOfSpeech}</span>
-          )}
+        <button
+          className="sc-speak-btn"
+          type="button"
+          onClick={e => { e.stopPropagation(); speakWord(word.word); }}
+        >🔊</button>
+
+        {word.partOfSpeech && (
+          <span className="sc-pos">{POS_ABBR[word.partOfSpeech] || word.partOfSpeech}</span>
+        )}
+
+        <div className="sc-word-stage" onClick={onToggleReveal}>
           <div className="sc-word">{word.word}</div>
-          <div className="sc-flip-hint">Ag'darish uchun bosing · Space</div>
-          <div className="sc-swipe-hint">
-            <span>← Bilmayman</span>
-            <span>Bilaman →</span>
-          </div>
+          {!isRevealed && <div className="sc-tap-hint">Tarjimani ko'rish uchun bosing</div>}
         </div>
 
-        {/* Back */}
-        <div className="sc-face sc-back">
-          <div className="sc-translation">{word.translation}</div>
-          {word.definition && <div className="sc-def">{word.definition}</div>}
-          {word.example && <div className="sc-example">"{word.example}"</div>}
-        </div>
+        {/* Reveal panel — slides up from the bottom instead of a 3D flip */}
+        <AnimatePresence>
+          {isRevealed && (
+            <motion.div
+              className="sc-reveal-panel"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+              onClick={onToggleReveal}
+            >
+              <div className="sc-reveal-handle" />
+              <div className="sc-translation">{word.translation}</div>
+              {word.definition && <div className="sc-def">{word.definition}</div>}
+              {word.example && <div className="sc-example">"{word.example}"</div>}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );
 }
 
-function StackCard({ word, depth }) {
+function StackCard({ word, gradient, depth }) {
   const scale = 1 - depth * 0.05;
   const y = depth * 10;
-  const opacity = 1 - depth * 0.18;
+  const opacity = 1 - depth * 0.25;
 
   return (
     <motion.div
@@ -96,8 +98,8 @@ function StackCard({ word, depth }) {
       animate={{ scale, y, opacity }}
       transition={{ type: 'spring', stiffness: 300, damping: 28 }}
     >
-      <div className="sc-card">
-        <div className="sc-face sc-front sc-front--muted">
+      <div className="sc-card sc-card--stack" style={{ background: gradient }}>
+        <div className="sc-word-stage">
           <div className="sc-word">{word.word}</div>
         </div>
       </div>
@@ -107,7 +109,7 @@ function StackCard({ word, depth }) {
 
 export default function SwipeCard({ words, onComplete }) {
   const [index, setIndex] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
   const [known, setKnown] = useState([]);
   const [unknown, setUnknown] = useState([]);
   const [exiting, setExiting] = useState(false);
@@ -115,6 +117,11 @@ export default function SwipeCard({ words, onComplete }) {
   const currentWord = words[index];
   const totalWords = words.length;
   const progress = index / totalWords;
+
+  const gradients = useMemo(
+    () => words.map((w, i) => gradientForWord(w.id, i)),
+    [words]
+  );
 
   // Speak on new card
   useEffect(() => {
@@ -124,19 +131,17 @@ export default function SwipeCard({ words, onComplete }) {
     }
   }, [index, currentWord]);
 
-  // Keyboard shortcuts
   const handleSwipe = useCallback((dir, motionX) => {
     if (exiting || !currentWord) return;
     setExiting(true);
 
-    // Audio and haptics feedback
     const isCorrect = dir === 'right';
     playSound(isCorrect ? 'correct' : 'wrong');
     triggerVibration(isCorrect ? 'correct' : 'wrong');
 
     const targetX = dir === 'right' ? 1000 : -1000;
     if (motionX) {
-      motionX.set(targetX); // animate card flying off
+      motionX.set(targetX);
     }
 
     const newKnown   = dir === 'right' ? [...known, currentWord] : known;
@@ -145,7 +150,7 @@ export default function SwipeCard({ words, onComplete }) {
     setTimeout(() => {
       setKnown(newKnown);
       setUnknown(newUnknown);
-      setIsFlipped(false);
+      setIsRevealed(false);
 
       const nextIdx = index + 1;
       if (nextIdx >= totalWords) {
@@ -159,7 +164,7 @@ export default function SwipeCard({ words, onComplete }) {
 
   useEffect(() => {
     const handleKey = (e) => {
-      if (e.code === 'Space') { e.preventDefault(); setIsFlipped(f => !f); }
+      if (e.code === 'Space') { e.preventDefault(); setIsRevealed(f => !f); }
       if (e.code === 'ArrowRight') handleSwipe('right', null);
       if (e.code === 'ArrowLeft')  handleSwipe('left', null);
     };
@@ -169,7 +174,7 @@ export default function SwipeCard({ words, onComplete }) {
 
   if (!currentWord) return null;
 
-  const stackWords = words.slice(index + 1, index + 3);
+  const stackIdxs = [index + 1, index + 2].filter(i => i < totalWords);
 
   return (
     <div className="sc-root">
@@ -187,57 +192,61 @@ export default function SwipeCard({ words, onComplete }) {
 
       {/* Score badges */}
       <div className="sc-score-row">
-        <span className="sc-score sc-score--blue">❌ {unknown.length}</span>
-        <span className="sc-score sc-score--green">✅ {known.length}</span>
+        <span className="sc-score sc-score--blue">✕ {unknown.length}</span>
+        <span className="sc-score sc-score--green">✓ {known.length}</span>
       </div>
 
       {/* Deck */}
       <div className="sc-deck">
-        {/* Stack cards behind (rendered bottom-up so lower zIndex is below) */}
-        {[...stackWords].reverse().map((w, i) => (
-          <StackCard key={w.id} word={w} depth={stackWords.length - i} />
+        {[...stackIdxs].reverse().map((i, order) => (
+          <StackCard key={words[i].id} word={words[i]} gradient={gradients[i]} depth={stackIdxs.length - order} />
         ))}
 
-        {/* Top card */}
         <AnimatePresence mode="wait">
           {!exiting && (
             <TopCard
               key={currentWord.id}
               word={currentWord}
+              gradient={gradients[index]}
               onSwipe={handleSwipe}
-              onFlip={() => setIsFlipped(f => !f)}
-              isFlipped={isFlipped}
+              onToggleReveal={() => setIsRevealed(f => !f)}
+              isRevealed={isRevealed}
             />
           )}
         </AnimatePresence>
       </div>
 
-      {/* Swipe buttons */}
+      {/* Action buttons — circular, Tinder-style */}
       <div className="sc-btn-row">
         <button
-          className="sc-btn sc-btn--unknown"
+          className="sc-fab sc-fab--unknown"
           onClick={() => handleSwipe('left', null)}
           type="button"
+          title="Bilmayman"
         >
-          <span className="sc-btn-icon">✕</span>
-          <span>Bilmayman</span>
+          ✕
         </button>
         <button
-          className="sc-btn sc-btn--flip"
-          onClick={() => setIsFlipped(f => !f)}
+          className="sc-fab sc-fab--reveal"
+          onClick={() => setIsRevealed(f => !f)}
           type="button"
+          title="Tarjimani ko'rsatish"
         >
-          <span className="sc-btn-icon">↩</span>
-          <span>Ag'dar</span>
+          👁
         </button>
         <button
-          className="sc-btn sc-btn--known"
+          className="sc-fab sc-fab--known"
           onClick={() => handleSwipe('right', null)}
           type="button"
+          title="Bilaman"
         >
-          <span className="sc-btn-icon">✓</span>
-          <span>Bilaman</span>
+          ✓
         </button>
+      </div>
+      <div className="sc-btn-labels">
+        <span>Bilmayman</span>
+        <span>Ko'rish</span>
+        <span>Bilaman</span>
       </div>
     </div>
   );

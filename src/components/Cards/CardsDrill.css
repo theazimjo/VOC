@@ -61,19 +61,34 @@
   border-radius: var(--radius-full);
 }
 
-/* ─── Card ─── */
+/* ─── Card: two stacked zones — gradient clue on top, frosted exercise below ─── */
 .cd-card {
   width: 100%;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  padding: var(--space-xl);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.28), var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.cd-clue-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-xl);
+  color: #fff;
+}
+
+.cd-exercise-zone {
+  background: var(--bg-secondary);
+  border-radius: 24px 24px 0 0;
+  margin-top: -16px;
+  padding: var(--space-lg) var(--space-xl) var(--space-xl);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  box-shadow: var(--shadow-lg);
   position: relative;
-  overflow: hidden;
+  z-index: 2;
 }
 
 /* ─── Clue Header ─── */
@@ -89,16 +104,18 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--accent-1);
-  background: var(--accent-1-dim);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 4px 12px;
   border-radius: var(--radius-full);
 }
 
 .cd-speak-btn {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  color: #fff;
   padding: 6px 12px;
   border-radius: var(--radius-lg);
   font-size: var(--font-xs);
@@ -111,29 +128,37 @@
 }
 
 .cd-speak-btn:hover {
-  background: var(--bg-glass-hover);
-  color: var(--text-primary);
-  border-color: var(--accent-1);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .cd-speak-btn--large {
   font-size: var(--font-lg);
   padding: 8px 16px;
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.cd-speak-btn--large:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+  border-color: var(--accent-1);
 }
 
 /* ─── Translation & Meanings ─── */
 .cd-translation-display {
   font-size: 2.1rem;
-  font-weight: 800;
-  color: var(--text-primary);
+  font-weight: 900;
+  color: #fff;
   text-align: center;
   margin: var(--space-sm) 0 0;
   line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .cd-definition-display {
   font-size: var(--font-sm);
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.88);
   text-align: center;
   line-height: 1.5;
   margin: 0;
@@ -141,19 +166,12 @@
 
 .cd-example-display {
   font-size: var(--font-sm);
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.75);
   text-align: center;
   line-height: 1.5;
   margin: 0 var(--space-md);
-  border-left: 3px solid var(--accent-1-dim);
+  border-left: 3px solid rgba(255, 255, 255, 0.4);
   padding-left: var(--space-md);
-}
-
-.cd-divider {
-  border: 0;
-  height: 1px;
-  background: var(--border);
-  margin: var(--space-sm) 0;
 }
 
 /* ─── Exercise Common ─── */
@@ -521,9 +539,19 @@
   }
 
   .cd-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .cd-clue-zone {
+    padding: var(--space-md);
+    gap: var(--space-xs);
+  }
+
+  .cd-exercise-zone {
     padding: var(--space-md);
     gap: var(--space-sm);
-    border-radius: var(--radius-lg);
+    margin-top: -12px;
+    border-radius: 18px 18px 0 0;
   }
 
   .cd-translation-display {
@@ -534,10 +562,6 @@
   .cd-definition-display,
   .cd-example-display {
     font-size: var(--font-xs);
-  }
-
-  .cd-divider {
-    margin: var(--space-xs) 0;
   }
 
   .cd-instruction {
