@@ -264,25 +264,48 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 600px) {
-  .quiz-question { font-size: 2rem; }
-
-  .quiz-options {
-    grid-template-columns: 1fr;
+  .quiz-container {
     gap: var(--space-sm);
   }
 
+  .quiz-progress-label {
+    margin-top: -4px;
+  }
+
+  .quiz-question-card {
+    padding: var(--space-md) var(--space-md);
+    gap: var(--space-sm);
+    border-radius: var(--radius-lg);
+  }
+
+  .quiz-question { font-size: 1.7rem; }
+
+  .quiz-question-hint {
+    font-size: var(--font-xs);
+  }
+
+  .quiz-options {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
   .quiz-option {
-    padding: var(--space-sm) var(--space-md);
+    padding: 10px var(--space-md);
     font-size: var(--font-sm);
   }
 
   .quiz-next-row {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: var(--space-sm) var(--space-md);
+    flex-direction: row;
+    align-items: center;
     gap: var(--space-sm);
   }
 
   .btn-quiz-next {
-    width: 100%;
+    padding: 8px 18px;
   }
+}
+
+@media (max-width: 380px) {
+  .quiz-question { font-size: 1.4rem; }
 }

@@ -13,18 +13,23 @@
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
   padding: var(--space-xs) 0 var(--space-md) 0;
   border-bottom: 1px solid var(--border-light);
 }
 
 .practice-page-header h1 {
+  flex: 1;
+  min-width: 0;
   font-size: 1.45rem;
   font-weight: 800;
   margin: 0;
   color: var(--text-primary);
   letter-spacing: -0.025em;
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .practice-page-header .clean-back-arrow {
@@ -38,6 +43,7 @@
   background: transparent;
   border: none;
   transition: transform var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .practice-page-header .clean-back-arrow:hover {
@@ -648,6 +654,14 @@
     padding-bottom: calc(64px + var(--space-lg));
   }
 
+  .practice-page-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .practice-page-header h1 {
+    font-size: 1.15rem;
+  }
+
   .source-tabs-container {
     justify-content: center;
   }
@@ -658,6 +672,7 @@
   }
 
   .practice-word-count-bar {
-    padding: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-md);
   }
 }
