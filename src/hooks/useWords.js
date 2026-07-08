@@ -112,6 +112,7 @@ export function useWords(collectionType, collectionId) {
         definition: data.definition || '',
         example: data.example || '',
         notes: data.notes || '',
+        customSentence: data.customSentence || '',
         partOfSpeech: data.partOfSpeech || 'noun',
         addedAt: new Date().toISOString(),
         mastery: 0,

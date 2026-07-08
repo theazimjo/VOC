@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePacks } from '../hooks/usePacks';
 import { useWords } from '../hooks/useWords';
+import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
@@ -14,6 +15,7 @@ export default function PackDetail() {
   const navigate = useNavigate();
   const { getPack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
+  const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
   
   const [pack, setPack] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
@@ -34,6 +36,12 @@ export default function PackDetail() {
     if (editingWord) {
       await updateWord(editingWord.id, data);
     } else {
+      if (todayCount >= dailyWordLimit) {
+        const proceed = window.confirm(
+          `Bugun allaqachon ${todayCount} ta yangi so'z qo'shdingiz (kunlik maqsad: ${dailyWordLimit} ta). Ko'p so'zni bir kunda qo'shish yodlashni qiyinlashtiradi — ularni avval mustahkamlab olish tavsiya etiladi. Baribir davom etasizmi?`
+        );
+        if (!proceed) return;
+      }
       await addWord(data);
     }
     setShowWordForm(false);
@@ -48,6 +56,13 @@ export default function PackDetail() {
 
   const handleBulkImport = async (newWords, onProgress) => {
     if (pack?.name === 'Irregular Verbs') return;
+    const projectedTotal = todayCount + newWords.length;
+    if (projectedTotal > dailyWordLimit) {
+      const proceed = window.confirm(
+        `Bu import bilan bugungi jami yangi so'zlar soni ${projectedTotal} taga yetadi (kunlik maqsad: ${dailyWordLimit} ta). Baribir davom etasizmi?`
+      );
+      if (!proceed) return;
+    }
     await bulkAddWords(newWords, onProgress);
   };
 

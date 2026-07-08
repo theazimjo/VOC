@@ -23,6 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-sm);
   padding: 0 var(--space-md);
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
@@ -36,6 +37,11 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-xs);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-exit-practice {
@@ -49,6 +55,7 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: inherit;
+  flex-shrink: 0;
 }
 
 .btn-exit-practice:hover {
@@ -338,6 +345,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
+  flex-wrap: wrap;
 }
 
 .feedback-text-wrapper {
@@ -349,6 +357,12 @@
 .feedback-icon {
   font-size: 1.4rem;
   line-height: 1;
+  flex-shrink: 0;
+}
+
+.feedback-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .feedback-text h4 {
@@ -547,7 +561,6 @@
 @media (max-width: 768px) {
   .mixed-practice-page {
     padding: var(--space-md);
-    padding-bottom: calc(64px + var(--space-lg));
   }
 
   .mixed-practice-card {
@@ -568,18 +581,36 @@
   }
 
   .feedback-content {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
   }
 
   .btn-next {
-    width: auto;
-    padding: 8px 16px;
+    flex-basis: 100%;
+    width: 100%;
+    padding: 12px 16px;
   }
 
   .practice-results-card {
     padding: var(--space-md);
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .audio-player-container {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .practice-session-title {
+    font-size: var(--font-sm);
+  }
+
+  .quiz-option-btn {
+    padding: 12px 10px;
+    gap: var(--space-sm);
   }
 }

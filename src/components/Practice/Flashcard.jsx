@@ -136,6 +136,9 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
               {currentWord.example && (
                 <div className="flashcard-example">"{currentWord.example}"</div>
               )}
+              {currentWord.customSentence && (
+                <div className="flashcard-example flashcard-custom-sentence">✍️ {currentWord.customSentence}</div>
+              )}
             </div>
           </div>
         </motion.div>

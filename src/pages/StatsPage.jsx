@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { FileText, Trophy, Flame, Sparkles, Brain, BarChart3 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { FileText, Trophy, Flame, Sparkles, Brain, BarChart3, Target } from 'lucide-react';
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { grammarData, germanGrammarData } from '../data/grammarData';
@@ -17,6 +18,11 @@ export default function StatsPage() {
   const newWords = allWords.filter(w => (w.mastery || 0) === 0).length;
   const dueNow = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= new Date()).length;
   const avgMastery = totalWords > 0 ? Math.round(allWords.reduce((s, w) => s + (w.mastery || 0), 0) / totalWords) : 0;
+
+  const LEECH_THRESHOLD = 3;
+  const leechWords = allWords
+    .filter(w => (w.wrongCount || 0) >= LEECH_THRESHOLD)
+    .sort((a, b) => (b.wrongCount || 0) - (a.wrongCount || 0));
 
   const activeWords = allWords.filter(w => (w.mastery || 0) >= 75 || (w.customSentence && w.customSentence.trim() !== '')).length;
   const passiveWords = totalWords - activeWords;
@@ -154,6 +160,39 @@ export default function StatsPage() {
           <div className="stat-card-label">O'rtacha daraja</div>
         </div>
       </motion.div>
+
+      {/* Leech Words — repeatedly-wrong words worth focused drilling */}
+      {leechWords.length > 0 && (
+        <motion.div className="stats-section leech-section" variants={itemVariants}>
+          <h2><Target size={18} strokeWidth={2.2} style={{ verticalAlign: '-3px', marginRight: '6px' }} />Qiyin so'zlar ({leechWords.length})</h2>
+          <p className="leech-section-desc">
+            Bu so'zlarda {LEECH_THRESHOLD} martadan ortiq xato qilingan — alohida mashq qilish tavsiya etiladi.
+          </p>
+          <div className="source-stats-list">
+            {leechWords.slice(0, 8).map((word, idx) => (
+              <motion.div
+                className="source-stat-item"
+                key={word.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.04 }}
+              >
+                <div className="source-info">
+                  <span className="source-icon">{word.sourceIcon}</span>
+                  <div>
+                    <div className="source-name">{word.word}</div>
+                    <div className="source-count">{word.translation}</div>
+                  </div>
+                </div>
+                <span className="badge badge-error">{word.wrongCount}x xato</span>
+              </motion.div>
+            ))}
+          </div>
+          <Link to="/mixed-practice?filter=leech" className="btn btn-primary" style={{ marginTop: 'var(--space-md)', width: '100%' }}>
+            Qiyin so'zlarni mashq qilish 🎯
+          </Link>
+        </motion.div>
+      )}
 
       {/* Mastery Distribution Chart */}
       {totalWords > 0 && (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, update } from 'firebase/database';
 import { db } from '../firebase';
@@ -10,11 +10,31 @@ import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import './MixedPractice.css';
 
+const LEECH_THRESHOLD = 3;
+
+// Recognition-before-production sequencing: brand-new / weak words get the
+// easiest (multiple-choice) format; words the learner has seen more and is
+// getting right move to listening, then full spelling — the hardest,
+// most production-heavy format — once mastery is high.
+function pickQuestionType(wordObj, poolSize) {
+  if (poolSize < 4) {
+    return Math.random() > 0.5 ? 'spelling' : 'dictation';
+  }
+  const mastery = wordObj.mastery || 0;
+  const reviewCount = wordObj.reviewCount || 0;
+
+  if (reviewCount === 0 || mastery < 30) return 'quiz';
+  if (mastery < 70) return 'dictation';
+  return 'spelling';
+}
+
 export default function MixedPractice() {
   const { user } = useAuth();
   const { allWords, allWordsLoading } = usePacks();
   const { incrementActivity } = useStreak();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isLeechMode = searchParams.get('filter') === 'leech';
 
   const [step, setStep] = useState('setup'); // 'setup' | 'practice' | 'results'
   const [mixedWordsPool, setMixedWordsPool] = useState([]);
@@ -31,24 +51,21 @@ export default function MixedPractice() {
     if (allWordsLoading) return;
     if (!user) return;
 
-    setMixedWordsPool(allWords.map(w => ({ ...w, sourceId: w.packId })));
+    let pool = allWords.map(w => ({ ...w, sourceId: w.packId }));
+    if (isLeechMode) {
+      pool = pool.filter(w => (w.wrongCount || 0) >= LEECH_THRESHOLD);
+    }
+    setMixedWordsPool(pool);
     setLoading(false);
-  }, [user, allWords, allWordsLoading]);
+  }, [user, allWords, allWordsLoading, isLeechMode]);
 
   // Generate question queue
   const startSession = (wordsPool) => {
     if (wordsPool.length === 0) return;
-    
+
     const selectedWords = shuffleArray(wordsPool).slice(0, 8);
     const generated = selectedWords.map((wordObj) => {
-      // Pick question type: 'quiz' | 'spelling' | 'dictation'
-      let type = 'spelling';
-      if (wordsPool.length >= 4) {
-        const questionTypes = ['quiz', 'spelling', 'dictation'];
-        type = questionTypes[Math.floor(Math.random() * questionTypes.length)];
-      } else {
-        type = Math.random() > 0.5 ? 'spelling' : 'dictation';
-      }
+      const type = pickQuestionType(wordObj, wordsPool.length);
 
       let options = [];
       if (type === 'quiz') {
@@ -210,11 +227,15 @@ export default function MixedPractice() {
         </div>
       ) : mixedWordsPool.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">🎮</div>
-          <h3>So'zlar topilmadi</h3>
-          <p>Aralash mashq qilish uchun Kutubxonaga kirib kitob yoki to'plam oching va so'zlar qo'shing!</p>
-          <Link to="/library" className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
-            Kutubxonaga o'tish →
+          <div className="empty-state-icon">{isLeechMode ? '🎯' : '🎮'}</div>
+          <h3>{isLeechMode ? "Qiyin so'zlar yo'q" : "So'zlar topilmadi"}</h3>
+          <p>
+            {isLeechMode
+              ? "Barakalla! Hozircha 3 martadan ortiq xato qilingan so'z yo'q."
+              : "Aralash mashq qilish uchun Kutubxonaga kirib kitob yoki to'plam oching va so'zlar qo'shing!"}
+          </p>
+          <Link to={isLeechMode ? '/stats' : '/library'} className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
+            {isLeechMode ? 'Statistikaga qaytish →' : "Kutubxonaga o'tish →"}
           </Link>
         </div>
       ) : (
@@ -224,7 +245,7 @@ export default function MixedPractice() {
             <div className="mixed-practice-container">
               <div className="practice-session-header">
                 <span className="practice-session-title">
-                  🚀 Aralash Mashq (Mixed Practice)
+                  {isLeechMode ? "🎯 Qiyin so'zlar mashqi" : "🚀 Aralash Mashq"}
                 </span>
                 <button className="btn-exit-practice" onClick={handleExit} title="Mashqdan chiqish">
                   ✕ Chiqish

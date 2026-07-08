@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
 import './Settings.css';
 
 export default function Settings() {
@@ -15,6 +16,8 @@ export default function Settings() {
     performanceMode,
     themes
   } = useTheme();
+
+  const { limit: dailyWordLimit, setLimit: setDailyWordLimit, todayCount } = useDailyNewWordLimit();
 
   const handleThemeChange = (newThemeId) => {
     setTheme(newThemeId);
@@ -129,6 +132,26 @@ export default function Settings() {
                 </button>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Daily New Word Limit Card */}
+        <div className="settings-card behavior-settings-card">
+          <h2>📅 Kunlik yangi so'z maqsadi</h2>
+          <p className="section-desc">
+            Bir kunda ko'p yangi so'z qo'shish yodlashni qiyinlashtiradi — kunlik maqsad belgilang.
+            Bugun qo'shilgan: <strong>{todayCount} / {dailyWordLimit}</strong>
+          </p>
+          <div className="font-size-selector-grid">
+            {[10, 15, 20, 30].map((n) => (
+              <button
+                key={n}
+                className={`font-size-btn ${dailyWordLimit === n ? 'active' : ''}`}
+                onClick={() => setDailyWordLimit(n)}
+              >
+                {n} ta
+              </button>
+            ))}
           </div>
         </div>
       </div>
