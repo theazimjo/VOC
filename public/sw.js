@@ -84,7 +84,7 @@ self.addEventListener('fetch', (event) => {
           fetch(event.request).then((networkResponse) => {
             if (networkResponse.status === 200) {
               caches.open(DYNAMIC_CACHE_NAME).then((cache) => {
-                cache.put(event.request, networkResponse);
+                cache.put(event.request, networkResponse.clone());
               });
             }
           }).catch(() => {/* Ignore background fetch failures */});

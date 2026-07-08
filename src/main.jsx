@@ -9,10 +9,35 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
       .then((reg) => {
         console.log('[Service Worker] Registered successfully:', reg.scope);
+        
+        // Check for updates automatically
+        reg.onupdatefound = () => {
+          const installingWorker = reg.installing;
+          if (installingWorker == null) return;
+          
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                // New update is ready, force reload immediately to apply changes
+                console.log('[Service Worker] New update found and active! Reloading...');
+                window.location.reload();
+              }
+            }
+          };
+        };
       })
       .catch((err) => {
         console.error('[Service Worker] Registration failed:', err);
       });
+  });
+  
+  // Handle case where controller change occurs
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) {
+      refreshing = true;
+      window.location.reload();
+    }
   });
 }
 

@@ -3538,6 +3538,185 @@ Bu zamon bilan ko'pincha quyidagi payt ravishlari keladi:
           { id: 20, situation: "Chatting about travel.", dialogue: "A: How often do they travel?\nB: They ___ abroad every year.", options: ["go", "goes", "going", "went"], correct: 0, explanation: "They + go." }
         ]
       },
+      {
+        id: "past-simple",
+        title: "Past Simple",
+        icon: "⏳",
+        guide: `## Past Simple (Oddiy o'tgan zamon)
+
+Past Simple o'tmishda sodir bo'lgan va to'liq yakunlangan ish-harakatlar hamda holatlarni ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+Past Simple da fe'llar ikki turga bo'linadi: **To'g'ri (Regular)** va **Noto'g'ri (Irregular)** fe'llar.
+
+• **Positive (+)**:
+  - To'g'ri fe'llarga **-ed** qo'shimchasi qo'shiladi:
+    - I/You/He/She/It/We/They **watched** a movie yesterday.
+  - Noto'g'ri fe'llarning o'tgan zamon shakli (V2) ishlatiladi:
+    - I/You/He/She/It/We/They **went** to London last year. (go -> went)
+• **Negative (-)**: Subject + did not (didn't) + Verb (asosiy shakli)
+  - I **didn't watch** the game. (Inkor gapda fe'lning asil shakliga qaytiladi!)
+  - He **didn't go** home. (didn't went emas!)
+• **Question (?)**: Did + Subject + Verb (asosiy shakli)?
+  - **Did you watch** the news?
+  - **Did they go** to school?
+
+## 2. To'g'ri fe'llar uchun imlo qoidalari (-ed)
+• Ko'pgina fe'llarga shunchaki **-ed** qo'shiladi:
+  - work -> worked, play -> played, start -> started
+• Fe'l **-e** harfi bilan tugasa, faqat **-d** qo'shiladi:
+  - live -> lived, like -> liked, love -> loved
+• Fe'l undosh + **-y** bilan tugasa, **-y** harfi **-i** ga o'zgaradi va **-ed** qo'shiladi:
+  - study -> studied, try -> tried, cry -> cried
+• Fe'l bir bo'g'inli bo'lib, oxiri unli + undosh bilan tugasa, oxirgi undosh ikkilanadi:
+  - stop -> stopped, plan -> planned
+
+## 3. Ishlatilishi (Usage)
+1. **O'tmishda yakunlangan aniq harakatlar**:
+   - I finished my work two hours ago. (Men ishimni ikki soat oldin tugatdim)
+2. **O'tmishdagi ketma-ket sodir bo'lgan harakatlar (Stories)**:
+   - He woke up, had breakfast, and left the house.
+3. **O'tmishdagi doimiy holat yoki odatlar**:
+   - When I was a child, we lived in Samarkand.
+
+## 4. Signal so'zlar (Time Expressions)
+• yesterday (kecha)
+• ago (oldin): two days ago (ikki kun oldin), a year ago (bir yil oldin)
+• last (o'tgan): last night (o'tgan kecha), last week (o'tgan hafta), last year (o'tgan yili)
+• in + o'tgan yil: in 2020, in 1998.`,
+        questions: [
+          { id: 1, text: "I ___ a great movie yesterday.", options: ["watch", "watched", "watching", "watches"], correct: 1, explanation: "Time word 'yesterday' requires Past Simple: 'watched'." },
+          { id: 2, text: "They ___ to the park last Sunday.", options: ["go", "went", "going", "goes"], correct: 1, explanation: "Past Simple of irregular verb 'go' is 'went'." },
+          { id: 3, text: "Did you ___ your homework?", options: ["finish", "finished", "finishing", "finishes"], correct: 0, explanation: "After did/didn't, use the base verb form: 'finish'." },
+          { id: 4, text: "She ___ not study for the test.", options: ["do", "does", "did", "is"], correct: 2, explanation: "Past negation uses 'did not' (didn't)." },
+          { id: 5, text: "We ___ in London in 2018.", options: ["live", "lived", "living", "lives"], correct: 1, explanation: "Completed action in a past year uses Past Simple: 'lived'." },
+          { id: 6, text: "He ___ a new car two days ago.", options: ["buy", "bought", "buyed", "buying"], correct: 1, explanation: "Past Simple of irregular verb 'buy' is 'bought'." },
+          { id: 7, text: "___ they arrive on time last night?", options: ["Do", "Does", "Did", "Were"], correct: 2, explanation: "Past simple question starts with auxiliary 'Did'." },
+          { id: 8, text: "I didn't ___ him at school yesterday.", options: ["see", "saw", "seeing", "seen"], correct: 0, explanation: "After didn't, use the base verb form: 'see'." },
+          { id: 9, text: "The rain ___ an hour ago.", options: ["stop", "stopped", "stopping", "stops"], correct: 1, explanation: "Double consonant for stop: 'stopped'." },
+          { id: 10, text: "My mother ___ a delicious cake last night.", options: ["make", "made", "maked", "making"], correct: 1, explanation: "Past Simple of irregular verb 'make' is 'made'." },
+          { id: 11, text: "What time ___ you wake up this morning?", options: ["do", "does", "did", "were"], correct: 2, explanation: "Past simple questions use auxiliary 'did'." },
+          { id: 12, text: "She ___ to go to the party.", options: ["decide", "decided", "decides", "deciding"], correct: 1, explanation: "Regular past verb 'decided' (ends in -e, add -d)." },
+          { id: 13, text: "We ___ very happy to see them.", options: ["are", "was", "were", "been"], correct: 2, explanation: "Past tense of 'be' for 'we' is 'were'." },
+          { id: 14, text: "He ___ his keys this morning.", options: ["lose", "lost", "losed", "losing"], correct: 1, explanation: "Past Simple of irregular verb 'lose' is 'lost'." },
+          { id: 15, text: "They didn't ___ any pictures.", options: ["take", "took", "taking", "taken"], correct: 0, explanation: "Use base verb after did not: 'take'." },
+          { id: 16, text: "I ___ a letter to my granddad last week.", options: ["write", "wrote", "written", "writing"], correct: 1, explanation: "Past Simple of irregular verb 'write' is 'wrote'." },
+          { id: 17, text: "___ it snow last winter?", options: ["Did", "Does", "Do", "Was"], correct: 0, explanation: "Question form starts with 'Did' for action verbs." },
+          { id: 18, text: "My friend ___ me with my project.", options: ["help", "helped", "helps", "helping"], correct: 1, explanation: "Regular verb past tense: 'helped'." },
+          { id: 19, text: "We ___ a nice hotel during our trip.", options: ["find", "found", "finded", "finding"], correct: 1, explanation: "Past Simple of irregular verb 'find' is 'found'." },
+          { id: 20, text: "He ___ late for the meeting yesterday.", options: ["is", "was", "were", "be"], correct: 1, explanation: "Past tense of 'be' for singular 'he' is 'was'." }
+        ],
+        fillBlanks: [
+          { id: 1, text: "She ___ (cook) pasta last night.", options: ["cooked", "cook", "cooking", "cooks"], correct: 0, explanation: "Regular verb adds '-ed'." },
+          { id: 2, text: "We did not ___ (go) to the beach yesterday.", options: ["go", "went", "going", "goes"], correct: 0, explanation: "Use base form after did not." },
+          { id: 3, text: "___ (did) you read the book last week?", options: ["Did", "Do", "Does", "Were"], correct: 0, explanation: "Past simple question starts with Did." },
+          { id: 4, text: "He ___ (give) me a present yesterday.", options: ["gave", "give", "given", "gives"], correct: 0, explanation: "Past tense of irregular 'give' is 'gave'." },
+          { id: 5, text: "The train ___ (arrive) late last night.", options: ["arrived", "arrive", "arriving", "arrives"], correct: 0, explanation: "Regular verb ending in -e adds '-d'." },
+          { id: 6, text: "They did not ___ (eat) anything.", options: ["eat", "ate", "eating", "eats"], correct: 0, explanation: "Use base form after did not." },
+          { id: 7, text: "___ (did) she call you this morning?", options: ["Did", "Does", "Do", "Was"], correct: 0, explanation: "Past simple question starts with Did." },
+          { id: 8, text: "He ___ (carry) the heavy bag.", options: ["carried", "carry", "carrying", "carries"], correct: 0, explanation: "Consonant + y changes to -ied: 'carried'." },
+          { id: 9, text: "We ___ (see) an interesting bird.", options: ["saw", "see", "seen", "seeing"], correct: 0, explanation: "Past simple of irregular 'see' is 'saw'." },
+          { id: 10, text: "I did not ___ (know) the answer.", options: ["know", "knew", "knowing", "knows"], correct: 0, explanation: "Base form after did not." },
+          { id: 11, text: "___ (did) it rain yesterday?", options: ["Did", "Does", "Do", "Was"], correct: 0, explanation: "Past simple question starts with Did." },
+          { id: 12, text: "She ___ (write) a nice poem.", options: ["wrote", "write", "written", "writing"], correct: 0, explanation: "Past simple of irregular 'write' is 'wrote'." },
+          { id: 13, text: "We ___ (buy) some fresh fruit.", options: ["bought", "buy", "buying", "buys"], correct: 0, explanation: "Past simple of irregular 'buy' is 'bought'." },
+          { id: 14, text: "He ___ (run) very fast in the race.", options: ["ran", "run", "running", "runs"], correct: 0, explanation: "Past simple of irregular 'run' is 'ran'." },
+          { id: 15, text: "I ___ (have) a cat when I was young.", options: ["had", "have", "having", "has"], correct: 0, explanation: "Past simple of 'have' is 'had'." },
+          { id: 16, text: "The class ___ (begin) at 9 AM yesterday.", options: ["began", "begin", "begun", "begins"], correct: 0, explanation: "Past simple of irregular 'begin' is 'began'." },
+          { id: 17, text: "___ (did) they buy a new house last year?", options: ["Did", "Do", "Does", "Were"], correct: 0, explanation: "Past simple question starts with Did." },
+          { id: 18, text: "We ___ (leave) the party early.", options: ["left", "leave", "leaving", "leaves"], correct: 0, explanation: "Past simple of irregular 'leave' is 'left'." },
+          { id: 19, text: "She did not ___ (understand) the lesson.", options: ["understand", "understood", "understanding", "understands"], correct: 0, explanation: "Base form after did not." },
+          { id: 20, text: "The window ___ (break) yesterday.", options: ["broke", "break", "broken", "breaks"], correct: 0, explanation: "Past simple of irregular 'break' is 'broke'." }
+        ],
+        scrambled: [
+          { id: 1, words: ["yesterday", "went", "he", "cinema", "to", "the"], answer: "he went to the cinema yesterday", explanation: "Subject + verb + place + time expression." },
+          { id: 2, words: ["like", "not", "I", "did", "the", "soup"], answer: "I did not like the soup", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 3, words: ["she", "where", "did", "go", "?"], answer: "where did she go", explanation: "Question word + auxiliary + subject + verb." },
+          { id: 4, words: ["bought", "we", "car", "a", "year", "last"], answer: "we bought a car last year", explanation: "Subject + verb + object + time." },
+          { id: 5, words: ["arrive", "did", "they", "time", "on", "?"], answer: "did they arrive on time", explanation: "Auxiliary + subject + verb + prepositional phrase." },
+          { id: 6, words: ["studied", "my", "sister", "hard", "yesterday"], answer: "my sister studied hard yesterday", explanation: "Subject + verb + adverb + time." },
+          { id: 7, words: ["he", "call", "not", "did", "me"], answer: "he did not call me", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 8, words: ["you", "did", "near", "here", "live", "?"], answer: "did you live near here", explanation: "Auxiliary + subject + verb + place." },
+          { id: 9, words: ["stopped", "rain", "the", "hour", "an", "ago"], answer: "the rain stopped an hour ago", explanation: "Subject + verb + time phrase." },
+          { id: 10, words: ["last", "they", "saw", "him", "night"], answer: "they saw him last night", explanation: "Subject + verb + object + time." },
+          { id: 11, words: ["play", "on", "did", "they", "Sunday", "tennis", "?"], answer: "did they play tennis on Sunday", explanation: "Auxiliary + subject + verb + object + time." },
+          { id: 12, words: ["lost", "her", "she", "bag", "yesterday"], answer: "she lost her bag yesterday", explanation: "Subject + verb + object + time." },
+          { id: 13, words: ["a", "have", "we", "dog", "not", "did"], answer: "we did not have a dog", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 14, words: ["hard", "worked", "every", "he", "day"], answer: "he worked hard every day", explanation: "Subject + verb + adverb + time." },
+          { id: 15, words: ["what", "did", "train", "the", "leave", "time", "?"], answer: "what time did the train leave", explanation: "Question phrase + auxiliary + subject + verb." },
+          { id: 16, words: ["got", "up", "early", "I", "yesterday"], answer: "I got up early yesterday", explanation: "Subject + verb + adverb + time." },
+          { id: 17, words: ["drink", "not", "she", "did", "coffee"], answer: "she did not drink coffee", explanation: "Subject + auxiliary + not + verb + object." },
+          { id: 18, words: ["snow", "did", "it", "yesterday", "?"], answer: "did it snow yesterday", explanation: "Auxiliary + subject + verb + time." },
+          { id: 19, words: ["my", "friend", "wrote", "a", "letter", "last", "week"], answer: "my friend wrote a letter last week", explanation: "Subject + verb + object + time." },
+          { id: 20, words: ["arrived", "they", "late", "for", "class"], answer: "they arrived late for class", explanation: "Subject + verb + modifier." }
+        ],
+        errorCorrection: [
+          { id: 1, text: "He workt in a bank last year.", options: ["He", "workt", "in a", "bank"], correct: 1, wrongPart: "workt", correction: "worked", explanation: "Spelling of regular past is 'worked' (with -ed)." },
+          { id: 2, text: "I does not like the movie yesterday.", options: ["I", "does not", "like", "yesterday"], correct: 1, wrongPart: "does not", correction: "did not", explanation: "Past negation requires 'did not'." },
+          { id: 3, text: "Did she went to London last week?", options: ["Did", "she", "went", "last week"], correct: 2, wrongPart: "went", correction: "go", explanation: "After Did, use base form 'go' instead of V2 'went'." },
+          { id: 4, text: "They buyed a new car yesterday.", options: ["They", "buyed", "a new", "yesterday"], correct: 1, wrongPart: "buyed", correction: "bought", explanation: "Past of buy is irregular 'bought'." },
+          { id: 5, text: "The rain stoped an hour ago.", options: ["The", "stoped", "an hour", "ago"], correct: 1, wrongPart: "stoped", correction: "stopped", explanation: "Oxiri unli+undosh bo'lgani uchun undosh ikkilanadi: 'stopped'." },
+          { id: 6, text: "My sister studyed history last year.", options: ["My sister", "studyed", "history", "last year"], correct: 1, wrongPart: "studyed", correction: "studied", explanation: "Consonant + y changes to -ied: 'studied'." },
+          { id: 7, text: "We didn't had a dog in 2020.", options: ["We", "didn't", "had", "a dog"], correct: 2, wrongPart: "had", correction: "have", explanation: "After didn't, use base verb form 'have'." },
+          { id: 8, text: "Do he play football yesterday?", options: ["Do", "he", "play", "yesterday"], correct: 0, wrongPart: "Do", correction: "Did", explanation: "Past simple question begins with 'Did'." },
+          { id: 9, text: "The sun rised early today.", options: ["The sun", "rised", "early", "today"], correct: 1, wrongPart: "rised", correction: "rose", explanation: "Past of rise is irregular 'rose'." },
+          { id: 10, text: "She seed me at the market yesterday.", options: ["She", "seed", "me at", "yesterday"], correct: 1, wrongPart: "seed", correction: "saw", explanation: "Past of see is irregular 'saw'." },
+          { id: 11, text: "They didn't liked the dinner.", options: ["They", "didn't", "liked", "the dinner"], correct: 2, wrongPart: "liked", correction: "like", explanation: "After didn't, use base verb 'like'." },
+          { id: 12, text: "Where did she worked last year?", options: ["Where", "did", "she", "worked"], correct: 3, wrongPart: "worked", correction: "work", explanation: "After did, use base verb 'work'." },
+          { id: 13, text: "I were at home yesterday evening.", options: ["I", "were", "at home", "yesterday"], correct: 1, wrongPart: "were", correction: "was", explanation: "Past of 'be' for 'I' is 'was'." },
+          { id: 14, text: "He maked a mistake in the test.", options: ["He", "maked", "a mistake", "in the test"], correct: 1, wrongPart: "maked", correction: "made", explanation: "Past of make is irregular 'made'." },
+          { id: 15, text: "The train lefted at 8 AM yesterday.", options: ["The train", "lefted", "at 8 AM", "yesterday"], correct: 1, wrongPart: "lefted", correction: "left", explanation: "Past of leave is 'left' (no extra -ed)." },
+          { id: 16, text: "Did they had any questions?", options: ["Did", "they", "had", "any questions"], correct: 2, wrongPart: "had", correction: "have", explanation: "Question form uses base verb 'have'." },
+          { id: 17, text: "She runned to catch the bus.", options: ["She", "runned", "to catch", "the bus"], correct: 1, wrongPart: "runned", correction: "ran", explanation: "Past of run is irregular 'ran'." },
+          { id: 18, text: "We was very tired yesterday.", options: ["We", "was", "very tired", "yesterday"], correct: 1, wrongPart: "was", correction: "were", explanation: "Plural subject 'we' takes 'were'." },
+          { id: 19, text: "He didn't knew the way home.", options: ["He", "didn't", "knew", "the way"], correct: 2, wrongPart: "knew", correction: "know", explanation: "After didn't, use base verb 'know'." },
+          { id: 20, text: "The glass breaked when it fell.", options: ["The glass", "breaked", "when", "it fell"], correct: 1, wrongPart: "breaked", correction: "broke", explanation: "Past of break is irregular 'broke'." }
+        ],
+        transform: [
+          { id: 1, text: "Make negative: 'He lived in London.'", options: ["He not lived in London.", "He didn't live in London.", "He didn't lived in London.", "He don't live in London."], correct: 1, explanation: "Use didn't + base verb: 'He didn't live in London'." },
+          { id: 2, text: "Make question: 'She worked hard.'", options: ["Does she worked hard?", "Did she work hard?", "Did she worked hard?", "Worked she hard?"], correct: 1, explanation: "Use Did + subject + base verb: 'Did she work hard?'." },
+          { id: 3, text: "Transform to negative: 'They bought a house.'", options: ["They don't buy a house.", "They didn't buy a house.", "They didn't bought a house.", "They not buy a house."], correct: 1, explanation: "Use didn't + base verb: 'They didn't buy a house'." },
+          { id: 4, text: "Make question: 'You spoke to him.'", options: ["Did you speak to him?", "Did you spoke to him?", "Do you speak to him?", "Spoke you to him?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did you speak to him?'." },
+          { id: 5, text: "Transform to negative: 'I ran a mile.'", options: ["I didn't ran a mile.", "I didn't run a mile.", "I don't run a mile.", "I not run a mile."], correct: 1, explanation: "Use didn't + base verb: 'I didn't run a mile'." },
+          { id: 6, text: "Make question: 'It rained yesterday.'", options: ["Did it rain yesterday?", "Did it rained yesterday?", "Does it rain yesterday?", "Is it rain yesterday?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did it rain yesterday?'." },
+          { id: 7, text: "Transform to negative: 'My sister studied law.'", options: ["My sister didn't study law.", "My sister didn't studied law.", "My sister don't study law.", "My sister not studied law."], correct: 0, explanation: "Use didn't + base verb: 'My sister didn't study law'." },
+          { id: 8, text: "Make question: 'They wanted some tea.'", options: ["Did they want some tea?", "Did they wanted some tea?", "Do they want some tea?", "Wanted they some tea?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did they want some tea?'." },
+          { id: 9, text: "Transform to negative: 'We left early.'", options: ["We don't leave early.", "We didn't leave early.", "We not leave early.", "We didn't left early."], correct: 1, explanation: "Use didn't + base verb: 'We didn't leave early'." },
+          { id: 10, text: "Make question: 'He read books.'", options: ["Did he reads books?", "Did he read books?", "Do he read books?", "Read he books?"], correct: 1, explanation: "Use Did + subject + base verb: 'Did he read books?'." },
+          { id: 11, text: "Transform to negative: 'Water boiled.'", options: ["Water didn't boil.", "Water didn't boiled.", "Water don't boil.", "Water not boiled."], correct: 0, explanation: "Use didn't + base verb: 'Water didn't boil'." },
+          { id: 12, text: "Make question: 'You saw a doctor.'", options: ["Did you see a doctor?", "Did you saw a doctor?", "Do you see a doctor?", "Saw you a doctor?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did you see a doctor?'." },
+          { id: 13, text: "Transform to negative: 'The train left at 5.'", options: ["The train didn't leave at 5.", "The train didn't left at 5.", "The train don't leave at 5.", "The train not left at 5."], correct: 0, explanation: "Use didn't + base verb: 'The train didn't leave at 5'." },
+          { id: 14, text: "Make question: 'She washed her hair.'", options: ["Did she wash her hair?", "Did she washed her hair?", "Does she wash her hair?", "Washed she her hair?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did she wash her hair?'." },
+          { id: 15, text: "Transform to negative: 'My parents worked yesterday.'", options: ["My parents don't work yesterday.", "My parents didn't work yesterday.", "My parents didn't worked yesterday.", "My parents not work yesterday."], correct: 1, explanation: "Use didn't + base verb: 'My parents didn't work yesterday'." },
+          { id: 16, text: "Make question: 'The shop opened early.'", options: ["Did the shop open early?", "Did the shop opened early?", "Does the shop open early?", "Opened the shop early?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did the shop open early?'." },
+          { id: 17, text: "Transform to negative: 'I watched a show.'", options: ["I didn't watch a show.", "I didn't watched a show.", "I don't watch a show.", "I not watch a show."], correct: 0, explanation: "Use didn't + base verb: 'I didn't watch a show'." },
+          { id: 18, text: "Make question: 'They spoke German.'", options: ["Did they speak German?", "Did they spoke German?", "Do they speak German?", "Spoke they German?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did they speak German?'." },
+          { id: 19, text: "Transform to negative: 'It snowed in April.'", options: ["It didn't snow in April.", "It didn't snowed in April.", "It don't snow in April.", "It not snowed in April."], correct: 0, explanation: "Use didn't + base verb: 'It didn't snow in April'." },
+          { id: 20, text: "Make question: 'We had homework.'", options: ["Did we have homework?", "Did we had homework?", "Do we have homework?", "Had we homework?"], correct: 0, explanation: "Use Did + subject + base verb: 'Did we have homework?'." }
+        ],
+        dialogue: [
+          { id: 1, situation: "Talking about the weekend.", dialogue: "A: What did you do on Saturday?\nB: I ___ tennis with my friend.", options: ["played", "play", "playing", "plays"], correct: 0, explanation: "I + played (past form)." },
+          { id: 2, situation: "Asking about someone's trip.", dialogue: "A: Did you enjoy your vacation?\nB: Yes, we ___ a great time.", options: ["had", "have", "having", "has"], correct: 0, explanation: "We + had (past of have)." },
+          { id: 3, situation: "Asking about food.", dialogue: "A: Did you eat lunch?\nB: Yes, I ___ a sandwich.", options: ["ate", "eat", "eating", "eats"], correct: 0, explanation: "I + ate (past of eat)." },
+          { id: 4, situation: "Asking about an event.", dialogue: "A: What time did the concert start?\nB: It ___ at 8 PM.", options: ["started", "start", "starting", "starts"], correct: 0, explanation: "It + started." },
+          { id: 5, situation: "Discussing a book.", dialogue: "A: Did you like the novel?\nB: No, I ___ like it. It was boring.", options: ["didn't", "don't", "haven't", "not"], correct: 0, explanation: "I + didn't (did not) for past negative." },
+          { id: 6, situation: "Inquiring about someone's health.", dialogue: "A: Where were you yesterday?\nB: I ___ sick, so I stayed at home.", options: ["was", "were", "am", "be"], correct: 0, explanation: "I + was (past of be)." },
+          { id: 7, situation: "Asking about transportation.", dialogue: "A: Did they catch the bus?\nB: No, they ___ it. They took a taxi.", options: ["missed", "miss", "missing", "misses"], correct: 0, explanation: "They + missed." },
+          { id: 8, situation: "Asking about a phone call.", dialogue: "A: Did she call you last night?\nB: Yes, she ___ me around 9 PM.", options: ["called", "call", "calling", "calls"], correct: 0, explanation: "She + called." },
+          { id: 9, situation: "Discussing shopping.", dialogue: "A: What did you buy at the mall?\nB: I ___ a new jacket.", options: ["bought", "buy", "buying", "buys"], correct: 0, explanation: "I + bought." },
+          { id: 10, situation: "Asking about the weather.", dialogue: "A: Did it rain last night?\nB: Yes, it ___ heavily.", options: ["rained", "rain", "running", "rains"], correct: 0, explanation: "It + rained." },
+          { id: 11, situation: "Meeting a colleague.", dialogue: "A: Why were you late this morning?\nB: I ___ my alarm clock.", options: ["missed", "miss", "missing", "misses"], correct: 0, explanation: "I + missed." },
+          { id: 12, situation: "Talking about university.", dialogue: "A: Did you study French in college?\nB: No, I ___ Spanish.", options: ["studied", "study", "studying", "studies"], correct: 0, explanation: "I + studied." },
+          { id: 13, situation: "Asking about parents.", dialogue: "A: Where did your parents meet?\nB: They ___ in Samarkand in 1995.", options: ["met", "meet", "meeting", "meets"], correct: 0, explanation: "They + met." },
+          { id: 14, situation: "Inquiring about class end.", dialogue: "A: When did the class finish?\nB: It ___ ten minutes ago.", options: ["finished", "finish", "finishing", "finishes"], correct: 0, explanation: "It + finished." },
+          { id: 15, situation: "Discussing a movie.", dialogue: "A: Did you watch the match?\nB: No, I ___ asleep before it started.", options: ["fell", "fall", "falling", "falls"], correct: 0, explanation: "I + fell (past of fall)." },
+          { id: 16, situation: "Asking about yesterday.", dialogue: "A: Did you go to work yesterday?\nB: No, it ___ a holiday.", options: ["was", "were", "is", "be"], correct: 0, explanation: "It + was." },
+          { id: 17, situation: "Discussing an email.", dialogue: "A: Did you send the report?\nB: Yes, I ___ it this morning.", options: ["sent", "send", "sending", "sends"], correct: 0, explanation: "I + sent (past of send)." },
+          { id: 18, situation: "Talking about keys.", dialogue: "A: Where did you leave your keys?\nB: I ___ them on the table.", options: ["left", "leave", "leaving", "leaves"], correct: 0, explanation: "I + left." },
+          { id: 19, situation: "Talking about news.", dialogue: "A: Did you hear the news?\nB: Yes, my brother ___ me.", options: ["told", "tell", "telling", "tells"], correct: 0, explanation: "My brother + told (past of tell)." },
+          { id: 20, situation: "Chatting about childhood.", dialogue: "A: Did you live in a village?\nB: Yes, we ___ a big farm there.", options: ["had", "have", "having", "has"], correct: 0, explanation: "We + had." }
+        ]
+      },
 
     ]
   }
