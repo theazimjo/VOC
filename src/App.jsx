@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -8,20 +8,21 @@ import RegisterPage from './components/Auth/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Layout from './components/Layout/Layout';
 import IosSpinner from './components/common/IosSpinner';
+import { lazyWithRetry } from './utils/lazyWithRetry';
 
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const PackDetail = lazy(() => import('./pages/PackDetail'));
-const PracticePage = lazy(() => import('./pages/PracticePage'));
-const StatsPage = lazy(() => import('./pages/StatsPage'));
-const ProfilePage = lazy(() => import('./pages/ProfilePage'));
-const LibraryPage = lazy(() => import('./pages/LibraryPage'));
-const MixedPractice = lazy(() => import('./pages/MixedPractice'));
-const CardsMode = lazy(() => import('./pages/CardsMode'));
-const Settings = lazy(() => import('./pages/Settings'));
-const GrammarPage = lazy(() => import('./pages/GrammarPage'));
-const GrammarTopic = lazy(() => import('./pages/GrammarTopic'));
-const GrammarExercises = lazy(() => import('./pages/GrammarExercises'));
-const GrammarTest = lazy(() => import('./pages/GrammarTest'));
+const Dashboard = lazyWithRetry(() => import('./pages/Dashboard'));
+const PackDetail = lazyWithRetry(() => import('./pages/PackDetail'));
+const PracticePage = lazyWithRetry(() => import('./pages/PracticePage'));
+const StatsPage = lazyWithRetry(() => import('./pages/StatsPage'));
+const ProfilePage = lazyWithRetry(() => import('./pages/ProfilePage'));
+const LibraryPage = lazyWithRetry(() => import('./pages/LibraryPage'));
+const MixedPractice = lazyWithRetry(() => import('./pages/MixedPractice'));
+const CardsMode = lazyWithRetry(() => import('./pages/CardsMode'));
+const Settings = lazyWithRetry(() => import('./pages/Settings'));
+const GrammarPage = lazyWithRetry(() => import('./pages/GrammarPage'));
+const GrammarTopic = lazyWithRetry(() => import('./pages/GrammarTopic'));
+const GrammarExercises = lazyWithRetry(() => import('./pages/GrammarExercises'));
+const GrammarTest = lazyWithRetry(() => import('./pages/GrammarTest'));
 
 function RouteLoader() {
   return (
