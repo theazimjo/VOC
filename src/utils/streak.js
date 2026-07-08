@@ -17,6 +17,44 @@ function getYesterdayDateString() {
 }
 
 /**
+ * Read-time self-heal: if a day was missed since lastActiveDate without
+ * meeting the daily goal, reset the streak count so the UI reflects the
+ * break even before the user does any new activity.
+ */
+export function checkAndHealStreak(data) {
+  if (!data) return { modified: false, data };
+
+  const todayStr = getLocalDateString();
+  const yesterdayStr = getYesterdayDateString();
+
+  const streak = { ...data, activityLog: { ...(data.activityLog || {}) } };
+  if (streak.dailyGoal === undefined) streak.dailyGoal = 5;
+
+  if (!streak.lastActiveDate || streak.lastActiveDate === todayStr) {
+    return { modified: false, data: streak };
+  }
+
+  let modified = false;
+
+  if (streak.lastActiveDate !== yesterdayStr) {
+    // Missed at least one full day
+    if (streak.streakCount !== 0) {
+      streak.streakCount = 0;
+      modified = true;
+    }
+  } else {
+    // Last active yesterday — verify the daily goal was actually met
+    const yesterdayProgress = streak.activityLog[yesterdayStr] || 0;
+    if (yesterdayProgress < streak.dailyGoal && streak.streakCount !== 0) {
+      streak.streakCount = 0;
+      modified = true;
+    }
+  }
+
+  return { modified, data: streak };
+}
+
+/**
  * Standalone utility to atomically increment points for a user's daily goal.
  */
 export async function incrementActivity(userId, amount = 1) {

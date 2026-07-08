@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
+import { useStreak } from '../hooks/useStreak';
 import { getMasteryLevel } from '../utils/sm2';
 import './Dashboard.css';
 
 export default function Dashboard() {
   const { user } = useAuth();
   const { packs } = usePacks();
+  const { streak } = useStreak();
   const [recentWords, setRecentWords] = useState([]);
   const [totalWords, setTotalWords] = useState(0);
   const [masteredWords, setMasteredWords] = useState(0);
@@ -64,25 +67,38 @@ export default function Dashboard() {
 
       {/* ── Greeting ── */}
       <motion.div className="dash-greeting-section" {...fadeUp(0)}>
-        <div className="dash-greeting">{getGreeting()}</div>
-        <div className="dash-name">{displayName}</div>
+        <div className="dash-greeting-row">
+          <div>
+            <div className="dash-greeting">{getGreeting()}</div>
+            <div className="dash-name">{displayName}</div>
+          </div>
+          {streak && (
+            <div
+              className={`dash-streak-badge ${(streak.todayCount || 0) >= (streak.dailyGoal || 5) ? 'goal-met' : ''}`}
+              title={`Bugungi maqsad: ${streak.todayCount || 0}/${streak.dailyGoal || 5}`}
+            >
+              <Flame size={18} strokeWidth={2.3} />
+              <span>{streak.streakCount || 0}</span>
+            </div>
+          )}
+        </div>
         <div className="dash-subtitle">Bugun qancha so'z o'rganasiz?</div>
       </motion.div>
 
       {/* ── Stats Row ── */}
       <motion.div className="dash-stats-row" {...fadeUp(0.07)}>
         <div className="dash-stat-card">
-          <div className="dash-stat-icon">📚</div>
+          <div className="dash-stat-icon blue"><BookOpen size={20} strokeWidth={2.2} /></div>
           <div className="dash-stat-value blue">{totalWords}</div>
           <div className="dash-stat-label">Jami so'z</div>
         </div>
         <div className="dash-stat-card">
-          <div className="dash-stat-icon">✅</div>
+          <div className="dash-stat-icon green"><CheckCircle2 size={20} strokeWidth={2.2} /></div>
           <div className="dash-stat-value green">{masteredWords}</div>
           <div className="dash-stat-label">O'zlashtirilgan</div>
         </div>
         <div className="dash-stat-card">
-          <div className="dash-stat-icon">🔔</div>
+          <div className="dash-stat-icon orange"><BellRing size={20} strokeWidth={2.2} /></div>
           <div className="dash-stat-value orange">{dueWords}</div>
           <div className="dash-stat-label">Takrorlash</div>
         </div>
@@ -156,7 +172,7 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className="dash-empty-state">
-            <div className="dash-empty-icon">📝</div>
+            <div className="dash-empty-icon"><FileEdit size={32} strokeWidth={1.8} /></div>
             <h3>Hali so'z qo'shilmagan</h3>
             <p>Kutubxonadan to'plam ochib, birinchi so'zingizni qo'shing!</p>
             <Link to="/library" className="btn-practice-primary empty-btn">

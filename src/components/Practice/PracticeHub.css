@@ -74,8 +74,7 @@
 }
 
 .practice-mode-icon {
-  font-size: 1.4rem;
-  line-height: 1;
+  color: var(--accent-1);
 }
 
 .practice-mode-title {

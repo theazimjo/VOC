@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Zap, Layers, PenLine, Shuffle, ListChecks, Headphones, Mic, Brain } from 'lucide-react';
 import './PracticeHub.css';
 
 export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
@@ -7,7 +8,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
   if (isIrregularVerbs) {
     modes.push({
       id: 'irregular-verbs',
-      icon: '⚡',
+      icon: Zap,
       title: "Fe'llar Trenajyori",
       desc: "Noto'g'ri fe'llarning V1, V2, V3 shakllarini yozib mashq qiling",
       badge: 'Tavsiya etiladi 🌟',
@@ -18,7 +19,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
   modes.push(
     {
       id: 'flashcard',
-      icon: '🎴',
+      icon: Layers,
       title: 'Flashcards',
       desc: "Kartochkalarni ag'darib vizual xotirani mashq qiling",
       badge: 'Barcha darajalar',
@@ -26,7 +27,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
     },
     {
       id: 'spelling',
-      icon: '✍️',
+      icon: PenLine,
       title: 'Imlo Mashqi',
       desc: "Eshitish va xotiradan so'zlarni to'g'ri yozishni mashq qiling",
       badge: "Min 3 ta so'z",
@@ -34,7 +35,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
     },
     {
       id: 'match',
-      icon: '🔀',
+      icon: Shuffle,
       title: 'Juftlikni Top',
       desc: "Inglizcha so'zni uning tarjimasiga moslashtiring",
       badge: "Min 4 ta so'z",
@@ -42,7 +43,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
     },
     {
       id: 'quiz',
-      icon: '📝',
+      icon: ListChecks,
       title: 'Test',
       desc: "To'rtta variantdan to'g'ri tarjimani tezkorlik bilan tanlang",
       badge: "Min 4 ta so'z",
@@ -50,7 +51,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
     },
     {
       id: 'dictation',
-      icon: '🎧',
+      icon: Headphones,
       title: 'Diktant',
       desc: "So'zni faqat eshitgan holda inglizcha imlosini yozing",
       badge: "Min 3 ta so'z",
@@ -58,7 +59,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
     },
     {
       id: 'pronounce',
-      icon: '🎙️',
+      icon: Mic,
       title: 'Talaffuz',
       desc: "Mikrofonga talaffuz qilib, so'zlashuv qobiliyatini oshiring",
       badge: "Min 1 ta so'z",
@@ -66,7 +67,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
     },
     {
       id: 'spaced',
-      icon: '🧠',
+      icon: Brain,
       title: 'Takrorlash (SM-2)',
       desc: "Ilmiy tasdiqlangan interval takrorlash algoritmi yordamida yod oling",
       badge: 'Kunlik vazifa',
@@ -92,7 +93,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
             whileTap={{ scale: 0.97 }}
           >
             <div className="practice-mode-icon-wrap">
-              <span className="practice-mode-icon">{mode.icon}</span>
+              <mode.icon size={22} strokeWidth={2.1} className="practice-mode-icon" />
             </div>
             <h3 className="practice-mode-title">{mode.title}</h3>
             <p className="practice-mode-desc">{mode.desc}</p>

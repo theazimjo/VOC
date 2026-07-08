@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { FileText, Trophy, Flame, Sparkles, Brain, BarChart3 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
@@ -151,32 +152,32 @@ export default function StatsPage() {
       {/* Overview Stats */}
       <motion.div className="stats-overview" variants={itemVariants}>
         <div className="stat-card">
-          <div className="stat-card-icon">📝</div>
+          <div className="stat-card-icon"><FileText size={26} strokeWidth={2} /></div>
           <div className="stat-card-value">{totalWords}</div>
           <div className="stat-card-label">Jami so'zlar</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-icon">🏆</div>
+          <div className="stat-card-icon"><Trophy size={26} strokeWidth={2} /></div>
           <div className="stat-card-value">{masteredWords}</div>
           <div className="stat-card-label">O'zlashtirilgan</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-icon">🔥</div>
+          <div className="stat-card-icon"><Flame size={26} strokeWidth={2} /></div>
           <div className="stat-card-value">{activeWords}</div>
           <div className="stat-card-label">Faol so'zlar</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-icon">🆕</div>
+          <div className="stat-card-icon"><Sparkles size={26} strokeWidth={2} /></div>
           <div className="stat-card-value">{newWords}</div>
           <div className="stat-card-label">Yangi</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-icon">🧠</div>
+          <div className="stat-card-icon"><Brain size={26} strokeWidth={2} /></div>
           <div className="stat-card-value">{dueNow}</div>
           <div className="stat-card-label">Takrorlash kerak</div>
         </div>
         <div className="stat-card">
-          <div className="stat-card-icon">📊</div>
+          <div className="stat-card-icon"><BarChart3 size={26} strokeWidth={2} /></div>
           <div className="stat-card-value">{avgMastery}%</div>
           <div className="stat-card-label">O'rtacha daraja</div>
         </div>

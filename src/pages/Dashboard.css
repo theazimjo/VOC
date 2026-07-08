@@ -40,6 +40,32 @@
   font-weight: 400;
 }
 
+.dash-greeting-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dash-streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--bg-secondary, #FFFFFF);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  color: #C7C7CC;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.dash-streak-badge.goal-met {
+  color: #FF9500;
+}
+
 /* ── Stats Row (iOS Widget Style) ── */
 .dash-stats-row {
   display: grid;
@@ -64,9 +90,14 @@
 }
 
 .dash-stat-icon {
-  font-size: 20px;
+  display: flex;
+  align-items: center;
   margin-bottom: 6px;
 }
+
+.dash-stat-icon.blue   { color: #007AFF; }
+.dash-stat-icon.green  { color: #34C759; }
+.dash-stat-icon.orange { color: #FF9500; }
 
 .dash-stat-value {
   font-size: 22px;
@@ -285,6 +316,14 @@
   padding: 40px 20px;
   text-align: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.dash-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #C7C7CC;
+  margin: 0 auto;
 }
 
 .dash-empty-state h3 {

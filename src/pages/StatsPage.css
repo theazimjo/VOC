@@ -28,9 +28,11 @@
 }
 
 .stats-overview .stat-card .stat-card-icon {
-  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: var(--space-sm);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  color: var(--accent-1);
 }
 
 .stats-overview .stat-card .stat-card-value {

@@ -5,6 +5,7 @@ import { ref, update } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
+import { useStreak } from '../hooks/useStreak';
 import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import './MixedPractice.css';
@@ -12,6 +13,7 @@ import './MixedPractice.css';
 export default function MixedPractice() {
   const { user } = useAuth();
   const { packs, loading: packsLoading } = usePacks();
+  const { incrementActivity } = useStreak();
   const navigate = useNavigate();
 
   const [step, setStep] = useState('setup'); // 'setup' | 'practice' | 'results'
@@ -208,6 +210,7 @@ export default function MixedPractice() {
       setStep('results');
       playSound('victory');
       triggerVibration('victory');
+      incrementActivity(questions.length || 1);
     }
   };
 

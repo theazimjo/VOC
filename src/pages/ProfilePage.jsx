@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { UserCircle2, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useAvatar } from '../hooks/useAvatar';
@@ -42,7 +43,7 @@ export default function ProfilePage() {
       animate={{ opacity: 1, y: 0 }}
     >
       <div className="page-header">
-        <h1>⚙️ Profil</h1>
+        <h1><UserCircle2 size={26} strokeWidth={2.1} style={{ verticalAlign: '-4px', marginRight: '8px' }} />Profil</h1>
       </div>
 
       <div className="profile-card">
@@ -102,7 +103,7 @@ export default function ProfilePage() {
       </div>
 
       <div className="danger-zone">
-        <h3>⚠️ Xavfli zona</h3>
+        <h3><AlertTriangle size={17} strokeWidth={2.2} style={{ verticalAlign: '-3px', marginRight: '6px' }} />Xavfli zona</h3>
         <p>Hisobdan chiqish</p>
         <button className="btn btn-danger" onClick={handleLogout}>
           Chiqish

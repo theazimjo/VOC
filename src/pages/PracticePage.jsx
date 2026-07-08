@@ -5,6 +5,7 @@ import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
+import { useStreak } from '../hooks/useStreak';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import { calculateNextReview } from '../utils/sm2';
@@ -24,6 +25,7 @@ export default function PracticePage() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { packs, loading: packsLoading } = usePacks();
+  const { incrementActivity } = useStreak();
   
   const [step, setStep] = useState(urlSourceId ? 'loading' : 'source'); // 'loading' | 'source' | 'mode' | 'practice' | 'results'
   const [sourceType, setSourceType] = useState('packs');
@@ -270,6 +272,7 @@ export default function PracticePage() {
     triggerVibration('victory');
     setResults(resultData);
     setStep('results');
+    incrementActivity(resultData.totalWords || 1);
   };
 
   const handleBack = () => {
