@@ -1,41 +1,13 @@
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Trophy, Flame, Sparkles, Brain, BarChart3 } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { grammarData, germanGrammarData } from '../data/grammarData';
 import './StatsPage.css';
 
 export default function StatsPage() {
-  const { user } = useAuth();
-  const { packs } = usePacks();
+  const { allWords, allWordsLoading: loading } = usePacks();
   const { stats: grammarStats, loading: grammarLoading } = useGrammarStats();
-  const [allWords, setAllWords] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!user) return;
-
-    let words = [];
-
-    // Extract nested words from packs
-    packs.forEach(pack => {
-      const wordsObj = pack.words || {};
-      Object.keys(wordsObj).forEach(wordId => {
-        words.push({
-          id: wordId,
-          ...wordsObj[wordId],
-          source: pack.name,
-          sourceType: 'packs',
-          sourceIcon: pack.icon || '📦'
-        });
-      });
-    });
-
-    setAllWords(words);
-    setLoading(false);
-  }, [user, packs]);
 
   // Stats calculations
 

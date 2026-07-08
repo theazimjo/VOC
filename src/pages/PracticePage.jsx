@@ -6,6 +6,7 @@ import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
+import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import { calculateNextReview } from '../utils/sm2';
@@ -74,7 +75,8 @@ export default function PracticePage() {
         
         // Fetch words for this source
         const fetchWords = async () => {
-          const wordsRef = ref(db, `users/${user.uid}/packs/${urlSourceId}/words`);
+          await migratePackWordsIfNeeded(user.uid, urlSourceId);
+          const wordsRef = ref(db, `users/${user.uid}/words/${urlSourceId}`);
           const wordsSnap = await get(wordsRef);
           let words = [];
           if (wordsSnap.exists()) {
@@ -154,7 +156,8 @@ export default function PracticePage() {
     setSelectedSource(source);
     if (!user) return;
 
-    const wordsRef = ref(db, `users/${user.uid}/${sourceType}/${source.id}/words`);
+    await migratePackWordsIfNeeded(user.uid, source.id);
+    const wordsRef = ref(db, `users/${user.uid}/words/${source.id}`);
     const wordsSnap = await get(wordsRef);
     let words = [];
     if (wordsSnap.exists()) {
@@ -180,7 +183,7 @@ export default function PracticePage() {
 
   const reloadWordsAndLessons = async () => {
     if (!selectedSource || !user) return;
-    const wordsRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/words`);
+    const wordsRef = ref(db, `users/${user.uid}/words/${selectedSource.id}`);
     const wordsSnap = await get(wordsRef);
     let words = [];
     if (wordsSnap.exists()) {
@@ -243,7 +246,7 @@ export default function PracticePage() {
         }
       }
 
-      const wordRef = ref(db, `users/${user.uid}/${sourceType}/${selectedSource.id}/words/${wordId}`);
+      const wordRef = ref(db, `users/${user.uid}/words/${selectedSource.id}/${wordId}`);
       await update(wordRef, finalData);
 
       // Sync local state immediately so weights are updated for future picks

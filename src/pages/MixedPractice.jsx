@@ -12,7 +12,7 @@ import './MixedPractice.css';
 
 export default function MixedPractice() {
   const { user } = useAuth();
-  const { packs, loading: packsLoading } = usePacks();
+  const { allWords, allWordsLoading } = usePacks();
   const { incrementActivity } = useStreak();
   const navigate = useNavigate();
 
@@ -26,30 +26,14 @@ export default function MixedPractice() {
   const [correctCount, setCorrectCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Extract all words from all packs
+  // Word pool sourced from the shared allWords aggregator
   useEffect(() => {
-    if (packsLoading) return;
+    if (allWordsLoading) return;
     if (!user) return;
 
-    let allWords = [];
-
-    // Extract pack words
-    packs.forEach(pack => {
-      const wordsObj = pack.words || {};
-      Object.keys(wordsObj).forEach(wordId => {
-        allWords.push({
-          id: wordId,
-          ...wordsObj[wordId],
-          source: pack.name,
-          sourceType: 'packs',
-          sourceId: pack.id
-        });
-      });
-    });
-
-    setMixedWordsPool(allWords);
+    setMixedWordsPool(allWords.map(w => ({ ...w, sourceId: w.packId })));
     setLoading(false);
-  }, [user, packs, packsLoading]);
+  }, [user, allWords, allWordsLoading]);
 
   // Generate question queue
   const startSession = (wordsPool) => {
@@ -142,9 +126,8 @@ export default function MixedPractice() {
   const handleUpdateWordStats = async (wordObj, isCorrect) => {
     if (!user) return;
     try {
-      const pathType = wordObj.sourceType;
       const parentId = wordObj.sourceId;
-      const wordRef = ref(db, `users/${user.uid}/${pathType}/${parentId}/words/${wordObj.id}`);
+      const wordRef = ref(db, `users/${user.uid}/words/${parentId}/${wordObj.id}`);
       
       const currentMastery = wordObj.mastery || 0;
       let newMastery = isCorrect 
@@ -214,7 +197,7 @@ export default function MixedPractice() {
     }
   };
 
-  const pageLoading = loading || packsLoading;
+  const pageLoading = loading || allWordsLoading;
 
   return (
     <div className="mixed-practice-page">

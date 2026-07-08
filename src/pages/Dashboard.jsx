@@ -10,7 +10,7 @@ import './Dashboard.css';
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { packs } = usePacks();
+  const { allWords } = usePacks();
   const { streak } = useStreak();
   const [recentWords, setRecentWords] = useState([]);
   const [totalWords, setTotalWords] = useState(0);
@@ -21,29 +21,15 @@ export default function Dashboard() {
   useEffect(() => {
     if (!user) return;
 
-    let allWords = [];
-
-    packs.forEach(pack => {
-      const wordsObj = pack.words || {};
-      Object.keys(wordsObj).forEach(wordId => {
-        allWords.push({
-          id: wordId,
-          ...wordsObj[wordId],
-          source: pack.name,
-          sourceType: 'pack'
-        });
-      });
-    });
-
     setTotalWords(allWords.length);
     setMasteredWords(allWords.filter(w => (w.mastery || 0) >= 80).length);
 
     const now = new Date();
     setDueWords(allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now).length);
 
-    allWords.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
-    setRecentWords(allWords.slice(0, 6));
-  }, [user, packs]);
+    const sorted = [...allWords].sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
+    setRecentWords(sorted.slice(0, 6));
+  }, [user, allWords]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();

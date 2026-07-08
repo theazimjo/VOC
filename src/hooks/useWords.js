@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ref, set, push, update, remove, get, onValue } from 'firebase/database';
+import { ref, set, push, update, remove, get, onValue, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
+import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 
 export function useWords(collectionType, collectionId) {
   const { user } = useAuth();
@@ -14,16 +15,20 @@ export function useWords(collectionType, collectionId) {
   });
   const [loading, setLoading] = useState(true);
 
-  // Build the words reference path in RTDB
+  // Words live at a flat top-level path (users/{uid}/words/{packId}),
+  // separate from pack metadata, so word-level writes (mastery updates
+  // during practice) never touch — and never re-trigger listeners on —
+  // the pack list.
   const getWordsRef = useCallback(() => {
-    if (!user || !collectionType || !collectionId) return null;
-    return ref(db, `users/${user.uid}/${collectionType}/${collectionId}/words`);
-  }, [user, collectionType, collectionId]);
+    if (!user || !collectionId) return null;
+    return ref(db, `users/${user.uid}/words/${collectionId}`);
+  }, [user, collectionId]);
 
-  // Get reference to the parent document (book or pack) in RTDB
-  const getParentRef = useCallback(() => {
+  // Reference to just the wordCount leaf on the pack node, so it can be
+  // updated without downloading the entire pack.
+  const getWordCountRef = useCallback(() => {
     if (!user || !collectionType || !collectionId) return null;
-    return ref(db, `users/${user.uid}/${collectionType}/${collectionId}`);
+    return ref(db, `users/${user.uid}/${collectionType}/${collectionId}/wordCount`);
   }, [user, collectionType, collectionId]);
 
   // Real-time listener for words
@@ -44,43 +49,61 @@ export function useWords(collectionType, collectionId) {
       setLoading(true);
     }
 
-    const wordsRef = getWordsRef();
+    let unsubscribe = () => {};
+    let cancelled = false;
 
-    const unsubscribe = onValue(
-      wordsRef,
-      (snapshot) => {
-        const wordsData = [];
-        snapshot.forEach((childSnap) => {
-          wordsData.push({
-            id: childSnap.key,
-            ...childSnap.val()
-          });
-        });
-
-        // Sort by addedAt descending
-        wordsData.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
-        
-        // Cache data
-        localStorage.setItem(cacheKey, JSON.stringify(wordsData));
-        
-        setWords(wordsData);
-        setLoading(false);
-      },
-      (error) => {
-        console.error('Error listening to words from RTDB:', error);
-        setLoading(false);
+    const start = async () => {
+      // One-time, idempotent migration of this pack's legacy nested words
+      // (if any) into the new flat location, before subscribing.
+      try {
+        await migratePackWordsIfNeeded(user.uid, collectionId);
+      } catch (err) {
+        console.warn('Word migration check failed:', err);
       }
-    );
+      if (cancelled) return;
 
-    return () => unsubscribe();
+      const wordsRef = getWordsRef();
+
+      unsubscribe = onValue(
+        wordsRef,
+        (snapshot) => {
+          const wordsData = [];
+          snapshot.forEach((childSnap) => {
+            wordsData.push({
+              id: childSnap.key,
+              ...childSnap.val()
+            });
+          });
+
+          // Sort by addedAt descending
+          wordsData.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
+
+          // Cache data
+          localStorage.setItem(cacheKey, JSON.stringify(wordsData));
+
+          setWords(wordsData);
+          setLoading(false);
+        },
+        (error) => {
+          console.error('Error listening to words from RTDB:', error);
+          setLoading(false);
+        }
+      );
+    };
+
+    start();
+
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
   }, [user, collectionType, collectionId, getWordsRef]);
 
   // Add a new word with SM-2 initial data
   const addWord = useCallback(
     async (data) => {
       const wordsRef = getWordsRef();
-      const parentRef = getParentRef();
-      if (!wordsRef || !parentRef) return null;
+      if (!wordsRef) return null;
 
       const newWordRef = push(wordsRef);
       const wordData = {
@@ -101,66 +124,60 @@ export function useWords(collectionType, collectionId) {
 
       await set(newWordRef, wordData);
 
-      // Update parent wordCount
+      // Increment wordCount via transaction (touches only the counter leaf,
+      // not the whole pack + all its words)
       try {
-        const parentSnap = await get(parentRef);
-        if (parentSnap.exists()) {
-          const currentData = parentSnap.val();
-          const wordsObj = currentData.words || {};
-          const currentCount = Object.keys(wordsObj).length;
-          await update(parentRef, { wordCount: currentCount });
+        const wordCountRef = getWordCountRef();
+        if (wordCountRef) {
+          await runTransaction(wordCountRef, (count) => (count || 0) + 1);
         }
       } catch (err) {
-        console.warn("Failed to update parent wordCount:", err);
+        console.warn("Failed to update pack wordCount:", err);
       }
 
       return newWordRef.key;
     },
-    [getWordsRef, getParentRef]
+    [getWordsRef, getWordCountRef]
   );
 
   // Update a word (partial update)
   const updateWord = useCallback(
     async (wordId, data) => {
-      if (!user || !collectionType || !collectionId) return;
+      if (!user || !collectionId) return;
 
-      const wordRef = ref(db, `users/${user.uid}/${collectionType}/${collectionId}/words/${wordId}`);
+      const wordRef = ref(db, `users/${user.uid}/words/${collectionId}/${wordId}`);
       await update(wordRef, data);
     },
-    [user, collectionType, collectionId]
+    [user, collectionId]
   );
 
   // Delete a word
   const deleteWord = useCallback(
     async (wordId) => {
-      const parentRef = getParentRef();
-      if (!user || !collectionType || !collectionId || !parentRef) return;
+      if (!user || !collectionType || !collectionId) return;
 
-      const wordRef = ref(db, `users/${user.uid}/${collectionType}/${collectionId}/words/${wordId}`);
+      const wordRef = ref(db, `users/${user.uid}/words/${collectionId}/${wordId}`);
       await remove(wordRef);
 
-      // Update parent wordCount
+      // Decrement wordCount via transaction (no full pack re-fetch)
       try {
-        const parentSnap = await get(parentRef);
-        if (parentSnap.exists()) {
-          const currentData = parentSnap.val();
-          const wordsObj = currentData.words || {};
-          const currentCount = Object.keys(wordsObj).length;
-          await update(parentRef, { wordCount: currentCount });
+        const wordCountRef = getWordCountRef();
+        if (wordCountRef) {
+          await runTransaction(wordCountRef, (count) => Math.max(0, (count || 0) - 1));
         }
       } catch (err) {
-        console.warn("Failed to update parent wordCount after delete:", err);
+        console.warn("Failed to update pack wordCount after delete:", err);
       }
     },
-    [user, collectionType, collectionId, getParentRef]
+    [user, collectionType, collectionId, getWordCountRef]
   );
 
   // Get a single word by ID
   const getWord = useCallback(
     async (wordId) => {
-      if (!user || !collectionType || !collectionId) return null;
+      if (!user || !collectionId) return null;
 
-      const wordRef = ref(db, `users/${user.uid}/${collectionType}/${collectionId}/words/${wordId}`);
+      const wordRef = ref(db, `users/${user.uid}/words/${collectionId}/${wordId}`);
       const snap = await get(wordRef);
 
       if (snap.exists()) {
@@ -168,15 +185,14 @@ export function useWords(collectionType, collectionId) {
       }
       return null;
     },
-    [user, collectionType, collectionId]
+    [user, collectionId]
   );
 
   // Add multiple words in batch chunks (extremely efficient)
   const bulkAddWords = useCallback(
     async (wordsList, onProgress) => {
       const wordsRef = getWordsRef();
-      const parentRef = getParentRef();
-      if (!wordsRef || !parentRef || !wordsList || wordsList.length === 0) return;
+      if (!wordsRef || !wordsList || wordsList.length === 0) return;
 
       const total = wordsList.length;
       const batchSize = 25;
@@ -219,22 +235,18 @@ export function useWords(collectionType, collectionId) {
         await new Promise(resolve => setTimeout(resolve, 300));
       }
 
-      // Update parent wordCount exactly once at the end
+      // Increment wordCount via transaction exactly once at the end
       try {
-        const parentSnap = await get(parentRef);
-        if (parentSnap.exists()) {
-          const currentData = parentSnap.val();
-          const wordsObj = currentData.words || {};
-          const currentCount = Object.keys(wordsObj).length;
-          await update(parentRef, { wordCount: currentCount });
+        const wordCountRef = getWordCountRef();
+        if (wordCountRef) {
+          await runTransaction(wordCountRef, (count) => (count || 0) + total);
         }
       } catch (err) {
-        console.warn("Failed to update parent wordCount after bulk import:", err);
+        console.warn("Failed to update pack wordCount after bulk import:", err);
       }
     },
-    [getWordsRef, getParentRef]
+    [getWordsRef, getWordCountRef]
   );
 
   return { words, loading, addWord, updateWord, deleteWord, getWord, bulkAddWords };
 }
-

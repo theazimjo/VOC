@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ref, get } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
+import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import SwipeCard from '../components/Cards/SwipeCard';
 import CardsDrill from '../components/Cards/CardsDrill';
 import { playSound, triggerVibration } from '../utils/feedback';
@@ -65,13 +66,16 @@ export default function CardsMode() {
 
     if (!user || !sourceId) return;
 
-    // Fetch the ENTIRE source node (book/pack) in ONE request.
-    // Words are stored nested inside: users/{uid}/{type}/{id}/words
-    // so we read them from the same snapshot to avoid SDK path-dedup issues.
+    // Source metadata and words now live at separate paths:
+    // users/{uid}/{type}/{id} (metadata) and users/{uid}/words/{id} (words)
     const sourceRef = ref(db, `users/${user.uid}/${sourceType}/${sourceId}`);
 
-    get(sourceRef)
-      .then((sourceSnap) => {
+    (async () => {
+      try {
+        await migratePackWordsIfNeeded(user.uid, sourceId);
+        const wordsRef = ref(db, `users/${user.uid}/words/${sourceId}`);
+        const [sourceSnap, wordsSnap] = await Promise.all([get(sourceRef), get(wordsRef)]);
+
         if (cancelled) return;
 
         if (!sourceSnap.exists()) {
@@ -89,11 +93,9 @@ export default function CardsMode() {
           coverColor: val.coverColor || '#7C3AED',
         });
 
-        // Extract words from the nested `words` child of the snapshot
-        const wordsChild = sourceSnap.child('words');
         const loaded = [];
-        if (wordsChild.exists()) {
-          wordsChild.forEach(child => {
+        if (wordsSnap.exists()) {
+          wordsSnap.forEach(child => {
             loaded.push({ id: child.key, ...child.val() });
           });
         }
@@ -108,14 +110,14 @@ export default function CardsMode() {
           setAllWords(shuffled);
           setStep('dashboard');
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         if (!cancelled) {
           console.error('[CardsMode] Fetch error:', err);
           setError("So'zlarni yuklashda xato yuz berdi.");
           setStep('error');
         }
-      });
+      }
+    })();
 
     return () => { cancelled = true; };
   }, [user?.uid, sourceType, sourceId]);

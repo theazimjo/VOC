@@ -118,8 +118,8 @@ export default function LibraryPage() {
       });
 
       if (newPackId) {
-        // 2. Write all words inside this pack's words node
-        const wordsRef = ref(db, `users/${user.uid}/packs/${newPackId}/words`);
+        // 2. Write all words to the flat words node for this pack
+        const wordsRef = ref(db, `users/${user.uid}/words/${newPackId}`);
         const updates = {};
         
         marketPack.words.forEach((wordData) => {
