@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ref, get } from 'firebase/database';
+import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
+import { useStreak } from '../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
+import { calculateNextReview } from '../utils/sm2';
 import SwipeCard from '../components/Cards/SwipeCard';
 import CardsDrill from '../components/Cards/CardsDrill';
 import { playSound, triggerVibration } from '../utils/feedback';
+import IosSpinner from '../components/common/IosSpinner';
 import './CardsMode.css';
 
 const PAGE_VARIANTS = {
@@ -20,7 +23,8 @@ export default function CardsMode() {
   const { sourceType, sourceId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  
+  const { incrementActivity } = useStreak();
+
   const [step, setStep]         = useState('loading'); // loading | dashboard | swipe | drill | results
   const [source, setSource]     = useState(null);
   const [allWords, setAllWords] = useState([]); // all words fetched
@@ -28,6 +32,7 @@ export default function CardsMode() {
   const [wordLimit, setWordLimit] = useState(10); // 5 | 10 | 20 | 0 (all)
   const [knownWords, setKnownWords]     = useState([]);
   const [unknownWords, setUnknownWords] = useState([]);
+  const [drillQueue, setDrillQueue]     = useState([]); // words being drilled this pass
   const [drillResults, setDrillResults] = useState(null);
   const [error, setError]       = useState(null);
   const [customModal, setCustomModal] = useState({ show: false, type: 'confirm', message: '', onConfirm: null });
@@ -100,8 +105,6 @@ export default function CardsMode() {
           });
         }
 
-        console.log(`[CardsMode] ${sourceType}/${sourceId} => ${loaded.length} words`);
-
         if (loaded.length === 0) {
           setError("Bu manbada so'zlar yo'q. Avval so'z qo'shing!");
           setStep('error');
@@ -129,12 +132,31 @@ export default function CardsMode() {
     setStep('swipe');
   };
 
+  // Persist the SM-2 outcome for one word so Cards Mode sessions actually
+  // feed into mastery/stats/spaced-repetition, same as every other practice mode.
+  const persistWordMastery = async (word, quality) => {
+    if (!user || !sourceId || !word) return;
+    try {
+      const sm2Data = calculateNextReview(quality, word);
+      const wordRef = ref(db, `users/${user.uid}/words/${sourceId}/${word.id}`);
+      await update(wordRef, sm2Data);
+    } catch (err) {
+      console.error('[CardsMode] Failed to persist word mastery:', err);
+    }
+  };
+
   const handleSwipeComplete = (known, unknown) => {
     setKnownWords(known);
     setUnknownWords(unknown);
+    setDrillQueue(unknown);
+
+    // Words swiped "known" are a confident correct response — quality 5
+    known.forEach(w => persistWordMastery(w, 5));
+
     if (unknown.length > 0) {
       setStep('drill');
     } else {
+      incrementActivity(known.length || 1);
       playSound('victory');
       triggerVibration('victory');
       setStep('results');
@@ -143,6 +165,11 @@ export default function CardsMode() {
 
   const handleDrillComplete = (results) => {
     setDrillResults(results);
+
+    // Drilled words: correct on first try -> quality 4, needed correction/skip -> quality 2
+    results.forEach(r => persistWordMastery(r.word, r.correct ? 4 : 2));
+    incrementActivity(knownWords.length + results.length || 1);
+
     playSound('victory');
     triggerVibration('victory');
     setStep('results');
@@ -153,11 +180,15 @@ export default function CardsMode() {
     setAllWords(shuffled);
     setKnownWords([]);
     setUnknownWords([]);
+    setDrillQueue([]);
     setDrillResults(null);
     setStep('dashboard');
   };
 
   const handleRestartUnknown = () => {
+    // Only re-drill the words that are STILL weak after the last drill pass
+    const stillWeak = drillResults ? drillResults.filter(r => !r.correct).map(r => r.word) : drillQueue;
+    setDrillQueue(stillWeak);
     setDrillResults(null);
     setStep('drill');
   };
@@ -165,16 +196,23 @@ export default function CardsMode() {
   const drillCorrect   = drillResults ? drillResults.filter(r => r.correct).length : 0;
   const drillIncorrect = drillResults ? drillResults.filter(r => !r.correct).length : 0;
 
+  // What the learner still needs to work on, reflecting the actual drill
+  // outcome rather than the raw pre-drill "swiped left" list.
+  const stillWeakWords = drillResults
+    ? drillResults.filter(r => !r.correct).map(r => r.word)
+    : unknownWords;
+
   return (
     <div className="cm-root">
       <div className="cm-header">
-        <button className="clean-back-arrow" onClick={handleBack} type="button" style={{ marginRight: '4px' }}>
-          ←
+        <button className="cm-back-btn" onClick={handleBack} type="button">
+          ← <span>Orqaga</span>
         </button>
         <div className="cm-title-area">
           <span className="cm-badge">🃏 Cards Mode</span>
           {source && <h1 className="cm-title">{source.title}</h1>}
         </div>
+        <div className="cm-header-spacer" />
       </div>
 
       {(step === 'swipe' || step === 'drill' || step === 'results') && (
@@ -200,7 +238,7 @@ export default function CardsMode() {
         <AnimatePresence mode="wait">
           {step === 'loading' && (
             <motion.div key="loading" className="cm-center" {...PAGE_VARIANTS}>
-              <div className="spinner" />
+              <IosSpinner size={32} />
               <p>So'zlar yuklanmoqda...</p>
             </motion.div>
           )}
@@ -265,19 +303,19 @@ export default function CardsMode() {
                     <span className="cm-stat-lbl">Bilaman</span>
                   </div>
                   <div className="cm-stat cm-stat--blue">
-                    <span className="cm-stat-num">{unknownWords.length}</span>
+                    <span className="cm-stat-num">{drillQueue.length}</span>
                     <span className="cm-stat-lbl">Bilmayman</span>
                   </div>
                 </div>
               </div>
-              <CardsDrill words={unknownWords} allWords={allWords} onComplete={handleDrillComplete} />
+              <CardsDrill words={drillQueue} allWords={allWords} onComplete={handleDrillComplete} />
             </motion.div>
           )}
 
           {step === 'results' && (
             <motion.div key="results" className="cm-results" {...PAGE_VARIANTS}>
               <div className="cm-results-icon">
-                {knownWords.length > unknownWords.length ? '🎉' : '💪'}
+                {stillWeakWords.length === 0 ? '🎉' : '💪'}
               </div>
               <h2 className="cm-results-title">Sessiya tugadi!</h2>
 
@@ -304,11 +342,13 @@ export default function CardsMode() {
                 )}
               </div>
 
-              {unknownWords.length > 0 && (
+              {stillWeakWords.length > 0 && (
                 <div className="cm-unknown-list">
-                  <h3 className="cm-unknown-title">Bilmagan so'zlar:</h3>
+                  <h3 className="cm-unknown-title">
+                    {drillResults ? "Hali mustahkamlash kerak:" : "Bilmagan so'zlar:"}
+                  </h3>
                   <div className="cm-unknown-words">
-                    {unknownWords.map(w => (
+                    {stillWeakWords.map(w => (
                       <div key={w.id} className="cm-unknown-word">
                         <span className="cm-uw-word">{w.word}</span>
                         <span className="cm-uw-sep">—</span>
@@ -323,12 +363,12 @@ export default function CardsMode() {
                 <button className="btn btn-primary cm-action-btn" onClick={handleRestart}>
                   🔄 Qaytadan boshlash
                 </button>
-                {unknownWords.length > 0 && (
+                {stillWeakWords.length > 0 && (
                   <button
                     className="btn btn-ghost cm-action-btn"
                     onClick={handleRestartUnknown}
                   >
-                    💪 Bilmaymanni qayta mashq qilish
+                    💪 Qolgan so'zlarni qayta mashq qilish
                   </button>
                 )}
                 <button

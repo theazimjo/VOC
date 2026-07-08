@@ -4,6 +4,7 @@ import { FileText, Trophy, Flame, Sparkles, Brain, BarChart3, Target } from 'luc
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { grammarData, germanGrammarData } from '../data/grammarData';
+import IosSpinner from '../components/common/IosSpinner';
 import './StatsPage.css';
 
 export default function StatsPage() {
@@ -109,7 +110,7 @@ export default function StatsPage() {
       <div className="stats-page">
         <div className="page-header"><h1>📈 Statistika</h1></div>
         <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
-          <div className="ios-spinner-ring"></div>
+          <IosSpinner />
           <span>Yuklanmoqda...</span>
         </div>
       </div>

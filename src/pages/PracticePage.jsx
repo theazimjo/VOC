@@ -10,6 +10,7 @@ import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import { calculateNextReview } from '../utils/sm2';
+import IosSpinner from '../components/common/IosSpinner';
 import PracticeHub from '../components/Practice/PracticeHub';
 import Flashcard from '../components/Practice/Flashcard';
 import SpellingGame from '../components/Practice/SpellingGame';
@@ -385,7 +386,7 @@ export default function PracticePage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
           >
-            <div className="ios-spinner-ring"></div>
+            <IosSpinner />
             <span>Yuklanmoqda...</span>
           </motion.div>
         )}
@@ -481,7 +482,7 @@ export default function PracticePage() {
                 <p>{practiceWords.length} ta so'z tayyorlandi</p>
                 
                 <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
-                  <div className="ios-spinner-ring"></div>
+                  <IosSpinner />
                   <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Mashq tayyorlanmoqda...</span>
                 </div>
               </div>

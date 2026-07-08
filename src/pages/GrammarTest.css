@@ -1341,19 +1341,6 @@
   gap: var(--space-md);
 }
 
-.loading-spinner {
-  width: 44px;
-  height: 44px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent-1);
-  border-radius: 50%;
-  animation: spinner 0.8s linear infinite;
-}
-
-@keyframes spinner {
-  to { transform: rotate(360deg); }
-}
-
 .gt-evaluating-card h2 {
   font-size: var(--font-md);
   font-weight: 800;

@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = 'voc-static-v2';
-const DYNAMIC_CACHE_NAME = 'voc-dynamic-v2';
+const STATIC_CACHE_NAME = 'voc-static-v3';
+const DYNAMIC_CACHE_NAME = 'voc-dynamic-v3';
 
 const STATIC_ASSETS = [
   '/',

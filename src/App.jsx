@@ -7,6 +7,7 @@ import LoginPage from './components/Auth/LoginPage';
 import RegisterPage from './components/Auth/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Layout from './components/Layout/Layout';
+import IosSpinner from './components/common/IosSpinner';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const PackDetail = lazy(() => import('./pages/PackDetail'));
@@ -25,7 +26,7 @@ const GrammarTest = lazy(() => import('./pages/GrammarTest'));
 function RouteLoader() {
   return (
     <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-2xl)' }}>
-      <div className="ios-spinner-ring"></div>
+      <IosSpinner />
       <span>Yuklanmoqda...</span>
     </div>
   );

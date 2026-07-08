@@ -8,6 +8,7 @@ import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
 import SpeedDialFAB from '../components/Words/SpeedDialFAB';
+import IosSpinner from '../components/common/IosSpinner';
 import './PackDetail.css';
 
 export default function PackDetail() {
@@ -76,7 +77,7 @@ export default function PackDetail() {
   if (!pack) {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
-        <div className="ios-spinner-ring"></div>
+        <IosSpinner />
         <span>Yuklanmoqda...</span>
       </div>
     );

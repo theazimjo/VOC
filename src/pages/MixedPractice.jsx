@@ -8,6 +8,7 @@ import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
+import IosSpinner from '../components/common/IosSpinner';
 import './MixedPractice.css';
 
 const LEECH_THRESHOLD = 3;
@@ -222,7 +223,7 @@ export default function MixedPractice() {
 
       {pageLoading ? (
         <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
-          <div className="ios-spinner-ring"></div>
+          <IosSpinner />
           <span>Yuklanmoqda...</span>
         </div>
       ) : mixedWordsPool.length === 0 ? (

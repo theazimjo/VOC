@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { grammarData, germanGrammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { getExerciseType } from '../utils/grammarHelpers';
+import IosSpinner from '../components/common/IosSpinner';
 import './GrammarExercises.css';
 
 export default function GrammarExercises() {
@@ -24,7 +25,7 @@ export default function GrammarExercises() {
   if (loading) {
     return (
       <div className="grammar-exercises-page loading">
-        <div className="loading-spinner" />
+        <IosSpinner size={36} />
         <p>Yuklanmoqda...</p>
       </div>
     );

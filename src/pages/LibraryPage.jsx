@@ -11,6 +11,7 @@ import PackForm from '../components/Packs/PackForm';
 import { packIcons } from '../utils/helpers';
 import { playSound } from '../utils/feedback';
 import { marketPacks } from '../data/marketData';
+import IosSpinner from '../components/common/IosSpinner';
 import './LibraryPage.css';
 
 export default function LibraryPage() {
@@ -208,7 +209,7 @@ export default function LibraryPage() {
       <div className="library-content">
         {isLoading ? (
           <div className="ios-activity-indicator" style={{ marginTop: '50px' }}>
-            <div className="ios-spinner-ring"></div>
+            <IosSpinner />
             <span>Yuklanmoqda...</span>
           </div>
         ) : (

@@ -116,8 +116,6 @@ export default function SwipeCard({ words, onComplete }) {
   const totalWords = words.length;
   const progress = index / totalWords;
 
-  console.log("SwipeCard Render: index =", index, "totalWords =", totalWords, "words =", words);
-
   // Speak on new card
   useEffect(() => {
     if (currentWord) {
@@ -144,8 +142,6 @@ export default function SwipeCard({ words, onComplete }) {
     const newKnown   = dir === 'right' ? [...known, currentWord] : known;
     const newUnknown = dir === 'left'  ? [...unknown, currentWord] : unknown;
 
-    console.log("handleSwipe called: dir =", dir, "index =", index, "nextIdx =", index + 1, "totalWords =", totalWords);
-
     setTimeout(() => {
       setKnown(newKnown);
       setUnknown(newUnknown);
@@ -153,7 +149,6 @@ export default function SwipeCard({ words, onComplete }) {
 
       const nextIdx = index + 1;
       if (nextIdx >= totalWords) {
-        console.log("Swipe complete! Calling onComplete with:", newKnown.length, "known,", newUnknown.length, "unknown");
         onComplete(newKnown, newUnknown);
       } else {
         setIndex(nextIdx);

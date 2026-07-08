@@ -189,7 +189,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
 
       {/* Check button */}
       {isCorrect === null && selected.length > 0 && (
-        <button className="clean-next-btn" onClick={checkAnswer} style={{ marginTop: '16px' }}>
+        <button className="clean-next-btn" onClick={checkAnswer}>
           Tekshirish
         </button>
       )}

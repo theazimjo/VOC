@@ -4,6 +4,7 @@ import { usePacks } from '../hooks/usePacks';
 import PackList from '../components/Packs/PackList';
 import PackForm from '../components/Packs/PackForm';
 import { packIcons } from '../utils/helpers';
+import IosSpinner from '../components/common/IosSpinner';
 
 export default function PacksPage() {
   const { packs, loading, addPack } = usePacks();
@@ -36,7 +37,7 @@ export default function PacksPage() {
 
       {loading ? (
         <div className="ios-activity-indicator" style={{ marginTop: '50px' }}>
-          <div className="ios-spinner-ring"></div>
+          <IosSpinner />
           <span>Yuklanmoqda...</span>
         </div>
       ) : packs.length > 0 ? (

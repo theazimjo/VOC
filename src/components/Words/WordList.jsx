@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { Search } from 'lucide-react';
 import WordCard from './WordCard';
+import IosSpinner from '../common/IosSpinner';
 import './WordList.css';
 
 export default function WordList({ words, onEdit, onDelete, loading, readOnly }) {
@@ -11,7 +12,7 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly })
   if (loading) {
     return (
       <div className="ios-activity-indicator">
-        <div className="ios-spinner-ring"></div>
+        <IosSpinner />
         <span>Yuklanmoqda...</span>
       </div>
     );

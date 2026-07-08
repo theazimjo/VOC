@@ -34,6 +34,7 @@ import {
   Brain,
   Cloud
 } from 'lucide-react';
+import IosSpinner from '../components/common/IosSpinner';
 import './GrammarTest.css';
 
 export default function GrammarTest() {
@@ -1471,7 +1472,7 @@ ${exampleGrades}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div className="loading-spinner" />
+          <IosSpinner size={36} />
           <h2>AI javoblaringizni tekshirmoqda...</h2>
           <p>
             LM Studio yordamida yozma tarjima va matn savollarining grammatikasi va ma'nosi baholanmoqda.
