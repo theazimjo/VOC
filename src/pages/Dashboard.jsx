@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { getMasteryLevel } from '../utils/sm2';
+import OnboardingModal from '../components/Onboarding/OnboardingModal';
 import './Dashboard.css';
 
 const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sh'];
@@ -35,14 +36,23 @@ function getWeekActivity(activityLog = {}, dailyGoal = 5) {
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { allWords } = usePacks();
+  const { allWords, packs, loading: packsLoading } = usePacks();
   const { streak } = useStreak();
   const [recentWords, setRecentWords] = useState([]);
   const [dueWordsList, setDueWordsList] = useState([]);
   const [totalWords, setTotalWords] = useState(0);
   const [masteredWords, setMasteredWords] = useState(0);
   const [dueWords, setDueWords] = useState(0);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user || packsLoading) return;
+    const onboardingDone = localStorage.getItem(`voc-onboarding-done-${user.uid}`);
+    if (!onboardingDone && packs.length === 0) {
+      setShowOnboarding(true);
+    }
+  }, [user, packsLoading, packs]);
 
   useEffect(() => {
     if (!user) return;
@@ -217,6 +227,10 @@ export default function Dashboard() {
           </div>
         )}
       </motion.div>
+
+      {showOnboarding && (
+        <OnboardingModal onClose={() => setShowOnboarding(false)} />
+      )}
 
     </div>
   );

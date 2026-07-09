@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import { FileText, Trophy, Flame, Sparkles, Brain, BarChart3, Target } from 'lucide-react';
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
+import { useStreak } from '../hooks/useStreak';
 import { grammarData, germanGrammarData } from '../data/grammarData';
 import IosSpinner from '../components/common/IosSpinner';
+import ActivityHeatmap from '../components/Stats/ActivityHeatmap';
 import './StatsPage.css';
 
 export default function StatsPage() {
   const { allWords, allWordsLoading: loading } = usePacks();
   const { stats: grammarStats, loading: grammarLoading } = useGrammarStats();
+  const { streak } = useStreak();
 
   // Stats calculations
 
@@ -161,6 +164,14 @@ export default function StatsPage() {
           <div className="stat-card-label">O'rtacha daraja</div>
         </div>
       </motion.div>
+
+      {/* Activity Heatmap */}
+      {streak && (
+        <motion.div className="stats-section" variants={itemVariants}>
+          <h2>🗓️ Faollik xaritasi</h2>
+          <ActivityHeatmap activityLog={streak.activityLog} dailyGoal={streak.dailyGoal || 5} />
+        </motion.div>
+      )}
 
       {/* Leech Words — repeatedly-wrong words worth focused drilling */}
       {leechWords.length > 0 && (

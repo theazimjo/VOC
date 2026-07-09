@@ -1,11 +1,20 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { usePacks } from '../../hooks/usePacks';
 import './PackCard.css';
 
 export default function PackCard({ pack, onLongPress }) {
   const [isLongPress, setIsLongPress] = useState(false);
   const timerRef = useRef(null);
+  const { allWords } = usePacks();
+
+  const masteryPercent = useMemo(() => {
+    const packWords = allWords.filter(w => w.packId === pack.id);
+    if (packWords.length === 0) return null;
+    const total = packWords.reduce((sum, w) => sum + (w.mastery || 0), 0);
+    return Math.round(total / packWords.length);
+  }, [allWords, pack.id]);
 
   const startPress = () => {
     setIsLongPress(false);
@@ -73,6 +82,17 @@ export default function PackCard({ pack, onLongPress }) {
             <h3 className="pack-card-title">{pack.name}</h3>
           </div>
           {pack.description && <p className="pack-card-desc">{pack.description}</p>}
+          {masteryPercent !== null && (
+            <div className="pack-card-progress-row">
+              <div className="pack-card-progress-track">
+                <div
+                  className="pack-card-progress-fill"
+                  style={{ width: `${masteryPercent}%`, background: pack.color || 'var(--accent-1)' }}
+                />
+              </div>
+              <span className="pack-card-progress-label">{masteryPercent}%</span>
+            </div>
+          )}
         </div>
         <div className="pack-card-meta-container">
           <span className="pack-card-badge-compact">{pack.wordCount || 0} ta so'z</span>
