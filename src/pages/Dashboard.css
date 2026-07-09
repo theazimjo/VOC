@@ -66,6 +66,55 @@
   color: var(--accent-3);
 }
 
+/* ── Weekly Activity Strip ── */
+.dash-week-strip {
+  display: flex;
+  justify-content: space-between;
+  background: var(--bg-secondary, #FFFFFF);
+  border-radius: 18px;
+  padding: 14px 10px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+.week-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.week-day-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+
+.week-day.met .week-day-dot {
+  background: var(--accent-3);
+}
+
+.week-day.today .week-day-dot {
+  box-shadow: 0 0 0 2px var(--accent-1);
+}
+
+.week-day-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.week-day.today .week-day-label {
+  color: var(--accent-1);
+}
+
 /* ── Stats Row (iOS Widget Style) ── */
 .dash-stats-row {
   display: grid;

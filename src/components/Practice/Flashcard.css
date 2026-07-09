@@ -14,38 +14,23 @@
 }
 
 /* ─── Progress ─── */
-.flashcard-progress-track {
-  width: 100%;
-  height: 6px;
-  background: var(--bg-tertiary);
-  border-radius: var(--radius-full);
-  overflow: hidden;
-  border: 1px solid var(--border-light);
-}
-
-.flashcard-progress-fill {
-  height: 100%;
-  background: var(--accent-1);
-  border-radius: var(--radius-full);
-  transition: width 0.35s ease;
-}
-
 .flashcard-progress {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  font-size: var(--font-xs);
-  color: var(--text-muted);
-  font-weight: 700;
-  margin-top: -8px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
-.flashcard-progress-num {
-  color: var(--accent-1);
-  font-weight: 800;
+.flashcard-progress-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 /* ─── Card Scene (3D Flip) ─── */
@@ -73,7 +58,7 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: var(--radius-lg);
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,6 +116,19 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: var(--space-sm) var(--space-md);
+}
+
+.flashcard-custom-sentence {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+}
+
+.fc-custom-sentence-icon {
+  color: var(--accent-1);
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .flashcard-hint {
@@ -201,70 +199,74 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: 10px var(--space-xs);
+  gap: 6px;
+  padding: 4px 2px;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
-  font-weight: 700;
-  font-size: var(--font-xs);
   cursor: pointer;
+  transition: transform var(--transition-fast);
+  border: none;
+  background: transparent;
+}
+
+.flashcard-rating-btn:active {
+  transform: scale(0.92);
+}
+
+.rating-icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all var(--transition-fast);
-  border: 1px solid var(--border);
-  background: var(--bg-secondary);
 }
 
 .flashcard-rating-btn .rating-label {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  opacity: 0.85;
+  color: var(--text-secondary);
 }
 
-.flashcard-rating-btn.again {
+.flashcard-rating-btn.again .rating-icon-circle {
   color: var(--error);
-  border-color: rgba(239, 68, 68, 0.25);
   background: var(--error-dim);
 }
 
-.flashcard-rating-btn.again:hover {
+.flashcard-rating-btn.again:hover .rating-icon-circle {
   background: var(--error);
   color: white;
-  border-color: var(--error);
 }
 
-.flashcard-rating-btn.hard {
+.flashcard-rating-btn.hard .rating-icon-circle {
   color: var(--warning);
-  border-color: rgba(249, 115, 22, 0.25);
   background: var(--warning-dim);
 }
 
-.flashcard-rating-btn.hard:hover {
+.flashcard-rating-btn.hard:hover .rating-icon-circle {
   background: var(--warning);
   color: white;
-  border-color: var(--warning);
 }
 
-.flashcard-rating-btn.good {
+.flashcard-rating-btn.good .rating-icon-circle {
   color: var(--success);
-  border-color: rgba(34, 197, 94, 0.25);
   background: var(--success-dim);
 }
 
-.flashcard-rating-btn.good:hover {
+.flashcard-rating-btn.good:hover .rating-icon-circle {
   background: var(--success);
   color: white;
-  border-color: var(--success);
 }
 
-.flashcard-rating-btn.easy {
+.flashcard-rating-btn.easy .rating-icon-circle {
   color: var(--accent-1);
-  border-color: rgba(0, 122, 255, 0.25);
   background: var(--accent-1-dim);
 }
 
-.flashcard-rating-btn.easy:hover {
+.flashcard-rating-btn.easy:hover .rating-icon-circle {
   background: var(--accent-1);
   color: white;
-  border-color: var(--accent-1);
 }
 
 /* ─── Part of Speech Badge ─── */
@@ -312,12 +314,16 @@
   .flashcard-actions {
     gap: 6px;
   }
-  
-  .flashcard-rating-btn {
-    padding: 8px 4px;
-    font-size: 10px;
+
+  .rating-icon-circle {
+    width: 40px;
+    height: 40px;
   }
-  
+
+  .flashcard-rating-btn .rating-label {
+    font-size: 0.62rem;
+  }
+
   .btn-speak-card {
     width: 32px;
     height: 32px;

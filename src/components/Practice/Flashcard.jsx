@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2 } from 'lucide-react';
+import { Volume2, X, Meh, ThumbsUp, Zap, PenLine } from 'lucide-react';
 import { calculateNextReview, responseToQuality } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './Flashcard.css';
@@ -94,8 +94,8 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
 
   return (
     <div className="flashcard-container clean-theme">
-      <div className="flashcard-progress" style={{ width: '100%', textAlign: 'left', marginBottom: '8px', fontSize: 'var(--font-sm)', color: 'var(--text-secondary)', fontWeight: 600 }}>
-        <span>{currentIndex + 1} / {words.length}</span>
+      <div className="flashcard-progress">
+        <span className="flashcard-progress-pill">{currentIndex + 1} / {words.length}</span>
       </div>
 
       {/* Card scene */}
@@ -137,7 +137,10 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
                 <div className="flashcard-example">"{currentWord.example}"</div>
               )}
               {currentWord.customSentence && (
-                <div className="flashcard-example flashcard-custom-sentence">✍️ {currentWord.customSentence}</div>
+                <div className="flashcard-example flashcard-custom-sentence">
+                  <PenLine size={13} strokeWidth={2.3} className="fc-custom-sentence-icon" />
+                  {currentWord.customSentence}
+                </div>
               )}
             </div>
           </div>
@@ -147,15 +150,19 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
       {/* Rating buttons — visible only when flipped */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
         <button className="flashcard-rating-btn again" onClick={() => handleRate('again')}>
+          <span className="rating-icon-circle"><X size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Bilmadim</span>
         </button>
         <button className="flashcard-rating-btn hard" onClick={() => handleRate('hard')}>
+          <span className="rating-icon-circle"><Meh size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Qiyin</span>
         </button>
         <button className="flashcard-rating-btn good" onClick={() => handleRate('good')}>
+          <span className="rating-icon-circle"><ThumbsUp size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Yaxshi</span>
         </button>
         <button className="flashcard-rating-btn easy" onClick={() => handleRate('easy')}>
+          <span className="rating-icon-circle"><Zap size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Oson</span>
         </button>
       </div>

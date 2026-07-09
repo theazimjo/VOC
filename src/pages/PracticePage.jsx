@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Trophy, ThumbsUp, Dumbbell, TrendingDown, Sparkles, BookOpen, CheckCircle2, XCircle, Volume2 } from 'lucide-react';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
@@ -361,6 +362,13 @@ export default function PracticePage() {
 
   const pageLoading = packsLoading;
 
+  const getResultTier = (r) => {
+    const ratio = r.totalWords > 0 ? r.correctCount / r.totalWords : 0;
+    if (ratio >= 0.8) return { Icon: Trophy, label: 'Ajoyib!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
+    if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Yaxshi!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
+    return { Icon: Dumbbell, label: 'Davom eting!', color: 'var(--success)', dim: 'var(--success-dim)' };
+  };
+
   return (
     <div className="practice-page">
       <div className="practice-page-header">
@@ -522,7 +530,9 @@ export default function PracticePage() {
           )}
 
           {/* Step 4: Results */}
-          {!pageLoading && step === 'results' && results && (
+          {!pageLoading && step === 'results' && results && (() => {
+            const tier = getResultTier(results);
+            return (
             <motion.div
               key="results"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -530,25 +540,24 @@ export default function PracticePage() {
               exit={{ opacity: 0 }}
             >
               <div className="practice-results">
-                <div className="result-icon">
-                  {results.correctCount / results.totalWords >= 0.8 ? '🎉' : 
-                   results.correctCount / results.totalWords >= 0.5 ? '👍' : '💪'}
+                <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color }}>
+                  <tier.Icon size={36} strokeWidth={2.2} />
                 </div>
-                <h2>
-                  {results.correctCount / results.totalWords >= 0.8 ? 'Ajoyib!' :
-                   results.correctCount / results.totalWords >= 0.5 ? 'Yaxshi!' : 'Davom eting!'}
-                </h2>
+                <h2>{tier.label}</h2>
                 <p>Mashq yakunlandi</p>
                 <div className="result-stats">
                   <div className="result-stat">
+                    <BookOpen className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--accent-2)' }} />
                     <div className="value" style={{ color: 'var(--accent-2)' }}>{results.totalWords}</div>
                     <div className="label">Jami so'zlar</div>
                   </div>
                   <div className="result-stat">
+                    <CheckCircle2 className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
                     <div className="value" style={{ color: 'var(--success)' }}>{results.correctCount}</div>
                     <div className="label">To'g'ri</div>
                   </div>
                   <div className="result-stat">
+                    <XCircle className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--error)' }} />
                     <div className="value" style={{ color: 'var(--error)' }}>{results.incorrectCount}</div>
                     <div className="label">Noto'g'ri</div>
                   </div>
@@ -558,7 +567,8 @@ export default function PracticePage() {
                 {wrongWords.length > 0 ? (
                   <div className="results-mistakes-container">
                     <div className="results-mistakes-title">
-                      📉 Takrorlash tavsiya etiladi (xatolar):
+                      <TrendingDown size={14} strokeWidth={2.4} />
+                      Takrorlash tavsiya etiladi (xatolar)
                     </div>
                     <div className="results-mistake-list">
                       {wrongWords.map(word => (
@@ -573,7 +583,7 @@ export default function PracticePage() {
                             onClick={() => speakWord(word.word)}
                             title="Tinglash"
                           >
-                            🔊
+                            <Volume2 size={16} strokeWidth={2.3} />
                           </button>
                         </div>
                       ))}
@@ -581,7 +591,8 @@ export default function PracticePage() {
                   </div>
                 ) : (
                   <div className="perfect-score-banner">
-                    🏆 Mukammal natija! Hech qanday xatolikka yo'l qo'yilmadi.
+                    <Sparkles size={16} strokeWidth={2.3} />
+                    Mukammal natija! Hech qanday xatolikka yo'l qo'yilmadi.
                   </div>
                 )}
 
@@ -592,7 +603,8 @@ export default function PracticePage() {
                 </div>
               </div>
             </motion.div>
-          )}
+            );
+          })()}
       </div>
       {customModal.show && (
         <div className="custom-alert-overlay">

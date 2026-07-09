@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit, ChevronRight } from 'lucide-react';
@@ -8,11 +8,37 @@ import { useStreak } from '../hooks/useStreak';
 import { getMasteryLevel } from '../utils/sm2';
 import './Dashboard.css';
 
+const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sh'];
+
+function getLocalDateString(d) {
+  const offset = d.getTimezoneOffset();
+  return new Date(d.getTime() - offset * 60 * 1000).toISOString().split('T')[0];
+}
+
+function getWeekActivity(activityLog = {}, dailyGoal = 5) {
+  const today = new Date();
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = getLocalDateString(d);
+    const count = activityLog[dateStr] || 0;
+    days.push({
+      date: dateStr,
+      label: WEEKDAY_LABELS[d.getDay()],
+      met: count >= dailyGoal,
+      isToday: i === 0
+    });
+  }
+  return days;
+}
+
 export default function Dashboard() {
   const { user } = useAuth();
   const { allWords } = usePacks();
   const { streak } = useStreak();
   const [recentWords, setRecentWords] = useState([]);
+  const [dueWordsList, setDueWordsList] = useState([]);
   const [totalWords, setTotalWords] = useState(0);
   const [masteredWords, setMasteredWords] = useState(0);
   const [dueWords, setDueWords] = useState(0);
@@ -25,11 +51,19 @@ export default function Dashboard() {
     setMasteredWords(allWords.filter(w => (w.mastery || 0) >= 80).length);
 
     const now = new Date();
-    setDueWords(allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now).length);
+    const due = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now);
+    setDueWords(due.length);
+    const dueSorted = [...due].sort((a, b) => new Date(a.nextReview || 0) - new Date(b.nextReview || 0));
+    setDueWordsList(dueSorted.slice(0, 6));
 
     const sorted = [...allWords].sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
     setRecentWords(sorted.slice(0, 6));
   }, [user, allWords]);
+
+  const weekActivity = useMemo(
+    () => getWeekActivity(streak?.activityLog, streak?.dailyGoal || 5),
+    [streak]
+  );
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -41,6 +75,8 @@ export default function Dashboard() {
 
   const displayName = user?.displayName || user?.email?.split('@')[0] || 'Foydalanuvchi';
   const masteryPercent = totalWords > 0 ? Math.round((masteredWords / totalWords) * 100) : 0;
+  const showDue = dueWordsList.length > 0;
+  const wordsToShow = showDue ? dueWordsList : recentWords;
 
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: 16 },
@@ -69,6 +105,16 @@ export default function Dashboard() {
           )}
         </div>
         <div className="dash-subtitle">Bugun qancha so'z o'rganasiz?</div>
+      </motion.div>
+
+      {/* ── Weekly Activity Strip ── */}
+      <motion.div className="dash-week-strip" {...fadeUp(0.05)}>
+        {weekActivity.map((d) => (
+          <div key={d.date} className={`week-day ${d.met ? 'met' : ''} ${d.isToday ? 'today' : ''}`}>
+            <div className="week-day-dot">{d.met && <Flame size={12} strokeWidth={2.5} />}</div>
+            <span className="week-day-label">{d.label}</span>
+          </div>
+        ))}
       </motion.div>
 
       {/* ── Stats Row ── */}
@@ -107,29 +153,33 @@ export default function Dashboard() {
       </motion.div>
 
       {/* ── CTA Button ── */}
-      <motion.div className="dash-cta-section" {...fadeUp(0.16)}>
-        <button
-          className={`btn-practice-primary ${dueWords > 0 ? 'pulse-border' : ''}`}
-          onClick={() => navigate('/mixed-practice')}
-          id="dashboard-practice-btn"
-        >
-          Mashq qilish
-          {dueWords > 0 && (
-            <span className="btn-practice-badge">{dueWords} ta takrorlash</span>
-          )}
-        </button>
-      </motion.div>
+      {totalWords > 0 && (
+        <motion.div className="dash-cta-section" {...fadeUp(0.16)}>
+          <button
+            className={`btn-practice-primary ${dueWords > 0 ? 'pulse-border' : ''}`}
+            onClick={() => navigate('/mixed-practice')}
+            id="dashboard-practice-btn"
+          >
+            {dueWords > 0 ? 'Takrorlashni boshlash' : 'Mashq qilish'}
+            {dueWords > 0 && (
+              <span className="btn-practice-badge">{dueWords} ta so'z</span>
+            )}
+          </button>
+        </motion.div>
+      )}
 
-      {/* ── Recent Words (iOS Inset Grouped List) ── */}
+      {/* ── Due Today / Recent Words (iOS Inset Grouped List) ── */}
       <motion.div className="dashboard-section" {...fadeUp(0.2)}>
         <div className="dashboard-section-header">
-          <h2>Oxirgi so'zlar</h2>
-          <Link to="/library" className="ios-link">Barchasi</Link>
+          <h2>{showDue ? 'Bugun takrorlang' : "Oxirgi so'zlar"}</h2>
+          <Link to={showDue ? '/mixed-practice' : '/library'} className="ios-link">
+            {showDue ? 'Mashq qilish' : 'Barchasi'}
+          </Link>
         </div>
 
-        {recentWords.length > 0 ? (
+        {wordsToShow.length > 0 ? (
           <div className="recent-words-list">
-            {recentWords.map((word, idx) => {
+            {wordsToShow.map((word, idx) => {
               const masteryInfo = getMasteryLevel(word.mastery || 0);
               return (
                 <motion.div
