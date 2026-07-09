@@ -12,10 +12,6 @@ export function ThemeProvider({ children }) {
     const saved = localStorage.getItem('voc-theme') || 'ios';
     return ['ios', 'android'].includes(saved) ? saved : 'ios';
   });
-  const [particlesEnabled, setParticlesEnabled] = useState(() => {
-    const saved = localStorage.getItem('voc-particles');
-    return saved !== null ? saved === 'true' : true;
-  });
   const [fontSize, setFontSize] = useState(() => localStorage.getItem('voc-font-size') || 'normal'); // small, normal, large
   const [audioEnabled, setAudioEnabled] = useState(() => {
     const saved = localStorage.getItem('voc-audio');
@@ -27,7 +23,6 @@ export function ThemeProvider({ children }) {
   const [reminderTime, setReminderTime] = useState(() => {
     return localStorage.getItem('voc-reminder-time') || '19:00';
   });
-  const [performanceMode, setPerformanceMode] = useState(false); // If FPS drops, disable particles
 
   useEffect(() => {
     const root = document.documentElement;
@@ -40,10 +35,6 @@ export function ThemeProvider({ children }) {
     root.setAttribute('data-font-size', fontSize);
     localStorage.setItem('voc-font-size', fontSize);
   }, [fontSize]);
-
-  useEffect(() => {
-    localStorage.setItem('voc-particles', particlesEnabled);
-  }, [particlesEnabled]);
 
   useEffect(() => {
     localStorage.setItem('voc-audio', audioEnabled);
@@ -61,8 +52,6 @@ export function ThemeProvider({ children }) {
     <ThemeContext.Provider value={{
       theme,
       setTheme,
-      particlesEnabled,
-      setParticlesEnabled,
       fontSize,
       setFontSize,
       audioEnabled,
@@ -71,8 +60,6 @@ export function ThemeProvider({ children }) {
       setReminderEnabled,
       reminderTime,
       setReminderTime,
-      performanceMode,
-      setPerformanceMode,
       themes
     }}>
       {children}

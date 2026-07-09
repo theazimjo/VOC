@@ -7,8 +7,6 @@ export default function Settings() {
   const {
     theme,
     setTheme,
-    particlesEnabled,
-    setParticlesEnabled,
     fontSize,
     setFontSize,
     audioEnabled,
@@ -17,7 +15,6 @@ export default function Settings() {
     setReminderEnabled,
     reminderTime,
     setReminderTime,
-    performanceMode,
     themes
   } = useTheme();
 
@@ -58,7 +55,7 @@ export default function Settings() {
         {/* Theme Selection Card */}
         <div className="settings-card theme-selector-card">
           <h2>🎨 Mavzular (Themes)</h2>
-          <p className="section-desc">Ilovaning umumiy dizayni, shakllari va fon effektlarini boshqaring:</p>
+          <p className="section-desc">Ilovaning umumiy rangi va ko'rinishini tanlang:</p>
           
           <div className="themes-list">
             {themes.map((t) => {
@@ -96,30 +93,6 @@ export default function Settings() {
         {/* Behavior & Display Settings Card */}
         <div className="settings-card behavior-settings-card">
           <h2>⚙️ Interfeys va Effektlar</h2>
-          
-          <div className="setting-option-row">
-            <div className="option-info">
-              <span className="option-title">✨ Zarrachalar (Particles) tizimi</span>
-              <span className="option-desc">Har bir mavzu uchun maxsus tayyorlangan jonli fon effektlari</span>
-            </div>
-            <label className="switch-toggle">
-              <input
-                type="checkbox"
-                checked={particlesEnabled && !performanceMode}
-                disabled={performanceMode}
-                onChange={(e) => setParticlesEnabled(e.target.checked)}
-              />
-              <span className="slider-round"></span>
-            </label>
-          </div>
-
-          {performanceMode && (
-            <div className="settings-warning-alert">
-              ⚠️ Qurilmangizda ishlash unumdorligi pasayganligi sababli zarrachalar avtomatik tarzda o'chirildi.
-            </div>
-          )}
-
-          <hr className="settings-divider" />
 
           <div className="setting-option-row">
             <div className="option-info">

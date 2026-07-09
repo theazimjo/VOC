@@ -14,5 +14,28 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mashq qilish",
+      "short_name": "Mashq",
+      "description": "Aralash mashqni darhol boshlash",
+      "url": "/mixed-practice",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Kutubxona",
+      "short_name": "Kutubxona",
+      "description": "So'z to'plamlarini ko'rish",
+      "url": "/library",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "Statistika",
+      "short_name": "Statistika",
+      "description": "Progress va faollik statistikasi",
+      "url": "/stats",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
   ]
 }

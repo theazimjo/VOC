@@ -37,6 +37,15 @@ export default function PackDetail() {
     if (editingWord) {
       await updateWord(editingWord.id, data);
     } else {
+      const trimmedWord = (data.word || '').trim().toLowerCase();
+      const isDuplicate = trimmedWord && words.some(w => (w.word || '').trim().toLowerCase() === trimmedWord);
+      if (isDuplicate) {
+        const proceed = window.confirm(
+          `"${data.word}" so'zi ushbu to'plamda allaqachon mavjud. Baribir qo'shishni xohlaysizmi?`
+        );
+        if (!proceed) return;
+      }
+
       if (todayCount >= dailyWordLimit) {
         const proceed = window.confirm(
           `Bugun allaqachon ${todayCount} ta yangi so'z qo'shdingiz (kunlik maqsad: ${dailyWordLimit} ta). Ko'p so'zni bir kunda qo'shish yodlashni qiyinlashtiradi — ularni avval mustahkamlab olish tavsiya etiladi. Baribir davom etasizmi?`
@@ -57,14 +66,43 @@ export default function PackDetail() {
 
   const handleBulkImport = async (newWords, onProgress) => {
     if (pack?.name === 'Irregular Verbs') return;
-    const projectedTotal = todayCount + newWords.length;
+
+    // Skip words already in the pack, and duplicates within the pasted list itself.
+    const existingWords = new Set(words.map(w => (w.word || '').trim().toLowerCase()));
+    const seenInBatch = new Set();
+    const uniqueWords = [];
+    let duplicateCount = 0;
+
+    for (const w of newWords) {
+      const key = (w.word || '').trim().toLowerCase();
+      if (key && (existingWords.has(key) || seenInBatch.has(key))) {
+        duplicateCount += 1;
+        continue;
+      }
+      if (key) seenInBatch.add(key);
+      uniqueWords.push(w);
+    }
+
+    if (duplicateCount > 0) {
+      const proceed = window.confirm(
+        `${duplicateCount} ta so'z takroriy bo'lgani uchun o'tkazib yuboriladi. ${uniqueWords.length} ta yangi so'z qo'shiladi. Davom etasizmi?`
+      );
+      if (!proceed) return;
+    }
+
+    if (uniqueWords.length === 0) {
+      window.alert("Qo'shiladigan yangi so'z topilmadi — ro'yxatdagi barcha so'zlar allaqachon mavjud.");
+      return;
+    }
+
+    const projectedTotal = todayCount + uniqueWords.length;
     if (projectedTotal > dailyWordLimit) {
       const proceed = window.confirm(
         `Bu import bilan bugungi jami yangi so'zlar soni ${projectedTotal} taga yetadi (kunlik maqsad: ${dailyWordLimit} ta). Baribir davom etasizmi?`
       );
       if (!proceed) return;
     }
-    await bulkAddWords(newWords, onProgress);
+    await bulkAddWords(uniqueWords, onProgress);
   };
 
   const handleDeleteWord = async (wordId) => {
