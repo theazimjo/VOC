@@ -21,6 +21,12 @@ export function ThemeProvider({ children }) {
     const saved = localStorage.getItem('voc-audio');
     return saved !== null ? saved === 'true' : true;
   });
+  const [reminderEnabled, setReminderEnabled] = useState(() => {
+    return localStorage.getItem('voc-reminder') === 'true';
+  });
+  const [reminderTime, setReminderTime] = useState(() => {
+    return localStorage.getItem('voc-reminder-time') || '19:00';
+  });
   const [performanceMode, setPerformanceMode] = useState(false); // If FPS drops, disable particles
 
   useEffect(() => {
@@ -43,6 +49,14 @@ export function ThemeProvider({ children }) {
     localStorage.setItem('voc-audio', audioEnabled);
   }, [audioEnabled]);
 
+  useEffect(() => {
+    localStorage.setItem('voc-reminder', reminderEnabled);
+  }, [reminderEnabled]);
+
+  useEffect(() => {
+    localStorage.setItem('voc-reminder-time', reminderTime);
+  }, [reminderTime]);
+
   return (
     <ThemeContext.Provider value={{
       theme,
@@ -53,6 +67,10 @@ export function ThemeProvider({ children }) {
       setFontSize,
       audioEnabled,
       setAudioEnabled,
+      reminderEnabled,
+      setReminderEnabled,
+      reminderTime,
+      setReminderTime,
       performanceMode,
       setPerformanceMode,
       themes

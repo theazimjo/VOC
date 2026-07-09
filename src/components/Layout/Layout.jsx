@@ -4,12 +4,15 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import BottomNav from './BottomNav';
 import ParticleCanvas from '../Particles/ParticleCanvas';
+import { useDailyReminder } from '../../hooks/useDailyReminder';
 import './Layout.css';
 
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+
+  useDailyReminder();
 
   const handleToggleSidebar = useCallback(() => {
     setCollapsed((prev) => !prev);

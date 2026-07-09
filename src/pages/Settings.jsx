@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
 import './Settings.css';
@@ -13,9 +13,33 @@ export default function Settings() {
     setFontSize,
     audioEnabled,
     setAudioEnabled,
+    reminderEnabled,
+    setReminderEnabled,
+    reminderTime,
+    setReminderTime,
     performanceMode,
     themes
   } = useTheme();
+
+  const [notifPermission, setNotifPermission] = useState(
+    typeof Notification !== 'undefined' ? Notification.permission : 'unsupported'
+  );
+
+  const handleReminderToggle = async (checked) => {
+    if (checked) {
+      if (typeof Notification === 'undefined') {
+        setNotifPermission('unsupported');
+        return;
+      }
+      const permission = await Notification.requestPermission();
+      setNotifPermission(permission);
+      if (permission === 'granted') {
+        setReminderEnabled(true);
+      }
+    } else {
+      setReminderEnabled(false);
+    }
+  };
 
   const { limit: dailyWordLimit, setLimit: setDailyWordLimit, todayCount } = useDailyNewWordLimit();
 
@@ -153,6 +177,54 @@ export default function Settings() {
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Daily Reminder Card */}
+        <div className="settings-card behavior-settings-card">
+          <h2>🔔 Kunlik eslatma</h2>
+          <p className="section-desc">
+            Kunlik maqsadingizni bajarmagan bo'lsangiz, belgilangan vaqtda eslatma yuboriladi.
+            Eslatma faqat ilova ochiq turgan brauzerda ishlaydi.
+          </p>
+
+          <div className="setting-option-row">
+            <div className="option-info">
+              <span className="option-title">Eslatmalarni yoqish</span>
+              <span className="option-desc">
+                {notifPermission === 'denied'
+                  ? "Brauzer bildirishnomalari bloklangan — brauzer sozlamalaridan ruxsat bering"
+                  : "Bugun mashq qilmagan bo'lsangiz sizga eslatib turamiz"}
+              </span>
+            </div>
+            <label className="switch-toggle">
+              <input
+                type="checkbox"
+                checked={reminderEnabled}
+                disabled={notifPermission === 'denied'}
+                onChange={(e) => handleReminderToggle(e.target.checked)}
+              />
+              <span className="slider-round"></span>
+            </label>
+          </div>
+
+          {reminderEnabled && (
+            <>
+              <hr className="settings-divider" />
+              <div className="setting-option-row">
+                <div className="option-info">
+                  <span className="option-title">Eslatma vaqti</span>
+                  <span className="option-desc">Har kuni shu vaqtdan keyin tekshiriladi</span>
+                </div>
+                <input
+                  type="time"
+                  className="font-size-btn"
+                  value={reminderTime}
+                  onChange={(e) => setReminderTime(e.target.value)}
+                  style={{ cursor: 'pointer' }}
+                />
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

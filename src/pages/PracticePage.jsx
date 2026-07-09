@@ -21,6 +21,7 @@ import SpacedRepetition from '../components/Practice/SpacedRepetition';
 import DictationGame from '../components/Practice/DictationGame';
 import PronounceGame from '../components/Practice/PronounceGame';
 import IrregularVerbsTrainer from '../components/Practice/IrregularVerbsTrainer';
+import SentenceBuilder from '../components/Practice/SentenceBuilder';
 import './PracticePage.css';
 
 export default function PracticePage() {
@@ -355,6 +356,7 @@ export default function PracticePage() {
       case 'dictation': return <DictationGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
       case 'spaced': return <SpacedRepetition {...props} />;
+      case 'sentence': return <SentenceBuilder {...props} />;
       case 'irregular-verbs': return <IrregularVerbsTrainer {...props} initialSubStep={querySubStep} />;
       default: return null;
     }
@@ -482,10 +484,10 @@ export default function PracticePage() {
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">
-                  {selectedMode === 'flashcard' ? '🎴' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'dictation' ? '🎧' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'spaced' ? '🧠' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
+                  {selectedMode === 'flashcard' ? '🎴' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'dictation' ? '🎧' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'spaced' ? '🧠' : selectedMode === 'sentence' ? '📓' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? 'Flashcards' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'dictation' ? 'Diktant' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'spaced' ? 'Takrorlash' : selectedMode === 'irregular-verbs' ? "Fe'llar Trenajyori" : 'Mashq'}
+                  {selectedMode === 'flashcard' ? 'Flashcards' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'dictation' ? 'Diktant' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'spaced' ? 'Takrorlash' : selectedMode === 'sentence' ? 'Jumla Tuzish' : selectedMode === 'irregular-verbs' ? "Fe'llar Trenajyori" : 'Mashq'}
                 </h2>
                 <p>{practiceWords.length} ta so'z tayyorlandi</p>
                 
@@ -511,7 +513,7 @@ export default function PracticePage() {
                   ←
                 </button>
                 <h1 className="clean-quiz-title">
-                  {selectedMode === 'flashcard' ? '🎴 Flashcards' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🎧 Diktant' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : 'Mashq'}
+                  {selectedMode === 'flashcard' ? '🎴 Flashcards' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'dictation' ? '🎧 Diktant' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : selectedMode === 'sentence' ? '📓 Jumla tuzish' : 'Mashq'}
                 </h1>
                 <div style={{ width: '40px', opacity: 0 }}></div>
                 

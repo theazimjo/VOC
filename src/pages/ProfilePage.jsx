@@ -4,6 +4,7 @@ import { UserCircle2, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useAvatar } from '../hooks/useAvatar';
+import AchievementsGrid from '../components/Profile/AchievementsGrid';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
@@ -101,6 +102,8 @@ export default function ProfilePage() {
           </div>
         </form>
       </div>
+
+      <AchievementsGrid />
 
       <div className="danger-zone">
         <h3><AlertTriangle size={17} strokeWidth={2.2} style={{ verticalAlign: '-3px', marginRight: '6px' }} />Xavfli zona</h3>

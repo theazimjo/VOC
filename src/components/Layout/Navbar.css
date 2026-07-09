@@ -94,6 +94,26 @@
   margin-left: auto;
 }
 
+.navbar-search-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.navbar-search-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--accent-1);
+}
+
 /* ---------- User dropdown ---------- */
 .navbar-user {
   position: relative;

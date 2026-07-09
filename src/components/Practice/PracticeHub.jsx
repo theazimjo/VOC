@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Layers, PenLine, Shuffle, ListChecks, Headphones, Mic, Brain } from 'lucide-react';
+import { Zap, Layers, PenLine, Shuffle, ListChecks, Headphones, Mic, Brain, NotebookPen } from 'lucide-react';
 import './PracticeHub.css';
 
 export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
@@ -72,6 +72,14 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
       desc: "Ilmiy tasdiqlangan interval takrorlash algoritmi yordamida yod oling",
       badge: 'Kunlik vazifa',
       glowColor: 'hsl(180, 85%, 50%)'
+    },
+    {
+      id: 'sentence',
+      icon: NotebookPen,
+      title: 'Jumla Tuzish',
+      desc: "So'zni yodingizdan chaqirib, uni ishlatib inglizcha jumla yozing",
+      badge: "Min 1 ta so'z",
+      glowColor: 'hsl(20, 90%, 55%)'
     }
   );
 

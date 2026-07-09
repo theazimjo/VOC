@@ -1,17 +1,31 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, User, BarChart3, Settings, LogOut } from 'lucide-react';
+import { Menu, User, BarChart3, Settings, LogOut, Search } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useAvatar } from '../../hooks/useAvatar';
+import GlobalSearch from '../common/GlobalSearch';
 import './Navbar.css';
 
 export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
   const { user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
   const dropdownRef = useRef(null);
+
+  // Cmd/Ctrl+K opens global search
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Monitor online status
   useEffect(() => {
@@ -74,6 +88,14 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
 
       {/* Right side */}
       <div className="navbar-right">
+        <button
+          className="navbar-search-btn"
+          onClick={() => setSearchOpen(true)}
+          aria-label="Qidirish"
+          title="Qidirish (Ctrl+K)"
+        >
+          <Search size={18} strokeWidth={2.2} />
+        </button>
         {!isOnline && (
           <div
             className="navbar-offline-badge"
@@ -148,6 +170,8 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
           </AnimatePresence>
         </div>
       </div>
+
+      <GlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }
