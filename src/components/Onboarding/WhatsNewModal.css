@@ -85,6 +85,11 @@
   flex-shrink: 0;
 }
 
+.whatsnew-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
 .whatsnew-item-title {
   font-size: var(--font-sm);
   font-weight: 700;
