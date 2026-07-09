@@ -13,20 +13,20 @@
   flex: 1;
   height: 4px;
   border-radius: 2px;
-  background: rgba(142, 142, 147, 0.2); /* iOS System Gray Fill */
+  background: var(--bg-tertiary);
   transition: background 0.3s ease;
 }
 
 .auth-password-strength-bar.active.weak {
-  background: #ff3b30; /* iOS System Red */
+  background: var(--error);
 }
 
 .auth-password-strength-bar.active.medium {
-  background: #ff9500; /* iOS System Orange */
+  background: var(--accent-3);
 }
 
 .auth-password-strength-bar.active.strong {
-  background: #34c759; /* iOS System Green */
+  background: var(--success);
 }
 
 .auth-password-hint {
@@ -38,6 +38,6 @@
   transition: color 0.3s ease;
 }
 
-.auth-password-hint.weak { color: #ff3b30; }
-.auth-password-hint.medium { color: #ff9500; }
-.auth-password-hint.strong { color: #34c759; }
+.auth-password-hint.weak { color: var(--error); }
+.auth-password-hint.medium { color: var(--accent-3); }
+.auth-password-hint.strong { color: var(--success); }

@@ -53,9 +53,9 @@
 .active-tab-pill {
   position: absolute;
   inset: 0;
-  background: var(--segmented-active-bg, rgba(255, 255, 255, 0.12));
+  background: var(--segmented-active-bg, var(--bg-secondary));
   border-radius: 7px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   z-index: 0;
 }
 
@@ -67,7 +67,7 @@
 
 /* Count badge inside tab */
 .tab-count-badge {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-tertiary);
   border: none;
   padding: 1px 6px;
   border-radius: var(--radius-full);
@@ -82,7 +82,7 @@
 }
 
 .library-tab-btn.active .tab-count-badge {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-tertiary);
   color: var(--text-secondary);
 }
 
@@ -135,7 +135,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--space-md);
-  border-left: 4px solid var(--accent);
+  border-left: 4px solid var(--accent-1);
   padding-left: var(--space-sm);
 }
 
@@ -147,7 +147,7 @@
 }
 
 .library-section-add-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   font-size: var(--font-xs);
@@ -159,7 +159,7 @@
 }
 
 .library-section-add-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-glass-hover);
   color: var(--text-primary);
   border-color: var(--border-light);
 }
@@ -187,7 +187,7 @@
 }
 
 .market-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-md);
@@ -200,23 +200,10 @@
   height: 240px;
 }
 
-.market-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--card-border-gradient, var(--accent-gradient));
-  opacity: 0.8;
-}
-
 .market-card:hover {
-  transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.04);
-  border-color: var(--border-light);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 
-              0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  border-color: var(--accent-1);
+  box-shadow: var(--shadow-lg);
 }
 
 .market-card-top {
@@ -233,14 +220,14 @@
 
 .market-card-icon {
   font-size: 2rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-light);
 }
 
 .market-card-title {
@@ -265,15 +252,15 @@
 }
 
 .market-badge.level {
-  background: rgba(124, 58, 237, 0.15);
-  color: #a78bfa;
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  background: rgba(175, 82, 222, 0.12);
+  color: #AF52DE;
+  border: 1px solid rgba(175, 82, 222, 0.2);
 }
 
 .market-badge.category {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: var(--accent-2-dim);
+  color: var(--accent-2);
+  border: 1px solid transparent;
 }
 
 .market-card-desc {
@@ -293,7 +280,7 @@
   align-items: center;
   margin-top: var(--space-md);
   padding-top: var(--space-sm);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-light);
 }
 
 .market-card-words {
@@ -303,7 +290,7 @@
 }
 
 .market-install-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   color: var(--text-primary);
   font-size: var(--font-xs);
@@ -318,15 +305,15 @@
 }
 
 .market-install-btn:hover:not(:disabled) {
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   border-color: transparent;
   color: white;
-  box-shadow: 0 4px 12px hsla(175, 75%, 45%, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
 }
 
 .market-install-btn:disabled {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.05);
+  background: transparent;
+  border-color: var(--border-light);
   color: var(--text-muted);
   cursor: not-allowed;
 }
@@ -354,7 +341,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   border: none;
   color: white;
   font-size: 28px;
@@ -363,15 +350,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.35),
-              0 8px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 122, 255, 0.35),
+              var(--shadow-lg);
   z-index: 99;
   transition: all var(--transition-base);
 }
 
 .fab-main-btn.open {
-  background: #ef4444; /* red background when open */
-  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+  background: var(--error); /* red background when open */
+  box-shadow: 0 4px 15px rgba(255, 59, 48, 0.35);
 }
 
 .fab-main-icon {
@@ -397,21 +384,21 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  background: rgba(20, 20, 25, 0.85);
+  background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
   padding: 8px 16px;
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-lg);
   transition: all var(--transition-base);
   white-space: nowrap;
 }
 
 .fab-option-btn:hover {
-  border-color: var(--border-light);
+  border-color: var(--accent-1);
   transform: translateX(-4px);
-  background: rgba(30, 30, 35, 0.95);
+  background: var(--bg-glass-hover);
 }
 
 .fab-option-label {

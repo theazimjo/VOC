@@ -12,14 +12,14 @@
 .spelling-progress-track {
   width: 100%;
   height: 6px;
-  background: rgba(255,255,255,0.06);
+  background: var(--bg-tertiary);
   border-radius: var(--radius-full);
   overflow: hidden;
   border: 1px solid var(--border);
 }
 .spelling-progress-fill {
   height: 100%;
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   border-radius: var(--radius-full);
   transition: width 0.4s ease;
 }
@@ -67,8 +67,8 @@
   text-align: center;
   transition: border-color 0.3s;
 }
-.spelling-card.correct { border-color: var(--success); box-shadow: var(--shadow-lg), 0 0 30px hsla(145, 65%, 45%, 0.2); }
-.spelling-card.wrong   { border-color: var(--error);   box-shadow: var(--shadow-lg), 0 0 30px hsla(355, 70%, 55%, 0.2); }
+.spelling-card.correct { border-color: var(--success); box-shadow: var(--shadow-lg), 0 0 30px var(--success-dim); }
+.spelling-card.wrong   { border-color: var(--error);   box-shadow: var(--shadow-lg), 0 0 30px var(--error-dim); }
 
 .spelling-card-label {
   font-size: var(--font-xs);
@@ -81,10 +81,7 @@
 .spelling-target {
   font-size: 2.6rem;
   font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
@@ -107,7 +104,7 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: var(--font-xl);
   font-weight: 700;
-  background: rgba(255,255,255,0.04);
+  background: var(--bg-tertiary);
   padding: var(--space-sm) var(--space-lg);
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
@@ -140,7 +137,7 @@
 .spelling-input:focus {
   border-color: var(--accent-1);
   outline: none;
-  box-shadow: 0 0 20px hsla(175, 75%, 45%, 0.25);
+  box-shadow: 0 0 0 4px var(--accent-1-dim);
   background: var(--bg-tertiary);
 }
 .spelling-input.correct {
@@ -155,7 +152,7 @@
 }
 
 .btn-spell-submit {
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   color: white;
   border: none;
   border-radius: var(--radius-md);
@@ -165,12 +162,12 @@
   cursor: pointer;
   font-family: var(--font-family);
   transition: all var(--transition-base);
-  box-shadow: 0 4px 14px hsla(175, 75%, 45%, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3);
 }
 .btn-spell-submit:hover {
   filter: brightness(1.1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px hsla(175, 75%, 45%, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
 }
 
 /* ─── Feedback Banner ─── */
@@ -204,7 +201,7 @@
 }
 
 .btn-spell-next {
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   color: white;
   border: none;
   border-radius: var(--radius-md);
@@ -214,13 +211,13 @@
   cursor: pointer;
   font-family: var(--font-family);
   transition: all var(--transition-base);
-  box-shadow: 0 4px 14px hsla(175, 75%, 45%, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3);
   width: 100%;
 }
 .btn-spell-next:hover {
   filter: brightness(1.1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px hsla(175, 75%, 45%, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
 }
 
 /* ─── Responsive ─── */

@@ -45,12 +45,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 28px;
-  border-radius: 10px;
-  transition:
-    background var(--transition-fast),
-    transform var(--transition-fast);
+  width: 28px;
+  height: 24px;
+  transition: transform var(--transition-fast);
 }
 
 /* ── Label ─────────────────────────────────── */
@@ -70,8 +67,7 @@
 }
 
 .bottom-nav-link.active .bottom-nav-icon {
-  background: var(--accent-1-dim);
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 /* ── Show on Mobile ────────────────────────── */

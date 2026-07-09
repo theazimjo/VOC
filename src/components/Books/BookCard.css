@@ -16,7 +16,7 @@
 .book-card-horizontal:hover {
   border-color: var(--accent-1);
   background: var(--bg-glass-hover);
-  box-shadow: var(--shadow-sm), 0 0 20px hsla(175, 75%, 45%, 0.08);
+  box-shadow: var(--shadow-sm), 0 0 20px var(--accent-1-dim);
 }
 
 /* Colored book spine indicator on the left edge */
@@ -31,7 +31,7 @@
 
 .book-card-icon-container {
   font-size: 1.5rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-tertiary);
   width: 44px;
   height: 44px;
   display: flex;
@@ -78,7 +78,7 @@
 }
 
 .book-card-badge-compact {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   padding: 3px 10px;
   border-radius: var(--radius-full);

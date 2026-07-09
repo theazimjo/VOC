@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Nunito:wght@300;400;600;700;800&family=Cinzel:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;600;800;900&family=MedievalSharp&family=Oswald:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -55,45 +55,46 @@ html[data-font-size="large"] {
 }
 
 :root {
-  /* Default = iOS (Palitra A - Duolingo Uslubi - Light Mode) */
-  --bg-primary: hsl(0, 0%, 98%);
-  --bg-secondary: hsl(0, 0%, 100%);
-  --bg-tertiary: hsl(210, 20%, 96%);
+  /* Default = iOS Light (systemBackground / Human Interface Guidelines) */
+  --bg-primary: #F2F2F7;        /* systemGroupedBackground */
+  --bg-secondary: #FFFFFF;      /* systemBackground (cards, rows) */
+  --bg-tertiary: #E5E5EA;       /* systemGray5 */
   --bg-glass: rgba(255, 255, 255, 0.75);
-  --bg-glass-hover: rgba(240, 240, 250, 0.85);
+  --bg-glass-hover: rgba(245, 245, 248, 0.9);
   --bg-glass-strong: rgba(255, 255, 255, 0.95);
 
-  --accent-1: hsl(195, 100%, 42%);      /* Havorang (Light Blue) */
-  --accent-1-dim: rgba(0, 162, 232, 0.08);
-  --accent-2: hsl(142, 70%, 45%);       /* Och yashil (Light Green) */
-  --accent-2-dim: rgba(34, 197, 94, 0.08);
-  --accent-3: hsl(30, 100%, 50%);        /* To'q sariq (Orange) */
-  --accent-3-dim: rgba(249, 115, 22, 0.08);
+  --accent-1: #007AFF;          /* systemBlue */
+  --accent-1-dim: rgba(0, 122, 255, 0.1);
+  --accent-2: #34C759;          /* systemGreen */
+  --accent-2-dim: rgba(52, 199, 89, 0.1);
+  --accent-3: #FF9500;          /* systemOrange */
+  --accent-3-dim: rgba(255, 149, 0, 0.1);
   --accent-gradient: var(--accent-1);
   --accent-gradient-2: var(--accent-2);
   --accent-gradient-3: var(--accent-1);
 
-  --text-primary: hsl(220, 15%, 15%);    /* Dark gray text */
-  --text-secondary: hsl(220, 10%, 40%);  /* Medium gray text */
-  --text-muted: hsl(220, 8%, 60%);       /* Muted gray text */
+  --text-primary: rgba(0, 0, 0, 0.88);      /* label */
+  --text-secondary: rgba(60, 60, 67, 0.6);  /* secondaryLabel */
+  --text-muted: rgba(60, 60, 67, 0.35);     /* tertiaryLabel */
 
-  --success: hsl(142, 70%, 45%);
-  --success-dim: rgba(34, 197, 94, 0.08);
-  --error: hsl(354, 90%, 55%);
-  --error-dim: rgba(239, 68, 68, 0.08);
-  --warning: hsl(30, 100%, 50%);
-  --warning-dim: rgba(249, 115, 22, 0.08);
+  --success: #34C759;
+  --success-dim: rgba(52, 199, 89, 0.1);
+  --error: #FF3B30;
+  --error-dim: rgba(255, 59, 48, 0.1);
+  --warning: #FF9500;
+  --warning-dim: rgba(255, 149, 0, 0.1);
 
-  --border: rgba(0, 0, 0, 0.08);
-  --border-light: rgba(0, 0, 0, 0.04);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.07);
-  --shadow-glow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  --border: rgba(60, 60, 67, 0.16);
+  --border-light: rgba(60, 60, 67, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.06), 0 24px 48px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 1px 2px rgba(0, 0, 0, 0.04);
 
   --radius-sm: 10px;
   --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
   --space-xs: 4px;
@@ -104,7 +105,7 @@ html[data-font-size="large"] {
   --space-2xl: 48px;
   --space-3xl: 64px;
 
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
   --font-xs: 0.75rem;
   --font-sm: 0.875rem;
   --font-md: 1rem;
@@ -125,62 +126,64 @@ html[data-font-size="large"] {
   --navbar-height: 64px;
 }
 
-/* iOS theme (explicit selector) -> Palitra A (Duolingo Style - Light Mode) */
+/* Light appearance (explicit selector) */
 [data-theme="ios"] {
-  --bg-primary: hsl(0, 0%, 98%);
-  --bg-secondary: hsl(0, 0%, 100%);
-  --bg-tertiary: hsl(210, 20%, 96%);
+  --bg-primary: #F2F2F7;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #E5E5EA;
   --bg-glass: rgba(255, 255, 255, 0.75);
-  --bg-glass-hover: rgba(240, 240, 250, 0.85);
+  --bg-glass-hover: rgba(245, 245, 248, 0.9);
   --bg-glass-strong: rgba(255, 255, 255, 0.95);
-  --accent-1: hsl(195, 100%, 42%);      /* Havorang */
-  --accent-2: hsl(142, 70%, 45%);       /* Och yashil */
-  --accent-3: hsl(30, 100%, 50%);        /* To'q sariq */
-  --accent-1-dim: rgba(0, 162, 232, 0.08);
-  --accent-2-dim: rgba(34, 197, 94, 0.08);
-  --accent-3-dim: rgba(249, 115, 22, 0.08);
-  --text-primary: hsl(220, 15%, 15%);
-  --text-secondary: hsl(220, 10%, 40%);
-  --text-muted: hsl(220, 8%, 60%);
-  --border: rgba(0, 0, 0, 0.08);
-  --border-light: rgba(0, 0, 0, 0.04);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.07);
-  --shadow-glow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --accent-1: #007AFF;
+  --accent-2: #34C759;
+  --accent-3: #FF9500;
+  --accent-1-dim: rgba(0, 122, 255, 0.1);
+  --accent-2-dim: rgba(52, 199, 89, 0.1);
+  --accent-3-dim: rgba(255, 149, 0, 0.1);
+  --text-primary: rgba(0, 0, 0, 0.88);
+  --text-secondary: rgba(60, 60, 67, 0.6);
+  --text-muted: rgba(60, 60, 67, 0.35);
+  --border: rgba(60, 60, 67, 0.16);
+  --border-light: rgba(60, 60, 67, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.06), 0 24px 48px rgba(0, 0, 0, 0.08);
+  --shadow-glow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
   --radius-sm: 10px;
   --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 }
 
-/* Android theme -> Palitra B (Akademik Uslub - Navy Blue Dark Mode) */
+/* Dark appearance -> true iOS Dark Mode palette */
 [data-theme="android"] {
-  --bg-primary: hsl(222, 47%, 11%);       /* To'q ko'k / Navy Blue */
-  --bg-secondary: hsl(222, 40%, 15%);     /* Och kulrang fon vazifasida / Slate */
-  --bg-tertiary: hsl(222, 35%, 20%);
-  --bg-glass: rgba(15, 23, 42, 0.65);
-  --bg-glass-hover: rgba(30, 41, 59, 0.75);
-  --bg-glass-strong: rgba(15, 23, 42, 0.85);
-  --accent-1: hsl(215, 100%, 55%);
-  --accent-2: hsl(160, 84%, 39%);        /* Zümrüd yashili */
-  --accent-3: hsl(38, 92%, 50%);         /* Amber/Gold */
-  --accent-1-dim: rgba(59, 130, 246, 0.15);
-  --accent-2-dim: rgba(16, 185, 129, 0.15);
-  --accent-3-dim: rgba(245, 158, 11, 0.15);
-  --text-primary: hsl(210, 40%, 98%);
-  --text-secondary: hsl(215, 25%, 80%);
-  --text-muted: hsl(215, 15%, 60%);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-light: rgba(255, 255, 255, 0.04);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --font-family: 'Nunito', 'Google Sans', sans-serif;
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+  --bg-primary: #000000;             /* systemBackground (dark) */
+  --bg-secondary: #1C1C1E;           /* secondarySystemBackground */
+  --bg-tertiary: #2C2C2E;            /* tertiarySystemBackground */
+  --bg-glass: rgba(28, 28, 30, 0.72);
+  --bg-glass-hover: rgba(44, 44, 46, 0.85);
+  --bg-glass-strong: rgba(28, 28, 30, 0.94);
+  --accent-1: #0A84FF;               /* systemBlue (dark) */
+  --accent-2: #30D158;               /* systemGreen (dark) */
+  --accent-3: #FF9F0A;               /* systemOrange (dark) */
+  --accent-1-dim: rgba(10, 132, 255, 0.18);
+  --accent-2-dim: rgba(48, 209, 88, 0.18);
+  --accent-3-dim: rgba(255, 159, 10, 0.18);
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(235, 235, 245, 0.6);
+  --text-muted: rgba(235, 235, 245, 0.3);
+  --border: rgba(255, 255, 255, 0.14);
+  --border-light: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 }
 
 
@@ -297,14 +300,19 @@ a:hover {
 }
 
 .btn-primary {
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   color: white;
-  box-shadow: 0 4px 16px hsla(175, 75%, 45%, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 122, 255, 0.28);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px hsla(175, 75%, 45%, 0.4);
+  background: var(--accent-1);
+  filter: brightness(1.06);
+  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.34);
+}
+
+.btn-primary:active {
+  filter: brightness(0.92);
 }
 
 .btn-cards {
@@ -619,12 +627,10 @@ a:hover {
 }
 
 .page-header h1 {
-  font-size: var(--font-3xl);
+  font-size: 2.1rem;
   font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 /* ========== GRID LAYOUTS ========== */
@@ -931,35 +937,6 @@ a:hover {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
   border-radius: 14px !important;
   background: var(--bg-glass-strong) !important;
-}
-
-[data-theme="ios"] .btn,
-[data-theme="android"] .btn {
-  border-radius: 10px !important;
-  box-shadow: none !important;
-}
-
-[data-theme="ios"] .btn-primary,
-[data-theme="android"] .btn-primary {
-  background: #007aff !important; /* iOS systemBlue */
-  color: #ffffff !important;
-  border: none !important;
-}
-
-[data-theme="ios"] .btn-primary:hover,
-[data-theme="android"] .btn-primary:hover {
-  background: #0063d1 !important;
-}
-
-/* iOS clean headers (pure color, no gradients, clean system look) */
-[data-theme="ios"] .page-header h1,
-[data-theme="android"] .page-header h1 {
-  background: none !important;
-  -webkit-text-fill-color: initial !important;
-  color: var(--text-primary) !important;
-  font-size: 2.1rem !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.02em !important;
 }
 
 /* Pack card indicators adjustments */

@@ -40,10 +40,7 @@
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 4px;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .stats-overview .stat-card .stat-card-label {
@@ -204,7 +201,7 @@
 .source-stat-item .source-mastery-fill {
   height: 100%;
   border-radius: var(--radius-full);
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   transition: width var(--transition-slow);
 }
 
@@ -285,7 +282,7 @@
 }
 
 .active-segment {
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   text-shadow: 0 1px 3px rgba(0,0,0,0.5);
   box-shadow: inset 0 -4px 10px rgba(0,0,0,0.1);
 }
@@ -466,10 +463,6 @@
   font-weight: 800;
   color: var(--accent-1);
   margin-bottom: var(--space-xs);
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .grammar-overview-card .card-lbl {
@@ -527,15 +520,15 @@
 }
 
 .beginner-fill {
-  background: linear-gradient(90deg, #10B981, #34D399) !important;
+  background: var(--success) !important;
 }
 
 .intermediate-fill {
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2)) !important;
+  background: var(--accent-1) !important;
 }
 
 .advanced-fill {
-  background: linear-gradient(90deg, #EF4444, #F87171) !important;
+  background: var(--error) !important;
 }
 
 /* History Table Wrapper */
@@ -571,7 +564,7 @@
 }
 
 .grammar-history-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-tertiary);
 }
 
 .grammar-history-table .date-cell {
@@ -590,8 +583,8 @@
 }
 
 .level-badge.beginner {
-  background: rgba(16, 185, 129, 0.1) !important;
-  color: #10B981 !important;
+  background: var(--success-dim) !important;
+  color: var(--success) !important;
 }
 
 .level-badge.intermediate {
@@ -600,8 +593,8 @@
 }
 
 .level-badge.advanced {
-  background: rgba(239, 68, 68, 0.1) !important;
-  color: #EF4444 !important;
+  background: var(--error-dim) !important;
+  color: var(--error) !important;
 }
 
 .accuracy-badge {
@@ -613,18 +606,18 @@
 }
 
 .accuracy-badge.high {
-  background: rgba(16, 185, 129, 0.15) !important;
-  color: #10B981 !important;
+  background: var(--success-dim) !important;
+  color: var(--success) !important;
 }
 
 .accuracy-badge.medium {
-  background: rgba(245, 158, 11, 0.15) !important;
-  color: #F59E0B !important;
+  background: var(--warning-dim) !important;
+  color: var(--warning) !important;
 }
 
 .accuracy-badge.low {
-  background: rgba(239, 68, 68, 0.15) !important;
-  color: #EF4444 !important;
+  background: var(--error-dim) !important;
+  color: var(--error) !important;
 }
 
 .grammar-empty-stats {

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, User, BarChart3, Settings, LogOut } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import './Navbar.css';
@@ -68,7 +69,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
         onClick={onHamburgerClick}
         aria-label="Menyuni ochish"
       >
-        ☰
+        <Menu size={20} strokeWidth={2.2} />
       </button>
 
       {/* Right side */}
@@ -117,7 +118,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
                   className="navbar-dropdown-item"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  <span>👤</span> Profil
+                  <User size={16} strokeWidth={2.2} /> Profil
                 </Link>
 
                 <Link
@@ -125,7 +126,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
                   className="navbar-dropdown-item"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  <span>📈</span> Statistika
+                  <BarChart3 size={16} strokeWidth={2.2} /> Statistika
                 </Link>
 
                 <Link
@@ -133,14 +134,14 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick }) {
                   className="navbar-dropdown-item"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  <span>⚙️</span> Sozlamalar
+                  <Settings size={16} strokeWidth={2.2} /> Sozlamalar
                 </Link>
 
                 <button
                   className="navbar-dropdown-item danger"
                   onClick={handleLogout}
                 >
-                  <span>🚪</span> Chiqish
+                  <LogOut size={16} strokeWidth={2.2} /> Chiqish
                 </button>
               </motion.div>
             )}

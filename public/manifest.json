@@ -4,7 +4,7 @@
   "description": "VOC — So'z boyligi, grammatika va IELTS mashqlari platformasi",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#09090e",
+  "background_color": "#F2F2F7",
   "theme_color": "#007aff",
   "orientation": "portrait-primary",
   "icons": [

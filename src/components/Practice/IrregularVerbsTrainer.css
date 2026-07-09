@@ -1,29 +1,24 @@
-/* iOS System Colors & Variables */
-:root {
-  --ios-bg: #f2f2f7; /* System Gray 6 */
-  --ios-card: #ffffff;
-  --ios-blue: #007aff;
-  --ios-blue-hover: #0062cc;
-  --ios-green: #34c759;
-  --ios-green-light: #e4f8eb;
-  --ios-red: #ff3b30;
-  --ios-red-light: #ffebe9;
-  --ios-text-main: #000000;
-  --ios-text-secondary: #8e8e93; /* System Gray */
-  --ios-border: rgba(60, 60, 67, 0.18);
-  --ios-separator: rgba(60, 60, 67, 0.13);
-  --space-sm: 12px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xs: 8px;
-  --transition-ios: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
 .irregular-trainer-container {
+  /* Scoped aliases (theme-aware, not global) */
+  --ios-bg: var(--bg-primary);
+  --ios-card: var(--bg-secondary);
+  --ios-blue: var(--accent-1);
+  --ios-blue-hover: var(--accent-1);
+  --ios-green: var(--success);
+  --ios-green-light: var(--success-dim);
+  --ios-red: var(--error);
+  --ios-red-light: var(--error-dim);
+  --ios-text-main: var(--text-primary);
+  --ios-text-secondary: var(--text-secondary);
+  --ios-border: var(--border);
+  --ios-separator: var(--border-light);
+  --ios-fill: var(--bg-tertiary);
+  --transition-ios: 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+
   width: 100%;
   max-width: 620px !important;
   margin: 0 auto;
-  padding: var(--space-lg) var(--space-sm);
+  padding: var(--space-lg) var(--space-md);
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   color: var(--text-primary);
@@ -85,7 +80,7 @@
 .study-card {
   width: 100%;
   box-sizing: border-box;
-  background: #ffffff !important;
+  background: var(--ios-card) !important;
   border-radius: 28px !important;
   padding: 30px 24px !important;
   display: flex;
@@ -100,7 +95,7 @@
 .study-card-uz-title {
   font-size: 32px;
   font-weight: 700;
-  color: #000000 !important;
+  color: var(--ios-text-main) !important;
   margin-bottom: 24px;
   text-align: center;
   letter-spacing: 0.4px;
@@ -111,7 +106,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: #ffffff !important;
+  background: var(--ios-card) !important;
   border-radius: 14px;
   margin-bottom: 24px;
   overflow: hidden;
@@ -122,8 +117,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  border-bottom: 0.5px solid #e5e5ea !important;
-  background: #ffffff !important;
+  border-bottom: 0.5px solid var(--ios-separator) !important;
+  background: var(--ios-card) !important;
 }
 
 .study-card-row-item:last-child {
@@ -133,20 +128,20 @@
 .study-row-title {
   font-size: 15px;
   font-weight: 500;
-  color: #1c1c1e !important;
+  color: var(--ios-text-main) !important;
 }
 
 .study-row-val {
   font-size: 17px;
   font-weight: 700;
-  color: #007aff !important;
+  color: var(--ios-blue) !important;
   letter-spacing: -0.4px;
 }
 
 .study-card-example-box {
   width: 100%;
-  background: #ffffff !important;
-  border: 0.5px solid #e5e5ea !important;
+  background: var(--ios-card) !important;
+  border: 0.5px solid var(--ios-separator) !important;
   border-radius: 14px;
   padding: 16px;
   box-sizing: border-box;
@@ -156,7 +151,7 @@
 .example-label {
   font-size: 12px;
   font-weight: 700;
-  color: #8e8e93 !important;
+  color: var(--ios-text-secondary) !important;
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -170,20 +165,20 @@
 
 .example-sentence-item {
   font-size: 15px;
-  color: #1c1c1e !important;
+  color: var(--ios-text-main) !important;
   line-height: 1.4;
   letter-spacing: -0.2px;
 }
 
 .example-sentence-item strong {
-  color: #007aff !important;
+  color: var(--ios-blue) !important;
   font-weight: 700;
 }
 
 .btn-speak-study-card {
-  background: #e8f2ff !important;
+  background: var(--accent-1-dim) !important;
   border: none;
-  color: #007aff !important;
+  color: var(--ios-blue) !important;
   font-size: 15px;
   font-weight: 700;
   padding: 12px 24px;
@@ -234,12 +229,12 @@
 }
 
 .study-card-footer button.btn-secondary {
-  background: rgba(142, 142, 147, 0.12) !important;
+  background: var(--ios-fill) !important;
   color: var(--ios-blue) !important;
 }
 
 .study-card-footer button.btn-secondary:active:not(:disabled) {
-  background: rgba(142, 142, 147, 0.2) !important;
+  background: var(--ios-fill) !important;
   transform: scale(0.97);
 }
 
@@ -296,7 +291,7 @@
 }
 
 .trainer-input.prefilled {
-  background: rgba(142, 142, 147, 0.08);
+  background: var(--ios-fill);
   border-color: transparent;
   color: var(--ios-text-secondary);
 }
@@ -343,12 +338,12 @@
 }
 
 .btn-order-item:active:not(.disabled) {
-  background: rgba(142, 142, 147, 0.1);
+  background: var(--ios-fill);
   transform: scale(0.96);
 }
 
 .btn-order-item.clicked {
-  background: rgba(142, 142, 147, 0.1);
+  background: var(--ios-fill);
   border-color: transparent;
   opacity: 0.5;
   cursor: not-allowed;
@@ -380,7 +375,7 @@
   font-weight: 600;
   padding: 8px 14px;
   border-radius: 10px;
-  background: rgba(142, 142, 147, 0.08);
+  background: var(--ios-fill);
   transition: var(--transition-ios);
   min-width: 50px;
   text-align: center;
@@ -447,7 +442,7 @@
 }
 
 .btn-choice-item:active:not(:disabled) {
-  background: rgba(142, 142, 147, 0.1);
+  background: var(--ios-fill);
   transform: scale(0.96);
 }
 
@@ -467,7 +462,7 @@
 .btn-choice-item.disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  background: rgba(142, 142, 147, 0.05);
+  background: var(--ios-fill);
 }
 
 .choice-label {
@@ -567,7 +562,7 @@
 }
 
 .btn-submit-trainer.btn-ghost {
-  background: rgba(142, 142, 147, 0.12) !important;
+  background: var(--ios-fill) !important;
   color: var(--ios-blue) !important;
 }
 

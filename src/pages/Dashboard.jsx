@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit } from 'lucide-react';
+import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit, ChevronRight } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
@@ -150,7 +150,7 @@ export default function Dashboard() {
                     <span className="word-mastery-percent" style={{ color: masteryInfo.color }}>
                       {word.mastery || 0}%
                     </span>
-                    <span className="word-chevron">›</span>
+                    <ChevronRight className="word-chevron" size={16} strokeWidth={2.5} />
                   </div>
                 </motion.div>
               );

@@ -108,7 +108,7 @@
 .flashcard-translation {
   font-size: 1.8rem;
   font-weight: 850;
-  color: hsl(142, 70%, 42%);
+  color: var(--accent-2);
   letter-spacing: -0.025em;
   margin-bottom: var(--space-md);
 }
@@ -175,7 +175,7 @@
 .btn-speak-card:hover {
   background: var(--accent-1-dim);
   color: var(--accent-1);
-  border-color: rgba(0, 162, 232, 0.2);
+  border-color: rgba(0, 122, 255, 0.2);
 }
 
 .btn-speak-card:active {
@@ -257,7 +257,7 @@
 
 .flashcard-rating-btn.easy {
   color: var(--accent-1);
-  border-color: rgba(0, 162, 232, 0.25);
+  border-color: rgba(0, 122, 255, 0.25);
   background: var(--accent-1-dim);
 }
 

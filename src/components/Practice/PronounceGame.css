@@ -68,19 +68,19 @@
   gap: var(--space-md);
   position: relative;
   overflow: hidden;
-  box-shadow: var(--shadow-glass);
+  box-shadow: var(--shadow);
   backdrop-filter: blur(12px);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .pronounce-card.correct {
   border-color: var(--success);
-  box-shadow: 0 0 25px rgba(74, 222, 128, 0.15), var(--shadow-glass);
+  box-shadow: 0 0 25px var(--success-dim), var(--shadow);
 }
 
 .pronounce-card.wrong {
   border-color: var(--error);
-  box-shadow: 0 0 25px rgba(239, 68, 68, 0.15), var(--shadow-glass);
+  box-shadow: 0 0 25px var(--error-dim), var(--shadow);
 }
 
 .pronounce-card-label {
@@ -117,8 +117,8 @@
 .pronounce-error {
   color: var(--error);
   font-size: var(--font-xs);
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: var(--error-dim);
+  border: 1px solid transparent;
   padding: 8px 12px;
   border-radius: var(--radius-md);
   width: 100%;
@@ -140,21 +140,21 @@
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  border: none;
+  background: var(--accent-1);
   color: white;
   font-size: 2.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-1-dim);
+  box-shadow: 0 8px 20px rgba(0, 122, 255, 0.35);
   transition: all var(--transition-base);
 }
 
 .mic-button:hover:not(:disabled) {
   transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), 0 0 25px var(--accent-1-dim);
+  box-shadow: 0 12px 24px rgba(0, 122, 255, 0.4);
 }
 
 .mic-button:active:not(:disabled) {
@@ -163,19 +163,19 @@
 
 .mic-button.listening {
   background: var(--success);
-  box-shadow: 0 0 25px rgba(74, 222, 128, 0.5);
+  box-shadow: 0 0 25px rgba(52, 199, 89, 0.5);
   animation: pulse-success 1.5s infinite;
 }
 
 @keyframes pulse-success {
   0% {
-    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4);
+    box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.4);
   }
   70% {
-    box-shadow: 0 0 0 15px rgba(74, 222, 128, 0);
+    box-shadow: 0 0 0 15px rgba(52, 199, 89, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+    box-shadow: 0 0 0 0 rgba(52, 199, 89, 0);
   }
 }
 
@@ -243,20 +243,20 @@
 }
 
 .pronounce-feedback-banner.correct {
-  background: rgba(74, 222, 128, 0.08);
-  border: 1px solid rgba(74, 222, 128, 0.2);
+  background: var(--success-dim);
+  border: 1px solid transparent;
   color: var(--success);
 }
 
 .pronounce-feedback-banner.wrong {
-  background: rgba(239, 68, 68, 0.08);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  background: var(--error-dim);
+  border: 1px solid transparent;
   color: var(--error);
 }
 
 .pronounce-feedback-banner.unsupported {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -310,7 +310,7 @@
 
 .btn-ghost:hover {
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-tertiary);
 }
 
 /* Actions footer row */
@@ -323,7 +323,7 @@
 
 .btn-pronounce-next {
   width: 100%;
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  background: var(--accent-1);
   color: white;
   border: none;
   border-radius: var(--radius-lg);
@@ -331,13 +331,13 @@
   font-size: var(--font-md);
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 15px var(--accent-1-dim);
+  box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
   transition: all var(--transition-base);
 }
 
 .btn-pronounce-next:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--accent-1-dim);
+  filter: brightness(1.06);
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
 }
 
 .btn-pronounce-next:active {

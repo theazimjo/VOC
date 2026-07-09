@@ -287,7 +287,7 @@
 
 .active-badge {
   background: #ffffff;
-  color: #65A30D;
+  color: var(--success);
   font-size: 0.65rem;
   font-weight: 800;
   padding: 4px 10px;
@@ -322,7 +322,7 @@
 /* Locked icon */
 .locked-icon {
   font-size: 1.2rem;
-  color: #3f3f46;
+  color: var(--text-muted);
   margin-left: auto;
   flex-shrink: 0;
 }

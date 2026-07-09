@@ -31,13 +31,13 @@
 }
 
 .sidebar-logo {
-  font-size: var(--font-2xl);
-  font-weight: 900;
-  letter-spacing: -1px;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--accent-1);
   white-space: nowrap;
   user-select: none;
   transition: opacity var(--transition-base);
@@ -113,7 +113,7 @@
   bottom: 6px;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background: var(--accent-gradient);
+  background: var(--accent-1);
 }
 
 .sidebar-link-icon {
@@ -156,7 +156,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--accent-gradient);
+  background: var(--accent-1);
   display: flex;
   align-items: center;
   justify-content: center;

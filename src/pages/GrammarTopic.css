@@ -189,7 +189,7 @@
   align-items: center;
   gap: var(--space-md);
   padding: 14px var(--space-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -203,7 +203,7 @@
 }
 
 .option-btn:hover:not(.correct):not(.wrong):not(.dimmed) {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-glass-hover);
   border-color: var(--accent-1);
   transform: translateX(4px);
 }
@@ -236,7 +236,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-tertiary);
   font-size: var(--font-xs);
   font-weight: 700;
   flex-shrink: 0;
@@ -295,7 +295,7 @@
 
 .explanation-text {
   padding: var(--space-md);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-tertiary);
   border-left: 3px solid var(--accent-1);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-size: var(--font-sm);
@@ -420,7 +420,7 @@
 }
 
 .review-item {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: var(--space-md);

@@ -18,7 +18,7 @@
 .pack-card-horizontal:hover {
   border-color: var(--accent-1);
   background: var(--bg-glass-hover);
-  box-shadow: var(--shadow-sm), 0 0 20px hsla(175, 75%, 45%, 0.08);
+  box-shadow: var(--shadow-sm), 0 0 20px var(--accent-1-dim);
 }
 
 /* Left edge accent color bar */
@@ -33,7 +33,7 @@
 
 .pack-card-icon-container {
   font-size: 1.5rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-tertiary);
   width: 44px;
   height: 44px;
   display: flex;

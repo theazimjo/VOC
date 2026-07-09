@@ -1,23 +1,17 @@
 /* ========== AUTH PAGE (iOS Style) ========== */
-:root {
-  --ios-bg: #f2f2f7; /* System Gray 6 */
-  --ios-card: #ffffff;
-  --ios-blue: #007aff;
-  --ios-blue-active: #0062cc;
-  --ios-text-main: #000000;
-  --ios-text-secondary: #8e8e93; /* System Gray */
-  --ios-input-bg: rgba(118, 118, 128, 0.12); /* System Fill */
-  --ios-border: rgba(60, 60, 67, 0.13);
-  --ios-error-bg: #ffebe9;
-  --ios-error-text: #ff3b30;
-  
-  --radius-xl: 20px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
-  --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-}
-
 .auth-page {
+  /* Scoped aliases (theme-aware, not global) */
+  --ios-bg: var(--bg-primary);
+  --ios-card: var(--bg-secondary);
+  --ios-blue: var(--accent-1);
+  --ios-blue-active: var(--accent-1);
+  --ios-text-main: var(--text-primary);
+  --ios-text-secondary: var(--text-secondary);
+  --ios-input-bg: var(--bg-tertiary);
+  --ios-border: var(--border);
+  --ios-error-bg: var(--error-dim);
+  --ios-error-text: var(--error);
+
   position: relative;
   min-height: 100vh;
   display: flex;
@@ -83,7 +77,7 @@
   background: var(--ios-card);
   border-radius: var(--radius-xl);
   padding: 40px 32px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-lg);
 }
 
 /* ---------- Branding ---------- */

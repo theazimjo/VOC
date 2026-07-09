@@ -19,10 +19,7 @@
 .learning-path-header h2 {
   font-size: var(--font-3xl);
   font-weight: 900;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
   letter-spacing: -0.5px;
 }
 
@@ -35,13 +32,13 @@
 
 .learning-path-header .btn {
   margin-top: var(--space-sm);
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.18);
   transition: all var(--transition-fast);
 }
 
 .learning-path-header .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 6px 16px rgba(0, 122, 255, 0.25);
 }
 
 .learning-path-tree {
@@ -207,7 +204,7 @@
   border-radius: var(--radius-lg);
   padding: var(--space-md) var(--space-lg);
   width: 300px;
-  box-shadow: var(--shadow-lg), 0 0 20px rgba(124, 58, 237, 0.12);
+  box-shadow: var(--shadow-lg);
   z-index: 100;
   text-align: center;
   display: flex;
@@ -252,10 +249,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--bg-tertiary);
   padding: 6px 10px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-light);
 }
 
 .tooltip-actions {

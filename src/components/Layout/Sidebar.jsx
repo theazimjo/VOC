@@ -1,9 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
-import { useTheme } from '../../contexts/ThemeContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, BookMarked } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, ChevronLeft, ChevronRight, LogOut, GraduationCap as LogoIcon } from 'lucide-react';
 import './Sidebar.css';
 
 const navItems = [
@@ -17,7 +16,6 @@ const navItems = [
 
 export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user, logout } = useAuth();
-  const { theme } = useTheme();
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
 
   const handleLogout = async () => {
@@ -55,19 +53,9 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
       >
         {/* Header */}
         <div className="sidebar-header">
-          <div className={`sidebar-logo theme-${theme}`}>
-            {theme === 'ios' && (
-              <>
-                <span style={{ marginRight: '8px' }}>🍎</span>
-                {!collapsed && <span>VOC iOS</span>}
-              </>
-            )}
-            {theme === 'android' && (
-              <>
-                <span style={{ marginRight: '8px' }}>🤖</span>
-                {!collapsed && <span>Material</span>}
-              </>
-            )}
+          <div className="sidebar-logo">
+            <LogoIcon size={22} strokeWidth={2.4} />
+            {!collapsed && <span>VOC</span>}
           </div>
           <button
             className="sidebar-toggle"
@@ -75,7 +63,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
             aria-label={collapsed ? 'Kengaytirish' : 'Yig\'ish'}
             title={collapsed ? 'Kengaytirish' : 'Yig\'ish'}
           >
-            {collapsed ? '»' : '«'}
+            {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
           </button>
         </div>
 
@@ -126,7 +114,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
             title="Chiqish"
             aria-label="Chiqish"
           >
-            🚪
+            <LogOut size={16} strokeWidth={2.2} />
           </button>
         </div>
       </motion.aside>

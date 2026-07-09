@@ -297,7 +297,7 @@
 }
 
 .grammar-topic-card.completed .card-accent-line {
-  background: hsl(142, 70%, 42%);
+  background: var(--accent-2);
   opacity: 0.8;
 }
 
@@ -306,8 +306,8 @@
 }
 
 .grammar-topic-card.completed:hover {
-  border-color: hsl(142, 70%, 42%);
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.1);
+  border-color: var(--accent-2);
+  box-shadow: 0 4px 16px var(--success-dim);
 }
 
 /* Card top row: icon + arrow */
@@ -397,9 +397,9 @@
 }
 
 .topic-badge-completed {
-  background: rgba(34, 197, 94, 0.08);
-  color: hsl(142, 70%, 38%);
-  border: 1px solid rgba(34, 197, 94, 0.2);
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1px solid transparent;
 }
 
 .topic-badge-todo {

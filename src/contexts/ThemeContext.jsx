@@ -3,8 +3,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const themes = [
-  { id: 'ios', name: 'Duolingo Uslubi', desc: 'Palitra A: Oq fon, och yashil, havorang va to\'q sariq motivatsiya elementlari' },
-  { id: 'android', name: 'Akademik Uslub', desc: 'Palitra B: To\'q ko\'k, och kulrang fon va zumrad yashil urg\'u ranglari' }
+  { id: 'ios', name: 'Yorug\' rejim', desc: 'Oq fon, sistem havorang va yashil urg\'u ranglari' },
+  { id: 'android', name: 'Tungi rejim', desc: 'Qora fon, sistem havorang va yashil urg\'u ranglari' }
 ];
 
 export function ThemeProvider({ children }) {
