@@ -4,7 +4,7 @@ import { FileText, Trophy, Flame, Sparkles, Brain, BarChart3, Target } from 'luc
 import { usePacks } from '../hooks/usePacks';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { useStreak } from '../hooks/useStreak';
-import { grammarData, germanGrammarData } from '../data/grammarData';
+import { grammarTopicCounts } from '../data/grammarTopicCounts';
 import IosSpinner from '../components/common/IosSpinner';
 import ActivityHeatmap from '../components/Stats/ActivityHeatmap';
 import './StatsPage.css';
@@ -73,7 +73,7 @@ export default function StatsPage() {
 
   // Grammar calculations
   const lang = localStorage.getItem('grammar_language') || 'en';
-  const currentData = lang === 'en' ? grammarData : germanGrammarData;
+  const topicCounts = grammarTopicCounts[lang] || grammarTopicCounts.en;
 
   const filteredTopics = Object.entries(grammarStats?.topics || {})
     .filter(([topicId, t]) => {
@@ -83,17 +83,17 @@ export default function StatsPage() {
     .map(([_, t]) => t);
 
   const uniqueGrammarTopics = filteredTopics.length;
-  const averageGrammarAccuracy = uniqueGrammarTopics > 0 
-    ? Math.round(filteredTopics.reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) / uniqueGrammarTopics) 
+  const averageGrammarAccuracy = uniqueGrammarTopics > 0
+    ? Math.round(filteredTopics.reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) / uniqueGrammarTopics)
     : 0;
 
-  const beginnerTotal = currentData.beginner?.topics?.length || 0;
+  const beginnerTotal = topicCounts.beginner;
   const beginnerCompleted = filteredTopics.filter(t => t.level === 'beginner').length;
 
-  const intermediateTotal = currentData.intermediate?.topics?.length || 0;
+  const intermediateTotal = topicCounts.intermediate;
   const intermediateCompleted = filteredTopics.filter(t => t.level === 'intermediate').length;
 
-  const advancedTotal = currentData.advanced?.topics?.length || 0;
+  const advancedTotal = topicCounts.advanced;
   const advancedCompleted = filteredTopics.filter(t => t.level === 'advanced').length;
 
   const containerVariants = {

@@ -6,6 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useStreak } from '../../hooks/useStreak';
 import { packIcons } from '../../utils/helpers';
+import { WHATS_NEW_VERSION } from './WhatsNewModal';
 import './OnboardingModal.css';
 
 const SUGGESTED_NAMES = ["Kundalik so'zlar", 'IELTS lug\'ati', 'Ish/Biznes', 'Sayohat'];
@@ -13,6 +14,8 @@ const GOAL_OPTIONS = [5, 10, 15, 20];
 
 function markOnboardingDone(uid) {
   localStorage.setItem(`voc-onboarding-done-${uid}`, 'true');
+  // A brand-new user has nothing to "catch up" on — skip the What's New modal.
+  localStorage.setItem(`voc-whatsnew-seen-${WHATS_NEW_VERSION}-${uid}`, 'true');
 }
 
 export default function OnboardingModal({ onClose }) {

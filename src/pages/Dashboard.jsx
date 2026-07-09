@@ -7,6 +7,7 @@ import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { getMasteryLevel } from '../utils/sm2';
 import OnboardingModal from '../components/Onboarding/OnboardingModal';
+import WhatsNewModal, { WHATS_NEW_VERSION } from '../components/Onboarding/WhatsNewModal';
 import './Dashboard.css';
 
 const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sh'];
@@ -44,15 +45,29 @@ export default function Dashboard() {
   const [masteredWords, setMasteredWords] = useState(0);
   const [dueWords, setDueWords] = useState(0);
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showWhatsNew, setShowWhatsNew] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!user || packsLoading) return;
     const onboardingDone = localStorage.getItem(`voc-onboarding-done-${user.uid}`);
-    if (!onboardingDone && packs.length === 0) {
+    const needsOnboarding = !onboardingDone && packs.length === 0;
+
+    if (needsOnboarding) {
       setShowOnboarding(true);
+      return;
+    }
+
+    const whatsNewSeen = localStorage.getItem(`voc-whatsnew-seen-${WHATS_NEW_VERSION}-${user.uid}`);
+    if (!whatsNewSeen) {
+      setShowWhatsNew(true);
     }
   }, [user, packsLoading, packs]);
+
+  const handleCloseWhatsNew = () => {
+    if (user) localStorage.setItem(`voc-whatsnew-seen-${WHATS_NEW_VERSION}-${user.uid}`, 'true');
+    setShowWhatsNew(false);
+  };
 
   useEffect(() => {
     if (!user) return;
@@ -230,6 +245,10 @@ export default function Dashboard() {
 
       {showOnboarding && (
         <OnboardingModal onClose={() => setShowOnboarding(false)} />
+      )}
+
+      {showWhatsNew && (
+        <WhatsNewModal onClose={handleCloseWhatsNew} />
       )}
 
     </div>
