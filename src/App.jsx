@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -8,6 +8,8 @@ import RegisterPage from './components/Auth/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Layout from './components/Layout/Layout';
 import IosSpinner from './components/common/IosSpinner';
+import ErrorBoundary from './components/common/ErrorBoundary';
+import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
 const Dashboard = lazyWithRetry(() => import('./pages/Dashboard'));
@@ -34,48 +36,54 @@ function RouteLoader() {
 }
 
 export default function App() {
+  useEffect(() => {
+    installGlobalErrorLogging();
+  }, []);
+
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <PacksProvider>
-            <Suspense fallback={<RouteLoader />}>
-              <Routes>
-                {/* Public routes */}
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ThemeProvider>
+          <AuthProvider>
+            <PacksProvider>
+              <Suspense fallback={<RouteLoader />}>
+                <Routes>
+                  {/* Public routes */}
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
 
-                {/* Protected routes */}
-                <Route element={<ProtectedRoute />}>
-                  <Route element={<Layout />}>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/library" element={<LibraryPage />} />
-                    <Route path="/books" element={<Navigate to="/library" replace />} />
-                    <Route path="/books/:bookId" element={<Navigate to="/packs/:bookId" replace />} />
-                    <Route path="/packs" element={<Navigate to="/library" replace />} />
-                    <Route path="/packs/:packId" element={<PackDetail />} />
-                    <Route path="/practice" element={<PracticePage />} />
-                    <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />
-                    <Route path="/mixed-practice" element={<MixedPractice />} />
-                    <Route path="/cards/:sourceType/:sourceId" element={<CardsMode />} />
-                    <Route path="/stats" element={<StatsPage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/grammar" element={<GrammarPage />} />
-                    <Route path="/grammar/:level/:topicId" element={<GrammarExercises />} />
-                    <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
-                    <Route path="/grammar-test" element={<GrammarTest />} />
-                    <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
+                  {/* Protected routes */}
+                  <Route element={<ProtectedRoute />}>
+                    <Route element={<Layout />}>
+                      <Route path="/" element={<Dashboard />} />
+                      <Route path="/library" element={<LibraryPage />} />
+                      <Route path="/books" element={<Navigate to="/library" replace />} />
+                      <Route path="/books/:bookId" element={<Navigate to="/packs/:bookId" replace />} />
+                      <Route path="/packs" element={<Navigate to="/library" replace />} />
+                      <Route path="/packs/:packId" element={<PackDetail />} />
+                      <Route path="/practice" element={<PracticePage />} />
+                      <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />
+                      <Route path="/mixed-practice" element={<MixedPractice />} />
+                      <Route path="/cards/:sourceType/:sourceId" element={<CardsMode />} />
+                      <Route path="/stats" element={<StatsPage />} />
+                      <Route path="/profile" element={<ProfilePage />} />
+                      <Route path="/settings" element={<Settings />} />
+                      <Route path="/grammar" element={<GrammarPage />} />
+                      <Route path="/grammar/:level/:topicId" element={<GrammarExercises />} />
+                      <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
+                      <Route path="/grammar-test" element={<GrammarTest />} />
+                      <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
+                    </Route>
                   </Route>
-                </Route>
 
-                {/* Catch all */}
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </Suspense>
-          </PacksProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+                  {/* Catch all */}
+                  <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+              </Suspense>
+            </PacksProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }

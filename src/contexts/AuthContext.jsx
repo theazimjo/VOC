@@ -83,6 +83,9 @@ export function AuthProvider({ children }) {
 
 
   const logout = async () => {
+    if ('clearAppBadge' in navigator) {
+      navigator.clearAppBadge().catch(() => {});
+    }
     return signOut(auth);
   };
 

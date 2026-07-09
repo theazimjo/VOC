@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import BottomNav from './BottomNav';
 import ParticleCanvas from '../Particles/ParticleCanvas';
 import { useDailyReminder } from '../../hooks/useDailyReminder';
+import { useAppBadge } from '../../hooks/useAppBadge';
 import './Layout.css';
 
 export default function Layout() {
@@ -13,6 +14,7 @@ export default function Layout() {
   const location = useLocation();
 
   useDailyReminder();
+  useAppBadge();
 
   const handleToggleSidebar = useCallback(() => {
     setCollapsed((prev) => !prev);

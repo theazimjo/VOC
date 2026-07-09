@@ -18,6 +18,12 @@
       "$attemptId": {
         ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))"
       }
+    },
+    "error_logs": {
+      ".read": "auth != null && auth.token.email === 'azimjonxolmirzayev30@gmail.com'",
+      "$logId": {
+        ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))"
+      }
     }
   }
 }
