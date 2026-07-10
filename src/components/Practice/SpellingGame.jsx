@@ -53,7 +53,7 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
       currentWord.interval || 0,
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
 
     if (correct) setCorrectCount(c => c + 1);
     else setIncorrectCount(c => c + 1);
@@ -71,7 +71,7 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
     setIsCorrect(false);
     if (onAnswer) onAnswer(currentWord, false);
     const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
     setIncorrectCount(c => c + 1);
   };
 

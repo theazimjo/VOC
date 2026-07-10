@@ -101,7 +101,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
         currentWord.interval || 0, 
         currentWord.reviewCount || 0
       );
-      await onUpdateWord(currentWord.id, sm2Data);
+      onUpdateWord(currentWord.id, sm2Data);
     } else {
       setStatus('wrong');
       if (onAnswer) onAnswer(currentWord, false);
@@ -122,7 +122,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       currentWord.interval || 0, 
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
   };
 
   const handleRetry = () => {
@@ -157,7 +157,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       currentWord.interval || 0, 
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
     handleNext();
   };
 

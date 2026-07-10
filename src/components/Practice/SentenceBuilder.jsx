@@ -70,7 +70,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
       currentWord.interval || 0,
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
 
     if (usesWord) setCorrectCount(c => c + 1);
     else setIncorrectCount(c => c + 1);
@@ -87,7 +87,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
     setIsCorrect(false);
     if (onAnswer) onAnswer(currentWord, false);
     const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
     setIncorrectCount(c => c + 1);
   };
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, X, Meh, ThumbsUp, Zap, PenLine } from 'lucide-react';
+import { Volume2, PenLine } from 'lucide-react';
 import { calculateNextReview, responseToQuality } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './Flashcard.css';
@@ -74,7 +74,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
       currentWord.interval || 0,
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
 
     const newResults = {
       correctCount: results.correctCount + (isCorrect ? 1 : 0),
@@ -150,19 +150,15 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
       {/* Rating buttons — visible only when flipped */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
         <button className="flashcard-rating-btn again" onClick={() => handleRate('again')}>
-          <span className="rating-icon-circle"><X size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Bilmadim</span>
         </button>
         <button className="flashcard-rating-btn hard" onClick={() => handleRate('hard')}>
-          <span className="rating-icon-circle"><Meh size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Qiyin</span>
         </button>
         <button className="flashcard-rating-btn good" onClick={() => handleRate('good')}>
-          <span className="rating-icon-circle"><ThumbsUp size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Yaxshi</span>
         </button>
         <button className="flashcard-rating-btn easy" onClick={() => handleRate('easy')}>
-          <span className="rating-icon-circle"><Zap size={20} strokeWidth={2.5} /></span>
           <span className="rating-label">Oson</span>
         </button>
       </div>

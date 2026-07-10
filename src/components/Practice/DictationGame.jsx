@@ -50,7 +50,7 @@ export default function DictationGame({ words, onComplete, onUpdateWord, onAnswe
       currentWord.interval || 0,
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
     setResults(prev => ({
       correctCount: prev.correctCount + (isCorrect ? 1 : 0),
       incorrectCount: prev.incorrectCount + (isCorrect ? 0 : 1)
@@ -63,7 +63,7 @@ export default function DictationGame({ words, onComplete, onUpdateWord, onAnswe
     setStatus('wrong');
     if (onAnswer) onAnswer(currentWord, false);
     const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
     setResults(prev => ({ ...prev, incorrectCount: prev.incorrectCount + 1 }));
   };
 

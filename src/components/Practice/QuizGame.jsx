@@ -69,7 +69,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       currentWord.interval || 0,
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
 
     if (isCorrect) setCorrectCount(c => c + 1);
     else setIncorrectCount(c => c + 1);

@@ -197,74 +197,61 @@
 .flashcard-rating-btn {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 4px 2px;
+  justify-content: center;
+  padding: 12px 2px;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
   cursor: pointer;
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
   border: none;
-  background: transparent;
 }
 
 .flashcard-rating-btn:active {
   transform: scale(0.92);
 }
 
-.rating-icon-circle {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-fast);
-}
-
 .flashcard-rating-btn .rating-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
-.flashcard-rating-btn.again .rating-icon-circle {
+.flashcard-rating-btn.again {
   color: var(--error);
   background: var(--error-dim);
 }
 
-.flashcard-rating-btn.again:hover .rating-icon-circle {
+.flashcard-rating-btn.again:hover {
   background: var(--error);
   color: white;
 }
 
-.flashcard-rating-btn.hard .rating-icon-circle {
+.flashcard-rating-btn.hard {
   color: var(--warning);
   background: var(--warning-dim);
 }
 
-.flashcard-rating-btn.hard:hover .rating-icon-circle {
+.flashcard-rating-btn.hard:hover {
   background: var(--warning);
   color: white;
 }
 
-.flashcard-rating-btn.good .rating-icon-circle {
+.flashcard-rating-btn.good {
   color: var(--success);
   background: var(--success-dim);
 }
 
-.flashcard-rating-btn.good:hover .rating-icon-circle {
+.flashcard-rating-btn.good:hover {
   background: var(--success);
   color: white;
 }
 
-.flashcard-rating-btn.easy .rating-icon-circle {
+.flashcard-rating-btn.easy {
   color: var(--accent-1);
   background: var(--accent-1-dim);
 }
 
-.flashcard-rating-btn.easy:hover .rating-icon-circle {
+.flashcard-rating-btn.easy:hover {
   background: var(--accent-1);
   color: white;
 }
@@ -315,13 +302,8 @@
     gap: 6px;
   }
 
-  .rating-icon-circle {
-    width: 40px;
-    height: 40px;
-  }
-
   .flashcard-rating-btn .rating-label {
-    font-size: 0.62rem;
+    font-size: 0.72rem;
   }
 
   .btn-speak-card {

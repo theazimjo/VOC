@@ -37,7 +37,7 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
       currentWord.interval || 0,
       currentWord.reviewCount || 0
     );
-    await onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, sm2Data);
 
     const newResults = {
       correctCount: results.correctCount + (isCorrect ? 1 : 0),
