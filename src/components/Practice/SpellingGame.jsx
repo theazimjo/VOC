@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Volume2 } from 'lucide-react';
 import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './SpellingGame.css';
@@ -92,7 +93,8 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
       <div className="spelling-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
         <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word)}>
-          🔊 Eshitish
+          <Volume2 size={14} strokeWidth={2.3} />
+          Eshitish
         </button>
       </div>
 
@@ -129,7 +131,7 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
             />
             {!answered && (
               <button type="submit" className="btn-spell-submit">
-                Tekshirish ✓
+                Tekshirish
               </button>
             )}
           </form>
@@ -142,8 +144,8 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
                 animate={{ opacity: 1, scale: 1 }}
               >
                 {isCorrect
-                  ? <><span className="sf-icon">✨</span> To'g'ri! Zo'r!</>
-                  : <><span className="sf-icon">❌</span> Javob: <strong>{currentWord.word}</strong></>
+                  ? "To'g'ri!"
+                  : <>Javob: <strong>{currentWord.word}</strong></>
                 }
               </motion.div>
             )}

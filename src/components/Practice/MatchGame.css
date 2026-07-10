@@ -78,14 +78,12 @@
 .match-item:hover:not(.matched):not(.error) {
   border-color: var(--accent-1);
   background: var(--bg-glass-hover);
-  transform: translateY(-2px);
 }
 
 .match-item.selected {
   border-color: var(--accent-1);
   background: var(--accent-1-dim);
   font-weight: 700;
-  transform: scale(1.02);
 }
 
 .match-item.matched {
@@ -94,7 +92,14 @@
   color: var(--success);
   cursor: default;
   opacity: 0.55;
-  transform: scale(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.match-item-check {
+  flex-shrink: 0;
 }
 
 .match-item.error {

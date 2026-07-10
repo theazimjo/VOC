@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Volume2, Eye, CheckCircle2 } from 'lucide-react';
 import { calculateNextReview, getDueWords } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './SpacedRepetition.css';
@@ -69,7 +70,7 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
           animate={{ opacity: 1, scale: 1 }}
           className="sr-empty-card"
         >
-          <div className="sr-empty-icon">🎉</div>
+          <div className="sr-empty-icon"><CheckCircle2 size={40} strokeWidth={1.8} /></div>
           <h3>Hammasi o'rganildi!</h3>
           <p>Hozircha takrorlash uchun so'zlar yo'q. Keyinroq qaytib ko'ring.</p>
           <div className="result-actions" style={{ justifyContent: 'center', display: 'flex', gap: '10px', marginTop: '16px' }}>
@@ -91,7 +92,7 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
     <div className="sr-container">
       <div className="sr-progress-label">
         <span><strong>{currentIndex + 1}</strong> / {dueWords.length}</span>
-        <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>🧠 Spaced Repetition</span>
+        <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>Spaced Repetition</span>
       </div>
 
       {/* Card */}
@@ -110,12 +111,15 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
               className="btn-speak-sr"
               onClick={() => speakWord(currentWord.word)}
               title="Talaffuz qilish"
-            >🔊</button>
+            >
+              <Volume2 size={18} strokeWidth={2.2} />
+            </button>
           </div>
 
           {!showAnswer ? (
             <button className="sr-reveal-btn" onClick={() => setShowAnswer(true)}>
-              👁 Javobni ko'rish
+              <Eye size={16} strokeWidth={2.3} />
+              Javobni ko'rish
             </button>
           ) : (
             <motion.div

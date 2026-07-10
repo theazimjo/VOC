@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Volume2, Check, X } from 'lucide-react';
 import { shuffleArray, speakWord } from '../../utils/helpers';
 import { calculateNextReview } from '../../utils/sm2';
 import './QuizGame.css';
@@ -102,7 +103,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       <div className="quiz-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
         <span className={`quiz-timer ${timeLeft <= 4 ? 'danger' : timeLeft <= 8 ? 'warning' : ''}`}>
-          ⏱ {timeLeft}s
+          {timeLeft}s
         </span>
       </div>
 
@@ -124,7 +125,9 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
               onClick={() => speakWord(currentWord.word)}
               title="Talaffuz"
               type="button"
-            >🔊</button>
+            >
+              <Volume2 size={18} strokeWidth={2.2} />
+            </button>
           </div>
           {currentWord.definition && (
             <div className="quiz-question-hint">{currentWord.definition}</div>
@@ -160,13 +163,12 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.06 }}
-              whileHover={!answered ? { scale: 1.02 } : {}}
               whileTap={!answered ? { scale: 0.97 } : {}}
             >
               <span className="quiz-option-letter">{['A', 'B', 'C', 'D'][idx]}</span>
               <span className="quiz-option-text">{opt}</span>
-              {answered && state === 'correct' && <span className="quiz-option-icon">✓</span>}
-              {answered && state === 'wrong'   && <span className="quiz-option-icon">✗</span>}
+              {answered && state === 'correct' && <Check className="quiz-option-icon" size={18} strokeWidth={2.5} />}
+              {answered && state === 'wrong'   && <X className="quiz-option-icon" size={18} strokeWidth={2.5} />}
             </motion.button>
           );
         })}
@@ -184,10 +186,10 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
           >
             <div className={`quiz-feedback ${timedOut ? 'wrong' : isCorrectAnswer ? 'correct' : 'wrong'}`}>
               {timedOut
-                ? `⏰ Vaqt tugadi! Javob: ${currentWord.translation}`
+                ? `Vaqt tugadi! Javob: ${currentWord.translation}`
                 : isCorrectAnswer
-                  ? "✨ To'g'ri!"
-                  : `❌ Javob: ${currentWord.translation}`
+                  ? "To'g'ri!"
+                  : `Javob: ${currentWord.translation}`
               }
             </div>
             <button

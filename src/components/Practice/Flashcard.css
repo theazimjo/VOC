@@ -132,52 +132,37 @@
 }
 
 .flashcard-hint {
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   color: var(--text-muted);
   margin-top: var(--space-lg);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.flashcard-hint-key {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-light);
-  border-radius: 4px;
-  padding: 1px 5px;
-  font-family: var(--font-family);
-  font-size: 0.65rem;
-  font-weight: 700;
 }
 
 /* ─── Card Audio Play Button ─── */
 .btn-speak-card {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-light);
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   transition: all var(--transition-fast) ease;
-  box-shadow: var(--shadow-sm);
   z-index: 10;
 }
 
 .btn-speak-card:hover {
-  background: var(--accent-1-dim);
   color: var(--accent-1);
-  border-color: rgba(0, 122, 255, 0.2);
 }
 
 .btn-speak-card:active {
-  transform: scale(0.92);
+  transform: scale(0.9);
+  color: var(--accent-1);
 }
 
 /* ─── Rating Controls ─── */
@@ -199,61 +184,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 2px;
+  padding: 12px 2px 10px;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
   cursor: pointer;
-  transition: transform var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  transition: transform var(--transition-fast), background var(--transition-fast);
   border: none;
+  border-bottom: 3px solid transparent;
+  background: var(--bg-tertiary);
 }
 
 .flashcard-rating-btn:active {
-  transform: scale(0.92);
+  transform: scale(0.94);
 }
 
 .flashcard-rating-btn .rating-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
+  color: var(--text-primary);
 }
 
-.flashcard-rating-btn.again {
-  color: var(--error);
-  background: var(--error-dim);
-}
+.flashcard-rating-btn.again { border-bottom-color: var(--error); }
+.flashcard-rating-btn.hard  { border-bottom-color: var(--warning); }
+.flashcard-rating-btn.good  { border-bottom-color: var(--success); }
+.flashcard-rating-btn.easy  { border-bottom-color: var(--accent-1); }
 
-.flashcard-rating-btn.again:hover {
-  background: var(--error);
-  color: white;
-}
-
-.flashcard-rating-btn.hard {
-  color: var(--warning);
-  background: var(--warning-dim);
-}
-
-.flashcard-rating-btn.hard:hover {
-  background: var(--warning);
-  color: white;
-}
-
-.flashcard-rating-btn.good {
-  color: var(--success);
-  background: var(--success-dim);
-}
-
-.flashcard-rating-btn.good:hover {
-  background: var(--success);
-  color: white;
-}
-
-.flashcard-rating-btn.easy {
-  color: var(--accent-1);
-  background: var(--accent-1-dim);
-}
-
-.flashcard-rating-btn.easy:hover {
-  background: var(--accent-1);
-  color: white;
+.flashcard-rating-btn:hover {
+  background: var(--border-light);
 }
 
 /* ─── Part of Speech Badge ─── */
@@ -266,19 +223,9 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   margin-bottom: var(--space-sm);
-  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
 }
-
-/* Color codes */
-.fc-pos-noun         { background: rgba(0, 122, 255, 0.08); color: #007aff; }
-.fc-pos-verb         { background: rgba(52, 199, 89, 0.08); color: #34c759; }
-.fc-pos-adjective    { background: rgba(255, 149, 0, 0.08); color: #ff9500; }
-.fc-pos-adverb       { background: rgba(175, 82, 222, 0.08); color: #af52de; }
-.fc-pos-preposition  { background: rgba(88, 86, 214, 0.08); color: #5856d6; }
-.fc-pos-conjunction  { background: rgba(255, 45, 85, 0.08); color: #ff2d55; }
-.fc-pos-pronoun      { background: rgba(90, 200, 250, 0.08); color: #5ac8fa; }
-.fc-pos-phrase       { background: var(--bg-tertiary); color: var(--text-secondary); }
-.fc-pos-idiom        { background: var(--bg-tertiary); color: var(--text-secondary); }
 
 /* ─── Mobile ─── */
 @media (max-width: 600px) {

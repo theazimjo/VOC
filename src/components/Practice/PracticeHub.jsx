@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Layers, PenLine, Shuffle, ListChecks, Headphones, Mic, Brain, NotebookPen } from 'lucide-react';
+import { Zap, Layers, PenLine, Shuffle, ListChecks, Mic, Brain, NotebookPen } from 'lucide-react';
 import './PracticeHub.css';
 
 export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
@@ -48,14 +48,6 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
       desc: "To'rtta variantdan to'g'ri tarjimani tezkorlik bilan tanlang",
       badge: "Min 4 ta so'z",
       glowColor: 'hsl(38, 95%, 55%)'
-    },
-    {
-      id: 'dictation',
-      icon: Headphones,
-      title: 'Diktant',
-      desc: "So'zni faqat eshitgan holda inglizcha imlosini yozing",
-      badge: "Min 3 ta so'z",
-      glowColor: 'hsl(245, 80%, 65%)'
     },
     {
       id: 'pronounce',

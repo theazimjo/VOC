@@ -34,21 +34,21 @@
 }
 
 .btn-spell-speak {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 5px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  padding: 5px 6px;
   font-size: var(--font-xs);
   font-weight: 700;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   cursor: pointer;
   font-family: var(--font-family);
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast);
 }
 .btn-spell-speak:hover {
-  border-color: var(--accent-2);
-  color: var(--accent-2);
-  background: var(--bg-glass-hover);
+  color: var(--accent-1);
 }
 
 /* ─── Card ─── */
@@ -67,8 +67,8 @@
   text-align: center;
   transition: border-color 0.3s;
 }
-.spelling-card.correct { border-color: var(--success); box-shadow: var(--shadow-lg), 0 0 30px var(--success-dim); }
-.spelling-card.wrong   { border-color: var(--error);   box-shadow: var(--shadow-lg), 0 0 30px var(--error-dim); }
+.spelling-card.correct { border-color: var(--success); }
+.spelling-card.wrong   { border-color: var(--error); }
 
 .spelling-card-label {
   font-size: var(--font-xs);
@@ -161,13 +161,13 @@
   font-weight: 700;
   cursor: pointer;
   font-family: var(--font-family);
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3);
+  transition: filter var(--transition-fast), transform var(--transition-fast);
 }
 .btn-spell-submit:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+  filter: brightness(1.08);
+}
+.btn-spell-submit:active {
+  transform: scale(0.97);
 }
 
 /* ─── Feedback Banner ─── */
@@ -192,8 +192,6 @@
   color: var(--error);
   border: 1px solid var(--error);
 }
-.sf-icon { font-size: 1.2rem; }
-
 /* ─── Actions ─── */
 .spelling-actions {
   display: flex;
@@ -210,14 +208,14 @@
   font-weight: 700;
   cursor: pointer;
   font-family: var(--font-family);
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3);
+  transition: filter var(--transition-fast), transform var(--transition-fast);
   width: 100%;
 }
 .btn-spell-next:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+  filter: brightness(1.08);
+}
+.btn-spell-next:active {
+  transform: scale(0.98);
 }
 
 /* ─── Responsive ─── */

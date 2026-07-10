@@ -21,7 +21,6 @@
 .pronounce-progress-fill {
   height: 100%;
   background: var(--accent-1);
-  box-shadow: 0 0 10px var(--accent-1);
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -36,24 +35,21 @@
 }
 
 .btn-pronounce-speak-target {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  padding: 6px 4px;
   font-size: var(--font-xs);
-  color: var(--text-secondary);
+  font-weight: 700;
+  color: var(--text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast);
 }
 
 .btn-pronounce-speak-target:hover {
-  background: var(--accent-1-dim);
-  border-color: var(--accent-1);
   color: var(--accent-1);
-  transform: translateY(-1px);
 }
 
 /* Pronounce Card Design */
@@ -75,12 +71,10 @@
 
 .pronounce-card.correct {
   border-color: var(--success);
-  box-shadow: 0 0 25px var(--success-dim), var(--shadow);
 }
 
 .pronounce-card.wrong {
   border-color: var(--error);
-  box-shadow: 0 0 25px var(--error-dim), var(--shadow);
 }
 
 .pronounce-card-label {
@@ -97,7 +91,6 @@
   color: var(--accent-1);
   letter-spacing: -0.02em;
   line-height: 1.1;
-  text-shadow: 0 0 20px var(--accent-1-dim);
 }
 
 .pronounce-translation {
@@ -143,27 +136,23 @@
   border: none;
   background: var(--accent-1);
   color: white;
-  font-size: 2.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px rgba(0, 122, 255, 0.35);
-  transition: all var(--transition-base);
+  transition: filter var(--transition-fast), transform var(--transition-fast);
 }
 
 .mic-button:hover:not(:disabled) {
-  transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 12px 24px rgba(0, 122, 255, 0.4);
+  filter: brightness(1.08);
 }
 
 .mic-button:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: scale(0.96);
 }
 
 .mic-button.listening {
   background: var(--success);
-  box-shadow: 0 0 25px rgba(52, 199, 89, 0.5);
   animation: pulse-success 1.5s infinite;
 }
 
@@ -289,6 +278,9 @@
   font-size: var(--font-sm);
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   transition: all var(--transition-fast);
 }
 
@@ -331,17 +323,15 @@
   font-size: var(--font-md);
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
-  transition: all var(--transition-base);
+  transition: filter var(--transition-fast), transform var(--transition-fast);
 }
 
 .btn-pronounce-next:hover {
   filter: brightness(1.06);
-  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
 }
 
 .btn-pronounce-next:active {
-  transform: translateY(0);
+  transform: scale(0.98);
 }
 
 @media (max-width: 600px) {

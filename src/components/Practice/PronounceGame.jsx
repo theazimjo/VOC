@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Volume2, Mic, RotateCcw } from 'lucide-react';
 import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './PronounceGame.css';
@@ -170,13 +171,14 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       <div className="pronounce-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
         {status !== 'unsupported' && (
-          <button 
-            className="btn-pronounce-speak-target" 
-            type="button" 
+          <button
+            className="btn-pronounce-speak-target"
+            type="button"
             onClick={() => speakWord(currentWord.word)}
             title="Tinglash"
           >
-            🔊 Tinglash
+            <Volume2 size={14} strokeWidth={2.3} />
+            Tinglash
           </button>
         )}
       </div>
@@ -216,7 +218,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
                       <span className="bar"></span>
                     </div>
                   ) : (
-                    '🎙️'
+                    <Mic size={28} strokeWidth={2.2} />
                   )}
                 </button>
 
@@ -236,13 +238,13 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             {/* Banners inside the card for immediate clean feedback */}
             {answered && isCorrect && (
               <div className="pronounce-feedback-banner correct">
-                <span className="pf-icon">✨</span> Ajoyib talaffuz!
+                Ajoyib talaffuz!
               </div>
             )}
 
             {answered && !isCorrect && (
               <div className="pronounce-feedback-banner wrong">
-                <span className="pf-icon">❌</span> {status === 'skipped' ? "O'tkazib yuborildi" : "Nomaqbul talaffuz"}
+                {status === 'skipped' ? "O'tkazib yuborildi" : "Nomaqbul talaffuz"}
                 {heardText && (
                   <div className="heard-text">
                     Biz eshitdik: <strong>"{heardText}"</strong>
@@ -253,7 +255,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
 
             {status === 'unsupported' && (
               <div className="pronounce-feedback-banner unsupported">
-                ℹ️ Nutqni aniqlash ushbu brauzerda qo'llab-quvvatlanmaydi
+                Nutqni aniqlash ushbu brauzerda qo'llab-quvvatlanmaydi
               </div>
             )}
           </div>
@@ -262,10 +264,11 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
           {!answered && status === 'wrong' && (
             <div className="pronounce-action-buttons">
               <button type="button" className="btn btn-secondary" onClick={handleRetry}>
-                🔄 Qayta urinish
+                <RotateCcw size={14} strokeWidth={2.3} />
+                Qayta urinish
               </button>
               <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                ⏩ O'tkazib yuborish
+                O'tkazib yuborish
               </button>
             </div>
           )}

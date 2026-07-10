@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Check } from 'lucide-react';
 import { shuffleArray } from '../../utils/helpers';
 import { calculateNextReview } from '../../utils/sm2';
 import './MatchGame.css';
@@ -72,14 +73,14 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
   return (
     <div className="match-game-container">
       <div className="match-stats">
-        <div className="match-stat-pill">⏱ <span>{formatTime(timer)}</span></div>
-        <div className="match-stat-pill">🎯 Qoldi: <span>{remaining}</span></div>
-        <div className="match-stat-pill">❌ Xato: <span>{mistakes}</span></div>
+        <div className="match-stat-pill">Vaqt: <span>{formatTime(timer)}</span></div>
+        <div className="match-stat-pill">Qoldi: <span>{remaining}</span></div>
+        <div className="match-stat-pill">Xato: <span>{mistakes}</span></div>
       </div>
 
       <div className="match-grid">
         <div className="match-column">
-          <div className="match-column-label">🇬🇧 Inglizcha</div>
+          <div className="match-column-label">Inglizcha</div>
           {leftItems.map((item, idx) => (
             <motion.div
               key={`l-${item.id}`}
@@ -99,13 +100,13 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
               transition={{ delay: idx * 0.07 }}
             >
               {item.text}
-              {matchedIds.includes(item.id) && <span style={{ marginLeft: 6 }}>✓</span>}
+              {matchedIds.includes(item.id) && <Check className="match-item-check" size={14} strokeWidth={2.5} />}
             </motion.div>
           ))}
         </div>
 
         <div className="match-column">
-          <div className="match-column-label">🇺🇿 Tarjima</div>
+          <div className="match-column-label">Tarjima</div>
           {rightItems.map((item, idx) => (
             <motion.div
               key={`r-${item.id}`}
@@ -125,7 +126,7 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
               transition={{ delay: idx * 0.07 }}
             >
               {item.text}
-              {matchedIds.includes(item.id) && <span style={{ marginLeft: 6 }}>✓</span>}
+              {matchedIds.includes(item.id) && <Check className="match-item-check" size={14} strokeWidth={2.5} />}
             </motion.div>
           ))}
         </div>

@@ -23,7 +23,7 @@ function PosBadge({ pos }) {
   if (!pos) return null;
   const info = POS_LABELS[pos] || { label: pos, abbr: pos };
   return (
-    <span className={`fc-pos-badge fc-pos-${pos}`} title={info.label}>
+    <span className="fc-pos-badge" title={info.label}>
       {info.abbr}
     </span>
   );
@@ -117,13 +117,11 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
                 onClick={e => { e.stopPropagation(); speakWord(currentWord.word); }}
                 title="Talaffuz qilish"
               >
-                <Volume2 size={18} strokeWidth={2.4} />
+                <Volume2 size={18} strokeWidth={2.2} />
               </button>
               <PosBadge pos={currentWord.partOfSpeech} />
               <div className="flashcard-word">{currentWord.word}</div>
-              <div className="flashcard-hint">
-                Bosing yoki <span className="flashcard-hint-key">Space</span> tugmasini bosing
-              </div>
+              <div className="flashcard-hint">Javobni ko'rish uchun bosing</div>
             </div>
 
             {/* Back */}
