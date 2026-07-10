@@ -3717,7 +3717,188 @@ Past Simple da fe'llar ikki turga bo'linadi: **To'g'ri (Regular)** va **Noto'g'r
           { id: 20, situation: "Chatting about childhood.", dialogue: "A: Did you live in a village?\nB: Yes, we ___ a big farm there.", options: ["had", "have", "having", "has"], correct: 0, explanation: "We + had." }
         ]
       },
+      {
+        id: 'past-continuous',
+        title: 'Past Continuous',
+        icon: '🌙',
+        guide: `## Past Continuous (O'tgan davomli zamon)
 
+Past Continuous o'tmishdagi muayyan bir vaqtda davom etayotgan harakatni yoki bir harakat davom etayotganda sodir bo'lgan boshqa (qisqa) harakatni ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+Gaplar quyidagicha tuziladi:
+• **Positive (+)**: Subject + was / were + Verb-ing
+  - I **was watching** TV at 8 PM.
+  - They **were playing** football yesterday.
+• **Negative (-)**: Subject + was / were + not + Verb-ing
+  - She **wasn't listening** to the teacher.
+  - We **weren't sleeping** at midnight.
+• **Question (?)**: Was / Were + Subject + Verb-ing?
+  - **Was he working** at that time?
+  - **What were you doing** last night?
+
+I/He/She/It -> **was**; You/We/They -> **were** (Present Continuous dagi am/is/are ning o'tgan zamondagi shakli).
+
+## 2. Ishlatilishi (Usage)
+1. **O'tmishdagi muayyan vaqtda davom etayotgan harakat**:
+   - At 9 PM yesterday, I was doing my homework.
+2. **Uzoq davom etayotgan harakat va uni bo'lib o'tgan qisqa harakat (Past Simple)**:
+   - I **was cooking** dinner **when** the phone **rang**. (Uzun harakat: Past Continuous, qisqa harakat: Past Simple)
+   - **While** she **was reading**, her brother **came** in.
+3. **Bir vaqtning o'zida davom etgan ikkita harakat (parallel actions)**:
+   - **While** I **was studying**, my sister **was watching** TV.
+4. **Voqea yoki hikoyaning fonini (background) tasvirlash uchun**:
+   - The sun was shining and the birds were singing.
+
+## 3. While va When farqi
+• **While** + Past Continuous (uzoq davom etgan harakat bilan ishlatiladi):
+  - While I was walking home, it started to rain.
+• **When** + Past Simple (qisqa, to'satdan sodir bo'lgan harakat bilan ishlatiladi):
+  - I was walking home when it started to rain.
+
+## 4. Davomli zamonda ishlatilmaydigan fe'llar (Stative Verbs)
+His-tuyg'u, fikrlash va egalikni bildiruvchi fe'llar Past Continuous da emas, Past Simple da ishlatiladi:
+• like, love, want, know, believe, have (egalik ma'nosida).
+  - I **liked** the movie. (emas: I was liking...)
+
+## 5. Signal so'zlar (Time Expressions)
+• while (harakat davom etayotganda)
+• when (to'satdan sodir bo'lgan harakat)
+• at that moment, at that time
+• at 8 o'clock yesterday, all day yesterday, the whole morning`,
+        questions: [
+          { id: 1, text: 'I ___ TV when you called.', options: ['watch', 'was watching', 'were watching', 'am watching'], correct: 1, explanation: 'Subject "I" takes "was" in Past Continuous: "was watching".' },
+          { id: 2, text: 'They ___ football at 5 PM yesterday.', options: ['play', 'was playing', 'were playing', 'plays'], correct: 2, explanation: 'Plural subject "they" takes "were": "were playing".' },
+          { id: 3, text: 'She ___ not listening when I spoke.', options: ['was', 'were', 'is', 'does'], correct: 0, explanation: 'Singular subject "she" takes "was".' },
+          { id: 4, text: '___ you sleeping at midnight?', options: ['Was', 'Were', 'Did', 'Do'], correct: 1, explanation: 'Subject "you" takes "were" in Past Continuous questions.' },
+          { id: 5, text: 'While I ___ dinner, the phone rang.', options: ['cook', 'was cooking', 'were cooking', 'cooked'], correct: 1, explanation: 'The long background action uses Past Continuous: "was cooking".' },
+          { id: 6, text: 'It ___ raining when we left the house.', options: ['was', 'were', 'is', 'did'], correct: 0, explanation: 'Subject "it" takes "was".' },
+          { id: 7, text: 'We ___ walking in the park at that moment.', options: ['was', 'were', 'are', 'did'], correct: 1, explanation: 'Plural subject "we" takes "were".' },
+          { id: 8, text: 'He ___ his homework at 7 PM yesterday.', options: ['do', 'did', 'was doing', 'were doing'], correct: 2, explanation: 'A specific past moment needs Past Continuous: "was doing".' },
+          { id: 9, text: '___ they watching a movie last night at nine?', options: ['Was', 'Were', 'Did', 'Do'], correct: 1, explanation: 'Plural subject "they" takes "were" in questions.' },
+          { id: 10, text: 'I was reading a book while she ___ cooking.', options: ['was', 'were', 'is', 'did'], correct: 0, explanation: 'Parallel past action, subject "she" takes "was".' },
+          { id: 11, text: 'The children ___ playing in the garden all afternoon.', options: ['was', 'were', 'is', 'are'], correct: 1, explanation: 'Plural subject "the children" takes "were".' },
+          { id: 12, text: "What ___ you doing at 10 o'clock last night?", options: ['was', 'were', 'did', 'do'], correct: 1, explanation: 'Subject "you" takes "were" in Past Continuous questions.' },
+          { id: 13, text: 'She ___ crying when I saw her.', options: ['was', 'were', 'is', 'did'], correct: 0, explanation: 'Singular subject "she" takes "was".' },
+          { id: 14, text: 'They ___ not studying, they were sleeping.', options: ['was', 'were', 'are', 'did'], correct: 1, explanation: 'Plural subject "they" takes "were".' },
+          { id: 15, text: 'While he was driving, his phone ___.', options: ['rang', 'was ringing', 'ring', 'rings'], correct: 0, explanation: 'The short interrupting action uses Past Simple: "rang".' },
+          { id: 16, text: 'I ___ working when the lights went out.', options: ['was', 'were', 'am', 'did'], correct: 0, explanation: 'Subject "I" takes "was".' },
+          { id: 17, text: 'My parents ___ having dinner when I arrived.', options: ['was', 'were', 'is', 'are'], correct: 1, explanation: 'Plural subject "my parents" takes "were".' },
+          { id: 18, text: 'Was it ___ when you woke up?', options: ['snow', 'snowing', 'snowed', 'snows'], correct: 1, explanation: 'After "was", use Verb-ing: "snowing".' },
+          { id: 19, text: 'We were not ___ attention during the lesson.', options: ['pay', 'paying', 'payed', 'pays'], correct: 1, explanation: 'Continuous negative needs Verb-ing: "paying".' },
+          { id: 20, text: '___ she talking on the phone when you entered?', options: ['Was', 'Were', 'Did', 'Do'], correct: 0, explanation: 'Singular subject "she" takes "was" in questions.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'I was ___ (write) a letter when she came in.', options: ['writing', 'writeing', 'write', 'wrote'], correct: 0, explanation: 'Drop "e" in write before adding "-ing": "writing".' },
+          { id: 2, text: 'They were ___ (play) football at 5 PM.', options: ['playing', 'play', 'plaied', 'plays'], correct: 0, explanation: 'Simply add "-ing" to play.' },
+          { id: 3, text: '___ (was) he sleeping when you called?', options: ['Was', 'Were', 'Is', 'Did'], correct: 0, explanation: 'Singular subject "he" takes "Was".' },
+          { id: 4, text: 'She was not ___ (listen) to music.', options: ['listening', 'listen', 'listenning', 'listens'], correct: 0, explanation: 'Simply add "-ing" to listen.' },
+          { id: 5, text: 'We were ___ (sit) in the garden all evening.', options: ['sitting', 'siting', 'sit', 'sits'], correct: 0, explanation: 'Double the consonant: "sitting".' },
+          { id: 6, text: 'The baby was ___ (cry) at midnight.', options: ['crying', 'cryed', 'cries', 'cry'], correct: 0, explanation: 'Simply add "-ing" to cry.' },
+          { id: 7, text: '___ (were) you waiting for the bus?', options: ['Were', 'Was', 'Did', 'Do'], correct: 0, explanation: 'Subject "you" takes "Were".' },
+          { id: 8, text: 'He was ___ (make) dinner when I arrived.', options: ['making', 'makeing', 'make', 'makes'], correct: 0, explanation: 'Drop "e" in make before adding "-ing": "making".' },
+          { id: 9, text: 'I was ___ (run) when it started to rain.', options: ['running', 'runing', 'run', 'runs'], correct: 0, explanation: 'Double the consonant: "running".' },
+          { id: 10, text: 'They were not ___ (study) at that time.', options: ['studying', 'studing', 'study', 'studies'], correct: 0, explanation: 'Simply add "-ing" to study.' },
+          { id: 11, text: 'She was ___ (drive) to work when it happened.', options: ['driving', 'driveing', 'drive', 'drives'], correct: 0, explanation: 'Drop "e" in drive before adding "-ing": "driving".' },
+          { id: 12, text: '___ (was) it raining this morning?', options: ['Was', 'Were', 'Is', 'Does'], correct: 0, explanation: 'Subject "it" takes "Was".' },
+          { id: 13, text: 'We were ___ (have) lunch at noon.', options: ['having', 'haveing', 'have', 'has'], correct: 0, explanation: 'Drop "e" in have before adding "-ing": "having".' },
+          { id: 14, text: 'He was ___ (write) an email when the power went out.', options: ['writing', 'writeing', 'write', 'writes'], correct: 0, explanation: 'Drop "e" in write before adding "-ing": "writing".' },
+          { id: 15, text: 'I was not ___ (sleep) when you texted.', options: ['sleeping', 'sleepping', 'sleep', 'sleeps'], correct: 0, explanation: 'Simply add "-ing" to sleep.' },
+          { id: 16, text: 'The children were ___ (swim) in the lake.', options: ['swimming', 'swiming', 'swim', 'swims'], correct: 0, explanation: 'Double the consonant: "swimming".' },
+          { id: 17, text: '___ (was) she cooking dinner at 6?', options: ['Was', 'Were', 'Is', 'Does'], correct: 0, explanation: 'Singular subject "she" takes "Was".' },
+          { id: 18, text: 'They were ___ (watch) TV all night.', options: ['watching', 'watchhing', 'watch', 'watches'], correct: 0, explanation: 'Simply add "-ing" to watch.' },
+          { id: 19, text: 'My father was ___ (fix) the car when I got home.', options: ['fixing', 'fixxing', 'fix', 'fixes'], correct: 0, explanation: 'Simply add "-ing" to fix.' },
+          { id: 20, text: 'We were ___ (talk) about you yesterday.', options: ['talking', 'talkking', 'talk', 'talks'], correct: 0, explanation: 'Simply add "-ing" to talk.' }
+        ],
+        scrambled: [
+          { id: 1, words: ['was', 'I', 'a', 'book', 'reading'], answer: 'I was reading a book', explanation: 'Subject + was + verb-ing + object.' },
+          { id: 2, words: ['were', 'they', 'football', 'playing'], answer: 'they were playing football', explanation: 'Subject + were + verb-ing + object.' },
+          { id: 3, words: ['was', 'what', 'doing', 'she', '?'], answer: 'what was she doing', explanation: 'Question word + was + subject + verb-ing.' },
+          { id: 4, words: ['were', 'not', 'we', 'sleeping'], answer: 'we were not sleeping', explanation: 'Subject + were + not + verb-ing.' },
+          { id: 5, words: ['it', 'raining', 'was', 'hard'], answer: 'it was raining hard', explanation: 'Subject + was + verb-ing + adverb.' },
+          { id: 6, words: ['was', 'driving', 'he', 'car', 'a'], answer: 'he was driving a car', explanation: 'Subject + was + verb-ing + object.' },
+          { id: 7, words: ['were', 'listening', 'you', 'music', 'to', '?'], answer: 'were you listening to music', explanation: 'Were + subject + verb-ing + preposition + object.' },
+          { id: 8, words: ['was', 'not', 'I', 'working', 'yesterday'], answer: 'I was not working yesterday', explanation: 'Subject + was + not + verb-ing + time.' },
+          { id: 9, words: ['were', 'having', 'we', 'dinner', 'at', 'seven'], answer: 'we were having dinner at seven', explanation: 'Subject + were + verb-ing + object + time.' },
+          { id: 10, words: ['was', 'sleeping', 'baby', 'the', 'bedroom', 'in', 'the'], answer: 'the baby was sleeping in the bedroom', explanation: 'Subject + was + sleeping + prepositional phrase.' },
+          { id: 11, words: ['were', 'coming', 'they', 'when', '?'], answer: 'when were they coming', explanation: 'When + were + subject + verb-ing.' },
+          { id: 12, words: ['was', 'running', 'dog', 'the', 'park', 'in', 'the'], answer: 'the dog was running in the park', explanation: 'Subject + was + running + prepositional phrase.' },
+          { id: 13, words: ['was', 'not', 'she', 'working', 'today'], answer: 'she was not working today', explanation: 'Subject + was + not + working + today.' },
+          { id: 14, words: ['was', 'writing', 'he', 'letter', 'a'], answer: 'he was writing a letter', explanation: 'Subject + was + writing + object.' },
+          { id: 15, words: ['were', 'you', 'looking', 'why', 'at', 'me', '?'], answer: 'why were you looking at me', explanation: 'Why + were + subject + looking + preposition + object.' },
+          { id: 16, words: ['were', 'making', 'they', 'a', 'cake'], answer: 'they were making a cake', explanation: 'Subject + were + making + object.' },
+          { id: 17, words: ['was', 'waiting', 'for', 'who', 'she', '?'], answer: 'who was she waiting for', explanation: 'Question word + was + subject + waiting + preposition.' },
+          { id: 18, words: ['were', 'reading', 'books', 'we', 'library', 'in', 'the'], answer: 'we were reading books in the library', explanation: 'Subject + were + reading + object + prepositional phrase.' },
+          { id: 19, words: ['was', 'cooking', 'mother', 'my', 'dinner'], answer: 'my mother was cooking dinner', explanation: 'Subject + was + cooking + object.' },
+          { id: 20, words: ['were', 'playing', 'the', 'children', 'outside'], answer: 'the children were playing outside', explanation: 'Subject + were + playing + adverb.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'I were watching TV last night.', options: ['I', 'were', 'watching TV', 'last night'], correct: 1, wrongPart: 'were', correction: 'was', explanation: 'Subject "I" takes "was", not "were".' },
+          { id: 2, text: 'She were sleeping when I called.', options: ['She', 'were', 'sleeping', 'when I called'], correct: 1, wrongPart: 'were', correction: 'was', explanation: 'Singular subject "she" takes "was".' },
+          { id: 3, text: 'They was playing in the yard.', options: ['They', 'was', 'playing', 'in the yard'], correct: 1, wrongPart: 'was', correction: 'were', explanation: 'Plural subject "they" takes "were".' },
+          { id: 4, text: 'We was having dinner at 8.', options: ['We', 'was', 'having dinner', 'at 8'], correct: 1, wrongPart: 'was', correction: 'were', explanation: 'Plural subject "we" takes "were".' },
+          { id: 5, text: 'He was writeing a letter.', options: ['He', 'was', 'writeing', 'a letter'], correct: 2, wrongPart: 'writeing', correction: 'writing', explanation: 'Drop "e" in write before adding "-ing": "writing".' },
+          { id: 6, text: 'I was runing when it started to rain.', options: ['I', 'was', 'runing', 'when it started to rain'], correct: 2, wrongPart: 'runing', correction: 'running', explanation: 'Double the consonant: "running".' },
+          { id: 7, text: 'Was you sleeping at midnight?', options: ['Was', 'you', 'sleeping', 'at midnight'], correct: 0, wrongPart: 'Was', correction: 'Were', explanation: 'Subject "you" takes "were": "Were you sleeping?".' },
+          { id: 8, text: 'What did you doing at 9 PM?', options: ['What', 'did you', 'doing', 'at 9 PM'], correct: 1, wrongPart: 'did you', correction: 'were you', explanation: 'Past Continuous questions use "were", not "did": "What were you doing?".' },
+          { id: 9, text: 'The children was playing outside.', options: ['The children', 'was', 'playing', 'outside'], correct: 1, wrongPart: 'was', correction: 'were', explanation: 'Plural subject "the children" takes "were".' },
+          { id: 10, text: 'She was not listen to music.', options: ['She', 'was not', 'listen', 'to music'], correct: 2, wrongPart: 'listen', correction: 'listening', explanation: 'Continuous form requires Verb-ing: "listening".' },
+          { id: 11, text: 'I not was sleeping when you texted.', options: ['I', 'not was', 'sleeping', 'when you texted'], correct: 1, wrongPart: 'not was', correction: 'was not', explanation: 'Negative word order is "was not", not "not was".' },
+          { id: 12, text: 'They were makeing a cake.', options: ['They', 'were', 'makeing', 'a cake'], correct: 2, wrongPart: 'makeing', correction: 'making', explanation: 'Drop "e" in make before adding "-ing": "making".' },
+          { id: 13, text: 'While I was cook, the phone rang.', options: ['While I was', 'cook', 'the phone', 'rang'], correct: 1, wrongPart: 'cook', correction: 'cooking', explanation: 'Continuous form requires Verb-ing: "cooking".' },
+          { id: 14, text: 'We were sit in the room.', options: ['We', 'were', 'sit', 'in the room'], correct: 2, wrongPart: 'sit', correction: 'sitting', explanation: 'Double the consonant and add "-ing": "sitting".' },
+          { id: 15, text: 'It were raining all day yesterday.', options: ['It', 'were', 'raining', 'all day yesterday'], correct: 1, wrongPart: 'were', correction: 'was', explanation: 'Subject "it" takes "was".' },
+          { id: 16, text: 'He was writting an email.', options: ['He', 'was', 'writting', 'an email'], correct: 2, wrongPart: 'writting', correction: 'writing', explanation: 'Only one "t": "writing", not "writting".' },
+          { id: 17, text: 'Were she waiting for the bus?', options: ['Were', 'she', 'waiting', 'for the bus'], correct: 0, wrongPart: 'Were', correction: 'Was', explanation: 'Singular subject "she" takes "was": "Was she waiting?".' },
+          { id: 18, text: 'My parents was having lunch.', options: ['My parents', 'was', 'having', 'lunch'], correct: 1, wrongPart: 'was', correction: 'were', explanation: 'Plural subject "my parents" takes "were".' },
+          { id: 19, text: 'I was liking the movie.', options: ['I', 'was liking', 'the movie', 'No error'], correct: 1, wrongPart: 'was liking', correction: 'liked', explanation: 'Stative verb "like" is not used in continuous form; use Past Simple: "I liked the movie".' },
+          { id: 20, text: 'Did they were sleeping when you arrived?', options: ['Did they were', 'sleeping', 'when', 'you arrived'], correct: 0, wrongPart: 'Did they were', correction: 'Were they', explanation: 'Past Continuous questions start with "Were", not "Did ... were": "Were they sleeping?".' }
+        ],
+        transform: [
+          { id: 1, text: 'Make negative: "I was watching TV."', options: ["I not was watching TV.", "I was not watching TV.", "I don't was watching TV.", "I wasn't watch TV."], correct: 1, explanation: 'Add "not" after "was": "I was not watching TV".' },
+          { id: 2, text: 'Make question: "She was working."', options: ['Was she working?', 'Does she working?', 'Was she work?', 'She was working?'], correct: 0, explanation: 'Move "was" to the front: "Was she working?".' },
+          { id: 3, text: 'Transform to Past Continuous: "He writes a book." (at 8 PM yesterday)', options: ['He was writing a book.', 'He is writing a book.', 'He wrote a book.', 'He writing a book.'], correct: 0, explanation: 'Subject + was + verb-ing: "He was writing a book".' },
+          { id: 4, text: 'Make negative: "They were playing."', options: ['They were not playing.', "They weren't play.", "They don't playing.", 'They not playing.'], correct: 0, explanation: 'Negative form: "They were not playing".' },
+          { id: 5, text: 'Make question: "They were reading."', options: ['Were they reading?', 'Did they reading?', 'They were reading?', 'Were they read?'], correct: 0, explanation: 'Question form: "Were they reading?".' },
+          { id: 6, text: 'Transform to Past Continuous: "I do homework." (at that moment)', options: ['I was doing homework.', 'I am doing homework.', 'I did homework.', 'I doing homework.'], correct: 0, explanation: 'Subject + was + verb-ing: "I was doing homework".' },
+          { id: 7, text: 'Make negative: "He was driving."', options: ["He doesn't driving.", 'He was driving not.', 'He was not driving.', 'He not driving.'], correct: 2, explanation: 'Add "not" after "was": "He was not driving".' },
+          { id: 8, text: 'Make question: "You were listening."', options: ['Were you listening?', 'Did you listening?', 'You were listening?', 'Were you listen?'], correct: 0, explanation: 'Question form: "Were you listening?".' },
+          { id: 9, text: 'Transform to Past Continuous: "She eats an apple." (at noon yesterday)', options: ['She was eating an apple.', 'She is eating an apple.', 'She ate an apple.', 'She eating an apple.'], correct: 0, explanation: 'Past Continuous: "She was eating an apple".' },
+          { id: 10, text: 'Make negative: "We were leaving."', options: ["We weren't leave.", "We didn't leaving.", 'We not were leaving.', 'We were not leaving.'], correct: 3, explanation: 'Negative form: "We were not leaving".' },
+          { id: 11, text: 'Make question: "It was raining."', options: ['Was it raining?', 'Did it raining?', 'It was raining?', 'Was it rain?'], correct: 0, explanation: 'Question form: "Was it raining?".' },
+          { id: 12, text: 'Transform to Past Continuous: "They run." (at 5 o\'clock)', options: ['They were running.', 'They was running.', 'They were runing.', 'They run.'], correct: 0, explanation: 'Double the consonant: "They were running".' },
+          { id: 13, text: 'Make negative: "I was driving."', options: ['I was not driving.', "I weren't driving.", "I don't driving.", 'I driving not.'], correct: 0, explanation: 'Negative form: "I was not driving".' },
+          { id: 14, text: 'Make question: "She was cooking."', options: ['Was she cooking?', 'Did she cooking?', 'She was cooking?', 'Was she cook?'], correct: 0, explanation: 'Question form: "Was she cooking?".' },
+          { id: 15, text: 'Transform to Past Continuous: "We have lunch." (at 1 PM)', options: ['We were having lunch.', 'We was having lunch.', 'We were haveing lunch.', 'We were have lunch.'], correct: 0, explanation: 'Drop "e" in have and use "were": "We were having lunch".' },
+          { id: 16, text: 'Make negative: "She was sleeping."', options: ["She weren't sleep.", 'She not was sleeping.', 'She was not sleeping.', "She doesn't sleeping."], correct: 2, explanation: 'Negative form: "She was not sleeping".' },
+          { id: 17, text: 'Make question: "They were leaving."', options: ['Were they leaving?', 'Did they leaving?', 'They were leaving?', 'Were they leave?'], correct: 0, explanation: 'Question form: "Were they leaving?".' },
+          { id: 18, text: 'Transform to Past Continuous: "I wash my car." (at 10 AM)', options: ['I was washing my car.', 'I am washing my car.', 'I washed my car.', 'I washing my car.'], correct: 0, explanation: 'Past Continuous: "I was washing my car".' },
+          { id: 19, text: 'Make negative: "It was snowing."', options: ["It weren't snow.", 'It was not snowing.', 'It not was snowing.', "It doesn't snowing."], correct: 1, explanation: 'Negative form: "It was not snowing".' },
+          { id: 20, text: 'Make question: "He was speaking."', options: ['Was he speaking?', 'Did he speaking?', 'Was he speak?', 'He was speaking?'], correct: 0, explanation: 'Question form: "Was he speaking?".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Talking about last night.', dialogue: 'A: What were you doing at 9 PM?\nB: I ___ dinner.', options: ['was cooking', 'is cooking', 'cooking', 'cook'], correct: 0, explanation: 'Subject "I" takes "was cooking".' },
+          { id: 2, situation: 'Discussing an interruption.', dialogue: 'A: What happened when the phone rang?\nB: I ___ a shower.', options: ['was taking', 'am taking', 'take', 'took'], correct: 0, explanation: 'Ongoing background action: "was taking".' },
+          { id: 3, situation: 'Talking about the weather yesterday.', dialogue: 'A: Why did you stay inside?\nB: Because it ___ heavily.', options: ['was raining', 'rained', 'rains', 'is raining'], correct: 0, explanation: 'Subject "it" takes "was raining".' },
+          { id: 4, situation: 'Asking about a call.', dialogue: "A: Why didn't you answer the phone?\nB: I ___ in the shower.", options: ['was', 'were', 'am', 'is'], correct: 0, explanation: 'Subject "I" takes "was".' },
+          { id: 5, situation: 'Discussing a walk.', dialogue: 'A: What were you doing at the park?\nB: We ___ our dog.', options: ['were walking', 'was walking', 'walk', 'walked'], correct: 0, explanation: 'Subject "we" takes "were walking".' },
+          { id: 6, situation: 'Talking about an accident.', dialogue: 'A: What was he doing when it happened?\nB: He ___ his bike.', options: ['was riding', 'were riding', 'rides', 'rode'], correct: 0, explanation: 'Subject "he" takes "was riding".' },
+          { id: 7, situation: 'Asking about studying.', dialogue: 'A: Why were you tired?\nB: I ___ all night for the exam.', options: ['was studying', 'were studying', 'study', 'studied'], correct: 0, explanation: 'Subject "I" takes "was studying".' },
+          { id: 8, situation: 'Discussing a noise.', dialogue: 'A: What was that noise?\nB: The children ___ upstairs.', options: ['were playing', 'was playing', 'play', 'played'], correct: 0, explanation: 'Plural subject "the children" takes "were playing".' },
+          { id: 9, situation: 'Talking about cooking.', dialogue: 'A: Was dinner ready?\nB: No, my mother ___ it.', options: ['was still making', 'were still making', 'still makes', 'still made'], correct: 0, explanation: 'Subject "my mother" takes "was still making".' },
+          { id: 10, situation: 'Discussing an interruption during work.', dialogue: 'A: What were you doing when the boss called?\nB: I ___ a report.', options: ['was writing', 'were writing', 'write', 'wrote'], correct: 0, explanation: 'Subject "I" takes "was writing".' },
+          { id: 11, situation: 'Talking about a trip.', dialogue: 'A: What were they doing at the airport?\nB: They ___ for their flight.', options: ['were waiting', 'was waiting', 'wait', 'waited'], correct: 0, explanation: 'Plural subject "they" takes "were waiting".' },
+          { id: 12, situation: 'Discussing a game.', dialogue: "A: Why didn't you hear me?\nB: We ___ video games.", options: ['were playing', 'was playing', 'play', 'played'], correct: 0, explanation: 'Subject "we" takes "were playing".' },
+          { id: 13, situation: 'Talking about last summer.', dialogue: 'A: What were you doing every morning?\nB: I ___ in the sea.', options: ['was swimming', 'were swimming', 'swim', 'swam'], correct: 0, explanation: 'Subject "I" takes "was swimming".' },
+          { id: 14, situation: 'Discussing a class.', dialogue: 'A: Was the teacher talking when you came in?\nB: Yes, she ___ a new topic.', options: ['was explaining', 'were explaining', 'explains', 'explained'], correct: 0, explanation: 'Subject "she" takes "was explaining".' },
+          { id: 15, situation: 'Talking about traffic.', dialogue: 'A: Why were you late?\nB: Cars ___ everywhere in traffic.', options: ['were waiting', 'was waiting', 'wait', 'waited'], correct: 0, explanation: 'Plural subject "cars" takes "were waiting".' },
+          { id: 16, situation: 'Discussing an event.', dialogue: 'A: What was happening when you arrived?\nB: Everyone ___ and dancing.', options: ['was singing', 'were singing', 'sing', 'sang'], correct: 0, explanation: 'Subject "everyone" takes "was singing".' },
+          { id: 17, situation: 'Talking about a storm.', dialogue: 'A: Was it windy last night?\nB: Yes, the trees ___ hard.', options: ['were shaking', 'was shaking', 'shake', 'shook'], correct: 0, explanation: 'Plural subject "the trees" takes "were shaking".' },
+          { id: 18, situation: 'Discussing an emergency.', dialogue: 'A: What were the firemen doing?\nB: They ___ the fire.', options: ['were putting out', 'was putting out', 'put out', 'puts out'], correct: 0, explanation: 'Plural subject "they" takes "were putting out".' },
+          { id: 19, situation: 'Talking about a picnic.', dialogue: 'A: What was everyone doing at the picnic?\nB: We ___ sandwiches and talking.', options: ['were eating', 'was eating', 'eat', 'ate'], correct: 0, explanation: 'Subject "we" takes "were eating".' },
+          { id: 20, situation: 'Discussing homework.', dialogue: 'A: Why was your room so quiet?\nB: I ___ hard for my test.', options: ['was studying', 'were studying', 'study', 'studied'], correct: 0, explanation: 'Subject "I" takes "was studying".' }
+        ]
+      }
     ]
   }
 };
