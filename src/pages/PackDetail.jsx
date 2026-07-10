@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { usePacks } from '../hooks/usePacks';
 import { useWords } from '../hooks/useWords';
 import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
+import { getIrregularVerbGroup } from '../data/irregularVerbGroups';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
@@ -173,12 +174,13 @@ export default function PackDetail() {
         </div>
       </div>
 
-      <WordList 
-        words={words} 
-        onEdit={handleEditWord} 
-        onDelete={handleDeleteWord} 
+      <WordList
+        words={words}
+        onEdit={handleEditWord}
+        onDelete={handleDeleteWord}
         loading={loading}
         readOnly={pack.name === 'Irregular Verbs'}
+        groupFn={pack.name === 'Irregular Verbs' ? getIrregularVerbGroup : undefined}
       />
 
       <WordForm

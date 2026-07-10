@@ -4,6 +4,7 @@
   --ios-card: var(--bg-secondary);
   --ios-blue: var(--accent-1);
   --ios-blue-hover: var(--accent-1);
+  --ios-blue-dim: var(--accent-1-dim);
   --ios-green: var(--success);
   --ios-green-light: var(--success-dim);
   --ios-red: var(--error);
@@ -20,7 +21,7 @@
   margin: 0 auto;
   padding: var(--space-lg) var(--space-md);
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-family);
   color: var(--text-primary);
   background-color: transparent;
   -webkit-font-smoothing: antialiased;
@@ -86,7 +87,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: var(--shadow-lg) !important;
   position: relative;
   overflow: hidden;
   margin-bottom: 8px;
@@ -196,6 +197,29 @@
   transform: scale(0.97);
 }
 
+.btn-reveal-study-card {
+  background: var(--ios-blue) !important;
+  border: none;
+  color: white !important;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 24px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: var(--transition-ios);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-reveal-study-card:active {
+  transform: scale(0.97);
+  filter: brightness(1.08);
+}
+
 .study-card-footer {
   display: flex;
   justify-content: space-between;
@@ -287,7 +311,7 @@
 .trainer-input:focus {
   outline: none;
   border-color: var(--ios-blue);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2);
+  box-shadow: 0 0 0 3px var(--ios-blue-dim);
 }
 
 .trainer-input.prefilled {
@@ -383,7 +407,7 @@
 
 .seq-dot.active {
   color: var(--ios-blue);
-  background: rgba(0, 122, 255, 0.1);
+  background: var(--ios-blue-dim);
 }
 
 .seq-arrow {
@@ -594,7 +618,6 @@
     padding: 16px 14px !important;
     border-radius: 20px !important;
     margin-bottom: 8px !important;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
   }
   .study-card-uz-title {
     font-size: 24px !important;

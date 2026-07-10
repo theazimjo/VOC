@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Volume2, Eye } from 'lucide-react';
 import { playSound } from '../../utils/feedback';
+import { weightedSelectWords } from '../../utils/helpers';
 import './IrregularVerbsTrainer.css';
 
 export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName, onProgress, initialSubStep, onExit }) {
   const [sessionVerbs, setSessionVerbs] = useState([]);
   const [subStep, setSubStep] = useState(initialSubStep || 'study'); // 'study' | 'practice'
   const [studyIndex, setStudyIndex] = useState(0);
+  const [studyRevealed, setStudyRevealed] = useState(false);
 
   // Practice States
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -94,9 +97,15 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       return { ...w, v1, v2, v3 };
     }).filter(w => w.v1 && w.v2 && w.v3);
 
-    const shuffled = [...pool].sort(() => Math.random() - 0.5);
-    setSessionVerbs(shuffled.slice(0, 10));
+    // Weighted, spaced-repetition-aware pick: verbs the user gets wrong
+    // or hasn't mastered yet surface more often than ones already known well.
+    setSessionVerbs(weightedSelectWords(pool, Math.min(10, pool.length)));
   }, [words]);
+
+  // Reset the "cover before you recall" state whenever the study card changes.
+  useEffect(() => {
+    setStudyRevealed(false);
+  }, [studyIndex]);
 
   // Setup current practice question
   useEffect(() => {
@@ -317,6 +326,18 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       setIncorrectCount(prev => prev + 1);
       setWrongVerbs(prev => [...prev, verb]);
       if (onUpdateWord) onUpdateWord(verb.id, { quality: 2, isCorrect: false });
+
+      // Give the verb one more attempt later in this same session instead of
+      // just dropping it — retrieving it again shortly after a miss is what
+      // actually moves it into memory (the "testing effect").
+      if (!verb._requeued) {
+        setSessionVerbs(prev => {
+          const next = [...prev];
+          const reinsertAt = Math.min(next.length, currentIndex + 4);
+          next.splice(reinsertAt, 0, { ...verb, _requeued: true });
+          return next;
+        });
+      }
     }
     speakVerbs(verb.v1, verb.v2, verb.v3);
   };
@@ -361,66 +382,75 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                 {sessionVerbs[studyIndex].translation}
               </div>
 
-              {/* iOS-Style Grouped Rows */}
-              <div className="study-card-rows-list">
-                <div className="study-card-row-item">
-                  <span className="study-row-title">Infinitive</span>
-                  <span className="study-row-val">{sessionVerbs[studyIndex].v1}</span>
-                </div>
-                <div className="study-card-row-item">
-                  <span className="study-row-title">Past Simple</span>
-                  <span className="study-row-val">{sessionVerbs[studyIndex].v2}</span>
-                </div>
-                <div className="study-card-row-item">
-                  <span className="study-row-title">Past Participle</span>
-                  <span className="study-row-val">{sessionVerbs[studyIndex].v3}</span>
-                </div>
-              </div>
-
-              {sessionVerbs[studyIndex].example && (
-                <div className="study-card-example-box">
-                  <div className="example-label">Misol uchun</div>
-                  <div className="example-sentences">
-                    {sessionVerbs[studyIndex].example.split('/').map((s, i) => {
-                      const trimmed = s.trim();
-                      let highlighted = trimmed;
-                      
-                      const escapeRegex = (str) => str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                      const forms = [
-                        ...sessionVerbs[studyIndex].v1.split('/'),
-                        ...sessionVerbs[studyIndex].v2.split('/'),
-                        ...sessionVerbs[studyIndex].v3.split('/')
-                      ].map(f => f.trim()).filter(Boolean);
-
-                      forms.sort((a,b) => b.length - a.length);
-
-                      for (const form of forms) {
-                        const regex = new RegExp(`\\b${escapeRegex(form)}\\b`, 'gi');
-                        highlighted = highlighted.replace(regex, `<strong>$&</strong>`);
-                      }
-
-                      return (
-                        <div 
-                          key={i} 
-                          className="example-sentence-item" 
-                          dangerouslySetInnerHTML={{ __html: highlighted }}
-                        />
-                      );
-                    })}
+              {!studyRevealed ? (
+                <button
+                  className="btn-reveal-study-card"
+                  onClick={() => setStudyRevealed(true)}
+                >
+                  <Eye size={16} strokeWidth={2.3} />
+                  Shakllarni eslab ko'ring, so'ng bosing
+                </button>
+              ) : (
+                <>
+                  {/* iOS-Style Grouped Rows */}
+                  <div className="study-card-rows-list">
+                    <div className="study-card-row-item">
+                      <span className="study-row-title">Infinitive</span>
+                      <span className="study-row-val">{sessionVerbs[studyIndex].v1}</span>
+                    </div>
+                    <div className="study-card-row-item">
+                      <span className="study-row-title">Past Simple</span>
+                      <span className="study-row-val">{sessionVerbs[studyIndex].v2}</span>
+                    </div>
+                    <div className="study-card-row-item">
+                      <span className="study-row-title">Past Participle</span>
+                      <span className="study-row-val">{sessionVerbs[studyIndex].v3}</span>
+                    </div>
                   </div>
-                </div>
-              )}
 
-              <button 
-                className="btn-speak-study-card" 
-                onClick={() => speakVerbs(sessionVerbs[studyIndex].v1, sessionVerbs[studyIndex].v2, sessionVerbs[studyIndex].v3)}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{marginRight: '6px'}}>
-                  <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 001.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 011.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 11-1.06-1.06 8.25 8.25 0 000-11.668.75.75 0 010-1.06z"/>
-                  <path d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z"/>
-                </svg>
-                Ovozli eshitish
-              </button>
+                  {sessionVerbs[studyIndex].example && (
+                    <div className="study-card-example-box">
+                      <div className="example-label">Misol uchun</div>
+                      <div className="example-sentences">
+                        {sessionVerbs[studyIndex].example.split('/').map((s, i) => {
+                          const trimmed = s.trim();
+                          let highlighted = trimmed;
+
+                          const escapeRegex = (str) => str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                          const forms = [
+                            ...sessionVerbs[studyIndex].v1.split('/'),
+                            ...sessionVerbs[studyIndex].v2.split('/'),
+                            ...sessionVerbs[studyIndex].v3.split('/')
+                          ].map(f => f.trim()).filter(Boolean);
+
+                          forms.sort((a,b) => b.length - a.length);
+
+                          for (const form of forms) {
+                            const regex = new RegExp(`\\b${escapeRegex(form)}\\b`, 'gi');
+                            highlighted = highlighted.replace(regex, `<strong>$&</strong>`);
+                          }
+
+                          return (
+                            <div
+                              key={i}
+                              className="example-sentence-item"
+                              dangerouslySetInnerHTML={{ __html: highlighted }}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  <button
+                    className="btn-speak-study-card"
+                    onClick={() => speakVerbs(sessionVerbs[studyIndex].v1, sessionVerbs[studyIndex].v2, sessionVerbs[studyIndex].v3)}
+                  >
+                    <Volume2 size={18} strokeWidth={2.2} />
+                    Ovozli eshitish
+                  </button>
+                </>
+              )}
             </motion.div>
           </AnimatePresence>
 

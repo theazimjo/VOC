@@ -5,9 +5,9 @@ import WordCard from './WordCard';
 import IosSpinner from '../common/IosSpinner';
 import './WordList.css';
 
-export default function WordList({ words, onEdit, onDelete, loading, readOnly }) {
+export default function WordList({ words, onEdit, onDelete, loading, readOnly, groupFn }) {
   const [search, setSearch] = useState('');
-  const [sortBy, setSortBy] = useState('date-desc');
+  const [sortBy, setSortBy] = useState(groupFn ? 'group' : 'date-desc');
 
   if (loading) {
     return (
@@ -34,6 +34,10 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly })
   );
 
   const sortedWords = [...filteredWords].sort((a, b) => {
+    if (sortBy === 'group' && groupFn) {
+      const diff = groupFn(a.word).id - groupFn(b.word).id;
+      return diff !== 0 ? diff : a.word.localeCompare(b.word);
+    }
     if (sortBy === 'date-desc') return new Date(b.addedAt || 0) - new Date(a.addedAt || 0);
     if (sortBy === 'date-asc') return new Date(a.addedAt || 0) - new Date(b.addedAt || 0);
     if (sortBy === 'alpha-asc') return a.word.localeCompare(b.word);
@@ -41,6 +45,8 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly })
     if (sortBy === 'mastery-desc') return (b.mastery || 0) - (a.mastery || 0);
     return 0;
   });
+
+  let lastGroupId = null;
 
   return (
     <div>
@@ -57,6 +63,7 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly })
         </div>
         <div className="word-list-filters">
           <select className="select" value={sortBy} onChange={e => setSortBy(e.target.value)}>
+            {groupFn && <option value="group">Guruh bo'yicha</option>}
             <option value="date-desc">Eng yangilari oldin</option>
             <option value="date-asc">Eng eskilar oldin</option>
             <option value="alpha-asc">Alifbo bo'yicha (A-Z)</option>
@@ -68,15 +75,32 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly })
 
       <div className="word-list-grid">
         <AnimatePresence>
-          {sortedWords.map(word => (
-            <WordCard 
-              key={word.id} 
-              word={word} 
-              onEdit={onEdit} 
-              onDelete={onDelete} 
-              readOnly={readOnly}
-            />
-          ))}
+          {sortedWords.map(word => {
+            let groupHeader = null;
+            if (sortBy === 'group' && groupFn) {
+              const group = groupFn(word.word);
+              if (group.id !== lastGroupId) {
+                lastGroupId = group.id;
+                groupHeader = (
+                  <div className="word-group-header" key={`group-${group.id}`}>
+                    <span className="word-group-title">{group.title}</span>
+                    <span className="word-group-pattern">{group.pattern}</span>
+                  </div>
+                );
+              }
+            }
+            return (
+              <div key={word.id} className="word-group-item-wrap">
+                {groupHeader}
+                <WordCard
+                  word={word}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  readOnly={readOnly}
+                />
+              </div>
+            );
+          })}
         </AnimatePresence>
       </div>
     </div>

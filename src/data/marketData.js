@@ -941,7 +941,7 @@ export const marketPacks = [
         partOfSpeech: "verb",
         notes: "threw | thrown",
         v1: "throw",
-        v2: "drew",
+        v2: "threw",
         v3: "thrown"
       },
       {
