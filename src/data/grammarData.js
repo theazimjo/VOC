@@ -3898,6 +3898,356 @@ His-tuyg'u, fikrlash va egalikni bildiruvchi fe'llar Past Continuous da emas, Pa
           { id: 19, situation: 'Talking about a picnic.', dialogue: 'A: What was everyone doing at the picnic?\nB: We ___ sandwiches and talking.', options: ['were eating', 'was eating', 'eat', 'ate'], correct: 0, explanation: 'Subject "we" takes "were eating".' },
           { id: 20, situation: 'Discussing homework.', dialogue: 'A: Why was your room so quiet?\nB: I ___ hard for my test.', options: ['was studying', 'were studying', 'study', 'studied'], correct: 0, explanation: 'Subject "I" takes "was studying".' }
         ]
+      },
+      {
+        id: 'future-simple',
+        title: 'Future Simple',
+        icon: '🔮',
+        guide: `## Future Simple (Oddiy kelasi zamon)
+
+Future Simple kelajakda sodir bo'ladigan harakatlar, bashoratlar, spontan qarorlar, va'dalar va takliflarni ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **Positive (+)**: Subject + will + Verb (base form)
+  - I **will help** you tomorrow.
+  - She **will call** you later.
+• **Negative (-)**: Subject + will not (won't) + Verb
+  - I **won't be** late.
+  - They **won't come** to the party.
+• **Question (?)**: Will + Subject + Verb?
+  - **Will you help** me?
+  - **What will** you **do** tomorrow?
+
+*(Barcha shaxslar uchun bir xil shakl ishlatiladi — will hech qachon o'zgarmaydi: I/You/He/She/It/We/They will...)*
+
+## 2. Ishlatilishi (Usage)
+1. **Spontan qarorlar (nutq paytida, o'ylab o'tirmasdan qabul qilingan)**:
+   - The phone is ringing. I **will answer** it.
+2. **Kelajak haqidagi bashoratlar (dalilsiz, shaxsiy fikr asosida)**:
+   - I think it **will rain** tomorrow.
+   - I'm sure she **will pass** the exam.
+3. **Va'dalar, takliflar va tahdidlar (Promises, offers, threats)**:
+   - I **will help** you with your homework. (va'da)
+   - **Will** you **carry** this bag for me? (taklif)
+4. **Kelajak haqidagi faktlar**:
+   - She **will be** 20 years old next year.
+
+## 3. Going to bilan qisqacha farqi
+• **Will** — spontan qaror yoki dalilsiz bashorat.
+• **Going to** — oldindan rejalashtirilgan qaror yoki aniq dalilga asoslangan bashorat.
+  - Look at those clouds! It **is going to** rain. (dalil bor — bulutlar)
+  - I think it **will** rain later. (shunchaki shaxsiy fikr)
+
+## 4. Signal so'zlar (Time Expressions)
+• tomorrow, next week/month/year, soon, in the future
+• I think, I'm sure, probably, perhaps
+• someday, one day`,
+        questions: [
+          { id: 1, text: 'I think it ___ rain tomorrow.', options: ['will', 'is', 'was', 'would'], correct: 0, explanation: 'A prediction based on personal opinion uses "will".' },
+          { id: 2, text: '___ you help me carry this bag?', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'Offers are often made with "Will you...?".' },
+          { id: 3, text: 'She ___ be 18 next month.', options: ['will', 'is', 'was', 'were'], correct: 0, explanation: 'A future fact uses "will be".' },
+          { id: 4, text: 'The phone is ringing. I ___ answer it.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'A spontaneous decision made at the moment of speaking uses "will".' },
+          { id: 5, text: "They ___ not come to the party tonight.", options: ['will', 'do', 'are', 'did'], correct: 0, explanation: "Future negative uses 'will not' (won't)." },
+          { id: 6, text: 'I ___ help you with your homework, I promise.', options: ['will', 'am', 'do', 'did'], correct: 0, explanation: 'A promise is expressed with "will".' },
+          { id: 7, text: 'What time ___ the meeting start?', options: ['will', 'does', 'is', 'did'], correct: 0, explanation: 'A future question uses "will".' },
+          { id: 8, text: "I'm sure they ___ win the match.", options: ['will', 'are', 'do', 'did'], correct: 0, explanation: 'A confident prediction uses "will".' },
+          { id: 9, text: 'We ___ probably arrive late.', options: ['will', 'are', 'do', 'did'], correct: 0, explanation: 'An uncertain future action uses "will".' },
+          { id: 10, text: 'He ___ not be at the office tomorrow.', options: ['will', 'does', 'is', 'did'], correct: 0, explanation: 'Future negative statements use "will not".' },
+          { id: 11, text: '___ she call you when she arrives?', options: ['Will', 'Does', 'Is', 'Did'], correct: 0, explanation: 'Future questions start with "Will".' },
+          { id: 12, text: 'I ___ be 25 years old next year.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'A future fact uses "will be".' },
+          { id: 13, text: "Don't worry, I ___ never tell anyone.", options: ['will', 'am', 'do', 'did'], correct: 0, explanation: 'A promise uses "will".' },
+          { id: 14, text: 'I think computers ___ be much faster in ten years.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'A prediction about the future uses "will".' },
+          { id: 15, text: '___ you marry me?', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'A formal proposal is expressed with "Will".' },
+          { id: 16, text: "She ___ not pass the exam if she doesn't study.", options: ['will', 'does', 'is', 'did'], correct: 0, explanation: 'A future consequence uses "will not".' },
+          { id: 17, text: 'Perhaps it ___ snow this winter.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: '"Perhaps" pairs with "will" for an uncertain prediction.' },
+          { id: 18, text: 'We ___ meet again someday.', options: ['will', 'are', 'do', 'did'], correct: 0, explanation: 'The time expression "someday" pairs with "will".' },
+          { id: 19, text: '___ it be cold tomorrow?', options: ['Will', 'Is', 'Does', 'Did'], correct: 0, explanation: 'Future questions start with "Will".' },
+          { id: 20, text: "I ___ not forget your birthday.", options: ['will', 'do', 'am', 'did'], correct: 0, explanation: "A promise's negative form uses 'will not' (won't)." }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'I ___ (help) you tomorrow.', options: ['will help', 'help', 'helps', 'helped'], correct: 0, explanation: 'Future Simple: "will" + base verb.' },
+          { id: 2, text: 'She ___ (call) you later.', options: ['will call', 'calls', 'call', 'called'], correct: 0, explanation: 'Future Simple: "will" + base verb.' },
+          { id: 3, text: '___ (will) it rain tomorrow?', options: ['Will', 'Do', 'Does', 'Is'], correct: 0, explanation: 'Future questions start with "Will".' },
+          { id: 4, text: 'They ___ (not / arrive) on time.', options: ['will not arrive', 'will not arrives', 'do not arrive', 'not will arrive'], correct: 0, explanation: 'Future negative: "will not" + base verb.' },
+          { id: 5, text: 'We ___ (visit) our grandparents next weekend.', options: ['will visit', 'visits', 'visit', 'visited'], correct: 0, explanation: 'Future Simple: "will" + base verb.' },
+          { id: 6, text: 'He ___ (be) a doctor one day.', options: ['will be', 'is', 'was', 'will is'], correct: 0, explanation: 'Future Simple of "be": "will be".' },
+          { id: 7, text: 'I promise I ___ (not / forget) your birthday.', options: ['will not forget', 'will not forgets', 'do not forget', 'not will forget'], correct: 0, explanation: 'Future negative: "will not" + base verb.' },
+          { id: 8, text: 'What ___ (you / do) after the exam?', options: ['will you do', 'will you does', 'do you will', 'you will do'], correct: 0, explanation: 'Future question order: "will" + subject + base verb.' },
+          { id: 9, text: 'The train ___ (leave) at 6 PM.', options: ['will leave', 'leaves', 'leave', 'left'], correct: 0, explanation: 'Future Simple: "will" + base verb.' },
+          { id: 10, text: '___ (they / win) the championship?', options: ['Will they win', 'Do they win', 'Will they wins', 'They will win'], correct: 0, explanation: 'Future question order: "Will" + subject + base verb.' },
+          { id: 11, text: 'I ___ (not / be) late again.', options: ['will not be', 'will not is', 'do not be', 'not will be'], correct: 0, explanation: 'Future negative of "be": "will not be".' },
+          { id: 12, text: 'She ___ (graduate) next summer.', options: ['will graduate', 'graduates', 'graduate', 'graduated'], correct: 0, explanation: 'Future Simple: "will" + base verb.' },
+          { id: 13, text: 'I think it ___ (be) sunny tomorrow.', options: ['will be', 'is', 'was', 'will is'], correct: 0, explanation: 'A future prediction uses "will be".' },
+          { id: 14, text: 'We ___ (not / have) enough time.', options: ['will not have', 'will not has', 'do not have', 'not will have'], correct: 0, explanation: 'Future negative: "will not" + base verb.' },
+          { id: 15, text: '___ (you / marry) him?', options: ['Will you marry', 'Do you marry', 'Will you marries', 'You will marry'], correct: 0, explanation: 'Future question order: "Will" + subject + base verb.' },
+          { id: 16, text: 'My father ___ (retire) next year.', options: ['will retire', 'retires', 'retire', 'retired'], correct: 0, explanation: 'Future Simple: "will" + base verb.' },
+          { id: 17, text: 'I ___ (call) you as soon as I arrive.', options: ['will call', 'calls', 'call', 'called'], correct: 0, explanation: 'Future Simple: "will" + base verb.' },
+          { id: 18, text: 'They ___ (not / forget) this day.', options: ['will not forget', 'will not forgets', 'do not forget', 'not will forget'], correct: 0, explanation: 'Future negative: "will not" + base verb.' },
+          { id: 19, text: '___ (the shop / open) on Sunday?', options: ['Will the shop open', 'Does the shop open', 'Will the shop opens', 'The shop will open'], correct: 0, explanation: 'Future question order: "Will" + subject + base verb.' },
+          { id: 20, text: 'One day I ___ (be) famous.', options: ['will be', 'am', 'was', 'will is'], correct: 0, explanation: 'A prediction about the future uses "will be".' }
+        ],
+        scrambled: [
+          { id: 1, words: ['will', 'I', 'you', 'help'], answer: 'I will help you', explanation: 'Subject + will + verb + object.' },
+          { id: 2, words: ['tomorrow', 'rain', 'will', 'it'], answer: 'it will rain tomorrow', explanation: 'Subject + will + verb + time.' },
+          { id: 3, words: ['will', 'she', 'call', 'you', '?'], answer: 'will she call you', explanation: 'Will + subject + verb + object.' },
+          { id: 4, words: ['not', 'will', 'they', 'come'], answer: 'they will not come', explanation: 'Subject + will not + verb.' },
+          { id: 5, words: ['carry', 'you', 'will', 'this', 'bag', '?'], answer: 'will you carry this bag', explanation: 'Will + subject + verb + object (an offer).' },
+          { id: 6, words: ['be', 'I', 'will', '20', 'next', 'year'], answer: 'I will be 20 next year', explanation: 'Subject + will be + complement + time.' },
+          { id: 7, words: ['start', 'will', 'when', 'the', 'meeting', '?'], answer: 'when will the meeting start', explanation: 'Question word + will + subject + verb.' },
+          { id: 8, words: ['probably', 'we', 'late', 'will', 'arrive'], answer: 'we will probably arrive late', explanation: 'Subject + will + adverb + verb + adjective.' },
+          { id: 9, words: ['not', 'be', 'he', 'will', 'here'], answer: 'he will not be here', explanation: 'Subject + will not be + place.' },
+          { id: 10, words: ['win', 'sure', "I'm", 'will', 'they'], answer: "I'm sure they will win", explanation: 'Confidence phrase + subject + will + verb.' },
+          { id: 11, words: ['snow', 'perhaps', 'will', 'it'], answer: 'perhaps it will snow', explanation: '"Perhaps" + subject + will + verb.' },
+          { id: 12, words: ['someday', 'meet', 'we', 'will', 'again'], answer: 'we will meet again someday', explanation: 'Subject + will + verb + adverb + time.' },
+          { id: 13, words: ['cold', 'tomorrow', 'will', 'it', 'be', '?'], answer: 'will it be cold tomorrow', explanation: 'Will + subject + be + adjective + time.' },
+          { id: 14, words: ['forget', 'birthday', 'not', 'will', 'I', 'your'], answer: 'I will not forget your birthday', explanation: 'Subject + will not + verb + object.' },
+          { id: 15, words: ['answer', 'will', 'it', 'I'], answer: 'I will answer it', explanation: 'Subject + will + verb + object (spontaneous decision).' },
+          { id: 16, words: ['pass', 'the', 'exam', 'will', 'she'], answer: 'she will pass the exam', explanation: 'Subject + will + verb + object.' },
+          { id: 17, words: ['marry', 'will', 'me', 'you', '?'], answer: 'will you marry me', explanation: 'Will + subject + verb + object (a proposal).' },
+          { id: 18, words: ['faster', 'be', 'will', 'computers', 'much'], answer: 'computers will be much faster', explanation: 'Subject + will be + adverb + adjective.' },
+          { id: 19, words: ['office', 'not', 'be', 'at', 'will', 'the', 'she'], answer: 'she will not be at the office', explanation: 'Subject + will not be + place.' },
+          { id: 20, words: ['open', 'the', 'will', 'shop', 'Sunday', 'on', '?'], answer: 'will the shop open on Sunday', explanation: 'Will + subject + verb + time.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'She will goes to the party.', options: ['She', 'will goes', 'to the party', 'No error'], correct: 1, wrongPart: 'will goes', correction: 'will go', explanation: 'After "will", use the base form: "will go", not "will goes".' },
+          { id: 2, text: 'I will to help you.', options: ['I', 'will to', 'help you', 'No error'], correct: 1, wrongPart: 'will to', correction: 'will', explanation: '"will" is followed directly by the base verb, with no "to": "will help".' },
+          { id: 3, text: 'They wills arrive tomorrow.', options: ['They', 'wills', 'arrive tomorrow', 'No error'], correct: 1, wrongPart: 'wills', correction: 'will', explanation: '"will" never takes "-s", regardless of the subject.' },
+          { id: 4, text: 'He will not comes to the meeting.', options: ['He', 'will not', 'comes', 'to the meeting'], correct: 2, wrongPart: 'comes', correction: 'come', explanation: 'After "will not", use the base form: "come".' },
+          { id: 5, text: 'You will helping me tomorrow.', options: ['You', 'will', 'helping', 'me tomorrow'], correct: 2, wrongPart: 'helping', correction: 'help', explanation: '"will" is followed by the base verb, not the "-ing" form.' },
+          { id: 6, text: 'Will she calls you later?', options: ['Will', 'she', 'calls', 'you later'], correct: 2, wrongPart: 'calls', correction: 'call', explanation: 'After "Will + subject", use the base verb: "call".' },
+          { id: 7, text: 'I will going to call you tomorrow.', options: ['I', 'will going to', 'call you', 'tomorrow'], correct: 1, wrongPart: 'will going to', correction: 'will', explanation: 'Do not mix "will" and "going to": just use "will call".' },
+          { id: 8, text: 'She go will to university next year.', options: ['She', 'go will', 'to university', 'next year'], correct: 1, wrongPart: 'go will', correction: 'will go', explanation: 'Word order is subject + will + base verb: "will go".' },
+          { id: 9, text: 'Do you will help me?', options: ['Do you will', 'help', 'me', 'No error'], correct: 0, wrongPart: 'Do you will', correction: 'Will you', explanation: 'Future questions start with "Will you", not "Do you will".' },
+          { id: 10, text: "I don't will forget you.", options: ["I don't will", 'forget', 'you', 'No error'], correct: 0, wrongPart: "I don't will", correction: "I won't", explanation: "The correct future negative is 'won't', not 'don't will'." },
+          { id: 11, text: 'What will happens tomorrow?', options: ['What', 'will happens', 'tomorrow', 'No error'], correct: 1, wrongPart: 'will happens', correction: 'will happen', explanation: 'After "will", use the base form: "happen".' },
+          { id: 12, text: 'They will not to come.', options: ['They', 'will not to', 'come', 'No error'], correct: 1, wrongPart: 'will not to', correction: 'will not', explanation: 'There is no "to" after "will not": "will not come".' },
+          { id: 13, text: 'He will be helps you later.', options: ['He', 'will be', 'helps', 'you later'], correct: 2, wrongPart: 'helps', correction: 'help', explanation: 'Future Simple uses "will" + base verb: the correct form is "will help", not "will be helps".' },
+          { id: 14, text: 'Will you be able helping me?', options: ['Will you', 'be able', 'helping', 'me'], correct: 2, wrongPart: 'helping', correction: 'to help', explanation: '"be able" is followed by "to + base verb": "be able to help".' },
+          { id: 15, text: 'We will meets you at the station.', options: ['We', 'will meets', 'you', 'at the station'], correct: 1, wrongPart: 'will meets', correction: 'will meet', explanation: 'After "will", use the base form: "meet".' },
+          { id: 16, text: 'I will not to forget this day.', options: ['I', 'will not to', 'forget', 'this day'], correct: 1, wrongPart: 'will not to', correction: 'will not', explanation: 'There is no "to" after "will not": "will not forget".' },
+          { id: 17, text: 'Will they arrives on time?', options: ['Will', 'they', 'arrives', 'on time'], correct: 2, wrongPart: 'arrives', correction: 'arrive', explanation: 'After "Will + subject", use the base verb: "arrive".' },
+          { id: 18, text: 'She will graduates next summer.', options: ['She', 'will graduates', 'next summer', 'No error'], correct: 1, wrongPart: 'will graduates', correction: 'will graduate', explanation: 'After "will", use the base form: "graduate".' },
+          { id: 19, text: 'Perhaps it will snows tonight.', options: ['Perhaps', 'it', 'will snows', 'tonight'], correct: 2, wrongPart: 'will snows', correction: 'will snow', explanation: 'After "will", use the base form: "snow".' },
+          { id: 20, text: 'My father will retires next year.', options: ['My father', 'will retires', 'next year', 'No error'], correct: 1, wrongPart: 'will retires', correction: 'will retire', explanation: 'After "will", use the base form: "retire".' }
+        ],
+        transform: [
+          { id: 1, text: 'Make negative: "I will help you."', options: ['I will not help you.', 'I not will help you.', "I don't will help you.", "I won't helps you."], correct: 0, explanation: 'Add "not" after "will": "I will not help you".' },
+          { id: 2, text: 'Make question: "She will call you."', options: ['Will she call you?', 'Does she will call you?', 'Will she calls you?', 'She will call you?'], correct: 0, explanation: 'Move "will" to the front: "Will she call you?".' },
+          { id: 3, text: 'Transform to Future Simple: "It rains a lot." (prediction for next week)', options: ['It will rain a lot.', 'It rains a lot.', 'It is raining a lot.', 'It rained a lot.'], correct: 0, explanation: 'Future Simple: "It will rain a lot".' },
+          { id: 4, text: 'Make negative: "They will come to the party."', options: ["They won't come to the party.", "They don't will come to the party.", 'They will not comes to the party.', "They won't comes to the party."], correct: 0, explanation: "The short form 'won't' means 'will not'." },
+          { id: 5, text: 'Make question: "You will be at home tonight."', options: ['Will you be at home tonight?', 'Do you will be at home tonight?', 'Will you being at home tonight?', 'You will be at home tonight?'], correct: 0, explanation: 'Move "will" to the front: "Will you be at home tonight?".' },
+          { id: 6, text: 'Transform to Future Simple: "He works hard." (prediction)', options: ['He will work hard.', 'He works hard.', 'He is working hard.', 'He worked hard.'], correct: 0, explanation: 'Future Simple: "He will work hard".' },
+          { id: 7, text: 'Make negative: "We will be late."', options: ["We won't be late.", "We don't will be late.", 'We will not being late.', "We aren't will be late."], correct: 0, explanation: "The negative form is 'will not' (won't) + base verb." },
+          { id: 8, text: 'Make question: "It will snow tomorrow."', options: ['Will it snow tomorrow?', 'Does it will snow tomorrow?', 'Will it snows tomorrow?', 'It will snow tomorrow?'], correct: 0, explanation: 'Move "will" to the front: "Will it snow tomorrow?".' },
+          { id: 9, text: 'Transform to Future Simple: "I visit my grandmother." (next weekend)', options: ['I will visit my grandmother.', 'I visit my grandmother.', 'I am visiting my grandmother.', 'I visited my grandmother.'], correct: 0, explanation: 'Future Simple: "I will visit my grandmother".' },
+          { id: 10, text: 'Make negative: "She will pass the exam."', options: ["She won't pass the exam.", "She doesn't will pass the exam.", 'She will not passes the exam.', "She isn't will pass the exam."], correct: 0, explanation: "Negative form: 'will not' (won't) + base verb." },
+          { id: 11, text: 'Make question: "They will win the match."', options: ['Will they win the match?', 'Do they will win the match?', 'Will they wins the match?', 'They will win the match?'], correct: 0, explanation: 'Move "will" to the front: "Will they win the match?".' },
+          { id: 12, text: 'Transform to Future Simple: "The train leaves at 6." (prediction / schedule)', options: ['The train will leave at 6.', 'The train leaves at 6.', 'The train is leaving at 6.', 'The train left at 6.'], correct: 0, explanation: 'Future Simple: "The train will leave at 6".' },
+          { id: 13, text: 'Make negative: "I will forget this day."', options: ["I won't forget this day.", "I don't will forget this day.", 'I will not forgets this day.', "I amn't will forget this day."], correct: 0, explanation: "Negative form: 'will not' (won't) + base verb." },
+          { id: 14, text: 'Make question: "He will be a doctor."', options: ['Will he be a doctor?', 'Does he will be a doctor?', 'Will he is a doctor?', 'He will be a doctor?'], correct: 0, explanation: 'Move "will" to the front: "Will he be a doctor?".' },
+          { id: 15, text: 'Transform to Future Simple: "We meet again." (someday)', options: ['We will meet again.', 'We meet again.', 'We are meeting again.', 'We met again.'], correct: 0, explanation: 'Future Simple: "We will meet again".' },
+          { id: 16, text: 'Make negative: "You will need a jacket."', options: ["You won't need a jacket.", "You don't will need a jacket.", 'You will not needs a jacket.', "You aren't will need a jacket."], correct: 0, explanation: "Negative form: 'will not' (won't) + base verb." },
+          { id: 17, text: 'Make question: "The shop will open on Sunday."', options: ['Will the shop open on Sunday?', 'Does the shop will open on Sunday?', 'Will the shop opens on Sunday?', 'The shop will open on Sunday?'], correct: 0, explanation: 'Move "will" to the front: "Will the shop open on Sunday?".' },
+          { id: 18, text: 'Transform to Future Simple: "My father retires." (next year)', options: ['My father will retire.', 'My father retires.', 'My father is retiring.', 'My father retired.'], correct: 0, explanation: 'Future Simple: "My father will retire".' },
+          { id: 19, text: 'Make negative: "It will be cold tomorrow."', options: ["It won't be cold tomorrow.", "It doesn't will be cold tomorrow.", 'It will not being cold tomorrow.', "It isn't will be cold tomorrow."], correct: 0, explanation: "Negative form: 'will not' (won't) + base verb." },
+          { id: 20, text: 'Make question: "You will marry him."', options: ['Will you marry him?', 'Do you will marry him?', 'Will you marries him?', 'You will marry him?'], correct: 0, explanation: 'Move "will" to the front: "Will you marry him?".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Making a spontaneous decision.', dialogue: "A: The phone is ringing.\nB: I ___ answer it.", options: ['will', 'am', 'do', 'was'], correct: 0, explanation: 'A decision made at the moment of speaking uses "will".' },
+          { id: 2, situation: "Talking about tomorrow's weather.", dialogue: "A: What's the weather like tomorrow?\nB: I think it ___ rain.", options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'A prediction based on opinion uses "will".' },
+          { id: 3, situation: 'Making a promise.', dialogue: "A: Can I trust you?\nB: Yes, I ___ never lie to you.", options: ['will', 'am', 'do', 'did'], correct: 0, explanation: 'Promises are expressed with "will".' },
+          { id: 4, situation: 'Offering help.', dialogue: 'A: This bag is so heavy.\nB: ___ I carry it for you?', options: ['Will', 'Do', 'Am', 'Did'], correct: 0, explanation: 'Offers are made with "Will I...?" or "Will you...?".' },
+          { id: 5, situation: 'Discussing future plans.', dialogue: 'A: Where will you be next year?\nB: I ___ be in London.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'Subject "I" takes "will be".' },
+          { id: 6, situation: 'Talking about an exam.', dialogue: 'A: Are you nervous about the test?\nB: A little. I hope I ___ pass it.', options: ['will', 'am', 'do', 'did'], correct: 0, explanation: 'A hope about the future uses "will".' },
+          { id: 7, situation: "Discussing a friend's career.", dialogue: 'A: What will she do after university?\nB: She ___ become a teacher.', options: ['will', 'is', 'does', 'was'], correct: 0, explanation: 'Subject "she" takes "will become".' },
+          { id: 8, situation: 'Talking about the future of technology.', dialogue: 'A: How will technology change?\nB: Computers ___ become much faster.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'A prediction about the future uses "will".' },
+          { id: 9, situation: 'Making a joking threat.', dialogue: 'A: You ate my sandwich!\nB: I ___ never forgive you!', options: ['will', 'am', 'do', 'did'], correct: 0, explanation: 'Strong statements about the future use "will".' },
+          { id: 10, situation: 'Discussing a meeting time.', dialogue: 'A: What time ___ the meeting start?\nB: At 9 AM.', options: ['will', 'does', 'is', 'did'], correct: 0, explanation: 'Future questions use "will".' },
+          { id: 11, situation: 'Talking about the train schedule.', dialogue: 'A: When ___ the train leave?\nB: It will leave at 6 PM.', options: ['will', 'does', 'is', 'did'], correct: 0, explanation: 'Future questions use "will".' },
+          { id: 12, situation: 'Talking about marriage plans.', dialogue: 'A: Are you two getting married?\nB: Yes, we ___ get married next spring.', options: ['will', 'are', 'do', 'did'], correct: 0, explanation: 'Subject "we" takes "will get".' },
+          { id: 13, situation: 'Discussing the future of the planet.', dialogue: 'A: What do scientists think?\nB: They think the climate ___ change a lot.', options: ['will', 'is', 'does', 'was'], correct: 0, explanation: 'A scientific prediction uses "will".' },
+          { id: 14, situation: "Talking about a friend's birthday.", dialogue: 'A: Will you remember my birthday?\nB: Of course, I ___ never forget it.', options: ['will', 'am', 'do', 'did'], correct: 0, explanation: 'Subject "I" takes "will never forget".' },
+          { id: 15, situation: 'Asking about a delivery.', dialogue: 'A: When will the package arrive?\nB: It ___ arrive tomorrow.', options: ['will', 'is', 'does', 'was'], correct: 0, explanation: 'Subject "it" takes "will arrive".' },
+          { id: 16, situation: 'Discussing retirement.', dialogue: 'A: When does your father retire?\nB: He ___ retire next year.', options: ['will', 'is', 'does', 'was'], correct: 0, explanation: 'Subject "he" takes "will retire".' },
+          { id: 17, situation: 'Talking about a football match.', dialogue: "A: Who do you think will win?\nB: I'm sure our team ___ win.", options: ['will', 'is', 'does', 'was'], correct: 0, explanation: 'A confident prediction uses "will".' },
+          { id: 18, situation: 'Discussing a house purchase.', dialogue: 'A: Will you buy a new house?\nB: Yes, we ___ buy one next year.', options: ['will', 'are', 'do', 'did'], correct: 0, explanation: 'Subject "we" takes "will buy".' },
+          { id: 19, situation: 'Talking about graduation.', dialogue: 'A: When does she graduate?\nB: She ___ graduate in June.', options: ['will', 'is', 'does', 'was'], correct: 0, explanation: 'Subject "she" takes "will graduate".' },
+          { id: 20, situation: 'Making a farewell promise.', dialogue: 'A: Will you write to me?\nB: Yes, I ___ write every week.', options: ['will', 'am', 'do', 'did'], correct: 0, explanation: 'Subject "I" takes "will write".' }
+        ]
+      },
+      {
+        id: 'future-continuous',
+        title: 'Future Continuous',
+        icon: '🌠',
+        guide: `## Future Continuous (Kelasi davomli zamon)
+
+Future Continuous kelajakda muayyan bir vaqtda davom etib turgan harakatni yoki kelajakdagi rejalashtirilgan, davom etadigan jarayonni ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **Positive (+)**: Subject + will be + Verb-ing
+  - I **will be sleeping** at 11 PM tonight.
+  - They **will be traveling** this time next week.
+• **Negative (-)**: Subject + will not (won't) be + Verb-ing
+  - She **won't be working** tomorrow.
+  - We **won't be waiting** for you.
+• **Question (?)**: Will + Subject + be + Verb-ing?
+  - **Will you be using** the car tonight?
+  - **What will** she **be doing** at 9 AM?
+
+*(Barcha shaxslar uchun bir xil shakl: will be + Verb-ing — will hech qachon o'zgarmaydi)*
+
+## 2. Ishlatilishi (Usage)
+1. **Kelajakdagi muayyan vaqtda davom etayotgan harakat**:
+   - At 10 PM tomorrow, I **will be sleeping**.
+2. **Kelajakda bir vaqtning o'zida davom etadigan ikkita harakat (parallel)**:
+   - While I **am cooking**, she **will be setting** the table.
+3. **Odobli so'rov (kimningdir kelajakdagi rejasi haqida, uni bezovta qilmasdan)**:
+   - **Will** you **be using** the printer this afternoon?
+4. **Kelajakda rejalashtirilgan, kutilayotgan jarayon (interruptionsiz)**:
+   - This time next year, I **will be studying** at university.
+
+## 3. Future Simple bilan farqi
+• **Future Simple (will + base)** — bitta aniq, tugallangan kelajak harakati.
+  - I **will call** you tomorrow. (bitta qisqa harakat)
+• **Future Continuous (will be + Verb-ing)** — kelajakdagi muayyan vaqtda davom etayotgan jarayon.
+  - At 5 PM tomorrow, I **will be traveling** to Samarkand. (o'sha payt davomida sayohat qilyapman)
+
+## 4. Signal so'zlar (Time Expressions)
+• at this time tomorrow, at 8 o'clock next Monday
+• this time next year/week
+• while, at that moment (kelajakka nisbatan)`,
+        questions: [
+          { id: 1, text: 'At 10 PM tonight, I ___ sleeping.', options: ['will be', 'am', 'was', 'will'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 2, text: 'This time tomorrow, we ___ flying to Paris.', options: ['will be', 'are', 'were', 'will'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 3, text: '___ you be using the car tonight?', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'A polite future question uses "Will you be...?".' },
+          { id: 4, text: 'She ___ not be working at 6 PM.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'Future Continuous negative uses "will not be".' },
+          { id: 5, text: 'While I am cooking, she ___ be setting the table.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'Parallel future actions use "will be" + Verb-ing.' },
+          { id: 6, text: 'At this time next year, I ___ studying at university.', options: ['will be', 'am', 'was', 'will'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 7, text: 'What ___ you be doing at 9 AM tomorrow?', options: ['will', 'do', 'are', 'did'], correct: 0, explanation: 'Future Continuous question: "will" + subject + "be" + Verb-ing.' },
+          { id: 8, text: 'They ___ be waiting for us at the airport.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 9, text: 'He ___ not be sleeping at midnight; he works nights.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'Future Continuous negative: "will not be".' },
+          { id: 10, text: '___ she be attending the conference next week?', options: ['Will', 'Does', 'Is', 'Did'], correct: 0, explanation: 'Future Continuous questions begin with "Will".' },
+          { id: 11, text: "At 8 o'clock tomorrow morning, we ___ having breakfast.", options: ['will be', 'are', 'were', 'will'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 12, text: 'This time next week, I ___ lying on a beach.', options: ['will be', 'am', 'was', 'will'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 13, text: 'The children ___ be sleeping when we arrive.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 14, text: '___ you be needing this book tomorrow?', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'Polite future question: "Will you be...?".' },
+          { id: 15, text: 'I ___ not be using my laptop this evening, you can borrow it.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous negative: "will not be".' },
+          { id: 16, text: 'At noon tomorrow, the plane ___ crossing the ocean.', options: ['will be', 'is', 'was', 'will'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 17, text: 'We ___ be discussing the budget at 3 PM.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 18, text: 'What ___ they be doing this time next month?', options: ['will', 'do', 'are', 'did'], correct: 0, explanation: 'Future Continuous question: "will" + subject + "be" + Verb-ing.' },
+          { id: 19, text: 'She ___ be wearing a red dress at the party.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing.' },
+          { id: 20, text: 'At 7 AM tomorrow, I ___ not be sleeping anymore.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous negative: "will not be".' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'I ___ (sleep) at 11 PM tonight.', options: ['will be sleeping', 'will be sleep', 'am sleeping', 'was sleeping'], correct: 0, explanation: 'Future Continuous: "will be" + Verb-ing: "will be sleeping".' },
+          { id: 2, text: 'They ___ (travel) this time next week.', options: ['will be traveling', 'will be travel', 'are traveling', 'were traveling'], correct: 0, explanation: 'Future Continuous: "will be traveling".' },
+          { id: 3, text: '___ (will) you be using the printer this afternoon?', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'Future Continuous questions start with "Will".' },
+          { id: 4, text: 'She ___ (not / work) tomorrow.', options: ['will not be working', 'will not be work', "won't working", 'is not working'], correct: 0, explanation: 'Future Continuous negative: "will not be" + Verb-ing.' },
+          { id: 5, text: 'We ___ (set) the table while you cook.', options: ['will be setting', 'will be set', 'are setting', 'were setting'], correct: 0, explanation: 'Future Continuous: "will be setting".' },
+          { id: 6, text: 'At 10 PM, I ___ (study) for my exam.', options: ['will be studying', 'will be study', 'am studying', 'was studying'], correct: 0, explanation: 'Future Continuous: "will be studying".' },
+          { id: 7, text: 'What ___ (you / do) at 9 AM tomorrow?', options: ['will you be doing', 'will you be do', 'are you doing', 'do you be doing'], correct: 0, explanation: 'Future Continuous question order: "will" + subject + "be" + Verb-ing.' },
+          { id: 8, text: 'They ___ (wait) for us at the airport.', options: ['will be waiting', 'will be wait', 'are waiting', 'were waiting'], correct: 0, explanation: 'Future Continuous: "will be waiting".' },
+          { id: 9, text: 'He ___ (not / sleep) at midnight.', options: ['will not be sleeping', 'will not be sleep', "won't sleeping", 'is not sleeping'], correct: 0, explanation: 'Future Continuous negative: "will not be" + Verb-ing.' },
+          { id: 10, text: '___ (she / attend) the conference next week?', options: ['Will she be attending', 'Does she be attending', 'Will she attending', 'She will be attending'], correct: 0, explanation: 'Future Continuous question order: "Will" + subject + "be" + Verb-ing.' },
+          { id: 11, text: 'At 8 AM tomorrow, we ___ (have) breakfast.', options: ['will be having', 'will be have', 'are having', 'were having'], correct: 0, explanation: 'Future Continuous: "will be having".' },
+          { id: 12, text: 'This time next week, I ___ (lie) on a beach.', options: ['will be lying', 'will be lieing', 'am lying', 'was lying'], correct: 0, explanation: 'Change "ie" to "y" before "-ing": "lying".' },
+          { id: 13, text: 'The children ___ (sleep) when we arrive.', options: ['will be sleeping', 'will be sleep', 'are sleeping', 'were sleeping'], correct: 0, explanation: 'Future Continuous: "will be sleeping".' },
+          { id: 14, text: '___ (you / need) this book tomorrow?', options: ['Will you be needing', 'Do you be needing', 'Will you needing', 'You will be needing'], correct: 0, explanation: 'Future Continuous question order: "Will" + subject + "be" + Verb-ing.' },
+          { id: 15, text: 'I ___ (not / use) my laptop this evening.', options: ['will not be using', 'will not be use', "won't using", 'am not using'], correct: 0, explanation: 'Future Continuous negative: "will not be" + Verb-ing.' },
+          { id: 16, text: 'At noon, the plane ___ (cross) the ocean.', options: ['will be crossing', 'will be cross', 'is crossing', 'was crossing'], correct: 0, explanation: 'Future Continuous: "will be crossing".' },
+          { id: 17, text: 'We ___ (discuss) the budget at 3 PM.', options: ['will be discussing', 'will be discuss', 'are discussing', 'were discussing'], correct: 0, explanation: 'Future Continuous: "will be discussing".' },
+          { id: 18, text: 'What ___ (they / do) this time next month?', options: ['will they be doing', 'will they be do', 'are they doing', 'do they be doing'], correct: 0, explanation: 'Future Continuous question order: "will" + subject + "be" + Verb-ing.' },
+          { id: 19, text: 'She ___ (wear) a red dress at the party.', options: ['will be wearing', 'will be wear', 'is wearing', 'was wearing'], correct: 0, explanation: 'Future Continuous: "will be wearing".' },
+          { id: 20, text: 'I ___ (not / sleep) anymore at 7 AM.', options: ['will not be sleeping', 'will not be sleep', "won't sleeping", 'am not sleeping'], correct: 0, explanation: 'Future Continuous negative: "will not be" + Verb-ing.' }
+        ],
+        scrambled: [
+          { id: 1, words: ['be', 'I', 'will', 'sleeping', 'tonight'], answer: 'I will be sleeping tonight', explanation: 'Subject + will be + Verb-ing + time.' },
+          { id: 2, words: ['using', 'you', 'will', 'be', 'car', 'the', '?'], answer: 'will you be using the car', explanation: 'Will + subject + be + Verb-ing + object.' },
+          { id: 3, words: ['not', 'she', 'will', 'be', 'working'], answer: 'she will not be working', explanation: 'Subject + will not be + Verb-ing.' },
+          { id: 4, words: ['traveling', 'we', 'will', 'be', 'tomorrow'], answer: 'we will be traveling tomorrow', explanation: 'Subject + will be + Verb-ing + time.' },
+          { id: 5, words: ['doing', 'you', 'will', 'be', 'what', '?'], answer: 'what will you be doing', explanation: 'Question word + will + subject + be + Verb-ing.' },
+          { id: 6, words: ['for', 'waiting', 'they', 'be', 'us', 'will'], answer: 'they will be waiting for us', explanation: 'Subject + will be + Verb-ing + object.' },
+          { id: 7, words: ['sleeping', 'not', 'he', 'be', 'will', 'midnight', 'at'], answer: 'he will not be sleeping at midnight', explanation: 'Subject + will not be + Verb-ing + time.' },
+          { id: 8, words: ['attending', 'she', 'will', 'be', 'the', 'conference', '?'], answer: 'will she be attending the conference', explanation: 'Will + subject + be + Verb-ing + object.' },
+          { id: 9, words: ['breakfast', 'having', 'we', 'be', 'will'], answer: 'we will be having breakfast', explanation: 'Subject + will be + Verb-ing + object.' },
+          { id: 10, words: ['beach', 'lying', 'be', 'I', 'a', 'on', 'will'], answer: 'I will be lying on a beach', explanation: 'Subject + will be + Verb-ing + place.' },
+          { id: 11, words: ['sleeping', 'the', 'be', 'children', 'will'], answer: 'the children will be sleeping', explanation: 'Subject + will be + Verb-ing.' },
+          { id: 12, words: ['book', 'you', 'this', 'needing', 'be', 'will', '?'], answer: 'will you be needing this book', explanation: 'Will + subject + be + Verb-ing + object.' },
+          { id: 13, words: ['using', 'not', 'I', 'be', 'will', 'laptop', 'my'], answer: 'I will not be using my laptop', explanation: 'Subject + will not be + Verb-ing + object.' },
+          { id: 14, words: ['crossing', 'plane', 'the', 'be', 'will', 'ocean', 'the'], answer: 'the plane will be crossing the ocean', explanation: 'Subject + will be + Verb-ing + object.' },
+          { id: 15, words: ['budget', 'discussing', 'we', 'be', 'the', 'will'], answer: 'we will be discussing the budget', explanation: 'Subject + will be + Verb-ing + object.' },
+          { id: 16, words: ['doing', 'be', 'they', 'what', 'will', '?'], answer: 'what will they be doing', explanation: 'Question word + will + subject + be + Verb-ing.' },
+          { id: 17, words: ['dress', 'wearing', 'she', 'a', 'be', 'will', 'red'], answer: 'she will be wearing a red dress', explanation: 'Subject + will be + Verb-ing + object.' },
+          { id: 18, words: ['studying', 'at', 'be', 'I', 'will', 'university'], answer: 'I will be studying at university', explanation: 'Subject + will be + Verb-ing + place.' },
+          { id: 19, words: ['setting', 'be', 'the', 'she', 'table', 'will'], answer: 'she will be setting the table', explanation: 'Subject + will be + Verb-ing + object.' },
+          { id: 20, words: ['sleeping', 'not', 'anymore', 'I', 'be', 'will'], answer: 'I will not be sleeping anymore', explanation: 'Subject + will not be + Verb-ing.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'I will sleeping at 11 PM.', options: ['I', 'will sleeping', 'at 11', 'PM'], correct: 1, wrongPart: 'will sleeping', correction: 'will be sleeping', explanation: 'Future Continuous needs "be": "will be sleeping".' },
+          { id: 2, text: 'She will be work tomorrow.', options: ['She', 'will be', 'work', 'tomorrow'], correct: 2, wrongPart: 'work', correction: 'working', explanation: 'After "will be", use the "-ing" form: "working".' },
+          { id: 3, text: 'They will be travels this time next week.', options: ['They', 'will be', 'travels', 'this time next week'], correct: 2, wrongPart: 'travels', correction: 'traveling', explanation: 'After "will be", use the "-ing" form: "traveling".' },
+          { id: 4, text: 'Will be you using the car tonight?', options: ['Will be', 'you', 'using', 'the car tonight'], correct: 0, wrongPart: 'Will be', correction: 'Will', explanation: 'Question order is "Will + subject + be": "Will you be using...?".' },
+          { id: 5, text: 'He not will be sleeping at midnight.', options: ['He', 'not will be', 'sleeping', 'at midnight'], correct: 1, wrongPart: 'not will be', correction: 'will not be', explanation: '"not" goes after "will": "will not be".' },
+          { id: 6, text: 'We will be setted the table.', options: ['We', 'will be', 'setted', 'the table'], correct: 2, wrongPart: 'setted', correction: 'setting', explanation: 'After "will be", use the "-ing" form: "setting".' },
+          { id: 7, text: 'What will you doing at 9 AM?', options: ['What', 'will you', 'doing', 'at 9 AM'], correct: 2, wrongPart: 'doing', correction: 'be doing', explanation: 'Future Continuous needs "be" before the "-ing" form: "be doing".' },
+          { id: 8, text: 'I will be studies at university.', options: ['I', 'will be', 'studies', 'at university'], correct: 2, wrongPart: 'studies', correction: 'studying', explanation: 'After "will be", use the "-ing" form: "studying".' },
+          { id: 9, text: 'She will attending the conference.', options: ['She', 'will', 'attending', 'the conference'], correct: 1, wrongPart: 'will', correction: 'will be', explanation: 'Future Continuous needs "be" before "attending": "will be attending".' },
+          { id: 10, text: 'The plane will be crosses the ocean at noon.', options: ['The plane', 'will be', 'crosses', 'the ocean at noon'], correct: 2, wrongPart: 'crosses', correction: 'crossing', explanation: 'After "will be", use the "-ing" form: "crossing".' },
+          { id: 11, text: 'Will they be waits for us?', options: ['Will', 'they be', 'waits', 'for us'], correct: 2, wrongPart: 'waits', correction: 'waiting', explanation: 'After "be", use the "-ing" form: "waiting".' },
+          { id: 12, text: 'We will not using my laptop.', options: ['We', 'will not', 'using', 'my laptop'], correct: 2, wrongPart: 'using', correction: 'be using', explanation: 'Future Continuous negative needs "be": "will not be using".' },
+          { id: 13, text: 'What time you will be arriving?', options: ['What time', 'you will be', 'arriving', 'No error'], correct: 1, wrongPart: 'you will be', correction: 'will you be', explanation: 'Question order is "will + subject + be": "will you be arriving".' },
+          { id: 14, text: 'She will be wear a red dress.', options: ['She', 'will be', 'wear', 'a red dress'], correct: 2, wrongPart: 'wear', correction: 'wearing', explanation: 'After "will be", use the "-ing" form: "wearing".' },
+          { id: 15, text: 'They will be discuss the budget at 3 PM.', options: ['They', 'will be', 'discuss', 'the budget at 3 PM'], correct: 2, wrongPart: 'discuss', correction: 'discussing', explanation: 'After "will be", use the "-ing" form: "discussing".' },
+          { id: 16, text: 'I be will lying on a beach this time next week.', options: ['I be will', 'lying', 'on a beach', 'this time next week'], correct: 0, wrongPart: 'I be will', correction: 'I will be', explanation: 'Correct word order is "subject + will + be": "I will be".' },
+          { id: 17, text: 'The children will sleeping when we arrive.', options: ['The children', 'will', 'sleeping', 'when we arrive'], correct: 1, wrongPart: 'will', correction: 'will be', explanation: 'Future Continuous needs "be": "will be sleeping".' },
+          { id: 18, text: 'Will you needing this book tomorrow?', options: ['Will', 'you', 'needing', 'this book tomorrow'], correct: 2, wrongPart: 'needing', correction: 'be needing', explanation: 'Future Continuous needs "be" before the "-ing" form: "be needing".' },
+          { id: 19, text: 'At 8 AM, we will be has breakfast.', options: ['At 8 AM', 'we will be', 'has', 'breakfast'], correct: 2, wrongPart: 'has', correction: 'having', explanation: 'After "will be", use the "-ing" form: "having".' },
+          { id: 20, text: 'He will not be sleep at midnight.', options: ['He', 'will not be', 'sleep', 'at midnight'], correct: 2, wrongPart: 'sleep', correction: 'sleeping', explanation: 'After "will not be", use the "-ing" form: "sleeping".' }
+        ],
+        transform: [
+          { id: 1, text: 'Make negative: "I will be sleeping at 11 PM."', options: ['I will not be sleeping at 11 PM.', 'I will not sleeping at 11 PM.', "I won't sleeping at 11 PM.", 'I am not being sleeping at 11 PM.'], correct: 0, explanation: 'Add "not" after "will": "will not be sleeping".' },
+          { id: 2, text: 'Make question: "You will be using the car tonight."', options: ['Will you be using the car tonight?', 'Do you will be using the car tonight?', 'Will you using the car tonight?', 'You will be using the car tonight?'], correct: 0, explanation: 'Move "will" to the front: "Will you be using...?".' },
+          { id: 3, text: 'Transform to Future Continuous: "I sleep." (at 11 PM tonight)', options: ['I will be sleeping.', 'I sleep.', 'I am sleeping.', 'I was sleeping.'], correct: 0, explanation: 'Future Continuous: "I will be sleeping".' },
+          { id: 4, text: 'Make negative: "They will be traveling tomorrow."', options: ["They won't be traveling tomorrow.", "They don't will be traveling tomorrow.", "They won't traveling tomorrow.", "They aren't will be traveling tomorrow."], correct: 0, explanation: "The short form 'won't be' means 'will not be'." },
+          { id: 5, text: 'Make question: "She will be attending the meeting."', options: ['Will she be attending the meeting?', 'Does she will be attending the meeting?', 'Will she attending the meeting?', 'She will be attending the meeting?'], correct: 0, explanation: 'Move "will" to the front: "Will she be attending...?".' },
+          { id: 6, text: 'Transform to Future Continuous: "We have breakfast." (at 8 AM tomorrow)', options: ['We will be having breakfast.', 'We have breakfast.', 'We are having breakfast.', 'We had breakfast.'], correct: 0, explanation: 'Future Continuous: "We will be having breakfast".' },
+          { id: 7, text: 'Make negative: "He will be working tomorrow."', options: ["He won't be working tomorrow.", "He don't will be working tomorrow.", "He won't working tomorrow.", "He isn't will be working tomorrow."], correct: 0, explanation: "Negative form: 'will not be' (won't be) + Verb-ing." },
+          { id: 8, text: 'Make question: "They will be waiting at the station."', options: ['Will they be waiting at the station?', 'Do they will be waiting at the station?', 'Will they waiting at the station?', 'They will be waiting at the station?'], correct: 0, explanation: 'Move "will" to the front: "Will they be waiting...?".' },
+          { id: 9, text: 'Transform to Future Continuous: "I study." (this time next year, at university)', options: ['I will be studying.', 'I study.', 'I am studying.', 'I studied.'], correct: 0, explanation: 'Future Continuous: "I will be studying".' },
+          { id: 10, text: 'Make negative: "We will be discussing the budget."', options: ["We won't be discussing the budget.", "We don't will be discussing the budget.", "We won't discussing the budget.", "We aren't will be discussing the budget."], correct: 0, explanation: "Negative form: 'will not be' (won't be) + Verb-ing." },
+          { id: 11, text: 'Make question: "The plane will be crossing the ocean."', options: ['Will the plane be crossing the ocean?', 'Does the plane will be crossing the ocean?', 'Will the plane crossing the ocean?', 'The plane will be crossing the ocean?'], correct: 0, explanation: 'Move "will" to the front: "Will the plane be crossing...?".' },
+          { id: 12, text: 'Transform to Future Continuous: "She wears a red dress." (at the party tonight)', options: ['She will be wearing a red dress.', 'She wears a red dress.', 'She is wearing a red dress.', 'She wore a red dress.'], correct: 0, explanation: 'Future Continuous: "She will be wearing a red dress".' },
+          { id: 13, text: 'Make negative: "I will be using my laptop this evening."', options: ["I won't be using my laptop this evening.", "I don't will be using my laptop this evening.", "I won't using my laptop this evening.", "I amn't will be using my laptop this evening."], correct: 0, explanation: "Negative form: 'will not be' (won't be) + Verb-ing." },
+          { id: 14, text: 'Make question: "The children will be sleeping when we arrive."', options: ['Will the children be sleeping when we arrive?', 'Do the children will be sleeping when we arrive?', 'Will the children sleeping when we arrive?', 'The children will be sleeping when we arrive?'], correct: 0, explanation: 'Move "will" to the front: "Will the children be sleeping...?".' },
+          { id: 15, text: 'Transform to Future Continuous: "We set the table." (while you cook)', options: ['We will be setting the table.', 'We set the table.', 'We are setting the table.', 'We were setting the table.'], correct: 0, explanation: 'Future Continuous: "We will be setting the table".' },
+          { id: 16, text: 'Make negative: "You will be needing this book."', options: ["You won't be needing this book.", "You don't will be needing this book.", "You won't needing this book.", "You aren't will be needing this book."], correct: 0, explanation: "Negative form: 'will not be' (won't be) + Verb-ing." },
+          { id: 17, text: 'Make question: "I will be lying on a beach."', options: ['Will I be lying on a beach?', 'Do I will be lying on a beach?', 'Will I lying on a beach?', 'I will be lying on a beach?'], correct: 0, explanation: 'Move "will" to the front: "Will I be lying...?".' },
+          { id: 18, text: 'Transform to Future Continuous: "They wait for us." (at the airport at 5 PM)', options: ['They will be waiting for us.', 'They wait for us.', 'They are waiting for us.', 'They waited for us.'], correct: 0, explanation: 'Future Continuous: "They will be waiting for us".' },
+          { id: 19, text: 'Make negative: "She will be attending the conference."', options: ["She won't be attending the conference.", "She don't will be attending the conference.", "She won't attending the conference.", "She isn't will be attending the conference."], correct: 0, explanation: "Negative form: 'will not be' (won't be) + Verb-ing." },
+          { id: 20, text: 'Make question: "He will be sleeping at midnight."', options: ['Will he be sleeping at midnight?', 'Does he will be sleeping at midnight?', 'Will he sleeping at midnight?', 'He will be sleeping at midnight?'], correct: 0, explanation: 'Move "will" to the front: "Will he be sleeping...?".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Planning tonight.', dialogue: 'A: What are you doing at 11 PM?\nB: I ___ sleeping by then.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be sleeping".' },
+          { id: 2, situation: 'Asking to borrow the car.', dialogue: 'A: Can I borrow your car tonight?\nB: Sorry, I ___ using it myself.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be using".' },
+          { id: 3, situation: "Discussing tomorrow's schedule.", dialogue: 'A: Where will you be at 3 PM?\nB: I ___ attending a meeting.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be attending".' },
+          { id: 4, situation: 'Asking about a trip.', dialogue: 'A: What will you be doing this time next week?\nB: We ___ traveling to Japan.', options: ['will be', 'are', 'were', 'do'], correct: 0, explanation: 'Future Continuous: "will be traveling".' },
+          { id: 5, situation: 'Talking about dinner plans.', dialogue: 'A: Will you join us for dinner?\nB: Sorry, I ___ working late tonight.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be working".' },
+          { id: 6, situation: 'Discussing an interruption at work.', dialogue: 'A: Can we talk at 2 PM?\nB: I ___ having a meeting then.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be having".' },
+          { id: 7, situation: 'Asking about a flight.', dialogue: 'A: What time does your flight land?\nB: At 5 PM. I ___ crossing three time zones.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be crossing".' },
+          { id: 8, situation: 'Talking about a party outfit.', dialogue: 'A: What will you wear to the party?\nB: I ___ wearing my blue dress.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be wearing".' },
+          { id: 9, situation: 'Asking about study plans.', dialogue: 'A: Where will you be next semester?\nB: I ___ studying in Germany.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be studying".' },
+          { id: 10, situation: 'Discussing a beach holiday.', dialogue: 'A: What will you be doing this time next month?\nB: I ___ lying on a beach!', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be lying".' },
+          { id: 11, situation: 'Asking about picking someone up.', dialogue: 'A: Will you be at the station at 6?\nB: Yes, we ___ waiting for you there.', options: ['will be', 'are', 'were', 'do'], correct: 0, explanation: 'Future Continuous: "will be waiting".' },
+          { id: 12, situation: 'Talking about a late-night flight.', dialogue: 'A: Should I call you at midnight?\nB: No, I ___ sleeping by then.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be sleeping".' },
+          { id: 13, situation: 'Discussing a business trip.', dialogue: 'A: When will he be back?\nB: Next week he ___ traveling for work.', options: ['will be', 'is', 'was', 'does'], correct: 0, explanation: 'Future Continuous: "will be traveling".' },
+          { id: 14, situation: 'Asking politely about equipment use.', dialogue: 'A: ___ you be needing the projector this afternoon?\nB: No, go ahead and use it.', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'A polite future question uses "Will you be...?".' },
+          { id: 15, situation: 'Discussing the school run.', dialogue: 'A: Who will be picking up the kids?\nB: I ___ picking them up at 4 PM.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be picking".' },
+          { id: 16, situation: 'Talking about the weather forecast.', dialogue: 'A: What will the weather be like tomorrow morning?\nB: It ___ raining, according to the forecast.', options: ['will be', 'is', 'was', 'does'], correct: 0, explanation: 'Future Continuous: "will be raining".' },
+          { id: 17, situation: 'Asking about noise at night.', dialogue: 'A: Will the neighbors be loud tonight?\nB: Probably, they ___ having a party.', options: ['will be', 'are', 'were', 'do'], correct: 0, explanation: 'Future Continuous: "will be having".' },
+          { id: 18, situation: 'Discussing a work shift.', dialogue: 'A: Are you free this evening?\nB: No, I ___ working until 10 PM.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be working".' },
+          { id: 19, situation: 'Talking about exam preparation.', dialogue: 'A: What will you be doing all weekend?\nB: I ___ studying for my final exam.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be studying".' },
+          { id: 20, situation: 'Asking about arrival time.', dialogue: 'A: What time will you get here?\nB: By 9, I ___ waiting outside.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be waiting".' }
+        ]
       }
     ]
   }
