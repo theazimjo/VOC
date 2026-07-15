@@ -45,6 +45,9 @@
 }
 
 .btn-exit-practice {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: var(--bg-tertiary);
   border: 1px solid var(--border);
   color: var(--text-secondary);
@@ -56,6 +59,20 @@
   transition: all var(--transition-fast);
   font-family: inherit;
   flex-shrink: 0;
+}
+
+.btn-exit-practice:active {
+  transform: scale(0.97);
+}
+
+.result-icon-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-sm);
 }
 
 .btn-exit-practice:hover {
@@ -298,18 +315,13 @@
   border: none;
   border-radius: 50%;
   color: white;
-  font-size: 1.2rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast) ease;
   outline: none;
-  box-shadow: 0 2px 8px rgba(0, 162, 232, 0.2);
-}
-
-.audio-play-btn:hover {
-  transform: scale(1.04);
+  flex-shrink: 0;
 }
 
 .audio-play-btn:active {

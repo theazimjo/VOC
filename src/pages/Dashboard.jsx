@@ -99,7 +99,9 @@ export default function Dashboard() {
   };
 
   const displayName = user?.displayName || user?.email?.split('@')[0] || 'Foydalanuvchi';
-  const masteryPercent = totalWords > 0 ? Math.round((masteredWords / totalWords) * 100) : 0;
+  const masteryPercent = totalWords > 0
+    ? Math.round(allWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / totalWords)
+    : 0;
   const showDue = dueWordsList.length > 0;
   const wordsToShow = showDue ? dueWordsList : recentWords;
 

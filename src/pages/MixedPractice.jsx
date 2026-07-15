@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, update } from 'firebase/database';
+import {
+  Shuffle, Target, Volume2, X, CheckCircle2, XCircle,
+  Trophy, ThumbsUp, Dumbbell, RotateCcw
+} from 'lucide-react';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
@@ -12,6 +16,12 @@ import IosSpinner from '../components/common/IosSpinner';
 import './MixedPractice.css';
 
 const LEECH_THRESHOLD = 3;
+
+function getResultTier(ratio) {
+  if (ratio >= 0.8) return { Icon: Trophy, label: 'Ajoyib natija!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
+  if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Yaxshi, harakat qiling!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
+  return { Icon: Dumbbell, label: "Davom eting, o'rganasiz!", color: 'var(--success)', dim: 'var(--success-dim)' };
+}
 
 // Recognition-before-production sequencing: brand-new / weak words get the
 // easiest (multiple-choice) format; words the learner has seen more and is
@@ -246,10 +256,11 @@ export default function MixedPractice() {
             <div className="mixed-practice-container">
               <div className="practice-session-header">
                 <span className="practice-session-title">
-                  {isLeechMode ? "🎯 Qiyin so'zlar mashqi" : "🚀 Aralash Mashq"}
+                  {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
+                  {isLeechMode ? "Qiyin so'zlar mashqi" : "Aralash Mashq"}
                 </span>
                 <button className="btn-exit-practice" onClick={handleExit} title="Mashqdan chiqish">
-                  ✕ Chiqish
+                  <X size={14} strokeWidth={2.4} /> Chiqish
                 </button>
               </div>
 
@@ -343,13 +354,13 @@ export default function MixedPractice() {
                   <div className="dictation-question">
                     <span className="question-prompt">Eshitgan so'zingizni inglizcha yozing:</span>
                     <div className="audio-player-container">
-                      <button 
-                        className="audio-play-btn" 
+                      <button
+                        className="audio-play-btn"
                         onClick={() => speakWord(questions[currentIdx].word.word)}
                         title="Qayta eshitish"
                         type="button"
                       >
-                        🔊
+                        <Volume2 size={20} strokeWidth={2.2} />
                       </button>
                       <span className="audio-helper-text">Talaffuzni qayta eshitish uchun bosing</span>
                     </div>
@@ -386,7 +397,9 @@ export default function MixedPractice() {
                 >
                   <div className="feedback-content">
                     <span className="feedback-icon">
-                      {questions[currentIdx].isCorrect ? '🎉' : '❌'}
+                      {questions[currentIdx].isCorrect
+                        ? <CheckCircle2 size={22} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
+                        : <XCircle size={22} strokeWidth={2.2} style={{ color: 'var(--error)' }} />}
                     </span>
                     <div className="feedback-text">
                       <h4>{questions[currentIdx].isCorrect ? "To'g'ri! Barakalla!" : "Noto'g'ri!"}</h4>
@@ -408,21 +421,19 @@ export default function MixedPractice() {
           )}
 
           {/* Step 2: Results Summary */}
-          {step === 'results' && (
+          {step === 'results' && (() => {
+            const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0);
+            return (
             <motion.div
               key="results"
               className="practice-results-card"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
             >
-              <div className="result-icon">
-                {correctCount / questions.length >= 0.8 ? '🏆' : 
-                 correctCount / questions.length >= 0.5 ? '👍' : '💪'}
+              <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color }}>
+                <tier.Icon size={32} strokeWidth={2.2} />
               </div>
-              <h2>
-                {correctCount / questions.length >= 0.8 ? 'Ajoyib natija!' :
-                 correctCount / questions.length >= 0.5 ? 'Yaxshi, harakat qiling!' : 'Davom eting, o\'rganasiz!'}
-              </h2>
+              <h2>{tier.label}</h2>
               <p className="results-subtitle">Aralash mashq yakunlandi</p>
 
               <div className="results-score-badge">
@@ -453,7 +464,7 @@ export default function MixedPractice() {
                           title="Talaffuzni eshitish"
                           type="button"
                         >
-                          🔊
+                          <Volume2 size={14} strokeWidth={2.3} />
                         </button>
                       </div>
                     ))}
@@ -463,14 +474,15 @@ export default function MixedPractice() {
 
               <div className="result-actions">
                 <button className="btn btn-primary" onClick={() => startSession(mixedWordsPool)}>
-                  Yana mashq qilish 🔁
+                  <RotateCcw size={16} strokeWidth={2.3} /> Yana mashq qilish
                 </button>
                 <button className="btn btn-secondary" onClick={() => navigate('/')}>
                   Dashboardga qaytish
                 </button>
               </div>
             </motion.div>
-          )}
+            );
+          })()}
         </AnimatePresence>
       )}
     </div>
