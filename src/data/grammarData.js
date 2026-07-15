@@ -4250,6 +4250,709 @@ Future Continuous kelajakda muayyan bir vaqtda davom etib turgan harakatni yoki 
         ]
       }
     ]
+  },
+  intermediate: {
+    label: 'Intermediate',
+    topics: [
+      {
+        id: 'present-perfect-simple',
+        title: 'Present Perfect Simple',
+        icon: '✅',
+        guide: `## Present Perfect Simple (Hozirgi tugallangan zamon)
+
+Present Perfect Simple o'tmishda sodir bo'lgan, lekin natijasi yoki ta'siri hozirgi paytga bog'liq bo'lgan harakatlarni ifodalash uchun ishlatiladi. Harakatning aniq vaqti odatda muhim emas.
+
+## 1. Shakllanishi (Form)
+• **Positive (+)**: Subject + have/has + Past Participle (V3)
+  - I/You/We/They **have finished** the report.
+  - He/She/It **has finished** the report.
+• **Negative (-)**: Subject + have not (haven't) / has not (hasn't) + V3
+  - I **haven't seen** that film.
+  - She **hasn't called** me yet.
+• **Question (?)**: Have/Has + Subject + V3?
+  - **Have** you **ever visited** London?
+  - **Has** he **finished** his homework?
+
+*(has faqat he/she/it bilan, qolgan barcha shaxslar bilan have ishlatiladi)*
+
+## 2. Ishlatilishi (Usage)
+1. **O'tmishda sodir bo'lgan, aniq vaqti muhim bo'lmagan, hozirgi natijasi muhim harakat**:
+   - I **have lost** my keys. (hozir kalitim yo'q)
+2. **Hayotiy tajriba** (ever/never bilan):
+   - She **has visited** Paris twice.
+3. **Yaqinda tugagan harakat** (just, already, yet bilan):
+   - He **has just finished** his homework.
+4. **Hozirgi paytgacha davom etib kelayotgan holat** (for/since bilan):
+   - We **have lived** here for five years.
+
+## 3. Present Perfect vs Past Simple
+• **Past Simple** — aniq, tugallangan vaqt bilan ishlatiladi (yesterday, last week, in 2020).
+  - I **saw** that movie last night.
+• **Present Perfect** — aniq vaqt ko'rsatilmaydi, natija yoki tajriba muhim.
+  - I **have seen** that movie. (qachonligi muhim emas)
+
+## 4. Signal so'zlar (Time Expressions)
+• already, yet, just, ever, never
+• for (davomiylik: for five years), since (boshlanish nuqtasi: since 2019)
+• so far, recently, this week/month/year (hali tugamagan davr)`,
+        questions: [
+          { id: 1, text: 'I ___ finished my homework already.', options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect: I + have + V3 (finished).' },
+          { id: 2, text: 'She ___ visited Paris twice.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect: she + has + V3 (visited).' },
+          { id: 3, text: '___ you ever visited Japan?', options: ['Have', 'Are', 'Were', 'Did'], correct: 0, explanation: 'Present Perfect question: Have + you + ever + V3?' },
+          { id: 4, text: 'He ___ not called me yet.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: "Present Perfect negative: he + has not (hasn't) + V3." },
+          { id: 5, text: 'We ___ lived here for five years.', options: ['have', 'are', 'were', 'did'], correct: 0, explanation: 'Present Perfect with "for": have + V3 (lived) + for + period.' },
+          { id: 6, text: 'They ___ just arrived at the airport.', options: ['have', 'are', 'were', 'did'], correct: 0, explanation: 'Present Perfect with "just": have + just + V3.' },
+          { id: 7, text: '___ she finished her project yet?', options: ['Has', 'Is', 'Was', 'Did'], correct: 0, explanation: 'Present Perfect question: Has + she + V3 + yet?' },
+          { id: 8, text: 'I ___ never been to Japan.', options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect with "never": have + never + V3 (been).' },
+          { id: 9, text: 'He ___ lost his keys again.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect: he + has + V3 (lost).' },
+          { id: 10, text: '___ you seen my phone anywhere?', options: ['Have', 'Are', 'Were', 'Did'], correct: 0, explanation: 'Present Perfect question: Have + you + V3?' },
+          { id: 11, text: 'We ___ not met before.', options: ['have', 'are', 'were', 'did'], correct: 0, explanation: "Present Perfect negative: we + have not (haven't) + V3." },
+          { id: 12, text: 'My parents ___ been married for 20 years.', options: ['have', 'are', 'were', 'did'], correct: 0, explanation: 'Present Perfect with "for": have + V3 (been) + for + period.' },
+          { id: 13, text: '___ he ever tried sushi?', options: ['Has', 'Is', 'Was', 'Did'], correct: 0, explanation: 'Present Perfect question: Has + he + ever + V3?' },
+          { id: 14, text: 'She ___ already read that book.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect with "already": has + already + V3.' },
+          { id: 15, text: 'I ___ not finished my report yet.', options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect negative with "yet": have not + V3 + yet.' },
+          { id: 16, text: 'They ___ known each other since childhood.', options: ['have', 'are', 'were', 'did'], correct: 0, explanation: 'Present Perfect with "since": have + V3 (known) + since + point in time.' },
+          { id: 17, text: '___ your sister got her results yet?', options: ['Has', 'Is', 'Was', 'Did'], correct: 0, explanation: 'Present Perfect question: Has + subject + V3 + yet?' },
+          { id: 18, text: 'We ___ just moved into our new house.', options: ['have', 'are', 'were', 'did'], correct: 0, explanation: 'Present Perfect with "just": have + just + V3.' },
+          { id: 19, text: 'He ___ broken his leg twice.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect: he + has + V3 (broken).' },
+          { id: 20, text: 'I ___ not seen that film.', options: ['have', 'am', 'was', 'did'], correct: 0, explanation: "Present Perfect negative: I + have not (haven't) + V3 (seen)." }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'I ___ (finish) my homework already.', options: ['have finished', 'have finish', 'am finishing', 'was finishing'], correct: 0, explanation: 'Present Perfect: have + V3 (finished).' },
+          { id: 2, text: 'She ___ (visit) Paris twice.', options: ['has visited', 'has visit', 'is visiting', 'was visiting'], correct: 0, explanation: 'Present Perfect: has + V3 (visited).' },
+          { id: 3, text: '___ (you / ever / see) a ghost?', options: ['Have you ever seen', 'Have you ever see', 'Do you ever see', 'Are you ever seeing'], correct: 0, explanation: 'Present Perfect question: Have + subject + ever + V3.' },
+          { id: 4, text: 'He ___ (not / call) me yet.', options: ["hasn't called", "haven't called", "didn't call", "isn't calling"], correct: 0, explanation: "Present Perfect negative: hasn't + V3 (called)." },
+          { id: 5, text: 'We ___ (live) here for five years.', options: ['have lived', 'have live', 'are living', 'were living'], correct: 0, explanation: 'Present Perfect: have + V3 (lived).' },
+          { id: 6, text: 'They ___ (just / arrive) at the airport.', options: ['have just arrived', 'have just arrive', 'are just arriving', 'just arrived'], correct: 0, explanation: 'Present Perfect with "just": have + just + V3.' },
+          { id: 7, text: '___ (she / finish) her project yet?', options: ['Has she finished', 'Has she finish', 'Does she finish', 'Is she finishing'], correct: 0, explanation: 'Present Perfect question: Has + subject + V3 + yet?' },
+          { id: 8, text: 'I ___ (never / be) to Japan.', options: ['have never been', 'have never be', 'am never being', 'was never'], correct: 0, explanation: 'Present Perfect: have + never + V3 (been).' },
+          { id: 9, text: 'He ___ (lose) his keys again.', options: ['has lost', 'has lose', 'is losing', 'was losing'], correct: 0, explanation: 'Present Perfect: has + V3 (lost).' },
+          { id: 10, text: '___ (you / see) my phone anywhere?', options: ['Have you seen', 'Have you see', 'Do you see', 'Are you seeing'], correct: 0, explanation: 'Present Perfect question: Have + subject + V3?' },
+          { id: 11, text: 'We ___ (not / meet) before.', options: ["haven't met", "hasn't met", "didn't meet", "aren't meeting"], correct: 0, explanation: "Present Perfect negative: haven't + V3 (met)." },
+          { id: 12, text: 'My parents ___ (be) married for 20 years.', options: ['have been', 'have be', 'are being', 'were'], correct: 0, explanation: 'Present Perfect: have + V3 (been) + for.' },
+          { id: 13, text: '___ (he / ever / try) sushi?', options: ['Has he ever tried', 'Has he ever try', 'Does he ever try', 'Is he ever trying'], correct: 0, explanation: 'Present Perfect question: Has + subject + ever + V3.' },
+          { id: 14, text: 'She ___ (already / read) that book.', options: ['has already read', 'has already reads', 'is already reading', 'already read'], correct: 0, explanation: 'Present Perfect: has + already + V3 (read).' },
+          { id: 15, text: 'I ___ (not / finish) my report yet.', options: ["haven't finished", "hasn't finished", "didn't finish", "am not finishing"], correct: 0, explanation: "Present Perfect negative: haven't + V3 (finished) + yet." },
+          { id: 16, text: 'They ___ (know) each other since childhood.', options: ['have known', 'have know', 'are knowing', 'knew'], correct: 0, explanation: 'Present Perfect: have + V3 (known) + since.' },
+          { id: 17, text: '___ (your sister / get) her results yet?', options: ['Has your sister got', 'Has your sister get', 'Does your sister get', 'Is your sister getting'], correct: 0, explanation: 'Present Perfect question: Has + subject + V3 + yet?' },
+          { id: 18, text: 'We ___ (just / move) into our new house.', options: ['have just moved', 'have just move', 'are just moving', 'just moved'], correct: 0, explanation: 'Present Perfect with "just": have + just + V3.' },
+          { id: 19, text: 'He ___ (break) his leg twice.', options: ['has broken', 'has break', 'is breaking', 'broke'], correct: 0, explanation: 'Present Perfect: has + V3 (broken).' },
+          { id: 20, text: 'I ___ (not / see) that film.', options: ["haven't seen", "hasn't seen", "didn't see", "am not seeing"], correct: 0, explanation: "Present Perfect negative: haven't + V3 (seen)." }
+        ],
+        scrambled: [
+          { id: 1, words: ['finished', 'I', 'have', 'my', 'homework', 'already'], answer: 'I have finished my homework already', explanation: 'Subject + have + V3 + object + already.' },
+          { id: 2, words: ['visited', 'she', 'has', 'Paris', 'twice'], answer: 'she has visited Paris twice', explanation: 'Subject + has + V3 + object + twice.' },
+          { id: 3, words: ['ever', 'you', 'have', 'seen', 'a', 'ghost', '?'], answer: 'have you ever seen a ghost', explanation: 'Have + subject + ever + V3 + object?' },
+          { id: 4, words: ['called', 'he', "hasn't", 'me', 'yet'], answer: "he hasn't called me yet", explanation: "Subject + hasn't + V3 + object + yet." },
+          { id: 5, words: ['lived', 'we', 'have', 'here', 'for', 'five', 'years'], answer: 'we have lived here for five years', explanation: 'Subject + have + V3 + place + for + period.' },
+          { id: 6, words: ['arrived', 'they', 'have', 'just', 'at', 'the', 'airport'], answer: 'they have just arrived at the airport', explanation: 'Subject + have + just + V3 + place.' },
+          { id: 7, words: ['finished', 'has', 'she', 'her', 'project', 'yet', '?'], answer: 'has she finished her project yet', explanation: 'Has + subject + V3 + object + yet?' },
+          { id: 8, words: ['been', 'I', 'have', 'never', 'to', 'Japan'], answer: 'I have never been to Japan', explanation: 'Subject + have + never + V3 + place.' },
+          { id: 9, words: ['lost', 'he', 'has', 'his', 'keys', 'again'], answer: 'he has lost his keys again', explanation: 'Subject + has + V3 + object + again.' },
+          { id: 10, words: ['seen', 'have', 'you', 'my', 'phone', 'anywhere', '?'], answer: 'have you seen my phone anywhere', explanation: 'Have + subject + V3 + object?' },
+          { id: 11, words: ['met', 'we', "haven't", 'before'], answer: "we haven't met before", explanation: "Subject + haven't + V3 + before." },
+          { id: 12, words: ['been', 'my', 'parents', 'have', 'married', 'for', '20', 'years'], answer: 'my parents have been married for 20 years', explanation: 'Subject + have + been + married + for + period.' },
+          { id: 13, words: ['tried', 'has', 'he', 'ever', 'sushi', '?'], answer: 'has he ever tried sushi', explanation: 'Has + subject + ever + V3 + object?' },
+          { id: 14, words: ['read', 'she', 'has', 'already', 'that', 'book'], answer: 'she has already read that book', explanation: 'Subject + has + already + V3 + object.' },
+          { id: 15, words: ['finished', 'I', "haven't", 'my', 'report', 'yet'], answer: "I haven't finished my report yet", explanation: "Subject + haven't + V3 + object + yet." },
+          { id: 16, words: ['known', 'they', 'have', 'each', 'other', 'since', 'childhood'], answer: 'they have known each other since childhood', explanation: 'Subject + have + V3 + object + since + point in time.' },
+          { id: 17, words: ['got', 'has', 'your', 'sister', 'her', 'results', 'yet', '?'], answer: 'has your sister got her results yet', explanation: 'Has + subject + V3 + object + yet?' },
+          { id: 18, words: ['moved', 'we', 'have', 'just', 'into', 'our', 'new', 'house'], answer: 'we have just moved into our new house', explanation: 'Subject + have + just + V3 + place.' },
+          { id: 19, words: ['broken', 'he', 'has', 'his', 'leg', 'twice'], answer: 'he has broken his leg twice', explanation: 'Subject + has + V3 + object + twice.' },
+          { id: 20, words: ['seen', 'I', "haven't", 'that', 'film'], answer: "I haven't seen that film", explanation: "Subject + haven't + V3 + object." }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'I have saw that movie already.', options: ['I', 'have', 'saw', 'that movie already'], correct: 2, wrongPart: 'saw', correction: 'seen', explanation: 'After "have", use the past participle (V3): "seen", not the past simple "saw".' },
+          { id: 2, text: 'She have visited Paris twice.', options: ['She', 'have', 'visited', 'Paris twice'], correct: 1, wrongPart: 'have', correction: 'has', explanation: '"She" is third person singular, so use "has", not "have".' },
+          { id: 3, text: 'He has finish his homework.', options: ['He', 'has', 'finish', 'his homework'], correct: 2, wrongPart: 'finish', correction: 'finished', explanation: 'After "has", use the past participle (V3): "finished".' },
+          { id: 4, text: 'You have ever been to London?', options: ['You', 'have ever', 'been to', 'London?'], correct: 1, wrongPart: 'have ever', correction: 'Have you ever', explanation: 'Present Perfect questions start with "Have/Has + subject": "Have you ever been...?".' },
+          { id: 5, text: "They haven't arrive yet.", options: ['They', "haven't", 'arrive', 'yet'], correct: 2, wrongPart: 'arrive', correction: 'arrived', explanation: "After \"haven't\", use the past participle (V3): \"arrived\"." },
+          { id: 6, text: 'We have live here since 2015.', options: ['We', 'have', 'live', 'here since 2015'], correct: 2, wrongPart: 'live', correction: 'lived', explanation: 'After "have", use the past participle (V3): "lived".' },
+          { id: 7, text: 'She has never went to Japan.', options: ['She', 'has never', 'went', 'to Japan'], correct: 2, wrongPart: 'went', correction: 'gone', explanation: 'After "has never", use the past participle (V3): "gone", not "went".' },
+          { id: 8, text: 'I have losed my keys again.', options: ['I', 'have', 'losed', 'my keys again'], correct: 2, wrongPart: 'losed', correction: 'lost', explanation: '"Lose" is irregular: its past participle is "lost", not "losed".' },
+          { id: 9, text: 'Has you finished the report?', options: ['Has', 'you', 'finished', 'the report?'], correct: 0, wrongPart: 'Has', correction: 'Have', explanation: '"You" takes "have", not "has": "Have you finished...?".' },
+          { id: 10, text: "He didn't has called me yet.", options: ['He', "didn't has", 'called', 'me yet'], correct: 1, wrongPart: "didn't has", correction: "hasn't", explanation: "Present Perfect negative is \"hasn't\" + V3, not \"didn't has\"." },
+          { id: 11, text: 'We have knew each other for years.', options: ['We', 'have', 'knew', 'each other for years'], correct: 2, wrongPart: 'knew', correction: 'known', explanation: 'After "have", use the past participle (V3): "known", not "knew".' },
+          { id: 12, text: 'I have lived in Tashkent since five years.', options: ['I', 'have lived', 'in Tashkent', 'since five years'], correct: 3, wrongPart: 'since five years', correction: 'for five years', explanation: 'Use "for" with a period of time and "since" with a starting point: "for five years".' },
+          { id: 13, text: 'She has already finished her homework yesterday.', options: ['She', 'has already finished', 'her homework', 'yesterday'], correct: 3, wrongPart: 'yesterday', correction: '', explanation: 'Present Perfect cannot be used with a finished-time expression like "yesterday"; use Past Simple instead, or simply drop it.' },
+          { id: 14, text: 'They have broke the window.', options: ['They', 'have', 'broke', 'the window'], correct: 2, wrongPart: 'broke', correction: 'broken', explanation: 'After "have", use the past participle (V3): "broken", not "broke".' },
+          { id: 15, text: 'Have she finished the exam?', options: ['Have', 'she', 'finished', 'the exam?'], correct: 0, wrongPart: 'Have', correction: 'Has', explanation: '"She" takes "has", not "have": "Has she finished...?".' },
+          { id: 16, text: 'I have never eating sushi before.', options: ['I', 'have never', 'eating', 'sushi before'], correct: 2, wrongPart: 'eating', correction: 'eaten', explanation: 'After "have never", use the past participle (V3): "eaten", not the "-ing" form.' },
+          { id: 17, text: 'We has just moved to a new flat.', options: ['We', 'has', 'just moved', 'to a new flat'], correct: 1, wrongPart: 'has', correction: 'have', explanation: '"We" takes "have", not "has".' },
+          { id: 18, text: 'He has broken his leg two times ago.', options: ['He has broken', 'his leg', 'two times', 'ago'], correct: 3, wrongPart: 'ago', correction: '', explanation: 'Present Perfect cannot be used with "ago" (a finished-time marker); simply say "twice", without "ago".' },
+          { id: 19, text: "I haven't finish my project.", options: ['I', "haven't", 'finish', 'my project'], correct: 2, wrongPart: 'finish', correction: 'finished', explanation: "After \"haven't\", use the past participle (V3): \"finished\"." },
+          { id: 20, text: "She hasn't call me yet.", options: ['She', "hasn't", 'call', 'me yet'], correct: 2, wrongPart: 'call', correction: 'called', explanation: "After \"hasn't\", use the past participle (V3): \"called\"." }
+        ],
+        transform: [
+          { id: 1, text: 'Make negative: "I have finished my homework."', options: ["I haven't finished my homework.", "I don't have finished my homework.", "I haven't finish my homework.", "I am not finished my homework."], correct: 0, explanation: "Present Perfect negative: haven't + V3." },
+          { id: 2, text: 'Make question: "She has visited Paris."', options: ['Has she visited Paris?', 'Does she has visited Paris?', 'Has she visit Paris?', 'She has visited Paris?'], correct: 0, explanation: 'Move "has" to the front: "Has she visited...?".' },
+          { id: 3, text: 'Transform to Present Perfect: "I lose my keys." (result: I can\'t find them now)', options: ['I have lost my keys.', 'I lose my keys.', 'I am losing my keys.', 'I lost my keys.'], correct: 0, explanation: 'Present Perfect: "I have lost my keys" (result matters now).' },
+          { id: 4, text: 'Make negative: "They have arrived."', options: ["They haven't arrived.", "They don't have arrived.", "They haven't arrive.", "They aren't arrived."], correct: 0, explanation: "Negative form: 'have not' (haven't) + V3." },
+          { id: 5, text: 'Make question: "He has finished the report."', options: ['Has he finished the report?', 'Does he has finished the report?', 'Has he finish the report?', 'He has finished the report?'], correct: 0, explanation: 'Move "has" to the front: "Has he finished...?".' },
+          { id: 6, text: 'Transform to Present Perfect: "We live here." (for five years, and still now)', options: ['We have lived here for five years.', 'We live here for five years.', 'We are living here for five years.', 'We lived here for five years.'], correct: 0, explanation: 'Present Perfect with "for": "We have lived here for five years".' },
+          { id: 7, text: 'Make negative: "He has called me."', options: ["He hasn't called me.", "He doesn't have called me.", "He hasn't call me.", "He isn't called me."], correct: 0, explanation: "Negative form: 'has not' (hasn't) + V3." },
+          { id: 8, text: 'Make question: "They have met before."', options: ['Have they met before?', 'Do they have met before?', 'Have they meet before?', 'They have met before?'], correct: 0, explanation: 'Move "have" to the front: "Have they met...?".' },
+          { id: 9, text: 'Transform to Present Perfect: "I try sushi." (at some point in my life, no exact time)', options: ['I have tried sushi.', 'I try sushi.', 'I am trying sushi.', 'I tried sushi.'], correct: 0, explanation: 'Present Perfect: "I have tried sushi" (life experience, no exact time).' },
+          { id: 10, text: 'Make negative: "We have finished the project."', options: ["We haven't finished the project.", "We don't have finished the project.", "We haven't finish the project.", "We aren't finished the project."], correct: 0, explanation: "Negative form: 'have not' (haven't) + V3." },
+          { id: 11, text: 'Make question: "She has broken her leg."', options: ['Has she broken her leg?', 'Does she has broken her leg?', 'Has she break her leg?', 'She has broken her leg?'], correct: 0, explanation: 'Move "has" to the front: "Has she broken...?".' },
+          { id: 12, text: 'Transform to Present Perfect: "They know each other." (since childhood, still true now)', options: ['They have known each other since childhood.', 'They know each other since childhood.', 'They are knowing each other since childhood.', 'They knew each other since childhood.'], correct: 0, explanation: 'Present Perfect with "since": "They have known each other since childhood".' },
+          { id: 13, text: 'Make negative: "I have seen that film."', options: ["I haven't seen that film.", "I don't have seen that film.", "I haven't see that film.", "I am not seen that film."], correct: 0, explanation: "Negative form: 'have not' (haven't) + V3." },
+          { id: 14, text: 'Make question: "You have finished your homework."', options: ['Have you finished your homework?', 'Do you have finished your homework?', 'Have you finish your homework?', 'You have finished your homework?'], correct: 0, explanation: 'Move "have" to the front: "Have you finished...?".' },
+          { id: 15, text: 'Transform to Present Perfect: "We move into a new house." (recently, just now)', options: ['We have just moved into a new house.', 'We move into a new house just now.', 'We are moving into a new house.', 'We moved into a new house just now.'], correct: 0, explanation: 'Present Perfect with "just": "We have just moved into a new house".' },
+          { id: 16, text: 'Make negative: "She has read that book."', options: ["She hasn't read that book.", "She doesn't have read that book.", "She hasn't reads that book.", "She isn't read that book."], correct: 0, explanation: "Negative form: 'has not' (hasn't) + V3." },
+          { id: 17, text: 'Make question: "Your sister has got her results."', options: ['Has your sister got her results?', 'Does your sister has got her results?', 'Has your sister get her results?', 'Your sister has got her results?'], correct: 0, explanation: 'Move "has" to the front: "Has your sister got...?".' },
+          { id: 18, text: 'Transform to Present Perfect: "My parents are married." (for 20 years, still married now)', options: ['My parents have been married for 20 years.', 'My parents are married for 20 years.', 'My parents were married for 20 years.', 'My parents are being married for 20 years.'], correct: 0, explanation: 'Present Perfect with "for": "My parents have been married for 20 years".' },
+          { id: 19, text: 'Make negative: "I have finished my report."', options: ["I haven't finished my report.", "I don't have finished my report.", "I haven't finish my report.", "I am not finished my report."], correct: 0, explanation: "Negative form: 'have not' (haven't) + V3." },
+          { id: 20, text: 'Make question: "He has broken his leg twice."', options: ['Has he broken his leg twice?', 'Does he has broken his leg twice?', 'Has he break his leg twice?', 'He has broken his leg twice?'], correct: 0, explanation: 'Move "has" to the front: "Has he broken...?".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Talking about homework.', dialogue: 'A: Have you finished your homework?\nB: Yes, I ___ finished it already.', options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect: "have finished".' },
+          { id: 2, situation: 'Asking about travel experience.', dialogue: 'A: Has she ever been to Paris?\nB: Yes, she ___ visited it twice.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect: "has visited".' },
+          { id: 3, situation: 'Talking about lost items.', dialogue: "A: Where are your keys?\nB: I don't know, I ___ lost them.", options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect: "have lost" (result matters now).' },
+          { id: 4, situation: 'Discussing a phone call.', dialogue: "A: Did John call you back?\nB: No, he ___ called yet.", options: ["hasn't", "isn't", "wasn't", "doesn't"], correct: 0, explanation: 'Present Perfect negative: "hasn\'t called".' },
+          { id: 5, situation: 'Talking about how long someone has lived somewhere.', dialogue: 'A: How long have you lived here?\nB: I ___ lived here for five years.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect with "for": "have lived".' },
+          { id: 6, situation: 'Waiting at the airport.', dialogue: 'A: Where are the guests?\nB: They ___ just arrived.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect with "just": "have just arrived".' },
+          { id: 7, situation: "Checking on a colleague's work.", dialogue: 'A: ___ she finished the project yet?\nB: Almost, just a few more details.', options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect question: "Has she finished...?".' },
+          { id: 8, situation: 'Talking about travel experience.', dialogue: 'A: Have you ever been to Japan?\nB: No, I ___ never been there.', options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect: "have never been".' },
+          { id: 9, situation: 'Talking about keys again.', dialogue: 'A: Why are you upset?\nB: He ___ lost his keys again.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect: "has lost".' },
+          { id: 10, situation: 'Looking for a phone.', dialogue: "A: ___ you seen my phone?\nB: No, sorry, I haven't seen it.", options: ['Have', 'Are', 'Were', 'Did'], correct: 0, explanation: 'Present Perfect question: "Have you seen...?".' },
+          { id: 11, situation: 'Introducing new colleagues.', dialogue: 'A: Do you two know each other?\nB: No, we ___ not met before.', options: ['have', 'are', 'were', 'did'], correct: 0, explanation: 'Present Perfect negative: "have not met".' },
+          { id: 12, situation: 'Talking about a long marriage.', dialogue: 'A: How long have your parents been married?\nB: They ___ been married for 20 years.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect with "for": "have been".' },
+          { id: 13, situation: 'Asking about food experience.', dialogue: 'A: ___ he ever tried sushi?\nB: Yes, he loves it!', options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect question: "Has he ever tried...?".' },
+          { id: 14, situation: 'Talking about a book.', dialogue: 'A: Do you want to borrow this book?\nB: No thanks, she ___ already read it.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect with "already": "has already read".' },
+          { id: 15, situation: 'Checking on a report.', dialogue: 'A: Can you send me the report?\nB: Sorry, I ___ not finished it yet.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect negative: "have not finished".' },
+          { id: 16, situation: 'Talking about old friends.', dialogue: 'A: Are they good friends?\nB: Yes, they ___ known each other since childhood.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect with "since": "have known".' },
+          { id: 17, situation: 'Asking about exam results.', dialogue: "A: ___ your sister got her results yet?\nB: Not yet, she's still waiting.", options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect question: "Has your sister got...?".' },
+          { id: 18, situation: 'Talking about moving house.', dialogue: 'A: Are you settled in?\nB: Yes, we ___ just moved in.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect with "just": "have just moved".' },
+          { id: 19, situation: 'Talking about an injury.', dialogue: 'A: Is he careful when skiing?\nB: Not really, he ___ broken his leg twice.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect: "has broken".' },
+          { id: 20, situation: 'Discussing movies.', dialogue: "A: Do you want to watch this film?\nB: No, I ___ not seen it, but I've heard bad things.", options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect negative: "have not seen".' }
+        ]
+      },
+      {
+        id: 'present-perfect-continuous',
+        title: 'Present Perfect Continuous',
+        icon: '⏱️',
+        guide: `## Present Perfect Continuous (Hozirgi tugallangan davomli zamon)
+
+Present Perfect Continuous o'tmishda boshlangan va hozirgi paytgacha davom etib kelayotgan (yoki yaqindagina tugagan, lekin natijasi hali sezilib turgan) harakatni ta'kidlash uchun ishlatiladi — ko'pincha harakatning davomiyligi yoki uzluksizligi muhim bo'ladi.
+
+## 1. Shakllanishi (Form)
+• **Positive (+)**: Subject + have/has + been + Verb-ing
+  - I **have been waiting** for an hour.
+  - She **has been studying** all day.
+• **Negative (-)**: Subject + have not (haven't) / has not (hasn't) + been + Verb-ing
+  - We **haven't been sleeping** well lately.
+  - He **hasn't been feeling** well.
+• **Question (?)**: Have/Has + Subject + been + Verb-ing?
+  - **Have** you **been waiting** long?
+  - **How long has** she **been learning** English?
+
+*(has faqat he/she/it bilan, qolganlarida have ishlatiladi; been barcha shaxslarda o'zgarmaydi)*
+
+## 2. Ishlatilishi (Usage)
+1. **O'tmishda boshlanib, hozirgi paytgacha davom etayotgan harakat, davomiylik muhim**:
+   - I **have been learning** English for three years.
+2. **Yaqinda tugagan, lekin natijasi hozir ko'rinib turgan harakat**:
+   - Her eyes are red — she **has been crying**.
+3. **Vaqtincha, uzluksiz takrorlanayotgan harakat**:
+   - He **has been working** a lot recently.
+4. **"How long...?" savoli bilan davomiylikni so'rash**:
+   - **How long have** you **been living** here?
+
+## 3. Present Perfect Simple bilan farqi
+• **Present Perfect Simple** — natija yoki tugallanganlik muhim (nechta, nima qildi).
+  - I **have painted** the fence. (fence tayyor, ish tugagan)
+• **Present Perfect Continuous** — jarayon, davomiylik muhim (qancha vaqt, nima qilyapti/qildi).
+  - I **have been painting** the fence. (jarayon davom etyapti yoki hozirgina tugagan, natija ikkinchi darajali)
+
+## 4. Signal so'zlar (Time Expressions)
+• for, since, all day/week/morning
+• lately, recently
+• how long...?`,
+        questions: [
+          { id: 1, text: 'I ___ been waiting for an hour.', options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect Continuous: I + have + been + Verb-ing.' },
+          { id: 2, text: 'She ___ been studying all day.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect Continuous: she + has + been + Verb-ing.' },
+          { id: 3, text: '___ you been waiting long?', options: ['Have', 'Are', 'Were', 'Did'], correct: 0, explanation: 'Present Perfect Continuous question: Have + subject + been + Verb-ing?' },
+          { id: 4, text: 'We ___ not been sleeping well lately.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous negative: have not + been + Verb-ing.' },
+          { id: 5, text: 'He ___ been feeling sick since Monday.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous: has + been + feeling.' },
+          { id: 6, text: 'How long ___ you been learning English?', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: '"How long" + have/has + subject + been + Verb-ing.' },
+          { id: 7, text: 'Her eyes are red — she ___ been crying.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous: has + been + crying (recent evidence).' },
+          { id: 8, text: 'They ___ been working hard recently.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous: have + been + working.' },
+          { id: 9, text: '___ it been raining all morning?', options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect Continuous question: Has + it + been + raining?' },
+          { id: 10, text: 'I ___ been running every day this month.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect Continuous: have + been + running.' },
+          { id: 11, text: 'She ___ not been reading much lately.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous negative: has not + been + reading.' },
+          { id: 12, text: 'We ___ been playing tennis together for years.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous: have + been + playing.' },
+          { id: 13, text: '___ they been talking about the project all day?', options: ['Have', 'Are', 'Were', 'Do'], correct: 0, explanation: 'Present Perfect Continuous question: Have + they + been + talking?' },
+          { id: 14, text: 'I ___ been cooking since noon.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect Continuous: have + been + cooking.' },
+          { id: 15, text: 'He ___ been exercising every morning this week.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous: has + been + exercising.' },
+          { id: 16, text: 'You ___ not been watching too much TV, have you?', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous negative: have not + been + watching.' },
+          { id: 17, text: 'How long ___ she been texting him?', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: '"How long" + has + subject + been + Verb-ing.' },
+          { id: 18, text: 'We ___ been arguing about this all week.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous: have + been + arguing.' },
+          { id: 19, text: '___ he been practicing the piano lately?', options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect Continuous question: Has + he + been + practicing?' },
+          { id: 20, text: 'I ___ been driving for six hours straight.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect Continuous: have + been + driving.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'I ___ (wait) for an hour.', options: ['have been waiting', 'have been wait', 'am waiting', 'was waiting'], correct: 0, explanation: 'Present Perfect Continuous: have + been + Verb-ing.' },
+          { id: 2, text: 'She ___ (study) all day.', options: ['has been studying', 'has been study', 'is studying', 'was studying'], correct: 0, explanation: 'Present Perfect Continuous: has + been + studying.' },
+          { id: 3, text: '___ (you / wait) long?', options: ['Have you been waiting', 'Have you been wait', 'Are you waiting', 'Were you waiting'], correct: 0, explanation: 'Present Perfect Continuous question: Have + subject + been + Verb-ing.' },
+          { id: 4, text: 'We ___ (not / sleep) well lately.', options: ["haven't been sleeping", "haven't been sleep", "aren't sleeping", "weren't sleeping"], correct: 0, explanation: "Present Perfect Continuous negative: haven't + been + Verb-ing." },
+          { id: 5, text: 'He ___ (feel) sick since Monday.', options: ['has been feeling', 'has been feel', 'is feeling', 'was feeling'], correct: 0, explanation: 'Present Perfect Continuous: has + been + feeling.' },
+          { id: 6, text: 'How long ___ (you / learn) English?', options: ['have you been learning', 'have you been learn', 'are you learning', 'were you learning'], correct: 0, explanation: '"How long" + have + subject + been + Verb-ing.' },
+          { id: 7, text: "She ___ (cry) — her eyes are red.", options: ['has been crying', 'has been cry', 'is crying', 'was crying'], correct: 0, explanation: 'Present Perfect Continuous: has + been + crying.' },
+          { id: 8, text: 'They ___ (work) hard recently.', options: ['have been working', 'have been work', 'are working', 'were working'], correct: 0, explanation: 'Present Perfect Continuous: have + been + working.' },
+          { id: 9, text: '___ (it / rain) all morning?', options: ['Has it been raining', 'Has it been rain', 'Is it raining', 'Was it raining'], correct: 0, explanation: 'Present Perfect Continuous question: Has + it + been + raining.' },
+          { id: 10, text: 'I ___ (run) every day this month.', options: ['have been running', 'have been run', 'am running', 'was running'], correct: 0, explanation: 'Present Perfect Continuous: have + been + running.' },
+          { id: 11, text: 'She ___ (not / read) much lately.', options: ["hasn't been reading", "hasn't been read", "isn't reading", "wasn't reading"], correct: 0, explanation: "Present Perfect Continuous negative: hasn't + been + Verb-ing." },
+          { id: 12, text: 'We ___ (play) tennis together for years.', options: ['have been playing', 'have been play', 'are playing', 'were playing'], correct: 0, explanation: 'Present Perfect Continuous: have + been + playing.' },
+          { id: 13, text: '___ (they / talk) about the project all day?', options: ['Have they been talking', 'Have they been talk', 'Are they talking', 'Were they talking'], correct: 0, explanation: 'Present Perfect Continuous question: Have + subject + been + Verb-ing.' },
+          { id: 14, text: 'I ___ (cook) since noon.', options: ['have been cooking', 'have been cook', 'am cooking', 'was cooking'], correct: 0, explanation: 'Present Perfect Continuous: have + been + cooking.' },
+          { id: 15, text: 'He ___ (exercise) every morning this week.', options: ['has been exercising', 'has been exercise', 'is exercising', 'was exercising'], correct: 0, explanation: 'Present Perfect Continuous: has + been + exercising.' },
+          { id: 16, text: "You ___ (not / watch) too much TV, have you?", options: ["haven't been watching", "haven't been watch", "aren't watching", "weren't watching"], correct: 0, explanation: "Present Perfect Continuous negative: haven't + been + Verb-ing." },
+          { id: 17, text: 'How long ___ (she / text) him?', options: ['has she been texting', 'has she been text', 'is she texting', 'was she texting'], correct: 0, explanation: '"How long" + has + subject + been + Verb-ing.' },
+          { id: 18, text: 'We ___ (argue) about this all week.', options: ['have been arguing', 'have been argue', 'are arguing', 'were arguing'], correct: 0, explanation: 'Present Perfect Continuous: have + been + arguing.' },
+          { id: 19, text: '___ (he / practice) the piano lately?', options: ['Has he been practicing', 'Has he been practice', 'Is he practicing', 'Was he practicing'], correct: 0, explanation: 'Present Perfect Continuous question: Has + subject + been + Verb-ing.' },
+          { id: 20, text: 'I ___ (drive) for six hours straight.', options: ['have been driving', 'have been drive', 'am driving', 'was driving'], correct: 0, explanation: 'Present Perfect Continuous: have + been + driving.' }
+        ],
+        scrambled: [
+          { id: 1, words: ['waiting', 'I', 'have', 'been', 'for', 'an', 'hour'], answer: 'I have been waiting for an hour', explanation: 'Subject + have + been + Verb-ing + duration.' },
+          { id: 2, words: ['studying', 'she', 'has', 'been', 'all', 'day'], answer: 'she has been studying all day', explanation: 'Subject + has + been + Verb-ing + duration.' },
+          { id: 3, words: ['waiting', 'have', 'you', 'been', 'long', '?'], answer: 'have you been waiting long', explanation: 'Have + subject + been + Verb-ing?' },
+          { id: 4, words: ['sleeping', 'we', "haven't", 'been', 'well', 'lately'], answer: "we haven't been sleeping well lately", explanation: "Subject + haven't + been + Verb-ing + adverb." },
+          { id: 5, words: ['feeling', 'he', 'has', 'been', 'sick', 'since', 'Monday'], answer: 'he has been feeling sick since Monday', explanation: 'Subject + has + been + Verb-ing + since + point in time.' },
+          { id: 6, words: ['learning', 'you', 'have', 'been', 'how', 'long', 'English', '?'], answer: 'how long have you been learning English', explanation: 'How long + have + subject + been + Verb-ing + object?' },
+          { id: 7, words: ['crying', 'she', 'has', 'been'], answer: 'she has been crying', explanation: 'Subject + has + been + Verb-ing.' },
+          { id: 8, words: ['working', 'they', 'have', 'been', 'hard', 'recently'], answer: 'they have been working hard recently', explanation: 'Subject + have + been + Verb-ing + adverb.' },
+          { id: 9, words: ['raining', 'has', 'it', 'been', 'all', 'morning', '?'], answer: 'has it been raining all morning', explanation: 'Has + it + been + Verb-ing?' },
+          { id: 10, words: ['running', 'I', 'have', 'been', 'every', 'day', 'this', 'month'], answer: 'I have been running every day this month', explanation: 'Subject + have + been + Verb-ing + time.' },
+          { id: 11, words: ['reading', 'she', "hasn't", 'been', 'much', 'lately'], answer: "she hasn't been reading much lately", explanation: "Subject + hasn't + been + Verb-ing + adverb." },
+          { id: 12, words: ['playing', 'we', 'have', 'been', 'tennis', 'together', 'for', 'years'], answer: 'we have been playing tennis together for years', explanation: 'Subject + have + been + Verb-ing + object + duration.' },
+          { id: 13, words: ['talking', 'have', 'they', 'been', 'about', 'the', 'project', 'all', 'day', '?'], answer: 'have they been talking about the project all day', explanation: 'Have + subject + been + Verb-ing?' },
+          { id: 14, words: ['cooking', 'I', 'have', 'been', 'since', 'noon'], answer: 'I have been cooking since noon', explanation: 'Subject + have + been + Verb-ing + since + point in time.' },
+          { id: 15, words: ['exercising', 'he', 'has', 'been', 'every', 'morning', 'this', 'week'], answer: 'he has been exercising every morning this week', explanation: 'Subject + has + been + Verb-ing + time.' },
+          { id: 16, words: ['watching', 'you', "haven't", 'been', 'too', 'much', 'TV'], answer: "you haven't been watching too much TV", explanation: "Subject + haven't + been + Verb-ing + object." },
+          { id: 17, words: ['texting', 'she', 'has', 'been', 'how', 'long', 'him', '?'], answer: 'how long has she been texting him', explanation: 'How long + has + subject + been + Verb-ing + object?' },
+          { id: 18, words: ['arguing', 'we', 'have', 'been', 'about', 'this', 'all', 'week'], answer: 'we have been arguing about this all week', explanation: 'Subject + have + been + Verb-ing + object.' },
+          { id: 19, words: ['practicing', 'has', 'he', 'been', 'the', 'piano', 'lately', '?'], answer: 'has he been practicing the piano lately', explanation: 'Has + subject + been + Verb-ing?' },
+          { id: 20, words: ['driving', 'I', 'have', 'been', 'for', 'six', 'hours', 'straight'], answer: 'I have been driving for six hours straight', explanation: 'Subject + have + been + Verb-ing + duration.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'I have been wait for an hour.', options: ['I', 'have been', 'wait', 'for an hour'], correct: 2, wrongPart: 'wait', correction: 'waiting', explanation: 'After "have been", use the "-ing" form: "waiting".' },
+          { id: 2, text: 'She have been studying all day.', options: ['She', 'have', 'been studying', 'all day'], correct: 1, wrongPart: 'have', correction: 'has', explanation: '"She" is third person singular, so use "has", not "have".' },
+          { id: 3, text: 'You been waiting long?', options: ['You', 'been', 'waiting', 'long?'], correct: 0, wrongPart: 'You', correction: 'Have you', explanation: 'Present Perfect Continuous questions start with "Have/Has": "Have you been waiting...?".' },
+          { id: 4, text: "We haven't sleeping well lately.", options: ['We', "haven't", 'sleeping', 'well lately'], correct: 1, wrongPart: "haven't", correction: "haven't been", explanation: "Present Perfect Continuous negative needs \"been\": \"haven't been sleeping\"." },
+          { id: 5, text: 'He has been feels sick since Monday.', options: ['He', 'has been', 'feels', 'sick since Monday'], correct: 2, wrongPart: 'feels', correction: 'feeling', explanation: 'After "has been", use the "-ing" form: "feeling".' },
+          { id: 6, text: 'How long you have been learning English?', options: ['How long', 'you have been', 'learning', 'English?'], correct: 1, wrongPart: 'you have been', correction: 'have you been', explanation: 'Question order: "How long" + have + subject + been: "how long have you been".' },
+          { id: 7, text: 'She has cried been all morning.', options: ['She', 'has cried been', 'all morning', 'No error'], correct: 1, wrongPart: 'has cried been', correction: 'has been crying', explanation: 'Correct order is "has been" + Verb-ing: "has been crying".' },
+          { id: 8, text: 'They has been working hard recently.', options: ['They', 'has been', 'working hard', 'recently'], correct: 1, wrongPart: 'has been', correction: 'have been', explanation: '"They" takes "have", not "has": "have been working".' },
+          { id: 9, text: 'Has it been rains all morning?', options: ['Has', 'it been', 'rains', 'all morning?'], correct: 2, wrongPart: 'rains', correction: 'raining', explanation: 'After "been", use the "-ing" form: "raining".' },
+          { id: 10, text: 'I have running every day this month.', options: ['I', 'have', 'running', 'every day this month'], correct: 1, wrongPart: 'have', correction: 'have been', explanation: 'Present Perfect Continuous needs "been": "have been running".' },
+          { id: 11, text: "She hasn't been read much lately.", options: ['She', "hasn't been", 'read', 'much lately'], correct: 2, wrongPart: 'read', correction: 'reading', explanation: "After \"hasn't been\", use the \"-ing\" form: \"reading\"." },
+          { id: 12, text: 'We have been played tennis for years.', options: ['We', 'have been', 'played', 'tennis for years'], correct: 2, wrongPart: 'played', correction: 'playing', explanation: 'After "have been", use the "-ing" form: "playing".' },
+          { id: 13, text: 'Have they talking about the project all day?', options: ['Have', 'they', 'talking', 'about the project all day?'], correct: 2, wrongPart: 'talking', correction: 'been talking', explanation: 'Present Perfect Continuous questions need "been": "been talking".' },
+          { id: 14, text: 'I have been cook since noon.', options: ['I', 'have been', 'cook', 'since noon'], correct: 2, wrongPart: 'cook', correction: 'cooking', explanation: 'After "have been", use the "-ing" form: "cooking".' },
+          { id: 15, text: 'He have been exercising every morning.', options: ['He', 'have been', 'exercising', 'every morning'], correct: 1, wrongPart: 'have been', correction: 'has been', explanation: '"He" is third person singular, so use "has", not "have".' },
+          { id: 16, text: "You haven't watching too much TV, have you?", options: ['You', "haven't", 'watching', 'too much TV, have you?'], correct: 1, wrongPart: "haven't", correction: "haven't been", explanation: "Present Perfect Continuous negative needs \"been\": \"haven't been watching\"." },
+          { id: 17, text: 'How long has she texting been him?', options: ['How long', 'has she', 'texting been', 'him?'], correct: 2, wrongPart: 'texting been', correction: 'been texting', explanation: 'Correct order is "been" + Verb-ing: "been texting".' },
+          { id: 18, text: 'We have been argue about this all week.', options: ['We', 'have been', 'argue', 'about this all week'], correct: 2, wrongPart: 'argue', correction: 'arguing', explanation: 'After "have been", use the "-ing" form: "arguing".' },
+          { id: 19, text: 'Has he practicing been the piano lately?', options: ['Has', 'he', 'practicing been', 'the piano lately?'], correct: 2, wrongPart: 'practicing been', correction: 'been practicing', explanation: 'Correct order is "been" + Verb-ing: "been practicing".' },
+          { id: 20, text: 'I has been driving for six hours straight.', options: ['I', 'has been', 'driving', 'for six hours straight'], correct: 1, wrongPart: 'has been', correction: 'have been', explanation: '"I" takes "have", not "has": "have been driving".' }
+        ],
+        transform: [
+          { id: 1, text: 'Make negative: "I have been waiting for an hour."', options: ["I haven't been waiting for an hour.", "I don't have been waiting for an hour.", "I haven't been wait for an hour.", "I am not been waiting for an hour."], correct: 0, explanation: "Present Perfect Continuous negative: haven't been + Verb-ing." },
+          { id: 2, text: 'Make question: "She has been studying all day."', options: ['Has she been studying all day?', 'Does she has been studying all day?', 'Has she been study all day?', 'She has been studying all day?'], correct: 0, explanation: 'Move "has" to the front: "Has she been studying...?".' },
+          { id: 3, text: 'Transform to Present Perfect Continuous: "I learn English." (for three years, still learning)', options: ['I have been learning English for three years.', 'I learn English for three years.', 'I am learning English for three years.', 'I learned English for three years.'], correct: 0, explanation: 'Present Perfect Continuous with "for": "I have been learning English for three years".' },
+          { id: 4, text: 'Make negative: "We have been sleeping well."', options: ["We haven't been sleeping well.", "We don't have been sleeping well.", "We haven't been sleep well.", "We aren't been sleeping well."], correct: 0, explanation: "Negative form: 'have not' (haven't) + been + Verb-ing." },
+          { id: 5, text: 'Make question: "He has been feeling sick."', options: ['Has he been feeling sick?', 'Does he has been feeling sick?', 'Has he been feel sick?', 'He has been feeling sick?'], correct: 0, explanation: 'Move "has" to the front: "Has he been feeling...?".' },
+          { id: 6, text: 'Transform to Present Perfect Continuous: "They work hard." (recently, still ongoing)', options: ['They have been working hard recently.', 'They work hard recently.', 'They are working hard recently.', 'They worked hard recently.'], correct: 0, explanation: 'Present Perfect Continuous: "They have been working hard recently".' },
+          { id: 7, text: 'Make negative: "She has been reading much."', options: ["She hasn't been reading much.", "She doesn't have been reading much.", "She hasn't been read much.", "She isn't been reading much."], correct: 0, explanation: "Negative form: 'has not' (hasn't) + been + Verb-ing." },
+          { id: 8, text: 'Make question: "It has been raining all morning."', options: ['Has it been raining all morning?', 'Does it has been raining all morning?', 'Has it been rain all morning?', 'It has been raining all morning?'], correct: 0, explanation: 'Move "has" to the front: "Has it been raining...?".' },
+          { id: 9, text: 'Transform to Present Perfect Continuous: "I run every day." (this month, still continuing)', options: ['I have been running every day this month.', 'I run every day this month.', 'I am running every day this month.', 'I ran every day this month.'], correct: 0, explanation: 'Present Perfect Continuous: "I have been running every day this month".' },
+          { id: 10, text: 'Make negative: "They have been arguing."', options: ["They haven't been arguing.", "They don't have been arguing.", "They haven't been argue.", "They aren't been arguing."], correct: 0, explanation: "Negative form: 'have not' (haven't) + been + Verb-ing." },
+          { id: 11, text: 'Make question: "They have been talking about it."', options: ['Have they been talking about it?', 'Do they have been talking about it?', 'Have they been talk about it?', 'They have been talking about it?'], correct: 0, explanation: 'Move "have" to the front: "Have they been talking...?".' },
+          { id: 12, text: 'Transform to Present Perfect Continuous: "We play tennis together." (for years, still playing)', options: ['We have been playing tennis together for years.', 'We play tennis together for years.', 'We are playing tennis together for years.', 'We played tennis together for years.'], correct: 0, explanation: 'Present Perfect Continuous with "for": "We have been playing tennis together for years".' },
+          { id: 13, text: 'Make negative: "You have been watching too much TV."', options: ["You haven't been watching too much TV.", "You don't have been watching too much TV.", "You haven't been watch too much TV.", "You aren't been watching too much TV."], correct: 0, explanation: "Negative form: 'have not' (haven't) + been + Verb-ing." },
+          { id: 14, text: 'Make question: "She has been texting him."', options: ['Has she been texting him?', 'Does she has been texting him?', 'Has she been text him?', 'She has been texting him?'], correct: 0, explanation: 'Move "has" to the front: "Has she been texting...?".' },
+          { id: 15, text: 'Transform to Present Perfect Continuous: "He practices the piano." (lately, still ongoing)', options: ['He has been practicing the piano lately.', 'He practices the piano lately.', 'He is practicing the piano lately.', 'He practiced the piano lately.'], correct: 0, explanation: 'Present Perfect Continuous: "He has been practicing the piano lately".' },
+          { id: 16, text: 'Make negative: "I have been driving for six hours."', options: ["I haven't been driving for six hours.", "I don't have been driving for six hours.", "I haven't been drive for six hours.", "I am not been driving for six hours."], correct: 0, explanation: "Negative form: 'have not' (haven't) + been + Verb-ing." },
+          { id: 17, text: 'Make question: "You have been waiting long."', options: ['Have you been waiting long?', 'Do you have been waiting long?', 'Have you been wait long?', 'You have been waiting long?'], correct: 0, explanation: 'Move "have" to the front: "Have you been waiting...?".' },
+          { id: 18, text: 'Transform to Present Perfect Continuous: "We cook." (since noon, still cooking)', options: ['We have been cooking since noon.', 'We cook since noon.', 'We are cooking since noon.', 'We cooked since noon.'], correct: 0, explanation: 'Present Perfect Continuous with "since": "We have been cooking since noon".' },
+          { id: 19, text: 'Make negative: "He has been exercising every day."', options: ["He hasn't been exercising every day.", "He doesn't have been exercising every day.", "He hasn't been exercise every day.", "He isn't been exercising every day."], correct: 0, explanation: "Negative form: 'has not' (hasn't) + been + Verb-ing." },
+          { id: 20, text: 'Transform to Present Perfect Continuous: "She feels tired." (all week, still feeling tired)', options: ['She has been feeling tired all week.', 'She feels tired all week.', 'She is feeling tired all week.', 'She felt tired all week.'], correct: 0, explanation: 'Present Perfect Continuous: "She has been feeling tired all week".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Waiting for a friend.', dialogue: "A: Sorry I'm late!\nB: It's fine, I ___ been waiting for only ten minutes.", options: ['have', 'am', 'was', 'did'], correct: 0, explanation: 'Present Perfect Continuous: "have been waiting".' },
+          { id: 2, situation: 'Checking on exam prep.', dialogue: 'A: Is she ready for the exam?\nB: Yes, she ___ been studying all day.', options: ['has', 'is', 'was', 'did'], correct: 0, explanation: 'Present Perfect Continuous: "has been studying".' },
+          { id: 3, situation: 'Asking about someone at the bus stop.', dialogue: '___ you been waiting long?\nB: Yes, about half an hour.', options: ['Have', 'Are', 'Were', 'Did'], correct: 0, explanation: 'Present Perfect Continuous question: "Have you been waiting...?".' },
+          { id: 4, situation: 'Talking about tiredness.', dialogue: 'A: You look tired.\nB: Yeah, we ___ not been sleeping well lately.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous negative: "have not been sleeping".' },
+          { id: 5, situation: 'Asking about health.', dialogue: 'A: Why is he staying home?\nB: He ___ been feeling sick since Monday.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous: "has been feeling".' },
+          { id: 6, situation: 'Talking about language learning.', dialogue: 'A: Your English is great! How long ___ you been learning it?\nB: For three years.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: '"How long" + have + subject + been + Verb-ing.' },
+          { id: 7, situation: 'Noticing someone upset.', dialogue: "A: What's wrong with her?\nB: She ___ been crying — her eyes are red.", options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous: "has been crying".' },
+          { id: 8, situation: 'Talking about overtime.', dialogue: 'A: They look exhausted.\nB: Yeah, they ___ been working hard recently.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been working".' },
+          { id: 9, situation: 'Checking the weather.', dialogue: '___ it been raining all morning?\nB: Yes, non-stop.', options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect Continuous question: "Has it been raining...?".' },
+          { id: 10, situation: 'Talking about fitness.', dialogue: "A: You're in great shape!\nB: Thanks, I ___ been running every day this month.", options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been running".' },
+          { id: 11, situation: 'Talking about hobbies.', dialogue: 'A: Does she still read a lot?\nB: Actually, she ___ not been reading much lately.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous negative: "has not been reading".' },
+          { id: 12, situation: 'Talking about a friendship.', dialogue: 'A: Do you and Tom play sports together?\nB: Yes, we ___ been playing tennis together for years.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been playing".' },
+          { id: 13, situation: 'Checking on a meeting.', dialogue: "___ they been talking about the project all day?\nB: Yes, they still haven't decided anything.", options: ['Have', 'Are', 'Were', 'Do'], correct: 0, explanation: 'Present Perfect Continuous question: "Have they been talking...?".' },
+          { id: 14, situation: 'Talking about smells in the kitchen.', dialogue: 'A: Something smells great!\nB: I ___ been cooking since noon.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been cooking".' },
+          { id: 15, situation: 'Talking about fitness habits.', dialogue: 'A: He looks so fit lately.\nB: He ___ been exercising every morning this week.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: 'Present Perfect Continuous: "has been exercising".' },
+          { id: 16, situation: 'Worrying about screen time.', dialogue: "A: You ___ not been watching too much TV, have you?\nB: No, don't worry.", options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous negative: "have not been watching".' },
+          { id: 17, situation: 'Gossiping about a relationship.', dialogue: 'A: How long ___ she been texting him?\nB: For a couple of weeks now.', options: ['has', 'is', 'was', 'does'], correct: 0, explanation: '"How long" + has + subject + been + Verb-ing.' },
+          { id: 18, situation: 'Talking about a disagreement.', dialogue: 'A: Are you two okay?\nB: Not really, we ___ been arguing about this all week.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been arguing".' },
+          { id: 19, situation: 'Talking about music practice.', dialogue: '___ he been practicing the piano lately?\nB: Yes, every single day.', options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect Continuous question: "Has he been practicing...?".' },
+          { id: 20, situation: 'Talking about a road trip.', dialogue: 'A: You must be exhausted.\nB: Yeah, I ___ been driving for six hours straight.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been driving".' }
+        ]
+      },
+      {
+        id: 'passive-voice',
+        title: 'Passive Voice',
+        icon: '🎭',
+        guide: `## Passive Voice (Majhul nisbat)
+
+Passive Voice harakatni bajaruvchi shaxs emas, balki harakat ta'sir etuvchi ob'ekt (yoki harakatning o'zi) muhim bo'lganda ishlatiladi. Bu bo'limda Present Simple va Past Simple zamonlaridagi passiv gaplarni o'rganamiz.
+
+## 1. Shakllanishi (Form)
+• **Present Simple Passive**: Subject + am/is/are + Past Participle (V3)
+  - English **is spoken** all over the world.
+  - Cars **are made** in this factory.
+• **Past Simple Passive**: Subject + was/were + Past Participle (V3)
+  - The letter **was sent** yesterday.
+  - These houses **were built** in 1990.
+• **Negative**: am/is/are/was/were + not + V3
+  - The window **wasn't broken** by me.
+• **Question**: Am/Is/Are/Was/Were + Subject + V3?
+  - **Is** this book **written** in English?
+  - **Were** the windows **cleaned** yesterday?
+
+*(Bajaruvchi shaxs ko'rsatilsa, "by" bilan qo'shiladi: The book was written **by** Shakespeare.)*
+
+## 2. Ishlatilishi (Usage)
+1. **Harakatni bajaruvchi shaxs noma'lum yoki muhim emas**:
+   - My car **was stolen** last night. (kim o'g'irlaganini bilmaymiz)
+2. **Harakat natijasi yoki ob'ekt harakat bajaruvchisidan ko'ra muhimroq**:
+   - This bridge **was built** in 1889.
+3. **Rasmiy, ilmiy yoki gazeta uslubidagi matnlar**:
+   - Mistakes **were made** during the process.
+4. **Umumiy haqiqatlar va jarayonlar**:
+   - Rice **is grown** in many countries.
+
+## 3. Active vs Passive
+• **Active**: Subject (bajaruvchi) + Verb + Object
+  - Shakespeare **wrote** this play. (Shakespeare — bajaruvchi, muhim)
+• **Passive**: Object (natija) + be + V3 (+ by + bajaruvchi)
+  - This play **was written** by Shakespeare. (play — natija, birinchi o'rinda)
+
+## 4. Signal so'zlar / Eslatmalar
+• by + bajaruvchi (agar muhim bo'lsa)
+• Faqat o'timli fe'llar (transitive verbs) passiv shaklga o'tkaziladi
+• Present Simple Passive: umumiy haqiqatlar; Past Simple Passive: o'tmishda tugallangan harakatlar`,
+        questions: [
+          { id: 1, text: 'English ___ spoken in many countries.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: subject (singular) + is + V3.' },
+          { id: 2, text: 'Cars ___ made in this factory.', options: ['are', 'is', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: subject (plural) + are + V3.' },
+          { id: 3, text: 'The letter ___ sent yesterday.', options: ['was', 'is', 'were', 'be'], correct: 0, explanation: 'Past Simple Passive: subject (singular) + was + V3.' },
+          { id: 4, text: 'These houses ___ built in 1990.', options: ['were', 'was', 'are', 'be'], correct: 0, explanation: 'Past Simple Passive: subject (plural) + were + V3.' },
+          { id: 5, text: '___ this book written in English?', options: ['Is', 'Are', 'Was', 'Does'], correct: 0, explanation: 'Passive question: Is + subject + V3?' },
+          { id: 6, text: 'The window ___ not broken by me.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Passive negative: was + not + V3.' },
+          { id: 7, text: '___ the windows cleaned yesterday?', options: ['Were', 'Was', 'Are', 'Did'], correct: 0, explanation: 'Passive question: Were + subject (plural) + V3?' },
+          { id: 8, text: 'My car ___ stolen last night.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: subject (singular) + was + V3.' },
+          { id: 9, text: 'This bridge ___ built in 1889.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: was + V3.' },
+          { id: 10, text: 'Rice ___ grown in many countries.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: is + V3.' },
+          { id: 11, text: 'This play ___ written by Shakespeare.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: was + V3 + by + agent.' },
+          { id: 12, text: 'These cakes ___ baked fresh every morning.', options: ['are', 'is', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: are + V3.' },
+          { id: 13, text: '___ the report finished on time?', options: ['Was', 'Is', 'Were', 'Did'], correct: 0, explanation: 'Passive question: Was + subject + V3?' },
+          { id: 14, text: 'The museum ___ visited by thousands of tourists every year.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: is + V3.' },
+          { id: 15, text: 'These photos ___ taken during the war.', options: ['were', 'was', 'are', 'be'], correct: 0, explanation: 'Past Simple Passive: were + V3.' },
+          { id: 16, text: 'This song ___ not written by her.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Passive negative: was + not + V3.' },
+          { id: 17, text: 'Coffee ___ exported from Brazil.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: is + V3.' },
+          { id: 18, text: '___ the tickets sold already?', options: ['Were', 'Was', 'Are', 'Did'], correct: 0, explanation: 'Passive question: Were + subject (plural) + V3?' },
+          { id: 19, text: 'The email ___ delivered this morning.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: was + V3.' },
+          { id: 20, text: 'These rules ___ followed by everyone.', options: ['are', 'is', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: are + V3.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'This letter ___ (write) by John.', options: ['was written', 'was write', 'is written', 'wrote'], correct: 0, explanation: 'Past Simple Passive: was + V3 (written).' },
+          { id: 2, text: 'English ___ (speak) all over the world.', options: ['is spoken', 'is speak', 'was spoken', 'speaks'], correct: 0, explanation: 'Present Simple Passive: is + V3 (spoken).' },
+          { id: 3, text: 'These cars ___ (make) in Germany.', options: ['are made', 'are make', 'were made', 'make'], correct: 0, explanation: 'Present Simple Passive: are + V3 (made).' },
+          { id: 4, text: 'The bridge ___ (build) in 1889.', options: ['was built', 'was build', 'is built', 'built'], correct: 0, explanation: 'Past Simple Passive: was + V3 (built).' },
+          { id: 5, text: '___ (this book / write) in English?', options: ['Is this book written', 'Is this book write', 'Was this book written', 'Does this book write'], correct: 0, explanation: 'Present Simple Passive question: Is + subject + V3.' },
+          { id: 6, text: 'My car ___ (not / steal).', options: ["wasn't stolen", "wasn't steal", "isn't stolen", "didn't steal"], correct: 0, explanation: "Past Simple Passive negative: wasn't + V3 (stolen)." },
+          { id: 7, text: 'Rice ___ (grow) in many countries.', options: ['is grown', 'is grow', 'was grown', 'grows'], correct: 0, explanation: 'Present Simple Passive: is + V3 (grown).' },
+          { id: 8, text: 'These photos ___ (take) during the war.', options: ['were taken', 'were take', 'are taken', 'took'], correct: 0, explanation: 'Past Simple Passive: were + V3 (taken).' },
+          { id: 9, text: '___ (the windows / clean) yesterday?', options: ['Were the windows cleaned', 'Were the windows clean', 'Are the windows cleaned', 'Did the windows clean'], correct: 0, explanation: 'Past Simple Passive question: Were + subject + V3.' },
+          { id: 10, text: 'This song ___ (not / write) by her.', options: ["wasn't written", "wasn't write", "isn't written", "didn't write"], correct: 0, explanation: "Past Simple Passive negative: wasn't + V3 (written)." },
+          { id: 11, text: 'Coffee ___ (export) from Brazil.', options: ['is exported', 'is export', 'was exported', 'exports'], correct: 0, explanation: 'Present Simple Passive: is + V3 (exported).' },
+          { id: 12, text: 'The museum ___ (visit) by thousands of tourists every year.', options: ['is visited', 'is visit', 'was visited', 'visits'], correct: 0, explanation: 'Present Simple Passive: is + V3 (visited).' },
+          { id: 13, text: '___ (the report / finish) on time?', options: ['Was the report finished', 'Was the report finish', 'Is the report finished', 'Did the report finish'], correct: 0, explanation: 'Past Simple Passive question: Was + subject + V3.' },
+          { id: 14, text: 'These cakes ___ (bake) fresh every morning.', options: ['are baked', 'are bake', 'were baked', 'bakes'], correct: 0, explanation: 'Present Simple Passive: are + V3 (baked).' },
+          { id: 15, text: 'The email ___ (deliver) this morning.', options: ['was delivered', 'was deliver', 'is delivered', 'delivered'], correct: 0, explanation: 'Past Simple Passive: was + V3 (delivered).' },
+          { id: 16, text: 'These rules ___ (follow) by everyone.', options: ['are followed', 'are follow', 'were followed', 'follows'], correct: 0, explanation: 'Present Simple Passive: are + V3 (followed).' },
+          { id: 17, text: '___ (the tickets / sell) already?', options: ['Were the tickets sold', 'Were the tickets sell', 'Are the tickets sold', 'Did the tickets sell'], correct: 0, explanation: 'Past Simple Passive question: Were + subject + V3.' },
+          { id: 18, text: 'This castle ___ (destroy) during the war.', options: ['was destroyed', 'was destroy', 'is destroyed', 'destroyed'], correct: 0, explanation: 'Past Simple Passive: was + V3 (destroyed).' },
+          { id: 19, text: 'Milk ___ (produce) on this farm.', options: ['is produced', 'is produce', 'was produced', 'produces'], correct: 0, explanation: 'Present Simple Passive: is + V3 (produced).' },
+          { id: 20, text: 'The prize ___ (give) to the winner.', options: ['was given', 'was give', 'is given', 'gave'], correct: 0, explanation: 'Past Simple Passive: was + V3 (given).' }
+        ],
+        scrambled: [
+          { id: 1, words: ['written', 'this', 'letter', 'was', 'by', 'John'], answer: 'this letter was written by John', explanation: 'Subject + was + V3 + by + agent.' },
+          { id: 2, words: ['spoken', 'English', 'is', 'all', 'over', 'the', 'world'], answer: 'English is spoken all over the world', explanation: 'Subject + is + V3 + place.' },
+          { id: 3, words: ['made', 'these', 'cars', 'are', 'in', 'Germany'], answer: 'these cars are made in Germany', explanation: 'Subject + are + V3 + place.' },
+          { id: 4, words: ['built', 'the', 'bridge', 'was', 'in', '1889'], answer: 'the bridge was built in 1889', explanation: 'Subject + was + V3 + time.' },
+          { id: 5, words: ['written', 'is', 'this', 'book', 'in', 'English', '?'], answer: 'is this book written in English', explanation: 'Is + subject + V3?' },
+          { id: 6, words: ['stolen', 'my', 'car', "wasn't", 'last', 'night'], answer: "my car wasn't stolen last night", explanation: "Subject + wasn't + V3 + time." },
+          { id: 7, words: ['grown', 'rice', 'is', 'in', 'many', 'countries'], answer: 'rice is grown in many countries', explanation: 'Subject + is + V3 + place.' },
+          { id: 8, words: ['taken', 'these', 'photos', 'were', 'during', 'the', 'war'], answer: 'these photos were taken during the war', explanation: 'Subject + were + V3 + time.' },
+          { id: 9, words: ['cleaned', 'were', 'the', 'windows', 'yesterday', '?'], answer: 'were the windows cleaned yesterday', explanation: 'Were + subject + V3?' },
+          { id: 10, words: ['written', 'this', 'song', "wasn't", 'by', 'her'], answer: "this song wasn't written by her", explanation: "Subject + wasn't + V3 + by + agent." },
+          { id: 11, words: ['exported', 'coffee', 'is', 'from', 'Brazil'], answer: 'coffee is exported from Brazil', explanation: 'Subject + is + V3 + place.' },
+          { id: 12, words: ['visited', 'the', 'museum', 'is', 'by', 'thousands', 'of', 'tourists'], answer: 'the museum is visited by thousands of tourists', explanation: 'Subject + is + V3 + by + agent.' },
+          { id: 13, words: ['finished', 'was', 'the', 'report', 'on', 'time', '?'], answer: 'was the report finished on time', explanation: 'Was + subject + V3?' },
+          { id: 14, words: ['baked', 'these', 'cakes', 'are', 'fresh', 'every', 'morning'], answer: 'these cakes are baked fresh every morning', explanation: 'Subject + are + V3 + adverb.' },
+          { id: 15, words: ['delivered', 'the', 'email', 'was', 'this', 'morning'], answer: 'the email was delivered this morning', explanation: 'Subject + was + V3 + time.' },
+          { id: 16, words: ['followed', 'these', 'rules', 'are', 'by', 'everyone'], answer: 'these rules are followed by everyone', explanation: 'Subject + are + V3 + by + agent.' },
+          { id: 17, words: ['sold', 'were', 'the', 'tickets', 'already', '?'], answer: 'were the tickets sold already', explanation: 'Were + subject + V3?' },
+          { id: 18, words: ['destroyed', 'the', 'castle', 'was', 'during', 'the', 'war'], answer: 'the castle was destroyed during the war', explanation: 'Subject + was + V3 + time.' },
+          { id: 19, words: ['produced', 'milk', 'is', 'on', 'this', 'farm'], answer: 'milk is produced on this farm', explanation: 'Subject + is + V3 + place.' },
+          { id: 20, words: ['given', 'the', 'prize', 'was', 'to', 'the', 'winner'], answer: 'the prize was given to the winner', explanation: 'Subject + was + V3 + object.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'This letter is wrote by John.', options: ['This letter', 'is', 'wrote', 'by John'], correct: 2, wrongPart: 'wrote', correction: 'written', explanation: 'Passive needs the past participle (V3): "written", not the past simple "wrote".' },
+          { id: 2, text: 'English speaks all over the world.', options: ['English', 'speaks', 'all', 'over the world'], correct: 1, wrongPart: 'speaks', correction: 'is spoken', explanation: 'Passive needs "be" + V3: "is spoken".' },
+          { id: 3, text: 'These cars is made in Germany.', options: ['These cars', 'is', 'made', 'in Germany'], correct: 1, wrongPart: 'is', correction: 'are', explanation: 'Plural subject needs "are", not "is": "are made".' },
+          { id: 4, text: 'The bridge built in 1889.', options: ['The bridge', 'built', 'in', '1889'], correct: 1, wrongPart: 'built', correction: 'was built', explanation: 'Passive needs "was/were" + V3: "was built".' },
+          { id: 5, text: 'This book wrote in English?', options: ['This book', 'wrote', 'in', 'English?'], correct: 1, wrongPart: 'wrote', correction: 'Is this book written', explanation: 'Passive question needs "Is/Was" + subject + V3: "Is this book written...?".' },
+          { id: 6, text: "My car didn't stolen last night.", options: ['My car', "didn't", 'stolen', 'last night'], correct: 1, wrongPart: "didn't", correction: "wasn't", explanation: "Passive negative needs \"wasn't/weren't\" + V3, not \"didn't\": \"wasn't stolen\"." },
+          { id: 7, text: 'Rice grows in many countries by farmers.', options: ['Rice', 'grows', 'in many countries', 'by farmers'], correct: 1, wrongPart: 'grows', correction: 'is grown', explanation: 'When "by" is used, the sentence should be passive: "is grown".' },
+          { id: 8, text: 'These photos taken during the war.', options: ['These photos', 'taken', 'during', 'the war'], correct: 1, wrongPart: 'taken', correction: 'were taken', explanation: 'Passive needs "were" + V3: "were taken".' },
+          { id: 9, text: 'Did the windows cleaned yesterday?', options: ['Did', 'the windows', 'cleaned', 'yesterday?'], correct: 0, wrongPart: 'Did', correction: 'Were', explanation: 'Passive question needs "Was/Were", not "Did": "Were the windows cleaned...?".' },
+          { id: 10, text: "This song weren't written by her.", options: ['This song', "weren't", 'written', 'by her'], correct: 1, wrongPart: "weren't", correction: "wasn't", explanation: 'Singular subject needs "wasn\'t", not "weren\'t".' },
+          { id: 11, text: 'Coffee export from Brazil.', options: ['Coffee', 'export', 'from', 'Brazil'], correct: 1, wrongPart: 'export', correction: 'is exported', explanation: 'Passive needs "be" + V3: "is exported".' },
+          { id: 12, text: 'The museum visit by thousands of tourists every year.', options: ['The museum', 'visit', 'by thousands of tourists', 'every year'], correct: 1, wrongPart: 'visit', correction: 'is visited', explanation: 'Passive needs "be" + V3: "is visited".' },
+          { id: 13, text: 'Was the report finish on time?', options: ['Was', 'the report', 'finish', 'on time?'], correct: 2, wrongPart: 'finish', correction: 'finished', explanation: 'Passive needs the past participle (V3): "finished".' },
+          { id: 14, text: 'These cakes bakes fresh every morning.', options: ['These cakes', 'bakes', 'fresh', 'every morning'], correct: 1, wrongPart: 'bakes', correction: 'are baked', explanation: 'Passive needs "be" + V3: "are baked".' },
+          { id: 15, text: 'The email delivered this morning.', options: ['The email', 'delivered', 'this', 'morning'], correct: 1, wrongPart: 'delivered', correction: 'was delivered', explanation: 'Passive needs "was" + V3: "was delivered".' },
+          { id: 16, text: 'These rules is followed by everyone.', options: ['These rules', 'is', 'followed', 'by everyone'], correct: 1, wrongPart: 'is', correction: 'are', explanation: 'Plural subject needs "are", not "is".' },
+          { id: 17, text: 'Did the tickets sold already?', options: ['Did', 'the tickets', 'sold', 'already?'], correct: 0, wrongPart: 'Did', correction: 'Were', explanation: 'Passive question needs "Was/Were", not "Did": "Were the tickets sold...?".' },
+          { id: 18, text: 'The castle destroy during the war.', options: ['The castle', 'destroy', 'during', 'the war'], correct: 1, wrongPart: 'destroy', correction: 'was destroyed', explanation: 'Passive needs "was" + V3: "was destroyed".' },
+          { id: 19, text: 'Milk produces on this farm.', options: ['Milk', 'produces', 'on', 'this farm'], correct: 1, wrongPart: 'produces', correction: 'is produced', explanation: 'Passive needs "be" + V3: "is produced".' },
+          { id: 20, text: 'The prize gave to the winner.', options: ['The prize', 'gave', 'to', 'the winner'], correct: 1, wrongPart: 'gave', correction: 'was given', explanation: 'Passive needs "was" + V3: "was given".' }
+        ],
+        transform: [
+          { id: 1, text: 'Change to Passive: "John wrote this letter."', options: ['This letter was written by John.', 'This letter is written by John.', 'This letter wrote by John.', 'This letter was write by John.'], correct: 0, explanation: 'Active object becomes passive subject: "This letter was written by John".' },
+          { id: 2, text: 'Change to Passive: "People speak English all over the world."', options: ['English is spoken all over the world.', 'English was spoken all over the world.', 'English speaks all over the world.', 'English is speak all over the world.'], correct: 0, explanation: 'Present Simple Passive: "English is spoken...".' },
+          { id: 3, text: 'Change to Passive: "They make these cars in Germany."', options: ['These cars are made in Germany.', 'These cars were made in Germany.', 'These cars make in Germany.', 'These cars is made in Germany.'], correct: 0, explanation: 'Present Simple Passive: "These cars are made...".' },
+          { id: 4, text: 'Change to Passive: "Engineers built the bridge in 1889."', options: ['The bridge was built in 1889.', 'The bridge is built in 1889.', 'The bridge built in 1889.', 'The bridge was build in 1889.'], correct: 0, explanation: 'Past Simple Passive: "The bridge was built...".' },
+          { id: 5, text: 'Change to question form (Passive): "Someone wrote this book in English."', options: ['Was this book written in English?', 'Is this book written in English?', 'Did this book written in English?', 'Was this book write in English?'], correct: 0, explanation: 'Past Simple Passive question: "Was this book written...?".' },
+          { id: 6, text: 'Change to Passive (negative): "Nobody stole my car."', options: ["My car wasn't stolen.", "My car isn't stolen.", "My car didn't stolen.", "My car wasn't steal."], correct: 0, explanation: "Past Simple Passive negative: \"My car wasn't stolen\"." },
+          { id: 7, text: 'Change to Passive: "Farmers grow rice in many countries."', options: ['Rice is grown in many countries.', 'Rice was grown in many countries.', 'Rice grows in many countries.', 'Rice is grow in many countries.'], correct: 0, explanation: 'Present Simple Passive: "Rice is grown...".' },
+          { id: 8, text: 'Change to Passive: "Someone took these photos during the war."', options: ['These photos were taken during the war.', 'These photos are taken during the war.', 'These photos took during the war.', 'These photos were take during the war.'], correct: 0, explanation: 'Past Simple Passive: "These photos were taken...".' },
+          { id: 9, text: 'Change to question form (Passive): "Someone cleaned the windows yesterday."', options: ['Were the windows cleaned yesterday?', 'Was the windows cleaned yesterday?', 'Did the windows cleaned yesterday?', 'Were the windows clean yesterday?'], correct: 0, explanation: 'Past Simple Passive question: "Were the windows cleaned...?".' },
+          { id: 10, text: 'Change to Passive: "Brazil exports coffee."', options: ['Coffee is exported from Brazil.', 'Coffee was exported from Brazil.', 'Coffee exports from Brazil.', 'Coffee is export from Brazil.'], correct: 0, explanation: 'Present Simple Passive: "Coffee is exported...".' },
+          { id: 11, text: 'Change to Passive: "Thousands of tourists visit the museum every year."', options: ['The museum is visited by thousands of tourists every year.', 'The museum was visited by thousands of tourists every year.', 'The museum visits by thousands of tourists every year.', 'The museum is visit by thousands of tourists every year.'], correct: 0, explanation: 'Present Simple Passive: "The museum is visited...".' },
+          { id: 12, text: 'Change to question form (Passive): "Someone finished the report on time."', options: ['Was the report finished on time?', 'Is the report finished on time?', 'Did the report finished on time?', 'Was the report finish on time?'], correct: 0, explanation: 'Past Simple Passive question: "Was the report finished...?".' },
+          { id: 13, text: 'Change to Passive: "The bakery bakes these cakes fresh every morning."', options: ['These cakes are baked fresh every morning.', 'These cakes were baked fresh every morning.', 'These cakes bake fresh every morning.', 'These cakes are bake fresh every morning.'], correct: 0, explanation: 'Present Simple Passive: "These cakes are baked...".' },
+          { id: 14, text: 'Change to Passive: "The postman delivered the email this morning."', options: ['The email was delivered this morning.', 'The email is delivered this morning.', 'The email delivered this morning.', 'The email was deliver this morning.'], correct: 0, explanation: 'Past Simple Passive: "The email was delivered...".' },
+          { id: 15, text: 'Change to Passive: "Everyone follows these rules."', options: ['These rules are followed by everyone.', 'These rules were followed by everyone.', 'These rules follow by everyone.', 'These rules are follow by everyone.'], correct: 0, explanation: 'Present Simple Passive: "These rules are followed...".' },
+          { id: 16, text: 'Change to question form (Passive): "Someone sold the tickets already."', options: ['Were the tickets sold already?', 'Was the tickets sold already?', 'Did the tickets sold already?', 'Were the tickets sell already?'], correct: 0, explanation: 'Past Simple Passive question: "Were the tickets sold...?".' },
+          { id: 17, text: 'Change to Passive: "The war destroyed the castle."', options: ['The castle was destroyed during the war.', 'The castle is destroyed during the war.', 'The castle destroyed during the war.', 'The castle was destroy during the war.'], correct: 0, explanation: 'Past Simple Passive: "The castle was destroyed...".' },
+          { id: 18, text: 'Change to Passive: "This farm produces milk."', options: ['Milk is produced on this farm.', 'Milk was produced on this farm.', 'Milk produces on this farm.', 'Milk is produce on this farm.'], correct: 0, explanation: 'Present Simple Passive: "Milk is produced...".' },
+          { id: 19, text: 'Change to Passive: "The judges gave the prize to the winner."', options: ['The prize was given to the winner.', 'The prize is given to the winner.', 'The prize gave to the winner.', 'The prize was give to the winner.'], correct: 0, explanation: 'Past Simple Passive: "The prize was given...".' },
+          { id: 20, text: 'Change to Passive: "Shakespeare wrote this play."', options: ['This play was written by Shakespeare.', 'This play is written by Shakespeare.', 'This play wrote by Shakespeare.', 'This play was write by Shakespeare.'], correct: 0, explanation: 'Past Simple Passive with agent: "This play was written by Shakespeare".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Asking about a language.', dialogue: 'A: Is English hard to learn?\nB: Maybe, but it ___ spoken all over the world.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "is spoken".' },
+          { id: 2, situation: 'Talking about car manufacturing.', dialogue: 'A: Where are these cars from?\nB: They ___ made in Germany.', options: ['are', 'is', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "are made".' },
+          { id: 3, situation: 'Discussing a historic bridge.', dialogue: 'A: How old is this bridge?\nB: It ___ built in 1889.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: "was built".' },
+          { id: 4, situation: 'Talking about a stolen car.', dialogue: 'A: What happened to your car?\nB: It ___ stolen last night!', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: "was stolen".' },
+          { id: 5, situation: 'Asking about a book.', dialogue: "___ this book written in English?\nB: No, it's in French.", options: ['Is', 'Are', 'Was', 'Does'], correct: 0, explanation: 'Present Simple Passive question: "Is this book written...?".' },
+          { id: 6, situation: 'Talking about the windows.', dialogue: '___ the windows cleaned yesterday?\nB: Yes, they look spotless.', options: ['Were', 'Was', 'Are', 'Did'], correct: 0, explanation: 'Past Simple Passive question: "Were the windows cleaned...?".' },
+          { id: 7, situation: 'Talking about rice production.', dialogue: 'A: Where does rice come from?\nB: It ___ grown in many countries.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "is grown".' },
+          { id: 8, situation: 'Looking at old photos.', dialogue: 'A: When were these taken?\nB: They ___ taken during the war.', options: ['were', 'was', 'are', 'be'], correct: 0, explanation: 'Past Simple Passive: "were taken".' },
+          { id: 9, situation: 'Talking about a play.', dialogue: 'A: Who wrote this play?\nB: It ___ written by Shakespeare.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: "was written".' },
+          { id: 10, situation: 'Talking about bakery goods.', dialogue: 'A: Are these cakes fresh?\nB: Yes, they ___ baked fresh every morning.', options: ['are', 'is', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "are baked".' },
+          { id: 11, situation: 'Talking about a work deadline.', dialogue: '___ the report finished on time?\nB: Yes, just in time!', options: ['Was', 'Is', 'Were', 'Did'], correct: 0, explanation: 'Past Simple Passive question: "Was the report finished...?".' },
+          { id: 12, situation: 'Discussing tourism.', dialogue: 'A: Is this museum popular?\nB: Very — it ___ visited by thousands of tourists every year.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "is visited".' },
+          { id: 13, situation: 'Talking about a song.', dialogue: 'A: Did she write this song?\nB: No, it ___ not written by her.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive negative: "was not written".' },
+          { id: 14, situation: 'Talking about coffee.', dialogue: 'A: Where does this coffee come from?\nB: It ___ exported from Brazil.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "is exported".' },
+          { id: 15, situation: 'Waiting for an email.', dialogue: 'A: Did you get my email?\nB: Yes, it ___ delivered this morning.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: "was delivered".' },
+          { id: 16, situation: 'Talking about workplace rules.', dialogue: 'A: Do people respect the rules here?\nB: Yes, they ___ followed by everyone.', options: ['are', 'is', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "are followed".' },
+          { id: 17, situation: 'Talking about a concert.', dialogue: '___ the tickets sold already?\nB: Yes, it sold out in an hour.', options: ['Were', 'Was', 'Are', 'Did'], correct: 0, explanation: 'Past Simple Passive question: "Were the tickets sold...?".' },
+          { id: 18, situation: 'Discussing history.', dialogue: 'A: What happened to the old castle?\nB: It ___ destroyed during the war.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: "was destroyed".' },
+          { id: 19, situation: 'Talking about dairy products.', dialogue: 'A: Where does this milk come from?\nB: It ___ produced on this farm.', options: ['is', 'are', 'was', 'be'], correct: 0, explanation: 'Present Simple Passive: "is produced".' },
+          { id: 20, situation: 'Talking about a competition.', dialogue: 'A: Who won first place?\nB: The prize ___ given to the winner over there.', options: ['was', 'is', 'were', 'did'], correct: 0, explanation: 'Past Simple Passive: "was given".' }
+        ]
+      },
+      {
+        id: 'first-conditional',
+        title: 'First Conditional',
+        icon: '🌦️',
+        guide: `## First Conditional (Birinchi shart ergash gap)
+
+First Conditional kelajakda sodir bo'lishi mumkin bo'lgan real, ehtimoli yuqori shart-natija munosabatlarini ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **If-band (shart qismi)**: If + Present Simple
+• **Main clause (natija qismi)**: will + base verb
+  - **If** it **rains**, I **will stay** at home.
+  - I **will stay** at home **if** it **rains**. (band tartibi ixtiyoriy, o'rtada vergul yo'q)
+• **Negative**: har ikkala qismda ham inkor bo'lishi mumkin
+  - If you **don't hurry**, you **will miss** the bus.
+  - If it **rains**, we **won't go** to the park.
+• **Question**: Will + Subject + base verb, if + Present Simple?
+  - **Will** you **come** if I **invite** you?
+
+*(If bandida "will" HECH QACHON ishlatilmaydi — faqat Present Simple)*
+
+## 2. Ishlatilishi (Usage)
+1. **Kelajakdagi real, ehtimoli yuqori shart va uning natijasi**:
+   - If I **study** hard, I **will pass** the exam.
+2. **Ogohlantirish yoki tahdid**:
+   - If you **touch** that wire, you **will get** a shock.
+3. **Taklif yoki va'da**:
+   - If you **need** help, I **will help** you.
+4. **Umumiy qoida-natija munosabati (kelajakka nisbatan)**:
+   - If the sun **shines**, we **will go** to the beach.
+
+## 3. First Conditional vs Zero Conditional
+• **Zero Conditional (If + Present, Present)** — doim to'g'ri bo'lgan umumiy haqiqat.
+  - If you **heat** ice, it **melts**. (har doim shunday)
+• **First Conditional (If + Present, will + base)** — kelajakdagi bitta aniq, ehtimoliy vaziyat.
+  - If you **heat** the ice, it **will melt** in ten minutes. (aniq bir holat)
+
+## 4. Signal so'zlar
+• if, unless (= if not)
+• Modal "will" natija qismida; ba'zan "can/may/should" ham ishlatilishi mumkin
+• If-band har doim Present Simple, hech qachon "will" emas`,
+        questions: [
+          { id: 1, text: 'If it rains, I ___ stay at home.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 2, text: 'If I ___ hard, I will pass the exam.', options: ['study', 'will study', 'studied', 'am studying'], correct: 0, explanation: 'If-clause uses Present Simple, never "will".' },
+          { id: 3, text: "If you don't hurry, you ___ miss the bus.", options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 4, text: 'If you touch that wire, you ___ get a shock.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 5, text: 'If you need help, I ___ help you.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 6, text: 'If the sun ___, we will go to the beach.', options: ['shines', 'will shine', 'shone', 'is shining'], correct: 0, explanation: 'If-clause uses Present Simple, never "will".' },
+          { id: 7, text: 'I will call you if I ___ work early.', options: ['finish', 'will finish', 'finished', 'am finishing'], correct: 0, explanation: 'If-clause uses Present Simple, never "will".' },
+          { id: 8, text: 'If she misses the train, she ___ be late.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 9, text: 'You will be cold if you ___ not wear a coat.', options: ['do', 'will', 'did', 'are'], correct: 0, explanation: "If-clause negative uses Present Simple (\"don't/doesn't\"): \"do not wear\"." },
+          { id: 10, text: 'If he works hard, he ___ get a promotion.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 11, text: '___ you come if I invite you?', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'First Conditional question: Will + subject + base verb...?' },
+          { id: 12, text: "If we don't leave now, we ___ miss the flight.", options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 13, text: 'If you ask nicely, she ___ say yes.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 14, text: 'If they break the rule, they ___ be punished.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 15, text: 'If I ___ enough money, I will buy a car.', options: ['save', 'will save', 'saved', 'am saving'], correct: 0, explanation: 'If-clause uses Present Simple, never "will".' },
+          { id: 16, text: "If you don't practice, you ___ fail the test.", options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 17, text: 'The plants ___ grow if you water them.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 18, text: 'If we ___ early, we will get good seats.', options: ['arrive', 'will arrive', 'arrived', 'are arriving'], correct: 0, explanation: 'If-clause uses Present Simple, never "will".' },
+          { id: 19, text: 'She will stay angry if you ___ not apologize.', options: ['do', 'will', 'did', 'are'], correct: 0, explanation: 'If-clause negative uses Present Simple: "do not apologize".' },
+          { id: 20, text: 'If we forget the tickets, we ___ not be able to enter.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'If it ___ (rain), I will stay at home.', options: ['rains', 'will rain', 'rained', 'is raining'], correct: 0, explanation: 'If-clause: Present Simple (rains).' },
+          { id: 2, text: 'If I study hard, I ___ (pass) the exam.', options: ['will pass', 'pass', 'passed', 'am passing'], correct: 0, explanation: 'Main clause: will + base verb (pass).' },
+          { id: 3, text: "If you don't hurry, you ___ (miss) the bus.", options: ['will miss', 'miss', 'missed', 'are missing'], correct: 0, explanation: 'Main clause: will + base verb (miss).' },
+          { id: 4, text: 'If you ___ (touch) that wire, you will get a shock.', options: ['touch', 'will touch', 'touched', 'are touching'], correct: 0, explanation: 'If-clause: Present Simple (touch).' },
+          { id: 5, text: 'If you need help, I ___ (help) you.', options: ['will help', 'help', 'helped', 'am helping'], correct: 0, explanation: 'Main clause: will + base verb (help).' },
+          { id: 6, text: 'If the sun shines, we ___ (go) to the beach.', options: ['will go', 'go', 'went', 'are going'], correct: 0, explanation: 'Main clause: will + base verb (go).' },
+          { id: 7, text: 'I will call you if I ___ (finish) work early.', options: ['finish', 'will finish', 'finished', 'am finishing'], correct: 0, explanation: 'If-clause: Present Simple (finish).' },
+          { id: 8, text: 'If she ___ (miss) the train, she will be late.', options: ['misses', 'will miss', 'missed', 'is missing'], correct: 0, explanation: 'If-clause: Present Simple (misses).' },
+          { id: 9, text: 'You will be cold if you ___ (not / wear) a coat.', options: ["don't wear", "won't wear", "didn't wear", "aren't wearing"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't wear\")." },
+          { id: 10, text: 'If he works hard, he ___ (get) a promotion.', options: ['will get', 'get', 'got', 'is getting'], correct: 0, explanation: 'Main clause: will + base verb (get).' },
+          { id: 11, text: '___ (you / come) if I invite you?', options: ['Will you come', 'Do you come', 'Are you coming', 'Did you come'], correct: 0, explanation: 'First Conditional question: Will + subject + base verb.' },
+          { id: 12, text: "If we don't leave now, we ___ (miss) the flight.", options: ['will miss', 'miss', 'missed', 'are missing'], correct: 0, explanation: 'Main clause: will + base verb (miss).' },
+          { id: 13, text: 'If you ask nicely, she ___ (say) yes.', options: ['will say', 'say', 'said', 'is saying'], correct: 0, explanation: 'Main clause: will + base verb (say).' },
+          { id: 14, text: 'If they ___ (break) the rule, they will be punished.', options: ['break', 'will break', 'broke', 'are breaking'], correct: 0, explanation: 'If-clause: Present Simple (break).' },
+          { id: 15, text: 'If I save enough money, I ___ (buy) a car.', options: ['will buy', 'buy', 'bought', 'am buying'], correct: 0, explanation: 'Main clause: will + base verb (buy).' },
+          { id: 16, text: 'If you ___ (not / practice), you will fail the test.', options: ["don't practice", "won't practice", "didn't practice", "aren't practicing"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't practice\")." },
+          { id: 17, text: 'The plants will grow if you ___ (water) them.', options: ['water', 'will water', 'watered', 'are watering'], correct: 0, explanation: 'If-clause: Present Simple (water).' },
+          { id: 18, text: 'If we arrive early, we ___ (get) good seats.', options: ['will get', 'get', 'got', 'are getting'], correct: 0, explanation: 'Main clause: will + base verb (get).' },
+          { id: 19, text: 'She will stay angry if you ___ (not / apologize).', options: ["don't apologize", "won't apologize", "didn't apologize", "aren't apologizing"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't apologize\")." },
+          { id: 20, text: 'If we forget the tickets, we ___ (not / be) able to enter.', options: ["won't be", "don't be", "weren't", "aren't being"], correct: 0, explanation: "Main clause negative: will not (won't) + base verb (be)." }
+        ],
+        scrambled: [
+          { id: 1, words: ['rains', 'if', 'it', 'stay', 'I', 'will', 'home', 'at'], answer: 'if it rains I will stay at home', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 2, words: ['study', 'if', 'I', 'hard', 'pass', 'I', 'will', 'the', 'exam'], answer: 'if I study hard I will pass the exam', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 3, words: ['hurry', "don't", 'if', 'you', 'miss', 'will', 'you', 'the', 'bus'], answer: "if you don't hurry you will miss the bus", explanation: 'If-clause negative + main clause with will.' },
+          { id: 4, words: ['touch', 'if', 'you', 'that', 'wire', 'get', 'will', 'you', 'a', 'shock'], answer: 'if you touch that wire you will get a shock', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 5, words: ['need', 'if', 'you', 'help', 'help', 'I', 'will', 'you'], answer: 'if you need help I will help you', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 6, words: ['shines', 'if', 'the', 'sun', 'go', 'we', 'will', 'to', 'the', 'beach'], answer: 'if the sun shines we will go to the beach', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 7, words: ['finish', 'if', 'I', 'work', 'early', 'call', 'I', 'will', 'you'], answer: 'if I finish work early I will call you', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 8, words: ['misses', 'if', 'she', 'the', 'train', 'be', 'she', 'will', 'late'], answer: 'if she misses the train she will be late', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 9, words: ['wear', "don't", 'if', 'you', 'a', 'coat', 'be', 'you', 'will', 'cold'], answer: "if you don't wear a coat you will be cold", explanation: 'If-clause negative + main clause with will.' },
+          { id: 10, words: ['works', 'if', 'he', 'hard', 'get', 'he', 'will', 'a', 'promotion'], answer: 'if he works hard he will get a promotion', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 11, words: ['come', 'will', 'you', 'if', 'invite', 'I', 'you', '?'], answer: 'will you come if I invite you', explanation: 'Will + subject + base verb + if + Present Simple?' },
+          { id: 12, words: ['leave', "don't", 'if', 'we', 'now', 'miss', 'we', 'will', 'the', 'flight'], answer: "if we don't leave now we will miss the flight", explanation: 'If-clause negative + main clause with will.' },
+          { id: 13, words: ['ask', 'if', 'you', 'nicely', 'say', 'she', 'will', 'yes'], answer: 'if you ask nicely she will say yes', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 14, words: ['break', 'if', 'they', 'the', 'rule', 'be', 'they', 'will', 'punished'], answer: 'if they break the rule they will be punished', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 15, words: ['save', 'if', 'I', 'enough', 'money', 'buy', 'I', 'will', 'a', 'car'], answer: 'if I save enough money I will buy a car', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 16, words: ['practice', "don't", 'if', 'you', 'fail', 'you', 'will', 'the', 'test'], answer: "if you don't practice you will fail the test", explanation: 'If-clause negative + main clause with will.' },
+          { id: 17, words: ['water', 'if', 'you', 'them', 'grow', 'the', 'plants', 'will'], answer: 'if you water them the plants will grow', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 18, words: ['arrive', 'if', 'we', 'early', 'get', 'we', 'will', 'good', 'seats'], answer: 'if we arrive early we will get good seats', explanation: 'If + Present Simple, subject + will + base verb.' },
+          { id: 19, words: ['apologize', "don't", 'if', 'you', 'stay', 'she', 'will', 'angry'], answer: "if you don't apologize she will stay angry", explanation: 'If-clause negative + main clause with will.' },
+          { id: 20, words: ['forget', 'if', 'we', 'the', 'tickets', 'be', 'able', "won't", 'we', 'to', 'enter'], answer: "if we forget the tickets we won't be able to enter", explanation: "If + Present Simple, subject + won't + base verb." }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'If it will rain, I will stay at home.', options: ['If it', 'will rain', 'I will stay', 'at home'], correct: 1, wrongPart: 'will rain', correction: 'rains', explanation: 'The if-clause never uses "will" — use Present Simple: "rains".' },
+          { id: 2, text: 'If I study hard, I pass the exam.', options: ['If I study hard', 'I', 'pass', 'the exam'], correct: 2, wrongPart: 'pass', correction: 'will pass', explanation: 'The main clause needs "will" + base verb: "will pass".' },
+          { id: 3, text: "If you don't hurry, you miss the bus.", options: ['If you', "don't hurry", 'you', 'miss the bus'], correct: 3, wrongPart: 'miss the bus', correction: 'will miss the bus', explanation: 'The main clause needs "will" + base verb: "will miss".' },
+          { id: 4, text: 'If you will touch that wire, you will get a shock.', options: ['If you', 'will touch', 'that wire', 'you will get a shock'], correct: 1, wrongPart: 'will touch', correction: 'touch', explanation: 'The if-clause never uses "will" — use Present Simple: "touch".' },
+          { id: 5, text: 'If you needs help, I will help you.', options: ['If you', 'needs', 'help', 'I will help you'], correct: 1, wrongPart: 'needs', correction: 'need', explanation: 'The if-clause uses Present Simple, but "you" takes "need", not "needs".' },
+          { id: 6, text: 'If the sun shines, we go to the beach tomorrow.', options: ['If the sun shines', 'we', 'go', 'to the beach tomorrow'], correct: 2, wrongPart: 'go', correction: 'will go', explanation: 'The main clause needs "will" + base verb: "will go".' },
+          { id: 7, text: 'I will call you if I will finish work early.', options: ['I will call you', 'if I', 'will finish', 'work early'], correct: 2, wrongPart: 'will finish', correction: 'finish', explanation: 'The if-clause never uses "will" — use Present Simple: "finish".' },
+          { id: 8, text: 'If she miss the train, she will be late.', options: ['If she', 'miss', 'the train', 'she will be late'], correct: 1, wrongPart: 'miss', correction: 'misses', explanation: 'The if-clause uses Present Simple, and "she" takes "misses".' },
+          { id: 9, text: 'You will be cold if you not wear a coat.', options: ['You will be cold', 'if you', 'not wear', 'a coat'], correct: 2, wrongPart: 'not wear', correction: "don't wear", explanation: "Present Simple negative needs \"do/does\": \"don't wear\"." },
+          { id: 10, text: 'If he works hard, he gets a promotion soon.', options: ['If he works hard', 'he', 'gets', 'a promotion soon'], correct: 2, wrongPart: 'gets', correction: 'will get', explanation: 'The main clause needs "will" + base verb: "will get".' },
+          { id: 11, text: 'Do you come if I invite you?', options: ['Do', 'you', 'come', 'if I invite you?'], correct: 0, wrongPart: 'Do', correction: 'Will', explanation: 'First Conditional questions use "Will", not "Do": "Will you come...?".' },
+          { id: 12, text: "If we don't leave now, we missing the flight.", options: ['If we', "don't leave now", 'we', 'missing the flight'], correct: 3, wrongPart: 'missing the flight', correction: 'will miss the flight', explanation: 'The main clause needs "will" + base verb: "will miss".' },
+          { id: 13, text: 'If you ask nicely, she says yes.', options: ['If you ask nicely', 'she', 'says', 'yes'], correct: 2, wrongPart: 'says', correction: 'will say', explanation: 'The main clause needs "will" + base verb: "will say".' },
+          { id: 14, text: 'If they will break the rule, they will be punished.', options: ['If they', 'will break', 'the rule', 'they will be punished'], correct: 1, wrongPart: 'will break', correction: 'break', explanation: 'The if-clause never uses "will" — use Present Simple: "break".' },
+          { id: 15, text: 'If I save enough money, I bought a car.', options: ['If I save enough money', 'I', 'bought', 'a car'], correct: 2, wrongPart: 'bought', correction: 'will buy', explanation: 'The main clause needs "will" + base verb: "will buy", not the past tense.' },
+          { id: 16, text: "If you don't practices, you will fail the test.", options: ['If you', "don't practices", 'you will fail', 'the test'], correct: 1, wrongPart: "don't practices", correction: "don't practice", explanation: "After \"don't\", use the base form: \"practice\", not \"practices\"." },
+          { id: 17, text: 'The plants will grow if you watered them.', options: ['The plants will grow', 'if you', 'watered', 'them'], correct: 2, wrongPart: 'watered', correction: 'water', explanation: 'The if-clause uses Present Simple, not the past tense: "water".' },
+          { id: 18, text: 'If we arrive early, we will got good seats.', options: ['If we arrive early', 'we', 'will got', 'good seats'], correct: 2, wrongPart: 'will got', correction: 'will get', explanation: 'After "will", use the base verb: "get", not "got".' },
+          { id: 19, text: "She will stay angry if you doesn't apologize.", options: ['She will stay angry', 'if you', "doesn't apologize", 'No error'], correct: 2, wrongPart: "doesn't apologize", correction: "don't apologize", explanation: '"You" takes "don\'t", not "doesn\'t".' },
+          { id: 20, text: 'If we forget the tickets, we not will be able to enter.', options: ['If we forget the tickets', 'we', 'not will be', 'able to enter'], correct: 2, wrongPart: 'not will be', correction: 'will not be', explanation: '"Not" goes after "will": "will not be" (won\'t be).' }
+        ],
+        transform: [
+          { id: 1, text: 'Complete the First Conditional: "If it rains, I ___ (stay) at home."', options: ['will stay', 'stay', 'stayed', 'am staying'], correct: 0, explanation: 'Main clause: will + base verb (stay).' },
+          { id: 2, text: 'Complete the First Conditional: "If I ___ (study) hard, I will pass the exam."', options: ['study', 'will study', 'studied', 'am studying'], correct: 0, explanation: 'If-clause: Present Simple (study).' },
+          { id: 3, text: 'Make negative (main clause): "If you hurry, you will catch the bus." → If you don\'t hurry, you ___ the bus.', options: ['will miss', 'miss', 'missed', 'are missing'], correct: 0, explanation: 'Negated condition leads to a different will + base verb result.' },
+          { id: 4, text: 'Combine using First Conditional: "You touch that wire. You get a shock." (as a warning)', options: ['If you touch that wire, you will get a shock.', 'If you touch that wire, you get a shock.', 'If you will touch that wire, you get a shock.', 'If you touched that wire, you would get a shock.'], correct: 0, explanation: 'First Conditional: If + Present Simple, will + base verb.' },
+          { id: 5, text: 'Make question: "You will come if I invite you."', options: ['Will you come if I invite you?', 'Do you come if I invite you?', 'Will you come if I will invite you?', 'You will come if I invite you?'], correct: 0, explanation: 'Move "will" to the front of the main clause: "Will you come...?".' },
+          { id: 6, text: 'Combine using First Conditional: "The sun shines. We go to the beach."', options: ['If the sun shines, we will go to the beach.', 'If the sun will shine, we go to the beach.', 'If the sun shines, we go to the beach.', 'If the sun shone, we would go to the beach.'], correct: 0, explanation: 'First Conditional: If + Present Simple, will + base verb.' },
+          { id: 7, text: 'Complete the First Conditional: "I will call you if I ___ (finish) work early."', options: ['finish', 'will finish', 'finished', 'am finishing'], correct: 0, explanation: 'If-clause: Present Simple (finish).' },
+          { id: 8, text: 'Combine using First Conditional: "She misses the train. She is late."', options: ['If she misses the train, she will be late.', 'If she will miss the train, she is late.', 'If she misses the train, she is late.', 'If she missed the train, she would be late.'], correct: 0, explanation: 'First Conditional: If + Present Simple, will + base verb.' },
+          { id: 9, text: 'Make negative (if-clause): "If you wear a coat, you will be warm." → If you ___ a coat, you will be cold.', options: ["don't wear", "won't wear", "didn't wear", "aren't wearing"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't wear\")." },
+          { id: 10, text: 'Combine using First Conditional: "He works hard. He gets a promotion."', options: ['If he works hard, he will get a promotion.', 'If he will work hard, he gets a promotion.', 'If he works hard, he gets a promotion.', 'If he worked hard, he would get a promotion.'], correct: 0, explanation: 'First Conditional: If + Present Simple, will + base verb.' },
+          { id: 11, text: "Combine using First Conditional: \"We don't leave now. We miss the flight.\"", options: ["If we don't leave now, we will miss the flight.", "If we don't leave now, we miss the flight.", 'If we leave now, we will miss the flight.', "If we didn't leave now, we would miss the flight."], correct: 0, explanation: 'First Conditional: If + Present Simple (negative), will + base verb.' },
+          { id: 12, text: 'Complete the First Conditional: "If you ask nicely, she ___ (say) yes."', options: ['will say', 'say', 'said', 'is saying'], correct: 0, explanation: 'Main clause: will + base verb (say).' },
+          { id: 13, text: 'Combine using First Conditional: "They break the rule. They are punished."', options: ['If they break the rule, they will be punished.', 'If they will break the rule, they are punished.', 'If they break the rule, they are punished.', 'If they broke the rule, they would be punished.'], correct: 0, explanation: 'First Conditional: If + Present Simple, will + base verb.' },
+          { id: 14, text: 'Complete the First Conditional: "If I save enough money, I ___ (buy) a car."', options: ['will buy', 'buy', 'bought', 'am buying'], correct: 0, explanation: 'Main clause: will + base verb (buy).' },
+          { id: 15, text: 'Make negative (if-clause): "If you practice, you will pass the test." → If you ___, you will fail the test.', options: ["don't practice", "won't practice", "didn't practice", "aren't practicing"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't practice\")." },
+          { id: 16, text: 'Combine using First Conditional: "You water the plants. They grow."', options: ['If you water the plants, they will grow.', 'If you will water the plants, they grow.', 'If you water the plants, they grow.', 'If you watered the plants, they would grow.'], correct: 0, explanation: 'First Conditional: If + Present Simple, will + base verb.' },
+          { id: 17, text: 'Complete the First Conditional: "If we arrive early, we ___ (get) good seats."', options: ['will get', 'get', 'got', 'are getting'], correct: 0, explanation: 'Main clause: will + base verb (get).' },
+          { id: 18, text: 'Make negative (if-clause): "If you apologize, she will forgive you." → If you ___, she will stay angry.', options: ["don't apologize", "won't apologize", "didn't apologize", "aren't apologizing"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't apologize\")." },
+          { id: 19, text: 'Make negative (main clause): "If we forget the tickets, we will be able to enter." → If we forget the tickets, we ___ able to enter.', options: ["won't be", "don't be", "aren't being", "weren't"], correct: 0, explanation: "Main clause negative: will not (won't) + base verb (be)." },
+          { id: 20, text: 'Combine using First Conditional: "I finish work early. I call you."', options: ['If I finish work early, I will call you.', 'If I will finish work early, I call you.', 'If I finish work early, I call you.', 'If I finished work early, I would call you.'], correct: 0, explanation: 'First Conditional: If + Present Simple, will + base verb.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Making weekend plans.', dialogue: "A: What will you do this weekend?\nB: If it rains, I ___ stay at home.", options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 2, situation: 'Talking about exam prep.', dialogue: 'A: Are you worried about the exam?\nB: A bit, but if I study hard, I ___ pass it.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 3, situation: 'Catching a bus.', dialogue: "A: We should hurry!\nB: You're right, if we don't hurry, we ___ miss the bus.", options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 4, situation: 'Warning a child.', dialogue: 'A: Can I touch that wire?\nB: No! If you touch it, you ___ get a shock.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 5, situation: 'Offering help.', dialogue: "A: I'm struggling with this project.\nB: If you need help, I ___ help you.", options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 6, situation: 'Planning a beach trip.', dialogue: 'A: Should we bring towels?\nB: Yes, if the sun ___, we will go to the beach.', options: ['shines', 'will shine', 'shone', 'is shining'], correct: 0, explanation: 'If-clause uses Present Simple (shines).' },
+          { id: 7, situation: 'Making evening plans.', dialogue: 'A: Can you meet me at 6?\nB: I will call you if I ___ work early.', options: ['finish', 'will finish', 'finished', 'am finishing'], correct: 0, explanation: 'If-clause uses Present Simple (finish).' },
+          { id: 8, situation: 'Discussing punctuality.', dialogue: 'A: Will she be on time?\nB: If she misses the train, she ___ be late.', options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 9, situation: 'Talking about winter weather.', dialogue: 'A: Should I bring a coat?\nB: Yes, you will be cold if you ___ wear one.', options: ["don't", "won't", "didn't", "aren't"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't wear\")." },
+          { id: 10, situation: 'Talking about career goals.', dialogue: "A: Do you think he'll get promoted?\nB: If he works hard, he ___ get a promotion.", options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 11, situation: 'Inviting a friend.', dialogue: '___ you come if I invite you?\nB: Of course!', options: ['Will', 'Do', 'Are', 'Did'], correct: 0, explanation: 'First Conditional question: Will + subject + base verb.' },
+          { id: 12, situation: 'Rushing to the airport.', dialogue: "A: We're running late!\nB: If we don't leave now, we ___ miss the flight.", options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 13, situation: 'Asking for a favor.', dialogue: "A: Do you think she'll agree?\nB: If you ask nicely, she ___ say yes.", options: ['will', 'is', 'was', 'does'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 14, situation: 'Discussing school rules.', dialogue: "A: What happens if you're late?\nB: If we break the rule, we ___ be punished.", options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 15, situation: 'Talking about savings.', dialogue: 'A: Are you saving for anything?\nB: Yes, if I save enough money, I ___ buy a car.', options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 16, situation: 'Discussing test prep.', dialogue: "A: Are you ready for the test?\nB: Not really, if I don't practice, I ___ fail it.", options: ['will', 'am', 'was', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 17, situation: 'Gardening advice.', dialogue: 'A: How do I keep these plants alive?\nB: They ___ grow if you water them regularly.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 18, situation: 'Planning to watch a show.', dialogue: 'A: Should we leave now?\nB: Yes, if we arrive early, we ___ get good seats.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
+          { id: 19, situation: 'Resolving an argument.', dialogue: 'A: What if I say sorry?\nB: She will stay angry if you ___ apologize.', options: ["don't", "won't", "didn't", "aren't"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't apologize\")." },
+          { id: 20, situation: 'Checking travel documents.', dialogue: 'A: Do we have everything?\nB: If we forget the tickets, we ___ be able to enter.', options: ["won't", "don't", "aren't", "weren't"], correct: 0, explanation: "Main clause negative: will not (won't) + base verb (be)." }
+        ]
+      }
+    ]
   }
 };
 

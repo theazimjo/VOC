@@ -8,7 +8,7 @@ import './GrammarPage.css';
 
 const LEVELS = [
   { id: 'beginner',     label: "Boshlang'ich", emoji: '🌱', locked: false },
-  { id: 'intermediate', label: "O'rta daraja",  emoji: '🔥', locked: true  },
+  { id: 'intermediate', label: "O'rta daraja",  emoji: '🔥', locked: false },
   { id: 'advanced',     label: 'Yuqori daraja', emoji: '⚡', locked: true  },
 ];
 
