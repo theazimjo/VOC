@@ -4951,6 +4951,701 @@ First Conditional kelajakda sodir bo'lishi mumkin bo'lgan real, ehtimoli yuqori 
           { id: 19, situation: 'Resolving an argument.', dialogue: 'A: What if I say sorry?\nB: She will stay angry if you ___ apologize.', options: ["don't", "won't", "didn't", "aren't"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't apologize\")." },
           { id: 20, situation: 'Checking travel documents.', dialogue: 'A: Do we have everything?\nB: If we forget the tickets, we ___ be able to enter.', options: ["won't", "don't", "aren't", "weren't"], correct: 0, explanation: "Main clause negative: will not (won't) + base verb (be)." }
         ]
+      },
+      {
+        id: 'past-perfect-simple',
+        title: 'Past Perfect Simple',
+        icon: '⏮️',
+        guide: `## Past Perfect Simple (O'tgan zamon oldingi tugallangan ish-harakat)
+
+Past Perfect Simple o'tmishdagi ikkita ish-harakatdan **birinchi bo'lib**, ikkinchi o'tmishdagi ish-harakatdan **oldinroq** sodir bo'lganini ko'rsatish uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **Tasdiq**: Subject + had + V3 (Past Participle)
+  - I **had finished** my homework before dinner.
+• **Inkor**: Subject + had not (hadn't) + V3
+  - She **hadn't seen** the movie before.
+• **Savol**: Had + Subject + V3?
+  - **Had** you **left** when I called?
+
+*(had barcha shaxs/sonlar uchun bir xil — o'zgarmaydi)*
+
+## 2. Ishlatilishi (Usage)
+1. **Ikkita o'tmish ish-harakatidan avvalgisi** (Past Simple bilan birga):
+   - When I **arrived**, the train **had already left**.
+2. **Sabab-natija (o'tmishda avvalroq sodir bo'lgan sabab)**:
+   - She was tired because she **had worked** all day.
+3. **Reported Speech'da (Past Simple → Past Perfect)**:
+   - He said he **had finished** the report.
+4. **Third Conditional bilan** (bu yerda alohida o'rganilmaydi, lekin tanish bo'ladi):
+   - If I **had known**, I would have helped.
+
+## 3. Past Perfect vs Past Simple
+• **Past Simple** — o'tmishdagi bitta aniq voqea yoki ketma-ket voqealar.
+  - I **ate** breakfast and **went** to work. (ketma-ket, oddiy tartib)
+• **Past Perfect** — ikkita voqeadan **avvalroq** sodir bo'lganini ta'kidlash uchun.
+  - I **had eaten** breakfast before I **went** to work. (nonushta ishga borishdan OLDIN)
+
+## 4. Signal so'zlar
+• before, after, when, by the time, already, just, never, ever (o'tmishga nisbatan)
+• as soon as, once`,
+        questions: [
+          { id: 1, text: 'When I arrived, the train ___ already left.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 2, text: 'She was tired because she ___ worked all day.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
+          { id: 3, text: 'He said he ___ finished the report.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Reported speech: Past Simple → Past Perfect.' },
+          { id: 4, text: 'By the time we got to the cinema, the film ___ started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 5, text: 'I ___ never seen snow before I visited Norway.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + never + V3.' },
+          { id: 6, text: 'They ___ already eaten when we arrived.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 7, text: '___ you finished your homework before dinner?', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 8, text: 'We ___ not met before the conference.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not (hadn\'t) + V3.' },
+          { id: 9, text: 'After she ___ finished the exam, she went home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 10, text: 'He ___ already left when I called him.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 11, text: 'As soon as she ___ arrived, the meeting started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 12, text: "I couldn't get in because I ___ forgotten my key.", options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
+          { id: 13, text: 'By 2020, she ___ graduated from university.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar tugallangan.' },
+          { id: 14, text: '___ he ever visited London before that trip?', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 15, text: 'The house was empty because the family ___ moved out.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
+          { id: 16, text: 'We ___ just sat down when the phone rang.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + just + V3.' },
+          { id: 17, text: 'She realized she ___ left her phone at home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 18, text: 'They ___ not seen each other for ten years before the reunion.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not (hadn\'t) + V3.' },
+          { id: 19, text: 'Before he became a doctor, he ___ studied biology for six years.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 20, text: 'When the police arrived, the thief ___ already escaped.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'When I arrived, the train ___ (already / leave).', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
+          { id: 2, text: 'She was tired because she ___ (work) all day.', options: ['had worked', 'has worked', 'worked', 'was working'], correct: 0, explanation: 'Past Perfect: had + V3 (worked).' },
+          { id: 3, text: 'He said he ___ (finish) the report.', options: ['had finished', 'has finished', 'finished', 'was finishing'], correct: 0, explanation: 'Reported speech: had + V3 (finished).' },
+          { id: 4, text: 'By the time we got there, the film ___ (start).', options: ['had started', 'has started', 'started', 'was starting'], correct: 0, explanation: 'Past Perfect: had + V3 (started).' },
+          { id: 5, text: 'I ___ (never / see) snow before I visited Norway.', options: ['had never seen', 'have never seen', 'never saw', 'was never seeing'], correct: 0, explanation: 'Past Perfect: had + never + V3 (seen).' },
+          { id: 6, text: 'They ___ (already / eat) when we arrived.', options: ['had already eaten', 'have already eaten', 'already ate', 'were already eating'], correct: 0, explanation: 'Past Perfect: had + already + V3 (eaten).' },
+          { id: 7, text: '___ (you / finish) your homework before dinner?', options: ['Had you finished', 'Have you finished', 'Did you finish', 'Were you finishing'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3.' },
+          { id: 8, text: 'We ___ (not / meet) before the conference.', options: ["hadn't met", "haven't met", "didn't meet", "weren't meeting"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (met).' },
+          { id: 9, text: 'After she ___ (finish) the exam, she went home.', options: ['had finished', 'has finished', 'finished', 'was finishing'], correct: 0, explanation: 'Past Perfect: had + V3 (finished).' },
+          { id: 10, text: 'He ___ (already / leave) when I called him.', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + already + V3 (left).' },
+          { id: 11, text: 'As soon as she ___ (arrive), the meeting started.', options: ['had arrived', 'has arrived', 'arrived', 'was arriving'], correct: 0, explanation: 'Past Perfect: had + V3 (arrived).' },
+          { id: 12, text: "I couldn't get in because I ___ (forget) my key.", options: ['had forgotten', 'have forgotten', 'forgot', 'was forgetting'], correct: 0, explanation: 'Past Perfect: had + V3 (forgotten).' },
+          { id: 13, text: 'By 2020, she ___ (graduate) from university.', options: ['had graduated', 'has graduated', 'graduated', 'was graduating'], correct: 0, explanation: 'Past Perfect: had + V3 (graduated).' },
+          { id: 14, text: '___ (he / ever / visit) London before that trip?', options: ['Had he ever visited', 'Has he ever visited', 'Did he ever visit', 'Was he ever visiting'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3.' },
+          { id: 15, text: 'The house was empty because the family ___ (move) out.', options: ['had moved', 'has moved', 'moved', 'was moving'], correct: 0, explanation: 'Past Perfect: had + V3 (moved).' },
+          { id: 16, text: 'We ___ (just / sit) down when the phone rang.', options: ['had just sat', 'have just sat', 'just sat', 'were just sitting'], correct: 0, explanation: 'Past Perfect: had + just + V3 (sat).' },
+          { id: 17, text: 'She realized she ___ (leave) her phone at home.', options: ['had left', 'has left', 'left', 'was leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
+          { id: 18, text: 'They ___ (not / see) each other for ten years before the reunion.', options: ["hadn't seen", "haven't seen", "didn't see", "weren't seeing"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (seen).' },
+          { id: 19, text: 'Before he became a doctor, he ___ (study) biology for six years.', options: ['had studied', 'has studied', 'studied', 'was studying'], correct: 0, explanation: 'Past Perfect: had + V3 (studied).' },
+          { id: 20, text: 'When the police arrived, the thief ___ (already / escape).', options: ['had already escaped', 'has already escaped', 'already escaped', 'was already escaping'], correct: 0, explanation: 'Past Perfect: had + already + V3 (escaped).' }
+        ],
+        scrambled: [
+          { id: 1, words: ['left', 'when', 'I', 'arrived', 'the', 'train', 'had', 'already'], answer: 'when I arrived the train had already left', explanation: 'Past Perfect: had + already + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 2, words: ['worked', 'she', 'was', 'tired', 'because', 'she', 'had', 'all', 'day'], answer: 'she was tired because she had worked all day', explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 3, words: ['finished', 'he', 'said', 'he', 'had', 'the', 'report'], answer: 'he said he had finished the report', explanation: 'Reported speech: had + V3.' },
+          { id: 4, words: ['started', 'by', 'the', 'time', 'we', 'got', 'there', 'the', 'film', 'had'], answer: 'by the time we got there the film had started', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 5, words: ['seen', 'I', 'had', 'never', 'snow', 'before', 'I', 'visited', 'Norway'], answer: 'I had never seen snow before I visited Norway', explanation: 'Past Perfect: had + never + V3.' },
+          { id: 6, words: ['eaten', 'they', 'had', 'already', 'when', 'we', 'arrived'], answer: 'they had already eaten when we arrived', explanation: 'Past Perfect: had + already + V3.' },
+          { id: 7, words: ['finished', 'had', 'you', 'your', 'homework', 'before', 'dinner', '?'], answer: 'had you finished your homework before dinner', explanation: 'Past Perfect question: Had + subject + V3.' },
+          { id: 8, words: ['met', 'we', "hadn't", 'before', 'the', 'conference'], answer: "we hadn't met before the conference", explanation: 'Past Perfect negative: hadn\'t + V3.' },
+          { id: 9, words: ['finished', 'after', 'she', 'had', 'the', 'exam', 'she', 'went', 'home'], answer: 'after she had finished the exam she went home', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 10, words: ['left', 'he', 'had', 'already', 'when', 'I', 'called', 'him'], answer: 'he had already left when I called him', explanation: 'Past Perfect: had + already + V3.' },
+          { id: 11, words: ['arrived', 'as', 'soon', 'as', 'she', 'had', 'the', 'meeting', 'started'], answer: 'as soon as she had arrived the meeting started', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 12, words: ['forgotten', 'I', "couldn't", 'get', 'in', 'because', 'I', 'had', 'my', 'key'], answer: "I couldn't get in because I had forgotten my key", explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 13, words: ['graduated', 'by', '2020', 'she', 'had', 'from', 'university'], answer: 'by 2020 she had graduated from university', explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar.' },
+          { id: 14, words: ['visited', 'had', 'he', 'ever', 'London', 'before', 'that', 'trip', '?'], answer: 'had he ever visited London before that trip', explanation: 'Past Perfect question: Had + subject + ever + V3.' },
+          { id: 15, words: ['moved', 'the', 'house', 'was', 'empty', 'because', 'the', 'family', 'had', 'out'], answer: 'the house was empty because the family had moved out', explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 16, words: ['sat', 'we', 'had', 'just', 'down', 'when', 'the', 'phone', 'rang'], answer: 'we had just sat down when the phone rang', explanation: 'Past Perfect: had + just + V3.' },
+          { id: 17, words: ['left', 'she', 'realized', 'she', 'had', 'her', 'phone', 'at', 'home'], answer: 'she realized she had left her phone at home', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 18, words: ['seen', 'they', "hadn't", 'each', 'other', 'for', 'ten', 'years', 'before', 'the', 'reunion'], answer: "they hadn't seen each other for ten years before the reunion", explanation: 'Past Perfect negative: hadn\'t + V3.' },
+          { id: 19, words: ['studied', 'before', 'he', 'became', 'a', 'doctor', 'he', 'had', 'biology', 'for', 'six', 'years'], answer: 'before he became a doctor he had studied biology for six years', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 20, words: ['escaped', 'when', 'the', 'police', 'arrived', 'the', 'thief', 'had', 'already'], answer: 'when the police arrived the thief had already escaped', explanation: 'Past Perfect: had + already + V3.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'When I arrived, the train has already left.', options: ['When I arrived', 'the train', 'has already left', 'No error'], correct: 2, wrongPart: 'has already left', correction: 'had already left', explanation: 'Past reference needs Past Perfect: "had already left", not Present Perfect.' },
+          { id: 2, text: 'She was tired because she has worked all day.', options: ['She was tired', 'because', 'she has worked', 'all day'], correct: 2, wrongPart: 'she has worked', correction: 'she had worked', explanation: 'With a Past Simple main clause, use Past Perfect: "had worked".' },
+          { id: 3, text: 'He said he has finished the report.', options: ['He said', 'he has finished', 'the report', 'No error'], correct: 1, wrongPart: 'he has finished', correction: 'he had finished', explanation: 'Reported speech shifts Present Perfect to Past Perfect: "had finished".' },
+          { id: 4, text: 'By the time we got there, the film had start.', options: ['By the time', 'we got there', 'the film', 'had start'], correct: 3, wrongPart: 'had start', correction: 'had started', explanation: 'Past Perfect needs V3: "had started", not the base form.' },
+          { id: 5, text: 'I had never see snow before I visited Norway.', options: ['I had never', 'see', 'snow', 'before I visited Norway'], correct: 1, wrongPart: 'see', correction: 'seen', explanation: 'Past Perfect needs V3: "had never seen".' },
+          { id: 6, text: 'They had already ate when we arrived.', options: ['They had already', 'ate', 'when', 'we arrived'], correct: 1, wrongPart: 'ate', correction: 'eaten', explanation: 'Past Perfect needs V3: "had already eaten", not the Past Simple form.' },
+          { id: 7, text: 'Did you finished your homework before dinner?', options: ['Did you finished', 'your', 'homework', 'before dinner'], correct: 0, wrongPart: 'Did you finished', correction: 'Had you finished', explanation: 'To express "before another past action," use Past Perfect: "Had you finished".' },
+          { id: 8, text: "We hadn't met before the conference, isn't it?", options: ["We hadn't met", 'before the conference', "isn't it", 'No error'], correct: 2, wrongPart: "isn't it", correction: "had we", explanation: 'Past Perfect negative statements use "had we" as a tag, not "isn\'t it".' },
+          { id: 9, text: 'After she had finish the exam, she went home.', options: ['After she had', 'finish', 'the exam', 'she went home'], correct: 1, wrongPart: 'finish', correction: 'finished', explanation: 'Past Perfect needs V3: "had finished".' },
+          { id: 10, text: 'He already left when I called him.', options: ['He', 'already left', 'when I called', 'him'], correct: 1, wrongPart: 'already left', correction: 'had already left', explanation: 'To show the action happened before another past action, use Past Perfect: "had already left".' },
+          { id: 11, text: 'As soon as she has arrived, the meeting started.', options: ['As soon as', 'she has arrived', 'the meeting', 'started'], correct: 1, wrongPart: 'she has arrived', correction: 'she had arrived', explanation: 'With a Past Simple main clause, use Past Perfect: "had arrived".' },
+          { id: 12, text: "I couldn't get in because I had forget my key.", options: ["I couldn't get in", 'because', 'I had forget', 'my key'], correct: 2, wrongPart: 'I had forget', correction: 'I had forgotten', explanation: 'Past Perfect needs V3: "had forgotten".' },
+          { id: 13, text: 'By 2020, she has graduated from university.', options: ['By 2020', 'she has graduated', 'from university', 'No error'], correct: 1, wrongPart: 'she has graduated', correction: 'she had graduated', explanation: 'A past time marker ("By 2020") requires Past Perfect: "had graduated".' },
+          { id: 14, text: 'Had he ever visit London before that trip?', options: ['Had he', 'ever visit', 'London', 'before that trip'], correct: 1, wrongPart: 'ever visit', correction: 'ever visited', explanation: 'Past Perfect needs V3: "ever visited".' },
+          { id: 15, text: 'The house was empty because the family has moved out.', options: ['The house was empty', 'because', 'the family has moved', 'out'], correct: 2, wrongPart: 'the family has moved', correction: 'the family had moved', explanation: 'With a Past Simple main clause, use Past Perfect: "had moved".' },
+          { id: 16, text: 'We had just sit down when the phone rang.', options: ['We had just', 'sit', 'down', 'when the phone rang'], correct: 1, wrongPart: 'sit', correction: 'sat', explanation: 'Past Perfect needs V3: "had just sat".' },
+          { id: 17, text: 'She realized she has left her phone at home.', options: ['She realized', 'she has left', 'her phone', 'at home'], correct: 1, wrongPart: 'she has left', correction: 'she had left', explanation: 'With a Past Simple main clause, use Past Perfect: "had left".' },
+          { id: 18, text: "They hadn't saw each other for ten years before the reunion.", options: ["They hadn't", 'saw', 'each other for ten years', 'before the reunion'], correct: 1, wrongPart: 'saw', correction: 'seen', explanation: 'Past Perfect needs V3: "hadn\'t seen", not the Past Simple form.' },
+          { id: 19, text: 'Before he became a doctor, he had study biology for six years.', options: ['Before he became a doctor', 'he had', 'study', 'biology for six years'], correct: 2, wrongPart: 'study', correction: 'studied', explanation: 'Past Perfect needs V3: "had studied".' },
+          { id: 20, text: 'When the police arrived, the thief already escaped.', options: ['When the police arrived', 'the thief', 'already escaped', 'No error'], correct: 2, wrongPart: 'already escaped', correction: 'had already escaped', explanation: 'To show the escape happened before the police arrived, use Past Perfect: "had already escaped".' }
+        ],
+        transform: [
+          { id: 1, text: 'Complete the Past Perfect: "When I arrived, the train ___ (already / leave)."', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
+          { id: 2, text: 'Combine using Past Perfect: "She finished work. She went home." (finished first)', options: ['After she had finished work, she went home.', 'After she finished work, she has gone home.', 'After she has finished work, she went home.', 'After she was finishing work, she went home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had finished".' },
+          { id: 3, text: 'Change to reported speech: "I have finished the report," he said. → He said he ___.', options: ['had finished the report', 'has finished the report', 'finished the report', 'was finishing the report'], correct: 0, explanation: 'Reported speech: Present Perfect → Past Perfect.' },
+          { id: 4, text: 'Complete the Past Perfect: "By the time we got there, the film ___ (start)."', options: ['had started', 'has started', 'started', 'was starting'], correct: 0, explanation: 'Past Perfect: had + V3 (started).' },
+          { id: 5, text: 'Combine using Past Perfect: "I never saw snow. Then I visited Norway."', options: ['I had never seen snow before I visited Norway.', 'I have never seen snow before I visited Norway.', 'I never saw snow before I visited Norway.', 'I was never seeing snow before I visited Norway.'], correct: 0, explanation: 'Past Perfect shows the earlier state: "had never seen".' },
+          { id: 6, text: 'Make a question: "You had finished your homework before dinner."', options: ['Had you finished your homework before dinner?', 'Have you finished your homework before dinner?', 'Did you finish your homework before dinner?', 'Were you finishing your homework before dinner?'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 7, text: 'Make negative: "We had met before the conference." → We ___ before the conference.', options: ["hadn't met", "haven't met", "didn't meet", "weren't meeting"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (met).' },
+          { id: 8, text: 'Combine using Past Perfect: "She finished the exam. She went home."', options: ['After she had finished the exam, she went home.', 'After she finishing the exam, she went home.', 'After she has finished the exam, she went home.', 'After she finished the exam, she has gone home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had finished".' },
+          { id: 9, text: 'Complete the Past Perfect: "He ___ (already / leave) when I called him."', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + already + V3 (left).' },
+          { id: 10, text: 'Combine using Past Perfect: "She arrived. The meeting started." (as soon as she arrived)', options: ['As soon as she had arrived, the meeting started.', 'As soon as she arrived, the meeting has started.', 'As soon as she has arrived, the meeting started.', 'As soon as she was arriving, the meeting started.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had arrived".' },
+          { id: 11, text: 'Give the reason using Past Perfect: "I forgot my key. I couldn\'t get in."', options: ["I couldn't get in because I had forgotten my key.", "I couldn't get in because I forgot my key first.", "I couldn't get in because I have forgotten my key.", "I couldn't get in because I was forgetting my key."], correct: 0, explanation: 'Past Perfect shows the earlier cause: "had forgotten".' },
+          { id: 12, text: 'Complete the Past Perfect: "By 2020, she ___ (graduate) from university."', options: ['had graduated', 'has graduated', 'graduated', 'was graduating'], correct: 0, explanation: 'Past Perfect: had + V3 (graduated).' },
+          { id: 13, text: 'Make a question: "He had ever visited London before that trip."', options: ['Had he ever visited London before that trip?', 'Has he ever visited London before that trip?', 'Did he ever visit London before that trip?', 'Was he ever visiting London before that trip?'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3?' },
+          { id: 14, text: 'Give the reason using Past Perfect: "The family moved out. The house was empty."', options: ['The house was empty because the family had moved out.', 'The house was empty because the family moved out later.', 'The house was empty because the family has moved out.', 'The house was empty because the family was moving out.'], correct: 0, explanation: 'Past Perfect shows the earlier cause: "had moved out".' },
+          { id: 15, text: 'Complete the Past Perfect: "We ___ (just / sit) down when the phone rang."', options: ['had just sat', 'have just sat', 'just sat', 'were just sitting'], correct: 0, explanation: 'Past Perfect: had + just + V3 (sat).' },
+          { id: 16, text: 'Combine using Past Perfect: "She left her phone at home. She realized it."', options: ['She realized she had left her phone at home.', 'She realized she has left her phone at home.', 'She realized she leaves her phone at home.', 'She realized she was leaving her phone at home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had left".' },
+          { id: 17, text: 'Make negative: "They had seen each other before the reunion." → They ___ each other for ten years before the reunion.', options: ["hadn't seen", "haven't seen", "didn't see", "weren't seeing"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (seen).' },
+          { id: 18, text: 'Combine using Past Perfect: "He studied biology for six years. Then he became a doctor."', options: ['Before he became a doctor, he had studied biology for six years.', 'Before he became a doctor, he has studied biology for six years.', 'Before he became a doctor, he studies biology for six years.', 'Before he became a doctor, he was studying biology for six years.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had studied".' },
+          { id: 19, text: 'Complete the Past Perfect: "When the police arrived, the thief ___ (already / escape)."', options: ['had already escaped', 'has already escaped', 'already escaped', 'was already escaping'], correct: 0, explanation: 'Past Perfect: had + already + V3 (escaped).' },
+          { id: 20, text: 'Change to reported speech: "I have finished my homework," she said. → She said she ___.', options: ['had finished her homework', 'has finished her homework', 'finished her homework', 'was finishing her homework'], correct: 0, explanation: 'Reported speech: Present Perfect → Past Perfect.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Missing a train.', dialogue: 'A: Did you catch the train?\nB: No, when I arrived, it ___ already left.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 2, situation: 'Talking about a tiring day.', dialogue: 'A: Why was she so tired?\nB: Because she ___ worked all day.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 3, situation: 'Reporting what someone said.', dialogue: 'A: What did he tell you?\nB: He said he ___ finished the report.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Reported speech: had + V3.' },
+          { id: 4, situation: 'Arriving late at the cinema.', dialogue: 'A: Did you see the beginning?\nB: No, by the time we got there, the film ___ started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 5, situation: 'Talking about a trip to Norway.', dialogue: 'A: Was it your first time seeing snow?\nB: Yes, I ___ never seen snow before I visited Norway.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + never + V3.' },
+          { id: 6, situation: 'Arriving for dinner.', dialogue: 'A: Are they still eating?\nB: No, they ___ already eaten when we arrived.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 7, situation: 'Checking on homework.', dialogue: 'A: ___ you finished your homework before dinner?\nB: Yes, I had.', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 8, situation: 'Meeting new colleagues.', dialogue: 'A: Did you know each other before?\nB: No, we ___ not met before the conference.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not + V3.' },
+          { id: 9, situation: 'Talking about an exam day.', dialogue: 'A: What did she do after the exam?\nB: After she ___ finished the exam, she went home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 10, situation: 'Trying to reach someone.', dialogue: 'A: Did you reach him?\nB: No, he ___ already left when I called him.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 11, situation: 'Describing a meeting start.', dialogue: 'A: When did the meeting start?\nB: As soon as she ___ arrived, it started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 12, situation: 'Explaining why the door was locked.', dialogue: "A: Why couldn't you get in?\nB: Because I ___ forgotten my key.", options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 13, situation: 'Talking about education history.', dialogue: 'A: Was she working by 2020?\nB: Yes, by 2020, she ___ graduated from university.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar.' },
+          { id: 14, situation: 'Discussing travel history.', dialogue: '___ he ever visited London before that trip?\nB: No, it was his first time.', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3?' },
+          { id: 15, situation: 'Talking about an empty house.', dialogue: 'A: Why was the house empty?\nB: Because the family ___ moved out.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 16, situation: 'Describing an interrupted moment.', dialogue: 'A: What were you doing when the phone rang?\nB: We ___ just sat down.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + just + V3.' },
+          { id: 17, situation: 'Explaining a mistake.', dialogue: 'A: Why did she go back home?\nB: She realized she ___ left her phone at home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 18, situation: 'Talking about an old friendship.', dialogue: 'A: Had they kept in touch?\nB: No, they ___ not seen each other for ten years before the reunion.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not + V3.' },
+          { id: 19, situation: 'Talking about a doctor\'s background.', dialogue: 'A: How long did he study?\nB: Before he became a doctor, he ___ studied biology for six years.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 20, situation: 'Reporting a crime scene.', dialogue: 'A: Did the police catch the thief?\nB: No, when they arrived, he ___ already escaped.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' }
+        ]
+      },
+      {
+        id: 'second-conditional',
+        title: 'Second Conditional',
+        icon: '🌀',
+        guide: `## Second Conditional (Ikkinchi shart ergash gap)
+
+Second Conditional hozirgi yoki kelajakdagi **xayoliy, ehtimoli past yoki mumkin bo'lmagan** vaziyatlarni va ularning natijasini ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **If-band**: If + Past Simple
+• **Main clause**: would + base verb
+  - **If** I **had** a million dollars, I **would buy** a house.
+  - I **would travel** the world **if** I **had** more time.
+• **"were" ishlatilishi**: rasmiy/klassik uslubda "I/he/she/it" bilan ham **were** ishlatiladi (was emas)
+  - If I **were** you, I **would apologize**.
+• **Negative**: har ikkala qismda ham inkor bo'lishi mumkin
+  - If I **didn't have** work, I **would go** with you.
+  - If you **studied** more, you **wouldn't fail**.
+• **Question**: Would + Subject + base verb, if + Past Simple?
+  - **Would** you **help** me if I **asked**?
+
+## 2. Ishlatilishi (Usage)
+1. **Xayoliy, hozirgi haqiqatga zid vaziyat**:
+   - If I **had** wings, I **would fly**. (lekin qanotim yo'q)
+2. **Ehtimoli juda past kelajakdagi vaziyat**:
+   - If I **won** the lottery, I **would quit** my job.
+3. **Maslahat berish ("If I were you")**:
+   - If I **were** you, I **would talk** to her.
+4. **Xayoliy taxmin/tasavvur**:
+   - What **would** you **do** if you **saw** a ghost?
+
+## 3. Second Conditional vs First Conditional
+• **First Conditional (If + Present, will)** — real, ehtimoli yuqori kelajak.
+  - If it **rains**, I **will stay** home. (haqiqatan yomg'ir yog'ishi mumkin)
+• **Second Conditional (If + Past, would)** — xayoliy yoki ehtimoli juda past.
+  - If it **snowed** in July, I **would be** shocked. (deyarli mumkin emas)
+
+## 4. Signal so'zlar
+• if, unless, if I were you
+• would, wouldn't; If-bandda hech qachon "would" ishlatilmaydi
+• Past Simple shakli bu yerda **hozirgi/kelajak** ma'noni bildiradi, o'tmish emas`,
+        questions: [
+          { id: 1, text: 'If I had a million dollars, I ___ buy a house.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 2, text: 'If I ___ you, I would apologize.', options: ['were', 'was', 'am', 'be'], correct: 0, explanation: 'Second Conditional formal style uses "were" for all persons.' },
+          { id: 3, text: 'If I ___ more time, I would travel the world.', options: ['had', 'have', 'will have', 'having'], correct: 0, explanation: 'If-clause uses Past Simple in Second Conditional.' },
+          { id: 4, text: 'If I won the lottery, I ___ quit my job.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 5, text: 'What ___ you do if you saw a ghost?', options: ['would', 'will', 'do', 'did'], correct: 0, explanation: 'Second Conditional question: Would + subject + base verb.' },
+          { id: 6, text: 'If you studied more, you ___ fail.', options: ["wouldn't", "won't", "don't", "didn't"], correct: 0, explanation: 'Second Conditional negative main clause: wouldn\'t + base verb.' },
+          { id: 7, text: 'If I ___ wings, I would fly.', options: ['had', 'have', 'will have', 'having'], correct: 0, explanation: 'If-clause uses Past Simple in Second Conditional.' },
+          { id: 8, text: 'If she had more money, she ___ buy a new car.', options: ['would', 'will', 'is', 'does'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 9, text: "If I didn't have work, I ___ go with you.", options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 10, text: '___ you help me if I asked?', options: ['Would', 'Will', 'Do', 'Did'], correct: 0, explanation: 'Second Conditional question: Would + subject + base verb.' },
+          { id: 11, text: 'If they lived closer, we ___ see each other more.', options: ['would', 'will', 'are', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 12, text: 'If he ___ harder, he would get better results.', options: ['tried', 'tries', 'will try', 'try'], correct: 0, explanation: 'If-clause uses Past Simple in Second Conditional.' },
+          { id: 13, text: 'If I were rich, I ___ travel around the world.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 14, text: 'If it ___ in July, I would be shocked.', options: ['snowed', 'snows', 'will snow', 'snowing'], correct: 0, explanation: 'If-clause uses Past Simple in Second Conditional.' },
+          { id: 15, text: 'We ___ live in the countryside if we could.', options: ['would', 'will', 'do', 'are'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 16, text: 'If you ___ any superpower, what would you choose?', options: ['had', 'have', 'will have', 'having'], correct: 0, explanation: 'If-clause uses Past Simple in Second Conditional.' },
+          { id: 17, text: 'If I knew the answer, I ___ tell you.', options: ['would', 'will', 'do', 'am'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 18, text: 'She ___ be happier if she changed jobs.', options: ['would', 'will', 'is', 'does'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 19, text: 'If we had a bigger house, we ___ get a dog.', options: ['would', 'will', 'are', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 20, text: 'If I ___ speak French, I would move to Paris.', options: ['could', 'can', 'will can', 'able'], correct: 0, explanation: 'If-clause can use "could" (Past form of "can") in Second Conditional.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'If I ___ (have) a million dollars, I would buy a house.', options: ['had', 'have', 'will have', 'having'], correct: 0, explanation: 'If-clause: Past Simple (had).' },
+          { id: 2, text: 'If I were you, I ___ (apologize).', options: ['would apologize', 'will apologize', 'apologize', 'am apologizing'], correct: 0, explanation: 'Main clause: would + base verb (apologize).' },
+          { id: 3, text: 'If I had more time, I ___ (travel) the world.', options: ['would travel', 'will travel', 'travel', 'am traveling'], correct: 0, explanation: 'Main clause: would + base verb (travel).' },
+          { id: 4, text: 'If I ___ (win) the lottery, I would quit my job.', options: ['won', 'win', 'will win', 'winning'], correct: 0, explanation: 'If-clause: Past Simple (won).' },
+          { id: 5, text: 'What would you do if you ___ (see) a ghost?', options: ['saw', 'see', 'will see', 'seeing'], correct: 0, explanation: 'If-clause: Past Simple (saw).' },
+          { id: 6, text: 'If you studied more, you ___ (not / fail).', options: ["wouldn't fail", "won't fail", "don't fail", "didn't fail"], correct: 0, explanation: 'Main clause negative: wouldn\'t + base verb (fail).' },
+          { id: 7, text: 'If I ___ (have) wings, I would fly.', options: ['had', 'have', 'will have', 'having'], correct: 0, explanation: 'If-clause: Past Simple (had).' },
+          { id: 8, text: 'If she had more money, she ___ (buy) a new car.', options: ['would buy', 'will buy', 'buys', 'is buying'], correct: 0, explanation: 'Main clause: would + base verb (buy).' },
+          { id: 9, text: "If I ___ (not / have) work, I would go with you.", options: ["didn't have", "don't have", "won't have", "wasn't having"], correct: 0, explanation: 'If-clause negative: Past Simple ("didn\'t have").' },
+          { id: 10, text: '___ (you / help) me if I asked?', options: ['Would you help', 'Will you help', 'Do you help', 'Did you help'], correct: 0, explanation: 'Second Conditional question: Would + subject + base verb.' },
+          { id: 11, text: 'If they lived closer, we ___ (see) each other more.', options: ['would see', 'will see', 'see', 'are seeing'], correct: 0, explanation: 'Main clause: would + base verb (see).' },
+          { id: 12, text: 'If he ___ (try) harder, he would get better results.', options: ['tried', 'tries', 'will try', 'try'], correct: 0, explanation: 'If-clause: Past Simple (tried).' },
+          { id: 13, text: 'If I were rich, I ___ (travel) around the world.', options: ['would travel', 'will travel', 'travel', 'am traveling'], correct: 0, explanation: 'Main clause: would + base verb (travel).' },
+          { id: 14, text: 'If it ___ (snow) in July, I would be shocked.', options: ['snowed', 'snows', 'will snow', 'snowing'], correct: 0, explanation: 'If-clause: Past Simple (snowed).' },
+          { id: 15, text: 'We ___ (live) in the countryside if we could.', options: ['would live', 'will live', 'live', 'are living'], correct: 0, explanation: 'Main clause: would + base verb (live).' },
+          { id: 16, text: 'If you ___ (have) any superpower, what would you choose?', options: ['had', 'have', 'will have', 'having'], correct: 0, explanation: 'If-clause: Past Simple (had).' },
+          { id: 17, text: 'If I knew the answer, I ___ (tell) you.', options: ['would tell', 'will tell', 'tell', 'am telling'], correct: 0, explanation: 'Main clause: would + base verb (tell).' },
+          { id: 18, text: 'She ___ (be) happier if she changed jobs.', options: ['would be', 'will be', 'is', 'was'], correct: 0, explanation: 'Main clause: would + base verb (be).' },
+          { id: 19, text: 'If we had a bigger house, we ___ (get) a dog.', options: ['would get', 'will get', 'get', 'are getting'], correct: 0, explanation: 'Main clause: would + base verb (get).' },
+          { id: 20, text: 'If I ___ (can / speak) French, I would move to Paris.', options: ['could speak', 'can speak', 'will can speak', 'am able to speak'], correct: 0, explanation: 'If-clause can use "could" as the Past form of "can".' }
+        ],
+        scrambled: [
+          { id: 1, words: ['had', 'if', 'I', 'a', 'million', 'dollars', 'buy', 'I', 'would', 'a', 'house'], answer: 'if I had a million dollars I would buy a house', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 2, words: ['were', 'if', 'I', 'you', 'apologize', 'I', 'would'], answer: 'if I were you I would apologize', explanation: 'Second Conditional formal style: if I were you.' },
+          { id: 3, words: ['had', 'if', 'I', 'more', 'time', 'travel', 'I', 'would', 'the', 'world'], answer: 'if I had more time I would travel the world', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 4, words: ['won', 'if', 'I', 'the', 'lottery', 'quit', 'I', 'would', 'my', 'job'], answer: 'if I won the lottery I would quit my job', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 5, words: ['do', 'what', 'would', 'you', 'if', 'saw', 'you', 'a', 'ghost'], answer: 'what would you do if you saw a ghost', explanation: 'Second Conditional question with "what".' },
+          { id: 6, words: ['studied', 'if', 'you', 'more', 'fail', "wouldn't", 'you'], answer: "if you studied more you wouldn't fail", explanation: 'If + Past Simple, subject + wouldn\'t + base verb.' },
+          { id: 7, words: ['had', 'if', 'I', 'wings', 'fly', 'I', 'would'], answer: 'if I had wings I would fly', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 8, words: ['had', 'if', 'she', 'more', 'money', 'buy', 'she', 'would', 'a', 'new', 'car'], answer: 'if she had more money she would buy a new car', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 9, words: ['have', "didn't", 'if', 'I', 'work', 'go', 'I', 'would', 'with', 'you'], answer: "if I didn't have work I would go with you", explanation: 'If-clause negative + main clause with would.' },
+          { id: 10, words: ['help', 'would', 'you', 'me', 'if', 'asked', 'I'], answer: 'would you help me if I asked', explanation: 'Would + subject + base verb + if + Past Simple?' },
+          { id: 11, words: ['lived', 'if', 'they', 'closer', 'see', 'we', 'would', 'each', 'other', 'more'], answer: 'if they lived closer we would see each other more', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 12, words: ['tried', 'if', 'he', 'harder', 'get', 'he', 'would', 'better', 'results'], answer: 'if he tried harder he would get better results', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 13, words: ['were', 'if', 'I', 'rich', 'travel', 'I', 'would', 'around', 'the', 'world'], answer: 'if I were rich I would travel around the world', explanation: 'If + Past Simple (were), subject + would + base verb.' },
+          { id: 14, words: ['snowed', 'if', 'it', 'in', 'July', 'be', 'I', 'would', 'shocked'], answer: 'if it snowed in July I would be shocked', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 15, words: ['live', 'we', 'would', 'in', 'the', 'countryside', 'if', 'we', 'could'], answer: 'we would live in the countryside if we could', explanation: 'Main clause + if + could (Past form of can).' },
+          { id: 16, words: ['had', 'if', 'you', 'any', 'superpower', 'choose', 'what', 'would', 'you'], answer: 'if you had any superpower what would you choose', explanation: 'If + Past Simple, question with would.' },
+          { id: 17, words: ['knew', 'if', 'I', 'the', 'answer', 'tell', 'I', 'would', 'you'], answer: 'if I knew the answer I would tell you', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 18, words: ['changed', 'she', 'would', 'be', 'happier', 'if', 'she', 'jobs'], answer: 'she would be happier if she changed jobs', explanation: 'Main clause + if + Past Simple.' },
+          { id: 19, words: ['had', 'if', 'we', 'a', 'bigger', 'house', 'get', 'we', 'would', 'a', 'dog'], answer: 'if we had a bigger house we would get a dog', explanation: 'If + Past Simple, subject + would + base verb.' },
+          { id: 20, words: ['could', 'if', 'I', 'speak', 'French', 'move', 'I', 'would', 'to', 'Paris'], answer: 'if I could speak French I would move to Paris', explanation: 'If + could (Past form of can), subject + would + base verb.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'If I have a million dollars, I would buy a house.', options: ['If I', 'have', 'a million dollars', 'I would buy a house'], correct: 1, wrongPart: 'have', correction: 'had', explanation: 'Second Conditional if-clause uses Past Simple: "had".' },
+          { id: 2, text: 'If I was you, I would apologize.', options: ['If I', 'was', 'you', 'I would apologize'], correct: 1, wrongPart: 'was', correction: 'were', explanation: 'Formal Second Conditional uses "were" for all persons: "If I were you".' },
+          { id: 3, text: 'If I had more time, I will travel the world.', options: ['If I had more time', 'I', 'will travel', 'the world'], correct: 2, wrongPart: 'will travel', correction: 'would travel', explanation: 'Second Conditional main clause needs "would", not "will".' },
+          { id: 4, text: 'If I will win the lottery, I would quit my job.', options: ['If I', 'will win', 'the lottery', 'I would quit my job'], correct: 1, wrongPart: 'will win', correction: 'won', explanation: 'The if-clause never uses "will" — use Past Simple: "won".' },
+          { id: 5, text: 'What would you do if you see a ghost?', options: ['What would you do', 'if', 'you see', 'a ghost'], correct: 2, wrongPart: 'you see', correction: 'you saw', explanation: 'If-clause uses Past Simple in Second Conditional: "saw".' },
+          { id: 6, text: 'If you studied more, you don\'t fail.', options: ['If you studied more', 'you', "don't", 'fail'], correct: 2, wrongPart: "don't", correction: "wouldn't", explanation: 'Second Conditional main clause negative: "wouldn\'t".' },
+          { id: 7, text: 'If I have wings, I would fly.', options: ['If I', 'have', 'wings', 'I would fly'], correct: 1, wrongPart: 'have', correction: 'had', explanation: 'Second Conditional if-clause uses Past Simple: "had".' },
+          { id: 8, text: 'If she had more money, she buys a new car.', options: ['If she had more money', 'she', 'buys', 'a new car'], correct: 2, wrongPart: 'buys', correction: 'would buy', explanation: 'Second Conditional main clause needs "would" + base verb: "would buy".' },
+          { id: 9, text: "If I don't have work, I would go with you.", options: ['If I', "don't have", 'work', 'I would go with you'], correct: 1, wrongPart: "don't have", correction: "didn't have", explanation: 'Second Conditional if-clause negative uses Past Simple: "didn\'t have".' },
+          { id: 10, text: 'Will you help me if I asked?', options: ['Will', 'you help me', 'if I', 'asked'], correct: 0, wrongPart: 'Will', correction: 'Would', explanation: 'Second Conditional questions use "Would", not "Will": "Would you help...?".' },
+          { id: 11, text: 'If they lived closer, we will see each other more.', options: ['If they lived closer', 'we', 'will see', 'each other more'], correct: 2, wrongPart: 'will see', correction: 'would see', explanation: 'Second Conditional main clause needs "would", not "will".' },
+          { id: 12, text: 'If he tries harder, he would get better results.', options: ['If he', 'tries', 'harder', 'he would get better results'], correct: 1, wrongPart: 'tries', correction: 'tried', explanation: 'Second Conditional if-clause uses Past Simple: "tried".' },
+          { id: 13, text: 'If I was rich, I would travel around the world.', options: ['If I', 'was', 'rich', 'I would travel around the world'], correct: 1, wrongPart: 'was', correction: 'were', explanation: 'Formal Second Conditional uses "were" for all persons: "If I were rich".' },
+          { id: 14, text: 'If it snows in July, I would be shocked.', options: ['If it', 'snows', 'in July', 'I would be shocked'], correct: 1, wrongPart: 'snows', correction: 'snowed', explanation: 'Second Conditional if-clause uses Past Simple: "snowed".' },
+          { id: 15, text: 'We will live in the countryside if we could.', options: ['We', 'will live', 'in the countryside', 'if we could'], correct: 1, wrongPart: 'will live', correction: 'would live', explanation: 'Second Conditional main clause needs "would", not "will".' },
+          { id: 16, text: 'If you have any superpower, what would you choose?', options: ['If you', 'have', 'any superpower', 'what would you choose'], correct: 1, wrongPart: 'have', correction: 'had', explanation: 'Second Conditional if-clause uses Past Simple: "had".' },
+          { id: 17, text: 'If I knew the answer, I tell you.', options: ['If I knew the answer', 'I', 'tell', 'you'], correct: 2, wrongPart: 'tell', correction: 'would tell', explanation: 'Second Conditional main clause needs "would" + base verb: "would tell".' },
+          { id: 18, text: 'She would be happier if she changes jobs.', options: ['She would be happier', 'if', 'she changes', 'jobs'], correct: 2, wrongPart: 'she changes', correction: 'she changed', explanation: 'Second Conditional if-clause uses Past Simple: "changed".' },
+          { id: 19, text: 'If we had a bigger house, we get a dog.', options: ['If we had a bigger house', 'we', 'get', 'a dog'], correct: 2, wrongPart: 'get', correction: 'would get', explanation: 'Second Conditional main clause needs "would" + base verb: "would get".' },
+          { id: 20, text: 'If I can speak French, I would move to Paris.', options: ['If I', 'can speak', 'French', 'I would move to Paris'], correct: 1, wrongPart: 'can speak', correction: 'could speak', explanation: 'Second Conditional if-clause uses "could", the Past form of "can".' }
+        ],
+        transform: [
+          { id: 1, text: 'Complete the Second Conditional: "If I ___ (have) a million dollars, I would buy a house."', options: ['had', 'have', 'will have', 'having'], correct: 0, explanation: 'If-clause: Past Simple (had).' },
+          { id: 2, text: 'Give advice using Second Conditional: "You should apologize." (If I were you)', options: ['If I were you, I would apologize.', 'If I am you, I will apologize.', 'If I was you, I will apologize.', 'If I were you, I apologize.'], correct: 0, explanation: 'Second Conditional advice: If I were you, I would...' },
+          { id: 3, text: 'Combine using Second Conditional: "I don\'t have more time. I can\'t travel the world."', options: ['If I had more time, I would travel the world.', 'If I have more time, I will travel the world.', 'If I had more time, I will travel the world.', 'If I have more time, I would travel the world.'], correct: 0, explanation: 'Second Conditional: If + Past Simple, would + base verb.' },
+          { id: 4, text: 'Complete the Second Conditional: "If I ___ (win) the lottery, I would quit my job."', options: ['won', 'win', 'will win', 'winning'], correct: 0, explanation: 'If-clause: Past Simple (won).' },
+          { id: 5, text: 'Make a question using Second Conditional: "You would do something if you saw a ghost."', options: ['What would you do if you saw a ghost?', 'What will you do if you see a ghost?', 'What would you do if you see a ghost?', 'What do you do if you saw a ghost?'], correct: 0, explanation: 'Second Conditional question: Would + subject + base verb + if + Past Simple?' },
+          { id: 6, text: 'Make negative (main clause): "If you studied more, you would pass." → If you didn\'t study, you ___ fail.', options: ['would', 'will', 'do', 'did'], correct: 0, explanation: 'Second Conditional main clause: would + base verb (fail).' },
+          { id: 7, text: 'Combine using Second Conditional: "I don\'t have wings. I can\'t fly."', options: ['If I had wings, I would fly.', 'If I have wings, I will fly.', 'If I had wings, I will fly.', 'If I have wings, I would fly.'], correct: 0, explanation: 'Second Conditional: If + Past Simple, would + base verb.' },
+          { id: 8, text: 'Combine using Second Conditional: "She doesn\'t have more money. She can\'t buy a new car."', options: ['If she had more money, she would buy a new car.', 'If she has more money, she will buy a new car.', 'If she had more money, she will buy a new car.', 'If she has more money, she would buy a new car.'], correct: 0, explanation: 'Second Conditional: If + Past Simple, would + base verb.' },
+          { id: 9, text: 'Make negative (if-clause): "If I have work, I won\'t go with you." → If I ___ have work, I would go with you.', options: ["didn't", "don't", "won't", "wasn't"], correct: 0, explanation: "Second Conditional if-clause negative: Past Simple (\"didn't\")." },
+          { id: 10, text: 'Make a question using Second Conditional: "You would help me if I asked."', options: ['Would you help me if I asked?', 'Will you help me if I ask?', 'Do you help me if I asked?', 'Would you help me if I ask?'], correct: 0, explanation: 'Second Conditional question: Would + subject + base verb?' },
+          { id: 11, text: 'Combine using Second Conditional: "They don\'t live closer. We don\'t see each other much."', options: ['If they lived closer, we would see each other more.', 'If they live closer, we will see each other more.', 'If they lived closer, we will see each other more.', 'If they live closer, we would see each other more.'], correct: 0, explanation: 'Second Conditional: If + Past Simple, would + base verb.' },
+          { id: 12, text: 'Complete the Second Conditional: "If he ___ (try) harder, he would get better results."', options: ['tried', 'tries', 'will try', 'try'], correct: 0, explanation: 'If-clause: Past Simple (tried).' },
+          { id: 13, text: 'Combine using Second Conditional: "I am not rich. I can\'t travel around the world."', options: ['If I were rich, I would travel around the world.', 'If I am rich, I will travel around the world.', 'If I were rich, I will travel around the world.', 'If I am rich, I would travel around the world.'], correct: 0, explanation: 'Second Conditional: If + were, would + base verb.' },
+          { id: 14, text: 'Complete the Second Conditional: "If it ___ (snow) in July, I would be shocked."', options: ['snowed', 'snows', 'will snow', 'snowing'], correct: 0, explanation: 'If-clause: Past Simple (snowed).' },
+          { id: 15, text: 'Combine using Second Conditional: "We can\'t live in the countryside now."', options: ['We would live in the countryside if we could.', 'We will live in the countryside if we can.', 'We would live in the countryside if we can.', 'We will live in the countryside if we could.'], correct: 0, explanation: 'Second Conditional main clause + if + could.' },
+          { id: 16, text: 'Make a question using Second Conditional: "You have a superpower. What would you choose?"', options: ['If you had any superpower, what would you choose?', 'If you have any superpower, what will you choose?', 'If you had any superpower, what will you choose?', 'If you have any superpower, what would you choose?'], correct: 0, explanation: 'Second Conditional: If + Past Simple, would + base verb question.' },
+          { id: 17, text: 'Combine using Second Conditional: "I don\'t know the answer. I can\'t tell you."', options: ['If I knew the answer, I would tell you.', 'If I know the answer, I will tell you.', 'If I knew the answer, I will tell you.', 'If I know the answer, I would tell you.'], correct: 0, explanation: 'Second Conditional: If + Past Simple, would + base verb.' },
+          { id: 18, text: 'Combine using Second Conditional: "She doesn\'t change jobs. She isn\'t happier."', options: ['She would be happier if she changed jobs.', 'She will be happier if she changes jobs.', 'She would be happier if she changes jobs.', 'She will be happier if she changed jobs.'], correct: 0, explanation: 'Second Conditional: main clause + if + Past Simple.' },
+          { id: 19, text: 'Combine using Second Conditional: "We don\'t have a bigger house. We can\'t get a dog."', options: ['If we had a bigger house, we would get a dog.', 'If we have a bigger house, we will get a dog.', 'If we had a bigger house, we will get a dog.', 'If we have a bigger house, we would get a dog.'], correct: 0, explanation: 'Second Conditional: If + Past Simple, would + base verb.' },
+          { id: 20, text: 'Combine using Second Conditional: "I can\'t speak French. I can\'t move to Paris."', options: ['If I could speak French, I would move to Paris.', 'If I can speak French, I will move to Paris.', 'If I could speak French, I will move to Paris.', 'If I can speak French, I would move to Paris.'], correct: 0, explanation: 'Second Conditional: If + could, would + base verb.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Talking about dreams.', dialogue: 'A: What would you do with a lot of money?\nB: If I had a million dollars, I ___ buy a house.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 2, situation: 'Giving advice to a friend.', dialogue: "A: She hurt my feelings.\nB: If I were you, I ___ apologize... wait, she should apologize to you!", options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional advice: If I were you, I would...' },
+          { id: 3, situation: 'Talking about free time.', dialogue: 'A: What would you do with more free time?\nB: If I had more time, I ___ travel the world.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 4, situation: 'Discussing the lottery.', dialogue: 'A: Would you keep working if you won the lottery?\nB: No, if I won, I ___ quit my job.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 5, situation: 'Talking about fears.', dialogue: 'A: Are you scared of ghosts?\nB: What ___ you do if you saw one?', options: ['would', 'will', 'do', 'did'], correct: 0, explanation: 'Second Conditional question: would + subject + base verb.' },
+          { id: 6, situation: 'Discussing study habits.', dialogue: "A: I'm worried about the exam.\nB: If you studied more, you ___ fail.", options: ["wouldn't", "won't", "don't", "didn't"], correct: 0, explanation: 'Second Conditional negative main clause: wouldn\'t + base verb.' },
+          { id: 7, situation: 'Talking about superpowers.', dialogue: 'A: What would you do with wings?\nB: If I had wings, I ___ fly everywhere.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 8, situation: 'Talking about finances.', dialogue: 'A: Does she want a new car?\nB: Yes, if she had more money, she ___ buy one.', options: ['would', 'will', 'is', 'does'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 9, situation: 'Making plans with a friend.', dialogue: "A: Can you come with us?\nB: If I didn't have work, I ___ go with you.", options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 10, situation: 'Asking for help.', dialogue: '___ you help me if I asked?\nB: Of course I would.', options: ['Would', 'Will', 'Do', 'Did'], correct: 0, explanation: 'Second Conditional question: Would + subject + base verb.' },
+          { id: 11, situation: 'Talking about distant relatives.', dialogue: 'A: Do you see your cousins often?\nB: Not really. If they lived closer, we ___ see each other more.', options: ['would', 'will', 'are', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 12, situation: 'Giving encouragement.', dialogue: 'A: I keep failing my tests.\nB: If you tried harder, you ___ get better results.', options: ['would', 'will', 'are', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 13, situation: 'Talking about wealth.', dialogue: 'A: What would you do if you were rich?\nB: If I were rich, I ___ travel around the world.', options: ['would', 'will', 'am', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 14, situation: 'Talking about unusual weather.', dialogue: 'A: Could it snow in summer here?\nB: Never, if it ___ in July, I would be shocked.', options: ['snowed', 'snows', 'will snow', 'snowing'], correct: 0, explanation: 'If-clause uses Past Simple (snowed).' },
+          { id: 15, situation: 'Talking about lifestyle preferences.', dialogue: 'A: Do you like the city?\nB: Not really. We ___ live in the countryside if we could.', options: ['would', 'will', 'do', 'are'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 16, situation: 'Playing a hypothetical game.', dialogue: 'A: If you had any superpower, what ___ you choose?\nB: Probably flying.', options: ['would', 'will', 'do', 'did'], correct: 0, explanation: 'Second Conditional question: would + subject + base verb.' },
+          { id: 17, situation: 'Helping with a puzzle.', dialogue: "A: Do you know the answer?\nB: No, but if I knew it, I ___ tell you.", options: ['would', 'will', 'do', 'am'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 18, situation: 'Discussing career changes.', dialogue: 'A: Is she happy at work?\nB: Not really. She ___ be happier if she changed jobs.', options: ['would', 'will', 'is', 'does'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 19, situation: 'Talking about pets.', dialogue: 'A: Why don\'t you have a dog?\nB: If we had a bigger house, we ___ get one.', options: ['would', 'will', 'are', 'do'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' },
+          { id: 20, situation: 'Talking about moving abroad.', dialogue: 'A: Would you ever live in Paris?\nB: If I could speak French, I ___ move there.', options: ['would', 'will', 'do', 'am'], correct: 0, explanation: 'Second Conditional main clause: would + base verb.' }
+        ]
+      },
+      {
+        id: 'modal-verbs',
+        title: 'Modal Verbs',
+        icon: '🧩',
+        guide: `## Modal Verbs (Modal fe'llar: majburiyat, ruxsat, maslahat, ehtimollik)
+
+Modal fe'llar asosiy fe'lga qo'shimcha ma'no (majburiyat, ruxsat, maslahat, ehtimollik, qobiliyat) qo'shadi. Ular hech qachon "-s", "-ing", "-ed" olmaydi va o'zidan keyin doim **base verb** keladi.
+
+## 1. Shakllanishi (Form)
+• Subject + modal + base verb (to'siqsiz)
+  - She **must go** now. She **can swim**. You **should study**.
+• **Inkor**: modal + not
+  - You **mustn't smoke** here. He **can't drive**.
+• **Savol**: Modal + Subject + base verb?
+  - **Must** I **finish** this today? **Can** you **help** me?
+
+## 2. Ishlatilishi (Usage)
+1. **must** — kuchli shaxsiy majburiyat/ishonch:
+   - I **must finish** this report today. (o'zim his qilgan zaruriyat)
+   - You **must be** tired after that trip. (kuchli ishonch/xulosa)
+2. **have to** — tashqi qoida/majburiyat (qonun, boshqa odam):
+   - Employees **have to wear** a uniform. (kompaniya qoidasi)
+   - **must** va **have to** ko'pincha almashinadi, lekin **have to** tashqi manbadan, **must** ichki his-tuyg'udan kelib chiqadi
+3. **mustn't** vs **don't have to**:
+   - You **mustn't** enter. (taqiqlangan — kirish MAN ETILGAN)
+   - You **don't have to** come. (majburiy emas — kelish SHART EMAS, lekin mumkin)
+4. **should** — maslahat, tavsiya:
+   - You **should see** a doctor. (maslahat, majburiyat emas)
+5. **can** — qobiliyat, ruxsat, so'rov:
+   - She **can speak** three languages. (qobiliyat)
+   - **Can** I **open** the window? (ruxsat so'rash, norasmiy)
+6. **may** — ruxsat (rasmiy), ehtimollik:
+   - **May** I **come** in? (ruxsat so'rash, rasmiy)
+   - It **may rain** later. (ehtimollik)
+
+## 3. Solishtirish jadvali
+• must (ichki majburiyat) vs have to (tashqi majburiyat)
+• mustn't (taqiq) vs don't have to (ixtiyoriy)
+• can (norasmiy ruxsat/qobiliyat) vs may (rasmiy ruxsat/ehtimollik)
+• should (maslahat) vs must (majburiyat) — should kuchsizroq
+
+## 4. Signal so'zlar
+• must, have to/has to, mustn't, don't have to/doesn't have to
+• should, shouldn't
+• can, can't, could (o'tmishda)
+• may, might (ehtimollik, kamroq aniq)`,
+        questions: [
+          { id: 1, text: 'I ___ finish this report today — it\'s urgent.', options: ['must', 'may', 'could', 'was'], correct: 0, explanation: '"must" — kuchli shaxsiy majburiyat.' },
+          { id: 2, text: 'Employees ___ wear a uniform at this company.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida/majburiyat.' },
+          { id: 3, text: 'You ___ enter this room — it\'s strictly forbidden.', options: ["mustn't", "don't have to", "shouldn't", "can't"], correct: 0, explanation: '"mustn\'t" — taqiq, kirish man etilgan.' },
+          { id: 4, text: 'You ___ come to the party if you don\'t want to — it\'s optional.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — majburiy emas, ixtiyoriy.' },
+          { id: 5, text: 'You ___ see a doctor about that cough.', options: ['should', 'must', 'can', 'may'], correct: 0, explanation: '"should" — maslahat, tavsiya.' },
+          { id: 6, text: 'She ___ speak three languages fluently.', options: ['can', 'must', 'should', 'may'], correct: 0, explanation: '"can" — qobiliyatni bildiradi.' },
+          { id: 7, text: '___ I open the window? It\'s hot in here.', options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 8, text: '___ I come in, please?', options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
+          { id: 9, text: 'It ___ rain later, so take an umbrella just in case.', options: ['may', 'must', 'should', 'have to'], correct: 0, explanation: '"may" — ehtimollikni bildiradi.' },
+          { id: 10, text: 'You ___ be tired after such a long trip.', options: ['must', 'can', 'should', 'may not'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
+          { id: 11, text: 'He ___ swim when he was five years old.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
+          { id: 12, text: 'Students ___ hand in their homework by Friday.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida (maktab qoidasi).' },
+          { id: 13, text: 'You ___ smoke inside the building.', options: ["mustn't", "don't have to", "shouldn't", "may not"], correct: 0, explanation: '"mustn\'t" — taqiq, chekish man etilgan.' },
+          { id: 14, text: 'You ___ bring your own laptop — we provide one.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — ixtiyoriy, shart emas.' },
+          { id: 15, text: 'You ___ apologize to her — it was a small mistake.', options: ['should', 'must', 'can', 'have to'], correct: 0, explanation: '"should" — maslahat, tavsiya.' },
+          { id: 16, text: 'They ___ afford a new car this year.', options: ["can't", "mustn't", "shouldn't", "mayn't"], correct: 0, explanation: '"can\'t" — imkoniyat/qobiliyat yo\'qligi.' },
+          { id: 17, text: '___ you help me carry these boxes?', options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy so\'rov.' },
+          { id: 18, text: '___ I ask you a personal question?', options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
+          { id: 19, text: 'The lights are off — they ___ be asleep already.', options: ['must', 'can', 'should', 'have to'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
+          { id: 20, text: 'We ___ leave early tomorrow to catch the flight.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi zaruriyat (parvoz vaqti).' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'I ___ (must / finish) this report today.', options: ['must finish', 'have to finished', 'must to finish', 'musting finish'], correct: 0, explanation: 'Modal + base verb, hech qanday qo\'shimcha qo\'shilmaydi.' },
+          { id: 2, text: 'Employees ___ (have to / wear) a uniform.', options: ['have to wear', 'has to wear', 'have to wearing', 'must to wear'], correct: 0, explanation: '"have to" + base verb (wear).' },
+          { id: 3, text: 'You ___ (mustn\'t / enter) this room.', options: ["mustn't enter", "don't must enter", "mustn't to enter", "mustn't entering"], correct: 0, explanation: '"mustn\'t" + base verb (enter), taqiq.' },
+          { id: 4, text: 'You ___ (don\'t have to / come) if you don\'t want to.', options: ["don't have to come", "mustn't come", "don't must come", "haven't to come"], correct: 0, explanation: '"don\'t have to" + base verb (come), ixtiyoriy.' },
+          { id: 5, text: 'You ___ (should / see) a doctor about that cough.', options: ['should see', 'should to see', 'should seeing', 'shoulds see'], correct: 0, explanation: '"should" + base verb (see).' },
+          { id: 6, text: 'She ___ (can / speak) three languages.', options: ['can speak', 'can to speak', 'cans speak', 'can speaking'], correct: 0, explanation: '"can" + base verb (speak).' },
+          { id: 7, text: '___ (can / I / open) the window?', options: ['Can I open', 'Can I to open', 'Can I opening', 'I can open'], correct: 0, explanation: 'Modal question: Can + subject + base verb?' },
+          { id: 8, text: '___ (may / I / come) in?', options: ['May I come', 'May I to come', 'I may come', 'May I coming'], correct: 0, explanation: 'Modal question: May + subject + base verb?' },
+          { id: 9, text: 'It ___ (may / rain) later.', options: ['may rain', 'may to rain', 'may raining', 'mays rain'], correct: 0, explanation: '"may" + base verb (rain), ehtimollik.' },
+          { id: 10, text: 'You ___ (must / be) tired after that trip.', options: ['must be', 'must to be', 'must being', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli ishonch.' },
+          { id: 11, text: 'He ___ (could / swim) when he was five.', options: ['could swim', 'could to swim', 'coulds swim', 'could swimming'], correct: 0, explanation: '"could" + base verb (swim), o\'tmishdagi qobiliyat.' },
+          { id: 12, text: 'Students ___ (have to / hand) in homework by Friday.', options: ['have to hand', 'has to hand', 'have to handing', 'must to hand'], correct: 0, explanation: '"have to" + base verb (hand).' },
+          { id: 13, text: 'You ___ (mustn\'t / smoke) inside the building.', options: ["mustn't smoke", "don't must smoke", "mustn't to smoke", "mustn't smoking"], correct: 0, explanation: '"mustn\'t" + base verb (smoke), taqiq.' },
+          { id: 14, text: 'You ___ (don\'t have to / bring) your own laptop.', options: ["don't have to bring", "mustn't bring", "don't must bring", "haven't to bring"], correct: 0, explanation: '"don\'t have to" + base verb (bring), ixtiyoriy.' },
+          { id: 15, text: 'You ___ (should / apologize) to her.', options: ['should apologize', 'should to apologize', 'shoulds apologize', 'should apologizing'], correct: 0, explanation: '"should" + base verb (apologize).' },
+          { id: 16, text: 'They ___ (can\'t / afford) a new car.', options: ["can't afford", "can't to afford", "cant's afford", "can't affording"], correct: 0, explanation: '"can\'t" + base verb (afford).' },
+          { id: 17, text: '___ (can / you / help) me carry these boxes?', options: ['Can you help', 'Can you to help', 'You can help', 'Can you helping'], correct: 0, explanation: 'Modal question: Can + subject + base verb?' },
+          { id: 18, text: '___ (may / I / ask) you a personal question?', options: ['May I ask', 'May I to ask', 'I may ask', 'May I asking'], correct: 0, explanation: 'Modal question: May + subject + base verb?' },
+          { id: 19, text: 'The lights are off — they ___ (must / be) asleep.', options: ['must be', 'must to be', 'must being', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli ishonch.' },
+          { id: 20, text: 'We ___ (have to / leave) early tomorrow.', options: ['have to leave', 'has to leave', 'have to leaving', 'must to leave'], correct: 0, explanation: '"have to" + base verb (leave).' }
+        ],
+        scrambled: [
+          { id: 1, words: ['finish', 'I', 'must', 'this', 'report', 'today'], answer: 'I must finish this report today', explanation: 'Subject + must + base verb.' },
+          { id: 2, words: ['wear', 'employees', 'have', 'to', 'a', 'uniform'], answer: 'employees have to wear a uniform', explanation: 'Subject + have to + base verb.' },
+          { id: 3, words: ['enter', 'you', "mustn't", 'this', 'room'], answer: "you mustn't enter this room", explanation: 'Subject + mustn\'t + base verb.' },
+          { id: 4, words: ['come', 'you', "don't", 'have', 'to', 'if', 'you', "don't", 'want', 'to'], answer: "you don't have to come if you don't want to", explanation: 'Subject + don\'t have to + base verb.' },
+          { id: 5, words: ['see', 'you', 'should', 'a', 'doctor'], answer: 'you should see a doctor', explanation: 'Subject + should + base verb.' },
+          { id: 6, words: ['speak', 'she', 'can', 'three', 'languages'], answer: 'she can speak three languages', explanation: 'Subject + can + base verb.' },
+          { id: 7, words: ['open', 'can', 'I', 'the', 'window', '?'], answer: 'can I open the window', explanation: 'Can + subject + base verb?' },
+          { id: 8, words: ['come', 'may', 'I', 'in', '?'], answer: 'may I come in', explanation: 'May + subject + base verb?' },
+          { id: 9, words: ['rain', 'it', 'may', 'later'], answer: 'it may rain later', explanation: 'Subject + may + base verb.' },
+          { id: 10, words: ['be', 'you', 'must', 'tired', 'after', 'that', 'trip'], answer: 'you must be tired after that trip', explanation: 'Subject + must + base verb.' },
+          { id: 11, words: ['swim', 'he', 'could', 'when', 'he', 'was', 'five'], answer: 'he could swim when he was five', explanation: 'Subject + could + base verb.' },
+          { id: 12, words: ['hand', 'students', 'have', 'to', 'in', 'homework', 'by', 'Friday'], answer: 'students have to hand in homework by Friday', explanation: 'Subject + have to + base verb.' },
+          { id: 13, words: ['smoke', 'you', "mustn't", 'inside', 'the', 'building'], answer: "you mustn't smoke inside the building", explanation: 'Subject + mustn\'t + base verb.' },
+          { id: 14, words: ['bring', 'you', "don't", 'have', 'to', 'your', 'own', 'laptop'], answer: "you don't have to bring your own laptop", explanation: 'Subject + don\'t have to + base verb.' },
+          { id: 15, words: ['apologize', 'you', 'should', 'to', 'her'], answer: 'you should apologize to her', explanation: 'Subject + should + base verb.' },
+          { id: 16, words: ['afford', 'they', "can't", 'a', 'new', 'car'], answer: "they can't afford a new car", explanation: 'Subject + can\'t + base verb.' },
+          { id: 17, words: ['help', 'can', 'you', 'me', 'carry', 'these', 'boxes', '?'], answer: 'can you help me carry these boxes', explanation: 'Can + subject + base verb?' },
+          { id: 18, words: ['ask', 'may', 'I', 'you', 'a', 'personal', 'question', '?'], answer: 'may I ask you a personal question', explanation: 'May + subject + base verb?' },
+          { id: 19, words: ['be', 'they', 'must', 'asleep', 'already'], answer: 'they must be asleep already', explanation: 'Subject + must + base verb.' },
+          { id: 20, words: ['leave', 'we', 'have', 'to', 'early', 'tomorrow'], answer: 'we have to leave early tomorrow', explanation: 'Subject + have to + base verb.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'I must to finish this report today.', options: ['I', 'must to finish', 'this report', 'today'], correct: 1, wrongPart: 'must to finish', correction: 'must finish', explanation: 'Modal verbs are followed directly by the base verb, no "to": "must finish".' },
+          { id: 2, text: 'Employees have to wearing a uniform.', options: ['Employees', 'have to', 'wearing', 'a uniform'], correct: 2, wrongPart: 'wearing', correction: 'wear', explanation: 'After "have to", use the base verb: "wear", not "wearing".' },
+          { id: 3, text: "You don't must enter this room.", options: ['You', "don't must", 'enter', 'this room'], correct: 1, wrongPart: "don't must", correction: "mustn't", explanation: '"must" is negated as "mustn\'t", not "don\'t must".' },
+          { id: 4, text: "You mustn't come if you don't want to.", options: ['You', "mustn't come", 'if you', "don't want to"], correct: 1, wrongPart: "mustn't come", correction: "don't have to come", explanation: '"mustn\'t" means forbidden; for "not necessary" use "don\'t have to".' },
+          { id: 5, text: 'You should to see a doctor.', options: ['You', 'should to see', 'a doctor', 'No error'], correct: 1, wrongPart: 'should to see', correction: 'should see', explanation: 'Modal verbs are followed directly by the base verb, no "to": "should see".' },
+          { id: 6, text: 'She can speaks three languages.', options: ['She', 'can', 'speaks', 'three languages'], correct: 2, wrongPart: 'speaks', correction: 'speak', explanation: 'After a modal verb, use the base verb without "-s": "speak".' },
+          { id: 7, text: 'Can I opening the window?', options: ['Can', 'I', 'opening', 'the window'], correct: 2, wrongPart: 'opening', correction: 'open', explanation: 'After "can", use the base verb: "open", not "opening".' },
+          { id: 8, text: 'May I to come in?', options: ['May', 'I to come', 'in', 'No error'], correct: 1, wrongPart: 'I to come', correction: 'I come', explanation: 'Modal verbs are followed directly by the base verb, no "to": "May I come".' },
+          { id: 9, text: 'It mays rain later.', options: ['It', 'mays', 'rain', 'later'], correct: 1, wrongPart: 'mays', correction: 'may', explanation: 'Modal verbs never take "-s": "may", not "mays".' },
+          { id: 10, text: 'You must being tired after that trip.', options: ['You', 'must', 'being', 'tired after that trip'], correct: 2, wrongPart: 'being', correction: 'be', explanation: 'After "must", use the base verb: "be", not "being".' },
+          { id: 11, text: 'He can swim when he was five years old.', options: ['He', 'can swim', 'when he was', 'five years old'], correct: 1, wrongPart: 'can swim', correction: 'could swim', explanation: 'For a past ability, use "could", the past form of "can".' },
+          { id: 12, text: 'Students has to hand in their homework.', options: ['Students', 'has to', 'hand in', 'their homework'], correct: 1, wrongPart: 'has to', correction: 'have to', explanation: 'With plural subject "Students", use "have to", not "has to".' },
+          { id: 13, text: "You don't have to smoke inside the building.", options: ['You', "don't have to smoke", 'inside', 'the building'], correct: 1, wrongPart: "don't have to smoke", correction: "mustn't smoke", explanation: 'To express a prohibition (forbidden), use "mustn\'t", not "don\'t have to".' },
+          { id: 14, text: 'You mustn\'t bring your own laptop — it\'s optional.', options: ['You', "mustn't bring", 'your own laptop', "it's optional"], correct: 1, wrongPart: "mustn't bring", correction: "don't have to bring", explanation: 'Since it is optional (not forbidden), use "don\'t have to".' },
+          { id: 15, text: 'You should apologizing to her.', options: ['You', 'should', 'apologizing', 'to her'], correct: 2, wrongPart: 'apologizing', correction: 'apologize', explanation: 'After "should", use the base verb: "apologize", not "apologizing".' },
+          { id: 16, text: "They can't affords a new car.", options: ['They', "can't", 'affords', 'a new car'], correct: 2, wrongPart: 'affords', correction: 'afford', explanation: 'After a modal verb, use the base verb without "-s": "afford".' },
+          { id: 17, text: 'Can you helping me carry these boxes?', options: ['Can', 'you', 'helping', 'me carry these boxes'], correct: 2, wrongPart: 'helping', correction: 'help', explanation: 'After "can", use the base verb: "help", not "helping".' },
+          { id: 18, text: 'May I asks you a personal question?', options: ['May', 'I', 'asks', 'you a personal question'], correct: 2, wrongPart: 'asks', correction: 'ask', explanation: 'Modal verbs never take "-s": "ask", not "asks".' },
+          { id: 19, text: 'The lights are off — they must to be asleep.', options: ['The lights are off', 'they', 'must to be', 'asleep'], correct: 2, wrongPart: 'must to be', correction: 'must be', explanation: 'Modal verbs are followed directly by the base verb, no "to": "must be".' },
+          { id: 20, text: 'We have to leaving early tomorrow.', options: ['We', 'have to', 'leaving', 'early tomorrow'], correct: 2, wrongPart: 'leaving', correction: 'leave', explanation: 'After "have to", use the base verb: "leave", not "leaving".' }
+        ],
+        transform: [
+          { id: 1, text: 'Express strong personal obligation: "It\'s necessary for me to finish this report today."', options: ['I must finish this report today.', 'I can finish this report today.', 'I may finish this report today.', 'I should finish this report today.'], correct: 0, explanation: '"must" expresses strong personal obligation.' },
+          { id: 2, text: 'Express an external rule: "Company policy requires employees to wear a uniform."', options: ['Employees have to wear a uniform.', 'Employees must to wear a uniform.', 'Employees may wear a uniform.', 'Employees should wear a uniform.'], correct: 0, explanation: '"have to" expresses an external rule/obligation.' },
+          { id: 3, text: 'Express prohibition: "It is forbidden to enter this room."', options: ["You mustn't enter this room.", "You don't have to enter this room.", "You shouldn't enter this room.", "You can't enter this room."], correct: 0, explanation: '"mustn\'t" expresses prohibition.' },
+          { id: 4, text: 'Express that something is optional: "Coming to the party is not required."', options: ["You don't have to come to the party.", "You mustn't come to the party.", "You can't come to the party.", "You shouldn't come to the party."], correct: 0, explanation: '"don\'t have to" expresses lack of obligation.' },
+          { id: 5, text: 'Give advice: "I recommend that you see a doctor."', options: ['You should see a doctor.', 'You must see a doctor.', 'You can see a doctor.', 'You have to see a doctor.'], correct: 0, explanation: '"should" is used for advice/recommendation.' },
+          { id: 6, text: 'Express ability: "She has the ability to speak three languages."', options: ['She can speak three languages.', 'She must speak three languages.', 'She should speak three languages.', 'She may speak three languages.'], correct: 0, explanation: '"can" expresses ability.' },
+          { id: 7, text: 'Ask for informal permission: "I want permission to open the window."', options: ['Can I open the window?', 'Must I open the window?', 'Should I open the window?', 'Have I to open the window?'], correct: 0, explanation: '"Can" is used for informal permission requests.' },
+          { id: 8, text: 'Ask for formal permission: "I want polite permission to come in."', options: ['May I come in?', 'Must I come in?', 'Should I come in?', 'Have I to come in?'], correct: 0, explanation: '"May" is used for formal permission requests.' },
+          { id: 9, text: 'Express possibility: "It is possible that it will rain later."', options: ['It may rain later.', 'It must rain later.', 'It should rain later.', 'It has to rain later.'], correct: 0, explanation: '"may" expresses possibility.' },
+          { id: 10, text: 'Express a logical conclusion: "I am sure you are tired after that trip."', options: ['You must be tired after that trip.', 'You can be tired after that trip.', 'You may not be tired after that trip.', 'You should be tired after that trip.'], correct: 0, explanation: '"must" expresses a strong logical conclusion.' },
+          { id: 11, text: 'Express past ability: "He had the ability to swim at age five."', options: ['He could swim when he was five.', 'He can swim when he was five.', 'He must swim when he was five.', 'He should swim when he was five.'], correct: 0, explanation: '"could" is the past form of "can" for ability.' },
+          { id: 12, text: 'Express an external requirement: "School rules require students to hand in homework by Friday."', options: ['Students have to hand in their homework by Friday.', 'Students must to hand in their homework by Friday.', 'Students may hand in their homework by Friday.', 'Students should hand in their homework by Friday.'], correct: 0, explanation: '"have to" expresses an external rule.' },
+          { id: 13, text: 'Express prohibition: "Smoking inside the building is forbidden."', options: ["You mustn't smoke inside the building.", "You don't have to smoke inside the building.", "You shouldn't smoke inside the building.", "You can't smoke inside the building."], correct: 0, explanation: '"mustn\'t" expresses prohibition.' },
+          { id: 14, text: 'Express that something is optional: "Bringing your own laptop is not required — we provide one."', options: ["You don't have to bring your own laptop.", "You mustn't bring your own laptop.", "You can't bring your own laptop.", "You shouldn't bring your own laptop."], correct: 0, explanation: '"don\'t have to" expresses lack of obligation.' },
+          { id: 15, text: 'Give advice: "I recommend that you apologize to her."', options: ['You should apologize to her.', 'You must apologize to her.', 'You have to apologize to her.', 'You may apologize to her.'], correct: 0, explanation: '"should" is used for advice/recommendation.' },
+          { id: 16, text: 'Express lack of ability: "They don\'t have the money for a new car."', options: ["They can't afford a new car.", "They mustn't afford a new car.", "They shouldn't afford a new car.", "They may not afford a new car."], correct: 0, explanation: '"can\'t" expresses lack of ability/possibility.' },
+          { id: 17, text: 'Make an informal request: "I want you to help me carry these boxes."', options: ['Can you help me carry these boxes?', 'Must you help me carry these boxes?', 'Should you help me carry these boxes?', 'Have you to help me carry these boxes?'], correct: 0, explanation: '"Can" is used for informal requests.' },
+          { id: 18, text: 'Make a formal, polite request: "I want polite permission to ask you a personal question."', options: ['May I ask you a personal question?', 'Must I ask you a personal question?', 'Should I ask you a personal question?', 'Can I ask you a personal question, formally?'], correct: 0, explanation: '"May" is used for formal, polite permission requests.' },
+          { id: 19, text: 'Express a logical conclusion: "I\'m sure they are asleep — the lights are off."', options: ['They must be asleep already.', 'They can be asleep already.', 'They may not be asleep already.', 'They should be asleep already.'], correct: 0, explanation: '"must" expresses a strong logical conclusion.' },
+          { id: 20, text: 'Express an external requirement: "The flight schedule requires us to leave early tomorrow."', options: ['We have to leave early tomorrow.', 'We must to leave early tomorrow.', 'We may leave early tomorrow.', 'We should leave early tomorrow.'], correct: 0, explanation: '"have to" expresses an external requirement.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Working under deadline pressure.', dialogue: 'A: Can you come out tonight?\nB: Sorry, I ___ finish this report today.', options: ['must', 'may', 'could', 'was'], correct: 0, explanation: '"must" — kuchli shaxsiy majburiyat.' },
+          { id: 2, situation: 'Talking about a new job.', dialogue: 'A: Is there a dress code?\nB: Yes, employees ___ wear a uniform.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
+          { id: 3, situation: 'Warning a visitor.', dialogue: 'A: Can I go in there?\nB: No, you ___ enter — it\'s strictly forbidden.', options: ["mustn't", "don't have to", "shouldn't", "can't"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
+          { id: 4, situation: 'Inviting a friend to a party.', dialogue: 'A: Do I have to come tonight?\nB: No, you ___ come if you don\'t want to.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — ixtiyoriy.' },
+          { id: 5, situation: 'Talking about health.', dialogue: 'A: I have a bad cough.\nB: You ___ see a doctor about that.', options: ['should', 'must', 'can', 'may'], correct: 0, explanation: '"should" — maslahat.' },
+          { id: 6, situation: 'Talking about language skills.', dialogue: 'A: Is she good with languages?\nB: Yes, she ___ speak three of them fluently.', options: ['can', 'must', 'should', 'may'], correct: 0, explanation: '"can" — qobiliyat.' },
+          { id: 7, situation: 'In a hot classroom.', dialogue: "A: It's so hot in here!\nB: ___ I open the window?", options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 8, situation: 'At a formal office.', dialogue: "A: Excuse me, ___ I come in?\nB: Yes, please.", options: ['may', 'must', 'should', 'have to'], correct: 0, explanation: '"may" — rasmiy ruxsat so\'rash.' },
+          { id: 9, situation: 'Checking the weather.', dialogue: 'A: Should I bring an umbrella?\nB: Good idea, it ___ rain later.', options: ['may', 'must', 'should', 'have to'], correct: 0, explanation: '"may" — ehtimollik.' },
+          { id: 10, situation: 'Welcoming someone home.', dialogue: "A: I just got back from a 12-hour flight.\nB: Wow, you ___ be exhausted!", options: ['must', 'can', 'should', 'may not'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
+          { id: 11, situation: 'Talking about childhood.', dialogue: 'A: Were you a good swimmer as a kid?\nB: Yes, I ___ swim when I was five.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
+          { id: 12, situation: 'Discussing school deadlines.', dialogue: 'A: When is the homework due?\nB: Students ___ hand it in by Friday.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
+          { id: 13, situation: 'Pointing out a building rule.', dialogue: "A: Can I smoke here?\nB: No, you ___ smoke inside the building.", options: ["mustn't", "don't have to", "shouldn't", "may not"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
+          { id: 14, situation: 'Preparing for a meeting.', dialogue: 'A: Should I bring my own laptop?\nB: No, you ___ — we provide one.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — ixtiyoriy.' },
+          { id: 15, situation: 'After an argument.', dialogue: 'A: I feel bad about what I said.\nB: You ___ apologize to her.', options: ['should', 'must', 'can', 'have to'], correct: 0, explanation: '"should" — maslahat.' },
+          { id: 16, situation: 'Talking about finances.', dialogue: "A: Are they getting a new car?\nB: No, they ___ afford one this year.", options: ["can't", "mustn't", "shouldn't", "mayn't"], correct: 0, explanation: '"can\'t" — imkoniyat yo\'qligi.' },
+          { id: 17, situation: 'Moving furniture.', dialogue: "A: These boxes are so heavy!\nB: ___ you help me carry them?", options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy so\'rov.' },
+          { id: 18, situation: 'Approaching a sensitive topic.', dialogue: "A: ___ I ask you a personal question?\nB: Sure, go ahead.", options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
+          { id: 19, situation: 'Late at night.', dialogue: 'A: All the lights are off next door.\nB: They ___ be asleep already.', options: ['must', 'can', 'should', 'have to'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
+          { id: 20, situation: 'Planning a flight departure.', dialogue: "A: What time should we leave?\nB: We ___ leave early to catch the flight.", options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi zaruriyat.' }
+        ]
+      },
+      {
+        id: 'reported-speech',
+        title: 'Reported Speech',
+        icon: '🗣️',
+        guide: `## Reported Speech (Ko'chirma gapni o'zlashtirma gapga aylantirish)
+
+Reported Speech — birovning aytgan so'zlarini to'g'ridan-to'g'ri tirnoqchada emas, balki o'z gapimiz ichida qayta aytib berish usuli. Bunda zamon, olmosh va vaqt/o'rin so'zlari o'zgaradi.
+
+## 1. Zamon orqaga siljishi (Tense Backshift)
+Agar reporting fe'l **o'tgan zamonda** bo'lsa (said, told), asosiy gapdagi zamon bir bosqich orqaga siljiydi:
+• Present Simple → Past Simple: "I **work** here." → He said (that) he **worked** there.
+• Present Continuous → Past Continuous: "I **am working**." → She said she **was working**.
+• Present Perfect → Past Perfect: "I **have finished**." → He said he **had finished**.
+• Past Simple → Past Perfect: "I **finished**." → She said she **had finished**.
+• will → would: "I **will help**." → He said he **would help**.
+• can → could: "I **can swim**." → She said she **could swim**.
+
+*(Past Perfect o'zgarmaydi — u allaqachon "eng orqada")*
+
+## 2. Olmosh va vaqt/o'rin so'zlari o'zgarishi
+• I → he/she; my → his/her; we → they; you → I/he/she (kontekstga qarab)
+• now → then; today → that day; tomorrow → the next day
+• yesterday → the day before; here → there; this → that
+
+## 3. Gapларni ko'chirish (Statements)
+Subject + said/told (+ object) + (that) + backshifted clause
+  - "I am tired," she said. → She said (that) she **was tired**.
+  - "I will call you," he said. → He told me (that) he **would call** me.
+  - **say** — obyektsiz ishlatiladi; **tell** — doim obyekt talab qiladi (tell + someone)
+
+## 4. Savollarni ko'chirish (Reported Questions)
+• **Ha/Yo'q savollar**: asked + if/whether + Subject + Verb (auxiliary "do" yo'q, so'roq belgisi yo'q)
+  - "Are you coming?" → She asked **if** I **was coming**.
+  - "Do you like pizza?" → He asked **whether** I **liked** pizza.
+• **Maxsus savollar (Wh-questions)**: asked + wh-so'z + Subject + Verb
+  - "Where do you live?" → She asked **where** I **lived**.
+  - "What are you doing?" → He asked **what** I **was doing**.
+
+*(Reported questions'da so'z tartibi TASDIQ gap tartibiga o'tadi, savol tartibida qolmaydi)*`,
+        questions: [
+          { id: 1, text: '"I work here," she said. → She said (that) she ___ there.', options: ['worked', 'works', 'is working', 'has worked'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 2, text: '"I am working," he said. → He said he ___ working.', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Present Continuous → Past Continuous in reported speech.' },
+          { id: 3, text: '"I have finished," he said. → He said he ___ finished.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Present Perfect → Past Perfect in reported speech.' },
+          { id: 4, text: '"I finished the work," she said. → She said she ___ finished the work.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Simple → Past Perfect in reported speech.' },
+          { id: 5, text: '"I will help you," he said. → He said he ___ help me.', options: ['would', 'will', 'can', 'was'], correct: 0, explanation: 'will → would in reported speech.' },
+          { id: 6, text: '"I can swim," she said. → She said she ___ swim.', options: ['could', 'can', 'would', 'was'], correct: 0, explanation: 'can → could in reported speech.' },
+          { id: 7, text: '"I am tired," she said. → She said (that) she ___ tired.', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Present Simple (am) → Past Simple (was) in reported speech.' },
+          { id: 8, text: '"I will call you tomorrow," he said. → He told me (that) he ___ call me the next day.', options: ['would', 'will', 'can', 'was'], correct: 0, explanation: 'will → would in reported speech.' },
+          { id: 9, text: '"Are you coming?" she asked. → She asked if I ___ coming.', options: ['was', 'am', 'have been', 'were'], correct: 0, explanation: 'Reported yes/no question: if + subject + backshifted verb.' },
+          { id: 10, text: '"Do you like pizza?" he asked. → He asked whether I ___ pizza.', options: ['liked', 'like', 'likes', 'am liking'], correct: 0, explanation: 'Reported yes/no question: whether + subject + backshifted verb, no "do".' },
+          { id: 11, text: '"Where do you live?" she asked. → She asked where I ___.', options: ['lived', 'live', 'do live', 'am living'], correct: 0, explanation: 'Reported wh-question: statement word order, backshifted verb.' },
+          { id: 12, text: '"What are you doing?" he asked. → He asked what I ___ doing.', options: ['was', 'am', 'have been', 'were'], correct: 0, explanation: 'Reported wh-question: was + doing (backshifted continuous).' },
+          { id: 13, text: '"I live in London," she said. → She said (that) she ___ in London.', options: ['lived', 'lives', 'is living', 'has lived'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 14, text: '"We are studying English," they said. → They said (that) they ___ studying English.', options: ['were', 'are', 'have been', 'was'], correct: 0, explanation: 'Present Continuous → Past Continuous in reported speech.' },
+          { id: 15, text: '"I have never been to Paris," he said. → He said he ___ never been to Paris.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Present Perfect → Past Perfect in reported speech.' },
+          { id: 16, text: '"I saw that film," she said. → She said she ___ seen that film.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Simple → Past Perfect in reported speech.' },
+          { id: 17, text: '"Where is the station?" he asked. → He asked where the station ___.', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Reported wh-question: statement word order, backshifted verb.' },
+          { id: 18, text: '"I can\'t come tonight," she said. → She said she ___ come that night.', options: ["couldn't", "can't", "wouldn't", "wasn't"], correct: 0, explanation: 'can\'t → couldn\'t in reported speech.' },
+          { id: 19, text: '"Did you finish your homework?" the teacher asked. → The teacher asked if I ___ finished my homework.', options: ['had', 'has', 'did', 'have'], correct: 0, explanation: 'Past Simple → Past Perfect in reported yes/no question.' },
+          { id: 20, text: '"I need help," he said. → He said (that) he ___ help.', options: ['needed', 'needs', 'is needing', 'has needed'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: '"I work here," she said. → She said she ___ (work) there.', options: ['worked', 'works', 'is working', 'has worked'], correct: 0, explanation: 'Present Simple → Past Simple (worked).' },
+          { id: 2, text: '"I am working," he said. → He said he ___ (work).', options: ['was working', 'is working', 'has been working', 'were working'], correct: 0, explanation: 'Present Continuous → Past Continuous (was working).' },
+          { id: 3, text: '"I have finished," he said. → He said he ___ (finish).', options: ['had finished', 'has finished', 'was finished', 'did finish'], correct: 0, explanation: 'Present Perfect → Past Perfect (had finished).' },
+          { id: 4, text: '"I finished the work," she said. → She said she ___ (finish) the work.', options: ['had finished', 'has finished', 'was finishing', 'did finish'], correct: 0, explanation: 'Past Simple → Past Perfect (had finished).' },
+          { id: 5, text: '"I will help you," he said. → He said he ___ (help) me.', options: ['would help', 'will help', 'can help', 'was helping'], correct: 0, explanation: 'will → would (would help).' },
+          { id: 6, text: '"I can swim," she said. → She said she ___ (swim).', options: ['could swim', 'can swim', 'would swim', 'was swimming'], correct: 0, explanation: 'can → could (could swim).' },
+          { id: 7, text: '"I am tired," she said. → She said she ___ (be) tired.', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Present Simple (am) → Past Simple (was).' },
+          { id: 8, text: '"I will call you tomorrow," he said. → He said he ___ (call) me the next day.', options: ['would call', 'will call', 'can call', 'was calling'], correct: 0, explanation: 'will → would (would call).' },
+          { id: 9, text: '"Are you coming?" she asked. → She asked if I ___ (come).', options: ['was coming', 'am coming', 'have been coming', 'were coming'], correct: 0, explanation: 'Reported yes/no question: if + backshifted continuous (was coming).' },
+          { id: 10, text: '"Do you like pizza?" he asked. → He asked whether I ___ (like) pizza.', options: ['liked', 'like', 'likes', 'am liking'], correct: 0, explanation: 'Reported yes/no question: whether + backshifted verb (liked), no "do".' },
+          { id: 11, text: '"Where do you live?" she asked. → She asked where I ___ (live).', options: ['lived', 'live', 'do live', 'am living'], correct: 0, explanation: 'Reported wh-question: statement order, backshifted verb (lived).' },
+          { id: 12, text: '"What are you doing?" he asked. → He asked what I ___ (do).', options: ['was doing', 'am doing', 'have been doing', 'were doing'], correct: 0, explanation: 'Reported wh-question: backshifted continuous (was doing).' },
+          { id: 13, text: '"I live in London," she said. → She said she ___ (live) in London.', options: ['lived', 'lives', 'is living', 'has lived'], correct: 0, explanation: 'Present Simple → Past Simple (lived).' },
+          { id: 14, text: '"We are studying English," they said. → They said they ___ (study) English.', options: ['were studying', 'are studying', 'have been studying', 'was studying'], correct: 0, explanation: 'Present Continuous → Past Continuous (were studying).' },
+          { id: 15, text: '"I have never been to Paris," he said. → He said he ___ (never / be) to Paris.', options: ['had never been', 'has never been', 'was never', 'did never be'], correct: 0, explanation: 'Present Perfect → Past Perfect (had never been).' },
+          { id: 16, text: '"I saw that film," she said. → She said she ___ (see) that film.', options: ['had seen', 'has seen', 'was seeing', 'did see'], correct: 0, explanation: 'Past Simple → Past Perfect (had seen).' },
+          { id: 17, text: '"Where is the station?" he asked. → He asked where the station ___ (be).', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Reported wh-question: backshifted verb (was).' },
+          { id: 18, text: '"I can\'t come tonight," she said. → She said she ___ (not / can / come) that night.', options: ["couldn't come", "can't come", "wouldn't come", "wasn't coming"], correct: 0, explanation: 'can\'t → couldn\'t (couldn\'t come).' },
+          { id: 19, text: '"Did you finish your homework?" the teacher asked. → The teacher asked if I ___ (finish) my homework.', options: ['had finished', 'has finished', 'did finish', 'have finished'], correct: 0, explanation: 'Past Simple → Past Perfect in reported yes/no question (had finished).' },
+          { id: 20, text: '"I need help," he said. → He said he ___ (need) help.', options: ['needed', 'needs', 'is needing', 'has needed'], correct: 0, explanation: 'Present Simple → Past Simple (needed).' }
+        ],
+        scrambled: [
+          { id: 1, words: ['worked', 'she', 'said', 'she', 'there'], answer: 'she said she worked there', explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 2, words: ['working', 'he', 'said', 'he', 'was'], answer: 'he said he was working', explanation: 'Present Continuous → Past Continuous in reported speech.' },
+          { id: 3, words: ['finished', 'he', 'said', 'he', 'had'], answer: 'he said he had finished', explanation: 'Present Perfect → Past Perfect in reported speech.' },
+          { id: 4, words: ['finished', 'she', 'said', 'she', 'had', 'the', 'work'], answer: 'she said she had finished the work', explanation: 'Past Simple → Past Perfect in reported speech.' },
+          { id: 5, words: ['help', 'he', 'said', 'he', 'would', 'me'], answer: 'he said he would help me', explanation: 'will → would in reported speech.' },
+          { id: 6, words: ['swim', 'she', 'said', 'she', 'could'], answer: 'she said she could swim', explanation: 'can → could in reported speech.' },
+          { id: 7, words: ['tired', 'she', 'said', 'she', 'was'], answer: 'she said she was tired', explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 8, words: ['call', 'he', 'said', 'he', 'would', 'me', 'the', 'next', 'day'], answer: 'he said he would call me the next day', explanation: 'will → would, tomorrow → the next day.' },
+          { id: 9, words: ['coming', 'she', 'asked', 'if', 'I', 'was'], answer: 'she asked if I was coming', explanation: 'Reported yes/no question with "if".' },
+          { id: 10, words: ['liked', 'he', 'asked', 'whether', 'I', 'pizza'], answer: 'he asked whether I liked pizza', explanation: 'Reported yes/no question with "whether".' },
+          { id: 11, words: ['lived', 'she', 'asked', 'where', 'I'], answer: 'she asked where I lived', explanation: 'Reported wh-question: statement word order.' },
+          { id: 12, words: ['doing', 'he', 'asked', 'what', 'I', 'was'], answer: 'he asked what I was doing', explanation: 'Reported wh-question: backshifted continuous.' },
+          { id: 13, words: ['lived', 'she', 'said', 'she', 'in', 'London'], answer: 'she said she lived in London', explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 14, words: ['studying', 'they', 'said', 'they', 'were', 'English'], answer: 'they said they were studying English', explanation: 'Present Continuous → Past Continuous in reported speech.' },
+          { id: 15, words: ['been', 'he', 'said', 'he', 'had', 'never', 'to', 'Paris'], answer: 'he said he had never been to Paris', explanation: 'Present Perfect → Past Perfect in reported speech.' },
+          { id: 16, words: ['seen', 'she', 'said', 'she', 'had', 'that', 'film'], answer: 'she said she had seen that film', explanation: 'Past Simple → Past Perfect in reported speech.' },
+          { id: 17, words: ['was', 'he', 'asked', 'where', 'the', 'station'], answer: 'he asked where the station was', explanation: 'Reported wh-question: statement word order.' },
+          { id: 18, words: ['come', "couldn't", 'she', 'said', 'she', 'that', 'night'], answer: "she said she couldn't come that night", explanation: 'can\'t → couldn\'t, tonight → that night.' },
+          { id: 19, words: ['finished', 'the', 'teacher', 'asked', 'if', 'I', 'had', 'my', 'homework'], answer: 'the teacher asked if I had finished my homework', explanation: 'Reported yes/no question with "if", Past Simple → Past Perfect.' },
+          { id: 20, words: ['needed', 'he', 'said', 'he', 'help'], answer: 'he said he needed help', explanation: 'Present Simple → Past Simple in reported speech.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: '"I work here," she said. → She said she works there.', options: ['She said', 'she', 'works', 'there'], correct: 2, wrongPart: 'works', correction: 'worked', explanation: 'Present Simple must backshift to Past Simple: "worked".' },
+          { id: 2, text: '"I am working," he said. → He said he is working.', options: ['He said', 'he', 'is working', 'No error'], correct: 2, wrongPart: 'is working', correction: 'was working', explanation: 'Present Continuous must backshift to Past Continuous: "was working".' },
+          { id: 3, text: '"I have finished," he said. → He said he has finished.', options: ['He said', 'he', 'has finished', 'No error'], correct: 2, wrongPart: 'has finished', correction: 'had finished', explanation: 'Present Perfect must backshift to Past Perfect: "had finished".' },
+          { id: 4, text: '"I finished the work," she said. → She said she finished the work.', options: ['She said', 'she', 'finished', 'the work'], correct: 2, wrongPart: 'finished', correction: 'had finished', explanation: 'Past Simple must backshift to Past Perfect: "had finished".' },
+          { id: 5, text: '"I will help you," he said. → He said he will help me.', options: ['He said', 'he', 'will help', 'me'], correct: 2, wrongPart: 'will help', correction: 'would help', explanation: '"will" must backshift to "would": "would help".' },
+          { id: 6, text: '"I can swim," she said. → She said she can swim.', options: ['She said', 'she', 'can swim', 'No error'], correct: 2, wrongPart: 'can swim', correction: 'could swim', explanation: '"can" must backshift to "could": "could swim".' },
+          { id: 7, text: '"I am tired," she said. → She said she is tired.', options: ['She said', 'she', 'is tired', 'No error'], correct: 2, wrongPart: 'is tired', correction: 'was tired', explanation: 'Present Simple (am) must backshift to Past Simple (was).' },
+          { id: 8, text: '"I will call you tomorrow," he said. → He said he would call me tomorrow.', options: ['He said', 'he would call me', 'tomorrow', 'No error'], correct: 2, wrongPart: 'tomorrow', correction: 'the next day', explanation: 'Time expressions shift too: "tomorrow" becomes "the next day".' },
+          { id: 9, text: '"Are you coming?" she asked. → She asked was I coming.', options: ['She asked', 'was I coming', 'No error', ''], correct: 1, wrongPart: 'was I coming', correction: 'if I was coming', explanation: 'Reported yes/no questions need "if"/"whether": "if I was coming".' },
+          { id: 10, text: '"Do you like pizza?" he asked. → He asked whether I did like pizza.', options: ['He asked', 'whether', 'I did like', 'pizza'], correct: 2, wrongPart: 'I did like', correction: 'I liked', explanation: 'Reported questions drop the auxiliary "do": "I liked".' },
+          { id: 11, text: '"Where do you live?" she asked. → She asked where did I live.', options: ['She asked', 'where', 'did I live', 'No error'], correct: 2, wrongPart: 'did I live', correction: 'I lived', explanation: 'Reported wh-questions use statement word order without "did": "I lived".' },
+          { id: 12, text: '"What are you doing?" he asked. → He asked what I am doing.', options: ['He asked', 'what', 'I am doing', 'No error'], correct: 2, wrongPart: 'I am doing', correction: 'I was doing', explanation: 'Present Continuous must backshift to Past Continuous: "I was doing".' },
+          { id: 13, text: '"I live in London," she said. → She said she lives in London.', options: ['She said', 'she', 'lives', 'in London'], correct: 2, wrongPart: 'lives', correction: 'lived', explanation: 'Present Simple must backshift to Past Simple: "lived".' },
+          { id: 14, text: '"We are studying English," they said. → They said they are studying English.', options: ['They said', 'they', 'are studying', 'English'], correct: 2, wrongPart: 'are studying', correction: 'were studying', explanation: 'Present Continuous must backshift to Past Continuous: "were studying".' },
+          { id: 15, text: '"I have never been to Paris," he said. → He said he never been to Paris.', options: ['He said', 'he', 'never been', 'to Paris'], correct: 2, wrongPart: 'never been', correction: 'had never been', explanation: 'Present Perfect must backshift to Past Perfect: "had never been".' },
+          { id: 16, text: '"I saw that film," she said. → She said she saw that film.', options: ['She said', 'she', 'saw', 'that film'], correct: 2, wrongPart: 'saw', correction: 'had seen', explanation: 'Past Simple must backshift to Past Perfect: "had seen".' },
+          { id: 17, text: '"Where is the station?" he asked. → He asked where is the station.', options: ['He asked', 'where', 'is the station', 'No error'], correct: 2, wrongPart: 'is the station', correction: 'the station was', explanation: 'Reported wh-questions use statement word order and backshift: "the station was".' },
+          { id: 18, text: '"I can\'t come tonight," she said. → She said she can\'t come that night.', options: ['She said', "she can't come", 'that night', 'No error'], correct: 1, wrongPart: "she can't come", correction: "she couldn't come", explanation: '"can\'t" must backshift to "couldn\'t": "couldn\'t come".' },
+          { id: 19, text: '"Did you finish your homework?" the teacher asked. → The teacher asked if I finished my homework.', options: ['The teacher asked', 'if', 'I finished', 'my homework'], correct: 2, wrongPart: 'I finished', correction: 'I had finished', explanation: 'Past Simple in a reported question backshifts to Past Perfect: "I had finished".' },
+          { id: 20, text: '"I need help," he said. → He said he need help.', options: ['He said', 'he', 'need', 'help'], correct: 2, wrongPart: 'need', correction: 'needed', explanation: 'Present Simple must backshift to Past Simple: "needed".' }
+        ],
+        transform: [
+          { id: 1, text: 'Report this statement: "I work here," she said.', options: ['She said she worked there.', 'She said she works there.', 'She said she is working there.', 'She said she has worked there.'], correct: 0, explanation: 'Present Simple → Past Simple, here → there.' },
+          { id: 2, text: 'Report this statement: "I am working," he said.', options: ['He said he was working.', 'He said he is working.', 'He said he has been working.', 'He said he worked.'], correct: 0, explanation: 'Present Continuous → Past Continuous.' },
+          { id: 3, text: 'Report this statement: "I have finished," he said.', options: ['He said he had finished.', 'He said he has finished.', 'He said he finished.', 'He said he was finished.'], correct: 0, explanation: 'Present Perfect → Past Perfect.' },
+          { id: 4, text: 'Report this statement: "I finished the work," she said.', options: ['She said she had finished the work.', 'She said she finished the work.', 'She said she has finished the work.', 'She said she was finishing the work.'], correct: 0, explanation: 'Past Simple → Past Perfect.' },
+          { id: 5, text: 'Report this statement: "I will help you," he said (to me).', options: ['He told me he would help me.', 'He told me he will help me.', 'He told me he can help me.', 'He told me he helps me.'], correct: 0, explanation: 'will → would; "tell" needs an object.' },
+          { id: 6, text: 'Report this statement: "I can swim," she said.', options: ['She said she could swim.', 'She said she can swim.', 'She said she would swim.', 'She said she swam.'], correct: 0, explanation: 'can → could.' },
+          { id: 7, text: 'Report this statement: "I am tired," she said.', options: ['She said she was tired.', 'She said she is tired.', 'She said she has been tired.', 'She said she tired.'], correct: 0, explanation: 'Present Simple (am) → Past Simple (was).' },
+          { id: 8, text: 'Report this statement: "I will call you tomorrow," he said.', options: ['He said he would call me the next day.', 'He said he will call me tomorrow.', 'He said he would call me tomorrow.', 'He said he calls me the next day.'], correct: 0, explanation: 'will → would, tomorrow → the next day.' },
+          { id: 9, text: 'Report this question: "Are you coming?" she asked.', options: ['She asked if I was coming.', 'She asked was I coming.', 'She asked if I am coming.', 'She asked am I coming.'], correct: 0, explanation: 'Reported yes/no question: if + statement order + backshift.' },
+          { id: 10, text: 'Report this question: "Do you like pizza?" he asked.', options: ['He asked whether I liked pizza.', 'He asked whether I did like pizza.', 'He asked do I like pizza.', 'He asked if I like pizza.'], correct: 0, explanation: 'Reported yes/no question: whether + statement order, no "do".' },
+          { id: 11, text: 'Report this question: "Where do you live?" she asked.', options: ['She asked where I lived.', 'She asked where did I live.', 'She asked where I live.', 'She asked where do I live.'], correct: 0, explanation: 'Reported wh-question: statement order, backshift.' },
+          { id: 12, text: 'Report this question: "What are you doing?" he asked.', options: ['He asked what I was doing.', 'He asked what am I doing.', 'He asked what I am doing.', 'He asked what was I doing.'], correct: 0, explanation: 'Reported wh-question: statement order, backshift.' },
+          { id: 13, text: 'Report this statement: "I live in London," she said.', options: ['She said she lived in London.', 'She said she lives in London.', 'She said she is living in London.', 'She said she has lived in London.'], correct: 0, explanation: 'Present Simple → Past Simple.' },
+          { id: 14, text: 'Report this statement: "We are studying English," they said.', options: ['They said they were studying English.', 'They said they are studying English.', 'They said they have studied English.', 'They said they studied English.'], correct: 0, explanation: 'Present Continuous → Past Continuous.' },
+          { id: 15, text: 'Report this statement: "I have never been to Paris," he said.', options: ['He said he had never been to Paris.', 'He said he has never been to Paris.', 'He said he never went to Paris.', 'He said he was never in Paris.'], correct: 0, explanation: 'Present Perfect → Past Perfect.' },
+          { id: 16, text: 'Report this statement: "I saw that film," she said.', options: ['She said she had seen that film.', 'She said she saw that film.', 'She said she has seen that film.', 'She said she was seeing that film.'], correct: 0, explanation: 'Past Simple → Past Perfect.' },
+          { id: 17, text: 'Report this question: "Where is the station?" he asked.', options: ['He asked where the station was.', 'He asked where is the station.', 'He asked where the station is.', 'He asked where was the station.'], correct: 0, explanation: 'Reported wh-question: statement order, backshift.' },
+          { id: 18, text: 'Report this statement: "I can\'t come tonight," she said.', options: ["She said she couldn't come that night.", "She said she can't come tonight.", "She said she couldn't come tonight.", "She said she wouldn't come that night."], correct: 0, explanation: 'can\'t → couldn\'t, tonight → that night.' },
+          { id: 19, text: 'Report this question: "Did you finish your homework?" the teacher asked.', options: ['The teacher asked if I had finished my homework.', 'The teacher asked did I finish my homework.', 'The teacher asked if I finished my homework.', 'The teacher asked if I have finished my homework.'], correct: 0, explanation: 'Reported yes/no question: Past Simple → Past Perfect.' },
+          { id: 20, text: 'Report this statement: "I need help," he said.', options: ['He said he needed help.', 'He said he needs help.', 'He said he was needing help.', 'He said he has needed help.'], correct: 0, explanation: 'Present Simple → Past Simple.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Reporting a colleague\'s statement.', dialogue: 'A: What did Anna say about her job?\nB: She said she ___ here.', options: ['worked', 'works', 'is working', 'has worked'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 2, situation: 'Reporting what someone was doing.', dialogue: 'A: What did Tom say when you called?\nB: He said he ___ working.', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Present Continuous → Past Continuous in reported speech.' },
+          { id: 3, situation: 'Passing on news.', dialogue: 'A: Has he finished the project?\nB: He said he ___ finished it.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Present Perfect → Past Perfect in reported speech.' },
+          { id: 4, situation: 'Reporting a colleague\'s update.', dialogue: 'A: Did she complete the work?\nB: Yes, she said she ___ finished the work.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Simple → Past Perfect in reported speech.' },
+          { id: 5, situation: 'Reporting a promise.', dialogue: 'A: Is he going to help you?\nB: Yes, he said he ___ help me.', options: ['would', 'will', 'can', 'was'], correct: 0, explanation: 'will → would in reported speech.' },
+          { id: 6, situation: 'Reporting an ability.', dialogue: 'A: Can she swim well?\nB: She said she ___ swim, yes.', options: ['could', 'can', 'would', 'was'], correct: 0, explanation: 'can → could in reported speech.' },
+          { id: 7, situation: 'Reporting how someone felt.', dialogue: 'A: How was she feeling?\nB: She said she ___ tired.', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 8, situation: 'Reporting a promise made yesterday.', dialogue: 'A: Did he say when he\'d call?\nB: He said he ___ call me the next day.', options: ['would', 'will', 'can', 'was'], correct: 0, explanation: 'will → would in reported speech.' },
+          { id: 9, situation: 'Reporting what was asked at a party.', dialogue: 'A: What did she ask you?\nB: She asked if I ___ coming.', options: ['was', 'am', 'have been', 'were'], correct: 0, explanation: 'Reported yes/no question: if + backshifted verb.' },
+          { id: 10, situation: 'Reporting a question about food.', dialogue: 'A: What did he ask at dinner?\nB: He asked whether I ___ pizza.', options: ['liked', 'like', 'likes', 'am liking'], correct: 0, explanation: 'Reported yes/no question: whether + backshifted verb, no "do".' },
+          { id: 11, situation: 'Reporting a new acquaintance\'s question.', dialogue: 'A: What did she want to know?\nB: She asked where I ___.', options: ['lived', 'live', 'do live', 'am living'], correct: 0, explanation: 'Reported wh-question: statement order, backshift.' },
+          { id: 12, situation: 'Reporting a curious question.', dialogue: 'A: Was he curious about your evening?\nB: Yes, he asked what I ___ doing.', options: ['was', 'am', 'have been', 'were'], correct: 0, explanation: 'Reported wh-question: backshifted continuous.' },
+          { id: 13, situation: 'Reporting where someone lives.', dialogue: 'A: Where does she live?\nB: She told me she ___ in London.', options: ['lived', 'lives', 'is living', 'has lived'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' },
+          { id: 14, situation: 'Reporting what classmates said.', dialogue: 'A: What are they studying?\nB: They said they ___ studying English.', options: ['were', 'are', 'have been', 'was'], correct: 0, explanation: 'Present Continuous → Past Continuous in reported speech.' },
+          { id: 15, situation: 'Reporting travel history.', dialogue: 'A: Has he ever traveled to Europe?\nB: He said he ___ never been to Paris.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Present Perfect → Past Perfect in reported speech.' },
+          { id: 16, situation: 'Reporting a movie recommendation.', dialogue: 'A: Did she recommend anything?\nB: She said she ___ seen that film already.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Simple → Past Perfect in reported speech.' },
+          { id: 17, situation: 'Reporting directions asked.', dialogue: 'A: What did the tourist ask?\nB: He asked where the station ___.', options: ['was', 'is', 'has been', 'were'], correct: 0, explanation: 'Reported wh-question: backshifted verb.' },
+          { id: 18, situation: 'Reporting a cancellation.', dialogue: 'A: Is she coming tonight?\nB: No, she said she ___ come that night.', options: ["couldn't", "can't", "wouldn't", "wasn't"], correct: 0, explanation: 'can\'t → couldn\'t in reported speech.' },
+          { id: 19, situation: 'Reporting a teacher\'s question.', dialogue: 'A: What did the teacher ask you?\nB: She asked if I ___ finished my homework.', options: ['had', 'has', 'did', 'have'], correct: 0, explanation: 'Reported yes/no question: Past Simple → Past Perfect.' },
+          { id: 20, situation: 'Reporting a request for help.', dialogue: 'A: What did he say when he called?\nB: He said he ___ help.', options: ['needed', 'needs', 'is needing', 'has needed'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' }
+        ]
       }
     ]
   }
