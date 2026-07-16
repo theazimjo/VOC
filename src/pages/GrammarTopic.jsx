@@ -256,6 +256,21 @@ export default function GrammarTopic() {
   const question = questions[currentQ];
   const progressPct = totalQ > 0 ? ((currentQ) / totalQ) * 100 : 0;
 
+  // Shuffle option order per question so the correct answer isn't always
+  // stuck in whatever slot the source data happened to put it in.
+  const shuffled = useMemo(() => {
+    if (!question || !question.options) return null;
+    const order = question.options.map((_, i) => i);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    return {
+      options: order.map((i) => question.options[i]),
+      correct: order.indexOf(question.correct),
+    };
+  }, [question]);
+
   useEffect(() => {
     if (finished && topic && totalQ > 0) {
       playFinishedSound();
@@ -271,7 +286,7 @@ export default function GrammarTopic() {
     setAnswered(true);
     setShowExplanation(false);
 
-    const isCorrect = idx === question.correct;
+    const isCorrect = idx === shuffled.correct;
     if (isCorrect) {
       playCorrectSound();
       vibrate([50, 30, 50]);
@@ -287,10 +302,10 @@ export default function GrammarTopic() {
         questionId: question.id,
         questionText: question.text,
         selected: idx,
-        correct: question.correct,
+        correct: shuffled.correct,
         isCorrect,
         explanation: question.explanation,
-        options: question.options,
+        options: shuffled.options,
       },
     ]);
   };
@@ -557,10 +572,10 @@ export default function GrammarTopic() {
       ) : (
         /* Standard Options List */
         <div className="clean-options-list">
-          {(question.options || []).map((opt, idx) => {
+          {(shuffled?.options || []).map((opt, idx) => {
             let cls = 'clean-option-btn';
             if (answered) {
-              if (idx === question.correct) cls += ' correct';
+              if (idx === shuffled.correct) cls += ' correct';
               else if (idx === selected) cls += ' wrong';
               else cls += ' dimmed';
             } else if (selected === idx) {
@@ -574,10 +589,10 @@ export default function GrammarTopic() {
                 disabled={answered}
               >
                 <span className="option-text-only">{opt}</span>
-                {answered && idx === question.correct && (
+                {answered && idx === shuffled.correct && (
                   <span className="option-badge-icon correct-badge">✓</span>
                 )}
-                {answered && idx === selected && idx !== question.correct && (
+                {answered && idx === selected && idx !== shuffled.correct && (
                   <span className="option-badge-icon wrong-badge">✗</span>
                 )}
               </button>
