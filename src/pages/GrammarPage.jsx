@@ -37,11 +37,19 @@ const headerVariants = {
 
 export default function GrammarPage() {
   const navigate = useNavigate();
-  const [activeLevel, setActiveLevel] = useState('beginner');
-  const { stats: grammarStats } = useGrammarStats();
   const [lang, setLang] = useState(() => {
     return localStorage.getItem('grammar_language') || 'en';
   });
+  const [activeLevel, setActiveLevelState] = useState(() => {
+    const storedLevel = localStorage.getItem('grammar_level') || 'beginner';
+    return lang === 'de' && storedLevel !== 'beginner' ? 'beginner' : storedLevel;
+  });
+  const { stats: grammarStats } = useGrammarStats();
+
+  const setActiveLevel = (level) => {
+    setActiveLevelState(level);
+    localStorage.setItem('grammar_level', level);
+  };
 
   const currentData = lang === 'en' ? grammarData : germanGrammarData;
   const topics = currentData[activeLevel]?.topics ?? [];
