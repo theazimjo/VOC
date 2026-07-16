@@ -205,6 +205,7 @@ export default function GrammarTest() {
 
   const activeSection = sections[activeSectionIdx];
   const timerRef = useRef(null);
+  const handleSubmitTestRef = useRef(null);
 
   // Timer Effect
   useEffect(() => {
@@ -213,7 +214,7 @@ export default function GrammarTest() {
         setTimeLeft((prev) => {
           if (prev <= 1) {
             clearInterval(timerRef.current);
-            handleSubmitTest(true);
+            handleSubmitTestRef.current(true);
             return 0;
           }
           return prev - 1;
@@ -260,6 +261,8 @@ export default function GrammarTest() {
     setAnswers({});
     setReorderSelections({});
     setGrades({});
+    setTimeLeft(30 * 60);
+    setActiveSectionIdx(0);
     navigate(`/grammar-test/run/${exam.id}`);
     playSound('correct');
   };
@@ -269,6 +272,7 @@ export default function GrammarTest() {
     setReorderSelections({});
     setGrades({});
     setTimeLeft(30 * 60);
+    setActiveSectionIdx(0);
     setStage('intro');
   };
 
@@ -287,18 +291,14 @@ export default function GrammarTest() {
     playSound('correct');
   };
 
-  const handleReorderClickWord = (questionGlobalId, word, scrambledList) => {
+  const handleReorderClickWord = (questionGlobalId, wordIndex, scrambledList) => {
     setReorderSelections((prev) => {
       const selected = prev[questionGlobalId] || [];
-      if (selected.includes(word)) {
-        const updated = selected.filter(w => w !== word);
-        setAnswers((ans) => ({ ...ans, [questionGlobalId]: updated.join(' ') }));
-        return { ...prev, [questionGlobalId]: updated };
-      } else {
-        const updated = [...selected, word];
-        setAnswers((ans) => ({ ...ans, [questionGlobalId]: updated.join(' ') }));
-        return { ...prev, [questionGlobalId]: updated };
-      }
+      const updated = selected.includes(wordIndex)
+        ? selected.filter((i) => i !== wordIndex)
+        : [...selected, wordIndex];
+      setAnswers((ans) => ({ ...ans, [questionGlobalId]: updated.map((i) => scrambledList[i]).join(' ') }));
+      return { ...prev, [questionGlobalId]: updated };
     });
   };
 
@@ -401,6 +401,13 @@ export default function GrammarTest() {
     await finalizeScores(apiGrades, 'pending');
     setStage('submitted');
   };
+
+  // Keep the timer's interval callback calling the latest handleSubmitTest closure
+  // (the interval itself is only (re)created when `stage` changes, so without this
+  // ref it would auto-submit using stale, empty `answers` from test start).
+  useEffect(() => {
+    handleSubmitTestRef.current = handleSubmitTest;
+  });
 
   const finalizeScores = async (finalGradesMap, forcedStatus) => {
     let totalQuestions = 0;
@@ -742,6 +749,111 @@ ${exampleGrades}
       console.error(e);
       alert("JSON tahlilida xatolik! AI to'g'ri JSON qaytarganini tekshiring.");
       playSound('wrong');
+    }
+  };
+
+  // Student-side retry: re-run pending written answers through the local LM Studio endpoint
+  const handleRetryGrading = async (attempt, e) => {
+    if (e) e.stopPropagation();
+    if (!attempt || isRetryingAttemptId) return;
+
+    setIsRetryingAttemptId(attempt.id);
+    try {
+      const foundExam = EXAMS_LIST.find(ex => ex.id === attempt.testId);
+      if (!foundExam) throw new Error('Exam not found');
+
+      const updatedGrades = { ...(attempt.grades || {}) };
+      const pendingEntries = [];
+      foundExam.sections.forEach(s => {
+        s.questions.forEach(q => {
+          const key = `${s.id}_${q.id}`;
+          const g = updatedGrades[key];
+          if (g && g.pending) {
+            pendingEntries.push({
+              key,
+              question: s.id === 'translate'
+                ? `Translate Uzbek: "${q.uzbek}" into English`
+                : s.id === 'mistakes'
+                  ? `Correct the mistake in: "${q.original}"`
+                  : (q.prompt || q.question),
+              reference: q.reference || q.referencePattern || q.answer,
+              answer: attempt.answers ? (attempt.answers[key] || '') : ''
+            });
+          }
+        });
+      });
+
+      if (pendingEntries.length === 0) {
+        setIsRetryingAttemptId(null);
+        return;
+      }
+
+      let anyFailed = false;
+      for (const item of pendingEntries) {
+        try {
+          const result = await evaluateWithLMStudio(item.question, item.reference, item.answer, apiModel);
+          updatedGrades[item.key] = { score: result.score, feedback: result.feedback, pending: false };
+        } catch (err) {
+          console.error('LM Studio evaluation failed for', item.key, err);
+          anyFailed = true;
+        }
+      }
+
+      let totalQuestions = 0;
+      let totalScore = 0;
+      let stillPending = false;
+      foundExam.sections.forEach(s => {
+        s.questions.forEach(q => {
+          totalQuestions++;
+          const g = updatedGrades[`${s.id}_${q.id}`];
+          if (g && g.score !== null && !g.pending) {
+            totalScore += g.score;
+          } else {
+            stillPending = true;
+          }
+        });
+      });
+      const percent = totalQuestions > 0 ? Math.round((totalScore / totalQuestions) * 100) : 0;
+
+      const updatedAttempt = {
+        ...attempt,
+        score: percent,
+        totalScore: totalScore.toFixed(1),
+        grades: updatedGrades,
+        status: stillPending ? 'pending' : 'completed',
+        notified: false
+      };
+
+      if (user) {
+        const attemptRef = ref(db, `users/${user.uid}/grammar/complex_attempts/${attempt.id}`);
+        await set(attemptRef, updatedAttempt);
+        if (!stillPending) {
+          await remove(ref(db, `grammar_pending_attempts/${attempt.id}`));
+        }
+      } else {
+        const savedAttempts = localStorage.getItem('grammar_test_attempts');
+        const attemptsList = savedAttempts ? JSON.parse(savedAttempts) : [];
+        const idx = attemptsList.findIndex(a => a.id === attempt.id);
+        if (idx !== -1) {
+          attemptsList[idx] = updatedAttempt;
+          localStorage.setItem('grammar_test_attempts', JSON.stringify(attemptsList));
+          setAttempts(attemptsList);
+        }
+      }
+
+      setGrades(updatedGrades);
+      if (anyFailed || stillPending) {
+        alert("LM Studio ulanmadi yoki ba'zi javoblarni baholay olmadi. Keyinroq qayta urinib ko'ring.");
+        playSound('wrong');
+      } else {
+        playSound('victory');
+      }
+    } catch (err) {
+      console.error('Retry grading failed:', err);
+      alert("Qayta tekshirishda xatolik yuz berdi.");
+      playSound('wrong');
+    } finally {
+      setIsRetryingAttemptId(null);
     }
   };
 
@@ -1311,13 +1423,13 @@ ${exampleGrades}
                         {/* Word Tiles to select */}
                         <div className="gt-scrambled-pool">
                           {q.scrambled.map((word, wIdx) => {
-                            const isSelected = selectedList.includes(word);
+                            const isSelected = selectedList.includes(wIdx);
                             return (
                               <button
                                 key={wIdx}
                                 disabled={isSelected}
                                 className={`gt-word-tile ${isSelected ? 'selected' : ''}`}
-                                onClick={() => handleReorderClickWord(key, word, q.scrambled)}
+                                onClick={() => handleReorderClickWord(key, wIdx, q.scrambled)}
                               >
                                 {word}
                               </button>
@@ -1329,14 +1441,14 @@ ${exampleGrades}
                         <div className="gt-assembled-area">
                           {selectedList.length > 0 ? (
                             <div className="assembled-words-row">
-                              {selectedList.map((word, sIdx) => (
-                                <span 
-                                  key={sIdx} 
+                              {selectedList.map((wIdx, sIdx) => (
+                                <span
+                                  key={sIdx}
                                   className="gt-word-bubble"
-                                  onClick={() => handleReorderClickWord(key, word, q.scrambled)}
+                                  onClick={() => handleReorderClickWord(key, wIdx, q.scrambled)}
                                   title="Olib tashlash uchun bosing"
                                 >
-                                  {word}
+                                  {q.scrambled[wIdx]}
                                 </span>
                               ))}
                             </div>

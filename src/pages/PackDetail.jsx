@@ -37,6 +37,14 @@ export default function PackDetail() {
     fetchPack();
   }, [packId, getPack, navigate]);
 
+  // Reset the market-sync guard whenever the user navigates to a different pack —
+  // this component instance persists across /packs/:packId param changes (React
+  // Router doesn't remount it), so without this the sync would only ever run once
+  // per session, for whichever pack happened to be opened first.
+  useEffect(() => {
+    marketSyncCheckedRef.current = false;
+  }, [packId]);
+
   // On first visit after the Market source pack gained new words, silently
   // add the missing ones to this installed copy (existing words/progress are
   // never touched) and let the user know with a one-time notice.

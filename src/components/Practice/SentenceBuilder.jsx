@@ -5,9 +5,50 @@ import { calculateNextReview } from '../../utils/sm2';
 import { speakWord } from '../../utils/helpers';
 import './SentenceBuilder.css';
 
-// Checks whether the target word (allowing common suffixes) appears in the
+// Builds the set of regular inflected forms for a stem, accounting for the
+// standard English spelling changes that plain suffix-appending misses:
+// silent-e drop ("make" -> "making"), consonant doubling ("stop" -> "stopping"),
+// and y->i ("study" -> "studies"). Without these, correctly inflected sentences
+// were scored as not using the word at all.
+function buildInflectedForms(stem) {
+  const lower = stem.toLowerCase();
+  const vowels = 'aeiou';
+  const forms = new Set([lower, lower + 's', lower + 'es', lower + 'd', lower + 'ed', lower + 'ing', lower + 'er', lower + 'est', lower + 'r']);
+
+  if (/[^aeiou]e$/i.test(lower)) {
+    const base = lower.slice(0, -1);
+    forms.add(base + 'ing');
+    forms.add(base + 'ed');
+    forms.add(base + 'er');
+    forms.add(base + 'est');
+  }
+
+  if (lower.length >= 3) {
+    const c1 = lower[lower.length - 3];
+    const v = lower[lower.length - 2];
+    const c2 = lower[lower.length - 1];
+    if (vowels.includes(v) && !vowels.includes(c1) && !vowels.includes(c2) && !'wxy'.includes(c2)) {
+      forms.add(lower + c2 + 'ing');
+      forms.add(lower + c2 + 'ed');
+      forms.add(lower + c2 + 'er');
+      forms.add(lower + c2 + 'est');
+    }
+  }
+
+  if (/[^aeiou]y$/i.test(lower)) {
+    const base = lower.slice(0, -1) + 'i';
+    forms.add(base + 'es');
+    forms.add(base + 'ed');
+    forms.add(base + 'er');
+    forms.add(base + 'est');
+  }
+
+  return forms;
+}
+
+// Checks whether the target word (allowing common inflections) appears in the
 // submitted sentence. Multi-word entries (phrases/idioms) fall back to a
-// plain substring check since suffix matching doesn't apply to them.
+// plain substring check since inflection matching doesn't apply to them.
 function sentenceUsesWord(sentence, word) {
   const stem = word.trim();
   if (!stem) return false;
@@ -16,8 +57,8 @@ function sentenceUsesWord(sentence, word) {
     return sentence.toLowerCase().includes(stem.toLowerCase());
   }
 
-  const escaped = stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const pattern = new RegExp(`\\b${escaped}(s|es|d|ed|ing|er|r)?\\b`, 'i');
+  const forms = [...buildInflectedForms(stem)].map(f => f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const pattern = new RegExp(`\\b(?:${forms.join('|')})\\b`, 'i');
   return pattern.test(sentence);
 }
 
@@ -64,12 +105,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
     setIsTooShort(tooShort);
     if (onAnswer) onAnswer(currentWord, usesWord);
 
-    const sm2Data = calculateNextReview(
-      usesWord ? (tooShort ? 3 : 4) : 1,
-      currentWord.easeFactor || 2.5,
-      currentWord.interval || 0,
-      currentWord.reviewCount || 0
-    );
+    const sm2Data = calculateNextReview(usesWord ? (tooShort ? 3 : 4) : 1, currentWord);
     onUpdateWord(currentWord.id, sm2Data);
 
     if (usesWord) setCorrectCount(c => c + 1);
@@ -86,7 +122,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
     setAnswered(true);
     setIsCorrect(false);
     if (onAnswer) onAnswer(currentWord, false);
-    const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
+    const sm2Data = calculateNextReview(1, currentWord);
     onUpdateWord(currentWord.id, sm2Data);
     setIncorrectCount(c => c + 1);
   };

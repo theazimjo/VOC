@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect, useCallback } from 'react';
-import { ref, onValue, set } from 'firebase/database';
+import { ref, onValue, set, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { incrementActivity as incrementActivityUtil, checkAndHealStreak } from '../utils/streak';
@@ -46,7 +46,15 @@ export function useStreak() {
           // Self-heal: verify if yesterday's goal was not met, reset streak
           const healed = checkAndHealStreak(data);
           if (healed.modified) {
-            set(streakRef, healed.data);
+            // Use a transaction (not a plain set) so this can't clobber a
+            // concurrent incrementActivity transaction with stale snapshot data —
+            // it re-derives the heal decision from whatever is actually in the
+            // DB at commit time.
+            runTransaction(streakRef, (currentData) => {
+              if (!currentData) return currentData;
+              const rehealed = checkAndHealStreak(currentData);
+              return rehealed.modified ? rehealed.data : currentData;
+            });
           }
           localStorage.setItem(cacheKey, JSON.stringify(healed.data));
           setStreak(healed.data);

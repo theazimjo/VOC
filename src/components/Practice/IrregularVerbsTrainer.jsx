@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Eye } from 'lucide-react';
 import { playSound } from '../../utils/feedback';
-import { weightedSelectWords } from '../../utils/helpers';
+import { weightedSelectWords, shuffleArray } from '../../utils/helpers';
 import './IrregularVerbsTrainer.css';
 
 export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName, onProgress, initialSubStep, onExit }) {
@@ -189,12 +189,12 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
             const regex = new RegExp(`\\b${t}\\b`, 'i');
             const questionText = sentence.replace(regex, '<strong>_______</strong>');
             
-            const choices = [
+            const choices = shuffleArray([
               { label: 'V1', text: verb.v1 },
               { label: 'V2', text: verb.v2 },
               { label: 'V3', text: verb.v3 }
-            ];
-            
+            ]);
+
             const correctIndex = choices.findIndex(c => c.label.toLowerCase() === check.key);
 
             return {

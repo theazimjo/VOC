@@ -33,7 +33,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
   useEffect(() => {
     if (!currentWord) return;
     const correctOption = currentWord.translation;
-    const otherWords = words.filter(w => w.id !== currentWord.id);
+    const otherWords = words.filter(w => w.id !== currentWord.id && w.translation !== correctOption);
     const wrongOptions = shuffleArray(otherWords).slice(0, 3).map(w => w.translation);
     while (wrongOptions.length < 3) wrongOptions.push(`Variant ${wrongOptions.length + 1}`);
     setOptions(shuffleArray([correctOption, ...wrongOptions]));
@@ -48,7 +48,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       setAnswered(true);
       setIncorrectCount(c => c + 1);
       if (onAnswer) onAnswer(currentWord, false);
-      const sm2Data = calculateNextReview(1, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
+      const sm2Data = calculateNextReview(1, currentWord);
       onUpdateWord(currentWord.id, sm2Data);
       return;
     }
@@ -63,13 +63,8 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
 
     const isCorrect = option === currentWord.translation;
     if (onAnswer) onAnswer(currentWord, isCorrect);
-    
-    const sm2Data = calculateNextReview(
-      isCorrect ? 4 : 1,
-      currentWord.easeFactor || 2.5,
-      currentWord.interval || 0,
-      currentWord.reviewCount || 0
-    );
+
+    const sm2Data = calculateNextReview(isCorrect ? 4 : 1, currentWord);
     onUpdateWord(currentWord.id, sm2Data);
 
     if (isCorrect) setCorrectCount(c => c + 1);

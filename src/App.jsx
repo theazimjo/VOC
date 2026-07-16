@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { PacksProvider } from './contexts/PacksContext';
@@ -25,6 +25,11 @@ const GrammarPage = lazyWithRetry(() => import('./pages/GrammarPage'));
 const GrammarTopic = lazyWithRetry(() => import('./pages/GrammarTopic'));
 const GrammarExercises = lazyWithRetry(() => import('./pages/GrammarExercises'));
 const GrammarTest = lazyWithRetry(() => import('./pages/GrammarTest'));
+
+function BookToPackRedirect() {
+  const { bookId } = useParams();
+  return <Navigate to={`/packs/${bookId}`} replace />;
+}
 
 function RouteLoader() {
   return (
@@ -58,7 +63,7 @@ export default function App() {
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/library" element={<LibraryPage />} />
                       <Route path="/books" element={<Navigate to="/library" replace />} />
-                      <Route path="/books/:bookId" element={<Navigate to="/packs/:bookId" replace />} />
+                      <Route path="/books/:bookId" element={<BookToPackRedirect />} />
                       <Route path="/packs" element={<Navigate to="/library" replace />} />
                       <Route path="/packs/:packId" element={<PackDetail />} />
                       <Route path="/practice" element={<PracticePage />} />

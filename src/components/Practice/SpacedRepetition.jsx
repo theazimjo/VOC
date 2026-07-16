@@ -32,12 +32,7 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
     const isCorrect = quality >= 3;
     if (onAnswer) onAnswer(currentWord, isCorrect);
     
-    const sm2Data = calculateNextReview(
-      quality,
-      currentWord.easeFactor || 2.5,
-      currentWord.interval || 0,
-      currentWord.reviewCount || 0
-    );
+    const sm2Data = calculateNextReview(quality, currentWord);
     onUpdateWord(currentWord.id, sm2Data);
 
     const newResults = {
@@ -56,7 +51,7 @@ export default function SpacedRepetition({ words, onComplete, onUpdateWord, onAn
 
   const getNextIntervalText = (quality) => {
     if (!currentWord) return '';
-    const temp = calculateNextReview(quality, currentWord.easeFactor || 2.5, currentWord.interval || 0, currentWord.reviewCount || 0);
+    const temp = calculateNextReview(quality, currentWord);
     if (temp.interval === 0) return 'Bugun';
     if (temp.interval === 1) return 'Ertaga';
     return `${temp.interval} kun`;

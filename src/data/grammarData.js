@@ -5646,6 +5646,697 @@ Subject + said/told (+ object) + (that) + backshifted clause
           { id: 19, situation: 'Reporting a teacher\'s question.', dialogue: 'A: What did the teacher ask you?\nB: She asked if I ___ finished my homework.', options: ['had', 'has', 'did', 'have'], correct: 0, explanation: 'Reported yes/no question: Past Simple → Past Perfect.' },
           { id: 20, situation: 'Reporting a request for help.', dialogue: 'A: What did he say when he called?\nB: He said he ___ help.', options: ['needed', 'needs', 'is needing', 'has needed'], correct: 0, explanation: 'Present Simple → Past Simple in reported speech.' }
         ]
+      },
+      {
+        id: "past-perfect-continuous",
+        title: "Past Perfect Continuous",
+        icon: "⏳",
+        guide: `## Past Perfect Continuous (O'tgan zamon davomli tugallangan)
+
+Past Perfect Continuous o'tmishdagi biror nuqtadan OLDIN boshlanib, o'sha nuqtagacha davom etgan harakatni, ko'pincha uning DAVOMIYLIGI yoki SABABINI ta'kidlash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **Positive (+)**: Subject + had been + Verb-ing
+  - I **had been waiting** for an hour when the bus arrived.
+  - She **had been studying** for three hours before she took a break.
+• **Negative (-)**: Subject + had not (hadn't) + been + Verb-ing
+  - They **hadn't been sleeping** well before the trip.
+  - He **hadn't been working** there long when he got promoted.
+• **Question (?)**: Had + Subject + been + Verb-ing?
+  - **Had** you **been waiting** long before I arrived?
+  - **How long had** she **been learning** English before the exam?
+
+*(had barcha shaxslarda bir xil — o'zgarmaydi)*
+
+## 2. Ishlatilishi (Usage)
+1. **O'tgan bir nuqtadan oldin boshlanib, o'sha nuqtagacha davom etgan harakat (davomiylik muhim)**:
+   - By the time he arrived, we **had been waiting** for two hours.
+2. **O'tmishdagi bir holatning sababini tushuntirish**:
+   - She was exhausted because she **had been running** all morning.
+3. **"How long...?" savoli bilan o'tmishdagi davomiylikni so'rash**:
+   - **How long had** they **been living** there before they moved?
+
+## 3. Past Perfect Simple bilan farqi
+• **Past Perfect Simple** — tugallangan harakat, natija yoki miqdor muhim.
+  - I **had written** three emails before lunch. (uchtasi tugagan)
+• **Past Perfect Continuous** — jarayon, davomiylik muhim.
+  - I **had been writing** emails all morning. (qancha vaqt band bo'lgani muhim)
+
+## 4. Signal so'zlar (Time Expressions)
+• for, since, before, when, how long, all day/morning (o'tgan nuqtagacha)`,
+        questions: [
+          { id: 1, text: "I ___ for an hour when the bus finally arrived.", options: ["had been waiting", "have been waiting", "was waiting", "have waited"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing, for an action before a past point." },
+          { id: 2, text: "She ___ all morning before she finally took a break.", options: ["had been studying", "has been studying", "was studying", "studied"], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 3, text: "They ___ football for two hours when it started to rain.", options: ["had been playing", "have been playing", "were playing", "played"], correct: 0, explanation: "Duration before a past interruption: had been + V-ing." },
+          { id: 4, text: "He was tired because he ___ all night.", options: ["had been driving", "has been driving", "drove", "was driving"], correct: 0, explanation: "Cause of a past state: had been + V-ing." },
+          { id: 5, text: "We ___ for you for twenty minutes before you texted.", options: ["had been waiting", "have been waiting", "waited", "were waiting"], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 6, text: "___ you been waiting long before I arrived?", options: ["Had", "Have", "Were", "Did"], correct: 0, explanation: "Question form: Had + subject + been + V-ing?" },
+          { id: 7, text: "How long ___ she been learning English before the exam?", options: ["had", "has", "was", "did"], correct: 0, explanation: "Question form: How long + had + subject + been + V-ing?" },
+          { id: 8, text: "The ground was wet because it ___ all night.", options: ["had been raining", "has been raining", "rained", "was raining"], correct: 0, explanation: "Cause of a past result: had been + V-ing." },
+          { id: 9, text: "I ___ not been sleeping well before the trip.", options: ["had", "have", "was", "did"], correct: 0, explanation: "Negative form: had not (hadn't) + been + V-ing." },
+          { id: 10, text: "By the time he got home, she ___ for three hours.", options: ["had been cooking", "has been cooking", "cooked", "was cooking"], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 11, text: "He ___ been teaching for ten years before he retired.", options: ["had", "has", "was", "did"], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 12, text: "Her eyes were red because she ___ .", options: ["had been crying", "has been crying", "cried", "was crying"], correct: 0, explanation: "Cause of a past state: had been + V-ing." },
+          { id: 13, text: "We ___ been arguing about money before they broke up.", options: ["had", "have", "were", "did"], correct: 0, explanation: "Duration before a past event: had been + V-ing." },
+          { id: 14, text: "The children ___ TV for hours before their mother turned it off.", options: ["had been watching", "have been watching", "watched", "were watching"], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 15, text: "I ___ been living there for six years before I moved abroad.", options: ["had", "have", "was", "did"], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 16, text: "She was out of breath because she ___ .", options: ["had been running", "has been running", "ran", "was running"], correct: 0, explanation: "Cause of a past state: had been + V-ing." },
+          { id: 17, text: "They ___ been practicing the song for weeks before the concert.", options: ["had", "have", "were", "did"], correct: 0, explanation: "Duration before a past event: had been + V-ing." },
+          { id: 18, text: "How long ___ you been working there before you quit?", options: ["had", "have", "were", "did"], correct: 0, explanation: "Question form: How long + had + subject + been + V-ing?" },
+          { id: 19, text: "___ he been training hard before the competition?", options: ["Had", "Has", "Was", "Did"], correct: 0, explanation: "Question form: Had + subject + been + V-ing?" },
+          { id: 20, text: "We ___ been talking for hours when the power went out.", options: ["had", "have", "were", "did"], correct: 0, explanation: "Duration before a past interruption: had been + V-ing." }
+        ],
+        fillBlanks: [
+          { id: 1, text: "I ___ (wait) for an hour when the bus arrived.", options: ["had been waiting", "have been waiting", "was waiting", "have waited"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (waiting)." },
+          { id: 2, text: "She ___ (study) all morning before her break.", options: ["had been studying", "has been studying", "was studying", "studied"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (studying)." },
+          { id: 3, text: "They ___ (play) football for two hours when it rained.", options: ["had been playing", "have been playing", "were playing", "played"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (playing)." },
+          { id: 4, text: "He ___ (drive) all night, so he was exhausted.", options: ["had been driving", "has been driving", "drove", "was driving"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (driving)." },
+          { id: 5, text: "We ___ (wait) for twenty minutes before you texted.", options: ["had been waiting", "have been waiting", "waited", "were waiting"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (waiting)." },
+          { id: 6, text: "___ (you / wait) long before I arrived?", options: ["Had you been waiting", "Have you been waiting", "Were you waiting", "Did you wait"], correct: 0, explanation: "Question form: Had + subject + been + V-ing." },
+          { id: 7, text: "How long ___ (she / learn) English before the exam?", options: ["had she been learning", "has she been learning", "was she learning", "did she learn"], correct: 0, explanation: "Question form: How long + had + subject + been + V-ing." },
+          { id: 8, text: "The ground was wet because it ___ (rain) all night.", options: ["had been raining", "has been raining", "rained", "was raining"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (raining)." },
+          { id: 9, text: "I ___ (not / sleep) well before the trip.", options: ["hadn't been sleeping", "haven't been sleeping", "wasn't sleeping", "didn't sleep"], correct: 0, explanation: "Negative form: hadn't been + V-ing (sleeping)." },
+          { id: 10, text: "By the time he got home, she ___ (cook) for three hours.", options: ["had been cooking", "has been cooking", "cooked", "was cooking"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (cooking)." },
+          { id: 11, text: "He ___ (teach) for ten years before he retired.", options: ["had been teaching", "has been teaching", "taught", "was teaching"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (teaching)." },
+          { id: 12, text: "Her eyes were red because she ___ (cry).", options: ["had been crying", "has been crying", "cried", "was crying"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (crying)." },
+          { id: 13, text: "We ___ (argue) about money before they broke up.", options: ["had been arguing", "have been arguing", "were arguing", "argued"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (arguing)." },
+          { id: 14, text: "The children ___ (watch) TV for hours before their mother turned it off.", options: ["had been watching", "have been watching", "watched", "were watching"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (watching)." },
+          { id: 15, text: "I ___ (live) there for six years before I moved abroad.", options: ["had been living", "have been living", "lived", "was living"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (living)." },
+          { id: 16, text: "She was out of breath because she ___ (run).", options: ["had been running", "has been running", "ran", "was running"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (running)." },
+          { id: 17, text: "They ___ (practice) the song for weeks before the concert.", options: ["had been practicing", "have been practicing", "practiced", "were practicing"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (practicing)." },
+          { id: 18, text: "How long ___ (you / work) there before you quit?", options: ["had you been working", "have you been working", "were you working", "did you work"], correct: 0, explanation: "Question form: How long + had + subject + been + V-ing." },
+          { id: 19, text: "___ (he / train) hard before the competition?", options: ["Had he been training", "Has he been training", "Was he training", "Did he train"], correct: 0, explanation: "Question form: Had + subject + been + V-ing." },
+          { id: 20, text: "We ___ (talk) for hours when the power went out.", options: ["had been talking", "have been talking", "were talking", "talked"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing (talking)." }
+        ],
+        scrambled: [
+          { id: 1, words: ["waiting", "I", "had", "been", "for", "an", "hour"], answer: "I had been waiting for an hour", explanation: "Subject + had been + V-ing + for + period." },
+          { id: 2, words: ["studying", "she", "had", "been", "all", "morning"], answer: "she had been studying all morning", explanation: "Subject + had been + V-ing + time expression." },
+          { id: 3, words: ["playing", "they", "had", "been", "football", "for", "two", "hours"], answer: "they had been playing football for two hours", explanation: "Subject + had been + V-ing + object + for + period." },
+          { id: 4, words: ["driving", "he", "had", "been", "all", "night"], answer: "he had been driving all night", explanation: "Subject + had been + V-ing + time expression." },
+          { id: 5, words: ["waiting", "we", "had", "been", "for", "twenty", "minutes"], answer: "we had been waiting for twenty minutes", explanation: "Subject + had been + V-ing + for + period." },
+          { id: 6, words: ["waiting", "had", "you", "been", "long", "?"], answer: "had you been waiting long", explanation: "Had + subject + been + V-ing + long?" },
+          { id: 7, words: ["learning", "how", "long", "had", "she", "been", "English"], answer: "how long had she been learning English", explanation: "How long + had + subject + been + V-ing + object?" },
+          { id: 8, words: ["raining", "it", "had", "been", "all", "night"], answer: "it had been raining all night", explanation: "Subject + had been + V-ing + time expression." },
+          { id: 9, words: ["sleeping", "I", "hadn't", "been", "well"], answer: "I hadn't been sleeping well", explanation: "Subject + hadn't been + V-ing + adverb." },
+          { id: 10, words: ["cooking", "she", "had", "been", "for", "three", "hours"], answer: "she had been cooking for three hours", explanation: "Subject + had been + V-ing + for + period." },
+          { id: 11, words: ["teaching", "he", "had", "been", "for", "ten", "years"], answer: "he had been teaching for ten years", explanation: "Subject + had been + V-ing + for + period." },
+          { id: 12, words: ["crying", "she", "had", "been"], answer: "she had been crying", explanation: "Subject + had been + V-ing." },
+          { id: 13, words: ["arguing", "they", "had", "been", "about", "money"], answer: "they had been arguing about money", explanation: "Subject + had been + V-ing + about + object." },
+          { id: 14, words: ["watching", "the", "children", "had", "been", "TV", "for", "hours"], answer: "the children had been watching TV for hours", explanation: "Subject + had been + V-ing + object + for + period." },
+          { id: 15, words: ["living", "I", "had", "been", "there", "for", "six", "years"], answer: "I had been living there for six years", explanation: "Subject + had been + V-ing + place + for + period." },
+          { id: 16, words: ["running", "she", "had", "been"], answer: "she had been running", explanation: "Subject + had been + V-ing." },
+          { id: 17, words: ["practicing", "they", "had", "been", "the", "song", "for", "weeks"], answer: "they had been practicing the song for weeks", explanation: "Subject + had been + V-ing + object + for + period." },
+          { id: 18, words: ["working", "how", "long", "had", "you", "been", "there"], answer: "how long had you been working there", explanation: "How long + had + subject + been + V-ing + place?" },
+          { id: 19, words: ["training", "had", "he", "been", "hard", "?"], answer: "had he been training hard", explanation: "Had + subject + been + V-ing + adverb?" },
+          { id: 20, words: ["talking", "we", "had", "been", "for", "hours"], answer: "we had been talking for hours", explanation: "Subject + had been + V-ing + for + period." }
+        ],
+        errorCorrection: [
+          { id: 1, text: "I have been waiting for an hour when the bus arrived.", options: ["I", "have been waiting", "for an hour", "when the bus arrived"], correct: 1, wrongPart: "have been waiting", correction: "had been waiting", explanation: "Since the waiting happened before a past action (the bus arrived), use Past Perfect Continuous: had been waiting." },
+          { id: 2, text: "She had been study all morning before her break.", options: ["She", "had been", "study", "all morning before her break"], correct: 2, wrongPart: "study", correction: "studying", explanation: "After had been, use the -ing form: studying." },
+          { id: 3, text: "They had being playing football when it started to rain.", options: ["They", "had being", "playing football", "when it started to rain"], correct: 1, wrongPart: "had being", correction: "had been", explanation: "The correct auxiliary is been (past participle of be), not being: had been playing." },
+          { id: 4, text: "He was tired because he has been driving all night.", options: ["He was tired", "because", "he has been driving", "all night"], correct: 2, wrongPart: "he has been driving", correction: "he had been driving", explanation: "The cause happened before a past state (was tired), so use Past Perfect Continuous: had been driving." },
+          { id: 5, text: "We had been waited for twenty minutes before you texted.", options: ["We", "had been", "waited", "for twenty minutes before you texted"], correct: 2, wrongPart: "waited", correction: "waiting", explanation: "After had been, use the -ing form: waiting." },
+          { id: 6, text: "Had you waiting long before I arrived?", options: ["Had", "you", "waiting", "long before I arrived?"], correct: 2, wrongPart: "waiting", correction: "been waiting", explanation: "Past Perfect Continuous questions need been: Had you been waiting...?" },
+          { id: 7, text: "How long she had been learning English before the exam?", options: ["How long", "she had been", "learning English", "before the exam?"], correct: 1, wrongPart: "she had been", correction: "had she been", explanation: "In questions, the auxiliary comes before the subject: How long had she been...?" },
+          { id: 8, text: "The ground was wet because it had been rain all night.", options: ["The ground was wet", "because", "it had been", "rain all night"], correct: 3, wrongPart: "rain all night", correction: "raining all night", explanation: "After had been, use the -ing form: raining." },
+          { id: 9, text: "I didn't been sleeping well before the trip.", options: ["I", "didn't been", "sleeping", "well before the trip"], correct: 1, wrongPart: "didn't been", correction: "hadn't been", explanation: "The negative form of Past Perfect Continuous is hadn't been, not didn't been." },
+          { id: 10, text: "By the time he got home, she had been cook for three hours.", options: ["By the time he got home", "she", "had been cook", "for three hours"], correct: 2, wrongPart: "had been cook", correction: "had been cooking", explanation: "After had been, use the -ing form: cooking." },
+          { id: 11, text: "He had been teach for ten years before he retired.", options: ["He", "had been", "teach", "for ten years before he retired"], correct: 2, wrongPart: "teach", correction: "teaching", explanation: "After had been, use the -ing form: teaching." },
+          { id: 12, text: "Her eyes were red because she has been crying.", options: ["Her eyes were red", "because", "she has been crying", "No error"], correct: 2, wrongPart: "she has been crying", correction: "she had been crying", explanation: "The crying happened before a past state (were red), so use Past Perfect Continuous: had been crying." },
+          { id: 13, text: "We had been arguing about money before they broken up.", options: ["We had been arguing", "about money", "before they", "broken up"], correct: 3, wrongPart: "broken up", correction: "broke up", explanation: "Before here introduces a simple past action: before they broke up, not the past participle broken." },
+          { id: 14, text: "The children had been watch TV for hours before their mother turned it off.", options: ["The children", "had been", "watch TV", "for hours before their mother turned it off"], correct: 2, wrongPart: "watch TV", correction: "watching TV", explanation: "After had been, use the -ing form: watching." },
+          { id: 15, text: "I had been live there for six years before I moved abroad.", options: ["I", "had been", "live", "there for six years before I moved abroad"], correct: 2, wrongPart: "live", correction: "living", explanation: "After had been, use the -ing form: living." },
+          { id: 16, text: "She was out of breath because she have been running.", options: ["She was out of breath", "because", "she have been running", "No error"], correct: 2, wrongPart: "she have been running", correction: "she had been running", explanation: "This describes a past cause, so use Past Perfect Continuous: had been running, not have been." },
+          { id: 17, text: "They had been practicing the song for weeks before the concert start.", options: ["They had been practicing", "the song", "for weeks before the concert", "start"], correct: 3, wrongPart: "start", correction: "started", explanation: "Before here needs Past Simple: before the concert started." },
+          { id: 18, text: "How long you had been working there before you quit?", options: ["How long", "you had been", "working there", "before you quit?"], correct: 1, wrongPart: "you had been", correction: "had you been", explanation: "In questions, the auxiliary comes before the subject: How long had you been...?" },
+          { id: 19, text: "Had he training hard before the competition?", options: ["Had", "he", "training", "hard before the competition?"], correct: 2, wrongPart: "training", correction: "been training", explanation: "Past Perfect Continuous questions need been: Had he been training...?" },
+          { id: 20, text: "We had been talk for hours when the power went out.", options: ["We", "had been", "talk", "for hours when the power went out"], correct: 2, wrongPart: "talk", correction: "talking", explanation: "After had been, use the -ing form: talking." }
+        ],
+        transform: [
+          { id: 1, text: "Make negative: \"I had been waiting for an hour.\"", options: ["I hadn't been waiting for an hour.", "I didn't been waiting for an hour.", "I hadn't been wait for an hour.", "I wasn't been waiting for an hour."], correct: 0, explanation: "Negative form: hadn't been + V-ing." },
+          { id: 2, text: "Make question: \"She had been studying all morning.\"", options: ["Had she been studying all morning?", "Did she had been studying all morning?", "Had she being studying all morning?", "She had been studying all morning?"], correct: 0, explanation: "Move had to the front: Had she been studying...?" },
+          { id: 3, text: "Transform to Past Perfect Continuous: \"They played football for two hours before it rained.\"", options: ["They had been playing football for two hours before it rained.", "They were playing football for two hours before it rained.", "They have been playing football for two hours before it rained.", "They played football for two hours before it rained."], correct: 0, explanation: "Duration before a past action: had been + V-ing." },
+          { id: 4, text: "Make negative: \"They had been sleeping well.\"", options: ["They hadn't been sleeping well.", "They didn't been sleeping well.", "They hadn't been sleep well.", "They weren't been sleeping well."], correct: 0, explanation: "Negative form: hadn't been + V-ing." },
+          { id: 5, text: "Make question: \"He had been driving all night.\"", options: ["Had he been driving all night?", "Did he had been driving all night?", "Had he being driving all night?", "He had been driving all night?"], correct: 0, explanation: "Move had to the front: Had he been driving...?" },
+          { id: 6, text: "Transform to Past Perfect Continuous: \"She cooked for three hours before he got home.\" (emphasize the duration)", options: ["She had been cooking for three hours before he got home.", "She cooked for three hours before he got home.", "She was cooking for three hours before he got home.", "She has been cooking for three hours before he got home."], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 7, text: "Make negative: \"We had been arguing about money.\"", options: ["We hadn't been arguing about money.", "We didn't been arguing about money.", "We hadn't been argue about money.", "We weren't been arguing about money."], correct: 0, explanation: "Negative form: hadn't been + V-ing." },
+          { id: 8, text: "Make question: \"They had been practicing the song for weeks.\"", options: ["Had they been practicing the song for weeks?", "Did they had been practicing the song for weeks?", "Had they being practicing the song for weeks?", "They had been practicing the song for weeks?"], correct: 0, explanation: "Move had to the front: Had they been practicing...?" },
+          { id: 9, text: "Transform to Past Perfect Continuous: \"It rained all night.\" (result: the ground was wet)", options: ["It had been raining all night.", "It rained all night.", "It was raining all night.", "It has been raining all night."], correct: 0, explanation: "Cause of a past result: had been + V-ing." },
+          { id: 10, text: "Make negative: \"He had been feeling well.\"", options: ["He hadn't been feeling well.", "He didn't been feeling well.", "He hadn't been feel well.", "He wasn't been feeling well."], correct: 0, explanation: "Negative form: hadn't been + V-ing." },
+          { id: 11, text: "Make question: \"You had been waiting long.\"", options: ["Had you been waiting long?", "Did you had been waiting long?", "Had you being waiting long?", "You had been waiting long?"], correct: 0, explanation: "Move had to the front: Had you been waiting...?" },
+          { id: 12, text: "Transform to Past Perfect Continuous: \"She cried.\" (reason: her eyes were red)", options: ["She had been crying.", "She cried.", "She was crying.", "She has been crying."], correct: 0, explanation: "Cause of a past result: had been + V-ing." },
+          { id: 13, text: "Make negative: \"The children had been watching TV.\"", options: ["The children hadn't been watching TV.", "The children didn't been watching TV.", "The children hadn't been watch TV.", "The children weren't been watching TV."], correct: 0, explanation: "Negative form: hadn't been + V-ing." },
+          { id: 14, text: "Make question: \"She had been learning English for three years.\"", options: ["Had she been learning English for three years?", "Did she had been learning English for three years?", "Had she being learning English for three years?", "She had been learning English for three years?"], correct: 0, explanation: "Move had to the front: Had she been learning...?" },
+          { id: 15, text: "Transform to Past Perfect Continuous: \"I lived there for six years.\" (before I moved abroad)", options: ["I had been living there for six years.", "I lived there for six years.", "I was living there for six years.", "I have been living there for six years."], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 16, text: "Make negative: \"He had been training hard.\"", options: ["He hadn't been training hard.", "He didn't been training hard.", "He hadn't been train hard.", "He wasn't been training hard."], correct: 0, explanation: "Negative form: hadn't been + V-ing." },
+          { id: 17, text: "Make question: \"We had been talking for hours.\"", options: ["Had we been talking for hours?", "Did we had been talking for hours?", "Had we being talking for hours?", "We had been talking for hours?"], correct: 0, explanation: "Move had to the front: Had we been talking...?" },
+          { id: 18, text: "Transform to Past Perfect Continuous: \"He worked there for ten years.\" (before he got promoted)", options: ["He had been working there for ten years.", "He worked there for ten years.", "He was working there for ten years.", "He has been working there for ten years."], correct: 0, explanation: "Duration before a past point: had been + V-ing." },
+          { id: 19, text: "Make negative: \"She had been teaching for a long time.\"", options: ["She hadn't been teaching for a long time.", "She didn't been teaching for a long time.", "She hadn't been teach for a long time.", "She wasn't been teaching for a long time."], correct: 0, explanation: "Negative form: hadn't been + V-ing." },
+          { id: 20, text: "Make question: \"He had been learning the guitar for a year.\" (asking how long)", options: ["How long had he been learning the guitar?", "How long did he had been learning the guitar?", "How long has he been learning the guitar?", "How long he had been learning the guitar?"], correct: 0, explanation: "In questions, had comes before the subject: How long had he been...?" }
+        ],
+        dialogue: [
+          { id: 1, situation: "Explaining why you were tired.", dialogue: "A: Why were you so tired yesterday?\nB: I ___ for six hours straight.", options: ["had been working", "have been working", "was working", "have worked"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing, cause of a past state." },
+          { id: 2, situation: "Talking about someone's exhaustion.", dialogue: "A: Why was she out of breath?\nB: She ___ .", options: ["had been running", "has been running", "ran", "was running"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 3, situation: "Discussing a delayed bus.", dialogue: "A: How long did you wait?\nB: We ___ for an hour when it finally came.", options: ["had been waiting", "have been waiting", "waited", "were waiting"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 4, situation: "Talking about wet streets.", dialogue: "A: Why were the streets so wet?\nB: It ___ all night.", options: ["had been raining", "has been raining", "rained", "was raining"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 5, situation: "Discussing someone's promotion.", dialogue: "A: How long had he worked there before the promotion?\nB: He ___ there for ten years.", options: ["had been working", "has been working", "worked", "was working"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 6, situation: "Talking about a tired driver.", dialogue: "A: Why did he look so tired?\nB: He ___ all night.", options: ["had been driving", "has been driving", "drove", "was driving"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 7, situation: "Discussing a crying friend.", dialogue: "A: Why were her eyes red?\nB: She ___ .", options: ["had been crying", "has been crying", "cried", "was crying"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 8, situation: "Talking about an argument.", dialogue: "A: Why did they break up?\nB: They ___ about money for months.", options: ["had been arguing", "have been arguing", "argued", "were arguing"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 9, situation: "Discussing a concert.", dialogue: "A: Were they ready for the concert?\nB: Yes, they ___ the song for weeks.", options: ["had been practicing", "have been practicing", "practiced", "were practicing"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 10, situation: "Talking about children and TV.", dialogue: "A: Why did their mother turn off the TV?\nB: They ___ it for hours.", options: ["had been watching", "have been watching", "watched", "were watching"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 11, situation: "Discussing a long stay abroad.", dialogue: "A: How long had you lived there before you moved?\nB: I ___ there for six years.", options: ["had been living", "have been living", "lived", "was living"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 12, situation: "Talking about sleepless nights.", dialogue: "A: Why did they look so tired before the trip?\nB: They ___ well.", options: ["hadn't been sleeping", "haven't been sleeping", "didn't sleep", "weren't sleeping"], correct: 0, explanation: "Negative Past Perfect Continuous: hadn't been + V-ing." },
+          { id: 13, situation: "Discussing a competition.", dialogue: "A: Was he ready for the competition?\nB: Yes, he ___ hard for months.", options: ["had been training", "has been training", "trained", "was training"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 14, situation: "Talking about a long phone call.", dialogue: "A: What happened when the power went out?\nB: We ___ for hours at that point.", options: ["had been talking", "have been talking", "talked", "were talking"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 15, situation: "Discussing homework.", dialogue: "A: How long had she been studying before the exam?\nB: She ___ all morning.", options: ["had been studying", "has been studying", "studied", "was studying"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 16, situation: "Talking about a long teaching career.", dialogue: "A: How long had he been teaching before he retired?\nB: He ___ for ten years.", options: ["had been teaching", "has been teaching", "taught", "was teaching"], correct: 0, explanation: "Past Perfect Continuous: had been + V-ing." },
+          { id: 17, situation: "Asking about waiting time.", dialogue: "A: ___ you been waiting long before I arrived?\nB: About twenty minutes.", options: ["Had", "Have", "Were", "Did"], correct: 0, explanation: "Question form: Had + subject + been + V-ing?" },
+          { id: 18, situation: "Asking about a long football match.", dialogue: "A: ___ they been playing long when it started to rain?\nB: Yes, over two hours.", options: ["Had", "Have", "Were", "Did"], correct: 0, explanation: "Question form: Had + subject + been + V-ing?" },
+          { id: 19, situation: "Asking how long someone studied English.", dialogue: "A: How long ___ she been learning English before the exam?\nB: For about three years.", options: ["had", "has", "was", "did"], correct: 0, explanation: "Question form: How long + had + subject + been + V-ing?" },
+          { id: 20, situation: "Asking about a long career.", dialogue: "A: How long ___ he been working there before he quit?\nB: Almost a decade.", options: ["had", "have", "was", "did"], correct: 0, explanation: "Question form: How long + had + subject + been + V-ing?" }
+        ]
+      },
+      {
+        id: "relative-clauses",
+        title: "Relative Clauses",
+        icon: "🔗",
+        guide: `## Relative Clauses (Aniqlovchi ergash gaplar)
+
+Relative Clauses ot yoki olmoshni aniqlashtirish, unga qo'shimcha ma'lumot berish uchun ishlatiladi. Ular relative pronoun (who, which, that, whose, where, when, why) bilan boshlanadi.
+
+## 1. Relative Pronoun'lar
+• **who** — odamlar uchun (subject yoki object)
+  - The man **who** called you is my brother.
+• **which** — narsalar/hayvonlar uchun
+  - The book **which** I bought is amazing.
+• **that** — odamlar va narsalar uchun (ko'proq so'zlashuv tilida, defining clause'da)
+  - The car **that** he drives is new.
+• **whose** — egalik bildiradi (odamlar va narsalar uchun)
+  - That's the woman **whose** car was stolen.
+• **where** — joy uchun
+  - This is the house **where** I grew up.
+• **when** — vaqt uchun
+  - I remember the day **when** we met.
+• **why** — sabab uchun
+  - I don't know the reason **why** he left.
+
+## 2. Defining (Aniqlovchi) vs Non-defining (Aniqlovchi bo'lmagan) Clauses
+• **Defining clause** — gapning ma'nosi uchun zarur ma'lumot, vergul QO'YILMAYDI, "that" ishlatilishi mumkin.
+  - Students **who study hard** usually succeed. (qaysi studentlar — muhim ma'lumot)
+• **Non-defining clause** — qo'shimcha, olib tashlash mumkin bo'lgan ma'lumot, vergul bilan ajratiladi, "that" ISHLATILMAYDI.
+  - My brother, **who lives in London**, is a doctor. (bitta akam bor, qo'shimcha ma'lumot)
+
+## 3. Relative Pronoun'ni tushirish (Omission)
+Agar relative pronoun clause ichida OBJECT bo'lsa va clause defining bo'lsa, uni tushirish mumkin:
+  - The book (**which/that**) I bought is amazing. → The book I bought is amazing.
+Agar relative pronoun SUBJECT bo'lsa, uni tushirib bo'lmaydi:
+  - The man **who** called you is my brother. (tushirib bo'lmaydi)
+
+## 4. Prepositions bilan
+Preposition clause oxirida yoki (rasmiy uslubda) whom/which oldida kelishi mumkin:
+  - The person **who** I spoke **to** was very helpful. (norasmiy)
+  - The person **to whom** I spoke was very helpful. (rasmiy)`,
+        questions: [
+          { id: 1, text: "The man ___ called you is my brother.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject of the clause." },
+          { id: 2, text: "The book ___ I bought is amazing.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
+          { id: 3, text: "That's the woman ___ car was stolen.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 4, text: "This is the house ___ I grew up.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
+          { id: 5, text: "I remember the day ___ we met.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
+          { id: 6, text: "The car ___ he drives is new.", options: ["that", "who", "whose", "when"], correct: 0, explanation: "Use that/which for things." },
+          { id: 7, text: "Students ___ study hard usually succeed.", options: ["who", "whom", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 8, text: "The teacher ___ class I love is very kind.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 9, text: "This is the restaurant ___ we had dinner.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
+          { id: 10, text: "The girl ___ won the competition is my classmate.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 11, text: "I have a friend ___ father is a doctor.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 12, text: "The movie ___ we watched last night was boring.", options: ["which", "who", "whose", "when"], correct: 0, explanation: "Use which/that for things." },
+          { id: 13, text: "Do you remember the year ___ we graduated?", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
+          { id: 14, text: "People ___ exercise regularly feel healthier.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 15, text: "The company ___ hired me is very professional.", options: ["that", "who", "whose", "where"], correct: 0, explanation: "Use that/which for things (a company)." },
+          { id: 16, text: "This is the town ___ I was born.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
+          { id: 17, text: "The keys ___ I lost were expensive.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
+          { id: 18, text: "My neighbor, ___ works at a bank, is very friendly.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 19, text: "The house ___ roof is red belongs to my uncle.", options: ["whose", "which", "who", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 20, text: "Can you tell me the reason ___ you were late?", options: ["why", "where", "when", "which"], correct: 0, explanation: "Use why for a reason." }
+        ],
+        fillBlanks: [
+          { id: 1, text: "The scientist ___ discovered this won a prize.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 2, text: "The laptop ___ I bought last week is already broken.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
+          { id: 3, text: "The man ___ dog barks all night is my neighbor.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 4, text: "This is the park ___ we used to play.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
+          { id: 5, text: "I'll never forget the moment ___ I met her.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
+          { id: 6, text: "The film ___ won the award was excellent.", options: ["that", "who", "whose", "when"], correct: 0, explanation: "Use that/which for things." },
+          { id: 7, text: "Employees ___ work hard get promoted.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 8, text: "The woman ___ bag was stolen called the police.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 9, text: "This is the office ___ I work.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
+          { id: 10, text: "The singer ___ performed last night was amazing.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 11, text: "I met a man ___ son studies medicine.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 12, text: "The novel ___ she wrote became a bestseller.", options: ["which", "who", "whose", "when"], correct: 0, explanation: "Use which/that for things." },
+          { id: 13, text: "Do you know the date ___ the exam starts?", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
+          { id: 14, text: "Drivers ___ break the law get fined.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 15, text: "The hospital ___ treated him is excellent.", options: ["that", "who", "whose", "where"], correct: 0, explanation: "Use that/which for things (a hospital)." },
+          { id: 16, text: "This is the village ___ my grandparents lived.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
+          { id: 17, text: "The phone ___ I dropped still works.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
+          { id: 18, text: "My colleague, ___ speaks five languages, just got promoted.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
+          { id: 19, text: "The building ___ roof collapsed has been closed.", options: ["whose", "which", "who", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 20, text: "Nobody knows the reason ___ she resigned.", options: ["why", "where", "when", "which"], correct: 0, explanation: "Use why for a reason." }
+        ],
+        scrambled: [
+          { id: 1, words: ["brother", "the", "man", "who", "called", "you", "is", "my"], answer: "the man who called you is my brother", explanation: "Relative clause with who for a person as subject." },
+          { id: 2, words: ["amazing", "the", "book", "which", "I", "bought", "is"], answer: "the book which I bought is amazing", explanation: "Relative clause with which for a thing as object." },
+          { id: 3, words: ["stolen", "that's", "the", "woman", "whose", "car", "was"], answer: "that's the woman whose car was stolen", explanation: "Relative clause with whose showing possession." },
+          { id: 4, words: ["grew", "this", "is", "the", "house", "where", "I", "up"], answer: "this is the house where I grew up", explanation: "Relative clause with where for a place." },
+          { id: 5, words: ["met", "I", "remember", "the", "day", "when", "we"], answer: "I remember the day when we met", explanation: "Relative clause with when for a time." },
+          { id: 6, words: ["new", "the", "car", "that", "he", "drives", "is"], answer: "the car that he drives is new", explanation: "Relative clause with that for a thing." },
+          { id: 7, words: ["succeed", "students", "who", "study", "hard", "usually"], answer: "students who study hard usually succeed", explanation: "Defining relative clause, no comma needed." },
+          { id: 8, words: ["kind", "the", "teacher", "whose", "class", "I", "love", "is", "very"], answer: "the teacher whose class I love is very kind", explanation: "Relative clause with whose showing possession." },
+          { id: 9, words: ["dinner", "this", "is", "the", "restaurant", "where", "we", "had"], answer: "this is the restaurant where we had dinner", explanation: "Relative clause with where for a place." },
+          { id: 10, words: ["classmate", "the", "girl", "who", "won", "the", "competition", "is", "my"], answer: "the girl who won the competition is my classmate", explanation: "Relative clause with who for a person as subject." },
+          { id: 11, words: ["doctor", "I", "have", "a", "friend", "whose", "father", "is", "a"], answer: "I have a friend whose father is a doctor", explanation: "Relative clause with whose showing possession." },
+          { id: 12, words: ["boring", "the", "movie", "which", "we", "watched", "last", "night", "was"], answer: "the movie which we watched last night was boring", explanation: "Relative clause with which for a thing." },
+          { id: 13, words: ["graduated", "do", "you", "remember", "the", "year", "when", "we"], answer: "do you remember the year when we graduated", explanation: "Relative clause with when for a time." },
+          { id: 14, words: ["healthier", "people", "who", "exercise", "regularly", "feel"], answer: "people who exercise regularly feel healthier", explanation: "Defining relative clause with who." },
+          { id: 15, words: ["professional", "the", "company", "that", "hired", "me", "is", "very"], answer: "the company that hired me is very professional", explanation: "Relative clause with that for a thing." },
+          { id: 16, words: ["born", "this", "is", "the", "town", "where", "I", "was"], answer: "this is the town where I was born", explanation: "Relative clause with where for a place." },
+          { id: 17, words: ["expensive", "the", "keys", "which", "I", "lost", "were"], answer: "the keys which I lost were expensive", explanation: "Relative clause with which for things." },
+          { id: 18, words: ["friendly", "my", "neighbor", "who", "works", "at", "a", "bank", "is", "very"], answer: "my neighbor who works at a bank is very friendly", explanation: "Relative clause with who for a person." },
+          { id: 19, words: ["uncle", "the", "house", "whose", "roof", "is", "red", "belongs", "to", "my"], answer: "the house whose roof is red belongs to my uncle", explanation: "Relative clause with whose showing possession." },
+          { id: 20, words: ["left", "I", "don't", "know", "the", "reason", "why", "he"], answer: "I don't know the reason why he left", explanation: "Relative clause with why for a reason." }
+        ],
+        errorCorrection: [
+          { id: 1, text: "The man which called you is my brother.", options: ["The man", "which", "called you", "is my brother"], correct: 1, wrongPart: "which", correction: "who", explanation: "Use who for people, not which." },
+          { id: 2, text: "The book who I bought is amazing.", options: ["The book", "who", "I bought", "is amazing"], correct: 1, wrongPart: "who", correction: "which", explanation: "Use which/that for things, not who." },
+          { id: 3, text: "That's the woman who car was stolen.", options: ["That's the woman", "who", "car was stolen", "No error"], correct: 1, wrongPart: "who", correction: "whose", explanation: "Use whose to show possession, not who." },
+          { id: 4, text: "This is the house which I grew up.", options: ["This is the house", "which", "I grew", "up"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
+          { id: 5, text: "I remember the day where we met.", options: ["I remember the day", "where", "we", "met"], correct: 1, wrongPart: "where", correction: "when", explanation: "Use when for a time, not where." },
+          { id: 6, text: "Students which study hard usually succeed.", options: ["Students", "which", "study hard", "usually succeed"], correct: 1, wrongPart: "which", correction: "who", explanation: "Use who for people, not which." },
+          { id: 7, text: "My brother who lives in London is a doctor is very tall.", options: ["My brother", "who lives in London", "is a doctor", "is very tall"], correct: 2, wrongPart: "is a doctor", correction: ", who lives in London, is a doctor,", explanation: "A non-defining clause about an only brother needs commas: My brother, who lives in London, is a doctor." },
+          { id: 8, text: "The teacher which class I love is very kind.", options: ["The teacher", "which", "class I love", "is very kind"], correct: 1, wrongPart: "which", correction: "whose", explanation: "Use whose to show possession, not which." },
+          { id: 9, text: "This is the restaurant which we had dinner.", options: ["This is the restaurant", "which", "we had", "dinner"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
+          { id: 10, text: "The girl which won the competition is my classmate.", options: ["The girl", "which", "won the competition", "is my classmate"], correct: 1, wrongPart: "which", correction: "who", explanation: "Use who for people, not which." },
+          { id: 11, text: "I have a friend who father is a doctor.", options: ["I have a friend", "who", "father", "is a doctor"], correct: 1, wrongPart: "who", correction: "whose", explanation: "Use whose to show possession, not who." },
+          { id: 12, text: "Do you know the date which the exam starts?", options: ["Do you know", "the date", "which", "the exam starts?"], correct: 2, wrongPart: "which", correction: "when", explanation: "Use when for a time, not which." },
+          { id: 13, text: "The car who he drives is new.", options: ["The car", "who", "he drives", "is new"], correct: 1, wrongPart: "who", correction: "that", explanation: "Use that/which for things, not who." },
+          { id: 14, text: "This is the office which I work.", options: ["This is the office", "which", "I", "work"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
+          { id: 15, text: "The novel whose she wrote became a bestseller.", options: ["The novel", "whose", "she wrote", "became a bestseller"], correct: 1, wrongPart: "whose", correction: "which", explanation: "Use which for a thing as object, not whose." },
+          { id: 16, text: "Drivers whose break the law get fined.", options: ["Drivers", "whose", "break the law", "get fined"], correct: 1, wrongPart: "whose", correction: "who", explanation: "Use who for people, not whose, unless showing possession." },
+          { id: 17, text: "This is the village which my grandparents lived.", options: ["This is the village", "which", "my grandparents", "lived"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
+          { id: 18, text: "The phone which I dropped it still works.", options: ["The phone", "which I dropped", "it", "still works"], correct: 2, wrongPart: "it", correction: "", explanation: "Do not repeat the object with a pronoun after a relative clause: remove it." },
+          { id: 19, text: "The building who roof collapsed has been closed.", options: ["The building", "who", "roof collapsed", "has been closed"], correct: 1, wrongPart: "who", correction: "whose", explanation: "Use whose to show possession, not who." },
+          { id: 20, text: "Nobody knows the reason which she resigned.", options: ["Nobody knows", "the reason", "which", "she resigned"], correct: 2, wrongPart: "which", correction: "why", explanation: "Use why for a reason, not which." }
+        ],
+        transform: [
+          { id: 1, text: "Combine: \"The man is my brother. He called you.\"", options: ["The man who called you is my brother.", "The man which called you is my brother.", "The man whose called you is my brother.", "The man where called you is my brother."], correct: 0, explanation: "Use who for a person as subject of the relative clause." },
+          { id: 2, text: "Combine: \"The book is amazing. I bought it.\"", options: ["The book which I bought is amazing.", "The book who I bought is amazing.", "The book whose I bought is amazing.", "The book I am bought is amazing."], correct: 0, explanation: "Use which/that for a thing as object." },
+          { id: 3, text: "Combine: \"That's the woman. Her car was stolen.\"", options: ["That's the woman whose car was stolen.", "That's the woman who car was stolen.", "That's the woman which car was stolen.", "That's the woman her car was stolen."], correct: 0, explanation: "Use whose to show possession." },
+          { id: 4, text: "Combine: \"This is the house. I grew up there.\"", options: ["This is the house where I grew up.", "This is the house which I grew up.", "This is the house who I grew up.", "This is the house when I grew up."], correct: 0, explanation: "Use where for a place." },
+          { id: 5, text: "Combine: \"I remember the day. We met on that day.\"", options: ["I remember the day when we met.", "I remember the day where we met.", "I remember the day which we met.", "I remember the day who we met."], correct: 0, explanation: "Use when for a time." },
+          { id: 6, text: "Combine: \"Students usually succeed. They study hard.\" (defining clause)", options: ["Students who study hard usually succeed.", "Students, who study hard, usually succeed.", "Students which study hard usually succeed.", "Students whose study hard usually succeed."], correct: 0, explanation: "Defining clause with who, no commas needed." },
+          { id: 7, text: "Combine: \"My brother is a doctor. He lives in London.\" (only one brother, non-defining)", options: ["My brother, who lives in London, is a doctor.", "My brother who lives in London is a doctor.", "My brother, which lives in London, is a doctor.", "My brother whose lives in London is a doctor."], correct: 0, explanation: "Non-defining clause needs commas around it." },
+          { id: 8, text: "Combine: \"The teacher is very kind. I love her class.\"", options: ["The teacher whose class I love is very kind.", "The teacher who class I love is very kind.", "The teacher which class I love is very kind.", "The teacher where class I love is very kind."], correct: 0, explanation: "Use whose to show possession." },
+          { id: 9, text: "Combine: \"This is the restaurant. We had dinner there.\"", options: ["This is the restaurant where we had dinner.", "This is the restaurant which we had dinner.", "This is the restaurant when we had dinner.", "This is the restaurant who we had dinner."], correct: 0, explanation: "Use where for a place." },
+          { id: 10, text: "Combine: \"The girl is my classmate. She won the competition.\"", options: ["The girl who won the competition is my classmate.", "The girl which won the competition is my classmate.", "The girl whose won the competition is my classmate.", "The girl where won the competition is my classmate."], correct: 0, explanation: "Use who for a person as subject." },
+          { id: 11, text: "Combine: \"I have a friend. His father is a doctor.\"", options: ["I have a friend whose father is a doctor.", "I have a friend who father is a doctor.", "I have a friend which father is a doctor.", "I have a friend where father is a doctor."], correct: 0, explanation: "Use whose to show possession." },
+          { id: 12, text: "Combine: \"The movie was boring. We watched it last night.\"", options: ["The movie which we watched last night was boring.", "The movie who we watched last night was boring.", "The movie whose we watched last night was boring.", "The movie where we watched last night was boring."], correct: 0, explanation: "Use which/that for a thing as object." },
+          { id: 13, text: "Combine: \"Do you remember the year? We graduated that year.\"", options: ["Do you remember the year when we graduated?", "Do you remember the year where we graduated?", "Do you remember the year which we graduated?", "Do you remember the year who we graduated?"], correct: 0, explanation: "Use when for a time." },
+          { id: 14, text: "Combine: \"The company is very professional. It hired me.\"", options: ["The company that hired me is very professional.", "The company who hired me is very professional.", "The company whose hired me is very professional.", "The company where hired me is very professional."], correct: 0, explanation: "Use that/which for a thing as subject." },
+          { id: 15, text: "Combine: \"This is the town. I was born there.\"", options: ["This is the town where I was born.", "This is the town which I was born.", "This is the town when I was born.", "This is the town who I was born."], correct: 0, explanation: "Use where for a place." },
+          { id: 16, text: "Combine: \"My colleague just got promoted. She speaks five languages.\" (non-defining)", options: ["My colleague, who speaks five languages, just got promoted.", "My colleague who speaks five languages just got promoted.", "My colleague, which speaks five languages, just got promoted.", "My colleague whose speaks five languages just got promoted."], correct: 0, explanation: "Non-defining clause with who needs commas." },
+          { id: 17, text: "Combine: \"The building has been closed. Its roof collapsed.\"", options: ["The building whose roof collapsed has been closed.", "The building which roof collapsed has been closed.", "The building who roof collapsed has been closed.", "The building where roof collapsed has been closed."], correct: 0, explanation: "Use whose to show possession." },
+          { id: 18, text: "Combine: \"Nobody knows the reason. She resigned for that reason.\"", options: ["Nobody knows the reason why she resigned.", "Nobody knows the reason where she resigned.", "Nobody knows the reason which she resigned.", "Nobody knows the reason who she resigned."], correct: 0, explanation: "Use why for a reason." },
+          { id: 19, text: "Combine: \"The phone still works. I dropped it.\" (object pronoun can be omitted)", options: ["The phone I dropped still works.", "The phone which I dropped it still works.", "The phone who I dropped still works.", "The phone whose I dropped still works."], correct: 0, explanation: "The relative pronoun as object can be omitted in defining clauses; do not repeat the object with it." },
+          { id: 20, text: "Combine: \"The singer was amazing. She performed last night.\"", options: ["The singer who performed last night was amazing.", "The singer which performed last night was amazing.", "The singer whose performed last night was amazing.", "The singer where performed last night was amazing."], correct: 0, explanation: "Use who for a person as subject." }
+        ],
+        dialogue: [
+          { id: 1, situation: "Describing a person.", dialogue: "A: Who is that man over there?\nB: He's the man ___ called you yesterday.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for a person as subject." },
+          { id: 2, situation: "Talking about a purchase.", dialogue: "A: Is your new laptop good?\nB: The one ___ I bought is already broken!", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for a thing." },
+          { id: 3, situation: "Talking about a stolen item.", dialogue: "A: Do you know that woman?\nB: Yes, she's the one ___ car was stolen.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 4, situation: "Talking about childhood.", dialogue: "A: Is this your hometown?\nB: Yes, this is the house ___ I grew up.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
+          { id: 5, situation: "Talking about memories.", dialogue: "A: Do you remember your wedding day?\nB: Of course, I'll never forget the day ___ we got married.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
+          { id: 6, situation: "Describing a car.", dialogue: "A: Is that your new car?\nB: Yes, it's the car ___ I bought last month.", options: ["that", "who", "whose", "when"], correct: 0, explanation: "Use that/which for a thing." },
+          { id: 7, situation: "Talking about success.", dialogue: "A: What is the secret to success?\nB: Students ___ study hard usually succeed.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as subject." },
+          { id: 8, situation: "Talking about a favorite class.", dialogue: "A: Which teacher do you like most?\nB: The teacher ___ class I love the most is Mrs. Smith.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 9, situation: "Talking about a restaurant.", dialogue: "A: Where did you two meet?\nB: This is the restaurant ___ we had our first dinner.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
+          { id: 10, situation: "Talking about a competition.", dialogue: "A: Who won the prize?\nB: The girl ___ won the competition is my classmate.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for a person as subject." },
+          { id: 11, situation: "Talking about friends.", dialogue: "A: Do you know any doctors?\nB: Yes, I have a friend ___ father is a doctor.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 12, situation: "Talking about a movie.", dialogue: "A: Did you enjoy the film?\nB: Not really, the movie ___ we watched last night was boring.", options: ["which", "who", "whose", "when"], correct: 0, explanation: "Use which/that for a thing." },
+          { id: 13, situation: "Talking about graduation.", dialogue: "A: Do you remember 2020?\nB: Yes, that's the year ___ we graduated.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
+          { id: 14, situation: "Talking about health.", dialogue: "A: What is your advice for staying healthy?\nB: People ___ exercise regularly feel healthier.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as subject." },
+          { id: 15, situation: "Talking about a new job.", dialogue: "A: How do you like your new job?\nB: The company ___ hired me is very professional.", options: ["that", "who", "whose", "where"], correct: 0, explanation: "Use that/which for a thing (a company)." },
+          { id: 16, situation: "Talking about origins.", dialogue: "A: Where were you born?\nB: This is the town ___ I was born.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
+          { id: 17, situation: "Talking about lost items.", dialogue: "A: Did you find your keys?\nB: Yes, but the keys ___ I lost were quite expensive to replace.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
+          { id: 18, situation: "Introducing a neighbor.", dialogue: "A: Who is that friendly person?\nB: My neighbor, ___ works at a bank, is always so kind.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for a person as subject." },
+          { id: 19, situation: "Talking about property.", dialogue: "A: Whose house is that with the red roof?\nB: The house ___ roof is red belongs to my uncle.", options: ["whose", "which", "who", "where"], correct: 0, explanation: "Use whose to show possession." },
+          { id: 20, situation: "Asking about a resignation.", dialogue: "A: Do you know why she quit?\nB: Nobody knows the reason ___ she resigned.", options: ["why", "where", "when", "which"], correct: 0, explanation: "Use why for a reason." }
+        ]
+      },
+      {
+        id: "used-to-would",
+        title: "Used to & Would",
+        icon: "🕰️",
+        guide: `## Used to & Would (O'tmishdagi odatlar)
+
+"Used to" va "would" o'tmishda muntazam sodir bo'lgan, lekin hozir tugagan odat yoki holatlarni ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **used to + base verb**: barcha o'tmishdagi odatlar VA holatlar (be, have, like, know kabi) uchun
+  - I **used to play** football every weekend.
+  - She **used to live** in Paris.
+• **would + base verb**: faqat o'tmishdagi TAKRORLANUVCHI harakatlar uchun, HOLAT fe'llari bilan ishlatilmaydi
+  - When I was young, I **would visit** my grandma every summer.
+  - *(would live — NOTO'G'RI, chunki "live" holat fe'li)*
+• **Negative**: didn't use to + base verb
+  - I **didn't use to like** coffee.
+• **Question**: Did + Subject + use to + base verb?
+  - **Did** you **use to play** football?
+
+*("use to" — asosiy fe'l shakli; "used to" faqat tasdiq gapda ishlatiladi, savol/inkorda "did" bilan "use to" qo'llanadi)*
+
+## 2. Ishlatilishi (Usage)
+1. **Hozir to'xtagan o'tmishdagi odat**: used to / would
+   - I **used to smoke**, but I quit. / My father **would tell** us stories every night.
+2. **O'tmishdagi holat (be, have, like, know, believe, want)** — faqat used to:
+   - I **used to believe** in ghosts.
+3. **Hozirgi holat bilan taqqoslash**:
+   - I **used to hate** vegetables, but now I love them.
+
+## 3. Muhim eslatma: "be used to" bilan farqi
+"Used to + infinitive" (odat) bilan "be/get used to + -ing" (biror narsaga o'rganib qolish) ikki xil narsa:
+  - I **used to live** alone. (avval yolg'iz yashaganman — odat)
+  - I **am used to living** alone. (yolg'iz yashashga o'rganib qolganman — hozirgi holat)
+
+## 4. Umumiy xatolar
+• "I use to..." — NOTO'G'RI tasdiq gapda; to'g'risi "I used to...".
+• "Did you used to...?" — NOTO'G'RI; to'g'risi "Did you use to...?".
+• "would" holat fe'llari (be, have, like, know) bilan ishlatilmaydi.`,
+        questions: [
+          { id: 1, text: "I ___ play football every weekend when I was a child.", options: ["used to", "use to", "would played", "was used to"], correct: 0, explanation: "Past habit: used to + base verb." },
+          { id: 2, text: "She ___ live in Paris before she moved to London.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb: only used to is possible, not would." },
+          { id: 3, text: "When I was young, I ___ visit my grandma every summer.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 4, text: "I ___ not use to like vegetables, but now I love them.", options: ["did", "was", "used", "have"], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 5, text: "___ you use to play the piano when you were a kid?", options: ["Did", "Were", "Have", "Used"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 6, text: "He ___ smoke, but he quit five years ago.", options: ["used to", "would", "uses to", "is used to"], correct: 0, explanation: "Past habit: used to + base verb." },
+          { id: 7, text: "We ___ have a dog when I was little.", options: ["used to", "would", "use to", "were"], correct: 0, explanation: "State verb (possession): only used to is possible." },
+          { id: 8, text: "They ___ walk to school together every morning.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 9, text: "I ___ believe in ghosts when I was a kid.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb: only used to is possible." },
+          { id: 10, text: "She didn't ___ eat meat, but now she does.", options: ["use to", "used to", "using to", "use"], correct: 0, explanation: "After didn't, use the base form: use to." },
+          { id: 11, text: "My father ___ tell us stories every night before bed.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 12, text: "___ she used to work here?", options: ["Did", "Was", "Has", "Is"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 13, text: "I ___ hate mathematics, but now I enjoy it.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb: only used to is possible." },
+          { id: 14, text: "When we were kids, we ___ build sandcastles at the beach.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 15, text: "He ___ have long hair, but he cut it.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb (possession): only used to is possible." },
+          { id: 16, text: "They ___ not use to travel much before they got rich.", options: ["did", "were", "used", "have"], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 17, text: "I ___ afraid of the dark when I was young.", options: ["used to be", "would be", "use to be", "was used"], correct: 0, explanation: "State verb (be): only used to is possible." },
+          { id: 18, text: "She ___ knock on my door every morning to wake me up.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 19, text: "Did you ___ live in a small village?", options: ["use to", "used to", "using to", "use"], correct: 0, explanation: "After did, use the base form: use to." },
+          { id: 20, text: "We ___ go camping every summer as a family.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "Past habit: used to + base verb." }
+        ],
+        fillBlanks: [
+          { id: 1, text: "I ___ (play) football every weekend as a child.", options: ["used to play", "use to play", "would played", "was used to play"], correct: 0, explanation: "Past habit: used to + base verb (play)." },
+          { id: 2, text: "She ___ (live) in Paris before moving to London.", options: ["used to live", "would live", "use to live", "was living"], correct: 0, explanation: "State verb: only used to is possible (live)." },
+          { id: 3, text: "When I was young, I ___ (visit) my grandma every summer.", options: ["would visit", "used visit", "use to visited", "was visited"], correct: 0, explanation: "Repeated past action: would + base verb (visit)." },
+          { id: 4, text: "I ___ (not / like) vegetables, but now I love them.", options: ["didn't use to like", "don't used to like", "wasn't used to like", "haven't used to like"], correct: 0, explanation: "Negative form: didn't use to + base verb (like)." },
+          { id: 5, text: "___ (you / play) the piano when you were a kid?", options: ["Did you use to play", "Were you use to play", "Have you used to play", "Used you to play"], correct: 0, explanation: "Question form: Did + subject + use to + base verb." },
+          { id: 6, text: "He ___ (smoke), but he quit five years ago.", options: ["used to smoke", "would smoke", "uses to smoke", "is used to smoking"], correct: 0, explanation: "Past habit: used to + base verb (smoke)." },
+          { id: 7, text: "We ___ (have) a dog when I was little.", options: ["used to have", "would have", "use to have", "were having"], correct: 0, explanation: "State verb (possession): only used to is possible (have)." },
+          { id: 8, text: "They ___ (walk) to school together every morning.", options: ["would walk", "used walk", "use to walked", "were walk"], correct: 0, explanation: "Repeated past action: would + base verb (walk)." },
+          { id: 9, text: "I ___ (believe) in ghosts when I was a kid.", options: ["used to believe", "would believe", "use to believed", "was believing"], correct: 0, explanation: "State verb: only used to is possible (believe)." },
+          { id: 10, text: "She ___ (not / eat) meat, but now she does.", options: ["didn't use to eat", "don't used to eat", "wasn't used to eat", "hasn't used to eat"], correct: 0, explanation: "Negative form: didn't use to + base verb (eat)." },
+          { id: 11, text: "My father ___ (tell) us stories every night before bed.", options: ["would tell", "used tell", "use to told", "was tell"], correct: 0, explanation: "Repeated past action: would + base verb (tell)." },
+          { id: 12, text: "___ (she / work) here?", options: ["Did she use to work", "Was she use to work", "Has she used to work", "Used she to work"], correct: 0, explanation: "Question form: Did + subject + use to + base verb." },
+          { id: 13, text: "I ___ (hate) mathematics, but now I enjoy it.", options: ["used to hate", "would hate", "use to hated", "was hating"], correct: 0, explanation: "State verb: only used to is possible (hate)." },
+          { id: 14, text: "When we were kids, we ___ (build) sandcastles at the beach.", options: ["would build", "used build", "use to built", "were build"], correct: 0, explanation: "Repeated past action: would + base verb (build)." },
+          { id: 15, text: "He ___ (have) long hair, but he cut it.", options: ["used to have", "would have", "use to have", "was having"], correct: 0, explanation: "State verb (possession): only used to is possible (have)." },
+          { id: 16, text: "They ___ (not / travel) much before they got rich.", options: ["didn't use to travel", "don't used to travel", "weren't used to travel", "haven't used to travel"], correct: 0, explanation: "Negative form: didn't use to + base verb (travel)." },
+          { id: 17, text: "I ___ (be) afraid of the dark when I was young.", options: ["used to be", "would be", "use to be", "was used"], correct: 0, explanation: "State verb (be): only used to is possible." },
+          { id: 18, text: "She ___ (knock) on my door every morning to wake me up.", options: ["would knock", "used knock", "use to knocked", "was knock"], correct: 0, explanation: "Repeated past action: would + base verb (knock)." },
+          { id: 19, text: "___ (you / live) in a small village?", options: ["Did you use to live", "Were you use to live", "Have you used to live", "Used you to live"], correct: 0, explanation: "Question form: Did + subject + use to + base verb." },
+          { id: 20, text: "We ___ (go) camping every summer as a family.", options: ["used to go", "would go", "use to went", "was going"], correct: 0, explanation: "Past habit: used to + base verb (go)." }
+        ],
+        scrambled: [
+          { id: 1, words: ["football", "I", "used", "to", "play", "every", "weekend"], answer: "I used to play football every weekend", explanation: "Subject + used to + base verb + object." },
+          { id: 2, words: ["Paris", "she", "used", "to", "live", "in"], answer: "she used to live in Paris", explanation: "State verb: only used to is possible, not would." },
+          { id: 3, words: ["grandma", "I", "would", "visit", "my", "every", "summer"], answer: "I would visit my grandma every summer", explanation: "would for a repeated past action/habit." },
+          { id: 4, words: ["vegetables", "I", "didn't", "use", "to", "like"], answer: "I didn't use to like vegetables", explanation: "Negative form: didn't use to + base verb." },
+          { id: 5, words: ["piano", "did", "you", "use", "to", "play", "the", "?"], answer: "did you use to play the piano", explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 6, words: ["smoke", "he", "used", "to"], answer: "he used to smoke", explanation: "Subject + used to + base verb." },
+          { id: 7, words: ["dog", "we", "used", "to", "have", "a"], answer: "we used to have a dog", explanation: "State verb (possession): only used to." },
+          { id: 8, words: ["school", "they", "would", "walk", "to", "together"], answer: "they would walk to school together", explanation: "would for a repeated past action." },
+          { id: 9, words: ["ghosts", "I", "used", "to", "believe", "in"], answer: "I used to believe in ghosts", explanation: "State verb: only used to." },
+          { id: 10, words: ["meat", "she", "didn't", "use", "to", "eat"], answer: "she didn't use to eat meat", explanation: "Negative form: didn't use to + base verb." },
+          { id: 11, words: ["stories", "my", "father", "would", "tell", "us", "every", "night"], answer: "my father would tell us stories every night", explanation: "would for a repeated past action." },
+          { id: 12, words: ["here", "did", "she", "use", "to", "work", "?"], answer: "did she use to work here", explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 13, words: ["mathematics", "I", "used", "to", "hate"], answer: "I used to hate mathematics", explanation: "State verb: only used to." },
+          { id: 14, words: ["sandcastles", "we", "would", "build", "at", "the", "beach"], answer: "we would build sandcastles at the beach", explanation: "would for a repeated past action." },
+          { id: 15, words: ["hair", "he", "used", "to", "have", "long"], answer: "he used to have long hair", explanation: "State verb (possession): only used to." },
+          { id: 16, words: ["much", "they", "didn't", "use", "to", "travel"], answer: "they didn't use to travel much", explanation: "Negative form: didn't use to + base verb." },
+          { id: 17, words: ["dark", "I", "used", "to", "be", "afraid", "of", "the"], answer: "I used to be afraid of the dark", explanation: "State verb: only used to." },
+          { id: 18, words: ["door", "she", "would", "knock", "on", "my"], answer: "she would knock on my door", explanation: "would for a repeated past action." },
+          { id: 19, words: ["village", "did", "you", "use", "to", "live", "in", "a", "small"], answer: "did you use to live in a small village", explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 20, words: ["camping", "we", "used", "to", "go", "every", "summer"], answer: "we used to go camping every summer", explanation: "Subject + used to + base verb." }
+        ],
+        errorCorrection: [
+          { id: 1, text: "I use to play football every weekend when I was a child.", options: ["I", "use to", "play football", "every weekend when I was a child"], correct: 1, wrongPart: "use to", correction: "used to", explanation: "The past form is used to, not use to (except after did/didn't)." },
+          { id: 2, text: "She would live in Paris before she moved to London.", options: ["She", "would live", "in Paris", "before she moved to London"], correct: 1, wrongPart: "would live", correction: "used to live", explanation: "would cannot be used with state verbs like live; use used to." },
+          { id: 3, text: "When I was young, I use to visit my grandma every summer.", options: ["When I was young", "I", "use to visit", "my grandma every summer"], correct: 2, wrongPart: "use to visit", correction: "used to visit", explanation: "The past form is used to, not use to." },
+          { id: 4, text: "I didn't used to like vegetables, but now I love them.", options: ["I", "didn't used to like", "vegetables", "but now I love them"], correct: 1, wrongPart: "didn't used to like", correction: "didn't use to like", explanation: "After didn't, use the base form use to, not used to." },
+          { id: 5, text: "Did you used to play the piano?", options: ["Did", "you", "used to play", "the piano?"], correct: 2, wrongPart: "used to play", correction: "use to play", explanation: "After Did, use the base form use to, not used to." },
+          { id: 6, text: "He use to smoke, but he quit five years ago.", options: ["He", "use to smoke", "but he quit", "five years ago"], correct: 1, wrongPart: "use to smoke", correction: "used to smoke", explanation: "The past form is used to, not use to." },
+          { id: 7, text: "We would have a dog when I was little.", options: ["We", "would have", "a dog", "when I was little"], correct: 1, wrongPart: "would have", correction: "used to have", explanation: "would cannot be used with state verbs like have (possession); use used to." },
+          { id: 8, text: "They use to walk to school together every morning.", options: ["They", "use to walk", "to school together", "every morning"], correct: 1, wrongPart: "use to walk", correction: "used to walk", explanation: "The past form is used to, not use to." },
+          { id: 9, text: "I would believe in ghosts when I was a kid.", options: ["I", "would believe", "in ghosts", "when I was a kid"], correct: 1, wrongPart: "would believe", correction: "used to believe", explanation: "would cannot be used with state verbs like believe; use used to." },
+          { id: 10, text: "She didn't use to ate meat, but now she does.", options: ["She", "didn't use to", "ate meat", "but now she does"], correct: 2, wrongPart: "ate meat", correction: "eat meat", explanation: "After use to, use the base form of the verb: eat, not ate." },
+          { id: 11, text: "My father use to tell us stories every night.", options: ["My father", "use to tell", "us stories", "every night"], correct: 1, wrongPart: "use to tell", correction: "used to tell", explanation: "The past form is used to, not use to." },
+          { id: 12, text: "Was she used to work here?", options: ["Was", "she", "used to work", "here?"], correct: 0, wrongPart: "Was", correction: "Did", explanation: "Questions about past habits use Did, not Was: Did she use to work here?" },
+          { id: 13, text: "I use to hate mathematics, but now I enjoy it.", options: ["I", "use to hate", "mathematics", "but now I enjoy it"], correct: 1, wrongPart: "use to hate", correction: "used to hate", explanation: "The past form is used to, not use to." },
+          { id: 14, text: "When we were kids, we would built sandcastles at the beach.", options: ["When we were kids", "we", "would built", "sandcastles at the beach"], correct: 2, wrongPart: "would built", correction: "would build", explanation: "After would, use the base form of the verb: build, not built." },
+          { id: 15, text: "He would have long hair, but he cut it.", options: ["He", "would have", "long hair", "but he cut it"], correct: 1, wrongPart: "would have", correction: "used to have", explanation: "would cannot be used with state verbs like have (possession); use used to." },
+          { id: 16, text: "They didn't used to travel much before they got rich.", options: ["They", "didn't used to travel", "much", "before they got rich"], correct: 1, wrongPart: "didn't used to travel", correction: "didn't use to travel", explanation: "After didn't, use the base form use to, not used to." },
+          { id: 17, text: "I would be afraid of the dark when I was young.", options: ["I", "would be", "afraid of the dark", "when I was young"], correct: 1, wrongPart: "would be", correction: "used to be", explanation: "would cannot be used with the state verb be; use used to." },
+          { id: 18, text: "She use to knock on my door every morning.", options: ["She", "use to knock", "on my door", "every morning"], correct: 1, wrongPart: "use to knock", correction: "used to knock", explanation: "The past form is used to, not use to." },
+          { id: 19, text: "Did you use to lived in a small village?", options: ["Did", "you use to", "lived", "in a small village?"], correct: 2, wrongPart: "lived", correction: "live", explanation: "After use to, use the base form of the verb: live, not lived." },
+          { id: 20, text: "We use to go camping every summer.", options: ["We", "use to go", "camping", "every summer"], correct: 1, wrongPart: "use to go", correction: "used to go", explanation: "The past form is used to, not use to." }
+        ],
+        transform: [
+          { id: 1, text: "Rewrite using \"used to\": \"I played football every weekend when I was a child, but I don't anymore.\"", options: ["I used to play football every weekend.", "I would played football every weekend.", "I use to play football every weekend.", "I am used to playing football every weekend."], correct: 0, explanation: "Past habit that stopped: used to + base verb." },
+          { id: 2, text: "Rewrite using \"used to\": \"She lived in Paris, but now she lives in London.\"", options: ["She used to live in Paris.", "She would live in Paris.", "She use to live in Paris.", "She is used to living in Paris."], correct: 0, explanation: "Past state: only used to is possible." },
+          { id: 3, text: "Make negative: \"I used to like vegetables.\"", options: ["I didn't use to like vegetables.", "I didn't used to like vegetables.", "I don't used to like vegetables.", "I wasn't used to like vegetables."], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 4, text: "Make a question: \"You used to play the piano.\"", options: ["Did you use to play the piano?", "Did you used to play the piano?", "Were you use to play the piano?", "Have you used to play the piano?"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 5, text: "Rewrite using \"would\": \"As a child, I visited my grandma every summer.\"", options: ["As a child, I would visit my grandma every summer.", "As a child, I would visited my grandma every summer.", "As a child, I used to visited my grandma every summer.", "As a child, I was visiting my grandma every summer."], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 6, text: "Make negative: \"He used to smoke.\"", options: ["He didn't use to smoke.", "He didn't used to smoke.", "He don't used to smoke.", "He wasn't used to smoke."], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 7, text: "Rewrite using \"used to\": \"We had a dog when I was little, but we don't have one now.\"", options: ["We used to have a dog when I was little.", "We would have a dog when I was little.", "We use to have a dog when I was little.", "We are used to having a dog."], correct: 0, explanation: "Past state (possession): only used to is possible." },
+          { id: 8, text: "Rewrite using \"would\": \"They walked to school together every morning.\"", options: ["They would walk to school together every morning.", "They would walked to school together every morning.", "They used to walked to school together every morning.", "They were walking to school together every morning."], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 9, text: "Make a question: \"She used to work here.\"", options: ["Did she use to work here?", "Did she used to work here?", "Was she use to work here?", "Has she used to work here?"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 10, text: "Rewrite using \"used to\": \"I hated mathematics, but now I enjoy it.\"", options: ["I used to hate mathematics.", "I would hated mathematics.", "I use to hate mathematics.", "I am used to hating mathematics."], correct: 0, explanation: "Past state: only used to is possible." },
+          { id: 11, text: "Rewrite using \"would\": \"As kids, we built sandcastles at the beach.\"", options: ["As kids, we would build sandcastles at the beach.", "As kids, we would built sandcastles at the beach.", "As kids, we used to built sandcastles at the beach.", "As kids, we were building sandcastles at the beach."], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 12, text: "Make negative: \"They traveled much before they got rich.\"", options: ["They didn't use to travel much before they got rich.", "They didn't used to travel much before they got rich.", "They don't used to travel much before they got rich.", "They weren't used to travel much before they got rich."], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 13, text: "Rewrite using \"used to\": \"I was afraid of the dark when I was young.\"", options: ["I used to be afraid of the dark.", "I would afraid of the dark.", "I use to be afraid of the dark.", "I am used to be afraid of the dark."], correct: 0, explanation: "Past state: only used to is possible." },
+          { id: 14, text: "Rewrite using \"would\": \"She knocked on my door every morning.\"", options: ["She would knock on my door every morning.", "She would knocked on my door every morning.", "She used to knocked on my door every morning.", "She was knocking on my door every morning."], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 15, text: "Make a question: \"You used to live in a small village.\"", options: ["Did you use to live in a small village?", "Did you used to live in a small village?", "Were you use to live in a small village?", "Have you used to live in a small village?"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 16, text: "Rewrite using \"used to\": \"We went camping every summer as a family.\"", options: ["We used to go camping every summer as a family.", "We would went camping every summer as a family.", "We use to go camping every summer as a family.", "We are used to going camping every summer."], correct: 0, explanation: "Past habit: used to + base verb." },
+          { id: 17, text: "Make negative: \"He had long hair.\"", options: ["He didn't use to have long hair.", "He didn't used to have long hair.", "He don't used to have long hair.", "He wasn't used to have long hair."], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 18, text: "Rewrite using \"used to\": \"I believed in ghosts when I was a kid.\"", options: ["I used to believe in ghosts.", "I would believed in ghosts.", "I use to believe in ghosts.", "I am used to believing in ghosts."], correct: 0, explanation: "Past state: only used to is possible." },
+          { id: 19, text: "Make a question: \"My father used to tell you stories.\"", options: ["Did your father use to tell you stories?", "Did your father used to tell you stories?", "Was your father use to tell you stories?", "Has your father used to tell you stories?"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 20, text: "Rewrite using \"would\": \"Every night, my father told us a story.\"", options: ["Every night, my father would tell us a story.", "Every night, my father would told us a story.", "Every night, my father used to told us a story.", "Every night, my father was telling us a story."], correct: 0, explanation: "Repeated past action: would + base verb." }
+        ],
+        dialogue: [
+          { id: 1, situation: "Talking about childhood hobbies.", dialogue: "A: Did you play any sports as a kid?\nB: Yes, I ___ play football every weekend.", options: ["used to", "use to", "would played", "was used to"], correct: 0, explanation: "Past habit: used to + base verb." },
+          { id: 2, situation: "Talking about where someone lived.", dialogue: "A: Has she always lived in London?\nB: No, she ___ live in Paris before.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb: only used to is possible." },
+          { id: 3, situation: "Talking about summer visits.", dialogue: "A: Did you see your grandma often?\nB: Yes, I ___ visit her every summer.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 4, situation: "Talking about food preferences.", dialogue: "A: Have you always liked vegetables?\nB: No, I ___ like them, but now I love them.", options: ["didn't use to", "didn't used to", "don't used to", "wasn't used to"], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 5, situation: "Asking about musical instruments.", dialogue: "A: ___ you use to play any instruments?\nB: Yes, the piano.", options: ["Did", "Were", "Have", "Was"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 6, situation: "Talking about smoking habits.", dialogue: "A: Does he still smoke?\nB: No, he ___ smoke, but he quit.", options: ["used to", "use to", "would smoked", "is used to"], correct: 0, explanation: "Past habit: used to + base verb." },
+          { id: 7, situation: "Talking about pets.", dialogue: "A: Do you have any pets now?\nB: No, but we ___ have a dog.", options: ["used to", "would", "use to", "were"], correct: 0, explanation: "State verb (possession): only used to is possible." },
+          { id: 8, situation: "Talking about a school routine.", dialogue: "A: How did you get to school?\nB: We ___ walk together every morning.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 9, situation: "Talking about childhood beliefs.", dialogue: "A: Were you scared of anything as a kid?\nB: Yes, I ___ believe in ghosts.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb: only used to is possible." },
+          { id: 10, situation: "Talking about diet changes.", dialogue: "A: Has she always eaten meat?\nB: No, she ___ eat it, but now she does.", options: ["didn't use to", "didn't used to", "don't used to", "wasn't used to"], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 11, situation: "Talking about bedtime stories.", dialogue: "A: Did your father tell you stories?\nB: Yes, he ___ tell us stories every night.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 12, situation: "Asking about past jobs.", dialogue: "A: ___ she used to work here?\nB: Yes, a few years ago.", options: ["Did", "Was", "Has", "Is"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 13, situation: "Talking about school subjects.", dialogue: "A: Do you like math now?\nB: Yes, but I ___ hate it.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb: only used to is possible." },
+          { id: 14, situation: "Talking about beach memories.", dialogue: "A: What did you do at the beach as kids?\nB: We ___ build sandcastles.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 15, situation: "Talking about appearance.", dialogue: "A: Did he always have short hair?\nB: No, he ___ have long hair.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "State verb (possession): only used to is possible." },
+          { id: 16, situation: "Talking about travel habits.", dialogue: "A: Did they travel a lot before?\nB: No, they ___ travel much before they got rich.", options: ["didn't use to", "didn't used to", "don't used to", "weren't used to"], correct: 0, explanation: "Negative form: didn't use to + base verb." },
+          { id: 17, situation: "Talking about childhood fears.", dialogue: "A: Were you afraid of the dark?\nB: Yes, I ___ afraid of the dark when I was young.", options: ["used to be", "would be", "use to be", "was used"], correct: 0, explanation: "State verb (be): only used to is possible." },
+          { id: 18, situation: "Talking about morning routines.", dialogue: "A: How did she wake you up?\nB: She ___ knock on my door every morning.", options: ["would", "used", "use", "was"], correct: 0, explanation: "Repeated past action: would + base verb." },
+          { id: 19, situation: "Asking about hometown.", dialogue: "A: ___ you use to live in a small village?\nB: Yes, until I was ten.", options: ["Did", "Were", "Have", "Was"], correct: 0, explanation: "Question form: Did + subject + use to + base verb?" },
+          { id: 20, situation: "Talking about family trips.", dialogue: "A: Did you travel much as a family?\nB: Yes, we ___ go camping every summer.", options: ["used to", "would", "use to", "was"], correct: 0, explanation: "Past habit: used to + base verb." }
+        ]
+      },
+      {
+        id: "gerunds-infinitives",
+        title: "Gerunds and Infinitives",
+        icon: "🧩",
+        guide: `## Gerunds and Infinitives (V-ing va to + Infinitive)
+
+Ingliz tilida ba'zi fe'llardan keyin doim -ing (gerund), ba'zilaridan keyin doim "to + infinitive" keladi, ba'zilaridan keyin esa ikkalasi ham kelishi mumkin (ba'zan ma'no o'zgaradi).
+
+## 1. Gerund (-ing) talab qiluvchi fe'llar
+enjoy, finish, avoid, mind, suggest, consider, admit, deny, practice, imagine, keep (on), give up, can't stand, can't help
+  - I **enjoy reading** books.
+  - She **finished writing** the report.
+  - He **avoids eating** junk food.
+
+## 2. To + Infinitive talab qiluvchi fe'llar
+want, decide, plan, hope, promise, agree, refuse, offer, manage, afford, learn, seem, expect, need
+  - I **want to travel** the world.
+  - They **decided to leave** early.
+  - She **promised to call** me.
+
+## 3. Ikkalasi ham mumkin bo'lgan fe'llar (ma'no deyarli bir xil)
+like, love, hate, prefer, start, begin, continue
+  - I **like swimming**. / I **like to swim**. (deyarli bir xil ma'no)
+
+## 4. Ma'no o'zgaradigan fe'llar
+• **remember + -ing** — o'tmishda qilgan ishni eslash
+  - I remember **locking** the door. (eslayapman, avval qulflaganman)
+• **remember + to** — kelajakda qilish kerak bo'lgan ishni unutmaslik
+  - I remembered **to lock** the door. (unutmadim, qulfladim)
+• **stop + -ing** — biror ishni to'xtatish (odatni tashlash)
+  - He stopped **smoking**. (chekishni tashladi)
+• **stop + to** — boshqa ish qilish uchun to'xtash
+  - He stopped **to smoke**. (chekish uchun to'xtadi)
+• **try + -ing** — biror narsani sinab ko'rish (tajriba)
+  - Try **restarting** the computer. (sinab ko'r)
+• **try + to** — harakat qilish, urinish
+  - I tried **to open** the door, but it was locked. (harakat qildim)
+
+## 5. Preposition + gerund
+Preposition'dan keyin doim -ing keladi, infinitive emas:
+  - She is interested **in learning** French.
+  - Thank you **for helping** me.
+  - I'm good **at cooking**.`,
+        questions: [
+          { id: 1, text: "I enjoy ___ books in my free time.", options: ["reading", "to read", "read", "reads"], correct: 0, explanation: "enjoy is followed by a gerund (-ing)." },
+          { id: 2, text: "She finished ___ the report before lunch.", options: ["writing", "to write", "write", "wrote"], correct: 0, explanation: "finish is followed by a gerund (-ing)." },
+          { id: 3, text: "He avoids ___ junk food.", options: ["eating", "to eat", "eat", "ate"], correct: 0, explanation: "avoid is followed by a gerund (-ing)." },
+          { id: 4, text: "I want ___ the world someday.", options: ["to travel", "traveling", "travel", "traveled"], correct: 0, explanation: "want is followed by to + infinitive." },
+          { id: 5, text: "They decided ___ early to catch the train.", options: ["to leave", "leaving", "leave", "left"], correct: 0, explanation: "decide is followed by to + infinitive." },
+          { id: 6, text: "She promised ___ me as soon as she arrived.", options: ["to call", "calling", "call", "called"], correct: 0, explanation: "promise is followed by to + infinitive." },
+          { id: 7, text: "I like ___ , and I also like to swim.", options: ["swimming", "to swimming", "swim", "swam"], correct: 0, explanation: "like can be followed by a gerund or infinitive." },
+          { id: 8, text: "I remember ___ the door before we left. (I recall doing it)", options: ["locking", "to lock", "lock", "locked"], correct: 0, explanation: "remember + -ing refers to a memory of a past action." },
+          { id: 9, text: "I remembered ___ the door, so it was locked when we came back. (I didn't forget)", options: ["to lock", "locking", "lock", "locked"], correct: 0, explanation: "remember + to refers to not forgetting a task." },
+          { id: 10, text: "He stopped ___ five years ago and never smoked again.", options: ["smoking", "to smoke", "smoke", "smoked"], correct: 0, explanation: "stop + -ing means to quit a habit." },
+          { id: 11, text: "On the way to work, he stopped ___ a coffee.", options: ["to buy", "buying", "buy", "bought"], correct: 0, explanation: "stop + to means pausing to do something else." },
+          { id: 12, text: "Try ___ the computer if the app doesn't work.", options: ["restarting", "to restart", "restart", "restarted"], correct: 0, explanation: "try + -ing suggests experimenting with a solution." },
+          { id: 13, text: "I tried ___ the door, but it was locked.", options: ["to open", "opening", "open", "opened"], correct: 0, explanation: "try + to means making an effort." },
+          { id: 14, text: "She is interested ___ French.", options: ["in learning", "to learn", "learn", "learning to"], correct: 0, explanation: "Preposition + gerund: interested in learning." },
+          { id: 15, text: "Thank you ___ me with my homework.", options: ["for helping", "to help", "help", "helped"], correct: 0, explanation: "Preposition + gerund: for helping." },
+          { id: 16, text: "I am good ___ .", options: ["at cooking", "to cook", "cook", "cooked"], correct: 0, explanation: "Preposition + gerund: good at cooking." },
+          { id: 17, text: "He suggested ___ a break.", options: ["taking", "to take", "take", "took"], correct: 0, explanation: "suggest is followed by a gerund (-ing)." },
+          { id: 18, text: "She admitted ___ the vase.", options: ["breaking", "to break", "break", "broke"], correct: 0, explanation: "admit is followed by a gerund (-ing)." },
+          { id: 19, text: "They can't stand ___ in traffic.", options: ["waiting", "to wait", "wait", "waited"], correct: 0, explanation: "can't stand is followed by a gerund (-ing)." },
+          { id: 20, text: "We plan ___ next summer.", options: ["to travel", "traveling", "travel", "traveled"], correct: 0, explanation: "plan is followed by to + infinitive." }
+        ],
+        fillBlanks: [
+          { id: 1, text: "I enjoy ___ (read) books in my free time.", options: ["reading", "to read", "read", "reads"], correct: 0, explanation: "enjoy + gerund (-ing): reading." },
+          { id: 2, text: "She finished ___ (write) the report before lunch.", options: ["writing", "to write", "write", "wrote"], correct: 0, explanation: "finish + gerund (-ing): writing." },
+          { id: 3, text: "He avoids ___ (eat) junk food.", options: ["eating", "to eat", "eat", "ate"], correct: 0, explanation: "avoid + gerund (-ing): eating." },
+          { id: 4, text: "I want ___ (travel) the world someday.", options: ["to travel", "traveling", "travel", "traveled"], correct: 0, explanation: "want + to + infinitive: to travel." },
+          { id: 5, text: "They decided ___ (leave) early to catch the train.", options: ["to leave", "leaving", "leave", "left"], correct: 0, explanation: "decide + to + infinitive: to leave." },
+          { id: 6, text: "She promised ___ (call) me as soon as she arrived.", options: ["to call", "calling", "call", "called"], correct: 0, explanation: "promise + to + infinitive: to call." },
+          { id: 7, text: "I don't mind ___ (wait) a few minutes.", options: ["waiting", "to wait", "wait", "waited"], correct: 0, explanation: "mind + gerund (-ing): waiting." },
+          { id: 8, text: "I remember ___ (lock) the door before we left.", options: ["locking", "to lock", "lock", "locked"], correct: 0, explanation: "remember + -ing for recalling a past action: locking." },
+          { id: 9, text: "I remembered ___ (lock) the door, so it was safe.", options: ["to lock", "locking", "lock", "locked"], correct: 0, explanation: "remember + to for not forgetting a task: to lock." },
+          { id: 10, text: "He stopped ___ (smoke) five years ago.", options: ["smoking", "to smoke", "smoke", "smoked"], correct: 0, explanation: "stop + -ing means to quit a habit: smoking." },
+          { id: 11, text: "On the way to work, he stopped ___ (buy) a coffee.", options: ["to buy", "buying", "buy", "bought"], correct: 0, explanation: "stop + to means pausing to do something else: to buy." },
+          { id: 12, text: "Try ___ (restart) the computer if the app doesn't work.", options: ["restarting", "to restart", "restart", "restarted"], correct: 0, explanation: "try + -ing suggests experimenting: restarting." },
+          { id: 13, text: "I tried ___ (open) the door, but it was locked.", options: ["to open", "opening", "open", "opened"], correct: 0, explanation: "try + to means making an effort: to open." },
+          { id: 14, text: "She is interested ___ (learn) French.", options: ["in learning", "to learn", "learn", "learning to"], correct: 0, explanation: "Preposition + gerund: in learning." },
+          { id: 15, text: "Thank you ___ (help) me with my homework.", options: ["for helping", "to help", "help", "helped"], correct: 0, explanation: "Preposition + gerund: for helping." },
+          { id: 16, text: "I am good ___ (cook).", options: ["at cooking", "to cook", "cook", "cooked"], correct: 0, explanation: "Preposition + gerund: at cooking." },
+          { id: 17, text: "He suggested ___ (take) a break.", options: ["taking", "to take", "take", "took"], correct: 0, explanation: "suggest + gerund (-ing): taking." },
+          { id: 18, text: "She admitted ___ (break) the vase.", options: ["breaking", "to break", "break", "broke"], correct: 0, explanation: "admit + gerund (-ing): breaking." },
+          { id: 19, text: "They can't stand ___ (wait) in traffic.", options: ["waiting", "to wait", "wait", "waited"], correct: 0, explanation: "can't stand + gerund (-ing): waiting." },
+          { id: 20, text: "We plan ___ (travel) next summer.", options: ["to travel", "traveling", "travel", "traveled"], correct: 0, explanation: "plan + to + infinitive: to travel." }
+        ],
+        scrambled: [
+          { id: 1, words: ["books", "I", "enjoy", "reading"], answer: "I enjoy reading books", explanation: "enjoy is followed by a gerund (-ing)." },
+          { id: 2, words: ["report", "she", "finished", "writing", "the"], answer: "she finished writing the report", explanation: "finish is followed by a gerund (-ing)." },
+          { id: 3, words: ["food", "he", "avoids", "eating", "junk"], answer: "he avoids eating junk food", explanation: "avoid is followed by a gerund (-ing)." },
+          { id: 4, words: ["world", "I", "want", "to", "travel", "the"], answer: "I want to travel the world", explanation: "want is followed by to + infinitive." },
+          { id: 5, words: ["early", "they", "decided", "to", "leave"], answer: "they decided to leave early", explanation: "decide is followed by to + infinitive." },
+          { id: 6, words: ["call", "she", "promised", "to", "me"], answer: "she promised to call me", explanation: "promise is followed by to + infinitive." },
+          { id: 7, words: ["swimming", "I", "like"], answer: "I like swimming", explanation: "like can be followed by a gerund." },
+          { id: 8, words: ["door", "I", "remember", "locking", "the"], answer: "I remember locking the door", explanation: "remember + -ing refers to a memory of a past action." },
+          { id: 9, words: ["door", "I", "remembered", "to", "lock", "the"], answer: "I remembered to lock the door", explanation: "remember + to refers to not forgetting a task." },
+          { id: 10, words: ["smoking", "he", "stopped"], answer: "he stopped smoking", explanation: "stop + -ing means to quit an activity." },
+          { id: 11, words: ["coffee", "he", "stopped", "to", "buy", "a"], answer: "he stopped to buy a coffee", explanation: "stop + to means pausing to do something else." },
+          { id: 12, words: ["computer", "try", "restarting", "the"], answer: "try restarting the computer", explanation: "try + -ing suggests experimenting with a solution." },
+          { id: 13, words: ["door", "I", "tried", "to", "open", "the"], answer: "I tried to open the door", explanation: "try + to means making an effort." },
+          { id: 14, words: ["French", "she", "is", "interested", "in", "learning"], answer: "she is interested in learning French", explanation: "Preposition + gerund: interested in learning." },
+          { id: 15, words: ["me", "thank", "you", "for", "helping"], answer: "thank you for helping me", explanation: "Preposition + gerund: for helping." },
+          { id: 16, words: ["cooking", "I", "am", "good", "at"], answer: "I am good at cooking", explanation: "Preposition + gerund: good at cooking." },
+          { id: 17, words: ["break", "he", "suggested", "taking", "a"], answer: "he suggested taking a break", explanation: "suggest is followed by a gerund (-ing)." },
+          { id: 18, words: ["vase", "she", "admitted", "breaking", "the"], answer: "she admitted breaking the vase", explanation: "admit is followed by a gerund (-ing)." },
+          { id: 19, words: ["traffic", "they", "can't", "stand", "waiting", "in"], answer: "they can't stand waiting in traffic", explanation: "can't stand is followed by a gerund (-ing)." },
+          { id: 20, words: ["summer", "we", "plan", "to", "travel", "next"], answer: "we plan to travel next summer", explanation: "plan is followed by to + infinitive." }
+        ],
+        errorCorrection: [
+          { id: 1, text: "I enjoy to read books in my free time.", options: ["I", "enjoy", "to read", "books in my free time"], correct: 2, wrongPart: "to read", correction: "reading", explanation: "enjoy is followed by a gerund (-ing), not to + infinitive." },
+          { id: 2, text: "She finished to write the report.", options: ["She", "finished", "to write", "the report"], correct: 2, wrongPart: "to write", correction: "writing", explanation: "finish is followed by a gerund (-ing), not to + infinitive." },
+          { id: 3, text: "He avoids to eat junk food.", options: ["He", "avoids", "to eat", "junk food"], correct: 2, wrongPart: "to eat", correction: "eating", explanation: "avoid is followed by a gerund (-ing), not to + infinitive." },
+          { id: 4, text: "I want traveling the world someday.", options: ["I", "want", "traveling", "the world someday"], correct: 2, wrongPart: "traveling", correction: "to travel", explanation: "want is followed by to + infinitive, not a gerund." },
+          { id: 5, text: "They decided leaving early.", options: ["They", "decided", "leaving", "early"], correct: 2, wrongPart: "leaving", correction: "to leave", explanation: "decide is followed by to + infinitive, not a gerund." },
+          { id: 6, text: "She promised calling me.", options: ["She", "promised", "calling", "me"], correct: 2, wrongPart: "calling", correction: "to call", explanation: "promise is followed by to + infinitive, not a gerund." },
+          { id: 7, text: "I don't mind to wait a few minutes.", options: ["I don't mind", "to wait", "a few minutes", "No error"], correct: 1, wrongPart: "to wait", correction: "waiting", explanation: "mind is followed by a gerund (-ing), not to + infinitive." },
+          { id: 8, text: "He stopped to smoke five years ago and never smoked again.", options: ["He", "stopped to smoke", "five years ago", "and never smoked again"], correct: 1, wrongPart: "stopped to smoke", correction: "stopped smoking", explanation: "stop + -ing means to quit a habit; stop + to would mean pausing to do something else, which doesn't fit here." },
+          { id: 9, text: "On the way to work, he stopped buying a coffee.", options: ["On the way to work", "he", "stopped buying", "a coffee"], correct: 2, wrongPart: "stopped buying", correction: "stopped to buy", explanation: "He paused his journey in order to buy coffee, so use stop + to: stopped to buy." },
+          { id: 10, text: "Try to restart the computer if the app doesn't work.", options: ["Try to restart", "the computer", "if the app", "doesn't work"], correct: 0, wrongPart: "Try to restart", correction: "Try restarting", explanation: "Suggesting a solution to experiment with uses try + -ing: Try restarting." },
+          { id: 11, text: "I tried opening the door, but it was locked, so I gave up.", options: ["I tried opening", "the door", "but it was locked", "so I gave up"], correct: 0, wrongPart: "I tried opening", correction: "I tried to open", explanation: "Making an effort to do something uses try + to: tried to open." },
+          { id: 12, text: "She is interested to learn French.", options: ["She", "is interested", "to learn", "French"], correct: 2, wrongPart: "to learn", correction: "in learning", explanation: "After a preposition (interested in), use a gerund: in learning." },
+          { id: 13, text: "Thank you to help me with my homework.", options: ["Thank you", "to help", "me with", "my homework"], correct: 1, wrongPart: "to help", correction: "for helping", explanation: "After a preposition (thank you for), use a gerund: for helping." },
+          { id: 14, text: "I am good to cook.", options: ["I", "am good", "to cook", "No error"], correct: 2, wrongPart: "to cook", correction: "at cooking", explanation: "After a preposition (good at), use a gerund: at cooking." },
+          { id: 15, text: "He suggested to take a break.", options: ["He", "suggested", "to take", "a break"], correct: 2, wrongPart: "to take", correction: "taking", explanation: "suggest is followed by a gerund (-ing), not to + infinitive." },
+          { id: 16, text: "She admitted to break the vase.", options: ["She", "admitted", "to break", "the vase"], correct: 2, wrongPart: "to break", correction: "breaking", explanation: "admit is followed by a gerund (-ing), not to + infinitive." },
+          { id: 17, text: "They can't stand to wait in traffic.", options: ["They can't stand", "to wait", "in traffic", "No error"], correct: 1, wrongPart: "to wait", correction: "waiting", explanation: "can't stand is followed by a gerund (-ing), not to + infinitive." },
+          { id: 18, text: "We plan traveling next summer.", options: ["We", "plan", "traveling", "next summer"], correct: 2, wrongPart: "traveling", correction: "to travel", explanation: "plan is followed by to + infinitive, not a gerund." },
+          { id: 19, text: "I remember to lock the door yesterday, I clearly recall doing it.", options: ["I remember to lock", "the door yesterday", "I clearly recall", "doing it"], correct: 0, wrongPart: "I remember to lock", correction: "I remember locking", explanation: "Recalling a past action uses remember + -ing: remember locking." },
+          { id: 20, text: "He gave up to smoke last year.", options: ["He", "gave up", "to smoke", "last year"], correct: 2, wrongPart: "to smoke", correction: "smoking", explanation: "give up is followed by a gerund (-ing), not to + infinitive." }
+        ],
+        transform: [
+          { id: 1, text: "Complete with the correct form: \"I enjoy ___ (read) books.\"", options: ["I enjoy reading books.", "I enjoy to read books.", "I enjoy read books.", "I enjoy to reading books."], correct: 0, explanation: "enjoy + gerund (-ing)." },
+          { id: 2, text: "Complete: \"She finished ___ (write) the report.\"", options: ["She finished writing the report.", "She finished to write the report.", "She finished write the report.", "She finished to writing the report."], correct: 0, explanation: "finish + gerund (-ing)." },
+          { id: 3, text: "Complete: \"I want ___ (travel) the world.\"", options: ["I want to travel the world.", "I want traveling the world.", "I want travel the world.", "I want to traveling the world."], correct: 0, explanation: "want + to + infinitive." },
+          { id: 4, text: "Complete: \"They decided ___ (leave) early.\"", options: ["They decided to leave early.", "They decided leaving early.", "They decided leave early.", "They decided to leaving early."], correct: 0, explanation: "decide + to + infinitive." },
+          { id: 5, text: "Complete: \"He avoids ___ (eat) junk food.\"", options: ["He avoids eating junk food.", "He avoids to eat junk food.", "He avoids eat junk food.", "He avoids to eating junk food."], correct: 0, explanation: "avoid + gerund (-ing)." },
+          { id: 6, text: "Complete: \"She promised ___ (call) me.\"", options: ["She promised to call me.", "She promised calling me.", "She promised call me.", "She promised to calling me."], correct: 0, explanation: "promise + to + infinitive." },
+          { id: 7, text: "Complete (recalling a past action): \"I remember ___ (lock) the door.\"", options: ["I remember locking the door.", "I remember to lock the door.", "I remember lock the door.", "I remember to locking the door."], correct: 0, explanation: "remember + -ing for recalling something already done." },
+          { id: 8, text: "Complete (not forgetting a task): \"I remembered ___ (lock) the door.\"", options: ["I remembered to lock the door.", "I remembered locking the door.", "I remembered lock the door.", "I remembered to locking the door."], correct: 0, explanation: "remember + to for not forgetting to do something." },
+          { id: 9, text: "Complete (quitting a habit): \"He stopped ___ (smoke).\"", options: ["He stopped smoking.", "He stopped to smoke.", "He stopped smoke.", "He stopped to smoking."], correct: 0, explanation: "stop + -ing means to quit a habit." },
+          { id: 10, text: "Complete (pausing to do something else): \"He stopped ___ (buy) a coffee.\"", options: ["He stopped to buy a coffee.", "He stopped buying a coffee.", "He stopped buy a coffee.", "He stopped to buying a coffee."], correct: 0, explanation: "stop + to means pausing to do something else." },
+          { id: 11, text: "Complete (suggesting a solution): \"Try ___ (restart) the computer.\"", options: ["Try restarting the computer.", "Try to restart the computer.", "Try restart the computer.", "Try to restarting the computer."], correct: 0, explanation: "try + -ing for experimenting with a solution." },
+          { id: 12, text: "Complete (making an effort): \"I tried ___ (open) the door.\"", options: ["I tried to open the door.", "I tried opening the door.", "I tried open the door.", "I tried to opening the door."], correct: 0, explanation: "try + to for making an effort." },
+          { id: 13, text: "Complete: \"She is interested ___ (learn) French.\"", options: ["She is interested in learning French.", "She is interested to learn French.", "She is interested learn French.", "She is interested learning to French."], correct: 0, explanation: "Preposition + gerund: interested in learning." },
+          { id: 14, text: "Complete: \"Thank you ___ (help) me.\"", options: ["Thank you for helping me.", "Thank you to help me.", "Thank you help me.", "Thank you for help me."], correct: 0, explanation: "Preposition + gerund: for helping." },
+          { id: 15, text: "Complete: \"I am good ___ (cook).\"", options: ["I am good at cooking.", "I am good to cook.", "I am good cook.", "I am good for cooking."], correct: 0, explanation: "Preposition + gerund: at cooking." },
+          { id: 16, text: "Complete: \"He suggested ___ (take) a break.\"", options: ["He suggested taking a break.", "He suggested to take a break.", "He suggested take a break.", "He suggested to taking a break."], correct: 0, explanation: "suggest + gerund (-ing)." },
+          { id: 17, text: "Complete: \"She admitted ___ (break) the vase.\"", options: ["She admitted breaking the vase.", "She admitted to break the vase.", "She admitted break the vase.", "She admitted to breaking the vase."], correct: 0, explanation: "admit + gerund (-ing)." },
+          { id: 18, text: "Complete: \"They can't stand ___ (wait) in traffic.\"", options: ["They can't stand waiting in traffic.", "They can't stand to wait in traffic.", "They can't stand wait in traffic.", "They can't stand to waiting in traffic."], correct: 0, explanation: "can't stand + gerund (-ing)." },
+          { id: 19, text: "Complete: \"We plan ___ (travel) next summer.\"", options: ["We plan to travel next summer.", "We plan traveling next summer.", "We plan travel next summer.", "We plan to traveling next summer."], correct: 0, explanation: "plan + to + infinitive." },
+          { id: 20, text: "Complete: \"He gave up ___ (smoke) last year.\"", options: ["He gave up smoking last year.", "He gave up to smoke last year.", "He gave up smoke last year.", "He gave up to smoking last year."], correct: 0, explanation: "give up + gerund (-ing)." }
+        ],
+        dialogue: [
+          { id: 1, situation: "Talking about hobbies.", dialogue: "A: What do you do in your free time?\nB: I enjoy ___ books.", options: ["reading", "to read", "read", "reads"], correct: 0, explanation: "enjoy + gerund (-ing)." },
+          { id: 2, situation: "Talking about a report.", dialogue: "A: Has she finished the report?\nB: Yes, she finished ___ it before lunch.", options: ["writing", "to write", "write", "wrote"], correct: 0, explanation: "finish + gerund (-ing)." },
+          { id: 3, situation: "Talking about diet.", dialogue: "A: Does he eat healthily?\nB: Yes, he avoids ___ junk food.", options: ["eating", "to eat", "eat", "ate"], correct: 0, explanation: "avoid + gerund (-ing)." },
+          { id: 4, situation: "Talking about future plans.", dialogue: "A: What are your dreams?\nB: I want ___ the world someday.", options: ["to travel", "traveling", "travel", "traveled"], correct: 0, explanation: "want + to + infinitive." },
+          { id: 5, situation: "Talking about a trip.", dialogue: "A: When are they leaving?\nB: They decided ___ early to catch the train.", options: ["to leave", "leaving", "leave", "left"], correct: 0, explanation: "decide + to + infinitive." },
+          { id: 6, situation: "Talking about a promise.", dialogue: "A: Will she contact you?\nB: Yes, she promised ___ me as soon as she arrived.", options: ["to call", "calling", "call", "called"], correct: 0, explanation: "promise + to + infinitive." },
+          { id: 7, situation: "Talking about patience.", dialogue: "A: Are you okay waiting a bit?\nB: Sure, I don't mind ___ a few minutes.", options: ["waiting", "to wait", "wait", "waited"], correct: 0, explanation: "mind + gerund (-ing)." },
+          { id: 8, situation: "Talking about memory.", dialogue: "A: Are you sure you locked the door?\nB: Yes, I remember ___ it before we left.", options: ["locking", "to lock", "lock", "locked"], correct: 0, explanation: "remember + -ing for recalling a past action." },
+          { id: 9, situation: "Talking about tasks.", dialogue: "A: Did you forget anything?\nB: No, I remembered ___ the door, so it's safe.", options: ["to lock", "locking", "lock", "locked"], correct: 0, explanation: "remember + to for not forgetting a task." },
+          { id: 10, situation: "Talking about smoking.", dialogue: "A: Does he still smoke?\nB: No, he stopped ___ five years ago.", options: ["smoking", "to smoke", "smoke", "smoked"], correct: 0, explanation: "stop + -ing means to quit a habit." },
+          { id: 11, situation: "Talking about a commute.", dialogue: "A: Why was he late?\nB: He stopped ___ a coffee on the way.", options: ["to buy", "buying", "buy", "bought"], correct: 0, explanation: "stop + to means pausing to do something else." },
+          { id: 12, situation: "Giving tech advice.", dialogue: "A: The app isn't working.\nB: Try ___ the computer.", options: ["restarting", "to restart", "restart", "restarted"], correct: 0, explanation: "try + -ing suggests experimenting with a solution." },
+          { id: 13, situation: "Talking about a locked door.", dialogue: "A: Could you get in?\nB: I tried ___ the door, but it was locked.", options: ["to open", "opening", "open", "opened"], correct: 0, explanation: "try + to means making an effort." },
+          { id: 14, situation: "Talking about language learning.", dialogue: "A: Is she taking any classes?\nB: Yes, she is interested ___ French.", options: ["in learning", "to learn", "learn", "learning to"], correct: 0, explanation: "Preposition + gerund: in learning." },
+          { id: 15, situation: "Expressing gratitude.", dialogue: "A: I helped you move your boxes.\nB: Thank you so much ___ me!", options: ["for helping", "to help", "help", "helped"], correct: 0, explanation: "Preposition + gerund: for helping." },
+          { id: 16, situation: "Talking about skills.", dialogue: "A: Can you cook well?\nB: Yes, I am good ___ .", options: ["at cooking", "to cook", "cook", "cooked"], correct: 0, explanation: "Preposition + gerund: at cooking." },
+          { id: 17, situation: "Talking about advice.", dialogue: "A: What did he say to do?\nB: He suggested ___ a break.", options: ["taking", "to take", "take", "took"], correct: 0, explanation: "suggest + gerund (-ing)." },
+          { id: 18, situation: "Talking about honesty.", dialogue: "A: Did she confess?\nB: Yes, she admitted ___ the vase.", options: ["breaking", "to break", "break", "broke"], correct: 0, explanation: "admit + gerund (-ing)." },
+          { id: 19, situation: "Talking about traffic.", dialogue: "A: How do you feel about commuting?\nB: They can't stand ___ in traffic.", options: ["waiting", "to wait", "wait", "waited"], correct: 0, explanation: "can't stand + gerund (-ing)." },
+          { id: 20, situation: "Talking about summer plans.", dialogue: "A: Any plans for summer?\nB: We plan ___ next summer.", options: ["to travel", "traveling", "travel", "traveled"], correct: 0, explanation: "plan + to + infinitive." }
+        ]
       }
     ]
   }

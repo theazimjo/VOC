@@ -68,12 +68,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
     if (onAnswer) onAnswer(currentWord, isCorrect);
     
     const quality = responseToQuality(rating);
-    const sm2Data = calculateNextReview(
-      quality,
-      currentWord.easeFactor || 2.5,
-      currentWord.interval || 0,
-      currentWord.reviewCount || 0
-    );
+    const sm2Data = calculateNextReview(quality, currentWord);
     onUpdateWord(currentWord.id, sm2Data);
 
     const newResults = {

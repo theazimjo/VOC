@@ -96,12 +96,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       setCorrectCount(c => c + 1);
       if (onAnswer) onAnswer(currentWord, true);
 
-      const sm2Data = calculateNextReview(
-        5, // Active perfect quality
-        currentWord.easeFactor || 2.5, 
-        currentWord.interval || 0, 
-        currentWord.reviewCount || 0
-      );
+      const sm2Data = calculateNextReview(5, currentWord); // Active perfect quality
       onUpdateWord(currentWord.id, sm2Data);
     } else {
       setStatus('wrong');
@@ -117,12 +112,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
     setIncorrectCount(c => c + 1);
     if (onAnswer) onAnswer(currentWord, false);
 
-    const sm2Data = calculateNextReview(
-      1, // Failed
-      currentWord.easeFactor || 2.5, 
-      currentWord.interval || 0, 
-      currentWord.reviewCount || 0
-    );
+    const sm2Data = calculateNextReview(1, currentWord); // Failed
     onUpdateWord(currentWord.id, sm2Data);
   };
 
@@ -152,12 +142,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
   const handleUnsupportedSkip = async () => {
     setIncorrectCount(c => c + 1);
     if (onAnswer) onAnswer(currentWord, false);
-    const sm2Data = calculateNextReview(
-      1, 
-      currentWord.easeFactor || 2.5, 
-      currentWord.interval || 0, 
-      currentWord.reviewCount || 0
-    );
+    const sm2Data = calculateNextReview(1, currentWord);
     onUpdateWord(currentWord.id, sm2Data);
     handleNext();
   };

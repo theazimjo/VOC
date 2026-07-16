@@ -89,10 +89,25 @@ export function useAvatar(photoURL) {
     };
     img.onerror = () => {
       if (cancelled) return;
-      // Save 'error' state so we don't make requests to broken URL again
-      try { localStorage.setItem(cacheKey, 'error'); } catch { /* ignore */ }
-      setAvatarSrc(null);
-      setAvatarError(true);
+      // The CORS-mode request failed — this can happen even for URLs that would
+      // serve the image fine to a plain non-CORS <img> tag (inconsistent CORS
+      // headers from the CDN). Retry without crossOrigin before giving up, since
+      // caching 'error' here would permanently blacklist an otherwise-working avatar.
+      const plainImg = new Image();
+      plainImg.onload = () => {
+        if (cancelled) return;
+        try { localStorage.setItem(cacheKey, 'tainted'); } catch { /* ignore */ }
+        setAvatarSrc(photoURL);
+        setAvatarError(false);
+      };
+      plainImg.onerror = () => {
+        if (cancelled) return;
+        // Save 'error' state so we don't make requests to broken URL again
+        try { localStorage.setItem(cacheKey, 'error'); } catch { /* ignore */ }
+        setAvatarSrc(null);
+        setAvatarError(true);
+      };
+      plainImg.src = photoURL;
     };
     img.src = photoURL;
 

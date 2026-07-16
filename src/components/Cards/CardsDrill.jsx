@@ -240,6 +240,8 @@ export default function CardsDrill({ words, allWords, onComplete }) {
 
   // Correction input handling
   const handleCorrectionChange = (e) => {
+    if (status === 'correct') return; // already matched & advance timer armed — ignore further input
+
     const val = e.target.value;
     setCorrectionInput(val);
 
@@ -445,6 +447,7 @@ export default function CardsDrill({ words, allWords, onComplete }) {
           placeholder="To'g'ri so'zni yozib chiqing..."
           value={correctionInput}
           onChange={handleCorrectionChange}
+          disabled={status === 'correct'}
           autoComplete="off"
           autoCorrect="off"
           spellCheck="false"

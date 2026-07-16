@@ -34,24 +34,24 @@ export function checkAndHealStreak(data) {
     return { modified: false, data: streak };
   }
 
-  let modified = false;
-
   if (streak.lastActiveDate !== yesterdayStr) {
     // Missed at least one full day
-    if (streak.streakCount !== 0) {
-      streak.streakCount = 0;
-      modified = true;
-    }
+    streak.streakCount = 0;
   } else {
     // Last active yesterday — verify the daily goal was actually met
     const yesterdayProgress = streak.activityLog[yesterdayStr] || 0;
-    if (yesterdayProgress < streak.dailyGoal && streak.streakCount !== 0) {
+    if (yesterdayProgress < streak.dailyGoal) {
       streak.streakCount = 0;
-      modified = true;
     }
   }
 
-  return { modified, data: streak };
+  // We're past the top guard, so lastActiveDate is definitely not today:
+  // reset today's progress too, otherwise the UI keeps showing a stale
+  // day's todayCount/lastActiveDate as if it were today's (already met goal).
+  streak.todayCount = 0;
+  streak.lastActiveDate = todayStr;
+
+  return { modified: true, data: streak };
 }
 
 /**

@@ -13,6 +13,7 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
   const [matchedIds, setMatchedIds] = useState([]);
   const [errorIds, setErrorIds] = useState([]);
   const [mistakes, setMistakes] = useState(0);
+  const [erroredIds, setErroredIds] = useState(() => new Set());
   const [timer, setTimer] = useState(0);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
 
         const word = words.find(w => w.id === selectedLeft);
         if (word) {
-          const sm2Data = calculateNextReview(4, word.easeFactor || 2.5, word.interval || 0, word.reviewCount || 0);
+          const sm2Data = calculateNextReview(4, word);
           onUpdateWord(word.id, sm2Data);
           if (onAnswer) onAnswer(word, true);
         }
@@ -43,8 +44,8 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
           setTimeout(() => {
             onComplete({
               totalWords: leftItems.length,
-              correctCount: leftItems.length - Math.min(mistakes, leftItems.length),
-              incorrectCount: Math.min(mistakes, leftItems.length)
+              correctCount: leftItems.length - erroredIds.size,
+              incorrectCount: erroredIds.size
             });
           }, 800);
         }
@@ -52,9 +53,10 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
         // Error
         setErrorIds([selectedLeft, selectedRight]);
         setMistakes(m => m + 1);
+        setErroredIds(prev => new Set(prev).add(selectedLeft));
         const word = words.find(w => w.id === selectedLeft);
         if (word) {
-          const sm2Data = calculateNextReview(1, word.easeFactor || 2.5, word.interval || 0, word.reviewCount || 0);
+          const sm2Data = calculateNextReview(1, word);
           onUpdateWord(word.id, sm2Data);
           if (onAnswer) onAnswer(word, false);
         }
