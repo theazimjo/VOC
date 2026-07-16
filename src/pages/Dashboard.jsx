@@ -184,7 +184,7 @@ export default function Dashboard() {
         <motion.div className="dash-cta-section" {...fadeUp(0.16)}>
           <button
             className={`btn-practice-primary ${dueWords > 0 ? 'pulse-border' : ''}`}
-            onClick={() => navigate('/mixed-practice')}
+            onClick={() => navigate(dueWords > 0 ? '/mixed-practice?filter=due' : '/mixed-practice')}
             id="dashboard-practice-btn"
           >
             {dueWords > 0 ? 'Takrorlashni boshlash' : 'Mashq qilish'}

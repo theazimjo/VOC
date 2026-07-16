@@ -12,6 +12,7 @@ import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
+import { getDueWords, calculateNextReview, responseToQuality } from '../utils/sm2';
 import IosSpinner from '../components/common/IosSpinner';
 import './MixedPractice.css';
 
@@ -46,6 +47,7 @@ export default function MixedPractice() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const isLeechMode = searchParams.get('filter') === 'leech';
+  const isDueMode = searchParams.get('filter') === 'due';
 
   const [step, setStep] = useState('setup'); // 'setup' | 'practice' | 'results'
   const [mixedWordsPool, setMixedWordsPool] = useState([]);
@@ -65,16 +67,24 @@ export default function MixedPractice() {
     let pool = allWords.map(w => ({ ...w, sourceId: w.packId }));
     if (isLeechMode) {
       pool = pool.filter(w => (w.wrongCount || 0) >= LEECH_THRESHOLD);
+    } else if (isDueMode) {
+      pool = getDueWords(pool);
     }
     setMixedWordsPool(pool);
     setLoading(false);
-  }, [user, allWords, allWordsLoading, isLeechMode]);
+  }, [user, allWords, allWordsLoading, isLeechMode, isDueMode]);
 
   // Generate question queue
   const startSession = (wordsPool) => {
     if (wordsPool.length === 0) return;
 
-    const selectedWords = shuffleArray(wordsPool).slice(0, 8);
+    // Due mode prioritizes the most overdue words first (never-reviewed
+    // words count as most urgent); other modes just sample randomly.
+    const selectedWords = isDueMode
+      ? [...wordsPool]
+          .sort((a, b) => new Date(a.nextReview || 0) - new Date(b.nextReview || 0))
+          .slice(0, 8)
+      : shuffleArray(wordsPool).slice(0, 8);
     const generated = selectedWords.map((wordObj) => {
       const type = pickQuestionType(wordObj, wordsPool.length);
 
@@ -156,23 +166,19 @@ export default function MixedPractice() {
     try {
       const parentId = wordObj.sourceId;
       const wordRef = ref(db, `users/${user.uid}/words/${parentId}/${wordObj.id}`);
-      
-      const currentMastery = wordObj.mastery || 0;
-      let newMastery = isCorrect 
-        ? Math.min(100, currentMastery + 15) 
-        : Math.max(0, currentMastery - 15);
-      
-      const currentReviewCount = wordObj.reviewCount || 0;
-      const nextReviewDate = isCorrect
-        ? new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString() // 3 days if correct
-        : new Date().toISOString(); // immediately if wrong
 
-      await update(wordRef, {
-        mastery: newMastery,
-        reviewCount: currentReviewCount + 1,
-        lastReviewed: new Date().toISOString(),
-        nextReview: nextReviewDate
-      });
+      // Same SM-2 engine and wrongCount/leech bookkeeping as PracticePage's
+      // spaced-repetition flow, so mastery/nextReview stay consistent no
+      // matter which practice mode a word was reviewed in.
+      const quality = responseToQuality(isCorrect ? 'good' : 'again');
+      const sm2Data = calculateNextReview(quality, wordObj);
+
+      const prevWrongCount = wordObj.wrongCount || 0;
+      const wrongCount = quality < 4
+        ? prevWrongCount + 1
+        : Math.max(0, prevWrongCount - 1);
+
+      await update(wordRef, { ...sm2Data, wrongCount });
     } catch (e) {
       console.error('Error updating word stats:', e);
     }
@@ -238,15 +244,17 @@ export default function MixedPractice() {
         </div>
       ) : mixedWordsPool.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-state-icon">{isLeechMode ? '🎯' : '🎮'}</div>
-          <h3>{isLeechMode ? "Qiyin so'zlar yo'q" : "So'zlar topilmadi"}</h3>
+          <div className="empty-state-icon">{isLeechMode ? '🎯' : isDueMode ? '✅' : '🎮'}</div>
+          <h3>{isLeechMode ? "Qiyin so'zlar yo'q" : isDueMode ? "Takrorlash uchun so'z yo'q" : "So'zlar topilmadi"}</h3>
           <p>
             {isLeechMode
               ? "Barakalla! Hozircha 3 martadan ortiq xato qilingan so'z yo'q."
-              : "Aralash mashq qilish uchun Kutubxonaga kirib kitob yoki to'plam oching va so'zlar qo'shing!"}
+              : isDueMode
+                ? "Ajoyib! Hozircha takrorlash muddati kelgan so'z yo'q — keyinroq qayting."
+                : "Aralash mashq qilish uchun Kutubxonaga kirib kitob yoki to'plam oching va so'zlar qo'shing!"}
           </p>
-          <Link to={isLeechMode ? '/stats' : '/library'} className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
-            {isLeechMode ? 'Statistikaga qaytish →' : "Kutubxonaga o'tish →"}
+          <Link to={isLeechMode ? '/stats' : isDueMode ? '/' : '/library'} className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
+            {isLeechMode ? 'Statistikaga qaytish →' : isDueMode ? 'Bosh sahifaga qaytish →' : "Kutubxonaga o'tish →"}
           </Link>
         </div>
       ) : (
@@ -256,8 +264,8 @@ export default function MixedPractice() {
             <div className="mixed-practice-container">
               <div className="practice-session-header">
                 <span className="practice-session-title">
-                  {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
-                  {isLeechMode ? "Qiyin so'zlar mashqi" : "Aralash Mashq"}
+                  {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : isDueMode ? <RotateCcw size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
+                  {isLeechMode ? "Qiyin so'zlar mashqi" : isDueMode ? "Bugungi takrorlash" : "Aralash Mashq"}
                 </span>
                 <button className="btn-exit-practice" onClick={handleExit} title="Mashqdan chiqish">
                   <X size={14} strokeWidth={2.4} /> Chiqish
@@ -434,7 +442,7 @@ export default function MixedPractice() {
                 <tier.Icon size={32} strokeWidth={2.2} />
               </div>
               <h2>{tier.label}</h2>
-              <p className="results-subtitle">Aralash mashq yakunlandi</p>
+              <p className="results-subtitle">{isDueMode ? 'Takrorlash yakunlandi' : 'Aralash mashq yakunlandi'}</p>
 
               <div className="results-score-badge">
                 <span className="score-value">{correctCount}</span>
