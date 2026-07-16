@@ -318,6 +318,18 @@
   cursor: not-allowed;
 }
 
+.market-install-btn.has-update {
+  background: var(--warning-bg, rgba(255, 159, 10, 0.12));
+  border-color: var(--warning, #FF9F0A);
+  color: var(--warning, #FF9F0A);
+}
+
+.market-install-btn.has-update:hover:not(:disabled) {
+  background: var(--warning, #FF9F0A);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 159, 10, 0.3);
+}
+
 /* Floating Action Button (FAB) styles */
 .fab-container {
   position: fixed;

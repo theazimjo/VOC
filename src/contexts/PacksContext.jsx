@@ -148,7 +148,8 @@ export function PacksProvider({ children }) {
         icon: data.icon || '📦',
         level: data.level || 'beginner',
         createdAt: new Date().toISOString(),
-        wordCount: 0
+        wordCount: 0,
+        ...(data.marketPackId ? { marketPackId: data.marketPackId } : {})
       };
 
       await set(newPackRef, packData);

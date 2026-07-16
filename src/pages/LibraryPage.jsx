@@ -11,23 +11,41 @@ import PackForm from '../components/Packs/PackForm';
 import { packIcons } from '../utils/helpers';
 import { playSound } from '../utils/feedback';
 import { marketPacks } from '../data/marketData';
+import { getMissingMarketWords } from '../utils/marketSync';
 import IosSpinner from '../components/common/IosSpinner';
 import './LibraryPage.css';
 
 export default function LibraryPage() {
   const { user } = useAuth();
   const { books, loading: booksLoading } = useBooks(); // Loaded strictly for automatic migration
-  const { packs, loading: packsLoading, addPack, updatePack, deletePack } = usePacks();
+  const { packs, loading: packsLoading, addPack, updatePack, deletePack, allWords } = usePacks();
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   // Tabs: 'library' (my packs) or 'market'
   const activeTab = searchParams.get('tab') === 'market' ? 'market' : 'library';
   const [showPackForm, setShowPackForm] = useState(false);
   const [editingPack, setEditingPack] = useState(null);
 
-  // Install State for Market
+  // Install / Update state for Market
   const [installingPackId, setInstallingPackId] = useState(null);
   const [justInstalledIds, setJustInstalledIds] = useState([]);
+  const [updatingPackId, setUpdatingPackId] = useState(null);
+
+  // Find the user's own pack that was installed from a given market pack
+  // (matched by marketPackId when available, falling back to name for
+  // packs installed before that field existed).
+  const findInstalledPack = (marketPack) => {
+    return packs.find((p) => p.marketPackId === marketPack.id)
+      || packs.find((p) => p.name === marketPack.name);
+  };
+
+  // Words already present in the user's installed copy of a market pack,
+  // used to figure out which market words are new.
+  const getMissingWords = (marketPack, installedPack) => {
+    if (!installedPack) return marketPack.words;
+    const existingWords = allWords.filter((w) => w.packId === installedPack.id);
+    return getMissingMarketWords(marketPack, existingWords);
+  };
 
   // ----------------------------------------------------
   // Automatic Migration: Convert all existing books to packs
@@ -103,6 +121,31 @@ export default function LibraryPage() {
     }
   };
 
+  // Builds the Firebase update payload for a batch of market words being
+  // written into a pack's flat words node.
+  const buildWordUpdates = (wordsRef, words) => {
+    const updates = {};
+    words.forEach((wordData) => {
+      const newWordRef = push(wordsRef);
+      updates[newWordRef.key] = {
+        word: wordData.word || '',
+        translation: wordData.translation || '',
+        definition: wordData.definition || '',
+        example: wordData.example || '',
+        notes: wordData.notes || '',
+        partOfSpeech: wordData.partOfSpeech || 'noun',
+        addedAt: new Date().toISOString(),
+        mastery: 0,
+        easeFactor: 2.5,
+        interval: 0,
+        reviewCount: 0,
+        nextReview: null,
+        lastReviewed: null
+      };
+    });
+    return updates;
+  };
+
   // Click handler to import / install a market pack
   const handleInstallPack = async (marketPack) => {
     if (!user) return;
@@ -115,35 +158,14 @@ export default function LibraryPage() {
         description: marketPack.description,
         icon: marketPack.icon,
         color: marketPack.color,
-        level: marketPack.level
+        level: marketPack.level,
+        marketPackId: marketPack.id
       });
 
       if (newPackId) {
         // 2. Write all words to the flat words node for this pack
         const wordsRef = ref(db, `users/${user.uid}/words/${newPackId}`);
-        const updates = {};
-        
-        marketPack.words.forEach((wordData) => {
-          const newWordRef = push(wordsRef);
-          const newWordId = newWordRef.key;
-          updates[newWordId] = {
-            word: wordData.word || '',
-            translation: wordData.translation || '',
-            definition: wordData.definition || '',
-            example: wordData.example || '',
-            notes: wordData.notes || '',
-            partOfSpeech: wordData.partOfSpeech || 'noun',
-            addedAt: new Date().toISOString(),
-            mastery: 0,
-            easeFactor: 2.5,
-            interval: 0,
-            reviewCount: 0,
-            nextReview: null,
-            lastReviewed: null
-          };
-        });
-
-        await update(wordsRef, updates);
+        await update(wordsRef, buildWordUpdates(wordsRef, marketPack.words));
 
         // 3. Set the final word count exactly once
         const packRef = ref(db, `users/${user.uid}/packs/${newPackId}`);
@@ -158,6 +180,33 @@ export default function LibraryPage() {
       alert("To'plamni o'rnatishda xatolik yuz berdi. Iltimos qaytadan urunib ko'ring.");
     } finally {
       setInstallingPackId(null);
+    }
+  };
+
+  // Adds only the words that are new in the market pack (since it was
+  // installed) to the user's existing copy — never touches or resets
+  // progress on words the user already has.
+  const handleUpdatePack = async (marketPack, installedPack, missingWords) => {
+    if (!user || !installedPack || missingWords.length === 0) return;
+    setUpdatingPackId(marketPack.id);
+
+    try {
+      const wordsRef = ref(db, `users/${user.uid}/words/${installedPack.id}`);
+      await update(wordsRef, buildWordUpdates(wordsRef, missingWords));
+
+      const packRef = ref(db, `users/${user.uid}/packs/${installedPack.id}`);
+      await update(packRef, {
+        wordCount: (installedPack.wordCount || 0) + missingWords.length,
+        // Backfill marketPackId for packs installed before this field existed.
+        ...(installedPack.marketPackId ? {} : { marketPackId: marketPack.id })
+      });
+
+      playSound('correct');
+    } catch (err) {
+      console.error("Failed to update market pack:", err);
+      alert("To'plamni yangilashda xatolik yuz berdi. Iltimos qaytadan urunib ko'ring.");
+    } finally {
+      setUpdatingPackId(null);
     }
   };
 
@@ -241,8 +290,12 @@ export default function LibraryPage() {
                 <div className="market-container">
                   <div className="market-grid">
                     {marketPacks.map((pack) => {
-                      const isInstalled = packs.some(p => p.name === pack.name) || justInstalledIds.includes(pack.id);
+                      const installedPack = findInstalledPack(pack);
+                      const isInstalled = !!installedPack || justInstalledIds.includes(pack.id);
                       const isInstalling = installingPackId === pack.id;
+                      const isUpdating = updatingPackId === pack.id;
+                      const missingWords = installedPack ? getMissingWords(pack, installedPack) : [];
+                      const hasUpdate = isInstalled && installedPack && missingWords.length > 0;
 
                       return (
                         <div 
@@ -266,13 +319,19 @@ export default function LibraryPage() {
                             <span className="market-card-words">
                               📊 {pack.words.length} ta so'z
                             </span>
-                            <button 
-                              className="market-install-btn"
-                              disabled={isInstalled || isInstalling}
-                              onClick={() => handleInstallPack(pack)}
+                            <button
+                              className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
+                              disabled={isInstalling || isUpdating || (isInstalled && !hasUpdate)}
+                              onClick={() => hasUpdate
+                                ? handleUpdatePack(pack, installedPack, missingWords)
+                                : handleInstallPack(pack)}
                             >
                               {isInstalling ? (
                                 <>⌛ O'rnatilmoqda...</>
+                              ) : isUpdating ? (
+                                <>⌛ Yangilanmoqda...</>
+                              ) : hasUpdate ? (
+                                <>Yangilash (+{missingWords.length}) 🔄</>
                               ) : isInstalled ? (
                                 <>O'rnatildi ✅</>
                               ) : (

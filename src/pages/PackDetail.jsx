@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePacks } from '../hooks/usePacks';
 import { useWords } from '../hooks/useWords';
 import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
 import { getIrregularVerbGroup } from '../data/irregularVerbGroups';
+import { findSourceMarketPack, getMissingMarketWords } from '../utils/marketSync';
+import { playSound } from '../utils/feedback';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
@@ -18,11 +20,13 @@ export default function PackDetail() {
   const { getPack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
   const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
-  
+
   const [pack, setPack] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
+  const [newWordsAddedCount, setNewWordsAddedCount] = useState(null);
+  const marketSyncCheckedRef = useRef(false);
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -32,6 +36,25 @@ export default function PackDetail() {
     };
     fetchPack();
   }, [packId, getPack, navigate]);
+
+  // On first visit after the Market source pack gained new words, silently
+  // add the missing ones to this installed copy (existing words/progress are
+  // never touched) and let the user know with a one-time notice.
+  useEffect(() => {
+    if (marketSyncCheckedRef.current || !pack || loading) return;
+    marketSyncCheckedRef.current = true;
+
+    const sourcePack = findSourceMarketPack(pack);
+    if (!sourcePack) return;
+
+    const missingWords = getMissingMarketWords(sourcePack, words);
+    if (missingWords.length === 0) return;
+
+    bulkAddWords(missingWords).then(() => {
+      playSound('correct');
+      setNewWordsAddedCount(missingWords.length);
+    });
+  }, [pack, words, loading, bulkAddWords]);
 
   const handleSaveWord = async (data) => {
     if (pack?.name === 'Irregular Verbs') return;
@@ -201,6 +224,23 @@ export default function PackDetail() {
           onAddWord={() => { setEditingWord(null); setShowWordForm(true); }}
           onImportJson={() => setShowBulkImportForm(true)}
         />
+      )}
+
+      {newWordsAddedCount !== null && (
+        <div className="ios-alert-overlay" onClick={() => setNewWordsAddedCount(null)}>
+          <motion.div
+            className="ios-alert-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="ios-alert-icon">✨</div>
+            <h3>Yangi so'zlar qo'shildi!</h3>
+            <p>Bu to'plamga {newWordsAddedCount} ta yangi so'z avtomatik qo'shildi.</p>
+            <button className="ios-alert-btn" onClick={() => setNewWordsAddedCount(null)}>OK</button>
+          </motion.div>
+        </div>
       )}
     </motion.div>
   );
