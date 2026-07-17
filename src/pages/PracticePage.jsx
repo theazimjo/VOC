@@ -152,8 +152,6 @@ export default function PracticePage() {
     }
   }, [step, practiceWords]);
 
-  const sources = sourceType === 'books' ? books : packs;
-
   const handleSelectSource = async (source) => {
     setSelectedSource(source);
     if (!user) return;

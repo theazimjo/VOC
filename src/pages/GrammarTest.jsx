@@ -211,18 +211,21 @@ export default function GrammarTest() {
   useEffect(() => {
     if (stage === 'testing') {
       timerRef.current = setInterval(() => {
-        setTimeLeft((prev) => {
-          if (prev <= 1) {
-            clearInterval(timerRef.current);
-            handleSubmitTestRef.current(true);
-            return 0;
-          }
-          return prev - 1;
-        });
+        setTimeLeft((prev) => Math.max(0, prev - 1));
       }, 1000);
     }
     return () => clearInterval(timerRef.current);
   }, [stage]);
+
+  // Auto-submit on timeout. Kept out of the setTimeLeft updater: updaters must
+  // stay pure — StrictMode double-invokes them, which would submit the attempt
+  // twice (duplicate Firebase attempt + duplicate admin pending entry).
+  useEffect(() => {
+    if (stage === 'testing' && timeLeft === 0) {
+      clearInterval(timerRef.current);
+      handleSubmitTestRef.current(true);
+    }
+  }, [stage, timeLeft]);
 
   const formatTime = (secs) => {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
@@ -1674,7 +1677,7 @@ ${exampleGrades}
               <div className="res-metric-card">
                 <span className="lbl">Natija reytingi</span>
                 <div className={`rating-indicator-text ${rating.className}`}>
-                  {statsObj.percent >= 70 ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle size={16} /> Muvaffaqiyatli!</span> : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Ko\'proq takrorlang!</span>}
+                  {statsObj.percent >= 70 ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle size={16} /> Muvaffaqiyatli!</span> : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Ko'proq takrorlang!</span>}
                 </div>
                 <p className="desc-meta">Intermediate saviyasidagi natija darajasi.</p>
               </div>

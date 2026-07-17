@@ -235,21 +235,8 @@ export default function GrammarTopic() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentQ]);
 
-  if (!topic) {
-    return (
-      <div className="grammar-topic-error">
-        <div className="error-icon">🔍</div>
-        <h2>Mavzu topilmadi</h2>
-        <p>Kechirasiz, bu mavzu hali mavjud emas.</p>
-        <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
-          ← Grammatikaga qaytish
-        </button>
-      </div>
-    );
-  }
-
   const questions = useMemo(() => {
-    return getQuestionsForExercise(topic, exerciseId);
+    return topic ? getQuestionsForExercise(topic, exerciseId) : [];
   }, [topic, exerciseId, sessionKey]);
 
   const totalQ = questions.length;
@@ -279,6 +266,22 @@ export default function GrammarTopic() {
         .catch((err) => console.error("Error saving grammar result:", err));
     }
   }, [finished, level, topicId, topic, score, totalQ, saveGrammarResult, exerciseId]);
+
+  // Early return must come AFTER all hooks — a params change from a valid
+  // topic to a missing one would otherwise change the hook count between
+  // renders and crash React.
+  if (!topic) {
+    return (
+      <div className="grammar-topic-error">
+        <div className="error-icon">🔍</div>
+        <h2>Mavzu topilmadi</h2>
+        <p>Kechirasiz, bu mavzu hali mavjud emas.</p>
+        <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
+          ← Grammatikaga qaytish
+        </button>
+      </div>
+    );
+  }
 
   const handleSelect = (idx) => {
     if (answered) return;

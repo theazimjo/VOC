@@ -107,11 +107,17 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     setStudyRevealed(false);
   }, [studyIndex]);
 
-  // Setup current practice question
-  useEffect(() => {
-    if (subStep !== 'practice' || sessionVerbs.length === 0 || currentIndex >= sessionVerbs.length) return;
+  const currentVerb = sessionVerbs[currentIndex];
 
-    const verb = sessionVerbs[currentIndex];
+  // Setup current practice question. Depends on the current verb's identity,
+  // NOT the sessionVerbs array — processResult re-queues a missed verb by
+  // splicing a copy into sessionVerbs, and re-running this effect on that
+  // array change would instantly wipe the just-revealed answer (checked=false)
+  // and re-randomize the current question.
+  useEffect(() => {
+    if (subStep !== 'practice' || !currentVerb) return;
+
+    const verb = currentVerb;
     setChecked(false);
 
     // Randomize question type: 0 (Table fill), 1 (Shuffled order), 2 (Sentence context choice)
@@ -160,7 +166,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       setSentenceQuestion(parsedSentence);
       setSelectedChoice(null);
     }
-  }, [subStep, sessionVerbs, currentIndex]);
+  }, [subStep, currentVerb, currentIndex]);
 
   // Helper: Sentence parser
   const parseSentenceQuestion = (verb) => {
@@ -354,8 +360,6 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       setCurrentIndex(prev => prev + 1);
     }
   };
-
-  const currentVerb = sessionVerbs[currentIndex];
 
   return (
     <div className="practice-card-container irregular-trainer-container">
