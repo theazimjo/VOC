@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { getMasteryLevel } from '../utils/spacedRepetition';
-import { computeRecallProbability } from '../experiment/memoryEngine';
+import { computeRecallProbability } from '../utils/memoryEngine';
 import OnboardingModal from '../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../components/Onboarding/WhatsNewModal';
 import './Dashboard.css';

@@ -31,7 +31,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SkipForward, PenLine, Eye } from 'lucide-react';
-import { inferConfidenceFromSpeed, getRecommendedRetrievalType } from '../memoryEngine';
+import { inferConfidenceFromSpeed, getRecommendedRetrievalType } from '../../utils/memoryEngine';
 import { similarityRatio } from '../textSimilarity';
 
 const AUTO_CORRECT_THRESHOLD = 0.82;

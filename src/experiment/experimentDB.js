@@ -18,7 +18,7 @@
 import { ref, update, get, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { applyReview } from '../utils/spacedRepetition';
-import { computeRecallProbability } from './memoryEngine';
+import { computeRecallProbability } from '../utils/memoryEngine';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

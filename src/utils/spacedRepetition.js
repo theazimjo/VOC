@@ -1,6 +1,6 @@
 /**
  * Spaced repetition — powered by the Individual Memory Dynamics Engine
- * (see src/experiment/memoryEngine.js): P(t) = e^(−t/S), a per-user,
+ * (see src/utils/memoryEngine.js): P(t) = e^(−t/S), a per-user,
  * per-word forgetting curve, instead of SM-2's fixed ease-factor formula.
  *
  * This used to be gated behind the "Memory Lab" experiment; it is now the
@@ -25,7 +25,7 @@ import {
   updateStability,
   getOptimalReviewDate,
   computeInitialStability,
-} from '../experiment/memoryEngine';
+} from './memoryEngine';
 
 function stabilityToMastery(stability) {
   const pct = 100 * (1 - Math.exp(-Math.max(0, stability) / 12));

@@ -8,7 +8,7 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle } from 'lucide-react';
-import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision } from '../memoryEngine';
+import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision } from '../../utils/memoryEngine';
 import { classifyWord } from '../semanticClassifier';
 
 // ─── Forgetting Curve SVG ─────────────────────────────────────────────────────

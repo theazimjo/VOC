@@ -15,7 +15,7 @@ import {
   recordConfusionPair,
   getConfusionPairs,
 } from './experimentDB';
-import { computeRecallProbability, computeClusterCalibration, estimateDifficulty } from './memoryEngine';
+import { computeRecallProbability, computeClusterCalibration, estimateDifficulty } from '../utils/memoryEngine';
 import { classifyWord } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
