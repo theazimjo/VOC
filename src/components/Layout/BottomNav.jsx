@@ -4,11 +4,11 @@ import './BottomNav.css';
 
 export default function BottomNav() {
   const navItems = [
-    { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
-    { to: '/library',  icon: BookOpen,        label: 'Kutubxona' },
-    { to: '/grammar',  icon: GraduationCap,   label: 'Grammatika' },
-    { to: '/experiment', icon: FlaskConical,   label: 'Memory Lab' },
-    { to: '/grammar-test', icon: Trophy,       label: 'Imtihon' },
+    { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/library', icon: BookOpen, label: 'Kutubxona' },
+    { to: '/grammar', icon: GraduationCap, label: 'Grammatika' },
+    { to: '/experiment', icon: FlaskConical, label: 'Memory Lab' },
+    // { to: '/grammar-test', icon: Trophy,       label: 'Imtihon' },
   ];
 
   return (
