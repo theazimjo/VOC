@@ -51,13 +51,8 @@ const RETRIEVAL_TYPE_BONUS = { active_recall: 0.15, passive_recall: 0 };
 const CALIBRATION_MIN = 0.7;
 const CALIBRATION_MAX = 1.4;
 
-/** Bounds for the population-level word-difficulty adjustment (see computeGlobalDifficultyAdjustment). */
-const GLOBAL_ADJUST_MIN = 0.7;
-const GLOBAL_ADJUST_MAX = 1.3;
-
-/** Minimum sample size before a calibration/adjustment is trusted over the neutral default. */
+/** Minimum sample size before a calibration is trusted over the neutral default. */
 const MIN_CALIBRATION_SAMPLES = 8;
-const MIN_GLOBAL_SAMPLES = 10;
 
 /** A word must have been seen at least this many times before active recall is even offered — you cannot retrieve a trace that was never formed. */
 const AUTO_TYPED_MIN_REVIEWS = 1;
@@ -238,23 +233,6 @@ export function getRecommendedRetrievalType(memory) {
 }
 
 /**
- * Convert aggregate cross-user statistics for a specific word into an
- * initial-stability adjustment multiplier. Solves the cold-start problem:
- * a brand-new word for THIS user can still start from a smarter S₀ if the
- * rest of the population has already shown it's intrinsically easy/hard.
- *
- * @param {{totalReviews:number, totalCorrect:number}|null} globalStats
- * @returns {number} multiplier in [GLOBAL_ADJUST_MIN, GLOBAL_ADJUST_MAX], 1.0 = not enough population data yet
- */
-export function computeGlobalDifficultyAdjustment(globalStats) {
-  if (!globalStats || (globalStats.totalReviews || 0) < MIN_GLOBAL_SAMPLES) return 1.0;
-  const accuracy = globalStats.totalCorrect / globalStats.totalReviews;
-  // accuracy 0 → 0.7 (hard word, smaller S0), accuracy 1 → 1.3 (easy word, bigger S0)
-  const adj = 0.7 + accuracy * 0.6;
-  return Math.round(Math.max(GLOBAL_ADJUST_MIN, Math.min(GLOBAL_ADJUST_MAX, adj)) * 100) / 100;
-}
-
-/**
  * Calculate the optimal next review date.
  *
  * Solves: P(t) = TARGET_RECALL → t = −S × ln(TARGET_RECALL)
@@ -315,28 +293,6 @@ export function estimateDifficulty(history) {
 export function isDue(nextOptimalReview) {
   if (!nextOptimalReview) return true;
   return new Date(nextOptimalReview) <= new Date();
-}
-
-/**
- * Initialize fresh memory state for a new word entry with optional category
- * context and population-level difficulty context.
- *
- * @param {number} [categoryMastery=0]
- * @param {number} [globalAdjustment=1.0] - output of computeGlobalDifficultyAdjustment
- * @returns {Object}
- */
-export function initWordMemory(categoryMastery = 0, globalAdjustment = 1.0) {
-  const initialS = computeInitialStability(categoryMastery, globalAdjustment);
-  return {
-    stability: initialS,
-    difficulty: Math.max(0.1, 0.5 - categoryMastery * 0.3),
-    totalReviews: 0,
-    lastReview: null,
-    nextOptimalReview: null, // null = never reviewed → due immediately
-    recallHistory: [],
-    contextBoost: Math.round(categoryMastery * 100),
-    globalAdjustment: Math.round((globalAdjustment || 1.0) * 100) / 100,
-  };
 }
 
 /**

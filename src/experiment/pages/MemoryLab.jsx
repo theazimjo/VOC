@@ -314,12 +314,11 @@ function LabTab({ dueWords, allWords, memoryMap, onStart, loading }) {
         </div>
       )}
 
-      {/* All enrolled words count */}
+      {/* Total tracked words */}
       {allWords.length > 0 && (
         <div className="mem-enrolled-info">
           <Award size={14} />
-          Jami <strong>{Object.keys(memoryMap).length}</strong> ta so'z tajribaga kiritilgan
-          ({allWords.length} ta lug'atda)
+          Lug'atingizda jami <strong>{allWords.length}</strong> ta so'z
         </div>
       )}
     </div>

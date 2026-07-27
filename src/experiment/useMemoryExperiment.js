@@ -1,161 +1,137 @@
 /**
  * 🪝 useMemoryExperiment — React Hook
  *
- * Manages the full experiment lifecycle:
- *   - Loads user's packs and aggregates all words
- *   - Fetches which words are due for review
- *   - Handles session flow (start → review → save → next)
- *   - Exposes stats and per-word memory data
+ * Manages the full experiment lifecycle. Word data and progress come from
+ * usePacks() — the same live source Dashboard/PackDetail/StatsPage read —
+ * so a Memory Lab session updates the exact same word record the rest of
+ * the app displays, instead of a shadow copy nobody else sees.
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { ref, get } from 'firebase/database';
-import { db } from '../firebase';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { usePacks } from '../hooks/usePacks';
 import {
-  getWordsDueForReview,
-  getAllWordMemories,
   saveReviewEvent,
-  enrollWords,
-  getExperimentStats,
   recordConfusionPair,
   getConfusionPairs,
 } from './experimentDB';
-import { computeRecallProbability, computeClusterCalibration } from './memoryEngine';
+import { computeRecallProbability, computeClusterCalibration, estimateDifficulty } from './memoryEngine';
 import { classifyWord } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
 
 export function useMemoryExperiment() {
   const { user } = useAuth();
+  const { allWords: packWords, allWordsLoading } = usePacks();
 
-  // ── State ──────────────────────────────────────────────────────
-  const [allWords, setAllWords] = useState([]);          // flat list of {id, word, translation, packId, packName}
-  const [dueWords, setDueWords] = useState([]);          // words due for review
-  const [memoryMap, setMemoryMap] = useState({});        // wordId → memory state
-  const [stats, setStats] = useState(null);
-  const [confusionPairs, setConfusionPairs] = useState([]); // detected confusion pairs, most frequent first
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [confusionPairs, setConfusionPairs] = useState([]);
+  const [confusionLoading, setConfusionLoading] = useState(true);
 
   // ── Session state ──────────────────────────────────────────────
   const [session, setSession] = useState(null);          // null | { queue, index, results }
-  const sessionTimerRef = useRef(null);
 
-  // ── Load all data ──────────────────────────────────────────────
-  const loadData = useCallback(async () => {
-    if (!user) return;
-    setLoading(true);
-    setError(null);
-    try {
-      // 1. Fetch all packs for metadata lookup
-      const packsSnap = await get(ref(db, `users/${user.uid}/packs`));
-      const packById = {};
-      if (packsSnap.exists()) {
-        packsSnap.forEach(s => { packById[s.key] = s.val(); });
-      }
-
-      // 2. Fetch all words across all packs/schemas in users/{uid}/words
-      const allWordsSnap = await get(ref(db, `users/${user.uid}/words`));
-      const flat = [];
-      if (allWordsSnap.exists()) {
-        allWordsSnap.forEach(snap => {
-          const key = snap.key;
-          const val = snap.val();
-          if (val && typeof val === 'object') {
-            if (val.word && val.translation) {
-              // Direct single word entry
-              flat.push({
-                id: key,
-                packId: val.packId || 'default',
-                packName: packById[val.packId]?.name || 'Kutubxona',
-                ...val,
-              });
-            } else {
-              // Pack folder containing word entries
-              const pack = packById[key];
-              Object.entries(val).forEach(([wId, wVal]) => {
-                if (wVal && typeof wVal === 'object' && wVal.word) {
-                  flat.push({
-                    id: wId,
-                    packId: key,
-                    packName: pack?.name || pack?.title || 'Kutubxona',
-                    ...wVal,
-                  });
-                }
-              });
-            }
-          }
-        });
-      }
-      setAllWords(flat);
-
-      // 3. Enroll any new words into the experiment
-      if (flat.length > 0) {
-        await enrollWords(user.uid, flat);
-      }
-
-      // 4. Load memory states, stats, and detected confusion pairs
-      const [memories, s, pairs] = await Promise.all([
-        getAllWordMemories(user.uid),
-        getExperimentStats(user.uid),
-        getConfusionPairs(user.uid),
-      ]);
-      setConfusionPairs(pairs);
-
-      // Build memoryMap: wordId → memory state enriched with word data
-      const map = {};
-      const wordLookup = {};
-      flat.forEach(w => { wordLookup[w.id] = w; });
-
-      memories.forEach(m => {
-        map[m.wordId] = {
-          ...m,
-          wordData: wordLookup[m.wordId] || null,
-        };
-      });
-      setMemoryMap(map);
-
-      // 5. Build prioritized queue of ALL enrolled words
-      // Sorting criteria (Individual Memory Dynamics):
-      //   1. Unreviewed words first (never reviewed)
-      //   2. Words past their optimal review date (isDue)
-      //   3. Lowest recall probability P(t) = e^(-t/S) first
-      const now = Date.now();
-      const enrolledQueue = Object.values(map)
-        .filter(m => m.wordData !== null)
-        .sort((a, b) => {
-          // Never reviewed words go to top
-          if (!a.lastReview && b.lastReview) return -1;
-          if (a.lastReview && !b.lastReview) return 1;
-
-          // Due words go next
-          const aDue = !a.nextOptimalReview || new Date(a.nextOptimalReview) <= now;
-          const bDue = !b.nextOptimalReview || new Date(b.nextOptimalReview) <= now;
-          if (aDue && !bDue) return -1;
-          if (!aDue && bDue) return 1;
-
-          // Probability P(t) = e^(-t/S) ascending (most forgotten first)
-          const daysSinceA = a.lastReview ? (now - new Date(a.lastReview).getTime()) / 86400000 : 999;
-          const daysSinceB = b.lastReview ? (now - new Date(b.lastReview).getTime()) / 86400000 : 999;
-          const pA = Math.exp(-daysSinceA / (a.stability || 1));
-          const pB = Math.exp(-daysSinceB / (b.stability || 1));
-          return pA - pB;
-        });
-
-      setDueWords(enrolledQueue);
-      setStats(s);
-    } catch (err) {
-      console.error('[MemoryExperiment] loadData error:', err);
-      setError(err.message || 'Ma\'lumotlarni yuklashda xatolik');
-    } finally {
-      setLoading(false);
+  // ── Confusion pairs (Memory-Lab-only metadata, not part of any word record) ──
+  useEffect(() => {
+    if (!user) {
+      setConfusionPairs([]);
+      setConfusionLoading(false);
+      return;
     }
+    let cancelled = false;
+    setConfusionLoading(true);
+    getConfusionPairs(user.uid).then((pairs) => {
+      if (!cancelled) {
+        setConfusionPairs(pairs);
+        setConfusionLoading(false);
+      }
+    });
+    return () => { cancelled = true; };
   }, [user]);
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
+  // ── Build memory map from the real, shared word records ─────────
+  // Includes both canonical field names (reviewCount/lastReviewed/nextReview)
+  // and the legacy experiment names (totalReviews/lastReview/nextOptimalReview)
+  // as aliases, since memoryEngine.js's generic helpers and the Lab/Insights
+  // UI were written against the latter.
+  const memoryMap = useMemo(() => {
+    const map = {};
+    packWords.forEach((w) => {
+      const recallHistory = w.recallHistory || [];
+      const reviewCount = w.reviewCount || 0;
+      const lastReviewed = w.lastReviewed || null;
+      const nextReview = w.nextReview || null;
+
+      map[w.id] = {
+        wordId: w.id,
+        packId: w.packId,
+        stability: typeof w.stability === 'number' ? w.stability : 1.0,
+        mastery: w.mastery || 0,
+        interval: w.interval || 0,
+        reviewCount,
+        totalReviews: reviewCount,
+        lastReviewed,
+        lastReview: lastReviewed,
+        nextReview,
+        nextOptimalReview: nextReview,
+        recallHistory,
+        difficulty: estimateDifficulty(recallHistory),
+        wordData: { word: w.word, translation: w.translation, packName: w.source },
+      };
+    });
+    return map;
+  }, [packWords]);
+
+  const allWords = useMemo(
+    () => packWords.map((w) => ({
+      id: w.id, word: w.word, translation: w.translation, packId: w.packId, packName: w.source,
+    })),
+    [packWords]
+  );
+
+  // ── Prioritized queue of ALL words (Individual Memory Dynamics) ─
+  // Sorting criteria:
+  //   1. Unreviewed words first (never reviewed)
+  //   2. Words past their optimal review date (isDue)
+  //   3. Lowest recall probability P(t) = e^(-t/S) first
+  const dueWords = useMemo(() => {
+    const now = Date.now();
+    return Object.values(memoryMap).sort((a, b) => {
+      if (!a.lastReviewed && b.lastReviewed) return -1;
+      if (a.lastReviewed && !b.lastReviewed) return 1;
+
+      const aDue = !a.nextReview || new Date(a.nextReview) <= now;
+      const bDue = !b.nextReview || new Date(b.nextReview) <= now;
+      if (aDue && !bDue) return -1;
+      if (!aDue && bDue) return 1;
+
+      const daysSinceA = a.lastReviewed ? (now - new Date(a.lastReviewed).getTime()) / 86400000 : 999;
+      const daysSinceB = b.lastReviewed ? (now - new Date(b.lastReviewed).getTime()) / 86400000 : 999;
+      const pA = Math.exp(-daysSinceA / (a.stability || 1));
+      const pB = Math.exp(-daysSinceB / (b.stability || 1));
+      return pA - pB;
+    });
+  }, [memoryMap]);
+
+  const stats = useMemo(() => {
+    const all = Object.values(memoryMap);
+    if (all.length === 0) {
+      return { totalWords: 0, dueCount: 0, avgStability: 0, avgDifficulty: 0, totalReviews: 0 };
+    }
+    const now = Date.now();
+    const due = all.filter((w) => !w.nextReview || new Date(w.nextReview) <= now);
+    const avgStability = all.reduce((s, w) => s + (w.stability || 1), 0) / all.length;
+    const avgDifficulty = all.reduce((s, w) => s + (w.difficulty || 0.5), 0) / all.length;
+    const totalReviews = all.reduce((s, w) => s + (w.reviewCount || 0), 0);
+    return {
+      totalWords: all.length,
+      dueCount: due.length,
+      avgStability: Math.round(avgStability * 10) / 10,
+      avgDifficulty: Math.round(avgDifficulty * 100) / 100,
+      totalReviews,
+    };
+  }, [memoryMap]);
+
+  const loading = allWordsLoading || confusionLoading;
 
   // ── Session management ─────────────────────────────────────────
 
@@ -164,7 +140,7 @@ export function useMemoryExperiment() {
    * If `words` is omitted, uses the full due list.
    */
   const startSession = useCallback((words = null) => {
-    const queue = (words || dueWords).filter(w => w.wordData);
+    const queue = (words || dueWords).filter((w) => w.wordData);
     if (queue.length === 0) return;
 
     setSession({
@@ -189,21 +165,22 @@ export function useMemoryExperiment() {
 
     const current = session.queue[session.index];
     const wordId = current.wordId;
+    const packId = current.packId;
     const wordData = current.wordData;
 
     // Self-calibrate this word's semantic cluster: compare this user's past
     // predicted-vs-actual outcomes for the cluster to nudge growth up/down.
     const { key: clusterKey } = classifyWord(wordData?.word, wordData?.translation, wordData?.packName);
     const clusterHistory = [];
-    Object.values(memoryMap).forEach(m => {
+    Object.values(memoryMap).forEach((m) => {
       if (!m.wordData) return;
       const mKey = classifyWord(m.wordData.word, m.wordData.translation, m.wordData.packName).key;
       if (mKey === clusterKey) clusterHistory.push(...(m.recallHistory || []));
     });
     const clusterMultiplier = computeClusterCalibration(clusterHistory);
 
-    // Save to Firebase
-    const updatedMemory = await saveReviewEvent(user.uid, wordId, {
+    // Save directly onto the real word record
+    const updatedMemory = await saveReviewEvent(user.uid, packId, wordId, current, {
       isCorrect,
       confidence,
       responseTime,
@@ -212,16 +189,10 @@ export function useMemoryExperiment() {
       wordText: wordData?.word,
     });
 
-    // Update local memory map
-    setMemoryMap(prev => ({
-      ...prev,
-      [wordId]: { ...updatedMemory, wordData: current.wordData },
-    }));
-
     const result = {
       wordId,
-      word: current.wordData?.word,
-      translation: current.wordData?.translation,
+      word: wordData?.word,
+      translation: wordData?.translation,
       isCorrect,
       confidence,
       responseTime,
@@ -232,16 +203,10 @@ export function useMemoryExperiment() {
     const nextIndex = session.index + 1;
     const done = nextIndex >= session.queue.length;
 
-    if (done) {
-      setSession(prev => ({ ...prev, results: newResults, index: nextIndex, finished: true }));
-      // Refresh stats
-      getExperimentStats(user.uid).then(setStats);
-    } else {
-      setSession(prev => ({ ...prev, results: newResults, index: nextIndex }));
-    }
+    setSession((prev) => ({ ...prev, results: newResults, index: nextIndex, finished: done }));
 
     return { done, updatedMemory };
-  }, [session, user]);
+  }, [session, user, memoryMap]);
 
   /**
    * Skip the current word (no review recorded).
@@ -250,14 +215,13 @@ export function useMemoryExperiment() {
     if (!session) return;
     const nextIndex = session.index + 1;
     const done = nextIndex >= session.queue.length;
-    setSession(prev => ({ ...prev, index: nextIndex, finished: done }));
+    setSession((prev) => ({ ...prev, index: nextIndex, finished: done }));
   }, [session]);
 
   /** End the session and return to the lab. */
   const endSession = useCallback(() => {
     setSession(null);
-    loadData(); // refresh
-  }, [loadData]);
+  }, []);
 
   /**
    * Report that the user typed an answer close to a *different* word's
@@ -278,8 +242,8 @@ export function useMemoryExperiment() {
   // ── Convenience: recall probability for a word right now ───────
   const getRecallNow = useCallback((wordId) => {
     const mem = memoryMap[wordId];
-    if (!mem || !mem.lastReview) return null;
-    const daysSince = (Date.now() - new Date(mem.lastReview).getTime()) / (86400 * 1000);
+    if (!mem || !mem.lastReviewed) return null;
+    const daysSince = (Date.now() - new Date(mem.lastReviewed).getTime()) / (86400 * 1000);
     return computeRecallProbability(mem.stability, daysSince);
   }, [memoryMap]);
 
@@ -291,7 +255,7 @@ export function useMemoryExperiment() {
     stats,
     confusionPairs,
     loading,
-    error,
+    error: null,
     // Session
     session,
     currentSessionWord,
@@ -302,6 +266,6 @@ export function useMemoryExperiment() {
     // Helpers
     getRecallNow,
     reportConfusion,
-    refresh: loadData,
+    refresh: () => {},
   };
 }

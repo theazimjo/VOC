@@ -3,8 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-// Register Service Worker for offline PWA support
-if ('serviceWorker' in navigator) {
+// Register Service Worker for offline PWA support — production only. In dev,
+// the SW's cache-first strategy for .js files fights Vite's HMR: a stale
+// cached chunk served alongside a freshly recompiled one can load two copies
+// of React, which surfaces as "Invalid hook call" errors that have nothing
+// to do with the component actually reporting them. If a SW from an earlier
+// `npm run dev` session is still controlling this page, unregister it so
+// dev mode self-heals without the user having to clear storage by hand.
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     // updateViaCache: 'none' tells the browser to never serve sw.js (or its
     // imports) from the HTTP cache — without this, browsers only re-check
@@ -20,12 +26,11 @@ if ('serviceWorker' in navigator) {
           if (installingWorker == null) return;
 
           installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed') {
-              if (navigator.serviceWorker.controller) {
-                // New update is ready, force reload immediately to apply changes
-                console.log('[Service Worker] New update found and active! Reloading...');
-                window.location.reload();
-              }
+            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // New update installed. sw.js calls skipWaiting()/clients.claim(),
+              // so this will shortly trigger 'controllerchange' below, which
+              // does the actual reload — don't reload here too, or we double-fire.
+              console.log('[Service Worker] New update installed, activating...');
             }
           };
         };
@@ -53,6 +58,13 @@ if ('serviceWorker' in navigator) {
       window.location.reload();
     }
   });
+} else if ('serviceWorker' in navigator && import.meta.env.DEV) {
+  navigator.serviceWorker.getRegistrations().then((regs) => {
+    regs.forEach((reg) => reg.unregister());
+  });
+  if ('caches' in window) {
+    caches.keys().then((keys) => keys.forEach((key) => caches.delete(key)));
+  }
 }
 
 createRoot(document.getElementById('root')).render(

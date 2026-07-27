@@ -5,7 +5,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
-  getRedirectResult,
   signOut,
   updateProfile
 } from 'firebase/auth';

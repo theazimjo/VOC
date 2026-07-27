@@ -11,11 +11,14 @@ export default defineConfig({
     },
   },
   build: {
-    // grammarData.js is a legitimate ~565kB content chunk (grammar topics/
+    // grammarData.js is a legitimate ~980kB content chunk (grammar topics/
     // exercises), lazy-loaded only on grammar routes — not on the critical
     // path for Dashboard/Library/Practice/Stats. Raised so the build stops
-    // warning about a chunk that's already correctly isolated.
-    chunkSizeWarningLimit: 600,
+    // warning about a chunk that's already correctly isolated. Re-check this
+    // number occasionally — if grammarData.js keeps growing, splitting it
+    // into per-topic dynamic imports (instead of one static object) would
+    // cut real payload size, not just silence the warning.
+    chunkSizeWarningLimit: 1050,
     rollupOptions: {
       output: {
         manualChunks(id) {

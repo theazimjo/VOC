@@ -44,18 +44,27 @@ function hadOvernightGap(fromISO, toDate) {
 }
 
 /**
- * @param {number} quality - 0..5 (>=3 counts as a correct recall)
+ * Core review-application shared by every practice mode in the app
+ * (games, Memory Lab). Takes correctness/confidence as independent inputs
+ * — the fidelity the underlying engine already supports — rather than
+ * collapsing them into a single 0..5 quality score.
+ *
  * @param {Object} word - the word's current progress record
- * @param {Object} [options]
- * @param {'active_recall'|'passive_recall'} [options.retrievalType='passive_recall']
+ * @param {Object} options
+ * @param {boolean} options.isCorrect
+ * @param {number} [options.confidence=3] - 1..5
  * @param {number} [options.responseTimeSec=4]
+ * @param {'active_recall'|'passive_recall'} [options.retrievalType='passive_recall']
+ * @param {number} [options.clusterMultiplier=1.0] - see computeClusterCalibration
  */
-export function calculateNextReview(quality, word = {}, options = {}) {
-  const { retrievalType = 'passive_recall', responseTimeSec = 4 } = options;
-
-  quality = Math.max(0, Math.min(5, Math.round(quality)));
-  const isCorrect = quality >= 3;
-  const confidence = Math.max(1, Math.min(5, quality || 1));
+export function applyReview(word = {}, options = {}) {
+  const {
+    isCorrect,
+    confidence = 3,
+    responseTimeSec = 4,
+    retrievalType = 'passive_recall',
+    clusterMultiplier = 1.0,
+  } = options;
 
   const revCount = word.reviewCount ?? 0;
   const lastRev = word.lastReviewed ?? null;
@@ -70,8 +79,10 @@ export function calculateNextReview(quality, word = {}, options = {}) {
   const newStability = updateStability(seedStability, isCorrect, confidence, responseTimeSec, daysSince, {
     hadOvernightGap: overnight,
     retrievalType: retrievalType === 'active_recall' ? 'active_recall' : 'passive_recall',
-    clusterMultiplier: 1.0,
+    clusterMultiplier,
   });
+
+  const clampedConfidence = Math.max(1, Math.min(5, Math.round(confidence) || 1));
 
   return {
     interval: Math.round(newStability * 10) / 10,
@@ -79,9 +90,26 @@ export function calculateNextReview(quality, word = {}, options = {}) {
     reviewCount: revCount + 1,
     mastery: stabilityToMastery(newStability),
     lastReviewed: now.toISOString(),
-    quality,
+    quality: isCorrect ? clampedConfidence : Math.min(2, clampedConfidence - 1),
     stability: newStability,
   };
+}
+
+/**
+ * @param {number} quality - 0..5 (>=3 counts as a correct recall)
+ * @param {Object} word - the word's current progress record
+ * @param {Object} [options]
+ * @param {'active_recall'|'passive_recall'} [options.retrievalType='passive_recall']
+ * @param {number} [options.responseTimeSec=4]
+ */
+export function calculateNextReview(quality, word = {}, options = {}) {
+  const { retrievalType = 'passive_recall', responseTimeSec = 4 } = options;
+
+  quality = Math.max(0, Math.min(5, Math.round(quality)));
+  const isCorrect = quality >= 3;
+  const confidence = Math.max(1, Math.min(5, quality || 1));
+
+  return applyReview(word, { isCorrect, confidence, responseTimeSec, retrievalType });
 }
 
 /**

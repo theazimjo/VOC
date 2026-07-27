@@ -123,7 +123,6 @@ function WordInsightCard({ memory }) {
   const due = isDue(nextOptimalReview);
   const checkpoints = getForgettingCurvePoints(stability);
   const explanation = explainSchedulingDecision(stability, lastReview, nextOptimalReview);
-  const globalAdjustment = Number(memory.globalAdjustment) || 1.0;
 
   const daysSinceLast = lastReview
     ? Math.round((Date.now() - new Date(lastReview).getTime()) / (86400 * 1000))
@@ -150,14 +149,6 @@ function WordInsightCard({ memory }) {
             {health.icon} {health.label}
           </span>
           {due && <span className="mem-due-badge">Bugun takrorlash</span>}
-          {globalAdjustment !== 1.0 && (
-            <span
-              className="mem-global-badge"
-              title="Boshlang'ich barqarorlik boshqa foydalanuvchilarning shu so'z bo'yicha jamoaviy natijasidan moslashtirilgan"
-            >
-              🌍 {globalAdjustment > 1 ? 'Jamiyat: oson so\'z' : 'Jamiyat: qiyin so\'z'}
-            </span>
-          )}
           <span className="mem-expand-arrow" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
         </div>
       </div>
