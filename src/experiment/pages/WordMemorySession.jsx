@@ -10,17 +10,10 @@
  *   6. Next word
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, SkipForward, RotateCcw } from 'lucide-react';
-
-const CONFIDENCE_OPTIONS = [
-  { value: 1, emoji: '😫', label: 'Juda qiyin' },
-  { value: 2, emoji: '😕', label: 'Qiyin' },
-  { value: 3, emoji: '😐', label: "O'rtacha" },
-  { value: 4, emoji: '🙂', label: 'Oson' },
-  { value: 5, emoji: '😎', label: 'Juda oson' },
-];
+import { SkipForward } from 'lucide-react';
+import { inferConfidenceFromSpeed } from '../memoryEngine';
 
 // ─── Subcomponents ────────────────────────────────────────────────────────────
 
@@ -54,9 +47,8 @@ function Timer({ isRunning }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function WordMemorySession({ session, onSubmit, onSkip, onEnd }) {
-  const [phase, setPhase] = useState('show');   // 'show' | 'revealed' | 'rate'
+  const [phase, setPhase] = useState('show');   // 'show' | 'revealed'
   const [responseTime, setResponseTime] = useState(0);
-  const [isCorrect, setIsCorrect] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
   const timerStart = useRef(Date.now());
@@ -66,7 +58,6 @@ export default function WordMemorySession({ session, onSubmit, onSkip, onEnd }) 
   useEffect(() => {
     setPhase('show');
     setResponseTime(0);
-    setIsCorrect(null);
     timerStart.current = Date.now();
   }, [wordIndex]);
 
@@ -81,20 +72,15 @@ export default function WordMemorySession({ session, onSubmit, onSkip, onEnd }) 
     setPhase('revealed');
   };
 
-  const handleJudgement = (correct) => {
-    setIsCorrect(correct);
-    setPhase('rate');
-  };
-
-  const handleConfidence = async (conf) => {
+  const handleJudgement = async (correct) => {
     if (submitting) return;
     setSubmitting(true);
-    await onSubmit(isCorrect, conf, responseTime);
+    const conf = inferConfidenceFromSpeed(responseTime, correct);
+    await onSubmit(correct, conf, responseTime);
     setSubmitting(false);
   };
 
   const progress = session ? (session.index / session.queue.length) * 100 : 0;
-  const remaining = session ? session.queue.length - session.index : 0;
 
   return (
     <div className="mem-session">
@@ -145,7 +131,7 @@ export default function WordMemorySession({ session, onSubmit, onSkip, onEnd }) 
             </div>
           )}
 
-          {/* PHASE: revealed — show translation + ask correct/wrong */}
+          {/* PHASE: revealed — show translation + 1-Click judgement */}
           {phase === 'revealed' && (
             <div className="mem-card">
               <div className="mem-card-label">Javobingiz to'g'ri edimi?</div>
@@ -164,44 +150,18 @@ export default function WordMemorySession({ session, onSubmit, onSkip, onEnd }) 
               <div className="mem-judgement-btns">
                 <button
                   className="mem-btn-wrong"
+                  disabled={submitting}
                   onClick={() => handleJudgement(false)}
                 >
                   ✗ Bilmadim
                 </button>
                 <button
                   className="mem-btn-correct"
+                  disabled={submitting}
                   onClick={() => handleJudgement(true)}
                 >
                   ✓ Bildim
                 </button>
-              </div>
-            </div>
-          )}
-
-          {/* PHASE: rate — confidence self-rating */}
-          {phase === 'rate' && (
-            <div className="mem-card">
-              <div className="mem-card-label">
-                {isCorrect
-                  ? '✅ To\'g\'ri! Bu so\'z qanchalik oson edi?'
-                  : '❌ Xato. Bu so\'z qanchalik qiyin edi?'}
-              </div>
-              <div className="mem-word-display">{word}</div>
-              <div className="mem-confidence-grid">
-                {CONFIDENCE_OPTIONS.map(opt => (
-                  <motion.button
-                    key={opt.value}
-                    className="mem-conf-btn"
-                    onClick={() => handleConfidence(opt.value)}
-                    disabled={submitting}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span className="mem-conf-emoji">{opt.emoji}</span>
-                    <span className="mem-conf-label">{opt.value}</span>
-                    <span className="mem-conf-text">{opt.label}</span>
-                  </motion.button>
-                ))}
               </div>
             </div>
           )}

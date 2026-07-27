@@ -32,6 +32,21 @@ const FAST_RESPONSE_SEC = 2.5;
 /** Slow response threshold (seconds) — reduces confidence bonus */
 const SLOW_RESPONSE_SEC = 7.0;
 
+/**
+ * Automatically infers user confidence (1–5) based on response speed (seconds).
+ *
+ * @param {number} responseTimeSec
+ * @param {boolean} isCorrect
+ * @returns {number} confidence 1..5
+ */
+export function inferConfidenceFromSpeed(responseTimeSec, isCorrect) {
+  if (!isCorrect) return 1;
+  if (responseTimeSec < 2.5) return 5;
+  if (responseTimeSec < 5.0) return 4;
+  if (responseTimeSec < 8.0) return 3;
+  return 2;
+}
+
 // ─── Core functions ──────────────────────────────────────────────────────────
 
 /**
