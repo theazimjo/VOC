@@ -1,9 +1,9 @@
 .whatsnew-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 3000;
   display: flex;
   align-items: center;
@@ -13,32 +13,45 @@
 
 .whatsnew-card {
   width: 100%;
-  max-width: 420px;
-  max-height: 85vh;
+  max-width: 440px;
+  max-height: 88vh;
   overflow-y: auto;
-  background: var(--bg-glass-strong);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  padding: var(--space-xl);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative;
+}
+
+.whatsnew-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--accent-1-dim);
 }
 
 .whatsnew-header-icon {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: var(--accent-1-dim);
   color: var(--accent-1);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.75rem;
 }
 
 .whatsnew-card h2 {
@@ -46,37 +59,39 @@
   font-weight: 800;
   color: var(--text-primary);
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .whatsnew-subtitle {
-  font-size: var(--font-sm);
+  font-size: 0.82rem;
   color: var(--text-secondary);
-  margin: 4px 0 var(--space-lg);
+  margin: 4px 0 1.25rem;
+  line-height: 1.4;
 }
 
 .whatsnew-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   width: 100%;
-  margin-bottom: var(--space-lg);
+  margin-bottom: 1.25rem;
 }
 
 .whatsnew-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  padding: 10px;
-  background: var(--bg-secondary);
+  padding: 10px 12px;
+  background: var(--bg-glass);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   text-align: left;
 }
 
 .whatsnew-item-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background: var(--accent-1-dim);
   color: var(--accent-1);
   display: flex;
@@ -91,32 +106,62 @@
 }
 
 .whatsnew-item-title {
-  font-size: var(--font-sm);
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 2px;
 }
 
 .whatsnew-item-desc {
-  font-size: 12px;
+  font-size: 0.76rem;
   color: var(--text-secondary);
   line-height: 1.4;
 }
 
-.whatsnew-btn {
+.whatsnew-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
-  padding: 14px;
+}
+
+.whatsnew-btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0.85rem;
   background: var(--accent-1);
   color: #fff;
   border: none;
   border-radius: var(--radius-lg);
-  font-size: var(--font-md);
+  font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
   font-family: var(--font-family);
-  transition: all var(--transition-fast);
+  transition: filter 0.2s, transform 0.15s;
 }
 
-.whatsnew-btn:hover {
+.whatsnew-btn-primary:hover {
   filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.whatsnew-btn-secondary {
+  width: 100%;
+  padding: 0.65rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-family);
+  transition: color 0.2s;
+}
+
+.whatsnew-btn-secondary:hover {
+  color: var(--text-primary);
 }

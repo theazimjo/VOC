@@ -167,19 +167,79 @@ export function isDue(nextOptimalReview) {
 }
 
 /**
- * Initialize fresh memory state for a new word entry.
+ * Initialize fresh memory state for a new word entry with optional category context.
  *
+ * @param {number} [categoryMastery=0]
  * @returns {Object}
  */
-export function initWordMemory() {
+export function initWordMemory(categoryMastery = 0) {
+  const initialS = computeInitialStability(categoryMastery);
   return {
-    stability: INITIAL_STABILITY,
-    difficulty: 0.5,
+    stability: initialS,
+    difficulty: Math.max(0.1, 0.5 - categoryMastery * 0.3),
     totalReviews: 0,
     lastReview: null,
     nextOptimalReview: null, // null = never reviewed → due immediately
     recallHistory: [],
+    contextBoost: Math.round(categoryMastery * 100),
   };
+}
+
+/**
+ * Compute semantic category / pack mastery score M_cat ∈ [0, 1].
+ *
+ * M_cat is derived from:
+ *   - Average stability of existing words in the category (S_cat)
+ *   - Historical accuracy rate across all reviews in the category (R_cat)
+ *
+ * @param {Array<Object>} packMemories - list of word memory objects in this pack
+ * @returns {{ mastery: number, avgStability: number, accuracyRate: number }}
+ */
+export function computeCategoryMastery(packMemories) {
+  if (!packMemories || packMemories.length === 0) {
+    return { mastery: 0, avgStability: INITIAL_STABILITY, accuracyRate: 0.5 };
+  }
+
+  const reviewed = packMemories.filter(m => (Number(m.totalReviews) || 0) > 0);
+  if (reviewed.length === 0) {
+    return { mastery: 0, avgStability: INITIAL_STABILITY, accuracyRate: 0.5 };
+  }
+
+  const avgS = reviewed.reduce((sum, m) => sum + (Number(m.stability) || INITIAL_STABILITY), 0) / reviewed.length;
+  const stabilityFactor = Math.min(1.0, avgS / 15);
+
+  let totalReviews = 0;
+  let correctReviews = 0;
+  reviewed.forEach(m => {
+    (m.recallHistory || []).forEach(h => {
+      totalReviews++;
+      if (h.result) correctReviews++;
+    });
+  });
+  const accuracyRate = totalReviews > 0 ? correctReviews / totalReviews : 0.5;
+
+  const mastery = Math.round((0.6 * stabilityFactor + 0.4 * accuracyRate) * 100) / 100;
+
+  return {
+    mastery: isNaN(mastery) ? 0 : mastery,
+    avgStability: isNaN(avgS) ? 1.0 : Math.round(avgS * 10) / 10,
+    accuracyRate: isNaN(accuracyRate) ? 0.5 : Math.round(accuracyRate * 100) / 100,
+  };
+}
+
+/**
+ * Compute context-aware initial stability (S_0) for a newly enrolled word
+ * based on the user's category/pack mastery score.
+ *
+ * Formula: S_0 = INITIAL_STABILITY × (1 + 2.5 × categoryMastery)
+ *
+ * @param {number} categoryMastery - category mastery score in [0, 1]
+ * @returns {number} - initial stability in days
+ */
+export function computeInitialStability(categoryMastery = 0) {
+  const boost = Math.max(0, Math.min(1.0, categoryMastery));
+  const s0 = INITIAL_STABILITY * (1 + 2.5 * boost);
+  return Math.round(s0 * 100) / 100;
 }
 
 /**

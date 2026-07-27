@@ -32,6 +32,7 @@ import {
   getOptimalReviewDate,
   estimateDifficulty,
   isDue,
+  computeCategoryMastery,
 } from './memoryEngine';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -169,24 +170,52 @@ export async function saveReviewEvent(userId, wordId, reviewData) {
   return { wordId, ...updated };
 }
 
+import { classifyWord } from './semanticClassifier';
+
 /**
  * Enroll a batch of words into the experiment (creates initial state).
- * Words that already have an entry are skipped.
+ * Calculates semantic category mastery per semantic cluster so newly added words in
+ * mastered topics/POS categories get context-aware initial stability boosts!
  *
  * @param {string}   userId
- * @param {Array<{id:string}>} words
+ * @param {Array<{id:string, word?:string, translation?:string, packName?:string}>} words
  * @returns {Promise<number>} - number of newly enrolled words
  */
 export async function enrollWords(userId, words) {
   const snap = await get(experimentRef(userId));
-  const existing = snap.exists() ? Object.keys(snap.val()) : [];
+  const existing = snap.exists() ? snap.val() : {};
 
+  // Group existing word memories by semantic cluster key
+  const clusterMemoriesMap = {};
+  Object.entries(existing).forEach(([wId, mVal]) => {
+    const matched = words.find(w => w.id === wId);
+    const { key } = classifyWord(matched?.word || '', matched?.translation || '', matched?.packName || '');
+    if (!clusterMemoriesMap[key]) clusterMemoriesMap[key] = [];
+    clusterMemoriesMap[key].push({ wordId: wId, ...mVal });
+  });
+
+  // Calculate mastery score per semantic cluster
+  const clusterMasteryMap = {};
+  Object.entries(clusterMemoriesMap).forEach(([key, mList]) => {
+    const { mastery } = computeCategoryMastery(mList);
+    clusterMasteryMap[key] = mastery;
+  });
+
+  const updates = {};
   let enrolled = 0;
+
   for (const word of words) {
-    if (!existing.includes(word.id)) {
-      await set(wordRef(userId, word.id), initWordMemory());
+    if (!existing[word.id]) {
+      const { key } = classifyWord(word.word || '', word.translation || '', word.packName || '');
+      const categoryMastery = clusterMasteryMap[key] || 0;
+      updates[word.id] = initWordMemory(categoryMastery);
       enrolled++;
     }
   }
+
+  if (enrolled > 0) {
+    await update(experimentRef(userId), updates);
+  }
+
   return enrolled;
 }

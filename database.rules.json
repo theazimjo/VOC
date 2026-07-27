@@ -1,6 +1,7 @@
 {
   "rules": {
     "users": {
+      ".read": "auth != null && auth.token.email === 'azimjonxolmirzayev30@gmail.com'",
       "$uid": {
         ".read": "auth != null && auth.uid === $uid",
         ".write": "auth != null && auth.uid === $uid",
@@ -27,3 +28,4 @@
     }
   }
 }
+

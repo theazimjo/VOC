@@ -9,7 +9,7 @@ import {
   signOut,
   updateProfile
 } from 'firebase/auth';
-import { ref, set, get } from 'firebase/database';
+import { ref, set, get, update, increment } from 'firebase/database';
 import { auth, db, googleProvider } from '../firebase';
 
 const AuthContext = createContext(null);
@@ -39,7 +39,18 @@ export function AuthProvider({ children }) {
               photoURL: firebaseUser.photoURL || '',
               createdAt: new Date().toISOString()
             });
+          } else {
+            // Update mutable fields (displayName may change)
+            await update(profileRef, {
+              displayName: firebaseUser.displayName || snap.val().displayName || '',
+              photoURL: firebaseUser.photoURL || snap.val().photoURL || '',
+            });
           }
+          // Track activity: lastSeen + session count
+          await update(ref(db, `users/${firebaseUser.uid}/activity`), {
+            lastSeen: new Date().toISOString(),
+            sessionCount: increment(1),
+          });
         } catch (error) {
           console.error("Error fetching user profile from RTDB:", error);
         }

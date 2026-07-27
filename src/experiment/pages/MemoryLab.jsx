@@ -47,7 +47,7 @@ function StatsPanel({ stats, memoryMap }) {
 
   const maxCount = Math.max(...bucketCounts.map(b => b.count), 1);
 
-  // Recent reviews
+  // Recent reviews & overall historical metrics
   const recentReviews = [];
   words.forEach(w => {
     (w.recallHistory || []).forEach(h => {
@@ -60,37 +60,44 @@ function StatsPanel({ stats, memoryMap }) {
     ? Math.round((last10.filter(h => h.result).length / last10.length) * 100)
     : null;
 
+  const overallAccuracy = recentReviews.length > 0
+    ? Math.round((recentReviews.filter(h => h.result).length / recentReviews.length) * 100)
+    : null;
+  const overallAvgSpeed = recentReviews.length > 0
+    ? (recentReviews.reduce((sum, h) => sum + (h.responseTime || 0), 0) / recentReviews.length).toFixed(1)
+    : null;
+
   return (
     <div className="mem-stats-panel">
       {/* Overview cards */}
       <div className="mem-stats-grid">
         <div className="mem-stat-card">
-          <div className="mem-stat-icon" style={{ background: 'rgba(99,102,241,0.15)', color: '#818cf8' }}>
+          <div className="mem-stat-icon" style={{ background: 'var(--accent-1-dim)', color: 'var(--accent-1)' }}>
             <BookOpen size={20} />
           </div>
-          <div className="mem-stat-val">{stats?.totalWords ?? 0}</div>
+          <div className="mem-stat-val">{stats?.totalWords ?? Object.keys(memoryMap).length}</div>
           <div className="mem-stat-lbl">So'zlar kiritilgan</div>
         </div>
         <div className="mem-stat-card">
-          <div className="mem-stat-icon" style={{ background: 'rgba(251,191,36,0.15)', color: '#fbbf24' }}>
+          <div className="mem-stat-icon" style={{ background: 'var(--warning-dim)', color: 'var(--warning)' }}>
             <Clock size={20} />
           </div>
-          <div className="mem-stat-val">{stats?.dueCount ?? 0}</div>
-          <div className="mem-stat-lbl">Bugun takrorlash</div>
+          <div className="mem-stat-val">{overallAccuracy !== null ? `${overallAccuracy}%` : '—'}</div>
+          <div className="mem-stat-lbl">Umumiy aniqlik</div>
         </div>
         <div className="mem-stat-card">
-          <div className="mem-stat-icon" style={{ background: 'rgba(52,211,153,0.15)', color: '#34d399' }}>
+          <div className="mem-stat-icon" style={{ background: 'var(--success-dim)', color: 'var(--success)' }}>
             <TrendingUp size={20} />
           </div>
           <div className="mem-stat-val">{stats?.avgStability ?? '—'}</div>
           <div className="mem-stat-lbl">O'rtacha barqarorlik (kun)</div>
         </div>
         <div className="mem-stat-card">
-          <div className="mem-stat-icon" style={{ background: 'rgba(248,113,113,0.15)', color: '#f87171' }}>
+          <div className="mem-stat-icon" style={{ background: 'var(--error-dim)', color: 'var(--error)' }}>
             <Zap size={20} />
           </div>
-          <div className="mem-stat-val">{stats?.totalReviews ?? 0}</div>
-          <div className="mem-stat-lbl">Jami takrorlashlar</div>
+          <div className="mem-stat-val">{overallAvgSpeed ? `${overallAvgSpeed}s` : '—'}</div>
+          <div className="mem-stat-lbl">O'rtacha javob tezligi</div>
         </div>
       </div>
 
@@ -121,7 +128,7 @@ function StatsPanel({ stats, memoryMap }) {
       {/* Recent accuracy */}
       {correctRate !== null && (
         <div className="mem-recent-section">
-          <div className="mem-section-title">⚡ So'nggi 10 ta review natijalari</div>
+          <div className="mem-section-title">⚡ So'nggi 10 ta takrorlash natijalari</div>
           <div className="mem-recent-dots">
             {last10.map((h, i) => (
               <div
@@ -132,7 +139,7 @@ function StatsPanel({ stats, memoryMap }) {
             ))}
           </div>
           <div className="mem-accuracy-label">
-            Aniqlik: <strong>{correctRate}%</strong>
+            So'nggi 10 ta takrorlash aniqligi: <strong>{correctRate}%</strong>
           </div>
         </div>
       )}
@@ -239,9 +246,12 @@ function SessionResults({ session, onRestart, onDone }) {
 
 function LabTab({ dueWords, allWords, memoryMap, onStart, loading }) {
   const SESSION_SIZE = 20;
-  const due = dueWords.filter(w => w.wordData);
-  const batch = due.slice(0, SESSION_SIZE);
-  const remaining = Math.max(0, due.length - SESSION_SIZE);
+  const queue = dueWords.filter(w => w.wordData);
+  const batch = queue.slice(0, SESSION_SIZE);
+  const remaining = Math.max(0, queue.length - SESSION_SIZE);
+
+  const now = new Date();
+  const strictlyDueCount = queue.filter(w => !w.nextOptimalReview || new Date(w.nextOptimalReview) <= now).length;
 
   return (
     <div className="mem-lab-tab">
@@ -251,23 +261,26 @@ function LabTab({ dueWords, allWords, memoryMap, onStart, loading }) {
         <div>
           <h2 className="mem-lab-hero-title">Xotira Laboratoriyasi</h2>
           <p className="mem-lab-hero-sub">
-            Har bir so'z uchun individual unutish egri chizig'ini o'rganish
+            Individual unutish egri chizig'i bo'yicha ketma-ket yodlash va takrorlash
           </p>
         </div>
       </div>
 
-      {/* Due words section */}
+      {/* Main session launcher card */}
       {loading ? (
         <div className="mem-loading">
           <div className="mem-spinner" />
-          <span>Yuklanmoqda...</span>
+          <span>Lug'atingizdagi barcha so'zlar yuklanmoqda...</span>
         </div>
-      ) : due.length > 0 ? (
+      ) : queue.length > 0 ? (
         <div className="mem-due-section">
           <div className="mem-due-header">
-            <span className="mem-due-title">⏰ Bugun takrorlash kerak</span>
-            <span className="mem-due-badge-count">{due.length} ta so'z</span>
+            <span className="mem-due-title">🧠 Aqlli Yodlash Navbati</span>
+            <span className="mem-due-badge-count">
+              {strictlyDueCount > 0 ? `⏰ ${strictlyDueCount} ta vaqti kelgan` : `✨ Barqaror`}
+            </span>
           </div>
+
           <div className="mem-due-preview">
             {batch.slice(0, 5).map(m => (
               <div key={m.wordId} className="mem-due-chip">
@@ -275,28 +288,29 @@ function LabTab({ dueWords, allWords, memoryMap, onStart, loading }) {
                 <span className="mem-due-chip-s">S={m.stability?.toFixed(1)}d</span>
               </div>
             ))}
-            {due.length > 5 && (
-              <div className="mem-due-chip more">+{due.length - 5} ta</div>
+            {batch.length > 5 && (
+              <div className="mem-due-chip more">+{batch.length - 5} ta</div>
             )}
           </div>
+
           <button
             className="mem-start-btn"
             onClick={() => onStart(batch)}
           >
             <Play size={18} />
-            Sessiyani boshlash ({batch.length} ta)
+            Yodlashni boshlash ({batch.length} ta so'z)
           </button>
-          {remaining > 0 && (
-            <div className="mem-remaining-note">
-              ✦ Yana {remaining} ta so'z keyingi sessiyaga qoladi
-            </div>
-          )}
+
+          <div className="mem-remaining-note">
+            ✦ Jami <strong>{queue.length}</strong> ta so'z individual unutish ehtimoli P(t) bo'yicha saralangan.
+            {remaining > 0 && ` Keyingi sessiyada yana ${remaining} ta so'z kutyapti.`}
+          </div>
         </div>
       ) : (
         <div className="mem-no-due">
-          <div className="mem-no-due-icon">✅</div>
-          <h3>Bugun barcha so'zlar takrorlandi!</h3>
-          <p>Keyingi session vaqti yaqinlashganda bu yerda ko'rinadi.</p>
+          <div className="mem-no-due-icon">📚</div>
+          <h3>Lug'atingizda hali so'zlar yo'q</h3>
+          <p>Kutubxonadan yangi so'zlar va to'plamlar qo'shing!</p>
         </div>
       )}
 
@@ -304,7 +318,7 @@ function LabTab({ dueWords, allWords, memoryMap, onStart, loading }) {
       {allWords.length > 0 && (
         <div className="mem-enrolled-info">
           <Award size={14} />
-          Jami <strong>{Object.keys(memoryMap).length}</strong> ta so'z experiment'ga kiritilgan
+          Jami <strong>{Object.keys(memoryMap).length}</strong> ta so'z tajribaga kiritilgan
           ({allWords.length} ta lug'atda)
         </div>
       )}

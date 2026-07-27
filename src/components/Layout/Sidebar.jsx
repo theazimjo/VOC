@@ -2,14 +2,15 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, ChevronLeft, ChevronRight, LogOut, GraduationCap as LogoIcon } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, ChevronLeft, ChevronRight, LogOut, GraduationCap as LogoIcon, FlaskConical, Shield } from 'lucide-react';
 import './Sidebar.css';
 
-const navItems = [
+const baseNavItems = [
   { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/library',  icon: BookOpen,        label: 'Kutubxona' },
   { to: '/grammar',  icon: GraduationCap,   label: 'Grammatika' },
   { to: '/grammar-test', icon: Trophy,       label: 'Imtihon' },
+  { to: '/experiment', icon: FlaskConical,   label: 'Memory Lab' },
   { to: '/settings', icon: Settings,        label: 'Sozlamalar' },
 ];
 
@@ -35,6 +36,11 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
       .join('')
       .toUpperCase();
   };
+
+  const navItems = [...baseNavItems];
+  if (user?.email === 'azimjonxolmirzayev30@gmail.com') {
+    navItems.push({ to: '/admin', icon: Shield, label: 'Admin Panel' });
+  }
 
   return (
     <>

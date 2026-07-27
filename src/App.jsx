@@ -13,6 +13,7 @@ import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
 const Dashboard = lazyWithRetry(() => import('./pages/Dashboard'));
+const LandingPage = lazyWithRetry(() => import('./pages/LandingPage'));
 const PackDetail = lazyWithRetry(() => import('./pages/PackDetail'));
 const PracticePage = lazyWithRetry(() => import('./pages/PracticePage'));
 const StatsPage = lazyWithRetry(() => import('./pages/StatsPage'));
@@ -26,6 +27,7 @@ const GrammarTopic = lazyWithRetry(() => import('./pages/GrammarTopic'));
 const GrammarExercises = lazyWithRetry(() => import('./pages/GrammarExercises'));
 const GrammarTest = lazyWithRetry(() => import('./pages/GrammarTest'));
 const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
+const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard'));
 
 function BookToPackRedirect() {
   const { bookId } = useParams();
@@ -55,6 +57,7 @@ export default function App() {
               <Suspense fallback={<RouteLoader />}>
                 <Routes>
                   {/* Public routes */}
+                  <Route path="/landing" element={<LandingPage />} />
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
 
@@ -80,6 +83,7 @@ export default function App() {
                       <Route path="/grammar-test" element={<GrammarTest />} />
                       <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
                       <Route path="/experiment" element={<MemoryLab />} />
+                      <Route path="/admin" element={<AdminDashboard />} />
                     </Route>
                   </Route>
 

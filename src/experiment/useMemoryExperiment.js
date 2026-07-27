@@ -44,27 +44,45 @@ export function useMemoryExperiment() {
     setLoading(true);
     setError(null);
     try {
-      // 1. Fetch all packs
+      // 1. Fetch all packs for metadata lookup
       const packsSnap = await get(ref(db, `users/${user.uid}/packs`));
-      const packs = [];
+      const packById = {};
       if (packsSnap.exists()) {
-        packsSnap.forEach(s => packs.push({ id: s.key, ...s.val() }));
+        packsSnap.forEach(s => { packById[s.key] = s.val(); });
       }
 
-      // 2. Fetch all words across packs
+      // 2. Fetch all words across all packs/schemas in users/{uid}/words
+      const allWordsSnap = await get(ref(db, `users/${user.uid}/words`));
       const flat = [];
-      for (const pack of packs) {
-        const wordsSnap = await get(ref(db, `users/${user.uid}/words/${pack.id}`));
-        if (wordsSnap.exists()) {
-          wordsSnap.forEach(ws => {
-            flat.push({
-              id: ws.key,
-              packId: pack.id,
-              packName: pack.name || pack.title || 'To\'plam',
-              ...ws.val(),
-            });
-          });
-        }
+      if (allWordsSnap.exists()) {
+        allWordsSnap.forEach(snap => {
+          const key = snap.key;
+          const val = snap.val();
+          if (val && typeof val === 'object') {
+            if (val.word && val.translation) {
+              // Direct single word entry
+              flat.push({
+                id: key,
+                packId: val.packId || 'default',
+                packName: packById[val.packId]?.name || 'Kutubxona',
+                ...val,
+              });
+            } else {
+              // Pack folder containing word entries
+              const pack = packById[key];
+              Object.entries(val).forEach(([wId, wVal]) => {
+                if (wVal && typeof wVal === 'object' && wVal.word) {
+                  flat.push({
+                    id: wId,
+                    packId: key,
+                    packName: pack?.name || pack?.title || 'Kutubxona',
+                    ...wVal,
+                  });
+                }
+              });
+            }
+          }
+        });
       }
       setAllWords(flat);
 
@@ -73,10 +91,9 @@ export function useMemoryExperiment() {
         await enrollWords(user.uid, flat);
       }
 
-      // 4. Load memory states and due words
-      const [memories, due, s] = await Promise.all([
+      // 4. Load memory states and stats
+      const [memories, s] = await Promise.all([
         getAllWordMemories(user.uid),
-        getWordsDueForReview(user.uid),
         getExperimentStats(user.uid),
       ]);
 
@@ -93,24 +110,34 @@ export function useMemoryExperiment() {
       });
       setMemoryMap(map);
 
-      // Enrich due words with word data, sorted by urgency:
-      // lowest P(Recall) first → most-forgotten words reviewed first
+      // 5. Build prioritized queue of ALL enrolled words
+      // Sorting criteria (Individual Memory Dynamics):
+      //   1. Unreviewed words first (never reviewed)
+      //   2. Words past their optimal review date (isDue)
+      //   3. Lowest recall probability P(t) = e^(-t/S) first
       const now = Date.now();
-      const enrichedDue = due
-        .map(m => ({
-          ...m,
-          wordData: wordLookup[m.wordId] || null,
-        }))
+      const enrolledQueue = Object.values(map)
         .filter(m => m.wordData !== null)
         .sort((a, b) => {
+          // Never reviewed words go to top
+          if (!a.lastReview && b.lastReview) return -1;
+          if (a.lastReview && !b.lastReview) return 1;
+
+          // Due words go next
+          const aDue = !a.nextOptimalReview || new Date(a.nextOptimalReview) <= now;
+          const bDue = !b.nextOptimalReview || new Date(b.nextOptimalReview) <= now;
+          if (aDue && !bDue) return -1;
+          if (!aDue && bDue) return 1;
+
+          // Probability P(t) = e^(-t/S) ascending (most forgotten first)
           const daysSinceA = a.lastReview ? (now - new Date(a.lastReview).getTime()) / 86400000 : 999;
           const daysSinceB = b.lastReview ? (now - new Date(b.lastReview).getTime()) / 86400000 : 999;
           const pA = Math.exp(-daysSinceA / (a.stability || 1));
           const pB = Math.exp(-daysSinceB / (b.stability || 1));
-          return pA - pB; // ascending: most forgotten first
+          return pA - pB;
         });
 
-      setDueWords(enrichedDue);
+      setDueWords(enrolledQueue);
       setStats(s);
     } catch (err) {
       console.error('[MemoryExperiment] loadData error:', err);

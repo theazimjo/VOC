@@ -8,7 +8,8 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Clock, Brain } from 'lucide-react';
-import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue } from '../memoryEngine';
+import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability } from '../memoryEngine';
+import { classifyWord } from '../semanticClassifier';
 
 // ─── Forgetting Curve SVG ─────────────────────────────────────────────────────
 
@@ -111,8 +112,12 @@ function ForgettingCurve({ stability, width = 280, height = 100 }) {
 
 function WordInsightCard({ memory }) {
   const [expanded, setExpanded] = useState(false);
-  const { wordData, stability, difficulty, totalReviews, lastReview, nextOptimalReview, recallHistory } = memory;
+  const { wordData, lastReview, nextOptimalReview, recallHistory } = memory;
   if (!wordData) return null;
+
+  const stability = Number(memory.stability) || 1.0;
+  const difficulty = Number(memory.difficulty) || 0.5;
+  const totalReviews = Number(memory.totalReviews) || 0;
 
   const health = getMemoryHealth(stability, nextOptimalReview);
   const due = isDue(nextOptimalReview);
@@ -241,12 +246,83 @@ export default function MemoryInsights({ memoryMap }) {
 
   const entries = Object.values(memoryMap).filter(m => m.wordData);
 
+  // Overall summary metrics
+  const now = Date.now();
+  const summary = useMemo(() => {
+    if (entries.length === 0) return null;
+
+    let strong = 0;   // S >= 10
+    let medium = 0;   // 5 <= S < 10
+    let weak = 0;     // S < 5 && totalReviews > 0
+    let unreviewed = 0; // totalReviews === 0
+    let totalP = 0;
+    let totalS = 0;
+
+    entries.forEach(m => {
+      const stab = Number(m.stability) || 1.0;
+      const reviews = Number(m.totalReviews) || 0;
+      const daysSince = m.lastReview ? (now - new Date(m.lastReview).getTime()) / 86400000 : 0;
+      const p = computeRecallProbability(stab, daysSince);
+      totalP += (isNaN(p) ? 0 : p);
+      totalS += stab;
+
+      if (reviews === 0 || !m.lastReview) unreviewed++;
+      else if (stab >= 10) strong++;
+      else if (stab >= 5) medium++;
+      else weak++;
+    });
+
+    const avgRetention = entries.length > 0 ? Math.round((totalP / entries.length) * 100) : 0;
+    const rawAvgS = entries.length > 0 ? totalS / entries.length : 1.0;
+    const avgStability = isNaN(rawAvgS) ? 1.0 : Math.max(0.5, rawAvgS);
+
+    return {
+      total: entries.length,
+      strong,
+      medium,
+      weak,
+      unreviewed,
+      avgRetention: isNaN(avgRetention) ? 0 : avgRetention,
+      avgStability,
+    };
+  }, [entries, now]);
+
+  // Automatic Semantic & Linguistic Clusters Breakdown
+  const semanticClusters = useMemo(() => {
+    const clusterMap = {};
+    entries.forEach(m => {
+      const word = m.wordData?.word || '';
+      const translation = m.wordData?.translation || '';
+      const packName = m.wordData?.packName || '';
+
+      const { key, name, icon } = classifyWord(word, translation, packName);
+
+      if (!clusterMap[key]) {
+        clusterMap[key] = { key, name, icon, memories: [] };
+      }
+      clusterMap[key].memories.push(m);
+    });
+
+    return Object.values(clusterMap).map(cluster => {
+      const { mastery, avgStability, accuracyRate } = computeCategoryMastery(cluster.memories);
+      const s0 = computeInitialStability(mastery);
+      return {
+        ...cluster,
+        count: cluster.memories.length,
+        mastery: Number(mastery) || 0,
+        avgStability: Number(avgStability) || 1.0,
+        accuracyRate: Number(accuracyRate) || 0.5,
+        initialStability: Number(s0) || 1.0,
+      };
+    }).sort((a, b) => b.count - a.count);
+  }, [entries]);
+
   const filtered = useMemo(() => {
     let list = entries;
 
     if (filter === 'due') list = list.filter(m => isDue(m.nextOptimalReview));
     else if (filter === 'strong') list = list.filter(m => m.stability >= 10);
-    else if (filter === 'weak') list = list.filter(m => m.stability < 3 && m.totalReviews > 0);
+    else if (filter === 'weak') list = list.filter(m => m.stability < 5 && m.totalReviews > 0);
 
     if (search.trim()) {
       const q = search.toLowerCase();
@@ -277,6 +353,120 @@ export default function MemoryInsights({ memoryMap }) {
 
   return (
     <div className="mem-insights">
+
+      {/* Overall Memory Health Card */}
+      {summary && (
+        <div className="mem-overall-card">
+          <div className="mem-overall-header">
+            <div>
+              <div className="mem-overall-title">🧠 Umumiy Xotira Holati</div>
+              <div className="mem-overall-sub">Barcha {summary.total} ta so'zning eslab qolish dinamikasi</div>
+            </div>
+            <div className="mem-retention-badge" title="O'rtacha eslab qolish kuchi">
+              <span className="mem-retention-num">{summary.avgRetention}%</span>
+              <span className="mem-retention-lbl">Xotira kuchi</span>
+            </div>
+          </div>
+
+          {/* Distribution bar */}
+          <div className="mem-overall-bar">
+            {summary.strong > 0 && (
+              <div
+                className="mem-bar-seg strong"
+                style={{ width: `${(summary.strong / summary.total) * 100}%` }}
+                title={`Kuchli: ${summary.strong} ta`}
+              />
+            )}
+            {summary.medium > 0 && (
+              <div
+                className="mem-bar-seg medium"
+                style={{ width: `${(summary.medium / summary.total) * 100}%` }}
+                title={`O'rtacha: ${summary.medium} ta`}
+              />
+            )}
+            {summary.weak > 0 && (
+              <div
+                className="mem-bar-seg weak"
+                style={{ width: `${(summary.weak / summary.total) * 100}%` }}
+                title={`Zaif: ${summary.weak} ta`}
+              />
+            )}
+            {summary.unreviewed > 0 && (
+              <div
+                className="mem-bar-seg new"
+                style={{ width: `${(summary.unreviewed / summary.total) * 100}%` }}
+                title={`Yangi: ${summary.unreviewed} ta`}
+              />
+            )}
+          </div>
+
+          {/* Legend pills */}
+          <div className="mem-overall-legend">
+            <div className="mem-legend-pill">
+              <div className="mem-leg-dot strong" />
+              <span>💪 Kuchli: <strong>{summary.strong}</strong></span>
+            </div>
+            <div className="mem-legend-pill">
+              <div className="mem-leg-dot medium" />
+              <span>⭐ O'rtacha: <strong>{summary.medium}</strong></span>
+            </div>
+            <div className="mem-legend-pill">
+              <div className="mem-leg-dot weak" />
+              <span>🌱 Zaif: <strong>{summary.weak}</strong></span>
+            </div>
+            <div className="mem-legend-pill">
+              <div className="mem-leg-dot new" />
+              <span>🆕 Yangi: <strong>{summary.unreviewed}</strong></span>
+            </div>
+          </div>
+
+          {/* Overall Forgetting Curve Graph */}
+          <div className="mem-curve-container" style={{ marginTop: '0.25rem' }}>
+            <div className="mem-curve-label" style={{ fontWeight: 700, color: 'var(--text-secondary)', display: 'flex', justifyContent: 'space-between' }}>
+              <span>📉 Umumiy Unutish Dinamikasi (P = e⁻ᵗ/ˢ)</span>
+              <span>O'rtacha S = {summary.avgStability.toFixed(1)}d</span>
+            </div>
+            <ForgettingCurve stability={summary.avgStability} />
+            <div className="mem-curve-legend">
+              <span style={{ color: 'var(--success)' }}>— 75% optimal takrorlash chegarasi</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Semantic Clusters & Context Transfer Section */}
+      {semanticClusters.length > 0 && (
+        <div className="mem-semantic-card">
+          <div className="mem-semantic-header">
+            <div>
+              <div className="mem-semantic-title">🧬 Semantik Klasterlar & Kontekstual Transfer</div>
+              <div className="mem-semantic-sub">Mavzu va to'plamlar bo'yicha xotira modeli moslashishi</div>
+            </div>
+            <span className="mem-sem-badge">Context-Aware AI</span>
+          </div>
+
+          <div className="mem-semantic-list">
+            {semanticClusters.map(c => (
+              <div key={c.name} className="mem-semantic-item">
+                <div className="mem-sem-left">
+                  <span className="mem-sem-icon">{c.icon}</span>
+                  <div>
+                    <div className="mem-sem-name">{c.name}</div>
+                    <div className="mem-sem-meta">{c.count} ta so'z · O'rtacha S = {c.avgStability}d</div>
+                  </div>
+                </div>
+                <div className="mem-sem-right">
+                  <div className="mem-sem-mastery">{(c.mastery * 100).toFixed(0)}% bilish</div>
+                  <div className="mem-sem-boost" title="Yangi so'zlar uchun boshlang'ich barqarorlik">
+                    ⚡ Yangi so'z S₀ = {c.initialStability}d
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Search + Filter bar */}
       <div className="mem-insights-toolbar">
         <input
