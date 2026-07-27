@@ -15,11 +15,18 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
   const [mistakes, setMistakes] = useState(0);
   const [erroredIds, setErroredIds] = useState(() => new Set());
   const [timer, setTimer] = useState(0);
+  // Local, updated-as-we-go copy of `words` — a left item can be mismatched
+  // more than once before it's finally matched, and each attempt must build
+  // on the previous one's result instead of recomputing from the original
+  // pre-session stability every time (which would silently erase earlier
+  // mismatch penalties once the word is eventually matched correctly).
+  const [liveWords, setLiveWords] = useState(words);
 
   useEffect(() => {
     const playWords = words.slice(0, 8);
     setLeftItems(shuffleArray(playWords.map(w => ({ id: w.id, text: w.word }))));
     setRightItems(shuffleArray(playWords.map(w => ({ id: w.id, text: w.translation }))));
+    setLiveWords(words);
     const int = setInterval(() => setTimer(t => t + 1), 1000);
     return () => clearInterval(int);
   }, [words]);
@@ -33,10 +40,11 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
         setSelectedLeft(null);
         setSelectedRight(null);
 
-        const word = words.find(w => w.id === selectedLeft);
+        const word = liveWords.find(w => w.id === selectedLeft);
         if (word) {
           const sm2Data = calculateNextReview(4, word);
           onUpdateWord(word.id, sm2Data);
+          setLiveWords(prev => prev.map(w => (w.id === word.id ? { ...w, ...sm2Data } : w)));
           if (onAnswer) onAnswer(word, true);
         }
 
@@ -54,10 +62,11 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
         setErrorIds([selectedLeft, selectedRight]);
         setMistakes(m => m + 1);
         setErroredIds(prev => new Set(prev).add(selectedLeft));
-        const word = words.find(w => w.id === selectedLeft);
+        const word = liveWords.find(w => w.id === selectedLeft);
         if (word) {
           const sm2Data = calculateNextReview(1, word);
           onUpdateWord(word.id, sm2Data);
+          setLiveWords(prev => prev.map(w => (w.id === word.id ? { ...w, ...sm2Data } : w)));
           if (onAnswer) onAnswer(word, false);
         }
         setTimeout(() => {

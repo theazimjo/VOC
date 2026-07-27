@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Eye } from 'lucide-react';
 import { playSound } from '../../utils/feedback';
 import { weightedSelectWords, shuffleArray } from '../../utils/helpers';
+import { calculateNextReview } from '../../utils/spacedRepetition';
 import './IrregularVerbsTrainer.css';
 
 export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName, onProgress, initialSubStep, onExit }) {
@@ -323,28 +324,38 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
   // Common Results Processing
   const processResult = (isCorrect) => {
     const verb = sessionVerbs[currentIndex];
+    const quality = isCorrect ? 5 : 2;
+    // Compute the full progress record ourselves (same pattern as every
+    // other game) — PracticePage now persists whatever it's handed as-is,
+    // it no longer recomputes from {quality, isCorrect} alone.
+    const sm2Data = calculateNextReview(quality, verb);
+
     if (isCorrect) {
       playSound('correct');
       setCorrectCount(prev => prev + 1);
-      if (onUpdateWord) onUpdateWord(verb.id, { quality: 5, isCorrect: true });
     } else {
       playSound('wrong');
       setIncorrectCount(prev => prev + 1);
       setWrongVerbs(prev => [...prev, verb]);
-      if (onUpdateWord) onUpdateWord(verb.id, { quality: 2, isCorrect: false });
-
-      // Give the verb one more attempt later in this same session instead of
-      // just dropping it — retrieving it again shortly after a miss is what
-      // actually moves it into memory (the "testing effect").
-      if (!verb._requeued) {
-        setSessionVerbs(prev => {
-          const next = [...prev];
-          const reinsertAt = Math.min(next.length, currentIndex + 4);
-          next.splice(reinsertAt, 0, { ...verb, _requeued: true });
-          return next;
-        });
-      }
     }
+    if (onUpdateWord) onUpdateWord(verb.id, sm2Data);
+
+    // Merge the fresh progress into every copy of this verb still queued
+    // this session — otherwise a requeued retry below would compute its
+    // next review from the stale pre-attempt snapshot and overwrite the
+    // result we just persisted.
+    setSessionVerbs(prev => {
+      const next = prev.map(v => (v.id === verb.id ? { ...v, ...sm2Data } : v));
+      if (!isCorrect && !verb._requeued) {
+        // Give the verb one more attempt later in this same session instead of
+        // just dropping it — retrieving it again shortly after a miss is what
+        // actually moves it into memory (the "testing effect").
+        const reinsertAt = Math.min(next.length, currentIndex + 4);
+        next.splice(reinsertAt, 0, { ...verb, ...sm2Data, _requeued: true });
+      }
+      return next;
+    });
+
     speakVerbs(verb.v1, verb.v2, verb.v3);
   };
 

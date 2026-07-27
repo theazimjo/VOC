@@ -134,24 +134,41 @@ export default function CardsMode() {
 
   // Persist the SM-2 outcome for one word so Cards Mode sessions actually
   // feed into mastery/stats/spaced-repetition, same as every other practice mode.
+  // Returns the merged, post-review word so callers can keep local state
+  // (and any retry round built from it) built on top of this review instead
+  // of the stale pre-session snapshot.
   const persistWordMastery = async (word, quality) => {
-    if (!user || !sourceId || !word) return;
+    if (!user || !sourceId || !word) return word;
     try {
       const sm2Data = calculateNextReview(quality, word);
       const wordRef = ref(db, `users/${user.uid}/words/${sourceId}/${word.id}`);
       await update(wordRef, sm2Data);
+      return { ...word, ...sm2Data };
     } catch (err) {
       console.error('[CardsMode] Failed to persist word mastery:', err);
+      return word;
     }
   };
 
-  const handleSwipeComplete = (known, unknown) => {
-    setKnownWords(known);
+  // Merge freshly-persisted word data back into every local list that might
+  // feed a later step in this session (e.g. "re-drill still-weak words") —
+  // otherwise a second review of the same word would start over from its
+  // pre-session stability and overwrite the progress just saved.
+  const syncWordState = (updatedWords) => {
+    const byId = new Map(updatedWords.map(w => [w.id, w]));
+    const merge = (w) => byId.get(w.id) || w;
+    setAllWords(prev => prev.map(merge));
+    setWords(prev => prev.map(merge));
+  };
+
+  const handleSwipeComplete = async (known, unknown) => {
+    // Words swiped "known" are a confident correct response — quality 5
+    const updatedKnown = await Promise.all(known.map(w => persistWordMastery(w, 5)));
+    syncWordState(updatedKnown);
+
+    setKnownWords(updatedKnown);
     setUnknownWords(unknown);
     setDrillQueue(unknown);
-
-    // Words swiped "known" are a confident correct response — quality 5
-    known.forEach(w => persistWordMastery(w, 5));
 
     if (unknown.length > 0) {
       setStep('drill');
@@ -163,11 +180,14 @@ export default function CardsMode() {
     }
   };
 
-  const handleDrillComplete = (results) => {
-    setDrillResults(results);
-
+  const handleDrillComplete = async (results) => {
     // Drilled words: correct on first try -> quality 4, needed correction/skip -> quality 2
-    results.forEach(r => persistWordMastery(r.word, r.correct ? 4 : 2));
+    const updatedResults = await Promise.all(
+      results.map(async (r) => ({ ...r, word: await persistWordMastery(r.word, r.correct ? 4 : 2) }))
+    );
+    syncWordState(updatedResults.map(r => r.word));
+
+    setDrillResults(updatedResults);
     incrementActivity(knownWords.length + results.length || 1);
 
     playSound('victory');
