@@ -18,8 +18,11 @@ import {
   saveReviewEvent,
   enrollWords,
   getExperimentStats,
+  recordConfusionPair,
+  getConfusionPairs,
 } from './experimentDB';
-import { computeRecallProbability } from './memoryEngine';
+import { computeRecallProbability, computeClusterCalibration } from './memoryEngine';
+import { classifyWord } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
 
@@ -31,6 +34,7 @@ export function useMemoryExperiment() {
   const [dueWords, setDueWords] = useState([]);          // words due for review
   const [memoryMap, setMemoryMap] = useState({});        // wordId → memory state
   const [stats, setStats] = useState(null);
+  const [confusionPairs, setConfusionPairs] = useState([]); // detected confusion pairs, most frequent first
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -91,11 +95,13 @@ export function useMemoryExperiment() {
         await enrollWords(user.uid, flat);
       }
 
-      // 4. Load memory states and stats
-      const [memories, s] = await Promise.all([
+      // 4. Load memory states, stats, and detected confusion pairs
+      const [memories, s, pairs] = await Promise.all([
         getAllWordMemories(user.uid),
         getExperimentStats(user.uid),
+        getConfusionPairs(user.uid),
       ]);
+      setConfusionPairs(pairs);
 
       // Build memoryMap: wordId → memory state enriched with word data
       const map = {};
@@ -175,19 +181,35 @@ export function useMemoryExperiment() {
    * @param {boolean} isCorrect
    * @param {number}  confidence  1–5
    * @param {number}  responseTime seconds
+   * @param {'active_recall'|'passive_recall'} [retrievalType='passive_recall'] - typed answer vs self-judged
    * @returns {Promise<{done:boolean, updatedMemory:Object}>}
    */
-  const submitReview = useCallback(async (isCorrect, confidence, responseTime) => {
+  const submitReview = useCallback(async (isCorrect, confidence, responseTime, retrievalType = 'passive_recall') => {
     if (!session || !user) return { done: true };
 
     const current = session.queue[session.index];
     const wordId = current.wordId;
+    const wordData = current.wordData;
+
+    // Self-calibrate this word's semantic cluster: compare this user's past
+    // predicted-vs-actual outcomes for the cluster to nudge growth up/down.
+    const { key: clusterKey } = classifyWord(wordData?.word, wordData?.translation, wordData?.packName);
+    const clusterHistory = [];
+    Object.values(memoryMap).forEach(m => {
+      if (!m.wordData) return;
+      const mKey = classifyWord(m.wordData.word, m.wordData.translation, m.wordData.packName).key;
+      if (mKey === clusterKey) clusterHistory.push(...(m.recallHistory || []));
+    });
+    const clusterMultiplier = computeClusterCalibration(clusterHistory);
 
     // Save to Firebase
     const updatedMemory = await saveReviewEvent(user.uid, wordId, {
       isCorrect,
       confidence,
       responseTime,
+      retrievalType,
+      clusterMultiplier,
+      wordText: wordData?.word,
     });
 
     // Update local memory map
@@ -237,6 +259,17 @@ export function useMemoryExperiment() {
     loadData(); // refresh
   }, [loadData]);
 
+  /**
+   * Report that the user typed an answer close to a *different* word's
+   * correct answer — evidence of confusion/interference between the two.
+   */
+  const reportConfusion = useCallback(async (wordIdA, wordIdB, meta = {}) => {
+    if (!user) return;
+    await recordConfusionPair(user.uid, wordIdA, wordIdB, meta);
+    const pairs = await getConfusionPairs(user.uid);
+    setConfusionPairs(pairs);
+  }, [user]);
+
   // ── Current session word ───────────────────────────────────────
   const currentSessionWord = session && !session.finished
     ? session.queue[session.index] || null
@@ -256,6 +289,7 @@ export function useMemoryExperiment() {
     dueWords,
     memoryMap,
     stats,
+    confusionPairs,
     loading,
     error,
     // Session
@@ -267,6 +301,7 @@ export function useMemoryExperiment() {
     endSession,
     // Helpers
     getRecallNow,
+    reportConfusion,
     refresh: loadData,
   };
 }

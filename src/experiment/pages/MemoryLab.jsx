@@ -339,9 +339,9 @@ export default function MemoryLab() {
   const [activeTab, setActiveTab] = useState('lab');
 
   const {
-    allWords, dueWords, memoryMap, stats, loading, error,
+    allWords, dueWords, memoryMap, stats, confusionPairs, loading, error,
     session, currentSessionWord,
-    startSession, submitReview, skipWord, endSession,
+    startSession, submitReview, skipWord, endSession, reportConfusion,
   } = useMemoryExperiment();
 
   const inSession = !!session && !session.finished;
@@ -406,9 +406,11 @@ export default function MemoryLab() {
             >
               <WordMemorySession
                 session={session}
+                allWords={allWords}
                 onSubmit={submitReview}
                 onSkip={skipWord}
                 onEnd={endSession}
+                onConfusionDetected={reportConfusion}
               />
             </motion.div>
           )}
@@ -450,7 +452,7 @@ export default function MemoryLab() {
                 />
               )}
               {activeTab === 'insights' && (
-                <MemoryInsights memoryMap={memoryMap} />
+                <MemoryInsights memoryMap={memoryMap} confusionPairs={confusionPairs} />
               )}
               {activeTab === 'stats' && (
                 <StatsPanel stats={stats} memoryMap={memoryMap} />

@@ -456,6 +456,63 @@
   border-color: var(--error-dim);
 }
 
+.mem-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  font-family: var(--font-family);
+}
+.mem-mode-toggle:hover:not(:disabled) {
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  border-color: var(--accent-1-dim);
+}
+.mem-mode-toggle:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.mem-typed-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: var(--font-family);
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.mem-typed-input:focus {
+  outline: none;
+  border-color: var(--accent-1);
+}
+
+.mem-typed-answer {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-weight: 600;
+}
+.mem-typed-answer.correct {
+  background: var(--success-dim);
+  color: var(--success);
+}
+.mem-typed-answer.wrong {
+  background: var(--error-dim);
+  color: var(--error);
+}
+
 /* Card */
 .mem-card-wrapper {
   flex: 1;
@@ -1125,6 +1182,39 @@
   padding: 2px 7px;
   border-radius: 99px;
   border: 1px solid var(--warning-dim);
+}
+.mem-global-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* Explainability box */
+.mem-explain-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.mem-explain-box svg {
+  flex-shrink: 0;
+  color: var(--accent-1);
+  margin-top: 1px;
+}
+
+/* Confusion pairs card — reuses .mem-semantic-card layout */
+.mem-confusion-card .mem-sem-icon {
+  filter: none;
 }
 .mem-expand-arrow {
   color: var(--text-muted);

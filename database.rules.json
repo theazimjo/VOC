@@ -25,6 +25,13 @@
       "$logId": {
         ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))"
       }
+    },
+    "globalWordStats": {
+      ".read": "auth != null",
+      "$wordKey": {
+        ".write": "auth != null",
+        ".validate": "newData.hasChildren(['totalReviews', 'totalCorrect']) && newData.child('totalReviews').isNumber() && newData.child('totalCorrect').isNumber() && newData.child('totalCorrect').val() <= newData.child('totalReviews').val() && (!data.exists() || newData.child('totalReviews').val() >= data.child('totalReviews').val())"
+      }
     }
   }
 }

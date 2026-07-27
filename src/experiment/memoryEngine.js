@@ -33,6 +33,42 @@ const FAST_RESPONSE_SEC = 2.5;
 const SLOW_RESPONSE_SEC = 7.0;
 
 /**
+ * Sleep-dependent consolidation bonus — reviews separated by at least one
+ * overnight gap (a local calendar-day boundary) get a stability boost, since
+ * sleep-based memory consolidation is well documented in the literature and
+ * is not modelled by fixed-interval schedulers like SM-2.
+ */
+const SLEEP_BONUS = 0.15;
+
+/**
+ * Retrieval-type bonus (testing/generation effect). Actively producing the
+ * answer from memory (typing it) is a "desirable difficulty" that strengthens
+ * the memory trace more than passively self-judging a shown answer.
+ */
+const RETRIEVAL_TYPE_BONUS = { active_recall: 0.15, passive_recall: 0 };
+
+/** Bounds for the per-cluster self-calibration multiplier (see computeClusterCalibration). */
+const CALIBRATION_MIN = 0.7;
+const CALIBRATION_MAX = 1.4;
+
+/** Bounds for the population-level word-difficulty adjustment (see computeGlobalDifficultyAdjustment). */
+const GLOBAL_ADJUST_MIN = 0.7;
+const GLOBAL_ADJUST_MAX = 1.3;
+
+/** Minimum sample size before a calibration/adjustment is trusted over the neutral default. */
+const MIN_CALIBRATION_SAMPLES = 8;
+const MIN_GLOBAL_SAMPLES = 10;
+
+/** A word must have been seen at least this many times before active recall is even offered — you cannot retrieve a trace that was never formed. */
+const AUTO_TYPED_MIN_REVIEWS = 1;
+
+/** Stability below this (days) counts as "weak" — a prime target for the testing effect. */
+const AUTO_TYPED_WEAK_STABILITY = 5;
+
+/** Fraction of already-strong words that are still sampled into active recall, so the app collects unbiased comparison data instead of only ever testing weak words. */
+const AUTO_TYPED_RANDOM_SAMPLE_RATE = 0.18;
+
+/**
  * Automatically infers user confidence (1–5) based on response speed (seconds).
  *
  * @param {number} responseTimeSec
@@ -72,12 +108,19 @@ export function computeRecallProbability(stability, daysSince) {
  * α depends on:
  *   - confidence rating (1–5)
  *   - response time (fast boosts, slow penalises)
+ *   - overnight sleep consolidation (options.hadOvernightGap)
+ *   - retrieval type — active production vs passive self-judgement (options.retrievalType)
+ *   - per-cluster self-calibration multiplier (options.clusterMultiplier)
  *
  * @param {number} currentS        - current stability (days)
  * @param {boolean} isCorrect      - whether recall was successful
  * @param {number} confidence      - user's self-rating 1–5
  * @param {number} responseTimeSec - seconds to answer
  * @param {number} daysSince       - days since last review (for retrievability)
+ * @param {Object} [options]
+ * @param {boolean} [options.hadOvernightGap=false]      - at least one local-midnight boundary crossed since last review
+ * @param {'active_recall'|'passive_recall'} [options.retrievalType='passive_recall']
+ * @param {number} [options.clusterMultiplier=1.0]       - output of computeClusterCalibration for this word's cluster
  * @returns {number}                - new stability (days)
  */
 export function updateStability(
@@ -85,8 +128,15 @@ export function updateStability(
   isCorrect,
   confidence = 3,
   responseTimeSec = 4,
-  daysSince = 0
+  daysSince = 0,
+  options = {}
 ) {
+  const {
+    hadOvernightGap = false,
+    retrievalType = 'passive_recall',
+    clusterMultiplier = 1.0,
+  } = options;
+
   const S = Math.max(currentS, 0.1);
 
   if (!isCorrect) {
@@ -108,14 +158,100 @@ export function updateStability(
   const retrievability = computeRecallProbability(S, daysSince);
   const retrievabilityBonus = (1 - retrievability) * 0.3; // 0 → 0.3
 
+  // ── Sleep-dependent consolidation bonus ─────────────────────────
+  const sleepBonus = hadOvernightGap ? SLEEP_BONUS : 0;
+
+  // ── Testing/generation effect bonus ─────────────────────────────
+  const retrievalBonus = RETRIEVAL_TYPE_BONUS[retrievalType] ?? 0;
+
   // ── Total growth factor ────────────────────────────────────────
-  const alpha = Math.max(
+  const rawAlpha = Math.max(
     0.05,
-    STABILITY_GROWTH_BASE + confBonus + timeBonus + retrievabilityBonus
+    STABILITY_GROWTH_BASE + confBonus + timeBonus + retrievabilityBonus + sleepBonus + retrievalBonus
   );
+
+  // ── Per-cluster self-calibration ────────────────────────────────
+  // Nudges growth up/down based on how well past predictions in this
+  // semantic cluster matched this user's actual outcomes.
+  const boundedMultiplier = Math.max(CALIBRATION_MIN, Math.min(CALIBRATION_MAX, clusterMultiplier || 1.0));
+  const alpha = rawAlpha * boundedMultiplier;
 
   const S_new = S * (1 + alpha);
   return Math.round(S_new * 100) / 100;
+}
+
+/**
+ * Self-calibrate the growth rate for a semantic cluster by comparing this
+ * user's *predicted* recall probability (stored per review as `predictedP`)
+ * against what *actually* happened.
+ *
+ * If actual accuracy in the cluster consistently exceeds what the model
+ * predicted, the user is retaining that kind of word better than modelled —
+ * so future growth in that cluster is nudged up (and vice-versa). This is
+ * what makes the engine adapt per user × per semantic cluster instead of
+ * using one fixed global formula for everybody.
+ *
+ * @param {Array<{predictedP:number, result:boolean}>} historyEntries - review events from all words in one cluster
+ * @returns {number} multiplier in [CALIBRATION_MIN, CALIBRATION_MAX], 1.0 = no adjustment yet
+ */
+export function computeClusterCalibration(historyEntries) {
+  const withP = (historyEntries || []).filter(e => typeof e.predictedP === 'number');
+  if (withP.length < MIN_CALIBRATION_SAMPLES) return 1.0;
+
+  const avgPredicted = withP.reduce((sum, e) => sum + e.predictedP, 0) / withP.length;
+  const actualAccuracy = withP.filter(e => e.result).length / withP.length;
+  if (avgPredicted <= 0.02) return 1.0;
+
+  const ratio = actualAccuracy / avgPredicted;
+  return Math.round(Math.max(CALIBRATION_MIN, Math.min(CALIBRATION_MAX, ratio)) * 100) / 100;
+}
+
+/**
+ * Decide, automatically and per word, whether this review should be an
+ * active-recall (typed) trial or a passive self-judged one — so the user
+ * never has to manually flip a mode switch.
+ *
+ * Rules:
+ *   - Never-before-seen words (totalReviews = 0) → always passive. There is
+ *     no memory trace yet to retrieve, so "typing it from memory" is
+ *     meaningless and just wastes the user's time.
+ *   - Weak words the user has already been exposed to at least once →
+ *     active recall, since the testing effect helps most while a trace is
+ *     still forming.
+ *   - Strong/well-known words → mostly passive (faster), but a small random
+ *     fraction is still sampled into active recall so the app accumulates
+ *     unbiased data on whether typing actually helps — a user who
+ *     self-selects into typing only when confident would bias that
+ *     comparison.
+ *
+ * @param {{totalReviews?:number, stability?:number}} memory
+ * @returns {'active_recall'|'passive_recall'}
+ */
+export function getRecommendedRetrievalType(memory) {
+  const totalReviews = Number(memory?.totalReviews) || 0;
+  if (totalReviews < AUTO_TYPED_MIN_REVIEWS) return 'passive_recall';
+
+  const stability = Number(memory?.stability) || INITIAL_STABILITY;
+  if (stability < AUTO_TYPED_WEAK_STABILITY) return 'active_recall';
+
+  return Math.random() < AUTO_TYPED_RANDOM_SAMPLE_RATE ? 'active_recall' : 'passive_recall';
+}
+
+/**
+ * Convert aggregate cross-user statistics for a specific word into an
+ * initial-stability adjustment multiplier. Solves the cold-start problem:
+ * a brand-new word for THIS user can still start from a smarter S₀ if the
+ * rest of the population has already shown it's intrinsically easy/hard.
+ *
+ * @param {{totalReviews:number, totalCorrect:number}|null} globalStats
+ * @returns {number} multiplier in [GLOBAL_ADJUST_MIN, GLOBAL_ADJUST_MAX], 1.0 = not enough population data yet
+ */
+export function computeGlobalDifficultyAdjustment(globalStats) {
+  if (!globalStats || (globalStats.totalReviews || 0) < MIN_GLOBAL_SAMPLES) return 1.0;
+  const accuracy = globalStats.totalCorrect / globalStats.totalReviews;
+  // accuracy 0 → 0.7 (hard word, smaller S0), accuracy 1 → 1.3 (easy word, bigger S0)
+  const adj = 0.7 + accuracy * 0.6;
+  return Math.round(Math.max(GLOBAL_ADJUST_MIN, Math.min(GLOBAL_ADJUST_MAX, adj)) * 100) / 100;
 }
 
 /**
@@ -182,13 +318,15 @@ export function isDue(nextOptimalReview) {
 }
 
 /**
- * Initialize fresh memory state for a new word entry with optional category context.
+ * Initialize fresh memory state for a new word entry with optional category
+ * context and population-level difficulty context.
  *
  * @param {number} [categoryMastery=0]
+ * @param {number} [globalAdjustment=1.0] - output of computeGlobalDifficultyAdjustment
  * @returns {Object}
  */
-export function initWordMemory(categoryMastery = 0) {
-  const initialS = computeInitialStability(categoryMastery);
+export function initWordMemory(categoryMastery = 0, globalAdjustment = 1.0) {
+  const initialS = computeInitialStability(categoryMastery, globalAdjustment);
   return {
     stability: initialS,
     difficulty: Math.max(0.1, 0.5 - categoryMastery * 0.3),
@@ -197,6 +335,7 @@ export function initWordMemory(categoryMastery = 0) {
     nextOptimalReview: null, // null = never reviewed → due immediately
     recallHistory: [],
     contextBoost: Math.round(categoryMastery * 100),
+    globalAdjustment: Math.round((globalAdjustment || 1.0) * 100) / 100,
   };
 }
 
@@ -246,14 +385,15 @@ export function computeCategoryMastery(packMemories) {
  * Compute context-aware initial stability (S_0) for a newly enrolled word
  * based on the user's category/pack mastery score.
  *
- * Formula: S_0 = INITIAL_STABILITY × (1 + 2.5 × categoryMastery)
+ * Formula: S_0 = INITIAL_STABILITY × (1 + 2.5 × categoryMastery) × globalAdjustment
  *
  * @param {number} categoryMastery - category mastery score in [0, 1]
+ * @param {number} [globalAdjustment=1.0] - population-level word-difficulty multiplier
  * @returns {number} - initial stability in days
  */
-export function computeInitialStability(categoryMastery = 0) {
+export function computeInitialStability(categoryMastery = 0, globalAdjustment = 1.0) {
   const boost = Math.max(0, Math.min(1.0, categoryMastery));
-  const s0 = INITIAL_STABILITY * (1 + 2.5 * boost);
+  const s0 = INITIAL_STABILITY * (1 + 2.5 * boost) * (globalAdjustment || 1.0);
   return Math.round(s0 * 100) / 100;
 }
 
@@ -271,4 +411,36 @@ export function getMemoryHealth(stability, nextOptimalReview) {
   if (stability >= 10) return { label: "Yaxshi", color: '#60a5fa', icon: '⭐' };
   if (stability >= 5)  return { label: "O'rtacha", color: '#f59e0b', icon: '📈' };
   return { label: "Zaif xotira", color: '#f87171', icon: '🌱' };
+}
+
+/**
+ * Explain in plain Uzbek why the engine is (or isn't) surfacing this word
+ * for review right now — makes the scheduling decision transparent instead
+ * of a black box.
+ *
+ * @param {number} stability
+ * @param {string|null} lastReview - ISO date string
+ * @param {string|null} nextOptimalReview - ISO date string
+ * @returns {string}
+ */
+export function explainSchedulingDecision(stability, lastReview, nextOptimalReview) {
+  if (!lastReview) {
+    return "Bu so'z hali birinchi marta ko'rilmagan — shuning uchun navbatning boshida turibdi.";
+  }
+
+  const daysSince = (Date.now() - new Date(lastReview).getTime()) / (86400 * 1000);
+  const p = computeRecallProbability(stability, daysSince);
+  const pct = Math.round(p * 100);
+  const targetPct = Math.round(TARGET_RECALL * 100);
+
+  if (p <= TARGET_RECALL) {
+    return `Eslab qolish ehtimoli hozir ${pct}% ga tushdi (maqsad chegara: ${targetPct}%) — shuning uchun aynan hozir takrorlash tavsiya qilinmoqda.`;
+  }
+
+  const daysUntil = nextOptimalReview
+    ? Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
+    : null;
+
+  return `Eslab qolish ehtimoli hali ${pct}% — yetarlicha yuqori.` +
+    (daysUntil !== null ? ` Keyingi optimal takrorlash ${daysUntil} kundan keyin.` : '');
 }

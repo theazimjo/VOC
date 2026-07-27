@@ -7,8 +7,8 @@
 
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, TrendingDown, Clock, Brain } from 'lucide-react';
-import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability } from '../memoryEngine';
+import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle } from 'lucide-react';
+import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision } from '../memoryEngine';
 import { classifyWord } from '../semanticClassifier';
 
 // ─── Forgetting Curve SVG ─────────────────────────────────────────────────────
@@ -122,6 +122,8 @@ function WordInsightCard({ memory }) {
   const health = getMemoryHealth(stability, nextOptimalReview);
   const due = isDue(nextOptimalReview);
   const checkpoints = getForgettingCurvePoints(stability);
+  const explanation = explainSchedulingDecision(stability, lastReview, nextOptimalReview);
+  const globalAdjustment = Number(memory.globalAdjustment) || 1.0;
 
   const daysSinceLast = lastReview
     ? Math.round((Date.now() - new Date(lastReview).getTime()) / (86400 * 1000))
@@ -148,6 +150,14 @@ function WordInsightCard({ memory }) {
             {health.icon} {health.label}
           </span>
           {due && <span className="mem-due-badge">Bugun takrorlash</span>}
+          {globalAdjustment !== 1.0 && (
+            <span
+              className="mem-global-badge"
+              title="Boshlang'ich barqarorlik boshqa foydalanuvchilarning shu so'z bo'yicha jamoaviy natijasidan moslashtirilgan"
+            >
+              🌍 {globalAdjustment > 1 ? 'Jamiyat: oson so\'z' : 'Jamiyat: qiyin so\'z'}
+            </span>
+          )}
           <span className="mem-expand-arrow" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
         </div>
       </div>
@@ -190,6 +200,11 @@ function WordInsightCard({ memory }) {
               <div className="mem-curve-legend">
                 <span style={{ color: 'var(--success)' }}>— 75% maqsad</span>
               </div>
+            </div>
+
+            <div className="mem-explain-box">
+              <Lightbulb size={14} />
+              <span>{explanation}</span>
             </div>
 
             <div className="mem-checkpoint-table">
@@ -240,7 +255,7 @@ function WordInsightCard({ memory }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function MemoryInsights({ memoryMap }) {
+export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
   const [filter, setFilter] = useState('all'); // 'all' | 'due' | 'strong' | 'weak'
   const [search, setSearch] = useState('');
 
@@ -460,6 +475,34 @@ export default function MemoryInsights({ memoryMap }) {
                   <div className="mem-sem-boost" title="Yangi so'zlar uchun boshlang'ich barqarorlik">
                     ⚡ Yangi so'z S₀ = {c.initialStability}d
                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Confusion Pairs Section */}
+      {confusionPairs.length > 0 && (
+        <div className="mem-semantic-card mem-confusion-card">
+          <div className="mem-semantic-header">
+            <div>
+              <div className="mem-semantic-title"><AlertTriangle size={16} style={{ verticalAlign: '-2px' }} /> Chalkashtirilgan So'zlar</div>
+              <div className="mem-semantic-sub">Yozib javob berishda doim aralashtirilayotgan so'z juftliklari</div>
+            </div>
+          </div>
+          <div className="mem-semantic-list">
+            {confusionPairs.slice(0, 8).map(pair => (
+              <div key={pair.key} className="mem-semantic-item">
+                <div className="mem-sem-left">
+                  <span className="mem-sem-icon">⚠️</span>
+                  <div>
+                    <div className="mem-sem-name">{pair.wordA || '—'} ↔ {pair.wordB || '—'}</div>
+                    <div className="mem-sem-meta">{pair.translationA} / {pair.translationB}</div>
+                  </div>
+                </div>
+                <div className="mem-sem-right">
+                  <div className="mem-sem-mastery">{pair.count}x aralashtirilgan</div>
                 </div>
               </div>
             ))}
