@@ -10,7 +10,6 @@ import { useStreak } from '../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
-import { calculateNextReview } from '../utils/spacedRepetition';
 import IosSpinner from '../components/common/IosSpinner';
 import PracticeHub from '../components/Practice/PracticeHub';
 import Flashcard from '../components/Practice/Flashcard';
@@ -209,6 +208,13 @@ export default function PracticePage() {
     setStep('intro');
   };
 
+  // `data` is already the full calculateNextReview() result computed by the
+  // game component itself (Flashcard/QuizGame/etc. — each knows its own real
+  // response time and retrieval type). Persist it as-is instead of
+  // recomputing here: a second calculateNextReview() call couldn't see the
+  // per-game responseTimeSec/retrievalType (those are inputs, not part of
+  // its return value) and would silently fall back to neutral defaults,
+  // discarding the speed and active-recall bonuses on every single review.
   const handleUpdateWord = async (wordId, data) => {
     if (!user || !selectedSource) return;
     try {
@@ -217,18 +223,11 @@ export default function PracticePage() {
 
       const prevWrongCount = word.wrongCount || 0;
 
-      const { quality, retrievalType, responseTimeSec, ...rest } = data;
-      let finalData = { ...rest };
+      const { quality, ...finalData } = data;
       if (typeof quality === 'number') {
-        const progressData = calculateNextReview(quality, word, { retrievalType, responseTimeSec });
-
-        finalData = { ...finalData, ...progressData };
-
-        if (quality < 4) {
-          finalData.wrongCount = prevWrongCount + 1;
-        } else {
-          finalData.wrongCount = Math.max(0, prevWrongCount - 1);
-        }
+        finalData.wrongCount = quality < 4
+          ? prevWrongCount + 1
+          : Math.max(0, prevWrongCount - 1);
       }
 
       const wordRef = ref(db, `users/${user.uid}/words/${selectedSource.id}/${wordId}`);
