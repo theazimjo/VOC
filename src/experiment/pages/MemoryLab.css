@@ -1,0 +1,1166 @@
+/* ============================================================
+   🧪 MemoryLab — Experiment Module Styles
+   Fully theme-aware: uses only CSS custom properties from index.css
+   ============================================================ */
+
+/* ── Page shell ─────────────────────────────────────────── */
+.mem-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mem-content {
+  width: 100%;
+  max-width: 640px;
+  padding: 0 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ── Page header ────────────────────────────────────────── */
+.mem-page-header {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mem-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.mem-back-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+
+.mem-page-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.mem-page-title-icon {
+  font-size: 1.2rem;
+}
+.mem-page-title-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  padding: 2px 6px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--accent-1-dim);
+}
+
+/* ── Tab bar ────────────────────────────────────────────── */
+.mem-tab-bar {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  gap: 4px;
+  padding: 0.75rem 1rem 0;
+}
+
+.mem-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-family);
+}
+.mem-tab.active {
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  border-color: var(--accent-1-dim);
+}
+.mem-tab:hover:not(.active) {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+
+/* ── Loading ────────────────────────────────────────────── */
+.mem-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 3rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.mem-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--bg-tertiary);
+  border-top-color: var(--accent-1);
+  border-radius: 50%;
+  animation: mem-spin 0.8s linear infinite;
+}
+@keyframes mem-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error page ─────────────────────────────────────────── */
+.mem-error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+.mem-error-icon {
+  font-size: 3rem;
+}
+
+/* ── Lab Tab ────────────────────────────────────────────── */
+.mem-lab-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 1rem;
+}
+
+.mem-lab-hero {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--accent-1-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+.mem-lab-hero-icon {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+}
+.mem-lab-hero-title {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.mem-lab-hero-sub {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ── Due words section ──────────────────────────────────── */
+.mem-due-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--warning-dim);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.mem-due-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mem-due-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--warning);
+}
+.mem-due-badge-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--warning-dim);
+  color: var(--warning);
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.mem-due-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.mem-due-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: 99px;
+  font-size: 0.78rem;
+}
+.mem-due-chip-word {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.mem-due-chip-s {
+  color: var(--accent-1);
+  font-size: 0.7rem;
+}
+.mem-due-chip.more {
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+}
+
+.mem-start-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--accent-1);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s, filter 0.2s;
+  letter-spacing: -0.01em;
+  font-family: var(--font-family);
+}
+.mem-start-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+.mem-start-btn:active {
+  transform: translateY(0);
+}
+
+.mem-remaining-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 2px 0;
+}
+
+/* ── No due ─────────────────────────────────────────────── */
+.mem-no-due {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: var(--success-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+.mem-no-due-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.mem-no-due h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--success);
+}
+.mem-no-due p {
+  margin: 0;
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+/* ── Enrolled info ──────────────────────────────────────── */
+.mem-enrolled-info {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+.mem-enrolled-info strong {
+  color: var(--accent-1);
+}
+
+/* ── How it works ───────────────────────────────────────── */
+.mem-how-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.mem-how-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+.mem-how-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.mem-how-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.mem-how-num {
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.mem-formula-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0.85rem;
+  background: var(--accent-1-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+.mem-formula-box code {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-1);
+  letter-spacing: 0.02em;
+}
+.mem-formula-box span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────
+   REVIEW SESSION
+   ───────────────────────────────────────────────────────── */
+
+.mem-session {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 0.5rem;
+  min-height: 80vh;
+}
+
+/* Progress bar */
+.mem-progress-track {
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+.mem-progress-fill {
+  height: 100%;
+  background: var(--accent-1);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* Session header */
+.mem-session-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0 0.25rem;
+}
+.mem-pack-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  padding: 3px 10px;
+  border-radius: 99px;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mem-count {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.mem-end-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  font-family: var(--font-family);
+}
+.mem-end-btn:hover {
+  background: var(--error-dim);
+  color: var(--error);
+  border-color: var(--error-dim);
+}
+
+/* Card */
+.mem-card-wrapper {
+  flex: 1;
+}
+.mem-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.75rem 1.25rem 1.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  min-height: 380px;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+
+.mem-card-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 500;
+}
+
+.mem-word-display {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.mem-translation-hidden {
+  font-size: 2rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-align: center;
+  opacity: 0.4;
+}
+.mem-translation-reveal {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-1);
+  text-align: center;
+}
+
+.mem-response-time {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  padding: 4px 12px;
+  border-radius: 99px;
+}
+
+/* Timer */
+.mem-timer {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s;
+}
+
+/* Card action buttons */
+.mem-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  align-items: center;
+}
+
+.mem-reveal-btn {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--accent-1);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.15s;
+  font-family: var(--font-family);
+}
+.mem-reveal-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.mem-skip-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: color 0.2s;
+  font-family: var(--font-family);
+}
+.mem-skip-btn:hover {
+  color: var(--text-primary);
+}
+
+/* Judgement buttons */
+.mem-judgement-btns {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+.mem-btn-wrong, .mem-btn-correct {
+  flex: 1;
+  padding: 0.85rem;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.15s;
+  font-family: var(--font-family);
+}
+.mem-btn-wrong {
+  background: var(--error-dim);
+  color: var(--error);
+  border: 1.5px solid var(--error-dim);
+}
+.mem-btn-wrong:hover { filter: brightness(0.95); }
+.mem-btn-correct {
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1.5px solid var(--success-dim);
+}
+.mem-btn-correct:hover { filter: brightness(0.95); }
+
+/* Confidence grid */
+.mem-confidence-grid {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+.mem-conf-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 0.65rem 0.3rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s;
+  min-width: 0;
+  font-family: var(--font-family);
+}
+.mem-conf-btn:hover:not(:disabled) {
+  background: var(--accent-1-dim);
+  border-color: var(--accent-1);
+}
+.mem-conf-btn:disabled { opacity: 0.5; }
+.mem-conf-emoji { font-size: 1.3rem; }
+.mem-conf-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.mem-conf-text {
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.2;
+  display: none;
+}
+@media (min-width: 380px) {
+  .mem-conf-text { display: block; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   SESSION RESULTS
+   ───────────────────────────────────────────────────────── */
+
+.mem-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+}
+.mem-results-trophy {
+  font-size: 3.5rem;
+}
+.mem-results-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.mem-results-ring svg {
+  overflow: visible;
+}
+
+.mem-results-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.mem-result-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.mem-results-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.mem-result-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.82rem;
+}
+.mem-result-row.correct { background: var(--success-dim); }
+.mem-result-row.wrong { background: var(--error-dim); }
+.mem-rr-icon {
+  font-size: 0.85rem;
+  min-width: 16px;
+  text-align: center;
+}
+.mem-result-row.correct .mem-rr-icon { color: var(--success); }
+.mem-result-row.wrong .mem-rr-icon { color: var(--error); }
+.mem-rr-word {
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+}
+.mem-rr-trans {
+  color: var(--text-secondary);
+  flex: 1;
+}
+.mem-rr-s {
+  font-size: 0.72rem;
+  color: var(--accent-1);
+  background: var(--accent-1-dim);
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.mem-results-actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+.mem-btn-primary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.8rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent-1);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.2s;
+  font-family: var(--font-family);
+}
+.mem-btn-primary:hover { filter: brightness(1.08); }
+.mem-btn-secondary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.8rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-family: var(--font-family);
+}
+.mem-btn-secondary:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────────────────────
+   INSIGHTS TAB
+   ───────────────────────────────────────────────────────── */
+
+.mem-insights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.mem-insights-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mem-search-input {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+.mem-search-input:focus {
+  border-color: var(--accent-1);
+  background: var(--bg-glass-hover);
+  box-shadow: 0 0 0 3px var(--accent-1-dim);
+}
+.mem-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.mem-filter-tabs {
+  display: flex;
+  gap: 6px;
+}
+.mem-filter-tab {
+  flex: 1;
+  padding: 0.45rem 0.3rem;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  font-size: 0.73rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: var(--font-family);
+}
+.mem-filter-tab.active {
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  border-color: var(--accent-1-dim);
+}
+.mem-filter-tab:hover:not(.active) {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+
+.mem-count-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 0 2px;
+}
+
+.mem-insight-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Insight card */
+.mem-insight-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.mem-insight-card.due {
+  border-color: var(--warning-dim);
+  background: var(--warning-dim);
+}
+.mem-insight-card:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--border);
+}
+
+.mem-insight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mem-insight-word-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.mem-insight-word {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.mem-insight-translation {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mem-insight-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.mem-health-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.mem-due-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--warning-dim);
+  color: var(--warning);
+  padding: 2px 7px;
+  border-radius: 99px;
+  border: 1px solid var(--warning-dim);
+}
+.mem-expand-arrow {
+  color: var(--text-muted);
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+/* Metrics strip */
+.mem-insight-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 0.6rem;
+}
+.mem-metric {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+.mem-metric svg { opacity: 0.7; }
+
+/* Expanded section */
+.mem-insight-expanded {
+  overflow: hidden;
+}
+.mem-curve-container {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+.mem-curve-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.mem-curve-legend {
+  font-size: 0.67rem;
+  color: var(--success);
+  margin-top: 6px;
+  text-align: right;
+}
+
+/* Checkpoint table */
+.mem-checkpoint-table {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 0.75rem;
+}
+.mem-checkpoint-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mem-cp-label {
+  width: 52px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.mem-cp-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.mem-cp-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+.mem-cp-pct {
+  width: 34px;
+  text-align: right;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+/* History strip */
+.mem-history-strip {
+  margin-top: 0.75rem;
+}
+.mem-history-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.mem-history-dots {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.mem-history-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.mem-history-dot.correct { background: var(--success); }
+.mem-history-dot.wrong { background: var(--error); }
+
+/* Empty state */
+.mem-empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.mem-empty-icon {
+  font-size: 3rem;
+}
+.mem-empty-state h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.mem-empty-state p {
+  margin: 0;
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+}
+
+/* ─────────────────────────────────────────────────────────
+   STATS TAB
+   ───────────────────────────────────────────────────────── */
+
+.mem-stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 0.75rem;
+}
+
+.mem-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.mem-stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.mem-stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mem-stat-val {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.mem-stat-lbl {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.mem-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.mem-dist-section, .mem-recent-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.mem-dist-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mem-dist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mem-dist-label {
+  width: 64px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.mem-dist-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.mem-dist-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  min-width: 3px;
+}
+.mem-dist-count {
+  width: 24px;
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mem-recent-dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+.mem-recent-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  cursor: default;
+}
+.mem-recent-dot.correct { background: var(--success); }
+.mem-recent-dot.wrong { background: var(--error); }
+.mem-accuracy-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.mem-accuracy-label strong {
+  color: var(--accent-1);
+}

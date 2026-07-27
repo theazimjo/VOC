@@ -25,6 +25,7 @@ const GrammarPage = lazyWithRetry(() => import('./pages/GrammarPage'));
 const GrammarTopic = lazyWithRetry(() => import('./pages/GrammarTopic'));
 const GrammarExercises = lazyWithRetry(() => import('./pages/GrammarExercises'));
 const GrammarTest = lazyWithRetry(() => import('./pages/GrammarTest'));
+const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
 
 function BookToPackRedirect() {
   const { bookId } = useParams();
@@ -78,6 +79,7 @@ export default function App() {
                       <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
                       <Route path="/grammar-test" element={<GrammarTest />} />
                       <Route path="/grammar-test/run/:testId" element={<GrammarTest />} />
+                      <Route path="/experiment" element={<MemoryLab />} />
                     </Route>
                   </Route>
 
