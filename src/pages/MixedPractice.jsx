@@ -12,7 +12,7 @@ import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
-import { getDueWords, calculateNextReview, responseToQuality } from '../utils/sm2';
+import { getDueWords, calculateNextReview, responseToQuality } from '../utils/spacedRepetition';
 import IosSpinner from '../components/common/IosSpinner';
 import './MixedPractice.css';
 

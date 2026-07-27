@@ -5,7 +5,8 @@ import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit, ChevronRight } from 
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
-import { getMasteryLevel } from '../utils/sm2';
+import { getMasteryLevel } from '../utils/spacedRepetition';
+import { computeRecallProbability } from '../experiment/memoryEngine';
 import OnboardingModal from '../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../components/Onboarding/WhatsNewModal';
 import './Dashboard.css';
@@ -15,6 +16,15 @@ const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sh'];
 function getLocalDateString(d) {
   const offset = d.getTimezoneOffset();
   return new Date(d.getTime() - offset * 60 * 1000).toISOString().split('T')[0];
+}
+
+/** Current recall probability P(t) = e^(-t/S) for a word, given its stability and last review. */
+function getRecallInfo(word) {
+  const stability = typeof word.stability === 'number' ? word.stability : 1.0;
+  const daysSince = word.lastReviewed ? (Date.now() - new Date(word.lastReviewed).getTime()) / 86400000 : 0;
+  const pct = Math.round(computeRecallProbability(stability, daysSince) * 100);
+  const color = pct < 50 ? 'var(--error)' : pct < 75 ? 'var(--warning)' : 'var(--success)';
+  return { pct, color };
 }
 
 function getWeekActivity(activityLog = {}, dailyGoal = 5) {
@@ -78,7 +88,9 @@ export default function Dashboard() {
     const now = new Date();
     const due = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now);
     setDueWords(due.length);
-    const dueSorted = [...due].sort((a, b) => new Date(a.nextReview || 0) - new Date(b.nextReview || 0));
+    // Most at-risk first — lowest current recall probability, not just oldest due date,
+    // since two overdue words with different stability forget at different rates.
+    const dueSorted = [...due].sort((a, b) => getRecallInfo(a).pct - getRecallInfo(b).pct);
     setDueWordsList(dueSorted.slice(0, 6));
 
     const sorted = [...allWords].sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
@@ -208,6 +220,7 @@ export default function Dashboard() {
           <div className="recent-words-list">
             {wordsToShow.map((word, idx) => {
               const masteryInfo = getMasteryLevel(word.mastery || 0);
+              const recall = showDue ? getRecallInfo(word) : null;
               return (
                 <motion.div
                   key={word.id}
@@ -224,9 +237,15 @@ export default function Dashboard() {
                     <div className="word-translation">{word.translation}</div>
                   </div>
                   <div className="word-meta">
-                    <span className="word-mastery-percent" style={{ color: masteryInfo.color }}>
-                      {word.mastery || 0}%
-                    </span>
+                    {recall ? (
+                      <span className="word-mastery-percent" style={{ color: recall.color }} title="Hozirgi eslab qolish ehtimoli">
+                        {recall.pct}%
+                      </span>
+                    ) : (
+                      <span className="word-mastery-percent" style={{ color: masteryInfo.color }}>
+                        {word.mastery || 0}%
+                      </span>
+                    )}
                     <ChevronRight className="word-chevron" size={16} strokeWidth={2.5} />
                   </div>
                 </motion.div>

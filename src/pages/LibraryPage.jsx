@@ -136,7 +136,6 @@ export default function LibraryPage() {
         partOfSpeech: wordData.partOfSpeech || 'noun',
         addedAt: new Date().toISOString(),
         mastery: 0,
-        easeFactor: 2.5,
         interval: 0,
         reviewCount: 0,
         nextReview: null,

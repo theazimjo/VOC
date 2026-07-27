@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Mic, RotateCcw } from 'lucide-react';
-import { calculateNextReview } from '../../utils/sm2';
+import { calculateNextReview } from '../../utils/spacedRepetition';
 import { speakWord } from '../../utils/helpers';
 import './PronounceGame.css';
 
@@ -96,7 +96,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       setCorrectCount(c => c + 1);
       if (onAnswer) onAnswer(currentWord, true);
 
-      const sm2Data = calculateNextReview(5, currentWord); // Active perfect quality
+      const sm2Data = calculateNextReview(5, currentWord, { retrievalType: 'active_recall' }); // Active perfect quality
       onUpdateWord(currentWord.id, sm2Data);
     } else {
       setStatus('wrong');
@@ -112,7 +112,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
     setIncorrectCount(c => c + 1);
     if (onAnswer) onAnswer(currentWord, false);
 
-    const sm2Data = calculateNextReview(1, currentWord); // Failed
+    const sm2Data = calculateNextReview(1, currentWord, { retrievalType: 'active_recall' }); // Failed
     onUpdateWord(currentWord.id, sm2Data);
   };
 
@@ -142,7 +142,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
   const handleUnsupportedSkip = async () => {
     setIncorrectCount(c => c + 1);
     if (onAnswer) onAnswer(currentWord, false);
-    const sm2Data = calculateNextReview(1, currentWord);
+    const sm2Data = calculateNextReview(1, currentWord, { retrievalType: 'active_recall' });
     onUpdateWord(currentWord.id, sm2Data);
     handleNext();
   };

@@ -10,14 +10,13 @@ import { useStreak } from '../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
-import { calculateNextReview } from '../utils/sm2';
+import { calculateNextReview } from '../utils/spacedRepetition';
 import IosSpinner from '../components/common/IosSpinner';
 import PracticeHub from '../components/Practice/PracticeHub';
 import Flashcard from '../components/Practice/Flashcard';
 import SpellingGame from '../components/Practice/SpellingGame';
 import MatchGame from '../components/Practice/MatchGame';
 import QuizGame from '../components/Practice/QuizGame';
-import SpacedRepetition from '../components/Practice/SpacedRepetition';
 import PronounceGame from '../components/Practice/PronounceGame';
 import IrregularVerbsTrainer from '../components/Practice/IrregularVerbsTrainer';
 import SentenceBuilder from '../components/Practice/SentenceBuilder';
@@ -204,15 +203,8 @@ export default function PracticePage() {
       return;
     }
 
-    let selected;
-    if (mode === 'spaced') {
-      // Spaced repetition uses its own ordering logic
-      selected = sourceWords;
-    } else {
-      // Weighted selection: harder / less-known words are more likely to be chosen
-      selected = weightedSelectWords(sourceWords, wordCount);
-    }
-
+    // Weighted selection: harder / less-known words are more likely to be chosen
+    const selected = weightedSelectWords(sourceWords, wordCount);
     setPracticeWords(selected);
     setStep('intro');
   };
@@ -225,19 +217,12 @@ export default function PracticePage() {
 
       const prevWrongCount = word.wrongCount || 0;
 
-      let finalData = { ...data };
-      if (typeof data.quality === 'number') {
-        const quality = data.quality;
-        const safeSm2Data = calculateNextReview(
-          quality,
-          word.easeFactor || 2.5,
-          word.interval || 0,
-          word.reviewCount || 0,
-          word.lastReviewed,
-          word.nextReview
-        );
-        
-        finalData = { ...finalData, ...safeSm2Data };
+      const { quality, retrievalType, responseTimeSec, ...rest } = data;
+      let finalData = { ...rest };
+      if (typeof quality === 'number') {
+        const progressData = calculateNextReview(quality, word, { retrievalType, responseTimeSec });
+
+        finalData = { ...finalData, ...progressData };
 
         if (quality < 4) {
           finalData.wrongCount = prevWrongCount + 1;
@@ -351,7 +336,6 @@ export default function PracticePage() {
       case 'match': return <MatchGame {...props} />;
       case 'quiz': return <QuizGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
-      case 'spaced': return <SpacedRepetition {...props} />;
       case 'sentence': return <SentenceBuilder {...props} />;
       case 'irregular-verbs': return <IrregularVerbsTrainer {...props} initialSubStep={querySubStep} />;
       default: return null;
@@ -480,10 +464,10 @@ export default function PracticePage() {
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">
-                  {selectedMode === 'flashcard' ? '🎴' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'spaced' ? '🧠' : selectedMode === 'sentence' ? '📓' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
+                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? 'Flashcards' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'spaced' ? 'Takrorlash' : selectedMode === 'sentence' ? 'Jumla Tuzish' : selectedMode === 'irregular-verbs' ? "Fe'llar Trenajyori" : 'Mashq'}
+                  {selectedMode === 'flashcard' ? 'Aqlli Kartochkalar' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'sentence' ? 'Jumla Tuzish' : selectedMode === 'irregular-verbs' ? "Fe'llar Trenajyori" : 'Mashq'}
                 </h2>
                 <p>{practiceWords.length} ta so'z tayyorlandi</p>
                 
@@ -509,7 +493,7 @@ export default function PracticePage() {
                   ←
                 </button>
                 <h1 className="clean-quiz-title">
-                  {selectedMode === 'flashcard' ? '🎴 Flashcards' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'spaced' ? '🧠 Takrorlash' : selectedMode === 'sentence' ? '📓 Jumla tuzish' : 'Mashq'}
+                  {selectedMode === 'flashcard' ? '🧠 Aqlli Kartochkalar' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'sentence' ? '📓 Jumla tuzish' : 'Mashq'}
                 </h1>
                 <div style={{ width: '40px', opacity: 0 }}></div>
                 

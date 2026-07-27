@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { shuffleArray, speakWord } from '../../utils/helpers';
-import { calculateNextReview } from '../../utils/sm2';
+import { calculateNextReview } from '../../utils/spacedRepetition';
 import './QuizGame.css';
 
 export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { shuffleArray } from '../../utils/helpers';
-import { calculateNextReview } from '../../utils/sm2';
+import { calculateNextReview } from '../../utils/spacedRepetition';
 import './MatchGame.css';
 
 export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer }) {

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Package, ChevronRight } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
-import { getMasteryLevel } from '../../utils/sm2';
+import { getMasteryLevel } from '../../utils/spacedRepetition';
 import './GlobalSearch.css';
 
 const MAX_WORD_RESULTS = 20;

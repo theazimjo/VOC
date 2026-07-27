@@ -18,8 +18,8 @@ export function shuffleArray(arr) {
  * Weighted word selection — harder/less-known words appear more often.
  *
  * Weight formula (higher = more likely to be selected):
- *   - mastery 0–5:       (6 - mastery)  → range 6..1
- *   - easeFactor ~1.3–3: (3 - easeFactor + 1) → lower ease = higher weight
+ *   - mastery 0–5:      (6 - mastery)  → range 6..1
+ *   - stability 0–3+:   (3 - stability) → lower stability (weaker memory) = higher weight
  *   - overdue nextReview: words whose review date has passed get a +2 bonus
  *
  * If count >= words.length (or count === 'all'), every word is included once
@@ -36,7 +36,7 @@ export function weightedSelectWords(words, count) {
 
   const weighted = words.map(w => {
     const mastery     = typeof w.mastery === 'number' ? w.mastery : 0;
-    const easeFactor  = typeof w.easeFactor === 'number' ? w.easeFactor : 2.5;
+    const stability    = typeof w.stability === 'number' ? w.stability : 1.0;
     const nextReview  = w.nextReview ? new Date(w.nextReview).getTime() : 0;
     const isOverdue   = nextReview > 0 && nextReview <= now;
     const wrongCount  = typeof w.wrongCount === 'number' ? w.wrongCount : 0;
@@ -48,10 +48,10 @@ export function weightedSelectWords(words, count) {
 
     // Higher weight = harder / less-known word / more mistakes
     const weight =
-      masteryWeight                        // 6 (new) … 0 (mastered)
-      + Math.max(0, 3 - easeFactor)        // 0 … ~1.7
-      + (isOverdue ? 2 : 0)                // overdue bonus
-      + (wrongCount * 3);                  // mistake weight boost: +3 per mistake!
+      masteryWeight                          // 6 (new) … 0 (mastered)
+      + Math.max(0, 3 - Math.min(stability, 3)) // 0 … 3 (weaker memory = higher weight)
+      + (isOverdue ? 2 : 0)                  // overdue bonus
+      + (wrongCount * 3);                    // mistake weight boost: +3 per mistake!
 
     return { word: w, weight };
   });

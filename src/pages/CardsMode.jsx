@@ -6,7 +6,7 @@ import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useStreak } from '../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
-import { calculateNextReview } from '../utils/sm2';
+import { calculateNextReview } from '../utils/spacedRepetition';
 import SwipeCard from '../components/Cards/SwipeCard';
 import CardsDrill from '../components/Cards/CardsDrill';
 import { playSound, triggerVibration } from '../utils/feedback';

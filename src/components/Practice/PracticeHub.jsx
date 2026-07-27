@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Layers, PenLine, Shuffle, ListChecks, Mic, Brain, NotebookPen } from 'lucide-react';
+import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen } from 'lucide-react';
 import './PracticeHub.css';
 
 export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
@@ -19,10 +19,10 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
   modes.push(
     {
       id: 'flashcard',
-      icon: Layers,
-      title: 'Flashcards',
-      desc: "Kartochkalarni ag'darib vizual xotirani mashq qiling",
-      badge: 'Barcha darajalar',
+      icon: Brain,
+      title: 'Aqlli Kartochkalar',
+      desc: "Kartochkalarni ag'darib, har bir so'z uchun individual unutish egri chizig'i asosida hisoblangan optimal vaqtda takrorlaysiz",
+      badge: 'Tavsiya etiladi 🌟',
       glowColor: 'hsl(200, 90%, 55%)'
     },
     {
@@ -56,14 +56,6 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
       desc: "Mikrofonga talaffuz qilib, so'zlashuv qobiliyatini oshiring",
       badge: "Min 1 ta so'z",
       glowColor: 'hsl(340, 85%, 60%)'
-    },
-    {
-      id: 'spaced',
-      icon: Brain,
-      title: 'Takrorlash (SM-2)',
-      desc: "Ilmiy tasdiqlangan interval takrorlash algoritmi yordamida yod oling",
-      badge: 'Kunlik vazifa',
-      glowColor: 'hsl(180, 85%, 50%)'
     },
     {
       id: 'sentence',

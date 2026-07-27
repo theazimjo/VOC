@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, PenLine } from 'lucide-react';
-import { calculateNextReview, responseToQuality } from '../../utils/sm2';
+import { calculateNextReview, responseToQuality } from '../../utils/spacedRepetition';
 import { speakWord } from '../../utils/helpers';
 import './Flashcard.css';
 
 // Short Uzbek labels for each part of speech
 const POS_LABELS = {
   noun:          { label: 'ot',        abbr: 'n.' },
-  verb:          { label: 'fe\u02bcl',   abbr: 'v.' },
+  verb:          { label: 'feʼl',   abbr: 'v.' },
   adjective:     { label: 'sifat',     abbr: 'adj.' },
   adverb:        { label: 'ravish',    abbr: 'adv.' },
   preposition:   { label: 'predlog',  abbr: 'prep.' },
-  conjunction:   { label: 'bog\u02bclovchi', abbr: 'conj.' },
+  conjunction:   { label: 'bogʼlovchi', abbr: 'conj.' },
   pronoun:       { label: 'olmosh',   abbr: 'pron.' },
   interjection:  { label: 'undov',    abbr: 'int.' },
   phrase:        { label: 'ibora',    abbr: 'phr.' },
@@ -35,6 +35,8 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
 
   const currentWord = words[currentIndex];
+  const cardStartRef = useRef(Date.now());
+  const revealElapsedRef = useRef(4);
 
   // Report progress
   useEffect(() => {
@@ -51,6 +53,13 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
     }
   }, [currentIndex, currentWord]);
 
+  // Reset per-card state when the card changes
+  useEffect(() => {
+    setIsFlipped(false);
+    cardStartRef.current = Date.now();
+    revealElapsedRef.current = 4;
+  }, [currentIndex]);
+
   // Space to flip
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -63,12 +72,19 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const handleCardClick = () => {
+    if (!isFlipped) revealElapsedRef.current = (Date.now() - cardStartRef.current) / 1000;
+    setIsFlipped(prev => !prev);
+  };
+
   const handleRate = async (rating) => {
     const isCorrect = rating !== 'again';
     if (onAnswer) onAnswer(currentWord, isCorrect);
-    
+
     const quality = responseToQuality(rating);
-    const sm2Data = calculateNextReview(quality, currentWord);
+    const sm2Data = calculateNextReview(quality, currentWord, {
+      responseTimeSec: revealElapsedRef.current,
+    });
     onUpdateWord(currentWord.id, sm2Data);
 
     const newResults = {
@@ -102,7 +118,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, s
           exit={{ opacity: 0, x: -60 }}
           transition={{ duration: 0.25 }}
           className="flashcard-scene"
-          onClick={() => setIsFlipped(!isFlipped)}
+          onClick={handleCardClick}
         >
           <div className={`flashcard ${isFlipped ? 'is-flipped' : ''}`}>
             {/* Front */}

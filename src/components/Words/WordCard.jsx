@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { getMasteryLevel } from '../../utils/sm2';
+import { getMasteryLevel } from '../../utils/spacedRepetition';
 import { partOfSpeechOptions, speakWord } from '../../utils/helpers';
 import { Volume2, Edit2, Trash2 } from 'lucide-react';
 import './WordCard.css';
