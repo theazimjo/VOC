@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { grammarData, germanGrammarData } from '../data/grammarData';
+import { grammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
 import { getExerciseType } from '../utils/grammarHelpers';
 import IosSpinner from '../components/common/IosSpinner';
@@ -12,10 +12,7 @@ export default function GrammarExercises() {
   const navigate = useNavigate();
   const { stats: grammarStats, loading } = useGrammarStats();
 
-  const lang = localStorage.getItem('grammar_language') || 'en';
-  const currentData = lang === 'en' ? grammarData : germanGrammarData;
-
-  const levelData = currentData[level];
+  const levelData = grammarData[level];
   const topic = levelData?.topics?.find((t) => t.id === topicId);
 
   useEffect(() => {

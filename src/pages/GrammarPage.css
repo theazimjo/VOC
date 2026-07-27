@@ -67,44 +67,6 @@
   font-weight: 400;
 }
 
-/* ── Language Switcher (iOS Segmented) ───── */
-.grammar-lang-selector {
-  display: flex;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 3px;
-  gap: 2px;
-  margin-left: auto;
-}
-
-.lang-btn {
-  background: transparent;
-  border: none;
-  padding: 7px 14px;
-  font-size: var(--font-xs);
-  font-weight: 700;
-  color: var(--text-secondary);
-  border-radius: calc(var(--radius-md) - 2px);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
-  font-family: var(--font-family);
-}
-
-.lang-btn:hover {
-  color: var(--text-primary);
-}
-
-.lang-btn.active {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-}
-
 /* ── Header Stats Row ────────────────────── */
 .grammar-header-stats {
   display: flex;
@@ -467,18 +429,6 @@
 
   .grammar-title {
     font-size: 1.2rem;
-  }
-
-  .grammar-lang-selector {
-    margin-left: 0;
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .lang-btn {
-    flex: 1;
-    justify-content: center;
-    padding: 7px 8px;
   }
 
   .grammar-header-stats {

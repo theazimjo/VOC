@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { grammarData, germanGrammarData } from '../data/grammarData';
+import { grammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
-import { playSound } from '../utils/feedback';
 import './GrammarPage.css';
 
 const LEVELS = [
@@ -37,12 +36,8 @@ const headerVariants = {
 
 export default function GrammarPage() {
   const navigate = useNavigate();
-  const [lang, setLang] = useState(() => {
-    return localStorage.getItem('grammar_language') || 'en';
-  });
   const [activeLevel, setActiveLevelState] = useState(() => {
-    const storedLevel = localStorage.getItem('grammar_level') || 'beginner';
-    return lang === 'de' && storedLevel !== 'beginner' ? 'beginner' : storedLevel;
+    return localStorage.getItem('grammar_level') || 'beginner';
   });
   const { stats: grammarStats } = useGrammarStats();
 
@@ -51,25 +46,13 @@ export default function GrammarPage() {
     localStorage.setItem('grammar_level', level);
   };
 
-  const currentData = lang === 'en' ? grammarData : germanGrammarData;
-  const topics = currentData[activeLevel]?.topics ?? [];
+  const topics = grammarData[activeLevel]?.topics ?? [];
 
-  const handleLangChange = (newLang) => {
-    setLang(newLang);
-    localStorage.setItem('grammar_language', newLang);
-    playSound('correct');
-    if (newLang === 'de' && activeLevel !== 'beginner') {
-      setActiveLevel('beginner');
-    }
-  };
-
-  // Calculate statistics for the active level
+  // Calculate statistics for the active level. Legacy German-grammar topic
+  // stats (that language option was removed) are excluded so old
+  // completions don't skew the counts below.
   const completedTopicsOfLevel = Object.entries(grammarStats?.topics || {})
-    .filter(([topicId, t]) => {
-      const isLvl = t.level === activeLevel;
-      const isDe = topicId.startsWith('de-');
-      return isLvl && (lang === 'de' ? isDe : !isDe);
-    })
+    .filter(([topicId, t]) => t.level === activeLevel && !topicId.startsWith('de-'))
     .map(([_, t]) => t);
 
   let completedExercisesCount = 0;
@@ -113,26 +96,7 @@ export default function GrammarPage() {
         <div className="grammar-header-content">
           <div className="grammar-header-icon">📖</div>
           <div className="grammar-header-titles">
-            <h1 className="grammar-title">
-              {lang === 'en' ? 'Grammatika' : 'Deutsche Grammatik'}
-            </h1>
-          
-          </div>
-
-          {/* Premium Language Switcher */}
-          <div className="grammar-lang-selector">
-            <button 
-              className={`lang-btn ${lang === 'en' ? 'active' : ''}`}
-              onClick={() => handleLangChange('en')}
-            >
-              🇬🇧 English
-            </button>
-            <button 
-              className={`lang-btn ${lang === 'de' ? 'active' : ''}`}
-              onClick={() => handleLangChange('de')}
-            >
-              🇩🇪 German
-            </button>
+            <h1 className="grammar-title">Grammatika</h1>
           </div>
         </div>
 

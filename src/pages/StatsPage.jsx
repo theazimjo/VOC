@@ -72,14 +72,12 @@ export default function StatsPage() {
   const posItems = Object.entries(posMap).sort((a, b) => b[1] - a[1]);
 
   // Grammar calculations
-  const lang = localStorage.getItem('grammar_language') || 'en';
-  const topicCounts = grammarTopicCounts[lang] || grammarTopicCounts.en;
+  const topicCounts = grammarTopicCounts;
 
+  // Exclude legacy German-grammar topic stats (that language option was
+  // removed) so old completions don't skew the counts below.
   const filteredTopics = Object.entries(grammarStats?.topics || {})
-    .filter(([topicId, t]) => {
-      const isDe = topicId.startsWith('de-');
-      return lang === 'de' ? isDe : !isDe;
-    })
+    .filter(([topicId]) => !topicId.startsWith('de-'))
     .map(([_, t]) => t);
 
   const uniqueGrammarTopics = filteredTopics.length;
