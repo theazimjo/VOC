@@ -287,7 +287,7 @@ export default function LibraryPage() {
               ) : (
                 /* Market view with ready-made packs list */
                 <div className="market-container">
-                  <div className="market-grid">
+                  <div className="grid-cards market-cards-grid">
                     {marketPacks.map((pack) => {
                       const installedPack = findInstalledPack(pack);
                       const isInstalled = !!installedPack || justInstalledIds.includes(pack.id);

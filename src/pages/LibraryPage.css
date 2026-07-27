@@ -86,7 +86,9 @@
   color: var(--text-secondary);
 }
 
-/* Content overrides for unified list view */
+/* Content grid — shared by "My packs" and "Market" so both sections use the
+   same card format and column layout instead of one being a list and the
+   other a grid. */
 .library-page .grid-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -118,10 +120,16 @@
     font-size: var(--font-xs);
   }
 
-  /* Force single-column lists on mobile to let horizontal cards expand */
   .library-page .grid-cards {
-    grid-template-columns: 1fr !important;
-    gap: var(--space-sm) !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  /* Market cards carry more content (badges, description, install button)
+     than pack cards — two narrow columns cramp that text and wrap/overlap
+     badly, so market cards get their own full-width column on mobile. */
+  .library-page .market-cards-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -177,13 +185,6 @@
   color: var(--text-secondary);
   font-size: var(--font-sm);
   line-height: 1.5;
-}
-
-.market-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
 }
 
 .market-card {

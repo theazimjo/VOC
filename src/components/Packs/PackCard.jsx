@@ -44,16 +44,20 @@ export default function PackCard({ pack, onLongPress }) {
     if (onLongPress) onLongPress();
   };
 
+  const accentColor = pack.color || 'var(--accent-1)';
+
   return (
     <motion.div
-      whileHover={{ scale: 1.015, x: 4 }}
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+      style={{ '--pack-accent': accentColor }}
     >
-      <Link 
-        to={`/packs/${pack.id}`} 
-        className="pack-card-horizontal"
+      <Link
+        to={`/packs/${pack.id}`}
+        className="pack-card"
         onMouseDown={startPress}
         onMouseUp={endPress}
         onMouseLeave={endPress}
@@ -64,39 +68,39 @@ export default function PackCard({ pack, onLongPress }) {
         onContextMenu={handleContextMenu}
         title="Tahrirlash uchun bosib turing"
       >
-        <div 
-          className="pack-card-color-indicator" 
-          style={{ background: pack.color || 'var(--accent-gradient)' }}
-        />
-        <div 
-          className="pack-card-icon-container" 
-          style={{ 
-            backgroundColor: pack.color ? `${pack.color}18` : 'rgba(255, 255, 255, 0.04)',
-            borderColor: pack.color ? `${pack.color}35` : 'var(--border)'
-          }}
-        >
-          {pack.icon}
-        </div>
-        <div className="pack-card-info-container">
-          <div className="pack-card-header-line">
-            <h3 className="pack-card-title">{pack.name}</h3>
+        <div className="pack-card-top">
+          <div
+            className="pack-card-icon"
+            style={{
+              backgroundColor: pack.color ? `${pack.color}18` : 'var(--accent-1-dim)',
+              borderColor: pack.color ? `${pack.color}35` : 'var(--border-light)',
+            }}
+          >
+            {pack.icon}
           </div>
+          <span className="pack-card-count">{pack.wordCount || 0} ta so'z</span>
+        </div>
+
+        <div className="pack-card-body">
+          <h3 className="pack-card-title">{pack.name}</h3>
           {pack.description && <p className="pack-card-desc">{pack.description}</p>}
-          {masteryPercent !== null && (
+        </div>
+
+        <div className="pack-card-footer">
+          {masteryPercent !== null ? (
             <div className="pack-card-progress-row">
               <div className="pack-card-progress-track">
                 <div
                   className="pack-card-progress-fill"
-                  style={{ width: `${masteryPercent}%`, background: pack.color || 'var(--accent-1)' }}
+                  style={{ width: `${masteryPercent}%`, background: accentColor }}
                 />
               </div>
               <span className="pack-card-progress-label">{masteryPercent}%</span>
             </div>
+          ) : (
+            <span className="pack-card-new-label">✨ Yangi to'plam</span>
           )}
-        </div>
-        <div className="pack-card-meta-container">
-          <span className="pack-card-badge-compact">{pack.wordCount || 0} ta so'z</span>
-          <span className="pack-card-arrow">›</span>
+          <span className="pack-card-arrow">→</span>
         </div>
       </Link>
     </motion.div>

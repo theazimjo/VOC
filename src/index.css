@@ -905,16 +905,6 @@ a:hover {
   background: var(--bg-glass-strong) !important;
 }
 
-/* Pack card indicators adjustments */
-.pack-card-color-indicator {
-  width: 4px !important;
-  border-radius: 4px 0 0 4px !important;
-}
-
-.pack-card-horizontal {
-  border-radius: 14px !important;
-}
-
 /* iOS Segmented control themes */
 [data-theme="ios"] {
   --segmented-bg: rgba(120, 120, 128, 0.12);
