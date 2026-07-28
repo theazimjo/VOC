@@ -138,7 +138,7 @@ export default function Dashboard() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 6)  return 'Assalomu alaykum';
+    if (hour < 6) return 'Assalomu alaykum';
     if (hour < 12) return 'Xayrli tong';
     if (hour < 18) return 'Xayrli kun';
     return 'Xayrli kech';
@@ -243,23 +243,7 @@ export default function Dashboard() {
         </motion.div>
       )}
 
-      {/* ── Progress Bar ── */}
-      <motion.div className="dash-progress-card" {...fadeUp(0.12)}>
-        <div className="dash-progress-header">
-          <span className="dash-progress-title" title="So'zlaringizning taxminiy xotira mustahkamlik darajasi (stability asosida hisoblangan)">
-            Vocabulary mastery
-          </span>
-          <span className="dash-progress-pct">{masteryPercent}%</span>
-        </div>
-        <div className="dash-progress-track">
-          <motion.div
-            className="dash-progress-fill"
-            initial={{ width: 0 }}
-            animate={{ width: `${masteryPercent}%` }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          />
-        </div>
-      </motion.div>
+
 
       {/* ── CTA Button ── */}
       {totalWords > 0 && (
