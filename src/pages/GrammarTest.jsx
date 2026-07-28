@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { playSound, triggerVibration } from '../utils/feedback';
+import { motion } from 'framer-motion';
+import { playSound } from '../utils/feedback';
 import { EXAMS_LIST } from '../data/examData';
 import { 
   ref, 
@@ -18,11 +18,9 @@ import {
   BookOpen, 
   ChevronRight, 
   ArrowLeft, 
-  Timer, 
-  CheckCircle, 
-  HelpCircle, 
-  Sparkles, 
-  TrendingUp,
+  Timer,
+  CheckCircle,
+  Sparkles,
   Clock,
   CheckCircle2,
   XCircle,
@@ -60,8 +58,6 @@ export default function GrammarTest() {
   // Time spent tracking
   const [timeSpent, setTimeSpent] = useState(0); // in seconds
 
-  // Category selection tab: 'level' | 'ielts'
-  const [examCategory, setExamCategory] = useState('level');
   // Attempts History state
   const [attempts, setAttempts] = useState([]);
   const [viewingPastAttempt, setViewingPastAttempt] = useState(null);
@@ -74,12 +70,10 @@ export default function GrammarTest() {
   const [newlyGradedAttempt, setNewlyGradedAttempt] = useState(null);
 
   // ─── SETTINGS & CONNECTIONS ────────────────────────────────────────────────
-  const [apiEndpoint, setApiEndpoint] = useState(() => {
+  const [apiEndpoint] = useState(() => {
     return localStorage.getItem('lm_studio_endpoint') || 'http://localhost:1234/v1';
   });
-  const [apiModel, setApiModel] = useState('local-model');
-  const [isApiChecking, setIsApiChecking] = useState(false);
-  const [apiStatus, setApiStatus] = useState({ checked: false, connected: false, error: '' });
+  const [apiModel] = useState('local-model');
 
   // Load attempts history (Firebase if logged in, otherwise localStorage)
   useEffect(() => {
@@ -173,7 +167,6 @@ export default function GrammarTest() {
       const ALL_EXAMS = EXAMS_LIST;
       const foundExam = ALL_EXAMS.find(e => e.id === testId);
       if (foundExam) {
-        setExamCategory('level');
         setActiveTest(foundExam);
         setSections(foundExam.sections);
         setStage((prev) => {
@@ -231,33 +224,6 @@ export default function GrammarTest() {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
-  };
-
-  const handleCheckConnection = async () => {
-    setIsApiChecking(true);
-    setApiStatus({ checked: false, connected: false, error: '' });
-    try {
-      const response = await fetch(`${apiEndpoint}/models`, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
-      });
-      if (!response.ok) throw new Error(`HTTP Error ${response.status}`);
-      const data = await response.json();
-      const model = data.data?.[0]?.id || 'local-model';
-      setApiModel(model);
-      setApiStatus({ checked: true, connected: true, error: '' });
-      playSound('correct');
-    } catch (e) {
-      console.error(e);
-      setApiStatus({
-        checked: true,
-        connected: false,
-        error: 'LM Studio ulanmadi. CORS (Private Network Access) yoki HTTPS cheklovlarini ko\'rib chiqing.'
-      });
-      playSound('wrong');
-    } finally {
-      setIsApiChecking(false);
-    }
   };
 
   const handleStartVariant = (exam) => {
@@ -338,7 +304,7 @@ export default function GrammarTest() {
             pending: false
           };
         } else if (section.id === 'gaps' && q.type === 'text') {
-          const isCorrect = userVal.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"") === q.correct.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+          const isCorrect = userVal.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"") === q.correct.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,"");
           tempGrades[key] = {
             score: isCorrect ? 1.0 : 0.0,
             feedback: isCorrect ? 'Perfect!' : `Correct answer: "${q.correct}"`,
@@ -352,8 +318,8 @@ export default function GrammarTest() {
             pending: false
           };
         } else if (section.id === 'mistakes') {
-          const cleanUser = userVal.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
-          const cleanRef = q.reference.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
+          const cleanUser = userVal.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
+          const cleanRef = q.reference.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
           if (cleanUser === cleanRef) {
             tempGrades[key] = { score: 1.0, feedback: 'Correct!', pending: false };
           } else {
@@ -366,9 +332,9 @@ export default function GrammarTest() {
             });
           }
         } else if (section.id === 'reorder') {
-          const cleanUser = userVal.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
-          const cleanRef = q.answer.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
-          const cleanAlt = q.altAnswer ? q.altAnswer.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ') : '';
+          const cleanUser = userVal.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
+          const cleanRef = q.answer.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
+          const cleanAlt = q.altAnswer ? q.altAnswer.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ') : '';
           
           const isCorrect = cleanUser === cleanRef || (cleanAlt && cleanUser === cleanAlt);
           tempGrades[key] = {
@@ -401,7 +367,8 @@ export default function GrammarTest() {
     });
 
     setGrades(apiGrades);
-    await finalizeScores(apiGrades, 'pending');
+    const hasPendingItems = Object.values(apiGrades).some((g) => g.pending);
+    await finalizeScores(apiGrades, hasPendingItems ? 'pending' : 'completed');
     setStage('submitted');
   };
 
@@ -452,7 +419,7 @@ export default function GrammarTest() {
       takenAt: new Date().toISOString(),
       answers: { ...answers },
       grades: { ...finalGradesMap },
-      status: 'pending',
+      status: hasPending ? 'pending' : 'completed',
       notified: false
     };
 
@@ -464,15 +431,18 @@ export default function GrammarTest() {
         setCurrentAttemptId(attemptId);
         await set(newAttemptRef, attemptData);
 
-        // Write to global admin pending node
-        const pendingRef = ref(db, `grammar_pending_attempts/${attemptId}`);
-        await set(pendingRef, {
-          id: attemptId,
-          userId: user.uid,
-          studentEmail: user.email,
-          studentName: user.displayName || user.email.split('@')[0],
-          ...attemptData
-        });
+        // Only queue for admin review if something actually needs grading —
+        // a fully auto-graded attempt (no open-ended answers) has nothing to review.
+        if (hasPending) {
+          const pendingRef = ref(db, `grammar_pending_attempts/${attemptId}`);
+          await set(pendingRef, {
+            id: attemptId,
+            userId: user.uid,
+            studentEmail: user.email,
+            studentName: user.displayName || user.email.split('@')[0],
+            ...attemptData
+          });
+        }
       } catch (err) {
         console.error("Failed to save attempt to Firebase:", err);
       }
@@ -1746,16 +1716,12 @@ ${exampleGrades}
                       const isPartial = !isPendingItem && gradeObj.score > 0.1 && gradeObj.score < 0.9;
 
                       let statusClass = 'wrong';
-                      let StatusIcon = XCircle;
                       if (isPendingItem) {
                         statusClass = 'pending-item';
-                        StatusIcon = Clock;
                       } else if (isCorrect) {
                         statusClass = 'correct';
-                        StatusIcon = CheckCircle2;
                       } else if (isPartial) {
                         statusClass = 'partial';
-                        StatusIcon = AlertCircle;
                       }
 
                       return (

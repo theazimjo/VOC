@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { grammarData } from '../data/grammarData';
@@ -42,29 +42,16 @@ export default function GrammarExercises() {
   // Get topic stats
   const topicStats = grammarStats?.topics?.[topicId];
   const exercisesData = topicStats?.exercises || {};
-
-  // Find active exercise (first uncompleted one, defaults to 1)
   const TOTAL_EXERCISES = 6;
-  let activeExerciseId = 1;
-  for (let i = 1; i <= TOTAL_EXERCISES; i++) {
-    if (!exercisesData[i]) {
-      activeExerciseId = i;
-      break;
-    }
-  }
-  const allCompleted = Object.keys(exercisesData).length >= TOTAL_EXERCISES;
-  if (allCompleted) {
-    activeExerciseId = TOTAL_EXERCISES + 1;
-  }
 
   const handleExerciseClick = (exId) => {
     navigate(`/grammar/${level}/${topicId}/${exId}`);
   };
 
   const getLevelLabel = () => {
-    if (level === 'beginner') return lang === 'en' ? 'Elementary' : 'Anfänger';
-    if (level === 'intermediate') return lang === 'en' ? 'Intermediate' : 'Mittelstufe';
-    return lang === 'en' ? 'Advanced' : 'Fortgeschrittene';
+    if (level === 'beginner') return "Boshlang'ich";
+    if (level === 'intermediate') return "O'rta daraja";
+    return 'Yuqori daraja';
   };
 
   const completedCount = Object.keys(exercisesData).length;
