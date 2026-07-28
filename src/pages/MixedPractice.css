@@ -573,6 +573,70 @@
   flex: 1;
 }
 
+/* Bigger, more celebratory completion card (Duolingo-style) — no header on
+   this step, so the card itself needs to carry more visual weight instead
+   of floating small in an otherwise empty screen. */
+.practice-results-card-lg {
+  max-width: 420px;
+  width: 100%;
+  padding: var(--space-2xl) var(--space-xl);
+}
+
+.practice-results-card-lg .result-icon-circle {
+  width: 100px;
+  height: 100px;
+  margin-bottom: var(--space-md);
+}
+
+.practice-results-card-lg h2 {
+  font-size: var(--font-2xl);
+  font-weight: 850;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.practice-results-card-lg .results-subtitle {
+  font-size: var(--font-md);
+  margin-bottom: var(--space-md);
+}
+
+.practice-results-card-lg .results-score-badge {
+  padding: var(--space-md) var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.practice-results-card-lg .score-value {
+  font-size: 3rem;
+}
+
+.practice-results-card-lg .score-total {
+  font-size: var(--font-md);
+}
+
+.practice-results-card-lg .results-label {
+  font-size: var(--font-md);
+  margin-bottom: var(--space-xl);
+}
+
+.practice-results-card-lg .result-actions {
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.practice-results-card-lg .result-actions .btn {
+  padding: 16px 24px;
+  font-size: var(--font-md);
+  font-weight: 700;
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 480px) {
+  .practice-results-card-lg {
+    max-width: 100%;
+    padding: var(--space-xl) var(--space-lg);
+  }
+}
+
 @media (max-width: 768px) {
   .mixed-practice-page {
     padding: var(--space-md);

@@ -457,23 +457,14 @@ export default function MixedPractice() {
             const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0);
             return (
             <div className="mixed-practice-container">
-              <div className="practice-session-header">
-                <span className="practice-session-title">
-                  {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : isDueMode ? <RotateCcw size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
-                  {isLeechMode ? "Qiyin so'zlar mashqi" : isDueMode ? "Bugungi takrorlash" : "Aralash Mashq"}
-                </span>
-                <button className="btn-exit-practice" onClick={handleExit} title="Chiqish">
-                  <X size={14} strokeWidth={2.4} /> Chiqish
-                </button>
-              </div>
             <motion.div
               key="results"
-              className="practice-results-card"
+              className="practice-results-card practice-results-card-lg"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
             >
               <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color }}>
-                <tier.Icon size={32} strokeWidth={2.2} />
+                <tier.Icon size={44} strokeWidth={2.2} />
               </div>
               <h2>{tier.label}</h2>
               <p className="results-subtitle">{isDueMode ? 'Takrorlash yakunlandi' : 'Aralash mashq yakunlandi'}</p>
@@ -483,7 +474,7 @@ export default function MixedPractice() {
                 <span className="score-slash">/</span>
                 <span className="score-total">{questions.length}</span>
               </div>
-              
+
               <div className="results-label">To'g'ri topilgan so'zlar</div>
 
               {/* Mistakes review */}
