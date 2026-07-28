@@ -166,6 +166,70 @@
   color: var(--text-secondary);
 }
 
+/* ── Memory Twin Insight Card ── */
+.dash-memtwin-card {
+  background: linear-gradient(135deg, var(--accent-1-dim, rgba(0, 122, 255, 0.08)) 0%, var(--bg-secondary, #FFFFFF) 60%);
+  border: 1px solid var(--border-light, rgba(0, 122, 255, 0.15));
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+
+.dash-memtwin-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.dash-memtwin-icon {
+  display: flex;
+  align-items: center;
+  color: var(--accent-1);
+}
+
+.dash-memtwin-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-1);
+}
+
+.dash-memtwin-text {
+  font-size: 15px;
+  color: var(--text-primary, #000);
+  line-height: 1.4;
+  margin: 0 0 6px;
+}
+
+.dash-memtwin-text strong {
+  font-weight: 700;
+}
+
+.dash-memtwin-sub {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--warning, #FF9500);
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.dash-memtwin-link {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-1);
+  text-decoration: none;
+}
+
+.dash-memtwin-link:active {
+  opacity: 0.6;
+}
+
 /* ── Progress Card ── */
 .dash-progress-card {
   background: var(--bg-secondary, #FFFFFF);

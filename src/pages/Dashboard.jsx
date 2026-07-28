@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit, ChevronRight } from 'lucide-react';
+import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit, ChevronRight, Brain, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { getMasteryLevel } from '../utils/spacedRepetition';
 import { computeRecallProbability } from '../utils/memoryEngine';
+import { getConfusionPairs } from '../experiment/experimentDB';
 import OnboardingModal from '../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../components/Onboarding/WhatsNewModal';
 import './Dashboard.css';
@@ -56,7 +57,16 @@ export default function Dashboard() {
   const [dueWords, setDueWords] = useState(0);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
+  const [confusionPairs, setConfusionPairs] = useState([]);
   const navigate = useNavigate();
+
+  // One-time fetch (not a realtime listener, matching Memory Lab's own
+  // usage) — just enough to surface the single most useful Memory Twin
+  // insight on the dashboard without duplicating Memory Lab's full state.
+  useEffect(() => {
+    if (!user) return;
+    getConfusionPairs(user.uid).then(setConfusionPairs).catch(() => setConfusionPairs([]));
+  }, [user]);
 
   useEffect(() => {
     if (!user || packsLoading) return;
@@ -101,6 +111,30 @@ export default function Dashboard() {
     () => getWeekActivity(streak?.activityLog, streak?.dailyGoal || 5),
     [streak]
   );
+
+  // The single most useful thing the memory model can tell the user right
+  // now — prefers a concrete confusion pair (the strongest, most "it knows
+  // me" signal) over the generic retention estimate, and says nothing at
+  // all rather than showing a hollow stat when there isn't enough history.
+  const memoryTwin = useMemo(() => {
+    const reviewed = allWords.filter(w => w.lastReviewed);
+    if (reviewed.length === 0) return null;
+
+    const now = Date.now();
+    let totalP = 0;
+    let atRisk = 0;
+    reviewed.forEach(w => {
+      const stability = typeof w.stability === 'number' ? w.stability : 1.0;
+      const daysSince = (now - new Date(w.lastReviewed).getTime()) / 86400000;
+      const p = computeRecallProbability(stability, daysSince);
+      totalP += p;
+      if (p < 0.5) atRisk++;
+    });
+    const avgRetention = Math.round((totalP / reviewed.length) * 100);
+    const topConfusion = [...confusionPairs].sort((a, b) => (b.count || 0) - (a.count || 0))[0] || null;
+
+    return { avgRetention, atRisk, topConfusion };
+  }, [allWords, confusionPairs]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -171,14 +205,50 @@ export default function Dashboard() {
         <div className="dash-stat-card">
           <div className="dash-stat-icon orange"><BellRing size={20} strokeWidth={2.2} /></div>
           <div className="dash-stat-value orange">{dueWords}</div>
-          <div className="dash-stat-label">Takrorlash</div>
+          <div className="dash-stat-label">Bugungi review</div>
         </div>
       </motion.div>
+
+      {/* ── Memory Twin Insight ── */}
+      {memoryTwin && (
+        <motion.div className="dash-memtwin-card" {...fadeUp(0.1)}>
+          <div className="dash-memtwin-header">
+            <span className="dash-memtwin-icon"><Brain size={18} strokeWidth={2.2} /></span>
+            <span className="dash-memtwin-title">Memory Twin</span>
+          </div>
+
+          {memoryTwin.topConfusion ? (
+            <>
+              <p className="dash-memtwin-text">
+                Siz <strong>{memoryTwin.topConfusion.wordA}</strong> va <strong>{memoryTwin.topConfusion.wordB}</strong> so'zlarini ko'pincha aralashtirayapsiz.
+              </p>
+              <p className="dash-memtwin-sub">
+                <AlertTriangle size={13} strokeWidth={2.3} /> Tavsiya: solishtirib mashq qilish (Contrastive Review)
+              </p>
+              <Link to="/experiment" className="dash-memtwin-link">Hozir tuzatish →</Link>
+            </>
+          ) : (
+            <>
+              <p className="dash-memtwin-text">
+                Oxirgi o'rgangan so'zlaringizni o'rtacha <strong>{memoryTwin.avgRetention}%</strong> ehtimol bilan eslayapsiz.
+              </p>
+              {memoryTwin.atRisk > 0 && (
+                <p className="dash-memtwin-sub">
+                  <AlertTriangle size={13} strokeWidth={2.3} /> {memoryTwin.atRisk} ta so'zda unutish xavfi yuqori
+                </p>
+              )}
+              <Link to="/experiment" className="dash-memtwin-link">Xotiramni ko'rish →</Link>
+            </>
+          )}
+        </motion.div>
+      )}
 
       {/* ── Progress Bar ── */}
       <motion.div className="dash-progress-card" {...fadeUp(0.12)}>
         <div className="dash-progress-header">
-          <span className="dash-progress-title">O'zlashtirish darajasi</span>
+          <span className="dash-progress-title" title="So'zlaringizning taxminiy xotira mustahkamlik darajasi (stability asosida hisoblangan)">
+            Vocabulary mastery
+          </span>
           <span className="dash-progress-pct">{masteryPercent}%</span>
         </div>
         <div className="dash-progress-track">
@@ -201,7 +271,7 @@ export default function Dashboard() {
           >
             {dueWords > 0 ? 'Takrorlashni boshlash' : 'Mashq qilish'}
             {dueWords > 0 && (
-              <span className="btn-practice-badge">{dueWords} ta so'z</span>
+              <span className="btn-practice-badge">{dueWords} ta review</span>
             )}
           </button>
         </motion.div>
