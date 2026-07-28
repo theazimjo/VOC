@@ -1,30 +1,25 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FlaskConical, Brain, Zap, TrendingUp, Sparkles } from 'lucide-react';
+import { FolderPlus, Layers, Move, ShieldCheck, Sparkles } from 'lucide-react';
 import './WhatsNewModal.css';
 
-export const WHATS_NEW_VERSION = 'v2_memory_lab';
+export const WHATS_NEW_VERSION = 'v3_pack_folders';
 
 const FEATURES = [
   {
-    icon: Brain,
-    title: 'Individual Unutish Egri Chizig\'i (P = e⁻ᵗ/ˢ)',
-    desc: 'Har bir insonning miyasi so\'zlarni har xil tezlikda unutadi. Tizim har bir so\'zingiz uchun sizning shaxsiy xotira barqarorligingizni (S) o\'rganadi.'
+    icon: Layers,
+    title: 'Papkalar — to\'plamlarni guruhlang',
+    desc: 'Bir mavzu yoki kitobga tegishli bir nechta to\'plamni (masalan, "Science" kitobining har xil bo\'limlari) bitta papka ichiga yig\'ib qo\'yishingiz mumkin.'
   },
   {
-    icon: Zap,
-    title: 'Aqlli Navbat (Smart Queue)',
-    desc: 'Yodlashni boshlaganingizda, unutilish arafasida turgan va eng kerakli so\'zlar avtomatik navbatning eng birinchi o\'rniga chiqadi.'
+    icon: Move,
+    title: 'Istalgan to\'plamni papkaga ko\'chiring',
+    desc: 'Yangi to\'plam yaratganda yoki mavjudini tahrirlaganda, uni istalgan papkaga biriktirishingiz yoki asosiy ro\'yxatga qaytarishingiz mumkin.'
   },
   {
-    icon: TrendingUp,
-    title: 'Tezlik va Ishonch Tahlili',
-    desc: 'Javob berish vaqtingiz (sekund) va ishonchingiz (1–5) avtomatik o\'lchanib, so\'zning xotiradagi mustahkamligi hisoblab boriladi.'
-  },
-  {
-    icon: FlaskConical,
-    title: '30 Kunlik Vizual Grafiklar',
-    desc: '"Memory Lab" bo\'limiga kirib, har bir so\'zingiz va umumiy xotirangizning 30 kunlik unutish egri chizig\'ini kuzatishingiz mumkin.'
+    icon: ShieldCheck,
+    title: 'To\'plamning o\'zi o\'zgarmaydi',
+    desc: 'Papka faqat tashqi ko\'rinishni tartibga soladi — so\'zlar, yodlash jarayoni va progress hech qanday o\'zgarishsiz avvalgidek ishlayveradi.'
   }
 ];
 
@@ -33,7 +28,7 @@ export default function WhatsNewModal({ onClose }) {
 
   const handleTryNow = () => {
     onClose();
-    navigate('/experiment');
+    navigate('/library');
   };
 
   return (
@@ -51,12 +46,12 @@ export default function WhatsNewModal({ onClose }) {
         </div>
 
         <div className="whatsnew-header-icon">
-          <FlaskConical size={32} strokeWidth={2} />
+          <FolderPlus size={32} strokeWidth={2} />
         </div>
 
-        <h2>🧪 Xotira Laboratoriyasi</h2>
+        <h2>📁 Papkalar bilan Kutubxona</h2>
         <p className="whatsnew-subtitle">
-          Sun'iy intellekt va Ebbinghaus algoritmi asosida individual xotira dinamikasi
+          Ko'p to'plamlaringizni endi mavzu bo'yicha papkalarga solib, tartibli saqlang
         </p>
 
         <div className="whatsnew-list">
@@ -84,8 +79,8 @@ export default function WhatsNewModal({ onClose }) {
 
         <div className="whatsnew-actions">
           <button className="whatsnew-btn-primary" onClick={handleTryNow}>
-            <FlaskConical size={18} />
-            Memory Lab'ga o'tish 🚀
+            <FolderPlus size={18} />
+            Kutubxonaga o'tish 🚀
           </button>
           <button className="whatsnew-btn-secondary" onClick={onClose}>
             Tushunarli 👍
