@@ -456,6 +456,7 @@ export default function MixedPractice() {
           {step === 'results' && (() => {
             const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0);
             return (
+            <div className="mixed-practice-container">
             <motion.div
               key="results"
               className="practice-results-card"
@@ -513,6 +514,7 @@ export default function MixedPractice() {
                 </button>
               </div>
             </motion.div>
+            </div>
             );
           })()}
         </AnimatePresence>
