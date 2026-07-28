@@ -457,6 +457,15 @@ export default function MixedPractice() {
             const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0);
             return (
             <div className="mixed-practice-container">
+              <div className="practice-session-header">
+                <span className="practice-session-title">
+                  {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : isDueMode ? <RotateCcw size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
+                  {isLeechMode ? "Qiyin so'zlar mashqi" : isDueMode ? "Bugungi takrorlash" : "Aralash Mashq"}
+                </span>
+                <button className="btn-exit-practice" onClick={handleExit} title="Chiqish">
+                  <X size={14} strokeWidth={2.4} /> Chiqish
+                </button>
+              </div>
             <motion.div
               key="results"
               className="practice-results-card"
