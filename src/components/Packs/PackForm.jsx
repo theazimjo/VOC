@@ -9,6 +9,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const [icon, setIcon] = useState(packIcons[0]);
   const [color, setColor] = useState(bookColors[0]);
   const [folderId, setFolderId] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isLocked = editPack && editPack.name === 'Irregular Verbs';
 
@@ -26,12 +27,18 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setColor(bookColors[Math.floor(Math.random() * bookColors.length)]);
       setFolderId(defaultFolderId || '');
     }
+    setIsSubmitting(false);
   }, [editPack, isOpen, defaultFolderId]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    onSave({ name, description, icon, color, folderId: folderId || null });
+    if (!name.trim() || isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      await onSave({ name, description, icon, color, folderId: folderId || null });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -123,8 +130,10 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                   </button>
                 )}
                 <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                  <button type="button" className="btn btn-ghost" onClick={onClose}>Bekor qilish</button>
-                  <button type="submit" className="btn btn-primary">Saqlash</button>
+                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>Bekor qilish</button>
+                  <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                    {isSubmitting ? 'Saqlanmoqda...' : 'Saqlash'}
+                  </button>
                 </div>
               </div>
             </form>

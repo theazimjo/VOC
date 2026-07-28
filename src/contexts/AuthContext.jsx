@@ -7,7 +7,8 @@ import {
   signInWithRedirect,
   signOut,
   updateProfile,
-  sendEmailVerification
+  sendEmailVerification,
+  sendPasswordResetEmail
 } from 'firebase/auth';
 import { ref, set, get, update, increment } from 'firebase/database';
 import { auth, db, googleProvider } from '../firebase';
@@ -98,6 +99,18 @@ export function AuthProvider({ children }) {
   };
 
 
+  // Deliberately swallows 'auth/user-not-found' so the caller can't use this
+  // to check whether an email is registered (email enumeration protection) —
+  // callers should always show the same generic "check your inbox" message.
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+    } catch (err) {
+      if (err.code === 'auth/user-not-found') return;
+      throw err;
+    }
+  };
+
   const logout = async () => {
     if ('clearAppBadge' in navigator) {
       navigator.clearAppBadge().catch(() => {});
@@ -118,6 +131,7 @@ export function AuthProvider({ children }) {
     login,
     loginWithGoogle,
     register,
+    resetPassword,
     logout,
     updateUserProfile
   };

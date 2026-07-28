@@ -39,6 +39,17 @@
           }
         },
 
+        "profile": {
+          "displayName": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" },
+          "email": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 320)" },
+          "photoURL": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 1000)" }
+        },
+
+        "activity": {
+          "lastSeen": { ".validate": "!newData.exists() || newData.isString()" },
+          "sessionCount": { ".validate": "!newData.exists() || newData.isNumber()" }
+        },
+
         "grammar": {
           "complex_attempts": {
             "$attemptId": {
@@ -56,13 +67,26 @@
     "grammar_pending_attempts": {
       ".read": "auth != null && auth.token.email === 'azimjonxolmirzayev30@gmail.com'",
       "$attemptId": {
-        ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))"
+        ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))",
+        "answers": {
+          "$answerKey": {
+            ".validate": "newData.isString() && newData.val().length <= 5000"
+          }
+        },
+        "studentEmail": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 320)" },
+        "studentName": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" },
+        "testTitle": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" }
       }
     },
     "error_logs": {
       ".read": "auth != null && auth.token.email === 'azimjonxolmirzayev30@gmail.com'",
       "$logId": {
-        ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))"
+        ".write": "auth != null && (auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (!data.exists() && newData.child('userId').val() === auth.uid))",
+        "message": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 500)" },
+        "stack": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)" },
+        "url": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)" },
+        "userAgent": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 500)" },
+        "context": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" }
       }
     },
     "globalWordStats": {

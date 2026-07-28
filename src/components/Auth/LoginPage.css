@@ -245,6 +245,23 @@
   flex-shrink: 0;
 }
 
+/* ---------- Inline "forgot password" link ---------- */
+.auth-forgot-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: -4px 0 4px;
+  align-self: flex-end;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ios-blue);
+  cursor: pointer;
+}
+
+.auth-forgot-link:hover {
+  text-decoration: underline;
+}
+
 /* ---------- Footer links ---------- */
 .auth-footer {
   text-align: center;

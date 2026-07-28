@@ -6,6 +6,7 @@ import './PackForm.css';
 export default function FolderForm({ isOpen, onClose, onSave, editFolder = null, onDelete = null }) {
   const [name, setName] = useState('');
   const [icon, setIcon] = useState(packIcons[0]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (editFolder) {
@@ -15,12 +16,18 @@ export default function FolderForm({ isOpen, onClose, onSave, editFolder = null,
       setName('');
       setIcon('📁');
     }
+    setIsSubmitting(false);
   }, [editFolder, isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    onSave({ name, icon });
+    if (!name.trim() || isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      await onSave({ name, icon });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -88,8 +95,10 @@ export default function FolderForm({ isOpen, onClose, onSave, editFolder = null,
                   </button>
                 )}
                 <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                  <button type="button" className="btn btn-ghost" onClick={onClose}>Bekor qilish</button>
-                  <button type="submit" className="btn btn-primary">Saqlash</button>
+                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>Bekor qilish</button>
+                  <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                    {isSubmitting ? 'Saqlanmoqda...' : 'Saqlash'}
+                  </button>
                 </div>
               </div>
             </form>

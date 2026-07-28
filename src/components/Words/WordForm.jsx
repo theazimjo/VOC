@@ -13,6 +13,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
     partOfSpeech: 'noun',
     customSentence: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (editWord) {
@@ -36,12 +37,18 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
         customSentence: ''
       });
     }
+    setIsSubmitting(false);
   }, [editWord, isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.word.trim() || !formData.translation.trim()) return;
-    onSave(formData);
+    if (!formData.word.trim() || !formData.translation.trim() || isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      await onSave(formData);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -154,8 +161,10 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
               </div>
               
               <div className="modal-footer">
-                <button type="button" className="btn btn-ghost" onClick={onClose}>Bekor qilish</button>
-                <button type="submit" className="btn btn-primary">Saqlash</button>
+                <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>Bekor qilish</button>
+                <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? 'Saqlanmoqda...' : 'Saqlash'}
+                </button>
               </div>
             </form>
           </motion.div>

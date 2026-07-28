@@ -72,13 +72,41 @@ function getFirebaseErrorMessage(code) {
 }
 
 export default function LoginPage() {
-  const { user, loading, login, loginWithGoogle } = useAuth();
+  const { user, loading, login, loginWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  // Inline "forgot password" mode — no separate route needed for a single email field.
+  const [mode, setMode] = useState('login'); // 'login' | 'reset'
+  const [resetEmail, setResetEmail] = useState('');
+  const [resetSent, setResetSent] = useState(false);
+
+  const handleResetSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!resetEmail.trim()) {
+      setError('Iltimos, email manzilingizni kiriting.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await resetPassword(resetEmail.trim());
+      // Always show the same success state, whether or not the email is
+      // actually registered — revealing that would let an attacker probe
+      // for valid accounts.
+      setResetSent(true);
+    } catch (err) {
+      setError(getFirebaseErrorMessage(err.code));
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (!loading && user) {
@@ -181,94 +209,166 @@ export default function LoginPage() {
         </AnimatePresence>
 
         {/* Form */}
-        <form className="auth-form" onSubmit={handleSubmit} noValidate>
-          <motion.div
-            className="auth-input-group"
-            variants={inputVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-          >
-            <input
-              type="email"
-              className="auth-input"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
+        {mode === 'reset' ? (
+          resetSent ? (
+            <div className="auth-form">
+              <p style={{ textAlign: 'center', lineHeight: 1.5 }}>
+                ✅ Agar bu email ro'yxatdan o'tgan bo'lsa, unga parolni tiklash havolasi yuborildi. Pochta qutingizni (shu jumladan spam papkasini) tekshiring.
+              </p>
+              <button
+                type="button"
+                className="auth-submit"
+                onClick={() => { setMode('login'); setResetSent(false); setResetEmail(''); }}
+              >
+                Kirishga qaytish
+              </button>
+            </div>
+          ) : (
+            <form className="auth-form" onSubmit={handleResetSubmit} noValidate>
+              <motion.div
+                className="auth-input-group"
+                variants={inputVariants}
+                initial="hidden"
+                animate="visible"
+                custom={0}
+              >
+                <input
+                  type="email"
+                  className="auth-input"
+                  placeholder="Email"
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  autoComplete="email"
+                  disabled={submitting}
+                  autoFocus
+                />
+                <label className="auth-label">Email</label>
+              </motion.div>
+
+              <motion.button
+                type="submit"
+                className="auth-submit"
+                disabled={submitting}
+                variants={inputVariants}
+                initial="hidden"
+                animate="visible"
+                custom={1}
+                whileTap={{ scale: 0.96 }}
+              >
+                {submitting ? <span className="auth-spinner" /> : 'Tiklash havolasini yuborish'}
+              </motion.button>
+
+              <button
+                type="button"
+                className="auth-forgot-link"
+                onClick={() => { setMode('login'); setError(''); }}
+              >
+                ← Kirishga qaytish
+              </button>
+            </form>
+          )
+        ) : (
+          <form className="auth-form" onSubmit={handleSubmit} noValidate>
+            <motion.div
+              className="auth-input-group"
+              variants={inputVariants}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+            >
+              <input
+                type="email"
+                className="auth-input"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoComplete="email"
+                disabled={submitting}
+              />
+              <label className="auth-label">Email</label>
+            </motion.div>
+
+            <motion.div
+              className="auth-input-group"
+              variants={inputVariants}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+            >
+              <input
+                type="password"
+                className="auth-input"
+                placeholder="Parol"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                disabled={submitting}
+              />
+              <label className="auth-label">Parol</label>
+            </motion.div>
+
+            <button
+              type="button"
+              className="auth-forgot-link"
+              onClick={() => { setMode('reset'); setError(''); setResetEmail(email); }}
+            >
+              Parolni unutdingizmi?
+            </button>
+
+            <motion.button
+              type="submit"
+              className="auth-submit"
               disabled={submitting}
-            />
-            <label className="auth-label">Email</label>
-          </motion.div>
+              variants={inputVariants}
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              whileTap={{ scale: 0.96 }}
+            >
+              {submitting ? <span className="auth-spinner" /> : 'Kirish'}
+            </motion.button>
+          </form>
+        )}
 
-          <motion.div
-            className="auth-input-group"
-            variants={inputVariants}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-          >
-            <input
-              type="password"
-              className="auth-input"
-              placeholder="Parol"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
+        {mode === 'login' && (
+          <>
+            {/* Divider */}
+            <motion.div
+              className="auth-divider"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <span>yoki</span>
+            </motion.div>
+
+            {/* Google */}
+            <motion.button
+              type="button"
+              className="auth-google-btn"
+              onClick={handleGoogle}
               disabled={submitting}
-            />
-            <label className="auth-label">Parol</label>
-          </motion.div>
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, type: "spring", damping: 20 }}
+              whileTap={{ scale: 0.96 }}
+            >
+              <GoogleIcon />
+              Google orqali kirish
+            </motion.button>
 
-          <motion.button
-            type="submit"
-            className="auth-submit"
-            disabled={submitting}
-            variants={inputVariants}
-            initial="hidden"
-            animate="visible"
-            custom={2}
-            whileTap={{ scale: 0.96 }}
-          >
-            {submitting ? <span className="auth-spinner" /> : 'Kirish'}
-          </motion.button>
-        </form>
-
-        {/* Divider */}
-        <motion.div
-          className="auth-divider"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          <span>yoki</span>
-        </motion.div>
-
-        {/* Google */}
-        <motion.button
-          type="button"
-          className="auth-google-btn"
-          onClick={handleGoogle}
-          disabled={submitting}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, type: "spring", damping: 20 }}
-          whileTap={{ scale: 0.96 }}
-        >
-          <GoogleIcon />
-          Google orqali kirish
-        </motion.button>
-
-        {/* Footer */}
-        <motion.div
-          className="auth-footer"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          Akkauntingiz yo'qmi?{' '}
-          <Link to="/register">Ro'yxatdan o'tish</Link>
-        </motion.div>
+            {/* Footer */}
+            <motion.div
+              className="auth-footer"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              Akkauntingiz yo'qmi?{' '}
+              <Link to="/register">Ro'yxatdan o'tish</Link>
+            </motion.div>
+          </>
+        )}
       </motion.div>
     </div>
   );

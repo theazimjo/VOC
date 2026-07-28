@@ -49,6 +49,8 @@ const inputVariants = {
   }),
 };
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function getPasswordStrength(password) {
   if (!password) return { level: 0, label: '' };
   let score = 0;
@@ -99,6 +101,9 @@ export default function RegisterPage() {
     }
     if (!email.trim()) {
       return 'Email manzilni kiriting.';
+    }
+    if (!EMAIL_PATTERN.test(email.trim())) {
+      return "Email manzil noto'g'ri ko'rinishda (masalan: ism@domen.com).";
     }
     if (password.length < 6) {
       return 'Parol kamida 6 belgidan iborat bo\'lishi kerak.';
