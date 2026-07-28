@@ -17,6 +17,11 @@ const SAMPLE_JSON = `[
   }
 ]`;
 
+// Keep this in sync with the `words/$packId` cap enforced server-side in
+// database.rules.json — failing fast here avoids a confusing partial import
+// where earlier chunks succeed and later ones get rejected mid-way.
+const MAX_WORDS_PER_IMPORT = 500;
+
 export default function BulkImportForm({ isOpen, onClose, onImport }) {
   const [jsonText, setJsonText] = useState('');
   const [error, setError] = useState('');
@@ -84,6 +89,10 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
         throw new Error("JSON ma'lumot ro'yxat (array) ko'rinishida bo'lishi kerak: [...]");
       }
 
+      if (parsedData.length > MAX_WORDS_PER_IMPORT) {
+        throw new Error(`Bir martada faqat ${MAX_WORDS_PER_IMPORT} tagacha so'z qo'shish mumkin (siz ${parsedData.length} ta kiritdingiz). Ro'yxatni bir necha qismga bo'lib yuboring.`);
+      }
+
       const validWords = [];
       for (let i = 0; i < parsedData.length; i++) {
         const item = parsedData[i];
@@ -91,12 +100,12 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
           throw new Error(`${i + 1}-so'zda 'word' yoki 'translation' maydoni yetishmayapti.`);
         }
         validWords.push({
-          word: item.word,
-          translation: item.translation,
+          word: String(item.word).slice(0, 300),
+          translation: String(item.translation).slice(0, 300),
           partOfSpeech: item.partOfSpeech || 'noun',
-          definition: item.definition || '',
-          example: item.example || '',
-          notes: item.notes || ''
+          definition: String(item.definition || '').slice(0, 3000),
+          example: String(item.example || '').slice(0, 3000),
+          notes: String(item.notes || '').slice(0, 2000)
         });
       }
 

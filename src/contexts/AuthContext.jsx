@@ -6,7 +6,8 @@ import {
   signInWithPopup,
   signInWithRedirect,
   signOut,
-  updateProfile
+  updateProfile,
+  sendEmailVerification
 } from 'firebase/auth';
 import { ref, set, get, update, increment } from 'firebase/database';
 import { auth, db, googleProvider } from '../firebase';
@@ -87,6 +88,11 @@ export function AuthProvider({ children }) {
       email,
       photoURL: '',
       createdAt: new Date().toISOString()
+    });
+    // Best-effort: doesn't block registration or gate any feature yet, but
+    // starts building a real verified-email signal for future anti-abuse use.
+    sendEmailVerification(cred.user).catch((err) => {
+      console.warn('Failed to send verification email:', err);
     });
     return cred;
   };

@@ -77,9 +77,10 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     value={name} 
                     onChange={e => setName(e.target.value)} 
                     placeholder="Masalan: IELTS Vocabulary"
-                    required 
+                    required
                     autoFocus
                     disabled={isLocked}
+                    maxLength={200}
                   />
                 </div>
 

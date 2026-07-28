@@ -5,10 +5,49 @@
       "$uid": {
         ".read": "auth != null && auth.uid === $uid",
         ".write": "auth != null && auth.uid === $uid",
+
+        "packs": {
+          "$packId": {
+            ".validate": "newData.hasChildren(['name'])",
+            "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200" },
+            "description": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)" },
+            "icon": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)" },
+            "color": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" },
+            "level": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 50)" },
+            "folderId": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 100)" },
+            "marketPackId": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" }
+          }
+        },
+
+        "folders": {
+          "$folderId": {
+            "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100" },
+            "icon": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)" }
+          }
+        },
+
+        "words": {
+          "$packId": {
+            "$wordId": {
+              "word": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 300)" },
+              "translation": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 300)" },
+              "definition": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)" },
+              "example": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)" },
+              "notes": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 2000)" },
+              "partOfSpeech": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 50)" }
+            }
+          }
+        },
+
         "grammar": {
           "complex_attempts": {
             "$attemptId": {
-              ".write": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjonxolmirzayev30@gmail.com')"
+              ".write": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+              "answers": {
+                "$answerKey": {
+                  ".validate": "newData.isString() && newData.val().length <= 5000"
+                }
+              }
             }
           }
         }
@@ -35,4 +74,3 @@
     }
   }
 }
-

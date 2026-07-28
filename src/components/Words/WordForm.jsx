@@ -72,8 +72,9 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                     value={formData.word} 
                     onChange={e => setFormData({...formData, word: e.target.value})} 
                     placeholder="Masalan: Serendipity"
-                    required 
+                    required
                     autoFocus
+                    maxLength={300}
                   />
                 </div>
                 
@@ -85,7 +86,8 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                     value={formData.translation} 
                     onChange={e => setFormData({...formData, translation: e.target.value})} 
                     placeholder="Tasodifiy baxt"
-                    required 
+                    required
+                    maxLength={300}
                   />
                 </div>
 
@@ -107,9 +109,10 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                   <input 
                     type="text" 
                     className="input" 
-                    value={formData.definition} 
-                    onChange={e => setFormData({...formData, definition: e.target.value})} 
+                    value={formData.definition}
+                    onChange={e => setFormData({...formData, definition: e.target.value})}
                     placeholder="Ingliz tilidagi ta'rifi"
+                    maxLength={1000}
                   />
                 </div>
 
@@ -117,10 +120,11 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                   <label>Misol gap (ixtiyoriy)</label>
                   <textarea 
                     className="textarea" 
-                    value={formData.example} 
-                    onChange={e => setFormData({...formData, example: e.target.value})} 
+                    value={formData.example}
+                    onChange={e => setFormData({...formData, example: e.target.value})}
                     placeholder="Ushbu so'z qatnashgan gap"
                     style={{ minHeight: '60px' }}
+                    maxLength={1500}
                   />
                 </div>
 
@@ -128,10 +132,11 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                   <label>O'zingiz tuzgan gap (Faol so'zlik uchun)</label>
                   <textarea 
                     className="textarea" 
-                    value={formData.customSentence} 
-                    onChange={e => setFormData({...formData, customSentence: e.target.value})} 
+                    value={formData.customSentence}
+                    onChange={e => setFormData({...formData, customSentence: e.target.value})}
                     placeholder="So'zni faollashtirish uchun mustaqil gap tuzib kiriting"
                     style={{ minHeight: '60px' }}
+                    maxLength={1500}
                   />
                 </div>
 
@@ -140,9 +145,10 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                   <input 
                     type="text" 
                     className="input" 
-                    value={formData.notes} 
-                    onChange={e => setFormData({...formData, notes: e.target.value})} 
+                    value={formData.notes}
+                    onChange={e => setFormData({...formData, notes: e.target.value})}
                     placeholder="Sinonim, antonim va h.k."
+                    maxLength={800}
                   />
                 </div>
               </div>

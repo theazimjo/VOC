@@ -53,6 +53,7 @@ export default function FolderForm({ isOpen, onClose, onSave, editFolder = null,
                     placeholder="Masalan: Science kitobi"
                     required
                     autoFocus
+                    maxLength={100}
                   />
                 </div>
 
