@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { shuffleArray, speakWord } from '../../utils/helpers';
-import { calculateNextReview } from '../../utils/spacedRepetition';
+import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import './QuizGame.css';
 
 export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
@@ -14,6 +14,10 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
   const [timeLeft, setTimeLeft] = useState(15);
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
+  // Tracked via a ref (not the ticking timeLeft state) so the elapsed time
+  // is precise and unaffected by the 1s-granularity countdown or stale
+  // closures in the memoized handlers below.
+  const questionStartRef = useRef(Date.now());
 
   const currentWord = words[currentIndex];
 
@@ -37,6 +41,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
     const wrongOptions = shuffleArray(otherWords).slice(0, 3).map(w => w.translation);
     while (wrongOptions.length < 3) wrongOptions.push(`Variant ${wrongOptions.length + 1}`);
     setOptions(shuffleArray([correctOption, ...wrongOptions]));
+    questionStartRef.current = Date.now();
   }, [currentIndex]);
 
   // Timer — only ticks when not yet answered
@@ -44,12 +49,17 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
     if (answered) return;
     if (timeLeft <= 0) {
       // Time's up — mark as wrong without selecting any option
+      const responseTime = (Date.now() - questionStartRef.current) / 1000;
       setTimedOut(true);
       setAnswered(true);
       setIncorrectCount(c => c + 1);
       if (onAnswer) onAnswer(currentWord, false);
-      const sm2Data = calculateNextReview(1, currentWord);
-      onUpdateWord(currentWord.id, sm2Data);
+      onUpdateWord(currentWord.id, {
+        isCorrect: false,
+        confidence: inferConfidenceFromSpeed(responseTime, false),
+        responseTime,
+        retrievalType: 'passive_recall',
+      });
       return;
     }
     const id = setTimeout(() => setTimeLeft(t => t - 1), 1000);
@@ -61,11 +71,16 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
     setSelectedOption(option);
     setAnswered(true);
 
+    const responseTime = (Date.now() - questionStartRef.current) / 1000;
     const isCorrect = option === currentWord.translation;
     if (onAnswer) onAnswer(currentWord, isCorrect);
 
-    const sm2Data = calculateNextReview(isCorrect ? 4 : 1, currentWord);
-    onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, {
+      isCorrect,
+      confidence: inferConfidenceFromSpeed(responseTime, isCorrect),
+      responseTime,
+      retrievalType: 'passive_recall',
+    });
 
     if (isCorrect) setCorrectCount(c => c + 1);
     else setIncorrectCount(c => c + 1);

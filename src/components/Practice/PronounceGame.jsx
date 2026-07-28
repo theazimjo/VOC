@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Mic, RotateCcw } from 'lucide-react';
-import { calculateNextReview } from '../../utils/spacedRepetition';
+import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
 import './PronounceGame.css';
 
@@ -16,6 +16,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const recognitionRef = useRef(null);
+  const cardStartRef = useRef(Date.now());
 
   const currentWord = words[currentIndex];
 
@@ -27,6 +28,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
   }, [currentIndex, words, onProgress]);
 
   useEffect(() => {
+    cardStartRef.current = Date.now();
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       setErrorMsg("Kechirasiz, ushbu brauzerda nutqni aniqlash qo'llab-quvvatlanmaydi. Google Chrome, Safari yoki MS Edge dan foydalanib ko'ring.");
@@ -84,6 +86,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
   };
 
   const checkPronunciation = async (speech) => {
+    const responseTime = (Date.now() - cardStartRef.current) / 1000;
     const target = currentWord.word.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
     const spoken = speech.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
 
@@ -96,8 +99,12 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       setCorrectCount(c => c + 1);
       if (onAnswer) onAnswer(currentWord, true);
 
-      const sm2Data = calculateNextReview(5, currentWord, { retrievalType: 'active_recall' }); // Active perfect quality
-      onUpdateWord(currentWord.id, sm2Data);
+      onUpdateWord(currentWord.id, {
+        isCorrect: true,
+        confidence: inferConfidenceFromSpeed(responseTime, true),
+        responseTime,
+        retrievalType: 'active_recall',
+      });
     } else {
       setStatus('wrong');
       if (onAnswer) onAnswer(currentWord, false);
@@ -106,14 +113,19 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
 
   const handleSkip = async () => {
     if (answered) return;
+    const responseTime = (Date.now() - cardStartRef.current) / 1000;
     setAnswered(true);
     setIsCorrect(false);
     setStatus('skipped');
     setIncorrectCount(c => c + 1);
     if (onAnswer) onAnswer(currentWord, false);
 
-    const sm2Data = calculateNextReview(1, currentWord, { retrievalType: 'active_recall' }); // Failed
-    onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, {
+      isCorrect: false,
+      confidence: inferConfidenceFromSpeed(responseTime, false),
+      responseTime,
+      retrievalType: 'active_recall',
+    });
   };
 
   const handleRetry = () => {
@@ -142,8 +154,12 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
   const handleUnsupportedSkip = async () => {
     setIncorrectCount(c => c + 1);
     if (onAnswer) onAnswer(currentWord, false);
-    const sm2Data = calculateNextReview(1, currentWord, { retrievalType: 'active_recall' });
-    onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, {
+      isCorrect: false,
+      confidence: 1,
+      responseTime: (Date.now() - cardStartRef.current) / 1000,
+      retrievalType: 'active_recall',
+    });
     handleNext();
   };
 

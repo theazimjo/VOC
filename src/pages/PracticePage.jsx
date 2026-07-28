@@ -10,6 +10,9 @@ import { useStreak } from '../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
+import { computeClusterCalibration } from '../utils/memoryEngine';
+import { saveReviewEvent } from '../experiment/experimentDB';
+import { classifyWord } from '../experiment/semanticClassifier';
 import IosSpinner from '../components/common/IosSpinner';
 import PracticeHub from '../components/Practice/PracticeHub';
 import Flashcard from '../components/Practice/Flashcard';
@@ -184,35 +187,63 @@ export default function PracticePage() {
     setStep('intro');
   };
 
-  // `data` is already the full calculateNextReview() result computed by the
-  // game component itself (Flashcard/QuizGame/etc. — each knows its own real
-  // response time and retrieval type). Persist it as-is instead of
-  // recomputing here: a second calculateNextReview() call couldn't see the
-  // per-game responseTimeSec/retrievalType (those are inputs, not part of
-  // its return value) and would silently fall back to neutral defaults,
-  // discarding the speed and active-recall bonuses on every single review.
-  const handleUpdateWord = async (wordId, data) => {
-    if (!user || !selectedSource) return;
+  // `reviewInput` is the raw outcome of a single review — {isCorrect,
+  // confidence, responseTime, retrievalType} — each game component measures
+  // its own real response time and knows its own retrieval type, but does
+  // NOT compute the stability update itself anymore. That's delegated here
+  // to saveReviewEvent(), the exact same function Memory Lab uses, so every
+  // practice mode feeds one consistent pipeline: recallHistory gets recorded
+  // (previously only Memory Lab wrote it, leaving Forgetting Autopsy/
+  // Confusion Network data empty for anyone who only used the main practice
+  // modes), and per-semantic-cluster self-calibration applies everywhere too.
+  // Returns the persisted result so a caller that needs it for its own
+  // in-session logic (IrregularVerbsTrainer's retry queue) can await it.
+  const handleUpdateWord = async (wordId, reviewInput) => {
+    if (!user || !selectedSource) return null;
     try {
       const word = sourceWords.find(w => w.id === wordId);
-      if (!word) return;
+      if (!word) return null;
 
+      const { isCorrect, confidence, responseTime, retrievalType = 'passive_recall' } = reviewInput;
       const prevWrongCount = word.wrongCount || 0;
 
-      const { quality, ...finalData } = data;
-      if (typeof quality === 'number') {
-        finalData.wrongCount = quality < 4
-          ? prevWrongCount + 1
-          : Math.max(0, prevWrongCount - 1);
-      }
+      // Self-calibrate this word's semantic cluster the same way Memory Lab
+      // does, so both practice paths adapt the model consistently. Use the
+      // pack's own name (not word.source — sourceWords is read directly from
+      // Firebase and never carries that synthetic, PacksContext-only field)
+      // so this matches how allWords classifies the very same word elsewhere.
+      const packName = selectedSource?.name || '';
+      const { key: clusterKey } = classifyWord(word.word, word.translation, packName);
+      const clusterHistory = [];
+      allWords.forEach((w) => {
+        if (classifyWord(w.word, w.translation, w.source).key === clusterKey) {
+          clusterHistory.push(...(w.recallHistory || []));
+        }
+      });
+      const clusterMultiplier = computeClusterCalibration(clusterHistory);
 
+      const updated = await saveReviewEvent(user.uid, selectedSource.id, wordId, word, {
+        isCorrect,
+        confidence,
+        responseTime,
+        retrievalType,
+        clusterMultiplier,
+        wordText: word.word,
+      });
+
+      const wrongCount = isCorrect ? Math.max(0, prevWrongCount - 1) : prevWrongCount + 1;
       const wordRef = ref(db, `users/${user.uid}/words/${selectedSource.id}/${wordId}`);
-      await update(wordRef, finalData);
+      await update(wordRef, { wrongCount });
+
+      const finalData = { ...updated, wrongCount };
 
       // Sync local state immediately so weights are updated for future picks
       setSourceWords(prev => prev.map(w => w.id === wordId ? { ...w, ...finalData } : w));
+
+      return finalData;
     } catch (e) {
       console.error('Error updating word:', e);
+      return null;
     }
   };
 

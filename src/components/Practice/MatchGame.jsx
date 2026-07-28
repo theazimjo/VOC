@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { shuffleArray } from '../../utils/helpers';
-import { calculateNextReview } from '../../utils/spacedRepetition';
+import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import './MatchGame.css';
 
 export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer }) {
@@ -21,6 +21,10 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
   // pre-session stability every time (which would silently erase earlier
   // mismatch penalties once the word is eventually matched correctly).
   const [liveWords, setLiveWords] = useState(words);
+  // Elapsed time since the board last returned to "nothing selected" —
+  // the closest equivalent this order-independent, two-click game has to
+  // the other games' "time from question shown to answer given".
+  const attemptStartRef = useRef(Date.now());
 
   useEffect(() => {
     const playWords = words.slice(0, 8);
@@ -31,8 +35,19 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
     return () => clearInterval(int);
   }, [words]);
 
+  // Reset the attempt timer whenever the board is idle (right after a match
+  // resolves, or after an error's brief highlight clears) — i.e. whenever a
+  // fresh attempt is about to begin.
+  useEffect(() => {
+    if (!selectedLeft && !selectedRight) {
+      attemptStartRef.current = Date.now();
+    }
+  }, [selectedLeft, selectedRight]);
+
   useEffect(() => {
     if (selectedLeft && selectedRight) {
+      const responseTime = (Date.now() - attemptStartRef.current) / 1000;
+
       if (selectedLeft === selectedRight) {
         // Match!
         const newMatched = [...matchedIds, selectedLeft];
@@ -42,9 +57,11 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
 
         const word = liveWords.find(w => w.id === selectedLeft);
         if (word) {
-          const sm2Data = calculateNextReview(4, word);
-          onUpdateWord(word.id, sm2Data);
-          setLiveWords(prev => prev.map(w => (w.id === word.id ? { ...w, ...sm2Data } : w)));
+          const confidence = inferConfidenceFromSpeed(responseTime, true);
+          onUpdateWord(word.id, { isCorrect: true, confidence, responseTime, retrievalType: 'passive_recall' })
+            .then((updated) => {
+              if (updated) setLiveWords(prev => prev.map(w => (w.id === word.id ? { ...w, ...updated } : w)));
+            });
           if (onAnswer) onAnswer(word, true);
         }
 
@@ -64,9 +81,11 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
         setErroredIds(prev => new Set(prev).add(selectedLeft));
         const word = liveWords.find(w => w.id === selectedLeft);
         if (word) {
-          const sm2Data = calculateNextReview(1, word);
-          onUpdateWord(word.id, sm2Data);
-          setLiveWords(prev => prev.map(w => (w.id === word.id ? { ...w, ...sm2Data } : w)));
+          const confidence = inferConfidenceFromSpeed(responseTime, false);
+          onUpdateWord(word.id, { isCorrect: false, confidence, responseTime, retrievalType: 'passive_recall' })
+            .then((updated) => {
+              if (updated) setLiveWords(prev => prev.map(w => (w.id === word.id ? { ...w, ...updated } : w)));
+            });
           if (onAnswer) onAnswer(word, false);
         }
         setTimeout(() => {

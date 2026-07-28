@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2 } from 'lucide-react';
-import { calculateNextReview } from '../../utils/spacedRepetition';
+import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
 import { findConfusableMatch } from '../../experiment/textSimilarity';
 import { recordConfusionPair } from '../../experiment/experimentDB';
@@ -20,6 +20,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const inputRef = useRef(null);
+  const startTimeRef = useRef(Date.now());
 
   const currentWord = words[currentIndex];
 
@@ -36,6 +37,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     setInput('');
     setAnswered(false);
     setIsCorrect(false);
+    startTimeRef.current = Date.now();
   }, [currentIndex]);
 
   useEffect(() => {
@@ -49,13 +51,19 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     const submittedInput = overrideWord ?? input;
     if (!submittedInput.trim()) return;
 
+    const responseTime = (Date.now() - startTimeRef.current) / 1000;
     const correct = submittedInput.toLowerCase().trim() === currentWord.word.toLowerCase();
     setAnswered(true);
     setIsCorrect(correct);
     if (onAnswer) onAnswer(currentWord, correct);
 
-    const sm2Data = calculateNextReview(correct ? 4 : 1, currentWord, { retrievalType: 'active_recall' });
-    onUpdateWord(currentWord.id, sm2Data);
+    const confidence = inferConfidenceFromSpeed(responseTime, correct);
+    onUpdateWord(currentWord.id, {
+      isCorrect: correct,
+      confidence,
+      responseTime,
+      retrievalType: 'active_recall',
+    });
 
     if (correct) {
       setCorrectCount(c => c + 1);
@@ -96,12 +104,17 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   const handleSkip = async () => {
     if (answered) return;
+    const responseTime = (Date.now() - startTimeRef.current) / 1000;
     setInput(currentWord.word);
     setAnswered(true);
     setIsCorrect(false);
     if (onAnswer) onAnswer(currentWord, false);
-    const sm2Data = calculateNextReview(1, currentWord, { retrievalType: 'active_recall' });
-    onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, {
+      isCorrect: false,
+      confidence: inferConfidenceFromSpeed(responseTime, false),
+      responseTime,
+      retrievalType: 'active_recall',
+    });
     setIncorrectCount(c => c + 1);
   };
 

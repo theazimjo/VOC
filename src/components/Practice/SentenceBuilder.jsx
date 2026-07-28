@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
-import { calculateNextReview } from '../../utils/spacedRepetition';
+import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
 import './SentenceBuilder.css';
 
@@ -71,6 +71,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const textareaRef = useRef(null);
+  const startTimeRef = useRef(Date.now());
 
   const currentWord = words[currentIndex];
 
@@ -85,6 +86,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
     setAnswered(false);
     setIsCorrect(false);
     setIsTooShort(false);
+    startTimeRef.current = Date.now();
   }, [currentIndex]);
 
   useEffect(() => {
@@ -96,6 +98,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
   const submitAnswer = async () => {
     if (answered || !input.trim()) return;
 
+    const responseTime = (Date.now() - startTimeRef.current) / 1000;
     const usesWord = sentenceUsesWord(input, currentWord.word);
     const wordCount = input.trim().split(/\s+/).length;
     const tooShort = usesWord && wordCount < 3;
@@ -105,8 +108,12 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
     setIsTooShort(tooShort);
     if (onAnswer) onAnswer(currentWord, usesWord);
 
-    const sm2Data = calculateNextReview(usesWord ? (tooShort ? 3 : 4) : 1, currentWord, { retrievalType: 'active_recall' });
-    onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, {
+      isCorrect: usesWord,
+      confidence: inferConfidenceFromSpeed(responseTime, usesWord),
+      responseTime,
+      retrievalType: 'active_recall',
+    });
 
     if (usesWord) setCorrectCount(c => c + 1);
     else setIncorrectCount(c => c + 1);
@@ -119,11 +126,16 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
 
   const handleSkip = async () => {
     if (answered) return;
+    const responseTime = (Date.now() - startTimeRef.current) / 1000;
     setAnswered(true);
     setIsCorrect(false);
     if (onAnswer) onAnswer(currentWord, false);
-    const sm2Data = calculateNextReview(1, currentWord, { retrievalType: 'active_recall' });
-    onUpdateWord(currentWord.id, sm2Data);
+    onUpdateWord(currentWord.id, {
+      isCorrect: false,
+      confidence: inferConfidenceFromSpeed(responseTime, false),
+      responseTime,
+      retrievalType: 'active_recall',
+    });
     setIncorrectCount(c => c + 1);
   };
 

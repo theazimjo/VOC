@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, PenLine } from 'lucide-react';
-import { calculateNextReview, responseToQuality } from '../../utils/spacedRepetition';
+import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
 import './Flashcard.css';
 
@@ -77,15 +77,16 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
     setIsFlipped(prev => !prev);
   };
 
-  const handleRate = async (rating) => {
-    const isCorrect = rating !== 'again';
+  const handleJudge = (isCorrect) => {
     if (onAnswer) onAnswer(currentWord, isCorrect);
 
-    const quality = responseToQuality(rating);
-    const sm2Data = calculateNextReview(quality, currentWord, {
-      responseTimeSec: revealElapsedRef.current,
+    const confidence = inferConfidenceFromSpeed(revealElapsedRef.current, isCorrect);
+    onUpdateWord(currentWord.id, {
+      isCorrect,
+      confidence,
+      responseTime: revealElapsedRef.current,
+      retrievalType: 'passive_recall',
     });
-    onUpdateWord(currentWord.id, sm2Data);
 
     const newResults = {
       correctCount: results.correctCount + (isCorrect ? 1 : 0),
@@ -156,19 +157,16 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
         </motion.div>
       </AnimatePresence>
 
-      {/* Rating buttons — visible only when flipped */}
+      {/* Judgement buttons — visible only when flipped. Confidence is
+          auto-inferred from response speed (same as Memory Lab), not
+          manually self-rated, so this is a binary choice like everywhere
+          else in the app. */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
-        <button className="flashcard-rating-btn again" onClick={() => handleRate('again')}>
-          <span className="rating-label">Bilmadim</span>
+        <button className="flashcard-rating-btn again" onClick={() => handleJudge(false)}>
+          <span className="rating-label">✗ Bilmadim</span>
         </button>
-        <button className="flashcard-rating-btn hard" onClick={() => handleRate('hard')}>
-          <span className="rating-label">Qiyin</span>
-        </button>
-        <button className="flashcard-rating-btn good" onClick={() => handleRate('good')}>
-          <span className="rating-label">Yaxshi</span>
-        </button>
-        <button className="flashcard-rating-btn easy" onClick={() => handleRate('easy')}>
-          <span className="rating-label">Oson</span>
+        <button className="flashcard-rating-btn easy" onClick={() => handleJudge(true)}>
+          <span className="rating-label">✓ Bildim</span>
         </button>
       </div>
     </div>
