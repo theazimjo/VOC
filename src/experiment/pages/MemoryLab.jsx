@@ -18,10 +18,11 @@ import { useNavigate } from 'react-router-dom';
 import {
   FlaskConical, BarChart2, Brain, ArrowLeft,
   Play, RefreshCw, CheckCircle, XCircle, Zap,
-  TrendingUp, Clock, BookOpen, Award
+  TrendingUp, Clock, BookOpen, Award, Sparkles
 } from 'lucide-react';
 
 import { useMemoryExperiment } from '../useMemoryExperiment';
+import { simulateReviewScenarios } from '../../utils/memoryEngine';
 import WordMemorySession from './WordMemorySession';
 import MemoryInsights from './MemoryInsights';
 import './MemoryLab.css';
@@ -253,6 +254,15 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
   const now = new Date();
   const strictlyDueCount = queue.filter(w => !w.nextOptimalReview || new Date(w.nextOptimalReview) <= now).length;
 
+  // "Why exactly now?" — simulate reviewing this session's batch today vs.
+  // putting it off, using the batch's own average stability so the numbers
+  // reflect these actual words, not an arbitrary example.
+  const avgStability = batch.length > 0
+    ? batch.reduce((sum, w) => sum + (Number(w.stability) || 1.0), 0) / batch.length
+    : 1.0;
+  const simNow = simulateReviewScenarios(avgStability, 1, 30);
+  const simLater = simulateReviewScenarios(avgStability, 14, 30);
+
   return (
     <div className="mem-lab-tab">
       {/* Hero banner */}
@@ -277,7 +287,7 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
           <div className="mem-due-header">
             <span className="mem-due-title">🧠 Aqlli Yodlash Navbati</span>
             <span className="mem-due-badge-count">
-              {strictlyDueCount > 0 ? `⏰ ${strictlyDueCount} ta vaqti kelgan` : `✨ Barqaror`}
+              {strictlyDueCount > 0 ? `⏰ ${strictlyDueCount} ta review tayyor` : `✨ Barqaror`}
             </span>
           </div>
 
@@ -285,7 +295,12 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
             {batch.slice(0, 5).map(m => (
               <div key={m.wordId} className="mem-due-chip">
                 <span className="mem-due-chip-word">{m.wordData.word}</span>
-                <span className="mem-due-chip-s">S={m.stability?.toFixed(1)}d</span>
+                <span
+                  className="mem-due-chip-s"
+                  title="Barqarorlik (Stability) — bu so'zni unutmasdan necha kun saqlab qolishingiz taxmin qilinadi."
+                >
+                  S: {m.stability?.toFixed(1)} kun
+                </span>
               </div>
             ))}
             {batch.length > 5 && (
@@ -298,12 +313,13 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
             onClick={() => onStart(batch)}
           >
             <Play size={18} />
-            Yodlashni boshlash ({batch.length} ta so'z)
+            Yodlashni boshlash · {batch.length} ta
           </button>
 
           <div className="mem-remaining-note">
-            ✦ Jami <strong>{queue.length}</strong> ta so'z individual unutish ehtimoli P(t) bo'yicha saralangan.
-            {remaining > 0 && ` Keyingi sessiyada yana ${remaining} ta so'z kutyapti.`}
+            ✦ <strong>{queue.length}</strong> ta so'z sizning individual unutish ehtimolingiz asosida saralangan.
+            {' '}Eng muhim <strong>{batch.length}</strong> tasi bugungi sessiyaga tanlandi.
+            {remaining > 0 && ` Yana ${remaining} ta so'z keyingi sessiyada kutyapti.`}
           </div>
         </div>
       ) : (
@@ -311,6 +327,29 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
           <div className="mem-no-due-icon">📚</div>
           <h3>Lug'atingizda hali so'zlar yo'q</h3>
           <p>Kutubxonadan yangi so'zlar va to'plamlar qo'shing!</p>
+        </div>
+      )}
+
+      {/* Memory Simulator — "why exactly now?" */}
+      {batch.length > 0 && (
+        <div className="mem-lab-sim-card">
+          <div className="mem-lab-sim-title">
+            <Sparkles size={15} strokeWidth={2.2} /> Nega aynan hozir?
+          </div>
+          <p className="mem-lab-sim-text">
+            Ushbu {batch.length} ta so'zni bugun ko'rib chiqsangiz, 30 kundan keyin ham eslab qolish ehtimolingiz yuqori bo'ladi:
+          </p>
+          <div className="mem-lab-sim-compare">
+            <div className="mem-lab-sim-stat">
+              <span className="mem-lab-sim-stat-label">Hozir ko'rib chiqsangiz</span>
+              <span className="mem-lab-sim-stat-value good">{Math.round(simNow.withReview * 100)}%</span>
+            </div>
+            <div className="mem-lab-sim-stat">
+              <span className="mem-lab-sim-stat-label">2 haftadan keyin ko'rib chiqsangiz</span>
+              <span className="mem-lab-sim-stat-value bad">{Math.round(simLater.withReview * 100)}%</span>
+            </div>
+          </div>
+          <div className="mem-lab-sim-note">30-kunlik eslab qolish ehtimoli (o'rtacha barqarorlik asosida)</div>
         </div>
       )}
 
@@ -367,9 +406,8 @@ export default function MemoryLab() {
           <ArrowLeft size={20} />
         </button>
         <div className="mem-page-title">
-          <span className="mem-page-title-icon">🧪</span>
-          Memory Experiment
-          <span className="mem-page-title-badge">BETA</span>
+          <span className="mem-page-title-icon">🧠</span>
+          Memory Twin
         </div>
         <div style={{ width: 40 }} />
       </div>

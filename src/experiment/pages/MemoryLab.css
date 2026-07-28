@@ -278,6 +278,63 @@
   padding: 2px 0;
 }
 
+/* ── Lab Tab: Memory Simulator ("why exactly now?") ────────── */
+.mem-lab-sim-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.mem-lab-sim-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-1);
+  margin-bottom: 0.5rem;
+}
+
+.mem-lab-sim-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0 0 0.75rem;
+}
+
+.mem-lab-sim-compare {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mem-lab-sim-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mem-lab-sim-stat-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.mem-lab-sim-stat-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.mem-lab-sim-stat-value.good { color: var(--success); }
+.mem-lab-sim-stat-value.bad { color: var(--error); }
+
+.mem-lab-sim-note {
+  margin-top: 0.6rem;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
 /* ── No due ─────────────────────────────────────────────── */
 .mem-no-due {
   text-align: center;
