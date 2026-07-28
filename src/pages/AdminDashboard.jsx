@@ -10,7 +10,7 @@ import { ref, get } from 'firebase/database';
 import {
   Users, Activity, BookOpen, Clock, TrendingUp,
   ArrowLeft, RefreshCw, Shield, Zap, Award,
-  ChevronDown, ChevronUp, Search
+  ChevronDown, ChevronUp, Search, AlertTriangle
 } from 'lucide-react';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
@@ -141,7 +141,7 @@ function ActivityHeatmap({ activityLog = {} }) {
 
 function UserRow({ userData, index }) {
   const [expanded, setExpanded] = useState(false);
-  const { profile, activity, packs = {}, words = {} } = userData;
+  const { profile, activity, packs = {}, words = {}, meta = {} } = userData;
 
   const packCount = Object.keys(packs).length;
   const wordCount = Object.values(words).reduce((total, packWords) => {
@@ -151,6 +151,15 @@ function UserRow({ userData, index }) {
   const lastSeen = activity?.lastSeen;
   const activityClass = getActivityColor(lastSeen);
   const streak = userData.streak?.streakCount || 0;
+
+  const folderCount = Object.keys(userData.folders || {}).length;
+  const packsCreatedTotal = meta.packsCreatedTotal || 0;
+  const foldersCreatedTotal = meta.foldersCreatedTotal || 0;
+  // Lifetime creations far above what currently exists means a lot of
+  // create+delete cycling — worth a second look, not proof of abuse.
+  const packChurn = packsCreatedTotal - packCount;
+  const folderChurn = foldersCreatedTotal - folderCount;
+  const looksSuspicious = packChurn > 30 || folderChurn > 30;
 
   return (
     <motion.div
@@ -172,7 +181,12 @@ function UserRow({ userData, index }) {
 
         {/* Identity */}
         <div className="adm-user-identity">
-          <div className="adm-user-name">{profile?.displayName || 'Nomsiz'}</div>
+          <div className="adm-user-name">
+            {profile?.displayName || 'Nomsiz'}
+            {looksSuspicious && (
+              <AlertTriangle size={13} className="adm-suspicious-flag" title="Ko'p create+delete tsikli — tekshirib ko'ring" />
+            )}
+          </div>
           <div className="adm-user-email">{profile?.email || '—'}</div>
         </div>
 
@@ -239,6 +253,14 @@ function UserRow({ userData, index }) {
             <div className="adm-detail-item">
               <div className="adm-detail-label">Streak</div>
               <div className="adm-detail-value">{streak} kun 🔥</div>
+            </div>
+            <div className={`adm-detail-item ${packChurn > 30 ? 'adm-detail-item--warn' : ''}`}>
+              <div className="adm-detail-label">Umrbod yaratilgan to'plamlar</div>
+              <div className="adm-detail-value">{packsCreatedTotal} ta (hozir {packCount} ta bor)</div>
+            </div>
+            <div className={`adm-detail-item ${folderChurn > 30 ? 'adm-detail-item--warn' : ''}`}>
+              <div className="adm-detail-label">Umrbod yaratilgan papkalar</div>
+              <div className="adm-detail-value">{foldersCreatedTotal} ta (hozir {folderCount} ta bor)</div>
             </div>
           </div>
 

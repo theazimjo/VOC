@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { ref, push, update, remove, get, onValue, serverTimestamp } from 'firebase/database';
+import { ref, push, update, remove, get, onValue, serverTimestamp, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from './AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
@@ -199,6 +199,17 @@ export function PacksProvider({ children }) {
         [`packs/${newPackRef.key}`]: packData,
         'meta/lastPackCreatedAt': serverTimestamp()
       });
+
+      // Best-effort lifetime counter for the admin panel — a monitoring
+      // signal only, not an enforced cap (see chat history: RTDB rules can't
+      // atomically tie a counter to a sibling write, so this can't be relied
+      // on to block abuse, only to surface it).
+      try {
+        await runTransaction(ref(db, `users/${user.uid}/meta/packsCreatedTotal`), (count) => (count || 0) + 1);
+      } catch (err) {
+        console.warn('Failed to bump packsCreatedTotal:', err);
+      }
+
       return newPackRef.key;
     },
     [user]
@@ -262,6 +273,14 @@ export function PacksProvider({ children }) {
         },
         'meta/lastFolderCreatedAt': serverTimestamp()
       });
+
+      // Best-effort lifetime counter for the admin panel — see addPack.
+      try {
+        await runTransaction(ref(db, `users/${user.uid}/meta/foldersCreatedTotal`), (count) => (count || 0) + 1);
+      } catch (err) {
+        console.warn('Failed to bump foldersCreatedTotal:', err);
+      }
+
       return newFolderRef.key;
     },
     [user]

@@ -8,7 +8,9 @@
 
         "meta": {
           "lastPackCreatedAt": { ".validate": "newData.isNumber() && newData.val() === now" },
-          "lastFolderCreatedAt": { ".validate": "newData.isNumber() && newData.val() === now" }
+          "lastFolderCreatedAt": { ".validate": "newData.isNumber() && newData.val() === now" },
+          "packsCreatedTotal": { ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" },
+          "foldersCreatedTotal": { ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() : 0) + 1" }
         },
 
         "packs": {

@@ -394,6 +394,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.adm-suspicious-flag {
+  color: var(--warning);
+  flex-shrink: 0;
 }
 .adm-user-email {
   font-size: 0.75rem;
@@ -474,6 +481,9 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-primary);
+}
+.adm-detail-item--warn .adm-detail-value {
+  color: var(--warning);
 }
 
 .adm-pack-list {
