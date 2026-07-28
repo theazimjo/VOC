@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, push, update, get, remove, set } from 'firebase/database';
@@ -50,12 +50,29 @@ export default function LibraryPage() {
   // ----------------------------------------------------
   // Automatic Migration: Convert all existing books to packs
   // ----------------------------------------------------
+  // Tracks book ids already claimed for migration so that this effect —
+  // which re-runs every time `books` changes, including when a book gets
+  // removed mid-migration by the loop below — never re-migrates a book
+  // that's already being (or has been) processed. Without this, removing
+  // book 1 triggers the realtime listener, which produces a new `books`
+  // array, which re-fires this effect and re-migrates books 2, 3, ... in
+  // parallel with the original still-running loop, creating duplicate packs.
+  const migratingBookIdsRef = useRef(new Set());
+
+  useEffect(() => {
+    migratingBookIdsRef.current = new Set();
+  }, [user]);
+
   useEffect(() => {
     if (!user || booksLoading || !books || books.length === 0) return;
 
+    const booksToMigrate = books.filter((b) => !migratingBookIdsRef.current.has(b.id));
+    if (booksToMigrate.length === 0) return;
+    booksToMigrate.forEach((b) => migratingBookIdsRef.current.add(b.id));
+
     const migrateBooksToPacks = async () => {
-      console.log(`Starting migration of ${books.length} books to packs...`);
-      for (const book of books) {
+      console.log(`Starting migration of ${booksToMigrate.length} books to packs...`);
+      for (const book of booksToMigrate) {
         try {
           const bookRef = ref(db, `users/${user.uid}/books/${book.id}`);
           const bookSnap = await get(bookRef);
