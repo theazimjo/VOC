@@ -32,7 +32,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SkipForward, PenLine, Eye } from 'lucide-react';
 import { inferConfidenceFromSpeed, getRecommendedRetrievalType } from '../../utils/memoryEngine';
-import { similarityRatio } from '../textSimilarity';
+import { similarityRatio, findConfusableMatch } from '../textSimilarity';
 
 const AUTO_CORRECT_THRESHOLD = 0.82;
 const CONFUSION_THRESHOLD = 0.6;
@@ -110,20 +110,17 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
   const detectConfusion = (typedText) => {
     if (!onConfusionDetected || !Array.isArray(allWords) || !typedText.trim()) return;
 
-    let best = null;
-    for (const w of allWords) {
-      if (!w || w.id === current.wordId || !w.translation) continue;
-      const ratio = similarityRatio(typedText, w.translation);
-      if (ratio >= CONFUSION_THRESHOLD && (!best || ratio > best.ratio)) {
-        best = { ratio, id: w.id, word: w.word, translation: w.translation };
-      }
-    }
+    const best = findConfusableMatch(typedText, allWords, {
+      excludeId: current.wordId,
+      getField: (w) => w.translation,
+      threshold: CONFUSION_THRESHOLD,
+    });
     if (best) {
       onConfusionDetected(current.wordId, best.id, {
         wordA: word,
-        wordB: best.word,
+        wordB: best.candidate.word,
         translationA: translation,
-        translationB: best.translation,
+        translationB: best.candidate.translation,
       });
     }
   };

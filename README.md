@@ -38,8 +38,9 @@ Quyida — bu vizyonning qaysi qismi hozir haqiqatan ishlayotgani, qaysi qismi u
 | Qatlam | Qayerda | Tavsif |
 |---|---|---|
 | **Individual Memory Dynamics Engine** | `memoryEngine.js` — `updateStability`, `computeRecallProbability` | `P(t) = e^(−t/S)` unutish egri chizig'i, har bir foydalanuvchi × har bir so'z uchun alohida stability qiymati |
-| **Future Memory Simulator (v1)** | `getForgettingCurvePoints` → `MemoryInsights.jsx` | Har bir so'z uchun 0/1/3/7/14/30 kunlik eslab qolish foizi hisoblanadi va grafik ko'rinishida ko'rsatiladi |
-| **Confusion Network (v1)** | `textSimilarity.js` (Levenshtein) + `reportConfusion` → `MemoryInsights.jsx` | Foydalanuvchi xato javob berganda, unga o'xshash so'zlar avtomatik aniqlanadi va "chalkashtirilgan juftliklar" ro'yxati sifatida ko'rsatiladi |
+| **Future Memory Simulator** | `simulateReviewScenarios`/`simulateReviewDayOptions` (`memoryEngine.js`) → `MemoryInsights.jsx` | Har bir so'z uchun "hech qachon takrorlamasangiz" va "1/3/7/14-kunda takrorlasangiz" ssenariylarini interaktiv taqqoslaydi — 30 kundan keyingi eslab qolish foizi qanday o'zgarishini ko'rsatadi |
+| **Forgetting Autopsy** | `forgettingAutopsy.js` — `diagnoseForgetting` → `MemoryInsights.jsx` | So'z unutilganda, mavjud signallar (interval, ishonch darajasi, chalkashtirish) asosida nisbiy ta'sir ko'rsatuvchi omillarni aniqlaydi va mos mashq turini tavsiya qiladi. Ataylab **statistik faktdan ko'ra "taxminiy baho"** sifatida taqdim etiladi |
+| **Confusion Network** | `textSimilarity.js` (`findConfusableMatch`) + `reportConfusion`/`recordConfusionPair` → `MemoryInsights.jsx` | Foydalanuvchi xato javob berganda (endi nafaqat Memory Lab'da, balki **asosiy Imlo mashqida** ham), unga o'xshash so'zlar avtomatik aniqlanadi va "chalkashtirilgan juftliklar" ro'yxati sifatida ko'rsatiladi |
 | **Semantik klasterlash + o'z-o'zini kalibrlash** | `semanticClassifier.js` + `computeClusterCalibration` | Har bir so'z avtomatik semantik guruhga (hayvonlar, texnologiya, fe'llar, sifatlar...) ajratiladi; foydalanuvchining shu guruh bo'yicha haqiqiy natijalari modelning bashoratini moslashtiradi |
 | **Scheduling Transparency** | `explainSchedulingDecision` | "Nega aynan hozir takrorlash tavsiya qilinmoqda" — oddiy tilda tushuntirish |
 | **Testing/generation effect** | `applyReview` (`retrievalType`) | Faol (typing) va passiv takrorlash alohida hisobga olinadi va turlicha xotira o'sishi beradi |
@@ -48,9 +49,8 @@ Quyida — bu vizyonning qaysi qismi hozir haqiqatan ishlayotgani, qaysi qismi u
 
 | Qatlam | Nima yetishmayapti | Nega tez qurish mumkin |
 |---|---|---|
-| **Forgetting Autopsy** ("Nega unutdim?") | Sabablarni foizli taqsimlash formulasi va UI | Kerakli signallar (confusion mavjudligi, review intervali, confidence darajasi) allaqachon saqlanadi — faqat ularni bitta diagnostik javobga birlashtirish kerak |
-| **Interactive Future Simulator** | "Agar 7-kunda takrorlasangiz — 30-kunlik retention qanday o'zgaradi" taqqoslash rejimi | `getForgettingCurvePoints` allaqachon istalgan stability qiymati uchun hisoblay oladi — faqat ikkita ssenariyni yonma-yon chiqarish kerak |
-| **Intervention Engine** | Diagnoz → mos mashq turiga avtomatik yo'naltirish (routing) | Barcha kerakli mashq turlari (Contrast, Active Recall, Context, Speaking) allaqachon alohida o'yinlar sifatida mavjud — faqat "qaysi holatda qaysi o'yin" xaritasi yozilishi kerak |
+| **Intervention Engine (to'liq)** | Diagnoz → mos mashq turiga **avtomatik yo'naltirish** (hozircha Forgetting Autopsy faqat tavsiyani matn sifatida ko'rsatadi, foydalanuvchini o'sha mashqqa avtomatik olib bormaydi) | Barcha kerakli mashq turlari (Contrast, Active Recall, Context, Speaking) allaqachon alohida o'yinlar sifatida mavjud — faqat "tavsiya → shu mashqni ochish" navigatsiyasi yozilishi kerak |
+| **Confusion detection barcha rejimlarda** | Hozircha faqat Memory Lab va Imlo mashqida ishlaydi; Test/Kartochka/Jumla tuzish rejimlarida hali yo'q | `findConfusableMatch` allaqachon umumiy utility — qolgan o'yinlarga ulash mexanik ish |
 
 ### 🔮 Kelajak rejasi (yangi tadqiqot/infratuzilma talab qiladi)
 

@@ -25,7 +25,7 @@ export default function PracticePage() {
   const { sourceType: urlSourceType, sourceId: urlSourceId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { packs, loading: packsLoading } = usePacks();
+  const { packs, allWords, loading: packsLoading } = usePacks();
   const { incrementActivity } = useStreak();
   
   const [step, setStep] = useState(urlSourceId ? 'loading' : 'source'); // 'loading' | 'source' | 'mode' | 'practice' | 'results'
@@ -297,6 +297,7 @@ export default function PracticePage() {
   const renderPracticeMode = () => {
     const props = {
       words: practiceWords,
+      allWords,
       onComplete: handleComplete,
       onUpdateWord: handleUpdateWord,
       onAnswer: handleAnswer,

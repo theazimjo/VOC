@@ -51,3 +51,38 @@ export function similarityRatio(a, b) {
   if (maxLen === 0) return 1;
   return 1 - levenshteinDistance(s, t) / maxLen;
 }
+
+/**
+ * Find the closest *other* word whose given field the typed text could be
+ * confused with — evidence of interference between two words (e.g. typing
+ * "though" when the correct answer was "although").
+ *
+ * Shared by every practice mode that wants to feed the Confusion Network,
+ * not just Memory Lab — pass whichever field (word or translation) matches
+ * what the user was actually typing.
+ *
+ * @param {string} typedText
+ * @param {Array<Object>} candidates - full word list to compare against
+ * @param {Object} options
+ * @param {string} [options.excludeId] - the word being answered, never matched against itself
+ * @param {(candidate: Object) => string} options.getField - extracts the comparable text from a candidate
+ * @param {number} [options.threshold=0.6] - minimum similarity ratio to count as a confusion
+ * @returns {{ id: string, ratio: number, candidate: Object } | null}
+ */
+export function findConfusableMatch(typedText, candidates, options = {}) {
+  const { excludeId, getField, threshold = 0.6 } = options;
+  if (!typedText || !typedText.trim() || !Array.isArray(candidates) || !getField) return null;
+
+  let best = null;
+  for (const candidate of candidates) {
+    if (!candidate || candidate.id === excludeId) continue;
+    const fieldValue = getField(candidate);
+    if (!fieldValue) continue;
+
+    const ratio = similarityRatio(typedText, fieldValue);
+    if (ratio >= threshold && (!best || ratio > best.ratio)) {
+      best = { id: candidate.id, ratio, candidate };
+    }
+  }
+  return best;
+}

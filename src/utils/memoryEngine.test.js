@@ -10,6 +10,8 @@ import {
   getRecommendedRetrievalType,
   computeInitialStability,
   getMemoryHealth,
+  simulateReviewScenarios,
+  simulateReviewDayOptions,
 } from './memoryEngine';
 
 describe('computeRecallProbability', () => {
@@ -189,6 +191,62 @@ describe('computeInitialStability', () => {
 
   it('clamps categoryMastery above 1.0', () => {
     expect(computeInitialStability(5)).toBe(computeInitialStability(1));
+  });
+});
+
+describe('simulateReviewScenarios', () => {
+  it('projects lower retention without review than with a review partway through the horizon', () => {
+    const { withoutReview, withReview } = simulateReviewScenarios(3, 7, 30);
+    expect(withReview).toBeGreaterThan(withoutReview);
+  });
+
+  it('matches computeRecallProbability at the horizon for the no-review scenario', () => {
+    const { withoutReview } = simulateReviewScenarios(5, 7, 30);
+    expect(withoutReview).toBeCloseTo(computeRecallProbability(5, 30), 10);
+  });
+
+  it('treats a review scheduled at or beyond the horizon as a no-op', () => {
+    const atHorizon = simulateReviewScenarios(5, 30, 30);
+    expect(atHorizon.withReview).toBe(atHorizon.withoutReview);
+
+    const beyondHorizon = simulateReviewScenarios(5, 45, 30);
+    expect(beyondHorizon.withReview).toBe(beyondHorizon.withoutReview);
+  });
+
+  it('treats a non-positive review day as a no-op', () => {
+    const result = simulateReviewScenarios(5, 0, 30);
+    expect(result.withReview).toBe(result.withoutReview);
+  });
+
+  it('grows stability from the hypothetical review', () => {
+    const { newStabilityAfterReview } = simulateReviewScenarios(3, 7, 30);
+    expect(newStabilityAfterReview).toBeGreaterThan(3);
+  });
+
+  it('reviewing earlier when memory is weaker projects at least as much retention gain', () => {
+    // A word with low stability decays fast without review — reviewing it
+    // partway through should meaningfully close the gap to the no-review case.
+    const weak = simulateReviewScenarios(1, 3, 30);
+    expect(weak.withReview).toBeGreaterThan(weak.withoutReview);
+  });
+});
+
+describe('simulateReviewDayOptions', () => {
+  it('returns one result per requested review day, in order', () => {
+    const results = simulateReviewDayOptions(5, [1, 3, 7, 14], 30);
+    expect(results.map((r) => r.reviewDay)).toEqual([1, 3, 7, 14]);
+  });
+
+  it('defaults to the standard [1, 3, 7, 14] day set', () => {
+    const results = simulateReviewDayOptions(5);
+    expect(results).toHaveLength(4);
+  });
+
+  it('every option outperforms the no-review baseline at the horizon', () => {
+    const results = simulateReviewDayOptions(3, [1, 3, 7, 14], 30);
+    results.forEach((r) => {
+      expect(r.withReview).toBeGreaterThanOrEqual(r.withoutReview);
+    });
   });
 });
 

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { levenshteinDistance, similarityRatio } from './textSimilarity';
+import { levenshteinDistance, similarityRatio, findConfusableMatch } from './textSimilarity';
 
 describe('levenshteinDistance', () => {
   it('is 0 for identical strings', () => {
@@ -49,5 +49,66 @@ describe('similarityRatio', () => {
     const ratio = similarityRatio('completely', 'different');
     expect(ratio).toBeGreaterThanOrEqual(0);
     expect(ratio).toBeLessThanOrEqual(1);
+  });
+});
+
+describe('findConfusableMatch', () => {
+  const candidates = [
+    { id: 'w1', word: 'although', translation: "garchi, biroq" },
+    { id: 'w2', word: 'though', translation: "garchi" },
+    { id: 'w3', word: 'giraffe', translation: 'jirafa' },
+  ];
+
+  it('finds a close match above the threshold', () => {
+    const match = findConfusableMatch('garch', candidates, {
+      excludeId: 'w1',
+      getField: (c) => c.translation,
+      threshold: 0.6,
+    });
+    expect(match?.id).toBe('w2');
+  });
+
+  it('never matches the excluded (current) word itself, even on an exact match', () => {
+    // "garchi" is an exact match for w2's own translation, but w2 is excluded
+    // (it's the word being answered) — w1's translation still clears a lower
+    // threshold, so the match should fall through to w1, never w2.
+    const match = findConfusableMatch('garchi', candidates, {
+      excludeId: 'w2',
+      getField: (c) => c.translation,
+      threshold: 0.45,
+    });
+    expect(match?.id).toBe('w1');
+  });
+
+  it('returns null when nothing clears the threshold', () => {
+    const match = findConfusableMatch('xyz', candidates, {
+      excludeId: 'w1',
+      getField: (c) => c.translation,
+      threshold: 0.6,
+    });
+    expect(match).toBeNull();
+  });
+
+  it('returns null for empty typed text', () => {
+    const match = findConfusableMatch('', candidates, {
+      excludeId: 'w1',
+      getField: (c) => c.translation,
+    });
+    expect(match).toBeNull();
+  });
+
+  it('picks the single best match when multiple candidates clear the threshold', () => {
+    const closeCandidates = [
+      { id: 'a', word: 'affect' },
+      { id: 'b', word: 'effect' },
+      { id: 'c', word: 'affect' }, // identical spelling, different id
+    ];
+    const match = findConfusableMatch('affect', closeCandidates, {
+      excludeId: 'x',
+      getField: (c) => c.word,
+      threshold: 0.5,
+    });
+    expect(match.ratio).toBe(1);
+    expect(['a', 'c']).toContain(match.id);
   });
 });

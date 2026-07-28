@@ -1300,6 +1300,91 @@
   flex-shrink: 0;
 }
 
+/* Forgetting Autopsy */
+.mem-section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mem-autopsy-box {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+.mem-autopsy-label {
+  width: 130px;
+}
+.mem-autopsy-disclaimer {
+  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Future Memory Simulator */
+.mem-simulator-box {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+.mem-simulator-days {
+  display: flex;
+  gap: 6px;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+.mem-sim-day-btn {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.mem-sim-day-btn.active {
+  background: var(--accent-1);
+  border-color: var(--accent-1);
+  color: white;
+}
+.mem-simulator-compare {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+.mem-simulator-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mem-simulator-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+.mem-simulator-stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.mem-simulator-stat-value.bad {
+  color: var(--error);
+}
+.mem-simulator-stat-value.good {
+  color: var(--success);
+}
+.mem-simulator-note {
+  margin-top: 0.5rem;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
 /* History strip */
 .mem-history-strip {
   margin-top: 0.75rem;

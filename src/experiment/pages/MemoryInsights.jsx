@@ -7,9 +7,12 @@
 
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle } from 'lucide-react';
-import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision } from '../../utils/memoryEngine';
+import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle, Stethoscope, Rocket } from 'lucide-react';
+import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision, simulateReviewDayOptions } from '../../utils/memoryEngine';
+import { diagnoseForgetting, getConfusionPairsForWord } from '../../utils/forgettingAutopsy';
 import { classifyWord } from '../semanticClassifier';
+
+const SIMULATOR_DAYS = [1, 3, 7, 14];
 
 // ─── Forgetting Curve SVG ─────────────────────────────────────────────────────
 
@@ -110,12 +113,31 @@ function ForgettingCurve({ stability, width = 280, height = 100 }) {
 
 // ─── Word Insight Card ────────────────────────────────────────────────────────
 
-function WordInsightCard({ memory }) {
+function WordInsightCard({ memory, confusionPairs }) {
   const [expanded, setExpanded] = useState(false);
+  const [simulatorDay, setSimulatorDay] = useState(null);
   const { wordData, lastReview, nextOptimalReview, recallHistory } = memory;
-  if (!wordData) return null;
 
   const stability = Number(memory.stability) || 1.0;
+
+  // Forgetting Autopsy — only meaningful once this word has actually been forgotten at least once.
+  // Computed unconditionally (never after an early return) to satisfy Rules of Hooks,
+  // even though the result is only rendered when wordData is present below.
+  const wordConfusionPairs = useMemo(
+    () => getConfusionPairsForWord(memory.wordId, confusionPairs),
+    [memory.wordId, confusionPairs]
+  );
+  const autopsy = useMemo(
+    () => diagnoseForgetting(memory, wordConfusionPairs),
+    [memory, wordConfusionPairs]
+  );
+
+  // Future Memory Simulator — "what if I review on day X" comparison.
+  const simulatorOptions = useMemo(() => simulateReviewDayOptions(stability, SIMULATOR_DAYS, 30), [stability]);
+  const activeSimulatorOption = simulatorOptions.find((o) => o.reviewDay === simulatorDay) || null;
+
+  if (!wordData) return null;
+
   const difficulty = Number(memory.difficulty) || 0.5;
   const totalReviews = Number(memory.totalReviews) || 0;
 
@@ -216,6 +238,82 @@ function WordInsightCard({ memory }) {
                   </span>
                 </div>
               ))}
+            </div>
+
+            {/* Forgetting Autopsy — likely reasons behind the most recent forgetting event */}
+            {autopsy.hasEnoughData && (
+              <div className="mem-autopsy-box">
+                <div className="mem-curve-label mem-section-title">
+                  <Stethoscope size={13} /> Nega unutasiz? (taxminiy sabablar)
+                </div>
+                <div className="mem-checkpoint-table">
+                  {autopsy.factors.map((f) => (
+                    <div key={f.key} className="mem-checkpoint-row">
+                      <span className="mem-cp-label mem-autopsy-label">{f.label}</span>
+                      <div className="mem-cp-bar-wrap">
+                        <div
+                          className="mem-cp-bar"
+                          style={{
+                            width: `${Math.round(f.weight * 100)}%`,
+                            background: f.key === autopsy.primaryCause ? 'var(--accent-1)' : 'var(--border-light)',
+                          }}
+                        />
+                      </div>
+                      <span className="mem-cp-pct">{Math.round(f.weight * 100)}%</span>
+                    </div>
+                  ))}
+                </div>
+                {autopsy.recommendation && (
+                  <div className="mem-explain-box" style={{ marginTop: '0.6rem' }}>
+                    <Lightbulb size={14} />
+                    <span><strong>{autopsy.recommendation.label}.</strong> {autopsy.recommendation.description}</span>
+                  </div>
+                )}
+                <div className="mem-autopsy-disclaimer">
+                  Bu — taxminiy baho (bir nechta signal asosida hisoblangan nisbiy og'irlik), ilmiy jihatdan tasdiqlangan statistik xulosa emas.
+                </div>
+              </div>
+            )}
+
+            {/* Future Memory Simulator — "what if I review on day X" comparison */}
+            <div className="mem-simulator-box">
+              <div className="mem-curve-label mem-section-title">
+                <Rocket size={13} /> Kelajakdagi xotira: agar takrorlasangiz-chi?
+              </div>
+              <div className="mem-simulator-days">
+                {simulatorOptions.map((opt) => (
+                  <button
+                    key={opt.reviewDay}
+                    type="button"
+                    className={`mem-sim-day-btn ${simulatorDay === opt.reviewDay ? 'active' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSimulatorDay((prev) => (prev === opt.reviewDay ? null : opt.reviewDay));
+                    }}
+                  >
+                    {opt.reviewDay}-kun
+                  </button>
+                ))}
+              </div>
+              <div className="mem-simulator-compare">
+                <div className="mem-simulator-stat">
+                  <span className="mem-simulator-stat-label">Takrorlamasangiz (30 kundan keyin)</span>
+                  <span className="mem-simulator-stat-value bad">
+                    {Math.round((activeSimulatorOption ?? simulatorOptions[0]).withoutReview * 100)}%
+                  </span>
+                </div>
+                {activeSimulatorOption && (
+                  <div className="mem-simulator-stat">
+                    <span className="mem-simulator-stat-label">{activeSimulatorOption.reviewDay}-kunda takrorlasangiz</span>
+                    <span className="mem-simulator-stat-value good">
+                      {Math.round(activeSimulatorOption.withReview * 100)}%
+                    </span>
+                  </div>
+                )}
+              </div>
+              {!activeSimulatorOption && (
+                <div className="mem-simulator-note">30-kunlik prognozni ko'rish uchun kunlardan birini tanlang.</div>
+              )}
             </div>
 
             {/* Recent history */}
@@ -528,7 +626,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
 
       <div className="mem-insight-list">
         {filtered.map(memory => (
-          <WordInsightCard key={memory.wordId} memory={memory} />
+          <WordInsightCard key={memory.wordId} memory={memory} confusionPairs={confusionPairs} />
         ))}
       </div>
     </div>

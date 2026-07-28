@@ -296,6 +296,54 @@ export function isDue(nextOptimalReview) {
 }
 
 /**
+ * Future Memory Simulator — "what will I forget, and what changes if I
+ * review sooner?" Composes updateStability + computeRecallProbability to
+ * project retention at a fixed horizon under two scenarios: no further
+ * review, versus one hypothetical successful review on a given future day.
+ *
+ * The hypothetical review assumes typical/neutral conditions (correct,
+ * confidence 3, average response time, no sleep/retrieval-type bonus) —
+ * this is a projection under average conditions, not a guarantee.
+ *
+ * @param {number} stability - current stability (days)
+ * @param {number} reviewDay - the future day (from now) the hypothetical review happens
+ * @param {number} [horizonDays=30] - how far out to project retention
+ * @returns {{ withoutReview: number, withReview: number, newStabilityAfterReview: number }}
+ */
+export function simulateReviewScenarios(stability, reviewDay, horizonDays = 30) {
+  const safeStability = Math.max(stability, 0.1);
+  const withoutReview = computeRecallProbability(safeStability, horizonDays);
+
+  // A review at or beyond the horizon (or in the past) can't affect
+  // retention *at* the horizon under this model — nothing to project.
+  if (reviewDay >= horizonDays || reviewDay <= 0) {
+    return { withoutReview, withReview: withoutReview, newStabilityAfterReview: safeStability };
+  }
+
+  const newStabilityAfterReview = updateStability(safeStability, true, 3, 4, reviewDay, {});
+  const daysAfterReview = horizonDays - reviewDay;
+  const withReview = computeRecallProbability(newStabilityAfterReview, daysAfterReview);
+
+  return { withoutReview, withReview, newStabilityAfterReview };
+}
+
+/**
+ * Convenience wrapper: simulate several candidate review days at once, e.g.
+ * for a row of "review on day 1 / 3 / 7 / 14" comparison buttons in the UI.
+ *
+ * @param {number} stability
+ * @param {Array<number>} [reviewDays=[1, 3, 7, 14]]
+ * @param {number} [horizonDays=30]
+ * @returns {Array<{ reviewDay: number, withoutReview: number, withReview: number, newStabilityAfterReview: number }>}
+ */
+export function simulateReviewDayOptions(stability, reviewDays = [1, 3, 7, 14], horizonDays = 30) {
+  return reviewDays.map((reviewDay) => ({
+    reviewDay,
+    ...simulateReviewScenarios(stability, reviewDay, horizonDays),
+  }));
+}
+
+/**
  * Compute semantic category / pack mastery score M_cat ∈ [0, 1].
  *
  * M_cat is derived from:

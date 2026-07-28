@@ -3,9 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2 } from 'lucide-react';
 import { calculateNextReview } from '../../utils/spacedRepetition';
 import { speakWord } from '../../utils/helpers';
+import { findConfusableMatch } from '../../experiment/textSimilarity';
+import { recordConfusionPair } from '../../experiment/experimentDB';
+import { useAuth } from '../../contexts/AuthContext';
 import './SpellingGame.css';
 
-export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
+const CONFUSION_THRESHOLD = 0.6;
+
+export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress }) {
+  const { user } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
@@ -51,8 +57,36 @@ export default function SpellingGame({ words, onComplete, onUpdateWord, onAnswer
     const sm2Data = calculateNextReview(correct ? 4 : 1, currentWord, { retrievalType: 'active_recall' });
     onUpdateWord(currentWord.id, sm2Data);
 
-    if (correct) setCorrectCount(c => c + 1);
-    else setIncorrectCount(c => c + 1);
+    if (correct) {
+      setCorrectCount(c => c + 1);
+    } else {
+      setIncorrectCount(c => c + 1);
+      detectConfusion(submittedInput);
+    }
+  };
+
+  /**
+   * A wrong spelling that closely matches a *different* word's spelling is
+   * evidence of interference between the two (e.g. typing "though" for
+   * "although") — feeds the same Confusion Network Memory Lab uses, so it's
+   * populated by regular practice too, not just Memory Lab sessions.
+   */
+  const detectConfusion = (typedText) => {
+    if (!user || !Array.isArray(allWords)) return;
+
+    const best = findConfusableMatch(typedText, allWords, {
+      excludeId: currentWord.id,
+      getField: (w) => w.word,
+      threshold: CONFUSION_THRESHOLD,
+    });
+    if (best) {
+      recordConfusionPair(user.uid, currentWord.id, best.id, {
+        wordA: currentWord.word,
+        wordB: best.candidate.word,
+        translationA: currentWord.translation,
+        translationB: best.candidate.translation,
+      }).catch((err) => console.warn('Failed to record confusion pair:', err));
+    }
   };
 
   const handleSubmit = (e) => {
