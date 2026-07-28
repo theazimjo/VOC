@@ -23,6 +23,45 @@ Bu yerda `P(t)` — `t` kun o'tgandan keyin so'zni eslab qolish ehtimoli, `S` es
 
 Bu tizim `src/experiment/` papkasidagi **Xotira Laboratoriyasi (Memory Lab)** orqali sinovdan o'tkazilgan va endi butun ilova bo'ylab standart algoritm sifatida ishlatiladi.
 
+> **Duolingo sizga nimani o'rganishni aytadi. Anki sizga qachon takrorlashni aytadi. VOC esa sizning miyangiz qanday o'rganishi va unutishini o'rganadi.**
+
+---
+
+## 🗺️ Memory Twin — rivojlanish xaritasi
+
+Uzoq muddatli maqsad — spaced repetition algoritmini foydalanuvchining shaxsiy **"Memory Twin"**iga (o'z xotirasining raqamli egizagi) aylantirish: nafaqat *qachon* takrorlash kerakligini, balki *nega unutilganini*, *nimalarni bir-biriga chalkashtirishini* va *qaysi usul aynan shu odam uchun ishlashini* ham tushunadigan tizim.
+
+Quyida — bu vizyonning qaysi qismi hozir haqiqatan ishlayotgani, qaysi qismi uchun infratuzilma tayyor (faqat UI/formula kerak) va qaysi qismi hali boshlanmagan tadqiqot ekanligining aniq holati:
+
+### ✅ Hozirda ishlaydi (production'da)
+
+| Qatlam | Qayerda | Tavsif |
+|---|---|---|
+| **Individual Memory Dynamics Engine** | `memoryEngine.js` — `updateStability`, `computeRecallProbability` | `P(t) = e^(−t/S)` unutish egri chizig'i, har bir foydalanuvchi × har bir so'z uchun alohida stability qiymati |
+| **Future Memory Simulator (v1)** | `getForgettingCurvePoints` → `MemoryInsights.jsx` | Har bir so'z uchun 0/1/3/7/14/30 kunlik eslab qolish foizi hisoblanadi va grafik ko'rinishida ko'rsatiladi |
+| **Confusion Network (v1)** | `textSimilarity.js` (Levenshtein) + `reportConfusion` → `MemoryInsights.jsx` | Foydalanuvchi xato javob berganda, unga o'xshash so'zlar avtomatik aniqlanadi va "chalkashtirilgan juftliklar" ro'yxati sifatida ko'rsatiladi |
+| **Semantik klasterlash + o'z-o'zini kalibrlash** | `semanticClassifier.js` + `computeClusterCalibration` | Har bir so'z avtomatik semantik guruhga (hayvonlar, texnologiya, fe'llar, sifatlar...) ajratiladi; foydalanuvchining shu guruh bo'yicha haqiqiy natijalari modelning bashoratini moslashtiradi |
+| **Scheduling Transparency** | `explainSchedulingDecision` | "Nega aynan hozir takrorlash tavsiya qilinmoqda" — oddiy tilda tushuntirish |
+| **Testing/generation effect** | `applyReview` (`retrievalType`) | Faol (typing) va passiv takrorlash alohida hisobga olinadi va turlicha xotira o'sishi beradi |
+
+### 🔜 Infratuzilma tayyor, faqat kengaytirish/UI kerak
+
+| Qatlam | Nima yetishmayapti | Nega tez qurish mumkin |
+|---|---|---|
+| **Forgetting Autopsy** ("Nega unutdim?") | Sabablarni foizli taqsimlash formulasi va UI | Kerakli signallar (confusion mavjudligi, review intervali, confidence darajasi) allaqachon saqlanadi — faqat ularni bitta diagnostik javobga birlashtirish kerak |
+| **Interactive Future Simulator** | "Agar 7-kunda takrorlasangiz — 30-kunlik retention qanday o'zgaradi" taqqoslash rejimi | `getForgettingCurvePoints` allaqachon istalgan stability qiymati uchun hisoblay oladi — faqat ikkita ssenariyni yonma-yon chiqarish kerak |
+| **Intervention Engine** | Diagnoz → mos mashq turiga avtomatik yo'naltirish (routing) | Barcha kerakli mashq turlari (Contrast, Active Recall, Context, Speaking) allaqachon alohida o'yinlar sifatida mavjud — faqat "qaysi holatda qaysi o'yin" xaritasi yozilishi kerak |
+
+### 🔮 Kelajak rejasi (yangi tadqiqot/infratuzilma talab qiladi)
+
+| Qatlam | Nega hali yo'q |
+|---|---|
+| **Memory Fingerprint** (visual/audio/contextual retention taqsimoti) | Hozircha har bir review faqat *active/passive recall* sifatida belgilanadi — qaysi o'yin turi (Pronounce/Match/Spelling) orqali o'tkazilgani alohida saqlanmaydi. Modallik bo'yicha statistika chiqarish uchun avval shu darajada data yig'ishni boshlash kerak |
+| **Memory Genome** (so'z metadata + ona til interferensiyasi tadqiqoti) | Ilmiy jihatdan asoslash uchun yetarli hajmda uzoq muddatli (longitudinal) data va lingvistik tahlil kerak |
+| **Knowledge Graph** (so'zlar orasidagi semantik bog'liqlik xaritasi) | Sifatli natija uchun kuratsiya qilingan lingvistik ma'lumotlar bazasi (WordNet darajasida) kerak — bu kontent xarajati, faqat kod emas |
+| **Memory Replay** (90 kunlik progress tarixi) | Hozircha faqat so'zning *joriy* holati saqlanadi; tarixiy kunlik snapshot saqlash boshlanmagan |
+| **Personal Learning Experiments / rigorous A-B testing** | ⚠️ Statistik ehtiyotkorlik talab qiladi: bitta foydalanuvchining bir necha o'nlab review'i asosida "sizga X usuli Y% samaraliroq" degan xulosa ilmiy jihatdan ishonchli emas (so'z qiyinligi, vaqt kabi omillar hisobga olinmagan bo'ladi). Bu qatlam yetarli namuna hajmi va nazorat guruhisiz **taqdim etilmasligi kerak** — aks holda bu "hypothesis", "ilmiy natija" emas |
+
 ---
 
 ## ✨ Asosiy imkoniyatlar
@@ -40,7 +79,7 @@ Bu tizim `src/experiment/` papkasidagi **Xotira Laboratoriyasi (Memory Lab)** or
 
 ### 🧬 Xotira Laboratoriyasi (tadqiqot moduli)
 - Yuqoridagi individual xotira modelini vizual tarzda kuzatish: unutish egri chizig'i, ishonchlilik darajasi, chalkashtiriladigan so'z juftliklari (confusion pairs)
-- Levenshtein masofasi asosida matn o'xshashligini hisoblash (`src/experiment/textSimilarity.js`)
+- To'liq holat va kelajak rejasi uchun yuqoridagi **"Memory Twin — rivojlanish xaritasi"** bo'limiga qarang
 
 ### 🏆 Gamifikatsiya va statistika
 - Kunlik seriya (streak) kuzatuvi, faollik xaritasi (heatmap)
