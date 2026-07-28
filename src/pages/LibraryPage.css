@@ -86,6 +86,57 @@
   color: var(--text-secondary);
 }
 
+/* Folder detail header: back arrow, folder title, edit/delete trigger */
+.library-folder-detail-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.library-folder-detail-header h2 {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--font-lg);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.library-folder-detail-header .btn-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+}
+
+.library-folder-back-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 4px;
+  transition: color var(--transition-base), transform var(--transition-base);
+}
+
+.library-folder-back-btn:hover {
+  color: var(--accent-1);
+  transform: translateX(-3px);
+}
+
+/* "+ Yangi papka" row shown above the top-level folders/packs grid */
+.library-folders-row-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-md);
+}
+
 /* Content grid — shared by "My packs" and "Market" so both sections use the
    same card format and column layout instead of one being a list and the
    other a grid. */
@@ -130,6 +181,20 @@
      badly, so market cards get their own full-width column on mobile. */
   .library-page .market-cards-grid {
     grid-template-columns: 1fr;
+  }
+
+  .library-folder-detail-header {
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .library-folder-detail-header h2 {
+    font-size: var(--font-md);
+  }
+
+  .library-folders-row-header .btn {
+    padding: 6px 10px;
+    font-size: var(--font-xs);
   }
 }
 

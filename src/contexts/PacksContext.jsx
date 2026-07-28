@@ -18,6 +18,8 @@ export function PacksProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [wordsByPack, setWordsByPack] = useState({});
   const [wordsLoading, setWordsLoading] = useState(true);
+  const [folders, setFolders] = useState([]);
+  const [foldersLoading, setFoldersLoading] = useState(true);
   const migratedRef = useRef(new Set());
 
   // Single real-time listener for pack metadata (name/icon/wordCount), shared
@@ -78,6 +80,42 @@ export function PacksProvider({ children }) {
       (error) => {
         console.error('Error listening to packs from RTDB:', error);
         setLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, [user]);
+
+  // Single real-time listener for folders — lightweight grouping metadata only
+  // (name/icon/color). Packs opt into a folder via their own `folderId` field;
+  // a pack with no folderId (or one pointing at a since-deleted folder) is
+  // just rendered at the top level, same as before folders existed.
+  useEffect(() => {
+    if (!user) {
+      setFolders([]);
+      setFoldersLoading(false);
+      return;
+    }
+
+    const foldersRef = ref(db, `users/${user.uid}/folders`);
+
+    const unsubscribe = onValue(
+      foldersRef,
+      (snapshot) => {
+        const foldersData = [];
+        snapshot.forEach((childSnap) => {
+          const val = childSnap.val();
+          if (val && typeof val === 'object') {
+            foldersData.push({ id: childSnap.key, ...val });
+          }
+        });
+        foldersData.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        setFolders(foldersData);
+        setFoldersLoading(false);
+      },
+      (error) => {
+        console.error('Error listening to folders from RTDB:', error);
+        setFoldersLoading(false);
       }
     );
 
@@ -149,7 +187,8 @@ export function PacksProvider({ children }) {
         level: data.level || 'beginner',
         createdAt: new Date().toISOString(),
         wordCount: 0,
-        ...(data.marketPackId ? { marketPackId: data.marketPackId } : {})
+        ...(data.marketPackId ? { marketPackId: data.marketPackId } : {}),
+        ...(data.folderId ? { folderId: data.folderId } : {})
       };
 
       await set(newPackRef, packData);
@@ -201,6 +240,52 @@ export function PacksProvider({ children }) {
     [user]
   );
 
+  const addFolder = useCallback(
+    async (data) => {
+      if (!user) return null;
+
+      const foldersRef = ref(db, `users/${user.uid}/folders`);
+      const newFolderRef = push(foldersRef);
+      await set(newFolderRef, {
+        name: data.name || '',
+        icon: data.icon || '📁',
+        createdAt: new Date().toISOString()
+      });
+      return newFolderRef.key;
+    },
+    [user]
+  );
+
+  const updateFolder = useCallback(
+    async (folderId, data) => {
+      if (!user) return;
+
+      const folderRef = ref(db, `users/${user.uid}/folders/${folderId}`);
+      await update(folderRef, data);
+    },
+    [user]
+  );
+
+  // Deleting a folder never deletes the packs inside it — they're simply
+  // ungrouped back to the top-level list, same as a pack that never had a
+  // folder. Only the folder's own metadata node is removed.
+  const deleteFolder = useCallback(
+    async (folderId) => {
+      if (!user) return;
+
+      const packsToUngroup = packs.filter((p) => p.folderId === folderId);
+      await Promise.all(
+        packsToUngroup.map((p) =>
+          update(ref(db, `users/${user.uid}/packs/${p.id}`), { folderId: null })
+        )
+      );
+
+      const folderRef = ref(db, `users/${user.uid}/folders/${folderId}`);
+      await remove(folderRef);
+    },
+    [user, packs]
+  );
+
   const value = {
     packs,
     loading,
@@ -208,6 +293,11 @@ export function PacksProvider({ children }) {
     updatePack,
     deletePack,
     getPack,
+    folders,
+    foldersLoading,
+    addFolder,
+    updateFolder,
+    deleteFolder,
     allWords,
     allWordsLoading: wordsLoading
   };

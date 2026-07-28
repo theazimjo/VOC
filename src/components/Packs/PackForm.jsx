@@ -3,11 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { packIcons, bookColors } from '../../utils/helpers';
 import './PackForm.css';
 
-export default function PackForm({ isOpen, onClose, onSave, editPack = null, onDelete = null }) {
+export default function PackForm({ isOpen, onClose, onSave, editPack = null, onDelete = null, folders = [], defaultFolderId = null }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [icon, setIcon] = useState(packIcons[0]);
   const [color, setColor] = useState(bookColors[0]);
+  const [folderId, setFolderId] = useState('');
 
   const isLocked = editPack && editPack.name === 'Irregular Verbs';
 
@@ -17,18 +18,20 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setDescription(editPack.description || '');
       setIcon(editPack.icon || packIcons[0]);
       setColor(editPack.color || bookColors[0]);
+      setFolderId(editPack.folderId || '');
     } else {
       setName('');
       setDescription('');
       setIcon(packIcons[Math.floor(Math.random() * packIcons.length)]);
       setColor(bookColors[Math.floor(Math.random() * bookColors.length)]);
+      setFolderId(defaultFolderId || '');
     }
-  }, [editPack, isOpen]);
+  }, [editPack, isOpen, defaultFolderId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim()) return;
-    onSave({ name, description, icon, color });
+    onSave({ name, description, icon, color, folderId: folderId || null });
   };
 
   if (!isOpen) return null;
@@ -79,8 +82,31 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     disabled={isLocked}
                   />
                 </div>
+
+                {folders.length > 0 && (
+                  <div className="input-group">
+                    <label>Papka</label>
+                    <div className="level-selector">
+                      <div
+                        className={`level-option ${!folderId ? 'selected' : ''}`}
+                        onClick={() => setFolderId('')}
+                      >
+                        Asosiy ro'yxat
+                      </div>
+                      {folders.map((f) => (
+                        <div
+                          key={f.id}
+                          className={`level-option ${folderId === f.id ? 'selected' : ''}`}
+                          onClick={() => setFolderId(f.id)}
+                        >
+                          {f.icon} {f.name}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-              
+
               <div className="modal-footer" style={{ justifyContent: editPack ? 'space-between' : 'flex-end', width: '100%' }}>
                 {editPack && onDelete && (
                   <button 

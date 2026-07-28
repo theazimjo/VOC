@@ -2,12 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, push, update, get, remove, set } from 'firebase/database';
+import { ArrowLeft, MoreVertical } from 'lucide-react';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { useBooks } from '../hooks/useBooks';
 import { usePacks } from '../hooks/usePacks';
 import PackList from '../components/Packs/PackList';
+import PackCard from '../components/Packs/PackCard';
 import PackForm from '../components/Packs/PackForm';
+import FolderCard from '../components/Packs/FolderCard';
+import FolderForm from '../components/Packs/FolderForm';
 import { packIcons } from '../utils/helpers';
 import { playSound } from '../utils/feedback';
 import { marketPacks } from '../data/marketData';
@@ -18,13 +22,22 @@ import './LibraryPage.css';
 export default function LibraryPage() {
   const { user } = useAuth();
   const { books, loading: booksLoading } = useBooks(); // Loaded strictly for automatic migration
-  const { packs, loading: packsLoading, addPack, updatePack, deletePack, allWords } = usePacks();
+  const {
+    packs, loading: packsLoading, addPack, updatePack, deletePack, allWords,
+    folders, addFolder, updateFolder, deleteFolder
+  } = usePacks();
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Tabs: 'library' (my packs) or 'market'
   const activeTab = searchParams.get('tab') === 'market' ? 'market' : 'library';
   const [showPackForm, setShowPackForm] = useState(false);
   const [editingPack, setEditingPack] = useState(null);
+
+  // Folders: null = top-level grid, otherwise the id of the folder being viewed
+  const [openFolderId, setOpenFolderId] = useState(null);
+  const [showFolderForm, setShowFolderForm] = useState(false);
+  const [editingFolder, setEditingFolder] = useState(null);
+  const openFolder = openFolderId ? folders.find((f) => f.id === openFolderId) : null;
 
   // Install / Update state for Market
   const [installingPackId, setInstallingPackId] = useState(null);
@@ -124,6 +137,7 @@ export default function LibraryPage() {
         color: data.color || 'var(--accent-gradient)',
         icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
         level: data.level || 'beginner',
+        folderId: data.folderId || null,
       });
     }
     setShowPackForm(false);
@@ -135,6 +149,25 @@ export default function LibraryPage() {
       await deletePack(editingPack.id);
       setShowPackForm(false);
       setEditingPack(null);
+    }
+  };
+
+  const handleSaveFolder = async (data) => {
+    if (editingFolder) {
+      await updateFolder(editingFolder.id, data);
+    } else {
+      await addFolder(data);
+    }
+    setShowFolderForm(false);
+    setEditingFolder(null);
+  };
+
+  const handleDeleteFolder = async () => {
+    if (editingFolder) {
+      await deleteFolder(editingFolder.id);
+      setShowFolderForm(false);
+      setEditingFolder(null);
+      if (openFolderId === editingFolder.id) setOpenFolderId(null);
     }
   };
 
@@ -290,14 +323,72 @@ export default function LibraryPage() {
                 /* Packs list view */
                 <div className="library-sections-container">
                   <div className="library-section">
-                    {packs.length > 0 ? (
-                      <PackList packs={packs} onEditPack={(pack) => { setEditingPack(pack); setShowPackForm(true); }} />
+                    {openFolder ? (
+                      /* Inside a folder: just its packs, same behavior as the top-level list */
+                      <>
+                        <div className="library-folder-detail-header">
+                          <button className="library-folder-back-btn" onClick={() => setOpenFolderId(null)}>
+                            <ArrowLeft size={22} /> Orqaga
+                          </button>
+                          <h2>{openFolder.icon} {openFolder.name}</h2>
+                          <button
+                            className="btn btn-ghost btn-icon"
+                            onClick={() => { setEditingFolder(openFolder); setShowFolderForm(true); }}
+                            title="Papkani tahrirlash"
+                          >
+                            <MoreVertical size={22} />
+                          </button>
+                        </div>
+
+                        {packs.filter((p) => p.folderId === openFolder.id).length > 0 ? (
+                          <PackList
+                            packs={packs.filter((p) => p.folderId === openFolder.id)}
+                            onEditPack={(pack) => { setEditingPack(pack); setShowPackForm(true); }}
+                          />
+                        ) : (
+                          <div className="empty-state" style={{ padding: 'var(--space-2xl) var(--space-lg)' }}>
+                            <div className="empty-state-icon">📦</div>
+                            <h3>Bu papka hali bo'sh</h3>
+                            <p>Pastdagi + tugmasi bilan shu papkaga to'plam qo'shing.</p>
+                          </div>
+                        )}
+                      </>
                     ) : (
-                      <div className="empty-state" style={{ padding: 'var(--space-2xl) var(--space-lg)' }}>
-                        <div className="empty-state-icon">📦</div>
-                        <h3>To'plamlar topilmadi</h3>
-                        <p>Mavzular bo'yicha so'z to'plamlari yarating yoki ularni Marketdan yuklab oling.</p>
-                      </div>
+                      /* Top level: folders first, then ungrouped packs */
+                      <>
+                        <div className="library-folders-row-header">
+                          <button className="btn btn-ghost" onClick={() => { setEditingFolder(null); setShowFolderForm(true); }}>
+                            + Yangi papka
+                          </button>
+                        </div>
+
+                        {(folders.length > 0 || packs.length > 0) ? (
+                          <div className="grid-cards">
+                            {folders.map((folder) => (
+                              <FolderCard
+                                key={folder.id}
+                                folder={folder}
+                                packCount={packs.filter((p) => p.folderId === folder.id).length}
+                                onOpen={() => setOpenFolderId(folder.id)}
+                                onLongPress={() => { setEditingFolder(folder); setShowFolderForm(true); }}
+                              />
+                            ))}
+                            {packs.filter((p) => !p.folderId).map((pack) => (
+                              <PackCard
+                                key={pack.id}
+                                pack={pack}
+                                onLongPress={() => { setEditingPack(pack); setShowPackForm(true); }}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="empty-state" style={{ padding: 'var(--space-2xl) var(--space-lg)' }}>
+                            <div className="empty-state-icon">📦</div>
+                            <h3>To'plamlar topilmadi</h3>
+                            <p>Mavzular bo'yicha so'z to'plamlari yarating yoki ularni Marketdan yuklab oling.</p>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
@@ -373,6 +464,16 @@ export default function LibraryPage() {
         onSave={handleSavePack}
         editPack={editingPack}
         onDelete={handleDeletePack}
+        folders={folders}
+        defaultFolderId={openFolderId}
+      />
+
+      <FolderForm
+        isOpen={showFolderForm}
+        onClose={() => { setShowFolderForm(false); setEditingFolder(null); }}
+        onSave={handleSaveFolder}
+        editFolder={editingFolder}
+        onDelete={handleDeleteFolder}
       />
 
       {/* Floating Action Button (FAB) for adding a pack */}
