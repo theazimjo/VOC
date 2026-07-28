@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { ref, set, push, update, remove, get, onValue } from 'firebase/database';
+import { ref, push, update, remove, get, onValue, serverTimestamp } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from './AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
@@ -191,7 +191,14 @@ export function PacksProvider({ children }) {
         ...(data.folderId ? { folderId: data.folderId } : {})
       };
 
-      await set(newPackRef, packData);
+      // Written as one atomic multi-path update, alongside a server-clock
+      // timestamp, so the security rules can enforce a minimum gap between
+      // pack creations (spam/abuse throttling) without needing Cloud
+      // Functions — see database.rules.json.
+      await update(ref(db, `users/${user.uid}`), {
+        [`packs/${newPackRef.key}`]: packData,
+        'meta/lastPackCreatedAt': serverTimestamp()
+      });
       return newPackRef.key;
     },
     [user]
@@ -246,10 +253,14 @@ export function PacksProvider({ children }) {
 
       const foldersRef = ref(db, `users/${user.uid}/folders`);
       const newFolderRef = push(foldersRef);
-      await set(newFolderRef, {
-        name: data.name || '',
-        icon: data.icon || '📁',
-        createdAt: new Date().toISOString()
+      // Same atomic-timestamp throttling pattern as addPack — see database.rules.json.
+      await update(ref(db, `users/${user.uid}`), {
+        [`folders/${newFolderRef.key}`]: {
+          name: data.name || '',
+          icon: data.icon || '📁',
+          createdAt: new Date().toISOString()
+        },
+        'meta/lastFolderCreatedAt': serverTimestamp()
       });
       return newFolderRef.key;
     },

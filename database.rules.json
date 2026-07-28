@@ -6,9 +6,14 @@
         ".read": "auth != null && auth.uid === $uid",
         ".write": "auth != null && auth.uid === $uid",
 
+        "meta": {
+          "lastPackCreatedAt": { ".validate": "newData.isNumber() && newData.val() === now" },
+          "lastFolderCreatedAt": { ".validate": "newData.isNumber() && newData.val() === now" }
+        },
+
         "packs": {
           "$packId": {
-            ".validate": "newData.hasChildren(['name'])",
+            ".validate": "newData.hasChildren(['name']) && (data.exists() || !root.child('users').child($uid).child('meta').child('lastPackCreatedAt').exists() || now > root.child('users').child($uid).child('meta').child('lastPackCreatedAt').val() + 3000)",
             "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200" },
             "description": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 3000)" },
             "icon": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)" },
@@ -21,6 +26,7 @@
 
         "folders": {
           "$folderId": {
+            ".validate": "newData.hasChildren(['name']) && (data.exists() || !root.child('users').child($uid).child('meta').child('lastFolderCreatedAt').exists() || now > root.child('users').child($uid).child('meta').child('lastFolderCreatedAt').val() + 3000)",
             "name": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 100" },
             "icon": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 32)" }
           }

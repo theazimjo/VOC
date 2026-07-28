@@ -128,17 +128,26 @@ export default function LibraryPage() {
   };
 
   const handleSavePack = async (data) => {
-    if (editingPack) {
-      await updatePack(editingPack.id, data);
-    } else {
-      await addPack({
-        name: data.name,
-        description: data.description || '',
-        color: data.color || 'var(--accent-gradient)',
-        icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
-        level: data.level || 'beginner',
-        folderId: data.folderId || null,
-      });
+    try {
+      if (editingPack) {
+        await updatePack(editingPack.id, data);
+      } else {
+        await addPack({
+          name: data.name,
+          description: data.description || '',
+          color: data.color || 'var(--accent-gradient)',
+          icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
+          level: data.level || 'beginner',
+          folderId: data.folderId || null,
+        });
+      }
+    } catch (err) {
+      console.error('Failed to save pack:', err);
+      // Firebase only ever reports a generic permission-denied here, whether
+      // it's the abuse-throttle (too many packs too fast) or another rule —
+      // either way this is the honest, safe message to show.
+      alert("To'plamni saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring.");
+      return;
     }
     setShowPackForm(false);
     setEditingPack(null);
@@ -153,10 +162,16 @@ export default function LibraryPage() {
   };
 
   const handleSaveFolder = async (data) => {
-    if (editingFolder) {
-      await updateFolder(editingFolder.id, data);
-    } else {
-      await addFolder(data);
+    try {
+      if (editingFolder) {
+        await updateFolder(editingFolder.id, data);
+      } else {
+        await addFolder(data);
+      }
+    } catch (err) {
+      console.error('Failed to save folder:', err);
+      alert("Papkani saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring.");
+      return;
     }
     setShowFolderForm(false);
     setEditingFolder(null);

@@ -86,6 +86,10 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  // Honeypot: invisible to real users, but simple bots that auto-fill every
+  // input on a form will fill this in too — if it's non-empty, silently
+  // treat the submission as a bot and skip creating an account.
+  const [website, setWebsite] = useState('');
 
   const strength = useMemo(() => getPasswordStrength(password), [password]);
 
@@ -117,6 +121,13 @@ export default function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    if (website.trim()) {
+      // Bot tripped the honeypot — fail generically without hitting Firebase
+      // or hinting that this field was a trap.
+      setError('Xatolik yuz berdi. Qaytadan urinib ko\'ring.');
+      return;
+    }
 
     const validationError = validate();
     if (validationError) {
@@ -195,6 +206,18 @@ export default function RegisterPage() {
 
         {/* Form */}
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
+          {/* Honeypot — real users never see or fill this in */}
+          <input
+            type="text"
+            name="website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+          />
+
           <motion.div
             className="auth-input-group"
             variants={inputVariants}
