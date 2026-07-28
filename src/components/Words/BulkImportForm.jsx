@@ -77,7 +77,7 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
       try {
         parsedData = JSON.parse(jsonText);
       } catch (jsonErr) {
-        throw new Error("Noto'g'ri JSON formati! Qavslar, qo'shtirnoqlar yoki vergullarni tekshiring.");
+        throw new Error("Noto'g'ri JSON formati! Qavslar, qo'shtirnoqlar yoki vergullarni tekshiring.", { cause: jsonErr });
       }
 
       if (!Array.isArray(parsedData)) {

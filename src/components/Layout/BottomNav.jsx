@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, GraduationCap, Trophy, FlaskConical } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, FlaskConical } from 'lucide-react';
 import './BottomNav.css';
 
 export default function BottomNav() {

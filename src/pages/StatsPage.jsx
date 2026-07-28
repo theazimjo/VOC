@@ -18,7 +18,6 @@ export default function StatsPage() {
 
   const totalWords = allWords.length;
   const masteredWords = allWords.filter(w => (w.mastery || 0) >= 80).length;
-  const learningWords = allWords.filter(w => (w.mastery || 0) > 0 && (w.mastery || 0) < 80).length;
   const newWords = allWords.filter(w => (w.mastery || 0) === 0).length;
   const dueNow = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= new Date()).length;
   const avgMastery = totalWords > 0 ? Math.round(allWords.reduce((s, w) => s + (w.mastery || 0), 0) / totalWords) : 0;

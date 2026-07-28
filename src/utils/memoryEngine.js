@@ -362,7 +362,6 @@ export function computeInitialStability(categoryMastery = 0, globalAdjustment = 
  */
 export function getMemoryHealth(stability, nextOptimalReview) {
   if (!nextOptimalReview) return { label: "Yangi", color: '#8b8fa8', icon: '🆕' };
-  const daysUntil = (new Date(nextOptimalReview) - Date.now()) / (86400 * 1000);
   if (stability >= 20) return { label: "Kuchli xotira", color: '#34d399', icon: '💪' };
   if (stability >= 10) return { label: "Yaxshi", color: '#60a5fa', icon: '⭐' };
   if (stability >= 5)  return { label: "O'rtacha", color: '#f59e0b', icon: '📈' };

@@ -16,9 +16,7 @@ import {
   Check,
   X,
   Volume2,
-  ChevronDown,
-  Trophy,
-  ShieldCheck
+  ChevronDown
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import './LandingPage.css';

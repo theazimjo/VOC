@@ -10,7 +10,7 @@
 export function getQuestionsForExercise(topic, exerciseIdStr) {
   const exerciseId = parseInt(exerciseIdStr, 10) || 1;
   
-  let pool = [];
+  let pool;
   
   switch (exerciseId) {
     case 1:

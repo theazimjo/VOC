@@ -22,7 +22,7 @@ export default function ProfilePage() {
       await updateUserProfile({ displayName });
       setMessage("Profil muvaffaqiyatli yangilandi! ✅");
       setTimeout(() => setMessage(''), 3000);
-    } catch (err) {
+    } catch {
       setMessage("Xatolik yuz berdi ❌");
     }
     setSaving(false);

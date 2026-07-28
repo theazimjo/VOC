@@ -8,8 +8,8 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ref, get } from 'firebase/database';
 import {
-  Users, Activity, BookOpen, Brain, Clock, TrendingUp,
-  ArrowLeft, RefreshCw, Shield, Zap, Award, Calendar,
+  Users, Activity, BookOpen, Clock, TrendingUp,
+  ArrowLeft, RefreshCw, Shield, Zap, Award,
   ChevronDown, ChevronUp, Search
 } from 'lucide-react';
 import { db } from '../firebase';

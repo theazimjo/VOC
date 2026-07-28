@@ -149,7 +149,7 @@ export default function LearningPath({ words, completedLessons = {}, onSelectLes
         {lessons.map((lesson) => {
           const offsetClass = getOffsetClass(lesson.index);
           let nodeClass = 'path-node';
-          let nodeIcon = '🔒';
+          let nodeIcon;
 
           if (lesson.isCompleted) {
             nodeClass += ' completed';

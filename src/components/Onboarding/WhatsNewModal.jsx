@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { FlaskConical, Brain, Zap, TrendingUp, Sparkles, CheckCircle2 } from 'lucide-react';
+import { FlaskConical, Brain, Zap, TrendingUp, Sparkles } from 'lucide-react';
 import './WhatsNewModal.css';
 
 export const WHATS_NEW_VERSION = 'v2_memory_lab';

@@ -5,6 +5,10 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
   ],
+  test: {
+    environment: 'jsdom',
+    include: ['src/**/*.test.js'],
+  },
   server: {
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',

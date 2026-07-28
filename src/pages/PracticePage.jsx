@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Trophy, ThumbsUp, Dumbbell, TrendingDown, Sparkles, BookOpen, CheckCircle2, XCircle, Volume2 } from 'lucide-react';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
@@ -29,7 +29,6 @@ export default function PracticePage() {
   const { incrementActivity } = useStreak();
   
   const [step, setStep] = useState(urlSourceId ? 'loading' : 'source'); // 'loading' | 'source' | 'mode' | 'practice' | 'results'
-  const [sourceType, setSourceType] = useState('packs');
   const [selectedSource, setSelectedSource] = useState(null);
   const [selectedMode, setSelectedMode] = useState(null);
   const [wordCount, setWordCount] = useState(10);
@@ -38,7 +37,6 @@ export default function PracticePage() {
   const [sourceWords, setSourceWords] = useState([]);
   const [sourceLoaded, setSourceLoaded] = useState(false);
   const [wrongWords, setWrongWords] = useState([]);
-  const [randomIntroWord, setRandomIntroWord] = useState(null);
   const [customModal, setCustomModal] = useState({ show: false, type: 'alert', message: '', onConfirm: null, onCancel: null });
   const [progressPct, setProgressPct] = useState(0);
 
@@ -69,7 +67,6 @@ export default function PracticePage() {
       const foundSource = packs.find(s => s.id === urlSourceId);
       if (foundSource) {
         setStep('loading');
-        setSourceType('packs');
         setSelectedSource(foundSource);
         setSourceLoaded(true);
         
@@ -142,14 +139,6 @@ export default function PracticePage() {
     return () => clearTimeout(timerId);
   }, [step]);
 
-  // Choose a random word for the loading screen tip
-  useEffect(() => {
-    if (step === 'intro' && practiceWords.length > 0) {
-      const idx = Math.floor(Math.random() * practiceWords.length);
-      setRandomIntroWord(practiceWords[idx]);
-    }
-  }, [step, practiceWords]);
-
   const handleSelectSource = async (source) => {
     setSelectedSource(source);
     if (!user) return;
@@ -177,19 +166,6 @@ export default function PracticePage() {
     } else {
       setStep('mode');
     }
-  };
-
-  const reloadWordsAndLessons = async () => {
-    if (!selectedSource || !user) return;
-    const wordsRef = ref(db, `users/${user.uid}/words/${selectedSource.id}`);
-    const wordsSnap = await get(wordsRef);
-    let words = [];
-    if (wordsSnap.exists()) {
-      wordsSnap.forEach(childSnap => {
-        words.push({ id: childSnap.key, ...childSnap.val() });
-      });
-    }
-    setSourceWords(words);
   };
 
   const handleStartPractice = async (mode) => {

@@ -1,4 +1,4 @@
-import { ref, set, runTransaction } from 'firebase/database';
+import { ref, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 
 function getLocalDateString() {

@@ -244,7 +244,7 @@ function SessionResults({ session, onRestart, onDone }) {
 
 // ─── Lab Tab ─────────────────────────────────────────────────────────────────
 
-function LabTab({ dueWords, allWords, memoryMap, onStart, loading }) {
+function LabTab({ dueWords, allWords, onStart, loading }) {
   const SESSION_SIZE = 20;
   const queue = dueWords.filter(w => w.wordData);
   const batch = queue.slice(0, SESSION_SIZE);
@@ -339,7 +339,7 @@ export default function MemoryLab() {
 
   const {
     allWords, dueWords, memoryMap, stats, confusionPairs, loading, error,
-    session, currentSessionWord,
+    session,
     startSession, submitReview, skipWord, endSession, reportConfusion,
   } = useMemoryExperiment();
 

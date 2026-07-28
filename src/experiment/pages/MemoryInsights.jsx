@@ -124,10 +124,6 @@ function WordInsightCard({ memory }) {
   const checkpoints = getForgettingCurvePoints(stability);
   const explanation = explainSchedulingDecision(stability, lastReview, nextOptimalReview);
 
-  const daysSinceLast = lastReview
-    ? Math.round((Date.now() - new Date(lastReview).getTime()) / (86400 * 1000))
-    : null;
-
   const daysUntilNext = nextOptimalReview && !due
     ? Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
     : null;

@@ -29,7 +29,7 @@ function PosBadge({ pos }) {
   );
 }
 
-export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, sourceName, onProgress }) {
+export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });

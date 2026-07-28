@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../data/grammarData';
 import { useGrammarStats } from '../hooks/useGrammarStats';
@@ -24,7 +24,9 @@ function playCorrectSound() {
       osc.stop(t + i * 0.12 + 0.35);
     });
     setTimeout(() => ctx.close(), 800);
-  } catch (_) {}
+  } catch {
+    // WebAudio unsupported or blocked (e.g. autoplay policy) — sound is optional feedback.
+  }
 }
 
 function playWrongSound() {
@@ -42,7 +44,9 @@ function playWrongSound() {
     gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
     osc.start(t); osc.stop(t + 0.3);
     setTimeout(() => ctx.close(), 600);
-  } catch (_) {}
+  } catch {
+    // WebAudio unsupported or blocked (e.g. autoplay policy) — sound is optional feedback.
+  }
 }
 
 function playFinishedSound() {
@@ -63,7 +67,9 @@ function playFinishedSound() {
       osc.stop(t + i * 0.1 + 0.45);
     });
     setTimeout(() => ctx.close(), 1200);
-  } catch (_) {}
+  } catch {
+    // WebAudio unsupported or blocked (e.g. autoplay policy) — sound is optional feedback.
+  }
 }
 
 function vibrate(pattern) {
@@ -129,7 +135,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
       if (!str) return '';
       return str
         .toLowerCase()
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "")
+        .replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g, "")
         .replace(/\s+/g, " ")
         .trim();
     };
@@ -139,9 +145,6 @@ function ScrambledExercise({ question, answered, onAnswer }) {
     setIsCorrect(correct);
     onAnswer(correct);
   };
-
-  const built = selected.join(' ');
-  const remaining = shuffledWords.filter(w => !selected.includes(w) || selected.filter(s => s === w).length < shuffledWords.filter(s => s === w).length);
 
   return (
     <div className="scrambled-exercise">

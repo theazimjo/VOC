@@ -6,7 +6,7 @@ import { weightedSelectWords, shuffleArray } from '../../utils/helpers';
 import { calculateNextReview } from '../../utils/spacedRepetition';
 import './IrregularVerbsTrainer.css';
 
-export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, sourceName, onProgress, initialSubStep, onExit }) {
+export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, onProgress, initialSubStep, onExit }) {
   const [sessionVerbs, setSessionVerbs] = useState([]);
   const [subStep, setSubStep] = useState(initialSubStep || 'study'); // 'study' | 'practice'
   const [studyIndex, setStudyIndex] = useState(0);
@@ -175,7 +175,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     const sentences = verb.example.split('/').map(s => s.trim());
 
     for (const sentence of sentences) {
-      const cleanSentence = sentence.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "");
+      const cleanSentence = sentence.replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g, "");
       const wordsInSentence = cleanSentence.toLowerCase().split(/\s+/);
 
       const v1Option = verb.v1.toLowerCase();
@@ -431,7 +431,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                           const trimmed = s.trim();
                           let highlighted = trimmed;
 
-                          const escapeRegex = (str) => str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                          const escapeRegex = (str) => str.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
                           const forms = [
                             ...sessionVerbs[studyIndex].v1.split('/'),
                             ...sessionVerbs[studyIndex].v2.split('/'),
