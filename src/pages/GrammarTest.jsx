@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { playSound } from '../utils/feedback';
-import { EXAMS_LIST } from '../data/examData';
+import { EXAMS_LIST, EXAMS_LIST_13 } from '../data/examData';
 import { 
   ref, 
   set, 
@@ -35,6 +35,42 @@ import {
 import IosSpinner from '../components/common/IosSpinner';
 import './GrammarTest.css';
 
+const DEFAULT_DURATION_SECONDS = 30 * 60;
+const getExamDurationSeconds = (exam) => (exam?.durationMinutes ? exam.durationMinutes * 60 : DEFAULT_DURATION_SECONDS);
+
+// The two exam folders shown on the list stage. Each owns its own variant list,
+// scoring history is per-testId so ids must stay unique across folders.
+const EXAM_FOLDERS = [
+  {
+    key: 'folder_12',
+    title: 'Imtihon 1.2',
+    level: 'Intermediate',
+    desc: 'Present Continuous, Articles, Numerals, Adverbs, Comparison',
+    list: EXAMS_LIST
+  },
+  {
+    key: 'folder_13',
+    title: 'Imtihon 1.3',
+    level: 'Beginner → Elementary',
+    desc: "8 qismli kompleks test: xatolar, bo'shliqlar, tarjima, ko'p tanlovli va yozma vazifalar",
+    list: EXAMS_LIST_13
+  }
+];
+const ALL_EXAMS_COMBINED = [...EXAMS_LIST, ...EXAMS_LIST_13];
+
+// Builds the question/prompt text shown to the AI grader / teacher for open-ended answers.
+const getGradingQuestionText = (section, q) => {
+  if (section.id === 'translate') {
+    return q.direction === 'en-uz'
+      ? `Translate English: "${q.english}" into Uzbek`
+      : `Translate Uzbek: "${q.uzbek}" into English`;
+  }
+  if (section.id === 'mistakes') return `Correct the mistake in: "${q.original}"`;
+  if (section.id === 'transformation') return `Rewrite without changing the meaning: "${q.original}" (start with "${q.starter}")`;
+  if (section.id === 'writing') return `Write 10-12 sentences about one of the topics: ${(section.topics || []).map(t => `${t.key}) ${t.label}`).join(', ')}`;
+  return q.prompt || q.question;
+};
+
 export default function GrammarTest() {
   const navigate = useNavigate();
   const { testId } = useParams();
@@ -42,6 +78,8 @@ export default function GrammarTest() {
 
   // ─── STAGES: 'list' | 'folder_detail' | 'intro' | 'testing' | 'evaluating' | 'results' ───
   const [stage, setStage] = useState('list');
+  const [activeFolderKey, setActiveFolderKey] = useState(EXAM_FOLDERS[0].key);
+  const activeFolder = EXAM_FOLDERS.find(f => f.key === activeFolderKey) || EXAM_FOLDERS[0];
   const [activeTest, setActiveTest] = useState(null);
   const [sections, setSections] = useState([]);
   const [activeSectionIdx, setActiveSectionIdx] = useState(0);
@@ -128,7 +166,7 @@ export default function GrammarTest() {
   // Recalculate stats and high scores whenever attempts state changes
   useEffect(() => {
     const scores = {};
-    const ALL_EXAMS = EXAMS_LIST;
+    const ALL_EXAMS = ALL_EXAMS_COMBINED;
 
     // 1. First, load old local high scores for backward compatibility
     ALL_EXAMS.forEach(exam => {
@@ -164,11 +202,12 @@ export default function GrammarTest() {
     if (viewingPastAttempt) return; // Do not overwrite if viewing past attempt
 
     if (testId) {
-      const ALL_EXAMS = EXAMS_LIST;
+      const ALL_EXAMS = ALL_EXAMS_COMBINED;
       const foundExam = ALL_EXAMS.find(e => e.id === testId);
       if (foundExam) {
         setActiveTest(foundExam);
         setSections(foundExam.sections);
+        setTimeLeft(getExamDurationSeconds(foundExam));
         setStage((prev) => {
           if (prev === 'list' || prev === 'folder_detail') return 'intro';
           return prev;
@@ -189,7 +228,7 @@ export default function GrammarTest() {
   }, [apiEndpoint]);
 
   // ─── TEST STATE ────────────────────────────────────────────────────────────
-  const [timeLeft, setTimeLeft] = useState(30 * 60);
+  const [timeLeft, setTimeLeft] = useState(DEFAULT_DURATION_SECONDS);
   const [answers, setAnswers] = useState({});
   const [reorderSelections, setReorderSelections] = useState({});
   
@@ -230,7 +269,7 @@ export default function GrammarTest() {
     setAnswers({});
     setReorderSelections({});
     setGrades({});
-    setTimeLeft(30 * 60);
+    setTimeLeft(getExamDurationSeconds(exam));
     setActiveSectionIdx(0);
     navigate(`/grammar-test/run/${exam.id}`);
     playSound('correct');
@@ -240,7 +279,7 @@ export default function GrammarTest() {
     setAnswers({});
     setReorderSelections({});
     setGrades({});
-    setTimeLeft(30 * 60);
+    setTimeLeft(getExamDurationSeconds(activeTest));
     setActiveSectionIdx(0);
     setStage('intro');
   };
@@ -285,7 +324,7 @@ export default function GrammarTest() {
     setStage('evaluating');
 
     // Calculate time spent
-    setTimeSpent(30 * 60 - timeLeft);
+    setTimeSpent(getExamDurationSeconds(activeTest) - timeLeft);
 
     const tempGrades = {};
     const writtenToEvaluate = [];
@@ -335,18 +374,39 @@ export default function GrammarTest() {
           const cleanUser = userVal.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
           const cleanRef = q.answer.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
           const cleanAlt = q.altAnswer ? q.altAnswer.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ') : '';
-          
+
           const isCorrect = cleanUser === cleanRef || (cleanAlt && cleanUser === cleanAlt);
           tempGrades[key] = {
             score: isCorrect ? 1.0 : 0.0,
             feedback: isCorrect ? 'Correct order!' : `Expected: "${q.answer}"`,
             pending: false
           };
+        } else if (section.id === 'multichoice' || section.id === 'mixedgrammar') {
+          const isCorrect = userVal.toLowerCase() === q.correct.toLowerCase();
+          tempGrades[key] = {
+            score: isCorrect ? 1.0 : 0.0,
+            feedback: isCorrect ? 'Correct!' : `Correct answer: "${q.correct}"`,
+            pending: false
+          };
+        } else if (section.id === 'transformation') {
+          const cleanUser = userVal.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
+          const cleanRef = q.reference.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g,"").replace(/\s+/g, ' ');
+          if (cleanUser === cleanRef) {
+            tempGrades[key] = { score: 1.0, feedback: 'Correct!', pending: false };
+          } else {
+            writtenToEvaluate.push({
+              key,
+              type: 'transformation',
+              question: getGradingQuestionText(section, q),
+              reference: `${q.starter} ${q.reference}`,
+              answer: userVal
+            });
+          }
         } else {
           writtenToEvaluate.push({
             key,
             type: section.id,
-            question: section.id === 'translate' ? `Translate Uzbek: "${q.uzbek}" into English` : (q.prompt || q.question),
+            question: getGradingQuestionText(section, q),
             reference: q.reference || q.referencePattern,
             answer: userVal
           });
@@ -415,7 +475,7 @@ export default function GrammarTest() {
       score: percent,
       totalScore: totalScore.toFixed(1),
       totalQuestions: totalQuestions,
-      timeSpent: 30 * 60 - timeLeft,
+      timeSpent: getExamDurationSeconds(activeTest) - timeLeft,
       takenAt: new Date().toISOString(),
       answers: { ...answers },
       grades: { ...finalGradesMap },
@@ -573,10 +633,13 @@ Evaluate the answer and return the JSON.`;
     return `${day}.${month}.${year} ${hours}:${minutes}`;
   };
 
-  // Helper to get variant letter A, B, C...
+  // Helper to get variant letter A, B, C... (per-folder, since each folder has its own A-E run)
   const getVariantLetter = (testId) => {
-    const idx = EXAMS_LIST.findIndex(e => e.id === testId);
-    return idx !== -1 ? String.fromCharCode(65 + idx) : '?';
+    for (const folder of EXAM_FOLDERS) {
+      const idx = folder.list.findIndex(e => e.id === testId);
+      if (idx !== -1) return String.fromCharCode(65 + idx);
+    }
+    return '?';
   };
 
   // View a past attempt details
@@ -585,7 +648,7 @@ Evaluate the answer and return the JSON.`;
       alert("Natijalar hali baholanmagan. O'qituvchi baholashini kuting!");
       return;
     }
-    const ALL_EXAMS = EXAMS_LIST;
+    const ALL_EXAMS = ALL_EXAMS_COMBINED;
     const foundExam = ALL_EXAMS.find(e => e.id === attempt.testId);
     if (foundExam) {
       setActiveTest(foundExam);
@@ -602,7 +665,7 @@ Evaluate the answer and return the JSON.`;
 
   // Copy AI grading prompt for admin
   const handleCopyPrompt = (attempt) => {
-    const foundExam = EXAMS_LIST.find(e => e.id === attempt.testId);
+    const foundExam = ALL_EXAMS_COMBINED.find(e => e.id === attempt.testId);
     if (!foundExam) return;
 
     const questionsToGrade = [];
@@ -614,11 +677,7 @@ Evaluate the answer and return the JSON.`;
           questionsToGrade.push({
             key,
             section: sec.title,
-            question: sec.id === 'translate'
-              ? `Translate Uzbek: "${q.uzbek}" into English`
-              : sec.id === 'mistakes'
-                ? `Correct the mistake in: "${q.original}"`
-                : (q.prompt || q.question),
+            question: getGradingQuestionText(sec, q),
             reference: q.reference || q.referencePattern || q.answer,
             studentAnswer: attempt.answers ? (attempt.answers[key] || '') : ''
           });
@@ -685,7 +744,7 @@ ${exampleGrades}
         }
       });
 
-      const foundExam = EXAMS_LIST.find(e => e.id === attempt.testId);
+      const foundExam = ALL_EXAMS_COMBINED.find(e => e.id === attempt.testId);
       if (!foundExam) throw new Error('Exam not found');
 
       let totalQuestions = 0;
@@ -732,7 +791,7 @@ ${exampleGrades}
 
     setIsRetryingAttemptId(attempt.id);
     try {
-      const foundExam = EXAMS_LIST.find(ex => ex.id === attempt.testId);
+      const foundExam = ALL_EXAMS_COMBINED.find(ex => ex.id === attempt.testId);
       if (!foundExam) throw new Error('Exam not found');
 
       const updatedGrades = { ...(attempt.grades || {}) };
@@ -744,11 +803,7 @@ ${exampleGrades}
           if (g && g.pending) {
             pendingEntries.push({
               key,
-              question: s.id === 'translate'
-                ? `Translate Uzbek: "${q.uzbek}" into English`
-                : s.id === 'mistakes'
-                  ? `Correct the mistake in: "${q.original}"`
-                  : (q.prompt || q.question),
+              question: getGradingQuestionText(s, q),
               reference: q.reference || q.referencePattern || q.answer,
               answer: attempt.answers ? (attempt.answers[key] || '') : ''
             });
@@ -917,34 +972,38 @@ ${exampleGrades}
               <h3 className="section-title">Papka to'plamlari</h3>
               
               <div className="gt-folders-grid-list">
-                <motion.div 
-                  className="gt-premium-folder-item"
-                  whileHover={{ scale: 1.01, y: -4 }}
-                  whileTap={{ scale: 0.99 }}
-                  onClick={() => {
-                    setStage('folder_detail');
-                    playSound('correct');
-                  }}
-                >
-                  <div className="folder-tab" />
-                  <div className="folder-body-card">
-                    <div className="folder-icon-wrapper">
-                      <Folder className="folder-icon-svg" />
-                    </div>
-                    <div className="folder-card-meta">
-                      <h3>Imtihon 1.2</h3>
-                      <p className="folder-meta-desc-desktop">Present Continuous, Articles, Numerals, Adverbs, Comparison</p>
-                      
-                      <div className="folder-footer-meta">
-                        <span className="badge-meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={10} /> 5 ta variant</span>
-                        <span className="badge-level">Intermediate</span>
+                {EXAM_FOLDERS.map((folder) => (
+                  <motion.div
+                    key={folder.key}
+                    className="gt-premium-folder-item"
+                    whileHover={{ scale: 1.01, y: -4 }}
+                    whileTap={{ scale: 0.99 }}
+                    onClick={() => {
+                      setActiveFolderKey(folder.key);
+                      setStage('folder_detail');
+                      playSound('correct');
+                    }}
+                  >
+                    <div className="folder-tab" />
+                    <div className="folder-body-card">
+                      <div className="folder-icon-wrapper">
+                        <Folder className="folder-icon-svg" />
+                      </div>
+                      <div className="folder-card-meta">
+                        <h3>{folder.title}</h3>
+                        <p className="folder-meta-desc-desktop">{folder.desc}</p>
+
+                        <div className="folder-footer-meta">
+                          <span className="badge-meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={10} /> {folder.list.length} ta variant</span>
+                          <span className="badge-level">{folder.level}</span>
+                        </div>
+                      </div>
+                      <div className="folder-chevron">
+                        <ChevronRight size={22} />
                       </div>
                     </div>
-                    <div className="folder-chevron">
-                      <ChevronRight size={22} />
-                    </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                ))}
               </div>
 
               {/* Urinishlar Tarixi (Attempts History) */}
@@ -1070,7 +1129,7 @@ ${exampleGrades}
               <div className="gt-stats-glass-card">
                 <div className="stat-circle-row">
                   <div className="stat-circle-box">
-                    <span className="number">{stats.totalTaken} / {EXAMS_LIST.length}</span>
+                    <span className="number">{stats.totalTaken} / {ALL_EXAMS_COMBINED.length}</span>
                     <span className="label">Topshirildi</span>
                   </div>
                   <div className="stat-circle-box primary">
@@ -1098,13 +1157,13 @@ ${exampleGrades}
               <ArrowLeft size={18} /> Orqaga
             </button>
             <div className="header-nav-title-group">
-              <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Folder size={22} /> Imtihon 1.2 Variantlari</h2>
+              <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Folder size={22} /> {activeFolder.title} Variantlari</h2>
             </div>
           </div>
 
           {/* Variants Grid */}
           <div className="gt-variants-inside-grid">
-            {EXAMS_LIST.map((exam, index) => {
+            {activeFolder.list.map((exam, index) => {
               const bestScore = highScores[exam.id];
               const isPassed = bestScore !== undefined;
               const letter = String.fromCharCode(65 + index);
@@ -1148,7 +1207,7 @@ ${exampleGrades}
                     </div>
 
                     <div className="v2-features-list">
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> 30 daqiqa</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {exam.durationMinutes || 30} daqiqa</span>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Brain size={11} /> AI baholash</span>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={11} /> {exam.sections?.length} ta bo'lim</span>
                     </div>
@@ -1183,18 +1242,16 @@ ${exampleGrades}
             Bu test sizning quyidagi mavzulardagi bilimingizni har tomonlama tekshiradi:
           </p>
           <div className="gt-topics-grid">
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Present Continuous</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Articles (a, an, the)</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Numerals</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Adverbs</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> As ... as comparison</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Degrees of adjectives</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><ChevronRight size={12} /> Irregular adjectives</span>
+            {(activeTest?.sections || []).map((sec) => (
+              <span key={sec.id} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <ChevronRight size={12} /> {sec.title.split('. ')[1] || sec.title}
+              </span>
+            ))}
           </div>
 
           <div className="gt-alert-info" style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
             <Clock size={16} style={{ marginTop: '2px', flexShrink: 0 }} />
-            <span><strong>Vaqt limiti:</strong> 30 daqiqa. Javoblarni yozib tugatgach, "Testni topshirish" ni bosing.</span>
+            <span><strong>Vaqt limiti:</strong> {activeTest?.durationMinutes || 30} daqiqa. Javoblarni yozib tugatgach, "Testni topshirish" ni bosing.</span>
           </div>
 
           <div className="gt-intro-actions">
@@ -1231,7 +1288,7 @@ ${exampleGrades}
             </div>
             <div className="submitted-info-row">
               <span className="submitted-info-label">Vaqt:</span>
-              <span className="submitted-info-value">{Math.round((30 * 60 - timeLeft) / 60)} daqiqa</span>
+              <span className="submitted-info-value">{Math.round((getExamDurationSeconds(activeTest) - timeLeft) / 60)} daqiqa</span>
             </div>
             <div className="submitted-info-row">
               <span className="submitted-info-label">Holat:</span>
@@ -1259,7 +1316,7 @@ ${exampleGrades}
               <div className="timer-progress-bg">
                 <div 
                   className={`timer-progress-fill ${timeLeft < 180 ? 'critical' : timeLeft < 600 ? 'warning' : ''}`}
-                  style={{ width: `${(timeLeft / (30 * 60)) * 100}%` }}
+                  style={{ width: `${(timeLeft / getExamDurationSeconds(activeTest)) * 100}%` }}
                 />
               </div>
             </div>
@@ -1365,20 +1422,109 @@ ${exampleGrades}
                 <div className="gt-questions-list">
                   {activeSection.questions.map((q) => {
                     const key = `translate_${q.id}`;
+                    const isEnUz = q.direction === 'en-uz';
                     return (
                       <div key={q.id} className="gt-question-box translate-box">
-                        <div className="q-badge">Gap #{q.id}</div>
-                        <div className="q-sentence uz-sentence">Uzbek: {q.uzbek}</div>
+                        <div className="q-badge">Gap #{q.id} {isEnUz ? '(English → Uzbek)' : '(Uzbek → English)'}</div>
+                        <div className="q-sentence uz-sentence">{isEnUz ? 'English' : 'Uzbek'}: {isEnUz ? q.english : q.uzbek}</div>
                         <textarea
                           className="gt-textarea"
                           rows={2}
-                          placeholder="Inglizcha tarjimasini yozing..."
+                          placeholder={isEnUz ? "O'zbekcha tarjimasini yozing..." : 'Inglizcha tarjimasini yozing...'}
                           value={answers[key] || ''}
                           onChange={(e) => handleTextChange('translate', q.id, e.target.value)}
                         />
                       </div>
                     );
                   })}
+                </div>
+              )}
+
+              {/* SECTION: Multiple Choice / Mixed Grammar Challenge */}
+              {(activeSection.id === 'multichoice' || activeSection.id === 'mixedgrammar') && (
+                <div className="gt-questions-list">
+                  {activeSection.questions.map((q) => {
+                    const key = `${activeSection.id}_${q.id}`;
+                    return (
+                      <div key={q.id} className="gt-question-box choice-only-box">
+                        <div className="q-badge">Savol #{q.id}</div>
+                        <div className="q-sentence">{q.text}</div>
+                        <div className="gt-options-row">
+                          {q.options.map((opt) => (
+                            <button
+                              key={opt}
+                              className={`gt-opt-select-btn ${answers[key] === opt ? 'active' : ''}`}
+                              onClick={() => handleChoiceSelect(activeSection.id, q.id, opt)}
+                            >
+                              {opt}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* SECTION: Sentence Transformation */}
+              {activeSection.id === 'transformation' && (
+                <div className="gt-questions-list">
+                  {activeSection.questions.map((q) => {
+                    const key = `transformation_${q.id}`;
+                    return (
+                      <div key={q.id} className="gt-question-box transformation-box">
+                        <div className="q-badge">Gap #{q.id}</div>
+                        <div className="q-sentence">{q.original}</div>
+                        <div className="gt-transform-row" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span className="gt-transform-starter" style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>→ {q.starter}</span>
+                          <input
+                            type="text"
+                            className="gt-input-text clean-width"
+                            placeholder="Davomini yozing..."
+                            value={answers[key] || ''}
+                            onChange={(e) => handleTextChange('transformation', q.id, e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* SECTION: Short Writing Task */}
+              {activeSection.id === 'writing' && (
+                <div className="gt-questions-list">
+                  <div className="gt-question-box writing-box">
+                    <div className="q-badge">Choose ONE topic</div>
+                    <div className="gt-options-row">
+                      {activeSection.topics.map((t) => (
+                        <button
+                          key={t.key}
+                          className={`gt-opt-select-btn ${answers['writing_topic'] === t.key ? 'active' : ''}`}
+                          onClick={() => handleChoiceSelect('writing', 'topic', t.key)}
+                        >
+                          {t.key}) {t.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="gt-topics-grid" style={{ marginTop: '14px' }}>
+                      {activeSection.mustUse.map((item) => (
+                        <span key={item} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <CheckCircle size={12} /> {item}
+                        </span>
+                      ))}
+                    </div>
+
+                    <textarea
+                      className="gt-textarea"
+                      rows={8}
+                      style={{ marginTop: '14px' }}
+                      placeholder="10-12 gapdan iborat matningizni shu yerga yozing..."
+                      value={answers['writing_1'] || ''}
+                      onChange={(e) => handleTextChange('writing', 1, e.target.value)}
+                    />
+                  </div>
                 </div>
               )}
 
@@ -1640,7 +1786,7 @@ ${exampleGrades}
                   <Clock className="time-icon-svg" />
                   <span className="time-val-text">{formatTimeSpent(timeSpent)}</span>
                 </div>
-                <p className="desc-meta">30 daqiqa umumiy limit berilgan edi.</p>
+                <p className="desc-meta">{activeTest?.durationMinutes || 30} daqiqa umumiy limit berilgan edi.</p>
               </div>
 
               {/* Rating level card */}
@@ -1727,7 +1873,7 @@ ${exampleGrades}
                       return (
                         <div key={q.id} className={`gt-result-detail-card-item ${statusClass}`}>
                           <div className="card-item-header">
-                            <span className="question-number">Savol #{q.id} ({q.topic})</span>
+                            <span className="question-number">Savol #{q.id}{q.topic ? ` (${q.topic})` : ''}</span>
                             <span className="score-label-pill">
                               {isPendingItem ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Clock size={11} /> Tekshirilmagan</span> : `${gradeObj.score.toFixed(1)} ball`}
                             </span>
@@ -1756,9 +1902,38 @@ ${exampleGrades}
                             {/* Translate specific */}
                             {sections[activeResultSecIdx].id === 'translate' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line uz"><strong>O'zbekcha gap:</strong> {q.uzbek}</div>
+                                <div className="txt-line uz"><strong>{q.direction === 'en-uz' ? 'English gap' : "O'zbekcha gap"}:</strong> {q.direction === 'en-uz' ? q.english : q.uzbek}</div>
                                 <div className="txt-line user"><strong>Sizning tarjimangiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
                                 {!isPendingItem && <div className="txt-line ref"><strong>Namunaviy to'g'ri variant:</strong> "{q.reference}"</div>}
+                              </div>
+                            )}
+
+                            {/* Multiple Choice / Mixed Grammar Challenge specific */}
+                            {(sections[activeResultSecIdx].id === 'multichoice' || sections[activeResultSecIdx].id === 'mixedgrammar') && (
+                              <div className="detail-texts-block">
+                                <div className="txt-line"><strong>Savol:</strong> {q.text}</div>
+                                <div className="txt-line user"><strong>Sizning tanlovingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan javob:</strong> "{q.correct}"</div>}
+                              </div>
+                            )}
+
+                            {/* Sentence Transformation specific */}
+                            {sections[activeResultSecIdx].id === 'transformation' && (
+                              <div className="detail-texts-block">
+                                <div className="txt-line"><strong>Asl gap:</strong> {q.original}</div>
+                                <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{q.starter} {userVal || <em>[Bo'sh]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan:</strong> "{q.starter} {q.reference}"</div>}
+                              </div>
+                            )}
+
+                            {/* Short Writing Task specific */}
+                            {sections[activeResultSecIdx].id === 'writing' && (
+                              <div className="detail-texts-block">
+                                <div className="txt-line"><strong>Tanlangan mavzu:</strong> {(() => {
+                                  const chosen = (sections[activeResultSecIdx].topics || []).find(t => t.key === answers['writing_topic']);
+                                  return chosen ? `${chosen.key}) ${chosen.label}` : <em>[Tanlanmagan]</em>;
+                                })()}</div>
+                                <div className="txt-line user"><strong>Yozgan matningiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
                               </div>
                             )}
 
