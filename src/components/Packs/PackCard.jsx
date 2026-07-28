@@ -1,6 +1,7 @@
 import { useState, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { MoreVertical } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import './PackCard.css';
 
@@ -69,7 +70,7 @@ export default function PackCard({ pack, onLongPress }) {
         onTouchMove={handleMove}
         onClick={handleClick}
         onContextMenu={handleContextMenu}
-        title="Tahrirlash uchun bosib turing"
+        title="Tahrirlash yoki o'chirish uchun bosib turing"
       >
         <div className="pack-card-top">
           <div
@@ -81,7 +82,24 @@ export default function PackCard({ pack, onLongPress }) {
           >
             {pack.icon}
           </div>
-          <span className="pack-card-count">{pack.wordCount || 0} ta so'z</span>
+          <div className="pack-card-top-right">
+            <span className="pack-card-count">{pack.wordCount || 0} ta so'z</span>
+            {onLongPress && (
+              <button
+                type="button"
+                className="pack-card-more-btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onLongPress();
+                }}
+                title="To'plam sozlamalari / o'chirish"
+                aria-label="To'plam sozlamalari"
+              >
+                <MoreVertical size={18} />
+              </button>
+            )}
+          </div>
         </div>
 
         <div className="pack-card-body">

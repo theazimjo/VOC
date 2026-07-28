@@ -79,45 +79,6 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     disabled={isLocked}
                   />
                 </div>
-                
-                <div className="input-group">
-                  <label>Tavsif</label>
-                  <textarea 
-                    className="textarea" 
-                    value={description} 
-                    onChange={e => setDescription(e.target.value)} 
-                    placeholder="To'plam haqida qisqacha ma'lumot..."
-                  />
-                </div>
-
-                <div className="input-group">
-                  <label>Ikonka</label>
-                  <div className="icon-picker">
-                    {packIcons.map((icn, idx) => (
-                      <div 
-                        key={idx}
-                        className={`icon-swatch ${icon === icn ? 'selected' : ''} ${isLocked && icon !== icn ? 'disabled' : ''}`}
-                        onClick={() => !isLocked && setIcon(icn)}
-                      >
-                        {icn}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="input-group">
-                  <label>Rang</label>
-                  <div className="color-picker">
-                    {bookColors.map((c, idx) => (
-                      <div 
-                        key={idx}
-                        className={`color-swatch ${color === c ? 'selected' : ''}`}
-                        style={{ background: c }}
-                        onClick={() => setColor(c)}
-                      />
-                    ))}
-                  </div>
-                </div>
               </div>
               
               <div className="modal-footer" style={{ justifyContent: editPack ? 'space-between' : 'flex-end', width: '100%' }}>
