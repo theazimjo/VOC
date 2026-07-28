@@ -32,6 +32,7 @@ function PosBadge({ pos }) {
 export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [answered, setAnswered] = useState(false);
   const [results, setResults] = useState({ correctCount: 0, incorrectCount: 0 });
 
   const currentWord = words[currentIndex];
@@ -56,6 +57,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   // Reset per-card state when the card changes
   useEffect(() => {
     setIsFlipped(false);
+    setAnswered(false);
     cardStartRef.current = Date.now();
     revealElapsedRef.current = 4;
   }, [currentIndex]);
@@ -78,6 +80,12 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   };
 
   const handleJudge = (isCorrect) => {
+    // Guards against a double-tap/double-click firing this twice for the
+    // same card — without it, two scheduled setCurrentIndex(prev => prev+1)
+    // calls both land, silently skipping the next card entirely.
+    if (answered) return;
+    setAnswered(true);
+
     if (onAnswer) onAnswer(currentWord, isCorrect);
 
     const confidence = inferConfidenceFromSpeed(revealElapsedRef.current, isCorrect);
@@ -162,10 +170,10 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
           manually self-rated, so this is a binary choice like everywhere
           else in the app. */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
-        <button className="flashcard-rating-btn again" onClick={() => handleJudge(false)}>
+        <button className="flashcard-rating-btn again" onClick={() => handleJudge(false)} disabled={answered}>
           <span className="rating-label">✗ Bilmadim</span>
         </button>
-        <button className="flashcard-rating-btn easy" onClick={() => handleJudge(true)}>
+        <button className="flashcard-rating-btn easy" onClick={() => handleJudge(true)} disabled={answered}>
           <span className="rating-label">✓ Bildim</span>
         </button>
       </div>

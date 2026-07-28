@@ -267,6 +267,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
   };
 
   const handleTableSubmit = () => {
+    if (checked) return;
     const verb = sessionVerbs[currentIndex];
     const v1Correct = isCorrectMatch(tableAnswers.v1, verb.v1);
     const v2Correct = isCorrectMatch(tableAnswers.v2, verb.v2);
@@ -324,7 +325,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
   };
 
   // Common Results Processing
-  const processResult = async (isCorrect) => {
+  const processResult = (isCorrect) => {
     const verb = sessionVerbs[currentIndex];
     const responseTime = (Date.now() - questionStartRef.current) / 1000;
     const confidence = inferConfidenceFromSpeed(responseTime, isCorrect);
@@ -338,28 +339,28 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       setWrongVerbs(prev => [...prev, verb]);
     }
 
-    // PracticePage computes and persists the actual stability update (via
-    // the same saveReviewEvent pipeline Memory Lab uses) — awaited here so
-    // the local requeue below builds on the real result, not a stale one.
-    const updated = onUpdateWord
-      ? await onUpdateWord(verb.id, { isCorrect, confidence, responseTime, retrievalType: 'active_recall' })
-      : null;
-
-    // Merge the fresh progress into every copy of this verb still queued
-    // this session — otherwise a requeued retry below would compute its
-    // next review from the stale pre-attempt snapshot and overwrite the
-    // result we just persisted.
-    setSessionVerbs(prev => {
-      const next = prev.map(v => (v.id === verb.id ? { ...v, ...(updated || {}) } : v));
-      if (!isCorrect && !verb._requeued) {
-        // Give the verb one more attempt later in this same session instead of
-        // just dropping it — retrieving it again shortly after a miss is what
-        // actually moves it into memory (the "testing effect").
+    // Requeue a missed verb immediately, synchronously — never gated behind
+    // the Firebase round-trip below. Awaiting it first (as this used to)
+    // meant that on a slow connection, answering the *next* question before
+    // this promise resolved could land the requeue splice at a position
+    // that had already been reached, silently swapping out whatever verb
+    // the user was currently looking at. The verb's own linguistic fields
+    // (v1/v2/v3/translation/example) — the only ones this component ever
+    // renders — don't change, so there's nothing to wait for here; the
+    // persisted stability/mastery update below is fire-and-forget.
+    if (!isCorrect && !verb._requeued) {
+      setSessionVerbs(prev => {
+        const next = [...prev];
         const reinsertAt = Math.min(next.length, currentIndex + 4);
-        next.splice(reinsertAt, 0, { ...verb, ...(updated || {}), _requeued: true });
-      }
-      return next;
-    });
+        next.splice(reinsertAt, 0, { ...verb, _requeued: true });
+        return next;
+      });
+    }
+
+    if (onUpdateWord) {
+      onUpdateWord(verb.id, { isCorrect, confidence, responseTime, retrievalType: 'active_recall' })
+        .catch((err) => console.error('Failed to persist verb review:', err));
+    }
 
     speakVerbs(verb.v1, verb.v2, verb.v3);
   };
