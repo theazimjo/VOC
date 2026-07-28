@@ -253,14 +253,17 @@
 }
 
 /* ─── Spelling / Input Form ───────────────────────────────────────────────── */
-.spelling-form {
+/* Prefixed (mp-) to avoid colliding with SpellingGame.css's identically-named
+   .spelling-form/.spelling-input — both are plain global stylesheets, and a
+   shared class name here meant whichever loaded last silently won. */
+.mp-spelling-form {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
   width: 100%;
 }
 
-.spelling-input {
+.mp-spelling-input {
   width: 100%;
   padding: 14px var(--space-md);
   background: var(--bg-secondary);
@@ -273,7 +276,7 @@
   transition: all var(--transition-base);
 }
 
-.spelling-input:focus:not(:disabled) {
+.mp-spelling-input:focus:not(:disabled) {
   border-color: var(--accent-1);
   box-shadow: 0 0 0 3px var(--accent-1-dim);
   background: var(--bg-secondary);

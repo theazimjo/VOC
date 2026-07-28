@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, update } from 'firebase/database';
@@ -12,7 +12,10 @@ import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
-import { getDueWords, calculateNextReview, responseToQuality } from '../utils/spacedRepetition';
+import { getDueWords } from '../utils/spacedRepetition';
+import { inferConfidenceFromSpeed, computeClusterCalibration } from '../utils/memoryEngine';
+import { saveReviewEvent } from '../experiment/experimentDB';
+import { classifyWord } from '../experiment/semanticClassifier';
 import IosSpinner from '../components/common/IosSpinner';
 import './MixedPractice.css';
 
@@ -58,6 +61,7 @@ export default function MixedPractice() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [loading, setLoading] = useState(true);
+  const questionStartRef = useRef(Date.now());
 
   // Word pool sourced from the shared allWords aggregator
   useEffect(() => {
@@ -112,6 +116,7 @@ export default function MixedPractice() {
     setTypedAnswer('');
     setHasAnswered(false);
     setSelectedOption(null);
+    questionStartRef.current = Date.now();
     setStep('practice');
   };
 
@@ -161,60 +166,78 @@ export default function MixedPractice() {
     }
   };
 
-  const handleUpdateWordStats = async (wordObj, isCorrect) => {
-    if (!user) return;
+  // Routes through the exact same saveReviewEvent() pipeline every other
+  // practice mode now uses (Memory Lab, PracticePage's 7 games) — real
+  // response time + speed-inferred confidence, recallHistory recorded, and
+  // the same per-semantic-cluster self-calibration. Returns the persisted
+  // result so callers can keep their local question/word copies in sync.
+  const handleUpdateWordStats = async (wordObj, isCorrect, responseTime, retrievalType) => {
+    if (!user) return null;
     try {
       const parentId = wordObj.sourceId;
-      const wordRef = ref(db, `users/${user.uid}/words/${parentId}/${wordObj.id}`);
+      const confidence = inferConfidenceFromSpeed(responseTime, isCorrect);
 
-      // Same SM-2 engine and wrongCount/leech bookkeeping as PracticePage's
-      // spaced-repetition flow, so mastery/nextReview stay consistent no
-      // matter which practice mode a word was reviewed in.
-      const quality = responseToQuality(isCorrect ? 'good' : 'again');
-      const sm2Data = calculateNextReview(quality, wordObj);
+      const { key: clusterKey } = classifyWord(wordObj.word, wordObj.translation, wordObj.source);
+      const clusterHistory = [];
+      allWords.forEach((w) => {
+        if (classifyWord(w.word, w.translation, w.source).key === clusterKey) {
+          clusterHistory.push(...(w.recallHistory || []));
+        }
+      });
+      const clusterMultiplier = computeClusterCalibration(clusterHistory);
+
+      const updated = await saveReviewEvent(user.uid, parentId, wordObj.id, wordObj, {
+        isCorrect,
+        confidence,
+        responseTime,
+        retrievalType,
+        clusterMultiplier,
+        wordText: wordObj.word,
+      });
 
       const prevWrongCount = wordObj.wrongCount || 0;
-      const wrongCount = quality < 4
-        ? prevWrongCount + 1
-        : Math.max(0, prevWrongCount - 1);
+      const wrongCount = isCorrect ? Math.max(0, prevWrongCount - 1) : prevWrongCount + 1;
+      const wordRef = ref(db, `users/${user.uid}/words/${parentId}/${wordObj.id}`);
+      await update(wordRef, { wrongCount });
 
-      await update(wordRef, { ...sm2Data, wrongCount });
+      return { ...updated, wrongCount };
     } catch (e) {
       console.error('Error updating word stats:', e);
+      return null;
     }
   };
 
   const handleQuizAnswer = (option) => {
     if (hasAnswered) return;
     setSelectedOption(option);
+    const responseTime = (Date.now() - questionStartRef.current) / 1000;
     const correctVal = questions[currentIdx].word.translation;
     const isRight = option.trim().toLowerCase() === correctVal.trim().toLowerCase();
-    
-    questions[currentIdx].isCorrect = isRight;
-    questions[currentIdx].userAnswer = option;
-    
+
+    setQuestions(prev => prev.map((q, i) => (i === currentIdx ? { ...q, isCorrect: isRight, userAnswer: option } : q)));
+
     if (isRight) setCorrectCount(prev => prev + 1);
     setHasAnswered(true);
     playSound(isRight ? 'correct' : 'wrong');
     triggerVibration(isRight ? 'correct' : 'wrong');
-    handleUpdateWordStats(questions[currentIdx].word, isRight);
+    handleUpdateWordStats(questions[currentIdx].word, isRight, responseTime, 'passive_recall');
   };
 
   const handleTextSubmit = (e) => {
     if (e) e.preventDefault();
     if (hasAnswered) return;
-    
+
+    const responseTime = (Date.now() - questionStartRef.current) / 1000;
     const correctVal = questions[currentIdx].word.word.trim().toLowerCase();
     const isRight = typedAnswer.trim().toLowerCase() === correctVal;
-    
-    questions[currentIdx].isCorrect = isRight;
-    questions[currentIdx].userAnswer = typedAnswer;
-    
+
+    setQuestions(prev => prev.map((q, i) => (i === currentIdx ? { ...q, isCorrect: isRight, userAnswer: typedAnswer } : q)));
+
     if (isRight) setCorrectCount(prev => prev + 1);
     setHasAnswered(true);
     playSound(isRight ? 'correct' : 'wrong');
     triggerVibration(isRight ? 'correct' : 'wrong');
-    handleUpdateWordStats(questions[currentIdx].word, isRight);
+    handleUpdateWordStats(questions[currentIdx].word, isRight, responseTime, 'active_recall');
   };
 
   const handleNext = () => {
@@ -223,6 +246,7 @@ export default function MixedPractice() {
       setTypedAnswer('');
       setHasAnswered(false);
       setSelectedOption(null);
+      questionStartRef.current = Date.now();
     } else {
       setStep('results');
       playSound('victory');
@@ -296,7 +320,7 @@ export default function MixedPractice() {
               {/* Question area */}
               <div className="question-content">
                 {questions[currentIdx].type === 'quiz' && (
-                  <div className="quiz-question">
+                  <div className="mp-quiz-question">
                     <span className="question-prompt">Tarjimasini tanlang:</span>
                     <h2 className="question-word">{questions[currentIdx].word.word}</h2>
                     
@@ -336,10 +360,10 @@ export default function MixedPractice() {
                     <span className="question-prompt">Inglizcha tarjimasini yozing:</span>
                     <h2 className="question-word">{questions[currentIdx].word.translation}</h2>
                     
-                    <form onSubmit={handleTextSubmit} className="spelling-form">
+                    <form onSubmit={handleTextSubmit} className="mp-spelling-form">
                       <input
                         type="text"
-                        className="spelling-input"
+                        className="mp-spelling-input"
                         placeholder="Inglizcha so'zni yozing..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
@@ -373,10 +397,10 @@ export default function MixedPractice() {
                       <span className="audio-helper-text">Talaffuzni qayta eshitish uchun bosing</span>
                     </div>
 
-                    <form onSubmit={handleTextSubmit} className="spelling-form">
+                    <form onSubmit={handleTextSubmit} className="mp-spelling-form">
                       <input
                         type="text"
-                        className="spelling-input"
+                        className="mp-spelling-input"
                         placeholder="Eshitgan so'zingizni yozing..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
