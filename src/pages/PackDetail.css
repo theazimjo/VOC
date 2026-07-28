@@ -154,6 +154,97 @@
   transform: scale(0.98);
 }
 
+/* ── Memory Twin (per-collection) ── */
+.pack-memtwin-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.pack-memtwin-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--space-md);
+}
+
+.pack-memtwin-icon {
+  display: flex;
+  align-items: center;
+  color: var(--accent-1);
+}
+
+.pack-memtwin-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-1);
+}
+
+.pack-memtwin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+
+.pack-memtwin-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+  padding: var(--space-sm) 4px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.pack-memtwin-stat-value {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pack-memtwin-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.pack-memtwin-insight {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border-light);
+}
+
+.pack-memtwin-insight-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.pack-memtwin-insight-text svg {
+  color: var(--warning);
+  flex-shrink: 0;
+}
+
+.pack-memtwin-insight-sub {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 400px) {
+  .pack-memtwin-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Mobile responsive details */
 @media (max-width: 768px) {
   .pack-detail-page {

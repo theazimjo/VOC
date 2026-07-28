@@ -1,12 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Brain, AlertTriangle } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useWords } from '../hooks/useWords';
 import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
 import { getIrregularVerbGroup } from '../data/irregularVerbGroups';
 import { findSourceMarketPack, getMissingMarketWords } from '../utils/marketSync';
 import { playSound } from '../utils/feedback';
+import { computeRecallProbability } from '../utils/memoryEngine';
+import { getConfusionPairs } from '../experiment/experimentDB';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
@@ -17,6 +21,7 @@ import './PackDetail.css';
 export default function PackDetail() {
   const { packId } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { getPack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
   const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
@@ -26,7 +31,44 @@ export default function PackDetail() {
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
   const [newWordsAddedCount, setNewWordsAddedCount] = useState(null);
+  const [confusionPairs, setConfusionPairs] = useState([]);
   const marketSyncCheckedRef = useRef(false);
+
+  // One-time fetch, same pattern as the Dashboard's Memory Twin card.
+  useEffect(() => {
+    if (!user) return;
+    getConfusionPairs(user.uid).then(setConfusionPairs).catch(() => setConfusionPairs([]));
+  }, [user]);
+
+  // Per-collection Memory Twin: mastery/retention/at-risk plus the strongest
+  // confusion pair *within this pack specifically* (a pack-wide confusion
+  // list wouldn't tell the user anything about the words they're actually
+  // looking at right now).
+  const memoryTwin = useMemo(() => {
+    if (!words || words.length === 0) return null;
+    const reviewed = words.filter(w => w.lastReviewed);
+    if (reviewed.length === 0) return null;
+
+    const masteryPercent = Math.round(words.reduce((sum, w) => sum + (w.mastery || 0), 0) / words.length);
+
+    const now = Date.now();
+    let totalP = 0;
+    let atRisk = 0;
+    reviewed.forEach(w => {
+      const stability = typeof w.stability === 'number' ? w.stability : 1.0;
+      const daysSince = (now - new Date(w.lastReviewed).getTime()) / 86400000;
+      const p = computeRecallProbability(stability, daysSince);
+      totalP += p;
+      if (p < 0.5) atRisk++;
+    });
+    const retentionPercent = Math.round((totalP / reviewed.length) * 100);
+
+    const wordIds = new Set(words.map(w => w.id));
+    const packConfusions = confusionPairs.filter(p => wordIds.has(p.wordIdA) || wordIds.has(p.wordIdB));
+    const topConfusion = [...packConfusions].sort((a, b) => (b.count || 0) - (a.count || 0))[0] || null;
+
+    return { masteryPercent, retentionPercent, atRisk, confusionCount: packConfusions.length, topConfusion };
+  }, [words, confusionPairs]);
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -204,6 +246,43 @@ export default function PackDetail() {
           )}
         </div>
       </div>
+
+      {memoryTwin && (
+        <div className="pack-memtwin-card">
+          <div className="pack-memtwin-header">
+            <span className="pack-memtwin-icon"><Brain size={16} strokeWidth={2.2} /></span>
+            <span className="pack-memtwin-title">Memory Twin</span>
+          </div>
+
+          <div className="pack-memtwin-stats-grid">
+            <div className="pack-memtwin-stat">
+              <span className="pack-memtwin-stat-value">{memoryTwin.masteryPercent}%</span>
+              <span className="pack-memtwin-stat-label">Mastery</span>
+            </div>
+            <div className="pack-memtwin-stat">
+              <span className="pack-memtwin-stat-value">{memoryTwin.retentionPercent}%</span>
+              <span className="pack-memtwin-stat-label">Retention</span>
+            </div>
+            <div className="pack-memtwin-stat">
+              <span className="pack-memtwin-stat-value">{memoryTwin.atRisk}</span>
+              <span className="pack-memtwin-stat-label">At risk</span>
+            </div>
+            <div className="pack-memtwin-stat">
+              <span className="pack-memtwin-stat-value">{memoryTwin.confusionCount}</span>
+              <span className="pack-memtwin-stat-label">Confusions</span>
+            </div>
+          </div>
+
+          {memoryTwin.topConfusion && (
+            <div className="pack-memtwin-insight">
+              <p className="pack-memtwin-insight-text">
+                <AlertTriangle size={13} strokeWidth={2.3} /> Ko'p aralashtiriladi: <strong>{memoryTwin.topConfusion.wordA}</strong> ↔ <strong>{memoryTwin.topConfusion.wordB}</strong>
+              </p>
+              <p className="pack-memtwin-insight-sub">Tavsiya: solishtirib mashq qilish (Contrastive Practice)</p>
+            </div>
+          )}
+        </div>
+      )}
 
       <WordList
         words={words}

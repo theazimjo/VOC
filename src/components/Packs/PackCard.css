@@ -94,6 +94,18 @@
   -webkit-box-orient: vertical;
 }
 
+.pack-card-health {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.pack-card-health--some-risk { color: var(--warning); }
+.pack-card-health--high-risk { color: var(--error); }
+
 .pack-card-footer {
   display: flex;
   align-items: center;
