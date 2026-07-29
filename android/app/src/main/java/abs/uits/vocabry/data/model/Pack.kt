@@ -8,10 +8,12 @@ data class Pack(
     val name: String = "",
     val description: String = "",
     val color: String = "#7C3AED",
-    val icon: String = "📦", // 📦
+    val icon: String = "📦",
     val level: String = "beginner",
     val createdAt: String = "",
     val wordCount: Int = 0,
+    val folderId: String? = null,
+    val marketPackId: String? = null,
 ) {
     companion object {
         fun fromSnapshot(snapshot: DataSnapshot): Pack {
@@ -24,17 +26,21 @@ data class Pack(
                 level = snapshot.child("level").getValue(String::class.java) ?: "beginner",
                 createdAt = snapshot.child("createdAt").getValue(String::class.java) ?: "",
                 wordCount = snapshot.child("wordCount").getValue(Double::class.java)?.toInt() ?: 0,
+                folderId = snapshot.child("folderId").getValue(String::class.java),
+                marketPackId = snapshot.child("marketPackId").getValue(String::class.java),
             )
         }
     }
 
-    fun toMap(): Map<String, Any?> = mapOf(
-        "name" to name,
-        "description" to description,
-        "color" to color,
-        "icon" to icon,
-        "level" to level,
-        "createdAt" to createdAt,
-        "wordCount" to wordCount,
-    )
+    fun toMap(): Map<String, Any?> = buildMap {
+        put("name", name)
+        put("description", description)
+        put("color", color)
+        put("icon", icon)
+        put("level", level)
+        put("createdAt", createdAt)
+        put("wordCount", wordCount)
+        folderId?.let { put("folderId", it) }
+        marketPackId?.let { put("marketPackId", it) }
+    }
 }
