@@ -51,14 +51,11 @@ object GeminiService {
     private const val ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E="
 
     private val MODEL_CANDIDATES = listOf(
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
         "gemini-2.0-flash",
         "gemini-2.0-flash-lite",
-        "gemini-1.5-flash",
-        "gemini-1.5-pro"
-    )
-
-    private val LIVE_MODEL_CANDIDATES = listOf(
-        "gemini-2.0-flash",
+        "gemini-1.5-flash-latest",
         "gemini-1.5-flash"
     )
 
@@ -122,31 +119,21 @@ object GeminiService {
                 }
                 errorReader.close()
                 lastErrorMsg = "[$model] HTTP $responseCode: ${errSb.toString()}"
-
-                if (responseCode == 404 || responseCode == 400) {
-                    // Model candidate failed, try next in list
-                    continue
-                }
-
-                throw Exception(lastErrorMsg)
+                continue
             } catch (e: Exception) {
-                if (e.message?.contains("404") == true || e.message?.contains("400") == true) {
-                    continue
-                }
-                if (model == MODEL_CANDIDATES.last()) {
-                    throw e
-                }
+                lastErrorMsg = e.message ?: "Network error"
+                continue
             } finally {
                 conn?.disconnect()
             }
         }
 
-        throw Exception("Gemini API so'rovi amalga oshmadi: $lastErrorMsg")
+        throw Exception("Gemini AI xizmatiga ulanib bo'lmadi. Profil bo'limida API Kalitingizni tekshiring.")
     }
 
     suspend fun lookupWordWithAI(context: Context, query: String): WordLookupResult? = withContext(Dispatchers.IO) {
         val apiKey = getApiKey(context)
-        if (apiKey.isBlank()) throw Exception("Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting.")
+        if (apiKey.isBlank()) throw Exception("Gemini API Kaliti kiritilmagan. Iltimos, Profil bo'limida kalitni kiriting.")
 
         val prompt = """Task: Vocabulary lookup for "${query.trim()}".
 Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
@@ -202,7 +189,7 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
         existingWords: List<String> = emptyList()
     ): List<ExtractedWordItem> = withContext(Dispatchers.IO) {
         val apiKey = getApiKey(context)
-        if (apiKey.isBlank()) throw Exception("Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting.")
+        if (apiKey.isBlank()) throw Exception("Gemini API Kaliti kiritilmagan. Iltimos, Profil bo'limida kalitni kiriting.")
 
         val cleanBase64 = imageBase64.replace(Regex("^data:image/[a-zA-Z0-9+.-]+;base64,"), "")
         val existingKeys = existingWords.take(100).joinToString(", ")
