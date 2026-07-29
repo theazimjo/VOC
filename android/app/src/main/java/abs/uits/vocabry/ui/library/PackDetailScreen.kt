@@ -7,6 +7,9 @@ import abs.uits.vocabry.ui.library.components.AddWordDialog
 import abs.uits.vocabry.ui.library.components.BulkImportDialog
 import abs.uits.vocabry.ui.library.components.PhotoWordExtractorDialog
 import abs.uits.vocabry.ui.library.components.WordFormData
+import abs.uits.vocabry.ui.theme.SuccessGreen
+import abs.uits.vocabry.ui.theme.WarningAmber
+import abs.uits.vocabry.ui.theme.iconForPackOrFolder
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
 import android.speech.tts.TextToSpeech
@@ -32,14 +35,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.NoteAdd
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.SportsEsports
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -120,7 +128,7 @@ fun PackDetailScreen(
     LaunchedEffect(newWordsAddedCount) {
         val count = newWordsAddedCount
         if (count != null) {
-            snackbarHostState.showSnackbar("✨ $count ta yangi so'z qo'shildi!")
+            snackbarHostState.showSnackbar("$count ta yangi so'z qo'shildi!")
             viewModel.clearNewWordsAddedCount()
         }
     }
@@ -214,11 +222,11 @@ fun PackDetailScreen(
                                 contentAlignment = Alignment.Center,
                                 modifier = Modifier
                                     .size(52.dp)
-                                    .clip(RoundedCornerShape(12.dp))
+                                    .clip(MaterialTheme.shapes.medium)
                                     .background(accentColor.copy(alpha = 0.15f))
-                                    .border(1.dp, accentColor.copy(alpha = 0.3f), RoundedCornerShape(12.dp))
+                                    .border(1.dp, accentColor.copy(alpha = 0.3f), MaterialTheme.shapes.medium)
                             ) {
-                                Text(pack?.icon?.ifEmpty { "📦" } ?: "📦", fontSize = 26.sp)
+                                Icon(iconForPackOrFolder(pack?.icon.orEmpty()), contentDescription = null, tint = accentColor, modifier = Modifier.size(26.dp))
                             }
 
                             Spacer(Modifier.width(14.dp))
@@ -238,11 +246,11 @@ fun PackDetailScreen(
                                 }
                                 Spacer(Modifier.height(4.dp))
                                 Surface(
-                                    shape = RoundedCornerShape(6.dp),
+                                    shape = MaterialTheme.shapes.extraSmall,
                                     color = accentColor.copy(alpha = 0.15f)
                                 ) {
                                     Text(
-                                        "📝 ${words.size} ta so'z",
+                                        "${words.size} ta so'z",
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = accentColor,
@@ -271,18 +279,20 @@ fun PackDetailScreen(
                                 OutlinedButton(
                                     onClick = { navController.navigate("irregular_verbs/$packId/study") },
                                     modifier = Modifier.weight(1f),
-                                    shape = RoundedCornerShape(10.dp)
+                                    shape = MaterialTheme.shapes.small
                                 ) {
-                                    Text("🃏 Flashkart", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = null, modifier = Modifier.size(16.dp))
+                                    Spacer(Modifier.width(6.dp))
+                                    Text("Flashkart", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 }
 
                                 Button(
                                     onClick = { navController.navigate("irregular_verbs/$packId/practice") },
                                     modifier = Modifier.weight(1f),
                                     colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
-                                    shape = RoundedCornerShape(10.dp)
+                                    shape = MaterialTheme.shapes.small
                                 ) {
-                                    Text("⚡ Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    Text("Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
                         } else {
@@ -290,9 +300,11 @@ fun PackDetailScreen(
                                 onClick = { navController.navigate("practice_pack/$packId") },
                                 modifier = Modifier.fillMaxWidth(),
                                 colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
-                                shape = RoundedCornerShape(10.dp)
+                                shape = MaterialTheme.shapes.small
                             ) {
-                                Text("🎮 Mashq qilish", fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                                Icon(Icons.Filled.SportsEsports, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Spacer(Modifier.width(6.dp))
+                                Text("Mashq qilish", fontSize = 14.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -332,7 +344,7 @@ fun PackDetailScreen(
                             .padding(32.dp)
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("📝", fontSize = 48.sp)
+                            Icon(Icons.Filled.NoteAdd, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                             Spacer(Modifier.height(8.dp))
                             Text(
                                 "Bu to'plamda hali so'zlar yo'q",
@@ -512,7 +524,7 @@ private fun SpeedDialFab(
                     onClick = onExtractPhoto,
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    icon = { Text("📸") },
+                    icon = { Icon(Icons.Filled.CameraAlt, contentDescription = null) },
                     text = { Text("Rasmdan so'z qo'shish") }
                 )
                 Spacer(Modifier.height(10.dp))
@@ -520,7 +532,7 @@ private fun SpeedDialFab(
                     onClick = onImportJson,
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    icon = { Text("📥") },
+                    icon = { Icon(Icons.Filled.Download, contentDescription = null) },
                     text = { Text("JSON Import") }
                 )
                 Spacer(Modifier.height(10.dp))
@@ -528,7 +540,7 @@ private fun SpeedDialFab(
                     onClick = onAddWord,
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    icon = { Text("📝") },
+                    icon = { Icon(Icons.Filled.NoteAdd, contentDescription = null) },
                     text = { Text("So'z qo'shish") }
                 )
                 Spacer(Modifier.height(10.dp))
@@ -621,14 +633,14 @@ fun WordCardItem(
     }
 
     val masteryColor = when {
-        word.mastery >= 80 -> Color(0xFF10B981) // green
-        word.mastery >= 40 -> Color(0xFFF59E0B) // yellow
-        word.mastery > 0 -> Color(0xFFEF4444)  // red
-        else -> Color.Gray
+        word.mastery >= 80 -> SuccessGreen
+        word.mastery >= 40 -> WarningAmber
+        word.mastery > 0 -> MaterialTheme.colorScheme.error
+        else -> MaterialTheme.colorScheme.onSurfaceVariant
     }
 
     Card(
-        shape = RoundedCornerShape(14.dp),
+        shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         modifier = Modifier.fillMaxWidth()
@@ -660,13 +672,13 @@ fun WordCardItem(
                             .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f))
                             .clickable { onSpeak(word.word) }
                     ) {
-                        Text("🔊", fontSize = 12.sp)
+                        Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "Eshitish", modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.primary)
                     }
 
                     Spacer(Modifier.width(6.dp))
 
                     Surface(
-                        shape = RoundedCornerShape(4.dp),
+                        shape = MaterialTheme.shapes.extraSmall,
                         color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.7f)
                     ) {
                         Text(

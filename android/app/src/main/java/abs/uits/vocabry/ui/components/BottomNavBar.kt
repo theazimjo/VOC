@@ -1,14 +1,14 @@
 package abs.uits.vocabry.ui.components
 
-import abs.uits.vocabry.ui.theme.IOSCardDark
-import abs.uits.vocabry.ui.theme.IOSSegmentedTrack
-import abs.uits.vocabry.ui.theme.IOSSystemBlue
-import abs.uits.vocabry.ui.theme.IOSSystemGray
+import abs.uits.vocabry.ui.theme.MutedBlueGrayText
+import abs.uits.vocabry.ui.theme.RoyalBluePrimary
+import abs.uits.vocabry.ui.theme.SearchBgBlue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,11 +30,11 @@ fun BottomNavBar(navController: NavController) {
     val currentRoute = backStackEntry?.destination
 
     NavigationBar(
-        containerColor = IOSCardDark,
+        containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 8.dp,
         modifier = Modifier.shadow(12.dp)
     ) {
-        // Tab 1: Kutubxona
+        // Tab 1: Library
         NavigationBarItem(
             selected = currentRoute?.hierarchy?.any { it.route == "library" } == true,
             onClick = {
@@ -43,20 +42,20 @@ fun BottomNavBar(navController: NavController) {
                     popUpTo("library") { inclusive = true }
                 }
             },
-            icon = { Icon(Icons.Filled.List, contentDescription = "Kutubxona") },
+            icon = { Icon(Icons.Filled.List, contentDescription = "Library") },
             label = {
                 Text(
-                    "Kutubxona",
+                    "Library",
                     fontSize = 11.sp,
                     fontWeight = if (currentRoute?.hierarchy?.any { it.route == "library" } == true) FontWeight.Bold else FontWeight.Medium
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = IOSSystemBlue,
-                selectedTextColor = IOSSystemBlue,
-                indicatorColor = IOSSegmentedTrack,
-                unselectedIconColor = IOSSystemGray,
-                unselectedTextColor = IOSSystemGray
+                selectedIconColor = RoyalBluePrimary,
+                selectedTextColor = RoyalBluePrimary,
+                indicatorColor = SearchBgBlue,
+                unselectedIconColor = MutedBlueGrayText,
+                unselectedTextColor = MutedBlueGrayText
             )
         )
 
@@ -77,11 +76,11 @@ fun BottomNavBar(navController: NavController) {
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = IOSSystemBlue,
-                selectedTextColor = IOSSystemBlue,
-                indicatorColor = IOSSegmentedTrack,
-                unselectedIconColor = IOSSystemGray,
-                unselectedTextColor = IOSSystemGray
+                selectedIconColor = RoyalBluePrimary,
+                selectedTextColor = RoyalBluePrimary,
+                indicatorColor = SearchBgBlue,
+                unselectedIconColor = MutedBlueGrayText,
+                unselectedTextColor = MutedBlueGrayText
             )
         )
 
@@ -102,11 +101,11 @@ fun BottomNavBar(navController: NavController) {
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = IOSSystemBlue,
-                selectedTextColor = IOSSystemBlue,
-                indicatorColor = IOSSegmentedTrack,
-                unselectedIconColor = IOSSystemGray,
-                unselectedTextColor = IOSSystemGray
+                selectedIconColor = RoyalBluePrimary,
+                selectedTextColor = RoyalBluePrimary,
+                indicatorColor = SearchBgBlue,
+                unselectedIconColor = MutedBlueGrayText,
+                unselectedTextColor = MutedBlueGrayText
             )
         )
 
@@ -127,11 +126,11 @@ fun BottomNavBar(navController: NavController) {
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = IOSSystemBlue,
-                selectedTextColor = IOSSystemBlue,
-                indicatorColor = IOSSegmentedTrack,
-                unselectedIconColor = IOSSystemGray,
-                unselectedTextColor = IOSSystemGray
+                selectedIconColor = RoyalBluePrimary,
+                selectedTextColor = RoyalBluePrimary,
+                indicatorColor = SearchBgBlue,
+                unselectedIconColor = MutedBlueGrayText,
+                unselectedTextColor = MutedBlueGrayText
             )
         )
     }

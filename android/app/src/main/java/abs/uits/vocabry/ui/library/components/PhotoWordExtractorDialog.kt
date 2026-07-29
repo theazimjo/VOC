@@ -2,6 +2,7 @@ package abs.uits.vocabry.ui.library.components
 
 import abs.uits.vocabry.engine.ExtractedWordItem
 import abs.uits.vocabry.engine.GeminiService
+import abs.uits.vocabry.ui.theme.WarningAmber
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -23,9 +24,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.PhotoLibrary
+import androidx.compose.material.icons.filled.RocketLaunch
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -123,7 +130,7 @@ fun PhotoWordExtractorDialog(
         val key = GeminiService.getApiKey(context)
         if (key.isBlank()) {
             showKeyInput = true
-            errorMsg = "🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting."
+            errorMsg = "Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting."
             return
         }
 
@@ -154,11 +161,15 @@ fun PhotoWordExtractorDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text(
-                "📸 Rasmdan so'zlar ajratish (AI OCR)",
-                fontWeight = FontWeight.Bold,
-                fontSize = 17.sp
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Filled.CameraAlt, contentDescription = null)
+                Spacer(Modifier.width(8.dp))
+                Text(
+                    "Rasmdan so'zlar ajratish (AI OCR)",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 17.sp
+                )
+            }
         },
         text = {
             Column(modifier = Modifier.fillMaxWidth()) {
@@ -171,7 +182,7 @@ fun PhotoWordExtractorDialog(
                             .padding(vertical = 24.dp)
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("🔒", fontSize = 48.sp)
+                            Icon(Icons.Filled.Lock, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                             Spacer(Modifier.height(8.dp))
                             Text(
                                 "Rasmdan so'z ajratish (AI OCR)",
@@ -187,16 +198,22 @@ fun PhotoWordExtractorDialog(
                             )
                             Spacer(Modifier.height(10.dp))
                             Surface(
-                                shape = RoundedCornerShape(16.dp),
+                                shape = MaterialTheme.shapes.large,
                                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
                             ) {
-                                Text(
-                                    "🚀 Coming soon",
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.primary,
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp)
-                                )
+                                ) {
+                                    Icon(Icons.Filled.RocketLaunch, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.primary)
+                                    Spacer(Modifier.width(4.dp))
+                                    Text(
+                                        "Coming soon",
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
                             }
                         }
                     }
@@ -204,17 +221,20 @@ fun PhotoWordExtractorDialog(
                     if (errorMsg != null) {
                         Surface(
                             color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f),
-                            shape = RoundedCornerShape(8.dp),
+                            shape = MaterialTheme.shapes.small,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(bottom = 8.dp)
                         ) {
-                            Text(
-                                "⚠️ ${errorMsg}",
-                                color = MaterialTheme.colorScheme.error,
-                                fontSize = 12.sp,
-                                modifier = Modifier.padding(8.dp)
-                            )
+                            Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Filled.Warning, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.error)
+                                Spacer(Modifier.width(6.dp))
+                                Text(
+                                    errorMsg.orEmpty(),
+                                    color = MaterialTheme.colorScheme.error,
+                                    fontSize = 12.sp
+                                )
+                            }
                         }
                     }
 
@@ -222,10 +242,14 @@ fun PhotoWordExtractorDialog(
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f), RoundedCornerShape(10.dp))
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f), MaterialTheme.shapes.small)
                                 .padding(10.dp)
                         ) {
-                            Text("🔑 Gemini API Kalitingizni kiriting:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Filled.Lock, contentDescription = null, modifier = Modifier.size(14.dp))
+                                Spacer(Modifier.width(6.dp))
+                                Text("Gemini API Kalitingizni kiriting:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
                             Spacer(Modifier.height(4.dp))
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 OutlinedTextField(
@@ -264,13 +288,13 @@ fun PhotoWordExtractorDialog(
                                 modifier = Modifier
                                     .weight(1f)
                                     .height(100.dp)
-                                    .clip(RoundedCornerShape(12.dp))
+                                    .clip(MaterialTheme.shapes.medium)
                                     .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f))
-                                    .border(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), RoundedCornerShape(12.dp))
+                                    .border(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f), MaterialTheme.shapes.medium)
                                     .clickable { galleryLauncher.launch("image/*") }
                             ) {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text("📁", fontSize = 28.sp)
+                                    Icon(Icons.Filled.PhotoLibrary, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                                     Text("Galereyadan", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
@@ -280,13 +304,13 @@ fun PhotoWordExtractorDialog(
                                 modifier = Modifier
                                     .weight(1f)
                                     .height(100.dp)
-                                    .clip(RoundedCornerShape(12.dp))
-                                    .background(Color(0xFF10B981).copy(alpha = 0.08f))
-                                    .border(1.dp, Color(0xFF10B981).copy(alpha = 0.3f), RoundedCornerShape(12.dp))
+                                    .clip(MaterialTheme.shapes.medium)
+                                    .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.08f))
+                                    .border(1.dp, MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f), MaterialTheme.shapes.medium)
                                     .clickable { cameraLauncher.launch(null) }
                             ) {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text("📸", fontSize = 28.sp)
+                                    Icon(Icons.Filled.CameraAlt, contentDescription = null, tint = MaterialTheme.colorScheme.tertiary)
                                     Text("Rasmga olish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 }
                             }
@@ -302,9 +326,11 @@ fun PhotoWordExtractorDialog(
                                 if (isProcessing) {
                                     CircularProgressIndicator(modifier = Modifier.size(16.dp), color = Color.White, strokeWidth = 2.dp)
                                     Spacer(Modifier.width(8.dp))
-                                    Text("✨ AI tahlil qilmoqda...")
+                                    Text("AI tahlil qilmoqda...")
                                 } else {
-                                    Text("✨ Rasmdagi so'zlarni tahlil qilish")
+                                    Icon(Icons.Filled.AutoAwesome, contentDescription = null, modifier = Modifier.size(18.dp))
+                                    Spacer(Modifier.width(6.dp))
+                                    Text("Rasmdagi so'zlarni tahlil qilish")
                                 }
                             }
                         }
@@ -326,7 +352,7 @@ fun PhotoWordExtractorDialog(
                         ) {
                             items(extractedItems, key = { it.id }) { item ->
                                 Card(
-                                    shape = RoundedCornerShape(10.dp),
+                                    shape = MaterialTheme.shapes.small,
                                     colors = CardDefaults.cardColors(
                                         containerColor = if (item.selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
                                         else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
@@ -356,7 +382,7 @@ fun PhotoWordExtractorDialog(
                                                     modifier = Modifier.weight(1f)
                                                 )
                                                 Spacer(Modifier.width(4.dp))
-                                                Text("➔", fontSize = 12.sp)
+                                                Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(14.dp))
                                                 Spacer(Modifier.width(4.dp))
                                                 OutlinedTextField(
                                                     value = item.translation,
@@ -370,9 +396,9 @@ fun PhotoWordExtractorDialog(
 
                                             if (item.isDuplicate) {
                                                 Text(
-                                                    "⚠️ To'plamda mavjud (O'tkazib yuboriladi)",
+                                                    "To'plamda mavjud (O'tkazib yuboriladi)",
                                                     fontSize = 10.sp,
-                                                    color = Color(0xFFF59E0B),
+                                                    color = WarningAmber,
                                                     fontWeight = FontWeight.Bold,
                                                     modifier = Modifier.padding(top = 2.dp)
                                                 )
@@ -417,7 +443,9 @@ fun PhotoWordExtractorDialog(
                     },
                     enabled = selectedCount > 0
                 ) {
-                    Text("✨ ${selectedCount} ta so'zni saqlash")
+                    Icon(Icons.Filled.AutoAwesome, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text("${selectedCount} ta so'zni saqlash")
                 }
             }
         },

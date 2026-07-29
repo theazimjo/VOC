@@ -2,19 +2,22 @@ package abs.uits.vocabry.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// iOS Dark Palette
-val IOSSystemBlack = Color(0xFF000000)      // Pure OLED Black
-val IOSCardDark = Color(0xFF1C1C1E)         // iOS Dark Surface / Card
-val IOSSegmentedTrack = Color(0xFF2C2C2E)   // iOS Segmented Track
-val IOSBorderDark = Color(0xFF38383A)       // iOS Subtle Border / Divider
+// Light Royal Blue Palette
+val SoftIceBackground = Color(0xFFF5F7FB)    // Soft Ice Blue Background
+val CardWhite = Color(0xFFFFFFFF)             // White Card Background
+val FolderCardBlue = Color(0xFFDCE8FC)        // Soft Sky Blue Folder Card
+val SearchBgBlue = Color(0xFFE8F0FE)          // Soft Blue Search Bar
+val RoyalNavyText = Color(0xFF0F4C81)         // Primary Royal Navy Text
+val RoyalBluePrimary = Color(0xFF004080)      // Royal Blue Primary Accent / FAB
+val MutedBlueGrayText = Color(0xFF64748B)     // Slate Muted Text
+val BorderBlueLight = Color(0xFFE2E8F0)       // Subtle Border
+val BadgeGreenBg = Color(0xFFDCFCE7)          // Light Green Badge Bg
+val BadgeGreenText = Color(0xFF166534)        // Green Badge Text
 
-// iOS System Colors
-val IOSSystemBlue = Color(0xFF0A84FF)       // iOS Active Blue / FAB
-val IOSSystemBlueLight = Color(0xFF007AFF)  // iOS Light Active Blue
-val IOSSystemGray = Color(0xFF8E8E93)       // iOS Muted Gray Text
-val IOSSystemRed = Color(0xFFFF453A)        // iOS System Red
-val IOSSystemGreen = Color(0xFF30D158)      // iOS System Green
-val IOSSystemYellow = Color(0xFFFFD60A)     // iOS System Yellow
+// Common / State Colors used by practice screens
+val WarningAmber = Color(0xFFD97706)
+val SuccessGreen = Color(0xFF10B981)
 
-// Text
-val IOSTextWhite = Color(0xFFFFFFFF)
+// Dark Mode Support
+val DarkBackground = Color(0xFF09090B)
+val DarkSurface = Color(0xFF18181B)

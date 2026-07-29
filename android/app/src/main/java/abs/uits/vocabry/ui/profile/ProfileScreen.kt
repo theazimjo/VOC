@@ -20,7 +20,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -74,7 +80,13 @@ fun ProfileScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("👤 Mening Profilim", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp) },
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Person, contentDescription = null)
+                        Spacer(Modifier.width(8.dp))
+                        Text("Mening Profilim", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
@@ -163,11 +175,15 @@ fun ProfileScreen(
                         )
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            "🔑 Gemini AI API Kaliti",
-                            fontWeight = FontWeight.ExtraBold,
-                            fontSize = 15.sp
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.Key, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                "Gemini AI API Kaliti",
+                                fontWeight = FontWeight.ExtraBold,
+                                fontSize = 15.sp
+                            )
+                        }
                         Spacer(Modifier.height(4.dp))
                         Text(
                             "So'zlarga ta'rif va tarjimalarni avto-to'ldirish uchun Google AI Studio API kalitingiz:",
@@ -188,7 +204,7 @@ fun ProfileScreen(
                             Button(
                                 onClick = {
                                     profileViewModel.saveApiKey(context)
-                                    savedMessage = "✅ Kalit saqlandi!"
+                                    savedMessage = "Kalit saqlandi!"
                                 },
                                 shape = RoundedCornerShape(10.dp)
                             ) {
@@ -198,12 +214,16 @@ fun ProfileScreen(
 
                         if (savedMessage != null) {
                             Spacer(Modifier.height(6.dp))
-                            Text(
-                                savedMessage!!,
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary
-                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Filled.CheckCircle, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.primary)
+                                Spacer(Modifier.width(4.dp))
+                                Text(
+                                    savedMessage!!,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
                         }
                     }
                 }
@@ -220,7 +240,9 @@ fun ProfileScreen(
                         .fillMaxWidth()
                         .height(48.dp)
                 ) {
-                    Text("🔴 Hisobdan chiqish (Sign Out)", fontWeight = FontWeight.Bold)
+                    Icon(Icons.Filled.Logout, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text("Hisobdan chiqish (Sign Out)", fontWeight = FontWeight.Bold)
                 }
             }
         }

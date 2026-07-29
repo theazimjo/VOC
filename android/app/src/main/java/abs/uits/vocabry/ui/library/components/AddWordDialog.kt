@@ -2,12 +2,6 @@ package abs.uits.vocabry.ui.library.components
 
 import abs.uits.vocabry.data.model.Word
 import abs.uits.vocabry.engine.GeminiService
-import abs.uits.vocabry.ui.theme.IOSBorderDark
-import abs.uits.vocabry.ui.theme.IOSCardDark
-import abs.uits.vocabry.ui.theme.IOSSegmentedTrack
-import abs.uits.vocabry.ui.theme.IOSSystemBlue
-import abs.uits.vocabry.ui.theme.IOSSystemGray
-import abs.uits.vocabry.ui.theme.IOSTextWhite
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,14 +16,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
@@ -46,7 +46,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -106,27 +105,18 @@ fun AddWordDialog(
     val isEditing = editingWord != null
     var showMore by remember { mutableStateOf(isEditing && (editingWord.definition.isNotBlank() || editingWord.example.isNotBlank() || editingWord.notes.isNotBlank() || editingWord.customSentence.isNotBlank())) }
 
-    val textFieldColors = OutlinedTextFieldDefaults.colors(
-        focusedBorderColor = IOSSystemBlue,
-        unfocusedBorderColor = IOSBorderDark,
-        focusedLabelColor = IOSSystemBlue,
-        unfocusedLabelColor = IOSSystemGray,
-        focusedTextColor = IOSTextWhite,
-        unfocusedTextColor = IOSTextWhite,
-        focusedContainerColor = IOSSegmentedTrack,
-        unfocusedContainerColor = IOSSegmentedTrack
-    )
+    val textFieldColors = OutlinedTextFieldDefaults.colors()
 
     fun handleAiAutofill() {
         val userEmail = currentUser?.email?.lowercase().orEmpty()
         if (userEmail != "azimjonxolmirzayev30@gmail.com") {
-            aiError = "🔒 AI Avto-to'ldirish tez orada taqdim etiladi! (Coming soon)"
+            aiError = "AI Avto-to'ldirish tez orada taqdim etiladi! (Coming soon)"
             return
         }
 
         if (GeminiService.getApiKey(context).isBlank()) {
             showKeyInput = true
-            aiError = "🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting."
+            aiError = "Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting."
             return
         }
 
@@ -163,8 +153,6 @@ fun AddWordDialog(
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
-        containerColor = IOSCardDark,
-        contentColor = IOSTextWhite
     ) {
         Column(
             modifier = Modifier
@@ -180,12 +168,11 @@ fun AddWordDialog(
                 Text(
                     text = if (isEditing) "So'zni tahrirlash" else "Yangi so'z",
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 20.sp,
-                    color = IOSTextWhite
+                    fontSize = 20.sp
                 )
                 Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = IOSSystemBlue.copy(alpha = 0.15f),
+                    shape = MaterialTheme.shapes.small,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
                     modifier = Modifier.clickable { handleAiAutofill() }
                 ) {
                     Row(
@@ -193,11 +180,13 @@ fun AddWordDialog(
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                     ) {
                         if (isAiLoading) {
-                            CircularProgressIndicator(modifier = Modifier.size(12.dp), strokeWidth = 1.5.dp, color = IOSSystemBlue)
+                            CircularProgressIndicator(modifier = Modifier.size(12.dp), strokeWidth = 1.5.dp, color = MaterialTheme.colorScheme.primary)
                             Spacer(Modifier.width(4.dp))
-                            Text("Qidirilmoqda...", fontSize = 11.sp, color = IOSSystemBlue)
+                            Text("Qidirilmoqda...", fontSize = 11.sp, color = MaterialTheme.colorScheme.primary)
                         } else {
-                            Text("✨ AI Avto-to'ldirish", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = IOSSystemBlue)
+                            Icon(Icons.Filled.AutoAwesome, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.primary)
+                            Spacer(Modifier.width(4.dp))
+                            Text("AI Avto-to'ldirish", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                         }
                     }
                 }
@@ -207,18 +196,21 @@ fun AddWordDialog(
 
             if (aiError != null) {
                 Surface(
-                    color = Color(0xFF3B1215),
-                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.errorContainer,
+                    shape = MaterialTheme.shapes.small,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 8.dp)
                 ) {
-                    Text(
-                        "⚠️ ${aiError}",
-                        color = Color(0xFFFF6B6B),
-                        fontSize = 12.sp,
-                        modifier = Modifier.padding(8.dp)
-                    )
+                    Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Warning, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.onErrorContainer)
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            aiError.orEmpty(),
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            fontSize = 12.sp
+                        )
+                    }
                 }
             }
 
@@ -226,16 +218,20 @@ fun AddWordDialog(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(IOSSegmentedTrack, RoundedCornerShape(10.dp))
+                        .background(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.shapes.medium)
                         .padding(10.dp)
                 ) {
-                    Text("🔑 Gemini API Kalitingizni kiriting:", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = IOSTextWhite)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Lock, contentDescription = null, modifier = Modifier.size(14.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text("Gemini API Kalitingizni kiriting:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    }
                     Spacer(Modifier.height(4.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         OutlinedTextField(
                             value = apiKeyText,
                             onValueChange = { apiKeyText = it },
-                            placeholder = { Text("API Key...", color = IOSSystemGray) },
+                            placeholder = { Text("API Key...") },
                             singleLine = true,
                             colors = textFieldColors,
                             modifier = Modifier.weight(1f)
@@ -249,8 +245,7 @@ fun AddWordDialog(
                                     aiError = null
                                     handleAiAutofill()
                                 }
-                            },
-                            colors = ButtonDefaults.buttonColors(containerColor = IOSSystemBlue, contentColor = Color.White)
+                            }
                         ) {
                             Text("Saqlash", fontSize = 12.sp)
                         }
@@ -263,7 +258,7 @@ fun AddWordDialog(
                 value = word,
                 onValueChange = { word = it },
                 label = { Text("Inglizcha so'z *") },
-                placeholder = { Text("Masalan: Serendipity", color = IOSSystemGray) },
+                placeholder = { Text("Masalan: Serendipity") },
                 singleLine = true,
                 colors = textFieldColors,
                 modifier = Modifier.fillMaxWidth(),
@@ -273,7 +268,7 @@ fun AddWordDialog(
                 value = translation,
                 onValueChange = { translation = it },
                 label = { Text("O'zbekcha tarjima *") },
-                placeholder = { Text("Tasodifiy baxt", color = IOSSystemGray) },
+                placeholder = { Text("Tasodifiy baxt") },
                 singleLine = true,
                 colors = textFieldColors,
                 modifier = Modifier.fillMaxWidth(),
@@ -285,30 +280,29 @@ fun AddWordDialog(
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
             ) {
+                Icon(
+                    if (showMore) Icons.Filled.ExpandLess else Icons.Filled.Settings,
+                    contentDescription = null,
+                    modifier = Modifier.size(14.dp)
+                )
+                Spacer(Modifier.width(6.dp))
                 Text(
-                    if (showMore) "🔼 Kamroq variantlar" else "⚙️ Ko'proq variantlar (Ta'rif, misol va so'z turkumi)",
+                    if (showMore) "Kamroq variantlar" else "Ko'proq variantlar (Ta'rif, misol va so'z turkumi)",
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = IOSSystemBlue
+                    fontWeight = FontWeight.Bold
                 )
             }
 
             if (showMore) {
                 Spacer(Modifier.height(4.dp))
-                Text("So'z turkumi", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = IOSSystemGray)
+                Text("So'z turkumi", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(4.dp))
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     items(POS_OPTIONS) { (valKey, label) ->
                         FilterChip(
                             selected = selectedPos == valKey,
                             onClick = { selectedPos = valKey },
-                            label = { Text(label) },
-                            colors = FilterChipDefaults.filterChipColors(
-                                selectedContainerColor = IOSSystemBlue,
-                                selectedLabelColor = Color.White,
-                                containerColor = IOSSegmentedTrack,
-                                labelColor = IOSTextWhite
-                            )
+                            label = { Text(label) }
                         )
                     }
                 }
@@ -318,7 +312,7 @@ fun AddWordDialog(
                     value = definition,
                     onValueChange = { definition = it },
                     label = { Text("Ta'rifi (ixtiyoriy)") },
-                    placeholder = { Text("O'zbek tilidagi ta'rifi", color = IOSSystemGray) },
+                    placeholder = { Text("O'zbek tilidagi ta'rifi") },
                     colors = textFieldColors,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -327,7 +321,7 @@ fun AddWordDialog(
                     value = example,
                     onValueChange = { example = it },
                     label = { Text("Misol gap (ixtiyoriy)") },
-                    placeholder = { Text("Ushbu so'z qatnashgan gap", color = IOSSystemGray) },
+                    placeholder = { Text("Ushbu so'z qatnashgan gap") },
                     colors = textFieldColors,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -336,7 +330,7 @@ fun AddWordDialog(
                     value = customSentence,
                     onValueChange = { customSentence = it },
                     label = { Text("O'zingiz tuzgan gap (Faol so'zlik uchun)") },
-                    placeholder = { Text("So'zni faollashtirish uchun mustaqil gap tuzib kiriting", color = IOSSystemGray) },
+                    placeholder = { Text("So'zni faollashtirish uchun mustaqil gap tuzib kiriting") },
                     colors = textFieldColors,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -345,7 +339,7 @@ fun AddWordDialog(
                     value = notes,
                     onValueChange = { notes = it },
                     label = { Text("Qo'shimcha izoh (ixtiyoriy)") },
-                    placeholder = { Text("Sinonim, antonim va h.k.", color = IOSSystemGray) },
+                    placeholder = { Text("Sinonim, antonim va h.k.") },
                     singleLine = true,
                     colors = textFieldColors,
                     modifier = Modifier.fillMaxWidth(),
@@ -359,7 +353,7 @@ fun AddWordDialog(
                 horizontalArrangement = Arrangement.End
             ) {
                 TextButton(onClick = onDismiss) {
-                    Text("Bekor qilish", color = IOSSystemGray)
+                    Text("Bekor qilish")
                 }
                 Spacer(Modifier.width(8.dp))
                 Button(
@@ -376,8 +370,7 @@ fun AddWordDialog(
                             )
                         )
                     },
-                    enabled = word.isNotBlank() && translation.isNotBlank(),
-                    colors = ButtonDefaults.buttonColors(containerColor = IOSSystemBlue, contentColor = Color.White)
+                    enabled = word.isNotBlank() && translation.isNotBlank()
                 ) {
                     Text(if (isEditing) "Saqlash" else "Qo'shish")
                 }

@@ -11,10 +11,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.PushPin
+import androidx.compose.material.icons.filled.Psychology
+import androidx.compose.material.icons.filled.Whatshot
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -77,12 +85,16 @@ fun DashboardScreen(
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Column {
-                                Text(
-                                    "🔥 Ketma-ketlik: ${state.streak.streakCount} kun",
-                                    color = MaterialTheme.colorScheme.onPrimary,
-                                    fontSize = 18.sp,
-                                    fontWeight = FontWeight.ExtraBold
-                                )
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(Icons.Filled.Whatshot, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(20.dp))
+                                    Spacer(Modifier.width(6.dp))
+                                    Text(
+                                        "Ketma-ketlik: ${state.streak.streakCount} kun",
+                                        color = MaterialTheme.colorScheme.onPrimary,
+                                        fontSize = 18.sp,
+                                        fontWeight = FontWeight.ExtraBold
+                                    )
+                                }
                                 Spacer(Modifier.height(4.dp))
                                 Text(
                                     "Bugungi maqsad: ${state.streak.todayCount}/${state.streak.dailyGoal} ta so'z",
@@ -94,13 +106,19 @@ fun DashboardScreen(
                                 shape = RoundedCornerShape(8.dp),
                                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.15f)
                             ) {
-                                Text(
-                                    "⚡ Active",
-                                    color = MaterialTheme.colorScheme.onPrimary,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 11.sp,
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
-                                )
+                                ) {
+                                    Icon(Icons.Filled.Bolt, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(14.dp))
+                                    Spacer(Modifier.width(4.dp))
+                                    Text(
+                                        "Active",
+                                        color = MaterialTheme.colorScheme.onPrimary,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 11.sp
+                                    )
+                                }
                             }
                         }
 
@@ -152,11 +170,15 @@ fun DashboardScreen(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text(
-                                "🧠 O'zlashtirish darajasi",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 14.sp
-                            )
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Filled.Psychology, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(Modifier.width(6.dp))
+                                Text(
+                                    "O'zlashtirish darajasi",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 14.sp
+                                )
+                            }
                             Text(
                                 "${state.masteryPercent}%",
                                 fontWeight = FontWeight.ExtraBold,
@@ -193,8 +215,10 @@ fun DashboardScreen(
                             .fillMaxWidth()
                             .height(50.dp)
                     ) {
+                        Icon(Icons.Filled.Bolt, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(Modifier.width(6.dp))
                         Text(
-                            "⚡ Takrorlashni boshlash (${state.dueCount} ta so'z)",
+                            "Takrorlashni boshlash (${state.dueCount} ta so'z)",
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -205,11 +229,15 @@ fun DashboardScreen(
             // Due words header & items
             if (state.dueWords.isNotEmpty()) {
                 item {
-                    Text(
-                        "📌 Bugun takrorlanishi kerak bo'lganlar",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.PushPin, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            "Bugun takrorlanishi kerak bo'lganlar",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
                 }
 
                 items(state.dueWords) { info ->

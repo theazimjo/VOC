@@ -12,10 +12,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.filled.PushPin
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -49,7 +56,13 @@ fun GrammarScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("📖 Grammatika Qoidalari", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp) },
+                title = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = null)
+                        Spacer(Modifier.width(8.dp))
+                        Text("Grammatika Qoidalari", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         },
@@ -126,21 +139,29 @@ private fun GrammarTopicCardItem(topic: GrammarTopicItem) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Text(
-                            "📌 Qoida:",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 12.sp,
-                            color = MaterialTheme.colorScheme.primary
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.PushPin, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.primary)
+                            Spacer(Modifier.width(4.dp))
+                            Text(
+                                "Qoida:",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
                         Spacer(Modifier.height(2.dp))
                         Text(topic.ruleSummary, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                         Spacer(Modifier.height(8.dp))
-                        Text(
-                            "💡 Misollar:",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 12.sp,
-                            color = MaterialTheme.colorScheme.primary
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.Lightbulb, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.primary)
+                            Spacer(Modifier.width(4.dp))
+                            Text(
+                                "Misollar:",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
                         Spacer(Modifier.height(2.dp))
                         Text(topic.example, fontSize = 12.sp, fontStyle = FontStyle.Italic)
                     }

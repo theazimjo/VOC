@@ -9,10 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
+import androidx.compose.material3.Icon
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
@@ -198,7 +202,9 @@ fun BulkImportDialog(
                             ) {
                                 Text("Namuna formati", fontSize = 11.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold)
                                 TextButton(onClick = { clipboard.setText(AnnotatedString(SAMPLE_JSON)) }) {
-                                    Text("📋 Nusxalash", fontSize = 11.sp)
+                                    Icon(Icons.Filled.ContentCopy, contentDescription = null, modifier = Modifier.size(14.dp))
+                                    Spacer(Modifier.width(4.dp))
+                                    Text("Nusxalash", fontSize = 11.sp)
                                 }
                             }
                             Text(SAMPLE_JSON, fontFamily = FontFamily.Monospace, fontSize = 11.sp)

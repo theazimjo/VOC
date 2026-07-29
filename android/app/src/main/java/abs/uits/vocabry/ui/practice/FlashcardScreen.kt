@@ -1,6 +1,8 @@
 package abs.uits.vocabry.ui.practice
 
 import abs.uits.vocabry.data.model.Word
+import abs.uits.vocabry.ui.theme.SuccessGreen
+import abs.uits.vocabry.ui.theme.WarningAmber
 import abs.uits.vocabry.util.Feedback
 import abs.uits.vocabry.util.FeedbackSound
 import android.Manifest
@@ -39,8 +41,25 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Cancel
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.Inventory2
+import androidx.compose.material.icons.filled.Mic
+import androidx.compose.material.icons.filled.Psychology
+import androidx.compose.material.icons.filled.Quiz
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Shuffle
+import androidx.compose.material.icons.filled.SportsEsports
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.filled.TrendingDown
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -73,6 +92,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -84,13 +104,13 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import java.util.Locale
 
-private val MODE_ICONS = mapOf(
-    PracticeMode.FLASHCARD to "🧠",
-    PracticeMode.QUIZ to "📝",
-    PracticeMode.SPELLING to "✍️",
-    PracticeMode.MATCH to "🔀",
-    PracticeMode.SENTENCE to "📓",
-    PracticeMode.PRONOUNCE to "🎙️",
+private val MODE_ICONS: Map<PracticeMode, ImageVector> = mapOf(
+    PracticeMode.FLASHCARD to Icons.Filled.Psychology,
+    PracticeMode.QUIZ to Icons.Filled.Quiz,
+    PracticeMode.SPELLING to Icons.AutoMirrored.Filled.MenuBook,
+    PracticeMode.MATCH to Icons.Filled.Shuffle,
+    PracticeMode.SENTENCE to Icons.Filled.Quiz,
+    PracticeMode.PRONOUNCE to Icons.Filled.Mic,
 )
 
 private val MODE_TITLES = mapOf(
@@ -178,7 +198,11 @@ fun FlashcardScreen(
                                 fontSize = 18.sp
                             )
                         } else {
-                            Text("🎮 Mashq", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(Icons.Filled.SportsEsports, contentDescription = null)
+                                Spacer(Modifier.width(8.dp))
+                                Text("Mashq", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                            }
                         }
                     },
                     navigationIcon = {
@@ -227,7 +251,7 @@ fun FlashcardScreen(
                 state.selectedMode != PracticeMode.MODE_HUB && state.queue.isEmpty() && !state.finished -> {
                     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize().padding(24.dp)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text("📦", fontSize = 48.sp)
+                            Icon(Icons.Filled.Inventory2, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
                             Spacer(Modifier.height(12.dp))
                             Text("Bu bo'limda mashq qilinadigan so'zlar yo'q.", fontWeight = FontWeight.Bold)
                             Spacer(Modifier.height(12.dp))
@@ -334,7 +358,12 @@ fun FlashcardScreen(
 private fun IntroSplashView(mode: PracticeMode?) {
     Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(mode?.let { MODE_ICONS[it] } ?: "🎮", fontSize = 56.sp)
+            Icon(
+                mode?.let { MODE_ICONS[it] } ?: Icons.Filled.SportsEsports,
+                contentDescription = null,
+                modifier = Modifier.size(56.dp),
+                tint = MaterialTheme.colorScheme.primary
+            )
             Spacer(Modifier.height(16.dp))
             Text(
                 mode?.let { MODE_TITLES[it] } ?: "Mashq",
@@ -361,13 +390,13 @@ private fun PracticeHubView(
     ) {
         // Word Count selector bar
         Surface(
-            shape = RoundedCornerShape(12.dp),
+            shape = MaterialTheme.shapes.medium,
             color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(modifier = Modifier.padding(12.dp)) {
                 Text(
-                    "🔢 So'zlar soni:",
+                    "So'zlar soni:",
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -378,7 +407,7 @@ private fun PracticeHubView(
                         val isSelected = state.wordCountLimit == count
                         Surface(
                             onClick = { onSetWordCount(count) },
-                            shape = RoundedCornerShape(8.dp),
+                            shape = MaterialTheme.shapes.small,
                             color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent,
                             modifier = Modifier.weight(1f)
                         ) {
@@ -387,7 +416,7 @@ private fun PracticeHubView(
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Center,
-                                color = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
+                                color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(vertical = 8.dp)
                             )
                         }
@@ -399,7 +428,7 @@ private fun PracticeHubView(
         Spacer(Modifier.height(18.dp))
 
         Text(
-            "🎮 Mashq rejimini tanlang",
+            "Mashq rejimini tanlang",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.ExtraBold
         )
@@ -411,23 +440,23 @@ private fun PracticeHubView(
 
         Spacer(Modifier.height(14.dp))
 
-        ModeCardItem("🧠", "Aqlli Kartochkalar", "Kartochkalarni ag'darib, har bir so'z uchun unutish egri chizig'i asosida hisoblangan vaqtda takrorlang", "Tavsiya etiladi 🌟", Color(0xFF2563EB)) { onSelectMode(PracticeMode.FLASHCARD) }
+        ModeCardItem(Icons.Filled.Psychology, "Aqlli Kartochkalar", "Kartochkalarni ag'darib, har bir so'z uchun unutish egri chizig'i asosida hisoblangan vaqtda takrorlang", "Tavsiya etiladi", MaterialTheme.colorScheme.primary) { onSelectMode(PracticeMode.FLASHCARD) }
         Spacer(Modifier.height(12.dp))
-        ModeCardItem("📝", "Test", "To'rtta variantdan to'g'ri tarjimani tezkorlik bilan tanlang", "Tezkor ⚡", Color(0xFFD97706)) { onSelectMode(PracticeMode.QUIZ) }
+        ModeCardItem(Icons.Filled.Quiz, "Test", "To'rtta variantdan to'g'ri tarjimani tezkorlik bilan tanlang", "Tezkor", WarningAmber) { onSelectMode(PracticeMode.QUIZ) }
         Spacer(Modifier.height(12.dp))
-        ModeCardItem("✍️", "Imlo Mashqi", "Eshitish va xotiradan so'zlarni to'g'ri yozishni mashq qiling", "Yozuv ✍️", Color(0xFF7C3AED)) { onSelectMode(PracticeMode.SPELLING) }
+        ModeCardItem(Icons.AutoMirrored.Filled.MenuBook, "Imlo Mashqi", "Eshitish va xotiradan so'zlarni to'g'ri yozishni mashq qiling", "Yozuv", MaterialTheme.colorScheme.tertiary) { onSelectMode(PracticeMode.SPELLING) }
         Spacer(Modifier.height(12.dp))
-        ModeCardItem("🔀", "Moslashtirish", "So'z va tarjimasini juftlab toping — vaqt va xatolar hisoblanadi", "O'yin 🎲", Color(0xFF0EA5E9)) { onSelectMode(PracticeMode.MATCH) }
+        ModeCardItem(Icons.Filled.Shuffle, "Moslashtirish", "So'z va tarjimasini juftlab toping — vaqt va xatolar hisoblanadi", "O'yin", MaterialTheme.colorScheme.secondary) { onSelectMode(PracticeMode.MATCH) }
         Spacer(Modifier.height(12.dp))
-        ModeCardItem("📓", "Jumla Tuzish", "So'zni ishlatib mustaqil inglizcha jumla yozing", "Faol so'zlik ✨", Color(0xFF059669)) { onSelectMode(PracticeMode.SENTENCE) }
+        ModeCardItem(Icons.Filled.Quiz, "Jumla Tuzish", "So'zni ishlatib mustaqil inglizcha jumla yozing", "Faol so'zlik", SuccessGreen) { onSelectMode(PracticeMode.SENTENCE) }
         Spacer(Modifier.height(12.dp))
-        ModeCardItem("🎙️", "Talaffuz", "So'zni ovoz chiqarib talaffuz qiling, tizim eshitib tekshiradi", "Nutq 🎤", Color(0xFFDB2777)) { onSelectMode(PracticeMode.PRONOUNCE) }
+        ModeCardItem(Icons.Filled.Mic, "Talaffuz", "So'zni ovoz chiqarib talaffuz qiling, tizim eshitib tekshiradi", "Nutq", MaterialTheme.colorScheme.error) { onSelectMode(PracticeMode.PRONOUNCE) }
     }
 }
 
 @Composable
 private fun ModeCardItem(
-    icon: String,
+    icon: ImageVector,
     title: String,
     desc: String,
     badge: String,
@@ -435,7 +464,7 @@ private fun ModeCardItem(
     onClick: () -> Unit,
 ) {
     Card(
-        shape = RoundedCornerShape(16.dp),
+        shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         modifier = Modifier
@@ -452,10 +481,10 @@ private fun ModeCardItem(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .size(50.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(MaterialTheme.shapes.medium)
                     .background(color.copy(alpha = 0.15f))
             ) {
-                Text(icon, fontSize = 24.sp)
+                Icon(icon, contentDescription = null, tint = color)
             }
 
             Spacer(Modifier.width(14.dp))
@@ -468,7 +497,7 @@ private fun ModeCardItem(
                 ) {
                     Text(title, fontWeight = FontWeight.ExtraBold, fontSize = 16.sp)
                     Surface(
-                        shape = RoundedCornerShape(6.dp),
+                        shape = MaterialTheme.shapes.extraSmall,
                         color = color.copy(alpha = 0.15f)
                     ) {
                         Text(
@@ -489,6 +518,33 @@ private fun ModeCardItem(
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun SpeakerButton(onClick: () -> Unit, size: androidx.compose.ui.unit.Dp = 36.dp, iconSize: androidx.compose.ui.unit.Dp = 18.dp) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .size(size)
+            .clip(CircleShape)
+            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+            .clickable { onClick() }
+    ) {
+        Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "Talaffuz eshitish", modifier = Modifier.size(iconSize), tint = MaterialTheme.colorScheme.primary)
+    }
+}
+
+@Composable
+private fun NextButton(onNext: () -> Unit) {
+    Button(
+        onClick = onNext,
+        shape = MaterialTheme.shapes.small,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text("Keyingisi", fontWeight = FontWeight.Bold)
+        Spacer(Modifier.width(6.dp))
+        Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = null, modifier = Modifier.size(18.dp))
     }
 }
 
@@ -522,7 +578,7 @@ private fun FlashcardView(
     ) {
         // Main Card
         Card(
-            shape = RoundedCornerShape(20.dp),
+            shape = MaterialTheme.shapes.extraLarge,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f)),
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
             modifier = Modifier
@@ -538,7 +594,7 @@ private fun FlashcardView(
             ) {
                 // POS Badge on top right corner
                 Surface(
-                    shape = RoundedCornerShape(6.dp),
+                    shape = MaterialTheme.shapes.extraSmall,
                     color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.8f),
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -561,23 +617,18 @@ private fun FlashcardView(
                                 color = MaterialTheme.colorScheme.onSurface
                             )
                             Spacer(Modifier.width(8.dp))
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .clip(CircleShape)
-                                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
-                                    .clickable { onSpeak(word.word) }
-                            ) {
-                                Text("🔊", fontSize = 18.sp)
-                            }
+                            SpeakerButton(onClick = { onSpeak(word.word) })
                         }
                         Spacer(Modifier.height(18.dp))
-                        Text(
-                            "Javobni ko'rish uchun bosing 🔄",
-                            fontSize = 13.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                "Javobni ko'rish uchun bosing",
+                                fontSize = 13.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            Spacer(Modifier.width(4.dp))
+                            Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
                     }
                 } else {
                     Column(
@@ -616,7 +667,7 @@ private fun FlashcardView(
                         if (word.customSentence.isNotBlank()) {
                             Spacer(Modifier.height(10.dp))
                             Text(
-                                "✎ ${word.customSentence}",
+                                word.customSentence,
                                 fontSize = 13.sp,
                                 fontStyle = FontStyle.Italic,
                                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.85f),
@@ -630,7 +681,7 @@ private fun FlashcardView(
 
         Spacer(Modifier.height(20.dp))
 
-        // Web parity Judgement buttons (visible only when flipped): ✗ Bilmadim & ✓ Bildim
+        // Web parity Judgement buttons (visible only when flipped)
         if (state.isFlipped) {
             Row(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -638,30 +689,34 @@ private fun FlashcardView(
             ) {
                 Button(
                     onClick = { onRate("again") },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEF4444)),
-                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
+                    shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
                         .weight(1f)
                         .height(48.dp)
                 ) {
-                    Text("✗ Bilmadim", fontSize = 15.sp, fontWeight = FontWeight.ExtraBold)
+                    Icon(Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text("Bilmadim", fontSize = 15.sp, fontWeight = FontWeight.ExtraBold)
                 }
 
                 Button(
                     onClick = { onRate("good") },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
-                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen),
+                    shape = MaterialTheme.shapes.medium,
                     modifier = Modifier
                         .weight(1f)
                         .height(48.dp)
                 ) {
-                    Text("✓ Bildim", fontSize = 15.sp, fontWeight = FontWeight.ExtraBold)
+                    Icon(Icons.Filled.Check, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(6.dp))
+                    Text("Bildim", fontSize = 15.sp, fontWeight = FontWeight.ExtraBold)
                 }
             }
         } else {
             OutlinedButton(
                 onClick = onFlip,
-                shape = RoundedCornerShape(12.dp),
+                shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp)
@@ -689,7 +744,7 @@ private fun QuizView(
     ) {
         // Question Card
         Card(
-            shape = RoundedCornerShape(16.dp),
+            shape = MaterialTheme.shapes.large,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -711,8 +766,8 @@ private fun QuizView(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     val timerColor = when {
-                        state.quizTimeLeft <= 4 -> Color(0xFFEF4444)
-                        state.quizTimeLeft <= 8 -> Color(0xFFF59E0B)
+                        state.quizTimeLeft <= 4 -> MaterialTheme.colorScheme.error
+                        state.quizTimeLeft <= 8 -> WarningAmber
                         else -> MaterialTheme.colorScheme.onSurfaceVariant
                     }
                     Text("${state.quizTimeLeft}s", fontSize = 13.sp, fontWeight = FontWeight.Bold, color = timerColor)
@@ -725,16 +780,7 @@ private fun QuizView(
                         fontWeight = FontWeight.ExtraBold
                     )
                     Spacer(Modifier.width(8.dp))
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(36.dp)
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
-                            .clickable { onSpeak(current.word) }
-                    ) {
-                        Text("🔊", fontSize = 18.sp)
-                    }
+                    SpeakerButton(onClick = { onSpeak(current.word) })
                 }
                 if (current.definition.isNotBlank()) {
                     Spacer(Modifier.height(6.dp))
@@ -747,8 +793,8 @@ private fun QuizView(
 
                 Spacer(Modifier.height(10.dp))
                 val timerBarColor = when {
-                    state.quizTimeLeft <= 4 -> Color(0xFFEF4444)
-                    state.quizTimeLeft <= 8 -> Color(0xFFF59E0B)
+                    state.quizTimeLeft <= 4 -> MaterialTheme.colorScheme.error
+                    state.quizTimeLeft <= 8 -> WarningAmber
                     else -> MaterialTheme.colorScheme.primary
                 }
                 LinearProgressIndicator(
@@ -757,7 +803,7 @@ private fun QuizView(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(4.dp)
-                        .clip(RoundedCornerShape(2.dp))
+                        .clip(MaterialTheme.shapes.extraSmall)
                 )
             }
         }
@@ -773,21 +819,21 @@ private fun QuizView(
 
             val optionColor = when {
                 !state.quizAnswered -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
-                isCorrectOption -> Color(0xFF10B981).copy(alpha = 0.2f)
-                isSelected && !isCorrectOption -> Color(0xFFEF4444).copy(alpha = 0.2f)
+                isCorrectOption -> SuccessGreen.copy(alpha = 0.2f)
+                isSelected && !isCorrectOption -> MaterialTheme.colorScheme.error.copy(alpha = 0.2f)
                 else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f)
             }
 
             val borderColor = when {
                 !state.quizAnswered -> Color.Transparent
-                isCorrectOption -> Color(0xFF10B981)
-                isSelected && !isCorrectOption -> Color(0xFFEF4444)
+                isCorrectOption -> SuccessGreen
+                isSelected && !isCorrectOption -> MaterialTheme.colorScheme.error
                 else -> Color.Transparent
             }
 
             Surface(
                 onClick = { if (!state.quizAnswered) onSelectOption(opt) },
-                shape = RoundedCornerShape(12.dp),
+                shape = MaterialTheme.shapes.medium,
                 color = optionColor,
                 border = androidx.compose.foundation.BorderStroke(1.dp, borderColor),
                 modifier = Modifier
@@ -799,7 +845,7 @@ private fun QuizView(
                     modifier = Modifier.padding(14.dp)
                 ) {
                     Surface(
-                        shape = RoundedCornerShape(6.dp),
+                        shape = MaterialTheme.shapes.extraSmall,
                         color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
                     ) {
                         Text(
@@ -821,9 +867,9 @@ private fun QuizView(
 
                     if (state.quizAnswered) {
                         if (isCorrectOption) {
-                            Icon(Icons.Filled.Check, contentDescription = "To'g'ri", tint = Color(0xFF10B981))
+                            Icon(Icons.Filled.Check, contentDescription = "To'g'ri", tint = SuccessGreen)
                         } else if (isSelected) {
-                            Icon(Icons.Filled.Close, contentDescription = "Noto'g'ri", tint = Color(0xFFEF4444))
+                            Icon(Icons.Filled.Close, contentDescription = "Noto'g'ri", tint = MaterialTheme.colorScheme.error)
                         }
                     }
                 }
@@ -836,18 +882,12 @@ private fun QuizView(
             if (state.quizTimedOut) {
                 Text(
                     "Vaqt tugadi! Javob: ${current.translation}",
-                    color = Color(0xFFEF4444),
+                    color = MaterialTheme.colorScheme.error,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
             }
-            Button(
-                onClick = onNext,
-                shape = RoundedCornerShape(10.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Keyingisi →", fontWeight = FontWeight.Bold)
-            }
+            NextButton(onNext)
         }
     }
 }
@@ -870,7 +910,7 @@ private fun SpellingView(
             .verticalScroll(rememberScrollState())
     ) {
         Card(
-            shape = RoundedCornerShape(16.dp),
+            shape = MaterialTheme.shapes.large,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -920,9 +960,7 @@ private fun SpellingView(
                 )
 
                 Spacer(Modifier.height(10.dp))
-                IconButton(onClick = { onSpeak(current.word) }) {
-                    Text("🔊", fontSize = 24.sp)
-                }
+                SpeakerButton(onClick = { onSpeak(current.word) }, size = 44.dp, iconSize = 22.dp)
             }
         }
 
@@ -943,7 +981,7 @@ private fun SpellingView(
             Button(
                 onClick = { onSubmit(input) },
                 enabled = input.isNotBlank(),
-                shape = RoundedCornerShape(10.dp),
+                shape = MaterialTheme.shapes.small,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Tekshirish", fontWeight = FontWeight.Bold)
@@ -954,29 +992,29 @@ private fun SpellingView(
             }
         } else {
             Surface(
-                shape = RoundedCornerShape(10.dp),
-                color = if (state.spellingIsCorrect) Color(0xFF10B981).copy(alpha = 0.15f) else Color(0xFFEF4444).copy(alpha = 0.15f),
+                shape = MaterialTheme.shapes.small,
+                color = if (state.spellingIsCorrect) SuccessGreen.copy(alpha = 0.15f) else MaterialTheme.colorScheme.error.copy(alpha = 0.15f),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(modifier = Modifier.padding(14.dp)) {
+                Row(modifier = Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        if (state.spellingIsCorrect) Icons.Filled.CheckCircle else Icons.Filled.Cancel,
+                        contentDescription = null,
+                        tint = if (state.spellingIsCorrect) SuccessGreen else MaterialTheme.colorScheme.error
+                    )
+                    Spacer(Modifier.width(8.dp))
                     Text(
-                        if (state.spellingIsCorrect) "✨ Barakalla! To'g'ri yozdingiz!" else "❌ Noto'g'ri. To'g'ri yozilishi: ${current.word}",
+                        if (state.spellingIsCorrect) "Barakalla! To'g'ri yozdingiz!" else "Noto'g'ri. To'g'ri yozilishi: ${current.word}",
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp,
-                        color = if (state.spellingIsCorrect) Color(0xFF10B981) else Color(0xFFEF4444)
+                        color = if (state.spellingIsCorrect) SuccessGreen else MaterialTheme.colorScheme.error
                     )
                 }
             }
 
             Spacer(Modifier.height(14.dp))
 
-            Button(
-                onClick = onNext,
-                shape = RoundedCornerShape(10.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Keyingisi →", fontWeight = FontWeight.Bold)
-            }
+            NextButton(onNext)
         }
     }
 }
@@ -999,7 +1037,7 @@ private fun SentenceView(
             .verticalScroll(rememberScrollState())
     ) {
         Card(
-            shape = RoundedCornerShape(16.dp),
+            shape = MaterialTheme.shapes.large,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -1053,10 +1091,12 @@ private fun SentenceView(
             Button(
                 onClick = { onSubmit(input) },
                 enabled = input.isNotBlank(),
-                shape = RoundedCornerShape(10.dp),
+                shape = MaterialTheme.shapes.small,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Tekshirish ✓", fontWeight = FontWeight.Bold)
+                Icon(Icons.Filled.Check, contentDescription = null, modifier = Modifier.size(18.dp))
+                Spacer(Modifier.width(6.dp))
+                Text("Tekshirish", fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.height(8.dp))
             TextButton(onClick = onSkip, modifier = Modifier.fillMaxWidth()) {
@@ -1069,23 +1109,29 @@ private fun SentenceView(
                 "So'z jumlada ishlatilmadi"
             }
             Surface(
-                shape = RoundedCornerShape(10.dp),
-                color = if (state.sentenceIsCorrect) Color(0xFF10B981).copy(alpha = 0.15f) else Color(0xFFEF4444).copy(alpha = 0.15f),
+                shape = MaterialTheme.shapes.small,
+                color = if (state.sentenceIsCorrect) SuccessGreen.copy(alpha = 0.15f) else MaterialTheme.colorScheme.error.copy(alpha = 0.15f),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(14.dp)) {
-                    Text(
-                        feedbackText,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
-                        color = if (state.sentenceIsCorrect) Color(0xFF10B981) else Color(0xFFEF4444)
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            if (state.sentenceIsCorrect) Icons.Filled.CheckCircle else Icons.Filled.Cancel,
+                            contentDescription = null,
+                            tint = if (state.sentenceIsCorrect) SuccessGreen else MaterialTheme.colorScheme.error
+                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(
+                            feedbackText,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = if (state.sentenceIsCorrect) SuccessGreen else MaterialTheme.colorScheme.error
+                        )
+                    }
                     Spacer(Modifier.height(6.dp))
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(current.word, fontWeight = FontWeight.Bold, fontSize = 15.sp)
-                        IconButton(onClick = { onSpeak(current.word) }, modifier = Modifier.size(28.dp)) {
-                            Text("🔊", fontSize = 14.sp)
-                        }
+                        SpeakerButton(onClick = { onSpeak(current.word) }, size = 28.dp, iconSize = 16.dp)
                     }
                     if (current.example.isNotBlank()) {
                         Text(
@@ -1100,13 +1146,7 @@ private fun SentenceView(
 
             Spacer(Modifier.height(14.dp))
 
-            Button(
-                onClick = onNext,
-                shape = RoundedCornerShape(10.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Keyingisi →", fontWeight = FontWeight.Bold)
-            }
+            NextButton(onNext)
         }
     }
 }
@@ -1176,7 +1216,7 @@ private fun PronounceView(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Card(
-            shape = RoundedCornerShape(16.dp),
+            shape = MaterialTheme.shapes.large,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -1218,7 +1258,7 @@ private fun PronounceView(
                 modifier = Modifier
                     .size(84.dp)
                     .clip(CircleShape)
-                    .background(if (listening) Color(0xFFEF4444).copy(alpha = 0.2f) else MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+                    .background(if (listening) MaterialTheme.colorScheme.error.copy(alpha = 0.2f) else MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
                     .clickable {
                         if (!hasPermission) {
                             permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
@@ -1227,7 +1267,12 @@ private fun PronounceView(
                         }
                     }
             ) {
-                Text("🎙️", fontSize = 32.sp)
+                Icon(
+                    Icons.Filled.Mic,
+                    contentDescription = "Gapirish",
+                    modifier = Modifier.size(32.dp),
+                    tint = if (listening) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                )
             }
             Spacer(Modifier.height(10.dp))
             Text(
@@ -1243,21 +1288,26 @@ private fun PronounceView(
             TextButton(onClick = onSkip) { Text("O'tkazib yuborish") }
         } else {
             Surface(
-                shape = RoundedCornerShape(10.dp),
-                color = if (state.pronounceIsCorrect) Color(0xFF10B981).copy(alpha = 0.15f) else Color(0xFFEF4444).copy(alpha = 0.15f),
+                shape = MaterialTheme.shapes.small,
+                color = if (state.pronounceIsCorrect) SuccessGreen.copy(alpha = 0.15f) else MaterialTheme.colorScheme.error.copy(alpha = 0.15f),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
-                    if (state.pronounceIsCorrect) "✨ To'g'ri talaffuz!" else "❌ Qayta urinib ko'ring",
-                    fontWeight = FontWeight.Bold,
-                    color = if (state.pronounceIsCorrect) Color(0xFF10B981) else Color(0xFFEF4444),
-                    modifier = Modifier.padding(14.dp)
-                )
+                Row(modifier = Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        if (state.pronounceIsCorrect) Icons.Filled.CheckCircle else Icons.Filled.Cancel,
+                        contentDescription = null,
+                        tint = if (state.pronounceIsCorrect) SuccessGreen else MaterialTheme.colorScheme.error
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        if (state.pronounceIsCorrect) "To'g'ri talaffuz!" else "Qayta urinib ko'ring",
+                        fontWeight = FontWeight.Bold,
+                        color = if (state.pronounceIsCorrect) SuccessGreen else MaterialTheme.colorScheme.error
+                    )
+                }
             }
             Spacer(Modifier.height(14.dp))
-            Button(onClick = onNext, shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth()) {
-                Text("Keyingisi →", fontWeight = FontWeight.Bold)
-            }
+            NextButton(onNext)
         }
     }
 }
@@ -1318,7 +1368,7 @@ private fun MatchView(
 
 @Composable
 private fun MatchStatPill(label: String, value: String) {
-    Surface(shape = RoundedCornerShape(8.dp), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)) {
+    Surface(shape = MaterialTheme.shapes.small, color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)) {
         Row(modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)) {
             Text("$label: ", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(value, fontSize = 12.sp, fontWeight = FontWeight.Bold)
@@ -1336,20 +1386,20 @@ private fun MatchTileItem(
     onClick: () -> Unit,
 ) {
     val bg = when {
-        matched -> Color(0xFF10B981).copy(alpha = 0.15f)
-        error -> Color(0xFFEF4444).copy(alpha = 0.2f)
+        matched -> SuccessGreen.copy(alpha = 0.15f)
+        error -> MaterialTheme.colorScheme.error.copy(alpha = 0.2f)
         selected -> MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
         else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
     }
     val borderColor = when {
-        matched -> Color(0xFF10B981)
-        error -> Color(0xFFEF4444)
+        matched -> SuccessGreen
+        error -> MaterialTheme.colorScheme.error
         selected -> MaterialTheme.colorScheme.primary
         else -> Color.Transparent
     }
     Surface(
         onClick = { if (enabled) onClick() },
-        shape = RoundedCornerShape(10.dp),
+        shape = MaterialTheme.shapes.medium,
         color = bg,
         border = androidx.compose.foundation.BorderStroke(1.dp, borderColor),
         modifier = Modifier.fillMaxWidth()
@@ -1363,7 +1413,7 @@ private fun MatchTileItem(
         ) {
             Text(text, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f), overflow = TextOverflow.Ellipsis, maxLines = 1)
             if (matched) {
-                Icon(Icons.Filled.Check, contentDescription = null, tint = Color(0xFF10B981), modifier = Modifier.size(14.dp))
+                Icon(Icons.Filled.Check, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(14.dp))
             }
         }
     }
@@ -1381,9 +1431,9 @@ private fun ResultsView(
     val ratio = if (total > 0) correct.toFloat() / total else 0f
 
     val (tierIcon, tierLabel, tierColor) = when {
-        ratio >= 0.8f -> Triple("🏆", "Ajoyib!", Color(0xFFF59E0B))
-        ratio >= 0.5f -> Triple("👍", "Yaxshi!", Color(0xFF2563EB))
-        else -> Triple("🏋️", "Davom eting!", Color(0xFF10B981))
+        ratio >= 0.8f -> Triple(Icons.Filled.EmojiEvents, "Ajoyib!", WarningAmber)
+        ratio >= 0.5f -> Triple(Icons.Filled.ThumbUp, "Yaxshi!", MaterialTheme.colorScheme.primary)
+        else -> Triple(Icons.Filled.FitnessCenter, "Davom eting!", SuccessGreen)
     }
 
     Column(
@@ -1402,7 +1452,7 @@ private fun ResultsView(
                 .clip(CircleShape)
                 .background(tierColor.copy(alpha = 0.15f))
         ) {
-            Text(tierIcon, fontSize = 36.sp)
+            Icon(tierIcon, contentDescription = null, modifier = Modifier.size(36.dp), tint = tierColor)
         }
 
         Spacer(Modifier.height(12.dp))
@@ -1413,7 +1463,7 @@ private fun ResultsView(
 
         // Score Statistics Card
         Card(
-            shape = RoundedCornerShape(16.dp),
+            shape = MaterialTheme.shapes.large,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -1424,17 +1474,17 @@ private fun ResultsView(
                     .padding(16.dp)
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$total", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF2563EB))
+                    Text("$total", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                     Text("Jami so'zlar", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$correct", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF10B981))
+                    Text("$correct", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
                     Text("To'g'ri", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$incorrect", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFFEF4444))
+                    Text("$incorrect", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.error)
                     Text("Noto'g'ri", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
@@ -1445,17 +1495,21 @@ private fun ResultsView(
         // Mistakes list
         if (state.wrongWords.isNotEmpty()) {
             Surface(
-                shape = RoundedCornerShape(14.dp),
-                color = Color(0xFFEF4444).copy(alpha = 0.08f),
+                shape = MaterialTheme.shapes.large,
+                color = MaterialTheme.colorScheme.error.copy(alpha = 0.08f),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(14.dp)) {
-                    Text(
-                        "📉 Takrorlash tavsiya etiladi (xatolar)",
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 14.sp,
-                        color = Color(0xFFEF4444)
-                    )
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.TrendingDown, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.error)
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            "Takrorlash tavsiya etiladi (xatolar)",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
                     Spacer(Modifier.height(10.dp))
                     state.wrongWords.forEach { word ->
                         Row(
@@ -1469,24 +1523,24 @@ private fun ResultsView(
                                 Text(word.word, fontWeight = FontWeight.Bold, fontSize = 14.sp)
                                 Text(word.translation, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
-                            IconButton(onClick = { onSpeak(word.word) }) {
-                                Text("🔊", fontSize = 16.sp)
-                            }
+                            SpeakerButton(onClick = { onSpeak(word.word) }, size = 32.dp, iconSize = 16.dp)
                         }
                     }
                 }
             }
         } else {
             Surface(
-                shape = RoundedCornerShape(14.dp),
-                color = Color(0xFF10B981).copy(alpha = 0.12f),
+                shape = MaterialTheme.shapes.large,
+                color = SuccessGreen.copy(alpha = 0.12f),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(14.dp)
                 ) {
-                    Text("✨ Mukammal natija! Hech qanday xatolikka yo'l qo'yilmadi.", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = Color(0xFF10B981))
+                    Icon(Icons.Filled.AutoAwesome, contentDescription = null, modifier = Modifier.size(18.dp), tint = SuccessGreen)
+                    Spacer(Modifier.width(8.dp))
+                    Text("Mukammal natija! Hech qanday xatolikka yo'l qo'yilmadi.", fontWeight = FontWeight.Bold, fontSize = 13.sp, color = SuccessGreen)
                 }
             }
         }
@@ -1495,7 +1549,7 @@ private fun ResultsView(
 
         Button(
             onClick = onReset,
-            shape = RoundedCornerShape(10.dp),
+            shape = MaterialTheme.shapes.small,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Mashq menyusiga qaytish", fontWeight = FontWeight.Bold)

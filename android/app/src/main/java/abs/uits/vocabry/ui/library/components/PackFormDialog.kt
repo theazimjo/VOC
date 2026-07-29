@@ -2,6 +2,7 @@ package abs.uits.vocabry.ui.library.components
 
 import abs.uits.vocabry.data.model.Folder
 import abs.uits.vocabry.data.model.Pack
+import abs.uits.vocabry.ui.theme.iconForPackOrFolder
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,10 +10,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Icon
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -27,8 +33,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -90,19 +96,21 @@ fun PackFormDialog(
             ) {
                 if (isLocked) {
                     Surface(
-                        shape = RoundedCornerShape(8.dp),
-                        color = Color(0xFF14B8A6).copy(alpha = 0.1f),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF14B8A6).copy(alpha = 0.3f)),
+                        shape = MaterialTheme.shapes.small,
+                        color = MaterialTheme.colorScheme.tertiaryContainer,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 12.dp)
                     ) {
-                        Text(
-                            "ℹ️ Ushbu tayyor to'plamning nomi va ikonkasini o'zgartirib bo'lmaydi. Uni faqat o'chirishingiz mumkin.",
-                            fontSize = 12.sp,
-                            color = Color(0xFF0D9488),
-                            modifier = Modifier.padding(10.dp)
-                        )
+                        Row(modifier = Modifier.padding(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Filled.Info, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.onTertiaryContainer)
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                "Ushbu tayyor to'plamning nomi va ikonkasini o'zgartirib bo'lmaydi. Uni faqat o'chirishingiz mumkin.",
+                                fontSize = 12.sp,
+                                color = MaterialTheme.colorScheme.onTertiaryContainer
+                            )
+                        }
                     }
                 }
 
@@ -125,11 +133,12 @@ fun PackFormDialog(
                         expanded = folderMenuExpanded,
                         onExpandedChange = { folderMenuExpanded = !folderMenuExpanded }
                     ) {
-                        val currentFolderName = folders.find { it.id == selectedFolderId }?.let { "${it.icon} ${it.name}" } ?: "Asosiy ro'yxat"
+                        val selectedFolder = folders.find { it.id == selectedFolderId }
                         OutlinedTextField(
-                            value = currentFolderName,
+                            value = selectedFolder?.name ?: "Asosiy ro'yxat",
                             onValueChange = {},
                             readOnly = true,
+                            leadingIcon = { Icon(iconForPackOrFolder(selectedFolder?.icon.orEmpty()), contentDescription = null) },
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = folderMenuExpanded) },
                             modifier = Modifier
                                 .menuAnchor()
@@ -148,7 +157,8 @@ fun PackFormDialog(
                             )
                             folders.forEach { f ->
                                 DropdownMenuItem(
-                                    text = { Text("${f.icon} ${f.name}") },
+                                    text = { Text(f.name) },
+                                    leadingIcon = { Icon(iconForPackOrFolder(f.icon), contentDescription = null) },
                                     onClick = {
                                         selectedFolderId = f.id
                                         folderMenuExpanded = false
@@ -181,7 +191,9 @@ fun PackFormDialog(
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (isEditing && onDelete != null) {
                     TextButton(onClick = { showDeleteConfirm = true }) {
-                        Text("🗑 O'chirish", color = MaterialTheme.colorScheme.error)
+                        Icon(Icons.Filled.Delete, contentDescription = null, modifier = Modifier.size(16.dp), tint = MaterialTheme.colorScheme.error)
+                        Spacer(Modifier.width(4.dp))
+                        Text("O'chirish", color = MaterialTheme.colorScheme.error)
                     }
                 }
                 TextButton(onClick = onDismiss) {

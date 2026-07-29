@@ -1,5 +1,7 @@
 package abs.uits.vocabry.ui.practice
 
+import abs.uits.vocabry.ui.theme.SuccessGreen
+import abs.uits.vocabry.ui.theme.WarningAmber
 import abs.uits.vocabry.util.Feedback
 import android.speech.tts.TextToSpeech
 import androidx.compose.foundation.background
@@ -16,10 +18,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.EmojiEvents
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.filled.TrendingDown
+import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -47,7 +56,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -210,7 +218,7 @@ private fun StudyPhaseView(
         Spacer(Modifier.height(16.dp))
 
         Card(
-            shape = RoundedCornerShape(18.dp),
+            shape = MaterialTheme.shapes.large,
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
             modifier = Modifier.fillMaxWidth().weight(1f)
         ) {
@@ -225,8 +233,10 @@ private fun StudyPhaseView(
                 Spacer(Modifier.height(20.dp))
 
                 if (!state.studyRevealed) {
-                    OutlinedButton(onClick = onReveal, shape = RoundedCornerShape(10.dp)) {
-                        Text("👁 Shakllarni eslab ko'ring, so'ng bosing")
+                    OutlinedButton(onClick = onReveal, shape = MaterialTheme.shapes.small) {
+                        Icon(Icons.Filled.Visibility, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text("Shakllarni eslab ko'ring, so'ng bosing")
                     }
                 } else {
                     Column(modifier = Modifier.fillMaxWidth()) {
@@ -251,8 +261,10 @@ private fun StudyPhaseView(
                     }
 
                     Spacer(Modifier.height(14.dp))
-                    OutlinedButton(onClick = { onSpeak(verb.v1, verb.v2, verb.v3) }, shape = RoundedCornerShape(10.dp)) {
-                        Text("🔊 Ovozli eshitish")
+                    OutlinedButton(onClick = { onSpeak(verb.v1, verb.v2, verb.v3) }, shape = MaterialTheme.shapes.small) {
+                        Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text("Ovozli eshitish")
                     }
                 }
             }
@@ -264,14 +276,14 @@ private fun StudyPhaseView(
             OutlinedButton(
                 onClick = { if (state.studyIndex == 0) onExit() else onPrev() },
                 modifier = Modifier.weight(1f),
-                shape = RoundedCornerShape(10.dp)
+                shape = MaterialTheme.shapes.small
             ) {
                 Text(if (state.studyIndex == 0) "Chiqish" else "Orqaga")
             }
             Button(
                 onClick = onNext,
                 modifier = Modifier.weight(1f),
-                shape = RoundedCornerShape(10.dp)
+                shape = MaterialTheme.shapes.small
             ) {
                 Text(if (state.studyIndex + 1 == state.sessionVerbs.size) "Boshlash" else "Keyingisi")
             }
@@ -327,7 +339,7 @@ private fun PracticePhaseView(
         if (state.checked) {
             Spacer(Modifier.height(16.dp))
             Surface(
-                shape = RoundedCornerShape(14.dp),
+                shape = MaterialTheme.shapes.medium,
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -353,7 +365,7 @@ private fun PracticePhaseView(
 
         if (!state.checked) {
             when (state.qType) {
-                0 -> Button(onClick = onTableSubmit, shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth()) {
+                0 -> Button(onClick = onTableSubmit, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth()) {
                     Text("Tekshirish", fontWeight = FontWeight.Bold)
                 }
                 1 -> TextButton(onClick = onOrderSkip, modifier = Modifier.fillMaxWidth()) {
@@ -363,8 +375,8 @@ private fun PracticePhaseView(
         } else {
             Button(
                 onClick = onNext,
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
-                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = SuccessGreen),
+                shape = MaterialTheme.shapes.small,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(if (state.currentIndex + 1 == state.sessionVerbs.size) "Natija" else "Davom Etish", fontWeight = FontWeight.Bold)
@@ -417,9 +429,9 @@ private fun TableCell(
             modifier = Modifier.fillMaxWidth()
         )
         if (checked && !isCorrect) {
-            Text("✗", color = Color(0xFFEF4444), fontSize = 12.sp)
+            Icon(Icons.Filled.Close, contentDescription = null, tint = MaterialTheme.colorScheme.error, modifier = Modifier.size(14.dp))
         } else if (checked && isCorrect && !prefilled) {
-            Text("✓", color = Color(0xFF10B981), fontSize = 12.sp)
+            Icon(Icons.Filled.Check, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(14.dp))
         }
     }
 }
@@ -438,10 +450,10 @@ private fun ShuffledOrderQuestion(
         Spacer(Modifier.height(16.dp))
 
         state.orderButtons.forEachIndexed { idx, btn ->
-            val bg = if (btn.clicked) Color(0xFF10B981).copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
+            val bg = if (btn.clicked) SuccessGreen.copy(alpha = 0.15f) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
             Surface(
                 onClick = { if (!btn.clicked && !state.checked) onClick(idx) },
-                shape = RoundedCornerShape(10.dp),
+                shape = MaterialTheme.shapes.small,
                 color = bg,
                 modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
             ) {
@@ -452,7 +464,7 @@ private fun ShuffledOrderQuestion(
                 ) {
                     Text(btn.text, fontWeight = FontWeight.SemiBold, fontSize = 15.sp)
                     if (btn.clicked) {
-                        Surface(shape = RoundedCornerShape(6.dp), color = Color(0xFF10B981).copy(alpha = 0.2f)) {
+                        Surface(shape = MaterialTheme.shapes.extraSmall, color = SuccessGreen.copy(alpha = 0.2f)) {
                             Text("V${btn.clickedIndex + 1}", fontSize = 11.sp, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp))
                         }
                     }
@@ -506,13 +518,13 @@ private fun SentenceChoiceQuestion(
                 val isSelected = state.selectedChoice == idx
                 val isCorrect = idx == q.correctIndex
                 val bg = when {
-                    state.checked && isCorrect -> Color(0xFF10B981).copy(alpha = 0.2f)
-                    state.checked && isSelected -> Color(0xFFEF4444).copy(alpha = 0.2f)
+                    state.checked && isCorrect -> SuccessGreen.copy(alpha = 0.2f)
+                    state.checked && isSelected -> MaterialTheme.colorScheme.error.copy(alpha = 0.2f)
                     else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
                 }
                 Surface(
                     onClick = { if (!state.checked) onClick(idx) },
-                    shape = RoundedCornerShape(10.dp),
+                    shape = MaterialTheme.shapes.small,
                     color = bg,
                     modifier = Modifier.weight(1f)
                 ) {
@@ -535,9 +547,9 @@ private fun IrregularResultsView(
     val total = state.correctCount + state.incorrectCount
     val ratio = if (total > 0) state.correctCount.toFloat() / total else 0f
     val (tierIcon, tierLabel, tierColor) = when {
-        ratio >= 0.8f -> Triple("🏆", "Ajoyib!", Color(0xFFF59E0B))
-        ratio >= 0.5f -> Triple("👍", "Yaxshi!", Color(0xFF2563EB))
-        else -> Triple("🏋️", "Davom eting!", Color(0xFF10B981))
+        ratio >= 0.8f -> Triple(Icons.Filled.EmojiEvents, "Ajoyib!", WarningAmber)
+        ratio >= 0.5f -> Triple(Icons.Filled.ThumbUp, "Yaxshi!", MaterialTheme.colorScheme.primary)
+        else -> Triple(Icons.Filled.FitnessCenter, "Davom eting!", SuccessGreen)
     }
 
     Column(
@@ -548,24 +560,24 @@ private fun IrregularResultsView(
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.size(72.dp).background(tierColor.copy(alpha = 0.15f), CircleShape)
-        ) { Text(tierIcon, fontSize = 36.sp) }
+        ) { Icon(tierIcon, contentDescription = null, modifier = Modifier.size(36.dp), tint = tierColor) }
         Spacer(Modifier.height(12.dp))
         Text(tierLabel, fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
         Text("Fe'llar mashqi yakunlandi", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
 
         Spacer(Modifier.height(20.dp))
-        Card(shape = RoundedCornerShape(16.dp), colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)), modifier = Modifier.fillMaxWidth()) {
+        Card(shape = MaterialTheme.shapes.large, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)), modifier = Modifier.fillMaxWidth()) {
             Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth().padding(16.dp)) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$total", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF2563EB))
+                    Text("$total", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                     Text("Jami fe'llar", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("${state.correctCount}", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF10B981))
+                    Text("${state.correctCount}", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = SuccessGreen)
                     Text("To'g'ri", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("${state.incorrectCount}", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFFEF4444))
+                    Text("${state.incorrectCount}", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.error)
                     Text("Noto'g'ri", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
@@ -573,9 +585,13 @@ private fun IrregularResultsView(
 
         if (state.wrongVerbs.isNotEmpty()) {
             Spacer(Modifier.height(20.dp))
-            Surface(shape = RoundedCornerShape(14.dp), color = Color(0xFFEF4444).copy(alpha = 0.08f), modifier = Modifier.fillMaxWidth()) {
+            Surface(shape = MaterialTheme.shapes.medium, color = MaterialTheme.colorScheme.error.copy(alpha = 0.08f), modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(14.dp)) {
-                    Text("📉 Takrorlash tavsiya etiladi", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color(0xFFEF4444))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.TrendingDown, contentDescription = null, modifier = Modifier.size(18.dp), tint = MaterialTheme.colorScheme.error)
+                        Spacer(Modifier.width(6.dp))
+                        Text("Takrorlash tavsiya etiladi", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.error)
+                    }
                     Spacer(Modifier.height(10.dp))
                     state.wrongVerbs.distinctBy { it.word.id }.forEach { verb ->
                         Row(
@@ -587,7 +603,9 @@ private fun IrregularResultsView(
                                 Text("${verb.v1} → ${verb.v2} → ${verb.v3}", fontWeight = FontWeight.Bold, fontSize = 13.sp)
                                 Text(verb.word.translation, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
-                            IconButton(onClick = { onSpeak(verb.v1, verb.v2, verb.v3) }) { Text("🔊", fontSize = 16.sp) }
+                            IconButton(onClick = { onSpeak(verb.v1, verb.v2, verb.v3) }) {
+                                Icon(Icons.AutoMirrored.Filled.VolumeUp, contentDescription = "Eshitish", modifier = Modifier.size(18.dp))
+                            }
                         }
                     }
                 }
@@ -595,7 +613,7 @@ private fun IrregularResultsView(
         }
 
         Spacer(Modifier.height(24.dp))
-        Button(onClick = onDone, shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth()) {
+        Button(onClick = onDone, shape = MaterialTheme.shapes.small, modifier = Modifier.fillMaxWidth()) {
             Text("Kutubxonaga qaytish", fontWeight = FontWeight.Bold)
         }
     }

@@ -1,6 +1,7 @@
 package abs.uits.vocabry.ui.library.components
 
 import abs.uits.vocabry.data.model.Folder
+import abs.uits.vocabry.ui.theme.iconForPackOrFolder
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,8 +17,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -33,7 +34,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 private val FOLDER_ICONS = listOf("📁", "📂", "📚", "💼", "🎓", "🌟", "🎯", "🚀", "🏷️", "📂")
 
@@ -92,7 +92,11 @@ fun FolderFormDialog(
                                 )
                                 .clickable { selectedIcon = icon }
                         ) {
-                            Text(icon, fontSize = 20.sp)
+                            Icon(
+                                iconForPackOrFolder(icon),
+                                contentDescription = null,
+                                tint = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurfaceVariant
+                            )
                         }
                     }
                 }
