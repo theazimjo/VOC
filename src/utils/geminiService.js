@@ -15,8 +15,15 @@ const MODEL_CANDIDATES = [
   "gemini-2.5-pro"
 ];
 
-export function getGeminiApiKey() {
-  return localStorage.getItem('gemini_api_key') || DEFAULT_API_KEY;
+/**
+ * Personal key (BYOK) always wins if the user set one. The shared
+ * DEFAULT_API_KEY (paid for by the app, not the user) is only offered as a
+ * fallback to Premium users — Free users must supply their own key.
+ */
+export function getGeminiApiKey(isPremium = false) {
+  const personalKey = localStorage.getItem('gemini_api_key');
+  if (personalKey) return personalKey;
+  return isPremium ? DEFAULT_API_KEY : '';
 }
 
 export function setGeminiApiKey(key) {
@@ -73,9 +80,9 @@ async function callGeminiWithFallback(payload, apiKey) {
  * Single word lookup: Auto-detects English or Uzbek, returns concise translation, POS, definition & example.
  * Token-optimized prompt to minimize cost.
  */
-export async function lookupWordWithAI(query) {
+export async function lookupWordWithAI(query, isPremium = false) {
   if (!query || !query.trim()) return null;
-  const apiKey = getGeminiApiKey();
+  const apiKey = getGeminiApiKey(isPremium);
   if (!apiKey) throw new Error("Gemini API kalit kiritilmagan");
 
   const prompt = `Task: Vocabulary lookup for "${query.trim()}".
@@ -120,8 +127,8 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
  * Automatically performs OCR typo correction, ignores basic stop words (a, an, the, hello, etc.),
  * and excludes words that already exist in the pack.
  */
-export async function extractWordsFromImageAI(imageBase64, mimeType = 'image/jpeg', existingWords = []) {
-  const apiKey = getGeminiApiKey();
+export async function extractWordsFromImageAI(imageBase64, mimeType = 'image/jpeg', existingWords = [], isPremium = false) {
+  const apiKey = getGeminiApiKey(isPremium);
   if (!apiKey) throw new Error("Gemini API kalit kiritilmagan");
 
   // Dynamically extract real MIME type if data URL exists

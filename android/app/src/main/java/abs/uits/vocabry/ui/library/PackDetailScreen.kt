@@ -1,10 +1,14 @@
 package abs.uits.vocabry.ui.library
 
 import abs.uits.vocabry.data.market.IrregularVerbGroups
+import abs.uits.vocabry.data.model.MarketWord
 import abs.uits.vocabry.data.model.Word
 import abs.uits.vocabry.ui.library.components.AddWordDialog
 import abs.uits.vocabry.ui.library.components.BulkImportDialog
+import abs.uits.vocabry.ui.library.components.PhotoWordExtractorDialog
 import abs.uits.vocabry.ui.library.components.WordFormData
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import android.speech.tts.TextToSpeech
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -96,8 +100,11 @@ fun PackDetailScreen(
     val isIrregularVerbs by viewModel.isIrregularVerbs.collectAsState()
     val newWordsAddedCount by viewModel.newWordsAddedCount.collectAsState()
 
+    val scope = rememberCoroutineScope()
+
     var showWordForm by remember { mutableStateOf(false) }
     var showBulkImportForm by remember { mutableStateOf(false) }
+    var showPhotoExtractorForm by remember { mutableStateOf(false) }
     var editingWord by remember { mutableStateOf<Word?>(null) }
     var wordToDeleteId by remember { mutableStateOf<String?>(null) }
     var pendingNewWord by remember { mutableStateOf<WordFormData?>(null) }
@@ -176,6 +183,10 @@ fun PackDetailScreen(
                     },
                     onImportJson = {
                         showBulkImportForm = true
+                        speedDialOpen = false
+                    },
+                    onExtractPhoto = {
+                        showPhotoExtractorForm = true
                         speedDialOpen = false
                     }
                 )
@@ -430,7 +441,33 @@ fun PackDetailScreen(
         BulkImportDialog(
             existingWords = words,
             onDismiss = { showBulkImportForm = false },
-            onImport = { newWords, onProgress -> viewModel.bulkAddWords(newWords, onProgress) }
+            onImport = { newWords, onProgress ->
+                scope.launch {
+                    viewModel.bulkAddWords(newWords, onProgress)
+                }
+            }
+        )
+    }
+
+    if (showPhotoExtractorForm) {
+        PhotoWordExtractorDialog(
+            isOpen = showPhotoExtractorForm,
+            onDismiss = { showPhotoExtractorForm = false },
+            existingWords = words.map { it.word },
+            onImport = { newWords ->
+                val convertedWords = newWords.map { data ->
+                    MarketWord(
+                        word = data.word,
+                        translation = data.translation,
+                        definition = data.definition,
+                        example = data.example,
+                        partOfSpeech = data.partOfSpeech
+                    )
+                }
+                scope.launch {
+                    viewModel.bulkAddWords(convertedWords) { _, _ -> }
+                }
+            }
         )
     }
 
@@ -458,7 +495,7 @@ fun PackDetailScreen(
     }
 }
 
-/** Two-action speed-dial FAB, mirrors SpeedDialFAB.jsx (JSON Import + So'z qo'shish). */
+/** Three-action speed-dial FAB (Photo OCR + JSON Import + So'z qo'shish). */
 @Composable
 private fun SpeedDialFab(
     open: Boolean,
@@ -466,10 +503,19 @@ private fun SpeedDialFab(
     accentColor: Color,
     onAddWord: () -> Unit,
     onImportJson: () -> Unit,
+    onExtractPhoto: () -> Unit,
 ) {
     Column(horizontalAlignment = Alignment.End) {
         AnimatedVisibility(visible = open, enter = fadeIn(), exit = fadeOut()) {
             Column(horizontalAlignment = Alignment.End) {
+                ExtendedFloatingActionButton(
+                    onClick = onExtractPhoto,
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    icon = { Text("📸") },
+                    text = { Text("Rasmdan so'z qo'shish") }
+                )
+                Spacer(Modifier.height(10.dp))
                 ExtendedFloatingActionButton(
                     onClick = onImportJson,
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,

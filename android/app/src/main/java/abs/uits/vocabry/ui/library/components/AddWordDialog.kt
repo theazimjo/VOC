@@ -1,30 +1,48 @@
 package abs.uits.vocabry.ui.library.components
 
 import abs.uits.vocabry.data.model.Word
+import abs.uits.vocabry.engine.GeminiService
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 /** Mirrors src/utils/helpers.js's partOfSpeechOptions. */
 private val POS_OPTIONS = listOf(
@@ -56,6 +74,10 @@ fun AddWordDialog(
     onDismiss: () -> Unit,
     onConfirm: (WordFormData) -> Unit,
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val currentUser = Firebase.auth.currentUser
+
     var word by remember { mutableStateOf(editingWord?.word.orEmpty()) }
     var translation by remember { mutableStateOf(editingWord?.translation.orEmpty()) }
     var definition by remember { mutableStateOf(editingWord?.definition.orEmpty()) }
@@ -64,15 +86,140 @@ fun AddWordDialog(
     var notes by remember { mutableStateOf(editingWord?.notes.orEmpty()) }
     var selectedPos by remember { mutableStateOf(editingWord?.partOfSpeech?.ifEmpty { "noun" } ?: "noun") }
 
+    var isAiLoading by remember { mutableStateOf(false) }
+    var aiError by remember { mutableStateOf<String?>(null) }
+    var showKeyInput by remember { mutableStateOf(false) }
+    var apiKeyText by remember { mutableStateOf(GeminiService.getApiKey(context)) }
+
     val isEditing = editingWord != null
+
+    fun handleAiAutofill() {
+        val userEmail = currentUser?.email?.lowercase().orEmpty()
+        if (userEmail != "azimjonxolmirzayev30@gmail.com") {
+            aiError = "🔒 AI Avto-to'ldirish tez orada taqdim etiladi! (Coming soon)"
+            return
+        }
+
+        if (GeminiService.getApiKey(context).isBlank()) {
+            showKeyInput = true
+            aiError = "🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting."
+            return
+        }
+
+        val q = word.ifBlank { translation }
+        if (q.isBlank() || isAiLoading) return
+
+        isAiLoading = true
+        aiError = null
+
+        scope.launch {
+            try {
+                val res = GeminiService.lookupWordWithAI(context, q)
+                if (res != null) {
+                    word = res.word.ifBlank { word }
+                    translation = res.translation.ifBlank { translation }
+                    selectedPos = res.partOfSpeech.ifBlank { selectedPos }
+                    definition = res.definition.ifBlank { definition }
+                    example = res.example.ifBlank { example }
+                } else {
+                    aiError = "So'z ma'lumoti topilmadi."
+                }
+            } catch (e: Exception) {
+                if (e.message?.contains("API Kaliti") == true) {
+                    showKeyInput = true
+                }
+                aiError = e.message ?: "AI so'rovida xatolik yuz berdi"
+            } finally {
+                isAiLoading = false
+            }
+        }
+    }
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (isEditing) "So'zni tahrirlash" else "Yangi so'z") },
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(if (isEditing) "So'zni tahrirlash" else "Yangi so'z", fontWeight = FontWeight.Bold)
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                    modifier = Modifier.clickable { handleAiAutofill() }
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                    ) {
+                        if (isAiLoading) {
+                            CircularProgressIndicator(modifier = Modifier.size(12.dp), strokeWidth = 1.5.dp)
+                            Spacer(Modifier.width(4.dp))
+                            Text("Qidirilmoqda...", fontSize = 11.sp, color = MaterialTheme.colorScheme.primary)
+                        } else {
+                            Text("✨ AI Avto-to'ldirish", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                        }
+                    }
+                }
+            }
+        },
         text = {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
+                if (aiError != null) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp)
+                    ) {
+                        Text(
+                            "⚠️ ${aiError}",
+                            color = MaterialTheme.colorScheme.error,
+                            fontSize = 12.sp,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
+                }
+
+                if (showKeyInput) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f), RoundedCornerShape(10.dp))
+                            .padding(10.dp)
+                    ) {
+                        Text("🔑 Gemini API Kalitingizni kiriting:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Spacer(Modifier.height(4.dp))
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            OutlinedTextField(
+                                value = apiKeyText,
+                                onValueChange = { apiKeyText = it },
+                                placeholder = { Text("API Key...") },
+                                singleLine = true,
+                                modifier = Modifier.weight(1f)
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Button(
+                                onClick = {
+                                    if (apiKeyText.isNotBlank()) {
+                                        GeminiService.setApiKey(context, apiKeyText)
+                                        showKeyInput = false
+                                        aiError = null
+                                        handleAiAutofill()
+                                    }
+                                }
+                            ) {
+                                Text("Saqlash", fontSize = 12.sp)
+                            }
+                        }
+                    }
+                    Spacer(Modifier.height(8.dp))
+                }
+
                 OutlinedTextField(
                     value = word,
                     onValueChange = { word = it },
@@ -109,7 +256,7 @@ fun AddWordDialog(
                     value = definition,
                     onValueChange = { definition = it },
                     label = { Text("Ta'rifi (ixtiyoriy)") },
-                    placeholder = { Text("Ingliz tilidagi ta'rifi") },
+                    placeholder = { Text("O'zbek tilidagi ta'rifi") },
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Spacer(Modifier.height(8.dp))

@@ -97,6 +97,15 @@
         "context": { ".validate": "!newData.exists() || (newData.isString() && newData.val().length <= 200)" }
       }
     },
+    "userPlans": {
+      ".read": "auth != null && auth.token.email === 'azimjonxolmirzayev30@gmail.com'",
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
+        ".write": "auth != null && auth.token.email === 'azimjonxolmirzayev30@gmail.com'",
+        ".validate": "newData.hasChild('plan') && (newData.child('plan').val() === 'free' || newData.child('plan').val() === 'premium')"
+      }
+    },
+
     "globalWordStats": {
       ".read": "auth != null",
       "$wordKey": {

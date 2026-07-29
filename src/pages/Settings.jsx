@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
+import { usePlan } from '../hooks/usePlan';
 import './Settings.css';
 
 export default function Settings() {
@@ -39,6 +40,7 @@ export default function Settings() {
   };
 
   const { limit: dailyWordLimit, setLimit: setDailyWordLimit, todayCount } = useDailyNewWordLimit();
+  const { isPremium } = usePlan();
 
   const handleThemeChange = (newThemeId) => {
     setTheme(newThemeId);
@@ -88,6 +90,44 @@ export default function Settings() {
               );
             })}
           </div>
+        </div>
+
+        {/* Plan / Tariff Card */}
+        <div className="settings-card plan-card">
+          <h2>💎 Tarif rejasi</h2>
+          <p className="section-desc">
+            Joriy rejangiz:{' '}
+            <span className={`plan-badge ${isPremium ? 'plan-badge-premium' : 'plan-badge-free'}`}>
+              {isPremium ? '⭐ Premium' : 'Bepul (Free)'}
+            </span>
+          </p>
+
+          <div className="plan-compare-grid">
+            <div className="plan-compare-col">
+              <div className="plan-compare-title">Bepul</div>
+              <ul className="plan-feature-list">
+                <li>✓ So'z va to'plamlarni qo'lda qo'shish</li>
+                <li>✓ Barcha mashqlar va statistika</li>
+                <li>✓ Kunlik maqsad va eslatmalar</li>
+                <li className="plan-feature-disabled">✕ AI orqali so'z qidirish</li>
+                <li className="plan-feature-disabled">✕ Rasmdan so'z ajratish (AI OCR)</li>
+              </ul>
+            </div>
+            <div className="plan-compare-col plan-compare-col-premium">
+              <div className="plan-compare-title">Premium</div>
+              <ul className="plan-feature-list">
+                <li>✓ Bepul rejadagi barcha imkoniyatlar</li>
+                <li>✓ AI orqali so'z qidirish va avto-to'ldirish</li>
+                <li>✓ Rasmdan so'z ajratish (AI OCR)</li>
+              </ul>
+            </div>
+          </div>
+
+          {!isPremium && (
+            <p className="section-desc" style={{ marginTop: 'var(--space-md)', marginBottom: 0 }}>
+              Premium rejani faollashtirish uchun hozircha administrator bilan bog'laning.
+            </p>
+          )}
         </div>
 
         {/* Behavior & Display Settings Card */}
