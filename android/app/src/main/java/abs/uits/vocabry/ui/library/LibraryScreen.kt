@@ -7,13 +7,6 @@ import abs.uits.vocabry.ui.library.components.FolderFormDialog
 import abs.uits.vocabry.ui.library.components.PackFormDialog
 import abs.uits.vocabry.ui.theme.BadgeGreenBg
 import abs.uits.vocabry.ui.theme.BadgeGreenText
-import abs.uits.vocabry.ui.theme.BorderBlueLight
-import abs.uits.vocabry.ui.theme.CardWhite
-import abs.uits.vocabry.ui.theme.FolderCardBlue
-import abs.uits.vocabry.ui.theme.MutedBlueGrayText
-import abs.uits.vocabry.ui.theme.RoyalBluePrimary
-import abs.uits.vocabry.ui.theme.RoyalNavyText
-import abs.uits.vocabry.ui.theme.SearchBgBlue
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -128,7 +121,7 @@ fun LibraryScreen(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = SearchBgBlue,
+                            color = MaterialTheme.colorScheme.primaryContainer,
                             modifier = Modifier.size(34.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
@@ -140,7 +133,7 @@ fun LibraryScreen(
                             "Library",
                             fontWeight = FontWeight.ExtraBold,
                             fontSize = 24.sp,
-                            color = RoyalNavyText
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                     }
                 },
@@ -156,7 +149,7 @@ fun LibraryScreen(
                     editingPack = null
                     showPackForm = true
                 },
-                containerColor = RoyalBluePrimary,
+                containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = Color.White,
                 shape = CircleShape,
                 modifier = Modifier.size(56.dp)
@@ -178,17 +171,17 @@ fun LibraryScreen(
                 OutlinedTextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
-                    placeholder = { Text("So'zlarni qidirish...", color = MutedBlueGrayText, fontSize = 14.sp) },
-                    leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Qidirish", tint = MutedBlueGrayText) },
+                    placeholder = { Text("So'zlarni qidirish...", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp) },
+                    leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Qidirish", tint = MaterialTheme.colorScheme.onSurfaceVariant) },
                     singleLine = true,
                     shape = RoundedCornerShape(16.dp),
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = SearchBgBlue,
-                        unfocusedContainerColor = SearchBgBlue,
+                        focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                         focusedBorderColor = Color.Transparent,
                         unfocusedBorderColor = Color.Transparent,
-                        focusedTextColor = RoyalNavyText,
-                        unfocusedTextColor = RoyalNavyText
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     ),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -207,18 +200,18 @@ fun LibraryScreen(
                             TextButton(onClick = { viewModel.closeFolder() }) {
                                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Orqaga", modifier = Modifier.size(18.dp))
                                 Spacer(Modifier.width(4.dp))
-                                Text("Orqaga", fontWeight = FontWeight.SemiBold, color = RoyalBluePrimary)
+                                Text("Orqaga", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
                             }
                             Spacer(Modifier.width(4.dp))
                             Text(
                                 "${openFolder.icon} ${openFolder.name}",
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.ExtraBold,
-                                color = RoyalNavyText
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                         }
                         IconButton(onClick = { editingFolder = openFolder; showFolderForm = true }) {
-                            Icon(Icons.Filled.MoreVert, contentDescription = "Papkani tahrirlash", tint = MutedBlueGrayText)
+                            Icon(Icons.Filled.MoreVert, contentDescription = "Papkani tahrirlash", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -235,10 +228,10 @@ fun LibraryScreen(
                                 "Papkalaringiz",
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = RoyalNavyText
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             TextButton(onClick = { editingFolder = null; showFolderForm = true }) {
-                                Text("Hammasi", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = RoyalBluePrimary)
+                                Text("Hammasi", fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
                             }
                         }
 
@@ -247,7 +240,7 @@ fun LibraryScreen(
                         if (folders.isEmpty()) {
                             Surface(
                                 shape = RoundedCornerShape(16.dp),
-                                color = FolderCardBlue,
+                                color = MaterialTheme.colorScheme.secondaryContainer,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .combinedClickable(
@@ -264,14 +257,14 @@ fun LibraryScreen(
                                         modifier = Modifier
                                             .size(40.dp)
                                             .clip(RoundedCornerShape(10.dp))
-                                            .background(RoyalBluePrimary)
+                                            .background(MaterialTheme.colorScheme.primary)
                                     ) {
                                         Icon(Icons.Filled.Folder, contentDescription = "Papka", tint = Color.White, modifier = Modifier.size(22.dp))
                                     }
                                     Spacer(Modifier.width(12.dp))
                                     Column {
-                                        Text("+ Yangi papka yaratish", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = RoyalNavyText)
-                                        Text("To'plamlarni tartiblash uchun", fontSize = 11.sp, color = MutedBlueGrayText)
+                                        Text("+ Yangi papka yaratish", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurface)
+                                        Text("To'plamlarni tartiblash uchun", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                                     }
                                 }
                             }
@@ -306,12 +299,12 @@ fun LibraryScreen(
                         if (openFolder != null) "Papka to'plamlari" else "Oxirgi yodlanayotgan",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = RoyalNavyText
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Icon(
                         Icons.Filled.Tune,
                         contentDescription = "Saralash",
-                        tint = MutedBlueGrayText,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )
                 }
@@ -335,7 +328,7 @@ fun LibraryScreen(
                         Text(
                             "Hali to'plamlar mavjud emas. Pastdagi + tugmasini bosing.",
                             fontSize = 13.sp,
-                            color = MutedBlueGrayText
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
@@ -425,7 +418,7 @@ fun FolderCardHorizontalItem(
 ) {
     Card(
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = FolderCardBlue),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         modifier = Modifier
             .width(165.dp)
@@ -446,7 +439,7 @@ fun FolderCardHorizontalItem(
                 modifier = Modifier
                     .size(38.dp)
                     .clip(RoundedCornerShape(10.dp))
-                    .background(RoyalBluePrimary)
+                    .background(MaterialTheme.colorScheme.primary)
             ) {
                 Text(folder.icon.ifEmpty { "📁" }, fontSize = 20.sp)
             }
@@ -456,7 +449,7 @@ fun FolderCardHorizontalItem(
                     folder.name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,
-                    color = RoyalNavyText,
+                    color = MaterialTheme.colorScheme.onSurface,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -464,7 +457,7 @@ fun FolderCardHorizontalItem(
                 Text(
                     "$packCount ta to'plam",
                     fontSize = 11.sp,
-                    color = MutedBlueGrayText
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -480,11 +473,11 @@ fun PackListItem(
 ) {
     Card(
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = CardWhite),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, BorderBlueLight, RoundedCornerShape(20.dp))
+            .border(1.dp, MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(20.dp))
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = onLongClick
@@ -502,7 +495,7 @@ fun PackListItem(
                 modifier = Modifier
                     .size(56.dp)
                     .clip(RoundedCornerShape(14.dp))
-                    .background(SearchBgBlue)
+                    .background(MaterialTheme.colorScheme.primaryContainer)
             ) {
                 Text(pack.icon.ifEmpty { "📚" }, fontSize = 28.sp)
             }
@@ -520,7 +513,7 @@ fun PackListItem(
                         pack.name,
                         fontWeight = FontWeight.Bold,
                         fontSize = 15.sp,
-                        color = RoyalNavyText,
+                        color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f)
@@ -552,13 +545,13 @@ fun PackListItem(
                         "${pack.wordCount} ta so'z",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MutedBlueGrayText
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
                     Text(
                         "2 soat oldin",
                         fontSize = 12.sp,
-                        color = MutedBlueGrayText
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -568,7 +561,7 @@ fun PackListItem(
             Icon(
                 Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "Ochish",
-                tint = MutedBlueGrayText,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(22.dp)
             )
         }
