@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './SpeedDialFAB.css';
 
-export default function SpeedDialFAB({ onAddWord, onImportJson, onExtractPhoto }) {
+export default function SpeedDialFAB({ onAddWord, onImportJson }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -22,26 +22,7 @@ export default function SpeedDialFAB({ onAddWord, onImportJson, onExtractPhoto }
       <AnimatePresence>
         {isOpen && (
           <div className="speed-dial-actions">
-            {/* Action 1: Rasmdan so'z qo'shish (AI OCR) */}
-            {onExtractPhoto && (
-              <motion.button
-                className="speed-dial-action"
-                onClick={() => {
-                  onExtractPhoto();
-                  setIsOpen(false);
-                }}
-                initial={{ opacity: 0, y: 15, scale: 0.8 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 15, scale: 0.8 }}
-                transition={{ duration: 0.2, delay: 0.1 }}
-                title="Rasmdan so'z qo'shish (AI OCR)"
-              >
-                <span className="speed-dial-action-label">Rasmdan so'z qo'shish</span>
-                <span className="speed-dial-action-icon">📸</span>
-              </motion.button>
-            )}
-
-            {/* Action 2: JSON Import */}
+            {/* Action 1: JSON Import */}
             <motion.button
               className="speed-dial-action"
               onClick={() => {
@@ -58,7 +39,7 @@ export default function SpeedDialFAB({ onAddWord, onImportJson, onExtractPhoto }
               <span className="speed-dial-action-icon">📥</span>
             </motion.button>
 
-            {/* Action 3: So'z qo'shish */}
+            {/* Action 2: So'z qo'shish */}
             <motion.button
               className="speed-dial-action"
               onClick={() => {

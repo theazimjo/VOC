@@ -112,7 +112,6 @@ fun PackDetailScreen(
 
     var showWordForm by remember { mutableStateOf(false) }
     var showBulkImportForm by remember { mutableStateOf(false) }
-    var showPhotoExtractorForm by remember { mutableStateOf(false) }
     var editingWord by remember { mutableStateOf<Word?>(null) }
     var wordToDeleteId by remember { mutableStateOf<String?>(null) }
     var pendingNewWord by remember { mutableStateOf<WordFormData?>(null) }
@@ -191,10 +190,6 @@ fun PackDetailScreen(
                     },
                     onImportJson = {
                         showBulkImportForm = true
-                        speedDialOpen = false
-                    },
-                    onExtractPhoto = {
-                        showPhotoExtractorForm = true
                         speedDialOpen = false
                     }
                 )
@@ -461,28 +456,6 @@ fun PackDetailScreen(
         )
     }
 
-    if (showPhotoExtractorForm) {
-        PhotoWordExtractorDialog(
-            isOpen = showPhotoExtractorForm,
-            onDismiss = { showPhotoExtractorForm = false },
-            existingWords = words.map { it.word },
-            onImport = { newWords ->
-                val convertedWords = newWords.map { data ->
-                    MarketWord(
-                        word = data.word,
-                        translation = data.translation,
-                        definition = data.definition,
-                        example = data.example,
-                        partOfSpeech = data.partOfSpeech
-                    )
-                }
-                scope.launch {
-                    viewModel.bulkAddWords(convertedWords) { _, _ -> }
-                }
-            }
-        )
-    }
-
     if (wordToDeleteId != null) {
         AlertDialog(
             onDismissRequest = { wordToDeleteId = null },
@@ -507,7 +480,7 @@ fun PackDetailScreen(
     }
 }
 
-/** Three-action speed-dial FAB (Photo OCR + JSON Import + So'z qo'shish). */
+/** Two-action speed-dial FAB (JSON Import + So'z qo'shish). */
 @Composable
 private fun SpeedDialFab(
     open: Boolean,
@@ -515,19 +488,10 @@ private fun SpeedDialFab(
     accentColor: Color,
     onAddWord: () -> Unit,
     onImportJson: () -> Unit,
-    onExtractPhoto: () -> Unit,
 ) {
     Column(horizontalAlignment = Alignment.End) {
         AnimatedVisibility(visible = open, enter = fadeIn(), exit = fadeOut()) {
             Column(horizontalAlignment = Alignment.End) {
-                ExtendedFloatingActionButton(
-                    onClick = onExtractPhoto,
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
-                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    icon = { Icon(Icons.Filled.CameraAlt, contentDescription = null) },
-                    text = { Text("Rasmdan so'z qo'shish") }
-                )
-                Spacer(Modifier.height(10.dp))
                 ExtendedFloatingActionButton(
                     onClick = onImportJson,
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
