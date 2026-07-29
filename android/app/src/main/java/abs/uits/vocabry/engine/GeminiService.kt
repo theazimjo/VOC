@@ -50,12 +50,12 @@ object GeminiService {
     private const val KEY_API_KEY = "gemini_api_key"
     private const val ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E="
 
-    // High availability models (gemini-1.5-flash is 100% available on all free tier keys)
+    // High availability models
     private val MODEL_CANDIDATES = listOf(
         "gemini-1.5-flash",
-        "gemini-1.5-flash-8b",
         "gemini-2.0-flash-exp",
         "gemini-2.0-flash",
+        "gemini-1.5-flash-8b",
         "gemini-1.5-pro"
     )
 
@@ -79,6 +79,7 @@ object GeminiService {
     private suspend fun callGeminiWithFallback(payload: JSONObject, apiKey: String): JSONObject = withContext(Dispatchers.IO) {
         var lastErrorMsg = ""
         var lastResponseCode = 0
+        var isInvalidKey = false
 
         for (model in MODEL_CANDIDATES) {
             val urlString = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey"
@@ -122,7 +123,12 @@ object GeminiService {
                 }
                 errorReader.close()
 
-                lastErrorMsg = "[$model] HTTP $responseCode: ${errSb.toString()}"
+                val errText = errSb.toString()
+                if (errText.contains("is not found for API version") || errText.contains("API key not valid")) {
+                    isInvalidKey = true
+                }
+
+                lastErrorMsg = "[$model] HTTP $responseCode: $errText"
                 continue
             } catch (e: Exception) {
                 lastErrorMsg = e.message ?: "Network error"
@@ -130,6 +136,10 @@ object GeminiService {
             } finally {
                 conn?.disconnect()
             }
+        }
+
+        if (isInvalidKey || !apiKey.startsWith("AIzaSy")) {
+            throw Exception("API Kalit yaroqsiz. Google AI Studio'dan yangi API kalit (AIzaSy...) olib, Profil bo'limida kiriting.")
         }
 
         if (lastResponseCode == 429) {
