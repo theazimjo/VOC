@@ -9,6 +9,7 @@ import android.speech.tts.TextToSpeech
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -80,7 +81,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun PackDetailScreen(
     navController: NavController,
@@ -181,185 +182,179 @@ fun PackDetailScreen(
             }
         },
     ) { padding ->
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
+                .padding(padding),
+            contentPadding = PaddingValues(bottom = 100.dp)
         ) {
-            // Pack Header Banner (Web parity)
-            Surface(
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .border(
-                        width = 0.dp,
-                        color = Color.Transparent
-                    )
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            contentAlignment = Alignment.Center,
-                            modifier = Modifier
-                                .size(52.dp)
-                                .clip(RoundedCornerShape(12.dp))
-                                .background(accentColor.copy(alpha = 0.15f))
-                                .border(1.dp, accentColor.copy(alpha = 0.3f), RoundedCornerShape(12.dp))
+            // Pack Header Banner (Web parity - Header Info)
+            item {
+                Surface(
+                    color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text(pack?.icon?.ifEmpty { "📦" } ?: "📦", fontSize = 26.sp)
-                        }
-
-                        Spacer(Modifier.width(14.dp))
-
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                pack?.name.orEmpty().ifEmpty { "To'plam" },
-                                fontWeight = FontWeight.ExtraBold,
-                                style = MaterialTheme.typography.titleLarge
-                            )
-                            if (!pack?.description.isNullOrBlank()) {
-                                Text(
-                                    pack?.description.orEmpty(),
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
-                            }
-                            Spacer(Modifier.height(4.dp))
-                            Surface(
-                                shape = RoundedCornerShape(6.dp),
-                                color = accentColor.copy(alpha = 0.15f)
+                            Box(
+                                contentAlignment = Alignment.Center,
+                                modifier = Modifier
+                                    .size(52.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(accentColor.copy(alpha = 0.15f))
+                                    .border(1.dp, accentColor.copy(alpha = 0.3f), RoundedCornerShape(12.dp))
                             ) {
+                                Text(pack?.icon?.ifEmpty { "📦" } ?: "📦", fontSize = 26.sp)
+                            }
+
+                            Spacer(Modifier.width(14.dp))
+
+                            Column(modifier = Modifier.weight(1f)) {
                                 Text(
-                                    "📝 ${words.size} ta so'z",
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = accentColor,
-                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                                    pack?.name.orEmpty().ifEmpty { "To'plam" },
+                                    fontWeight = FontWeight.ExtraBold,
+                                    style = MaterialTheme.typography.titleLarge
                                 )
+                                if (!pack?.description.isNullOrBlank()) {
+                                    Text(
+                                        pack?.description.orEmpty(),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Spacer(Modifier.height(4.dp))
+                                Surface(
+                                    shape = RoundedCornerShape(6.dp),
+                                    color = accentColor.copy(alpha = 0.15f)
+                                ) {
+                                    Text(
+                                        "📝 ${words.size} ta so'z",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = accentColor,
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                                    )
+                                }
                             }
                         }
                     }
+                }
+            }
 
-                    Spacer(Modifier.height(14.dp))
-
-                    // Action buttons — Irregular Verbs gets its own dedicated
-                    // study/practice flow (PackDetail.jsx's pack.name === 'Irregular Verbs'
-                    // special-casing); every other pack gets Cards Mode / Mashq qilish.
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(10.dp),
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
+            // STICKY HEADER: Action buttons (Mashq qilish) - stays pinned at top when scrolling!
+            stickyHeader {
+                Surface(
+                    color = MaterialTheme.colorScheme.background,
+                    shadowElevation = 4.dp,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
                         if (isReadOnly) {
-                            OutlinedButton(
-                                onClick = { navController.navigate("irregular_verbs/$packId/study") },
-                                modifier = Modifier.weight(1f),
-                                shape = RoundedCornerShape(10.dp)
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                modifier = Modifier.fillMaxWidth()
                             ) {
-                                Text("🃏 Flashkart", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                            }
+                                OutlinedButton(
+                                    onClick = { navController.navigate("irregular_verbs/$packId/study") },
+                                    modifier = Modifier.weight(1f),
+                                    shape = RoundedCornerShape(10.dp)
+                                ) {
+                                    Text("🃏 Flashkart", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                }
 
-                            Button(
-                                onClick = { navController.navigate("irregular_verbs/$packId/practice") },
-                                modifier = Modifier.weight(1f),
-                                colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
-                                shape = RoundedCornerShape(10.dp)
-                            ) {
-                                Text("⚡ Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Button(
+                                    onClick = { navController.navigate("irregular_verbs/$packId/practice") },
+                                    modifier = Modifier.weight(1f),
+                                    colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
+                                    shape = RoundedCornerShape(10.dp)
+                                ) {
+                                    Text("⚡ Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                }
                             }
                         } else {
-                            OutlinedButton(
-                                onClick = { navController.navigate("practice_pack/$packId") },
-                                modifier = Modifier.weight(1f),
-                                shape = RoundedCornerShape(10.dp)
-                            ) {
-                                Text("🃏 Cards Mode", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                            }
-
                             Button(
                                 onClick = { navController.navigate("practice_pack/$packId") },
-                                modifier = Modifier.weight(1f),
+                                modifier = Modifier.fillMaxWidth(),
                                 colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
                                 shape = RoundedCornerShape(10.dp)
                             ) {
-                                Text("🎮 Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Text("🎮 Mashq qilish", fontSize = 14.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
                 }
             }
 
-            Spacer(Modifier.height(12.dp))
-
-            // Search + sort controls (WordList.jsx parity) — hidden until there's
-            // more than one word, same threshold-free behavior as web (always shown
-            // once the list isn't empty).
+            // Search + sort controls (WordList.jsx parity)
             if (words.isNotEmpty()) {
-                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-                    OutlinedTextField(
-                        value = searchQuery,
-                        onValueChange = { viewModel.setSearchQuery(it) },
-                        placeholder = { Text("So'z yoki tarjima bo'yicha qidirish...") },
-                        leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(Modifier.height(8.dp))
-                    WordSortDropdown(
-                        sortBy = sortBy,
-                        showGroupOption = isIrregularVerbs,
-                        onSelect = { viewModel.setSortBy(it) }
-                    )
-                    Spacer(Modifier.height(10.dp))
+                item {
+                    Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                        OutlinedTextField(
+                            value = searchQuery,
+                            onValueChange = { viewModel.setSearchQuery(it) },
+                            placeholder = { Text("So'z yoki tarjima bo'yicha qidirish...") },
+                            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
+                            singleLine = true,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                        Spacer(Modifier.height(8.dp))
+                        WordSortDropdown(
+                            sortBy = sortBy,
+                            showGroupOption = isIrregularVerbs,
+                            onSelect = { viewModel.setSortBy(it) }
+                        )
+                        Spacer(Modifier.height(4.dp))
+                    }
                 }
             }
 
-            // Words List
+            // Empty states or Word Cards List
             if (words.isEmpty()) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(32.dp)
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text("📝", fontSize = 48.sp)
-                        Spacer(Modifier.height(8.dp))
+                item {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(32.dp)
+                    ) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text("📝", fontSize = 48.sp)
+                            Spacer(Modifier.height(8.dp))
+                            Text(
+                                "Bu to'plamda hali so'zlar yo'q",
+                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                            Text(
+                                "Pastdagi + tugmasini bosib yangi so'z qo'shing.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                }
+            } else if (displayedWords.isEmpty()) {
+                item {
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(32.dp)
+                    ) {
                         Text(
-                            "Bu to'plamda hali so'zlar yo'q",
-                            fontWeight = FontWeight.Bold,
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                        Text(
-                            "Pastdagi + tugmasini bosib yangi so'z qo'shing.",
-                            style = MaterialTheme.typography.bodySmall,
+                            "Qidiruv bo'yicha so'z topilmadi.",
+                            style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
-            } else if (displayedWords.isEmpty()) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(32.dp)
-                ) {
-                    Text(
-                        "Qidiruv bo'yicha so'z topilmadi.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
             } else {
                 var lastGroupId: Int? = null
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 100.dp),
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    items(displayedWords, key = { it.id }) { word ->
+                items(displayedWords, key = { it.id }) { word ->
+                    Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 5.dp)) {
                         if (sortBy == WordSort.GROUP && isIrregularVerbs) {
                             val group = IrregularVerbGroups.getGroup(word.word)
                             if (group.id != lastGroupId) {
