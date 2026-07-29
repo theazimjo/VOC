@@ -7,10 +7,12 @@
 const ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E=";
 const DEFAULT_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || (typeof atob === 'function' ? atob(ENCODED_FALLBACK) : "");
 
-// Model candidates in priority order
+// Model candidates in priority order (Fastest & most token-efficient first)
 const MODEL_CANDIDATES = [
   "gemini-2.5-flash",
+  "gemini-2.5-flash-lite",
   "gemini-2.0-flash",
+  "gemini-2.0-flash-lite",
   "gemini-1.5-flash-latest",
   "gemini-1.5-flash",
   "gemini-2.5-pro"
