@@ -1,8 +1,14 @@
 package abs.uits.vocabry.ui.library
 
+import abs.uits.vocabry.data.market.IrregularVerbGroups
 import abs.uits.vocabry.data.model.Word
 import abs.uits.vocabry.ui.library.components.AddWordDialog
+import abs.uits.vocabry.ui.library.components.BulkImportDialog
+import abs.uits.vocabry.ui.library.components.WordFormData
 import android.speech.tts.TextToSpeech
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -25,21 +31,29 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -47,6 +61,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -73,11 +88,34 @@ fun PackDetailScreen(
     viewModel: PackDetailViewModel,
 ) {
     val words by viewModel.words.collectAsState()
+    val displayedWords by viewModel.displayedWords.collectAsState()
     val pack by viewModel.pack.collectAsState()
+    val searchQuery by viewModel.searchQuery.collectAsState()
+    val sortBy by viewModel.sortBy.collectAsState()
+    val isIrregularVerbs by viewModel.isIrregularVerbs.collectAsState()
+    val newWordsAddedCount by viewModel.newWordsAddedCount.collectAsState()
 
     var showWordForm by remember { mutableStateOf(false) }
+    var showBulkImportForm by remember { mutableStateOf(false) }
     var editingWord by remember { mutableStateOf<Word?>(null) }
     var wordToDeleteId by remember { mutableStateOf<String?>(null) }
+    var pendingNewWord by remember { mutableStateOf<WordFormData?>(null) }
+    var speedDialOpen by remember { mutableStateOf(false) }
+
+    // Web defaults the sort control to grouped-by-verb-pattern for the
+    // Irregular Verbs pack specifically (WordList.jsx: groupFn ? 'group' : 'date-desc').
+    LaunchedEffect(isIrregularVerbs) {
+        if (isIrregularVerbs) viewModel.setSortBy(WordSort.GROUP)
+    }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    LaunchedEffect(newWordsAddedCount) {
+        val count = newWordsAddedCount
+        if (count != null) {
+            snackbarHostState.showSnackbar("✨ $count ta yangi so'z qo'shildi!")
+            viewModel.clearNewWordsAddedCount()
+        }
+    }
 
     // TTS Setup
     val context = LocalContext.current
@@ -105,7 +143,13 @@ fun PackDetailScreen(
 
     val isReadOnly = pack?.name == "Irregular Verbs"
 
+    fun submitNewWord(data: WordFormData) {
+        viewModel.addWord(data.word, data.translation, data.definition, data.example, data.partOfSpeech, data.notes, data.customSentence)
+        showWordForm = false
+    }
+
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = {
@@ -120,17 +164,20 @@ fun PackDetailScreen(
         },
         floatingActionButton = {
             if (!isReadOnly) {
-                FloatingActionButton(
-                    onClick = {
+                SpeedDialFab(
+                    open = speedDialOpen,
+                    onToggle = { speedDialOpen = !speedDialOpen },
+                    accentColor = accentColor,
+                    onAddWord = {
                         editingWord = null
                         showWordForm = true
+                        speedDialOpen = false
                     },
-                    containerColor = accentColor,
-                    contentColor = Color.White,
-                    shape = CircleShape
-                ) {
-                    Icon(Icons.Filled.Add, contentDescription = "So'z qo'shish")
-                }
+                    onImportJson = {
+                        showBulkImportForm = true
+                        speedDialOpen = false
+                    }
+                )
             }
         },
     ) { padding ->
@@ -198,32 +245,76 @@ fun PackDetailScreen(
 
                     Spacer(Modifier.height(14.dp))
 
-                    // Action buttons (Cards Mode & Mashq qilish)
+                    // Action buttons — Irregular Verbs gets its own dedicated
+                    // study/practice flow (PackDetail.jsx's pack.name === 'Irregular Verbs'
+                    // special-casing); every other pack gets Cards Mode / Mashq qilish.
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(10.dp),
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        OutlinedButton(
-                            onClick = { navController.navigate("practice_pack/$packId") },
-                            modifier = Modifier.weight(1f),
-                            shape = RoundedCornerShape(10.dp)
-                        ) {
-                            Text("🃏 Cards Mode", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                        }
+                        if (isReadOnly) {
+                            OutlinedButton(
+                                onClick = { navController.navigate("irregular_verbs/$packId/study") },
+                                modifier = Modifier.weight(1f),
+                                shape = RoundedCornerShape(10.dp)
+                            ) {
+                                Text("🃏 Flashkart", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
 
-                        Button(
-                            onClick = { navController.navigate("practice_pack/$packId") },
-                            modifier = Modifier.weight(1f),
-                            colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
-                            shape = RoundedCornerShape(10.dp)
-                        ) {
-                            Text("🎮 Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            Button(
+                                onClick = { navController.navigate("irregular_verbs/$packId/practice") },
+                                modifier = Modifier.weight(1f),
+                                colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
+                                shape = RoundedCornerShape(10.dp)
+                            ) {
+                                Text("⚡ Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
+                        } else {
+                            OutlinedButton(
+                                onClick = { navController.navigate("practice_pack/$packId") },
+                                modifier = Modifier.weight(1f),
+                                shape = RoundedCornerShape(10.dp)
+                            ) {
+                                Text("🃏 Cards Mode", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
+
+                            Button(
+                                onClick = { navController.navigate("practice_pack/$packId") },
+                                modifier = Modifier.weight(1f),
+                                colors = ButtonDefaults.buttonColors(containerColor = accentColor, contentColor = Color.White),
+                                shape = RoundedCornerShape(10.dp)
+                            ) {
+                                Text("🎮 Mashq qilish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                            }
                         }
                     }
                 }
             }
 
             Spacer(Modifier.height(12.dp))
+
+            // Search + sort controls (WordList.jsx parity) — hidden until there's
+            // more than one word, same threshold-free behavior as web (always shown
+            // once the list isn't empty).
+            if (words.isNotEmpty()) {
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    OutlinedTextField(
+                        value = searchQuery,
+                        onValueChange = { viewModel.setSearchQuery(it) },
+                        placeholder = { Text("So'z yoki tarjima bo'yicha qidirish...") },
+                        leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    WordSortDropdown(
+                        sortBy = sortBy,
+                        showGroupOption = isIrregularVerbs,
+                        onSelect = { viewModel.setSortBy(it) }
+                    )
+                    Spacer(Modifier.height(10.dp))
+                }
+            }
 
             // Words List
             if (words.isEmpty()) {
@@ -248,26 +339,51 @@ fun PackDetailScreen(
                         )
                     }
                 }
+            } else if (displayedWords.isEmpty()) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(32.dp)
+                ) {
+                    Text(
+                        "Qidiruv bo'yicha so'z topilmadi.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
             } else {
+                var lastGroupId: Int? = null
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 80.dp),
+                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 100.dp),
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    items(words, key = { it.id }) { word ->
+                    items(displayedWords, key = { it.id }) { word ->
+                        if (sortBy == WordSort.GROUP && isIrregularVerbs) {
+                            val group = IrregularVerbGroups.getGroup(word.word)
+                            if (group.id != lastGroupId) {
+                                lastGroupId = group.id
+                                Column {
+                                    WordGroupHeader(title = group.title, pattern = group.pattern)
+                                    Spacer(Modifier.height(6.dp))
+                                    WordCardItem(
+                                        word = word,
+                                        readOnly = isReadOnly,
+                                        onSpeak = { text -> tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null) },
+                                        onEdit = { editingWord = word; showWordForm = true },
+                                        onDelete = { wordToDeleteId = word.id }
+                                    )
+                                }
+                                return@items
+                            }
+                        }
                         WordCardItem(
                             word = word,
                             readOnly = isReadOnly,
-                            onSpeak = { text ->
-                                tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
-                            },
-                            onEdit = {
-                                editingWord = word
-                                showWordForm = true
-                            },
-                            onDelete = {
-                                wordToDeleteId = word.id
-                            }
+                            onSpeak = { text -> tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null) },
+                            onEdit = { editingWord = word; showWordForm = true },
+                            onDelete = { wordToDeleteId = word.id }
                         )
                     }
                 }
@@ -283,15 +399,43 @@ fun PackDetailScreen(
                 showWordForm = false
                 editingWord = null
             },
-            onConfirm = { w, tr, def, ex, pos ->
+            onConfirm = { data ->
                 if (editingWord != null) {
-                    viewModel.updateWord(editingWord!!.id, w, tr, def, ex, pos)
+                    viewModel.updateWord(editingWord!!.id, data.word, data.translation, data.definition, data.example, data.partOfSpeech, data.notes, data.customSentence)
+                    showWordForm = false
+                    editingWord = null
+                } else if (viewModel.isDuplicateWord(data.word)) {
+                    pendingNewWord = data
                 } else {
-                    viewModel.addWord(w, tr, def, ex, pos)
+                    submitNewWord(data)
                 }
-                showWordForm = false
-                editingWord = null
             }
+        )
+    }
+
+    if (pendingNewWord != null) {
+        AlertDialog(
+            onDismissRequest = { pendingNewWord = null },
+            title = { Text("So'z allaqachon mavjud") },
+            text = { Text("\"${pendingNewWord?.word}\" so'zi ushbu to'plamda allaqachon mavjud. Baribir qo'shishni xohlaysizmi?") },
+            confirmButton = {
+                TextButton(onClick = {
+                    val data = pendingNewWord!!
+                    pendingNewWord = null
+                    submitNewWord(data)
+                }) { Text("Qo'shish") }
+            },
+            dismissButton = {
+                TextButton(onClick = { pendingNewWord = null }) { Text("Bekor qilish") }
+            }
+        )
+    }
+
+    if (showBulkImportForm) {
+        BulkImportDialog(
+            existingWords = words,
+            onDismiss = { showBulkImportForm = false },
+            onImport = { newWords, onProgress -> viewModel.bulkAddWords(newWords, onProgress) }
         )
     }
 
@@ -319,6 +463,101 @@ fun PackDetailScreen(
     }
 }
 
+/** Two-action speed-dial FAB, mirrors SpeedDialFAB.jsx (JSON Import + So'z qo'shish). */
+@Composable
+private fun SpeedDialFab(
+    open: Boolean,
+    onToggle: () -> Unit,
+    accentColor: Color,
+    onAddWord: () -> Unit,
+    onImportJson: () -> Unit,
+) {
+    Column(horizontalAlignment = Alignment.End) {
+        AnimatedVisibility(visible = open, enter = fadeIn(), exit = fadeOut()) {
+            Column(horizontalAlignment = Alignment.End) {
+                ExtendedFloatingActionButton(
+                    onClick = onImportJson,
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    icon = { Text("📥") },
+                    text = { Text("JSON Import") }
+                )
+                Spacer(Modifier.height(10.dp))
+                ExtendedFloatingActionButton(
+                    onClick = onAddWord,
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    icon = { Text("📝") },
+                    text = { Text("So'z qo'shish") }
+                )
+                Spacer(Modifier.height(10.dp))
+            }
+        }
+
+        FloatingActionButton(
+            onClick = onToggle,
+            containerColor = accentColor,
+            contentColor = Color.White,
+            shape = CircleShape
+        ) {
+            Icon(
+                if (open) Icons.Filled.Close else Icons.Filled.Add,
+                contentDescription = if (open) "Yopish" else "Amallar"
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun WordSortDropdown(
+    sortBy: WordSort,
+    showGroupOption: Boolean,
+    onSelect: (WordSort) -> Unit,
+) {
+    var expanded by remember { mutableStateOf(false) }
+    val options = buildList {
+        if (showGroupOption) add(WordSort.GROUP to "Guruh bo'yicha")
+        add(WordSort.DATE_DESC to "Eng yangilari oldin")
+        add(WordSort.DATE_ASC to "Eng eskilar oldin")
+        add(WordSort.ALPHA_ASC to "Alifbo bo'yicha (A-Z)")
+        add(WordSort.MASTERY_DESC to "O'zlashtirish (Yuqori-past)")
+        add(WordSort.MASTERY_ASC to "O'zlashtirish (Past-yuqori)")
+    }
+    val currentLabel = options.find { it.first == sortBy }?.second ?: options.first().second
+
+    Box {
+        OutlinedButton(onClick = { expanded = true }, modifier = Modifier.fillMaxWidth()) {
+            Text(currentLabel, fontSize = 12.sp)
+        }
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            options.forEach { (value, label) ->
+                DropdownMenuItem(
+                    text = { Text(label) },
+                    onClick = {
+                        onSelect(value)
+                        expanded = false
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun WordGroupHeader(title: String, pattern: String) {
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 6.dp, bottom = 2.dp)
+    ) {
+        Text(title, fontWeight = FontWeight.ExtraBold, fontSize = 13.sp, color = MaterialTheme.colorScheme.primary)
+        Text(pattern, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
+    }
+}
+
 @Composable
 fun WordCardItem(
     word: Word,
@@ -331,7 +570,12 @@ fun WordCardItem(
         "verb" -> "Fe'l"
         "adjective" -> "Sifat"
         "adverb" -> "Ravish"
+        "preposition" -> "Preposition"
+        "conjunction" -> "Conjunction"
+        "pronoun" -> "Olmosh"
+        "interjection" -> "Interjection"
         "phrase" -> "Ibora"
+        "idiom" -> "Idiom"
         else -> "Ot"
     }
 
@@ -412,8 +656,8 @@ fun WordCardItem(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                // Optional definition or example
-                if (word.definition.isNotBlank() || word.example.isNotBlank()) {
+                // Optional definition, example, custom sentence, notes
+                if (word.definition.isNotBlank() || word.example.isNotBlank() || word.customSentence.isNotBlank() || word.notes.isNotBlank()) {
                     Spacer(Modifier.height(6.dp))
                     Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
                         if (word.definition.isNotBlank()) {
@@ -439,6 +683,21 @@ fun WordCardItem(
                                     color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
                                 )
                             }
+                        }
+                        if (word.customSentence.isNotBlank()) {
+                            Text(
+                                "Mening gapim: ${word.customSentence}",
+                                fontSize = 11.sp,
+                                fontStyle = FontStyle.Italic,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
+                            )
+                        }
+                        if (word.notes.isNotBlank()) {
+                            Text(
+                                "Izoh: ${word.notes}",
+                                fontSize = 11.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
+                            )
                         }
                     }
                 }

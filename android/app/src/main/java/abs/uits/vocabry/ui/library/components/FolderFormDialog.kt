@@ -46,6 +46,7 @@ fun FolderFormDialog(
 ) {
     var name by remember { mutableStateOf(folder?.name.orEmpty()) }
     var selectedIcon by remember { mutableStateOf(folder?.icon.orEmpty().ifEmpty { "📁" }) }
+    var showDeleteConfirm by remember { mutableStateOf(false) }
     val isEditing = folder != null
 
     AlertDialog(
@@ -108,7 +109,7 @@ fun FolderFormDialog(
         dismissButton = {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (isEditing && onDelete != null) {
-                    TextButton(onClick = onDelete) {
+                    TextButton(onClick = { showDeleteConfirm = true }) {
                         Text("O'chirish", color = MaterialTheme.colorScheme.error)
                     }
                 }
@@ -118,4 +119,25 @@ fun FolderFormDialog(
             }
         }
     )
+
+    if (showDeleteConfirm && onDelete != null) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirm = false },
+            title = { Text("Papkani o'chirish") },
+            text = { Text("Papkani o'chirmoqchimisiz? Ichidagi to'plamlar o'chirilmaydi, ular asosiy ro'yxatga qaytadi.") },
+            confirmButton = {
+                TextButton(onClick = {
+                    showDeleteConfirm = false
+                    onDelete()
+                }) {
+                    Text("O'chirish", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirm = false }) {
+                    Text("Bekor qilish")
+                }
+            }
+        )
+    }
 }

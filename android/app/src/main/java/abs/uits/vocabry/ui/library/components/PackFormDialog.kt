@@ -33,6 +33,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+/** Mirrors src/utils/helpers.js's packIcons. */
+val PACK_ICONS = listOf(
+    "📦", "🎯", "💼", "🌍", "🎓", "💡", "🔬", "🎨", "🏋️", "✈️", "🍔", "🎮", "📰", "🎬", "🎵", "⚽",
+)
+
+/**
+ * Solid-color analog of src/utils/helpers.js's bookColors (which are CSS
+ * gradients — not renderable as a single [Color] on Android without a
+ * Brush). Same palette spirit (one accent hue per pack), different format.
+ */
+val PACK_COLORS = listOf(
+    "#8B5CF6", "#3B82F6", "#14B8A6", "#F43F5E", "#F59E0B", "#22C55E", "#A855F7", "#EC4899",
+)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PackFormDialog(
@@ -53,9 +67,17 @@ fun PackFormDialog(
     var name by remember { mutableStateOf(pack?.name.orEmpty()) }
     var selectedFolderId by remember { mutableStateOf(pack?.folderId ?: defaultFolderId) }
     var folderMenuExpanded by remember { mutableStateOf(false) }
+    var showDeleteConfirm by remember { mutableStateOf(false) }
+
+    // New packs get a random icon/color, same as web's PackForm.jsx useEffect
+    // (packIcons[Math.floor(Math.random() * packIcons.length)] / bookColors[...]).
+    val icon = remember(pack) { pack?.icon.orEmpty().ifEmpty { PACK_ICONS.random() } }
+    val color = remember(pack) { pack?.color.orEmpty().ifEmpty { PACK_COLORS.random() } }
 
     val isEditing = pack != null
-    val isLocked = isEditing && pack?.marketPackId != null
+    // Web only locks name/icon editing for the Irregular Verbs pack specifically
+    // (PackForm.jsx: editPack.name === 'Irregular Verbs'), not every market pack.
+    val isLocked = isEditing && pack?.name == "Irregular Verbs"
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -144,8 +166,8 @@ fun PackFormDialog(
                     onSave(
                         name.trim(),
                         pack?.description.orEmpty(),
-                        pack?.color.orEmpty(),
-                        pack?.icon.orEmpty(),
+                        color,
+                        icon,
                         pack?.level.orEmpty().ifEmpty { "beginner" },
                         selectedFolderId
                     )
@@ -158,7 +180,7 @@ fun PackFormDialog(
         dismissButton = {
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 if (isEditing && onDelete != null) {
-                    TextButton(onClick = onDelete) {
+                    TextButton(onClick = { showDeleteConfirm = true }) {
                         Text("🗑 O'chirish", color = MaterialTheme.colorScheme.error)
                     }
                 }
@@ -168,4 +190,25 @@ fun PackFormDialog(
             }
         }
     )
+
+    if (showDeleteConfirm && onDelete != null) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirm = false },
+            title = { Text("To'plamni o'chirish") },
+            text = { Text("Rostdan ham bu to'plamni va undagi barcha so'zlarni o'chirmoqchimisiz?") },
+            confirmButton = {
+                TextButton(onClick = {
+                    showDeleteConfirm = false
+                    onDelete()
+                }) {
+                    Text("O'chirish", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirm = false }) {
+                    Text("Bekor qilish")
+                }
+            }
+        )
+    }
 }

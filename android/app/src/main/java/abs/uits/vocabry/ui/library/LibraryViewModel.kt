@@ -56,6 +56,13 @@ class LibraryViewModel(
     private val _justInstalledIds = MutableStateFlow<Set<String>>(emptySet())
     val justInstalledIds: StateFlow<Set<String>> = _justInstalledIds.asStateFlow()
 
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error.asStateFlow()
+
+    fun clearError() {
+        _error.value = null
+    }
+
     fun setActiveTab(tab: LibraryTab) {
         _activeTab.value = tab
     }
@@ -79,15 +86,23 @@ class LibraryViewModel(
     ) {
         if (name.isBlank()) return
         viewModelScope.launch {
-            packRepo.addPack(
-                uid = uid,
-                name = name.trim(),
-                description = description.trim(),
-                color = color,
-                icon = icon,
-                level = level,
-                folderId = folderId ?: _openFolderId.value
-            )
+            try {
+                packRepo.addPack(
+                    uid = uid,
+                    name = name.trim(),
+                    description = description.trim(),
+                    color = color,
+                    icon = icon,
+                    level = level,
+                    folderId = folderId ?: _openFolderId.value
+                )
+            } catch (e: Exception) {
+                // Firebase only ever reports a generic permission-denied here, whether
+                // it's the abuse-throttle (too many packs too fast) or another rule —
+                // either way this is the honest, safe message to show (see LibraryPage.jsx).
+                _error.value = "To'plamni saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring."
+                return@launch
+            }
             onDone()
         }
     }
@@ -104,16 +119,21 @@ class LibraryViewModel(
     ) {
         if (packId.isBlank() || name.isBlank()) return
         viewModelScope.launch {
-            packRepo.updatePack(
-                uid = uid,
-                packId = packId,
-                name = name.trim(),
-                description = description.trim(),
-                color = color,
-                icon = icon,
-                level = level,
-                folderId = folderId
-            )
+            try {
+                packRepo.updatePack(
+                    uid = uid,
+                    packId = packId,
+                    name = name.trim(),
+                    description = description.trim(),
+                    color = color,
+                    icon = icon,
+                    level = level,
+                    folderId = folderId
+                )
+            } catch (e: Exception) {
+                _error.value = "To'plamni saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring."
+                return@launch
+            }
             onDone()
         }
     }
@@ -129,7 +149,12 @@ class LibraryViewModel(
     fun addFolder(name: String, icon: String, onDone: () -> Unit = {}) {
         if (name.isBlank()) return
         viewModelScope.launch {
-            folderRepo.addFolder(uid, name.trim(), icon)
+            try {
+                folderRepo.addFolder(uid, name.trim(), icon)
+            } catch (e: Exception) {
+                _error.value = "Papkani saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring."
+                return@launch
+            }
             onDone()
         }
     }
@@ -137,7 +162,12 @@ class LibraryViewModel(
     fun updateFolder(folderId: String, name: String, icon: String, onDone: () -> Unit = {}) {
         if (folderId.isBlank() || name.isBlank()) return
         viewModelScope.launch {
-            folderRepo.updateFolder(uid, folderId, name.trim(), icon)
+            try {
+                folderRepo.updateFolder(uid, folderId, name.trim(), icon)
+            } catch (e: Exception) {
+                _error.value = "Papkani saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring."
+                return@launch
+            }
             onDone()
         }
     }

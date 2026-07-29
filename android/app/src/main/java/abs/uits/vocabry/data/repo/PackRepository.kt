@@ -6,7 +6,9 @@ import abs.uits.vocabry.data.model.Pack
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.MutableData
 import com.google.firebase.database.ServerValue
+import com.google.firebase.database.Transaction
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -74,6 +76,22 @@ class PackRepository(
         )
 
         db.reference.updateChildren(updates).await()
+
+        // Best-effort lifetime counter for the admin panel — a monitoring
+        // signal only, not an enforced cap (mirrors PacksContext.jsx's addPack).
+        runCatching {
+            db.reference.child("users").child(uid).child("meta").child("packsCreatedTotal")
+                .runTransaction(object : Transaction.Handler {
+                    override fun doTransaction(currentData: MutableData): Transaction.Result {
+                        val current = currentData.getValue(Long::class.java) ?: 0L
+                        currentData.value = current + 1
+                        return Transaction.success(currentData)
+                    }
+
+                    override fun onComplete(error: DatabaseError?, committed: Boolean, snapshot: DataSnapshot?) {}
+                })
+        }
+
         return packKey
     }
 

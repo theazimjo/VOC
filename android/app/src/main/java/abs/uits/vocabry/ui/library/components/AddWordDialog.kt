@@ -3,7 +3,6 @@ package abs.uits.vocabry.ui.library.components
 import abs.uits.vocabry.data.model.Word
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,30 +26,42 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
+/** Mirrors src/utils/helpers.js's partOfSpeechOptions. */
 private val POS_OPTIONS = listOf(
     "noun" to "Ot (Noun)",
     "verb" to "Fe'l (Verb)",
-    "adjective" to "Sifat (Adj)",
-    "adverb" to "Ravish (Adv)",
+    "adjective" to "Sifat (Adjective)",
+    "adverb" to "Ravish (Adverb)",
+    "preposition" to "Preposition",
+    "conjunction" to "Conjunction",
+    "pronoun" to "Olmosh (Pronoun)",
+    "interjection" to "Interjection",
     "phrase" to "Ibora (Phrase)",
+    "idiom" to "Idiom",
+)
+
+data class WordFormData(
+    val word: String,
+    val translation: String,
+    val definition: String,
+    val example: String,
+    val customSentence: String,
+    val notes: String,
+    val partOfSpeech: String,
 )
 
 @Composable
 fun AddWordDialog(
     editingWord: Word? = null,
     onDismiss: () -> Unit,
-    onConfirm: (
-        word: String,
-        translation: String,
-        definition: String,
-        example: String,
-        partOfSpeech: String
-    ) -> Unit,
+    onConfirm: (WordFormData) -> Unit,
 ) {
     var word by remember { mutableStateOf(editingWord?.word.orEmpty()) }
     var translation by remember { mutableStateOf(editingWord?.translation.orEmpty()) }
     var definition by remember { mutableStateOf(editingWord?.definition.orEmpty()) }
     var example by remember { mutableStateOf(editingWord?.example.orEmpty()) }
+    var customSentence by remember { mutableStateOf(editingWord?.customSentence.orEmpty()) }
+    var notes by remember { mutableStateOf(editingWord?.notes.orEmpty()) }
     var selectedPos by remember { mutableStateOf(editingWord?.partOfSpeech?.ifEmpty { "noun" } ?: "noun") }
 
     val isEditing = editingWord != null
@@ -65,7 +76,8 @@ fun AddWordDialog(
                 OutlinedTextField(
                     value = word,
                     onValueChange = { word = it },
-                    label = { Text("So'z (inglizcha) *") },
+                    label = { Text("Inglizcha so'z *") },
+                    placeholder = { Text("Masalan: Serendipity") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -73,7 +85,8 @@ fun AddWordDialog(
                 OutlinedTextField(
                     value = translation,
                     onValueChange = { translation = it },
-                    label = { Text("Tarjimasi *") },
+                    label = { Text("O'zbekcha tarjima *") },
+                    placeholder = { Text("Tasodifiy baxt") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
@@ -95,21 +108,52 @@ fun AddWordDialog(
                 OutlinedTextField(
                     value = definition,
                     onValueChange = { definition = it },
-                    label = { Text("Ta'rif (ixtiyoriy)") },
+                    label = { Text("Ta'rifi (ixtiyoriy)") },
+                    placeholder = { Text("Ingliz tilidagi ta'rifi") },
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(
                     value = example,
                     onValueChange = { example = it },
-                    label = { Text("Misol jumla (ixtiyoriy)") },
+                    label = { Text("Misol gap (ixtiyoriy)") },
+                    placeholder = { Text("Ushbu so'z qatnashgan gap") },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = customSentence,
+                    onValueChange = { customSentence = it },
+                    label = { Text("O'zingiz tuzgan gap (Faol so'zlik uchun)") },
+                    placeholder = { Text("So'zni faollashtirish uchun mustaqil gap tuzib kiriting") },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = notes,
+                    onValueChange = { notes = it },
+                    label = { Text("Qo'shimcha izoh (ixtiyoriy)") },
+                    placeholder = { Text("Sinonim, antonim va h.k.") },
+                    singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
         },
         confirmButton = {
             TextButton(
-                onClick = { onConfirm(word, translation, definition, example, selectedPos) },
+                onClick = {
+                    onConfirm(
+                        WordFormData(
+                            word = word,
+                            translation = translation,
+                            definition = definition,
+                            example = example,
+                            customSentence = customSentence,
+                            notes = notes,
+                            partOfSpeech = selectedPos,
+                        )
+                    )
+                },
                 enabled = word.isNotBlank() && translation.isNotBlank(),
             ) {
                 Text(if (isEditing) "Saqlash" else "Qo'shish")

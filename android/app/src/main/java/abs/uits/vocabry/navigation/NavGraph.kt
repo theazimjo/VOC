@@ -23,8 +23,11 @@ import abs.uits.vocabry.ui.library.LibraryViewModel
 import abs.uits.vocabry.ui.library.PackDetailScreen
 import abs.uits.vocabry.ui.library.PackDetailViewModel
 import abs.uits.vocabry.ui.practice.FlashcardScreen
+import abs.uits.vocabry.ui.practice.IrregularVerbsScreen
+import abs.uits.vocabry.ui.practice.IrregularVerbsViewModel
 import abs.uits.vocabry.ui.practice.PracticeSource
 import abs.uits.vocabry.ui.practice.PracticeViewModel
+import abs.uits.vocabry.ui.practice.TrainerSubStep
 
 @Composable
 fun VocabryNavGraph() {
@@ -87,6 +90,21 @@ fun VocabryNavGraph() {
                 factory = viewModelFactory { initializer { PracticeViewModel(PracticeSource.Pack(packId)) } },
             )
             FlashcardScreen(navController, vm)
+        }
+        composable(
+            "irregular_verbs/{packId}/{subStep}",
+            arguments = listOf(
+                navArgument("packId") { type = NavType.StringType },
+                navArgument("subStep") { type = NavType.StringType },
+            ),
+        ) { backStackEntry ->
+            val packId = backStackEntry.arguments?.getString("packId") ?: return@composable
+            val subStepArg = backStackEntry.arguments?.getString("subStep") ?: "study"
+            val subStep = if (subStepArg == "practice") TrainerSubStep.PRACTICE else TrainerSubStep.STUDY
+            val vm: IrregularVerbsViewModel = viewModel(
+                factory = viewModelFactory { initializer { IrregularVerbsViewModel(packId, subStep) } },
+            )
+            IrregularVerbsScreen(navController, vm)
         }
     }
 }

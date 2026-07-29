@@ -1,5 +1,6 @@
 package abs.uits.vocabry.data.repo
 
+import abs.uits.vocabry.data.model.MarketWord
 import abs.uits.vocabry.data.model.RecallEvent
 import abs.uits.vocabry.data.model.Word
 import abs.uits.vocabry.engine.MemoryEngine
@@ -78,6 +79,8 @@ class WordRepository(
         definition: String = "",
         example: String = "",
         partOfSpeech: String = "noun",
+        notes: String = "",
+        customSentence: String = "",
     ) {
         val ref = db.reference.child("users").child(uid).child("words").child(packId).push()
         val newWord = Word(
@@ -86,6 +89,8 @@ class WordRepository(
             definition = definition,
             example = example,
             partOfSpeech = partOfSpeech,
+            notes = notes,
+            customSentence = customSentence,
             addedAt = Instant.now().toString(),
         )
         ref.setValue(newWord.toMap()).await()
@@ -112,6 +117,8 @@ class WordRepository(
         definition: String = "",
         example: String = "",
         partOfSpeech: String = "noun",
+        notes: String = "",
+        customSentence: String = "",
     ) {
         val updates = mapOf(
             "word" to word,
@@ -119,9 +126,62 @@ class WordRepository(
             "definition" to definition,
             "example" to example,
             "partOfSpeech" to partOfSpeech,
+            "notes" to notes,
+            "customSentence" to customSentence,
         )
         db.reference.child("users").child(uid).child("words").child(packId).child(wordId)
             .updateChildren(updates).await()
+    }
+
+    /**
+     * Batch word import, mirrors src/hooks/useWords.js's bulkAddWords: writes
+     * in chunks of 25 (one RTDB multi-path update per chunk, reporting
+     * progress after each) and bumps the pack's wordCount exactly once at the end.
+     */
+    suspend fun bulkAddWords(
+        uid: String,
+        packId: String,
+        words: List<MarketWord>,
+        onProgress: ((added: Int, total: Int) -> Unit)? = null,
+    ) {
+        if (words.isEmpty()) return
+        val wordsRef = db.reference.child("users").child(uid).child("words").child(packId)
+        val total = words.size
+        val batchSize = 25
+        var addedCount = 0
+        var index = 0
+        while (index < total) {
+            val chunk = words.subList(index, minOf(index + batchSize, total))
+            val updates = mutableMapOf<String, Any?>()
+            chunk.forEach { w ->
+                val newRef = wordsRef.push()
+                val key = newRef.key ?: return@forEach
+                updates[key] = Word(
+                    word = w.word,
+                    translation = w.translation,
+                    definition = w.definition,
+                    example = w.example,
+                    partOfSpeech = w.partOfSpeech.ifBlank { "noun" },
+                    notes = w.notes,
+                    addedAt = Instant.now().toString(),
+                ).toMap()
+            }
+            wordsRef.updateChildren(updates).await()
+            addedCount += chunk.size
+            onProgress?.invoke(addedCount, total)
+            index += batchSize
+        }
+
+        val countRef = db.reference.child("users").child(uid).child("packs").child(packId).child("wordCount")
+        countRef.runTransaction(object : Transaction.Handler {
+            override fun doTransaction(currentData: MutableData): Transaction.Result {
+                val current = currentData.getValue(Long::class.java) ?: 0L
+                currentData.value = current + total
+                return Transaction.success(currentData)
+            }
+
+            override fun onComplete(error: DatabaseError?, committed: Boolean, snapshot: DataSnapshot?) {}
+        })
     }
 
     suspend fun deleteWord(uid: String, packId: String, wordId: String) {
@@ -219,5 +279,37 @@ class WordRepository(
 
         db.reference.child("users").child(uid).child("words").child(word.packId).child(word.id)
             .updateChildren(updates).await()
+    }
+
+    /**
+     * Record (or increment) a confusion pair — evidence that the user typed an
+     * answer close to a *different* word's correct answer. Mirrors
+     * src/experiment/experimentDB.js's recordConfusionPair, feeding the same
+     * Confusion Network Memory Lab reads regardless of which practice mode
+     * detected the mix-up.
+     */
+    suspend fun recordConfusionPair(uid: String, wordIdA: String, wordIdB: String, meta: Map<String, Any?> = emptyMap()) {
+        if (uid.isBlank() || wordIdA.isBlank() || wordIdB.isBlank() || wordIdA == wordIdB) return
+        val key = listOf(wordIdA, wordIdB).sorted().joinToString("__")
+        val pairRef = db.reference.child("users").child(uid).child("experiment").child("confusionPairs").child(key)
+        pairRef.runTransaction(object : Transaction.Handler {
+            override fun doTransaction(currentData: MutableData): Transaction.Result {
+                @Suppress("UNCHECKED_CAST")
+                val current = currentData.value as? Map<String, Any?>
+                val count = (current?.get("count") as? Long) ?: 0L
+                val merged = mutableMapOf<String, Any?>(
+                    "wordIdA" to wordIdA,
+                    "wordIdB" to wordIdB,
+                )
+                current?.let { merged.putAll(it) }
+                merged.putAll(meta)
+                merged["count"] = count + 1
+                merged["lastSeen"] = Instant.now().toString()
+                currentData.value = merged
+                return Transaction.success(currentData)
+            }
+
+            override fun onComplete(error: DatabaseError?, committed: Boolean, snapshot: DataSnapshot?) {}
+        })
     }
 }
