@@ -4,7 +4,7 @@
  * Memory Lab reviews are written straight onto the same word record every
  * other part of the app reads — `users/{uid}/words/{packId}/{wordId}` — via
  * applyReview() from spacedRepetition.js (the same engine PracticePage,
- * CardsMode and MixedPractice use). This used to write to an isolated
+ * MixedPractice uses). This used to write to an isolated
  * `users/{uid}/experiment/words/{wordId}` tree instead, so Memory Lab
  * sessions never showed up in Dashboard/Packs/Stats and vice versa.
  *

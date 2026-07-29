@@ -238,14 +238,9 @@ export default function PackDetail() {
               </button>
             </>
           ) : (
-            <>
-              <button className="btn btn-cards" onClick={() => navigate(`/cards/packs/${packId}`)}>
-                🃏 Cards Mode
-              </button>
-              <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
-                🎮 Mashq qilish
-              </button>
-            </>
+            <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
+              🎮 Mashq qilish
+            </button>
           )}
         </div>
       </div>

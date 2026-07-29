@@ -2,9 +2,8 @@ package abs.uits.vocabry.ui.dashboard
 
 import abs.uits.vocabry.ui.components.BottomNavBar
 import abs.uits.vocabry.ui.components.StatCard
-import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,7 +32,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
@@ -65,77 +63,63 @@ fun DashboardScreen(
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            // Hero Streak & Daily Goal Banner
+            // Classic Streak & Goal Header Card
             item {
                 Card(
-                    shape = RoundedCornerShape(20.dp),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(
-                                Brush.horizontalGradient(
-                                    colors = listOf(
-                                        MaterialTheme.colorScheme.primary,
-                                        MaterialTheme.colorScheme.secondary
-                                    )
+                    Column(modifier = Modifier.padding(18.dp)) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Column {
+                                Text(
+                                    "🔥 Ketma-ketlik: ${state.streak.streakCount} kun",
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.ExtraBold
                                 )
-                            )
-                            .padding(18.dp)
-                    ) {
-                        Column {
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Column {
-                                    Text(
-                                        "🔥 Ketma-ketlik: ${state.streak.streakCount} kun",
-                                        color = Color.White,
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.ExtraBold
-                                    )
-                                    Spacer(Modifier.height(4.dp))
-                                    Text(
-                                        "Bugungi maqsad: ${state.streak.todayCount}/${state.streak.dailyGoal} ta so'z",
-                                        color = Color.White.copy(alpha = 0.85f),
-                                        fontSize = 13.sp
-                                    )
-                                }
-                                Surface(
-                                    shape = RoundedCornerShape(12.dp),
-                                    color = Color.White.copy(alpha = 0.2f)
-                                ) {
-                                    Text(
-                                        "⚡ Active",
-                                        color = Color.White,
-                                        fontWeight = FontWeight.Bold,
-                                        fontSize = 12.sp,
-                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
-                                    )
-                                }
+                                Spacer(Modifier.height(4.dp))
+                                Text(
+                                    "Bugungi maqsad: ${state.streak.todayCount}/${state.streak.dailyGoal} ta so'z",
+                                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f),
+                                    fontSize = 13.sp
+                                )
                             }
-
-                            Spacer(Modifier.height(14.dp))
-
-                            val streakProgress = if (state.streak.dailyGoal > 0) {
-                                (state.streak.todayCount.toFloat() / state.streak.dailyGoal).coerceIn(0f, 1f)
-                            } else 0f
-
-                            LinearProgressIndicator(
-                                progress = { streakProgress },
-                                color = Color.White,
-                                trackColor = Color.White.copy(alpha = 0.3f),
-                                strokeCap = StrokeCap.Round,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(6.dp)
-                                    .clip(RoundedCornerShape(3.dp))
-                            )
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.15f)
+                            ) {
+                                Text(
+                                    "⚡ Active",
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 11.sp,
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp)
+                                )
+                            }
                         }
+
+                        Spacer(Modifier.height(14.dp))
+
+                        val streakProgress = if (state.streak.dailyGoal > 0) {
+                            (state.streak.todayCount.toFloat() / state.streak.dailyGoal).coerceIn(0f, 1f)
+                        } else 0f
+
+                        LinearProgressIndicator(
+                            progress = { streakProgress },
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            trackColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.25f),
+                            strokeCap = StrokeCap.Round,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(5.dp)
+                                .clip(RoundedCornerShape(3.dp))
+                        )
                     }
                 }
             }
@@ -143,18 +127,24 @@ fun DashboardScreen(
             // Quick Stats Grid
             item {
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    StatCard(state.totalWords.toString(), "Jami so'z", MaterialTheme.colorScheme.primary, Modifier.weight(1f))
-                    StatCard(state.masteredWords.toString(), "O'zlashtirilgan", Color(0xFF10B981), Modifier.weight(1f))
-                    StatCard(state.dueCount.toString(), "Takrorlash", Color(0xFFF59E0B), Modifier.weight(1f))
+                    StatCard(state.totalWords.toString(), "Jami so'z", modifier = Modifier.weight(1f))
+                    StatCard(state.masteredWords.toString(), "O'zlashtirilgan", modifier = Modifier.weight(1f))
+                    StatCard(state.dueCount.toString(), "Takrorlash", modifier = Modifier.weight(1f))
                 }
             }
 
             // Mastery Percent Progress Card
             item {
                 Card(
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)),
-                    modifier = Modifier.fillMaxWidth()
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
+                            shape = RoundedCornerShape(12.dp)
+                        )
                 ) {
                     Column(Modifier.padding(16.dp)) {
                         Row(
@@ -178,12 +168,12 @@ fun DashboardScreen(
                         LinearProgressIndicator(
                             progress = { state.masteryPercent / 100f },
                             color = MaterialTheme.colorScheme.primary,
-                            trackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                            trackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
                             strokeCap = StrokeCap.Round,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(8.dp)
-                                .clip(RoundedCornerShape(4.dp))
+                                .height(6.dp)
+                                .clip(RoundedCornerShape(3.dp))
                         )
                     }
                 }
@@ -194,11 +184,14 @@ fun DashboardScreen(
                 item {
                     Button(
                         onClick = { navController.navigate("practice_due") },
-                        shape = RoundedCornerShape(14.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(52.dp)
+                            .height(50.dp)
                     ) {
                         Text(
                             "⚡ Takrorlashni boshlash (${state.dueCount} ta so'z)",
@@ -220,15 +213,16 @@ fun DashboardScreen(
                 }
 
                 items(state.dueWords) { info ->
-                    val color = when {
-                        info.recallPct < 50 -> Color(0xFFE11D48)
-                        info.recallPct < 75 -> Color(0xFFF59E0B)
-                        else -> Color(0xFF10B981)
-                    }
                     Card(
                         shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
-                        modifier = Modifier.fillMaxWidth()
+                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+                                shape = RoundedCornerShape(12.dp)
+                            )
                     ) {
                         Row(
                             modifier = Modifier
@@ -247,12 +241,12 @@ fun DashboardScreen(
                                 )
                             }
                             Surface(
-                                shape = RoundedCornerShape(8.dp),
-                                color = color.copy(alpha = 0.15f)
+                                shape = RoundedCornerShape(6.dp),
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
                             ) {
                                 Text(
                                     "${info.recallPct}%",
-                                    color = color,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     fontWeight = FontWeight.ExtraBold,
                                     fontSize = 12.sp,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)

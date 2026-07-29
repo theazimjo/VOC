@@ -20,7 +20,6 @@ const StatsPage = lazyWithRetry(() => import('./pages/StatsPage'));
 const ProfilePage = lazyWithRetry(() => import('./pages/ProfilePage'));
 const LibraryPage = lazyWithRetry(() => import('./pages/LibraryPage'));
 const MixedPractice = lazyWithRetry(() => import('./pages/MixedPractice'));
-const CardsMode = lazyWithRetry(() => import('./pages/CardsMode'));
 const Settings = lazyWithRetry(() => import('./pages/Settings'));
 const GrammarPage = lazyWithRetry(() => import('./pages/GrammarPage'));
 const GrammarTopic = lazyWithRetry(() => import('./pages/GrammarTopic'));
@@ -73,7 +72,6 @@ export default function App() {
                       <Route path="/practice" element={<PracticePage />} />
                       <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />
                       <Route path="/mixed-practice" element={<MixedPractice />} />
-                      <Route path="/cards/:sourceType/:sourceId" element={<CardsMode />} />
                       <Route path="/stats" element={<StatsPage />} />
                       <Route path="/profile" element={<ProfilePage />} />
                       <Route path="/settings" element={<Settings />} />
