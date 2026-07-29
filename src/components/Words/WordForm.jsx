@@ -181,25 +181,35 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
 
                 <div className="input-group">
                   <label>Inglizcha so'z *</label>
-                  <input 
-                    type="text" 
-                    className="input" 
-                    value={formData.word} 
-                    onChange={e => setFormData({...formData, word: e.target.value})} 
+                  <input
+                    type="text"
+                    className="input"
+                    value={formData.word}
+                    onChange={e => setFormData({...formData, word: e.target.value})}
+                    onBlur={() => {
+                      if (!formData.translation.trim() && formData.word.trim() && !isAiLoading) {
+                        handleAiAutofill(formData.word);
+                      }
+                    }}
                     placeholder="Masalan: Serendipity"
                     required
                     autoFocus
                     maxLength={300}
                   />
                 </div>
-                
+
                 <div className="input-group">
                   <label>O'zbekcha tarjima *</label>
-                  <input 
-                    type="text" 
-                    className="input" 
-                    value={formData.translation} 
-                    onChange={e => setFormData({...formData, translation: e.target.value})} 
+                  <input
+                    type="text"
+                    className="input"
+                    value={formData.translation}
+                    onChange={e => setFormData({...formData, translation: e.target.value})}
+                    onBlur={() => {
+                      if (!formData.word.trim() && formData.translation.trim() && !isAiLoading) {
+                        handleAiAutofill(formData.translation);
+                      }
+                    }}
                     placeholder="Tasodifiy baxt"
                     required
                     maxLength={300}

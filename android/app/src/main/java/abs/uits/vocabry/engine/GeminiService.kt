@@ -144,8 +144,15 @@ object GeminiService {
         if (apiKey.isBlank()) throw Exception("Gemini API Kaliti kiritilmagan. Iltimos, Profil bo'limida kalitni kiriting.")
 
         val prompt = """Task: Vocabulary lookup for "${query.trim()}".
-Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
-{"w":"English word or phrase","tr":"Uzbek translation","pos":"noun|verb|adjective|adverb|preposition|conjunction|pronoun|interjection|phrase|idiom","def":"Short Uzbek definition","ex":"Short English example sentence"}""".trimIndent()
+Detect input language (English or Uzbek).
+- If query is English: "w" is the English input word, "tr" is the Uzbek translation.
+- If query is Uzbek: "w" is the correct English translation/word for the query, "tr" is the Uzbek query.
+- "pos": Part of speech (noun|verb|adjective|adverb|preposition|conjunction|pronoun|interjection|phrase|idiom).
+- "def": Short Uzbek definition of "w".
+- "ex": Short English example sentence using "w".
+
+Return concise JSON object ONLY without markdown:
+{"w":"English word or phrase","tr":"Uzbek translation","pos":"part of speech","def":"Short Uzbek definition","ex":"Short English example sentence"}""".trimIndent()
 
         val payload = JSONObject().apply {
             put("contents", JSONArray().apply {
