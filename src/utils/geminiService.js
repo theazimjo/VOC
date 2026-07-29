@@ -124,31 +124,37 @@ export async function extractWordsFromImageAI(imageBase64, mimeType = 'image/jpe
   const apiKey = getGeminiApiKey();
   if (!apiKey) throw new Error("Gemini API kalit kiritilmagan");
 
-  // Clean base64 string if data URL prefix exists
-  const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z]+;base64,/, '');
+  // Dynamically extract real MIME type if data URL exists
+  let detectedMime = mimeType || 'image/jpeg';
+  const mimeMatch = imageBase64.match(/^data:(image\/[a-zA-Z0-9+.-]+);base64,/);
+  if (mimeMatch) {
+    detectedMime = mimeMatch[1];
+  }
 
-  // Extract existing word keys for AI filtering (up to 150 items to optimize tokens)
+  // Clean base64 string if data URL prefix exists
+  const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z0-9+.-]+;base64,/, '');
+
+  // Extract existing word keys for AI filtering (up to 100 items to save tokens)
   const existingKeys = existingWords
-    .slice(0, 150)
+    .slice(0, 100)
     .map(w => (w.word || '').trim().toLowerCase())
     .filter(Boolean)
     .join(', ');
 
-  const prompt = `Task: Read text/vocabulary from photo, correct any OCR typos, and extract ONLY valuable vocabulary.
+  const prompt = `Task: Read all English or Uzbek vocabulary words/phrases from this image.
+Correct any OCR misread letters/typos.
 Rules:
-1. Correct misread OCR characters (e.g. blurred or missing letters) to proper English words.
-2. EXCLUDE trivial/basic stop words (e.g. a, an, the, is, are, am, to, of, in, on, and, or, hello, hi, bye, yes, no).
-3. EXCLUDE words that are already in this user's pack: [${existingKeys || 'none'}]
-4. Return ONLY valuable learning vocabulary.
-5. Format each item as a JSON object:
-   - w: Corrected English word/phrase
+1. EXCLUDE basic stop words (e.g. a, an, the, is, are, am, to, of, in, on, and, or, hello, hi, bye, yes, no).
+2. EXCLUDE words already in this pack: [${existingKeys || 'none'}]
+3. Return a JSON array ONLY with items containing:
+   - w: English word/phrase
    - tr: Uzbek translation
    - pos: part of speech (noun|verb|adjective|adverb|preposition|conjunction|pronoun|interjection|phrase|idiom)
    - def: Short Uzbek definition (So'zning o'zbek tilidagi ta'rifi)
    - ex: Short English example sentence
 
-Return a JSON array ONLY without markdown formatting:
-[{"w":"English word","tr":"O'zbekcha tarjima","pos":"noun","def":"O'zbekcha ta'rif","ex":"Example sentence"}]`;
+Example JSON format:
+[{"w":"apple","tr":"olma","pos":"noun","def":"Qizil yoki yashil yumaloq meva","ex":"I ate an apple."}]`;
 
   const payload = {
     contents: [
@@ -157,7 +163,7 @@ Return a JSON array ONLY without markdown formatting:
           { text: prompt },
           {
             inline_data: {
-              mime_type: mimeType,
+              mime_type: detectedMime,
               data: cleanBase64
             }
           }
@@ -166,7 +172,7 @@ Return a JSON array ONLY without markdown formatting:
     ],
     generationConfig: {
       temperature: 0.2,
-      maxOutputTokens: 1500,
+      maxOutputTokens: 2000,
       responseMimeType: "application/json"
     }
   };
@@ -177,11 +183,21 @@ Return a JSON array ONLY without markdown formatting:
 
   try {
     const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-    const parsedList = JSON.parse(cleanJson);
+    const parsedData = JSON.parse(cleanJson);
 
-    if (!Array.isArray(parsedList)) return [];
+    let itemsList = [];
+    if (Array.isArray(parsedData)) {
+      itemsList = parsedData;
+    } else if (parsedData && typeof parsedData === 'object') {
+      const arrayKey = Object.keys(parsedData).find(key => Array.isArray(parsedData[key]));
+      if (arrayKey) {
+        itemsList = parsedData[arrayKey];
+      }
+    }
 
-    return parsedList.map(item => ({
+    if (!Array.isArray(itemsList)) return [];
+
+    return itemsList.map(item => ({
       word: item.w || item.word || '',
       translation: item.tr || item.translation || '',
       partOfSpeech: (item.pos || item.partOfSpeech || 'noun').toLowerCase(),
