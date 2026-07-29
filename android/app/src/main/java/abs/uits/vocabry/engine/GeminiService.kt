@@ -50,13 +50,13 @@ object GeminiService {
     private const val KEY_API_KEY = "gemini_api_key"
     private const val ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E="
 
+    // High quota stable models first (1,500 requests/day limit on free tier)
     private val MODEL_CANDIDATES = listOf(
-        "gemini-2.5-flash",
-        "gemini-2.5-flash-lite",
         "gemini-2.0-flash",
         "gemini-2.0-flash-lite",
+        "gemini-1.5-flash",
         "gemini-1.5-flash-latest",
-        "gemini-1.5-flash"
+        "gemini-1.5-pro"
     )
 
     fun getApiKey(context: Context): String {
@@ -78,6 +78,7 @@ object GeminiService {
 
     private suspend fun callGeminiWithFallback(payload: JSONObject, apiKey: String): JSONObject = withContext(Dispatchers.IO) {
         var lastErrorMsg = ""
+        var isQuotaExceeded = false
 
         for (model in MODEL_CANDIDATES) {
             val urlString = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey"
@@ -118,6 +119,11 @@ object GeminiService {
                     errSb.append(errLine)
                 }
                 errorReader.close()
+
+                if (responseCode == 429) {
+                    isQuotaExceeded = true
+                }
+
                 lastErrorMsg = "[$model] HTTP $responseCode: ${errSb.toString()}"
                 continue
             } catch (e: Exception) {
@@ -126,6 +132,10 @@ object GeminiService {
             } finally {
                 conn?.disconnect()
             }
+        }
+
+        if (isQuotaExceeded) {
+            throw Exception("AI so'rovlari kvotasi (limiti) vaqtincha tugadi. Iltimos, birozdan so'ng qayta urinib ko'ring yoki Profil bo'limida shaxsiy API kalitingizni kiriting.")
         }
 
         throw Exception("Gemini AI xizmatiga ulanib bo'lmadi. Profil bo'limida API Kalitingizni tekshiring.")

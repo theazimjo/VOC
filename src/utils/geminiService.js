@@ -1,21 +1,19 @@
 /**
  * Lightweight Gemini AI Service for VOC Web App
- * Automatically tries available Flash models (gemini-2.5-flash, gemini-2.0-flash, gemini-1.5-flash-latest)
+ * Automatically tries high-quota Flash models (gemini-2.0-flash, gemini-1.5-flash)
  * for maximum reliability, speed, and minimal token cost.
  */
 
 const ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E=";
 const DEFAULT_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || (typeof atob === 'function' ? atob(ENCODED_FALLBACK) : "");
 
-// Model candidates in priority order (Fastest & most token-efficient first)
+// High quota stable models first (1,500 requests/day limit on free tier)
 const MODEL_CANDIDATES = [
-  "gemini-2.5-flash",
-  "gemini-2.5-flash-lite",
   "gemini-2.0-flash",
   "gemini-2.0-flash-lite",
-  "gemini-1.5-flash-latest",
   "gemini-1.5-flash",
-  "gemini-2.5-pro"
+  "gemini-1.5-flash-latest",
+  "gemini-1.5-pro"
 ];
 
 export function getGeminiApiKey() {
@@ -33,10 +31,11 @@ export function setGeminiApiKey(key) {
 }
 
 /**
- * Executes Gemini API request with automatic model fallback if a model endpoint returns 404.
+ * Executes Gemini API request with automatic model fallback if a model endpoint returns 404 or 429.
  */
 async function callGeminiWithFallback(payload, apiKey) {
   let lastErrorText = "";
+  let isQuotaExceeded = false;
 
   for (const model of MODEL_CANDIDATES) {
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
@@ -55,23 +54,24 @@ async function callGeminiWithFallback(payload, apiKey) {
       const errorText = await response.text().catch(() => '');
       lastErrorText = `[${model}] HTTP ${response.status}: ${errorText || response.statusText}`;
 
-      // If 404 (model not found on API key/version), try next model candidate
-      if (response.status === 404) {
-        console.warn(`Gemini model ${model} not found (404), trying next model candidate...`);
-        continue;
+      if (response.status === 429) {
+        isQuotaExceeded = true;
       }
 
-      // If non-404 error (e.g. 400 Bad Request or 403 Invalid Key), throw directly
-      throw new Error(lastErrorText);
+      // If non-200, try next model candidate in fallback loop
+      console.warn(`Gemini model ${model} issue (HTTP ${response.status}), trying next candidate...`);
+      continue;
     } catch (err) {
-      if (err.message && err.message.includes('404')) {
-        continue;
-      }
-      throw err;
+      lastErrorText = err.message || "";
+      continue;
     }
   }
 
-  throw new Error(`Gemini API so'rovi amalga oshmadi. Oxirgi xato: ${lastErrorText}`);
+  if (isQuotaExceeded) {
+    throw new Error("AI so'rovlari kvotasi (limiti) vaqtincha tugadi. Iltimos, birozdan so'ng qayta urinib ko'ring yoki Profil bo'limida shaxsiy API kalitingizni kiriting.");
+  }
+
+  throw new Error(`Gemini AI xizmatiga ulanib bo'lmadi. Oxirgi xato: ${lastErrorText}`);
 }
 
 /**

@@ -1,9 +1,7 @@
 package abs.uits.vocabry.ui.components
 
-import abs.uits.vocabry.ui.theme.MutedBlueGrayText
-import abs.uits.vocabry.ui.theme.RoyalBluePrimary
-import abs.uits.vocabry.ui.theme.SearchBgBlue
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -11,7 +9,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,6 +26,9 @@ fun BottomNavBar(navController: NavController) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination
 
+    // Colors are intentionally left at M3 defaults so the bar always follows
+    // the app's active color scheme (see ui/theme/Theme.kt) instead of a
+    // hardcoded palette that would go stale if the theme changes.
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 8.dp,
@@ -49,14 +49,7 @@ fun BottomNavBar(navController: NavController) {
                     fontSize = 11.sp,
                     fontWeight = if (currentRoute?.hierarchy?.any { it.route == "library" } == true) FontWeight.Bold else FontWeight.Medium
                 )
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = RoyalBluePrimary,
-                selectedTextColor = RoyalBluePrimary,
-                indicatorColor = SearchBgBlue,
-                unselectedIconColor = MutedBlueGrayText,
-                unselectedTextColor = MutedBlueGrayText
-            )
+            }
         )
 
         // Tab 2: Market
@@ -74,14 +67,7 @@ fun BottomNavBar(navController: NavController) {
                     fontSize = 11.sp,
                     fontWeight = if (currentRoute?.hierarchy?.any { it.route == "market" } == true) FontWeight.Bold else FontWeight.Medium
                 )
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = RoyalBluePrimary,
-                selectedTextColor = RoyalBluePrimary,
-                indicatorColor = SearchBgBlue,
-                unselectedIconColor = MutedBlueGrayText,
-                unselectedTextColor = MutedBlueGrayText
-            )
+            }
         )
 
         // Tab 3: Grammatika
@@ -92,21 +78,14 @@ fun BottomNavBar(navController: NavController) {
                     popUpTo("library")
                 }
             },
-            icon = { Text("📖", fontSize = 18.sp) },
+            icon = { Icon(Icons.AutoMirrored.Filled.MenuBook, contentDescription = "Grammatika") },
             label = {
                 Text(
                     "Grammatika",
                     fontSize = 11.sp,
                     fontWeight = if (currentRoute?.hierarchy?.any { it.route == "grammar" } == true) FontWeight.Bold else FontWeight.Medium
                 )
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = RoyalBluePrimary,
-                selectedTextColor = RoyalBluePrimary,
-                indicatorColor = SearchBgBlue,
-                unselectedIconColor = MutedBlueGrayText,
-                unselectedTextColor = MutedBlueGrayText
-            )
+            }
         )
 
         // Tab 4: Profil
@@ -124,14 +103,7 @@ fun BottomNavBar(navController: NavController) {
                     fontSize = 11.sp,
                     fontWeight = if (currentRoute?.hierarchy?.any { it.route == "profile" } == true) FontWeight.Bold else FontWeight.Medium
                 )
-            },
-            colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = RoyalBluePrimary,
-                selectedTextColor = RoyalBluePrimary,
-                indicatorColor = SearchBgBlue,
-                unselectedIconColor = MutedBlueGrayText,
-                unselectedTextColor = MutedBlueGrayText
-            )
+            }
         )
     }
 }
