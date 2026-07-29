@@ -5,8 +5,8 @@ import abs.uits.vocabry.data.model.Pack
 import abs.uits.vocabry.ui.components.BottomNavBar
 import abs.uits.vocabry.ui.library.components.FolderFormDialog
 import abs.uits.vocabry.ui.library.components.PackFormDialog
-import abs.uits.vocabry.ui.theme.BadgeGreenBg
-import abs.uits.vocabry.ui.theme.BadgeGreenText
+import abs.uits.vocabry.ui.theme.SuccessGreen
+import abs.uits.vocabry.ui.theme.iconForPackOrFolder
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -32,6 +32,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Folder
 import androidx.compose.material.icons.filled.MoreVert
@@ -125,7 +126,12 @@ fun LibraryScreen(
                             modifier = Modifier.size(34.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
-                                Text("☑️", fontSize = 16.sp)
+                                Icon(
+                                    Icons.AutoMirrored.Filled.MenuBook,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                    modifier = Modifier.size(18.dp)
+                                )
                             }
                         }
                         Spacer(Modifier.width(10.dp))
@@ -203,8 +209,15 @@ fun LibraryScreen(
                                 Text("Orqaga", fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.primary)
                             }
                             Spacer(Modifier.width(4.dp))
+                            Icon(
+                                iconForPackOrFolder(openFolder.icon),
+                                contentDescription = null,
+                                modifier = Modifier.size(20.dp),
+                                tint = MaterialTheme.colorScheme.onSurface
+                            )
+                            Spacer(Modifier.width(6.dp))
                             Text(
-                                "${openFolder.icon} ${openFolder.name}",
+                                openFolder.name,
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = MaterialTheme.colorScheme.onSurface
@@ -441,7 +454,7 @@ fun FolderCardHorizontalItem(
                     .clip(RoundedCornerShape(10.dp))
                     .background(MaterialTheme.colorScheme.primary)
             ) {
-                Text(folder.icon.ifEmpty { "📁" }, fontSize = 20.sp)
+                Icon(iconForPackOrFolder(folder.icon), contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
             }
 
             Column {
@@ -497,7 +510,7 @@ fun PackListItem(
                     .clip(RoundedCornerShape(14.dp))
                     .background(MaterialTheme.colorScheme.primaryContainer)
             ) {
-                Text(pack.icon.ifEmpty { "📚" }, fontSize = 28.sp)
+                Icon(iconForPackOrFolder(pack.icon), contentDescription = null, tint = MaterialTheme.colorScheme.onPrimaryContainer, modifier = Modifier.size(26.dp))
             }
 
             Spacer(Modifier.width(14.dp))
@@ -521,14 +534,14 @@ fun PackListItem(
 
                     Surface(
                         shape = RoundedCornerShape(8.dp),
-                        color = BadgeGreenBg,
+                        color = SuccessGreen.copy(alpha = 0.15f),
                         modifier = Modifier.padding(start = 6.dp)
                     ) {
                         Text(
                             "O'rganilmoqda",
                             fontSize = 10.sp,
                             fontWeight = FontWeight.Bold,
-                            color = BadgeGreenText,
+                            color = SuccessGreen,
                             modifier = Modifier.padding(horizontal = 7.dp, vertical = 3.dp)
                         )
                     }

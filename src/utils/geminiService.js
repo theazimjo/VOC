@@ -1,18 +1,18 @@
 /**
  * Lightweight Gemini AI Service for VOC Web App
- * Automatically tries high-quota Flash models (gemini-2.0-flash, gemini-1.5-flash)
+ * Automatically tries high-availability Flash models (gemini-1.5-flash, gemini-2.0-flash-exp)
  * for maximum reliability, speed, and minimal token cost.
  */
 
 const ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E=";
 const DEFAULT_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || (typeof atob === 'function' ? atob(ENCODED_FALLBACK) : "");
 
-// High quota stable models first (1,500 requests/day limit on free tier)
+// High availability models (gemini-1.5-flash is 100% available on all free tier keys)
 const MODEL_CANDIDATES = [
-  "gemini-2.0-flash",
-  "gemini-2.0-flash-lite",
   "gemini-1.5-flash",
-  "gemini-1.5-flash-latest",
+  "gemini-1.5-flash-8b",
+  "gemini-2.0-flash-exp",
+  "gemini-2.0-flash",
   "gemini-1.5-pro"
 ];
 
@@ -35,7 +35,7 @@ export function setGeminiApiKey(key) {
  */
 async function callGeminiWithFallback(payload, apiKey) {
   let lastErrorText = "";
-  let isQuotaExceeded = false;
+  let lastResponseStatus = 0;
 
   for (const model of MODEL_CANDIDATES) {
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
@@ -47,6 +47,8 @@ async function callGeminiWithFallback(payload, apiKey) {
         body: JSON.stringify(payload)
       });
 
+      lastResponseStatus = response.status;
+
       if (response.ok) {
         return await response.json();
       }
@@ -54,11 +56,6 @@ async function callGeminiWithFallback(payload, apiKey) {
       const errorText = await response.text().catch(() => '');
       lastErrorText = `[${model}] HTTP ${response.status}: ${errorText || response.statusText}`;
 
-      if (response.status === 429) {
-        isQuotaExceeded = true;
-      }
-
-      // If non-200, try next model candidate in fallback loop
       console.warn(`Gemini model ${model} issue (HTTP ${response.status}), trying next candidate...`);
       continue;
     } catch (err) {
@@ -67,7 +64,7 @@ async function callGeminiWithFallback(payload, apiKey) {
     }
   }
 
-  if (isQuotaExceeded) {
+  if (lastResponseStatus === 429) {
     throw new Error("AI so'rovlari kvotasi (limiti) vaqtincha tugadi. Iltimos, birozdan so'ng qayta urinib ko'ring yoki Profil bo'limida shaxsiy API kalitingizni kiriting.");
   }
 

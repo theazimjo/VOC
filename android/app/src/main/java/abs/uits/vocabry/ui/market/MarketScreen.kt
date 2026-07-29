@@ -4,14 +4,9 @@ import abs.uits.vocabry.data.model.MarketPack
 import abs.uits.vocabry.data.model.Pack
 import abs.uits.vocabry.ui.components.BottomNavBar
 import abs.uits.vocabry.ui.library.LibraryViewModel
-import abs.uits.vocabry.ui.theme.BorderBlueLight
-import abs.uits.vocabry.ui.theme.CardWhite
-import abs.uits.vocabry.ui.theme.MutedBlueGrayText
-import abs.uits.vocabry.ui.theme.RoyalBluePrimary
-import abs.uits.vocabry.ui.theme.RoyalNavyText
-import abs.uits.vocabry.ui.theme.SearchBgBlue
+import abs.uits.vocabry.ui.theme.WarningAmber
+import abs.uits.vocabry.ui.theme.iconForPackOrFolder
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,17 +22,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.TrendingUp
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Download
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -48,7 +46,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -71,9 +68,9 @@ fun MarketScreen(
             TopAppBar(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.ShoppingCart, contentDescription = null, tint = RoyalNavyText)
+                        Icon(Icons.Filled.ShoppingCart, contentDescription = null)
                         Spacer(Modifier.width(8.dp))
-                        Text("So'zlik Marketi", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp, color = RoyalNavyText)
+                        Text("So'zlik Marketi", fontWeight = FontWeight.ExtraBold, fontSize = 20.sp)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
@@ -160,13 +157,11 @@ fun MarketPackCardItem(
     missingWordsCount: Int,
     onAction: () -> Unit,
 ) {
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = CardWhite),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(1.dp, BorderBlueLight, RoundedCornerShape(16.dp))
+    OutlinedCard(
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.outlinedCardColors(),
+        border = CardDefaults.outlinedCardBorder(),
+        modifier = Modifier.fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(
@@ -179,10 +174,9 @@ fun MarketPackCardItem(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .size(46.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                            .background(SearchBgBlue)
+                            .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
                     ) {
-                        Text(marketPack.icon, fontSize = 24.sp)
+                        Icon(iconForPackOrFolder(marketPack.icon), contentDescription = null, tint = MaterialTheme.colorScheme.onPrimaryContainer, modifier = Modifier.size(24.dp))
                     }
                     Spacer(Modifier.width(12.dp))
                     Column {
@@ -190,31 +184,31 @@ fun MarketPackCardItem(
                             marketPack.name,
                             fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleMedium,
-                            color = RoyalNavyText
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(Modifier.height(2.dp))
                         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             Surface(
-                                shape = RoundedCornerShape(4.dp),
-                                color = SearchBgBlue
+                                shape = MaterialTheme.shapes.extraSmall,
+                                color = MaterialTheme.colorScheme.primaryContainer
                             ) {
                                 Text(
                                     marketPack.category,
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = RoyalNavyText,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                                 )
                             }
                             Surface(
-                                shape = RoundedCornerShape(4.dp),
-                                color = Color(0xFFAF52DE).copy(alpha = 0.15f)
+                                shape = MaterialTheme.shapes.extraSmall,
+                                color = MaterialTheme.colorScheme.tertiaryContainer
                             ) {
                                 Text(
                                     marketPack.level,
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color(0xFFAF52DE),
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                                 )
                             }
@@ -228,7 +222,7 @@ fun MarketPackCardItem(
             Text(
                 marketPack.description,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MutedBlueGrayText,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis
             )
@@ -240,41 +234,50 @@ fun MarketPackCardItem(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
-                    "📊 ${marketPack.words.size} ta so'z",
-                    style = MaterialTheme.typography.bodySmall,
-                    fontWeight = FontWeight.Bold,
-                    color = MutedBlueGrayText
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.AutoMirrored.Filled.TrendingUp, contentDescription = null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Spacer(Modifier.width(4.dp))
+                    Text(
+                        "${marketPack.words.size} ta so'z",
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
 
-                val warningColor = Color(0xFFFF9F0A)
                 Button(
                     onClick = onAction,
                     enabled = !isInstalling && !isUpdating && (!isInstalled || hasUpdate),
                     colors = if (hasUpdate) {
-                        ButtonDefaults.buttonColors(containerColor = warningColor, contentColor = Color.White)
+                        ButtonDefaults.buttonColors(containerColor = WarningAmber, contentColor = Color.White)
                     } else if (isInstalled) {
-                        ButtonDefaults.buttonColors(containerColor = SearchBgBlue, contentColor = MutedBlueGrayText)
+                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant, contentColor = MaterialTheme.colorScheme.onSurfaceVariant)
                     } else {
-                        ButtonDefaults.buttonColors(containerColor = RoyalBluePrimary, contentColor = Color.White)
+                        ButtonDefaults.buttonColors()
                     },
-                    shape = RoundedCornerShape(10.dp),
+                    shape = MaterialTheme.shapes.small,
                     contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp)
                 ) {
                     if (isInstalling) {
-                        CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp, color = Color.White)
+                        CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp)
                         Spacer(Modifier.width(6.dp))
                         Text("O'rnatilmoqda...", fontSize = 12.sp)
                     } else if (isUpdating) {
-                        CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp, color = Color.White)
+                        CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp)
                         Spacer(Modifier.width(6.dp))
                         Text("Yangilanmoqda...", fontSize = 12.sp)
                     } else if (hasUpdate) {
-                        Text("Yangilash (+$missingWordsCount) 🔄", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Icon(Icons.Filled.Refresh, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text("Yangilash (+$missingWordsCount)", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     } else if (isInstalled) {
-                        Text("O'rnatildi ✅", fontSize = 12.sp)
+                        Icon(Icons.Filled.CheckCircle, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text("O'rnatildi", fontSize = 12.sp)
                     } else {
-                        Text("Yuklab olish 📥", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                        Icon(Icons.Filled.Download, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text("Yuklab olish", fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
