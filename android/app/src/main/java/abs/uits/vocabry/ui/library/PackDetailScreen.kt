@@ -164,7 +164,7 @@ fun PackDetailScreen(
                     TextButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Orqaga", modifier = Modifier.size(18.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("← Kutubxona", fontWeight = FontWeight.Bold)
+                        Text("Kutubxona", fontWeight = FontWeight.Bold)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)

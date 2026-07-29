@@ -18,15 +18,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +37,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -68,6 +69,7 @@ data class WordFormData(
     val partOfSpeech: String,
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddWordDialog(
     editingWord: Word? = null,
@@ -77,6 +79,7 @@ fun AddWordDialog(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val currentUser = Firebase.auth.currentUser
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     var word by remember { mutableStateOf(editingWord?.word.orEmpty()) }
     var translation by remember { mutableStateOf(editingWord?.translation.orEmpty()) }
@@ -137,15 +140,26 @@ fun AddWordDialog(
         }
     }
 
-    AlertDialog(
+    ModalBottomSheet(
         onDismissRequest = onDismiss,
-        title = {
+        sheetState = sheetState
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 8.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(if (isEditing) "So'zni tahrirlash" else "Yangi so'z", fontWeight = FontWeight.Bold)
+                Text(
+                    text = if (isEditing) "So'zni tahrirlash" else "Yangi so'z",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp
+                )
                 Surface(
                     shape = RoundedCornerShape(8.dp),
                     color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
@@ -153,7 +167,7 @@ fun AddWordDialog(
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                     ) {
                         if (isAiLoading) {
                             CircularProgressIndicator(modifier = Modifier.size(12.dp), strokeWidth = 1.5.dp)
@@ -165,167 +179,173 @@ fun AddWordDialog(
                     }
                 }
             }
-        },
-        text = {
-            Column(
-                modifier = Modifier.verticalScroll(rememberScrollState())
+
+            Spacer(Modifier.height(12.dp))
+
+            if (aiError != null) {
+                Surface(
+                    color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f),
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp)
+                ) {
+                    Text(
+                        "⚠️ ${aiError}",
+                        color = MaterialTheme.colorScheme.error,
+                        fontSize = 12.sp,
+                        modifier = Modifier.padding(8.dp)
+                    )
+                }
+            }
+
+            if (showKeyInput) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f), RoundedCornerShape(10.dp))
+                        .padding(10.dp)
+                ) {
+                    Text("🔑 Gemini API Kalitingizni kiriting:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Spacer(Modifier.height(4.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        OutlinedTextField(
+                            value = apiKeyText,
+                            onValueChange = { apiKeyText = it },
+                            placeholder = { Text("API Key...") },
+                            singleLine = true,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Button(
+                            onClick = {
+                                if (apiKeyText.isNotBlank()) {
+                                    GeminiService.setApiKey(context, apiKeyText)
+                                    showKeyInput = false
+                                    aiError = null
+                                    handleAiAutofill()
+                                }
+                            }
+                        ) {
+                            Text("Saqlash", fontSize = 12.sp)
+                        }
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
+            }
+
+            OutlinedTextField(
+                value = word,
+                onValueChange = { word = it },
+                label = { Text("Inglizcha so'z *") },
+                placeholder = { Text("Masalan: Serendipity") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(Modifier.height(8.dp))
+            OutlinedTextField(
+                value = translation,
+                onValueChange = { translation = it },
+                label = { Text("O'zbekcha tarjima *") },
+                placeholder = { Text("Tasodifiy baxt") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
+
+            TextButton(
+                onClick = { showMore = !showMore },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp)
             ) {
-                if (aiError != null) {
-                    Surface(
-                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 8.dp)
-                    ) {
-                        Text(
-                            "⚠️ ${aiError}",
-                            color = MaterialTheme.colorScheme.error,
-                            fontSize = 12.sp,
-                            modifier = Modifier.padding(8.dp)
+                Text(
+                    if (showMore) "🔼 Kamroq variantlar" else "⚙️ Ko'proq variantlar (Ta'rif, misol va so'z turkumi)",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+            if (showMore) {
+                Spacer(Modifier.height(4.dp))
+                Text("So'z turkumi", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
+                Spacer(Modifier.height(4.dp))
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    items(POS_OPTIONS) { (valKey, label) ->
+                        FilterChip(
+                            selected = selectedPos == valKey,
+                            onClick = { selectedPos = valKey },
+                            label = { Text(label) }
                         )
                     }
                 }
 
-                if (showKeyInput) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f), RoundedCornerShape(10.dp))
-                            .padding(10.dp)
-                    ) {
-                        Text("🔑 Gemini API Kalitingizni kiriting:", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                        Spacer(Modifier.height(4.dp))
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            OutlinedTextField(
-                                value = apiKeyText,
-                                onValueChange = { apiKeyText = it },
-                                placeholder = { Text("API Key...") },
-                                singleLine = true,
-                                modifier = Modifier.weight(1f)
-                            )
-                            Spacer(Modifier.width(6.dp))
-                            Button(
-                                onClick = {
-                                    if (apiKeyText.isNotBlank()) {
-                                        GeminiService.setApiKey(context, apiKeyText)
-                                        showKeyInput = false
-                                        aiError = null
-                                        handleAiAutofill()
-                                    }
-                                }
-                            ) {
-                                Text("Saqlash", fontSize = 12.sp)
-                            }
-                        }
-                    }
-                    Spacer(Modifier.height(8.dp))
-                }
-
+                Spacer(Modifier.height(10.dp))
                 OutlinedTextField(
-                    value = word,
-                    onValueChange = { word = it },
-                    label = { Text("Inglizcha so'z *") },
-                    placeholder = { Text("Masalan: Serendipity") },
-                    singleLine = true,
+                    value = definition,
+                    onValueChange = { definition = it },
+                    label = { Text("Ta'rifi (ixtiyoriy)") },
+                    placeholder = { Text("O'zbek tilidagi ta'rifi") },
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(
-                    value = translation,
-                    onValueChange = { translation = it },
-                    label = { Text("O'zbekcha tarjima *") },
-                    placeholder = { Text("Tasodifiy baxt") },
+                    value = example,
+                    onValueChange = { example = it },
+                    label = { Text("Misol gap (ixtiyoriy)") },
+                    placeholder = { Text("Ushbu so'z qatnashgan gap") },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = customSentence,
+                    onValueChange = { customSentence = it },
+                    label = { Text("O'zingiz tuzgan gap (Faol so'zlik uchun)") },
+                    placeholder = { Text("So'zni faollashtirish uchun mustaqil gap tuzib kiriting") },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                Spacer(Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = notes,
+                    onValueChange = { notes = it },
+                    label = { Text("Qo'shimcha izoh (ixtiyoriy)") },
+                    placeholder = { Text("Sinonim, antonim va h.k.") },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth(),
                 )
-
-                TextButton(
-                    onClick = { showMore = !showMore },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp)
-                ) {
-                    Text(
-                        if (showMore) "🔼 Kamroq variantlar" else "⚙️ Ko'proq variantlar (Ta'rif, misol va so'z turkumi)",
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-
-                if (showMore) {
-                    Spacer(Modifier.height(4.dp))
-                    Text("So'z turkumi", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
-                    Spacer(Modifier.height(4.dp))
-                    LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                        items(POS_OPTIONS) { (valKey, label) ->
-                            FilterChip(
-                                selected = selectedPos == valKey,
-                                onClick = { selectedPos = valKey },
-                                label = { Text(label) }
-                            )
-                        }
-                    }
-
-                    Spacer(Modifier.height(10.dp))
-                    OutlinedTextField(
-                        value = definition,
-                        onValueChange = { definition = it },
-                        label = { Text("Ta'rifi (ixtiyoriy)") },
-                        placeholder = { Text("O'zbek tilidagi ta'rifi") },
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                    Spacer(Modifier.height(8.dp))
-                    OutlinedTextField(
-                        value = example,
-                        onValueChange = { example = it },
-                        label = { Text("Misol gap (ixtiyoriy)") },
-                        placeholder = { Text("Ushbu so'z qatnashgan gap") },
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                    Spacer(Modifier.height(8.dp))
-                    OutlinedTextField(
-                        value = customSentence,
-                        onValueChange = { customSentence = it },
-                        label = { Text("O'zingiz tuzgan gap (Faol so'zlik uchun)") },
-                        placeholder = { Text("So'zni faollashtirish uchun mustaqil gap tuzib kiriting") },
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                    Spacer(Modifier.height(8.dp))
-                    OutlinedTextField(
-                        value = notes,
-                        onValueChange = { notes = it },
-                        label = { Text("Qo'shimcha izoh (ixtiyoriy)") },
-                        placeholder = { Text("Sinonim, antonim va h.k.") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                }
             }
-        },
-        confirmButton = {
-            TextButton(
-                onClick = {
-                    onConfirm(
-                        WordFormData(
-                            word = word,
-                            translation = translation,
-                            definition = definition,
-                            example = example,
-                            customSentence = customSentence,
-                            notes = notes,
-                            partOfSpeech = selectedPos,
-                        )
-                    )
-                },
-                enabled = word.isNotBlank() && translation.isNotBlank(),
+
+            Spacer(Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
             ) {
-                Text(if (isEditing) "Saqlash" else "Qo'shish")
+                TextButton(onClick = onDismiss) {
+                    Text("Bekor qilish")
+                }
+                Spacer(Modifier.width(8.dp))
+                Button(
+                    onClick = {
+                        onConfirm(
+                            WordFormData(
+                                word = word,
+                                translation = translation,
+                                definition = definition,
+                                example = example,
+                                customSentence = customSentence,
+                                notes = notes,
+                                partOfSpeech = selectedPos,
+                            )
+                        )
+                    },
+                    enabled = word.isNotBlank() && translation.isNotBlank(),
+                ) {
+                    Text(if (isEditing) "Saqlash" else "Qo'shish")
+                }
             }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Bekor qilish") }
-        },
-    )
+
+            Spacer(Modifier.height(24.dp))
+        }
+    }
 }
