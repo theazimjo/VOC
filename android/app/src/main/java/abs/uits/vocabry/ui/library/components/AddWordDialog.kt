@@ -92,6 +92,7 @@ fun AddWordDialog(
     var apiKeyText by remember { mutableStateOf(GeminiService.getApiKey(context)) }
 
     val isEditing = editingWord != null
+    var showMore by remember { mutableStateOf(isEditing && (editingWord.definition.isNotBlank() || editingWord.example.isNotBlank() || editingWord.notes.isNotBlank() || editingWord.customSentence.isNotBlank())) }
 
     fun handleAiAutofill() {
         val userEmail = currentUser?.email?.lowercase().orEmpty()
@@ -121,6 +122,7 @@ fun AddWordDialog(
                     selectedPos = res.partOfSpeech.ifBlank { selectedPos }
                     definition = res.definition.ifBlank { definition }
                     example = res.example.ifBlank { example }
+                    showMore = true
                 } else {
                     aiError = "So'z ma'lumoti topilmadi."
                 }
@@ -238,52 +240,68 @@ fun AddWordDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
 
-                Spacer(Modifier.height(10.dp))
-                Text("So'z turkumi", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
-                Spacer(Modifier.height(4.dp))
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                    items(POS_OPTIONS) { (valKey, label) ->
-                        FilterChip(
-                            selected = selectedPos == valKey,
-                            onClick = { selectedPos = valKey },
-                            label = { Text(label) }
-                        )
-                    }
+                TextButton(
+                    onClick = { showMore = !showMore },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp)
+                ) {
+                    Text(
+                        if (showMore) "🔼 Kamroq variantlar" else "⚙️ Ko'proq variantlar (Ta'rif, misol va so'z turkumi)",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
 
-                Spacer(Modifier.height(10.dp))
-                OutlinedTextField(
-                    value = definition,
-                    onValueChange = { definition = it },
-                    label = { Text("Ta'rifi (ixtiyoriy)") },
-                    placeholder = { Text("O'zbek tilidagi ta'rifi") },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Spacer(Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = example,
-                    onValueChange = { example = it },
-                    label = { Text("Misol gap (ixtiyoriy)") },
-                    placeholder = { Text("Ushbu so'z qatnashgan gap") },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Spacer(Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = customSentence,
-                    onValueChange = { customSentence = it },
-                    label = { Text("O'zingiz tuzgan gap (Faol so'zlik uchun)") },
-                    placeholder = { Text("So'zni faollashtirish uchun mustaqil gap tuzib kiriting") },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                Spacer(Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = notes,
-                    onValueChange = { notes = it },
-                    label = { Text("Qo'shimcha izoh (ixtiyoriy)") },
-                    placeholder = { Text("Sinonim, antonim va h.k.") },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                )
+                if (showMore) {
+                    Spacer(Modifier.height(4.dp))
+                    Text("So'z turkumi", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
+                    Spacer(Modifier.height(4.dp))
+                    LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        items(POS_OPTIONS) { (valKey, label) ->
+                            FilterChip(
+                                selected = selectedPos == valKey,
+                                onClick = { selectedPos = valKey },
+                                label = { Text(label) }
+                            )
+                        }
+                    }
+
+                    Spacer(Modifier.height(10.dp))
+                    OutlinedTextField(
+                        value = definition,
+                        onValueChange = { definition = it },
+                        label = { Text("Ta'rifi (ixtiyoriy)") },
+                        placeholder = { Text("O'zbek tilidagi ta'rifi") },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = example,
+                        onValueChange = { example = it },
+                        label = { Text("Misol gap (ixtiyoriy)") },
+                        placeholder = { Text("Ushbu so'z qatnashgan gap") },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = customSentence,
+                        onValueChange = { customSentence = it },
+                        label = { Text("O'zingiz tuzgan gap (Faol so'zlik uchun)") },
+                        placeholder = { Text("So'zni faollashtirish uchun mustaqil gap tuzib kiriting") },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = notes,
+                        onValueChange = { notes = it },
+                        label = { Text("Qo'shimcha izoh (ixtiyoriy)") },
+                        placeholder = { Text("Sinonim, antonim va h.k.") },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
             }
         },
         confirmButton = {

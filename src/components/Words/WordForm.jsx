@@ -23,6 +23,8 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
   const [showKeyInput, setShowKeyInput] = useState(false);
   const [customKey, setCustomKey] = useState('');
 
+  const [showMore, setShowMore] = useState(false);
+
   const handleAiAutofill = async (queryText) => {
     const userEmail = user?.email?.toLowerCase() || '';
     if (userEmail !== 'azimjonxolmirzayev30@gmail.com') {
@@ -52,6 +54,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
           definition: res.definition || prev.definition,
           example: res.example || prev.example,
         }));
+        setShowMore(true);
       } else {
         setAiError("So'z ma'lumoti topilmadi.");
       }
@@ -78,6 +81,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
         partOfSpeech: editWord.partOfSpeech || 'noun',
         customSentence: editWord.customSentence || ''
       });
+      setShowMore(Boolean(editWord.definition || editWord.example || editWord.notes || editWord.customSentence));
     } else {
       setFormData({
         word: '',
@@ -88,6 +92,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
         partOfSpeech: 'noun',
         customSentence: ''
       });
+      setShowMore(false);
     }
     setIsSubmitting(false);
   }, [editWord, isOpen]);
@@ -201,66 +206,81 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                   />
                 </div>
 
-                <div className="input-group word-form-full">
-                  <label>So'z turkumi</label>
-                  <select 
-                    className="select"
-                    value={formData.partOfSpeech}
-                    onChange={e => setFormData({...formData, partOfSpeech: e.target.value})}
+                <div className="word-form-full" style={{ textAlign: 'center', marginTop: '4px', marginBottom: '4px' }}>
+                  <button 
+                    type="button" 
+                    className="btn btn-ghost" 
+                    onClick={() => setShowMore(!showMore)}
+                    style={{ fontSize: '0.82rem', color: 'var(--accent-1, #7c3aed)', fontWeight: '500' }}
                   >
-                    {partOfSpeechOptions.map(pos => (
-                      <option key={pos.value} value={pos.value}>{pos.label}</option>
-                    ))}
-                  </select>
+                    {showMore ? "🔼 Kamroq variantlar" : "⚙️ Ko'proq variantlar (Ta'rif, misol va so'z turkumi)"}
+                  </button>
                 </div>
 
-                <div className="input-group word-form-full">
-                  <label>Ta'rifi (ixtiyoriy)</label>
-                  <input 
-                    type="text" 
-                    className="input" 
-                    value={formData.definition}
-                    onChange={e => setFormData({...formData, definition: e.target.value})}
-                    placeholder="O'zbek tilidagi ta'rifi"
-                    maxLength={1000}
-                  />
-                </div>
+                {showMore && (
+                  <>
+                    <div className="input-group word-form-full">
+                      <label>So'z turkumi</label>
+                      <select 
+                        className="select"
+                        value={formData.partOfSpeech}
+                        onChange={e => setFormData({...formData, partOfSpeech: e.target.value})}
+                      >
+                        {partOfSpeechOptions.map(pos => (
+                          <option key={pos.value} value={pos.value}>{pos.label}</option>
+                        ))}
+                      </select>
+                    </div>
 
-                <div className="input-group word-form-full">
-                  <label>Misol gap (ixtiyoriy)</label>
-                  <textarea 
-                    className="textarea" 
-                    value={formData.example}
-                    onChange={e => setFormData({...formData, example: e.target.value})}
-                    placeholder="Ushbu so'z qatnashgan gap"
-                    style={{ minHeight: '60px' }}
-                    maxLength={1500}
-                  />
-                </div>
+                    <div className="input-group word-form-full">
+                      <label>Ta'rifi (ixtiyoriy)</label>
+                      <input 
+                        type="text" 
+                        className="input" 
+                        value={formData.definition}
+                        onChange={e => setFormData({...formData, definition: e.target.value})}
+                        placeholder="O'zbek tilidagi ta'rifi"
+                        maxLength={1000}
+                      />
+                    </div>
 
-                <div className="input-group word-form-full">
-                  <label>O'zingiz tuzgan gap (Faol so'zlik uchun)</label>
-                  <textarea 
-                    className="textarea" 
-                    value={formData.customSentence}
-                    onChange={e => setFormData({...formData, customSentence: e.target.value})}
-                    placeholder="So'zni faollashtirish uchun mustaqil gap tuzib kiriting"
-                    style={{ minHeight: '60px' }}
-                    maxLength={1500}
-                  />
-                </div>
+                    <div className="input-group word-form-full">
+                      <label>Misol gap (ixtiyoriy)</label>
+                      <textarea 
+                        className="textarea" 
+                        value={formData.example}
+                        onChange={e => setFormData({...formData, example: e.target.value})}
+                        placeholder="Ushbu so'z qatnashgan gap"
+                        style={{ minHeight: '60px' }}
+                        maxLength={1500}
+                      />
+                    </div>
 
-                <div className="input-group word-form-full">
-                  <label>Qo'shimcha izoh (ixtiyoriy)</label>
-                  <input 
-                    type="text" 
-                    className="input" 
-                    value={formData.notes}
-                    onChange={e => setFormData({...formData, notes: e.target.value})}
-                    placeholder="Sinonim, antonim va h.k."
-                    maxLength={800}
-                  />
-                </div>
+                    <div className="input-group word-form-full">
+                      <label>O'zingiz tuzgan gap (Faol so'zlik uchun)</label>
+                      <textarea 
+                        className="textarea" 
+                        value={formData.customSentence}
+                        onChange={e => setFormData({...formData, customSentence: e.target.value})}
+                        placeholder="So'zni faollashtirish uchun mustaqil gap tuzib kiriting"
+                        style={{ minHeight: '60px' }}
+                        maxLength={1500}
+                      />
+                    </div>
+
+                    <div className="input-group word-form-full">
+                      <label>Qo'shimcha izoh (ixtiyoriy)</label>
+                      <input 
+                        type="text" 
+                        className="input" 
+                        value={formData.notes}
+                        onChange={e => setFormData({...formData, notes: e.target.value})}
+                        placeholder="Sinonim, antonim va h.k."
+                        maxLength={800}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
               
               <div className="modal-footer">
