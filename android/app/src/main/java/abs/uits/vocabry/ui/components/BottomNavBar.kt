@@ -1,8 +1,9 @@
 package abs.uits.vocabry.ui.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -30,19 +31,20 @@ fun BottomNavBar(navController: NavController) {
         tonalElevation = 8.dp,
         modifier = Modifier.shadow(12.dp)
     ) {
+        // Tab 1: Kutubxona
         NavigationBarItem(
-            selected = currentRoute?.hierarchy?.any { it.route == "dashboard" } == true,
+            selected = currentRoute?.hierarchy?.any { it.route == "library" } == true,
             onClick = {
-                navController.navigate("dashboard") {
-                    popUpTo("dashboard") { inclusive = true }
+                navController.navigate("library") {
+                    popUpTo("library") { inclusive = true }
                 }
             },
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Bosh sahifa") },
+            icon = { Icon(Icons.Filled.List, contentDescription = "Kutubxona") },
             label = {
                 Text(
-                    "Bosh sahifa",
+                    "Kutubxona",
                     fontSize = 11.sp,
-                    fontWeight = if (currentRoute?.hierarchy?.any { it.route == "dashboard" } == true) FontWeight.Bold else FontWeight.Medium
+                    fontWeight = if (currentRoute?.hierarchy?.any { it.route == "library" } == true) FontWeight.Bold else FontWeight.Medium
                 )
             },
             colors = NavigationBarItemDefaults.colors(
@@ -53,19 +55,71 @@ fun BottomNavBar(navController: NavController) {
                 unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
             )
         )
+
+        // Tab 2: Market
         NavigationBarItem(
-            selected = currentRoute?.hierarchy?.any { it.route == "library" } == true,
+            selected = currentRoute?.hierarchy?.any { it.route == "market" } == true,
             onClick = {
-                navController.navigate("library") {
-                    popUpTo("dashboard")
+                navController.navigate("market") {
+                    popUpTo("library")
                 }
             },
-            icon = { Icon(Icons.Filled.List, contentDescription = "Kutubxona") },
+            icon = { Icon(Icons.Filled.ShoppingCart, contentDescription = "Market") },
             label = {
                 Text(
-                    "Kutubxona",
+                    "Market",
                     fontSize = 11.sp,
-                    fontWeight = if (currentRoute?.hierarchy?.any { it.route == "library" } == true) FontWeight.Bold else FontWeight.Medium
+                    fontWeight = if (currentRoute?.hierarchy?.any { it.route == "market" } == true) FontWeight.Bold else FontWeight.Medium
+                )
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = MaterialTheme.colorScheme.primary,
+                selectedTextColor = MaterialTheme.colorScheme.primary,
+                indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        )
+
+        // Tab 3: Grammatika
+        NavigationBarItem(
+            selected = currentRoute?.hierarchy?.any { it.route == "grammar" } == true,
+            onClick = {
+                navController.navigate("grammar") {
+                    popUpTo("library")
+                }
+            },
+            icon = { Text("📖", fontSize = 18.sp) },
+            label = {
+                Text(
+                    "Grammatika",
+                    fontSize = 11.sp,
+                    fontWeight = if (currentRoute?.hierarchy?.any { it.route == "grammar" } == true) FontWeight.Bold else FontWeight.Medium
+                )
+            },
+            colors = NavigationBarItemDefaults.colors(
+                selectedIconColor = MaterialTheme.colorScheme.primary,
+                selectedTextColor = MaterialTheme.colorScheme.primary,
+                indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        )
+
+        // Tab 4: Profil
+        NavigationBarItem(
+            selected = currentRoute?.hierarchy?.any { it.route == "profile" } == true,
+            onClick = {
+                navController.navigate("profile") {
+                    popUpTo("library")
+                }
+            },
+            icon = { Icon(Icons.Filled.Person, contentDescription = "Profil") },
+            label = {
+                Text(
+                    "Profil",
+                    fontSize = 11.sp,
+                    fontWeight = if (currentRoute?.hierarchy?.any { it.route == "profile" } == true) FontWeight.Bold else FontWeight.Medium
                 )
             },
             colors = NavigationBarItemDefaults.colors(

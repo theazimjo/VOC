@@ -3,7 +3,6 @@ package abs.uits.vocabry.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.lifecycle.viewmodel.initializer
@@ -16,18 +15,22 @@ import androidx.navigation.navArgument
 import abs.uits.vocabry.ui.auth.AuthViewModel
 import abs.uits.vocabry.ui.auth.LoginScreen
 import abs.uits.vocabry.ui.auth.RegisterScreen
-import abs.uits.vocabry.ui.dashboard.DashboardScreen
 import abs.uits.vocabry.ui.dashboard.DashboardViewModel
+import abs.uits.vocabry.ui.grammar.GrammarScreen
+import abs.uits.vocabry.ui.grammar.GrammarViewModel
 import abs.uits.vocabry.ui.library.LibraryScreen
 import abs.uits.vocabry.ui.library.LibraryViewModel
 import abs.uits.vocabry.ui.library.PackDetailScreen
 import abs.uits.vocabry.ui.library.PackDetailViewModel
+import abs.uits.vocabry.ui.market.MarketScreen
 import abs.uits.vocabry.ui.practice.FlashcardScreen
 import abs.uits.vocabry.ui.practice.IrregularVerbsScreen
 import abs.uits.vocabry.ui.practice.IrregularVerbsViewModel
 import abs.uits.vocabry.ui.practice.PracticeSource
 import abs.uits.vocabry.ui.practice.PracticeViewModel
 import abs.uits.vocabry.ui.practice.TrainerSubStep
+import abs.uits.vocabry.ui.profile.ProfileScreen
+import abs.uits.vocabry.ui.profile.ProfileViewModel
 
 @Composable
 fun VocabryNavGraph() {
@@ -37,9 +40,16 @@ fun VocabryNavGraph() {
     )
     val user by authViewModel.user.collectAsState()
 
+    val libraryViewModel: LibraryViewModel = viewModel(
+        factory = viewModelFactory { initializer { LibraryViewModel() } },
+    )
+    val dashboardViewModel: DashboardViewModel = viewModel(
+        factory = viewModelFactory { initializer { DashboardViewModel() } },
+    )
+
     NavHost(
         navController = navController,
-        startDestination = if (user != null) "dashboard" else "login",
+        startDestination = if (user != null) "library" else "login",
     ) {
         composable("login") {
             LoginScreen(
@@ -53,17 +63,23 @@ fun VocabryNavGraph() {
                 onNavigateToLogin = { navController.popBackStack() },
             )
         }
-        composable("dashboard") {
-            val vm: DashboardViewModel = viewModel(
-                factory = viewModelFactory { initializer { DashboardViewModel() } },
-            )
-            DashboardScreen(navController, vm)
-        }
         composable("library") {
-            val vm: LibraryViewModel = viewModel(
-                factory = viewModelFactory { initializer { LibraryViewModel() } },
+            LibraryScreen(navController, libraryViewModel)
+        }
+        composable("market") {
+            MarketScreen(navController, libraryViewModel)
+        }
+        composable("grammar") {
+            val grammarVm: GrammarViewModel = viewModel(
+                factory = viewModelFactory { initializer { GrammarViewModel() } },
             )
-            LibraryScreen(navController, vm)
+            GrammarScreen(navController, grammarVm)
+        }
+        composable("profile") {
+            val profileVm: ProfileViewModel = viewModel(
+                factory = viewModelFactory { initializer { ProfileViewModel() } },
+            )
+            ProfileScreen(navController, authViewModel, dashboardViewModel, profileVm)
         }
         composable(
             "pack/{packId}",
