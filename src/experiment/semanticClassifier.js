@@ -57,6 +57,116 @@ const TOPIC_CLUSTERS = [
       'tomorrow', 'yesterday', 'future', 'past', 'clock', 'season', 'summer', 'winter'
     ],
     uzbekKeywords: ['vaqt', 'kun', 'tungi', 'hafta', 'oy', 'yil', 'soat', 'bugun', 'ertaga', 'kecha']
+  },
+  {
+    key: 'travel',
+    name: 'Sayohat & Transport',
+    icon: '✈️',
+    keywords: [
+      'travel', 'trip', 'journey', 'airport', 'flight', 'airplane', 'passport', 'ticket',
+      'hotel', 'tourist', 'luggage', 'visa', 'train', 'station', 'map', 'vacation',
+      'holiday', 'destination', 'border', 'road', 'car', 'bus', 'taxi'
+    ],
+    uzbekKeywords: ['sayohat', 'parvoz', 'chipta', 'mehmonxona', 'sayyoh', 'viza', 'poyezd', 'bekat', 'ta\'til', 'chegara']
+  },
+  {
+    key: 'emotions',
+    name: "His-tuyg'ular",
+    icon: '😊',
+    keywords: [
+      'happy', 'sad', 'angry', 'afraid', 'love', 'hate', 'fear', 'joy', 'excited',
+      'nervous', 'worried', 'proud', 'jealous', 'calm', 'upset', 'surprised',
+      'disappointed', 'hope', 'feeling', 'emotion', 'anxious', 'relieved'
+    ],
+    uzbekKeywords: ['baxtli', 'xafa', 'jahl', "qo'rquv", 'sevgi', 'nafrat', 'xursand', 'hayajon', 'tashvish', 'umid']
+  },
+  {
+    key: 'health',
+    name: "Sog'liq & Tibbiyot",
+    icon: '🩺',
+    keywords: [
+      'doctor', 'hospital', 'medicine', 'pain', 'sick', 'disease', 'health', 'patient',
+      'nurse', 'treatment', 'symptom', 'injury', 'surgery', 'pill', 'clinic', 'vaccine',
+      'fever', 'cough', 'headache', 'body', 'heart', 'blood'
+    ],
+    uzbekKeywords: ['shifokor', 'kasalxona', 'dori', 'kasallik', "sog'liq", 'bemor', 'hamshira', 'davolash', 'jarrohlik', 'isitma']
+  },
+  {
+    key: 'education',
+    name: "Ta'lim & O'qish",
+    icon: '📚',
+    keywords: [
+      'school', 'teacher', 'student', 'class', 'lesson', 'exam', 'homework', 'university',
+      'study', 'learn', 'education', 'grade', 'subject', 'degree', 'course', 'lecture',
+      'classroom', 'knowledge', 'textbook', 'library'
+    ],
+    uzbekKeywords: ["maktab", "o'qituvchi", 'talaba', 'dars', 'imtihon', 'universitet', "o'qish", "ta'lim", 'kitob', 'bilim']
+  },
+  {
+    key: 'family',
+    name: 'Oila & Munosabatlar',
+    icon: '👨‍👩‍👧',
+    keywords: [
+      'family', 'mother', 'father', 'sister', 'brother', 'parent', 'child', 'husband',
+      'wife', 'friend', 'relative', 'marriage', 'wedding', 'son', 'daughter',
+      'grandmother', 'grandfather', 'relationship', 'neighbor', 'baby'
+    ],
+    uzbekKeywords: ['oila', 'ona', 'ota', 'opa', 'aka', 'farzand', 'er', 'xotin', "do'st", 'qarindosh']
+  },
+  {
+    key: 'clothing',
+    name: 'Kiyim & Moda',
+    icon: '👕',
+    keywords: [
+      'shirt', 'dress', 'shoes', 'hat', 'coat', 'jacket', 'pants', 'clothes', 'wear',
+      'fashion', 'jeans', 'skirt', 'sock', 'glove', 'scarf', 'belt', 'button', 'fabric',
+      'cotton', 'style'
+    ],
+    uzbekKeywords: ["ko'ylak", 'kiyim', 'poyabzal', 'shlyapa', 'kurtka', 'shim', 'moda', 'kamar']
+  },
+  {
+    key: 'sports',
+    name: 'Sport & Musobaqa',
+    icon: '⚽',
+    keywords: [
+      'sport', 'football', 'game', 'team', 'player', 'ball', 'win', 'lose', 'race',
+      'match', 'coach', 'exercise', 'gym', 'swim', 'run', 'jump', 'athlete',
+      'competition', 'tournament', 'score'
+    ],
+    uzbekKeywords: ['sport', 'futbol', "o'yin", 'jamoa', "o'yinchi", "to'p", 'musobaqa', 'mashq', 'sportchi', 'poyga']
+  },
+  {
+    key: 'weather',
+    name: "Ob-havo & Iqlim",
+    icon: '⛅',
+    keywords: [
+      'weather', 'rain', 'sun', 'snow', 'wind', 'cloud', 'storm', 'hot', 'cold', 'warm',
+      'cool', 'temperature', 'climate', 'humid', 'fog', 'thunder', 'lightning',
+      'forecast', 'sunny', 'rainy'
+    ],
+    uzbekKeywords: ['ob-havo', "yomg'ir", 'quyosh', 'qor', 'shamol', 'bulut', "bo'ron", 'issiq', 'sovuq', 'iqlim']
+  },
+  {
+    key: 'home',
+    name: 'Uy & Ro\'zg\'or',
+    icon: '🏠',
+    keywords: [
+      'house', 'home', 'room', 'kitchen', 'table', 'chair', 'bed', 'door', 'window',
+      'wall', 'floor', 'roof', 'furniture', 'garden', 'garage', 'key', 'lamp',
+      'curtain', 'sofa', 'apartment'
+    ],
+    uzbekKeywords: ['uy', 'xona', 'oshxona', 'stol', 'stul', 'karavot', 'eshik', 'deraza', 'mebel', 'kvartira']
+  },
+  {
+    key: 'money',
+    name: 'Pul & Xarid',
+    icon: '💰',
+    keywords: [
+      'money', 'buy', 'sell', 'shop', 'store', 'price', 'discount', 'pay', 'cash',
+      'credit', 'expensive', 'cheap', 'purchase', 'receipt', 'wallet', 'coin', 'bill',
+      'budget', 'save', 'spend'
+    ],
+    uzbekKeywords: ['pul', 'xarid', "do'kon", 'narx', 'chegirma', 'naqd', 'qimmat', 'arzon', "cheki", 'byudjet']
   }
 ];
 

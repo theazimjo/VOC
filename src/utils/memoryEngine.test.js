@@ -84,7 +84,7 @@ describe('updateStability', () => {
 
 describe('computeClusterCalibration', () => {
   it('returns the neutral 1.0 multiplier below the minimum sample size', () => {
-    const fewSamples = Array.from({ length: 7 }, () => ({ predictedP: 0.5, result: true }));
+    const fewSamples = Array.from({ length: 4 }, () => ({ predictedP: 0.5, result: true }));
     expect(computeClusterCalibration(fewSamples)).toBe(1.0);
   });
 

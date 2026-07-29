@@ -185,11 +185,6 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
               rows={3}
               placeholder="Inglizcha jumla yozing..."
             />
-            {!answered && (
-              <button type="submit" className="btn-sentence-submit">
-                Tekshirish ✓
-              </button>
-            )}
           </form>
 
           <AnimatePresence>
@@ -229,16 +224,29 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
         </motion.div>
       </AnimatePresence>
 
-      <div className="sentence-actions">
-        {!answered ? (
-          <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-            Bilmadim (o'tkazib yuborish)
-          </button>
-        ) : (
-          <button type="button" className="btn-sentence-next" onClick={handleNext}>
-            {isLast ? 'Natijalar →' : 'Keyingisi →'}
-          </button>
-        )}
+      {/* Fixed full-width bottom bar, consistent with the other practice modes */}
+      <div className="sentence-bottom-bar">
+        <div className="sentence-bottom-bar-inner">
+          {!answered ? (
+            <>
+              <button type="button" className="btn btn-ghost" onClick={handleSkip}>
+                Bilmadim
+              </button>
+              <button
+                type="button"
+                className="btn-sentence-submit"
+                onClick={submitAnswer}
+                disabled={!input.trim()}
+              >
+                Tekshirish
+              </button>
+            </>
+          ) : (
+            <button type="button" className="btn-sentence-next" onClick={handleNext}>
+              {isLast ? 'Natijalar →' : 'Keyingisi →'}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

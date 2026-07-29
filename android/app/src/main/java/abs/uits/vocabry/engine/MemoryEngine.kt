@@ -34,7 +34,11 @@ object MemoryEngine {
     private const val ACTIVE_RECALL_BONUS = 0.15
     private const val CALIBRATION_MIN = 0.7
     private const val CALIBRATION_MAX = 1.4
-    private const val MIN_CALIBRATION_SAMPLES = 8
+    // Lowered from 8 now that SemanticClassifier's topic catalog grew from 5 to
+    // 15 clusters — more clusters means fewer reviews land in each one, so
+    // calibration needs to trust a smaller sample or it would rarely kick in
+    // for most users' pack sizes.
+    private const val MIN_CALIBRATION_SAMPLES = 5
 
     /** Automatically infer confidence (1-5) from response speed. */
     fun inferConfidenceFromSpeed(responseTimeSec: Double, isCorrect: Boolean): Int {

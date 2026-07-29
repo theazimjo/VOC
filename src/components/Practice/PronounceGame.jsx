@@ -276,24 +276,28 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
         </motion.div>
       </AnimatePresence>
 
-      {/* Action Row */}
-      <div className="pronounce-actions">
-        {!answered ? (
-          status === 'playing' && (
-            <button type="button" className="btn btn-ghost" onClick={handleSkip} disabled={isListening}>
-              Bilmadim (o'tkazib yuborish)
+      {/* Fixed full-width bottom bar, consistent with the other practice modes */}
+      <div className="pronounce-bottom-bar">
+        <div className="pronounce-bottom-bar-inner">
+          {!answered ? (
+            status === 'playing' ? (
+              <button type="button" className="btn btn-ghost" onClick={handleSkip} disabled={isListening}>
+                Bilmadim (o'tkazib yuborish)
+              </button>
+            ) : status === 'wrong' ? (
+              <div className="pronounce-bottom-hint">Qayta urinib ko'ring yoki o'tkazib yuboring</div>
+            ) : null
+          ) : (
+            <button type="button" className="btn-pronounce-next" onClick={handleNext}>
+              {isLast ? 'Natijalar →' : 'Keyingisi →'}
             </button>
-          )
-        ) : (
-          <button type="button" className="btn-pronounce-next" onClick={handleNext}>
-            {isLast ? 'Natijalar →' : 'Keyingisi →'}
-          </button>
-        )}
-        {status === 'unsupported' && (
-          <button type="button" className="btn-pronounce-next" onClick={handleUnsupportedSkip}>
-            {isLast ? 'Natijalar →' : 'Keyingisi →'}
-          </button>
-        )}
+          )}
+          {status === 'unsupported' && (
+            <button type="button" className="btn-pronounce-next" onClick={handleUnsupportedSkip}>
+              {isLast ? 'Natijalar →' : 'Keyingisi →'}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

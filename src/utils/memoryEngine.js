@@ -51,8 +51,14 @@ const RETRIEVAL_TYPE_BONUS = { active_recall: 0.15, passive_recall: 0 };
 const CALIBRATION_MIN = 0.7;
 const CALIBRATION_MAX = 1.4;
 
-/** Minimum sample size before a calibration is trusted over the neutral default. */
-const MIN_CALIBRATION_SAMPLES = 8;
+/**
+ * Minimum sample size before a calibration is trusted over the neutral
+ * default. Lowered from 8 now that the topic catalog (semanticClassifier.js)
+ * has grown from 5 to 15 clusters — more clusters means fewer reviews land
+ * in each one, so calibration needs to kick in on a smaller sample or it
+ * would rarely reach trust for most users' pack sizes.
+ */
+const MIN_CALIBRATION_SAMPLES = 5;
 
 /** A word must have been seen at least this many times before active recall is even offered — you cannot retrieve a trace that was never formed. */
 const AUTO_TYPED_MIN_REVIEWS = 1;

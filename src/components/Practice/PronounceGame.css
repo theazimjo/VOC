@@ -6,6 +6,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  /* Room for the fixed bottom bar so the card never sits underneath it */
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
 }
 
 /* Progress track matches spelling/quiz */
@@ -305,12 +307,35 @@
   background: var(--bg-tertiary);
 }
 
-/* Actions footer row */
-.pronounce-actions {
+/* ─── Fixed full-width bottom bar, consistent with the other practice modes ─── */
+.pronounce-bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid var(--border);
+  padding: env(safe-area-inset-bottom, 0px) 0 0 0;
+}
+
+.pronounce-bottom-bar-inner {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: var(--space-sm);
-  width: 100%;
+  gap: var(--space-md);
+  min-height: 24px;
+}
+
+.pronounce-bottom-hint {
+  color: var(--text-muted);
+  font-size: var(--font-sm);
+  font-weight: 600;
 }
 
 .btn-pronounce-next {
@@ -334,6 +359,14 @@
   transform: scale(0.98);
 }
 
+/* Sit above the mobile bottom tab bar instead of overlapping it */
+@media (max-width: 768px) {
+  .pronounce-bottom-bar {
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+    padding: 0;
+  }
+}
+
 @media (max-width: 600px) {
   .pronounce-card {
     padding: var(--space-lg) var(--space-md);
@@ -348,4 +381,6 @@
     height: 64px;
     font-size: 1.8rem;
   }
+
+  .pronounce-bottom-bar-inner { padding: var(--space-sm) var(--space-md); }
 }

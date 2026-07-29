@@ -6,6 +6,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+  /* Room for the fixed bottom bar so the card never sits underneath it */
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
 }
 
 .sentence-progress-label {
@@ -111,14 +113,17 @@
   font-weight: 700;
   cursor: pointer;
   font-family: var(--font-family);
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3);
-  width: 100%;
+  transition: filter var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
 }
-.btn-sentence-submit:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+.btn-sentence-submit:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+.btn-sentence-submit:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.btn-sentence-submit:disabled {
+  opacity: 0.4;
+  cursor: default;
 }
 
 /* ─── Feedback Banner ─── */
@@ -186,10 +191,28 @@
   max-width: 400px;
 }
 
-/* ─── Actions ─── */
-.sentence-actions {
+/* ─── Fixed full-width bottom bar, consistent with the other practice modes ─── */
+.sentence-bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid var(--border);
+  padding: env(safe-area-inset-bottom, 0px) 0 0 0;
+}
+
+.sentence-bottom-bar-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
 }
 
 .btn-sentence-next {
@@ -202,18 +225,27 @@
   font-weight: 700;
   cursor: pointer;
   font-family: var(--font-family);
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.3);
+  transition: filter var(--transition-fast), transform var(--transition-fast);
   width: 100%;
 }
 .btn-sentence-next:hover {
-  filter: brightness(1.1);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+  filter: brightness(1.08);
+}
+.btn-sentence-next:active {
+  transform: scale(0.98);
+}
+
+/* Sit above the mobile bottom tab bar instead of overlapping it */
+@media (max-width: 768px) {
+  .sentence-bottom-bar {
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+    padding: 0;
+  }
 }
 
 /* ─── Responsive ─── */
 @media (max-width: 600px) {
   .sentence-card { padding: var(--space-lg) var(--space-md); }
   .sentence-target { font-size: 1.6rem; }
+  .sentence-bottom-bar-inner { padding: var(--space-sm) var(--space-md); gap: var(--space-sm); }
 }

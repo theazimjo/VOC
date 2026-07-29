@@ -137,6 +137,22 @@
   margin-top: var(--space-lg);
 }
 
+/* explainSchedulingDecision() — why this word is being shown now */
+.flashcard-schedule-note {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: var(--space-sm);
+  max-width: 320px;
+  line-height: 1.4;
+  text-align: center;
+}
+.flashcard-schedule-note svg {
+  flex-shrink: 0;
+}
+
 /* ─── Card Audio Play Button ─── */
 .btn-speak-card {
   position: absolute;
