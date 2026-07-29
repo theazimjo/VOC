@@ -1,11 +1,14 @@
 package abs.uits.vocabry.ui.components
 
+import abs.uits.vocabry.ui.theme.IOSCardDark
+import abs.uits.vocabry.ui.theme.IOSSegmentedTrack
+import abs.uits.vocabry.ui.theme.IOSSystemBlue
+import abs.uits.vocabry.ui.theme.IOSSystemGray
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -14,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +31,7 @@ fun BottomNavBar(navController: NavController) {
     val currentRoute = backStackEntry?.destination
 
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = IOSCardDark,
         tonalElevation = 8.dp,
         modifier = Modifier.shadow(12.dp)
     ) {
@@ -48,11 +52,11 @@ fun BottomNavBar(navController: NavController) {
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.primary,
-                indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+                selectedIconColor = IOSSystemBlue,
+                selectedTextColor = IOSSystemBlue,
+                indicatorColor = IOSSegmentedTrack,
+                unselectedIconColor = IOSSystemGray,
+                unselectedTextColor = IOSSystemGray
             )
         )
 
@@ -73,11 +77,11 @@ fun BottomNavBar(navController: NavController) {
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.primary,
-                indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+                selectedIconColor = IOSSystemBlue,
+                selectedTextColor = IOSSystemBlue,
+                indicatorColor = IOSSegmentedTrack,
+                unselectedIconColor = IOSSystemGray,
+                unselectedTextColor = IOSSystemGray
             )
         )
 
@@ -98,11 +102,11 @@ fun BottomNavBar(navController: NavController) {
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.primary,
-                indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+                selectedIconColor = IOSSystemBlue,
+                selectedTextColor = IOSSystemBlue,
+                indicatorColor = IOSSegmentedTrack,
+                unselectedIconColor = IOSSystemGray,
+                unselectedTextColor = IOSSystemGray
             )
         )
 
@@ -123,11 +127,11 @@ fun BottomNavBar(navController: NavController) {
                 )
             },
             colors = NavigationBarItemDefaults.colors(
-                selectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.primary,
-                indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+                selectedIconColor = IOSSystemBlue,
+                selectedTextColor = IOSSystemBlue,
+                indicatorColor = IOSSegmentedTrack,
+                unselectedIconColor = IOSSystemGray,
+                unselectedTextColor = IOSSystemGray
             )
         )
     }

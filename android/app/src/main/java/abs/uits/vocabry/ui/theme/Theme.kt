@@ -13,43 +13,43 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = MonoWhite,
-    onPrimary = MonoBlack,
-    primaryContainer = MonoDarkCharcoal,
-    onPrimaryContainer = MonoWhite,
-    secondary = ZincMutedTextDark,
-    onSecondary = MonoBlack,
-    secondaryContainer = ZincSurfaceDark,
-    onSecondaryContainer = MonoWhite,
-    tertiary = MonoWhite,
-    error = Color(0xFFEF4444),
+    primary = IOSSystemBlue,
+    onPrimary = IOSTextWhite,
+    primaryContainer = IOSSegmentedTrack,
+    onPrimaryContainer = IOSTextWhite,
+    secondary = IOSSystemGray,
+    onSecondary = IOSTextWhite,
+    secondaryContainer = IOSCardDark,
+    onSecondaryContainer = IOSTextWhite,
+    tertiary = IOSSystemBlue,
+    error = IOSSystemRed,
     errorContainer = Color(0xFF450A0A),
-    background = Color(0xFF09090B), // Deep Charcoal Black
-    onBackground = MonoWhite,
-    surface = Color(0xFF121215),
-    onSurface = MonoWhite,
-    surfaceVariant = ZincSurfaceDark,
-    onSurfaceVariant = ZincMutedTextDark
+    background = IOSSystemBlack,
+    onBackground = IOSTextWhite,
+    surface = IOSCardDark,
+    onSurface = IOSTextWhite,
+    surfaceVariant = IOSSegmentedTrack,
+    onSurfaceVariant = IOSSystemGray
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = MonoBlack,
-    onPrimary = MonoWhite,
-    primaryContainer = ZincSurfaceLight,
-    onPrimaryContainer = MonoBlack,
-    secondary = ZincMutedTextLight,
-    onSecondary = MonoWhite,
-    secondaryContainer = ZincSurfaceLight,
-    onSecondaryContainer = MonoBlack,
-    tertiary = MonoBlack,
-    error = Color(0xFFDC2626),
-    errorContainer = Color(0xFFFEE2E2),
-    background = MonoWhite,
-    onBackground = MonoBlack,
-    surface = MonoWhite,
-    onSurface = MonoBlack,
-    surfaceVariant = ZincSurfaceLight,
-    onSurfaceVariant = ZincMutedTextLight
+    primary = IOSSystemBlueLight,
+    onPrimary = IOSTextWhite,
+    primaryContainer = Color(0xFFE5E5EA),
+    onPrimaryContainer = IOSSystemBlack,
+    secondary = IOSSystemGray,
+    onSecondary = IOSTextWhite,
+    secondaryContainer = Color(0xFFF2F2F7),
+    onSecondaryContainer = IOSSystemBlack,
+    tertiary = IOSSystemBlueLight,
+    error = IOSSystemRed,
+    errorContainer = Color(0xFFFFE4E6),
+    background = Color(0xFFF2F2F7),
+    onBackground = IOSSystemBlack,
+    surface = IOSTextWhite,
+    onSurface = IOSSystemBlack,
+    surfaceVariant = Color(0xFFE5E5EA),
+    onSurfaceVariant = IOSSystemGray
 )
 
 @Composable

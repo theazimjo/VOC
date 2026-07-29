@@ -6,9 +6,12 @@ import abs.uits.vocabry.data.model.Pack
 import abs.uits.vocabry.ui.components.BottomNavBar
 import abs.uits.vocabry.ui.library.components.FolderFormDialog
 import abs.uits.vocabry.ui.library.components.PackFormDialog
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import abs.uits.vocabry.ui.theme.IOSBorderDark
+import abs.uits.vocabry.ui.theme.IOSCardDark
+import abs.uits.vocabry.ui.theme.IOSSegmentedTrack
+import abs.uits.vocabry.ui.theme.IOSSystemBlue
+import abs.uits.vocabry.ui.theme.IOSSystemGray
+import abs.uits.vocabry.ui.theme.IOSTextWhite
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -40,8 +43,10 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
@@ -117,7 +122,7 @@ fun LibraryScreen(
                     Text(
                         "📚 Kutubxona",
                         fontWeight = FontWeight.ExtraBold,
-                        fontSize = 22.sp
+                        fontSize = 26.sp
                     )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -133,7 +138,7 @@ fun LibraryScreen(
                         editingPack = null
                         showPackForm = true
                     },
-                    containerColor = MaterialTheme.colorScheme.primary,
+                    containerColor = IOSSystemBlue,
                     contentColor = Color.White,
                     shape = CircleShape,
                     modifier = Modifier.size(56.dp)
@@ -148,32 +153,59 @@ fun LibraryScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
+            // iOS Segmented Tab Row
+            LibrarySegmentedTabs(
+                activeTab = activeTab,
+                packsCount = packs.size,
+                marketCount = viewModel.marketPacks.size,
+                onTabSelected = { viewModel.setActiveTab(it) }
+            )
+
+            Spacer(Modifier.height(14.dp))
+
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {
-                MyPacksContent(
-                    packs = packs,
-                    folders = folders,
-                    openFolder = openFolder,
-                    getPackMastery = { viewModel.getPackMastery(it) },
-                    onOpenFolder = { viewModel.openFolder(it) },
-                    onCloseFolder = { viewModel.closeFolder() },
-                    onPackClick = { navController.navigate("pack/${it.id}") },
-                    onPackEdit = {
-                        editingPack = it
-                        showPackForm = true
-                    },
-                    onFolderAdd = {
-                        editingFolder = null
-                        showFolderForm = true
-                    },
-                    onFolderEdit = {
-                        editingFolder = it
-                        showFolderForm = true
+                when (activeTab) {
+                    LibraryTab.MY_PACKS -> {
+                        MyPacksContent(
+                            packs = packs,
+                            folders = folders,
+                            openFolder = openFolder,
+                            getPackMastery = { viewModel.getPackMastery(it) },
+                            onOpenFolder = { viewModel.openFolder(it) },
+                            onCloseFolder = { viewModel.closeFolder() },
+                            onPackClick = { navController.navigate("pack/${it.id}") },
+                            onPackEdit = {
+                                editingPack = it
+                                showPackForm = true
+                            },
+                            onFolderAdd = {
+                                editingFolder = null
+                                showFolderForm = true
+                            },
+                            onFolderEdit = {
+                                editingFolder = it
+                                showFolderForm = true
+                            }
+                        )
                     }
-                )
+
+                    LibraryTab.MARKET -> {
+                        MarketContent(
+                            marketPacks = viewModel.marketPacks,
+                            installingPackId = installingPackId,
+                            updatingPackId = updatingPackId,
+                            justInstalledIds = justInstalledIds,
+                            findInstalledPack = { viewModel.findInstalledPack(it) },
+                            getMissingWords = { mp, ip -> viewModel.getMissingMarketWords(mp, ip) },
+                            onInstall = { viewModel.installMarketPack(it) },
+                            onUpdate = { mp, ip, mw -> viewModel.updateMarketPack(mp, ip, mw) }
+                        )
+                    }
+                }
             }
         }
     }
@@ -251,7 +283,7 @@ fun LibrarySegmentedTabs(
 ) {
     Surface(
         shape = RoundedCornerShape(12.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        color = IOSSegmentedTrack,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
@@ -264,33 +296,32 @@ fun LibrarySegmentedTabs(
             Surface(
                 onClick = { onTabSelected(LibraryTab.MY_PACKS) },
                 shape = RoundedCornerShape(9.dp),
-                color = if (librarySelected) MaterialTheme.colorScheme.surface else Color.Transparent,
-                shadowElevation = if (librarySelected) 2.dp else 0.dp,
+                color = if (librarySelected) Color(0xFF3A3A3C) else Color.Transparent,
                 modifier = Modifier.weight(1f)
             ) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 8.dp)
+                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 8.dp)
                 ) {
                     Text(
                         "🏠 Mening to'plamlarim",
                         fontWeight = if (librarySelected) FontWeight.Bold else FontWeight.Medium,
                         fontSize = 13.sp,
-                        color = if (librarySelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant
+                        color = IOSTextWhite
                     )
                     if (packsCount > 0) {
                         Spacer(Modifier.width(6.dp))
                         Surface(
                             shape = CircleShape,
-                            color = MaterialTheme.colorScheme.primaryContainer,
+                            color = Color(0xFF48484A),
                         ) {
                             Text(
                                 packsCount.toString(),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.ExtraBold,
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                                color = IOSTextWhite
                             )
                         }
                     }
@@ -301,32 +332,31 @@ fun LibrarySegmentedTabs(
             Surface(
                 onClick = { onTabSelected(LibraryTab.MARKET) },
                 shape = RoundedCornerShape(9.dp),
-                color = if (marketSelected) MaterialTheme.colorScheme.surface else Color.Transparent,
-                shadowElevation = if (marketSelected) 2.dp else 0.dp,
+                color = if (marketSelected) Color(0xFF3A3A3C) else Color.Transparent,
                 modifier = Modifier.weight(1f)
             ) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 8.dp)
+                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 8.dp)
                 ) {
                     Text(
                         "🛒 Market",
                         fontWeight = if (marketSelected) FontWeight.Bold else FontWeight.Medium,
                         fontSize = 13.sp,
-                        color = if (marketSelected) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.onSurfaceVariant
+                        color = if (marketSelected) IOSTextWhite else IOSSystemGray
                     )
                     Spacer(Modifier.width(6.dp))
                     Surface(
                         shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = Color(0xFF48484A),
                     ) {
                         Text(
                             marketCount.toString(),
                             fontSize = 10.sp,
                             fontWeight = FontWeight.ExtraBold,
                             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                            color = Color.White
+                            color = IOSTextWhite
                         )
                     }
                 }
@@ -349,7 +379,6 @@ fun MyPacksContent(
     onFolderEdit: (Folder) -> Unit,
 ) {
     if (openFolder != null) {
-        // Folder Detail View
         val folderPacks = packs.filter { it.folderId == openFolder.id }
 
         Column(modifier = Modifier.fillMaxSize()) {
@@ -398,7 +427,7 @@ fun MyPacksContent(
                         Text(
                             "Pastdagi + tugmasi bilan shu papkaga to'plam qo'shing.",
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = IOSSystemGray
                         )
                     }
                 }
@@ -422,7 +451,6 @@ fun MyPacksContent(
             }
         }
     } else {
-        // Top-level View (Folders + Top-level Packs Grid)
         val topLevelPacks = packs.filter { it.folderId == null }
 
         if (folders.isEmpty() && topLevelPacks.isEmpty()) {
@@ -444,7 +472,7 @@ fun MyPacksContent(
                     Text(
                         "Mavzular bo'yicha so'z to'plamlari yarating yoki ularni Marketdan yuklab oling.",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = IOSSystemGray
                     )
                 }
             }
@@ -456,24 +484,18 @@ fun MyPacksContent(
                 contentPadding = PaddingValues(bottom = 80.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                // Section header row
+                // Right-aligned + Yangi papka header button
                 item(span = { GridItemSpan(2) }) {
                     Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                        horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text(
-                            "Papkalar & To'plamlar",
-                            style = MaterialTheme.typography.titleSmall,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
                         TextButton(
                             onClick = onFolderAdd,
                             contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
                         ) {
-                            Text("+ Yangi papka", fontWeight = FontWeight.SemiBold)
+                            Text("+ Yangi papka", fontWeight = FontWeight.Bold, color = IOSSystemGray)
                         }
                     }
                 }
@@ -512,12 +534,17 @@ fun FolderCardItem(
     onLongClick: () -> Unit,
 ) {
     Card(
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(containerColor = IOSCardDark),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .height(180.dp)
+            .height(185.dp)
+            .border(
+                width = 1.dp,
+                color = IOSBorderDark,
+                shape = RoundedCornerShape(18.dp)
+            )
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = onLongClick
@@ -538,24 +565,24 @@ fun FolderCardItem(
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
-                        .size(42.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f))
+                        .size(46.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(IOSSegmentedTrack)
                 ) {
-                    Text(folder.icon.ifEmpty { "📁" }, fontSize = 22.sp)
+                    Text(folder.icon.ifEmpty { "📁" }, fontSize = 24.sp)
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         "$packCount ta to'plam",
-                        fontSize = 10.sp,
+                        fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = IOSSystemGray
                     )
                     IconButton(
                         onClick = onLongClick,
                         modifier = Modifier.size(24.dp)
                     ) {
-                        Icon(Icons.Filled.MoreVert, contentDescription = "Papkani boshqarish", modifier = Modifier.size(16.dp))
+                        Icon(Icons.Filled.MoreVert, contentDescription = "Papkani boshqarish", modifier = Modifier.size(16.dp), tint = IOSSystemGray)
                     }
                 }
             }
@@ -564,38 +591,44 @@ fun FolderCardItem(
             Column {
                 Text(
                     folder.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 16.sp,
+                    color = IOSTextWhite,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
+                Spacer(Modifier.height(2.dp))
                 Text(
-                    "Papka — bir mavzudagi to'plamlar",
+                    "Papka — bir mavzudagi to'plamlar shu yerda",
                     fontSize = 11.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1,
+                    color = IOSSystemGray,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
             }
 
             // Footer
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    "📁 Papkani ochish",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Text(
-                    "→",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
+            Column {
+                HorizontalDivider(color = IOSBorderDark, thickness = 1.dp)
+                Spacer(Modifier.height(8.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        "📁 Papkani ochish",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = IOSSystemGray
+                    )
+                    Text(
+                        "→",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = IOSSystemGray
+                    )
+                }
             }
         }
     }
@@ -609,23 +642,17 @@ fun PackCardItem(
     onClick: () -> Unit,
     onLongClick: () -> Unit,
 ) {
-    val accentColor = try {
-        Color(android.graphics.Color.parseColor(pack.color))
-    } catch (e: Exception) {
-        MaterialTheme.colorScheme.primary
-    }
-
     Card(
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)),
+        shape = RoundedCornerShape(18.dp),
+        colors = CardDefaults.cardColors(containerColor = IOSCardDark),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .height(180.dp)
+            .height(185.dp)
             .border(
                 width = 1.dp,
-                color = accentColor.copy(alpha = 0.25f),
-                shape = RoundedCornerShape(16.dp)
+                color = IOSBorderDark,
+                shape = RoundedCornerShape(18.dp)
             )
             .combinedClickable(
                 onClick = onClick,
@@ -647,25 +674,24 @@ fun PackCardItem(
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
-                        .size(42.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(accentColor.copy(alpha = 0.15f))
-                        .border(1.dp, accentColor.copy(alpha = 0.3f), RoundedCornerShape(10.dp))
+                        .size(46.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(IOSSegmentedTrack)
                 ) {
-                    Text(pack.icon.ifEmpty { "📦" }, fontSize = 22.sp)
+                    Text(pack.icon.ifEmpty { "📦" }, fontSize = 24.sp)
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         "${pack.wordCount} ta so'z",
-                        fontSize = 10.sp,
+                        fontSize = 11.sp,
                         fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = IOSSystemGray
                     )
                     IconButton(
                         onClick = onLongClick,
                         modifier = Modifier.size(24.dp)
                     ) {
-                        Icon(Icons.Filled.MoreVert, contentDescription = "Tahrirlash", modifier = Modifier.size(16.dp))
+                        Icon(Icons.Filled.MoreVert, contentDescription = "Tahrirlash", modifier = Modifier.size(16.dp), tint = IOSSystemGray)
                     }
                 }
             }
@@ -674,68 +700,74 @@ fun PackCardItem(
             Column {
                 Text(
                     pack.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontSize = 16.sp,
+                    color = IOSTextWhite,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
                 )
                 if (pack.description.isNotBlank()) {
+                    Spacer(Modifier.height(2.dp))
                     Text(
                         pack.description,
                         fontSize = 11.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = IOSSystemGray,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
                 }
             }
 
-            // Footer (Progress row or ✨ Yangi to'plam label)
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                if (masteryPercent != null && masteryPercent > 0) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        LinearProgressIndicator(
-                            progress = { masteryPercent / 100f },
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(5.dp)
-                                .clip(CircleShape),
-                            color = accentColor,
-                            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                            strokeCap = StrokeCap.Round
-                        )
-                        Spacer(Modifier.width(6.dp))
+            // Footer
+            Column {
+                HorizontalDivider(color = IOSBorderDark, thickness = 1.dp)
+                Spacer(Modifier.height(8.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    if (masteryPercent != null && masteryPercent > 0) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            LinearProgressIndicator(
+                                progress = { masteryPercent / 100f },
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(4.dp)
+                                    .clip(CircleShape),
+                                color = IOSSystemBlue,
+                                trackColor = IOSSegmentedTrack,
+                                strokeCap = StrokeCap.Round
+                            )
+                            Spacer(Modifier.width(6.dp))
+                            Text(
+                                "$masteryPercent%",
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = IOSSystemGray
+                            )
+                        }
+                    } else {
                         Text(
-                            "$masteryPercent%",
-                            fontSize = 10.sp,
+                            "✨ Yangi to'plam",
+                            fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = IOSSystemGray,
+                            modifier = Modifier.weight(1f)
                         )
                     }
-                } else {
+
+                    Spacer(Modifier.width(4.dp))
                     Text(
-                        "✨ Yangi to'plam",
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.weight(1f)
+                        "→",
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = IOSSystemGray
                     )
                 }
-
-                Spacer(Modifier.width(4.dp))
-                Text(
-                    "→",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = accentColor
-                )
             }
         }
     }
@@ -753,7 +785,7 @@ fun MarketContent(
     onUpdate: (MarketPack, Pack, List<abs.uits.vocabry.data.model.MarketWord>) -> Unit,
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(1), // Market cards fit 1 column full width like web
+        columns = GridCells.Fixed(1),
         verticalArrangement = Arrangement.spacedBy(14.dp),
         contentPadding = PaddingValues(bottom = 80.dp),
         modifier = Modifier.fillMaxSize()
@@ -795,19 +827,13 @@ fun MarketPackCardItem(
     missingWordsCount: Int,
     onAction: () -> Unit,
 ) {
-    val cardColor = try {
-        Color(android.graphics.Color.parseColor(marketPack.color))
-    } catch (e: Exception) {
-        MaterialTheme.colorScheme.primary
-    }
-
     Card(
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)),
+        colors = CardDefaults.cardColors(containerColor = IOSCardDark),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .border(1.dp, cardColor.copy(alpha = 0.3f), RoundedCornerShape(16.dp))
+            .border(1.dp, IOSBorderDark, RoundedCornerShape(16.dp))
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Row(
@@ -821,8 +847,7 @@ fun MarketPackCardItem(
                         modifier = Modifier
                             .size(46.dp)
                             .clip(RoundedCornerShape(12.dp))
-                            .background(cardColor.copy(alpha = 0.15f))
-                            .border(1.dp, cardColor.copy(alpha = 0.3f), RoundedCornerShape(12.dp))
+                            .background(IOSSegmentedTrack)
                     ) {
                         Text(marketPack.icon, fontSize = 24.sp)
                     }
@@ -831,24 +856,26 @@ fun MarketPackCardItem(
                         Text(
                             marketPack.name,
                             fontWeight = FontWeight.Bold,
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
+                            color = IOSTextWhite
                         )
                         Spacer(Modifier.height(2.dp))
                         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             Surface(
                                 shape = RoundedCornerShape(4.dp),
-                                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f)
+                                color = IOSSegmentedTrack
                             ) {
                                 Text(
                                     marketPack.category,
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
+                                    color = IOSTextWhite,
                                     modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                                 )
                             }
                             Surface(
                                 shape = RoundedCornerShape(4.dp),
-                                color = Color(0xFFAF52DE).copy(alpha = 0.15f)
+                                color = Color(0xFFAF52DE).copy(alpha = 0.2f)
                             ) {
                                 Text(
                                     marketPack.level,
@@ -868,7 +895,7 @@ fun MarketPackCardItem(
             Text(
                 marketPack.description,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = IOSSystemGray,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis
             )
@@ -884,7 +911,7 @@ fun MarketPackCardItem(
                     "📊 ${marketPack.words.size} ta so'z",
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = IOSSystemGray
                 )
 
                 val warningColor = Color(0xFFFF9F0A)
@@ -894,9 +921,9 @@ fun MarketPackCardItem(
                     colors = if (hasUpdate) {
                         ButtonDefaults.buttonColors(containerColor = warningColor, contentColor = Color.White)
                     } else if (isInstalled) {
-                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant, contentColor = MaterialTheme.colorScheme.onSurfaceVariant)
+                        ButtonDefaults.buttonColors(containerColor = IOSSegmentedTrack, contentColor = IOSSystemGray)
                     } else {
-                        ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary, contentColor = Color.White)
+                        ButtonDefaults.buttonColors(containerColor = IOSSystemBlue, contentColor = Color.White)
                     },
                     shape = RoundedCornerShape(10.dp),
                     contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp)

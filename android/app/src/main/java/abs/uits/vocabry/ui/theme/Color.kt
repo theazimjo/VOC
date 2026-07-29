@@ -2,19 +2,19 @@ package abs.uits.vocabry.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Pure Monochrome (Black & White)
-val MonoBlack = Color(0xFF000000)
-val MonoDarkCharcoal = Color(0xFF18181B)   // Zinc 900
-val MonoWhite = Color(0xFFFFFFFF)
-val MonoOffWhite = Color(0xFFFAFAFA)    // Zinc 50
+// iOS Dark Palette
+val IOSSystemBlack = Color(0xFF000000)      // Pure OLED Black
+val IOSCardDark = Color(0xFF1C1C1E)         // iOS Dark Surface / Card
+val IOSSegmentedTrack = Color(0xFF2C2C2E)   // iOS Segmented Track
+val IOSBorderDark = Color(0xFF38383A)       // iOS Subtle Border / Divider
 
-// Borders & Surfaces
-val ZincBorderLight = Color(0xFFE4E4E7) // Zinc 200
-val ZincBorderDark = Color(0xFF27272A)  // Zinc 800
+// iOS System Colors
+val IOSSystemBlue = Color(0xFF0A84FF)       // iOS Active Blue / FAB
+val IOSSystemBlueLight = Color(0xFF007AFF)  // iOS Light Active Blue
+val IOSSystemGray = Color(0xFF8E8E93)       // iOS Muted Gray Text
+val IOSSystemRed = Color(0xFFFF453A)        // iOS System Red
+val IOSSystemGreen = Color(0xFF30D158)      // iOS System Green
+val IOSSystemYellow = Color(0xFFFFD60A)     // iOS System Yellow
 
-val ZincSurfaceLight = Color(0xFFF4F4F5) // Zinc 100
-val ZincSurfaceDark = Color(0xFF1E1E22)  // Zinc 900
-
-// Neutral Text & Muted
-val ZincMutedTextLight = Color(0xFF71717A) // Zinc 500
-val ZincMutedTextDark = Color(0xFFA1A1AA)  // Zinc 400
+// Text
+val IOSTextWhite = Color(0xFFFFFFFF)
