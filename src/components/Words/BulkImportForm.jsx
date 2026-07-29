@@ -7,7 +7,7 @@ const SAMPLE_JSON = `[
     "word": "Apple",
     "translation": "Olma",
     "partOfSpeech": "noun",
-    "definition": "A round fruit with red or green skin",
+    "definition": "Qizil yoki yashil po'stli yumaloq meva",
     "example": "I ate an apple."
   },
   {

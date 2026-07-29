@@ -1,0 +1,345 @@
+.photo-modal {
+  max-width: 680px;
+  width: 92%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-modal-body {
+  overflow-y: auto;
+  max-height: 65vh;
+  padding: 16px;
+}
+
+.photo-error-banner {
+  padding: 10px 14px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  font-size: 0.88rem;
+}
+
+/* Upload & Camera Option Cards */
+.photo-input-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 520px) {
+  .photo-input-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.photo-dropzone {
+  border: 2px dashed rgba(124, 58, 237, 0.35);
+  background: rgba(124, 58, 237, 0.04);
+  border-radius: 16px;
+  padding: 30px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.photo-dropzone.camera-option {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.04);
+}
+
+.photo-dropzone:hover {
+  border-color: var(--accent-1, #7c3aed);
+  background: rgba(124, 58, 237, 0.08);
+  transform: translateY(-2px);
+}
+
+.photo-dropzone.camera-option:hover {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.photo-dropzone-icon {
+  font-size: 38px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.photo-dropzone-title {
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin-bottom: 4px;
+  color: var(--text-1, #f3f4f6);
+}
+
+.photo-dropzone-sub {
+  font-size: 0.8rem;
+  color: var(--text-2, #9ca3af);
+}
+
+/* Live Camera Viewfinder */
+.photo-camera-viewfinder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.camera-viewport-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.camera-video-stream {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Document Framing Guide Corners */
+.camera-doc-frame {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+
+.doc-frame-hint {
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 0.78rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.doc-frame-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: #10b981;
+  border-style: solid;
+}
+
+.doc-frame-corner.top-left {
+  top: -2px;
+  left: -2px;
+  border-width: 3px 0 0 3px;
+  border-top-left-radius: 8px;
+}
+
+.doc-frame-corner.top-right {
+  top: -2px;
+  right: -2px;
+  border-width: 3px 3px 0 0;
+  border-top-right-radius: 8px;
+}
+
+.doc-frame-corner.bottom-left {
+  bottom: -2px;
+  left: -2px;
+  border-width: 0 0 3px 3px;
+  border-bottom-left-radius: 8px;
+}
+
+.doc-frame-corner.bottom-right {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 3px 3px 0;
+  border-bottom-right-radius: 8px;
+}
+
+.camera-controls {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-snap-photo {
+  background: #10b981;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 12px;
+}
+
+.btn-snap-photo:hover {
+  background: #059669;
+}
+
+/* Preview Image */
+.photo-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.photo-preview-img {
+  max-height: 240px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.photo-reselect-btn {
+  font-size: 0.82rem;
+  color: var(--text-2, #9ca3af);
+}
+
+.photo-action-bar {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.photo-extract-btn {
+  padding: 10px 24px;
+  font-weight: 600;
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* Review List Section */
+.photo-review-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.photo-review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-2, #9ca3af);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+
+.photo-review-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--accent-1, #7c3aed);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.photo-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.photo-item-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  transition: all 0.15s ease;
+}
+
+.photo-item-card.selected {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.photo-item-card.duplicate {
+  opacity: 0.65;
+  background: rgba(245, 158, 11, 0.05);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+.photo-item-checkbox {
+  padding-top: 8px;
+}
+
+.photo-item-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-1, #7c3aed);
+  cursor: pointer;
+}
+
+.photo-item-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.photo-item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.photo-input-word, .photo-input-trans {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+.photo-item-arrow {
+  color: var(--text-2, #9ca3af);
+  font-size: 0.85rem;
+}
+
+.photo-item-subtext {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.78rem;
+  color: var(--text-2, #9ca3af);
+}
+
+.photo-badge-duplicate {
+  font-size: 0.75rem;
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.photo-item-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.photo-item-delete:hover {
+  opacity: 1;
+}

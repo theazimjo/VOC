@@ -14,6 +14,7 @@ import { getConfusionPairs } from '../experiment/experimentDB';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
 import BulkImportForm from '../components/Words/BulkImportForm';
+import PhotoWordExtractorModal from '../components/Words/PhotoWordExtractorModal';
 import SpeedDialFAB from '../components/Words/SpeedDialFAB';
 import IosSpinner from '../components/common/IosSpinner';
 import './PackDetail.css';
@@ -29,8 +30,10 @@ export default function PackDetail() {
   const [pack, setPack] = useState(null);
   const [showWordForm, setShowWordForm] = useState(false);
   const [showBulkImportForm, setShowBulkImportForm] = useState(false);
+  const [showPhotoExtractorModal, setShowPhotoExtractorModal] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
   const [newWordsAddedCount, setNewWordsAddedCount] = useState(null);
+
   const [confusionPairs, setConfusionPairs] = useState([]);
   const marketSyncCheckedRef = useRef(false);
 
@@ -306,10 +309,18 @@ export default function PackDetail() {
         onImport={handleBulkImport}
       />
 
+      <PhotoWordExtractorModal
+        isOpen={showPhotoExtractorModal}
+        onClose={() => setShowPhotoExtractorModal(false)}
+        onImport={(newWords) => handleBulkImport(newWords)}
+        existingWords={words}
+      />
+
       {pack.name !== 'Irregular Verbs' && (
         <SpeedDialFAB
           onAddWord={() => { setEditingWord(null); setShowWordForm(true); }}
           onImportJson={() => setShowBulkImportForm(true)}
+          onExtractPhoto={() => setShowPhotoExtractorModal(true)}
         />
       )}
 

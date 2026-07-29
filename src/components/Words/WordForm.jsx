@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../contexts/AuthContext';
 import { partOfSpeechOptions } from '../../utils/helpers';
+import { lookupWordWithAI } from '../../utils/geminiService';
 import './WordForm.css';
 
 export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
+  const { user } = useAuth();
+
   const [formData, setFormData] = useState({
     word: '',
     translation: '',
@@ -14,6 +18,43 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
     customSentence: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [aiError, setAiError] = useState(null);
+
+  const handleAiAutofill = async (queryText) => {
+    const userEmail = user?.email?.toLowerCase() || '';
+    if (userEmail !== 'azimjonxolmirzayev30@gmail.com') {
+      setAiError("🔒 AI Avto-to'ldirish tez orada taqdim etiladi! (Coming soon)");
+      return;
+    }
+
+    const q = queryText || formData.word || formData.translation;
+    if (!q.trim() || isAiLoading) return;
+
+    setIsAiLoading(true);
+    setAiError(null);
+    try {
+      const res = await lookupWordWithAI(q);
+      if (res) {
+        setFormData(prev => ({
+          ...prev,
+          word: res.word || prev.word,
+          translation: res.translation || prev.translation,
+          partOfSpeech: res.partOfSpeech || prev.partOfSpeech,
+          definition: res.definition || prev.definition,
+          example: res.example || prev.example,
+        }));
+      } else {
+        setAiError("So'z ma'lumoti topilmadi.");
+      }
+    } catch (err) {
+      console.error(err);
+      setAiError(err.message || "AI so'rovida xatolik yuz berdi");
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
+
 
   useEffect(() => {
     if (editWord) {
@@ -64,13 +105,31 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
           >
-            <div className="modal-header">
+            <div className="modal-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <h2>{editWord ? "So'zni tahrirlash" : "Yangi so'z"}</h2>
-              <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  onClick={() => handleAiAutofill()}
+                  disabled={isAiLoading || (!formData.word.trim() && !formData.translation.trim())}
+                  style={{ fontSize: '0.82rem', padding: '4px 10px', borderRadius: '8px', background: 'rgba(124, 58, 237, 0.1)', color: 'var(--accent-1, #7c3aed)', border: '1px solid rgba(124, 58, 237, 0.2)' }}
+                  title="Gemini AI orqali tarjima, ta'rif va so'z turkumini avto-to'ldirish"
+                >
+                  {isAiLoading ? '✨ Qidirilmoqda...' : '✨ AI Avto-to\'ldirish'}
+                </button>
+                <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
+              </div>
             </div>
             
             <form onSubmit={handleSubmit}>
               <div className="modal-body word-form-grid">
+                {aiError && (
+                  <div className="word-form-full" style={{ padding: '8px 12px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: '8px', fontSize: '0.85rem' }}>
+                    ⚠️ {aiError}
+                  </div>
+                )}
+
                 <div className="input-group">
                   <label>Inglizcha so'z *</label>
                   <input 
@@ -118,7 +177,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                     className="input" 
                     value={formData.definition}
                     onChange={e => setFormData({...formData, definition: e.target.value})}
-                    placeholder="Ingliz tilidagi ta'rifi"
+                    placeholder="O'zbek tilidagi ta'rifi"
                     maxLength={1000}
                   />
                 </div>
