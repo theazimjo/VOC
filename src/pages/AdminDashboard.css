@@ -337,7 +337,7 @@
 
 .adm-user-main {
   display: grid;
-  grid-template-columns: auto 1fr auto auto auto 24px;
+  grid-template-columns: auto 1fr auto auto 24px;
   gap: 12px;
   align-items: center;
   padding: 0.85rem 1.25rem;
@@ -408,32 +408,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Plan toggle */
-.adm-plan-toggle {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  cursor: pointer;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  transition: opacity 0.15s;
-}
-.adm-plan-toggle:disabled { opacity: 0.5; cursor: wait; }
-.adm-plan-toggle.adm-plan-free {
-  background: var(--bg-tertiary);
-  color: var(--text-muted);
-  border-color: var(--border);
-}
-.adm-plan-toggle.adm-plan-premium {
-  background: rgba(139, 92, 246, 0.12);
-  color: #8b5cf6;
-  border-color: rgba(139, 92, 246, 0.3);
 }
 
 /* Quick stats */
@@ -697,6 +671,6 @@
   .adm-user-quick { display: none; }
   .adm-col-stats { display: none; }
   .adm-users-header { grid-template-columns: 1fr auto 24px; }
-  .adm-user-main { grid-template-columns: auto 1fr auto auto 24px; }
+  .adm-user-main { grid-template-columns: auto 1fr auto 24px; }
   .adm-sort-tabs { display: none; }
 }

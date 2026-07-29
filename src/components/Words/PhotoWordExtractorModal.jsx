@@ -1,12 +1,12 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../contexts/AuthContext';
 import { extractWordsFromImageAI, getGeminiApiKey, setGeminiApiKey } from '../../utils/geminiService';
-import { usePlan } from '../../hooks/usePlan';
 import './PhotoWordExtractorModal.css';
 
 export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, existingWords = [] }) {
-  const { isPremium } = usePlan();
-  const isAllowedUser = isPremium;
+  const { user } = useAuth();
+  const isAllowedUser = user?.email?.toLowerCase() === 'azimjonxolmirzayev30@gmail.com';
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
@@ -136,7 +136,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
   const handleExtract = async () => {
     if (!imagePreview || isProcessing) return;
 
-    if (!getGeminiApiKey(isPremium)) {
+    if (!getGeminiApiKey()) {
       setShowKeyInput(true);
       setErrorMsg("🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting.");
       return;
@@ -147,7 +147,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
 
     try {
       const mimeType = selectedImage?.type || 'image/jpeg';
-      const items = await extractWordsFromImageAI(imagePreview, mimeType, existingWords, isPremium);
+      const items = await extractWordsFromImageAI(imagePreview, mimeType, existingWords);
 
       if (!items || items.length === 0) {
         setErrorMsg("Rasmdan so'zlar ajratib bo'lmadi. Iltimos, boshqa aniqroq rasm tanlang.");
@@ -263,10 +263,10 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                     Rasmdan so'z ajratish (AI OCR)
                   </h3>
                   <p style={{ color: 'var(--text-2, #9ca3af)', fontSize: '0.9rem', maxWidth: '380px', margin: '0 auto 16px auto', lineHeight: '1.5' }}>
-                    Rasmdan so'z ajratish (AI OCR) faqat Premium foydalanuvchilar uchun mavjud. Sozlamalar bo'limidan Premium haqida bilib oling.
+                    Ushbu AI imkoniyati hozirda sinov jarayonida. Tez orada barcha foydalanuvchilar uchun ishga tushiriladi!
                   </p>
                   <span style={{ display: 'inline-block', padding: '6px 14px', borderRadius: '20px', background: 'rgba(124, 58, 237, 0.15)', color: 'var(--accent-1, #7c3aed)', fontSize: '0.82rem', fontWeight: 'bold' }}>
-                    ⭐ Premium
+                    🚀 Coming soon
                   </span>
                 </div>
               ) : (

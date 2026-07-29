@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../../contexts/AuthContext';
 import { partOfSpeechOptions } from '../../utils/helpers';
 import { lookupWordWithAI, getGeminiApiKey, setGeminiApiKey } from '../../utils/geminiService';
-import { usePlan } from '../../hooks/usePlan';
 import './WordForm.css';
 
 export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
-  const { isPremium } = usePlan();
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     word: '',
@@ -24,12 +24,13 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
   const [customKey, setCustomKey] = useState('');
 
   const handleAiAutofill = async (queryText) => {
-    if (!isPremium) {
-      setAiError("🔒 AI Avto-to'ldirish Premium reja uchun mavjud. Sozlamalar bo'limidan Premium haqida bilib oling.");
+    const userEmail = user?.email?.toLowerCase() || '';
+    if (userEmail !== 'azimjonxolmirzayev30@gmail.com') {
+      setAiError("🔒 AI Avto-to'ldirish tez orada taqdim etiladi! (Coming soon)");
       return;
     }
 
-    if (!getGeminiApiKey(isPremium)) {
+    if (!getGeminiApiKey()) {
       setShowKeyInput(true);
       setAiError("🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting.");
       return;
@@ -41,7 +42,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
     setIsAiLoading(true);
     setAiError(null);
     try {
-      const res = await lookupWordWithAI(q, isPremium);
+      const res = await lookupWordWithAI(q);
       if (res) {
         setFormData(prev => ({
           ...prev,
@@ -124,9 +125,9 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                   onClick={() => handleAiAutofill()}
                   disabled={isAiLoading || (!formData.word.trim() && !formData.translation.trim())}
                   style={{ fontSize: '0.82rem', padding: '4px 10px', borderRadius: '8px', background: 'rgba(124, 58, 237, 0.1)', color: 'var(--accent-1, #7c3aed)', border: '1px solid rgba(124, 58, 237, 0.2)' }}
-                  title={isPremium ? "Gemini AI orqali tarjima, ta'rif va so'z turkumini avto-to'ldirish" : "Premium reja uchun mavjud"}
+                  title="Gemini AI orqali tarjima, ta'rif va so'z turkumini avto-to'ldirish"
                 >
-                  {isAiLoading ? '✨ Qidirilmoqda...' : isPremium ? '✨ AI Avto-to\'ldirish' : '🔒 AI Avto-to\'ldirish'}
+                  {isAiLoading ? '✨ Qidirilmoqda...' : '✨ AI Avto-to\'ldirish'}
                 </button>
                 <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
               </div>

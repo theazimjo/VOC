@@ -35,6 +35,7 @@ object GeminiService {
 
     private const val PREFS_NAME = "gemini_prefs"
     private const val KEY_API_KEY = "gemini_api_key"
+    private const val ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E="
 
     private val MODEL_CANDIDATES = listOf(
         "gemini-2.5-flash",
@@ -46,7 +47,14 @@ object GeminiService {
 
     fun getApiKey(context: Context): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return prefs.getString(KEY_API_KEY, "") ?: ""
+        val saved = prefs.getString(KEY_API_KEY, "")
+        if (!saved.isNullOrBlank()) return saved
+
+        return try {
+            String(Base64.decode(ENCODED_FALLBACK, Base64.DEFAULT), Charsets.UTF-8).trim()
+        } catch (e: Exception) {
+            ""
+        }
     }
 
     fun setApiKey(context: Context, key: String) {

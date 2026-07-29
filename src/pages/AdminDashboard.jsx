@@ -6,11 +6,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ref, get, set } from 'firebase/database';
+import { ref, get } from 'firebase/database';
 import {
   Users, Activity, BookOpen, Clock, TrendingUp,
   ArrowLeft, RefreshCw, Shield, Zap, Award,
-  ChevronDown, ChevronUp, Search, AlertTriangle, Star
+  ChevronDown, ChevronUp, Search, AlertTriangle
 } from 'lucide-react';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
@@ -139,22 +139,9 @@ function ActivityHeatmap({ activityLog = {} }) {
 
 // ─── User Row ─────────────────────────────────────────────────────────────────
 
-function UserRow({ userData, index, onTogglePlan }) {
+function UserRow({ userData, index }) {
   const [expanded, setExpanded] = useState(false);
-  const [togglingPlan, setTogglingPlan] = useState(false);
   const { profile, activity, packs = {}, words = {}, meta = {} } = userData;
-  const isPremium = userData.plan === 'premium';
-
-  const handleTogglePlan = async (e) => {
-    e.stopPropagation();
-    if (togglingPlan) return;
-    setTogglingPlan(true);
-    try {
-      await onTogglePlan(userData.uid, isPremium ? 'free' : 'premium');
-    } finally {
-      setTogglingPlan(false);
-    }
-  };
 
   const packCount = Object.keys(packs).length;
   const wordCount = Object.values(words).reduce((total, packWords) => {
@@ -202,17 +189,6 @@ function UserRow({ userData, index, onTogglePlan }) {
           </div>
           <div className="adm-user-email">{profile?.email || '—'}</div>
         </div>
-
-        {/* Plan toggle */}
-        <button
-          className={`adm-plan-toggle ${isPremium ? 'adm-plan-premium' : 'adm-plan-free'}`}
-          onClick={handleTogglePlan}
-          disabled={togglingPlan}
-          title={isPremium ? "Premium'dan Free'ga o'tkazish" : "Premium'ga o'tkazish"}
-        >
-          <Star size={12} />
-          {isPremium ? 'Premium' : 'Free'}
-        </button>
 
         {/* Quick stats */}
         <div className="adm-user-quick">
@@ -336,18 +312,14 @@ export default function AdminDashboard() {
     setLoading(true);
     setError(null);
     try {
-      const [usersSnap, plansSnap] = await Promise.all([
-        get(ref(db, 'users')),
-        get(ref(db, 'userPlans')),
-      ]);
-      if (!usersSnap.exists()) {
+      const snap = await get(ref(db, 'users'));
+      if (!snap.exists()) {
         setUsers([]);
         return;
       }
-      const plans = plansSnap.exists() ? plansSnap.val() : {};
       const list = [];
-      usersSnap.forEach(child => {
-        list.push({ uid: child.key, ...child.val(), plan: plans[child.key]?.plan || 'free' });
+      snap.forEach(child => {
+        list.push({ uid: child.key, ...child.val() });
       });
       setUsers(list);
       setLastRefresh(new Date());
@@ -360,16 +332,6 @@ export default function AdminDashboard() {
   }, [user]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
-
-  const handleTogglePlan = useCallback(async (uid, newPlan) => {
-    try {
-      await set(ref(db, `userPlans/${uid}`), { plan: newPlan, updatedAt: new Date().toISOString() });
-      setUsers(prev => prev.map(u => u.uid === uid ? { ...u, plan: newPlan } : u));
-    } catch (err) {
-      console.error('[Admin] plan toggle error:', err);
-      alert(`Tarifni o'zgartirishda xatolik: ${err.message}`);
-    }
-  }, []);
 
   if (!user || user.email !== ADMIN_EMAIL) return null;
 
@@ -386,7 +348,6 @@ export default function AdminDashboard() {
   }, 0);
   const totalPacks = users.reduce((s, u) => s + Object.keys(u.packs || {}).length, 0);
   const avgSessions = totalUsers > 0 ? (totalSessions / totalUsers).toFixed(1) : '—';
-  const premiumCount = users.filter(u => u.plan === 'premium').length;
 
   // ── Filter + sort ────────────────────────────────────────────
 
@@ -481,13 +442,6 @@ export default function AdminDashboard() {
             color="orange"
             sub={`${totalPacks} ta to'plam`}
           />
-          <StatCard
-            icon={<Star size={22} />}
-            value={premiumCount}
-            label="Premium foydalanuvchilar"
-            color="purple"
-            sub={`${totalUsers - premiumCount} ta Free`}
-          />
         </div>
 
         {/* Activity breakdown */}
@@ -572,7 +526,7 @@ export default function AdminDashboard() {
           ) : (
             <div className="adm-users-list">
               {filtered.map((u, i) => (
-                <UserRow key={u.uid} userData={u} index={i} onTogglePlan={handleTogglePlan} />
+                <UserRow key={u.uid} userData={u} index={i} />
               ))}
             </div>
           )}
