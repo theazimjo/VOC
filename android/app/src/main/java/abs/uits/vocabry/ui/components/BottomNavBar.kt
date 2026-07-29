@@ -40,15 +40,5 @@ fun BottomNavBar(navController: NavController) {
             icon = { Icon(Icons.Filled.List, contentDescription = "Kutubxona") },
             label = { Text("Kutubxona") },
         )
-        NavigationBarItem(
-            selected = currentRoute?.hierarchy?.any { it.route == "live" } == true,
-            onClick = {
-                navController.navigate("live") {
-                    popUpTo("dashboard")
-                }
-            },
-            icon = { Text("✨", fontSize = 18.sp) },
-            label = { Text("Live AI") },
-        )
     }
 }
