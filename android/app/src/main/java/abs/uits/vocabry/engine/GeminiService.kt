@@ -51,7 +51,7 @@ object GeminiService {
         if (!saved.isNullOrBlank()) return saved
 
         return try {
-            String(Base64.decode(ENCODED_FALLBACK, Base64.DEFAULT), Charsets.UTF-8).trim()
+            String(Base64.decode(ENCODED_FALLBACK, Base64.DEFAULT), java.nio.charset.StandardCharsets.UTF_8).trim()
         } catch (e: Exception) {
             ""
         }
