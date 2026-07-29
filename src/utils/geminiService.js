@@ -1,19 +1,19 @@
 /**
  * Lightweight Gemini AI Service for VOC Web App
- * Automatically tries high-availability Flash models (gemini-1.5-flash, gemini-2.0-flash-exp)
+ * Automatically tries canonical dynamic aliases (gemini-flash-latest, gemini-flash-lite-latest)
  * for maximum reliability, speed, and minimal token cost.
  */
 
 const ENCODED_FALLBACK = "QVEuQWI4Uk42TFRjeE9hb2p0RjJYTml5b3BLdXBnOEJNZnNpSXpndzlyby03SWFwd3JKU1E=";
 const DEFAULT_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || (typeof atob === 'function' ? atob(ENCODED_FALLBACK) : "");
 
-// High availability models
+// Canonical dynamic aliases supported across all Google AI Studio keys
 const MODEL_CANDIDATES = [
-  "gemini-1.5-flash",
-  "gemini-2.0-flash-exp",
+  "gemini-flash-latest",
+  "gemini-flash-lite-latest",
   "gemini-2.0-flash",
-  "gemini-1.5-flash-8b",
-  "gemini-1.5-pro"
+  "gemini-2.5-flash",
+  "gemini-pro-latest"
 ];
 
 export function getGeminiApiKey() {
@@ -36,7 +36,6 @@ export function setGeminiApiKey(key) {
 async function callGeminiWithFallback(payload, apiKey) {
   let lastErrorText = "";
   let lastResponseStatus = 0;
-  let isInvalidKey = false;
 
   for (const model of MODEL_CANDIDATES) {
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
@@ -57,20 +56,12 @@ async function callGeminiWithFallback(payload, apiKey) {
       const errorText = await response.text().catch(() => '');
       lastErrorText = `[${model}] HTTP ${response.status}: ${errorText || response.statusText}`;
 
-      if (errorText.includes('is not found for API version') || errorText.includes('API key not valid')) {
-        isInvalidKey = true;
-      }
-
       console.warn(`Gemini model ${model} issue (HTTP ${response.status}), trying next candidate...`);
       continue;
     } catch (err) {
       lastErrorText = err.message || "";
       continue;
     }
-  }
-
-  if (isInvalidKey || !apiKey.startsWith('AIzaSy')) {
-    throw new Error("API Kalit yaroqsiz. Google AI Studio'dan yangi API kalit (AIzaSy...) olib, Profil bo'limida kiriting.");
   }
 
   if (lastResponseStatus === 429) {
