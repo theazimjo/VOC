@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { partOfSpeechOptions } from '../../utils/helpers';
-import { lookupWordWithAI } from '../../utils/geminiService';
+import { lookupWordWithAI, getGeminiApiKey, setGeminiApiKey } from '../../utils/geminiService';
 import './WordForm.css';
 
 export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
@@ -20,11 +20,19 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [aiError, setAiError] = useState(null);
+  const [showKeyInput, setShowKeyInput] = useState(false);
+  const [customKey, setCustomKey] = useState('');
 
   const handleAiAutofill = async (queryText) => {
     const userEmail = user?.email?.toLowerCase() || '';
     if (userEmail !== 'azimjonxolmirzayev30@gmail.com') {
       setAiError("🔒 AI Avto-to'ldirish tez orada taqdim etiladi! (Coming soon)");
+      return;
+    }
+
+    if (!getGeminiApiKey()) {
+      setShowKeyInput(true);
+      setAiError("🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting.");
       return;
     }
 
@@ -49,6 +57,9 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
       }
     } catch (err) {
       console.error(err);
+      if (err.message && err.message.includes('API kalit')) {
+        setShowKeyInput(true);
+      }
       setAiError(err.message || "AI so'rovida xatolik yuz berdi");
     } finally {
       setIsAiLoading(false);
@@ -127,6 +138,39 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                 {aiError && (
                   <div className="word-form-full" style={{ padding: '8px 12px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: '8px', fontSize: '0.85rem' }}>
                     ⚠️ {aiError}
+                  </div>
+                )}
+
+                {showKeyInput && (
+                  <div className="word-form-full" style={{ padding: '10px 14px', background: 'rgba(124, 58, 237, 0.1)', border: '1px solid rgba(124, 58, 237, 0.25)', borderRadius: '10px' }}>
+                    <label style={{ fontSize: '0.82rem', fontWeight: 'bold', display: 'block', marginBottom: '6px' }}>
+                      🔑 Gemini API Kalitingizni kiriting:
+                    </label>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <input 
+                        type="password" 
+                        className="input" 
+                        value={customKey} 
+                        onChange={e => setCustomKey(e.target.value)} 
+                        placeholder="AI Studio API Key..." 
+                        style={{ fontSize: '0.85rem', flex: 1 }}
+                      />
+                      <button 
+                        type="button" 
+                        className="btn btn-primary" 
+                        onClick={() => {
+                          if (customKey.trim()) {
+                            setGeminiApiKey(customKey.trim());
+                            setShowKeyInput(false);
+                            setAiError(null);
+                            handleAiAutofill();
+                          }
+                        }}
+                        style={{ fontSize: '0.8rem', whiteSpace: 'nowrap', padding: '6px 14px' }}
+                      >
+                        Saqlash
+                      </button>
+                    </div>
                   </div>
                 )}
 

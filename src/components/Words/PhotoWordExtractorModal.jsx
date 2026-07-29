@@ -1,7 +1,7 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
-import { extractWordsFromImageAI } from '../../utils/geminiService';
+import { extractWordsFromImageAI, getGeminiApiKey, setGeminiApiKey } from '../../utils/geminiService';
 import './PhotoWordExtractorModal.css';
 
 export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, existingWords = [] }) {
@@ -13,6 +13,8 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
   const [isProcessing, setIsProcessing] = useState(false);
   const [extractedItems, setExtractedItems] = useState([]);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [showKeyInput, setShowKeyInput] = useState(false);
+  const [customKey, setCustomKey] = useState('');
 
 
   // Camera state
@@ -134,6 +136,12 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
   const handleExtract = async () => {
     if (!imagePreview || isProcessing) return;
 
+    if (!getGeminiApiKey()) {
+      setShowKeyInput(true);
+      setErrorMsg("🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting.");
+      return;
+    }
+
     setIsProcessing(true);
     setErrorMsg(null);
 
@@ -165,6 +173,9 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
       }
     } catch (err) {
       console.error(err);
+      if (err.message && err.message.includes('API kalit')) {
+        setShowKeyInput(true);
+      }
       setErrorMsg(err.message || "Rasmni AI orqali tahlil qilishda xatolik yuz berdi");
     } finally {
       setIsProcessing(false);
@@ -263,6 +274,39 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                   {errorMsg && (
                     <div className="photo-error-banner">
                       ⚠️ {errorMsg}
+                    </div>
+                  )}
+
+                  {showKeyInput && (
+                    <div style={{ padding: '10px 14px', background: 'rgba(124, 58, 237, 0.1)', border: '1px solid rgba(124, 58, 237, 0.25)', borderRadius: '10px', marginBottom: '14px' }}>
+                      <label style={{ fontSize: '0.82rem', fontWeight: 'bold', display: 'block', marginBottom: '6px', color: 'var(--text-1, #f3f4f6)' }}>
+                        🔑 Gemini API Kalitingizni kiriting:
+                      </label>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <input 
+                          type="password" 
+                          className="input" 
+                          value={customKey} 
+                          onChange={e => setCustomKey(e.target.value)} 
+                          placeholder="AI Studio API Key..." 
+                          style={{ fontSize: '0.85rem', flex: 1 }}
+                        />
+                        <button 
+                          type="button" 
+                          className="btn btn-primary" 
+                          onClick={() => {
+                            if (customKey.trim()) {
+                              setGeminiApiKey(customKey.trim());
+                              setShowKeyInput(false);
+                              setErrorMsg(null);
+                              if (imagePreview) handleExtract();
+                            }
+                          }}
+                          style={{ fontSize: '0.8rem', whiteSpace: 'nowrap', padding: '6px 14px' }}
+                        >
+                          Saqlash
+                        </button>
+                      </div>
                     </div>
                   )}
 
