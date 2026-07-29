@@ -1,8 +1,13 @@
 package abs.uits.vocabry.ui.live
 
 import abs.uits.vocabry.ui.components.BottomNavBar
-import android.content.Context
+import abs.uits.vocabry.util.AudioPlayerHelper
+import android.app.Activity
+import android.content.Intent
+import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -98,11 +103,36 @@ fun LiveScreen(
         onDispose {
             tts?.stop()
             tts?.shutdown()
+            AudioPlayerHelper.stopAudio()
         }
     }
 
-    fun speakText(text: String) {
-        if (ttsReady) {
+    val speechLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val spokenText = result.data
+                ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                ?.firstOrNull()
+            if (!spokenText.isNullOrBlank()) {
+                viewModel.sendMessage(context, spokenText)
+            }
+        }
+    }
+
+    fun startSpeechToText() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+            putExtra(RecognizerIntent.EXTRA_PROMPT, "Jonli AI bilan gaplashing...")
+        }
+        speechLauncher.launch(intent)
+    }
+
+    fun playMsgAudio(audioBase64: String?, text: String) {
+        if (!audioBase64.isNullOrBlank()) {
+            AudioPlayerHelper.playBase64Audio(context, audioBase64)
+        } else if (ttsReady) {
             tts?.stop()
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "live_speech_${System.currentTimeMillis()}")
         }
@@ -111,7 +141,7 @@ fun LiveScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("✨ Gemini Live AI Tutor", fontWeight = FontWeight.Bold) },
+                title = { Text("✨ Gemini Live Voice Tutor", fontWeight = FontWeight.Bold) },
                 actions = {
                     if (isAllowedUser) {
                         IconButton(onClick = { viewModel.clearHistory() }) {
@@ -214,15 +244,15 @@ fun LiveScreen(
                                         modifier = Modifier.fillMaxWidth()
                                     ) {
                                         Text(
-                                            if (isUser) "Siz" else "✨ VOC Live Tutor",
+                                            if (isUser) "Siz" else "✨ VOC Live Voice AI",
                                             fontSize = 11.sp,
                                             fontWeight = FontWeight.Bold,
                                             color = if (isUser) Color.White.copy(alpha = 0.8f) else MaterialTheme.colorScheme.primary
                                         )
                                         if (!isUser) {
                                             IconButton(
-                                                onClick = { speakText(msg.text) },
-                                                modifier = Modifier.size(24.dp)
+                                                onClick = { playMsgAudio(msg.audioBase64, msg.text) },
+                                                modifier = Modifier.size(26.dp)
                                             ) {
                                                 Icon(
                                                     Icons.Filled.PlayArrow,
@@ -248,7 +278,7 @@ fun LiveScreen(
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 CircularProgressIndicator(modifier = Modifier.size(16.dp), strokeWidth = 2.dp)
                                 Spacer(Modifier.width(8.dp))
-                                Text("✨ Gemini AI o'ylamoqda...", fontSize = 12.sp, color = MaterialTheme.colorScheme.primary)
+                                Text("✨ Gemini Native AI ovoz generatsiya qilmoqda...", fontSize = 12.sp, color = MaterialTheme.colorScheme.primary)
                             }
                         }
                     }
@@ -278,17 +308,31 @@ fun LiveScreen(
                     }
                 }
 
-                // Input bar
+                // Input bar with Mic Voice recording button & text field
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp)
                 ) {
+                    // Microphone live voice recording button
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f))
+                            .clickable { startSpeechToText() }
+                    ) {
+                        Text("🎙️", fontSize = 22.sp)
+                    }
+
+                    Spacer(Modifier.width(8.dp))
+
                     OutlinedTextField(
                         value = inputText,
                         onValueChange = { viewModel.setInputText(it) },
-                        placeholder = { Text("Inglizcha savol yoki javob yozing...") },
+                        placeholder = { Text("Ovozli muloqot yoki matn yozing...") },
                         singleLine = true,
                         modifier = Modifier.weight(1f)
                     )

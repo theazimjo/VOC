@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+import abs.uits.vocabry.util.AudioPlayerHelper
+
 class LiveViewModel : ViewModel() {
 
     private val _messages = MutableStateFlow<List<LiveChatMessage>>(
@@ -48,9 +50,10 @@ class LiveViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val aiReplyText = GeminiService.sendLiveChatMessage(context, currentList, trimmed)
-                val aiMsg = LiveChatMessage(sender = "ai", text = aiReplyText)
+                val res = GeminiService.sendLiveChatMessage(context, currentList, trimmed)
+                val aiMsg = LiveChatMessage(sender = "ai", text = res.text, audioBase64 = res.audioBase64)
                 _messages.value = _messages.value + aiMsg
+                AudioPlayerHelper.playBase64Audio(context, res.audioBase64)
             } catch (e: Exception) {
                 _errorMsg.value = e.message ?: "Javob olishda xatolik yuz berdi"
             } finally {

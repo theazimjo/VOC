@@ -16,7 +16,13 @@ data class LiveChatMessage(
     val id: String = System.currentTimeMillis().toString(),
     val sender: String, // "user" | "ai"
     val text: String,
+    val audioBase64: String? = null,
     val timestamp: Long = System.currentTimeMillis()
+)
+
+data class GeminiLiveResponse(
+    val text: String,
+    val audioBase64: String? = null
 )
 
 data class WordLookupResult(
@@ -272,16 +278,14 @@ Example JSON format:
         context: Context,
         history: List<LiveChatMessage>,
         userMessageText: String
-    ): String = withContext(Dispatchers.IO) {
+    ): GeminiLiveResponse = withContext(Dispatchers.IO) {
         val apiKey = getApiKey(context)
         if (apiKey.isBlank()) throw Exception("Gemini API Kaliti kiritilmagan")
 
         val contentsArr = JSONArray()
 
-        // System instructions / Persona
         val systemPrompt = "System Persona: You are VOC AI Live Tutor, an encouraging and conversational English learning assistant. Engage in friendly English conversation, correct any grammar mistakes gently, and explain difficult words in Uzbek when appropriate. Keep responses natural, concise (1-3 sentences), and interactive."
 
-        // Add system message first
         contentsArr.put(JSONObject().apply {
             put("role", "user")
             put("parts", JSONArray().apply { put(JSONObject().apply { put("text", systemPrompt) }) })
@@ -291,7 +295,6 @@ Example JSON format:
             put("parts", JSONArray().apply { put(JSONObject().apply { put("text", "Understood! I'm ready to chat with you as your VOC AI Live Tutor!") }) })
         })
 
-        // Add history (last 10 messages)
         for (msg in history.takeLast(10)) {
             contentsArr.put(JSONObject().apply {
                 put("role", if (msg.sender == "user") "user" else "model")
@@ -299,7 +302,6 @@ Example JSON format:
             })
         }
 
-        // Add current user prompt
         contentsArr.put(JSONObject().apply {
             put("role", "user")
             put("parts", JSONArray().apply { put(JSONObject().apply { put("text", userMessageText.trim()) }) })
@@ -310,15 +312,89 @@ Example JSON format:
             put("generationConfig", JSONObject().apply {
                 put("temperature", 0.7)
                 put("maxOutputTokens", 500)
+                put("responseModalities", JSONArray().apply { put("TEXT"); put("AUDIO") })
+                put("speechConfig", JSONObject().apply {
+                    put("voiceConfig", JSONObject().apply {
+                        put("prebuiltVoiceConfig", JSONObject().apply {
+                            put("voiceName", "Puck")
+                        })
+                    })
+                })
             })
         }
 
         val jsonResponse = callGeminiWithFallback(payload, apiKey)
-        jsonResponse.optJSONArray("candidates")
+
+        var replyText = ""
+        var audioData: String? = null
+
+        val parts = jsonResponse.optJSONArray("candidates")
             ?.optJSONObject(0)
             ?.optJSONObject("content")
             ?.optJSONArray("parts")
+
+        if (parts != null) {
+            for (i in 0 until parts.length()) {
+                val part = parts.optJSONObject(i) ?: continue
+                if (part.has("text")) {
+                    replyText += part.optString("text") + " "
+                }
+                if (part.has("inlineData")) {
+                    val inlineData = part.optJSONObject("inlineData")
+                    if (inlineData?.optString("mimeType")?.startsWith("audio/") == true) {
+                        audioData = inlineData.optString("data")
+                    }
+                }
+            }
+        }
+
+        if (replyText.isBlank()) replyText = "Kechirasiz, javob olishda xatolik yuz berdi."
+
+        GeminiLiveResponse(text = replyText.trim(), audioBase64 = audioData)
+    }
+
+    suspend fun generateAudioWithGeminiTTS(context: Context, textToSpeak: String): String? = withContext(Dispatchers.IO) {
+        val apiKey = getApiKey(context)
+        if (apiKey.isBlank()) return@withContext null
+
+        val contentsArr = JSONArray().apply {
+            put(JSONObject().apply {
+                put("role", "user")
+                put("parts", JSONArray().apply { put(JSONObject().apply { put("text", "Read this text naturally with clear English pronunciation: $textToSpeak") }) })
+            })
+        }
+
+        val payload = JSONObject().apply {
+            put("contents", contentsArr)
+            put("generationConfig", JSONObject().apply {
+                put("responseModalities", JSONArray().apply { put("TEXT"); put("AUDIO") })
+                put("speechConfig", JSONObject().apply {
+                    put("voiceConfig", JSONObject().apply {
+                        put("prebuiltVoiceConfig", JSONObject().apply {
+                            put("voiceName", "Aoede")
+                        })
+                    })
+                })
+            })
+        }
+
+        val jsonResponse = callGeminiWithFallback(payload, apiKey)
+        val parts = jsonResponse.optJSONArray("candidates")
             ?.optJSONObject(0)
-            ?.optString("text") ?: "Kechirasiz, javob olishda xatolik yuz berdi."
+            ?.optJSONObject("content")
+            ?.optJSONArray("parts")
+
+        if (parts != null) {
+            for (i in 0 until parts.length()) {
+                val part = parts.optJSONObject(i) ?: continue
+                if (part.has("inlineData")) {
+                    val inlineData = part.optJSONObject("inlineData")
+                    if (inlineData?.optString("mimeType")?.startsWith("audio/") == true) {
+                        return@withContext inlineData.optString("data")
+                    }
+                }
+            }
+        }
+        null
     }
 }
