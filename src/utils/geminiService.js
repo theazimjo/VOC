@@ -117,19 +117,38 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
 
 /**
  * Photo Word Extractor: Extract key vocabulary list from base64 image using Gemini Vision.
- * Token-optimized JSON array output.
+ * Automatically performs OCR typo correction, ignores basic stop words (a, an, the, hello, etc.),
+ * and excludes words that already exist in the pack.
  */
-export async function extractWordsFromImageAI(imageBase64, mimeType = 'image/jpeg') {
+export async function extractWordsFromImageAI(imageBase64, mimeType = 'image/jpeg', existingWords = []) {
   const apiKey = getGeminiApiKey();
   if (!apiKey) throw new Error("Gemini API kalit kiritilmagan");
 
   // Clean base64 string if data URL prefix exists
   const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z]+;base64,/, '');
 
-  const prompt = `Extract all key vocabulary words/phrases from this image.
-For each item, return Uzbek translation, part of speech (must be one of: noun, verb, adjective, adverb, preposition, conjunction, pronoun, interjection, phrase, idiom), concise Uzbek definition (def), and a short English example sentence (ex).
+  // Extract existing word keys for AI filtering (up to 150 items to optimize tokens)
+  const existingKeys = existingWords
+    .slice(0, 150)
+    .map(w => (w.word || '').trim().toLowerCase())
+    .filter(Boolean)
+    .join(', ');
+
+  const prompt = `Task: Read text/vocabulary from photo, correct any OCR typos, and extract ONLY valuable vocabulary.
+Rules:
+1. Correct misread OCR characters (e.g. blurred or missing letters) to proper English words.
+2. EXCLUDE trivial/basic stop words (e.g. a, an, the, is, are, am, to, of, in, on, and, or, hello, hi, bye, yes, no).
+3. EXCLUDE words that are already in this user's pack: [${existingKeys || 'none'}]
+4. Return ONLY valuable learning vocabulary.
+5. Format each item as a JSON object:
+   - w: Corrected English word/phrase
+   - tr: Uzbek translation
+   - pos: part of speech (noun|verb|adjective|adverb|preposition|conjunction|pronoun|interjection|phrase|idiom)
+   - def: Short Uzbek definition (So'zning o'zbek tilidagi ta'rifi)
+   - ex: Short English example sentence
+
 Return a JSON array ONLY without markdown formatting:
-[{"w":"English word","tr":"Uzbek translation","pos":"noun|verb|adjective|...","def":"Short Uzbek definition","ex":"Short EN example"}]`;
+[{"w":"English word","tr":"O'zbekcha tarjima","pos":"noun","def":"O'zbekcha ta'rif","ex":"Example sentence"}]`;
 
   const payload = {
     contents: [

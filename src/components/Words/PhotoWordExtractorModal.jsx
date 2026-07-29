@@ -147,7 +147,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
 
     try {
       const mimeType = selectedImage?.type || 'image/jpeg';
-      const items = await extractWordsFromImageAI(imagePreview, mimeType);
+      const items = await extractWordsFromImageAI(imagePreview, mimeType, existingWords);
 
       if (!items || items.length === 0) {
         setErrorMsg("Rasmdan so'zlar ajratib bo'lmadi. Iltimos, boshqa aniqroq rasm tanlang.");
