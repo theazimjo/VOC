@@ -92,7 +92,7 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
     ],
     generationConfig: {
       temperature: 0.1,
-      maxOutputTokens: 256,
+      maxOutputTokens: 1024,
       responseMimeType: "application/json"
     }
   };
@@ -102,7 +102,17 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
   if (!rawText) return null;
 
   try {
-    const cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+    let cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+
+    // Auto repair truncated JSON strings
+    if (!cleanJson.endsWith('}')) {
+      const quoteCount = (cleanJson.match(/"/g) || []).length;
+      if (quoteCount % 2 !== 0) {
+        cleanJson += '"';
+      }
+      cleanJson += '}';
+    }
+
     const parsed = JSON.parse(cleanJson);
     return {
       word: parsed.w || query,
@@ -112,6 +122,23 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
       example: parsed.ex || ''
     };
   } catch (err) {
+    // Regex fallback parser for partial JSON
+    const matchW = rawText.match(/"w"\s*:\s*"([^"]+)"/);
+    const matchTr = rawText.match(/"tr"\s*:\s*"([^"]+)"/);
+    const matchPos = rawText.match(/"pos"\s*:\s*"([^"]+)"/);
+    const matchDef = rawText.match(/"def"\s*:\s*"([^"]+)"/);
+    const matchEx = rawText.match(/"ex"\s*:\s*"([^"]+)"/);
+
+    if (matchTr) {
+      return {
+        word: matchW ? matchW[1] : query,
+        translation: matchTr[1],
+        partOfSpeech: matchPos ? matchPos[1].toLowerCase() : 'noun',
+        definition: matchDef ? matchDef[1] : '',
+        example: matchEx ? matchEx[1] : ''
+      };
+    }
+
     console.error("JSON parsing error in Gemini response:", err, rawText);
     return null;
   }

@@ -157,7 +157,7 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
             })
             put("generationConfig", JSONObject().apply {
                 put("temperature", 0.1)
-                put("maxOutputTokens", 512)
+                put("maxOutputTokens", 1024)
                 put("responseMimeType", "application/json")
             })
         }
@@ -179,15 +179,44 @@ Detect language (EN or UZ). Return concise JSON object ONLY without markdown:
             cleanJson = cleanJson.replace("```json", "").replace("```", "").trim()
         }
 
-        val parsed = JSONObject(cleanJson)
+        // Auto-repair truncated JSON string
+        if (!cleanJson.endsWith("}")) {
+            val quoteCount = cleanJson.count { it == '"' }
+            if (quoteCount % 2 != 0) {
+                cleanJson += "\""
+            }
+            cleanJson += "}"
+        }
 
-        WordLookupResult(
-            word = parsed.optString("w", query).ifBlank { query },
-            translation = parsed.optString("tr", ""),
-            partOfSpeech = parsed.optString("pos", "phrase").lowercase(),
-            definition = parsed.optString("def", ""),
-            example = parsed.optString("ex", "")
-        )
+        try {
+            val parsed = JSONObject(cleanJson)
+            WordLookupResult(
+                word = parsed.optString("w", query).ifBlank { query },
+                translation = parsed.optString("tr", ""),
+                partOfSpeech = parsed.optString("pos", "phrase").lowercase(),
+                definition = parsed.optString("def", ""),
+                example = parsed.optString("ex", "")
+            )
+        } catch (e: Exception) {
+            // Regex fallback for partial JSON parsing
+            val matchW = Regex("\"w\"\\s*:\\s*\"([^\"]+)\"").find(text)
+            val matchTr = Regex("\"tr\"\\s*:\\s*\"([^\"]+)\"").find(text)
+            val matchPos = Regex("\"pos\"\\s*:\\s*\"([^\"]+)\"").find(text)
+            val matchDef = Regex("\"def\"\\s*:\\s*\"([^\"]+)\"").find(text)
+            val matchEx = Regex("\"ex\"\\s*:\\s*\"([^\"]+)\"").find(text)
+
+            if (matchTr != null) {
+                WordLookupResult(
+                    word = matchW?.groupValues?.get(1) ?: query,
+                    translation = matchTr.groupValues[1],
+                    partOfSpeech = (matchPos?.groupValues?.get(1) ?: "noun").lowercase(),
+                    definition = matchDef?.groupValues?.get(1) ?: "",
+                    example = matchEx?.groupValues?.get(1) ?: ""
+                )
+            } else {
+                null
+            }
+        }
     }
 
     suspend fun extractWordsFromImageAI(
