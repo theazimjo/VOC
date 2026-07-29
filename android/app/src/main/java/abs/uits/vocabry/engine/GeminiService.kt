@@ -60,6 +60,14 @@ object GeminiService {
         "gemini-2.5-pro"
     )
 
+    private val LIVE_MODEL_CANDIDATES = listOf(
+        "gemini-2.5-flash-native-audio-dialog",
+        "gemini-3-flash-live",
+        "gemini-3.5-live-translate",
+        "gemini-2.5-flash",
+        "gemini-2.0-flash"
+    )
+
     fun getApiKey(context: Context): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val saved = prefs.getString(KEY_API_KEY, "")
@@ -140,6 +148,64 @@ object GeminiService {
         }
 
         throw Exception("Gemini API so'rovi amalga oshmadi: $lastErrorMsg")
+    }
+
+    private suspend fun callGeminiLiveWithFallback(payload: JSONObject, apiKey: String): JSONObject = withContext(Dispatchers.IO) {
+        var lastErrorMsg = ""
+
+        for (model in LIVE_MODEL_CANDIDATES) {
+            val urlString = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=$apiKey"
+            var conn: HttpURLConnection? = null
+
+            try {
+                val url = URL(urlString)
+                conn = (url.openConnection() as HttpURLConnection).apply {
+                    requestMethod = "POST"
+                    setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+                    doOutput = true
+                    connectTimeout = 15000
+                    readTimeout = 20000
+                }
+
+                OutputStreamWriter(conn.outputStream, "UTF-8").use { writer ->
+                    writer.write(payload.toString())
+                    writer.flush()
+                }
+
+                val responseCode = conn.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    val sb = StringBuilder()
+                    BufferedReader(InputStreamReader(conn.inputStream, "UTF-8")).use { reader ->
+                        var line: String?
+                        while (reader.readLine().also { line = it } != null) {
+                            sb.append(line)
+                        }
+                    }
+                    return@withContext JSONObject(sb.toString())
+                } else {
+                    val errSb = StringBuilder()
+                    val errStream = conn.errorStream
+                    if (errStream != null) {
+                        BufferedReader(InputStreamReader(errStream, "UTF-8")).use { reader ->
+                            var line: String?
+                            while (reader.readLine().also { line = it } != null) {
+                                errSb.append(line)
+                            }
+                        }
+                    }
+                    lastErrorMsg = "[$model] HTTP $responseCode: ${errSb.toString().take(200)}"
+                    if (responseCode == 404 || responseCode == 400) continue
+                    throw Exception(lastErrorMsg)
+                }
+            } catch (e: Exception) {
+                if (e.message?.contains("404") == true || e.message?.contains("400") == true) continue
+                if (model == LIVE_MODEL_CANDIDATES.last()) throw e
+            } finally {
+                conn?.disconnect()
+            }
+        }
+
+        throw Exception("Barcha Live modellar so'rovni bajara olmadi: $lastErrorMsg")
     }
 
     suspend fun lookupWordWithAI(context: Context, query: String): WordLookupResult? = withContext(Dispatchers.IO) {
@@ -323,7 +389,7 @@ Example JSON format:
             })
         }
 
-        val jsonResponse = callGeminiWithFallback(payload, apiKey)
+        val jsonResponse = callGeminiLiveWithFallback(payload, apiKey)
 
         var replyText = ""
         var audioData: String? = null
@@ -378,7 +444,7 @@ Example JSON format:
             })
         }
 
-        val jsonResponse = callGeminiWithFallback(payload, apiKey)
+        val jsonResponse = callGeminiLiveWithFallback(payload, apiKey)
         val parts = jsonResponse.optJSONArray("candidates")
             ?.optJSONObject(0)
             ?.optJSONObject("content")
