@@ -184,34 +184,32 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
         })}
       </div>
 
-      {/* Feedback + Next — only after answering */}
-      <AnimatePresence>
-        {answered && (
-          <motion.div
-            className="quiz-next-row"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            <div className={`quiz-feedback ${timedOut ? 'wrong' : isCorrectAnswer ? 'correct' : 'wrong'}`}>
-              {timedOut
-                ? `Vaqt tugadi! Javob: ${currentWord.translation}`
-                : isCorrectAnswer
-                  ? "To'g'ri!"
-                  : `Javob: ${currentWord.translation}`
-              }
-            </div>
-            <button
-              type="button"
-              className="btn-quiz-next"
-              onClick={handleNext}
-            >
-              {isLast ? 'Natijalar →' : 'Keyingisi →'}
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Fixed full-width bottom bar — always present, same as Spelling's, just swaps its content */}
+      <div className={`quiz-bottom-bar ${answered ? (isCorrectAnswer && !timedOut ? 'correct' : 'wrong') : ''}`}>
+        <div className="quiz-bottom-bar-inner">
+          {!answered ? (
+            <div className="quiz-feedback quiz-feedback-hint">Variantlardan birini tanlang</div>
+          ) : (
+            <>
+              <div className="quiz-feedback">
+                {timedOut
+                  ? `Vaqt tugadi! Javob: ${currentWord.translation}`
+                  : isCorrectAnswer
+                    ? "To'g'ri!"
+                    : `Javob: ${currentWord.translation}`
+                }
+              </div>
+              <button
+                type="button"
+                className="btn-quiz-next"
+                onClick={handleNext}
+              >
+                {isLast ? 'Natijalar →' : 'Keyingisi →'}
+              </button>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

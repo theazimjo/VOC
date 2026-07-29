@@ -2,32 +2,16 @@
 .match-game-container {
   max-width: 620px;
   width: 100%;
-  margin: 0 auto;
+  /* The parent (.practice-session-content) is a column flex box that
+     top-aligns its content by default — with only 8 short rows, Match Game
+     was left stranded at the very top with empty space below. Auto
+     top/bottom margins center it vertically along that flex axis instead,
+     without touching the shared parent rule every other practice mode uses. */
+  margin: auto auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
 }
-
-.match-stats {
-  display: flex;
-  gap: var(--space-sm);
-  justify-content: center;
-  margin-bottom: var(--space-sm);
-}
-
-.match-stat-pill {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  padding: 6px 16px;
-  font-size: var(--font-sm);
-  font-weight: 700;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.match-stat-pill span { color: var(--text-primary); }
 
 .match-grid {
   display: grid;
@@ -39,19 +23,7 @@
 .match-column {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.match-column-label {
-  font-size: var(--font-xs);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  text-align: center;
-  padding-bottom: var(--space-xs);
-  border-bottom: 1px solid var(--border);
-  margin-bottom: var(--space-xs);
+  gap: var(--space-md);
 }
 
 .match-item {
@@ -122,22 +94,13 @@
     gap: var(--space-sm);
   }
 
-  .match-stats {
-    margin-bottom: var(--space-xs);
-  }
-
   .match-grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-xs);
   }
 
   .match-column {
-    gap: 6px;
-  }
-
-  .match-column-label {
-    padding-bottom: 4px;
-    margin-bottom: 2px;
+    gap: var(--space-sm);
   }
 
   .match-item {
@@ -145,9 +108,5 @@
     font-size: 0.78rem;
     height: 52px; /* Equal height on mobile — tighter to avoid page scroll */
     line-height: 1.25;
-  }
-  .match-stat-pill {
-    padding: 4px 10px;
-    font-size: var(--font-xs);
   }
 }

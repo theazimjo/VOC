@@ -6,6 +6,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+  /* Room for the fixed bottom bar so content never sits underneath it */
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
 }
 
 /* ─── Progress ─── */
@@ -207,25 +209,41 @@
   opacity: 0.35;
 }
 
-/* ─── Next Row ─── */
-.quiz-next-row {
+/* ─── Fixed full-width bottom bar (feedback + Next) ─── */
+.quiz-bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid var(--border);
+  padding: env(safe-area-inset-bottom, 0px) 0 0 0;
+}
+
+.quiz-bottom-bar-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md) var(--space-lg);
-  backdrop-filter: blur(12px);
 }
 
 .quiz-feedback {
   font-size: var(--font-md);
   font-weight: 700;
 }
-.quiz-feedback.correct { color: var(--success); }
-.quiz-feedback.wrong   { color: var(--error); }
+.quiz-bottom-bar.correct .quiz-feedback { color: var(--success); }
+.quiz-bottom-bar.wrong .quiz-feedback   { color: var(--error); }
+
+.quiz-feedback-hint {
+  color: var(--text-muted);
+  font-weight: 600;
+}
 
 .btn-quiz-next {
   background: var(--accent-1);
@@ -247,6 +265,14 @@
 
 .btn-quiz-next:active {
   transform: scale(0.97);
+}
+
+/* Sit above the mobile bottom tab bar instead of overlapping it */
+@media (max-width: 768px) {
+  .quiz-bottom-bar {
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+    padding: 0;
+  }
 }
 
 /* ─── Responsive ─── */
@@ -281,10 +307,8 @@
     font-size: var(--font-sm);
   }
 
-  .quiz-next-row {
+  .quiz-bottom-bar-inner {
     padding: var(--space-sm) var(--space-md);
-    flex-direction: row;
-    align-items: center;
     gap: var(--space-sm);
   }
 

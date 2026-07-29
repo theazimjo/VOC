@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2 } from 'lucide-react';
+import { Volume2, Check, X } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
 import { findConfusableMatch } from '../../experiment/textSimilarity';
@@ -171,41 +171,41 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               spellCheck="false"
               placeholder="So'zni yozing..."
             />
-            {!answered && (
-              <button type="submit" className="btn-spell-submit">
-                Tekshirish
-              </button>
-            )}
           </form>
-
-          <AnimatePresence>
-            {answered && (
-              <motion.div
-                className={`spelling-feedback-banner ${isCorrect ? 'correct' : 'wrong'}`}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-              >
-                {isCorrect
-                  ? "To'g'ri!"
-                  : <>Javob: <strong>{currentWord.word}</strong></>
-                }
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.div>
       </AnimatePresence>
 
-      {/* Action row */}
-      <div className="spelling-actions">
-        {!answered ? (
-          <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-            Bilmadim (o'tkazib yuborish)
-          </button>
-        ) : (
-          <button type="button" className="btn-spell-next" onClick={handleNext}>
-            {isLast ? 'Natijalar →' : 'Keyingisi →'}
-          </button>
-        )}
+      {/* Fixed full-width bottom bar, styled with the app's own design language */}
+      <div className={`spelling-bottom-bar ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}>
+        <div className="spelling-bottom-bar-inner">
+          {!answered ? (
+            <>
+              <button type="button" className="btn btn-ghost" onClick={handleSkip}>
+                Bilmadim
+              </button>
+              <button
+                type="button"
+                className="btn-spell-submit"
+                onClick={() => submitAnswer()}
+                disabled={!input.trim()}
+              >
+                Tekshirish
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="spelling-bottom-feedback">
+                {isCorrect ? <Check size={18} strokeWidth={2.5} /> : <X size={18} strokeWidth={2.5} />}
+                <span>
+                  {isCorrect ? "To'g'ri!" : <>Javob: <strong>{currentWord.word}</strong></>}
+                </span>
+              </div>
+              <button type="button" className="btn-spell-next" onClick={handleNext}>
+                {isLast ? 'Natijalar →' : 'Keyingisi →'}
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -12,9 +12,7 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
   const [selectedRight, setSelectedRight] = useState(null);
   const [matchedIds, setMatchedIds] = useState([]);
   const [errorIds, setErrorIds] = useState([]);
-  const [mistakes, setMistakes] = useState(0);
   const [erroredIds, setErroredIds] = useState(() => new Set());
-  const [timer, setTimer] = useState(0);
   // Local, updated-as-we-go copy of `words` — a left item can be mismatched
   // more than once before it's finally matched, and each attempt must build
   // on the previous one's result instead of recomputing from the original
@@ -31,8 +29,6 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
     setLeftItems(shuffleArray(playWords.map(w => ({ id: w.id, text: w.word }))));
     setRightItems(shuffleArray(playWords.map(w => ({ id: w.id, text: w.translation }))));
     setLiveWords(words);
-    const int = setInterval(() => setTimer(t => t + 1), 1000);
-    return () => clearInterval(int);
   }, [words]);
 
   // Reset the attempt timer whenever the board is idle (right after a match
@@ -77,7 +73,6 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
       } else {
         // Error
         setErrorIds([selectedLeft, selectedRight]);
-        setMistakes(m => m + 1);
         setErroredIds(prev => new Set(prev).add(selectedLeft));
         const word = liveWords.find(w => w.id === selectedLeft);
         if (word) {
@@ -97,20 +92,10 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
     }
   }, [selectedLeft, selectedRight]);
 
-  const formatTime = (s) => `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, '0')}`;
-  const remaining = leftItems.length - matchedIds.length;
-
   return (
     <div className="match-game-container">
-      <div className="match-stats">
-        <div className="match-stat-pill">Vaqt: <span>{formatTime(timer)}</span></div>
-        <div className="match-stat-pill">Qoldi: <span>{remaining}</span></div>
-        <div className="match-stat-pill">Xato: <span>{mistakes}</span></div>
-      </div>
-
       <div className="match-grid">
         <div className="match-column">
-          <div className="match-column-label">Inglizcha</div>
           {leftItems.map((item, idx) => (
             <motion.div
               key={`l-${item.id}`}
@@ -136,7 +121,6 @@ export default function MatchGame({ words, onComplete, onUpdateWord, onAnswer })
         </div>
 
         <div className="match-column">
-          <div className="match-column-label">Tarjima</div>
           {rightItems.map((item, idx) => (
             <motion.div
               key={`r-${item.id}`}
