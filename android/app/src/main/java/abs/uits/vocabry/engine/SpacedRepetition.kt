@@ -55,6 +55,7 @@ object SpacedRepetition {
         word: Word,
         retrievalType: String = "passive_recall",
         responseTimeSec: Double = 4.0,
+        clusterMultiplier: Double = 1.0,
     ): ReviewResult {
         val q = max(0, min(5, quality))
         val isCorrect = q >= 3
@@ -74,6 +75,7 @@ object SpacedRepetition {
             daysSince = daysSince,
             hadOvernightGap = overnight,
             retrievalType = retrievalType,
+            clusterMultiplier = clusterMultiplier,
         )
 
         return ReviewResult(

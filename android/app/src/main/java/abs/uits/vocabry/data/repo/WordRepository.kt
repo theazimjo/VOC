@@ -1,6 +1,9 @@
 package abs.uits.vocabry.data.repo
 
+import abs.uits.vocabry.data.model.RecallEvent
 import abs.uits.vocabry.data.model.Word
+import abs.uits.vocabry.engine.MemoryEngine
+import abs.uits.vocabry.engine.SemanticClassifier
 import abs.uits.vocabry.engine.SpacedRepetition
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -13,6 +16,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 import java.time.Instant
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.round
 
 /**
  * Mirrors src/hooks/useWords.js (per-pack CRUD) and
@@ -97,6 +103,27 @@ class WordRepository(
         })
     }
 
+    suspend fun updateWord(
+        uid: String,
+        packId: String,
+        wordId: String,
+        word: String,
+        translation: String,
+        definition: String = "",
+        example: String = "",
+        partOfSpeech: String = "noun",
+    ) {
+        val updates = mapOf(
+            "word" to word,
+            "translation" to translation,
+            "definition" to definition,
+            "example" to example,
+            "partOfSpeech" to partOfSpeech,
+        )
+        db.reference.child("users").child(uid).child("words").child(packId).child(wordId)
+            .updateChildren(updates).await()
+    }
+
     suspend fun deleteWord(uid: String, packId: String, wordId: String) {
         db.reference.child("users").child(uid).child("words").child(packId).child(wordId).removeValue().await()
 
@@ -114,12 +141,70 @@ class WordRepository(
 
     /**
      * Persists the outcome of one review: runs [SpacedRepetition.calculateNextReview]
-     * and writes the result back, plus the same wrongCount bookkeeping
-     * PracticePage.jsx's handleUpdateWord does (quality < 4 -> +1, else decay -1).
+     * and writes the result back, plus the same bookkeeping
+     * src/experiment/experimentDB.js's saveReviewEvent + PracticePage.jsx's
+     * handleUpdateWord do —
+     *  - wrongCount (isCorrect, i.e. quality >= 3 -> decay, else +1)
+     *  - a recallHistory entry (last 50 kept) carrying the recall probability
+     *    predicted just before this review, so future reviews can self-calibrate
+     *  - a per-cluster calibration multiplier derived from [allWords]' history
+     *    in the same semantic cluster as this word (see [SemanticClassifier])
+     *
+     * @param packName the current pack's display name, used by [SemanticClassifier]
+     *   to prefer a user-named pack over automatic POS/topic clustering
+     * @param allWords the full word corpus (all packs), used to gather this
+     *   word's cluster history — pass an empty list to skip calibration
+     *   (falls back to a neutral 1.0 multiplier)
      */
-    suspend fun submitReview(uid: String, word: Word, quality: Int, responseTimeSec: Double) {
-        val result = SpacedRepetition.calculateNextReview(quality, word, responseTimeSec = responseTimeSec)
-        val newWrongCount = if (quality < 4) word.wrongCount + 1 else maxOf(0, word.wrongCount - 1)
+    suspend fun submitReview(
+        uid: String,
+        word: Word,
+        quality: Int,
+        responseTimeSec: Double,
+        retrievalType: String = "passive_recall",
+        packName: String = "",
+        allWords: List<Word> = emptyList(),
+    ) {
+        val cluster = SemanticClassifier.classifyWord(word.word, word.translation, packName)
+        val clusterHistory = allWords
+            .asSequence()
+            .filter { SemanticClassifier.classifyWord(it.word, it.translation, packName).key == cluster.key }
+            .flatMap { it.recallHistory.asSequence() }
+            .toList()
+        val clusterMultiplier = MemoryEngine.computeClusterCalibration(clusterHistory)
+
+        val result = SpacedRepetition.calculateNextReview(
+            quality,
+            word,
+            retrievalType = retrievalType,
+            responseTimeSec = responseTimeSec,
+            clusterMultiplier = clusterMultiplier,
+        )
+        val isCorrect = quality >= 3
+        val newWrongCount = if (isCorrect) max(0, word.wrongCount - 1) else word.wrongCount + 1
+
+        val lastRev = word.lastReviewed
+        val seedStability = word.stability
+            ?: (if (word.interval > 0) word.interval else MemoryEngine.computeInitialStability())
+        val daysSince = if (lastRev != null) {
+            val diffMs = Instant.now().toEpochMilli() - Instant.parse(lastRev).toEpochMilli()
+            max(0.0, diffMs / (24.0 * 60 * 60 * 1000))
+        } else {
+            0.0
+        }
+        val predictedP = if (lastRev != null) MemoryEngine.computeRecallProbability(seedStability, daysSince) else null
+        val confidence = max(1, min(5, if (quality == 0) 1 else quality))
+
+        val newEntry = RecallEvent(
+            t = round(daysSince * 100) / 100,
+            result = isCorrect,
+            responseTime = round(responseTimeSec * 10) / 10,
+            confidence = confidence,
+            ts = result.lastReviewed,
+            retrievalType = retrievalType,
+            predictedP = predictedP?.let { round(it * 1000) / 1000 },
+        )
+        val newHistory = (word.recallHistory + newEntry).takeLast(50)
 
         val updates = mapOf(
             "interval" to result.interval,
@@ -129,6 +214,7 @@ class WordRepository(
             "lastReviewed" to result.lastReviewed,
             "stability" to result.stability,
             "wrongCount" to newWrongCount,
+            "recallHistory" to newHistory.map { it.toMap() },
         )
 
         db.reference.child("users").child(uid).child("words").child(word.packId).child(word.id)

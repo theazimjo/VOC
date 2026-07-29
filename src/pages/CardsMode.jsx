@@ -132,7 +132,7 @@ export default function CardsMode() {
     setStep('swipe');
   };
 
-  // Persist the SM-2 outcome for one word so Cards Mode sessions actually
+  // Persist the review outcome for one word so Cards Mode sessions actually
   // feed into mastery/stats/spaced-repetition, same as every other practice mode.
   // Returns the merged, post-review word so callers can keep local state
   // (and any retry round built from it) built on top of this review instead
@@ -140,10 +140,10 @@ export default function CardsMode() {
   const persistWordMastery = async (word, quality) => {
     if (!user || !sourceId || !word) return word;
     try {
-      const sm2Data = calculateNextReview(quality, word);
+      const reviewData = calculateNextReview(quality, word);
       const wordRef = ref(db, `users/${user.uid}/words/${sourceId}/${word.id}`);
-      await update(wordRef, sm2Data);
-      return { ...word, ...sm2Data };
+      await update(wordRef, reviewData);
+      return { ...word, ...reviewData };
     } catch (err) {
       console.error('[CardsMode] Failed to persist word mastery:', err);
       return word;

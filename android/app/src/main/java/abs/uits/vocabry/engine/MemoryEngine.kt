@@ -1,5 +1,6 @@
 package abs.uits.vocabry.engine
 
+import abs.uits.vocabry.data.model.RecallEvent
 import java.time.Instant
 import kotlin.math.exp
 import kotlin.math.ln
@@ -33,6 +34,7 @@ object MemoryEngine {
     private const val ACTIVE_RECALL_BONUS = 0.15
     private const val CALIBRATION_MIN = 0.7
     private const val CALIBRATION_MAX = 1.4
+    private const val MIN_CALIBRATION_SAMPLES = 8
 
     /** Automatically infer confidence (1-5) from response speed. */
     fun inferConfidenceFromSpeed(responseTimeSec: Double, isCorrect: Boolean): Int {
@@ -95,6 +97,27 @@ object MemoryEngine {
 
         val sNew = s * (1 + alpha)
         return round(sNew * 100) / 100
+    }
+
+    /**
+     * Self-calibrate the growth rate for a semantic cluster by comparing this
+     * user's *predicted* recall probability (stored per review as `predictedP`)
+     * against what *actually* happened. Direct port of
+     * memoryEngine.js#computeClusterCalibration.
+     *
+     * @param historyEntries review events from all words in one cluster
+     * @return multiplier in [CALIBRATION_MIN, CALIBRATION_MAX]; 1.0 = no adjustment yet
+     */
+    fun computeClusterCalibration(historyEntries: List<RecallEvent>): Double {
+        val withP = historyEntries.filter { it.predictedP != null }
+        if (withP.size < MIN_CALIBRATION_SAMPLES) return 1.0
+
+        val avgPredicted = withP.sumOf { it.predictedP ?: 0.0 } / withP.size
+        val actualAccuracy = withP.count { it.result }.toDouble() / withP.size
+        if (avgPredicted <= 0.02) return 1.0
+
+        val ratio = actualAccuracy / avgPredicted
+        return round(max(CALIBRATION_MIN, min(CALIBRATION_MAX, ratio)) * 100) / 100
     }
 
     /** Solve P(t) = targetRecall -> t = -S * ln(targetRecall); returns the ISO-8601 instant. */

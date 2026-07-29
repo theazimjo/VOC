@@ -3,6 +3,44 @@ package abs.uits.vocabry.data.model
 import com.google.firebase.database.DataSnapshot
 
 /**
+ * One entry of a word's `recallHistory` — mirrors the objects
+ * src/experiment/experimentDB.js's saveReviewEvent appends (last 50 kept).
+ * Used by [abs.uits.vocabry.engine.MemoryEngine.computeClusterCalibration]
+ * to self-calibrate growth per semantic cluster.
+ */
+data class RecallEvent(
+    val t: Double = 0.0,
+    val result: Boolean = false,
+    val responseTime: Double = 0.0,
+    val confidence: Int = 3,
+    val ts: String = "",
+    val retrievalType: String = "passive_recall",
+    val predictedP: Double? = null,
+) {
+    companion object {
+        fun fromSnapshot(snapshot: DataSnapshot): RecallEvent = RecallEvent(
+            t = snapshot.child("t").getValue(Double::class.java) ?: 0.0,
+            result = snapshot.child("result").getValue(Boolean::class.java) ?: false,
+            responseTime = snapshot.child("responseTime").getValue(Double::class.java) ?: 0.0,
+            confidence = snapshot.child("confidence").getValue(Double::class.java)?.toInt() ?: 3,
+            ts = snapshot.child("ts").getValue(String::class.java) ?: "",
+            retrievalType = snapshot.child("retrievalType").getValue(String::class.java) ?: "passive_recall",
+            predictedP = snapshot.child("predictedP").getValue(Double::class.java),
+        )
+    }
+
+    fun toMap(): Map<String, Any?> = mapOf(
+        "t" to t,
+        "result" to result,
+        "responseTime" to responseTime,
+        "confidence" to confidence,
+        "ts" to ts,
+        "retrievalType" to retrievalType,
+        "predictedP" to predictedP,
+    )
+}
+
+/**
  * Mirrors the word record shape at `users/{uid}/words/{packId}/{wordId}` in
  * the web app (src/hooks/useWords.js, src/pages/PracticePage.jsx). Mapped
  * manually (not via Firebase's reflective POJO binding) so numeric-type
@@ -28,6 +66,7 @@ data class Word(
     val lastReviewed: String? = null,
     val stability: Double? = null,
     val wrongCount: Int = 0,
+    val recallHistory: List<RecallEvent> = emptyList(),
 ) {
     companion object {
         fun fromSnapshot(snapshot: DataSnapshot, packId: String): Word {
@@ -49,6 +88,9 @@ data class Word(
                 lastReviewed = snapshot.child("lastReviewed").getValue(String::class.java),
                 stability = snapshot.child("stability").getValue(Double::class.java),
                 wrongCount = snapshot.child("wrongCount").getValue(Double::class.java)?.toInt() ?: 0,
+                recallHistory = snapshot.child("recallHistory").children.mapNotNull {
+                    runCatching { RecallEvent.fromSnapshot(it) }.getOrNull()
+                },
             )
         }
     }
@@ -70,5 +112,6 @@ data class Word(
         "lastReviewed" to lastReviewed,
         "stability" to stability,
         "wrongCount" to wrongCount,
+        "recallHistory" to recallHistory.map { it.toMap() },
     )
 }
