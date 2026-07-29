@@ -148,59 +148,32 @@ fun LibraryScreen(
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            // iOS Segmented Tab Row (Web parity)
-            LibrarySegmentedTabs(
-                activeTab = activeTab,
-                packsCount = packs.size,
-                marketCount = viewModel.marketPacks.size,
-                onTabSelected = { viewModel.setActiveTab(it) }
-            )
-
-            Spacer(Modifier.height(14.dp))
-
             Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {
-                when (activeTab) {
-                    LibraryTab.MY_PACKS -> {
-                        MyPacksContent(
-                            packs = packs,
-                            folders = folders,
-                            openFolder = openFolder,
-                            getPackMastery = { viewModel.getPackMastery(it) },
-                            onOpenFolder = { viewModel.openFolder(it) },
-                            onCloseFolder = { viewModel.closeFolder() },
-                            onPackClick = { navController.navigate("pack/${it.id}") },
-                            onPackEdit = {
-                                editingPack = it
-                                showPackForm = true
-                            },
-                            onFolderAdd = {
-                                editingFolder = null
-                                showFolderForm = true
-                            },
-                            onFolderEdit = {
-                                editingFolder = it
-                                showFolderForm = true
-                            }
-                        )
+                MyPacksContent(
+                    packs = packs,
+                    folders = folders,
+                    openFolder = openFolder,
+                    getPackMastery = { viewModel.getPackMastery(it) },
+                    onOpenFolder = { viewModel.openFolder(it) },
+                    onCloseFolder = { viewModel.closeFolder() },
+                    onPackClick = { navController.navigate("pack/${it.id}") },
+                    onPackEdit = {
+                        editingPack = it
+                        showPackForm = true
+                    },
+                    onFolderAdd = {
+                        editingFolder = null
+                        showFolderForm = true
+                    },
+                    onFolderEdit = {
+                        editingFolder = it
+                        showFolderForm = true
                     }
-
-                    LibraryTab.MARKET -> {
-                        MarketContent(
-                            marketPacks = viewModel.marketPacks,
-                            installingPackId = installingPackId,
-                            updatingPackId = updatingPackId,
-                            justInstalledIds = justInstalledIds,
-                            findInstalledPack = { viewModel.findInstalledPack(it) },
-                            getMissingWords = { mp, ip -> viewModel.getMissingMarketWords(mp, ip) },
-                            onInstall = { viewModel.installMarketPack(it) },
-                            onUpdate = { mp, ip, mw -> viewModel.updateMarketPack(mp, ip, mw) }
-                        )
-                    }
-                }
+                )
             }
         }
     }
