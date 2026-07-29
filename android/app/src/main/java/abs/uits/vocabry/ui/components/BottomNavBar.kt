@@ -9,6 +9,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -38,6 +39,16 @@ fun BottomNavBar(navController: NavController) {
             },
             icon = { Icon(Icons.Filled.List, contentDescription = "Kutubxona") },
             label = { Text("Kutubxona") },
+        )
+        NavigationBarItem(
+            selected = currentRoute?.hierarchy?.any { it.route == "live" } == true,
+            onClick = {
+                navController.navigate("live") {
+                    popUpTo("dashboard")
+                }
+            },
+            icon = { Text("✨", fontSize = 18.sp) },
+            label = { Text("Live AI") },
         )
     }
 }

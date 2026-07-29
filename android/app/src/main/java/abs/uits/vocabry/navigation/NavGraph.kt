@@ -22,6 +22,8 @@ import abs.uits.vocabry.ui.library.LibraryScreen
 import abs.uits.vocabry.ui.library.LibraryViewModel
 import abs.uits.vocabry.ui.library.PackDetailScreen
 import abs.uits.vocabry.ui.library.PackDetailViewModel
+import abs.uits.vocabry.ui.live.LiveScreen
+import abs.uits.vocabry.ui.live.LiveViewModel
 import abs.uits.vocabry.ui.practice.FlashcardScreen
 import abs.uits.vocabry.ui.practice.IrregularVerbsScreen
 import abs.uits.vocabry.ui.practice.IrregularVerbsViewModel
@@ -64,6 +66,12 @@ fun VocabryNavGraph() {
                 factory = viewModelFactory { initializer { LibraryViewModel() } },
             )
             LibraryScreen(navController, vm)
+        }
+        composable("live") {
+            val vm: LiveViewModel = viewModel(
+                factory = viewModelFactory { initializer { LiveViewModel() } },
+            )
+            LiveScreen(navController, vm)
         }
         composable(
             "pack/{packId}",

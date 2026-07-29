@@ -12,6 +12,13 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 
+data class LiveChatMessage(
+    val id: String = System.currentTimeMillis().toString(),
+    val sender: String, // "user" | "ai"
+    val text: String,
+    val timestamp: Long = System.currentTimeMillis()
+)
+
 data class WordLookupResult(
     val word: String,
     val translation: String,
@@ -259,5 +266,59 @@ Example JSON format:
         }
 
         resultList
+    }
+
+    suspend fun sendLiveChatMessage(
+        context: Context,
+        history: List<LiveChatMessage>,
+        userMessageText: String
+    ): String = withContext(Dispatchers.IO) {
+        val apiKey = getApiKey(context)
+        if (apiKey.isBlank()) throw Exception("Gemini API Kaliti kiritilmagan")
+
+        val contentsArr = JSONArray()
+
+        // System instructions / Persona
+        val systemPrompt = "System Persona: You are VOC AI Live Tutor, an encouraging and conversational English learning assistant. Engage in friendly English conversation, correct any grammar mistakes gently, and explain difficult words in Uzbek when appropriate. Keep responses natural, concise (1-3 sentences), and interactive."
+
+        // Add system message first
+        contentsArr.put(JSONObject().apply {
+            put("role", "user")
+            put("parts", JSONArray().apply { put(JSONObject().apply { put("text", systemPrompt) }) })
+        })
+        contentsArr.put(JSONObject().apply {
+            put("role", "model")
+            put("parts", JSONArray().apply { put(JSONObject().apply { put("text", "Understood! I'm ready to chat with you as your VOC AI Live Tutor!") }) })
+        })
+
+        // Add history (last 10 messages)
+        for (msg in history.takeLast(10)) {
+            contentsArr.put(JSONObject().apply {
+                put("role", if (msg.sender == "user") "user" else "model")
+                put("parts", JSONArray().apply { put(JSONObject().apply { put("text", msg.text) }) })
+            })
+        }
+
+        // Add current user prompt
+        contentsArr.put(JSONObject().apply {
+            put("role", "user")
+            put("parts", JSONArray().apply { put(JSONObject().apply { put("text", userMessageText.trim()) }) })
+        })
+
+        val payload = JSONObject().apply {
+            put("contents", contentsArr)
+            put("generationConfig", JSONObject().apply {
+                put("temperature", 0.7)
+                put("maxOutputTokens", 500)
+            })
+        }
+
+        val jsonResponse = callGeminiWithFallback(payload, apiKey)
+        jsonResponse.optJSONArray("candidates")
+            ?.optJSONObject(0)
+            ?.optJSONObject("content")
+            ?.optJSONArray("parts")
+            ?.optJSONObject(0)
+            ?.optString("text") ?: "Kechirasiz, javob olishda xatolik yuz berdi."
     }
 }
