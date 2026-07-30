@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, GraduationCap, FlaskConical } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Trophy, FlaskConical } from 'lucide-react';
 import './BottomNav.css';
 
 export default function BottomNav() {
@@ -7,8 +7,8 @@ export default function BottomNav() {
     { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/library', icon: BookOpen, label: 'Kutubxona' },
     { to: '/grammar', icon: GraduationCap, label: 'Grammatika' },
+    { to: '/grammar-test', icon: Trophy, label: 'Imtixon' },
     { to: '/experiment', icon: FlaskConical, label: 'Memory Lab' },
-    // { to: '/grammar-test', icon: Trophy,       label: 'Imtihon' },
   ];
 
   return (
