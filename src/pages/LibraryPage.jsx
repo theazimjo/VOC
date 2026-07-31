@@ -139,6 +139,7 @@ export default function LibraryPage() {
           icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
           level: data.level || 'beginner',
           folderId: data.folderId || null,
+          language: data.language || 'en-US',
         });
       }
     } catch (err) {

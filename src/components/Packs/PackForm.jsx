@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { packIcons, bookColors } from '../../utils/helpers';
+import { packIcons, bookColors, speechLanguages } from '../../utils/helpers';
 import './PackForm.css';
 
 export default function PackForm({ isOpen, onClose, onSave, editPack = null, onDelete = null, folders = [], defaultFolderId = null }) {
@@ -9,6 +9,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const [icon, setIcon] = useState(packIcons[0]);
   const [color, setColor] = useState(bookColors[0]);
   const [folderId, setFolderId] = useState('');
+  const [language, setLanguage] = useState('en-US');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isLocked = editPack && editPack.name === 'Irregular Verbs';
@@ -20,12 +21,14 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setIcon(editPack.icon || packIcons[0]);
       setColor(editPack.color || bookColors[0]);
       setFolderId(editPack.folderId || '');
+      setLanguage(editPack.language || 'en-US');
     } else {
       setName('');
       setDescription('');
       setIcon(packIcons[Math.floor(Math.random() * packIcons.length)]);
       setColor(bookColors[Math.floor(Math.random() * bookColors.length)]);
       setFolderId(defaultFolderId || '');
+      setLanguage('en-US');
     }
     setIsSubmitting(false);
   }, [editPack, isOpen, defaultFolderId]);
@@ -35,7 +38,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
     if (!name.trim() || isSubmitting) return;
     setIsSubmitting(true);
     try {
-      await onSave({ name, description, icon, color, folderId: folderId || null });
+      await onSave({ name, description, icon, color, folderId: folderId || null, language });
     } finally {
       setIsSubmitting(false);
     }
@@ -113,6 +116,19 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     </div>
                   </div>
                 )}
+
+                <div className="input-group">
+                  <label>So'zlarning tili (talaffuz uchun)</label>
+                  <select
+                    className="select"
+                    value={language}
+                    onChange={e => setLanguage(e.target.value)}
+                  >
+                    {speechLanguages.map(l => (
+                      <option key={l.code} value={l.code}>{l.flag} {l.label}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <div className="modal-footer" style={{ justifyContent: editPack ? 'space-between' : 'flex-end', width: '100%' }}>

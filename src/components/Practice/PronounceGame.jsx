@@ -5,7 +5,7 @@ import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
 import './PronounceGame.css';
 
-export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
+export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isListening, setIsListening] = useState(false);
   const [status, setStatus] = useState('playing'); // playing, correct, wrong, unsupported, skipped
@@ -37,7 +37,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
     }
 
     const rec = new SpeechRecognition();
-    rec.lang = 'en-US';
+    rec.lang = language;
     rec.interimResults = false;
     rec.maxAlternatives = 1;
 
@@ -73,7 +73,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
         recognitionRef.current.abort();
       }
     };
-  }, [currentIndex]);
+  }, [currentIndex, language]);
 
   const startListening = () => {
     if (answered || isListening || status === 'unsupported') return;
@@ -87,8 +87,8 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
 
   const checkPronunciation = async (speech) => {
     const responseTime = (Date.now() - cardStartRef.current) / 1000;
-    const target = currentWord.word.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
-    const spoken = speech.toLowerCase().replace(/[^a-z0-9]/g, '').trim();
+    const target = currentWord.word.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '').trim();
+    const spoken = speech.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '').trim();
 
     const correct = spoken === target;
 
@@ -175,7 +175,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
           <button
             className="btn-pronounce-speak-target"
             type="button"
-            onClick={() => speakWord(currentWord.word)}
+            onClick={() => speakWord(currentWord.word, language)}
             title="Tinglash"
           >
             <Volume2 size={14} strokeWidth={2.3} />

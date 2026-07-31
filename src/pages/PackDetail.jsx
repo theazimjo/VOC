@@ -289,6 +289,7 @@ export default function PackDetail() {
         loading={loading}
         readOnly={pack.name === 'Irregular Verbs'}
         groupFn={pack.name === 'Irregular Verbs' ? getIrregularVerbGroup : undefined}
+        language={pack.language || 'en-US'}
       />
 
       <WordForm

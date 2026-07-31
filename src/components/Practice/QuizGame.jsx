@@ -5,7 +5,7 @@ import { shuffleArray, speakWord } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import './QuizGame.css';
 
-export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
+export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null); // the chosen option text
@@ -30,8 +30,8 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
 
   // Autoplay pronunciation
   useEffect(() => {
-    if (currentWord) speakWord(currentWord.word);
-  }, [currentIndex, currentWord]);
+    if (currentWord) speakWord(currentWord.word, language);
+  }, [currentIndex, currentWord, language]);
 
   // Build options when word changes
   useEffect(() => {
@@ -132,7 +132,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
             {currentWord.word}
             <button
               className="btn-speak-quiz"
-              onClick={() => speakWord(currentWord.word)}
+              onClick={() => speakWord(currentWord.word, language)}
               title="Talaffuz"
               type="button"
             >

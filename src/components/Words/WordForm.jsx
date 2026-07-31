@@ -26,8 +26,9 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
   const [showMore, setShowMore] = useState(false);
 
   const handleAiAutofill = async (queryText) => {
-    const userEmail = user?.email?.toLowerCase() || '';
-    if (userEmail !== 'azimjonxolmirzayev30@gmail.com') {
+    const userEmail = user?.email?.toLowerCase();
+    const ADMIN_EMAILS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
+    if (!ADMIN_EMAILS.includes(userEmail)) {
       setAiError("🔒 AI Avto-to'ldirish tez orada taqdim etiladi! (Coming soon)");
       return;
     }

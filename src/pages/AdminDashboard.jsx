@@ -16,7 +16,7 @@ import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import './AdminDashboard.css';
 
-const ADMIN_EMAIL = 'azimjonxolmirzayev30@gmail.com';
+const ADMIN_EMAILS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -302,13 +302,13 @@ export default function AdminDashboard() {
   // Guard: only admin
   useEffect(() => {
     if (!user) return;
-    if (user.email !== ADMIN_EMAIL) {
+    if (!ADMIN_EMAILS.includes(user.email)) {
       navigate('/');
     }
   }, [user, navigate]);
 
   const fetchData = useCallback(async () => {
-    if (!user || user.email !== ADMIN_EMAIL) return;
+    if (!user || !ADMIN_EMAILS.includes(user.email)) return;
     setLoading(true);
     setError(null);
     try {
@@ -333,7 +333,7 @@ export default function AdminDashboard() {
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
-  if (!user || user.email !== ADMIN_EMAIL) return null;
+  if (!user || !ADMIN_EMAILS.includes(user.email)) return null;
 
   // ── Compute global stats ─────────────────────────────────────
 

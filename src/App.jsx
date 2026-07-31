@@ -28,6 +28,25 @@ const GrammarTest = lazyWithRetry(() => import('./pages/GrammarTest'));
 const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
 const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard'));
 
+// Corporate / Learning Center Portal Routes (fully independent of the
+// individual-learner auth/route tree above — see CorpProtectedRoute)
+const CorpLayout = lazyWithRetry(() => import('./components/corp/CorpLayout'));
+const CorpAdminLayout = lazyWithRetry(() => import('./components/corp/CorpAdminLayout'));
+const CorpLoginPage = lazyWithRetry(() => import('./pages/corp/CorpLoginPage'));
+const TeacherJoinPage = lazyWithRetry(() => import('./pages/corp/TeacherJoinPage'));
+const CorpPortalHome = lazyWithRetry(() => import('./pages/corp/CorpPortalHome'));
+const CorpProtectedRoute = lazyWithRetry(() => import('./components/corp/CorpProtectedRoute'));
+const SuperAdminLayout = lazyWithRetry(() => import('./components/corp/SuperAdminLayout'));
+const SuperAdminOverview = lazyWithRetry(() => import('./pages/corp/SuperAdminOverview'));
+const SuperAdminCenters = lazyWithRetry(() => import('./pages/corp/SuperAdminCenters'));
+const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/SuperAdminUsers'));
+const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/SuperAdminAnnouncements'));
+const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/SuperAdminSettings'));
+const CenterAdminDashboard = lazyWithRetry(() => import('./pages/corp/CenterAdminDashboard'));
+const TeacherDashboard = lazyWithRetry(() => import('./pages/corp/TeacherDashboard'));
+const StudentCorpDashboard = lazyWithRetry(() => import('./pages/corp/StudentCorpDashboard'));
+const CorpPractice = lazyWithRetry(() => import('./pages/corp/CorpPractice'));
+
 function BookToPackRedirect() {
   const { bookId } = useParams();
   return <Navigate to={`/packs/${bookId}`} replace />;
@@ -83,6 +102,40 @@ export default function App() {
                       <Route path="/experiment" element={<MemoryLab />} />
                       <Route path="/admin" element={<AdminDashboard />} />
                     </Route>
+                  </Route>
+
+                  {/* Standalone Corporate Learning Center Portal — deliberately
+                      OUTSIDE the individual-learner ProtectedRoute above.
+                      Center admins/teachers authenticate via /corp/login;
+                      students never need an individual account at all. */}
+                  <Route path="/corp/login" element={<CorpLoginPage />} />
+                  <Route path="/corp/teacher/join" element={<TeacherJoinPage />} />
+                  <Route path="/corp" element={<CorpLayout />}>
+                    <Route index element={<CorpPortalHome />} />
+                    <Route element={<CorpProtectedRoute allowedRoles={['super_admin']} />}>
+                      <Route element={<SuperAdminLayout />}>
+                        <Route path="super-admin" element={<SuperAdminOverview />} />
+                        <Route path="super-admin/centers" element={<SuperAdminCenters />} />
+                        <Route path="super-admin/users" element={<SuperAdminUsers />} />
+                        <Route path="super-admin/announcements" element={<SuperAdminAnnouncements />} />
+                        <Route path="super-admin/settings" element={<SuperAdminSettings />} />
+                      </Route>
+                    </Route>
+                    <Route element={<CorpProtectedRoute allowedRoles={['center_admin']} />}>
+                      <Route element={<CorpAdminLayout />}>
+                        <Route path="admin" element={<CenterAdminDashboard tab="dashboard" />} />
+                        <Route path="admin/teachers" element={<CenterAdminDashboard tab="teachers" />} />
+                        <Route path="admin/students" element={<CenterAdminDashboard tab="students" />} />
+                        <Route path="admin/courses" element={<CenterAdminDashboard tab="courses" />} />
+                        <Route path="admin/statistics" element={<CenterAdminDashboard tab="statistics" />} />
+                        <Route path="admin/settings" element={<CenterAdminDashboard tab="settings" />} />
+                      </Route>
+                    </Route>
+                    <Route element={<CorpProtectedRoute allowedRoles={['teacher']} />}>
+                      <Route path="teacher" element={<TeacherDashboard />} />
+                    </Route>
+                    <Route path="student" element={<StudentCorpDashboard />} />
+                    <Route path="practice" element={<CorpPractice />} />
                   </Route>
 
                   {/* Catch all */}

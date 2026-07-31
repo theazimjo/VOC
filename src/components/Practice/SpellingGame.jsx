@@ -10,7 +10,7 @@ import './SpellingGame.css';
 
 const CONFUSION_THRESHOLD = 0.6;
 
-export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress }) {
+export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
   const { user } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
@@ -134,7 +134,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     <div className="spelling-container">
       <div className="spelling-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
-        <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word)}>
+        <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word, language)}>
           <Volume2 size={14} strokeWidth={2.3} />
           Eshitish
         </button>

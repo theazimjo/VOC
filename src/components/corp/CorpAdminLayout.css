@@ -1,0 +1,14 @@
+.corp-admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #090910;
+  color: #f8fafc;
+}
+
+.corp-admin-main-pane {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #090910;
+}

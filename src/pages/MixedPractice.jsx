@@ -126,10 +126,10 @@ export default function MixedPractice() {
     }
   }, [loading, mixedWordsPool, step]);
 
-  const speakWord = (text) => {
+  const speakWord = (text, lang = 'en-US') => {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
+    utterance.lang = lang;
     utterance.rate = 0.9;
     window.speechSynthesis.speak(utterance);
   };
@@ -138,7 +138,7 @@ export default function MixedPractice() {
   useEffect(() => {
     if (step === 'practice' && questions[currentIdx]?.type === 'dictation' && !hasAnswered) {
       const timer = setTimeout(() => {
-        speakWord(questions[currentIdx].word.word);
+        speakWord(questions[currentIdx].word.word, questions[currentIdx].word.language);
       }, 300);
       return () => clearTimeout(timer);
     }
@@ -388,7 +388,7 @@ export default function MixedPractice() {
                     <div className="audio-player-container">
                       <button
                         className="audio-play-btn"
-                        onClick={() => speakWord(questions[currentIdx].word.word)}
+                        onClick={() => speakWord(questions[currentIdx].word.word, questions[currentIdx].word.language)}
                         title="Qayta eshitish"
                         type="button"
                       >
@@ -493,7 +493,7 @@ export default function MixedPractice() {
                         </span>
                         <button
                           className="btn-speak-mistake"
-                          onClick={() => speakWord(q.word.word)}
+                          onClick={() => speakWord(q.word.word, q.word.language)}
                           title="Talaffuzni eshitish"
                           type="button"
                         >

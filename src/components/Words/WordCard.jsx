@@ -4,7 +4,7 @@ import { partOfSpeechOptions, speakWord } from '../../utils/helpers';
 import { Volume2, Edit2, Trash2 } from 'lucide-react';
 import './WordCard.css';
 
-export default function WordCard({ word, onEdit, onDelete, readOnly }) {
+export default function WordCard({ word, onEdit, onDelete, readOnly, language = 'en-US' }) {
   const masteryInfo = getMasteryLevel(word.mastery || 0);
   const pos = partOfSpeechOptions.find(p => p.value === word.partOfSpeech) || partOfSpeechOptions[0];
 
@@ -23,7 +23,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly }) {
             <span className="word-english-text">{word.word}</span>
             <button 
               className="btn-speak" 
-              onClick={() => speakWord(word.word)}
+              onClick={() => speakWord(word.word, language)}
               title="Talaffuz qilish"
             >
               <Volume2 size={16} strokeWidth={2.4} />

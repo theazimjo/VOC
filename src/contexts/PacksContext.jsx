@@ -166,7 +166,8 @@ export function PacksProvider({ children }) {
           packId,
           source: pack?.name || 'Kutubxona',
           sourceIcon: pack?.icon || '📦',
-          sourceType: 'packs'
+          sourceType: 'packs',
+          language: pack?.language || 'en-US'
         });
       });
     });
@@ -185,6 +186,7 @@ export function PacksProvider({ children }) {
         color: data.color || '#7C3AED',
         icon: data.icon || '📦',
         level: data.level || 'beginner',
+        language: data.language || 'en-US',
         createdAt: new Date().toISOString(),
         wordCount: 0,
         ...(data.marketPackId ? { marketPackId: data.marketPackId } : {}),

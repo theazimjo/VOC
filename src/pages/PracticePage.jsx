@@ -334,6 +334,7 @@ export default function PracticePage() {
       onAnswer: handleAnswer,
       onExit: handleBack,
       sourceName: selectedSource?.title || selectedSource?.name || "Kutubxona",
+      language: selectedSource?.language || 'en-US',
       onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
 
@@ -569,7 +570,7 @@ export default function PracticePage() {
                           <button
                             type="button"
                             className="btn-speak-mistake"
-                            onClick={() => speakWord(word.word)}
+                            onClick={() => speakWord(word.word, selectedSource?.language)}
                             title="Tinglash"
                           >
                             <Volume2 size={16} strokeWidth={2.3} />

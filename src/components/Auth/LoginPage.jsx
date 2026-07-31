@@ -108,9 +108,18 @@ export default function LoginPage() {
     }
   };
 
+  const SUPER_ADMINS = ['azimjonxolmirzayev30@gmail.com', 'azimjon29042006@gmail.com'];
+
+  const getRedirectPath = (u) => {
+    if (u?.email && SUPER_ADMINS.includes(u.email.toLowerCase())) {
+      return '/corp/super-admin';
+    }
+    return '/';
+  };
+
   useEffect(() => {
     if (!loading && user) {
-      navigate('/', { replace: true });
+      navigate(getRedirectPath(user), { replace: true });
     }
   }, [user, loading, navigate]);
 
@@ -125,8 +134,9 @@ export default function LoginPage() {
 
     setSubmitting(true);
     try {
-      await login(email.trim(), password);
-      navigate('/', { replace: true });
+      const res = await login(email.trim(), password);
+      const targetUser = res?.user || user;
+      navigate(getRedirectPath(targetUser), { replace: true });
     } catch (err) {
       setError(getFirebaseErrorMessage(err.code));
     } finally {
@@ -138,8 +148,9 @@ export default function LoginPage() {
     setError('');
     setSubmitting(true);
     try {
-      await loginWithGoogle();
-      navigate('/', { replace: true });
+      const res = await loginWithGoogle();
+      const targetUser = res?.user || user;
+      navigate(getRedirectPath(targetUser), { replace: true });
     } catch (err) {
       console.error("Google Sign-In Error details:", err);
       if (err.code !== 'auth/popup-closed-by-user') {

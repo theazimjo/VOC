@@ -17,6 +17,7 @@ export default function PacksPage() {
       color: data.color || 'var(--accent-gradient)',
       icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
       level: data.level || 'beginner',
+      language: data.language || 'en-US',
     });
     setShowForm(false);
   };

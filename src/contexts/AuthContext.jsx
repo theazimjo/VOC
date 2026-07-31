@@ -133,7 +133,7 @@ export function AuthProvider({ children }) {
     register,
     resetPassword,
     logout,
-    updateUserProfile
+    updateUserProfile,
   };
 
   return (

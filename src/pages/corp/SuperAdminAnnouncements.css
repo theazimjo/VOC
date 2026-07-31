@@ -1,0 +1,136 @@
+.announcements-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .announcements-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.announcement-form-card, .announcement-list-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.5rem;
+}
+
+.announcement-form-card h2 {
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.announcement-form-card .settings-form {
+  gap: 1rem;
+}
+
+.announcement-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.announcement-list-head h2 {
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.announcement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.announcement-row {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 3px solid #38bdf8;
+}
+
+.announcement-row.type-warning {
+  border-left-color: #f59e0b;
+}
+
+.announcement-row.type-critical {
+  border-left-color: #f87171;
+}
+
+.announcement-row.inactive {
+  opacity: 0.55;
+}
+
+.announcement-row-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.announcement-row.type-warning .announcement-row-icon {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.announcement-row.type-critical .announcement-row-icon {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+}
+
+.announcement-row-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.announcement-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.announcement-row-body h3 {
+  font-size: 0.92rem;
+  color: #fff;
+  font-weight: 700;
+}
+
+.announcement-target-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.announcement-row-body p {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  margin: 4px 0;
+}
+
+.announcement-date {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.announcement-row-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  flex-shrink: 0;
+}

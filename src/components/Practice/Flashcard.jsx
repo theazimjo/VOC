@@ -29,7 +29,7 @@ function PosBadge({ pos }) {
   );
 }
 
-export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
+export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -49,10 +49,10 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   // Autoplay pronunciation on card switch
   useEffect(() => {
     if (currentWord) {
-      const t = setTimeout(() => speakWord(currentWord.word), 350);
+      const t = setTimeout(() => speakWord(currentWord.word, language), 350);
       return () => clearTimeout(t);
     }
-  }, [currentIndex, currentWord]);
+  }, [currentIndex, currentWord, language]);
 
   // Reset per-card state when the card changes
   useEffect(() => {
@@ -134,7 +134,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
             <div className="flashcard-face flashcard-front">
               <button
                 className="btn-speak-card"
-                onClick={e => { e.stopPropagation(); speakWord(currentWord.word); }}
+                onClick={e => { e.stopPropagation(); speakWord(currentWord.word, language); }}
                 title="Talaffuz qilish"
               >
                 <Volume2 size={18} strokeWidth={2.2} />

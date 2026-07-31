@@ -59,6 +59,57 @@
   margin-top: var(--space-md);
 }
 
+.group-mode-card {
+  text-align: left;
+}
+
+.group-mode-card h3 {
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.group-mode-desc {
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  margin-bottom: var(--space-md);
+  line-height: 1.5;
+}
+
+.group-mode-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.group-mode-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+}
+
+.group-mode-input-wrap input {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 12px 0;
+  font-size: var(--font-md);
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.group-mode-input-wrap input:focus {
+  outline: none;
+}
+
+.group-mode-error {
+  color: var(--error);
+  font-size: var(--font-sm);
+}
+
 .danger-zone {
   background: var(--bg-glass);
   border: 1px solid var(--error-dim);

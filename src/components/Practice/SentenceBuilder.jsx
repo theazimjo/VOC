@@ -62,7 +62,7 @@ function sentenceUsesWord(sentence, word) {
   return pattern.test(sentence);
 }
 
-export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
+export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
@@ -209,7 +209,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
                   <button
                     type="button"
                     className="btn-sentence-speak"
-                    onClick={() => speakWord(currentWord.word)}
+                    onClick={() => speakWord(currentWord.word, language)}
                     title="Talaffuz qilish"
                   >
                     <Volume2 size={15} strokeWidth={2.3} />

@@ -6,7 +6,8 @@ import './PhotoWordExtractorModal.css';
 
 export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, existingWords = [] }) {
   const { user } = useAuth();
-  const isAllowedUser = user?.email?.toLowerCase() === 'azimjonxolmirzayev30@gmail.com';
+  const ADMIN_EMAILS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
+  const isAllowedUser = ADMIN_EMAILS.includes(user?.email?.toLowerCase());
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);

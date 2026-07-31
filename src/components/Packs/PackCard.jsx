@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { MoreVertical } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
+import { speechLanguages } from '../../utils/helpers';
 import './PackCard.css';
 
 export default function PackCard({ pack, onLongPress }) {
@@ -49,6 +50,7 @@ export default function PackCard({ pack, onLongPress }) {
   };
 
   const accentColor = pack.color || 'var(--accent-1)';
+  const packLanguage = speechLanguages.find(l => l.code === pack.language);
 
   return (
     <motion.div
@@ -83,6 +85,9 @@ export default function PackCard({ pack, onLongPress }) {
             {pack.icon}
           </div>
           <div className="pack-card-top-right">
+            {packLanguage && packLanguage.code !== 'en-US' && (
+              <span className="pack-card-lang" title={packLanguage.label}>{packLanguage.flag}</span>
+            )}
             <span className="pack-card-count">{pack.wordCount || 0} ta so'z</span>
             {onLongPress && (
               <button

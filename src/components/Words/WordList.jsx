@@ -5,7 +5,7 @@ import WordCard from './WordCard';
 import IosSpinner from '../common/IosSpinner';
 import './WordList.css';
 
-export default function WordList({ words, onEdit, onDelete, loading, readOnly, groupFn }) {
+export default function WordList({ words, onEdit, onDelete, loading, readOnly, groupFn, language = 'en-US' }) {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState(groupFn ? 'group' : 'date-desc');
 
@@ -97,6 +97,7 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly, g
                   onEdit={onEdit}
                   onDelete={onDelete}
                   readOnly={readOnly}
+                  language={language}
                 />
               </div>
             );

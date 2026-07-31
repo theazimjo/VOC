@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, ChevronLeft, ChevronRight, LogOut, GraduationCap as LogoIcon, FlaskConical, Shield } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, ChevronLeft, ChevronRight, LogOut, GraduationCap as LogoIcon, FlaskConical, Shield, Building2 } from 'lucide-react';
 import './Sidebar.css';
 
 const baseNavItems = [
@@ -38,7 +38,8 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
   };
 
   const navItems = [...baseNavItems];
-  if (user?.email === 'azimjonxolmirzayev30@gmail.com') {
+  const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
+  if (SUPER_ADMINS.includes(user?.email)) {
     navItems.push({ to: '/admin', icon: Shield, label: 'Admin Panel' });
   }
 
@@ -95,8 +96,6 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
               </NavLink>
             );
           })}
-
-
         </nav>
 
         {/* Footer — user info */}
