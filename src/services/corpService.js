@@ -423,6 +423,44 @@ export async function getCenterTeachers(centerId) {
 }
 
 /**
+ * Center Admin: Create a teacher account directly (no invite code needed).
+ * Mirrors createCenterAdminAccount's secondary-auth pattern so the admin's
+ * own session is untouched, and writes the same centers/teachers +
+ * corpUsers shape joinAsTeacher produces so both paths behave identically
+ * afterward.
+ */
+export async function createTeacher(centerId, centerName, teacherForm) {
+  const { name, email, phone, subject } = teacherForm;
+
+  const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
+  const teacherId = teacherRef.key;
+
+  const { uid, tempPassword } = await createCorpAccount(email, {
+    role: 'teacher',
+    centerId,
+    centerName: centerName || '',
+    teacherId,
+    teacherName: name,
+  });
+
+  const teacherPayload = {
+    id: teacherId,
+    uid,
+    centerId,
+    name,
+    email,
+    phone: phone || '',
+    subject: subject || 'Ingliz tili',
+    status: 'active',
+    createdAt: new Date().toISOString(),
+  };
+
+  await set(teacherRef, teacherPayload);
+
+  return { id: teacherId, name, email, tempPassword };
+}
+
+/**
  * Center Admin / Teacher: Create Custom Word Pack
  */
 export async function createCustomPack(centerId, packData) {
