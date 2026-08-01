@@ -21,7 +21,7 @@ export default function CorpProtectedRoute({ allowedRoles }) {
   }
 
   if (!identity || !allowedRoles.includes(identity.role)) {
-    return <Navigate to="/corp/login" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return <Outlet context={identity} />;

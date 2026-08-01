@@ -162,6 +162,45 @@
   border-color: rgba(245, 158, 11, 0.3);
 }
 
+.teacher-group-card.clickable {
+  cursor: pointer;
+}
+
+.group-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #60a5fa;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.teacher-group-card:hover .group-card-footer {
+  color: #93c5fd;
+}
+
+.group-detail-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.group-detail-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.group-detail-actions .btn-group-action {
+  flex: none;
+  padding: 8px 16px;
+}
+
 .assign-pack-list {
   display: flex;
   flex-direction: column;

@@ -8,11 +8,6 @@ function generateJoinCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-// Helper to generate a teacher invite code in "T-XXXX" form
-function generateInviteCode() {
-  return 'T-' + Math.floor(1000 + Math.random() * 9000);
-}
-
 // Helper to generate a temporary password shown once to the creator, who
 // shares it with the new center admin / teacher out of band.
 function generateTempPassword() {
@@ -29,16 +24,16 @@ function generateTempPassword() {
  * without disturbing the current (creator's) session, and register the
  * role mapping under corpUsers/{uid} so CorpProtectedRoute can authorize them.
  */
-async function createCorpAccount(email, roleRecord) {
+async function createCorpAccount(email, roleRecord, customPassword = null) {
   const secondaryAuth = getSecondaryAuth();
-  const tempPassword = generateTempPassword();
+  const password = customPassword || generateTempPassword();
 
   let cred;
   try {
-    cred = await createUserWithEmailAndPassword(secondaryAuth, email, tempPassword);
+    cred = await createUserWithEmailAndPassword(secondaryAuth, email, password);
   } catch (err) {
     if (err.code === 'auth/email-already-in-use') {
-      throw new Error('Bu email allaqachon ro\'yxatdan o\'tgan. Boshqa email manzil kiriting.', { cause: err });
+      throw new Error('Bu telefon raqam / foydalanuvchi allaqachon ro\'yxatdan o\'tgan.', { cause: err });
     }
     throw err;
   }
@@ -52,7 +47,7 @@ async function createCorpAccount(email, roleRecord) {
     createdAt: new Date().toISOString(),
   });
 
-  return { uid, email, tempPassword };
+  return { uid, email, tempPassword: password };
 }
 
 /**
@@ -247,65 +242,6 @@ export async function deleteCenter(centerId) {
 }
 
 /**
- * Center Admin: Generate a one-time "T-XXXX" invite code for a teacher to
- * join this center. Unlike center admin accounts, the center admin does NOT
- * create the teacher's login here — the teacher creates their own account
- * on the invite-code join page (see joinAsTeacher below). The code is
- * written both under the center (for the admin's "active invites" list) and
- * to a top-level `teacherInvites/{code}` pointer so the join page can look
- * it up before the teacher is authenticated, mirroring how `groupCodes`
- * lets students resolve a PIN to a center/group.
- */
-export async function generateTeacherInvite(centerId, centerName) {
-  let code = generateInviteCode();
-  let attempts = 0;
-  while ((await get(ref(db, `teacherInvites/${code}`))).exists() && attempts < 10) {
-    code = generateInviteCode();
-    attempts++;
-  }
-
-  const invite = {
-    code,
-    centerId,
-    centerName: centerName || '',
-    status: 'active',
-    createdAt: Date.now(),
-  };
-
-  // One atomic multi-path write instead of two sequential set() calls —
-  // halves the round trips this button click waits on.
-  await update(ref(db), {
-    [`teacherInvites/${code}`]: invite,
-    [`centers/${centerId}/teacherInvites/${code}`]: invite,
-  });
-
-  return invite;
-}
-
-/**
- * Center Admin: List this center's active (unused) teacher invite codes.
- */
-export async function getCenterTeacherInvites(centerId) {
-  const snap = await get(ref(db, `centers/${centerId}/teacherInvites`));
-  if (!snap.exists()) return [];
-  const val = snap.val();
-  return Object.keys(val)
-    .map(code => ({ ...val[code] }))
-    .filter(invite => invite.status === 'active')
-    .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-}
-
-/**
- * Center Admin: Revoke an unused teacher invite code.
- */
-export async function deleteTeacherInvite(centerId, code) {
-  await update(ref(db), {
-    [`centers/${centerId}/teacherInvites/${code}`]: null,
-    [`teacherInvites/${code}`]: null,
-  });
-}
-
-/**
  * Center Admin: Remove a teacher from the center. Deletes their teacher
  * record and their corpUsers role mapping (which is what actually revokes
  * portal access — see resolveCorpIdentity), same "can't delete the Firebase
@@ -340,78 +276,6 @@ export async function getCenterStudents(centerId) {
 }
 
 /**
- * Teacher: Redeem an invite code to create their own login account and join
- * a center as a teacher. Runs on the PRIMARY auth instance (unlike
- * createCorpAccount, which uses the secondary app for admin-created
- * accounts) because the whole point is that the teacher ends this call
- * signed in as themselves.
- */
-export async function joinAsTeacher(code, { name, email, password }) {
-  const normalizedCode = code.trim().toUpperCase();
-  const inviteSnap = await get(ref(db, `teacherInvites/${normalizedCode}`));
-  if (!inviteSnap.exists() || inviteSnap.val().status !== 'active') {
-    throw new Error('Taklif kodi topilmadi yoki allaqachon ishlatilgan.');
-  }
-  const invite = inviteSnap.val();
-  const { centerId, centerName } = invite;
-
-  let cred;
-  try {
-    cred = await createUserWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    if (err.code === 'auth/email-already-in-use') {
-      throw new Error('Bu email allaqachon ro\'yxatdan o\'tgan. Boshqa email manzil kiriting.', { cause: err });
-    }
-    throw err;
-  }
-  const uid = cred.user.uid;
-
-  const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
-  const teacherId = teacherRef.key;
-
-  const teacherPayload = {
-    id: teacherId,
-    uid,
-    centerId,
-    name,
-    email,
-    phone: '',
-    subject: 'Ingliz tili',
-    status: 'active',
-    inviteCode: normalizedCode,
-    createdAt: new Date().toISOString(),
-  };
-
-  // These two must land in ONE atomic update, and BEFORE the invite gets
-  // flipped to 'used' below: their write rules check root.child('teacherInvites')
-  // .child(code).child('status') === 'active', and `root` in a security rule
-  // always reflects the data as it will be immediately after that write — so
-  // if the status flip were batched into the same update, this check would
-  // see 'used' (its own post-write state) and reject the write.
-  await update(ref(db), {
-    [`centers/${centerId}/teachers/${teacherId}`]: teacherPayload,
-    [`corpUsers/${uid}`]: {
-      email,
-      role: 'teacher',
-      centerId,
-      centerName: centerName || '',
-      teacherId,
-      teacherName: name,
-      inviteCode: normalizedCode,
-      createdAt: new Date().toISOString(),
-    },
-  });
-
-  const usedInvite = { ...invite, status: 'used', usedBy: uid, usedAt: Date.now() };
-  await update(ref(db), {
-    [`teacherInvites/${normalizedCode}`]: usedInvite,
-    [`centers/${centerId}/teacherInvites/${normalizedCode}`]: usedInvite,
-  });
-
-  return { uid, centerId, teacherId };
-}
-
-/**
  * Center Admin: Get Teachers of a Center
  */
 export async function getCenterTeachers(centerId) {
@@ -423,14 +287,15 @@ export async function getCenterTeachers(centerId) {
 }
 
 /**
- * Center Admin: Create a teacher account directly (no invite code needed).
- * Mirrors createCenterAdminAccount's secondary-auth pattern so the admin's
- * own session is untouched, and writes the same centers/teachers +
- * corpUsers shape joinAsTeacher produces so both paths behave identically
- * afterward.
+ * Center Admin: Create a teacher account directly. Mirrors
+ * createCenterAdminAccount's secondary-auth pattern so the admin's own
+ * session is untouched.
  */
 export async function createTeacher(centerId, centerName, teacherForm) {
-  const { name, email, phone, subject } = teacherForm;
+  const { name, phone, password, email: rawEmail, subject } = teacherForm;
+
+  const cleanPhone = (phone || '').replace(/\D/g, '') || Date.now().toString();
+  const email = rawEmail || `teacher_${cleanPhone}@markaz.uz`;
 
   const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
   const teacherId = teacherRef.key;
@@ -441,7 +306,8 @@ export async function createTeacher(centerId, centerName, teacherForm) {
     centerName: centerName || '',
     teacherId,
     teacherName: name,
-  });
+    phone: phone || '',
+  }, password);
 
   const teacherPayload = {
     id: teacherId,
@@ -458,6 +324,16 @@ export async function createTeacher(centerId, centerName, teacherForm) {
   await set(teacherRef, teacherPayload);
 
   return { id: teacherId, name, email, tempPassword };
+}
+
+export async function updateTeacherPassword(centerId, teacherId, uid, newPassword) {
+  const updates = {};
+  updates[`centers/${centerId}/teachers/${teacherId}/tempPassword`] = newPassword;
+  if (uid) {
+    updates[`corpUsers/${uid}/tempPassword`] = newPassword;
+  }
+  await update(ref(db), updates);
+  return { success: true };
 }
 
 /**
@@ -504,6 +380,19 @@ export async function duplicateCustomPack(centerId, pack) {
  */
 export async function deleteCustomPack(centerId, packId) {
   await update(ref(db), { [`centers/${centerId}/customPacks/${packId}`]: null });
+}
+
+/**
+ * Center Admin / Teacher: Update a custom pack's title/level/description
+ * and/or its word list in place (keeps the same id, so groups that already
+ * have it in assignedPacks keep pointing at the updated content).
+ */
+export async function updateCustomPack(centerId, packId, updates) {
+  const payload = { ...updates };
+  if (updates.words) {
+    payload.wordCount = updates.words.length;
+  }
+  await update(ref(db, `centers/${centerId}/customPacks/${packId}`), payload);
 }
 
 /**
@@ -602,6 +491,50 @@ export async function transferGroup(centerId, groupId, newTeacherId) {
   return true;
 }
 
+export async function updateGroupStatus(centerId, groupId, status) {
+  const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
+  await update(groupRef, {
+    status,
+    updatedAt: new Date().toISOString()
+  });
+  return true;
+}
+
+export async function updateGroupDetails(centerId, groupId, updates) {
+  const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
+  await update(groupRef, {
+    ...updates,
+    updatedAt: new Date().toISOString()
+  });
+  // Also update the global code mapping name if name is updated
+  if (updates.name) {
+    const snap = await get(groupRef);
+    if (snap.exists() && snap.val().code) {
+      const code = snap.val().code;
+      await update(ref(db, `groupCodes/${code}`), { name: updates.name });
+    }
+  }
+  return true;
+}
+
+export async function deleteGroup(centerId, groupId) {
+  const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
+  const snap = await get(groupRef);
+  if (!snap.exists()) return false;
+  const group = snap.val();
+  
+  const updates = {
+    [`centers/${centerId}/groups/${groupId}`]: null
+  };
+  
+  if (group.code) {
+    updates[`groupCodes/${group.code}`] = null;
+  }
+  
+  await update(ref(db), updates);
+  return true;
+}
+
 /**
  * Teacher: Assign Pack to Group
  */
@@ -670,11 +603,29 @@ export async function joinGroupAsUser(code, uid, profile) {
     groupName: group.name,
     groupCode: code,
     joinedAt: studentPayload.joinedAt,
+    level: group.level || 'General',
   };
   await set(ref(db, `users/${uid}/groupMembership`), membership);
+  await set(ref(db, `users/${uid}/groupMemberships/${groupId}`), membership);
   await set(ref(db, `users/${uid}/profile/appMode`), 'group');
 
   return { group: { id: groupId, ...group }, centerId, student: studentPayload, membership };
+}
+
+export async function switchActiveGroup(uid, groupId) {
+  const snap = await get(ref(db, `users/${uid}/groupMemberships/${groupId}`));
+  if (!snap.exists()) throw new Error('Guruh topilmadi');
+  const membership = snap.val();
+  await set(ref(db, `users/${uid}/groupMembership`), membership);
+  await set(ref(db, `users/${uid}/profile/appMode`), 'group');
+  return membership;
+}
+
+export async function getJoinedGroups(uid) {
+  const snap = await get(ref(db, `users/${uid}/groupMemberships`));
+  if (!snap.exists()) return [];
+  const val = snap.val();
+  return Object.values(val);
 }
 
 /**

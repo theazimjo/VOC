@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
-  Building2, LayoutDashboard, Users, GraduationCap, BookOpen,
+  Building2, Users, Archive, BookOpen,
   BarChart3, Settings, LogOut, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import './CorpAdminSidebar.css';
 
-export default function CorpAdminSidebar({ centerName, email }) {
+export default function TeacherSidebar({ centerName, teacherName, email, phone }) {
   const [collapsed, setCollapsed] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     await logout();
@@ -18,12 +19,11 @@ export default function CorpAdminSidebar({ centerName, email }) {
   };
 
   const navItems = [
-    { to: '/corp/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
-    { to: '/corp/admin/teachers', label: 'Teachers', icon: Users },
-    { to: '/corp/admin/students', label: 'Students', icon: GraduationCap },
-    { to: '/corp/admin/courses', label: 'Courses', icon: BookOpen },
-    { to: '/corp/admin/statistics', label: 'Statistics', icon: BarChart3 },
-    { to: '/corp/admin/settings', label: 'Settings', icon: Settings },
+    { to: '/corp/teacher', label: 'Guruhlarim', icon: Users, isGroupTab: true },
+    { to: '/corp/teacher/archive', label: 'Arxiv', icon: Archive },
+    { to: '/corp/teacher/courses', label: "So'zlar bazasi", icon: BookOpen },
+    { to: '/corp/teacher/statistics', label: 'Statistika', icon: BarChart3 },
+    { to: '/corp/teacher/settings', label: 'Sozlamalar', icon: Settings },
   ];
 
   return (
@@ -36,7 +36,7 @@ export default function CorpAdminSidebar({ centerName, email }) {
         {!collapsed && (
           <div className="brand-text-meta">
             <span className="center-title">{centerName || "O'quv Markazi"}</span>
-            <span className="center-role-tag">Center Admin</span>
+            <span className="center-role-tag">O'qituvchi</span>
           </div>
         )}
 
@@ -54,12 +54,14 @@ export default function CorpAdminSidebar({ centerName, email }) {
       <nav className="corp-sidebar-nav">
         {navItems.map((item) => {
           const Icon = item.icon;
+          const isActive = item.isGroupTab
+            ? (location.pathname === '/corp/teacher' || location.pathname.startsWith('/corp/teacher/group/'))
+            : location.pathname.startsWith(item.to);
           return (
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.end}
-              className={({ isActive }) => `sidebar-nav-btn ${isActive ? 'active' : ''}`}
+              className={`sidebar-nav-btn ${isActive ? 'active' : ''}`}
               title={item.label}
             >
               <Icon size={20} strokeWidth={2.2} />
@@ -74,11 +76,11 @@ export default function CorpAdminSidebar({ centerName, email }) {
         {!collapsed && (
           <div className="admin-profile-info">
             <div className="admin-avatar">
-              {(email || 'A')[0].toUpperCase()}
+              {(teacherName || email || 'O')[0].toUpperCase()}
             </div>
             <div className="admin-email-text">
-              <span className="adm-name">{email?.split('@')[0] || 'Admin'}</span>
-              <span className="adm-mail">{email || 'admin@markaz.uz'}</span>
+              <span className="adm-name">{teacherName || 'O\'qituvchi'}</span>
+              <span className="adm-mail">{phone || email || 'O\'qituvchi akkaunti'}</span>
             </div>
           </div>
         )}

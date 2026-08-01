@@ -116,18 +116,28 @@
 
 .auth-input {
   width: 100%;
-  padding: 20px 16px 8px;
+  padding: 22px 16px 8px;
   background: var(--ios-input-bg);
   border: 1px solid transparent;
   border-radius: var(--radius-md);
   color: var(--ios-text-main);
   font-family: var(--font-family);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
   -webkit-appearance: none;
+}
+
+/* Fix Chrome Autofill yellow/blue background override */
+.auth-input:-webkit-autofill,
+.auth-input:-webkit-autofill:hover,
+.auth-input:-webkit-autofill:focus,
+.auth-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--ios-input-bg) inset !important;
+  -webkit-text-fill-color: var(--ios-text-main) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .auth-input:focus {
@@ -145,19 +155,18 @@
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 17px;
+  font-size: 15px;
   color: var(--ios-text-secondary);
   pointer-events: none;
   transition: all 0.2s ease;
-  transform-origin: left center;
 }
 
 /* Float label up when input is focused or has value */
 .auth-input:focus + .auth-label,
 .auth-input:not(:placeholder-shown) + .auth-label {
-  top: 12px;
+  top: 6px;
   transform: translateY(0);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--ios-text-secondary);
 }

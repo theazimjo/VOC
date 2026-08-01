@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Outlet, useLocation, Navigate } from 'react-router-dom';
 import Sidebar from './Sidebar';
+import StudentSidebar from '../corp/StudentSidebar';
 import Navbar from './Navbar';
 import BottomNav from './BottomNav';
 import { useDailyReminder } from '../../hooks/useDailyReminder';
@@ -29,10 +30,14 @@ export default function Layout() {
     setMobileOpen(false);
   }, []);
 
-  // A student who switched to group mode from their Profile page gets the
-  // whole app redirected to the corp student view until they switch back.
-  if (!groupModeLoading && appMode === 'group') {
-    return <Navigate to="/corp/student" replace />;
+  // Redirection rules to separate the modes completely
+  if (!groupModeLoading) {
+    if (appMode === 'group' && location.pathname === '/') {
+      return <Navigate to="/corp/student" replace />;
+    }
+    if (appMode === 'individual' && location.pathname === '/corp/student') {
+      return <Navigate to="/" replace />;
+    }
   }
 
   // Check if we are in grammar test mode or actively running a complex test
@@ -43,15 +48,19 @@ export default function Layout() {
   return (
     <div className={`layout ${isTestMode ? 'layout--test-mode' : ''}`}>
       {!isTestMode && (
-        <Sidebar
-          collapsed={collapsed}
-          onToggle={handleToggleSidebar}
-          mobileOpen={mobileOpen}
-          onMobileClose={handleMobileClose}
-        />
+        appMode === 'group' ? (
+          <StudentSidebar />
+        ) : (
+          <Sidebar
+            collapsed={collapsed}
+            onToggle={handleToggleSidebar}
+            mobileOpen={mobileOpen}
+            onMobileClose={handleMobileClose}
+          />
+        )
       )}
 
-      {!isTestMode && (
+      {!isTestMode && appMode !== 'group' && (
         <Navbar
           sidebarCollapsed={collapsed}
           onHamburgerClick={handleHamburgerClick}
@@ -60,8 +69,11 @@ export default function Layout() {
 
       <main
         className={`layout-content ${
-          isTestMode ? 'layout-content--test-mode' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded')
+          isTestMode 
+            ? 'layout-content--test-mode' 
+            : (appMode === 'group' ? 'layout-content--expanded' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'))
         }`}
+        style={appMode === 'group' ? { marginTop: 0, minHeight: '100vh' } : {}}
       >
         <Outlet />
       </main>

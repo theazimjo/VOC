@@ -8,25 +8,26 @@ export default function CredentialsModal({ title, email, tempPassword, onClose }
   const [copied, setCopied] = useState(false);
 
   const copyAll = () => {
-    navigator.clipboard.writeText(`Email: ${email}\nParol: ${tempPassword}\nKirish: ${window.location.origin}/corp/login`);
+    navigator.clipboard.writeText(`Telefon/Email: ${email}\nParol: ${tempPassword}\nKirish: ${window.location.origin}/login`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <h2><KeyRound size={20} /> {title}</h2>
-
-        <div className="credentials-warning">
-          <TriangleAlert size={16} />
-          <span>Bu parol faqat bir marta ko'rsatiladi. Uni nusxalab, foydalanuvchiga xavfsiz yo'l bilan yuboring.</span>
+      <div className="credentials-modal" onClick={e => e.stopPropagation()}>
+        <div className="credentials-icon">
+          <KeyRound size={28} />
         </div>
+        <h2>{title}</h2>
+        <p className="credentials-desc">
+          O'qituvchiga kirish ma'lumotlarini taqdim eting.
+        </p>
 
         <div className="credentials-box">
-          <div><strong>Email:</strong> {email}</div>
-          <div><strong>Vaqtinchalik parol:</strong> <code>{tempPassword}</code></div>
-          <div><strong>Kirish sahifasi:</strong> /corp/login</div>
+          <div><strong>Telefon / Email:</strong> {email}</div>
+          <div><strong>Vaqtinchalik Parol:</strong> {tempPassword}</div>
+          <div><strong>Kirish sahifasi:</strong> /login</div>
         </div>
 
         <div className="modal-actions">

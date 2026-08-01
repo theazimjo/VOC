@@ -1,0 +1,87 @@
+import { useState, useEffect } from 'react';
+import { Outlet, Navigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import { useGroupMode } from '../../hooks/useGroupMode';
+import { getGroup, getCenterCustomPacks } from '../../services/corpService';
+import StudentSidebar from './StudentSidebar';
+import './CorpAdminLayout.css';
+
+export default function StudentLayout() {
+  const { user } = useAuth();
+  const { loading: groupModeLoading, appMode, membership } = useGroupMode();
+
+  const [group, setGroup] = useState(null);
+  const [assignedPacks, setAssignedPacks] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (groupModeLoading) return;
+    if (!membership) {
+      setLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    async function loadGroupPacks() {
+      setLoading(true);
+      try {
+        const [freshGroup, centerPacks] = await Promise.all([
+          getGroup(membership.centerId, membership.groupId),
+          getCenterCustomPacks(membership.centerId),
+        ]);
+        if (cancelled) return;
+
+        setGroup(freshGroup);
+        const assignedIds = new Set(freshGroup?.assignedPacks || []);
+        setAssignedPacks(centerPacks.filter(p => assignedIds.has(p.id)));
+      } catch (err) {
+        console.error('Error loading student packs:', err);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    loadGroupPacks();
+    return () => { cancelled = true; };
+  }, [membership, groupModeLoading]);
+
+  // Complete separation: if individual mode, redirect away from corp student layout
+  if (!groupModeLoading && appMode === 'individual') {
+    return <Navigate to="/" replace />;
+  }
+
+  if (groupModeLoading || loading) {
+    return (
+      <div className="corp-admin-layout" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0b0b0f' }}>
+        <div style={{ color: '#c084fc', fontSize: '1rem', fontWeight: 600 }}>Yuklanmoqda...</div>
+      </div>
+    );
+  }
+
+  const student = group?.students?.[user.uid];
+  const learnedPacksCount = Object.keys(student?.progress || {}).length;
+  const progressPct = assignedPacks.length > 0
+    ? Math.round((learnedPacksCount / assignedPacks.length) * 100)
+    : 0;
+
+  const contextValue = {
+    user,
+    membership,
+    group,
+    assignedPacks,
+    student,
+    learnedPacksCount,
+    progressPct,
+  };
+
+  return (
+    <div className="corp-admin-layout">
+      {/* Student Sidebar */}
+      <StudentSidebar />
+
+      {/* Main Content Pane */}
+      <main className="corp-admin-main-pane">
+        <Outlet context={contextValue} />
+      </main>
+    </div>
+  );
+}

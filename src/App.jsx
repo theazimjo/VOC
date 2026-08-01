@@ -32,8 +32,8 @@ const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard'));
 // individual-learner auth/route tree above — see CorpProtectedRoute)
 const CorpLayout = lazyWithRetry(() => import('./components/corp/CorpLayout'));
 const CorpAdminLayout = lazyWithRetry(() => import('./components/corp/CorpAdminLayout'));
-const CorpLoginPage = lazyWithRetry(() => import('./pages/corp/CorpLoginPage'));
-const TeacherJoinPage = lazyWithRetry(() => import('./pages/corp/TeacherJoinPage'));
+const TeacherLayout = lazyWithRetry(() => import('./components/corp/TeacherLayout'));
+const StudentLayout = lazyWithRetry(() => import('./components/corp/StudentLayout'));
 const CorpPortalHome = lazyWithRetry(() => import('./pages/corp/CorpPortalHome'));
 const CorpProtectedRoute = lazyWithRetry(() => import('./components/corp/CorpProtectedRoute'));
 const SuperAdminLayout = lazyWithRetry(() => import('./components/corp/SuperAdminLayout'));
@@ -45,6 +45,9 @@ const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/SuperAdminSe
 const CenterAdminDashboard = lazyWithRetry(() => import('./pages/corp/CenterAdminDashboard'));
 const TeacherDashboard = lazyWithRetry(() => import('./pages/corp/TeacherDashboard'));
 const StudentCorpDashboard = lazyWithRetry(() => import('./pages/corp/StudentCorpDashboard'));
+const StudentCorpPractice = lazyWithRetry(() => import('./pages/corp/StudentCorpPractice'));
+const StudentCorpProfile = lazyWithRetry(() => import('./pages/corp/StudentCorpProfile'));
+const StudentCorpSettings = lazyWithRetry(() => import('./pages/corp/StudentCorpSettings'));
 const CorpPractice = lazyWithRetry(() => import('./pages/corp/CorpPractice'));
 
 function BookToPackRedirect() {
@@ -108,8 +111,8 @@ export default function App() {
                       OUTSIDE the individual-learner ProtectedRoute above.
                       Center admins/teachers authenticate via /corp/login;
                       students never need an individual account at all. */}
-                  <Route path="/corp/login" element={<CorpLoginPage />} />
-                  <Route path="/corp/teacher/join" element={<TeacherJoinPage />} />
+                  <Route path="/corp/login" element={<Navigate to="/login" replace />} />
+                  <Route path="/corp/teacher/join" element={<Navigate to="/login" replace />} />
                   <Route path="/corp" element={<CorpLayout />}>
                     <Route index element={<CorpPortalHome />} />
                     <Route element={<CorpProtectedRoute allowedRoles={['super_admin']} />}>
@@ -132,9 +135,22 @@ export default function App() {
                       </Route>
                     </Route>
                     <Route element={<CorpProtectedRoute allowedRoles={['teacher']} />}>
-                      <Route path="teacher" element={<TeacherDashboard />} />
+                      <Route element={<TeacherLayout />}>
+                        <Route path="teacher" element={<TeacherDashboard tab="groups" />} />
+                        <Route path="teacher/group/:groupId" element={<TeacherDashboard tab="groups" />} />
+                        <Route path="teacher/group/:groupId/:subTab" element={<TeacherDashboard tab="groups" />} />
+                        <Route path="teacher/archive" element={<TeacherDashboard tab="archive" />} />
+                        <Route path="teacher/courses" element={<TeacherDashboard tab="courses" />} />
+                        <Route path="teacher/statistics" element={<TeacherDashboard tab="statistics" />} />
+                        <Route path="teacher/settings" element={<TeacherDashboard tab="settings" />} />
+                      </Route>
                     </Route>
-                    <Route path="student" element={<StudentCorpDashboard />} />
+                    <Route element={<StudentLayout />}>
+                      <Route path="student" element={<StudentCorpDashboard />} />
+                      <Route path="student/practice" element={<StudentCorpPractice />} />
+                      <Route path="student/profile" element={<StudentCorpProfile />} />
+                      <Route path="student/settings" element={<StudentCorpSettings />} />
+                    </Route>
                     <Route path="practice" element={<CorpPractice />} />
                   </Route>
 

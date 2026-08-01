@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import './LoginPage.css';
 
 // Subtle, smooth ambient animations for the orbs
@@ -108,20 +109,36 @@ export default function LoginPage() {
     }
   };
 
-  const SUPER_ADMINS = ['azimjonxolmirzayev30@gmail.com', 'azimjon29042006@gmail.com'];
-
-  const getRedirectPath = (u) => {
-    if (u?.email && SUPER_ADMINS.includes(u.email.toLowerCase())) {
-      return '/corp/super-admin';
+  const getRedirectPath = async (u) => {
+    if (!u) return '/';
+    try {
+      const identity = await resolveCorpIdentity(u);
+      if (identity) {
+        if (identity.role === 'super_admin') return '/corp/super-admin';
+        if (identity.role === 'center_admin') return '/corp/admin';
+        if (identity.role === 'teacher') return '/corp/teacher';
+      }
+    } catch (err) {
+      console.error('Error resolving corp identity on login:', err);
     }
     return '/';
   };
 
+  const resolveLoginEmail = (input) => {
+    const trimmed = input.trim();
+    if (trimmed.includes('@')) return trimmed;
+    const clean = trimmed.replace(/\D/g, '');
+    if (clean) return `teacher_${clean}@markaz.uz`;
+    return trimmed;
+  };
+
   useEffect(() => {
     if (!loading && user) {
-      navigate(getRedirectPath(user), { replace: true });
+      getRedirectPath(user).then((targetPath) => {
+        navigate(targetPath, { replace: true });
+      });
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, navigate, mode]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -134,9 +151,11 @@ export default function LoginPage() {
 
     setSubmitting(true);
     try {
-      const res = await login(email.trim(), password);
+      const loginIdentifier = resolveLoginEmail(email);
+      const res = await login(loginIdentifier, password);
       const targetUser = res?.user || user;
-      navigate(getRedirectPath(targetUser), { replace: true });
+      const targetPath = await getRedirectPath(targetUser);
+      navigate(targetPath, { replace: true });
     } catch (err) {
       setError(getFirebaseErrorMessage(err.code));
     } finally {
@@ -150,7 +169,8 @@ export default function LoginPage() {
     try {
       const res = await loginWithGoogle();
       const targetUser = res?.user || user;
-      navigate(getRedirectPath(targetUser), { replace: true });
+      const targetPath = await getRedirectPath(targetUser);
+      navigate(targetPath, { replace: true });
     } catch (err) {
       console.error("Google Sign-In Error details:", err);
       if (err.code !== 'auth/popup-closed-by-user') {
@@ -288,15 +308,15 @@ export default function LoginPage() {
               custom={0}
             >
               <input
-                type="email"
+                type="text"
                 className="auth-input"
-                placeholder="Email"
+                placeholder="Email yoki Telefon raqam"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
+                autoComplete="username"
                 disabled={submitting}
               />
-              <label className="auth-label">Email</label>
+              <label className="auth-label">Email yoki Telefon raqam</label>
             </motion.div>
 
             <motion.div

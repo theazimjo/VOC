@@ -14,7 +14,7 @@ export default function SuperAdminSidebar({ email }) {
 
   const handleLogout = async () => {
     await logout();
-    navigate('/corp/login');
+    navigate('/login');
   };
 
   const navItems = [

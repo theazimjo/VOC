@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useOutletContext, useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  Building, Users, BookOpen, Layers, Plus,
-  GraduationCap, UserPlus, Sparkles, LayoutDashboard,
-  BarChart3, Settings, Save, CheckCircle2, TrendingUp,
-  ArrowRight, ShieldCheck, Mail, Phone, MapPin, Download,
-  Search, SlidersHorizontal, MoreHorizontal, Target,
-  FileText, Copy, Edit3, Trash2, ArrowUpRight, Smartphone
+  Building, Users, BookOpen, Book, Layers, Plus,
+  GraduationCap, UserPlus, Sparkles,
+  BarChart3, Settings, Save, CheckCircle2,
+  ArrowRight, Mail, Download,
+  Search, SlidersHorizontal, MoreHorizontal, MoreVertical, Target, Filter, ChevronDown,
+  FileText, Copy, Edit3, Trash2, ArrowUpRight, KeyRound
 } from 'lucide-react';
-import { getCenterTeachers, createTeacher, getCenterCustomPacks } from '../../services/corpService';
+import {
+  getCenterTeachers, createTeacher, updateTeacherPassword, removeTeacherFromCenter, getCenterCustomPacks, getCenterGroups,
+  getCenter, updateCenter, deleteCustomPack, duplicateCustomPack
+} from '../../services/corpService';
 import CustomPackEditor from '../../components/corp/CustomPackEditor';
+import CourseManager from '../../components/corp/CourseManager';
 import CredentialsModal from '../../components/corp/CredentialsModal';
 import './CenterAdminDashboard.css';
 
@@ -20,106 +24,85 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const initialCenterName = context.centerName || 'O\'quv Markazi';
 
   const [centerName, setCenterName] = useState(initialCenterName);
-  const [centerEmail, setCenterEmail] = useState('info@markaz.uz');
-  const [centerPhone, setCenterPhone] = useState('+998 90 123 45 67');
-  const [centerAddress, setCenterAddress] = useState('Toshkent sh., Yunusobod t.');
+  const [centerEmail, setCenterEmail] = useState('');
+  const [centerPhone, setCenterPhone] = useState('');
+  const [centerAddress, setCenterAddress] = useState('');
   const [settingsSaved, setSettingsSaved] = useState(false);
+  const [savingSettings, setSavingSettings] = useState(false);
 
-  const [defaultTeachers] = useState([
-    {
-      id: 't1',
-      name: 'Azimjon Xolmirzayev',
-      email: 'azimjonbieber@gmail.com',
-      phone: '+998 90 123 45 67',
-      subject: 'Ingliz tili',
-      groupsCount: 3,
-      studentsCount: 20,
-      status: 'Faol'
-    },
-    {
-      id: 't2',
-      name: 'Rustamjon Isakov',
-      email: 'uchkurganitschool2@gmail.com',
-      phone: '+998 91 987 65 43',
-      subject: 'IELTS / SAT',
-      groupsCount: 5,
-      studentsCount: 4,
-      status: 'Faol'
-    }
-  ]);
-
-  const [defaultCourses, setDefaultCourses] = useState([
-    {
-      id: 'c1',
-      title: 'A1',
-      description: 'Tavsif yo\'q',
-      sectionsCount: 0,
-      wordsCount: 104,
-      groupsCount: 0,
-      studentsCount: 0,
-      active: true
-    },
-    {
-      id: 'c2',
-      title: 'English pro',
-      description: 'Tavsif yo\'q',
-      sectionsCount: 2,
-      wordsCount: 101,
-      groupsCount: 0,
-      studentsCount: 0,
-      active: false
-    },
-    {
-      id: 'c3',
-      title: 'General English',
-      description: 'Tavsif yo\'q',
-      sectionsCount: 6,
-      wordsCount: 239,
-      groupsCount: 0,
-      studentsCount: 0,
-      active: false
-    }
-  ]);
-
-  const [teachers, setTeachers] = useState(defaultTeachers);
+  const [teachers, setTeachers] = useState([]);
+  const [groups, setGroups] = useState([]);
   const [customPacks, setCustomPacks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [teacherSearchTerm, setTeacherSearchTerm] = useState('');
   const [courseSearchTerm, setCourseSearchTerm] = useState('');
+  const [courseSortBy, setCourseSortBy] = useState('date'); // date | name | units | words
+  const [courseSortOrder, setCourseSortOrder] = useState('desc');
+  const [showCourseSortMenu, setShowCourseSortMenu] = useState(false);
   const [selectedTeacherIds, setSelectedTeacherIds] = useState([]);
+  const [activeTeacherMenu, setActiveTeacherMenu] = useState(null);
+  const [teacherMenuPos, setTeacherMenuPos] = useState({ top: 0, right: 0 });
 
-  // Modals
+  // Modals & Routing
+  const [searchParams, setSearchParams] = useSearchParams();
+  const courseIdFromUrl = searchParams.get('courseId');
+  const managingCourse = customPacks.find(p => p.id === courseIdFromUrl) || null;
   const [showTeacherModal, setShowTeacherModal] = useState(false);
   const [showPackEditor, setShowPackEditor] = useState(false);
+  const [editingPack, setEditingPack] = useState(null);
   const [credentials, setCredentials] = useState(null);
 
-  const [teacherForm, setTeacherForm] = useState({ name: '', email: '', phone: '', subject: 'Ingliz tili' });
+  const [teacherForm, setTeacherForm] = useState({ name: '', phone: '', password: '' });
   const [submittingTeacher, setSubmittingTeacher] = useState(false);
+
+  const [resetPasswordTeacher, setResetPasswordTeacher] = useState(null);
+  const [newTeacherPassword, setNewTeacherPassword] = useState('');
+  const [submittingPasswordReset, setSubmittingPasswordReset] = useState(false);
+
+  const handleUpdateTeacherPassword = async (e) => {
+    e.preventDefault();
+    if (!newTeacherPassword.trim() || newTeacherPassword.trim().length < 6) {
+      alert("Parol kamida 6 ta belgidan iborat bo'lishi kerak!");
+      return;
+    }
+    setSubmittingPasswordReset(true);
+    try {
+      const teacher = resetPasswordTeacher;
+      const pwd = newTeacherPassword.trim();
+      await updateTeacherPassword(centerId, teacher.id, teacher.uid, pwd);
+      const targetIdentifier = teacher.phone || teacher.email;
+      setResetPasswordTeacher(null);
+      setCredentials({ email: targetIdentifier, tempPassword: pwd });
+    } catch (err) {
+      alert("Parolni yangilashda xatolik: " + err.message);
+    } finally {
+      setSubmittingPasswordReset(false);
+    }
+  };
 
   const loadData = async () => {
     setLoading(true);
     try {
-      const [teachersData, packsData] = await Promise.all([
+      const [teachersData, packsData, groupsData, centerData] = await Promise.all([
         getCenterTeachers(centerId),
-        getCenterCustomPacks(centerId)
+        getCenterCustomPacks(centerId),
+        getCenterGroups(centerId),
+        getCenter(centerId)
       ]);
-      
-      if (teachersData && teachersData.length > 0) {
-        const merged = [...teachersData];
-        defaultTeachers.forEach(dt => {
-          if (!merged.find(t => t.email === dt.email)) {
-            merged.push(dt);
-          }
-        });
-        setTeachers(merged);
-      } else {
-        setTeachers(defaultTeachers);
-      }
+
+      setTeachers(teachersData || []);
       setCustomPacks(packsData || []);
+      setGroups(groupsData || []);
+
+      if (centerData) {
+        setCenterName(centerData.name || initialCenterName);
+        setCenterEmail(centerData.email || '');
+        setCenterPhone(centerData.phone || '');
+        setCenterAddress(centerData.address || '');
+      }
     } catch (err) {
       console.error('Error loading center admin data:', err);
-      setTeachers(defaultTeachers);
     } finally {
       setLoading(false);
     }
@@ -131,24 +114,27 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
 
   const handleAddTeacher = async (e) => {
     e.preventDefault();
-    if (!teacherForm.name.trim() || !teacherForm.email.trim()) return;
+    if (!teacherForm.name.trim() || !teacherForm.phone.trim() || !teacherForm.password.trim()) {
+      alert("Iltimos, barcha maydonlarni (F.I.Sh, Telefon raqam va Parol) to'ldiring!");
+      return;
+    }
     setSubmittingTeacher(true);
     try {
       const newTeacher = await createTeacher(centerId, centerName, teacherForm);
       const formatted = {
         id: newTeacher.id || Date.now().toString(),
-        name: newTeacher.name || teacherForm.name,
-        email: newTeacher.email || teacherForm.email,
-        phone: teacherForm.phone || '+998 90 000 00 00',
-        subject: teacherForm.subject || 'General English',
-        groupsCount: 1,
+        name: teacherForm.name.trim(),
+        phone: teacherForm.phone.trim(),
+        email: teacherForm.phone.trim(),
+        subject: 'Ingliz tili',
+        groupsCount: 0,
         studentsCount: 0,
         status: 'Faol'
       };
       setTeachers(prev => [formatted, ...prev]);
-      setTeacherForm({ name: '', email: '', phone: '', subject: 'Ingliz tili' });
+      setTeacherForm({ name: '', phone: '', password: '' });
       setShowTeacherModal(false);
-      setCredentials({ email: formatted.email, tempPassword: newTeacher.tempPassword || 'temp1234' });
+      setCredentials({ email: teacherForm.phone.trim(), tempPassword: teacherForm.password.trim() });
     } catch (err) {
       alert('O\'qituvchi qo\'shishda xatolik: ' + err.message);
     } finally {
@@ -156,69 +142,140 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     }
   };
 
-  const handleSaveSettings = (e) => {
+  const handleSaveSettings = async (e) => {
     e.preventDefault();
-    setSettingsSaved(true);
-    setTimeout(() => setSettingsSaved(false), 3000);
-  };
-
-  const handleDeleteCourse = (id) => {
-    if (confirm('Ushbu kursni o\'chirishni tasdiqlaysizmi?')) {
-      setDefaultCourses(prev => prev.filter(c => c.id !== id));
-      setCustomPacks(prev => prev.filter(p => p.id !== id));
+    setSavingSettings(true);
+    try {
+      await updateCenter(centerId, {
+        name: centerName,
+        email: centerEmail,
+        phone: centerPhone,
+        address: centerAddress,
+      });
+      setSettingsSaved(true);
+      setTimeout(() => setSettingsSaved(false), 3000);
+    } catch (err) {
+      alert("Sozlamalarni saqlashda xatolik: " + err.message);
+    } finally {
+      setSavingSettings(false);
     }
   };
 
-  const handleDuplicateCourse = (course) => {
-    const duplicated = {
-      ...course,
-      id: Date.now().toString(),
-      title: `${course.title} (Nusxa)`
-    };
-    setDefaultCourses(prev => [duplicated, ...prev]);
+  const handleDeleteTeacher = async (teacher) => {
+    if (!confirm(`"${teacher.name}" o'qituvchisini o'chirishni tasdiqlaysizmi?`)) return;
+    try {
+      await removeTeacherFromCenter(centerId, teacher.id, teacher.uid);
+      setTeachers(prev => prev.filter(t => t.id !== teacher.id));
+      setSelectedTeacherIds(prev => prev.filter(id => id !== teacher.id));
+    } catch (err) {
+      alert("O'qituvchini o'chirishda xatolik: " + err.message);
+    }
   };
 
-  // Filtered lists
-  const filteredTeachers = teachers.filter(t => 
+  const handleBulkDeleteTeachers = async () => {
+    if (selectedTeacherIds.length === 0) return;
+    if (!confirm(`${selectedTeacherIds.length} ta tanlangan o'qituvchini o'chirishni tasdiqlaysizmi?`)) return;
+    try {
+      for (const tId of selectedTeacherIds) {
+        const teacher = teachers.find(t => t.id === tId);
+        if (teacher) {
+          await removeTeacherFromCenter(centerId, teacher.id, teacher.uid);
+        }
+      }
+      setTeachers(prev => prev.filter(t => !selectedTeacherIds.includes(t.id)));
+      setSelectedTeacherIds([]);
+    } catch (err) {
+      alert("O'qituvchilarni o'chirishda xatolik: " + err.message);
+    }
+  };
+
+  const handleDeleteCourse = async (id) => {
+    if (!confirm('Ushbu kursni o\'chirishni tasdiqlaysizmi?')) return;
+    try {
+      await deleteCustomPack(centerId, id);
+      setCustomPacks(prev => prev.filter(p => p.id !== id));
+    } catch (err) {
+      alert("Kursni o'chirishda xatolik: " + err.message);
+    }
+  };
+
+  const handleDuplicateCourse = async (course) => {
+    try {
+      const original = customPacks.find(p => p.id === course.id);
+      if (!original) return;
+      const duplicated = await duplicateCustomPack(centerId, original);
+      setCustomPacks(prev => [duplicated, ...prev]);
+    } catch (err) {
+      alert("Kursni nusxalashda xatolik: " + err.message);
+    }
+  };
+
+  // Real per-teacher group/student counts, derived from this center's actual
+  // groups (a teacher record itself doesn't carry these — they're computed,
+  // not stored, so they can never drift out of sync with the groups list).
+  const teachersWithStats = teachers.map(t => {
+    const ownGroups = groups.filter(g => g.teacherId === t.id);
+    return {
+      ...t,
+      groupsCount: ownGroups.length,
+      studentsCount: ownGroups.reduce((sum, g) => sum + (g.studentsCount || 0), 0),
+    };
+  });
+  const filteredTeachersWithStats = teachersWithStats.filter(t =>
     t.name.toLowerCase().includes(teacherSearchTerm.toLowerCase()) ||
     t.email.toLowerCase().includes(teacherSearchTerm.toLowerCase())
   );
 
-  // Combine customPacks and defaultCourses for display
-  const allCourses = [...defaultCourses, ...customPacks.map(p => ({
-    id: p.id,
-    title: p.title,
-    description: p.description || 'Tavsif yo\'q',
-    sectionsCount: p.sectionsCount || 0,
-    wordsCount: p.wordCount || (p.words ? p.words.length : 0),
-    groupsCount: 0,
-    studentsCount: 0,
-    active: false
-  }))];
+  const allCourses = customPacks.map(p => {
+    const packGroups = groups.filter(g => (g.assignedPacks || []).includes(p.id));
+    return {
+      id: p.id,
+      title: p.title,
+      description: p.description || 'Tavsif yo\'q',
+      sectionsCount: p.sectionsCount || 0,
+      wordsCount: p.wordCount || (p.words ? p.words.length : 0),
+      groupsCount: packGroups.length,
+      studentsCount: packGroups.reduce((sum, g) => sum + (g.studentsCount || 0), 0),
+      createdAt: p.createdAt ? new Date(p.createdAt).getTime() : 0,
+      active: false
+    };
+  });
 
-  const filteredCourses = allCourses.filter(c => 
-    c.title.toLowerCase().includes(courseSearchTerm.toLowerCase()) ||
-    c.description.toLowerCase().includes(courseSearchTerm.toLowerCase())
-  );
+  const filteredCourses = allCourses
+    .filter(c =>
+      c.title.toLowerCase().includes(courseSearchTerm.toLowerCase()) ||
+      c.description.toLowerCase().includes(courseSearchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      let cmp;
+      switch (courseSortBy) {
+        case 'name': cmp = a.title.localeCompare(b.title); break;
+        case 'units': cmp = a.sectionsCount - b.sectionsCount; break;
+        case 'words': cmp = a.wordsCount - b.wordsCount; break;
+        case 'date':
+        default: cmp = a.createdAt - b.createdAt; break;
+      }
+      return courseSortOrder === 'asc' ? cmp : -cmp;
+    });
 
   // Teacher Counts
   const totalTeachers = teachers.length;
-  const totalTeacherGroups = teachers.reduce((sum, t) => sum + (t.groupsCount || 3), 0);
-  const totalTeacherStudents = teachers.reduce((sum, t) => sum + (t.studentsCount || 10), 0);
-  const avgGroups = totalTeachers ? Math.round(totalTeacherGroups / totalTeachers) : 4;
-  const avgStudents = totalTeachers ? Math.round(totalTeacherStudents / totalTeachers) : 12;
+  const totalTeacherGroups = teachersWithStats.reduce((sum, t) => sum + t.groupsCount, 0);
+  const totalTeacherStudents = teachersWithStats.reduce((sum, t) => sum + t.studentsCount, 0);
+  const avgGroups = totalTeachers ? Math.round(totalTeacherGroups / totalTeachers) : 0;
+  const avgStudents = totalTeachers ? Math.round(totalTeacherStudents / totalTeachers) : 0;
 
-  // Course Counts (matching screenshot: 5 ta kurs · 8 ta bo'lim · 524 ta so'z)
-  const totalCourses = Math.max(allCourses.length, 5);
-  const totalSections = Math.max(allCourses.reduce((sum, c) => sum + (c.sectionsCount || 0), 0), 8);
-  const totalWords = Math.max(allCourses.reduce((sum, c) => sum + (c.wordsCount || 0), 0), 524);
-  const totalCourseStudents = 24;
+  // Course counts
+  const totalCourses = allCourses.length;
+  const totalSections = allCourses.reduce((sum, c) => sum + (c.sectionsCount || 0), 0);
+  const totalWords = allCourses.reduce((sum, c) => sum + (c.wordsCount || 0), 0);
+  const totalCourseStudents = groups.reduce((sum, g) => sum + (g.studentsCount || 0), 0);
 
   const toggleSelectAllTeachers = () => {
-    if (selectedTeacherIds.length === filteredTeachers.length) {
+    if (selectedTeacherIds.length === filteredTeachersWithStats.length) {
       setSelectedTeacherIds([]);
     } else {
-      setSelectedTeacherIds(filteredTeachers.map(t => t.id));
+      setSelectedTeacherIds(filteredTeachersWithStats.map(t => t.id));
     }
   };
 
@@ -340,66 +397,20 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
             </div>
 
             <div className="teachers-top-actions">
-              <button className="btn-export">
-                <Download size={16} /> Export
-              </button>
+              <div className="search-input-wrap">
+                <Search size={16} className="search-icon" />
+                <input 
+                  type="text" 
+                  placeholder="Qidirish..." 
+                  value={teacherSearchTerm}
+                  onChange={e => setTeacherSearchTerm(e.target.value)}
+                />
+              </div>
+
               <button className="btn-add-teacher-primary" onClick={() => setShowTeacherModal(true)}>
                 <Plus size={16} /> Qo'shish
               </button>
             </div>
-          </div>
-
-          {/* 4 Summary Metrics Cards */}
-          <div className="teachers-metrics-grid">
-            <div className="t-metric-card">
-              <div className="t-metric-top">
-                <div className="t-metric-icon purple"><Users size={20} /></div>
-                <span className="t-metric-badge">+0 hafta</span>
-              </div>
-              <div className="t-metric-val">{totalTeachers}</div>
-              <div className="t-metric-label">Jami O'qituvchilar</div>
-            </div>
-
-            <div className="t-metric-card">
-              <div className="t-metric-top">
-                <div className="t-metric-icon purple"><BarChart3 size={20} /></div>
-              </div>
-              <div className="t-metric-val">{avgGroups}</div>
-              <div className="t-metric-label">O'rtacha Guruhlar</div>
-            </div>
-
-            <div className="t-metric-card">
-              <div className="t-metric-top">
-                <div className="t-metric-icon orange"><Target size={20} /></div>
-              </div>
-              <div className="t-metric-val">{avgStudents}</div>
-              <div className="t-metric-label">O'rtacha O'quvchilar</div>
-            </div>
-
-            <div className="t-metric-card">
-              <div className="t-metric-top">
-                <div className="t-metric-icon pink"><Mail size={20} /></div>
-              </div>
-              <div className="t-metric-val">0</div>
-              <div className="t-metric-label">Kutilayotgan</div>
-            </div>
-          </div>
-
-          {/* Toolbar (Search + Filter) */}
-          <div className="teachers-toolbar">
-            <div className="search-input-wrap">
-              <Search size={16} className="search-icon" />
-              <input 
-                type="text" 
-                placeholder="Qidirish..." 
-                value={teacherSearchTerm}
-                onChange={e => setTeacherSearchTerm(e.target.value)}
-              />
-            </div>
-
-            <button className="btn-filter-dropdown">
-              <SlidersHorizontal size={16} /> Saralash ∨
-            </button>
           </div>
 
           {/* Teachers Data Table */}
@@ -407,30 +418,16 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
             <table className="teachers-table">
               <thead>
                 <tr>
-                  <th className="cell-checkbox">
-                    <input 
-                      type="checkbox" 
-                      checked={selectedTeacherIds.length > 0 && selectedTeacherIds.length === filteredTeachers.length}
-                      onChange={toggleSelectAllTeachers}
-                    />
-                  </th>
                   <th>O'QITUVCHI</th>
                   <th>GURUHLAR</th>
                   <th>O'QUVCHILAR</th>
                   <th>STATUS</th>
-                  <th style={{ width: '40px' }}></th>
+                  <th style={{ width: '60px', textAlign: 'right' }}>AMAL</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredTeachers.map((t) => (
+                {filteredTeachersWithStats.map((t) => (
                   <tr key={t.id}>
-                    <td className="cell-checkbox">
-                      <input 
-                        type="checkbox" 
-                        checked={selectedTeacherIds.includes(t.id)}
-                        onChange={() => toggleSelectOneTeacher(t.id)}
-                      />
-                    </td>
                     <td>
                       <div className="cell-teacher-info">
                         <div className="t-table-avatar">{getInitials(t.name)}</div>
@@ -443,13 +440,13 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
                     <td>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <BookOpen size={16} style={{ color: '#94a3b8' }} />
-                        <span>{t.groupsCount || 3}</span>
+                        <span>{t.groupsCount}</span>
                       </div>
                     </td>
                     <td>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <Users size={16} style={{ color: '#94a3b8' }} />
-                        <span>{t.studentsCount || 12}</span>
+                        <span>{t.studentsCount}</span>
                       </div>
                     </td>
                     <td>
@@ -457,10 +454,120 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
                         <span className="status-dot"></span> Faol
                       </span>
                     </td>
-                    <td>
-                      <button className="btn-action-more" title="Boshqalar">
-                        <MoreHorizontal size={18} />
+                    <td style={{ textAlign: 'right' }}>
+                      <button
+                        type="button"
+                        className="btn-action-more"
+                        title="Amallar"
+                        style={{
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          border: '1px solid rgba(255, 255, 255, 0.1)',
+                          color: '#cbd5e1',
+                          padding: '6px 10px',
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          setTeacherMenuPos({
+                            top: rect.bottom + 6,
+                            right: window.innerWidth - rect.right
+                          });
+                          setActiveTeacherMenu(activeTeacherMenu === t.id ? null : t.id);
+                        }}
+                      >
+                        <MoreVertical size={18} />
                       </button>
+
+                      {activeTeacherMenu === t.id && (
+                        <>
+                          <div 
+                            style={{ position: 'fixed', inset: 0, zIndex: 9998 }} 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveTeacherMenu(null);
+                            }} 
+                          />
+                          <div
+                            className="teacher-action-dropdown"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{
+                              position: 'fixed',
+                              top: `${teacherMenuPos.top}px`,
+                              right: `${teacherMenuPos.right}px`,
+                              background: '#1a1a26',
+                              border: '1px solid rgba(255, 255, 255, 0.15)',
+                              borderRadius: '12px',
+                              padding: '6px',
+                              zIndex: 9999,
+                              boxShadow: '0 12px 30px rgba(0,0,0,0.7)',
+                              minWidth: '140px'
+                            }}
+                          >
+                            <button
+                              type="button"
+                              style={{
+                                width: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                padding: '9px 12px',
+                                borderRadius: '8px',
+                                background: 'transparent',
+                                border: 'none',
+                                color: '#38bdf8',
+                                fontSize: '0.88rem',
+                                fontWeight: 600,
+                                cursor: 'pointer',
+                                transition: 'background 0.15s ease',
+                                marginBottom: '2px'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(56, 189, 248, 0.15)'}
+                              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveTeacherMenu(null);
+                                setResetPasswordTeacher(t);
+                                setNewTeacherPassword('');
+                              }}
+                            >
+                              <KeyRound size={16} /> Parolni yangilash
+                            </button>
+
+                            <button
+                              type="button"
+                              style={{
+                                width: '100%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '8px',
+                                padding: '9px 12px',
+                                borderRadius: '8px',
+                                background: 'transparent',
+                                border: 'none',
+                                color: '#f87171',
+                                fontSize: '0.88rem',
+                                fontWeight: 600,
+                                cursor: 'pointer',
+                                transition: 'background 0.15s ease'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)'}
+                              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveTeacherMenu(null);
+                                handleDeleteTeacher(t);
+                              }}
+                            >
+                              <Trash2 size={16} /> O'chirish
+                            </button>
+                          </div>
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -470,8 +577,18 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
         </div>
       )}
 
-      {/* 3. COURSES VIEW (Exact design matching user screenshot) */}
+      {/* 3. COURSES VIEW */}
       {(tab === 'courses' || tab === 'packs') && (
+        managingCourse ? (
+          <CourseManager
+            centerId={centerId}
+            course={managingCourse}
+            onBack={() => setSearchParams({})}
+            onUpdate={(updated) => {
+              setCustomPacks(prev => prev.map(p => p.id === updated.id ? updated : p));
+            }}
+          />
+        ) : (
         <div className="courses-page-container">
           {/* Top Bar */}
           <div className="courses-top-bar">
@@ -480,11 +597,12 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
               <p>{totalCourses} ta kurs · {totalSections} ta bo'lim · {totalWords} ta so'z</p>
             </div>
 
-            <div className="courses-top-actions">
-              <button className="btn-add-course-primary" onClick={() => setShowPackEditor(true)}>
-                <Plus size={16} /> Yangi Kurs
-              </button>
-            </div>
+            <button
+              className="btn-add-course-primary"
+              onClick={() => { setEditingPack(null); setShowPackEditor(true); }}
+            >
+              <Plus size={16} /> Yangi Kurs
+            </button>
           </div>
 
           {/* 4 Summary Metrics Cards */}
@@ -514,101 +632,170 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
             </div>
           </div>
 
-          {/* Toolbar (Search + Filter) */}
+          {/* Toolbar (Search + Sort) */}
           <div className="courses-toolbar">
             <div className="search-input-wrap">
               <Search size={16} className="search-icon" />
-              <input 
-                type="text" 
-                placeholder="Kurs qidirish..." 
+              <input
+                type="text"
+                placeholder="Kurs qidirish..."
                 value={courseSearchTerm}
                 onChange={e => setCourseSearchTerm(e.target.value)}
               />
             </div>
 
-            <button className="btn-filter-dropdown">
-              <SlidersHorizontal size={16} /> Saralash ∨
-            </button>
+            <div className="sort-dropdown-wrap">
+              <button
+                className="btn-filter-dropdown"
+                onClick={() => setShowCourseSortMenu(v => !v)}
+              >
+                <Filter size={16} /> Saralash <ChevronDown size={14} />
+              </button>
+
+              {showCourseSortMenu && (
+                <div className="sort-dropdown-menu">
+                  <div className="sort-dropdown-label">Saralash</div>
+                  {[
+                    { value: 'date', label: "Sana bo'yicha" },
+                    { value: 'name', label: "Nom bo'yicha" },
+                    { value: 'units', label: "Bo'limlar soni" },
+                    { value: 'words', label: "So'zlar soni" },
+                  ].map(opt => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => {
+                        setCourseSortOrder(courseSortBy === opt.value && courseSortOrder === 'desc' ? 'asc' : 'desc');
+                        setCourseSortBy(opt.value);
+                        setShowCourseSortMenu(false);
+                      }}
+                      className={`sort-dropdown-item ${courseSortBy === opt.value ? 'active' : ''}`}
+                    >
+                      {opt.label} {courseSortBy === opt.value && (courseSortOrder === 'desc' ? '↓' : '↑')}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Inline Pack Editor */}
-          {showPackEditor && (
-            <CustomPackEditor 
-              centerId={centerId}
-              onCreated={(pack) => {
-                setCustomPacks(prev => [pack, ...prev]);
-                setShowPackEditor(false);
-              }}
-              onCancel={() => setShowPackEditor(false)}
-            />
-          )}
-
-          {/* Courses Cards Grid */}
+          {/* Courses Grid */}
           <div className="courses-grid">
             {filteredCourses.map((c) => (
-              <div key={c.id} className={`course-card ${c.active ? 'active' : ''}`}>
+              <div key={c.id} className="course-card">
                 <div className="course-card-top">
                   <div className="course-badge-icon">
-                    <Smartphone size={20} />
+                    <Book size={20} />
                   </div>
-
                   <div className="course-card-actions">
-                    <button className="btn-card-action" onClick={() => handleDuplicateCourse(c)} title="Nusxalash">
-                      <Copy size={16} />
+                    <button
+                      onClick={() => {
+                        const original = customPacks.find(p => p.id === c.id) || c;
+                        setEditingPack(original);
+                        setShowPackEditor(true);
+                      }}
+                      className="btn-card-action"
+                      title="Tahrirlash"
+                    >
+                      <Edit3 size={15} />
                     </button>
-                    <button className="btn-card-action" onClick={() => setShowPackEditor(true)} title="Tahrirlash">
-                      <Edit3 size={16} />
-                    </button>
-                    <button className="btn-card-action" onClick={() => handleDeleteCourse(c.id)} title="O'chirish">
-                      <Trash2 size={16} />
+                    <button
+                      onClick={() => handleDeleteCourse(c.id)}
+                      className="btn-card-action"
+                      style={{ color: '#f87171' }}
+                      title="O'chirish"
+                    >
+                      <Trash2 size={15} />
                     </button>
                   </div>
                 </div>
 
                 <div className="course-card-content">
                   <h3>{c.title}</h3>
-                  <p>{c.description || 'Tavsif yo\'q'}</p>
+                  <p>{c.description || "Tavsif yo'q"}</p>
                 </div>
 
                 <div className="course-card-meta">
                   <div className="course-meta-row">
                     <div className="course-meta-item">
                       <Layers size={14} />
-                      <span>{c.sectionsCount || 0} bo'lim</span>
+                      <span>{c.sectionsCount} bo'lim</span>
                     </div>
                     <div className="course-meta-item">
                       <FileText size={14} />
-                      <span>{c.wordsCount || 0} so'z</span>
+                      <span>{c.wordsCount} so'z</span>
                     </div>
                   </div>
-
-                  <div className="course-meta-row">
+                  <div className="course-meta-row" style={{ marginTop: '4px' }}>
                     <div className="course-meta-item">
                       <Users size={14} />
-                      <span>{c.groupsCount || 0} guruh</span>
+                      <span>{c.groupsCount} guruh</span>
                     </div>
                     <div className="course-meta-item">
                       <GraduationCap size={14} />
-                      <span>{c.studentsCount || 0} o'quvchi</span>
+                      <span>{c.studentsCount} o'quvchi</span>
                     </div>
                   </div>
                 </div>
 
-                <button className={`btn-manage-course ${c.active ? 'primary' : 'outline'}`}>
+                <button
+                  onClick={() => setSearchParams({ courseId: c.id })}
+                  className="btn-manage-course outline"
+                >
                   Boshqarish <ArrowUpRight size={16} />
                 </button>
               </div>
             ))}
 
-            {/* "Yangi Kurs" Add Card Placeholder */}
-            <div className="course-card-add-new" onClick={() => setShowPackEditor(true)}>
+            {/* Add-new card */}
+            <button
+              onClick={() => { setEditingPack(null); setShowPackEditor(true); }}
+              className="course-card-add-new"
+            >
               <div className="add-new-icon-wrap">
                 <Plus size={24} />
               </div>
               <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Yangi Kurs</span>
-            </div>
+            </button>
           </div>
+
+          {filteredCourses.length === 0 && (
+            <div className="empty-state" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px dashed rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '3rem 1rem' }}>
+              <div className="add-new-icon-wrap" style={{ width: '56px', height: '56px', borderRadius: '50%', marginBottom: '0.5rem' }}>
+                <Search className="text-gray-500" size={24} />
+              </div>
+              <p style={{ color: '#fff', fontWeight: 600, fontSize: '1rem', margin: 0 }}>
+                {courseSearchTerm ? `"${courseSearchTerm}" bo'yicha kurs topilmadi` : "Hozircha kurslar yo'q"}
+              </p>
+              <p style={{ color: '#94a3b8', fontSize: '0.85rem', margin: 0 }}>Yangi kurs yaratish uchun tugmani bosing</p>
+            </div>
+          )}
+
+          {/* Create/Edit modal */}
+          {showPackEditor && (
+            <div className="modal-overlay" onClick={() => { setShowPackEditor(false); setEditingPack(null); }}>
+              <div onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: '480px', padding: '1rem' }}>
+                <CustomPackEditor
+                  centerId={centerId}
+                  editPack={editingPack}
+                  onSaved={(pack) => {
+                    setCustomPacks(prev => {
+                      const exists = prev.some(p => p.id === pack.id);
+                      if (exists) {
+                        return prev.map(p => p.id === pack.id ? { ...p, ...pack } : p);
+                      }
+                      return [pack, ...prev];
+                    });
+                    setShowPackEditor(false);
+                    setEditingPack(null);
+                  }}
+                  onCancel={() => { setShowPackEditor(false); setEditingPack(null); }}
+                />
+              </div>
+            </div>
+          )}
         </div>
+        )
       )}
 
       {/* 4. STATISTICS VIEW */}
@@ -628,18 +815,21 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
               <strong>{totalCourseStudents} ta</strong>
             </div>
             <div className="stat-detail-item">
-              <span>Topshirilgan Mashqlar Soni</span>
-              <strong>412 ta</strong>
+              <span>Jami O'qituvchilar</span>
+              <strong>{totalTeachers} ta</strong>
             </div>
             <div className="stat-detail-item">
-              <span>O'rtacha O'zlashtirish Balli</span>
-              <strong>86%</strong>
+              <span>Jami Guruhlar</span>
+              <strong>{groups.length} ta</strong>
             </div>
             <div className="stat-detail-item">
-              <span>Oylik Faollik O'sishi</span>
-              <strong>+22%</strong>
+              <span>Jami Kurslar</span>
+              <strong>{totalCourses} ta</strong>
             </div>
           </div>
+          <p style={{ color: 'var(--text-secondary, #94a3b8)', fontSize: '0.85rem', marginTop: '1rem' }}>
+            Mashqlar soni, o'rtacha o'zlashtirish balli va faollik dinamikasi bo'yicha kuzatuv hali ishga tushirilmagan.
+          </p>
         </div>
       )}
 
@@ -694,9 +884,9 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
                 />
               </div>
 
-              <button type="submit" className="btn-save-settings">
+              <button type="submit" className="btn-save-settings" disabled={savingSettings}>
                 {settingsSaved ? <CheckCircle2 size={18} /> : <Save size={18} />}
-                {settingsSaved ? 'Saqlandi!' : 'Sozlamalarni Saqlash'}
+                {savingSettings ? 'Saqlanmoqda...' : (settingsSaved ? 'Saqlandi!' : 'Sozlamalarni Saqlash')}
               </button>
             </form>
           </div>
@@ -708,33 +898,28 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
         <div className="modal-overlay" onClick={() => setShowTeacherModal(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h2><UserPlus size={20} /> Yangi O'qituvchi Qo'shish</h2>
-            <form onSubmit={handleAddTeacher}>
+            <form onSubmit={handleAddTeacher} autoComplete="off">
               <div className="form-group">
-                <label>O'qituvchining F.I.Sh *</label>
+                <label>F.I.SH *</label>
                 <input 
                   type="text" 
+                  name="teacher_fullname"
+                  autoComplete="off"
                   required 
                   placeholder="masalan: Abdulla Qodirov"
                   value={teacherForm.name}
                   onChange={e => setTeacherForm({ ...teacherForm, name: e.target.value })}
+                  autoFocus
                 />
               </div>
 
               <div className="form-group">
-                <label>Email *</label>
+                <label>Telefon raqam *</label>
                 <input 
-                  type="email" 
-                  required 
-                  placeholder="oqituvchi@markaz.uz"
-                  value={teacherForm.email}
-                  onChange={e => setTeacherForm({ ...teacherForm, email: e.target.value })}
-                />
-              </div>
-
-              <div className="form-group">
-                <label>Telefon raqam</label>
-                <input 
-                  type="text" 
+                  type="tel" 
+                  name="teacher_phone"
+                  autoComplete="off"
+                  required
                   placeholder="+998 90 123 45 67"
                   value={teacherForm.phone}
                   onChange={e => setTeacherForm({ ...teacherForm, phone: e.target.value })}
@@ -742,12 +927,15 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
               </div>
 
               <div className="form-group">
-                <label>Fan / Yo'nalish</label>
+                <label>Parol *</label>
                 <input 
-                  type="text" 
-                  placeholder="General English / IELTS"
-                  value={teacherForm.subject}
-                  onChange={e => setTeacherForm({ ...teacherForm, subject: e.target.value })}
+                  type="password" 
+                  name="teacher_password"
+                  autoComplete="new-password"
+                  required
+                  placeholder="O'qituvchining kirish paroli"
+                  value={teacherForm.password}
+                  onChange={e => setTeacherForm({ ...teacherForm, password: e.target.value })}
                 />
               </div>
 
@@ -762,9 +950,43 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
         </div>
       )}
 
+      {resetPasswordTeacher && (
+        <div className="modal-overlay" onClick={() => setResetPasswordTeacher(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h2><KeyRound size={20} /> Parolni Yangilash</h2>
+            <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginBottom: '1.25rem' }}>
+              <strong>{resetPasswordTeacher.name}</strong> ({resetPasswordTeacher.phone || resetPasswordTeacher.email}) o'qituvchisi uchun yangi parol kiriting:
+            </p>
+
+            <form onSubmit={handleUpdateTeacherPassword} autoComplete="off">
+              <div className="form-group">
+                <label>Yangi Parol *</label>
+                <input 
+                  type="text" 
+                  name="new_teacher_pwd"
+                  autoComplete="off"
+                  required
+                  placeholder="Kamida 6 ta belgi kiriting..."
+                  value={newTeacherPassword}
+                  onChange={e => setNewTeacherPassword(e.target.value)}
+                  autoFocus
+                />
+              </div>
+
+              <div className="modal-actions">
+                <button type="button" className="btn-secondary" onClick={() => setResetPasswordTeacher(null)}>Bekor qilish</button>
+                <button type="submit" className="btn-primary" disabled={submittingPasswordReset}>
+                  {submittingPasswordReset ? 'Saqlanmoqda...' : 'Parolni Saqlash'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {credentials && (
         <CredentialsModal
-          title="O'qituvchi Akkaunti Yaratildi"
+          title="O'qituvchi Akkaunti Ma'lumotlari"
           email={credentials.email}
           tempPassword={credentials.tempPassword}
           onClose={() => setCredentials(null)}
