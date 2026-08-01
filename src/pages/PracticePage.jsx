@@ -137,7 +137,7 @@ export default function PracticePage() {
     
     const timerId = setTimeout(() => {
       setStep('practice');
-    }, 3200); // slightly longer loading time to allow reading the tip
+    }, 700);
 
     return () => clearTimeout(timerId);
   }, [step]);
@@ -468,10 +468,12 @@ export default function PracticePage() {
             <motion.div
               key="intro"
               className="practice-intro-screen"
+              onClick={() => setStep('practice')}
+              style={{ cursor: 'pointer' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">

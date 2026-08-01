@@ -117,7 +117,7 @@ export default function CorpPractice() {
     
     const timerId = setTimeout(() => {
       setStep('practice');
-    }, 3200);
+    }, 700);
 
     return () => clearTimeout(timerId);
   }, [step]);
@@ -332,10 +332,12 @@ export default function CorpPractice() {
           <motion.div
             key="intro"
             className="practice-intro-screen"
+            onClick={() => setStep('practice')}
+            style={{ cursor: 'pointer' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
           >
             <div className="intro-card" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
               <div className="intro-mode-icon">
