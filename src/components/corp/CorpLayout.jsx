@@ -21,7 +21,8 @@ export default function CorpLayout() {
   const isCorpAdmin = location.pathname.startsWith('/corp/admin') || 
                       location.pathname.startsWith('/corp/super-admin') || 
                       location.pathname.startsWith('/corp/teacher') ||
-                      location.pathname.startsWith('/corp/student');
+                      location.pathname.startsWith('/corp/student') ||
+                      location.pathname.startsWith('/corp/practice');
 
   // /corp-only maintenance gate — deliberately does not touch the
   // individual-learner app's routes at all.

@@ -284,10 +284,6 @@ export default function LibraryPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Header */}
-      <div className="page-header">
-        <h1>📚 Kutubxona</h1>
-      </div>
 
       {/* Tabs bar */}
       <div className="library-tabs-container">

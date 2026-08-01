@@ -2,6 +2,8 @@
  * Utility / helper functions
  */
 
+import { getDecayedMastery } from './memoryEngine';
+
 /**
  * Shuffle an array (Fisher-Yates algorithm)
  */
@@ -35,7 +37,7 @@ export function weightedSelectWords(words, count) {
   const now = Date.now();
 
   const weighted = words.map(w => {
-    const mastery     = typeof w.mastery === 'number' ? w.mastery : 0;
+    const mastery     = getDecayedMastery(w, now);
     const stability    = typeof w.stability === 'number' ? w.stability : 1.0;
     const nextReview  = w.nextReview ? new Date(w.nextReview).getTime() : 0;
     const isOverdue   = nextReview > 0 && nextReview <= now;
@@ -89,6 +91,33 @@ export function weightedSelectWords(words, count) {
   }
 
   return selected;
+}
+
+// Spelling (type the translation's English word from the scrambled letters)
+// and Sentence Builder (recall the English word from memory to use it in a
+// sentence) both require the learner to already have *some* trace of the
+// word — the English form is never shown up front, only revealed after
+// answering. A word with zero prior reviews has no trace to draw on, so
+// picking it here is just an unwinnable guess, not practice.
+const RECALL_ONLY_MODES = new Set(['spelling', 'sentence']);
+
+/**
+ * Narrow a word pool to what's actually appropriate for the chosen practice
+ * mode, before weightedSelectWords ranks it. Flashcard/Quiz/Match/Pronounce
+ * all show (or speak) the word itself, so they're fine introducing a
+ * brand-new word — that's how first exposure happens. Spelling/Sentence
+ * don't, so they're restricted to words that have been reviewed at least
+ * once already (falls back to the full pool if literally nothing has been
+ * reviewed yet, rather than leaving the user with an empty session).
+ *
+ * @param {Array<Object>} words
+ * @param {string} mode - a PracticeHub mode id
+ * @returns {Array<Object>}
+ */
+export function filterWordsForMode(words, mode) {
+  if (!words || !RECALL_ONLY_MODES.has(mode)) return words;
+  const seen = words.filter(w => (w.reviewCount || 0) > 0);
+  return seen.length > 0 ? seen : words;
 }
 
 /**

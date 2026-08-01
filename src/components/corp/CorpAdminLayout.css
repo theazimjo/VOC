@@ -1,8 +1,8 @@
 .corp-admin-layout {
   display: flex;
   min-height: 100vh;
-  background: #090910;
-  color: #f8fafc;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .corp-admin-main-pane {
@@ -10,5 +10,11 @@
   overflow-y: auto;
   min-height: 100vh;
   box-sizing: border-box;
-  background: #090910;
+  background: var(--bg-primary);
+}
+
+@media (max-width: 768px) {
+  .corp-admin-main-pane {
+    padding-bottom: 80px !important;
+  }
 }

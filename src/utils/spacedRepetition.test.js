@@ -49,9 +49,42 @@ describe('applyReview', () => {
   });
 
   it('keeps mastery within 0..100', () => {
-    const result = applyReview({ stability: 1000 }, { isCorrect: true });
+    const result = applyReview({ stability: 1000 }, { isCorrect: true, retrievalType: 'active_recall' });
     expect(result.mastery).toBeLessThanOrEqual(100);
     expect(result.mastery).toBeGreaterThanOrEqual(0);
+  });
+
+  describe('active-recall confirmation gate', () => {
+    it('caps mastery well below 100 on passive-only reviews, however many', () => {
+      let word = { activeRecallPasses: 0 };
+      for (let i = 0; i < 15; i++) {
+        word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+      }
+      expect(word.mastery).toBeLessThan(70);
+      expect(word.activeRecallPasses).toBe(0);
+    });
+
+    it('lets mastery climb past the passive ceiling after one correct active-recall pass', () => {
+      let word = { activeRecallPasses: 0 };
+      for (let i = 0; i < 10; i++) {
+        word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+      }
+      const cappedMastery = word.mastery;
+
+      word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'active_recall' });
+      expect(word.activeRecallPasses).toBe(1);
+
+      for (let i = 0; i < 10; i++) {
+        word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+      }
+      expect(word.mastery).toBeGreaterThan(cappedMastery);
+    });
+
+    it('never lowers a legacy word\'s existing stability just because activeRecallPasses is untracked', () => {
+      const legacyWord = { stability: 40, reviewCount: 5 };
+      const result = applyReview(legacyWord, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+      expect(result.stability).toBeGreaterThanOrEqual(40);
+    });
   });
 });
 

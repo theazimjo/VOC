@@ -12,6 +12,8 @@ import {
   getMemoryHealth,
   simulateReviewScenarios,
   simulateReviewDayOptions,
+  computeRetentionStats,
+  recommendPracticeMode,
 } from './memoryEngine';
 
 describe('computeRecallProbability', () => {
@@ -261,5 +263,61 @@ describe('getMemoryHealth', () => {
 
   it('labels low stability as weak memory', () => {
     expect(getMemoryHealth(1, new Date().toISOString()).label).toBe('Zaif xotira');
+  });
+});
+
+describe('computeRetentionStats', () => {
+  it('returns zeroed stats for an empty or never-reviewed word list', () => {
+    expect(computeRetentionStats([])).toEqual({ retentionPercent: 0, atRisk: 0, reviewedCount: 0 });
+    expect(computeRetentionStats([{ stability: 5 }])).toEqual({ retentionPercent: 0, atRisk: 0, reviewedCount: 0 });
+  });
+
+  it('reports full retention right after review', () => {
+    const words = [{ stability: 10, lastReviewed: new Date().toISOString() }];
+    const stats = computeRetentionStats(words);
+    expect(stats.reviewedCount).toBe(1);
+    expect(stats.retentionPercent).toBe(100);
+    expect(stats.atRisk).toBe(0);
+  });
+
+  it('flags a stale, low-stability word as at-risk', () => {
+    const staleDate = new Date(Date.now() - 30 * 86400000).toISOString();
+    const words = [{ stability: 1, lastReviewed: staleDate }];
+    const stats = computeRetentionStats(words);
+    expect(stats.atRisk).toBe(1);
+    expect(stats.retentionPercent).toBeLessThan(50);
+  });
+});
+
+describe('recommendPracticeMode', () => {
+  it('returns null for an empty word list', () => {
+    expect(recommendPracticeMode([])).toBeNull();
+  });
+
+  it('recommends flashcard when the whole pack is unseen', () => {
+    const words = Array.from({ length: 5 }, () => ({ reviewCount: 0 }));
+    const rec = recommendPracticeMode(words);
+    expect(rec).toMatchObject({ modeId: 'flashcard', reason: 'new' });
+  });
+
+  it('recommends spelling once several words are passively reviewed but never actively confirmed', () => {
+    const words = Array.from({ length: 6 }, () => ({
+      reviewCount: 3,
+      activeRecallPasses: 0,
+      stability: 8,
+      lastReviewed: new Date().toISOString(),
+    }));
+    const rec = recommendPracticeMode(words);
+    expect(rec).toMatchObject({ modeId: 'spelling', reason: 'confirm' });
+  });
+
+  it('gives no recommendation once words are actively confirmed and healthy', () => {
+    const words = Array.from({ length: 6 }, () => ({
+      reviewCount: 3,
+      activeRecallPasses: 1,
+      stability: 20,
+      lastReviewed: new Date().toISOString(),
+    }));
+    expect(recommendPracticeMode(words)).toBeNull();
   });
 });

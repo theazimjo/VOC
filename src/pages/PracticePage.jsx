@@ -8,7 +8,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
-import { weightedSelectWords, shuffleArray, speakWord } from '../utils/helpers';
+import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import { computeClusterCalibration } from '../utils/memoryEngine';
 import { saveReviewEvent } from '../experiment/experimentDB';
@@ -102,7 +102,7 @@ export default function PracticePage() {
           
           if (mode) {
             setSelectedMode(mode);
-            let selected = [...words];
+            let selected = filterWordsForMode(words, mode);
             if (count && selected.length > count) {
               selected = shuffleArray(selected).slice(0, count);
             }
@@ -181,8 +181,11 @@ export default function PracticePage() {
       return;
     }
 
-    // Weighted selection: harder / less-known words are more likely to be chosen
-    const selected = weightedSelectWords(sourceWords, wordCount);
+    // Weighted selection: harder / less-known words are more likely to be
+    // chosen, but Spelling/Sentence get narrowed to already-seen words first
+    // — you can't type or recall a word from memory you've never met.
+    const pool = filterWordsForMode(sourceWords, mode);
+    const selected = weightedSelectWords(pool, wordCount);
     setPracticeWords(selected);
     setStep('intro');
   };
@@ -456,7 +459,7 @@ export default function PracticePage() {
                   ))}
                 </div>
               </div>
-              <PracticeHub onSelectMode={handleStartPractice} isIrregularVerbs={selectedSource?.id === 'irregular-verbs' || selectedSource?.isIrregularVerbs} />
+              <PracticeHub onSelectMode={handleStartPractice} isIrregularVerbs={selectedSource?.id === 'irregular-verbs' || selectedSource?.isIrregularVerbs} words={sourceWords} />
             </motion.div>
           )}
 

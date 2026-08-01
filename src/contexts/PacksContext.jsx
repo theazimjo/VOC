@@ -3,6 +3,7 @@ import { ref, push, update, remove, get, onValue, serverTimestamp, runTransactio
 import { db } from '../firebase';
 import { useAuth } from './AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
+import { getDecayedMastery } from '../utils/memoryEngine';
 
 const PacksContext = createContext(null);
 
@@ -160,9 +161,11 @@ export function PacksProvider({ children }) {
       const pack = packById[packId];
       const wordsObj = wordsByPack[packId] || {};
       Object.keys(wordsObj).forEach((wordId) => {
+        const word = wordsObj[wordId];
         flat.push({
           id: wordId,
-          ...wordsObj[wordId],
+          ...word,
+          mastery: getDecayedMastery(word),
           packId,
           source: pack?.name || 'Kutubxona',
           sourceIcon: pack?.icon || '📦',

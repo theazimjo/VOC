@@ -1,0 +1,208 @@
+/* ═══════════════════════════════════════════
+   Corp Student Profile — Duolingo-style stats
+   ═══════════════════════════════════════════ */
+
+/* ── Avatar Header ──────────────────────── */
+.corp-profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
+  padding-top: 0.5rem;
+  gap: 10px;
+}
+
+.corp-profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0a84ff 0%, #af52de 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(10, 132, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.corp-profile-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+  text-align: center;
+}
+
+.corp-profile-email {
+  font-size: 0.84rem;
+  color: #8e8e93;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* ── Streak Banner ──────────────────────── */
+.corp-streak-banner {
+  background: linear-gradient(135deg, #1c1c1e 0%, #252527 100%);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 149, 0, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.corp-streak-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 149, 0, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.corp-streak-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.corp-streak-fire {
+  font-size: 2.4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 8px rgba(255, 149, 0, 0.6));
+}
+
+.corp-streak-count {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ff9500;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.corp-streak-label {
+  font-size: 0.75rem;
+  color: #8e8e93;
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* ── Daily Progress Ring ────────────────── */
+.corp-daily-ring-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.corp-daily-ring-label {
+  font-size: 0.7rem;
+  color: #8e8e93;
+  font-weight: 500;
+}
+
+/* ── Weekly Bar Chart ───────────────────── */
+.corp-week-chart {
+  background: #1c1c1e;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+  height: 100px;
+}
+
+.corp-week-day {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+}
+
+.corp-week-bar-track {
+  flex: 1;
+  width: 100%;
+  background: #2c2c2e;
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.corp-week-bar-fill {
+  width: 100%;
+  background: #0a84ff;
+  border-radius: 4px;
+  transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 4px;
+}
+
+.corp-week-bar-fill.done {
+  background: #34c759;
+}
+
+.corp-week-day-label {
+  font-size: 0.65rem;
+  color: #8e8e93;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.corp-week-day-label.today {
+  color: #0a84ff;
+}
+
+/* ── Stats Grid (6-cell) ────────────────── */
+.corp-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.corp-stat-card {
+  background: #1c1c1e;
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.15s;
+}
+
+.corp-stat-card:active {
+  transform: scale(0.96);
+}
+
+.corp-stat-icon {
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.corp-stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.corp-stat-label {
+  font-size: 0.65rem;
+  color: #8e8e93;
+  margin-top: 2px;
+  font-weight: 500;
+}

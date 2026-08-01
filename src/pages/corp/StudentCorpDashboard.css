@@ -1,8 +1,7 @@
 .student-corp-container {
-  padding: var(--space-xl, 2rem);
-  max-width: 1000px;
-  margin: 0 auto;
-  min-height: calc(100vh - 80px);
+  padding: var(--space-lg) var(--space-xl);
+  width: 100%;
+  min-height: calc(100vh - var(--navbar-height));
 }
 
 .student-corp-header {
@@ -241,4 +240,64 @@
 .st-no-group-state h2 {
   font-size: 1.3rem;
   color: #f8fafc;
+}
+
+/* Responsive tab bar style */
+.library-tabs-container {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.library-tabs {
+  display: flex;
+  gap: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 14px;
+  padding: 4px;
+  width: fit-content;
+}
+
+.library-tab-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.library-tab-btn.active {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+  .library-tabs {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px !important;
+    padding: 3px !important;
+    border-radius: 12px !important;
+  }
+  
+  .library-tab-btn {
+    padding: 8px 4px !important;
+    font-size: 0.8rem !important;
+    justify-content: center !important;
+    gap: 4px !important;
+  }
+  
+  /* Hide emoji icons inside tabs on mobile to save space */
+  .library-tab-btn span.tab-icon {
+    display: none !important;
+  }
 }

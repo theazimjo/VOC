@@ -1,18 +1,123 @@
+/* ═══════════════════════════════════════════════════════
+   TEACHER DASHBOARD — Full Theme Adaptation (Light + Dark)
+   Converts inline #fff, rgba(255,255,255) into CSS variables
+   so that Light mode is clean & readable like individual mode.
+   ═══════════════════════════════════════════════════════ */
+
 .teacher-dashboard-container {
   padding: var(--space-xl, 2rem);
   max-width: 1200px;
   margin: 0 auto;
   min-height: calc(100vh - 80px);
+  color: var(--text-primary);
 }
 
+/* ── Inline Style Overrides ──────────────────── */
+.teacher-dashboard-container [style*="color: '#fff'"],
+.teacher-dashboard-container [style*="color:#fff"],
+.teacher-dashboard-container [style*="color: #fff"],
+.teacher-dashboard-container [style*="color: rgb(255, 255, 255)"] {
+  color: var(--text-primary) !important;
+}
+
+.teacher-dashboard-container [style*="color: '#cbd5e1'"],
+.teacher-dashboard-container [style*="color:#cbd5e1"],
+.teacher-dashboard-container [style*="color: #cbd5e1"] {
+  color: var(--text-secondary) !important;
+}
+
+.teacher-dashboard-container [style*="color: '#94a3b8'"],
+.teacher-dashboard-container [style*="color:#94a3b8"],
+.teacher-dashboard-container [style*="color: #94a3b8"] {
+  color: var(--text-muted) !important;
+}
+
+.teacher-dashboard-container [style*="background: 'rgba(255,255,255"],
+.teacher-dashboard-container [style*="background: rgba(255, 255, 255"],
+.teacher-dashboard-container [style*="background: rgba(255,255,255"] {
+  background: var(--bg-tertiary) !important;
+}
+
+.teacher-dashboard-container [style*="border: '1px solid rgba(255,255,255"],
+.teacher-dashboard-container [style*="border: 1px solid rgba(255, 255, 255"],
+.teacher-dashboard-container [style*="border-bottom: 1px solid rgba(255, 255, 255"],
+.teacher-dashboard-container [style*="border-bottom: '1px solid rgba(255,255,255"] {
+  border-color: var(--border) !important;
+}
+
+/* ── Title Area ─────────────────────────────── */
+.teacher-dashboard-container .courses-title-area h1,
+.teacher-dashboard-container h1 {
+  color: var(--text-primary) !important;
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.teacher-dashboard-container .courses-title-area p,
+.teacher-dashboard-container .tpv-title > span {
+  color: var(--text-secondary) !important;
+  font-size: 0.9rem;
+}
+
+.teacher-dashboard-container h2,
+.teacher-dashboard-container h3,
+.teacher-dashboard-container h4 {
+  color: var(--text-primary) !important;
+}
+
+/* ── Group Detail Header ────────────────────── */
+.teacher-dashboard-container .tpv-header {
+  border-bottom-color: var(--border) !important;
+}
+
+.teacher-dashboard-container .tpv-title h2 {
+  color: var(--text-primary) !important;
+}
+
+/* ── Shared Stat Cards ──────────────────────── */
+.teacher-dashboard-container .c-stat-card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.teacher-dashboard-container .c-stat-card:hover {
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+}
+
+.teacher-dashboard-container .c-stat-card h3 {
+  color: var(--text-primary) !important;
+}
+
+.teacher-dashboard-container .c-stat-card p {
+  color: var(--text-secondary) !important;
+}
+
+/* ── Quick Action Buttons ───────────────────── */
+.teacher-dashboard-container .quick-action-btn {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 14px;
+}
+
+.teacher-dashboard-container .quick-action-btn:hover {
+  border-color: rgba(59, 130, 246, 0.4) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── Teacher Header Card ────────────────────── */
 .teacher-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 1.5rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.1));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 2rem;
   margin-bottom: 2rem;
@@ -22,8 +127,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(59, 130, 246, 0.2);
-  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.12);
+  color: #0a84ff;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -32,48 +137,53 @@
 }
 
 .teacher-header h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 800;
   margin-bottom: 6px;
+  color: var(--text-primary) !important;
 }
 
 .teacher-header p {
-  color: #94a3b8;
+  color: var(--text-secondary) !important;
 }
 
+/* ── Create Group Button ────────────────────── */
 .btn-create-group {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
-  color: #fff;
+  background: linear-gradient(135deg, #0a84ff, #0056b3);
+  color: #fff !important;
   padding: 12px 20px;
   border-radius: 12px;
   border: none;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.25);
 }
 
+/* ── Groups Grid ────────────────────────────── */
 .teacher-groups-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
 }
 
+/* ── Group Cards ────────────────────────────── */
 .teacher-group-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 18px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .teacher-group-card:hover {
-  border-color: rgba(59, 130, 246, 0.4);
+  border-color: rgba(10, 132, 255, 0.4) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
 }
 
 .group-card-header {
@@ -85,49 +195,62 @@
 }
 
 .group-level-badge {
-  font-size: 0.75rem;
-  background: rgba(59, 130, 246, 0.15);
-  color: #60a5fa;
-  padding: 2px 8px;
+  font-size: 0.73rem;
+  background: rgba(10, 132, 255, 0.12);
+  color: #0a84ff;
+  padding: 2px 9px;
   border-radius: 8px;
   font-weight: 600;
 }
 
 .group-card-header h3 {
-  font-size: 1.25rem;
-  margin-top: 4px;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  color: var(--text-primary) !important;
+  font-weight: 700;
 }
 
 .group-code-pill {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border) !important;
   padding: 6px 10px;
   border-radius: 10px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary) !important;
   cursor: pointer;
   transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.group-code-pill strong {
+  color: var(--text-primary) !important;
 }
 
 .group-code-pill:hover {
-  background: rgba(59, 130, 246, 0.2);
+  background: rgba(10, 132, 255, 0.1) !important;
+  color: #0a84ff !important;
 }
 
 .group-card-body {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 0.9rem;
-  color: #cbd5e1;
+  font-size: 0.88rem;
+  color: var(--text-secondary) !important;
 }
 
 .group-info-row {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.group-info-row strong {
+  color: var(--text-primary) !important;
 }
 
 .group-card-actions {
@@ -141,25 +264,27 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
   padding: 8px;
   border-radius: 10px;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 500;
   cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .btn-group-action:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--bg-glass-hover) !important;
+  border-color: rgba(10, 132, 255, 0.3) !important;
 }
 
 .btn-group-action.btn-transfer {
   flex: 0 0 38px;
-  background: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
-  border-color: rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.1) !important;
+  color: #f59e0b !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
 }
 
 .teacher-group-card.clickable {
@@ -172,16 +297,17 @@
   justify-content: space-between;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #60a5fa;
+  border-top: 1px solid var(--border) !important;
+  color: #0a84ff !important;
   font-size: 0.85rem;
   font-weight: 600;
 }
 
 .teacher-group-card:hover .group-card-footer {
-  color: #93c5fd;
+  color: #0056b3 !important;
 }
 
+/* ── Group Detail Toolbar ───────────────────── */
 .group-detail-toolbar {
   display: flex;
   justify-content: space-between;
@@ -201,6 +327,7 @@
   padding: 8px 16px;
 }
 
+/* ── Pack Assignment List ───────────────────── */
 .assign-pack-list {
   display: flex;
   flex-direction: column;
@@ -214,15 +341,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border) !important;
   padding: 10px 14px;
   border-radius: 10px;
   font-size: 0.9rem;
+  color: var(--text-primary) !important;
 }
 
 .btn-select-pack {
-  background: #3b82f6;
-  color: #fff;
+  background: #0a84ff;
+  color: #fff !important;
   border: none;
   padding: 6px 12px;
   border-radius: 8px;
@@ -231,8 +360,8 @@
 }
 
 .btn-select-pack:disabled {
-  background: rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
+  background: var(--bg-tertiary);
+  color: var(--text-muted) !important;
   cursor: default;
 }
 
@@ -240,6 +369,7 @@
   max-width: 650px;
 }
 
+/* ── Student Progress List ──────────────────── */
 .students-progress-list {
   display: flex;
   flex-direction: column;
@@ -253,7 +383,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
   padding: 12px 16px;
   border-radius: 12px;
 }
@@ -268,8 +399,8 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #3b82f6;
-  color: #fff;
+  background: #0a84ff;
+  color: #fff !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,8 +409,161 @@
 
 .badge-active {
   font-size: 0.75rem;
-  background: rgba(34, 197, 94, 0.15);
-  color: #4ade80;
+  background: rgba(52, 199, 89, 0.12);
+  color: #34c759 !important;
   padding: 4px 10px;
   border-radius: 10px;
+  font-weight: 600;
+}
+
+/* ── Teachers Table ─────────────────────────── */
+.teacher-dashboard-container .teachers-table {
+  background: var(--bg-secondary) !important;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.teacher-dashboard-container .teachers-table th {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-secondary) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.teacher-dashboard-container .teachers-table td {
+  color: var(--text-primary) !important;
+  border-bottom: 1px solid var(--border-light) !important;
+}
+
+.teacher-dashboard-container .teachers-table tr:last-child td {
+  border-bottom: none !important;
+}
+
+.teacher-dashboard-container .t-table-row:hover {
+  background: var(--bg-glass-hover) !important;
+}
+
+/* ── Search Input ───────────────────────────── */
+.teacher-dashboard-container .search-input-wrap {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px;
+}
+
+.teacher-dashboard-container .search-input,
+.teacher-dashboard-container input[type="text"] {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+.teacher-dashboard-container .search-input::placeholder,
+.teacher-dashboard-container input::placeholder {
+  color: var(--text-muted) !important;
+}
+
+.teacher-dashboard-container .search-icon {
+  color: var(--text-muted) !important;
+}
+
+/* ── Stats Page (Statistika tab) ────────────── */
+.teacher-dashboard-container .dashboard-chart-card,
+.teacher-dashboard-container .dashboard-side-card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.teacher-dashboard-container .dashboard-chart-card h2,
+.teacher-dashboard-container .dashboard-side-card h2 {
+  color: var(--text-primary) !important;
+}
+
+.teacher-dashboard-container .dashboard-chart-hint {
+  color: var(--text-secondary) !important;
+}
+
+.teacher-dashboard-container .dashboard-active-group-row {
+  background: var(--bg-tertiary) !important;
+}
+
+.teacher-dashboard-container .dashboard-active-group-row .name {
+  color: var(--text-primary) !important;
+}
+
+.teacher-dashboard-container .dashboard-active-group-row .meta {
+  color: var(--text-secondary) !important;
+}
+
+.teacher-dashboard-container .dashboard-status-card {
+  border-top-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ── Action Dropdowns ───────────────────────── */
+.teacher-dashboard-container [class*="dropdown"] {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* ── Back Button ────────────────────────────── */
+.teacher-dashboard-container .tpv-back {
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.teacher-dashboard-container .tpv-back:hover {
+  background: var(--bg-glass-hover) !important;
+}
+
+/* ── Tabs ───────────────────────────────────── */
+.teacher-dashboard-container .group-tabs-row button,
+.teacher-dashboard-container [class*="tab-btn"] {
+  color: var(--text-secondary) !important;
+}
+
+.teacher-dashboard-container [class*="tab-btn"].active,
+.teacher-dashboard-container [class*="tab-btn"]:hover {
+  color: #0a84ff !important;
+}
+
+/* ── Progress Bars ──────────────────────────── */
+.teacher-dashboard-container [style*="rgba(255,255,255,0.08)"] {
+  background: var(--bg-tertiary) !important;
+}
+
+/* ── Empty State ────────────────────────────── */
+.teacher-dashboard-container .empty-state {
+  color: var(--text-secondary) !important;
+}
+
+/* ── Course / Pack Cards ────────────────────── */
+.teacher-dashboard-container .course-card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.teacher-dashboard-container .course-card:hover {
+  border-color: rgba(10, 132, 255, 0.4) !important;
+}
+
+.teacher-dashboard-container .course-card-title {
+  color: var(--text-primary) !important;
+}
+
+.teacher-dashboard-container .course-card-meta {
+  color: var(--text-secondary) !important;
+}
+
+/* ── Primary Action Button ──────────────────── */
+.teacher-dashboard-container .btn-add-course-primary {
+  background: linear-gradient(135deg, #0a84ff, #0056b3) !important;
+  color: #fff !important;
+  border: none !important;
 }

@@ -2,16 +2,24 @@ import { useState } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   Building2, Users, Archive, BookOpen,
-  BarChart3, Settings, LogOut, ChevronLeft, ChevronRight
+  BarChart3, Settings, LogOut, ChevronLeft, ChevronRight, Moon, Sun
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import './CorpAdminSidebar.css';
 
 export default function TeacherSidebar({ centerName, teacherName, email, phone }) {
   const [collapsed, setCollapsed] = useState(false);
   const { logout } = useAuth();
+  const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isDarkMode = theme === 'android';
+
+  const toggleTheme = () => {
+    setTheme(isDarkMode ? 'ios' : 'android');
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -73,6 +81,31 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
 
       {/* Footer / User Profile */}
       <div className="corp-sidebar-footer">
+        <button
+          className="btn-corp-theme-toggle"
+          onClick={toggleTheme}
+          title={isDarkMode ? "Yorug' rejimga o'tish" : "Tungi rejimga o'tish"}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            width: '100%',
+            padding: '9px 12px',
+            borderRadius: '12px',
+            background: 'var(--bg-tertiary)',
+            border: '1px solid var(--border)',
+            color: 'var(--text-primary)',
+            fontSize: '0.85rem',
+            fontWeight: 500,
+            cursor: 'pointer',
+            transition: 'all 150ms ease',
+            justifyContent: collapsed ? 'center' : 'flex-start'
+          }}
+        >
+          {isDarkMode ? <Sun size={17} style={{ color: '#ff9500' }} /> : <Moon size={17} style={{ color: '#5856d6' }} />}
+          {!collapsed && <span>{isDarkMode ? "Yorug' rejim" : "Tungi rejim"}</span>}
+        </button>
+
         {!collapsed && (
           <div className="admin-profile-info">
             <div className="admin-avatar">

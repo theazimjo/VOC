@@ -3,13 +3,21 @@ import { ref, set, push, update, remove, get, onValue, runTransaction } from 'fi
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
+import { getDecayedMastery } from '../utils/memoryEngine';
+
+// Cache/DB keep the raw, last-review-time mastery snapshot; consumers of
+// this hook should see it decayed toward the word's current retrievability
+// instead, so "mastered" doesn't stay frozen at 100% forever if untouched.
+function decayWordsMastery(wordsList) {
+  return wordsList.map(w => ({ ...w, mastery: getDecayedMastery(w) }));
+}
 
 export function useWords(collectionType, collectionId) {
   const { user } = useAuth();
   const [words, setWords] = useState(() => {
     if (typeof window !== 'undefined' && user && collectionType && collectionId) {
       const cached = localStorage.getItem(`voc-cache-words-${user.uid}-${collectionType}-${collectionId}`);
-      return cached ? JSON.parse(cached) : [];
+      return cached ? decayWordsMastery(JSON.parse(cached)) : [];
     }
     return [];
   });
@@ -43,7 +51,7 @@ export function useWords(collectionType, collectionId) {
     const cacheKey = `voc-cache-words-${user.uid}-${collectionType}-${collectionId}`;
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
-      setWords(JSON.parse(cached));
+      setWords(decayWordsMastery(JSON.parse(cached)));
       setLoading(false);
     } else {
       setLoading(true);
@@ -78,10 +86,11 @@ export function useWords(collectionType, collectionId) {
           // Sort by addedAt descending
           wordsData.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
 
-          // Cache data
+          // Cache the raw (undecayed) data so re-hydration on next load
+          // recomputes decay against the fresh current time, not a stale one.
           localStorage.setItem(cacheKey, JSON.stringify(wordsData));
 
-          setWords(wordsData);
+          setWords(decayWordsMastery(wordsData));
           setLoading(false);
         },
         (error) => {

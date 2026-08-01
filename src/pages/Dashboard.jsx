@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { getMasteryLevel } from '../utils/spacedRepetition';
-import { computeRecallProbability } from '../utils/memoryEngine';
+import { computeRecallProbability, computeRetentionStats } from '../utils/memoryEngine';
 import { getConfusionPairs } from '../experiment/experimentDB';
 import OnboardingModal from '../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../components/Onboarding/WhatsNewModal';
@@ -117,23 +117,12 @@ export default function Dashboard() {
   // me" signal) over the generic retention estimate, and says nothing at
   // all rather than showing a hollow stat when there isn't enough history.
   const memoryTwin = useMemo(() => {
-    const reviewed = allWords.filter(w => w.lastReviewed);
-    if (reviewed.length === 0) return null;
+    const { retentionPercent, atRisk, reviewedCount } = computeRetentionStats(allWords);
+    if (reviewedCount === 0) return null;
 
-    const now = Date.now();
-    let totalP = 0;
-    let atRisk = 0;
-    reviewed.forEach(w => {
-      const stability = typeof w.stability === 'number' ? w.stability : 1.0;
-      const daysSince = (now - new Date(w.lastReviewed).getTime()) / 86400000;
-      const p = computeRecallProbability(stability, daysSince);
-      totalP += p;
-      if (p < 0.5) atRisk++;
-    });
-    const avgRetention = Math.round((totalP / reviewed.length) * 100);
     const topConfusion = [...confusionPairs].sort((a, b) => (b.count || 0) - (a.count || 0))[0] || null;
 
-    return { avgRetention, atRisk, topConfusion };
+    return { avgRetention: retentionPercent, atRisk, topConfusion };
   }, [allWords, confusionPairs]);
 
   const getGreeting = () => {

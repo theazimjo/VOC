@@ -13,6 +13,11 @@
  * lets call sites that track a real timer feed it into the fast/slow
  * response bonus instead of the neutral default.
  *
+ * Passive self-judgement alone (flashcard "Bildim", quiz, match) can't push
+ * a word past UNCONFIRMED_MASTERY_CEILING — it needs at least one correct
+ * active-recall pass (tracked via `word.activeRecallPasses`) before it's
+ * trusted enough to graduate toward 100%.
+ *
  * Backward compatibility: existing word records only have
  * {interval, reviewCount, nextReview, mastery, lastReviewed} (no
  * `stability` yet). The first time such a word is reviewed under this
@@ -27,10 +32,21 @@ import {
   computeInitialStability,
 } from './memoryEngine';
 
+const MASTERY_TIME_CONSTANT = 12;
+
 function stabilityToMastery(stability) {
-  const pct = 100 * (1 - Math.exp(-Math.max(0, stability) / 12));
+  const pct = 100 * (1 - Math.exp(-Math.max(0, stability) / MASTERY_TIME_CONSTANT));
   return Math.round(Math.max(0, Math.min(100, pct)));
 }
+
+// A passive self-judgement ("Bildim" on a flashcard, a quiz guess, a match)
+// is too easy to game to fully trust on its own — until a word has survived
+// at least one correct *active*-recall trial (typing/spelling/speaking it
+// from memory), its growth is capped so it can plateau around this ceiling
+// but can't cross into "mastered" territory purely on passive exposure.
+const UNCONFIRMED_MASTERY_CEILING = 65; // %
+const UNCONFIRMED_STABILITY_CAP =
+  -MASTERY_TIME_CONSTANT * Math.log(1 - UNCONFIRMED_MASTERY_CEILING / 100);
 
 function daysBetween(fromISO, toDate) {
   if (!fromISO) return 0;
@@ -76,11 +92,21 @@ export function applyReview(word = {}, options = {}) {
   const daysSince = daysBetween(lastRev, now);
   const overnight = hadOvernightGap(lastRev, now);
 
-  const newStability = updateStability(seedStability, isCorrect, confidence, responseTimeSec, daysSince, {
+  let newStability = updateStability(seedStability, isCorrect, confidence, responseTimeSec, daysSince, {
     hadOvernightGap: overnight,
     retrievalType: retrievalType === 'active_recall' ? 'active_recall' : 'passive_recall',
     clusterMultiplier,
   });
+
+  const activeRecallPasses =
+    (word.activeRecallPasses || 0) + (isCorrect && retrievalType === 'active_recall' ? 1 : 0);
+
+  if (activeRecallPasses === 0) {
+    // Never lower stability a word already had (e.g. legacy words reviewed
+    // before this field existed) — only stop it from growing further past
+    // the ceiling until it earns a real active-recall pass.
+    newStability = Math.min(newStability, Math.max(UNCONFIRMED_STABILITY_CAP, seedStability));
+  }
 
   const clampedConfidence = Math.max(1, Math.min(5, Math.round(confidence) || 1));
 
@@ -92,6 +118,7 @@ export function applyReview(word = {}, options = {}) {
     lastReviewed: now.toISOString(),
     quality: isCorrect ? clampedConfidence : Math.min(2, clampedConfidence - 1),
     stability: newStability,
+    activeRecallPasses,
   };
 }
 
@@ -159,5 +186,6 @@ export function initWordProgress() {
     nextReview: null,
     lastReviewed: null,
     stability: computeInitialStability(),
+    activeRecallPasses: 0,
   };
 }

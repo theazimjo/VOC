@@ -100,6 +100,34 @@ export function computeRecallProbability(stability, daysSince) {
 }
 
 /**
+ * A word's stored `mastery` is a snapshot taken at the moment of its last
+ * review — it never moves on its own, so a word left untouched after
+ * hitting 100% would stay frozen at 100% forever, even as the underlying
+ * memory trace decays. This scales that snapshot by the current
+ * retrievability (same forgetting curve as computeRecallProbability) so
+ * "mastered" reflects what the learner can actually recall *right now*,
+ * decaying back down the longer a word goes unreviewed and snapping back
+ * up on the next successful review.
+ *
+ * @param {Object} word
+ * @param {number} [word.mastery]
+ * @param {number} [word.stability]
+ * @param {string} [word.lastReviewed] - ISO date
+ * @param {number} [now] - injectable for tests
+ * @returns {number} decayed mastery, 0-100
+ */
+export function getDecayedMastery(word = {}, now = Date.now()) {
+  const storedMastery = typeof word.mastery === 'number' ? word.mastery : 0;
+  if (storedMastery <= 0 || !word.lastReviewed) return storedMastery;
+
+  const stability = typeof word.stability === 'number' && word.stability > 0 ? word.stability : 1.0;
+  const daysSince = (now - new Date(word.lastReviewed).getTime()) / (24 * 60 * 60 * 1000);
+  const retrievability = computeRecallProbability(stability, daysSince);
+
+  return Math.round(storedMastery * retrievability);
+}
+
+/**
  * Update stability after a review event.
  *
  * Algorithm (simplified DSR — Difficulty, Stability, Retrievability):
@@ -452,4 +480,79 @@ export function explainSchedulingDecision(stability, lastReview, nextOptimalRevi
 
   return `Eslab qolish ehtimoli hali ${pct}% — yetarlicha yuqori.` +
     (daysUntil !== null ? ` Keyingi optimal takrorlash ${daysUntil} kundan keyin.` : '');
+}
+
+/**
+ * Shared "Memory Twin" retention aggregate — the one piece of math that used
+ * to be copy-pasted separately into Dashboard, PackDetail, and
+ * StudentCorpDashboard (and had already drifted out of sync once). Every
+ * per-word retention/at-risk stat shown anywhere in the app should come from
+ * here so they can't diverge again.
+ *
+ * @param {Array<Object>} words - word records with {stability, lastReviewed}
+ * @returns {{ retentionPercent: number, atRisk: number, reviewedCount: number }}
+ */
+export function computeRetentionStats(words) {
+  const reviewed = (words || []).filter(w => w.lastReviewed);
+  if (reviewed.length === 0) {
+    return { retentionPercent: 0, atRisk: 0, reviewedCount: 0 };
+  }
+
+  const now = Date.now();
+  let totalP = 0;
+  let atRisk = 0;
+  reviewed.forEach(w => {
+    const stability = typeof w.stability === 'number' ? w.stability : 1.0;
+    const daysSince = (now - new Date(w.lastReviewed).getTime()) / (24 * 60 * 60 * 1000);
+    const p = computeRecallProbability(stability, daysSince);
+    totalP += p;
+    if (p < 0.5) atRisk++;
+  });
+
+  return {
+    retentionPercent: Math.round((totalP / reviewed.length) * 100),
+    atRisk,
+    reviewedCount: reviewed.length,
+  };
+}
+
+/**
+ * Recommend which PracticeHub mode actually serves a word list right now,
+ * driven by the same per-word signals the rest of the engine already tracks
+ * (review history, active-recall confirmation, current retrievability)
+ * instead of a hardcoded "Tavsiya etiladi" badge that never changes.
+ *
+ * - Mostly-unseen pack → Flashcard (nothing to test yet, build first exposure).
+ * - Several words already passed passively but never confirmed via typing/
+ *   speaking (see the UNCONFIRMED_MASTERY_CEILING gate in spacedRepetition.js)
+ *   → Imlo Mashqi (spelling), since that's what actually lifts the ceiling.
+ * - Several words whose current recall probability has dropped below 50%
+ *   → back to Flashcard for quick reinforcement.
+ * - Otherwise → no strong recommendation (null).
+ *
+ * @param {Array<Object>} words
+ * @returns {{ modeId: string, reason: 'new'|'confirm'|'reinforce', count: number } | null}
+ */
+export function recommendPracticeMode(words) {
+  if (!words || words.length === 0) return null;
+  const threshold = Math.max(3, Math.ceil(words.length * 0.3));
+
+  const unseen = words.filter(w => !((w.reviewCount || 0) > 0));
+  if (unseen.length === words.length || unseen.length >= threshold) {
+    return { modeId: 'flashcard', reason: 'new', count: unseen.length };
+  }
+
+  const needsConfirmation = words.filter(
+    w => (w.reviewCount || 0) > 0 && !((w.activeRecallPasses || 0) > 0)
+  );
+  if (needsConfirmation.length >= threshold) {
+    return { modeId: 'spelling', reason: 'confirm', count: needsConfirmation.length };
+  }
+
+  const { atRisk } = computeRetentionStats(words);
+  if (atRisk >= threshold) {
+    return { modeId: 'flashcard', reason: 'reinforce', count: atRisk };
+  }
+
+  return null;
 }

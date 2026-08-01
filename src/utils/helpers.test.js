@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { shuffleArray, weightedSelectWords, formatDate } from './helpers';
+import { shuffleArray, weightedSelectWords, filterWordsForMode, formatDate } from './helpers';
 
 describe('shuffleArray', () => {
   it('does not mutate the original array', () => {
@@ -46,6 +46,35 @@ describe('weightedSelectWords', () => {
     const words = Array.from({ length: 6 }, (_, i) => ({ id: i, mastery: 0 }));
     const selected = weightedSelectWords(words, 3);
     selected.forEach((w) => expect(words).toContain(w));
+  });
+});
+
+describe('filterWordsForMode', () => {
+  const mixed = [
+    { id: 1, reviewCount: 0 },
+    { id: 2, reviewCount: 3 },
+    { id: 3, reviewCount: 0 },
+    { id: 4, reviewCount: 1 },
+  ];
+
+  it('leaves the pool untouched for recognition-based modes', () => {
+    expect(filterWordsForMode(mixed, 'flashcard')).toEqual(mixed);
+    expect(filterWordsForMode(mixed, 'quiz')).toEqual(mixed);
+    expect(filterWordsForMode(mixed, 'match')).toEqual(mixed);
+    expect(filterWordsForMode(mixed, 'pronounce')).toEqual(mixed);
+  });
+
+  it('drops never-reviewed words for spelling and sentence modes', () => {
+    const spelling = filterWordsForMode(mixed, 'spelling');
+    expect(spelling.map(w => w.id)).toEqual([2, 4]);
+
+    const sentence = filterWordsForMode(mixed, 'sentence');
+    expect(sentence.map(w => w.id)).toEqual([2, 4]);
+  });
+
+  it('falls back to the full pool if nothing has ever been reviewed', () => {
+    const allNew = [{ id: 1, reviewCount: 0 }, { id: 2, reviewCount: 0 }];
+    expect(filterWordsForMode(allNew, 'spelling')).toEqual(allNew);
   });
 });
 

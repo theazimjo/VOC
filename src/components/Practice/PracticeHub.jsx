@@ -1,9 +1,23 @@
 import { motion } from 'framer-motion';
 import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen } from 'lucide-react';
+import { recommendPracticeMode } from '../../utils/memoryEngine';
 import './PracticeHub.css';
 
-export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
+const RECOMMENDATION_BADGES = {
+  new: () => 'Tavsiya etiladi 🌟',
+  confirm: (count) => `${count} ta tasdiqlash kerak 🎯`,
+  reinforce: (count) => `${count} ta unutilmoqda ⏰`,
+};
+
+export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = [] }) {
   const modes = [];
+
+  // Which mode actually fits this word list's current memory state right
+  // now (see memoryEngine.recommendPracticeMode) — a word you've only ever
+  // passively "Bildim"-ed on a flashcard needs Imlo Mashqi to actually
+  // confirm it, not another flashcard pass, so the static badge that used to
+  // sit on Flashcard unconditionally is now driven by real data instead.
+  const recommendation = recommendPracticeMode(words);
 
   if (isIrregularVerbs) {
     modes.push({
@@ -22,7 +36,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
       icon: Brain,
       title: 'Aqlli Kartochkalar',
       desc: "Kartochkalarni ag'darib, har bir so'z uchun individual unutish egri chizig'i asosida hisoblangan optimal vaqtda takrorlaysiz",
-      badge: 'Tavsiya etiladi 🌟',
+      badge: recommendation?.modeId === 'flashcard'
+        ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
+        : null,
       glowColor: 'hsl(200, 90%, 55%)'
     },
     {
@@ -30,7 +46,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
       icon: PenLine,
       title: 'Imlo Mashqi',
       desc: "Eshitish va xotiradan so'zlarni to'g'ri yozishni mashq qiling",
-      badge: "Min 3 ta so'z",
+      badge: recommendation?.modeId === 'spelling'
+        ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
+        : "Min 3 ta so'z",
       glowColor: 'hsl(265, 90%, 65%)'
     },
     {
@@ -90,7 +108,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs }) {
             <h3 className="practice-mode-title">{mode.title}</h3>
             <p className="practice-mode-desc">{mode.desc}</p>
             <div className="practice-mode-footer">
-              <span className="practice-mode-badge">{mode.badge}</span>
+              {mode.badge && <span className="practice-mode-badge">{mode.badge}</span>}
               <span className="practice-mode-arrow">→</span>
             </div>
           </motion.div>

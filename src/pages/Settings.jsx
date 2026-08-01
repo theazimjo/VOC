@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
+import { 
+  Moon, Volume2, BookOpen, Bell, Clock, Check, ChevronRight, Type
+} from 'lucide-react';
 import './Settings.css';
 
 export default function Settings() {
@@ -22,6 +25,8 @@ export default function Settings() {
     typeof Notification !== 'undefined' ? Notification.permission : 'unsupported'
   );
 
+  const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', 'limit', or null
+
   const handleReminderToggle = async (checked) => {
     if (checked) {
       if (typeof Notification === 'undefined') {
@@ -40,166 +45,231 @@ export default function Settings() {
 
   const { limit: dailyWordLimit, setLimit: setDailyWordLimit, todayCount } = useDailyNewWordLimit();
 
-  const handleThemeChange = (newThemeId) => {
-    setTheme(newThemeId);
-  };
-
   return (
-    <div className="settings-page">
-      <div className="settings-header-section">
-        <h1 className="settings-title">⚙️ Tizim Sozlamalari</h1>
-        <p className="settings-subtitle">Ilova ko'rinishi, mavzular va interfeys sozlamalari</p>
-      </div>
+    <div className="ios-settings-container">
+      <h1 className="ios-settings-title">Sozlamalar</h1>
 
-      <div className="settings-grid">
-        {/* Theme Selection Card */}
-        <div className="settings-card theme-selector-card">
-          <h2>🎨 Mavzular (Themes)</h2>
-          <p className="section-desc">Ilovaning umumiy rangi va ko'rinishini tanlang:</p>
-          
-          <div className="themes-list">
-            {themes.map((t) => {
-              const isActive = theme === t.id;
-              return (
-                <button
-                  key={t.id}
-                  className={`theme-item-btn ${isActive ? 'active' : ''}`}
-                  onClick={() => handleThemeChange(t.id)}
-                  data-theme-id={t.id}
-                >
-                  <div className="theme-preview-box" data-preview-theme={t.id}>
-                    <div className="preview-nav"></div>
-                    <div className="preview-content">
-                      <div className="preview-line-long"></div>
-                      <div className="preview-line-short"></div>
-                      <div className="preview-chips">
-                        <span className="preview-chip chip-1"></span>
-                        <span className="preview-chip chip-2"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="theme-info">
-                    <span className="theme-name">
-                      {t.name} {isActive && <span className="active-badge">✓</span>}
-                    </span>
-                    <span className="theme-desc">{t.desc}</span>
-                  </div>
-                </button>
-              );
-            })}
+      {/* SECTION 1: DISPLAY & BEHAVIOR */}
+      <div className="ios-settings-header">Ko'rinish va Effektlar</div>
+      <div className="ios-settings-section">
+        {/* Theme select row */}
+        <div 
+          className="ios-settings-row"
+          style={{ cursor: 'pointer' }}
+          onClick={() => setActiveSheet('theme')}
+        >
+          <div className="ios-settings-left">
+            <div className="ios-icon-box" style={{ background: '#0a7aff' }}>
+              <Moon size={16} strokeWidth={2.2} />
+            </div>
+            <span className="ios-row-title">Mavzu</span>
+          </div>
+          <div className="ios-settings-right">
+            <span className="ios-detail-text">
+              {themes.find(t => t.id === theme)?.name || theme}
+            </span>
+            <ChevronRight size={14} className="ios-chevron" />
           </div>
         </div>
 
-        {/* Behavior & Display Settings Card */}
-        <div className="settings-card behavior-settings-card">
-          <h2>⚙️ Interfeys va Effektlar</h2>
-
-          <div className="setting-option-row">
-            <div className="option-info">
-              <span className="option-title">🔊 Ovozli qayta aloqa (Audio)</span>
-              <span className="option-desc">Mashq bajarishda to'g'ri/noto'g'ri javoblarda tovush chiqarish</span>
+        {/* Font size row */}
+        <div 
+          className="ios-settings-row"
+          style={{ cursor: 'pointer' }}
+          onClick={() => setActiveSheet('font')}
+        >
+          <div className="ios-settings-left">
+            <div className="ios-icon-box" style={{ background: '#8e8e93' }}>
+              <Type size={16} strokeWidth={2.2} />
             </div>
-            <label className="switch-toggle">
-              <input
-                type="checkbox"
-                checked={audioEnabled}
-                onChange={(e) => setAudioEnabled(e.target.checked)}
+            <span className="ios-row-title">Matn o'lchami</span>
+          </div>
+          <div className="ios-settings-right">
+            <span className="ios-detail-text">
+              {fontSize === 'small' ? 'Kichik (14px)' : fontSize === 'large' ? 'Katta (19px)' : "O'rta (16px)"}
+            </span>
+            <ChevronRight size={14} className="ios-chevron" />
+          </div>
+        </div>
+
+        {/* Audio feedback switch row */}
+        <div className="ios-settings-row">
+          <div className="ios-settings-left">
+            <div className="ios-icon-box" style={{ background: '#ff2d55' }}>
+              <Volume2 size={16} strokeWidth={2.2} />
+            </div>
+            <span className="ios-row-title">Ovozli effektlar</span>
+          </div>
+          <div className="ios-settings-right">
+            <label className="ios-switch">
+              <input 
+                type="checkbox" 
+                checked={audioEnabled} 
+                onChange={(e) => setAudioEnabled(e.target.checked)} 
               />
-              <span className="slider-round"></span>
+              <span className="ios-slider"></span>
             </label>
           </div>
-
-          <hr className="settings-divider" />
-
-          <div className="setting-option-column">
-            <div className="option-info">
-              <span className="option-title">🔤 Matn o'lchami (Font size)</span>
-              <span className="option-desc">Ilovadagi so'zlar va barcha yozuvlar kattaligi</span>
-            </div>
-            <div className="font-size-selector-grid">
-              {['small', 'normal', 'large'].map((size) => (
-                <button
-                  key={size}
-                  className={`font-size-btn ${fontSize === size ? 'active' : ''}`}
-                  onClick={() => setFontSize(size)}
-                >
-                  {size === 'small' && 'Kichik (14px)'}
-                  {size === 'normal' && 'O\'rta (16px)'}
-                  {size === 'large' && 'Katta (19px)'}
-                </button>
-              ))}
-            </div>
-          </div>
         </div>
 
-        {/* Daily New Word Limit Card */}
-        <div className="settings-card behavior-settings-card">
-          <h2>📅 Kunlik yangi so'z maqsadi</h2>
-          <p className="section-desc">
-            Bir kunda ko'p yangi so'z qo'shish yodlashni qiyinlashtiradi — kunlik maqsad belgilang.
-            Bugun qo'shilgan: <strong>{todayCount} / {dailyWordLimit}</strong>
-          </p>
-          <div className="font-size-selector-grid">
-            {[10, 15, 20, 30].map((n) => (
-              <button
-                key={n}
-                className={`font-size-btn ${dailyWordLimit === n ? 'active' : ''}`}
-                onClick={() => setDailyWordLimit(n)}
-              >
-                {n} ta
-              </button>
-            ))}
+        {/* Daily limit select row */}
+        <div 
+          className="ios-settings-row"
+          style={{ cursor: 'pointer' }}
+          onClick={() => setActiveSheet('limit')}
+        >
+          <div className="ios-settings-left">
+            <div className="ios-icon-box" style={{ background: '#ff9500' }}>
+              <BookOpen size={16} strokeWidth={2.2} />
+            </div>
+            <span className="ios-row-title">Kunlik maqsad</span>
+          </div>
+          <div className="ios-settings-right">
+            <span className="ios-detail-text">
+              {dailyWordLimit} ta so'z
+            </span>
+            <ChevronRight size={14} className="ios-chevron" />
           </div>
         </div>
+      </div>
+      <div className="ios-settings-footer">
+        Kunlik yangi so'z limiti sizga har kuni optimal miqdordagi yangi so'zlarni taqdim etadi. Bugun o'rganildi: {todayCount} ta so'z.
+      </div>
 
-        {/* Daily Reminder Card */}
-        <div className="settings-card behavior-settings-card">
-          <h2>🔔 Kunlik eslatma</h2>
-          <p className="section-desc">
-            Kunlik maqsadingizni bajarmagan bo'lsangiz, belgilangan vaqtda eslatma yuboriladi.
-            Eslatma faqat ilova ochiq turgan brauzerda ishlaydi.
-          </p>
-
-          <div className="setting-option-row">
-            <div className="option-info">
-              <span className="option-title">Eslatmalarni yoqish</span>
-              <span className="option-desc">
-                {notifPermission === 'denied'
-                  ? "Brauzer bildirishnomalari bloklangan — brauzer sozlamalaridan ruxsat bering"
-                  : "Bugun mashq qilmagan bo'lsangiz sizga eslatib turamiz"}
-              </span>
+      {/* SECTION 2: NOTIFICATIONS */}
+      <div className="ios-settings-header">Bildirishnomalar</div>
+      <div className="ios-settings-section">
+        {/* Toggle reminders */}
+        <div className="ios-settings-row">
+          <div className="ios-settings-left">
+            <div className="ios-icon-box" style={{ background: '#34c759' }}>
+              <Bell size={16} strokeWidth={2.2} />
             </div>
-            <label className="switch-toggle">
-              <input
-                type="checkbox"
-                checked={reminderEnabled}
+            <span className="ios-row-title">Kunlik eslatma</span>
+          </div>
+          <div className="ios-settings-right">
+            <label className="ios-switch">
+              <input 
+                type="checkbox" 
+                checked={reminderEnabled} 
                 disabled={notifPermission === 'denied'}
-                onChange={(e) => handleReminderToggle(e.target.checked)}
+                onChange={(e) => handleReminderToggle(e.target.checked)} 
               />
-              <span className="slider-round"></span>
+              <span className="ios-slider"></span>
             </label>
           </div>
-
-          {reminderEnabled && (
-            <>
-              <hr className="settings-divider" />
-              <div className="setting-option-row">
-                <div className="option-info">
-                  <span className="option-title">Eslatma vaqti</span>
-                  <span className="option-desc">Har kuni shu vaqtdan keyin tekshiriladi</span>
-                </div>
-                <input
-                  type="time"
-                  className="font-size-btn"
-                  value={reminderTime}
-                  onChange={(e) => setReminderTime(e.target.value)}
-                  style={{ cursor: 'pointer' }}
-                />
-              </div>
-            </>
-          )}
         </div>
+
+        {/* Reminder time select */}
+        {reminderEnabled && (
+          <div className="ios-settings-row">
+            <div className="ios-settings-left">
+              <div className="ios-icon-box" style={{ background: '#af52de' }}>
+                <Clock size={16} strokeWidth={2.2} />
+              </div>
+              <span className="ios-row-title">Eslatma vaqti</span>
+            </div>
+            <div className="ios-settings-right">
+              <input 
+                type="time" 
+                value={reminderTime} 
+                onChange={(e) => setReminderTime(e.target.value)} 
+                className="ios-time-input" 
+              />
+            </div>
+          </div>
+        )}
       </div>
+      <div className="ios-settings-footer">
+        {notifPermission === 'denied' 
+          ? "Brauzer bildirishnomalari bloklangan. Ruxsat berish uchun brauzer sozlamalarini tekshiring." 
+          : "Mashq qilishni unutib qo'ysangiz, tizim siz belgilagan vaqtda eslatma yuboradi."}
+      </div>
+
+      <div className="ios-settings-footer" style={{ textAlign: 'center', marginTop: '32px' }}>
+        Platforma talqini: v2.4.0<br />
+        Barcha huquqlar himoyalangan © VOC
+      </div>
+
+      {/* iOS Action Sheet / Modal Popover Dialog */}
+      {activeSheet && (
+        <div className="ios-sheet-backdrop" onClick={() => setActiveSheet(null)}>
+          <div className="ios-sheet-drawer" onClick={e => e.stopPropagation()}>
+            <div className="ios-sheet-handle" />
+            
+            {activeSheet === 'theme' && (
+              <>
+                <div className="ios-sheet-title">Mavzuni tanlang</div>
+                <div className="ios-sheet-options">
+                  {themes.map(t => (
+                    <button
+                      key={t.id}
+                      className={`ios-sheet-option-btn ${theme === t.id ? 'active' : ''}`}
+                      onClick={() => {
+                        setTheme(t.id);
+                        setActiveSheet(null);
+                      }}
+                    >
+                      <span>{t.name}</span>
+                      {theme === t.id && <Check size={16} className="ios-accent-check" />}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeSheet === 'font' && (
+              <>
+                <div className="ios-sheet-title">Matn o'lchamini tanlang</div>
+                <div className="ios-sheet-options">
+                  {[
+                    { id: 'small', label: 'Kichik (14px)' },
+                    { id: 'normal', label: "O'rta (16px)" },
+                    { id: 'large', label: 'Katta (19px)' }
+                  ].map(item => (
+                    <button
+                      key={item.id}
+                      className={`ios-sheet-option-btn ${fontSize === item.id ? 'active' : ''}`}
+                      onClick={() => {
+                        setFontSize(item.id);
+                        setActiveSheet(null);
+                      }}
+                    >
+                      <span>{item.label}</span>
+                      {fontSize === item.id && <Check size={16} className="ios-accent-check" />}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeSheet === 'limit' && (
+              <>
+                <div className="ios-sheet-title">Kunlik maqsadni tanlang</div>
+                <div className="ios-sheet-options">
+                  {[10, 15, 20, 30].map(n => (
+                    <button
+                      key={n}
+                      className={`ios-sheet-option-btn ${dailyWordLimit === n ? 'active' : ''}`}
+                      onClick={() => {
+                        setDailyWordLimit(n);
+                        setActiveSheet(null);
+                      }}
+                    >
+                      <span>{n} ta so'z</span>
+                      {dailyWordLimit === n && <Check size={16} className="ios-accent-check" />}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+
+            <button className="ios-sheet-cancel-btn" onClick={() => setActiveSheet(null)}>
+              Bekor qilish
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -147,11 +147,13 @@ export default function App() {
                     </Route>
                     <Route element={<StudentLayout />}>
                       <Route path="student" element={<StudentCorpDashboard />} />
+                      <Route path="student/month/:packId/:monthId" element={<StudentCorpDashboard />} />
+                      <Route path="student/topic/:packId/:monthId/:unitId" element={<StudentCorpDashboard />} />
+                      <Route path="practice/:packId/:monthId/:unitId" element={<CorpPractice />} />
                       <Route path="student/practice" element={<StudentCorpPractice />} />
                       <Route path="student/profile" element={<StudentCorpProfile />} />
                       <Route path="student/settings" element={<StudentCorpSettings />} />
                     </Route>
-                    <Route path="practice" element={<CorpPractice />} />
                   </Route>
 
                   {/* Catch all */}

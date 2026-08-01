@@ -13,7 +13,7 @@ import { useStreak } from '../hooks/useStreak';
 import { shuffleArray } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import { getDueWords } from '../utils/spacedRepetition';
-import { inferConfidenceFromSpeed, computeClusterCalibration } from '../utils/memoryEngine';
+import { inferConfidenceFromSpeed, computeClusterCalibration, getRecommendedRetrievalType } from '../utils/memoryEngine';
 import { saveReviewEvent } from '../experiment/experimentDB';
 import { classifyWord } from '../experiment/semanticClassifier';
 import IosSpinner from '../components/common/IosSpinner';
@@ -30,17 +30,22 @@ function getResultTier(ratio) {
 // Recognition-before-production sequencing: brand-new / weak words get the
 // easiest (multiple-choice) format; words the learner has seen more and is
 // getting right move to listening, then full spelling — the hardest,
-// most production-heavy format — once mastery is high.
+// most production-heavy format — once mastery is high. The passive-vs-active
+// split itself now comes from the same engine call Memory Lab uses
+// (getRecommendedRetrievalType), instead of a second, separately-tuned
+// mastery threshold that could silently drift out of sync with it.
 function pickQuestionType(wordObj, poolSize) {
   if (poolSize < 4) {
     return Math.random() > 0.5 ? 'spelling' : 'dictation';
   }
-  const mastery = wordObj.mastery || 0;
-  const reviewCount = wordObj.reviewCount || 0;
 
-  if (reviewCount === 0 || mastery < 30) return 'quiz';
-  if (mastery < 70) return 'dictation';
-  return 'spelling';
+  const recallType = getRecommendedRetrievalType({
+    totalReviews: wordObj.reviewCount || 0,
+    stability: wordObj.stability,
+  });
+  if (recallType === 'passive_recall') return 'quiz';
+
+  return (wordObj.mastery || 0) < 70 ? 'dictation' : 'spelling';
 }
 
 export default function MixedPractice() {

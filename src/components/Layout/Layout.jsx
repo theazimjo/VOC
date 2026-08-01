@@ -60,10 +60,11 @@ export default function Layout() {
         )
       )}
 
-      {!isTestMode && appMode !== 'group' && (
+      {!isTestMode && (
         <Navbar
           sidebarCollapsed={collapsed}
           onHamburgerClick={handleHamburgerClick}
+          appMode={appMode}
         />
       )}
 
@@ -73,7 +74,6 @@ export default function Layout() {
             ? 'layout-content--test-mode' 
             : (appMode === 'group' ? 'layout-content--expanded' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'))
         }`}
-        style={appMode === 'group' ? { marginTop: 0, minHeight: '100vh' } : {}}
       >
         <Outlet />
       </main>

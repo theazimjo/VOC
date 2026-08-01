@@ -3,10 +3,10 @@
   height: 100vh;
   position: sticky;
   top: 0;
-  background: #11111c;
+  background: var(--bg-secondary);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -26,7 +26,7 @@
   align-items: center;
   gap: 12px;
   padding: 8px 4px 16px 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border);
   position: relative;
   min-height: 54px;
 }
@@ -35,9 +35,9 @@
   width: 38px;
   height: 38px;
   border-radius: 12px;
-  background: rgba(10, 132, 255, 0.15);
-  color: #0A84FF;
-  border: 1px solid rgba(10, 132, 255, 0.3);
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,13 +57,13 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  color: #ffffff;
+  color: var(--text-primary);
   letter-spacing: -0.02em;
 }
 
 .center-role-tag {
   font-size: 11px;
-  color: #38bdf8;
+  color: var(--accent-1);
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -77,9 +77,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #191928;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #94a3b8;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,9 +89,9 @@
 }
 
 .sidebar-collapse-toggle:hover {
-  background: #0A84FF;
+  background: var(--accent-1);
   color: #ffffff;
-  border-color: #0A84FF;
+  border-color: var(--accent-1);
 }
 
 /* Nav links - dark theme sidebar links */
@@ -107,7 +107,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #64748b;
+  color: var(--text-muted);
   margin-bottom: 6px;
   padding-left: 8px;
 }
@@ -121,7 +121,7 @@
   border-radius: 12px;
   background: transparent;
   border: none;
-  color: #94a3b8;
+  color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
@@ -132,13 +132,13 @@
 }
 
 .sidebar-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
 }
 
 .sidebar-nav-btn.active {
-  background: rgba(10, 132, 255, 0.15);
-  color: #ffffff;
+  background: var(--accent-1-dim);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -150,7 +150,7 @@
   bottom: 6px;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background: #0A84FF;
+  background: var(--accent-1);
 }
 
 /* Collapsed state adjustments */
@@ -165,7 +165,7 @@
 
 /* Footer & Profile */
 .corp-sidebar-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border);
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -201,13 +201,13 @@
 .adm-name {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-primary);
   text-transform: capitalize;
 }
 
 .adm-mail {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -232,4 +232,10 @@
 .btn-corp-logout:hover {
   background: rgba(239, 68, 68, 0.2);
   color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .corp-admin-sidebar {
+    display: none !important;
+  }
 }

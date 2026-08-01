@@ -153,11 +153,6 @@
   transform: translateX(20px);
 }
 
-.ios-switch input:disabled + .ios-slider {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* iOS Bottom Sheet presentation */
 .ios-sheet-backdrop {
   position: fixed;

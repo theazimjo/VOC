@@ -1,36 +1,143 @@
-import { useState, useEffect, useRef } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { useOutletContext, useNavigate, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
+import { getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
 import {
-  User, Plus, ChevronDown, Check, UserCircle2, Key, BookOpen, Sparkles, CheckCircle2, Play, ChevronRight, ArrowLeft
+  BookOpen, Sparkles, CheckCircle2, Play, ChevronRight, ArrowLeft, MoreVertical, Brain
 } from 'lucide-react';
-import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
+import WordList from '../../components/Words/WordList';
+import '../../components/Packs/PackCard.css';
+import '../PackDetail.css';
 import './StudentCorpDashboard.css';
 
 export default function StudentCorpDashboard() {
   const { user, membership, student, assignedPacks } = useOutletContext();
   const navigate = useNavigate();
+  const { packId, monthId, unitId } = useParams();
 
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [memberships, setMemberships] = useState([]);
-  const [showJoinForm, setShowJoinForm] = useState(false);
-  const [pinCode, setPinCode] = useState('');
-  const [joining, setJoining] = useState(false);
-  const [joinError, setJoinError] = useState('');
+  const prevGroupIdRef = useRef(membership?.groupId);
+  const [activeTab, setActiveTab] = useState('asosiy'); // 'asosiy', 'qoshimcha', 'kerakli'
+  
 
-  const [selectedMonth, setSelectedMonth] = useState(null);
+  // Build the list of all months from assigned packs
+  const allMonths = useMemo(() => {
+    return (assignedPacks || []).flatMap(pack => {
+      const packMonths = pack.months && pack.months.length > 0
+        ? pack.months
+        : pack.units && pack.units.length > 0
+          ? [{ id: 'm1', title: '1-Oy', units: pack.units }]
+          : pack.words && pack.words.length > 0
+            ? [{ id: 'm1', title: '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }]
+            : [];
+      return packMonths.map(m => ({
+        ...m,
+        packId: pack.id,
+        packTitle: pack.title,
+        packLevel: pack.level
+      }));
+    });
+  }, [assignedPacks]);
 
+  // Derive the active selected month from the route parameters
+  const selectedMonth = useMemo(() => {
+    return (packId && monthId)
+      ? allMonths.find(m => m.packId === packId && m.id === monthId)
+      : null;
+  }, [allMonths, packId, monthId]);
+
+  // Derive the active selected unit (topic) if unitId is provided
+  const selectedUnit = useMemo(() => {
+    return (selectedMonth && unitId)
+      ? (selectedMonth.units || []).find(u => u.id === unitId)
+      : null;
+  }, [selectedMonth, unitId]);
+
+  const [allDbWords, setAllDbWords] = useState({});
+  const [loadingDbWords, setLoadingDbWords] = useState(false);
+
+  // Fetch all corporate and individual word learning progress reactively from Firebase
   useEffect(() => {
-    setSelectedMonth(null);
-  }, [membership]);
+    if (!user) {
+      setAllDbWords({});
+      return;
+    }
 
-  const dropdownRef = useRef(null);
+    const wordsRef = ref(db, `users/${user.uid}/words`);
+    
+    setLoadingDbWords(true);
+    const unsub = onValue(wordsRef, (snap) => {
+      if (snap.exists()) {
+        setAllDbWords(snap.val());
+      } else {
+        setAllDbWords({});
+      }
+      setLoadingDbWords(false);
+    }, (err) => {
+      console.error('Error fetching corporate word progress:', err);
+      setLoadingDbWords(false);
+    });
 
-  const startPractice = (pack) => {
-    navigate('/corp/practice', {
+    return unsub;
+  }, [user?.uid]);
+
+  // Derive active selected unit words stats
+  const dbWords = useMemo(() => {
+    if (!selectedMonth || !selectedUnit) return {};
+    const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`;
+    return allDbWords[uniqueUnitId] || {};
+  }, [allDbWords, selectedMonth, selectedUnit]);
+
+  // Map unit words to make sure they have IDs, valid timestamps and spaced repetition progress
+  const unitWords = useMemo(() => {
+    if (!selectedUnit?.words) return [];
+    return selectedUnit.words.map((w, idx) => {
+      const wordKey = w.id || String(idx);
+      const dbStat = dbWords[wordKey] || {};
+      const merged = {
+        id: wordKey,
+        addedAt: w.addedAt || new Date().toISOString(),
+        word: w.word || '',
+        translation: w.translation || '',
+        definition: w.definition || '',
+        example: w.example || '',
+        partOfSpeech: w.partOfSpeech || 'noun',
+        mastery: 0,
+        stability: 1.0,
+        ...w,
+        ...dbStat
+      };
+      return { ...merged, mastery: getDecayedMastery(merged) };
+    });
+  }, [selectedUnit, dbWords]);
+
+  // Compute dynamic Memory Twin statistics based on spaced repetition stats
+  const memoryTwin = useMemo(() => {
+    if (unitWords.length === 0) return null;
+    const masteryPercent = Math.round(unitWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / unitWords.length);
+    const { retentionPercent, atRisk } = computeRetentionStats(unitWords);
+
+    return {
+      masteryPercent,
+      retentionPercent,
+      atRisk,
+      confusionCount: 0
+    };
+  }, [unitWords]);
+
+  // Reset to main list if the active membership changes (group switch)
+  useEffect(() => {
+    if (membership?.groupId && prevGroupIdRef.current !== membership.groupId) {
+      prevGroupIdRef.current = membership.groupId;
+      navigate('/corp/student');
+    }
+  }, [membership?.groupId]);
+
+  const startPractice = (packToPractice) => {
+    navigate(`/corp/practice/${packId}/${monthId}/${unitId}`, {
       state: {
-        pack,
+        pack: packToPractice,
         centerId: membership.centerId,
         groupId: membership.groupId,
         studentId: user.uid,
@@ -38,479 +145,294 @@ export default function StudentCorpDashboard() {
     });
   };
 
-  // Close dropdown on click outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setShowDropdown(false);
-        setShowJoinForm(false);
-        setPinCode('');
-        setJoinError('');
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Fetch all joined groups reactively
-  useEffect(() => {
-    if (!user) return;
-    const membershipsRef = ref(db, `users/${user.uid}/groupMemberships`);
-    const unsub = onValue(membershipsRef, (snap) => {
-      if (snap.exists()) {
-        setMemberships(Object.values(snap.val()));
-      } else {
-        setMemberships([]);
-      }
-    });
-    return unsub;
-  }, [user]);
-
-  const handleSwitchToIndividual = async () => {
-    try {
-      await setAppMode(user.uid, 'individual');
-      navigate('/');
-    } catch (err) {
-      console.error('Error switching to individual mode:', err);
-    }
-  };
-
-  const handleSwitchGroup = async (groupId) => {
-    try {
-      await switchActiveGroup(user.uid, groupId);
-      setShowDropdown(false);
-    } catch (err) {
-      console.error('Error switching group:', err);
-    }
-  };
-
-  const handleJoinNewGroup = async (e) => {
-    e.preventDefault();
-    if (!pinCode.trim() || pinCode.length !== 6) {
-      setJoinError('Guruh PIN kodi 6 xonali bo\'lishi kerak!');
-      return;
-    }
-    setJoining(true);
-    setJoinError('');
-    try {
-      await joinGroupAsUser(pinCode.trim(), user.uid, {
-        name: user.displayName || user.email,
-        email: user.email || ''
-      });
-      setPinCode('');
-      setShowJoinForm(false);
-      setShowDropdown(false);
-    } catch (err) {
-      setJoinError(err.message || 'Ulanishda xatolik yuz berdi.');
-    } finally {
-      setJoining(false);
-    }
-  };
-
-  // Helper to get initials / abbreviation of group name or level
-  const getGroupBadgeText = (group) => {
-    if (!group) return 'G';
-    const text = group.level || group.groupName || 'G';
-    // Return first 2 letters uppercase
-    return text.substring(0, 2).toUpperCase();
-  };
-
-  const activeBadgeText = getGroupBadgeText(membership);
+  const isUnitDone = selectedMonth && selectedUnit && Boolean(
+    student?.progress?.[`${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`]
+  );
 
   return (
-    <div className="student-corp-container" style={{ padding: '2rem' }}>
-      {/* Dropdown Container */}
-      <div style={{ position: 'relative', width: 'fit-content' }} ref={dropdownRef}>
-        
-        {/* Trigger Pill */}
-        <button
-          onClick={() => setShowDropdown(!showDropdown)}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: 'rgba(255, 255, 255, 0.06)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            borderRadius: '24px',
-            padding: '6px 12px 6px 6px',
-            cursor: 'pointer',
-            color: '#fff',
-            outline: 'none',
-            fontSize: '0.88rem',
-            fontWeight: 600,
-            transition: 'background 0.2s'
-          }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)'}
-        >
-          {/* Active Level Badge */}
-          <div style={{
-            background: '#22c55e',
-            color: '#fff',
-            fontSize: '0.78rem',
-            fontWeight: 700,
-            width: '28px',
-            height: '28px',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            letterSpacing: '0.02em'
-          }}>
-            {activeBadgeText}
+    <div className="student-corp-container" style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
+      
+
+      {/* Tabs bar (only show at top-level Months overview) */}
+      {!selectedMonth && (
+        <div className="library-tabs-container">
+          <div className="library-tabs">
+            
+            {/* Asosiy Tab */}
+            <button
+              className={`library-tab-btn ${activeTab === 'asosiy' ? 'active' : ''}`}
+              onClick={() => setActiveTab('asosiy')}
+            >
+              <span className="tab-icon">🏠</span> <span>Asosiy</span>
+            </button>
+ 
+            {/* Qo'shimcha Tab */}
+            <button
+              className={`library-tab-btn ${activeTab === 'qoshimcha' ? 'active' : ''}`}
+              onClick={() => setActiveTab('qoshimcha')}
+            >
+              <span className="tab-icon">✨</span> <span>Qo'shimcha</span>
+            </button>
+ 
+            {/* Kerakli Tab */}
+            <button
+              className={`library-tab-btn ${activeTab === 'kerakli' ? 'active' : ''}`}
+              onClick={() => setActiveTab('kerakli')}
+            >
+              <span className="tab-icon">📌</span> <span>Kerakli</span>
+            </button>
+ 
           </div>
-          <ChevronDown size={14} style={{ color: '#94a3b8', transition: 'transform 0.2s', transform: showDropdown ? 'rotate(180deg)' : 'rotate(0)' }} />
-        </button>
+        </div>
+      )}
 
-        {/* Dropdown Popover */}
-        {showDropdown && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 'calc(100% + 10px)',
-              left: 0,
-              background: '#16161f',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '16px',
-              padding: '1.25rem',
-              width: 'max-content',
-              maxWidth: '420px',
-              zIndex: 1000,
-              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6)'
-            }}
-          >
-            {/* Horizontal Switcher List */}
-            <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-              
-              {/* 1. Shaxsiy Card */}
-              <div 
-                onClick={handleSwitchToIndividual}
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', cursor: 'pointer', width: '68px' }}
-              >
-                <div style={{
-                  width: '54px',
-                  height: '54px',
-                  borderRadius: '16px',
-                  background: 'rgba(59, 130, 246, 0.12)',
-                  color: '#3b82f6',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'transform 0.2s'
-                }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                  <User size={22} />
-                </div>
-                <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 500, textAlign: 'center' }}>Shaxsiy</span>
-              </div>
-
-              {/* 2. Group Cards */}
-              {memberships.map((g) => {
-                const isActive = g.groupId === membership.groupId;
-                const badge = getGroupBadgeText(g);
-                return (
-                  <div 
-                    key={g.groupId}
-                    onClick={() => !isActive && handleSwitchGroup(g.groupId)}
-                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', cursor: 'pointer', width: '68px' }}
-                  >
-                    <div style={{
-                      width: '54px',
-                      height: '54px',
-                      borderRadius: '16px',
-                      background: isActive ? '#22c55e' : '#14532d',
-                      color: isActive ? '#fff' : '#4ade80',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '0.95rem',
-                      fontWeight: 700,
-                      transition: 'transform 0.2s',
-                      boxShadow: isActive ? '0 0 12px rgba(34, 197, 94, 0.4)' : 'none'
-                    }}
-                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                    >
-                      {badge}
-                    </div>
-                    <span style={{ fontSize: '0.78rem', color: isActive ? '#fff' : '#94a3b8', fontWeight: isActive ? 600 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
-                      {g.groupName}
-                    </span>
+      {/* Tab Content */}
+      <div className="library-content">
+        
+        {activeTab === 'asosiy' && (
+          <div className="st-packs-section">
+            
+            {/* LEVEL 1: MONTHS LIST */}
+            {!selectedMonth && (
+              <>
+                {allMonths.length === 0 ? (
+                  <div className="empty-state">
+                    <div className="empty-state-icon">📦</div>
+                    <h3>To'plamlar topilmadi</h3>
+                    <p>Hozircha sizga hech qanday o'quv rejasi biriktirilmagan.</p>
                   </div>
-                );
-              })}
+                ) : (
+                  <div className="grid-cards">
+                    {allMonths.map((m) => (
+                      <motion.div
+                        key={`${m.packId}_${m.id}`}
+                        whileHover={{ y: -4 }}
+                        whileTap={{ scale: 0.98 }}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+                        onClick={() => navigate(`/corp/student/month/${m.packId}/${m.id}`)}
+                        className="pack-card"
+                        role="button"
+                        tabIndex={0}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <div className="pack-card-top">
+                          <div className="pack-card-icon" style={{ backgroundColor: 'var(--accent-1-dim)', borderColor: 'var(--border-light)' }}>
+                            📅
+                          </div>
+                          <div className="pack-card-top-right">
+                            <span className="pack-card-count">{(m.units || []).length} ta mavzu</span>
+                          </div>
+                        </div>
 
-              {/* 3. Qo'shish Card */}
-              <div 
-                onClick={() => { setShowJoinForm(!showJoinForm); setJoinError(''); }}
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', cursor: 'pointer', width: '68px' }}
-              >
-                <div style={{
-                  width: '54px',
-                  height: '54px',
-                  borderRadius: '16px',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px dashed rgba(255, 255, 255, 0.15)',
-                  color: '#3b82f6',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'transform 0.2s'
-                }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.08)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                  <Plus size={22} />
-                </div>
-                <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 500, textAlign: 'center' }}>Qo'shish</span>
-              </div>
+                        <div className="pack-card-body">
+                          <h3 className="pack-card-title">{m.title}</h3>
+                          <p className="pack-card-desc">{m.packTitle} ({m.packLevel})</p>
+                        </div>
 
-            </div>
+                        <div className="pack-card-footer">
+                          <span className="pack-card-new-label">📅 Oylik reja</span>
+                          <span className="pack-card-arrow">→</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
 
-            {/* Inline Add Group PIN Form */}
-            {showJoinForm && (
-              <form 
-                onSubmit={handleJoinNewGroup}
-                style={{ 
-                  marginTop: '1.25rem', 
-                  paddingTop: '1.25rem', 
-                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px'
-                }}
-              >
-                <div style={{ fontSize: '0.82rem', color: '#94a3b8', fontWeight: 500 }}>Yangi guruh PIN kodini kiriting:</div>
-                <div style={{ display: 'flex', gap: '8px' }}>
-                  <input
-                    type="text"
-                    maxLength={6}
-                    placeholder="123456"
-                    value={pinCode}
-                    onChange={e => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
-                    style={{
-                      background: 'rgba(0, 0, 0, 0.2)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '8px',
-                      color: '#fff',
-                      padding: '8px 12px',
-                      fontSize: '0.88rem',
-                      outline: 'none',
-                      flex: 1,
-                      fontFamily: 'monospace',
-                      letterSpacing: '2px',
-                      textAlign: 'center'
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    disabled={joining}
-                    style={{
-                      background: 'linear-gradient(135deg, #a855f7, #6366f1)',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '8px',
-                      padding: '8px 16px',
-                      fontSize: '0.85rem',
-                      fontWeight: 600,
-                      cursor: 'pointer'
-                    }}
+            {/* LEVEL 2: TOPICS LIST */}
+            {selectedMonth && !selectedUnit && (
+              <>
+                {/* Folder detail header exactly like /library */}
+                <div className="library-folder-detail-header" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
+                  <button 
+                    className="library-folder-back-btn" 
+                    onClick={() => navigate('/corp/student')}
+                    style={{ display: 'inline-flex', flexDirection: 'row', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}
                   >
-                    {joining ? '...' : "Qo'shish"}
+                    <ArrowLeft size={20} style={{ flexShrink: 0 }} /> Kutubxona
+                  </button>
+                  <h2 style={{ fontSize: 'var(--font-lg)', fontWeight: 700, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    📅 {selectedMonth.title}
+                  </h2>
+                </div>
+
+                <div className="grid-cards">
+                  {(selectedMonth.units || []).length === 0 ? (
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', padding: '1rem 0' }}>Bu oyda mavzular mavjud emas.</div>
+                  ) : (
+                    selectedMonth.units.map((u) => {
+                      const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${u.id}`;
+                      const hasWords = u.words && u.words.length > 0;
+
+                      // Calculate real average mastery percentage of the words in the unit
+                      let masteryPct = 0;
+                      if (hasWords) {
+                        const unitStats = allDbWords[uniqueUnitId] || {};
+                        const totalMastery = u.words.reduce((sum, w, idx) => {
+                          const wordKey = w.id || String(idx);
+                          const stat = unitStats[wordKey] || {};
+                          return sum + getDecayedMastery(stat);
+                        }, 0);
+                        masteryPct = Math.round(totalMastery / u.words.length);
+                      }
+
+                      return (
+                        <motion.div
+                          key={u.id}
+                          whileHover={hasWords ? { y: -4 } : {}}
+                          whileTap={hasWords ? { scale: 0.98 } : {}}
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+                          onClick={() => hasWords && navigate(`/corp/student/topic/${selectedMonth.packId}/${selectedMonth.id}/${u.id}`)}
+                          className="pack-card"
+                          role="button"
+                          tabIndex={0}
+                          style={{ cursor: hasWords ? 'pointer' : 'default', opacity: hasWords ? 1 : 0.5 }}
+                        >
+                          <div className="pack-card-top">
+                            <div className="pack-card-icon" style={{ backgroundColor: 'var(--accent-1-dim)', borderColor: 'var(--border-light)' }}>
+                              📖
+                            </div>
+                            <div className="pack-card-top-right">
+                              <span className="pack-card-count">{(u.words || []).length} ta so'z</span>
+                            </div>
+                          </div>
+
+                          <div className="pack-card-body">
+                            <h3 className="pack-card-title">{u.title}</h3>
+                          </div>
+
+                          <div className="pack-card-footer" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '8px' }}>
+                            <div className="pack-card-progress-row" style={{ width: '100%' }}>
+                              <div className="pack-card-progress-track">
+                                <div className="pack-card-progress-fill" style={{ width: `${masteryPct}%`, background: 'var(--success)' }} />
+                              </div>
+                              <span className="pack-card-progress-label" style={{ color: masteryPct > 0 ? 'var(--success)' : 'var(--text-secondary)' }}>
+                                {masteryPct}% mastered
+                              </span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
+                              <span style={{ fontSize: '0.78rem', color: 'var(--accent-1)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px' }}>
+                                O'tish <span className="pack-card-arrow" style={{ transform: 'none', position: 'static' }}>→</span>
+                              </span>
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })
+                  )}
+                </div>
+              </>
+            )}
+
+            {/* LEVEL 3: TOPIC DETAILS VIEW */}
+            {selectedMonth && selectedUnit && (
+              <motion.div
+                className="pack-detail-page"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                style={{ padding: 0 }}
+              >
+                {/* Back to month list */}
+                <div className="detail-back-navigation" style={{ marginBottom: '1.5rem' }}>
+                  <button 
+                    className="btn-back" 
+                    onClick={() => navigate(`/corp/student/month/${packId}/${monthId}`)}
+                    style={{ display: 'inline-flex', flexDirection: 'row', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap', border: 'none', background: 'transparent', color: 'var(--text-secondary)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer', padding: 0 }}
+                  >
+                    <ArrowLeft size={20} /> {selectedMonth.title}
                   </button>
                 </div>
-                {joinError && (
-                  <span style={{ fontSize: '0.75rem', color: '#f87171', marginTop: '4px' }}>{joinError}</span>
-                )}
-              </form>
+
+                {/* Header card */}
+                <div className="pack-detail-header" style={{ borderBottom: `4px solid var(--accent-1)` }}>
+                  <div className="pack-detail-info">
+                    <div className="pack-detail-icon">📖</div>
+                    <div className="pack-detail-text">
+                      <h1 style={{ color: 'var(--text-primary)', margin: 0, fontSize: '2rem', fontWeight: 800 }}>{selectedUnit.title}</h1>
+                      <div className="book-stats" style={{ marginTop: '6px' }}>
+                        <span className="book-stat-badge" style={{ display: 'inline-flex', background: 'var(--accent-1-dim)', color: 'var(--accent-1)', fontSize: '0.8rem', fontWeight: 600, padding: '4px 10px', borderRadius: '12px' }}>
+                          📝 {unitWords.length} ta so'z
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="pack-detail-actions">
+                    <button 
+                      className="btn btn-primary btn-mashq"
+                      onClick={() => {
+                        const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`;
+                        const virtualPack = {
+                          id: uniqueUnitId,
+                          title: `${selectedMonth.packTitle} - ${selectedUnit.title}`,
+                          words: selectedUnit.words || [],
+                          level: selectedMonth.packLevel
+                        };
+                        startPractice(virtualPack);
+                      }}
+                    >
+                      🎮 Mashq qilish
+                    </button>
+                  </div>
+                </div>
+
+                {/* Memory Twin card */}
+                <div className="pack-memtwin-card">
+                  <div className="pack-memtwin-header">
+                    <span className="pack-memtwin-icon"><Brain size={16} strokeWidth={2.2} /></span>
+                    <span className="pack-memtwin-title">Memory Twin</span>
+                  </div>
+
+                  <div className="pack-memtwin-stats-grid">
+                    <div className="pack-memtwin-stat">
+                      <span className="pack-memtwin-stat-value">{memoryTwin ? `${memoryTwin.masteryPercent}%` : '0%'}</span>
+                      <span className="pack-memtwin-stat-label">Mastery</span>
+                    </div>
+                    <div className="pack-memtwin-stat">
+                      <span className="pack-memtwin-stat-value">{memoryTwin ? `${memoryTwin.retentionPercent}%` : '0%'}</span>
+                      <span className="pack-memtwin-stat-label">Retention</span>
+                    </div>
+                    <div className="pack-memtwin-stat">
+                      <span className="pack-memtwin-stat-value">{memoryTwin ? memoryTwin.atRisk : '0'}</span>
+                      <span className="pack-memtwin-stat-label">At risk</span>
+                    </div>
+                    <div className="pack-memtwin-stat">
+                      <span className="pack-memtwin-stat-value">{memoryTwin ? memoryTwin.confusionCount : '0'}</span>
+                      <span className="pack-memtwin-stat-label">Confusions</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Words list */}
+                <WordList
+                  words={unitWords}
+                  readOnly={true}
+                  language="en-US"
+                />
+              </motion.div>
             )}
 
           </div>
         )}
-      </div>
 
-      {/* Assigned Word Packs Section */}
-      <div className="st-packs-section" style={{ marginTop: '3rem' }}>
-        
-        {/* LEVEL 1: MONTHS LIST */}
-        {!selectedMonth && (() => {
-          const allMonths = (assignedPacks || []).flatMap(pack => {
-            const packMonths = pack.months && pack.months.length > 0
-              ? pack.months
-              : pack.units && pack.units.length > 0
-                ? [{ id: 'm1', title: '1-Oy', units: pack.units }]
-                : pack.words && pack.words.length > 0
-                  ? [{ id: 'm1', title: '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }]
-                  : [];
-            return packMonths.map(m => ({
-              ...m,
-              packId: pack.id,
-              packTitle: pack.title,
-              packLevel: pack.level
-            }));
-          });
+        {activeTab === 'qoshimcha' && (
+          <div className="empty-state">
+            <div className="empty-state-icon">✨</div>
+            <h3>Qo'shimcha materiallar</h3>
+            <p>Hozircha o'qituvchi tomonidan qo'shimcha materiallar biriktirilmagan.</p>
+          </div>
+        )}
 
-          return (
-            <>
-              <div className="section-title" style={{ marginBottom: '1.5rem' }}>
-                <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-                  <BookOpen size={22} className="icon-purple" style={{ color: '#c084fc' }} /> Kurs Rejasi (Oylar)
-                </h2>
-                <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '0.25rem' }}>O'rganmoqchi bo'lgan oyingizni tanlang.</p>
-              </div>
-
-              {allMonths.length === 0 ? (
-                <div className="st-empty-state" style={{ background: '#13131c', border: '1px dashed rgba(255,255,255,0.08)', borderRadius: '14px', padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
-                  <Sparkles size={36} style={{ color: '#c084fc', marginBottom: '1rem' }} />
-                  <p style={{ margin: 0, fontSize: '0.9rem' }}>Hozircha sizga hech qanday reja biriktirilmagan. O'qituvchingiz tez orada topshiriq beradi.</p>
-                </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  {allMonths.map((m, idx) => (
-                    <button
-                      type="button"
-                      key={`${m.packId}_${m.id}`}
-                      onClick={() => setSelectedMonth(m)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                        background: 'rgba(255, 255, 255, 0.02)',
-                        border: '1px solid rgba(255, 255, 255, 0.04)',
-                        borderRadius: '12px',
-                        padding: '1rem 1.25rem',
-                        textAlign: 'left',
-                        cursor: 'pointer',
-                        transition: 'background 0.2s, border-color 0.2s',
-                        outline: 'none'
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.04)';
-                      }}
-                    >
-                      <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#c084fc', width: '32px' }}>{idx + 1}</span>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#fff' }}>{m.title}</div>
-                        {assignedPacks.length > 1 && (
-                          <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '2px' }}>{m.packTitle} ({m.packLevel})</div>
-                        )}
-                      </div>
-                      <span style={{ fontSize: '0.85rem', color: '#94a3b8', marginRight: '1rem' }}>{(m.units || []).length} ta mavzu</span>
-                      <ChevronRight size={18} style={{ color: '#64748b' }} />
-                    </button>
-                  ))}
-                </div>
-              )}
-            </>
-          );
-        })()}
-
-        {/* LEVEL 2: TOPICS LIST */}
-        {selectedMonth && (
-          <>
-            {/* Back Navigation */}
-            <button 
-              onClick={() => setSelectedMonth(null)} 
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '6px', 
-                background: 'none', 
-                border: 'none', 
-                color: '#c084fc', 
-                cursor: 'pointer', 
-                marginBottom: '1.5rem', 
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                outline: 'none',
-                padding: 0
-              }}
-            >
-              <ArrowLeft size={16} /> Orqaga (Oylar ro'yxatiga)
-            </button>
-
-            <div className="section-title" style={{ marginBottom: '1.5rem' }}>
-              <h2 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#fff', margin: 0 }}>
-                {selectedMonth.title}
-              </h2>
-              <p style={{ color: '#94a3b8', fontSize: '0.82rem', marginTop: '0.25rem' }}>Mashq qilishni boshlash uchun mavzuni tanlang.</p>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {(selectedMonth.units || []).length === 0 ? (
-                <div style={{ color: '#94a3b8', fontSize: '0.9rem', padding: '1rem 0' }}>Bu oyda mavzular mavjud emas.</div>
-              ) : (
-                selectedMonth.units.map((u, idx) => {
-                  const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${u.id}`;
-                  const done = Boolean(student?.progress?.[uniqueUnitId]);
-
-                  // Virtual pack builder for practice
-                  const virtualPack = {
-                    id: uniqueUnitId,
-                    title: `${selectedMonth.packTitle} - ${u.title}`,
-                    words: u.words || [],
-                    level: selectedMonth.packLevel
-                  };
-
-                  return (
-                    <button
-                      type="button"
-                      key={u.id}
-                      onClick={() => u.words && u.words.length > 0 && startPractice(virtualPack)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        width: '100%',
-                        background: 'rgba(255, 255, 255, 0.02)',
-                        border: '1px solid rgba(255, 255, 255, 0.04)',
-                        borderRadius: '12px',
-                        padding: '1rem 1.25rem',
-                        textAlign: 'left',
-                        cursor: u.words && u.words.length > 0 ? 'pointer' : 'default',
-                        transition: 'background 0.2s, border-color 0.2s',
-                        outline: 'none',
-                        opacity: u.words && u.words.length > 0 ? 1 : 0.5
-                      }}
-                      onMouseEnter={e => {
-                        if (u.words && u.words.length > 0) {
-                          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                        }
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.04)';
-                      }}
-                    >
-                      <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#c084fc', width: '32px' }}>{idx + 1}</span>
-                      
-                      <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ fontSize: '0.95rem', fontWeight: 600, color: '#fff' }}>{u.title}</span>
-                        {done && <span style={{ fontSize: '0.72rem', background: 'rgba(74, 222, 128, 0.15)', color: '#4ade80', padding: '2px 8px', borderRadius: '10px', fontWeight: 600 }}>Tugallandi</span>}
-                      </div>
-
-                      <span style={{ fontSize: '0.85rem', color: '#94a3b8', marginRight: '1rem' }}>{(u.words || []).length} ta so'z</span>
-                      
-                      {u.words && u.words.length > 0 ? (
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: done ? 'rgba(255,255,255,0.06)' : 'linear-gradient(135deg, #a855f7, #6366f1)', width: '28px', height: '28px', borderRadius: '8px' }}>
-                          <Play size={12} fill="#fff" style={{ color: '#fff', marginLeft: '1px' }} />
-                        </div>
-                      ) : (
-                        <span style={{ fontSize: '0.75rem', color: '#64748b' }}>Hozircha bo'sh</span>
-                      )}
-                    </button>
-                  );
-                })
-              )}
-            </div>
-          </>
+        {activeTab === 'kerakli' && (
+          <div className="empty-state">
+            <div className="empty-state-icon">📌</div>
+            <h3>Zaruriy topshiriqlar</h3>
+            <p>Hozircha bajarilishi shart bo'lgan alohida topshiriqlar yo'q.</p>
+          </div>
         )}
 
       </div>

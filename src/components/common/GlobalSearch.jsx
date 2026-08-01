@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Package, ChevronRight } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
+import { useAuth } from '../../contexts/AuthContext';
+import { ref, get } from 'firebase/database';
+import { db } from '../../firebase';
+import { setAppMode, switchActiveGroup } from '../../services/corpService';
 import { getMasteryLevel } from '../../utils/spacedRepetition';
 import './GlobalSearch.css';
 
@@ -13,7 +17,10 @@ export default function GlobalSearch({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { allWords, packs } = usePacks();
+
+  const [corpData, setCorpData] = useState({ words: [], packs: [] });
 
   useEffect(() => {
     if (isOpen) {
@@ -32,30 +39,166 @@ export default function GlobalSearch({ isOpen, onClose }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
+  // Fetch all corporate packages and words for user group memberships on search open
+  useEffect(() => {
+    if (!isOpen || !user) {
+      setCorpData({ words: [], packs: [] });
+      return;
+    }
+
+    const membershipsRef = ref(db, `users/${user.uid}/groupMemberships`);
+    const wordStatsRef = ref(db, `users/${user.uid}/words`);
+
+    Promise.all([get(membershipsRef), get(wordStatsRef)])
+      .then(async ([membershipsSnap, wordStatsSnap]) => {
+        if (!membershipsSnap.exists()) return;
+        const membershipsList = Object.values(membershipsSnap.val());
+        const wordStatsVal = wordStatsSnap.exists() ? wordStatsSnap.val() : {};
+
+        const allCorpWords = [];
+        const allCorpPacks = [];
+
+        await Promise.all(
+          membershipsList.map(async (m) => {
+            try {
+              const [groupSnap, packsSnap] = await Promise.all([
+                get(ref(db, `centers/${m.centerId}/groups/${m.groupId}`)),
+                get(ref(db, `centers/${m.centerId}/customPacks`))
+              ]);
+
+              if (groupSnap.exists() && packsSnap.exists()) {
+                const groupVal = groupSnap.val();
+                const packsVal = packsSnap.val() || {};
+                const assignedIds = new Set(groupVal.assignedPacks || []);
+
+                Object.keys(packsVal).forEach((packId) => {
+                  if (assignedIds.has(packId)) {
+                    const pack = { id: packId, ...packsVal[packId] };
+                    
+                    const months = pack.months && pack.months.length > 0
+                      ? pack.months
+                      : pack.units && pack.units.length > 0
+                        ? [{ id: 'm1', title: '1-Oy', units: pack.units }]
+                        : pack.words && pack.words.length > 0
+                          ? [{ id: 'm1', title: '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }]
+                          : [];
+
+                    let wordCount = 0;
+                    months.forEach((month) => {
+                      const units = month.units || [];
+                      units.forEach((unit) => {
+                        const words = unit.words || [];
+                        wordCount += words.length;
+                        words.forEach((w, idx) => {
+                          const wordId = w.id || String(idx);
+                          const uniqueUnitId = `${packId}_${month.id}_${unit.id}`;
+                          const wordStat = (wordStatsVal[uniqueUnitId] || {})[wordId] || {};
+                          
+                          allCorpWords.push({
+                            id: wordId,
+                            word: w.word || '',
+                            translation: w.translation || '',
+                            mastery: wordStat.mastery || 0,
+                            packId,
+                            monthId: month.id,
+                            unitId: unit.id,
+                            packTitle: pack.title,
+                            monthTitle: month.title,
+                            unitTitle: unit.title,
+                            source: `${m.groupName} - ${pack.title}`,
+                            sourceIcon: '🏢',
+                            sourceType: 'corp',
+                            groupId: m.groupId,
+                            centerId: m.centerId,
+                            groupName: m.groupName
+                          });
+                        });
+                      });
+                    });
+
+                    allCorpPacks.push({
+                      id: packId,
+                      name: pack.title,
+                      wordCount,
+                      groupId: m.groupId,
+                      centerId: m.centerId,
+                      groupName: m.groupName,
+                      isCorp: true,
+                      level: pack.level,
+                      firstMonthId: months[0]?.id || 'm1',
+                      firstUnitId: months[0]?.units?.[0]?.id || 'u1'
+                    });
+                  }
+                });
+              }
+            } catch (err) {
+              console.error('Error loading corp data in search:', err);
+            }
+          })
+        );
+
+        setCorpData({ words: allCorpWords, packs: allCorpPacks });
+      })
+      .catch((err) => console.error('Error fetching global search corp meta:', err));
+  }, [isOpen, user]);
+
   const trimmedQuery = query.trim().toLowerCase();
 
   const wordResults = useMemo(() => {
     if (!trimmedQuery) return [];
-    return allWords
-      .filter(w =>
-        w.word?.toLowerCase().includes(trimmedQuery) ||
-        w.translation?.toLowerCase().includes(trimmedQuery)
-      )
-      .slice(0, MAX_WORD_RESULTS);
-  }, [allWords, trimmedQuery]);
+    
+    // Local individual words
+    const localMatches = allWords.filter(w =>
+      w.word?.toLowerCase().includes(trimmedQuery) ||
+      w.translation?.toLowerCase().includes(trimmedQuery)
+    );
+
+    // Corporate words
+    const corpMatches = (corpData.words || []).filter(w =>
+      w.word?.toLowerCase().includes(trimmedQuery) ||
+      w.translation?.toLowerCase().includes(trimmedQuery)
+    );
+
+    return [...localMatches, ...corpMatches].slice(0, MAX_WORD_RESULTS);
+  }, [allWords, corpData.words, trimmedQuery]);
 
   const packResults = useMemo(() => {
     if (!trimmedQuery) return [];
-    return packs
-      .filter(p => p.name?.toLowerCase().includes(trimmedQuery))
-      .slice(0, MAX_PACK_RESULTS);
-  }, [packs, trimmedQuery]);
+
+    const localMatches = packs.filter(p => p.name?.toLowerCase().includes(trimmedQuery));
+    const corpMatches = (corpData.packs || []).filter(p => p.name?.toLowerCase().includes(trimmedQuery));
+
+    return [...localMatches, ...corpMatches].slice(0, MAX_PACK_RESULTS);
+  }, [packs, corpData.packs, trimmedQuery]);
 
   const hasResults = wordResults.length > 0 || packResults.length > 0;
 
-  const goToPack = (packId) => {
-    navigate(`/packs/${packId}`);
+  // Swaps modes and active group memberships in database to keep state aligned
+  const handleResultClick = async (item) => {
     onClose();
+
+    if (item.sourceType === 'corp' || item.isCorp) {
+      try {
+        await setAppMode(user.uid, 'group');
+        await switchActiveGroup(user.uid, item.groupId);
+
+        if (item.unitId) {
+          navigate(`/corp/student/topic/${item.packId}/${item.monthId}/${item.unitId}`);
+        } else {
+          navigate(`/corp/student/month/${item.id}/${item.firstMonthId}`);
+        }
+      } catch (err) {
+        console.error('Error switching to corporate search result:', err);
+      }
+    } else {
+      try {
+        await setAppMode(user.uid, 'individual');
+        const pId = item.packId || item.id;
+        navigate(`/packs/${pId}`);
+      } catch (err) {
+        console.error('Error switching to individual search result:', err);
+      }
+    }
   };
 
   return (
@@ -108,13 +251,18 @@ export default function GlobalSearch({ isOpen, onClose }) {
                     <button
                       key={pack.id}
                       className="global-search-pack-item"
-                      onClick={() => goToPack(pack.id)}
+                      onClick={() => handleResultClick(pack)}
                     >
                       <div className="global-search-pack-icon">
                         {pack.icon ? pack.icon : <Package size={16} strokeWidth={2.2} />}
                       </div>
                       <div className="global-search-pack-info">
                         <div className="global-search-pack-name">{pack.name}</div>
+                        {pack.isCorp && (
+                          <div style={{ fontSize: '0.62rem', background: '#22c55e', color: '#fff', padding: '1px 5px', borderRadius: '4px', width: 'fit-content', marginTop: '2px', fontWeight: 600 }}>
+                            Guruh
+                          </div>
+                        )}
                         <div className="global-search-pack-count">{pack.wordCount || 0} ta so'z</div>
                       </div>
                       <ChevronRight size={16} strokeWidth={2.3} className="global-search-chevron" />
@@ -132,7 +280,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
                       <button
                         key={word.id}
                         className="global-search-word-item"
-                        onClick={() => goToPack(word.packId)}
+                        onClick={() => handleResultClick(word)}
                       >
                         <div
                           className="global-search-word-icon"
@@ -144,7 +292,14 @@ export default function GlobalSearch({ isOpen, onClose }) {
                           <div className="global-search-word-text">{word.word}</div>
                           <div className="global-search-word-translation">{word.translation}</div>
                         </div>
-                        <div className="global-search-word-source">{word.source}</div>
+                        <div className="global-search-word-source" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
+                          <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>{word.source}</span>
+                          {word.sourceType === 'corp' && (
+                            <span style={{ fontSize: '0.62rem', background: 'rgba(34, 197, 94, 0.15)', color: '#22c55e', padding: '1px 5px', borderRadius: '3px', fontWeight: 600 }}>
+                              Guruh
+                            </span>
+                          )}
+                        </div>
                       </button>
                     );
                   })}

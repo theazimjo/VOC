@@ -4,8 +4,9 @@ import {
   Users, Plus, BookOpen, Key, ArrowRightLeft,
   Eye, Copy, Check, Sparkles, Trash2,
   Archive, RotateCcw, BarChart3, Settings, Search,
-  Save, CheckCircle2, TrendingUp, Shield, ArrowLeft, ChevronRight, X, ChevronDown, MoreVertical
+  Save, CheckCircle2, TrendingUp, Shield, ArrowLeft, ChevronRight, X, ChevronDown, MoreVertical, Moon, Sun
 } from 'lucide-react';
+import { useTheme } from '../../contexts/ThemeContext';
 import {
   getTeacherGroups, createGroup, getCenterCustomPacks,
   assignPackToGroup, getGroupStudents, duplicateCustomPack, deleteCustomPack,
@@ -19,6 +20,7 @@ import './CenterAdminDashboard.css';
 
 export default function TeacherDashboard({ tab = 'groups' }) {
   const context = useOutletContext() || {};
+  const { theme, setTheme } = useTheme();
   const { centerId, teacherId, teacherName, phone, email } = context;
   const { groupId: urlGroupId, subTab = 'students' } = useParams();
   const navigate = useNavigate();
@@ -980,36 +982,36 @@ export default function TeacherDashboard({ tab = 'groups' }) {
             </div>
           )}
 
-          <div style={{ background: '#1a1a26', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '2rem', maxWidth: '600px' }}>
+          <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '18px', padding: '2rem', maxWidth: '600px', marginBottom: '1.5rem' }}>
             <form onSubmit={handleSaveProfile} autoComplete="off">
               <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-                <label style={{ display: 'block', color: '#cbd5e1', fontSize: '0.88rem', marginBottom: '6px' }}>F.I.SH (Ism Sharif)</label>
+                <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '6px' }}>F.I.SH (Ism Sharif)</label>
                 <input
                   type="text"
                   required
-                  style={{ width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#fff', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px 14px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: '10px', color: 'var(--text-primary)', outline: 'none' }}
                   value={profileForm.name}
                   onChange={e => setProfileForm({ ...profileForm, name: e.target.value })}
                 />
               </div>
 
               <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-                <label style={{ display: 'block', color: '#cbd5e1', fontSize: '0.88rem', marginBottom: '6px' }}>Telefon raqam</label>
+                <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '6px' }}>Telefon raqam</label>
                 <input
                   type="tel"
-                  style={{ width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#fff', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px 14px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: '10px', color: 'var(--text-primary)', outline: 'none' }}
                   value={profileForm.phone}
                   onChange={e => setProfileForm({ ...profileForm, phone: e.target.value })}
                 />
               </div>
 
               <div className="form-group" style={{ marginBottom: '1.75rem' }}>
-                <label style={{ display: 'block', color: '#cbd5e1', fontSize: '0.88rem', marginBottom: '6px' }}>Yangi Parol (ixtiyoriy)</label>
+                <label style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.88rem', marginBottom: '6px' }}>Yangi Parol (ixtiyoriy)</label>
                 <input
                   type="password"
                   autoComplete="new-password"
                   placeholder="O'zgartirish uchun yangi parol kiriting"
-                  style={{ width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#fff', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px 14px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: '10px', color: 'var(--text-primary)', outline: 'none' }}
                   value={profileForm.password}
                   onChange={e => setProfileForm({ ...profileForm, password: e.target.value })}
                 />
@@ -1024,6 +1026,60 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                 <Save size={18} /> {savingSettings ? 'Saqlanmoqda...' : 'Sozlamalarni Saqlash'}
               </button>
             </form>
+          </div>
+
+          {/* Theme Selection Card */}
+          <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: '18px', padding: '1.75rem', maxWidth: '600px' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 0 4px 0', color: 'var(--text-primary)' }}>Mavzu va Ko'rinish</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: '0 0 1.25rem 0' }}>Tizim ko'rinishini o'zingizga qulay rejimga o'tkazing.</p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div
+                onClick={() => setTheme('ios')}
+                style={{
+                  background: 'var(--bg-tertiary)',
+                  border: theme === 'ios' ? '2px solid #0a84ff' : '1px solid var(--border)',
+                  borderRadius: '14px',
+                  padding: '1.25rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  transition: 'all 0.2s'
+                }}
+              >
+                <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(10,132,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0a84ff' }}>
+                  <Sun size={20} />
+                </div>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '0.92rem', color: 'var(--text-primary)' }}>Yorug' rejim</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Oq fon, toza interfeys</div>
+                </div>
+              </div>
+
+              <div
+                onClick={() => setTheme('android')}
+                style={{
+                  background: 'var(--bg-tertiary)',
+                  border: theme === 'android' ? '2px solid #0a84ff' : '1px solid var(--border)',
+                  borderRadius: '14px',
+                  padding: '1.25rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  transition: 'all 0.2s'
+                }}
+              >
+                <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(168,85,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#c084fc' }}>
+                  <Moon size={20} />
+                </div>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '0.92rem', color: 'var(--text-primary)' }}>Tungi rejim</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>To'q fon, ko'zga qulay</div>
+                </div>
+              </div>
+            </div>
           </div>
         </>
       )}

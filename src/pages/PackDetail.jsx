@@ -9,7 +9,7 @@ import { useDailyNewWordLimit } from '../hooks/useDailyNewWordLimit';
 import { getIrregularVerbGroup } from '../data/irregularVerbGroups';
 import { findSourceMarketPack, getMissingMarketWords } from '../utils/marketSync';
 import { playSound } from '../utils/feedback';
-import { computeRecallProbability } from '../utils/memoryEngine';
+import { computeRetentionStats } from '../utils/memoryEngine';
 import { getConfusionPairs } from '../experiment/experimentDB';
 import WordList from '../components/Words/WordList';
 import WordForm from '../components/Words/WordForm';
@@ -49,22 +49,10 @@ export default function PackDetail() {
   // looking at right now).
   const memoryTwin = useMemo(() => {
     if (!words || words.length === 0) return null;
-    const reviewed = words.filter(w => w.lastReviewed);
-    if (reviewed.length === 0) return null;
+    const { retentionPercent, atRisk, reviewedCount } = computeRetentionStats(words);
+    if (reviewedCount === 0) return null;
 
     const masteryPercent = Math.round(words.reduce((sum, w) => sum + (w.mastery || 0), 0) / words.length);
-
-    const now = Date.now();
-    let totalP = 0;
-    let atRisk = 0;
-    reviewed.forEach(w => {
-      const stability = typeof w.stability === 'number' ? w.stability : 1.0;
-      const daysSince = (now - new Date(w.lastReviewed).getTime()) / 86400000;
-      const p = computeRecallProbability(stability, daysSince);
-      totalP += p;
-      if (p < 0.5) atRisk++;
-    });
-    const retentionPercent = Math.round((totalP / reviewed.length) * 100);
 
     const wordIds = new Set(words.map(w => w.id));
     const packConfusions = confusionPairs.filter(p => wordIds.has(p.wordIdA) || wordIds.has(p.wordIdB));
