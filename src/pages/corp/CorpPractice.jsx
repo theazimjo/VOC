@@ -25,7 +25,7 @@ import './CorpPractice.css';
 export default function CorpPractice() {
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
-  const { user, membership, student, assignedPacks } = useOutletContext();
+  const { user, membership, student, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
   const { allWords } = usePacks();
 
   const [dbWords, setDbWords] = useState({});
@@ -40,9 +40,12 @@ export default function CorpPractice() {
   const [progressPct, setProgressPct] = useState(0);
   const [saving, setSaving] = useState(false);
 
-  // Derive corporate pack details reactively from the StudentLayout assignedPacks context
+  // Derive corporate pack details reactively from the StudentLayout context —
+  // search across all three categories (Asosiy/Kerakli/Qo'shimcha) since a
+  // pack in any of them must be practiceable.
   const loadedPack = useMemo(() => {
-    const foundPack = (assignedPacks || []).find(p => p.id === packId);
+    const allGroupPacks = [...(assignedPacks || []), ...(requiredPacks || []), ...(additionalPacks || [])];
+    const foundPack = allGroupPacks.find(p => p.id === packId);
     if (!foundPack) return null;
 
     const packMonths = foundPack.months && foundPack.months.length > 0
@@ -66,7 +69,7 @@ export default function CorpPractice() {
       level: foundPack.level,
       language: foundPack.language || 'en-US'
     };
-  }, [assignedPacks, packId, monthId, unitId]);
+  }, [assignedPacks, requiredPacks, additionalPacks, packId, monthId, unitId]);
 
   // Fetch student's individual learning progress for this unit
   useEffect(() => {
@@ -284,7 +287,7 @@ export default function CorpPractice() {
   };
 
   return (
-    <div className="practice-page" style={{ padding: '0 var(--space-md)', width: '100%', maxWidth: '600px', margin: '0 auto' }}>
+    <div className="practice-page" style={{ padding: '0 var(--space-md)' }}>
       
       {/* Header */}
       {(step !== 'results' || step === 'mode') && (

@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import {
-  Users, Plus, BookOpen, Key, ArrowRightLeft,
+  Users, Plus, BookOpen, Key,
   Eye, Copy, Check, Sparkles, Trash2,
   Archive, RotateCcw, BarChart3, Settings, Search,
-  Save, CheckCircle2, TrendingUp, Shield, ArrowLeft, ChevronRight, X, ChevronDown, MoreVertical, Moon, Sun
+  Save, CheckCircle2, TrendingUp, Shield, ArrowLeft, ChevronRight, X, ChevronDown, MoreVertical, Moon, Sun,
+  Pencil, RotateCw, Share2, User, MoreHorizontal
 } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import {
   getTeacherGroups, createGroup, getCenterCustomPacks,
-  assignPackToGroup, getGroupStudents, duplicateCustomPack, deleteCustomPack,
+  assignPackToGroup, removePackFromGroup, getGroupStudents, duplicateCustomPack, deleteCustomPack,
   updateGroupStatus, updateTeacherPassword, updateGroupDetails, deleteGroup
 } from '../../services/corpService';
-import TransferGroupModal from '../../components/corp/TransferGroupModal';
 import CustomPackEditor from '../../components/corp/CustomPackEditor';
 import TeacherPackViewer from '../../components/corp/TeacherPackViewer';
 import './TeacherDashboard.css';
@@ -29,15 +29,16 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const [customPacks, setCustomPacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showSearchInput, setShowSearchInput] = useState(false);
 
   // Modals
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPackEditor, setShowPackEditor] = useState(false);
-  const [transferingGroup, setTransferingGroup] = useState(null);
   const [viewingGroupStudents, setViewingGroupStudents] = useState(null);
   const [groupStudentsList, setGroupStudentsList] = useState([]);
   const [assigningGroup, setAssigningGroup] = useState(null);
+  const [assignCategory, setAssignCategory] = useState('assignedPacks');
   const [duplicatingPackId, setDuplicatingPackId] = useState(null);
   const [viewingPack, setViewingPack] = useState(null);
   const [selectedGroupId, setSelectedGroupId] = useState(urlGroupId || null);
@@ -180,14 +181,23 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  const handleAssignPack = async (groupId, packId) => {
+  const handleAssignPack = async (groupId, packId, listKey = 'assignedPacks') => {
     try {
-      const updatedPacks = await assignPackToGroup(centerId, groupId, packId);
-      setGroups(prev => prev.map(g => g.id === groupId ? { ...g, assignedPacks: updatedPacks } : g));
-      alert('So\'z packi guruhga muvaffaqiyatli biriktirildi!');
-      setAssigningGroup(null);
+      const updatedPacks = await assignPackToGroup(centerId, groupId, packId, listKey);
+      setGroups(prev => prev.map(g => g.id === groupId ? { ...g, [listKey]: updatedPacks } : g));
+      setAssigningGroup(prev => prev ? { ...prev, [listKey]: updatedPacks } : prev);
     } catch (err) {
       alert('Biriktirishda xatolik: ' + err.message);
+    }
+  };
+
+  const handleRemovePack = async (groupId, packId, listKey = 'assignedPacks') => {
+    try {
+      const updatedPacks = await removePackFromGroup(centerId, groupId, packId, listKey);
+      setGroups(prev => prev.map(g => g.id === groupId ? { ...g, [listKey]: updatedPacks } : g));
+      setAssigningGroup(prev => prev ? { ...prev, [listKey]: updatedPacks } : prev);
+    } catch (err) {
+      alert('Olib tashlashda xatolik: ' + err.message);
     }
   };
 
@@ -254,6 +264,80 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
+  // ── Group Settings Fullscreen Modal state & handlers ──
+  const [showGroupSettingsModal, setShowGroupSettingsModal] = useState(false);
+  const [groupSettingsForm, setGroupSettingsForm] = useState({ name: '', isArchived: false, code: '' });
+  const [savingGroupSettings, setSavingGroupSettings] = useState(false);
+
+  const handleOpenGroupSettings = (group) => {
+    if (!group) return;
+    setGroupSettingsForm({
+      name: group.name || '',
+      isArchived: group.status === 'archived',
+      code: group.code || '',
+    });
+    setShowGroupSettingsModal(true);
+  };
+
+  const handleSaveGroupSettings = async () => {
+    if (!selectedGroup) return;
+    setSavingGroupSettings(true);
+    try {
+      const updates = {};
+      if (groupSettingsForm.name.trim() && groupSettingsForm.name !== selectedGroup.name) {
+        updates.name = groupSettingsForm.name.trim();
+      }
+      if (Object.keys(updates).length > 0) {
+        await updateGroupDetails(centerId, selectedGroup.id, updates);
+      }
+      const newStatus = groupSettingsForm.isArchived ? 'archived' : 'active';
+      if (newStatus !== (selectedGroup.status || 'active')) {
+        await updateGroupStatus(centerId, selectedGroup.id, newStatus);
+      }
+      setGroups(prev => prev.map(g => g.id === selectedGroup.id ? {
+        ...g,
+        ...updates,
+        status: newStatus,
+        code: groupSettingsForm.code || g.code
+      } : g));
+      setShowGroupSettingsModal(false);
+    } catch (err) {
+      alert('Sozlamalarni saqlashda xatolik: ' + err.message);
+    } finally {
+      setSavingGroupSettings(false);
+    }
+  };
+
+  const handleRegenerateCode = async () => {
+    if (!selectedGroup) return;
+    if (!confirm("Yangi taklif kodi yaratilsinmi? Eski kod o'z kuchini yo'qotadi.")) return;
+    try {
+      const newCode = Math.floor(100000 + Math.random() * 900000).toString();
+      await updateGroupDetails(centerId, selectedGroup.id, { code: newCode });
+      setGroupSettingsForm(prev => ({ ...prev, code: newCode }));
+      setGroups(prev => prev.map(g => g.id === selectedGroup.id ? { ...g, code: newCode } : g));
+      alert(`Yangi taklif kodi yaratildi: ${newCode}`);
+    } catch (err) {
+      alert('Kodni yangilashda xatolik: ' + err.message);
+    }
+  };
+
+  const handleTransferGroupPrompt = async () => {
+    if (!selectedGroup) return;
+    const newTeacherId = prompt("Guruh o'tkaziladigan o'qituvchi ID sini kiriting:");
+    if (!newTeacherId) return;
+    try {
+      await updateGroupDetails(centerId, selectedGroup.id, { teacherId: newTeacherId });
+      setGroups(prev => prev.filter(g => g.id !== selectedGroup.id));
+      setSelectedGroupId(null);
+      setShowGroupSettingsModal(false);
+      navigate('/corp/teacher');
+      alert("Guruh muvaffaqiyatli o'tkazildi!");
+    } catch (err) {
+      alert("O'tkazishda xatolik: " + err.message);
+    }
+  };
+
   const activeGroups = groups.filter(g => g.status !== 'archived');
   const archivedGroups = groups.filter(g => g.status === 'archived');
   const selectedGroup = activeGroups.find(g => g.id === selectedGroupId) || null;
@@ -277,241 +361,205 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       {tab === 'groups' && (
         selectedGroup ? (
           <div className="tpv-container">
-            {/* Header with Title and Actions on the Right */}
-            <div className="tpv-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem', paddingBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <button type="button" className="tpv-back" onClick={() => { setSelectedGroupId(null); navigate('/corp/teacher'); }} style={{ flexShrink: 0 }}>
-                  <ArrowLeft size={18} />
-                </button>
-                <div className="tpv-title">
-                  <h2 style={{ margin: 0, fontSize: '1.45rem', color: '#fff', fontWeight: 700 }}>{selectedGroup.name}</h2>
-                  <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
-                    {selectedGroup.level} · {selectedGroup.studentsCount || 0} ta o'quvchi · {(selectedGroup.assignedPacks || []).length} ta pack
-                  </span>
-                </div>
+            {/* Mobile-style Navbar Header */}
+            <div className="tpv-navbar">
+              {/* Left: Back button */}
+              <button
+                type="button"
+                className="tpv-back tpv-navbar-back"
+                onClick={() => { setSelectedGroupId(null); navigate('/corp/teacher'); }}
+              >
+                <ArrowLeft size={20} />
+              </button>
+
+              {/* Center: Group name only */}
+              <div className="tpv-navbar-center">
+                <h2 className="tpv-navbar-title">{selectedGroup.name}</h2>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                {/* PIN Code Pill */}
-                <div className="group-code-pill" onClick={() => copyCode(selectedGroup.code)} title="Nusxalash uchun bosing" style={{ margin: 0, height: '36px', display: 'flex', alignItems: 'center' }}>
-                  <Key size={14} /> PIN: <strong>{selectedGroup.code}</strong>
-                  {copiedCode === selectedGroup.code ? <Check size={14} color="#4ade80" /> : <Copy size={14} />}
-                </div>                {/* Actions Dropdown */}
-                <div style={{ position: 'relative', zIndex: 100 }}>
-                  <button
-                    onClick={() => setShowActionsDropdown(!showActionsDropdown)}
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      background: 'rgba(255, 255, 255, 0.06)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '10px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      color: '#fff',
-                      flex: 'none',
-                      transition: 'background 0.2s'
-                    }}
-                    title="Batafsil harakatlar"
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
-                  >
-                    <MoreVertical size={18} />
-                  </button>
-
-                  {showActionsDropdown && (
-                    <>
-                      {/* Invisible backdrop to close dropdown on click outside */}
-                      <div
-                        onClick={() => setShowActionsDropdown(false)}
-                        style={{
-                          position: 'fixed',
-                          inset: 0,
-                          zIndex: 10,
-                          background: 'transparent'
-                        }}
-                      />
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 'calc(100% + 6px)',
-                          right: 0,
-                          width: '180px',
-                          background: '#16161f',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          borderRadius: '10px',
-                          padding: '6px',
-                          zIndex: 20,
-                          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          gap: '4px'
-                        }}
-                      >
-                        <button
-                          onClick={() => {
-                            setShowActionsDropdown(false);
-                            handleOpenEditModal(selectedGroup);
-                          }}
-                          style={{
-                            width: '100%',
-                            background: 'none',
-                            border: 'none',
-                            color: '#cbd5e1',
-                            padding: '8px 10px',
-                            textAlign: 'left',
-                            fontSize: '0.85rem',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            transition: 'background 0.2s'
-                          }}
-                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
-                          onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                        >
-                          <Settings size={14} /> Guruhni tahrirlash
-                        </button>
-
-                        <button
-                          onClick={() => {
-                            setShowActionsDropdown(false);
-                            setTransferingGroup(selectedGroup);
-                          }}
-                          style={{
-                            width: '100%',
-                            background: 'none',
-                            border: 'none',
-                            color: '#cbd5e1',
-                            padding: '8px 10px',
-                            textAlign: 'left',
-                            fontSize: '0.85rem',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            transition: 'background 0.2s'
-                          }}
-                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
-                          onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                        >
-                          <ArrowRightLeft size={14} /> Guruhni o'tkazish
-                        </button>
-
-                        <button
-                          onClick={() => {
-                            setShowActionsDropdown(false);
-                            handleArchiveGroup(selectedGroup);
-                          }}
-                          style={{
-                            width: '100%',
-                            background: 'none',
-                            border: 'none',
-                            color: '#fbbf24',
-                            padding: '8px 10px',
-                            textAlign: 'left',
-                            fontSize: '0.85rem',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            transition: 'background 0.2s'
-                          }}
-                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(245,158,11,0.1)'}
-                          onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                        >
-                          <Archive size={14} /> Guruhni arxivlash
-                        </button>
-
-                        <button
-                          onClick={() => {
-                            setShowActionsDropdown(false);
-                            handleDeleteGroup(selectedGroup);
-                          }}
-                          style={{
-                            width: '100%',
-                            background: 'none',
-                            border: 'none',
-                            color: '#f87171',
-                            padding: '8px 10px',
-                            textAlign: 'left',
-                            fontSize: '0.85rem',
-                            borderRadius: '6px',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            transition: 'background 0.2s'
-                          }}
-                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(248,113,113,0.1)'}
-                          onMouseLeave={e => e.currentTarget.style.background = 'none'}
-                        >
-                          <Trash2 size={14} /> Guruhni o'chirish
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </div>
+              {/* Right: Actions button */}
+              <div className="tpv-navbar-right">
+                <button
+                  className="tpv-navbar-action-btn"
+                  onClick={() => handleOpenGroupSettings(selectedGroup)}
+                  title="Sozlamalar"
+                >
+                  <MoreVertical size={18} />
+                </button>
               </div>
             </div>
 
-            {/* Tab Bar Navigation */}
-            <div className="group-tabs-bar" style={{ display: 'flex', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '1.5rem', marginTop: '1.25rem', gap: '1.75rem' }}>
+            {/* FULLSCREEN GROUP SETTINGS MODAL (Screenshot match) */}
+            {showGroupSettingsModal && selectedGroup && (
+              <div className="gsm-overlay">
+                <div className="gsm-container">
+                  {/* Header */}
+                  <div className="gsm-header">
+                    <button
+                      type="button"
+                      className="gsm-back-btn"
+                      onClick={() => setShowGroupSettingsModal(false)}
+                      title="Qaytish"
+                    >
+                      <ArrowLeft size={20} />
+                    </button>
+
+                    <h2 className="gsm-title">Sozlamalar</h2>
+
+                    <button
+                      type="button"
+                      className="gsm-save-btn"
+                      onClick={handleSaveGroupSettings}
+                      disabled={savingGroupSettings}
+                    >
+                      {savingGroupSettings ? 'Saqlanmoqda...' : 'Saqlash'}
+                    </button>
+                  </div>
+
+                  {/* Body Content */}
+                  <div className="gsm-body">
+                    {/* SECTION 1: UMUMIY */}
+                    <div className="gsm-section">
+                      <div className="gsm-section-title">UMUMIY</div>
+                      <div className="gsm-card">
+                        {/* Row 1: Guruh nomi */}
+                        <div className="gsm-row">
+                          <div className="gsm-row-icon gsm-icon-green">
+                            <Pencil size={18} />
+                          </div>
+                          <div className="gsm-row-content">
+                            <label className="gsm-input-label">Guruh nomi</label>
+                            <input
+                              type="text"
+                              className="gsm-text-input"
+                              value={groupSettingsForm.name}
+                              onChange={e => setGroupSettingsForm(prev => ({ ...prev, name: e.target.value }))}
+                              placeholder="Guruh nomini kiriting"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="gsm-divider" />
+
+                        {/* Row 2: Taklif kodini yangilash */}
+                        <div className="gsm-row gsm-row-clickable" onClick={handleRegenerateCode}>
+                          <div className="gsm-row-icon">
+                            <RotateCw size={18} />
+                          </div>
+                          <div className="gsm-row-content">
+                            <span className="gsm-row-label">Taklif kodini yangilash</span>
+                          </div>
+                          <ChevronRight size={18} className="gsm-row-arrow" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 2: HOLAT */}
+                    <div className="gsm-section">
+                      <div className="gsm-section-title">HOLAT</div>
+                      <div className="gsm-card">
+                        <div className="gsm-row">
+                          <div className="gsm-row-icon">
+                            <Archive size={18} />
+                          </div>
+                          <div className="gsm-row-content">
+                            <span className="gsm-row-label">Arxivlash</span>
+                            <span className="gsm-row-sub">Guruh vaqtincha nofaol bo'ladi</span>
+                          </div>
+                          <label className="gsm-toggle-switch">
+                            <input
+                              type="checkbox"
+                              checked={groupSettingsForm.isArchived}
+                              onChange={e => setGroupSettingsForm(prev => ({ ...prev, isArchived: e.target.checked }))}
+                            />
+                            <span className="gsm-toggle-slider" />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* SECTION 3: XAVFLI HUDUD */}
+                    <div className="gsm-section">
+                      <div className="gsm-section-title gsm-title-danger">XAVFLI HUDUD</div>
+                      <div className="gsm-card gsm-card-danger">
+                        {/* Guruhni o'chirish */}
+                        <div
+                          className="gsm-row gsm-row-clickable"
+                          onClick={() => {
+                            setShowGroupSettingsModal(false);
+                            handleDeleteGroup(selectedGroup);
+                          }}
+                        >
+                          <div className="gsm-row-icon gsm-icon-red">
+                            <Trash2 size={18} />
+                          </div>
+                          <div className="gsm-row-content">
+                            <span className="gsm-row-label gsm-text-danger">Guruhni o'chirish</span>
+                            <span className="gsm-row-sub">Bu amalni ortga qaytarib bo'lmaydi</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Hero Info Card (mobile only) */}
+            <div className="tpv-hero-card">
+              <div className="tpv-hero-top">
+                <span className="tpv-hero-label">TAKLIF KODI</span>
+                <button
+                  className="tpv-hero-copy-btn"
+                  onClick={() => copyCode(selectedGroup.code)}
+                  title="Nusxalash"
+                >
+                  {copiedCode === selectedGroup.code
+                    ? <Check size={15} color="#4ade80" />
+                    : <Copy size={15} />}
+                </button>
+              </div>
+              <div className="tpv-hero-code">{selectedGroup.code}</div>
+              <div className="tpv-hero-badges">
+                <span className="tpv-hero-badge">
+                  <Users size={13} />
+                  {selectedGroup.studentsCount || 0} O'quvchi
+                </span>
+                <span className="tpv-hero-badge tpv-hero-badge-green">
+                  <Check size={13} />
+                  {selectedGroup.level || 'Faol Kurs'}
+                </span>
+              </div>
+            </div>
+
+            {/* Tab Bar Navigation — Pill Style */}
+            <div className="group-seg-bar">
               <button
-                className={`group-tab-btn ${subTab === 'students' ? 'active' : ''}`}
+                className={`group-seg-btn ${subTab === 'students' ? 'active' : ''}`}
                 onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/students`)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  borderBottom: subTab === 'students' ? '2px solid #3b82f6' : '2px solid transparent',
-                  color: subTab === 'students' ? '#fff' : '#94a3b8',
-                  padding: '10px 0',
-                  fontSize: '0.92rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s'
-                }}
               >
-                O'quvchilar ({selectedGroup.studentsCount || 0})
+                <Users size={14} strokeWidth={2.3} />
+                <span>O'quvchilar</span>
+                <span className="seg-badge">{selectedGroup.studentsCount || 0}</span>
               </button>
               <button
-                className={`group-tab-btn ${subTab === 'words' ? 'active' : ''}`}
+                className={`group-seg-btn ${subTab === 'words' ? 'active' : ''}`}
                 onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/words`)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  borderBottom: subTab === 'words' ? '2px solid #3b82f6' : '2px solid transparent',
-                  color: subTab === 'words' ? '#fff' : '#94a3b8',
-                  padding: '10px 0',
-                  fontSize: '0.92rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s'
-                }}
               >
-                So'zlar / Packlar ({(selectedGroup.assignedPacks || []).length})
+                <BookOpen size={14} strokeWidth={2.3} />
+                <span>Packlar</span>
+                <span className="seg-badge">
+                  {(selectedGroup.assignedPacks || []).length +
+                    (selectedGroup.additionalPacks || []).length +
+                    (selectedGroup.requiredPacks || []).length}
+                </span>
               </button>
               <button
-                className={`group-tab-btn ${subTab === 'stats' ? 'active' : ''}`}
+                className={`group-seg-btn ${subTab === 'stats' ? 'active' : ''}`}
                 onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/stats`)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  borderBottom: subTab === 'stats' ? '2px solid #3b82f6' : '2px solid transparent',
-                  color: subTab === 'stats' ? '#fff' : '#94a3b8',
-                  padding: '10px 0',
-                  fontSize: '0.92rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s'
-                }}
               >
-                Statistika
+                <BarChart3 size={14} strokeWidth={2.3} />
+                <span>Statistika</span>
               </button>
             </div>
 
@@ -551,36 +599,58 @@ export default function TeacherDashboard({ tab = 'groups' }) {
               {/* SUB-TAB 2: WORDS / PACKS */}
               {subTab === 'words' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div className="group-words-header">
                     <h3 style={{ fontSize: '1.05rem', color: '#fff', margin: 0, fontWeight: 600 }}>Guruhga biriktirilgan so'z packlari</h3>
                     <button
                       className="btn-add-course-primary"
-                      onClick={() => setAssigningGroup(selectedGroup)}
-                      style={{ padding: '8px 14px', fontSize: '0.85rem', height: '36px' }}
+                      onClick={() => { setAssignCategory('assignedPacks'); setAssigningGroup(selectedGroup); }}
+                      style={{ padding: '8px 14px', fontSize: '0.85rem', height: '36px', flexShrink: 0 }}
                     >
                       <Plus size={16} /> Pack Biriktirish
                     </button>
                   </div>
 
-                  {(selectedGroup.assignedPacks || []).length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '3rem 2rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px dashed rgba(255,255,255,0.1)', color: '#94a3b8' }}>
-                      <BookOpen size={36} style={{ marginBottom: '10px', color: '#64748b' }} />
-                      <p style={{ margin: 0 }}>Guruhga hali birorta so'z packi biriktirilmagan.</p>
-                    </div>
-                  ) : (
-                    <div className="tpv-list" style={{ marginTop: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                      {selectedGroup.assignedPacks.map(pid => {
-                        const p = customPacks.find(cp => cp.id === pid);
-                        if (!p) return null;
-                        return (
-                          <div key={pid} className="tpv-row" style={{ cursor: 'default', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', padding: '12px 16px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span className="tpv-row-label" style={{ color: '#fff', fontWeight: 600 }}>{p.title}</span>
-                            <span className="tpv-row-meta" style={{ color: '#94a3b8', fontSize: '0.88rem' }}>{p.wordCount || (p.words ? p.words.length : 0)} ta so'z</span>
+                  {[
+                    { key: 'assignedPacks', label: 'Asosiy', emptyText: 'Guruhga hali birorta asosiy so\'z packi biriktirilmagan.' },
+                    { key: 'requiredPacks', label: 'Kerakli', emptyText: 'Guruhga hali birorta kerakli (majburiy) pack biriktirilmagan.' },
+                    { key: 'additionalPacks', label: 'Qo\'shimcha', emptyText: 'Guruhga hali birorta qo\'shimcha pack biriktirilmagan.' },
+                  ].map(({ key, label, emptyText }) => {
+                    const packIds = selectedGroup[key] || [];
+                    return (
+                      <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <h4 style={{ fontSize: '0.88rem', color: '#94a3b8', margin: 0, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                          {label} ({packIds.length})
+                        </h4>
+                        {packIds.length === 0 ? (
+                          <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '14px', border: '1px dashed rgba(255,255,255,0.1)', color: '#64748b', fontSize: '0.85rem' }}>
+                            {emptyText}
                           </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                        ) : (
+                          <div className="tpv-list" style={{ marginTop: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                            {packIds.map(pid => {
+                              const p = customPacks.find(cp => cp.id === pid);
+                              if (!p) return null;
+                              return (
+                                <div key={pid} className="tpv-row" style={{ cursor: 'default', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', padding: '12px 16px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                  <div>
+                                    <span className="tpv-row-label" style={{ color: '#fff', fontWeight: 600 }}>{p.title}</span>
+                                    <span className="tpv-row-meta" style={{ color: '#94a3b8', fontSize: '0.88rem', marginLeft: '10px' }}>{p.wordCount || (p.words ? p.words.length : 0)} ta so'z</span>
+                                  </div>
+                                  <button
+                                    onClick={() => handleRemovePack(selectedGroup.id, pid, key)}
+                                    title="Guruhdan olib tashlash"
+                                    style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center' }}
+                                  >
+                                    <X size={16} />
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
 
@@ -594,7 +664,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                     </div>
                     <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '14px', padding: '1.25rem' }}>
                       <div style={{ color: '#94a3b8', fontSize: '0.82rem', marginBottom: '6px' }}>Biriktirilgan packlar</div>
-                      <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff' }}>{(selectedGroup.assignedPacks || []).length} ta</div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#fff' }}>{(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length + (selectedGroup.requiredPacks || []).length} ta</div>
                     </div>
                   </div>
 
@@ -678,50 +748,56 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           </div>
         ) : (
         <>
-          <div className="courses-top-bar" style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-            <div className="courses-title-area">
-              <h1>Guruhlarim</h1>
-              <p>{activeGroups.length} ta faol guruh · {totalStudents} ta o'quvchi</p>
+          <div className="courses-top-bar" style={{ marginBottom: '1.25rem' }}>
+            <div className="courses-title-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+              <div className="courses-title-area">
+                <h1>Guruhlarim</h1>
+                <p>{activeGroups.length} ta faol guruh · {totalStudents} ta o'quvchi</p>
+              </div>
+
+              <button
+                type="button"
+                className="top-search-lupa-btn"
+                onClick={() => setShowSearchInput(!showSearchInput)}
+                title="Guruhni qidirish"
+              >
+                <Search size={18} />
+              </button>
             </div>
 
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'nowrap' }}>
-              <div className="search-input-wrap" style={{ width: '260px', position: 'relative' }}>
+            {(showSearchInput || searchTerm) && (
+              <div className="search-input-wrap mobile-search-expanded" style={{ marginTop: '0.85rem', position: 'relative', width: '100%' }}>
                 <Search size={16} className="search-icon" />
                 <input
                   type="text"
                   placeholder="Guruh nomini qidirish..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
-                  style={{ width: '100%', paddingRight: searchTerm ? '32px' : '12px' }}
+                  autoFocus
+                  style={{ width: '100%', paddingRight: '32px' }}
                 />
-                {searchTerm && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchTerm('')}
-                    style={{
-                      position: 'absolute',
-                      right: '10px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'none',
-                      border: 'none',
-                      color: '#94a3b8',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      padding: 0
-                    }}
-                    title="Qidiruvni tozalash"
-                  >
-                    <X size={14} />
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() => { setSearchTerm(''); setShowSearchInput(false); }}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    color: '#94a3b8',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: 0
+                  }}
+                  title="Qidiruvni yopish"
+                >
+                  <X size={16} />
+                </button>
               </div>
-
-              <button className="btn-add-course-primary" onClick={() => setShowCreateModal(true)} style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
-                <Plus size={16} /> Yangi Guruh
-              </button>
-            </div>
+            )}
           </div>
 
           {loading ? (
@@ -745,41 +821,50 @@ export default function TeacherDashboard({ tab = 'groups' }) {
               {filteredActiveGroups.map((group) => (
                 <div
                   key={group.id}
-                  className="teacher-group-card clickable"
+                  className="mobile-group-card clickable"
                   onClick={() => {
                     setSelectedGroupId(group.id);
                     navigate(`/corp/teacher/group/${group.id}`);
                   }}
                 >
-                  <div className="group-card-header">
-                    <div>
-                      <span className="group-level-badge">{group.level}</span>
-                      <h3>{group.name}</h3>
-                    </div>
+                  <div className="mgc-icon-badge">
+                    <Users size={22} color="#3b82f6" />
+                  </div>
 
-                    <div className="group-code-pill" onClick={(e) => { e.stopPropagation(); copyCode(group.code); }} title="Nusxalash uchun bosing">
-                      <Key size={14} /> PIN: <strong>{group.code}</strong>
-                      {copiedCode === group.code ? <Check size={14} color="#4ade80" /> : <Copy size={14} />}
+                  <div className="mgc-info">
+                    <h3 className="mgc-title">{group.name}</h3>
+                    <div className="mgc-sub">
+                      <User size={13} />
+                      <span>{group.studentsCount || 0} o'quvchi</span>
                     </div>
                   </div>
 
-                  <div className="group-card-body">
-                    <div className="group-info-row">
-                      <Users size={16} /> <span>O'quvchilar: <strong>{group.studentsCount || 0} ta</strong></span>
-                    </div>
-                    <div className="group-info-row">
-                      <BookOpen size={16} /> <span>Biriktirilgan packlar: <strong>{(group.assignedPacks || []).length} ta</strong></span>
-                    </div>
-                  </div>
-
-                  <div className="group-card-footer">
-                    <span>Batafsil ko'rish</span>
-                    <ChevronRight size={16} />
-                  </div>
+                  <button
+                    type="button"
+                    className="mgc-more-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenGroupSettings(group);
+                    }}
+                    title="Sozlamalar"
+                  >
+                    <MoreHorizontal size={22} />
+                  </button>
                 </div>
               ))}
             </div>
           )}
+
+          {/* Floating Action Button (Yangi Guruh) */}
+          <button
+            type="button"
+            className="mobile-fab-btn"
+            onClick={() => setShowCreateModal(true)}
+            title="Yangi Guruh Yaratish"
+          >
+            <Plus size={20} strokeWidth={2.8} />
+            <span>Yangi Guruh</span>
+          </button>
         </>
         )
       )}
@@ -819,7 +904,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                       <Users size={16} /> <span>O'quvchilar: <strong>{group.studentsCount || 0} ta</strong></span>
                     </div>
                     <div className="group-info-row">
-                      <BookOpen size={16} /> <span>Biriktirilgan packlar: <strong>{(group.assignedPacks || []).length} ta</strong></span>
+                      <BookOpen size={16} /> <span>Biriktirilgan packlar: <strong>{(group.assignedPacks || []).length + (group.additionalPacks || []).length + (group.requiredPacks || []).length} ta</strong></span>
                     </div>
                   </div>
 
@@ -1217,9 +1302,36 @@ export default function TeacherDashboard({ tab = 'groups' }) {
         <div className="modal-overlay" onClick={() => setAssigningGroup(null)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h2><BookOpen size={20} /> Pack Biriktirish: {assigningGroup.name}</h2>
-            <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1rem' }}>
-              Ushbu guruh o'quvchilari o'rganishi uchun pack tanlang:
+            <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+              Ushbu guruh o'quvchilari o'rganishi uchun pack tanlang va toifasini belgilang:
             </p>
+
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '1rem' }}>
+              {[
+                { key: 'assignedPacks', label: 'Asosiy' },
+                { key: 'requiredPacks', label: 'Kerakli' },
+                { key: 'additionalPacks', label: "Qo'shimcha" },
+              ].map(({ key, label }) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setAssignCategory(key)}
+                  style={{
+                    flex: 1,
+                    padding: '8px 10px',
+                    borderRadius: '10px',
+                    fontSize: '0.82rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    border: assignCategory === key ? '1px solid #0a84ff' : '1px solid rgba(255,255,255,0.1)',
+                    background: assignCategory === key ? 'rgba(10,132,255,0.15)' : 'rgba(255,255,255,0.03)',
+                    color: assignCategory === key ? '#0a84ff' : '#94a3b8',
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
 
             <div className="assign-pack-list">
               <h4>Markaz Xususiy Packlari ({customPacks.length})</h4>
@@ -1233,10 +1345,10 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                     </div>
                     <button
                       className="btn-select-pack"
-                      onClick={() => handleAssignPack(assigningGroup.id, p.id)}
-                      disabled={(assigningGroup.assignedPacks || []).includes(p.id)}
+                      onClick={() => handleAssignPack(assigningGroup.id, p.id, assignCategory)}
+                      disabled={(assigningGroup[assignCategory] || []).includes(p.id)}
                     >
-                      {(assigningGroup.assignedPacks || []).includes(p.id) ? 'Biriktirilgan' : 'Biriktirish'}
+                      {(assigningGroup[assignCategory] || []).includes(p.id) ? 'Biriktirilgan' : 'Biriktirish'}
                     </button>
                   </div>
                 ))
@@ -1286,20 +1398,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
             </div>
           </div>
         </div>
-      )}
-
-      {/* Transfer Group Modal */}
-      {transferingGroup && (
-        <TransferGroupModal
-          centerId={centerId}
-          currentTeacherId={teacherId}
-          group={transferingGroup}
-          onTransferred={(gId) => {
-            setGroups(prev => prev.filter(g => g.id !== gId));
-            setTransferingGroup(null);
-          }}
-          onClose={() => setTransferingGroup(null)}
-        />
       )}
     </div>
   );

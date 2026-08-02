@@ -440,7 +440,9 @@ export async function createGroup(centerId, teacherId, groupData) {
     name: groupData.name, // e.g. "General English - Group A"
     level: groupData.level || 'Beginner',
     code,
-    assignedPacks: groupData.assignedPacks || [], // list of pack IDs (default or custom)
+    assignedPacks: groupData.assignedPacks || [], // list of pack IDs (default or custom) — "Asosiy"
+    additionalPacks: groupData.additionalPacks || [], // "Qo'shimcha" (optional/supplementary) packs
+    requiredPacks: groupData.requiredPacks || [], // "Kerakli" (mandatory) packs
     createdAt: new Date().toISOString(),
     studentsCount: 0,
   };
@@ -469,26 +471,6 @@ export async function getTeacherGroups(centerId, teacherId) {
   return Object.keys(val)
     .map(key => ({ id: key, ...val[key] }))
     .filter(g => g.teacherId === teacherId);
-}
-
-/**
- * Teacher: Transfer Group to another Teacher
- */
-export async function transferGroup(centerId, groupId, newTeacherId) {
-  const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
-  await update(groupRef, {
-    teacherId: newTeacherId,
-    transferredAt: new Date().toISOString()
-  });
-
-  // Update global code lookup if needed
-  const snapshot = await get(groupRef);
-  if (snapshot.exists() && snapshot.val().code) {
-    const code = snapshot.val().code;
-    await update(ref(db, `groupCodes/${code}`), { teacherId: newTeacherId });
-  }
-
-  return true;
 }
 
 export async function updateGroupStatus(centerId, groupId, status) {
@@ -536,20 +518,36 @@ export async function deleteGroup(centerId, groupId) {
 }
 
 /**
- * Teacher: Assign Pack to Group
+ * Teacher: Assign Pack to Group.
+ * `listKey` selects which category the pack is assigned under:
+ * 'assignedPacks' (Asosiy), 'additionalPacks' (Qo'shimcha) or 'requiredPacks' (Kerakli).
  */
-export async function assignPackToGroup(centerId, groupId, packId) {
+export async function assignPackToGroup(centerId, groupId, packId, listKey = 'assignedPacks') {
   const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
   const snap = await get(groupRef);
   if (!snap.exists()) throw new Error('Guruh topilmadi');
 
   const group = snap.val();
-  const currentPacks = group.assignedPacks || [];
+  const currentPacks = group[listKey] || [];
   if (!currentPacks.includes(packId)) {
     currentPacks.push(packId);
-    await update(groupRef, { assignedPacks: currentPacks });
+    await update(groupRef, { [listKey]: currentPacks });
   }
   return currentPacks;
+}
+
+/**
+ * Teacher: Unassign (remove) a Pack from a Group's given category list.
+ */
+export async function removePackFromGroup(centerId, groupId, packId, listKey = 'assignedPacks') {
+  const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
+  const snap = await get(groupRef);
+  if (!snap.exists()) throw new Error('Guruh topilmadi');
+
+  const group = snap.val();
+  const updatedPacks = (group[listKey] || []).filter(id => id !== packId);
+  await update(groupRef, { [listKey]: updatedPacks });
+  return updatedPacks;
 }
 
 /**

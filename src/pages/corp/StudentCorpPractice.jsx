@@ -59,7 +59,7 @@ function flattenAllWords(assignedPacks) {
 
 export default function StudentCorpPractice() {
   const navigate = useNavigate();
-  const { user, assignedPacks } = useOutletContext();
+  const { user, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
   const { allWords } = usePacks();
 
   const [allDbWords, setAllDbWords] = useState({});
@@ -96,7 +96,10 @@ export default function StudentCorpPractice() {
     return unsub;
   }, [user?.uid]);
 
-  const baseWords = useMemo(() => flattenAllWords(assignedPacks), [assignedPacks]);
+  const baseWords = useMemo(
+    () => flattenAllWords([...(assignedPacks || []), ...(requiredPacks || []), ...(additionalPacks || [])]),
+    [assignedPacks, requiredPacks, additionalPacks]
+  );
 
   const sourceWords = useMemo(() => {
     return baseWords.map(w => {
@@ -272,7 +275,7 @@ export default function StudentCorpPractice() {
 
   if (sourceWords.length === 0) {
     return (
-      <div className="practice-page" style={{ padding: '0 var(--space-md)', width: '100%', maxWidth: '600px', margin: '0 auto' }}>
+      <div className="practice-page" style={{ padding: '0 var(--space-md)' }}>
         <div className="empty-state">
           <div className="empty-state-icon">✨</div>
           <h3>Hozircha mashq qilinadigan so'z yo'q</h3>
@@ -283,7 +286,7 @@ export default function StudentCorpPractice() {
   }
 
   return (
-    <div className="practice-page" style={{ padding: '0 var(--space-md)', width: '100%', maxWidth: '600px', margin: '0 auto' }}>
+    <div className="practice-page" style={{ padding: '0 var(--space-md)' }}>
 
       {(step !== 'results' || step === 'mode') && (
         <div className="practice-page-header">

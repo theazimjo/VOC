@@ -7,6 +7,10 @@
 
 .corp-admin-main-pane {
   flex: 1;
+  min-width: 0; /* row-flex items default to min-width:auto, which lets wide
+                   descendants (e.g. a flex row of buttons) force this pane
+                   — and the whole page — wider than the viewport on mobile */
+  overflow-x: hidden;
   overflow-y: auto;
   min-height: 100vh;
   box-sizing: border-box;

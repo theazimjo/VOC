@@ -16,6 +16,8 @@ export default function StudentLayout() {
 
   const [group, setGroup] = useState(null);
   const [assignedPacks, setAssignedPacks] = useState([]);
+  const [additionalPacks, setAdditionalPacks] = useState([]);
+  const [requiredPacks, setRequiredPacks] = useState([]);
   const [centerName, setCenterName] = useState('O\'quv Markazi');
   const [loading, setLoading] = useState(true);
 
@@ -39,7 +41,11 @@ export default function StudentLayout() {
 
         setGroup(freshGroup);
         const assignedIds = new Set(freshGroup?.assignedPacks || []);
+        const additionalIds = new Set(freshGroup?.additionalPacks || []);
+        const requiredIds = new Set(freshGroup?.requiredPacks || []);
         setAssignedPacks(centerPacks.filter(p => assignedIds.has(p.id)));
+        setAdditionalPacks(centerPacks.filter(p => additionalIds.has(p.id)));
+        setRequiredPacks(centerPacks.filter(p => requiredIds.has(p.id)));
         if (centerNameSnap.exists()) {
           setCenterName(centerNameSnap.val());
         }
@@ -77,6 +83,8 @@ export default function StudentLayout() {
     membership: { ...membership, centerName },
     group,
     assignedPacks,
+    additionalPacks,
+    requiredPacks,
     student,
     learnedPacksCount,
     progressPct,
@@ -88,7 +96,7 @@ export default function StudentLayout() {
       <StudentSidebar />
 
       {/* Main Content Area */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
+      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
         <Navbar sidebarCollapsed={false} onHamburgerClick={() => {}} appMode="group" />
         
         {/* Main Content Pane */}

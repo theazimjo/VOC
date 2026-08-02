@@ -10,11 +10,12 @@ import {
 } from 'lucide-react';
 import {
   getCenterTeachers, createTeacher, updateTeacherPassword, removeTeacherFromCenter, getCenterCustomPacks, getCenterGroups,
-  getCenter, updateCenter, deleteCustomPack, duplicateCustomPack
+  getCenter, updateCenter, deleteCustomPack, duplicateCustomPack, createCustomPack, updateCustomPack
 } from '../../services/corpService';
 import CustomPackEditor from '../../components/corp/CustomPackEditor';
 import CourseManager from '../../components/corp/CourseManager';
 import CredentialsModal from '../../components/corp/CredentialsModal';
+import { BEGINNER_ENGLISH_PACK } from '../../data/beginnerEnglishCoursePack';
 import './CenterAdminDashboard.css';
 
 export default function CenterAdminDashboard({ tab = 'dashboard' }) {
@@ -51,6 +52,7 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const [showTeacherModal, setShowTeacherModal] = useState(false);
   const [showPackEditor, setShowPackEditor] = useState(false);
   const [editingPack, setEditingPack] = useState(null);
+  const [seedingCourse, setSeedingCourse] = useState(false);
   const [credentials, setCredentials] = useState(null);
 
   const [teacherForm, setTeacherForm] = useState({ name: '', phone: '', password: '' });
@@ -207,6 +209,30 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
       setCustomPacks(prev => [duplicated, ...prev]);
     } catch (err) {
       alert("Kursni nusxalashda xatolik: " + err.message);
+    }
+  };
+
+  // One-click: create the ready-made Beginner English pack (3 months, 15
+  // units, 332 words) fully populated in a single write, instead of
+  // manually adding months/units and importing each unit's words by hand.
+  const handleSeedBeginnerCourse = async () => {
+    setSeedingCourse(true);
+    try {
+      const { title, level, description, months } = BEGINNER_ENGLISH_PACK;
+      const pack = await createCustomPack(centerId, { title, level, description });
+
+      const units = months.flatMap(m => m.units);
+      const words = units.flatMap(u => u.words);
+      const updates = { months, units, words, sectionsCount: units.length, wordCount: words.length };
+      await updateCustomPack(centerId, pack.id, updates);
+
+      const fullPack = { ...pack, ...updates };
+      setCustomPacks(prev => [fullPack, ...prev]);
+      setSearchParams({ courseId: pack.id });
+    } catch (err) {
+      alert("Tayyor kursni yuklashda xatolik: " + err.message);
+    } finally {
+      setSeedingCourse(false);
     }
   };
 
@@ -597,12 +623,22 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
               <p>{totalCourses} ta kurs · {totalSections} ta bo'lim · {totalWords} ta so'z</p>
             </div>
 
-            <button
-              className="btn-add-course-primary"
-              onClick={() => { setEditingPack(null); setShowPackEditor(true); }}
-            >
-              <Plus size={16} /> Yangi Kurs
-            </button>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                className="btn-secondary"
+                onClick={handleSeedBeginnerCourse}
+                disabled={seedingCourse}
+                title="Tayyor Beginner (A1) kursini bir tugma bilan to'liq yuklash — 3 oy, 15 mavzu, 332 so'z"
+              >
+                <Sparkles size={16} /> {seedingCourse ? 'Yuklanmoqda...' : 'Tayyor Beginner Kurs'}
+              </button>
+              <button
+                className="btn-add-course-primary"
+                onClick={() => { setEditingPack(null); setShowPackEditor(true); }}
+              >
+                <Plus size={16} /> Yangi Kurs
+              </button>
+            </div>
           </div>
 
           {/* 4 Summary Metrics Cards */}

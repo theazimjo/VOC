@@ -1,5 +1,6 @@
 import { Outlet, useOutletContext } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
+import TeacherBottomNav from './TeacherBottomNav';
 import './CorpAdminLayout.css';
 
 export default function TeacherLayout() {
@@ -23,7 +24,7 @@ export default function TeacherLayout() {
 
   return (
     <div className="corp-admin-layout">
-      {/* Teacher Sidebar */}
+      {/* Teacher Sidebar (desktop only) */}
       <TeacherSidebar
         centerName={centerName}
         teacherName={teacherName}
@@ -35,6 +36,9 @@ export default function TeacherLayout() {
       <main className="corp-admin-main-pane">
         <Outlet context={contextValue} />
       </main>
+
+      {/* Teacher Bottom Navigation (mobile only) */}
+      <TeacherBottomNav />
     </div>
   );
 }

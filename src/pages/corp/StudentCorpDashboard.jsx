@@ -12,40 +12,51 @@ import '../../components/Packs/PackCard.css';
 import '../PackDetail.css';
 import './StudentCorpDashboard.css';
 
+// Build the list of months (with month → unit → words nesting normalized)
+// from a list of pack objects.
+function buildMonthsFromPacks(packs) {
+  return (packs || []).flatMap(pack => {
+    const packMonths = pack.months && pack.months.length > 0
+      ? pack.months
+      : pack.units && pack.units.length > 0
+        ? [{ id: 'm1', title: '1-Oy', units: pack.units }]
+        : pack.words && pack.words.length > 0
+          ? [{ id: 'm1', title: '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }]
+          : [];
+    return packMonths.map(m => ({
+      ...m,
+      packId: pack.id,
+      packTitle: pack.title,
+      packLevel: pack.level
+    }));
+  });
+}
+
 export default function StudentCorpDashboard() {
-  const { user, membership, student, assignedPacks } = useOutletContext();
+  const { user, membership, student, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
 
   const prevGroupIdRef = useRef(membership?.groupId);
   const [activeTab, setActiveTab] = useState('asosiy'); // 'asosiy', 'qoshimcha', 'kerakli'
-  
 
-  // Build the list of all months from assigned packs
-  const allMonths = useMemo(() => {
-    return (assignedPacks || []).flatMap(pack => {
-      const packMonths = pack.months && pack.months.length > 0
-        ? pack.months
-        : pack.units && pack.units.length > 0
-          ? [{ id: 'm1', title: '1-Oy', units: pack.units }]
-          : pack.words && pack.words.length > 0
-            ? [{ id: 'm1', title: '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }]
-            : [];
-      return packMonths.map(m => ({
-        ...m,
-        packId: pack.id,
-        packTitle: pack.title,
-        packLevel: pack.level
-      }));
-    });
-  }, [assignedPacks]);
+  // Build the months list per pack category ("Asosiy" / "Qo'shimcha" / "Kerakli")
+  const allMonths = useMemo(() => buildMonthsFromPacks(assignedPacks), [assignedPacks]);
+  const additionalMonths = useMemo(() => buildMonthsFromPacks(additionalPacks), [additionalPacks]);
+  const requiredMonths = useMemo(() => buildMonthsFromPacks(requiredPacks), [requiredPacks]);
+
+  // Combined, for resolving the active month/unit regardless of which tab it came from
+  const combinedMonths = useMemo(
+    () => [...allMonths, ...additionalMonths, ...requiredMonths],
+    [allMonths, additionalMonths, requiredMonths]
+  );
 
   // Derive the active selected month from the route parameters
   const selectedMonth = useMemo(() => {
     return (packId && monthId)
-      ? allMonths.find(m => m.packId === packId && m.id === monthId)
+      ? combinedMonths.find(m => m.packId === packId && m.id === monthId)
       : null;
-  }, [allMonths, packId, monthId]);
+  }, [combinedMonths, packId, monthId]);
 
   // Derive the active selected unit (topic) if unitId is provided
   const selectedUnit = useMemo(() => {
@@ -149,6 +160,54 @@ export default function StudentCorpDashboard() {
     student?.progress?.[`${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`]
   );
 
+  // Renders the top-level "months" grid for a given pack category (Asosiy / Qo'shimcha / Kerakli)
+  const renderMonthsGrid = (months, emptyIcon, emptyTitle, emptyDesc) => (
+    months.length === 0 ? (
+      <div className="empty-state">
+        <div className="empty-state-icon">{emptyIcon}</div>
+        <h3>{emptyTitle}</h3>
+        <p>{emptyDesc}</p>
+      </div>
+    ) : (
+      <div className="grid-cards">
+        {months.map((m) => (
+          <motion.div
+            key={`${m.packId}_${m.id}`}
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 22 }}
+            onClick={() => navigate(`/corp/student/month/${m.packId}/${m.id}`)}
+            className="pack-card"
+            role="button"
+            tabIndex={0}
+            style={{ cursor: 'pointer' }}
+          >
+            <div className="pack-card-top">
+              <div className="pack-card-icon" style={{ backgroundColor: 'var(--accent-1-dim)', borderColor: 'var(--border-light)' }}>
+                📅
+              </div>
+              <div className="pack-card-top-right">
+                <span className="pack-card-count">{(m.units || []).length} ta mavzu</span>
+              </div>
+            </div>
+
+            <div className="pack-card-body">
+              <h3 className="pack-card-title">{m.title}</h3>
+              <p className="pack-card-desc">{m.packTitle} ({m.packLevel})</p>
+            </div>
+
+            <div className="pack-card-footer">
+              <span className="pack-card-new-label">📅 Oylik reja</span>
+              <span className="pack-card-arrow">→</span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    )
+  );
+
   return (
     <div className="student-corp-container" style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
       
@@ -189,55 +248,22 @@ export default function StudentCorpDashboard() {
       {/* Tab Content */}
       <div className="library-content">
         
-        {activeTab === 'asosiy' && (
-          <div className="st-packs-section">
-            
-            {/* LEVEL 1: MONTHS LIST */}
+        <div className="st-packs-section">
+
+            {/* LEVEL 1: MONTHS LIST (source depends on active tab) */}
             {!selectedMonth && (
               <>
-                {allMonths.length === 0 ? (
-                  <div className="empty-state">
-                    <div className="empty-state-icon">📦</div>
-                    <h3>To'plamlar topilmadi</h3>
-                    <p>Hozircha sizga hech qanday o'quv rejasi biriktirilmagan.</p>
-                  </div>
-                ) : (
-                  <div className="grid-cards">
-                    {allMonths.map((m) => (
-                      <motion.div
-                        key={`${m.packId}_${m.id}`}
-                        whileHover={{ y: -4 }}
-                        whileTap={{ scale: 0.98 }}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-                        onClick={() => navigate(`/corp/student/month/${m.packId}/${m.id}`)}
-                        className="pack-card"
-                        role="button"
-                        tabIndex={0}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        <div className="pack-card-top">
-                          <div className="pack-card-icon" style={{ backgroundColor: 'var(--accent-1-dim)', borderColor: 'var(--border-light)' }}>
-                            📅
-                          </div>
-                          <div className="pack-card-top-right">
-                            <span className="pack-card-count">{(m.units || []).length} ta mavzu</span>
-                          </div>
-                        </div>
-
-                        <div className="pack-card-body">
-                          <h3 className="pack-card-title">{m.title}</h3>
-                          <p className="pack-card-desc">{m.packTitle} ({m.packLevel})</p>
-                        </div>
-
-                        <div className="pack-card-footer">
-                          <span className="pack-card-new-label">📅 Oylik reja</span>
-                          <span className="pack-card-arrow">→</span>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+                {activeTab === 'asosiy' && renderMonthsGrid(
+                  allMonths, '📦', "To'plamlar topilmadi",
+                  "Hozircha sizga hech qanday o'quv rejasi biriktirilmagan."
+                )}
+                {activeTab === 'qoshimcha' && renderMonthsGrid(
+                  additionalMonths, '✨', "Qo'shimcha materiallar yo'q",
+                  "Hozircha o'qituvchi tomonidan qo'shimcha materiallar biriktirilmagan."
+                )}
+                {activeTab === 'kerakli' && renderMonthsGrid(
+                  requiredMonths, '📌', "Zaruriy topshiriqlar yo'q",
+                  "Hozircha bajarilishi shart bo'lgan alohida topshiriqlar yo'q."
                 )}
               </>
             )}
@@ -416,24 +442,7 @@ export default function StudentCorpDashboard() {
               </motion.div>
             )}
 
-          </div>
-        )}
-
-        {activeTab === 'qoshimcha' && (
-          <div className="empty-state">
-            <div className="empty-state-icon">✨</div>
-            <h3>Qo'shimcha materiallar</h3>
-            <p>Hozircha o'qituvchi tomonidan qo'shimcha materiallar biriktirilmagan.</p>
-          </div>
-        )}
-
-        {activeTab === 'kerakli' && (
-          <div className="empty-state">
-            <div className="empty-state-icon">📌</div>
-            <h3>Zaruriy topshiriqlar</h3>
-            <p>Hozircha bajarilishi shart bo'lgan alohida topshiriqlar yo'q.</p>
-          </div>
-        )}
+        </div>
 
       </div>
 

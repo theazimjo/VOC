@@ -74,6 +74,316 @@
   color: var(--text-primary) !important;
 }
 
+/* ── Mobile Navbar Header ───────────────────── */
+.tpv-navbar {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Hero Info Card (mobile: always visible | desktop: hidden) ── */
+.tpv-hero-card {
+  display: none; /* desktop da yashirin */
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem 1rem;
+  margin-top: 1rem;
+}
+
+.tpv-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.tpv-hero-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.tpv-hero-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s;
+}
+
+.tpv-hero-copy-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+
+.tpv-hero-code {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #60a5fa;
+  margin-bottom: 0.85rem;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.tpv-hero-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tpv-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.tpv-hero-badge-green {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+}
+
+/* Left: back button */
+.tpv-navbar-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.18s;
+  flex-shrink: 0;
+}
+
+.tpv-navbar-back:hover {
+  background: var(--bg-glass-hover);
+}
+
+/* Center: title + subtitle */
+.tpv-navbar-center {
+  text-align: center;
+  min-width: 0;
+}
+
+.tpv-navbar-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tpv-navbar-sub {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Right: PIN + more btn */
+.tpv-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* PIN code copy button */
+.tpv-pin-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  white-space: nowrap;
+}
+
+.tpv-pin-btn:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+}
+
+/* More actions icon button */
+.tpv-navbar-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.18s;
+  flex-shrink: 0;
+}
+
+.tpv-navbar-action-btn:hover {
+  background: var(--bg-glass-hover);
+}
+
+/* Dropdown menu */
+.tpv-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 190px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 6px;
+  z-index: 20;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tpv-dropdown-item {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 9px 11px;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.16s;
+}
+
+.tpv-dropdown-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.tpv-dropdown-warn {
+  color: #f59e0b;
+}
+
+.tpv-dropdown-warn:hover {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.tpv-dropdown-danger {
+  color: #f87171;
+}
+
+.tpv-dropdown-danger:hover {
+  background: rgba(248, 113, 113, 0.1);
+}
+
+/* ── Group Segmented Tab Bar (Pill style) ────── */
+.group-seg-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 5px;
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.group-seg-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: var(--text-muted);
+  padding: 8px 10px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  line-height: 1;
+}
+
+.group-seg-btn:hover {
+  color: var(--text-secondary);
+  background: var(--bg-glass-hover);
+}
+
+.group-seg-btn.active {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--border);
+}
+
+/* Count badge inside each tab */
+.seg-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background: var(--bg-glass-hover);
+  color: var(--text-muted);
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: background 0.18s, color 0.18s;
+}
+
+.group-seg-btn.active .seg-badge {
+  background: rgba(59, 130, 246, 0.18);
+  color: #3b82f6;
+}
+
+/* ── Group Words Header ──────────────────────── */
+.group-words-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 /* ── Shared Stat Cards ──────────────────────── */
 .teacher-dashboard-container .c-stat-card {
   background: var(--bg-secondary) !important;
@@ -567,3 +877,505 @@
   color: #fff !important;
   border: none !important;
 }
+
+/* ── Courses Top Bar ────────────────────────── */
+.courses-top-bar {
+  flex-wrap: wrap;
+}
+
+.courses-top-bar > div:last-child {
+  flex-shrink: 0;
+}
+
+/* ── Top Search Lupa Button ───────────────────── */
+.top-search-lupa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #f8fafc;
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s, border-color 0.16s;
+  flex-shrink: 0;
+}
+
+.top-search-lupa-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE GROUP CARD (Screenshot match)
+   ═══════════════════════════════════════════════════════ */
+.mobile-group-card {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: #181820;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.45rem;
+  cursor: pointer;
+  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+}
+
+.mobile-group-card:hover {
+  background: #1e1e28;
+  border-color: rgba(59, 130, 246, 0.35);
+  transform: translateY(-1px);
+}
+
+.mgc-icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.15);
+  flex-shrink: 0;
+}
+
+.mgc-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.mgc-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mgc-sub {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.84rem;
+  color: #8e8e93;
+}
+
+.mgc-more-btn {
+  background: none;
+  border: none;
+  color: #8e8e93;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: color 0.16s, background 0.16s;
+  flex-shrink: 0;
+}
+
+.mgc-more-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Floating Action Button (Yangi Guruh) */
+.mobile-fab-btn {
+  position: fixed;
+  bottom: calc(82px + env(safe-area-inset-bottom, 12px));
+  right: 1.25rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #0a84ff, #0056b3);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(10, 132, 255, 0.38);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.mobile-fab-btn:hover {
+  background: linear-gradient(135deg, #0066cc, #004499);
+  transform: scale(1.04);
+}
+
+.mobile-fab-btn:active {
+  transform: scale(0.96);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FULLSCREEN GROUP SETTINGS MODAL (Screenshot match)
+   ═══════════════════════════════════════════════════════ */
+.gsm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #09090b;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  animation: gsmFadeIn 0.2s ease-out;
+}
+
+@keyframes gsmFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.gsm-container {
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.gsm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gsm-back-btn {
+  background: none;
+  border: none;
+  color: #f8fafc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 8px;
+  transition: background 0.16s;
+}
+
+.gsm-back-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.gsm-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.gsm-save-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-weight: 700;
+  font-size: 0.98rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: opacity 0.16s;
+}
+
+.gsm-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gsm-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.gsm-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gsm-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  text-transform: uppercase;
+  padding-left: 4px;
+}
+
+.gsm-title-danger {
+  color: #ef4444;
+}
+
+.gsm-card {
+  background: #181820;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.gsm-card-danger {
+  border-color: rgba(239, 68, 68, 0.22);
+}
+
+.gsm-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+}
+
+.gsm-row-clickable {
+  cursor: pointer;
+  transition: background 0.16s;
+}
+
+.gsm-row-clickable:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.gsm-row-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.gsm-icon-green {
+  color: #3b82f6;
+}
+
+.gsm-icon-blue {
+  color: #3b82f6;
+}
+
+.gsm-icon-red {
+  color: #f87171;
+}
+
+.gsm-row-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.gsm-input-label {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.gsm-text-input {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0;
+  outline: none;
+  width: 100%;
+}
+
+.gsm-row-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.gsm-text-danger {
+  color: #f87171;
+}
+
+.gsm-row-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.gsm-row-arrow {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.gsm-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 1.25rem;
+}
+
+/* iOS Style Toggle Switch */
+.gsm-toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.gsm-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.gsm-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.12);
+  border-radius: 26px;
+  transition: 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gsm-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #94a3b8;
+  border-radius: 50%;
+  transition: 0.25s ease;
+}
+
+.gsm-toggle-switch input:checked + .gsm-toggle-slider {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.gsm-toggle-switch input:checked + .gsm-toggle-slider:before {
+  transform: translateX(22px);
+  background-color: #ffffff;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — Teacher Dashboard
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  /* ── Container ───────────────────────────── */
+  .teacher-dashboard-container {
+    padding: 1rem;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 12px));
+  }
+
+  /* ── Group Navbar Header ─────────────────── */
+  .tpv-navbar {
+    grid-template-columns: 36px 1fr auto;
+    gap: 6px;
+    padding-bottom: 0.85rem;
+    border-bottom: none; /* hero card bor, border shart emas */
+  }
+
+  .tpv-navbar-title {
+    font-size: 1rem;
+  }
+
+  /* ── Hero Info Card — mobilda ko'rinadi ───── */
+  .tpv-hero-card {
+    display: block;
+  }
+
+
+  .tpv-pin-btn span {
+    display: none; /* mobilda faqat icon ko'rinsin */
+  }
+
+  .tpv-pin-btn {
+    padding: 6px 8px;
+    min-width: 34px;
+  }
+
+  /* ── Group Seg Bar ───────────────────────── */
+  .group-seg-btn {
+    padding: 7px 8px;
+    font-size: 0.78rem;
+    gap: 4px;
+  }
+
+  .seg-badge {
+    min-width: 18px;
+    height: 18px;
+    font-size: 0.68rem;
+  }
+
+  /* ── Group Words Header ──────────────────── */
+  .group-words-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  /* ── Groups Grid ─────────────────────────── */
+  .teacher-groups-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.45rem !important;
+  }
+
+  /* ── Packs Grid ──────────────────────────── */
+  .packs-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Stats Grid ──────────────────────────── */
+  .teacher-dashboard-container .stats-overview-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* ── Teacher Header Card ─────────────────── */
+  .teacher-header {
+    padding: 1.25rem !important;
+    border-radius: 14px !important;
+  }
+
+  .teacher-header h1 {
+    font-size: 1.4rem !important;
+  }
+
+  /* ── Modal ───────────────────────────────── */
+  .modal-content {
+    max-width: calc(100vw - 2rem) !important;
+    width: 100% !important;
+    margin: 1rem !important;
+  }
+
+  /* ── Tables ──────────────────────────────── */
+  .teachers-table-card {
+    overflow-x: auto;
+  }
+
+  .teachers-table {
+    min-width: 480px;
+  }
+
+  /* ── Settings form ───────────────────────── */
+  .teacher-dashboard-container form > div[style*="maxWidth"],
+  .teacher-dashboard-container form > div[style*="max-width"] {
+    max-width: 100% !important;
+  }
+
+  /* ── Courses top bar ─────────────────────── */
+  .teacher-dashboard-container .courses-title-area {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+}
+
+
