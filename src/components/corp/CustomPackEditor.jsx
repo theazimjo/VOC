@@ -3,7 +3,7 @@ import { Save, X } from 'lucide-react';
 import { createCustomPack, updateCustomPack } from '../../services/corpService';
 import './CustomPackEditor.css';
 
-export default function CustomPackEditor({ centerId, editPack = null, onSaved, onCancel }) {
+export default function CustomPackEditor({ centerId, editPack = null, onSaved, onCancel, ownerUid = null }) {
   const [title, setTitle] = useState(editPack?.title || '');
   const [description, setDescription] = useState(editPack?.description || '');
   const [submitting, setSubmitting] = useState(false);
@@ -26,7 +26,7 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
         await updateCustomPack(centerId, editPack.id, { title: title.trim(), description: description.trim() });
         if (onSaved) onSaved({ ...editPack, title: title.trim(), description: description.trim() });
       } else {
-        const pack = await createCustomPack(centerId, { title: title.trim(), description: description.trim() });
+        const pack = await createCustomPack(centerId, { title: title.trim(), description: description.trim() }, ownerUid);
         if (onSaved) onSaved(pack);
       }
     } catch (err) {

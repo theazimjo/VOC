@@ -8,8 +8,9 @@ import { usePacks } from '../../hooks/usePacks';
 import { weightedSelectWords, filterWordsForMode, speakWord } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { classifyWord } from '../../experiment/semanticClassifier';
-import { computeClusterCalibration } from '../../utils/memoryEngine';
+import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
+import { updateStudentUnitProgress } from '../../services/corpService';
 import IosSpinner from '../../components/common/IosSpinner';
 import PracticeHub from '../../components/Practice/PracticeHub';
 import Flashcard from '../../components/Practice/Flashcard';
@@ -47,6 +48,9 @@ function flattenAllWords(assignedPacks) {
             id: `${uniqueUnitId}::${dbWordId}`, // globally unique across topics
             dbWordId,
             sourceId: uniqueUnitId,
+            packId: pack.id, // the real pack id — distinct from sourceId (a per-unit composite key)
+            monthId: month.id,
+            unitId: unit.id,
             source: `${pack.title} - ${unit.title}`,
             language: pack.language || 'en-US',
           });
@@ -59,7 +63,7 @@ function flattenAllWords(assignedPacks) {
 
 export default function StudentCorpPractice() {
   const navigate = useNavigate();
-  const { user, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
+  const { user, membership, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
   const { allWords } = usePacks();
 
   const [allDbWords, setAllDbWords] = useState({});
@@ -212,11 +216,51 @@ export default function StudentCorpPractice() {
     }
   };
 
-  const handleComplete = (summary) => {
+  const handleComplete = async (summary) => {
     playSound('victory');
     triggerVibration('victory');
     setResults(summary);
     setStep('results');
+
+    if (membership?.centerId && membership?.groupId && user?.uid) {
+      // The hub mixes words from every assigned unit at once, so a session
+      // can touch several units (possibly across several packs) — write a
+      // separate per-unit snapshot for each one touched, keyed the same way
+      // CorpPractice.jsx does (packId + monthId_unitId), so a teacher can
+      // see exactly which topics this student has covered.
+      const touchedUnits = new Map();
+      practiceWords.forEach(w => {
+        if (!w.packId || !w.monthId || !w.unitId) return;
+        const key = `${w.packId}::${w.monthId}_${w.unitId}`;
+        if (!touchedUnits.has(key)) touchedUnits.set(key, { packId: w.packId, unitKey: `${w.monthId}_${w.unitId}` });
+      });
+
+      try {
+        await Promise.all([...touchedUnits.values()].map(async ({ packId: pid, unitKey }) => {
+          // Full unit (every word in it), not just this session's subset —
+          // gives a genuinely current snapshot of that topic, not just what
+          // was touched in this one session.
+          const unitWords = sourceWords
+            .filter(w => w.packId === pid && `${w.monthId}_${w.unitId}` === unitKey)
+            .map(w => ({ ...w, mastery: getDecayedMastery(w) }));
+          if (unitWords.length === 0) return;
+
+          const masteryPercent = Math.round(unitWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / unitWords.length);
+          const { retentionPercent, atRisk } = computeRetentionStats(unitWords);
+          const wordsLearned = unitWords.filter(w => (w.mastery || 0) >= 60).length;
+
+          await updateStudentUnitProgress(membership.centerId, membership.groupId, user.uid, pid, unitKey, {
+            wordsLearned,
+            totalWords: unitWords.length,
+            masteryPercent,
+            retentionPercent,
+            atRiskCount: atRisk,
+          });
+        }));
+      } catch (err) {
+        console.error('Error saving group progress:', err);
+      }
+    }
   };
 
   const handleBack = () => {

@@ -1119,8 +1119,8 @@
 }
 
 .teacher-card, .custom-pack-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: 1.5rem;
   display: flex;
@@ -1158,7 +1158,7 @@
 
 .teacher-card-info {
   font-size: 0.9rem;
-  color: #cbd5e1;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -1169,9 +1169,9 @@
   display: block;
   width: 100%;
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
   padding: 10px;
   border-radius: 10px;
   font-size: 0.8rem;
@@ -1207,20 +1207,20 @@
 .custom-pack-card h3 {
   font-size: 1.2rem;
   margin-bottom: 6px;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .pack-desc {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--text-muted);
   margin-bottom: 1rem;
 }
 
 .pack-meta {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border);
   padding-top: 10px;
   font-size: 0.85rem;
-  color: #cbd5e1;
+  color: var(--text-secondary);
 }
 
 .empty-state {

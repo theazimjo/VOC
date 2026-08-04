@@ -726,7 +726,103 @@
   font-weight: 600;
 }
 
+/* ── Row action dropdown (student rows, pack cards) ─────────────────── */
+.teacher-action-dropdown {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.dropdown-item:hover:not(:disabled) {
+  background: var(--bg-tertiary);
+}
+
+.dropdown-item:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.dropdown-item-danger {
+  color: var(--error);
+}
+
+/* ── Announcements banner ────────────────────────────────────────────── */
+.teacher-announcements-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.teacher-announcement-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.teacher-announcement-item strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.teacher-announcement-item p {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.teacher-announcement-item.announcement-type-warning {
+  border-color: var(--warning-dim, var(--warning));
+  color: var(--warning);
+}
+
+.teacher-announcement-item.announcement-type-warning p {
+  color: var(--text-primary);
+}
+
+.teacher-announcement-item.announcement-type-critical {
+  border-color: var(--error-dim, var(--error));
+  color: var(--error);
+}
+
+.teacher-announcement-item.announcement-type-critical p {
+  color: var(--text-primary);
+}
+
 /* ── Teachers Table ─────────────────────────── */
+.teacher-dashboard-container .teachers-table-card {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
 .teacher-dashboard-container .teachers-table {
   background: var(--bg-secondary) !important;
   border-radius: 16px;
@@ -752,6 +848,201 @@
   background: var(--bg-glass-hover) !important;
 }
 
+/* ── Group Statistics: stat cards ────────────── */
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.85rem;
+}
+
+.group-stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.group-stat-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.group-stat-label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+}
+
+.group-stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Group Statistics: per-student progress cards ──
+   Card layout instead of a wide table, so it reads
+   naturally on a phone without horizontal scrolling. */
+.student-progress-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+}
+
+.student-progress-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.student-progress-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.85rem;
+}
+
+.student-progress-pack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.student-progress-pack-row {
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.student-progress-pack-row:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.student-progress-pack-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.student-progress-pack-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pack-category-badge {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.pack-category-badge.cat-main {
+  background: rgba(10, 132, 255, 0.14);
+  color: #0a84ff;
+}
+
+.pack-category-badge.cat-required {
+  background: rgba(248, 113, 113, 0.14);
+  color: #f87171;
+}
+
+.pack-category-badge.cat-extra {
+  background: rgba(168, 85, 247, 0.14);
+  color: #c084fc;
+}
+
+/* ── Per-topic (unit) breakdown chips ────────────────────────────────
+   Answers "3-mavzuni yodlab keling dedim, kim qildi?" at a glance —
+   one chip per topic in the pack, colored by how much of it is mastered. */
+.unit-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.unit-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  white-space: nowrap;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unit-chip-done {
+  background: rgba(52, 199, 89, 0.12);
+  border-color: rgba(52, 199, 89, 0.3);
+  color: #34c759;
+}
+
+.unit-chip-partial {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #f59e0b;
+}
+
+.unit-chip-none {
+  opacity: 0.6;
+}
+
+.student-progress-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-progress-count {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4ade80;
+  min-width: 52px;
+  flex-shrink: 0;
+}
+
+.student-progress-track {
+  flex: 1;
+  min-width: 0;
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.student-progress-fill {
+  height: 100%;
+  background: #4ade80;
+  border-radius: 999px;
+}
+
+.student-progress-percent {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  min-width: 32px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.student-progress-last-activity {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
 /* ── Search Input ───────────────────────────── */
 .teacher-dashboard-container .search-input-wrap {
   background: var(--bg-secondary) !important;
@@ -769,6 +1060,20 @@
 .teacher-dashboard-container .search-input::placeholder,
 .teacher-dashboard-container input::placeholder {
   color: var(--text-muted) !important;
+}
+
+/* ── Pack library cards — flat by default in the shared base rule
+   (CenterAdminDashboard.css), scoped-enhanced here with elevation so
+   browsing feels consistent with the rest of the teacher dashboard. */
+.teacher-dashboard-container .custom-pack-card {
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.teacher-dashboard-container .custom-pack-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: rgba(59, 130, 246, 0.35);
 }
 
 .teacher-dashboard-container .search-icon {
@@ -895,9 +1200,9 @@
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  color: #f8fafc;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
   cursor: pointer;
   transition: background 0.16s, color 0.16s, border-color 0.16s;
   flex-shrink: 0;
@@ -916,18 +1221,20 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  background: #181820;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: 0.9rem 1.1rem;
   margin-bottom: 0.45rem;
   cursor: pointer;
-  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.16s ease, background 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
 }
 
 .mobile-group-card:hover {
-  background: #1e1e28;
+  background: var(--bg-glass-hover);
   border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: var(--shadow);
   transform: translateY(-1px);
 }
 
@@ -954,7 +1261,7 @@
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -965,13 +1272,13 @@
   align-items: center;
   gap: 5px;
   font-size: 0.84rem;
-  color: #8e8e93;
+  color: var(--text-muted);
 }
 
 .mgc-more-btn {
   background: none;
   border: none;
-  color: #8e8e93;
+  color: var(--text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -983,8 +1290,8 @@
 }
 
 .mgc-more-btn:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  background: var(--bg-glass-hover);
 }
 
 /* Floating Action Button (Yangi Guruh) */
@@ -1024,8 +1331,8 @@
   position: fixed;
   inset: 0;
   z-index: 10000;
-  background: #09090b;
-  color: #f8fafc;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   animation: gsmFadeIn 0.2s ease-out;
@@ -1050,13 +1357,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.1rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border);
 }
 
 .gsm-back-btn {
   background: none;
   border: none;
-  color: #f8fafc;
+  color: var(--text-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1066,20 +1373,20 @@
 }
 
 .gsm-back-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-glass-hover);
 }
 
 .gsm-title {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .gsm-save-btn {
   background: none;
   border: none;
-  color: #3b82f6;
+  color: var(--accent-1);
   font-weight: 700;
   font-size: 0.98rem;
   cursor: pointer;
@@ -1112,24 +1419,24 @@
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #64748b;
+  color: var(--text-muted);
   text-transform: uppercase;
   padding-left: 4px;
 }
 
 .gsm-title-danger {
-  color: #ef4444;
+  color: var(--error);
 }
 
 .gsm-card {
-  background: #181820;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
   border-radius: 18px;
   overflow: hidden;
 }
 
 .gsm-card-danger {
-  border-color: rgba(239, 68, 68, 0.22);
+  border-color: var(--error-dim, var(--error));
 }
 
 .gsm-row {
@@ -1145,27 +1452,27 @@
 }
 
 .gsm-row-clickable:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-glass-hover);
 }
 
 .gsm-row-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
 .gsm-icon-green {
-  color: #3b82f6;
+  color: var(--accent-1);
 }
 
 .gsm-icon-blue {
-  color: #3b82f6;
+  color: var(--accent-1);
 }
 
 .gsm-icon-red {
-  color: #f87171;
+  color: var(--error);
 }
 
 .gsm-row-content {
@@ -1178,14 +1485,14 @@
 
 .gsm-input-label {
   font-size: 0.75rem;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
 .gsm-text-input {
   background: none;
   border: none;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 600;
   padding: 0;
@@ -1196,26 +1503,26 @@
 .gsm-row-label {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #f8fafc;
+  color: var(--text-primary);
 }
 
 .gsm-text-danger {
-  color: #f87171;
+  color: var(--error);
 }
 
 .gsm-row-sub {
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .gsm-row-arrow {
-  color: #64748b;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
 .gsm-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--border);
   margin: 0 1.25rem;
 }
 
@@ -1238,10 +1545,10 @@
 .gsm-toggle-slider {
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--bg-tertiary);
   border-radius: 26px;
   transition: 0.25s ease;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
 }
 
 .gsm-toggle-slider:before {
@@ -1251,14 +1558,14 @@
   width: 20px;
   left: 2px;
   bottom: 2px;
-  background-color: #94a3b8;
+  background-color: var(--text-muted);
   border-radius: 50%;
   transition: 0.25s ease;
 }
 
 .gsm-toggle-switch input:checked + .gsm-toggle-slider {
-  background-color: #3b82f6;
-  border-color: #3b82f6;
+  background-color: var(--accent-1);
+  border-color: var(--accent-1);
 }
 
 .gsm-toggle-switch input:checked + .gsm-toggle-slider:before {
@@ -1294,14 +1601,10 @@
     display: block;
   }
 
-
-  .tpv-pin-btn span {
-    display: none; /* mobilda faqat icon ko'rinsin */
-  }
-
+  /* Hero card already shows the code big & copyable on mobile — the navbar
+     pin button is desktop-only to avoid showing the code twice. */
   .tpv-pin-btn {
-    padding: 6px 8px;
-    min-width: 34px;
+    display: none;
   }
 
   /* ── Group Seg Bar ───────────────────────── */

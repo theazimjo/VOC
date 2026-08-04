@@ -94,7 +94,10 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
       ]);
 
       setTeachers(teachersData || []);
-      setCustomPacks(packsData || []);
+      // Packs a teacher created privately (ownerUid set) never show up in
+      // the admin's course library — only center-wide packs the admin (or
+      // any teacher, before this) created.
+      setCustomPacks((packsData || []).filter(p => !p.ownerUid));
       setGroups(groupsData || []);
 
       if (centerData) {

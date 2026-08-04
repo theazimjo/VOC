@@ -378,7 +378,7 @@ export default function StudentCorpDashboard() {
                 <div className="pack-detail-info">
                   <div className="pack-detail-icon">📖</div>
                   <div className="pack-detail-text">
-                    <h1 style={{ color: 'var(--text-primary)', margin: 0, fontSize: '2rem', fontWeight: 800 }}>{selectedUnit.title}</h1>
+                    <h1 className="corp-unit-detail-title">{selectedUnit.title}</h1>
                     <div className="book-stats" style={{ marginTop: '6px' }}>
                       <span className="book-stat-badge" style={{ display: 'inline-flex', background: 'var(--accent-1-dim)', color: 'var(--accent-1)', fontSize: '0.8rem', fontWeight: 600, padding: '4px 10px', borderRadius: '12px' }}>
                         📝 {unitWords.length} ta so'z

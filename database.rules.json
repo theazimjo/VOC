@@ -110,7 +110,10 @@
       ".read": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
       "$uid": {
         ".read": "auth != null && (auth.uid === $uid || auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com')",
-        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && newData.exists() && newData.child('role').val() === 'teacher' && newData.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val()) || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && !newData.exists() && data.child('role').val() === 'teacher' && data.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val()) || (auth.uid === $uid && !data.exists() && newData.child('role').val() === 'teacher' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('status').val() === 'active' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('centerId').val() === newData.child('centerId').val()))"
+        ".write": "auth != null && (auth.token.email === 'azimjon29042006@gmail.com' || auth.token.email === 'azimjonxolmirzayev30@gmail.com' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && newData.exists() && newData.child('role').val() === 'teacher' && newData.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val()) || (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && !newData.exists() && data.child('role').val() === 'teacher' && data.child('centerId').val() === root.child('corpUsers').child(auth.uid).child('centerId').val()) || (auth.uid === $uid && !data.exists() && newData.child('role').val() === 'teacher' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('status').val() === 'active' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('centerId').val() === newData.child('centerId').val()))",
+
+        "teacherName": { ".write": "auth != null && auth.uid === $uid && data.child('role').val() === 'teacher'" },
+        "phone": { ".write": "auth != null && auth.uid === $uid && data.child('role').val() === 'teacher'" }
       }
     },
 
@@ -169,7 +172,10 @@
 
         "teachers": {
           "$teacherId": {
-            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (!data.exists() && newData.child('uid').val() === auth.uid && newData.child('inviteCode').exists() && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('status').val() === 'active' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('centerId').val() === $centerId))"
+            ".write": "auth != null && ((root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId) || (!data.exists() && newData.child('uid').val() === auth.uid && newData.child('inviteCode').exists() && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('status').val() === 'active' && root.child('teacherInvites').child(newData.child('inviteCode').val()).child('centerId').val() === $centerId))",
+
+            "name": { ".write": "auth != null && auth.uid === data.parent().child('uid').val()" },
+            "phone": { ".write": "auth != null && auth.uid === data.parent().child('uid').val()" }
           }
         },
 
@@ -181,7 +187,7 @@
 
         "customPacks": {
           "$packId": {
-            ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' || root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher')"
+            ".write": "auth != null && root.child('corpUsers').child(auth.uid).child('centerId').val() === $centerId && (root.child('corpUsers').child(auth.uid).child('role').val() === 'center_admin' || (root.child('corpUsers').child(auth.uid).child('role').val() === 'teacher' && (!data.exists() || !data.child('ownerUid').exists() || data.child('ownerUid').val() === auth.uid) && (!newData.exists() || !newData.child('ownerUid').exists() || newData.child('ownerUid').val() === auth.uid)))"
           }
         },
 

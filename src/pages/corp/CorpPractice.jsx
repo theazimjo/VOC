@@ -5,11 +5,11 @@ import { CheckCircle2, XCircle, ArrowLeft, RotateCcw, Trophy, ThumbsUp, Dumbbell
 import { ref, get, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { usePacks } from '../../hooks/usePacks';
-import { updateStudentGroupProgress } from '../../services/corpService';
+import { updateStudentUnitProgress } from '../../services/corpService';
 import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { classifyWord } from '../../experiment/semanticClassifier';
-import { computeClusterCalibration } from '../../utils/memoryEngine';
+import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
 import IosSpinner from '../../components/common/IosSpinner';
 import PracticeHub from '../../components/Practice/PracticeHub';
@@ -223,7 +223,26 @@ export default function CorpPractice() {
     if (membership?.centerId && membership?.groupId && user?.uid && loadedPack) {
       setSaving(true);
       try {
-        await updateStudentGroupProgress(membership.centerId, membership.groupId, user.uid, loadedPack.id, summary.correctCount);
+        const decayed = sourceWords.map(w => ({ ...w, mastery: getDecayedMastery(w) }));
+        const masteryPercent = decayed.length > 0
+          ? Math.round(decayed.reduce((sum, w) => sum + (w.mastery || 0), 0) / decayed.length)
+          : 0;
+        const { retentionPercent, atRisk } = computeRetentionStats(decayed);
+        const wordsLearned = decayed.filter(w => (w.mastery || 0) >= 60).length;
+
+        // Keyed by the real pack id (route param), not `loadedPack.id` (a
+        // composite unit id) — the teacher dashboard matches this against
+        // group.assignedPacks/customPacks, so a mismatched key here would
+        // silently never show up in teacher statistics. Written per-unit
+        // (monthId_unitId) so a teacher can see exactly which topic this
+        // was, not just an overall pack %.
+        await updateStudentUnitProgress(membership.centerId, membership.groupId, user.uid, packId, `${monthId}_${unitId}`, {
+          wordsLearned,
+          totalWords: decayed.length,
+          masteryPercent,
+          retentionPercent,
+          atRiskCount: atRisk,
+        });
       } catch (err) {
         console.error('Error saving progress:', err);
       } finally {

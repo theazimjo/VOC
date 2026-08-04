@@ -279,6 +279,16 @@
   box-shadow: var(--shadow-sm);
 }
 
+/* Topic Unit Detail Title */
+.corp-unit-detail-title {
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
 @media (max-width: 768px) {
   .library-tabs {
     width: 100% !important;
@@ -299,5 +309,9 @@
   /* Hide emoji icons inside tabs on mobile to save space */
   .library-tab-btn span.tab-icon {
     display: none !important;
+  }
+
+  .corp-unit-detail-title {
+    font-size: 1.15rem !important;
   }
 }

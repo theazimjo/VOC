@@ -1,4 +1,4 @@
-import { ref, set, get, update, push } from 'firebase/database';
+import { ref, set, get, update, push, remove } from 'firebase/database';
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { getSecondaryAuth } from '../firebaseSecondary';
@@ -337,9 +337,40 @@ export async function updateTeacherPassword(centerId, teacherId, uid, newPasswor
 }
 
 /**
- * Center Admin / Teacher: Create Custom Word Pack
+ * Teacher: self-update name/phone on their own record. Requires the
+ * database.rules.json addition granting `teachers/$teacherId` and
+ * `corpUsers/$uid` self-write for these two fields only.
  */
-export async function createCustomPack(centerId, packData) {
+export async function updateTeacherProfile(centerId, teacherId, uid, { name, phone }) {
+  const updates = {};
+  updates[`centers/${centerId}/teachers/${teacherId}/name`] = name;
+  updates[`centers/${centerId}/teachers/${teacherId}/phone`] = phone || '';
+  if (uid) {
+    updates[`corpUsers/${uid}/teacherName`] = name;
+    updates[`corpUsers/${uid}/phone`] = phone || '';
+  }
+  await update(ref(db), updates);
+  return { success: true };
+}
+
+// All packs — center-wide and teacher-private alike — live in the same
+// centers/{centerId}/customPacks collection, so a group's assignedPacks can
+// point at either kind and student practice (which resolves pack content via
+// getCenterCustomPacks, unmodified) keeps working with zero special-casing.
+// Privacy for a teacher-private pack (ownerUid set) is enforced two ways:
+// (1) database.rules.json only lets center_admin or that exact ownerUid
+// write it, so other teachers can't edit/delete a colleague's private pack;
+// (2) the admin dashboard and other teachers' pack lists filter it out
+// client-side (see CenterAdminDashboard.jsx / TeacherDashboard.jsx). Note
+// this is UI-level hiding, not airtight DB-level secrecy — `centers` is
+// already publicly readable for unrelated reasons (students join with no
+// account), an accepted trade-off for this internal-tool scale.
+
+/**
+ * Center Admin / Teacher: Create a Custom Word Pack. Pass `ownerUid` to tag
+ * it as a private pack owned by that teacher instead of a center-wide one.
+ */
+export async function createCustomPack(centerId, packData, ownerUid = null) {
   const packsRef = push(ref(db, `centers/${centerId}/customPacks`));
   const packId = packsRef.key;
 
@@ -353,6 +384,7 @@ export async function createCustomPack(centerId, packData) {
     wordCount: (packData.words || []).length,
     createdAt: new Date().toISOString(),
     createdBy: packData.createdBy || 'Center Admin',
+    ...(ownerUid ? { ownerUid } : {}),
   };
 
   await set(packsRef, payload);
@@ -361,16 +393,18 @@ export async function createCustomPack(centerId, packData) {
 
 /**
  * Center Admin / Teacher: Duplicate an existing custom pack (same words,
- * title suffixed) — a quick starting point for a variant pack.
+ * title suffixed) — a quick starting point for a variant pack. Duplicating
+ * always produces a private copy owned by `ownerUid` when given one, even
+ * if the source was a shared center pack.
  */
-export async function duplicateCustomPack(centerId, pack) {
+export async function duplicateCustomPack(centerId, pack, ownerUid = null) {
   return createCustomPack(centerId, {
     title: `${pack.title} (Nusxa)`,
     level: pack.level,
     description: pack.description,
     words: pack.words || [],
     createdBy: pack.createdBy,
-  });
+  }, ownerUid);
 }
 
 /**
@@ -646,12 +680,45 @@ export async function getGroupStudents(centerId, groupId) {
 }
 
 /**
- * Student: Update Learning Progress in a Group
+ * Teacher: Remove a student from one of their groups. Write access comes
+ * from the cascading `.write` rule on `groups/$groupId` (owning teacher),
+ * which already covers this nested path — no separate rule needed.
+ * Note: this can't clean up the student's own `users/{uid}/groupMemberships`
+ * pointer (teachers have no write access to another user's account tree),
+ * so it's left stale until the student next joins/switches groups.
  */
-export async function updateStudentGroupProgress(centerId, groupId, studentId, packId, wordsLearnedCount) {
-  const progressRef = ref(db, `centers/${centerId}/groups/${groupId}/students/${studentId}/progress/${packId}`);
-  await set(progressRef, {
-    wordsLearned: wordsLearnedCount,
+export async function removeStudentFromGroup(centerId, groupId, studentId) {
+  const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
+  const snap = await get(groupRef);
+  const currentCount = snap.exists() ? (snap.val().studentsCount || 0) : 0;
+
+  await remove(ref(db, `centers/${centerId}/groups/${groupId}/students/${studentId}`));
+  await update(groupRef, { studentsCount: Math.max(0, currentCount - 1) });
+  return true;
+}
+
+/**
+ * Student: Update Learning Progress for one unit within a group's assigned
+ * pack. `stats` mirrors the same mastery/retention numbers the student's own
+ * "Memory Twin" card computes (see StudentCorpDashboard.jsx) so the teacher
+ * sees equivalent numbers, since teachers have no read access to a
+ * student's raw `users/{uid}/words`.
+ *
+ * Written per-unit (`progress/{packId}/units/{unitKey}`) rather than one
+ * flat per-pack snapshot, so a teacher can see exactly which topics a
+ * student has covered ("3-mavzuni yodlab keling" — a teacher needs to check
+ * unit 3 specifically, not just an overall pack %). Uses `update()` on just
+ * this unit's node so practicing one unit never clobbers another unit's
+ * already-recorded progress under the same pack.
+ */
+export async function updateStudentUnitProgress(centerId, groupId, studentId, packId, unitKey, stats) {
+  const unitRef = ref(db, `centers/${centerId}/groups/${groupId}/students/${studentId}/progress/${packId}/units/${unitKey}`);
+  await update(unitRef, {
+    wordsLearned: stats.wordsLearned || 0,
+    totalWords: stats.totalWords || 0,
+    masteryPercent: stats.masteryPercent || 0,
+    retentionPercent: stats.retentionPercent || 0,
+    atRiskCount: stats.atRiskCount || 0,
     lastActivity: new Date().toISOString()
   });
 }
