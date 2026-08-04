@@ -1,100 +1,148 @@
-.achievements-section {
-  margin-top: var(--space-xl);
+/* Apple iOS Tizim Ranglari (Theme o'zgaruvchilariga mos keladi) */
+:root {
+  --ios-text-primary: #000000;
+  --ios-text-secondary: #8a8a8e;
+  --ios-text-muted: #aeaeb2;
+  --ios-separator: rgba(60, 60, 67, 0.18);
+  --ios-badge-bg: #f2f2f7;
+  --ios-accent-blue: #007aff;
+  --ios-accent-blue-dim: rgba(0, 122, 255, 0.12);
+  --ios-accent-gold: #ff9500;
+  --ios-accent-gold-dim: rgba(255, 149, 0, 0.15);
 }
 
-.achievements-header {
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ios-text-primary: #ffffff;
+    --ios-text-secondary: #ebebf599;
+    --ios-text-muted: #636366;
+    --ios-separator: rgba(84, 84, 88, 0.4);
+    --ios-badge-bg: #2c2c2e;
+    --ios-accent-blue: #0a84ff;
+    --ios-accent-blue-dim: rgba(10, 132, 255, 0.18);
+    --ios-accent-gold: #ff9f0a;
+    --ios-accent-gold-dim: rgba(255, 159, 10, 0.2);
+  }
+}
+
+.ios-achievements-section {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
+  margin-top: 16px;
+}
+
+/* Header */
+.ios-achievements-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-md);
+  margin-bottom: 14px;
+  padding: 0 4px;
 }
 
-.achievements-header h3 {
-  font-size: var(--font-lg);
+.ios-achievements-header h3 {
+  font-size: 20px;
   font-weight: 700;
-  color: var(--text-primary);
+  letter-spacing: -0.4px;
+  color: var(--ios-text-primary);
   margin: 0;
 }
 
-.achievements-count {
-  font-size: var(--font-sm);
-  font-weight: 700;
-  color: var(--accent-1);
-  background: var(--accent-1-dim);
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
+.ios-achievements-count {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ios-accent-blue);
+  background: var(--ios-accent-blue-dim);
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: -0.2px;
 }
 
-.achievements-category {
-  margin-bottom: var(--space-lg);
+/* Category */
+.ios-achievements-category {
+  margin-bottom: 22px;
 }
 
-.achievements-category-label {
-  font-size: 12px;
-  font-weight: 700;
+.ios-achievements-category-label {
+  font-size: 13px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-  margin-bottom: 8px;
+  letter-spacing: -0.08px;
+  color: var(--ios-text-secondary);
+  margin-bottom: 10px;
+  padding-left: 4px;
 }
 
-.achievements-grid {
+/* Grid */
+.ios-achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
 }
 
-.achievement-badge {
+/* Badge (Card) */
+.ios-achievement-badge {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 6px;
-  padding: 14px 8px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  transition: transform var(--transition-fast);
+  padding: 16px 10px;
+  background-color: var(--ios-badge-bg);
+  border-radius: 14px;
+  border: 0.5px solid var(--ios-separator);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  cursor: default;
+  user-select: none;
 }
 
-.achievement-badge:active {
-  transform: scale(0.96);
+.ios-achievement-badge:active {
+  transform: scale(0.95);
 }
 
-.achievement-badge-icon {
-  width: 44px;
-  height: 44px;
+/* Badge Icons */
+.ios-badge-icon {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
-.achievement-badge.unlocked .achievement-badge-icon {
-  background: var(--accent-3-dim);
-  color: var(--accent-3);
+/* Ochildi (Unlocked state) */
+.ios-achievement-badge.unlocked {
+  background-color: var(--ios-badge-bg);
 }
 
-.achievement-badge.locked {
+.ios-achievement-badge.unlocked .ios-badge-icon {
+  background: var(--ios-accent-gold-dim);
+  color: var(--ios-accent-gold);
+}
+
+/* Yopildi (Locked state) */
+.ios-achievement-badge.locked {
   opacity: 0.55;
 }
 
-.achievement-badge.locked .achievement-badge-icon {
-  background: var(--bg-tertiary);
-  color: var(--text-muted);
+.ios-achievement-badge.locked .ios-badge-icon {
+  background: rgba(142, 142, 147, 0.15);
+  color: var(--ios-text-secondary);
 }
 
-.achievement-badge-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.2;
+/* Texts */
+.ios-badge-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+  line-height: 1.25;
+  margin-bottom: 4px;
+  letter-spacing: -0.1px;
 }
 
-.achievement-badge-desc {
-  font-size: 10px;
-  color: var(--text-secondary);
-  font-weight: 500;
+.ios-badge-desc {
+  font-size: 11px;
+  color: var(--ios-text-secondary);
+  font-weight: 400;
   line-height: 1.3;
+  letter-spacing: -0.05px;
 }

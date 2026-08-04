@@ -1,148 +1,227 @@
-.profile-page {
+/* iOS Variables - O'zingizning temangizga moslashtirishingiz mumkin */
+:root {
+  --ios-bg: #f2f2f7;
+  --ios-card-bg: #ffffff;
+  --ios-text-primary: #000000;
+  --ios-text-secondary: #8a8a8e;
+  --ios-blue: #007aff;
+  --ios-red: #ff3b30;
+  --ios-separator: rgba(60, 60, 67, 0.29);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ios-bg: #000000;
+    --ios-card-bg: #1c1c1e;
+    --ios-text-primary: #ffffff;
+    --ios-text-secondary: #ebebf599;
+    --ios-blue: #0a84ff;
+    --ios-red: #ff453a;
+    --ios-separator: rgba(84, 84, 88, 0.65);
+  }
+}
+
+.ios-profile-page {
   max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* Agar sizning ilovangiz orqa foni boshqacha bo'lsa, buni olib tashlang: */
+  background-color: var(--ios-bg);
+  min-height: 100vh;
 }
 
-.profile-card {
-  background: var(--bg-glass);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
-  backdrop-filter: blur(16px);
-  text-align: center;
-  margin-bottom: var(--space-xl);
+.ios-header {
+  padding: 24px 16px 12px;
 }
 
-.profile-avatar {
-  width: 100px;
-  height: 100px;
+.ios-header h1 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--ios-text-primary);
+  margin: 0;
+}
+
+.ios-profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 30px;
+}
+
+.ios-avatar {
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background: var(--accent-1);
+  background: var(--ios-separator);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: white;
-  margin: 0 auto var(--space-lg);
-  border: 3px solid var(--border);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--ios-text-primary);
+  margin-bottom: 16px;
   overflow: hidden;
 }
 
-.profile-avatar img {
+.ios-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.profile-name {
-  font-size: var(--font-2xl);
-  font-weight: 700;
-  margin-bottom: var(--space-xs);
+.ios-profile-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ios-text-primary);
+  margin: 0 0 4px 0;
 }
 
-.profile-email {
-  color: var(--text-secondary);
-  font-size: var(--font-sm);
-  margin-bottom: var(--space-lg);
+.ios-profile-email {
+  font-size: 15px;
+  color: var(--ios-text-secondary);
+  margin: 0;
 }
 
-.profile-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  text-align: left;
+/* Inset Grouped Lists */
+.ios-section {
+  margin: 0 16px 24px;
 }
 
-.profile-actions {
-  display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-md);
+.ios-section-header {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--ios-text-secondary);
+  margin-bottom: 8px;
+  padding-left: 16px;
+  letter-spacing: -0.08px;
 }
 
-.group-mode-card {
-  text-align: left;
+.ios-section-footer {
+  font-size: 13px;
+  color: var(--ios-text-secondary);
+  margin-top: 8px;
+  padding: 0 16px;
+  line-height: 1.3;
 }
 
-.group-mode-card h3 {
-  font-size: var(--font-lg);
-  margin-bottom: var(--space-sm);
+.ios-list {
+  background-color: var(--ios-card-bg);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.group-mode-desc {
-  color: var(--text-secondary);
-  font-size: var(--font-sm);
-  margin-bottom: var(--space-md);
-  line-height: 1.5;
-}
-
-.group-mode-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.group-mode-input-wrap {
+.ios-list-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 var(--space-md);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--bg-glass);
-}
-
-.group-mode-input-wrap input {
-  flex: 1;
-  border: none;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--ios-separator);
   background: none;
-  padding: 12px 0;
-  font-size: var(--font-md);
-  letter-spacing: 2px;
-  color: var(--text-primary);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  text-align: left;
+  font-size: 17px;
 }
 
-.group-mode-input-wrap input:focus {
+/* Oxirgi element chizig'ini olib tashlash */
+.ios-list-item:last-child {
+  border-bottom: none;
+}
+
+.ios-list-item.disabled {
+  opacity: 0.6;
+}
+
+.ios-list-item label {
+  color: var(--ios-text-primary);
+  width: 100px;
+  /* Label kengligi */
+  flex-shrink: 0;
+}
+
+.ios-list-item input {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  font-size: 17px;
+  color: var(--ios-text-primary);
+  text-align: right;
+  padding: 0;
   outline: none;
+  /* iOS da input zoom bo'lmasligi uchun font size kamida 16px bo'lishi shart */
 }
 
-.group-mode-error {
-  color: var(--error);
-  font-size: var(--font-sm);
+.ios-list-item input::placeholder {
+  color: var(--ios-text-secondary);
 }
 
-.danger-zone {
-  background: var(--bg-glass);
-  border: 1px solid var(--error-dim);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+/* Buttons */
+.ios-action-section {
+  padding: 0 16px;
+  margin-bottom: 30px;
 }
 
-.danger-zone h3 {
-  color: var(--error);
-  font-size: var(--font-lg);
-  margin-bottom: var(--space-sm);
+.ios-btn-primary {
+  width: 100%;
+  background-color: var(--ios-blue);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.danger-zone p {
-  color: var(--text-secondary);
-  font-size: var(--font-sm);
-  margin-bottom: var(--space-md);
+.ios-btn-primary:active {
+  opacity: 0.7;
 }
 
-@media (max-width: 600px) {
-  .profile-card {
-    padding: var(--space-lg) var(--space-md);
-    margin-bottom: var(--space-md);
-  }
+.ios-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-  .profile-avatar {
-    width: 80px;
-    height: 80px;
-    font-size: 2rem;
-    margin-bottom: var(--space-md);
-  }
+.ios-destructive-btn {
+  color: var(--ios-red);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .danger-zone {
-    padding: var(--space-md);
-  }
+.ios-destructive-btn:active {
+  background-color: var(--ios-separator);
+}
+
+/* Messages */
+.ios-message {
+  margin: 0 16px 16px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ios-message.success {
+  background-color: rgba(52, 199, 89, 0.15);
+  color: #34c759;
+}
+
+.ios-message.error {
+  background-color: rgba(255, 59, 48, 0.15);
+  color: var(--ios-red);
+}
+
+/* Achievements wrapper for standard background */
+.ios-achievements-container {
+  background-color: var(--ios-card-bg);
+  border-radius: 10px;
+  padding: 16px;
 }

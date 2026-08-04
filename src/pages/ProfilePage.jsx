@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { UserCircle2, AlertTriangle, Users, Key, ArrowRight } from 'lucide-react';
+import { UserCircle2, LogOut } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useAvatar } from '../hooks/useAvatar';
@@ -17,42 +17,16 @@ export default function ProfilePage() {
   const [message, setMessage] = useState('');
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
 
-  const { loading: groupLoading, membership } = useGroupMode();
-  const [groupCode, setGroupCode] = useState('');
-  const [groupError, setGroupError] = useState('');
-  const [joining, setJoining] = useState(false);
-
-  const handleJoinGroup = async (e) => {
-    e.preventDefault();
-    if (!groupCode.trim()) return;
-    setGroupError('');
-    setJoining(true);
-    try {
-      await joinGroupAsUser(groupCode.trim(), user.uid, {
-        name: user.displayName || user.email,
-        email: user.email,
-      });
-      // useGroupMode's live listener flips appMode to 'group', which
-      // redirects the whole app to /corp/student via Layout.jsx.
-    } catch (err) {
-      setGroupError(err.message || 'Guruhga ulanishda xatolik yuz berdi.');
-      setJoining(false);
-    }
-  };
-
-  const handleReturnToGroupMode = async () => {
-    await setAppMode(user.uid, 'group');
-  };
-
   const handleSave = async (e) => {
     e.preventDefault();
     setSaving(true);
     try {
       await updateUserProfile({ displayName });
-      setMessage("Profil muvaffaqiyatli yangilandi! ✅");
+      setMessage("Muvaffaqiyatli saqlandi");
       setTimeout(() => setMessage(''), 3000);
     } catch {
-      setMessage("Xatolik yuz berdi ❌");
+      setMessage("Xatolik yuz berdi");
+      setTimeout(() => setMessage(''), 3000);
     }
     setSaving(false);
   };
@@ -68,119 +42,85 @@ export default function ProfilePage() {
 
   return (
     <motion.div
-      className="profile-page"
-      initial={{ opacity: 0, y: 20 }}
+      className="ios-profile-page"
+      initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
     >
-      <div className="page-header">
-        <h1><UserCircle2 size={26} strokeWidth={2.1} style={{ verticalAlign: '-4px', marginRight: '8px' }} />Profil</h1>
+      <div className="ios-header">
+        <h1>Profil</h1>
       </div>
 
-      <div className="profile-card">
-        <div className="profile-avatar">
+      <div className="ios-profile-header">
+        <div className="ios-avatar">
           {avatarSrc && !avatarError ? (
             <img src={avatarSrc} alt="Avatar" />
           ) : (
-            getInitial()
+            <span>{getInitial()}</span>
           )}
         </div>
-        <div className="profile-name">{user?.displayName || 'Foydalanuvchi'}</div>
-        <div className="profile-email">{user?.email}</div>
-
-        <form className="profile-form" onSubmit={handleSave}>
-          <div className="input-group">
-            <label>Ism</label>
-            <input
-              type="text"
-              className="input"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="Ismingizni kiriting"
-            />
-          </div>
-
-          <div className="input-group">
-            <label>Email</label>
-            <input
-              type="email"
-              className="input"
-              value={user?.email || ''}
-              disabled
-              style={{ opacity: 0.6 }}
-            />
-          </div>
-
-          {message && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              style={{ 
-                color: message.includes('✅') ? 'var(--success)' : 'var(--error)',
-                fontSize: 'var(--font-sm)',
-                fontWeight: 500
-              }}
-            >
-              {message}
-            </motion.p>
-          )}
-
-          <div className="profile-actions">
-            <button type="submit" className="btn btn-primary" disabled={saving}>
-              {saving ? 'Saqlanmoqda...' : 'Saqlash'}
-            </button>
-          </div>
-        </form>
+        <h2 className="ios-profile-name">{user?.displayName || 'Foydalanuvchi'}</h2>
+        <p className="ios-profile-email">{user?.email}</p>
       </div>
 
-      <AchievementsGrid />
-
-      {!groupLoading && (
-        <div className="profile-card group-mode-card">
-          <h3><Users size={18} strokeWidth={2.2} style={{ verticalAlign: '-3px', marginRight: '6px' }} />Guruh rejimi</h3>
-
-          {membership ? (
-            <>
-              <p className="group-mode-desc">
-                Siz <strong>{membership.groupName}</strong> guruhiga a'zosiz. Guruh rejimiga o'tsangiz, butun tizim
-                o'qituvchingiz bergan so'zlarni o'rganish rejimiga o'tadi.
-              </p>
-              <button className="btn btn-primary" onClick={handleReturnToGroupMode}>
-                Guruh rejimiga o'tish <ArrowRight size={16} style={{ verticalAlign: '-3px', marginLeft: '4px' }} />
-              </button>
-            </>
-          ) : (
-            <>
-              <p className="group-mode-desc">
-                O'qituvchingiz bergan 6 xonali guruh kodini kiriting. Qo'shilgach, butun tizim guruh rejimiga o'tadi —
-                istalgan vaqt bu yerga qaytib, yana individual rejimga o'ta olasiz.
-              </p>
-              <form className="group-mode-form" onSubmit={handleJoinGroup}>
-                <div className="group-mode-input-wrap">
-                  <Key size={16} />
-                  <input
-                    type="text"
-                    maxLength={6}
-                    placeholder="123456"
-                    value={groupCode}
-                    onChange={e => setGroupCode(e.target.value.replace(/[^0-9]/g, ''))}
-                  />
-                </div>
-                {groupError && <p className="group-mode-error">{groupError}</p>}
-                <button type="submit" className="btn btn-primary" disabled={joining}>
-                  {joining ? 'Ulanmoqda...' : 'Guruhga Qo\'shilish'}
-                </button>
-              </form>
-            </>
-          )}
+      <form onSubmit={handleSave}>
+        <div className="ios-section">
+          <div className="ios-section-header">SHAXSIY MA'LUMOTLAR</div>
+          <div className="ios-list">
+            <div className="ios-list-item">
+              <label>Ism</label>
+              <input
+                type="text"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="Ismingiz"
+              />
+            </div>
+            <div className="ios-list-item disabled">
+              <label>Email</label>
+              <input
+                type="email"
+                value={user?.email || ''}
+                disabled
+              />
+            </div>
+          </div>
+          <div className="ios-section-footer">
+            Email manzilini o'zgartirib bo'lmaydi.
+          </div>
         </div>
-      )}
 
-      <div className="danger-zone">
-        <h3><AlertTriangle size={17} strokeWidth={2.2} style={{ verticalAlign: '-3px', marginRight: '6px' }} />Xavfli zona</h3>
-        <p>Hisobdan chiqish</p>
-        <button className="btn btn-danger" onClick={handleLogout}>
-          Chiqish
-        </button>
+        {message && (
+          <motion.div
+            className={`ios-message ${message.includes('Xato') ? 'error' : 'success'}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            {message}
+          </motion.div>
+        )}
+
+        <div className="ios-action-section">
+          <button type="submit" className="ios-btn-primary" disabled={saving}>
+            {saving ? 'Saqlanmoqda...' : 'O\'zgarishlarni saqlash'}
+          </button>
+        </div>
+      </form>
+      {/* 
+      <div className="ios-section">
+        <div className="ios-section-header">YUTUQLAR</div>
+        <div className="ios-achievements-container">
+          <AchievementsGrid />
+        </div>
+      </div> */}
+
+      <div className="ios-section">
+        <div className="ios-list">
+          <button type="button" className="ios-list-item ios-destructive-btn" onClick={handleLogout}>
+            <span>Hisobdan chiqish</span>
+            <LogOut size={20} />
+          </button>
+        </div>
       </div>
     </motion.div>
   );

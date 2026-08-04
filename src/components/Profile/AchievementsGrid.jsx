@@ -10,7 +10,7 @@ const ICONS = { BookOpen, CheckCircle2, Trophy, Flame };
 const CATEGORY_LABELS = {
   words: "So'zlar",
   mastered: "O'zlashtirish",
-  streak: 'Seriya'
+  streak: "Seriya"
 };
 
 export default function AchievementsGrid() {
@@ -27,35 +27,45 @@ export default function AchievementsGrid() {
   const categories = ['words', 'mastered', 'streak'];
 
   return (
-    <div className="achievements-section">
-      <div className="achievements-header">
+    <div className="ios-achievements-section">
+      <div className="ios-achievements-header">
         <h3>Yutuqlar</h3>
-        <span className="achievements-count">{unlockedCount} / {achievements.length}</span>
+        <span className="ios-achievements-count">
+          {unlockedCount} / {achievements.length}
+        </span>
       </div>
 
       {categories.map(category => {
         const items = achievements.filter(a => a.category === category);
         return (
-          <div key={category} className="achievements-category">
-            <div className="achievements-category-label">{CATEGORY_LABELS[category]}</div>
-            <div className="achievements-grid">
+          <div key={category} className="ios-achievements-category">
+            <div className="ios-achievements-category-label">
+              {CATEGORY_LABELS[category]}
+            </div>
+            <div className="ios-achievements-grid">
               {items.map((a, idx) => {
                 const Icon = ICONS[a.icon];
                 return (
                   <motion.div
                     key={a.id}
-                    className={`achievement-badge ${a.unlocked ? 'unlocked' : 'locked'}`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.03 }}
+                    className={`ios-achievement-badge ${a.unlocked ? 'unlocked' : 'locked'}`}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: idx * 0.03, duration: 0.2 }}
                     title={a.desc}
                   >
-                    <div className="achievement-badge-icon">
-                      {a.unlocked ? <Icon size={22} strokeWidth={2.1} /> : <Lock size={18} strokeWidth={2.1} />}
+                    <div className="ios-badge-icon">
+                      {a.unlocked ? (
+                        <Icon size={24} strokeWidth={2.2} />
+                      ) : (
+                        <Lock size={18} strokeWidth={2.2} />
+                      )}
                     </div>
-                    <div className="achievement-badge-title">{a.title}</div>
-                    <div className="achievement-badge-desc">
-                      {a.unlocked ? a.desc : `${Math.min(a.current, a.threshold)} / ${a.threshold}`}
+                    <div className="ios-badge-title">{a.title}</div>
+                    <div className="ios-badge-desc">
+                      {a.unlocked
+                        ? a.desc
+                        : `${Math.min(a.current, a.threshold)} / ${a.threshold}`}
                     </div>
                   </motion.div>
                 );
