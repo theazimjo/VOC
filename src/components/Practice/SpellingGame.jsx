@@ -33,7 +33,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   useEffect(() => {
     if (!currentWord) return;
-    setScrambled(currentWord.word.split('').sort(() => 0.5 - Math.random()).join(' '));
+    setScrambled(currentWord.word.trim().split('').sort(() => 0.5 - Math.random()).join(' '));
     setInput('');
     setAnswered(false);
     setIsCorrect(false);
@@ -52,7 +52,9 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     if (!submittedInput.trim()) return;
 
     const responseTime = (Date.now() - startTimeRef.current) / 1000;
-    const correct = submittedInput.toLowerCase().trim() === currentWord.word.toLowerCase();
+    const cleanSubmitted = submittedInput.toLowerCase().trim().replace(/\s+/g, ' ');
+    const cleanTarget = currentWord.word.toLowerCase().trim().replace(/\s+/g, ' ');
+    const correct = cleanSubmitted === cleanTarget;
     setAnswered(true);
     setIsCorrect(correct);
     if (onAnswer) onAnswer(currentWord, correct);
@@ -105,7 +107,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   const handleSkip = async () => {
     if (answered) return;
     const responseTime = (Date.now() - startTimeRef.current) / 1000;
-    setInput(currentWord.word);
+    setInput(currentWord.word.trim());
     setAnswered(true);
     setIsCorrect(false);
     if (onAnswer) onAnswer(currentWord, false);
