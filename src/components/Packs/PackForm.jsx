@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Check } from 'lucide-react';
 import { packIcons, bookColors, speechLanguages } from '../../utils/helpers';
 import './PackForm.css';
 
@@ -11,6 +12,8 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const [folderId, setFolderId] = useState('');
   const [language, setLanguage] = useState('en-US');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [folderMenuOpen, setFolderMenuOpen] = useState(false);
+  const folderMenuRef = useRef(null);
 
   const isLocked = editPack && editPack.name === 'Irregular Verbs';
 
@@ -31,7 +34,30 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setLanguage('en-US');
     }
     setIsSubmitting(false);
+    setFolderMenuOpen(false);
   }, [editPack, isOpen, defaultFolderId]);
+
+  // Close the folder dropdown when clicking/tapping anywhere outside it.
+  useEffect(() => {
+    if (!folderMenuOpen) return;
+    const handleOutside = (e) => {
+      if (folderMenuRef.current && !folderMenuRef.current.contains(e.target)) {
+        setFolderMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutside);
+    document.addEventListener('touchstart', handleOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+      document.removeEventListener('touchstart', handleOutside);
+    };
+  }, [folderMenuOpen]);
+
+  const selectedFolder = folderId
+    ? folders.find(f => f.id === folderId)
+    : null;
+  const selectedFolderIcon = selectedFolder ? (selectedFolder.icon || '📁') : '📂';
+  const selectedFolderName = selectedFolder ? selectedFolder.name : "Asosiy ro'yxat";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,22 +123,59 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                 {folders.length > 0 && (
                   <div className="input-group">
                     <label>Papka</label>
-                    <div className="level-selector">
-                      <div
-                        className={`level-option ${!folderId ? 'selected' : ''}`}
-                        onClick={() => setFolderId('')}
+                    <div className="folder-select" ref={folderMenuRef}>
+                      <button
+                        type="button"
+                        className="folder-select-trigger"
+                        onClick={() => setFolderMenuOpen(o => !o)}
+                        aria-expanded={folderMenuOpen}
+                        aria-haspopup="listbox"
                       >
-                        Asosiy ro'yxat
-                      </div>
-                      {folders.map((f) => (
-                        <div
-                          key={f.id}
-                          className={`level-option ${folderId === f.id ? 'selected' : ''}`}
-                          onClick={() => setFolderId(f.id)}
-                        >
-                          {f.icon} {f.name}
-                        </div>
-                      ))}
+                        <span className="folder-select-trigger-label">
+                          <span className="folder-select-icon">{selectedFolderIcon}</span>
+                          {selectedFolderName}
+                        </span>
+                        <ChevronDown size={16} className={`folder-select-chevron ${folderMenuOpen ? 'open' : ''}`} />
+                      </button>
+
+                      <AnimatePresence>
+                        {folderMenuOpen && (
+                          <motion.div
+                            className="folder-select-panel"
+                            role="listbox"
+                            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                            transition={{ duration: 0.15 }}
+                          >
+                            <button
+                              type="button"
+                              role="option"
+                              aria-selected={!folderId}
+                              className={`folder-select-option ${!folderId ? 'selected' : ''}`}
+                              onClick={() => { setFolderId(''); setFolderMenuOpen(false); }}
+                            >
+                              <span className="folder-select-option-icon">📂</span>
+                              <span className="folder-select-option-name">Asosiy ro'yxat</span>
+                              {!folderId && <Check size={15} className="folder-select-option-check" />}
+                            </button>
+                            {folders.map((f) => (
+                              <button
+                                key={f.id}
+                                type="button"
+                                role="option"
+                                aria-selected={folderId === f.id}
+                                className={`folder-select-option ${folderId === f.id ? 'selected' : ''}`}
+                                onClick={() => { setFolderId(f.id); setFolderMenuOpen(false); }}
+                              >
+                                <span className="folder-select-option-icon">{f.icon || '📁'}</span>
+                                <span className="folder-select-option-name">{f.name}</span>
+                                {folderId === f.id && <Check size={15} className="folder-select-option-check" />}
+                              </button>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
                 )}
