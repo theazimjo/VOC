@@ -99,10 +99,14 @@ export default function MixedPractice() {
 
       let options = [];
       if (type === 'quiz') {
-        const otherWords = wordsPool.filter(w => w.id !== wordObj.id);
+        // Exclude words sharing the same translation too, not just the same
+        // id — otherwise two options can render with identical text (one
+        // marked correct, one wrong), which is confusing for the learner.
+        const otherWords = wordsPool.filter(w => w.id !== wordObj.id && w.translation !== wordObj.translation);
         const wrongOptions = shuffleArray(otherWords)
           .slice(0, 3)
           .map(w => w.translation);
+        while (wrongOptions.length < 3) wrongOptions.push(`Variant ${wrongOptions.length + 1}`);
         options = shuffleArray([wordObj.translation, ...wrongOptions]);
       }
 

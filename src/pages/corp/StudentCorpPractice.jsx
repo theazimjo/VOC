@@ -5,7 +5,7 @@ import { CheckCircle2, XCircle, Trophy, ThumbsUp, Dumbbell, BookOpen, Volume2, T
 import { ref, onValue, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { usePacks } from '../../hooks/usePacks';
-import { weightedSelectWords, filterWordsForMode, speakWord } from '../../utils/helpers';
+import { weightedSelectWords, filterWordsForMode, speakWord, PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { classifyWord } from '../../experiment/semanticClassifier';
 import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
@@ -138,11 +138,15 @@ export default function StudentCorpPractice() {
 
   const handleStartPractice = (mode) => {
     if (sourceWords.length === 0) return;
+
+    const pool = filterWordsForMode(sourceWords, mode);
+    const minWords = PRACTICE_MODE_MIN_WORDS[mode] || 1;
+    if (pool.length < minWords) return;
+
     setSelectedMode(mode);
     setWrongWords([]);
     setProgressPct(0);
 
-    const pool = filterWordsForMode(sourceWords, mode);
     const selected = weightedSelectWords(pool, wordCount);
     setPracticeWords(selected);
     setStep('intro');
@@ -332,7 +336,7 @@ export default function StudentCorpPractice() {
   return (
     <div className="practice-page" style={{ padding: '0 var(--space-md)' }}>
 
-      {(step !== 'results' || step === 'mode') && (
+      {step !== 'results' && (
         <div className="practice-page-header">
           {step !== 'mode' && (
             <button className="clean-back-arrow" onClick={handleBack} title="Orqaga">

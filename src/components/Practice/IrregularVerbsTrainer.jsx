@@ -6,6 +6,24 @@ import { weightedSelectWords, shuffleArray } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import './IrregularVerbsTrainer.css';
 
+const escapeRegex = (str) => str.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+// Wraps occurrences of the given verb forms in <strong> WITHOUT going through
+// dangerouslySetInnerHTML — `text` comes from a pack's own (user-authored)
+// `example` field, so building raw HTML from it would let a malicious pack
+// inject arbitrary markup/scripts into anyone practicing it. Returns an array
+// of strings/elements safe to render directly as React children.
+function highlightForms(text, forms) {
+  const cleanForms = [...new Set(forms.map(f => f.trim()).filter(Boolean))];
+  if (cleanForms.length === 0) return [text];
+
+  const sorted = cleanForms.sort((a, b) => b.length - a.length);
+  const pattern = new RegExp(`\\b(${sorted.map(escapeRegex).join('|')})\\b`, 'gi');
+  return text.split(pattern).map((part, i) => (
+    i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+  ));
+}
+
 export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, onProgress, initialSubStep, onExit }) {
   const [sessionVerbs, setSessionVerbs] = useState([]);
   const [subStep, setSubStep] = useState(initialSubStep || 'study'); // 'study' | 'practice'
@@ -38,11 +56,16 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
   const [sentenceQuestion, setSentenceQuestion] = useState(null); // { text, correctFormIndex, correctText }
   const [selectedChoice, setSelectedChoice] = useState(null); // index of chosen option
 
-  // Helper to split options
+  // Helper to split options. Both sides are split on '/' (not just
+  // `correctOption`) — a verb form itself can be a multi-form string like
+  // "burned/burnt" (e.g. a prefilled table cell, or an order-game button
+  // whose label IS the verb's stored text verbatim), and comparing that raw
+  // string against the split targets would never match, wrongly marking an
+  // untouched/correct field as wrong.
   const isCorrectMatch = (userInput, correctOption) => {
-    const cleaned = userInput.trim().toLowerCase();
+    const inputParts = userInput.trim().toLowerCase().split('/').map(t => t.trim()).filter(Boolean);
     const targets = correctOption.toLowerCase().split('/').map(t => t.trim());
-    return targets.includes(cleaned);
+    return inputParts.some(p => targets.includes(p));
   };
 
   // Report progress
@@ -195,9 +218,11 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
         const targets = check.val.split('/').map(t => t.trim());
         for (const t of targets) {
           if (wordsInSentence.includes(t)) {
-            const regex = new RegExp(`\\b${t}\\b`, 'i');
-            const questionText = sentence.replace(regex, '<strong>_______</strong>');
-            
+            const regex = new RegExp(`\\b${escapeRegex(t)}\\b`, 'i');
+            const match = regex.exec(sentence);
+            const before = match ? sentence.slice(0, match.index) : sentence;
+            const after = match ? sentence.slice(match.index + match[0].length) : '';
+
             const choices = shuffleArray([
               { label: 'V1', text: verb.v1 },
               { label: 'V2', text: verb.v2 },
@@ -207,7 +232,8 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
             const correctIndex = choices.findIndex(c => c.label.toLowerCase() === check.key);
 
             return {
-              questionText,
+              before,
+              after,
               choices,
               correctIndex,
               correctText: check.val
@@ -292,9 +318,9 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     const isCorrectChoice = isCorrectMatch(btn.text, expectedFormText);
 
     if (isCorrectChoice) {
-      const updatedButtons = [...orderButtons];
-      updatedButtons[btnIdx].clicked = true;
-      updatedButtons[btnIdx].clickedIndex = orderStep; 
+      const updatedButtons = orderButtons.map((b, idx) =>
+        idx === btnIdx ? { ...b, clicked: true, clickedIndex: orderStep } : b
+      );
       setOrderButtons(updatedButtons);
 
       if (orderStep === 2) {
@@ -435,28 +461,16 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       <div className="example-sentences">
                         {sessionVerbs[studyIndex].example.split('/').map((s, i) => {
                           const trimmed = s.trim();
-                          let highlighted = trimmed;
-
-                          const escapeRegex = (str) => str.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
                           const forms = [
                             ...sessionVerbs[studyIndex].v1.split('/'),
                             ...sessionVerbs[studyIndex].v2.split('/'),
                             ...sessionVerbs[studyIndex].v3.split('/')
-                          ].map(f => f.trim()).filter(Boolean);
-
-                          forms.sort((a,b) => b.length - a.length);
-
-                          for (const form of forms) {
-                            const regex = new RegExp(`\\b${escapeRegex(form)}\\b`, 'gi');
-                            highlighted = highlighted.replace(regex, `<strong>$&</strong>`);
-                          }
+                          ];
 
                           return (
-                            <div
-                              key={i}
-                              className="example-sentence-item"
-                              dangerouslySetInnerHTML={{ __html: highlighted }}
-                            />
+                            <div key={i} className="example-sentence-item">
+                              {highlightForms(trimmed, forms)}
+                            </div>
                           );
                         })}
                       </div>
@@ -621,10 +635,9 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
             {/* ------------------------------------ */}
             {qType === 2 && sentenceQuestion && (
               <div className="game-type-wrap" style={{ width: '100%' }}>
-                <div 
-                  className="sentence-text-question" 
-                  dangerouslySetInnerHTML={{ __html: sentenceQuestion.questionText }} 
-                />
+                <div className="sentence-text-question">
+                  {sentenceQuestion.before}<strong>_______</strong>{sentenceQuestion.after}
+                </div>
                 <div className="trainer-instruction">
                   Mos tushuvchi fe'lni tanlang
                 </div>

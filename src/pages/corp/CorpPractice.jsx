@@ -6,7 +6,7 @@ import { ref, get, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { usePacks } from '../../hooks/usePacks';
 import { updateStudentUnitProgress } from '../../services/corpService';
-import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord } from '../../utils/helpers';
+import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { classifyWord } from '../../experiment/semanticClassifier';
 import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
@@ -117,13 +117,26 @@ export default function CorpPractice() {
   // Intro shape transition timer
   useEffect(() => {
     if (step !== 'intro') return;
-    
+
     const timerId = setTimeout(() => {
       setStep('practice');
     }, 700);
 
     return () => clearTimeout(timerId);
   }, [step]);
+
+  // StudentLayout only renders this route once assignedPacks/requiredPacks/
+  // additionalPacks have already finished loading (see StudentLayout.jsx),
+  // so neither a null loadedPack nor an empty sourceWords is ever "still
+  // loading" here — it means the packId/monthId/unitId in the URL genuinely
+  // doesn't resolve to a real, non-empty unit anymore (stale link, or the
+  // teacher edited/removed/emptied the topic). Redirect instead of leaving
+  // the student stuck on an endless spinner with no back button.
+  useEffect(() => {
+    if (!loadedPack || sourceWords.length === 0) {
+      navigate('/corp/student', { replace: true });
+    }
+  }, [loadedPack, sourceWords, navigate]);
 
   if (!loadedPack || sourceWords.length === 0 || loadingProgress) {
     return (
@@ -137,13 +150,18 @@ export default function CorpPractice() {
   }
 
   const handleStartPractice = (mode) => {
+    if (sourceWords.length === 0) return;
+
+    const pool = filterWordsForMode(sourceWords, mode);
+    const minWords = PRACTICE_MODE_MIN_WORDS[mode] || 1;
+    if (pool.length < minWords) return;
+
     setSelectedMode(mode);
     setWrongWords([]);
     setProgressPct(0);
 
     // Spaced repetition weighted selection — Spelling/Sentence narrow to
     // already-seen words first, same as individual practice.
-    const pool = filterWordsForMode(sourceWords, mode);
     const selected = weightedSelectWords(pool, wordCount);
     setPracticeWords(selected);
     setStep('intro');
@@ -309,7 +327,7 @@ export default function CorpPractice() {
     <div className="practice-page" style={{ padding: '0 var(--space-md)' }}>
       
       {/* Header */}
-      {(step !== 'results' || step === 'mode') && (
+      {step !== 'results' && (
         <div className="practice-page-header">
           <button className="clean-back-arrow" onClick={handleBack} title="Orqaga">
             ←

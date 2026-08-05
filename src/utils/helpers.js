@@ -121,6 +121,22 @@ export function filterWordsForMode(words, mode) {
 }
 
 /**
+ * Minimum word count each PracticeHub mode actually needs to function
+ * correctly — Quiz needs 3 wrong distractors, Match needs at least 2 pairs.
+ * Below this, the mode either can't render properly (Quiz falls back to fake
+ * "Variant N" placeholder options) or is trivial (Match with 1 pair).
+ */
+export const PRACTICE_MODE_MIN_WORDS = {
+  flashcard: 1,
+  spelling: 3,
+  match: 4,
+  quiz: 4,
+  pronounce: 1,
+  sentence: 1,
+  'irregular-verbs': 1,
+};
+
+/**
  * Format date for display
  */
 export function formatDate(dateStr) {
@@ -251,40 +267,6 @@ export function debounce(fn, delay = 300) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => fn(...args), delay);
   };
-}
-
-/**
- * Calculate streak (consecutive days with reviews)
- */
-export function calculateStreak(words) {
-  if (!words || words.length === 0) return 0;
-  
-  const reviewDates = words
-    .filter(w => w.lastReviewed)
-    .map(w => {
-      const d = new Date(w.lastReviewed);
-      return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
-    });
-  
-  const uniqueDates = [...new Set(reviewDates)].sort().reverse();
-  
-  if (uniqueDates.length === 0) return 0;
-  
-  const today = new Date();
-  const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-  const yesterdayStr = `${yesterday.getFullYear()}-${yesterday.getMonth()}-${yesterday.getDate()}`;
-  
-  if (uniqueDates[0] !== todayStr && uniqueDates[0] !== yesterdayStr) return 0;
-  
-  let streak = 1;
-  for (let i = 1; i < uniqueDates.length; i++) {
-    // simplified streak - just count unique dates
-    streak++;
-  }
-  
-  return streak;
 }
 
 /**

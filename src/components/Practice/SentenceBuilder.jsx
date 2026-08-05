@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
+import { useKeyboardInset } from '../../hooks/useKeyboardInset';
 import './SentenceBuilder.css';
 
 // Builds the set of regular inflected forms for a stem, accounting for the
@@ -72,6 +73,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
   const [incorrectCount, setIncorrectCount] = useState(0);
   const textareaRef = useRef(null);
   const startTimeRef = useRef(Date.now());
+  const keyboardInset = useKeyboardInset();
 
   const currentWord = words[currentIndex];
 
@@ -224,8 +226,13 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
         </motion.div>
       </AnimatePresence>
 
-      {/* Fixed full-width bottom bar, consistent with the other practice modes */}
-      <div className="sentence-bottom-bar">
+      {/* Fixed full-width bottom bar, consistent with the other practice modes.
+          Shifted up by the mobile keyboard's height so the submit button
+          never ends up hidden underneath it. */}
+      <div
+        className="sentence-bottom-bar"
+        style={keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
+      >
         <div className="sentence-bottom-bar-inner">
           {!answered ? (
             <>

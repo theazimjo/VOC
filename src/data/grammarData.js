@@ -3918,12 +3918,7 @@ Future Continuous kelajakda muayyan bir vaqtda davom etib turgan harakatni yoki 
           { id: 19, situation: 'Talking about exam preparation.', dialogue: 'A: What will you be doing all weekend?\nB: I ___ studying for my final exam.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be studying".' },
           { id: 20, situation: 'Asking about arrival time.', dialogue: 'A: What time will you get here?\nB: By 9, I ___ waiting outside.', options: ['will be', 'am', 'was', 'do'], correct: 0, explanation: 'Future Continuous: "will be waiting".' }
         ]
-      }
-    ]
-  },
-  intermediate: {
-    label: 'Intermediate',
-    topics: [
+      },
       {
         id: 'present-perfect-simple',
         title: 'Present Perfect Simple',
@@ -4270,6 +4265,354 @@ Present Perfect Continuous o'tmishda boshlangan va hozirgi paytgacha davom etib 
           { id: 18, situation: 'Talking about a disagreement.', dialogue: 'A: Are you two okay?\nB: Not really, we ___ been arguing about this all week.', options: ['have', 'are', 'were', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been arguing".' },
           { id: 19, situation: 'Talking about music practice.', dialogue: '___ he been practicing the piano lately?\nB: Yes, every single day.', options: ['Has', 'Is', 'Was', 'Does'], correct: 0, explanation: 'Present Perfect Continuous question: "Has he been practicing...?".' },
           { id: 20, situation: 'Talking about a road trip.', dialogue: 'A: You must be exhausted.\nB: Yeah, I ___ been driving for six hours straight.', options: ['have', 'am', 'was', 'do'], correct: 0, explanation: 'Present Perfect Continuous: "have been driving".' }
+        ]
+      },
+      {
+        id: 'be-going-to',
+        title: 'Be Going To',
+        icon: '🎯',
+        guide: `## Be Going To (Rejalashtirilgan kelasi zamon)
+
+"Be going to" kelajakda amalga oshirish oldindan rejalashtirilgan harakatlarni va aniq dalilga asoslangan bashoratlarni ifodalash uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **Positive (+)**: Subject + am / is / are + going to + Verb (base form)
+  - I **am going to** travel next month.
+  - She **is going to** study medicine.
+  - They **are going to** buy a new car.
+• **Negative (-)**: Subject + am / is / are + not + going to + Verb
+  - I **am not going to** go to the party.
+  - He **isn't going to** call her.
+• **Question (?)**: Am / Is / Are + Subject + going to + Verb?
+  - **Are you going to** visit your parents?
+  - **Is she going to** finish the project?
+
+*(Be fe'li shaxsga qarab o'zgaradi: I am, You/We/They are, He/She/It is)*
+
+## 2. Ishlatilishi (Usage)
+1. **Oldindan rejalashtirilgan qarorlar (allaqachon qaror qilingan)**:
+   - I **am going to** start a new diet next week. (allaqachon qaror qilingan)
+2. **Aniq dalilga asoslangan bashoratlar**:
+   - Look at those dark clouds! It **is going to** rain. (dalil bor — bulutlar)
+3. **Ko'zga ko'rinib turgan yaqin kelajak**:
+   - She's five months pregnant. She **is going to** have a baby.
+
+## 3. Will bilan qisqacha farqi
+• **Going to** — oldindan rejalashtirilgan qaror yoki aniq dalilga asoslangan bashorat.
+• **Will** — spontan qaror yoki shaxsiy fikrga asoslangan bashorat.
+  - I **am going to** call him later. (allaqachon qaror qilingan)
+  - The phone is ringing. I **will** answer it. (spontan qaror)
+
+## 4. Signal so'zlar (Time Expressions)
+• tonight, tomorrow, next week/month/year
+• this weekend, soon
+• at the weekend`,
+        questions: [
+          { id: 1, text: 'I ___ visit my grandmother next weekend.', options: ['am going to', 'is going to', 'are going to', 'going to'], correct: 0, explanation: 'Subject "I" takes "am going to".' },
+          { id: 2, text: 'She ___ start a new job next month.', options: ['am going to', 'is going to', 'are going to', 'be going to'], correct: 1, explanation: 'Singular subject "she" takes "is going to".' },
+          { id: 3, text: 'They ___ travel to Japan this summer.', options: ['am going to', 'is going to', 'are going to', 'going to'], correct: 2, explanation: 'Plural subject "they" takes "are going to".' },
+          { id: 4, text: 'Look at those clouds! It ___ rain.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A prediction based on visible evidence (dark clouds) uses "is going to".' },
+          { id: 5, text: 'We ___ not go to the beach today.', options: ['are', 'is', 'am', 'do'], correct: 0, explanation: 'Plural subject "we" takes "are" in "are not going to".' },
+          { id: 6, text: '___ you going to call me later?', options: ['Are', 'Is', 'Am', 'Do'], correct: 0, explanation: 'Questions with "you" start with "Are".' },
+          { id: 7, text: 'He ___ not going to finish the report on time.', options: ['is', 'are', 'am', 'does'], correct: 0, explanation: 'Singular subject "he" takes "is".' },
+          { id: 8, text: 'My sister is pregnant. She ___ have a baby.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A visible, certain future event uses "is going to".' },
+          { id: 9, text: '___ they going to move to a new house?', options: ['Are', 'Is', 'Am', 'Do'], correct: 0, explanation: 'Plural subject "they" starts questions with "Are".' },
+          { id: 10, text: 'I ___ not going to eat fast food anymore.', options: ['am', 'is', 'are', 'do'], correct: 0, explanation: 'Subject "I" takes "am".' },
+          { id: 11, text: 'We ___ going to paint the kitchen this weekend.', options: ['are', 'is', 'am', 'do'], correct: 0, explanation: 'Plural subject "we" takes "are".' },
+          { id: 12, text: 'What time ___ the movie going to start?', options: ['is', 'are', 'am', 'does'], correct: 0, explanation: 'Singular subject "the movie" takes "is".' },
+          { id: 13, text: "I've already decided. I ___ study abroad next year.", options: ['am going to', 'is going to', 'are going to', 'will going to'], correct: 0, explanation: 'A decision made before speaking uses "am going to".' },
+          { id: 14, text: 'He looks exhausted. He ___ collapse!', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A prediction based on visible evidence uses "is going to".' },
+          { id: 15, text: '___ she going to bring her friends to the party?', options: ['Is', 'Are', 'Am', 'Does'], correct: 0, explanation: 'Singular subject "she" starts questions with "Is".' },
+          { id: 16, text: 'They have booked the tickets. They ___ fly to Paris.', options: ['are going to', 'is going to', 'am going to', 'will going to'], correct: 0, explanation: 'A prior decision/arrangement uses "are going to".' },
+          { id: 17, text: 'I ___ not going to argue with you about this.', options: ['am', 'is', 'are', 'do'], correct: 0, explanation: 'Subject "I" takes "am".' },
+          { id: 18, text: 'Careful, that glass is about to fall! It ___ break.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'An imminent event with visible evidence uses "is going to".' },
+          { id: 19, text: '___ we going to have enough time?', options: ['Are', 'Is', 'Am', 'Do'], correct: 0, explanation: 'Plural subject "we" starts questions with "Are".' },
+          { id: 20, text: 'My parents ___ going to retire next year.', options: ['are', 'is', 'am', 'do'], correct: 0, explanation: 'Plural subject "parents" takes "are".' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'I ___ (visit) my cousin this weekend.', options: ['am going to visit', 'is going to visit', 'are going to visit', 'will visit'], correct: 0, explanation: 'Subject "I" + am going to + base verb.' },
+          { id: 2, text: 'She ___ (buy) a new phone.', options: ['is going to buy', 'am going to buy', 'are going to buy', 'will buys'], correct: 0, explanation: 'Singular subject "she" + is going to + base verb.' },
+          { id: 3, text: 'They ___ (not / travel) abroad this year.', options: ['are not going to travel', 'is not going to travel', 'am not going to travel', 'will not travel'], correct: 0, explanation: 'Plural subject "they" + are not going to + base verb.' },
+          { id: 4, text: '___ (you / watch) the game tonight?', options: ['Are you going to watch', 'Is you going to watch', 'Am you going to watch', 'Do you going to watch'], correct: 0, explanation: 'Subject "you" + Are going to + base verb.' },
+          { id: 5, text: 'He ___ (start) his own business.', options: ['is going to start', 'are going to start', 'am going to start', 'will starts'], correct: 0, explanation: 'Singular subject "he" + is going to + base verb.' },
+          { id: 6, text: 'We ___ (not / be) late again.', options: ['are not going to be', 'is not going to be', 'am not going to be', 'will not being'], correct: 0, explanation: 'Plural subject "we" + are not going to + base verb.' },
+          { id: 7, text: 'I ___ (call) you as soon as I land.', options: ['am going to call', 'is going to call', 'are going to call', 'will calling'], correct: 0, explanation: 'Subject "I" + am going to + base verb.' },
+          { id: 8, text: '___ (it / rain) later?', options: ['Is it going to rain', 'Are it going to rain', 'Am it going to rain', 'Does it going to rain'], correct: 0, explanation: 'Subject "it" + Is going to + base verb.' },
+          { id: 9, text: 'She ___ (graduate) next June.', options: ['is going to graduate', 'are going to graduate', 'am going to graduate', 'will graduates'], correct: 0, explanation: 'Singular subject "she" + is going to + base verb.' },
+          { id: 10, text: 'They ___ (not / come) to the wedding.', options: ['are not going to come', 'is not going to come', 'am not going to come', 'will not coming'], correct: 0, explanation: 'Plural subject "they" + are not going to + base verb.' },
+          { id: 11, text: 'I ___ (quit) my job next month.', options: ['am going to quit', 'is going to quit', 'are going to quit', 'will quits'], correct: 0, explanation: 'Subject "I" + am going to + base verb.' },
+          { id: 12, text: '___ (the / bus / leave) soon?', options: ['Is the bus going to leave', 'Are the bus going to leave', 'Am the bus going to leave', 'Does the bus going to leave'], correct: 0, explanation: 'Singular subject "the bus" + Is going to + base verb.' },
+          { id: 13, text: 'We ___ (paint) the fence this weekend.', options: ['are going to paint', 'is going to paint', 'am going to paint', 'will painting'], correct: 0, explanation: 'Plural subject "we" + are going to + base verb.' },
+          { id: 14, text: "He ___ (not / pass) the exam if he doesn't study.", options: ['is not going to pass', 'are not going to pass', 'am not going to pass', 'will not passing'], correct: 0, explanation: 'Singular subject "he" + is not going to + base verb.' },
+          { id: 15, text: '___ (they / sell) their old car?', options: ['Are they going to sell', 'Is they going to sell', 'Am they going to sell', 'Do they going to sell'], correct: 0, explanation: 'Plural subject "they" + Are going to + base verb.' },
+          { id: 16, text: '___ (I / not / tell) anyone your secret.', options: ['I am not going to tell', 'I is not going to tell', 'I are not going to tell', 'I will not telling'], correct: 0, explanation: 'Subject "I" + am not going to + base verb.' },
+          { id: 17, text: 'She ___ (open) her own restaurant.', options: ['is going to open', 'are going to open', 'am going to open', 'will opens'], correct: 0, explanation: 'Singular subject "she" + is going to + base verb.' },
+          { id: 18, text: '___ (you / need) any help tomorrow?', options: ['Are you going to need', 'Is you going to need', 'Am you going to need', 'Do you going to need'], correct: 0, explanation: 'Subject "you" + Are going to + base verb.' },
+          { id: 19, text: 'The weather forecast says it ___ (snow) tonight.', options: ['is going to snow', 'are going to snow', 'am going to snow', 'will snows'], correct: 0, explanation: 'Subject "it" + is going to + base verb.' },
+          { id: 20, text: 'We ___ (move) to a bigger apartment.', options: ['are going to move', 'is going to move', 'am going to move', 'will moves'], correct: 0, explanation: 'Plural subject "we" + are going to + base verb.' }
+        ],
+        scrambled: [
+          { id: 1, words: ['going', 'I', 'to', 'am', 'swim'], answer: 'I am going to swim', explanation: 'Subject + am + going to + verb.' },
+          { id: 2, words: ['to', 'she', 'study', 'is', 'going'], answer: 'she is going to study', explanation: 'Subject + is + going to + verb.' },
+          { id: 3, words: ['are', 'they', 'going', 'to', 'travel'], answer: 'they are going to travel', explanation: 'Subject + are + going to + verb.' },
+          { id: 4, words: ['rain', 'going', 'it', 'to', 'is'], answer: 'it is going to rain', explanation: 'Subject + is + going to + verb (prediction based on evidence).' },
+          { id: 5, words: ['not', 'going', 'I', 'am', 'to', 'go'], answer: 'I am not going to go', explanation: 'Subject + am not + going to + verb.' },
+          { id: 6, words: ['you', 'are', 'going', 'to', 'call', 'me', '?'], answer: 'are you going to call me', explanation: 'Am/Is/Are + subject + going to + verb.' },
+          { id: 7, words: ['he', 'going', 'not', 'is', 'to', 'come'], answer: 'he is not going to come', explanation: 'Subject + is not + going to + verb.' },
+          { id: 8, words: ['going', 'we', 'are', 'to', 'buy', 'a', 'car'], answer: 'we are going to buy a car', explanation: 'Subject + are + going to + verb + object.' },
+          { id: 9, words: ['is', 'she', 'going', 'to', 'have', 'a', 'baby'], answer: 'she is going to have a baby', explanation: 'Subject + is + going to + verb + object.' },
+          { id: 10, words: ['going', 'they', 'to', 'are', 'move', 'soon'], answer: 'they are going to move soon', explanation: 'Subject + are + going to + verb + adverb.' },
+          { id: 11, words: ['am', 'I', 'to', 'study', 'going', 'abroad'], answer: 'I am going to study abroad', explanation: 'Subject + am + going to + verb + place.' },
+          { id: 12, words: ['going', 'is', 'the', 'to', 'start', 'movie', '?'], answer: 'is the movie going to start', explanation: 'Is + subject + going to + verb.' },
+          { id: 13, words: ['not', 'are', 'we', 'going', 'to', 'be', 'late'], answer: 'we are not going to be late', explanation: 'Subject + are not + going to + verb.' },
+          { id: 14, words: ['going', 'he', 'is', 'to', 'collapse'], answer: 'he is going to collapse', explanation: 'Subject + is + going to + verb (evidence-based prediction).' },
+          { id: 15, words: ['bring', 'she', 'her', 'going', 'friends', 'is', 'to'], answer: 'she is going to bring her friends', explanation: 'Subject + is + going to + verb + object.' },
+          { id: 16, words: ['fly', 'are', 'they', 'to', 'paris', 'going'], answer: 'they are going to fly to paris', explanation: 'Subject + are + going to + verb + place.' },
+          { id: 17, words: ['argue', 'not', 'I', 'going', 'to', 'am'], answer: 'I am not going to argue', explanation: 'Subject + am not + going to + verb.' },
+          { id: 18, words: ['break', 'going', 'it', 'to', 'is'], answer: 'it is going to break', explanation: 'Subject + is + going to + verb (imminent event).' },
+          { id: 19, words: ['enough', 'have', 'we', 'time', 'going', 'to', 'are'], answer: 'we are going to have enough time', explanation: 'Subject + are + going to + verb + object.' },
+          { id: 20, words: ['retire', 'my', 'parents', 'going', 'next', 'to', 'are', 'year'], answer: 'my parents are going to retire next year', explanation: 'Subject + are + going to + verb + time.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'She going to visit her aunt.', options: ['She', 'going to visit', 'her aunt', 'No error'], correct: 1, wrongPart: 'going to visit', correction: 'is going to visit', explanation: 'Missing auxiliary "is" before "going to".' },
+          { id: 2, text: 'I am go to call you later.', options: ['I', 'am go to', 'call you', 'later'], correct: 1, wrongPart: 'am go to', correction: 'am going to', explanation: '"Going to" needs "-ing": "am going to".' },
+          { id: 3, text: 'They is going to arrive soon.', options: ['They', 'is going to', 'arrive soon', 'No error'], correct: 1, wrongPart: 'is going to', correction: 'are going to', explanation: 'Plural subject "they" takes "are", not "is".' },
+          { id: 4, text: 'He are going to buy a new car.', options: ['He', 'are going to', 'buy a new car', 'No error'], correct: 1, wrongPart: 'are going to', correction: 'is going to', explanation: 'Singular subject "he" takes "is", not "are".' },
+          { id: 5, text: 'We not going to finish on time.', options: ['We', 'not going to', 'finish on time', 'No error'], correct: 1, wrongPart: 'not going to', correction: 'are not going to', explanation: 'The negative form needs the auxiliary "are" before "not".' },
+          { id: 6, text: 'I will going to travel next year.', options: ['I', 'will going to', 'travel', 'next year'], correct: 1, wrongPart: 'will going to', correction: 'am going to', explanation: 'Do not mix "will" and "going to"; use one future form.' },
+          { id: 7, text: 'Is they going to sell the house?', options: ['Is', 'they', 'going to sell', 'the house'], correct: 0, wrongPart: 'Is', correction: 'Are', explanation: 'Plural subject "they" needs "Are", not "Is".' },
+          { id: 8, text: 'She is going to studies medicine.', options: ['She', 'is going to', 'studies', 'medicine'], correct: 2, wrongPart: 'studies', correction: 'study', explanation: 'After "going to", use the base form of the verb: "study".' },
+          { id: 9, text: 'I am not go to eat that.', options: ['I', 'am not go to', 'eat that', 'No error'], correct: 1, wrongPart: 'am not go to', correction: 'am not going to', explanation: '"Going to" needs "-ing" even in the negative.' },
+          { id: 10, text: "You going to be late if you don't hurry.", options: ['You', 'going to', 'be late', "if you don't hurry"], correct: 1, wrongPart: 'going to', correction: 'are going to', explanation: 'Missing auxiliary "are" before "going to".' },
+          { id: 11, text: 'Does she going to help us?', options: ['Does', 'she', 'going to', 'help us'], correct: 0, wrongPart: 'Does', correction: 'Is', explanation: '"Be going to" questions use "Is/Are/Am", not "Does".' },
+          { id: 12, text: 'It going to rain this afternoon.', options: ['It', 'going to', 'rain', 'this afternoon'], correct: 1, wrongPart: 'going to', correction: 'is going to', explanation: 'Missing auxiliary "is" before "going to".' },
+          { id: 13, text: 'We are going to buys a house.', options: ['We', 'are going to', 'buys', 'a house'], correct: 2, wrongPart: 'buys', correction: 'buy', explanation: 'After "going to", use the base form: "buy".' },
+          { id: 14, text: "He isn't going call his mother.", options: ['He', "isn't going", 'call his mother', 'No error'], correct: 1, wrongPart: "isn't going", correction: "isn't going to", explanation: '"To" is required: "isn\'t going to call".' },
+          { id: 15, text: 'Am they going to move next month?', options: ['Am', 'they', 'going to move', 'next month'], correct: 0, wrongPart: 'Am', correction: 'Are', explanation: 'Plural subject "they" needs "Are", not "Am".' },
+          { id: 16, text: 'She going to open her own shop.', options: ['She', 'going to open', 'her own shop', 'No error'], correct: 1, wrongPart: 'going to open', correction: 'is going to open', explanation: 'Missing auxiliary "is" before "going to".' },
+          { id: 17, text: "I amn't going to argue with you.", options: ['I', "amn't going to", 'argue with you', 'No error'], correct: 1, wrongPart: "amn't going to", correction: 'am not going to', explanation: '"Amn\'t" is not standard English; use "am not".' },
+          { id: 18, text: 'They are going to visits their grandparents.', options: ['They', 'are going to', 'visits', 'their grandparents'], correct: 2, wrongPart: 'visits', correction: 'visit', explanation: 'After "going to", use the base form: "visit".' },
+          { id: 19, text: 'What time is the train going to leaves?', options: ['What time', 'is the train', 'going to leaves', 'No error'], correct: 2, wrongPart: 'going to leaves', correction: 'going to leave', explanation: 'After "going to", use the base form: "leave".' },
+          { id: 20, text: 'We going to have a party this weekend.', options: ['We', 'going to have', 'a party', 'this weekend'], correct: 1, wrongPart: 'going to have', correction: 'are going to have', explanation: 'Missing auxiliary "are" before "going to".' }
+        ],
+        transform: [
+          { id: 1, text: 'Make negative: "I am going to travel next year."', options: ['I am not going to travel next year.', 'I not am going to travel next year.', "I don't am going to travel next year.", "I amn't going to travels next year."], correct: 0, explanation: 'Add "not" after "am": "am not going to".' },
+          { id: 2, text: 'Make question: "She is going to call you."', options: ['Is she going to call you?', 'Does she is going to call you?', 'Is she going to calls you?', 'She is going to call you?'], correct: 0, explanation: 'Move "is" to the front: "Is she going to call you?".' },
+          { id: 3, text: 'Transform to "Be Going To": "It rains a lot." (evidence: dark clouds)', options: ['It is going to rain a lot.', 'It rains a lot.', 'It will rain a lot.', 'It rained a lot.'], correct: 0, explanation: 'A prediction with visible evidence uses "is going to".' },
+          { id: 4, text: 'Make negative: "They are going to come to the party."', options: ['They are not going to come to the party.', "They don't going to come to the party.", 'They is not going to come to the party.', 'They not are going to come to the party.'], correct: 0, explanation: 'Negative form: "are not going to".' },
+          { id: 5, text: 'Make question: "You are going to be at home tonight."', options: ['Are you going to be at home tonight?', 'Do you going to be at home tonight?', 'Are you going to being at home tonight?', 'You are going to be at home tonight?'], correct: 0, explanation: 'Move "are" to the front: "Are you going to be...?".' },
+          { id: 6, text: 'Transform to "Be Going To": "He works hard." (already decided)', options: ['He is going to work hard.', 'He works hard.', 'He will work hard.', 'He worked hard.'], correct: 0, explanation: 'A prior decision uses "is going to".' },
+          { id: 7, text: 'Make negative: "We are going to be late."', options: ['We are not going to be late.', "We don't going to be late.", 'We is not going to be late.', "We aren't going to being late."], correct: 0, explanation: 'Negative form: "are not going to" + base verb.' },
+          { id: 8, text: 'Make question: "It is going to snow tomorrow."', options: ['Is it going to snow tomorrow?', 'Does it going to snow tomorrow?', 'Is it going to snows tomorrow?', 'It is going to snow tomorrow?'], correct: 0, explanation: 'Move "is" to the front: "Is it going to snow...?".' },
+          { id: 9, text: 'Transform to "Be Going To": "I visit my grandmother." (already planned)', options: ['I am going to visit my grandmother.', 'I visit my grandmother.', 'I will visit my grandmother.', 'I visited my grandmother.'], correct: 0, explanation: 'A planned action uses "am going to".' },
+          { id: 10, text: 'Make negative: "She is going to pass the exam."', options: ['She is not going to pass the exam.', "She doesn't going to pass the exam.", 'She are not going to pass the exam.', 'She not is going to pass the exam.'], correct: 0, explanation: 'Negative form: "is not going to" + base verb.' },
+          { id: 11, text: 'Make question: "They are going to win the match."', options: ['Are they going to win the match?', 'Do they going to win the match?', 'Are they going to wins the match?', 'They are going to win the match?'], correct: 0, explanation: 'Move "are" to the front: "Are they going to win...?".' },
+          { id: 12, text: 'Transform to "Be Going To": "The train leaves at 6." (scheduled plan)', options: ['The train is going to leave at 6.', 'The train leaves at 6.', 'The train will leave at 6.', 'The train left at 6.'], correct: 0, explanation: 'A planned schedule uses "is going to".' },
+          { id: 13, text: 'Make negative: "I am going to forget this day."', options: ['I am not going to forget this day.', "I don't going to forget this day.", 'I is not going to forget this day.', "I amn't going to forgets this day."], correct: 0, explanation: 'Negative form: "am not going to" + base verb.' },
+          { id: 14, text: 'Make question: "He is going to be a doctor."', options: ['Is he going to be a doctor?', 'Does he going to be a doctor?', 'Is he going to is a doctor?', 'He is going to be a doctor?'], correct: 0, explanation: 'Move "is" to the front: "Is he going to be...?".' },
+          { id: 15, text: 'Transform to "Be Going To": "We meet again." (already arranged)', options: ['We are going to meet again.', 'We meet again.', 'We will meet again.', 'We met again.'], correct: 0, explanation: 'A pre-arranged plan uses "are going to".' },
+          { id: 16, text: 'Make negative: "You are going to need a jacket."', options: ['You are not going to need a jacket.', "You don't going to need a jacket.", 'You is not going to need a jacket.', "You aren't going to needs a jacket."], correct: 0, explanation: 'Negative form: "are not going to" + base verb.' },
+          { id: 17, text: 'Make question: "The shop is going to open on Sunday."', options: ['Is the shop going to open on Sunday?', 'Does the shop going to open on Sunday?', 'Is the shop going to opens on Sunday?', 'The shop is going to open on Sunday?'], correct: 0, explanation: 'Move "is" to the front: "Is the shop going to open...?".' },
+          { id: 18, text: 'Transform to "Be Going To": "My father retires." (already decided)', options: ['My father is going to retire.', 'My father retires.', 'My father will retire.', 'My father retired.'], correct: 0, explanation: 'A prior decision uses "is going to".' },
+          { id: 19, text: 'Make negative: "It is going to be cold tomorrow."', options: ['It is not going to be cold tomorrow.', "It doesn't going to be cold tomorrow.", 'It are not going to be cold tomorrow.', "It isn't going to being cold tomorrow."], correct: 0, explanation: 'Negative form: "is not going to" + base verb.' },
+          { id: 20, text: 'Make question: "You are going to marry him."', options: ['Are you going to marry him?', 'Do you going to marry him?', 'Are you going to marries him?', 'You are going to marry him?'], correct: 0, explanation: 'Move "are" to the front: "Are you going to marry...?".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Discussing weekend plans.', dialogue: 'A: What are your plans for Saturday?\nB: I ___ visit my grandparents.', options: ['am going to', 'is going to', 'are going to', 'will going to'], correct: 0, explanation: 'Subject "I" takes "am going to" for a planned action.' },
+          { id: 2, situation: 'Talking about the weather.', dialogue: 'A: Why did you bring an umbrella?\nB: Look at those clouds, it ___ rain.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A prediction based on visible evidence uses "is going to".' },
+          { id: 3, situation: "Discussing a friend's career.", dialogue: 'A: What will she do after graduation?\nB: She ___ become a nurse.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A firm plan already decided uses "is going to".' },
+          { id: 4, situation: 'Talking about a trip.', dialogue: 'A: Have you booked your tickets?\nB: Yes, we ___ fly to Rome next week.', options: ['are going to', 'is going to', 'am going to', 'will going to'], correct: 0, explanation: 'A confirmed plan uses "are going to".' },
+          { id: 5, situation: 'Warning a friend.', dialogue: "A: Watch out! That vase ___ fall!\nB: I've got it!", options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'An imminent event with visible evidence uses "is going to".' },
+          { id: 6, situation: 'Discussing plans for tonight.', dialogue: "A: ___ you going to stay in tonight?\nB: Yes, I'm tired.", options: ['Are', 'Is', 'Am', 'Do'], correct: 0, explanation: 'Questions with "you" start with "Are".' },
+          { id: 7, situation: 'Talking about a decision.', dialogue: 'A: Have you decided about the job?\nB: Yes, I ___ accept the offer.', options: ['am going to', 'is going to', 'are going to', 'will going to'], correct: 0, explanation: 'A decision already made uses "am going to".' },
+          { id: 8, situation: 'Discussing house renovation.', dialogue: 'A: What are you doing with the old kitchen?\nB: We ___ renovate it completely.', options: ['are going to', 'is going to', 'am going to', 'will going to'], correct: 0, explanation: 'Subject "we" takes "are going to".' },
+          { id: 9, situation: "Talking about a friend's pregnancy.", dialogue: 'A: Did you hear the news?\nB: Yes! They ___ have twins!', options: ['are going to', 'is going to', 'am going to', 'will going to'], correct: 0, explanation: 'A certain future event uses "are going to".' },
+          { id: 10, situation: 'Discussing exam results.', dialogue: "A: ___ she going to pass the exam?\nB: I'm not sure.", options: ['Is', 'Are', 'Am', 'Does'], correct: 0, explanation: 'Singular subject "she" starts questions with "Is".' },
+          { id: 11, situation: 'Talking about a promise.', dialogue: 'A: Can you help me tomorrow?\nB: Sure, I ___ come early.', options: ['am going to', 'is going to', 'are going to', 'will going to'], correct: 0, explanation: 'A planned action uses "am going to".' },
+          { id: 12, situation: 'Discussing traffic.', dialogue: 'A: Why is everyone stopping?\nB: There ___ be an accident up ahead.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A prediction based on evidence uses "is going to".' },
+          { id: 13, situation: 'Talking about retirement.', dialogue: 'A: When does your father retire?\nB: He ___ retire next spring.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A planned event uses "is going to".' },
+          { id: 14, situation: 'Discussing a house purchase.', dialogue: 'A: Did you sign the papers?\nB: Yes, we ___ buy the house next month.', options: ['are going to', 'is going to', 'am going to', 'will going to'], correct: 0, explanation: 'A confirmed plan uses "are going to".' },
+          { id: 15, situation: 'Talking about graduation.', dialogue: 'A: When does she graduate?\nB: She ___ graduate in June, she already registered.', options: ['is going to', 'are going to', 'am going to', 'will going to'], correct: 0, explanation: 'A scheduled plan uses "is going to".' },
+          { id: 16, situation: 'Discussing a diet.', dialogue: 'A: Why did you throw away the chocolate?\nB: I ___ not eat sweets anymore.', options: ['am', 'is', 'are', 'do'], correct: 0, explanation: 'Subject "I" takes "am" in the negative form.' },
+          { id: 17, situation: 'Talking about a football match.', dialogue: 'A: Who do you think will win?\nB: Look at their form, they ___ win easily.', options: ['are going to', 'is going to', 'am going to', 'will going to'], correct: 0, explanation: 'A confident prediction based on evidence uses "are going to".' },
+          { id: 18, situation: 'Discussing a business plan.', dialogue: "A: What's your next step?\nB: I ___ open a small cafe.", options: ['am going to', 'is going to', 'are going to', 'will going to'], correct: 0, explanation: 'A decided plan uses "am going to".' },
+          { id: 19, situation: 'Talking about the schedule.', dialogue: '___ the meeting going to start on time?\nB: I hope so.', options: ['Is', 'Are', 'Am', 'Does'], correct: 0, explanation: 'Singular subject "the meeting" starts questions with "Is".' },
+          { id: 20, situation: 'Discussing a farewell.', dialogue: 'A: Will you write to me?\nB: Yes, I ___ write every week, I promise.', options: ['am going to', 'is going to', 'are going to', 'will going to'], correct: 0, explanation: 'A firm intention uses "am going to".' }
+        ]
+      },
+    ]
+  },
+  intermediate: {
+    label: 'Intermediate',
+    topics: [
+      {
+        id: 'past-perfect-simple',
+        title: 'Past Perfect Simple',
+        icon: '⏮️',
+        guide: `## Past Perfect Simple (O'tgan zamon oldingi tugallangan ish-harakat)
+
+Past Perfect Simple o'tmishdagi ikkita ish-harakatdan **birinchi bo'lib**, ikkinchi o'tmishdagi ish-harakatdan **oldinroq** sodir bo'lganini ko'rsatish uchun ishlatiladi.
+
+## 1. Shakllanishi (Form)
+• **Tasdiq**: Subject + had + V3 (Past Participle)
+  - I **had finished** my homework before dinner.
+• **Inkor**: Subject + had not (hadn't) + V3
+  - She **hadn't seen** the movie before.
+• **Savol**: Had + Subject + V3?
+  - **Had** you **left** when I called?
+
+*(had barcha shaxs/sonlar uchun bir xil — o'zgarmaydi)*
+
+## 2. Ishlatilishi (Usage)
+1. **Ikkita o'tmish ish-harakatidan avvalgisi** (Past Simple bilan birga):
+   - When I **arrived**, the train **had already left**.
+2. **Sabab-natija (o'tmishda avvalroq sodir bo'lgan sabab)**:
+   - She was tired because she **had worked** all day.
+3. **Reported Speech'da (Past Simple → Past Perfect)**:
+   - He said he **had finished** the report.
+4. **Third Conditional bilan** (bu yerda alohida o'rganilmaydi, lekin tanish bo'ladi):
+   - If I **had known**, I would have helped.
+
+## 3. Past Perfect vs Past Simple
+• **Past Simple** — o'tmishdagi bitta aniq voqea yoki ketma-ket voqealar.
+  - I **ate** breakfast and **went** to work. (ketma-ket, oddiy tartib)
+• **Past Perfect** — ikkita voqeadan **avvalroq** sodir bo'lganini ta'kidlash uchun.
+  - I **had eaten** breakfast before I **went** to work. (nonushta ishga borishdan OLDIN)
+
+## 4. Signal so'zlar
+• before, after, when, by the time, already, just, never, ever (o'tmishga nisbatan)
+• as soon as, once`,
+        questions: [
+          { id: 1, text: 'When I arrived, the train ___ already left.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 2, text: 'She was tired because she ___ worked all day.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
+          { id: 3, text: 'He said he ___ finished the report.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Reported speech: Past Simple → Past Perfect.' },
+          { id: 4, text: 'By the time we got to the cinema, the film ___ started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 5, text: 'I ___ never seen snow before I visited Norway.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + never + V3.' },
+          { id: 6, text: 'They ___ already eaten when we arrived.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 7, text: '___ you finished your homework before dinner?', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 8, text: 'We ___ not met before the conference.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not (hadn\'t) + V3.' },
+          { id: 9, text: 'After she ___ finished the exam, she went home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 10, text: 'He ___ already left when I called him.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 11, text: 'As soon as she ___ arrived, the meeting started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 12, text: "I couldn't get in because I ___ forgotten my key.", options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
+          { id: 13, text: 'By 2020, she ___ graduated from university.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar tugallangan.' },
+          { id: 14, text: '___ he ever visited London before that trip?', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 15, text: 'The house was empty because the family ___ moved out.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
+          { id: 16, text: 'We ___ just sat down when the phone rang.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + just + V3.' },
+          { id: 17, text: 'She realized she ___ left her phone at home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 18, text: 'They ___ not seen each other for ten years before the reunion.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not (hadn\'t) + V3.' },
+          { id: 19, text: 'Before he became a doctor, he ___ studied biology for six years.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
+          { id: 20, text: 'When the police arrived, the thief ___ already escaped.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'When I arrived, the train ___ (already / leave).', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
+          { id: 2, text: 'She was tired because she ___ (work) all day.', options: ['had worked', 'has worked', 'worked', 'was working'], correct: 0, explanation: 'Past Perfect: had + V3 (worked).' },
+          { id: 3, text: 'He said he ___ (finish) the report.', options: ['had finished', 'has finished', 'finished', 'was finishing'], correct: 0, explanation: 'Reported speech: had + V3 (finished).' },
+          { id: 4, text: 'By the time we got there, the film ___ (start).', options: ['had started', 'has started', 'started', 'was starting'], correct: 0, explanation: 'Past Perfect: had + V3 (started).' },
+          { id: 5, text: 'I ___ (never / see) snow before I visited Norway.', options: ['had never seen', 'have never seen', 'never saw', 'was never seeing'], correct: 0, explanation: 'Past Perfect: had + never + V3 (seen).' },
+          { id: 6, text: 'They ___ (already / eat) when we arrived.', options: ['had already eaten', 'have already eaten', 'already ate', 'were already eating'], correct: 0, explanation: 'Past Perfect: had + already + V3 (eaten).' },
+          { id: 7, text: '___ (you / finish) your homework before dinner?', options: ['Had you finished', 'Have you finished', 'Did you finish', 'Were you finishing'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3.' },
+          { id: 8, text: 'We ___ (not / meet) before the conference.', options: ["hadn't met", "haven't met", "didn't meet", "weren't meeting"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (met).' },
+          { id: 9, text: 'After she ___ (finish) the exam, she went home.', options: ['had finished', 'has finished', 'finished', 'was finishing'], correct: 0, explanation: 'Past Perfect: had + V3 (finished).' },
+          { id: 10, text: 'He ___ (already / leave) when I called him.', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + already + V3 (left).' },
+          { id: 11, text: 'As soon as she ___ (arrive), the meeting started.', options: ['had arrived', 'has arrived', 'arrived', 'was arriving'], correct: 0, explanation: 'Past Perfect: had + V3 (arrived).' },
+          { id: 12, text: "I couldn't get in because I ___ (forget) my key.", options: ['had forgotten', 'have forgotten', 'forgot', 'was forgetting'], correct: 0, explanation: 'Past Perfect: had + V3 (forgotten).' },
+          { id: 13, text: 'By 2020, she ___ (graduate) from university.', options: ['had graduated', 'has graduated', 'graduated', 'was graduating'], correct: 0, explanation: 'Past Perfect: had + V3 (graduated).' },
+          { id: 14, text: '___ (he / ever / visit) London before that trip?', options: ['Had he ever visited', 'Has he ever visited', 'Did he ever visit', 'Was he ever visiting'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3.' },
+          { id: 15, text: 'The house was empty because the family ___ (move) out.', options: ['had moved', 'has moved', 'moved', 'was moving'], correct: 0, explanation: 'Past Perfect: had + V3 (moved).' },
+          { id: 16, text: 'We ___ (just / sit) down when the phone rang.', options: ['had just sat', 'have just sat', 'just sat', 'were just sitting'], correct: 0, explanation: 'Past Perfect: had + just + V3 (sat).' },
+          { id: 17, text: 'She realized she ___ (leave) her phone at home.', options: ['had left', 'has left', 'left', 'was leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
+          { id: 18, text: 'They ___ (not / see) each other for ten years before the reunion.', options: ["hadn't seen", "haven't seen", "didn't see", "weren't seeing"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (seen).' },
+          { id: 19, text: 'Before he became a doctor, he ___ (study) biology for six years.', options: ['had studied', 'has studied', 'studied', 'was studying'], correct: 0, explanation: 'Past Perfect: had + V3 (studied).' },
+          { id: 20, text: 'When the police arrived, the thief ___ (already / escape).', options: ['had already escaped', 'has already escaped', 'already escaped', 'was already escaping'], correct: 0, explanation: 'Past Perfect: had + already + V3 (escaped).' }
+        ],
+        scrambled: [
+          { id: 1, words: ['left', 'when', 'I', 'arrived', 'the', 'train', 'had', 'already'], answer: 'when I arrived the train had already left', explanation: 'Past Perfect: had + already + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 2, words: ['worked', 'she', 'was', 'tired', 'because', 'she', 'had', 'all', 'day'], answer: 'she was tired because she had worked all day', explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 3, words: ['finished', 'he', 'said', 'he', 'had', 'the', 'report'], answer: 'he said he had finished the report', explanation: 'Reported speech: had + V3.' },
+          { id: 4, words: ['started', 'by', 'the', 'time', 'we', 'got', 'there', 'the', 'film', 'had'], answer: 'by the time we got there the film had started', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 5, words: ['seen', 'I', 'had', 'never', 'snow', 'before', 'I', 'visited', 'Norway'], answer: 'I had never seen snow before I visited Norway', explanation: 'Past Perfect: had + never + V3.' },
+          { id: 6, words: ['eaten', 'they', 'had', 'already', 'when', 'we', 'arrived'], answer: 'they had already eaten when we arrived', explanation: 'Past Perfect: had + already + V3.' },
+          { id: 7, words: ['finished', 'had', 'you', 'your', 'homework', 'before', 'dinner', '?'], answer: 'had you finished your homework before dinner', explanation: 'Past Perfect question: Had + subject + V3.' },
+          { id: 8, words: ['met', 'we', "hadn't", 'before', 'the', 'conference'], answer: "we hadn't met before the conference", explanation: 'Past Perfect negative: hadn\'t + V3.' },
+          { id: 9, words: ['finished', 'after', 'she', 'had', 'the', 'exam', 'she', 'went', 'home'], answer: 'after she had finished the exam she went home', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 10, words: ['left', 'he', 'had', 'already', 'when', 'I', 'called', 'him'], answer: 'he had already left when I called him', explanation: 'Past Perfect: had + already + V3.' },
+          { id: 11, words: ['arrived', 'as', 'soon', 'as', 'she', 'had', 'the', 'meeting', 'started'], answer: 'as soon as she had arrived the meeting started', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 12, words: ['forgotten', 'I', "couldn't", 'get', 'in', 'because', 'I', 'had', 'my', 'key'], answer: "I couldn't get in because I had forgotten my key", explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 13, words: ['graduated', 'by', '2020', 'she', 'had', 'from', 'university'], answer: 'by 2020 she had graduated from university', explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar.' },
+          { id: 14, words: ['visited', 'had', 'he', 'ever', 'London', 'before', 'that', 'trip', '?'], answer: 'had he ever visited London before that trip', explanation: 'Past Perfect question: Had + subject + ever + V3.' },
+          { id: 15, words: ['moved', 'the', 'house', 'was', 'empty', 'because', 'the', 'family', 'had', 'out'], answer: 'the house was empty because the family had moved out', explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 16, words: ['sat', 'we', 'had', 'just', 'down', 'when', 'the', 'phone', 'rang'], answer: 'we had just sat down when the phone rang', explanation: 'Past Perfect: had + just + V3.' },
+          { id: 17, words: ['left', 'she', 'realized', 'she', 'had', 'her', 'phone', 'at', 'home'], answer: 'she realized she had left her phone at home', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 18, words: ['seen', 'they', "hadn't", 'each', 'other', 'for', 'ten', 'years', 'before', 'the', 'reunion'], answer: "they hadn't seen each other for ten years before the reunion", explanation: 'Past Perfect negative: hadn\'t + V3.' },
+          { id: 19, words: ['studied', 'before', 'he', 'became', 'a', 'doctor', 'he', 'had', 'biology', 'for', 'six', 'years'], answer: 'before he became a doctor he had studied biology for six years', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 20, words: ['escaped', 'when', 'the', 'police', 'arrived', 'the', 'thief', 'had', 'already'], answer: 'when the police arrived the thief had already escaped', explanation: 'Past Perfect: had + already + V3.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'When I arrived, the train has already left.', options: ['When I arrived', 'the train', 'has already left', 'No error'], correct: 2, wrongPart: 'has already left', correction: 'had already left', explanation: 'Past reference needs Past Perfect: "had already left", not Present Perfect.' },
+          { id: 2, text: 'She was tired because she has worked all day.', options: ['She was tired', 'because', 'she has worked', 'all day'], correct: 2, wrongPart: 'she has worked', correction: 'she had worked', explanation: 'With a Past Simple main clause, use Past Perfect: "had worked".' },
+          { id: 3, text: 'He said he has finished the report.', options: ['He said', 'he has finished', 'the report', 'No error'], correct: 1, wrongPart: 'he has finished', correction: 'he had finished', explanation: 'Reported speech shifts Present Perfect to Past Perfect: "had finished".' },
+          { id: 4, text: 'By the time we got there, the film had start.', options: ['By the time', 'we got there', 'the film', 'had start'], correct: 3, wrongPart: 'had start', correction: 'had started', explanation: 'Past Perfect needs V3: "had started", not the base form.' },
+          { id: 5, text: 'I had never see snow before I visited Norway.', options: ['I had never', 'see', 'snow', 'before I visited Norway'], correct: 1, wrongPart: 'see', correction: 'seen', explanation: 'Past Perfect needs V3: "had never seen".' },
+          { id: 6, text: 'They had already ate when we arrived.', options: ['They had already', 'ate', 'when', 'we arrived'], correct: 1, wrongPart: 'ate', correction: 'eaten', explanation: 'Past Perfect needs V3: "had already eaten", not the Past Simple form.' },
+          { id: 7, text: 'Did you finished your homework before dinner?', options: ['Did you finished', 'your', 'homework', 'before dinner'], correct: 0, wrongPart: 'Did you finished', correction: 'Had you finished', explanation: 'To express "before another past action," use Past Perfect: "Had you finished".' },
+          { id: 8, text: "We hadn't met before the conference, isn't it?", options: ["We hadn't met", 'before the conference', "isn't it", 'No error'], correct: 2, wrongPart: "isn't it", correction: "had we", explanation: 'Past Perfect negative statements use "had we" as a tag, not "isn\'t it".' },
+          { id: 9, text: 'After she had finish the exam, she went home.', options: ['After she had', 'finish', 'the exam', 'she went home'], correct: 1, wrongPart: 'finish', correction: 'finished', explanation: 'Past Perfect needs V3: "had finished".' },
+          { id: 10, text: 'He already left when I called him.', options: ['He', 'already left', 'when I called', 'him'], correct: 1, wrongPart: 'already left', correction: 'had already left', explanation: 'To show the action happened before another past action, use Past Perfect: "had already left".' },
+          { id: 11, text: 'As soon as she has arrived, the meeting started.', options: ['As soon as', 'she has arrived', 'the meeting', 'started'], correct: 1, wrongPart: 'she has arrived', correction: 'she had arrived', explanation: 'With a Past Simple main clause, use Past Perfect: "had arrived".' },
+          { id: 12, text: "I couldn't get in because I had forget my key.", options: ["I couldn't get in", 'because', 'I had forget', 'my key'], correct: 2, wrongPart: 'I had forget', correction: 'I had forgotten', explanation: 'Past Perfect needs V3: "had forgotten".' },
+          { id: 13, text: 'By 2020, she has graduated from university.', options: ['By 2020', 'she has graduated', 'from university', 'No error'], correct: 1, wrongPart: 'she has graduated', correction: 'she had graduated', explanation: 'A past time marker ("By 2020") requires Past Perfect: "had graduated".' },
+          { id: 14, text: 'Had he ever visit London before that trip?', options: ['Had he', 'ever visit', 'London', 'before that trip'], correct: 1, wrongPart: 'ever visit', correction: 'ever visited', explanation: 'Past Perfect needs V3: "ever visited".' },
+          { id: 15, text: 'The house was empty because the family has moved out.', options: ['The house was empty', 'because', 'the family has moved', 'out'], correct: 2, wrongPart: 'the family has moved', correction: 'the family had moved', explanation: 'With a Past Simple main clause, use Past Perfect: "had moved".' },
+          { id: 16, text: 'We had just sit down when the phone rang.', options: ['We had just', 'sit', 'down', 'when the phone rang'], correct: 1, wrongPart: 'sit', correction: 'sat', explanation: 'Past Perfect needs V3: "had just sat".' },
+          { id: 17, text: 'She realized she has left her phone at home.', options: ['She realized', 'she has left', 'her phone', 'at home'], correct: 1, wrongPart: 'she has left', correction: 'she had left', explanation: 'With a Past Simple main clause, use Past Perfect: "had left".' },
+          { id: 18, text: "They hadn't saw each other for ten years before the reunion.", options: ["They hadn't", 'saw', 'each other for ten years', 'before the reunion'], correct: 1, wrongPart: 'saw', correction: 'seen', explanation: 'Past Perfect needs V3: "hadn\'t seen", not the Past Simple form.' },
+          { id: 19, text: 'Before he became a doctor, he had study biology for six years.', options: ['Before he became a doctor', 'he had', 'study', 'biology for six years'], correct: 2, wrongPart: 'study', correction: 'studied', explanation: 'Past Perfect needs V3: "had studied".' },
+          { id: 20, text: 'When the police arrived, the thief already escaped.', options: ['When the police arrived', 'the thief', 'already escaped', 'No error'], correct: 2, wrongPart: 'already escaped', correction: 'had already escaped', explanation: 'To show the escape happened before the police arrived, use Past Perfect: "had already escaped".' }
+        ],
+        transform: [
+          { id: 1, text: 'Complete the Past Perfect: "When I arrived, the train ___ (already / leave)."', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
+          { id: 2, text: 'Combine using Past Perfect: "She finished work. She went home." (finished first)', options: ['After she had finished work, she went home.', 'After she finished work, she has gone home.', 'After she has finished work, she went home.', 'After she was finishing work, she went home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had finished".' },
+          { id: 3, text: 'Change to reported speech: "I have finished the report," he said. → He said he ___.', options: ['had finished the report', 'has finished the report', 'finished the report', 'was finishing the report'], correct: 0, explanation: 'Reported speech: Present Perfect → Past Perfect.' },
+          { id: 4, text: 'Complete the Past Perfect: "By the time we got there, the film ___ (start)."', options: ['had started', 'has started', 'started', 'was starting'], correct: 0, explanation: 'Past Perfect: had + V3 (started).' },
+          { id: 5, text: 'Combine using Past Perfect: "I never saw snow. Then I visited Norway."', options: ['I had never seen snow before I visited Norway.', 'I have never seen snow before I visited Norway.', 'I never saw snow before I visited Norway.', 'I was never seeing snow before I visited Norway.'], correct: 0, explanation: 'Past Perfect shows the earlier state: "had never seen".' },
+          { id: 6, text: 'Make a question: "You had finished your homework before dinner."', options: ['Had you finished your homework before dinner?', 'Have you finished your homework before dinner?', 'Did you finish your homework before dinner?', 'Were you finishing your homework before dinner?'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 7, text: 'Make negative: "We had met before the conference." → We ___ before the conference.', options: ["hadn't met", "haven't met", "didn't meet", "weren't meeting"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (met).' },
+          { id: 8, text: 'Combine using Past Perfect: "She finished the exam. She went home."', options: ['After she had finished the exam, she went home.', 'After she finishing the exam, she went home.', 'After she has finished the exam, she went home.', 'After she finished the exam, she has gone home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had finished".' },
+          { id: 9, text: 'Complete the Past Perfect: "He ___ (already / leave) when I called him."', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + already + V3 (left).' },
+          { id: 10, text: 'Combine using Past Perfect: "She arrived. The meeting started." (as soon as she arrived)', options: ['As soon as she had arrived, the meeting started.', 'As soon as she arrived, the meeting has started.', 'As soon as she has arrived, the meeting started.', 'As soon as she was arriving, the meeting started.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had arrived".' },
+          { id: 11, text: 'Give the reason using Past Perfect: "I forgot my key. I couldn\'t get in."', options: ["I couldn't get in because I had forgotten my key.", "I couldn't get in because I forgot my key first.", "I couldn't get in because I have forgotten my key.", "I couldn't get in because I was forgetting my key."], correct: 0, explanation: 'Past Perfect shows the earlier cause: "had forgotten".' },
+          { id: 12, text: 'Complete the Past Perfect: "By 2020, she ___ (graduate) from university."', options: ['had graduated', 'has graduated', 'graduated', 'was graduating'], correct: 0, explanation: 'Past Perfect: had + V3 (graduated).' },
+          { id: 13, text: 'Make a question: "He had ever visited London before that trip."', options: ['Had he ever visited London before that trip?', 'Has he ever visited London before that trip?', 'Did he ever visit London before that trip?', 'Was he ever visiting London before that trip?'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3?' },
+          { id: 14, text: 'Give the reason using Past Perfect: "The family moved out. The house was empty."', options: ['The house was empty because the family had moved out.', 'The house was empty because the family moved out later.', 'The house was empty because the family has moved out.', 'The house was empty because the family was moving out.'], correct: 0, explanation: 'Past Perfect shows the earlier cause: "had moved out".' },
+          { id: 15, text: 'Complete the Past Perfect: "We ___ (just / sit) down when the phone rang."', options: ['had just sat', 'have just sat', 'just sat', 'were just sitting'], correct: 0, explanation: 'Past Perfect: had + just + V3 (sat).' },
+          { id: 16, text: 'Combine using Past Perfect: "She left her phone at home. She realized it."', options: ['She realized she had left her phone at home.', 'She realized she has left her phone at home.', 'She realized she leaves her phone at home.', 'She realized she was leaving her phone at home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had left".' },
+          { id: 17, text: 'Make negative: "They had seen each other before the reunion." → They ___ each other for ten years before the reunion.', options: ["hadn't seen", "haven't seen", "didn't see", "weren't seeing"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (seen).' },
+          { id: 18, text: 'Combine using Past Perfect: "He studied biology for six years. Then he became a doctor."', options: ['Before he became a doctor, he had studied biology for six years.', 'Before he became a doctor, he has studied biology for six years.', 'Before he became a doctor, he studies biology for six years.', 'Before he became a doctor, he was studying biology for six years.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had studied".' },
+          { id: 19, text: 'Complete the Past Perfect: "When the police arrived, the thief ___ (already / escape)."', options: ['had already escaped', 'has already escaped', 'already escaped', 'was already escaping'], correct: 0, explanation: 'Past Perfect: had + already + V3 (escaped).' },
+          { id: 20, text: 'Change to reported speech: "I have finished my homework," she said. → She said she ___.', options: ['had finished her homework', 'has finished her homework', 'finished her homework', 'was finishing her homework'], correct: 0, explanation: 'Reported speech: Present Perfect → Past Perfect.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Missing a train.', dialogue: 'A: Did you catch the train?\nB: No, when I arrived, it ___ already left.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 2, situation: 'Talking about a tiring day.', dialogue: 'A: Why was she so tired?\nB: Because she ___ worked all day.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 3, situation: 'Reporting what someone said.', dialogue: 'A: What did he tell you?\nB: He said he ___ finished the report.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Reported speech: had + V3.' },
+          { id: 4, situation: 'Arriving late at the cinema.', dialogue: 'A: Did you see the beginning?\nB: No, by the time we got there, the film ___ started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 5, situation: 'Talking about a trip to Norway.', dialogue: 'A: Was it your first time seeing snow?\nB: Yes, I ___ never seen snow before I visited Norway.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + never + V3.' },
+          { id: 6, situation: 'Arriving for dinner.', dialogue: 'A: Are they still eating?\nB: No, they ___ already eaten when we arrived.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 7, situation: 'Checking on homework.', dialogue: 'A: ___ you finished your homework before dinner?\nB: Yes, I had.', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
+          { id: 8, situation: 'Meeting new colleagues.', dialogue: 'A: Did you know each other before?\nB: No, we ___ not met before the conference.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not + V3.' },
+          { id: 9, situation: 'Talking about an exam day.', dialogue: 'A: What did she do after the exam?\nB: After she ___ finished the exam, she went home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 10, situation: 'Trying to reach someone.', dialogue: 'A: Did you reach him?\nB: No, he ___ already left when I called him.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
+          { id: 11, situation: 'Describing a meeting start.', dialogue: 'A: When did the meeting start?\nB: As soon as she ___ arrived, it started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 12, situation: 'Explaining why the door was locked.', dialogue: "A: Why couldn't you get in?\nB: Because I ___ forgotten my key.", options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 13, situation: 'Talking about education history.', dialogue: 'A: Was she working by 2020?\nB: Yes, by 2020, she ___ graduated from university.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar.' },
+          { id: 14, situation: 'Discussing travel history.', dialogue: '___ he ever visited London before that trip?\nB: No, it was his first time.', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3?' },
+          { id: 15, situation: 'Talking about an empty house.', dialogue: 'A: Why was the house empty?\nB: Because the family ___ moved out.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
+          { id: 16, situation: 'Describing an interrupted moment.', dialogue: 'A: What were you doing when the phone rang?\nB: We ___ just sat down.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + just + V3.' },
+          { id: 17, situation: 'Explaining a mistake.', dialogue: 'A: Why did she go back home?\nB: She realized she ___ left her phone at home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 18, situation: 'Talking about an old friendship.', dialogue: 'A: Had they kept in touch?\nB: No, they ___ not seen each other for ten years before the reunion.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not + V3.' },
+          { id: 19, situation: 'Talking about a doctor\'s background.', dialogue: 'A: How long did he study?\nB: Before he became a doctor, he ___ studied biology for six years.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
+          { id: 20, situation: 'Reporting a crime scene.', dialogue: 'A: Did the police catch the thief?\nB: No, when they arrived, he ___ already escaped.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' }
         ]
       },
       {
@@ -4620,176 +4963,6 @@ First Conditional kelajakda sodir bo'lishi mumkin bo'lgan real, ehtimoli yuqori 
           { id: 18, situation: 'Planning to watch a show.', dialogue: 'A: Should we leave now?\nB: Yes, if we arrive early, we ___ get good seats.', options: ['will', 'are', 'were', 'do'], correct: 0, explanation: 'First Conditional main clause: will + base verb.' },
           { id: 19, situation: 'Resolving an argument.', dialogue: 'A: What if I say sorry?\nB: She will stay angry if you ___ apologize.', options: ["don't", "won't", "didn't", "aren't"], correct: 0, explanation: "If-clause negative: Present Simple (\"don't apologize\")." },
           { id: 20, situation: 'Checking travel documents.', dialogue: 'A: Do we have everything?\nB: If we forget the tickets, we ___ be able to enter.', options: ["won't", "don't", "aren't", "weren't"], correct: 0, explanation: "Main clause negative: will not (won't) + base verb (be)." }
-        ]
-      },
-      {
-        id: 'past-perfect-simple',
-        title: 'Past Perfect Simple',
-        icon: '⏮️',
-        guide: `## Past Perfect Simple (O'tgan zamon oldingi tugallangan ish-harakat)
-
-Past Perfect Simple o'tmishdagi ikkita ish-harakatdan **birinchi bo'lib**, ikkinchi o'tmishdagi ish-harakatdan **oldinroq** sodir bo'lganini ko'rsatish uchun ishlatiladi.
-
-## 1. Shakllanishi (Form)
-• **Tasdiq**: Subject + had + V3 (Past Participle)
-  - I **had finished** my homework before dinner.
-• **Inkor**: Subject + had not (hadn't) + V3
-  - She **hadn't seen** the movie before.
-• **Savol**: Had + Subject + V3?
-  - **Had** you **left** when I called?
-
-*(had barcha shaxs/sonlar uchun bir xil — o'zgarmaydi)*
-
-## 2. Ishlatilishi (Usage)
-1. **Ikkita o'tmish ish-harakatidan avvalgisi** (Past Simple bilan birga):
-   - When I **arrived**, the train **had already left**.
-2. **Sabab-natija (o'tmishda avvalroq sodir bo'lgan sabab)**:
-   - She was tired because she **had worked** all day.
-3. **Reported Speech'da (Past Simple → Past Perfect)**:
-   - He said he **had finished** the report.
-4. **Third Conditional bilan** (bu yerda alohida o'rganilmaydi, lekin tanish bo'ladi):
-   - If I **had known**, I would have helped.
-
-## 3. Past Perfect vs Past Simple
-• **Past Simple** — o'tmishdagi bitta aniq voqea yoki ketma-ket voqealar.
-  - I **ate** breakfast and **went** to work. (ketma-ket, oddiy tartib)
-• **Past Perfect** — ikkita voqeadan **avvalroq** sodir bo'lganini ta'kidlash uchun.
-  - I **had eaten** breakfast before I **went** to work. (nonushta ishga borishdan OLDIN)
-
-## 4. Signal so'zlar
-• before, after, when, by the time, already, just, never, ever (o'tmishga nisbatan)
-• as soon as, once`,
-        questions: [
-          { id: 1, text: 'When I arrived, the train ___ already left.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
-          { id: 2, text: 'She was tired because she ___ worked all day.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
-          { id: 3, text: 'He said he ___ finished the report.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Reported speech: Past Simple → Past Perfect.' },
-          { id: 4, text: 'By the time we got to the cinema, the film ___ started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
-          { id: 5, text: 'I ___ never seen snow before I visited Norway.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + never + V3.' },
-          { id: 6, text: 'They ___ already eaten when we arrived.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
-          { id: 7, text: '___ you finished your homework before dinner?', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
-          { id: 8, text: 'We ___ not met before the conference.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not (hadn\'t) + V3.' },
-          { id: 9, text: 'After she ___ finished the exam, she went home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
-          { id: 10, text: 'He ___ already left when I called him.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
-          { id: 11, text: 'As soon as she ___ arrived, the meeting started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
-          { id: 12, text: "I couldn't get in because I ___ forgotten my key.", options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
-          { id: 13, text: 'By 2020, she ___ graduated from university.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar tugallangan.' },
-          { id: 14, text: '___ he ever visited London before that trip?', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
-          { id: 15, text: 'The house was empty because the family ___ moved out.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi: had + V3.' },
-          { id: 16, text: 'We ___ just sat down when the phone rang.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + just + V3.' },
-          { id: 17, text: 'She realized she ___ left her phone at home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
-          { id: 18, text: 'They ___ not seen each other for ten years before the reunion.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not (hadn\'t) + V3.' },
-          { id: 19, text: 'Before he became a doctor, he ___ studied biology for six years.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish-harakat.' },
-          { id: 20, text: 'When the police arrived, the thief ___ already escaped.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' }
-        ],
-        fillBlanks: [
-          { id: 1, text: 'When I arrived, the train ___ (already / leave).', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
-          { id: 2, text: 'She was tired because she ___ (work) all day.', options: ['had worked', 'has worked', 'worked', 'was working'], correct: 0, explanation: 'Past Perfect: had + V3 (worked).' },
-          { id: 3, text: 'He said he ___ (finish) the report.', options: ['had finished', 'has finished', 'finished', 'was finishing'], correct: 0, explanation: 'Reported speech: had + V3 (finished).' },
-          { id: 4, text: 'By the time we got there, the film ___ (start).', options: ['had started', 'has started', 'started', 'was starting'], correct: 0, explanation: 'Past Perfect: had + V3 (started).' },
-          { id: 5, text: 'I ___ (never / see) snow before I visited Norway.', options: ['had never seen', 'have never seen', 'never saw', 'was never seeing'], correct: 0, explanation: 'Past Perfect: had + never + V3 (seen).' },
-          { id: 6, text: 'They ___ (already / eat) when we arrived.', options: ['had already eaten', 'have already eaten', 'already ate', 'were already eating'], correct: 0, explanation: 'Past Perfect: had + already + V3 (eaten).' },
-          { id: 7, text: '___ (you / finish) your homework before dinner?', options: ['Had you finished', 'Have you finished', 'Did you finish', 'Were you finishing'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3.' },
-          { id: 8, text: 'We ___ (not / meet) before the conference.', options: ["hadn't met", "haven't met", "didn't meet", "weren't meeting"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (met).' },
-          { id: 9, text: 'After she ___ (finish) the exam, she went home.', options: ['had finished', 'has finished', 'finished', 'was finishing'], correct: 0, explanation: 'Past Perfect: had + V3 (finished).' },
-          { id: 10, text: 'He ___ (already / leave) when I called him.', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + already + V3 (left).' },
-          { id: 11, text: 'As soon as she ___ (arrive), the meeting started.', options: ['had arrived', 'has arrived', 'arrived', 'was arriving'], correct: 0, explanation: 'Past Perfect: had + V3 (arrived).' },
-          { id: 12, text: "I couldn't get in because I ___ (forget) my key.", options: ['had forgotten', 'have forgotten', 'forgot', 'was forgetting'], correct: 0, explanation: 'Past Perfect: had + V3 (forgotten).' },
-          { id: 13, text: 'By 2020, she ___ (graduate) from university.', options: ['had graduated', 'has graduated', 'graduated', 'was graduating'], correct: 0, explanation: 'Past Perfect: had + V3 (graduated).' },
-          { id: 14, text: '___ (he / ever / visit) London before that trip?', options: ['Had he ever visited', 'Has he ever visited', 'Did he ever visit', 'Was he ever visiting'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3.' },
-          { id: 15, text: 'The house was empty because the family ___ (move) out.', options: ['had moved', 'has moved', 'moved', 'was moving'], correct: 0, explanation: 'Past Perfect: had + V3 (moved).' },
-          { id: 16, text: 'We ___ (just / sit) down when the phone rang.', options: ['had just sat', 'have just sat', 'just sat', 'were just sitting'], correct: 0, explanation: 'Past Perfect: had + just + V3 (sat).' },
-          { id: 17, text: 'She realized she ___ (leave) her phone at home.', options: ['had left', 'has left', 'left', 'was leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
-          { id: 18, text: 'They ___ (not / see) each other for ten years before the reunion.', options: ["hadn't seen", "haven't seen", "didn't see", "weren't seeing"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (seen).' },
-          { id: 19, text: 'Before he became a doctor, he ___ (study) biology for six years.', options: ['had studied', 'has studied', 'studied', 'was studying'], correct: 0, explanation: 'Past Perfect: had + V3 (studied).' },
-          { id: 20, text: 'When the police arrived, the thief ___ (already / escape).', options: ['had already escaped', 'has already escaped', 'already escaped', 'was already escaping'], correct: 0, explanation: 'Past Perfect: had + already + V3 (escaped).' }
-        ],
-        scrambled: [
-          { id: 1, words: ['left', 'when', 'I', 'arrived', 'the', 'train', 'had', 'already'], answer: 'when I arrived the train had already left', explanation: 'Past Perfect: had + already + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 2, words: ['worked', 'she', 'was', 'tired', 'because', 'she', 'had', 'all', 'day'], answer: 'she was tired because she had worked all day', explanation: 'Past Perfect sababni bildiradi.' },
-          { id: 3, words: ['finished', 'he', 'said', 'he', 'had', 'the', 'report'], answer: 'he said he had finished the report', explanation: 'Reported speech: had + V3.' },
-          { id: 4, words: ['started', 'by', 'the', 'time', 'we', 'got', 'there', 'the', 'film', 'had'], answer: 'by the time we got there the film had started', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 5, words: ['seen', 'I', 'had', 'never', 'snow', 'before', 'I', 'visited', 'Norway'], answer: 'I had never seen snow before I visited Norway', explanation: 'Past Perfect: had + never + V3.' },
-          { id: 6, words: ['eaten', 'they', 'had', 'already', 'when', 'we', 'arrived'], answer: 'they had already eaten when we arrived', explanation: 'Past Perfect: had + already + V3.' },
-          { id: 7, words: ['finished', 'had', 'you', 'your', 'homework', 'before', 'dinner', '?'], answer: 'had you finished your homework before dinner', explanation: 'Past Perfect question: Had + subject + V3.' },
-          { id: 8, words: ['met', 'we', "hadn't", 'before', 'the', 'conference'], answer: "we hadn't met before the conference", explanation: 'Past Perfect negative: hadn\'t + V3.' },
-          { id: 9, words: ['finished', 'after', 'she', 'had', 'the', 'exam', 'she', 'went', 'home'], answer: 'after she had finished the exam she went home', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 10, words: ['left', 'he', 'had', 'already', 'when', 'I', 'called', 'him'], answer: 'he had already left when I called him', explanation: 'Past Perfect: had + already + V3.' },
-          { id: 11, words: ['arrived', 'as', 'soon', 'as', 'she', 'had', 'the', 'meeting', 'started'], answer: 'as soon as she had arrived the meeting started', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 12, words: ['forgotten', 'I', "couldn't", 'get', 'in', 'because', 'I', 'had', 'my', 'key'], answer: "I couldn't get in because I had forgotten my key", explanation: 'Past Perfect sababni bildiradi.' },
-          { id: 13, words: ['graduated', 'by', '2020', 'she', 'had', 'from', 'university'], answer: 'by 2020 she had graduated from university', explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar.' },
-          { id: 14, words: ['visited', 'had', 'he', 'ever', 'London', 'before', 'that', 'trip', '?'], answer: 'had he ever visited London before that trip', explanation: 'Past Perfect question: Had + subject + ever + V3.' },
-          { id: 15, words: ['moved', 'the', 'house', 'was', 'empty', 'because', 'the', 'family', 'had', 'out'], answer: 'the house was empty because the family had moved out', explanation: 'Past Perfect sababni bildiradi.' },
-          { id: 16, words: ['sat', 'we', 'had', 'just', 'down', 'when', 'the', 'phone', 'rang'], answer: 'we had just sat down when the phone rang', explanation: 'Past Perfect: had + just + V3.' },
-          { id: 17, words: ['left', 'she', 'realized', 'she', 'had', 'her', 'phone', 'at', 'home'], answer: 'she realized she had left her phone at home', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 18, words: ['seen', 'they', "hadn't", 'each', 'other', 'for', 'ten', 'years', 'before', 'the', 'reunion'], answer: "they hadn't seen each other for ten years before the reunion", explanation: 'Past Perfect negative: hadn\'t + V3.' },
-          { id: 19, words: ['studied', 'before', 'he', 'became', 'a', 'doctor', 'he', 'had', 'biology', 'for', 'six', 'years'], answer: 'before he became a doctor he had studied biology for six years', explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 20, words: ['escaped', 'when', 'the', 'police', 'arrived', 'the', 'thief', 'had', 'already'], answer: 'when the police arrived the thief had already escaped', explanation: 'Past Perfect: had + already + V3.' }
-        ],
-        errorCorrection: [
-          { id: 1, text: 'When I arrived, the train has already left.', options: ['When I arrived', 'the train', 'has already left', 'No error'], correct: 2, wrongPart: 'has already left', correction: 'had already left', explanation: 'Past reference needs Past Perfect: "had already left", not Present Perfect.' },
-          { id: 2, text: 'She was tired because she has worked all day.', options: ['She was tired', 'because', 'she has worked', 'all day'], correct: 2, wrongPart: 'she has worked', correction: 'she had worked', explanation: 'With a Past Simple main clause, use Past Perfect: "had worked".' },
-          { id: 3, text: 'He said he has finished the report.', options: ['He said', 'he has finished', 'the report', 'No error'], correct: 1, wrongPart: 'he has finished', correction: 'he had finished', explanation: 'Reported speech shifts Present Perfect to Past Perfect: "had finished".' },
-          { id: 4, text: 'By the time we got there, the film had start.', options: ['By the time', 'we got there', 'the film', 'had start'], correct: 3, wrongPart: 'had start', correction: 'had started', explanation: 'Past Perfect needs V3: "had started", not the base form.' },
-          { id: 5, text: 'I had never see snow before I visited Norway.', options: ['I had never', 'see', 'snow', 'before I visited Norway'], correct: 1, wrongPart: 'see', correction: 'seen', explanation: 'Past Perfect needs V3: "had never seen".' },
-          { id: 6, text: 'They had already ate when we arrived.', options: ['They had already', 'ate', 'when', 'we arrived'], correct: 1, wrongPart: 'ate', correction: 'eaten', explanation: 'Past Perfect needs V3: "had already eaten", not the Past Simple form.' },
-          { id: 7, text: 'Did you finished your homework before dinner?', options: ['Did you finished', 'your', 'homework', 'before dinner'], correct: 0, wrongPart: 'Did you finished', correction: 'Had you finished', explanation: 'To express "before another past action," use Past Perfect: "Had you finished".' },
-          { id: 8, text: "We hadn't met before the conference, isn't it?", options: ["We hadn't met", 'before the conference', "isn't it", 'No error'], correct: 2, wrongPart: "isn't it", correction: "had we", explanation: 'Past Perfect negative statements use "had we" as a tag, not "isn\'t it".' },
-          { id: 9, text: 'After she had finish the exam, she went home.', options: ['After she had', 'finish', 'the exam', 'she went home'], correct: 1, wrongPart: 'finish', correction: 'finished', explanation: 'Past Perfect needs V3: "had finished".' },
-          { id: 10, text: 'He already left when I called him.', options: ['He', 'already left', 'when I called', 'him'], correct: 1, wrongPart: 'already left', correction: 'had already left', explanation: 'To show the action happened before another past action, use Past Perfect: "had already left".' },
-          { id: 11, text: 'As soon as she has arrived, the meeting started.', options: ['As soon as', 'she has arrived', 'the meeting', 'started'], correct: 1, wrongPart: 'she has arrived', correction: 'she had arrived', explanation: 'With a Past Simple main clause, use Past Perfect: "had arrived".' },
-          { id: 12, text: "I couldn't get in because I had forget my key.", options: ["I couldn't get in", 'because', 'I had forget', 'my key'], correct: 2, wrongPart: 'I had forget', correction: 'I had forgotten', explanation: 'Past Perfect needs V3: "had forgotten".' },
-          { id: 13, text: 'By 2020, she has graduated from university.', options: ['By 2020', 'she has graduated', 'from university', 'No error'], correct: 1, wrongPart: 'she has graduated', correction: 'she had graduated', explanation: 'A past time marker ("By 2020") requires Past Perfect: "had graduated".' },
-          { id: 14, text: 'Had he ever visit London before that trip?', options: ['Had he', 'ever visit', 'London', 'before that trip'], correct: 1, wrongPart: 'ever visit', correction: 'ever visited', explanation: 'Past Perfect needs V3: "ever visited".' },
-          { id: 15, text: 'The house was empty because the family has moved out.', options: ['The house was empty', 'because', 'the family has moved', 'out'], correct: 2, wrongPart: 'the family has moved', correction: 'the family had moved', explanation: 'With a Past Simple main clause, use Past Perfect: "had moved".' },
-          { id: 16, text: 'We had just sit down when the phone rang.', options: ['We had just', 'sit', 'down', 'when the phone rang'], correct: 1, wrongPart: 'sit', correction: 'sat', explanation: 'Past Perfect needs V3: "had just sat".' },
-          { id: 17, text: 'She realized she has left her phone at home.', options: ['She realized', 'she has left', 'her phone', 'at home'], correct: 1, wrongPart: 'she has left', correction: 'she had left', explanation: 'With a Past Simple main clause, use Past Perfect: "had left".' },
-          { id: 18, text: "They hadn't saw each other for ten years before the reunion.", options: ["They hadn't", 'saw', 'each other for ten years', 'before the reunion'], correct: 1, wrongPart: 'saw', correction: 'seen', explanation: 'Past Perfect needs V3: "hadn\'t seen", not the Past Simple form.' },
-          { id: 19, text: 'Before he became a doctor, he had study biology for six years.', options: ['Before he became a doctor', 'he had', 'study', 'biology for six years'], correct: 2, wrongPart: 'study', correction: 'studied', explanation: 'Past Perfect needs V3: "had studied".' },
-          { id: 20, text: 'When the police arrived, the thief already escaped.', options: ['When the police arrived', 'the thief', 'already escaped', 'No error'], correct: 2, wrongPart: 'already escaped', correction: 'had already escaped', explanation: 'To show the escape happened before the police arrived, use Past Perfect: "had already escaped".' }
-        ],
-        transform: [
-          { id: 1, text: 'Complete the Past Perfect: "When I arrived, the train ___ (already / leave)."', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + V3 (left).' },
-          { id: 2, text: 'Combine using Past Perfect: "She finished work. She went home." (finished first)', options: ['After she had finished work, she went home.', 'After she finished work, she has gone home.', 'After she has finished work, she went home.', 'After she was finishing work, she went home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had finished".' },
-          { id: 3, text: 'Change to reported speech: "I have finished the report," he said. → He said he ___.', options: ['had finished the report', 'has finished the report', 'finished the report', 'was finishing the report'], correct: 0, explanation: 'Reported speech: Present Perfect → Past Perfect.' },
-          { id: 4, text: 'Complete the Past Perfect: "By the time we got there, the film ___ (start)."', options: ['had started', 'has started', 'started', 'was starting'], correct: 0, explanation: 'Past Perfect: had + V3 (started).' },
-          { id: 5, text: 'Combine using Past Perfect: "I never saw snow. Then I visited Norway."', options: ['I had never seen snow before I visited Norway.', 'I have never seen snow before I visited Norway.', 'I never saw snow before I visited Norway.', 'I was never seeing snow before I visited Norway.'], correct: 0, explanation: 'Past Perfect shows the earlier state: "had never seen".' },
-          { id: 6, text: 'Make a question: "You had finished your homework before dinner."', options: ['Had you finished your homework before dinner?', 'Have you finished your homework before dinner?', 'Did you finish your homework before dinner?', 'Were you finishing your homework before dinner?'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
-          { id: 7, text: 'Make negative: "We had met before the conference." → We ___ before the conference.', options: ["hadn't met", "haven't met", "didn't meet", "weren't meeting"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (met).' },
-          { id: 8, text: 'Combine using Past Perfect: "She finished the exam. She went home."', options: ['After she had finished the exam, she went home.', 'After she finishing the exam, she went home.', 'After she has finished the exam, she went home.', 'After she finished the exam, she has gone home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had finished".' },
-          { id: 9, text: 'Complete the Past Perfect: "He ___ (already / leave) when I called him."', options: ['had already left', 'has already left', 'already left', 'was already leaving'], correct: 0, explanation: 'Past Perfect: had + already + V3 (left).' },
-          { id: 10, text: 'Combine using Past Perfect: "She arrived. The meeting started." (as soon as she arrived)', options: ['As soon as she had arrived, the meeting started.', 'As soon as she arrived, the meeting has started.', 'As soon as she has arrived, the meeting started.', 'As soon as she was arriving, the meeting started.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had arrived".' },
-          { id: 11, text: 'Give the reason using Past Perfect: "I forgot my key. I couldn\'t get in."', options: ["I couldn't get in because I had forgotten my key.", "I couldn't get in because I forgot my key first.", "I couldn't get in because I have forgotten my key.", "I couldn't get in because I was forgetting my key."], correct: 0, explanation: 'Past Perfect shows the earlier cause: "had forgotten".' },
-          { id: 12, text: 'Complete the Past Perfect: "By 2020, she ___ (graduate) from university."', options: ['had graduated', 'has graduated', 'graduated', 'was graduating'], correct: 0, explanation: 'Past Perfect: had + V3 (graduated).' },
-          { id: 13, text: 'Make a question: "He had ever visited London before that trip."', options: ['Had he ever visited London before that trip?', 'Has he ever visited London before that trip?', 'Did he ever visit London before that trip?', 'Was he ever visiting London before that trip?'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3?' },
-          { id: 14, text: 'Give the reason using Past Perfect: "The family moved out. The house was empty."', options: ['The house was empty because the family had moved out.', 'The house was empty because the family moved out later.', 'The house was empty because the family has moved out.', 'The house was empty because the family was moving out.'], correct: 0, explanation: 'Past Perfect shows the earlier cause: "had moved out".' },
-          { id: 15, text: 'Complete the Past Perfect: "We ___ (just / sit) down when the phone rang."', options: ['had just sat', 'have just sat', 'just sat', 'were just sitting'], correct: 0, explanation: 'Past Perfect: had + just + V3 (sat).' },
-          { id: 16, text: 'Combine using Past Perfect: "She left her phone at home. She realized it."', options: ['She realized she had left her phone at home.', 'She realized she has left her phone at home.', 'She realized she leaves her phone at home.', 'She realized she was leaving her phone at home.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had left".' },
-          { id: 17, text: 'Make negative: "They had seen each other before the reunion." → They ___ each other for ten years before the reunion.', options: ["hadn't seen", "haven't seen", "didn't see", "weren't seeing"], correct: 0, explanation: 'Past Perfect negative: hadn\'t + V3 (seen).' },
-          { id: 18, text: 'Combine using Past Perfect: "He studied biology for six years. Then he became a doctor."', options: ['Before he became a doctor, he had studied biology for six years.', 'Before he became a doctor, he has studied biology for six years.', 'Before he became a doctor, he studies biology for six years.', 'Before he became a doctor, he was studying biology for six years.'], correct: 0, explanation: 'Past Perfect shows the earlier action: "had studied".' },
-          { id: 19, text: 'Complete the Past Perfect: "When the police arrived, the thief ___ (already / escape)."', options: ['had already escaped', 'has already escaped', 'already escaped', 'was already escaping'], correct: 0, explanation: 'Past Perfect: had + already + V3 (escaped).' },
-          { id: 20, text: 'Change to reported speech: "I have finished my homework," she said. → She said she ___.', options: ['had finished her homework', 'has finished her homework', 'finished her homework', 'was finishing her homework'], correct: 0, explanation: 'Reported speech: Present Perfect → Past Perfect.' }
-        ],
-        dialogue: [
-          { id: 1, situation: 'Missing a train.', dialogue: 'A: Did you catch the train?\nB: No, when I arrived, it ___ already left.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
-          { id: 2, situation: 'Talking about a tiring day.', dialogue: 'A: Why was she so tired?\nB: Because she ___ worked all day.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
-          { id: 3, situation: 'Reporting what someone said.', dialogue: 'A: What did he tell you?\nB: He said he ___ finished the report.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Reported speech: had + V3.' },
-          { id: 4, situation: 'Arriving late at the cinema.', dialogue: 'A: Did you see the beginning?\nB: No, by the time we got there, the film ___ started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 5, situation: 'Talking about a trip to Norway.', dialogue: 'A: Was it your first time seeing snow?\nB: Yes, I ___ never seen snow before I visited Norway.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + never + V3.' },
-          { id: 6, situation: 'Arriving for dinner.', dialogue: 'A: Are they still eating?\nB: No, they ___ already eaten when we arrived.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
-          { id: 7, situation: 'Checking on homework.', dialogue: 'A: ___ you finished your homework before dinner?\nB: Yes, I had.', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + V3?' },
-          { id: 8, situation: 'Meeting new colleagues.', dialogue: 'A: Did you know each other before?\nB: No, we ___ not met before the conference.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not + V3.' },
-          { id: 9, situation: 'Talking about an exam day.', dialogue: 'A: What did she do after the exam?\nB: After she ___ finished the exam, she went home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 10, situation: 'Trying to reach someone.', dialogue: 'A: Did you reach him?\nB: No, he ___ already left when I called him.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' },
-          { id: 11, situation: 'Describing a meeting start.', dialogue: 'A: When did the meeting start?\nB: As soon as she ___ arrived, it started.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 12, situation: 'Explaining why the door was locked.', dialogue: "A: Why couldn't you get in?\nB: Because I ___ forgotten my key.", options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
-          { id: 13, situation: 'Talking about education history.', dialogue: 'A: Was she working by 2020?\nB: Yes, by 2020, she ___ graduated from university.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, ma\'lum vaqtga qadar.' },
-          { id: 14, situation: 'Discussing travel history.', dialogue: '___ he ever visited London before that trip?\nB: No, it was his first time.', options: ['Had', 'Have', 'Did', 'Was'], correct: 0, explanation: 'Past Perfect question: Had + subject + ever + V3?' },
-          { id: 15, situation: 'Talking about an empty house.', dialogue: 'A: Why was the house empty?\nB: Because the family ___ moved out.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect sababni bildiradi.' },
-          { id: 16, situation: 'Describing an interrupted moment.', dialogue: 'A: What were you doing when the phone rang?\nB: We ___ just sat down.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + just + V3.' },
-          { id: 17, situation: 'Explaining a mistake.', dialogue: 'A: Why did she go back home?\nB: She realized she ___ left her phone at home.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 18, situation: 'Talking about an old friendship.', dialogue: 'A: Had they kept in touch?\nB: No, they ___ not seen each other for ten years before the reunion.', options: ['had', 'have', 'was', 'did'], correct: 0, explanation: 'Past Perfect negative: had not + V3.' },
-          { id: 19, situation: 'Talking about a doctor\'s background.', dialogue: 'A: How long did he study?\nB: Before he became a doctor, he ___ studied biology for six years.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + V3, avvalroq sodir bo\'lgan ish.' },
-          { id: 20, situation: 'Reporting a crime scene.', dialogue: 'A: Did the police catch the thief?\nB: No, when they arrived, he ___ already escaped.', options: ['had', 'has', 'was', 'did'], correct: 0, explanation: 'Past Perfect: had + already + V3.' }
         ]
       },
       {

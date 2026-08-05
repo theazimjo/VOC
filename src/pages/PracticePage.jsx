@@ -8,7 +8,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { usePacks } from '../hooks/usePacks';
 import { useStreak } from '../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
-import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord } from '../utils/helpers';
+import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACTICE_MODE_MIN_WORDS } from '../utils/helpers';
 import { playSound, triggerVibration } from '../utils/feedback';
 import { computeClusterCalibration } from '../utils/memoryEngine';
 import { saveReviewEvent } from '../experiment/experimentDB';
@@ -100,15 +100,21 @@ export default function PracticePage() {
           const mode = queryMode || (foundSource.name === 'Irregular Verbs' ? 'irregular-verbs' : null);
           const count = queryCount ? (queryCount === 'all' ? null : parseInt(queryCount, 10)) : (foundSource.name === 'Irregular Verbs' && mode === 'irregular-verbs' && querySubStep === 'practice' ? 10 : null);
           
-          if (mode) {
+          const eligiblePool = mode ? filterWordsForMode(words, mode) : words;
+          const minWords = mode ? (PRACTICE_MODE_MIN_WORDS[mode] || 1) : 1;
+
+          if (mode && eligiblePool.length >= minWords) {
             setSelectedMode(mode);
-            let selected = filterWordsForMode(words, mode);
+            let selected = eligiblePool;
             if (count && selected.length > count) {
               selected = shuffleArray(selected).slice(0, count);
             }
             setPracticeWords(selected);
             setStep('intro');
           } else {
+            if (mode) {
+              showAlert(`Bu rejim uchun kamida ${minWords} ta so'z kerak. Boshqa rejimni tanlang.`);
+            }
             setStep('mode');
           }
         };
@@ -172,10 +178,6 @@ export default function PracticePage() {
   };
 
   const handleStartPractice = async (mode) => {
-    setSelectedMode(mode);
-    setWrongWords([]);
-    setProgressPct(0);
-
     if (sourceWords.length === 0) {
       showAlert("Bu manbada so'zlar yo'q!");
       return;
@@ -185,6 +187,16 @@ export default function PracticePage() {
     // chosen, but Spelling/Sentence get narrowed to already-seen words first
     // — you can't type or recall a word from memory you've never met.
     const pool = filterWordsForMode(sourceWords, mode);
+    const minWords = PRACTICE_MODE_MIN_WORDS[mode] || 1;
+    if (pool.length < minWords) {
+      showAlert(`Bu rejim uchun kamida ${minWords} ta so'z kerak (hozir ${pool.length} ta bor).`);
+      return;
+    }
+
+    setSelectedMode(mode);
+    setWrongWords([]);
+    setProgressPct(0);
+
     const selected = weightedSelectWords(pool, wordCount);
     setPracticeWords(selected);
     setStep('intro');
@@ -365,7 +377,7 @@ export default function PracticePage() {
   return (
     <div className="practice-page">
       <div className="practice-page-header">
-        {(step !== 'source' && step !== 'results' || (urlSourceId && step !== 'results')) && (
+        {step !== 'source' && step !== 'results' && (
           <button className="clean-back-arrow" onClick={handleBack} title="Orqaga">
             ←
           </button>

@@ -6,9 +6,9 @@ import { useGrammarStats } from '../hooks/useGrammarStats';
 import './GrammarPage.css';
 
 const LEVELS = [
-  { id: 'beginner',     label: "Boshlang'ich", emoji: '🌱', locked: false },
-  { id: 'intermediate', label: "O'rta daraja",  emoji: '🔥', locked: false },
-  { id: 'advanced',     label: 'Yuqori daraja', emoji: '⚡', locked: true  },
+  { id: 'beginner',     label: 'Beginner',     emoji: '🌱', locked: false },
+  { id: 'intermediate', label: 'Elementary',   emoji: '🔥', locked: false },
+  { id: 'advanced',     label: 'Intermediate', emoji: '⚡', locked: true  },
 ];
 
 const containerVariants = {

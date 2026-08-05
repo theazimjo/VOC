@@ -108,6 +108,18 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
     } else {
       setStatus('wrong');
       if (onAnswer) onAnswer(currentWord, false);
+
+      // Persist the failed attempt itself, not just the eventual outcome —
+      // otherwise a word mispronounced twice before finally succeeding on
+      // retry would show up in the memory engine as pure success, unlike
+      // every other practice mode which records each wrong attempt as it
+      // happens.
+      onUpdateWord(currentWord.id, {
+        isCorrect: false,
+        confidence: inferConfidenceFromSpeed(responseTime, false),
+        responseTime,
+        retrievalType: 'active_recall',
+      });
     }
   };
 

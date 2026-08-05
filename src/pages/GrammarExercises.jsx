@@ -49,9 +49,9 @@ export default function GrammarExercises() {
   };
 
   const getLevelLabel = () => {
-    if (level === 'beginner') return "Boshlang'ich";
-    if (level === 'intermediate') return "O'rta daraja";
-    return 'Yuqori daraja';
+    if (level === 'beginner') return 'Beginner';
+    if (level === 'intermediate') return 'Elementary';
+    return 'Intermediate';
   };
 
   const completedCount = Object.keys(exercisesData).length;

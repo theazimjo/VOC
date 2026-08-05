@@ -2,16 +2,18 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
-import { speakWord } from '../../utils/helpers';
+import { speakWord, shuffleArray } from '../../utils/helpers';
 import { findConfusableMatch } from '../../experiment/textSimilarity';
 import { recordConfusionPair } from '../../experiment/experimentDB';
 import { useAuth } from '../../contexts/AuthContext';
+import { useKeyboardInset } from '../../hooks/useKeyboardInset';
 import './SpellingGame.css';
 
 const CONFUSION_THRESHOLD = 0.6;
 
 export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
   const { user } = useAuth();
+  const keyboardInset = useKeyboardInset();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
@@ -33,7 +35,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   useEffect(() => {
     if (!currentWord) return;
-    setScrambled(currentWord.word.trim().split('').sort(() => 0.5 - Math.random()).join(' '));
+    setScrambled(shuffleArray(currentWord.word.trim().split('')).join(' '));
     setInput('');
     setAnswered(false);
     setIsCorrect(false);
@@ -177,8 +179,13 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
         </motion.div>
       </AnimatePresence>
 
-      {/* Fixed full-width bottom bar, styled with the app's own design language */}
-      <div className={`spelling-bottom-bar ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}>
+      {/* Fixed full-width bottom bar, styled with the app's own design language.
+          Shifted up by the mobile keyboard's height (via translateY) so the
+          submit button never ends up hidden underneath it. */}
+      <div
+        className={`spelling-bottom-bar ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
+        style={keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
+      >
         <div className="spelling-bottom-bar-inner">
           {!answered ? (
             <>
