@@ -14,6 +14,7 @@ data class Pack(
     val wordCount: Int = 0,
     val folderId: String? = null,
     val marketPackId: String? = null,
+    val language: String = "en-US",
 ) {
     companion object {
         fun fromSnapshot(snapshot: DataSnapshot): Pack {
@@ -28,6 +29,7 @@ data class Pack(
                 wordCount = snapshot.child("wordCount").getValue(Double::class.java)?.toInt() ?: 0,
                 folderId = snapshot.child("folderId").getValue(String::class.java),
                 marketPackId = snapshot.child("marketPackId").getValue(String::class.java),
+                language = snapshot.child("language").getValue(String::class.java) ?: "en-US",
             )
         }
     }
@@ -42,5 +44,6 @@ data class Pack(
         put("wordCount", wordCount)
         folderId?.let { put("folderId", it) }
         marketPackId?.let { put("marketPackId", it) }
+        put("language", language)
     }
 }

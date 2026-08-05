@@ -52,24 +52,6 @@ class WordRepository(
         awaitClose { ref.removeEventListener(listener) }
     }
 
-    /** Words within a single pack — used by PackDetail and Practice. */
-    fun observeWordsForPack(uid: String, packId: String): Flow<List<Word>> = callbackFlow {
-        val ref = db.reference.child("users").child(uid).child("words").child(packId)
-        val listener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val words = snapshot.children.mapNotNull { child ->
-                    runCatching { Word.fromSnapshot(child, packId) }.getOrNull()
-                }
-                trySend(words)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                close(error.toException())
-            }
-        }
-        ref.addValueEventListener(listener)
-        awaitClose { ref.removeEventListener(listener) }
-    }
 
     suspend fun addWord(
         uid: String,

@@ -2,6 +2,7 @@ package abs.uits.vocabry.ui.library.components
 
 import abs.uits.vocabry.data.model.Folder
 import abs.uits.vocabry.data.model.Pack
+import abs.uits.vocabry.data.model.SPEECH_LANGUAGES
 import abs.uits.vocabry.ui.theme.iconForPackOrFolder
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -66,13 +67,16 @@ fun PackFormDialog(
         color: String,
         icon: String,
         level: String,
-        folderId: String?
+        folderId: String?,
+        language: String
     ) -> Unit,
     onDelete: (() -> Unit)? = null,
 ) {
     var name by remember { mutableStateOf(pack?.name.orEmpty()) }
     var selectedFolderId by remember { mutableStateOf(pack?.folderId ?: defaultFolderId) }
     var folderMenuExpanded by remember { mutableStateOf(false) }
+    var selectedLanguage by remember { mutableStateOf(pack?.language ?: "en-US") }
+    var languageMenuExpanded by remember { mutableStateOf(false) }
     var showDeleteConfirm by remember { mutableStateOf(false) }
 
     // New packs get a random icon/color, same as web's PackForm.jsx useEffect
@@ -168,6 +172,40 @@ fun PackFormDialog(
                         }
                     }
                 }
+
+                Spacer(Modifier.height(12.dp))
+                Text("So'zlarning tili (talaffuz uchun)", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
+                Spacer(Modifier.height(4.dp))
+
+                ExposedDropdownMenuBox(
+                    expanded = languageMenuExpanded,
+                    onExpandedChange = { languageMenuExpanded = !languageMenuExpanded }
+                ) {
+                    val selected = SPEECH_LANGUAGES.find { it.code == selectedLanguage } ?: SPEECH_LANGUAGES.first()
+                    OutlinedTextField(
+                        value = "${selected.flag} ${selected.label}",
+                        onValueChange = {},
+                        readOnly = true,
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageMenuExpanded) },
+                        modifier = Modifier
+                            .menuAnchor()
+                            .fillMaxWidth()
+                    )
+                    ExposedDropdownMenu(
+                        expanded = languageMenuExpanded,
+                        onDismissRequest = { languageMenuExpanded = false }
+                    ) {
+                        SPEECH_LANGUAGES.forEach { lang ->
+                            DropdownMenuItem(
+                                text = { Text("${lang.flag} ${lang.label}") },
+                                onClick = {
+                                    selectedLanguage = lang.code
+                                    languageMenuExpanded = false
+                                }
+                            )
+                        }
+                    }
+                }
             }
         },
         confirmButton = {
@@ -179,7 +217,8 @@ fun PackFormDialog(
                         color,
                         icon,
                         pack?.level.orEmpty().ifEmpty { "beginner" },
-                        selectedFolderId
+                        selectedFolderId,
+                        selectedLanguage
                     )
                 },
                 enabled = name.isNotBlank()

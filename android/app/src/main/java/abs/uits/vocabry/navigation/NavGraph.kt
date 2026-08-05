@@ -87,7 +87,9 @@ fun VocabryNavGraph() {
         ) { backStackEntry ->
             val packId = backStackEntry.arguments?.getString("packId") ?: return@composable
             val vm: PackDetailViewModel = viewModel(
-                factory = viewModelFactory { initializer { PackDetailViewModel(packId) } },
+                factory = viewModelFactory {
+                    initializer { PackDetailViewModel(packId, libraryViewModel.packs, libraryViewModel.allWords) }
+                },
             )
             PackDetailScreen(navController, packId, vm)
         }

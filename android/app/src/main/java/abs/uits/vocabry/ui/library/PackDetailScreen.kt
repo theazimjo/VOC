@@ -10,9 +10,9 @@ import abs.uits.vocabry.ui.library.components.WordFormData
 import abs.uits.vocabry.ui.theme.SuccessGreen
 import abs.uits.vocabry.ui.theme.WarningAmber
 import abs.uits.vocabry.ui.theme.iconForPackOrFolder
+import abs.uits.vocabry.util.TtsManager
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
-import android.speech.tts.TextToSpeech
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -35,6 +35,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.MenuBook
@@ -62,7 +63,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
@@ -73,7 +73,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -91,7 +90,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -132,23 +130,7 @@ fun PackDetailScreen(
         }
     }
 
-    // TTS Setup
     val context = LocalContext.current
-    var tts by remember { mutableStateOf<TextToSpeech?>(null) }
-
-    DisposableEffect(context) {
-        var ttsInstance: TextToSpeech? = null
-        ttsInstance = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                ttsInstance?.language = Locale.US
-            }
-        }
-        tts = ttsInstance
-        onDispose {
-            ttsInstance.stop()
-            ttsInstance.shutdown()
-        }
-    }
 
     val accentColor = try {
         Color(android.graphics.Color.parseColor(pack?.color ?: "#7C3AED"))
@@ -310,13 +292,10 @@ fun PackDetailScreen(
             if (words.isNotEmpty()) {
                 item {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
-                        OutlinedTextField(
+                        CompactSearchField(
                             value = searchQuery,
                             onValueChange = { viewModel.setSearchQuery(it) },
-                            placeholder = { Text("So'z yoki tarjima bo'yicha qidirish...") },
-                            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-                            singleLine = true,
-                            modifier = Modifier.fillMaxWidth()
+                            placeholder = "So'z yoki tarjima bo'yicha qidirish...",
                         )
                         Spacer(Modifier.height(8.dp))
                         WordSortDropdown(
@@ -383,7 +362,7 @@ fun PackDetailScreen(
                                     WordCardItem(
                                         word = word,
                                         readOnly = isReadOnly,
-                                        onSpeak = { text -> tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null) },
+                                        onSpeak = { text -> TtsManager.speak(context, text, pack?.language ?: "en-US") },
                                         onEdit = { editingWord = word; showWordForm = true },
                                         onDelete = { wordToDeleteId = word.id }
                                     )
@@ -394,7 +373,7 @@ fun PackDetailScreen(
                         WordCardItem(
                             word = word,
                             readOnly = isReadOnly,
-                            onSpeak = { text -> tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null) },
+                            onSpeak = { text -> TtsManager.speak(context, text, pack?.language ?: "en-US") },
                             onEdit = { editingWord = word; showWordForm = true },
                             onDelete = { wordToDeleteId = word.id }
                         )
@@ -521,6 +500,59 @@ private fun SpeedDialFab(
                 if (open) Icons.Filled.Close else Icons.Filled.Add,
                 contentDescription = if (open) "Yopish" else "Amallar"
             )
+        }
+    }
+}
+
+/**
+ * Compact pill search field — the default M3 [OutlinedTextField] this
+ * replaces has a ~56dp minimum height and 16sp body text baked in, which
+ * reads as oversized next to the rest of this screen's smaller (11-15sp)
+ * text. A [BasicTextField] in a fixed-height container gives full control
+ * over sizing instead.
+ */
+@Composable
+private fun CompactSearchField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    placeholder: String,
+) {
+    Surface(
+        shape = RoundedCornerShape(14.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(44.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp)
+        ) {
+            Icon(
+                Icons.Filled.Search,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(Modifier.width(8.dp))
+            Box(modifier = Modifier.weight(1f)) {
+                if (value.isEmpty()) {
+                    Text(placeholder, fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+                androidx.compose.foundation.text.BasicTextField(
+                    value = value,
+                    onValueChange = onValueChange,
+                    singleLine = true,
+                    textStyle = androidx.compose.ui.text.TextStyle(
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    ),
+                    cursorBrush = androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.primary),
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     }
 }

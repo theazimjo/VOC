@@ -5,7 +5,6 @@ import abs.uits.vocabry.data.market.MarketData
 import abs.uits.vocabry.data.model.MarketWord
 import abs.uits.vocabry.data.model.Pack
 import abs.uits.vocabry.data.model.Word
-import abs.uits.vocabry.data.repo.PackRepository
 import abs.uits.vocabry.data.repo.WordRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +14,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -22,19 +22,29 @@ import kotlinx.coroutines.launch
 
 enum class WordSort { GROUP, DATE_DESC, DATE_ASC, ALPHA_ASC, MASTERY_DESC, MASTERY_ASC }
 
+/**
+ * `sharedPacks`/`sharedAllWords` are [LibraryViewModel]'s app-wide, eagerly-loaded
+ * caches (hoisted once at the NavGraph root, loading from the moment the user
+ * enters the app). Deriving from them — instead of this screen opening its own
+ * fresh Firebase listener per pack, like it used to — means the data is already
+ * resident by the time the user taps into a pack, so it renders instantly with
+ * no per-open network wait.
+ */
 class PackDetailViewModel(
     private val packId: String,
+    sharedPacks: StateFlow<List<Pack>>,
+    sharedAllWords: StateFlow<List<Word>>,
     private val uid: String = FirebaseAuth.getInstance().currentUser?.uid.orEmpty(),
     private val wordRepo: WordRepository = WordRepository(),
-    private val packRepo: PackRepository = PackRepository(),
 ) : ViewModel() {
 
-    val words: StateFlow<List<Word>> = wordRepo.observeWordsForPack(uid, packId)
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+    val words: StateFlow<List<Word>> = sharedAllWords
+        .map { list -> list.filter { it.packId == packId } }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, sharedAllWords.value.filter { it.packId == packId })
 
-    val pack: StateFlow<Pack?> = packRepo.observePacks(uid)
-        .map { packs -> packs.find { it.id == packId } }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+    val pack: StateFlow<Pack?> = sharedPacks
+        .map { list -> list.find { it.id == packId } }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, sharedPacks.value.find { it.id == packId })
 
     val isIrregularVerbs: StateFlow<Boolean> = pack
         .map { it?.name == "Irregular Verbs" }
@@ -75,15 +85,16 @@ class PackDetailViewModel(
     init {
         // On first open after the Market source pack gained new words, silently
         // add the missing ones to this installed copy (mirrors PackDetail.jsx's
-        // market-sync effect). Uses the flows' first *real* emission (not the
-        // stateIn default) so an empty snapshot can't be mistaken for "no words yet".
+        // market-sync effect). Reads straight off the shared `pack`/`words`
+        // above — no separate fetch needed, since that data is already
+        // (or very shortly will be) resident from the app-wide eager load.
         viewModelScope.launch {
-            val currentPack = packRepo.observePacks(uid).first().find { it.id == packId } ?: return@launch
+            val currentPack = pack.filterNotNull().first()
             val sourcePack = MarketData.marketPacks.find { it.id == currentPack.marketPackId }
                 ?: MarketData.marketPacks.find { it.name == currentPack.name }
                 ?: return@launch
 
-            val currentWords = wordRepo.observeWordsForPack(uid, packId).first()
+            val currentWords = words.value
             val existing = currentWords.map { it.word.trim().lowercase() }.toSet()
             val missing = sourcePack.words.filter { !existing.contains(it.word.trim().lowercase()) }
             if (missing.isEmpty()) return@launch

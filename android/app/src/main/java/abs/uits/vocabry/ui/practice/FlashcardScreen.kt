@@ -5,6 +5,7 @@ import abs.uits.vocabry.ui.theme.SuccessGreen
 import abs.uits.vocabry.ui.theme.WarningAmber
 import abs.uits.vocabry.util.Feedback
 import abs.uits.vocabry.util.FeedbackSound
+import abs.uits.vocabry.util.TtsManager
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,7 +13,6 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import android.speech.tts.TextToSpeech
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
@@ -102,7 +102,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
-import java.util.Locale
 
 private val MODE_ICONS: Map<PracticeMode, ImageVector> = mapOf(
     PracticeMode.FLASHCARD to Icons.Filled.Psychology,
@@ -132,25 +131,8 @@ fun FlashcardScreen(
     val context = LocalContext.current
     var showExitConfirm by remember { mutableStateOf(false) }
 
-    // TTS Setup
-    var tts by remember { mutableStateOf<TextToSpeech?>(null) }
-
-    DisposableEffect(context) {
-        var ttsInstance: TextToSpeech? = null
-        ttsInstance = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                ttsInstance?.language = Locale.US
-            }
-        }
-        tts = ttsInstance
-        onDispose {
-            ttsInstance?.stop()
-            ttsInstance?.shutdown()
-        }
-    }
-
     val onSpeak: (String) -> Unit = { text ->
-        tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+        TtsManager.speak(context, text, state.sourceLanguage)
     }
 
     // Autoplay pronunciation ~350ms after each card mounts (web parity),

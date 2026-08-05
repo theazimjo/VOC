@@ -52,6 +52,7 @@ class PackRepository(
         level: String = "beginner",
         folderId: String? = null,
         marketPackId: String? = null,
+        language: String = "en-US",
     ): String {
         if (uid.isBlank()) return ""
         val newPackRef = db.reference.child("users").child(uid).child("packs").push()
@@ -68,6 +69,7 @@ class PackRepository(
             wordCount = 0,
             folderId = folderId,
             marketPackId = marketPackId,
+            language = language,
         )
 
         val updates = mapOf(
@@ -104,6 +106,7 @@ class PackRepository(
         icon: String,
         level: String,
         folderId: String?,
+        language: String,
     ) {
         if (uid.isBlank() || packId.isBlank()) return
         val updates = mutableMapOf<String, Any?>(
@@ -113,6 +116,7 @@ class PackRepository(
             "icon" to icon,
             "level" to level,
             "folderId" to folderId,
+            "language" to language,
         )
         db.reference.child("users").child(uid).child("packs").child(packId)
             .updateChildren(updates).await()

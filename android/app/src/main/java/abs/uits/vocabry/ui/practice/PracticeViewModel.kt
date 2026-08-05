@@ -49,6 +49,7 @@ data class MatchUiState(
 
 data class PracticeUiState(
     val loading: Boolean = true,
+    val sourceLanguage: String = "en-US",
     val allSourceWords: List<Word> = emptyList(),
     val queue: List<Word> = emptyList(),
     val currentIndex: Int = 0,
@@ -129,12 +130,22 @@ class PracticeViewModel(
                 is PracticeSource.Due -> SpacedRepetition.getDueWords(corpus)
                 is PracticeSource.Pack -> corpus.filter { it.packId == source.packId }
             }
-            sourcePackName = if (source is PracticeSource.Pack) {
-                packRepo.observePacks(uid).first().find { it.id == source.packId }?.name.orEmpty()
+            // Due/mixed sessions span multiple packs with potentially different
+            // languages, so — same limitation as web's MixedPractice.jsx — they
+            // fall back to the en-US default; only a single-pack session has one
+            // unambiguous language to speak words in (mirrors PracticePage.jsx's
+            // `selectedSource.language`).
+            val sourcePack = if (source is PracticeSource.Pack) {
+                packRepo.observePacks(uid).first().find { it.id == source.packId }
             } else {
-                ""
+                null
             }
-            _state.value = _state.value.copy(loading = false, allSourceWords = all)
+            sourcePackName = sourcePack?.name.orEmpty()
+            _state.value = _state.value.copy(
+                loading = false,
+                allSourceWords = all,
+                sourceLanguage = sourcePack?.language ?: "en-US",
+            )
         }
     }
 

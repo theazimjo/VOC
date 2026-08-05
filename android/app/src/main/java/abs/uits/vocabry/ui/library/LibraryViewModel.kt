@@ -30,14 +30,24 @@ class LibraryViewModel(
     private val wordRepo: WordRepository = WordRepository(),
 ) : ViewModel() {
 
+    // Eagerly (not WhileSubscribed): this ViewModel is created once at the
+    // NavGraph root and lives for the whole logged-in session, so these are
+    // the app's single shared, always-on cache of packs/folders/words —
+    // started the moment the user lands in the app, kept live via Firebase's
+    // realtime listener for the rest of the session, and reused by
+    // PackDetailViewModel so opening a pack never waits on a fresh fetch.
+    // (WhileSubscribed would only start the underlying listener once some
+    // Composable actually collects the flow via collectAsState — callers
+    // that only read `.value`, like getPackMastery below, never trigger
+    // that, so the listener would silently never run.)
     val packs: StateFlow<List<Pack>> = packRepo.observePacks(uid)
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val folders: StateFlow<List<Folder>> = folderRepo.observeFolders(uid)
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val allWords: StateFlow<List<Word>> = wordRepo.observeAllWords(uid)
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+        .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val marketPacks: List<MarketPack> = MarketData.marketPacks
 
@@ -82,6 +92,7 @@ class LibraryViewModel(
         icon: String,
         level: String,
         folderId: String?,
+        language: String = "en-US",
         onDone: () -> Unit = {}
     ) {
         if (name.isBlank()) return
@@ -94,7 +105,8 @@ class LibraryViewModel(
                     color = color,
                     icon = icon,
                     level = level,
-                    folderId = folderId ?: _openFolderId.value
+                    folderId = folderId ?: _openFolderId.value,
+                    language = language,
                 )
             } catch (e: Exception) {
                 // Firebase only ever reports a generic permission-denied here, whether
@@ -115,6 +127,7 @@ class LibraryViewModel(
         icon: String,
         level: String,
         folderId: String?,
+        language: String = "en-US",
         onDone: () -> Unit = {}
     ) {
         if (packId.isBlank() || name.isBlank()) return
@@ -128,7 +141,8 @@ class LibraryViewModel(
                     color = color,
                     icon = icon,
                     level = level,
-                    folderId = folderId
+                    folderId = folderId,
+                    language = language,
                 )
             } catch (e: Exception) {
                 _error.value = "To'plamni saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring."
@@ -194,6 +208,18 @@ class LibraryViewModel(
         if (packWords.isEmpty()) return null
         val totalMastery = packWords.sumOf { it.mastery }
         return (totalMastery.toDouble() / packWords.size).toInt().coerceIn(0, 100)
+    }
+
+    /** Latest `lastReviewed` (falling back to `addedAt`) among a pack's words, for "last studied" display. */
+    fun getPackLastActivity(packId: String): String? {
+        val packWords = allWords.value.filter { it.packId == packId }
+        if (packWords.isEmpty()) return null
+        return packWords.mapNotNull { it.lastReviewed ?: it.addedAt.ifBlank { null } }.maxOrNull()
+    }
+
+    /** Packs ordered by most recent study activity first, matching the "Oxirgi yodlanayotgan" label. */
+    fun sortByRecentActivity(packsToSort: List<Pack>): List<Pack> {
+        return packsToSort.sortedByDescending { getPackLastActivity(it.id) ?: it.createdAt }
     }
 
     fun getMissingMarketWords(marketPack: MarketPack, installedPack: Pack?): List<MarketWord> {
