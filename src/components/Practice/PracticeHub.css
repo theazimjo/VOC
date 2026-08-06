@@ -1,54 +1,58 @@
 /* ==========================================================================
-   PRACTICE HUB — iOS HIG STYLE
+   PRACTICE HUB — DARK SAT/iOS DESIGN SYSTEM
    ========================================================================== */
 
 .practice-hub {
-  max-width: 600px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .practice-hub > h2 {
-  font-size: var(--font-lg);
-  font-weight: 800;
+  font-size: 1.35rem;
+  font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
-  margin-bottom: 2px;
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
   text-align: left;
 }
 
 .practice-hub > p {
   color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
-  font-size: var(--font-sm);
+  margin-bottom: 1.25rem;
+  font-size: 0.88rem;
   text-align: left;
 }
 
 .practice-hub-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-sm);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
 }
 
 /* Practice Mode Card */
 .practice-mode-card {
   position: relative;
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-md);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 18px);
+  padding: 1.15rem 1.25rem;
   text-align: left;
   cursor: pointer;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 10px;
   box-shadow: var(--shadow);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .practice-mode-card:hover {
   border-color: var(--accent-1);
-  box-shadow: 0 4px 16px rgba(0, 162, 232, 0.08);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 .practice-mode-card:active {
@@ -57,54 +61,37 @@
 
 .practice-mode-card.disabled {
   cursor: not-allowed;
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 .practice-mode-card.disabled:hover {
-  border-color: var(--border);
-  box-shadow: var(--shadow);
-}
-
-.practice-mode-card.disabled:hover .practice-mode-icon-wrap {
-  background: var(--bg-tertiary);
   border-color: var(--border-light);
-}
-
-.practice-mode-card.disabled:hover .practice-mode-arrow {
-  color: var(--text-muted);
+  box-shadow: var(--shadow);
   transform: none;
-}
-
-.practice-mode-badge-warning {
-  background: var(--warning-dim, var(--bg-tertiary));
-  border-color: rgba(245, 158, 11, 0.3);
-  color: var(--warning, var(--text-muted));
 }
 
 .practice-mode-icon-wrap {
   width: 44px;
   height: 44px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-tertiary);
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--radius-md, 12px);
+  background: var(--accent-1-dim);
   border: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2px;
-  transition: all var(--transition-fast) ease;
+  color: var(--accent-1);
+  transition: all 0.2s ease;
 }
 
 .practice-mode-card:hover .practice-mode-icon-wrap {
-  background: var(--accent-1-dim);
-  border-color: var(--accent-1);
-}
-
-.practice-mode-icon {
-  color: var(--accent-1);
+  background: var(--accent-1);
+  color: #ffffff;
 }
 
 .practice-mode-title {
-  font-size: var(--font-md);
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.015em;
@@ -113,7 +100,7 @@
 
 .practice-mode-desc {
   color: var(--text-secondary);
-  font-size: var(--font-xs);
+  font-size: 0.82rem;
   line-height: 1.45;
   margin: 0;
   flex: 1;
@@ -123,73 +110,60 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 6px;
+  gap: 8px;
   width: 100%;
-  margin-top: 4px;
+  margin-top: 6px;
   border-top: 1px solid var(--border-light);
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
 .practice-mode-badge {
-  background: var(--bg-tertiary);
+  background: var(--accent-1-dim);
   border: 1px solid var(--border-light);
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  font-size: 0.65rem;
-  color: var(--text-muted);
+  padding: 3px 10px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.7rem;
+  color: var(--accent-1);
   font-weight: 600;
+  white-space: nowrap;
 }
 
-.practice-mode-card:hover .practice-mode-badge {
-  background: var(--accent-1-dim);
-  border-color: rgba(0, 162, 232, 0.2);
-  color: var(--accent-1);
+.practice-mode-badge-warning {
+  background: var(--warning-dim, rgba(245, 158, 11, 0.15));
+  border-color: rgba(245, 158, 11, 0.25);
+  color: var(--warning, #f59e0b);
 }
 
 .practice-mode-arrow {
   color: var(--text-muted);
-  font-size: var(--font-sm);
-  transition: transform var(--transition-fast) ease, color var(--transition-fast) ease;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .practice-mode-card:hover .practice-mode-arrow {
   color: var(--accent-1);
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 /* Mobile responsive details */
 @media (max-width: 768px) {
-  .practice-hub > h2 {
-    font-size: 1.15rem;
-  }
-
-  .practice-hub > p {
-    font-size: 0.82rem;
-    margin-bottom: 0.85rem;
-  }
-
   .practice-hub-grid {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 0.75rem;
   }
 
   .practice-mode-card {
-    padding: 0.85rem 1rem;
-    gap: 6px;
-    border-radius: 16px;
+    padding: 1rem;
+    border-radius: var(--radius-md, 14px);
+    gap: 8px;
   }
 
   .practice-mode-title {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
   }
 
   .practice-mode-desc {
     font-size: 0.78rem;
     line-height: 1.4;
-  }
-
-  .practice-mode-footer {
-    margin-top: 2px;
-    padding-top: 6px;
   }
 }

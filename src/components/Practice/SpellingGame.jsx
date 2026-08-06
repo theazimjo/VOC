@@ -18,7 +18,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [scrambled, setScrambled] = useState('');
+  const [scrambledList, setScrambledList] = useState([]);
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const inputRef = useRef(null);
@@ -35,12 +35,22 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   useEffect(() => {
     if (!currentWord) return;
-    setScrambled(shuffleArray(currentWord.word.trim().split('')).join(' '));
+    setScrambledList(shuffleArray(currentWord.word.trim().split('')));
     setInput('');
     setAnswered(false);
     setIsCorrect(false);
     startTimeRef.current = Date.now();
   }, [currentIndex]);
+
+  // Compute used indices in scrambledList based on current input text
+  const usedIndices = new Set();
+  const typedChars = input.toLowerCase().split('');
+  typedChars.forEach((ch) => {
+    const idx = scrambledList.findIndex((letter, i) => !usedIndices.has(i) && letter.toLowerCase() === ch);
+    if (idx !== -1) {
+      usedIndices.add(idx);
+    }
+  });
 
   useEffect(() => {
     if (inputRef.current && !answered) {
@@ -134,13 +144,19 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   const isLast = currentIndex === words.length - 1;
 
+  const wordLength = currentWord ? currentWord.word.trim().length : 0;
+  const tileSizeClass = wordLength > 12 ? 'size-xs' : wordLength > 9 ? 'size-sm' : wordLength > 6 ? 'size-md' : '';
+
+  const targetLength = currentWord ? (currentWord.translation || '').length : 0;
+  const targetSizeClass = targetLength > 30 ? 'target-xs' : targetLength > 18 ? 'target-sm' : '';
+
   return (
     <div className="spelling-container">
       <div className="spelling-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
         <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word, language)}>
           <Volume2 size={14} strokeWidth={2.3} />
-          Eshitish
+          Listen
         </button>
       </div>
 
@@ -154,13 +170,24 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="spelling-card-label">Tarjimani yozing (inglizcha)</div>
-          <div className="spelling-target">{currentWord.translation}</div>
-          {currentWord.definition && (
-            <div className="spelling-definition">{currentWord.definition}</div>
-          )}
-          <div className="spelling-scramble-label">Aralashtirilgan harflar:</div>
-          <div className="spelling-hint">{scrambled}</div>
+          <div className="spelling-card-label">Type the English word</div>
+          <div className={`spelling-target ${targetSizeClass}`}>{currentWord.translation}</div>
+          <div className="spelling-scramble-label">
+            Scrambled letters ({wordLength} letters):
+          </div>
+          <div className={`spelling-tiles-wrapper ${tileSizeClass}`}>
+            {scrambledList.map((letter, idx) => {
+              const isUsed = usedIndices.has(idx);
+              return (
+                <span
+                  key={idx}
+                  className={`scrambled-tile ${isUsed ? 'used' : ''}`}
+                >
+                  {letter}
+                </span>
+              );
+            })}
+          </div>
 
           <form onSubmit={handleSubmit} className="spelling-form">
             <input
@@ -173,15 +200,13 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               autoComplete="off"
               autoCorrect="off"
               spellCheck="false"
-              placeholder="So'zni yozing..."
+              placeholder="Type the word..."
             />
           </form>
         </motion.div>
       </AnimatePresence>
 
-      {/* Fixed full-width bottom bar, styled with the app's own design language.
-          Shifted up by the mobile keyboard's height (via translateY) so the
-          submit button never ends up hidden underneath it. */}
+      {/* Fixed full-width bottom bar */}
       <div
         className={`spelling-bottom-bar ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
         style={keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
@@ -190,7 +215,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
           {!answered ? (
             <>
               <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                Bilmadim
+                Don't know
               </button>
               <button
                 type="button"
@@ -198,7 +223,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
                 onClick={() => submitAnswer()}
                 disabled={!input.trim()}
               >
-                Tekshirish
+                Check
               </button>
             </>
           ) : (
@@ -206,11 +231,11 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               <div className="spelling-bottom-feedback">
                 {isCorrect ? <Check size={18} strokeWidth={2.5} /> : <X size={18} strokeWidth={2.5} />}
                 <span>
-                  {isCorrect ? "To'g'ri!" : <>Javob: <strong>{currentWord.word}</strong></>}
+                  {isCorrect ? "Correct!" : <>Answer: <strong>{currentWord.word}</strong></>}
                 </span>
               </div>
               <button type="button" className="btn-spell-next" onClick={handleNext}>
-                {isLast ? 'Natijalar →' : 'Keyingisi →'}
+                {isLast ? 'Results →' : 'Next →'}
               </button>
             </>
           )}

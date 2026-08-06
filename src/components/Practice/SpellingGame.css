@@ -94,22 +94,78 @@
   max-width: 360px;
 }
 
+.spelling-target.target-sm { font-size: 2.1rem; }
+.spelling-target.target-xs { font-size: 1.6rem; }
+
 .spelling-scramble-label {
   font-size: var(--font-xs);
   color: var(--text-muted);
   font-weight: 600;
 }
 
-.spelling-hint {
-  color: var(--text-secondary);
-  letter-spacing: 4px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: var(--font-xl);
-  font-weight: 700;
+.spelling-tiles-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  max-width: 440px;
+  margin: 4px auto 0;
+}
+
+.spelling-tiles-wrapper.size-md { gap: 5px; }
+.spelling-tiles-wrapper.size-sm { gap: 4px; }
+.spelling-tiles-wrapper.size-xs { gap: 3px; }
+
+.scrambled-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 40px;
+  padding: 0 10px;
   background: var(--bg-tertiary);
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md, 10px);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.spelling-tiles-wrapper.size-md .scrambled-tile {
+  min-width: 31px;
+  height: 35px;
+  padding: 0 7px;
+  font-size: 1.05rem;
+}
+
+.spelling-tiles-wrapper.size-sm .scrambled-tile {
+  min-width: 26px;
+  height: 31px;
+  padding: 0 5px;
+  font-size: 0.92rem;
+  border-radius: 8px;
+}
+
+.spelling-tiles-wrapper.size-xs .scrambled-tile {
+  min-width: 21px;
+  height: 27px;
+  padding: 0 4px;
+  font-size: 0.82rem;
+  border-radius: 6px;
+}
+
+.scrambled-tile.used {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: #3b82f6;
+  color: #60a5fa;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.35);
+  transform: scale(0.94);
+  opacity: 0.9;
 }
 
 /* ─── Form ─── */

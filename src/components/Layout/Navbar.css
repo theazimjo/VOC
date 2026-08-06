@@ -256,22 +256,23 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
   border-radius: 20px;
   padding: 4px 10px 4px 4px;
   cursor: pointer;
-  color: #fff;
+  color: var(--text-primary);
   outline: none;
   font-size: 0.82rem;
   font-weight: 600;
   height: 32px;
   margin-right: 8px;
-  transition: background var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .navbar-group-switcher-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--bg-glass-hover);
+  border-color: var(--border);
 }
 
 .navbar-group-switcher-popover {

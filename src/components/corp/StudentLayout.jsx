@@ -8,6 +8,7 @@ import { getGroup, getCenterCustomPacks } from '../../services/corpService';
 import StudentSidebar from './StudentSidebar';
 import StudentBottomNav from './StudentBottomNav';
 import Navbar from '../Layout/Navbar';
+import FullScreenLoader from '../common/FullScreenLoader';
 import './CorpAdminLayout.css';
 
 export default function StudentLayout() {
@@ -65,11 +66,7 @@ export default function StudentLayout() {
   }
 
   if (groupModeLoading || loading) {
-    return (
-      <div className="corp-admin-layout" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0b0b0f' }}>
-        <div style={{ color: '#c084fc', fontSize: '1rem', fontWeight: 600 }}>Yuklanmoqda...</div>
-      </div>
-    );
+    return <FullScreenLoader />;
   }
 
   const student = group?.students?.[user.uid];

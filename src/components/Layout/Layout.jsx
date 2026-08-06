@@ -7,6 +7,7 @@ import BottomNav from './BottomNav';
 import { useDailyReminder } from '../../hooks/useDailyReminder';
 import { useAppBadge } from '../../hooks/useAppBadge';
 import { useGroupMode } from '../../hooks/useGroupMode';
+import FullScreenLoader from '../common/FullScreenLoader';
 import './Layout.css';
 
 export default function Layout() {
@@ -38,6 +39,11 @@ export default function Layout() {
     if (appMode === 'individual' && location.pathname === '/corp/student') {
       return <Navigate to="/" replace />;
     }
+  } else if (location.pathname === '/') {
+    // '/' is the only route whose real destination depends on appMode
+    // (individual Dashboard vs. a redirect to /corp/student) — wait for it
+    // to resolve instead of briefly rendering the individual dashboard.
+    return <FullScreenLoader />;
   }
 
   // Check if we are in grammar test mode or actively running a complex test

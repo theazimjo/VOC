@@ -79,12 +79,25 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
     setIsFlipped(prev => !prev);
   };
 
+  const knownWordsRef = useRef([]);
+  const reviewWordsRef = useRef([]);
+
+  // Reset per-round state when words list changes
+  useEffect(() => {
+    knownWordsRef.current = [];
+    reviewWordsRef.current = [];
+    setCurrentIndex(0);
+  }, [words]);
+
   const handleJudge = (isCorrect) => {
-    // Guards against a double-tap/double-click firing this twice for the
-    // same card — without it, two scheduled setCurrentIndex(prev => prev+1)
-    // calls both land, silently skipping the next card entirely.
     if (answered) return;
     setAnswered(true);
+
+    if (isCorrect) {
+      knownWordsRef.current.push(currentWord);
+    } else {
+      reviewWordsRef.current.push(currentWord);
+    }
 
     if (onAnswer) onAnswer(currentWord, isCorrect);
 
@@ -106,7 +119,12 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
       setIsFlipped(false);
       setTimeout(() => setCurrentIndex(prev => prev + 1), 180);
     } else {
-      onComplete({ totalWords: words.length, ...newResults });
+      onComplete({
+        totalWords: words.length,
+        ...newResults,
+        knownWords: knownWordsRef.current,
+        reviewWords: reviewWordsRef.current,
+      });
     }
   };
 
@@ -135,13 +153,13 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
               <button
                 className="btn-speak-card"
                 onClick={e => { e.stopPropagation(); speakWord(currentWord.word, language); }}
-                title="Talaffuz qilish"
+                title="Listen"
               >
                 <Volume2 size={18} strokeWidth={2.2} />
               </button>
               <PosBadge pos={currentWord.partOfSpeech} />
               <div className="flashcard-word">{currentWord.word}</div>
-              <div className="flashcard-hint">Javobni ko'rish uchun bosing</div>
+              <div className="flashcard-hint">Tap to flip card</div>
             </div>
 
             {/* Back */}
@@ -171,10 +189,10 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
           else in the app. */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
         <button className="flashcard-rating-btn again" onClick={() => handleJudge(false)} disabled={answered}>
-          <span className="rating-label">✗ Bilmadim</span>
+          <span className="rating-label">✗ Don't know</span>
         </button>
         <button className="flashcard-rating-btn easy" onClick={() => handleJudge(true)} disabled={answered}>
-          <span className="rating-label">✓ Bildim</span>
+          <span className="rating-label">✓ Know</span>
         </button>
       </div>
     </div>

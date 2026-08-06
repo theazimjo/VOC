@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useOutletContext, useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { CheckCircle2, XCircle, ArrowLeft, RotateCcw, Trophy, ThumbsUp, Dumbbell, BookOpen, Volume2, TrendingDown, Sparkles } from 'lucide-react';
+import { CheckCircle2, XCircle, ArrowLeft, ChevronLeft, RotateCcw, Trophy, ThumbsUp, Dumbbell, BookOpen, Volume2, TrendingDown, Sparkles } from 'lucide-react';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { usePacks } from '../../hooks/usePacks';
@@ -13,6 +13,7 @@ import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } f
 import { saveReviewEvent } from '../../experiment/experimentDB';
 import IosSpinner from '../../components/common/IosSpinner';
 import PracticeHub from '../../components/Practice/PracticeHub';
+import RoundCheckpointSummary from '../../components/Practice/RoundCheckpointSummary';
 import Flashcard from '../../components/Practice/Flashcard';
 import SpellingGame from '../../components/Practice/SpellingGame';
 import MatchGame from '../../components/Practice/MatchGame';
@@ -39,6 +40,8 @@ export default function CorpPractice() {
   const [wrongWords, setWrongWords] = useState([]);
   const [progressPct, setProgressPct] = useState(0);
   const [saving, setSaving] = useState(false);
+  const [roundNumber, setRoundNumber] = useState(1);
+  const [showExitModal, setShowExitModal] = useState(false);
 
   // Derive corporate pack details reactively from the StudentLayout context —
   // search across all three categories (Asosiy/Kerakli/Qo'shimcha) since a
@@ -159,11 +162,20 @@ export default function CorpPractice() {
     setSelectedMode(mode);
     setWrongWords([]);
     setProgressPct(0);
+    setRoundNumber(1);
 
     // Spaced repetition weighted selection — Spelling/Sentence narrow to
     // already-seen words first, same as individual practice.
     const selected = weightedSelectWords(pool, wordCount);
     setPracticeWords(selected);
+    setStep('intro');
+  };
+
+  const handleRepeatReviewWords = () => {
+    if (!results?.reviewWords || results.reviewWords.length === 0) return;
+    setPracticeWords(results.reviewWords);
+    setRoundNumber(prev => prev + 1);
+    setProgressPct(0);
     setStep('intro');
   };
 
@@ -271,13 +283,11 @@ export default function CorpPractice() {
 
   const handleBack = () => {
     if (step === 'practice' || step === 'intro') {
-      if (window.confirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.")) {
-        setStep('mode');
-      }
+      setShowExitModal(true);
       return;
     }
     if (step === 'mode') {
-      navigate(`/corp/student/topic/${packId}/${monthId}/${unitId}`);
+      navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}`);
     } else if (step === 'results') {
       setStep('mode');
     }
@@ -318,23 +328,26 @@ export default function CorpPractice() {
 
   const getResultTier = (r) => {
     const ratio = r.totalWords > 0 ? r.correctCount / r.totalWords : 0;
-    if (ratio >= 0.8) return { Icon: Trophy, label: 'Ajoyib!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
-    if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Yaxshi!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
-    return { Icon: Dumbbell, label: 'Davom eting!', color: 'var(--success)', dim: 'var(--success-dim)' };
+    if (ratio >= 0.8) return { Icon: Trophy, label: 'Great job!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
+    if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Good job!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
+    return { Icon: Dumbbell, label: 'Keep going!', color: 'var(--success)', dim: 'var(--success-dim)' };
   };
 
   return (
-    <div className="practice-page" style={{ padding: '0 var(--space-md)' }}>
+    <div className="practice-page" style={{ padding: '1.25rem var(--space-md) var(--space-xl)' }}>
       
-      {/* Header */}
-      {step !== 'results' && (
-        <div className="practice-page-header">
-          <button className="clean-back-arrow" onClick={handleBack} title="Orqaga">
-            ←
+      {/* Sleek iOS pill back button */}
+      {step !== 'results' && step !== 'practice' && (
+        <div className="ios-nav-header" style={{ marginBottom: '1.25rem' }}>
+          <button
+            className="ios-back-btn"
+            onClick={handleBack}
+            aria-label="Back"
+            title="Back"
+          >
+            <ChevronLeft size={18} strokeWidth={2.5} />
+            <span>Back</span>
           </button>
-          <h1>
-            🎯 Mashq ({loadedPack.title})
-          </h1>
         </div>
       )}
 
@@ -350,7 +363,7 @@ export default function CorpPractice() {
           >
             {/* Word Count Selector */}
             <div className="practice-word-count-bar">
-              <span className="practice-word-count-label">🔢 Mashq qilish uchun so'zlar soni:</span>
+              <span className="practice-word-count-label">🔢 Practice word count:</span>
               <div className="word-count-options">
                 {[5, 10, 20, 'all'].map(count => (
                   <button
@@ -358,7 +371,7 @@ export default function CorpPractice() {
                     className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
                     onClick={() => setWordCount(count)}
                   >
-                    {count === 'all' ? 'Barchasi' : `${count} ta`}
+                    {count === 'all' ? 'All' : `${count} words`}
                   </button>
                 ))}
               </div>
@@ -381,16 +394,16 @@ export default function CorpPractice() {
           >
             <div className="intro-card" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
               <div className="intro-mode-icon">
-                {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : '🎮'}
+                {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : '🎮'}
               </div>
               <h2>
-                {selectedMode === 'flashcard' ? 'Aqlli Kartochkalar' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'sentence' ? 'Jumla Tuzish' : 'Mashq'}
+                {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match Game' : selectedMode === 'quiz' ? 'Multiple Choice Quiz' : selectedMode === 'pronounce' ? 'Pronunciation Practice' : 'Practice'}
               </h2>
-              <p>{practiceWords.length} ta so'z tayyorlandi</p>
+              <p>{practiceWords.length} words prepared</p>
               
               <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
                 <IosSpinner />
-                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Mashq tayyorlanmoqda...</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-secondary)' }}>Preparing practice...</span>
               </div>
             </div>
           </motion.div>
@@ -406,11 +419,11 @@ export default function CorpPractice() {
             exit={{ opacity: 0, y: -20 }}
           >
             <div className="practice-session-header clean-quiz-header">
-              <button className="clean-back-arrow" onClick={handleBack} title="Mashqdan chiqish">
-                ←
+              <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
+                <ChevronLeft size={22} strokeWidth={2.5} />
               </button>
               <h1 className="clean-quiz-title">
-                {selectedMode === 'flashcard' ? '🧠 Aqlli Kartochkalar' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'sentence' ? '📓 Jumla tuzish' : 'Mashq'}
+                {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match Game' : selectedMode === 'quiz' ? '📝 Multiple Choice Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation Practice' : 'Practice'}
               </h1>
               <div style={{ width: '40px', opacity: 0 }}></div>
               
@@ -428,84 +441,181 @@ export default function CorpPractice() {
         )}
 
         {/* Step 4: Results */}
-        {step === 'results' && results && (() => {
-          const tier = getResultTier(results);
-          return (
+        {step === 'results' && results && (
+          selectedMode === 'flashcard' ? (
+            <RoundCheckpointSummary
+              roundNumber={roundNumber}
+              knownWords={results.knownWords || []}
+              reviewWords={results.reviewWords || []}
+              onRepeatReviewWords={handleRepeatReviewWords}
+              onFinish={() => navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}`)}
+            />
+          ) : (
             <motion.div
-              key="results"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              key="standard-results"
+              className="checkpoint-fullscreen-wrapper"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <div className="practice-results" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}>
-                <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color }}>
-                  <tier.Icon size={36} strokeWidth={2.2} />
-                </div>
-                <h2>{tier.label}</h2>
-                <p>Mashq yakunlandi</p>
-                <div className="result-stats">
-                  <div className="result-stat">
-                    <BookOpen className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--accent-2)' }} />
-                    <div className="value" style={{ color: 'var(--accent-2)' }}>{results.totalWords}</div>
-                    <div className="label">Jami so'zlar</div>
-                  </div>
-                  <div className="result-stat">
-                    <CheckCircle2 className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
-                    <div className="value" style={{ color: 'var(--success)' }}>{results.correctCount}</div>
-                    <div className="label">To'g'ri</div>
-                  </div>
-                  <div className="result-stat">
-                    <XCircle className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--error)' }} />
-                    <div className="value" style={{ color: 'var(--error)' }}>{results.incorrectCount}</div>
-                    <div className="label">Noto'g'ri</div>
-                  </div>
-                </div>
-
-                {saving && <p className="cp-saving" style={{ textAlign: 'center', margin: '1rem 0', color: 'var(--accent-1)', fontWeight: 600 }}>Natija saqlanmoqda...</p>}
-
-                {wrongWords.length > 0 ? (
-                  <div className="results-mistakes-container">
-                    <div className="results-mistakes-title">
-                      <TrendingDown size={14} strokeWidth={2.4} />
-                      Takrorlash tavsiya etiladi (xatolar)
-                    </div>
-                    <div className="results-mistake-list">
-                      {wrongWords.map(word => (
-                        <div key={word.id} className="results-mistake-item">
-                          <div className="results-mistake-info">
-                            <span className="results-mistake-word">{word.word}</span>
-                            <span className="results-mistake-translation">{word.translation}</span>
-                          </div>
-                          <button
-                            type="button"
-                            className="btn-speak-mistake"
-                            onClick={() => speakWord(word.word, loadedPack.language)}
-                            title="Tinglash"
-                          >
-                            <Volume2 size={16} strokeWidth={2.3} />
-                          </button>
+              <div className="checkpoint-scrollable-content" style={{ justifyContent: 'center' }}>
+                <div className="practice-results" style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-light)', borderRadius: '20px', padding: '1.75rem', width: '100%', maxWidth: '500px', margin: '0 auto', boxSizing: 'border-box' }}>
+                  {(() => {
+                    const tier = getResultTier(results);
+                    return (
+                      <>
+                        <div className="result-icon-circle" style={{ background: tier.dim, color: tier.color, margin: '0 auto 1rem' }}>
+                          <tier.Icon size={36} strokeWidth={2.2} />
                         </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="perfect-score-banner">
-                    <Sparkles size={16} strokeWidth={2.3} />
-                    Mukammal natija! Hech qanday xatolikka yo'l qo'yilmadi.
-                  </div>
-                )}
+                        <h2 style={{ fontSize: '1.45rem', fontWeight: 800, margin: '0 0 4px 0', color: 'var(--text-primary)' }}>{tier.label}</h2>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', margin: '0 0 1.25rem 0' }}>Practice completed</p>
 
-                <div className="result-actions">
-                  <button className="btn-results-back" onClick={handleReset}>
-                    Mashq menyusiga qaytish
-                  </button>
+                        {/* Stats row */}
+                        <div className="result-stats" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.75rem', marginBottom: '1.25rem' }}>
+                          <div className="result-stat" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-light)', padding: '0.85rem 0.5rem', borderRadius: '14px', textAlign: 'center' }}>
+                            <BookOpen className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--accent-1)', margin: '0 auto 4px' }} />
+                            <div className="value" style={{ color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 800 }}>{results.totalWords}</div>
+                            <div className="label" style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Total</div>
+                          </div>
+                          <div className="result-stat" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-light)', padding: '0.85rem 0.5rem', borderRadius: '14px', textAlign: 'center' }}>
+                            <CheckCircle2 className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--success)', margin: '0 auto 4px' }} />
+                            <div className="value" style={{ color: 'var(--success)', fontSize: '1.2rem', fontWeight: 800 }}>{results.correctCount}</div>
+                            <div className="label" style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Correct</div>
+                          </div>
+                          <div className="result-stat" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-light)', padding: '0.85rem 0.5rem', borderRadius: '14px', textAlign: 'center' }}>
+                            <XCircle className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--error)', margin: '0 auto 4px' }} />
+                            <div className="value" style={{ color: 'var(--error)', fontSize: '1.2rem', fontWeight: 800 }}>{results.incorrectCount}</div>
+                            <div className="label" style={{ fontSize: '0.7rem', color: 'var(--text-muted)', fontWeight: 600 }}>Mistakes</div>
+                          </div>
+                        </div>
+
+                        {/* Mistakes list */}
+                        {wrongWords.length > 0 ? (
+                          <div className="results-mistakes-container" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-light)', borderRadius: '14px', padding: '1rem', marginBottom: '0.5rem', textAlign: 'left' }}>
+                            <div className="results-mistakes-title" style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--error)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '0.75rem', textTransform: 'uppercase' }}>
+                              <TrendingDown size={14} strokeWidth={2.4} />
+                              Words to review ({wrongWords.length})
+                            </div>
+                            <div className="results-mistake-list" style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '180px', overflowY: 'auto' }}>
+                              {wrongWords.map(word => (
+                                <div key={word.id} className="results-mistake-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'var(--bg-secondary)', border: '1px solid var(--border-light)', borderRadius: '10px' }}>
+                                  <div className="results-mistake-info" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <span className="results-mistake-word" style={{ fontWeight: 700, fontSize: '0.88rem', color: 'var(--text-primary)' }}>{word.word}</span>
+                                    <span className="results-mistake-translation" style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>— {word.translation}</span>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    className="btn-speak-mistake"
+                                    onClick={() => speakWord(word.word, loadedPack?.language || 'en-US')}
+                                    title="Listen"
+                                    style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '4px', display: 'flex', alignItems: 'center' }}
+                                  >
+                                    <Volume2 size={16} strokeWidth={2.3} />
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="perfect-score-banner" style={{ background: 'var(--success-dim)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '12px', padding: '0.85rem', color: 'var(--success)', fontWeight: 700, fontSize: '0.88rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '0.5rem' }}>
+                            <Sparkles size={16} strokeWidth={2.3} />
+                            Perfect score! No mistakes made.
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
+
+              {/* Pinned Bottom Action Bar */}
+              <div className="checkpoint-pinned-footer">
+                <button className="checkpoint-btn-primary" onClick={handleReset}>
+                  Back to Practice Modes
+                </button>
+              </div>
             </motion.div>
-          );
-        })()}
+          )
+        )}
 
       </div>
+
+      {/* ── Quit Practice Confirmation Modal ── */}
+      {showExitModal && (
+        <div className="modal-overlay" style={{ zIndex: 9999, background: 'rgba(0, 0, 0, 0.65)', backdropFilter: 'blur(8px)' }} onClick={() => setShowExitModal(false)}>
+          <motion.div
+            className="modal-content"
+            style={{ maxWidth: '360px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.85rem' }}
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div
+              style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '50%',
+                background: 'rgba(255, 59, 48, 0.15)',
+                color: '#ff3b30',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '0.2rem'
+              }}
+            >
+              <Dumbbell size={24} strokeWidth={2.2} />
+            </div>
+
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+              Quit Practice?
+            </h3>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.4 }}>
+              Are you sure you want to leave? Your progress in this round will not be saved.
+            </p>
+
+            <div style={{ display: 'flex', gap: '0.75rem', width: '100%', marginTop: '0.5rem' }}>
+              <button
+                type="button"
+                style={{
+                  flex: 1,
+                  padding: '11px 16px',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border-light)',
+                  background: 'var(--bg-tertiary)',
+                  color: 'var(--text-primary)',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}
+                onClick={() => setShowExitModal(false)}
+              >
+                Resume
+              </button>
+              <button
+                type="button"
+                style={{
+                  flex: 1,
+                  padding: '11px 16px',
+                  borderRadius: '12px',
+                  border: 'none',
+                  background: '#ff3b30',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}
+                onClick={() => {
+                  setShowExitModal(false);
+                  setStep('mode');
+                }}
+              >
+                Quit
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 }

@@ -190,6 +190,7 @@ html[data-font-size="large"] {
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  background: var(--bg-primary);
 }
 
 body {
@@ -205,6 +206,7 @@ body {
 
 #root {
   min-height: 100vh;
+  background: var(--bg-primary);
 }
 
 /* ========== SCROLLBAR ========== */

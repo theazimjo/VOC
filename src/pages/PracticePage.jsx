@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Trophy, ThumbsUp, Dumbbell, TrendingDown, Sparkles, BookOpen, CheckCircle2, XCircle, Volume2 } from 'lucide-react';
+import { Trophy, ThumbsUp, Dumbbell, TrendingDown, Sparkles, BookOpen, CheckCircle2, XCircle, Volume2, ChevronLeft } from 'lucide-react';
 import { ref, get, update } from 'firebase/database';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
@@ -369,9 +369,9 @@ export default function PracticePage() {
 
   const getResultTier = (r) => {
     const ratio = r.totalWords > 0 ? r.correctCount / r.totalWords : 0;
-    if (ratio >= 0.8) return { Icon: Trophy, label: 'Ajoyib!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
-    if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Yaxshi!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
-    return { Icon: Dumbbell, label: 'Davom eting!', color: 'var(--success)', dim: 'var(--success-dim)' };
+    if (ratio >= 0.8) return { Icon: Trophy, label: 'Great job!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
+    if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Good job!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
+    return { Icon: Dumbbell, label: 'Keep going!', color: 'var(--success)', dim: 'var(--success-dim)' };
   };
 
   return (
@@ -514,8 +514,8 @@ export default function PracticePage() {
               exit={{ opacity: 0, y: -20 }}
             >
               <div className="practice-session-header clean-quiz-header">
-                <button className="clean-back-arrow" onClick={handleBack} title="Mashqdan chiqish">
-                  ←
+                <button className="clean-back-arrow" onClick={handleBack} title="Exit practice">
+                  <ChevronLeft size={22} strokeWidth={2.5} />
                 </button>
                 <h1 className="clean-quiz-title">
                   {selectedMode === 'flashcard' ? '🧠 Aqlli Kartochkalar' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'sentence' ? '📓 Jumla tuzish' : 'Mashq'}

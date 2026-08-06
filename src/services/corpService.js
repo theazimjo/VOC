@@ -700,7 +700,7 @@ export async function removeStudentFromGroup(centerId, groupId, studentId) {
 /**
  * Student: Update Learning Progress for one unit within a group's assigned
  * pack. `stats` mirrors the same mastery/retention numbers the student's own
- * "Memory Twin" card computes (see StudentCorpDashboard.jsx) so the teacher
+ * "Memory Twin" card computes (see StudentCorpLearn.jsx) so the teacher
  * sees equivalent numbers, since teachers have no read access to a
  * student's raw `users/{uid}/words`.
  *
@@ -721,6 +721,26 @@ export async function updateStudentUnitProgress(centerId, groupId, studentId, pa
     atRiskCount: stats.atRiskCount || 0,
     lastActivity: new Date().toISOString()
   });
+}
+
+/**
+ * Student: Set a personal monthly word-learning target for one group. Lets
+ * the student override the dashboard's default target (the group's full
+ * assigned word count) with their own goal.
+ */
+export async function updateStudentWordTarget(centerId, groupId, studentId, wordTarget) {
+  const studentRef = ref(db, `centers/${centerId}/groups/${groupId}/students/${studentId}`);
+  await update(studentRef, { wordTarget });
+}
+
+/**
+ * Student: Update their own display name / avatar color on their group
+ * record (the same `centers/{centerId}/groups/{groupId}/students/{uid}`
+ * node the teacher's roster reads from).
+ */
+export async function updateStudentProfile(centerId, groupId, studentId, updates) {
+  const studentRef = ref(db, `centers/${centerId}/groups/${groupId}/students/${studentId}`);
+  await update(studentRef, updates);
 }
 
 /**

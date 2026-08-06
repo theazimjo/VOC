@@ -163,6 +163,14 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
       .toUpperCase();
   };
 
+  const handleAvatarClick = () => {
+    if (appMode === 'group') {
+      navigate('/corp/student/profile');
+    } else {
+      navigate('/profile');
+    }
+  };
+
   return (
     <header
       className={`navbar ${
@@ -209,23 +217,21 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
               height: '24px',
               borderRadius: '50%',
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
             }}>
               {getGroupBadgeText(membership)}
             </div>
           )}
           <span>
-            {appMode === 'individual' ? 'Shaxsiy' : (membership?.groupName || 'Guruh')}
+            {appMode === 'individual' ? 'Personal' : (membership?.groupName || 'Group')}
           </span>
-          <ChevronDown size={12} style={{ color: '#94a3b8', transform: showSwitcher ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
+          <ChevronDown size={12} style={{ color: 'var(--text-secondary)', transform: showSwitcher ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
         </button>
 
         {/* Switcher Popover */}
         {showSwitcher && (
           <div className="navbar-group-switcher-popover">
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              {/* Shaxsiy Card */}
+              {/* Personal Card */}
               <div 
                 onClick={handleSwitchToIndividual}
                 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer', width: '60px' }}
@@ -244,7 +250,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 }}>
                   <User size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? '#fff' : '#94a3b8', fontWeight: appMode === 'individual' ? 600 : 500, textAlign: 'center' }}>Shaxsiy</span>
+                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? '#fff' : '#94a3b8', fontWeight: appMode === 'individual' ? 600 : 500, textAlign: 'center' }}>Personal</span>
               </div>
 
               {/* Groups Cards */}
@@ -298,7 +304,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 }}>
                   <Plus size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 500, textAlign: 'center' }}>Qo'shish</span>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 500, textAlign: 'center' }}>Add</span>
               </div>
             </div>
 
@@ -315,7 +321,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                   gap: '6px'
                 }}
               >
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 500 }}>PIN kod kiritish:</div>
+                <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 500 }}>Enter 6-digit PIN:</div>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <input
                     type="text"
@@ -351,7 +357,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                       cursor: 'pointer'
                     }}
                   >
-                    {joining ? '...' : "Qo'shish"}
+                    {joining ? '...' : "Add"}
                   </button>
                 </div>
                 {joinError && (
@@ -387,12 +393,12 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
 
           <button
             className="navbar-avatar-btn"
-            onClick={() => appMode !== 'group' && setDropdownOpen((prev) => !prev)}
-            aria-label="Profil menyusi"
-            style={{ cursor: appMode === 'group' ? 'default' : 'pointer' }}
+            onClick={handleAvatarClick}
+            aria-label="Profil"
+            style={{ cursor: 'pointer' }}
           >
             {avatarSrc && !avatarError ? (
-              <img src={avatarSrc} alt={user.displayName || 'Avatar'} />
+              <img src={avatarSrc} alt={user?.displayName || 'Avatar'} />
             ) : (
               getInitials()
             )}

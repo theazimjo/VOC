@@ -5,9 +5,9 @@ import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import './PracticeHub.css';
 
 const RECOMMENDATION_BADGES = {
-  new: () => 'Tavsiya etiladi 🌟',
-  confirm: (count) => `${count} ta tasdiqlash kerak 🎯`,
-  reinforce: (count) => `${count} ta unutilmoqda ⏰`,
+  new: () => 'Recommended 🌟',
+  confirm: (count) => `${count} to confirm 🎯`,
+  reinforce: (count) => `${count} forgetting ⏰`,
 };
 
 export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = [] }) {
@@ -24,9 +24,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = []
     modes.push({
       id: 'irregular-verbs',
       icon: Zap,
-      title: "Fe'llar Trenajyori",
-      desc: "Noto'g'ri fe'llarning V1, V2, V3 shakllarini yozib mashq qiling",
-      badge: 'Tavsiya etiladi 🌟',
+      title: "Irregular Verbs",
+      desc: "Practice V1, V2, V3 verb forms",
+      badge: 'Recommended 🌟',
       glowColor: 'hsl(165, 85%, 50%)'
     });
   }
@@ -35,8 +35,8 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = []
     {
       id: 'flashcard',
       icon: Brain,
-      title: 'Aqlli Kartochkalar',
-      desc: "Kartochkalarni ag'darib, har bir so'z uchun individual unutish egri chizig'i asosida hisoblangan optimal vaqtda takrorlaysiz",
+      title: 'Smart Flashcards',
+      desc: "Review words with intelligent spaced repetition flashcards",
       badge: recommendation?.modeId === 'flashcard'
         ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
         : null,
@@ -45,51 +45,42 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = []
     {
       id: 'spelling',
       icon: PenLine,
-      title: 'Imlo Mashqi',
-      desc: "Eshitish va xotiradan so'zlarni to'g'ri yozishni mashq qiling",
+      title: 'Spelling Practice',
+      desc: "Listen and type words correctly from memory",
       badge: recommendation?.modeId === 'spelling'
         ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
-        : "Min 3 ta so'z",
+        : "Min 3 words",
       glowColor: 'hsl(265, 90%, 65%)'
     },
     {
       id: 'match',
       icon: Shuffle,
-      title: 'Juftlikni Top',
-      desc: "Inglizcha so'zni uning tarjimasiga moslashtiring",
-      badge: "Min 4 ta so'z",
+      title: 'Match Game',
+      desc: "Match English words with their correct translations",
+      badge: "Min 4 words",
       glowColor: 'hsl(150, 80%, 45%)'
     },
     {
       id: 'quiz',
       icon: ListChecks,
-      title: 'Test',
-      desc: "To'rtta variantdan to'g'ri tarjimani tezkorlik bilan tanlang",
-      badge: "Min 4 ta so'z",
+      title: 'Multiple Choice Quiz',
+      desc: "Select the correct translation from four options",
+      badge: "Min 4 words",
       glowColor: 'hsl(38, 95%, 55%)'
     },
     {
       id: 'pronounce',
       icon: Mic,
-      title: 'Talaffuz',
-      desc: "Mikrofonga talaffuz qilib, so'zlashuv qobiliyatini oshiring",
-      badge: "Min 1 ta so'z",
+      title: 'Pronunciation Practice',
+      desc: "Speak into the microphone to improve pronunciation",
+      badge: "Min 1 word",
       glowColor: 'hsl(340, 85%, 60%)'
-    },
-    {
-      id: 'sentence',
-      icon: NotebookPen,
-      title: 'Jumla Tuzish',
-      desc: "So'zni yodingizdan chaqirib, uni ishlatib inglizcha jumla yozing",
-      badge: "Min 1 ta so'z",
-      glowColor: 'hsl(20, 90%, 55%)'
     }
   );
 
   return (
     <div className="practice-hub">
-      <h2>🎮 Mashq rejimini tanlang</h2>
-      <p>O'zingizga qulay usulda so'zlarni xotirangizga muhrlang</p>
+
 
       <div className="practice-hub-grid">
         {modes.map((mode, idx) => {
@@ -116,7 +107,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = []
               <div className="practice-mode-footer">
                 {isDisabled ? (
                   <span className="practice-mode-badge practice-mode-badge-warning">
-                    Kamida {minWords} ta so'z kerak
+                    Min {minWords} words needed
                   </span>
                 ) : (
                   mode.badge && <span className="practice-mode-badge">{mode.badge}</span>

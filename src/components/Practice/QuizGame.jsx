@@ -127,21 +127,18 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
           exit={{ opacity: 0, y: -20, scale: 0.96 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="quiz-question-label">So'zni toping</div>
+          <div className="quiz-question-label">Choose the translation</div>
           <div className="quiz-question">
             {currentWord.word}
             <button
               className="btn-speak-quiz"
               onClick={() => speakWord(currentWord.word, language)}
-              title="Talaffuz"
+              title="Listen"
               type="button"
             >
               <Volume2 size={18} strokeWidth={2.2} />
             </button>
           </div>
-          {currentWord.definition && (
-            <div className="quiz-question-hint">{currentWord.definition}</div>
-          )}
           <div className="quiz-timer-bar">
             <div
               className="quiz-timer-fill"
@@ -188,15 +185,15 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       <div className={`quiz-bottom-bar ${answered ? (isCorrectAnswer && !timedOut ? 'correct' : 'wrong') : ''}`}>
         <div className="quiz-bottom-bar-inner">
           {!answered ? (
-            <div className="quiz-feedback quiz-feedback-hint">Variantlardan birini tanlang</div>
+            <div className="quiz-feedback quiz-feedback-hint">Select the correct translation</div>
           ) : (
             <>
               <div className="quiz-feedback">
                 {timedOut
-                  ? `Vaqt tugadi! Javob: ${currentWord.translation}`
+                  ? `Time is up! Answer: ${currentWord.translation}`
                   : isCorrectAnswer
-                    ? "To'g'ri!"
-                    : `Javob: ${currentWord.translation}`
+                    ? "Correct!"
+                    : `Answer: ${currentWord.translation}`
                 }
               </div>
               <button
@@ -204,7 +201,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
                 className="btn-quiz-next"
                 onClick={handleNext}
               >
-                {isLast ? 'Natijalar →' : 'Keyingisi →'}
+                {isLast ? 'Results →' : 'Next →'}
               </button>
             </>
           )}

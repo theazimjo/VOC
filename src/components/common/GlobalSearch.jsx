@@ -183,9 +183,9 @@ export default function GlobalSearch({ isOpen, onClose }) {
         await switchActiveGroup(user.uid, item.groupId);
 
         if (item.unitId) {
-          navigate(`/corp/student/topic/${item.packId}/${item.monthId}/${item.unitId}`);
+          navigate(`/corp/student/learn/topic/${item.packId}/${item.monthId}/${item.unitId}`);
         } else {
-          navigate(`/corp/student/month/${item.id}/${item.firstMonthId}`);
+          navigate(`/corp/student/learn/month/${item.id}/${item.firstMonthId}`);
         }
       } catch (err) {
         console.error('Error switching to corporate search result:', err);
@@ -226,27 +226,27 @@ export default function GlobalSearch({ isOpen, onClose }) {
                 ref={inputRef}
                 type="text"
                 className="global-search-input"
-                placeholder="So'z, tarjima yoki to'plam qidiring..."
+                placeholder="Search words, translations, or topics..."
                 value={query}
                 onChange={e => setQuery(e.target.value)}
               />
-              <button className="global-search-close" onClick={onClose} aria-label="Yopish">
+              <button className="global-search-close" onClick={onClose} aria-label="Close">
                 <X size={18} strokeWidth={2.2} />
               </button>
             </div>
 
             <div className="global-search-results">
               {!trimmedQuery && (
-                <div className="global-search-empty">Qidirish uchun yozishni boshlang</div>
+                <div className="global-search-empty">Start typing to search</div>
               )}
 
               {trimmedQuery && !hasResults && (
-                <div className="global-search-empty">Hech narsa topilmadi</div>
+                <div className="global-search-empty">No results found</div>
               )}
 
               {packResults.length > 0 && (
                 <div className="global-search-section">
-                  <div className="global-search-section-title">To'plamlar</div>
+                  <div className="global-search-section-title">Topics</div>
                   {packResults.map(pack => (
                     <button
                       key={pack.id}
@@ -260,10 +260,10 @@ export default function GlobalSearch({ isOpen, onClose }) {
                         <div className="global-search-pack-name">{pack.name}</div>
                         {pack.isCorp && (
                           <div style={{ fontSize: '0.62rem', background: '#22c55e', color: '#fff', padding: '1px 5px', borderRadius: '4px', width: 'fit-content', marginTop: '2px', fontWeight: 600 }}>
-                            Guruh
+                            Group
                           </div>
                         )}
-                        <div className="global-search-pack-count">{pack.wordCount || 0} ta so'z</div>
+                        <div className="global-search-pack-count">{pack.wordCount || 0} words</div>
                       </div>
                       <ChevronRight size={16} strokeWidth={2.3} className="global-search-chevron" />
                     </button>
@@ -273,7 +273,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
 
               {wordResults.length > 0 && (
                 <div className="global-search-section">
-                  <div className="global-search-section-title">So'zlar</div>
+                  <div className="global-search-section-title">Words</div>
                   {wordResults.map(word => {
                     const masteryInfo = getMasteryLevel(word.mastery || 0);
                     return (
@@ -296,7 +296,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
                           <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>{word.source}</span>
                           {word.sourceType === 'corp' && (
                             <span style={{ fontSize: '0.62rem', background: 'rgba(34, 197, 94, 0.15)', color: '#22c55e', padding: '1px 5px', borderRadius: '3px', fontWeight: 600 }}>
-                              Guruh
+                              Group
                             </span>
                           )}
                         </div>

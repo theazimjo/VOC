@@ -1,0 +1,240 @@
+.sat-pack-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 1.05rem 1.15rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sat-pack-card.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.sat-pack-card:hover:not(.disabled) {
+  border-color: var(--accent-1);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Header row: icon, title/subtitle, ring badge */
+.sat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sat-card-icon-wrapper {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  border-radius: 9px;
+  background: var(--accent-1-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-1);
+  flex-shrink: 0;
+}
+
+.sat-card-icon-svg {
+  color: var(--accent-1);
+}
+
+.sat-card-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.sat-card-title {
+  color: var(--text-primary);
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.sat-card-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.3;
+  margin: 2px 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* Compact ring badge */
+.sat-card-badge-circle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+.sat-card-ring-svg {
+  transform: rotate(-90deg);
+  display: block;
+}
+
+.sat-card-ring-bg {
+  fill: none;
+  stroke: var(--bg-tertiary);
+}
+
+.sat-card-ring-fill {
+  fill: none;
+  stroke: var(--accent-2);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sat-card-badge-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Progress bar */
+.sat-card-progress-bar {
+  width: 100%;
+  height: 5px;
+  background: var(--bg-tertiary);
+  border-radius: 9999px;
+  display: flex;
+  overflow: hidden;
+}
+
+.sat-prog-seg {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.sat-seg-mastered { background: var(--accent-2); }
+.sat-seg-learning { background: var(--accent-3); }
+.sat-seg-new { background: var(--bg-tertiary); }
+
+/* Footer: meta pills + chevron, single line */
+.sat-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.sat-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.sat-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.sat-pill-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.sat-action-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.sat-pack-card:hover:not(.disabled) .sat-action-arrow {
+  color: var(--accent-1);
+  transform: translateX(3px);
+}
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+  .sat-pack-card {
+    padding: 0.85rem 0.9rem 0.75rem;
+    border-radius: 12px;
+    gap: 0.55rem;
+  }
+
+  .sat-card-header {
+    gap: 0.5rem;
+  }
+
+  .sat-card-icon-wrapper {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  .sat-card-badge-circle {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  .sat-card-ring-svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .sat-card-title {
+    font-size: 0.86rem;
+  }
+
+  .sat-card-subtitle {
+    font-size: 0.68rem;
+  }
+
+  .sat-card-badge-text {
+    font-size: 0.55rem;
+  }
+
+  .sat-card-meta {
+    font-size: 0.68rem;
+    gap: 0.45rem;
+  }
+}

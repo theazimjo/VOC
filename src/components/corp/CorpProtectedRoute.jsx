@@ -1,13 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useCorpRole } from '../../hooks/useCorpRole';
-
-const spinnerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minHeight: '60vh',
-  color: 'var(--corp-text-muted, #94a3b8)',
-};
+import FullScreenLoader from '../common/FullScreenLoader';
 
 // Gates a /corp/* sub-route to a specific set of roles (super_admin,
 // center_admin, teacher). Unlike the individual app's ProtectedRoute, an
@@ -17,7 +10,7 @@ export default function CorpProtectedRoute({ allowedRoles }) {
   const { loading, identity } = useCorpRole();
 
   if (loading) {
-    return <div style={spinnerStyle}>Yuklanmoqda...</div>;
+    return <FullScreenLoader />;
   }
 
   if (!identity || !allowedRoles.includes(identity.role)) {

@@ -31,7 +31,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
     cardStartRef.current = Date.now();
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      setErrorMsg("Kechirasiz, ushbu brauzerda nutqni aniqlash qo'llab-quvvatlanmaydi. Google Chrome, Safari yoki MS Edge dan foydalanib ko'ring.");
+      setErrorMsg("Sorry, speech recognition is not supported in this browser. Please try Google Chrome, Safari, or MS Edge.");
       setStatus('unsupported');
       return;
     }
@@ -54,9 +54,9 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       console.error('Speech recognition error:', e.error);
       setIsListening(false);
       if (e.error === 'not-allowed') {
-        setErrorMsg("Mikrofonga ruxsat berilmadi. Sozlamalardan mikrofonga ruxsat bering.");
+        setErrorMsg("Microphone permission denied. Please allow microphone access in your browser settings.");
       } else {
-        setErrorMsg(`Xatolik yuz berdi: ${e.error}`);
+        setErrorMsg(`An error occurred: ${e.error}`);
       }
     };
 
@@ -109,11 +109,6 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       setStatus('wrong');
       if (onAnswer) onAnswer(currentWord, false);
 
-      // Persist the failed attempt itself, not just the eventual outcome —
-      // otherwise a word mispronounced twice before finally succeeding on
-      // retry would show up in the memory engine as pure success, unlike
-      // every other practice mode which records each wrong attempt as it
-      // happens.
       onUpdateWord(currentWord.id, {
         isCorrect: false,
         confidence: inferConfidenceFromSpeed(responseTime, false),
@@ -188,10 +183,10 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             className="btn-pronounce-speak-target"
             type="button"
             onClick={() => speakWord(currentWord.word, language)}
-            title="Tinglash"
+            title="Listen"
           >
             <Volume2 size={14} strokeWidth={2.3} />
-            Tinglash
+            Listen
           </button>
         )}
       </div>
@@ -203,14 +198,11 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
           animate={status === 'wrong' ? { x: [-10, 10, -10, 10, 0] } : {}}
           transition={{ duration: 0.4 }}
         >
-          <div className="pronounce-card-label">Talaffuz qiling (inglizcha)</div>
+          <div className="pronounce-card-label">Pronounce the word</div>
           <div className="pronounce-target-word">
             {currentWord.word}
           </div>
           <div className="pronounce-translation">{currentWord.translation}</div>
-          {currentWord.definition && (
-            <div className="pronounce-definition">{currentWord.definition}</div>
-          )}
 
           {errorMsg && <div className="pronounce-error">{errorMsg}</div>}
 
@@ -236,12 +228,12 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
                 </button>
 
                 {isListening ? (
-                  <div className="listening-status text-pulse">Eshitmoqdaman... Gapiring</div>
+                  <div className="listening-status text-pulse">Listening... Speak now</div>
                 ) : (
                   <div className="listening-status instruction">
                     {status === 'wrong' 
-                      ? "Nutqni qayta urinib ko'ring yoki keyingisiga o'ting" 
-                      : "Mikrofon tugmasini bosing va gapiring"
+                      ? "Try speaking again or skip" 
+                      : "Tap the microphone and speak"
                     }
                   </div>
                 )}
@@ -251,16 +243,16 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             {/* Banners inside the card for immediate clean feedback */}
             {answered && isCorrect && (
               <div className="pronounce-feedback-banner correct">
-                Ajoyib talaffuz!
+                Great pronunciation!
               </div>
             )}
 
             {answered && !isCorrect && (
               <div className="pronounce-feedback-banner wrong">
-                {status === 'skipped' ? "O'tkazib yuborildi" : "Nomaqbul talaffuz"}
+                {status === 'skipped' ? "Skipped" : "Incorrect pronunciation"}
                 {heardText && (
                   <div className="heard-text">
-                    Biz eshitdik: <strong>"{heardText}"</strong>
+                    We heard: <strong>"{heardText}"</strong>
                   </div>
                 )}
               </div>
@@ -268,7 +260,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
 
             {status === 'unsupported' && (
               <div className="pronounce-feedback-banner unsupported">
-                Nutqni aniqlash ushbu brauzerda qo'llab-quvvatlanmaydi
+                Speech recognition is not supported in this browser
               </div>
             )}
           </div>
@@ -278,10 +270,10 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             <div className="pronounce-action-buttons">
               <button type="button" className="btn btn-secondary" onClick={handleRetry}>
                 <RotateCcw size={14} strokeWidth={2.3} />
-                Qayta urinish
+                Try again
               </button>
               <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                O'tkazib yuborish
+                Skip
               </button>
             </div>
           )}
@@ -294,19 +286,19 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
           {!answered ? (
             status === 'playing' ? (
               <button type="button" className="btn btn-ghost" onClick={handleSkip} disabled={isListening}>
-                Bilmadim (o'tkazib yuborish)
+                Skip
               </button>
             ) : status === 'wrong' ? (
-              <div className="pronounce-bottom-hint">Qayta urinib ko'ring yoki o'tkazib yuboring</div>
+              <div className="pronounce-bottom-hint">Try again or skip</div>
             ) : null
           ) : (
             <button type="button" className="btn-pronounce-next" onClick={handleNext}>
-              {isLast ? 'Natijalar →' : 'Keyingisi →'}
+              {isLast ? 'Results →' : 'Next →'}
             </button>
           )}
           {status === 'unsupported' && (
             <button type="button" className="btn-pronounce-next" onClick={handleUnsupportedSkip}>
-              {isLast ? 'Natijalar →' : 'Keyingisi →'}
+              {isLast ? 'Results →' : 'Next →'}
             </button>
           )}
         </div>

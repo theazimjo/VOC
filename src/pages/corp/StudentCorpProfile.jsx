@@ -1,17 +1,80 @@
-import { useMemo } from 'react';
-import { useOutletContext, useNavigate } from 'react-router-dom';
-import { ArrowRightLeft, LogOut, ChevronRight, BookOpen, Users, Star, Mail, Flame, Trophy, Zap } from 'lucide-react';
-import { setAppMode } from '../../services/corpService';
+import { useState } from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import {
+  ArrowRightLeft, LogOut, ChevronRight, Mail, User, Pencil, X, Check,
+  Target, CheckCircle2, Building2, GraduationCap, CalendarDays, Moon, Type, Volume2
+} from 'lucide-react';
+import { setAppMode, updateStudentProfile } from '../../services/corpService';
 import { useAuth } from '../../contexts/AuthContext';
-import { useStreak } from '../../hooks/useStreak';
-import './StudentCorpSettings.css';
+import { useTheme } from '../../contexts/ThemeContext';
+import { useGroupWordProgress } from '../../hooks/useGroupWordProgress';
+import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import './StudentCorpProfile.css';
 
+const AVATAR_COLORS = ['#0A84FF', '#30D158', '#FF9500', '#AF52DE', '#FF375F', '#5AC8FA'];
+
+const SHEET_META = {
+  theme: { icon: Moon, title: 'Choose Theme' },
+  font: { icon: Type, title: 'Choose Text Size' },
+};
+
 export default function StudentCorpProfile() {
-  const { user, membership, student, assignedPacks, learnedPacksCount, progressPct } = useOutletContext();
+  const { user, membership, student, assignedPacks, requiredPacks, additionalPacks } = useOutletContext();
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const { streak } = useStreak();
+  const { theme, setTheme, fontSize, setFontSize, audioEnabled, setAudioEnabled, themes } = useTheme();
+
+  const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', or null
+  const closeSheet = () => setActiveSheet(null);
+  const sheetMeta = activeSheet ? SHEET_META[activeSheet] : null;
+  const SheetIcon = sheetMeta?.icon;
+
+  // Same word-mastery computation the dashboard's Target Words card uses —
+  // respects the student's own target if they've set one there — so this
+  // mirrors that number instead of the unrelated "packs started" ratio.
+  const { groupTotalWords, learnedWords } = useGroupWordProgress(
+    user?.uid, assignedPacks, requiredPacks, additionalPacks
+  );
+  const targetWords = student?.wordTarget ?? groupTotalWords;
+  const learnedPct = targetWords > 0 ? Math.min(100, Math.round((learnedWords / targetWords) * 100)) : 0;
+
+  // Optimistic local overrides — the group record StudentLayout reads is a
+  // one-time fetch, so we reflect a save immediately rather than waiting on
+  // a refetch that never happens until the next mount.
+  const [customName, setCustomName] = useState(() => student?.name || null);
+  const [avatarColor, setAvatarColor] = useState(() => student?.avatarColor || AVATAR_COLORS[0]);
+  const [editingProfile, setEditingProfile] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [draftName, setDraftName] = useState('');
+  const [draftColor, setDraftColor] = useState(AVATAR_COLORS[0]);
+
+  const displayName = customName || user?.displayName || user?.email?.split('@')[0] || 'Student';
+  const initial = displayName[0]?.toUpperCase() || '?';
+
+  const openEditor = () => {
+    setDraftName(displayName);
+    setDraftColor(avatarColor);
+    setEditingProfile(true);
+  };
+
+  const closeEditor = () => setEditingProfile(false);
+
+  const saveProfile = async () => {
+    const nextName = draftName.trim() || displayName;
+    setCustomName(nextName);
+    setAvatarColor(draftColor);
+    setEditingProfile(false);
+    if (!membership?.centerId || !membership?.groupId || !user?.uid) return;
+    try {
+      await updateStudentProfile(membership.centerId, membership.groupId, user.uid, {
+        name: nextName,
+        avatarColor: draftColor,
+      });
+    } catch (err) {
+      console.error('Error saving profile:', err);
+    }
+  };
 
   const handleReturnToIndividual = async () => {
     if (user) await setAppMode(user.uid, 'individual');
@@ -23,187 +86,321 @@ export default function StudentCorpProfile() {
     navigate('/login');
   };
 
-  const displayName = student?.name || user.displayName || "O'quvchi";
-  const initial = displayName[0].toUpperCase();
-
-  const streakCount = streak?.streakCount ?? 0;
-  const todayCount = streak?.todayCount ?? 0;
-  const dailyGoal = streak?.dailyGoal ?? 5;
-  const todayPct = Math.min(100, Math.round((todayCount / dailyGoal) * 100));
-
-  // Build last 7 days activity
-  const weekActivity = useMemo(() => {
-    const log = streak?.activityLog || {};
-    const goal = streak?.dailyGoal ?? 5;
-    const days = [];
-    const labels = ['Du', 'Se', 'Ch', 'Pa', 'Sh', 'Ya', 'Ya'];
-
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      const offset = d.getTimezoneOffset();
-      const local = new Date(d.getTime() - offset * 60000);
-      const key = local.toISOString().split('T')[0];
-      const count = log[key] ?? 0;
-      const dayName = labels[local.getDay() === 0 ? 6 : local.getDay() - 1];
-      days.push({ key, dayName, count, goal, isToday: i === 0 });
-    }
-    return days;
-  }, [streak]);
-
-  // Circumference of the SVG circle for daily progress ring
-  const RADIUS = 28;
-  const CIRC = 2 * Math.PI * RADIUS;
-  const offset = CIRC - (todayPct / 100) * CIRC;
-
   return (
-    <div className="ios-settings-container">
+    <div className="corp-profile-container">
 
-      {/* ── Avatar Header ────────────────────── */}
-      <div className="corp-profile-header">
-        <div className="corp-profile-avatar">{initial}</div>
-        <div>
+      {/* ── Hero: avatar + name + edit ── */}
+      <div className="corp-profile-hero">
+        <div className="corp-profile-avatar" style={{ background: avatarColor }}>{initial}</div>
+        <div className="corp-profile-info">
           <div className="corp-profile-name">{displayName}</div>
-          <div className="corp-profile-email">
-            <Mail size={13} /> {user.email}
-          </div>
+          {user?.email && (
+            <div className="corp-profile-email">
+              <Mail size={13} style={{ flexShrink: 0 }} />
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.email}</span>
+            </div>
+          )}
         </div>
+        <button type="button" className="corp-profile-edit-btn" onClick={openEditor} aria-label="Edit profile">
+          <Pencil size={16} strokeWidth={2.3} />
+        </button>
       </div>
 
-      {/* ── STREAK BANNER ─────────────────────── */}
-      <div className="corp-streak-banner">
-        <div className="corp-streak-main">
-          <span className="corp-streak-fire">🔥</span>
-          <div>
-            <div className="corp-streak-count">{streakCount} kun</div>
-            <div className="corp-streak-label">Uzluksiz mashq</div>
-          </div>
-        </div>
-        {/* Daily progress ring */}
-        <div className="corp-daily-ring-wrap">
-          <svg width="72" height="72">
-            <circle cx="36" cy="36" r={RADIUS} strokeWidth="6" stroke="#2c2c2e" fill="none" />
-            <circle
-              cx="36" cy="36" r={RADIUS}
-              strokeWidth="6"
-              stroke={todayPct >= 100 ? '#34c759' : '#0a84ff'}
-              fill="none"
-              strokeLinecap="round"
-              strokeDasharray={CIRC}
-              strokeDashoffset={offset}
-              transform="rotate(-90 36 36)"
-              style={{ transition: 'stroke-dashoffset 0.6s cubic-bezier(0.4,0,0.2,1)' }}
-            />
-            <text x="36" y="40" textAnchor="middle" fontSize="13" fontWeight="700"
-              fill={todayPct >= 100 ? '#34c759' : '#fff'}>
-              {todayPct}%
-            </text>
-          </svg>
-          <div className="corp-daily-ring-label">Bugungi</div>
-        </div>
-      </div>
+      {/* ── Progress + Membership ── */}
+      <div className="corp-profile-grid">
+        <PackHeaderHero
+          icon={<Target size={22} />}
+          tag={null}
+          title="Word Mastery"
+          subtitle={`${learnedWords} / ${targetWords} words learned`}
+          masteryPct={learnedPct}
+          metrics={[
+            { icon: <Target size={16} />, label: 'TARGET', value: targetWords, color: 'blue' },
+            { icon: <CheckCircle2 size={16} />, label: 'LEARNED', value: learnedWords, color: 'green' },
+          ]}
+        />
 
-      {/* ── WEEKLY ACTIVITY BAR CHART ─────────── */}
-      <div className="ios-settings-header" style={{ marginTop: '28px' }}>Haftalik faollik</div>
-      <div className="corp-week-chart">
-        {weekActivity.map(day => {
-          const barH = day.goal > 0 ? Math.min(100, Math.round((day.count / day.goal) * 100)) : 0;
-          const done = day.count >= day.goal && day.goal > 0;
-          return (
-            <div key={day.key} className="corp-week-day">
-              <div className="corp-week-bar-track">
-                <div
-                  className={`corp-week-bar-fill ${done ? 'done' : ''}`}
-                  style={{ height: `${Math.max(4, barH)}%` }}
-                />
+        <div className="corp-profile-membership-card">
+          <span className="corp-profile-membership-title">Membership</span>
+
+          <div className="corp-profile-membership-row">
+            <div className="corp-profile-membership-icon"><Building2 size={15} strokeWidth={2.2} /></div>
+            <div className="corp-profile-membership-text">
+              <div className="corp-profile-membership-label">Center</div>
+              <div className="corp-profile-membership-value">{membership?.centerName || '—'}</div>
+            </div>
+          </div>
+
+          <div className="corp-profile-membership-row">
+            <div className="corp-profile-membership-icon"><GraduationCap size={15} strokeWidth={2.2} /></div>
+            <div className="corp-profile-membership-text">
+              <div className="corp-profile-membership-label">Group</div>
+              <div className="corp-profile-membership-value">{membership?.groupName || '—'}</div>
+            </div>
+          </div>
+
+          <div className="corp-profile-membership-row">
+            <div className="corp-profile-membership-icon"><CalendarDays size={15} strokeWidth={2.2} /></div>
+            <div className="corp-profile-membership-text">
+              <div className="corp-profile-membership-label">Joined</div>
+              <div className="corp-profile-membership-value">
+                {membership?.joinedAt ? new Date(membership.joinedAt).toLocaleDateString() : '—'}
               </div>
-              <div className={`corp-week-day-label ${day.isToday ? 'today' : ''}`}>{day.dayName}</div>
             </div>
-          );
-        })}
+          </div>
+        </div>
       </div>
 
-      {/* ── STATS GRID ───────────────────────── */}
-      <div className="corp-stats-grid">
-        {[
-          { icon: <Flame size={18} />, label: 'Streak rekord', value: `${streakCount} kun`, color: '#ff9500' },
-          { icon: <Zap size={18} />, label: 'Bugungi maqsad', value: `${todayCount}/${dailyGoal}`, color: '#0a84ff' },
-          { icon: <BookOpen size={18} />, label: 'Paketlar', value: assignedPacks?.length ?? 0, color: '#5856d6' },
-          { icon: <Star size={18} />, label: 'Bajarildi', value: learnedPacksCount ?? 0, color: '#ff2d55' },
-          { icon: <Trophy size={18} />, label: 'Jarayon', value: `${progressPct ?? 0}%`, color: '#34c759' },
-          { icon: <Users size={18} />, label: 'Guruh', value: membership.groupName?.split(' ')[0] || '—', color: '#af52de' },
-        ].map((s) => (
-          <div key={s.label} className="corp-stat-card">
-            <div className="corp-stat-icon" style={{ color: s.color }}>{s.icon}</div>
-            <div className="corp-stat-value">{s.value}</div>
-            <div className="corp-stat-label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* ── Group Info ───────────────────────── */}
-      <div className="ios-settings-header">Guruh ma'lumotlari</div>
-      <div className="ios-settings-section">
-        <div className="ios-settings-row">
-          <div className="ios-settings-left">
-            <div className="ios-icon-box" style={{ background: '#5856d6' }}>
-              <Users size={16} strokeWidth={2.2} />
+      {/* ── Appearance ── */}
+      <div className="corp-profile-section-title">Appearance</div>
+      <div className="corp-profile-appearance-card">
+        <div className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => setActiveSheet('theme')}>
+          <div className="corp-profile-appearance-row-left">
+            <div className="corp-profile-appearance-icon" style={{ background: '#0a7aff' }}>
+              <Moon size={15} strokeWidth={2.2} />
             </div>
-            <span className="ios-row-title">Guruh nomi</span>
+            <span className="corp-profile-appearance-title">Theme</span>
           </div>
-          <span className="ios-detail-text">{membership.groupName}</span>
+          <div className="corp-profile-appearance-right">
+            <span className="corp-profile-appearance-detail">{themes.find(t => t.id === theme)?.name || theme}</span>
+            <ChevronRight size={14} className="corp-profile-appearance-chevron" />
+          </div>
         </div>
 
+        <div className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => setActiveSheet('font')}>
+          <div className="corp-profile-appearance-row-left">
+            <div className="corp-profile-appearance-icon" style={{ background: '#8e8e93' }}>
+              <Type size={15} strokeWidth={2.2} />
+            </div>
+            <span className="corp-profile-appearance-title">Text Size</span>
+          </div>
+          <div className="corp-profile-appearance-right">
+            <span className="corp-profile-appearance-detail">
+              {fontSize === 'small' ? 'Small (14px)' : fontSize === 'large' ? 'Large (19px)' : 'Medium (16px)'}
+            </span>
+            <ChevronRight size={14} className="corp-profile-appearance-chevron" />
+          </div>
+        </div>
 
-        {membership.centerName && (
-          <div className="ios-settings-row">
-            <div className="ios-settings-left">
-              <div className="ios-icon-box" style={{ background: '#34c759' }}>
-                <BookOpen size={16} strokeWidth={2.2} />
+        <div className="corp-profile-appearance-row">
+          <div className="corp-profile-appearance-row-left">
+            <div className="corp-profile-appearance-icon" style={{ background: '#ff2d55' }}>
+              <Volume2 size={15} strokeWidth={2.2} />
+            </div>
+            <span className="corp-profile-appearance-title">Audio Effects</span>
+          </div>
+          <div className="corp-profile-appearance-right">
+            <label className="corp-profile-switch">
+              <input type="checkbox" checked={audioEnabled} onChange={(e) => setAudioEnabled(e.target.checked)} />
+              <span className="corp-profile-switch-slider" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Account actions ── */}
+      <div className="corp-profile-section-title">Account</div>
+      <div className="corp-profile-tiles">
+        <div className="corp-profile-tile" onClick={handleReturnToIndividual}>
+          <div className="corp-profile-tile-icon" style={{ background: 'var(--accent-1)' }}>
+            <ArrowRightLeft size={17} strokeWidth={2.2} />
+          </div>
+          <span className="corp-profile-tile-text">Switch to Individual Mode</span>
+          <ChevronRight className="corp-profile-tile-arrow" size={16} strokeWidth={2.5} />
+        </div>
+
+        <div className="corp-profile-tile danger" onClick={() => setShowLogoutModal(true)}>
+          <div className="corp-profile-tile-icon" style={{ background: 'var(--error, #ff3b30)' }}>
+            <LogOut size={17} strokeWidth={2.2} />
+          </div>
+          <span className="corp-profile-tile-text">Log Out</span>
+        </div>
+      </div>
+
+      <p className="corp-profile-footer">VOCABRY · Student Profile</p>
+
+      {/* ── Logout Confirmation Modal ── */}
+      {showLogoutModal && (
+        <div className="corp-profile-edit-overlay" onClick={() => setShowLogoutModal(false)}>
+          <motion.div
+            className="corp-profile-edit-card"
+            style={{ maxWidth: '360px', textAlign: 'center', alignItems: 'center' }}
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div
+              style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '50%',
+                background: 'rgba(255, 59, 48, 0.15)',
+                color: '#ff3b30',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '0.25rem'
+              }}
+            >
+              <LogOut size={24} strokeWidth={2.2} />
+            </div>
+
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+              Log Out?
+            </h3>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: '0 0 0.5rem 0', lineHeight: 1.4 }}>
+              Are you sure you want to log out of your account?
+            </p>
+
+            <div style={{ display: 'flex', gap: '0.75rem', width: '100%' }}>
+              <button
+                type="button"
+                style={{
+                  flex: 1,
+                  padding: '11px 16px',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border-light)',
+                  background: 'var(--bg-tertiary)',
+                  color: 'var(--text-primary)',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}
+                onClick={() => setShowLogoutModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                style={{
+                  flex: 1,
+                  padding: '11px 16px',
+                  borderRadius: '12px',
+                  border: 'none',
+                  background: '#ff3b30',
+                  color: '#fff',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  cursor: 'pointer'
+                }}
+                onClick={handleLogout}
+              >
+                Log Out
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* ── Edit profile modal ── */}
+      {editingProfile && (
+        <div className="corp-profile-edit-overlay" onClick={closeEditor}>
+          <motion.div
+            className="corp-profile-edit-card"
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="corp-profile-edit-header">
+              <div className="corp-profile-edit-header-icon"><User size={18} strokeWidth={2.3} /></div>
+              <h3>Edit Profile</h3>
+              <button type="button" className="corp-profile-edit-close" onClick={closeEditor} aria-label="Close">
+                <X size={18} strokeWidth={2.3} />
+              </button>
+            </div>
+
+            <div className="corp-profile-edit-avatar-preview">
+              <div className="corp-profile-avatar" style={{ background: draftColor }}>
+                {(draftName || displayName)[0]?.toUpperCase() || '?'}
               </div>
-              <span className="ios-row-title">O'quv markazi</span>
             </div>
-            <span className="ios-detail-text">{membership.centerName}</span>
-          </div>
-        )}
-      </div>
 
-      {/* ── Actions ──────────────────────────── */}
-      <div className="ios-settings-header">Akkaunt</div>
-      <div className="ios-settings-section">
-        <div
-          className="ios-settings-row"
-          style={{ cursor: 'pointer' }}
-          onClick={handleReturnToIndividual}
-        >
-          <div className="ios-settings-left">
-            <div className="ios-icon-box" style={{ background: '#0a84ff' }}>
-              <ArrowRightLeft size={16} strokeWidth={2.2} />
+            <div className="corp-profile-edit-field">
+              <label>Name</label>
+              <input
+                type="text"
+                className="corp-profile-edit-input"
+                value={draftName}
+                onChange={(e) => setDraftName(e.target.value)}
+                maxLength={40}
+                placeholder="Your name"
+              />
             </div>
-            <span className="ios-row-title">Individual rejimga o'tish</span>
-          </div>
-          <ChevronRight size={14} className="ios-chevron" />
+
+            <div className="corp-profile-edit-field">
+              <label>Avatar Color</label>
+              <div className="corp-profile-edit-swatches">
+                {AVATAR_COLORS.map(c => (
+                  <button
+                    key={c}
+                    type="button"
+                    className={`corp-profile-edit-swatch ${draftColor === c ? 'active' : ''}`}
+                    style={{ background: c }}
+                    onClick={() => setDraftColor(c)}
+                    aria-label={`Choose ${c}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <button type="button" className="corp-profile-edit-save-btn" onClick={saveProfile}>
+              <Check size={18} strokeWidth={2.6} /> Save Changes
+            </button>
+          </motion.div>
         </div>
-      </div>
+      )}
 
-      <div className="ios-settings-section" style={{ marginTop: '8px' }}>
-        <div
-          className="ios-settings-row"
-          style={{ cursor: 'pointer' }}
-          onClick={handleLogout}
-        >
-          <div className="ios-settings-left">
-            <div className="ios-icon-box" style={{ background: '#ff3b30' }}>
-              <LogOut size={16} strokeWidth={2.2} />
+      {/* ── Theme / text-size option-picker modal ── */}
+      {activeSheet && (
+        <div className="corp-profile-edit-overlay" onClick={closeSheet}>
+          <motion.div
+            className="corp-profile-edit-card"
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="corp-profile-edit-header">
+              <div className="corp-profile-edit-header-icon">{SheetIcon && <SheetIcon size={18} strokeWidth={2.3} />}</div>
+              <h3>{sheetMeta.title}</h3>
+              <button type="button" className="corp-profile-edit-close" onClick={closeSheet} aria-label="Close">
+                <X size={18} strokeWidth={2.3} />
+              </button>
             </div>
-            <span className="ios-row-title" style={{ color: '#ff3b30' }}>Hisobdan chiqish</span>
-          </div>
-        </div>
-      </div>
 
-      <div className="ios-settings-footer" style={{ textAlign: 'center', marginTop: '16px' }}>
-        VOC Corp Edition · {membership.groupName}
-      </div>
+            <div className="corp-profile-sheet-options">
+              {activeSheet === 'theme' && themes.map(t => (
+                <button
+                  key={t.id}
+                  className={`corp-profile-sheet-option ${theme === t.id ? 'active' : ''}`}
+                  onClick={() => { setTheme(t.id); closeSheet(); }}
+                >
+                  <span>{t.name}</span>
+                  {theme === t.id && <Check size={16} className="corp-profile-sheet-check" />}
+                </button>
+              ))}
+
+              {activeSheet === 'font' && [
+                { id: 'small', label: 'Small (14px)' },
+                { id: 'normal', label: 'Medium (16px)' },
+                { id: 'large', label: 'Large (19px)' }
+              ].map(item => (
+                <button
+                  key={item.id}
+                  className={`corp-profile-sheet-option ${fontSize === item.id ? 'active' : ''}`}
+                  onClick={() => { setFontSize(item.id); closeSheet(); }}
+                >
+                  <span>{item.label}</span>
+                  {fontSize === item.id && <Check size={16} className="corp-profile-sheet-check" />}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      )}
+
     </div>
   );
 }

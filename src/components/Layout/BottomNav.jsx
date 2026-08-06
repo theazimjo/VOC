@@ -1,8 +1,18 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { LayoutDashboard, BookOpen, GraduationCap, Trophy, FlaskConical } from 'lucide-react';
 import './BottomNav.css';
 
 export default function BottomNav() {
+  const location = useLocation();
+
+  const isInsidePackOrTopic =
+    location.pathname.includes('/packs/') ||
+    location.pathname.includes('/practice/');
+
+  if (isInsidePackOrTopic) {
+    return null;
+  }
+
   const navItems = [
     { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/library', icon: BookOpen, label: 'Kutubxona' },
@@ -34,4 +44,3 @@ export default function BottomNav() {
     </nav>
   );
 }
-

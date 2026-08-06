@@ -56,19 +56,19 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly, g
           <input 
             type="text" 
             className="input" 
-            placeholder="So'z yoki tarjima bo'yicha qidirish..." 
+            placeholder="Search word or translation..." 
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
         </div>
         <div className="word-list-filters">
           <select className="select" value={sortBy} onChange={e => setSortBy(e.target.value)}>
-            {groupFn && <option value="group">Guruh bo'yicha</option>}
-            <option value="date-desc">Eng yangilari oldin</option>
-            <option value="date-asc">Eng eskilar oldin</option>
-            <option value="alpha-asc">Alifbo bo'yicha (A-Z)</option>
-            <option value="mastery-desc">O'zlashtirish (Yuqori-past)</option>
-            <option value="mastery-asc">O'zlashtirish (Past-yuqori)</option>
+            {groupFn && <option value="group">By group</option>}
+            <option value="date-desc">Newest first</option>
+            <option value="date-asc">Oldest first</option>
+            <option value="alpha-asc">Alphabetical (A-Z)</option>
+            <option value="mastery-desc">Mastery (High to Low)</option>
+            <option value="mastery-asc">Mastery (Low to High)</option>
           </select>
         </div>
       </div>

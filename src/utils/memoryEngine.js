@@ -485,7 +485,7 @@ export function explainSchedulingDecision(stability, lastReview, nextOptimalRevi
 /**
  * Shared "Memory Twin" retention aggregate — the one piece of math that used
  * to be copy-pasted separately into Dashboard, PackDetail, and
- * StudentCorpDashboard (and had already drifted out of sync once). Every
+ * StudentCorpLearn (and had already drifted out of sync once). Every
  * per-word retention/at-risk stat shown anywhere in the app should come from
  * here so they can't diverge again.
  *

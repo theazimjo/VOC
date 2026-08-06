@@ -3,8 +3,8 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export const themes = [
-  { id: 'ios', name: 'Yorug\' rejim', desc: 'Oq fon, sistem havorang va yashil urg\'u ranglari' },
-  { id: 'android', name: 'Tungi rejim', desc: 'Qora fon, sistem havorang va yashil urg\'u ranglari' }
+  { id: 'ios', name: 'Light Mode', desc: 'Clean light background with system accent colors' },
+  { id: 'android', name: 'Dark Mode', desc: 'Sleek dark background with system accent colors' }
 ];
 
 export function ThemeProvider({ children }) {

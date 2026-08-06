@@ -1,13 +1,25 @@
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, User, Settings } from 'lucide-react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { LayoutDashboard, BookOpen, ClipboardList, User } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
 export default function StudentBottomNav() {
+  const location = useLocation();
+
+  // Hide bottom navigation bar when inside a pack/month/topic or practice mode
+  const isInsidePackOrTopic =
+    location.pathname.includes('/learn/month/') ||
+    location.pathname.includes('/learn/topic/') ||
+    location.pathname.includes('/corp/practice/');
+
+  if (isInsidePackOrTopic) {
+    return null;
+  }
+
   const navItems = [
-    { to: '/corp/student', label: 'Asosiy', icon: LayoutDashboard },
-    { to: '/corp/student/practice', label: 'Practice', icon: BookOpen },
+    { to: '/corp/student', label: 'Dashboard', icon: LayoutDashboard },
+    { to: '/corp/student/learn', label: 'Vocabulary', icon: BookOpen },
+    { to: '/corp/student/assessment', label: 'Assessment', icon: ClipboardList },
     { to: '/corp/student/profile', label: 'Profile', icon: User },
-    { to: '/corp/student/settings', label: 'More', icon: Settings },
   ];
 
   return (

@@ -1,0 +1,390 @@
+/* ========================================
+   STUDENT CORP OVERVIEW — simple stacked
+   dashboard: welcome, target words, personal
+   calendar, homework. Desktop widens into a
+   2-col grid; mobile keeps the exact order.
+   ======================================== */
+
+.corp-ov-container {
+  padding: var(--space-lg) var(--space-xl);
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ── Header ── */
+.corp-ov-topbar {
+  margin-bottom: 1.25rem;
+}
+
+.corp-ov-eyebrow {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.corp-ov-name {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.corp-ov-subtitle {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  margin: 4px 0 0 0;
+}
+
+/* ── Section grid: target-words / calendar / homework ── */
+.corp-ov-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .corp-ov-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .corp-ov-homework-card {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ── Target editor modal (replaces a plain number input) ── */
+.corp-ov-target-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overscroll-behavior: contain;
+  touch-action: none;
+}
+
+.corp-ov-target-editor {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 20px);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-lg, var(--shadow));
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+/* Header: icon badge + title + close */
+.corp-ov-target-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.corp-ov-target-header-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: var(--radius-sm, 10px);
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.corp-ov-target-header h3 {
+  flex: 1;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.corp-ov-target-close {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.corp-ov-target-close:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+/* Drag-around-the-ring dial */
+.corp-ov-dial {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0.25rem auto 0;
+  touch-action: none;
+  cursor: grab;
+  background: radial-gradient(circle, var(--accent-1-dim) 0%, transparent 68%);
+  border-radius: 50%;
+}
+
+.corp-ov-dial:active {
+  cursor: grabbing;
+}
+
+.corp-ov-dial-track {
+  fill: none;
+  stroke: var(--bg-tertiary);
+}
+
+.corp-ov-dial-fill {
+  fill: none;
+  stroke: var(--accent-1);
+  stroke-linecap: round;
+}
+
+.corp-ov-dial-knob {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: var(--accent-1);
+  border: 3px solid var(--bg-secondary);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
+
+.corp-ov-dial-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.corp-ov-dial-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.corp-ov-dial-unit {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.corp-ov-dial-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Full-width save — the only action button in the modal */
+.corp-ov-target-save-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border-radius: var(--radius-md, 12px);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: var(--accent-1);
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.corp-ov-target-save-btn:hover {
+  box-shadow: var(--shadow-lg, var(--shadow));
+}
+
+.corp-ov-target-save-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── Personal calendar ── */
+.corp-ov-cal-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 18px);
+  padding: 1.1rem 1.15rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.corp-ov-cal-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.corp-ov-cal-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.corp-ov-cal-month {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.corp-ov-cal-summary {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: -0.35rem 0 0 0;
+}
+
+.corp-ov-cal-summary strong {
+  color: var(--accent-1);
+}
+
+.corp-ov-cal-weekdays,
+.corp-ov-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.corp-ov-cal-weekday {
+  text-align: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.corp-ov-cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm, 8px);
+  background: var(--bg-tertiary);
+  gap: 1px;
+}
+
+.corp-ov-cal-cell.empty {
+  background: transparent;
+}
+
+.corp-ov-cal-day {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.corp-ov-cal-cell.active {
+  background: var(--accent-1-dim);
+}
+
+.corp-ov-cal-cell.active .corp-ov-cal-day {
+  color: var(--accent-1);
+}
+
+.corp-ov-cal-cell.today {
+  box-shadow: 0 0 0 2px var(--accent-1);
+}
+
+.corp-ov-cal-count {
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: var(--accent-1);
+  line-height: 1;
+}
+
+/* ── Homework placeholder ── */
+.corp-ov-hw-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 18px);
+  padding: 1.5rem 1.25rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.corp-ov-hw-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md, 12px);
+  background: var(--accent-3-dim, rgba(168, 85, 247, 0.15));
+  color: var(--accent-3, #a855f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.corp-ov-hw-card h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.corp-ov-hw-card p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 320px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .corp-ov-container {
+    padding: 1rem;
+  }
+
+  .corp-ov-name {
+    font-size: 1.4rem;
+  }
+}

@@ -45,7 +45,7 @@ function getGroupPackEntries(group) {
 }
 
 // Flatten a pack's months → units into a flat list of topics, each tagged
-// with the same `${monthId}_${unitId}` key CorpPractice/StudentCorpPractice
+// with the same `${monthId}_${unitId}` key CorpPractice/StudentCorpLearn
 // write progress under — this is what lets the teacher see "3-mavzu: 0%"
 // instead of only a whole-pack %. Same months||units||words fallback used
 // everywhere else in the corp module for legacy flat-shape packs.

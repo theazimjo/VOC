@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import {
-  LayoutDashboard, BookOpen, User, Settings
+  LayoutDashboard, BookOpen, ClipboardList, User
 } from 'lucide-react';
 import './CorpAdminSidebar.css';
 
@@ -8,10 +8,10 @@ export default function StudentSidebar() {
   const location = useLocation();
 
   const navItems = [
-    { to: '/corp/student', label: 'Asosiy', icon: LayoutDashboard },
-    { to: '/corp/student/practice', label: 'Practice', icon: BookOpen },
+    { to: '/corp/student', label: 'Dashboard', icon: LayoutDashboard },
+    { to: '/corp/student/learn', label: 'Vocabulary', icon: BookOpen },
+    { to: '/corp/student/assessment', label: 'Assessment', icon: ClipboardList },
     { to: '/corp/student/profile', label: 'Profile', icon: User },
-    { to: '/corp/student/settings', label: 'More', icon: Settings },
   ];
 
   return (

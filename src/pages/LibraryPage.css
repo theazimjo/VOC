@@ -17,7 +17,7 @@
   border-radius: 9px;
   padding: 2px;
   width: 100%;
-  max-width: 320px;
+  max-width: 360px;
   position: relative;
 }
 
@@ -39,6 +39,7 @@
   outline: none;
   flex: 1;
   border-radius: 7px;
+  white-space: nowrap;
 }
 
 .library-tab-btn:hover {
@@ -59,10 +60,10 @@
   z-index: 0;
 }
 
-.tab-label,
-.tab-count-badge {
+.tab-label {
   position: relative;
   z-index: 1;
+  white-space: nowrap;
 }
 
 /* Count badge inside tab */

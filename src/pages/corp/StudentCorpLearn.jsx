@@ -5,12 +5,14 @@ import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 import { getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
 import {
-  BookOpen, Sparkles, CheckCircle2, Play, ChevronRight, ArrowLeft, MoreVertical, Brain
+  BookOpen, Sparkles, CheckCircle2, Play, ChevronRight, ChevronLeft, ArrowLeft, MoreVertical, Brain
 } from 'lucide-react';
 import WordList from '../../components/Words/WordList';
+import SatPackCard from '../../components/corp/SatPackCard';
+import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import '../../components/Packs/PackCard.css';
 import '../PackDetail.css';
-import './StudentCorpDashboard.css';
+import './StudentCorpLearn.css';
 
 // Build the list of months (with month → unit → words nesting normalized)
 // from a list of pack objects.
@@ -32,7 +34,78 @@ function buildMonthsFromPacks(packs) {
   });
 }
 
-export default function StudentCorpDashboard() {
+// Helper to compute word breakdown stats (mastered, learning, new) for a month/pack.
+// `avgMasteryPct` (mean decayed mastery across every word) drives the ring
+// badge — a binary ">=80% counts as mastered" ratio stays at 0% for a long
+// time under this app's spaced-repetition model (passive-recall practice
+// modes cap a word's mastery at 65% until it earns an active-recall pass),
+// so the ring needs a continuous signal that moves with any real practice.
+function computeMonthWordStats(month, allDbWords) {
+  let masteredCount = 0;
+  let learningCount = 0;
+  let newCount = 0;
+  let totalMasterySum = 0;
+
+  const units = month.units || [];
+  units.forEach(u => {
+    const uniqueUnitId = `${month.packId}_${month.id}_${u.id}`;
+    const unitDbStats = allDbWords[uniqueUnitId] || {};
+    const words = u.words || [];
+
+    words.forEach((w, idx) => {
+      const wordKey = w.id || String(idx);
+      const dbStat = unitDbStats[wordKey] || {};
+      const merged = { ...w, ...dbStat };
+      const mastery = getDecayedMastery(merged);
+      totalMasterySum += mastery;
+
+      if (mastery >= 80) {
+        masteredCount++;
+      } else if (mastery > 0 || dbStat.reviewCount > 0 || dbStat.lastReviewed) {
+        learningCount++;
+      } else {
+        newCount++;
+      }
+    });
+  });
+
+  const totalWords = masteredCount + learningCount + newCount;
+  const avgMasteryPct = totalWords > 0 ? Math.round(totalMasterySum / totalWords) : 0;
+  return { masteredCount, learningCount, newCount, totalWords, avgMasteryPct };
+}
+
+// Helper to compute word breakdown stats for a single unit/topic
+function computeUnitWordStats(selectedMonth, unit, allDbWords) {
+  let masteredCount = 0;
+  let learningCount = 0;
+  let newCount = 0;
+  let totalMasterySum = 0;
+
+  const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${unit.id}`;
+  const unitDbStats = allDbWords[uniqueUnitId] || {};
+
+  (unit.words || []).forEach((w, idx) => {
+    const wordKey = w.id || String(idx);
+    const dbStat = unitDbStats[wordKey] || {};
+    const merged = { ...w, ...dbStat };
+    const mastery = getDecayedMastery(merged);
+    totalMasterySum += mastery;
+
+    if (mastery >= 80) {
+      masteredCount++;
+    } else if (mastery > 0 || dbStat.reviewCount > 0 || dbStat.lastReviewed) {
+      learningCount++;
+    } else {
+      newCount++;
+    }
+  });
+
+  const totalWords = masteredCount + learningCount + newCount;
+  const avgMasteryPct = totalWords > 0 ? Math.round(totalMasterySum / totalWords) : 0;
+  return { masteredCount, learningCount, newCount, totalWords, avgMasteryPct };
+}
+
+export default function StudentCorpLearn() {
   const { user, membership, student, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
@@ -141,7 +214,7 @@ export default function StudentCorpDashboard() {
   useEffect(() => {
     if (membership?.groupId && prevGroupIdRef.current !== membership.groupId) {
       prevGroupIdRef.current = membership.groupId;
-      navigate('/corp/student');
+      navigate('/corp/student/learn');
     }
   }, [membership?.groupId]);
 
@@ -170,40 +243,25 @@ export default function StudentCorpDashboard() {
       </div>
     ) : (
       <div className="grid-cards">
-        {months.map((m) => (
-          <motion.div
-            key={`${m.packId}_${m.id}`}
-            whileHover={{ y: -4 }}
-            whileTap={{ scale: 0.98 }}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-            onClick={() => navigate(`/corp/student/month/${m.packId}/${m.id}`)}
-            className="pack-card"
-            role="button"
-            tabIndex={0}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="pack-card-top">
-              <div className="pack-card-icon" style={{ backgroundColor: 'var(--accent-1-dim)', borderColor: 'var(--border-light)' }}>
-                📅
-              </div>
-              <div className="pack-card-top-right">
-                <span className="pack-card-count">{(m.units || []).length} ta mavzu</span>
-              </div>
-            </div>
-
-            <div className="pack-card-body">
-              <h3 className="pack-card-title">{m.title}</h3>
-              <p className="pack-card-desc">{m.packTitle} ({m.packLevel})</p>
-            </div>
-
-            <div className="pack-card-footer">
-              <span className="pack-card-new-label">📅 Oylik reja</span>
-              <span className="pack-card-arrow">→</span>
-            </div>
-          </motion.div>
-        ))}
+        {months.map((m) => {
+          const stats = computeMonthWordStats(m, allDbWords);
+          return (
+            <SatPackCard
+              key={`${m.packId}_${m.id}`}
+              title={m.title}
+              subtitle={`${m.packTitle} (${m.packLevel})`}
+              setCount={(m.units || []).length}
+              setLabel="sets"
+              wordCount={stats.totalWords}
+              wordLabel="words"
+              masteredCount={stats.masteredCount}
+              learningCount={stats.learningCount}
+              newCount={stats.newCount}
+              masteryPct={stats.avgMasteryPct}
+              onClick={() => navigate(`/corp/student/learn/month/${m.packId}/${m.id}`)}
+            />
+          );
+        })}
       </div>
     )
   );
@@ -217,28 +275,28 @@ export default function StudentCorpDashboard() {
         <div className="library-tabs-container">
           <div className="library-tabs">
 
-            {/* Asosiy Tab */}
+            {/* Main Tab */}
             <button
               className={`library-tab-btn ${activeTab === 'asosiy' ? 'active' : ''}`}
               onClick={() => setActiveTab('asosiy')}
             >
-              <span className="tab-icon">🏠</span> <span>Asosiy</span>
+              <span className="tab-icon">🏠</span> <span>Main</span>
             </button>
 
-            {/* Qo'shimcha Tab */}
+            {/* Additional Tab */}
             <button
               className={`library-tab-btn ${activeTab === 'qoshimcha' ? 'active' : ''}`}
               onClick={() => setActiveTab('qoshimcha')}
             >
-              <span className="tab-icon">✨</span> <span>Qo'shimcha</span>
+              <span className="tab-icon">✨</span> <span>Additional</span>
             </button>
 
-            {/* Kerakli Tab */}
+            {/* Required Tab */}
             <button
               className={`library-tab-btn ${activeTab === 'kerakli' ? 'active' : ''}`}
               onClick={() => setActiveTab('kerakli')}
             >
-              <span className="tab-icon">📌</span> <span>Kerakli</span>
+              <span className="tab-icon">📌</span> <span>Required</span>
             </button>
 
           </div>
@@ -254,16 +312,16 @@ export default function StudentCorpDashboard() {
           {!selectedMonth && (
             <>
               {activeTab === 'asosiy' && renderMonthsGrid(
-                allMonths, '📦', "To'plamlar topilmadi",
-                "Hozircha sizga hech qanday o'quv rejasi biriktirilmagan."
+                allMonths, '📦', "No sets found",
+                "No study plan has been assigned to you yet."
               )}
               {activeTab === 'qoshimcha' && renderMonthsGrid(
-                additionalMonths, '✨', "Qo'shimcha materiallar yo'q",
-                "Hozircha o'qituvchi tomonidan qo'shimcha materiallar biriktirilmagan."
+                additionalMonths, '✨', "No additional materials",
+                "No additional materials assigned by teacher yet."
               )}
               {activeTab === 'kerakli' && renderMonthsGrid(
-                requiredMonths, '📌', "Zaruriy topshiriqlar yo'q",
-                "Hozircha bajarilishi shart bo'lgan alohida topshiriqlar yo'q."
+                requiredMonths, '📌', "No required tasks",
+                "No separate required tasks assigned to complete."
               )}
             </>
           )}
@@ -271,82 +329,57 @@ export default function StudentCorpDashboard() {
           {/* LEVEL 2: TOPICS LIST */}
           {selectedMonth && !selectedUnit && (
             <>
-              {/* Folder detail header exactly like /library */}
-              <div className="library-folder-detail-header" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
+              {/* Sleek back button pill */}
+              <div className="ios-nav-header">
                 <button
-                  className="library-folder-back-btn"
-                  onClick={() => navigate('/corp/student')}
-                  style={{ display: 'inline-flex', flexDirection: 'row', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap' }}
+                  className="ios-back-btn"
+                  onClick={() => navigate('/corp/student/learn')}
+                  aria-label="Back"
+                  title="Back"
                 >
-                  <ArrowLeft size={20} style={{ flexShrink: 0 }} /> Kutubxona
+                  <ChevronLeft size={18} strokeWidth={2.5} />
+                  <span>Back</span>
                 </button>
-                <h2 style={{ fontSize: 'var(--font-lg)', fontWeight: 700, margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  📅 {selectedMonth.title}
-                </h2>
               </div>
+
+              {/* Hero Banner Header Card */}
+              {(() => {
+                const monthStats = computeMonthWordStats(selectedMonth, allDbWords);
+                return (
+                  <PackHeaderHero
+                    title={selectedMonth.title}
+                    subtitle={selectedMonth.packTitle ? `${selectedMonth.packTitle} (${selectedMonth.packLevel || 'Standard'})` : "Words collected from real past exams"}
+                    tag={selectedMonth.packLevel || "Question bank"}
+                    setCount={(selectedMonth.units || []).length}
+                    wordCount={monthStats.totalWords}
+                    masteredCount={monthStats.masteredCount}
+                    masteryPct={monthStats.avgMasteryPct}
+                  />
+                );
+              })()}
 
               <div className="grid-cards">
                 {(selectedMonth.units || []).length === 0 ? (
-                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', padding: '1rem 0' }}>Bu oyda mavzular mavjud emas.</div>
+                  <div style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', padding: '1rem 0' }}>No topics available in this month.</div>
                 ) : (
                   selectedMonth.units.map((u) => {
-                    const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${u.id}`;
-                    const hasWords = u.words && u.words.length > 0;
-
-                    // Calculate real average mastery percentage of the words in the unit
-                    let masteryPct = 0;
-                    if (hasWords) {
-                      const unitStats = allDbWords[uniqueUnitId] || {};
-                      const totalMastery = u.words.reduce((sum, w, idx) => {
-                        const wordKey = w.id || String(idx);
-                        const stat = unitStats[wordKey] || {};
-                        return sum + getDecayedMastery(stat);
-                      }, 0);
-                      masteryPct = Math.round(totalMastery / u.words.length);
-                    }
+                    const stats = computeUnitWordStats(selectedMonth, u, allDbWords);
+                    const hasWords = (u.words || []).length > 0;
 
                     return (
-                      <motion.div
+                      <SatPackCard
                         key={u.id}
-                        whileHover={hasWords ? { y: -4 } : {}}
-                        whileTap={hasWords ? { scale: 0.98 } : {}}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ type: 'spring', stiffness: 300, damping: 22 }}
-                        onClick={() => hasWords && navigate(`/corp/student/topic/${selectedMonth.packId}/${selectedMonth.id}/${u.id}`)}
-                        className="pack-card"
-                        role="button"
-                        tabIndex={0}
-                        style={{ cursor: hasWords ? 'pointer' : 'default', opacity: hasWords ? 1 : 0.5 }}
-                      >
-                        <div className="pack-card-top">
-                          <div className="pack-card-icon" style={{ backgroundColor: 'var(--accent-1-dim)', borderColor: 'var(--border-light)' }}>
-                            📖
-                          </div>
-                          <div className="pack-card-top-right">
-                            <span className="pack-card-count">{(u.words || []).length} ta so'z</span>
-                          </div>
-                        </div>
-
-                        <div className="pack-card-body">
-                          <h3 className="pack-card-title">{u.title}</h3>
-                        </div>
-
-                        <div className="pack-card-footer" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '8px' }}>
-                          <div className="pack-card-progress-row" style={{ width: '100%' }}>
-                            <div className="pack-card-progress-track">
-                              <div className="pack-card-progress-fill" style={{ width: `${masteryPct}%`, background: 'var(--success)' }} />
-                            </div>
-                            <span className="pack-card-progress-label" style={{ color: masteryPct > 0 ? 'var(--success)' : 'var(--text-secondary)' }}>
-                              {masteryPct}% mastered
-                            </span>
-                          </div>
-                          <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-                            <span style={{ fontSize: '0.78rem', color: 'var(--accent-1)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px' }}>
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
+                        title={u.title}
+                        subtitle={selectedMonth.title}
+                        wordCount={stats.totalWords}
+                        wordLabel="words"
+                        masteredCount={stats.masteredCount}
+                        learningCount={stats.learningCount}
+                        newCount={stats.newCount}
+                        masteryPct={stats.avgMasteryPct}
+                        onClick={() => hasWords && navigate(`/corp/student/learn/topic/${selectedMonth.packId}/${selectedMonth.id}/${u.id}`)}
+                        disabled={!hasWords}
+                      />
                     );
                   })
                 )}
@@ -362,14 +395,16 @@ export default function StudentCorpDashboard() {
               animate={{ opacity: 1 }}
               style={{ padding: 0 }}
             >
-              {/* Back to month list */}
-              <div className="detail-back-navigation" style={{ marginBottom: '1.5rem' }}>
+              {/* Sleek back button pill */}
+              <div className="ios-nav-header">
                 <button
-                  className="btn-back"
-                  onClick={() => navigate(`/corp/student/month/${packId}/${monthId}`)}
-                  style={{ display: 'inline-flex', flexDirection: 'row', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap', border: 'none', background: 'transparent', color: 'var(--text-secondary)', fontWeight: 600, fontSize: '0.9rem', cursor: 'pointer', padding: 0 }}
+                  className="ios-back-btn"
+                  onClick={() => navigate(`/corp/student/learn/month/${packId}/${monthId}`)}
+                  aria-label="Back"
+                  title="Back"
                 >
-                  <ArrowLeft size={20} /> {selectedMonth.title}
+                  <ChevronLeft size={18} strokeWidth={2.5} />
+                  <span>Back</span>
                 </button>
               </div>
 
@@ -381,7 +416,7 @@ export default function StudentCorpDashboard() {
                     <h1 className="corp-unit-detail-title">{selectedUnit.title}</h1>
                     <div className="book-stats" style={{ marginTop: '6px' }}>
                       <span className="book-stat-badge" style={{ display: 'inline-flex', background: 'var(--accent-1-dim)', color: 'var(--accent-1)', fontSize: '0.8rem', fontWeight: 600, padding: '4px 10px', borderRadius: '12px' }}>
-                        📝 {unitWords.length} ta so'z
+                        📝 {unitWords.length} words
                       </span>
                     </div>
                   </div>
@@ -400,7 +435,7 @@ export default function StudentCorpDashboard() {
                       startPractice(virtualPack);
                     }}
                   >
-                    🎮 Mashq qilish
+                    🎮 Practice
                   </button>
                 </div>
               </div>
