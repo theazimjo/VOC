@@ -2,10 +2,12 @@ import { useState, useEffect, useMemo } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
 import { getDecayedMastery } from '../utils/memoryEngine';
+import { corpWordStorageId } from '../utils/helpers';
 
 // Flattens assigned/additional/required packs down to individual words,
 // keyed the same way the rest of the corp student area writes progress
-// (`${packId}_${monthId}_${unitId}` -> per-word stats), so "target" reflects
+// (corpWordStorageId: `${packId}_${monthId}_${unitId}` per-word stats, or a
+// flat packId for the canonical Irregular Verbs pack), so "target" reflects
 // the full set of words assigned to this group, not just one category.
 function flattenAllWords(...packGroups) {
   const words = [];
@@ -20,7 +22,7 @@ function flattenAllWords(...packGroups) {
 
     packMonths.forEach(month => {
       (month.units || []).forEach(unit => {
-        const sourceId = `${pack.id}_${month.id}_${unit.id}`;
+        const sourceId = corpWordStorageId(pack.id, month.id, unit.id);
         (unit.words || []).forEach((w, idx) => {
           words.push({ ...w, sourceId, dbWordId: w.id || String(idx) });
         });

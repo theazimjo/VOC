@@ -3,6 +3,7 @@
  */
 
 import { getDecayedMastery } from './memoryEngine';
+import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsCorpPack';
 
 /**
  * Shuffle an array (Fisher-Yates algorithm)
@@ -135,6 +136,20 @@ export const PRACTICE_MODE_MIN_WORDS = {
   sentence: 1,
   'irregular-verbs': 1,
 };
+
+/**
+ * Corp practice normally scopes per-word progress to one specific
+ * (pack, month, unit) triple — `${packId}_${monthId}_${unitId}` — since a
+ * regular pack's words are only guaranteed unique *within* their own unit.
+ * The canonical Irregular Verbs pack is the one exception: every verb's id
+ * is its own (globally unique) text, so it's safe — and required — to store
+ * its mastery under one flat key instead. That's what makes "1-guruh" vs
+ * "2-guruh" vs a completely different group/center all update the exact
+ * same record for a given verb, instead of each keeping independent progress.
+ */
+export function corpWordStorageId(packId, monthId, unitId) {
+  return packId === IRREGULAR_VERBS_PACK_ID ? packId : `${packId}_${monthId}_${unitId}`;
+}
 
 /**
  * Format date for display

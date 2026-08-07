@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 import { getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
+import { corpWordStorageId } from '../../utils/helpers';
 import {
   BookOpen, Sparkles, CheckCircle2, Play, ChevronRight, ChevronLeft, ArrowLeft, MoreVertical, Brain
 } from 'lucide-react';
@@ -49,8 +50,7 @@ function computeMonthWordStats(month, allDbWords) {
 
   const units = month.units || [];
   units.forEach(u => {
-    const uniqueUnitId = `${month.packId}_${month.id}_${u.id}`;
-    const unitDbStats = allDbWords[uniqueUnitId] || {};
+    const unitDbStats = allDbWords[corpWordStorageId(month.packId, month.id, u.id)] || {};
     const words = u.words || [];
 
     words.forEach((w, idx) => {
@@ -82,8 +82,7 @@ function computeUnitWordStats(selectedMonth, unit, allDbWords) {
   let newCount = 0;
   let totalMasterySum = 0;
 
-  const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${unit.id}`;
-  const unitDbStats = allDbWords[uniqueUnitId] || {};
+  const unitDbStats = allDbWords[corpWordStorageId(selectedMonth.packId, selectedMonth.id, unit.id)] || {};
 
   (unit.words || []).forEach((w, idx) => {
     const wordKey = w.id || String(idx);
@@ -170,8 +169,7 @@ export default function StudentCorpLearn() {
   // Derive active selected unit words stats
   const dbWords = useMemo(() => {
     if (!selectedMonth || !selectedUnit) return {};
-    const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`;
-    return allDbWords[uniqueUnitId] || {};
+    return allDbWords[corpWordStorageId(selectedMonth.packId, selectedMonth.id, selectedUnit.id)] || {};
   }, [allDbWords, selectedMonth, selectedUnit]);
 
   // Map unit words to make sure they have IDs, valid timestamps and spaced repetition progress
@@ -371,7 +369,7 @@ export default function StudentCorpLearn() {
                       <SatPackCard
                         key={u.id}
                         title={u.title}
-                        subtitle={selectedMonth.title}
+                        subtitle={u.pattern || selectedMonth.title}
                         wordCount={stats.totalWords}
                         wordLabel="words"
                         masteredCount={stats.masteredCount}
@@ -426,9 +424,8 @@ export default function StudentCorpLearn() {
                   <button
                     className="btn btn-primary btn-mashq"
                     onClick={() => {
-                      const uniqueUnitId = `${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`;
                       const virtualPack = {
-                        id: uniqueUnitId,
+                        id: corpWordStorageId(selectedMonth.packId, selectedMonth.id, selectedUnit.id),
                         title: `${selectedMonth.packTitle} - ${selectedUnit.title}`,
                         words: selectedUnit.words || [],
                         level: selectedMonth.packLevel,

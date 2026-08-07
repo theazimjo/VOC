@@ -248,7 +248,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
   if (sessionVerbs.length === 0) {
     return (
       <div className="empty-state">
-        <p>Noto'g'ri fe'llar topilmadi.</p>
+        <p>No irregular verbs found.</p>
       </div>
     );
   }
@@ -412,7 +412,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       {subStep === 'study' && (
         <div className="study-flow">
           <div className="practice-card-header study-header">
-            <span className="practice-source-badge">Fe'llarni O'rganish</span>
+            <span className="practice-source-badge">Study Verbs</span>
             <span className="practice-source-badge">{studyIndex + 1} / {sessionVerbs.length}</span>
           </div>
 
@@ -435,7 +435,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   onClick={() => setStudyRevealed(true)}
                 >
                   <Eye size={16} strokeWidth={2.3} />
-                  Shakllarni eslab ko'ring, so'ng bosing
+                  Try to recall the forms, then tap
                 </button>
               ) : (
                 <>
@@ -457,7 +457,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
 
                   {sessionVerbs[studyIndex].example && (
                     <div className="study-card-example-box">
-                      <div className="example-label">Misol uchun</div>
+                      <div className="example-label">For example</div>
                       <div className="example-sentences">
                         {sessionVerbs[studyIndex].example.split('/').map((s, i) => {
                           const trimmed = s.trim();
@@ -482,7 +482,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                     onClick={() => speakVerbs(sessionVerbs[studyIndex].v1, sessionVerbs[studyIndex].v2, sessionVerbs[studyIndex].v3)}
                   >
                     <Volume2 size={18} strokeWidth={2.2} />
-                    Ovozli eshitish
+                    Listen
                   </button>
                 </>
               )}
@@ -490,17 +490,17 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
           </AnimatePresence>
 
           <div className="study-card-footer">
-            <button 
-              className="btn btn-secondary" 
+            <button
+              className="btn btn-secondary"
               onClick={studyIndex === 0 ? onExit : handlePrevStudyCard}
             >
-              {studyIndex === 0 ? "Chiqish" : "Orqaga"}
+              {studyIndex === 0 ? "Exit" : "Back"}
             </button>
-            <button 
-              className="btn btn-primary" 
+            <button
+              className="btn btn-primary"
               onClick={handleNextStudyCard}
             >
-              {studyIndex + 1 === sessionVerbs.length ? "Boshlash" : "Keyingisi"}
+              {studyIndex + 1 === sessionVerbs.length ? "Start" : "Next"}
             </button>
           </div>
         </div>
@@ -512,7 +512,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       {subStep === 'practice' && (
         <div>
           <div className="practice-card-header study-header">
-            <span className="practice-source-badge">Amaliyot</span>
+            <span className="practice-source-badge">Practice</span>
             <div className="practice-source-badge">
               {currentIndex + 1} of {sessionVerbs.length}
             </div>
@@ -529,7 +529,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   <span>{currentVerb.translation}</span>
                 </div>
                 <div className="trainer-instruction">
-                  Qolgan shakllarini to'ldiring
+                  Fill in the remaining forms
                 </div>
 
                 <div className="trainer-grid">
@@ -599,7 +599,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   <span>{currentVerb.translation}</span>
                 </div>
                 <div className="trainer-instruction">
-                  Tartib bilan bosing: V1 → V2 → V3
+                  Tap in order: V1 → V2 → V3
                 </div>
 
                 <div className="order-grid">
@@ -639,7 +639,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   {sentenceQuestion.before}<strong>_______</strong>{sentenceQuestion.after}
                 </div>
                 <div className="trainer-instruction">
-                  Mos tushuvchi fe'lni tanlang
+                  Choose the matching verb
                 </div>
 
                 <div className="choices-grid">
@@ -679,7 +679,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
-                  <div className="reveal-title">To'g'ri Javob</div>
+                  <div className="reveal-title">Correct Answer</div>
                   <div className="reveal-forms">
                     <span className="reveal-form-item">{currentVerb.v1}</span>
                     <span className="reveal-divider">→</span>
@@ -701,16 +701,16 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
               {!checked ? (
                 qType === 0 ? (
                   <button className="btn btn-primary btn-submit-trainer" onClick={handleTableSubmit}>
-                    Tekshirish
+                    Check
                   </button>
                 ) : qType === 1 ? (
                   <button className="btn btn-ghost btn-submit-trainer" onClick={handleOrderSkipReveal}>
-                    Javobni Ko'rish
+                    Show Answer
                   </button>
                 ) : null
               ) : (
                 <button className="btn btn-success btn-submit-trainer" onClick={handleNextQuestion}>
-                  {currentIndex + 1 === sessionVerbs.length ? "Natija" : "Davom Etish"}
+                  {currentIndex + 1 === sessionVerbs.length ? "Results" : "Continue"}
                 </button>
               )}
             </div>

@@ -10,12 +10,14 @@ import {
 } from 'lucide-react';
 import {
   getCenterTeachers, createTeacher, updateTeacherPassword, removeTeacherFromCenter, getCenterCustomPacks, getCenterGroups,
-  getCenter, updateCenter, deleteCustomPack, duplicateCustomPack, createCustomPack, updateCustomPack
+  getCenter, updateCenter, deleteCustomPack, duplicateCustomPack, createCustomPack, updateCustomPack,
+  ensureIrregularVerbsPack
 } from '../../services/corpService';
 import CustomPackEditor from '../../components/corp/CustomPackEditor';
 import CourseManager from '../../components/corp/CourseManager';
 import CredentialsModal from '../../components/corp/CredentialsModal';
 import { BEGINNER_ENGLISH_PACK } from '../../data/beginnerEnglishCoursePack';
+import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
 import './CenterAdminDashboard.css';
 
 export default function CenterAdminDashboard({ tab = 'dashboard' }) {
@@ -86,18 +88,33 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [teachersData, packsData, groupsData, centerData] = await Promise.all([
+      const [teachersData, packsData, groupsData, centerData, irregularPack] = await Promise.all([
         getCenterTeachers(centerId),
         getCenterCustomPacks(centerId),
         getCenterGroups(centerId),
-        getCenter(centerId)
+        getCenter(centerId),
+        ensureIrregularVerbsPack(centerId).catch(err => {
+          console.error('Error ensuring Irregular Verbs pack:', err);
+          return null;
+        }),
       ]);
 
       setTeachers(teachersData || []);
       // Packs a teacher created privately (ownerUid set) never show up in
       // the admin's course library — only center-wide packs the admin (or
       // any teacher, before this) created.
-      setCustomPacks((packsData || []).filter(p => !p.ownerUid));
+      const scopedPacks = (packsData || []).filter(p => !p.ownerUid);
+      // Always replaced with ensureIrregularVerbsPack's own return value
+      // rather than trusting whatever getCenterCustomPacks read — that read
+      // runs concurrently with ensure()'s write/self-heal above, so it can
+      // easily win the race and hand back a stale copy (e.g. pre-rename
+      // set/unit titles) even though ensure() already fixed it server-side.
+      const scopedWithoutStaleIrregular = scopedPacks.filter(p => p.id !== IRREGULAR_VERBS_PACK_ID);
+      setCustomPacks(
+        irregularPack
+          ? [...scopedWithoutStaleIrregular, irregularPack]
+          : scopedPacks
+      );
       setGroups(groupsData || []);
 
       if (centerData) {
@@ -195,6 +212,10 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   };
 
   const handleDeleteCourse = async (id) => {
+    if (id === IRREGULAR_VERBS_PACK_ID) {
+      alert("Bu tizim packi — barcha markazlarda umumiy ishlatiladi va o'chirib bo'lmaydi.");
+      return;
+    }
     if (!confirm('Ushbu kursni o\'chirishni tasdiqlaysizmi?')) return;
     try {
       await deleteCustomPack(centerId, id);

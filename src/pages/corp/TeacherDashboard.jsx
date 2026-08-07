@@ -17,13 +17,21 @@ import {
   getTeacherGroups, createGroup, getCenterCustomPacks,
   assignPackToGroup, removePackFromGroup, getGroupStudents, duplicateCustomPack, deleteCustomPack,
   updateGroupStatus, updateGroupDetails, deleteGroup,
-  getCenterTeachers, removeStudentFromGroup, updateTeacherProfile, getActiveAnnouncementsForRole
+  getCenterTeachers, removeStudentFromGroup, updateTeacherProfile, getActiveAnnouncementsForRole,
+  ensureIrregularVerbsPack
 } from '../../services/corpService';
+import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
 import CustomPackEditor from '../../components/corp/CustomPackEditor';
 import TeacherPackViewer from '../../components/corp/TeacherPackViewer';
 import CourseManager from '../../components/corp/CourseManager';
+import ConfirmSheet from '../../components/corp/ConfirmSheet';
 import './TeacherDashboard.css';
 import './CenterAdminDashboard.css';
+
+const GROUP_LEVEL_OPTIONS = [
+  'Beginner', 'Elementary', 'Pre-Intermediate', 'Intermediate', 'Upper-Intermediate',
+  'Advanced', 'Pre-IELTS', 'IELTS', 'CEFR B1', 'CEFR B2', 'CEFR C1',
+];
 
 // All packs assigned to a group across its three categories, deduplicated,
 // each tagged with the category it's assigned under (a pack could in theory
@@ -192,19 +200,35 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   // pattern as CenterAdminDashboard's per-row "⋮" teacher menu.
   const [activeStudentMenu, setActiveStudentMenu] = useState(null);
   const [studentMenuPos, setStudentMenuPos] = useState({ top: 0, right: 0 });
-  const [removingStudentId, setRemovingStudentId] = useState(null);
   const [viewingStudentDetail, setViewingStudentDetail] = useState(null);
 
   // Group transfer picker (replaces the old prompt()-based flow)
   const [showTransferPicker, setShowTransferPicker] = useState(false);
   const [centerTeachersList, setCenterTeachersList] = useState([]);
   const [loadingTransferTeachers, setLoadingTransferTeachers] = useState(false);
-  const [transferringTo, setTransferringTo] = useState(null);
 
   // Pack row actions + editor
   const [activePackMenu, setActivePackMenu] = useState(null);
   const [packMenuPos, setPackMenuPos] = useState({ top: 0, right: 0 });
   const [editingPack, setEditingPack] = useState(null);
+
+  // iOS-style action-sheet confirm dialog — replaces window.confirm() for
+  // every destructive/irreversible action in the group flow.
+  const [confirmSheet, setConfirmSheet] = useState(null);
+  const [confirmBusy, setConfirmBusy] = useState(false);
+
+  const askConfirm = (sheet) => setConfirmSheet(sheet);
+  const closeConfirmSheet = () => { if (!confirmBusy) setConfirmSheet(null); };
+  const runConfirmSheet = async () => {
+    if (!confirmSheet) return;
+    setConfirmBusy(true);
+    try {
+      await confirmSheet.onConfirm();
+    } finally {
+      setConfirmBusy(false);
+      setConfirmSheet(null);
+    }
+  };
 
   // Announcements targeted at teachers
   const [announcements, setAnnouncements] = useState([]);
@@ -265,9 +289,13 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const loadTeacherData = async () => {
     setLoading(true);
     try {
-      const [groupsData, packsData] = await Promise.all([
+      const [groupsData, packsData, irregularPack] = await Promise.all([
         getTeacherGroups(centerId, teacherId),
-        getCenterCustomPacks(centerId)
+        getCenterCustomPacks(centerId),
+        ensureIrregularVerbsPack(centerId).catch(err => {
+          console.error('Error ensuring Irregular Verbs pack:', err);
+          return null;
+        }),
       ]);
       setGroups(groupsData || []);
       // Packs with no ownerUid are center-wide (admin's, read-only for
@@ -281,7 +309,16 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       const scoped = (packsData || [])
         .filter(p => !p.ownerUid || p.ownerUid === myUid)
         .map(p => ({ ...p, scope: p.ownerUid ? 'own' : 'center' }));
-      setCustomPacks(scoped);
+      // Always replaced with ensureIrregularVerbsPack's own return value
+      // rather than trusting whatever getCenterCustomPacks read — that read
+      // runs concurrently with ensure()'s write/self-heal above, so it can
+      // easily win the race and hand back a stale copy (e.g. pre-rename
+      // set/unit titles) even though ensure() already fixed it server-side.
+      const withoutStaleIrregular = scoped.filter(p => p.id !== IRREGULAR_VERBS_PACK_ID);
+      const withIrregular = irregularPack
+        ? [...withoutStaleIrregular, { ...irregularPack, scope: 'center' }]
+        : scoped;
+      setCustomPacks(withIrregular);
     } catch (err) {
       console.error('Error loading teacher data:', err);
     } finally {
@@ -360,17 +397,23 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  const handleDeleteGroup = async (group) => {
-    if (!confirm(`"${group.name}" guruhini butunlay o'chirmoqchimisiz? Ushbu amalni ortga qaytarib bo'lmaydi!`)) return;
-    try {
-      await deleteGroup(centerId, group.id);
-      setGroups(prev => prev.filter(g => g.id !== group.id));
-      setSelectedGroupId(null);
-      navigate('/corp/teacher');
-      alert("Guruh muvaffaqiyatli o'chirildi!");
-    } catch (err) {
-      alert("Guruhni o'chirishda xatolik: " + err.message);
-    }
+  const handleDeleteGroup = (group) => {
+    askConfirm({
+      title: "Guruhni o'chirish",
+      message: `"${group.name}" guruhini butunlay o'chirmoqchimisiz? Ushbu amalni ortga qaytarib bo'lmaydi!`,
+      confirmLabel: "O'chirish",
+      danger: true,
+      onConfirm: async () => {
+        try {
+          await deleteGroup(centerId, group.id);
+          setGroups(prev => prev.filter(g => g.id !== group.id));
+          setSelectedGroupId(null);
+          navigate('/corp/teacher');
+        } catch (err) {
+          alert("Guruhni o'chirishda xatolik: " + err.message);
+        }
+      },
+    });
   };
 
   const copyCode = (code) => {
@@ -540,18 +583,23 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  const handleRegenerateCode = async () => {
+  const handleRegenerateCode = () => {
     if (!groupSettingsTarget) return;
-    if (!confirm("Yangi taklif kodi yaratilsinmi? Eski kod o'z kuchini yo'qotadi.")) return;
-    try {
-      const newCode = Math.floor(100000 + Math.random() * 900000).toString();
-      await updateGroupDetails(centerId, groupSettingsTarget.id, { code: newCode });
-      setGroupSettingsForm(prev => ({ ...prev, code: newCode }));
-      setGroups(prev => prev.map(g => g.id === groupSettingsTarget.id ? { ...g, code: newCode } : g));
-      alert(`Yangi taklif kodi yaratildi: ${newCode}`);
-    } catch (err) {
-      alert('Kodni yangilashda xatolik: ' + err.message);
-    }
+    askConfirm({
+      title: 'Yangi taklif kodi',
+      message: "Yangi taklif kodi yaratilsinmi? Eski kod o'z kuchini yo'qotadi.",
+      confirmLabel: 'Yaratish',
+      onConfirm: async () => {
+        try {
+          const newCode = Math.floor(100000 + Math.random() * 900000).toString();
+          await updateGroupDetails(centerId, groupSettingsTarget.id, { code: newCode });
+          setGroupSettingsForm(prev => ({ ...prev, code: newCode }));
+          setGroups(prev => prev.map(g => g.id === groupSettingsTarget.id ? { ...g, code: newCode } : g));
+        } catch (err) {
+          alert('Kodni yangilashda xatolik: ' + err.message);
+        }
+      },
+    });
   };
 
   const handleOpenTransferPicker = async () => {
@@ -568,41 +616,48 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  const handleTransferGroupTo = async (targetTeacher) => {
+  const handleTransferGroupTo = (targetTeacher) => {
     if (!groupSettingsTarget) return;
-    if (!confirm(`"${groupSettingsTarget.name}" guruhini ${targetTeacher.name} o'qituvchisiga o'tkazmoqchimisiz?`)) return;
-    setTransferringTo(targetTeacher.id);
-    try {
-      await updateGroupDetails(centerId, groupSettingsTarget.id, { teacherId: targetTeacher.id });
-      setGroups(prev => prev.filter(g => g.id !== groupSettingsTarget.id));
-      setSelectedGroupId(null);
-      setShowTransferPicker(false);
-      setShowGroupSettingsModal(false);
-      navigate('/corp/teacher');
-      alert("Guruh muvaffaqiyatli o'tkazildi!");
-    } catch (err) {
-      alert("O'tkazishda xatolik: " + err.message);
-    } finally {
-      setTransferringTo(null);
-    }
+    askConfirm({
+      title: "Guruhni o'tkazish",
+      message: `"${groupSettingsTarget.name}" guruhini ${targetTeacher.name} o'qituvchisiga o'tkazmoqchimisiz?`,
+      confirmLabel: "O'tkazish",
+      danger: true,
+      onConfirm: async () => {
+        try {
+          await updateGroupDetails(centerId, groupSettingsTarget.id, { teacherId: targetTeacher.id });
+          setGroups(prev => prev.filter(g => g.id !== groupSettingsTarget.id));
+          setSelectedGroupId(null);
+          setShowTransferPicker(false);
+          setShowGroupSettingsModal(false);
+          navigate('/corp/teacher');
+        } catch (err) {
+          alert("O'tkazishda xatolik: " + err.message);
+        }
+      },
+    });
   };
 
-  const handleRemoveStudent = async (student) => {
+  const handleRemoveStudent = (student) => {
     if (!selectedGroup) return;
-    if (!confirm(`"${student.name}" o'quvchisini guruhdan chiqarmoqchimisiz?`)) return;
-    setRemovingStudentId(student.id);
-    try {
-      await removeStudentFromGroup(centerId, selectedGroup.id, student.id);
-      setGroupStudentsList(prev => prev.filter(s => s.id !== student.id));
-      setGroups(prev => prev.map(g => g.id === selectedGroup.id
-        ? { ...g, studentsCount: Math.max(0, (g.studentsCount || 0) - 1) }
-        : g));
-      setActiveStudentMenu(null);
-    } catch (err) {
-      alert("O'quvchini chiqarishda xatolik: " + err.message);
-    } finally {
-      setRemovingStudentId(null);
-    }
+    askConfirm({
+      title: "O'quvchini chiqarish",
+      message: `"${student.name}" o'quvchisini guruhdan chiqarmoqchimisiz?`,
+      confirmLabel: 'Chiqarish',
+      danger: true,
+      onConfirm: async () => {
+        try {
+          await removeStudentFromGroup(centerId, selectedGroup.id, student.id);
+          setGroupStudentsList(prev => prev.filter(s => s.id !== student.id));
+          setGroups(prev => prev.map(g => g.id === selectedGroup.id
+            ? { ...g, studentsCount: Math.max(0, (g.studentsCount || 0) - 1) }
+            : g));
+          setActiveStudentMenu(null);
+        } catch (err) {
+          alert("O'quvchini chiqarishda xatolik: " + err.message);
+        }
+      },
+    });
   };
 
   const activeGroups = groups.filter(g => g.status !== 'archived');
@@ -706,7 +761,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                   title="Nusxalash"
                 >
                   {copiedCode === selectedGroup.code
-                    ? <Check size={15} color="#4ade80" />
+                    ? <Check size={15} color="var(--success)" />
                     : <Copy size={15} />}
                 </button>
               </div>
@@ -759,9 +814,29 @@ export default function TeacherDashboard({ tab = 'groups' }) {
               {/* SUB-TAB 1: STUDENTS */}
               {subTab === 'students' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {/* Top Quick Invite Banner */}
+                  <div className="group-invite-banner">
+                    <div className="gib-left">
+                      <div className="gib-icon"><Key size={20} color="#3b82f6" /></div>
+                      <div>
+                        <div className="gib-title">Guruh taklif kodi: <strong>{selectedGroup.code}</strong></div>
+                        <div className="gib-sub">O'quvchilar ilovadagi PIN maydoniga ushbu kodni kiritishi kerak</div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      className="gib-code-btn"
+                      onClick={() => copyCode(selectedGroup.code)}
+                      title="Kodni nusxalash"
+                    >
+                      {copiedCode === selectedGroup.code ? <Check size={15} color="var(--success)" /> : <Copy size={15} />}
+                      <span>{copiedCode === selectedGroup.code ? 'Nusxalandi' : 'Nusxalash'}</span>
+                    </button>
+                  </div>
+
                   {groupStudentsList.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '3rem 2rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px dashed rgba(255,255,255,0.1)', color: '#94a3b8' }}>
-                      <Users size={36} style={{ marginBottom: '10px', color: '#64748b' }} />
+                    <div style={{ textAlign: 'center', padding: '3rem 2rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)' }}>
+                      <Users size={36} style={{ marginBottom: '10px', color: 'var(--text-muted)' }} />
                       <p style={{ margin: '0 0 8px 0' }}>Ushbu guruhga hali o'quvchilar ulanmagan.</p>
                       <span style={{ fontSize: '0.85rem' }}>O'quvchilarga 6 xonali ulanish kodini bering: <strong>{selectedGroup.code}</strong></span>
                     </div>
@@ -827,10 +902,9 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                                     <button
                                       type="button"
                                       className="dropdown-item dropdown-item-danger"
-                                      disabled={removingStudentId === st.id}
                                       onClick={() => handleRemoveStudent(st)}
                                     >
-                                      <UserMinus size={15} /> {removingStudentId === st.id ? 'Chiqarilmoqda...' : 'Guruhdan chiqarish'}
+                                      <UserMinus size={15} /> Guruhdan chiqarish
                                     </button>
                                   </div>
                                 </>
@@ -848,7 +922,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
               {subTab === 'words' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div className="group-words-header">
-                    <h3 style={{ fontSize: '1.05rem', color: '#fff', margin: 0, fontWeight: 600 }}>Guruhga biriktirilgan so'z packlari</h3>
+                    <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)', margin: 0, fontWeight: 600 }}>Guruhga biriktirilgan so'z packlari</h3>
                     <button
                       className="btn-add-course-primary"
                       onClick={() => { setAssignCategory('assignedPacks'); setAssigningGroup(selectedGroup); }}
@@ -866,11 +940,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                     const packIds = selectedGroup[key] || [];
                     return (
                       <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <h4 style={{ fontSize: '0.88rem', color: '#94a3b8', margin: 0, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                        <h4 style={{ fontSize: '0.88rem', color: 'var(--text-muted)', margin: 0, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
                           {label} ({packIds.length})
                         </h4>
                         {packIds.length === 0 ? (
-                          <div style={{ textAlign: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '14px', border: '1px dashed rgba(255,255,255,0.1)', color: '#64748b', fontSize: '0.85rem' }}>
+                          <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
                             {emptyText}
                           </div>
                         ) : (
@@ -879,15 +953,23 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                               const p = customPacks.find(cp => cp.id === pid);
                               if (!p) return null;
                               return (
-                                <div key={pid} className="tpv-row" style={{ cursor: 'default', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', padding: '12px 16px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px' }}>
-                                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
-                                    <span className="tpv-row-label" style={{ color: '#fff', fontWeight: 600 }}>{p.title}</span>
-                                    <span className="tpv-row-meta" style={{ color: '#94a3b8', fontSize: '0.82rem' }}>{p.wordCount || (p.words ? p.words.length : 0)} ta so'z</span>
+                                <div key={pid} className="tpv-row" style={{ cursor: 'default', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', padding: '12px 16px', borderRadius: '14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                                    <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                                      <BookOpen size={18} />
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span className="tpv-row-label" style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.95rem' }}>{p.title}</span>
+                                        {p.level && <span className="group-level-badge">{p.level}</span>}
+                                      </div>
+                                      <span className="tpv-row-meta" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>{p.wordCount || (p.words ? p.words.length : 0)} ta so'z</span>
+                                    </div>
                                   </div>
                                   <button
                                     onClick={() => handleRemovePack(selectedGroup.id, pid, key)}
                                     title="Guruhdan olib tashlash"
-                                    style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', padding: '6px', display: 'flex', alignItems: 'center' }}
+                                    style={{ background: 'var(--error-dim)', border: 'none', color: 'var(--error)', cursor: 'pointer', padding: '8px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s ease' }}
                                   >
                                     <X size={16} />
                                   </button>
@@ -916,24 +998,24 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                     </div>
                     <div className="group-stat-card">
                       <div className="group-stat-label">Faol o'quvchilar</div>
-                      <div className="group-stat-value" style={{ color: '#38bdf8' }}>{selectedGroupStats.activeStudentsCount} ta</div>
+                      <div className="group-stat-value" style={{ color: 'var(--accent-1)' }}>{selectedGroupStats.activeStudentsCount} ta</div>
                     </div>
                     <div className="group-stat-card">
                       <div className="group-stat-label">O'rtacha o'zlashtirish</div>
-                      <div className="group-stat-value" style={{ color: '#4ade80' }}>{selectedGroupStats.avgPercent}%</div>
+                      <div className="group-stat-value" style={{ color: 'var(--success)' }}>{selectedGroupStats.avgPercent}%</div>
                     </div>
                   </div>
 
-                  <div className="teachers-table-card" style={{ marginTop: '0.5rem', background: 'rgba(255,255,255,0.02)' }}>
-                    <h4 style={{ padding: '1rem 1.25rem', margin: 0, color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.08)', fontSize: '0.98rem', fontWeight: 600 }}>
+                  <div className="teachers-table-card" style={{ marginTop: '0.5rem', background: 'var(--bg-tertiary)' }}>
+                    <h4 style={{ padding: '1rem 1.25rem', margin: 0, color: 'var(--text-primary)', borderBottom: '1px solid var(--border)', fontSize: '0.98rem', fontWeight: 600 }}>
                       O'quvchilar o'zlashtirishi (Packlar bo'yicha)
                     </h4>
                     {groupStudentsList.length === 0 ? (
-                      <div style={{ padding: '2.5rem 1rem', textAlign: 'center', color: '#94a3b8' }}>
+                      <div style={{ padding: '2.5rem 1rem', textAlign: 'center', color: 'var(--text-muted)' }}>
                         Statistika ko'rsatish uchun guruhda o'quvchilar mavjud emas.
                       </div>
                     ) : selectedGroupStats.packEntries.length === 0 ? (
-                      <div style={{ padding: '2.5rem 1rem', textAlign: 'center', color: '#94a3b8' }}>
+                      <div style={{ padding: '2.5rem 1rem', textAlign: 'center', color: 'var(--text-muted)' }}>
                         Guruhga hali pack biriktirilmagan — statistika ko'rsatish uchun avval "Packlar" bo'limidan pack biriktiring.
                       </div>
                     ) : (
@@ -941,8 +1023,8 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                         {groupStudentsList.map((student) => (
                           <div key={student.id} className="student-progress-card">
                             <div className="student-progress-card-head">
-                              <div className="st-avatar" style={{ background: '#3b82f6', fontWeight: 700 }}>{(student.name || '?').charAt(0).toUpperCase()}</div>
-                              <strong style={{ color: '#fff' }}>{student.name}</strong>
+                              <div className="st-avatar" style={{ background: 'var(--accent-1)', fontWeight: 700 }}>{(student.name || '?').charAt(0).toUpperCase()}</div>
+                              <strong style={{ color: 'var(--text-primary)' }}>{student.name}</strong>
                             </div>
                             <div className="student-progress-pack-list">
                               {selectedGroupStats.packEntries.map(({ packId, category }) => {
@@ -1031,14 +1113,24 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                 <p>{activeGroups.length} ta faol guruh · {totalStudents} ta o'quvchi</p>
               </div>
 
-              <button
-                type="button"
-                className="top-search-lupa-btn"
-                onClick={() => setShowSearchInput(!showSearchInput)}
-                title="Guruhni qidirish"
-              >
-                <Search size={18} />
-              </button>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <button
+                  type="button"
+                  className="top-search-lupa-btn"
+                  onClick={() => setShowSearchInput(!showSearchInput)}
+                  title="Guruhni qidirish"
+                >
+                  <Search size={18} />
+                </button>
+                <button
+                  type="button"
+                  className="btn-add-course-primary"
+                  onClick={() => setShowCreateModal(true)}
+                  style={{ padding: '8px 14px', fontSize: '0.88rem' }}
+                >
+                  <Plus size={16} /> Yangi Guruh
+                </button>
+              </div>
             </div>
 
             {(showSearchInput || searchTerm) && (
@@ -1062,7 +1154,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                     transform: 'translateY(-50%)',
                     background: 'none',
                     border: 'none',
-                    color: '#94a3b8',
+                    color: 'var(--text-muted)',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -1094,40 +1186,75 @@ export default function TeacherDashboard({ tab = 'groups' }) {
             </div>
           ) : (
             <div className="teacher-groups-grid">
-              {filteredActiveGroups.map((group) => (
-                <div
-                  key={group.id}
-                  className="mobile-group-card clickable"
-                  onClick={() => {
-                    setSelectedGroupId(group.id);
-                    navigate(`/corp/teacher/group/${group.id}`);
-                  }}
-                >
-                  <div className="mgc-icon-badge">
-                    <Users size={22} color="#3b82f6" />
-                  </div>
+              {filteredActiveGroups.map((group) => {
+                const totalPacks = (group.assignedPacks || []).length + (group.requiredPacks || []).length + (group.additionalPacks || []).length;
+                return (
+                  <div
+                    key={group.id}
+                    className="teacher-group-card-enhanced clickable"
+                    onClick={() => {
+                      setSelectedGroupId(group.id);
+                      navigate(`/corp/teacher/group/${group.id}`);
+                    }}
+                  >
+                    <div className="tgc-header">
+                      <div className="tgc-badge-wrap">
+                        <div className="tgc-icon-badge">
+                          <Users size={20} color="#3b82f6" />
+                        </div>
+                        <div className="tgc-title-block">
+                          <h3 className="tgc-title">{group.name}</h3>
+                          <span className="group-level-badge">{group.level || 'General'}</span>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        className="mgc-more-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpenGroupSettings(group);
+                        }}
+                        title="Sozlamalar"
+                      >
+                        <MoreVertical size={18} />
+                      </button>
+                    </div>
 
-                  <div className="mgc-info">
-                    <h3 className="mgc-title">{group.name}</h3>
-                    <div className="mgc-sub">
-                      <User size={13} />
-                      <span>{group.studentsCount || 0} o'quvchi</span>
+                    <div className="tgc-body">
+                      <div className="tgc-meta-row">
+                        <div className="tgc-meta-item">
+                          <User size={14} color="var(--text-muted)" />
+                          <span><strong>{group.studentsCount || 0}</strong> o'quvchi</span>
+                        </div>
+                        <div className="tgc-meta-item">
+                          <BookOpen size={14} color="var(--text-muted)" />
+                          <span><strong>{totalPacks}</strong> pack</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="tgc-footer">
+                      <button
+                        type="button"
+                        className="tgc-code-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          copyCode(group.code);
+                        }}
+                        title="Taklif kodini nusxalash"
+                      >
+                        {copiedCode === group.code ? <Check size={14} color="var(--success)" /> : <Copy size={14} />}
+                        <span>Kod: <strong>{group.code}</strong></span>
+                      </button>
+
+                      <div className="tgc-enter-link">
+                        <span>Guruhga kirish</span>
+                        <ChevronRight size={16} />
+                      </div>
                     </div>
                   </div>
-
-                  <button
-                    type="button"
-                    className="mgc-more-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenGroupSettings(group);
-                    }}
-                    title="Sozlamalar"
-                  >
-                    <MoreHorizontal size={22} />
-                  </button>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
@@ -1380,7 +1507,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
 
             <div className="group-stat-card">
               <div className="group-stat-label" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Users size={16} color="#4ade80" /> Jami O'quvchilar
+                <Users size={16} color="var(--success)" /> Jami O'quvchilar
               </div>
               <div className="group-stat-value">{totalStudents} ta</div>
             </div>
@@ -1719,6 +1846,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                     </div>
                     <div className="gsm-row-content">
                       <span className="gsm-row-label">Taklif kodini yangilash</span>
+                      <span className="gsm-row-sub">Joriy kod: {groupSettingsForm.code}</span>
                     </div>
                     <ChevronRight size={18} className="gsm-row-arrow" />
                   </div>
@@ -1813,7 +1941,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                     type="button"
                     className="dropdown-item"
                     style={{ border: '1px solid var(--border)', justifyContent: 'space-between' }}
-                    disabled={transferringTo === t.id}
                     onClick={() => handleTransferGroupTo(t)}
                   >
                     <span>
@@ -1851,10 +1978,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h2><Users size={20} /> Yangi Guruh Yaratish</h2>
             <form onSubmit={handleCreateGroup}>
-              <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.88rem' }}>Guruh Nomi *</label>
+              <div className="input-group" style={{ marginBottom: '1.25rem' }}>
+                <label>Guruh Nomi *</label>
                 <input
                   type="text"
+                  className="input"
                   required
                   placeholder="masalan: Beginner Monday 17:00"
                   value={groupForm.name}
@@ -1862,33 +1990,14 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                 />
               </div>
 
-              <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.88rem' }}>Daraja (Level)</label>
+              <div className="input-group" style={{ marginBottom: '1.5rem' }}>
+                <label>Daraja (Level)</label>
                 <select
+                  className="select"
                   value={groupForm.level}
                   onChange={e => setGroupForm({ ...groupForm, level: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '12px 14px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '10px',
-                    color: '#fff',
-                    outline: 'none',
-                    fontSize: '0.9rem'
-                  }}
                 >
-                   <option value="Beginner" style={{ background: '#1e1e2d', color: '#fff' }}>Beginner</option>
-                  <option value="Elementary" style={{ background: '#1e1e2d', color: '#fff' }}>Elementary</option>
-                  <option value="Pre-Intermediate" style={{ background: '#1e1e2d', color: '#fff' }}>Pre-Intermediate</option>
-                  <option value="Intermediate" style={{ background: '#1e1e2d', color: '#fff' }}>Intermediate</option>
-                  <option value="Upper-Intermediate" style={{ background: '#1e1e2d', color: '#fff' }}>Upper-Intermediate</option>
-                  <option value="Advanced" style={{ background: '#1e1e2d', color: '#fff' }}>Advanced</option>
-                  <option value="Pre-IELTS" style={{ background: '#1e1e2d', color: '#fff' }}>Pre-IELTS</option>
-                  <option value="IELTS" style={{ background: '#1e1e2d', color: '#fff' }}>IELTS</option>
-                  <option value="CEFR B1" style={{ background: '#1e1e2d', color: '#fff' }}>CEFR B1</option>
-                  <option value="CEFR B2" style={{ background: '#1e1e2d', color: '#fff' }}>CEFR B2</option>
-                  <option value="CEFR C1" style={{ background: '#1e1e2d', color: '#fff' }}>CEFR C1</option>
+                  {GROUP_LEVEL_OPTIONS.map(lvl => <option key={lvl} value={lvl}>{lvl}</option>)}
                 </select>
               </div>
 
@@ -1909,10 +2018,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h2><Users size={20} /> Guruhni Tahrirlash</h2>
             <form onSubmit={handleUpdateGroup}>
-              <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.88rem' }}>Guruh Nomi *</label>
+              <div className="input-group" style={{ marginBottom: '1.25rem' }}>
+                <label>Guruh Nomi *</label>
                 <input
                   type="text"
+                  className="input"
                   required
                   placeholder="masalan: Beginner Monday 17:00"
                   value={editForm.name}
@@ -1920,33 +2030,14 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                 />
               </div>
 
-              <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', marginBottom: '6px', color: '#cbd5e1', fontSize: '0.88rem' }}>Daraja (Level)</label>
+              <div className="input-group" style={{ marginBottom: '1.5rem' }}>
+                <label>Daraja (Level)</label>
                 <select
+                  className="select"
                   value={editForm.level}
                   onChange={e => setEditForm({ ...editForm, level: e.target.value })}
-                  style={{
-                    width: '100%',
-                    padding: '12px 14px',
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '10px',
-                    color: '#fff',
-                    outline: 'none',
-                    fontSize: '0.9rem'
-                  }}
                 >
-                  <option value="Beginner" style={{ background: '#1e1e2d', color: '#fff' }}>Beginner</option>
-                  <option value="Elementary" style={{ background: '#1e1e2d', color: '#fff' }}>Elementary</option>
-                  <option value="Pre-Intermediate" style={{ background: '#1e1e2d', color: '#fff' }}>Pre-Intermediate</option>
-                  <option value="Intermediate" style={{ background: '#1e1e2d', color: '#fff' }}>Intermediate</option>
-                  <option value="Upper-Intermediate" style={{ background: '#1e1e2d', color: '#fff' }}>Upper-Intermediate</option>
-                  <option value="Advanced" style={{ background: '#1e1e2d', color: '#fff' }}>Advanced</option>
-                  <option value="Pre-IELTS" style={{ background: '#1e1e2d', color: '#fff' }}>Pre-IELTS</option>
-                  <option value="IELTS" style={{ background: '#1e1e2d', color: '#fff' }}>IELTS</option>
-                  <option value="CEFR B1" style={{ background: '#1e1e2d', color: '#fff' }}>CEFR B1</option>
-                  <option value="CEFR B2" style={{ background: '#1e1e2d', color: '#fff' }}>CEFR B2</option>
-                  <option value="CEFR C1" style={{ background: '#1e1e2d', color: '#fff' }}>CEFR C1</option>
+                  {GROUP_LEVEL_OPTIONS.map(lvl => <option key={lvl} value={lvl}>{lvl}</option>)}
                 </select>
               </div>
 
@@ -1966,11 +2057,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
         <div className="modal-overlay" onClick={() => setAssigningGroup(null)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h2><BookOpen size={20} /> Pack Biriktirish: {assigningGroup.name}</h2>
-            <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
               Ushbu guruh o'quvchilari o'rganishi uchun pack tanlang va toifasini belgilang:
             </p>
 
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '1rem' }}>
+            <div className="group-seg-bar" style={{ marginTop: 0, marginBottom: '1rem' }}>
               {[
                 { key: 'assignedPacks', label: 'Asosiy' },
                 { key: 'requiredPacks', label: 'Kerakli' },
@@ -1979,47 +2070,49 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                 <button
                   key={key}
                   type="button"
+                  className={`group-seg-btn ${assignCategory === key ? 'active' : ''}`}
                   onClick={() => setAssignCategory(key)}
-                  style={{
-                    flex: 1,
-                    padding: '8px 10px',
-                    borderRadius: '10px',
-                    fontSize: '0.82rem',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    border: assignCategory === key ? '1px solid #0a84ff' : '1px solid rgba(255,255,255,0.1)',
-                    background: assignCategory === key ? 'rgba(10,132,255,0.15)' : 'rgba(255,255,255,0.03)',
-                    color: assignCategory === key ? '#0a84ff' : '#94a3b8',
-                  }}
                 >
-                  {label}
+                  <span>{label}</span>
                 </button>
               ))}
             </div>
 
             <div className="assign-pack-list">
-              <h4>Mavjud Packlar ({customPacks.length})</h4>
-              {customPacks.length === 0 ? (
-                <p style={{ color: '#64748b', fontSize: '0.85rem' }}>Hali pack yaratilmagan.</p>
-              ) : (
-                customPacks.map(p => (
-                  <div key={p.id} className="assign-pack-item">
-                    <div>
-                      <strong>{p.title}</strong> ({p.level}) - {p.wordCount || (p.words ? p.words.length : 0)} so'z
-                      <span style={{ marginLeft: '8px', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-                        {p.scope === 'own' ? '· Mening' : '· Markaz'}
-                      </span>
-                    </div>
-                    <button
-                      className="btn-select-pack"
-                      onClick={() => handleAssignPack(assigningGroup.id, p.id, assignCategory)}
-                      disabled={(assigningGroup[assignCategory] || []).includes(p.id)}
-                    >
-                      {(assigningGroup[assignCategory] || []).includes(p.id) ? 'Biriktirilgan' : 'Biriktirish'}
-                    </button>
-                  </div>
-                ))
-              )}
+              {(() => {
+                // Irregular Verbs is only ever assignable under "Qo'shimcha"
+                // — it's a grammar-drill pack, not core curriculum, so it
+                // shouldn't clutter the Asosiy/Kerakli pickers.
+                const assignablePacks = customPacks.filter(
+                  p => p.id !== IRREGULAR_VERBS_PACK_ID || assignCategory === 'additionalPacks'
+                );
+                return (
+                  <>
+                    <h4>Mavjud Packlar ({assignablePacks.length})</h4>
+                    {assignablePacks.length === 0 ? (
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Hali pack yaratilmagan.</p>
+                    ) : (
+                      assignablePacks.map(p => (
+                        <div key={p.id} className="assign-pack-item">
+                          <div>
+                            <strong>{p.title}</strong> ({p.level}) - {p.wordCount || (p.words ? p.words.length : 0)} so'z
+                            <span style={{ marginLeft: '8px', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                              {p.scope === 'own' ? '· Mening' : '· Markaz'}
+                            </span>
+                          </div>
+                          <button
+                            className="btn-select-pack"
+                            onClick={() => handleAssignPack(assigningGroup.id, p.id, assignCategory)}
+                            disabled={(assigningGroup[assignCategory] || []).includes(p.id)}
+                          >
+                            {(assigningGroup[assignCategory] || []).includes(p.id) ? 'Biriktirilgan' : 'Biriktirish'}
+                          </button>
+                        </div>
+                      ))
+                    )}
+                  </>
+                );
+              })()}
             </div>
 
             <div className="modal-actions">
@@ -2036,7 +2129,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
             <h2><Users size={20} /> {viewingGroupStudents.name} - O'quvchilar Progressi</h2>
 
             {groupStudentsList.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '2rem 0', color: '#94a3b8' }}>
+              <div style={{ textAlign: 'center', padding: '2rem 0', color: 'var(--text-muted)' }}>
                 Ushbu guruhga hali o'quvchilar ulanmagan.<br />
                 O'quvchilarga 6 xonali ulanish kodini bering: <strong>{viewingGroupStudents.code}</strong>
               </div>
@@ -2048,7 +2141,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                       <div className="st-avatar">{st.name.charAt(0)}</div>
                       <div>
                         <strong>{st.name}</strong>
-                        <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>{st.email || 'Email berilmagan'}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{st.email || 'Email berilmagan'}</div>
                       </div>
                     </div>
 
@@ -2066,6 +2159,17 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           </div>
         </div>
       )}
+
+      <ConfirmSheet
+        open={!!confirmSheet}
+        title={confirmSheet?.title}
+        message={confirmSheet?.message}
+        confirmLabel={confirmSheet?.confirmLabel}
+        danger={confirmSheet?.danger}
+        busy={confirmBusy}
+        onConfirm={runConfirmSheet}
+        onCancel={closeConfirmSheet}
+      />
     </div>
   );
 }

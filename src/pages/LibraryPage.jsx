@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ref, push, update, get, remove, set } from 'firebase/database';
+import { ref, push, update, get, remove, set, serverTimestamp } from 'firebase/database';
 import { ArrowLeft, MoreVertical } from 'lucide-react';
 import { db } from '../firebase';
 import { useAuth } from '../contexts/AuthContext';
@@ -16,6 +16,7 @@ import { packIcons } from '../utils/helpers';
 import { playSound } from '../utils/feedback';
 import { marketPacks } from '../data/marketData';
 import { getMissingMarketWords } from '../utils/marketSync';
+import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsCorpPack';
 import IosSpinner from '../components/common/IosSpinner';
 import './LibraryPage.css';
 
@@ -187,26 +188,31 @@ export default function LibraryPage() {
     }
   };
 
+  // Shared field shape for a market word being written into a pack's flat
+  // words node — used both for a normal push()-keyed word and (below) for
+  // the Irregular Verbs pack's fixed, text-keyed words.
+  const buildWordPayload = (wordData) => ({
+    word: wordData.word || '',
+    translation: wordData.translation || '',
+    definition: wordData.definition || '',
+    example: wordData.example || '',
+    notes: wordData.notes || '',
+    partOfSpeech: wordData.partOfSpeech || 'noun',
+    addedAt: new Date().toISOString(),
+    mastery: 0,
+    interval: 0,
+    reviewCount: 0,
+    nextReview: null,
+    lastReviewed: null
+  });
+
   // Builds the Firebase update payload for a batch of market words being
   // written into a pack's flat words node.
   const buildWordUpdates = (wordsRef, words) => {
     const updates = {};
     words.forEach((wordData) => {
       const newWordRef = push(wordsRef);
-      updates[newWordRef.key] = {
-        word: wordData.word || '',
-        translation: wordData.translation || '',
-        definition: wordData.definition || '',
-        example: wordData.example || '',
-        notes: wordData.notes || '',
-        partOfSpeech: wordData.partOfSpeech || 'noun',
-        addedAt: new Date().toISOString(),
-        mastery: 0,
-        interval: 0,
-        reviewCount: 0,
-        nextReview: null,
-        lastReviewed: null
-      };
+      updates[newWordRef.key] = buildWordPayload(wordData);
     });
     return updates;
   };
@@ -217,6 +223,39 @@ export default function LibraryPage() {
     setInstallingPackId(marketPack.id);
 
     try {
+      // The canonical Irregular Verbs pack installs under one fixed packId,
+      // with each word keyed by its own (globally unique) text instead of a
+      // random push() key — the exact same location corp group practice
+      // writes to (see utils/helpers.corpWordStorageId and
+      // corpService.ensureIrregularVerbsPack), so a student's mastery on a
+      // given verb is the same record whether they practiced it personally
+      // or through any group/center.
+      if (marketPack.id === IRREGULAR_VERBS_PACK_ID) {
+        await update(ref(db, `users/${user.uid}`), {
+          [`packs/${IRREGULAR_VERBS_PACK_ID}`]: {
+            name: marketPack.name,
+            description: marketPack.description,
+            icon: marketPack.icon,
+            color: marketPack.color,
+            level: marketPack.level,
+            marketPackId: marketPack.id,
+            createdAt: new Date().toISOString(),
+            wordCount: marketPack.words.length
+          },
+          'meta/lastPackCreatedAt': serverTimestamp()
+        });
+
+        const updates = {};
+        marketPack.words.forEach((wordData) => {
+          if (wordData.word) updates[wordData.word] = buildWordPayload(wordData);
+        });
+        await update(ref(db, `users/${user.uid}/words/${IRREGULAR_VERBS_PACK_ID}`), updates);
+
+        playSound('correct');
+        setJustInstalledIds(prev => [...prev, marketPack.id]);
+        return;
+      }
+
       // 1. Create the pack metadata node
       const newPackId = await addPack({
         name: marketPack.name,
@@ -257,7 +296,13 @@ export default function LibraryPage() {
 
     try {
       const wordsRef = ref(db, `users/${user.uid}/words/${installedPack.id}`);
-      await update(wordsRef, buildWordUpdates(wordsRef, missingWords));
+      // Irregular Verbs keeps its text-keyed words even on incremental
+      // updates, so any newly added verb still lands under the same shared
+      // id a corp group would use for it — never a random push() key.
+      const updates = installedPack.id === IRREGULAR_VERBS_PACK_ID
+        ? Object.fromEntries(missingWords.filter(w => w.word).map(w => [w.word, buildWordPayload(w)]))
+        : buildWordUpdates(wordsRef, missingWords);
+      await update(wordsRef, updates);
 
       const packRef = ref(db, `users/${user.uid}/packs/${installedPack.id}`);
       await update(packRef, {

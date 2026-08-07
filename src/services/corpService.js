@@ -2,6 +2,7 @@ import { ref, set, get, update, push, remove } from 'firebase/database';
 import { createUserWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { getSecondaryAuth } from '../firebaseSecondary';
+import { IRREGULAR_VERBS_PACK_ID, IRREGULAR_VERBS_CORP_PACK } from '../data/irregularVerbsCorpPack';
 
 // Helper to generate unique 6-digit join PIN
 function generateJoinCode() {
@@ -447,6 +448,45 @@ export async function getCenterCustomPacks(centerId) {
   if (!snapshot.exists()) return [];
   const val = snapshot.val();
   return Object.keys(val).map(key => ({ id: key, ...val[key] }));
+}
+
+/**
+ * Make sure this center has the canonical, system-wide Irregular Verbs pack
+ * available to assign to groups (typically under "Qo'shimcha"). It's seeded
+ * under the same fixed key (IRREGULAR_VERBS_PACK_ID) in every center rather
+ * than a random push() id, specifically so that a student's per-verb mastery
+ * — stored via corpWordStorageId() — lands in one shared record regardless
+ * of which center/group/topic they practiced it through.
+ *
+ * The set/unit breakdown (`months`) and word count always self-heal to the
+ * current IRREGULAR_VERBS_CORP_PACK on every call — it's static code-defined
+ * content, not something a teacher edits, so a center that seeded an older
+ * copy (e.g. before sets were renamed) picks up the rename automatically
+ * instead of staying stuck on whatever was written the first time. Title/
+ * description/level are only set on first creation, so an admin's own edits
+ * to those (via CustomPackEditor) are left alone on later calls.
+ */
+export async function ensureIrregularVerbsPack(centerId) {
+  const packRef = ref(db, `centers/${centerId}/customPacks/${IRREGULAR_VERBS_PACK_ID}`);
+  const snap = await get(packRef);
+
+  if (snap.exists()) {
+    const existing = snap.val();
+    await update(packRef, {
+      months: IRREGULAR_VERBS_CORP_PACK.months,
+      wordCount: IRREGULAR_VERBS_CORP_PACK.wordCount,
+    });
+    return { id: IRREGULAR_VERBS_PACK_ID, ...existing, months: IRREGULAR_VERBS_CORP_PACK.months, wordCount: IRREGULAR_VERBS_CORP_PACK.wordCount };
+  }
+
+  const payload = {
+    ...IRREGULAR_VERBS_CORP_PACK,
+    centerId,
+    createdAt: new Date().toISOString(),
+    createdBy: 'System',
+  };
+  await set(packRef, payload);
+  return payload;
 }
 
 /**

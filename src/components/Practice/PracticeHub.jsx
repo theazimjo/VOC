@@ -10,7 +10,7 @@ const RECOMMENDATION_BADGES = {
   reinforce: (count) => `${count} forgetting ⏰`,
 };
 
-export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = [] }) {
+export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, words = [] }) {
   const modes = [];
 
   // Which mode actually fits this word list's current memory state right
@@ -31,52 +31,58 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, words = []
     });
   }
 
-  modes.push(
-    {
-      id: 'flashcard',
-      icon: Brain,
-      title: 'Smart Flashcards',
-      desc: "Review words with intelligent spaced repetition flashcards",
-      badge: recommendation?.modeId === 'flashcard'
-        ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
-        : null,
-      glowColor: 'hsl(200, 90%, 55%)'
-    },
-    {
-      id: 'spelling',
-      icon: PenLine,
-      title: 'Spelling Practice',
-      desc: "Listen and type words correctly from memory",
-      badge: recommendation?.modeId === 'spelling'
-        ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
-        : "Min 3 words",
-      glowColor: 'hsl(265, 90%, 65%)'
-    },
-    {
-      id: 'match',
-      icon: Shuffle,
-      title: 'Match Game',
-      desc: "Match English words with their correct translations",
-      badge: "Min 4 words",
-      glowColor: 'hsl(150, 80%, 45%)'
-    },
-    {
-      id: 'quiz',
-      icon: ListChecks,
-      title: 'Multiple Choice Quiz',
-      desc: "Select the correct translation from four options",
-      badge: "Min 4 words",
-      glowColor: 'hsl(38, 95%, 55%)'
-    },
-    {
-      id: 'pronounce',
-      icon: Mic,
-      title: 'Pronunciation Practice',
-      desc: "Speak into the microphone to improve pronunciation",
-      badge: "Min 1 word",
-      glowColor: 'hsl(340, 85%, 60%)'
-    }
-  );
+  modes.push({
+    id: 'flashcard',
+    icon: Brain,
+    title: 'Smart Flashcards',
+    desc: "Review words with intelligent spaced repetition flashcards",
+    badge: recommendation?.modeId === 'flashcard'
+      ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
+      : null,
+    glowColor: 'hsl(200, 90%, 55%)'
+  });
+
+  // The corp Irregular Verbs pack only ever needs the dedicated trainer plus
+  // flashcards — Spelling/Match/Quiz/Pronounce are built around translation
+  // recall, not V1/V2/V3 conjugation, so they're skipped entirely here.
+  if (!irregularVerbsOnly) {
+    modes.push(
+      {
+        id: 'spelling',
+        icon: PenLine,
+        title: 'Spelling Practice',
+        desc: "Listen and type words correctly from memory",
+        badge: recommendation?.modeId === 'spelling'
+          ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
+          : "Min 3 words",
+        glowColor: 'hsl(265, 90%, 65%)'
+      },
+      {
+        id: 'match',
+        icon: Shuffle,
+        title: 'Match Game',
+        desc: "Match English words with their correct translations",
+        badge: "Min 4 words",
+        glowColor: 'hsl(150, 80%, 45%)'
+      },
+      {
+        id: 'quiz',
+        icon: ListChecks,
+        title: 'Multiple Choice Quiz',
+        desc: "Select the correct translation from four options",
+        badge: "Min 4 words",
+        glowColor: 'hsl(38, 95%, 55%)'
+      },
+      {
+        id: 'pronounce',
+        icon: Mic,
+        title: 'Pronunciation Practice',
+        desc: "Speak into the microphone to improve pronunciation",
+        badge: "Min 1 word",
+        glowColor: 'hsl(340, 85%, 60%)'
+      }
+    );
+  }
 
   return (
     <div className="practice-hub">

@@ -6,7 +6,7 @@ import { ref, get, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { usePacks } from '../../hooks/usePacks';
 import { updateStudentUnitProgress } from '../../services/corpService';
-import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
+import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACTICE_MODE_MIN_WORDS, corpWordStorageId } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { classifyWord } from '../../experiment/semanticClassifier';
 import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
@@ -20,6 +20,8 @@ import MatchGame from '../../components/Practice/MatchGame';
 import QuizGame from '../../components/Practice/QuizGame';
 import PronounceGame from '../../components/Practice/PronounceGame';
 import SentenceBuilder from '../../components/Practice/SentenceBuilder';
+import IrregularVerbsTrainer from '../../components/Practice/IrregularVerbsTrainer';
+import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
 import '../../pages/PracticePage.css';
 import './CorpPractice.css';
 
@@ -64,9 +66,12 @@ export default function CorpPractice() {
     const foundUnit = (foundMonth.units || []).find(u => u.id === unitId);
     if (!foundUnit) return null;
 
-    const uniqueUnitId = `${foundPack.id}_${foundMonth.id}_${foundUnit.id}`;
     return {
-      id: uniqueUnitId,
+      // Flat 'irregular-verbs' for the canonical pack (every verb's id is
+      // globally unique, so its mastery is one shared record regardless of
+      // which group/center it's practiced through) — the usual compound
+      // packId_monthId_unitId key for every other pack, see corpWordStorageId.
+      id: corpWordStorageId(foundPack.id, foundMonth.id, foundUnit.id),
       title: `${foundPack.title} - ${foundUnit.title}`,
       words: foundUnit.words || [],
       level: foundPack.level,
@@ -128,6 +133,20 @@ export default function CorpPractice() {
     return () => clearTimeout(timerId);
   }, [step]);
 
+  // Irregular Verbs skips the PracticeHub mode picker entirely — its
+  // trainer already combines a flashcard-style study pass with the
+  // V1/V2/V3 practice games in one continuous flow, so opening a topic goes
+  // straight into it instead of an extra "choose a mode" screen.
+  useEffect(() => {
+    if (packId !== IRREGULAR_VERBS_PACK_ID || step !== 'mode' || sourceWords.length === 0) return;
+    setSelectedMode('irregular-verbs');
+    setWrongWords([]);
+    setProgressPct(0);
+    setRoundNumber(1);
+    setPracticeWords(sourceWords);
+    setStep('intro');
+  }, [packId, step, sourceWords]);
+
   // StudentLayout only renders this route once assignedPacks/requiredPacks/
   // additionalPacks have already finished loading (see StudentLayout.jsx),
   // so neither a null loadedPack nor an empty sourceWords is ever "still
@@ -141,7 +160,9 @@ export default function CorpPractice() {
     }
   }, [loadedPack, sourceWords, navigate]);
 
-  if (!loadedPack || sourceWords.length === 0 || loadingProgress) {
+  const autoStartingIrregularVerbs = packId === IRREGULAR_VERBS_PACK_ID && step === 'mode';
+
+  if (!loadedPack || sourceWords.length === 0 || loadingProgress || autoStartingIrregularVerbs) {
     return (
       <div style={{ padding: '3rem 1.5rem', textAlign: 'center' }}>
         <div className="ios-activity-indicator">
@@ -322,6 +343,7 @@ export default function CorpPractice() {
       case 'quiz': return <QuizGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
       case 'sentence': return <SentenceBuilder {...props} />;
+      case 'irregular-verbs': return <IrregularVerbsTrainer {...props} />;
       default: return null;
     }
   };
@@ -376,7 +398,12 @@ export default function CorpPractice() {
                 ))}
               </div>
             </div>
-            <PracticeHub onSelectMode={handleStartPractice} isIrregularVerbs={false} words={sourceWords} />
+            <PracticeHub
+              onSelectMode={handleStartPractice}
+              isIrregularVerbs={packId === IRREGULAR_VERBS_PACK_ID}
+              irregularVerbsOnly={packId === IRREGULAR_VERBS_PACK_ID}
+              words={sourceWords}
+            />
           </motion.div>
         )}
 
@@ -607,7 +634,16 @@ export default function CorpPractice() {
                 }}
                 onClick={() => {
                   setShowExitModal(false);
-                  setStep('mode');
+                  // Irregular Verbs auto-skips the 'mode' step (it jumps
+                  // straight back into the trainer the instant step becomes
+                  // 'mode' again — see the auto-start effect above), so
+                  // quitting has to leave the practice route entirely
+                  // instead of just resetting to 'mode'.
+                  if (packId === IRREGULAR_VERBS_PACK_ID) {
+                    navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}`);
+                  } else {
+                    setStep('mode');
+                  }
                 }}
               >
                 Quit
