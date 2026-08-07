@@ -380,6 +380,7 @@ export async function createCustomPack(centerId, packData, ownerUid = null) {
     title: packData.title,
     level: packData.level || 'Elementary',
     description: packData.description || '',
+    language: packData.language || 'en-US',
     words: packData.words || [], // Array of { word, translation, definition, example }
     wordCount: (packData.words || []).length,
     createdAt: new Date().toISOString(),
@@ -547,6 +548,13 @@ export async function deleteGroup(centerId, groupId) {
     updates[`groupCodes/${group.code}`] = null;
   }
   
+  // Clean up student membership references if accessible
+  if (group.students) {
+    Object.keys(group.students).forEach(uid => {
+      updates[`users/${uid}/groupMemberships/${groupId}`] = null;
+    });
+  }
+
   await update(ref(db), updates);
   return true;
 }

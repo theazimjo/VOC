@@ -88,6 +88,13 @@
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
+  color-scheme: dark;
+}
+
+.modal-input option,
+select option {
+  background-color: #181824;
+  color: #ffffff;
 }
 
 .modal-input::placeholder {

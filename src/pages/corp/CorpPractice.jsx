@@ -448,7 +448,7 @@ export default function CorpPractice() {
               knownWords={results.knownWords || []}
               reviewWords={results.reviewWords || []}
               onRepeatReviewWords={handleRepeatReviewWords}
-              onFinish={() => navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}`)}
+              onFinish={handleReset}
             />
           ) : (
             <motion.div

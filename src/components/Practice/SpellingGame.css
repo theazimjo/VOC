@@ -134,6 +134,17 @@
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.scrambled-tile:hover:not(.used) {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.12);
+  transform: translateY(-2px);
+}
+
+.scrambled-tile:active {
+  transform: scale(0.92);
 }
 
 .spelling-tiles-wrapper.size-md .scrambled-tile {

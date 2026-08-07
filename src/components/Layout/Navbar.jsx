@@ -5,7 +5,7 @@ import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, Che
 import { useAuth } from '../../contexts/AuthContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useGroupMode } from '../../hooks/useGroupMode';
-import { ref, onValue } from 'firebase/database';
+import { ref, onValue, get, remove } from 'firebase/database';
 import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
 import GlobalSearch from '../common/GlobalSearch';
@@ -29,13 +29,28 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const [joinError, setJoinError] = useState('');
   const switcherRef = useRef(null);
 
-  // Fetch all joined groups reactively
+  // Fetch all joined groups reactively and filter deleted ones
   useEffect(() => {
     if (!user) return;
     const membershipsRef = ref(db, `users/${user.uid}/groupMemberships`);
-    const unsub = onValue(membershipsRef, (snap) => {
+    const unsub = onValue(membershipsRef, async (snap) => {
       if (snap.exists()) {
-        setMemberships(Object.values(snap.val()));
+        const rawList = Object.values(snap.val());
+        const validList = [];
+        for (const m of rawList) {
+          try {
+            const groupSnap = await get(ref(db, `centers/${m.centerId}/groups/${m.groupId}`));
+            if (groupSnap.exists()) {
+              validList.push(m);
+            } else {
+              // Group no longer exists (deleted by teacher)! Remove stale pointer
+              await remove(ref(db, `users/${user.uid}/groupMemberships/${m.groupId}`));
+            }
+          } catch {
+            validList.push(m);
+          }
+        }
+        setMemberships(validList);
       } else {
         setMemberships([]);
       }
@@ -69,6 +84,15 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
 
   const handleSwitchGroup = async (groupId) => {
     try {
+      const targetM = memberships.find(m => m.groupId === groupId);
+      if (targetM) {
+        const groupSnap = await get(ref(db, `centers/${targetM.centerId}/groups/${groupId}`));
+        if (!groupSnap.exists()) {
+          await remove(ref(db, `users/${user.uid}/groupMemberships/${groupId}`));
+          setMemberships(prev => prev.filter(m => m.groupId !== groupId));
+          return;
+        }
+      }
       await switchActiveGroup(user.uid, groupId);
       setShowSwitcher(false);
       navigate('/corp/student');
@@ -211,12 +235,19 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
             <div style={{
               background: '#22c55e',
               color: '#fff',
-              fontSize: '0.72rem',
-              fontWeight: 700,
+              fontSize: '0.65rem',
+              fontWeight: 800,
+              letterSpacing: '-0.02em',
               width: '24px',
               height: '24px',
+              minWidth: '24px',
+              minHeight: '24px',
               borderRadius: '50%',
               display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+              lineHeight: 1
             }}>
               {getGroupBadgeText(membership)}
             </div>

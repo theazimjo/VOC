@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Save, X } from 'lucide-react';
 import { createCustomPack, updateCustomPack } from '../../services/corpService';
+import { speechLanguages } from '../../utils/helpers';
 import './CustomPackEditor.css';
 
 export default function CustomPackEditor({ centerId, editPack = null, onSaved, onCancel, ownerUid = null }) {
   const [title, setTitle] = useState(editPack?.title || '');
   const [description, setDescription] = useState(editPack?.description || '');
+  const [language, setLanguage] = useState(editPack?.language || 'en-US');
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     setTitle(editPack?.title || '');
     setDescription(editPack?.description || '');
+    setLanguage(editPack?.language || 'en-US');
   }, [editPack]);
 
   const handleSubmit = async (e) => {
@@ -23,10 +26,10 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
     setSubmitting(true);
     try {
       if (editPack && editPack.id) {
-        await updateCustomPack(centerId, editPack.id, { title: title.trim(), description: description.trim() });
-        if (onSaved) onSaved({ ...editPack, title: title.trim(), description: description.trim() });
+        await updateCustomPack(centerId, editPack.id, { title: title.trim(), description: description.trim(), language });
+        if (onSaved) onSaved({ ...editPack, title: title.trim(), description: description.trim(), language });
       } else {
-        const pack = await createCustomPack(centerId, { title: title.trim(), description: description.trim() }, ownerUid);
+        const pack = await createCustomPack(centerId, { title: title.trim(), description: description.trim(), language }, ownerUid);
         if (onSaved) onSaved(pack);
       }
     } catch (err) {
@@ -63,13 +66,26 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
 
         <div className="modal-form-group">
           <label className="modal-label">TAVSIF (IXTIYORIY)</label>
-          <textarea 
-            placeholder="Kurs haqida qisqacha..." 
+          <textarea
+            placeholder="Kurs haqida qisqacha..."
             value={description}
             onChange={e => setDescription(e.target.value)}
             rows={3}
             className="modal-textarea"
           />
+        </div>
+
+        <div className="modal-form-group">
+          <label className="modal-label">SO'ZLARNING TILI (TALAFFUZ UCHUN)</label>
+          <select
+            className="modal-input"
+            value={language}
+            onChange={e => setLanguage(e.target.value)}
+          >
+            {speechLanguages.map(l => (
+              <option key={l.code} value={l.code}>{l.flag} {l.label}</option>
+            ))}
+          </select>
         </div>
 
         <div className="course-modal-footer">
@@ -79,7 +95,7 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
             </button>
           )}
           <button type="submit" className="btn-modal-save" disabled={submitting}>
-            <Save size={18} /> {submitting ? 'Saqlanmoqda...' : 'Kursni Yaratish'}
+            <Save size={18} /> {submitting ? 'Saqlanmoqda...' : (editPack ? 'Saqlash' : 'Kursni Yaratish')}
           </button>
         </div>
       </form>

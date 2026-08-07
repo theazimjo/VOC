@@ -43,6 +43,11 @@
   box-sizing: border-box;
 }
 
+select option {
+  background-color: #181824;
+  color: #ffffff;
+}
+
 /* Font size configurations */
 html[data-font-size="small"] {
   font-size: 14px;

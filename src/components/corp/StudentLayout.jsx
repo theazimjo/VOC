@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import { ref, get } from 'firebase/database';
+import { ref, get, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGroupMode } from '../../hooks/useGroupMode';
@@ -38,7 +38,31 @@ export default function StudentLayout() {
           getCenterCustomPacks(membership.centerId),
           get(ref(db, `centers/${membership.centerId}/name`))
         ]);
-        if (cancelled) return;
+        if (!freshGroup) {
+          // Group was deleted by teacher! Clean up stale membership
+          const updates = {};
+          updates[`users/${user.uid}/groupMemberships/${membership.groupId}`] = null;
+          updates[`users/${user.uid}/groupMembership`] = null;
+
+          const allMembershipsSnap = await get(ref(db, `users/${user.uid}/groupMemberships`));
+          let nextMembership = null;
+          if (allMembershipsSnap.exists()) {
+            const remaining = Object.values(allMembershipsSnap.val()).filter(m => m.groupId !== membership.groupId);
+            if (remaining.length > 0) {
+              nextMembership = remaining[0];
+            }
+          }
+
+          if (nextMembership) {
+            updates[`users/${user.uid}/groupMembership`] = nextMembership;
+          } else {
+            updates[`users/${user.uid}/profile/appMode`] = 'individual';
+          }
+
+          await update(ref(db), updates);
+          if (!cancelled) setLoading(false);
+          return;
+        }
 
         setGroup(freshGroup);
         const assignedIds = new Set(freshGroup?.assignedPacks || []);

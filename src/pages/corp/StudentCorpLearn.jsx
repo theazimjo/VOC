@@ -29,7 +29,8 @@ function buildMonthsFromPacks(packs) {
       ...m,
       packId: pack.id,
       packTitle: pack.title,
-      packLevel: pack.level
+      packLevel: pack.level,
+      packLanguage: pack.language || 'en-US'
     }));
   });
 }
@@ -430,7 +431,8 @@ export default function StudentCorpLearn() {
                         id: uniqueUnitId,
                         title: `${selectedMonth.packTitle} - ${selectedUnit.title}`,
                         words: selectedUnit.words || [],
-                        level: selectedMonth.packLevel
+                        level: selectedMonth.packLevel,
+                        language: selectedMonth.packLanguage
                       };
                       startPractice(virtualPack);
                     }}
@@ -471,7 +473,7 @@ export default function StudentCorpLearn() {
               <WordList
                 words={unitWords}
                 readOnly={true}
-                language="en-US"
+                language={selectedMonth?.packLanguage || 'en-US'}
               />
             </motion.div>
           )}

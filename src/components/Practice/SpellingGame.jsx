@@ -58,6 +58,40 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     }
   }, [currentIndex, answered]);
 
+  const getLangAdjective = (langCode) => {
+    if (!langCode) return 'English';
+    const prefix = langCode.toLowerCase().slice(0, 2);
+    switch (prefix) {
+      case 'de': return 'German';
+      case 'ko': return 'Korean';
+      case 'ru': return 'Russian';
+      case 'fr': return 'French';
+      case 'es': return 'Spanish';
+      case 'tr': return 'Turkish';
+      case 'it': return 'Italian';
+      case 'pt': return 'Portuguese';
+      case 'ar': return 'Arabic';
+      case 'zh': return 'Chinese';
+      case 'ja': return 'Japanese';
+      case 'uz': return 'Uzbek';
+      default: return 'English';
+    }
+  };
+
+  const normalizeForComparison = (str) => {
+    if (!str) return '';
+    return str
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, ' ')
+      .replace(/ä/g, 'a')
+      .replace(/ö/g, 'o')
+      .replace(/ü/g, 'u')
+      .replace(/ß/g, 'ss')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  };
+
   const submitAnswer = async (overrideWord) => {
     if (answered) return;
     const submittedInput = overrideWord ?? input;
@@ -66,7 +100,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     const responseTime = (Date.now() - startTimeRef.current) / 1000;
     const cleanSubmitted = submittedInput.toLowerCase().trim().replace(/\s+/g, ' ');
     const cleanTarget = currentWord.word.toLowerCase().trim().replace(/\s+/g, ' ');
-    const correct = cleanSubmitted === cleanTarget;
+    const correct = cleanSubmitted === cleanTarget || normalizeForComparison(cleanSubmitted) === normalizeForComparison(cleanTarget);
     setAnswered(true);
     setIsCorrect(correct);
     if (onAnswer) onAnswer(currentWord, correct);
@@ -84,6 +118,21 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     } else {
       setIncorrectCount(c => c + 1);
       detectConfusion(submittedInput);
+    }
+  };
+
+  const handleTileClick = (letter, isUsed) => {
+    if (answered) return;
+    if (!isUsed) {
+      setInput(prev => prev + letter);
+    } else {
+      // Remove last occurrence of letter
+      const idx = input.lastIndexOf(letter.toLowerCase());
+      const altIdx = input.lastIndexOf(letter.toUpperCase());
+      const removeAt = Math.max(idx, altIdx);
+      if (removeAt !== -1) {
+        setInput(prev => prev.slice(0, removeAt) + prev.slice(removeAt + 1));
+      }
     }
   };
 
@@ -170,7 +219,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="spelling-card-label">Type the English word</div>
+          <div className="spelling-card-label">Type the {getLangAdjective(language)} word</div>
           <div className={`spelling-target ${targetSizeClass}`}>{currentWord.translation}</div>
           <div className="spelling-scramble-label">
             Scrambled letters ({wordLength} letters):
@@ -182,6 +231,8 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
                 <span
                   key={idx}
                   className={`scrambled-tile ${isUsed ? 'used' : ''}`}
+                  onClick={() => handleTileClick(letter, isUsed)}
+                  title={isUsed ? "O'chirish uchun bosing" : "Tanlash uchun bosing"}
                 >
                   {letter}
                 </span>
