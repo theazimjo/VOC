@@ -8,7 +8,7 @@ import {
 import { setAppMode, updateStudentProfile } from '../../services/corpService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
-import { useGroupWordProgress } from '../../hooks/useGroupWordProgress';
+import { useAccountWordProgress } from '../../hooks/useAccountWordProgress';
 import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import './StudentCorpProfile.css';
 
@@ -20,7 +20,7 @@ const SHEET_META = {
 };
 
 export default function StudentCorpProfile() {
-  const { user, membership, student, assignedPacks, requiredPacks, additionalPacks } = useOutletContext();
+  const { user, membership, student, wordTarget } = useOutletContext();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const { theme, setTheme, fontSize, setFontSize, audioEnabled, setAudioEnabled, themes } = useTheme();
@@ -30,13 +30,13 @@ export default function StudentCorpProfile() {
   const sheetMeta = activeSheet ? SHEET_META[activeSheet] : null;
   const SheetIcon = sheetMeta?.icon;
 
-  // Same word-mastery computation the dashboard's Target Words card uses —
-  // respects the student's own target if they've set one there — so this
-  // mirrors that number instead of the unrelated "packs started" ratio.
-  const { groupTotalWords, learnedWords } = useGroupWordProgress(
-    user?.uid, assignedPacks, requiredPacks, additionalPacks
-  );
-  const targetWords = student?.wordTarget ?? groupTotalWords;
+  // Same account-wide word-mastery computation the dashboard's Target Words
+  // card uses — respects the student's own target if they've set one there
+  // — so this mirrors that number instead of the unrelated "packs started"
+  // ratio, and never resets just because they're viewing from a different
+  // group's context.
+  const { totalWords, learnedWords } = useAccountWordProgress(user?.uid);
+  const targetWords = wordTarget ?? totalWords;
   const learnedPct = targetWords > 0 ? Math.min(100, Math.round((learnedWords / targetWords) * 100)) : 0;
 
   // Optimistic local overrides — the group record StudentLayout reads is a

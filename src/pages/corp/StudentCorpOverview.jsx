@@ -1,9 +1,10 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Target, CheckCircle2, CalendarDays, NotebookPen, X, Check } from 'lucide-react';
+import { Target, CheckCircle2, CalendarDays, NotebookPen, X, Check, ChevronRight, PartyPopper } from 'lucide-react';
 import { updateStudentWordTarget } from '../../services/corpService';
-import { useGroupWordProgress } from '../../hooks/useGroupWordProgress';
+import { useAccountWordProgress } from '../../hooks/useAccountWordProgress';
+import { corpWordStorageId } from '../../utils/helpers';
 import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import './StudentCorpOverview.css';
 
@@ -44,10 +45,10 @@ function getMonthCalendar(activityLog = {}) {
   return { cells, year, month };
 }
 
-// Rebuilds a date -> count activity log strictly from this group's own words'
-// recallHistory, instead of the app-wide streak log, so the calendar reflects
-// only what was actually reviewed in this group's curriculum.
-function buildGroupActivityLog(words) {
+// Rebuilds a date -> count activity log from every word's own recallHistory
+// (account-wide — any group, any center, individual mode too), instead of
+// the app-wide streak log, so the calendar reflects real reviews.
+function buildActivityLog(words) {
   const log = {};
   words.forEach(w => {
     (w.recallHistory || []).forEach(entry => {
@@ -60,28 +61,77 @@ function buildGroupActivityLog(words) {
 }
 
 export default function StudentCorpOverview() {
-  const { user, membership, student, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
+  const { user, homeworkList, wordTarget } = useOutletContext();
+  const navigate = useNavigate();
 
-  const { words, groupTotalWords, learnedWords } = useGroupWordProgress(
-    user?.uid, assignedPacks, requiredPacks, additionalPacks
-  );
+  const { words, totalWords, learnedWords } = useAccountWordProgress(user?.uid);
 
-  // The student's own goal overrides the group total as the ring's
-  // denominator; null means "use the full group word count".
-  const [customTarget, setCustomTarget] = useState(() => student?.wordTarget ?? null);
+  // Flattened across every assignment the teacher has ever given (see
+  // corpService.addGroupHomework) — homework items are just pointers at
+  // existing Asosiy/Qo'shimcha topics, so "done" reuses the exact same
+  // decayed-mastery words this page already computed above; practicing a
+  // topic from Learn or from here updates the identical record either way.
+  const homeworkItems = useMemo(() => {
+    const allItems = (homeworkList || []).flatMap(hw => hw.items || []);
+    return allItems.map(item => {
+      const sourceId = corpWordStorageId(item.packId, item.monthId, item.unitId);
+      const itemWords = words.filter(w => w.sourceId === sourceId);
+      const masteryPct = itemWords.length > 0
+        ? Math.round(itemWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / itemWords.length)
+        : 0;
+      return { ...item, masteryPct, done: masteryPct >= 80 };
+    });
+  }, [homeworkList, words]);
+  const homeworkDoneCount = homeworkItems.filter(i => i.done).length;
+
+  // The student's own goal overrides the account-wide total as the ring's
+  // denominator; null means "use the total words touched so far". `wordTarget`
+  // itself is live (StudentLayout subscribes to users/{uid}/profile/wordTarget),
+  // so it's mirrored into local state to allow an instant optimistic update
+  // on save without waiting for the round trip back down.
+  const [customTarget, setCustomTarget] = useState(wordTarget);
+  useEffect(() => { setCustomTarget(wordTarget); }, [wordTarget]);
   const [editingTarget, setEditingTarget] = useState(false);
   const [draftTarget, setDraftTarget] = useState(null);
 
-  const targetWords = customTarget ?? groupTotalWords;
+  const targetWords = customTarget ?? totalWords;
   const learnedPct = targetWords > 0 ? Math.min(100, Math.round((learnedWords / targetWords) * 100)) : 0;
-  const sliderMax = Math.max(2000, groupTotalWords);
+  // Capped at the target itself — learnedWords (account-wide) can keep
+  // growing past it, but the card should read "100/100, goal reached", not
+  // an odd-looking "137/100".
+  const targetReached = learnedWords >= targetWords && targetWords > 0;
+  const displayLearned = targetReached ? targetWords : learnedWords;
+  const sliderMax = Math.max(5000, totalWords);
+  // Once the target's been reached, the editor session it opens into is
+  // locked: no closing without saving, and the dial itself can't be dragged
+  // back down to (or below) the value that was just reached.
+  const mustRaiseTarget = targetReached;
+  const dialMin = mustRaiseTarget ? targetWords + TARGET_STEP : TARGET_MIN;
+
+  // Reaching the target isn't the end — it's shown as a congratulations
+  // screen with no way to dismiss it (no close button, no click-outside),
+  // and raising the target via "Set New Target" is the only way past it —
+  // no silent auto-raise, no skipping it either.
+  const showCongrats = targetReached && !editingTarget;
 
   const openEditor = () => {
-    setDraftTarget(customTarget ?? groupTotalWords);
+    setDraftTarget(customTarget ?? totalWords);
     setEditingTarget(true);
   };
 
-  const closeEditor = () => setEditingTarget(false);
+  // Locked while a just-reached target still needs raising — nothing to
+  // fall back to that wouldn't just be the value they already hit.
+  const closeEditor = () => {
+    if (mustRaiseTarget) return;
+    setEditingTarget(false);
+  };
+
+  const startNewTarget = () => {
+    // Opens already above the just-reached target, step-aligned, instead of
+    // at the old value — there's no valid lower starting point to show.
+    setDraftTarget(targetWords + TARGET_STEP);
+    setEditingTarget(true);
+  };
 
   // Lock page scroll while the modal is open — otherwise dragging the dial
   // on a touch screen also drags the page behind it.
@@ -95,9 +145,9 @@ export default function StudentCorpOverview() {
   const saveTarget = async () => {
     setCustomTarget(draftTarget);
     setEditingTarget(false);
-    if (!membership?.centerId || !membership?.groupId || !user?.uid) return;
+    if (!user?.uid) return;
     try {
-      await updateStudentWordTarget(membership.centerId, membership.groupId, user.uid, draftTarget);
+      await updateStudentWordTarget(user.uid, draftTarget);
     } catch (err) {
       console.error('Error saving word target:', err);
     }
@@ -115,8 +165,8 @@ export default function StudentCorpOverview() {
     let angle = Math.atan2(clientY - cy, clientX - cx) * (180 / Math.PI);
     angle = (angle + 90 + 360) % 360;
     const pct = angle / 360;
-    const raw = TARGET_MIN + pct * (sliderMax - TARGET_MIN);
-    return Math.min(sliderMax, Math.max(TARGET_MIN, Math.round(raw / TARGET_STEP) * TARGET_STEP));
+    const raw = dialMin + pct * (sliderMax - dialMin);
+    return Math.min(sliderMax, Math.max(dialMin, Math.round(raw / TARGET_STEP) * TARGET_STEP));
   };
 
   const handleDialPointerDown = (e) => {
@@ -131,15 +181,15 @@ export default function StudentCorpOverview() {
     setDraftTarget(valueFromPointer(e.clientX, e.clientY));
   };
 
-  const dialFraction = draftTarget != null ? (draftTarget - TARGET_MIN) / (sliderMax - TARGET_MIN) : 0;
+  const dialFraction = draftTarget != null ? (draftTarget - dialMin) / (sliderMax - dialMin) : 0;
   const dialTheta = dialFraction * 2 * Math.PI;
   const dialKnobX = DIAL_SIZE / 2 + DIAL_RADIUS * Math.sin(dialTheta);
   const dialKnobY = DIAL_SIZE / 2 - DIAL_RADIUS * Math.cos(dialTheta);
 
-  const groupActivityLog = useMemo(() => buildGroupActivityLog(words), [words]);
+  const activityLog = useMemo(() => buildActivityLog(words), [words]);
   const { cells: calendarCells, month } = useMemo(
-    () => getMonthCalendar(groupActivityLog),
-    [groupActivityLog]
+    () => getMonthCalendar(activityLog),
+    [activityLog]
   );
   const monthTotal = useMemo(
     () => calendarCells.reduce((sum, c) => sum + (c?.count || 0), 0),
@@ -162,13 +212,15 @@ export default function StudentCorpOverview() {
         {/* ── Target words ── */}
         <PackHeaderHero
           icon={<Target size={22} />}
-          tag={null}
+          tag={targetReached ? 'Target reached 🎉' : null}
           title="Target Words"
-          subtitle={`${learnedWords} / ${targetWords} words learned`}
+          subtitle={targetReached
+            ? `You've reached your goal of ${targetWords} words — set a new target to keep going`
+            : `${displayLearned} / ${targetWords} words learned`}
           masteryPct={learnedPct}
           metrics={[
             { icon: <Target size={16} />, label: 'TARGET', value: targetWords, color: 'blue', onClick: openEditor },
-            { icon: <CheckCircle2 size={16} />, label: 'LEARNED', value: learnedWords, color: 'green' },
+            { icon: <CheckCircle2 size={16} />, label: 'LEARNED', value: displayLearned, color: 'green' },
           ]}
         />
 
@@ -178,7 +230,7 @@ export default function StudentCorpOverview() {
             <span className="corp-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Activity Calendar</span>
             <span className="corp-ov-cal-month">{MONTH_NAMES[month]}</span>
           </div>
-          <p className="corp-ov-cal-summary">You've reviewed <strong>{monthTotal}</strong> words in this group this month</p>
+          <p className="corp-ov-cal-summary">You've reviewed <strong>{monthTotal}</strong> words this month</p>
 
           <div className="corp-ov-cal-weekdays">
             {WEEKDAY_LABELS.map(d => <span key={d} className="corp-ov-cal-weekday">{d}</span>)}
@@ -197,14 +249,69 @@ export default function StudentCorpOverview() {
           </div>
         </div>
 
-        {/* ── Homework (placeholder) ── */}
+        {/* ── Homework ── */}
         <div className="corp-ov-hw-card corp-ov-homework-card">
-          <div className="corp-ov-hw-icon"><NotebookPen size={20} strokeWidth={2.2} /></div>
-          <h3>Homework</h3>
-          <p>No homework assigned yet. Tasks from your teacher will appear here.</p>
+          <div className="corp-ov-hw-header">
+            <div className="corp-ov-hw-header-left">
+              <div className="corp-ov-hw-icon"><NotebookPen size={20} strokeWidth={2.2} /></div>
+              <h3>Homework</h3>
+            </div>
+            {homeworkItems.length > 0 && (
+              <span className="corp-ov-hw-count">{homeworkDoneCount}/{homeworkItems.length} done</span>
+            )}
+          </div>
+
+          {homeworkItems.length === 0 ? (
+            <p>No homework assigned yet. Tasks from your teacher will appear here.</p>
+          ) : (
+            <div className="corp-ov-hw-list">
+              {homeworkItems.map(item => (
+                <button
+                  key={`${item.packId}_${item.monthId}_${item.unitId}`}
+                  type="button"
+                  className={`corp-ov-hw-item ${item.done ? 'done' : ''}`}
+                  onClick={() => navigate(`/corp/student/learn/topic/${item.packId}/${item.monthId}/${item.unitId}?from=homework`)}
+                >
+                  <div className={`corp-ov-hw-item-check ${item.done ? 'done' : ''}`}>
+                    {item.done && <Check size={13} strokeWidth={3} />}
+                  </div>
+                  <div className="corp-ov-hw-item-text">
+                    <span className="corp-ov-hw-item-title">{item.unitTitle}</span>
+                    <span className="corp-ov-hw-item-sub">{item.packTitle} · {item.masteryPct}%</span>
+                  </div>
+                  <ChevronRight size={16} className="corp-ov-hw-item-arrow" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
       </div>
+
+      {/* ── Congratulations screen: shown once the target is reached.
+          Fully locked, same as the dial it leads into — no close button,
+          no dismissing by clicking outside. Setting a higher target via
+          "Set New Target" is the only way past it. ── */}
+      {showCongrats && (
+        <div className="corp-ov-target-overlay">
+          <motion.div
+            className="corp-ov-target-editor corp-ov-congrats"
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="corp-ov-congrats-icon"><PartyPopper size={34} strokeWidth={2} /></div>
+            <h3 className="corp-ov-congrats-title">Congratulations! 🎉</h3>
+            <p className="corp-ov-congrats-text">
+              You've reached your target — <strong>{targetWords} / {targetWords}</strong> words learned!
+            </p>
+
+            <button type="button" className="corp-ov-target-save-btn" onClick={startNewTarget}>
+              <Target size={18} strokeWidth={2.6} /> Set New Target
+            </button>
+          </motion.div>
+        </div>
+      )}
 
       {/* ── Target editor modal: drag-around-the-ring picker ── */}
       {editingTarget && (
@@ -219,9 +326,11 @@ export default function StudentCorpOverview() {
             <div className="corp-ov-target-header">
               <div className="corp-ov-target-header-icon"><Target size={18} strokeWidth={2.3} /></div>
               <h3>Set Your Target</h3>
-              <button type="button" className="corp-ov-target-close" onClick={closeEditor} aria-label="Close">
-                <X size={18} strokeWidth={2.3} />
-              </button>
+              {!mustRaiseTarget && (
+                <button type="button" className="corp-ov-target-close" onClick={closeEditor} aria-label="Close">
+                  <X size={18} strokeWidth={2.3} />
+                </button>
+              )}
             </div>
 
             <div
@@ -256,9 +365,18 @@ export default function StudentCorpOverview() {
               </div>
             </div>
 
-            <p className="corp-ov-dial-hint">Drag the ring to set your target</p>
+            <p className="corp-ov-dial-hint">
+              {mustRaiseTarget
+                ? `You've hit ${targetWords} — drag to set a higher target to keep going`
+                : 'Drag the ring to set your target'}
+            </p>
 
-            <button type="button" className="corp-ov-target-save-btn" onClick={saveTarget}>
+            <button
+              type="button"
+              className="corp-ov-target-save-btn"
+              onClick={saveTarget}
+              disabled={mustRaiseTarget && draftTarget <= targetWords}
+            >
               <Check size={18} strokeWidth={2.6} /> Save Target
             </button>
           </motion.div>

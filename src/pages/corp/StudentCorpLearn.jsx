@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { useOutletContext, useNavigate, useParams } from 'react-router-dom';
+import { useOutletContext, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 import { getDecayedMastery, computeRetentionStats } from '../../utils/memoryEngine';
 import { corpWordStorageId } from '../../utils/helpers';
 import {
-  BookOpen, Sparkles, CheckCircle2, Play, ChevronRight, ChevronLeft, ArrowLeft, MoreVertical, Brain
+  BookOpen, Sparkles, CheckCircle2, Play, ChevronRight, ChevronLeft, ArrowLeft, MoreVertical, Brain, NotebookPen
 } from 'lucide-react';
 import WordList from '../../components/Words/WordList';
 import SatPackCard from '../../components/corp/SatPackCard';
@@ -106,9 +106,16 @@ function computeUnitWordStats(selectedMonth, unit, allDbWords) {
 }
 
 export default function StudentCorpLearn() {
-  const { user, membership, student, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
+  const { user, membership, student, assignedPacks, additionalPacks, requiredPacks, homeworkList } = useOutletContext();
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
+  const [searchParams] = useSearchParams();
+  // Homework jumps straight from the flat list to a topic, skipping the
+  // month page a normal Main/Additional drill-down passes through — so its
+  // topic view's Back button can't just assume "go up to the month" like
+  // every other entry point does; it needs to know it came from Homework
+  // and return to the tab instead.
+  const cameFromHomework = searchParams.get('from') === 'homework';
 
   const prevGroupIdRef = useRef(membership?.groupId);
   const [activeTab, setActiveTab] = useState('asosiy'); // 'asosiy', 'qoshimcha', 'kerakli'
@@ -218,7 +225,8 @@ export default function StudentCorpLearn() {
   }, [membership?.groupId]);
 
   const startPractice = (packToPractice) => {
-    navigate(`/corp/practice/${packId}/${monthId}/${unitId}`, {
+    const query = cameFromHomework ? '?from=homework' : '';
+    navigate(`/corp/practice/${packId}/${monthId}/${unitId}${query}`, {
       state: {
         pack: packToPractice,
         centerId: membership.centerId,
@@ -232,7 +240,83 @@ export default function StudentCorpLearn() {
     student?.progress?.[`${selectedMonth.packId}_${selectedMonth.id}_${selectedUnit.id}`]
   );
 
-  // Renders the top-level "months" grid for a given pack category (Asosiy / Qo'shimcha / Kerakli)
+  // Homework items point at units that already live inside allMonths/
+  // additionalMonths (see corpService.addGroupHomework — never a copy of
+  // the topic's words), so this resolves each item back to its real unit
+  // to reuse the exact same computeUnitWordStats/SatPackCard used
+  // everywhere else, rather than a one-off homework-only design. Every
+  // assignment the teacher has ever given is its own card, newest first.
+  const renderHomeworkGrid = () => {
+    const assignments = homeworkList || [];
+    if (assignments.length === 0) {
+      return (
+        <div className="empty-state">
+          <div className="empty-state-icon">📝</div>
+          <h3>No homework yet</h3>
+          <p>Your teacher hasn't assigned any homework to this group yet.</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="hw-assignments-list">
+        {[...assignments].reverse().map((hw) => {
+          const resolvedItems = (hw.items || []).map((item) => {
+            const month = combinedMonths.find(m => m.packId === item.packId && m.id === item.monthId);
+            const unit = month?.units?.find(u => u.id === item.unitId);
+            const stats = (month && unit) ? computeUnitWordStats(month, unit, allDbWords) : null;
+            const wordCount = unit ? (unit.words || []).length : (item.totalWords || 0);
+            const masteryPct = stats?.avgMasteryPct || 0;
+            return { item, stats, wordCount, masteryPct, done: masteryPct >= 80 };
+          });
+          const doneCount = resolvedItems.filter(r => r.done).length;
+
+          return (
+            <div key={hw.id} className="hw-outer-card">
+              <div className="hw-tab-header">
+                <div className="hw-tab-icon">
+                  <NotebookPen size={17} strokeWidth={2.2} />
+                </div>
+                <div className="hw-tab-info">
+                  <h2 className="hw-tab-title">
+                    {hw.assignedAt
+                      ? new Date(hw.assignedAt).toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })
+                      : (hw.name || 'Homework')}
+                  </h2>
+                  <span className="hw-tab-date">
+                    {resolvedItems.length} {resolvedItems.length === 1 ? 'topic' : 'topics'} assigned
+                  </span>
+                </div>
+                <span className="hw-tab-done-badge">{doneCount}/{resolvedItems.length}</span>
+              </div>
+
+              <div className="grid-cards">
+                {resolvedItems.map(({ item, stats, wordCount, masteryPct }) => {
+                  const hasWords = wordCount > 0;
+                  return (
+                    <SatPackCard
+                      key={`${item.packId}_${item.monthId}_${item.unitId}`}
+                      title={item.unitTitle}
+                      subtitle={item.packTitle}
+                      wordCount={wordCount}
+                      wordLabel="words"
+                      masteredCount={stats?.masteredCount || 0}
+                      learningCount={stats?.learningCount || 0}
+                      newCount={stats?.newCount || 0}
+                      masteryPct={masteryPct}
+                      onClick={() => hasWords && navigate(`/corp/student/learn/topic/${item.packId}/${item.monthId}/${item.unitId}?from=homework`)}
+                      disabled={!hasWords}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   const renderMonthsGrid = (months, emptyIcon, emptyTitle, emptyDesc) => (
     months.length === 0 ? (
       <div className="empty-state">
@@ -290,12 +374,12 @@ export default function StudentCorpLearn() {
               <span className="tab-icon">✨</span> <span>Additional</span>
             </button>
 
-            {/* Required Tab */}
+            {/* Homework Tab */}
             <button
-              className={`library-tab-btn ${activeTab === 'kerakli' ? 'active' : ''}`}
-              onClick={() => setActiveTab('kerakli')}
+              className={`library-tab-btn ${activeTab === 'homework' ? 'active' : ''}`}
+              onClick={() => setActiveTab('homework')}
             >
-              <span className="tab-icon">📌</span> <span>Required</span>
+              <span className="tab-icon">📝</span> <span>Homework</span>
             </button>
 
           </div>
@@ -318,10 +402,7 @@ export default function StudentCorpLearn() {
                 additionalMonths, '✨', "No additional materials",
                 "No additional materials assigned by teacher yet."
               )}
-              {activeTab === 'kerakli' && renderMonthsGrid(
-                requiredMonths, '📌', "No required tasks",
-                "No separate required tasks assigned to complete."
-              )}
+              {activeTab === 'homework' && renderHomeworkGrid()}
             </>
           )}
 
@@ -398,7 +479,14 @@ export default function StudentCorpLearn() {
               <div className="ios-nav-header">
                 <button
                   className="ios-back-btn"
-                  onClick={() => navigate(`/corp/student/learn/month/${packId}/${monthId}`)}
+                  onClick={() => {
+                    if (cameFromHomework) {
+                      setActiveTab('homework');
+                      navigate('/corp/student/learn');
+                    } else {
+                      navigate(`/corp/student/learn/month/${packId}/${monthId}`);
+                    }
+                  }}
                   aria-label="Back"
                   title="Back"
                 >

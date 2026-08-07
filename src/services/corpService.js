@@ -746,6 +746,47 @@ export async function removeStudentFromGroup(centerId, groupId, studentId) {
 }
 
 /**
+ * Teacher: Read every homework assignment ever given to a group, oldest
+ * first. Each is its own dated batch, never overwritten — a student's
+ * "done" status and a teacher's per-assignment stats stay tied to exactly
+ * the topics that were handed out that day, and a topic already used in an
+ * earlier assignment can be excluded from the next one (see
+ * getHomeworkCandidates in TeacherDashboard.jsx). Each item just points at
+ * an existing topic (packId/monthId/unitId) already assigned to the group
+ * under Asosiy/Qo'shimcha — it's not a copy of that pack's words, so a
+ * student's progress there is the exact same record CorpPractice/
+ * StudentCorpLearn already read/write (see utils/helpers.corpWordStorageId).
+ */
+export async function getGroupHomeworkList(centerId, groupId) {
+  const snap = await get(ref(db, `centers/${centerId}/groups/${groupId}/homeworkList`));
+  if (!snap.exists()) return [];
+  const val = snap.val();
+  return Object.keys(val)
+    .map(key => ({ id: key, ...val[key] }))
+    .sort((a, b) => (a.assignedAt || '').localeCompare(b.assignedAt || ''));
+}
+
+/**
+ * Teacher: Add a new homework assignment — never replaces past ones.
+ * `items` is [{ packId, monthId, unitId, packTitle, unitTitle, totalWords }].
+ * The name is auto-generated from the assignment date plus the set names in
+ * it (e.g. "7-avgust — Set 1, Set 3, Set 5"), so each round reads as what it
+ * actually was instead of a generic label.
+ */
+export async function addGroupHomework(centerId, groupId, items) {
+  const newRef = push(ref(db, `centers/${centerId}/groups/${groupId}/homeworkList`));
+  const now = new Date();
+  const titles = items.map(i => i.unitTitle).filter(Boolean);
+  const dateLabel = now.toLocaleDateString(undefined, { day: 'numeric', month: 'long' });
+  const name = titles.length > 0
+    ? `${dateLabel} — ${titles.slice(0, 3).join(', ')}${titles.length > 3 ? ` +${titles.length - 3}` : ''}`
+    : dateLabel;
+  const payload = { name, items, assignedAt: now.toISOString() };
+  await set(newRef, payload);
+  return { id: newRef.key, ...payload };
+}
+
+/**
  * Student: Update Learning Progress for one unit within a group's assigned
  * pack. `stats` mirrors the same mastery/retention numbers the student's own
  * "Memory Twin" card computes (see StudentCorpLearn.jsx) so the teacher
@@ -772,13 +813,13 @@ export async function updateStudentUnitProgress(centerId, groupId, studentId, pa
 }
 
 /**
- * Student: Set a personal monthly word-learning target for one group. Lets
- * the student override the dashboard's default target (the group's full
- * assigned word count) with their own goal.
+ * Student: Set their personal word-learning target. Stored on the
+ * student's own account (users/{uid}/profile), not nested under any one
+ * group's student record, so switching groups never resets it (or the
+ * "learned" count it's measured against — see useAccountWordProgress).
  */
-export async function updateStudentWordTarget(centerId, groupId, studentId, wordTarget) {
-  const studentRef = ref(db, `centers/${centerId}/groups/${groupId}/students/${studentId}`);
-  await update(studentRef, { wordTarget });
+export async function updateStudentWordTarget(uid, wordTarget) {
+  await update(ref(db, `users/${uid}/profile`), { wordTarget });
 }
 
 /**

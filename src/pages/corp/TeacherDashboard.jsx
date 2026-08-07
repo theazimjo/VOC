@@ -9,7 +9,7 @@ import {
   Eye, Copy, Check, Sparkles, Trash2,
   Archive, RotateCcw, BarChart3, Settings, Search,
   Save, CheckCircle2, TrendingUp, Shield, ArrowLeft, ChevronRight, X, ChevronDown, MoreVertical, Moon, Sun,
-  Pencil, RotateCw, Share2, User, MoreHorizontal, UserMinus, ArrowRightLeft, AlertTriangle, Megaphone
+  Pencil, RotateCw, Share2, User, MoreHorizontal, UserMinus, ArrowRightLeft, AlertTriangle, Megaphone, NotebookPen
 } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { auth } from '../../firebase';
@@ -18,7 +18,7 @@ import {
   assignPackToGroup, removePackFromGroup, getGroupStudents, duplicateCustomPack, deleteCustomPack,
   updateGroupStatus, updateGroupDetails, deleteGroup,
   getCenterTeachers, removeStudentFromGroup, updateTeacherProfile, getActiveAnnouncementsForRole,
-  ensureIrregularVerbsPack
+  ensureIrregularVerbsPack, getGroupHomeworkList, addGroupHomework
 } from '../../services/corpService';
 import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
 import CustomPackEditor from '../../components/corp/CustomPackEditor';
@@ -72,6 +72,8 @@ function getPackUnits(pack) {
     (month.units || []).forEach(unit => {
       units.push({
         unitKey: `${month.id}_${unit.id}`,
+        monthId: month.id,
+        unitId: unit.id,
         title: unit.title,
         monthTitle: month.title,
         totalWords: (unit.words || []).length,
@@ -79,6 +81,71 @@ function getPackUnits(pack) {
     });
   });
   return units;
+}
+
+// Every topic a teacher can hand out as homework: every unit of every pack
+// assigned to the group under Asosiy or Qo'shimcha (never Kerakli — that
+// category's gone). Topics already given in a past assignment (`usedKeys`,
+// built from the group's whole homeworkList) are still included — just
+// flagged `used: true` — so the picker can show them greyed out instead of
+// hiding them outright; the teacher can see at a glance what's already been
+// covered. Each candidate carries everything a homework item needs to both
+// render on its own (packTitle/unitTitle/totalWords) and link straight into
+// the exact same topic a student would reach by browsing normally
+// (packId/monthId/unitId) — homework never copies a topic's words, it just
+// points at one that's already there.
+function getHomeworkCandidates(group, customPacks, usedKeys = new Set()) {
+  if (!group) return [];
+  const packIds = [...new Set([...(group.assignedPacks || []), ...(group.additionalPacks || [])])];
+  const candidates = [];
+  packIds.forEach(packId => {
+    const pack = customPacks.find(cp => cp.id === packId);
+    if (!pack) return;
+    getPackUnits(pack).forEach(unit => {
+      if (unit.totalWords === 0) return;
+      const key = `${packId}_${unit.monthId}_${unit.unitId}`;
+      candidates.push({
+        packId,
+        monthId: unit.monthId,
+        unitId: unit.unitId,
+        packTitle: pack.title,
+        unitTitle: unit.title,
+        totalWords: unit.totalWords,
+        used: usedKeys.has(key),
+      });
+    });
+  });
+  return candidates;
+}
+
+// Flat set of "packId_monthId_unitId" keys already given across every past
+// homework assignment for this group.
+function getUsedHomeworkKeys(homeworkList) {
+  const keys = new Set();
+  (homeworkList || []).forEach(hw => {
+    (hw.items || []).forEach(item => {
+      keys.add(`${item.packId}_${item.monthId}_${item.unitId}`);
+    });
+  });
+  return keys;
+}
+
+// Resolves one homework item back to its actual unit (with real words),
+// straight from customPacks — homework items only ever store the pointer
+// (packId/monthId/unitId) plus a display snapshot, never the words
+// themselves, so this is the one place that needs the live pack data.
+function resolveHomeworkItemUnit(item, customPacks) {
+  const pack = customPacks.find(cp => cp.id === item.packId);
+  if (!pack) return null;
+  const months = pack.months && pack.months.length > 0
+    ? pack.months
+    : pack.units && pack.units.length > 0
+      ? [{ id: 'm1', units: pack.units }]
+      : pack.words && pack.words.length > 0
+        ? [{ id: 'm1', units: [{ id: 'u1', words: pack.words }] }]
+        : [];
+  const month = months.find(m => m.id === item.monthId);
+  return month?.units?.find(u => u.id === item.unitId) || null;
 }
 
 // Reads a student's progress for one pack, whether it's in the current
@@ -172,7 +239,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const context = useOutletContext() || {};
   const { theme, setTheme } = useTheme();
   const { centerId, teacherId, teacherName, phone, email } = context;
-  const { groupId: urlGroupId, subTab = 'students' } = useParams();
+  const { groupId: urlGroupId, subTab = 'students', hwId } = useParams();
   const navigate = useNavigate();
 
   const [groups, setGroups] = useState([]);
@@ -195,6 +262,15 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const [showActionsDropdown, setShowActionsDropdown] = useState(false);
   const [allGroupsStudents, setAllGroupsStudents] = useState({}); // groupId -> students[]
   const [loadingAllStats, setLoadingAllStats] = useState(false);
+
+  // Homework subtab: every assignment ever given to this group (oldest
+  // first, never overwritten) plus the teacher's in-progress selection
+  // while building a new one.
+  const [groupHomeworkList, setGroupHomeworkList] = useState([]);
+  const [homeworkSelection, setHomeworkSelection] = useState(new Set());
+  const [savingHomework, setSavingHomework] = useState(false);
+  const [showHomeworkEditor, setShowHomeworkEditor] = useState(false);
+  const [viewingHomeworkItem, setViewingHomeworkItem] = useState(null);
 
   // Student row actions (remove / detail) — same fixed-position dropdown
   // pattern as CenterAdminDashboard's per-row "⋮" teacher menu.
@@ -260,6 +336,20 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       }
     };
     fetchStudents();
+  }, [selectedGroupId, centerId]);
+
+  // Load every homework assignment ever given to this group
+  useEffect(() => {
+    const fetchHomework = async () => {
+      if (!selectedGroupId || !centerId) return;
+      try {
+        const list = await getGroupHomeworkList(centerId, selectedGroupId);
+        setGroupHomeworkList(list);
+      } catch (err) {
+        console.error('Error loading group homework:', err);
+      }
+    };
+    fetchHomework();
   }, [selectedGroupId, centerId]);
 
   // Form states
@@ -429,6 +519,42 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       setGroupStudentsList(list || []);
     } catch (err) {
       console.error('Error fetching students:', err);
+    }
+  };
+
+  const toggleHomeworkItem = (candidate) => {
+    if (candidate.used) return;
+    const key = `${candidate.packId}_${candidate.monthId}_${candidate.unitId}`;
+    setHomeworkSelection(prev => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
+  const openHomeworkEditor = () => {
+    setHomeworkSelection(new Set());
+    setShowHomeworkEditor(true);
+  };
+
+  const handleAddHomework = async () => {
+    if (!selectedGroup) return;
+    setSavingHomework(true);
+    try {
+      const usedKeys = getUsedHomeworkKeys(groupHomeworkList);
+      const candidates = getHomeworkCandidates(selectedGroup, customPacks, usedKeys);
+      const items = candidates
+        .filter(c => !c.used && homeworkSelection.has(`${c.packId}_${c.monthId}_${c.unitId}`))
+        .map(({ packId, monthId, unitId, packTitle, unitTitle, totalWords }) => ({ packId, monthId, unitId, packTitle, unitTitle, totalWords }));
+      const added = await addGroupHomework(centerId, selectedGroup.id, items);
+      setGroupHomeworkList(prev => [...prev, added]);
+      setHomeworkSelection(new Set());
+      setShowHomeworkEditor(false);
+    } catch (err) {
+      alert("Uy vazifasini saqlashda xatolik: " + err.message);
+    } finally {
+      setSavingHomework(false);
     }
   };
 
@@ -751,6 +877,107 @@ export default function TeacherDashboard({ tab = 'groups' }) {
               </div>
             </div>
 
+            {hwId ? (() => {
+              const hw = groupHomeworkList.find(h => h.id === hwId);
+              if (!hw) {
+                return (
+                  <div className="empty-state">
+                    <NotebookPen size={40} />
+                    <p>Bu uy vazifasi topilmadi.</p>
+                    <button className="btn-secondary" onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)} style={{ marginTop: '10px' }}>
+                      Uy vazifalariga qaytish
+                    </button>
+                  </div>
+                );
+              }
+              const hwItems = hw.items || [];
+              return (
+                <div className="hw-manage-page">
+                  <button
+                    type="button"
+                    className="hw-manage-back"
+                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
+                  >
+                    <ArrowLeft size={16} /> Uy vazifasi
+                  </button>
+
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)' }}>{hw.name}</h3>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '4px 0 0' }}>
+                      {hwItems.length} ta mavzu{hw.assignedAt && <> — <strong>{new Date(hw.assignedAt).toLocaleDateString()}</strong></>}
+                    </p>
+                  </div>
+
+                  {/* Assigned topics — click one to open its detail window */}
+                  <div className="tpv-list" style={{ marginTop: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                    {hwItems.map(item => (
+                      <button
+                        type="button"
+                        key={`${item.packId}_${item.monthId}_${item.unitId}`}
+                        className="tpv-row"
+                        onClick={() => setViewingHomeworkItem(item)}
+                        style={{ cursor: 'pointer', width: '100%', textAlign: 'left', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', padding: '12px 16px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                          <span className="tpv-row-label" style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.95rem' }}>{item.unitTitle}</span>
+                          <span className="tpv-row-meta" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>{item.packTitle} · {item.totalWords} ta so'z</span>
+                        </div>
+                        <ChevronRight size={18} className="tpv-row-arrow" />
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Per-student completion */}
+                  <div className="teachers-table-card" style={{ marginTop: '0.25rem', background: 'var(--bg-tertiary)' }}>
+                    <h4 style={{ padding: '1rem 1.25rem', margin: 0, color: 'var(--text-primary)', borderBottom: '1px solid var(--border)', fontSize: '0.92rem', fontWeight: 600 }}>
+                      O'quvchilar bo'yicha bajarilishi
+                    </h4>
+                    {groupStudentsList.length === 0 ? (
+                      <div style={{ padding: '2.5rem 1rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                        Statistika ko'rsatish uchun guruhda o'quvchilar mavjud emas.
+                      </div>
+                    ) : (
+                      <div className="student-progress-cards">
+                        {groupStudentsList.map(student => {
+                          const itemStats = hwItems.map(item => {
+                            const agg = aggregatePackProgress((student.progress || {})[item.packId]);
+                            const us = agg.units[`${item.monthId}_${item.unitId}`];
+                            const m = us ? (us.masteryPercent || 0) : 0;
+                            return { item, masteryPercent: m, done: m >= 80, started: !!us };
+                          });
+                          const doneCount = itemStats.filter(s => s.done).length;
+                          return (
+                            <div key={student.id} className="student-progress-card">
+                              <div className="student-progress-card-head" style={{ justifyContent: 'space-between', display: 'flex', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                  <div className="st-avatar" style={{ background: 'var(--accent-1)', fontWeight: 700 }}>{(student.name || '?').charAt(0).toUpperCase()}</div>
+                                  <strong style={{ color: 'var(--text-primary)' }}>{student.name}</strong>
+                                </div>
+                                <span className="badge-active" style={{ background: doneCount === hwItems.length ? 'var(--success-dim)' : 'var(--bg-glass-hover)', color: doneCount === hwItems.length ? 'var(--success)' : 'var(--text-secondary)' }}>
+                                  {doneCount}/{hwItems.length} done
+                                </span>
+                              </div>
+                              <div className="unit-chip-row" style={{ marginTop: '10px' }}>
+                                {itemStats.map(({ item, masteryPercent, done, started }) => (
+                                  <span
+                                    key={`${item.packId}_${item.monthId}_${item.unitId}`}
+                                    className={`unit-chip unit-chip-${done ? 'done' : started ? 'partial' : 'none'}`}
+                                    title={item.packTitle}
+                                  >
+                                    {item.unitTitle}: {started ? `${masteryPercent}%` : '—'}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })() : (
+              <>
             {/* Hero Info Card (mobile only) */}
             <div className="tpv-hero-card">
               <div className="tpv-hero-top">
@@ -795,10 +1022,16 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                 <BookOpen size={14} strokeWidth={2.3} />
                 <span>Packlar</span>
                 <span className="seg-badge">
-                  {(selectedGroup.assignedPacks || []).length +
-                    (selectedGroup.additionalPacks || []).length +
-                    (selectedGroup.requiredPacks || []).length}
+                  {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length}
                 </span>
+              </button>
+              <button
+                className={`group-seg-btn ${subTab === 'homework' ? 'active' : ''}`}
+                onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
+              >
+                <NotebookPen size={14} strokeWidth={2.3} />
+                <span>Uy vazifasi</span>
+                <span className="seg-badge">{groupHomeworkList.length}</span>
               </button>
               <button
                 className={`group-seg-btn ${subTab === 'stats' ? 'active' : ''}`}
@@ -934,7 +1167,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
 
                   {[
                     { key: 'assignedPacks', label: 'Asosiy', emptyText: 'Guruhga hali birorta asosiy so\'z packi biriktirilmagan.' },
-                    { key: 'requiredPacks', label: 'Kerakli', emptyText: 'Guruhga hali birorta kerakli (majburiy) pack biriktirilmagan.' },
                     { key: 'additionalPacks', label: 'Qo\'shimcha', emptyText: 'Guruhga hali birorta qo\'shimcha pack biriktirilmagan.' },
                   ].map(({ key, label, emptyText }) => {
                     const packIds = selectedGroup[key] || [];
@@ -981,6 +1213,56 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                       </div>
                     );
                   })}
+                </div>
+              )}
+
+              {/* SUB-TAB: HOMEWORK — just the names here; tap one to open its
+                  own page with the full topic list + per-student completion. */}
+              {subTab === 'homework' && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <div className="group-words-header">
+                    <div>
+                      <h3 style={{ fontSize: '1.05rem', color: 'var(--text-primary)', margin: 0, fontWeight: 600 }}>Uy vazifasi</h3>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '4px 0 0' }}>
+                        {groupHomeworkList.length > 0
+                          ? `${groupHomeworkList.length} ta vazifa berilgan.`
+                          : "Guruhga hali uy vazifasi berilmagan."}
+                      </p>
+                    </div>
+                    <button
+                      className="btn-add-course-primary"
+                      onClick={openHomeworkEditor}
+                      style={{ padding: '8px 14px', fontSize: '0.85rem', height: '36px', flexShrink: 0 }}
+                    >
+                      <Plus size={15} /> Yangi vazifa
+                    </button>
+                  </div>
+
+                  {groupHomeworkList.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                      "Yangi vazifa" tugmasini bosib, Asosiy/Qo'shimcha mavzulardan bir nechtasini tanlang.
+                    </div>
+                  ) : (
+                    <div className="tpv-list" style={{ marginTop: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                      {[...groupHomeworkList].reverse().map(hw => (
+                        <button
+                          type="button"
+                          key={hw.id}
+                          className="tpv-row"
+                          onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework/${hw.id}`)}
+                          style={{ cursor: 'pointer', width: '100%', textAlign: 'left', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', padding: '12px 16px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}
+                        >
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                            <span className="tpv-row-label" style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.95rem' }}>{hw.name}</span>
+                            <span className="tpv-row-meta" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
+                              {(hw.items || []).length} ta mavzu{hw.assignedAt && <> · {new Date(hw.assignedAt).toLocaleDateString()}</>}
+                            </span>
+                          </div>
+                          <ChevronRight size={18} className="tpv-row-arrow" />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -1095,6 +1377,8 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                 </div>
               )}
             </div>
+              </>
+            )}
           </div>
         ) : urlGroupId && !loading ? (
           <div className="empty-state">
@@ -2052,6 +2336,182 @@ export default function TeacherDashboard({ tab = 'groups' }) {
         </div>
       )}
 
+      {/* Homework Editor Modal — always adds a NEW assignment. Topics already
+          given in an earlier one still show up (so the teacher can see
+          what's already covered) but are greyed out and can't be reselected. */}
+      {showHomeworkEditor && selectedGroup && (() => {
+        const usedKeys = getUsedHomeworkKeys(groupHomeworkList);
+        const candidates = getHomeworkCandidates(selectedGroup, customPacks, usedKeys);
+        const byPack = new Map();
+        candidates.forEach(c => {
+          if (!byPack.has(c.packId)) byPack.set(c.packId, { packTitle: c.packTitle, units: [] });
+          byPack.get(c.packId).units.push(c);
+        });
+
+        return (
+          <div className="modal-overlay" onClick={() => !savingHomework && setShowHomeworkEditor(false)}>
+            <div className="modal-content large" onClick={e => e.stopPropagation()}>
+              <h2><NotebookPen size={20} /> Yangi uy vazifasi: {selectedGroup.name}</h2>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                Asosiy va qo'shimcha packlardagi mavzulardan bir nechtasini tanlang. Kulrang mavzular avval berilgan — ularni qayta tanlab bo'lmaydi.
+              </p>
+
+              {candidates.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  Avval "Packlar" bo'limidan guruhga Asosiy yoki Qo'shimcha pack biriktiring.
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '50vh', overflowY: 'auto', paddingRight: '4px' }}>
+                  {[...byPack.entries()].map(([packId, { packTitle, units }]) => (
+                    <div key={packId} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                      <h4 style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                        {packTitle}
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        {units.map(u => {
+                          const key = `${u.packId}_${u.monthId}_${u.unitId}`;
+                          const checked = homeworkSelection.has(key);
+                          return (
+                            <div
+                              key={key}
+                              onClick={() => toggleHomeworkItem(u)}
+                              style={{
+                                cursor: u.used ? 'default' : 'pointer',
+                                opacity: u.used ? 0.5 : 1,
+                                background: checked ? 'var(--accent-1-dim)' : 'var(--bg-tertiary)',
+                                border: `1px solid ${checked ? 'var(--accent-1)' : 'var(--border)'}`,
+                                padding: '10px 14px',
+                                borderRadius: '12px',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                gap: '12px'
+                              }}
+                            >
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0 }}>
+                                <span style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.9rem' }}>{u.unitTitle}</span>
+                                <span style={{ color: 'var(--text-secondary)', fontSize: '0.78rem' }}>
+                                  {u.totalWords} ta so'z{u.used && ' · Berilgan'}
+                                </span>
+                              </div>
+                              {u.used ? (
+                                <Check size={16} color="var(--text-muted)" strokeWidth={3} />
+                              ) : (
+                                <div
+                                  style={{
+                                    width: '20px',
+                                    height: '20px',
+                                    borderRadius: '6px',
+                                    flexShrink: 0,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    background: checked ? 'var(--accent-1)' : 'transparent',
+                                    border: `1.5px solid ${checked ? 'var(--accent-1)' : 'var(--border)'}`
+                                  }}
+                                >
+                                  {checked && <Check size={13} color="#fff" strokeWidth={3} />}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="modal-actions">
+                <button type="button" className="btn-secondary" onClick={() => setShowHomeworkEditor(false)} disabled={savingHomework}>Bekor qilish</button>
+                <button type="button" className="btn-primary" onClick={handleAddHomework} disabled={savingHomework || homeworkSelection.size === 0}>
+                  {savingHomework ? 'Saqlanmoqda...' : `Vazifa berish (${homeworkSelection.size})`}
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Homework Item Detail Window — opens when a teacher clicks one of
+          the assigned homework topics: its word list plus, specifically for
+          this one topic, which students have finished it. */}
+      {viewingHomeworkItem && (() => {
+        const item = viewingHomeworkItem;
+        const unit = resolveHomeworkItemUnit(item, customPacks);
+        const words = unit?.words || [];
+        const studentStats = groupStudentsList.map(st => {
+          const agg = aggregatePackProgress((st.progress || {})[item.packId]);
+          const us = agg.units[`${item.monthId}_${item.unitId}`];
+          const m = us ? (us.masteryPercent || 0) : 0;
+          return { student: st, masteryPercent: m, done: m >= 80, started: !!us };
+        });
+
+        return (
+          <div className="modal-overlay" onClick={() => setViewingHomeworkItem(null)}>
+            <div className="modal-content large" onClick={e => e.stopPropagation()}>
+              <h2><NotebookPen size={20} /> {item.unitTitle}</h2>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
+                {item.packTitle} · {item.totalWords} ta so'z
+              </p>
+
+              <h4 style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: '0 0 10px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                So'zlar
+              </h4>
+              {words.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '1.25rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
+                  Bu mavzu endi topilmadi — pack o'zgargan bo'lishi mumkin.
+                </div>
+              ) : (
+                <div className="tpv-words-grid" style={{ marginBottom: '1.25rem', maxHeight: '220px', overflowY: 'auto' }}>
+                  {words.map(w => (
+                    <div key={w.id} className="tpv-word-card">
+                      <div className="tpv-word-top">
+                        <strong>{w.word}</strong>
+                      </div>
+                      <div className="tpv-word-translation">{w.translation}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <h4 style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: '0 0 10px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.03em' }}>
+                O'quvchilar bajarilishi
+              </h4>
+              {studentStats.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '1.25rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  Guruhda o'quvchilar mavjud emas.
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '260px', overflowY: 'auto' }}>
+                  {studentStats.map(({ student, masteryPercent, done, started }) => (
+                    <div key={student.id} className="student-progress-row" style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border)' }}>
+                      <div className="st-info">
+                        <div className="st-avatar" style={{ background: 'var(--accent-1)', fontWeight: 700 }}>{(student.name || '?').charAt(0).toUpperCase()}</div>
+                        <strong style={{ color: 'var(--text-primary)' }}>{student.name}</strong>
+                      </div>
+                      <span
+                        className="badge-active"
+                        style={{
+                          background: done ? 'var(--success-dim)' : started ? 'var(--warning-dim)' : 'var(--bg-glass-hover)',
+                          color: done ? 'var(--success)' : started ? 'var(--warning)' : 'var(--text-secondary)'
+                        }}
+                      >
+                        {started ? `${masteryPercent}%${done ? ' · Done' : ''}` : 'Not started'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="modal-actions">
+                <button className="btn-secondary" onClick={() => setViewingHomeworkItem(null)}>Yopish</button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Assign Pack Modal */}
       {assigningGroup && (
         <div className="modal-overlay" onClick={() => setAssigningGroup(null)}>
@@ -2064,7 +2524,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
             <div className="group-seg-bar" style={{ marginTop: 0, marginBottom: '1rem' }}>
               {[
                 { key: 'assignedPacks', label: 'Asosiy' },
-                { key: 'requiredPacks', label: 'Kerakli' },
                 { key: 'additionalPacks', label: "Qo'shimcha" },
               ].map(({ key, label }) => (
                 <button
@@ -2082,7 +2541,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
               {(() => {
                 // Irregular Verbs is only ever assignable under "Qo'shimcha"
                 // — it's a grammar-drill pack, not core curriculum, so it
-                // shouldn't clutter the Asosiy/Kerakli pickers.
+                // shouldn't clutter the Asosiy picker.
                 const assignablePacks = customPacks.filter(
                   p => p.id !== IRREGULAR_VERBS_PACK_ID || assignCategory === 'additionalPacks'
                 );

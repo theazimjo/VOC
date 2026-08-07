@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import { ref, get, update } from 'firebase/database';
+import { ref, get, update, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGroupMode } from '../../hooks/useGroupMode';
@@ -19,6 +19,8 @@ export default function StudentLayout() {
   const [assignedPacks, setAssignedPacks] = useState([]);
   const [additionalPacks, setAdditionalPacks] = useState([]);
   const [requiredPacks, setRequiredPacks] = useState([]);
+  const [homeworkList, setHomeworkList] = useState([]);
+  const [wordTarget, setWordTarget] = useState(null);
   const [centerName, setCenterName] = useState('O\'quv Markazi');
   const [loading, setLoading] = useState(true);
 
@@ -84,6 +86,45 @@ export default function StudentLayout() {
     return () => { cancelled = true; };
   }, [membership, groupModeLoading]);
 
+  // Live-subscribed separately from the rest of the group (a one-time read
+  // above) so a teacher adding a new homework assignment shows up
+  // immediately in an already-open student session instead of only after a
+  // reload. Every assignment ever given is kept (never overwritten), oldest
+  // first — see corpService.addGroupHomework.
+  useEffect(() => {
+    if (!membership) return;
+    const homeworkRef = ref(db, `centers/${membership.centerId}/groups/${membership.groupId}/homeworkList`);
+    const unsub = onValue(homeworkRef, (snap) => {
+      if (!snap.exists()) {
+        setHomeworkList([]);
+        return;
+      }
+      const val = snap.val();
+      const list = Object.keys(val)
+        .map(key => ({ id: key, ...val[key] }))
+        .sort((a, b) => (a.assignedAt || '').localeCompare(b.assignedAt || ''));
+      setHomeworkList(list);
+    }, (err) => {
+      console.error('Error listening to group homework:', err);
+    });
+    return unsub;
+  }, [membership]);
+
+  // The student's personal word-learning target, stored on their own
+  // account (users/{uid}/profile/wordTarget) rather than nested under a
+  // specific group's student record — so it (and the "learned" count it's
+  // measured against) persists across group switches instead of resetting.
+  useEffect(() => {
+    if (!user) return;
+    const targetRef = ref(db, `users/${user.uid}/profile/wordTarget`);
+    const unsub = onValue(targetRef, (snap) => {
+      setWordTarget(snap.exists() ? snap.val() : null);
+    }, (err) => {
+      console.error('Error listening to word target:', err);
+    });
+    return unsub;
+  }, [user]);
+
   // Complete separation: if individual mode, redirect away from corp student layout
   if (!groupModeLoading && appMode === 'individual') {
     return <Navigate to="/" replace />;
@@ -106,6 +147,8 @@ export default function StudentLayout() {
     assignedPacks,
     additionalPacks,
     requiredPacks,
+    homeworkList,
+    wordTarget,
     student,
     learnedPacksCount,
     progressPct,

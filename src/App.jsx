@@ -135,6 +135,7 @@ export default function App() {
                         <Route element={<TeacherLayout />}>
                           <Route path="teacher" element={<TeacherDashboard tab="groups" />} />
                           <Route path="teacher/group/:groupId" element={<TeacherDashboard tab="groups" />} />
+                          <Route path="teacher/group/:groupId/homework/:hwId" element={<TeacherDashboard tab="groups" />} />
                           <Route path="teacher/group/:groupId/:subTab" element={<TeacherDashboard tab="groups" />} />
                           <Route path="teacher/archive" element={<TeacherDashboard tab="archive" />} />
                           <Route path="teacher/courses" element={<TeacherDashboard tab="courses" />} />

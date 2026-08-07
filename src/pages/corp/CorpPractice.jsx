@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useOutletContext, useNavigate, useParams } from 'react-router-dom';
+import { useOutletContext, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle2, XCircle, ArrowLeft, ChevronLeft, RotateCcw, Trophy, ThumbsUp, Dumbbell, BookOpen, Volume2, TrendingDown, Sparkles } from 'lucide-react';
 import { ref, get, update } from 'firebase/database';
@@ -28,6 +28,10 @@ import './CorpPractice.css';
 export default function CorpPractice() {
   const navigate = useNavigate();
   const { packId, monthId, unitId } = useParams();
+  const [searchParams] = useSearchParams();
+  // Carried through from StudentCorpLearn so the topic page's own Back
+  // button still knows to return to the Homework tab, not the pack's month.
+  const topicBackQuery = searchParams.get('from') === 'homework' ? '?from=homework' : '';
   const { user, membership, student, assignedPacks, additionalPacks, requiredPacks } = useOutletContext();
   const { allWords } = usePacks();
 
@@ -308,7 +312,7 @@ export default function CorpPractice() {
       return;
     }
     if (step === 'mode') {
-      navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}`);
+      navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}${topicBackQuery}`);
     } else if (step === 'results') {
       setStep('mode');
     }
@@ -640,7 +644,7 @@ export default function CorpPractice() {
                   // quitting has to leave the practice route entirely
                   // instead of just resetting to 'mode'.
                   if (packId === IRREGULAR_VERBS_PACK_ID) {
-                    navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}`);
+                    navigate(`/corp/student/learn/topic/${packId}/${monthId}/${unitId}${topicBackQuery}`);
                   } else {
                     setStep('mode');
                   }

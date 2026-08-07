@@ -89,6 +89,40 @@
   gap: 1.15rem;
 }
 
+/* Congratulations screen — reuses .corp-ov-target-editor's card, just a
+   centered celebratory layout instead of the dial. */
+.corp-ov-congrats {
+  text-align: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.corp-ov-congrats-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--success-dim, rgba(52, 199, 89, 0.12));
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+
+.corp-ov-congrats-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.corp-ov-congrats-text {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
 /* Header: icon badge + title + close */
 .corp-ov-target-header {
   display: flex;
@@ -239,6 +273,12 @@
   transform: scale(0.98);
 }
 
+.corp-ov-target-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
 /* ── Personal calendar ── */
 .corp-ov-cal-card {
   background: var(--bg-secondary);
@@ -338,30 +378,41 @@
   line-height: 1;
 }
 
-/* ── Homework placeholder ── */
+/* ── Homework ── */
 .corp-ov-hw-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg, 18px);
-  padding: 1.5rem 1.25rem;
+  padding: 1.25rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
+  gap: 0.85rem;
+}
+
+.corp-ov-hw-header {
+  display: flex;
   align-items: center;
-  text-align: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.corp-ov-hw-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .corp-ov-hw-icon {
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radius-md, 12px);
   background: var(--accent-3-dim, rgba(168, 85, 247, 0.15));
   color: var(--accent-3, #a855f7);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  flex-shrink: 0;
 }
 
 .corp-ov-hw-card h3 {
@@ -371,11 +422,94 @@
   margin: 0;
 }
 
-.corp-ov-hw-card p {
+.corp-ov-hw-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--success);
+  background: var(--success-dim, rgba(52, 199, 89, 0.12));
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.corp-ov-hw-card > p {
   font-size: 0.8rem;
   color: var(--text-secondary);
   margin: 0;
   max-width: 320px;
+}
+
+.corp-ov-hw-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.corp-ov-hw-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.corp-ov-hw-item:hover {
+  background: var(--bg-glass-hover);
+}
+
+.corp-ov-hw-item.done {
+  border-color: var(--success-dim, rgba(52, 199, 89, 0.3));
+}
+
+.corp-ov-hw-item-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border);
+  color: #fff;
+}
+
+.corp-ov-hw-item-check.done {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.corp-ov-hw-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.corp-ov-hw-item-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.corp-ov-hw-item-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.corp-ov-hw-item-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
 }
 
 /* ── Mobile ── */
