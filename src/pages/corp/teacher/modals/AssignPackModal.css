@@ -1,0 +1,136 @@
+/* ── Bento Ambient Hero Group Settings Modal ── */
+
+.group-settings-bento-modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  padding: 1.5rem 1.6rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(24px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: bentoModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group-settings-bento-modal::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.gsbm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.gsbm-title-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gsbm-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gsbm-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.gsbm-sub {
+  margin: 2px 0 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.gsbm-cancel-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gsbm-cancel-btn:hover {
+  background: var(--bg-glass-hover);
+}
+
+/* ── Group Segmented Tab Bar (Pill style) ────── */
+.group-seg-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 5px;
+  margin-top: 1.25rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  touch-action: pan-x;
+}
+
+.group-seg-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.group-seg-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 0px;
+  min-width: max-content;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: var(--text-muted);
+  padding: 9px 14px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+  user-select: none;
+}
+
+.group-seg-btn svg {
+  flex-shrink: 0;
+}
+
+.group-seg-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-glass-hover);
+}

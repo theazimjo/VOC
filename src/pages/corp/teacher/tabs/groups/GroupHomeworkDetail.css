@@ -1,0 +1,28 @@
+/* ── Single homework assignment's own page (own back link, replaces the
+   segmented tab bar while viewing one) ── */
+.hw-manage-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.hw-manage-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.hw-manage-back:hover {
+  background: var(--bg-glass-hover);
+}

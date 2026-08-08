@@ -3,6 +3,7 @@ import {
   Pencil, Plus, RotateCw, Save, Trash2, Users, X,
 } from 'lucide-react';
 import { GROUP_LEVEL_OPTIONS, aggregatePackProgress, getPackUnits, getStudentSummary } from '../../utils';
+import './GroupSubtabs.css';
 
 export default function GroupSubtabs({ p }) {
   const {

@@ -1,0 +1,26 @@
+.stats-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-detail-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-detail-item span {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.stat-detail-item strong {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+}

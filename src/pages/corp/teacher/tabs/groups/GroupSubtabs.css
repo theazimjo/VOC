@@ -1,0 +1,278 @@
+/* ── Students Section Bento Hero Design System ── */
+
+.group-invite-banner {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 22px !important;
+  padding: 1.2rem 1.4rem !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+  backdrop-filter: blur(20px) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+}
+
+.group-invite-banner::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.gib-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gib-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gib-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.gib-title strong {
+  color: #3b82f6;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em;
+}
+
+.gib-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.st-info-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.st-name {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.st-email {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gsbm-danger-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 14px;
+  color: #ef4444;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gsbm-danger-btn:hover {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* ── Floating Action Button (FAB) for Pack Biriktirish ── */
+.fab-add-pack-btn {
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  z-index: 999;
+  background: #3b82f6;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
+  backdrop-filter: blur(16px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab-add-pack-btn.fab-icon-only {
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.fab-add-pack-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.55);
+}
+
+.fab-add-pack-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ── Group Words Header ──────────────────────── */
+.group-words-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.student-progress-pack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.student-progress-pack-row {
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.student-progress-pack-row:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.student-progress-pack-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.student-progress-pack-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.student-progress-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-progress-count {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4ade80;
+  min-width: 52px;
+  flex-shrink: 0;
+}
+
+.student-progress-track {
+  flex: 1;
+  min-width: 0;
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.student-progress-fill {
+  height: 100%;
+  background: #4ade80;
+  border-radius: 999px;
+}
+
+.student-progress-percent {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  min-width: 32px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.student-progress-last-activity {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ── Group Invite Banner ────────────────────── */
+.group-invite-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(59, 130, 246, 0.05));
+  border: 1px solid rgba(10, 132, 255, 0.25);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+}
+
+.gib-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gib-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(10, 132, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gib-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.gib-title strong {
+  color: #60a5fa;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+.gib-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}

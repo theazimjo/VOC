@@ -1,6 +1,7 @@
 import { ArrowLeft, BarChart3, BookOpen, Check, ChevronRight, Copy, MoreVertical, NotebookPen, Users } from 'lucide-react';
 import GroupHomeworkDetail from './GroupHomeworkDetail';
 import GroupSubtabs from './GroupSubtabs';
+import './GroupDetailView.css';
 
 export default function GroupDetailView({ p }) {
   const {

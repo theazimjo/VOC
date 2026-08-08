@@ -1,0 +1,171 @@
+.status-pill-active.suspended {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+}
+
+.status-pill-active.suspended .status-dot {
+  background: #f87171;
+}
+
+/* Teachers Page Layout (Matching user screenshot) */
+.teachers-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.teachers-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.teachers-title-area h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.teachers-title-area p {
+  color: #94a3b8;
+  font-size: 0.88rem;
+}
+
+.teachers-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-add-teacher-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0A84FF;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-add-teacher-primary:hover {
+  background: #0070df;
+}
+
+/* Data Table Container */
+.teachers-table-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow-x: auto;
+}
+
+.teachers-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 680px;
+}
+
+.teachers-table th {
+  padding: 14px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.teachers-table td {
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.teachers-table tr:last-child td {
+  border-bottom: none;
+}
+
+.teachers-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cell-teacher-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.t-table-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.t-table-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.t-table-name {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 0.92rem;
+}
+
+.t-table-email {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.status-pill-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(74, 222, 128, 0.12);
+  color: #4ade80;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+.btn-action-more {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-action-more:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}

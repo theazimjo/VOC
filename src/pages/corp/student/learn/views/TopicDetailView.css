@@ -1,0 +1,9 @@
+/* Topic Unit Detail Title */
+.corp-unit-detail-title {
+  color: var(--text-primary);
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}

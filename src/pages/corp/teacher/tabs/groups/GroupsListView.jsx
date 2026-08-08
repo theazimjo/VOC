@@ -1,4 +1,5 @@
 import { BookOpen, Check, ChevronRight, Copy, MoreVertical, Plus, Search, User, Users, X } from 'lucide-react';
+import './GroupsListView.css';
 
 export default function GroupsListView({ p }) {
   const {

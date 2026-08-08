@@ -1,0 +1,327 @@
+/* Shared across the student/learn/* views: generic empty-state, grid-card
+   and homework-card classes reused by 2+ views, plus some legacy classes
+   kept for safety that no current view matches by class name. */
+
+.student-corp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.1));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.st-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.st-header-meta h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.st-header-meta p {
+  color: #94a3b8;
+}
+
+.st-header-meta code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: #818cf8;
+}
+
+.st-header-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-leave-corp {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.st-progress-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.st-prog-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.st-prog-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-prog-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 4px;
+}
+
+.st-prog-info p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.st-prog-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.meter-bar {
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.icon-purple { color: #a855f7; }
+
+.st-packs-section .grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.85rem;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .st-packs-section .grid-cards {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+}
+
+.st-packs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.st-pack-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.st-pack-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+.st-pack-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.st-level-tag {
+  font-size: 0.75rem;
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.st-pack-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.st-pack-card p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 1.25rem;
+}
+
+.st-pack-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.btn-start-learn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.st-no-group-state,
+.st-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  color: #94a3b8;
+  max-width: 420px;
+  margin: 2rem auto 0;
+}
+
+.st-no-group-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.st-no-group-state h2 {
+  font-size: 1.3rem;
+  color: #f8fafc;
+}
+
+/* iOS-style Navigation Bar Header */
+.ios-nav-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  width: 100%;
+}
+
+.ios-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  padding: 6px 14px 6px 10px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.ios-back-btn:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--accent-1);
+  color: var(--accent-1);
+  transform: translateX(-2px);
+}
+
+.ios-back-btn:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .ios-nav-header {
+    margin-bottom: 1rem;
+    gap: 8px;
+  }
+
+  .ios-nav-title {
+    font-size: 1.15rem;
+  }
+
+  .library-tabs {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 4px !important;
+    padding: 3px !important;
+    border-radius: 12px !important;
+  }
+  
+  .library-tab-btn {
+    padding: 8px 4px !important;
+    font-size: 0.8rem !important;
+    justify-content: center !important;
+    gap: 4px !important;
+  }
+  
+  /* Hide emoji icons inside tabs on mobile to save space */
+  .library-tab-btn span.tab-icon {
+    display: none !important;
+  }
+
+  .corp-unit-detail-title {
+    font-size: 1.15rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   HOMEWORK TAB — every assignment is its own card (newest
+   first), each wrapping the same .grid-cards / SatPackCard
+   layout Main/Additional use.
+   ═══════════════════════════════════════════════════════ */
+.hw-assignments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

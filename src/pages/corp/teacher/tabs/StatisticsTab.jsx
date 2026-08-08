@@ -1,5 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { BarChart3, BookOpen, TrendingUp, Users } from 'lucide-react';
+import './StatisticsTab.css';
 
 export default function StatisticsTab({ p }) {
   const {

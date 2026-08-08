@@ -13,21 +13,21 @@ import ErrorBoundary from './components/common/ErrorBoundary';
 import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
-const Dashboard = lazyWithRetry(() => import('./pages/Dashboard'));
+const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
 const LandingPage = lazyWithRetry(() => import('./pages/LandingPage'));
-const PackDetail = lazyWithRetry(() => import('./pages/PackDetail'));
-const PracticePage = lazyWithRetry(() => import('./pages/PracticePage'));
-const StatsPage = lazyWithRetry(() => import('./pages/StatsPage'));
-const ProfilePage = lazyWithRetry(() => import('./pages/ProfilePage'));
-const LibraryPage = lazyWithRetry(() => import('./pages/LibraryPage'));
-const MixedPractice = lazyWithRetry(() => import('./pages/MixedPractice'));
-const Settings = lazyWithRetry(() => import('./pages/Settings'));
-const GrammarPage = lazyWithRetry(() => import('./pages/GrammarPage'));
-const GrammarTopic = lazyWithRetry(() => import('./pages/GrammarTopic'));
-const GrammarExercises = lazyWithRetry(() => import('./pages/GrammarExercises'));
-const GrammarTest = lazyWithRetry(() => import('./pages/GrammarTest'));
+const PackDetail = lazyWithRetry(() => import('./pages/personal/PackDetail'));
+const PracticePage = lazyWithRetry(() => import('./pages/personal/PracticePage'));
+const StatsPage = lazyWithRetry(() => import('./pages/personal/StatsPage'));
+const ProfilePage = lazyWithRetry(() => import('./pages/personal/ProfilePage'));
+const LibraryPage = lazyWithRetry(() => import('./pages/personal/LibraryPage'));
+const MixedPractice = lazyWithRetry(() => import('./pages/personal/MixedPractice'));
+const Settings = lazyWithRetry(() => import('./pages/personal/Settings'));
+const GrammarPage = lazyWithRetry(() => import('./pages/grammar/GrammarPage'));
+const GrammarTopic = lazyWithRetry(() => import('./pages/grammar/GrammarTopic'));
+const GrammarExercises = lazyWithRetry(() => import('./pages/grammar/GrammarExercises'));
+const GrammarTest = lazyWithRetry(() => import('./pages/grammar/GrammarTest'));
 const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
-const AdminDashboard = lazyWithRetry(() => import('./pages/AdminDashboard'));
+const AdminDashboard = lazyWithRetry(() => import('./pages/admin/AdminDashboard'));
 
 // Corporate / Learning Center Portal Routes (fully independent of the
 // individual-learner auth/route tree above — see CorpProtectedRoute)
@@ -38,18 +38,18 @@ const StudentLayout = lazyWithRetry(() => import('./components/corp/StudentLayou
 const CorpPortalHome = lazyWithRetry(() => import('./pages/corp/CorpPortalHome'));
 const CorpProtectedRoute = lazyWithRetry(() => import('./components/corp/CorpProtectedRoute'));
 const SuperAdminLayout = lazyWithRetry(() => import('./components/corp/SuperAdminLayout'));
-const SuperAdminOverview = lazyWithRetry(() => import('./pages/corp/SuperAdminOverview'));
-const SuperAdminCenters = lazyWithRetry(() => import('./pages/corp/SuperAdminCenters'));
-const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/SuperAdminUsers'));
-const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/SuperAdminAnnouncements'));
-const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/SuperAdminSettings'));
-const CenterAdminDashboard = lazyWithRetry(() => import('./pages/corp/CenterAdminDashboard'));
+const SuperAdminOverview = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminOverview'));
+const SuperAdminCenters = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminCenters'));
+const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminUsers'));
+const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminAnnouncements'));
+const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/super-admin/SuperAdminSettings'));
+const CenterAdminDashboard = lazyWithRetry(() => import('./pages/corp/center-admin/CenterAdminDashboard'));
 const TeacherDashboard = lazyWithRetry(() => import('./pages/corp/teacher/TeacherDashboard'));
-const StudentCorpOverview = lazyWithRetry(() => import('./pages/corp/StudentCorpOverview'));
-const StudentCorpLearn = lazyWithRetry(() => import('./pages/corp/StudentCorpLearn'));
-const StudentCorpAssessment = lazyWithRetry(() => import('./pages/corp/StudentCorpAssessment'));
-const StudentCorpProfile = lazyWithRetry(() => import('./pages/corp/StudentCorpProfile'));
-const CorpPractice = lazyWithRetry(() => import('./pages/corp/CorpPractice'));
+const StudentCorpOverview = lazyWithRetry(() => import('./pages/corp/student/StudentCorpOverview'));
+const StudentCorpLearn = lazyWithRetry(() => import('./pages/corp/student/learn/StudentCorpLearn'));
+const StudentCorpAssessment = lazyWithRetry(() => import('./pages/corp/student/StudentCorpAssessment'));
+const StudentCorpProfile = lazyWithRetry(() => import('./pages/corp/student/StudentCorpProfile'));
+const CorpPractice = lazyWithRetry(() => import('./pages/corp/student/practice/CorpPractice'));
 
 function BookToPackRedirect() {
   const { bookId } = useParams();

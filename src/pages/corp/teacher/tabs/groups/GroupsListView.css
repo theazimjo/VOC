@@ -1,0 +1,232 @@
+/* ── Create Group Button ────────────────────── */
+.btn-create-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #0a84ff, #0056b3);
+  color: #fff !important;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.25);
+}
+
+/* ── Courses Top Bar ────────────────────────── */
+.courses-top-bar {
+  flex-wrap: wrap;
+}
+
+.courses-top-bar > div:last-child {
+  flex-shrink: 0;
+}
+
+/* ── Top Search Lupa Button ───────────────────── */
+.top-search-lupa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s, border-color 0.16s;
+  flex-shrink: 0;
+}
+
+.top-search-lupa-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.mgc-more-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: color 0.16s, background 0.16s;
+  flex-shrink: 0;
+}
+
+.mgc-more-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-glass-hover);
+}
+
+/* Floating Action Button (Yangi Guruh) */
+.mobile-fab-btn {
+  position: fixed;
+  bottom: calc(82px + env(safe-area-inset-bottom, 12px));
+  right: 1.25rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #0a84ff, #0056b3);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(10, 132, 255, 0.38);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.mobile-fab-btn:hover {
+  background: linear-gradient(135deg, #0066cc, #004499);
+  transform: scale(1.04);
+}
+
+.mobile-fab-btn:active {
+  transform: scale(0.96);
+}
+
+/* ═══════════════════════════════════════════════════════
+   ENHANCED GROUP CARD & INVITE BANNER (UX UPGRADE)
+   ═══════════════════════════════════════════════════════ */
+.teacher-group-card-enhanced {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.9rem;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.teacher-group-card-enhanced:hover {
+  background: var(--bg-glass-hover);
+  border-color: rgba(10, 132, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(10, 132, 255, 0.08);
+}
+
+.tgc-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tgc-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.tgc-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(10, 132, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tgc-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tgc-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tgc-body {
+  padding: 4px 0;
+}
+
+.tgc-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tgc-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.tgc-meta-item strong {
+  color: var(--text-primary);
+}
+
+.tgc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border-light);
+  gap: 10px;
+}
+
+.tgc-code-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.tgc-code-btn strong {
+  color: #60a5fa;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tgc-code-btn:hover {
+  background: rgba(10, 132, 255, 0.15);
+  border-color: rgba(10, 132, 255, 0.3);
+  color: var(--text-primary);
+}
+
+.tgc-enter-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0a84ff;
+  transition: gap 0.18s ease;
+}
+
+.teacher-group-card-enhanced:hover .tgc-enter-link {
+  gap: 7px;
+  color: #3b82f6;
+}

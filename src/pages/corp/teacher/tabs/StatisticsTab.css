@@ -1,0 +1,43 @@
+.ios-seg-card:hover:not(.active) {
+  color: var(--text-primary);
+  background: var(--bg-glass-hover);
+}
+
+.ios-seg-card.active {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16), 0 0 0 1px var(--border);
+  font-weight: 700;
+}
+
+.ios-seg-card.active .ios-seg-badge {
+  background: rgba(59, 130, 246, 0.18);
+  color: #3b82f6;
+}
+
+.gh-nav-tab.active {
+  color: var(--text-primary);
+  border-bottom-color: #fd8c73;
+  font-weight: 700;
+}
+
+.gh-nav-tab.active .gh-nav-icon,
+.gh-nav-tab:hover .gh-nav-icon {
+  color: var(--text-primary);
+}
+
+.gh-nav-tab.active .gh-nav-counter {
+  background: rgba(253, 140, 115, 0.15);
+  color: #fd8c73;
+}
+
+.group-kpi-nav-card.active {
+  background: var(--bg-secondary);
+  border-color: #3b82f6;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.16), 0 0 0 1px #3b82f6;
+}
+
+.group-kpi-nav-card.active .kpi-title {
+  color: #3b82f6;
+}

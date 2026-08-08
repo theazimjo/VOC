@@ -13,14 +13,27 @@ import {
 } from '../../../services/corpService';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsCorpPack';
 import { getHomeworkCandidates, getUsedHomeworkKeys, computeGroupStats } from './utils';
+import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import GroupsTab from './tabs/GroupsTab';
 import ArchiveTab from './tabs/ArchiveTab';
 import CoursesTab from './tabs/CoursesTab';
 import StatisticsTab from './tabs/StatisticsTab';
 import SettingsTab from './tabs/SettingsTab';
-import TeacherModals from './modals/TeacherModals';
+import StudentPackBreakdownModal from './modals/StudentPackBreakdownModal';
+import TransferPickerModal from './modals/TransferPickerModal';
+import PackEditorModal from './modals/PackEditorModal';
+import CreateGroupModal from './modals/CreateGroupModal';
+import EditGroupModal from './modals/EditGroupModal';
+import HomeworkEditorModal from './modals/HomeworkEditorModal';
+import HomeworkItemModal from './modals/HomeworkItemModal';
+import AssignPackModal from './modals/AssignPackModal';
+import ViewStudentsModal from './modals/ViewStudentsModal';
+import StudentDetailModal from './modals/StudentDetailModal';
+import StudentActionMenu from './modals/StudentActionMenu';
+import './shared.css';
 import './TeacherDashboard.css';
-import '../CenterAdminDashboard.css';
+import '../center-admin/shared.css';
+import '../center-admin/CenterAdminDashboard.css';
 
 export default function TeacherDashboard({ tab = 'groups' }) {
   const context = useOutletContext() || {};
@@ -702,7 +715,28 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       {tab === 'statistics' && <StatisticsTab p={p} />}
       {tab === 'settings' && <SettingsTab p={p} />}
 
-      <TeacherModals p={p} />
+      <StudentPackBreakdownModal p={p} />
+      <TransferPickerModal p={p} />
+      <PackEditorModal p={p} />
+      <CreateGroupModal p={p} />
+      <EditGroupModal p={p} />
+      <HomeworkEditorModal p={p} />
+      <HomeworkItemModal p={p} />
+      <AssignPackModal p={p} />
+      <ViewStudentsModal p={p} />
+      <StudentDetailModal p={p} />
+      <StudentActionMenu p={p} />
+
+      <ConfirmSheet
+        open={!!confirmSheet}
+        title={confirmSheet?.title}
+        message={confirmSheet?.message}
+        confirmLabel={confirmSheet?.confirmLabel}
+        danger={confirmSheet?.danger}
+        busy={confirmBusy}
+        onConfirm={runConfirmSheet}
+        onCancel={closeConfirmSheet}
+      />
     </div>
   );
 }

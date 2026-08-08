@@ -1,5 +1,6 @@
 import { ArrowLeft, ChevronRight, NotebookPen } from 'lucide-react';
 import { aggregatePackProgress } from '../../utils';
+import './GroupHomeworkDetail.css';
 
 export default function GroupHomeworkDetail({ p }) {
   const { groupHomeworkList, groupStudentsList, hwId, navigate, selectedGroup, setViewingHomeworkItem } = p;

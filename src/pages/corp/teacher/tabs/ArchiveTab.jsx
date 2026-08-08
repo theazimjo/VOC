@@ -1,4 +1,5 @@
 import { Archive, BookOpen, RotateCcw, Users } from 'lucide-react';
+import './ArchiveTab.css';
 
 export default function ArchiveTab({ p }) {
   const { archivedGroups, handleRestoreGroup, loading } = p;
