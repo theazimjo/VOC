@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Building2, Users, Archive, BookOpen,
   BarChart3, Settings, LogOut, ChevronLeft, ChevronRight, Moon, Sun
@@ -66,7 +66,7 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
             ? (location.pathname === '/corp/teacher' || location.pathname.startsWith('/corp/teacher/group/'))
             : location.pathname.startsWith(item.to);
           return (
-            <NavLink
+            <Link
               key={item.to}
               to={item.to}
               className={`sidebar-nav-btn ${isActive ? 'active' : ''}`}
@@ -74,7 +74,7 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
             >
               <Icon size={20} strokeWidth={2.2} />
               {!collapsed && <span>{item.label}</span>}
-            </NavLink>
+            </Link>
           );
         })}
       </nav>

@@ -1,4 +1,4 @@
-import { useLocation, NavLink } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { Users, Archive, BookOpen, BarChart3, Settings } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
@@ -44,7 +44,7 @@ export default function TeacherBottomNav() {
           : location.pathname.startsWith(item.to);
 
         return (
-          <NavLink
+          <Link
             key={item.to}
             to={item.to}
             className={`bottom-nav-link ${isActive ? 'active' : ''}`}
@@ -53,7 +53,7 @@ export default function TeacherBottomNav() {
               <IconComponent size={20} strokeWidth={2.2} />
             </span>
             <span className="bottom-nav-label">{item.label}</span>
-          </NavLink>
+          </Link>
         );
       })}
     </nav>

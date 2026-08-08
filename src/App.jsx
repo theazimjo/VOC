@@ -44,7 +44,7 @@ const SuperAdminUsers = lazyWithRetry(() => import('./pages/corp/SuperAdminUsers
 const SuperAdminAnnouncements = lazyWithRetry(() => import('./pages/corp/SuperAdminAnnouncements'));
 const SuperAdminSettings = lazyWithRetry(() => import('./pages/corp/SuperAdminSettings'));
 const CenterAdminDashboard = lazyWithRetry(() => import('./pages/corp/CenterAdminDashboard'));
-const TeacherDashboard = lazyWithRetry(() => import('./pages/corp/TeacherDashboard'));
+const TeacherDashboard = lazyWithRetry(() => import('./pages/corp/teacher/TeacherDashboard'));
 const StudentCorpOverview = lazyWithRetry(() => import('./pages/corp/StudentCorpOverview'));
 const StudentCorpLearn = lazyWithRetry(() => import('./pages/corp/StudentCorpLearn'));
 const StudentCorpAssessment = lazyWithRetry(() => import('./pages/corp/StudentCorpAssessment'));
