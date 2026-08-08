@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import { updatePassword } from 'firebase/auth';
 import {
@@ -239,7 +239,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const context = useOutletContext() || {};
   const { theme, setTheme } = useTheme();
   const { centerId, teacherId, teacherName, phone, email } = context;
-  const { groupId: urlGroupId, subTab = 'students', hwId } = useParams();
+  const { groupId: urlGroupId, subTab, hwId } = useParams();
   const navigate = useNavigate();
 
   const [groups, setGroups] = useState([]);
@@ -271,6 +271,14 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const [savingHomework, setSavingHomework] = useState(false);
   const [showHomeworkEditor, setShowHomeworkEditor] = useState(false);
   const [viewingHomeworkItem, setViewingHomeworkItem] = useState(null);
+
+  // Active tab ref for auto-scrolling on mobile/narrow screens
+  const activeSegTabRef = useRef(null);
+  useEffect(() => {
+    if (activeSegTabRef.current) {
+      activeSegTabRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    }
+  }, [subTab]);
 
   // Student row actions (remove / detail) — same fixed-position dropdown
   // pattern as CenterAdminDashboard's per-row "⋮" teacher menu.
@@ -840,42 +848,201 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       {tab === 'groups' && (
         selectedGroup ? (
           <div className="tpv-container">
-            {/* Mobile-style Navbar Header */}
-            <div className="tpv-navbar">
-              {/* Left: Back button */}
+            {/* Top Compact Group Header Bar */}
+            <div className="ios-group-top-bar">
               <button
                 type="button"
-                className="tpv-back tpv-navbar-back"
-                onClick={() => { setSelectedGroupId(null); navigate('/corp/teacher'); }}
+                className="ios-back-btn"
+                onClick={() => {
+                  if (subTab) {
+                    navigate(`/corp/teacher/group/${selectedGroup.id}`);
+                  } else {
+                    setSelectedGroupId(null);
+                    navigate('/corp/teacher');
+                  }
+                }}
+                title={subTab ? "Bo'limlarga qaytish" : "Guruhlarga qaytish"}
               >
-                <ArrowLeft size={20} />
+                <ArrowLeft size={18} />
               </button>
 
-              {/* Center: Group name only */}
-              <div className="tpv-navbar-center">
-                <h2 className="tpv-navbar-title">{selectedGroup.name}</h2>
+              <div className="ios-title-group">
+                <h2 className="ios-group-title">
+                  {subTab === 'students' && "O'quvchilar"}
+                  {subTab === 'words' && "Packlar"}
+                  {subTab === 'homework' && "Uy vazifasi"}
+                  {subTab === 'stats' && "Statistika"}
+                  {!subTab && selectedGroup.name}
+                </h2>
               </div>
 
-              {/* Right: join-code (desktop) + Actions button */}
-              <div className="tpv-navbar-right">
-                <button
-                  type="button"
-                  className="tpv-pin-btn"
-                  onClick={() => copyCode(selectedGroup.code)}
-                  title="Taklif kodini nusxalash"
-                >
-                  {copiedCode === selectedGroup.code ? <Check size={13} /> : <Copy size={13} />}
-                  <span>{selectedGroup.code}</span>
-                </button>
-                <button
-                  className="tpv-navbar-action-btn"
-                  onClick={() => handleOpenGroupSettings(selectedGroup)}
-                  title="Sozlamalar"
-                >
-                  <MoreVertical size={18} />
-                </button>
-              </div>
+              <button
+                type="button"
+                className="ios-action-btn"
+                onClick={() => handleOpenGroupSettings(selectedGroup)}
+                title="Guruh sozlamalari"
+              >
+                <MoreVertical size={18} />
+              </button>
             </div>
+
+            {/* OVERVIEW: Big Main Hero Card + 2x2 Bento Hero Cards Grid (Wireframe Layout) */}
+            {!subTab && !hwId && (
+              <>
+                {/* 1. Main Large Hero Banner Card (Big rectangle from wireframe) */}
+                <div className="group-main-hero-card">
+                  <div className="gmh-top">
+                    <div className="gmh-code-block">
+                      <span className="gmh-subtitle">GURUH TAKLIF KODI</span>
+                      <div className="gmh-code-row">
+                        <span className="gmh-code">{selectedGroup.code}</span>
+                        <button
+                          type="button"
+                          className="gmh-copy-btn"
+                          onClick={() => copyCode(selectedGroup.code)}
+                          title="Nusxalash"
+                        >
+                          {copiedCode === selectedGroup.code ? (
+                            <>
+                              <Check size={14} color="#34c759" />
+                              <span>Nusxalandi</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={14} />
+                              <span>Nusxalash</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    <span className="gmh-status-badge">
+                      <Check size={13} />
+                      {selectedGroup.level || 'Faol Kurs'}
+                    </span>
+                  </div>
+
+                  <div className="gmh-divider" />
+
+                  <div className="gmh-stats-row">
+                    <div className="gmh-stat">
+                      <span className="gmh-stat-val">{selectedGroup.studentsCount || 0}</span>
+                      <span className="gmh-stat-label">O'quvchilar</span>
+                    </div>
+                    <div className="gmh-stat">
+                      <span className="gmh-stat-val">
+                        {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length}
+                      </span>
+                      <span className="gmh-stat-label">Packlar</span>
+                    </div>
+                    <div className="gmh-stat">
+                      <span className="gmh-stat-val">{groupHomeworkList.length}</span>
+                      <span className="gmh-stat-label">Vazifalar</span>
+                    </div>
+                    <div className="gmh-stat">
+                      <span className="gmh-stat-val green">
+                        {selectedGroupStats ? `${selectedGroupStats.avgPercent}%` : '0%'}
+                      </span>
+                      <span className="gmh-stat-label">O'zlashtirish</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. 2x2 Bento Hero Cards Grid (4 equal cards from wireframe) */}
+                <div className="ios-bento-grid">
+                  {/* Card 1: Students */}
+                  <div
+                    className="ios-bento-card card-blue"
+                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/students`)}
+                  >
+                    <div className="bento-top-row">
+                      <div className="bento-icon-box icon-blue">
+                        <Users size={22} />
+                      </div>
+                      <span className="bento-badge-count">{selectedGroup.studentsCount || 0} ta</span>
+                    </div>
+                    <div className="bento-info">
+                      <h3 className="bento-title">O'quvchilar</h3>
+                      <p className="bento-sub">A'zolar progressi va boshqaruvi</p>
+                    </div>
+                    <div className="bento-footer">
+                      <span className="bento-action-label">Boshqarish</span>
+                      <ChevronRight size={16} className="bento-arrow" />
+                    </div>
+                  </div>
+
+                  {/* Card 2: Packs */}
+                  <div
+                    className="ios-bento-card card-purple"
+                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/words`)}
+                  >
+                    <div className="bento-top-row">
+                      <div className="bento-icon-box icon-purple">
+                        <BookOpen size={22} />
+                      </div>
+                      <span className="bento-badge-count">
+                        {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length} ta
+                      </span>
+                    </div>
+                    <div className="bento-info">
+                      <h3 className="bento-title">Packlar</h3>
+                      <p className="bento-sub">Biriktirilgan so'z toifalari</p>
+                    </div>
+                    <div className="bento-footer">
+                      <span className="bento-action-label">Boshqarish</span>
+                      <ChevronRight size={16} className="bento-arrow" />
+                    </div>
+                  </div>
+
+                  {/* Card 3: Homework */}
+                  <div
+                    className="ios-bento-card card-amber"
+                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
+                  >
+                    <div className="bento-top-row">
+                      <div className="bento-icon-box icon-amber">
+                        <NotebookPen size={22} />
+                      </div>
+                      <span className="bento-badge-count">{groupHomeworkList.length} ta</span>
+                    </div>
+                    <div className="bento-info">
+                      <h3 className="bento-title">Uy vazifasi</h3>
+                      <p className="bento-sub">Topshiriqlar va bajarilish holati</p>
+                    </div>
+                    <div className="bento-footer">
+                      <span className="bento-action-label">Boshqarish</span>
+                      <ChevronRight size={16} className="bento-arrow" />
+                    </div>
+                  </div>
+
+                  {/* Card 4: Stats */}
+                  <div
+                    className="ios-bento-card card-emerald"
+                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/stats`)}
+                  >
+                    <div className="bento-top-row">
+                      <div className="bento-icon-box icon-emerald">
+                        <BarChart3 size={22} />
+                      </div>
+                      <span className="bento-badge-count green">
+                        {selectedGroupStats ? `${selectedGroupStats.avgPercent}%` : '0%'}
+                      </span>
+                    </div>
+                    <div className="bento-info">
+                      <h3 className="bento-title">Statistika</h3>
+                      <p className="bento-sub">Guruh bo'yicha o'zlashtirish tahlili</p>
+                    </div>
+                    <div className="bento-footer">
+                      <span className="bento-action-label">Tahlilni ko'rish</span>
+                      <ChevronRight size={16} className="bento-arrow" />
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+
 
             {hwId ? (() => {
               const hw = groupHomeworkList.find(h => h.id === hwId);
@@ -976,71 +1143,8 @@ export default function TeacherDashboard({ tab = 'groups' }) {
                   </div>
                 </div>
               );
-            })() : (
+            })() : subTab && (
               <>
-            {/* Hero Info Card (mobile only) */}
-            <div className="tpv-hero-card">
-              <div className="tpv-hero-top">
-                <span className="tpv-hero-label">TAKLIF KODI</span>
-                <button
-                  className="tpv-hero-copy-btn"
-                  onClick={() => copyCode(selectedGroup.code)}
-                  title="Nusxalash"
-                >
-                  {copiedCode === selectedGroup.code
-                    ? <Check size={15} color="var(--success)" />
-                    : <Copy size={15} />}
-                </button>
-              </div>
-              <div className="tpv-hero-code">{selectedGroup.code}</div>
-              <div className="tpv-hero-badges">
-                <span className="tpv-hero-badge">
-                  <Users size={13} />
-                  {selectedGroup.studentsCount || 0} O'quvchi
-                </span>
-                <span className="tpv-hero-badge tpv-hero-badge-green">
-                  <Check size={13} />
-                  {selectedGroup.level || 'Faol Kurs'}
-                </span>
-              </div>
-            </div>
-
-            {/* Tab Bar Navigation — Pill Style */}
-            <div className="group-seg-bar">
-              <button
-                className={`group-seg-btn ${subTab === 'students' ? 'active' : ''}`}
-                onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/students`)}
-              >
-                <Users size={14} strokeWidth={2.3} />
-                <span>O'quvchilar</span>
-                <span className="seg-badge">{selectedGroup.studentsCount || 0}</span>
-              </button>
-              <button
-                className={`group-seg-btn ${subTab === 'words' ? 'active' : ''}`}
-                onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/words`)}
-              >
-                <BookOpen size={14} strokeWidth={2.3} />
-                <span>Packlar</span>
-                <span className="seg-badge">
-                  {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length}
-                </span>
-              </button>
-              <button
-                className={`group-seg-btn ${subTab === 'homework' ? 'active' : ''}`}
-                onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
-              >
-                <NotebookPen size={14} strokeWidth={2.3} />
-                <span>Uy vazifasi</span>
-                <span className="seg-badge">{groupHomeworkList.length}</span>
-              </button>
-              <button
-                className={`group-seg-btn ${subTab === 'stats' ? 'active' : ''}`}
-                onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/stats`)}
-              >
-                <BarChart3 size={14} strokeWidth={2.3} />
-                <span>Statistika</span>
-              </button>
-            </div>
 
             {/* Tab Contents */}
             <div className="group-tab-content">
