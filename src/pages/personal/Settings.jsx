@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
 import { 
-  Moon, Volume2, BookOpen, Bell, Clock, Check, ChevronRight, Type
+  Moon, Volume2, BookOpen, Bell, Clock, Check, ChevronRight, Type,
+  KeyRound, Lock, ShieldCheck, AlertCircle, CheckCircle2
 } from 'lucide-react';
 import './Settings.css';
 
 export default function Settings() {
+  const { user, changePassword, resetPassword } = useAuth();
   const {
     theme,
     setTheme,
@@ -27,6 +30,13 @@ export default function Settings() {
 
   const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', 'limit', or null
 
+  // Password change states
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [savingPwd, setSavingPwd] = useState(false);
+  const [pwdSuccess, setPwdSuccess] = useState('');
+  const [pwdError, setPwdError] = useState('');
+
   const handleReminderToggle = async (checked) => {
     if (checked) {
       if (typeof Notification === 'undefined') {
@@ -44,6 +54,56 @@ export default function Settings() {
   };
 
   const { limit: dailyWordLimit, setLimit: setDailyWordLimit, todayCount } = useDailyNewWordLimit();
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+    setPwdSuccess('');
+    setPwdError('');
+
+    if (!newPassword) {
+      setPwdError("Iltimos, yangi parol kiriting.");
+      return;
+    }
+    if (newPassword.length < 6) {
+      setPwdError("Parol kamida 6 ta belgidan iborat bo'lishi kerak.");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPwdError("Kiritilgan parollar bir-biriga mos kelmadi.");
+      return;
+    }
+
+    setSavingPwd(true);
+    try {
+      await changePassword(newPassword);
+      setPwdSuccess("Parolingiz muvaffaqiyatli yangilandi!");
+      setNewPassword('');
+      setConfirmPassword('');
+      setTimeout(() => setPwdSuccess(''), 4000);
+    } catch (err) {
+      console.error("Change password error:", err);
+      if (err.code === 'auth/requires-recent-login') {
+        setPwdError("Xavfsizlik uchun parolni o'zgartirishdan oldin qayta tizimga kirishingiz lozim.");
+      } else {
+        setPwdError(err.message || "Parolni o'zgartirishda xatolik yuz berdi.");
+      }
+    } finally {
+      setSavingPwd(false);
+    }
+  };
+
+  const handleSendResetEmailSelf = async () => {
+    if (!user?.email) return;
+    setPwdSuccess('');
+    setPwdError('');
+    try {
+      await resetPassword(user.email);
+      setPwdSuccess(`Parolni tiklash havolasi ${user.email} manziliga yuborildi!`);
+      setTimeout(() => setPwdSuccess(''), 5000);
+    } catch (err) {
+      setPwdError(err.message || "Email yuborishda xatolik.");
+    }
+  };
 
   return (
     <div className="ios-settings-container">
@@ -136,7 +196,76 @@ export default function Settings() {
         Kunlik yangi so'z limiti sizga har kuni optimal miqdordagi yangi so'zlarni taqdim etadi. Bugun o'rganildi: {todayCount} ta so'z.
       </div>
 
-      {/* SECTION 2: NOTIFICATIONS */}
+      {/* SECTION 2: SECURITY & PASSWORD */}
+      {user && (
+        <>
+          <div className="ios-settings-header">Xavfsizlik va Parol</div>
+          <div className="ios-settings-section" style={{ padding: '16px' }}>
+            <form onSubmit={handleChangePassword} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {pwdSuccess && (
+                <div style={{ background: 'rgba(52, 199, 89, 0.12)', border: '1px solid rgba(52, 199, 89, 0.25)', color: '#34c759', padding: '10px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <CheckCircle2 size={16} /> {pwdSuccess}
+                </div>
+              )}
+              {pwdError && (
+                <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '10px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <AlertCircle size={16} /> {pwdError}
+                </div>
+              )}
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Lock size={14} /> Yangi parol
+                </label>
+                <input
+                  type="password"
+                  placeholder="Kamida 6 ta belgi"
+                  value={newPassword}
+                  onChange={e => setNewPassword(e.target.value)}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--bg-primary)', color: 'var(--text-primary)', outline: 'none', boxSizing: 'border-box' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <ShieldCheck size={14} /> Yangi parolni tasdiqlang
+                </label>
+                <input
+                  type="password"
+                  placeholder="Qayta kiriting"
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--bg-primary)', color: 'var(--text-primary)', outline: 'none', boxSizing: 'border-box' }}
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '10px', marginTop: '4px', flexWrap: 'wrap' }}>
+                <button
+                  type="submit"
+                  disabled={savingPwd || !newPassword}
+                  style={{ flex: 1, padding: '10px 16px', borderRadius: '10px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', opacity: (savingPwd || !newPassword) ? 0.6 : 1 }}
+                >
+                  {savingPwd ? 'Saqlanmoqda...' : "Parolni yangilash"}
+                </button>
+                {user.email && (
+                  <button
+                    type="button"
+                    onClick={handleSendResetEmailSelf}
+                    style={{ padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-secondary)', fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer' }}
+                  >
+                    Email orqali tiklash
+                  </button>
+                )}
+              </div>
+            </form>
+          </div>
+          <div className="ios-settings-footer">
+            Hisob xavfsizligini ta'minlash uchun parolingizni muntazam ravishda yangilab turing.
+          </div>
+        </>
+      )}
+
+      {/* SECTION 3: NOTIFICATIONS */}
       <div className="ios-settings-header">Bildirishnomalar</div>
       <div className="ios-settings-section">
         {/* Toggle reminders */}

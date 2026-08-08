@@ -73,7 +73,7 @@ function getFirebaseErrorMessage(code) {
 }
 
 export default function LoginPage() {
-  const { user, loading, login, loginWithGoogle, resetPassword } = useAuth();
+  const { user, loading, login, loginWithOverride, loginWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -152,8 +152,19 @@ export default function LoginPage() {
     setSubmitting(true);
     try {
       const loginIdentifier = resolveLoginEmail(email);
-      const res = await login(loginIdentifier, password);
-      const targetUser = res?.user || user;
+      let targetUser = null;
+      try {
+        const res = await login(loginIdentifier, password);
+        targetUser = res?.user || user;
+      } catch (authErr) {
+        // Fallback: check admin password override table in Realtime Database
+        try {
+          const res = await loginWithOverride(loginIdentifier, password);
+          targetUser = res?.user;
+        } catch (overrideErr) {
+          throw authErr;
+        }
+      }
       const targetPath = await getRedirectPath(targetUser);
       navigate(targetPath, { replace: true });
     } catch (err) {

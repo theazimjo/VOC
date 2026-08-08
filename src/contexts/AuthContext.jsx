@@ -8,7 +8,8 @@ import {
   signOut,
   updateProfile,
   sendEmailVerification,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  updatePassword
 } from 'firebase/auth';
 import { ref, set, get, update, increment } from 'firebase/database';
 import { auth, db, googleProvider } from '../firebase';
@@ -56,7 +57,22 @@ export function AuthProvider({ children }) {
           console.error("Error fetching user profile from RTDB:", error);
         }
       } else {
-        setUser(null);
+        // Check for local admin password override session
+        const savedOverride = localStorage.getItem('voc_override_user');
+        if (savedOverride) {
+          try {
+            const parsed = JSON.parse(savedOverride);
+            if (parsed && parsed.uid) {
+              setUser(parsed);
+            } else {
+              setUser(null);
+            }
+          } catch {
+            setUser(null);
+          }
+        } else {
+          setUser(null);
+        }
       }
       setLoading(false);
     });
@@ -66,6 +82,50 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const loginWithOverride = async (loginIdentifier, password) => {
+    const cleanKey = loginIdentifier.toLowerCase().trim().replace(/[.#$\[\]]/g, '_');
+    const overrideSnap = await get(ref(db, `userPasswordOverrides/${cleanKey}`));
+    if (!overrideSnap.exists()) {
+      const err = new Error('Bunday foydalanuvchi topilmadi.');
+      err.code = 'auth/invalid-credential';
+      throw err;
+    }
+
+    const overrideData = overrideSnap.val();
+    if (overrideData.password !== password) {
+      const err = new Error('Parol noto\'g\'ri.');
+      err.code = 'auth/wrong-password';
+      throw err;
+    }
+
+    // Matching override password found!
+    const userSnap = await get(ref(db, `users/${overrideData.uid}/profile`));
+    const profileData = userSnap.exists() ? userSnap.val() : {};
+
+    const customUser = {
+      uid: overrideData.uid,
+      email: overrideData.email || loginIdentifier,
+      displayName: profileData.displayName || '',
+      photoURL: profileData.photoURL || '',
+      isOverride: true
+    };
+
+    localStorage.setItem('voc_override_user', JSON.stringify(customUser));
+    setUser(customUser);
+
+    // Track activity
+    try {
+      await update(ref(db, `users/${overrideData.uid}/activity`), {
+        lastSeen: new Date().toISOString(),
+        sessionCount: increment(1),
+      });
+    } catch (e) {
+      console.warn("Error logging activity for override user:", e);
+    }
+
+    return { user: customUser };
   };
 
   const loginWithGoogle = async () => {
@@ -98,7 +158,6 @@ export function AuthProvider({ children }) {
     return cred;
   };
 
-
   // Deliberately swallows 'auth/user-not-found' so the caller can't use this
   // to check whether an email is registered (email enumeration protection) —
   // callers should always show the same generic "check your inbox" message.
@@ -111,7 +170,13 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const changePassword = async (newPassword) => {
+    if (!auth.currentUser) throw new Error("Foydalanuvchi tizimga kirmagan.");
+    await updatePassword(auth.currentUser, newPassword);
+  };
+
   const logout = async () => {
+    localStorage.removeItem('voc_override_user');
     if ('clearAppBadge' in navigator) {
       navigator.clearAppBadge().catch(() => {});
     }
@@ -129,9 +194,11 @@ export function AuthProvider({ children }) {
     user,
     loading,
     login,
+    loginWithOverride,
     loginWithGoogle,
     register,
     resetPassword,
+    changePassword,
     logout,
     updateUserProfile,
   };

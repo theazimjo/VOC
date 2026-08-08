@@ -4,15 +4,17 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ref, get } from 'firebase/database';
+import { ref, get, update } from 'firebase/database';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import {
   Users, Activity, BookOpen, Clock, TrendingUp,
   ArrowLeft, RefreshCw, Shield, Zap, Award,
-  ChevronDown, ChevronUp, Search, AlertTriangle
+  ChevronDown, ChevronUp, Search, AlertTriangle,
+  KeyRound, Key, Mail, CheckCircle2, X, Lock
 } from 'lucide-react';
-import { db } from '../../firebase';
+import { db, auth } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import './AdminDashboard.css';
 
@@ -139,7 +141,7 @@ function ActivityHeatmap({ activityLog = {} }) {
 
 // ─── User Row ─────────────────────────────────────────────────────────────────
 
-function UserRow({ userData, index }) {
+function UserRow({ userData, index, onResetPassword }) {
   const [expanded, setExpanded] = useState(false);
   const { profile, activity, packs = {}, words = {}, meta = {} } = userData;
 
@@ -155,8 +157,7 @@ function UserRow({ userData, index }) {
   const folderCount = Object.keys(userData.folders || {}).length;
   const packsCreatedTotal = meta.packsCreatedTotal || 0;
   const foldersCreatedTotal = meta.foldersCreatedTotal || 0;
-  // Lifetime creations far above what currently exists means a lot of
-  // create+delete cycling — worth a second look, not proof of abuse.
+
   const packChurn = packsCreatedTotal - packCount;
   const folderChurn = foldersCreatedTotal - folderCount;
   const looksSuspicious = packChurn > 30 || folderChurn > 30;
@@ -168,9 +169,9 @@ function UserRow({ userData, index }) {
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.04 }}
     >
-      <div className="adm-user-main" onClick={() => setExpanded(e => !e)}>
+      <div className="adm-user-main">
         {/* Avatar */}
-        <div className="adm-user-avatar">
+        <div className="adm-user-avatar" onClick={() => setExpanded(e => !e)}>
           {profile?.photoURL ? (
             <img src={profile.photoURL} alt="" />
           ) : (
@@ -180,7 +181,7 @@ function UserRow({ userData, index }) {
         </div>
 
         {/* Identity */}
-        <div className="adm-user-identity">
+        <div className="adm-user-identity" onClick={() => setExpanded(e => !e)}>
           <div className="adm-user-name">
             {profile?.displayName || 'Nomsiz'}
             {looksSuspicious && (
@@ -191,7 +192,7 @@ function UserRow({ userData, index }) {
         </div>
 
         {/* Quick stats */}
-        <div className="adm-user-quick">
+        <div className="adm-user-quick" onClick={() => setExpanded(e => !e)}>
           <div className="adm-quick-item" title="So'zlar">
             <BookOpen size={13} />
             <span>{wordCount}</span>
@@ -211,11 +212,25 @@ function UserRow({ userData, index }) {
           )}
         </div>
 
-        {/* Last seen */}
-        <div className={`adm-last-seen ${activityClass}`}>{timeAgo(lastSeen)}</div>
+        {/* Actions & Last seen */}
+        <div className="adm-user-actions">
+          <button
+            type="button"
+            className="adm-reset-pwd-btn"
+            title="Parolni tiklash / yangilash"
+            onClick={(e) => {
+              e.stopPropagation();
+              onResetPassword(userData);
+            }}
+          >
+            <KeyRound size={14} />
+            <span>Parolni tiklash</span>
+          </button>
+          <div className={`adm-last-seen ${activityClass}`}>{timeAgo(lastSeen)}</div>
+        </div>
 
         {/* Expand */}
-        <div className="adm-expand-btn">
+        <div className="adm-expand-btn" onClick={() => setExpanded(e => !e)}>
           {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </div>
@@ -264,6 +279,17 @@ function UserRow({ userData, index }) {
             </div>
           </div>
 
+          <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+            <button
+              type="button"
+              className="adm-reset-pwd-btn adm-reset-pwd-btn--large"
+              onClick={() => onResetPassword(userData)}
+            >
+              <KeyRound size={15} />
+              Ushbu foydalanuvchining parolini tiklash
+            </button>
+          </div>
+
           {/* Activity Heatmap */}
           <ActivityHeatmap activityLog={userData.streak?.activityLog} />
 
@@ -299,6 +325,17 @@ export default function AdminDashboard() {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('lastSeen'); // lastSeen | words | sessions | created
 
+  // Password reset modal states
+  const [resetPasswordUser, setResetPasswordUser] = useState(null);
+  const [customPassword, setCustomPassword] = useState('');
+  const [actionLoading, setActionLoading] = useState(false);
+  const [toastMsg, setToastMsg] = useState(null);
+
+  const showToast = (msg, isError = false) => {
+    setToastMsg({ msg, isError });
+    setTimeout(() => setToastMsg(null), 4000);
+  };
+
   // Guard: only admin
   useEffect(() => {
     if (!user) return;
@@ -332,6 +369,85 @@ export default function AdminDashboard() {
   }, [user]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
+
+  const handleSendResetEmail = async () => {
+    if (!resetPasswordUser?.profile?.email) {
+      showToast("Foydalanuvchi email manzili topilmadi.", true);
+      return;
+    }
+    setActionLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, resetPasswordUser.profile.email);
+      showToast(`Parolni tiklash havolasi ${resetPasswordUser.profile.email} manziliga yuborildi!`);
+      setResetPasswordUser(null);
+    } catch (err) {
+      console.error("Password reset email error:", err);
+      showToast(`Xatolik: ${err.message}`, true);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleSetCustomPassword = async (e) => {
+    e.preventDefault();
+    const newPwd = customPassword.trim();
+    if (!newPwd) {
+      showToast("Iltimos, yangi parol kiriting.", true);
+      return;
+    }
+    if (newPwd.length < 6) {
+      showToast("Parol kamida 6 ta belgidan iborat bo'lishi kerak.", true);
+      return;
+    }
+
+    setActionLoading(true);
+    let rtdbUpdated = false;
+    let emailSent = false;
+
+    const userEmail = resetPasswordUser.profile?.email || resetPasswordUser.email || '';
+    const cleanKey = userEmail.toLowerCase().trim().replace(/[.#$\[\]]/g, '_');
+
+    // 1. Update tempPassword and userPasswordOverrides in RTDB
+    try {
+      const updates = {};
+      updates[`users/${resetPasswordUser.uid}/tempPassword`] = newPwd;
+      updates[`users/${resetPasswordUser.uid}/profile/tempPassword`] = newPwd;
+      updates[`users/${resetPasswordUser.uid}/profile/password`] = newPwd;
+      updates[`users/${resetPasswordUser.uid}/profile/passwordUpdatedAt`] = new Date().toISOString();
+
+      if (cleanKey) {
+        updates[`userPasswordOverrides/${cleanKey}`] = {
+          uid: resetPasswordUser.uid,
+          password: newPwd,
+          email: userEmail,
+          updatedAt: new Date().toISOString()
+        };
+      }
+
+      await update(ref(db), updates);
+      rtdbUpdated = true;
+    } catch (err) {
+      console.warn("RTDB password update warning:", err);
+    }
+
+    // 2. Best-effort send reset email if valid email exists
+    if (userEmail && userEmail.includes('@')) {
+      sendPasswordResetEmail(auth, userEmail).then(() => {
+        emailSent = true;
+      }).catch(() => {});
+    }
+
+    if (rtdbUpdated) {
+      const userLabel = resetPasswordUser.profile?.displayName || userEmail || 'Foydalanuvchi';
+      showToast(`✅ ${userLabel} uchun yangi parol (${newPwd}) o'rnatildi! Foydalanuvchi endi darhol kirishi mumkin.`);
+      setResetPasswordUser(null);
+      setCustomPassword('');
+      fetchData();
+    } else {
+      showToast("Xatolik: Yangi parol saqlanmadi.", true);
+    }
+    setActionLoading(false);
+  };
 
   if (!user || !ADMIN_EMAILS.includes(user.email)) return null;
 
@@ -378,6 +494,21 @@ export default function AdminDashboard() {
 
   return (
     <div className="adm-page">
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toastMsg && (
+          <motion.div
+            className={`adm-toast ${toastMsg.isError ? 'adm-toast--error' : ''}`}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            {toastMsg.isError ? <AlertTriangle size={18} /> : <CheckCircle2 size={18} />}
+            <span>{toastMsg.msg}</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <div className="adm-header">
         <div className="adm-header-left">
@@ -526,7 +657,15 @@ export default function AdminDashboard() {
           ) : (
             <div className="adm-users-list">
               {filtered.map((u, i) => (
-                <UserRow key={u.uid} userData={u} index={i} />
+                <UserRow
+                  key={u.uid}
+                  userData={u}
+                  index={i}
+                  onResetPassword={(targetUser) => {
+                    setResetPasswordUser(targetUser);
+                    setCustomPassword('');
+                  }}
+                />
               ))}
             </div>
           )}
@@ -537,6 +676,102 @@ export default function AdminDashboard() {
         </div>
 
       </div>
+
+      {/* Password Reset Modal */}
+      <AnimatePresence>
+        {resetPasswordUser && (
+          <div className="adm-modal-overlay" onClick={() => setResetPasswordUser(null)}>
+            <motion.div
+              className="adm-modal"
+              onClick={e => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+            >
+              <div className="adm-modal-header">
+                <div className="adm-modal-title">
+                  <KeyRound size={20} className="adm-icon-accent" />
+                  Parolni Tiklash / Yangi Parol O'rnatish
+                </div>
+                <button
+                  type="button"
+                  className="adm-modal-close"
+                  onClick={() => setResetPasswordUser(null)}
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="adm-modal-body">
+                <div className="adm-user-info-box">
+                  <div className="adm-user-avatar-sm">
+                    {(resetPasswordUser.profile?.displayName || resetPasswordUser.profile?.email || '?')[0].toUpperCase()}
+                  </div>
+                  <div>
+                    <div className="adm-user-info-name">
+                      {resetPasswordUser.profile?.displayName || 'Nomsiz foydalanuvchi'}
+                    </div>
+                    <div className="adm-user-info-email">
+                      {resetPasswordUser.profile?.email || 'Email kiritilmagan'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Option 1: Direct Custom Password Setting */}
+                <form onSubmit={handleSetCustomPassword} className="adm-pwd-form">
+                  <label className="adm-pwd-label">
+                    <Lock size={16} /> Yangi Parol Belgilash (Email ochish shart emas):
+                  </label>
+                  <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginBottom: '4px' }}>
+                    Admin sifatida kiritgan yangi parolingiz saqlanadi. Foydalanuvchi darhol ushbu parol bilan tizimga kirishi mumkin.
+                  </div>
+                  <input
+                    type="text"
+                    className="adm-pwd-input"
+                    placeholder="Masalan: 123456 yoki yangi parol..."
+                    value={customPassword}
+                    onChange={e => setCustomPassword(e.target.value)}
+                    disabled={actionLoading}
+                  />
+                  <button
+                    type="submit"
+                    className="adm-pwd-submit-btn"
+                    disabled={actionLoading || !customPassword.trim()}
+                    style={{ padding: '12px', fontSize: '0.9rem' }}
+                  >
+                    {actionLoading ? 'Saqlanmoqda...' : 'Yangi Parolni Saqlash va Foydalanuvchiga Berish'}
+                  </button>
+                </form>
+
+                <div className="adm-modal-divider">
+                  <span>YOKI</span>
+                </div>
+
+                {/* Option 2: Send Reset Link via Email */}
+                <button
+                  type="button"
+                  className="adm-pwd-email-btn"
+                  onClick={handleSendResetEmail}
+                  disabled={actionLoading || !resetPasswordUser.profile?.email}
+                >
+                  <Mail size={16} />
+                  <span>Email ga parolni tiklash havolasini yuborish</span>
+                </button>
+              </div>
+
+              <div className="adm-modal-footer">
+                <button
+                  type="button"
+                  className="adm-modal-cancel-btn"
+                  onClick={() => setResetPasswordUser(null)}
+                >
+                  Yopish
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
