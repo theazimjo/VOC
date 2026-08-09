@@ -13,15 +13,14 @@
    blobs were positioned across the whole content height and most
    cards ended up scrolled past them, looking flat. */
 .teacher-dashboard-container {
-  /* Pin the whole module to the premium dark-glass look introduced for
-     Courses/Statistics/Archive/Settings/PackViewer/modals, independent of
-     the user's app-wide light/dark theme choice. Everything else in the
-     module (Group Detail's cards, rows, dropdowns, tables) is still built
-     against these same theme tokens rather than the newer --pg-* ones, so
-     redefining the tokens here — instead of hunting down every individual
-     var(--bg-glass-strong)/var(--text-primary) usage across ~2000 lines of
-     JSX/CSS — is what actually makes the whole section look like one
-     consistent design instead of "some pages dark, some pages themed". */
+  /* Give the whole module one consistent "glass" design language —
+     Courses/Statistics/Archive/Settings/PackViewer/modals plus everything
+     still built against the older theme tokens (Group Detail's cards,
+     rows, dropdowns, tables) — in BOTH the app's light and dark theme,
+     instead of hunting down every individual var(--bg-glass-strong)/
+     var(--text-primary) usage across ~2000 lines of JSX/CSS one by one.
+     Dark (android theme) values live here as the default; [data-theme="ios"]
+     below swaps in the light-glass equivalents. */
   --bg-primary: #0a0a0f;
   --bg-secondary: rgba(22, 22, 30, 0.88);
   --bg-tertiary: rgba(255, 255, 255, 0.07);
@@ -33,6 +32,18 @@
   --text-muted: rgba(255, 255, 255, 0.48);
   --border: rgba(255, 255, 255, 0.12);
   --border-light: rgba(255, 255, 255, 0.08);
+
+  /* Premium-glass card recipe (Courses/Statistics/Archive/Settings/
+     PackViewer/modals) — same idea, its own token set since those pages
+     use a stronger blur/saturate/glow combo than the plain glass above. */
+  --pg-bg: rgba(22, 22, 30, 0.32);
+  --pg-hairline: rgba(255, 255, 255, 0.12);
+  --pg-surface: rgba(255, 255, 255, 0.07);
+  --pg-surface-hover: rgba(255, 255, 255, 0.14);
+  --pg-text: rgba(255, 255, 255, 0.94);
+  --pg-text-secondary: rgba(255, 255, 255, 0.68);
+  --pg-text-muted: rgba(255, 255, 255, 0.48);
+  --pg-inset-highlight: rgba(255, 255, 255, 0.06);
 
   padding: var(--space-xl, 2rem);
   max-width: 1200px;
@@ -46,6 +57,29 @@
     radial-gradient(650px circle at 92% 88%, rgba(52, 199, 89, 0.06), transparent 65%),
     var(--bg-primary);
   background-attachment: fixed;
+}
+
+[data-theme="ios"] .teacher-dashboard-container {
+  --bg-primary: #eef0f5;
+  --bg-secondary: rgba(255, 255, 255, 0.86);
+  --bg-tertiary: rgba(0, 0, 0, 0.045);
+  --bg-glass: rgba(255, 255, 255, 0.4);
+  --bg-glass-hover: rgba(0, 0, 0, 0.06);
+  --bg-glass-strong: rgba(255, 255, 255, 0.55);
+  --text-primary: rgba(0, 0, 0, 0.88);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --text-muted: rgba(0, 0, 0, 0.4);
+  --border: rgba(0, 0, 0, 0.1);
+  --border-light: rgba(0, 0, 0, 0.06);
+
+  --pg-bg: rgba(255, 255, 255, 0.55);
+  --pg-hairline: rgba(0, 0, 0, 0.1);
+  --pg-surface: rgba(0, 0, 0, 0.045);
+  --pg-surface-hover: rgba(0, 0, 0, 0.08);
+  --pg-text: rgba(0, 0, 0, 0.88);
+  --pg-text-secondary: rgba(0, 0, 0, 0.6);
+  --pg-text-muted: rgba(0, 0, 0, 0.4);
+  --pg-inset-highlight: rgba(255, 255, 255, 0.6);
 }
 
 @media (max-width: 768px) {

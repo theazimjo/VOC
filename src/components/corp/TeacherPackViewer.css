@@ -3,22 +3,22 @@
   flex-direction: column;
   gap: 1.25rem;
   width: 100%;
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .tpv-header {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(22, 22, 30, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   padding: 1rem 1.25rem;
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 var(--pg-inset-highlight) inset,
     0 0 90px rgba(124, 108, 255, 0.1);
 }
 
@@ -27,9 +27,9 @@
   height: 38px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #e2e8f0;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,20 +38,20 @@
 }
 
 .tpv-back:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text);
 }
 
 .tpv-title h2 {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .tpv-title span {
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
 }
 
 .tpv-list {
@@ -67,9 +67,9 @@
   width: 100%;
   padding: 14px 16px;
   border-radius: 18px;
-  background: rgba(22, 22, 30, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-family: inherit;
   cursor: pointer;
   text-align: left;
@@ -78,12 +78,12 @@
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 var(--pg-inset-highlight) inset,
     0 0 90px rgba(124, 108, 255, 0.1);
 }
 
 .tpv-row:hover {
-  background: rgba(30, 30, 40, 0.42);
+  background: var(--pg-surface-hover);
   border-color: rgba(10, 132, 255, 0.35);
 }
 
@@ -91,8 +91,8 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  background: var(--pg-surface);
+  color: var(--pg-text-secondary);
   font-size: 0.75rem;
   font-weight: 700;
   display: flex;
@@ -116,7 +116,7 @@
 }
 
 .tpv-row-arrow {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .tpv-words {
@@ -135,23 +135,23 @@
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .tpv-search-wrap input {
   width: 100%;
   padding: 9px 12px 9px 34px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.85rem;
   outline: none;
   box-sizing: border-box;
 }
 
 .tpv-search-wrap input::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .tpv-words-grid {
@@ -161,8 +161,8 @@
 }
 
 .tpv-word-card {
-  background: rgba(22, 22, 30, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 18px;
   padding: 1rem 1.1rem;
   display: flex;
@@ -172,7 +172,7 @@
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 var(--pg-inset-highlight) inset,
     0 0 90px rgba(124, 108, 255, 0.1);
 }
 
@@ -185,7 +185,7 @@
 
 .tpv-word-top strong {
   font-size: 1rem;
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .tpv-pos {
@@ -209,18 +209,18 @@
 
 .tpv-word-translation {
   font-size: 0.9rem;
-  color: #cbd5e1;
+  color: var(--pg-text-secondary);
   font-weight: 500;
 }
 
 .tpv-word-def {
   font-size: 0.82rem;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
 }
 
 .tpv-word-example {
   font-size: 0.82rem;
-  color: #64748b;
+  color: var(--pg-text-muted);
   font-style: italic;
 }
 
@@ -231,10 +231,10 @@
   justify-content: center;
   gap: 10px;
   padding: 3rem 1rem;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   text-align: center;
-  background: rgba(22, 22, 30, 0.32);
-  border: 1px dashed rgba(255, 255, 255, 0.15);
+  background: var(--pg-bg);
+  border: 1px dashed var(--pg-hairline);
   border-radius: 18px;
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
@@ -255,8 +255,8 @@
   padding: 12px 16px;
   border-radius: 18px;
   background: transparent;
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  color: #94a3b8;
+  border: 1px dashed var(--pg-hairline);
+  color: var(--pg-text-secondary);
   font-family: inherit;
   font-size: 0.88rem;
   font-weight: 600;
@@ -265,9 +265,9 @@
 }
 
 .tpv-add-row:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--pg-surface);
   border-color: rgba(10, 132, 255, 0.4);
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .tpv-add-form {
@@ -276,7 +276,7 @@
   gap: 8px;
   padding: 8px 8px 8px 16px;
   border-radius: 18px;
-  background: rgba(22, 22, 30, 0.32);
+  background: var(--pg-bg);
   border: 1px solid rgba(10, 132, 255, 0.35);
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
@@ -287,13 +287,13 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #ffffff;
+  color: var(--pg-text);
   font-size: 0.9rem;
   padding: 6px 0;
 }
 
 .tpv-add-form input::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .tpv-add-confirm,
@@ -320,13 +320,13 @@
 }
 
 .tpv-add-cancel {
-  background: rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  background: var(--pg-surface);
+  color: var(--pg-text-secondary);
 }
 
 .tpv-add-cancel:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text);
 }
 
 /* ── Add Word ─────────────────────────────────── */
@@ -356,7 +356,7 @@
   gap: 8px;
   padding: 14px 16px;
   border-radius: 18px;
-  background: rgba(22, 22, 30, 0.32);
+  background: var(--pg-bg);
   border: 1px solid rgba(10, 132, 255, 0.35);
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
@@ -374,9 +374,9 @@
   min-width: 120px;
   padding: 9px 12px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.85rem;
   outline: none;
   box-sizing: border-box;
@@ -384,7 +384,7 @@
 }
 
 .tpv-word-add-row input::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .tpv-word-add-row select {
@@ -409,13 +409,13 @@
 }
 
 .tpv-word-add-actions button[type="button"] {
-  background: rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  background: var(--pg-surface);
+  color: var(--pg-text-secondary);
 }
 
 .tpv-word-add-actions button[type="button"]:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #ffffff;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text);
 }
 
 .tpv-word-add-actions button[type="submit"] {

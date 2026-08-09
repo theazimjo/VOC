@@ -159,22 +159,19 @@
 }
 
 .premium-glass {
-  --pg-text: rgba(255, 255, 255, 0.94);
-  --pg-text-secondary: rgba(255, 255, 255, 0.68);
-  --pg-text-muted: rgba(255, 255, 255, 0.48);
-  --pg-hairline: rgba(255, 255, 255, 0.12);
-  --pg-surface: rgba(255, 255, 255, 0.07);
   /* Deliberately low alpha — the whole point of glass is that whatever is
      behind the card (the page's ambient blobs, other cards, scrolled
      content) stays visible and shifts as it moves; a heavy alpha here
-     just paints a static dark rectangle with a blurred edge. */
-  background: rgba(22, 22, 30, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+     just paints a static rectangle with a blurred edge. --pg-bg/--pg-hairline
+     flip between the dark and light-glass recipes with the app theme (see
+     .teacher-dashboard-container in TeacherDashboard.css). */
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 var(--pg-inset-highlight) inset,
     0 0 90px rgba(124, 108, 255, 0.1);
   color: var(--pg-text);
 }
@@ -232,20 +229,15 @@
 }
 
 .teacher-dashboard-container .modal-content {
-  --pg-text: rgba(255, 255, 255, 0.94);
-  --pg-text-secondary: rgba(255, 255, 255, 0.68);
-  --pg-text-muted: rgba(255, 255, 255, 0.48);
-  --pg-hairline: rgba(255, 255, 255, 0.12);
-  --pg-surface: rgba(255, 255, 255, 0.07);
-  background: rgba(22, 22, 30, 0.32) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: var(--pg-bg) !important;
+  border: 1px solid var(--pg-hairline) !important;
   border-radius: 22px !important;
   padding: 1.4rem 1.5rem !important;
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08) !important;
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08) !important;
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 var(--pg-inset-highlight) inset,
     0 0 90px rgba(124, 108, 255, 0.1) !important;
   color: var(--pg-text);
 }
@@ -1699,19 +1691,14 @@
    never imports it), so the table had no padding/border-collapse/font
    rules at all. Fully self-contained now, premium dark glass + compact. */
 .teacher-dashboard-container .teachers-table-card {
-  --pg-text: rgba(255, 255, 255, 0.94);
-  --pg-text-secondary: rgba(255, 255, 255, 0.68);
-  --pg-text-muted: rgba(255, 255, 255, 0.48);
-  --pg-hairline: rgba(255, 255, 255, 0.12);
-  --pg-surface: rgba(255, 255, 255, 0.06);
-  background: rgba(22, 22, 30, 0.32) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: var(--pg-bg) !important;
+  border: 1px solid var(--pg-hairline) !important;
   border-radius: 18px;
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 var(--pg-inset-highlight) inset,
     0 0 90px rgba(124, 108, 255, 0.1);
   overflow: hidden;
 }
@@ -1726,8 +1713,8 @@
 
 .teacher-dashboard-container .teachers-table th {
   background: transparent !important;
-  color: rgba(255, 255, 255, 0.56) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--pg-text-secondary) !important;
+  border-bottom: 1px solid var(--pg-hairline) !important;
   padding: 10px 14px;
   font-size: 0.7rem;
   font-weight: 700;
@@ -1736,8 +1723,8 @@
 }
 
 .teacher-dashboard-container .teachers-table td {
-  color: rgba(255, 255, 255, 0.9) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: var(--pg-text) !important;
+  border-bottom: 1px solid var(--pg-surface) !important;
   padding: 10px 14px;
   font-size: 0.86rem;
   vertical-align: middle;
@@ -1748,7 +1735,7 @@
 }
 
 .teacher-dashboard-container .teachers-table tr:hover td {
-  background: rgba(255, 255, 255, 0.03) !important;
+  background: var(--pg-surface) !important;
 }
 
 /* ── Group Statistics: stat cards ────────────── */
@@ -1759,15 +1746,15 @@
 }
 
 .group-stat-card {
-  background: rgba(22, 22, 30, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 16px;
   padding: 0.85rem 1rem;
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 0 var(--pg-inset-highlight) inset,
     0 0 90px rgba(124, 108, 255, 0.1);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1777,7 +1764,7 @@
 }
 
 .group-stat-label {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--pg-text-secondary);
   font-size: 0.74rem;
   font-weight: 600;
   margin-bottom: 4px;
@@ -1786,7 +1773,7 @@
 .group-stat-value {
   font-size: 1.25rem;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.94);
+  color: var(--pg-text);
   letter-spacing: -0.02em;
 }
 
