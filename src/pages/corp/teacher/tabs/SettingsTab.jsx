@@ -1,13 +1,29 @@
 import { useState } from 'react';
-import { Archive, ChevronRight, CheckCircle2, Moon } from 'lucide-react';
+import { Archive, ChevronRight, CheckCircle2, Moon, LogOut } from 'lucide-react';
+import { useAuth } from '../../../../contexts/AuthContext';
 
 export default function SettingsTab({ p }) {
   const {
-    handleSaveProfile, navigate, profileForm, savingSettings,
+    askConfirm, handleSaveProfile, navigate, profileForm, savingSettings,
     setProfileForm, setTheme, settingsSuccess, theme,
   } = p;
 
+  const { logout } = useAuth();
   const [showProfileForm, setShowProfileForm] = useState(false);
+
+  const handleLogout = () => {
+    askConfirm({
+      title: 'Log Out',
+      message: 'Are you sure you want to log out?',
+      confirmLabel: 'Log Out',
+      cancelLabel: 'Cancel',
+      danger: true,
+      onConfirm: async () => {
+        await logout();
+        navigate('/login');
+      },
+    });
+  };
 
   return (
         <div style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -155,6 +171,20 @@ export default function SettingsTab({ p }) {
               </div>
             </div>
           </div>
+
+          {/* LOG OUT */}
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="premium-glass"
+            style={{
+              borderRadius: '18px', padding: '13px 14px', width: '100%',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+              color: '#ef4444', fontSize: '0.94rem', fontWeight: 700, cursor: 'pointer',
+            }}
+          >
+            <LogOut size={16} /> Log out
+          </button>
         </div>
   );
 }

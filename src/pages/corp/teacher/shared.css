@@ -1605,10 +1605,14 @@
   max-width: 650px;
 }
 
-/* ── Student Progress List ──────────────────── */
+/* ── Student Progress List ────────────────────
+   Grid instead of a single always-full-width column — on a wide desktop
+   viewport a compact row stretched across ~1100px just looks sparse (name
+   on the left, one badge way off on the right with empty space between);
+   auto-fill naturally collapses back to one column on mobile. */
 .students-progress-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 10px;
   max-height: 400px;
   overflow-y: auto;

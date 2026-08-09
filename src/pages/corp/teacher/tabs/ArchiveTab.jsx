@@ -29,7 +29,7 @@ export default function ArchiveTab({ p }) {
               <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--pg-text-secondary)' }}>No archived groups.</p>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '8px' }}>
               {archivedGroups.map((group) => (
                 <div
                   key={group.id}

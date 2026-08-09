@@ -160,7 +160,7 @@ export default function GroupSubtabs({ p }) {
                           );
                         }
                         return (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '8px' }}>
                             {assignablePacks.map(p => {
                               const isAssigned = (assigningGroup[assignCategory] || []).includes(p.id);
                               return (
@@ -279,7 +279,7 @@ export default function GroupSubtabs({ p }) {
                                 </button>
                               </div>
                             ) : (
-                              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '6px' }}>
                                 {packIds.map(pid => {
                                   const p = customPacks.find(cp => cp.id === pid);
                                   if (!p) return null;
@@ -442,7 +442,7 @@ export default function GroupSubtabs({ p }) {
                                     {packTitle}
                                   </span>
 
-                                  <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '6px' }}>
                                     {units.map(u => {
                                       const key = `${u.packId}_${u.monthId}_${u.unitId}`;
                                       const checked = homeworkSelection.has(key);
@@ -538,7 +538,7 @@ export default function GroupSubtabs({ p }) {
                           Tap "+" below to assign new homework.
                         </div>
                       ) : (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '8px' }}>
                           {[...groupHomeworkList].reverse().map(hw => (
                             <button
                               type="button"
@@ -662,7 +662,7 @@ export default function GroupSubtabs({ p }) {
                         No pack assigned to this group yet — assign one from the "Packs" tab to see statistics.
                       </div>
                     ) : (
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '10px', alignItems: 'start' }}>
                         {groupStudentsList.map((student) => {
                           let studentLearnedTotal = 0;
                           let studentPackTotal = 0;

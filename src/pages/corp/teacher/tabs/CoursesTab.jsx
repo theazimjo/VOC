@@ -141,7 +141,7 @@ export default function CoursesTab({ p }) {
                     You haven't created any private packs yet. Tap <strong>"+"</strong> below to create one only you can see — not even the center admin.
                   </div>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '8px' }}>
                     {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
                       <div
                         key={pack.id}
@@ -233,7 +233,7 @@ export default function CoursesTab({ p }) {
                     No shared packs from the center yet.
                   </div>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '8px' }}>
                     {filteredPacks.filter(p => p.scope === 'center').map((pack) => (
                       <div
                         key={pack.id}
