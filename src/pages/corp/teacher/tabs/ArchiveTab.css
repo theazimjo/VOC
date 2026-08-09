@@ -1,12 +1,14 @@
 /* ── Group Cards ────────────────────────────── */
 .teacher-group-card {
-  background: var(--bg-secondary) !important;
+  background: var(--bg-glass-strong) !important;
   border: 1px solid var(--border) !important;
   border-radius: 18px;
-  padding: 1.5rem;
+  padding: 1.1rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -24,10 +26,20 @@
 }
 
 .group-card-header h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   margin-top: 5px;
   color: var(--text-primary) !important;
   font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .teacher-group-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+  .group-card-header h3 {
+    font-size: 1.05rem;
+  }
 }
 
 .group-card-body {

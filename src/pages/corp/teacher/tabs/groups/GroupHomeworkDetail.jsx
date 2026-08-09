@@ -1,11 +1,63 @@
-import { ArrowLeft, BookOpen, ChevronRight, NotebookPen } from 'lucide-react';
-import { aggregatePackProgress } from '../../utils';
+import { useState } from 'react';
+import { ArrowLeft, BookOpen, ChevronRight, NotebookPen, X } from 'lucide-react';
+import { aggregatePackProgress, resolveHomeworkItemUnit } from '../../utils';
 import './GroupHomeworkDetail.css';
 
 export default function GroupHomeworkDetail({ p }) {
-  const { groupHomeworkList, groupStudentsList, hwId, navigate, selectedGroup, setViewingHomeworkItem } = p;
+  const { customPacks, groupHomeworkList, groupStudentsList, hwId, navigate, selectedGroup, setViewingHomeworkItem, viewingHomeworkItem } = p;
+  const [selectedStudentProgressModal, setSelectedStudentProgressModal] = useState(null);
 
   const hw = groupHomeworkList.find(h => h.id === hwId);
+
+  if (viewingHomeworkItem) {
+    const unit = resolveHomeworkItemUnit(viewingHomeworkItem, customPacks);
+    const words = unit?.words || [];
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
+        {/* Word List Section */}
+        <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+            <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              So'zlar ({words.length})
+            </span>
+          </div>
+
+          {words.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
+              Mavzu topilmadi.
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {words.map(w => (
+                <div
+                  key={w.id}
+                  className="student-progress-row"
+                  style={{
+                    padding: '10px 14px',
+                    borderRadius: '16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    gap: '12px',
+                    width: '100%'
+                  }}
+                >
+                  <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                    <BookOpen size={18} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
+                    <strong style={{ fontSize: '0.92rem', color: 'var(--text-primary)', fontWeight: 700 }}>{w.word}</strong>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{w.translation}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   if (!hw) {
     return (
@@ -27,81 +79,53 @@ export default function GroupHomeworkDetail({ p }) {
   const hwItems = hw.items || [];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', maxWidth: '750px', margin: '0 auto' }}>
-      {/* Top Bento Glass Hero Card */}
-      <div className="teacher-settings-hero-card" style={{ marginBottom: 0 }}>
-        <div style={{ marginBottom: '1rem' }}>
-          <button
-            type="button"
-            className="gib-code-btn"
-            onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
-          >
-            <ArrowLeft size={16} /> Uy vazifalariga qaytish
-          </button>
-        </div>
-
-        <div className="tshc-header" style={{ marginBottom: 0 }}>
-          <div className="tshc-title-block">
-            <div className="tshc-icon-box">
-              <NotebookPen size={22} color="#3b82f6" />
-            </div>
-            <div>
-              <h3 className="tshc-title">{hw.name}</h3>
-              <p className="tshc-sub">
-                {hwItems.length} ta mavzu{hw.assignedAt && <> · Berilgan sana: <strong>{new Date(hw.assignedAt).toLocaleDateString()}</strong></>}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
       {/* Section 1: Assigned Topics */}
-      <div className="teacher-settings-hero-card" style={{ marginBottom: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Topshiriqlar Mavzulari ({hwItems.length})
+      <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+          <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            Mavzular ({hwItems.length})
           </span>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Mavzu bo'yicha batafsil ko'rish uchun bosing</span>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           {hwItems.map(item => (
             <button
               type="button"
               key={`${item.packId}_${item.monthId}_${item.unitId}`}
               className="student-progress-row"
               onClick={() => setViewingHomeworkItem(item)}
-              style={{ cursor: 'pointer', width: '100%', textAlign: 'left', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', padding: '12px 16px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}
+              style={{ cursor: 'pointer', width: '100%', textAlign: 'left', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', padding: '8px 12px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
-                  <BookOpen size={20} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                  <BookOpen size={16} />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', minWidth: 0 }}>
-                  <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}>{item.unitTitle}</strong>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{item.packTitle} · {item.totalWords} ta so'z</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', minWidth: 0 }}>
+                  <strong style={{ color: 'var(--text-primary)', fontSize: '0.86rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.unitTitle}</strong>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.packTitle} · {item.totalWords} so'z</span>
                 </div>
               </div>
-              <ChevronRight size={18} style={{ color: 'var(--text-muted)' }} />
+              <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
             </button>
           ))}
         </div>
       </div>
 
       {/* Section 2: Student Completion Progress */}
-      <div className="teacher-settings-hero-card" style={{ marginBottom: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-          <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            O'quvchilar Bajarilishi ({groupStudentsList.length})
+      <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+          <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            O'quvchilar ({groupStudentsList.length})
           </span>
         </div>
 
         {groupStudentsList.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '2rem 1rem', background: 'var(--bg-tertiary)', borderRadius: '18px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.88rem' }}>
-            Statistika ko'rsatish uchun guruhda o'quvchilar mavjud emas.
+          <div style={{ textAlign: 'center', padding: '1.2rem 1rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
+            O'quvchilar mavjud emas.
           </div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {groupStudentsList.map(student => {
               const itemStats = hwItems.map(item => {
                 const agg = aggregatePackProgress((student.progress || {})[item.packId]);
@@ -112,36 +136,150 @@ export default function GroupHomeworkDetail({ p }) {
               const doneCount = itemStats.filter(s => s.done).length;
               const allDone = doneCount === hwItems.length && hwItems.length > 0;
               return (
-                <div key={student.id} style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: '18px', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <div className="st-avatar">{(student.name || '?').charAt(0).toUpperCase()}</div>
-                      <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem' }}>{student.name}</strong>
+                <div
+                  key={student.id}
+                  className="student-progress-row"
+                  onClick={() => setSelectedStudentProgressModal({ student, itemStats, doneCount, total: hwItems.length })}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '8px 10px',
+                    borderRadius: '14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '10px',
+                    width: '100%'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flex: 1 }}>
+                    <div className="st-avatar" style={{ width: '30px', height: '30px', fontSize: '0.82rem', borderRadius: '10px', flexShrink: 0 }}>
+                      {(student.name || '?').charAt(0).toUpperCase()}
                     </div>
-                    <span
-                      className="badge-active"
-                      style={allDone ? {} : { background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#3b82f6' }}
-                    >
-                      {doneCount}/{hwItems.length} bajarildi
-                    </span>
+                    <strong style={{ color: 'var(--text-primary)', fontSize: '0.85rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {student.name}
+                    </strong>
                   </div>
-                  <div className="unit-chip-row">
-                    {itemStats.map(({ item, masteryPercent, done, started }) => (
-                      <span
-                        key={`${item.packId}_${item.monthId}_${item.unitId}`}
-                        className={`unit-chip unit-chip-${done ? 'done' : started ? 'partial' : 'none'}`}
-                        title={item.packTitle}
-                      >
-                        {item.unitTitle}: {started ? `${masteryPercent}%` : '—'}
-                      </span>
-                    ))}
-                  </div>
+                  <span
+                    className="badge-active"
+                    style={allDone ? { padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 } : { background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#3b82f6', padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 }}
+                  >
+                    {doneCount}/{hwItems.length} bajarildi
+                  </span>
                 </div>
               );
             })}
           </div>
         )}
       </div>
+
+      {/* Student Progress Breakdown Compact Modal */}
+      {selectedStudentProgressModal && (
+        <div
+          className="modal-overlay"
+          onClick={() => setSelectedStudentProgressModal(null)}
+          style={{
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            background: 'rgba(0, 0, 0, 0.65)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000
+          }}
+        >
+          <div
+            className="teacher-settings-hero-card modal-content"
+            onClick={e => e.stopPropagation()}
+            style={{
+              maxWidth: '420px',
+              width: '92%',
+              padding: '1.1rem 1.2rem',
+              borderRadius: '24px',
+              marginBottom: 0,
+              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
+              border: '1px solid var(--border)',
+              background: 'var(--bg-glass-strong)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            {/* Top-Right Soft Blue Radial Glow */}
+            <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '180px', height: '180px', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+            {/* Header */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '0.85rem', position: 'relative', zIndex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                <div className="st-avatar" style={{ width: '34px', height: '34px', fontSize: '0.88rem', borderRadius: '10px', flexShrink: 0 }}>
+                  {(selectedStudentProgressModal.student.name || '?').charAt(0).toUpperCase()}
+                </div>
+                <div style={{ minWidth: 0 }}>
+                  <h3 style={{ margin: 0, fontSize: '0.96rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    {selectedStudentProgressModal.student.name}
+                  </h3>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    Natija: {selectedStudentProgressModal.doneCount}/{selectedStudentProgressModal.total} bajarildi
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedStudentProgressModal(null)}
+                style={{
+                  background: 'var(--bg-tertiary)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '10px',
+                  color: 'var(--text-muted)',
+                  width: '30px',
+                  height: '30px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  flexShrink: 0
+                }}
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Topic breakdown list */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', position: 'relative', zIndex: 1 }}>
+              {selectedStudentProgressModal.itemStats.map(({ item, masteryPercent, done, started }) => (
+                <div
+                  key={`${item.packId}_${item.monthId}_${item.unitId}`}
+                  style={{
+                    background: 'var(--bg-tertiary)',
+                    border: '1px solid var(--border)',
+                    padding: '8px 12px',
+                    borderRadius: '14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '10px'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flex: 1 }}>
+                    <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                      <BookOpen size={14} />
+                    </div>
+                    <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {item.unitTitle}
+                    </span>
+                  </div>
+
+                  <span
+                    className={`unit-chip unit-chip-${done ? 'done' : started ? 'partial' : 'none'}`}
+                    style={{ padding: '3px 9px', fontSize: '0.74rem', borderRadius: '8px', flexShrink: 0, fontWeight: 700 }}
+                  >
+                    {started ? `${masteryPercent}%` : '—'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

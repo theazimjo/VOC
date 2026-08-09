@@ -97,16 +97,18 @@
    ENHANCED GROUP CARD & INVITE BANNER (UX UPGRADE)
    ═══════════════════════════════════════════════════════ */
 .teacher-group-card-enhanced {
-  background: var(--bg-secondary);
+  background: var(--bg-glass-strong);
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 1.25rem;
+  padding: 1.1rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 0.9rem;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   position: relative;
 }
 

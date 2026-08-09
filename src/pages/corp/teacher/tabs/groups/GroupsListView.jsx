@@ -10,11 +10,11 @@ export default function GroupsListView({ p }) {
 
   return (
         <>
-          <div className="courses-top-bar" style={{ marginBottom: '1.25rem' }}>
+          <div className="courses-top-bar" style={{ marginBottom: '1rem' }}>
             <div className="courses-title-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
               <div className="courses-title-area">
-                <h1>Guruhlarim</h1>
-                <p>{activeGroups.length} ta faol guruh · {totalStudents} ta o'quvchi</p>
+                <h1 style={{ fontSize: '1.4rem', margin: 0 }}>Guruhlarim</h1>
+                <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem' }}>{activeGroups.length} ta faol guruh · {totalStudents} ta o'quvchi</p>
               </div>
 
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -25,14 +25,6 @@ export default function GroupsListView({ p }) {
                   title="Guruhni qidirish"
                 >
                   <Search size={18} />
-                </button>
-                <button
-                  type="button"
-                  className="btn-add-course-primary"
-                  onClick={() => setShowCreateModal(true)}
-                  style={{ padding: '8px 14px', fontSize: '0.88rem' }}
-                >
-                  <Plus size={16} /> Yangi Guruh
                 </button>
               </div>
             </div>
@@ -75,11 +67,11 @@ export default function GroupsListView({ p }) {
           {loading ? (
             <div className="loading-spinner">Guruhlar yuklanmoqda...</div>
           ) : filteredActiveGroups.length === 0 ? (
-            <div className="empty-state">
-              <Users size={48} />
-              <p>{searchTerm ? `"${searchTerm}" bo'yicha guruh topilmadi.` : 'Hozircha faol guruhlaringiz yo\'q.'}</p>
+            <div className="empty-state" style={{ padding: '2rem 1rem' }}>
+              <Users size={40} style={{ opacity: 0.5 }} />
+              <p style={{ fontSize: '0.88rem' }}>{searchTerm ? `"${searchTerm}" bo'yicha guruh topilmadi.` : 'Hozircha faol guruhlaringiz yo\'q.'}</p>
               {searchTerm ? (
-                <button className="btn-secondary" onClick={() => setSearchTerm('')} style={{ marginTop: '10px' }}>
+                <button className="btn-secondary" onClick={() => setSearchTerm('')} style={{ marginTop: '8px' }}>
                   Qidiruvni tozalash
                 </button>
               ) : (
@@ -89,73 +81,66 @@ export default function GroupsListView({ p }) {
               )}
             </div>
           ) : (
-            <div className="teacher-groups-grid">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {filteredActiveGroups.map((group) => {
                 const totalPacks = (group.assignedPacks || []).length + (group.requiredPacks || []).length + (group.additionalPacks || []).length;
                 return (
                   <div
                     key={group.id}
-                    className="teacher-group-card-enhanced clickable"
                     onClick={() => {
                       setSelectedGroupId(group.id);
                       navigate(`/corp/teacher/group/${group.id}`);
                     }}
+                    style={{
+                      padding: '10px 14px',
+                      borderRadius: '16px',
+                      background: 'var(--bg-glass-strong)',
+                      border: '1px solid var(--border)',
+                      backdropFilter: 'blur(16px)',
+                      WebkitBackdropFilter: 'blur(16px)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      gap: '12px',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
                   >
-                    <div className="tgc-header">
-                      <div className="tgc-badge-wrap">
-                        <div className="tgc-icon-badge">
-                          <Users size={20} color="#3b82f6" />
-                        </div>
-                        <div className="tgc-title-block">
-                          <h3 className="tgc-title">{group.name}</h3>
-                          <span className="group-level-badge">{group.level || 'General'}</span>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        className="mgc-more-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleOpenGroupSettings(group);
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
+                      <div
+                        style={{
+                          width: '36px',
+                          height: '36px',
+                          borderRadius: '11px',
+                          background: 'rgba(59, 130, 246, 0.14)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          flexShrink: 0,
+                          color: '#3b82f6'
                         }}
-                        title="Sozlamalar"
                       >
-                        <MoreVertical size={18} />
-                      </button>
-                    </div>
+                        <Users size={18} />
+                      </div>
 
-                    <div className="tgc-body">
-                      <div className="tgc-meta-row">
-                        <div className="tgc-meta-item">
-                          <User size={14} color="var(--text-muted)" />
-                          <span><strong>{group.studentsCount || 0}</strong> o'quvchi</span>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', minWidth: 0, flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
+                          <strong style={{ color: 'var(--text-primary)', fontSize: '0.9rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {group.name}
+                          </strong>
+                          {group.level && (
+                            <span className="group-level-badge" style={{ fontSize: '0.66rem', padding: '1px 6px', flexShrink: 0 }}>
+                              {group.level}
+                            </span>
+                          )}
                         </div>
-                        <div className="tgc-meta-item">
-                          <BookOpen size={14} color="var(--text-muted)" />
-                          <span><strong>{totalPacks}</strong> pack</span>
-                        </div>
+                        <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+                          {group.studentsCount || 0} o'quvchi · {totalPacks} pack
+                        </span>
                       </div>
                     </div>
 
-                    <div className="tgc-footer">
-                      <button
-                        type="button"
-                        className="tgc-code-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          copyCode(group.code);
-                        }}
-                        title="Taklif kodini nusxalash"
-                      >
-                        {copiedCode === group.code ? <Check size={14} color="var(--success)" /> : <Copy size={14} />}
-                        <span>Kod: <strong>{group.code}</strong></span>
-                      </button>
-
-                      <div className="tgc-enter-link">
-                        <span>Guruhga kirish</span>
-                        <ChevronRight size={16} />
-                      </div>
-                    </div>
+                    <ChevronRight size={18} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
                   </div>
                 );
               })}
@@ -165,12 +150,11 @@ export default function GroupsListView({ p }) {
           {/* Floating Action Button (Yangi Guruh) */}
           <button
             type="button"
-            className="mobile-fab-btn"
+            className="fab-add-pack-btn fab-icon-only"
             onClick={() => setShowCreateModal(true)}
             title="Yangi Guruh Yaratish"
           >
-            <Plus size={20} strokeWidth={2.8} />
-            <span>Yangi Guruh</span>
+            <Plus size={26} />
           </button>
         </>
   );

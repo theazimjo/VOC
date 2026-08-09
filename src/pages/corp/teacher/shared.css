@@ -3,6 +3,71 @@
    states) reused by 2+ pages, plus some legacy classes kept for safety that
    no current page matches by class name. */
 
+/* ── Bento Ambient Hero Group Settings Modal ── */
+.group-settings-bento-modal {
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.4rem 1.5rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: bentoModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 480px) {
+  .group-settings-bento-modal {
+    padding: 1.1rem 1.2rem;
+    border-radius: 20px;
+    max-width: 100%;
+  }
+}
+
+.group-settings-bento-modal::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Modal Glass Override (teacher-scoped) ────
+   .modal-content/.modal-overlay are the app-wide CorpLayout.css primitives
+   (opaque, no blur). Scoping the glass treatment to .teacher-dashboard-container
+   keeps every teacher modal visually consistent with the Group Detail page
+   without touching the shared component used by other corp roles. */
+.teacher-dashboard-container .modal-overlay {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.teacher-dashboard-container .modal-content {
+  background: var(--bg-glass-strong) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 22px !important;
+  padding: 1.4rem 1.5rem !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}
+
+@media (max-width: 480px) {
+  .teacher-dashboard-container .modal-content {
+    padding: 1.1rem 1.2rem !important;
+    border-radius: 18px !important;
+  }
+}
+
 /* ── Title Area ─────────────────────────────── */
 .teacher-dashboard-container .courses-title-area h1,
 .teacher-dashboard-container h1 {
@@ -29,21 +94,22 @@
 
 /* ── iOS Group Top Header Bar ─────────────────── */
 .ios-group-top-bar {
+  position: sticky;
+  top: 8px;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 12px 16px;
-  margin-top: 0.5rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  padding: 8px 12px;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  overflow: hidden;
 }
 
 .ios-group-top-bar::before {
@@ -154,8 +220,8 @@
 }
 
 .ios-group-title {
-  font-size: 1.18rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 700;
   color: var(--text-primary);
   margin: 0;
   white-space: nowrap;
@@ -1191,12 +1257,23 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  background: var(--bg-secondary);
+  gap: 1.25rem;
+  background: var(--bg-glass-strong);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+@media (max-width: 640px) {
+  .teacher-header {
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    gap: 1rem;
+  }
 }
 
 .teacher-badge {
@@ -1346,16 +1423,6 @@
   margin-top: 1rem;
 }
 
-.student-progress-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--bg-secondary) !important;
-  border: 1px solid var(--border) !important;
-  padding: 12px 16px;
-  border-radius: 12px;
-}
-
 .st-info {
   display: flex;
   align-items: center;
@@ -1385,11 +1452,13 @@
 
 /* ── Row action dropdown (student rows, pack cards) ─────────────────── */
 .teacher-action-dropdown {
-  background: var(--bg-secondary);
+  background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 6px;
   box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -1589,18 +1658,45 @@
   border-radius: 12px;
 }
 
-/* ── Pack library cards — flat by default in the shared base rule
-   (CenterAdminDashboard.css), scoped-enhanced here with elevation so
-   browsing feels consistent with the rest of the teacher dashboard. */
+/* ── Pack Library Grid + Cards ──────────────── */
+.teacher-dashboard-container .packs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
 .teacher-dashboard-container .custom-pack-card {
-  box-shadow: var(--shadow-sm);
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
 }
 
 .teacher-dashboard-container .custom-pack-card:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
   border-color: rgba(59, 130, 246, 0.35);
+}
+
+.teacher-dashboard-container .custom-pack-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 6px 0;
+  color: var(--text-primary) !important;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .teacher-dashboard-container .custom-pack-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
 }
 
 .teacher-dashboard-container .search-icon {
@@ -1615,6 +1711,32 @@
 /* ── Empty State ────────────────────────────── */
 .teacher-dashboard-container .empty-state {
   color: var(--text-secondary) !important;
+}
+
+/* ── Loading Spinner ─────────────────────────── */
+.teacher-dashboard-container .loading-spinner,
+.loading-spinner {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* ── Status Pill (groups table, etc.) ────────── */
+.teacher-status-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.teacher-status-pill.active {
+  background: rgba(52, 199, 89, 0.14);
+  color: #34c759;
 }
 
 /* ── Primary Action Button ──────────────────── */

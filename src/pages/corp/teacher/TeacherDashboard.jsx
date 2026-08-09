@@ -297,23 +297,15 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  const handleDeleteGroup = (group) => {
-    askConfirm({
-      title: "Guruhni o'chirish",
-      message: `"${group.name}" guruhini butunlay o'chirmoqchimisiz? Ushbu amalni ortga qaytarib bo'lmaydi!`,
-      confirmLabel: "O'chirish",
-      danger: true,
-      onConfirm: async () => {
-        try {
-          await deleteGroup(centerId, group.id);
-          setGroups(prev => prev.filter(g => g.id !== group.id));
-          setSelectedGroupId(null);
-          navigate('/corp/teacher');
-        } catch (err) {
-          alert("Guruhni o'chirishda xatolik: " + err.message);
-        }
-      },
-    });
+  const handleDeleteGroup = async (group) => {
+    try {
+      await deleteGroup(centerId, group.id);
+      setGroups(prev => prev.filter(g => g.id !== group.id));
+      setSelectedGroupId(null);
+      navigate('/corp/teacher');
+    } catch (err) {
+      alert("Guruhni o'chirishda xatolik: " + err.message);
+    }
   };
 
   const copyCode = (code) => {

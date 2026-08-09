@@ -23,11 +23,6 @@ export default function StudentActionMenu({ p }) {
                 right: `${studentMenuPos.right}px`,
                 zIndex: 99999,
                 minWidth: '190px',
-                background: 'var(--bg-secondary)',
-                border: '1px solid var(--border)',
-                borderRadius: '16px',
-                padding: '6px',
-                boxShadow: '0 12px 36px rgba(0, 0, 0, 0.4)'
               }}
             >
               <button

@@ -5,41 +5,67 @@ import './GroupDetailView.css';
 
 export default function GroupDetailView({ p }) {
   const {
-    copiedCode, copyCode, groupHomeworkList, handleOpenGroupSettings,
-    hwId, navigate, selectedGroup, selectedGroupStats, setSelectedGroupId, subTab,
+    assigningGroup, copiedCode, copyCode, groupHomeworkList, handleAddHomework, handleOpenGroupSettings, homeworkSelection,
+    hwId, navigate, savingHomework, selectedGroup, selectedGroupStats, setAssigningGroup, setSelectedGroupId, setShowHomeworkEditor, showHomeworkEditor, setViewingHomeworkItem, subTab, viewingHomeworkItem,
   } = p;
 
+  const currentHw = hwId ? groupHomeworkList.find(h => h.id === hwId) : null;
+
   return (
-    <div className="tpv-container">
+    <div className="group-detail-container">
             <div className="ios-group-top-bar">
               <button
                 type="button"
                 className="ios-back-btn"
                 onClick={() => {
-                  if (subTab) {
+                  if (viewingHomeworkItem) {
+                    setViewingHomeworkItem(null);
+                  } else if (showHomeworkEditor) {
+                    setShowHomeworkEditor(false);
+                  } else if (assigningGroup) {
+                    setAssigningGroup(null);
+                  } else if (hwId) {
+                    navigate(`/corp/teacher/group/${selectedGroup.id}/homework`);
+                  } else if (subTab) {
                     navigate(`/corp/teacher/group/${selectedGroup.id}`);
                   } else {
                     setSelectedGroupId(null);
                     navigate('/corp/teacher');
                   }
                 }}
-                title={subTab ? "Bo'limlarga qaytish" : "Guruhlarga qaytish"}
+                title={viewingHomeworkItem ? "Mavzularga qaytish" : showHomeworkEditor ? "Vazifalarga qaytish" : assigningGroup ? "Packlarga qaytish" : hwId ? "Uy vazifalariga qaytish" : subTab ? "Bo'limlarga qaytish" : "Guruhlarga qaytish"}
               >
                 <ArrowLeft size={18} />
               </button>
 
               <div className="ios-title-group">
                 <h2 className="ios-group-title">
-                  {subTab === 'students' && "O'quvchilar"}
-                  {subTab === 'words' && "Packlar"}
-                  {subTab === 'homework' && "Uy vazifasi"}
-                  {subTab === 'stats' && "Statistika"}
-                  {subTab === 'settings' && "Guruh Sozlamalari"}
-                  {!subTab && selectedGroup.name}
+                  {viewingHomeworkItem ? viewingHomeworkItem.unitTitle : showHomeworkEditor ? "Yangi uy vazifasi" : assigningGroup ? "Pack biriktirish" : hwId ? (currentHw?.name || "Uy vazifasi") : subTab === 'students' ? "O'quvchilar" : subTab === 'words' ? "Packlar" : subTab === 'homework' ? "Uy vazifasi" : subTab === 'stats' ? "Statistika" : subTab === 'settings' ? "Guruh Sozlamalari" : selectedGroup.name}
                 </h2>
               </div>
 
-              {!subTab && (
+              {showHomeworkEditor ? (
+                <button
+                  type="button"
+                  onClick={handleAddHomework}
+                  disabled={savingHomework || homeworkSelection?.size === 0}
+                  style={{
+                    padding: '6px 14px',
+                    fontSize: '0.82rem',
+                    borderRadius: '12px',
+                    background: (savingHomework || homeworkSelection?.size === 0) ? 'var(--bg-tertiary)' : '#3b82f6',
+                    color: (savingHomework || homeworkSelection?.size === 0) ? 'var(--text-muted)' : '#ffffff',
+                    border: (savingHomework || homeworkSelection?.size === 0) ? '1px solid var(--border)' : 'none',
+                    fontWeight: 700,
+                    cursor: (savingHomework || homeworkSelection?.size === 0) ? 'not-allowed' : 'pointer',
+                    boxShadow: (savingHomework || homeworkSelection?.size === 0) ? 'none' : '0 4px 14px rgba(59, 130, 246, 0.4)',
+                    transition: 'all 0.18s ease',
+                    flexShrink: 0
+                  }}
+                >
+                  {savingHomework ? 'Saqlanmoqda...' : `Saqlash (${homeworkSelection?.size || 0})`}
+                </button>
+              ) : !subTab && !hwId && !viewingHomeworkItem && (
                 <button
                   type="button"
                   className="ios-action-btn"
