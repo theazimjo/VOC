@@ -1,18 +1,4 @@
-.announcements-layout {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 1.5rem;
-  align-items: start;
-}
-
-@media (max-width: 900px) {
-  .announcements-layout {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-}
-
-.announcement-form-card, .announcement-list-card {
+.announcement-list-card {
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
   border-radius: 20px;
@@ -21,31 +7,28 @@
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
 }
 
-.announcement-form-card h2 {
-  font-size: 1.05rem;
-  margin-bottom: 1rem;
-  color: var(--pg-text);
-}
-
-.announcement-form-card .settings-form {
+/* Create/edit form now lives inside the shared .modal-content (opened
+   from the FAB), so these scope to that instead of the old always-on
+   side-by-side form card. */
+.modal-content .settings-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.announcement-form-card .form-row-2 {
+.modal-content .form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
 @media (max-width: 480px) {
-  .announcement-form-card .form-row-2 {
+  .modal-content .form-row-2 {
     grid-template-columns: 1fr;
   }
 }
 
-.announcement-form-card textarea {
+.modal-content textarea {
   padding: 12px;
   border-radius: 10px;
   background: var(--pg-surface);
@@ -53,6 +36,7 @@
   color: var(--pg-text);
   outline: none;
   font-family: inherit;
+  font-size: 0.92rem;
   resize: vertical;
 }
 
@@ -165,12 +149,12 @@
 
 /* ── Mobile: compact + easier to use. Desktop above stays large. ── */
 @media (max-width: 768px) {
-  .announcement-form-card, .announcement-list-card {
+  .announcement-list-card {
     padding: 1rem;
     border-radius: 16px;
   }
 
-  .announcement-form-card h2, .announcement-list-head h2 {
+  .announcement-list-head h2 {
     font-size: 0.92rem;
   }
 
@@ -178,11 +162,11 @@
     margin-bottom: 0.75rem;
   }
 
-  .announcement-form-card .settings-form {
+  .modal-content .settings-form {
     gap: 0.75rem;
   }
 
-  .announcement-form-card textarea {
+  .modal-content textarea {
     padding: 10px 11px;
     font-size: 0.88rem;
   }

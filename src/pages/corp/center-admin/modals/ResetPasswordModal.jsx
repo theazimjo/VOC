@@ -11,7 +11,7 @@ export default function ResetPasswordModal({ p }) {
         <div className="modal-overlay" onClick={() => setResetPasswordTeacher(null)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
             <h2><KeyRound size={20} /> Parolni Yangilash</h2>
-            <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginBottom: '1.25rem' }}>
+            <p style={{ color: 'var(--pg-text-secondary)', fontSize: '0.88rem', marginBottom: '1.25rem' }}>
               <strong>{resetPasswordTeacher.name}</strong> ({resetPasswordTeacher.phone || resetPasswordTeacher.email}) o'qituvchisi uchun yangi parol kiriting:
             </p>
 

@@ -1,14 +1,16 @@
 .new-course-modal {
-  background: #181824;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  color: #ffffff;
+  color: var(--pg-text);
   font-family: inherit;
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
   animation: modalPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -28,20 +30,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--pg-hairline);
 }
 
 .course-modal-header h2 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--pg-text);
   margin: 0;
 }
 
 .btn-modal-close {
   background: transparent;
   border: none;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   cursor: pointer;
   padding: 6px;
   border-radius: 8px;
@@ -52,8 +54,8 @@
 }
 
 .btn-modal-close:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text);
 }
 
 .course-modal-body {
@@ -72,7 +74,7 @@
 .modal-label {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -81,38 +83,37 @@
   width: 100%;
   padding: 12px 16px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.95rem;
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
-  color-scheme: dark;
 }
 
 .modal-input option,
 select option {
-  background-color: #181824;
-  color: #ffffff;
+  background-color: var(--pg-bg);
+  color: var(--pg-text);
 }
 
 .modal-input::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .modal-input:focus {
   border-color: #0A84FF;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--pg-surface-hover);
 }
 
 .modal-textarea {
   width: 100%;
   padding: 12px 16px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.95rem;
   outline: none;
   font-family: inherit;
@@ -122,11 +123,11 @@ select option {
 }
 
 .modal-textarea::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .modal-textarea:focus {
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--pg-surface-hover);
   border-color: #0A84FF;
 }
 
@@ -141,9 +142,9 @@ select option {
   flex: 1;
   padding: 12px 20px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--pg-surface);
   border: none;
-  color: #e2e8f0;
+  color: var(--pg-text-secondary);
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
@@ -151,8 +152,8 @@ select option {
 }
 
 .btn-modal-cancel:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text);
 }
 
 .btn-modal-save {
@@ -181,4 +182,23 @@ select option {
 .btn-modal-save:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .new-course-modal {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .course-modal-header {
+    padding: 1rem 1.1rem;
+  }
+
+  .course-modal-body {
+    padding: 1.1rem;
+    gap: 1rem;
+  }
+
+  .course-modal-footer {
+    flex-direction: column-reverse;
+  }
 }

@@ -215,8 +215,8 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #6366f1, #a855f7);
-  color: #fff;
+  background: #6366f1;
+  color: #ffffff;
 }
 
 .btn-primary:disabled {

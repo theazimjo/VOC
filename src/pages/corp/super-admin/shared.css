@@ -453,19 +453,11 @@
 }
 
 @media (max-width: 768px) {
-  .modal-overlay {
-    align-items: flex-end;
-    padding: 0;
-  }
-
+  /* Stays a normal centered floating window on mobile too, just sized
+     to fit — not a bottom sheet. */
   .modal-content {
-    max-width: 100%;
-    width: 100%;
-    border-radius: 20px 20px 0 0;
-    padding: 1.25rem 1.1rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
-    /* Bottom sheet on mobile instead of a centered floating card — one
-       thumb-reachable tap to dismiss (tap the dimmed area above it),
-       and no awkward margins around a small centered box on a phone. */
+    max-width: calc(100vw - 2rem);
+    padding: 1.25rem;
   }
 
   .modal-content h2 {
@@ -944,5 +936,55 @@
 @media (max-width: 768px) {
   .super-admin-container .admin-settings-card {
     padding: 1rem 1.1rem !important;
+  }
+}
+
+/* ── Floating Action Button — same recipe as the teacher module's
+   .fab-add-pack-btn, defined locally since that file isn't loaded on
+   Super Admin routes. Sits above the mobile bottom-nav dock. ── */
+.fab-add-pack-btn {
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  z-index: 999;
+  background: #3b82f6;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab-add-pack-btn.fab-icon-only {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.fab-add-pack-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.55);
+}
+
+.fab-add-pack-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .fab-add-pack-btn {
+    bottom: 76px;
   }
 }

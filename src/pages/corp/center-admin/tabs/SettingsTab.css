@@ -3,20 +3,21 @@
   flex-direction: column;
   gap: 1.25rem;
   max-width: 600px;
+  margin: 0 auto;
 }
 
 .settings-form label {
   font-size: 0.88rem;
-  color: #cbd5e1;
+  color: var(--pg-text-secondary);
   font-weight: 500;
 }
 
 .settings-form input, .settings-form textarea {
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.95rem;
   font-family: inherit;
   resize: vertical;
@@ -45,4 +46,11 @@
 
 .btn-save-settings:hover {
   background: #0070df;
+}
+
+@media (max-width: 768px) {
+  .btn-save-settings {
+    width: 100%;
+    justify-content: center;
+  }
 }

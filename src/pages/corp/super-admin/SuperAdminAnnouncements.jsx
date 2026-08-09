@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Megaphone, Pencil, Trash2, Power, RefreshCw, Info, TriangleAlert, OctagonAlert } from 'lucide-react';
+import { Megaphone, Pencil, Trash2, Power, RefreshCw, Info, TriangleAlert, OctagonAlert, Plus } from 'lucide-react';
 import {
   getAllAnnouncements, createAnnouncement, updateAnnouncement,
   toggleAnnouncementActive, deleteAnnouncement
@@ -15,6 +15,7 @@ export default function SuperAdminAnnouncements() {
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState(EMPTY_FORM);
   const [editingId, setEditingId] = useState(null);
+  const [showFormModal, setShowFormModal] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [busyId, setBusyId] = useState(null);
 
@@ -36,11 +37,19 @@ export default function SuperAdminAnnouncements() {
   const resetForm = () => {
     setForm(EMPTY_FORM);
     setEditingId(null);
+    setShowFormModal(false);
+  };
+
+  const openCreate = () => {
+    setForm(EMPTY_FORM);
+    setEditingId(null);
+    setShowFormModal(true);
   };
 
   const startEdit = (a) => {
     setForm({ title: a.title, message: a.message, type: a.type, target: a.target });
     setEditingId(a.id);
+    setShowFormModal(true);
   };
 
   const handleSubmit = async (e) => {
@@ -96,96 +105,108 @@ export default function SuperAdminAnnouncements() {
         <p>Markaz adminlari va/yoki o'qituvchilarga ko'rinadigan e'lonlarni boshqarish.</p>
       </header>
 
-      <div className="announcements-layout">
-        <div className="announcement-form-card">
-          <h2>{editingId ? "E'lonni Tahrirlash" : "Yangi E'lon"}</h2>
-          <form onSubmit={handleSubmit} className="settings-form">
-            <div className="form-group">
-              <label>Sarlavha</label>
-              <input type="text" required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
-            </div>
-            <div className="form-group">
-              <label>Xabar</label>
-              <textarea rows={4} required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
-            </div>
-            <div className="form-row-2">
-              <div className="form-group">
-                <label>Turi</label>
-                <select className="pack-sort-select" value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}>
-                  <option value="info">Info</option>
-                  <option value="warning">Ogohlantirish</option>
-                  <option value="critical">Kritik</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>Kimga</label>
-                <select className="pack-sort-select" value={form.target} onChange={e => setForm({ ...form, target: e.target.value })}>
-                  <option value="all">Barchaga</option>
-                  <option value="center_admin">Markaz Adminlariga</option>
-                  <option value="teacher">O'qituvchilarga</option>
-                </select>
-              </div>
-            </div>
-            <div className="modal-actions" style={{ marginTop: 0 }}>
-              {editingId && <button type="button" className="btn-secondary" onClick={resetForm}>Bekor qilish</button>}
-              <button type="submit" className="btn-primary" disabled={submitting}>
-                {submitting ? 'Saqlanmoqda...' : (editingId ? 'Saqlash' : "E'lon Qilish")}
-              </button>
-            </div>
-          </form>
+      <div className="announcement-list-card">
+        <div className="announcement-list-head">
+          <h2>Barcha E'lonlar ({announcements.length})</h2>
+          <button className="c-icon-btn" title="Yangilash" onClick={loadAnnouncements}><RefreshCw size={15} /></button>
         </div>
 
-        <div className="announcement-list-card">
-          <div className="announcement-list-head">
-            <h2>Barcha E'lonlar ({announcements.length})</h2>
-            <button className="c-icon-btn" title="Yangilash" onClick={loadAnnouncements}><RefreshCw size={15} /></button>
+        {loading ? (
+          <div className="loading-spinner">Yuklanmoqda...</div>
+        ) : announcements.length === 0 ? (
+          <div className="empty-state">
+            <Megaphone size={40} />
+            <p>Hozircha e'lonlar yo'q.</p>
           </div>
-
-          {loading ? (
-            <div className="loading-spinner">Yuklanmoqda...</div>
-          ) : announcements.length === 0 ? (
-            <div className="empty-state">
-              <Megaphone size={40} />
-              <p>Hozircha e'lonlar yo'q.</p>
-            </div>
-          ) : (
-            <div className="announcement-list">
-              {announcements.map((a) => {
-                const Icon = TYPE_ICON[a.type] || Info;
-                return (
-                  <div key={a.id} className={`announcement-row type-${a.type} ${!a.isActive ? 'inactive' : ''}`}>
-                    <div className="announcement-row-icon"><Icon size={18} /></div>
-                    <div className="announcement-row-body">
-                      <div className="announcement-row-head">
-                        <h3>{a.title}</h3>
-                        <span className="announcement-target-tag">
-                          {a.target === 'all' ? 'Barchaga' : a.target === 'center_admin' ? 'Adminlarga' : "O'qituvchilarga"}
-                        </span>
-                      </div>
-                      <p>{a.message}</p>
-                      <span className="announcement-date">
-                        {a.createdAt ? new Date(a.createdAt).toLocaleDateString('uz-UZ') : ''}
-                        {!a.isActive && ' · nofaol'}
+        ) : (
+          <div className="announcement-list">
+            {announcements.map((a) => {
+              const Icon = TYPE_ICON[a.type] || Info;
+              return (
+                <div key={a.id} className={`announcement-row type-${a.type} ${!a.isActive ? 'inactive' : ''}`}>
+                  <div className="announcement-row-icon"><Icon size={18} /></div>
+                  <div className="announcement-row-body">
+                    <div className="announcement-row-head">
+                      <h3>{a.title}</h3>
+                      <span className="announcement-target-tag">
+                        {a.target === 'all' ? 'Barchaga' : a.target === 'center_admin' ? 'Adminlarga' : "O'qituvchilarga"}
                       </span>
                     </div>
-                    <div className="announcement-row-actions">
-                      <button className="c-icon-btn" title={a.isActive ? 'Nofaollashtirish' : 'Faollashtirish'} disabled={busyId === a.id} onClick={() => handleToggle(a)}>
-                        <Power size={15} />
-                      </button>
-                      <button className="c-icon-btn" title="Tahrirlash" onClick={() => startEdit(a)}>
-                        <Pencil size={15} />
-                      </button>
-                      <button className="c-icon-btn c-icon-btn-danger" title="O'chirish" disabled={busyId === a.id} onClick={() => handleDelete(a)}>
-                        <Trash2 size={15} />
-                      </button>
-                    </div>
+                    <p>{a.message}</p>
+                    <span className="announcement-date">
+                      {a.createdAt ? new Date(a.createdAt).toLocaleDateString('uz-UZ') : ''}
+                      {!a.isActive && ' · nofaol'}
+                    </span>
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+                  <div className="announcement-row-actions">
+                    <button className="c-icon-btn" title={a.isActive ? 'Nofaollashtirish' : 'Faollashtirish'} disabled={busyId === a.id} onClick={() => handleToggle(a)}>
+                      <Power size={15} />
+                    </button>
+                    <button className="c-icon-btn" title="Tahrirlash" onClick={() => startEdit(a)}>
+                      <Pencil size={15} />
+                    </button>
+                    <button className="c-icon-btn c-icon-btn-danger" title="O'chirish" disabled={busyId === a.id} onClick={() => handleDelete(a)}>
+                      <Trash2 size={15} />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
+
+      {/* Floating Action Button (New Announcement) */}
+      <button
+        type="button"
+        className="fab-add-pack-btn fab-icon-only"
+        onClick={openCreate}
+        title="Yangi e'lon"
+      >
+        <Plus size={26} />
+      </button>
+
+      {showFormModal && (
+        <div className="modal-overlay" onClick={resetForm}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h2>{editingId ? "E'lonni Tahrirlash" : "Yangi E'lon"}</h2>
+            <form onSubmit={handleSubmit} className="settings-form">
+              <div className="form-group">
+                <label>Sarlavha</label>
+                <input type="text" required autoFocus value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} />
+              </div>
+              <div className="form-group">
+                <label>Xabar</label>
+                <textarea rows={4} required value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
+              </div>
+              <div className="form-row-2">
+                <div className="form-group">
+                  <label>Turi</label>
+                  <select className="pack-sort-select" value={form.type} onChange={e => setForm({ ...form, type: e.target.value })}>
+                    <option value="info">Info</option>
+                    <option value="warning">Ogohlantirish</option>
+                    <option value="critical">Kritik</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Kimga</label>
+                  <select className="pack-sort-select" value={form.target} onChange={e => setForm({ ...form, target: e.target.value })}>
+                    <option value="all">Barchaga</option>
+                    <option value="center_admin">Markaz Adminlariga</option>
+                    <option value="teacher">O'qituvchilarga</option>
+                  </select>
+                </div>
+              </div>
+              <div className="modal-actions">
+                <button type="button" className="btn-secondary" onClick={resetForm}>Bekor qilish</button>
+                <button type="submit" className="btn-primary" disabled={submitting}>
+                  {submitting ? 'Saqlanmoqda...' : (editingId ? 'Saqlash' : "E'lon Qilish")}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

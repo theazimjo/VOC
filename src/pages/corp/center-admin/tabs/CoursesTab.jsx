@@ -43,12 +43,6 @@ export default function CoursesTab({ p }) {
               >
                 <Sparkles size={16} /> {seedingCourse ? 'Yuklanmoqda...' : 'Tayyor Beginner Kurs'}
               </button>
-              <button
-                className="btn-add-course-primary"
-                onClick={() => { setEditingPack(null); setShowPackEditor(true); }}
-              >
-                <Plus size={16} /> Yangi Kurs
-              </button>
             </div>
           </div>
 
@@ -207,16 +201,28 @@ export default function CoursesTab({ p }) {
           </div>
 
           {filteredCourses.length === 0 && (
-            <div className="empty-state" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px dashed rgba(255, 255, 255, 0.1)', borderRadius: '16px', padding: '3rem 1rem' }}>
+            <div className="empty-state" style={{ background: 'var(--pg-surface)', border: '1px dashed var(--pg-hairline)', borderRadius: '16px', padding: '3rem 1rem' }}>
               <div className="add-new-icon-wrap" style={{ width: '56px', height: '56px', borderRadius: '50%', marginBottom: '0.5rem' }}>
                 <Search className="text-gray-500" size={24} />
               </div>
-              <p style={{ color: '#fff', fontWeight: 600, fontSize: '1rem', margin: 0 }}>
+              <p style={{ color: 'var(--pg-text)', fontWeight: 600, fontSize: '1rem', margin: 0 }}>
                 {courseSearchTerm ? `"${courseSearchTerm}" bo'yicha kurs topilmadi` : "Hozircha kurslar yo'q"}
               </p>
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem', margin: 0 }}>Yangi kurs yaratish uchun tugmani bosing</p>
+              <p style={{ color: 'var(--pg-text-secondary)', fontSize: '0.85rem', margin: 0 }}>Yangi kurs yaratish uchun tugmani bosing</p>
             </div>
           )}
+
+          {/* Floating Action Button (New Course) — same always-visible FAB
+              pattern as the teacher module's Courses tab, replacing the
+              old inline "Yangi Kurs" button. */}
+          <button
+            type="button"
+            className="fab-add-pack-btn fab-icon-only"
+            onClick={() => { setEditingPack(null); setShowPackEditor(true); }}
+            title="Yangi Kurs"
+          >
+            <Plus size={26} />
+          </button>
 
           {/* Create/Edit modal */}
           {showPackEditor && (

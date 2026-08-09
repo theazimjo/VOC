@@ -25,12 +25,12 @@
 .teachers-title-area h1 {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--pg-text);
   margin-bottom: 2px;
 }
 
 .teachers-title-area p {
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   font-size: 0.88rem;
 }
 
@@ -40,31 +40,18 @@
   gap: 10px;
 }
 
-.btn-add-teacher-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #0A84FF;
-  color: #ffffff;
-  padding: 8px 18px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.88rem;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.btn-add-teacher-primary:hover {
-  background: #0070df;
-}
-
 /* Data Table Container */
 .teachers-table-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  overflow-x: auto;
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
+  border-radius: 18px;
+  overflow: hidden;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 1px 0 var(--pg-inset-highlight) inset,
+    0 0 90px rgba(124, 108, 255, 0.1);
 }
 
 .teachers-table {
@@ -79,15 +66,15 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #64748b;
+  color: var(--pg-text-muted);
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--pg-hairline);
 }
 
 .teachers-table td {
   padding: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  color: #cbd5e1;
+  border-bottom: 1px solid var(--pg-surface);
+  color: var(--pg-text-secondary);
   font-size: 0.9rem;
   vertical-align: middle;
 }
@@ -97,7 +84,7 @@
 }
 
 .teachers-table tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--pg-surface);
 }
 
 .cell-teacher-info {
@@ -127,13 +114,13 @@
 
 .t-table-name {
   font-weight: 700;
-  color: #ffffff;
+  color: var(--pg-text);
   font-size: 0.92rem;
 }
 
 .t-table-email {
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .status-pill-active {
@@ -158,7 +145,7 @@
 .btn-action-more {
   background: transparent;
   border: none;
-  color: #64748b;
+  color: var(--pg-text-muted);
   cursor: pointer;
   padding: 6px;
   border-radius: 6px;
@@ -166,6 +153,24 @@
 }
 
 .btn-action-more:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--pg-text);
+  background: var(--pg-surface-hover);
+}
+
+@media (max-width: 768px) {
+  .teachers-title-area h1 { font-size: 1.3rem; }
+  .teachers-title-area p { font-size: 0.78rem; }
+
+  .teachers-top-actions {
+    width: 100%;
+  }
+
+  /* Teachers table -> stacked cards, same data. A 5-column table has no
+     good mobile layout — horizontal scroll reads as broken on a phone. */
+  .teachers-mobile-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
 }

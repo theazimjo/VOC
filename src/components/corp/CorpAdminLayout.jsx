@@ -1,5 +1,6 @@
 import { Outlet, useOutletContext } from 'react-router-dom';
 import CorpAdminSidebar from './CorpAdminSidebar';
+import CorpAdminBottomNav from './CorpAdminBottomNav';
 import './CorpAdminLayout.css';
 
 // The corp identity (role/centerId/centerName/email) is resolved once by
@@ -15,13 +16,16 @@ export default function CorpAdminLayout() {
 
   return (
     <div className="corp-admin-layout">
-      {/* Dedicated Center Admin Sidebar */}
+      {/* Dedicated Center Admin Sidebar (desktop only) */}
       <CorpAdminSidebar centerName={centerName} email={email} />
 
       {/* Main Content Pane */}
       <main className="corp-admin-main-pane">
         <Outlet context={{ centerId, centerName }} />
       </main>
+
+      {/* Center Admin Bottom Navigation (mobile only) */}
+      <CorpAdminBottomNav />
     </div>
   );
 }

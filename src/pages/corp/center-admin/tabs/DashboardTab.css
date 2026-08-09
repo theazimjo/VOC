@@ -26,8 +26,10 @@
   background: #0070df;
 }
 
+/* Same solid blue as .btn-add-teacher right next to it — this used to
+   be the only button on the page using a purple/pink gradient. */
 .btn-add-pack {
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  background: #0A84FF;
   color: #ffffff;
   display: inline-flex;
   align-items: center;
@@ -43,7 +45,7 @@
 }
 
 .btn-add-pack:hover {
-  opacity: 0.9;
+  background: #0070df;
 }
 
 .center-admin-stats {
@@ -56,12 +58,19 @@
 .c-stat-card {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.25rem;
+  gap: 0.75rem;
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
+  padding: 0.85rem 1rem;
   border-radius: 16px;
-  color: #ffffff;
+  color: var(--pg-text);
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 1px 0 var(--pg-inset-highlight) inset,
+    0 0 90px rgba(124, 108, 255, 0.1);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .c-stat-card.clickable {
@@ -75,32 +84,39 @@
 }
 
 .c-stat-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.c-stat-card h3 { font-size: 1.5rem; font-weight: 700; color: #ffffff; }
+.c-stat-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--pg-text); }
 
-.c-stat-card p { font-size: 0.85rem; color: #94a3b8; }
+.c-stat-card p { font-size: 0.76rem; color: var(--pg-text-secondary); }
 
 .teachers-grid, .packs-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: 0.85rem;
 }
 
 .teacher-card, .custom-pack-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 18px;
-  padding: 1.5rem;
+  padding: 1.1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 1px 0 var(--pg-inset-highlight) inset,
+    0 0 90px rgba(124, 108, 255, 0.1);
 }
 
 .teacher-card-head {
@@ -115,12 +131,17 @@
   height: 48px;
   border-radius: 50%;
   background: linear-gradient(135deg, #a855f7, #6366f1);
-  color: #fff;
+  color: #ffffff;
   font-size: 1.3rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.teacher-card-head h3 {
+  color: var(--pg-text);
 }
 
 .teacher-subject-badge {
@@ -133,7 +154,7 @@
 
 .teacher-card-info {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--pg-text-secondary);
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -155,6 +176,49 @@
 .custom-pack-card h3 {
   font-size: 1.2rem;
   margin-bottom: 6px;
-  color: var(--text-primary);
+  color: var(--pg-text);
 }
 
+@media (max-width: 768px) {
+  .center-admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+  }
+
+  .c-stat-card {
+    padding: 0.75rem 0.8rem;
+    gap: 0.6rem;
+    border-radius: 12px;
+  }
+
+  .c-stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .c-stat-icon svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .c-stat-card h3 { font-size: 1.05rem; }
+  .c-stat-card p { font-size: 0.68rem; }
+
+  .teachers-grid, .packs-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .teacher-card, .custom-pack-card {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .teacher-avatar {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+}

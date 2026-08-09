@@ -51,7 +51,7 @@ export default function DashboardTab({ p }) {
           {/* Quick Previews */}
           <div className="dashboard-sections">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: '#fff' }}>O'qituvchilar ({teachers.length})</h2>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--pg-text)' }}>O'qituvchilar ({teachers.length})</h2>
               <button className="btn-tab-action btn-add-teacher" style={{ padding: '6px 12px', fontSize: '0.82rem' }} onClick={() => navigate('/corp/admin/teachers')}>
                 Barchasini ko'rish <ArrowRight size={14} />
               </button>
@@ -75,7 +75,7 @@ export default function DashboardTab({ p }) {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h2 style={{ fontSize: '1.25rem', color: '#fff' }}>Custom So'z Packlari / Kurslar ({allCourses.length})</h2>
+              <h2 style={{ fontSize: '1.25rem', color: 'var(--pg-text)' }}>Custom So'z Packlari / Kurslar ({allCourses.length})</h2>
               <button className="btn-tab-action btn-add-pack" style={{ padding: '6px 12px', fontSize: '0.82rem' }} onClick={() => navigate('/corp/admin/courses')}>
                 Barchasini ko'rish <ArrowRight size={14} />
               </button>

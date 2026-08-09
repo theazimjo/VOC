@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 1.25rem;
   width: 100%;
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 /* Top Header Card */
@@ -11,9 +11,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(135deg, rgba(30, 30, 48, 0.7), rgba(18, 18, 30, 0.9));
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  background: var(--pg-bg);
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   padding: 1rem 1.5rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -29,9 +32,9 @@
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #e2e8f0;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,9 +43,9 @@
 }
 
 .cm-btn-back:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--pg-hairline);
+  color: var(--pg-text);
+  border-color: var(--pg-hairline);
 }
 
 .cm-course-badge {
@@ -59,14 +62,14 @@
 .cm-course-info h1 {
   font-size: 1.3rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--pg-text);
   margin: 0;
   line-height: 1.2;
 }
 
 .cm-course-info p {
   font-size: 0.82rem;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   margin: 2px 0 0 0;
 }
 
@@ -76,13 +79,16 @@
   gap: 10px;
 }
 
+/* Same tinted-blue "secondary action" recipe used everywhere else in
+   this file (.sort-dropdown-item.active, .working-day-btn.active, etc.)
+   — this used to be the odd purple-tinted button out. */
 .btn-pdf-import {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: rgba(10, 132, 255, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(10, 132, 255, 0.3);
   padding: 10px 18px;
   border-radius: 12px;
   font-weight: 600;
@@ -92,8 +98,8 @@
 }
 
 .btn-pdf-import:hover {
-  background: rgba(168, 85, 247, 0.25);
-  color: #e9d5ff;
+  background: rgba(10, 132, 255, 0.25);
+  color: #ffffff;
 }
 
 .btn-add-word-top {
@@ -126,9 +132,9 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  color: #94a3b8;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--pg-surface);
+  color: var(--pg-text-secondary);
+  border: 1px solid var(--pg-hairline);
   padding: 9px 14px;
   border-radius: 12px;
   font-weight: 600;
@@ -138,9 +144,9 @@
 }
 
 .btn-filter-toggle:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--pg-hairline);
+  color: var(--pg-text);
+  border-color: var(--pg-hairline);
 }
 
 .btn-filter-toggle.active {
@@ -151,7 +157,7 @@
 
 .filter-chevron {
   transition: transform 0.2s ease;
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .filter-chevron.open {
@@ -163,11 +169,13 @@
   top: calc(100% + 8px);
   right: 0;
   width: 210px;
-  background: #161622;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 16px;
   padding: 8px;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   z-index: 100;
   animation: modalPopIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -175,7 +183,7 @@
 .filter-menu-header {
   font-size: 0.68rem;
   font-weight: 800;
-  color: #64748b;
+  color: var(--pg-text-muted);
   letter-spacing: 0.08em;
   padding: 6px 10px 6px 10px;
   text-transform: uppercase;
@@ -190,7 +198,7 @@
   border-radius: 10px;
   background: transparent;
   border: none;
-  color: #cbd5e1;
+  color: var(--pg-text-secondary);
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
@@ -199,8 +207,8 @@
 }
 
 .filter-menu-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background: var(--pg-surface);
+  color: var(--pg-text);
 }
 
 .filter-menu-item.selected {
@@ -212,8 +220,8 @@
 .filter-item-count {
   font-size: 0.72rem;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  background: var(--pg-hairline);
+  color: var(--pg-text-secondary);
   padding: 2px 7px;
   border-radius: 8px;
 }
@@ -275,8 +283,8 @@
 
 /* Delete Confirmation Modal */
 .delete-modal-card {
-  background: #181824;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 24px;
   width: 100%;
   max-width: 420px;
@@ -284,8 +292,10 @@
   padding: 2rem 1.75rem 1.5rem 1.75rem;
   text-align: center;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
   animation: modalPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .delete-modal-icon {
@@ -305,19 +315,19 @@
   font-size: 1.2rem;
   font-weight: 800;
   margin: 0 0 8px 0;
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .delete-modal-card p {
   font-size: 0.92rem;
-  color: #e2e8f0;
+  color: var(--pg-text-secondary);
   margin: 0 0 4px 0;
   line-height: 1.4;
 }
 
 .delete-modal-sub {
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   margin-top: 6px !important;
 }
 
@@ -353,8 +363,8 @@
 
 /* 2. Top Units Section */
 .cm-units-section-top {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   padding: 1.25rem 1.5rem;
   display: flex;
@@ -376,7 +386,7 @@
   gap: 8px;
   font-size: 0.82rem;
   font-weight: 800;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -393,22 +403,22 @@
   flex: 1;
   padding: 10px 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
   font-size: 0.88rem;
-  color: #ffffff;
+  color: var(--pg-text);
   outline: none;
   transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
 .add-unit-top-input::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .add-unit-top-input:focus {
   border-color: #0A84FF;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--pg-surface-hover);
 }
 
 .btn-add-unit-top {
@@ -434,10 +444,10 @@
 .units-empty-top {
   padding: 1.5rem;
   text-align: center;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   font-size: 0.88rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px dashed rgba(255, 255, 255, 0.08);
+  background: var(--pg-surface);
+  border: 1px dashed var(--pg-hairline);
   border-radius: 14px;
 }
 
@@ -454,14 +464,14 @@
   justify-content: space-between;
   padding: 14px 18px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .unit-list-row:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--pg-surface);
   border-color: rgba(10, 132, 255, 0.35);
   transform: translateX(4px);
 }
@@ -477,8 +487,8 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
+  background: var(--pg-hairline);
+  color: var(--pg-text-secondary);
   font-size: 0.8rem;
   font-weight: 700;
   display: flex;
@@ -496,7 +506,7 @@
 .unit-list-title {
   font-weight: 700;
   font-size: 0.98rem;
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .unit-list-sub {
@@ -516,9 +526,9 @@
 }
 
 .btn-unit-icon {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text-secondary);
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -530,8 +540,8 @@
 }
 
 .btn-unit-icon:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--pg-text);
+  background: var(--pg-hairline);
 }
 
 .btn-unit-icon.edit:hover {
@@ -547,7 +557,7 @@
 }
 
 .unit-enter-arrow {
-  color: #64748b;
+  color: var(--pg-text-muted);
   transition: transform 0.2s ease, color 0.2s ease;
   margin-left: 4px;
 }
@@ -570,9 +580,9 @@
   flex: 1;
   padding: 6px 12px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--pg-hairline);
   border: 1px solid #0A84FF;
-  color: #ffffff;
+  color: var(--pg-text);
   font-size: 0.92rem;
   font-weight: 600;
   outline: none;
@@ -601,8 +611,8 @@
   width: 30px;
   height: 30px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
+  background: var(--pg-hairline);
+  color: var(--pg-text-secondary);
   border: none;
   display: flex;
   align-items: center;
@@ -612,14 +622,14 @@
 }
 
 .btn-edit-unit-cancel:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text);
 }
 
 /* 3. Bottom Words Panel */
 .cm-words-panel {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   padding: 1.5rem;
   display: flex;
@@ -643,30 +653,37 @@
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .unit-search-input {
   width: 100%;
   padding: 8px 12px 8px 32px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
   font-size: 0.85rem;
-  color: #ffffff;
+  color: var(--pg-text);
   outline: none;
   box-sizing: border-box;
 }
 
 .unit-search-input::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .words-table-wrapper {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--pg-hairline);
   border-radius: 14px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.02);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--pg-surface);
+}
+
+@media (max-width: 768px) {
+  .words-table {
+    min-width: 640px; /* scrolls instead of clipping columns off-screen */
+  }
 }
 
 .unit-empty-words-state {
@@ -682,9 +699,9 @@
   width: 64px;
   height: 64px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #64748b;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -694,13 +711,13 @@
 .unit-empty-words-state h3 {
   font-size: 1.15rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--pg-text);
   margin: 0 0 6px 0;
 }
 
 .unit-empty-words-state p {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   max-width: 420px;
   line-height: 1.5;
   margin: 0;
@@ -710,9 +727,9 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   padding: 10px 20px;
   border-radius: 12px;
   font-weight: 600;
@@ -722,7 +739,7 @@
 }
 
 .btn-import-lg:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--pg-hairline);
 }
 
 .words-table {
@@ -733,20 +750,20 @@
 }
 
 .words-table th {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--pg-surface);
   padding: 14px 16px;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--pg-text-muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--pg-surface);
 }
 
 .words-table td {
   padding: 14px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  color: #cbd5e1;
+  border-bottom: 1px solid var(--pg-surface);
+  color: var(--pg-text-secondary);
   vertical-align: middle;
 }
 
@@ -754,8 +771,8 @@
   border-bottom: none;
 }
 
-.w-bold { font-weight: 700; color: #ffffff; }
-.w-dim { color: #94a3b8; font-size: 0.85rem; }
+.w-bold { font-weight: 700; color: var(--pg-text); }
+.w-dim { color: var(--pg-text-secondary); font-size: 0.85rem; }
 
 /* Part of speech pill badges */
 .part-badge {
@@ -774,7 +791,7 @@
 .part-badge.adverb { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
 .part-badge.phrase { background: rgba(244, 114, 182, 0.15); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.3); }
 .part-badge.preposition { background: rgba(250, 204, 21, 0.15); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3); }
-.part-badge.other { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
+.part-badge.other { background: rgba(148, 163, 184, 0.15); color: var(--pg-text-secondary); border: 1px solid rgba(148, 163, 184, 0.3); }
 
 .word-row-actions {
   display: flex;
@@ -786,7 +803,7 @@
 .btn-word-icon {
   background: transparent;
   border: none;
-  color: #64748b;
+  color: var(--pg-text-muted);
   cursor: pointer;
   padding: 6px;
   border-radius: 8px;
@@ -794,8 +811,8 @@
 }
 
 .btn-word-icon:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--pg-text);
+  background: var(--pg-hairline);
 }
 
 .btn-word-icon.danger:hover {
@@ -805,15 +822,15 @@
 
 /* Word Modal Styling */
 .word-modal-card {
-  background: #161622;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
   overflow: hidden;
-  color: #ffffff;
+  color: var(--pg-text);
   font-family: inherit;
   animation: modalPopIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -823,14 +840,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--pg-hairline);
+  background: var(--pg-surface);
 }
 
 .word-modal-header h3 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--pg-text);
   margin: 0;
 }
 
@@ -857,7 +874,7 @@
 .modal-label {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   height: 18px;
@@ -870,9 +887,9 @@
   height: 46px;
   padding: 0 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.92rem;
   outline: none;
   transition: all 0.2s ease;
@@ -880,12 +897,12 @@
 }
 
 .modal-input::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .modal-input:focus {
   border-color: #0A84FF;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--pg-surface-hover);
   box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
 }
 
@@ -894,9 +911,9 @@
   height: 46px;
   padding: 0 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.9rem;
   outline: none;
   cursor: pointer;
@@ -910,13 +927,13 @@
 
 .modal-select:focus {
   border-color: #0A84FF;
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: var(--pg-surface-hover);
   box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
 }
 
 .modal-select option {
-  background: #181824;
-  color: #ffffff;
+  background: var(--pg-bg);
+  color: var(--pg-text);
   padding: 10px;
 }
 
@@ -924,9 +941,9 @@
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-size: 0.92rem;
   outline: none;
   font-family: inherit;
@@ -936,12 +953,12 @@
 }
 
 .modal-textarea::placeholder {
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .modal-textarea:focus {
   border-color: #0A84FF;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--pg-surface-hover);
   box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
 }
 
@@ -957,9 +974,9 @@
   flex: 1;
   height: 46px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--pg-surface);
   border: none;
-  color: #e2e8f0;
+  color: var(--pg-text-secondary);
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
@@ -967,8 +984,8 @@
 }
 
 .btn-modal-cancel:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-hairline);
+  color: var(--pg-text);
 }
 
 .btn-modal-save {
@@ -996,15 +1013,17 @@
 
 /* PDF Import Modal */
 .pdf-modal-card {
-  background: #181824;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
   overflow: hidden;
-  color: #ffffff;
+  color: var(--pg-text);
 }
 
 .pdf-modal-header {
@@ -1012,13 +1031,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--pg-hairline);
 }
 
 .pdf-modal-header h3 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--pg-text);
   margin: 0;
 }
 
@@ -1031,17 +1050,17 @@
 
 .pdf-import-hint {
   font-size: 0.85rem;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--pg-text-secondary);
+  background: var(--pg-surface);
   padding: 10px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--pg-hairline);
   margin: 0;
   line-height: 1.5;
 }
 
 .pdf-import-hint code {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--pg-hairline);
   color: #38bdf8;
   padding: 2px 6px;
   border-radius: 4px;
@@ -1052,9 +1071,9 @@
   width: 100%;
   padding: 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   font-family: monospace;
   font-size: 0.88rem;
   outline: none;
@@ -1071,11 +1090,14 @@
   justify-content: flex-end;
   gap: 10px;
   padding: 1rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--pg-hairline);
 }
 
+/* Same primary-action blue as every other button in the app (#0A84FF /
+   #0070df hover) — this used to be a one-off purple, the only button in
+   the whole corp module not using the standard color. */
 .btn-pdf-submit {
-  background: #a855f7;
+  background: #0A84FF;
   color: #ffffff;
   padding: 10px 18px;
   border-radius: 12px;
@@ -1086,5 +1108,34 @@
 }
 
 .btn-pdf-submit:hover {
-  background: #9333ea;
+  background: #0070df;
+}
+
+@media (max-width: 768px) {
+  .cm-header-card {
+    padding: 0.85rem 1rem;
+    border-radius: 16px;
+  }
+
+  .cm-course-info h1 { font-size: 1.05rem; }
+  .cm-course-info p { font-size: 0.76rem; }
+
+  .cm-course-badge {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cm-units-section-top {
+    padding: 1rem;
+    border-radius: 16px;
+    gap: 1rem;
+  }
+
+  .word-modal-body, .course-modal-body {
+    padding: 1.1rem;
+  }
+
+  .modal-form-row {
+    grid-template-columns: 1fr;
+  }
 }
