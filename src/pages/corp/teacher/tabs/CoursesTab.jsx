@@ -141,73 +141,134 @@ export default function CoursesTab({ p }) {
                     You haven't created any private packs yet. Tap <strong>"+"</strong> below to create one only you can see — not even the center admin.
                   </div>
                 ) : (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '8px' }}>
-                    {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
-                      <div
-                        key={pack.id}
-                        className="premium-glass"
-                        onClick={() => setViewingPack(pack)}
-                        style={{
-                          padding: '12px 14px',
-                          borderRadius: '18px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: '12px',
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
-                          <strong style={{ color: 'var(--pg-text)', fontSize: '0.94rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {pack.title}
-                          </strong>
-                          <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {pack.description || 'No description'}
-                          </span>
-                        </div>
+                  <div className="teachers-table-card">
+                    {/* Desktop: data table */}
+                    <div className="teachers-table-wrap" style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+                      <table className="teachers-table">
+                        <thead>
+                          <tr>
+                            <th>TITLE</th>
+                            <th>DESCRIPTION</th>
+                            <th>WORDS</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
+                            <tr key={pack.id} className="t-table-row" style={{ cursor: 'pointer' }} onClick={() => setViewingPack(pack)}>
+                              <td style={{ fontWeight: 600, color: 'var(--pg-text)' }}>{pack.title}</td>
+                              <td style={{ color: 'var(--pg-text-secondary)' }}>{pack.description || 'No description'}</td>
+                              <td>
+                                <span
+                                  style={{
+                                    padding: '3px 10px', borderRadius: '999px',
+                                    background: 'rgba(129, 140, 248, 0.18)', color: '#a5b4fc',
+                                    fontSize: '0.78rem', fontWeight: 600, whiteSpace: 'nowrap',
+                                  }}
+                                >
+                                  {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                                </span>
+                              </td>
+                              <td style={{ width: '40px' }}>
+                                <button
+                                  type="button"
+                                  title="Delete"
+                                  style={{
+                                    background: 'rgba(239, 68, 68, 0.14)',
+                                    border: '1px solid rgba(239, 68, 68, 0.25)',
+                                    borderRadius: '9px',
+                                    color: '#ef4444',
+                                    width: '28px',
+                                    height: '28px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    cursor: 'pointer',
+                                    flexShrink: 0
+                                  }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeletePack(pack);
+                                  }}
+                                >
+                                  <Trash2 size={15} />
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-                          <span
-                            style={{
-                              padding: '4px 12px',
-                              borderRadius: '999px',
-                              background: 'rgba(129, 140, 248, 0.18)',
-                              color: '#a5b4fc',
-                              fontSize: '0.78rem',
-                              fontWeight: 600,
-                              whiteSpace: 'nowrap'
-                            }}
-                          >
-                            {pack.wordCount || (pack.words ? pack.words.length : 0)} words
-                          </span>
+                    {/* Mobile: stacked cards, same data. */}
+                    <div className="teachers-mobile-list" style={{ display: 'none', flexDirection: 'column', gap: '8px', padding: '0.6rem' }}>
+                      {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
+                        <div
+                          key={pack.id}
+                          className="premium-glass"
+                          onClick={() => setViewingPack(pack)}
+                          style={{
+                            padding: '12px 14px',
+                            borderRadius: '18px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '12px',
+                            cursor: 'pointer',
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
+                            <strong style={{ color: 'var(--pg-text)', fontSize: '0.94rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {pack.title}
+                            </strong>
+                            <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {pack.description || 'No description'}
+                            </span>
+                          </div>
 
-                          <button
-                            type="button"
-                            title="Delete"
-                            style={{
-                              background: 'rgba(239, 68, 68, 0.14)',
-                              border: '1px solid rgba(239, 68, 68, 0.25)',
-                              borderRadius: '9px',
-                              color: '#ef4444',
-                              width: '28px',
-                              height: '28px',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              cursor: 'pointer',
-                              flexShrink: 0
-                            }}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeletePack(pack);
-                            }}
-                          >
-                            <Trash2 size={15} />
-                          </button>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                            <span
+                              style={{
+                                padding: '4px 12px',
+                                borderRadius: '999px',
+                                background: 'rgba(129, 140, 248, 0.18)',
+                                color: '#a5b4fc',
+                                fontSize: '0.78rem',
+                                fontWeight: 600,
+                                whiteSpace: 'nowrap'
+                              }}
+                            >
+                              {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                            </span>
+
+                            <button
+                              type="button"
+                              title="Delete"
+                              style={{
+                                background: 'rgba(239, 68, 68, 0.14)',
+                                border: '1px solid rgba(239, 68, 68, 0.25)',
+                                borderRadius: '9px',
+                                color: '#ef4444',
+                                width: '28px',
+                                height: '28px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                flexShrink: 0
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeletePack(pack);
+                              }}
+                            >
+                              <Trash2 size={15} />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -233,50 +294,89 @@ export default function CoursesTab({ p }) {
                     No shared packs from the center yet.
                   </div>
                 ) : (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '8px' }}>
-                    {filteredPacks.filter(p => p.scope === 'center').map((pack) => (
-                      <div
-                        key={pack.id}
-                        className="premium-glass"
-                        onClick={() => setViewingPack(pack)}
-                        style={{
-                          padding: '12px 14px',
-                          borderRadius: '18px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          gap: '12px',
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
-                          <strong style={{ color: 'var(--pg-text)', fontSize: '0.94rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {pack.title}
-                          </strong>
-                          <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                            {pack.description || 'No description'}
-                          </span>
-                        </div>
+                  <div className="teachers-table-card">
+                    {/* Desktop: data table */}
+                    <div className="teachers-table-wrap" style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+                      <table className="teachers-table">
+                        <thead>
+                          <tr>
+                            <th>TITLE</th>
+                            <th>DESCRIPTION</th>
+                            <th>WORDS</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filteredPacks.filter(p => p.scope === 'center').map((pack) => (
+                            <tr key={pack.id} className="t-table-row" style={{ cursor: 'pointer' }} onClick={() => setViewingPack(pack)}>
+                              <td style={{ fontWeight: 600, color: 'var(--pg-text)' }}>{pack.title}</td>
+                              <td style={{ color: 'var(--pg-text-secondary)' }}>{pack.description || 'No description'}</td>
+                              <td>
+                                <span
+                                  style={{
+                                    padding: '3px 10px', borderRadius: '999px',
+                                    background: 'rgba(129, 140, 248, 0.18)', color: '#a5b4fc',
+                                    fontSize: '0.78rem', fontWeight: 600, whiteSpace: 'nowrap',
+                                  }}
+                                >
+                                  {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                                </span>
+                              </td>
+                              <td style={{ width: '32px' }}>
+                                <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
 
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-                          <span
-                            style={{
-                              padding: '4px 12px',
-                              borderRadius: '999px',
-                              background: 'rgba(129, 140, 248, 0.18)',
-                              color: '#a5b4fc',
-                              fontSize: '0.78rem',
-                              fontWeight: 600,
-                              whiteSpace: 'nowrap'
-                            }}
-                          >
-                            {pack.wordCount || (pack.words ? pack.words.length : 0)} words
-                          </span>
-                          <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                    {/* Mobile: stacked cards, same data. */}
+                    <div className="teachers-mobile-list" style={{ display: 'none', flexDirection: 'column', gap: '8px', padding: '0.6rem' }}>
+                      {filteredPacks.filter(p => p.scope === 'center').map((pack) => (
+                        <div
+                          key={pack.id}
+                          className="premium-glass"
+                          onClick={() => setViewingPack(pack)}
+                          style={{
+                            padding: '12px 14px',
+                            borderRadius: '18px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '12px',
+                            cursor: 'pointer',
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
+                            <strong style={{ color: 'var(--pg-text)', fontSize: '0.94rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {pack.title}
+                            </strong>
+                            <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {pack.description || 'No description'}
+                            </span>
+                          </div>
+
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                            <span
+                              style={{
+                                padding: '4px 12px',
+                                borderRadius: '999px',
+                                background: 'rgba(129, 140, 248, 0.18)',
+                                color: '#a5b4fc',
+                                fontSize: '0.78rem',
+                                fontWeight: 600,
+                                whiteSpace: 'nowrap'
+                              }}
+                            >
+                              {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                            </span>
+                            <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

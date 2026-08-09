@@ -1606,13 +1606,12 @@
 }
 
 /* ── Student Progress List ────────────────────
-   Grid instead of a single always-full-width column — on a wide desktop
-   viewport a compact row stretched across ~1100px just looks sparse (name
-   on the left, one badge way off on the right with empty space between);
-   auto-fill naturally collapses back to one column on mobile. */
+   Single full-width column — this is an action list (each row opens a
+   per-student menu), not gallery content, so it stays a clean list on
+   desktop rather than being squeezed into a stretched-card grid. */
 .students-progress-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   max-height: 400px;
   overflow-y: auto;

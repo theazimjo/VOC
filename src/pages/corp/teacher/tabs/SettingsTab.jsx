@@ -26,7 +26,7 @@ export default function SettingsTab({ p }) {
   };
 
   return (
-        <div style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        <div style={{ maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {settingsSuccess && (
             <div style={{ background: 'rgba(52, 199, 89, 0.12)', border: '1px solid rgba(52, 199, 89, 0.25)', color: '#34c759', padding: '9px 14px', borderRadius: '14px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, fontSize: '0.86rem' }}>
               <CheckCircle2 size={16} /> {settingsSuccess}
