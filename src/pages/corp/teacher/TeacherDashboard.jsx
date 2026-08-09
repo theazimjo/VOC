@@ -19,14 +19,12 @@ import ArchiveTab from './tabs/ArchiveTab';
 import CoursesTab from './tabs/CoursesTab';
 import StatisticsTab from './tabs/StatisticsTab';
 import SettingsTab from './tabs/SettingsTab';
-import StudentPackBreakdownModal from './modals/StudentPackBreakdownModal';
 import TransferPickerModal from './modals/TransferPickerModal';
 import CreateGroupModal from './modals/CreateGroupModal';
 import EditGroupModal from './modals/EditGroupModal';
 import HomeworkEditorModal from './modals/HomeworkEditorModal';
 import HomeworkItemModal from './modals/HomeworkItemModal';
 import AssignPackModal from './modals/AssignPackModal';
-import ViewStudentsModal from './modals/ViewStudentsModal';
 import StudentDetailModal from './modals/StudentDetailModal';
 import StudentActionMenu from './modals/StudentActionMenu';
 import './shared.css';
@@ -51,7 +49,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPackEditor, setShowPackEditor] = useState(false);
-  const [viewingGroupStudents, setViewingGroupStudents] = useState(null);
   const [groupStudentsList, setGroupStudentsList] = useState([]);
   const [assigningGroup, setAssigningGroup] = useState(null);
   const [assignCategory, setAssignCategory] = useState('assignedPacks');
@@ -309,16 +306,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   };
 
 
-  const handleOpenStudentsModal = async (group) => {
-    setViewingGroupStudents(group);
-    try {
-      const list = await getGroupStudents(centerId, group.id);
-      setGroupStudentsList(list || []);
-    } catch (err) {
-      console.error('Error fetching students:', err);
-    }
-  };
-
   const toggleHomeworkItem = (candidate) => {
     if (candidate.used) return;
     const key = `${candidate.packId}_${candidate.monthId}_${candidate.unitId}`;
@@ -372,6 +359,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       title: "Remove Pack",
       message: `Remove "${packTitle}" from this group?`,
       confirmLabel: "Remove",
+      cancelLabel: "Cancel",
       danger: true,
       onConfirm: async () => {
         try {
@@ -426,6 +414,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       title: "Restore Group",
       message: `Restore "${group.name}" to your active groups?`,
       confirmLabel: "Restore",
+      cancelLabel: "Cancel",
       onConfirm: async () => {
         try {
           await updateGroupStatus(centerId, group.id, 'active');
@@ -531,6 +520,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       title: 'New Invite Code',
       message: 'Generate a new invite code? The old one will stop working.',
       confirmLabel: 'Generate',
+      cancelLabel: 'Cancel',
       onConfirm: async () => {
         try {
           const newCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -564,6 +554,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       title: "Transfer Group",
       message: `Transfer "${groupSettingsTarget.name}" to ${targetTeacher.name}?`,
       confirmLabel: "Transfer",
+      cancelLabel: "Cancel",
       danger: true,
       onConfirm: async () => {
         try {
@@ -587,6 +578,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       title: "Remove Student",
       message: `Remove "${student.name}" from this group?`,
       confirmLabel: 'Remove',
+      cancelLabel: 'Cancel',
       danger: true,
       onConfirm: async () => {
         try {
@@ -657,7 +649,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     groups, setGroups, customPacks, setCustomPacks, loading, setLoading,
     searchTerm, setSearchTerm, showSearchInput, setShowSearchInput,
     showCreateModal, setShowCreateModal, showEditModal, setShowEditModal,
-    showPackEditor, setShowPackEditor, viewingGroupStudents, setViewingGroupStudents,
+    showPackEditor, setShowPackEditor,
     groupStudentsList, setGroupStudentsList, assigningGroup, setAssigningGroup,
     assignCategory, setAssignCategory, duplicatingPackId, setDuplicatingPackId,
     viewingPack, setViewingPack, selectedGroupId, setSelectedGroupId,
@@ -676,7 +668,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     groupSettingsForm, setGroupSettingsForm, savingGroupSettings, setSavingGroupSettings,
     askConfirm, closeConfirmSheet, runConfirmSheet,
     handleCreateGroup, handleOpenEditModal, handleUpdateGroup, handleDeleteGroup, copyCode,
-    handleOpenStudentsModal, toggleHomeworkItem, openHomeworkEditor, handleAddHomework,
+    toggleHomeworkItem, openHomeworkEditor, handleAddHomework,
     handleAssignPack, handleRemovePack, handleDuplicatePack, handleDeletePack,
     handleArchiveGroup, handleRestoreGroup, handleSaveProfile,
     handleOpenGroupSettings, handleSaveGroupSettings, handleRegenerateCode,
@@ -707,14 +699,12 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       {tab === 'statistics' && <StatisticsTab p={p} />}
       {tab === 'settings' && <SettingsTab p={p} />}
 
-      <StudentPackBreakdownModal p={p} />
       <TransferPickerModal p={p} />
       <CreateGroupModal p={p} />
       <EditGroupModal p={p} />
       <HomeworkEditorModal p={p} />
       <HomeworkItemModal p={p} />
       <AssignPackModal p={p} />
-      <ViewStudentsModal p={p} />
       <StudentDetailModal p={p} />
       <StudentActionMenu p={p} />
 

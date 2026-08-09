@@ -27,15 +27,7 @@ export default function EditGroupModal({ p }) {
         className="modal-content"
         onClick={e => e.stopPropagation()}
         style={{
-          background: 'var(--bg-glass-strong)',
-          border: '1px solid var(--border)',
-          borderRadius: '24px',
-          padding: '1.25rem',
-          width: '100%',
           maxWidth: '400px',
-          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(24px)',
-          WebkitBackdropFilter: 'blur(24px)',
           display: 'flex',
           flexDirection: 'column',
           gap: '1rem',
@@ -60,7 +52,7 @@ export default function EditGroupModal({ p }) {
             >
               <Users size={18} />
             </div>
-            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+            <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--pg-text)' }}>
               Edit Group
             </h3>
           </div>
@@ -72,9 +64,9 @@ export default function EditGroupModal({ p }) {
               width: '30px',
               height: '30px',
               borderRadius: '9px',
-              background: 'var(--bg-tertiary)',
-              border: '1px solid var(--border)',
-              color: 'var(--text-muted)',
+              background: 'var(--pg-surface)',
+              border: '1px solid var(--pg-hairline)',
+              color: 'var(--pg-text-muted)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -89,7 +81,7 @@ export default function EditGroupModal({ p }) {
         {/* Form */}
         <form onSubmit={handleUpdateGroup} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Group Name *
             </label>
             <input
@@ -103,16 +95,16 @@ export default function EditGroupModal({ p }) {
                 width: '100%',
                 padding: '9px 12px',
                 borderRadius: '12px',
-                background: 'var(--bg-tertiary)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-primary)',
+                background: 'var(--pg-surface)',
+                border: '1px solid var(--pg-hairline)',
+                color: 'var(--pg-text)',
                 fontSize: '0.88rem'
               }}
             />
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               Level
             </label>
             <select
@@ -123,9 +115,9 @@ export default function EditGroupModal({ p }) {
                 width: '100%',
                 padding: '9px 12px',
                 borderRadius: '12px',
-                background: 'var(--bg-tertiary)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-primary)',
+                background: 'var(--pg-surface)',
+                border: '1px solid var(--pg-hairline)',
+                color: 'var(--pg-text)',
                 fontSize: '0.88rem'
               }}
             >
@@ -141,9 +133,9 @@ export default function EditGroupModal({ p }) {
               style={{
                 padding: '8px 16px',
                 borderRadius: '12px',
-                background: 'var(--bg-tertiary)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-primary)',
+                background: 'var(--pg-surface)',
+                border: '1px solid var(--pg-hairline)',
+                color: 'var(--pg-text)',
                 fontSize: '0.84rem',
                 fontWeight: 600,
                 cursor: 'pointer'

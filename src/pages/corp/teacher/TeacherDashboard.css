@@ -13,6 +13,27 @@
    blobs were positioned across the whole content height and most
    cards ended up scrolled past them, looking flat. */
 .teacher-dashboard-container {
+  /* Pin the whole module to the premium dark-glass look introduced for
+     Courses/Statistics/Archive/Settings/PackViewer/modals, independent of
+     the user's app-wide light/dark theme choice. Everything else in the
+     module (Group Detail's cards, rows, dropdowns, tables) is still built
+     against these same theme tokens rather than the newer --pg-* ones, so
+     redefining the tokens here — instead of hunting down every individual
+     var(--bg-glass-strong)/var(--text-primary) usage across ~2000 lines of
+     JSX/CSS — is what actually makes the whole section look like one
+     consistent design instead of "some pages dark, some pages themed". */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: rgba(22, 22, 30, 0.88);
+  --bg-tertiary: rgba(255, 255, 255, 0.07);
+  --bg-glass: rgba(22, 22, 30, 0.24);
+  --bg-glass-hover: rgba(255, 255, 255, 0.1);
+  --bg-glass-strong: rgba(22, 22, 30, 0.32);
+  --text-primary: rgba(255, 255, 255, 0.94);
+  --text-secondary: rgba(255, 255, 255, 0.68);
+  --text-muted: rgba(255, 255, 255, 0.48);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-light: rgba(255, 255, 255, 0.08);
+
   padding: var(--space-xl, 2rem);
   max-width: 1200px;
   margin: 0 auto;

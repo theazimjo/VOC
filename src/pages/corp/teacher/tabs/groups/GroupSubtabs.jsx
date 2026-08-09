@@ -1407,9 +1407,9 @@ export default function GroupSubtabs({ p }) {
                 style={{
                   flex: 1,
                   padding: '10px',
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   fontSize: '0.84rem',
-                  fontWeight: 700,
+                  fontWeight: 600,
                   background: 'var(--bg-tertiary)',
                   color: 'var(--text-primary)',
                   border: '1px solid var(--border)',
@@ -1428,7 +1428,7 @@ export default function GroupSubtabs({ p }) {
                 style={{
                   flex: 1,
                   padding: '10px',
-                  borderRadius: '14px',
+                  borderRadius: '12px',
                   fontSize: '0.84rem',
                   fontWeight: 700,
                   background: '#3b82f6',
