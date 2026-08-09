@@ -13,9 +13,9 @@ export default function GroupsTab({ p }) {
     return (
           <div className="empty-state">
             <Users size={48} />
-            <p>Guruh topilmadi yoki sizga biriktirilmagan.</p>
+            <p>Group not found, or not assigned to you.</p>
             <button className="btn-secondary" onClick={() => { setSelectedGroupId(null); navigate('/corp/teacher'); }} style={{ marginTop: '10px' }}>
-              Guruhlarim ro'yxatiga qaytish
+              Back to My Groups
             </button>
           </div>
     );

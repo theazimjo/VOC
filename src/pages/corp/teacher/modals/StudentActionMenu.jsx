@@ -34,7 +34,7 @@ export default function StudentActionMenu({ p }) {
                   setViewingStudentDetail(st);
                 }}
               >
-                <Eye size={16} color="#3b82f6" /> Batafsil ko'rish
+                <Eye size={16} color="#3b82f6" /> View Details
               </button>
               <button
                 type="button"
@@ -45,7 +45,7 @@ export default function StudentActionMenu({ p }) {
                   handleRemoveStudent(st);
                 }}
               >
-                <UserMinus size={16} color="#ef4444" /> Guruhdan chiqarish
+                <UserMinus size={16} color="#ef4444" /> Remove from Group
               </button>
             </div>
           </>

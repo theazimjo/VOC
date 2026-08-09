@@ -13,8 +13,8 @@ export default function GroupsListView({ p }) {
           <div className="courses-top-bar" style={{ marginBottom: '1rem' }}>
             <div className="courses-title-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
               <div className="courses-title-area">
-                <h1 style={{ fontSize: '1.4rem', margin: 0 }}>Guruhlarim</h1>
-                <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem' }}>{activeGroups.length} ta faol guruh · {totalStudents} ta o'quvchi</p>
+                <h1 style={{ fontSize: '1.4rem', margin: 0 }}>My Groups</h1>
+                <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem' }}>{activeGroups.length} active groups · {totalStudents} students</p>
               </div>
 
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -22,7 +22,7 @@ export default function GroupsListView({ p }) {
                   type="button"
                   className="top-search-lupa-btn"
                   onClick={() => setShowSearchInput(!showSearchInput)}
-                  title="Guruhni qidirish"
+                  title="Search groups"
                 >
                   <Search size={18} />
                 </button>
@@ -34,7 +34,7 @@ export default function GroupsListView({ p }) {
                 <Search size={16} className="search-icon" />
                 <input
                   type="text"
-                  placeholder="Guruh nomini qidirish..."
+                  placeholder="Search groups..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                   autoFocus
@@ -56,7 +56,7 @@ export default function GroupsListView({ p }) {
                     alignItems: 'center',
                     padding: 0
                   }}
-                  title="Qidiruvni yopish"
+                  title="Close search"
                 >
                   <X size={16} />
                 </button>
@@ -65,18 +65,18 @@ export default function GroupsListView({ p }) {
           </div>
 
           {loading ? (
-            <div className="loading-spinner">Guruhlar yuklanmoqda...</div>
+            <div className="loading-spinner">Loading groups...</div>
           ) : filteredActiveGroups.length === 0 ? (
             <div className="empty-state" style={{ padding: '2rem 1rem' }}>
               <Users size={40} style={{ opacity: 0.5 }} />
-              <p style={{ fontSize: '0.88rem' }}>{searchTerm ? `"${searchTerm}" bo'yicha guruh topilmadi.` : 'Hozircha faol guruhlaringiz yo\'q.'}</p>
+              <p style={{ fontSize: '0.88rem' }}>{searchTerm ? `No groups match "${searchTerm}".` : "You don't have any active groups yet."}</p>
               {searchTerm ? (
                 <button className="btn-secondary" onClick={() => setSearchTerm('')} style={{ marginTop: '8px' }}>
-                  Qidiruvni tozalash
+                  Clear search
                 </button>
               ) : (
                 <button className="btn-create-group" onClick={() => setShowCreateModal(true)}>
-                  Yangi Guruh Yaratish
+                  Create New Group
                 </button>
               )}
             </div>
@@ -135,7 +135,7 @@ export default function GroupsListView({ p }) {
                           )}
                         </div>
                         <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
-                          {group.studentsCount || 0} o'quvchi · {totalPacks} pack
+                          {group.studentsCount || 0} students · {totalPacks} packs
                         </span>
                       </div>
                     </div>
@@ -147,12 +147,12 @@ export default function GroupsListView({ p }) {
             </div>
           )}
 
-          {/* Floating Action Button (Yangi Guruh) */}
+          {/* Floating Action Button (New Group) */}
           <button
             type="button"
             className="fab-add-pack-btn fab-icon-only"
             onClick={() => setShowCreateModal(true)}
-            title="Yangi Guruh Yaratish"
+            title="Create New Group"
           >
             <Plus size={26} />
           </button>

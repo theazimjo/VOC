@@ -1,5 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
-import { Users, Archive, BookOpen, BarChart3, Settings } from 'lucide-react';
+import { Users, BookOpen, BarChart3, Settings } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
 export default function TeacherBottomNav() {
@@ -8,28 +8,23 @@ export default function TeacherBottomNav() {
   const navItems = [
     {
       to: '/corp/teacher',
-      label: 'Guruhlar',
+      label: 'Groups',
       icon: Users,
       isGroupTab: true,
     },
     {
-      to: '/corp/teacher/archive',
-      label: 'Arxiv',
-      icon: Archive,
-    },
-    {
       to: '/corp/teacher/courses',
-      label: "So'zlar",
+      label: 'Words',
       icon: BookOpen,
     },
     {
       to: '/corp/teacher/statistics',
-      label: 'Statistika',
+      label: 'Stats',
       icon: BarChart3,
     },
     {
       to: '/corp/teacher/settings',
-      label: 'Sozlamalar',
+      label: 'Settings',
       icon: Settings,
     },
   ];
@@ -41,6 +36,8 @@ export default function TeacherBottomNav() {
         const isActive = item.isGroupTab
           ? location.pathname === '/corp/teacher' ||
             location.pathname.startsWith('/corp/teacher/group/')
+          : item.to === '/corp/teacher/settings'
+          ? location.pathname.startsWith('/corp/teacher/settings') || location.pathname.startsWith('/corp/teacher/archive')
           : location.pathname.startsWith(item.to);
 
         return (

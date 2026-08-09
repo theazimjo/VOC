@@ -8,12 +8,12 @@ export default function ViewStudentsModal({ p }) {
       viewingGroupStudents && (
         <div className="modal-overlay" onClick={() => setViewingGroupStudents(null)}>
           <div className="modal-content large" onClick={e => e.stopPropagation()}>
-            <h2><Users size={20} /> {viewingGroupStudents.name} - O'quvchilar Progressi</h2>
+            <h2><Users size={20} /> {viewingGroupStudents.name} - Student Progress</h2>
 
             {groupStudentsList.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '2rem 0', color: 'var(--text-muted)' }}>
-                Ushbu guruhga hali o'quvchilar ulanmagan.<br />
-                O'quvchilarga 6 xonali ulanish kodini bering: <strong>{viewingGroupStudents.code}</strong>
+                No students have joined this group yet.<br />
+                Give students this 6-digit join code: <strong>{viewingGroupStudents.code}</strong>
               </div>
             ) : (
               <div className="students-progress-list">
@@ -23,12 +23,12 @@ export default function ViewStudentsModal({ p }) {
                       <div className="st-avatar">{st.name.charAt(0)}</div>
                       <div>
                         <strong>{st.name}</strong>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{st.email || 'Email berilmagan'}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{st.email || 'No email'}</div>
                       </div>
                     </div>
 
                     <div className="st-stats">
-                      <span className="badge-active">A'zo bo'ldi</span>
+                      <span className="badge-active">Joined</span>
                     </div>
                   </div>
                 ))}
@@ -36,7 +36,7 @@ export default function ViewStudentsModal({ p }) {
             )}
 
             <div className="modal-actions">
-              <button className="btn-secondary" onClick={() => setViewingGroupStudents(null)}>Yopish</button>
+              <button className="btn-secondary" onClick={() => setViewingGroupStudents(null)}>Close</button>
             </div>
           </div>
         </div>

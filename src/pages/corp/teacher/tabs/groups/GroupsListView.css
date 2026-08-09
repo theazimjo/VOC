@@ -13,37 +13,6 @@
   box-shadow: 0 4px 14px rgba(10, 132, 255, 0.25);
 }
 
-/* ── Courses Top Bar ────────────────────────── */
-.courses-top-bar {
-  flex-wrap: wrap;
-}
-
-.courses-top-bar > div:last-child {
-  flex-shrink: 0;
-}
-
-/* ── Top Search Lupa Button ───────────────────── */
-.top-search-lupa-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: background 0.16s, color 0.16s, border-color 0.16s;
-  flex-shrink: 0;
-}
-
-.top-search-lupa-btn:hover {
-  background: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
-  border-color: rgba(59, 130, 246, 0.3);
-}
-
 .mgc-more-btn {
   background: none;
   border: none;

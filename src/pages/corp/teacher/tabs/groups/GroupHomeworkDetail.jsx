@@ -19,13 +19,13 @@ export default function GroupHomeworkDetail({ p }) {
         <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
             <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              So'zlar ({words.length})
+              Words ({words.length})
             </span>
           </div>
 
           {words.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '1.5rem', background: 'var(--bg-tertiary)', borderRadius: '16px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.84rem' }}>
-              Mavzu topilmadi.
+              Topic not found.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -63,14 +63,14 @@ export default function GroupHomeworkDetail({ p }) {
     return (
       <div className="teacher-settings-hero-card" style={{ textAlign: 'center', padding: '3rem 1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
         <NotebookPen size={44} style={{ color: 'var(--text-muted)', opacity: 0.5 }} />
-        <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.1rem' }}>Bu uy vazifasi topilmadi.</h3>
+        <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.1rem' }}>This homework wasn't found.</h3>
         <button
           type="button"
           className="gib-code-btn"
           onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
           style={{ marginTop: '8px' }}
         >
-          <ArrowLeft size={16} /> Uy vazifalariga qaytish
+          <ArrowLeft size={16} /> Back to homework
         </button>
       </div>
     );
@@ -84,7 +84,7 @@ export default function GroupHomeworkDetail({ p }) {
       <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
           <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Mavzular ({hwItems.length})
+            Topics ({hwItems.length})
           </span>
         </div>
 
@@ -103,7 +103,7 @@ export default function GroupHomeworkDetail({ p }) {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', minWidth: 0 }}>
                   <strong style={{ color: 'var(--text-primary)', fontSize: '0.86rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.unitTitle}</strong>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.packTitle} · {item.totalWords} so'z</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.packTitle} · {item.totalWords} words</span>
                 </div>
               </div>
               <ChevronRight size={16} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />
@@ -116,13 +116,13 @@ export default function GroupHomeworkDetail({ p }) {
       <div className="teacher-settings-hero-card" style={{ marginBottom: 0, padding: '1rem 1.1rem', borderRadius: '20px', width: '100%', maxWidth: 'none' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
           <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            O'quvchilar ({groupStudentsList.length})
+            Students ({groupStudentsList.length})
           </span>
         </div>
 
         {groupStudentsList.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '1.2rem 1rem', background: 'var(--bg-tertiary)', borderRadius: '14px', border: '1px dashed var(--border)', color: 'var(--text-muted)', fontSize: '0.82rem' }}>
-            O'quvchilar mavjud emas.
+            No students yet.
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
@@ -163,7 +163,7 @@ export default function GroupHomeworkDetail({ p }) {
                     className="badge-active"
                     style={allDone ? { padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 } : { background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#3b82f6', padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 }}
                   >
-                    {doneCount}/{hwItems.length} bajarildi
+                    {doneCount}/{hwItems.length} done
                   </span>
                 </div>
               );
@@ -217,7 +217,7 @@ export default function GroupHomeworkDetail({ p }) {
                     {selectedStudentProgressModal.student.name}
                   </h3>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Natija: {selectedStudentProgressModal.doneCount}/{selectedStudentProgressModal.total} bajarildi
+                    Result: {selectedStudentProgressModal.doneCount}/{selectedStudentProgressModal.total} done
                   </span>
                 </div>
               </div>

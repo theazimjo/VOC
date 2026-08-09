@@ -1,173 +1,297 @@
-import { BookOpen, Copy, MoreVertical, Pencil, Plus, Search, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, BookOpen, ChevronRight, Plus, Search, Trash2, X } from 'lucide-react';
+import { auth } from '../../../../firebase';
 import TeacherPackViewer from '../../../../components/corp/TeacherPackViewer';
-import CourseManager from '../../../../components/corp/CourseManager';
+import CustomPackEditor from '../../../../components/corp/CustomPackEditor';
 
 export default function CoursesTab({ p }) {
   const {
     centerId, customPacks, setCustomPacks, filteredPacks, searchTerm, setSearchTerm,
-    setShowPackEditor, viewingPack, setViewingPack, editingPack, setEditingPack,
-    activePackMenu, setActivePackMenu, packMenuPos, setPackMenuPos,
-    duplicatingPackId, handleDuplicatePack, handleDeletePack,
+    setShowPackEditor, showPackEditor, viewingPack, setViewingPack,
+    handleDeletePack,
   } = p;
 
+  const [showSearch, setShowSearch] = useState(false);
+
   return (
-        viewingPack ? (
+        showPackEditor ? (
+          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <div className="ios-group-top-bar">
+              <button
+                type="button"
+                className="ios-back-btn"
+                onClick={() => setShowPackEditor(false)}
+                title="Back"
+              >
+                <ArrowLeft size={18} />
+              </button>
+              <div className="ios-title-group">
+                <h2 className="ios-group-title">Create New Pack</h2>
+              </div>
+            </div>
+            <CustomPackEditor
+              centerId={centerId}
+              ownerUid={auth.currentUser?.uid}
+              onSaved={(pack) => {
+                setCustomPacks(prev => [{ ...pack, scope: 'own' }, ...prev]);
+                setShowPackEditor(false);
+              }}
+              onCancel={() => setShowPackEditor(false)}
+            />
+          </div>
+        ) : viewingPack ? (
           <TeacherPackViewer
             pack={viewingPack}
             onBack={() => setViewingPack(null)}
-          />
-        ) : editingPack ? (
-          <CourseManager
+            editable={viewingPack.scope === 'own'}
             centerId={centerId}
-            course={editingPack}
-            onBack={() => setEditingPack(null)}
             onUpdate={(updatedPack) => {
               setCustomPacks(prev => prev.map(p => p.id === updatedPack.id ? { ...updatedPack, scope: p.scope } : p));
-              setEditingPack(prev => ({ ...updatedPack, scope: prev.scope }));
             }}
           />
         ) : (
         <>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-            <h2 style={{ fontSize: '1.35rem', color: 'var(--text-primary)', margin: 0, fontWeight: 700 }}>
-              So'zlar bazasi ({customPacks.length})
-            </h2>
-
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'nowrap' }}>
-              <div className="search-input-wrap">
-                <Search size={16} className="search-icon" />
-                <input
-                  type="text"
-                  placeholder="Pack nomini qidirish..."
-                  value={searchTerm}
-                  onChange={e => setSearchTerm(e.target.value)}
-                />
+          <div
+            className="premium-glass"
+            style={{ marginBottom: '1rem', padding: '1rem 1.1rem', borderRadius: '20px' }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+              <div>
+                <h2 style={{ fontSize: '1.2rem', color: 'var(--pg-text)', margin: 0, fontWeight: 700 }}>
+                  Word Bank
+                </h2>
+                <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem', color: 'var(--pg-text-secondary)' }}>{customPacks.length} packs</p>
               </div>
+
               <button
                 type="button"
-                className="btn-add-course-primary"
-                onClick={() => setShowPackEditor(true)}
-                style={{ padding: '8px 14px', fontSize: '0.85rem', height: '36px', flexShrink: 0 }}
+                onClick={() => setShowSearch(!showSearch)}
+                title="Search packs"
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  width: '40px', height: '40px', borderRadius: '12px',
+                  background: 'var(--pg-surface)', border: '1px solid var(--pg-hairline)',
+                  color: 'var(--pg-text)', cursor: 'pointer', flexShrink: 0,
+                }}
               >
-                <Plus size={16} /> Yangi pack
+                {showSearch ? <X size={18} /> : <Search size={18} />}
               </button>
             </div>
+
+            {showSearch && (
+              <div
+                style={{
+                  marginTop: '0.85rem', width: '100%', display: 'flex', alignItems: 'center', gap: '8px',
+                  padding: '9px 12px', borderRadius: '12px',
+                  background: 'var(--pg-surface)', border: '1px solid var(--pg-hairline)',
+                }}
+              >
+                <Search size={16} style={{ color: 'var(--pg-text-muted)', flexShrink: 0 }} />
+                <input
+                  type="text"
+                  placeholder="Search packs..."
+                  value={searchTerm}
+                  onChange={e => setSearchTerm(e.target.value)}
+                  autoFocus
+                  style={{ width: '100%', background: 'transparent', border: 'none', outline: 'none', color: 'var(--pg-text)', fontSize: '0.9rem' }}
+                />
+              </div>
+            )}
           </div>
 
           {filteredPacks.length === 0 ? (
-            <div className="empty-state">
-              <BookOpen size={40} />
-              <p>{searchTerm ? 'Qidiruv bo\'yicha pack topilmadi.' : 'Hozircha custom packlar yaratilmagan.'}</p>
+            <div
+              className="premium-glass"
+              style={{
+                textAlign: 'center',
+                padding: '2.5rem 1.5rem',
+                borderRadius: '20px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '10px'
+              }}
+            >
+              <BookOpen size={40} style={{ color: '#818cf8', opacity: 0.8 }} />
+              <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--pg-text-secondary)' }}>
+                {searchTerm ? 'No packs match your search.' : 'No custom packs yet.'}
+              </p>
             </div>
           ) : (
-            <>
-              <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.03em', margin: '0 0 0.85rem 0' }}>
-                Mening packlarim ({filteredPacks.filter(p => p.scope === 'own').length})
-              </h3>
-              {filteredPacks.filter(p => p.scope === 'own').length === 0 ? (
-                <div className="empty-state" style={{ padding: '1.5rem' }}>
-                  <p>Siz hali shaxsiy pack yaratmagansiz. Faqat sizga tegishli bo'lgan va boshqa hech kimga (markaz admini ham) ko'rinmaydigan pack yaratish uchun "Yangi pack" tugmasini bosing.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {/* MENING PACKLARIM SECTION */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '0.6rem' }}>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    My Packs ({filteredPacks.filter(p => p.scope === 'own').length})
+                  </span>
                 </div>
-              ) : (
-                <div className="packs-grid" style={{ marginBottom: '2rem' }}>
-                  {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
-                    <div
-                      key={pack.id}
-                      className="custom-pack-card"
-                      onClick={() => setViewingPack(pack)}
-                      style={{ cursor: 'pointer', position: 'relative' }}
-                      title="Ko'rish uchun bosing"
-                    >
-                      <button
-                        type="button"
-                        className="btn-action-more"
-                        title="Amallar"
-                        style={{ position: 'absolute', top: '10px', right: '10px' }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const rect = e.currentTarget.getBoundingClientRect();
-                          setPackMenuPos({ top: rect.bottom + 6, right: window.innerWidth - rect.right });
-                          setActivePackMenu(activePackMenu === pack.id ? null : pack.id);
+
+                {filteredPacks.filter(p => p.scope === 'own').length === 0 ? (
+                  <div
+                    className="premium-glass"
+                    style={{
+                      padding: '1.1rem 1.25rem',
+                      borderRadius: '18px',
+                      color: 'var(--pg-text-secondary)',
+                      fontSize: '0.82rem',
+                      lineHeight: '1.45'
+                    }}
+                  >
+                    You haven't created any private packs yet. Tap <strong>"+"</strong> below to create one only you can see — not even the center admin.
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
+                      <div
+                        key={pack.id}
+                        className="premium-glass"
+                        onClick={() => setViewingPack(pack)}
+                        style={{
+                          padding: '12px 14px',
+                          borderRadius: '18px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '12px',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
                         }}
                       >
-                        <MoreVertical size={16} />
-                      </button>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
+                          <strong style={{ color: 'var(--pg-text)', fontSize: '0.94rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {pack.title}
+                          </strong>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {pack.description || 'No description'}
+                          </span>
+                        </div>
 
-                      <h3>{pack.title}</h3>
-                      <p className="pack-desc">{pack.description || 'Izoh yo\'q'}</p>
-                      <div className="pack-meta">
-                        <span><strong>{pack.wordCount || (pack.words ? pack.words.length : 0)}</strong> ta so'z</span>
-                      </div>
-
-                      {activePackMenu === pack.id && (
-                        <>
-                          <div style={{ position: 'fixed', inset: 0, zIndex: 9998 }} onClick={(e) => { e.stopPropagation(); setActivePackMenu(null); }} />
-                          <div
-                            className="teacher-action-dropdown"
-                            onClick={(e) => e.stopPropagation()}
-                            style={{ position: 'fixed', top: `${packMenuPos.top}px`, right: `${packMenuPos.right}px`, zIndex: 9999, minWidth: '160px' }}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                          <span
+                            style={{
+                              padding: '4px 12px',
+                              borderRadius: '999px',
+                              background: 'rgba(129, 140, 248, 0.18)',
+                              color: '#a5b4fc',
+                              fontSize: '0.78rem',
+                              fontWeight: 600,
+                              whiteSpace: 'nowrap'
+                            }}
                           >
-                            <button type="button" className="dropdown-item" onClick={() => { setEditingPack(pack); setActivePackMenu(null); }}>
-                              <Pencil size={15} /> Tahrirlash
-                            </button>
-                            <button
-                              type="button"
-                              className="dropdown-item"
-                              disabled={duplicatingPackId === pack.id}
-                              onClick={() => { handleDuplicatePack(pack); setActivePackMenu(null); }}
-                            >
-                              <Copy size={15} /> {duplicatingPackId === pack.id ? 'Nusxalanmoqda...' : 'Nusxalash'}
-                            </button>
-                            <button type="button" className="dropdown-item dropdown-item-danger" onClick={() => { handleDeletePack(pack); setActivePackMenu(null); }}>
-                              <Trash2 size={15} /> O'chirish
-                            </button>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
+                            {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                          </span>
 
-              <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.03em', margin: '0 0 0.85rem 0' }}>
-                Markaz packlari ({filteredPacks.filter(p => p.scope === 'center').length})
-              </h3>
-              {filteredPacks.filter(p => p.scope === 'center').length === 0 ? (
-                <div className="empty-state" style={{ padding: '1.5rem' }}>
-                  <p>Markaz tomonidan umumiy pack hali yaratilmagan.</p>
-                </div>
-              ) : (
-                <div className="packs-grid">
-                  {filteredPacks.filter(p => p.scope === 'center').map((pack) => (
-                    <div
-                      key={pack.id}
-                      className="custom-pack-card"
-                      onClick={() => setViewingPack(pack)}
-                      style={{ cursor: 'pointer', position: 'relative' }}
-                      title="Ko'rish uchun bosing"
-                    >
-                      <button
-                        type="button"
-                        className="btn-action-more"
-                        title="Nusxalash"
-                        style={{ position: 'absolute', top: '10px', right: '10px' }}
-                        disabled={duplicatingPackId === pack.id}
-                        onClick={(e) => { e.stopPropagation(); handleDuplicatePack(pack); }}
-                      >
-                        <Copy size={16} />
-                      </button>
-
-                      <h3>{pack.title}</h3>
-                      <p className="pack-desc">{pack.description || 'Izoh yo\'q'}</p>
-                      <div className="pack-meta">
-                        <span><strong>{pack.wordCount || (pack.words ? pack.words.length : 0)}</strong> ta so'z</span>
+                          <button
+                            type="button"
+                            title="Delete"
+                            style={{
+                              background: 'rgba(239, 68, 68, 0.14)',
+                              border: '1px solid rgba(239, 68, 68, 0.25)',
+                              borderRadius: '9px',
+                              color: '#ef4444',
+                              width: '28px',
+                              height: '28px',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              cursor: 'pointer',
+                              flexShrink: 0
+                            }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeletePack(pack);
+                            }}
+                          >
+                            <Trash2 size={15} />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* MARKAZ PACKLARI SECTION */}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '0.6rem' }}>
+                  <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Center Packs ({filteredPacks.filter(p => p.scope === 'center').length})
+                  </span>
                 </div>
-              )}
-            </>
+
+                {filteredPacks.filter(p => p.scope === 'center').length === 0 ? (
+                  <div
+                    className="premium-glass"
+                    style={{
+                      padding: '1.1rem 1.25rem',
+                      borderRadius: '18px',
+                      color: 'var(--pg-text-secondary)',
+                      fontSize: '0.82rem'
+                    }}
+                  >
+                    No shared packs from the center yet.
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {filteredPacks.filter(p => p.scope === 'center').map((pack) => (
+                      <div
+                        key={pack.id}
+                        className="premium-glass"
+                        onClick={() => setViewingPack(pack)}
+                        style={{
+                          padding: '12px 14px',
+                          borderRadius: '18px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: '12px',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
+                          <strong style={{ color: 'var(--pg-text)', fontSize: '0.94rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {pack.title}
+                          </strong>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {pack.description || 'No description'}
+                          </span>
+                        </div>
+
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                          <span
+                            style={{
+                              padding: '4px 12px',
+                              borderRadius: '999px',
+                              background: 'rgba(129, 140, 248, 0.18)',
+                              color: '#a5b4fc',
+                              fontSize: '0.78rem',
+                              fontWeight: 600,
+                              whiteSpace: 'nowrap'
+                            }}
+                          >
+                            {pack.wordCount || (pack.words ? pack.words.length : 0)} words
+                          </span>
+                          <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           )}
+
+          {/* Floating Action Button (New Pack) */}
+          <button
+            type="button"
+            className="fab-add-pack-btn fab-icon-only"
+            onClick={() => setShowPackEditor(true)}
+            title="Create new pack"
+          >
+            <Plus size={26} />
+          </button>
         </>
         )
   );

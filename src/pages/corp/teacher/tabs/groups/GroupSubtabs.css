@@ -108,47 +108,6 @@
   border-color: rgba(239, 68, 68, 0.4);
 }
 
-/* ── Floating Action Button (FAB) for Pack Biriktirish ── */
-.fab-add-pack-btn {
-  position: fixed;
-  bottom: 85px;
-  right: 20px;
-  z-index: 999;
-  background: #3b82f6;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 50px;
-  padding: 12px 20px;
-  font-weight: 700;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
-  backdrop-filter: blur(16px);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fab-add-pack-btn.fab-icon-only {
-  width: 58px;
-  height: 58px;
-  padding: 0;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-}
-
-.fab-add-pack-btn:hover {
-  background: #2563eb;
-  transform: translateY(-2px) scale(1.06);
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.55);
-}
-
-.fab-add-pack-btn:active {
-  transform: translateY(0) scale(0.98);
-}
-
 /* ── Group Words Header ──────────────────────── */
 .group-words-header {
   display: flex;

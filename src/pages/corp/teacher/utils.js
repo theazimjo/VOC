@@ -9,9 +9,9 @@ export const GROUP_LEVEL_OPTIONS = [
 export function getGroupPackEntries(group) {
   if (!group) return [];
   const categories = [
-    { key: 'assignedPacks', label: 'Asosiy' },
-    { key: 'requiredPacks', label: 'Kerakli' },
-    { key: 'additionalPacks', label: "Qo'shimcha" },
+    { key: 'assignedPacks', label: 'Main' },
+    { key: 'requiredPacks', label: 'Required' },
+    { key: 'additionalPacks', label: "Extra" },
   ];
   const seen = new Map();
   categories.forEach(({ key, label }) => {
@@ -32,9 +32,9 @@ export function getPackUnits(pack) {
   const months = pack.months && pack.months.length > 0
     ? pack.months
     : pack.units && pack.units.length > 0
-      ? [{ id: 'm1', title: '1-Oy', units: pack.units }]
+      ? [{ id: 'm1', title: 'Month 1', units: pack.units }]
       : pack.words && pack.words.length > 0
-        ? [{ id: 'm1', title: '1-Oy', units: [{ id: 'u1', title: '1-Mavzu', words: pack.words }] }]
+        ? [{ id: 'm1', title: 'Month 1', units: [{ id: 'u1', title: 'Topic 1', words: pack.words }] }]
         : [];
 
   const units = [];
@@ -54,7 +54,7 @@ export function getPackUnits(pack) {
 }
 
 // Every topic a teacher can hand out as homework: every unit of every pack
-// assigned to the group under Asosiy or Qo'shimcha (never Kerakli — that
+// assigned to the group under Main or Extra (never Required — that
 // category's gone). Topics already given in a past assignment (`usedKeys`,
 // built from the group's whole homeworkList) are still included — just
 // flagged `used: true` — so the picker can show them greyed out instead of

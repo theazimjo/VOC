@@ -11,16 +11,16 @@ export default function TransferPickerModal({ p }) {
       showTransferPicker && groupSettingsTarget && (
         <div className="modal-overlay" onClick={() => setShowTransferPicker(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h2><ArrowRightLeft size={20} /> "{groupSettingsTarget.name}"ni o'tkazish</h2>
+            <h2><ArrowRightLeft size={20} /> Transfer "{groupSettingsTarget.name}"</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1rem' }}>
-              Guruh o'tkaziladigan o'qituvchini tanlang:
+              Select a teacher to transfer this group to:
             </p>
 
             {loadingTransferTeachers ? (
-              <div className="loading-spinner">Yuklanmoqda...</div>
+              <div className="loading-spinner">Loading...</div>
             ) : centerTeachersList.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '1.5rem 0', color: 'var(--text-secondary)' }}>
-                Markazda boshqa o'qituvchi topilmadi.
+                No other teachers found at this center.
               </div>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '320px', overflowY: 'auto' }}>
@@ -43,7 +43,7 @@ export default function TransferPickerModal({ p }) {
             )}
 
             <div className="modal-actions">
-              <button className="btn-secondary" onClick={() => setShowTransferPicker(false)}>Bekor qilish</button>
+              <button className="btn-secondary" onClick={() => setShowTransferPicker(false)}>Cancel</button>
             </div>
           </div>
         </div>

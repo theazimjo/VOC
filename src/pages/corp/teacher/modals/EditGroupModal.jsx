@@ -61,7 +61,7 @@ export default function EditGroupModal({ p }) {
               <Users size={18} />
             </div>
             <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-              Guruhni Tahrirlash
+              Edit Group
             </h3>
           </div>
 
@@ -80,7 +80,7 @@ export default function EditGroupModal({ p }) {
               justifyContent: 'center',
               cursor: 'pointer'
             }}
-            title="Yopish"
+            title="Close"
           >
             <X size={16} />
           </button>
@@ -90,13 +90,13 @@ export default function EditGroupModal({ p }) {
         <form onSubmit={handleUpdateGroup} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Guruh Nomi *
+              Group Name *
             </label>
             <input
               type="text"
               className="input"
               required
-              placeholder="masalan: Beginner Monday 17:00"
+              placeholder="e.g. Beginner Monday 5pm"
               value={editForm.name}
               onChange={e => setEditForm({ ...editForm, name: e.target.value })}
               style={{
@@ -113,7 +113,7 @@ export default function EditGroupModal({ p }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <label style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-              Daraja (Level)
+              Level
             </label>
             <select
               className="select"
@@ -149,7 +149,7 @@ export default function EditGroupModal({ p }) {
                 cursor: 'pointer'
               }}
             >
-              Bekor qilish
+              Cancel
             </button>
 
             <button
@@ -168,7 +168,7 @@ export default function EditGroupModal({ p }) {
                 boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)'
               }}
             >
-              {submittingEditGroup ? 'Saqlanmoqda...' : 'Saqlash'}
+              {submittingEditGroup ? 'Saving...' : 'Save'}
             </button>
           </div>
         </form>

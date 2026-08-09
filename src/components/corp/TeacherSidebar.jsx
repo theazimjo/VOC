@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
-  Building2, Users, Archive, BookOpen,
+  Building2, Users, BookOpen,
   BarChart3, Settings, LogOut, ChevronLeft, ChevronRight, Moon, Sun
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -27,11 +27,10 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
   };
 
   const navItems = [
-    { to: '/corp/teacher', label: 'Guruhlarim', icon: Users, isGroupTab: true },
-    { to: '/corp/teacher/archive', label: 'Arxiv', icon: Archive },
-    { to: '/corp/teacher/courses', label: "So'zlar bazasi", icon: BookOpen },
-    { to: '/corp/teacher/statistics', label: 'Statistika', icon: BarChart3 },
-    { to: '/corp/teacher/settings', label: 'Sozlamalar', icon: Settings },
+    { to: '/corp/teacher', label: 'My Groups', icon: Users, isGroupTab: true },
+    { to: '/corp/teacher/courses', label: 'Word Bank', icon: BookOpen },
+    { to: '/corp/teacher/statistics', label: 'Statistics', icon: BarChart3 },
+    { to: '/corp/teacher/settings', label: 'Settings', icon: Settings, matchExtra: '/corp/teacher/archive' },
   ];
 
   return (
@@ -43,16 +42,16 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
         </div>
         {!collapsed && (
           <div className="brand-text-meta">
-            <span className="center-title">{centerName || "O'quv Markazi"}</span>
-            <span className="center-role-tag">O'qituvchi</span>
+            <span className="center-title">{centerName || 'Learning Center'}</span>
+            <span className="center-role-tag">Teacher</span>
           </div>
         )}
 
         <button
           className="sidebar-collapse-toggle"
           onClick={() => setCollapsed(!collapsed)}
-          title={collapsed ? "Kengaytirish" : "Yig'ish"}
-          aria-label={collapsed ? "Kengaytirish" : "Yig'ish"}
+          title={collapsed ? 'Expand' : 'Collapse'}
+          aria-label={collapsed ? 'Expand' : 'Collapse'}
         >
           {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
         </button>
@@ -64,7 +63,7 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
           const Icon = item.icon;
           const isActive = item.isGroupTab
             ? (location.pathname === '/corp/teacher' || location.pathname.startsWith('/corp/teacher/group/'))
-            : location.pathname.startsWith(item.to);
+            : location.pathname.startsWith(item.to) || (item.matchExtra && location.pathname.startsWith(item.matchExtra));
           return (
             <Link
               key={item.to}
@@ -84,7 +83,7 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
         <button
           className="btn-corp-theme-toggle"
           onClick={toggleTheme}
-          title={isDarkMode ? "Yorug' rejimga o'tish" : "Tungi rejimga o'tish"}
+          title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -103,24 +102,24 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
           }}
         >
           {isDarkMode ? <Sun size={17} style={{ color: '#ff9500' }} /> : <Moon size={17} style={{ color: '#5856d6' }} />}
-          {!collapsed && <span>{isDarkMode ? "Yorug' rejim" : "Tungi rejim"}</span>}
+          {!collapsed && <span>{isDarkMode ? 'Light mode' : 'Dark mode'}</span>}
         </button>
 
         {!collapsed && (
           <div className="admin-profile-info">
             <div className="admin-avatar">
-              {(teacherName || email || 'O')[0].toUpperCase()}
+              {(teacherName || email || 'T')[0].toUpperCase()}
             </div>
             <div className="admin-email-text">
-              <span className="adm-name">{teacherName || 'O\'qituvchi'}</span>
-              <span className="adm-mail">{phone || email || 'O\'qituvchi akkaunti'}</span>
+              <span className="adm-name">{teacherName || 'Teacher'}</span>
+              <span className="adm-mail">{phone || email || 'Teacher account'}</span>
             </div>
           </div>
         )}
 
-        <button className="btn-corp-logout" onClick={handleLogout} title="Chiqish">
+        <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
           <LogOut size={16} strokeWidth={2.2} />
-          {!collapsed && <span>Chiqish</span>}
+          {!collapsed && <span>Log out</span>}
         </button>
       </div>
     </aside>

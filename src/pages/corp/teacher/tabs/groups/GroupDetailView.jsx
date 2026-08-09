@@ -33,14 +33,14 @@ export default function GroupDetailView({ p }) {
                     navigate('/corp/teacher');
                   }
                 }}
-                title={viewingHomeworkItem ? "Mavzularga qaytish" : showHomeworkEditor ? "Vazifalarga qaytish" : assigningGroup ? "Packlarga qaytish" : hwId ? "Uy vazifalariga qaytish" : subTab ? "Bo'limlarga qaytish" : "Guruhlarga qaytish"}
+                title={viewingHomeworkItem ? "Back to topics" : showHomeworkEditor ? "Back to homework" : assigningGroup ? "Back to packs" : hwId ? "Back to homework list" : subTab ? "Back to sections" : "Back to groups"}
               >
                 <ArrowLeft size={18} />
               </button>
 
               <div className="ios-title-group">
                 <h2 className="ios-group-title">
-                  {viewingHomeworkItem ? viewingHomeworkItem.unitTitle : showHomeworkEditor ? "Yangi uy vazifasi" : assigningGroup ? "Pack biriktirish" : hwId ? (currentHw?.name || "Uy vazifasi") : subTab === 'students' ? "O'quvchilar" : subTab === 'words' ? "Packlar" : subTab === 'homework' ? "Uy vazifasi" : subTab === 'stats' ? "Statistika" : subTab === 'settings' ? "Guruh Sozlamalari" : selectedGroup.name}
+                  {viewingHomeworkItem ? viewingHomeworkItem.unitTitle : showHomeworkEditor ? "New Homework" : assigningGroup ? "Assign Pack" : hwId ? (currentHw?.name || "Homework") : subTab === 'students' ? "Students" : subTab === 'words' ? "Packs" : subTab === 'homework' ? "Homework" : subTab === 'stats' ? "Stats" : subTab === 'settings' ? "Group Settings" : selectedGroup.name}
                 </h2>
               </div>
 
@@ -63,7 +63,7 @@ export default function GroupDetailView({ p }) {
                     flexShrink: 0
                   }}
                 >
-                  {savingHomework ? 'Saqlanmoqda...' : `Saqlash (${homeworkSelection?.size || 0})`}
+                  {savingHomework ? 'Saving...' : `Save (${homeworkSelection?.size || 0})`}
                 </button>
               ) : !subTab && !hwId && !viewingHomeworkItem && (
                 <button
@@ -73,7 +73,7 @@ export default function GroupDetailView({ p }) {
                     handleOpenGroupSettings(selectedGroup);
                     navigate(`/corp/teacher/group/${selectedGroup.id}/settings`);
                   }}
-                  title="Guruh sozlamalari"
+                  title="Group settings"
                 >
                   <MoreVertical size={18} />
                 </button>
@@ -86,24 +86,24 @@ export default function GroupDetailView({ p }) {
                 <div className="group-main-hero-card">
                   <div className="gmh-top">
                     <div className="gmh-code-block">
-                      <span className="gmh-subtitle">GURUH TAKLIF KODI</span>
+                      <span className="gmh-subtitle">GROUP INVITE CODE</span>
                       <div className="gmh-code-row">
                         <span className="gmh-code">{selectedGroup.code}</span>
                         <button
                           type="button"
                           className="gmh-copy-btn"
                           onClick={() => copyCode(selectedGroup.code)}
-                          title="Nusxalash"
+                          title="Copy"
                         >
                           {copiedCode === selectedGroup.code ? (
                             <>
                               <Check size={14} color="#34c759" />
-                              <span>Nusxalandi</span>
+                              <span>Copied</span>
                             </>
                           ) : (
                             <>
                               <Copy size={14} />
-                              <span>Nusxalash</span>
+                              <span>Copy</span>
                             </>
                           )}
                         </button>
@@ -112,7 +112,7 @@ export default function GroupDetailView({ p }) {
 
                     <span className="gmh-status-badge">
                       <Check size={13} />
-                      {selectedGroup.level || 'Faol Kurs'}
+                      {selectedGroup.level || 'Active Course'}
                     </span>
                   </div>
 
@@ -121,23 +121,23 @@ export default function GroupDetailView({ p }) {
                   <div className="gmh-stats-row">
                     <div className="gmh-stat">
                       <span className="gmh-stat-val">{selectedGroup.studentsCount || 0}</span>
-                      <span className="gmh-stat-label">O'quvchilar</span>
+                      <span className="gmh-stat-label">Students</span>
                     </div>
                     <div className="gmh-stat">
                       <span className="gmh-stat-val">
                         {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length}
                       </span>
-                      <span className="gmh-stat-label">Packlar</span>
+                      <span className="gmh-stat-label">Packs</span>
                     </div>
                     <div className="gmh-stat">
                       <span className="gmh-stat-val">{groupHomeworkList.length}</span>
-                      <span className="gmh-stat-label">Vazifalar</span>
+                      <span className="gmh-stat-label">Homework</span>
                     </div>
                     <div className="gmh-stat">
                       <span className="gmh-stat-val green">
                         {selectedGroupStats ? `${selectedGroupStats.avgPercent}%` : '0%'}
                       </span>
-                      <span className="gmh-stat-label">O'zlashtirish</span>
+                      <span className="gmh-stat-label">Mastery</span>
                     </div>
                   </div>
                 </div>
@@ -153,14 +153,14 @@ export default function GroupDetailView({ p }) {
                       <div className="bento-icon-box icon-blue">
                         <Users size={22} />
                       </div>
-                      <span className="bento-badge-count">{selectedGroup.studentsCount || 0} ta</span>
+                      <span className="bento-badge-count">{selectedGroup.studentsCount || 0}</span>
                     </div>
                     <div className="bento-info">
-                      <h3 className="bento-title">O'quvchilar</h3>
-                      <p className="bento-sub">A'zolar progressi va boshqaruvi</p>
+                      <h3 className="bento-title">Students</h3>
+                      <p className="bento-sub">Member progress & management</p>
                     </div>
                     <div className="bento-footer">
-                      <span className="bento-action-label">Boshqarish</span>
+                      <span className="bento-action-label">Manage</span>
                       <ChevronRight size={16} className="bento-arrow" />
                     </div>
                   </div>
@@ -175,15 +175,15 @@ export default function GroupDetailView({ p }) {
                         <BookOpen size={22} />
                       </div>
                       <span className="bento-badge-count">
-                        {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length} ta
+                        {(selectedGroup.assignedPacks || []).length + (selectedGroup.additionalPacks || []).length}
                       </span>
                     </div>
                     <div className="bento-info">
-                      <h3 className="bento-title">Packlar</h3>
-                      <p className="bento-sub">Biriktirilgan so'z toifalari</p>
+                      <h3 className="bento-title">Packs</h3>
+                      <p className="bento-sub">Assigned word categories</p>
                     </div>
                     <div className="bento-footer">
-                      <span className="bento-action-label">Boshqarish</span>
+                      <span className="bento-action-label">Manage</span>
                       <ChevronRight size={16} className="bento-arrow" />
                     </div>
                   </div>
@@ -197,14 +197,14 @@ export default function GroupDetailView({ p }) {
                       <div className="bento-icon-box icon-amber">
                         <NotebookPen size={22} />
                       </div>
-                      <span className="bento-badge-count">{groupHomeworkList.length} ta</span>
+                      <span className="bento-badge-count">{groupHomeworkList.length}</span>
                     </div>
                     <div className="bento-info">
-                      <h3 className="bento-title">Uy vazifasi</h3>
-                      <p className="bento-sub">Topshiriqlar va bajarilish holati</p>
+                      <h3 className="bento-title">Homework</h3>
+                      <p className="bento-sub">Assignments & completion status</p>
                     </div>
                     <div className="bento-footer">
-                      <span className="bento-action-label">Boshqarish</span>
+                      <span className="bento-action-label">Manage</span>
                       <ChevronRight size={16} className="bento-arrow" />
                     </div>
                   </div>
@@ -223,11 +223,11 @@ export default function GroupDetailView({ p }) {
                       </span>
                     </div>
                     <div className="bento-info">
-                      <h3 className="bento-title">Statistika</h3>
-                      <p className="bento-sub">Guruh bo'yicha o'zlashtirish tahlili</p>
+                      <h3 className="bento-title">Stats</h3>
+                      <p className="bento-sub">Group mastery breakdown</p>
                     </div>
                     <div className="bento-footer">
-                      <span className="bento-action-label">Tahlilni ko'rish</span>
+                      <span className="bento-action-label">View Analysis</span>
                       <ChevronRight size={16} className="bento-arrow" />
                     </div>
                   </div>

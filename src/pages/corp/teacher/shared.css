@@ -3,6 +3,182 @@
    states) reused by 2+ pages, plus some legacy classes kept for safety that
    no current page matches by class name. */
 
+/* ── New Pack Editor (CustomPackEditor) — full-page override ──
+   The shared component (also used by center-admin inside an actual
+   .modal-overlay popup) is hardcoded dark/modal-styled. Teacher now
+   renders it inline as a page (see CoursesTab.jsx), so it needs to look
+   like the rest of the teacher design system instead of a floating
+   dark modal card. Scoped to .teacher-dashboard-container so
+   center-admin's own modal usage is untouched. */
+.teacher-dashboard-container .new-course-modal {
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--text-primary);
+}
+
+.teacher-dashboard-container .course-modal-header {
+  display: none;
+}
+
+.teacher-dashboard-container .course-modal-body {
+  padding: 1.1rem 1.25rem;
+  gap: 1rem;
+}
+
+.teacher-dashboard-container .modal-label {
+  color: var(--text-muted);
+}
+
+.teacher-dashboard-container .modal-input,
+.teacher-dashboard-container .modal-textarea {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  color-scheme: light dark;
+}
+
+.teacher-dashboard-container .modal-input option,
+.teacher-dashboard-container select option {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.teacher-dashboard-container .modal-input::placeholder,
+.teacher-dashboard-container .modal-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.teacher-dashboard-container .modal-input:focus,
+.teacher-dashboard-container .modal-textarea:focus {
+  border-color: #3b82f6;
+  background: var(--bg-glass-hover);
+}
+
+.teacher-dashboard-container .btn-modal-cancel {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.teacher-dashboard-container .btn-modal-cancel:hover {
+  background: var(--bg-glass-hover);
+}
+
+@media (max-width: 480px) {
+  .teacher-dashboard-container .new-course-modal {
+    border-radius: 16px;
+  }
+  .teacher-dashboard-container .course-modal-body {
+    padding: 1rem;
+  }
+}
+
+/* ── Premium Dark Glass (Courses / So'zlar bazasi) ──
+   A fixed dark-glass surface (not theme-adaptive like --bg-glass-strong)
+   for a deliberate "premium glass panel" look: translucent dark surface,
+   strong blur, subtle luminous border, soft wide glow instead of a heavy
+   black shadow. Text/icon colors inside read off the --pg-* custom
+   properties, which cascade to descendants automatically. */
+/* ── iOS-style grouped list (Sozlamalar) ──────
+   Small uppercase section label above a rounded card of dividerless
+   rows — the modern iOS Settings.app pattern, instead of one big
+   "hero card" per field. Pairs with .premium-glass for the card. */
+.ios-section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 6px 6px;
+}
+
+.ios-list-card {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.ios-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--pg-hairline);
+  min-height: 46px;
+}
+
+.ios-list-row:last-child {
+  border-bottom: none;
+}
+
+.ios-list-row-action {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.ios-list-row-action:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ios-list-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--pg-text);
+  flex-shrink: 0;
+}
+
+.ios-list-input {
+  flex: 1;
+  text-align: right;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.88rem;
+  color: var(--pg-text);
+  min-width: 0;
+}
+
+.ios-list-input::placeholder {
+  color: var(--pg-text-muted);
+}
+
+.ios-row-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.premium-glass {
+  --pg-text: rgba(255, 255, 255, 0.94);
+  --pg-text-secondary: rgba(255, 255, 255, 0.68);
+  --pg-text-muted: rgba(255, 255, 255, 0.48);
+  --pg-hairline: rgba(255, 255, 255, 0.12);
+  --pg-surface: rgba(255, 255, 255, 0.07);
+  /* Deliberately low alpha — the whole point of glass is that whatever is
+     behind the card (the page's ambient blobs, other cards, scrolled
+     content) stays visible and shifts as it moves; a heavy alpha here
+     just paints a static dark rectangle with a blurred edge. */
+  background: rgba(22, 22, 30, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 0 90px rgba(124, 108, 255, 0.1);
+  color: var(--pg-text);
+}
+
 /* ── Bento Ambient Hero Group Settings Modal ── */
 .group-settings-bento-modal {
   background: var(--bg-glass-strong);
@@ -128,15 +304,23 @@
 .teacher-settings-hero-card {
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 1.5rem 1.6rem;
-  margin-bottom: 1.25rem;
+  border-radius: 20px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   position: relative;
   overflow: hidden;
   max-width: 650px;
+}
+
+@media (max-width: 480px) {
+  .teacher-settings-hero-card {
+    padding: 0.9rem 1rem;
+    border-radius: 16px;
+    margin-bottom: 0.75rem;
+  }
 }
 
 .teacher-settings-hero-card::before {
@@ -157,14 +341,14 @@
 .tshc-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 1.25rem;
+  gap: 10px;
+  margin-bottom: 1rem;
 }
 
 .tshc-icon-box {
-  width: 42px;
-  height: 42px;
-  border-radius: 13px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   background: rgba(59, 130, 246, 0.14);
   color: #3b82f6;
   display: flex;
@@ -1268,14 +1452,6 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
-@media (max-width: 640px) {
-  .teacher-header {
-    padding: 1rem 1.1rem;
-    border-radius: 18px;
-    gap: 1rem;
-  }
-}
-
 .teacher-badge {
   display: inline-flex;
   align-items: center;
@@ -1290,7 +1466,7 @@
 }
 
 .teacher-header h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 6px;
   color: var(--text-primary) !important;
@@ -1493,72 +1669,100 @@
   color: var(--error);
 }
 
-/* ── Teachers Table ─────────────────────────── */
+/* ── Teachers Table (Statistika sahifasi) ─────
+   Was only ever partially styled here (an override-only block assuming
+   center-admin/tabs/TeachersTab.css was also loaded — it isn't, teacher
+   never imports it), so the table had no padding/border-collapse/font
+   rules at all. Fully self-contained now, premium dark glass + compact. */
 .teacher-dashboard-container .teachers-table-card {
-  background: var(--bg-glass-strong) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 16px;
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-.teacher-dashboard-container .teachers-table {
-  background: var(--bg-secondary) !important;
-  border-radius: 16px;
+  --pg-text: rgba(255, 255, 255, 0.94);
+  --pg-text-secondary: rgba(255, 255, 255, 0.68);
+  --pg-text-muted: rgba(255, 255, 255, 0.48);
+  --pg-hairline: rgba(255, 255, 255, 0.12);
+  --pg-surface: rgba(255, 255, 255, 0.06);
+  background: rgba(22, 22, 30, 0.32) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 18px;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 0 90px rgba(124, 108, 255, 0.1);
   overflow: hidden;
 }
 
+.teacher-dashboard-container .teachers-table {
+  background: transparent !important;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 640px;
+}
+
 .teacher-dashboard-container .teachers-table th {
-  background: var(--bg-tertiary) !important;
-  color: var(--text-secondary) !important;
-  border-bottom: 1px solid var(--border) !important;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.56) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 10px 14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .teacher-dashboard-container .teachers-table td {
-  color: var(--text-primary) !important;
-  border-bottom: 1px solid var(--border-light) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 10px 14px;
+  font-size: 0.86rem;
+  vertical-align: middle;
 }
 
 .teacher-dashboard-container .teachers-table tr:last-child td {
   border-bottom: none !important;
 }
 
+.teacher-dashboard-container .teachers-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
 /* ── Group Statistics: stat cards ────────────── */
 .stat-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
 }
 
 .group-stat-card {
-  background: var(--bg-glass-strong);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 1.2rem 1.4rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(22, 22, 30, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.22),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 0 90px rgba(124, 108, 255, 0.1);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .group-stat-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(59, 130, 246, 0.35);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
 }
 
 .group-stat-label {
-  color: var(--text-muted);
-  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.74rem;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .group-stat-value {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  color: var(--text-primary);
+  color: rgba(255, 255, 255, 0.94);
   letter-spacing: -0.02em;
 }
 
@@ -1690,6 +1894,15 @@
   margin: 0 0 6px 0;
   color: var(--text-primary) !important;
   font-weight: 700;
+  padding-right: 24px;
+}
+
+.teacher-dashboard-container .custom-pack-card .pack-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.4em;
 }
 
 @media (max-width: 480px) {
@@ -1711,6 +1924,103 @@
 /* ── Empty State ────────────────────────────── */
 .teacher-dashboard-container .empty-state {
   color: var(--text-secondary) !important;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ── Page Top Bar (title + search toggle) ─────
+   Shared by Courses and Groups list — used to live only in
+   GroupsListView.css so Courses rendered it unstyled if visited first. */
+.courses-top-bar {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.courses-top-bar > div:last-child {
+  flex-shrink: 0;
+}
+
+/* ── Top Search Lupa Button ───────────────────── */
+.top-search-lupa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s, border-color 0.16s;
+  flex-shrink: 0;
+}
+
+.top-search-lupa-btn:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+@media (max-width: 480px) {
+  .courses-top-bar {
+    padding: 0.85rem 1rem;
+    border-radius: 16px;
+  }
+}
+
+/* ── Floating Action Button (FAB) ─────────────
+   Shared by any page that needs a primary "add" action pinned to the
+   bottom-right (Group Detail's pack/homework FABs, Courses tab). */
+.fab-add-pack-btn {
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  z-index: 999;
+  background: #3b82f6;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fab-add-pack-btn.fab-icon-only {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.fab-add-pack-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.55);
+}
+
+.fab-add-pack-btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* ── Loading Spinner ─────────────────────────── */
@@ -2134,14 +2444,29 @@
     grid-template-columns: 1fr 1fr !important;
   }
 
+  /* ── Statistika sahifasi: stat cards ─────── */
+  .stat-cards-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  .group-stat-card {
+    padding: 0.7rem 0.85rem !important;
+  }
+
+  .group-stat-value {
+    font-size: 1.1rem !important;
+  }
+
   /* ── Teacher Header Card ─────────────────── */
   .teacher-header {
-    padding: 1.25rem !important;
-    border-radius: 14px !important;
+    padding: 1rem 1.1rem !important;
+    border-radius: 16px !important;
+    gap: 1rem !important;
   }
 
   .teacher-header h1 {
-    font-size: 1.4rem !important;
+    font-size: 1.3rem !important;
   }
 
   /* ── Modal ───────────────────────────────── */
@@ -2158,6 +2483,15 @@
 
   .teachers-table {
     min-width: 480px;
+  }
+
+  /* ── Guruhlar Statistikasi: table → stacked cards ── */
+  .teachers-table-wrap {
+    display: none !important;
+  }
+
+  .teachers-mobile-list {
+    display: flex !important;
   }
 
   /* ── Settings form ───────────────────────── */

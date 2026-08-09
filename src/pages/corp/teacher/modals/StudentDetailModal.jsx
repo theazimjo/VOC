@@ -19,7 +19,7 @@ export default function StudentDetailModal({ p }) {
                     {viewingStudentDetail.name}
                   </h3>
                   <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                    {viewingStudentDetail.email || 'Email kiritilmagan'}
+                    {viewingStudentDetail.email || 'No email'}
                   </span>
                 </div>
               </div>
@@ -34,13 +34,13 @@ export default function StudentDetailModal({ p }) {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', background: 'var(--bg-tertiary)', padding: '14px', borderRadius: '16px', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Guruhga a'zo bo'lgan sana:</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Joined on:</span>
                 <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.85rem' }}>
-                  {viewingStudentDetail.joinedAt ? new Date(viewingStudentDetail.joinedAt).toLocaleDateString() : "Yaqinda"}
+                  {viewingStudentDetail.joinedAt ? new Date(viewingStudentDetail.joinedAt).toLocaleDateString() : "Recently"}
                 </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>O'zlashtirish darajasi:</span>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>Mastery level:</span>
                 <span className="badge-active">
                   {getStudentSummary(viewingStudentDetail, selectedGroup).masteryPercent}% mastery
                 </span>
@@ -48,7 +48,7 @@ export default function StudentDetailModal({ p }) {
             </div>
 
             <div className="modal-actions" style={{ marginTop: '1.25rem' }}>
-              <button className="btn-secondary" onClick={() => setViewingStudentDetail(null)}>Yopish</button>
+              <button className="btn-secondary" onClick={() => setViewingStudentDetail(null)}>Close</button>
               <button
                 type="button"
                 className="btn-danger"
@@ -59,7 +59,7 @@ export default function StudentDetailModal({ p }) {
                   handleRemoveStudent(st);
                 }}
               >
-                Guruhdan chiqarish
+                Remove from Group
               </button>
             </div>
           </div>
