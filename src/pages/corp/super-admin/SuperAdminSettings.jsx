@@ -47,15 +47,15 @@ export default function SuperAdminSettings() {
         <p>/corp portali uchun texnik xizmat rejimi va boshqa global sozlamalar.</p>
       </header>
 
-      <div className="admin-settings-card" style={{ maxWidth: 600 }}>
+      <div className="admin-settings-card" style={{ maxWidth: 600, margin: '0 auto' }}>
         {loading ? (
           <div className="loading-spinner">Yuklanmoqda...</div>
         ) : (
           <>
             <div className="toggle-row" style={{ borderBottom: 'none', paddingBottom: 0 }}>
               <div>
-                <div style={{ fontWeight: 600, color: '#fff', marginBottom: 4 }}>Texnik Xizmat Rejimi</div>
-                <div style={{ fontSize: '0.8rem', color: '#64748b', maxWidth: 380 }}>
+                <div style={{ fontWeight: 600, color: 'var(--pg-text)', marginBottom: 4 }}>Texnik Xizmat Rejimi</div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--pg-text-muted)', maxWidth: 380 }}>
                   Yoqilganda, super adminlardan tashqari hech kim /corp portaliga kira olmaydi
                   (individual VOC ilovasi bunga ta'sir qilmaydi).
                 </div>

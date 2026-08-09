@@ -1,17 +1,52 @@
+/* Same theme-token recipe as the teacher module (TeacherDashboard.css) —
+   dark (android theme) values are the default, [data-theme="ios"] below
+   swaps in the light-glass equivalents, so this whole section respects
+   the app's light/dark setting instead of being hardcoded dark-only. */
 .super-admin-container {
-  padding: var(--space-xl, 2rem);
+  --pg-bg: rgba(22, 22, 30, 0.32);
+  --pg-hairline: rgba(255, 255, 255, 0.12);
+  --pg-surface: rgba(255, 255, 255, 0.07);
+  --pg-surface-hover: rgba(255, 255, 255, 0.14);
+  --pg-text: rgba(255, 255, 255, 0.94);
+  --pg-text-secondary: rgba(255, 255, 255, 0.68);
+  --pg-text-muted: rgba(255, 255, 255, 0.48);
+  --pg-inset-highlight: rgba(255, 255, 255, 0.06);
+
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
   min-height: calc(100vh - 80px);
+  color: var(--pg-text);
+}
+
+[data-theme="ios"] .super-admin-container {
+  --pg-bg: rgba(255, 255, 255, 0.55);
+  --pg-hairline: rgba(0, 0, 0, 0.1);
+  --pg-surface: rgba(0, 0, 0, 0.045);
+  --pg-surface-hover: rgba(0, 0, 0, 0.08);
+  --pg-text: rgba(0, 0, 0, 0.88);
+  --pg-text-secondary: rgba(0, 0, 0, 0.6);
+  --pg-text-muted: rgba(0, 0, 0, 0.4);
+  --pg-inset-highlight: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Mobile: compact. Desktop above stays large/unscaled.
+   (Bottom-nav clearance is already handled by .corp-admin-main-pane's
+   own padding-bottom in CorpAdminLayout.css — no need to duplicate it.) ── */
+@media (max-width: 768px) {
+  .super-admin-container {
+    padding: 0.85rem;
+  }
 }
 
 .super-admin-header {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.1));
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-2xl, 20px);
-  padding: var(--space-xl, 2rem);
-  margin-bottom: var(--space-xl, 2rem);
+  border: 1px solid var(--pg-hairline);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
   backdrop-filter: blur(12px);
+  color: var(--pg-text);
 }
 
 .super-admin-badge {
@@ -31,11 +66,36 @@
   font-size: 2rem;
   font-weight: 800;
   margin-bottom: 8px;
+  color: var(--pg-text);
 }
 
 .super-admin-header p {
-  color: var(--text-secondary, #94a3b8);
+  color: var(--pg-text-secondary);
   margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .super-admin-header {
+    padding: 0.85rem 0.95rem;
+    margin-bottom: 0.85rem;
+    border-radius: 16px;
+  }
+
+  .super-admin-badge {
+    padding: 3px 9px;
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+
+  .super-admin-header h1 {
+    font-size: 1.15rem;
+    margin-bottom: 3px;
+  }
+
+  .super-admin-header p {
+    font-size: 0.78rem;
+    margin-bottom: 0.75rem;
+  }
 }
 
 .super-admin-actions {
@@ -50,9 +110,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--surface-secondary, rgba(255, 255, 255, 0.05));
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-  border-radius: var(--radius-lg, 12px);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  border-radius: 12px;
   padding: 0 14px;
 }
 
@@ -62,7 +122,7 @@
   background: transparent;
   border: none;
   outline: none;
-  color: inherit;
+  color: var(--pg-text);
 }
 
 .btn-create-center {
@@ -72,7 +132,7 @@
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: #fff;
   padding: 12px 20px;
-  border-radius: var(--radius-lg, 12px);
+  border-radius: 12px;
   border: none;
   font-weight: 600;
   cursor: pointer;
@@ -82,6 +142,33 @@
 .btn-create-center:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+@media (max-width: 768px) {
+  .super-admin-actions {
+    gap: 0.5rem;
+  }
+
+  /* Full-width search + full-width action button, stacked — easier to
+     tap accurately than a cramped inline row on a narrow screen. */
+  .search-bar-wrap {
+    min-width: 100%;
+    flex-basis: 100%;
+    padding: 0 10px;
+    border-radius: 12px;
+  }
+
+  .search-bar-wrap input {
+    padding: 11px 0;
+    font-size: 0.86rem;
+  }
+
+  .btn-create-center {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 16px;
+    font-size: 0.86rem;
+  }
 }
 
 .super-admin-stats {
@@ -95,10 +182,12 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: var(--surface-card, rgba(255, 255, 255, 0.03));
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   padding: 1.25rem;
   border-radius: 16px;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
 }
 
 .stat-icon {
@@ -108,14 +197,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .icon-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
 .icon-green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
 .icon-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
 
-.stat-card h3 { font-size: 1.5rem; font-weight: 700; }
-.stat-card p { font-size: 0.85rem; color: #94a3b8; }
+.stat-card h3 { font-size: 1.5rem; font-weight: 700; color: var(--pg-text); }
+.stat-card p { font-size: 0.85rem; color: var(--pg-text-secondary); }
+
+@media (max-width: 768px) {
+  .super-admin-stats {
+    /* Two columns on a phone reads as a real dashboard grid; one wide
+       column per stat (the old minmax(220px,..) forced this) just
+       wastes the screen and makes you scroll further to see them all. */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat-card {
+    padding: 0.75rem 0.8rem;
+    gap: 0.6rem;
+    border-radius: 12px;
+  }
+
+  .stat-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+  }
+
+  .stat-icon svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .stat-card h3 { font-size: 1.05rem; }
+  .stat-card p { font-size: 0.68rem; line-height: 1.25; }
+}
 
 .centers-grid {
   display: grid;
@@ -124,14 +245,16 @@
 }
 
 .center-card {
-  background: var(--surface-card, rgba(255, 255, 255, 0.04));
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 18px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: border-color 0.2s ease;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
 }
 
 .center-card:hover {
@@ -153,7 +276,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.center-card-head h3 {
+  color: var(--pg-text);
+}
+
+@media (max-width: 768px) {
+  .centers-grid {
+    gap: 0.65rem;
+  }
+
+  .center-card {
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+  }
+
+  .center-card-head {
+    gap: 0.65rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .center-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+
+  .center-avatar svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .center-card-head h3 {
+    font-size: 0.92rem;
+  }
 }
 
 .center-status-badge {
@@ -170,7 +329,7 @@
 
 .center-card-info {
   font-size: 0.9rem;
-  color: #cbd5e1;
+  color: var(--pg-text-secondary);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -178,10 +337,19 @@
 }
 
 .center-card-info code {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--pg-surface);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.8rem;
+  color: var(--pg-text);
+}
+
+@media (max-width: 768px) {
+  .center-card-info {
+    font-size: 0.78rem;
+    gap: 3px;
+    margin-bottom: 0.85rem;
+  }
 }
 
 .center-card.is-suspended {
@@ -204,9 +372,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text-secondary);
   padding: 9px;
   border-radius: 10px;
   cursor: pointer;
@@ -216,7 +384,7 @@
 .c-icon-btn:hover:not(:disabled) {
   background: rgba(99, 102, 241, 0.2);
   border-color: rgba(99, 102, 241, 0.4);
-  color: #fff;
+  color: var(--pg-text);
 }
 
 .c-icon-btn:disabled {
@@ -230,17 +398,29 @@
   color: #f87171;
 }
 
+@media (max-width: 768px) {
+  /* Buttons stay a real ~38px touch target even though everything
+     around them got tighter — compact spacing should never mean
+     harder-to-hit buttons. */
+  .c-icon-btn {
+    padding: 10px;
+    min-height: 38px;
+    border-radius: 9px;
+  }
+}
+
 .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
   padding: 3rem 1rem;
-  color: #64748b;
+  color: var(--pg-text-muted);
   text-align: center;
 }
 
-/* Modal styling */
+/* Modal styling — same premium-glass recipe as the teacher module's
+   .modal-content, so a Super Admin modal looks identical to a Teacher one. */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -254,18 +434,44 @@
 }
 
 .modal-content {
-  background: #1e1e2e;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   padding: 2rem;
   width: 100%;
   max-width: 480px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.08);
+  color: var(--pg-text);
 }
 
 .modal-content h2 {
   font-size: 1.4rem;
   margin-bottom: 1.25rem;
+  color: var(--pg-text);
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    padding: 1.25rem 1.1rem calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    /* Bottom sheet on mobile instead of a centered floating card — one
+       thumb-reachable tap to dismiss (tap the dimmed area above it),
+       and no awkward margins around a small centered box on a phone. */
+  }
+
+  .modal-content h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.9rem;
+  }
 }
 
 .form-group {
@@ -278,15 +484,15 @@
 .form-group label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--pg-text-secondary);
 }
 
 .form-group input {
   padding: 12px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   outline: none;
 }
 
@@ -300,10 +506,14 @@
 .btn-secondary {
   padding: 10px 18px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--pg-surface);
   border: none;
-  color: #fff;
+  color: var(--pg-text);
   cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--pg-surface-hover);
 }
 
 .btn-primary {
@@ -311,7 +521,7 @@
   border-radius: 10px;
   background: #6366f1;
   border: none;
-  color: #fff;
+  color: #ffffff;
   font-weight: 600;
   cursor: pointer;
 }
@@ -319,7 +529,40 @@
 .loading-spinner {
   text-align: center;
   padding: 4rem 1rem;
-  color: #64748b;
+  color: var(--pg-text-muted);
+}
+
+@media (max-width: 768px) {
+  .form-group {
+    margin-bottom: 0.85rem;
+  }
+
+  .form-group input {
+    padding: 11px 12px;
+    font-size: 0.88rem;
+  }
+
+  .modal-actions {
+    gap: 8px;
+    margin-top: 1.1rem;
+  }
+
+  /* Stacked, full-width, primary action on top — the natural thumb
+     order on mobile, and each button gets a full-width easy tap. */
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn-secondary, .btn-primary {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+    font-size: 0.92rem;
+  }
+
+  .loading-spinner {
+    padding: 2.5rem 1rem;
+  }
 }
 
 /* Overview page: growth chart + recent centers */
@@ -332,14 +575,17 @@
 @media (max-width: 900px) {
   .overview-widgets-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 }
 
 .overview-chart-card, .overview-side-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   padding: 1.5rem;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
 }
 
 .overview-chart-card h2, .overview-side-card h2 {
@@ -347,7 +593,7 @@
   align-items: center;
   gap: 8px;
   font-size: 1rem;
-  color: #fff;
+  color: var(--pg-text);
 }
 
 .overview-recent-list {
@@ -361,7 +607,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--pg-surface);
   border-radius: 14px;
   padding: 10px 12px;
   cursor: pointer;
@@ -388,7 +634,7 @@
 .overview-recent-row .name {
   font-size: 0.88rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--pg-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -396,7 +642,42 @@
 
 .overview-recent-row .meta {
   font-size: 0.72rem;
-  color: #64748b;
+  color: var(--pg-text-muted);
+}
+
+@media (max-width: 768px) {
+  .overview-chart-card, .overview-side-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .overview-chart-card h2, .overview-side-card h2 {
+    font-size: 0.9rem;
+  }
+
+  .overview-recent-list {
+    gap: 6px;
+    margin-top: 0.75rem;
+  }
+
+  .overview-recent-row {
+    padding: 8px 10px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .overview-recent-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .overview-recent-icon svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .overview-recent-row .name { font-size: 0.82rem; }
+  .overview-recent-row .meta { font-size: 0.68rem; }
 }
 
 /* Centers page toolbar */
@@ -418,13 +699,13 @@
 .centers-filter-label {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--pg-text-muted);
   text-transform: uppercase;
 }
 
 .centers-found-count {
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .centers-toolbar-actions {
@@ -434,9 +715,9 @@
 }
 
 .pack-sort-select {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text-secondary);
   padding: 8px 12px;
   border-radius: 10px;
   font-size: 0.85rem;
@@ -445,8 +726,8 @@
 
 .view-toggle-group {
   display: flex;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
   border-radius: 10px;
   padding: 3px;
 }
@@ -454,24 +735,24 @@
 .view-toggle-btn {
   background: transparent;
   border: none;
-  color: #64748b;
+  color: var(--pg-text-muted);
   padding: 7px 9px;
   border-radius: 7px;
   cursor: pointer;
 }
 
 .view-toggle-btn.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text);
 }
 
 .btn-export {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
   padding: 8px 16px;
   border-radius: 10px;
   font-weight: 600;
@@ -481,15 +762,52 @@
 }
 
 .btn-export:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--pg-surface-hover);
 }
 
-/* Centers table view (reuses teachers-table look) */
+@media (max-width: 768px) {
+  .centers-toolbar {
+    gap: 0.6rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .centers-filter-group {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pack-sort-select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .centers-toolbar-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Grid/table toggle + export are secondary actions on mobile — grid
+     view (already card-based) is the sane default there, so this row
+     just needs to stay usable, not prominent. */
+  .btn-export {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Data tables (Centers table view, Users) — same premium-glass +
+   desktop-table/mobile-card pattern as the teacher module's
+   .teachers-table-card / .teachers-table-wrap / .teachers-mobile-list. */
 .centers-table-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 16px;
-  overflow-x: auto;
+  overflow: hidden;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
 }
 
 .centers-table-card .teachers-table {
@@ -504,15 +822,15 @@
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: #64748b;
+  color: var(--pg-text-muted);
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--pg-hairline);
 }
 
 .centers-table-card .teachers-table td {
   padding: 14px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  color: #cbd5e1;
+  border-bottom: 1px solid var(--pg-surface);
+  color: var(--pg-text-secondary);
   font-size: 0.88rem;
   vertical-align: middle;
 }
@@ -522,7 +840,7 @@
 }
 
 .centers-table-card .teachers-table tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--pg-surface);
 }
 
 .centers-table-card .cell-teacher-info {
@@ -545,6 +863,86 @@
 
 .centers-table-card .t-table-name {
   font-weight: 700;
-  color: #ffffff;
+  color: var(--pg-text);
   font-size: 0.9rem;
+}
+
+.centers-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.centers-mobile-list {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0.6rem;
+}
+
+.centers-mobile-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+}
+
+@media (max-width: 768px) {
+  .centers-table-wrap {
+    display: none !important;
+  }
+
+  .centers-mobile-list {
+    display: flex !important;
+    padding: 0.5rem;
+    gap: 6px;
+  }
+
+  .centers-mobile-row {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .centers-table-card .t-table-avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .centers-table-card .t-table-avatar svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .centers-table-card .t-table-name {
+    font-size: 0.84rem;
+  }
+}
+
+/* Settings page (SuperAdminSettings.jsx) reuses center-admin's
+   .admin-settings-card/.toggle-row/.toggle-switch classes — scoped
+   overrides here bring them onto the same pg-* tokens without touching
+   center-admin/shared.css (which other, unrelated pages also depend on). */
+.super-admin-container .admin-settings-card {
+  background: var(--pg-bg) !important;
+  border: 1px solid var(--pg-hairline) !important;
+  color: var(--pg-text);
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+}
+
+.super-admin-container .toggle-row {
+  border-bottom-color: var(--pg-hairline) !important;
+  color: var(--pg-text-secondary) !important;
+}
+
+.super-admin-container .toggle-switch {
+  background: var(--pg-surface) !important;
+}
+
+@media (max-width: 768px) {
+  .super-admin-container .admin-settings-card {
+    padding: 1rem 1.1rem !important;
+  }
 }

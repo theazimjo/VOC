@@ -155,7 +155,7 @@ export default function SuperAdminOverview() {
               </div>
             ))}
             {recentCenters.length === 0 && (
-              <p style={{ textAlign: 'center', color: '#64748b', padding: '2rem 0' }}>Hozircha markazlar yo'q</p>
+              <p style={{ textAlign: 'center', color: 'var(--pg-text-muted)', padding: '2rem 0' }}>Hozircha markazlar yo'q</p>
             )}
           </div>
         </div>

@@ -244,14 +244,15 @@
 }
 
 .credentials-box {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
   border-radius: 12px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 8px;
   font-size: 0.9rem;
+  color: var(--text-primary, #f8fafc);
 }
 
 .credentials-box code {
@@ -267,7 +268,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  color: #94a3b8;
+  color: var(--text-secondary, #94a3b8);
   font-size: 0.85rem;
   margin-bottom: 1.25rem;
 }
@@ -285,13 +286,23 @@
   margin-bottom: 1.5rem;
 }
 
+@media (max-width: 480px) {
+  .cd-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-content.large {
+    max-width: calc(100vw - 2rem);
+  }
+}
+
 .cd-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
   border-radius: 12px;
   padding: 12px 6px;
   text-align: center;
@@ -301,21 +312,22 @@
 .cd-stat div strong {
   display: block;
   font-size: 1.15rem;
-  color: #f8fafc;
+  color: var(--text-primary, #f8fafc);
 }
 
 .cd-stat div span {
   font-size: 0.72rem;
-  color: #94a3b8;
+  color: var(--text-secondary, #94a3b8);
 }
 
 .cd-section-title {
   font-size: 1rem;
   margin-bottom: 0.75rem;
+  color: var(--text-primary, #f8fafc);
 }
 
 .cd-empty {
-  color: #64748b;
+  color: var(--text-muted, #64748b);
   font-size: 0.85rem;
 }
 
@@ -331,7 +343,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.03));
   border-radius: 10px;
   padding: 8px 10px;
 }
@@ -353,9 +365,10 @@
   display: flex;
   flex-direction: column;
   font-size: 0.85rem;
+  color: var(--text-primary, #f8fafc);
 }
 
 .cd-teacher-row div span {
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: var(--text-secondary, #94a3b8);
 }

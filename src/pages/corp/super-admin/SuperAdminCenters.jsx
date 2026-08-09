@@ -298,56 +298,101 @@ export default function SuperAdminCenters() {
         </div>
       ) : (
         <div className="centers-table-card">
-          <table className="teachers-table">
-            <thead>
-              <tr>
-                <th>MARKAZ</th>
-                <th>ADMIN</th>
-                <th>STATUS</th>
-                <th>STATISTIKA</th>
-                <th>YARATILGAN</th>
-                <th style={{ width: '160px' }}>AMALLAR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredCenters.map((center) => {
-                const stats = statsById[center.id];
-                const suspended = center.status === 'suspended';
-                return (
-                  <tr key={center.id}>
-                    <td>
-                      <div className="cell-teacher-info">
-                        <div className="t-table-avatar"><Building2 size={16} /></div>
-                        <span className="t-table-name">{center.name}</span>
-                      </div>
-                    </td>
-                    <td style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{center.adminEmail || '—'}</td>
-                    <td>
-                      <span className={`center-status-badge ${suspended ? 'status-suspended' : ''}`}>
-                        {suspended ? 'to\'xtatilgan' : 'faol'}
+          {/* Desktop: data table */}
+          <div className="centers-table-wrap">
+            <table className="teachers-table">
+              <thead>
+                <tr>
+                  <th>MARKAZ</th>
+                  <th>ADMIN</th>
+                  <th>STATUS</th>
+                  <th>STATISTIKA</th>
+                  <th>YARATILGAN</th>
+                  <th style={{ width: '160px' }}>AMALLAR</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredCenters.map((center) => {
+                  const stats = statsById[center.id];
+                  const suspended = center.status === 'suspended';
+                  return (
+                    <tr key={center.id}>
+                      <td>
+                        <div className="cell-teacher-info">
+                          <div className="t-table-avatar"><Building2 size={16} /></div>
+                          <span className="t-table-name">{center.name}</span>
+                        </div>
+                      </td>
+                      <td style={{ fontSize: '0.85rem' }}>{center.adminEmail || '—'}</td>
+                      <td>
+                        <span className={`center-status-badge ${suspended ? 'status-suspended' : ''}`}>
+                          {suspended ? 'to\'xtatilgan' : 'faol'}
+                        </span>
+                      </td>
+                      <td style={{ fontSize: '0.82rem' }}>
+                        {stats ? `${stats.teachersCount} o'q. • ${stats.groupsCount} gr. • ${stats.studentsCount} o'quv.` : '—'}
+                      </td>
+                      <td style={{ fontSize: '0.82rem' }}>
+                        {center.createdAt ? new Date(center.createdAt).toLocaleDateString('uz-UZ') : '—'}
+                      </td>
+                      <td>
+                        <div style={{ display: 'flex', gap: 4 }}>
+                          <button className="c-icon-btn" title="Batafsil" onClick={() => setDetailCenter(center)}><Eye size={15} /></button>
+                          <button className="c-icon-btn" title="Tahrirlash" onClick={() => openEditModal(center)}><Pencil size={15} /></button>
+                          <button className="c-icon-btn" disabled={busyId === center.id} onClick={() => handleToggleStatus(center)}>
+                            {suspended ? <PlayCircle size={15} /> : <PauseCircle size={15} />}
+                          </button>
+                          <button className="c-icon-btn c-icon-btn-danger" disabled={busyId === center.id} onClick={() => handleDelete(center)}><Trash2 size={15} /></button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile: stacked cards, same data. */}
+          <div className="centers-mobile-list">
+            {filteredCenters.map((center) => {
+              const stats = statsById[center.id];
+              const suspended = center.status === 'suspended';
+              return (
+                <div key={center.id} className="centers-mobile-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div className="t-table-avatar"><Building2 size={16} /></div>
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <span className="t-table-name" style={{ display: 'block', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {center.name}
                       </span>
-                    </td>
-                    <td style={{ color: '#94a3b8', fontSize: '0.82rem' }}>
-                      {stats ? `${stats.teachersCount} o'q. • ${stats.groupsCount} gr. • ${stats.studentsCount} o'quv.` : '—'}
-                    </td>
-                    <td style={{ color: '#94a3b8', fontSize: '0.82rem' }}>
-                      {center.createdAt ? new Date(center.createdAt).toLocaleDateString('uz-UZ') : '—'}
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', gap: 4 }}>
-                        <button className="c-icon-btn" title="Batafsil" onClick={() => setDetailCenter(center)}><Eye size={15} /></button>
-                        <button className="c-icon-btn" title="Tahrirlash" onClick={() => openEditModal(center)}><Pencil size={15} /></button>
-                        <button className="c-icon-btn" disabled={busyId === center.id} onClick={() => handleToggleStatus(center)}>
-                          {suspended ? <PlayCircle size={15} /> : <PauseCircle size={15} />}
-                        </button>
-                        <button className="c-icon-btn c-icon-btn-danger" disabled={busyId === center.id} onClick={() => handleDelete(center)}><Trash2 size={15} /></button>
-                      </div>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--pg-text-muted)' }}>{center.adminEmail || '—'}</span>
+                    </div>
+                    <span className={`center-status-badge ${suspended ? 'status-suspended' : ''}`} style={{ flexShrink: 0 }}>
+                      {suspended ? 'to\'xtatilgan' : 'faol'}
+                    </span>
+                  </div>
+
+                  <div style={{ fontSize: '0.8rem', color: 'var(--pg-text-secondary)' }}>
+                    {stats ? `${stats.teachersCount} o'q. • ${stats.groupsCount} gr. • ${stats.studentsCount} o'quv.` : '—'}
+                    {' · '}
+                    {center.createdAt ? new Date(center.createdAt).toLocaleDateString('uz-UZ') : '—'}
+                  </div>
+
+                  <div style={{ display: 'flex', gap: 4 }}>
+                    <button className="c-icon-btn" title="Batafsil" onClick={() => setDetailCenter(center)}><Eye size={15} /></button>
+                    <button className="c-icon-btn" title="Tahrirlash" onClick={() => openEditModal(center)}><Pencil size={15} /></button>
+                    <button className="c-icon-btn" disabled={busyId === center.id} onClick={() => handleToggleStatus(center)}>
+                      {suspended ? <PlayCircle size={15} /> : <PauseCircle size={15} />}
+                    </button>
+                    <button className="c-icon-btn" title="Parolni tiklash havolasini yuborish" disabled={busyId === center.id} onClick={() => handleResetPassword(center)}>
+                      <KeyRound size={15} />
+                    </button>
+                    <button className="c-icon-btn c-icon-btn-danger" disabled={busyId === center.id} onClick={() => handleDelete(center)}><Trash2 size={15} /></button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 

@@ -8,24 +8,52 @@
 @media (max-width: 900px) {
   .announcements-layout {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 }
 
 .announcement-form-card, .announcement-list-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
   border-radius: 20px;
   padding: 1.5rem;
+  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
 }
 
 .announcement-form-card h2 {
   font-size: 1.05rem;
   margin-bottom: 1rem;
-  color: #fff;
+  color: var(--pg-text);
 }
 
 .announcement-form-card .settings-form {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
+}
+
+.announcement-form-card .form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .announcement-form-card .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.announcement-form-card textarea {
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: var(--pg-text);
+  outline: none;
+  font-family: inherit;
+  resize: vertical;
 }
 
 .announcement-list-head {
@@ -37,7 +65,7 @@
 
 .announcement-list-head h2 {
   font-size: 1.05rem;
-  color: #fff;
+  color: var(--pg-text);
 }
 
 .announcement-list {
@@ -51,7 +79,7 @@
   gap: 12px;
   padding: 14px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--pg-surface);
   border-left: 3px solid #38bdf8;
 }
 
@@ -103,15 +131,15 @@
 
 .announcement-row-body h3 {
   font-size: 0.92rem;
-  color: #fff;
+  color: var(--pg-text);
   font-weight: 700;
 }
 
 .announcement-target-tag {
   font-size: 0.68rem;
   font-weight: 700;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--pg-text-secondary);
+  background: var(--pg-surface);
   padding: 2px 8px;
   border-radius: 8px;
   white-space: nowrap;
@@ -119,13 +147,13 @@
 
 .announcement-row-body p {
   font-size: 0.85rem;
-  color: #cbd5e1;
+  color: var(--pg-text-secondary);
   margin: 4px 0;
 }
 
 .announcement-date {
   font-size: 0.72rem;
-  color: #64748b;
+  color: var(--pg-text-muted);
 }
 
 .announcement-row-actions {
@@ -133,4 +161,80 @@
   align-items: flex-start;
   gap: 4px;
   flex-shrink: 0;
+}
+
+/* ── Mobile: compact + easier to use. Desktop above stays large. ── */
+@media (max-width: 768px) {
+  .announcement-form-card, .announcement-list-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .announcement-form-card h2, .announcement-list-head h2 {
+    font-size: 0.92rem;
+  }
+
+  .announcement-list-head {
+    margin-bottom: 0.75rem;
+  }
+
+  .announcement-form-card .settings-form {
+    gap: 0.75rem;
+  }
+
+  .announcement-form-card textarea {
+    padding: 10px 11px;
+    font-size: 0.88rem;
+  }
+
+  .announcement-list {
+    gap: 8px;
+  }
+
+  .announcement-row {
+    padding: 11px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .announcement-row-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .announcement-row-icon svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .announcement-row-body h3 { font-size: 0.86rem; }
+  .announcement-row-body p { font-size: 0.8rem; }
+
+  /* Title + target tag were sharing a row and colliding on narrow
+     screens — stack them so the tag never crowds the title text. */
+  .announcement-row-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  /* Row action buttons (toggle/edit/delete) go full-width and wrap to
+     their own row below the message — a horizontal thumb strip of tiny
+     icon buttons next to the text is a frequent mis-tap source. */
+  .announcement-row {
+    flex-wrap: wrap;
+  }
+
+  .announcement-row-actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .announcement-row-actions .c-icon-btn {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+  }
 }

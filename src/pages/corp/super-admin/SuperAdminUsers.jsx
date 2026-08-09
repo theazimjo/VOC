@@ -114,69 +114,126 @@ export default function SuperAdminUsers() {
         </div>
       ) : (
         <div className="centers-table-card">
-          <table className="teachers-table">
-            <thead>
-              <tr>
-                <th>FOYDALANUVCHI</th>
-                <th>ROL</th>
-                <th>MARKAZ</th>
-                <th>STATUS</th>
-                <th style={{ width: '150px' }}>AMALLAR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.map((u) => (
-                <tr key={u.uid}>
-                  <td>
-                    <div className="cell-teacher-info">
-                      <div className="t-table-avatar">
-                        {u.role === 'center_admin' ? <ShieldCheck size={16} /> : <GraduationCap size={16} />}
-                      </div>
-                      <div>
-                        <div className="t-table-name">{u.teacherName || u.centerName || u.email}</div>
-                        <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{u.email}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{ROLE_LABELS[u.role] || u.role}</td>
-                  <td style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{u.centerName || '—'}</td>
-                  <td>
-                    <span className={`center-status-badge ${u.disabled ? 'status-suspended' : ''}`}>
-                      {u.disabled ? 'bloklangan' : 'faol'}
-                    </span>
-                  </td>
-                  <td>
-                    <div style={{ display: 'flex', gap: 4 }}>
-                      <button
-                        className="c-icon-btn"
-                        title="Parolni tiklash"
-                        disabled={busyUid === u.uid}
-                        onClick={() => handleResetPassword(u)}
-                      >
-                        <KeyRound size={15} />
-                      </button>
-                      <button
-                        className="c-icon-btn"
-                        title={u.disabled ? 'Faollashtirish' : 'Bloklash'}
-                        disabled={busyUid === u.uid}
-                        onClick={() => handleToggleDisabled(u)}
-                      >
-                        {u.disabled ? <CheckCircle2 size={15} /> : <Ban size={15} />}
-                      </button>
-                      <button
-                        className="c-icon-btn c-icon-btn-danger"
-                        title="O'chirish"
-                        disabled={busyUid === u.uid}
-                        onClick={() => handleDelete(u)}
-                      >
-                        <Trash2 size={15} />
-                      </button>
-                    </div>
-                  </td>
+          {/* Desktop: data table */}
+          <div className="centers-table-wrap">
+            <table className="teachers-table">
+              <thead>
+                <tr>
+                  <th>FOYDALANUVCHI</th>
+                  <th>ROL</th>
+                  <th>MARKAZ</th>
+                  <th>STATUS</th>
+                  <th style={{ width: '150px' }}>AMALLAR</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredUsers.map((u) => (
+                  <tr key={u.uid}>
+                    <td>
+                      <div className="cell-teacher-info">
+                        <div className="t-table-avatar">
+                          {u.role === 'center_admin' ? <ShieldCheck size={16} /> : <GraduationCap size={16} />}
+                        </div>
+                        <div>
+                          <div className="t-table-name">{u.teacherName || u.centerName || u.email}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--pg-text-muted)' }}>{u.email}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td style={{ fontSize: '0.85rem' }}>{ROLE_LABELS[u.role] || u.role}</td>
+                    <td style={{ fontSize: '0.85rem' }}>{u.centerName || '—'}</td>
+                    <td>
+                      <span className={`center-status-badge ${u.disabled ? 'status-suspended' : ''}`}>
+                        {u.disabled ? 'bloklangan' : 'faol'}
+                      </span>
+                    </td>
+                    <td>
+                      <div style={{ display: 'flex', gap: 4 }}>
+                        <button
+                          className="c-icon-btn"
+                          title="Parolni tiklash"
+                          disabled={busyUid === u.uid}
+                          onClick={() => handleResetPassword(u)}
+                        >
+                          <KeyRound size={15} />
+                        </button>
+                        <button
+                          className="c-icon-btn"
+                          title={u.disabled ? 'Faollashtirish' : 'Bloklash'}
+                          disabled={busyUid === u.uid}
+                          onClick={() => handleToggleDisabled(u)}
+                        >
+                          {u.disabled ? <CheckCircle2 size={15} /> : <Ban size={15} />}
+                        </button>
+                        <button
+                          className="c-icon-btn c-icon-btn-danger"
+                          title="O'chirish"
+                          disabled={busyUid === u.uid}
+                          onClick={() => handleDelete(u)}
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile: stacked cards, same data. */}
+          <div className="centers-mobile-list">
+            {filteredUsers.map((u) => (
+              <div key={u.uid} className="centers-mobile-row" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div className="t-table-avatar">
+                    {u.role === 'center_admin' ? <ShieldCheck size={16} /> : <GraduationCap size={16} />}
+                  </div>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div className="t-table-name" style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {u.teacherName || u.centerName || u.email}
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--pg-text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {u.email}
+                    </div>
+                  </div>
+                  <span className={`center-status-badge ${u.disabled ? 'status-suspended' : ''}`} style={{ flexShrink: 0 }}>
+                    {u.disabled ? 'bloklangan' : 'faol'}
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', fontSize: '0.8rem', color: 'var(--pg-text-secondary)' }}>
+                  <span>{ROLE_LABELS[u.role] || u.role} · {u.centerName || '—'}</span>
+                  <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
+                    <button
+                      className="c-icon-btn"
+                      title="Parolni tiklash"
+                      disabled={busyUid === u.uid}
+                      onClick={() => handleResetPassword(u)}
+                    >
+                      <KeyRound size={15} />
+                    </button>
+                    <button
+                      className="c-icon-btn"
+                      title={u.disabled ? 'Faollashtirish' : 'Bloklash'}
+                      disabled={busyUid === u.uid}
+                      onClick={() => handleToggleDisabled(u)}
+                    >
+                      {u.disabled ? <CheckCircle2 size={15} /> : <Ban size={15} />}
+                    </button>
+                    <button
+                      className="c-icon-btn c-icon-btn-danger"
+                      title="O'chirish"
+                      disabled={busyUid === u.uid}
+                      onClick={() => handleDelete(u)}
+                    >
+                      <Trash2 size={15} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
