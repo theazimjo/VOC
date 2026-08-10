@@ -106,14 +106,14 @@ export default function PackDetail() {
       const isDuplicate = trimmedWord && words.some(w => (w.word || '').trim().toLowerCase() === trimmedWord);
       if (isDuplicate) {
         const proceed = window.confirm(
-          `"${data.word}" so'zi ushbu to'plamda allaqachon mavjud. Baribir qo'shishni xohlaysizmi?`
+          `"${data.word}" already exists in this pack. Add it anyway?`
         );
         if (!proceed) return;
       }
 
       if (todayCount >= dailyWordLimit) {
         const proceed = window.confirm(
-          `Bugun allaqachon ${todayCount} ta yangi so'z qo'shdingiz (kunlik maqsad: ${dailyWordLimit} ta). Ko'p so'zni bir kunda qo'shish yodlashni qiyinlashtiradi — ularni avval mustahkamlab olish tavsiya etiladi. Baribir davom etasizmi?`
+          `You've already added ${todayCount} new words today (daily goal: ${dailyWordLimit}). Adding too many words in one day makes them harder to memorize — it's recommended to reinforce these first. Continue anyway?`
         );
         if (!proceed) return;
       }
@@ -150,20 +150,20 @@ export default function PackDetail() {
 
     if (duplicateCount > 0) {
       const proceed = window.confirm(
-        `${duplicateCount} ta so'z takroriy bo'lgani uchun o'tkazib yuboriladi. ${uniqueWords.length} ta yangi so'z qo'shiladi. Davom etasizmi?`
+        `${duplicateCount} duplicate word(s) will be skipped. ${uniqueWords.length} new word(s) will be added. Continue?`
       );
       if (!proceed) return;
     }
 
     if (uniqueWords.length === 0) {
-      window.alert("Qo'shiladigan yangi so'z topilmadi — ro'yxatdagi barcha so'zlar allaqachon mavjud.");
+      window.alert('No new words to add — every word in the list already exists.');
       return;
     }
 
     const projectedTotal = todayCount + uniqueWords.length;
     if (projectedTotal > dailyWordLimit) {
       const proceed = window.confirm(
-        `Bu import bilan bugungi jami yangi so'zlar soni ${projectedTotal} taga yetadi (kunlik maqsad: ${dailyWordLimit} ta). Baribir davom etasizmi?`
+        `This import will bring today's total new words to ${projectedTotal} (daily goal: ${dailyWordLimit}). Continue anyway?`
       );
       if (!proceed) return;
     }
@@ -172,7 +172,7 @@ export default function PackDetail() {
 
   const handleDeleteWord = async (wordId) => {
     if (pack?.name === 'Irregular Verbs') return;
-    if (window.confirm("Rostdan ham bu so'zni o'chirmoqchimisiz?")) {
+    if (window.confirm('Are you sure you want to delete this word?')) {
       await deleteWord(wordId);
     }
   };
@@ -181,7 +181,7 @@ export default function PackDetail() {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
         <IosSpinner />
-        <span>Yuklanmoqda...</span>
+        <span>Loading...</span>
       </div>
     );
   }
@@ -194,7 +194,7 @@ export default function PackDetail() {
     >
       <div className="detail-back-navigation">
         <button className="btn-back" onClick={() => navigate('/library?tab=packs')}>
-          ← Kutubxona
+          ← Library
         </button>
       </div>
 
@@ -205,7 +205,7 @@ export default function PackDetail() {
             <h1>{pack.name}</h1>
             {pack.description && <p>{pack.description}</p>}
             <div className="book-stats">
-              <span className="book-stat-badge">📝 {words.length} ta so'z</span>
+              <span className="book-stat-badge">📝 {words.length} words</span>
             </div>
           </div>
         </div>
@@ -216,18 +216,18 @@ export default function PackDetail() {
                 className="btn btn-cards" 
                 onClick={() => navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=study`)}
               >
-                🃏 Flashkart
+                🃏 Flashcards
               </button>
-              <button 
-                className="btn btn-primary btn-mashq" 
+              <button
+                className="btn btn-primary btn-mashq"
                 onClick={() => navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=practice&count=10`)}
               >
-                ⚡ Mashq qilish
+                ⚡ Practice
               </button>
             </>
           ) : (
             <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
-              🎮 Mashq qilish
+              🎮 Practice
             </button>
           )}
         </div>
@@ -262,9 +262,9 @@ export default function PackDetail() {
           {memoryTwin.topConfusion && (
             <div className="pack-memtwin-insight">
               <p className="pack-memtwin-insight-text">
-                <AlertTriangle size={13} strokeWidth={2.3} /> Ko'p aralashtiriladi: <strong>{memoryTwin.topConfusion.wordA}</strong> ↔ <strong>{memoryTwin.topConfusion.wordB}</strong>
+                <AlertTriangle size={13} strokeWidth={2.3} /> Frequently confused: <strong>{memoryTwin.topConfusion.wordA}</strong> ↔ <strong>{memoryTwin.topConfusion.wordB}</strong>
               </p>
-              <p className="pack-memtwin-insight-sub">Tavsiya: solishtirib mashq qilish (Contrastive Practice)</p>
+              <p className="pack-memtwin-insight-sub">Recommendation: Contrastive Practice</p>
             </div>
           )}
         </div>
@@ -318,8 +318,8 @@ export default function PackDetail() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="ios-alert-icon">✨</div>
-            <h3>Yangi so'zlar qo'shildi!</h3>
-            <p>Bu to'plamga {newWordsAddedCount} ta yangi so'z avtomatik qo'shildi.</p>
+            <h3>New words added!</h3>
+            <p>{newWordsAddedCount} new word(s) were automatically added to this pack.</p>
             <button className="ios-alert-btn" onClick={() => setNewWordsAddedCount(null)}>OK</button>
           </motion.div>
         </div>

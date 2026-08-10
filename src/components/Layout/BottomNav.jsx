@@ -6,8 +6,8 @@ import './PersonalBottomNav.css';
 
 const NAV_ITEMS = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard', end: true },
-  { to: '/library', icon: BookOpen, label: 'Kutubxona', end: false },
-  { to: '/grammar', icon: GraduationCap, label: 'Grammatika', end: false },
+  { to: '/library', icon: BookOpen, label: 'Library', end: false },
+  { to: '/grammar', icon: GraduationCap, label: 'Grammar', end: false },
   { to: '/experiment', icon: FlaskConical, label: 'Memory Lab', end: false },
 ];
 

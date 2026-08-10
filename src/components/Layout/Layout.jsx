@@ -54,6 +54,12 @@ export default function Layout() {
   // the corp student dashboard's — see .dash-ov-container), so the shared
   // page padding here would otherwise just stack on top of it.
   const isDashboard = location.pathname === '/';
+  // Library / Grammar / Memory Lab get the same decorative background as
+  // the Dashboard, but keep this wrapper's normal padding — unlike the
+  // Dashboard, they don't provide their own.
+  const isThemedSection =
+    !isTestMode &&
+    (segments[0] === 'library' || segments[0] === 'grammar' || segments[0] === 'grammar-test' || segments[0] === 'experiment');
 
   return (
     <div className={`layout ${isTestMode ? 'layout--test-mode' : ''}`}>
@@ -83,7 +89,7 @@ export default function Layout() {
           isTestMode
             ? 'layout-content--test-mode'
             : (appMode === 'group' ? 'layout-content--expanded' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'))
-        } ${isDashboard && !isTestMode ? 'layout-content--dashboard' : ''}`}
+        } ${isDashboard && !isTestMode ? 'layout-content--dashboard' : ''} ${isThemedSection ? 'layout-content--themed-bg' : ''}`}
       >
         <Outlet />
       </main>

@@ -30,7 +30,7 @@ export default function PracticePage() {
   const { user } = useAuth();
   const { packs, allWords, loading: packsLoading } = usePacks();
   const { incrementActivity } = useStreak();
-  
+
   const [step, setStep] = useState(urlSourceId ? 'loading' : 'source'); // 'loading' | 'source' | 'mode' | 'practice' | 'results'
   const [selectedSource, setSelectedSource] = useState(null);
   const [selectedMode, setSelectedMode] = useState(null);
@@ -72,7 +72,7 @@ export default function PracticePage() {
         setStep('loading');
         setSelectedSource(foundSource);
         setSourceLoaded(true);
-        
+
         // Fetch words for this source
         const fetchWords = async () => {
           await migratePackWordsIfNeeded(user.uid, urlSourceId);
@@ -85,21 +85,21 @@ export default function PracticePage() {
             });
           }
           if (words.length === 0) {
-            showAlert("Bu manbada so'zlar yo'q! Avval so'zlar qo'shing.", () => {
+            showAlert("This pack has no words! Add some words first.", () => {
               navigate(`/packs/${urlSourceId}`);
             });
             return;
           }
           setSourceWords(words);
-          
+
           const queryParams = new URLSearchParams(search);
           const queryMode = queryParams.get('mode');
           const queryCount = queryParams.get('count');
           const querySubStep = queryParams.get('subStep');
-          
+
           const mode = queryMode || (foundSource.name === 'Irregular Verbs' ? 'irregular-verbs' : null);
           const count = queryCount ? (queryCount === 'all' ? null : parseInt(queryCount, 10)) : (foundSource.name === 'Irregular Verbs' && mode === 'irregular-verbs' && querySubStep === 'practice' ? 10 : null);
-          
+
           const eligiblePool = mode ? filterWordsForMode(words, mode) : words;
           const minWords = mode ? (PRACTICE_MODE_MIN_WORDS[mode] || 1) : 1;
 
@@ -113,7 +113,7 @@ export default function PracticePage() {
             setStep('intro');
           } else {
             if (mode) {
-              showAlert(`Bu rejim uchun kamida ${minWords} ta so'z kerak. Boshqa rejimni tanlang.`);
+              showAlert(`This mode needs at least ${minWords} words. Choose a different mode.`);
             }
             setStep('mode');
           }
@@ -140,7 +140,7 @@ export default function PracticePage() {
   // Intro shape transition timer
   useEffect(() => {
     if (step !== 'intro') return;
-    
+
     const timerId = setTimeout(() => {
       setStep('practice');
     }, 700);
@@ -163,7 +163,7 @@ export default function PracticePage() {
     }
 
     if (words.length === 0) {
-      showAlert("Bu manbada so'zlar yo'q! Avval Kutubxonadan so'zlar qo'shing.");
+      showAlert("This pack has no words! Add some words from the Library first.");
       return;
     }
 
@@ -179,7 +179,7 @@ export default function PracticePage() {
 
   const handleStartPractice = async (mode) => {
     if (sourceWords.length === 0) {
-      showAlert("Bu manbada so'zlar yo'q!");
+      showAlert("This pack has no words!");
       return;
     }
 
@@ -189,7 +189,7 @@ export default function PracticePage() {
     const pool = filterWordsForMode(sourceWords, mode);
     const minWords = PRACTICE_MODE_MIN_WORDS[mode] || 1;
     if (pool.length < minWords) {
-      showAlert(`Bu rejim uchun kamida ${minWords} ta so'z kerak (hozir ${pool.length} ta bor).`);
+      showAlert(`This mode needs at least ${minWords} words (you currently have ${pool.length}).`);
       return;
     }
 
@@ -286,7 +286,7 @@ export default function PracticePage() {
 
   const handleBack = () => {
     if (step === 'practice' || step === 'intro') {
-      showConfirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.", () => {
+      showConfirm("Are you sure you want to leave the practice? Your current results will not be saved.", () => {
         if (selectedSource?.name === 'Irregular Verbs') {
           if (urlSourceId) {
             navigate(`/packs/${urlSourceId}`);
@@ -324,7 +324,7 @@ export default function PracticePage() {
     setResults(null);
     setWrongWords([]);
     setProgressPct(0);
-    
+
     if (selectedSource?.name === 'Irregular Verbs') {
       setSelectedMode('irregular-verbs');
       setPracticeWords(sourceWords);
@@ -348,7 +348,7 @@ export default function PracticePage() {
       onUpdateWord: handleUpdateWord,
       onAnswer: handleAnswer,
       onExit: handleBack,
-      sourceName: selectedSource?.title || selectedSource?.name || "Kutubxona",
+      sourceName: selectedSource?.title || selectedSource?.name || "Library",
       language: selectedSource?.language || 'en-US',
       onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
@@ -378,12 +378,12 @@ export default function PracticePage() {
     <div className="practice-page">
       <div className="practice-page-header">
         {step !== 'source' && step !== 'results' && (
-          <button className="clean-back-arrow" onClick={handleBack} title="Orqaga">
+          <button className="clean-back-arrow" onClick={handleBack} title="Back">
             ←
           </button>
         )}
         <h1>
-          🎮 Mashq {selectedSource && `(${selectedSource.title || selectedSource.name})`}
+          🎮 Practice {selectedSource && `(${selectedSource.title || selectedSource.name})`}
         </h1>
       </div>
 
@@ -400,7 +400,7 @@ export default function PracticePage() {
             transition={{ duration: 0.15 }}
           >
             <IosSpinner />
-            <span>Yuklanmoqda...</span>
+            <span>Loading...</span>
           </motion.div>
         )}
 
@@ -413,7 +413,7 @@ export default function PracticePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <h2>📦 To'plamni tanlang</h2>
+              <h2>📦 Choose a pack</h2>
 
               {packs.length > 0 ? (
                 <div className="source-list">
@@ -431,7 +431,7 @@ export default function PracticePage() {
                           {source.name}
                         </div>
                         <div className="source-option-count">
-                          {source.wordCount || 0} ta so'z
+                          {source.wordCount || 0} words
                         </div>
                       </div>
                       <div className="source-option-arrow">→</div>
@@ -441,8 +441,8 @@ export default function PracticePage() {
               ) : (
                 <div className="empty-state">
                   <div className="empty-state-icon">📦</div>
-                  <h3>To'plamlar topilmadi</h3>
-                  <p>Avval to'plam yarating va so'zlar kiriting</p>
+                  <h3>No packs found</h3>
+                  <p>Create a pack and add some words first</p>
                 </div>
               )}
             </motion.div>
@@ -458,7 +458,7 @@ export default function PracticePage() {
             >
               {/* Word Count Selector for Free Practice */}
               <div className="practice-word-count-bar">
-                <span className="practice-word-count-label">🔢 Mashq qilish uchun so'zlar soni:</span>
+                <span className="practice-word-count-label">🔢 Number of words to practice:</span>
                 <div className="word-count-options">
                   {[5, 10, 20, 'all'].map(count => (
                     <button
@@ -466,7 +466,7 @@ export default function PracticePage() {
                       className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
                       onClick={() => setWordCount(count)}
                     >
-                      {count === 'all' ? 'Barchasi' : `${count} ta`}
+                      {count === 'all' ? 'All' : `${count}`}
                     </button>
                   ))}
                 </div>
@@ -492,13 +492,13 @@ export default function PracticePage() {
                   {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? 'Aqlli Kartochkalar' : selectedMode === 'spelling' ? 'Imlo Mashqi' : selectedMode === 'match' ? 'Juftlikni Top' : selectedMode === 'quiz' ? 'Test' : selectedMode === 'pronounce' ? 'Talaffuz' : selectedMode === 'sentence' ? 'Jumla Tuzish' : selectedMode === 'irregular-verbs' ? "Fe'llar Trenajyori" : 'Mashq'}
+                  {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match the Pair' : selectedMode === 'quiz' ? 'Quiz' : selectedMode === 'pronounce' ? 'Pronunciation' : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'irregular-verbs' ? "Irregular Verbs Trainer" : 'Practice'}
                 </h2>
-                <p>{practiceWords.length} ta so'z tayyorlandi</p>
-                
+                <p>{practiceWords.length} words ready</p>
+
                 <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
                   <IosSpinner />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Mashq tayyorlanmoqda...</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Preparing your practice...</span>
                 </div>
               </div>
             </motion.div>
@@ -518,14 +518,14 @@ export default function PracticePage() {
                   <ChevronLeft size={22} strokeWidth={2.5} />
                 </button>
                 <h1 className="clean-quiz-title">
-                  {selectedMode === 'flashcard' ? '🧠 Aqlli Kartochkalar' : selectedMode === 'spelling' ? '✍️ Imlo mashqi' : selectedMode === 'match' ? '🔀 Juftlikni top' : selectedMode === 'quiz' ? '📝 Test' : selectedMode === 'pronounce' ? '🎙️ Talaffuz' : selectedMode === 'sentence' ? '📓 Jumla tuzish' : 'Mashq'}
+                  {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match the Pair' : selectedMode === 'quiz' ? '📝 Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation' : selectedMode === 'sentence' ? '📓 Sentence Builder' : 'Practice'}
                 </h1>
                 <div style={{ width: '40px', opacity: 0 }}></div>
-                
+
                 {/* Clean Progress bar inside the header rectangle along the bottom edge */}
                 <div className="practice-header-progress-track">
-                  <div 
-                    className="practice-header-progress-fill" 
+                  <div
+                    className="practice-header-progress-fill"
                     style={{ width: `${progressPct}%` }}
                   />
                 </div>
@@ -551,22 +551,22 @@ export default function PracticePage() {
                   <tier.Icon size={36} strokeWidth={2.2} />
                 </div>
                 <h2>{tier.label}</h2>
-                <p>Mashq yakunlandi</p>
+                <p>Practice complete</p>
                 <div className="result-stats">
                   <div className="result-stat">
                     <BookOpen className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--accent-2)' }} />
                     <div className="value" style={{ color: 'var(--accent-2)' }}>{results.totalWords}</div>
-                    <div className="label">Jami so'zlar</div>
+                    <div className="label">Total words</div>
                   </div>
                   <div className="result-stat">
                     <CheckCircle2 className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
                     <div className="value" style={{ color: 'var(--success)' }}>{results.correctCount}</div>
-                    <div className="label">To'g'ri</div>
+                    <div className="label">Correct</div>
                   </div>
                   <div className="result-stat">
                     <XCircle className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--error)' }} />
                     <div className="value" style={{ color: 'var(--error)' }}>{results.incorrectCount}</div>
-                    <div className="label">Noto'g'ri</div>
+                    <div className="label">Incorrect</div>
                   </div>
                 </div>
 
@@ -575,7 +575,7 @@ export default function PracticePage() {
                   <div className="results-mistakes-container">
                     <div className="results-mistakes-title">
                       <TrendingDown size={14} strokeWidth={2.4} />
-                      Takrorlash tavsiya etiladi (xatolar)
+                      Recommended for review (mistakes)
                     </div>
                     <div className="results-mistake-list">
                       {wrongWords.map(word => (
@@ -588,7 +588,7 @@ export default function PracticePage() {
                             type="button"
                             className="btn-speak-mistake"
                             onClick={() => speakWord(word.word, selectedSource?.language)}
-                            title="Tinglash"
+                            title="Listen"
                           >
                             <Volume2 size={16} strokeWidth={2.3} />
                           </button>
@@ -599,13 +599,13 @@ export default function PracticePage() {
                 ) : (
                   <div className="perfect-score-banner">
                     <Sparkles size={16} strokeWidth={2.3} />
-                    Mukammal natija! Hech qanday xatolikka yo'l qo'yilmadi.
+                    Perfect score! No mistakes at all.
                   </div>
                 )}
 
                 <div className="result-actions">
                   <button className="btn-results-back" onClick={handleReset}>
-                    Mashq menyusiga qaytish
+                    Back to practice menu
                   </button>
                 </div>
               </div>
@@ -617,39 +617,39 @@ export default function PracticePage() {
         <div className="custom-alert-overlay">
           <div className="custom-alert-card">
             <p className="custom-alert-message">{customModal.message}</p>
-            
+
             {customModal.type === 'confirm' ? (
               <div className="custom-alert-actions-row">
-                <button 
-                  className="custom-alert-btn" 
+                <button
+                  className="custom-alert-btn"
                   onClick={() => {
                     setCustomModal(prev => ({ ...prev, show: false }));
                     if (customModal.onCancel) customModal.onCancel();
                   }}
                 >
-                  Yo'q
+                  No
                 </button>
-                <button 
-                  className="custom-alert-btn" 
+                <button
+                  className="custom-alert-btn"
                   style={{ fontWeight: '700' }}
                   onClick={() => {
                     setCustomModal(prev => ({ ...prev, show: false }));
                     if (customModal.onConfirm) customModal.onConfirm();
                   }}
                 >
-                  Ha
+                  Yes
                 </button>
               </div>
             ) : (
-              <button 
-                className="custom-alert-btn" 
+              <button
+                className="custom-alert-btn"
                 style={{ fontWeight: '700' }}
                 onClick={() => {
                   setCustomModal(prev => ({ ...prev, show: false }));
                   if (customModal.onConfirm) customModal.onConfirm();
                 }}
               >
-                Tushunarli
+                Got it
               </button>
             )}
           </div>

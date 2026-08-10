@@ -131,7 +131,7 @@
   transform: translateX(-3px);
 }
 
-/* "+ Yangi papka" row shown above the top-level folders/packs grid */
+/* "+ New Folder" row shown above the top-level folders/packs grid */
 .library-folders-row-header {
   display: flex;
   justify-content: flex-end;

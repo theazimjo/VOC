@@ -3,12 +3,12 @@ export const EXAMS_LIST = [
   {
     id: 'test_1',
     title: 'Imtihon 1.2 - Variant A',
-    description: 'Present Continuous, Articles, Numerals, Adverbs va Sifat darajalari bo\'yicha test to\'plami.',
+    description: 'A test set covering Present Continuous, Articles, Numerals, Adverbs, and Degrees of Adjectives.',
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes',
-        description: 'Gaplardagi grammatik xatolarni toping va ularni to\'g\'rilab yozing.',
+        description: 'Find the grammatical errors in the sentences and correct them.',
         questions: [
           { id: 1, original: 'She is more taller than me.', reference: 'She is taller than me.', topic: 'Degrees of adjectives' },
           { id: 2, original: 'He speak English very good.', reference: 'He speaks English very well.', topic: 'Adverbs / Verb Agreement' },
@@ -25,7 +25,7 @@ export const EXAMS_LIST = [
       {
         id: 'gaps',
         title: '2. Fill in the Gaps',
-        description: 'Qavs ichidagi so\'zlar yoki to\'g\'ri artikllar yordamida bo\'shliqlarni to\'ldiring.',
+        description: 'Fill in the blanks using the words in parentheses or the correct articles.',
         questions: [
           { id: 1, text: 'I bought ___ apple.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'an', topic: 'Articles' },
           { id: 2, text: 'She is ___ engineer.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'an', topic: 'Articles' },
@@ -47,7 +47,7 @@ export const EXAMS_LIST = [
       {
         id: 'translate',
         title: '3. Translate Test',
-        description: 'Berilgan o\'zbekcha gaplarni ingliz tiliga tarjima qiling. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Translate the given Uzbek sentences into English. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, uzbek: 'U mendan balandroq.', reference: 'He is taller than me. / She is taller than me.', topic: 'Degrees of adjectives' },
           { id: 2, uzbek: 'Bu men ko\'rgan eng yaxshi film.', reference: 'This is the best film I\'ve ever seen. / This is the best movie I have ever seen.', topic: 'Irregular adjectives' },
@@ -64,7 +64,7 @@ export const EXAMS_LIST = [
       {
         id: 'reorder',
         title: '4. Reorder the Words',
-        description: 'Aralashtirib berilgan so\'zlardan to\'g\'ri gap hosil qiling. So\'zlarni tartib bilan bosing.',
+        description: 'Form a correct sentence from the scrambled words. Tap the words in order.',
         questions: [
           { id: 1, scrambled: ['is', 'book', 'very', 'this', 'interesting'], answer: 'This book is very interesting.', topic: 'Word order / Adjectives' },
           { id: 2, scrambled: ['taller', 'Bob', 'Tom', 'than', 'is'], answer: 'Tom is taller than Bob.', altAnswer: 'Bob is taller than Tom.', topic: 'Degrees of adjectives' },
@@ -79,7 +79,7 @@ export const EXAMS_LIST = [
       {
         id: 'production',
         title: '5. Open Grammar Production',
-        description: 'Berilgan qoliplardan foydalanib o\'zingiz mustaqil ravishda gap yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Using the given patterns, write your own sentence independently. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, prompt: 'Write a sentence using a comparative adjective (e.g., taller than, more expensive than)', referencePattern: 'Comparative adjective comparison (e.g. My car is faster than yours.)', topic: 'Degrees of adjectives' },
           { id: 2, prompt: 'Write a sentence using a superlative adjective (e.g., the best, the most interesting)', referencePattern: 'Superlative adjective (e.g. He is the smartest boy in our school.)', topic: 'Degrees of adjectives' },
@@ -91,7 +91,7 @@ export const EXAMS_LIST = [
       {
         id: 'inged',
         title: '6. -ing / -ed Adjectives',
-        description: 'Gap mazmuniga ko\'ra eng to\'g\'ri sifat formasini tanlang.',
+        description: 'Choose the adjective form that best fits the meaning of the sentence.',
         questions: [
           { id: 1, text: 'The movie was very _______________.', options: ['boring', 'bored'], correct: 'boring', topic: '-ing / -ed Adjectives' },
           { id: 2, text: 'I was _______________ in the lesson.', options: ['interesting', 'interested'], correct: 'interested', topic: '-ing / -ed Adjectives' },
@@ -103,7 +103,7 @@ export const EXAMS_LIST = [
       {
         id: 'reading',
         title: '7. Reading Passage Questions',
-        description: 'Matnni o\'qing va savollarga ingliz tilida qisqa javob yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Read the passage and write short answers to the questions in English. (Graded via LM Studio or self-graded)',
         passage: 'Tom is a friendly student. He studies English very carefully. He is more hardworking than his friends. Yesterday, he finished three difficult exercises. Now he is preparing for his exam. He wants to become an engineer in the future.',
         questions: [
           { id: 1, question: 'What adjective describes Tom?', reference: 'friendly / hardworking', topic: 'Adjectives' },
@@ -118,12 +118,12 @@ export const EXAMS_LIST = [
   {
     id: 'test_2',
     title: 'Imtihon 1.2 - Variant B',
-    description: 'Present Continuous, Articles, Numerals, Adverbs va Sifat darajalari bo\'yicha test to\'plami.',
+    description: 'A test set covering Present Continuous, Articles, Numerals, Adverbs, and Degrees of Adjectives.',
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes',
-        description: 'Gaplardagi grammatik xatolarni toping va ularni to\'g\'rilab yozing.',
+        description: 'Find the grammatical errors in the sentences and correct them.',
         questions: [
           { id: 1, original: 'My brother is more older than Bob.', reference: 'My brother is older than Bob.', topic: 'Degrees of adjectives' },
           { id: 2, original: 'She runs very good.', reference: 'She runs very well.', topic: 'Adverbs / Verb Agreement' },
@@ -140,7 +140,7 @@ export const EXAMS_LIST = [
       {
         id: 'gaps',
         title: '2. Fill in the Gaps',
-        description: 'Qavs ichidagi so\'zlar yoki to\'g\'ri artikllar yordamida bo\'shliqlarni to\'ldiring.',
+        description: 'Fill in the blanks using the words in parentheses or the correct articles.',
         questions: [
           { id: 1, text: 'I saw ___ elephant at the zoo.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'an', topic: 'Articles' },
           { id: 2, text: 'He is ___ doctor.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'a', topic: 'Articles' },
@@ -162,7 +162,7 @@ export const EXAMS_LIST = [
       {
         id: 'translate',
         title: '3. Translate Test',
-        description: 'Berilgan o\'zbekcha gaplarni ingliz tiliga tarjima qiling. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Translate the given Uzbek sentences into English. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, uzbek: 'U mendan aqlliroq.', reference: 'He is smarter than me. / She is smarter than me.', topic: 'Degrees of adjectives' },
           { id: 2, uzbek: 'Bu dunyodagi eng qimmat mashina.', reference: 'This is the most expensive car in the world.', topic: 'Irregular adjectives' },
@@ -179,7 +179,7 @@ export const EXAMS_LIST = [
       {
         id: 'reorder',
         title: '4. Reorder the Words',
-        description: 'Aralashtirib berilgan so\'zlardan to\'g\'ri gap hosil qiling. So\'zlarni tartib bilan bosing.',
+        description: 'Form a correct sentence from the scrambled words. Tap the words in order.',
         questions: [
           { id: 1, scrambled: ['very', 'weather', 'is', 'today', 'the', 'hot'], answer: 'The weather is very hot today.', topic: 'Word order / Adjectives' },
           { id: 2, scrambled: ['faster', 'runs', 'cheetah', 'than', 'a', 'lion', 'a'], answer: 'A cheetah runs faster than a lion.', topic: 'Degrees of adjectives' },
@@ -194,7 +194,7 @@ export const EXAMS_LIST = [
       {
         id: 'production',
         title: '5. Open Grammar Production',
-        description: 'Berilgan qoliplardan foydalanib o\'zingiz mustaqil ravishda gap yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Using the given patterns, write your own sentence independently. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, prompt: 'Write a sentence using a comparative adjective (e.g., taller than, more expensive than)', referencePattern: 'Comparative adjective comparison (e.g. My car is faster than yours.)', topic: 'Degrees of adjectives' },
           { id: 2, prompt: 'Write a sentence using a superlative adjective (e.g., the best, the most interesting)', referencePattern: 'Superlative adjective (e.g. He is the smartest boy in our school.)', topic: 'Degrees of adjectives' },
@@ -206,7 +206,7 @@ export const EXAMS_LIST = [
       {
         id: 'inged',
         title: '6. -ing / -ed Adjectives',
-        description: 'Gap mazmuniga ko\'ra eng to\'g\'ri sifat formasini tanlang.',
+        description: 'Choose the adjective form that best fits the meaning of the sentence.',
         questions: [
           { id: 1, text: 'The book was very _______________.', options: ['interesting', 'interested'], correct: 'interesting', topic: '-ing / -ed Adjectives' },
           { id: 2, text: 'She was _______________ after the trip.', options: ['tiring', 'tired'], correct: 'tired', topic: '-ing / -ed Adjectives' },
@@ -218,7 +218,7 @@ export const EXAMS_LIST = [
       {
         id: 'reading',
         title: '7. Reading Passage Questions',
-        description: 'Matnni o\'qing va savollarga ingliz tilida qisqa javob yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Read the passage and write short answers to the questions in English. (Graded via LM Studio or self-graded)',
         passage: 'Sarah is an active girl. She travels very frequently. She is more adventurous than her sister. Last year, she visited five different countries. Now she is writing a travel blog. She wants to explore the whole world in the future.',
         questions: [
           { id: 1, question: 'What adjective describes Sarah?', reference: 'active / adventurous', topic: 'Adjectives' },
@@ -233,12 +233,12 @@ export const EXAMS_LIST = [
   {
     id: 'test_3',
     title: 'Imtihon 1.2 - Variant C',
-    description: 'Present Continuous, Articles, Numerals, Adverbs va Sifat darajalari bo\'yicha test to\'plami.',
+    description: 'A test set covering Present Continuous, Articles, Numerals, Adverbs, and Degrees of Adjectives.',
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes',
-        description: 'Gaplardagi grammatik xatolarni toping va ularni to\'g\'rilab yozing.',
+        description: 'Find the grammatical errors in the sentences and correct them.',
         questions: [
           { id: 1, original: 'My dog is more friendlier than yours.', reference: 'My dog is friendlier than yours.', topic: 'Degrees of adjectives' },
           { id: 2, original: 'He drives the car very safe.', reference: 'He drives the car very safely.', topic: 'Adverbs / Verb Agreement' },
@@ -255,7 +255,7 @@ export const EXAMS_LIST = [
       {
         id: 'gaps',
         title: '2. Fill in the Gaps',
-        description: 'Qavs ichidagi so\'zlar yoki to\'g\'ri artikllar yordamida bo\'shliqlarni to\'ldiring.',
+        description: 'Fill in the blanks using the words in parentheses or the correct articles.',
         questions: [
           { id: 1, text: 'I want ___ orange.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'an', topic: 'Articles' },
           { id: 2, text: 'He works as ___ teacher.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'a', topic: 'Articles' },
@@ -277,7 +277,7 @@ export const EXAMS_LIST = [
       {
         id: 'translate',
         title: '3. Translate Test',
-        description: 'Berilgan o\'zbekcha gaplarni ingliz tiliga tarjima qiling. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Translate the given Uzbek sentences into English. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, uzbek: 'U mendan chaqqonroq.', reference: 'He is quicker than me. / She is faster than me.', topic: 'Degrees of adjectives' },
           { id: 2, uzbek: 'Bu mening eng sevimli kitobim.', reference: 'This is my favorite book. / This is my favourite book.', topic: 'Irregular adjectives' },
@@ -294,7 +294,7 @@ export const EXAMS_LIST = [
       {
         id: 'reorder',
         title: '4. Reorder the Words',
-        description: 'Aralashtirib berilgan so\'zlardan to\'g\'ri gap hosil qiling. So\'zlarni tartib bilan bosing.',
+        description: 'Form a correct sentence from the scrambled words. Tap the words in order.',
         questions: [
           { id: 1, scrambled: ['learning', 'English', 'we', 'are', 'school', 'at'], answer: 'We are learning English at school.', topic: 'Word order / Adjectives' },
           { id: 2, scrambled: ['than', 'she', 'shorter', 'is', 'sister', 'her'], answer: 'She is shorter than her sister.', topic: 'Degrees of adjectives' },
@@ -309,7 +309,7 @@ export const EXAMS_LIST = [
       {
         id: 'production',
         title: '5. Open Grammar Production',
-        description: 'Berilgan qoliplardan foydalanib o\'zingiz mustaqil ravishda gap yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Using the given patterns, write your own sentence independently. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, prompt: 'Write a sentence using a comparative adjective (e.g., taller than, more expensive than)', referencePattern: 'Comparative adjective comparison (e.g. My car is faster than yours.)', topic: 'Degrees of adjectives' },
           { id: 2, prompt: 'Write a sentence using a superlative adjective (e.g., the best, the most interesting)', referencePattern: 'Superlative adjective (e.g. He is the smartest boy in our school.)', topic: 'Degrees of adjectives' },
@@ -321,7 +321,7 @@ export const EXAMS_LIST = [
       {
         id: 'inged',
         title: '6. -ing / -ed Adjectives',
-        description: 'Gap mazmuniga ko\'ra eng to\'g\'ri sifat formasini tanlang.',
+        description: 'Choose the adjective form that best fits the meaning of the sentence.',
         questions: [
           { id: 1, text: 'The book was so _______________.', options: ['boring', 'bored'], correct: 'boring', topic: '-ing / -ed Adjectives' },
           { id: 2, text: 'She was _______________ about the party.', options: ['exciting', 'excited'], correct: 'excited', topic: '-ing / -ed Adjectives' },
@@ -333,7 +333,7 @@ export const EXAMS_LIST = [
       {
         id: 'reading',
         title: '7. Reading Passage Questions',
-        description: 'Matnni o\'qing va savollarga ingliz tilida qisqa javob yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Read the passage and write short answers to the questions in English. (Graded via LM Studio or self-graded)',
         passage: 'Jane is a quiet student. She listens to her teachers very attentively. She is more disciplined than her classmates. Yesterday, she finished all her homework. Now she is preparing for the science competition. She wants to become a doctor in the future.',
         questions: [
           { id: 1, question: 'What adjective describes Jane?', reference: 'quiet / disciplined', topic: 'Adjectives' },
@@ -348,12 +348,12 @@ export const EXAMS_LIST = [
   {
     id: 'test_4',
     title: 'Imtihon 1.2 - Variant D',
-    description: 'Present Continuous, Articles, Numerals, Adverbs va Sifat darajalari bo\'yicha test to\'plami.',
+    description: 'A test set covering Present Continuous, Articles, Numerals, Adverbs, and Degrees of Adjectives.',
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes',
-        description: 'Gaplardagi grammatik xatolarni toping va ularni to\'g\'rilab yozing.',
+        description: 'Find the grammatical errors in the sentences and correct them.',
         questions: [
           { id: 1, original: 'This laptop is more cheaper than that one.', reference: 'This laptop is cheaper than that one.', topic: 'Degrees of adjectives' },
           { id: 2, original: 'She plays tennis very good.', reference: 'She plays tennis very well.', topic: 'Adverbs / Verb Agreement' },
@@ -370,7 +370,7 @@ export const EXAMS_LIST = [
       {
         id: 'gaps',
         title: '2. Fill in the Gaps',
-        description: 'Qavs ichidagi so\'zlar yoki to\'g\'ri artikllar yordamida bo\'shliqlarni to\'ldiring.',
+        description: 'Fill in the blanks using the words in parentheses or the correct articles.',
         questions: [
           { id: 1, text: 'She wants to buy ___ car.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'a', topic: 'Articles' },
           { id: 2, text: 'He is ___ architect.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'an', topic: 'Articles' },
@@ -392,7 +392,7 @@ export const EXAMS_LIST = [
       {
         id: 'translate',
         title: '3. Translate Test',
-        description: 'Berilgan o\'zbekcha gaplarni ingliz tiliga tarjima qiling. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Translate the given Uzbek sentences into English. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, uzbek: 'Bu mashina menikinidan tezroq.', reference: 'This car is faster than mine.', topic: 'Degrees of adjectives' },
           { id: 2, uzbek: 'Bu biz ko\'rgan eng yomon o\'yin bo\'ldi.', reference: 'This was the worst game we have ever seen.', topic: 'Irregular adjectives' },
@@ -409,7 +409,7 @@ export const EXAMS_LIST = [
       {
         id: 'reorder',
         title: '4. Reorder the Words',
-        description: 'Aralashtirib berilgan so\'zlardan to\'g\'ri gap hosil qiling. So\'zlarni tartib bilan bosing.',
+        description: 'Form a correct sentence from the scrambled words. Tap the words in order.',
         questions: [
           { id: 1, scrambled: ['is', 'colder', 'getting', 'water', 'the'], answer: 'The water is getting colder.', topic: 'Word order / Adjectives' },
           { id: 2, scrambled: ['than', 'smarter', 'she', 'brother', 'is', 'her'], answer: 'She is smarter than her brother.', topic: 'Degrees of adjectives' },
@@ -424,7 +424,7 @@ export const EXAMS_LIST = [
       {
         id: 'production',
         title: '5. Open Grammar Production',
-        description: 'Berilgan qoliplardan foydalanib o\'zingiz mustaqil ravishda gap yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Using the given patterns, write your own sentence independently. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, prompt: 'Write a sentence using a comparative adjective (e.g., taller than, more expensive than)', referencePattern: 'Comparative adjective comparison (e.g. My car is faster than yours.)', topic: 'Degrees of adjectives' },
           { id: 2, prompt: 'Write a sentence using a superlative adjective (e.g., the best, the most interesting)', referencePattern: 'Superlative adjective (e.g. He is the smartest boy in our school.)', topic: 'Degrees of adjectives' },
@@ -436,7 +436,7 @@ export const EXAMS_LIST = [
       {
         id: 'inged',
         title: '6. -ing / -ed Adjectives',
-        description: 'Gap mazmuniga ko\'ra eng to\'g\'ri sifat formasini tanlang.',
+        description: 'Choose the adjective form that best fits the meaning of the sentence.',
         questions: [
           { id: 1, text: 'This book is so _______________.', options: ['boring', 'bored'], correct: 'boring', topic: '-ing / -ed Adjectives' },
           { id: 2, text: 'They were _______________ with the results.', options: ['disappointing', 'disappointed'], correct: 'disappointed', topic: '-ing / -ed Adjectives' },
@@ -448,7 +448,7 @@ export const EXAMS_LIST = [
       {
         id: 'reading',
         title: '7. Reading Passage Questions',
-        description: 'Matnni o\'qing va savollarga ingliz tilida qisqa javob yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Read the passage and write short answers to the questions in English. (Graded via LM Studio or self-graded)',
         passage: 'Alex is a cheerful boy. He runs in the park very quickly. He is more energetic than his brother. Yesterday, he ran five kilometers. Now he is stretching his muscles. He wants to become an athlete in the future.',
         questions: [
           { id: 1, question: 'What adjective describes Alex?', reference: 'cheerful / energetic', topic: 'Adjectives' },
@@ -463,12 +463,12 @@ export const EXAMS_LIST = [
   {
     id: 'test_5',
     title: 'Imtihon 1.2 - Variant E',
-    description: 'Present Continuous, Articles, Numerals, Adverbs va Sifat darajalari bo\'yicha test to\'plami.',
+    description: 'A test set covering Present Continuous, Articles, Numerals, Adverbs, and Degrees of Adjectives.',
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes',
-        description: 'Gaplardagi grammatik xatolarni toping va ularni to\'g\'rilab yozing.',
+        description: 'Find the grammatical errors in the sentences and correct them.',
         questions: [
           { id: 1, original: 'My car is more faster than yours.', reference: 'My car is faster than yours.', topic: 'Degrees of adjectives' },
           { id: 2, original: 'She writes English very bad.', reference: 'She writes English very badly.', topic: 'Adverbs / Verb Agreement' },
@@ -485,7 +485,7 @@ export const EXAMS_LIST = [
       {
         id: 'gaps',
         title: '2. Fill in the Gaps',
-        description: 'Qavs ichidagi so\'zlar yoki to\'g\'ri artikllar yordamida bo\'shliqlarni to\'ldiring.',
+        description: 'Fill in the blanks using the words in parentheses or the correct articles.',
         questions: [
           { id: 1, text: 'I want to eat ___ banana.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'a', topic: 'Articles' },
           { id: 2, text: 'She is ___ actress.', type: 'choice', options: ['a', 'an', 'the', 'no article'], correct: 'an', topic: 'Articles' },
@@ -507,7 +507,7 @@ export const EXAMS_LIST = [
       {
         id: 'translate',
         title: '3. Translate Test',
-        description: 'Berilgan o\'zbekcha gaplarni ingliz tiliga tarjima qiling. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Translate the given Uzbek sentences into English. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, uzbek: 'Bu ko\'l ancha chuqurroq.', reference: 'This lake is much deeper.', topic: 'Degrees of adjectives' },
           { id: 2, uzbek: 'Bu men ko\'rgan eng yomon film bo\'ldi.', reference: 'This was the worst movie I have ever seen.', topic: 'Irregular adjectives' },
@@ -524,7 +524,7 @@ export const EXAMS_LIST = [
       {
         id: 'reorder',
         title: '4. Reorder the Words',
-        description: 'Aralashtirib berilgan so\'zlardan to\'g\'ri gap hosil qiling. So\'zlarni tartib bilan bosing.',
+        description: 'Form a correct sentence from the scrambled words. Tap the words in order.',
         questions: [
           { id: 1, scrambled: ['is', 'getting', 'weather', 'warmer', 'the'], answer: 'The weather is getting warmer.', topic: 'Word order / Adjectives' },
           { id: 2, scrambled: ['than', 'heavier', 'this', 'box', 'that', 'is', 'one'], answer: 'This box is heavier than that one.', topic: 'Degrees of adjectives' },
@@ -539,7 +539,7 @@ export const EXAMS_LIST = [
       {
         id: 'production',
         title: '5. Open Grammar Production',
-        description: 'Berilgan qoliplardan foydalanib o\'zingiz mustaqil ravishda gap yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Using the given patterns, write your own sentence independently. (Graded via LM Studio or self-graded)',
         questions: [
           { id: 1, prompt: 'Write a sentence using a comparative adjective (e.g., taller than, more expensive than)', referencePattern: 'Comparative adjective comparison (e.g. My car is faster than yours.)', topic: 'Degrees of adjectives' },
           { id: 2, prompt: 'Write a sentence using a superlative adjective (e.g., the best, the most interesting)', referencePattern: 'Superlative adjective (e.g. He is the smartest boy in our school.)', topic: 'Degrees of adjectives' },
@@ -551,7 +551,7 @@ export const EXAMS_LIST = [
       {
         id: 'inged',
         title: '6. -ing / -ed Adjectives',
-        description: 'Gap mazmuniga ko\'ra eng to\'g\'ri sifat formasini tanlang.',
+        description: 'Choose the adjective form that best fits the meaning of the sentence.',
         questions: [
           { id: 1, text: 'This puzzle is very _______________.', options: ['confusing', 'confused'], correct: 'confusing', topic: '-ing / -ed Adjectives' },
           { id: 2, text: 'She felt _______________ after the trip.', options: ['tiring', 'tired'], correct: 'tired', topic: '-ing / -ed Adjectives' },
@@ -563,7 +563,7 @@ export const EXAMS_LIST = [
       {
         id: 'reading',
         title: '7. Reading Passage Questions',
-        description: 'Matnni o\'qing va savollarga ingliz tilida qisqa javob yozing. (LM Studio yoki Self-graded orqali baholanadi)',
+        description: 'Read the passage and write short answers to the questions in English. (Graded via LM Studio or self-graded)',
         passage: 'Lucy is a quiet girl. She reads books in the library very quietly. She is more thoughtful than her classmates. Yesterday, she read three stories. Now she is writing in her journal. She wants to become a writer in the future.',
         questions: [
           { id: 1, question: 'What adjective describes Lucy?', reference: 'quiet / thoughtful', topic: 'Adjectives' },
@@ -621,7 +621,7 @@ export const IELTS_EXAMS_LIST = [
       {
         id: 'translate',
         title: '3. Translate Test',
-        description: 'Translate formal/academic Uzbek sentences into academic English. (LM Studio baholaydi)',
+        description: 'Translate formal/academic Uzbek sentences into academic English. (Graded by LM Studio)',
         questions: [
           { id: 1, uzbek: 'Narxlar oshganiga qaramay, talab yuqoriligicha qoldi.', reference: 'Despite the increase in prices, demand remained high. / Although prices increased, demand remained high.', topic: 'Contrast linkers' },
           { id: 2, uzbek: 'Ushbu hisobotda iqlim o\'zgarishining ta\'siri muhokama qilinadi.', reference: 'This report discusses the effects of climate change. / The impact of climate change is discussed in this report.', topic: 'Academic reporting' },
@@ -719,7 +719,7 @@ export const IELTS_EXAMS_LIST = [
       {
         id: 'translate',
         title: '3. Translate Test',
-        description: 'Translate formal/academic Uzbek sentences into academic English. (LM Studio baholaydi)',
+        description: 'Translate formal/academic Uzbek sentences into academic English. (Graded by LM Studio)',
         questions: [
           { id: 1, uzbek: 'Moliyaviy yordam yo\'qligiga qaramay, tadqiqot yakunlandi.', reference: 'Despite the lack of financial support, the research was completed. / In spite of the absence of funding, the study was finished.', topic: 'Contrast links' },
           { id: 2, uzbek: 'Bu tadqiqot global isishning sabablarini o\'rganishga qaratilgan.', reference: 'This study aims to examine the causes of global warming. / This research is focused on investigating the causes of global warming.', topic: 'Academic reporting' },
@@ -787,13 +787,13 @@ export const EXAMS_LIST_13 = [
   {
     id: 'test13_1',
     title: 'Imtihon 1.3 - Variant A',
-    description: 'Beginner → Elementary. 8 qismli test: xatolarni topish, bo\'shliqlarni to\'ldirish, so\'zlarni tartiblash, tarjima, ko\'p tanlovli va yozma vazifalar.',
+    description: 'Beginner → Elementary. An 8-part test: finding errors, filling in blanks, reordering words, translation, multiple choice, and writing tasks.',
     durationMinutes: 60,
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes (20 points)',
-        description: 'Some sentences contain MORE than one mistake. Gaplardagi xatolarni toping va to\'g\'ri shaklda qayta yozing.',
+        description: 'Some sentences contain MORE than one mistake. Find the errors in the sentences and rewrite them correctly.',
         questions: [
           { id: 1, original: "Anvar don't usually drinking coffee in the morning.", reference: 'Anvar doesn\'t usually drink coffee in the morning.', topic: 'Present Simple (verb agreement)' },
           { id: 2, original: 'My sister have already finish her homework.', reference: 'My sister has already finished her homework.', topic: 'Present Perfect' },
@@ -838,7 +838,7 @@ export const EXAMS_LIST_13 = [
       {
         id: 'translate',
         title: '4. Translation (20 points)',
-        description: 'Uzbek → English (1-5) va English → Uzbek (6-10) gaplarni tarjima qiling.',
+        description: 'Translate the sentences: Uzbek → English (1-5) and English → Uzbek (6-10).',
         questions: [
           { id: 1, direction: 'uz-en', uzbek: 'Men har kuni ertalab choy ichaman.', reference: 'I drink tea every morning.', topic: 'Present Simple (habitual)' },
           { id: 2, direction: 'uz-en', uzbek: 'Biz kelganimizda ular ovqatlanishayotgan edi.', reference: 'When we arrived, they were having dinner.', topic: 'Past Continuous' },
@@ -914,13 +914,13 @@ export const EXAMS_LIST_13 = [
   {
     id: 'test13_2',
     title: 'Imtihon 1.3 - Variant B',
-    description: 'Beginner → Elementary. 8 qismli test: xatolarni topish, bo\'shliqlarni to\'ldirish, so\'zlarni tartiblash, tarjima, ko\'p tanlovli va yozma vazifalar.',
+    description: 'Beginner → Elementary. An 8-part test: finding errors, filling in blanks, reordering words, translation, multiple choice, and writing tasks.',
     durationMinutes: 60,
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes (20 points)',
-        description: 'Some sentences contain MORE than one mistake. Gaplardagi xatolarni toping va to\'g\'ri shaklda qayta yozing.',
+        description: 'Some sentences contain MORE than one mistake. Find the errors in the sentences and rewrite them correctly.',
         questions: [
           { id: 1, original: "Malika don't usually eating breakfast at home.", reference: "Malika doesn't usually eat breakfast at home.", topic: 'Present Simple (verb agreement)' },
           { id: 2, original: 'My uncle have already sold his old car.', reference: 'My uncle has already sold his old car.', topic: 'Present Perfect' },
@@ -965,7 +965,7 @@ export const EXAMS_LIST_13 = [
       {
         id: 'translate',
         title: '4. Translation (20 points)',
-        description: 'Uzbek → English (1-5) va English → Uzbek (6-10) gaplarni tarjima qiling.',
+        description: 'Translate the sentences: Uzbek → English (1-5) and English → Uzbek (6-10).',
         questions: [
           { id: 1, direction: 'uz-en', uzbek: "U har kuni kechqurun kitob o'qiydi.", reference: 'He reads a book every evening.', topic: 'Present Simple (habitual)' },
           { id: 2, direction: 'uz-en', uzbek: "Men uyga kelganimda ular televizor ko'rishayotgan edi.", reference: 'When I came home, they were watching TV.', topic: 'Past Continuous' },
@@ -1041,13 +1041,13 @@ export const EXAMS_LIST_13 = [
   {
     id: 'test13_3',
     title: 'Imtihon 1.3 - Variant C',
-    description: 'Beginner → Elementary. 8 qismli test: xatolarni topish, bo\'shliqlarni to\'ldirish, so\'zlarni tartiblash, tarjima, ko\'p tanlovli va yozma vazifalar.',
+    description: 'Beginner → Elementary. An 8-part test: finding errors, filling in blanks, reordering words, translation, multiple choice, and writing tasks.',
     durationMinutes: 60,
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes (20 points)',
-        description: 'Some sentences contain MORE than one mistake. Gaplardagi xatolarni toping va to\'g\'ri shaklda qayta yozing.',
+        description: 'Some sentences contain MORE than one mistake. Find the errors in the sentences and rewrite them correctly.',
         questions: [
           { id: 1, original: "Sardor don't usually staying up late.", reference: "Sardor doesn't usually stay up late.", topic: 'Present Simple (verb agreement)' },
           { id: 2, original: 'My grandmother have already cooked dinner.', reference: 'My grandmother has already cooked dinner.', topic: 'Present Perfect' },
@@ -1092,7 +1092,7 @@ export const EXAMS_LIST_13 = [
       {
         id: 'translate',
         title: '4. Translation (20 points)',
-        description: 'Uzbek → English (1-5) va English → Uzbek (6-10) gaplarni tarjima qiling.',
+        description: 'Translate the sentences: Uzbek → English (1-5) and English → Uzbek (6-10).',
         questions: [
           { id: 1, direction: 'uz-en', uzbek: "U dam olish kunlari sport bilan shug'ullanadi.", reference: 'He does sports on weekends.', topic: 'Present Simple (habitual)' },
           { id: 2, direction: 'uz-en', uzbek: 'Men keldim, ular hovlida ishlayotgan edi.', reference: 'When I arrived, they were working in the yard.', topic: 'Past Continuous' },
@@ -1168,13 +1168,13 @@ export const EXAMS_LIST_13 = [
   {
     id: 'test13_4',
     title: 'Imtihon 1.3 - Variant D',
-    description: 'Beginner → Elementary. 8 qismli test: xatolarni topish, bo\'shliqlarni to\'ldirish, so\'zlarni tartiblash, tarjima, ko\'p tanlovli va yozma vazifalar.',
+    description: 'Beginner → Elementary. An 8-part test: finding errors, filling in blanks, reordering words, translation, multiple choice, and writing tasks.',
     durationMinutes: 60,
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes (20 points)',
-        description: 'Some sentences contain MORE than one mistake. Gaplardagi xatolarni toping va to\'g\'ri shaklda qayta yozing.',
+        description: 'Some sentences contain MORE than one mistake. Find the errors in the sentences and rewrite them correctly.',
         questions: [
           { id: 1, original: "Nodira don't usually skipping breakfast.", reference: "Nodira doesn't usually skip breakfast.", topic: 'Present Simple (verb agreement)' },
           { id: 2, original: 'My cousin have already painted his room.', reference: 'My cousin has already painted his room.', topic: 'Present Perfect' },
@@ -1219,7 +1219,7 @@ export const EXAMS_LIST_13 = [
       {
         id: 'translate',
         title: '4. Translation (20 points)',
-        description: 'Uzbek → English (1-5) va English → Uzbek (6-10) gaplarni tarjima qiling.',
+        description: 'Translate the sentences: Uzbek → English (1-5) and English → Uzbek (6-10).',
         questions: [
           { id: 1, direction: 'uz-en', uzbek: "U har hafta oyisiga qo'ng'iroq qiladi.", reference: 'She calls her mother every week.', topic: 'Present Simple (habitual)' },
           { id: 2, direction: 'uz-en', uzbek: "Men chiqqanimda yomg'ir yog'ayotgan edi.", reference: 'When I went out, it was raining.', topic: 'Past Continuous' },
@@ -1295,13 +1295,13 @@ export const EXAMS_LIST_13 = [
   {
     id: 'test13_5',
     title: 'Imtihon 1.3 - Variant E',
-    description: 'Beginner → Elementary. 8 qismli test: xatolarni topish, bo\'shliqlarni to\'ldirish, so\'zlarni tartiblash, tarjima, ko\'p tanlovli va yozma vazifalar.',
+    description: 'Beginner → Elementary. An 8-part test: finding errors, filling in blanks, reordering words, translation, multiple choice, and writing tasks.',
     durationMinutes: 60,
     sections: [
       {
         id: 'mistakes',
         title: '1. Correct the Mistakes (20 points)',
-        description: 'Some sentences contain MORE than one mistake. Gaplardagi xatolarni toping va to\'g\'ri shaklda qayta yozing.',
+        description: 'Some sentences contain MORE than one mistake. Find the errors in the sentences and rewrite them correctly.',
         questions: [
           { id: 1, original: "Javlon don't usually missing classes.", reference: "Javlon doesn't usually miss classes.", topic: 'Present Simple (verb agreement)' },
           { id: 2, original: 'My aunt have already booked the tickets.', reference: 'My aunt has already booked the tickets.', topic: 'Present Perfect' },
@@ -1346,7 +1346,7 @@ export const EXAMS_LIST_13 = [
       {
         id: 'translate',
         title: '4. Translation (20 points)',
-        description: 'Uzbek → English (1-5) va English → Uzbek (6-10) gaplarni tarjima qiling.',
+        description: 'Translate the sentences: Uzbek → English (1-5) and English → Uzbek (6-10).',
         questions: [
           { id: 1, direction: 'uz-en', uzbek: 'U dushanba kunlari sport zaliga boradi.', reference: 'He goes to the gym on Mondays.', topic: 'Present Simple (habitual)' },
           { id: 2, direction: 'uz-en', uzbek: "Men uyg'onganimda quyosh charaqlab turgan edi.", reference: 'When I woke up, the sun was shining.', topic: 'Past Continuous' },

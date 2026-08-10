@@ -166,7 +166,7 @@ function WordInsightCard({ memory, confusionPairs }) {
           <span className="mem-health-badge" style={{ color: health.color }}>
             {health.icon} {health.label}
           </span>
-          {due && <span className="mem-due-badge">Bugun takrorlash</span>}
+          {due && <span className="mem-due-badge">Review today</span>}
           <span className="mem-expand-arrow" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
         </div>
       </div>
@@ -175,20 +175,20 @@ function WordInsightCard({ memory, confusionPairs }) {
       <div className="mem-insight-metrics">
         <div className="mem-metric">
           <Brain size={12} />
-          <span>S = {stability.toFixed(1)} kun</span>
+          <span>S = {stability.toFixed(1)} days</span>
         </div>
         <div className="mem-metric">
           <TrendingDown size={12} />
-          <span>Qiyinlik: {Math.round(difficulty * 100)}%</span>
+          <span>Difficulty: {Math.round(difficulty * 100)}%</span>
         </div>
         <div className="mem-metric">
           <Clock size={12} />
-          <span>{totalReviews} marta tekshirildi</span>
+          <span>Reviewed {totalReviews} times</span>
         </div>
         {daysUntilNext !== null && (
           <div className="mem-metric">
             <TrendingUp size={12} />
-            <span>{daysUntilNext} kundan keyin</span>
+            <span>in {daysUntilNext} days</span>
           </div>
         )}
       </div>
@@ -204,10 +204,10 @@ function WordInsightCard({ memory, confusionPairs }) {
             transition={{ duration: 0.25 }}
           >
             <div className="mem-curve-container">
-              <div className="mem-curve-label">Unutish egri chizig'i (P = e⁻ᵗ/ˢ)</div>
+              <div className="mem-curve-label">Forgetting curve (P = e⁻ᵗ/ˢ)</div>
               <ForgettingCurve stability={stability} />
               <div className="mem-curve-legend">
-                <span style={{ color: 'var(--success)' }}>— 75% maqsad</span>
+                <span style={{ color: 'var(--success)' }}>— 75% target</span>
               </div>
             </div>
 
@@ -244,7 +244,7 @@ function WordInsightCard({ memory, confusionPairs }) {
             {autopsy.hasEnoughData && (
               <div className="mem-autopsy-box">
                 <div className="mem-curve-label mem-section-title">
-                  <Stethoscope size={13} /> Nega unutasiz? (taxminiy sabablar)
+                  <Stethoscope size={13} /> Why do you forget? (likely reasons)
                 </div>
                 <div className="mem-checkpoint-table">
                   {autopsy.factors.map((f) => (
@@ -270,7 +270,7 @@ function WordInsightCard({ memory, confusionPairs }) {
                   </div>
                 )}
                 <div className="mem-autopsy-disclaimer">
-                  Bu — taxminiy baho (bir nechta signal asosida hisoblangan nisbiy og'irlik), ilmiy jihatdan tasdiqlangan statistik xulosa emas.
+                  This is an estimate (a relative weighting computed from several signals), not a scientifically validated statistical conclusion.
                 </div>
               </div>
             )}
@@ -278,7 +278,7 @@ function WordInsightCard({ memory, confusionPairs }) {
             {/* Future Memory Simulator — "what if I review on day X" comparison */}
             <div className="mem-simulator-box">
               <div className="mem-curve-label mem-section-title">
-                <Rocket size={13} /> Kelajakdagi xotira: agar takrorlasangiz-chi?
+                <Rocket size={13} /> Future memory: what if you review?
               </div>
               <div className="mem-simulator-days">
                 {simulatorOptions.map((opt) => (
@@ -291,20 +291,20 @@ function WordInsightCard({ memory, confusionPairs }) {
                       setSimulatorDay((prev) => (prev === opt.reviewDay ? null : opt.reviewDay));
                     }}
                   >
-                    {opt.reviewDay}-kun
+                    Day {opt.reviewDay}
                   </button>
                 ))}
               </div>
               <div className="mem-simulator-compare">
                 <div className="mem-simulator-stat">
-                  <span className="mem-simulator-stat-label">Takrorlamasangiz (30 kundan keyin)</span>
+                  <span className="mem-simulator-stat-label">If you don't review (after 30 days)</span>
                   <span className="mem-simulator-stat-value bad">
                     {Math.round((activeSimulatorOption ?? simulatorOptions[0]).withoutReview * 100)}%
                   </span>
                 </div>
                 {activeSimulatorOption && (
                   <div className="mem-simulator-stat">
-                    <span className="mem-simulator-stat-label">{activeSimulatorOption.reviewDay}-kunda takrorlasangiz</span>
+                    <span className="mem-simulator-stat-label">If you review on day {activeSimulatorOption.reviewDay}</span>
                     <span className="mem-simulator-stat-value good">
                       {Math.round(activeSimulatorOption.withReview * 100)}%
                     </span>
@@ -312,20 +312,20 @@ function WordInsightCard({ memory, confusionPairs }) {
                 )}
               </div>
               {!activeSimulatorOption && (
-                <div className="mem-simulator-note">30-kunlik prognozni ko'rish uchun kunlardan birini tanlang.</div>
+                <div className="mem-simulator-note">Pick a day to see the 30-day forecast.</div>
               )}
             </div>
 
             {/* Recent history */}
             {recallHistory && recallHistory.length > 0 && (
               <div className="mem-history-strip">
-                <div className="mem-history-label">So'nggi natijalар</div>
+                <div className="mem-history-label">Recent results</div>
                 <div className="mem-history-dots">
                   {recallHistory.slice(-12).map((h, i) => (
                     <div
                       key={i}
                       className={`mem-history-dot ${h.result ? 'correct' : 'wrong'}`}
-                      title={`${h.result ? '✓' : '✗'} | ${h.responseTime}s | Ishonch: ${h.confidence}`}
+                      title={`${h.result ? '✓' : '✗'} | ${h.responseTime}s | Confidence: ${h.confidence}`}
                     />
                   ))}
                 </div>
@@ -445,8 +445,8 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
     return (
       <div className="mem-empty-state">
         <div className="mem-empty-icon">🧠</div>
-        <h3>Hali birorta so'z tekshirilmagan</h3>
-        <p>Birinchi sessiyani boshlang va xotira tahlili shu yerda paydo bo'ladi.</p>
+        <h3>No words reviewed yet</h3>
+        <p>Start your first session and your memory analysis will appear here.</p>
       </div>
     );
   }
@@ -459,12 +459,12 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
         <div className="mem-overall-card">
           <div className="mem-overall-header">
             <div>
-              <div className="mem-overall-title">🧠 Umumiy Xotira Holati</div>
-              <div className="mem-overall-sub">Barcha {summary.total} ta so'zning eslab qolish dinamikasi</div>
+              <div className="mem-overall-title">🧠 Overall Memory Health</div>
+              <div className="mem-overall-sub">Recall dynamics across all {summary.total} words</div>
             </div>
-            <div className="mem-retention-badge" title="O'rtacha eslab qolish kuchi">
+            <div className="mem-retention-badge" title="Average recall strength">
               <span className="mem-retention-num">{summary.avgRetention}%</span>
-              <span className="mem-retention-lbl">Xotira kuchi</span>
+              <span className="mem-retention-lbl">Memory strength</span>
             </div>
           </div>
 
@@ -474,28 +474,28 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
               <div
                 className="mem-bar-seg strong"
                 style={{ width: `${(summary.strong / summary.total) * 100}%` }}
-                title={`Kuchli: ${summary.strong} ta`}
+                title={`Strong: ${summary.strong}`}
               />
             )}
             {summary.medium > 0 && (
               <div
                 className="mem-bar-seg medium"
                 style={{ width: `${(summary.medium / summary.total) * 100}%` }}
-                title={`O'rtacha: ${summary.medium} ta`}
+                title={`Medium: ${summary.medium}`}
               />
             )}
             {summary.weak > 0 && (
               <div
                 className="mem-bar-seg weak"
                 style={{ width: `${(summary.weak / summary.total) * 100}%` }}
-                title={`Zaif: ${summary.weak} ta`}
+                title={`Weak: ${summary.weak}`}
               />
             )}
             {summary.unreviewed > 0 && (
               <div
                 className="mem-bar-seg new"
                 style={{ width: `${(summary.unreviewed / summary.total) * 100}%` }}
-                title={`Yangi: ${summary.unreviewed} ta`}
+                title={`New: ${summary.unreviewed}`}
               />
             )}
           </div>
@@ -504,31 +504,31 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
           <div className="mem-overall-legend">
             <div className="mem-legend-pill">
               <div className="mem-leg-dot strong" />
-              <span>💪 Kuchli: <strong>{summary.strong}</strong></span>
+              <span>💪 Strong: <strong>{summary.strong}</strong></span>
             </div>
             <div className="mem-legend-pill">
               <div className="mem-leg-dot medium" />
-              <span>⭐ O'rtacha: <strong>{summary.medium}</strong></span>
+              <span>⭐ Medium: <strong>{summary.medium}</strong></span>
             </div>
             <div className="mem-legend-pill">
               <div className="mem-leg-dot weak" />
-              <span>🌱 Zaif: <strong>{summary.weak}</strong></span>
+              <span>🌱 Weak: <strong>{summary.weak}</strong></span>
             </div>
             <div className="mem-legend-pill">
               <div className="mem-leg-dot new" />
-              <span>🆕 Yangi: <strong>{summary.unreviewed}</strong></span>
+              <span>🆕 New: <strong>{summary.unreviewed}</strong></span>
             </div>
           </div>
 
           {/* Overall Forgetting Curve Graph */}
           <div className="mem-curve-container" style={{ marginTop: '0.25rem' }}>
             <div className="mem-curve-label" style={{ fontWeight: 700, color: 'var(--text-secondary)', display: 'flex', justifyContent: 'space-between' }}>
-              <span>📉 Umumiy Unutish Dinamikasi (P = e⁻ᵗ/ˢ)</span>
-              <span>O'rtacha S = {summary.avgStability.toFixed(1)}d</span>
+              <span>📉 Overall Forgetting Dynamics (P = e⁻ᵗ/ˢ)</span>
+              <span>Avg S = {summary.avgStability.toFixed(1)}d</span>
             </div>
             <ForgettingCurve stability={summary.avgStability} />
             <div className="mem-curve-legend">
-              <span style={{ color: 'var(--success)' }}>— 75% optimal takrorlash chegarasi</span>
+              <span style={{ color: 'var(--success)' }}>— 75% optimal review threshold</span>
             </div>
           </div>
         </div>
@@ -539,8 +539,8 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
         <div className="mem-semantic-card">
           <div className="mem-semantic-header">
             <div>
-              <div className="mem-semantic-title">🧬 Semantik Klasterlar & Kontekstual Transfer</div>
-              <div className="mem-semantic-sub">Mavzu va to'plamlar bo'yicha xotira modeli moslashishi</div>
+              <div className="mem-semantic-title">🧬 Semantic Clusters & Context Transfer</div>
+              <div className="mem-semantic-sub">How the memory model adapts across topics and packs</div>
             </div>
             <span className="mem-sem-badge">Context-Aware AI</span>
           </div>
@@ -552,13 +552,13 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
                   <span className="mem-sem-icon">{c.icon}</span>
                   <div>
                     <div className="mem-sem-name">{c.name}</div>
-                    <div className="mem-sem-meta">{c.count} ta so'z · O'rtacha S = {c.avgStability}d</div>
+                    <div className="mem-sem-meta">{c.count} words · Avg S = {c.avgStability}d</div>
                   </div>
                 </div>
                 <div className="mem-sem-right">
-                  <div className="mem-sem-mastery">{(c.mastery * 100).toFixed(0)}% bilish</div>
-                  <div className="mem-sem-boost" title="Yangi so'zlar uchun boshlang'ich barqarorlik">
-                    ⚡ Yangi so'z S₀ = {c.initialStability}d
+                  <div className="mem-sem-mastery">{(c.mastery * 100).toFixed(0)}% mastered</div>
+                  <div className="mem-sem-boost" title="Starting stability for new words">
+                    ⚡ New word S₀ = {c.initialStability}d
                   </div>
                 </div>
               </div>
@@ -572,8 +572,8 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
         <div className="mem-semantic-card mem-confusion-card">
           <div className="mem-semantic-header">
             <div>
-              <div className="mem-semantic-title"><AlertTriangle size={16} style={{ verticalAlign: '-2px' }} /> Chalkashtirilgan So'zlar</div>
-              <div className="mem-semantic-sub">Yozib javob berishda doim aralashtirilayotgan so'z juftliklari</div>
+              <div className="mem-semantic-title"><AlertTriangle size={16} style={{ verticalAlign: '-2px' }} /> Confused Words</div>
+              <div className="mem-semantic-sub">Word pairs you consistently mix up when typing answers</div>
             </div>
           </div>
           <div className="mem-semantic-list">
@@ -587,7 +587,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
                   </div>
                 </div>
                 <div className="mem-sem-right">
-                  <div className="mem-sem-mastery">{pair.count}x aralashtirilgan</div>
+                  <div className="mem-sem-mastery">{pair.count}x confused</div>
                 </div>
               </div>
             ))}
@@ -600,16 +600,16 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
         <input
           className="mem-search-input"
           type="text"
-          placeholder="So'z qidirish..."
+          placeholder="Search words..."
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
         <div className="mem-filter-tabs">
           {[
-            { key: 'all', label: 'Barchasi' },
-            { key: 'due', label: '⏰ Bugun' },
-            { key: 'weak', label: '🌱 Zaif' },
-            { key: 'strong', label: '💪 Kuchli' },
+            { key: 'all', label: 'All' },
+            { key: 'due', label: '⏰ Today' },
+            { key: 'weak', label: '🌱 Weak' },
+            { key: 'strong', label: '💪 Strong' },
           ].map(f => (
             <button
               key={f.key}
@@ -622,7 +622,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
         </div>
       </div>
 
-      <div className="mem-count-label">{filtered.length} ta so'z</div>
+      <div className="mem-count-label">{filtered.length} words</div>
 
       <div className="mem-insight-list">
         {filtered.map(memory => (

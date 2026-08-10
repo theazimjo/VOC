@@ -168,7 +168,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="sentence-card-label">Ushbu ma'noni ifodalovchi so'zni ishlatib jumla tuzing</div>
+          <div className="sentence-card-label">Write a sentence using the word that matches this meaning</div>
           <div className="sentence-target">{currentWord.translation}</div>
           {currentWord.definition && (
             <div className="sentence-definition">{currentWord.definition}</div>
@@ -185,7 +185,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
               autoCorrect="off"
               spellCheck="false"
               rows={3}
-              placeholder="Inglizcha jumla yozing..."
+              placeholder="Write an English sentence..."
             />
           </form>
 
@@ -202,8 +202,8 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
                     : <X size={18} strokeWidth={2.5} />}
                   <span>
                     {isCorrect
-                      ? (isTooShort ? "So'z to'g'ri ishlatildi, lekin jumlani uzunroq yozing" : 'Ajoyib! So\'z to\'g\'ri ishlatildi')
-                      : "So'z jumlada ishlatilmadi"}
+                      ? (isTooShort ? 'Word used correctly, but try a longer sentence' : 'Great! Word used correctly')
+                      : 'Word not used in the sentence'}
                   </span>
                 </div>
                 <div className="sentence-answer-word">
@@ -212,7 +212,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
                     type="button"
                     className="btn-sentence-speak"
                     onClick={() => speakWord(currentWord.word, language)}
-                    title="Talaffuz qilish"
+                    title="Listen"
                   >
                     <Volume2 size={15} strokeWidth={2.3} />
                   </button>
@@ -237,7 +237,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
           {!answered ? (
             <>
               <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                Bilmadim
+                Don't know
               </button>
               <button
                 type="button"
@@ -245,12 +245,12 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
                 onClick={submitAnswer}
                 disabled={!input.trim()}
               >
-                Tekshirish
+                Check
               </button>
             </>
           ) : (
             <button type="button" className="btn-sentence-next" onClick={handleNext}>
-              {isLast ? 'Natijalar →' : 'Keyingisi →'}
+              {isLast ? 'Results →' : 'Next →'}
             </button>
           )}
         </div>

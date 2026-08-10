@@ -82,16 +82,16 @@ function ExitModal({ onConfirm, onCancel }) {
     <div className="gt-exit-overlay" onClick={onCancel}>
       <div className="gt-exit-modal" onClick={e => e.stopPropagation()}>
         <div className="gt-exit-icon">🚪</div>
-        <h2 className="gt-exit-title">Chiqib ketasizmi?</h2>
+        <h2 className="gt-exit-title">Exit the exercise?</h2>
         <p className="gt-exit-desc">
-          Mashq tugallanmadi. Natijalar saqlanmaydi.
+          The exercise isn't finished. Your results won't be saved.
         </p>
         <div className="gt-exit-actions">
           <button className="gt-exit-btn confirm" onClick={onConfirm}>
-            Ha, chiqish
+            Yes, exit
           </button>
           <button className="gt-exit-btn cancel" onClick={onCancel}>
-            Davom etish
+            Continue
           </button>
         </div>
       </div>
@@ -148,12 +148,12 @@ function ScrambledExercise({ question, answered, onAnswer }) {
 
   return (
     <div className="scrambled-exercise">
-      <p className="scrambled-instruction">So'zlarni to'g'ri tartibda tanlang:</p>
-      
+      <p className="scrambled-instruction">Select the words in the correct order:</p>
+
       {/* Built sentence area */}
       <div className="scrambled-built-area">
         {selected.length === 0 ? (
-          <span className="scrambled-placeholder">Bu yerga so'zlarni tanlang...</span>
+          <span className="scrambled-placeholder">Select words here...</span>
         ) : (
           selected.map((w, i) => (
             <button key={i} className="scrambled-word selected" onClick={() => toggleWord(w, true)}>
@@ -185,7 +185,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
       {/* Result feedback */}
       {isCorrect !== null && (
         <div className={`scrambled-result ${isCorrect ? 'correct' : 'wrong'}`}>
-          {isCorrect ? '✓ To\'g\'ri!' : `✗ Noto'g'ri. To'g'ri: "${question.answer}"`}
+          {isCorrect ? '✓ Correct!' : `✗ Incorrect. Correct answer: "${question.answer}"`}
           {question.explanation && <p className="scrambled-explanation">{question.explanation}</p>}
         </div>
       )}
@@ -193,7 +193,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
       {/* Check button */}
       {isCorrect === null && selected.length > 0 && (
         <button className="clean-next-btn" onClick={checkAnswer}>
-          Tekshirish
+          Check
         </button>
       )}
     </div>
@@ -274,10 +274,10 @@ export default function GrammarTopic() {
     return (
       <div className="grammar-topic-error">
         <div className="error-icon">🔍</div>
-        <h2>Mavzu topilmadi</h2>
-        <p>Kechirasiz, bu mavzu hali mavjud emas.</p>
+        <h2>Topic not found</h2>
+        <p>Sorry, this topic doesn't exist yet.</p>
         <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
-          ← Grammatikaga qaytish
+          ← Back to Grammar
         </button>
       </div>
     );
@@ -338,10 +338,10 @@ export default function GrammarTopic() {
 
   const getScoreGrade = () => {
     const pct = (score / totalQ) * 100;
-    if (pct >= 90) return { emoji: '🏆', label: 'Ajoyib!', color: 'var(--accent-2)' };
-    if (pct >= 70) return { emoji: '🌟', label: 'Yaxshi!', color: 'var(--accent-1)' };
-    if (pct >= 50) return { emoji: '📚', label: 'Qoniqarli', color: 'var(--accent-3)' };
-    return { emoji: '💪', label: 'Ko\'proq mashq qiling', color: 'var(--error)' };
+    if (pct >= 90) return { emoji: '🏆', label: 'Excellent!', color: 'var(--accent-2)' };
+    if (pct >= 70) return { emoji: '🌟', label: 'Good!', color: 'var(--accent-1)' };
+    if (pct >= 50) return { emoji: '📚', label: 'Satisfactory', color: 'var(--accent-3)' };
+    return { emoji: '💪', label: 'Practice more', color: 'var(--error)' };
   };
 
   // ─── GUIDE PANEL ───────────────────────────────────────────────────────────
@@ -350,7 +350,7 @@ export default function GrammarTopic() {
       <div className="grammar-topic-page clean-theme clean-guide-view">
         {/* Clean Header Bar */}
         <div className="clean-quiz-header">
-          <button className="clean-back-arrow" onClick={() => setShowGuide(false)} title="Testga qaytish">
+          <button className="clean-back-arrow" onClick={() => setShowGuide(false)} title="Back to test">
             ←
           </button>
           <h1 className="clean-quiz-title">Grammar Guide</h1>
@@ -363,7 +363,7 @@ export default function GrammarTopic() {
             Topic: <span className="highlight-white">{topic.title}</span>
           </div>
           <div className="meta-line topic-name">
-            Qo'llanma / Study Guide
+            Study Guide
           </div>
         </div>
 
@@ -402,7 +402,7 @@ export default function GrammarTopic() {
         {/* Return Action Button */}
         <div className="clean-guide-actions">
           <button className="clean-next-btn" onClick={() => setShowGuide(false)}>
-            ✅ Mashqni boshlash / Davom etish
+            ✅ Start / Continue Exercise
           </button>
         </div>
       </div>
@@ -416,7 +416,7 @@ export default function GrammarTopic() {
       <div className="grammar-topic-page">
         <div className="grammar-topic-header">
           <button className="btn-back" onClick={() => navigate(`/grammar/${level}/${topicId}`)}>
-            ← Orqaga
+            ← Back
           </button>
           <div className="topic-header-info">
             <span className="topic-header-icon">{topic.icon}</span>
@@ -432,15 +432,15 @@ export default function GrammarTopic() {
           <div className="results-stats-row">
             <div className="results-stat correct">
               <span className="stat-num">{score}</span>
-              <span className="stat-lbl">To'g'ri</span>
+              <span className="stat-lbl">Correct</span>
             </div>
             <div className="results-stat wrong">
               <span className="stat-num">{wrongCount}</span>
-              <span className="stat-lbl">Noto'g'ri</span>
+              <span className="stat-lbl">Incorrect</span>
             </div>
             <div className="results-stat total">
               <span className="stat-num">{totalQ}</span>
-              <span className="stat-lbl">Jami</span>
+              <span className="stat-lbl">Total</span>
             </div>
           </div>
           <div className="results-progress-bar">
@@ -449,24 +449,24 @@ export default function GrammarTopic() {
               style={{ width: `${(score / totalQ) * 100}%` }}
             />
           </div>
-          <p className="results-pct">{Math.round((score / totalQ) * 100)}% to'g'ri javob</p>
+          <p className="results-pct">{Math.round((score / totalQ) * 100)}% correct</p>
 
           <div className="results-actions">
             <button className="btn btn-primary" onClick={handleRestart}>
-              🔄 Qayta urinish
+              🔄 Try Again
             </button>
             <button className="btn btn-secondary" onClick={() => setShowGuide(true)}>
-              📖 Qo'llanmani ko'rish
+              📖 View Study Guide
             </button>
             <button className="btn btn-ghost" onClick={() => navigate(`/grammar/${level}/${topicId}`)}>
-              ← Orqaga
+              ← Back
             </button>
           </div>
 
           {/* Wrong answers review */}
           {wrongCount > 0 && (
             <div className="wrong-answers-review">
-              <h3 className="review-title">❌ Noto'g'ri javoblar</h3>
+              <h3 className="review-title">❌ Incorrect Answers</h3>
               {answers.filter((a) => !a.isCorrect).map((a, i) => (
                 <div key={i} className="review-item">
                   <p className="review-question">{a.questionText}</p>
@@ -503,11 +503,11 @@ export default function GrammarTopic() {
 
       {/* Clean Header Bar */}
       <div className="clean-quiz-header">
-        <button className="clean-back-arrow" onClick={handleExitRequest} title="Orqaga">
+        <button className="clean-back-arrow" onClick={handleExitRequest} title="Back">
           ←
         </button>
         <h1 className="clean-quiz-title">{getExerciseType(exerciseId).icon} Exercise {exerciseId}</h1>
-        <button className="clean-guide-icon" onClick={() => setShowGuide(true)} title="Qo'llanma">
+        <button className="clean-guide-icon" onClick={() => setShowGuide(true)} title="Study Guide">
           📖
         </button>
       </div>
@@ -545,8 +545,8 @@ export default function GrammarTopic() {
 
       {!question.situation && (
         <p className="clean-question-text">
-          {parseInt(exerciseId, 10) === 3 
-            ? "Berilgan so'zlardan to'g'ri gap hosil qiling:" 
+          {parseInt(exerciseId, 10) === 3
+            ? "Form the correct sentence from the given words:"
             : (question.text || question.answer)}
         </p>
       )}
@@ -563,7 +563,7 @@ export default function GrammarTopic() {
             else { playWrongSound(); vibrate([200]); setWrongCount(w => w + 1); }
             setAnswers(prev => [...prev, {
               questionId: question.id,
-              questionText: `Gap yig'ish mashqi`,
+              questionText: `Sentence building exercise`,
               selected: 0,
               correct: 0,
               isCorrect,
@@ -611,7 +611,7 @@ export default function GrammarTopic() {
             className="clean-explanation-toggle"
             onClick={() => setShowExplanation((s) => !s)}
           >
-            💡 {showExplanation ? "Tushuntirishni yashirish" : "Tushuntirishni ko'rish"}
+            💡 {showExplanation ? "Hide explanation" : "Show explanation"}
           </button>
           {showExplanation && (
             <p className="clean-explanation-text">{question.explanation}</p>
@@ -622,7 +622,7 @@ export default function GrammarTopic() {
       {/* Next/Finish button */}
       {answered && (
         <button className="clean-next-btn" onClick={handleNext}>
-          {currentQ + 1 >= totalQ ? '🏁 Natijalarni ko\'rish' : 'Keyingi savol →'}
+          {currentQ + 1 >= totalQ ? '🏁 View Results' : 'Next question →'}
         </button>
       )}
     </div>

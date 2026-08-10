@@ -43,16 +43,16 @@ const getExamDurationSeconds = (exam) => (exam?.durationMinutes ? exam.durationM
 const EXAM_FOLDERS = [
   {
     key: 'folder_12',
-    title: 'Imtihon 1.2',
+    title: 'Exam 1.2',
     level: 'Intermediate',
     desc: 'Present Continuous, Articles, Numerals, Adverbs, Comparison',
     list: EXAMS_LIST
   },
   {
     key: 'folder_13',
-    title: 'Imtihon 1.3',
+    title: 'Exam 1.3',
     level: 'Beginner → Elementary',
-    desc: "8 qismli kompleks test: xatolar, bo'shliqlar, tarjima, ko'p tanlovli va yozma vazifalar",
+    desc: "An 8-part complex test: mistakes, gaps, translation, multiple choice, and writing tasks",
     list: EXAMS_LIST_13
   }
 ];
@@ -318,7 +318,7 @@ export default function GrammarTest() {
   const handleSubmitTest = async (isTimeout = false) => {
     clearInterval(timerRef.current);
     if (isTimeout) {
-      alert("Vaqt tugadi! Javoblaringiz yuborilmoqda...");
+      alert("Time's up! Submitting your answers...");
     }
     playSound('victory');
     setStage('evaluating');
@@ -420,9 +420,9 @@ export default function GrammarTest() {
     const apiGrades = { ...tempGrades };
     writtenToEvaluate.forEach((item) => {
       if (item.answer === '') {
-        apiGrades[item.key] = { score: 0.0, feedback: 'Bo\'sh qoldirilgan javob.', pending: false };
+        apiGrades[item.key] = { score: 0.0, feedback: 'Left blank.', pending: false };
       } else {
-        apiGrades[item.key] = { score: null, feedback: 'Tekshirilmoqda...', pending: true };
+        apiGrades[item.key] = { score: null, feedback: 'Checking...', pending: true };
       }
     });
 
@@ -608,18 +608,18 @@ Evaluate the answer and return the JSON.`;
 
   // Helper to render rating feedback text
   const getRatingLabel = (percent) => {
-    if (percent >= 90) return { title: "A'lo! Mukammal bilim 🌟", className: 'excellent' };
-    if (percent >= 70) return { title: "Yaxshi natija! 👍", className: 'good' };
-    if (percent >= 50) return { title: "Qoniqarli, ko'proq mashq qiling 📚", className: 'satisfactory' };
-    return { title: "Qayta topshirish tavsiya etiladi 🔁", className: 'retry' };
+    if (percent >= 90) return { title: "Excellent! Perfect knowledge 🌟", className: 'excellent' };
+    if (percent >= 70) return { title: "Good result! 👍", className: 'good' };
+    if (percent >= 50) return { title: "Satisfactory, practice more 📚", className: 'satisfactory' };
+    return { title: "Retaking is recommended 🔁", className: 'retry' };
   };
 
   // Helper to format spent seconds
   const formatTimeSpent = (secs) => {
     const mins = Math.floor(secs / 60);
     const remainingSecs = secs % 60;
-    if (mins > 0) return `${mins} daqiqa ${remainingSecs} soniya`;
-    return `${remainingSecs} soniya`;
+    if (mins > 0) return `${mins} min ${remainingSecs} sec`;
+    return `${remainingSecs} sec`;
   };
 
   // Helper to format attempt date
@@ -645,7 +645,7 @@ Evaluate the answer and return the JSON.`;
   // View a past attempt details
   const handleViewAttempt = (attempt) => {
     if (attempt.status === 'pending') {
-      alert("Natijalar hali baholanmagan. O'qituvchi baholashini kuting!");
+      alert("Results haven't been graded yet. Please wait for the teacher's evaluation!");
       return;
     }
     const ALL_EXAMS = ALL_EXAMS_COMBINED;
@@ -698,13 +698,13 @@ Evaluate the answer and return the JSON.`;
       .join(',\n');
 
     const promptText =
-`Siz ingliz tili o'qituvchisi va imtihon baholovchi AIsiz.
-Quyidagi talabaning ingliz tili grammatikasi imtihonidagi ochiq yozma javoblarini namunaviy javoblar (reference) bilan solishtirib, har biriga 0.0 dan 1.0 gacha ball (score) va qisqa fikr-mulohaza (feedback) yozing.
+`You are an English teacher and exam grading AI.
+Compare the following student's open-ended written answers from an English grammar exam against the reference answers, and give each one a score from 0.0 to 1.0 along with brief feedback.
 
-Taqdim etilayotgan ma'lumotlar:
+Data provided:
 ${JSON.stringify(promptObj, null, 2)}
 
-Javobni FAQAT va FAQAT quyidagi JSON formatda qaytaring (hech qanday qo'shimcha matn yoki tushuntirishlarsiz):
+Return your response in ONLY the following JSON format (no extra text or explanations):
 {
   "attemptId": "${attempt.id}",
   "userId": "${attempt.userId}",
@@ -714,7 +714,7 @@ ${exampleGrades}
 }`;
 
     navigator.clipboard.writeText(promptText);
-    alert("AI uchun prompt buferga nusxalandi! Uni ChatGPT / Gemini / Claude'ga tashlang.");
+    alert("Prompt copied to clipboard for AI! Paste it into ChatGPT / Gemini / Claude.");
     playSound('correct');
   };
 
@@ -722,14 +722,14 @@ ${exampleGrades}
   const handleSubmitGrading = async (attempt) => {
     const rawText = adminJsonInput[attempt.id];
     if (!rawText) {
-      alert("Iltimos, avval AI javobini (JSON) tashlang!");
+      alert("Please paste the AI's response (JSON) first!");
       return;
     }
 
     try {
       const parsed = JSON.parse(rawText.trim());
       if (!parsed.grades || !parsed.attemptId) {
-        alert("JSON formati noto'g'ri! 'attemptId' va 'grades' bo'lishi kerak.");
+        alert("Invalid JSON format! It must include 'attemptId' and 'grades'.");
         return;
       }
 
@@ -775,11 +775,11 @@ ${exampleGrades}
       await remove(pendingRef);
 
       setAdminJsonInput(prev => { const c = { ...prev }; delete c[attempt.id]; return c; });
-      alert("Natijalar saqlandi va talabaga yuborildi!");
+      alert("Results saved and sent to the student!");
       playSound('victory');
     } catch (e) {
       console.error(e);
-      alert("JSON tahlilida xatolik! AI to'g'ri JSON qaytarganini tekshiring.");
+      alert("Error parsing JSON! Make sure the AI returned valid JSON.");
       playSound('wrong');
     }
   };
@@ -871,14 +871,14 @@ ${exampleGrades}
 
       setGrades(updatedGrades);
       if (anyFailed || stillPending) {
-        alert("LM Studio ulanmadi yoki ba'zi javoblarni baholay olmadi. Keyinroq qayta urinib ko'ring.");
+        alert("Couldn't connect to LM Studio or grade some answers. Please try again later.");
         playSound('wrong');
       } else {
         playSound('victory');
       }
     } catch (err) {
       console.error('Retry grading failed:', err);
-      alert("Qayta tekshirishda xatolik yuz berdi.");
+      alert("An error occurred while re-checking.");
       playSound('wrong');
     } finally {
       setIsRetryingAttemptId(null);
@@ -910,7 +910,7 @@ ${exampleGrades}
   // Delete an attempt from history
   const handleDeleteAttempt = async (attemptId, e) => {
     e.stopPropagation();
-    if (window.confirm("Ushbu urinish tarixini o'chirishni xohlaysizmi?")) {
+    if (window.confirm("Delete this attempt from your history?")) {
       if (user) {
         try {
           const attemptRef = ref(db, `users/${user.uid}/grammar/complex_attempts/${attemptId}`);
@@ -954,9 +954,9 @@ ${exampleGrades}
           <div className="gt-welcome-hero">
             <div className="hero-content">
               <span className="hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Award size={12} /> English Level Exam</span>
-              <h2>Grammatika Kompleks Imtihonlari</h2>
+              <h2>Grammar Complex Exams</h2>
               <p>
-                Variantlar yordamida o'z bilimingizni professional darajada sinab ko'ring va natijalarni real vaqtda AI yordamida baholang.
+                Test your knowledge at a professional level using the exam variants, and get your results graded in real time with AI.
               </p>
             </div>
             <div className="hero-decor-orbs">
@@ -969,7 +969,7 @@ ${exampleGrades}
             
             {/* Left side: Premium Folder Cards List & Exam History */}
             <div className="gt-folders-section">
-              <h3 className="section-title">Papka to'plamlari</h3>
+              <h3 className="section-title">Folder Collections</h3>
               
               <div className="gt-folders-grid-list">
                 {EXAM_FOLDERS.map((folder) => (
@@ -994,7 +994,7 @@ ${exampleGrades}
                         <p className="folder-meta-desc-desktop">{folder.desc}</p>
 
                         <div className="folder-footer-meta">
-                          <span className="badge-meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={10} /> {folder.list.length} ta variant</span>
+                          <span className="badge-meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={10} /> {folder.list.length} variants</span>
                           <span className="badge-level">{folder.level}</span>
                         </div>
                       </div>
@@ -1006,12 +1006,12 @@ ${exampleGrades}
                 ))}
               </div>
 
-              {/* Urinishlar Tarixi (Attempts History) */}
+              {/* Attempts History */}
               <div className="gt-history-section" style={{ marginTop: '40px' }}>
-                <h3 className="section-title">Imtihonlar Tarixi {user && <span style={{ fontSize: '0.8rem', textTransform: 'none', color: '#10B981', marginLeft: '6px', display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Cloud size={13} /> Cloud Synced</span>}</h3>
+                <h3 className="section-title">Exam History {user && <span style={{ fontSize: '0.8rem', textTransform: 'none', color: '#10B981', marginLeft: '6px', display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Cloud size={13} /> Cloud Synced</span>}</h3>
                 {attempts.length === 0 ? (
                   <div className="gt-empty-history">
-                    <p>Hozircha topshirilgan imtihonlar tarixi mavjud emas.</p>
+                    <p>No exam history yet.</p>
                   </div>
                 ) : (
                   <div className="gt-history-list">
@@ -1030,7 +1030,7 @@ ${exampleGrades}
                             <div className="history-subtitle">
                               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Calendar size={11} /> {formatDate(att.takenAt)}</span>
                               <span className="dot-divider">•</span>
-                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {Math.round(att.timeSpent / 60)} daq</span>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {Math.round(att.timeSpent / 60)} min</span>
                             </div>
                           </div>
                         </div>
@@ -1038,10 +1038,10 @@ ${exampleGrades}
                         <div className="history-right-content">
                           <div className="score-wrap-ios">
                             <span className={`score-percent-badge-ios ${att.status === 'pending' ? 'pending' : att.score >= 90 ? 'excellent' : att.score >= 70 ? 'good' : att.score >= 50 ? 'satisfactory' : 'fail'}`}>
-                              {att.status === 'pending' ? 'Kutilmoqda' : `${att.score}%`}
+                              {att.status === 'pending' ? 'Pending' : `${att.score}%`}
                             </span>
                             {att.status !== 'pending' && (
-                              <span className="score-details-ios">{att.totalScore}/{att.totalQuestions} ball</span>
+                              <span className="score-details-ios">{att.totalScore}/{att.totalQuestions} points</span>
                             )}
                           </div>
 
@@ -1049,7 +1049,7 @@ ${exampleGrades}
                             <button
                               className="btn-delete-history-ios"
                               onClick={(e) => handleDeleteAttempt(att.id, e)}
-                              title="O'chirish"
+                              title="Delete"
                             >
                               <Trash2 size={14} />
                             </button>
@@ -1079,7 +1079,7 @@ ${exampleGrades}
                     {pendingAttempts.length === 0 ? (
                       <div className="admin-empty-state">
                         <CheckCircle2 size={24} className="admin-empty-icon" />
-                        <p>Barcha imtihonlar baholangan</p>
+                        <p>All exams have been graded</p>
                       </div>
                     ) : (
                       <div className="admin-pending-list">
@@ -1097,17 +1097,17 @@ ${exampleGrades}
                             <div className="admin-card-meta">
                               <Calendar size={10} /> {formatDate(att.takenAt)}
                               &nbsp;&nbsp;•&nbsp;&nbsp;
-                              <Clock size={10} /> {Math.round((att.timeSpent || 0) / 60)} daq
+                              <Clock size={10} /> {Math.round((att.timeSpent || 0) / 60)} min
                             </div>
                             <button
                               className="btn-admin-copy"
                               onClick={() => handleCopyPrompt(att)}
                             >
-                              <Sparkles size={12} /> Prompt nusxalash
+                              <Sparkles size={12} /> Copy Prompt
                             </button>
                             <textarea
                               className="admin-json-textarea"
-                              placeholder='AI dan olingan JSON ni bu yerga tashlang...'
+                              placeholder='Paste the JSON from AI here...'
                               value={adminJsonInput[att.id] || ''}
                               onChange={(e) => setAdminJsonInput(prev => ({ ...prev, [att.id]: e.target.value }))}
                             />
@@ -1115,7 +1115,7 @@ ${exampleGrades}
                               className="btn-admin-submit"
                               onClick={() => handleSubmitGrading(att)}
                             >
-                              <CheckCircle2 size={12} /> Natijani saqlash
+                              <CheckCircle2 size={12} /> Save Result
                             </button>
                           </div>
                         ))}
@@ -1125,16 +1125,16 @@ ${exampleGrades}
                 </div>
               )}
 
-              <h3 className="section-title">Sizning ko'rsatkichlaringiz</h3>
+              <h3 className="section-title">Your Stats</h3>
               <div className="gt-stats-glass-card">
                 <div className="stat-circle-row">
                   <div className="stat-circle-box">
                     <span className="number">{stats.totalTaken} / {ALL_EXAMS_COMBINED.length}</span>
-                    <span className="label">Topshirildi</span>
+                    <span className="label">Completed</span>
                   </div>
                   <div className="stat-circle-box primary">
                     <span className="number">{stats.avgScore}%</span>
-                    <span className="label">O'rtacha Ball</span>
+                    <span className="label">Average Score</span>
                   </div>
                 </div>
               </div>
@@ -1154,10 +1154,10 @@ ${exampleGrades}
           {/* Header with back navigation */}
           <div className="gt-list-header-nav">
             <button className="gt-back-arrow-btn" onClick={() => setStage('list')}>
-              <ArrowLeft size={18} /> Orqaga
+              <ArrowLeft size={18} /> Back
             </button>
             <div className="header-nav-title-group">
-              <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Folder size={22} /> {activeFolder.title} Variantlari</h2>
+              <h2 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Folder size={22} /> {activeFolder.title} Variants</h2>
             </div>
           </div>
 
@@ -1187,7 +1187,7 @@ ${exampleGrades}
                           <CheckCircle size={12} /> {bestScore}%
                         </span>
                       ) : (
-                        <span className="score-pending-pill">Topshirilmagan</span>
+                        <span className="score-pending-pill">Not attempted</span>
                       )}
                     </div>
                   </div>
@@ -1200,25 +1200,25 @@ ${exampleGrades}
 
                     <div className="v2-mobile-status">
                       {isPassed ? (
-                        <span className="m-score-val" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><CheckCircle size={12} /> Eng yaxshi natija: <strong>{bestScore}%</strong></span>
+                        <span className="m-score-val" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><CheckCircle size={12} /> Best result: <strong>{bestScore}%</strong></span>
                       ) : (
-                        <span className="m-score-pending" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Clock size={12} /> Topshirilmagan</span>
+                        <span className="m-score-pending" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Clock size={12} /> Not attempted</span>
                       )}
                     </div>
 
                     <div className="v2-features-list">
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {exam.durationMinutes || 30} daqiqa</span>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Brain size={11} /> AI baholash</span>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={11} /> {exam.sections?.length} ta bo'lim</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {exam.durationMinutes || 30} minutes</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Brain size={11} /> AI grading</span>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><FileText size={11} /> {exam.sections?.length} sections</span>
                     </div>
                   </div>
 
-                  <button 
+                  <button
                     className={`btn ${isPassed ? 'btn-secondary' : 'btn-primary'} v2-start-btn`}
                     onClick={() => handleStartVariant(exam)}
                   >
-                    <span className="btn-text-desktop">Variantni Boshlash 🚀</span>
-                    <span className="btn-text-mobile">Boshlash</span>
+                    <span className="btn-text-desktop">Start Variant 🚀</span>
+                    <span className="btn-text-mobile">Start</span>
                   </button>
                 </motion.div>
               );
@@ -1239,7 +1239,7 @@ ${exampleGrades}
           </div>
           <h1>English Grammar Complex Test</h1>
           <p className="gt-subtitle">
-            Bu test sizning quyidagi mavzulardagi bilimingizni har tomonlama tekshiradi:
+            This test thoroughly checks your knowledge in the following topics:
           </p>
           <div className="gt-topics-grid">
             {(activeTest?.sections || []).map((sec) => (
@@ -1251,15 +1251,15 @@ ${exampleGrades}
 
           <div className="gt-alert-info" style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
             <Clock size={16} style={{ marginTop: '2px', flexShrink: 0 }} />
-            <span><strong>Vaqt limiti:</strong> {activeTest?.durationMinutes || 30} daqiqa. Javoblarni yozib tugatgach, "Testni topshirish" ni bosing.</span>
+            <span><strong>Time limit:</strong> {activeTest?.durationMinutes || 30} minutes. Once you're done writing your answers, click "Submit Test".</span>
           </div>
 
           <div className="gt-intro-actions">
             <button className="btn btn-secondary" onClick={() => navigate('/grammar-test')}>
-              ← Ro'yxatga qaytish
+              ← Back to List
             </button>
             <button className="btn btn-primary" onClick={() => setStage('testing')}>
-              Testni boshlash 🚀
+              Start Test 🚀
             </button>
           </div>
         </motion.div>
@@ -1277,9 +1277,9 @@ ${exampleGrades}
             <div className="submitted-icon-pulse" />
             <CheckCircle2 size={48} className="submitted-check-icon" />
           </div>
-          <h2>Imtihon topshirildi!</h2>
+          <h2>Exam submitted!</h2>
           <p className="submitted-subtitle">
-            Javoblaringiz o'qituvchiga yuborildi. Baholanganidan so'ng natijangiz bu yerda ko'rinadi.
+            Your answers have been sent to the teacher. Once graded, your result will appear here.
           </p>
           <div className="submitted-info-card">
             <div className="submitted-info-row">
@@ -1287,19 +1287,19 @@ ${exampleGrades}
               <span className="submitted-info-value">{activeTest?.title}</span>
             </div>
             <div className="submitted-info-row">
-              <span className="submitted-info-label">Vaqt:</span>
-              <span className="submitted-info-value">{Math.round((getExamDurationSeconds(activeTest) - timeLeft) / 60)} daqiqa</span>
+              <span className="submitted-info-label">Time:</span>
+              <span className="submitted-info-value">{Math.round((getExamDurationSeconds(activeTest) - timeLeft) / 60)} minutes</span>
             </div>
             <div className="submitted-info-row">
-              <span className="submitted-info-label">Holat:</span>
-              <span className="submitted-status-pill">Baholanmoqda...</span>
+              <span className="submitted-info-label">Status:</span>
+              <span className="submitted-status-pill">Being graded...</span>
             </div>
           </div>
           <button
             className="btn btn-secondary"
             onClick={() => { setStage('list'); navigate('/grammar-test'); }}
           >
-            Bosh sahifaga qaytish
+            Back to Home
           </button>
         </motion.div>
       )}
@@ -1339,7 +1339,7 @@ ${exampleGrades}
               onClick={() => handleSubmitTest(false)}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
             >
-              Testni topshirish <CheckCircle size={14} />
+              Submit Test <CheckCircle size={14} />
             </button>
           </div>
 
@@ -1363,14 +1363,14 @@ ${exampleGrades}
                     const key = `mistakes_${q.id}`;
                     return (
                       <div key={q.id} className="gt-question-box mistake-box">
-                        <div className="q-badge">Gap #{q.id}</div>
+                        <div className="q-badge">Sentence #{q.id}</div>
                         <div className="q-sentence wrong-sentence" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <XCircle size={16} className="text-red" style={{ flexShrink: 0 }} /> {q.original}
                         </div>
                         <input
                           type="text"
                           className="gt-input-text"
-                          placeholder="Gapni to'g'ri yozing..."
+                          placeholder="Write the corrected sentence..."
                           value={answers[key] || ''}
                           onChange={(e) => handleTextChange('mistakes', q.id, e.target.value)}
                         />
@@ -1387,7 +1387,7 @@ ${exampleGrades}
                     const key = `gaps_${q.id}`;
                     return (
                       <div key={q.id} className="gt-question-box gap-box">
-                        <div className="q-badge">Savol #{q.id}</div>
+                        <div className="q-badge">Question #{q.id}</div>
                         <div className="q-sentence">{q.text}</div>
                         
                         {q.type === 'choice' ? (
@@ -1406,7 +1406,7 @@ ${exampleGrades}
                           <input
                             type="text"
                             className="gt-input-text clean-width"
-                            placeholder="Bo'shliqni to'ldiring..."
+                            placeholder="Fill in the blank..."
                             value={answers[key] || ''}
                             onChange={(e) => handleTextChange('gaps', q.id, e.target.value)}
                           />
@@ -1425,12 +1425,12 @@ ${exampleGrades}
                     const isEnUz = q.direction === 'en-uz';
                     return (
                       <div key={q.id} className="gt-question-box translate-box">
-                        <div className="q-badge">Gap #{q.id} {isEnUz ? '(English → Uzbek)' : '(Uzbek → English)'}</div>
+                        <div className="q-badge">Sentence #{q.id} {isEnUz ? '(English → Uzbek)' : '(Uzbek → English)'}</div>
                         <div className="q-sentence uz-sentence">{isEnUz ? 'English' : 'Uzbek'}: {isEnUz ? q.english : q.uzbek}</div>
                         <textarea
                           className="gt-textarea"
                           rows={2}
-                          placeholder={isEnUz ? "O'zbekcha tarjimasini yozing..." : 'Inglizcha tarjimasini yozing...'}
+                          placeholder={isEnUz ? "Write the Uzbek translation..." : 'Write the English translation...'}
                           value={answers[key] || ''}
                           onChange={(e) => handleTextChange('translate', q.id, e.target.value)}
                         />
@@ -1447,7 +1447,7 @@ ${exampleGrades}
                     const key = `${activeSection.id}_${q.id}`;
                     return (
                       <div key={q.id} className="gt-question-box choice-only-box">
-                        <div className="q-badge">Savol #{q.id}</div>
+                        <div className="q-badge">Question #{q.id}</div>
                         <div className="q-sentence">{q.text}</div>
                         <div className="gt-options-row">
                           {q.options.map((opt) => (
@@ -1473,14 +1473,14 @@ ${exampleGrades}
                     const key = `transformation_${q.id}`;
                     return (
                       <div key={q.id} className="gt-question-box transformation-box">
-                        <div className="q-badge">Gap #{q.id}</div>
+                        <div className="q-badge">Sentence #{q.id}</div>
                         <div className="q-sentence">{q.original}</div>
                         <div className="gt-transform-row" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <span className="gt-transform-starter" style={{ fontWeight: 600, whiteSpace: 'nowrap' }}>→ {q.starter}</span>
                           <input
                             type="text"
                             className="gt-input-text clean-width"
-                            placeholder="Davomini yozing..."
+                            placeholder="Write the continuation..."
                             value={answers[key] || ''}
                             onChange={(e) => handleTextChange('transformation', q.id, e.target.value)}
                           />
@@ -1520,7 +1520,7 @@ ${exampleGrades}
                       className="gt-textarea"
                       rows={8}
                       style={{ marginTop: '14px' }}
-                      placeholder="10-12 gapdan iborat matningizni shu yerga yozing..."
+                      placeholder="Write your 10-12 sentence text here..."
                       value={answers['writing_1'] || ''}
                       onChange={(e) => handleTextChange('writing', 1, e.target.value)}
                     />
@@ -1537,7 +1537,7 @@ ${exampleGrades}
                     
                     return (
                       <div key={q.id} className="gt-question-box reorder-box">
-                        <div className="q-badge">Gap #{q.id}</div>
+                        <div className="q-badge">Sentence #{q.id}</div>
                         
                         {/* Word Tiles to select */}
                         <div className="gt-scrambled-pool">
@@ -1565,19 +1565,19 @@ ${exampleGrades}
                                   key={sIdx}
                                   className="gt-word-bubble"
                                   onClick={() => handleReorderClickWord(key, wIdx, q.scrambled)}
-                                  title="Olib tashlash uchun bosing"
+                                  title="Click to remove"
                                 >
                                   {q.scrambled[wIdx]}
                                 </span>
                               ))}
                             </div>
                           ) : (
-                            <span className="reorder-placeholder">Tepadagi so'zlarni bosib tartib bilan to'plang</span>
+                            <span className="reorder-placeholder">Click the words above to assemble them in order</span>
                           )}
-                          
+
                           {selectedList.length > 0 && (
                             <button className="gt-clear-reorder" onClick={() => handleReorderClear(key)}>
-                              Tozalash
+                              Clear
                             </button>
                           )}
                         </div>
@@ -1594,12 +1594,12 @@ ${exampleGrades}
                     const key = `production_${q.id}`;
                     return (
                       <div key={q.id} className="gt-question-box production-box">
-                        <div className="q-badge">Mashq #{q.id}</div>
+                        <div className="q-badge">Exercise #{q.id}</div>
                         <div className="q-sentence">Write: {q.prompt}</div>
                         <textarea
                           className="gt-textarea"
                           rows={3}
-                          placeholder="O'zingiz inglizcha gap yozing..."
+                          placeholder="Write your own sentence in English..."
                           value={answers[key] || ''}
                           onChange={(e) => handleTextChange('production', q.id, e.target.value)}
                         />
@@ -1616,7 +1616,7 @@ ${exampleGrades}
                     const key = `inged_${q.id}`;
                     return (
                       <div key={q.id} className="gt-question-box choice-only-box">
-                        <div className="q-badge">Savol #{q.id}</div>
+                        <div className="q-badge">Question #{q.id}</div>
                         <div className="q-sentence">{q.text}</div>
                         <div className="gt-options-row">
                           {q.options.map((opt) => (
@@ -1639,21 +1639,21 @@ ${exampleGrades}
               {activeSection.id === 'reading' && (
                 <div className="gt-reading-section-grid">
                   <div className="gt-reading-passage-card">
-                    <h3>Matn (Reading Passage)</h3>
+                    <h3>Text (Reading Passage)</h3>
                     <p>{activeSection.passage}</p>
                   </div>
-                  
+
                   <div className="gt-questions-list">
                     {activeSection.questions.map((q) => {
                       const key = `reading_${q.id}`;
                       return (
                         <div key={q.id} className="gt-question-box reading-question-box">
-                          <div className="q-badge">Savol #{q.id}</div>
+                          <div className="q-badge">Question #{q.id}</div>
                           <div className="q-sentence">Question: {q.question}</div>
                           <input
                             type="text"
                             className="gt-input-text"
-                            placeholder="Qisqa javobni yozing..."
+                            placeholder="Write a short answer..."
                             value={answers[key] || ''}
                             onChange={(e) => handleTextChange('reading', q.id, e.target.value)}
                           />
@@ -1671,7 +1671,7 @@ ${exampleGrades}
                   className="btn btn-secondary"
                   onClick={() => setActiveSectionIdx(prev => prev - 1)}
                 >
-                  ← Oldingisi
+                  ← Previous
                 </button>
 
                 {activeSectionIdx + 1 < sections.length ? (
@@ -1679,7 +1679,7 @@ ${exampleGrades}
                     className="btn btn-primary"
                     onClick={() => setActiveSectionIdx(prev => prev + 1)}
                   >
-                    Keyingisi →
+                    Next →
                   </button>
                 ) : (
                   <button
@@ -1687,7 +1687,7 @@ ${exampleGrades}
                     onClick={() => handleSubmitTest(false)}
                     style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                   >
-                    Testni topshirish <CheckCircle size={14} />
+                    Submit Test <CheckCircle size={14} />
                   </button>
                 )}
               </div>
@@ -1704,11 +1704,11 @@ ${exampleGrades}
           animate={{ opacity: 1 }}
         >
           <IosSpinner size={36} />
-          <h2>AI javoblaringizni tekshirmoqda...</h2>
+          <h2>AI is checking your answers...</h2>
           <p>
-            LM Studio yordamida yozma tarjima va matn savollarining grammatikasi va ma'nosi baholanmoqda.
+            Your written translation and text answers' grammar and meaning are being evaluated using LM Studio.
           </p>
-          <span className="loading-sub-info">Iltimos kuting, bu biroz vaqt olishi mumkin.</span>
+          <span className="loading-sub-info">Please wait, this may take a moment.</span>
         </motion.div>
       )}
 
@@ -1726,16 +1726,16 @@ ${exampleGrades}
             {/* Header section with Trophy card & primary metrics */}
             <div className="gt-results-hero">
               <div className="results-hero-left">
-                <span className="res-hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Award size={13} /> {viewingPastAttempt ? "Urinish Tafsilotlari" : "Imtihon Yakunlandi"}</span>
+                <span className="res-hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Award size={13} /> {viewingPastAttempt ? "Attempt Details" : "Exam Completed"}</span>
                 <h2>{rating.title}</h2>
-                <p>Natijalaringiz tahlili va to'g'rilik ko'rsatkichi bilan tanishing.</p>
+                <p>Review the analysis of your results and accuracy score.</p>
               </div>
-              
+
               {/* Radial Circle score metric */}
               <div className="results-radial-score-box">
                 <div className="radial-inner">
                   <span className="big-percent">{statsObj.percent}%</span>
-                  <span className="lbl">To'g'rilik</span>
+                  <span className="lbl">Accuracy</span>
                 </div>
               </div>
             </div>
@@ -1744,15 +1744,15 @@ ${exampleGrades}
             {isPending && (
               <div className="gt-pending-alert-box">
                 <div className="alert-text">
-                  <span>⚠️ <strong>Tekshirilmagan yozma javoblar mavjud!</strong></span>
-                  <p>LM Studio serveri o'chirilgan yoki ulanishda xatolik bo'lgani sababli, ayrim yozma javoblar baholanmay qoldi.</p>
+                  <span>⚠️ <strong>Unchecked written answers exist!</strong></span>
+                  <p>Some written answers weren't graded because the LM Studio server was off or there was a connection error.</p>
                 </div>
-                <button 
+                <button
                   className={`btn btn-primary compact btn-retry-eval ${isRetryingAttemptId === currentAttemptId ? 'loading' : ''}`}
                   onClick={(e) => handleRetryGrading(currentAttempt, e)}
                   disabled={isRetryingAttemptId === currentAttemptId}
                 >
-                  {isRetryingAttemptId === currentAttemptId ? 'Tekshirilmoqda...' : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}><RefreshCw size={12} /> Hozir qayta tekshirish</span>}
+                  {isRetryingAttemptId === currentAttemptId ? 'Checking...' : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}><RefreshCw size={12} /> Recheck now</span>}
                 </button>
               </div>
             )}
@@ -1761,48 +1761,48 @@ ${exampleGrades}
             <div className="results-metrics-grid">
               {/* Correct answers summary card */}
               <div className="res-metric-card">
-                <span className="lbl">To'g'ri javoblar</span>
+                <span className="lbl">Correct Answers</span>
                 <div className="val-row">
                   <span className="big-val">{statsObj.correctCount}</span>
-                  <span className="slash-val">/ {statsObj.total} ta savol</span>
+                  <span className="slash-val">/ {statsObj.total} questions</span>
                 </div>
                 <div className="score-breakdown-row">
-                  <span className="br-item green" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><CheckCircle2 size={11} /> {statsObj.correctCount} to'liq</span>
+                  <span className="br-item green" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><CheckCircle2 size={11} /> {statsObj.correctCount} full</span>
                   {statsObj.partialCount > 0 && (
-                    <span className="br-item orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><AlertCircle size={11} /> {statsObj.partialCount} qisman</span>
+                    <span className="br-item orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><AlertCircle size={11} /> {statsObj.partialCount} partial</span>
                   )}
-                  <span className="br-item red" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><XCircle size={11} /> {statsObj.wrongCount} xato</span>
+                  <span className="br-item red" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><XCircle size={11} /> {statsObj.wrongCount} wrong</span>
                   {statsObj.pendingCount > 0 && (
-                    <span className="br-item orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {statsObj.pendingCount} kutilmoqda</span>
+                    <span className="br-item orange" style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }}><Clock size={11} /> {statsObj.pendingCount} pending</span>
                   )}
                 </div>
-                <p className="desc-meta">Jami to'plangan ball: <strong>{statsObj.score} ball</strong></p>
+                <p className="desc-meta">Total points earned: <strong>{statsObj.score} points</strong></p>
               </div>
 
               {/* Time Spent card */}
               <div className="res-metric-card">
-                <span className="lbl">Sarflangan Vaqt</span>
+                <span className="lbl">Time Spent</span>
                 <div className="val-row">
                   <Clock className="time-icon-svg" />
                   <span className="time-val-text">{formatTimeSpent(timeSpent)}</span>
                 </div>
-                <p className="desc-meta">{activeTest?.durationMinutes || 30} daqiqa umumiy limit berilgan edi.</p>
+                <p className="desc-meta">The total time limit was {activeTest?.durationMinutes || 30} minutes.</p>
               </div>
 
               {/* Rating level card */}
               <div className="res-metric-card">
-                <span className="lbl">Natija reytingi</span>
+                <span className="lbl">Result Rating</span>
                 <div className={`rating-indicator-text ${rating.className}`}>
-                  {statsObj.percent >= 70 ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle size={16} /> Muvaffaqiyatli!</span> : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Ko'proq takrorlang!</span>}
+                  {statsObj.percent >= 70 ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><CheckCircle size={16} /> Successful!</span> : <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}><BookOpen size={16} /> Practice more!</span>}
                 </div>
-                <p className="desc-meta">Intermediate saviyasidagi natija darajasi.</p>
+                <p className="desc-meta">Result level for the Intermediate tier.</p>
               </div>
             </div>
 
             {/* Interactive Section Inspector Tabs */}
             <div className="results-inspector-container">
-              <h3>Bo'limlar bo'yicha batafsil hisobot:</h3>
-              <p className="inspector-desc-sub">Topshiriqlarni ustiga bosib, har bir savol bo'yicha xato va izohlarni ko'rib chiqing.</p>
+              <h3>Detailed report by section:</h3>
+              <p className="inspector-desc-sub">Click on a section to review the mistakes and feedback for each question.</p>
 
               {/* Horizontal Tabs row */}
               <div className="results-tabs-scroller">
@@ -1848,7 +1848,7 @@ ${exampleGrades}
                   className="sec-questions-details-list"
                 >
                   <h4 className="detail-section-title-label">
-                    {sections[activeResultSecIdx]?.title} — Savollar hisoboti
+                    {sections[activeResultSecIdx]?.title} — Question Report
                   </h4>
 
                   <div className="detail-questions-scroll-area">
@@ -1873,9 +1873,9 @@ ${exampleGrades}
                       return (
                         <div key={q.id} className={`gt-result-detail-card-item ${statusClass}`}>
                           <div className="card-item-header">
-                            <span className="question-number">Savol #{q.id}{q.topic ? ` (${q.topic})` : ''}</span>
+                            <span className="question-number">Question #{q.id}{q.topic ? ` (${q.topic})` : ''}</span>
                             <span className="score-label-pill">
-                              {isPendingItem ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Clock size={11} /> Tekshirilmagan</span> : `${gradeObj.score.toFixed(1)} ball`}
+                              {isPendingItem ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}><Clock size={11} /> Not checked</span> : `${gradeObj.score.toFixed(1)} points`}
                             </span>
                           </div>
 
@@ -1884,91 +1884,91 @@ ${exampleGrades}
                             {/* Correct mistakes specific */}
                             {sections[activeResultSecIdx].id === 'mistakes' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line wrong" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><strong>Original xato gap:</strong> <XCircle size={14} style={{ flexShrink: 0 }} /> {q.original}</div>
-                                <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Namunaviy shakli:</strong> "{q.reference}"</div>}
+                                <div className="txt-line wrong" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><strong>Original incorrect sentence:</strong> <XCircle size={14} style={{ flexShrink: 0 }} /> {q.original}</div>
+                                <div className="txt-line user"><strong>Your answer:</strong> "{userVal || <em>[Blank]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Reference form:</strong> "{q.reference}"</div>}
                               </div>
                             )}
 
                             {/* Gaps specific */}
                             {sections[activeResultSecIdx].id === 'gaps' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line"><strong>Savol:</strong> {q.text}</div>
-                                <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan to'g'ri javob:</strong> "{q.correct}"</div>}
+                                <div className="txt-line"><strong>Question:</strong> {q.text}</div>
+                                <div className="txt-line user"><strong>Your answer:</strong> "{userVal || <em>[Blank]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Expected correct answer:</strong> "{q.correct}"</div>}
                               </div>
                             )}
 
                             {/* Translate specific */}
                             {sections[activeResultSecIdx].id === 'translate' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line uz"><strong>{q.direction === 'en-uz' ? 'English gap' : "O'zbekcha gap"}:</strong> {q.direction === 'en-uz' ? q.english : q.uzbek}</div>
-                                <div className="txt-line user"><strong>Sizning tarjimangiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isPendingItem && <div className="txt-line ref"><strong>Namunaviy to'g'ri variant:</strong> "{q.reference}"</div>}
+                                <div className="txt-line uz"><strong>{q.direction === 'en-uz' ? 'English gap' : "Uzbek sentence"}:</strong> {q.direction === 'en-uz' ? q.english : q.uzbek}</div>
+                                <div className="txt-line user"><strong>Your translation:</strong> "{userVal || <em>[Blank]</em>}"</div>
+                                {!isPendingItem && <div className="txt-line ref"><strong>Reference correct version:</strong> "{q.reference}"</div>}
                               </div>
                             )}
 
                             {/* Multiple Choice / Mixed Grammar Challenge specific */}
                             {(sections[activeResultSecIdx].id === 'multichoice' || sections[activeResultSecIdx].id === 'mixedgrammar') && (
                               <div className="detail-texts-block">
-                                <div className="txt-line"><strong>Savol:</strong> {q.text}</div>
-                                <div className="txt-line user"><strong>Sizning tanlovingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan javob:</strong> "{q.correct}"</div>}
+                                <div className="txt-line"><strong>Question:</strong> {q.text}</div>
+                                <div className="txt-line user"><strong>Your choice:</strong> "{userVal || <em>[Blank]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Expected answer:</strong> "{q.correct}"</div>}
                               </div>
                             )}
 
                             {/* Sentence Transformation specific */}
                             {sections[activeResultSecIdx].id === 'transformation' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line"><strong>Asl gap:</strong> {q.original}</div>
-                                <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{q.starter} {userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan:</strong> "{q.starter} {q.reference}"</div>}
+                                <div className="txt-line"><strong>Original sentence:</strong> {q.original}</div>
+                                <div className="txt-line user"><strong>Your answer:</strong> "{q.starter} {userVal || <em>[Blank]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Expected:</strong> "{q.starter} {q.reference}"</div>}
                               </div>
                             )}
 
                             {/* Short Writing Task specific */}
                             {sections[activeResultSecIdx].id === 'writing' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line"><strong>Tanlangan mavzu:</strong> {(() => {
+                                <div className="txt-line"><strong>Chosen topic:</strong> {(() => {
                                   const chosen = (sections[activeResultSecIdx].topics || []).find(t => t.key === answers['writing_topic']);
-                                  return chosen ? `${chosen.key}) ${chosen.label}` : <em>[Tanlanmagan]</em>;
+                                  return chosen ? `${chosen.key}) ${chosen.label}` : <em>[Not chosen]</em>;
                                 })()}</div>
-                                <div className="txt-line user"><strong>Yozgan matningiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
+                                <div className="txt-line user"><strong>Your written text:</strong> "{userVal || <em>[Blank]</em>}"</div>
                               </div>
                             )}
 
                             {/* Reorder specific */}
                             {sections[activeResultSecIdx].id === 'reorder' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line scrambled"><strong>Aralash so'zlar:</strong> {q.scrambled.join(' / ')}</div>
-                                <div className="txt-line user"><strong>Tuzgan gapingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan:</strong> "{q.answer}"</div>}
+                                <div className="txt-line scrambled"><strong>Scrambled words:</strong> {q.scrambled.join(' / ')}</div>
+                                <div className="txt-line user"><strong>Your assembled sentence:</strong> "{userVal || <em>[Blank]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Expected:</strong> "{q.answer}"</div>}
                               </div>
                             )}
 
                             {/* Open production specific */}
                             {sections[activeResultSecIdx].id === 'production' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line prompt"><strong>Mashq talabi:</strong> {q.prompt}</div>
-                                <div className="txt-line user"><strong>Siz yozgan gap:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
+                                <div className="txt-line prompt"><strong>Exercise prompt:</strong> {q.prompt}</div>
+                                <div className="txt-line user"><strong>Sentence you wrote:</strong> "{userVal || <em>[Blank]</em>}"</div>
                               </div>
                             )}
 
                             {/* ing/ed specific */}
                             {sections[activeResultSecIdx].id === 'inged' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line"><strong>Gap:</strong> {q.text}</div>
-                                <div className="txt-line user"><strong>Sizning tanlovingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Kutilgan javob:</strong> "{q.correct}"</div>}
+                                <div className="txt-line"><strong>Sentence:</strong> {q.text}</div>
+                                <div className="txt-line user"><strong>Your choice:</strong> "{userVal || <em>[Blank]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Expected answer:</strong> "{q.correct}"</div>}
                               </div>
                             )}
 
                             {/* Reading specific */}
                             {sections[activeResultSecIdx].id === 'reading' && (
                               <div className="detail-texts-block">
-                                <div className="txt-line question"><strong>Savol:</strong> {q.question}</div>
-                                <div className="txt-line user"><strong>Sizning javobingiz:</strong> "{userVal || <em>[Bo'sh]</em>}"</div>
-                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Javob kaliti:</strong> "{q.reference}"</div>}
+                                <div className="txt-line question"><strong>Question:</strong> {q.question}</div>
+                                <div className="txt-line user"><strong>Your answer:</strong> "{userVal || <em>[Blank]</em>}"</div>
+                                {!isCorrect && !isPendingItem && <div className="txt-line ref"><strong>Answer key:</strong> "{q.reference}"</div>}
                               </div>
                             )}
 
@@ -1990,19 +1990,19 @@ ${exampleGrades}
 
             {/* Action buttons footer */}
             <div className="gt-results-actions-footer">
-              <button 
-                className="btn btn-secondary" 
+              <button
+                className="btn btn-secondary"
                 onClick={handleExitResults}
               >
-                ← Variantlar ro'yxatiga qaytish
+                ← Back to Variants List
               </button>
               {!viewingPastAttempt && (
-                  <button 
-                    className="btn btn-primary" 
+                  <button
+                    className="btn btn-primary"
                     onClick={handleRestartTest}
                     style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}
                   >
-                    <RefreshCw size={14} /> Qayta topshirib ko'rish
+                    <RefreshCw size={14} /> Retake Test
                   </button>
               )}
             </div>
@@ -2026,16 +2026,16 @@ ${exampleGrades}
               <Award size={26} className="gt-notif-icon" />
             </div>
             <div className="gt-notif-body">
-              <h3 className="gt-notif-title">Natijangiz tayyor! 🎉</h3>
+              <h3 className="gt-notif-title">Your result is ready! 🎉</h3>
               <p className="gt-notif-desc">
-                <strong>{newlyGradedAttempt.testTitle}</strong> imtihoni baholandi.
-                Natijangizni ko&apos;rishni xohlaysizmi?
+                <strong>{newlyGradedAttempt.testTitle}</strong> has been graded.
+                Would you like to view your result?
               </p>
               <div className="gt-notif-score-row">
                 <span className={`gt-notif-score-badge ${newlyGradedAttempt.score >= 90 ? 'excellent' : newlyGradedAttempt.score >= 70 ? 'good' : newlyGradedAttempt.score >= 50 ? 'satisfactory' : 'fail'}`}>
                   {newlyGradedAttempt.score}%
                 </span>
-                <span className="gt-notif-score-meta">{newlyGradedAttempt.totalScore} / {newlyGradedAttempt.totalQuestions} ball</span>
+                <span className="gt-notif-score-meta">{newlyGradedAttempt.totalScore} / {newlyGradedAttempt.totalQuestions} points</span>
               </div>
             </div>
             <div className="gt-notif-actions">
@@ -2043,13 +2043,13 @@ ${exampleGrades}
                 className="gt-notif-btn-primary"
                 onClick={() => handleDismissNotification(true)}
               >
-                Natijangizni ko&apos;rish
+                View Result
               </button>
               <button
                 className="gt-notif-btn-secondary"
                 onClick={() => handleDismissNotification(false)}
               >
-                Keyinroq
+                Later
               </button>
             </div>
           </motion.div>

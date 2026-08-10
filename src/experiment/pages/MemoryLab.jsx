@@ -34,11 +34,11 @@ function StatsPanel({ stats, memoryMap }) {
 
   // Stability distribution buckets
   const buckets = [
-    { label: '< 3 kun', min: 0, max: 3, color: '#f87171' },
-    { label: '3–7 kun', min: 3, max: 7, color: '#f59e0b' },
-    { label: '7–14 kun', min: 7, max: 14, color: '#60a5fa' },
-    { label: '14–30 kun', min: 14, max: 30, color: '#34d399' },
-    { label: '30+ kun', min: 30, max: Infinity, color: '#a78bfa' },
+    { label: '< 3 days', min: 0, max: 3, color: '#f87171' },
+    { label: '3–7 days', min: 3, max: 7, color: '#f59e0b' },
+    { label: '7–14 days', min: 7, max: 14, color: '#60a5fa' },
+    { label: '14–30 days', min: 14, max: 30, color: '#34d399' },
+    { label: '30+ days', min: 30, max: Infinity, color: '#a78bfa' },
   ];
 
   const bucketCounts = buckets.map(b => ({
@@ -77,35 +77,35 @@ function StatsPanel({ stats, memoryMap }) {
             <BookOpen size={20} />
           </div>
           <div className="mem-stat-val">{stats?.totalWords ?? Object.keys(memoryMap).length}</div>
-          <div className="mem-stat-lbl">So'zlar kiritilgan</div>
+          <div className="mem-stat-lbl">Words added</div>
         </div>
         <div className="mem-stat-card">
           <div className="mem-stat-icon" style={{ background: 'var(--warning-dim)', color: 'var(--warning)' }}>
             <Clock size={20} />
           </div>
           <div className="mem-stat-val">{overallAccuracy !== null ? `${overallAccuracy}%` : '—'}</div>
-          <div className="mem-stat-lbl">Umumiy aniqlik</div>
+          <div className="mem-stat-lbl">Overall accuracy</div>
         </div>
         <div className="mem-stat-card">
           <div className="mem-stat-icon" style={{ background: 'var(--success-dim)', color: 'var(--success)' }}>
             <TrendingUp size={20} />
           </div>
           <div className="mem-stat-val">{stats?.avgStability ?? '—'}</div>
-          <div className="mem-stat-lbl">O'rtacha barqarorlik (kun)</div>
+          <div className="mem-stat-lbl">Average stability (days)</div>
         </div>
         <div className="mem-stat-card">
           <div className="mem-stat-icon" style={{ background: 'var(--error-dim)', color: 'var(--error)' }}>
             <Zap size={20} />
           </div>
           <div className="mem-stat-val">{overallAvgSpeed ? `${overallAvgSpeed}s` : '—'}</div>
-          <div className="mem-stat-lbl">O'rtacha javob tezligi</div>
+          <div className="mem-stat-lbl">Average response speed</div>
         </div>
       </div>
 
       {/* Stability distribution */}
       {words.length > 0 && (
         <div className="mem-dist-section">
-          <div className="mem-section-title">📊 Barqarorlik taqsimoti</div>
+          <div className="mem-section-title">📊 Stability distribution</div>
           <div className="mem-dist-bars">
             {bucketCounts.map(b => (
               <div key={b.label} className="mem-dist-row">
@@ -129,7 +129,7 @@ function StatsPanel({ stats, memoryMap }) {
       {/* Recent accuracy */}
       {correctRate !== null && (
         <div className="mem-recent-section">
-          <div className="mem-section-title">⚡ So'nggi 10 ta takrorlash natijalari</div>
+          <div className="mem-section-title">⚡ Last 10 review results</div>
           <div className="mem-recent-dots">
             {last10.map((h, i) => (
               <div
@@ -140,7 +140,7 @@ function StatsPanel({ stats, memoryMap }) {
             ))}
           </div>
           <div className="mem-accuracy-label">
-            So'nggi 10 ta takrorlash aniqligi: <strong>{correctRate}%</strong>
+            Last 10 review accuracy: <strong>{correctRate}%</strong>
           </div>
         </div>
       )}
@@ -148,7 +148,7 @@ function StatsPanel({ stats, memoryMap }) {
       {words.length === 0 && (
         <div className="mem-empty-state">
           <div className="mem-empty-icon">📈</div>
-          <p>Birinchi sessiyani tugatgach, statistika shu yerda ko'rsatiladi.</p>
+          <p>Once you finish your first session, your stats will appear here.</p>
         </div>
       )}
     </div>
@@ -179,7 +179,7 @@ function SessionResults({ session, onRestart, onDone }) {
       <div className="mem-results-trophy">
         {pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪'}
       </div>
-      <h2 className="mem-results-title">Sessiya yakunlandi!</h2>
+      <h2 className="mem-results-title">Session complete!</h2>
 
       <div className="mem-results-ring">
         <svg viewBox="0 0 80 80" width={120}>
@@ -201,19 +201,19 @@ function SessionResults({ session, onRestart, onDone }) {
       <div className="mem-results-stats">
         <div className="mem-result-pill">
           <CheckCircle size={14} color="#34d399" />
-          <span>{correct} to'g'ri</span>
+          <span>{correct} correct</span>
         </div>
         <div className="mem-result-pill">
           <XCircle size={14} color="#f87171" />
-          <span>{total - correct} xato</span>
+          <span>{total - correct} wrong</span>
         </div>
         <div className="mem-result-pill">
           <Clock size={14} color="#818cf8" />
-          <span>O'rtacha {avgTime}s</span>
+          <span>Avg {avgTime}s</span>
         </div>
         <div className="mem-result-pill">
           <Brain size={14} color="#f59e0b" />
-          <span>Ishonch {avgConf}/5</span>
+          <span>Confidence {avgConf}/5</span>
         </div>
       </div>
 
@@ -231,11 +231,11 @@ function SessionResults({ session, onRestart, onDone }) {
 
       <div className="mem-results-actions">
         <button className="mem-btn-secondary" onClick={onDone}>
-          <ArrowLeft size={16} /> Labga qaytish
+          <ArrowLeft size={16} /> Back to Lab
         </button>
         {session?.queue?.length > 0 && (
           <button className="mem-btn-primary" onClick={onRestart}>
-            <RefreshCw size={16} /> Qayta boshlash
+            <RefreshCw size={16} /> Restart
           </button>
         )}
       </div>
@@ -269,9 +269,9 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       <div className="mem-lab-hero">
         <div className="mem-lab-hero-icon">🧬</div>
         <div>
-          <h2 className="mem-lab-hero-title">Xotira Laboratoriyasi</h2>
+          <h2 className="mem-lab-hero-title">Memory Laboratory</h2>
           <p className="mem-lab-hero-sub">
-            Individual unutish egri chizig'i bo'yicha ketma-ket yodlash va takrorlash
+            Sequential learning and review, driven by your own forgetting curve
           </p>
         </div>
       </div>
@@ -280,14 +280,14 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       {loading ? (
         <div className="mem-loading">
           <div className="mem-spinner" />
-          <span>Lug'atingizdagi barcha so'zlar yuklanmoqda...</span>
+          <span>Loading every word in your vocabulary...</span>
         </div>
       ) : queue.length > 0 ? (
         <div className="mem-due-section">
           <div className="mem-due-header">
-            <span className="mem-due-title">🧠 Aqlli Yodlash Navbati</span>
+            <span className="mem-due-title">🧠 Smart Review Queue</span>
             <span className="mem-due-badge-count">
-              {strictlyDueCount > 0 ? `⏰ ${strictlyDueCount} ta review tayyor` : `✨ Barqaror`}
+              {strictlyDueCount > 0 ? `⏰ ${strictlyDueCount} reviews ready` : `✨ Stable`}
             </span>
           </div>
 
@@ -297,14 +297,14 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
                 <span className="mem-due-chip-word">{m.wordData.word}</span>
                 <span
                   className="mem-due-chip-s"
-                  title="Barqarorlik (Stability) — bu so'zni unutmasdan necha kun saqlab qolishingiz taxmin qilinadi."
+                  title="Stability — the estimated number of days you'll retain this word before forgetting it."
                 >
-                  S: {m.stability?.toFixed(1)} kun
+                  S: {m.stability?.toFixed(1)}d
                 </span>
               </div>
             ))}
             {batch.length > 5 && (
-              <div className="mem-due-chip more">+{batch.length - 5} ta</div>
+              <div className="mem-due-chip more">+{batch.length - 5} more</div>
             )}
           </div>
 
@@ -313,20 +313,20 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
             onClick={() => onStart(batch)}
           >
             <Play size={18} />
-            Yodlashni boshlash · {batch.length} ta
+            Start learning · {batch.length}
           </button>
 
           <div className="mem-remaining-note">
-            ✦ <strong>{queue.length}</strong> ta so'z sizning individual unutish ehtimolingiz asosida saralangan.
-            {' '}Eng muhim <strong>{batch.length}</strong> tasi bugungi sessiyaga tanlandi.
-            {remaining > 0 && ` Yana ${remaining} ta so'z keyingi sessiyada kutyapti.`}
+            ✦ <strong>{queue.length}</strong> words have been ranked by your individual forgetting probability.
+            {' '}The top <strong>{batch.length}</strong> were picked for today's session.
+            {remaining > 0 && ` ${remaining} more words are waiting for the next session.`}
           </div>
         </div>
       ) : (
         <div className="mem-no-due">
           <div className="mem-no-due-icon">📚</div>
-          <h3>Lug'atingizda hali so'zlar yo'q</h3>
-          <p>Kutubxonadan yangi so'zlar va to'plamlar qo'shing!</p>
+          <h3>Your vocabulary doesn't have any words yet</h3>
+          <p>Add new words and packs from the library!</p>
         </div>
       )}
 
@@ -334,22 +334,22 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       {batch.length > 0 && (
         <div className="mem-lab-sim-card">
           <div className="mem-lab-sim-title">
-            <Sparkles size={15} strokeWidth={2.2} /> Nega aynan hozir?
+            <Sparkles size={15} strokeWidth={2.2} /> Why exactly now?
           </div>
           <p className="mem-lab-sim-text">
-            Ushbu {batch.length} ta so'zni bugun ko'rib chiqsangiz, 30 kundan keyin ham eslab qolish ehtimolingiz yuqori bo'ladi:
+            If you review these {batch.length} words today, your chance of still remembering them 30 days from now will be much higher:
           </p>
           <div className="mem-lab-sim-compare">
             <div className="mem-lab-sim-stat">
-              <span className="mem-lab-sim-stat-label">Hozir ko'rib chiqsangiz</span>
+              <span className="mem-lab-sim-stat-label">If you review now</span>
               <span className="mem-lab-sim-stat-value good">{Math.round(simNow.withReview * 100)}%</span>
             </div>
             <div className="mem-lab-sim-stat">
-              <span className="mem-lab-sim-stat-label">2 haftadan keyin ko'rib chiqsangiz</span>
+              <span className="mem-lab-sim-stat-label">If you review in 2 weeks</span>
               <span className="mem-lab-sim-stat-value bad">{Math.round(simLater.withReview * 100)}%</span>
             </div>
           </div>
-          <div className="mem-lab-sim-note">30-kunlik eslab qolish ehtimoli (o'rtacha barqarorlik asosida)</div>
+          <div className="mem-lab-sim-note">30-day recall probability (based on average stability)</div>
         </div>
       )}
 
@@ -357,7 +357,7 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       {allWords.length > 0 && (
         <div className="mem-enrolled-info">
           <Award size={14} />
-          Lug'atingizda jami <strong>{allWords.length}</strong> ta so'z
+          <strong>{allWords.length}</strong> words total in your vocabulary
         </div>
       )}
     </div>
@@ -389,10 +389,10 @@ export default function MemoryLab() {
     return (
       <div className="mem-page mem-error-page">
         <div className="mem-error-icon">⚠️</div>
-        <h2>Xatolik yuz berdi</h2>
+        <h2>Something went wrong</h2>
         <p>{error}</p>
         <button className="mem-btn-primary" onClick={() => navigate('/')}>
-          Bosh sahifaga qaytish
+          Back to home
         </button>
       </div>
     );
@@ -402,7 +402,7 @@ export default function MemoryLab() {
     <div className="mem-page">
       {/* Page header */}
       <div className="mem-page-header">
-        <button className="mem-back-btn" onClick={() => navigate('/')} title="Orqaga">
+        <button className="mem-back-btn" onClick={() => navigate('/')} title="Back">
           <ArrowLeft size={20} />
         </button>
         <div className="mem-page-title">

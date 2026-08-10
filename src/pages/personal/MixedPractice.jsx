@@ -22,9 +22,9 @@ import './MixedPractice.css';
 const LEECH_THRESHOLD = 3;
 
 function getResultTier(ratio) {
-  if (ratio >= 0.8) return { Icon: Trophy, label: 'Ajoyib natija!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
-  if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Yaxshi, harakat qiling!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
-  return { Icon: Dumbbell, label: "Davom eting, o'rganasiz!", color: 'var(--success)', dim: 'var(--success-dim)' };
+  if (ratio >= 0.8) return { Icon: Trophy, label: 'Great result!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
+  if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Good effort, keep it up!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
+  return { Icon: Dumbbell, label: "Keep going, you'll get there!", color: 'var(--success)', dim: 'var(--success-dim)' };
 }
 
 // Recognition-before-production sequencing: brand-new / weak words get the
@@ -106,7 +106,7 @@ export default function MixedPractice() {
         const wrongOptions = shuffleArray(otherWords)
           .slice(0, 3)
           .map(w => w.translation);
-        while (wrongOptions.length < 3) wrongOptions.push(`Variant ${wrongOptions.length + 1}`);
+        while (wrongOptions.length < 3) wrongOptions.push(`Option ${wrongOptions.length + 1}`);
         options = shuffleArray([wordObj.translation, ...wrongOptions]);
       }
 
@@ -167,7 +167,7 @@ export default function MixedPractice() {
 
   const handleExit = () => {
     if (step === 'practice') {
-      if (window.confirm("Rostdan ham mashqni tark etmoqchimisiz? Hozirgi natijalaringiz saqlanmaydi.")) {
+      if (window.confirm("Are you sure you want to leave the practice? Your current results will not be saved.")) {
         navigate('/');
       }
     } else {
@@ -268,26 +268,26 @@ export default function MixedPractice() {
 
   return (
     <div className="mixed-practice-page">
-    
+
 
       {pageLoading ? (
         <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
           <IosSpinner />
-          <span>Yuklanmoqda...</span>
+          <span>Loading...</span>
         </div>
       ) : mixedWordsPool.length === 0 ? (
         <div className="empty-state">
           <div className="empty-state-icon">{isLeechMode ? '🎯' : isDueMode ? '✅' : '🎮'}</div>
-          <h3>{isLeechMode ? "Qiyin so'zlar yo'q" : isDueMode ? "Takrorlash uchun so'z yo'q" : "So'zlar topilmadi"}</h3>
+          <h3>{isLeechMode ? "No tricky words" : isDueMode ? "No words due for review" : "No words found"}</h3>
           <p>
             {isLeechMode
-              ? "Barakalla! Hozircha 3 martadan ortiq xato qilingan so'z yo'q."
+              ? "Nice work! There are no words with more than 3 mistakes right now."
               : isDueMode
-                ? "Ajoyib! Hozircha takrorlash muddati kelgan so'z yo'q — keyinroq qayting."
-                : "Aralash mashq qilish uchun Kutubxonaga kirib kitob yoki to'plam oching va so'zlar qo'shing!"}
+                ? "Great! There are no words due for review right now — check back later."
+                : "To do a mixed practice, go to the Library, open a book or pack, and add some words!"}
           </p>
           <Link to={isLeechMode ? '/stats' : isDueMode ? '/' : '/library'} className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
-            {isLeechMode ? 'Statistikaga qaytish →' : isDueMode ? 'Bosh sahifaga qaytish →' : "Kutubxonaga o'tish →"}
+            {isLeechMode ? 'Back to Stats →' : isDueMode ? 'Back to Dashboard →' : "Go to Library →"}
           </Link>
         </div>
       ) : (
@@ -298,10 +298,10 @@ export default function MixedPractice() {
               <div className="practice-session-header">
                 <span className="practice-session-title">
                   {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : isDueMode ? <RotateCcw size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
-                  {isLeechMode ? "Qiyin so'zlar mashqi" : isDueMode ? "Bugungi takrorlash" : "Aralash Mashq"}
+                  {isLeechMode ? "Tricky words practice" : isDueMode ? "Today's review" : "Mixed Practice"}
                 </span>
-                <button className="btn-exit-practice" onClick={handleExit} title="Mashqdan chiqish">
-                  <X size={14} strokeWidth={2.4} /> Chiqish
+                <button className="btn-exit-practice" onClick={handleExit} title="Exit practice">
+                  <X size={14} strokeWidth={2.4} /> Exit
                 </button>
               </div>
 
@@ -316,11 +316,11 @@ export default function MixedPractice() {
               {/* Progress bar */}
               <div className="practice-progress-bar-container">
                 <div className="progress-bar-label">
-                  Savol {currentIdx + 1} / {questions.length}
+                  Question {currentIdx + 1} / {questions.length}
                 </div>
                 <div className="progress-bar-track">
-                  <div 
-                    className="progress-bar-fill" 
+                  <div
+                    className="progress-bar-fill"
                     style={{ width: `${((currentIdx + 1) / questions.length) * 100}%` }}
                   ></div>
                 </div>
@@ -330,14 +330,14 @@ export default function MixedPractice() {
               <div className="question-content">
                 {questions[currentIdx].type === 'quiz' && (
                   <div className="mp-quiz-question">
-                    <span className="question-prompt">Tarjimasini tanlang:</span>
+                    <span className="question-prompt">Choose the translation:</span>
                     <h2 className="question-word">{questions[currentIdx].word.word}</h2>
-                    
+
                     <div className="quiz-options-grid">
                       {questions[currentIdx].options.map((option, idx) => {
                         const correctVal = questions[currentIdx].word.translation;
                         let optionClass = 'quiz-option-btn';
-                        
+
                         if (hasAnswered) {
                           if (option === correctVal) {
                             optionClass += ' correct';
@@ -347,7 +347,7 @@ export default function MixedPractice() {
                             optionClass += ' disabled';
                           }
                         }
-                        
+
                         return (
                           <button
                             key={idx}
@@ -366,14 +366,14 @@ export default function MixedPractice() {
 
                 {questions[currentIdx].type === 'spelling' && (
                   <div className="spelling-question">
-                    <span className="question-prompt">Inglizcha tarjimasini yozing:</span>
+                    <span className="question-prompt">Type the English translation:</span>
                     <h2 className="question-word">{questions[currentIdx].word.translation}</h2>
-                    
+
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form">
                       <input
                         type="text"
                         className="mp-spelling-input"
-                        placeholder="Inglizcha so'zni yozing..."
+                        placeholder="Type the English word..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
@@ -384,7 +384,7 @@ export default function MixedPractice() {
                       />
                       {!hasAnswered && (
                         <button type="submit" className="btn btn-primary submit-btn">
-                          Tekshirish
+                          Check
                         </button>
                       )}
                     </form>
@@ -393,24 +393,24 @@ export default function MixedPractice() {
 
                 {questions[currentIdx].type === 'dictation' && (
                   <div className="dictation-question">
-                    <span className="question-prompt">Eshitgan so'zingizni inglizcha yozing:</span>
+                    <span className="question-prompt">Type the English word you hear:</span>
                     <div className="audio-player-container">
                       <button
                         className="audio-play-btn"
                         onClick={() => speakWord(questions[currentIdx].word.word, questions[currentIdx].word.language)}
-                        title="Qayta eshitish"
+                        title="Listen again"
                         type="button"
                       >
                         <Volume2 size={20} strokeWidth={2.2} />
                       </button>
-                      <span className="audio-helper-text">Talaffuzni qayta eshitish uchun bosing</span>
+                      <span className="audio-helper-text">Tap to hear the pronunciation again</span>
                     </div>
 
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form">
                       <input
                         type="text"
                         className="mp-spelling-input"
-                        placeholder="Eshitgan so'zingizni yozing..."
+                        placeholder="Type the word you heard..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
@@ -421,7 +421,7 @@ export default function MixedPractice() {
                       />
                       {!hasAnswered && (
                         <button type="submit" className="btn btn-primary submit-btn">
-                          Tekshirish
+                          Check
                         </button>
                       )}
                     </form>
@@ -431,7 +431,7 @@ export default function MixedPractice() {
 
               {/* Feedback footer */}
               {hasAnswered && (
-                <motion.div 
+                <motion.div
                   className={`feedback-footer ${questions[currentIdx].isCorrect ? 'correct' : 'incorrect'}`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -443,16 +443,16 @@ export default function MixedPractice() {
                         : <XCircle size={22} strokeWidth={2.2} style={{ color: 'var(--error)' }} />}
                     </span>
                     <div className="feedback-text">
-                      <h4>{questions[currentIdx].isCorrect ? "To'g'ri! Barakalla!" : "Noto'g'ri!"}</h4>
+                      <h4>{questions[currentIdx].isCorrect ? "Correct! Well done!" : "Incorrect!"}</h4>
                       {!questions[currentIdx].isCorrect && (
                         <p>
-                          To'g'ri javob: <strong>{questions[currentIdx].word.word}</strong> 
+                          Correct answer: <strong>{questions[currentIdx].word.word}</strong>
                           {questions[currentIdx].word.translation && ` — ${questions[currentIdx].word.translation}`}
                         </p>
                       )}
                     </div>
                     <button className="btn btn-next" onClick={handleNext}>
-                      {currentIdx === questions.length - 1 ? 'Natijalarni ko\'rish' : 'Keyingi →'}
+                      {currentIdx === questions.length - 1 ? 'View results' : 'Next →'}
                     </button>
                   </div>
                 </motion.div>
@@ -476,7 +476,7 @@ export default function MixedPractice() {
                 <tier.Icon size={44} strokeWidth={2.2} />
               </div>
               <h2>{tier.label}</h2>
-              <p className="results-subtitle">{isDueMode ? 'Takrorlash yakunlandi' : 'Aralash mashq yakunlandi'}</p>
+              <p className="results-subtitle">{isDueMode ? 'Review complete' : 'Mixed practice complete'}</p>
 
               <div className="results-score-badge">
                 <span className="score-value">{correctCount}</span>
@@ -484,12 +484,12 @@ export default function MixedPractice() {
                 <span className="score-total">{questions.length}</span>
               </div>
 
-              <div className="results-label">To'g'ri topilgan so'zlar</div>
+              <div className="results-label">Words answered correctly</div>
 
               {/* Mistakes review */}
               {questions.some(q => !q.isCorrect) && (
                 <div className="mistakes-review-container">
-                  <h3>Xatolarni ko'rib chiqish:</h3>
+                  <h3>Review your mistakes:</h3>
                   <div className="mistakes-list">
                     {questions.filter(q => !q.isCorrect).map((q, idx) => (
                       <div key={idx} className="mistake-item">
@@ -498,12 +498,12 @@ export default function MixedPractice() {
                           <span className="mistake-translation">{q.word.translation}</span>
                         </div>
                         <span className="mistake-your-answer">
-                          Siz: <del>{q.userAnswer || '(javobsiz)'}</del>
+                          You: <del>{q.userAnswer || '(no answer)'}</del>
                         </span>
                         <button
                           className="btn-speak-mistake"
                           onClick={() => speakWord(q.word.word, q.word.language)}
-                          title="Talaffuzni eshitish"
+                          title="Listen to pronunciation"
                           type="button"
                         >
                           <Volume2 size={14} strokeWidth={2.3} />
@@ -516,10 +516,10 @@ export default function MixedPractice() {
 
               <div className="result-actions">
                 <button className="btn btn-primary" onClick={() => startSession(mixedWordsPool)}>
-                  <RotateCcw size={16} strokeWidth={2.3} /> Yana mashq qilish
+                  <RotateCcw size={16} strokeWidth={2.3} /> Practice again
                 </button>
                 <button className="btn btn-secondary" onClick={() => navigate('/')}>
-                  Dashboardga qaytish
+                  Back to Dashboard
                 </button>
               </div>
             </motion.div>

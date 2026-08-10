@@ -8,18 +8,18 @@ export const WHATS_NEW_VERSION = 'v3_pack_folders';
 const FEATURES = [
   {
     icon: Layers,
-    title: 'Papkalar — to\'plamlarni guruhlang',
-    desc: 'Bir mavzu yoki kitobga tegishli bir nechta to\'plamni (masalan, "Science" kitobining har xil bo\'limlari) bitta papka ichiga yig\'ib qo\'yishingiz mumkin.'
+    title: 'Folders — Group your packs',
+    desc: 'Group multiple packs related to a topic or book into a single folder.'
   },
   {
     icon: Move,
-    title: 'Istalgan to\'plamni papkaga ko\'chiring',
-    desc: 'Yangi to\'plam yaratganda yoki mavjudini tahrirlaganda, uni istalgan papkaga biriktirishingiz yoki asosiy ro\'yxatga qaytarishingiz mumkin.'
+    title: 'Move any pack into a folder',
+    desc: 'Assign any pack to a folder when creating or editing it, or move it back to the main list.'
   },
   {
     icon: ShieldCheck,
-    title: 'To\'plamning o\'zi o\'zgarmaydi',
-    desc: 'Papka faqat tashqi ko\'rinishni tartibga soladi — so\'zlar, yodlash jarayoni va progress hech qanday o\'zgarishsiz avvalgidek ishlayveradi.'
+    title: 'Pack contents stay untouched',
+    desc: 'Folders only organize your view — your words, flashcards, and progress remain completely untouched.'
   }
 ];
 
@@ -42,16 +42,16 @@ export default function WhatsNewModal({ onClose }) {
       >
         <div className="whatsnew-badge">
           <Sparkles size={14} />
-          Yangi Tizim
+          New Feature
         </div>
 
         <div className="whatsnew-header-icon">
           <FolderPlus size={32} strokeWidth={2} />
         </div>
 
-        <h2>📁 Papkalar bilan Kutubxona</h2>
+        <h2>📁 Library with Folders</h2>
         <p className="whatsnew-subtitle">
-          Ko'p to'plamlaringizni endi mavzu bo'yicha papkalarga solib, tartibli saqlang
+          Organize your packs into topic-based folders to keep your library clean
         </p>
 
         <div className="whatsnew-list">
@@ -80,10 +80,10 @@ export default function WhatsNewModal({ onClose }) {
         <div className="whatsnew-actions">
           <button className="whatsnew-btn-primary" onClick={handleTryNow}>
             <FolderPlus size={18} />
-            Kutubxonaga o'tish 🚀
+            Go to Library 🚀
           </button>
           <button className="whatsnew-btn-secondary" onClick={onClose}>
-            Tushunarli 👍
+            Got it 👍
           </button>
         </div>
       </motion.div>

@@ -13,7 +13,7 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly, g
     return (
       <div className="ios-activity-indicator">
         <IosSpinner />
-        <span>Yuklanmoqda...</span>
+        <span>Loading...</span>
       </div>
     );
   }
@@ -22,8 +22,8 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly, g
     return (
       <div className="empty-state">
         <div className="empty-state-icon">📝</div>
-        <h3>Hali so'zlar yo'q</h3>
-        <p>"+ So'z qo'shish" tugmasini bosib yangi so'zlarni kiriting</p>
+        <h3>No words yet</h3>
+        <p>Tap "+ Add Word" to enter new words</p>
       </div>
     );
   }

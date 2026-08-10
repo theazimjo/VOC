@@ -39,7 +39,7 @@ export default function SpeedDialFAB({ onAddWord, onImportJson }) {
               <span className="speed-dial-action-icon">📥</span>
             </motion.button>
 
-            {/* Action 2: So'z qo'shish */}
+            {/* Action 2: Add word */}
             <motion.button
               className="speed-dial-action"
               onClick={() => {
@@ -50,9 +50,9 @@ export default function SpeedDialFAB({ onAddWord, onImportJson }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 15, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              title="So'z qo'shish"
+              title="Add Word"
             >
-              <span className="speed-dial-action-label">So'z qo'shish</span>
+              <span className="speed-dial-action-label">Add Word</span>
               <span className="speed-dial-action-icon">📝</span>
             </motion.button>
           </div>
@@ -65,7 +65,7 @@ export default function SpeedDialFAB({ onAddWord, onImportJson }) {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        title="Amallar"
+        title="Actions"
       >
         <span className="speed-dial-trigger-icon">+</span>
       </motion.button>

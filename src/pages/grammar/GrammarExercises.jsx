@@ -23,7 +23,7 @@ export default function GrammarExercises() {
     return (
       <div className="grammar-exercises-page loading">
         <IosSpinner size={36} />
-        <p>Yuklanmoqda...</p>
+        <p>Loading...</p>
       </div>
     );
   }
@@ -31,9 +31,9 @@ export default function GrammarExercises() {
   if (!topic) {
     return (
       <div className="grammar-exercises-page error">
-        <h2>Mavzu topilmadi</h2>
+        <h2>Topic not found</h2>
         <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
-          ← Grammatikaga qaytish
+          ← Back to Grammar
         </button>
       </div>
     );
@@ -61,7 +61,7 @@ export default function GrammarExercises() {
     <div className="grammar-exercises-page">
       {/* Header */}
       <div className="exercises-header">
-        <button className="header-back-btn" onClick={() => navigate('/grammar')} title="Orqaga">
+        <button className="header-back-btn" onClick={() => navigate('/grammar')} title="Back">
           ←
         </button>
         <div className="header-title-wrapper">
@@ -69,8 +69,8 @@ export default function GrammarExercises() {
           <h1 className="header-topic-title">{topic.title}</h1>
         </div>
         <div className="header-actions">
-          <button className="header-icon-btn" title="Ulashish">🔗</button>
-          <button className="header-icon-btn" title="Batafsil">⋮</button>
+          <button className="header-icon-btn" title="Share">🔗</button>
+          <button className="header-icon-btn" title="Details">⋮</button>
         </div>
       </div>
 
@@ -79,9 +79,9 @@ export default function GrammarExercises() {
         {/* Progress summary card */}
         <div className="exercises-progress-card">
           <div className="progress-card-info">
-            <span className="progress-card-label">Mavzu o'zlashtirilishi</span>
+            <span className="progress-card-label">Topic mastery</span>
             <span className="progress-card-value">
-              {completedCount} / {TOTAL_EXERCISES} yechildi ({progressPercent}%)
+              {completedCount} / {TOTAL_EXERCISES} completed ({progressPercent}%)
             </span>
           </div>
           <div className="progress-card-bar-bg">
@@ -150,13 +150,13 @@ export default function GrammarExercises() {
                   {/* Card Content */}
                   <div className="exercise-card-details">
                     <div className="exercise-type-badge">
-                      MASHQ {exId}
+                      EXERCISE {exId}
                     </div>
                     <h3 className="exercise-title">{exType.name}</h3>
-                    
+
                     <div className="exercise-meta-row">
                       <span className="meta-item questions-count">
-                        📄 20 savol
+                        📄 20 questions
                       </span>
                       
                       {isCompleted && (

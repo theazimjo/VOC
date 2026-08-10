@@ -101,7 +101,7 @@ export default function LibraryPage() {
             // Prepare pack payload
             const packData = {
               name: bookData.title || 'Migrated Book',
-              description: bookData.author ? `Muallif: ${bookData.author}` : 'Kitobdan o\'tkazilgan to\'plam',
+              description: bookData.author ? `Author: ${bookData.author}` : 'Migrated from book',
               color: bookData.coverColor || 'var(--accent-gradient)',
               icon: '📖',
               level: 'beginner',
@@ -148,7 +148,7 @@ export default function LibraryPage() {
       // Firebase only ever reports a generic permission-denied here, whether
       // it's the abuse-throttle (too many packs too fast) or another rule —
       // either way this is the honest, safe message to show.
-      alert("To'plamni saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring.");
+      alert("Couldn't save the pack. If you're doing this too quickly, wait a moment and try again.");
       return;
     }
     setShowPackForm(false);
@@ -156,7 +156,7 @@ export default function LibraryPage() {
   };
 
   const handleDeletePack = async () => {
-    if (editingPack && window.confirm("To'plamni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
+    if (editingPack && window.confirm("Delete this pack and all its words?")) {
       await deletePack(editingPack.id);
       setShowPackForm(false);
       setEditingPack(null);
@@ -172,7 +172,7 @@ export default function LibraryPage() {
       }
     } catch (err) {
       console.error('Failed to save folder:', err);
-      alert("Papkani saqlab bo'lmadi. Juda tez-tez urinayotgan bo'lsangiz, biroz kutib qaytadan urinib ko'ring.");
+      alert("Couldn't save the folder. If you're doing this too quickly, wait a moment and try again.");
       return;
     }
     setShowFolderForm(false);
@@ -281,7 +281,7 @@ export default function LibraryPage() {
       }
     } catch (err) {
       console.error("Failed to install market pack:", err);
-      alert("To'plamni o'rnatishda xatolik yuz berdi. Iltimos qaytadan urunib ko'ring.");
+      alert("Something went wrong installing the pack. Please try again.");
     } finally {
       setInstallingPackId(null);
     }
@@ -314,7 +314,7 @@ export default function LibraryPage() {
       playSound('correct');
     } catch (err) {
       console.error("Failed to update market pack:", err);
-      alert("To'plamni yangilashda xatolik yuz berdi. Iltimos qaytadan urunib ko'ring.");
+      alert("Something went wrong updating the pack. Please try again.");
     } finally {
       setUpdatingPackId(null);
     }
@@ -340,7 +340,7 @@ export default function LibraryPage() {
             {activeTab === 'library' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label">🏠 Mening to'plamlarim</span>
+            <span className="tab-label">🏠 My Packs</span>
             {!isLoading && packs.length > 0 && (
               <span className="tab-count-badge">{packs.length}</span>
             )}
@@ -365,7 +365,7 @@ export default function LibraryPage() {
         {isLoading ? (
           <div className="ios-activity-indicator" style={{ marginTop: '50px' }}>
             <IosSpinner />
-            <span>Yuklanmoqda...</span>
+            <span>Loading...</span>
           </div>
         ) : (
           <AnimatePresence mode="wait">
@@ -385,13 +385,13 @@ export default function LibraryPage() {
                       <>
                         <div className="library-folder-detail-header">
                           <button className="library-folder-back-btn" onClick={() => setOpenFolderId(null)}>
-                            <ArrowLeft size={22} /> Orqaga
+                            <ArrowLeft size={22} /> Back
                           </button>
                           <h2>{openFolder.icon} {openFolder.name}</h2>
                           <button
                             className="btn btn-ghost btn-icon"
                             onClick={() => { setEditingFolder(openFolder); setShowFolderForm(true); }}
-                            title="Papkani tahrirlash"
+                            title="Edit folder"
                           >
                             <MoreVertical size={22} />
                           </button>
@@ -405,8 +405,8 @@ export default function LibraryPage() {
                         ) : (
                           <div className="empty-state" style={{ padding: 'var(--space-2xl) var(--space-lg)' }}>
                             <div className="empty-state-icon">📦</div>
-                            <h3>Bu papka hali bo'sh</h3>
-                            <p>Pastdagi + tugmasi bilan shu papkaga to'plam qo'shing.</p>
+                            <h3>This folder is empty</h3>
+                            <p>Use the + button below to add a pack to this folder.</p>
                           </div>
                         )}
                       </>
@@ -415,7 +415,7 @@ export default function LibraryPage() {
                       <>
                         <div className="library-folders-row-header">
                           <button className="btn btn-ghost" onClick={() => { setEditingFolder(null); setShowFolderForm(true); }}>
-                            + Yangi papka
+                            + New Folder
                           </button>
                         </div>
 
@@ -441,8 +441,8 @@ export default function LibraryPage() {
                         ) : (
                           <div className="empty-state" style={{ padding: 'var(--space-2xl) var(--space-lg)' }}>
                             <div className="empty-state-icon">📦</div>
-                            <h3>To'plamlar topilmadi</h3>
-                            <p>Mavzular bo'yicha so'z to'plamlari yarating yoki ularni Marketdan yuklab oling.</p>
+                            <h3>No packs found</h3>
+                            <p>Create word packs by topic, or download them from the Market.</p>
                           </div>
                         )}
                       </>
@@ -481,7 +481,7 @@ export default function LibraryPage() {
 
                           <div className="market-card-bottom">
                             <span className="market-card-words">
-                              📊 {pack.words.length} ta so'z
+                              📊 {pack.words.length} words
                             </span>
                             <button
                               className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
@@ -491,15 +491,15 @@ export default function LibraryPage() {
                                 : handleInstallPack(pack)}
                             >
                               {isInstalling ? (
-                                <>⌛ O'rnatilmoqda...</>
+                                <>⌛ Installing...</>
                               ) : isUpdating ? (
-                                <>⌛ Yangilanmoqda...</>
+                                <>⌛ Updating...</>
                               ) : hasUpdate ? (
-                                <>Yangilash (+{missingWords.length}) 🔄</>
+                                <>Update (+{missingWords.length}) 🔄</>
                               ) : isInstalled ? (
-                                <>O'rnatildi ✅</>
+                                <>Installed ✅</>
                               ) : (
-                                <>Yuklab olish 📥</>
+                                <>Download 📥</>
                               )}
                             </button>
                           </div>

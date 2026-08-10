@@ -52,7 +52,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      setErrorMsg("Iltimos, rasm faylini tanlang (JPEG, PNG, WebP)");
+      setErrorMsg("Please choose an image file (JPEG, PNG, WebP)");
       return;
     }
 
@@ -139,7 +139,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
 
     if (!getGeminiApiKey()) {
       setShowKeyInput(true);
-      setErrorMsg("🔑 Gemini API Kaliti kiritilmagan. Iltimos, kalitni kiriting.");
+      setErrorMsg("🔑 No Gemini API key set. Please enter your key.");
       return;
     }
 
@@ -151,7 +151,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
       const items = await extractWordsFromImageAI(imagePreview, mimeType, existingWords);
 
       if (!items || items.length === 0) {
-        setErrorMsg("Rasmdan so'zlar ajratib bo'lmadi. Iltimos, boshqa aniqroq rasm tanlang.");
+        setErrorMsg("Couldn't extract any words from the image. Please try a clearer photo.");
         setExtractedItems([]);
       } else {
         // Map extracted items and automatically uncheck / flag duplicates
@@ -177,7 +177,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
       if (err.message && err.message.includes('API kalit')) {
         setShowKeyInput(true);
       }
-      setErrorMsg(err.message || "Rasmni AI orqali tahlil qilishda xatolik yuz berdi");
+      setErrorMsg(err.message || "Analyzing the image with AI failed");
     } finally {
       setIsProcessing(false);
     }
@@ -220,7 +220,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
       }));
 
     if (itemsToSave.length === 0) {
-      setErrorMsg("Qo'shish uchun kamida 1 ta so'z tanlanishi kerak");
+      setErrorMsg("Select at least 1 word to add");
       return;
     }
 
@@ -252,7 +252,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
           >
             <div className="modal-header">
-              <h2>📸 Rasmdan so'zlarni ajratish (AI OCR)</h2>
+              <h2>📸 Extract words from a photo (AI OCR)</h2>
               <button className="btn btn-ghost btn-icon" onClick={handleResetAndClose}>✕</button>
             </div>
 
@@ -261,10 +261,10 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                 <div style={{ textAlign: 'center', padding: '36px 16px' }}>
                   <span style={{ fontSize: '48px', display: 'block', marginBottom: '12px' }}>🔒</span>
                   <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '8px', color: 'var(--text-1, #f3f4f6)' }}>
-                    Rasmdan so'z ajratish (AI OCR)
+                    Extract words from a photo (AI OCR)
                   </h3>
                   <p style={{ color: 'var(--text-2, #9ca3af)', fontSize: '0.9rem', maxWidth: '380px', margin: '0 auto 16px auto', lineHeight: '1.5' }}>
-                    Ushbu AI imkoniyati hozirda sinov jarayonida. Tez orada barcha foydalanuvchilar uchun ishga tushiriladi!
+                    This AI feature is currently in testing. It will roll out to all users soon!
                   </p>
                   <span style={{ display: 'inline-block', padding: '6px 14px', borderRadius: '20px', background: 'rgba(124, 58, 237, 0.15)', color: 'var(--accent-1, #7c3aed)', fontSize: '0.82rem', fontWeight: 'bold' }}>
                     🚀 Coming soon
@@ -281,20 +281,20 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                   {showKeyInput && (
                     <div style={{ padding: '10px 14px', background: 'rgba(124, 58, 237, 0.1)', border: '1px solid rgba(124, 58, 237, 0.25)', borderRadius: '10px', marginBottom: '14px' }}>
                       <label style={{ fontSize: '0.82rem', fontWeight: 'bold', display: 'block', marginBottom: '6px', color: 'var(--text-1, #f3f4f6)' }}>
-                        🔑 Gemini API Kalitingizni kiriting:
+                        🔑 Enter your Gemini API key:
                       </label>
                       <div style={{ display: 'flex', gap: '8px' }}>
-                        <input 
-                          type="password" 
-                          className="input" 
-                          value={customKey} 
-                          onChange={e => setCustomKey(e.target.value)} 
-                          placeholder="AI Studio API Key..." 
+                        <input
+                          type="password"
+                          className="input"
+                          value={customKey}
+                          onChange={e => setCustomKey(e.target.value)}
+                          placeholder="AI Studio API Key..."
                           style={{ fontSize: '0.85rem', flex: 1 }}
                         />
-                        <button 
-                          type="button" 
-                          className="btn btn-primary" 
+                        <button
+                          type="button"
+                          className="btn btn-primary"
                           onClick={() => {
                             if (customKey.trim()) {
                               setGeminiApiKey(customKey.trim());
@@ -305,7 +305,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                           }}
                           style={{ fontSize: '0.8rem', whiteSpace: 'nowrap', padding: '6px 14px' }}
                         >
-                          Saqlash
+                          Save
                         </button>
                       </div>
                     </div>
@@ -322,16 +322,16 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                       <span className="doc-frame-corner top-right"></span>
                       <span className="doc-frame-corner bottom-left"></span>
                       <span className="doc-frame-corner bottom-right"></span>
-                      <p className="doc-frame-hint">📄 Kitob yoki varaqni ramka ichiga tekis joylashtiring</p>
+                      <p className="doc-frame-hint">📄 Lay the book or page flat inside the frame</p>
                     </div>
                   </div>
 
                   <div className="camera-controls">
                     <button type="button" className="btn btn-ghost" onClick={stopCameraStream}>
-                      Bekor qilish
+                      Cancel
                     </button>
                     <button type="button" className="btn btn-primary btn-snap-photo" onClick={captureFrameFromCamera}>
-                      📸 Tiniq Rasmga olish
+                      📸 Take a Sharp Photo
                     </button>
                   </div>
                   <canvas ref={canvasRef} style={{ display: 'none' }} />
@@ -341,36 +341,36 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                 <div className="photo-upload-section">
                   {imagePreview ? (
                     <div className="photo-preview-container">
-                      <img src={imagePreview} alt="Tahlil uchun rasm" className="photo-preview-img" />
-                      <button 
-                        type="button" 
+                      <img src={imagePreview} alt="Image to analyze" className="photo-preview-img" />
+                      <button
+                        type="button"
                         className="btn btn-ghost photo-reselect-btn"
                         onClick={() => { setSelectedImage(null); setImagePreview(null); }}
                         disabled={isProcessing}
                       >
-                        🔄 Boshqa rasm yuklash / Rasmga olish
+                        🔄 Upload another photo / Retake
                       </button>
                     </div>
                   ) : (
                     <div className="photo-input-options">
                       {/* Option 1: File Dropzone */}
-                      <div 
+                      <div
                         className="photo-dropzone"
                         onClick={() => fileInputRef.current?.click()}
                       >
                         <span className="photo-dropzone-icon">📁</span>
-                        <p className="photo-dropzone-title">Rasmni yuklash</p>
-                        <p className="photo-dropzone-sub">Galereya yoki kompyuterdan rasm tanlang</p>
+                        <p className="photo-dropzone-title">Upload a photo</p>
+                        <p className="photo-dropzone-sub">Choose an image from your gallery or computer</p>
                       </div>
 
                       {/* Option 2: Direct Camera Trigger */}
-                      <div 
+                      <div
                         className="photo-dropzone camera-option"
                         onClick={startCamera}
                       >
                         <span className="photo-dropzone-icon">📸</span>
-                        <p className="photo-dropzone-title">Rasmga olish (Camera)</p>
-                        <p className="photo-dropzone-sub">Kamera orqali kitob varag meytini rasmga oling</p>
+                        <p className="photo-dropzone-title">Take a photo (Camera)</p>
+                        <p className="photo-dropzone-sub">Photograph a book page using your camera</p>
                       </div>
 
                       {/* Hidden File Inputs */}
@@ -400,7 +400,7 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                         onClick={handleExtract}
                         disabled={isProcessing}
                       >
-                        {isProcessing ? '✨ Gemini AI rasmni tahlil qilmoqda...' : '✨ Rasmdagi so\'zlarni tahlil qilish'}
+                        {isProcessing ? '✨ Gemini AI is analyzing the image...' : '✨ Analyze words in the image'}
                       </button>
                     </div>
                   )}
@@ -410,12 +410,12 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
                 <div className="photo-review-section">
                   <div className="photo-review-header">
                     <span className="photo-review-count">
-                      Jami topilgan: <strong>{extractedItems.length} ta</strong> | Tanlangan: <strong>{selectedCount} ta</strong>
+                      Found: <strong>{extractedItems.length}</strong> | Selected: <strong>{selectedCount}</strong>
                     </span>
                     <div className="photo-review-controls">
-                      <button type="button" className="btn-link" onClick={() => handleSelectAll(true)}>Hammasini belgilash</button>
+                      <button type="button" className="btn-link" onClick={() => handleSelectAll(true)}>Select all</button>
                       <span>•</span>
-                      <button type="button" className="btn-link" onClick={() => handleSelectAll(false)}>Bekor qilish</button>
+                      <button type="button" className="btn-link" onClick={() => handleSelectAll(false)}>Deselect all</button>
                     </div>
                   </div>
 
@@ -435,20 +435,20 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
 
                         <div className="photo-item-fields">
                           <div className="photo-item-row">
-                            <input 
-                              type="text" 
-                              className="input photo-input-word" 
-                              value={item.word} 
+                            <input
+                              type="text"
+                              className="input photo-input-word"
+                              value={item.word}
                               onChange={e => handleFieldChange(item.id, 'word', e.target.value)}
-                              placeholder="So'z"
+                              placeholder="Word"
                             />
                             <span className="photo-item-arrow">➔</span>
-                            <input 
-                              type="text" 
-                              className="input photo-input-trans" 
-                              value={item.translation} 
+                            <input
+                              type="text"
+                              className="input photo-input-trans"
+                              value={item.translation}
                               onChange={e => handleFieldChange(item.id, 'translation', e.target.value)}
-                              placeholder="Tarjimasi"
+                              placeholder="Translation"
                             />
                           </div>
 
@@ -461,16 +461,16 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
 
                           {item.isDuplicate && (
                             <span className="photo-badge-duplicate">
-                              ⚠️ To'plamda mavjud (O'tkazib yuboriladi)
+                              ⚠️ Already in this pack (will be skipped)
                             </span>
                           )}
                         </div>
 
-                        <button 
-                          type="button" 
+                        <button
+                          type="button"
                           className="btn-icon photo-item-delete"
                           onClick={() => handleDeleteItem(item.id)}
-                          title="Ro'yxatdan o'chirish"
+                          title="Remove from list"
                         >
                           🗑️
                         </button>
@@ -485,16 +485,16 @@ export default function PhotoWordExtractorModal({ isOpen, onClose, onImport, exi
 
             <div className="modal-footer">
               <button type="button" className="btn btn-ghost" onClick={handleResetAndClose}>
-                {isAllowedUser ? "Bekor qilish" : "Yopish"}
+                {isAllowedUser ? "Cancel" : "Close"}
               </button>
               {isAllowedUser && extractedItems.length > 0 && (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="btn btn-primary"
                   onClick={handleConfirmSave}
                   disabled={selectedCount === 0}
                 >
-                  {selectedCount > 0 ? `✨ ${selectedCount} ta so'zni saqlash` : "So'z tanlanmadi"}
+                  {selectedCount > 0 ? `✨ Save ${selectedCount} word${selectedCount === 1 ? '' : 's'}` : "No word selected"}
                 </button>
               )}
             </div>

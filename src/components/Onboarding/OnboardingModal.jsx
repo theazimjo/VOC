@@ -9,7 +9,7 @@ import { packIcons } from '../../utils/helpers';
 import { WHATS_NEW_VERSION } from './WhatsNewModal';
 import './OnboardingModal.css';
 
-const SUGGESTED_NAMES = ["Kundalik so'zlar", 'IELTS lug\'ati', 'Ish/Biznes', 'Sayohat'];
+const SUGGESTED_NAMES = ['Daily Words', 'IELTS Vocabulary', 'Work & Business', 'Travel'];
 const GOAL_OPTIONS = [5, 10, 15, 20];
 
 function markOnboardingDone(uid) {
@@ -63,7 +63,7 @@ export default function OnboardingModal({ onClose }) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       >
-        <button className="onboarding-skip" onClick={handleClose}>O'tkazib yuborish</button>
+        <button className="onboarding-skip" onClick={handleClose}>Skip</button>
 
         <div className="onboarding-dots">
           {[1, 2, 3, 4].map(n => (
@@ -75,17 +75,17 @@ export default function OnboardingModal({ onClose }) {
           {step === 1 && (
             <motion.div key="s1" className="onboarding-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="onboarding-icon-circle"><GraduationCap size={36} strokeWidth={2} /></div>
-              <h2>VOC'ga xush kelibsiz!</h2>
-              <p>So'z boyligingizni oshirish, grammatikani mustahkamlash va IELTS'ga tayyorlanish uchun shaxsiy yordamchingiz.</p>
-              <button className="onboarding-primary-btn" onClick={() => setStep(2)}>Boshlaymiz →</button>
+              <h2>Welcome to VOC!</h2>
+              <p>Your personal assistant for building vocabulary, mastering grammar, and preparing for IELTS.</p>
+              <button className="onboarding-primary-btn" onClick={() => setStep(2)}>Get Started →</button>
             </motion.div>
           )}
 
           {step === 2 && (
             <motion.div key="s2" className="onboarding-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="onboarding-icon-circle"><Sparkles size={32} strokeWidth={2} /></div>
-              <h2>Birinchi to'plamingizni yarating</h2>
-              <p>So'zlaringizni mavzu bo'yicha guruhlang. Keyinroq ham o'zgartirishingiz mumkin.</p>
+              <h2>Create Your First Pack</h2>
+              <p>Group your words by topic. You can change this later.</p>
 
               <div className="onboarding-suggestions">
                 {SUGGESTED_NAMES.map(name => (
@@ -96,7 +96,7 @@ export default function OnboardingModal({ onClose }) {
               <input
                 type="text"
                 className="onboarding-input"
-                placeholder="To'plam nomi (masalan: IELTS so'zlari)"
+                placeholder="Pack Name (e.g. IELTS Words)"
                 value={packName}
                 onChange={e => setPackName(e.target.value)}
               />
@@ -114,7 +114,7 @@ export default function OnboardingModal({ onClose }) {
               </div>
 
               <button className="onboarding-primary-btn" onClick={handleCreatePack} disabled={creating}>
-                {creating ? 'Yaratilmoqda...' : packName.trim() ? 'Yaratish va davom etish →' : 'Keyinroq qo\'shaman →'}
+                {creating ? 'Creating...' : packName.trim() ? 'Create and Continue →' : 'Add Later →'}
               </button>
             </motion.div>
           )}
@@ -122,8 +122,8 @@ export default function OnboardingModal({ onClose }) {
           {step === 3 && (
             <motion.div key="s3" className="onboarding-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="onboarding-icon-circle"><Flame size={32} strokeWidth={2} /></div>
-              <h2>Kunlik maqsadingizni belgilang</h2>
-              <p>Har kuni nechta so'z mashq qilishni xohlaysiz? Bu streak tizimingiz uchun asos bo'ladi.</p>
+              <h2>Set Your Daily Goal</h2>
+              <p>How many words do you want to practice each day? This sets your streak goal.</p>
 
               <div className="onboarding-goal-grid">
                 {GOAL_OPTIONS.map(n => (
@@ -132,25 +132,25 @@ export default function OnboardingModal({ onClose }) {
                     className={`onboarding-goal-btn ${selectedGoal === n ? 'active' : ''}`}
                     onClick={() => setSelectedGoal(n)}
                   >
-                    {n} ta
+                    {n} words
                   </button>
                 ))}
               </div>
 
-              <button className="onboarding-primary-btn" onClick={() => setStep(4)}>Davom etish →</button>
+              <button className="onboarding-primary-btn" onClick={() => setStep(4)}>Continue →</button>
             </motion.div>
           )}
 
           {step === 4 && (
             <motion.div key="s4" className="onboarding-step" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
               <div className="onboarding-icon-circle success"><Check size={36} strokeWidth={2.4} /></div>
-              <h2>Tayyor!</h2>
+              <h2>All Set!</h2>
               <p>
                 {createdPackId
-                  ? "To'plamingiz yaratildi. Endi so'zlar qo'shib, mashq qilishni boshlashingiz mumkin."
-                  : "Kutubxonaga o'tib, birinchi to'plamingizni yaratishingiz mumkin."}
+                  ? "Your pack is created. You can now add words and start practicing."
+                  : "Head over to the Library to create your first pack."}
               </p>
-              <button className="onboarding-primary-btn" onClick={handleFinish}>Boshlash 🚀</button>
+              <button className="onboarding-primary-btn" onClick={handleFinish}>Start 🚀</button>
             </motion.div>
           )}
         </AnimatePresence>

@@ -73,7 +73,7 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
     setImportProgress(null);
 
     if (!jsonText.trim()) {
-      setError("Iltimos, JSON ma'lumotni kiriting.");
+      setError("Please enter JSON data.");
       return;
     }
 
@@ -82,22 +82,22 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
       try {
         parsedData = JSON.parse(jsonText);
       } catch (jsonErr) {
-        throw new Error("Noto'g'ri JSON formati! Qavslar, qo'shtirnoqlar yoki vergullarni tekshiring.", { cause: jsonErr });
+        throw new Error("Invalid JSON format! Check the brackets, quotes, and commas.", { cause: jsonErr });
       }
 
       if (!Array.isArray(parsedData)) {
-        throw new Error("JSON ma'lumot ro'yxat (array) ko'rinishida bo'lishi kerak: [...]");
+        throw new Error("The JSON data must be a list (array): [...]");
       }
 
       if (parsedData.length > MAX_WORDS_PER_IMPORT) {
-        throw new Error(`Bir martada faqat ${MAX_WORDS_PER_IMPORT} tagacha so'z qo'shish mumkin (siz ${parsedData.length} ta kiritdingiz). Ro'yxatni bir necha qismga bo'lib yuboring.`);
+        throw new Error(`You can add up to ${MAX_WORDS_PER_IMPORT} words at a time (you entered ${parsedData.length}). Split the list into several batches.`);
       }
 
       const validWords = [];
       for (let i = 0; i < parsedData.length; i++) {
         const item = parsedData[i];
         if (!item.word || !item.translation) {
-          throw new Error(`${i + 1}-so'zda 'word' yoki 'translation' maydoni yetishmayapti.`);
+          throw new Error(`Word ${i + 1} is missing a 'word' or 'translation' field.`);
         }
         validWords.push({
           word: String(item.word).slice(0, 300),
@@ -146,42 +146,42 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
               <div className="import-progress-overlay">
                 <div className="import-progress-card">
                   <div className="import-spinner" />
-                  <h3>So'zlar qo'shilmoqda...</h3>
+                  <h3>Adding words...</h3>
                   <div className="import-progress-bar-track">
-                    <div 
-                      className="import-progress-bar-fill" 
+                    <div
+                      className="import-progress-bar-fill"
                       style={{ width: `${(importProgress.added / importProgress.total) * 100}%` }}
                     />
                   </div>
                   <div className="import-progress-counts">
-                    <span>Qo'shildi: <strong>{importProgress.added} ta</strong></span>
-                    <span>Qoldi: <strong>{importProgress.remaining} / {importProgress.total} ta</strong></span>
+                    <span>Added: <strong>{importProgress.added}</strong></span>
+                    <span>Remaining: <strong>{importProgress.remaining} / {importProgress.total}</strong></span>
                   </div>
                 </div>
               </div>
             )}
 
             <div className="modal-header">
-              <h2>JSON orqali ko'p so'z qo'shish</h2>
+              <h2>Bulk-add words via JSON</h2>
               <button className="btn btn-ghost btn-icon" onClick={onClose} disabled={isImporting}>✕</button>
             </div>
 
             <form onSubmit={handleSubmit}>
               <div className="modal-body flex-col gap-md">
                 <p style={{ color: 'var(--text-secondary)' }}>
-                  Quyidagi namuna asosida JSON formatida so'zlarni kiriting.{' '}
-                  <code>word</code> va <code>translation</code> maydonlari majburiy.
+                  Enter words in JSON format following the sample below.{' '}
+                  The <code>word</code> and <code>translation</code> fields are required.
                 </p>
 
                 <div className="json-sample">
                   <div className="json-sample-header">
-                    <span className="json-sample-label">Namuna formati</span>
+                    <span className="json-sample-label">Sample format</span>
                     <button
                       type="button"
                       className={`btn-copy-sample ${copied ? 'copied' : ''}`}
                       onClick={handleCopy}
                     >
-                      {copied ? '✓ Nusxalandi!' : '📋 Nusxalash'}
+                      {copied ? '✓ Copied!' : '📋 Copy'}
                     </button>
                   </div>
                   <pre>{SAMPLE_JSON}</pre>
@@ -192,7 +192,7 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
                     className="bulk-import-textarea"
                     value={jsonText}
                     onChange={e => setJsonText(e.target.value)}
-                    placeholder="JSON formatidagi ro'yxatni bu yerga joylashtiring (Ctrl+V)..."
+                    placeholder="Paste your JSON list here (Ctrl+V)..."
                   />
                 </div>
 
@@ -211,10 +211,10 @@ export default function BulkImportForm({ isOpen, onClose, onImport }) {
 
               <div className="modal-footer">
                 <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isImporting}>
-                  Bekor qilish
+                  Cancel
                 </button>
                 <button type="submit" className="btn btn-primary" disabled={isImporting}>
-                  {isImporting ? 'Yuklanmoqda...' : "Qo'shish"}
+                  {isImporting ? 'Loading...' : "Add"}
                 </button>
               </div>
             </form>

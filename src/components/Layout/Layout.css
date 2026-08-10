@@ -35,6 +35,13 @@
    shared wrapper's padding on top of the Dashboard's own. ---------- */
 .layout-content--dashboard {
   padding: 0;
+}
+
+/* ---------- Themed background — shared by the Dashboard and by Library /
+   Grammar / Memory Lab (.layout-content--themed-bg), which keep this
+   wrapper's normal padding and only pick up the background. ---------- */
+.layout-content--dashboard,
+.layout-content--themed-bg {
   background:
     radial-gradient(850px circle at 12% 8%, rgba(0, 122, 255, 0.06), transparent 65%),
     radial-gradient(800px circle at 88% 18%, rgba(175, 82, 222, 0.05), transparent 65%),
@@ -43,7 +50,8 @@
   background-attachment: fixed;
 }
 
-[data-theme='android'] .layout-content--dashboard {
+[data-theme='android'] .layout-content--dashboard,
+[data-theme='android'] .layout-content--themed-bg {
   background:
     radial-gradient(850px circle at 12% 8%, rgba(59, 130, 246, 0.09), transparent 65%),
     radial-gradient(800px circle at 88% 18%, rgba(168, 85, 247, 0.08), transparent 65%),
@@ -63,6 +71,10 @@
 
   .layout-content--dashboard {
     padding: 0 0 calc(60px + env(safe-area-inset-bottom, 0px) + var(--space-md)) 0 !important;
+  }
+
+  .layout-content--dashboard,
+  .layout-content--themed-bg {
     background-attachment: scroll;
   }
 }

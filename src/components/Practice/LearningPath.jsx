@@ -97,10 +97,10 @@ export default function LearningPath({ words, completedLessons = {}, onSelectLes
   return (
     <div className="learning-path-container animate-fade-in">
       <div className="learning-path-header">
-        <h2>🗺️ O'rganish Yo'li</h2>
-        <p>So'zlarni bosqichma-bosqich o'rganing va oltin tojga erishing!</p>
+        <h2>🗺️ Learning Path</h2>
+        <p>Learn words step by step and earn the golden crown!</p>
         <button className="btn btn-secondary btn-sm" onClick={onStartFreePractice}>
-          🔀 Erkin Mashq Rejimi
+          🔀 Free Practice Mode
         </button>
       </div>
 
@@ -169,7 +169,7 @@ export default function LearningPath({ words, completedLessons = {}, onSelectLes
                 whileHover={!lesson.isLocked ? { scale: 1.1, y: -2 } : {}}
                 whileTap={!lesson.isLocked ? { scale: 0.95 } : {}}
                 onClick={() => !lesson.isLocked && setSelectedLesson(lesson)}
-                aria-label={`Dars ${lesson.index}`}
+                aria-label={`Lesson ${lesson.index}`}
               >
                 <span className="node-icon">{nodeIcon}</span>
                 <span className="node-badge">{lesson.index}</span>
@@ -183,9 +183,9 @@ export default function LearningPath({ words, completedLessons = {}, onSelectLes
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: 10 }}
                   >
-                    <h3>Dars {lesson.index}</h3>
+                    <h3>Lesson {lesson.index}</h3>
                     <p className="lesson-tooltip-words">
-                      {lesson.words.length} ta so'z • O'rtacha o'zlashtirish: <strong>{lesson.avgMastery}%</strong>
+                      {lesson.words.length} words • Average mastery: <strong>{lesson.avgMastery}%</strong>
                     </p>
                     <div className="lesson-words-preview">
                       {lesson.words.map(w => w.word).join(', ')}
@@ -198,13 +198,13 @@ export default function LearningPath({ words, completedLessons = {}, onSelectLes
                           setSelectedLesson(null);
                         }}
                       >
-                        Boshlash →
+                        Start →
                       </button>
-                      <button 
-                        className="btn btn-ghost btn-sm" 
+                      <button
+                        className="btn btn-ghost btn-sm"
                         onClick={() => setSelectedLesson(null)}
                       >
-                        Yopish
+                        Close
                       </button>
                     </div>
                   </motion.div>

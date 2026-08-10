@@ -359,7 +359,7 @@ export default function Settings() {
             
             {activeSheet === 'theme' && (
               <>
-                <div className="ios-sheet-title">Mavzuni tanlang</div>
+                <div className="ios-sheet-title">Choose Theme</div>
                 <div className="ios-sheet-options">
                   {themes.map(t => (
                     <button
@@ -380,12 +380,12 @@ export default function Settings() {
 
             {activeSheet === 'font' && (
               <>
-                <div className="ios-sheet-title">Matn o'lchamini tanlang</div>
+                <div className="ios-sheet-title">Choose Text Size</div>
                 <div className="ios-sheet-options">
                   {[
-                    { id: 'small', label: 'Kichik (14px)' },
-                    { id: 'normal', label: "O'rta (16px)" },
-                    { id: 'large', label: 'Katta (19px)' }
+                    { id: 'small', label: 'Small (14px)' },
+                    { id: 'normal', label: "Medium (16px)" },
+                    { id: 'large', label: 'Large (19px)' }
                   ].map(item => (
                     <button
                       key={item.id}
@@ -405,7 +405,7 @@ export default function Settings() {
 
             {activeSheet === 'limit' && (
               <>
-                <div className="ios-sheet-title">Kunlik maqsadni tanlang</div>
+                <div className="ios-sheet-title">Choose Daily Goal</div>
                 <div className="ios-sheet-options">
                   {[10, 15, 20, 30].map(n => (
                     <button
@@ -416,7 +416,7 @@ export default function Settings() {
                         setActiveSheet(null);
                       }}
                     >
-                      <span>{n} ta so'z</span>
+                      <span>{n} words</span>
                       {dailyWordLimit === n && <Check size={16} className="ios-accent-check" />}
                     </button>
                   ))}
@@ -425,7 +425,7 @@ export default function Settings() {
             )}
 
             <button className="ios-sheet-cancel-btn" onClick={() => setActiveSheet(null)}>
-              Bekor qilish
+              Cancel
             </button>
           </div>
         </div>

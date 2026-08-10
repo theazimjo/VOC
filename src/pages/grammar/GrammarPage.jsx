@@ -96,7 +96,7 @@ export default function GrammarPage() {
         <div className="grammar-header-content">
           <div className="grammar-header-icon">📖</div>
           <div className="grammar-header-titles">
-            <h1 className="grammar-title">Grammatika</h1>
+            <h1 className="grammar-title">Grammar</h1>
           </div>
         </div>
 
@@ -104,17 +104,17 @@ export default function GrammarPage() {
         <div className="grammar-header-stats">
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">{topics.length}</span>
-            <span className="grammar-stat-lbl">mavzu</span>
+            <span className="grammar-stat-lbl">topics</span>
           </div>
           <div className="grammar-stat-divider" />
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">{totalExercisesOfLevel}</span>
-            <span className="grammar-stat-lbl">mashq</span>
+            <span className="grammar-stat-lbl">exercises</span>
           </div>
           <div className="grammar-stat-divider" />
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">3</span>
-            <span className="grammar-stat-lbl">daraja</span>
+            <span className="grammar-stat-lbl">levels</span>
           </div>
         </div>
 
@@ -122,11 +122,11 @@ export default function GrammarPage() {
         <div className="grammar-user-stats">
           <div className="user-stat-card">
             <span className="user-stat-value">{completedExercisesCount} / {totalExercisesOfLevel}</span>
-            <span className="user-stat-label">Mashqlar yechildi</span>
+            <span className="user-stat-label">Exercises completed</span>
           </div>
           <div className="user-stat-card">
             <span className="user-stat-value">{averageAccuracy}%</span>
-            <span className="user-stat-label">O'rtacha natija</span>
+            <span className="user-stat-label">Average score</span>
           </div>
         </div>
       </motion.div>
@@ -148,7 +148,7 @@ export default function GrammarPage() {
             ].filter(Boolean).join(' ')}
             onClick={() => !lvl.locked && setActiveLevel(lvl.id)}
             disabled={lvl.locked}
-            title={lvl.locked ? 'Tez kunda...' : lvl.label}
+            title={lvl.locked ? 'Coming soon...' : lvl.label}
           >
             {activeLevel === lvl.id && !lvl.locked && (
               <motion.div
@@ -160,7 +160,7 @@ export default function GrammarPage() {
             <span className="tab-emoji">{lvl.locked ? '🔒' : lvl.emoji}</span>
             <span className="tab-label-text">{lvl.label}</span>
             {lvl.locked && (
-              <span className="tab-soon-badge">Tez kunda</span>
+              <span className="tab-soon-badge">Coming soon</span>
             )}
           </button>
         ))}
@@ -208,15 +208,15 @@ export default function GrammarPage() {
                   </div>
                   <div className="topic-card-meta">
                     <span className="topic-badge topic-badge-questions">
-                      📚 6 ta mashq
+                      📚 6 exercises
                     </span>
                     {completedExCount > 0 ? (
                       <span className="topic-badge topic-badge-completed">
-                        ✅ {completedExCount} / 6 yechildi
+                        ✅ {completedExCount} / 6 completed
                       </span>
                     ) : (
                       <span className="topic-badge topic-badge-todo">
-                        ⏳ Boshlanmagan
+                        ⏳ Not started
                       </span>
                     )}
                     {topic.tag && (
@@ -234,8 +234,8 @@ export default function GrammarPage() {
               transition={{ duration: 0.3 }}
             >
               <div className="empty-icon">🚧</div>
-              <h3>Tez kunda...</h3>
-              <p>Bu daraja bo'yicha mavzular tayyorlanmoqda</p>
+              <h3>Coming soon...</h3>
+              <p>Topics for this level are being prepared</p>
             </motion.div>
           )}
         </motion.div>

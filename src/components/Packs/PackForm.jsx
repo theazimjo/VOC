@@ -57,7 +57,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
     ? folders.find(f => f.id === folderId)
     : null;
   const selectedFolderIcon = selectedFolder ? (selectedFolder.icon || '📁') : '📂';
-  const selectedFolderName = selectedFolder ? selectedFolder.name : "Asosiy ro'yxat";
+  const selectedFolderName = selectedFolder ? selectedFolder.name : "Main List";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
           >
             <div className="modal-header">
-              <h2>{editPack ? "To'plamni tahrirlash" : "Yangi to'plam"}</h2>
+              <h2>{editPack ? "Edit Pack" : "New Pack"}</h2>
               <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
             </div>
             
@@ -101,18 +101,18 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     lineHeight: '1.4',
                     marginBottom: 'var(--space-sm)'
                   }}>
-                    ℹ️ Ushbu tayyor to'plamning nomi va ikonkasini o'zgartirib bo'lmaydi. Uni faqat o'chirishingiz mumkin.
+                    ℹ️ The name and icon of this preset pack cannot be modified. You can only delete it.
                   </div>
                 )}
 
                 <div className="input-group">
-                  <label>To'plam nomi *</label>
+                  <label>Pack Name *</label>
                   <input 
                     type="text" 
                     className="input" 
                     value={name} 
                     onChange={e => setName(e.target.value)} 
-                    placeholder="Masalan: IELTS Vocabulary"
+                    placeholder="E.g.: IELTS Vocabulary"
                     required
                     autoFocus
                     disabled={isLocked}
@@ -122,7 +122,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
 
                 {folders.length > 0 && (
                   <div className="input-group">
-                    <label>Papka</label>
+                    <label>Folder</label>
                     <div className="folder-select" ref={folderMenuRef}>
                       <button
                         type="button"
@@ -156,7 +156,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                               onClick={() => { setFolderId(''); setFolderMenuOpen(false); }}
                             >
                               <span className="folder-select-option-icon">📂</span>
-                              <span className="folder-select-option-name">Asosiy ro'yxat</span>
+                              <span className="folder-select-option-name">Main List</span>
                               {!folderId && <Check size={15} className="folder-select-option-check" />}
                             </button>
                             {folders.map((f) => (
@@ -181,7 +181,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                 )}
 
                 <div className="input-group">
-                  <label>So'zlarning tili (talaffuz uchun)</label>
+                  <label>Word Language (for pronunciation)</label>
                   <select
                     className="select"
                     value={language}
@@ -200,18 +200,18 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     type="button" 
                     className="btn btn-danger" 
                     onClick={() => {
-                      if (window.confirm("Rostdan ham bu to'plamni va undagi barcha so'zlarni o'chirmoqchimisiz?")) {
+                      if (window.confirm("Are you sure you want to delete this pack and all its words?")) {
                         onDelete();
                       }
                     }}
                   >
-                    🗑 O'chirish
+                    🗑 Delete
                   </button>
                 )}
                 <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>Bekor qilish</button>
+                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>Cancel</button>
                   <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                    {isSubmitting ? 'Saqlanmoqda...' : 'Saqlash'}
+                    {isSubmitting ? 'Saving...' : 'Save'}
                   </button>
                 </div>
               </div>
