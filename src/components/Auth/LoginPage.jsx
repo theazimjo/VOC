@@ -1,23 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import './LoginPage.css';
-
-// Subtle, smooth ambient animations for the orbs
-const orbVariants = {
-  animate: (i) => ({
-    x: [0, 20 * Math.sin(i * 1.2), -15 * Math.cos(i), 0],
-    y: [0, -20 * Math.cos(i * 0.8), 25 * Math.sin(i), 0],
-    scale: [1, 1.05, 0.98, 1],
-    transition: {
-      duration: 15 + i * 2,
-      repeat: Infinity,
-      ease: 'easeInOut',
-    },
-  }),
-};
 
 // iOS style spring entrance for the card
 const cardVariants = {
@@ -75,6 +61,21 @@ function getFirebaseErrorMessage(code) {
 export default function LoginPage() {
   const { user, loading, login, loginWithOverride, loginWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
+  const bgVideoRef = useRef(null);
+
+  // Respect reduced-motion preference — don't autoplay the background video.
+  useEffect(() => {
+    const video = bgVideoRef.current;
+    if (!video) return;
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const applyPreference = () => {
+      if (query.matches) video.pause();
+      else video.play().catch(() => {});
+    };
+    applyPreference();
+    query.addEventListener('change', applyPreference);
+    return () => query.removeEventListener('change', applyPreference);
+  }, [loading]);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -205,17 +206,18 @@ export default function LoginPage() {
 
   return (
     <div className="auth-page">
-      {/* Animated background */}
+      {/* Background video */}
       <div className="auth-bg">
-        {[1, 2, 3].map((i) => (
-          <motion.div
-            key={i}
-            className={`auth-orb auth-orb--${i}`}
-            variants={orbVariants}
-            animate="animate"
-            custom={i}
-          />
-        ))}
+        <video
+          ref={bgVideoRef}
+          className="auth-bg-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4"
+        />
+        <div className="auth-bg-overlay" />
       </div>
 
       {/* Card */}

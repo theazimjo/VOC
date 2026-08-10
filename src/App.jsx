@@ -14,7 +14,6 @@ import { installGlobalErrorLogging } from './utils/errorLogger';
 import { lazyWithRetry } from './utils/lazyWithRetry';
 
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
-const LandingPage = lazyWithRetry(() => import('./pages/LandingPage'));
 const PackDetail = lazyWithRetry(() => import('./pages/personal/PackDetail'));
 const PracticePage = lazyWithRetry(() => import('./pages/personal/PracticePage'));
 const StatsPage = lazyWithRetry(() => import('./pages/personal/StatsPage'));
@@ -75,7 +74,6 @@ export default function App() {
                 <Suspense fallback={<RouteLoader />}>
                   <Routes>
                     {/* Public routes */}
-                    <Route path="/landing" element={<LandingPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
   
