@@ -12,6 +12,15 @@ const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const TARGET_STEP = 10;
 const TARGET_MIN = 10;
+// How much value one full 360° drag around the ring adds/removes — keeps
+// mapping consistently no matter how many times you go around.
+const DIAL_TURN_VALUE = 5000;
+// A generous sanity ceiling, not a real-world target — just stops an
+// accidental fast multi-spin from producing an absurd number.
+const DIAL_ABSOLUTE_MAX = 200000;
+// Cycled through as the track color once you've spun past one full lap —
+// lap 0 is the default neutral track; each further lap tints it.
+const DIAL_TRACK_COLORS = ['var(--bg-tertiary)', 'var(--accent-2-dim)', 'var(--accent-3-dim)', 'var(--error-dim)'];
 const DIAL_SIZE = 200;
 const DIAL_STROKE = 16;
 const DIAL_RADIUS = (DIAL_SIZE - DIAL_STROKE) / 2;
@@ -101,7 +110,6 @@ export default function StudentCorpOverview() {
   // an odd-looking "137/100".
   const targetReached = learnedWords >= targetWords && targetWords > 0;
   const displayLearned = targetReached ? targetWords : learnedWords;
-  const sliderMax = Math.max(5000, totalWords);
   // Once the target's been reached, the editor session it opens into is
   // locked: no closing without saving, and the dial itself can't be dragged
   // back down to (or below) the value that was just reached.
@@ -153,38 +161,70 @@ export default function StudentCorpOverview() {
     }
   };
 
-  // Drag-around-the-ring input for the target picker — angle from the
-  // dial's center (0 at top, clockwise) maps directly to a value between
-  // TARGET_MIN and sliderMax, snapped to TARGET_STEP.
+  // Drag-around-the-ring input for the target picker. The knob always sits
+  // exactly under the pointer's angle (direct, not relative — dragging
+  // anywhere else on the ring would otherwise feel disconnected from the
+  // finger). Crossing back over the top of the circle counts as a lap —
+  // that's what lets the value keep climbing past a single 360° sweep
+  // instead of being capped by it, without breaking the direct knob→finger
+  // correspondence.
   const dialRef = useRef(null);
+  const dialLastAngleRef = useRef(null);
+  const dialLapRef = useRef(0);
 
-  const valueFromPointer = (clientX, clientY) => {
+  const angleFromPointer = (clientX, clientY) => {
     const rect = dialRef.current.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
-    let angle = Math.atan2(clientY - cy, clientX - cx) * (180 / Math.PI);
-    angle = (angle + 90 + 360) % 360;
-    const pct = angle / 360;
-    const raw = dialMin + pct * (sliderMax - dialMin);
-    return Math.min(sliderMax, Math.max(dialMin, Math.round(raw / TARGET_STEP) * TARGET_STEP));
+    const raw = Math.atan2(clientY - cy, clientX - cx) * (180 / Math.PI);
+    return (raw + 90 + 360) % 360; // 0 at top, clockwise
   };
 
   const handleDialPointerDown = (e) => {
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
-    setDraftTarget(valueFromPointer(e.clientX, e.clientY));
+    const angle = angleFromPointer(e.clientX, e.clientY);
+    dialLastAngleRef.current = angle;
+    // Re-derive which lap the current value sits on, so grabbing the dial
+    // again mid-range (not just at dialMin) starts from the right lap.
+    const base = draftTarget ?? dialMin;
+    dialLapRef.current = Math.floor((base - dialMin) / DIAL_TURN_VALUE);
   };
 
   const handleDialPointerMove = (e) => {
-    if (e.buttons !== 1) return;
+    if (e.buttons !== 1 || dialLastAngleRef.current === null) return;
     e.preventDefault();
-    setDraftTarget(valueFromPointer(e.clientX, e.clientY));
+
+    const angle = angleFromPointer(e.clientX, e.clientY);
+    // Crossing the 0°/360° seam in either direction — bump the lap count
+    // the same way an odometer rolls over, then keep tracking from here.
+    const delta = angle - dialLastAngleRef.current;
+    if (delta > 180) dialLapRef.current -= 1;
+    else if (delta < -180) dialLapRef.current += 1;
+    dialLastAngleRef.current = angle;
+
+    const raw = dialMin + dialLapRef.current * DIAL_TURN_VALUE + (angle / 360) * DIAL_TURN_VALUE;
+    const next = Math.round(raw / TARGET_STEP) * TARGET_STEP;
+    setDraftTarget(Math.min(DIAL_ABSOLUTE_MAX, Math.max(dialMin, next)));
   };
 
-  const dialFraction = draftTarget != null ? (draftTarget - dialMin) / (sliderMax - dialMin) : 0;
+  // Knob angle mirrors the finger directly: dialLap only affects the
+  // accumulated *value*, not where the knob sits within the current lap.
+  // The ring fill uses this exact same fraction — they always move
+  // together, sweeping a full circle and looping each lap, like a
+  // stopwatch hand — rather than the fill tracking overall progress
+  // toward some total while the knob tracks something else entirely.
+  const dialFraction = draftTarget != null
+    ? (((draftTarget - dialMin) % DIAL_TURN_VALUE) + DIAL_TURN_VALUE) % DIAL_TURN_VALUE / DIAL_TURN_VALUE
+    : 0;
   const dialTheta = dialFraction * 2 * Math.PI;
   const dialKnobX = DIAL_SIZE / 2 + DIAL_RADIUS * Math.sin(dialTheta);
   const dialKnobY = DIAL_SIZE / 2 - DIAL_RADIUS * Math.cos(dialTheta);
+  // The track (the ring's "empty" background) recolors each completed lap
+  // — the only way to tell at a glance that you've been around before,
+  // since the fill itself just loops back to looking identical every lap.
+  const dialLap = draftTarget != null ? Math.max(0, Math.floor((draftTarget - dialMin) / DIAL_TURN_VALUE)) : 0;
+  const dialTrackColor = DIAL_TRACK_COLORS[dialLap % DIAL_TRACK_COLORS.length];
 
   const activityLog = useMemo(() => buildActivityLog(words), [words]);
   const { cells: calendarCells, month } = useMemo(
@@ -346,6 +386,7 @@ export default function StudentCorpOverview() {
                   cy={DIAL_SIZE / 2}
                   r={DIAL_RADIUS}
                   strokeWidth={DIAL_STROKE}
+                  style={{ stroke: dialTrackColor, transition: 'stroke 250ms ease' }}
                 />
                 <circle
                   className="corp-ov-dial-fill"
@@ -358,7 +399,10 @@ export default function StudentCorpOverview() {
                   transform={`rotate(-90 ${DIAL_SIZE / 2} ${DIAL_SIZE / 2})`}
                 />
               </svg>
-              <div className="corp-ov-dial-knob" style={{ left: dialKnobX, top: dialKnobY }} />
+              <div
+                className="corp-ov-dial-knob"
+                style={{ transform: `translate(${dialKnobX - 11}px, ${dialKnobY - 11}px)` }}
+              />
               <div className="corp-ov-dial-center">
                 <span className="corp-ov-dial-value">{draftTarget}</span>
                 <span className="corp-ov-dial-unit">words</span>

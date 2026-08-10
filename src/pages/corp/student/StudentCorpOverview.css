@@ -200,15 +200,19 @@
 
 .corp-ov-dial-knob {
   position: absolute;
+  left: 0;
+  top: 0;
   width: 22px;
   height: 22px;
-  margin-left: -11px;
-  margin-top: -11px;
   border-radius: 50%;
   background: var(--accent-1);
   border: 3px solid var(--bg-secondary);
   box-shadow: var(--shadow);
   pointer-events: none;
+  /* Positioned via transform (GPU-composited), never left/top — those
+     force a synchronous layout recalc on every pointermove frame while
+     dragging, which is what caused the freeze. */
+  will-change: transform;
 }
 
 .corp-ov-dial-center {

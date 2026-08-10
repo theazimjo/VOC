@@ -1,465 +1,530 @@
 /* ========================================
-   DASHBOARD — NATIVE iOS HIG STYLE
+   PERSONAL DASHBOARD — mirrors the corp
+   student dashboard's layout 1:1 (see
+   StudentCorpOverview.css): welcome,
+   target words, activity calendar, and a
+   full-width card at the bottom — homework
+   there, "words due for repetition" here.
    ======================================== */
 
-.dashboard {
-  padding: 16px;
-  max-width: 600px;
+.dash-ov-container {
+  padding: var(--space-lg) var(--space-xl);
+  width: 100%;
+  max-width: 960px;
   margin: 0 auto;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
-/* ── Greeting Header (iOS Large Title Style) ── */
-.dash-greeting-section {
-  margin-bottom: 24px;
-  padding-top: 10px;
+/* ── Header ── */
+.dash-ov-topbar {
+  margin-bottom: 1.25rem;
 }
 
-.dash-greeting {
-  font-size: 13px;
-  color: var(--text-secondary); /* iOS System Gray */
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
-}
-
-.dash-name {
-  font-size: 34px; /* iOS Large Title size */
-  font-weight: 800;
-  color: var(--text-primary, #000);
-  letter-spacing: -0.04em;
-  line-height: 1.1;
-}
-
-.dash-subtitle {
-  font-size: 15px;
-  color: var(--text-secondary);
-  margin-top: 6px;
-  font-weight: 400;
-}
-
-.dash-greeting-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.dash-streak-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: var(--bg-secondary, #FFFFFF);
-  box-shadow: var(--shadow);
-  color: var(--text-muted);
-  font-size: 15px;
-  font-weight: 700;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.dash-streak-badge.goal-met {
-  color: var(--accent-3);
-}
-
-/* ── Weekly Activity Strip ── */
-.dash-week-strip {
-  display: flex;
-  justify-content: space-between;
-  background: var(--bg-secondary, #FFFFFF);
-  border-radius: 18px;
-  padding: 14px 10px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-}
-
-.week-day {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  flex: 1;
-}
-
-.week-day-dot {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--bg-tertiary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  transition: all 0.2s ease;
-}
-
-.week-day.met .week-day-dot {
-  background: var(--accent-3);
-}
-
-.week-day.today .week-day-dot {
-  box-shadow: 0 0 0 2px var(--accent-1);
-}
-
-.week-day-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
-
-.week-day.today .week-day-label {
-  color: var(--accent-1);
-}
-
-/* ── Stats Row (iOS Widget Style) ── */
-.dash-stats-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.dash-stat-card {
-  background: var(--bg-secondary, #FFFFFF);
-  border-radius: 18px; /* iOS standard for small widgets */
-  padding: 14px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  box-shadow: var(--shadow);
-  transition: transform 0.2s ease;
-}
-
-.dash-stat-card:active {
-  transform: scale(0.95);
-}
-
-.dash-stat-icon {
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
-}
-
-.dash-stat-icon.blue   { color: var(--accent-1); }
-.dash-stat-icon.green  { color: var(--accent-2); }
-.dash-stat-icon.orange { color: var(--accent-3); }
-
-.dash-stat-value {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-/* iOS System Colors */
-.dash-stat-value.blue  { color: var(--accent-1); }
-.dash-stat-value.green { color: var(--accent-2); }
-.dash-stat-value.orange { color: var(--accent-3); }
-
-.dash-stat-label {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-/* ── Memory Twin Insight Card ── */
-.dash-memtwin-card {
-  background: linear-gradient(135deg, var(--accent-1-dim, rgba(0, 122, 255, 0.08)) 0%, var(--bg-secondary, #FFFFFF) 60%);
-  border: 1px solid var(--border-light, rgba(0, 122, 255, 0.15));
-  border-radius: 18px;
-  padding: 16px 20px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow);
-}
-
-.dash-memtwin-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-
-.dash-memtwin-icon {
-  display: flex;
-  align-items: center;
-  color: var(--accent-1);
-}
-
-.dash-memtwin-title {
-  font-size: 13px;
+.dash-ov-eyebrow {
+  display: block;
+  font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--accent-1);
-}
-
-.dash-memtwin-text {
-  font-size: 15px;
-  color: var(--text-primary, #000);
-  line-height: 1.4;
-  margin: 0 0 6px;
-}
-
-.dash-memtwin-text strong {
-  font-weight: 700;
-}
-
-.dash-memtwin-sub {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 13px;
-  color: var(--warning, #FF9500);
-  font-weight: 500;
-  margin: 0 0 10px;
-}
-
-.dash-memtwin-link {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--accent-1);
-  text-decoration: none;
-}
-
-.dash-memtwin-link:active {
-  opacity: 0.6;
-}
-
-/* ── Progress Card ── */
-.dash-progress-card {
-  background: var(--bg-secondary, #FFFFFF);
-  border-radius: 18px;
-  padding: 16px 20px;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow);
-}
-
-.dash-progress-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.dash-progress-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-primary, #000);
-}
-
-.dash-progress-pct {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--accent-1);
-}
-
-.dash-progress-track {
-  width: 100%;
-  height: 6px; /* Thinner for iOS */
-  background: var(--bg-tertiary); /* iOS Gray 5 */
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.dash-progress-fill {
-  height: 100%;
-  background: var(--accent-1);
-  border-radius: 10px;
-}
-
-/* ── Primary CTA Button ── */
-.dash-cta-section {
-  margin-bottom: 32px;
-}
-
-.btn-practice-primary {
-  width: 100%;
-  padding: 16px;
-  background: var(--accent-1);
-  border: none;
-  border-radius: 14px; /* iOS standard button radius */
-  color: #FFFFFF;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
-}
-
-.btn-practice-primary:active {
-  transform: scale(0.96);
-  opacity: 0.85;
-}
-
-.btn-practice-badge {
-  background: rgba(255, 255, 255, 0.25);
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-/* ── Section & Inset Grouped List (iOS TableView) ── */
-.dashboard-section {
-  margin-bottom: 32px;
-}
-
-.dashboard-section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  padding: 0 8px;
-}
-
-.dashboard-section-header h2 {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.ios-link {
-  font-size: 15px;
-  color: var(--accent-1);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.ios-link:active {
-  opacity: 0.6;
-}
-
-.recent-words-list {
-  background: var(--bg-secondary, #FFFFFF);
-  border-radius: 10px; /* iOS Inset Grouped standard */
-  overflow: hidden;
-  box-shadow: var(--shadow-glow);
-}
-
-.recent-word-item {
-  display: flex;
-  align-items: center;
-  padding: 10px 16px;
-  position: relative;
-  background: transparent;
-}
-
-/* iOS Divider Style: Doesn't go edge-to-edge, starts after icon */
-.recent-word-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 56px; /* Offset to align with text */
-  right: 0;
-  height: 1px;
-  background-color: var(--bg-tertiary); /* iOS separator color */
-}
-
-.recent-word-item:active {
-  background: var(--bg-tertiary); /* iOS highlight color */
-}
-
-.word-mastery-icon {
-  font-size: 16px;
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 14px;
-  flex-shrink: 0;
-}
-
-.recent-word-item .word-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.recent-word-item .word-text {
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--text-primary, #000);
+  color: var(--text-secondary);
   margin-bottom: 2px;
 }
 
-.recent-word-item .word-translation {
-  color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 400;
+.dash-ov-name {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0;
 }
 
-.word-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* ── Section grid: target-words / calendar / due-words ── */
+.dash-ov-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
-.word-mastery-percent {
-  font-size: 15px;
-  font-weight: 500;
+@media (min-width: 768px) {
+  .dash-ov-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dash-ov-homework-card {
+    grid-column: 1 / -1;
+  }
 }
 
-/* ── Standard iOS Chevron ── */
-.word-chevron {
-  color: var(--text-muted);
-  margin-left: 2px;
-  flex-shrink: 0;
-}
-
-/* ── Empty State ── */
-.dash-empty-state {
-  background: var(--bg-secondary, #FFFFFF);
-  border-radius: 14px;
-  padding: 40px 20px;
-  text-align: center;
-  box-shadow: var(--shadow);
-}
-
-.dash-empty-icon {
+/* ── Target editor modal ── */
+.dash-ov-target-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 3000;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
-  margin: 0 auto;
+  padding: 16px;
+  overscroll-behavior: contain;
+  touch-action: none;
 }
 
-.dash-empty-state h3 {
-  font-size: 17px;
-  font-weight: 600;
-  margin: 12px 0 6px;
+.dash-ov-target-editor {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 20px);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-lg, var(--shadow));
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
 }
 
-.dash-empty-state p {
-  font-size: 15px;
+.dash-ov-congrats {
+  text-align: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dash-ov-congrats-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--success-dim, rgba(52, 199, 89, 0.12));
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+}
+
+.dash-ov-congrats-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.dash-ov-congrats-text {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  margin: 0 auto 20px;
+  line-height: 1.45;
 }
 
-.empty-btn {
-  max-width: 200px;
-  margin: 0 auto;
-  font-size: 15px;
-  padding: 12px;
+.dash-ov-target-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
 }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .dashboard {
-    padding: 16px;
-    padding-bottom: 80px;
+.dash-ov-target-header-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: var(--radius-sm, 10px);
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dash-ov-target-header h3 {
+  flex: 1;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.dash-ov-target-close {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dash-ov-target-close:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+/* Drag-around-the-ring dial */
+.dash-ov-dial {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0.25rem auto 0;
+  touch-action: none;
+  cursor: grab;
+  background: radial-gradient(circle, var(--accent-1-dim) 0%, transparent 68%);
+  border-radius: 50%;
+}
+
+.dash-ov-dial:active {
+  cursor: grabbing;
+}
+
+.dash-ov-dial-track {
+  fill: none;
+  stroke: var(--bg-tertiary);
+}
+
+.dash-ov-dial-fill {
+  fill: none;
+  stroke: var(--accent-1);
+  stroke-linecap: round;
+}
+
+.dash-ov-dial-knob {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-1);
+  border: 3px solid var(--bg-secondary);
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  /* Positioned via transform (GPU-composited), never left/top — those
+     force a synchronous layout recalc on every pointermove frame while
+     dragging, which is what caused the freeze. */
+  will-change: transform;
+}
+
+.dash-ov-dial-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.dash-ov-dial-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.dash-ov-dial-unit {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.dash-ov-dial-hint {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin: 0;
+}
+
+.dash-ov-target-save-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border-radius: var(--radius-md, 12px);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: var(--accent-1);
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dash-ov-target-save-btn:hover {
+  box-shadow: var(--shadow-lg, var(--shadow));
+}
+
+.dash-ov-target-save-btn:active {
+  transform: scale(0.98);
+}
+
+.dash-ov-target-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Activity calendar ── */
+.dash-ov-cal-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 18px);
+  padding: 1.1rem 1.15rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.dash-ov-cal-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.dash-ov-cal-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dash-ov-cal-month {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.dash-ov-cal-summary {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: -0.35rem 0 0 0;
+}
+
+.dash-ov-cal-summary strong {
+  color: var(--accent-1);
+}
+
+.dash-ov-cal-weekdays,
+.dash-ov-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.dash-ov-cal-weekday {
+  text-align: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.dash-ov-cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm, 8px);
+  background: var(--bg-tertiary);
+  gap: 1px;
+}
+
+.dash-ov-cal-cell.empty {
+  background: transparent;
+}
+
+.dash-ov-cal-day {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.dash-ov-cal-cell.active {
+  background: var(--accent-1-dim);
+}
+
+.dash-ov-cal-cell.active .dash-ov-cal-day {
+  color: var(--accent-1);
+}
+
+.dash-ov-cal-cell.today {
+  box-shadow: 0 0 0 2px var(--accent-1);
+}
+
+.dash-ov-cal-count {
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: var(--accent-1);
+  line-height: 1;
+}
+
+/* ── Words due for repetition (replaces corp's Homework card) ── */
+.dash-ov-hw-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg, 18px);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.dash-ov-hw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dash-ov-hw-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-ov-hw-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md, 12px);
+  background: var(--accent-3-dim, rgba(168, 85, 247, 0.15));
+  color: var(--accent-3, #a855f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-ov-hw-card h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dash-ov-hw-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--warning);
+  background: var(--warning-dim, rgba(255, 149, 0, 0.12));
+  padding: 4px 10px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.dash-ov-hw-card > p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 320px;
+}
+
+.dash-ov-hw-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dash-ov-hw-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.dash-ov-hw-item:hover {
+  background: var(--bg-glass-hover);
+}
+
+.dash-ov-hw-item-check {
+  width: 38px;
+  height: 22px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.dash-ov-hw-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.dash-ov-hw-item-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-ov-hw-item-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.dash-ov-hw-item-arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.dash-ov-hw-practice-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md, 12px);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  background: var(--accent-1);
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
+}
+
+.dash-ov-hw-practice-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .dash-ov-container {
+    padding: 1rem;
+  }
+
+  .dash-ov-name {
+    font-size: 1.4rem;
   }
 }

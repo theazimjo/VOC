@@ -1,18 +1,41 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, CheckCircle2, BellRing, Flame, FileEdit, ChevronRight, Brain, AlertTriangle } from 'lucide-react';
+import { Target, CheckCircle2, CalendarDays, RotateCcw, X, Check, ChevronRight, PartyPopper } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { usePacks } from '../../hooks/usePacks';
-import { useStreak } from '../../hooks/useStreak';
-import { getMasteryLevel } from '../../utils/spacedRepetition';
-import { computeRecallProbability, computeRetentionStats } from '../../utils/memoryEngine';
-import { getConfusionPairs } from '../../experiment/experimentDB';
+import { useWordTarget } from '../../hooks/useWordTarget';
+import { updateStudentWordTarget } from '../../services/corpService';
+import { computeRecallProbability } from '../../utils/memoryEngine';
 import OnboardingModal from '../../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../../components/Onboarding/WhatsNewModal';
+import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import './Dashboard.css';
 
 const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sh'];
+const MONTH_NAMES = [
+  'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun',
+  'Iyul', 'Avgust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr',
+];
+const TARGET_STEP = 10;
+const TARGET_MIN = 10;
+// Kept far below corp's 5000 — an individual learner's realistic goal is a
+// few hundred words, not a few thousand; still scales past this if their
+// own word count already exceeds it.
+const TARGET_MAX_DEFAULT = 500;
+// How much value one full 360° drag around the ring adds/removes — keeps
+// mapping consistently no matter how many times you go around.
+const DIAL_TURN_VALUE = TARGET_MAX_DEFAULT;
+// A generous sanity ceiling, not a real-world target — just stops an
+// accidental fast multi-spin from producing an absurd number.
+const DIAL_ABSOLUTE_MAX = 50000;
+// Cycled through as the track color once you've spun past one full lap —
+// lap 0 is the default neutral track; each further lap tints it.
+const DIAL_TRACK_COLORS = ['var(--bg-tertiary)', 'var(--accent-2-dim)', 'var(--accent-3-dim)', 'var(--error-dim)'];
+const DIAL_SIZE = 200;
+const DIAL_STROKE = 16;
+const DIAL_RADIUS = (DIAL_SIZE - DIAL_STROKE) / 2;
+const DIAL_CIRCUMFERENCE = 2 * Math.PI * DIAL_RADIUS;
 
 function getLocalDateString(d) {
   const offset = d.getTimezoneOffset();
@@ -28,45 +51,49 @@ function getRecallInfo(word) {
   return { pct, color };
 }
 
-function getWeekActivity(activityLog = {}, dailyGoal = 5) {
+// Builds the current month as a 7-column grid: leading nulls to align the
+// 1st on its real weekday, then one cell per day with that day's activity count.
+function getMonthCalendar(activityLog = {}) {
   const today = new Date();
-  const days = [];
-  for (let i = 6; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    const dateStr = getLocalDateString(d);
-    const count = activityLog[dateStr] || 0;
-    days.push({
-      date: dateStr,
-      label: WEEKDAY_LABELS[d.getDay()],
-      met: count >= dailyGoal,
-      isToday: i === 0
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const startWeekday = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const todayStr = getLocalDateString(today);
+
+  const cells = Array.from({ length: startWeekday }, () => null);
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateStr = getLocalDateString(new Date(year, month, day));
+    cells.push({
+      day,
+      dateStr,
+      count: activityLog[dateStr] || 0,
+      isToday: dateStr === todayStr,
     });
   }
-  return days;
+  return { cells, year, month };
+}
+
+// Rebuilds a date -> count activity log from every word's own recallHistory,
+// same approach as the corp dashboard's calendar.
+function buildActivityLog(words) {
+  const log = {};
+  words.forEach(w => {
+    (w.recallHistory || []).forEach(entry => {
+      if (!entry.result || !entry.ts) return;
+      const dateStr = getLocalDateString(new Date(entry.ts));
+      log[dateStr] = (log[dateStr] || 0) + 1;
+    });
+  });
+  return log;
 }
 
 export default function Dashboard() {
   const { user } = useAuth();
   const { allWords, packs, loading: packsLoading } = usePacks();
-  const { streak } = useStreak();
-  const [recentWords, setRecentWords] = useState([]);
-  const [dueWordsList, setDueWordsList] = useState([]);
-  const [totalWords, setTotalWords] = useState(0);
-  const [masteredWords, setMasteredWords] = useState(0);
-  const [dueWords, setDueWords] = useState(0);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
-  const [confusionPairs, setConfusionPairs] = useState([]);
   const navigate = useNavigate();
-
-  // One-time fetch (not a realtime listener, matching Memory Lab's own
-  // usage) — just enough to surface the single most useful Memory Twin
-  // insight on the dashboard without duplicating Memory Lab's full state.
-  useEffect(() => {
-    if (!user) return;
-    getConfusionPairs(user.uid).then(setConfusionPairs).catch(() => setConfusionPairs([]));
-  }, [user]);
 
   useEffect(() => {
     if (!user || packsLoading) return;
@@ -89,41 +116,143 @@ export default function Dashboard() {
     setShowWhatsNew(false);
   };
 
-  useEffect(() => {
-    if (!user) return;
+  const totalWords = allWords.length;
+  const learnedWords = useMemo(() => allWords.filter(w => (w.mastery || 0) >= 80).length, [allWords]);
 
-    setTotalWords(allWords.length);
-    setMasteredWords(allWords.filter(w => (w.mastery || 0) >= 80).length);
-
+  const dueWordsList = useMemo(() => {
     const now = new Date();
     const due = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now);
-    setDueWords(due.length);
-    // Most at-risk first — lowest current recall probability, not just oldest due date,
-    // since two overdue words with different stability forget at different rates.
-    const dueSorted = [...due].sort((a, b) => getRecallInfo(a).pct - getRecallInfo(b).pct);
-    setDueWordsList(dueSorted.slice(0, 6));
+    // Most at-risk first — lowest current recall probability, not just oldest
+    // due date, since two overdue words with different stability forget at
+    // different rates.
+    return [...due].sort((a, b) => getRecallInfo(a).pct - getRecallInfo(b).pct);
+  }, [allWords]);
+  const dueWords = dueWordsList.length;
 
-    const sorted = [...allWords].sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
-    setRecentWords(sorted.slice(0, 6));
-  }, [user, allWords]);
+  // Same account-level field the corp "Target Words" card reads/writes
+  // (users/{uid}/profile/wordTarget) — mirrored into local state for an
+  // instant optimistic update on save without waiting on the round trip.
+  const wordTarget = useWordTarget(user?.uid);
+  const [customTarget, setCustomTarget] = useState(wordTarget);
+  useEffect(() => { setCustomTarget(wordTarget); }, [wordTarget]);
+  const [editingTarget, setEditingTarget] = useState(false);
+  const [draftTarget, setDraftTarget] = useState(null);
 
-  const weekActivity = useMemo(
-    () => getWeekActivity(streak?.activityLog, streak?.dailyGoal || 5),
-    [streak]
+  const targetWords = customTarget ?? totalWords;
+  const learnedPct = targetWords > 0 ? Math.min(100, Math.round((learnedWords / targetWords) * 100)) : 0;
+  const targetReached = learnedWords >= targetWords && targetWords > 0;
+  const displayLearned = targetReached ? targetWords : learnedWords;
+  const mustRaiseTarget = targetReached;
+  const dialMin = mustRaiseTarget ? targetWords + TARGET_STEP : TARGET_MIN;
+  const showCongrats = targetReached && !editingTarget;
+
+  const openEditor = () => {
+    setDraftTarget(customTarget ?? totalWords);
+    setEditingTarget(true);
+  };
+
+  const closeEditor = () => {
+    if (mustRaiseTarget) return;
+    setEditingTarget(false);
+  };
+
+  const startNewTarget = () => {
+    setDraftTarget(targetWords + TARGET_STEP);
+    setEditingTarget(true);
+  };
+
+  useEffect(() => {
+    if (!editingTarget) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prevOverflow; };
+  }, [editingTarget]);
+
+  const saveTarget = async () => {
+    setCustomTarget(draftTarget);
+    setEditingTarget(false);
+    if (!user?.uid) return;
+    try {
+      await updateStudentWordTarget(user.uid, draftTarget);
+    } catch (err) {
+      console.error('Error saving word target:', err);
+    }
+  };
+
+  // Drag-around-the-ring input for the target picker. The knob always sits
+  // exactly under the pointer's angle (direct, not relative — dragging
+  // anywhere else on the ring would otherwise feel disconnected from the
+  // finger). Crossing back over the top of the circle counts as a lap —
+  // that's what lets the value keep climbing past a single 360° sweep
+  // instead of being capped by it, without breaking the direct knob→finger
+  // correspondence.
+  const dialRef = useRef(null);
+  const dialLastAngleRef = useRef(null);
+  const dialLapRef = useRef(0);
+
+  const angleFromPointer = (clientX, clientY) => {
+    const rect = dialRef.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const raw = Math.atan2(clientY - cy, clientX - cx) * (180 / Math.PI);
+    return (raw + 90 + 360) % 360; // 0 at top, clockwise
+  };
+
+  const handleDialPointerDown = (e) => {
+    e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    const angle = angleFromPointer(e.clientX, e.clientY);
+    dialLastAngleRef.current = angle;
+    // Re-derive which lap the current value sits on, so grabbing the dial
+    // again mid-range (not just at dialMin) starts from the right lap.
+    const base = draftTarget ?? dialMin;
+    dialLapRef.current = Math.floor((base - dialMin) / DIAL_TURN_VALUE);
+  };
+
+  const handleDialPointerMove = (e) => {
+    if (e.buttons !== 1 || dialLastAngleRef.current === null) return;
+    e.preventDefault();
+
+    const angle = angleFromPointer(e.clientX, e.clientY);
+    // Crossing the 0°/360° seam in either direction — bump the lap count
+    // the same way an odometer rolls over, then keep tracking from here.
+    const delta = angle - dialLastAngleRef.current;
+    if (delta > 180) dialLapRef.current -= 1;
+    else if (delta < -180) dialLapRef.current += 1;
+    dialLastAngleRef.current = angle;
+
+    const raw = dialMin + dialLapRef.current * DIAL_TURN_VALUE + (angle / 360) * DIAL_TURN_VALUE;
+    const next = Math.round(raw / TARGET_STEP) * TARGET_STEP;
+    setDraftTarget(Math.min(DIAL_ABSOLUTE_MAX, Math.max(dialMin, next)));
+  };
+
+  // Knob angle mirrors the finger directly: dialLap only affects the
+  // accumulated *value*, not where the knob sits within the current lap.
+  // The ring fill uses this exact same fraction — they always move
+  // together, sweeping a full circle and looping each lap, like a
+  // stopwatch hand — rather than the fill tracking overall progress
+  // toward some total while the knob tracks something else entirely.
+  const dialFraction = draftTarget != null
+    ? (((draftTarget - dialMin) % DIAL_TURN_VALUE) + DIAL_TURN_VALUE) % DIAL_TURN_VALUE / DIAL_TURN_VALUE
+    : 0;
+  const dialTheta = dialFraction * 2 * Math.PI;
+  const dialKnobX = DIAL_SIZE / 2 + DIAL_RADIUS * Math.sin(dialTheta);
+  const dialKnobY = DIAL_SIZE / 2 - DIAL_RADIUS * Math.cos(dialTheta);
+  // The track (the ring's "empty" background) recolors each completed lap
+  // — the only way to tell at a glance that you've been around before,
+  // since the fill itself just loops back to looking identical every lap.
+  const dialLap = draftTarget != null ? Math.max(0, Math.floor((draftTarget - dialMin) / DIAL_TURN_VALUE)) : 0;
+  const dialTrackColor = DIAL_TRACK_COLORS[dialLap % DIAL_TRACK_COLORS.length];
+
+  const activityLog = useMemo(() => buildActivityLog(allWords), [allWords]);
+  const { cells: calendarCells, month } = useMemo(
+    () => getMonthCalendar(activityLog),
+    [activityLog]
   );
-
-  // The single most useful thing the memory model can tell the user right
-  // now — prefers a concrete confusion pair (the strongest, most "it knows
-  // me" signal) over the generic retention estimate, and says nothing at
-  // all rather than showing a hollow stat when there isn't enough history.
-  const memoryTwin = useMemo(() => {
-    const { retentionPercent, atRisk, reviewedCount } = computeRetentionStats(allWords);
-    if (reviewedCount === 0) return null;
-
-    const topConfusion = [...confusionPairs].sort((a, b) => (b.count || 0) - (a.count || 0))[0] || null;
-
-    return { avgRetention: retentionPercent, atRisk, topConfusion };
-  }, [allWords, confusionPairs]);
+  const monthTotal = useMemo(
+    () => calendarCells.reduce((sum, c) => sum + (c?.count || 0), 0),
+    [calendarCells]
+  );
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -134,178 +263,204 @@ export default function Dashboard() {
   };
 
   const displayName = user?.displayName || user?.email?.split('@')[0] || 'Foydalanuvchi';
-  const masteryPercent = totalWords > 0
-    ? Math.round(allWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / totalWords)
-    : 0;
-  const showDue = dueWordsList.length > 0;
-  const wordsToShow = showDue ? dueWordsList : recentWords;
-
-  const fadeUp = (delay = 0) => ({
-    initial: { opacity: 0, y: 16 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.38, delay, ease: [0.22, 1, 0.36, 1] }
-  });
 
   return (
-    <div className="dashboard">
+    <div className="dash-ov-container">
 
-      {/* ── Greeting ── */}
-      <motion.div className="dash-greeting-section" {...fadeUp(0)}>
-        <div className="dash-greeting-row">
-          <div>
-            <div className="dash-greeting">{getGreeting()}</div>
-            <div className="dash-name">{displayName}</div>
+      <div className="dash-ov-topbar">
+        <span className="dash-ov-eyebrow">{getGreeting()}</span>
+        <h1 className="dash-ov-name">{displayName}</h1>
+      </div>
+
+      <div className="dash-ov-grid">
+
+        {/* ── Target words ── */}
+        <PackHeaderHero
+          icon={<Target size={22} />}
+          tag={targetReached ? "Maqsadga erishildi 🎉" : null}
+          title="Maqsad so'zlar"
+          subtitle={targetReached
+            ? `${targetWords} so'zdan iborat maqsadingizga erishdingiz — davom etish uchun yangi maqsad belgilang`
+            : `${displayLearned} / ${targetWords} so'z o'rganildi`}
+          masteryPct={learnedPct}
+          metrics={[
+            { icon: <Target size={16} />, label: 'MAQSAD', value: targetWords, color: 'blue', onClick: openEditor },
+            { icon: <CheckCircle2 size={16} />, label: "O'RGANILDI", value: displayLearned, color: 'green' },
+          ]}
+        />
+
+        {/* ── Personal calendar ── */}
+        <div className="dash-ov-cal-card">
+          <div className="dash-ov-cal-header">
+            <span className="dash-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Faollik taqvimi</span>
+            <span className="dash-ov-cal-month">{MONTH_NAMES[month]}</span>
           </div>
-          {streak && (
-            <div
-              className={`dash-streak-badge ${(streak.todayCount || 0) >= (streak.dailyGoal || 5) ? 'goal-met' : ''}`}
-              title={`Bugungi maqsad: ${streak.todayCount || 0}/${streak.dailyGoal || 5}`}
-            >
-              <Flame size={18} strokeWidth={2.3} />
-              <span>{streak.streakCount || 0}</span>
+          <p className="dash-ov-cal-summary">Bu oy <strong>{monthTotal}</strong> ta so'zni takrorladingiz</p>
+
+          <div className="dash-ov-cal-weekdays">
+            {WEEKDAY_LABELS.map(d => <span key={d} className="dash-ov-cal-weekday">{d}</span>)}
+          </div>
+          <div className="dash-ov-cal-grid">
+            {calendarCells.map((cell, idx) => (
+              cell ? (
+                <div key={cell.dateStr} className={`dash-ov-cal-cell ${cell.count > 0 ? 'active' : ''} ${cell.isToday ? 'today' : ''}`}>
+                  <span className="dash-ov-cal-day">{cell.day}</span>
+                  {cell.count > 0 && <span className="dash-ov-cal-count">{cell.count}</span>}
+                </div>
+              ) : (
+                <div key={`empty-${idx}`} className="dash-ov-cal-cell empty" />
+              )
+            ))}
+          </div>
+        </div>
+
+        {/* ── Words due for repetition (the individual analog of corp's
+            teacher-assigned Homework card) ── */}
+        <div className="dash-ov-hw-card dash-ov-homework-card">
+          <div className="dash-ov-hw-header">
+            <div className="dash-ov-hw-header-left">
+              <div className="dash-ov-hw-icon"><RotateCcw size={20} strokeWidth={2.2} /></div>
+              <h3>Takrorlash kerak</h3>
             </div>
-          )}
-        </div>
-        <div className="dash-subtitle">Bugun qancha so'z o'rganasiz?</div>
-      </motion.div>
-
-      {/* ── Weekly Activity Strip ── */}
-      <motion.div className="dash-week-strip" {...fadeUp(0.05)}>
-        {weekActivity.map((d) => (
-          <div key={d.date} className={`week-day ${d.met ? 'met' : ''} ${d.isToday ? 'today' : ''}`}>
-            <div className="week-day-dot">{d.met && <Flame size={12} strokeWidth={2.5} />}</div>
-            <span className="week-day-label">{d.label}</span>
-          </div>
-        ))}
-      </motion.div>
-
-      {/* ── Stats Row ── */}
-      <motion.div className="dash-stats-row" {...fadeUp(0.07)}>
-        <div className="dash-stat-card">
-          <div className="dash-stat-icon blue"><BookOpen size={20} strokeWidth={2.2} /></div>
-          <div className="dash-stat-value blue">{totalWords}</div>
-          <div className="dash-stat-label">Jami so'z</div>
-        </div>
-        <div className="dash-stat-card">
-          <div className="dash-stat-icon green"><CheckCircle2 size={20} strokeWidth={2.2} /></div>
-          <div className="dash-stat-value green">{masteredWords}</div>
-          <div className="dash-stat-label">O'zlashtirilgan</div>
-        </div>
-        <div className="dash-stat-card">
-          <div className="dash-stat-icon orange"><BellRing size={20} strokeWidth={2.2} /></div>
-          <div className="dash-stat-value orange">{dueWords}</div>
-          <div className="dash-stat-label">Bugungi review</div>
-        </div>
-      </motion.div>
-
-      {/* ── Memory Twin Insight ── */}
-      {memoryTwin && (
-        <motion.div className="dash-memtwin-card" {...fadeUp(0.1)}>
-          <div className="dash-memtwin-header">
-            <span className="dash-memtwin-icon"><Brain size={18} strokeWidth={2.2} /></span>
-            <span className="dash-memtwin-title">Memory Twin</span>
+            {dueWords > 0 && (
+              <span className="dash-ov-hw-count">{dueWords} ta so'z</span>
+            )}
           </div>
 
-          {memoryTwin.topConfusion ? (
-            <>
-              <p className="dash-memtwin-text">
-                Siz <strong>{memoryTwin.topConfusion.wordA}</strong> va <strong>{memoryTwin.topConfusion.wordB}</strong> so'zlarini ko'pincha aralashtirayapsiz.
-              </p>
-              <p className="dash-memtwin-sub">
-                <AlertTriangle size={13} strokeWidth={2.3} /> Tavsiya: solishtirib mashq qilish (Contrastive Review)
-              </p>
-              <Link to="/experiment" className="dash-memtwin-link">Hozir tuzatish →</Link>
-            </>
+          {dueWords === 0 ? (
+            <p>Hozircha takrorlash kerak bo'lgan so'z yo'q. Ajoyib ish!</p>
           ) : (
             <>
-              <p className="dash-memtwin-text">
-                Oxirgi o'rgangan so'zlaringizni o'rtacha <strong>{memoryTwin.avgRetention}%</strong> ehtimol bilan eslayapsiz.
-              </p>
-              {memoryTwin.atRisk > 0 && (
-                <p className="dash-memtwin-sub">
-                  <AlertTriangle size={13} strokeWidth={2.3} /> {memoryTwin.atRisk} ta so'zda unutish xavfi yuqori
-                </p>
-              )}
-              <Link to="/experiment" className="dash-memtwin-link">Xotiramni ko'rish →</Link>
+              <div className="dash-ov-hw-list">
+                {dueWordsList.slice(0, 6).map(word => {
+                  const recall = getRecallInfo(word);
+                  return (
+                    <button
+                      key={word.id}
+                      type="button"
+                      className="dash-ov-hw-item"
+                      onClick={() => navigate('/mixed-practice?filter=due')}
+                    >
+                      <div className="dash-ov-hw-item-check" style={{ backgroundColor: `${recall.color}15`, color: recall.color, borderColor: 'transparent' }}>
+                        {recall.pct}%
+                      </div>
+                      <div className="dash-ov-hw-item-text">
+                        <span className="dash-ov-hw-item-title">{word.word}</span>
+                        <span className="dash-ov-hw-item-sub">{word.translation}</span>
+                      </div>
+                      <ChevronRight size={16} className="dash-ov-hw-item-arrow" />
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                className="dash-ov-hw-practice-btn"
+                onClick={() => navigate('/mixed-practice?filter=due')}
+              >
+                Takrorlashni boshlash
+              </button>
             </>
           )}
-        </motion.div>
-      )}
-
-
-
-      {/* ── CTA Button ── */}
-      {totalWords > 0 && (
-        <motion.div className="dash-cta-section" {...fadeUp(0.16)}>
-          <button
-            className={`btn-practice-primary ${dueWords > 0 ? 'pulse-border' : ''}`}
-            onClick={() => navigate(dueWords > 0 ? '/mixed-practice?filter=due' : '/mixed-practice')}
-            id="dashboard-practice-btn"
-          >
-            {dueWords > 0 ? 'Takrorlashni boshlash' : 'Mashq qilish'}
-            {dueWords > 0 && (
-              <span className="btn-practice-badge">{dueWords} ta review</span>
-            )}
-          </button>
-        </motion.div>
-      )}
-
-      {/* ── Due Today / Recent Words (iOS Inset Grouped List) ── */}
-      <motion.div className="dashboard-section" {...fadeUp(0.2)}>
-        <div className="dashboard-section-header">
-          <h2>{showDue ? 'Bugun takrorlang' : "Oxirgi so'zlar"}</h2>
-          <Link to={showDue ? '/mixed-practice' : '/library'} className="ios-link">
-            {showDue ? 'Mashq qilish' : 'Barchasi'}
-          </Link>
         </div>
 
-        {wordsToShow.length > 0 ? (
-          <div className="recent-words-list">
-            {wordsToShow.map((word, idx) => {
-              const masteryInfo = getMasteryLevel(word.mastery || 0);
-              const recall = showDue ? getRecallInfo(word) : null;
-              return (
-                <motion.div
-                  key={word.id}
-                  className="recent-word-item"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.22 + idx * 0.04 }}
-                >
-                  <div className="word-mastery-icon" style={{ backgroundColor: `${masteryInfo.color}15`, color: masteryInfo.color }}>
-                    {masteryInfo.icon}
-                  </div>
-                  <div className="word-info">
-                    <div className="word-text">{word.word}</div>
-                    <div className="word-translation">{word.translation}</div>
-                  </div>
-                  <div className="word-meta">
-                    {recall ? (
-                      <span className="word-mastery-percent" style={{ color: recall.color }} title="Hozirgi eslab qolish ehtimoli">
-                        {recall.pct}%
-                      </span>
-                    ) : (
-                      <span className="word-mastery-percent" style={{ color: masteryInfo.color }}>
-                        {word.mastery || 0}%
-                      </span>
-                    )}
-                    <ChevronRight className="word-chevron" size={16} strokeWidth={2.5} />
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="dash-empty-state">
-            <div className="dash-empty-icon"><FileEdit size={32} strokeWidth={1.8} /></div>
-            <h3>Hali so'z qo'shilmagan</h3>
-            <p>Kutubxonadan to'plam ochib, birinchi so'zingizni qo'shing!</p>
-            <Link to="/library" className="btn-practice-primary empty-btn">
-              Kutubxonaga o'tish
-            </Link>
-          </div>
-        )}
-      </motion.div>
+      </div>
+
+      {/* ── Congratulations screen — locked until a new target is set ── */}
+      {showCongrats && (
+        <div className="dash-ov-target-overlay">
+          <motion.div
+            className="dash-ov-target-editor dash-ov-congrats"
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="dash-ov-congrats-icon"><PartyPopper size={34} strokeWidth={2} /></div>
+            <h3 className="dash-ov-congrats-title">Tabriklaymiz! 🎉</h3>
+            <p className="dash-ov-congrats-text">
+              Siz maqsadingizga yetdingiz — <strong>{targetWords} / {targetWords}</strong> so'z o'rganildi!
+            </p>
+
+            <button type="button" className="dash-ov-target-save-btn" onClick={startNewTarget}>
+              <Target size={18} strokeWidth={2.6} /> Yangi maqsad belgilash
+            </button>
+          </motion.div>
+        </div>
+      )}
+
+      {/* ── Target editor modal: drag-around-the-ring picker ── */}
+      {editingTarget && (
+        <div className="dash-ov-target-overlay" onClick={closeEditor}>
+          <motion.div
+            className="dash-ov-target-editor"
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="dash-ov-target-header">
+              <div className="dash-ov-target-header-icon"><Target size={18} strokeWidth={2.3} /></div>
+              <h3>Maqsadingizni belgilang</h3>
+              {!mustRaiseTarget && (
+                <button type="button" className="dash-ov-target-close" onClick={closeEditor} aria-label="Yopish">
+                  <X size={18} strokeWidth={2.3} />
+                </button>
+              )}
+            </div>
+
+            <div
+              ref={dialRef}
+              className="dash-ov-dial"
+              onPointerDown={handleDialPointerDown}
+              onPointerMove={handleDialPointerMove}
+            >
+              <svg width={DIAL_SIZE} height={DIAL_SIZE} viewBox={`0 0 ${DIAL_SIZE} ${DIAL_SIZE}`}>
+                <circle
+                  className="dash-ov-dial-track"
+                  cx={DIAL_SIZE / 2}
+                  cy={DIAL_SIZE / 2}
+                  r={DIAL_RADIUS}
+                  strokeWidth={DIAL_STROKE}
+                  style={{ stroke: dialTrackColor, transition: 'stroke 250ms ease' }}
+                />
+                <circle
+                  className="dash-ov-dial-fill"
+                  cx={DIAL_SIZE / 2}
+                  cy={DIAL_SIZE / 2}
+                  r={DIAL_RADIUS}
+                  strokeWidth={DIAL_STROKE}
+                  strokeDasharray={DIAL_CIRCUMFERENCE}
+                  strokeDashoffset={DIAL_CIRCUMFERENCE - dialFraction * DIAL_CIRCUMFERENCE}
+                  transform={`rotate(-90 ${DIAL_SIZE / 2} ${DIAL_SIZE / 2})`}
+                />
+              </svg>
+              <div
+                className="dash-ov-dial-knob"
+                style={{ transform: `translate(${dialKnobX - 11}px, ${dialKnobY - 11}px)` }}
+              />
+              <div className="dash-ov-dial-center">
+                <span className="dash-ov-dial-value">{draftTarget}</span>
+                <span className="dash-ov-dial-unit">so'z</span>
+              </div>
+            </div>
+
+            <p className="dash-ov-dial-hint">
+              {mustRaiseTarget
+                ? `Siz ${targetWords} taga yetdingiz — davom etish uchun yuqoriroq maqsad tanlang`
+                : "Maqsadni belgilash uchun halqani suring"}
+            </p>
+
+            <button
+              type="button"
+              className="dash-ov-target-save-btn"
+              onClick={saveTarget}
+              disabled={mustRaiseTarget && draftTarget <= targetWords}
+            >
+              <Check size={18} strokeWidth={2.6} /> Maqsadni saqlash
+            </button>
+          </motion.div>
+        </div>
+      )}
 
       {showOnboarding && (
         <OnboardingModal onClose={() => setShowOnboarding(false)} />
