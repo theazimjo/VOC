@@ -9,6 +9,92 @@
    module respects the app's light/dark setting instead of being frozen
    dark like it was before. */
 
+/* ── Bottom nav: real iOS-style translucent tab bar + sliding pill ──
+   Same reasoning as the teacher module's equivalent block: .bottom-nav
+   (src/components/Layout/BottomNav.css) is shared with every other
+   role, so it's left untouched and overridden here only for
+   CorpAdminBottomNav's extra .corp-admin-bottom-nav class. The base rule
+   already had backdrop-filter blur but paired it with a fully opaque
+   background, so the blur never actually showed anything through it. */
+.corp-admin-bottom-nav {
+  background: rgba(23, 23, 31, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="ios"] .corp-admin-bottom-nav {
+  background: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .corp-admin-bottom-nav {
+    background: var(--bg-secondary, #17171f) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+.corp-admin-bottom-nav .bottom-nav-link {
+  position: relative;
+}
+
+.corp-admin-bottom-nav .bottom-nav-link.active {
+  background: none !important;
+  color: var(--accent, #0a84ff) !important;
+}
+
+.corp-admin-bottom-nav .bottom-nav-icon,
+.corp-admin-bottom-nav .bottom-nav-label {
+  position: relative;
+  z-index: 1;
+}
+
+.corp-admin-bottom-nav .bottom-nav-active-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(var(--accent-rgb, 10, 132, 255), 0.14);
+  z-index: 0;
+}
+
+/* ── Press feedback + list entrance stagger ──
+   Same treatment as the teacher module: cards/rows only had :hover
+   (does nothing on touch), and lists popped in all at once instead of
+   cascading in. */
+.c-stat-card:active,
+.c-metric-card:active,
+.course-card:active,
+.teacher-card:active,
+.custom-pack-card:active,
+.stat-detail-item:active {
+  transform: scale(0.98);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .c-stat-card,
+  .c-metric-card,
+  .course-card,
+  .teacher-card,
+  .custom-pack-card,
+  .teachers-table tr {
+    animation: corp-stagger-in 0.32s var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)) both;
+  }
+
+  .c-stat-card:nth-child(1), .c-metric-card:nth-child(1), .course-card:nth-child(1), .teacher-card:nth-child(1), .custom-pack-card:nth-child(1), .teachers-table tr:nth-child(1) { animation-delay: 0ms; }
+  .c-stat-card:nth-child(2), .c-metric-card:nth-child(2), .course-card:nth-child(2), .teacher-card:nth-child(2), .custom-pack-card:nth-child(2), .teachers-table tr:nth-child(2) { animation-delay: 40ms; }
+  .c-stat-card:nth-child(3), .c-metric-card:nth-child(3), .course-card:nth-child(3), .teacher-card:nth-child(3), .custom-pack-card:nth-child(3), .teachers-table tr:nth-child(3) { animation-delay: 80ms; }
+  .c-stat-card:nth-child(4), .c-metric-card:nth-child(4), .course-card:nth-child(4), .teacher-card:nth-child(4), .custom-pack-card:nth-child(4), .teachers-table tr:nth-child(4) { animation-delay: 120ms; }
+  .course-card:nth-child(5), .teachers-table tr:nth-child(5) { animation-delay: 160ms; }
+  .course-card:nth-child(6), .teachers-table tr:nth-child(6) { animation-delay: 200ms; }
+  .teachers-table tr:nth-child(n+7) { animation-delay: 240ms; }
+}
+
+@keyframes corp-stagger-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .pack-desc {
   font-size: 0.85rem;
   color: var(--pg-text-muted);
@@ -28,8 +114,8 @@
   gap: 10px;
   padding: 12px 16px;
   border-radius: 12px;
-  background: rgba(56, 189, 248, 0.1);
-  border-left: 3px solid #38bdf8;
+  background: rgba(var(--accent-rgb), 0.1);
+  border-left: 3px solid var(--accent);
   color: var(--pg-text-secondary);
   font-size: 0.88rem;
 }
@@ -64,7 +150,7 @@
   border-radius: 14px;
   padding: 1rem 1.1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
   color: var(--pg-text);
 }
 
@@ -72,9 +158,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(10, 132, 255, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  background: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   padding: 3px 10px;
   border-radius: 20px;
   font-size: 0.76rem;
@@ -108,16 +194,6 @@
   .header-meta p {
     font-size: 0.74rem;
   }
-
-  .header-actions {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .header-actions .btn-tab-action {
-    width: 100%;
-    justify-content: center;
-  }
 }
 
 /* Dashboard widgets: activity chart + active groups + quick actions */
@@ -139,7 +215,7 @@
   border: 1px solid var(--pg-hairline);
   border-radius: 14px;
   padding: 1.1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 }
 
 .dashboard-chart-card h2, .dashboard-side-card h2 {
@@ -254,7 +330,7 @@
 
 .c-stat-icon.purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
 
-.c-stat-icon.blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.c-stat-icon.blue { background: rgba(var(--accent-rgb), 0.15); color: var(--accent); }
 
 .c-stat-icon.green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
 
@@ -298,7 +374,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 }
 
 .t-metric-top {
@@ -318,7 +394,7 @@
 
 .t-metric-icon.purple { color: #a855f7; }
 
-.t-metric-icon.blue { color: #60a5fa; }
+.t-metric-icon.blue { color: var(--accent); }
 
 .t-metric-icon.pink { color: #ec4899; }
 
@@ -359,8 +435,8 @@
 
 /* Active Teacher Invites */
 .invites-panel {
-  background: rgba(10, 132, 255, 0.06);
-  border: 1px solid rgba(10, 132, 255, 0.2);
+  background: rgba(var(--accent-rgb), 0.06);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 16px;
   padding: 1.25rem 1.5rem;
 }
@@ -394,7 +470,7 @@
   font-family: monospace;
   font-weight: 700;
   font-size: 1rem;
-  color: #38bdf8;
+  color: var(--accent);
   letter-spacing: 0.05em;
 }
 
@@ -444,9 +520,9 @@
   font-size: 2rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: #38bdf8;
-  background: rgba(10, 132, 255, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
   border-radius: 14px;
   padding: 1rem;
   margin-bottom: 1.25rem;
@@ -472,11 +548,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(10, 132, 255, 0.08);
-  border: 1px solid rgba(10, 132, 255, 0.2);
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
   border-radius: 12px;
   padding: 10px 16px;
-  color: #38bdf8;
+  color: var(--accent);
   font-size: 0.88rem;
   font-weight: 600;
 }
@@ -895,7 +971,7 @@
 .cell-checkbox input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  accent-color: #0A84FF;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
@@ -948,7 +1024,7 @@
   color: var(--pg-text-secondary);
 }
 
-.c-metric-icon.blue { color: #60a5fa; }
+.c-metric-icon.blue { color: var(--accent); }
 
 .c-metric-icon.purple { color: #c084fc; }
 
@@ -1013,9 +1089,9 @@
 }
 
 .working-day-btn.active {
-  background: rgba(10, 132, 255, 0.15);
-  border-color: rgba(10, 132, 255, 0.4);
-  color: #38bdf8;
+  background: rgba(var(--accent-rgb), 0.15);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  color: var(--accent);
 }
 
 .toggle-row {
@@ -1041,7 +1117,7 @@
 }
 
 .toggle-switch.on {
-  background: #0A84FF;
+  background: var(--accent);
 }
 
 .toggle-knob {
@@ -1070,7 +1146,7 @@
   border-radius: 14px;
   padding: 1.4rem 1.5rem;
   margin-top: 1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 }
 
 .settings-form .form-group {
@@ -1103,17 +1179,23 @@
 .modal-content {
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
-  border-radius: 14px;
+  border-radius: var(--r-md, 14px);
   padding: 1.4rem 1.5rem;
   width: 100%;
   max-width: 480px;
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 var(--pg-inset-highlight) inset,
-    0 0 90px rgba(124, 108, 255, 0.1);
-  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
-  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
+  box-shadow: var(--card-shadow, 0 1px 2px rgba(0, 0, 0, 0.06));
   color: var(--pg-text);
+}
+
+/* CustomPackEditor renders its own full card chrome (.new-course-modal) —
+   stripping modal-content's own background/border/padding here avoids
+   nesting one rounded card inside another. */
+.modal-content.pack-editor-modal {
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  max-width: 480px;
 }
 
 .modal-content h2 {
@@ -1214,7 +1296,7 @@
   bottom: 85px;
   right: 20px;
   z-index: 999;
-  background: #3b82f6;
+  background: var(--accent);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 50px;
@@ -1225,9 +1307,7 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.45);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -1241,9 +1321,9 @@
 }
 
 .fab-add-pack-btn:hover {
-  background: #2563eb;
+  background: var(--accent-hover);
   transform: translateY(-2px) scale(1.06);
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.55);
+  box-shadow: 0 12px 30px rgba(var(--accent-rgb), 0.55);
 }
 
 .fab-add-pack-btn:active {

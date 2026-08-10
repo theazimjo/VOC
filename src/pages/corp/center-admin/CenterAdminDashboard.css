@@ -12,6 +12,33 @@
   --pg-text-muted: rgba(255, 255, 255, 0.44);
   --pg-inset-highlight: rgba(255, 255, 255, 0.06);
 
+  /* Locked accent — one blue for every interactive/brand moment in this
+     module, replacing the #38bdf8/#0A84FF/#3b82f6/#60a5fa/#2563eb mix
+     that had accumulated file by file. Same iOS system blue as the
+     teacher module, since both are the same visual language. */
+  --accent: #0a84ff;
+  --accent-rgb: 10, 132, 255;
+  --accent-hover: #0070db;
+
+  /* Motion tokens — same vocabulary as the teacher module. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 120ms;
+  --dur-fast: 160ms;
+  --dur-base: 220ms;
+  --dur-modal: 240ms;
+
+  /* Radius scale + real elevation — see the equivalent comment in
+     teacher/TeacherDashboard.css for the reasoning: a flat 1px shadow
+     reads as no depth at all, cards need actual elevation to read as
+     cards. */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 6px 16px rgba(0, 0, 0, 0.34);
+  --card-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 12px 28px rgba(0, 0, 0, 0.42);
+
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -28,6 +55,9 @@
   --pg-text-secondary: rgba(0, 0, 0, 0.58);
   --pg-text-muted: rgba(0, 0, 0, 0.4);
   --pg-inset-highlight: rgba(255, 255, 255, 0.6);
+
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 24px -8px rgba(0, 0, 0, 0.14);
+  --card-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 36px -10px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {

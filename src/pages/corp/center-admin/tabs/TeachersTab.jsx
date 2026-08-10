@@ -4,11 +4,20 @@ import './TeachersTab.css';
 
 export default function TeachersTab({ p }) {
   const {
-    activeTeacherMenu, filteredTeachersWithStats, handleDeleteTeacher,
+    activeTeacherMenu, askConfirm, filteredTeachersWithStats, handleDeleteTeacher,
     setActiveTeacherMenu, setNewTeacherPassword, setResetPasswordTeacher, setShowTeacherModal,
     setTeacherMenuPos, setTeacherSearchTerm, teacherMenuPos, teacherSearchTerm,
     totalTeacherGroups, totalTeacherStudents, totalTeachers,
   } = p;
+
+  const confirmDeleteTeacher = (t) => askConfirm({
+    title: "O'qituvchini o'chirish",
+    message: `"${t.name}" o'qituvchisini o'chirishni tasdiqlaysizmi?`,
+    confirmLabel: "O'chirish",
+    cancelLabel: 'Bekor qilish',
+    danger: true,
+    onConfirm: () => handleDeleteTeacher(t),
+  });
 
   return (
         <div className="teachers-page-container">
@@ -120,13 +129,12 @@ export default function TeachersTab({ p }) {
                                 top: `${teacherMenuPos.top}px`,
                                 right: `${teacherMenuPos.right}px`,
                                 background: 'var(--pg-bg)',
-                                backdropFilter: 'blur(22px) saturate(180%) brightness(1.08)',
-                                WebkitBackdropFilter: 'blur(22px) saturate(180%) brightness(1.08)',
                                 border: '1px solid var(--pg-hairline)',
                                 borderRadius: '12px',
                                 padding: '6px',
                                 zIndex: 9999,
-                                boxShadow: '0 12px 30px rgba(0,0,0,0.5)',
+                                boxShadow: 'var(--card-shadow-hover)',
+                                transformOrigin: 'top right',
                                 minWidth: '140px'
                               }}
                             >
@@ -141,14 +149,14 @@ export default function TeachersTab({ p }) {
                                   borderRadius: '8px',
                                   background: 'transparent',
                                   border: 'none',
-                                  color: '#38bdf8',
+                                  color: 'var(--accent)',
                                   fontSize: '0.88rem',
                                   fontWeight: 600,
                                   cursor: 'pointer',
                                   transition: 'background 0.15s ease',
                                   marginBottom: '2px'
                                 }}
-                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(56, 189, 248, 0.15)'}
+                                onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(var(--accent-rgb), 0.15)'}
                                 onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -182,7 +190,7 @@ export default function TeachersTab({ p }) {
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setActiveTeacherMenu(null);
-                                  handleDeleteTeacher(t);
+                                  confirmDeleteTeacher(t);
                                 }}
                               >
                                 <Trash2 size={16} /> O'chirish

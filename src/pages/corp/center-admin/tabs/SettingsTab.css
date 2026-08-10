@@ -25,7 +25,7 @@
 
 .settings-form input:focus, .settings-form textarea:focus {
   outline: none;
-  border-color: #0A84FF;
+  border-color: var(--accent);
 }
 
 .btn-save-settings {
@@ -33,7 +33,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #0A84FF;
+  background: var(--accent);
   color: #ffffff;
   padding: 12px 24px;
   border-radius: 12px;

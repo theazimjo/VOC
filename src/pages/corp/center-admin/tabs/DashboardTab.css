@@ -1,51 +1,30 @@
-.header-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-tab-action {
+/* Secondary "view all" link for the dashboard's preview sections — not
+   a create-action, so it doesn't get the solid-accent primary-button
+   treatment those used to (incorrectly) share. */
+.btn-view-all {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 12px;
-  border: none;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--r-sm, 10px);
+  border: 1px solid var(--pg-hairline);
+  background: var(--pg-surface);
+  color: var(--pg-text-secondary);
   font-weight: 600;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all var(--dur-fast, 0.2s) ease;
 }
 
-.btn-add-teacher {
-  background: #0A84FF;
-  color: #ffffff;
+.btn-view-all:hover {
+  background: var(--pg-surface-hover);
+  color: var(--accent, #0a84ff);
+  border-color: rgba(var(--accent-rgb), 0.35);
 }
 
-.btn-add-teacher:hover {
-  background: #0070df;
-}
-
-/* Same solid blue as .btn-add-teacher right next to it — this used to
-   be the only button on the page using a purple/pink gradient. */
-.btn-add-pack {
-  background: #0A84FF;
-  color: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 12px;
-  border: none;
-  font-weight: 600;
-  font-size: 0.88rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-add-pack:hover {
-  background: #0070df;
+.btn-view-all:active {
+  transform: scale(0.96);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
 }
 
 .center-admin-stats {
@@ -62,20 +41,29 @@
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
   padding: 0.85rem 1rem;
-  border-radius: 10px;
+  border-radius: var(--r-md, 10px);
   color: var(--pg-text);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  font: inherit;
+  text-align: left;
 }
 
 .c-stat-card.clickable {
   cursor: pointer;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: border-color var(--dur-fast, 0.2s) ease, transform var(--dur-fast, 0.2s) ease;
 }
 
 .c-stat-card.clickable:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(var(--accent-rgb), 0.4);
   transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.c-stat-card.clickable:active {
+  transform: scale(0.98);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
 }
 
 .c-stat-icon {
@@ -88,9 +76,72 @@
   flex-shrink: 0;
 }
 
-.c-stat-card h3 { font-size: 1.2rem; font-weight: 700; color: var(--pg-text); }
+.c-stat-card h3 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: var(--pg-text); line-height: 1.1; }
 
-.c-stat-card p { font-size: 0.76rem; color: var(--pg-text-secondary); }
+.c-stat-card p { font-size: 0.78rem; color: var(--pg-text-secondary); margin-top: 2px; }
+
+/* ── Needs Attention ─────────────────────────── */
+.dashboard-attention-section {
+  margin-bottom: 2rem;
+}
+
+.attention-all-good {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  color: #4ade80;
+  border-radius: var(--r-lg, 16px);
+  padding: 1rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.attention-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.attention-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.18);
+  color: var(--pg-text);
+  border-radius: var(--r-md, 14px);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.86rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.2s) ease, transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+.attention-item span {
+  flex: 1;
+  min-width: 0;
+}
+
+.attention-icon {
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.attention-arrow {
+  color: var(--pg-text-muted);
+  flex-shrink: 0;
+}
+
+.attention-item:hover {
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.attention-item:active {
+  transform: scale(0.98);
+}
 
 .teachers-grid, .packs-grid {
   display: grid;
@@ -106,7 +157,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 }
 
 .teacher-card-head {

@@ -86,9 +86,9 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(10, 132, 255, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(10, 132, 255, 0.3);
+  background: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
   padding: 10px 18px;
   border-radius: 12px;
   font-weight: 600;
@@ -98,7 +98,7 @@
 }
 
 .btn-pdf-import:hover {
-  background: rgba(10, 132, 255, 0.25);
+  background: rgba(var(--accent-rgb), 0.25);
   color: #ffffff;
 }
 
@@ -106,7 +106,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #0A84FF;
+  background: var(--accent);
   color: #ffffff;
   padding: 10px 18px;
   border-radius: 12px;
@@ -114,13 +114,13 @@
   font-size: 0.88rem;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.35);
   transition: all 0.2s ease;
 }
 
 .btn-add-word-top:hover {
   background: #0070df;
-  box-shadow: 0 6px 18px rgba(10, 132, 255, 0.45);
+  box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.45);
 }
 
 /* Filter Dropdown Button & Popover */
@@ -150,9 +150,9 @@
 }
 
 .btn-filter-toggle.active {
-  background: rgba(10, 132, 255, 0.15);
-  color: #38bdf8;
-  border-color: rgba(10, 132, 255, 0.35);
+  background: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.35);
 }
 
 .filter-chevron {
@@ -212,8 +212,8 @@
 }
 
 .filter-menu-item.selected {
-  background: rgba(10, 132, 255, 0.2);
-  color: #38bdf8;
+  background: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -227,8 +227,8 @@
 }
 
 .filter-menu-item.selected .filter-item-count {
-  background: rgba(10, 132, 255, 0.3);
-  color: #38bdf8;
+  background: rgba(var(--accent-rgb), 0.3);
+  color: var(--accent);
 }
 
 /* Bulk Actions Bar */
@@ -272,13 +272,13 @@
   width: 17px;
   height: 17px;
   border-radius: 5px;
-  accent-color: #0A84FF;
+  accent-color: var(--accent);
   cursor: pointer;
   vertical-align: middle;
 }
 
 .words-table tr.row-selected {
-  background: rgba(10, 132, 255, 0.08);
+  background: rgba(var(--accent-rgb), 0.08);
 }
 
 /* Delete Confirmation Modal */
@@ -417,7 +417,7 @@
 }
 
 .add-unit-top-input:focus {
-  border-color: #0A84FF;
+  border-color: var(--accent);
   background: var(--pg-surface-hover);
 }
 
@@ -427,7 +427,7 @@
   gap: 6px;
   padding: 10px 18px;
   border-radius: 12px;
-  background: #0A84FF;
+  background: var(--accent);
   color: #ffffff;
   border: none;
   font-size: 0.88rem;
@@ -472,7 +472,7 @@
 
 .unit-list-row:hover {
   background: var(--pg-surface);
-  border-color: rgba(10, 132, 255, 0.35);
+  border-color: rgba(var(--accent-rgb), 0.35);
   transform: translateX(4px);
 }
 
@@ -511,9 +511,9 @@
 
 .unit-list-sub {
   font-size: 0.78rem;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
   padding: 2px 10px;
   border-radius: 8px;
   font-weight: 600;
@@ -545,9 +545,9 @@
 }
 
 .btn-unit-icon.edit:hover {
-  color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.3);
-  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.3);
+  background: rgba(var(--accent-rgb), 0.15);
 }
 
 .btn-unit-icon.danger:hover {
@@ -563,7 +563,7 @@
 }
 
 .unit-list-row:hover .unit-enter-arrow {
-  color: #38bdf8;
+  color: var(--accent);
   transform: translateX(4px);
 }
 
@@ -581,7 +581,7 @@
   padding: 6px 12px;
   border-radius: 8px;
   background: var(--pg-hairline);
-  border: 1px solid #0A84FF;
+  border: 1px solid var(--accent);
   color: var(--pg-text);
   font-size: 0.92rem;
   font-weight: 600;
@@ -593,7 +593,7 @@
   width: 30px;
   height: 30px;
   border-radius: 8px;
-  background: #0A84FF;
+  background: var(--accent);
   color: #ffffff;
   border: none;
   display: flex;
@@ -785,7 +785,7 @@
   letter-spacing: 0.04em;
 }
 
-.part-badge.noun { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+.part-badge.noun { background: rgba(var(--accent-rgb), 0.15); color: var(--accent); border: 1px solid rgba(var(--accent-rgb), 0.3); }
 .part-badge.verb { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
 .part-badge.adjective { background: rgba(251, 146, 60, 0.15); color: #fb923c; border: 1px solid rgba(251, 146, 60, 0.3); }
 .part-badge.adverb { background: rgba(74, 222, 128, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
@@ -901,9 +901,9 @@
 }
 
 .modal-input:focus {
-  border-color: #0A84FF;
+  border-color: var(--accent);
   background: var(--pg-surface-hover);
-  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
 }
 
 .modal-select {
@@ -926,9 +926,9 @@
 }
 
 .modal-select:focus {
-  border-color: #0A84FF;
+  border-color: var(--accent);
   background-color: var(--pg-surface-hover);
-  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
 }
 
 .modal-select option {
@@ -957,9 +957,9 @@
 }
 
 .modal-textarea:focus {
-  border-color: #0A84FF;
+  border-color: var(--accent);
   background: var(--pg-surface-hover);
-  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
 }
 
 .word-modal-footer {
@@ -996,19 +996,19 @@
   justify-content: center;
   gap: 8px;
   border-radius: 12px;
-  background: #0A84FF;
+  background: var(--accent);
   border: none;
   color: #ffffff;
   font-size: 0.92rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.35);
   transition: all 0.2s ease;
 }
 
 .btn-modal-save:hover {
   background: #0070df;
-  box-shadow: 0 6px 18px rgba(10, 132, 255, 0.45);
+  box-shadow: 0 6px 18px rgba(var(--accent-rgb), 0.45);
 }
 
 /* PDF Import Modal */
@@ -1061,7 +1061,7 @@
 
 .pdf-import-hint code {
   background: var(--pg-hairline);
-  color: #38bdf8;
+  color: var(--accent);
   padding: 2px 6px;
   border-radius: 4px;
   font-family: monospace;
@@ -1081,7 +1081,7 @@
 }
 
 .pdf-textarea:focus {
-  border-color: #0A84FF;
+  border-color: var(--accent);
 }
 
 .pdf-modal-footer {
@@ -1093,11 +1093,11 @@
   border-top: 1px solid var(--pg-hairline);
 }
 
-/* Same primary-action blue as every other button in the app (#0A84FF /
+/* Same primary-action blue as every other button in the app (var(--accent) /
    #0070df hover) — this used to be a one-off purple, the only button in
    the whole corp module not using the standard color. */
 .btn-pdf-submit {
-  background: #0A84FF;
+  background: var(--accent);
   color: #ffffff;
   padding: 10px 18px;
   border-radius: 12px;

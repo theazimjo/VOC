@@ -1,12 +1,11 @@
 import { UserPlus } from 'lucide-react';
+import CorpModal from '../../../../components/corp/CorpModal';
 
 export default function AddTeacherModal({ p }) {
   const { handleAddTeacher, setShowTeacherModal, setTeacherForm, showTeacherModal, submittingTeacher, teacherForm } = p;
 
   return (
-      showTeacherModal && (
-        <div className="modal-overlay" onClick={() => setShowTeacherModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <CorpModal open={showTeacherModal} onClose={() => setShowTeacherModal(false)}>
             <h2><UserPlus size={20} /> Yangi O'qituvchi Qo'shish</h2>
             <form onSubmit={handleAddTeacher} autoComplete="off">
               <div className="form-group">
@@ -56,8 +55,6 @@ export default function AddTeacherModal({ p }) {
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )
+      </CorpModal>
   );
 }

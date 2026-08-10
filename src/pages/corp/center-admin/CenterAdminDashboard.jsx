@@ -3,14 +3,16 @@ import { useOutletContext, useNavigate, useSearchParams } from 'react-router-dom
 import {
   getCenterTeachers, createTeacher, updateTeacherPassword, removeTeacherFromCenter, getCenterCustomPacks, getCenterGroups,
   getCenter, updateCenter, deleteCustomPack, duplicateCustomPack, createCustomPack, updateCustomPack,
-  ensureIrregularVerbsPack
+  ensureIrregularVerbsPack, getGroupStudents,
 } from '../../../services/corpService';
 import CredentialsModal from '../../../components/corp/CredentialsModal';
+import ConfirmSheet from '../../../components/corp/ConfirmSheet';
 import { BEGINNER_ENGLISH_PACK } from '../../../data/beginnerEnglishCoursePack';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsCorpPack';
 import DashboardTab from './tabs/DashboardTab';
 import TeachersTab from './tabs/TeachersTab';
 import CoursesTab from './tabs/CoursesTab';
+import StudentsTab from './tabs/StudentsTab';
 import StatisticsTab from './tabs/StatisticsTab';
 import SettingsTab from './tabs/SettingsTab';
 import AddTeacherModal from './modals/AddTeacherModal';
@@ -41,9 +43,16 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const [courseSortBy, setCourseSortBy] = useState('date'); // date | name | units | words
   const [courseSortOrder, setCourseSortOrder] = useState('desc');
   const [showCourseSortMenu, setShowCourseSortMenu] = useState(false);
-  const [selectedTeacherIds, setSelectedTeacherIds] = useState([]);
   const [activeTeacherMenu, setActiveTeacherMenu] = useState(null);
   const [teacherMenuPos, setTeacherMenuPos] = useState({ top: 0, right: 0 });
+
+  // Students tab: every student across every group in the center, fetched
+  // lazily (only once the tab is actually visited) since it's an N+1 read
+  // across every group's own students subtree — same lazy pattern as the
+  // teacher module's teacher-wide "Statistika" tab.
+  const [allGroupsStudents, setAllGroupsStudents] = useState({}); // groupId -> students[]
+  const [loadingStudents, setLoadingStudents] = useState(false);
+  const [studentSearchTerm, setStudentSearchTerm] = useState('');
 
   // Modals & Routing
   const [searchParams, setSearchParams] = useSearchParams();
@@ -61,6 +70,24 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const [resetPasswordTeacher, setResetPasswordTeacher] = useState(null);
   const [newTeacherPassword, setNewTeacherPassword] = useState('');
   const [submittingPasswordReset, setSubmittingPasswordReset] = useState(false);
+
+  // iOS-style action-sheet confirm dialog — replaces window.confirm() for
+  // every destructive/irreversible action, same pattern as the teacher
+  // module.
+  const [confirmSheet, setConfirmSheet] = useState(null);
+  const [confirmBusy, setConfirmBusy] = useState(false);
+  const askConfirm = (sheet) => setConfirmSheet(sheet);
+  const closeConfirmSheet = () => { if (!confirmBusy) setConfirmSheet(null); };
+  const runConfirmSheet = async () => {
+    if (!confirmSheet) return;
+    setConfirmBusy(true);
+    try {
+      await confirmSheet.onConfirm();
+    } finally {
+      setConfirmBusy(false);
+      setConfirmSheet(null);
+    }
+  };
 
   const handleUpdateTeacherPassword = async (e) => {
     e.preventDefault();
@@ -132,6 +159,30 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     loadData();
   }, [centerId]);
 
+  // Fetch every group's student list only once the Students tab is
+  // actually visited, and only for groups not already fetched.
+  useEffect(() => {
+    if (tab !== 'students' || !centerId) return;
+    const missingIds = groups.map(g => g.id).filter(id => !(id in allGroupsStudents));
+    if (missingIds.length === 0) return;
+
+    let cancelled = false;
+    setLoadingStudents(true);
+    Promise.all(missingIds.map(id => getGroupStudents(centerId, id).then(list => [id, list || []])))
+      .then(entries => {
+        if (cancelled) return;
+        setAllGroupsStudents(prev => {
+          const next = { ...prev };
+          entries.forEach(([id, list]) => { next[id] = list; });
+          return next;
+        });
+      })
+      .catch(err => console.error('Error loading center students:', err))
+      .finally(() => { if (!cancelled) setLoadingStudents(false); });
+
+    return () => { cancelled = true; };
+  }, [tab, centerId, groups]);
+
   const handleAddTeacher = async (e) => {
     e.preventDefault();
     if (!teacherForm.name.trim() || !teacherForm.phone.trim() || !teacherForm.password.trim()) {
@@ -181,31 +232,14 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     }
   };
 
+  // Confirmation lives at the call site (askConfirm's ConfirmSheet) — these
+  // are pure actions.
   const handleDeleteTeacher = async (teacher) => {
-    if (!confirm(`"${teacher.name}" o'qituvchisini o'chirishni tasdiqlaysizmi?`)) return;
     try {
       await removeTeacherFromCenter(centerId, teacher.id, teacher.uid);
       setTeachers(prev => prev.filter(t => t.id !== teacher.id));
-      setSelectedTeacherIds(prev => prev.filter(id => id !== teacher.id));
     } catch (err) {
       alert("O'qituvchini o'chirishda xatolik: " + err.message);
-    }
-  };
-
-  const handleBulkDeleteTeachers = async () => {
-    if (selectedTeacherIds.length === 0) return;
-    if (!confirm(`${selectedTeacherIds.length} ta tanlangan o'qituvchini o'chirishni tasdiqlaysizmi?`)) return;
-    try {
-      for (const tId of selectedTeacherIds) {
-        const teacher = teachers.find(t => t.id === tId);
-        if (teacher) {
-          await removeTeacherFromCenter(centerId, teacher.id, teacher.uid);
-        }
-      }
-      setTeachers(prev => prev.filter(t => !selectedTeacherIds.includes(t.id)));
-      setSelectedTeacherIds([]);
-    } catch (err) {
-      alert("O'qituvchilarni o'chirishda xatolik: " + err.message);
     }
   };
 
@@ -214,7 +248,6 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
       alert("Bu tizim packi — barcha markazlarda umumiy ishlatiladi va o'chirib bo'lmaydi.");
       return;
     }
-    if (!confirm('Ushbu kursni o\'chirishni tasdiqlaysizmi?')) return;
     try {
       await deleteCustomPack(centerId, id);
       setCustomPacks(prev => prev.filter(p => p.id !== id));
@@ -274,6 +307,25 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     t.email.toLowerCase().includes(teacherSearchTerm.toLowerCase())
   );
 
+  // Flat "every student in the center" list, each one tagged with its
+  // group and teacher — the students subtree is only ever stored nested
+  // under its own group, so this is the one place that view actually gets
+  // assembled.
+  const allStudents = groups.flatMap(g => {
+    const teacher = teachers.find(t => t.id === g.teacherId);
+    return (allGroupsStudents[g.id] || []).map(st => ({
+      ...st,
+      groupId: g.id,
+      groupName: g.name,
+      teacherName: teacher?.name || "Noma'lum",
+    }));
+  });
+  const filteredStudents = allStudents.filter(st =>
+    (st.name || '').toLowerCase().includes(studentSearchTerm.toLowerCase()) ||
+    (st.email || '').toLowerCase().includes(studentSearchTerm.toLowerCase()) ||
+    (st.groupName || '').toLowerCase().includes(studentSearchTerm.toLowerCase())
+  );
+
   const allCourses = customPacks.map(p => {
     const packGroups = groups.filter(g => (g.assignedPacks || []).includes(p.id));
     return {
@@ -319,20 +371,6 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const totalWords = allCourses.reduce((sum, c) => sum + (c.wordsCount || 0), 0);
   const totalCourseStudents = groups.reduce((sum, g) => sum + (g.studentsCount || 0), 0);
 
-  const toggleSelectAllTeachers = () => {
-    if (selectedTeacherIds.length === filteredTeachersWithStats.length) {
-      setSelectedTeacherIds([]);
-    } else {
-      setSelectedTeacherIds(filteredTeachersWithStats.map(t => t.id));
-    }
-  };
-
-  const toggleSelectOneTeacher = (id) => {
-    setSelectedTeacherIds(prev =>
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    );
-  };
-
   // Single bundle handed to every extracted tab/modal component below —
   // avoids re-deriving a bespoke prop list per file while keeping all the
   // state/handlers/derived data declared in exactly one place (here).
@@ -343,7 +381,7 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     teachers, setTeachers, groups, setGroups, customPacks, setCustomPacks, loading, setLoading,
     teacherSearchTerm, setTeacherSearchTerm, courseSearchTerm, setCourseSearchTerm,
     courseSortBy, setCourseSortBy, courseSortOrder, setCourseSortOrder,
-    showCourseSortMenu, setShowCourseSortMenu, selectedTeacherIds, setSelectedTeacherIds,
+    showCourseSortMenu, setShowCourseSortMenu,
     activeTeacherMenu, setActiveTeacherMenu, teacherMenuPos, setTeacherMenuPos,
     searchParams, setSearchParams, managingCourse,
     showTeacherModal, setShowTeacherModal, showPackEditor, setShowPackEditor,
@@ -352,11 +390,12 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     resetPasswordTeacher, setResetPasswordTeacher, newTeacherPassword, setNewTeacherPassword,
     submittingPasswordReset, setSubmittingPasswordReset,
     handleUpdateTeacherPassword, handleAddTeacher, handleSaveSettings, handleDeleteTeacher,
-    handleBulkDeleteTeachers, handleDeleteCourse, handleDuplicateCourse, handleSeedBeginnerCourse,
-    toggleSelectAllTeachers, toggleSelectOneTeacher,
+    handleDeleteCourse, handleDuplicateCourse, handleSeedBeginnerCourse,
+    askConfirm,
     teachersWithStats, filteredTeachersWithStats, allCourses, filteredCourses,
     totalTeachers, totalTeacherGroups, totalTeacherStudents, avgGroups, avgStudents,
     totalCourses, totalSections, totalWords, totalCourseStudents,
+    allStudents, filteredStudents, loadingStudents, studentSearchTerm, setStudentSearchTerm,
   };
 
   return (
@@ -364,6 +403,7 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
       {tab === 'dashboard' && <DashboardTab p={p} />}
       {tab === 'teachers' && <TeachersTab p={p} />}
       {(tab === 'courses' || tab === 'packs') && <CoursesTab p={p} />}
+      {tab === 'students' && <StudentsTab p={p} />}
       {tab === 'statistics' && <StatisticsTab p={p} />}
       {tab === 'settings' && <SettingsTab p={p} />}
 
@@ -378,6 +418,17 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
           onClose={() => setCredentials(null)}
         />
       )}
+
+      <ConfirmSheet
+        open={!!confirmSheet}
+        title={confirmSheet?.title}
+        message={confirmSheet?.message}
+        confirmLabel={confirmSheet?.confirmLabel}
+        danger={confirmSheet?.danger}
+        busy={confirmBusy}
+        onConfirm={runConfirmSheet}
+        onCancel={closeConfirmSheet}
+      />
     </div>
   );
 }

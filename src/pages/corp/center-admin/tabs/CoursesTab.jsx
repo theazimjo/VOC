@@ -4,16 +4,26 @@ import {
 } from 'lucide-react';
 import CustomPackEditor from '../../../../components/corp/CustomPackEditor';
 import CourseManager from '../../../../components/corp/CourseManager';
+import CorpModal from '../../../../components/corp/CorpModal';
 import './CoursesTab.css';
 
 export default function CoursesTab({ p }) {
   const {
-    centerId, courseSearchTerm, courseSortBy, courseSortOrder, customPacks,
+    askConfirm, centerId, courseSearchTerm, courseSortBy, courseSortOrder, customPacks,
     editingPack, filteredCourses, handleDeleteCourse, handleSeedBeginnerCourse,
     managingCourse, seedingCourse, setCourseSearchTerm, setCourseSortBy, setCourseSortOrder,
     setCustomPacks, setEditingPack, setSearchParams, setShowCourseSortMenu, setShowPackEditor,
     showCourseSortMenu, showPackEditor, totalCourseStudents, totalCourses, totalSections, totalWords,
   } = p;
+
+  const confirmDeleteCourse = (course) => askConfirm({
+    title: 'Kursni o\'chirish',
+    message: `"${course.title}" kursini o'chirishni tasdiqlaysizmi?`,
+    confirmLabel: "O'chirish",
+    cancelLabel: 'Bekor qilish',
+    danger: true,
+    onConfirm: () => handleDeleteCourse(course.id),
+  });
 
   return (
         managingCourse ? (
@@ -141,7 +151,7 @@ export default function CoursesTab({ p }) {
                       <Edit3 size={15} />
                     </button>
                     <button
-                      onClick={() => handleDeleteCourse(c.id)}
+                      onClick={() => confirmDeleteCourse(c)}
                       className="btn-card-action"
                       style={{ color: '#f87171' }}
                       title="O'chirish"
@@ -225,28 +235,24 @@ export default function CoursesTab({ p }) {
           </button>
 
           {/* Create/Edit modal */}
-          {showPackEditor && (
-            <div className="modal-overlay" onClick={() => { setShowPackEditor(false); setEditingPack(null); }}>
-              <div onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: '480px', padding: '1rem' }}>
-                <CustomPackEditor
-                  centerId={centerId}
-                  editPack={editingPack}
-                  onSaved={(pack) => {
-                    setCustomPacks(prev => {
-                      const exists = prev.some(p => p.id === pack.id);
-                      if (exists) {
-                        return prev.map(p => p.id === pack.id ? { ...p, ...pack } : p);
-                      }
-                      return [pack, ...prev];
-                    });
-                    setShowPackEditor(false);
-                    setEditingPack(null);
-                  }}
-                  onCancel={() => { setShowPackEditor(false); setEditingPack(null); }}
-                />
-              </div>
-            </div>
-          )}
+          <CorpModal open={showPackEditor} onClose={() => { setShowPackEditor(false); setEditingPack(null); }} className="pack-editor-modal" maxWidth="480px">
+            <CustomPackEditor
+              centerId={centerId}
+              editPack={editingPack}
+              onSaved={(pack) => {
+                setCustomPacks(prev => {
+                  const exists = prev.some(p => p.id === pack.id);
+                  if (exists) {
+                    return prev.map(p => p.id === pack.id ? { ...p, ...pack } : p);
+                  }
+                  return [pack, ...prev];
+                });
+                setShowPackEditor(false);
+                setEditingPack(null);
+              }}
+              onCancel={() => { setShowPackEditor(false); setEditingPack(null); }}
+            />
+          </CorpModal>
         </div>
         )
   );
