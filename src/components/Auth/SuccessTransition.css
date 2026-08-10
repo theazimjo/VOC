@@ -1,0 +1,112 @@
+.success-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 1;
+}
+
+/* Fade-out handoff after the sequence finishes and navigate() has fired —
+   the whole overlay dissolves together, revealing the destination page
+   underneath (already loaded by then, so nothing pops). */
+.success-transition--revealing {
+  transition: opacity 220ms ease;
+  opacity: 0;
+}
+
+/* ---------- Starfield — canvas-driven particle burst from center ---------- */
+.success-starfield {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- "Welcome" / "back" — approach along the same trajectory as
+   the starfield: born tiny and distant at the exact center, growing and
+   coming into focus as they fly toward the viewer, then rocketing past
+   into a blur — the same radial motion as every particle, not a flat
+   left/right slide. ---------- */
+.success-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  font-family: var(--font-family, -apple-system, sans-serif);
+  font-size: clamp(40px, 7vw, 140px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow:
+    0 0 40px rgba(255, 255, 255, 0.6),
+    0 4px 24px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+  opacity: 0;
+  will-change: transform, opacity, filter;
+}
+
+.success-word--welcome {
+  animation: success-word-approach 750ms cubic-bezier(0.25, 0.55, 0.3, 1) forwards;
+  animation-delay: 280ms;
+}
+
+.success-word--back {
+  animation: success-word-approach 450ms cubic-bezier(0.3, 0.5, 0.25, 1) forwards;
+  animation-delay: 980ms;
+}
+
+@keyframes success-word-approach {
+  0% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+    filter: blur(8px);
+  }
+  18% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  55% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.6);
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+/* ---------- Final flash — builds through the last "speed up" second and
+   reaches full white exactly as the sequence ends, so the cut to the
+   destination page lands under solid white instead of a visible pop. ---------- */
+.success-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #fff 0%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0) 80%);
+  opacity: 0;
+  animation: success-flash-build 2400ms cubic-bezier(0.5, 0, 0.75, 0.9) forwards;
+}
+
+@keyframes success-flash-build {
+  0%,
+  45% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.15;
+  }
+  88% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .success-transition {
+    display: none;
+  }
+}
