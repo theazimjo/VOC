@@ -10,12 +10,12 @@
   right: 12px;
   height: 62px;
   padding: 5px;
-  /* Opaque enough on its own to read clearly over any content — blur is
-     there for the frosted-glass feel, not to carry the contrast. */
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  /* Real iOS tab-bar material is mostly opaque, not a see-through pane —
+     the blur is a light frost for depth, not the main event. */
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
   border-radius: 26px;
   z-index: 1000;
   justify-content: space-around;
@@ -25,7 +25,7 @@
 }
 
 [data-theme='android'] .personal-bottom-nav {
-  background: rgba(30, 30, 33, 0.88);
+  background: rgba(28, 28, 30, 0.94);
   border-color: rgba(255, 255, 255, 0.1);
 }
 
