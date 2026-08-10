@@ -3,14 +3,18 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #0a84ff, #0056b3);
+  background: #0A84FF;
   color: #fff !important;
   padding: 12px 20px;
   border-radius: 12px;
   border: none;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(10, 132, 255, 0.25);
+  transition: background 0.2s ease;
+}
+
+.btn-create-group:hover {
+  background: #0070df;
 }
 
 .mgc-more-btn {
@@ -41,7 +45,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #0a84ff, #0056b3);
+  background: #0A84FF;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 700;
@@ -54,7 +58,7 @@
 }
 
 .mobile-fab-btn:hover {
-  background: linear-gradient(135deg, #0066cc, #004499);
+  background: #0070df;
   transform: scale(1.04);
 }
 

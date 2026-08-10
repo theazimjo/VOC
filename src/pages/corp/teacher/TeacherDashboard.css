@@ -22,11 +22,11 @@
      Dark (android theme) values live here as the default; [data-theme="ios"]
      below swaps in the light-glass equivalents. */
   --bg-primary: #0a0a0f;
-  --bg-secondary: rgba(22, 22, 30, 0.88);
-  --bg-tertiary: rgba(255, 255, 255, 0.07);
-  --bg-glass: rgba(22, 22, 30, 0.24);
-  --bg-glass-hover: rgba(255, 255, 255, 0.1);
-  --bg-glass-strong: rgba(22, 22, 30, 0.32);
+  --bg-secondary: #17171f;
+  --bg-tertiary: rgba(255, 255, 255, 0.05);
+  --bg-glass: #1a1a24;
+  --bg-glass-hover: rgba(255, 255, 255, 0.08);
+  --bg-glass-strong: #1a1a24;
   --text-primary: rgba(255, 255, 255, 0.94);
   --text-secondary: rgba(255, 255, 255, 0.68);
   --text-muted: rgba(255, 255, 255, 0.48);
@@ -36,13 +36,13 @@
   /* Premium-glass card recipe (Courses/Statistics/Archive/Settings/
      PackViewer/modals) — same idea, its own token set since those pages
      use a stronger blur/saturate/glow combo than the plain glass above. */
-  --pg-bg: rgba(22, 22, 30, 0.32);
-  --pg-hairline: rgba(255, 255, 255, 0.12);
-  --pg-surface: rgba(255, 255, 255, 0.07);
-  --pg-surface-hover: rgba(255, 255, 255, 0.14);
-  --pg-text: rgba(255, 255, 255, 0.94);
-  --pg-text-secondary: rgba(255, 255, 255, 0.68);
-  --pg-text-muted: rgba(255, 255, 255, 0.48);
+  --pg-bg: #1a1a24;
+  --pg-hairline: rgba(255, 255, 255, 0.08);
+  --pg-surface: rgba(255, 255, 255, 0.04);
+  --pg-surface-hover: rgba(255, 255, 255, 0.08);
+  --pg-text: rgba(255, 255, 255, 0.92);
+  --pg-text-secondary: rgba(255, 255, 255, 0.64);
+  --pg-text-muted: rgba(255, 255, 255, 0.44);
   --pg-inset-highlight: rgba(255, 255, 255, 0.06);
 
   padding: var(--space-xl, 2rem);
@@ -55,23 +55,23 @@
 
 [data-theme="ios"] .teacher-dashboard-container {
   --bg-primary: #eef0f5;
-  --bg-secondary: rgba(255, 255, 255, 0.86);
-  --bg-tertiary: rgba(0, 0, 0, 0.045);
-  --bg-glass: rgba(255, 255, 255, 0.4);
-  --bg-glass-hover: rgba(0, 0, 0, 0.06);
-  --bg-glass-strong: rgba(255, 255, 255, 0.55);
+  --bg-secondary: #ffffff;
+  --bg-tertiary: rgba(0, 0, 0, 0.035);
+  --bg-glass: #ffffff;
+  --bg-glass-hover: rgba(0, 0, 0, 0.05);
+  --bg-glass-strong: #ffffff;
   --text-primary: rgba(0, 0, 0, 0.88);
   --text-secondary: rgba(0, 0, 0, 0.6);
   --text-muted: rgba(0, 0, 0, 0.4);
   --border: rgba(0, 0, 0, 0.1);
   --border-light: rgba(0, 0, 0, 0.06);
 
-  --pg-bg: rgba(255, 255, 255, 0.55);
-  --pg-hairline: rgba(0, 0, 0, 0.1);
-  --pg-surface: rgba(0, 0, 0, 0.045);
-  --pg-surface-hover: rgba(0, 0, 0, 0.08);
+  --pg-bg: #ffffff;
+  --pg-hairline: rgba(0, 0, 0, 0.08);
+  --pg-surface: rgba(0, 0, 0, 0.03);
+  --pg-surface-hover: rgba(0, 0, 0, 0.06);
   --pg-text: rgba(0, 0, 0, 0.88);
-  --pg-text-secondary: rgba(0, 0, 0, 0.6);
+  --pg-text-secondary: rgba(0, 0, 0, 0.58);
   --pg-text-muted: rgba(0, 0, 0, 0.4);
   --pg-inset-highlight: rgba(255, 255, 255, 0.6);
 }

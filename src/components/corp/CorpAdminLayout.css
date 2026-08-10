@@ -34,7 +34,7 @@
 @media (max-width: 768px) {
   .corp-admin-main-pane {
     margin-left: 0 !important;
-    padding-bottom: 80px !important;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
     background-attachment: scroll;
   }
 }

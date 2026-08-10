@@ -1,7 +1,7 @@
 .announcement-list-card {
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
-  border-radius: 20px;
+  border-radius: 14px;
   padding: 1.5rem;
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
   -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);

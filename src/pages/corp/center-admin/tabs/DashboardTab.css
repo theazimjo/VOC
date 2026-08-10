@@ -62,14 +62,9 @@
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
   padding: 0.85rem 1rem;
-  border-radius: 16px;
+  border-radius: 10px;
   color: var(--pg-text);
-  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
-  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 var(--pg-inset-highlight) inset,
-    0 0 90px rgba(124, 108, 255, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -106,17 +101,12 @@
 .teacher-card, .custom-pack-card {
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
-  border-radius: 18px;
+  border-radius: 12px;
   padding: 1.1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
-  -webkit-backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.22),
-    0 1px 0 var(--pg-inset-highlight) inset,
-    0 0 90px rgba(124, 108, 255, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .teacher-card-head {

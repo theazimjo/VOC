@@ -5,7 +5,7 @@
 .bottom-nav {
   display: none;
   position: fixed;
-  bottom: 10px;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   left: 12px;
   right: 12px;
   height: 62px;

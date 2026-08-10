@@ -171,7 +171,7 @@
   width: 210px;
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
-  border-radius: 16px;
+  border-radius: 10px;
   padding: 8px;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(22px) saturate(180%) brightness(1.08);
@@ -824,7 +824,7 @@
 .word-modal-card {
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
-  border-radius: 20px;
+  border-radius: 14px;
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
@@ -1015,7 +1015,7 @@
 .pdf-modal-card {
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
-  border-radius: 20px;
+  border-radius: 14px;
   width: 100%;
   max-width: 500px;
   margin: 0 auto;

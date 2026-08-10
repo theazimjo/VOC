@@ -146,19 +146,9 @@ export default function EditGroupModal({ p }) {
 
             <button
               type="submit"
+              className="btn-primary"
               disabled={submittingEditGroup}
-              style={{
-                padding: '8px 18px',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
-                border: 'none',
-                color: '#ffffff',
-                fontSize: '0.84rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                opacity: submittingEditGroup ? 0.7 : 1,
-                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)'
-              }}
+              style={{ opacity: submittingEditGroup ? 0.7 : 1 }}
             >
               {submittingEditGroup ? 'Saving...' : 'Save'}
             </button>

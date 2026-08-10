@@ -3,13 +3,13 @@
    [data-theme="ios"] below swaps in the light-glass equivalents, so this
    whole section respects the app's light/dark setting. */
 .center-admin-container {
-  --pg-bg: rgba(22, 22, 30, 0.32);
-  --pg-hairline: rgba(255, 255, 255, 0.12);
-  --pg-surface: rgba(255, 255, 255, 0.07);
-  --pg-surface-hover: rgba(255, 255, 255, 0.14);
-  --pg-text: rgba(255, 255, 255, 0.94);
-  --pg-text-secondary: rgba(255, 255, 255, 0.68);
-  --pg-text-muted: rgba(255, 255, 255, 0.48);
+  --pg-bg: #1a1a24;
+  --pg-hairline: rgba(255, 255, 255, 0.08);
+  --pg-surface: rgba(255, 255, 255, 0.04);
+  --pg-surface-hover: rgba(255, 255, 255, 0.08);
+  --pg-text: rgba(255, 255, 255, 0.92);
+  --pg-text-secondary: rgba(255, 255, 255, 0.64);
+  --pg-text-muted: rgba(255, 255, 255, 0.44);
   --pg-inset-highlight: rgba(255, 255, 255, 0.06);
 
   padding: 2rem;
@@ -20,12 +20,12 @@
 }
 
 [data-theme="ios"] .center-admin-container {
-  --pg-bg: rgba(255, 255, 255, 0.55);
-  --pg-hairline: rgba(0, 0, 0, 0.1);
-  --pg-surface: rgba(0, 0, 0, 0.045);
-  --pg-surface-hover: rgba(0, 0, 0, 0.08);
+  --pg-bg: #ffffff;
+  --pg-hairline: rgba(0, 0, 0, 0.08);
+  --pg-surface: rgba(0, 0, 0, 0.03);
+  --pg-surface-hover: rgba(0, 0, 0, 0.06);
   --pg-text: rgba(0, 0, 0, 0.88);
-  --pg-text-secondary: rgba(0, 0, 0, 0.6);
+  --pg-text-secondary: rgba(0, 0, 0, 0.58);
   --pg-text-muted: rgba(0, 0, 0, 0.4);
   --pg-inset-highlight: rgba(255, 255, 255, 0.6);
 }
