@@ -37,25 +37,25 @@ export function getConfusionPairsForWord(wordId, allConfusionPairs = []) {
 const RECOMMENDATIONS = {
   confusion: (detail) => ({
     type: 'contrastive',
-    label: 'Solishtirib mashq qilish (Contrastive Review)',
+    label: 'Contrastive Review',
     description: detail?.partnerWord
-      ? `"${detail.word}" so'zini "${detail.partnerWord}" bilan solishtirib mashq qiling — ikkalasini yonma-yon ko'rish farqni miyada mustahkamlaydi.`
-      : "Bu so'zni unga o'xshash so'zlar bilan solishtirib mashq qiling.",
+      ? `Practice "${detail.word}" alongside "${detail.partnerWord}" — seeing both side by side helps the brain lock in the difference.`
+      : "Practice this word alongside similar-looking or similar-sounding words.",
   }),
   interval: () => ({
     type: 'active_recall',
-    label: "Ko'proq faol takrorlash",
-    description: "Takrorlash oralig'i bu so'z uchun juda uzun bo'lgan ko'rinadi — uni tez-tez, ayniqsa yozib (active recall) takrorlashga harakat qiling.",
+    label: "More active recall",
+    description: "The review gap for this word seems too long — try reviewing it more frequently, especially by typing it (active recall).",
   }),
   confidence: () => ({
     type: 'context_example',
-    label: "Misollar bilan mustahkamlash",
-    description: "Bu so'zni alohida emas, jumla va misollar ichida qayta o'rganing — kontekst xotirani chuqurroq mustahkamlaydi.",
+    label: "Reinforce with examples",
+    description: "Re-learn this word inside full sentences and examples rather than in isolation — context creates deeper memory traces.",
   }),
   exposure: () => ({
     type: 'active_recall',
-    label: "Ko'proq amaliyot",
-    description: "Bu so'z hali kam marta ko'rilgan — xotira izi hali yetarlicha shakllanmagan, ko'proq mashq qiling.",
+    label: "More practice needed",
+    description: "This word has been seen only a few times — the memory trace hasn't formed yet. Keep practicing.",
   }),
 };
 
@@ -104,25 +104,25 @@ export function diagnoseForgetting(memory, confusionPairsForWord = []) {
   const rawFactors = [
     {
       key: 'confusion',
-      label: "So'zlar aralashtirilishi",
+      label: "Word confusion",
       score: confusionScore,
       detail: { word: memory?.wordData?.word, partnerWord: topConfusion?.partnerWord, count: topConfusion?.count },
     },
     {
       key: 'interval',
-      label: "Uzoq takrorlash oralig'i",
+      label: "Long review gap",
       score: intervalScore,
       detail: { predictedP: predictedPAtFailure },
     },
     {
       key: 'confidence',
-      label: "Zaif ishonch darajasi",
+      label: "Weak confidence",
       score: confidenceScore,
       detail: { avgConfidence: Math.round(avgConfidence * 10) / 10 },
     },
     {
       key: 'exposure',
-      label: "Kam marta ko'rilgan",
+      label: "Seen too few times",
       score: exposureScore,
       detail: { totalReviews },
     },

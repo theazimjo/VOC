@@ -52,6 +52,14 @@ const CALIBRATION_MIN = 0.7;
 const CALIBRATION_MAX = 1.4;
 
 /**
+ * Hard cap on stability (days). Beyond this point a word is fully mastered
+ * and scheduling further than ~100 days out is both impractical (the user
+ * will have forgotten even the app exists) and creates confusing UI strings
+ * like "84520 kundan keyin". 365 days keeps the math honest.
+ */
+const MAX_STABILITY = 365;
+
+/**
  * Minimum sample size before a calibration is trusted over the neutral
  * default. Lowered from 8 now that the topic catalog (semanticClassifier.js)
  * has grown from 5 to 15 clusters — more clusters means fewer reviews land
@@ -205,7 +213,7 @@ export function updateStability(
   const boundedMultiplier = Math.max(CALIBRATION_MIN, Math.min(CALIBRATION_MAX, clusterMultiplier || 1.0));
   const alpha = rawAlpha * boundedMultiplier;
 
-  const S_new = S * (1 + alpha);
+  const S_new = Math.min(S * (1 + alpha), MAX_STABILITY);
   return Math.round(S_new * 100) / 100;
 }
 
@@ -290,12 +298,12 @@ export function getOptimalReviewDate(stability, targetRecall = TARGET_RECALL) {
  */
 export function getForgettingCurvePoints(stability) {
   const checkpoints = [
-    { label: 'Hozir', days: 0 },
-    { label: '1 kun', days: 1 },
-    { label: '3 kun', days: 3 },
-    { label: '7 kun', days: 7 },
-    { label: '14 kun', days: 14 },
-    { label: '30 kun', days: 30 },
+    { label: 'Now', days: 0 },
+    { label: '1 day', days: 1 },
+    { label: '3 days', days: 3 },
+    { label: '7 days', days: 7 },
+    { label: '14 days', days: 14 },
+    { label: '30 days', days: 30 },
   ];
   return checkpoints.map(cp => ({
     ...cp,
@@ -443,11 +451,11 @@ export function computeInitialStability(categoryMastery = 0, globalAdjustment = 
  * @returns {{ label:string, color:string, icon:string }}
  */
 export function getMemoryHealth(stability, nextOptimalReview) {
-  if (!nextOptimalReview) return { label: "Yangi", color: '#8b8fa8', icon: '🆕' };
-  if (stability >= 20) return { label: "Kuchli xotira", color: '#34d399', icon: '💪' };
-  if (stability >= 10) return { label: "Yaxshi", color: '#60a5fa', icon: '⭐' };
-  if (stability >= 5)  return { label: "O'rtacha", color: '#f59e0b', icon: '📈' };
-  return { label: "Zaif xotira", color: '#f87171', icon: '🌱' };
+  if (!nextOptimalReview) return { label: "New", color: '#8b8fa8', icon: '🆕' };
+  if (stability >= 20) return { label: "Strong memory", color: '#34d399', icon: '💪' };
+  if (stability >= 10) return { label: "Good", color: '#60a5fa', icon: '⭐' };
+  if (stability >= 5)  return { label: "Average", color: '#f59e0b', icon: '📈' };
+  return { label: "Weak memory", color: '#f87171', icon: '🌱' };
 }
 
 /**
@@ -462,7 +470,7 @@ export function getMemoryHealth(stability, nextOptimalReview) {
  */
 export function explainSchedulingDecision(stability, lastReview, nextOptimalReview) {
   if (!lastReview) {
-    return "Bu so'z hali birinchi marta ko'rilmagan — shuning uchun navbatning boshida turibdi.";
+    return "This word hasn't been seen yet — it's at the front of the queue.";
   }
 
   const daysSince = (Date.now() - new Date(lastReview).getTime()) / (86400 * 1000);
@@ -471,15 +479,15 @@ export function explainSchedulingDecision(stability, lastReview, nextOptimalRevi
   const targetPct = Math.round(TARGET_RECALL * 100);
 
   if (p <= TARGET_RECALL) {
-    return `Eslab qolish ehtimoli hozir ${pct}% ga tushdi (maqsad chegara: ${targetPct}%) — shuning uchun aynan hozir takrorlash tavsiya qilinmoqda.`;
+    return `Recall probability has dropped to ${pct}% (target threshold: ${targetPct}%) — reviewing now is recommended.`;
   }
 
   const daysUntil = nextOptimalReview
-    ? Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
+    ? Math.min(365, Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000))))
     : null;
 
-  return `Eslab qolish ehtimoli hali ${pct}% — yetarlicha yuqori.` +
-    (daysUntil !== null ? ` Keyingi optimal takrorlash ${daysUntil} kundan keyin.` : '');
+  return `Recall probability is still ${pct}% — memory is strong.` +
+    (daysUntil !== null ? ` Next optimal review in ${daysUntil} day${daysUntil === 1 ? '' : 's'}.` : '');
 }
 
 /**

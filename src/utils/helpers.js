@@ -188,7 +188,8 @@ export function formatNextReview(dateStr) {
   if (days === 1) return "Ertaga";
   if (days < 7) return `${days} kundan keyin`;
   if (days < 30) return `${Math.floor(days / 7)} haftadan keyin`;
-  return `${Math.floor(days / 30)} oydan keyin`;
+  if (days < 365) return `${Math.floor(days / 30)} oydan keyin`;
+  return "1 yildan keyin";
 }
 
 /**

@@ -16,8 +16,8 @@ const SIMULATOR_DAYS = [1, 3, 7, 14];
 
 // ─── Forgetting Curve SVG ─────────────────────────────────────────────────────
 
-function ForgettingCurve({ stability, width = 280, height = 100 }) {
-  const MAX_DAYS = 30;
+function ForgettingCurve({ stability, daysSince = 0, width = 280, height = 100 }) {
+  const MAX_DAYS = Math.max(30, Math.ceil(daysSince) + 10); // extend view if word is overdue
 
   // Generate SVG path from continuous curve
   const pathD = useMemo(() => {
@@ -31,12 +31,17 @@ function ForgettingCurve({ stability, width = 280, height = 100 }) {
       pts.push(`${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`);
     }
     return pts.join(' ');
-  }, [stability, width, height]);
+  }, [stability, width, height, MAX_DAYS]);
 
   // Area fill path
   const areaD = pathD + ` L${width},${height} L0,${height} Z`;
 
-  // Checkpoint dots
+  // "Now" marker — where the user currently sits on the curve
+  const nowX = Math.min((daysSince / MAX_DAYS) * width, width);
+  const nowP = computeRecallProbability(stability, daysSince);
+  const nowY = height - nowP * height;
+
+  // Checkpoint dots (at t=0 and standard future offsets from now)
   const checkpoints = getForgettingCurvePoints(stability);
   const dots = checkpoints.map(cp => ({
     ...cp,
@@ -91,6 +96,18 @@ function ForgettingCurve({ stability, width = 280, height = 100 }) {
         opacity={0.7}
       />
 
+      {/* "You are here" vertical line */}
+      {daysSince > 0 && (
+        <line
+          x1={nowX} y1={0}
+          x2={nowX} y2={height}
+          stroke="var(--text-muted)"
+          strokeWidth={1}
+          strokeDasharray="3 3"
+          opacity={0.5}
+        />
+      )}
+
       {/* Checkpoint dots */}
       {dots.map((d, i) => (
         <circle
@@ -107,6 +124,22 @@ function ForgettingCurve({ stability, width = 280, height = 100 }) {
           strokeWidth={1.5}
         />
       ))}
+
+      {/* "Now" marker dot */}
+      {daysSince > 0 && (
+        <circle
+          cx={nowX}
+          cy={nowY}
+          r={5}
+          fill={
+            nowP >= 0.75 ? 'var(--success)'
+            : nowP >= 0.5 ? 'var(--warning)'
+            : 'var(--error)'
+          }
+          stroke="white"
+          strokeWidth={2}
+        />
+      )}
     </svg>
   );
 }
@@ -141,9 +174,30 @@ function WordInsightCard({ memory, confusionPairs }) {
   const difficulty = Number(memory.difficulty) || 0.5;
   const totalReviews = Number(memory.totalReviews) || 0;
 
+  // Days elapsed since last review — this shifts where "Now" sits on the forgetting curve.
+  const daysSinceLastReview = lastReview
+    ? Math.max(0, (Date.now() - new Date(lastReview).getTime()) / (24 * 60 * 60 * 1000))
+    : 0;
+
   const health = getMemoryHealth(stability, nextOptimalReview);
   const due = isDue(nextOptimalReview);
-  const checkpoints = getForgettingCurvePoints(stability);
+
+  // Build time-aware checkpoints: "Now" = P at current elapsed time, then future offsets.
+  // Future offsets are days FROM NOW, not from last review.
+  const futureOffsets = [
+    { label: 'Now', addDays: 0 },
+    { label: '+1 day', addDays: 1 },
+    { label: '+3 days', addDays: 3 },
+    { label: '+7 days', addDays: 7 },
+    { label: '+14 days', addDays: 14 },
+    { label: '+30 days', addDays: 30 },
+  ];
+  const checkpoints = futureOffsets.map(({ label, addDays }) => ({
+    label,
+    days: daysSinceLastReview + addDays,
+    probability: computeRecallProbability(stability, daysSinceLastReview + addDays),
+  }));
+
   const explanation = explainSchedulingDecision(stability, lastReview, nextOptimalReview);
 
   const daysUntilNext = nextOptimalReview && !due
@@ -205,9 +259,14 @@ function WordInsightCard({ memory, confusionPairs }) {
           >
             <div className="mem-curve-container">
               <div className="mem-curve-label">Forgetting curve (P = e⁻ᵗ/ˢ)</div>
-              <ForgettingCurve stability={stability} />
+              <ForgettingCurve stability={stability} daysSince={daysSinceLastReview} />
               <div className="mem-curve-legend">
                 <span style={{ color: 'var(--success)' }}>— 75% target</span>
+                {daysSinceLastReview > 0.1 && (
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>
+                    ● now ({Math.round(daysSinceLastReview)} days since last review)
+                  </span>
+                )}
               </div>
             </div>
 
@@ -217,7 +276,11 @@ function WordInsightCard({ memory, confusionPairs }) {
             </div>
 
             <div className="mem-checkpoint-table">
-              {checkpoints.map(cp => (
+              {totalReviews === 0 ? (
+                <div className="mem-explain-box" style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+                  No review data yet — recall probabilities will appear after the first session.
+                </div>
+              ) : checkpoints.map(cp => (
                 <div key={cp.label} className="mem-checkpoint-row">
                   <span className="mem-cp-label">{cp.label}</span>
                   <div className="mem-cp-bar-wrap">
