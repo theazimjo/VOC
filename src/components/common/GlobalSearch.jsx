@@ -247,62 +247,66 @@ export default function GlobalSearch({ isOpen, onClose }) {
               {packResults.length > 0 && (
                 <div className="global-search-section">
                   <div className="global-search-section-title">Topics</div>
-                  {packResults.map(pack => (
-                    <button
-                      key={pack.id}
-                      className="global-search-pack-item"
-                      onClick={() => handleResultClick(pack)}
-                    >
-                      <div className="global-search-pack-icon">
-                        {pack.icon ? pack.icon : <Package size={16} strokeWidth={2.2} />}
-                      </div>
-                      <div className="global-search-pack-info">
-                        <div className="global-search-pack-name">{pack.name}</div>
-                        {pack.isCorp && (
-                          <div style={{ fontSize: '0.62rem', background: '#22c55e', color: '#fff', padding: '1px 5px', borderRadius: '4px', width: 'fit-content', marginTop: '2px', fontWeight: 600 }}>
-                            Group
-                          </div>
-                        )}
-                        <div className="global-search-pack-count">{pack.wordCount || 0} words</div>
-                      </div>
-                      <ChevronRight size={16} strokeWidth={2.3} className="global-search-chevron" />
-                    </button>
-                  ))}
+                  <div className="global-search-card">
+                    {packResults.map(pack => (
+                      <button
+                        key={pack.id}
+                        className="global-search-pack-item"
+                        onClick={() => handleResultClick(pack)}
+                      >
+                        <div className="global-search-pack-icon">
+                          {pack.icon ? pack.icon : <Package size={16} strokeWidth={2.2} />}
+                        </div>
+                        <div className="global-search-pack-info">
+                          <div className="global-search-pack-name">{pack.name}</div>
+                          {pack.isCorp && (
+                            <div style={{ fontSize: '0.62rem', background: '#22c55e', color: '#fff', padding: '1px 5px', borderRadius: '4px', width: 'fit-content', marginTop: '2px', fontWeight: 600 }}>
+                              Group
+                            </div>
+                          )}
+                          <div className="global-search-pack-count">{pack.wordCount || 0} words</div>
+                        </div>
+                        <ChevronRight size={16} strokeWidth={2.3} className="global-search-chevron" />
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
 
               {wordResults.length > 0 && (
                 <div className="global-search-section">
                   <div className="global-search-section-title">Words</div>
-                  {wordResults.map(word => {
-                    const masteryInfo = getMasteryLevel(word.mastery || 0);
-                    return (
-                      <button
-                        key={word.id}
-                        className="global-search-word-item"
-                        onClick={() => handleResultClick(word)}
-                      >
-                        <div
-                          className="global-search-word-icon"
-                          style={{ backgroundColor: `${masteryInfo.color}15`, color: masteryInfo.color }}
+                  <div className="global-search-card">
+                    {wordResults.map(word => {
+                      const masteryInfo = getMasteryLevel(word.mastery || 0);
+                      return (
+                        <button
+                          key={word.id}
+                          className="global-search-word-item"
+                          onClick={() => handleResultClick(word)}
                         >
-                          {masteryInfo.icon}
-                        </div>
-                        <div className="global-search-word-info">
-                          <div className="global-search-word-text">{word.word}</div>
-                          <div className="global-search-word-translation">{word.translation}</div>
-                        </div>
-                        <div className="global-search-word-source" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
-                          <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>{word.source}</span>
-                          {word.sourceType === 'corp' && (
-                            <span style={{ fontSize: '0.62rem', background: 'rgba(34, 197, 94, 0.15)', color: '#22c55e', padding: '1px 5px', borderRadius: '3px', fontWeight: 600 }}>
-                              Group
-                            </span>
-                          )}
-                        </div>
-                      </button>
-                    );
-                  })}
+                          <div
+                            className="global-search-word-icon"
+                            style={{ backgroundColor: `${masteryInfo.color}15`, color: masteryInfo.color }}
+                          >
+                            {masteryInfo.icon}
+                          </div>
+                          <div className="global-search-word-info">
+                            <div className="global-search-word-text">{word.word}</div>
+                            <div className="global-search-word-translation">{word.translation}</div>
+                          </div>
+                          <div className="global-search-word-source" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '2px' }}>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>{word.source}</span>
+                            {word.sourceType === 'corp' && (
+                              <span style={{ fontSize: '0.62rem', background: 'rgba(34, 197, 94, 0.15)', color: '#22c55e', padding: '1px 5px', borderRadius: '3px', fontWeight: 600 }}>
+                                Group
+                              </span>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
