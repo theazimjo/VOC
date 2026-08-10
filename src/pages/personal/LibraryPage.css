@@ -8,55 +8,62 @@
   display: flex;
   justify-content: flex-start;
   margin-bottom: var(--space-lg);
+  width: 100%;
 }
 
 .library-tabs {
-  display: inline-flex;
-  background: var(--segmented-bg, rgba(120, 120, 128, 0.2));
-  border: none;
-  border-radius: 9px;
-  padding: 2px;
+  display: flex;
+  align-items: center;
+  background: var(--segmented-bg, rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 3px;
   width: 100%;
   max-width: 360px;
   position: relative;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
 }
 
 .library-tab-btn {
   background: transparent;
   border: none;
-  padding: 6px 12px;
-  color: var(--text-secondary);
+  height: 38px;
+  padding: 0 14px;
+  color: var(--text-secondary, rgba(255, 255, 255, 0.6));
   font-family: var(--font-family);
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.88rem;
+  font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xs);
+  gap: 8px;
   position: relative;
-  transition: color var(--transition-base);
+  transition: color 0.2s ease;
   outline: none;
   flex: 1;
-  border-radius: 7px;
+  border-radius: 9px;
   white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .library-tab-btn:hover {
-  color: var(--text-primary);
+  color: var(--text-primary, #ffffff);
 }
 
 .library-tab-btn.active {
-  color: var(--text-primary);
+  color: var(--text-primary, #ffffff);
 }
 
 /* Active tab pill sliding background container */
 .active-tab-pill {
   position: absolute;
   inset: 0;
-  background: var(--segmented-active-bg, var(--bg-secondary));
-  border-radius: 7px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  background: var(--segmented-active-bg, rgba(255, 255, 255, 0.16));
+  border-radius: 9px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.12);
   z-index: 0;
 }
 
@@ -64,27 +71,39 @@
   position: relative;
   z-index: 1;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 /* Count badge inside tab */
 .tab-count-badge {
-  background: var(--bg-tertiary);
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.14);
   border: none;
-  padding: 1px 6px;
-  border-radius: var(--radius-full);
-  font-size: 0.7rem;
-  color: var(--text-muted);
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 700;
-  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .library-tab-btn:hover .tab-count-badge {
-  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
 }
 
 .library-tab-btn.active .tab-count-badge {
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
 }
 
 /* Folder detail header: back arrow, folder title, edit/delete trigger */
@@ -160,16 +179,19 @@
 
   .library-tabs-container {
     justify-content: center;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
   }
 
   .library-tabs {
-    max-width: none; /* Take full width on mobile */
+    max-width: 360px;
+    width: 100%;
   }
 
   .library-tab-btn {
-    padding: 8px 12px;
-    font-size: var(--font-xs);
+    height: 38px;
+    padding: 0 10px;
+    font-size: 0.84rem;
+    gap: 6px;
   }
 
   .library-page .grid-cards {

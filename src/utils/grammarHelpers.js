@@ -44,12 +44,12 @@ export function getQuestionsForExercise(topic, exerciseIdStr) {
 
 export function getExerciseType(exerciseId) {
   const types = {
-    1: { name: 'Ko\'p tanlovli', icon: '🎯', color: '#F59E0B' },
-    2: { name: 'Bo\'shliq to\'ldirish', icon: '✏️', color: '#10B981' },
-    3: { name: 'Gap yig\'ish', icon: '🔀', color: '#6366F1' },
-    4: { name: 'Xato topish', icon: '🔍', color: '#EF4444' },
-    5: { name: 'Transformatsiya', icon: '🔄', color: '#8B5CF6' },
-    6: { name: 'Muloqot', icon: '💬', color: '#06B6D4' },
+    1: { name: 'Multiple Choice', icon: '🎯', color: '#F59E0B' },
+    2: { name: 'Fill in the Blanks', icon: '✏️', color: '#10B981' },
+    3: { name: 'Sentence Building', icon: '🔀', color: '#6366F1' },
+    4: { name: 'Error Correction', icon: '🔍', color: '#EF4444' },
+    5: { name: 'Sentence Transformation', icon: '🔄', color: '#8B5CF6' },
+    6: { name: 'Situational Dialogues', icon: '💬', color: '#06B6D4' },
   };
   return types[parseInt(exerciseId, 10)] || types[1];
 }

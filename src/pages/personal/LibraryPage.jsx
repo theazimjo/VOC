@@ -353,7 +353,7 @@ export default function LibraryPage() {
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
             <span className="tab-label">🛒 Market</span>
-            <span className="tab-count-badge" style={{ background: 'var(--accent)', color: 'white', borderColor: 'transparent' }}>
+            <span className="tab-count-badge">
               {marketPacks.length}
             </span>
           </button>

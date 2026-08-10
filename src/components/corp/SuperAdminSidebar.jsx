@@ -18,11 +18,11 @@ export default function SuperAdminSidebar({ email }) {
   };
 
   const navItems = [
-    { to: '/corp/super-admin', label: 'Boshqaruv', icon: LayoutDashboard, end: true },
-    { to: '/corp/super-admin/centers', label: 'Markazlar', icon: Building2 },
-    { to: '/corp/super-admin/users', label: 'Foydalanuvchilar', icon: Users },
-    { to: '/corp/super-admin/announcements', label: 'E\'lonlar', icon: Megaphone },
-    { to: '/corp/super-admin/settings', label: 'Sozlamalar', icon: Settings },
+    { to: '/corp/super-admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
+    { to: '/corp/super-admin/centers', label: 'Centers', icon: Building2 },
+    { to: '/corp/super-admin/users', label: 'Users', icon: Users },
+    { to: '/corp/super-admin/announcements', label: 'Announcements', icon: Megaphone },
+    { to: '/corp/super-admin/settings', label: 'Settings', icon: Settings },
   ];
 
   return (
@@ -41,8 +41,8 @@ export default function SuperAdminSidebar({ email }) {
         <button
           className="sidebar-collapse-toggle"
           onClick={() => setCollapsed(!collapsed)}
-          title={collapsed ? "Kengaytirish" : "Yig'ish"}
-          aria-label={collapsed ? "Kengaytirish" : "Yig'ish"}
+          title={collapsed ? "Expand" : "Collapse"}
+          aria-label={collapsed ? "Expand" : "Collapse"}
         >
           {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
         </button>
@@ -77,9 +77,9 @@ export default function SuperAdminSidebar({ email }) {
           </div>
         )}
 
-        <button className="btn-corp-logout" onClick={handleLogout} title="Chiqish">
+        <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
           <LogOut size={16} strokeWidth={2.2} />
-          {!collapsed && <span>Chiqish</span>}
+          {!collapsed && <span>Log out</span>}
         </button>
       </div>
     </aside>

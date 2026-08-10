@@ -35,7 +35,7 @@ export default function CorpAdminSidebar({ centerName, email }) {
         </div>
         {!collapsed && (
           <div className="brand-text-meta">
-            <span className="center-title">{centerName || "O'quv Markazi"}</span>
+            <span className="center-title">{centerName || "Learning Center"}</span>
             <span className="center-role-tag">Center Admin</span>
           </div>
         )}
@@ -43,8 +43,8 @@ export default function CorpAdminSidebar({ centerName, email }) {
         <button
           className="sidebar-collapse-toggle"
           onClick={() => setCollapsed(!collapsed)}
-          title={collapsed ? "Kengaytirish" : "Yig'ish"}
-          aria-label={collapsed ? "Kengaytirish" : "Yig'ish"}
+          title={collapsed ? "Expand" : "Collapse"}
+          aria-label={collapsed ? "Expand" : "Collapse"}
         >
           {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
         </button>
@@ -83,9 +83,9 @@ export default function CorpAdminSidebar({ centerName, email }) {
           </div>
         )}
 
-        <button className="btn-corp-logout" onClick={handleLogout} title="Chiqish">
+        <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
           <LogOut size={16} strokeWidth={2.2} />
-          {!collapsed && <span>Chiqish</span>}
+          {!collapsed && <span>Log out</span>}
         </button>
       </div>
     </aside>

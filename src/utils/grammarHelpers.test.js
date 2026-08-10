@@ -52,11 +52,11 @@ describe('getQuestionsForExercise', () => {
 
 describe('getExerciseType', () => {
   it('returns the multiple-choice type for exercise 1', () => {
-    expect(getExerciseType(1).name).toBe("Ko'p tanlovli");
+    expect(getExerciseType(1).name).toBe("Multiple Choice");
   });
 
   it('returns the dialogue type for exercise 6', () => {
-    expect(getExerciseType(6).name).toBe('Muloqot');
+    expect(getExerciseType(6).name).toBe('Situational Dialogues');
   });
 
   it('falls back to exercise 1 for an unknown id', () => {
@@ -64,6 +64,6 @@ describe('getExerciseType', () => {
   });
 
   it('accepts a string exercise id', () => {
-    expect(getExerciseType('2').name).toBe("Bo'shliq to'ldirish");
+    expect(getExerciseType('2').name).toBe("Fill in the Blanks");
   });
 });

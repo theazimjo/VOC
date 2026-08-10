@@ -7,11 +7,11 @@ import './Sidebar.css';
 
 const baseNavItems = [
   { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/library',  icon: BookOpen,        label: 'Kutubxona' },
-  { to: '/grammar',  icon: GraduationCap,   label: 'Grammatika' },
-  { to: '/grammar-test', icon: Trophy,       label: 'Imtihon' },
+  { to: '/library',  icon: BookOpen,        label: 'Library' },
+  { to: '/grammar',  icon: GraduationCap,   label: 'Grammar' },
+  { to: '/grammar-test', icon: Trophy,       label: 'Exams' },
   { to: '/experiment', icon: FlaskConical,   label: 'Memory Lab' },
-  { to: '/settings', icon: Settings,        label: 'Sozlamalar' },
+  { to: '/settings', icon: Settings,        label: 'Settings' },
 ];
 
 
@@ -67,8 +67,8 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
           <button
             className="sidebar-toggle"
             onClick={onToggle}
-            aria-label={collapsed ? 'Kengaytirish' : 'Yig\'ish'}
-            title={collapsed ? 'Kengaytirish' : 'Yig\'ish'}
+            aria-label={collapsed ? 'Expand' : 'Collapse'}
+            title={collapsed ? 'Expand' : 'Collapse'}
           >
             {collapsed ? <ChevronRight size={16} strokeWidth={2.4} /> : <ChevronLeft size={16} strokeWidth={2.4} />}
           </button>
@@ -109,15 +109,15 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
           </div>
           <div className="sidebar-user-info">
             <div className="sidebar-user-name">
-              {user?.displayName || 'Foydalanuvchi'}
+              {user?.displayName || 'User'}
             </div>
             <div className="sidebar-user-email">{user?.email}</div>
           </div>
           <button
             className="sidebar-logout"
             onClick={handleLogout}
-            title="Chiqish"
-            aria-label="Chiqish"
+            title="Log Out"
+            aria-label="Log Out"
           >
             <LogOut size={16} strokeWidth={2.2} />
           </button>
