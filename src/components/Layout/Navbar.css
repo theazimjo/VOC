@@ -16,6 +16,27 @@
   transition: left var(--transition-slow);
 }
 
+/* ---------- Corp student — iOS-standard toolbar material ----------
+   Mostly-opaque glass (not a see-through pane — same lesson as the bottom
+   nav) with a soft shadow-based edge instead of a hard divider line, per
+   the "scroll edge effects, not hard dividers" material guidance. */
+.navbar--corp-student {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: none;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='android'] .navbar--corp-student {
+  background: rgba(28, 28, 30, 0.94);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
 /* left offset matches sidebar */
 .navbar--expanded {
   left: var(--sidebar-width);

@@ -199,7 +199,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     <header
       className={`navbar ${
         appMode === 'group'
-          ? 'navbar--expanded'
+          ? 'navbar--expanded navbar--corp-student'
           : (sidebarCollapsed ? 'navbar--collapsed' : 'navbar--expanded')
       }`}
     >
