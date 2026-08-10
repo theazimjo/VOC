@@ -10,15 +10,23 @@
   right: 12px;
   height: 62px;
   padding: 5px;
-  background: var(--bg-glass-strong);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  /* Opaque enough on its own to read clearly over any content — blur is
+     there for the frosted-glass feel, not to carry the contrast. */
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
   border-radius: 26px;
   z-index: 1000;
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme='android'] .corp-bottom-nav {
+  background: rgba(30, 30, 33, 0.88);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Specular edge — the bright rim of light a glass surface catches along
