@@ -1,0 +1,135 @@
+/* ═══════════════════════════════════════════
+   PERSONAL BOTTOM NAV — iOS Liquid Glass
+   ═══════════════════════════════════════════ */
+
+.personal-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  left: 12px;
+  right: 12px;
+  height: 62px;
+  padding: 5px;
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-radius: 26px;
+  z-index: 1000;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* Specular edge — the bright rim of light a glass surface catches along
+   its top, fading through the sides (same recipe as the auth card). */
+.personal-bottom-nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.12) 30%,
+    rgba(255, 255, 255, 0) 55%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+[data-theme='android'] .personal-bottom-nav::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.06) 30%,
+    rgba(255, 255, 255, 0) 55%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+}
+
+/* Sliding pill — one shared element that glides behind whichever tab is
+   active, instead of each tab toggling its own background on and off. */
+.personal-bottom-nav-pill {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  border-radius: 18px;
+  background: var(--accent-1-dim);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Each Nav Item ───────────────────────── */
+.personal-bottom-nav-link {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  flex: 1;
+  height: 52px;
+  border-radius: 18px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Icon Wrapper ─────────────────────────── */
+.personal-bottom-nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 24px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Label ─────────────────────────────────── */
+.personal-bottom-nav-label {
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+/* ── Hover (Desktop Touch Preview) ─────────── */
+.personal-bottom-nav-link:hover {
+  color: var(--text-primary);
+}
+
+/* ── Active State — color/weight/scale only; the background lives in the
+   sliding pill above, not per-item. ─────────── */
+.personal-bottom-nav-link.active {
+  color: var(--accent-1);
+  font-weight: 700;
+}
+
+.personal-bottom-nav-link.active .personal-bottom-nav-icon {
+  transform: scale(1.1);
+}
+
+/* ── Show on Mobile ────────────────────────── */
+@media (max-width: 768px) {
+  .personal-bottom-nav {
+    display: flex;
+  }
+}
+
+/* ── Reduced transparency — frost the glass into a near-solid bar ───── */
+@media (prefers-reduced-transparency: reduce) {
+  .personal-bottom-nav {
+    background: var(--bg-secondary);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
