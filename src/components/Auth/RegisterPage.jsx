@@ -1,37 +1,32 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
-import './LoginPage.css'; // Asosiy iOS stillar
+import './LoginPage.css'; // Glass material, background video, card chrome
 import './RegisterPage.css'; // Parol indikatori uchun stillar
 
-// Subtle, smooth ambient animations for the orbs (iOS style)
-const orbVariants = {
-  animate: (i) => ({
-    x: [0, 20 * Math.sin(i * 1.2), -15 * Math.cos(i), 0],
-    y: [0, -20 * Math.cos(i * 0.8), 25 * Math.sin(i), 0],
-    scale: [1, 1.05, 0.98, 1],
-    transition: {
-      duration: 15 + i * 2,
-      repeat: Infinity,
-      ease: 'easeInOut',
-    },
-  }),
-};
+const BG_VIDEO_SRC =
+  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4';
 
-// iOS style spring entrance for the card
+// Glass card "materializes" — scale, lift and blur resolve together, not a
+// plain fade, so it reads as a physical surface arriving rather than a
+// layer just appearing. Critically damped (bounce: 0): this is a settle,
+// not a flick, so no overshoot.
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.98 },
+  hidden: { opacity: 0, y: 24, scale: 0.94, filter: 'blur(16px)' },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { 
-      type: "spring", 
-      damping: 25, 
-      stiffness: 300 
-    },
+    filter: 'blur(0px)',
+    transition: { type: 'spring', bounce: 0, duration: 0.45 },
   },
+};
+
+// Cross-fade only — no motion, no blur — for prefers-reduced-motion.
+const cardVariantsReduced = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.25, ease: 'easeOut' } },
 };
 
 // Cascading entrance for inputs
@@ -40,12 +35,15 @@ const inputVariants = {
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { 
-      delay: 0.1 + i * 0.08, 
-      type: "spring", 
-      damping: 20, 
-      stiffness: 300 
-    },
+    transition: { delay: 0.1 + i * 0.08, type: 'spring', bounce: 0, duration: 0.4 },
+  }),
+};
+
+const inputVariantsReduced = {
+  hidden: { opacity: 0 },
+  visible: (i) => ({
+    opacity: 1,
+    transition: { delay: 0.05 + i * 0.04, duration: 0.2, ease: 'easeOut' },
   }),
 };
 
@@ -79,6 +77,22 @@ function getFirebaseErrorMessage(code) {
 export default function RegisterPage() {
   const { user, loading, register } = useAuth();
   const navigate = useNavigate();
+  const bgVideoRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Respect reduced-motion preference — don't autoplay the background video.
+  useEffect(() => {
+    const video = bgVideoRef.current;
+    if (!video) return;
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const applyPreference = () => {
+      if (query.matches) video.pause();
+      else video.play().catch(() => {});
+    };
+    applyPreference();
+    query.addEventListener('change', applyPreference);
+    return () => query.removeEventListener('change', applyPreference);
+  }, []);
 
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -146,35 +160,34 @@ export default function RegisterPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="auth-page">
-        <div className="auth-spinner" style={{ borderColor: 'rgba(0,0,0,0.1)', borderTopColor: '#007aff', width: 40, height: 40 }} />
-      </div>
-    );
-  }
-
-  if (user) return null;
+  const activeCardVariants = prefersReducedMotion ? cardVariantsReduced : cardVariants;
+  const activeInputVariants = prefersReducedMotion ? inputVariantsReduced : inputVariants;
 
   return (
     <div className="auth-page">
-      {/* Animated background */}
+      {/* Background video — stays mounted through loading/loaded/redirect
+          so there's no flash of plain background before it appears. */}
       <div className="auth-bg">
-        {[1, 2, 3].map((i) => (
-          <motion.div
-            key={i}
-            className={`auth-orb auth-orb--${i}`}
-            variants={orbVariants}
-            animate="animate"
-            custom={i}
-          />
-        ))}
+        <video
+          ref={bgVideoRef}
+          className="auth-bg-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          src={BG_VIDEO_SRC}
+        />
+        <div className="auth-bg-overlay" />
       </div>
 
-      {/* Card */}
+      {loading ? (
+        <div className="auth-loader">
+          <span className="auth-spinner" style={{ width: 40, height: 40 }} />
+        </div>
+      ) : user ? null : (
       <motion.div
         className="auth-card"
-        variants={cardVariants}
+        variants={activeCardVariants}
         initial="hidden"
         animate="visible"
       >
@@ -220,7 +233,7 @@ export default function RegisterPage() {
 
           <motion.div
             className="auth-input-group"
-            variants={inputVariants}
+            variants={activeInputVariants}
             initial="hidden"
             animate="visible"
             custom={0}
@@ -239,7 +252,7 @@ export default function RegisterPage() {
 
           <motion.div
             className="auth-input-group"
-            variants={inputVariants}
+            variants={activeInputVariants}
             initial="hidden"
             animate="visible"
             custom={1}
@@ -258,7 +271,7 @@ export default function RegisterPage() {
 
           <motion.div
             className="auth-input-group"
-            variants={inputVariants}
+            variants={activeInputVariants}
             initial="hidden"
             animate="visible"
             custom={2}
@@ -301,7 +314,7 @@ export default function RegisterPage() {
 
           <motion.div
             className="auth-input-group"
-            variants={inputVariants}
+            variants={activeInputVariants}
             initial="hidden"
             animate="visible"
             custom={3}
@@ -322,7 +335,7 @@ export default function RegisterPage() {
             type="submit"
             className="auth-submit"
             disabled={submitting}
-            variants={inputVariants}
+            variants={activeInputVariants}
             initial="hidden"
             animate="visible"
             custom={4}
@@ -343,6 +356,7 @@ export default function RegisterPage() {
           <Link to="/login">Kirish</Link>
         </motion.div>
       </motion.div>
+      )}
     </div>
   );
 }

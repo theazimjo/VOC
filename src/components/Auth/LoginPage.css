@@ -1,16 +1,18 @@
-/* ========== AUTH PAGE (iOS Style) ========== */
+/* ========== AUTH PAGE (iOS Liquid Glass) ========== */
 .auth-page {
-  /* Scoped aliases (theme-aware, not global) */
-  --ios-bg: var(--bg-primary);
-  --ios-card: var(--bg-secondary);
-  --ios-blue: var(--accent-1);
-  --ios-blue-active: var(--accent-1);
-  --ios-text-main: var(--text-primary);
-  --ios-text-secondary: var(--text-secondary);
-  --ios-input-bg: var(--bg-tertiary);
-  --ios-border: var(--border);
-  --ios-error-bg: var(--error-dim);
-  --ios-error-text: var(--error);
+  /* Glass palette — always light-on-dark, independent of the app's own
+     light/dark theme toggle, since this page is a permanent overlay on the
+     background video, not a themed surface. */
+  --glass-fill: rgba(255, 255, 255, 0.12);
+  --glass-fill-strong: rgba(255, 255, 255, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.28);
+  --glass-text: rgba(255, 255, 255, 0.96);
+  --glass-text-dim: rgba(255, 255, 255, 0.62);
+  --glass-accent: #0a84ff;
+  --glass-accent-active: #0071e3;
+  --glass-error-bg: rgba(255, 69, 58, 0.18);
+  --glass-error-text: #ffd4d1;
+  --glass-error-border: rgba(255, 69, 58, 0.35);
 
   position: relative;
   min-height: 100vh;
@@ -25,13 +27,13 @@
   padding-right: max(24px, env(safe-area-inset-right));
   overflow-x: hidden;
   overflow-y: auto;
-  background: var(--ios-bg);
+  background: #0a0a0c;
   font-family: var(--font-family);
-  color: var(--ios-text-main);
+  color: var(--glass-text);
   -webkit-font-smoothing: antialiased;
 }
 
-/* ---------- Animated background video ---------- */
+/* ---------- Background video ---------- */
 .auth-bg {
   position: absolute;
   inset: 0;
@@ -51,19 +53,56 @@
 .auth-bg-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.4);
 }
 
-/* ---------- Card ---------- */
+/* ---------- Full-page loader (shown before auth state resolves) ---------- */
+.auth-loader {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Glass card ---------- */
 .auth-card {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 420px;
-  background: var(--ios-card);
-  border-radius: var(--radius-xl);
+  background: var(--glass-fill);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-radius: 28px;
   padding: 40px 32px;
-  box-shadow: var(--shadow-lg);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Specular edge — the bright rim of light a glass surface catches, brightest
+   along the top and fading through the sides (see .liquid-glass recipe). */
+.auth-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.16) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.1) 80%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* ---------- Branding ---------- */
@@ -75,17 +114,18 @@
 .auth-logo {
   font-size: 34px;
   font-weight: 800;
-  letter-spacing: 0.5px;
-  color: var(--ios-text-main);
+  letter-spacing: -0.02em;
+  color: var(--glass-text);
   line-height: 1.1;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
 }
 
 .auth-tagline {
   font-size: 15px;
-  color: var(--ios-text-secondary);
+  color: var(--glass-text-dim);
   font-weight: 400;
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
 }
 
 /* ---------- Form ---------- */
@@ -103,15 +143,18 @@
 .auth-input {
   width: 100%;
   padding: 22px 16px 8px;
-  background: var(--ios-input-bg);
-  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-md);
-  color: var(--ios-text-main);
+  color: var(--glass-text);
   font-family: var(--font-family);
   font-size: 16px;
   font-weight: 500;
   outline: none;
-  transition: all 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
   box-sizing: border-box;
   -webkit-appearance: none;
 }
@@ -121,15 +164,15 @@
 .auth-input:-webkit-autofill:hover,
 .auth-input:-webkit-autofill:focus,
 .auth-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px var(--ios-input-bg) inset !important;
-  -webkit-text-fill-color: var(--ios-text-main) !important;
+  -webkit-box-shadow: 0 0 0 1000px rgba(40, 40, 44, 0.9) inset !important;
+  -webkit-text-fill-color: var(--glass-text) !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 .auth-input:focus {
-  border-color: rgba(0, 122, 255, 0.3);
-  background: var(--ios-card);
-  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
 }
 
 .auth-input::placeholder {
@@ -142,23 +185,25 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 15px;
-  color: var(--ios-text-secondary);
+  color: var(--glass-text-dim);
   pointer-events: none;
   transition: all 0.2s ease;
 }
 
-/* Float label up when input is focused or has value */
+/* Float label up when input is focused, has value, or is autofilled */
 .auth-input:focus + .auth-label,
-.auth-input:not(:placeholder-shown) + .auth-label {
+.auth-input:not(:placeholder-shown) + .auth-label,
+.auth-input:-webkit-autofill + .auth-label,
+.auth-input:autofill + .auth-label {
   top: 6px;
   transform: translateY(0);
   font-size: 11px;
   font-weight: 600;
-  color: var(--ios-text-secondary);
+  color: var(--glass-text-dim);
 }
 
 .auth-input:focus + .auth-label {
-  color: var(--ios-blue);
+  color: #fff;
 }
 
 /* ---------- Submit button ---------- */
@@ -167,7 +212,7 @@
   padding: 16px;
   border: none;
   border-radius: var(--radius-md);
-  background: var(--ios-blue);
+  background: var(--glass-accent);
   color: #fff;
   font-family: var(--font-family);
   font-size: 17px;
@@ -177,11 +222,18 @@
   margin-top: 8px;
   position: relative;
   overflow: hidden;
-  transition: background 0.2s ease;
+  box-shadow:
+    0 8px 20px rgba(10, 132, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease-out;
 }
 
+/* Respond on press, not release. */
 .auth-submit:active:not(:disabled) {
-  background: var(--ios-blue-active);
+  background: var(--glass-accent-active);
+  transform: scale(0.97);
 }
 
 .auth-submit:disabled {
@@ -202,12 +254,12 @@
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--ios-border);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .auth-divider span {
   font-size: 13px;
-  color: var(--ios-text-secondary);
+  color: var(--glass-text-dim);
   font-weight: 500;
 }
 
@@ -215,10 +267,10 @@
 .auth-google-btn {
   width: 100%;
   padding: 14px;
-  border: 1px solid var(--ios-border);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-md);
-  background: var(--ios-card);
-  color: var(--ios-text-main);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--glass-text);
   font-family: var(--font-family);
   font-size: 16px;
   font-weight: 600;
@@ -227,11 +279,14 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  transition: background 0.2s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease-out;
 }
 
 .auth-google-btn:active {
-  background: var(--ios-input-bg);
+  background: rgba(255, 255, 255, 0.16);
+  transform: scale(0.97);
 }
 
 .auth-google-btn svg {
@@ -249,7 +304,7 @@
   align-self: flex-end;
   font-size: 14px;
   font-weight: 500;
-  color: var(--ios-blue);
+  color: #6ac8ff;
   cursor: pointer;
 }
 
@@ -262,11 +317,11 @@
   text-align: center;
   margin-top: 32px;
   font-size: 15px;
-  color: var(--ios-text-secondary);
+  color: var(--glass-text-dim);
 }
 
 .auth-footer a {
-  color: var(--ios-blue);
+  color: #6ac8ff;
   font-weight: 500;
   text-decoration: none;
 }
@@ -281,9 +336,10 @@
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
-  background: var(--ios-error-bg);
+  background: var(--glass-error-bg);
+  border: 1px solid var(--glass-error-border);
   border-radius: var(--radius-sm);
-  color: var(--ios-error-text);
+  color: var(--glass-error-text);
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 16px;
@@ -301,7 +357,35 @@
 }
 
 @keyframes auth-spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Reduced transparency — frost the glass into a near-solid panel ---------- */
+@media (prefers-reduced-transparency: reduce) {
+  .auth-card {
+    background: rgba(18, 18, 20, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .auth-input {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ---------- High contrast — solid panel with a defined border ---------- */
+@media (prefers-contrast: more) {
+  .auth-card {
+    background: rgba(8, 8, 10, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .auth-input {
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+  .auth-bg-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
 }
 
 /* ---------- Responsive ---------- */
@@ -317,14 +401,14 @@
     font-size: 28px;
   }
   .auth-bg-overlay {
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.5);
   }
 }
 
 @media (max-width: 360px) {
   .auth-card {
     padding: 28px 18px;
-    border-radius: var(--radius-lg, 20px);
+    border-radius: 22px;
   }
   .auth-logo {
     font-size: 24px;
@@ -356,4 +440,3 @@
     margin-top: 20px;
   }
 }
-

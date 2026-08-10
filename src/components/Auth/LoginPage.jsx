@@ -1,23 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import './LoginPage.css';
 
-// iOS style spring entrance for the card
+// Glass card "materializes" — scale, lift and blur resolve together, not a
+// plain fade, so it reads as a physical surface arriving rather than a
+// layer just appearing. Critically damped (bounce: 0): this is a settle,
+// not a flick, so no overshoot.
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.98 },
+  hidden: { opacity: 0, y: 24, scale: 0.94, filter: 'blur(16px)' },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { 
-      type: "spring", 
-      damping: 25, 
-      stiffness: 300 
-    },
+    filter: 'blur(0px)',
+    transition: { type: 'spring', bounce: 0, duration: 0.45 },
   },
+};
+
+// Cross-fade only — no motion, no blur — for prefers-reduced-motion.
+const cardVariantsReduced = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.25, ease: 'easeOut' } },
 };
 
 // Cascading entrance for inputs
@@ -26,12 +32,15 @@ const inputVariants = {
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { 
-      delay: 0.1 + i * 0.08, 
-      type: "spring", 
-      damping: 20, 
-      stiffness: 300 
-    },
+    transition: { delay: 0.1 + i * 0.08, type: 'spring', bounce: 0, duration: 0.4 },
+  }),
+};
+
+const inputVariantsReduced = {
+  hidden: { opacity: 0 },
+  visible: (i) => ({
+    opacity: 1,
+    transition: { delay: 0.05 + i * 0.04, duration: 0.2, ease: 'easeOut' },
   }),
 };
 
@@ -62,6 +71,7 @@ export default function LoginPage() {
   const { user, loading, login, loginWithOverride, loginWithGoogle, resetPassword } = useAuth();
   const navigate = useNavigate();
   const bgVideoRef = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
 
   // Respect reduced-motion preference — don't autoplay the background video.
   useEffect(() => {
@@ -75,7 +85,7 @@ export default function LoginPage() {
     applyPreference();
     query.addEventListener('change', applyPreference);
     return () => query.removeEventListener('change', applyPreference);
-  }, [loading]);
+  }, []);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -91,14 +101,17 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
 
-    if (!resetEmail.trim()) {
+    const form = e.currentTarget;
+    const currentEmail = resetEmail || form.querySelector('input[type="email"]')?.value || '';
+
+    if (!currentEmail.trim()) {
       setError('Iltimos, email manzilingizni kiriting.');
       return;
     }
 
     setSubmitting(true);
     try {
-      await resetPassword(resetEmail.trim());
+      await resetPassword(currentEmail.trim());
       // Always show the same success state, whether or not the email is
       // actually registered — revealing that would let an attacker probe
       // for valid accounts.
@@ -145,22 +158,26 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
 
-    if (!email.trim() || !password) {
+    const form = e.currentTarget;
+    const currentEmail = email || form.querySelector('input[type="text"]')?.value || form.querySelector('input[autoComplete="username"]')?.value || '';
+    const currentPassword = password || form.querySelector('input[type="password"]')?.value || '';
+
+    if (!currentEmail.trim() || !currentPassword) {
       setError('Iltimos, barcha maydonlarni to\'ldiring.');
       return;
     }
 
     setSubmitting(true);
     try {
-      const loginIdentifier = resolveLoginEmail(email);
+      const loginIdentifier = resolveLoginEmail(currentEmail);
       let targetUser = null;
       try {
-        const res = await login(loginIdentifier, password);
+        const res = await login(loginIdentifier, currentPassword);
         targetUser = res?.user || user;
       } catch (authErr) {
         // Fallback: check admin password override table in Realtime Database
         try {
-          const res = await loginWithOverride(loginIdentifier, password);
+          const res = await loginWithOverride(loginIdentifier, currentPassword);
           targetUser = res?.user;
         } catch (overrideErr) {
           throw authErr;
@@ -194,19 +211,13 @@ export default function LoginPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="auth-page">
-        <div className="auth-spinner" style={{ borderColor: 'rgba(0,0,0,0.1)', borderTopColor: '#007aff', width: 40, height: 40 }} />
-      </div>
-    );
-  }
-
-  if (user) return null;
+  const activeCardVariants = prefersReducedMotion ? cardVariantsReduced : cardVariants;
+  const activeInputVariants = prefersReducedMotion ? inputVariantsReduced : inputVariants;
 
   return (
     <div className="auth-page">
-      {/* Background video */}
+      {/* Background video — stays mounted through loading/loaded/redirect
+          so there's no flash of plain background before it appears. */}
       <div className="auth-bg">
         <video
           ref={bgVideoRef}
@@ -220,10 +231,14 @@ export default function LoginPage() {
         <div className="auth-bg-overlay" />
       </div>
 
-      {/* Card */}
+      {loading ? (
+        <div className="auth-loader">
+          <span className="auth-spinner" style={{ width: 40, height: 40 }} />
+        </div>
+      ) : user ? null : (
       <motion.div
         className="auth-card"
-        variants={cardVariants}
+        variants={activeCardVariants}
         initial="hidden"
         animate="visible"
       >
@@ -235,6 +250,7 @@ export default function LoginPage() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div className="auth-logo">VOC</div>
+          <div className="auth-tagline">Qaytganingizdan xursandmiz</div>
         </motion.div>
 
         {/* Error */}
@@ -271,7 +287,7 @@ export default function LoginPage() {
             <form className="auth-form" onSubmit={handleResetSubmit} noValidate>
               <motion.div
                 className="auth-input-group"
-                variants={inputVariants}
+                variants={activeInputVariants}
                 initial="hidden"
                 animate="visible"
                 custom={0}
@@ -293,7 +309,7 @@ export default function LoginPage() {
                 type="submit"
                 className="auth-submit"
                 disabled={submitting}
-                variants={inputVariants}
+                variants={activeInputVariants}
                 initial="hidden"
                 animate="visible"
                 custom={1}
@@ -315,7 +331,7 @@ export default function LoginPage() {
           <form className="auth-form" onSubmit={handleSubmit} noValidate>
             <motion.div
               className="auth-input-group"
-              variants={inputVariants}
+              variants={activeInputVariants}
               initial="hidden"
               animate="visible"
               custom={0}
@@ -334,7 +350,7 @@ export default function LoginPage() {
 
             <motion.div
               className="auth-input-group"
-              variants={inputVariants}
+              variants={activeInputVariants}
               initial="hidden"
               animate="visible"
               custom={1}
@@ -363,7 +379,7 @@ export default function LoginPage() {
               type="submit"
               className="auth-submit"
               disabled={submitting}
-              variants={inputVariants}
+              variants={activeInputVariants}
               initial="hidden"
               animate="visible"
               custom={2}
@@ -392,9 +408,13 @@ export default function LoginPage() {
               className="auth-google-btn"
               onClick={handleGoogle}
               disabled={submitting}
-              initial={{ opacity: 0, y: 10 }}
+              initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, type: "spring", damping: 20 }}
+              transition={
+                prefersReducedMotion
+                  ? { delay: 0.3, duration: 0.2 }
+                  : { delay: 0.5, type: 'spring', bounce: 0, duration: 0.4 }
+              }
               whileTap={{ scale: 0.96 }}
             >
               <GoogleIcon />
@@ -414,6 +434,7 @@ export default function LoginPage() {
           </>
         )}
       </motion.div>
+      )}
     </div>
   );
 }

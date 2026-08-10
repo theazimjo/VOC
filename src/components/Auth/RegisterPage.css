@@ -13,7 +13,7 @@
   flex: 1;
   height: 4px;
   border-radius: 2px;
-  background: var(--bg-tertiary);
+  background: rgba(255, 255, 255, 0.16);
   transition: background 0.3s ease;
 }
 
@@ -32,7 +32,7 @@
 .auth-password-hint {
   font-size: 12px;
   font-weight: 500;
-  color: var(--ios-text-secondary);
+  color: var(--glass-text-dim);
   margin-top: 4px;
   margin-left: 2px;
   transition: color 0.3s ease;
