@@ -15,6 +15,25 @@
   opacity: 0;
 }
 
+/* ---------- Deep-space backdrop — a soft dark nebula vignette behind the
+   starfield, instead of the canvas floating over whatever was already
+   there. Fades in early so the scene reads as "now in space" before the
+   burst really gets going. ---------- */
+.success-space {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(32, 22, 64, 0.4) 0%, rgba(8, 8, 20, 0.9) 55%, #000 100%);
+  opacity: 0;
+  animation: success-space-in 850ms ease-out forwards;
+}
+
+@keyframes success-space-in {
+  to {
+    opacity: 1;
+  }
+}
+
 /* ---------- Starfield — canvas-driven particle burst from center ---------- */
 .success-starfield {
   position: absolute;
@@ -39,7 +58,7 @@
   letter-spacing: -0.02em;
   color: #fff;
   text-shadow:
-    0 0 40px rgba(255, 255, 255, 0.6),
+    0 0 40px rgba(210, 226, 255, 0.65),
     0 4px 24px rgba(0, 0, 0, 0.45);
   white-space: nowrap;
   opacity: 0;
@@ -84,7 +103,13 @@
 .success-flash {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, #fff 0%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0) 80%);
+  background: radial-gradient(
+    circle at center,
+    #ffffff 0%,
+    #eef4ff 25%,
+    rgba(199, 218, 255, 0.55) 55%,
+    rgba(140, 170, 255, 0) 80%
+  );
   opacity: 0;
   animation: success-flash-build 2400ms cubic-bezier(0.5, 0, 0.75, 0.9) forwards;
 }

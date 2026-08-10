@@ -35,6 +35,7 @@ export default function SuccessTransition({ revealing, readyPromise, onSequenceD
 
   return (
     <div className={`success-transition ${revealing ? 'success-transition--revealing' : ''}`} aria-hidden="true">
+      <div className="success-space" />
       <Starfield durationMs={SUCCESS_TRANSITION_MS} />
 
       <div className="success-word success-word--welcome">Welcome</div>

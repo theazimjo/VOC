@@ -1,15 +1,19 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
+import { useCorpRole } from '../../hooks/useCorpRole';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
-import { 
+import {
   Moon, Volume2, BookOpen, Bell, Clock, Check, ChevronRight, Type,
-  KeyRound, Lock, ShieldCheck, AlertCircle, CheckCircle2
+  KeyRound, Lock, ShieldCheck, AlertCircle, CheckCircle2, Shield
 } from 'lucide-react';
 import './Settings.css';
 
 export default function Settings() {
   const { user, changePassword, resetPassword } = useAuth();
+  const { identity } = useCorpRole();
+  const navigate = useNavigate();
   const {
     theme,
     setTheme,
@@ -195,6 +199,33 @@ export default function Settings() {
       <div className="ios-settings-footer">
         Kunlik yangi so'z limiti sizga har kuni optimal miqdordagi yangi so'zlarni taqdim etadi. Bugun o'rganildi: {todayCount} ta so'z.
       </div>
+
+      {/* SECTION: ADMIN ACCESS (super admins only) */}
+      {identity?.role === 'super_admin' && (
+        <>
+          <div className="ios-settings-header">Boshqaruv</div>
+          <div className="ios-settings-section">
+            <div
+              className="ios-settings-row"
+              style={{ cursor: 'pointer' }}
+              onClick={() => navigate('/corp/super-admin')}
+            >
+              <div className="ios-settings-left">
+                <div className="ios-icon-box" style={{ background: '#5856d6' }}>
+                  <Shield size={16} strokeWidth={2.2} />
+                </div>
+                <span className="ios-row-title">Super Admin paneli</span>
+              </div>
+              <div className="ios-settings-right">
+                <ChevronRight size={14} className="ios-chevron" />
+              </div>
+            </div>
+          </div>
+          <div className="ios-settings-footer">
+            Platformadagi barcha hamkor o'quv markazlarini boshqarish paneli.
+          </div>
+        </>
+      )}
 
       {/* SECTION 2: SECURITY & PASSWORD */}
       {user && (

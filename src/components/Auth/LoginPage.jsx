@@ -14,12 +14,6 @@ import './LoginPage.css';
 // generic FullScreenLoader instead of a clean cut.
 const ROUTE_PREFETCHERS = {
   '/': [() => import('../../pages/personal/Dashboard')],
-  '/corp/super-admin': [
-    () => import('../../components/corp/CorpLayout'),
-    () => import('../../components/corp/CorpProtectedRoute'),
-    () => import('../../components/corp/SuperAdminLayout'),
-    () => import('../../pages/corp/super-admin/SuperAdminOverview'),
-  ],
   '/corp/admin': [
     () => import('../../components/corp/CorpLayout'),
     () => import('../../components/corp/CorpProtectedRoute'),
@@ -189,7 +183,11 @@ export default function LoginPage() {
     try {
       const identity = await resolveCorpIdentity(u);
       if (identity) {
-        if (identity.role === 'super_admin') return '/corp/super-admin';
+        // super_admin is deliberately excluded here — a super admin is
+        // usually also a regular individual learner, and dropping them
+        // straight into the admin panel on every login is jarring when
+        // they just want their own dashboard. They reach it deliberately
+        // via the "Admin panel" entry in Settings instead.
         if (identity.role === 'center_admin') return '/corp/admin';
         if (identity.role === 'teacher') return '/corp/teacher';
       }
