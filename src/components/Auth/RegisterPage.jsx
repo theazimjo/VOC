@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import './LoginPage.css'; // Glass material, background video, card chrome
-import './RegisterPage.css'; // Parol indikatori uchun stillar
+import './RegisterPage.css'; // Password-strength indicator styles
 
 const BG_VIDEO_SRC =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4';
@@ -58,20 +58,20 @@ function getPasswordStrength(password) {
   if (/[0-9]/.test(password)) score++;
   if (/[^A-Za-z0-9]/.test(password)) score++;
 
-  if (score <= 1) return { level: 1, label: 'Kuchsiz', cls: 'weak' };
-  if (score <= 3) return { level: 2, label: 'O\'rtacha', cls: 'medium' };
-  return { level: 3, label: 'Kuchli', cls: 'strong' };
+  if (score <= 1) return { level: 1, label: 'Weak', cls: 'weak' };
+  if (score <= 3) return { level: 2, label: 'Medium', cls: 'medium' };
+  return { level: 3, label: 'Strong', cls: 'strong' };
 }
 
 function getFirebaseErrorMessage(code) {
   const map = {
-    'auth/email-already-in-use': 'Bu email allaqachon ro\'yxatdan o\'tgan.',
-    'auth/invalid-email': 'Email manzil noto\'g\'ri.',
-    'auth/weak-password': 'Parol juda oddiy. Kamida 6 belgi kiriting.',
-    'auth/too-many-requests': 'Juda ko\'p urinish. Keyinroq qaytadan urinib ko\'ring.',
-    'auth/network-request-failed': 'Internet bilan bog\'lanishda xatolik.',
+    'auth/email-already-in-use': 'This email is already registered.',
+    'auth/invalid-email': 'Invalid email address.',
+    'auth/weak-password': 'Password is too weak. Use at least 6 characters.',
+    'auth/too-many-requests': 'Too many attempts. Please try again later.',
+    'auth/network-request-failed': 'Network error. Check your connection.',
   };
-  return map[code] || 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.';
+  return map[code] || 'Something went wrong. Please try again.';
 }
 
 export default function RegisterPage() {
@@ -115,19 +115,19 @@ export default function RegisterPage() {
 
   const validate = () => {
     if (!displayName.trim()) {
-      return 'Ismingizni kiriting.';
+      return 'Please enter your name.';
     }
     if (!email.trim()) {
-      return 'Email manzilni kiriting.';
+      return 'Please enter your email address.';
     }
     if (!EMAIL_PATTERN.test(email.trim())) {
-      return "Email manzil noto'g'ri ko'rinishda (masalan: ism@domen.com).";
+      return 'Invalid email address (e.g. name@domain.com).';
     }
     if (password.length < 6) {
-      return 'Parol kamida 6 belgidan iborat bo\'lishi kerak.';
+      return 'Password must be at least 6 characters.';
     }
     if (password !== confirmPassword) {
-      return 'Parollar mos kelmadi.';
+      return 'Passwords do not match.';
     }
     return null;
   };
@@ -139,7 +139,7 @@ export default function RegisterPage() {
     if (website.trim()) {
       // Bot tripped the honeypot — fail generically without hitting Firebase
       // or hinting that this field was a trap.
-      setError('Xatolik yuz berdi. Qaytadan urinib ko\'ring.');
+      setError('Something went wrong. Please try again.');
       return;
     }
 
@@ -191,6 +191,8 @@ export default function RegisterPage() {
         initial="hidden"
         animate="visible"
       >
+        <div className="auth-sheet-handle" aria-hidden="true" />
+
         {/* Brand */}
         <motion.div
           className="auth-brand"
@@ -199,7 +201,7 @@ export default function RegisterPage() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div className="auth-logo">VOC</div>
-          <p className="auth-tagline">Yangi akkaunt yaratish</p>
+          <p className="auth-tagline">Create a new account</p>
         </motion.div>
 
         {/* Error */}
@@ -241,13 +243,13 @@ export default function RegisterPage() {
             <input
               type="text"
               className="auth-input"
-              placeholder="Ism"
+              placeholder="Name"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               autoComplete="name"
               disabled={submitting}
             />
-            <label className="auth-label">Ism</label>
+            <label className="auth-label">Name</label>
           </motion.div>
 
           <motion.div
@@ -279,13 +281,13 @@ export default function RegisterPage() {
             <input
               type="password"
               className="auth-input"
-              placeholder="Parol"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="new-password"
               disabled={submitting}
             />
-            <label className="auth-label">Parol</label>
+            <label className="auth-label">Password</label>
           </motion.div>
 
           {/* Password strength */}
@@ -322,13 +324,13 @@ export default function RegisterPage() {
             <input
               type="password"
               className="auth-input"
-              placeholder="Parolni tasdiqlash"
+              placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               autoComplete="new-password"
               disabled={submitting}
             />
-            <label className="auth-label">Parolni tasdiqlash</label>
+            <label className="auth-label">Confirm password</label>
           </motion.div>
 
           <motion.button
@@ -341,7 +343,7 @@ export default function RegisterPage() {
             custom={4}
             whileTap={{ scale: 0.96 }}
           >
-            {submitting ? <span className="auth-spinner" /> : 'Ro\'yxatdan o\'tish'}
+            {submitting ? <span className="auth-spinner" /> : 'Sign Up'}
           </motion.button>
         </form>
 
@@ -352,8 +354,8 @@ export default function RegisterPage() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          Akkauntingiz bormi?{' '}
-          <Link to="/login">Kirish</Link>
+          Already have an account?{' '}
+          <Link to="/login">Sign in</Link>
         </motion.div>
       </motion.div>
       )}

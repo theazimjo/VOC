@@ -55,16 +55,16 @@ const GoogleIcon = () => (
 
 function getFirebaseErrorMessage(code) {
   const map = {
-    'auth/invalid-email': 'Email manzil noto\'g\'ri.',
-    'auth/user-disabled': 'Bu foydalanuvchi bloklangan.',
-    'auth/user-not-found': 'Bunday foydalanuvchi topilmadi.',
-    'auth/wrong-password': 'Parol noto\'g\'ri.',
-    'auth/invalid-credential': 'Email yoki parol noto\'g\'ri.',
-    'auth/too-many-requests': 'Juda ko\'p urinish. Keyinroq qaytadan urinib ko\'ring.',
-    'auth/network-request-failed': 'Internet bilan bog\'lanishda xatolik.',
-    'auth/popup-closed-by-user': 'Kirish oynasi yopildi.',
+    'auth/invalid-email': 'Invalid email address.',
+    'auth/user-disabled': 'This account has been disabled.',
+    'auth/user-not-found': 'No account found with these details.',
+    'auth/wrong-password': 'Incorrect password.',
+    'auth/invalid-credential': 'Incorrect email or password.',
+    'auth/too-many-requests': 'Too many attempts. Please try again later.',
+    'auth/network-request-failed': 'Network error. Check your connection.',
+    'auth/popup-closed-by-user': 'Sign-in window was closed.',
   };
-  return map[code] || 'Xatolik yuz berdi. Qaytadan urinib ko\'ring.';
+  return map[code] || 'Something went wrong. Please try again.';
 }
 
 export default function LoginPage() {
@@ -105,7 +105,7 @@ export default function LoginPage() {
     const currentEmail = resetEmail || form.querySelector('input[type="email"]')?.value || '';
 
     if (!currentEmail.trim()) {
-      setError('Iltimos, email manzilingizni kiriting.');
+      setError('Please enter your email address.');
       return;
     }
 
@@ -163,7 +163,7 @@ export default function LoginPage() {
     const currentPassword = password || form.querySelector('input[type="password"]')?.value || '';
 
     if (!currentEmail.trim() || !currentPassword) {
-      setError('Iltimos, barcha maydonlarni to\'ldiring.');
+      setError('Please fill in all fields.');
       return;
     }
 
@@ -204,7 +204,7 @@ export default function LoginPage() {
       console.error("Google Sign-In Error details:", err);
       if (err.code !== 'auth/popup-closed-by-user') {
         const customMsg = getFirebaseErrorMessage(err.code);
-        setError(`${customMsg} (${err.code || err.message || 'Xatolik'})`);
+        setError(`${customMsg} (${err.code || err.message || 'Error'})`);
       }
     } finally {
       setSubmitting(false);
@@ -242,6 +242,8 @@ export default function LoginPage() {
         initial="hidden"
         animate="visible"
       >
+        <div className="auth-sheet-handle" aria-hidden="true" />
+
         {/* Brand */}
         <motion.div
           className="auth-brand"
@@ -250,7 +252,7 @@ export default function LoginPage() {
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           <div className="auth-logo">VOC</div>
-          <div className="auth-tagline">Qaytganingizdan xursandmiz</div>
+          <div className="auth-tagline">Welcome back</div>
         </motion.div>
 
         {/* Error */}
@@ -273,14 +275,14 @@ export default function LoginPage() {
           resetSent ? (
             <div className="auth-form">
               <p style={{ textAlign: 'center', lineHeight: 1.5 }}>
-                ✅ Agar bu email ro'yxatdan o'tgan bo'lsa, unga parolni tiklash havolasi yuborildi. Pochta qutingizni (shu jumladan spam papkasini) tekshiring.
+                ✅ If an account exists for this email, a password reset link has been sent. Check your inbox (including spam).
               </p>
               <button
                 type="button"
                 className="auth-submit"
                 onClick={() => { setMode('login'); setResetSent(false); setResetEmail(''); }}
               >
-                Kirishga qaytish
+                Back to sign in
               </button>
             </div>
           ) : (
@@ -315,7 +317,7 @@ export default function LoginPage() {
                 custom={1}
                 whileTap={{ scale: 0.96 }}
               >
-                {submitting ? <span className="auth-spinner" /> : 'Tiklash havolasini yuborish'}
+                {submitting ? <span className="auth-spinner" /> : 'Send reset link'}
               </motion.button>
 
               <button
@@ -323,7 +325,7 @@ export default function LoginPage() {
                 className="auth-forgot-link"
                 onClick={() => { setMode('login'); setError(''); }}
               >
-                ← Kirishga qaytish
+                ← Back to sign in
               </button>
             </form>
           )
@@ -339,13 +341,13 @@ export default function LoginPage() {
               <input
                 type="text"
                 className="auth-input"
-                placeholder="Email yoki Telefon raqam"
+                placeholder="Email or phone number"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="username"
                 disabled={submitting}
               />
-              <label className="auth-label">Email yoki Telefon raqam</label>
+              <label className="auth-label">Email or phone number</label>
             </motion.div>
 
             <motion.div
@@ -358,13 +360,13 @@ export default function LoginPage() {
               <input
                 type="password"
                 className="auth-input"
-                placeholder="Parol"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
                 disabled={submitting}
               />
-              <label className="auth-label">Parol</label>
+              <label className="auth-label">Password</label>
             </motion.div>
 
             <button
@@ -372,7 +374,7 @@ export default function LoginPage() {
               className="auth-forgot-link"
               onClick={() => { setMode('reset'); setError(''); setResetEmail(email); }}
             >
-              Parolni unutdingizmi?
+              Forgot password?
             </button>
 
             <motion.button
@@ -385,7 +387,7 @@ export default function LoginPage() {
               custom={2}
               whileTap={{ scale: 0.96 }}
             >
-              {submitting ? <span className="auth-spinner" /> : 'Kirish'}
+              {submitting ? <span className="auth-spinner" /> : 'Sign In'}
             </motion.button>
           </form>
         )}
@@ -399,7 +401,7 @@ export default function LoginPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <span>yoki</span>
+              <span>or</span>
             </motion.div>
 
             {/* Google */}
@@ -418,7 +420,7 @@ export default function LoginPage() {
               whileTap={{ scale: 0.96 }}
             >
               <GoogleIcon />
-              Google orqali kirish
+              Continue with Google
             </motion.button>
 
             {/* Footer */}
@@ -428,8 +430,8 @@ export default function LoginPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              Akkauntingiz yo'qmi?{' '}
-              <Link to="/register">Ro'yxatdan o'tish</Link>
+              Don&rsquo;t have an account?{' '}
+              <Link to="/register">Sign up</Link>
             </motion.div>
           </>
         )}

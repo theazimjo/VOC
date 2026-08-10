@@ -29,6 +29,7 @@
   overflow-y: auto;
   background: #0a0a0c;
   font-family: var(--font-family);
+  font-optical-sizing: auto;
   color: var(--glass-text);
   -webkit-font-smoothing: antialiased;
 }
@@ -105,6 +106,17 @@
   pointer-events: none;
 }
 
+/* ---------- Sheet grabber — the small pill iOS modal sheets show at the
+   top, signalling "this is a draggable sheet" even though ours isn't
+   draggable; it's a strong, instantly-recognizable iOS material cue. ---------- */
+.auth-sheet-handle {
+  width: 36px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 auto 20px;
+}
+
 /* ---------- Branding ---------- */
 .auth-brand {
   text-align: center;
@@ -112,8 +124,9 @@
 }
 
 .auth-logo {
+  /* iOS Large Title: 34pt, Bold */
   font-size: 34px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--glass-text);
   line-height: 1.1;
@@ -122,6 +135,7 @@
 }
 
 .auth-tagline {
+  /* iOS Subheadline: 15pt, Regular */
   font-size: 15px;
   color: var(--glass-text-dim);
   font-weight: 400;
@@ -141,6 +155,7 @@
 }
 
 .auth-input {
+  /* iOS Body: 17pt, Regular (16px reads correctly at this optical size) */
   width: 100%;
   padding: 22px 16px 8px;
   background: rgba(255, 255, 255, 0.08);
@@ -149,7 +164,8 @@
   color: var(--glass-text);
   font-family: var(--font-family);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   outline: none;
   transition:
     border-color 0.2s ease,
@@ -199,6 +215,7 @@
   transform: translateY(0);
   font-size: 11px;
   font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--glass-text-dim);
 }
 
@@ -208,6 +225,7 @@
 
 /* ---------- Submit button ---------- */
 .auth-submit {
+  /* iOS Headline: 17pt, Semibold */
   width: 100%;
   padding: 16px;
   border: none;
@@ -258,13 +276,16 @@
 }
 
 .auth-divider span {
+  /* iOS Footnote: 13pt */
   font-size: 13px;
   color: var(--glass-text-dim);
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* ---------- Google button ---------- */
 .auth-google-btn {
+  /* iOS Headline, tinted-glass secondary style */
   width: 100%;
   padding: 14px;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -274,6 +295,7 @@
   font-family: var(--font-family);
   font-size: 16px;
   font-weight: 600;
+  letter-spacing: -0.2px;
   cursor: pointer;
   display: flex;
   align-items: center;
