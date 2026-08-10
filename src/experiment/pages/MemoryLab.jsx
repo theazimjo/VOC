@@ -400,18 +400,6 @@ export default function MemoryLab() {
 
   return (
     <div className="mem-page">
-      {/* Page header */}
-      <div className="mem-page-header">
-        <button className="mem-back-btn" onClick={() => navigate('/')} title="Back">
-          <ArrowLeft size={20} />
-        </button>
-        <div className="mem-page-title">
-          <span className="mem-page-title-icon">🧠</span>
-          Memory Twin
-        </div>
-        <div style={{ width: 40 }} />
-      </div>
-
       {/* Tab bar (hidden during active session) */}
       {!inSession && !sessionDone && (
         <div className="mem-tab-bar">

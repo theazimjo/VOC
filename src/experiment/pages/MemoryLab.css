@@ -5,8 +5,8 @@
 
 /* ── Page shell ─────────────────────────────────────────── */
 .mem-page {
-  min-height: 100vh;
-  background: var(--bg-primary);
+  min-height: 100%;
+  background: transparent;
   color: var(--text-primary);
   font-family: var(--font-family);
   display: flex;
@@ -34,7 +34,9 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--bg-primary);
+  background: var(--bg-glass, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -188,7 +190,9 @@
 
 /* ── Due words section ──────────────────────────────────── */
 .mem-due-section {
-  background: var(--bg-secondary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--warning-dim);
   border-radius: var(--radius-xl);
   padding: 1.25rem;
@@ -280,7 +284,9 @@
 
 /* ── Lab Tab: Memory Simulator ("why exactly now?") ────────── */
 .mem-lab-sim-card {
-  background: var(--bg-secondary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xl);
   padding: 1.25rem;
@@ -377,12 +383,15 @@
 
 /* ── How it works ───────────────────────────────────────── */
 .mem-how-section {
-  background: var(--bg-secondary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xl);
   padding: 1.25rem;
   box-shadow: var(--shadow-sm);
 }
+
 .mem-how-title {
   font-size: 0.88rem;
   font-weight: 700;
@@ -580,7 +589,9 @@
   align-items: center;
   gap: 1rem;
   padding: 1.75rem 1.25rem 1.5rem;
-  background: var(--bg-secondary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   min-height: 380px;
@@ -1608,7 +1619,7 @@
 /* ── Page shell ─────────────────────────────────────────── */
 .mem-page {
   min-height: 100%;
-  background: var(--bg-primary);
+  background: transparent;
   color: var(--text-primary);
   font-family: var(--font-family);
   display: flex;
@@ -1635,7 +1646,9 @@
   padding: 0.5rem 1rem;
   position: relative;
   z-index: 10;
-  background: var(--bg-primary);
+  background: var(--bg-glass, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .mem-back-btn {
@@ -1682,7 +1695,9 @@
 
 /* ── Due words section ──────────────────────────────────── */
 .mem-due-section {
-  background: var(--bg-secondary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 1.25rem;
