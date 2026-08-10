@@ -50,16 +50,10 @@ export default function Layout() {
   const segments = location.pathname.split('/').filter(Boolean);
   const isTestMode = (segments.length === 4 && segments[0] === 'grammar') ||
                      (segments[0] === 'grammar-test' && segments[1] === 'run');
-  // The Dashboard provides its own full padding + background (mirroring
-  // the corp student dashboard's — see .dash-ov-container), so the shared
-  // page padding here would otherwise just stack on top of it.
-  const isDashboard = location.pathname === '/';
-  // Library / Grammar / Memory Lab get the same decorative background as
-  // the Dashboard, but keep this wrapper's normal padding — unlike the
-  // Dashboard, they don't provide their own.
-  const isThemedSection =
-    !isTestMode &&
-    (segments[0] === 'library' || segments[0] === 'grammar' || segments[0] === 'grammar-test' || segments[0] === 'experiment');
+  // In individual mode, all pages use their own standardized max-width: 960px container
+  // with uniform padding, so the layout wrapper provides zero main padding
+  // and the shared decorative gradient background.
+  const isIndividualMode = appMode !== 'group' && !isTestMode;
 
   return (
     <div className={`layout ${isTestMode ? 'layout--test-mode' : ''}`}>
@@ -89,7 +83,7 @@ export default function Layout() {
           isTestMode
             ? 'layout-content--test-mode'
             : (appMode === 'group' ? 'layout-content--expanded' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'))
-        } ${isDashboard && !isTestMode ? 'layout-content--dashboard' : ''} ${isThemedSection ? 'layout-content--themed-bg' : ''}`}
+        } ${isIndividualMode ? 'layout-content--dashboard layout-content--themed-bg' : ''}`}
       >
         <Outlet />
       </main>

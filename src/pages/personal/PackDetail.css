@@ -3,9 +3,11 @@
    ========================================================================== */
 
 .pack-detail-page {
-  padding: 0;
-  max-width: 600px;
+  padding: var(--space-lg) var(--space-xl);
+  max-width: 960px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Back navigation arrow style */
@@ -246,10 +248,9 @@
 }
 
 /* Mobile responsive details */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .pack-detail-page {
-    padding: var(--space-md);
-    padding-bottom: calc(64px + var(--space-lg));
+    padding: 1rem;
   }
 
   .pack-detail-header {

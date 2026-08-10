@@ -1,12 +1,19 @@
 .ios-profile-page {
-  max-width: 600px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
+  width: 100%;
+  padding: var(--space-lg) var(--space-xl);
   box-sizing: border-box;
-  background: var(--bg-primary);
   color: var(--text-primary);
   min-height: calc(100vh - var(--navbar-height));
 }
+
+@media (max-width: 640px) {
+  .ios-profile-page {
+    padding: 1rem;
+  }
+}
+
 
 .ios-header {
   padding: 0 0 1rem;

@@ -1,5 +1,9 @@
 .library-page {
-  padding: 0;
+  padding: var(--space-lg) var(--space-xl);
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
   min-height: 100%;
 }
 
@@ -171,10 +175,9 @@
   width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .library-page {
-    padding: var(--space-md);
-    padding-bottom: calc(64px + var(--space-lg)); /* Prevent BottomNav overlap */
+    padding: 1rem;
   }
 
   .library-tabs-container {

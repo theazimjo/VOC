@@ -1,6 +1,9 @@
 .stats-page {
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-lg) var(--space-xl);
 }
 
 .stats-overview {
@@ -346,9 +349,9 @@
   margin-top: 4px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .stats-page {
-    padding: var(--space-md);
+    padding: 1rem;
   }
 
   .stats-overview {

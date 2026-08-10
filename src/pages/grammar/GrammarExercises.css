@@ -3,8 +3,10 @@
    ========================================== */
 
 .grammar-exercises-page {
-  max-width: 600px;
+  max-width: 960px;
   margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
   min-height: 100vh;
   background: var(--bg-primary);
   display: flex;
@@ -15,6 +17,7 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
 }
+
 
 /* Neutral Header - matching theme */
 .exercises-header {
