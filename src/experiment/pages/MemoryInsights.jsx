@@ -169,7 +169,7 @@ function WordInsightCard({ memory, confusionPairs }) {
   const simulatorOptions = useMemo(() => simulateReviewDayOptions(stability, SIMULATOR_DAYS, 30), [stability]);
   const activeSimulatorOption = simulatorOptions.find((o) => o.reviewDay === simulatorDay) || null;
 
-  if (!wordData) return null;
+  if (!wordData || !wordData.word || typeof wordData.word !== 'string' || !wordData.word.trim()) return null;
 
   const difficulty = Number(memory.difficulty) || 0.5;
   const totalReviews = Number(memory.totalReviews) || 0;
@@ -407,7 +407,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
   const [filter, setFilter] = useState('all'); // 'all' | 'due' | 'strong' | 'weak'
   const [search, setSearch] = useState('');
 
-  const entries = Object.values(memoryMap).filter(m => m.wordData);
+  const entries = Object.values(memoryMap).filter(m => m.wordData && m.wordData.word && typeof m.wordData.word === 'string' && m.wordData.word.trim());
 
   // Overall summary metrics
   const now = Date.now();

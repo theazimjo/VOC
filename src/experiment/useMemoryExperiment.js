@@ -56,6 +56,7 @@ export function useMemoryExperiment() {
   const memoryMap = useMemo(() => {
     const map = {};
     packWords.forEach((w) => {
+      if (!w || !w.word || typeof w.word !== 'string' || !w.word.trim()) return;
       const recallHistory = w.recallHistory || [];
       const reviewCount = w.reviewCount || 0;
       const lastReviewed = w.lastReviewed || null;

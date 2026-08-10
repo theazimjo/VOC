@@ -162,6 +162,9 @@ export function PacksProvider({ children }) {
       const wordsObj = wordsByPack[packId] || {};
       Object.keys(wordsObj).forEach((wordId) => {
         const word = wordsObj[wordId];
+        if (!word || typeof word !== 'object' || !word.word || typeof word.word !== 'string' || !word.word.trim()) {
+          return;
+        }
         flat.push({
           id: wordId,
           ...word,
