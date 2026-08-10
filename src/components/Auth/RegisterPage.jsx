@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import VocLogo from '../common/VocLogo';
 import './LoginPage.css'; // Glass material, background video, card chrome
 import './RegisterPage.css'; // Password-strength indicator styles
 
@@ -200,8 +201,8 @@ export default function RegisterPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="auth-logo">VOC</div>
-          <p className="auth-tagline">Create a new account</p>
+          <VocLogo size="lg" />
+          <p className="auth-tagline" style={{ marginTop: '0.5rem' }}>Create a new account</p>
         </motion.div>
 
         {/* Error */}

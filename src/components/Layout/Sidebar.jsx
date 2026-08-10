@@ -2,16 +2,15 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, ChevronLeft, ChevronRight, LogOut, GraduationCap as LogoIcon, FlaskConical, Shield, Building2 } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, Trophy, Settings, ChevronLeft, ChevronRight, LogOut, Shield, FlaskConical } from 'lucide-react';
+import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
 const baseNavItems = [
   { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/library',  icon: BookOpen,        label: 'Library' },
   { to: '/grammar',  icon: GraduationCap,   label: 'Grammar' },
-  { to: '/grammar-test', icon: Trophy,       label: 'Exams' },
   { to: '/experiment', icon: FlaskConical,   label: 'Memory Lab' },
-  { to: '/settings', icon: Settings,        label: 'Settings' },
 ];
 
 
@@ -39,7 +38,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
 
   const navItems = [...baseNavItems];
   const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
-  if (SUPER_ADMINS.includes(user?.email)) {
+  if (user?.email && SUPER_ADMINS.includes(user.email.toLowerCase())) {
     navItems.push({ to: '/admin', icon: Shield, label: 'Admin Panel' });
   }
 
@@ -60,10 +59,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
       >
         {/* Header */}
         <div className="sidebar-header">
-          <div className="sidebar-logo">
-            <LogoIcon size={22} strokeWidth={2.4} />
-            {!collapsed && <span>VOC</span>}
-          </div>
+          <VocLogo collapsed={collapsed} />
           <button
             className="sidebar-toggle"
             onClick={onToggle}

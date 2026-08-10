@@ -1,0 +1,81 @@
+.voc-logo-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.voc-logo-img-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.25);
+  flex-shrink: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #0b0f19;
+}
+
+.voc-logo-brand:hover .voc-logo-img-wrap {
+  box-shadow: 0 0 22px rgba(168, 85, 247, 0.45);
+  transform: scale(1.05);
+}
+
+.voc-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.voc-logo-text-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.1;
+}
+
+.voc-logo-title {
+  font-family: inherit;
+  font-size: 1.28rem;
+  font-weight: 850;
+  letter-spacing: 0.07em;
+  background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 24px rgba(192, 132, 252, 0.25);
+  display: inline-block;
+}
+
+.voc-logo-subtitle {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Size Variants */
+.voc-logo--sm .voc-logo-img-wrap {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+.voc-logo--sm .voc-logo-title {
+  font-size: 1.05rem;
+}
+
+.voc-logo--lg .voc-logo-img-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+.voc-logo--lg .voc-logo-title {
+  font-size: 1.7rem;
+}

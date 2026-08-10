@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, BookOpen, ClipboardList, User
 } from 'lucide-react';
+import VocLogo from '../common/VocLogo';
 import './CorpAdminSidebar.css';
 
 export default function StudentSidebar() {
@@ -17,12 +18,8 @@ export default function StudentSidebar() {
   return (
     <aside className="corp-admin-sidebar">
       {/* Sidebar Top / Brand */}
-      <div className="sidebar-brand-header" style={{ padding: '1.5rem 1.5rem 1rem 1.5rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-        <div className="brand-text-meta">
-          <span className="center-title" style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '0.05em', color: '#c084fc' }}>
-            VOCABRY
-          </span>
-        </div>
+      <div className="sidebar-brand-header" style={{ padding: '1.25rem 1.5rem 1rem 1.5rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
+        <VocLogo subTitle="Student Portal" />
       </div>
 
       {/* Navigation Menu */}

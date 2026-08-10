@@ -1,7 +1,7 @@
 {
-  "name": "VOC",
-  "short_name": "VOC",
-  "description": "VOC — So'z boyligi, grammatika va IELTS mashqlari platformasi",
+  "name": "VOCABRY",
+  "short_name": "VOCABRY",
+  "description": "VOCABRY — So'z boyligi, grammatika va IELTS mashqlari platformasi",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F2F2F7",
@@ -9,9 +9,9 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],

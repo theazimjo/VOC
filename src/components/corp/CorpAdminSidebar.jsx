@@ -5,6 +5,7 @@ import {
   BarChart3, Settings, LogOut, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import VocLogo from '../common/VocLogo';
 import './CorpAdminSidebar.css';
 
 export default function CorpAdminSidebar({ centerName, email }) {
@@ -30,15 +31,7 @@ export default function CorpAdminSidebar({ centerName, email }) {
     <aside className={`corp-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
       {/* Sidebar Top / Brand */}
       <div className="sidebar-brand-header">
-        <div className="brand-logo-wrap">
-          <Building2 size={22} strokeWidth={2.4} />
-        </div>
-        {!collapsed && (
-          <div className="brand-text-meta">
-            <span className="center-title">{centerName || "Learning Center"}</span>
-            <span className="center-role-tag">Center Admin</span>
-          </div>
-        )}
+        <VocLogo collapsed={collapsed} subTitle={centerName ? `${centerName} • Admin` : 'Center Admin'} />
 
         <button
           className="sidebar-collapse-toggle"

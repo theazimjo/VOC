@@ -104,7 +104,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const handleJoinNewGroup = async (e) => {
     e.preventDefault();
     if (!pinCode.trim() || pinCode.length !== 6) {
-      setJoinError('Guruh PIN kodi 6 xonali bo\'lishi kerak!');
+      setJoinError('Group PIN code must be 6 digits.');
       return;
     }
     setJoining(true);
@@ -119,7 +119,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
       setShowSwitcher(false);
       navigate('/corp/student');
     } catch (err) {
-      setJoinError(err.message || 'Ulanishda xatolik yuz berdi.');
+      setJoinError(err.message || 'An error occurred while joining group.');
     } finally {
       setJoining(false);
     }

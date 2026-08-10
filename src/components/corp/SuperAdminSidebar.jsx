@@ -5,6 +5,7 @@ import {
   Megaphone, Settings, LogOut, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import VocLogo from '../common/VocLogo';
 import './CorpAdminSidebar.css';
 
 export default function SuperAdminSidebar({ email }) {
@@ -28,15 +29,7 @@ export default function SuperAdminSidebar({ email }) {
   return (
     <aside className={`corp-admin-sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-brand-header">
-        <div className="brand-logo-wrap">
-          <Shield size={22} strokeWidth={2.4} />
-        </div>
-        {!collapsed && (
-          <div className="brand-text-meta">
-            <span className="center-title">VOC Corporate</span>
-            <span className="center-role-tag">Super Admin</span>
-          </div>
-        )}
+        <VocLogo collapsed={collapsed} subTitle="Super Admin" />
 
         <button
           className="sidebar-collapse-toggle"

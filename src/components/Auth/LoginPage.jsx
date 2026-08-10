@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import { useSuccessTransition } from '../../contexts/SuccessTransitionContext';
+import VocLogo from '../common/VocLogo';
 import './LoginPage.css';
 
 // Warm every lazy chunk *in the destination's render chain* while the
@@ -338,8 +339,8 @@ export default function LoginPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="auth-logo">VOC</div>
-          <div className="auth-tagline">Welcome back</div>
+          <VocLogo size="lg" />
+          <div className="auth-tagline" style={{ marginTop: '0.5rem' }}>Welcome back</div>
         </motion.div>
 
         {/* Error */}

@@ -34,7 +34,7 @@ async function createCorpAccount(email, roleRecord, customPassword = null) {
     cred = await createUserWithEmailAndPassword(secondaryAuth, email, password);
   } catch (err) {
     if (err.code === 'auth/email-already-in-use') {
-      throw new Error('Bu telefon raqam / foydalanuvchi allaqachon ro\'yxatdan o\'tgan.', { cause: err });
+      throw new Error('This phone number / user is already registered.', { cause: err });
     }
     throw err;
   }
@@ -607,7 +607,7 @@ export async function deleteGroup(centerId, groupId) {
 export async function assignPackToGroup(centerId, groupId, packId, listKey = 'assignedPacks') {
   const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
   const snap = await get(groupRef);
-  if (!snap.exists()) throw new Error('Guruh topilmadi');
+  if (!snap.exists()) throw new Error('Group not found');
 
   const group = snap.val();
   const currentPacks = group[listKey] || [];
@@ -624,7 +624,7 @@ export async function assignPackToGroup(centerId, groupId, packId, listKey = 'as
 export async function removePackFromGroup(centerId, groupId, packId, listKey = 'assignedPacks') {
   const groupRef = ref(db, `centers/${centerId}/groups/${groupId}`);
   const snap = await get(groupRef);
-  if (!snap.exists()) throw new Error('Guruh topilmadi');
+  if (!snap.exists()) throw new Error('Group not found');
 
   const group = snap.val();
   const updatedPacks = (group[listKey] || []).filter(id => id !== packId);
@@ -644,7 +644,7 @@ export async function removePackFromGroup(centerId, groupId, packId, listKey = '
 export async function joinGroupAsUser(code, uid, profile) {
   const codeSnap = await get(ref(db, `groupCodes/${code}`));
   if (!codeSnap.exists()) {
-    throw new Error('Kiritilgan guruh kodi noto\'g\'ri!');
+    throw new Error('Invalid group code!');
   }
 
   const { centerId, groupId } = codeSnap.val();
@@ -652,7 +652,7 @@ export async function joinGroupAsUser(code, uid, profile) {
   const groupSnap = await get(groupRef);
 
   if (!groupSnap.exists()) {
-    throw new Error('Guruh topilmadi!');
+    throw new Error('Group not found!');
   }
 
   const group = groupSnap.val();
@@ -694,7 +694,7 @@ export async function joinGroupAsUser(code, uid, profile) {
 
 export async function switchActiveGroup(uid, groupId) {
   const snap = await get(ref(db, `users/${uid}/groupMemberships/${groupId}`));
-  if (!snap.exists()) throw new Error('Guruh topilmadi');
+  if (!snap.exists()) throw new Error('Group not found');
   const membership = snap.val();
   await set(ref(db, `users/${uid}/groupMembership`), membership);
   await set(ref(db, `users/${uid}/profile/appMode`), 'group');
