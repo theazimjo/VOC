@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { partOfSpeechOptions } from '../../utils/helpers';
-import { lookupWordFromDictionary } from '../../utils/dictionaryService';
+import { partOfSpeechOptions, speechLanguages } from '../../utils/helpers';
+import { lookupWordFromDictionary, toShortLangCode } from '../../utils/dictionaryService';
 import './WordForm.css';
 
-export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
+export default function WordForm({ isOpen, onClose, onSave, editWord = null, packLanguage = 'en-US' }) {
+  const wordLangCode = toShortLangCode(packLanguage);
+  const wordLangMeta = speechLanguages.find(l => l.code === packLanguage) || speechLanguages[0];
+
   const [formData, setFormData] = useState({
     word: '',
     translation: '',
@@ -48,17 +51,18 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
   }, [editWord, isOpen]);
 
   const handleDictionaryLookup = async () => {
-    const englishQuery = formData.word.trim();
+    const wordQuery = formData.word.trim();
     const uzbekQuery = formData.translation.trim();
-    if ((!englishQuery && !uzbekQuery) || isLookingUp) return;
+    if ((!wordQuery && !uzbekQuery) || isLookingUp) return;
 
     setIsLookingUp(true);
     setLookupError(null);
 
     try {
       const res = await lookupWordFromDictionary(
-        englishQuery || uzbekQuery,
-        englishQuery ? 'en2uz' : 'uz2en'
+        wordQuery || uzbekQuery,
+        wordQuery ? 'word2translation' : 'translation2word',
+        wordLangCode
       );
       if (res) {
         setFormData(prev => ({
@@ -133,13 +137,13 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                 )}
 
                 <div className="input-group">
-                  <label>English word *</label>
+                  <label>{wordLangMeta.flag} {wordLangMeta.label}cha so'z *</label>
                   <input
                     type="text"
                     className="input"
                     value={formData.word}
                     onChange={e => setFormData({...formData, word: e.target.value})}
-                    placeholder="E.g.: Serendipity"
+                    placeholder={wordLangCode === 'en' ? "E.g.: Serendipity" : "So'zni kiriting"}
                     required
                     autoFocus
                     maxLength={300}
@@ -147,7 +151,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
                 </div>
 
                 <div className="input-group">
-                  <label>Uzbek translation *</label>
+                  <label>🇺🇿 O'zbekcha tarjima *</label>
                   <input
                     type="text"
                     className="input"

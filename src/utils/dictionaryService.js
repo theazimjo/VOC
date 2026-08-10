@@ -1,14 +1,29 @@
 /**
  * Free, keyless online dictionary/translation lookup (no AI).
- * - MyMemory: free translation-memory database, used for en<->uz word translation.
+ * - MyMemory: free translation-memory database, used for word<->uz translation
+ *   across every language the app's packs support.
  * - dictionaryapi.dev: free English dictionary database, used for part of speech,
- *   definition and an example sentence for the English word.
+ *   definition and an example sentence — only reliable for English words, so
+ *   it's skipped for non-English pack languages.
  */
 
 const MYMEMORY_ENDPOINT = 'https://api.mymemory.translated.net/get';
 const FREE_DICTIONARY_ENDPOINT = 'https://api.dictionaryapi.dev/api/v2/entries/en';
 
+// Matches the locale codes used by `speechLanguages` in utils/helpers.js.
+const LOCALE_TO_SHORT_CODE = {
+  'en-US': 'en', 'es-ES': 'es', 'fr-FR': 'fr', 'de-DE': 'de', 'it-IT': 'it',
+  'pt-PT': 'pt', 'ru-RU': 'ru', 'tr-TR': 'tr', 'ar-SA': 'ar', 'zh-CN': 'zh',
+  'ja-JP': 'ja', 'ko-KR': 'ko', 'uz-UZ': 'uz'
+};
+
+export function toShortLangCode(localeCode) {
+  if (!localeCode) return 'en';
+  return LOCALE_TO_SHORT_CODE[localeCode] || localeCode.split('-')[0].toLowerCase();
+}
+
 async function translateWord(query, fromLang, toLang) {
+  if (fromLang === toLang) return query;
   const url = `${MYMEMORY_ENDPOINT}?q=${encodeURIComponent(query)}&langpair=${fromLang}|${toLang}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error("Tarjima bazasiga ulanib bo'lmadi");
@@ -47,17 +62,19 @@ async function fetchEnglishDictionaryInfo(word) {
 
 /**
  * Looks up a word from the free online database.
- * direction: 'en2uz' (query is the English word) or 'uz2en' (query is the Uzbek translation).
+ * direction: 'word2translation' (query is in the pack's word language) or
+ *            'translation2word' (query is the Uzbek translation).
+ * wordLangCode: short language code of the pack's word side (e.g. 'en', 'es', 'fr'; default 'en').
  * Returns { word, translation, partOfSpeech, definition, example } or null if nothing was found.
  */
-export async function lookupWordFromDictionary(query, direction) {
+export async function lookupWordFromDictionary(query, direction, wordLangCode = 'en') {
   const trimmed = (query || '').trim();
   if (!trimmed) return null;
 
-  if (direction === 'en2uz') {
+  if (direction === 'word2translation') {
     const [translation, dictInfo] = await Promise.all([
-      translateWord(trimmed, 'en', 'uz'),
-      fetchEnglishDictionaryInfo(trimmed)
+      translateWord(trimmed, wordLangCode, 'uz'),
+      wordLangCode === 'en' ? fetchEnglishDictionaryInfo(trimmed) : Promise.resolve(null)
     ]);
     if (!translation && !dictInfo) return null;
     return {
@@ -69,11 +86,11 @@ export async function lookupWordFromDictionary(query, direction) {
     };
   }
 
-  const englishWord = await translateWord(trimmed, 'uz', 'en');
-  if (!englishWord) return null;
-  const dictInfo = await fetchEnglishDictionaryInfo(englishWord);
+  const word = await translateWord(trimmed, 'uz', wordLangCode);
+  if (!word) return null;
+  const dictInfo = wordLangCode === 'en' ? await fetchEnglishDictionaryInfo(word) : null;
   return {
-    word: englishWord,
+    word,
     translation: trimmed,
     partOfSpeech: dictInfo?.partOfSpeech || '',
     definition: dictInfo?.definition || '',

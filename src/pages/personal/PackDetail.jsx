@@ -285,12 +285,14 @@ export default function PackDetail() {
         onClose={() => { setShowWordForm(false); setEditingWord(null); }}
         onSave={handleSaveWord}
         editWord={editingWord}
+        packLanguage={pack.language || 'en-US'}
       />
 
       <BulkImportForm
         isOpen={showBulkImportForm}
         onClose={() => setShowBulkImportForm(false)}
         onImport={handleBulkImport}
+        packLanguage={pack.language || 'en-US'}
       />
 
       <PhotoWordExtractorModal
