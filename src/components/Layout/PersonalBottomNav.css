@@ -66,12 +66,18 @@
    active, instead of each tab toggling its own background on and off. */
 .personal-bottom-nav-pill {
   position: absolute;
+  left: 0;
   top: 5px;
   bottom: 5px;
   border-radius: 18px;
   background: var(--accent-1-dim);
   z-index: 0;
   pointer-events: none;
+  /* Slid via transform (GPU-composited), never left/width — animating
+     those forces a synchronous layout recalc on every frame, which is
+     what caused the freeze when this competed with a route transition's
+     own layout work. */
+  will-change: transform;
 }
 
 /* ── Each Nav Item ───────────────────────── */

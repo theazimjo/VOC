@@ -63,8 +63,9 @@ export default function StudentBottomNav() {
         <motion.div
           className="corp-bottom-nav-pill"
           initial={false}
-          animate={{ left: pillRect.left, width: pillRect.width }}
+          animate={{ x: pillRect.left }}
           transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
+          style={{ width: pillRect.width }}
         />
       )}
       {NAV_ITEMS.map((item, index) => {
