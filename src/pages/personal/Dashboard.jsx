@@ -12,10 +12,10 @@ import WhatsNewModal, { WHATS_NEW_VERSION } from '../../components/Onboarding/Wh
 import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import './Dashboard.css';
 
-const WEEKDAY_LABELS = ['Ya', 'Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sh'];
+const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MONTH_NAMES = [
-  'Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun',
-  'Iyul', 'Avgust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr',
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
 ];
 const TARGET_STEP = 10;
 const TARGET_MIN = 10;
@@ -256,13 +256,13 @@ export default function Dashboard() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 6) return 'Assalomu alaykum';
-    if (hour < 12) return 'Xayrli tong';
-    if (hour < 18) return 'Xayrli kun';
-    return 'Xayrli kech';
+    if (hour < 6) return 'Hello';
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
   };
 
-  const displayName = user?.displayName || user?.email?.split('@')[0] || 'Foydalanuvchi';
+  const displayName = user?.displayName || user?.email?.split('@')[0] || 'User';
 
   return (
     <div className="dash-ov-container">
@@ -277,25 +277,25 @@ export default function Dashboard() {
         {/* ── Target words ── */}
         <PackHeaderHero
           icon={<Target size={22} />}
-          tag={targetReached ? "Maqsadga erishildi 🎉" : null}
-          title="Maqsad so'zlar"
+          tag={targetReached ? 'Target reached 🎉' : null}
+          title="Target Words"
           subtitle={targetReached
-            ? `${targetWords} so'zdan iborat maqsadingizga erishdingiz — davom etish uchun yangi maqsad belgilang`
-            : `${displayLearned} / ${targetWords} so'z o'rganildi`}
+            ? `You've reached your goal of ${targetWords} words — set a new target to keep going`
+            : `${displayLearned} / ${targetWords} words learned`}
           masteryPct={learnedPct}
           metrics={[
-            { icon: <Target size={16} />, label: 'MAQSAD', value: targetWords, color: 'blue', onClick: openEditor },
-            { icon: <CheckCircle2 size={16} />, label: "O'RGANILDI", value: displayLearned, color: 'green' },
+            { icon: <Target size={16} />, label: 'TARGET', value: targetWords, color: 'blue', onClick: openEditor },
+            { icon: <CheckCircle2 size={16} />, label: 'LEARNED', value: displayLearned, color: 'green' },
           ]}
         />
 
         {/* ── Personal calendar ── */}
         <div className="dash-ov-cal-card">
           <div className="dash-ov-cal-header">
-            <span className="dash-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Faollik taqvimi</span>
+            <span className="dash-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Activity Calendar</span>
             <span className="dash-ov-cal-month">{MONTH_NAMES[month]}</span>
           </div>
-          <p className="dash-ov-cal-summary">Bu oy <strong>{monthTotal}</strong> ta so'zni takrorladingiz</p>
+          <p className="dash-ov-cal-summary">You've reviewed <strong>{monthTotal}</strong> words this month</p>
 
           <div className="dash-ov-cal-weekdays">
             {WEEKDAY_LABELS.map(d => <span key={d} className="dash-ov-cal-weekday">{d}</span>)}
@@ -320,15 +320,15 @@ export default function Dashboard() {
           <div className="dash-ov-hw-header">
             <div className="dash-ov-hw-header-left">
               <div className="dash-ov-hw-icon"><RotateCcw size={20} strokeWidth={2.2} /></div>
-              <h3>Takrorlash kerak</h3>
+              <h3>Due for Review</h3>
             </div>
             {dueWords > 0 && (
-              <span className="dash-ov-hw-count">{dueWords} ta so'z</span>
+              <span className="dash-ov-hw-count">{dueWords} words</span>
             )}
           </div>
 
           {dueWords === 0 ? (
-            <p>Hozircha takrorlash kerak bo'lgan so'z yo'q. Ajoyib ish!</p>
+            <p>No words due for review right now. Great job!</p>
           ) : (
             <>
               <div className="dash-ov-hw-list">
@@ -358,7 +358,7 @@ export default function Dashboard() {
                 className="dash-ov-hw-practice-btn"
                 onClick={() => navigate('/mixed-practice?filter=due')}
               >
-                Takrorlashni boshlash
+                Start Review
               </button>
             </>
           )}
@@ -376,13 +376,13 @@ export default function Dashboard() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="dash-ov-congrats-icon"><PartyPopper size={34} strokeWidth={2} /></div>
-            <h3 className="dash-ov-congrats-title">Tabriklaymiz! 🎉</h3>
+            <h3 className="dash-ov-congrats-title">Congratulations! 🎉</h3>
             <p className="dash-ov-congrats-text">
-              Siz maqsadingizga yetdingiz — <strong>{targetWords} / {targetWords}</strong> so'z o'rganildi!
+              You've reached your target — <strong>{targetWords} / {targetWords}</strong> words learned!
             </p>
 
             <button type="button" className="dash-ov-target-save-btn" onClick={startNewTarget}>
-              <Target size={18} strokeWidth={2.6} /> Yangi maqsad belgilash
+              <Target size={18} strokeWidth={2.6} /> Set New Target
             </button>
           </motion.div>
         </div>
@@ -400,9 +400,9 @@ export default function Dashboard() {
           >
             <div className="dash-ov-target-header">
               <div className="dash-ov-target-header-icon"><Target size={18} strokeWidth={2.3} /></div>
-              <h3>Maqsadingizni belgilang</h3>
+              <h3>Set Your Target</h3>
               {!mustRaiseTarget && (
-                <button type="button" className="dash-ov-target-close" onClick={closeEditor} aria-label="Yopish">
+                <button type="button" className="dash-ov-target-close" onClick={closeEditor} aria-label="Close">
                   <X size={18} strokeWidth={2.3} />
                 </button>
               )}
@@ -440,14 +440,14 @@ export default function Dashboard() {
               />
               <div className="dash-ov-dial-center">
                 <span className="dash-ov-dial-value">{draftTarget}</span>
-                <span className="dash-ov-dial-unit">so'z</span>
+                <span className="dash-ov-dial-unit">words</span>
               </div>
             </div>
 
             <p className="dash-ov-dial-hint">
               {mustRaiseTarget
-                ? `Siz ${targetWords} taga yetdingiz — davom etish uchun yuqoriroq maqsad tanlang`
-                : "Maqsadni belgilash uchun halqani suring"}
+                ? `You've hit ${targetWords} — drag to set a higher target to keep going`
+                : 'Drag the ring to set your target'}
             </p>
 
             <button
@@ -456,7 +456,7 @@ export default function Dashboard() {
               onClick={saveTarget}
               disabled={mustRaiseTarget && draftTarget <= targetWords}
             >
-              <Check size={18} strokeWidth={2.6} /> Maqsadni saqlash
+              <Check size={18} strokeWidth={2.6} /> Save Target
             </button>
           </motion.div>
         </div>

@@ -50,6 +50,10 @@ export default function Layout() {
   const segments = location.pathname.split('/').filter(Boolean);
   const isTestMode = (segments.length === 4 && segments[0] === 'grammar') ||
                      (segments[0] === 'grammar-test' && segments[1] === 'run');
+  // The Dashboard provides its own full padding + background (mirroring
+  // the corp student dashboard's — see .dash-ov-container), so the shared
+  // page padding here would otherwise just stack on top of it.
+  const isDashboard = location.pathname === '/';
 
   return (
     <div className={`layout ${isTestMode ? 'layout--test-mode' : ''}`}>
@@ -76,10 +80,10 @@ export default function Layout() {
 
       <main
         className={`layout-content ${
-          isTestMode 
-            ? 'layout-content--test-mode' 
+          isTestMode
+            ? 'layout-content--test-mode'
             : (appMode === 'group' ? 'layout-content--expanded' : (collapsed ? 'layout-content--collapsed' : 'layout-content--expanded'))
-        }`}
+        } ${isDashboard && !isTestMode ? 'layout-content--dashboard' : ''}`}
       >
         <Outlet />
       </main>
