@@ -295,7 +295,7 @@ export default function Dashboard() {
             <span className="dash-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Activity Calendar</span>
             <span className="dash-ov-cal-month">{MONTH_NAMES[month]}</span>
           </div>
-          <p className="dash-ov-cal-summary">You've reviewed <strong>{monthTotal}</strong> words this month</p>
+          <p className="dash-ov-cal-summary">You've completed <strong>{monthTotal}</strong> reviews this month</p>
 
           <div className="dash-ov-cal-weekdays">
             {WEEKDAY_LABELS.map(d => <span key={d} className="dash-ov-cal-weekday">{d}</span>)}

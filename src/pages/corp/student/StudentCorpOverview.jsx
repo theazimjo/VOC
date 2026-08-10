@@ -270,7 +270,7 @@ export default function StudentCorpOverview() {
             <span className="corp-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Activity Calendar</span>
             <span className="corp-ov-cal-month">{MONTH_NAMES[month]}</span>
           </div>
-          <p className="corp-ov-cal-summary">You've reviewed <strong>{monthTotal}</strong> words this month</p>
+          <p className="corp-ov-cal-summary">You've completed <strong>{monthTotal}</strong> reviews this month</p>
 
           <div className="corp-ov-cal-weekdays">
             {WEEKDAY_LABELS.map(d => <span key={d} className="corp-ov-cal-weekday">{d}</span>)}
