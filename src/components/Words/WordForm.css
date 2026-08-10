@@ -1,15 +1,133 @@
+.word-form-modal {
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.word-form-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.word-form-modal-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.word-form-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-lookup-auto {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  background: rgba(124, 58, 237, 0.15);
+  color: #a855f7;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-lookup-auto:hover:not(:disabled) {
+  background: rgba(124, 58, 237, 0.25);
+}
+
+.btn-lookup-auto:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modal-close-btn {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  border-radius: 8px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.1rem !important;
+}
+
 .word-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-md);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.word-form-grid *,
+.word-form-grid input,
+.word-form-grid select,
+.word-form-grid textarea {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .word-form-full {
   grid-column: 1 / -1;
+  width: 100%;
+}
+
+.btn-more-options {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--accent-1, #7c3aed);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: normal;
+  text-align: center;
+  word-break: break-word;
+  transition: background 0.2s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.btn-more-options:hover {
+  background: rgba(124, 58, 237, 0.1);
 }
 
 @media (max-width: 600px) {
+  .word-form-modal-header {
+    padding: 12px 14px;
+  }
+
+  .word-form-modal-header h2 {
+    font-size: 1.05rem;
+  }
+
+  .btn-lookup-auto {
+    padding: 5px 8px;
+    font-size: 0.72rem;
+  }
+
   .word-form-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 }

@@ -102,29 +102,24 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null, pac
       {isOpen && (
         <div className="modal-overlay" onClick={onClose}>
           <motion.div 
-            className="modal"
+            className="modal word-form-modal"
             onClick={e => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
           >
-            <div className="modal-header">
+            <div className="modal-header word-form-modal-header">
               <h2>{editWord ? "Edit Word" : "New Word"}</h2>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div className="word-form-header-actions">
                 <button
                   type="button"
+                  className="btn-lookup-auto"
                   onClick={handleDictionaryLookup}
                   disabled={isLookingUp || (!formData.word.trim() && !formData.translation.trim())}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '4px',
-                    padding: '6px 10px', borderRadius: '8px', border: 'none',
-                    background: 'rgba(124, 58, 237, 0.15)', color: 'var(--accent-1, #7c3aed)',
-                    fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap'
-                  }}
                 >
                   {isLookingUp ? "⏳ Qidirilmoqda..." : "🔎 Lug'atdan qidirish"}
                 </button>
-                <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
+                <button className="btn btn-ghost btn-icon modal-close-btn" onClick={onClose}>✕</button>
               </div>
             </div>
 
@@ -166,11 +161,10 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null, pac
                 <div className="word-form-full" style={{ textAlign: 'center', marginTop: '4px', marginBottom: '4px' }}>
                   <button
                     type="button"
-                    className="btn btn-ghost"
+                    className="btn-more-options"
                     onClick={() => setShowMore(!showMore)}
-                    style={{ fontSize: '0.82rem', color: 'var(--accent-1, #7c3aed)', fontWeight: '500' }}
                   >
-                    {showMore ? "🔼 Fewer options" : "⚙️ More options (Definition, example, and part of speech)"}
+                    {showMore ? "🔼 Fewer options" : "⚙️ More options (Definition, example, etc.)"}
                   </button>
                 </div>
 
