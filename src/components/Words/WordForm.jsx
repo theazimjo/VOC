@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { partOfSpeechOptions } from '../../utils/helpers';
+import { lookupWordFromDictionary } from '../../utils/dictionaryService';
 import './WordForm.css';
 
 export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
@@ -15,6 +16,8 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [isLookingUp, setIsLookingUp] = useState(false);
+  const [lookupError, setLookupError] = useState(null);
 
   useEffect(() => {
     if (editWord) {
@@ -41,7 +44,41 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
       setShowMore(false);
     }
     setIsSubmitting(false);
+    setLookupError(null);
   }, [editWord, isOpen]);
+
+  const handleDictionaryLookup = async () => {
+    const englishQuery = formData.word.trim();
+    const uzbekQuery = formData.translation.trim();
+    if ((!englishQuery && !uzbekQuery) || isLookingUp) return;
+
+    setIsLookingUp(true);
+    setLookupError(null);
+
+    try {
+      const res = await lookupWordFromDictionary(
+        englishQuery || uzbekQuery,
+        englishQuery ? 'en2uz' : 'uz2en'
+      );
+      if (res) {
+        setFormData(prev => ({
+          ...prev,
+          word: res.word || prev.word,
+          translation: res.translation || prev.translation,
+          partOfSpeech: res.partOfSpeech || prev.partOfSpeech,
+          definition: res.definition || prev.definition,
+          example: res.example || prev.example
+        }));
+        if (res.partOfSpeech || res.definition || res.example) setShowMore(true);
+      } else {
+        setLookupError("Bazadan tarjima topilmadi.");
+      }
+    } catch (err) {
+      setLookupError(err.message || "Bazadan qidirishda xatolik yuz berdi");
+    } finally {
+      setIsLookingUp(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,11 +106,32 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null }) {
           >
             <div className="modal-header">
               <h2>{editWord ? "Edit Word" : "New Word"}</h2>
-              <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <button
+                  type="button"
+                  onClick={handleDictionaryLookup}
+                  disabled={isLookingUp || (!formData.word.trim() && !formData.translation.trim())}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: '4px',
+                    padding: '6px 10px', borderRadius: '8px', border: 'none',
+                    background: 'rgba(124, 58, 237, 0.15)', color: 'var(--accent-1, #7c3aed)',
+                    fontSize: '0.75rem', fontWeight: '700', cursor: 'pointer', whiteSpace: 'nowrap'
+                  }}
+                >
+                  {isLookingUp ? "⏳ Qidirilmoqda..." : "🔎 Lug'atdan qidirish"}
+                </button>
+                <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
+              </div>
             </div>
-            
+
             <form onSubmit={handleSubmit}>
               <div className="modal-body word-form-grid">
+                {lookupError && (
+                  <div className="word-form-full" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(220, 38, 38, 0.1)', color: '#dc2626', fontSize: '0.8rem' }}>
+                    ⚠️ {lookupError}
+                  </div>
+                )}
+
                 <div className="input-group">
                   <label>English word *</label>
                   <input
