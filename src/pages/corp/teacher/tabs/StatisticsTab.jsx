@@ -19,7 +19,7 @@ export default function StatisticsTab({ p }) {
             >
               <BarChart3 size={13} /> Stats
             </span>
-            <h1 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 800, color: 'var(--pg-text)' }}>Results & Statistics</h1>
+            <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--pg-text)' }}>Results & Statistics</h1>
             <p style={{ margin: '3px 0 0 0', fontSize: '0.8rem', color: 'var(--pg-text-secondary)' }}>
               Vocabulary mastery trends across your groups and students.
             </p>

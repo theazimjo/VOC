@@ -66,7 +66,7 @@ export default function CoursesTab({ p }) {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
               <div>
-                <h2 style={{ fontSize: '1.2rem', color: 'var(--pg-text)', margin: 0, fontWeight: 700 }}>
+                <h2 style={{ fontSize: '1.75rem', color: 'var(--pg-text)', margin: 0, fontWeight: 800, letterSpacing: '-0.02em' }}>
                   Word Bank
                 </h2>
                 <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem', color: 'var(--pg-text-secondary)' }}>{customPacks.length} packs</p>

@@ -3,6 +3,70 @@
    states) reused by 2+ pages, plus some legacy classes kept for safety that
    no current page matches by class name. */
 
+/* ── Bottom nav: real iOS-style translucent tab bar ──
+   .bottom-nav (src/components/Layout/BottomNav.css) is shared with the
+   individual-learner app and every other corp role, so it's intentionally
+   left untouched — this overrides it only for TeacherBottomNav's extra
+   .teacher-bottom-nav class. The base rule already had backdrop-filter:
+   blur(24px) saturate(180%) but paired it with a fully opaque
+   var(--bg-secondary), so the blur was doing nothing — content never
+   showed through no matter how you scrolled. Making the background
+   translucent is the one change that makes it actually a glass tab bar
+   instead of a solid one that happens to have an unused blur filter. */
+.teacher-bottom-nav {
+  background: rgba(23, 23, 31, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="ios"] .teacher-bottom-nav {
+  background: rgba(255, 255, 255, 0.72) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .teacher-bottom-nav {
+    background: var(--bg-secondary) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* ── Bottom nav: sliding active-tab pill ──
+   The shared .bottom-nav-link.active just gives each tab its own static
+   background, so switching tabs is two independent fades happening at
+   once instead of one shape actually travelling across the bar. Framer
+   Motion's layoutId gives every tab bar in the app this "for free" the
+   iOS way: one shared pill element that a spring animates from its old
+   position to its new one whenever the active tab changes. */
+.teacher-bottom-nav .bottom-nav-link {
+  position: relative;
+}
+
+.teacher-bottom-nav .bottom-nav-link.active {
+  background: none !important;
+  color: var(--accent, #0a84ff) !important;
+}
+
+.teacher-bottom-nav .bottom-nav-icon,
+.teacher-bottom-nav .bottom-nav-label {
+  position: relative;
+  z-index: 1;
+}
+
+.bottom-nav-active-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(var(--accent-rgb, 10, 132, 255), 0.14);
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bottom-nav-active-pill {
+    transition: none !important;
+  }
+}
+
 /* ── List entrance stagger ─────────────────────
    Applied to every repeated-row/card list (bento grid, groups table,
    student/pack/homework rows). Plays once per mount — React's stable
@@ -44,11 +108,11 @@
 .teacher-dashboard-container .new-course-modal {
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--r-xl, 22px);
   max-width: none;
   width: 100%;
   margin: 0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
   color: var(--text-primary);
 }
 
@@ -196,7 +260,7 @@
      .teacher-dashboard-container in TeacherDashboard.css). */
   background: var(--pg-bg);
   border: 1px solid var(--pg-hairline);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
   color: var(--pg-text);
 }
 
@@ -204,11 +268,11 @@
 .group-settings-bento-modal {
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: var(--r-xl, 22px);
   padding: 1.4rem 1.5rem;
   width: 100%;
   max-width: 440px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -253,9 +317,9 @@
 .teacher-dashboard-container .modal-content {
   background: var(--pg-bg) !important;
   border: 1px solid var(--pg-hairline) !important;
-  border-radius: 14px !important;
+  border-radius: var(--r-md, 14px) !important;
   padding: 1.4rem 1.5rem !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+  box-shadow: var(--card-shadow) !important;
   color: var(--pg-text);
 }
 
@@ -316,7 +380,7 @@
   padding: 8px 12px;
   margin-top: 0.25rem;
   margin-bottom: 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 }
 
 .ios-group-top-bar::before {
@@ -335,10 +399,10 @@
 .teacher-settings-hero-card {
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 1.1rem 1.25rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  border-radius: var(--r-xl, 22px);
+  padding: 1.35rem 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--card-shadow);
   position: relative;
   overflow: hidden;
   max-width: 650px;
@@ -502,7 +566,7 @@
   justify-content: space-between;
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: var(--r-xl, 22px);
   padding: 16px 18px;
   min-height: 145px;
   cursor: pointer;
@@ -541,7 +605,7 @@
 
 .ios-bento-card:hover {
   transform: translateY(-3px) scale(1.01);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .ios-bento-card:active {
@@ -590,9 +654,9 @@
 .student-progress-row {
   background: var(--bg-glass-strong) !important;
   border: 1px solid var(--border) !important;
-  border-radius: 20px !important;
+  border-radius: var(--r-lg, 18px) !important;
   padding: 12px 14px !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+  box-shadow: var(--card-shadow) !important;
   position: relative !important;
   overflow: hidden !important;
   display: flex !important;
@@ -615,7 +679,7 @@
 
 .student-progress-row:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: var(--card-shadow-hover) !important;
   border-color: rgba(var(--accent-rgb), 0.3) !important;
 }
 
@@ -890,10 +954,10 @@
   display: none;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: var(--r-xl, 22px);
   padding: 1.25rem 1.4rem;
   margin-top: 1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 }
 
 .tpv-hero-top {
@@ -1331,7 +1395,7 @@
 .group-kpi-nav-card:hover {
   transform: translateY(-2px);
   border-color: rgba(var(--accent-rgb), 0.35);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .kpi-card-header {
@@ -1485,10 +1549,10 @@
   gap: 1.25rem;
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--r-xl, 22px);
   padding: 1.25rem 1.4rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
 }
 
 .teacher-badge {
@@ -1718,8 +1782,8 @@
 .teacher-dashboard-container .teachers-table-card {
   background: var(--pg-bg) !important;
   border: 1px solid var(--pg-hairline) !important;
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  border-radius: var(--r-lg, 18px);
+  box-shadow: var(--card-shadow);
   overflow: hidden;
 }
 
@@ -1770,12 +1834,13 @@
   border: 1px solid var(--pg-hairline);
   border-radius: 10px;
   padding: 0.85rem 1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
   transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .group-stat-card:hover {
   transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .group-stat-label {
@@ -1898,19 +1963,19 @@
 .teacher-dashboard-container .custom-pack-card {
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--r-lg, 18px);
   padding: 1.1rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--card-shadow);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
 }
 
 .teacher-dashboard-container .custom-pack-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--card-shadow-hover);
   border-color: rgba(var(--accent-rgb), 0.35);
 }
 
@@ -1951,8 +2016,8 @@
   color: var(--text-secondary) !important;
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  border-radius: var(--r-lg, 18px);
+  box-shadow: var(--card-shadow);
 }
 
 /* ── Page Top Bar (title + search toggle) ─────
@@ -1963,9 +2028,9 @@
   flex-direction: column;
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 1rem 1.1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  border-radius: var(--r-xl, 22px);
+  padding: 1.25rem 1.4rem;
+  box-shadow: var(--card-shadow);
 }
 
 .courses-top-bar > div:last-child {
@@ -2096,7 +2161,7 @@
 .mobile-group-card:hover {
   background: var(--bg-glass-hover);
   border-color: rgba(var(--accent-rgb), 0.35);
-  box-shadow: var(--shadow);
+  box-shadow: var(--card-shadow-hover);
   transform: translateY(-1px);
 }
 

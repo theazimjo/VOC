@@ -311,7 +311,7 @@ export default function GroupSubtabs({ p }) {
                                         gap: '10px',
                                         background: 'var(--bg-glass-strong)',
                                         border: '1px solid var(--border)',
-                                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)'
+                                        boxShadow: 'var(--card-shadow)'
                                       }}
                                     >
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1 }}>
@@ -611,7 +611,7 @@ export default function GroupSubtabs({ p }) {
                           borderRadius: '16px',
                           background: 'var(--bg-glass-strong)',
                           border: '1px solid var(--border)',
-                          boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
+                          boxShadow: 'var(--card-shadow)',
                           display: 'flex',
                           alignItems: 'center',
                           gap: '10px'

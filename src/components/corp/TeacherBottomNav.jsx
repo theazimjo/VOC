@@ -1,4 +1,5 @@
 import { useLocation, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Users, BookOpen, BarChart3, Settings } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
@@ -30,7 +31,7 @@ export default function TeacherBottomNav() {
   ];
 
   return (
-    <nav className="bottom-nav">
+    <nav className="bottom-nav teacher-bottom-nav">
       {navItems.map((item) => {
         const IconComponent = item.icon;
         const isActive = item.isGroupTab
@@ -46,6 +47,13 @@ export default function TeacherBottomNav() {
             to={item.to}
             className={`bottom-nav-link ${isActive ? 'active' : ''}`}
           >
+            {isActive && (
+              <motion.span
+                className="bottom-nav-active-pill"
+                layoutId="teacherBottomNavPill"
+                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+              />
+            )}
             <span className="bottom-nav-icon">
               <IconComponent size={20} strokeWidth={2.2} />
             </span>

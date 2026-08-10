@@ -10,11 +10,11 @@ export default function GroupsListView({ p }) {
 
   return (
         <>
-          <div className="courses-top-bar" style={{ marginBottom: '1rem' }}>
+          <div className="courses-top-bar" style={{ marginBottom: '1.5rem' }}>
             <div className="courses-title-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
               <div className="courses-title-area">
-                <h1 style={{ fontSize: '1.4rem', margin: 0 }}>My Groups</h1>
-                <p style={{ margin: '2px 0 0 0', fontSize: '0.78rem' }}>{activeGroups.length} active groups · {totalStudents} students</p>
+                <h1 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', margin: 0 }}>My Groups</h1>
+                <p style={{ margin: '4px 0 0 0', fontSize: '0.82rem' }}>{activeGroups.length} active groups · {totalStudents} students</p>
               </div>
 
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
@@ -140,7 +140,7 @@ export default function GroupsListView({ p }) {
                         borderRadius: '16px',
                         background: 'var(--bg-glass-strong)',
                         border: '1px solid var(--border)',
-                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
+                        boxShadow: 'var(--card-shadow)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',

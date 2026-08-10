@@ -50,7 +50,7 @@
      iOS system blue rather than the Tailwind blue-500 that had crept in
      alongside it in some files; picking one and using it everywhere is
      the whole point of a "locked" accent. */
-  --accent: var(--accent);
+  --accent: #0a84ff;
   --accent-rgb: 10, 132, 255;
   --accent-hover: #0070db;
 
@@ -64,6 +64,24 @@
   --dur-fast: 160ms;
   --dur-base: 220ms;
   --dur-modal: 240ms;
+
+  /* Radius scale — every card-shaped surface in the module now picks
+     from exactly these four instead of the 10/12/14/16/18/20/22/24px
+     grab-bag that had accumulated file by file. */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
+
+  /* Real elevation. The card recipe used to be flattened all the way to
+     a near-invisible 1px hairline shadow, which is why the whole module
+     read as flat and undifferentiated from its own background — cards
+     need actual depth to read as cards. Dark mode leans on a soft top
+     inset highlight (light "catching" the card's top edge) plus a real
+     shadow, since a plain drop shadow barely shows against a near-black
+     page; light mode leans on a classic soft/wide shadow pair instead. */
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 6px 16px rgba(0, 0, 0, 0.34);
+  --card-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.07), 0 12px 28px rgba(0, 0, 0, 0.42);
 
   padding: var(--space-xl, 2rem);
   max-width: 1200px;
@@ -94,6 +112,9 @@
   --pg-text-secondary: rgba(0, 0, 0, 0.58);
   --pg-text-muted: rgba(0, 0, 0, 0.4);
   --pg-inset-highlight: rgba(255, 255, 255, 0.6);
+
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 10px 24px -8px rgba(0, 0, 0, 0.14);
+  --card-shadow-hover: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 36px -10px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
