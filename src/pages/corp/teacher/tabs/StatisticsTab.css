@@ -12,8 +12,8 @@
 }
 
 .ios-seg-card.active .ios-seg-badge {
-  background: rgba(59, 130, 246, 0.18);
-  color: #3b82f6;
+  background: rgba(var(--accent-rgb), 0.18);
+  color: var(--accent);
 }
 
 .gh-nav-tab.active {
@@ -34,10 +34,10 @@
 
 .group-kpi-nav-card.active {
   background: var(--bg-secondary);
-  border-color: #3b82f6;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.16), 0 0 0 1px #3b82f6;
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.16), 0 0 0 1px var(--accent);
 }
 
 .group-kpi-nav-card.active .kpi-title {
-  color: #3b82f6;
+  color: var(--accent);
 }

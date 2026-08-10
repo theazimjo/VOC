@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, BookOpen, ChevronRight, NotebookPen, X } from 'lucide-react';
 import { aggregatePackProgress, resolveHomeworkItemUnit } from '../../utils';
+import TeacherModal from '../../TeacherModal';
 import './GroupHomeworkDetail.css';
 
 export default function GroupHomeworkDetail({ p }) {
   const { customPacks, groupHomeworkList, groupStudentsList, hwId, navigate, selectedGroup, setViewingHomeworkItem, viewingHomeworkItem } = p;
   const [selectedStudentProgressModal, setSelectedStudentProgressModal] = useState(null);
+
+  // Keep showing the last-selected student's breakdown while the modal
+  // exits — selectedStudentProgressModal goes null the instant closing
+  // starts, and this modal's whole body reads from it.
+  const [lastProgressModal, setLastProgressModal] = useState(null);
+  useEffect(() => {
+    if (selectedStudentProgressModal) setLastProgressModal(selectedStudentProgressModal);
+  }, [selectedStudentProgressModal]);
+  const progressModal = selectedStudentProgressModal || lastProgressModal;
 
   const hw = groupHomeworkList.find(h => h.id === hwId);
 
@@ -43,7 +53,7 @@ export default function GroupHomeworkDetail({ p }) {
                     width: '100%'
                   }}
                 >
-                  <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
                     <BookOpen size={18} />
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
@@ -98,7 +108,7 @@ export default function GroupHomeworkDetail({ p }) {
               style={{ cursor: 'pointer', width: '100%', textAlign: 'left', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', padding: '8px 12px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
-                <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
                   <BookOpen size={16} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', minWidth: 0 }}>
@@ -161,7 +171,7 @@ export default function GroupHomeworkDetail({ p }) {
                   </div>
                   <span
                     className="badge-active"
-                    style={allDone ? { padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 } : { background: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)', color: '#3b82f6', padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 }}
+                    style={allDone ? { padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 } : { background: 'rgba(var(--accent-rgb), 0.12)', borderColor: 'rgba(var(--accent-rgb), 0.25)', color: 'var(--accent)', padding: '3px 8px', fontSize: '0.72rem', flexShrink: 0 }}
                   >
                     {doneCount}/{hwItems.length} done
                   </span>
@@ -173,51 +183,29 @@ export default function GroupHomeworkDetail({ p }) {
       </div>
 
       {/* Student Progress Breakdown Compact Modal */}
-      {selectedStudentProgressModal && (
-        <div
-          className="modal-overlay"
-          onClick={() => setSelectedStudentProgressModal(null)}
-          style={{
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            background: 'rgba(0, 0, 0, 0.65)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000
-          }}
-        >
-          <div
-            className="teacher-settings-hero-card modal-content"
-            onClick={e => e.stopPropagation()}
-            style={{
-              maxWidth: '420px',
-              width: '92%',
-              padding: '1.1rem 1.2rem',
-              borderRadius: '24px',
-              marginBottom: 0,
-              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
-              border: '1px solid var(--border)',
-              background: 'var(--bg-glass-strong)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
+      <TeacherModal
+        open={!!selectedStudentProgressModal}
+        onClose={() => setSelectedStudentProgressModal(null)}
+        className="teacher-settings-hero-card"
+        maxWidth="420px"
+      >
+        {progressModal && (
+          <>
             {/* Top-Right Soft Blue Radial Glow */}
-            <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '180px', height: '180px', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            <div style={{ position: 'absolute', top: '-50px', right: '-50px', width: '180px', height: '180px', background: 'radial-gradient(circle, rgba(var(--accent-rgb), 0.14) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
             {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '0.85rem', position: 'relative', zIndex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
                 <div className="st-avatar" style={{ width: '34px', height: '34px', fontSize: '0.88rem', borderRadius: '10px', flexShrink: 0 }}>
-                  {(selectedStudentProgressModal.student.name || '?').charAt(0).toUpperCase()}
+                  {(progressModal.student.name || '?').charAt(0).toUpperCase()}
                 </div>
                 <div style={{ minWidth: 0 }}>
                   <h3 style={{ margin: 0, fontSize: '0.96rem', fontWeight: 800, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {selectedStudentProgressModal.student.name}
+                    {progressModal.student.name}
                   </h3>
                   <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                    Result: {selectedStudentProgressModal.doneCount}/{selectedStudentProgressModal.total} done
+                    Result: {progressModal.doneCount}/{progressModal.total} done
                   </span>
                 </div>
               </div>
@@ -245,7 +233,7 @@ export default function GroupHomeworkDetail({ p }) {
 
             {/* Topic breakdown list */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', position: 'relative', zIndex: 1 }}>
-              {selectedStudentProgressModal.itemStats.map(({ item, masteryPercent, done, started }) => (
+              {progressModal.itemStats.map(({ item, masteryPercent, done, started }) => (
                 <div
                   key={`${item.packId}_${item.monthId}_${item.unitId}`}
                   style={{
@@ -260,7 +248,7 @@ export default function GroupHomeworkDetail({ p }) {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0, flex: 1 }}>
-                    <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                    <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
                       <BookOpen size={14} />
                     </div>
                     <span style={{ fontSize: '0.84rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -277,9 +265,9 @@ export default function GroupHomeworkDetail({ p }) {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </TeacherModal>
     </div>
   );
 }

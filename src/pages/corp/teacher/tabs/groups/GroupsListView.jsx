@@ -134,19 +134,18 @@ export default function GroupsListView({ p }) {
                         setSelectedGroupId(group.id);
                         navigate(`/corp/teacher/group/${group.id}`);
                       }}
+                      className="mobile-group-card"
                       style={{
                         padding: '10px 14px',
                         borderRadius: '16px',
                         background: 'var(--bg-glass-strong)',
                         border: '1px solid var(--border)',
-                        backdropFilter: 'blur(16px)',
-                        WebkitBackdropFilter: 'blur(16px)',
+                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         gap: '12px',
                         cursor: 'pointer',
-                        transition: 'all 0.15s ease'
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
@@ -155,12 +154,12 @@ export default function GroupsListView({ p }) {
                             width: '36px',
                             height: '36px',
                             borderRadius: '11px',
-                            background: 'rgba(59, 130, 246, 0.14)',
+                            background: 'rgba(var(--accent-rgb), 0.14)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             flexShrink: 0,
-                            color: '#3b82f6'
+                            color: 'var(--accent)'
                           }}
                         >
                           <Users size={18} />

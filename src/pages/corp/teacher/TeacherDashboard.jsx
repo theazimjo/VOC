@@ -22,9 +22,6 @@ import SettingsTab from './tabs/SettingsTab';
 import TransferPickerModal from './modals/TransferPickerModal';
 import CreateGroupModal from './modals/CreateGroupModal';
 import EditGroupModal from './modals/EditGroupModal';
-import HomeworkEditorModal from './modals/HomeworkEditorModal';
-import HomeworkItemModal from './modals/HomeworkItemModal';
-import AssignPackModal from './modals/AssignPackModal';
 import StudentDetailModal from './modals/StudentDetailModal';
 import StudentActionMenu from './modals/StudentActionMenu';
 import './shared.css';
@@ -388,9 +385,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
+  // Confirmation for both of these lives at the call site (askConfirm's
+  // ConfirmSheet) — these are pure actions so callers aren't at risk of a
+  // stray native confirm() firing on top of their own styled dialog.
   const handleDeletePack = async (pack) => {
     if (pack.scope !== 'own') return; // only a teacher's own packs can be deleted here
-    if (!confirm(`Delete "${pack.title}"?`)) return;
     try {
       await deleteCustomPack(centerId, pack.id);
       setCustomPacks(prev => prev.filter(p => p.id !== pack.id));
@@ -400,7 +399,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   };
 
   const handleArchiveGroup = async (group) => {
-    if (!confirm(`Archive "${group.name}"?`)) return;
     try {
       await updateGroupStatus(centerId, group.id, 'archived');
       setGroups(prev => prev.map(g => g.id === group.id ? { ...g, status: 'archived' } : g));
@@ -702,9 +700,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       <TransferPickerModal p={p} />
       <CreateGroupModal p={p} />
       <EditGroupModal p={p} />
-      <HomeworkEditorModal p={p} />
-      <HomeworkItemModal p={p} />
-      <AssignPackModal p={p} />
       <StudentDetailModal p={p} />
       <StudentActionMenu p={p} />
 

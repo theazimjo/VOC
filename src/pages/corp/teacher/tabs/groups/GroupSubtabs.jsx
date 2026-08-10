@@ -5,11 +5,12 @@ import {
 } from 'lucide-react';
 import { GROUP_LEVEL_OPTIONS, aggregatePackProgress, getHomeworkCandidates, getPackUnits, getStudentSummary, getUsedHomeworkKeys } from '../../utils';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsCorpPack';
+import TeacherModal from '../../TeacherModal';
 import './GroupSubtabs.css';
 
 export default function GroupSubtabs({ p }) {
   const {
-    activeStudentMenu, assignCategory, assigningGroup, copiedCode, copyCode, customPacks,
+    activeStudentMenu, askConfirm, assignCategory, assigningGroup, copiedCode, copyCode, customPacks,
     groupHomeworkList, groupSettingsForm, groupStudentsList,
     handleAddHomework, handleArchiveGroup, handleAssignPack, handleDeleteGroup, handleRegenerateCode, handleRemovePack, handleSaveGroupSettings,
     homeworkSelection, navigate, openHomeworkEditor, savingGroupSettings, savingHomework, selectedGroup, selectedGroupStats,
@@ -18,11 +19,25 @@ export default function GroupSubtabs({ p }) {
   } = p;
 
   const [activePackTab, setActivePackTab] = useState('all');
-  const [pendingPackAssign, setPendingPackAssign] = useState(null);
   const [expandedStudents, setExpandedStudents] = useState(new Set());
-  const [deleteConfirmStep, setDeleteConfirmStep] = useState(0);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [deleteNameInput, setDeleteNameInput] = useState('');
-  const [archiveConfirmOpen, setArchiveConfirmOpen] = useState(false);
+
+  const confirmAssignPack = (pack, group, category) => askConfirm({
+    title: 'Assign Pack',
+    message: `Assign "${pack.title}" to ${group.name}?`,
+    confirmLabel: 'Assign',
+    cancelLabel: 'Cancel',
+    onConfirm: () => handleAssignPack(group.id, pack.id, category),
+  });
+
+  const confirmArchiveGroup = () => askConfirm({
+    title: 'Archive Group',
+    message: `Archive "${selectedGroup?.name}"? It will be removed from your active list and moved to Archive.`,
+    confirmLabel: 'Move to Archive',
+    cancelLabel: 'Cancel',
+    onConfirm: () => handleArchiveGroup(selectedGroup),
+  });
 
   return (
     <div className="group-tab-content">
@@ -35,7 +50,7 @@ export default function GroupSubtabs({ p }) {
                       <p style={{ margin: 0, fontWeight: 600 }}>No students have joined this group yet.</p>
                       <span style={{ fontSize: '0.85rem' }}>Give students this 6-digit join code:</span>
                       <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginTop: '6px' }}>
-                        <strong style={{ fontSize: '1.4rem', color: '#3b82f6', letterSpacing: '0.14em', fontFamily: 'monospace' }}>{selectedGroup.code}</strong>
+                        <strong style={{ fontSize: '1.4rem', color: 'var(--accent)', letterSpacing: '0.14em', fontFamily: 'monospace' }}>{selectedGroup.code}</strong>
                         <button
                           type="button"
                           className="gib-code-btn"
@@ -136,7 +151,7 @@ export default function GroupSubtabs({ p }) {
                             fontWeight: 700,
                             cursor: 'pointer',
                             border: assignCategory === key ? 'none' : '1px solid var(--border)',
-                            background: assignCategory === key ? '#3b82f6' : 'var(--bg-tertiary)',
+                            background: assignCategory === key ? 'var(--accent)' : 'var(--bg-tertiary)',
                             color: assignCategory === key ? '#ffffff' : 'var(--text-primary)',
                             transition: 'all 0.18s ease'
                           }}
@@ -179,7 +194,7 @@ export default function GroupSubtabs({ p }) {
                                   }}
                                 >
                                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
-                                    <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                                    <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
                                       <BookOpen size={18} />
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', minWidth: 0, flex: 1 }}>
@@ -216,18 +231,18 @@ export default function GroupSubtabs({ p }) {
                                   ) : (
                                     <button
                                       type="button"
-                                      onClick={() => setPendingPackAssign({ pack: p, group: assigningGroup || selectedGroup, category: assignCategory })}
+                                      onClick={() => confirmAssignPack(p, assigningGroup || selectedGroup, assignCategory)}
                                       style={{
                                         padding: '6px 14px',
                                         fontSize: '0.82rem',
                                         fontWeight: 700,
                                         borderRadius: '12px',
-                                        background: '#3b82f6',
+                                        background: 'var(--accent)',
                                         color: '#ffffff',
                                         border: 'none',
                                         cursor: 'pointer',
                                         flexShrink: 0,
-                                        boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)'
+                                        boxShadow: '0 4px 12px rgba(var(--accent-rgb), 0.3)'
                                       }}
                                     >
                                       Assign
@@ -272,7 +287,7 @@ export default function GroupSubtabs({ p }) {
                                 <span>{emptyText}</span>
                                 <button
                                   type="button"
-                                  style={{ background: 'none', border: 'none', color: '#3b82f6', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                                  style={{ background: 'none', border: 'none', color: 'var(--accent)', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
                                   onClick={() => { setAssignCategory(key); setAssigningGroup(selectedGroup); }}
                                 >
                                   <Plus size={14} /> Assign
@@ -294,15 +309,13 @@ export default function GroupSubtabs({ p }) {
                                         alignItems: 'center',
                                         justifyContent: 'space-between',
                                         gap: '10px',
-                                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%), var(--bg-glass-strong)',
-                                        border: '1px solid rgba(255, 255, 255, 0.14)',
-                                        backdropFilter: 'blur(20px)',
-                                        WebkitBackdropFilter: 'blur(20px)',
-                                        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.22)'
+                                        background: 'var(--bg-glass-strong)',
+                                        border: '1px solid var(--border)',
+                                        boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)'
                                       }}
                                     >
                                       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1 }}>
-                                        <div style={{ width: '34px', height: '34px', borderRadius: '11px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                                        <div style={{ width: '34px', height: '34px', borderRadius: '11px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
                                           <BookOpen size={16} />
                                         </div>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
@@ -397,7 +410,7 @@ export default function GroupSubtabs({ p }) {
                               whiteSpace: 'nowrap',
                               cursor: 'pointer',
                               border: activePackTab === 'all' ? 'none' : '1px solid var(--border)',
-                              background: activePackTab === 'all' ? '#3b82f6' : 'var(--bg-tertiary)',
+                              background: activePackTab === 'all' ? 'var(--accent)' : 'var(--bg-tertiary)',
                               color: activePackTab === 'all' ? '#ffffff' : 'var(--text-primary)',
                               transition: 'all 0.18s ease'
                             }}
@@ -418,7 +431,7 @@ export default function GroupSubtabs({ p }) {
                                 whiteSpace: 'nowrap',
                                 cursor: 'pointer',
                                 border: activePackTab === packId ? 'none' : '1px solid var(--border)',
-                                background: activePackTab === packId ? '#3b82f6' : 'var(--bg-tertiary)',
+                                background: activePackTab === packId ? 'var(--accent)' : 'var(--bg-tertiary)',
                                 color: activePackTab === packId ? '#ffffff' : 'var(--text-primary)',
                                 transition: 'all 0.18s ease'
                               }}
@@ -460,12 +473,12 @@ export default function GroupSubtabs({ p }) {
                                             alignItems: 'center',
                                             justifyContent: 'space-between',
                                             gap: '12px',
-                                            border: checked ? '1px solid #3b82f6' : '1px solid var(--border)',
-                                            background: checked ? 'rgba(59, 130, 246, 0.14)' : 'var(--bg-glass-strong)'
+                                            border: checked ? '1px solid var(--accent)' : '1px solid var(--border)',
+                                            background: checked ? 'rgba(var(--accent-rgb), 0.14)' : 'var(--bg-glass-strong)'
                                           }}
                                         >
                                           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1 }}>
-                                            <div style={{ width: '34px', height: '34px', borderRadius: '11px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                                            <div style={{ width: '34px', height: '34px', borderRadius: '11px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
                                               <BookOpen size={16} />
                                             </div>
                                             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
@@ -488,8 +501,8 @@ export default function GroupSubtabs({ p }) {
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
-                                                background: checked ? '#3b82f6' : 'transparent',
-                                                border: `1.5px solid ${checked ? '#3b82f6' : 'var(--border)'}`
+                                                background: checked ? 'var(--accent)' : 'transparent',
+                                                border: `1.5px solid ${checked ? 'var(--accent)' : 'var(--border)'}`
                                               }}
                                             >
                                               {checked && <Check size={13} color="#fff" strokeWidth={3} />}
@@ -515,13 +528,6 @@ export default function GroupSubtabs({ p }) {
                       className="fab-add-pack-btn fab-icon-only"
                       onClick={openHomeworkEditor}
                       title="Assign new homework"
-                      style={{
-                        background: 'rgba(59, 130, 246, 0.85)',
-                        backdropFilter: 'blur(20px)',
-                        WebkitBackdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255, 255, 255, 0.3)',
-                        boxShadow: '0 10px 30px rgba(59, 130, 246, 0.5)'
-                      }}
                     >
                       <Plus size={26} />
                     </button>
@@ -558,7 +564,7 @@ export default function GroupSubtabs({ p }) {
                               }}
                             >
                               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0, flex: 1 }}>
-                                <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                                <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(var(--accent-rgb), 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: 'var(--accent)' }}>
                                   <BookOpen size={18} />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', minWidth: 0, flex: 1 }}>
@@ -593,7 +599,7 @@ export default function GroupSubtabs({ p }) {
                     }}
                   >
                     {[
-                      { label: "Students", val: `${selectedGroup.studentsCount || 0}`, icon: Users, color: '#3b82f6', bg: 'rgba(59, 130, 246, 0.14)' },
+                      { label: "Students", val: `${selectedGroup.studentsCount || 0}`, icon: Users, color: 'var(--accent)', bg: 'rgba(var(--accent-rgb), 0.14)' },
                       { label: "Packs", val: `${selectedGroupStats.packEntries.length}`, icon: BookOpen, color: '#a855f7', bg: 'rgba(168, 85, 247, 0.14)' },
                       { label: "Active Students", val: `${selectedGroupStats.activeStudentsCount}`, icon: Zap, color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.14)' },
                       { label: "Mastery", val: `${selectedGroupStats.avgPercent}%`, icon: Target, color: '#34c759', bg: 'rgba(52, 199, 89, 0.14)' },
@@ -605,8 +611,7 @@ export default function GroupSubtabs({ p }) {
                           borderRadius: '16px',
                           background: 'var(--bg-glass-strong)',
                           border: '1px solid var(--border)',
-                          backdropFilter: 'blur(16px)',
-                          WebkitBackdropFilter: 'blur(16px)',
+                          boxShadow: '0 1px 2px rgba(0, 0, 0, 0.06)',
                           display: 'flex',
                           alignItems: 'center',
                           gap: '10px'
@@ -647,7 +652,7 @@ export default function GroupSubtabs({ p }) {
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.85rem' }}>
-                      <Activity size={16} color="#3b82f6" />
+                      <Activity size={16} color="var(--accent)" />
                       <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                         Student Mastery (by Pack)
                       </span>
@@ -708,7 +713,7 @@ export default function GroupSubtabs({ p }) {
                                 }}
                               >
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0, flex: 1 }}>
-                                  <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: '#3b82f6', color: '#fff', fontSize: '0.82rem', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                                  <div style={{ width: '32px', height: '32px', borderRadius: '10px', background: 'var(--accent)', color: '#fff', fontSize: '0.82rem', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                                     {(student.name || '?').charAt(0).toUpperCase()}
                                   </div>
                                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', minWidth: 0, flex: 1 }}>
@@ -729,8 +734,8 @@ export default function GroupSubtabs({ p }) {
                                       gap: '4px',
                                       padding: '3px 9px',
                                       borderRadius: '9px',
-                                      background: overallMastery >= 80 ? 'rgba(52, 199, 89, 0.14)' : overallMastery > 0 ? 'rgba(59, 130, 246, 0.14)' : 'var(--bg-glass-strong)',
-                                      color: overallMastery >= 80 ? '#34c759' : overallMastery > 0 ? '#3b82f6' : 'var(--text-muted)',
+                                      background: overallMastery >= 80 ? 'rgba(52, 199, 89, 0.14)' : overallMastery > 0 ? 'rgba(var(--accent-rgb), 0.14)' : 'var(--bg-glass-strong)',
+                                      color: overallMastery >= 80 ? '#34c759' : overallMastery > 0 ? 'var(--accent)' : 'var(--text-muted)',
                                       fontSize: '0.76rem',
                                       fontWeight: 800,
                                       border: '1px solid var(--border)'
@@ -789,7 +794,7 @@ export default function GroupSubtabs({ p }) {
 
                                         {/* Progress Track Bar */}
                                         <div style={{ width: '100%', height: '5px', background: 'var(--border)', borderRadius: '999px', overflow: 'hidden' }}>
-                                          <div style={{ width: `${percent}%`, height: '100%', background: 'linear-gradient(90deg, #3b82f6, #34c759)', borderRadius: '999px' }} />
+                                          <div style={{ width: `${percent}%`, height: '100%', background: 'linear-gradient(90deg, var(--accent), #34c759)', borderRadius: '999px' }} />
                                         </div>
 
                                         {/* Units Chips */}
@@ -891,8 +896,8 @@ export default function GroupSubtabs({ p }) {
                           flexWrap: 'wrap'
                         }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', minWidth: 0 }}>
-                            <Key size={18} color="#3b82f6" style={{ flexShrink: 0 }} />
-                            <span style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '0.12em', color: '#3b82f6', fontFamily: 'monospace' }}>
+                            <Key size={18} color="var(--accent)" style={{ flexShrink: 0 }} />
+                            <span style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '0.12em', color: 'var(--accent)', fontFamily: 'monospace' }}>
                               {groupSettingsForm.code || selectedGroup.code}
                             </span>
                           </div>
@@ -986,7 +991,7 @@ export default function GroupSubtabs({ p }) {
                         cursor: 'pointer',
                         transition: 'all 0.15s ease'
                       }}
-                      onClick={() => setArchiveConfirmOpen(true)}
+                      onClick={confirmArchiveGroup}
                     >
                       <Archive size={16} />
                       <span>Move to Archive</span>
@@ -1010,7 +1015,7 @@ export default function GroupSubtabs({ p }) {
                       className="gsbm-danger-btn"
                       onClick={() => {
                         setDeleteNameInput('');
-                        setDeleteConfirmStep(1);
+                        setDeleteConfirmOpen(true);
                       }}
                     >
                       <Trash2 size={16} />
@@ -1020,430 +1025,62 @@ export default function GroupSubtabs({ p }) {
                 </div>
               )}
 
-      {/* ARCHIVE CONFIRMATION MODAL */}
-      {archiveConfirmOpen && (
-        <div
-          className="modal-overlay"
-          onClick={() => setArchiveConfirmOpen(false)}
-          style={{
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            background: 'rgba(0, 0, 0, 0.7)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '16px'
-          }}
-        >
-          <div
-            className="modal-content"
-            onClick={e => e.stopPropagation()}
-            style={{
-              background: 'var(--bg-glass-strong)',
-              border: '1px solid rgba(245, 158, 11, 0.3)',
-              borderRadius: '24px',
-              padding: '1.25rem',
-              width: '100%',
-              maxWidth: '400px',
-              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.4)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem',
-              animation: 'fadeIn 0.2s ease-out'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(245, 158, 11, 0.14)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Archive size={18} />
-                </div>
-                <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                  Archive Group
-                </h3>
-              </div>
-              <button type="button" onClick={() => setArchiveConfirmOpen(false)} style={{ width: '30px', height: '30px', borderRadius: '9px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                <X size={16} />
-              </button>
-            </div>
+      {/* DELETE GROUP CONFIRMATION — single flat modal, typed-name safety
+          check kept (irreversible action) but collapsed from the old
+          two-step flow into one so it's one less tap without losing the
+          "type the exact group name" guard. */}
+      <TeacherModal open={deleteConfirmOpen} onClose={() => setDeleteConfirmOpen(false)} className="gsbm-delete-modal">
+        <div className="gsbm-delete-header">
+          <div className="gsbm-delete-icon">
+            <Trash2 size={18} />
+          </div>
+          <div>
+            <h3 className="gsbm-delete-title">Delete Group</h3>
+            <p className="gsbm-delete-sub">This cannot be undone</p>
+          </div>
+          <button type="button" className="gsbm-icon-btn" onClick={() => setDeleteConfirmOpen(false)}>
+            <X size={16} />
+          </button>
+        </div>
 
-            <p style={{ margin: 0, fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
-              Archive <strong>"{selectedGroup?.name}"</strong>? It will be removed from your active list and moved to Archive.
-            </p>
-
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '8px', marginTop: '0.25rem' }}>
-              <button type="button" onClick={() => setArchiveConfirmOpen(false)} style={{ padding: '8px 16px', borderRadius: '12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: '0.84rem', fontWeight: 600, cursor: 'pointer' }}>
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setArchiveConfirmOpen(false);
-                  handleArchiveGroup(selectedGroup);
-                }}
-                style={{
-                  padding: '8px 18px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                  border: 'none',
-                  color: '#ffffff',
-                  fontSize: '0.84rem',
-                  fontWeight: 700,
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 12px rgba(245, 158, 11, 0.3)'
-                }}
-              >
-                Move to Archive
-              </button>
-            </div>
+        <div className="gsbm-delete-warning">
+          <AlertTriangle size={18} />
+          <div>
+            All students, packs, and homework results for <strong>"{selectedGroup?.name}"</strong> will be permanently deleted.
           </div>
         </div>
-      )}
 
-      {/* STEP 1 DELETE CONFIRMATION MODAL */}
-      {deleteConfirmStep === 1 && (
-        <div
-          className="modal-overlay"
-          onClick={() => setDeleteConfirmStep(0)}
-          style={{
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            background: 'rgba(0, 0, 0, 0.72)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '16px'
-          }}
-        >
-          <div
-            className="modal-content"
-            onClick={e => e.stopPropagation()}
-            style={{
-              background: 'var(--bg-glass-strong)',
-              border: '1px solid rgba(239, 68, 68, 0.3)',
-              borderRadius: '24px',
-              padding: '1.25rem',
-              width: '100%',
-              maxWidth: '420px',
-              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.5)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem',
-              animation: 'fadeIn 0.2s ease-out'
+        <div className="gsbm-field">
+          <label className="gsbm-label">
+            Type <code>{selectedGroup?.name}</code> to confirm
+          </label>
+          <input
+            type="text"
+            className="gsbm-input"
+            placeholder={selectedGroup?.name}
+            value={deleteNameInput}
+            onChange={e => setDeleteNameInput(e.target.value)}
+            autoFocus
+          />
+        </div>
+
+        <div className="gsbm-delete-actions">
+          <button type="button" className="gsbm-btn-secondary" onClick={() => setDeleteConfirmOpen(false)}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            className="gsbm-btn-danger"
+            disabled={deleteNameInput.trim() !== selectedGroup?.name?.trim()}
+            onClick={() => {
+              setDeleteConfirmOpen(false);
+              handleDeleteGroup(selectedGroup);
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: 'rgba(239, 68, 68, 0.14)', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <AlertTriangle size={18} />
-                </div>
-                <div>
-                  <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Step 1 (1/2)</span>
-                  <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)' }}>Confirm group name</h3>
-                </div>
-              </div>
-              <button type="button" onClick={() => setDeleteConfirmStep(0)} style={{ width: '30px', height: '30px', borderRadius: '9px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                <X size={16} />
-              </button>
-            </div>
-
-            <p style={{ margin: 0, fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: '1.4' }}>
-              Start deleting <strong>"{selectedGroup?.name}"</strong>? Type the group name exactly below to continue:
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <label style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontWeight: 700 }}>
-                Group name: <code style={{ color: '#ef4444', background: 'rgba(239,68,68,0.1)', padding: '2px 6px', borderRadius: '6px' }}>{selectedGroup?.name}</code>
-              </label>
-              <input
-                type="text"
-                placeholder={selectedGroup?.name}
-                value={deleteNameInput}
-                onChange={e => setDeleteNameInput(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '10px 12px',
-                  borderRadius: '12px',
-                  background: 'var(--bg-tertiary)',
-                  border: '1px solid var(--border)',
-                  color: 'var(--text-primary)',
-                  fontSize: '0.88rem'
-                }}
-                autoFocus
-              />
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '8px', marginTop: '0.25rem' }}>
-              <button type="button" onClick={() => setDeleteConfirmStep(0)} style={{ padding: '8px 16px', borderRadius: '12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: '0.84rem', fontWeight: 600, cursor: 'pointer' }}>
-                Cancel
-              </button>
-              <button
-                type="button"
-                disabled={deleteNameInput.trim() !== selectedGroup?.name?.trim()}
-                onClick={() => setDeleteConfirmStep(2)}
-                style={{
-                  padding: '8px 18px',
-                  borderRadius: '12px',
-                  background: deleteNameInput.trim() === selectedGroup?.name?.trim() ? '#ef4444' : 'var(--bg-tertiary)',
-                  border: 'none',
-                  color: deleteNameInput.trim() === selectedGroup?.name?.trim() ? '#ffffff' : 'var(--text-muted)',
-                  fontSize: '0.84rem',
-                  fontWeight: 700,
-                  cursor: deleteNameInput.trim() === selectedGroup?.name?.trim() ? 'pointer' : 'not-allowed',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                Next step (2/2) <ChevronRight size={16} style={{ display: 'inline', verticalAlign: 'middle' }} />
-              </button>
-            </div>
-          </div>
+            Delete Permanently
+          </button>
         </div>
-      )}
-
-      {/* STEP 2 DELETE CONFIRMATION MODAL */}
-      {deleteConfirmStep === 2 && (
-        <div
-          className="modal-overlay"
-          onClick={() => setDeleteConfirmStep(0)}
-          style={{
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            background: 'rgba(0, 0, 0, 0.75)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            padding: '16px'
-          }}
-        >
-          <div
-            className="modal-content"
-            onClick={e => e.stopPropagation()}
-            style={{
-              background: 'var(--bg-glass-strong)',
-              border: '1px solid rgba(239, 68, 68, 0.5)',
-              borderRadius: '24px',
-              padding: '1.25rem',
-              width: '100%',
-              maxWidth: '420px',
-              boxShadow: '0 24px 60px rgba(239, 68, 68, 0.25)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem',
-              animation: 'fadeIn 0.2s ease-out'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '11px', background: '#ef4444', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Trash2 size={18} />
-                </div>
-                <div>
-                  <span style={{ fontSize: '0.68rem', fontWeight: 800, color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Step 2 (Final confirmation)</span>
-                  <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, color: '#ef4444' }}>Permanently Delete Group</h3>
-                </div>
-              </div>
-              <button type="button" onClick={() => setDeleteConfirmStep(0)} style={{ width: '30px', height: '30px', borderRadius: '9px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-                <X size={16} />
-              </button>
-            </div>
-
-            <div style={{ background: 'rgba(239, 68, 68, 0.12)', border: '1px solid rgba(239, 68, 68, 0.25)', borderRadius: '14px', padding: '12px', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-              <AlertTriangle size={18} color="#ef4444" style={{ flexShrink: 0, marginTop: '2px' }} />
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-primary)', lineHeight: '1.4' }}>
-                <strong>WARNING:</strong> All student connections and results for <code>"{selectedGroup?.name}"</code> will be permanently deleted! This cannot be undone.
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '8px', marginTop: '0.25rem' }}>
-              <button type="button" onClick={() => setDeleteConfirmStep(0)} style={{ padding: '8px 16px', borderRadius: '12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-primary)', fontSize: '0.84rem', fontWeight: 600, cursor: 'pointer' }}>
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setDeleteConfirmStep(0);
-                  handleDeleteGroup(selectedGroup);
-                }}
-                style={{
-                  padding: '8px 20px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #ef4444, #dc2626)',
-                  border: 'none',
-                  color: '#ffffff',
-                  fontSize: '0.84rem',
-                  fontWeight: 800,
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(239, 68, 68, 0.4)'
-                }}
-              >
-                Yes, Delete Permanently
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* CONFIRMATION MODAL BEFORE ASSIGNING PACK */}
-      {pendingPackAssign && (
-        <div
-          className="modal-overlay"
-          onClick={() => setPendingPackAssign(null)}
-          style={{
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            background: 'rgba(0, 0, 0, 0.65)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 10000
-          }}
-        >
-          <div
-            className="group-settings-bento-modal"
-            onClick={e => e.stopPropagation()}
-            style={{
-              maxWidth: '420px',
-              width: '92%',
-              padding: '1.2rem 1.3rem',
-              borderRadius: '24px',
-              background: 'var(--bg-glass-strong)',
-              border: '1px solid var(--border)',
-              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Top-Right Soft Blue Radial Glow */}
-            <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '160px', height: '160px', background: 'radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%)', pointerEvents: 'none' }} />
-
-            {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', marginBottom: '1rem', position: 'relative', zIndex: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
-                <div style={{ width: '38px', height: '38px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
-                  <BookOpen size={20} />
-                </div>
-                <div>
-                  <h3 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 800, color: 'var(--text-primary)' }}>
-                    Assign Pack
-                  </h3>
-                  <span style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
-                    {pendingPackAssign.group.name}
-                  </span>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setPendingPackAssign(null)}
-                style={{
-                  background: 'var(--bg-tertiary)',
-                  border: '1px solid var(--border)',
-                  borderRadius: '10px',
-                  color: 'var(--text-muted)',
-                  width: '30px',
-                  height: '30px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer'
-                }}
-              >
-                <X size={16} />
-              </button>
-            </div>
-
-            {/* Pack Summary Card */}
-            <div
-              style={{
-                background: 'var(--bg-tertiary)',
-                border: '1px solid var(--border)',
-                borderRadius: '16px',
-                padding: '12px 14px',
-                marginBottom: '1rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '6px',
-                position: 'relative',
-                zIndex: 1
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                <strong style={{ color: 'var(--text-primary)', fontSize: '0.95rem', fontWeight: 800 }}>
-                  {pendingPackAssign.pack.title}
-                </strong>
-                {pendingPackAssign.pack.level && (
-                  <span className="group-level-badge" style={{ fontSize: '0.7rem', padding: '2px 8px' }}>
-                    {pendingPackAssign.pack.level}
-                  </span>
-                )}
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                <span>{pendingPackAssign.pack.wordCount || (pendingPackAssign.pack.words ? pendingPackAssign.pack.words.length : 0)} words</span>
-                <span>•</span>
-                <span style={{ color: '#3b82f6', fontWeight: 600 }}>
-                  {pendingPackAssign.category === 'assignedPacks' ? 'Main Pack' : "Extra Pack"}
-                </span>
-              </div>
-            </div>
-
-            <p style={{ margin: '0 0 1.2rem 0', fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.4, position: 'relative', zIndex: 1 }}>
-              Assign this pack to <strong>{pendingPackAssign.group.name}</strong>?
-            </p>
-
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', gap: '10px', position: 'relative', zIndex: 1 }}>
-              <button
-                type="button"
-                onClick={() => setPendingPackAssign(null)}
-                style={{
-                  flex: 1,
-                  padding: '10px',
-                  borderRadius: '12px',
-                  fontSize: '0.84rem',
-                  fontWeight: 600,
-                  background: 'var(--bg-tertiary)',
-                  color: 'var(--text-primary)',
-                  border: '1px solid var(--border)',
-                  cursor: 'pointer'
-                }}
-              >
-                Cancel
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  handleAssignPack(pendingPackAssign.group.id, pendingPackAssign.pack.id, pendingPackAssign.category);
-                  setPendingPackAssign(null);
-                }}
-                style={{
-                  flex: 1,
-                  padding: '10px',
-                  borderRadius: '12px',
-                  fontSize: '0.84rem',
-                  fontWeight: 700,
-                  background: '#3b82f6',
-                  color: '#ffffff',
-                  border: 'none',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 14px rgba(59, 130, 246, 0.35)'
-                }}
-              >
-                Yes, Assign
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      </TeacherModal>
     </div>
   );
 }

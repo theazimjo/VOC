@@ -3,6 +3,37 @@
    states) reused by 2+ pages, plus some legacy classes kept for safety that
    no current page matches by class name. */
 
+/* ── List entrance stagger ─────────────────────
+   Applied to every repeated-row/card list (bento grid, groups table,
+   student/pack/homework rows). Plays once per mount — React's stable
+   `key`s mean rows that survive a re-render (e.g. typing in a search box)
+   keep their DOM node and never replay this, only genuinely new rows do.
+   Capped at the first 10 children so a long list doesn't keep staggering
+   for a full second; items past that just fade in together with #10. */
+@media (prefers-reduced-motion: no-preference) {
+  .ios-bento-card,
+  .t-table-row,
+  .mobile-group-card,
+  .student-progress-row {
+    animation: teacher-stagger-in 0.32s var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1)) both;
+  }
+
+  .ios-bento-card:nth-child(1), .t-table-row:nth-child(1), .mobile-group-card:nth-child(1), .student-progress-row:nth-child(1) { animation-delay: 0ms; }
+  .ios-bento-card:nth-child(2), .t-table-row:nth-child(2), .mobile-group-card:nth-child(2), .student-progress-row:nth-child(2) { animation-delay: 40ms; }
+  .ios-bento-card:nth-child(3), .t-table-row:nth-child(3), .mobile-group-card:nth-child(3), .student-progress-row:nth-child(3) { animation-delay: 80ms; }
+  .ios-bento-card:nth-child(4), .t-table-row:nth-child(4), .mobile-group-card:nth-child(4), .student-progress-row:nth-child(4) { animation-delay: 120ms; }
+  .t-table-row:nth-child(5), .mobile-group-card:nth-child(5), .student-progress-row:nth-child(5) { animation-delay: 160ms; }
+  .t-table-row:nth-child(6), .mobile-group-card:nth-child(6), .student-progress-row:nth-child(6) { animation-delay: 200ms; }
+  .t-table-row:nth-child(7), .mobile-group-card:nth-child(7), .student-progress-row:nth-child(7) { animation-delay: 240ms; }
+  .t-table-row:nth-child(8), .mobile-group-card:nth-child(8), .student-progress-row:nth-child(8) { animation-delay: 280ms; }
+  .t-table-row:nth-child(n+9), .mobile-group-card:nth-child(n+9), .student-progress-row:nth-child(n+9) { animation-delay: 320ms; }
+}
+
+@keyframes teacher-stagger-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ── New Pack Editor (CustomPackEditor) — full-page override ──
    The shared component (also used by center-admin inside an actual
    .modal-overlay popup) is hardcoded dark/modal-styled. Teacher now
@@ -17,9 +48,7 @@
   max-width: none;
   width: 100%;
   margin: 0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   color: var(--text-primary);
 }
 
@@ -57,7 +86,7 @@
 
 .teacher-dashboard-container .modal-input:focus,
 .teacher-dashboard-container .modal-textarea:focus {
-  border-color: #3b82f6;
+  border-color: var(--accent);
   background: var(--bg-glass-hover);
 }
 
@@ -179,15 +208,13 @@
   padding: 1.4rem 1.5rem;
   width: 100%;
   max-width: 440px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  animation: bentoModalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: bentoModalPop 0.2s var(--ease-out, cubic-bezier(0.23, 1, 0.32, 1));
 }
 
 @media (max-width: 480px) {
@@ -205,7 +232,7 @@
   right: -50px;
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.16) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.16) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -289,9 +316,7 @@
   padding: 8px 12px;
   margin-top: 0.25rem;
   margin-bottom: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .ios-group-top-bar::before {
@@ -301,7 +326,7 @@
   right: -40px;
   width: 160px;
   height: 160px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -313,12 +338,11 @@
   border-radius: 20px;
   padding: 1.1rem 1.25rem;
   margin-bottom: 1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
   max-width: 650px;
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
 }
 
 @media (max-width: 480px) {
@@ -336,7 +360,7 @@
   right: -50px;
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.14) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -355,8 +379,8 @@
   width: 38px;
   height: 38px;
   border-radius: 12px;
-  background: rgba(59, 130, 246, 0.14);
-  color: #3b82f6;
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -401,6 +425,12 @@
   transform: translateX(-2px);
 }
 
+.ios-back-btn:active,
+.ios-action-btn:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease-out;
+}
+
 .ios-title-group {
   display: flex;
   align-items: center;
@@ -424,9 +454,9 @@
   display: inline-flex;
   align-items: center;
   padding: 3px 9px;
-  background: rgba(59, 130, 246, 0.12);
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  color: #3b82f6;
+  background: rgba(var(--accent-rgb), 0.12);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
+  color: var(--accent);
   border-radius: 20px;
   font-size: 0.74rem;
   font-weight: 700;
@@ -479,8 +509,6 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
   user-select: none;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
@@ -496,7 +524,7 @@
 }
 
 .ios-bento-card.card-blue::before {
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.14) 0%, transparent 70%);
 }
 
 .ios-bento-card.card-purple::before {
@@ -516,10 +544,15 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+.ios-bento-card:active {
+  transform: scale(0.97);
+  transition: transform 0.1s ease-out;
+}
+
 .ios-bento-card.active {
   background: var(--bg-secondary);
-  border-color: #3b82f6;
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.22), 0 0 0 1.5px #3b82f6;
+  border-color: var(--accent);
+  box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.22), 0 0 0 1.5px var(--accent);
 }
 
 .ios-bento-card:hover .bento-icon-box {
@@ -527,7 +560,7 @@
 }
 
 .ios-bento-card.active .bento-action-label {
-  color: #3b82f6;
+  color: var(--accent);
 }
 
 .ios-bento-card:hover .bento-arrow {
@@ -536,7 +569,7 @@
 }
 
 .ios-bento-card.active .bento-arrow {
-  color: #3b82f6;
+  color: var(--accent);
 }
 
 .bento-active-glow {
@@ -545,7 +578,7 @@
   left: 0;
   right: 0;
   height: 3.5px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  background: linear-gradient(90deg, var(--accent), #60a5fa);
 }
 
 .students-progress-list {
@@ -559,9 +592,7 @@
   border: 1px solid var(--border) !important;
   border-radius: 20px !important;
   padding: 12px 14px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
   position: relative !important;
   overflow: hidden !important;
   display: flex !important;
@@ -578,14 +609,19 @@
   right: -30px;
   width: 120px;
   height: 120px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
 .student-progress-row:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.2) !important;
-  border-color: rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(var(--accent-rgb), 0.3) !important;
+}
+
+.student-progress-row:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease-out;
 }
 
 .st-info {
@@ -600,14 +636,14 @@
   width: 40px;
   height: 40px;
   border-radius: 13px;
-  background: linear-gradient(135deg, #3b82f6, #60a5fa) !important;
+  background: linear-gradient(135deg, var(--accent), #60a5fa) !important;
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
   font-size: 1.05rem;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
   flex-shrink: 0;
 }
 
@@ -649,7 +685,7 @@
 
 .btn-action-more:hover {
   background: var(--bg-glass-hover);
-  color: #3b82f6;
+  color: var(--accent);
 }
 
 @keyframes bentoModalPop {
@@ -697,8 +733,8 @@
 }
 
 .gsbm-input:focus, .gsbm-select:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
 }
 
 .gsbm-code-banner {
@@ -732,7 +768,7 @@
   gap: 8px;
   width: 100%;
   padding: 12px 16px;
-  background: #3b82f6;
+  background: var(--accent);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
   color: #ffffff;
@@ -740,11 +776,11 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.3);
 }
 
 .gsbm-save-btn:hover {
-  background: #2563eb;
+  background: var(--accent-hover);
   transform: translateY(-1px);
 }
 
@@ -808,9 +844,9 @@
 }
 
 .ios-subtab-back-btn:hover {
-  background: rgba(59, 130, 246, 0.12);
-  border-color: rgba(59, 130, 246, 0.3);
-  color: #3b82f6;
+  background: rgba(var(--accent-rgb), 0.12);
+  border-color: rgba(var(--accent-rgb), 0.3);
+  color: var(--accent);
   transform: translateX(-2px);
 }
 
@@ -857,8 +893,7 @@
   border-radius: 22px;
   padding: 1.25rem 1.4rem;
   margin-top: 1rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .tpv-hero-top {
@@ -1139,8 +1174,8 @@
 }
 
 .ios-icon-blue {
-  background: rgba(59, 130, 246, 0.14);
-  color: #3b82f6;
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--accent);
 }
 
 .ios-icon-purple {
@@ -1295,7 +1330,7 @@
 
 .group-kpi-nav-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(59, 130, 246, 0.35);
+  border-color: rgba(var(--accent-rgb), 0.35);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
@@ -1321,8 +1356,8 @@
 }
 
 .kpi-icon-blue {
-  background: rgba(59, 130, 246, 0.12);
-  color: #3b82f6;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
 }
 
 .kpi-icon-purple {
@@ -1370,7 +1405,7 @@
   left: 12px;
   right: 12px;
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  background: linear-gradient(90deg, var(--accent), #60a5fa);
   border-radius: 3px 3px 0 0;
 }
 
@@ -1437,8 +1472,8 @@
 }
 
 .group-seg-btn.active .seg-badge {
-  background: rgba(59, 130, 246, 0.18);
-  color: #3b82f6;
+  background: rgba(var(--accent-rgb), 0.18);
+  color: var(--accent);
 }
 
 /* ── Teacher Header Card ────────────────────── */
@@ -1453,17 +1488,15 @@
   border-radius: 20px;
   padding: 1.25rem 1.4rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .teacher-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(59, 130, 246, 0.12);
-  color: #0a84ff;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.85rem;
@@ -1491,8 +1524,8 @@
 
 .group-level-badge {
   font-size: 0.73rem;
-  background: rgba(10, 132, 255, 0.12);
-  color: #0a84ff;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
   padding: 2px 9px;
   border-radius: 8px;
   font-weight: 600;
@@ -1518,8 +1551,8 @@
 }
 
 .group-code-pill:hover {
-  background: rgba(10, 132, 255, 0.1) !important;
-  color: #0a84ff !important;
+  background: rgba(var(--accent-rgb), 0.1) !important;
+  color: var(--accent) !important;
 }
 
 .teacher-group-card.clickable {
@@ -1533,7 +1566,7 @@
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border) !important;
-  color: #0a84ff !important;
+  color: var(--accent) !important;
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -1576,7 +1609,7 @@
 }
 
 .btn-select-pack {
-  background: #0a84ff;
+  background: var(--accent);
   color: #fff !important;
   border: none;
   padding: 6px 12px;
@@ -1618,7 +1651,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #0a84ff;
+  background: var(--accent);
   color: #fff !important;
   display: flex;
   align-items: center;
@@ -1641,9 +1674,8 @@
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 6px;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform-origin: var(--menu-origin, top right);
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -1795,8 +1827,8 @@
 }
 
 .pack-category-badge.cat-main {
-  background: rgba(10, 132, 255, 0.14);
-  color: #0a84ff;
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--accent);
 }
 
 .pack-category-badge.cat-required {
@@ -1871,8 +1903,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
 }
@@ -1880,7 +1911,7 @@
 .teacher-dashboard-container .custom-pack-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
-  border-color: rgba(59, 130, 246, 0.35);
+  border-color: rgba(var(--accent-rgb), 0.35);
 }
 
 .teacher-dashboard-container .custom-pack-card h3 {
@@ -1912,7 +1943,7 @@
 
 .teacher-dashboard-container [class*="tab-btn"].active,
 .teacher-dashboard-container [class*="tab-btn"]:hover {
-  color: #0a84ff !important;
+  color: var(--accent) !important;
 }
 
 /* ── Empty State ────────────────────────────── */
@@ -1921,8 +1952,7 @@
   background: var(--bg-glass-strong);
   border: 1px solid var(--border);
   border-radius: 18px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 /* ── Page Top Bar (title + search toggle) ─────
@@ -1935,9 +1965,7 @@
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 1rem 1.1rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .courses-top-bar > div:last-child {
@@ -1961,9 +1989,9 @@
 }
 
 .top-search-lupa-btn:hover {
-  background: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
-  border-color: rgba(59, 130, 246, 0.3);
+  background: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent);
+  border-color: rgba(var(--accent-rgb), 0.3);
 }
 
 @media (max-width: 480px) {
@@ -1981,7 +2009,7 @@
   bottom: 85px;
   right: 20px;
   z-index: 999;
-  background: #3b82f6;
+  background: var(--accent);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 50px;
@@ -1992,9 +2020,7 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 24px rgba(var(--accent-rgb), 0.45);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -2008,9 +2034,9 @@
 }
 
 .fab-add-pack-btn:hover {
-  background: #2563eb;
+  background: var(--accent-hover);
   transform: translateY(-2px) scale(1.06);
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.55);
+  box-shadow: 0 12px 30px rgba(var(--accent-rgb), 0.55);
 }
 
 .fab-add-pack-btn:active {
@@ -2045,7 +2071,7 @@
 
 /* ── Primary Action Button ──────────────────── */
 .teacher-dashboard-container .btn-add-course-primary {
-  background: linear-gradient(135deg, #0a84ff, #0056b3) !important;
+  background: linear-gradient(135deg, var(--accent), #0056b3) !important;
   color: #fff !important;
   border: none !important;
 }
@@ -2069,7 +2095,7 @@
 
 .mobile-group-card:hover {
   background: var(--bg-glass-hover);
-  border-color: rgba(59, 130, 246, 0.35);
+  border-color: rgba(var(--accent-rgb), 0.35);
   box-shadow: var(--shadow);
   transform: translateY(-1px);
 }
@@ -2081,7 +2107,7 @@
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(var(--accent-rgb), 0.15);
   flex-shrink: 0;
 }
 

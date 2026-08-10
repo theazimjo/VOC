@@ -1,39 +1,13 @@
 import { Users, X } from 'lucide-react';
 import { GROUP_LEVEL_OPTIONS } from '../utils';
+import TeacherModal from '../TeacherModal';
 
 export default function CreateGroupModal({ p }) {
   const { groupForm, handleCreateGroup, setGroupForm, setShowCreateModal, showCreateModal, submittingGroup } = p;
 
-  if (!showCreateModal) return null;
-
   return (
-    <div
-      className="modal-overlay"
-      onClick={() => setShowCreateModal(false)}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0, 0, 0, 0.7)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-        padding: '16px'
-      }}
-    >
-      <div
-        className="modal-content"
-        onClick={e => e.stopPropagation()}
-        style={{
-          maxWidth: '400px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          animation: 'fadeIn 0.2s ease-out'
-        }}
-      >
+    <TeacherModal open={showCreateModal} onClose={() => setShowCreateModal(false)} maxWidth="400px">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -42,8 +16,8 @@ export default function CreateGroupModal({ p }) {
                 width: '36px',
                 height: '36px',
                 borderRadius: '11px',
-                background: 'rgba(59, 130, 246, 0.14)',
-                color: '#3b82f6',
+                background: 'rgba(var(--accent-rgb), 0.14)',
+                color: 'var(--accent)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -155,6 +129,6 @@ export default function CreateGroupModal({ p }) {
           </div>
         </form>
       </div>
-    </div>
+    </TeacherModal>
   );
 }

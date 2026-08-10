@@ -8,8 +8,17 @@ export default function CoursesTab({ p }) {
   const {
     centerId, customPacks, setCustomPacks, filteredPacks, searchTerm, setSearchTerm,
     setShowPackEditor, showPackEditor, viewingPack, setViewingPack,
-    handleDeletePack,
+    handleDeletePack, askConfirm,
   } = p;
+
+  const confirmDeletePack = (pack) => askConfirm({
+    title: 'Delete Pack',
+    message: `Delete "${pack.title}"? This can't be undone.`,
+    confirmLabel: 'Delete',
+    cancelLabel: 'Cancel',
+    danger: true,
+    onConfirm: () => handleDeletePack(pack),
+  });
 
   const [showSearch, setShowSearch] = useState(false);
 
@@ -188,7 +197,7 @@ export default function CoursesTab({ p }) {
                                   }}
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    handleDeletePack(pack);
+                                    confirmDeletePack(pack);
                                   }}
                                 >
                                   <Trash2 size={15} />
@@ -260,7 +269,7 @@ export default function CoursesTab({ p }) {
                               }}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleDeletePack(pack);
+                                confirmDeletePack(pack);
                               }}
                             >
                               <Trash2 size={15} />

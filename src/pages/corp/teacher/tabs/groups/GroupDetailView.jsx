@@ -53,12 +53,12 @@ export default function GroupDetailView({ p }) {
                     padding: '6px 14px',
                     fontSize: '0.82rem',
                     borderRadius: '12px',
-                    background: (savingHomework || homeworkSelection?.size === 0) ? 'var(--bg-tertiary)' : '#3b82f6',
+                    background: (savingHomework || homeworkSelection?.size === 0) ? 'var(--bg-tertiary)' : 'var(--accent)',
                     color: (savingHomework || homeworkSelection?.size === 0) ? 'var(--text-muted)' : '#ffffff',
                     border: (savingHomework || homeworkSelection?.size === 0) ? '1px solid var(--border)' : 'none',
                     fontWeight: 700,
                     cursor: (savingHomework || homeworkSelection?.size === 0) ? 'not-allowed' : 'pointer',
-                    boxShadow: (savingHomework || homeworkSelection?.size === 0) ? 'none' : '0 4px 14px rgba(59, 130, 246, 0.4)',
+                    boxShadow: (savingHomework || homeworkSelection?.size === 0) ? 'none' : '0 4px 14px rgba(var(--accent-rgb), 0.4)',
                     transition: 'all 0.18s ease',
                     flexShrink: 0
                   }}

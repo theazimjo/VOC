@@ -1,4 +1,5 @@
 import { ArrowRightLeft, ChevronRight } from 'lucide-react';
+import TeacherModal from '../TeacherModal';
 
 export default function TransferPickerModal({ p }) {
   const {
@@ -8,9 +9,8 @@ export default function TransferPickerModal({ p }) {
 
   return (
       /* Group transfer picker — replaces the old raw prompt() flow */
-      showTransferPicker && groupSettingsTarget && (
-        <div className="modal-overlay" onClick={() => setShowTransferPicker(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <TeacherModal open={showTransferPicker && !!groupSettingsTarget} onClose={() => setShowTransferPicker(false)}>
+          {groupSettingsTarget && (<>
             <h2><ArrowRightLeft size={20} /> Transfer "{groupSettingsTarget.name}"</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1rem' }}>
               Select a teacher to transfer this group to:
@@ -45,8 +45,7 @@ export default function TransferPickerModal({ p }) {
             <div className="modal-actions">
               <button className="btn-secondary" onClick={() => setShowTransferPicker(false)}>Cancel</button>
             </div>
-          </div>
-        </div>
-      )
+          </>)}
+      </TeacherModal>
   );
 }

@@ -5,9 +5,7 @@
   border: 1px solid var(--border) !important;
   border-radius: 22px !important;
   padding: 1.2rem 1.4rem !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
   position: relative !important;
   overflow: hidden !important;
   display: flex !important;
@@ -23,7 +21,7 @@
   right: -40px;
   width: 160px;
   height: 160px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.14) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -37,7 +35,7 @@
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  background: rgba(59, 130, 246, 0.14);
+  background: rgba(var(--accent-rgb), 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +49,7 @@
 }
 
 .gib-title strong {
-  color: #3b82f6;
+  color: var(--accent);
   font-family: 'JetBrains Mono', monospace;
   letter-spacing: 0.04em;
 }
@@ -188,5 +186,126 @@
   margin-top: 4px;
   font-size: 0.75rem;
   color: var(--text-muted);
+}
+
+/* ── Delete Group confirmation modal ─────────── */
+.gsbm-delete-modal {
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gsbm-delete-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gsbm-delete-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: rgba(239, 68, 68, 0.14);
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gsbm-delete-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.gsbm-delete-sub {
+  margin: 1px 0 0;
+  font-size: 0.78rem;
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.gsbm-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: transform 0.12s ease;
+}
+
+.gsbm-icon-btn:active {
+  transform: scale(0.92);
+}
+
+.gsbm-delete-warning {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.gsbm-delete-warning svg {
+  color: #ef4444;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.gsbm-delete-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.gsbm-btn-secondary {
+  padding: 9px 16px;
+  border-radius: 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.gsbm-btn-danger {
+  padding: 9px 18px;
+  border-radius: 12px;
+  background: #ef4444;
+  border: none;
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.gsbm-btn-danger:disabled {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.gsbm-btn-secondary:active,
+.gsbm-btn-danger:not(:disabled):active {
+  transform: scale(0.96);
 }
 

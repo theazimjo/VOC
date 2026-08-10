@@ -45,6 +45,26 @@
   --pg-text-muted: rgba(255, 255, 255, 0.44);
   --pg-inset-highlight: rgba(255, 255, 255, 0.06);
 
+  /* Locked accent — one blue for every interactive/brand moment in the
+     teacher module (buttons, links, active states, focus rings). Real
+     iOS system blue rather than the Tailwind blue-500 that had crept in
+     alongside it in some files; picking one and using it everywhere is
+     the whole point of a "locked" accent. */
+  --accent: var(--accent);
+  --accent-rgb: 10, 132, 255;
+  --accent-hover: #0070db;
+
+  /* Motion tokens — strong custom eases (the built-in CSS ones are too
+     weak to feel intentional) plus a small duration scale so every
+     transition in this module comes from the same vocabulary instead of
+     each component picking its own random 0.15s/0.18s/0.2s/0.25s. */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 120ms;
+  --dur-fast: 160ms;
+  --dur-base: 220ms;
+  --dur-modal: 240ms;
+
   padding: var(--space-xl, 2rem);
   max-width: 1200px;
   margin: 0 auto;
@@ -140,8 +160,8 @@
 }
 
 .teacher-dashboard-container .c-stat-card:hover {
-  border-color: rgba(59, 130, 246, 0.4) !important;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+  border-color: rgba(var(--accent-rgb), 0.4) !important;
+  box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.08);
 }
 
 .teacher-dashboard-container .c-stat-card h3 {
@@ -161,7 +181,7 @@
 }
 
 .teacher-dashboard-container .quick-action-btn:hover {
-  border-color: rgba(59, 130, 246, 0.4) !important;
+  border-color: rgba(var(--accent-rgb), 0.4) !important;
   color: var(--text-primary) !important;
 }
 
@@ -215,6 +235,11 @@
 
 .teacher-dashboard-container .t-table-row:hover {
   background: var(--bg-glass-hover) !important;
+}
+
+.teacher-dashboard-container .t-table-row:active {
+  background: var(--bg-glass-hover) !important;
+  opacity: 0.7;
 }
 
 .teacher-dashboard-container .search-input,
@@ -304,7 +329,7 @@
 }
 
 .teacher-dashboard-container .course-card:hover {
-  border-color: rgba(10, 132, 255, 0.4) !important;
+  border-color: rgba(var(--accent-rgb), 0.4) !important;
 }
 
 .teacher-dashboard-container .course-card-title {
