@@ -12,10 +12,10 @@
   padding: 5px;
   /* Real iOS tab-bar material is mostly opaque, not a see-through pane —
      the blur is a light frost for depth, not the main event. */
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   border-radius: 26px;
   z-index: 1000;
   justify-content: space-around;
@@ -25,8 +25,8 @@
 }
 
 [data-theme='android'] .corp-bottom-nav {
-  background: rgba(28, 28, 30, 0.94);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(30, 30, 32, 0.97);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Specular edge — the bright rim of light a glass surface catches along

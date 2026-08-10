@@ -16,25 +16,22 @@
   transition: left var(--transition-slow);
 }
 
-/* ---------- Corp student — iOS-standard toolbar material ----------
-   Mostly-opaque glass (not a see-through pane — same lesson as the bottom
-   nav) with a soft shadow-based edge instead of a hard divider line, per
-   the "scroll edge effects, not hard dividers" material guidance. */
+/* ---------- Corp student — same glass material as the bottom nav ----------
+   Same background/blur/border recipe as .personal-bottom-nav /
+   .corp-bottom-nav, so the top and bottom chrome read as one consistent
+   material instead of two different levels of glass. */
 .navbar--corp-student {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-bottom: none;
-  box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.06),
-    0 8px 24px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme='android'] .navbar--corp-student {
-  background: rgba(28, 28, 30, 0.94);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.06),
-    0 8px 24px rgba(0, 0, 0, 0.35);
+  background: rgba(30, 30, 32, 0.97);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* left offset matches sidebar */
