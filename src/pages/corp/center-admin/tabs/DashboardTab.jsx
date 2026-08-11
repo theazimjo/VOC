@@ -1,182 +1,342 @@
-import { AlertTriangle, ArrowRight, BookOpen, Building, CheckCircle2, GraduationCap, Layers, Users } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import {
+  AlertTriangle, ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, ChevronRight,
+  GraduationCap, Layers, Search, Users,
+} from 'lucide-react';
 import { getInitials } from '../utils';
 import './DashboardTab.css';
 
-const STAT_ACCENT = { purple: '#c084fc', blue: 'var(--accent)', green: '#4ade80' };
-
-// A dashboard is a glance, not a workbench — it reports what's true
-// right now and what needs a decision, then links deeper. It doesn't
-// duplicate the create-actions that already live on their own tabs
-// (Teachers has its own "+" FAB, Courses has its own "+" FAB).
-//
-// Three jobs:
-//  1. headline numbers (clickable — each jumps to its own tab)
-//  2. "needs attention" — real problems computed from data that's
-//     already loaded (idle teachers, empty groups, unused courses),
-//     not vanity metrics
-//  3. "what's new" — the actual newest teachers/courses by real
-//     createdAt, not an arbitrary DB-order slice
+// Bento-grid layout, flat iOS card styling (same tokens as every other
+// center-admin tab). Every number on this page is derived from data
+// that's already loaded for the Teachers/Courses/Groups tabs — nothing
+// invented, no simulated trend lines, no fabricated percentages. There's
+// no time-series data source anywhere in this app (no daily snapshots,
+// no login/activity events), so instead of faking a growth chart this
+// shows a real per-teacher workload breakdown, sortable by an actual
+// metric (students or groups).
 export default function DashboardTab({ p }) {
-  const { allCourses, centerName, groups, navigate, teachers, teachersWithStats, totalCourses, totalTeacherStudents, totalTeachers } = p;
+  const {
+    allCourses, avgStudents, centerName, groups, navigate, teachersWithStats,
+    totalCourses, totalTeacherStudents, totalTeachers,
+  } = p;
 
-  const recentTeachers = [...teachersWithStats]
-    .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
-    .slice(0, 3);
-  const recentCourses = [...allCourses]
-    .sort((a, b) => b.createdAt - a.createdAt)
-    .slice(0, 3);
+  const [watchlistTab, setWatchlistTab] = useState('teachers');
+  const [sortMetric, setSortMetric] = useState('students'); // 'students' | 'groups'
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Real, computed signals — every number here comes from data already
-  // loaded for the Teachers/Courses tabs, nothing invented.
-  const idleTeachers = teachersWithStats.filter(t => t.groupsCount === 0);
-  const emptyGroups = groups.filter(g => g.status !== 'archived' && (g.studentsCount || 0) === 0);
-  const unusedCourses = allCourses.filter(c => c.groupsCount === 0);
+  const recentCourses = useMemo(() =>
+    [...allCourses].sort((a, b) => b.createdAt - a.createdAt).slice(0, 4),
+  [allCourses]);
+
+  // Real, computed problems — same signals the original dashboard used:
+  // idle teachers, empty groups, unused courses. Nothing here is a vanity
+  // metric; each one is something the admin can actually go fix.
+  const idleTeachers = useMemo(() => teachersWithStats.filter(t => t.groupsCount === 0), [teachersWithStats]);
+  const emptyGroups = useMemo(() => groups.filter(g => g.status !== 'archived' && (g.studentsCount || 0) === 0), [groups]);
+  const unusedCourses = useMemo(() => allCourses.filter(c => c.groupsCount === 0), [allCourses]);
   const attentionCount = idleTeachers.length + emptyGroups.length + unusedCourses.length;
 
+  const topInsight = useMemo(() => {
+    if (idleTeachers.length > 0) {
+      const t = idleTeachers[0];
+      return { text: <><strong>{t.name}</strong> hali birorta guruhga biriktirilmagan</>, cta: "O'qituvchilarni ko'rish", to: '/corp/admin/teachers' };
+    }
+    if (emptyGroups.length > 0) {
+      const g = emptyGroups[0];
+      return { text: <><strong>{g.name}</strong> guruhida hali o'quvchi yo'q</>, cta: "Guruhlarni ko'rish", to: '/corp/admin/teachers' };
+    }
+    if (unusedCourses.length > 0) {
+      const c = unusedCourses[0];
+      return { text: <><strong>{c.title}</strong> paketi hech qaysi guruhga biriktirilmagan</>, cta: "Packlarni ko'rish", to: '/corp/admin/courses' };
+    }
+    return null;
+  }, [idleTeachers, emptyGroups, unusedCourses]);
+
+  // Watchlist — real top performers ranked by actual student/group count.
+  // The search box genuinely filters this list (by name), it's not just
+  // decoration.
+  const q = searchQuery.trim().toLowerCase();
+  const rankedTeachers = useMemo(() =>
+    [...teachersWithStats]
+      .filter(t => !q || t.name.toLowerCase().includes(q))
+      .sort((a, b) => b.studentsCount - a.studentsCount),
+  [teachersWithStats, q]);
+  const rankedGroups = useMemo(() =>
+    [...groups]
+      .filter(g => !q || g.name.toLowerCase().includes(q))
+      .sort((a, b) => (b.studentsCount || 0) - (a.studentsCount || 0)),
+  [groups, q]);
+
+  // Workload — real per-teacher totals, sortable by whichever metric
+  // matters. No invented time axis since none of this data is timestamped
+  // per-day anywhere.
+  const workloadTeachers = useMemo(() => {
+    return [...teachersWithStats]
+      .sort((a, b) => sortMetric === 'students' ? b.studentsCount - a.studentsCount : b.groupsCount - a.groupsCount)
+      .slice(0, 6);
+  }, [teachersWithStats, sortMetric]);
+  const workloadMax = Math.max(1, ...workloadTeachers.map(t => sortMetric === 'students' ? t.studentsCount : t.groupsCount));
+
   return (
-        <div className="page-view-dashboard">
-          <header className="center-admin-header">
-            <div className="header-meta">
-              <span className="center-badge"><Building size={16} /> O'quv Markazi Admin Panel</span>
-              <h1>{centerName}</h1>
-              <p>Markaz o'qituvchilari, xususiy so'z packlari va umumiy o'quv dasturi boshqaruvi.</p>
+    <div className="helios-dashboard-container">
+      {/* ── Top Bar Header ── */}
+      <header className="helios-topbar">
+        <div className="helios-welcome-group">
+          <h1 className="helios-greeting">
+            Xush kelibsiz, <span className="helios-accent-text">{centerName}</span>
+          </h1>
+          <p className="helios-subtext">Markaz o'qituvchilari, guruhlari va kurslarining umumiy holati</p>
+        </div>
+
+        <div className="helios-top-right">
+          <div className="helios-search-bar">
+            <Search size={18} className="helios-search-icon" />
+            <input
+              type="text"
+              placeholder="O'qituvchi yoki guruh qidirish..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          <div className="helios-user-profile">
+            <div className="helios-avatar">{getInitials(centerName)}</div>
+            <div className="helios-user-meta">
+              <span className="helios-username">{centerName}</span>
+              <span className="helios-user-role">Center Admin</span>
             </div>
-          </header>
+          </div>
+        </div>
+      </header>
 
-          <div className="center-admin-stats">
-            <button type="button" className="c-stat-card clickable" style={{ borderLeft: `3px solid ${STAT_ACCENT.purple}` }} onClick={() => navigate('/corp/admin/teachers')}>
-              <div className="c-stat-icon purple"><GraduationCap size={24} /></div>
-              <div>
-                <h3>{totalTeachers}</h3>
-                <p>O'qituvchilar Soni</p>
-              </div>
-            </button>
-            <button type="button" className="c-stat-card clickable" style={{ borderLeft: `3px solid ${STAT_ACCENT.blue}` }} onClick={() => navigate('/corp/admin/courses')}>
-              <div className="c-stat-icon blue"><BookOpen size={24} /></div>
-              <div>
-                <h3>{totalCourses}</h3>
-                <p>Xususiy Packlar</p>
-              </div>
-            </button>
-            <button type="button" className="c-stat-card clickable" style={{ borderLeft: `3px solid ${STAT_ACCENT.green}` }} onClick={() => navigate('/corp/admin/students')}>
-              <div className="c-stat-icon green"><Users size={24} /></div>
-              <div>
-                <h3>{totalTeacherStudents}</h3>
-                <p>O'quvchilar Soni</p>
-              </div>
-            </button>
+      {/* ── Top Bento Grid Section ── */}
+      <div className="helios-bento-grid">
+        {/* Card 1: Total Students / Hero Stat */}
+        <div className="helios-card helios-hero-card">
+          <div className="helios-card-header">
+            <span className="helios-card-title">Jami O'quvchilar Soni</span>
+            <span className="helios-badge-chip blue">{groups.length} ta guruhda</span>
           </div>
 
-          {/* Needs Attention — real problems, not decoration. Empty state
-              when the center is actually healthy is just as important as
-              the list itself. */}
-          <div className="dashboard-attention-section">
-            <h2 style={{ fontSize: '1.25rem', color: 'var(--pg-text)', marginBottom: '1rem' }}>
-              Diqqat talab qiladi {attentionCount > 0 && `(${attentionCount})`}
-            </h2>
+          <div className="helios-big-stat-val">
+            {totalTeacherStudents} <span className="helios-stat-unit">o'quvchi</span>
+          </div>
 
-            {attentionCount === 0 ? (
-              <div className="attention-all-good">
-                <CheckCircle2 size={22} />
-                <span>Hammasi joyida — e'tibor talab qiladigan muammo yo'q.</span>
-              </div>
+          {/* Real "needs attention" insight, not a fabricated AI claim */}
+          <div className={`helios-insight-box ${topInsight ? 'warn' : 'good'}`}>
+            {topInsight ? (
+              <>
+                <div className="helios-insight-content">
+                  <div className="helios-insight-chip warn">
+                    <AlertTriangle size={13} /> Diqqat talab qiladi{attentionCount > 1 && ` (${attentionCount})`}
+                  </div>
+                  <p>{topInsight.text}</p>
+                </div>
+                <button type="button" className="helios-insight-cta-btn" onClick={() => navigate(topInsight.to)}>
+                  {topInsight.cta} <ArrowRight size={16} />
+                </button>
+              </>
             ) : (
-              <div className="attention-list">
-                {idleTeachers.slice(0, 3).map(t => (
-                  <button type="button" key={`t_${t.id}`} className="attention-item" onClick={() => navigate('/corp/admin/teachers')}>
-                    <AlertTriangle size={16} className="attention-icon" />
-                    <span><strong>{t.name}</strong> hali birorta guruhga biriktirilmagan</span>
-                    <ArrowRight size={14} className="attention-arrow" />
-                  </button>
-                ))}
-                {emptyGroups.slice(0, 3).map(g => (
-                  <button type="button" key={`g_${g.id}`} className="attention-item" onClick={() => navigate('/corp/admin/teachers')}>
-                    <AlertTriangle size={16} className="attention-icon" />
-                    <span>
-                      <strong>{g.name}</strong> guruhida hali o'quvchi yo'q
-                      {teachers.find(t => t.id === g.teacherId) && <> ({teachers.find(t => t.id === g.teacherId).name})</>}
-                    </span>
-                    <ArrowRight size={14} className="attention-arrow" />
-                  </button>
-                ))}
-                {unusedCourses.slice(0, 3).map(c => (
-                  <button type="button" key={`c_${c.id}`} className="attention-item" onClick={() => navigate('/corp/admin/courses')}>
-                    <AlertTriangle size={16} className="attention-icon" />
-                    <span><strong>{c.title}</strong> kursi hech qaysi guruhga biriktirilmagan</span>
-                    <ArrowRight size={14} className="attention-arrow" />
-                  </button>
-                ))}
+              <div className="helios-insight-content">
+                <div className="helios-insight-chip good">
+                  <CheckCircle2 size={13} /> Hammasi joyida
+                </div>
+                <p>Diqqat talab qiladigan muammo yo'q — barcha o'qituvchi va guruhlar faol.</p>
               </div>
-            )}
-          </div>
-
-          {/* What's new — the actual newest items, not an arbitrary slice */}
-          <div className="dashboard-sections">
-            {teachersWithStats.length === 0 ? null : (
-              <>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h2 style={{ fontSize: '1.25rem', color: 'var(--pg-text)' }}>So'nggi qo'shilgan o'qituvchilar</h2>
-                  <button type="button" className="btn-view-all" onClick={() => navigate('/corp/admin/teachers')}>
-                    Barchasini ko'rish <ArrowRight size={14} />
-                  </button>
-                </div>
-
-                <div className="teachers-grid" style={{ marginBottom: '2.5rem' }}>
-                  {recentTeachers.map((teacher) => (
-                    <div key={teacher.id} className="teacher-card">
-                      <div className="teacher-card-head">
-                        <div className="teacher-avatar">{getInitials(teacher.name)}</div>
-                        <div>
-                          <h3>{teacher.name}</h3>
-                          <span className="teacher-subject-badge">{teacher.subject || 'Ingliz tili'}</span>
-                        </div>
-                      </div>
-                      <div className="teacher-card-info">
-                        <p><strong>Email:</strong> {teacher.email}</p>
-                        <p style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '4px' }}>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                            <BookOpen size={13} /> {teacher.groupsCount} guruh
-                          </span>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                            <Users size={13} /> {teacher.studentsCount} o'quvchi
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {allCourses.length === 0 ? null : (
-              <>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h2 style={{ fontSize: '1.25rem', color: 'var(--pg-text)' }}>So'nggi qo'shilgan kurslar</h2>
-                  <button type="button" className="btn-view-all" onClick={() => navigate('/corp/admin/courses')}>
-                    Barchasini ko'rish <ArrowRight size={14} />
-                  </button>
-                </div>
-
-                <div className="packs-grid">
-                  {recentCourses.map((course) => (
-                    <div key={course.id} className="custom-pack-card">
-                      <div className="pack-level-tag">{course.title}</div>
-                      <h3>{course.title}</h3>
-                      <p className="pack-desc">{course.description || 'Izoh yo\'q'}</p>
-                      <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.78rem', color: 'var(--pg-text-secondary)' }}>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                          <Layers size={13} /> {course.sectionsCount} bo'lim
-                        </span>
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                          <Users size={13} /> {course.studentsCount} o'quvchi
-                        </span>
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </>
             )}
           </div>
         </div>
+
+        {/* Card 2: Watchlist / Top Performers */}
+        <div className="helios-card helios-watchlist-card">
+          <div className="helios-card-header">
+            <span className="helios-card-title">Yetakchilar</span>
+            <div className="helios-tab-pills">
+              <button
+                type="button"
+                className={`helios-tab-pill ${watchlistTab === 'teachers' ? 'active' : ''}`}
+                onClick={() => setWatchlistTab('teachers')}
+              >
+                O'qituvchilar
+              </button>
+              <button
+                type="button"
+                className={`helios-tab-pill ${watchlistTab === 'groups' ? 'active' : ''}`}
+                onClick={() => setWatchlistTab('groups')}
+              >
+                Guruhlar
+              </button>
+            </div>
+          </div>
+
+          <div className="helios-watchlist-list">
+            {watchlistTab === 'teachers' && (
+              rankedTeachers.length === 0 ? (
+                <div className="helios-empty-item">{q ? 'Hech narsa topilmadi' : "O'qituvchilar mavjud emas"}</div>
+              ) : (
+                rankedTeachers.slice(0, 4).map((t) => (
+                  <button type="button" key={t.id} className="helios-watchlist-row" onClick={() => navigate('/corp/admin/teachers')}>
+                    <div className="helios-row-left">
+                      <div className="helios-mini-avatar">{getInitials(t.name)}</div>
+                      <div>
+                        <div className="helios-row-title">{t.name}</div>
+                        <div className="helios-row-sub">{t.groupsCount} guruh</div>
+                      </div>
+                    </div>
+                    <div className="helios-row-right">
+                      <div className="helios-row-val">{t.studentsCount} o'quvchi</div>
+                    </div>
+                  </button>
+                ))
+              )
+            )}
+
+            {watchlistTab === 'groups' && (
+              rankedGroups.length === 0 ? (
+                <div className="helios-empty-item">{q ? 'Hech narsa topilmadi' : 'Guruhlar mavjud emas'}</div>
+              ) : (
+                rankedGroups.slice(0, 4).map((g) => (
+                  <button type="button" key={g.id} className="helios-watchlist-row" onClick={() => navigate('/corp/admin/teachers')}>
+                    <div className="helios-row-left">
+                      <div className="helios-icon-box purple"><BookOpen size={18} /></div>
+                      <div>
+                        <div className="helios-row-title">{g.name}</div>
+                        <div className="helios-row-sub">{g.level || 'Beginner'}</div>
+                      </div>
+                    </div>
+                    <div className="helios-row-right">
+                      <div className="helios-row-val">{g.studentsCount || 0} o'quvchi</div>
+                      <span className={`helios-status-chip ${g.status === 'archived' ? '' : 'active'}`}>
+                        {g.status === 'archived' ? 'Arxiv' : 'Faol'}
+                      </span>
+                    </div>
+                  </button>
+                ))
+              )
+            )}
+          </div>
+        </div>
+
+        {/* Card 3: Mini Metrics 2x2 Grid */}
+        <div className="helios-card helios-metrics-card">
+          <div className="helios-card-header">
+            <span className="helios-card-title">Markaz Metrikalari</span>
+            <button type="button" className="helios-see-all-btn" onClick={() => navigate('/corp/admin/statistics')}>
+              Barchasi <ArrowUpRight size={16} />
+            </button>
+          </div>
+
+          <div className="helios-metrics-grid">
+            <button type="button" className="helios-mini-metric-card" onClick={() => navigate('/corp/admin/teachers')}>
+              <div className="helios-mm-val">{totalTeachers}</div>
+              <div className="helios-mm-footer">
+                <GraduationCap size={18} className="helios-mm-icon purple" />
+                <span>O'qituvchilar</span>
+              </div>
+            </button>
+
+            <button type="button" className="helios-mini-metric-card" onClick={() => navigate('/corp/admin/courses')}>
+              <div className="helios-mm-val">{totalCourses}</div>
+              <div className="helios-mm-footer">
+                <BookOpen size={18} className="helios-mm-icon blue" />
+                <span>Xususiy Packlar</span>
+              </div>
+            </button>
+
+            <button type="button" className="helios-mini-metric-card" onClick={() => navigate('/corp/admin/teachers')}>
+              <div className="helios-mm-val">{groups.length}</div>
+              <div className="helios-mm-footer">
+                <Layers size={18} className="helios-mm-icon green" />
+                <span>Guruhlar</span>
+              </div>
+            </button>
+
+            <button type="button" className="helios-mini-metric-card" onClick={() => navigate('/corp/admin/statistics')}>
+              <div className="helios-mm-val">{avgStudents}</div>
+              <div className="helios-mm-footer">
+                <Users size={18} className="helios-mm-icon orange" />
+                <span>O'qituvchiga o'rtacha</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Middle: Real Per-Teacher Workload Breakdown ── */}
+      <div className="helios-card helios-chart-card">
+        <div className="helios-chart-header">
+          <div>
+            <h3 className="helios-chart-title">O'qituvchilar Yuklamasi</h3>
+            <p className="helios-chart-sub">Har bir o'qituvchining hozirgi haqiqiy ko'rsatkichlari</p>
+          </div>
+
+          <div className="helios-time-toggles">
+            <button
+              type="button"
+              className={`helios-time-btn ${sortMetric === 'students' ? 'active' : ''}`}
+              onClick={() => setSortMetric('students')}
+            >
+              O'quvchilar
+            </button>
+            <button
+              type="button"
+              className={`helios-time-btn ${sortMetric === 'groups' ? 'active' : ''}`}
+              onClick={() => setSortMetric('groups')}
+            >
+              Guruhlar
+            </button>
+          </div>
+        </div>
+
+        {workloadTeachers.length === 0 ? (
+          <div className="helios-empty-item">Hali o'qituvchi qo'shilmagan</div>
+        ) : (
+          <div className="helios-bar-list">
+            {workloadTeachers.map((t) => {
+              const val = sortMetric === 'students' ? t.studentsCount : t.groupsCount;
+              const pct = Math.round((val / workloadMax) * 100);
+              return (
+                <button type="button" key={t.id} className="helios-bar-row" onClick={() => navigate('/corp/admin/teachers')}>
+                  <div className="helios-bar-row-head">
+                    <span className="helios-bar-name">{t.name}</span>
+                    <span className="helios-bar-value">{val} {sortMetric === 'students' ? "o'quvchi" : 'guruh'}</span>
+                  </div>
+                  <div className="helios-bar-track">
+                    <div className="helios-bar-fill" style={{ width: `${pct}%` }} />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* ── Bottom Section: Recent Courses Preview ── */}
+      <div className="helios-card helios-recent-courses-card">
+        <div className="helios-card-header">
+          <span className="helios-card-title">So'nggi Qo'shilgan Packlar</span>
+          <button type="button" className="helios-see-all-btn" onClick={() => navigate('/corp/admin/courses')}>
+            Barchasi <ArrowRight size={16} />
+          </button>
+        </div>
+
+        <div className="helios-recent-packs-grid full-width-grid">
+          {recentCourses.length === 0 ? (
+            <div className="helios-empty-item">Xususiy packlar hali qo'shilmagan</div>
+          ) : (
+            recentCourses.map((c) => (
+              <button type="button" key={c.id} className="helios-pack-item" onClick={() => navigate('/corp/admin/courses')}>
+                <div className="helios-pack-icon"><BookOpen size={20} /></div>
+                <div className="helios-pack-info">
+                  <div className="helios-pack-title">{c.title}</div>
+                  <div className="helios-pack-sub">{c.sectionsCount} bo'lim · {c.wordsCount} so'z</div>
+                </div>
+                <ChevronRight size={18} className="helios-pack-arrow" />
+              </button>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

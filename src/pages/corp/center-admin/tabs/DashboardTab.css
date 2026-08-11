@@ -1,179 +1,370 @@
-/* Secondary "view all" link for the dashboard's preview sections — not
-   a create-action, so it doesn't get the solid-accent primary-button
-   treatment those used to (incorrectly) share. */
-.btn-view-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--r-sm, 10px);
-  border: 1px solid var(--pg-hairline);
-  background: var(--pg-surface);
-  color: var(--pg-text-secondary);
-  font-weight: 600;
-  font-size: 0.82rem;
-  cursor: pointer;
-  transition: all var(--dur-fast, 0.2s) ease;
+/* ==========================================================================
+   Bento-grid dashboard, flat iOS card styling — same recipe as the rest of
+   the center-admin module (shared.css/CenterAdminDashboard.css tokens):
+   var(--card-shadow) instead of glow/blur, solid opaque backgrounds, no
+   backdrop-filter (nothing behind these cards to blur). Decorative glow
+   effects (radial gradient blobs, neon drop-shadows, gradient-clipped
+   headline text) were stripped since they don't match the rest of the app.
+   ========================================================================== */
+
+.helios-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  width: 100%;
+  color: var(--pg-text);
 }
 
-.btn-view-all:hover {
-  background: var(--pg-surface-hover);
+/* ── Top Bar Header ── */
+.helios-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.5rem;
+}
+
+.helios-welcome-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.helios-greeting {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--pg-text);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.helios-accent-text {
   color: var(--accent, #0a84ff);
-  border-color: rgba(var(--accent-rgb), 0.35);
 }
 
-.btn-view-all:active {
-  transform: scale(0.96);
-  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+.helios-subtext {
+  font-size: 0.95rem;
+  color: var(--pg-text-secondary);
+  margin: 0;
 }
 
-.center-admin-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+/* Top Right Section */
+.helios-top-right {
+  display: flex;
+  align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
-.c-stat-card {
+.helios-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  border-radius: 9999px;
+  padding: 0.6rem 1rem 0.6rem 2.6rem;
+  width: 300px;
+  transition: border-color var(--dur-fast, 0.2s) ease, background var(--dur-fast, 0.2s) ease;
+}
+
+.helios-search-bar:focus-within {
+  border-color: rgba(var(--accent-rgb, 10, 132, 255), 0.5);
+  background: var(--pg-bg);
+}
+
+.helios-search-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--pg-text-muted);
+  pointer-events: none;
+}
+
+.helios-search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--pg-text);
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.helios-search-bar input::placeholder {
+  color: var(--pg-text-muted);
+}
+
+.helios-user-profile {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: var(--pg-bg);
+  background: var(--pg-surface);
   border: 1px solid var(--pg-hairline);
-  padding: 0.85rem 1rem;
-  border-radius: var(--r-md, 10px);
-  color: var(--pg-text);
-  box-shadow: var(--card-shadow);
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  width: 100%;
-  font: inherit;
-  text-align: left;
+  padding: 4px 14px 4px 5px;
+  border-radius: 9999px;
 }
 
-.c-stat-card.clickable {
-  cursor: pointer;
-  transition: border-color var(--dur-fast, 0.2s) ease, transform var(--dur-fast, 0.2s) ease;
-}
-
-.c-stat-card.clickable:hover {
-  border-color: rgba(var(--accent-rgb), 0.4);
-  transform: translateY(-2px);
-  box-shadow: var(--card-shadow-hover);
-}
-
-.c-stat-card.clickable:active {
-  transform: scale(0.98);
-  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
-}
-
-.c-stat-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
+.helios-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent, #0a84ff), #a855f7);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.c-stat-card h3 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; color: var(--pg-text); line-height: 1.1; }
-
-.c-stat-card p { font-size: 0.78rem; color: var(--pg-text-secondary); margin-top: 2px; }
-
-/* ── Needs Attention ─────────────────────────── */
-.dashboard-attention-section {
-  margin-bottom: 2rem;
-}
-
-.attention-all-good {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.25);
-  color: #4ade80;
-  border-radius: var(--r-lg, 16px);
-  padding: 1rem 1.1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.attention-list {
+.helios-user-meta {
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
-.attention-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  background: rgba(245, 158, 11, 0.06);
-  border: 1px solid rgba(245, 158, 11, 0.18);
+.helios-username {
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--pg-text);
+}
+
+.helios-user-role {
+  font-size: 0.72rem;
+  color: var(--pg-text-muted);
+}
+
+/* ── Generic Card Style ── */
+.helios-card {
+  background: var(--pg-bg);
+  border: 1px solid var(--pg-hairline);
+  border-radius: var(--r-lg, 18px);
+  padding: 1.4rem;
+  box-shadow: var(--card-shadow);
+}
+
+.helios-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.1rem;
+}
+
+.helios-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pg-text);
+  letter-spacing: -0.01em;
+}
+
+/* ── Top Bento Grid Layout ── */
+.helios-bento-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 1200px) {
+  .helios-bento-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .helios-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hero Stat Card */
+.helios-hero-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.helios-badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.helios-badge-chip.blue {
+  background: rgba(var(--accent-rgb, 10, 132, 255), 0.12);
+  color: var(--accent, #0a84ff);
+  border: 1px solid rgba(var(--accent-rgb, 10, 132, 255), 0.22);
+}
+
+.helios-big-stat-val {
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: var(--pg-text);
+  letter-spacing: -0.03em;
+  margin: 0.5rem 0 1.3rem 0;
+  line-height: 1;
+}
+
+.helios-stat-unit {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--pg-text-muted);
+}
+
+/* Real "needs attention" insight box, replaces the old fabricated AI-promo
+   claim. warn = amber (same palette as .attention-item elsewhere in this
+   module), good = green (same palette as .attention-all-good). */
+.helios-insight-box {
   border-radius: var(--r-md, 14px);
-  padding: 0.75rem 0.9rem;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.helios-insight-box.warn {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.helios-insight-box.good {
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.22);
+}
+
+.helios-insight-content p {
+  font-size: 0.85rem;
+  color: var(--pg-text-secondary);
+  margin: 0.35rem 0 0 0;
+  line-height: 1.4;
+}
+
+.helios-insight-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.helios-insight-chip.warn { color: #f59e0b; }
+.helios-insight-chip.good { color: #4ade80; }
+
+.helios-insight-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0.65rem 1.2rem;
+  border-radius: 9999px;
+  background: var(--accent, #0a84ff);
+  border: none;
+  color: #ffffff;
+  font-weight: 700;
   font-size: 0.86rem;
-  text-align: left;
   cursor: pointer;
   transition: background var(--dur-fast, 0.2s) ease, transform var(--dur-press, 120ms) var(--ease-out, ease-out);
 }
 
-.attention-item span {
-  flex: 1;
+.helios-insight-cta-btn:hover {
+  background: var(--accent-hover, #0070db);
+}
+
+.helios-insight-cta-btn:active {
+  transform: scale(0.97);
+}
+
+/* Watchlist Card */
+.helios-watchlist-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.helios-tab-pills {
+  display: flex;
+  background: var(--pg-surface);
+  border-radius: 9999px;
+  padding: 3px;
+  border: 1px solid var(--pg-hairline);
+}
+
+.helios-tab-pill {
+  background: transparent;
+  border: none;
+  color: var(--pg-text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.2s) ease, color var(--dur-fast, 0.2s) ease;
+}
+
+.helios-tab-pill.active {
+  background: var(--pg-bg);
+  color: var(--pg-text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.helios-tab-pill:active {
+  transform: scale(0.95);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+.helios-watchlist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+.helios-watchlist-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--r-md, 14px);
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.2s) ease, border-color var(--dur-fast, 0.2s) ease;
+}
+
+.helios-watchlist-row:hover {
+  background: var(--pg-surface-hover);
+  border-color: rgba(var(--accent-rgb, 10, 132, 255), 0.28);
+}
+
+.helios-watchlist-row:active {
+  transform: scale(0.98);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+.helios-row-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
   min-width: 0;
 }
 
-.attention-icon {
-  color: #f59e0b;
-  flex-shrink: 0;
-}
-
-.attention-arrow {
-  color: var(--pg-text-muted);
-  flex-shrink: 0;
-}
-
-.attention-item:hover {
-  background: rgba(245, 158, 11, 0.12);
-}
-
-.attention-item:active {
-  transform: scale(0.98);
-}
-
-.teachers-grid, .packs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 0.85rem;
-}
-
-.teacher-card, .custom-pack-card {
-  background: var(--pg-bg);
-  border: 1px solid var(--pg-hairline);
-  border-radius: 12px;
-  padding: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--card-shadow);
-}
-
-.teacher-card-head {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.teacher-avatar {
-  width: 48px;
-  height: 48px;
+.helios-mini-avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #a855f7, #6366f1);
+  background: linear-gradient(135deg, var(--accent, #0a84ff), #a855f7);
   color: #ffffff;
-  font-size: 1.3rem;
+  font-size: 0.85rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -181,85 +372,385 @@
   flex-shrink: 0;
 }
 
-.teacher-card-head h3 {
-  color: var(--pg-text);
+.helios-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.teacher-subject-badge {
-  font-size: 0.75rem;
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
-  padding: 2px 8px;
-  border-radius: 8px;
+.helios-icon-box.purple {
+  background: rgba(168, 85, 247, 0.12);
+  color: #a855f7;
 }
 
-.teacher-card-info {
+.helios-row-title {
   font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--pg-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.helios-row-sub {
+  font-size: 0.75rem;
+  color: var(--pg-text-muted);
+}
+
+.helios-row-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.helios-row-val {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--pg-text);
+  white-space: nowrap;
+}
+
+.helios-status-chip {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: var(--pg-surface-hover);
+  color: var(--pg-text-muted);
+}
+
+.helios-status-chip.active {
+  background: rgba(74, 222, 128, 0.12);
+  color: #4ade80;
+}
+
+/* Metrics 2x2 Grid Card */
+.helios-metrics-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.helios-see-all-btn {
+  background: transparent;
+  border: none;
+  color: var(--accent, #0a84ff);
+  font-size: 0.84rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.helios-see-all-btn:hover {
+  text-decoration: underline;
+}
+
+.helios-see-all-btn:active {
+  transform: scale(0.95);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+.helios-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+.helios-mini-metric-card {
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  border-radius: var(--r-md, 14px);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  height: 92px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.2s) ease, border-color var(--dur-fast, 0.2s) ease;
+}
+
+.helios-mini-metric-card:hover {
+  background: var(--pg-surface-hover);
+  border-color: rgba(var(--accent-rgb, 10, 132, 255), 0.28);
+}
+
+.helios-mini-metric-card:active {
+  transform: scale(0.97);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+.helios-mm-val {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--pg-text);
+  letter-spacing: -0.02em;
+}
+
+.helios-mm-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
   color: var(--pg-text-secondary);
-  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.helios-mm-icon.purple { color: #a855f7; }
+.helios-mm-icon.blue { color: var(--accent, #0a84ff); }
+.helios-mm-icon.green { color: #4ade80; }
+.helios-mm-icon.orange { color: #f97316; }
+
+/* ── Per-Teacher Workload Breakdown ── */
+.helios-chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.helios-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.helios-chart-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--pg-text);
+  margin: 0 0 0.25rem 0;
+}
+
+.helios-chart-sub {
+  font-size: 0.84rem;
+  color: var(--pg-text-secondary);
+  margin: 0;
+}
+
+.helios-time-toggles {
+  display: flex;
+  background: var(--pg-surface);
+  border-radius: 9999px;
+  padding: 4px;
+  border: 1px solid var(--pg-hairline);
+}
+
+.helios-time-btn {
+  background: transparent;
+  border: none;
+  color: var(--pg-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.2s) ease, color var(--dur-fast, 0.2s) ease;
+}
+
+.helios-time-btn.active {
+  background: var(--accent, #0a84ff);
+  color: #ffffff;
+}
+
+.helios-time-btn:active {
+  transform: scale(0.95);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+/* Real per-teacher horizontal bars — flat rows, no SVG/neon glow, values
+   are exactly what teachersWithStats already computed. */
+.helios-bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.helios-bar-row {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  border-radius: var(--r-sm, 10px);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.2s) ease;
 }
 
-.pack-level-tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
-  padding: 3px 10px;
-  border-radius: 8px;
+.helios-bar-row:hover {
+  background: var(--pg-surface);
+}
+
+.helios-bar-row:active {
+  transform: scale(0.99);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+.helios-bar-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.helios-bar-name {
+  font-size: 0.86rem;
   font-weight: 600;
-  margin-bottom: 10px;
-  align-self: flex-start;
+  color: var(--pg-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.custom-pack-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 6px;
+.helios-bar-value {
+  font-size: 0.78rem;
+  color: var(--pg-text-muted);
+  flex-shrink: 0;
+}
+
+.helios-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--pg-surface);
+  overflow: hidden;
+}
+
+.helios-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent, #0a84ff);
+  transition: width var(--dur-base, 220ms) var(--ease-out, ease-out);
+}
+
+/* Recent Packs List Grid */
+.full-width-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.8rem;
+}
+
+.helios-recent-packs-grid {
+  margin-top: 0.2rem;
+}
+
+.helios-pack-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  background: var(--pg-surface);
+  border: 1px solid var(--pg-hairline);
+  border-radius: var(--r-md, 14px);
+  padding: 0.8rem 1rem;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast, 0.2s) ease, border-color var(--dur-fast, 0.2s) ease;
+}
+
+.helios-pack-item:hover {
+  background: var(--pg-surface-hover);
+  border-color: rgba(var(--accent-rgb, 10, 132, 255), 0.28);
+}
+
+.helios-pack-item:active {
+  transform: scale(0.98);
+  transition: transform var(--dur-press, 120ms) var(--ease-out, ease-out);
+}
+
+.helios-pack-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(var(--accent-rgb, 10, 132, 255), 0.12);
+  color: var(--accent, #0a84ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.helios-pack-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.helios-pack-title {
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--pg-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.helios-pack-sub {
+  font-size: 0.76rem;
+  color: var(--pg-text-muted);
+}
+
+.helios-empty-item {
+  font-size: 0.85rem;
+  color: var(--pg-text-muted);
+  text-align: center;
+  padding: 1.5rem;
 }
 
 @media (max-width: 768px) {
-  .center-admin-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.55rem;
-    margin-bottom: 1rem;
+  .helios-dashboard-container {
+    gap: 1.1rem;
   }
 
-  .c-stat-card {
-    padding: 0.75rem 0.8rem;
+  .helios-greeting {
+    font-size: 1.5rem;
+  }
+
+  .helios-subtext {
+    font-size: 0.85rem;
+  }
+
+  .helios-top-right {
+    width: 100%;
+  }
+
+  .helios-search-bar {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .helios-card {
+    padding: 1.1rem;
+    border-radius: var(--r-md, 14px);
+  }
+
+  .helios-big-stat-val {
+    font-size: 2.1rem;
+  }
+
+  .helios-metrics-grid {
     gap: 0.6rem;
-    border-radius: 12px;
   }
 
-  .c-stat-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-  }
-
-  .c-stat-icon svg {
-    width: 17px !important;
-    height: 17px !important;
-  }
-
-  .c-stat-card h3 { font-size: 1.05rem; }
-  .c-stat-card p { font-size: 0.68rem; }
-
-  .teachers-grid, .packs-grid {
-    grid-template-columns: 1fr;
-    gap: 0.65rem;
-  }
-
-  .teacher-card, .custom-pack-card {
-    padding: 1rem;
-    border-radius: 14px;
-  }
-
-  .teacher-avatar {
-    width: 38px;
-    height: 38px;
-    font-size: 1rem;
+  .helios-mini-metric-card {
+    height: 82px;
+    padding: 0.85rem;
   }
 }
