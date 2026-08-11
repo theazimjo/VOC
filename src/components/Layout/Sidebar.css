@@ -234,8 +234,12 @@
   z-index: 99;
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 768px) {
+/* ---------- Responsive ----------
+   Widened from phone-only (768px) to cover tablets too — this component
+   is only ever rendered in personal mode (group mode renders
+   StudentSidebar instead), so it's safe to move this cutover up without
+   affecting corp. ---------- */
+@media (max-width: 1024px) {
   .sidebar {
     left: -260px;
     width: var(--sidebar-width) !important;

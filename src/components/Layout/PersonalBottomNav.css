@@ -132,8 +132,11 @@
   transform: scale(1.1);
 }
 
-/* ── Show on Mobile ────────────────────────── */
-@media (max-width: 768px) {
+/* ── Show on Mobile + Tablet ──────────────────
+   Extended up to 1024px so tablets (which otherwise sit just above the
+   old 768px phone cutover) get this bottom-nav shell instead of the
+   docked sidebar — see Layout.css/Sidebar.css. ─────── */
+@media (max-width: 1024px) {
   .personal-bottom-nav {
     display: flex;
   }

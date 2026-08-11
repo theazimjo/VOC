@@ -56,7 +56,7 @@ export default function Layout() {
   const isIndividualMode = appMode !== 'group' && !isTestMode;
 
   return (
-    <div className={`layout ${isTestMode ? 'layout--test-mode' : ''}`}>
+    <div className={`layout ${isTestMode ? 'layout--test-mode' : ''} ${isIndividualMode ? 'layout--personal' : ''}`}>
       {!isTestMode && (
         appMode === 'group' ? (
           <StudentSidebar />

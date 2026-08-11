@@ -222,6 +222,18 @@
   }
 }
 
+/* ---------- Tablet (personal mode only) ----------
+   Sidebar is off-canvas up to 1024px in personal mode (see Layout.css/
+   Sidebar.css), so the navbar must span full width instead of leaving
+   the 260px sidebar gutter empty. Excludes .navbar--corp-student so
+   corp/group mode, which docks its own StudentSidebar at this width,
+   is untouched. ---------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar:not(.navbar--corp-student) {
+    left: 0 !important;
+  }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .navbar {

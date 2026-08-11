@@ -61,6 +61,24 @@
   background-attachment: fixed;
 }
 
+/* ---------- Tablet (personal mode only) ----------
+   A fixed 260px sidebar eats too much of a tablet's width (portrait
+   tablets sit right above the 768px phone cutover), so personal mode
+   keeps the mobile bottom-nav shell all the way up to 1024px and only
+   docks the sidebar once there's real desktop-class width to spare.
+   Scoped to .layout--personal so corp/group mode (which uses its own
+   StudentSidebar) is untouched. ---------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .layout--personal .layout-content {
+    margin-left: 0 !important;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + var(--space-xl)) !important;
+  }
+
+  .layout--personal .layout-content--dashboard {
+    padding: 0 0 calc(60px + env(safe-area-inset-bottom, 0px) + var(--space-xl)) 0 !important;
+  }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .layout-content {
