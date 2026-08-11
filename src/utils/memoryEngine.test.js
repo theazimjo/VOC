@@ -14,6 +14,8 @@ import {
   simulateReviewDayOptions,
   computeRetentionStats,
   recommendPracticeMode,
+  clampStability,
+  clampNextReview,
 } from './memoryEngine';
 
 describe('computeRecallProbability', () => {
@@ -35,6 +37,45 @@ describe('computeRecallProbability', () => {
 
   it('matches the exponential forgetting curve formula P(t) = e^(-t/S)', () => {
     expect(computeRecallProbability(10, 10)).toBeCloseTo(Math.exp(-1), 10);
+  });
+});
+
+describe('clampStability', () => {
+  it('leaves a normal stability untouched', () => {
+    expect(clampStability(20)).toBe(20);
+  });
+
+  it('caps a runaway legacy stability so it can never produce a multi-thousand-day interval', () => {
+    const clamped = clampStability(7767);
+    const days = -clamped * Math.log(0.75);
+    expect(days).toBeLessThanOrEqual(70.5);
+  });
+
+  it('falls back to the initial stability for non-finite or non-positive input', () => {
+    expect(clampStability(NaN)).toBeGreaterThan(0);
+    expect(clampStability(0)).toBeGreaterThan(0);
+    expect(clampStability(-5)).toBeGreaterThan(0);
+  });
+});
+
+describe('clampNextReview', () => {
+  it('leaves a reasonable next-review date untouched', () => {
+    const last = new Date(Date.now() - 5 * 86400000).toISOString();
+    const next = new Date(Date.now() + 10 * 86400000).toISOString();
+    expect(clampNextReview(last, next)).toBe(next);
+  });
+
+  it('pulls in a next-review date scheduled far beyond the 70-day cap from lastReviewed', () => {
+    const last = new Date(Date.now() - 5 * 86400000).toISOString();
+    const farFuture = new Date(Date.now() + 2234 * 86400000).toISOString();
+    const clamped = clampNextReview(last, farFuture);
+    const daysFromLast = (new Date(clamped) - new Date(last)) / 86400000;
+    expect(daysFromLast).toBeCloseTo(70, 0);
+  });
+
+  it('passes through null/missing dates untouched', () => {
+    expect(clampNextReview(null, null)).toBeNull();
+    expect(clampNextReview(null, '2026-01-01T00:00:00.000Z')).toBe('2026-01-01T00:00:00.000Z');
   });
 });
 
@@ -81,6 +122,12 @@ describe('updateStability', () => {
     const withHugeMultiplier = updateStability(10, true, 3, 4, 0, { clusterMultiplier: 999 });
     const withClampedMultiplier = updateStability(10, true, 3, 4, 0, { clusterMultiplier: 1.4 });
     expect(withHugeMultiplier).toBe(withClampedMultiplier);
+  });
+
+  it('never grows stability past the point where the review interval would exceed 70 days', () => {
+    const result = updateStability(300, true, 5, 1, 0, { hadOvernightGap: true, retrievalType: 'active_recall' });
+    const days = -result * Math.log(0.75);
+    expect(days).toBeLessThanOrEqual(70.5);
   });
 });
 

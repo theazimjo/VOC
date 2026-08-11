@@ -243,6 +243,7 @@ export default function PracticePage() {
         responseTime,
         retrievalType,
         clusterMultiplier,
+        mode: selectedMode,
         wordText: word.word,
       });
 

@@ -5,6 +5,7 @@ import { usePacks } from '../../hooks/usePacks';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useStreak } from '../../hooks/useStreak';
 import { grammarTopicCounts } from '../../data/grammarTopicCounts';
+import { getDueWords } from '../../utils/spacedRepetition';
 import IosSpinner from '../../components/common/IosSpinner';
 import ActivityHeatmap from '../../components/Stats/ActivityHeatmap';
 import './StatsPage.css';
@@ -19,7 +20,7 @@ export default function StatsPage() {
   const totalWords = allWords.length;
   const masteredWords = allWords.filter(w => (w.mastery || 0) >= 80).length;
   const newWords = allWords.filter(w => (w.mastery || 0) === 0).length;
-  const dueNow = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= new Date()).length;
+  const dueNow = getDueWords(allWords).length;
   const avgMastery = totalWords > 0 ? Math.round(allWords.reduce((s, w) => s + (w.mastery || 0), 0) / totalWords) : 0;
 
   const LEECH_THRESHOLD = 3;

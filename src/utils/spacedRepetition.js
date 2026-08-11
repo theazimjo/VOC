@@ -14,9 +14,14 @@
  * response bonus instead of the neutral default.
  *
  * Passive self-judgement alone (flashcard "Bildim", quiz, match) can't push
- * a word past UNCONFIRMED_MASTERY_CEILING — it needs at least one correct
- * active-recall pass (tracked via `word.activeRecallPasses`) before it's
- * trusted enough to graduate toward 100%.
+ * a word past UNCONFIRMED_MASTERY_CEILING — it needs correct active-recall
+ * passes from at least MIN_CONFIRMED_MODES *distinct* angles (tracked via
+ * `word.confirmedModes`, tagged by the `options.mode` each call site passes
+ * — e.g. 'spelling', 'sentence', 'pronounce', 'dictation') before it's
+ * trusted enough to graduate toward 100%. Being able to type a word once in
+ * one drill isn't the same as actually knowing it — requiring a second,
+ * different kind of production catches words the learner has only
+ * memorized the shape of for one specific exercise.
  *
  * Backward compatibility: existing word records only have
  * {interval, reviewCount, nextReview, mastery, lastReviewed} (no
@@ -30,6 +35,8 @@ import {
   updateStability,
   getOptimalReviewDate,
   computeInitialStability,
+  clampStability,
+  clampNextReview,
 } from './memoryEngine';
 
 const MASTERY_TIME_CONSTANT = 12;
@@ -41,12 +48,18 @@ function stabilityToMastery(stability) {
 
 // A passive self-judgement ("Bildim" on a flashcard, a quiz guess, a match)
 // is too easy to game to fully trust on its own — until a word has survived
-// at least one correct *active*-recall trial (typing/spelling/speaking it
-// from memory), its growth is capped so it can plateau around this ceiling
-// but can't cross into "mastered" territory purely on passive exposure.
+// correct *active*-recall trials (typing/spelling/speaking it from memory)
+// from at least MIN_CONFIRMED_MODES distinct angles, its growth is capped
+// so it can plateau around this ceiling but can't cross into "mastered"
+// territory purely on passive exposure or a single lucky drill.
 const UNCONFIRMED_MASTERY_CEILING = 65; // %
 const UNCONFIRMED_STABILITY_CAP =
   -MASTERY_TIME_CONSTANT * Math.log(1 - UNCONFIRMED_MASTERY_CEILING / 100);
+
+// Number of distinct active-recall angles (spelling, sentence-building,
+// pronunciation, dictation, ...) a word must have been correctly recalled
+// from before it's trusted to grow toward the full review-interval ceiling.
+const MIN_CONFIRMED_MODES = 2;
 
 function daysBetween(fromISO, toDate) {
   if (!fromISO) return 0;
@@ -72,6 +85,10 @@ function hadOvernightGap(fromISO, toDate) {
  * @param {number} [options.responseTimeSec=4]
  * @param {'active_recall'|'passive_recall'} [options.retrievalType='passive_recall']
  * @param {number} [options.clusterMultiplier=1.0] - see computeClusterCalibration
+ * @param {string} [options.mode] - identifies *which* active-recall drill this was
+ *   (e.g. 'spelling', 'sentence', 'pronounce', 'dictation', 'irregular-verbs') so
+ *   distinct angles can be tracked toward MIN_CONFIRMED_MODES. Ignored for
+ *   passive_recall reviews.
  */
 export function applyReview(word = {}, options = {}) {
   const {
@@ -80,13 +97,16 @@ export function applyReview(word = {}, options = {}) {
     responseTimeSec = 4,
     retrievalType = 'passive_recall',
     clusterMultiplier = 1.0,
+    mode = null,
   } = options;
 
   const revCount = word.reviewCount ?? 0;
   const lastRev = word.lastReviewed ?? null;
-  const seedStability = typeof word.stability === 'number'
-    ? word.stability
-    : (word.interval > 0 ? word.interval : computeInitialStability());
+  const seedStability = clampStability(
+    typeof word.stability === 'number'
+      ? word.stability
+      : (word.interval > 0 ? word.interval : computeInitialStability())
+  );
 
   const now = new Date();
   const daysSince = daysBetween(lastRev, now);
@@ -101,10 +121,16 @@ export function applyReview(word = {}, options = {}) {
   const activeRecallPasses =
     (word.activeRecallPasses || 0) + (isCorrect && retrievalType === 'active_recall' ? 1 : 0);
 
-  if (activeRecallPasses === 0) {
+  const confirmedModes = Array.isArray(word.confirmedModes) ? [...word.confirmedModes] : [];
+  if (isCorrect && retrievalType === 'active_recall') {
+    const tag = mode || 'active_recall';
+    if (!confirmedModes.includes(tag)) confirmedModes.push(tag);
+  }
+
+  if (confirmedModes.length < MIN_CONFIRMED_MODES) {
     // Never lower stability a word already had (e.g. legacy words reviewed
     // before this field existed) — only stop it from growing further past
-    // the ceiling until it earns a real active-recall pass.
+    // the ceiling until it earns confirmation from enough distinct angles.
     newStability = Math.min(newStability, Math.max(UNCONFIRMED_STABILITY_CAP, seedStability));
   }
 
@@ -119,6 +145,7 @@ export function applyReview(word = {}, options = {}) {
     quality: isCorrect ? clampedConfidence : Math.min(2, clampedConfidence - 1),
     stability: newStability,
     activeRecallPasses,
+    confirmedModes,
   };
 }
 
@@ -140,13 +167,20 @@ export function calculateNextReview(quality, word = {}, options = {}) {
 }
 
 /**
- * Get words that are due for review today
+ * Get words that are due for review today.
+ *
+ * Clamps each word's `nextReview` before comparing — a legacy record whose
+ * stored date was computed from a since-fixed runaway stability (see
+ * clampNextReview) would otherwise never come due, silently vanishing from
+ * every practice mode for years instead of just this one review's schedule
+ * self-healing on its next actual review.
  */
 export function getDueWords(words) {
   const now = new Date();
   return words.filter(word => {
     if (!word.nextReview) return true;
-    return new Date(word.nextReview) <= now;
+    const clamped = clampNextReview(word.lastReviewed, word.nextReview);
+    return new Date(clamped) <= now;
   });
 }
 
@@ -187,5 +221,6 @@ export function initWordProgress() {
     lastReviewed: null,
     stability: computeInitialStability(),
     activeRecallPasses: 0,
+    confirmedModes: [],
   };
 }

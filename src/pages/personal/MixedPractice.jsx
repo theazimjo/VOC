@@ -180,7 +180,7 @@ export default function MixedPractice() {
   // response time + speed-inferred confidence, recallHistory recorded, and
   // the same per-semantic-cluster self-calibration. Returns the persisted
   // result so callers can keep their local question/word copies in sync.
-  const handleUpdateWordStats = async (wordObj, isCorrect, responseTime, retrievalType) => {
+  const handleUpdateWordStats = async (wordObj, isCorrect, responseTime, retrievalType, mode) => {
     if (!user) return null;
     try {
       const parentId = wordObj.sourceId;
@@ -201,6 +201,7 @@ export default function MixedPractice() {
         responseTime,
         retrievalType,
         clusterMultiplier,
+        mode,
         wordText: wordObj.word,
       });
 
@@ -229,7 +230,7 @@ export default function MixedPractice() {
     setHasAnswered(true);
     playSound(isRight ? 'correct' : 'wrong');
     triggerVibration(isRight ? 'correct' : 'wrong');
-    handleUpdateWordStats(questions[currentIdx].word, isRight, responseTime, 'passive_recall');
+    handleUpdateWordStats(questions[currentIdx].word, isRight, responseTime, 'passive_recall', questions[currentIdx].type);
   };
 
   const handleTextSubmit = (e) => {
@@ -246,7 +247,7 @@ export default function MixedPractice() {
     setHasAnswered(true);
     playSound(isRight ? 'correct' : 'wrong');
     triggerVibration(isRight ? 'correct' : 'wrong');
-    handleUpdateWordStats(questions[currentIdx].word, isRight, responseTime, 'active_recall');
+    handleUpdateWordStats(questions[currentIdx].word, isRight, responseTime, 'active_recall', questions[currentIdx].type);
   };
 
   const handleNext = () => {

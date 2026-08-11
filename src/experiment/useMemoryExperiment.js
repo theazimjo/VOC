@@ -15,7 +15,7 @@ import {
   recordConfusionPair,
   getConfusionPairs,
 } from './experimentDB';
-import { computeRecallProbability, computeClusterCalibration, estimateDifficulty } from '../utils/memoryEngine';
+import { computeRecallProbability, computeClusterCalibration, estimateDifficulty, clampStability, clampNextReview } from '../utils/memoryEngine';
 import { classifyWord } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
@@ -60,12 +60,17 @@ export function useMemoryExperiment() {
       const recallHistory = w.recallHistory || [];
       const reviewCount = w.reviewCount || 0;
       const lastReviewed = w.lastReviewed || null;
-      const nextReview = w.nextReview || null;
+      // Clamped defensively at read time: a word reviewed many times before
+      // MAX_STABILITY/MAX_REVIEW_INTERVAL_DAYS existed can still have a
+      // runaway stability/date sitting in the DB — this self-heals the
+      // display and due-scheduling immediately, without waiting for the
+      // word's next real review to overwrite the stored value.
+      const nextReview = w.nextReview ? clampNextReview(lastReviewed, w.nextReview) : null;
 
       map[w.id] = {
         wordId: w.id,
         packId: w.packId,
-        stability: typeof w.stability === 'number' ? w.stability : 1.0,
+        stability: typeof w.stability === 'number' ? clampStability(w.stability) : 1.0,
         mastery: w.mastery || 0,
         interval: w.interval || 0,
         reviewCount,
@@ -180,13 +185,17 @@ export function useMemoryExperiment() {
     });
     const clusterMultiplier = computeClusterCalibration(clusterHistory);
 
-    // Save directly onto the real word record
+    // Save directly onto the real word record. Memory Lab only has one
+    // production angle (typing the answer from memory), unlike PracticeHub's
+    // separate spelling/sentence/pronounce drills, so it's tagged as a
+    // single 'lab' mode for the confirmedModes gate in applyReview.
     const updatedMemory = await saveReviewEvent(user.uid, packId, wordId, current, {
       isCorrect,
       confidence,
       responseTime,
       retrievalType,
       clusterMultiplier,
+      mode: 'lab',
       wordText: wordData?.word,
     });
 

@@ -7,6 +7,7 @@ import { usePacks } from '../../hooks/usePacks';
 import { useWordTarget } from '../../hooks/useWordTarget';
 import { updateStudentWordTarget } from '../../services/corpService';
 import { computeRecallProbability } from '../../utils/memoryEngine';
+import { getDueWords } from '../../utils/spacedRepetition';
 import OnboardingModal from '../../components/Onboarding/OnboardingModal';
 import WhatsNewModal, { WHATS_NEW_VERSION } from '../../components/Onboarding/WhatsNewModal';
 import PackHeaderHero from '../../components/corp/PackHeaderHero';
@@ -120,8 +121,10 @@ export default function Dashboard() {
   const learnedWords = useMemo(() => allWords.filter(w => (w.mastery || 0) >= 80).length, [allWords]);
 
   const dueWordsList = useMemo(() => {
-    const now = new Date();
-    const due = allWords.filter(w => !w.nextReview || new Date(w.nextReview) <= now);
+    // getDueWords clamps each word's nextReview before comparing, so a
+    // legacy word whose stored date is a holdover from a since-fixed
+    // runaway stability doesn't silently disappear from the due queue.
+    const due = getDueWords(allWords);
     // Most at-risk first — lowest current recall probability, not just oldest
     // due date, since two overdue words with different stability forget at
     // different rates.

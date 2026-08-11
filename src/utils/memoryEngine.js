@@ -52,12 +52,24 @@ const CALIBRATION_MIN = 0.7;
 const CALIBRATION_MAX = 1.4;
 
 /**
- * Hard cap on stability (days). Beyond this point a word is fully mastered
- * and scheduling further than ~100 days out is both impractical (the user
- * will have forgotten even the app exists) and creates confusing UI strings
- * like "84520 kundan keyin". 365 days keeps the math honest.
+ * Hard cap on the *review interval* (days) — the longest gap the app will
+ * ever schedule between two reviews of the same word, even for a word
+ * that's been answered correctly dozens of times in a row. Beyond this,
+ * further spacing stops helping retention in practice and starts reading as
+ * "the app forgot about this word" instead of "the app trusts you know it".
  */
-const MAX_STABILITY = 365;
+const MAX_REVIEW_INTERVAL_DAYS = 70;
+
+/**
+ * Hard cap on stability (days), derived from MAX_REVIEW_INTERVAL_DAYS so the
+ * two stay in lockstep: getOptimalReviewDate(MAX_STABILITY) always comes out
+ * to exactly MAX_REVIEW_INTERVAL_DAYS. Without this cap, `updateStability`
+ * compounds every correct review by a growth factor with no ceiling — a
+ * word reviewed correctly many times in a row (especially before this cap
+ * existed) can end up with a stability of thousands of days, producing
+ * confusing UI strings like "2234 kundan keyin".
+ */
+const MAX_STABILITY = Math.round((-MAX_REVIEW_INTERVAL_DAYS / Math.log(TARGET_RECALL)) * 100) / 100;
 
 /**
  * Minimum sample size before a calibration is trusted over the neutral
@@ -105,6 +117,44 @@ export function computeRecallProbability(stability, daysSince) {
   if (daysSince <= 0) return 1.0;
   if (stability <= 0) return 0.0;
   return Math.exp(-daysSince / stability);
+}
+
+/**
+ * Clamp a stability value into (0, MAX_STABILITY] — a defensive read-time
+ * fix for word records written before MAX_STABILITY existed (or otherwise
+ * corrupted), so a single legacy word with a runaway stability can't keep
+ * producing multi-thousand-day intervals until its next review event
+ * happens to touch it. Non-finite/zero/negative input falls back to
+ * INITIAL_STABILITY rather than propagating NaN.
+ *
+ * @param {number} stability
+ * @returns {number}
+ */
+export function clampStability(stability) {
+  const s = Number(stability);
+  if (!Number.isFinite(s) || s <= 0) return INITIAL_STABILITY;
+  return Math.min(s, MAX_STABILITY);
+}
+
+/**
+ * Clamp a stored `nextReview` date so it's never more than
+ * MAX_REVIEW_INTERVAL_DAYS past `lastReviewed` — same rationale as
+ * clampStability, but for the already-computed date some legacy word
+ * records have on disk (their stability may since have been clamped, but
+ * the stale nextReview timestamp computed from the old, uncapped stability
+ * sticks around until the word is reviewed again).
+ *
+ * @param {string|null} lastReviewedISO
+ * @param {string|null} nextReviewISO
+ * @returns {string|null}
+ */
+export function clampNextReview(lastReviewedISO, nextReviewISO) {
+  if (!nextReviewISO || !lastReviewedISO) return nextReviewISO ?? null;
+  const last = new Date(lastReviewedISO).getTime();
+  const next = new Date(nextReviewISO).getTime();
+  if (!Number.isFinite(last) || !Number.isFinite(next)) return nextReviewISO;
+  const maxNext = last + MAX_REVIEW_INTERVAL_DAYS * 24 * 60 * 60 * 1000;
+  return next > maxNext ? new Date(maxNext).toISOString() : nextReviewISO;
 }
 
 /**
@@ -451,11 +501,11 @@ export function computeInitialStability(categoryMastery = 0, globalAdjustment = 
  * @returns {{ label:string, color:string, icon:string }}
  */
 export function getMemoryHealth(stability, nextOptimalReview) {
-  if (!nextOptimalReview) return { label: "New", color: '#8b8fa8', icon: '🆕' };
-  if (stability >= 20) return { label: "Strong memory", color: '#34d399', icon: '💪' };
-  if (stability >= 10) return { label: "Good", color: '#60a5fa', icon: '⭐' };
-  if (stability >= 5)  return { label: "Average", color: '#f59e0b', icon: '📈' };
-  return { label: "Weak memory", color: '#f87171', icon: '🌱' };
+  if (!nextOptimalReview) return { label: "Yangi", color: '#8b8fa8', icon: '🆕' };
+  if (stability >= 20) return { label: "Kuchli xotira", color: '#34d399', icon: '💪' };
+  if (stability >= 10) return { label: "Yaxshi xotira", color: '#60a5fa', icon: '⭐' };
+  if (stability >= 5)  return { label: "O'rtacha xotira", color: '#f59e0b', icon: '📈' };
+  return { label: "Zaif xotira", color: '#f87171', icon: '🌱' };
 }
 
 /**
@@ -483,7 +533,7 @@ export function explainSchedulingDecision(stability, lastReview, nextOptimalRevi
   }
 
   const daysUntil = nextOptimalReview
-    ? Math.min(365, Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000))))
+    ? Math.min(MAX_REVIEW_INTERVAL_DAYS, Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000))))
     : null;
 
   return `Recall probability is still ${pct}% — memory is strong.` +

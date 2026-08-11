@@ -239,6 +239,7 @@ export default function CorpPractice() {
         responseTime,
         retrievalType,
         clusterMultiplier,
+        mode: selectedMode,
         wordText: word.word,
       });
 

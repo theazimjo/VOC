@@ -18,7 +18,7 @@
 import { ref, update, get, runTransaction } from 'firebase/database';
 import { db } from '../firebase';
 import { applyReview } from '../utils/spacedRepetition';
-import { computeRecallProbability } from '../utils/memoryEngine';
+import { computeRecallProbability, clampStability } from '../utils/memoryEngine';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -50,6 +50,7 @@ const globalWordStatsRef = (wordText) => ref(db, `globalWordStats/${normalizeWor
  * @param {number}  reviewData.responseTime  - seconds
  * @param {'active_recall'|'passive_recall'} [reviewData.retrievalType='passive_recall']
  * @param {number}  [reviewData.clusterMultiplier=1.0] - from computeClusterCalibration
+ * @param {string}  [reviewData.mode] - which active-recall drill this was (see applyReview)
  * @param {string}  [reviewData.wordText] - the English word, used to update population-level stats
  * @returns {Promise<Object>} - updated word progress fields (merged with wordId/packId)
  */
@@ -60,13 +61,16 @@ export async function saveReviewEvent(userId, packId, wordId, currentWord, revie
     responseTime,
     retrievalType = 'passive_recall',
     clusterMultiplier = 1.0,
+    mode = null,
     wordText = '',
   } = reviewData;
 
   const lastRev = currentWord.lastReviewed ?? null;
-  const seedStability = typeof currentWord.stability === 'number'
-    ? currentWord.stability
-    : (currentWord.interval > 0 ? currentWord.interval : 1.0);
+  const seedStability = clampStability(
+    typeof currentWord.stability === 'number'
+      ? currentWord.stability
+      : (currentWord.interval > 0 ? currentWord.interval : 1.0)
+  );
   const daysSince = lastRev ? (Date.now() - new Date(lastRev).getTime()) / (86400 * 1000) : 0;
 
   // Predicted recall probability right before this review — stored so future
@@ -79,6 +83,7 @@ export async function saveReviewEvent(userId, packId, wordId, currentWord, revie
     responseTimeSec: responseTime,
     retrievalType,
     clusterMultiplier,
+    mode,
   });
 
   const newEntry = {

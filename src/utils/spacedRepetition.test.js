@@ -64,15 +64,33 @@ describe('applyReview', () => {
       expect(word.activeRecallPasses).toBe(0);
     });
 
-    it('lets mastery climb past the passive ceiling after one correct active-recall pass', () => {
+    it('does not lift the ceiling after a single active-recall pass — one angle is not "every angle"', () => {
       let word = { activeRecallPasses: 0 };
       for (let i = 0; i < 10; i++) {
         word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
       }
       const cappedMastery = word.mastery;
 
-      word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'active_recall' });
+      word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'active_recall', mode: 'spelling' });
       expect(word.activeRecallPasses).toBe(1);
+      expect(word.confirmedModes).toEqual(['spelling']);
+
+      for (let i = 0; i < 10; i++) {
+        word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+      }
+      expect(word.mastery).toBeLessThanOrEqual(cappedMastery + 1); // still ceiling-bound (rounding tolerance)
+    });
+
+    it('lets mastery climb past the passive ceiling once confirmed from two distinct active-recall angles', () => {
+      let word = { activeRecallPasses: 0 };
+      for (let i = 0; i < 10; i++) {
+        word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+      }
+      const cappedMastery = word.mastery;
+
+      word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'active_recall', mode: 'spelling' });
+      word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'active_recall', mode: 'sentence' });
+      expect(word.confirmedModes.sort()).toEqual(['sentence', 'spelling']);
 
       for (let i = 0; i < 10; i++) {
         word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
@@ -80,10 +98,40 @@ describe('applyReview', () => {
       expect(word.mastery).toBeGreaterThan(cappedMastery);
     });
 
-    it('never lowers a legacy word\'s existing stability just because activeRecallPasses is untracked', () => {
+    it('does not double-count repeated passes from the same mode toward confirmedModes', () => {
+      let word = { activeRecallPasses: 0 };
+      word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'active_recall', mode: 'spelling' });
+      word = applyReview(word, { isCorrect: true, confidence: 5, retrievalType: 'active_recall', mode: 'spelling' });
+      expect(word.confirmedModes).toEqual(['spelling']);
+    });
+
+    it('never lowers a legacy word\'s existing stability just because confirmedModes is untracked', () => {
       const legacyWord = { stability: 40, reviewCount: 5 };
       const result = applyReview(legacyWord, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
       expect(result.stability).toBeGreaterThanOrEqual(40);
+    });
+  });
+
+  describe('review interval cap', () => {
+    it('never schedules a next review more than 70 days out, however high stability climbs', () => {
+      let word = { stability: 1 };
+      for (let i = 0; i < 40; i++) {
+        word = applyReview(word, {
+          isCorrect: true,
+          confidence: 5,
+          retrievalType: 'active_recall',
+          mode: i % 2 === 0 ? 'spelling' : 'sentence',
+        });
+      }
+      const daysUntilNext = (new Date(word.nextReview) - Date.now()) / 86400000;
+      expect(daysUntilNext).toBeLessThanOrEqual(70.5);
+    });
+
+    it('self-heals a legacy word whose stored stability predates the cap', () => {
+      const corruptedWord = { stability: 7767, reviewCount: 40, lastReviewed: new Date().toISOString() };
+      const result = applyReview(corruptedWord, { isCorrect: true, confidence: 5, retrievalType: 'passive_recall' });
+      const daysUntilNext = (new Date(result.nextReview) - Date.now()) / 86400000;
+      expect(daysUntilNext).toBeLessThanOrEqual(70.5);
     });
   });
 });
