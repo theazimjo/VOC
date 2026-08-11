@@ -3,6 +3,7 @@ import { useOutletContext, useNavigate, useParams, useSearchParams } from 'react
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../../../firebase';
 import { getDecayedMastery, computeRetentionStats } from '../../../../utils/memoryEngine';
+import { getConfusionPairs } from '../../../../experiment/experimentDB';
 import { corpWordStorageId } from '../../../../utils/helpers';
 import { buildMonthsFromPacks } from './utils';
 import MonthsGridView from './views/MonthsGridView';
@@ -55,6 +56,7 @@ export default function StudentCorpLearn() {
 
   const [allDbWords, setAllDbWords] = useState({});
   const [loadingDbWords, setLoadingDbWords] = useState(false);
+  const [confusionPairs, setConfusionPairs] = useState([]);
 
   // Fetch all corporate and individual word learning progress reactively from Firebase
   useEffect(() => {
@@ -79,6 +81,12 @@ export default function StudentCorpLearn() {
     });
 
     return unsub;
+  }, [user?.uid]);
+
+  // Load confusion pairs once per user — filtered per-unit in memoryTwin below.
+  useEffect(() => {
+    if (!user?.uid) return;
+    getConfusionPairs(user.uid).then(setConfusionPairs).catch(() => setConfusionPairs([]));
   }, [user?.uid]);
 
   // Derive active selected unit words stats
@@ -116,13 +124,19 @@ export default function StudentCorpLearn() {
     const masteryPercent = Math.round(unitWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / unitWords.length);
     const { retentionPercent, atRisk } = computeRetentionStats(unitWords);
 
+    // Count confusion pairs that involve any word in this unit.
+    const wordIds = new Set(unitWords.map(w => w.id));
+    const confusionCount = confusionPairs.filter(
+      p => wordIds.has(p.wordIdA) || wordIds.has(p.wordIdB)
+    ).length;
+
     return {
       masteryPercent,
       retentionPercent,
       atRisk,
-      confusionCount: 0
+      confusionCount,
     };
-  }, [unitWords]);
+  }, [unitWords, confusionPairs]);
 
   // Reset to main list if the active membership changes (group switch)
   useEffect(() => {

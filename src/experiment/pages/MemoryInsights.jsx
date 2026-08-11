@@ -424,18 +424,27 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
     entries.forEach(m => {
       const stab = Number(m.stability) || 1.0;
       const reviews = Number(m.totalReviews) || 0;
-      const daysSince = m.lastReview ? (now - new Date(m.lastReview).getTime()) / 86400000 : 0;
-      const p = computeRecallProbability(stab, daysSince);
-      totalP += (isNaN(p) ? 0 : p);
       totalS += stab;
 
-      if (reviews === 0 || !m.lastReview) unreviewed++;
-      else if (stab >= 10) strong++;
-      else if (stab >= 5) medium++;
-      else weak++;
+      if (reviews === 0 || !m.lastReview) {
+        // New/unreviewed — count for the legend but exclude from retention average.
+        unreviewed++;
+      } else {
+        const daysSince = (now - new Date(m.lastReview).getTime()) / 86400000;
+        const p = computeRecallProbability(stab, daysSince);
+        totalP += (isNaN(p) ? 0 : p);
+
+        if (stab >= 10) strong++;
+        else if (stab >= 5) medium++;
+        else weak++;
+      }
     });
 
-    const avgRetention = entries.length > 0 ? Math.round((totalP / entries.length) * 100) : 0;
+    // Divide by reviewed-only count: unreviewed words contribute P=1.0 (daysSince=0)
+    // which would inflate the score — "Memory strength" should reflect actual retention
+    // of words you've genuinely practiced, not new vocabulary you haven't touched yet.
+    const reviewedCount = entries.length - unreviewed;
+    const avgRetention = reviewedCount > 0 ? Math.round((totalP / reviewedCount) * 100) : 0;
     const rawAvgS = entries.length > 0 ? totalS / entries.length : 1.0;
     const avgStability = isNaN(rawAvgS) ? 1.0 : Math.max(0.5, rawAvgS);
 

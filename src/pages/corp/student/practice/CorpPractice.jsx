@@ -323,7 +323,11 @@ export default function CorpPractice() {
   };
 
   const p = {
-    allWords, handleAnswer, handleBack, handleComplete, handleRepeatReviewWords,
+    // sourceWords carries both the corp word content (word/translation from the
+    // corp pack) and the Firebase stats merged together. allWords from usePacks()
+    // filters corp words out because they lack a .word field in Firebase, so
+    // SpellingGame/QuizGame/MatchGame would have no corp context to compare against.
+    allWords: sourceWords, handleAnswer, handleBack, handleComplete, handleRepeatReviewWords,
     handleReset, handleStartPractice, handleUpdateWord, loadedPack, monthId,
     navigate, packId, practiceWords, progressPct, results, roundNumber,
     selectedMode, setProgressPct, setShowExitModal, setStep, setWordCount,
