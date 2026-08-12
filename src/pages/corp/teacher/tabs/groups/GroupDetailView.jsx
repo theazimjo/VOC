@@ -5,7 +5,7 @@ import './GroupDetailView.css';
 
 export default function GroupDetailView({ p }) {
   const {
-    assigningGroup, copiedCode, copyCode, groupHomeworkList, handleAddHomework, handleOpenGroupSettings, homeworkSelection,
+    assigningGroup, basePath, copiedCode, copyCode, groupHomeworkList, handleAddHomework, handleOpenGroupSettings, homeworkSelection,
     hwId, navigate, savingHomework, selectedGroup, selectedGroupStats, setAssigningGroup, setSelectedGroupId, setShowHomeworkEditor, showHomeworkEditor, setViewingHomeworkItem, subTab, viewingHomeworkItem,
   } = p;
 
@@ -25,12 +25,12 @@ export default function GroupDetailView({ p }) {
                   } else if (assigningGroup) {
                     setAssigningGroup(null);
                   } else if (hwId) {
-                    navigate(`/corp/teacher/group/${selectedGroup.id}/homework`);
+                    navigate(`${basePath}/group/${selectedGroup.id}/homework`);
                   } else if (subTab) {
-                    navigate(`/corp/teacher/group/${selectedGroup.id}`);
+                    navigate(`${basePath}/group/${selectedGroup.id}`);
                   } else {
                     setSelectedGroupId(null);
-                    navigate('/corp/teacher');
+                    navigate(basePath);
                   }
                 }}
                 title={viewingHomeworkItem ? "Back to topics" : showHomeworkEditor ? "Back to homework" : assigningGroup ? "Back to packs" : hwId ? "Back to homework list" : subTab ? "Back to sections" : "Back to groups"}
@@ -71,7 +71,7 @@ export default function GroupDetailView({ p }) {
                   className="ios-action-btn"
                   onClick={() => {
                     handleOpenGroupSettings(selectedGroup);
-                    navigate(`/corp/teacher/group/${selectedGroup.id}/settings`);
+                    navigate(`${basePath}/group/${selectedGroup.id}/settings`);
                   }}
                   title="Group settings"
                 >
@@ -147,7 +147,7 @@ export default function GroupDetailView({ p }) {
                   {/* Card 1: Students */}
                   <div
                     className="ios-bento-card card-blue"
-                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/students`)}
+                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/students`)}
                   >
                     <div className="bento-top-row">
                       <div className="bento-icon-box icon-blue">
@@ -168,7 +168,7 @@ export default function GroupDetailView({ p }) {
                   {/* Card 2: Packs */}
                   <div
                     className="ios-bento-card card-purple"
-                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/words`)}
+                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/words`)}
                   >
                     <div className="bento-top-row">
                       <div className="bento-icon-box icon-purple">
@@ -191,7 +191,7 @@ export default function GroupDetailView({ p }) {
                   {/* Card 3: Homework */}
                   <div
                     className="ios-bento-card card-amber"
-                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
+                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/homework`)}
                   >
                     <div className="bento-top-row">
                       <div className="bento-icon-box icon-amber">
@@ -212,7 +212,7 @@ export default function GroupDetailView({ p }) {
                   {/* Card 4: Stats */}
                   <div
                     className="ios-bento-card card-emerald"
-                    onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/stats`)}
+                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/stats`)}
                   >
                     <div className="bento-top-row">
                       <div className="bento-icon-box icon-emerald">

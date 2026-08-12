@@ -7,6 +7,7 @@ import { GroupModeProvider } from './contexts/GroupModeContext';
 import { SuccessTransitionProvider } from './contexts/SuccessTransitionContext';
 import LoginPage from './components/Auth/LoginPage';
 import RegisterPage from './components/Auth/RegisterPage';
+import ProfileChooser from './components/Auth/ProfileChooser';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Layout from './components/Layout/Layout';
 import FullScreenLoader from './components/common/FullScreenLoader';
@@ -52,6 +53,12 @@ const StudentCorpAssessment = lazyWithRetry(() => import('./pages/corp/student/S
 const StudentCorpProfile = lazyWithRetry(() => import('./pages/corp/student/StudentCorpProfile'));
 const CorpPractice = lazyWithRetry(() => import('./pages/corp/student/practice/CorpPractice'));
 
+// Independent (centerless) teacher dashboard — reuses CorpProtectedRoute
+// (it only checks identity.role, not centerId) but lives outside /corp
+// since it isn't part of the multi-tenant learning-center portal.
+const IndependentTeacherLayout = lazyWithRetry(() => import('./pages/teacher/IndependentTeacherLayout'));
+const IndependentTeacherDashboard = lazyWithRetry(() => import('./pages/teacher/IndependentTeacherDashboard'));
+
 function BookToPackRedirect() {
   const { bookId } = useParams();
   return <Navigate to={`/packs/${bookId}`} replace />;
@@ -83,6 +90,7 @@ export default function App() {
                     {/* Public routes */}
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/choose-profile" element={<ProfileChooser />} />
   
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
@@ -159,7 +167,25 @@ export default function App() {
                         <Route path="student/profile" element={<StudentCorpProfile />} />
                       </Route>
                     </Route>
-  
+
+                    {/* Independent (centerless) teacher dashboard — a personal
+                        account that became a teacher without joining any
+                        learning center. Deliberately outside /corp; still
+                        gated by the same CorpProtectedRoute since it only
+                        checks identity.role. */}
+                    <Route element={<CorpProtectedRoute allowedRoles={['teacher']} />}>
+                      <Route path="/teacher" element={<IndependentTeacherLayout />}>
+                        <Route index element={<IndependentTeacherDashboard tab="groups" />} />
+                        <Route path="group/:groupId" element={<IndependentTeacherDashboard tab="groups" />} />
+                        <Route path="group/:groupId/homework/:hwId" element={<IndependentTeacherDashboard tab="groups" />} />
+                        <Route path="group/:groupId/:subTab" element={<IndependentTeacherDashboard tab="groups" />} />
+                        <Route path="archive" element={<IndependentTeacherDashboard tab="archive" />} />
+                        <Route path="courses" element={<IndependentTeacherDashboard tab="courses" />} />
+                        <Route path="statistics" element={<IndependentTeacherDashboard tab="statistics" />} />
+                        <Route path="settings" element={<IndependentTeacherDashboard tab="settings" />} />
+                      </Route>
+                    </Route>
+
                     {/* Catch all */}
                     <Route path="*" element={<Navigate to="/" replace />} />
                   </Routes>

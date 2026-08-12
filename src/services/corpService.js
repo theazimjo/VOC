@@ -61,6 +61,41 @@ export async function getCorpRole(uid) {
 }
 
 /**
+ * Full picture of an account's teacher-type affiliations, combining the two
+ * tables that can each independently hold one: `corpUsers/{uid}` (center-
+ * joined teacher, or center_admin) and `independentTeachers/{uid}/profile`
+ * (independent tutor — see becomeIndependentTeacher in
+ * independentTeacherService.js for why that's a separate table). An account
+ * can have both a center and an independent affiliation at once; it cannot
+ * have two centers, or be independent twice.
+ */
+export async function getTeacherAffiliations(uid) {
+  const [corpSnap, independentSnap] = await Promise.all([
+    get(ref(db, `corpUsers/${uid}`)),
+    get(ref(db, `independentTeachers/${uid}/profile`)),
+  ]);
+
+  const corpRecord = corpSnap.exists() ? corpSnap.val() : null;
+  const independentProfile = independentSnap.exists() ? independentSnap.val() : null;
+
+  let centerAffiliation = null;
+  let nonTeacherRole = null; // center_admin (or a disabled record) — blocks new teacher affiliations
+  if (corpRecord) {
+    if (corpRecord.role === 'teacher' && !corpRecord.disabled) {
+      centerAffiliation = corpRecord;
+    } else {
+      nonTeacherRole = corpRecord;
+    }
+  }
+
+  const independentAffiliation = independentProfile
+    ? { role: 'teacher', independent: true, centerId: null, centerName: null, teacherId: uid, ...independentProfile }
+    : null;
+
+  return { independentAffiliation, centerAffiliation, nonTeacherRole };
+}
+
+/**
  * Super Admin: List every center_admin/teacher across all centers (used by
  * the Global Users page). Super admins themselves are a hardcoded email
  * allowlist (see SUPER_ADMINS in useCorpRole.js), not corpUsers records, so
@@ -325,6 +360,190 @@ export async function createTeacher(centerId, centerName, teacherForm) {
   await set(teacherRef, teacherPayload);
 
   return { id: teacherId, name, email, tempPassword };
+}
+
+/**
+ * Center Admin: Get this center's persistent teacher join code, generating
+ * one on first use. Kept as a single stable code per center (unlike the
+ * per-group 6-digit codes) plus a top-level `teacherJoinCodes/{code}` index
+ * mirroring the `groupCodes` reverse-lookup pattern, so a prospective
+ * teacher's code entry resolves in one read.
+ */
+export async function getOrCreateTeacherJoinCode(centerId) {
+  const codeFieldRef = ref(db, `centers/${centerId}/teacherJoinCode`);
+  const snap = await get(codeFieldRef);
+  if (snap.exists()) return snap.val();
+
+  let code = generateJoinCode();
+  let indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
+  let attempts = 0;
+  while (indexSnap.exists() && attempts < 10) {
+    code = generateJoinCode();
+    indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
+    attempts++;
+  }
+
+  await set(codeFieldRef, code);
+  await set(ref(db, `teacherJoinCodes/${code}`), centerId);
+  return code;
+}
+
+/**
+ * Center Admin: Replace the center's teacher join code — the old one stops
+ * resolving immediately (its index entry is deleted, not just left stale).
+ */
+export async function regenerateTeacherJoinCode(centerId) {
+  const oldSnap = await get(ref(db, `centers/${centerId}/teacherJoinCode`));
+  const oldCode = oldSnap.exists() ? oldSnap.val() : null;
+
+  let code = generateJoinCode();
+  let indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
+  let attempts = 0;
+  while (indexSnap.exists() && attempts < 10) {
+    code = generateJoinCode();
+    indexSnap = await get(ref(db, `teacherJoinCodes/${code}`));
+    attempts++;
+  }
+
+  const updates = { [`centers/${centerId}/teacherJoinCode`]: code, [`teacherJoinCodes/${code}`]: centerId };
+  if (oldCode) updates[`teacherJoinCodes/${oldCode}`] = null;
+  await update(ref(db), updates);
+  return code;
+}
+
+/**
+ * Self-service: an already-signed-in personal account requests to join the
+ * center identified by `code` (from getOrCreateTeacherJoinCode) as a
+ * teacher. Does NOT create the teacher record — that only happens once a
+ * center admin calls approveTeacherRequest(). Mirrored under two paths:
+ * `centers/{centerId}/pendingTeachers/{uid}` (the admin's Pending Requests
+ * list, already scoped to their center) and `teacherJoinRequests/{uid}` (a
+ * direct-by-uid mirror so the requester can check their own status without
+ * needing to already know the centerId).
+ */
+export async function requestToJoinCenter(code, uid, profile) {
+  const centerIdSnap = await get(ref(db, `teacherJoinCodes/${code}`));
+  if (!centerIdSnap.exists()) {
+    throw new Error('Invalid center ID!');
+  }
+  const centerId = centerIdSnap.val();
+
+  const centerSnap = await get(ref(db, `centers/${centerId}`));
+  if (!centerSnap.exists()) {
+    throw new Error('Center not found!');
+  }
+  const center = centerSnap.val();
+  if (center.status === 'suspended') {
+    throw new Error('This center is currently suspended.');
+  }
+
+  const existingCorpSnap = await get(ref(db, `corpUsers/${uid}`));
+  if (existingCorpSnap.exists()) {
+    throw new Error('This account already has a teacher or admin role.');
+  }
+
+  const existingRequestSnap = await get(ref(db, `teacherJoinRequests/${uid}`));
+  if (existingRequestSnap.exists()) {
+    throw new Error('You already have a pending request.');
+  }
+
+  const request = {
+    uid,
+    name: profile.name,
+    email: profile.email || '',
+    phone: profile.phone || '',
+    centerId,
+    centerName: center.name || '',
+    joinCode: code,
+    requestedAt: new Date().toISOString(),
+    status: 'pending',
+  };
+
+  const updates = {};
+  updates[`centers/${centerId}/pendingTeachers/${uid}`] = request;
+  updates[`teacherJoinRequests/${uid}`] = request;
+  await update(ref(db), updates);
+  return request;
+}
+
+/** Self-service: check if the signed-in account has a pending center-join request. */
+export async function getMyTeacherJoinRequest(uid) {
+  const snap = await get(ref(db, `teacherJoinRequests/${uid}`));
+  return snap.exists() ? snap.val() : null;
+}
+
+/** Self-service: withdraw a not-yet-approved request. */
+export async function cancelTeacherRequest(uid, centerId) {
+  const updates = {};
+  updates[`centers/${centerId}/pendingTeachers/${uid}`] = null;
+  updates[`teacherJoinRequests/${uid}`] = null;
+  await update(ref(db), updates);
+}
+
+/** Center Admin: every pending teacher request for their center. */
+export async function getCenterPendingTeachers(centerId) {
+  const snap = await get(ref(db, `centers/${centerId}/pendingTeachers`));
+  if (!snap.exists()) return [];
+  const val = snap.val();
+  return Object.keys(val).map(uid => ({ uid, ...val[uid] }));
+}
+
+/**
+ * Center Admin: approve a pending request — creates the real teacher record
+ * (same shape createTeacher/the old joinCenterAsTeacher produced, so every
+ * existing center-admin view keeps working unmodified) and clears the
+ * request from both tables.
+ */
+export async function approveTeacherRequest(centerId, uid) {
+  const requestSnap = await get(ref(db, `centers/${centerId}/pendingTeachers/${uid}`));
+  if (!requestSnap.exists()) {
+    throw new Error('Request not found.');
+  }
+  const request = requestSnap.val();
+
+  const teacherRef = push(ref(db, `centers/${centerId}/teachers`));
+  const teacherId = teacherRef.key;
+
+  const teacherPayload = {
+    id: teacherId,
+    uid,
+    centerId,
+    name: request.name,
+    email: request.email || '',
+    phone: request.phone || '',
+    subject: 'Ingliz tili',
+    status: 'active',
+    joinCode: request.joinCode,
+    createdAt: new Date().toISOString(),
+  };
+
+  const updates = {};
+  updates[`centers/${centerId}/teachers/${teacherId}`] = teacherPayload;
+  updates[`corpUsers/${uid}`] = {
+    role: 'teacher',
+    independent: false,
+    centerId,
+    centerName: request.centerName,
+    teacherId,
+    teacherName: request.name,
+    email: request.email || '',
+    phone: request.phone || '',
+    joinCode: request.joinCode,
+    createdAt: new Date().toISOString(),
+  };
+  updates[`centers/${centerId}/pendingTeachers/${uid}`] = null;
+  updates[`teacherJoinRequests/${uid}`] = null;
+
+  await update(ref(db), updates);
+  return { centerId, centerName: request.centerName, teacherId };
+}
+
+/** Center Admin: reject a pending request — the requester can submit a new one later. */
+export async function rejectTeacherRequest(centerId, uid) {
+  const updates = {};
+  updates[`centers/${centerId}/pendingTeachers/${uid}`] = null;
+  updates[`teacherJoinRequests/${uid}`] = null;
+  await update(ref(db), updates);
 }
 
 export async function updateTeacherPassword(centerId, teacherId, uid, newPassword) {

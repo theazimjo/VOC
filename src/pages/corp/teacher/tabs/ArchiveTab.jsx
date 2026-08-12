@@ -1,7 +1,7 @@
 import { Archive, ArrowLeft, BookOpen, RotateCcw, Users } from 'lucide-react';
 
 export default function ArchiveTab({ p }) {
-  const { archivedGroups, handleRestoreGroup, loading, navigate } = p;
+  const { archivedGroups, basePath, handleRestoreGroup, loading, navigate } = p;
 
   return (
         <>
@@ -9,7 +9,7 @@ export default function ArchiveTab({ p }) {
             <button
               type="button"
               className="ios-back-btn"
-              onClick={() => navigate('/corp/teacher/settings')}
+              onClick={() => navigate(`${basePath}/settings`)}
               title="Back to Settings"
             >
               <ArrowLeft size={18} />

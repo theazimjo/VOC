@@ -1,4 +1,4 @@
-import { BookOpen, KeyRound, MoreVertical, Plus, Search, Trash2, Users } from 'lucide-react';
+import { BookOpen, Check, Clock, Copy, KeyRound, MoreVertical, Plus, RotateCw, Search, Trash2, Users, X } from 'lucide-react';
 import { getInitials } from '../utils';
 import './TeachersTab.css';
 
@@ -8,6 +8,8 @@ export default function TeachersTab({ p }) {
     setActiveTeacherMenu, setNewTeacherPassword, setResetPasswordTeacher, setShowTeacherModal,
     setTeacherMenuPos, setTeacherSearchTerm, teacherMenuPos, teacherSearchTerm,
     totalTeacherGroups, totalTeacherStudents, totalTeachers,
+    teacherJoinCode, copiedTeacherCode, handleCopyTeacherCode, handleRegenerateTeacherCode, regeneratingTeacherCode,
+    pendingTeacherRequests, processingRequestUid, handleApproveTeacherRequest, handleRejectTeacherRequest,
   } = p;
 
   const confirmDeleteTeacher = (t) => askConfirm({
@@ -40,6 +42,131 @@ export default function TeachersTab({ p }) {
               </div>
             </div>
           </div>
+
+          {/* Self-service teacher join code — a prospective teacher enters
+              this in their own Settings to attach themselves to this
+              center, instead of the admin creating their account directly. */}
+          <div
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+              padding: '12px 16px', borderRadius: '14px', marginBottom: '16px',
+              background: 'var(--pg-surface)', border: '1px solid var(--pg-hairline)',
+            }}
+          >
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Teacher Join ID
+              </div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--pg-text)', letterSpacing: '0.05em', fontFamily: 'monospace' }}>
+                {teacherJoinCode || '------'}
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+              <button
+                type="button"
+                onClick={handleCopyTeacherCode}
+                title="Copy"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px', borderRadius: '10px',
+                  background: 'var(--pg-bg)', border: '1px solid var(--pg-hairline)', color: 'var(--pg-text-secondary)',
+                  cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600,
+                }}
+              >
+                {copiedTeacherCode ? <Check size={14} /> : <Copy size={14} />}
+                {copiedTeacherCode ? 'Copied' : 'Copy'}
+              </button>
+              <button
+                type="button"
+                onClick={handleRegenerateTeacherCode}
+                disabled={regeneratingTeacherCode}
+                title="Generate new ID"
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 10px', borderRadius: '10px',
+                  background: 'var(--pg-bg)', border: '1px solid var(--pg-hairline)', color: 'var(--pg-text-secondary)',
+                  cursor: 'pointer', opacity: regeneratingTeacherCode ? 0.6 : 1,
+                }}
+              >
+                <RotateCw size={14} />
+              </button>
+            </div>
+          </div>
+
+          {/* Pending teacher join requests — a prospective teacher who
+              entered the join code above shows up here until the admin
+              approves or rejects them. */}
+          {pendingTeacherRequests && pendingTeacherRequests.length > 0 && (
+            <div
+              style={{
+                borderRadius: '14px', marginBottom: '16px', padding: '12px 16px',
+                background: 'var(--pg-surface)', border: '1px solid var(--pg-hairline)',
+              }}
+            >
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--pg-text-muted)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '10px' }}>
+                Pending Requests ({pendingTeacherRequests.length})
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {pendingTeacherRequests.map((req) => {
+                  const busy = processingRequestUid === req.uid;
+                  return (
+                    <div
+                      key={req.uid}
+                      style={{
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+                        padding: '10px 12px', borderRadius: '12px', background: 'var(--pg-bg)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
+                        <div style={{
+                          width: '34px', height: '34px', borderRadius: '50%', flexShrink: 0,
+                          background: 'var(--pg-accent-soft, rgba(99,102,241,0.12))', color: 'var(--pg-accent, #6366f1)',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.85rem',
+                        }}>
+                          {getInitials(req.name)}
+                        </div>
+                        <div style={{ minWidth: 0 }}>
+                          <div style={{ fontWeight: 700, color: 'var(--pg-text)', fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                            {req.name}
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem', color: 'var(--pg-text-muted)' }}>
+                            <Clock size={11} />
+                            {req.email || req.phone || 'No contact info'}
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
+                        <button
+                          type="button"
+                          onClick={() => handleApproveTeacherRequest(req.uid)}
+                          disabled={busy}
+                          title="Approve"
+                          style={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '7px 10px', borderRadius: '9px',
+                            background: 'var(--pg-success, #16a34a)', border: 'none', color: '#fff',
+                            cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.6 : 1,
+                          }}
+                        >
+                          <Check size={14} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleRejectTeacherRequest(req)}
+                          disabled={busy}
+                          title="Reject"
+                          style={{
+                            display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '7px 10px', borderRadius: '9px',
+                            background: 'var(--pg-bg)', border: '1px solid var(--pg-hairline)', color: 'var(--pg-danger, #dc2626)',
+                            cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.6 : 1,
+                          }}
+                        >
+                          <X size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Teachers Data Table */}
           <div className="teachers-table-card">

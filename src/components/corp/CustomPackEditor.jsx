@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Save, X } from 'lucide-react';
 import { createCustomPack, updateCustomPack } from '../../services/corpService';
+import { createIndependentCustomPack, updateIndependentCustomPack } from '../../services/independentTeacherService';
 import { speechLanguages } from '../../utils/helpers';
 import './CustomPackEditor.css';
 
-export default function CustomPackEditor({ centerId, editPack = null, onSaved, onCancel, ownerUid = null }) {
+// `independentUid`, when set, routes saves to independentTeacherService
+// (independentTeachers/{uid}/customPacks) instead of corpService
+// (centers/{centerId}/customPacks) — everything else about this editor is
+// identical for both, so it's a branch here rather than a second component.
+export default function CustomPackEditor({ centerId, editPack = null, onSaved, onCancel, ownerUid = null, independentUid = null }) {
   const [title, setTitle] = useState(editPack?.title || '');
   const [description, setDescription] = useState(editPack?.description || '');
   const [language, setLanguage] = useState(editPack?.language || 'en-US');
@@ -26,10 +31,16 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
     setSubmitting(true);
     try {
       if (editPack && editPack.id) {
-        await updateCustomPack(centerId, editPack.id, { title: title.trim(), description: description.trim(), language });
+        if (independentUid) {
+          await updateIndependentCustomPack(independentUid, editPack.id, { title: title.trim(), description: description.trim(), language });
+        } else {
+          await updateCustomPack(centerId, editPack.id, { title: title.trim(), description: description.trim(), language });
+        }
         if (onSaved) onSaved({ ...editPack, title: title.trim(), description: description.trim(), language });
       } else {
-        const pack = await createCustomPack(centerId, { title: title.trim(), description: description.trim(), language }, ownerUid);
+        const pack = independentUid
+          ? await createIndependentCustomPack(independentUid, { title: title.trim(), description: description.trim(), language })
+          : await createCustomPack(centerId, { title: title.trim(), description: description.trim(), language }, ownerUid);
         if (onSaved) onSaved(pack);
       }
     } catch (err) {

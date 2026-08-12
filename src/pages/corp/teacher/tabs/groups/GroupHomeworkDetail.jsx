@@ -5,7 +5,7 @@ import TeacherModal from '../../TeacherModal';
 import './GroupHomeworkDetail.css';
 
 export default function GroupHomeworkDetail({ p }) {
-  const { customPacks, groupHomeworkList, groupStudentsList, hwId, navigate, selectedGroup, setViewingHomeworkItem, viewingHomeworkItem } = p;
+  const { basePath, customPacks, groupHomeworkList, groupStudentsList, hwId, navigate, selectedGroup, setViewingHomeworkItem, viewingHomeworkItem } = p;
   const [selectedStudentProgressModal, setSelectedStudentProgressModal] = useState(null);
 
   // Keep showing the last-selected student's breakdown while the modal
@@ -77,7 +77,7 @@ export default function GroupHomeworkDetail({ p }) {
         <button
           type="button"
           className="gib-code-btn"
-          onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework`)}
+          onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/homework`)}
           style={{ marginTop: '8px' }}
         >
           <ArrowLeft size={16} /> Back to homework

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X } from 'lucide-react';
 import { updateCustomPack } from '../../services/corpService';
+import { updateIndependentCustomPack } from '../../services/independentTeacherService';
 import './TeacherPackViewer.css';
 
 const POS_LABELS = {
@@ -22,7 +23,7 @@ function deriveMonths(pack) {
   return [];
 }
 
-export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, onUpdate }) {
+export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, independentUid = null, onUpdate }) {
   const [months, setMonths] = useState(() => deriveMonths(pack));
   const [monthId, setMonthId] = useState(null);
   const [unitId, setUnitId] = useState(null);
@@ -62,7 +63,11 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
       const flatUnits = updatedMonths.flatMap(m => m.units || []);
       const flatWords = flatUnits.flatMap(u => u.words || []);
       const updates = { months: updatedMonths, units: flatUnits, words: flatWords, wordCount: flatWords.length };
-      await updateCustomPack(centerId, pack.id, updates);
+      if (independentUid) {
+        await updateIndependentCustomPack(independentUid, pack.id, updates);
+      } else {
+        await updateCustomPack(centerId, pack.id, updates);
+      }
       if (onUpdate) onUpdate({ ...pack, ...updates });
     } catch (err) {
       alert('Error saving: ' + err.message);

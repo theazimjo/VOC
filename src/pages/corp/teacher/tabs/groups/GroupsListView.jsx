@@ -3,7 +3,7 @@ import './GroupsListView.css';
 
 export default function GroupsListView({ p }) {
   const {
-    activeGroups, copiedCode, copyCode, filteredActiveGroups,
+    activeGroups, basePath, copiedCode, copyCode, filteredActiveGroups,
     handleOpenGroupSettings, loading, navigate, searchTerm, setSearchTerm,
     setSelectedGroupId, setShowCreateModal, setShowSearchInput, showSearchInput, totalStudents,
   } = p;
@@ -106,7 +106,7 @@ export default function GroupsListView({ p }) {
                           style={{ cursor: 'pointer' }}
                           onClick={() => {
                             setSelectedGroupId(group.id);
-                            navigate(`/corp/teacher/group/${group.id}`);
+                            navigate(`${basePath}/group/${group.id}`);
                           }}
                         >
                           <td style={{ fontWeight: 600, color: 'var(--pg-text)' }}>{group.name}</td>
@@ -132,7 +132,7 @@ export default function GroupsListView({ p }) {
                       key={group.id}
                       onClick={() => {
                         setSelectedGroupId(group.id);
-                        navigate(`/corp/teacher/group/${group.id}`);
+                        navigate(`${basePath}/group/${group.id}`);
                       }}
                       className="mobile-group-card"
                       style={{

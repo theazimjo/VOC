@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ref, get } from 'firebase/database';
 import { auth, db } from '../firebase';
+import { getActiveProfile, getActiveTeacherAffiliation } from '../utils/activeProfile';
 
 export const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
 
@@ -16,13 +17,31 @@ export const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@
 const identityCache = new Map(); // uid -> { promise, expiresAt }
 const CACHE_TTL_MS = 6000;
 
+// Call right after setActiveProfile() so the very next resolveCorpIdentity()
+// (triggered by the navigate() that follows) doesn't serve a stale cached
+// promise from before the switch — see clearCorpIdentityCache below.
+export function clearCorpIdentityCache(uid) {
+  if (uid) identityCache.delete(uid);
+}
+
 // Resolves a signed-in Firebase user to a corp identity: super_admin (email
-// allowlist), center_admin/teacher (corpUsers/{uid} lookup, denied if their
-// center has been suspended by the super admin), or null (not a corp user).
+// allowlist), center_admin/teacher (corpUsers/{uid} and/or
+// independentTeachers/{uid}/profile — see fetchCorpIdentity below), or null
+// (not a corp user).
 export async function resolveCorpIdentity(fbUser) {
   if (!fbUser) return null;
 
   if (fbUser.email && SUPER_ADMINS.includes(fbUser.email.toLowerCase())) {
+    // A super admin's email can *also* hold a teacher role (self-service
+    // "Become a Teacher" — being on the allowlist doesn't block that write).
+    // Only surface the teacher
+    // identity instead of super_admin when they've explicitly chosen
+    // 'teacher' via the profile switcher, so every other super-admin-gated
+    // check in the app is completely unaffected by default.
+    if (getActiveProfile() === 'teacher') {
+      const teacherIdentity = await fetchCorpIdentity(fbUser);
+      if (teacherIdentity?.role === 'teacher') return teacherIdentity;
+    }
     return { role: 'super_admin', email: fbUser.email, uid: fbUser.uid };
   }
 
@@ -36,23 +55,53 @@ export async function resolveCorpIdentity(fbUser) {
   return promise;
 }
 
+// An account can hold a center-type role (center_admin, or a center-joined
+// teacher — corpUsers/{uid}) AND an independent-tutor role
+// (independentTeachers/{uid}/profile) at the same time; these two tables are
+// deliberately unrelated so neither write blocks the other (see
+// becomeIndependentTeacher in independentTeacherService.js). When both a
+// center-teacher and an independent affiliation exist, which one "wins" is
+// the getActiveTeacherAffiliation() preference — set via the picker in
+// ProfilePage, defaults to the center one.
 async function fetchCorpIdentity(fbUser) {
+  const uid = fbUser.uid;
   try {
-    const snap = await get(ref(db, `corpUsers/${fbUser.uid}`));
-    if (!snap.exists()) return null;
+    const [corpSnap, independentSnap] = await Promise.all([
+      get(ref(db, `corpUsers/${uid}`)),
+      get(ref(db, `independentTeachers/${uid}/profile`)),
+    ]);
 
-    const data = snap.val();
-    if (data.disabled) return null;
+    let centerRoleData = corpSnap.exists() ? corpSnap.val() : null;
+    if (centerRoleData?.disabled) centerRoleData = null;
 
-    if (data.role === 'center_admin' || data.role === 'teacher') {
-      const statusSnap = await get(ref(db, `centers/${data.centerId}/status`));
-      if (statusSnap.exists() && statusSnap.val() === 'suspended') return null;
+    if (centerRoleData?.centerId) {
+      const statusSnap = await get(ref(db, `centers/${centerRoleData.centerId}/status`));
+      if (statusSnap.exists() && statusSnap.val() === 'suspended') centerRoleData = null;
     }
 
-    return { ...data, uid: fbUser.uid };
+    // center_admin has no independent-tutor counterpart — resolve
+    // immediately, same as before this function knew about that table.
+    if (centerRoleData?.role === 'center_admin') {
+      return { ...centerRoleData, uid, independent: false };
+    }
+
+    const centerIdentity = centerRoleData?.role === 'teacher'
+      ? { ...centerRoleData, uid, independent: false }
+      : null;
+
+    const independentProfile = independentSnap.exists() ? independentSnap.val() : null;
+    const independentIdentity = independentProfile
+      ? { role: 'teacher', independent: true, centerId: null, centerName: null, teacherId: uid, ...independentProfile, uid }
+      : null;
+
+    if (centerIdentity && independentIdentity) {
+      const chosen = getActiveTeacherAffiliation() === 'independent' ? independentIdentity : centerIdentity;
+      return { ...chosen, hasMultipleTeacherAffiliations: true };
+    }
+    return centerIdentity || independentIdentity || null;
   } catch (err) {
     // Don't let a transient failure poison the cache for the rest of the TTL.
-    identityCache.delete(fbUser.uid);
+    identityCache.delete(uid);
     throw err;
   }
 }

@@ -1,10 +1,17 @@
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import TeacherSidebar from './TeacherSidebar';
 import TeacherBottomNav from './TeacherBottomNav';
 import './CorpAdminLayout.css';
 
 export default function TeacherLayout() {
   const identity = useOutletContext();
+
+  // Independent teachers have no centerId — this layout (and everything
+  // under it) is center-scoped, so send them to their own dashboard instead
+  // of falling through to the 'demo_center_1' placeholder below.
+  if (identity?.independent) {
+    return <Navigate to="/teacher" replace />;
+  }
 
   const centerId = identity?.centerId || 'demo_center_1';
   const centerName = identity?.centerName || 'O\'quv Markazi';

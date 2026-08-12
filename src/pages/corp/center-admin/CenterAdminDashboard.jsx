@@ -3,7 +3,8 @@ import { useOutletContext, useNavigate, useSearchParams } from 'react-router-dom
 import {
   getCenterTeachers, createTeacher, updateTeacherPassword, removeTeacherFromCenter, getCenterCustomPacks, getCenterGroups,
   getCenter, updateCenter, deleteCustomPack, duplicateCustomPack, createCustomPack, updateCustomPack,
-  ensureIrregularVerbsPack, getGroupStudents,
+  ensureIrregularVerbsPack, getGroupStudents, getOrCreateTeacherJoinCode, regenerateTeacherJoinCode,
+  getCenterPendingTeachers, approveTeacherRequest, rejectTeacherRequest,
 } from '../../../services/corpService';
 import CredentialsModal from '../../../components/corp/CredentialsModal';
 import ConfirmSheet from '../../../components/corp/ConfirmSheet';
@@ -45,6 +46,14 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const [showCourseSortMenu, setShowCourseSortMenu] = useState(false);
   const [activeTeacherMenu, setActiveTeacherMenu] = useState(null);
   const [teacherMenuPos, setTeacherMenuPos] = useState({ top: 0, right: 0 });
+
+  // Self-service teacher join — the code a prospective teacher enters in
+  // their own Settings to attach themselves to this center.
+  const [teacherJoinCode, setTeacherJoinCode] = useState('');
+  const [copiedTeacherCode, setCopiedTeacherCode] = useState(false);
+  const [regeneratingTeacherCode, setRegeneratingTeacherCode] = useState(false);
+  const [pendingTeacherRequests, setPendingTeacherRequests] = useState([]);
+  const [processingRequestUid, setProcessingRequestUid] = useState(null);
 
   // Students tab: every student across every group in the center, fetched
   // lazily (only once the tab is actually visited) since it's an N+1 read
@@ -113,7 +122,7 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [teachersData, packsData, groupsData, centerData, irregularPack] = await Promise.all([
+      const [teachersData, packsData, groupsData, centerData, irregularPack, joinCode, pendingRequestsData] = await Promise.all([
         getCenterTeachers(centerId),
         getCenterCustomPacks(centerId),
         getCenterGroups(centerId),
@@ -122,9 +131,19 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
           console.error('Error ensuring Irregular Verbs pack:', err);
           return null;
         }),
+        getOrCreateTeacherJoinCode(centerId).catch(err => {
+          console.error('Error getting teacher join code:', err);
+          return '';
+        }),
+        getCenterPendingTeachers(centerId).catch(err => {
+          console.error('Error loading pending teacher requests:', err);
+          return [];
+        }),
       ]);
 
       setTeachers(teachersData || []);
+      setTeacherJoinCode(joinCode || '');
+      setPendingTeacherRequests(pendingRequestsData || []);
       // Packs a teacher created privately (ownerUid set) never show up in
       // the admin's course library — only center-wide packs the admin (or
       // any teacher, before this) created.
@@ -241,6 +260,68 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     } catch (err) {
       alert("O'qituvchini o'chirishda xatolik: " + err.message);
     }
+  };
+
+  const handleCopyTeacherCode = () => {
+    if (!teacherJoinCode) return;
+    navigator.clipboard.writeText(teacherJoinCode);
+    setCopiedTeacherCode(true);
+    setTimeout(() => setCopiedTeacherCode(false), 2000);
+  };
+
+  const handleRegenerateTeacherCode = () => {
+    askConfirm({
+      title: "Regenerate ID",
+      message: "Generate a new teacher join ID? The old one will stop working.",
+      confirmLabel: 'Generate',
+      cancelLabel: 'Cancel',
+      onConfirm: async () => {
+        setRegeneratingTeacherCode(true);
+        try {
+          const newCode = await regenerateTeacherJoinCode(centerId);
+          setTeacherJoinCode(newCode);
+        } catch (err) {
+          alert("Error regenerating ID: " + err.message);
+        } finally {
+          setRegeneratingTeacherCode(false);
+        }
+      },
+    });
+  };
+
+  const handleApproveTeacherRequest = async (uid) => {
+    setProcessingRequestUid(uid);
+    try {
+      await approveTeacherRequest(centerId, uid);
+      setPendingTeacherRequests(prev => prev.filter(r => r.uid !== uid));
+      const teachersData = await getCenterTeachers(centerId);
+      setTeachers(teachersData || []);
+    } catch (err) {
+      alert("Error approving request: " + err.message);
+    } finally {
+      setProcessingRequestUid(null);
+    }
+  };
+
+  const handleRejectTeacherRequest = (request) => {
+    askConfirm({
+      title: "Reject Request",
+      message: `Reject ${request.name}'s request to join as a teacher?`,
+      confirmLabel: 'Reject',
+      cancelLabel: 'Cancel',
+      danger: true,
+      onConfirm: async () => {
+        setProcessingRequestUid(request.uid);
+        try {
+          await rejectTeacherRequest(centerId, request.uid);
+          setPendingTeacherRequests(prev => prev.filter(r => r.uid !== request.uid));
+        } catch (err) {
+          alert("Error rejecting request: " + err.message);
+        } finally {
+          setProcessingRequestUid(null);
+        }
+      },
+    });
   };
 
   const handleDeleteCourse = async (id) => {
@@ -383,6 +464,8 @@ export default function CenterAdminDashboard({ tab = 'dashboard' }) {
     courseSortBy, setCourseSortBy, courseSortOrder, setCourseSortOrder,
     showCourseSortMenu, setShowCourseSortMenu,
     activeTeacherMenu, setActiveTeacherMenu, teacherMenuPos, setTeacherMenuPos,
+    teacherJoinCode, copiedTeacherCode, handleCopyTeacherCode, handleRegenerateTeacherCode, regeneratingTeacherCode,
+    pendingTeacherRequests, processingRequestUid, handleApproveTeacherRequest, handleRejectTeacherRequest,
     searchParams, setSearchParams, managingCourse,
     showTeacherModal, setShowTeacherModal, showPackEditor, setShowPackEditor,
     editingPack, setEditingPack, seedingCourse, setSeedingCourse, credentials, setCredentials,

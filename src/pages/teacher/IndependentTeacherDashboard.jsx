@@ -2,37 +2,48 @@ import { useState, useEffect, useRef } from 'react';
 import { useOutletContext, useParams, useNavigate } from 'react-router-dom';
 import { updatePassword } from 'firebase/auth';
 import { Megaphone } from 'lucide-react';
-import { useTheme } from '../../../contexts/ThemeContext';
-import { auth } from '../../../firebase';
+import { useTheme } from '../../contexts/ThemeContext';
+import { auth } from '../../firebase';
+import { getActiveAnnouncementsForRole } from '../../services/corpService';
 import {
-  getTeacherGroups, createGroup, getCenterCustomPacks,
-  assignPackToGroup, removePackFromGroup, getGroupStudents, duplicateCustomPack, deleteCustomPack,
-  updateGroupStatus, updateGroupDetails, deleteGroup,
-  getCenterTeachers, removeStudentFromGroup, updateTeacherProfile, getActiveAnnouncementsForRole,
-  ensureIrregularVerbsPack, getGroupHomeworkList, addGroupHomework
-} from '../../../services/corpService';
-import { IRREGULAR_VERBS_PACK_ID } from '../../../data/irregularVerbsCorpPack';
-import { getHomeworkCandidates, getUsedHomeworkKeys, computeGroupStats } from './utils';
-import ConfirmSheet from '../../../components/corp/ConfirmSheet';
-import GroupsTab from './tabs/GroupsTab';
-import ArchiveTab from './tabs/ArchiveTab';
-import CoursesTab from './tabs/CoursesTab';
-import StatisticsTab from './tabs/StatisticsTab';
-import SettingsTab from './tabs/SettingsTab';
-import TransferPickerModal from './modals/TransferPickerModal';
-import CreateGroupModal from './modals/CreateGroupModal';
-import EditGroupModal from './modals/EditGroupModal';
-import StudentDetailModal from './modals/StudentDetailModal';
-import StudentActionMenu from './modals/StudentActionMenu';
-import './shared.css';
-import './TeacherDashboard.css';
-import '../center-admin/shared.css';
-import '../center-admin/CenterAdminDashboard.css';
+  getIndependentGroups, createIndependentGroup, getIndependentCustomPacks,
+  assignPackToIndependentGroup, removePackFromIndependentGroup, getIndependentGroupStudents,
+  duplicateIndependentCustomPack, deleteIndependentCustomPack,
+  updateIndependentGroupStatus, updateIndependentGroupDetails, deleteIndependentGroup,
+  removeIndependentStudentFromGroup, updateIndependentTeacherProfile,
+  ensureIndependentIrregularVerbsPack, getIndependentGroupHomeworkList, addIndependentGroupHomework,
+} from '../../services/independentTeacherService';
+import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
+import { getHomeworkCandidates, getUsedHomeworkKeys, computeGroupStats } from '../corp/teacher/utils';
+import ConfirmSheet from '../../components/corp/ConfirmSheet';
+import GroupsTab from '../corp/teacher/tabs/GroupsTab';
+import ArchiveTab from '../corp/teacher/tabs/ArchiveTab';
+import CoursesTab from '../corp/teacher/tabs/CoursesTab';
+import StatisticsTab from '../corp/teacher/tabs/StatisticsTab';
+import SettingsTab from '../corp/teacher/tabs/SettingsTab';
+import CreateGroupModal from '../corp/teacher/modals/CreateGroupModal';
+import EditGroupModal from '../corp/teacher/modals/EditGroupModal';
+import StudentDetailModal from '../corp/teacher/modals/StudentDetailModal';
+import StudentActionMenu from '../corp/teacher/modals/StudentActionMenu';
+import '../corp/teacher/shared.css';
+import '../corp/teacher/TeacherDashboard.css';
+import '../corp/center-admin/shared.css';
+import '../corp/center-admin/CenterAdminDashboard.css';
 
-export default function TeacherDashboard({ tab = 'groups' }) {
+// Independent-teacher counterpart of corp/teacher/TeacherDashboard.jsx — same
+// tab-switching shape and `p` bundle contract (every tab/modal below is the
+// literal center-scoped component, unmodified except for reading `basePath`
+// off `p` instead of a hardcoded '/corp/teacher'), just backed by
+// independentTeacherService (rooted at independentTeachers/{uid}/...) instead
+// of corpService (rooted at centers/{centerId}/...). No "transfer group to
+// another teacher" here — that's a center-only concept, so
+// TransferPickerModal and its handlers are deliberately not included; no UI
+// in the reused tabs calls them.
+export default function IndependentTeacherDashboard({ tab = 'groups' }) {
   const context = useOutletContext() || {};
   const { theme, setTheme } = useTheme();
-  const { centerId, teacherId, teacherName, phone, email } = context;
+  const { uid, teacherName, phone, email } = context;
+  const basePath = '/teacher';
   const { groupId: urlGroupId, subTab, hwId } = useParams();
   const navigate = useNavigate();
 
@@ -42,7 +53,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearchInput, setShowSearchInput] = useState(false);
 
-  // Modals
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPackEditor, setShowPackEditor] = useState(false);
@@ -53,19 +63,15 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const [viewingPack, setViewingPack] = useState(null);
   const [selectedGroupId, setSelectedGroupId] = useState(urlGroupId || null);
   const [showActionsDropdown, setShowActionsDropdown] = useState(false);
-  const [allGroupsStudents, setAllGroupsStudents] = useState({}); // groupId -> students[]
+  const [allGroupsStudents, setAllGroupsStudents] = useState({});
   const [loadingAllStats, setLoadingAllStats] = useState(false);
 
-  // Homework subtab: every assignment ever given to this group (oldest
-  // first, never overwritten) plus the teacher's in-progress selection
-  // while building a new one.
   const [groupHomeworkList, setGroupHomeworkList] = useState([]);
   const [homeworkSelection, setHomeworkSelection] = useState(new Set());
   const [savingHomework, setSavingHomework] = useState(false);
   const [showHomeworkEditor, setShowHomeworkEditor] = useState(false);
   const [viewingHomeworkItem, setViewingHomeworkItem] = useState(null);
 
-  // Active tab ref for auto-scrolling on mobile/narrow screens
   const activeSegTabRef = useRef(null);
   useEffect(() => {
     if (activeSegTabRef.current) {
@@ -73,19 +79,10 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   }, [subTab]);
 
-  // Student row actions (remove / detail) — same fixed-position dropdown
-  // pattern as CenterAdminDashboard's per-row "⋮" teacher menu.
   const [activeStudentMenu, setActiveStudentMenu] = useState(null);
   const [studentMenuPos, setStudentMenuPos] = useState({ top: 0, right: 0 });
   const [viewingStudentDetail, setViewingStudentDetail] = useState(null);
 
-  // Group transfer picker (replaces the old prompt()-based flow)
-  const [showTransferPicker, setShowTransferPicker] = useState(false);
-  const [centerTeachersList, setCenterTeachersList] = useState([]);
-  const [loadingTransferTeachers, setLoadingTransferTeachers] = useState(false);
-
-  // iOS-style action-sheet confirm dialog — replaces window.confirm() for
-  // every destructive/irreversible action in the group flow.
   const [confirmSheet, setConfirmSheet] = useState(null);
   const [confirmBusy, setConfirmBusy] = useState(false);
 
@@ -102,7 +99,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  // Announcements targeted at teachers
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
@@ -119,12 +115,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   }, [urlGroupId]);
 
-  // Load group students automatically when group is selected
   useEffect(() => {
     const fetchStudents = async () => {
-      if (selectedGroupId && centerId) {
+      if (selectedGroupId && uid) {
         try {
-          const list = await getGroupStudents(centerId, selectedGroupId);
+          const list = await getIndependentGroupStudents(uid, selectedGroupId);
           setGroupStudentsList(list || []);
         } catch (err) {
           console.error('Error loading group students:', err);
@@ -132,30 +127,27 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       }
     };
     fetchStudents();
-  }, [selectedGroupId, centerId]);
+  }, [selectedGroupId, uid]);
 
-  // Load every homework assignment ever given to this group
   useEffect(() => {
     const fetchHomework = async () => {
-      if (!selectedGroupId || !centerId) return;
+      if (!selectedGroupId || !uid) return;
       try {
-        const list = await getGroupHomeworkList(centerId, selectedGroupId);
+        const list = await getIndependentGroupHomeworkList(uid, selectedGroupId);
         setGroupHomeworkList(list);
       } catch (err) {
         console.error('Error loading group homework:', err);
       }
     };
     fetchHomework();
-  }, [selectedGroupId, centerId]);
+  }, [selectedGroupId, uid]);
 
-  // Form states
   const [groupForm, setGroupForm] = useState({ name: '', level: 'Elementary' });
   const [editForm, setEditForm] = useState({ name: '', level: 'Elementary' });
   const [submittingGroup, setSubmittingGroup] = useState(false);
   const [submittingEditGroup, setSubmittingEditGroup] = useState(false);
   const [copiedCode, setCopiedCode] = useState('');
 
-  // Settings states
   const [profileForm, setProfileForm] = useState({
     name: teacherName || '',
     phone: phone || '',
@@ -176,33 +168,20 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     setLoading(true);
     try {
       const [groupsData, packsData, irregularPack] = await Promise.all([
-        getTeacherGroups(centerId, teacherId),
-        getCenterCustomPacks(centerId),
-        ensureIrregularVerbsPack(centerId).catch(err => {
+        getIndependentGroups(uid),
+        getIndependentCustomPacks(uid),
+        ensureIndependentIrregularVerbsPack(uid).catch(err => {
           console.error('Error ensuring Irregular Verbs pack:', err);
           return null;
         }),
       ]);
       setGroups(groupsData || []);
-      // Packs with no ownerUid are center-wide (admin's, read-only for
-      // teachers here); packs owned by this teacher are their own private
-      // ones (full CRUD). Other teachers' private packs are dropped
-      // entirely — never shown in this teacher's list at all — while still
-      // staying in the shared customPacks collection so group assignment /
-      // student practice (which reads that collection directly) is
-      // unaffected either way.
-      const myUid = auth.currentUser?.uid;
-      const scoped = (packsData || [])
-        .filter(p => !p.ownerUid || p.ownerUid === myUid)
-        .map(p => ({ ...p, scope: p.ownerUid ? 'own' : 'center' }));
-      // Always replaced with ensureIrregularVerbsPack's own return value
-      // rather than trusting whatever getCenterCustomPacks read — that read
-      // runs concurrently with ensure()'s write/self-heal above, so it can
-      // easily win the race and hand back a stale copy (e.g. pre-rename
-      // set/unit titles) even though ensure() already fixed it server-side.
+      // Every independent pack is this teacher's own — no center-wide/shared
+      // concept to distinguish, unlike corpService's ownerUid split.
+      const scoped = (packsData || []).map(p => ({ ...p, scope: 'own' }));
       const withoutStaleIrregular = scoped.filter(p => p.id !== IRREGULAR_VERBS_PACK_ID);
       const withIrregular = irregularPack
-        ? [...withoutStaleIrregular, { ...irregularPack, scope: 'center' }]
+        ? [...withoutStaleIrregular, { ...irregularPack, scope: 'own' }]
         : scoped;
       setCustomPacks(withIrregular);
     } catch (err) {
@@ -213,23 +192,20 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   };
 
   useEffect(() => {
-    if (centerId && teacherId) {
+    if (uid) {
       loadTeacherData();
     }
-  }, [centerId, teacherId]);
+  }, [uid]);
 
-  // Teacher-wide "Statistika" tab needs every active group's student list to
-  // compute a real average, not just the currently-open group's — fetch them
-  // in parallel only when that tab is actually visited.
   useEffect(() => {
-    if (tab !== 'statistics' || !centerId) return;
+    if (tab !== 'statistics' || !uid) return;
     const groupIds = groups.filter(g => g.status !== 'archived').map(g => g.id);
     const missingIds = groupIds.filter(id => !(id in allGroupsStudents));
     if (missingIds.length === 0) return;
 
     let cancelled = false;
     setLoadingAllStats(true);
-    Promise.all(missingIds.map(id => getGroupStudents(centerId, id).then(list => [id, list || []])))
+    Promise.all(missingIds.map(id => getIndependentGroupStudents(uid, id).then(list => [id, list || []])))
       .then(entries => {
         if (cancelled) return;
         setAllGroupsStudents(prev => {
@@ -242,14 +218,14 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       .finally(() => { if (!cancelled) setLoadingAllStats(false); });
 
     return () => { cancelled = true; };
-  }, [tab, centerId, groups]);
+  }, [tab, uid, groups]);
 
   const handleCreateGroup = async (e) => {
     e.preventDefault();
     if (!groupForm.name.trim()) return;
     setSubmittingGroup(true);
     try {
-      const newGroup = await createGroup(centerId, teacherId, groupForm);
+      const newGroup = await createIndependentGroup(uid, groupForm);
       setGroups(prev => [newGroup, ...prev]);
       setGroupForm({ name: '', level: 'Elementary' });
       setShowCreateModal(false);
@@ -259,7 +235,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       setSubmittingGroup(false);
     }
   };
-
 
   const handleOpenEditModal = (group) => {
     if (group) {
@@ -273,7 +248,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     if (!editForm.name.trim() || !selectedGroup) return;
     setSubmittingEditGroup(true);
     try {
-      await updateGroupDetails(centerId, selectedGroup.id, editForm);
+      await updateIndependentGroupDetails(uid, selectedGroup.id, editForm);
       setGroups(prev => prev.map(g => g.id === selectedGroup.id ? { ...g, name: editForm.name, level: editForm.level } : g));
       setShowEditModal(false);
       setShowGroupSettingsModal(false);
@@ -287,10 +262,10 @@ export default function TeacherDashboard({ tab = 'groups' }) {
 
   const handleDeleteGroup = async (group) => {
     try {
-      await deleteGroup(centerId, group.id);
+      await deleteIndependentGroup(uid, group.id);
       setGroups(prev => prev.filter(g => g.id !== group.id));
       setSelectedGroupId(null);
-      navigate('/corp/teacher');
+      navigate(basePath);
     } catch (err) {
       alert('Error deleting group: ' + err.message);
     }
@@ -301,7 +276,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     setCopiedCode(code);
     setTimeout(() => setCopiedCode(''), 2000);
   };
-
 
   const toggleHomeworkItem = (candidate) => {
     if (candidate.used) return;
@@ -328,7 +302,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       const items = candidates
         .filter(c => !c.used && homeworkSelection.has(`${c.packId}_${c.monthId}_${c.unitId}`))
         .map(({ packId, monthId, unitId, packTitle, unitTitle, totalWords }) => ({ packId, monthId, unitId, packTitle, unitTitle, totalWords }));
-      const added = await addGroupHomework(centerId, selectedGroup.id, items);
+      const added = await addIndependentGroupHomework(uid, selectedGroup.id, items);
       setGroupHomeworkList(prev => [...prev, added]);
       setHomeworkSelection(new Set());
       setShowHomeworkEditor(false);
@@ -341,7 +315,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
 
   const handleAssignPack = async (groupId, packId, listKey = 'assignedPacks') => {
     try {
-      const updatedPacks = await assignPackToGroup(centerId, groupId, packId, listKey);
+      const updatedPacks = await assignPackToIndependentGroup(uid, groupId, packId, listKey);
       setGroups(prev => prev.map(g => g.id === groupId ? { ...g, [listKey]: updatedPacks } : g));
       setAssigningGroup(prev => prev ? { ...prev, [listKey]: updatedPacks } : prev);
     } catch (err) {
@@ -360,7 +334,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       danger: true,
       onConfirm: async () => {
         try {
-          const updatedPacks = await removePackFromGroup(centerId, groupId, packId, listKey);
+          const updatedPacks = await removePackFromIndependentGroup(uid, groupId, packId, listKey);
           setGroups(prev => prev.map(g => g.id === groupId ? { ...g, [listKey]: updatedPacks } : g));
           setAssigningGroup(prev => prev ? { ...prev, [listKey]: updatedPacks } : prev);
         } catch (err) {
@@ -373,10 +347,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   const handleDuplicatePack = async (pack) => {
     setDuplicatingPackId(pack.id);
     try {
-      // Duplicating is itself a creation action by this teacher — the copy
-      // is always a private pack of theirs, regardless of whether the
-      // source was a shared center pack or already one of their own.
-      const copy = await duplicateCustomPack(centerId, pack, auth.currentUser?.uid);
+      const copy = await duplicateIndependentCustomPack(uid, pack);
       setCustomPacks(prev => [{ ...copy, scope: 'own' }, ...prev]);
     } catch (err) {
       alert('Error duplicating pack: ' + err.message);
@@ -385,13 +356,10 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  // Confirmation for both of these lives at the call site (askConfirm's
-  // ConfirmSheet) — these are pure actions so callers aren't at risk of a
-  // stray native confirm() firing on top of their own styled dialog.
   const handleDeletePack = async (pack) => {
-    if (pack.scope !== 'own') return; // only a teacher's own packs can be deleted here
+    if (pack.scope !== 'own') return;
     try {
-      await deleteCustomPack(centerId, pack.id);
+      await deleteIndependentCustomPack(uid, pack.id);
       setCustomPacks(prev => prev.filter(p => p.id !== pack.id));
     } catch (err) {
       alert('Error deleting pack: ' + err.message);
@@ -400,7 +368,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
 
   const handleArchiveGroup = async (group) => {
     try {
-      await updateGroupStatus(centerId, group.id, 'archived');
+      await updateIndependentGroupStatus(uid, group.id, 'archived');
       setGroups(prev => prev.map(g => g.id === group.id ? { ...g, status: 'archived' } : g));
     } catch (err) {
       alert('Error archiving: ' + err.message);
@@ -415,7 +383,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       cancelLabel: "Cancel",
       onConfirm: async () => {
         try {
-          await updateGroupStatus(centerId, group.id, 'active');
+          await updateIndependentGroupStatus(uid, group.id, 'active');
           setGroups(prev => prev.map(g => g.id === group.id ? { ...g, status: 'active' } : g));
         } catch (err) {
           alert('Error restoring group: ' + err.message);
@@ -430,7 +398,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     setSavingSettings(true);
     setSettingsSuccess('');
     try {
-      await updateTeacherProfile(centerId, teacherId, auth.currentUser?.uid, {
+      await updateIndependentTeacherProfile(uid, {
         name: profileForm.name.trim(),
         phone: profileForm.phone.trim(),
       });
@@ -441,9 +409,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
           setSavingSettings(false);
           return;
         }
-        // Teacher is already signed in — change the real Firebase Auth
-        // password directly, instead of the old dead write to a DB
-        // `tempPassword` field that the login screen never reads.
         await updatePassword(auth.currentUser, profileForm.password.trim());
         setProfileForm(prev => ({ ...prev, password: '' }));
       }
@@ -460,7 +425,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     }
   };
 
-  // ── Group Settings Fullscreen Modal state & handlers ──
   const [showGroupSettingsModal, setShowGroupSettingsModal] = useState(false);
   const [groupSettingsTarget, setGroupSettingsTarget] = useState(null);
   const [groupSettingsForm, setGroupSettingsForm] = useState({ name: '', level: 'Beginner', isArchived: false, code: '' });
@@ -491,11 +455,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
         updates.level = groupSettingsForm.level;
       }
       if (Object.keys(updates).length > 0) {
-        await updateGroupDetails(centerId, targetGroup.id, updates);
+        await updateIndependentGroupDetails(uid, targetGroup.id, updates);
       }
       const newStatus = groupSettingsForm.isArchived ? 'archived' : 'active';
       if (newStatus !== (targetGroup.status || 'active')) {
-        await updateGroupStatus(centerId, targetGroup.id, newStatus);
+        await updateIndependentGroupStatus(uid, targetGroup.id, newStatus);
       }
       setGroups(prev => prev.map(g => g.id === targetGroup.id ? {
         ...g,
@@ -522,48 +486,11 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       onConfirm: async () => {
         try {
           const newCode = Math.floor(100000 + Math.random() * 900000).toString();
-          await updateGroupDetails(centerId, targetGroup.id, { code: newCode });
+          await updateIndependentGroupDetails(uid, targetGroup.id, { code: newCode });
           setGroupSettingsForm(prev => ({ ...prev, code: newCode }));
           setGroups(prev => prev.map(g => g.id === targetGroup.id ? { ...g, code: newCode } : g));
         } catch (err) {
           alert('Error refreshing code: ' + err.message);
-        }
-      },
-    });
-  };
-
-  const handleOpenTransferPicker = async () => {
-    if (!groupSettingsTarget) return;
-    setShowTransferPicker(true);
-    setLoadingTransferTeachers(true);
-    try {
-      const list = await getCenterTeachers(centerId);
-      setCenterTeachersList((list || []).filter(t => t.id !== teacherId));
-    } catch (err) {
-      alert('Error loading teacher list: ' + err.message);
-    } finally {
-      setLoadingTransferTeachers(false);
-    }
-  };
-
-  const handleTransferGroupTo = (targetTeacher) => {
-    if (!groupSettingsTarget) return;
-    askConfirm({
-      title: "Transfer Group",
-      message: `Transfer "${groupSettingsTarget.name}" to ${targetTeacher.name}?`,
-      confirmLabel: "Transfer",
-      cancelLabel: "Cancel",
-      danger: true,
-      onConfirm: async () => {
-        try {
-          await updateGroupDetails(centerId, groupSettingsTarget.id, { teacherId: targetTeacher.id });
-          setGroups(prev => prev.filter(g => g.id !== groupSettingsTarget.id));
-          setSelectedGroupId(null);
-          setShowTransferPicker(false);
-          setShowGroupSettingsModal(false);
-          navigate('/corp/teacher');
-        } catch (err) {
-          alert('Error transferring: ' + err.message);
         }
       },
     });
@@ -580,7 +507,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       danger: true,
       onConfirm: async () => {
         try {
-          await removeStudentFromGroup(centerId, selectedGroup.id, stId);
+          await removeIndependentStudentFromGroup(uid, selectedGroup.id, stId);
           setGroupStudentsList(prev => prev.filter(s => (s.id || s.uid) !== stId));
           setGroups(prev => prev.map(g => g.id === selectedGroup.id
             ? { ...g, studentsCount: Math.max(0, (g.studentsCount || 0) - 1) }
@@ -626,9 +553,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     ? computeGroupStats(selectedGroup, groupStudentsList, customPacks)
     : null;
 
-  // Per-group stats for the teacher-wide "Statistika" tab, plus the overall
-  // average across every group (weighted by how many student×pack pairs
-  // actually have progress data, not just a flat average of averages).
   const allGroupsStats = activeGroups.map(g => ({
     group: g,
     ...computeGroupStats(g, allGroupsStudents[g.id] || [], customPacks),
@@ -639,11 +563,8 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     return Math.round(withData.reduce((sum, s) => sum + s.avgPercent, 0) / withData.length);
   })();
 
-  // Single bundle handed to every extracted tab/modal component below —
-  // avoids re-deriving a bespoke prop list per file while still keeping all
-  // the state/handlers/derived data declared in exactly one place (here).
   const p = {
-    navigate, urlGroupId, subTab, hwId, theme, setTheme, centerId, independentUid: null, basePath: '/corp/teacher',
+    navigate, urlGroupId, subTab, hwId, theme, setTheme, basePath, independentUid: uid,
     groups, setGroups, customPacks, setCustomPacks, loading, setLoading,
     searchTerm, setSearchTerm, showSearchInput, setShowSearchInput,
     showCreateModal, setShowCreateModal, showEditModal, setShowEditModal,
@@ -656,8 +577,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     homeworkSelection, setHomeworkSelection, savingHomework, setSavingHomework,
     showHomeworkEditor, setShowHomeworkEditor, viewingHomeworkItem, setViewingHomeworkItem,
     activeStudentMenu, setActiveStudentMenu, studentMenuPos, setStudentMenuPos,
-    viewingStudentDetail, setViewingStudentDetail, showTransferPicker, setShowTransferPicker,
-    centerTeachersList, setCenterTeachersList, loadingTransferTeachers, setLoadingTransferTeachers,
+    viewingStudentDetail, setViewingStudentDetail,
     confirmSheet, setConfirmSheet, confirmBusy, setConfirmBusy, announcements, setAnnouncements,
     groupForm, setGroupForm, editForm, setEditForm, submittingGroup, setSubmittingGroup,
     submittingEditGroup, setSubmittingEditGroup, copiedCode, setCopiedCode,
@@ -670,7 +590,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
     handleAssignPack, handleRemovePack, handleDuplicatePack, handleDeletePack,
     handleArchiveGroup, handleRestoreGroup, handleSaveProfile,
     handleOpenGroupSettings, handleSaveGroupSettings, handleRegenerateCode,
-    handleOpenTransferPicker, handleTransferGroupTo, handleRemoveStudent,
+    handleRemoveStudent,
     activeGroups, archivedGroups, selectedGroup, filteredActiveGroups, filteredPacks,
     totalStudents, selectedGroupStats, allGroupsStats, overallAvgPercent,
   };
@@ -697,7 +617,6 @@ export default function TeacherDashboard({ tab = 'groups' }) {
       {tab === 'statistics' && <StatisticsTab p={p} />}
       {tab === 'settings' && <SettingsTab p={p} />}
 
-      <TransferPickerModal p={p} />
       <CreateGroupModal p={p} />
       <EditGroupModal p={p} />
       <StudentDetailModal p={p} />

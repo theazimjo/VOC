@@ -10,7 +10,7 @@ import './GroupSubtabs.css';
 
 export default function GroupSubtabs({ p }) {
   const {
-    activeStudentMenu, askConfirm, assignCategory, assigningGroup, copiedCode, copyCode, customPacks,
+    activeStudentMenu, askConfirm, assignCategory, assigningGroup, basePath, copiedCode, copyCode, customPacks,
     groupHomeworkList, groupSettingsForm, groupStudentsList,
     handleAddHomework, handleArchiveGroup, handleAssignPack, handleDeleteGroup, handleRegenerateCode, handleRemovePack, handleSaveGroupSettings,
     homeworkSelection, navigate, openHomeworkEditor, savingGroupSettings, savingHomework, selectedGroup, selectedGroupStats,
@@ -550,7 +550,7 @@ export default function GroupSubtabs({ p }) {
                               type="button"
                               key={hw.id}
                               className="student-progress-row"
-                              onClick={() => navigate(`/corp/teacher/group/${selectedGroup.id}/homework/${hw.id}`)}
+                              onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/homework/${hw.id}`)}
                               style={{
                                 cursor: 'pointer',
                                 width: '100%',

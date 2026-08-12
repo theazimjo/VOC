@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Building2, Users, BookOpen,
-  BarChart3, Settings, LogOut, ChevronLeft, ChevronRight
+  BarChart3, Settings, LogOut, ChevronLeft, ChevronRight, Repeat
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { setActiveProfile } from '../../utils/activeProfile';
 import VocLogo from '../common/VocLogo';
 import './CorpAdminSidebar.css';
 
-export default function TeacherSidebar({ centerName, teacherName, email, phone }) {
+export default function TeacherSidebar({ centerName, teacherName, email, phone, basePath = '/corp/teacher' }) {
   const [collapsed, setCollapsed] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -19,11 +20,16 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
     navigate('/login');
   };
 
+  const handleSwitchToPersonal = () => {
+    setActiveProfile('personal');
+    navigate('/');
+  };
+
   const navItems = [
-    { to: '/corp/teacher', label: 'My Groups', icon: Users, isGroupTab: true },
-    { to: '/corp/teacher/courses', label: 'Word Bank', icon: BookOpen },
-    { to: '/corp/teacher/statistics', label: 'Statistics', icon: BarChart3 },
-    { to: '/corp/teacher/settings', label: 'Settings', icon: Settings, matchExtra: '/corp/teacher/archive' },
+    { to: basePath, label: 'My Groups', icon: Users, isGroupTab: true },
+    { to: `${basePath}/courses`, label: 'Word Bank', icon: BookOpen },
+    { to: `${basePath}/statistics`, label: 'Statistics', icon: BarChart3 },
+    { to: `${basePath}/settings`, label: 'Settings', icon: Settings, matchExtra: `${basePath}/archive` },
   ];
 
   return (
@@ -47,7 +53,7 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = item.isGroupTab
-            ? (location.pathname === '/corp/teacher' || location.pathname.startsWith('/corp/teacher/group/'))
+            ? (location.pathname === basePath || location.pathname.startsWith(`${basePath}/group/`))
             : location.pathname.startsWith(item.to) || (item.matchExtra && location.pathname.startsWith(item.matchExtra));
           return (
             <Link
@@ -76,6 +82,11 @@ export default function TeacherSidebar({ centerName, teacherName, email, phone }
             </div>
           </div>
         )}
+
+        <button className="btn-corp-logout" onClick={handleSwitchToPersonal} title="Switch to Personal">
+          <Repeat size={16} strokeWidth={2.2} />
+          {!collapsed && <span>Switch to Personal</span>}
+        </button>
 
         <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
           <LogOut size={16} strokeWidth={2.2} />

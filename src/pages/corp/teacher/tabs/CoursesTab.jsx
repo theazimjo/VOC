@@ -6,7 +6,7 @@ import CustomPackEditor from '../../../../components/corp/CustomPackEditor';
 
 export default function CoursesTab({ p }) {
   const {
-    centerId, customPacks, setCustomPacks, filteredPacks, searchTerm, setSearchTerm,
+    centerId, independentUid, customPacks, setCustomPacks, filteredPacks, searchTerm, setSearchTerm,
     setShowPackEditor, showPackEditor, viewingPack, setViewingPack,
     handleDeletePack, askConfirm,
   } = p;
@@ -40,6 +40,7 @@ export default function CoursesTab({ p }) {
             </div>
             <CustomPackEditor
               centerId={centerId}
+              independentUid={independentUid}
               ownerUid={auth.currentUser?.uid}
               onSaved={(pack) => {
                 setCustomPacks(prev => [{ ...pack, scope: 'own' }, ...prev]);
@@ -54,6 +55,7 @@ export default function CoursesTab({ p }) {
             onBack={() => setViewingPack(null)}
             editable={viewingPack.scope === 'own'}
             centerId={centerId}
+            independentUid={independentUid}
             onUpdate={(updatedPack) => {
               setCustomPacks(prev => prev.map(p => p.id === updatedPack.id ? { ...updatedPack, scope: p.scope } : p));
             }}

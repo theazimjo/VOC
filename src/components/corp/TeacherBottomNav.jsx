@@ -3,28 +3,28 @@ import { motion } from 'framer-motion';
 import { Users, BookOpen, BarChart3, Settings } from 'lucide-react';
 import '../Layout/BottomNav.css';
 
-export default function TeacherBottomNav() {
+export default function TeacherBottomNav({ basePath = '/corp/teacher' }) {
   const location = useLocation();
 
   const navItems = [
     {
-      to: '/corp/teacher',
+      to: basePath,
       label: 'Groups',
       icon: Users,
       isGroupTab: true,
     },
     {
-      to: '/corp/teacher/courses',
+      to: `${basePath}/courses`,
       label: 'Words',
       icon: BookOpen,
     },
     {
-      to: '/corp/teacher/statistics',
+      to: `${basePath}/statistics`,
       label: 'Stats',
       icon: BarChart3,
     },
     {
-      to: '/corp/teacher/settings',
+      to: `${basePath}/settings`,
       label: 'Settings',
       icon: Settings,
     },
@@ -35,10 +35,10 @@ export default function TeacherBottomNav() {
       {navItems.map((item) => {
         const IconComponent = item.icon;
         const isActive = item.isGroupTab
-          ? location.pathname === '/corp/teacher' ||
-            location.pathname.startsWith('/corp/teacher/group/')
-          : item.to === '/corp/teacher/settings'
-          ? location.pathname.startsWith('/corp/teacher/settings') || location.pathname.startsWith('/corp/teacher/archive')
+          ? location.pathname === basePath ||
+            location.pathname.startsWith(`${basePath}/group/`)
+          : item.to === `${basePath}/settings`
+          ? location.pathname.startsWith(`${basePath}/settings`) || location.pathname.startsWith(`${basePath}/archive`)
           : location.pathname.startsWith(item.to);
 
         return (

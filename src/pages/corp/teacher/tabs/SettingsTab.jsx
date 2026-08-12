@@ -1,15 +1,21 @@
 import { useState } from 'react';
-import { Archive, ChevronRight, CheckCircle2, Moon, LogOut } from 'lucide-react';
+import { Archive, ChevronRight, CheckCircle2, Moon, LogOut, Repeat } from 'lucide-react';
 import { useAuth } from '../../../../contexts/AuthContext';
+import { setActiveProfile } from '../../../../utils/activeProfile';
 
 export default function SettingsTab({ p }) {
   const {
-    askConfirm, handleSaveProfile, navigate, profileForm, savingSettings,
+    askConfirm, basePath, handleSaveProfile, navigate, profileForm, savingSettings,
     setProfileForm, setTheme, settingsSuccess, theme,
   } = p;
 
   const { logout } = useAuth();
   const [showProfileForm, setShowProfileForm] = useState(false);
+
+  const handleSwitchToPersonal = () => {
+    setActiveProfile('personal');
+    navigate('/');
+  };
 
   const handleLogout = () => {
     askConfirm({
@@ -158,14 +164,30 @@ export default function SettingsTab({ p }) {
                 className="ios-list-row ios-list-row-action"
                 role="button"
                 tabIndex={0}
-                onClick={() => navigate('/corp/teacher/archive')}
-                onKeyDown={e => { if (e.key === 'Enter') navigate('/corp/teacher/archive'); }}
+                onClick={() => navigate(`${basePath}/archive`)}
+                onKeyDown={e => { if (e.key === 'Enter') navigate(`${basePath}/archive`); }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div className="ios-row-icon" style={{ background: 'rgba(245, 158, 11, 0.16)', color: '#fbbf24' }}>
                     <Archive size={15} />
                   </div>
                   <span className="ios-list-label">Archived Groups</span>
+                </div>
+                <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)', flexShrink: 0 }} />
+              </div>
+
+              <div
+                className="ios-list-row ios-list-row-action"
+                role="button"
+                tabIndex={0}
+                onClick={handleSwitchToPersonal}
+                onKeyDown={e => { if (e.key === 'Enter') handleSwitchToPersonal(); }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div className="ios-row-icon" style={{ background: 'rgba(52, 199, 89, 0.16)', color: '#34c759' }}>
+                    <Repeat size={15} />
+                  </div>
+                  <span className="ios-list-label">Switch to Personal</span>
                 </div>
                 <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)', flexShrink: 0 }} />
               </div>
