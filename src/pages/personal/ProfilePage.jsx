@@ -306,23 +306,16 @@ export default function ProfilePage() {
             </div>
 
             <div className="corp-profile-edit-avatar-preview">
-              <div className="corp-profile-avatar" style={{ background: draftColor }}>
-                {(draftName.trim()[0] || initial).toUpperCase()}
+              <div className="corp-profile-avatar" style={{ background: draftColor, overflow: 'hidden' }}>
+                {avatarSrc && !avatarError ? (
+                  <img src={avatarSrc} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  (draftName.trim()[0] || initial).toUpperCase()
+                )}
               </div>
             </div>
 
-            <div className="corp-profile-edit-swatches">
-              {AVATAR_COLORS.map(c => (
-                <button
-                  key={c}
-                  type="button"
-                  className={`corp-profile-edit-swatch ${draftColor === c ? 'active' : ''}`}
-                  style={{ background: c }}
-                  onClick={() => setDraftColor(c)}
-                  aria-label={`Select color ${c}`}
-                />
-              ))}
-            </div>
+
 
             <div className="corp-profile-edit-field">
               <label htmlFor="student-profile-name-input">Display Name</label>

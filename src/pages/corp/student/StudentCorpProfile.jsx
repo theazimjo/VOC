@@ -9,6 +9,7 @@ import { setAppMode, updateStudentProfile } from '../../../services/corpService'
 import { useAuth } from '../../../contexts/AuthContext';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useAccountWordProgress } from '../../../hooks/useAccountWordProgress';
+import { useAvatar } from '../../../hooks/useAvatar';
 import PackHeaderHero from '../../../components/corp/PackHeaderHero';
 import './StudentCorpProfile.css';
 
@@ -22,6 +23,7 @@ const SHEET_META = {
 export default function StudentCorpProfile() {
   const { user, membership, student, wordTarget } = useOutletContext();
   const { logout } = useAuth();
+  const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
   const navigate = useNavigate();
   const { theme, setTheme, fontSize, setFontSize, audioEnabled, setAudioEnabled, themes } = useTheme();
 
@@ -91,7 +93,13 @@ export default function StudentCorpProfile() {
 
       {/* ── Hero: avatar + name + edit ── */}
       <div className="corp-profile-hero">
-        <div className="corp-profile-avatar" style={{ background: avatarColor }}>{initial}</div>
+        <div className="corp-profile-avatar" style={{ background: avatarColor, overflow: 'hidden' }}>
+          {avatarSrc && !avatarError ? (
+            <img src={avatarSrc} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          ) : (
+            initial
+          )}
+        </div>
         <div className="corp-profile-info">
           <div className="corp-profile-name">{displayName}</div>
           {user?.email && (
@@ -312,8 +320,12 @@ export default function StudentCorpProfile() {
             </div>
 
             <div className="corp-profile-edit-avatar-preview">
-              <div className="corp-profile-avatar" style={{ background: draftColor }}>
-                {(draftName || displayName)[0]?.toUpperCase() || '?'}
+              <div className="corp-profile-avatar" style={{ background: draftColor, overflow: 'hidden' }}>
+                {avatarSrc && !avatarError ? (
+                  <img src={avatarSrc} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  (draftName || displayName)[0]?.toUpperCase() || '?'
+                )}
               </div>
             </div>
 
@@ -327,22 +339,6 @@ export default function StudentCorpProfile() {
                 maxLength={40}
                 placeholder="Your name"
               />
-            </div>
-
-            <div className="corp-profile-edit-field">
-              <label>Avatar Color</label>
-              <div className="corp-profile-edit-swatches">
-                {AVATAR_COLORS.map(c => (
-                  <button
-                    key={c}
-                    type="button"
-                    className={`corp-profile-edit-swatch ${draftColor === c ? 'active' : ''}`}
-                    style={{ background: c }}
-                    onClick={() => setDraftColor(c)}
-                    aria-label={`Choose ${c}`}
-                  />
-                ))}
-              </div>
             </div>
 
             <button type="button" className="corp-profile-edit-save-btn" onClick={saveProfile}>
