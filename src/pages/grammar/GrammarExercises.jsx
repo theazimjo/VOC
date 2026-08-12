@@ -76,6 +76,19 @@ export default function GrammarExercises() {
 
       {/* Exercises Timeline */}
       <div className="exercises-timeline-container">
+        {/* Study guide entry point */}
+        <button
+          className="guide-entry-card"
+          onClick={() => navigate(`/grammar/${level}/${topicId}/guide`)}
+        >
+          <span className="guide-entry-icon">📖</span>
+          <div className="guide-entry-text">
+            <span className="guide-entry-title">Study Guide</span>
+            <span className="guide-entry-desc">Qoidalar, formulalar va misollarni ko'rish</span>
+          </div>
+          <span className="guide-entry-chevron">→</span>
+        </button>
+
         {/* Progress summary card */}
         <div className="exercises-progress-card">
           <div className="progress-card-info">

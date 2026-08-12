@@ -330,6 +330,71 @@
   flex-shrink: 0;
 }
 
+/* Study guide entry card */
+.guide-entry-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  cursor: pointer;
+  text-align: left;
+  box-shadow: var(--shadow);
+  transition: all var(--transition-base);
+  box-sizing: border-box;
+}
+
+.guide-entry-card:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.guide-entry-card:active {
+  transform: scale(0.99);
+}
+
+.guide-entry-icon {
+  flex-shrink: 0;
+  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-entry-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.guide-entry-title {
+  font-size: var(--font-md);
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.guide-entry-desc {
+  font-size: var(--font-xs);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.guide-entry-chevron {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  color: #ffffff;
+  opacity: 0.85;
+}
+
 /* Progress Card Style */
 .exercises-progress-card {
   background: var(--bg-secondary);

@@ -8,40 +8,46 @@ export const grammarData = {
         icon: '📝',
         guide: `## Ingliz tilida oddiy gap tuzilishi
 
-Ingliz tilida asosiy gap tuzilishi: Ega (Subject) + Fe'l (Verb) + To'ldiruvchi (Object) tartibida bo'ladi. Bu tartib o'zbek tilidagidan farq qiladi.
+Ingliz tilida asosiy gap tuzilishi qat'iy tartibga bo'ysunadi: Ega (Subject) + Fe'l (Verb) + To'ldiruvchi (Object). Bu tartib o'zbek tilidagidan farq qiladi — o'zbek tilida so'z tartibi ancha erkin, ingliz tilida esa deyarli har doim shu tartibda bo'ladi.
 
-## Asosiy tartib: S + V + O
+## 1. Asosiy formula: S + V + O
 
-• She reads books. (U kitob o'qiydi.)
-• They play football. (Ular futbol o'ynaydi.)
-• He eats an apple. (U olma yeydi.)
+• **Formula**: Subject + Verb + Object
+  - **She reads** books. (U kitob o'qiydi.)
+  - **They play** football. (Ular futbol o'ynaydi.)
+  - **He eats** an apple. (U olma yeydi.)
 
-## Tasdiqlash gaplari (Affirmative)
-Oddiy tasdiqlash gapida: Ega + Fe'l + To'ldiruvchi
-Misol: Tom drinks coffee every morning.
+*(So'z tartibini almashtirib bo'lmaydi — "Reads she books" kabi gap ingliz tilida noto'g'ri hisoblanadi)*
 
-## Inkor gaplari (Negative)
-Inkor gapida do/does + not ishlatiladi:
-• I do not (don't) like fish.
-• She does not (doesn't) eat meat.
-• They don't watch TV.
+## 2. Tasdiq, Inkor va Savol shakllari
 
-## So'roq gaplari (Questions)
-So'roq gaplarida fe'l egadan oldin keladi:
-• Do you like pizza? (Siz pizza yaxshi ko'rasizmi?)
-• Does she speak English? (U ingliz tilida gaplasha oladimi?)
-• Are they students? (Ular talabami?)
+• **Tasdiq**: Subject + Verb (+ -s/-es) + Object
+  - Tom **drinks** coffee every morning.
+• **Inkor**: Subject + do/does + not + base verb + Object
+  - I **do not (don't) like** fish.
+  - She **does not (doesn't) eat** meat.
+  - They **don't watch** TV.
+• **Savol**: Do/Does + Subject + base verb + Object?
+  - **Do** you **like** pizza? (Siz pizza yaxshi ko'rasizmi?)
+  - **Does** she **speak** English? (U ingliz tilida gaplasha oladimi?)
 
-## Muhim qoidalar
-1. Eganing o'rni har doim birinchi bo'ladi
-2. Fe'l egaga mos kelishi kerak (u/u/u uchun -s qo'shiladi)
-3. To'ldiruvchi fe'ldan keyin keladi
-4. Vaqt va joy ifodalari odatda oxirida keladi
+## 3. Muhim qoidalar
 
-## Misollar
+1. **Eganing o'rni**: har doim gapning birinchi o'rnida bo'ladi
+   - **She** reads books. ("Reads she books" — noto'g'ri)
+2. **Fe'l-ega moslashuvi**: he/she/it (uchinchi shaxs birlik) uchun fe'lga -s/-es qo'shiladi
+   - She **studies** medicine.
+3. **To'ldiruvchining o'rni**: har doim fe'ldan keyin keladi
+   - I **go to** school every day.
+4. **Vaqt va joy ifodalari**: odatda gap oxirida keladi
+   - We **play tennis** on Sundays.
+
+## 4. Ko'proq misollar
+
 • I go to school every day. (Men har kuni maktabga boraman.)
 • My sister studies medicine. (Mening singlim tibbiyot o'qiydi.)
-• We play tennis on Sundays. (Biz yakshanba kunlari tennis o'ynaymiz.)`,
+• We play tennis on Sundays. (Biz yakshanba kunlari tennis o'ynaymiz.)
+• The children play in the garden. (Bolalar bog'da o'ynashadi.)`,
         questions: [
           { id: 1, text: 'Choose the correct word order:', options: ['Cats milk like.', 'Like cats milk.', 'Cats like milk.', 'Milk cats like.'], correct: 2, explanation: 'English follows Subject-Verb-Object order: Cats (S) like (V) milk (O).' },
           { id: 2, text: 'She ___ to school every day.', options: ['go', 'goes', 'going', 'gone'], correct: 1, explanation: 'Third person singular (she/he/it) takes -s or -es in Simple Present.' },

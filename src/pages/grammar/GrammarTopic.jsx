@@ -209,7 +209,6 @@ export default function GrammarTopic() {
   const levelData = grammarData[level];
   const topic = levelData?.topics?.find((t) => t.id === topicId);
 
-  const [showGuide, setShowGuide] = useState(false);
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState(null);
   const [answered, setAnswered] = useState(false);
@@ -344,71 +343,6 @@ export default function GrammarTopic() {
     return { emoji: '💪', label: 'Practice more', color: 'var(--error)' };
   };
 
-  // ─── GUIDE PANEL ───────────────────────────────────────────────────────────
-  if (showGuide) {
-    return (
-      <div className="grammar-topic-page clean-theme clean-guide-view">
-        {/* Clean Header Bar */}
-        <div className="clean-quiz-header">
-          <button className="clean-back-arrow" onClick={() => setShowGuide(false)} title="Back to test">
-            ←
-          </button>
-          <h1 className="clean-quiz-title">Grammar Guide</h1>
-          <div className="clean-guide-icon" style={{ opacity: 0, pointerEvents: 'none' }}>📖</div>
-        </div>
-
-        {/* Guide Meta Card */}
-        <div className="clean-meta-card">
-          <div className="meta-line">
-            Topic: <span className="highlight-white">{topic.title}</span>
-          </div>
-          <div className="meta-line topic-name">
-            Study Guide
-          </div>
-        </div>
-
-        {/* Guide Content Body */}
-        <div className="clean-guide-content-panel">
-          <div className="clean-guide-text-body">
-            {topic.guide.split('\n').map((para, i) => {
-              const trimmed = para.trim();
-              if (!trimmed) {
-                return <div key={i} className="clean-guide-spacer" />;
-              }
-              if (trimmed.startsWith('##')) {
-                return (
-                  <h3 key={i} className="clean-guide-heading">
-                    {trimmed.replace(/^##\s*/, '')}
-                  </h3>
-                );
-              }
-              if (trimmed.startsWith('•') || trimmed.startsWith('-')) {
-                return (
-                  <div key={i} className="clean-guide-bullet">
-                    <span className="bullet-dot">•</span>
-                    <span className="bullet-text">{trimmed.replace(/^[•-]\s*/, '')}</span>
-                  </div>
-                );
-              }
-              return (
-                <p key={i} className="clean-guide-para">
-                  {trimmed}
-                </p>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Return Action Button */}
-        <div className="clean-guide-actions">
-          <button className="clean-next-btn" onClick={() => setShowGuide(false)}>
-            ✅ Start / Continue Exercise
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   // ─── FINISHED SCREEN ───────────────────────────────────────────────────────
   if (finished) {
     const grade = getScoreGrade();
@@ -454,9 +388,6 @@ export default function GrammarTopic() {
           <div className="results-actions">
             <button className="btn btn-primary" onClick={handleRestart}>
               🔄 Try Again
-            </button>
-            <button className="btn btn-secondary" onClick={() => setShowGuide(true)}>
-              📖 View Study Guide
             </button>
             <button className="btn btn-ghost" onClick={() => navigate(`/grammar/${level}/${topicId}`)}>
               ← Back
@@ -507,9 +438,7 @@ export default function GrammarTopic() {
           ←
         </button>
         <h1 className="clean-quiz-title">{getExerciseType(exerciseId).icon} Exercise {exerciseId}</h1>
-        <button className="clean-guide-icon" onClick={() => setShowGuide(true)} title="Study Guide">
-          📖
-        </button>
+        <div className="clean-guide-icon" style={{ opacity: 0, pointerEvents: 'none' }} aria-hidden="true">📖</div>
       </div>
 
       {/* Subtle Progress Bar */}
