@@ -5891,11 +5891,12 @@ Agar reporting fe'l **o'tgan zamonda** bo'lsa (said, told), asosiy gapdagi zamon
 • now → then; today → that day; tomorrow → the next day
 • yesterday → the day before; here → there; this → that
 
-## 3. Gapларni ko'chirish (Statements)
-Subject + said/told (+ object) + (that) + backshifted clause
+## 3. Gaplarni ko'chirish (Statements)
+• **Formula**: Subject + said/told (+ object) + (that) + backshifted clause
   - "I am tired," she said. → She said (that) she **was tired**.
   - "I will call you," he said. → He told me (that) he **would call** me.
-  - **say** — obyektsiz ishlatiladi; **tell** — doim obyekt talab qiladi (tell + someone)
+
+*(say — obyektsiz ishlatiladi; tell — doim obyekt talab qiladi: tell + someone)*
 
 ## 4. Savollarni ko'chirish (Reported Questions)
 • **Ha/Yo'q savollar**: asked + if/whether + Subject + Verb (auxiliary "do" yo'q, so'roq belgisi yo'q)
