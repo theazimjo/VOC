@@ -3,11 +3,10 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import VocLogo from '../common/VocLogo';
+import bgVideo from '../../assets/VOCABRY.mp4';
 import './LoginPage.css'; // Glass material, background video, card chrome
 import './RegisterPage.css'; // Password-strength indicator styles
 
-const BG_VIDEO_SRC =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4';
 
 // Glass card "materializes" — scale, lift and blur resolve together, not a
 // plain fade, so it reads as a physical surface arriving rather than a
@@ -176,7 +175,7 @@ export default function RegisterPage() {
           muted
           loop
           playsInline
-          src={BG_VIDEO_SRC}
+          src={bgVideo}
         />
         <div className="auth-bg-overlay" />
       </div>

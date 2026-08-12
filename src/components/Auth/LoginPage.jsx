@@ -5,6 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { resolveCorpIdentity } from '../../hooks/useCorpRole';
 import { useSuccessTransition } from '../../contexts/SuccessTransitionContext';
 import VocLogo from '../common/VocLogo';
+import bgVideo from '../../assets/VOCABRY.mp4';
 import './LoginPage.css';
 
 // Warm every lazy chunk *in the destination's render chain* while the
@@ -310,7 +311,7 @@ export default function LoginPage() {
           muted
           loop
           playsInline
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260613_180732_a54afbf6-b30d-470e-861f-669871f09f67.mp4"
+          src={bgVideo}
         />
         <div className={`auth-bg-overlay ${transitioning ? 'auth-bg-overlay--warp' : ''}`} />
       </div>
