@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard', end: true },
   { to: '/library', icon: BookOpen, label: 'Library', end: false },
   { to: '/grammar', icon: GraduationCap, label: 'Grammar', end: false },
-  { to: '/experiment', icon: FlaskConical, label: 'Memory Lab', end: false },
+  { to: '/experiment', icon: FlaskConical, label: 'Lab', end: false },
 ];
 
 function isItemActive(pathname, item) {

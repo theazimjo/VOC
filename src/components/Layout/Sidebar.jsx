@@ -10,7 +10,7 @@ const baseNavItems = [
   { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/library',  icon: BookOpen,        label: 'Library' },
   { to: '/grammar',  icon: GraduationCap,   label: 'Grammar' },
-  { to: '/experiment', icon: FlaskConical,   label: 'Memory Lab' },
+  { to: '/experiment', icon: FlaskConical,   label: 'Lab' },
 ];
 
 
