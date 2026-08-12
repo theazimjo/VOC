@@ -199,33 +199,36 @@ Ingliz tilida asosiy gap tuzilishi qat'iy tartibga bo'ysunadi: Ega (Subject) + F
 
 Olmosh — ot o'rnida ishlatiladigan so'z. Ingliz tilida olmoshlarning bir necha turi mavjud.
 
-## Olmosh turlari
+## 1. Olmosh turlari
 
-1. Shaxs olmoshlari (Personal Pronouns): I, you, he, she, it, we, they
-2. Egalik olmoshlari (Possessive Pronouns): mine, yours, his, hers, its, ours, theirs
-3. To'ldiruvchi olmoshlar (Object Pronouns): me, you, him, her, it, us, them
-4. O'zlik olmoshlari (Reflexive Pronouns): myself, yourself, himself, herself, itself, ourselves, themselves
+1. **Shaxs olmoshlari** (Personal Pronouns): I, you, he, she, it, we, they
+2. **Egalik olmoshlari** (Possessive Pronouns): mine, yours, his, hers, its, ours, theirs
+3. **To'ldiruvchi olmoshlar** (Object Pronouns): me, you, him, her, it, us, them
+4. **O'zlik olmoshlari** (Reflexive Pronouns): myself, yourself, himself, herself, itself, ourselves, themselves
 
-## Shaxs olmoshlari
-• I — birinchi shaxs, birlik (Men)
-• You — ikkinchi shaxs, birlik/ko'plik (Sen/Siz)
-• He — uchinchi shaxs, birlik, erkak (U - erkak)
-• She — uchinchi shaxs, birlik, ayol (U - ayol)
-• It — uchinchi shaxs, birlik, narsa/hayvon (U - narsa)
-• We — birinchi shaxs, ko'plik (Biz)
-• They — uchinchi shaxs, ko'plik (Ular)
+## 2. Shaxs olmoshlari
 
-## Olmoshlarni to'g'ri ishlatish
+• **I**: birinchi shaxs, birlik (Men)
+• **You**: ikkinchi shaxs, birlik/ko'plik (Sen/Siz)
+• **He**: uchinchi shaxs, birlik, erkak (U — erkak)
+• **She**: uchinchi shaxs, birlik, ayol (U — ayol)
+• **It**: uchinchi shaxs, birlik, narsa/hayvon (U — narsa)
+• **We**: birinchi shaxs, ko'plik (Biz)
+• **They**: uchinchi shaxs, ko'plik (Ular)
+
+## 3. Olmoshlarni to'g'ri ishlatish
+
 Olmosh eganing turi va jinsiga mos kelishi kerak:
-• My brother is a doctor. He works at a hospital.
-• My sister is a student. She studies English.
-• The book is on the table. It is interesting.
-• My parents live in Samarkand. They are teachers.
+  - My brother is a doctor. **He** works at a hospital.
+  - My sister is a student. **She** studies English.
+  - The book is on the table. **It** is interesting.
+  - My parents live in Samarkand. **They** are teachers.
 
-## Qoidalar
-1. Olmoshlar takroriy otlarni almashtiradi
-2. Jins va songa qarab to'g'ri olmosh tanlanadi
-3. Narsa va hayvonlar uchun "it" ishlatiladi (agar jins muhim bo'lmasa)`,
+## 4. Qoidalar
+
+1. **Takrorlanishni oldini olish**: olmoshlar takroriy otlarni almashtiradi
+2. **Jins va son**: jins va songa qarab to'g'ri olmosh tanlanadi
+3. **"It" qoidasi**: narsa va hayvonlar uchun "it" ishlatiladi (agar jins muhim bo'lmasa)`,
         questions: [
           { id: 1, text: 'My brother is a teacher. ___ works at a school.', options: ['She', 'They', 'He', 'It'], correct: 2, explanation: '"Brother" is male, so use "He".' },
           { id: 2, text: 'The book is interesting. ___ is about history.', options: ['He', 'She', 'They', 'It'], correct: 3, explanation: 'Non-living objects use "It".' },
@@ -377,28 +380,33 @@ Olmosh eganing turi va jinsiga mos kelishi kerak:
 
 Shaxs olmoshlari ega vazifasida ishlatiladigan olmoshlardir.
 
-## Birlik (Singular)
-• I — men (1-shaxs)
-• You — sen/siz (2-shaxs)
-• He — u (erkak, 3-shaxs)
-• She — u (ayol, 3-shaxs)
-• It — u (narsa/hayvon, 3-shaxs)
+## 1. Birlik (Singular)
 
-## Ko'plik (Plural)
-• We — biz (1-shaxs)
-• You — sizlar/senlar (2-shaxs)
-• They — ular (3-shaxs)
+• **I**: men (1-shaxs)
+• **You**: sen/siz (2-shaxs)
+• **He**: u — erkak (3-shaxs)
+• **She**: u — ayol (3-shaxs)
+• **It**: u — narsa/hayvon (3-shaxs)
 
-## Fe'l mosligi
-• I am, You are, He/She/It is
-• We are, You are, They are
-• I go, You go, He/She/It goes, We go, They go
+## 2. Ko'plik (Plural)
 
-## Muhim qoidalar
-1. "I" har doim bosh harf bilan yoziladi
-2. "You" birlik va ko'plikda bir xil
-3. "He" — erkak, "She" — ayol, "It" — narsa
-4. Fe'l uchinchi shaxs birlikda -s/-es qo'shiladi`,
+• **We**: biz (1-shaxs)
+• **You**: sizlar/senlar (2-shaxs)
+• **They**: ular (3-shaxs)
+
+## 3. Fe'l mosligi
+
+• **Be fe'li**: I **am**, You **are**, He/She/It **is**, We/You/They **are**
+  - **I am** a student. **She is** a teacher. **They are** friends.
+• **Oddiy fe'llar**: He/She/It uchun **-s/-es**, qolganlarida o'zgarmaydi
+  - I **go**, You **go**, He **goes**, We **go**, They **go**.
+
+## 4. Muhim qoidalar
+
+1. **"I" harfi**: har doim bosh harf bilan yoziladi
+2. **"You" shakli**: birlik va ko'plikda bir xil bo'ladi
+3. **Jins tanlash**: "He" — erkak, "She" — ayol, "It" — narsa
+4. **Fe'l qo'shimchasi**: uchinchi shaxs birlikda fe'lga -s/-es qo'shiladi`,
         questions: [
           { id: 1, text: 'Which is a first person singular pronoun?', options: ['We', 'You', 'I', 'They'], correct: 2, explanation: '"I" is the first person singular personal pronoun.' },
           { id: 2, text: '___ am a student.', options: ['He', 'She', 'I', 'They'], correct: 2, explanation: '"Am" is only used with "I".' },
@@ -550,31 +558,40 @@ Shaxs olmoshlari ega vazifasida ishlatiladigan olmoshlardir.
 
 To'ldiruvchi olmoshlar fe'ldan keyin, yoki old qo'shimchadan keyin keladi va ish-harakat kimga/nimaga qaratilganini ko'rsatadi.
 
-## Shaxs olmoshi → To'ldiruvchi olmoshi
-• I → me (menga, meni)
-• You → you (senga, seni)
-• He → him (unga, uni - erkak)
-• She → her (unga, uni - ayol)
-• It → it (unga, uni - narsa)
-• We → us (bizga, bizni)
-• They → them (ularga, ularni)
+## 1. Shaxs olmoshi → To'ldiruvchi olmoshi
 
-## Ishlatilishi
+• **I**: me (menga, meni)
+• **You**: you (senga, seni)
+• **He**: him (unga, uni — erkak)
+• **She**: her (unga, uni — ayol)
+• **It**: it (unga, uni — narsa)
+• **We**: us (bizga, bizni)
+• **They**: them (ularga, ularni)
+
+## 2. Ishlatilishi
+
 To'ldiruvchi olmoshlar quyidagi joylarda keladi:
-1. Fe'ldan keyin: I love HER. She knows THEM.
-2. Old qo'shimchadan keyin: Give it to ME. Talk to HIM.
 
-## Misollar
+1. **Fe'ldan keyin**: to'g'ridan-to'g'ri to'ldiruvchi sifatida
+   - I love **her**. She knows **them**.
+2. **Old qo'shimchadan keyin** (to, for, with va h.k.):
+   - Give it **to me**. Talk **to him**.
+
+## 3. Misollar
+
 • She loves him. (U uni sevadi.)
 • Tell me the truth. (Menga haqiqatni ayting.)
 • I called them yesterday. (Men kecha ularni chaqirdim.)
 • Give it to us. (Uni bizga bering.)
 • He helped her. (U unga yordam berdi.)
 
-## Keng tarqalgan xatolar
-✗ She loves I. → ✓ She loves me.
-✗ Tell I the truth. → ✓ Tell me the truth.
-✗ Give it to they. → ✓ Give it to them.`,
+## 4. Keng tarqalgan xatolar
+
+*(Shaxs olmoshi (I, they) to'ldiruvchi o'rnida ishlatilmaydi — o'rniga to'ldiruvchi olmoshi (me, them) kerak)*
+
+• ✗ She loves I. → ✓ She loves **me**.
+• ✗ Tell I the truth. → ✓ Tell **me** the truth.
+• ✗ Give it to they. → ✓ Give it to **them**.`,
         questions: [
           { id: 1, text: 'She loves ___. (I → ?)', options: ['I', 'me', 'my', 'mine'], correct: 1, explanation: '"I" becomes "me" as an object pronoun.' },
           { id: 2, text: 'I called ___ yesterday. (they → ?)', options: ['they', 'their', 'theirs', 'them'], correct: 3, explanation: '"They" becomes "them" as an object pronoun.' },
@@ -726,34 +743,37 @@ To'ldiruvchi olmoshlar quyidagi joylarda keladi:
 
 Egalik olmoshlari biror narsaning kimga tegishliligini bildiradi va ot o'rnida keladi.
 
-## Egalik olmoshlari jadvali
-• I → mine (meniki)
-• You → yours (seniki/sizniki)
-• He → his (uniki - erkak)
-• She → hers (uniki - ayol)
-• It → its (uniki - narsa) [kamdan-kam ishlatiladi]
-• We → ours (bizniki)
-• They → theirs (ularniki)
+## 1. Egalik olmoshlari jadvali
 
-## Egalik sifatlari (Possessive Adjectives) bilan farqi
-Egalik sifatlari ot oldidan keladi:
-• This is MY book. (Bu MENING kitobim.) — sifat
-• This book is MINE. (Bu kitob MENIKI.) — olmosh
+• **I**: mine (meniki)
+• **You**: yours (seniki/sizniki)
+• **He**: his (uniki — erkak)
+• **She**: hers (uniki — ayol)
+• **It**: its (uniki — narsa, kamdan-kam ishlatiladi)
+• **We**: ours (bizniki)
+• **They**: theirs (ularniki)
 
-Egalik olmoshlari otdan keyin, mustaqil holda keladi:
-• That car is HIS. (O'sha mashina UNIKI.)
-• These shoes are HERS. (Bu oyoq kiyimlar UNIKI.)
+## 2. Egalik sifatlari bilan farqi
 
-## Misollar
+• **Egalik sifati** (ot oldidan keladi): Subject + my/your/his/her/its/our/their + Noun
+  - This is **my** book. (Bu **mening** kitobim.)
+• **Egalik olmoshi** (otdan keyin, mustaqil holda keladi): Subject + is/are + mine/yours/his/hers/ours/theirs
+  - This book is **mine**. (Bu kitob **meniki**.)
+  - That car is **his**. (O'sha mashina **uniki**.)
+  - These shoes are **hers**. (Bu oyoq kiyimlar **uniki**.)
+
+## 3. Misollar
+
 • Is this your pen? No, it's not mine. It's hers.
 • That house is ours.
 • Are these keys yours or theirs?
 • The red bag is mine, and the blue one is yours.
 
-## Muhim qoid
-Egalik olmoshlari hech qachon apostrof bilan ishlatilmaydi!
-✗ it's (bu "it is" ning qisqarmasi)
-✓ its (bu egalik sifati)`,
+## 4. Muhim qoida
+
+*(Egalik olmoshlari hech qachon apostrof bilan ishlatilmaydi)*
+
+• ✗ it's (bu "it is" ning qisqarmasi) → ✓ **its** (bu egalik sifati)`,
         questions: [
           { id: 1, text: 'This is my book. The book is ___.', options: ['my', 'me', 'mine', 'I'], correct: 2, explanation: '"Mine" is the possessive pronoun (replaces "my + noun").' },
           { id: 2, text: 'That is his car. The car is ___.', options: ['he', 'him', 'his', 'himself'], correct: 2, explanation: '"His" is both possessive adjective and pronoun.' },
@@ -905,30 +925,29 @@ Egalik olmoshlari hech qachon apostrof bilan ishlatilmaydi!
 
 O'zlik olmoshlari ish-harakat egaga qaytganda yoki ta'kidlash uchun ishlatiladi.
 
-## O'zlik olmoshlari jadvali
-• I → myself (o'zim)
-• You → yourself (o'zing/o'zingiz) [birlik]
-• He → himself (o'zi - erkak)
-• She → herself (o'zi - ayol)
-• It → itself (o'zi - narsa)
-• We → ourselves (o'zimiz)
-• You → yourselves (o'zinglar/o'zingizlar) [ko'plik]
-• They → themselves (o'zlari)
+## 1. O'zlik olmoshlari jadvali
 
-## Ishlatilishi
+• **I**: myself (o'zim)
+• **You** (birlik): yourself (o'zing/o'zingiz)
+• **He**: himself (o'zi — erkak)
+• **She**: herself (o'zi — ayol)
+• **It**: itself (o'zi — narsa)
+• **We**: ourselves (o'zimiz)
+• **You** (ko'plik): yourselves (o'zinglar/o'zingizlar)
+• **They**: themselves (o'zlari)
 
-### 1. Ish-harakat egaga qaytganda (Reflexive use)
-• She hurt herself. (U o'zini yaraladi.)
-• He introduced himself. (U o'zini tanishtirdi.)
-• They enjoyed themselves at the party. (Ular ziyofatda yaxshi vaqt o'tkazishdi.)
+## 2. Ishlatilishi
 
-### 2. Ta'kidlash uchun (Emphatic use)
-• I made this cake myself. (Bu tortni o'zim qildim.)
-• The president himself came. (Prezidentning o'zi keldi.)
-
-### 3. "By + reflexive" = yolg'iz, o'zi
-• She lives by herself. (U yolg'iz yashaydi.)
-• I did it all by myself. (Buni hammasi o'zim qildim.)`,
+1. **Ish-harakat egaga qaytganda** (Reflexive use):
+   - She hurt **herself**. (U o'zini yaraladi.)
+   - He introduced **himself**. (U o'zini tanishtirdi.)
+   - They enjoyed **themselves** at the party. (Ular ziyofatda yaxshi vaqt o'tkazishdi.)
+2. **Ta'kidlash uchun** (Emphatic use):
+   - I made this cake **myself**. (Bu tortni o'zim qildim.)
+   - The president **himself** came. (Prezidentning o'zi keldi.)
+3. **"By + reflexive" = yolg'iz, o'zi**:
+   - She lives **by herself**. (U yolg'iz yashaydi.)
+   - I did it all **by myself**. (Buni hammasi o'zim qildim.)`,
         questions: [
           { id: 1, text: 'She hurt ___. (she → reflexive)', options: ['her', 'hers', 'herself', 'she'], correct: 2, explanation: '"Herself" reflects the action back to "she".' },
           { id: 2, text: 'He introduced ___ to everyone.', options: ['him', 'his', 'himself', 'he'], correct: 2, explanation: '"Himself" — reflexive for "he".' },
@@ -1080,38 +1099,33 @@ O'zlik olmoshlari ish-harakat egaga qaytganda yoki ta'kidlash uchun ishlatiladi.
 
 Ko'plik shakli ingliz tilida odatda otga -s yoki -es qo'shish orqali hosil qilinadi.
 
-## Asosiy qoidalar
+## 1. Asosiy qoidalar
 
-### 1. Ko'p otlarga -s qo'shiladi
-• book → books, cat → cats, dog → dogs
+1. **Ko'p otlarga -s qo'shiladi**:
+   - book → **books**, cat → **cats**, dog → **dogs**
+2. **-s, -ss, -sh, -ch, -x bilan tugagan otlarga -es**:
+   - bus → **buses**, class → **classes**, dish → **dishes**, church → **churches**, box → **boxes**
+3. **Unli + y → -ys**:
+   - day → **days**, key → **keys**, boy → **boys**
+4. **Undosh + y → y o'rniga -ies**:
+   - city → **cities**, baby → **babies**, country → **countries**
+5. **-f/-fe → -ves**:
+   - leaf → **leaves**, wife → **wives**, knife → **knives**
 
-### 2. -s, -ss, -sh, -ch, -x bilan tugagan otlarga -es
-• bus → buses, class → classes
-• dish → dishes, church → churches
-• box → boxes
+*(Istisnolar bor: roof → roofs, belief → beliefs — bu so'zlar oddiy -s oladi)*
 
-### 3. Unli + y → -ys
-• day → days, key → keys, boy → boys
+6. **-o bilan tugaganlar**:
+   - tomato → **tomatoes**, potato → **potatoes**, photo → **photos**, piano → **pianos**
 
-### 4. Undosh + y → y o'rniga -ies
-• city → cities, baby → babies, country → countries
+## 2. Noto'g'ri ko'pliklar (Irregular Plurals)
 
-### 5. -f/-fe → -ves
-• leaf → leaves, wife → wives, knife → knives
-• Istisnolar: roof → roofs, belief → beliefs
-
-### 6. -o bilan tugaganlar
-• tomato → tomatoes, potato → potatoes
-• photo → photos, piano → pianos
-
-## Noto'g'ri ko'pliklar (Irregular Plurals)
-• man → men
-• woman → women
-• child → children
-• foot → feet
-• tooth → teeth
-• mouse → mice
-• goose → geese`,
+• **man**: men
+• **woman**: women
+• **child**: children
+• **foot**: feet
+• **tooth**: teeth
+• **mouse**: mice
+• **goose**: geese`,
         questions: [
           { id: 1, text: 'What is the plural of "city"?', options: ['citys', 'cities', 'cityes', 'city'], correct: 1, explanation: 'Consonant + y → ies: city → cities.' },
           { id: 2, text: 'What is the plural of "box"?', options: ['boxs', 'boxes', 'boxxes', 'boxies'], correct: 1, explanation: 'Words ending in -x take -es: box → boxes.' },
@@ -1261,37 +1275,32 @@ Ko'plik shakli ingliz tilida odatda otga -s yoki -es qo'shish orqali hosil qilin
         icon: '👓',
         guide: `## Doim Ko'plikda Ishlatiladigan Otlar (Always Plural Nouns)
 
-Ba'zi ingliz otlari har doim ko'plik shaklida ishlatiladi, birok ularning yagona ma'nosi bo'ladi.
+Ba'zi ingliz otlari har doim ko'plik shaklida ishlatiladi, biroq ularning yagona ma'nosi bo'ladi.
 
-## Kiyim-kechak (Clothes)
-• trousers (shim) — a pair of trousers
-• jeans (jinsi shim) — a pair of jeans
-• shorts (shortlar)
-• tights (kolgotkalar)
-• pyjamas (pijama)
+## 1. Kiyim-kechak (Clothes)
 
-## Ko'zgu / asboblar
-• glasses/spectacles (ko'zoynaklar)
-• binoculars (durbin)
-• scissors (qaychi)
-• pliers (keski)
-• tweezers (qisqich)
+• trousers (shim), jeans (jinsi shim), shorts (shortlar), tights (kolgotkalar), pyjamas (pijama)
 
-## Boshqa otlar
-• trousers, jeans, shorts — juftlik
-• scales (tarozi) — pairs
-• headphones (quloqchinlar)
+## 2. Ko'zgu / asboblar
 
-## Fe'l mosligi
-Bu otlar har doim ko'plik fe'l bilan keladi:
-• My glasses are on the table. (Ko'zoynaklarim stol ustida.)
-• These scissors are very sharp. (Bu qaychi juda o'tkir.)
-• Your trousers are dirty. (Shimingiz iflos.)
+• glasses/spectacles (ko'zoynaklar), binoculars (durbin), scissors (qaychi), pliers (keski), tweezers (qisqich)
 
-## "A pair of" ishlatilishi
-Bitta ob'ektni aytganda "a pair of" ishlatiladi:
-• I need a pair of scissors. (Menga bitta qaychi kerak.)
-• She bought a pair of jeans. (U bitta jinsi shim sotib oldi.)`,
+## 3. Boshqa otlar
+
+• scales (tarozi), headphones (quloqchinlar)
+
+## 4. Fe'l mosligi
+
+• **Formula**: Always-plural noun + are/were (hech qachon is/was emas)
+  - My **glasses are** on the table. (Ko'zoynaklarim stol ustida.)
+  - These **scissors are** very sharp. (Bu qaychi juda o'tkir.)
+  - Your **trousers are** dirty. (Shimingiz iflos.)
+
+## 5. "A pair of" ishlatilishi
+
+• **Formula**: A pair of + always-plural noun (bitta ob'ektni aytganda)
+  - I need **a pair of** scissors. (Menga bitta qaychi kerak.)
+  - She bought **a pair of** jeans. (U bitta jinsi shim sotib oldi.)`,
         questions: [
           { id: 1, text: 'My glasses ___ on the table.', options: ['is', 'was', 'are', 'has'], correct: 2, explanation: '"Glasses" is always plural → "are".' },
           { id: 2, text: 'These scissors ___ very sharp.', options: ['is', 'are', 'was', 'has'], correct: 1, explanation: '"Scissors" is always plural → "are".' },
@@ -1441,34 +1450,40 @@ Bitta ob'ektni aytganda "a pair of" ishlatiladi:
         icon: '⚖️',
         guide: `## Sanaladigan va Sanalmaydigan Otlar
 
-### Sanaladigan otlar (Countable Nouns)
-Sanaladigan otlar birlik va ko'plik shaklida keladi va son bilan ishlatiladi:
-• one apple, two apples
-• a dog, three dogs
-• one book, five books
+## 1. Sanaladigan otlar (Countable Nouns)
 
-### Sanalmaydigan otlar (Uncountable Nouns)
+Sanaladigan otlar birlik va ko'plik shaklida keladi va son bilan ishlatiladi:
+  - one **apple**, two **apples**
+  - a **dog**, three **dogs**
+  - one **book**, five **books**
+
+## 2. Sanalmaydigan otlar (Uncountable Nouns)
+
 Sanalmaydigan otlar ko'plik shaklini olmaydi va odatda son bilan ishlatilmaydi:
+
 • water, music, love, advice, information
 • bread, milk, coffee, butter, sugar
 • furniture, luggage, equipment
 
-## Muhim farqlar
-Sanaladigan: a/an + ot, some/any + ko'plik
-• a book, some books, any books
+## 3. Muhim farqlar
 
-Sanalmaydigan: a/an ishlatilmaydi, some/any + birlik
-• some water (not "a water"), some advice (not "an advice")
+• **Sanaladigan**: a/an + ot, yoki some/any + ko'plik
+  - a book, some books, any books
+• **Sanalmaydigan**: a/an ishlatilmaydi, some/any + birlik shakl
+  - some water (not "a water"), some advice (not "an advice")
 
-## Miqdor so'zlari
-Sanaladigan: many, few, a few, number of
-• many books, a few apples
+## 4. Miqdor so'zlari
 
-Sanalmaydigan: much, little, a little, amount of
-• much water, a little milk
+• **Sanaladigan**: many, few, a few, number of
+  - many books, a few apples
+• **Sanalmaydigan**: much, little, a little, amount of
+  - much water, a little milk
 
-## Umumiy iboralar
-• a piece of advice, bread, furniture, information
+## 5. Umumiy iboralar
+
+*(Sanalmaydigan otlarni sanash uchun "o'lchov birligi" iboralari ishlatiladi)*
+
+• a piece of advice/bread/furniture/information
 • a glass of water, a cup of coffee
 • a loaf of bread, a slice of cheese`,
         questions: [
@@ -1620,45 +1635,39 @@ Sanalmaydigan: much, little, a little, amount of
         icon: '📊',
         guide: `## Sifat Darajalari (Degrees of Adjectives)
 
-Ingliz tilida sifatning uch darajasi mavjud:
+Ingliz tilida sifatning uch darajasi mavjud: oddiy, qiyosiy va orttirma.
 
 ## 1. Oddiy daraja (Positive)
-Sifat o'z holicha: big, small, fast, beautiful
+
+• **Formula**: sifat o'z holicha, hech qanday qo'shimchasiz
+  - big, small, fast, beautiful
 
 ## 2. Qiyosiy daraja (Comparative)
-Ikki narsani solishtirish uchun:
 
-### Qisqa sifatlarga -er qo'shiladi (1-2 bo'g'in)
-• big → bigger
-• small → smaller
-• fast → faster
-• hot → hotter (ikkilantirish)
-• happy → happier (y → ier)
+Ikki narsani solishtirish uchun ishlatiladi.
 
-### Uzun sifatlarga "more" qo'shiladi (2+ bo'g'in)
-• beautiful → more beautiful
-• interesting → more interesting
-• expensive → more expensive
+• **Qisqa sifatlar** (1-2 bo'g'in): Adjective + -er
+  - big → **bigger**, small → **smaller**, fast → **faster**
+  - hot → **hotter** (ikkilantirish), happy → **happier** (y → ier)
+• **Uzun sifatlar** (2+ bo'g'in): more + Adjective
+  - beautiful → **more beautiful**, interesting → **more interesting**, expensive → **more expensive**
 
 ## 3. Orttirma daraja (Superlative)
-Ko'p narsalar orasida eng yaxshisini ifodalaydi:
 
-### Qisqa sifatlarga the + -est
-• big → the biggest
-• small → the smallest
-• fast → the fastest
-• hot → the hottest
+Ko'p narsalar orasida eng yaxshisini ifodalaydi.
 
-### Uzun sifatlarga the most
-• beautiful → the most beautiful
-• interesting → the most interesting
+• **Qisqa sifatlar**: the + Adjective + -est
+  - big → **the biggest**, small → **the smallest**, fast → **the fastest**, hot → **the hottest**
+• **Uzun sifatlar**: the most + Adjective
+  - beautiful → **the most beautiful**, interesting → **the most interesting**
 
-## Noto'g'ri sifatlar (Irregular)
-• good → better → the best
-• bad → worse → the worst
-• far → farther/further → the farthest/furthest
-• little → less → the least
-• many/much → more → the most`,
+## 4. Noto'g'ri sifatlar (Irregular)
+
+• **good**: better → the best
+• **bad**: worse → the worst
+• **far**: farther/further → the farthest/furthest
+• **little**: less → the least
+• **many/much**: more → the most`,
         questions: [
           { id: 1, text: 'What is the comparative form of "big"?', options: ['biger', 'more big', 'biggest', 'bigger'], correct: 3, explanation: '"Big" → double the consonant and add -er: bigger.' },
           { id: 2, text: 'What is the superlative form of "fast"?', options: ['faster', 'more fast', 'the fastest', 'most fast'], correct: 2, explanation: '"Fast" → the fastest (short adjective → -est).' },
@@ -1810,7 +1819,7 @@ Ko'p narsalar orasida eng yaxshisini ifodalaydi:
 
 Ba'zi sifatlar oddiy daraja qoidalariga bo'ysunmaydi. Ularni yodlab olish kerak.
 
-## Asosiy noto'g'ri sifatlar
+## 1. Asosiy noto'g'ri sifatlar
 
 | Oddiy | Qiyosiy | Orttirma |
 |-------|---------|----------|
@@ -1822,20 +1831,27 @@ Ba'zi sifatlar oddiy daraja qoidalariga bo'ysunmaydi. Ularni yodlab olish kerak.
 | far   | farther/further | the farthest/furthest |
 | old   | older/elder | the oldest/eldest |
 
-## Misollar
-• This pizza is good, but that one is better. The Italian restaurant makes the best pizza.
-• Yesterday was bad, but today is worse. Last month was the worst.
-• She has more experience than him.
-• This road goes the farthest.
-• He is my elder brother.
+## 2. Misollar
 
-## "Elder" va "older" farqi
-• "Elder" faqat oila a'zolari uchun: my elder sister
-• "Older" hamma narsa uchun: This building is older than that one.
+  - This pizza is good, but that one is **better**. The Italian restaurant makes **the best** pizza.
+  - Yesterday was bad, but today is **worse**. Last month was **the worst**.
+  - She has **more** experience than him.
+  - This road goes **the farthest**.
+  - He is my **elder** brother.
 
-## "Further" va "farther" farqi
-• "Farther" — jismoniy masofa: The store is farther than I thought.
-• "Further" — ko'chma ma'no: Let's discuss this further.`,
+## 3. "Elder" va "older" farqi
+
+• **Elder**: faqat oila a'zolari uchun ishlatiladi
+  - my **elder** sister
+• **Older**: hamma narsa uchun ishlatiladi
+  - This building is **older** than that one.
+
+## 4. "Further" va "farther" farqi
+
+• **Farther**: jismoniy masofa uchun
+  - The store is **farther** than I thought.
+• **Further**: ko'chma ma'noda (masalan, muhokama)
+  - Let's discuss this **further**.`,
         questions: [
           { id: 1, text: 'What is the comparative form of "good"?', options: ['gooder', 'more good', 'best', 'better'], correct: 3, explanation: '"Good" is irregular: good → better → the best.' },
           { id: 2, text: 'What is the superlative form of "bad"?', options: ['baddest', 'the worst', 'the baddest', 'more bad'], correct: 1, explanation: '"Bad" is irregular: bad → worse → the worst.' },
@@ -1985,35 +2001,38 @@ Ba'zi sifatlar oddiy daraja qoidalariga bo'ysunmaydi. Ularni yodlab olish kerak.
         icon: '🏆',
         guide: `## Sifat Darajalari (Ilg'or bosqich)
 
-## Qisqartirma qoidalar eslatmasi
+## 1. Bo'g'in soniga qarab qoidalar
 
-### 1. Bir bo'g'inli sifatlar → -er/-est
-• tall, short, fast, slow, big, small, clean, dark
+1. **Bir bo'g'inli sifatlar**: -er/-est qo'shiladi
+   - tall, short, fast, slow, big, small, clean, dark
+2. **Ikki bo'g'inli sifatlar**: -er/-est YOKI more/most ishlatilishi mumkin
+   - simple → **simpler**/**the simplest**
+   - quiet → **quieter**/**the quietest**
+   - modern, careless, often → odatda **more**/**most** bilan
+3. **Uch va undan ko'p bo'g'inli sifatlar**: faqat more/most
+   - important → **more important** → **the most important**
+   - comfortable → **more comfortable** → **the most comfortable**
 
-### 2. Ikki bo'g'inli sifatlar
--er/-est ishlatishi mumkin: simple, quiet, clever, narrow, gentle
-• simpler/the simplest
-• quieter/the quietest
+## 2. Double comparatives
 
-yoki more/most: modern, careless, often
+• **Formula**: The + comparative..., the + comparative...
+  - **The harder** you work, **the better** the results.
+  - **The more** you practice, **the more fluent** you become.
 
-### 3. Uch va undan ko'p bo'g'inli sifatlar → more/most
-• important → more important → the most important
-• comfortable → more comfortable → the most comfortable
+*(Ikki jarayon bir vaqtda o'sayotganini ifodalaydi)*
 
-## Double comparatives
-Ikki jarayon bir vaqtda o'sayotganini ifodalaydi:
-• The harder you work, the better the results.
-• The more you practice, the more fluent you become.
+## 3. "Less" va "the least"
 
-## "Less" va "the least"
-Qiyosiy va orttirma darajaning teskarisi:
-• This method is less complicated than the other.
-• This is the least expensive option.
+• **Formula**: less/the least + adjective (qiyosiy va orttirma darajaning teskarisi)
+  - This method is **less complicated** than the other.
+  - This is **the least expensive** option.
 
-## Absolute superlatives
-• extremely/very + adjective: She is extremely beautiful.
-• Tildagi nisbiy ifoda: one of the most beautiful cities`,
+## 4. Absolute superlatives
+
+• **extremely/very + adjective**: kuchli, lekin taqqoslamasdan
+  - She is **extremely** beautiful.
+• **one of the most + adjective + plural noun**: nisbiy ifoda
+  - one of **the most beautiful** cities`,
         questions: [
           { id: 1, text: 'The ___ I study, the ___ I learn. (more/more)', options: ['more/more', 'most/most', 'much/much', 'many/many'], correct: 0, explanation: 'Double comparative: The more...the more.' },
           { id: 2, text: 'Which adjective uses -er for comparative?', options: ['comfortable', 'important', 'intelligent', 'simple'], correct: 3, explanation: '"Simple" (2 syllables) → simpler.' },
@@ -2165,22 +2184,27 @@ Qiyosiy va orttirma darajaning teskarisi:
 
 "As...as" tuzilmasi ikki narsaning tengligini yoki tengsizligini ifodalash uchun ishlatiladi.
 
-## Tenglik: as + sifat + as
-Ma'nosi: ...kabi, ...darajada
-• She is as tall as her brother. (U akasi kabi baland bo'yli.)
-• This book is as interesting as that one. (Bu kitob u kitob kabi qiziqarli.)
-• I run as fast as you. (Men siz kabi tez yugurib olaman.)
+## 1. Tenglik
 
-## Tengsizlik: not as + sifat + as
-Ma'nosi: ...kabi emas, ...dan kam
-• He is not as tall as his father. (U otasi kabi baland bo'yli emas.)
-• This film is not as good as the book. (Bu film kitob kabi yaxshi emas.)
+• **Formula**: as + adjective + as (ma'nosi: ...kabi, ...darajada)
+  - She is **as tall as** her brother. (U akasi kabi baland bo'yli.)
+  - This book is **as interesting as** that one. (Bu kitob u kitob kabi qiziqarli.)
+  - I run **as fast as** you. (Men siz kabi tez yugurib olaman.)
 
-## Miqdor bilan: as much/many...as
-• I don't earn as much money as him.
-• She has as many friends as I do.
+## 2. Tengsizlik
 
-## Foydali iboralar
+• **Formula**: not as + adjective + as (ma'nosi: ...kabi emas, ...dan kam)
+  - He is **not as tall as** his father. (U otasi kabi baland bo'yli emas.)
+  - This film is **not as good as** the book. (Bu film kitob kabi yaxshi emas.)
+
+## 3. Miqdor bilan
+
+• **Formula**: as much/many + noun + as
+  - I don't earn **as much money as** him.
+  - She has **as many friends as** I do.
+
+## 4. Foydali iboralar
+
 • as soon as possible (ASAP) — imkon qadar tez
 • as quickly as you can — iloji boricha tez
 • twice as big as — ikki baravar katta
@@ -2336,37 +2360,36 @@ Ma'nosi: ...kabi emas, ...dan kam
 
 Ravish fe'l, sifat yoki boshqa ravishni tavsiflaydi va odatda qanday, qachon, qayerda, qay darajada degan savollarga javob beradi.
 
-## Ravish turlari
+## 1. Ravish turlari
 
-### 1. Tarz ravishi (Manner) — qanday?
-Ko'pincha sifatga -ly qo'shib hosil qilinadi:
-• quick → quickly (tez)
-• careful → carefully (ehtiyotkorlik bilan)
-• slow → slowly (sekin)
-• happy → happily (baxtli ravishda)
+• **Tarz ravishi** (Manner — qanday?): ko'pincha sifatga -ly qo'shib hosil qilinadi
+  - quick → **quickly** (tez), careful → **carefully** (ehtiyotkorlik bilan)
+  - slow → **slowly** (sekin), happy → **happily** (baxtli ravishda)
+• **Vaqt ravishi** (Time — qachon?):
+  - now, then, today, yesterday, soon, already, still, yet
+• **Joy ravishi** (Place — qayerda?):
+  - here, there, inside, outside, abroad, nearby
+• **Darajat ravishi** (Degree — qay darajada?):
+  - very, quite, extremely, really, almost, nearly
+• **Chastota ravishi** (Frequency — qancha tez-tez?):
+  - always, usually, often, sometimes, rarely, never
 
-### 2. Vaqt ravishi (Time) — qachon?
-• now, then, today, yesterday, soon, already, still, yet
+## 2. Noto'g'ri ravishlar
 
-### 3. Joy ravishi (Place) — qayerda?
-• here, there, inside, outside, abroad, nearby
+*(Ba'zi ravishlar sifat bilan bir xil shaklda bo'ladi — -ly qo'shilmaydi)*
 
-### 4. Darajat ravishi (Degree) — qay darajada?
-• very, quite, extremely, really, almost, nearly
+• **good** → well (yaxshi)
+• **fast** → fast (tez — o'zgarmaydi)
+• **hard** → hard (qattiq — o'zgarmaydi)
+• **late** → late (kech — o'zgarmaydi)
+• **early** → early (erta — o'zgarmaydi)
 
-### 5. Chastota ravishi (Frequency) — qancha tez-tez?
-• always, usually, often, sometimes, rarely, never
+## 3. Gap ichidagi o'rni
 
-## Noto'g'ri ravishlar
-• good → well (yaxshi)
-• fast → fast (tez - o'zgarmaydi)
-• hard → hard (qattiq - o'zgarmaydi)
-• late → late (kech - o'zgarmaydi)
-• early → early (erta - o'zgarmaydi)
-
-## Gap ichidagi o'rni
-• Tarz ravishi: odatda fe'ldan keyin
-• Chastota ravishi: ko'makchi fe'ldan keyin, asosiy fe'ldan oldin`,
+1. **Tarz ravishi**: odatda fe'ldan keyin keladi
+   - She drives **carefully**.
+2. **Chastota ravishi**: ko'makchi fe'ldan keyin, asosiy fe'ldan oldin keladi
+   - She **always** drives carefully.`,
         questions: [
           { id: 1, text: 'What is the adverb form of "quick"?', options: ['quicker', 'quicken', 'quickly', 'quicksome'], correct: 2, explanation: 'quick + -ly = quickly.' },
           { id: 2, text: 'She sings ___. (beautiful → adverb)', options: ['beautiful', 'beautifuler', 'beautifully', 'beautifulls'], correct: 2, explanation: 'beautiful + -ly = beautifully.' },
@@ -2519,34 +2542,42 @@ Ko'pincha sifatga -ly qo'shib hosil qilinadi:
 Ingliz tilida sonlar bir necha turga bo'linadi.
 
 ## 1. Sanoq sonlar (Cardinal Numbers)
+
 Miqdorni bildiradi: one, two, three, four, five...
-• 11 — eleven
-• 12 — twelve
-• 13 — thirteen (va -teen qo'shimchasini oladiganlar)
-• 20 — twenty
-• 21 — twenty-one (defis bilan)
-• 100 — one hundred
-• 1,000 — one thousand
+
+• **11**: eleven
+• **12**: twelve
+• **13**: thirteen (va -teen qo'shimchasini oladiganlar)
+• **20**: twenty
+• **21**: twenty-one (defis bilan)
+• **100**: one hundred
+• **1,000**: one thousand
 
 ## 2. Tartib sonlar (Ordinal Numbers)
+
 Tartibni bildiradi: first, second, third, fourth...
-• 1st — first (birinchi)
-• 2nd — second (ikkinchi)
-• 3rd — third (uchinchi)
-• 4th — fourth, 5th — fifth
-• 21st — twenty-first
 
-## Muhim qoidalar
-• 13 vs 30: thirTEEN (urgʻu oxirida) vs THIRty (urgʻu boshida)
-• "And" — inglizda 100 dan keyin ishlatiladi: 101 = one hundred AND one
-• Telefon raqamlar: 0 — "oh" yoki "zero"
-• Yillar: 1999 = nineteen ninety-nine
+• **1st**: first (birinchi)
+• **2nd**: second (ikkinchi)
+• **3rd**: third (uchinchi)
+• **4th/5th**: fourth, fifth
+• **21st**: twenty-first
 
-## Kasrlar (Fractions)
-• 1/2 — one half / a half
-• 1/3 — one third
-• 1/4 — one quarter / a quarter
-• 3/4 — three quarters`,
+## 3. Muhim qoidalar
+
+1. **13 vs 30 talaffuzi**: thir**TEEN** (urg'u oxirida) vs **THIR**ty (urg'u boshida)
+2. **"And" so'zi**: 100 dan keyin ishlatiladi
+   - 101 = one hundred **and** one
+3. **Telefon raqamlar**: 0 raqami "oh" yoki "zero" deb o'qiladi
+4. **Yillar**: ikki juftlikka bo'lib o'qiladi
+   - 1999 = **nineteen ninety-nine**
+
+## 4. Kasrlar (Fractions)
+
+• **1/2**: one half / a half
+• **1/3**: one third
+• **1/4**: one quarter / a quarter
+• **3/4**: three quarters`,
         questions: [
           { id: 1, text: 'What is 13 in words?', options: ['thirty', 'thirdteen', 'thirteen', 'thirten'], correct: 2, explanation: '13 = thirteen.' },
           { id: 2, text: 'What is the ordinal form of "1"?', options: ['oneth', 'first', 'oned', 'primary'], correct: 1, explanation: '1st = first (irregular ordinal).' },
@@ -2698,27 +2729,33 @@ Tartibni bildiradi: first, second, third, fourth...
 
 Ingliz tilida uch xil artikl mavjud: a, an va the.
 
-## 1. "A" — noaniq artikl (undosh tovushdan oldin)
-Ma'nosi: biror, bir
-• a book, a car, a university (u- undosh tovushi bilan boshlanadi!)
-• Birinchi marta tilga olinganda: I saw a dog.
-• Kasb-kor bilan: She is a doctor.
+## 1. "A" — noaniq artikl
 
-## 2. "An" — noaniq artikl (unli tovushdan oldin)
-• an apple, an orange, an umbrella, an hour (h — jim, unli kabi talaffuz!)
-• an honest man, an MBA degree
+• **Qachon**: undosh TOVUSH bilan boshlangan so'zdan oldin (ma'nosi: biror, bir)
+  - a book, a car, a **u**niversity (u- undosh tovushi bilan boshlanadi!)
+  - Birinchi marta tilga olinganda: I saw **a** dog.
+  - Kasb-kor bilan: She is **a** doctor.
+
+## 2. "An" — noaniq artikl
+
+• **Qachon**: unli TOVUSH bilan boshlangan so'zdan oldin
+  - an apple, an orange, an umbrella, an **h**our (h — jim, unli kabi talaffuz!)
+  - an honest man, an MBA degree
 
 ## 3. "The" — aniq artikl
-• Ikkinchi marta tilga olinganda: I saw a dog. The dog was big.
-• Yagona narsalar: the sun, the moon, the earth
-• Geografik nomlar: the Pacific Ocean, the Amazon River, the Alps
-• "Of" bilan: the capital of France
 
-## Artikl ishlatilmaydigan hollar
-• Ko'plik va umumiy ma'noda: Dogs are friendly. (emas: The dogs are friendly — barcha itlar)
-• Ism va familiyalar: Mr. Smith (not the Mr. Smith)
-• Mamlakat nomlari: France, England (lekin the UK, the USA)
-• Ovqat, til, sport: I like coffee. She speaks English.`,
+• **Qachon**: ikkinchi marta tilga olinganda, yagona narsalar, geografik nomlar
+  - Ikkinchi marta: I saw a dog. **The** dog was big.
+  - Yagona narsalar: **the** sun, **the** moon, **the** earth
+  - Geografik nomlar: **the** Pacific Ocean, **the** Amazon River, **the** Alps
+  - "Of" bilan: **the** capital of France
+
+## 4. Artikl ishlatilmaydigan hollar
+
+1. **Ko'plik va umumiy ma'no**: Dogs are friendly. (emas: The dogs are friendly — barcha itlar)
+2. **Ism va familiyalar**: Mr. Smith (not the Mr. Smith)
+3. **Mamlakat nomlari**: France, England (lekin the UK, the USA)
+4. **Ovqat, til, sport**: I like coffee. She speaks English.`,
         questions: [
           { id: 1, text: '___ apple a day keeps the doctor away.', options: ['A', 'An', 'The', 'No article'], correct: 1, explanation: '"An" before vowel sounds: "an apple".' },
           { id: 2, text: 'I saw ___ cat in the garden. ___ cat was orange.', options: ['a / The', 'the / A', 'a / A', 'the / The'], correct: 0, explanation: 'First mention: "a cat". Second mention: "the cat".' },

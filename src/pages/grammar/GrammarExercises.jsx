@@ -68,10 +68,7 @@ export default function GrammarExercises() {
           <span className="header-category">MIXED: {getLevelLabel()}</span>
           <h1 className="header-topic-title">{topic.title}</h1>
         </div>
-        <div className="header-actions">
-          <button className="header-icon-btn" title="Share">🔗</button>
-          <button className="header-icon-btn" title="Details">⋮</button>
-        </div>
+
       </div>
 
       {/* Exercises Timeline */}

@@ -8,12 +8,11 @@
   width: 100%;
   box-sizing: border-box;
   min-height: 100vh;
-  background: var(--bg-primary);
+  background: transparent;
   display: flex;
   flex-direction: column;
   padding-bottom: var(--space-2xl);
   position: relative;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
   border-radius: var(--radius-xl);
   overflow: hidden;
 }
@@ -99,6 +98,7 @@
   flex: 1;
   padding: var(--space-lg) var(--space-md);
   position: relative;
+  background: transparent;
 }
 
 .timeline-wrapper {
