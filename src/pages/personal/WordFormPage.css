@@ -188,8 +188,7 @@
 .wfp-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: var(--space-md);
+  justify-content: center;
   padding: var(--space-md) var(--space-lg);
   background: var(--bg-secondary);
   border: 1px solid var(--border);
@@ -198,6 +197,13 @@
   bottom: 20px;
   z-index: 10;
   box-shadow: var(--shadow-lg);
+}
+
+.wfp-submit-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 14px;
+  font-size: 1rem;
 }
 
 @media (max-width: 640px) {

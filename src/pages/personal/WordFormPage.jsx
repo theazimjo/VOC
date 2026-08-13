@@ -76,25 +76,31 @@ export default function WordFormPage() {
   const wordLangCode = toShortLangCode(packLanguage);
   const wordLangMeta = speechLanguages.find(l => l.code === packLanguage) || speechLanguages[0];
 
-  const handleDictionaryLookup = async () => {
-    const wordQuery = formData.word.trim();
-    const uzbekQuery = formData.translation.trim();
-    if ((!wordQuery && !uzbekQuery) || isLookingUp) return;
+  // `source` says which field is being searched FROM - 'word' (the button
+  // next to the word field, or auto-fill while only the word is typed) or
+  // 'translation' (the mirror case). Only the *other* field ever gets
+  // overwritten by the result: searching by word never touches what's
+  // already in the translation field's own source, and vice versa, so
+  // hand-editing one field and then triggering a lookup from the other
+  // can't clobber an edit you just made.
+  const handleDictionaryLookup = async (source = 'word') => {
+    const query = source === 'word' ? formData.word.trim() : formData.translation.trim();
+    if (!query || isLookingUp) return;
 
     setIsLookingUp(true);
     setLookupError(null);
 
     try {
       const res = await lookupWordFromDictionary(
-        wordQuery || uzbekQuery,
-        wordQuery ? 'word2translation' : 'translation2word',
+        query,
+        source === 'word' ? 'word2translation' : 'translation2word',
         wordLangCode
       );
       if (res) {
         setFormData(prev => ({
           ...prev,
-          word: decodeHTMLEntities(res.word || prev.word),
-          translation: decodeHTMLEntities(res.translation || prev.translation),
+          ...(source === 'word' ? { translation: decodeHTMLEntities(res.translation || prev.translation) } : {}),
+          ...(source === 'translation' ? { word: decodeHTMLEntities(res.word || prev.word) } : {}),
           partOfSpeech: res.partOfSpeech || prev.partOfSpeech,
           definition: decodeHTMLEntities(res.definition || prev.definition),
           example: decodeHTMLEntities(res.example || prev.example)
@@ -113,18 +119,20 @@ export default function WordFormPage() {
   // Auto-fills the moment the user stops typing whichever of the two
   // fields they filled in first - word or translation - so neither
   // direction needs a click. Fires only while exactly one of the two is
-  // filled (the other is what's being looked up), keyed on that pair so a
-  // lookup that comes back empty doesn't refire every 700ms unchanged.
+  // filled (the other is what's being looked up), keyed on source+value so
+  // a lookup that comes back empty doesn't refire every 700ms unchanged.
   const lastAutoLookupRef = useRef('');
   useEffect(() => {
     const wordVal = formData.word.trim();
     const translationVal = formData.translation.trim();
     const hasExactlyOne = Boolean(wordVal) !== Boolean(translationVal);
-    const key = `${wordVal.toLowerCase()}|${translationVal.toLowerCase()}`;
-    if (!hasExactlyOne || isLookingUp || key === lastAutoLookupRef.current) return;
+    if (!hasExactlyOne || isLookingUp) return;
+    const source = wordVal ? 'word' : 'translation';
+    const key = `${source}:${(wordVal || translationVal).toLowerCase()}`;
+    if (key === lastAutoLookupRef.current) return;
     const timer = setTimeout(() => {
       lastAutoLookupRef.current = key;
-      handleDictionaryLookup();
+      handleDictionaryLookup(source);
     }, 700);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -249,9 +257,9 @@ export default function WordFormPage() {
                 <button
                   type="button"
                   className="wfp-input-lookup-btn"
-                  onClick={handleDictionaryLookup}
-                  disabled={isLookingUp || (!formData.word.trim() && !formData.translation.trim())}
-                  title="Look up in dictionary and auto-fill"
+                  onClick={() => handleDictionaryLookup('word')}
+                  disabled={isLookingUp || !formData.word.trim()}
+                  title="Look up this word and fill in the translation"
                 >
                   {isLookingUp ? <IosSpinner size="sm" /> : <Search size={16} />}
                 </button>
@@ -278,9 +286,9 @@ export default function WordFormPage() {
                 <button
                   type="button"
                   className="wfp-input-lookup-btn"
-                  onClick={handleDictionaryLookup}
-                  disabled={isLookingUp || (!formData.word.trim() && !formData.translation.trim())}
-                  title="Look up in dictionary and auto-fill"
+                  onClick={() => handleDictionaryLookup('translation')}
+                  disabled={isLookingUp || !formData.translation.trim()}
+                  title="Look up this translation and fill in the word"
                 >
                   {isLookingUp ? <IosSpinner size="sm" /> : <Search size={16} />}
                 </button>
@@ -368,17 +376,8 @@ export default function WordFormPage() {
         {/* Bottom Action Footer */}
         <div className="wfp-actions">
           <button
-            type="button"
-            className="btn btn-ghost"
-            onClick={() => navigate(`/packs/${packId}`)}
-            disabled={isSubmitting}
-          >
-            Cancel
-          </button>
-
-          <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary wfp-submit-btn"
             disabled={isSubmitting || !formData.word.trim() || !formData.translation.trim()}
           >
             <Save size={16} />
