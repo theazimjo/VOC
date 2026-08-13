@@ -47,7 +47,31 @@ const SAMPLE_WORDS_BY_LANG = {
   ]
 };
 
-function buildSampleJson(wordLangCode) {
+// Shown only for 'ielts'-type packs, so the sample actually demonstrates
+// the extra fields (synonyms/collocations/word family/article/topic) that
+// plain word/translation packs don't have - copying the generic sample
+// into an IELTS pack would otherwise leave a new user with no idea those
+// fields exist for JSON import too.
+const IELTS_SAMPLE_WORDS = [
+  {
+    word: 'meticulous',
+    translation: "ehtiyotkor, sinchkov",
+    definition: 'showing great attention to detail; very careful and precise',
+    synonyms: 'careful, precise, thorough',
+    collocations: 'meticulous planning, meticulous attention to detail',
+    nounForm: 'meticulousness',
+    adjectiveForm: 'meticulous',
+    adverbForm: 'meticulously',
+    article: '',
+    topic: 'Work & Economy',
+    example: 'The report was the result of meticulous research.',
+    partOfSpeech: 'adjective'
+  },
+  { word: 'inevitable', translation: "muqarrar", partOfSpeech: 'adjective' }
+];
+
+function buildSampleJson(wordLangCode, isIelts) {
+  if (isIelts) return JSON.stringify(IELTS_SAMPLE_WORDS, null, 2);
   const items = SAMPLE_WORDS_BY_LANG[wordLangCode] || SAMPLE_WORDS_BY_LANG.en;
   return JSON.stringify(items, null, 2);
 }
@@ -79,7 +103,13 @@ async function resolveEntry(item, wordLangCode) {
     const res = await lookupWordFromDictionary(word || translation, direction, wordLangCode);
     if (!res) return null;
 
+    // Spread the original item first so any extra fields it already had
+    // (IELTS packs' synonyms/collocations/word-family/article/topic, or
+    // anything else a pasted item happens to carry) survive the dictionary
+    // fill-in instead of being silently dropped - only the handful of
+    // fields the lookup can actually improve get overridden below.
     return {
+      ...item,
       word: word || res.word || '',
       translation: translation || res.translation || '',
       partOfSpeech: item.partOfSpeech || res.partOfSpeech || 'noun',
@@ -123,7 +153,8 @@ export default function BulkImportPage() {
 
   const packLanguage = pack?.language || 'en-US';
   const wordLangCode = toShortLangCode(packLanguage);
-  const sampleJson = useMemo(() => buildSampleJson(wordLangCode), [wordLangCode]);
+  const isIeltsPack = pack?.type === 'ielts';
+  const sampleJson = useMemo(() => buildSampleJson(wordLangCode, isIeltsPack), [wordLangCode, isIeltsPack]);
 
   const handleCopySample = () => {
     navigator.clipboard.writeText(sampleJson);

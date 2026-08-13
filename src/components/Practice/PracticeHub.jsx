@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen } from 'lucide-react';
+import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, GraduationCap } from 'lucide-react';
 import { recommendPracticeMode } from '../../utils/memoryEngine';
 import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import './PracticeHub.css';
@@ -10,7 +10,7 @@ const RECOMMENDATION_BADGES = {
   reinforce: (count) => `${count} forgetting ⏰`,
 };
 
-export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, words = [] }) {
+export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, isIeltsPack, words = [] }) {
   const modes = [];
 
   // Which mode actually fits this word list's current memory state right
@@ -41,6 +41,20 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
       : null,
     glowColor: 'hsl(200, 90%, 55%)'
   });
+
+  // Additive, unlike the Irregular-Verbs-only block below - an IELTS pack
+  // still gets every generic mode too, since its words still have
+  // word/translation like any other pack. This just adds one more option.
+  if (isIeltsPack) {
+    modes.push({
+      id: 'ielts-trainer',
+      icon: GraduationCap,
+      title: 'IELTS Trainer',
+      desc: 'Definition recall, synonyms, articles, word family, and collocations',
+      badge: 'Min 3 words',
+      glowColor: 'hsl(258, 85%, 62%)'
+    });
+  }
 
   // The corp Irregular Verbs pack only ever needs the dedicated trainer plus
   // flashcards — Spelling/Match/Quiz/Pronounce are built around translation

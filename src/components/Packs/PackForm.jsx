@@ -11,11 +11,16 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const [color, setColor] = useState(bookColors[0]);
   const [folderId, setFolderId] = useState('');
   const [language, setLanguage] = useState('en-US');
+  const [type, setType] = useState('default');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [folderMenuOpen, setFolderMenuOpen] = useState(false);
   const folderMenuRef = useRef(null);
 
   const isLocked = editPack && editPack.name === 'Irregular Verbs';
+  // Pack type drives which word-entry form and practice trainer a pack
+  // uses, so it can't be changed once words may already exist against it -
+  // locked for any existing pack, not just the Irregular Verbs preset.
+  const isTypeLocked = Boolean(editPack);
 
   useEffect(() => {
     if (editPack) {
@@ -25,6 +30,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setColor(editPack.color || bookColors[0]);
       setFolderId(editPack.folderId || '');
       setLanguage(editPack.language || 'en-US');
+      setType(editPack.type || 'default');
     } else {
       setName('');
       setDescription('');
@@ -32,6 +38,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
       setColor(bookColors[Math.floor(Math.random() * bookColors.length)]);
       setFolderId(defaultFolderId || '');
       setLanguage('en-US');
+      setType('default');
     }
     setIsSubmitting(false);
     setFolderMenuOpen(false);
@@ -64,7 +71,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
     if (!name.trim() || isSubmitting) return;
     setIsSubmitting(true);
     try {
-      await onSave({ name, description, icon, color, folderId: folderId || null, language });
+      await onSave({ name, description, icon, color, folderId: folderId || null, language, type });
     } finally {
       setIsSubmitting(false);
     }
@@ -118,6 +125,24 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     disabled={isLocked}
                     maxLength={200}
                   />
+                </div>
+
+                <div className="input-group">
+                  <label>Pack Type</label>
+                  <select
+                    className="select"
+                    value={type}
+                    onChange={e => setType(e.target.value)}
+                    disabled={isTypeLocked}
+                  >
+                    <option value="default">General</option>
+                    <option value="ielts">IELTS Vocabulary</option>
+                  </select>
+                  {isTypeLocked && (
+                    <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>
+                      Pack type can't be changed after creation.
+                    </span>
+                  )}
                 </div>
 
                 {folders.length > 0 && (

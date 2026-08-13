@@ -108,7 +108,10 @@ export default function PackCard({ pack, onLongPress }) {
         </div>
 
         <div className="pack-card-body">
-          <h3 className="pack-card-title">{pack.name}</h3>
+          <h3 className="pack-card-title">
+            {pack.name}
+            {pack.type === 'ielts' && <span className="pack-type-badge">🎓 IELTS</span>}
+          </h3>
           {pack.description && <p className="pack-card-desc">{pack.description}</p>}
 
         </div>

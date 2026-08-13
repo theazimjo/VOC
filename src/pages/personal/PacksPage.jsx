@@ -18,6 +18,7 @@ export default function PacksPage() {
       icon: data.icon || packIcons[Math.floor(Math.random() * packIcons.length)],
       level: data.level || 'beginner',
       language: data.language || 'en-US',
+      type: data.type || 'default',
     });
     setShowForm(false);
   };

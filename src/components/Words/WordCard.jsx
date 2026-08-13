@@ -38,11 +38,32 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
           <div className="word-translation">{word.translation}</div>
         </div>
 
-        {(word.definition || word.example || word.customSentence) && (
+        {(word.definition || word.example || word.customSentence || word.synonyms || word.collocations || word.article || word.nounForm || word.verbForm || word.adjectiveForm || word.adverbForm) && (
           <div className="word-details">
             {word.definition && (
               <div className="word-def">
                 <span className="detail-label">Def:</span> {word.definition}
+              </div>
+            )}
+            {word.synonyms && (
+              <div className="word-synonyms">
+                <span className="detail-label">Synonyms:</span> {word.synonyms}
+              </div>
+            )}
+            {word.collocations && (
+              <div className="word-collocations">
+                <span className="detail-label">Collocations:</span> {word.collocations}
+              </div>
+            )}
+            {(word.nounForm || word.verbForm || word.adjectiveForm || word.adverbForm) && (
+              <div className="word-family">
+                <span className="detail-label">Word family:</span>{' '}
+                {[word.nounForm, word.verbForm, word.adjectiveForm, word.adverbForm].filter(Boolean).join(' · ')}
+              </div>
+            )}
+            {word.article && (
+              <div className="word-article">
+                <span className="detail-label">Article:</span> {word.article}
               </div>
             )}
             {word.example && (

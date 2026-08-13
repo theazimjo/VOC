@@ -18,6 +18,7 @@ import { lazyWithRetry } from './utils/lazyWithRetry';
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
 const PackDetail = lazyWithRetry(() => import('./pages/personal/PackDetail'));
 const WordFormPage = lazyWithRetry(() => import('./pages/personal/WordFormPage'));
+const IeltsWordFormPage = lazyWithRetry(() => import('./pages/personal/IeltsWordFormPage'));
 const BulkImportPage = lazyWithRetry(() => import('./pages/personal/BulkImportPage'));
 const PracticePage = lazyWithRetry(() => import('./pages/personal/PracticePage'));
 const StatsPage = lazyWithRetry(() => import('./pages/personal/StatsPage'));
@@ -105,6 +106,8 @@ export default function App() {
                         <Route path="/packs/:packId" element={<PackDetail />} />
                         <Route path="/packs/:packId/word/new" element={<WordFormPage />} />
                         <Route path="/packs/:packId/word/edit/:wordId" element={<WordFormPage />} />
+                        <Route path="/packs/:packId/word/ielts/new" element={<IeltsWordFormPage />} />
+                        <Route path="/packs/:packId/word/ielts/edit/:wordId" element={<IeltsWordFormPage />} />
                         <Route path="/packs/:packId/import-json" element={<BulkImportPage />} />
                         <Route path="/practice" element={<PracticePage />} />
                         <Route path="/practice/:sourceType/:sourceId" element={<PracticePage />} />

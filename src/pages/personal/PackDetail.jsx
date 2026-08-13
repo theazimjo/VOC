@@ -34,6 +34,18 @@ export default function PackDetail() {
 
   const [confusionPairs, setConfusionPairs] = useState([]);
   const marketSyncCheckedRef = useRef(false);
+  const [topicFilter, setTopicFilter] = useState(null);
+
+  // Distinct topics present among this pack's words, for the optional
+  // study-grouping filter chips (IELTS packs only, and only once at least
+  // one word has a topic set) - "20-30 words per topic" beats a random
+  // pile, per the IELTS vocabulary research behind this feature.
+  const ieltsTopics = useMemo(() => {
+    if (!pack || pack.type !== 'ielts') return [];
+    return [...new Set(words.map(w => w.topic).filter(Boolean))].sort();
+  }, [pack, words]);
+
+  const displayedWords = topicFilter ? words.filter(w => w.topic === topicFilter) : words;
 
   // One-time fetch, same pattern as the Dashboard's Memory Twin card.
   useEffect(() => {
@@ -74,6 +86,7 @@ export default function PackDetail() {
   // per session, for whichever pack happened to be opened first.
   useEffect(() => {
     marketSyncCheckedRef.current = false;
+    setTopicFilter(null);
   }, [packId]);
 
   // On first visit after the Market source pack gained new words, silently
@@ -123,6 +136,10 @@ export default function PackDetail() {
 
   const handleEditWord = (word) => {
     if (pack?.name === 'Irregular Verbs') return;
+    if (pack?.type === 'ielts') {
+      navigate(`/packs/${packId}/word/ielts/edit/${word.id}`);
+      return;
+    }
     navigate(`/packs/${packId}/word/edit/${word.id}`);
   };
 
@@ -199,7 +216,7 @@ export default function PackDetail() {
         <div className="pack-detail-info">
           <div className="pack-detail-icon">{pack.icon}</div>
           <div className="pack-detail-text">
-            <h1>{pack.name}</h1>
+            <h1>{pack.name}{pack.type === 'ielts' && <span className="pack-type-badge">🎓 IELTS</span>}</h1>
             {pack.description && <p>{pack.description}</p>}
             <div className="book-stats">
               <span className="book-stat-badge">📝 {words.length} words</span>
@@ -267,8 +284,30 @@ export default function PackDetail() {
         </div>
       )}
 
+      {ieltsTopics.length > 0 && (
+        <div className="ielts-topic-filter-row">
+          <button
+            type="button"
+            className={`ielts-topic-chip ${topicFilter === null ? 'active' : ''}`}
+            onClick={() => setTopicFilter(null)}
+          >
+            All
+          </button>
+          {ieltsTopics.map(topic => (
+            <button
+              key={topic}
+              type="button"
+              className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
+              onClick={() => setTopicFilter(topic)}
+            >
+              {topic}
+            </button>
+          ))}
+        </div>
+      )}
+
       <WordList
-        words={words}
+        words={displayedWords}
         onEdit={handleEditWord}
         onDelete={handleDeleteWord}
         loading={loading}
@@ -286,7 +325,9 @@ export default function PackDetail() {
 
       {pack.name !== 'Irregular Verbs' && (
         <SpeedDialFAB
-          onAddWord={() => navigate(`/packs/${packId}/word/new`)}
+          onAddWord={() => navigate(
+            pack.type === 'ielts' ? `/packs/${packId}/word/ielts/new` : `/packs/${packId}/word/new`
+          )}
           onImportJson={() => navigate(`/packs/${packId}/import-json`)}
           onExtractPhoto={() => setShowPhotoExtractorModal(true)}
         />

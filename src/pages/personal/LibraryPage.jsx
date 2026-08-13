@@ -141,6 +141,7 @@ export default function LibraryPage() {
           level: data.level || 'beginner',
           folderId: data.folderId || null,
           language: data.language || 'en-US',
+          type: data.type || 'default',
         });
       }
     } catch (err) {
@@ -198,6 +199,16 @@ export default function LibraryPage() {
     example: wordData.example || '',
     notes: wordData.notes || '',
     partOfSpeech: wordData.partOfSpeech || 'noun',
+    // IELTS-pack-only fields - '' default, harmless no-op for every other
+    // market pack (see the "IELTS Pack Type" plan).
+    synonyms: wordData.synonyms || '',
+    collocations: wordData.collocations || '',
+    nounForm: wordData.nounForm || '',
+    verbForm: wordData.verbForm || '',
+    adjectiveForm: wordData.adjectiveForm || '',
+    adverbForm: wordData.adverbForm || '',
+    article: wordData.article || '',
+    topic: wordData.topic || '',
     addedAt: new Date().toISOString(),
     mastery: 0,
     interval: 0,
@@ -263,7 +274,8 @@ export default function LibraryPage() {
         icon: marketPack.icon,
         color: marketPack.color,
         level: marketPack.level,
-        marketPackId: marketPack.id
+        marketPackId: marketPack.id,
+        type: marketPack.type || 'default'
       });
 
       if (newPackId) {

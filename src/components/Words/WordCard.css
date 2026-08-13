@@ -99,7 +99,11 @@
   gap: 4px;
 }
 
-.word-def {
+.word-def,
+.word-synonyms,
+.word-collocations,
+.word-family,
+.word-article {
   font-size: var(--font-xs);
   color: var(--text-muted);
   line-height: 1.4;

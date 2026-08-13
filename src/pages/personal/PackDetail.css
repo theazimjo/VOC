@@ -83,6 +83,55 @@
   letter-spacing: -0.025em;
   line-height: 1.15;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ielts-topic-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: var(--space-sm) 0;
+}
+
+.ielts-topic-chip {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ielts-topic-chip:hover {
+  border-color: #7c3aed;
+  color: var(--text-primary);
+}
+
+.ielts-topic-chip.active {
+  background: rgba(124, 58, 237, 0.14);
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+.pack-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.01em;
+  vertical-align: middle;
 }
 
 .pack-detail-text p {

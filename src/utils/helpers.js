@@ -135,6 +135,7 @@ export const PRACTICE_MODE_MIN_WORDS = {
   pronounce: 1,
   sentence: 1,
   'irregular-verbs': 1,
+  'ielts-trainer': 3,
 };
 
 /**

@@ -21,6 +21,7 @@ import MatchGame from '../../components/Practice/MatchGame';
 import QuizGame from '../../components/Practice/QuizGame';
 import PronounceGame from '../../components/Practice/PronounceGame';
 import IrregularVerbsTrainer from '../../components/Practice/IrregularVerbsTrainer';
+import IeltsTrainer from '../../components/Practice/IeltsTrainer';
 import SentenceBuilder from '../../components/Practice/SentenceBuilder';
 import './PracticePage.css';
 
@@ -362,6 +363,7 @@ export default function PracticePage() {
       case 'pronounce': return <PronounceGame {...props} />;
       case 'sentence': return <SentenceBuilder {...props} />;
       case 'irregular-verbs': return <IrregularVerbsTrainer {...props} initialSubStep={querySubStep} />;
+      case 'ielts-trainer': return <IeltsTrainer {...props} />;
       default: return null;
     }
   };
@@ -472,7 +474,12 @@ export default function PracticePage() {
                   ))}
                 </div>
               </div>
-              <PracticeHub onSelectMode={handleStartPractice} isIrregularVerbs={selectedSource?.id === 'irregular-verbs' || selectedSource?.isIrregularVerbs} words={sourceWords} />
+              <PracticeHub
+                onSelectMode={handleStartPractice}
+                isIrregularVerbs={selectedSource?.id === 'irregular-verbs' || selectedSource?.isIrregularVerbs}
+                isIeltsPack={selectedSource?.type === 'ielts'}
+                words={sourceWords}
+              />
             </motion.div>
           )}
 
@@ -490,10 +497,10 @@ export default function PracticePage() {
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">
-                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'irregular-verbs' ? '⚡' : '🎮'}
+                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'irregular-verbs' ? '⚡' : selectedMode === 'ielts-trainer' ? '🎓' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match the Pair' : selectedMode === 'quiz' ? 'Quiz' : selectedMode === 'pronounce' ? 'Pronunciation' : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'irregular-verbs' ? "Irregular Verbs Trainer" : 'Practice'}
+                  {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match the Pair' : selectedMode === 'quiz' ? 'Quiz' : selectedMode === 'pronounce' ? 'Pronunciation' : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'irregular-verbs' ? "Irregular Verbs Trainer" : selectedMode === 'ielts-trainer' ? 'IELTS Trainer' : 'Practice'}
                 </h2>
                 <p>{practiceWords.length} words ready</p>
 
