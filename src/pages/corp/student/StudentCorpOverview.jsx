@@ -1,8 +1,9 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Target, CheckCircle2, CalendarDays, NotebookPen, X, Check, ChevronRight, PartyPopper } from 'lucide-react';
+import { Target, CheckCircle2, CalendarDays, NotebookPen, X, Check, ChevronRight, PartyPopper, Swords } from 'lucide-react';
 import { updateStudentWordTarget } from '../../../services/corpService';
+import { subscribeGroupBattle } from '../../../services/groupBattleService';
 import { useAccountWordProgress } from '../../../hooks/useAccountWordProgress';
 import { corpWordStorageId } from '../../../utils/helpers';
 import PackHeaderHero from '../../../components/corp/PackHeaderHero';
@@ -73,6 +74,17 @@ function buildActivityLog(words) {
 export default function StudentCorpOverview() {
   const { user, homeworkList, wordTarget, membership } = useOutletContext();
   const navigate = useNavigate();
+
+  const [activeBattle, setActiveBattle] = useState(null);
+  const [showBattleModal, setShowBattleModal] = useState(false);
+
+  useEffect(() => {
+    if (!membership?.groupId) return;
+    const unsub = subscribeGroupBattle(membership.groupId, (battle) => {
+      setActiveBattle(battle);
+    });
+    return () => unsub();
+  }, [membership?.groupId]);
 
   const { words, totalWords, learnedWords } = useAccountWordProgress(user?.uid);
 
@@ -248,14 +260,36 @@ export default function StudentCorpOverview() {
         <h1 className="corp-ov-name">{displayName}</h1>
       </div>
 
-      {/* ── Live Group Battle Banner / Room ── */}
-      {membership?.groupId && (
+      {/* ── Live Group Battle Floating Banner ── */}
+      {activeBattle && (activeBattle.status === 'lobby' || activeBattle.status === 'active') && (
+        <div className="corp-ov-battle-banner">
+          <div className="cobb-left">
+            <div className="cobb-icon">
+              <Swords size={24} />
+            </div>
+            <div>
+              <h3 className="cobb-title">🔥 Live Battle Room Open!</h3>
+              <p className="cobb-sub">
+                Hosted by {activeBattle.teacherName || 'Teacher'} · {activeBattle.questions?.length || 10} Words · {activeBattle.status === 'lobby' ? 'Waiting for players' : 'In Progress'}
+              </p>
+            </div>
+          </div>
+          <button type="button" className="cobb-btn" onClick={() => setShowBattleModal(true)}>
+            ⚡ Enter Battle
+          </button>
+        </div>
+      )}
+
+      {/* ── Dedicated Full Screen Battle Modal ── */}
+      {(showBattleModal || (activeBattle && activeBattle.participants?.[user?.uid] && activeBattle.status !== 'finished')) && (
         <GroupLiveBattle
-          groupId={membership.groupId}
-          groupName={membership.groupName || 'Group'}
+          groupId={membership?.groupId}
+          groupName={membership?.groupName || 'Group'}
           isTeacher={false}
           userUid={user?.uid}
           userName={displayName}
+          isModal={true}
+          onClose={() => setShowBattleModal(false)}
         />
       )}
 

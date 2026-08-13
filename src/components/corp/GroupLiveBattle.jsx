@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo } from 'react';
-import { Swords, Users, Play, Trophy, Check, X, Award, Zap, AlertTriangle, ArrowLeft, RefreshCw } from 'lucide-react';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { Swords, Users, Play, Trophy, Check, X, Award, Zap, AlertTriangle, ArrowLeft, RefreshCw, Timer } from 'lucide-react';
 import {
   subscribeGroupBattle,
   createGroupBattle,
@@ -20,8 +20,8 @@ function shuffleArray(arr) {
   return a;
 }
 
-// Build 10-15 multiple choice questions from selected sets
-function generateQuestionsFromSets(selectedSets) {
+// Build multiple choice questions from selected sets limited to maxCount
+function generateQuestionsFromSets(selectedSets, maxCount = 10) {
   const allWords = [];
   (selectedSets || []).forEach(set => {
     (set.words || []).forEach(w => {
@@ -39,7 +39,7 @@ function generateQuestionsFromSets(selectedSets) {
   if (allWords.length === 0) return [];
 
   const shuffled = shuffleArray(allWords);
-  const selectedWords = shuffled.slice(0, Math.min(15, allWords.length));
+  const selectedWords = shuffled.slice(0, Math.min(maxCount, allWords.length));
   const allTranslations = Array.from(new Set(allWords.map(w => w.translation)));
 
   return selectedWords.map((w, idx) => {
@@ -77,10 +77,13 @@ export default function GroupLiveBattle({
   userUid = '',
   userName = 'User',
   availablePacks = [],
-  onBack = null
+  onBack = null,
+  isModal = false,
+  onClose = null
 }) {
   const [battleData, setBattleData] = useState(null);
   const [selectedSetKeys, setSelectedSetKeys] = useState(new Set());
+  const [maxWordsCount, setMaxWordsCount] = useState(10); // Teacher configurable max words
 
   // Student Game State
   const [currentQIndex, setCurrentQIndex] = useState(0);
@@ -90,6 +93,10 @@ export default function GroupLiveBattle({
   const [isAnswering, setIsAnswering] = useState(false); // Strict anti-double-click lock
   const [selectedChoice, setSelectedChoice] = useState(null);
   const [gameFinished, setGameFinished] = useState(false);
+  const [lastPointsEarned, setLastPointsEarned] = useState(null);
+
+  // Timer reference for speed bonus calculation
+  const questionStartTimeRef = useRef(Date.now());
 
   // Subscribe to real-time battle state from Firebase
   useEffect(() => {
@@ -110,8 +117,23 @@ export default function GroupLiveBattle({
       setIsAnswering(false);
       setSelectedChoice(null);
       setGameFinished(false);
+      setLastPointsEarned(null);
     }
   }, [battleData?.createdAt, battleData?.status]);
+
+  // Reset question timer whenever question index changes
+  useEffect(() => {
+    questionStartTimeRef.current = Date.now();
+  }, [currentQIndex]);
+
+  // AUTO-FINISH BATTLE: When ALL joined participants have finished all questions
+  useEffect(() => {
+    if (!battleData || battleData.status !== 'active') return;
+    const participants = Object.values(battleData.participants || {});
+    if (participants.length > 0 && participants.every(p => p.finished === true)) {
+      endGroupBattle(groupId);
+    }
+  }, [battleData?.participants, battleData?.status, groupId]);
 
   // Extract all available sets/units across assigned packs
   const availableSets = useMemo(() => {
@@ -130,7 +152,6 @@ export default function GroupLiveBattle({
           }
         });
       });
-      // Fallback for flat units
       if (!pack.months && (pack.units || []).length > 0) {
         (pack.units || []).forEach(unit => {
           if ((unit.words || []).length > 0) {
@@ -156,14 +177,14 @@ export default function GroupLiveBattle({
     setSelectedSetKeys(next);
   };
 
-  // Teacher launches new battle room
+  // Teacher launches new battle room with selected max words count
   const handleTeacherCreateBattle = async () => {
     const chosenSets = availableSets.filter(s => selectedSetKeys.has(s.key));
     if (chosenSets.length === 0) {
       alert('Please select at least one word set for the battle!');
       return;
     }
-    const questions = generateQuestionsFromSets(chosenSets);
+    const questions = generateQuestionsFromSets(chosenSets, maxWordsCount);
     if (questions.length === 0) {
       alert('No valid words found in the selected sets.');
       return;
@@ -186,7 +207,7 @@ export default function GroupLiveBattle({
     await joinGroupBattle(groupId, userUid, userName);
   };
 
-  // Student Anti-Double-Click Answer Handler
+  // Student Anti-Double-Click & Speed-Bonus Answer Handler
   const handleAnswerOption = (choice) => {
     if (isAnswering || gameFinished || !battleData || battleData.status !== 'active') return;
 
@@ -199,7 +220,18 @@ export default function GroupLiveBattle({
     if (!currentQ) return;
 
     const isCorrect = choice === currentQ.correctAnswer;
-    const pointsEarned = isCorrect ? 100 : 0;
+    const elapsedSec = (Date.now() - questionStartTimeRef.current) / 1000;
+    
+    let basePoints = isCorrect ? 100 : 0;
+    let speedBonus = 0;
+
+    if (isCorrect) {
+      // Speed bonus: up to 50 bonus points for fast responses within 10 seconds!
+      speedBonus = Math.max(0, Math.round((10 - elapsedSec) * 5));
+    }
+
+    const pointsEarned = basePoints + speedBonus;
+    setLastPointsEarned({ points: pointsEarned, speedBonus, isCorrect });
 
     const newScore = score + pointsEarned;
     const newCorrect = correctCount + (isCorrect ? 1 : 0);
@@ -218,16 +250,17 @@ export default function GroupLiveBattle({
       finished: isLastQ
     });
 
-    // Advance to next question after 800ms
+    // Advance to next question after 850ms
     setTimeout(() => {
       setSelectedChoice(null);
+      setLastPointsEarned(null);
       if (isLastQ) {
         setGameFinished(true);
       } else {
         setCurrentQIndex(prev => prev + 1);
         setIsAnswering(false); // UNLOCK ONLY AFTER ADVANCING
       }
-    }, 800);
+    }, 850);
   };
 
   // Sort participants by score descending for real-time Leaderboard
@@ -239,12 +272,12 @@ export default function GroupLiveBattle({
 
   const hasJoined = Boolean(battleData?.participants?.[userUid]);
 
-  // ── TEACHER VIEW RENDER ───────────────────────────────────────────────────
-  if (isTeacher) {
-    // 1. Teacher Setup Screen (No active battle room)
-    if (!battleData || battleData.status === 'finished') {
-      return (
-        <div className="glb-container">
+  // ── RENDER CONTENT ────────────────────────────────────────────────────────
+  const renderMainContent = () => {
+    // 1. TEACHER SETUP SCREEN
+    if (isTeacher) {
+      if (!battleData || battleData.status === 'finished') {
+        return (
           <div className="glb-card">
             <div className="glb-header-hero">
               <div className="glb-icon-badge">
@@ -252,13 +285,31 @@ export default function GroupLiveBattle({
               </div>
               <div>
                 <h2 className="glb-title">Live Group Battle</h2>
-                <p className="glb-subtitle">Select word sets and host a real-time battle for {groupName}!</p>
+                <p className="glb-subtitle">Configure sets and max word count for {groupName}!</p>
               </div>
             </div>
 
+            {/* Max Word Count Configurator */}
+            <div className="glb-sets-section">
+              <span className="glb-section-label">MAX WORDS PER BATTLE</span>
+              <div className="glb-word-count-row">
+                {[5, 10, 15, 20, 25].map(cnt => (
+                  <button
+                    key={cnt}
+                    type="button"
+                    className={`glb-count-btn ${maxWordsCount === cnt ? 'active' : ''}`}
+                    onClick={() => setMaxWordsCount(cnt)}
+                  >
+                    {cnt} Words
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Word Sets Picker */}
             <div className="glb-sets-section">
               <span className="glb-section-label">
-                SELECT WORD SETS FOR BATTLE ({selectedSetKeys.size} selected)
+                SELECT WORD SETS ({selectedSetKeys.size} selected)
               </span>
 
               {availableSets.length === 0 ? (
@@ -302,18 +353,16 @@ export default function GroupLiveBattle({
                 disabled={selectedSetKeys.size === 0}
                 onClick={handleTeacherCreateBattle}
               >
-                <Play size={18} /> Launch Battle Lobby
+                <Play size={18} /> Launch Battle Lobby ({maxWordsCount} Words)
               </button>
             </div>
           </div>
-        </div>
-      );
-    }
+        );
+      }
 
-    // 2. Teacher Lobby View (Waiting for students to join)
-    if (battleData.status === 'lobby') {
-      return (
-        <div className="glb-container">
+      // 2. TEACHER LOBBY VIEW
+      if (battleData.status === 'lobby') {
+        return (
           <div className="glb-card">
             <div className="glb-header-hero">
               <div className="glb-icon-badge pulsing">
@@ -321,7 +370,7 @@ export default function GroupLiveBattle({
               </div>
               <div>
                 <h2 className="glb-title">Live Battle Lobby Open</h2>
-                <p className="glb-subtitle">Students can now join from their group screen!</p>
+                <p className="glb-subtitle">Max words: {battleData.questions?.length || 10} · Students joining in real-time</p>
               </div>
             </div>
 
@@ -363,21 +412,21 @@ export default function GroupLiveBattle({
               </button>
             </div>
           </div>
-        </div>
-      );
-    }
+        );
+      }
 
-    // 3. Teacher Active Battle Leaderboard View
-    return (
-      <div className="glb-container">
+      // 3. TEACHER ACTIVE / LEADERBOARD VIEW
+      return (
         <div className="glb-card">
           <div className="glb-header-hero">
             <div className="glb-icon-badge gold">
               <Trophy size={28} />
             </div>
             <div>
-              <h2 className="glb-title">Battle in Progress</h2>
-              <p className="glb-subtitle">Real-time leaderboard & scores</p>
+              <h2 className="glb-title">
+                {battleData.status === 'finished' ? 'Battle Finished! 🏆' : 'Battle in Progress ⚡'}
+              </h2>
+              <p className="glb-subtitle">Real-time leaderboard · Auto-finishes when everyone completes</p>
             </div>
           </div>
 
@@ -397,7 +446,7 @@ export default function GroupLiveBattle({
                   <div className="glb-lb-user">
                     <strong className="glb-lb-name">{p.name}</strong>
                     <span className="glb-lb-progress">
-                      {p.totalAnswered || 0} / {(battleData.questions || []).length} answered
+                      {p.totalAnswered || 0} / {(battleData.questions || []).length} answered {p.finished ? '✓ Done' : ''}
                     </span>
                   </div>
                   <div className="glb-lb-score">
@@ -415,65 +464,20 @@ export default function GroupLiveBattle({
             </button>
           </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 
-  // ── STUDENT VIEW RENDER ───────────────────────────────────────────────────
-  if (!battleData || battleData.status === 'finished') {
-    return null; // No active battle room for students
-  }
-
-  // Student Lobby (Not joined or joined waiting for start)
-  if (battleData.status === 'lobby') {
-    return (
-      <div className="glb-container">
-        <div className="glb-card">
-          <div className="glb-header-hero">
-            <div className="glb-icon-badge pulsing">
-              <Swords size={28} />
-            </div>
-            <div>
-              <h2 className="glb-title">🔥 Live Battle Invitation!</h2>
-              <p className="glb-subtitle">Hosted by {battleData.teacherName || 'Teacher'}</p>
-            </div>
-          </div>
-
-          {!hasJoined ? (
-            <div className="glb-lobby-join-box">
-              <p className="glb-join-desc">
-                Join your classmates for a real-time vocabulary battle! Earn points and climb the leaderboard.
-              </p>
-              <button type="button" className="glb-btn-primary" onClick={handleStudentJoinLobby}>
-                <Swords size={18} /> Join Live Battle
-              </button>
-            </div>
-          ) : (
-            <div className="glb-empty-card">
-              <RefreshCw className="spinning" size={24} />
-              <span>You're in! Waiting for the teacher to click Start...</span>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  // Student Active Battle Quiz Arena
-  const questions = battleData.questions || [];
-  const currentQ = questions[currentQIndex];
-
-  if (gameFinished || currentQIndex >= questions.length || !currentQ) {
-    return (
-      <div className="glb-container">
+    // ── STUDENT VIEW RENDER ─────────────────────────────────────────────────
+    if (!battleData || battleData.status === 'finished') {
+      return (
         <div className="glb-card">
           <div className="glb-header-hero">
             <div className="glb-icon-badge gold">
               <Award size={32} />
             </div>
             <div>
-              <h2 className="glb-title">Battle Completed! 🎉</h2>
-              <p className="glb-subtitle">Your final score: {score} pts ({correctCount}/{questions.length} correct)</p>
+              <h2 className="glb-title">Battle Ended! 🏆</h2>
+              <p className="glb-subtitle">Final scores and ranking</p>
             </div>
           </div>
 
@@ -481,7 +485,7 @@ export default function GroupLiveBattle({
             <span className="glb-section-label">FINAL LEADERBOARD</span>
             <div className="glb-lb-list">
               {leaderboardList.map((p, rank) => (
-                <div key={p.uid} className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''}`}>
+                <div key={p.uid} className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''} ${rank === 0 ? 'top-1' : ''}`}>
                   <div className="glb-lb-rank">
                     {rank === 0 ? '🥇 1' : rank === 1 ? '🥈 2' : rank === 2 ? '🥉 3' : `#${rank + 1}`}
                   </div>
@@ -495,13 +499,102 @@ export default function GroupLiveBattle({
               ))}
             </div>
           </div>
-        </div>
-      </div>
-    );
-  }
 
-  return (
-    <div className="glb-container">
+          {onClose && (
+            <div className="glb-footer">
+              <button type="button" className="glb-btn-secondary" onClick={onClose}>
+                Close View
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // Student Lobby
+    if (battleData.status === 'lobby') {
+      return (
+        <div className="glb-card">
+          <div className="glb-header-hero">
+            <div className="glb-icon-badge pulsing">
+              <Swords size={28} />
+            </div>
+            <div>
+              <h2 className="glb-title">🔥 Live Battle Lobby!</h2>
+              <p className="glb-subtitle">Hosted by {battleData.teacherName || 'Teacher'} · {battleData.questions?.length || 10} Words</p>
+            </div>
+          </div>
+
+          {!hasJoined ? (
+            <div className="glb-lobby-join-box">
+              <p className="glb-join-desc">
+                Join your classmates for a real-time speed battle! Fast & accurate answers earn maximum points.
+              </p>
+              <button type="button" className="glb-btn-primary" onClick={handleStudentJoinLobby}>
+                <Swords size={18} /> Join Battle Lobby
+              </button>
+            </div>
+          ) : (
+            <div className="glb-empty-card">
+              <RefreshCw className="spinning" size={24} />
+              <span>You're in! Waiting for teacher to click Start...</span>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // Student Active Battle Quiz Arena
+    const questions = battleData.questions || [];
+    const currentQ = questions[currentQIndex];
+
+    if (gameFinished || currentQIndex >= questions.length || !currentQ) {
+      return (
+        <div className="glb-card">
+          <div className="glb-header-hero">
+            <div className="glb-icon-badge gold">
+              <Award size={32} />
+            </div>
+            <div>
+              <h2 className="glb-title">All Questions Completed! 🎉</h2>
+              <p className="glb-subtitle">Your score: {score} pts · Waiting for all players to finish...</p>
+            </div>
+          </div>
+
+          <div className="glb-leaderboard-card">
+            <span className="glb-section-label">LIVE SCOREBOARD</span>
+            <div className="glb-lb-list">
+              {leaderboardList.map((p, rank) => (
+                <div key={p.uid} className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''}`}>
+                  <div className="glb-lb-rank">
+                    {rank === 0 ? '🥇 1' : rank === 1 ? '🥈 2' : rank === 2 ? '🥉 3' : `#${rank + 1}`}
+                  </div>
+                  <div className="glb-lb-user">
+                    <strong className="glb-lb-name">{p.name} {p.uid === userUid ? '(You)' : ''}</strong>
+                    <span className="glb-lb-progress">
+                      {p.finished ? '✓ Complete' : 'In progress...'}
+                    </span>
+                  </div>
+                  <div className="glb-lb-score">
+                    <span>{p.score || 0} pts</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {onClose && (
+            <div className="glb-footer">
+              <button type="button" className="glb-btn-secondary" onClick={onClose}>
+                Close
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    return (
       <div className="glb-card">
         {/* Battle Top Bar */}
         <div className="glb-game-topbar">
@@ -526,6 +619,16 @@ export default function GroupLiveBattle({
         <div className="glb-question-card">
           <span className="glb-pos-badge">{currentQ.partOfSpeech}</span>
           <h2 className="glb-question-word">{currentQ.word}</h2>
+
+          {lastPointsEarned && (
+            <div className={`glb-points-float ${lastPointsEarned.isCorrect ? 'plus' : 'zero'}`}>
+              {lastPointsEarned.isCorrect ? (
+                <>+{lastPointsEarned.points} pts {lastPointsEarned.speedBonus > 0 ? `(⚡ +${lastPointsEarned.speedBonus} speed bonus!)` : ''}</>
+              ) : (
+                <>Incorrect</>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Answer Options Grid with Strict Anti-Double-Click Lock */}
@@ -557,6 +660,30 @@ export default function GroupLiveBattle({
           })}
         </div>
       </div>
-    </div>
-  );
+    );
+  };
+
+  // Render inside Modal overlay if requested
+  if (isModal) {
+    return (
+      <div className="glb-modal-overlay">
+        <div className="glb-modal-topbar">
+          <div className="glb-modal-title-group">
+            <Swords size={20} color="#818cf8" />
+            <span className="glb-modal-title">Live Battle — {groupName}</span>
+          </div>
+          {onClose && (
+            <button type="button" className="glb-modal-close-btn" onClick={onClose} aria-label="Close">
+              <X size={18} />
+            </button>
+          )}
+        </div>
+        <div className="glb-modal-body">
+          <div className="glb-container">{renderMainContent()}</div>
+        </div>
+      </div>
+    );
+  }
+
+  return <div className="glb-container">{renderMainContent()}</div>;
 }
