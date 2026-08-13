@@ -12,7 +12,6 @@ import { playSound } from '../../utils/feedback';
 import { computeRetentionStats } from '../../utils/memoryEngine';
 import { getConfusionPairs } from '../../experiment/experimentDB';
 import WordList from '../../components/Words/WordList';
-import WordForm from '../../components/Words/WordForm';
 import BulkImportForm from '../../components/Words/BulkImportForm';
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
@@ -125,8 +124,7 @@ export default function PackDetail() {
 
   const handleEditWord = (word) => {
     if (pack?.name === 'Irregular Verbs') return;
-    setEditingWord(word);
-    setShowWordForm(true);
+    navigate(`/packs/${packId}/word/edit/${word.id}`);
   };
 
   const handleBulkImport = async (newWords, onProgress) => {
@@ -280,14 +278,6 @@ export default function PackDetail() {
         language={pack.language || 'en-US'}
       />
 
-      <WordForm
-        isOpen={showWordForm}
-        onClose={() => { setShowWordForm(false); setEditingWord(null); }}
-        onSave={handleSaveWord}
-        editWord={editingWord}
-        packLanguage={pack.language || 'en-US'}
-      />
-
       <BulkImportForm
         isOpen={showBulkImportForm}
         onClose={() => setShowBulkImportForm(false)}
@@ -304,7 +294,7 @@ export default function PackDetail() {
 
       {pack.name !== 'Irregular Verbs' && (
         <SpeedDialFAB
-          onAddWord={() => { setEditingWord(null); setShowWordForm(true); }}
+          onAddWord={() => navigate(`/packs/${packId}/word/new`)}
           onImportJson={() => setShowBulkImportForm(true)}
           onExtractPhoto={() => setShowPhotoExtractorModal(true)}
         />
