@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X } from 'lucide-react';
+import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X, Pencil, Trash2 } from 'lucide-react';
 import { updateCustomPack } from '../../services/corpService';
 import { updateIndependentCustomPack } from '../../services/independentTeacherService';
+import TeacherAddWordModal from './TeacherAddWordModal';
 import './TeacherPackViewer.css';
 
 const POS_LABELS = {
@@ -14,8 +15,6 @@ const POS_LABELS = {
   other: 'other'
 };
 
-const EMPTY_WORD_FORM = { word: '', translation: '', partOfSpeech: 'noun', definition: '', example: '' };
-
 function deriveMonths(pack) {
   if (pack.months && pack.months.length > 0) return pack.months;
   if (pack.units && pack.units.length > 0) return [{ id: 'm1', title: 'Month 1', units: pack.units }];
@@ -23,19 +22,28 @@ function deriveMonths(pack) {
   return [];
 }
 
-export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, independentUid = null, onUpdate }) {
+export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, independentUid = null, askConfirm = null, onUpdate }) {
   const [months, setMonths] = useState(() => deriveMonths(pack));
   const [monthId, setMonthId] = useState(null);
   const [unitId, setUnitId] = useState(null);
   const [search, setSearch] = useState('');
   const [saving, setSaving] = useState(false);
 
+  // Month editing / adding state
   const [addingMonth, setAddingMonth] = useState(false);
   const [newMonthTitle, setNewMonthTitle] = useState('');
+  const [editingMonthId, setEditingMonthId] = useState(null);
+  const [editingMonthTitle, setEditingMonthTitle] = useState('');
+
+  // Unit/Set editing / adding state
   const [addingUnit, setAddingUnit] = useState(false);
   const [newUnitTitle, setNewUnitTitle] = useState('');
-  const [addingWord, setAddingWord] = useState(false);
-  const [wordForm, setWordForm] = useState(EMPTY_WORD_FORM);
+  const [editingUnitId, setEditingUnitId] = useState(null);
+  const [editingUnitTitle, setEditingUnitTitle] = useState('');
+
+  // Dedicated Word addition / editing modal state
+  const [showAddWordModal, setShowAddWordModal] = useState(false);
+  const [editingWord, setEditingWord] = useState(null);
 
   useEffect(() => {
     setMonths(deriveMonths(pack));
@@ -76,6 +84,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
     }
   };
 
+  // ── Month Handlers ──────────────────────────────────────────────────────────
   const handleAddMonth = (e) => {
     e.preventDefault();
     const title = newMonthTitle.trim();
@@ -86,6 +95,44 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
     persist([...months, newMonth]);
   };
 
+  const handleStartEditMonth = (m, e) => {
+    e.stopPropagation();
+    setEditingMonthId(m.id);
+    setEditingMonthTitle(m.title);
+  };
+
+  const handleSaveMonthTitle = (mId, e) => {
+    if (e) e.preventDefault();
+    const title = editingMonthTitle.trim();
+    if (!title) return;
+    const updated = months.map(m => m.id === mId ? { ...m, title } : m);
+    setEditingMonthId(null);
+    persist(updated);
+  };
+
+  const handleDeleteMonth = (m, e) => {
+    e.stopPropagation();
+    const executeDelete = () => {
+      const updated = months.filter(item => item.id !== m.id);
+      if (monthId === m.id) setMonthId(null);
+      persist(updated);
+    };
+
+    if (askConfirm) {
+      askConfirm({
+        title: 'Delete Month',
+        message: `Delete "${m.title}" and all its topics?`,
+        confirmLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        danger: true,
+        onConfirm: executeDelete,
+      });
+    } else if (window.confirm(`Delete "${m.title}" and all its topics?`)) {
+      executeDelete();
+    }
+  };
+
+  // ── Unit/Set Handlers ────────────────────────────────────────────────────────
   const handleAddUnit = (e) => {
     e.preventDefault();
     const title = newUnitTitle.trim();
@@ -97,27 +144,110 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
     persist(updated);
   };
 
-  const handleAddWord = (e) => {
-    e.preventDefault();
-    if (!wordForm.word.trim() || !wordForm.translation.trim() || !activeMonth || !activeUnit) return;
-    const wordItem = {
-      id: 'w_' + Date.now(),
-      word: wordForm.word.trim(),
-      translation: wordForm.translation.trim(),
-      partOfSpeech: wordForm.partOfSpeech || 'noun',
-      definition: wordForm.definition.trim(),
-      example: wordForm.example.trim(),
+  const handleStartEditUnit = (u, e) => {
+    e.stopPropagation();
+    setEditingUnitId(u.id);
+    setEditingUnitTitle(u.title);
+  };
+
+  const handleSaveUnitTitle = (uId, e) => {
+    if (e) e.preventDefault();
+    const title = editingUnitTitle.trim();
+    if (!title || !activeMonth) return;
+    const updated = months.map(m => m.id === activeMonth.id ? {
+      ...m,
+      units: (m.units || []).map(u => u.id === uId ? { ...u, title } : u)
+    } : m);
+    setEditingUnitId(null);
+    persist(updated);
+  };
+
+  const handleDeleteUnit = (u, e) => {
+    e.stopPropagation();
+    const executeDelete = () => {
+      const updated = months.map(m => m.id === activeMonth.id ? {
+        ...m,
+        units: (m.units || []).filter(item => item.id !== u.id)
+      } : m);
+      if (unitId === u.id) setUnitId(null);
+      persist(updated);
     };
+
+    if (askConfirm) {
+      askConfirm({
+        title: 'Delete Set',
+        message: `Delete "${u.title}" and all its words?`,
+        confirmLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        danger: true,
+        onConfirm: executeDelete,
+      });
+    } else if (window.confirm(`Delete "${u.title}" and all its words?`)) {
+      executeDelete();
+    }
+  };
+
+  // ── Word Handlers ────────────────────────────────────────────────────────────
+  const handleAddWords = (newWordsArray) => {
+    if (!activeMonth || !activeUnit) return;
     const updated = months.map(m => {
       if (m.id !== activeMonth.id) return m;
       return {
         ...m,
-        units: (m.units || []).map(u => u.id === activeUnit.id ? { ...u, words: [...(u.words || []), wordItem] } : u),
+        units: (m.units || []).map(u => u.id === activeUnit.id ? {
+          ...u,
+          words: [...(u.words || []), ...newWordsArray]
+        } : u),
       };
     });
-    setWordForm(EMPTY_WORD_FORM);
-    setAddingWord(false);
     persist(updated);
+  };
+
+  const handleSaveEditWord = (updatedWord) => {
+    if (!activeMonth || !activeUnit) return;
+    const updated = months.map(m => {
+      if (m.id !== activeMonth.id) return m;
+      return {
+        ...m,
+        units: (m.units || []).map(u => u.id === activeUnit.id ? {
+          ...u,
+          words: (u.words || []).map(w => w.id === updatedWord.id ? updatedWord : w)
+        } : u),
+      };
+    });
+    setEditingWord(null);
+    setShowAddWordModal(false);
+    persist(updated);
+  };
+
+  const handleDeleteWord = (w, e) => {
+    e.stopPropagation();
+    const executeDelete = () => {
+      const updated = months.map(m => {
+        if (m.id !== activeMonth.id) return m;
+        return {
+          ...m,
+          units: (m.units || []).map(u => u.id === activeUnit.id ? {
+            ...u,
+            words: (u.words || []).filter(item => item.id !== w.id)
+          } : u),
+        };
+      });
+      persist(updated);
+    };
+
+    if (askConfirm) {
+      askConfirm({
+        title: 'Delete Word',
+        message: `Delete "${w.word}"?`,
+        confirmLabel: 'Delete',
+        cancelLabel: 'Cancel',
+        danger: true,
+        onConfirm: executeDelete,
+      });
+    } else if (window.confirm(`Delete "${w.word}"?`)) {
+      executeDelete();
+    }
   };
 
   return (
@@ -128,7 +258,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           type="button"
           className="tpv-back"
           onClick={() => {
-            if (activeUnit) { setUnitId(null); setSearch(''); setAddingWord(false); }
+            if (activeUnit) { setUnitId(null); setSearch(''); }
             else if (activeMonth) { setMonthId(null); setAddingUnit(false); }
             else onBack();
           }}
@@ -158,12 +288,60 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           )}
 
           {months.map((m, idx) => (
-            <button type="button" key={m.id} className="tpv-row" onClick={() => setMonthId(m.id)}>
-              <span className="tpv-row-num">{idx + 1}</span>
-              <span className="tpv-row-label">{m.title}</span>
-              <span className="tpv-row-meta">{(m.units || []).length} topics</span>
-              <ChevronRight size={18} className="tpv-row-arrow" />
-            </button>
+            editingMonthId === m.id ? (
+              <form key={m.id} onSubmit={(e) => handleSaveMonthTitle(m.id, e)} className="tpv-add-form">
+                <input
+                  type="text"
+                  placeholder="Month name"
+                  value={editingMonthTitle}
+                  onChange={e => setEditingMonthTitle(e.target.value)}
+                  autoFocus
+                />
+                <button type="submit" className="tpv-add-confirm" title="Save" disabled={saving}>
+                  <Check size={16} />
+                </button>
+                <button type="button" className="tpv-add-cancel" title="Cancel" onClick={() => setEditingMonthId(null)}>
+                  <X size={16} />
+                </button>
+              </form>
+            ) : (
+              <button type="button" key={m.id} className="tpv-row" onClick={() => setMonthId(m.id)}>
+                <span className="tpv-row-num">{idx + 1}</span>
+                <span className="tpv-row-label">{m.title}</span>
+                <span className="tpv-row-meta">{(m.units || []).length} topics</span>
+                
+                {editable && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginLeft: '6px' }} onClick={e => e.stopPropagation()}>
+                    <button
+                      type="button"
+                      title="Edit month"
+                      style={{
+                        background: 'rgba(99, 102, 241, 0.14)', border: '1px solid rgba(99, 102, 241, 0.25)',
+                        borderRadius: '8px', color: '#818cf8', width: '26px', height: '26px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
+                      }}
+                      onClick={e => handleStartEditMonth(m, e)}
+                    >
+                      <Pencil size={13} />
+                    </button>
+                    <button
+                      type="button"
+                      title="Delete month"
+                      style={{
+                        background: 'rgba(239, 68, 68, 0.14)', border: '1px solid rgba(239, 68, 68, 0.25)',
+                        borderRadius: '8px', color: '#ef4444', width: '26px', height: '26px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
+                      }}
+                      onClick={e => handleDeleteMonth(m, e)}
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  </div>
+                )}
+
+                <ChevronRight size={18} className="tpv-row-arrow" />
+              </button>
+            )
           ))}
 
           {editable && (
@@ -199,12 +377,60 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           )}
 
           {(activeMonth.units || []).map((u, idx) => (
-            <button type="button" key={u.id} className="tpv-row" onClick={() => setUnitId(u.id)}>
-              <span className="tpv-row-num">{idx + 1}</span>
-              <span className="tpv-row-label">{u.title}</span>
-              <span className="tpv-row-meta">{(u.words || []).length} words</span>
-              <ChevronRight size={18} className="tpv-row-arrow" />
-            </button>
+            editingUnitId === u.id ? (
+              <form key={u.id} onSubmit={(e) => handleSaveUnitTitle(u.id, e)} className="tpv-add-form">
+                <input
+                  type="text"
+                  placeholder="Set name"
+                  value={editingUnitTitle}
+                  onChange={e => setEditingUnitTitle(e.target.value)}
+                  autoFocus
+                />
+                <button type="submit" className="tpv-add-confirm" title="Save" disabled={saving}>
+                  <Check size={16} />
+                </button>
+                <button type="button" className="tpv-add-cancel" title="Cancel" onClick={() => setEditingUnitId(null)}>
+                  <X size={16} />
+                </button>
+              </form>
+            ) : (
+              <button type="button" key={u.id} className="tpv-row" onClick={() => setUnitId(u.id)}>
+                <span className="tpv-row-num">{idx + 1}</span>
+                <span className="tpv-row-label">{u.title}</span>
+                <span className="tpv-row-meta">{(u.words || []).length} words</span>
+
+                {editable && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginLeft: '6px' }} onClick={e => e.stopPropagation()}>
+                    <button
+                      type="button"
+                      title="Edit set"
+                      style={{
+                        background: 'rgba(99, 102, 241, 0.14)', border: '1px solid rgba(99, 102, 241, 0.25)',
+                        borderRadius: '8px', color: '#818cf8', width: '26px', height: '26px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
+                      }}
+                      onClick={e => handleStartEditUnit(u, e)}
+                    >
+                      <Pencil size={13} />
+                    </button>
+                    <button
+                      type="button"
+                      title="Delete set"
+                      style={{
+                        background: 'rgba(239, 68, 68, 0.14)', border: '1px solid rgba(239, 68, 68, 0.25)',
+                        borderRadius: '8px', color: '#ef4444', width: '26px', height: '26px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
+                      }}
+                      onClick={e => handleDeleteUnit(u, e)}
+                    >
+                      <Trash2 size={13} />
+                    </button>
+                  </div>
+                )}
+
+                <ChevronRight size={18} className="tpv-row-arrow" />
+              </button>
+            )
           ))}
 
           {editable && (
@@ -242,32 +468,20 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                 onChange={e => setSearch(e.target.value)}
               />
             </div>
-            {editable && !addingWord && (
-              <button type="button" className="tpv-add-word-btn" onClick={() => setAddingWord(true)} title="Add word">
+            {editable && (
+              <button
+                type="button"
+                className="tpv-add-word-btn"
+                onClick={() => {
+                  setEditingWord(null);
+                  setShowAddWordModal(true);
+                }}
+                title="Add word"
+              >
                 <Plus size={18} />
               </button>
             )}
           </div>
-
-          {editable && addingWord && (
-            <form onSubmit={handleAddWord} className="tpv-word-add-form">
-              <div className="tpv-word-add-row">
-                <input type="text" placeholder="Word *" value={wordForm.word} onChange={e => setWordForm({ ...wordForm, word: e.target.value })} autoFocus required />
-                <input type="text" placeholder="Translation *" value={wordForm.translation} onChange={e => setWordForm({ ...wordForm, translation: e.target.value })} required />
-                <select value={wordForm.partOfSpeech} onChange={e => setWordForm({ ...wordForm, partOfSpeech: e.target.value })}>
-                  {Object.keys(POS_LABELS).map(pos => <option key={pos} value={pos}>{POS_LABELS[pos]}</option>)}
-                </select>
-              </div>
-              <div className="tpv-word-add-row">
-                <input type="text" placeholder="Definition (optional)" value={wordForm.definition} onChange={e => setWordForm({ ...wordForm, definition: e.target.value })} />
-                <input type="text" placeholder="Example (optional)" value={wordForm.example} onChange={e => setWordForm({ ...wordForm, example: e.target.value })} />
-              </div>
-              <div className="tpv-word-add-actions">
-                <button type="button" onClick={() => { setAddingWord(false); setWordForm(EMPTY_WORD_FORM); }}>Cancel</button>
-                <button type="submit" disabled={saving}>{saving ? 'Saving...' : 'Add Word'}</button>
-              </div>
-            </form>
-          )}
 
           {filteredWords.length === 0 ? (
             <div className="tpv-empty">
@@ -280,9 +494,40 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                 <div key={w.id} className="tpv-word-card">
                   <div className="tpv-word-top">
                     <strong>{w.word}</strong>
-                    <span className={`tpv-pos tpv-pos-${w.partOfSpeech || 'noun'}`}>
-                      {POS_LABELS[w.partOfSpeech] || POS_LABELS.other}
-                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span className={`tpv-pos tpv-pos-${w.partOfSpeech || 'noun'}`}>
+                        {POS_LABELS[w.partOfSpeech] || POS_LABELS.other}
+                      </span>
+                      {editable && (
+                        <>
+                          <button
+                            type="button"
+                            title="Edit word"
+                            style={{
+                              background: 'transparent', border: 'none', color: '#818cf8',
+                              cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center'
+                            }}
+                            onClick={() => {
+                              setEditingWord(w);
+                              setShowAddWordModal(true);
+                            }}
+                          >
+                            <Pencil size={13} />
+                          </button>
+                          <button
+                            type="button"
+                            title="Delete word"
+                            style={{
+                              background: 'transparent', border: 'none', color: '#ef4444',
+                              cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center'
+                            }}
+                            onClick={e => handleDeleteWord(w, e)}
+                          >
+                            <Trash2 size={13} />
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </div>
                   <div className="tpv-word-translation">{w.translation}</div>
                   {w.definition && <div className="tpv-word-def">{w.definition}</div>}
@@ -293,6 +538,21 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           )}
         </div>
       )}
+
+      {/* Dedicated Word Addition & Editing Modal */}
+      <TeacherAddWordModal
+        open={showAddWordModal}
+        onClose={() => {
+          setShowAddWordModal(false);
+          setEditingWord(null);
+        }}
+        onAddWords={handleAddWords}
+        onSaveEditWord={handleSaveEditWord}
+        editWord={editingWord}
+        saving={saving}
+        monthTitle={activeMonth?.title || ''}
+        unitTitle={activeUnit?.title || ''}
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, BookOpen, ChevronRight, Plus, Search, Trash2, X } from 'lucide-react';
+import { ArrowLeft, BookOpen, ChevronRight, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
 import { auth } from '../../../../firebase';
 import TeacherPackViewer from '../../../../components/corp/TeacherPackViewer';
 import CustomPackEditor from '../../../../components/corp/CustomPackEditor';
@@ -11,6 +11,8 @@ export default function CoursesTab({ p }) {
     setShowPackEditor, showPackEditor, viewingPack, setViewingPack,
     handleDeletePack, askConfirm,
   } = p;
+
+  const [editingPack, setEditingPack] = useState(null);
 
   const confirmDeletePack = (pack) => askConfirm({
     title: 'Delete Pack',
@@ -30,24 +32,41 @@ export default function CoursesTab({ p }) {
               <button
                 type="button"
                 className="ios-back-btn"
-                onClick={() => setShowPackEditor(false)}
+                onClick={() => {
+                  setEditingPack(null);
+                  setShowPackEditor(false);
+                }}
                 title="Back"
               >
                 <ArrowLeft size={18} />
               </button>
               <div className="ios-title-group">
-                <h2 className="ios-group-title">Create New Pack</h2>
+                <h2 className="ios-group-title">{editingPack ? 'Edit Pack' : 'Create New Pack'}</h2>
               </div>
             </div>
             <CustomPackEditor
               centerId={centerId}
               independentUid={independentUid}
               ownerUid={auth.currentUser?.uid}
-              onSaved={(pack) => {
-                setCustomPacks(prev => [{ ...pack, scope: 'own' }, ...prev]);
+              editPack={editingPack}
+              onSaved={(savedPack) => {
+                setCustomPacks(prev => {
+                  const exists = prev.some(p => p.id === savedPack.id);
+                  if (exists) {
+                    return prev.map(p => p.id === savedPack.id ? { ...p, ...savedPack } : p);
+                  }
+                  return [{ ...savedPack, scope: 'own' }, ...prev];
+                });
+                if (viewingPack && viewingPack.id === savedPack.id) {
+                  setViewingPack(prev => ({ ...prev, ...savedPack }));
+                }
+                setEditingPack(null);
                 setShowPackEditor(false);
               }}
-              onCancel={() => setShowPackEditor(false)}
+              onCancel={() => {
+                setEditingPack(null);
+                setShowPackEditor(false);
+              }}
             />
           </div>
         ) : viewingPack ? (
@@ -57,6 +76,7 @@ export default function CoursesTab({ p }) {
             editable={viewingPack.scope === 'own'}
             centerId={centerId}
             independentUid={independentUid}
+            askConfirm={askConfirm}
             onUpdate={(updatedPack) => {
               setCustomPacks(prev => prev.map(p => p.id === updatedPack.id ? { ...updatedPack, scope: p.scope } : p));
             }}
@@ -181,16 +201,16 @@ export default function CoursesTab({ p }) {
                                   {pack.wordCount || (pack.words ? pack.words.length : 0)} words
                                 </span>
                               </td>
-                              <td style={{ width: '40px' }}>
-                                {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
+                              <td style={{ width: '70px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'flex-end' }}>
                                   <button
                                     type="button"
-                                    title="Delete"
+                                    title="Edit Pack"
                                     style={{
-                                      background: 'rgba(239, 68, 68, 0.14)',
-                                      border: '1px solid rgba(239, 68, 68, 0.25)',
+                                      background: 'rgba(99, 102, 241, 0.14)',
+                                      border: '1px solid rgba(99, 102, 241, 0.25)',
                                       borderRadius: '9px',
-                                      color: '#ef4444',
+                                      color: '#818cf8',
                                       width: '28px',
                                       height: '28px',
                                       display: 'flex',
@@ -201,14 +221,40 @@ export default function CoursesTab({ p }) {
                                     }}
                                     onClick={(e) => {
                                       e.stopPropagation();
-                                      confirmDeletePack(pack);
+                                      setEditingPack(pack);
+                                      setShowPackEditor(true);
                                     }}
                                   >
-                                    <Trash2 size={15} />
+                                    <Pencil size={14} />
                                   </button>
-                                ) : (
-                                  <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
-                                )}
+                                  {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
+                                    <button
+                                      type="button"
+                                      title="Delete"
+                                      style={{
+                                        background: 'rgba(239, 68, 68, 0.14)',
+                                        border: '1px solid rgba(239, 68, 68, 0.25)',
+                                        borderRadius: '9px',
+                                        color: '#ef4444',
+                                        width: '28px',
+                                        height: '28px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        cursor: 'pointer',
+                                        flexShrink: 0
+                                      }}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        confirmDeletePack(pack);
+                                      }}
+                                    >
+                                      <Trash2 size={15} />
+                                    </button>
+                                  ) : (
+                                    <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                                  )}
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -243,7 +289,7 @@ export default function CoursesTab({ p }) {
                             </span>
                           </div>
 
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
                             <span
                               style={{
                                 padding: '4px 12px',
@@ -257,6 +303,31 @@ export default function CoursesTab({ p }) {
                             >
                               {pack.wordCount || (pack.words ? pack.words.length : 0)} words
                             </span>
+
+                            <button
+                              type="button"
+                              title="Edit Pack"
+                              style={{
+                                background: 'rgba(99, 102, 241, 0.14)',
+                                border: '1px solid rgba(99, 102, 241, 0.25)',
+                                borderRadius: '9px',
+                                color: '#818cf8',
+                                width: '28px',
+                                height: '28px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                flexShrink: 0
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setEditingPack(pack);
+                                setShowPackEditor(true);
+                              }}
+                            >
+                              <Pencil size={14} />
+                            </button>
 
                             {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
                               <button
