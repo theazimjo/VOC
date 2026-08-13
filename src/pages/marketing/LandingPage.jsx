@@ -84,14 +84,10 @@ function Reveal({ children, className, delay = 0 }) {
 // view, so the number reads as a live measurement rather than static
 // decoration - same reason the roster bars below animate their fill.
 function MasteryRing({ percent, color = '#0a84ff' }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
-  const reduce = useReducedMotion();
-  const angle = (inView || reduce) ? percent * 3.6 : 0;
+  const angle = percent * 3.6;
 
   return (
     <div
-      ref={ref}
       className="lp-mastery-ring"
       style={{ '--lp-ring-angle': `${angle}deg`, '--lp-ring-color': color }}
     >
@@ -159,12 +155,7 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          <motion.div
-            className="lp-hero-visual"
-            initial={reduce ? false : { opacity: 0, scale: 0.94, y: 16 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="lp-hero-visual">
             <div className="lp-word-stack">
               {heroWords.map((w, i) => (
                 <div className={`lp-word-card lp-word-card--${i}`} key={w.word}>
@@ -176,7 +167,7 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </section>
 
         {/* ---------- Features bento ---------- */}
