@@ -515,9 +515,9 @@
   right: 0;
   bottom: 0;
   z-index: 9999;
-  background: rgba(10, 15, 30, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 15, 30, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   display: flex;
   flex-direction: column;
   animation: glbModalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -576,6 +576,49 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Timer Badge and Timer Bar */
+.glb-timer-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--pg-text-secondary, #94a3b8);
+  background: rgba(15, 23, 42, 0.5);
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--pg-hairline, rgba(255, 255, 255, 0.12));
+}
+
+.glb-timer-badge .timer-warn {
+  color: #ef4444 !important;
+  animation: glbTimerPulse 0.5s infinite alternate;
+}
+
+@keyframes glbTimerPulse {
+  from { opacity: 0.6; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1.1); }
+}
+
+.glb-timer-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.glb-timer-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%);
+  border-radius: 999px;
+  transition: width 1s linear;
+}
+
+.glb-timer-fill.warn {
+  background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%) !important;
 }
 
 /* Word Count Selector Row */

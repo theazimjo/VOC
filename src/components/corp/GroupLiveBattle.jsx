@@ -10,6 +10,64 @@ import {
 } from '../../services/groupBattleService';
 import './GroupLiveBattle.css';
 
+const QUESTION_TIME_LIMIT = 15; // 15 seconds per question
+
+// Web Audio API Sound Effects Synthesizer (Instant, zero latency, 100% browser compatible)
+function playSoundEffect(type) {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+
+    if (type === 'correct') {
+      // Ascending chime: C5 (523Hz) -> E5 (659Hz) -> G5 (784Hz) -> C6 (1046Hz)
+      const notes = [523.25, 659.25, 784.00, 1046.50];
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.07);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime + idx * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.07 + 0.15);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.07);
+        osc.stop(ctx.currentTime + idx * 0.07 + 0.16);
+      });
+    } else if (type === 'wrong') {
+      // Low buzz: Sawtooth wave 180Hz -> 120Hz
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(180, ctx.currentTime);
+      osc.frequency.linearRampToValueAtTime(120, ctx.currentTime + 0.25);
+      gain.gain.setValueAtTime(0.22, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.26);
+    } else if (type === 'victory') {
+      // Victory fanfare notes
+      const notes = [523.25, 659.25, 784.00, 1046.50, 1318.51];
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.09);
+        gain.gain.setValueAtTime(0.25, ctx.currentTime + idx * 0.09);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.09 + 0.3);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.09);
+        osc.stop(ctx.currentTime + idx * 0.09 + 0.32);
+      });
+    }
+  } catch (e) {
+    // Ignore autoplay restriction warnings
+  }
+}
+
 // Helper to shuffle an array
 function shuffleArray(arr) {
   const a = [...arr];
@@ -47,7 +105,6 @@ function generateQuestionsFromSets(selectedSets, maxCount = 10) {
     const wrongPool = allTranslations.filter(t => t !== correct);
     const wrongShuffled = shuffleArray(wrongPool).slice(0, 3);
     
-    // Fallback options if translation pool has fewer than 4 unique items
     const defaultFillers = ['To clarify', 'To accomplish', 'Essential', 'Substantial', 'Precise'];
     let fillIdx = 0;
     while (wrongShuffled.length < 3) {
@@ -94,6 +151,7 @@ export default function GroupLiveBattle({
   const [selectedChoice, setSelectedChoice] = useState(null);
   const [gameFinished, setGameFinished] = useState(false);
   const [lastPointsEarned, setLastPointsEarned] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(QUESTION_TIME_LIMIT);
 
   // Timer reference for speed bonus calculation
   const questionStartTimeRef = useRef(Date.now());
@@ -118,13 +176,30 @@ export default function GroupLiveBattle({
       setSelectedChoice(null);
       setGameFinished(false);
       setLastPointsEarned(null);
+      setTimeLeft(QUESTION_TIME_LIMIT);
     }
   }, [battleData?.createdAt, battleData?.status]);
 
-  // Reset question timer whenever question index changes
+  // Per-Question Countdown Timer effect
   useEffect(() => {
+    if (!battleData || battleData.status !== 'active' || gameFinished || isAnswering) return;
+
+    setTimeLeft(QUESTION_TIME_LIMIT);
     questionStartTimeRef.current = Date.now();
-  }, [currentQIndex]);
+
+    const interval = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          handleTimeOut();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [currentQIndex, battleData?.status, gameFinished, isAnswering]);
 
   // AUTO-FINISH BATTLE: When ALL joined participants have finished all questions
   useEffect(() => {
@@ -132,8 +207,42 @@ export default function GroupLiveBattle({
     const participants = Object.values(battleData.participants || {});
     if (participants.length > 0 && participants.every(p => p.finished === true)) {
       endGroupBattle(groupId);
+      playSoundEffect('victory');
     }
   }, [battleData?.participants, battleData?.status, groupId]);
+
+  // Handle Question Timeout (When student doesn't answer within 15 seconds)
+  const handleTimeOut = () => {
+    if (isAnswering || gameFinished) return;
+    setIsAnswering(true);
+    playSoundEffect('wrong');
+    setLastPointsEarned({ points: 0, speedBonus: 0, isCorrect: false, timeOut: true });
+
+    const questions = battleData?.questions || [];
+    const newTotal = totalAnswered + 1;
+    const isLastQ = currentQIndex + 1 >= questions.length;
+
+    setTotalAnswered(newTotal);
+
+    updateGroupBattleScore(groupId, userUid, {
+      score,
+      correctCount,
+      totalAnswered: newTotal,
+      finished: isLastQ
+    });
+
+    setTimeout(() => {
+      setSelectedChoice(null);
+      setLastPointsEarned(null);
+      if (isLastQ) {
+        setGameFinished(true);
+        playSoundEffect('victory');
+      } else {
+        setCurrentQIndex(prev => prev + 1);
+        setIsAnswering(false);
+      }
+    }, 850);
+  };
 
   // Extract all available sets/units across assigned packs
   const availableSets = useMemo(() => {
@@ -207,7 +316,7 @@ export default function GroupLiveBattle({
     await joinGroupBattle(groupId, userUid, userName);
   };
 
-  // Student Anti-Double-Click & Speed-Bonus Answer Handler
+  // Student Anti-Double-Click & Speed-Bonus Answer Handler with Audio Effects
   const handleAnswerOption = (choice) => {
     if (isAnswering || gameFinished || !battleData || battleData.status !== 'active') return;
 
@@ -220,8 +329,11 @@ export default function GroupLiveBattle({
     if (!currentQ) return;
 
     const isCorrect = choice === currentQ.correctAnswer;
-    const elapsedSec = (Date.now() - questionStartTimeRef.current) / 1000;
     
+    // Play Audio Effect
+    playSoundEffect(isCorrect ? 'correct' : 'wrong');
+
+    const elapsedSec = (Date.now() - questionStartTimeRef.current) / 1000;
     let basePoints = isCorrect ? 100 : 0;
     let speedBonus = 0;
 
@@ -256,6 +368,7 @@ export default function GroupLiveBattle({
       setLastPointsEarned(null);
       if (isLastQ) {
         setGameFinished(true);
+        playSoundEffect('victory');
       } else {
         setCurrentQIndex(prev => prev + 1);
         setIsAnswering(false); // UNLOCK ONLY AFTER ADVANCING
@@ -468,6 +581,10 @@ export default function GroupLiveBattle({
     }
 
     // ── STUDENT VIEW RENDER ─────────────────────────────────────────────────
+    const myRankIdx = leaderboardList.findIndex(p => p.uid === userUid);
+    const myRank = myRankIdx !== -1 ? myRankIdx + 1 : null;
+    const myRankBadge = myRank === 1 ? "🥇 1-o'rin! (1st Place Winner)" : myRank === 2 ? "🥈 2-o'rin! (2nd Place)" : myRank === 3 ? "🥉 3-o'rin! (3rd Place)" : myRank ? `#${myRank}-o'rin` : null;
+
     if (!battleData || battleData.status === 'finished') {
       return (
         <div className="glb-card">
@@ -476,8 +593,10 @@ export default function GroupLiveBattle({
               <Award size={32} />
             </div>
             <div>
-              <h2 className="glb-title">Battle Ended! 🏆</h2>
-              <p className="glb-subtitle">Final scores and ranking</p>
+              <h2 className="glb-title">
+                {myRankBadge ? `Siz ${myRankBadge}ni egalladingiz! 🎉` : 'Battle Ended! 🏆'}
+              </h2>
+              <p className="glb-subtitle">Yakuniy natijalar va g'oliblar jadvali</p>
             </div>
           </div>
 
@@ -485,12 +604,12 @@ export default function GroupLiveBattle({
             <span className="glb-section-label">FINAL LEADERBOARD</span>
             <div className="glb-lb-list">
               {leaderboardList.map((p, rank) => (
-                <div key={p.uid} className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''} ${rank === 0 ? 'top-1' : ''}`}>
+                <div key={p.uid} className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''} ${rank === 0 ? 'top-1' : rank === 1 ? 'top-2' : rank === 2 ? 'top-3' : ''}`}>
                   <div className="glb-lb-rank">
                     {rank === 0 ? '🥇 1' : rank === 1 ? '🥈 2' : rank === 2 ? '🥉 3' : `#${rank + 1}`}
                   </div>
                   <div className="glb-lb-user">
-                    <strong className="glb-lb-name">{p.name} {p.uid === userUid ? '(You)' : ''}</strong>
+                    <strong className="glb-lb-name">{p.name} {p.uid === userUid ? '(Siz)' : ''}</strong>
                   </div>
                   <div className="glb-lb-score">
                     <span>{p.score || 0} pts</span>
@@ -503,7 +622,7 @@ export default function GroupLiveBattle({
           {onClose && (
             <div className="glb-footer">
               <button type="button" className="glb-btn-secondary" onClick={onClose}>
-                Close View
+                Chiqish (Close View)
               </button>
             </div>
           )}
@@ -582,36 +701,34 @@ export default function GroupLiveBattle({
               ))}
             </div>
           </div>
-
-          {onClose && (
-            <div className="glb-footer">
-              <button type="button" className="glb-btn-secondary" onClick={onClose}>
-                Close
-              </button>
-            </div>
-          )}
         </div>
       );
     }
 
     return (
       <div className="glb-card">
-        {/* Battle Top Bar */}
+        {/* Battle Top Bar with Per-Question Timer */}
         <div className="glb-game-topbar">
           <div className="glb-game-step">
             Question {currentQIndex + 1} of {questions.length}
           </div>
+
+          <div className="glb-timer-badge">
+            <Timer size={15} className={timeLeft <= 4 ? 'timer-warn' : ''} />
+            <span className={timeLeft <= 4 ? 'timer-warn' : ''}>{timeLeft}s</span>
+          </div>
+
           <div className="glb-game-score">
             <Trophy size={16} color="#f59e0b" />
             <span>{score} pts</span>
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="glb-progress-track">
+        {/* Question Timer Bar */}
+        <div className="glb-timer-track">
           <div
-            className="glb-progress-fill"
-            style={{ width: `${((currentQIndex + 1) / questions.length) * 100}%` }}
+            className={`glb-timer-fill ${timeLeft <= 4 ? 'warn' : ''}`}
+            style={{ width: `${(timeLeft / QUESTION_TIME_LIMIT) * 100}%` }}
           />
         </div>
 
@@ -622,7 +739,9 @@ export default function GroupLiveBattle({
 
           {lastPointsEarned && (
             <div className={`glb-points-float ${lastPointsEarned.isCorrect ? 'plus' : 'zero'}`}>
-              {lastPointsEarned.isCorrect ? (
+              {lastPointsEarned.timeOut ? (
+                <>⏰ Time's up!</>
+              ) : lastPointsEarned.isCorrect ? (
                 <>+{lastPointsEarned.points} pts {lastPointsEarned.speedBonus > 0 ? `(⚡ +${lastPointsEarned.speedBonus} speed bonus!)` : ''}</>
               ) : (
                 <>Incorrect</>
@@ -663,7 +782,10 @@ export default function GroupLiveBattle({
     );
   };
 
-  // Render inside Modal overlay if requested
+  // Check if exit button should be allowed (only allowed when battle is finished, or for teacher)
+  const canCloseModal = isTeacher || !battleData || battleData.status === 'finished';
+
+  // Render inside Full Screen Modal Overlay if requested
   if (isModal) {
     return (
       <div className="glb-modal-overlay">
@@ -672,7 +794,8 @@ export default function GroupLiveBattle({
             <Swords size={20} color="#818cf8" />
             <span className="glb-modal-title">Live Battle — {groupName}</span>
           </div>
-          {onClose && (
+          {/* LOCK VIEW: Close button ONLY rendered if battle is finished or teacher mode! */}
+          {canCloseModal && onClose && (
             <button type="button" className="glb-modal-close-btn" onClick={onClose} aria-label="Close">
               <X size={18} />
             </button>
