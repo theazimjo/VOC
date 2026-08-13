@@ -1,8 +1,35 @@
 .word-form-modal {
   width: 100%;
   max-width: 520px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+.word-form-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.word-form-modal .modal-body.word-form-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.word-form-modal .modal-footer {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+  box-sizing: border-box;
 }
 
 .word-form-modal-header {
@@ -12,6 +39,7 @@
   gap: var(--space-xs);
   padding: 16px 20px;
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .word-form-modal-header h2 {

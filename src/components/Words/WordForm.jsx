@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { partOfSpeechOptions, speechLanguages } from '../../utils/helpers';
-import { lookupWordFromDictionary, toShortLangCode } from '../../utils/dictionaryService';
+import { lookupWordFromDictionary, toShortLangCode, decodeHTMLEntities } from '../../utils/dictionaryService';
 import './WordForm.css';
 
 export default function WordForm({ isOpen, onClose, onSave, editWord = null, packLanguage = 'en-US' }) {
@@ -25,13 +25,13 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null, pac
   useEffect(() => {
     if (editWord) {
       setFormData({
-        word: editWord.word || '',
-        translation: editWord.translation || '',
-        definition: editWord.definition || '',
-        example: editWord.example || '',
-        notes: editWord.notes || '',
+        word: decodeHTMLEntities(editWord.word || ''),
+        translation: decodeHTMLEntities(editWord.translation || ''),
+        definition: decodeHTMLEntities(editWord.definition || ''),
+        example: decodeHTMLEntities(editWord.example || ''),
+        notes: decodeHTMLEntities(editWord.notes || ''),
         partOfSpeech: editWord.partOfSpeech || 'noun',
-        customSentence: editWord.customSentence || ''
+        customSentence: decodeHTMLEntities(editWord.customSentence || '')
       });
       setShowMore(Boolean(editWord.definition || editWord.example || editWord.notes || editWord.customSentence));
     } else {
@@ -123,7 +123,7 @@ export default function WordForm({ isOpen, onClose, onSave, editWord = null, pac
               </div>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="word-form-container">
               <div className="modal-body word-form-grid">
                 {lookupError && (
                   <div className="word-form-full" style={{ padding: '8px 12px', borderRadius: '8px', background: 'rgba(220, 38, 38, 0.1)', color: '#dc2626', fontSize: '0.8rem' }}>

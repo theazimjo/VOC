@@ -22,15 +22,35 @@ export function toShortLangCode(localeCode) {
   return LOCALE_TO_SHORT_CODE[localeCode] || localeCode.split('-')[0].toLowerCase();
 }
 
+export function decodeHTMLEntities(str) {
+  if (!str || typeof str !== 'string') return '';
+  try {
+    const doc = new DOMParser().parseFromString(str, 'text/html');
+    return (doc.body.textContent || str).trim();
+  } catch {
+    return str
+      .replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(dec))
+      .replace(/&#x([0-9a-fA-F]+);/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'")
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&nbsp;/g, ' ')
+      .trim();
+  }
+}
+
 async function translateWord(query, fromLang, toLang) {
-  if (fromLang === toLang) return query;
+  if (fromLang === toLang) return decodeHTMLEntities(query);
   const url = `${MYMEMORY_ENDPOINT}?q=${encodeURIComponent(query)}&langpair=${fromLang}|${toLang}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error("Tarjima bazasiga ulanib bo'lmadi");
   const data = await res.json();
   const translated = data?.responseData?.translatedText || '';
   if (!translated || /invalid|no translation|not available/i.test(translated)) return '';
-  return translated;
+  return decodeHTMLEntities(translated);
 }
 
 async function fetchEnglishDictionaryInfo(word) {
@@ -51,9 +71,9 @@ async function fetchEnglishDictionaryInfo(word) {
     }
 
     return {
-      partOfSpeech: meaning?.partOfSpeech || '',
-      definition: uzDefinition || definitionEntry.definition || '',
-      example: definitionEntry.example || ''
+      partOfSpeech: decodeHTMLEntities(meaning?.partOfSpeech || ''),
+      definition: decodeHTMLEntities(uzDefinition || definitionEntry.definition || ''),
+      example: decodeHTMLEntities(definitionEntry.example || '')
     };
   } catch {
     return null;
@@ -78,11 +98,11 @@ export async function lookupWordFromDictionary(query, direction, wordLangCode = 
     ]);
     if (!translation && !dictInfo) return null;
     return {
-      word: trimmed,
-      translation,
-      partOfSpeech: dictInfo?.partOfSpeech || '',
-      definition: dictInfo?.definition || '',
-      example: dictInfo?.example || ''
+      word: decodeHTMLEntities(trimmed),
+      translation: decodeHTMLEntities(translation),
+      partOfSpeech: decodeHTMLEntities(dictInfo?.partOfSpeech || ''),
+      definition: decodeHTMLEntities(dictInfo?.definition || ''),
+      example: decodeHTMLEntities(dictInfo?.example || '')
     };
   }
 
@@ -90,10 +110,10 @@ export async function lookupWordFromDictionary(query, direction, wordLangCode = 
   if (!word) return null;
   const dictInfo = wordLangCode === 'en' ? await fetchEnglishDictionaryInfo(word) : null;
   return {
-    word,
-    translation: trimmed,
-    partOfSpeech: dictInfo?.partOfSpeech || '',
-    definition: dictInfo?.definition || '',
-    example: dictInfo?.example || ''
+    word: decodeHTMLEntities(word),
+    translation: decodeHTMLEntities(trimmed),
+    partOfSpeech: decodeHTMLEntities(dictInfo?.partOfSpeech || ''),
+    definition: decodeHTMLEntities(dictInfo?.definition || ''),
+    example: decodeHTMLEntities(dictInfo?.example || '')
   };
 }

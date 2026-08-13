@@ -488,8 +488,18 @@ a:hover {
   width: 100%;
   max-width: 520px;
   max-height: 90vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   box-shadow: var(--shadow-lg);
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .modal-header {
@@ -498,6 +508,7 @@ a:hover {
   justify-content: space-between;
   padding: var(--space-lg);
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .modal-header h2 {
@@ -507,6 +518,9 @@ a:hover {
 
 .modal-body {
   padding: var(--space-lg);
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .modal-footer {
@@ -516,6 +530,8 @@ a:hover {
   gap: var(--space-sm);
   padding: var(--space-lg);
   border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  background: var(--bg-secondary);
 }
 
 /* ========== PROGRESS BAR ========== */
