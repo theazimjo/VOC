@@ -6,6 +6,7 @@ import { updateStudentWordTarget } from '../../../services/corpService';
 import { useAccountWordProgress } from '../../../hooks/useAccountWordProgress';
 import { corpWordStorageId } from '../../../utils/helpers';
 import PackHeaderHero from '../../../components/corp/PackHeaderHero';
+import GroupLiveBattle from '../../../components/corp/GroupLiveBattle';
 import './StudentCorpOverview.css';
 
 const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -70,7 +71,7 @@ function buildActivityLog(words) {
 }
 
 export default function StudentCorpOverview() {
-  const { user, homeworkList, wordTarget } = useOutletContext();
+  const { user, homeworkList, wordTarget, membership } = useOutletContext();
   const navigate = useNavigate();
 
   const { words, totalWords, learnedWords } = useAccountWordProgress(user?.uid);
@@ -246,6 +247,17 @@ export default function StudentCorpOverview() {
         <span className="corp-ov-eyebrow">Welcome back</span>
         <h1 className="corp-ov-name">{displayName}</h1>
       </div>
+
+      {/* ── Live Group Battle Banner / Room ── */}
+      {membership?.groupId && (
+        <GroupLiveBattle
+          groupId={membership.groupId}
+          groupName={membership.groupName || 'Group'}
+          isTeacher={false}
+          userUid={user?.uid}
+          userName={displayName}
+        />
+      )}
 
       <div className="corp-ov-grid">
 

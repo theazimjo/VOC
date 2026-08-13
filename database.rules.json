@@ -274,6 +274,13 @@
           }
         }
       }
+    },
+
+    "groupBattles": {
+      "$groupId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
     }
   }
 }

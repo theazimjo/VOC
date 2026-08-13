@@ -5,6 +5,8 @@ import {
 } from 'lucide-react';
 import { GROUP_LEVEL_OPTIONS, aggregatePackProgress, getHomeworkCandidates, getPackUnits, getStudentSummary, getUsedHomeworkKeys } from '../../utils';
 import { IRREGULAR_VERBS_PACK_ID } from '../../../../../data/irregularVerbsCorpPack';
+import { auth } from '../../../../../firebase';
+import GroupLiveBattle from '../../../../../components/corp/GroupLiveBattle';
 import TeacherModal from '../../TeacherModal';
 import './GroupSubtabs.css';
 
@@ -838,6 +840,19 @@ export default function GroupSubtabs({ p }) {
                     )}
                   </div>
                 </div>
+              )}
+
+              {/* SUB-TAB: LIVE BATTLE */}
+              {subTab === 'battle' && (
+                <GroupLiveBattle
+                  groupId={selectedGroup.id}
+                  groupName={selectedGroup.name}
+                  isTeacher={true}
+                  userUid={auth.currentUser?.uid}
+                  userName={auth.currentUser?.displayName || 'Teacher'}
+                  availablePacks={customPacks}
+                  onBack={() => navigate(`${basePath}/group/${selectedGroup.id}`)}
+                />
               )}
 
               {/* SUB-TAB 5: GROUP SETTINGS */}

@@ -1,4 +1,4 @@
-import { ArrowLeft, BarChart3, BookOpen, Check, ChevronRight, Copy, MoreVertical, NotebookPen, Users } from 'lucide-react';
+import { ArrowLeft, BarChart3, BookOpen, Check, ChevronRight, Copy, MoreVertical, NotebookPen, Swords, Users } from 'lucide-react';
 import GroupHomeworkDetail from './GroupHomeworkDetail';
 import GroupSubtabs from './GroupSubtabs';
 import './GroupDetailView.css';
@@ -40,7 +40,7 @@ export default function GroupDetailView({ p }) {
 
               <div className="ios-title-group">
                 <h2 className="ios-group-title">
-                  {viewingHomeworkItem ? viewingHomeworkItem.unitTitle : showHomeworkEditor ? "New Homework" : assigningGroup ? "Assign Pack" : hwId ? (currentHw?.name || "Homework") : subTab === 'students' ? "Students" : subTab === 'words' ? "Packs" : subTab === 'homework' ? "Homework" : subTab === 'stats' ? "Stats" : subTab === 'settings' ? "Group Settings" : selectedGroup.name}
+                  {viewingHomeworkItem ? viewingHomeworkItem.unitTitle : showHomeworkEditor ? "New Homework" : assigningGroup ? "Assign Pack" : hwId ? (currentHw?.name || "Homework") : subTab === 'battle' ? "Live Battle" : subTab === 'students' ? "Students" : subTab === 'words' ? "Packs" : subTab === 'homework' ? "Homework" : subTab === 'stats' ? "Stats" : subTab === 'settings' ? "Group Settings" : selectedGroup.name}
                 </h2>
               </div>
 
@@ -79,10 +79,10 @@ export default function GroupDetailView({ p }) {
                 </button>
               )}
             </div>
-            {/* OVERVIEW: Big Main Hero Card + 2x2 Bento Hero Cards Grid (Wireframe Layout) */}
+            {/* OVERVIEW: Big Main Hero Card + Bento Hero Cards Grid */}
             {!subTab && !hwId && (
               <>
-                {/* 1. Main Large Hero Banner Card (Big rectangle from wireframe) */}
+                {/* 1. Main Large Hero Banner Card */}
                 <div className="group-main-hero-card">
                   <div className="gmh-top">
                     <div className="gmh-code-block">
@@ -142,8 +142,30 @@ export default function GroupDetailView({ p }) {
                   </div>
                 </div>
 
-                {/* 2. 2x2 Bento Hero Cards Grid (4 equal cards from wireframe) */}
+                {/* 2. Bento Hero Cards Grid */}
                 <div className="ios-bento-grid">
+                  {/* Card 0: Live Battle */}
+                  <div
+                    className="ios-bento-card"
+                    style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(168, 85, 247, 0.22) 100%)', border: '1px solid rgba(168, 85, 247, 0.4)' }}
+                    onClick={() => navigate(`${basePath}/group/${selectedGroup.id}/battle`)}
+                  >
+                    <div className="bento-top-row">
+                      <div className="bento-icon-box icon-purple" style={{ background: 'rgba(99, 102, 241, 0.3)', color: '#a5b4fc' }}>
+                        <Swords size={22} />
+                      </div>
+                      <span className="bento-badge-count" style={{ background: 'rgba(168, 85, 247, 0.3)', color: '#c084fc', fontWeight: 800 }}>LIVE</span>
+                    </div>
+                    <div className="bento-info">
+                      <h3 className="bento-title" style={{ color: '#ffffff' }}>Live Battle</h3>
+                      <p className="bento-sub">Host real-time game for students</p>
+                    </div>
+                    <div className="bento-footer">
+                      <span className="bento-action-label" style={{ color: '#a5b4fc' }}>Launch Room</span>
+                      <ChevronRight size={16} className="bento-arrow" style={{ color: '#a5b4fc' }} />
+                    </div>
+                  </div>
+
                   {/* Card 1: Students */}
                   <div
                     className="ios-bento-card card-blue"
