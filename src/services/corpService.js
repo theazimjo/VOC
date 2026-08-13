@@ -79,9 +79,14 @@ export async function getTeacherAffiliations(uid) {
   const independentProfile = independentSnap.exists() ? independentSnap.val() : null;
 
   let centerAffiliation = null;
-  let nonTeacherRole = null; // center_admin (or a disabled record) — blocks new teacher affiliations
+  let nonTeacherRole = null; // center_admin (or a disabled/malformed record) — blocks new teacher affiliations
   if (corpRecord) {
-    if (corpRecord.role === 'teacher' && !corpRecord.disabled) {
+    // A teacher-role record without a centerId isn't a real center
+    // affiliation — it can only be stale/malformed data (e.g. a record
+    // written by an older code path), since approveTeacherRequest() always
+    // sets centerId. Treat it like any other non-affiliation record rather
+    // than showing a phantom "joined a center" state.
+    if (corpRecord.role === 'teacher' && corpRecord.centerId && !corpRecord.disabled) {
       centerAffiliation = corpRecord;
     } else {
       nonTeacherRole = corpRecord;

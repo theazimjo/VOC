@@ -24,7 +24,7 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title.trim()) {
-      alert('Iltimos, kurs nomini kiriting!');
+      alert('Please enter a pack name!');
       return;
     }
 
@@ -44,7 +44,7 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
         if (onSaved) onSaved(pack);
       }
     } catch (err) {
-      alert((editPack ? 'Kursni saqlashda' : 'Kurs yaratishda') + ' xatolik: ' + err.message);
+      alert((editPack ? 'Error saving pack' : 'Error creating pack') + ': ' + err.message);
     } finally {
       setSubmitting(false);
     }
@@ -53,9 +53,9 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
   return (
     <div className="new-course-modal">
       <div className="course-modal-header">
-        <h2>{editPack ? 'Kursni Tahrirlash' : 'Yangi Kurs Yaratish'}</h2>
+        <h2>{editPack ? 'Edit Pack' : 'Create New Pack'}</h2>
         {onCancel && (
-          <button type="button" className="btn-modal-close" onClick={onCancel} title="Yopish">
+          <button type="button" className="btn-modal-close" onClick={onCancel} title="Close">
             <X size={18} />
           </button>
         )}
@@ -63,10 +63,10 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
 
       <form onSubmit={handleSubmit} className="course-modal-body">
         <div className="modal-form-group">
-          <label className="modal-label">KURS NOMI *</label>
+          <label className="modal-label">PACK NAME *</label>
           <input 
             type="text" 
-            placeholder="Masalan: Beginner English" 
+            placeholder="e.g. Beginner English" 
             value={title} 
             onChange={e => setTitle(e.target.value)} 
             required
@@ -76,9 +76,9 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
         </div>
 
         <div className="modal-form-group">
-          <label className="modal-label">TAVSIF (IXTIYORIY)</label>
+          <label className="modal-label">DESCRIPTION (OPTIONAL)</label>
           <textarea
-            placeholder="Kurs haqida qisqacha..."
+            placeholder="Short description..."
             value={description}
             onChange={e => setDescription(e.target.value)}
             rows={3}
@@ -87,7 +87,7 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
         </div>
 
         <div className="modal-form-group">
-          <label className="modal-label">SO'ZLARNING TILI (TALAFFUZ UCHUN)</label>
+          <label className="modal-label">WORD LANGUAGE (FOR PRONUNCIATION)</label>
           <select
             className="modal-input"
             value={language}
@@ -102,11 +102,11 @@ export default function CustomPackEditor({ centerId, editPack = null, onSaved, o
         <div className="course-modal-footer">
           {onCancel && (
             <button type="button" className="btn-modal-cancel" onClick={onCancel}>
-              Bekor qilish
+              Cancel
             </button>
           )}
           <button type="submit" className="btn-modal-save" disabled={submitting}>
-            <Save size={18} /> {submitting ? 'Saqlanmoqda...' : (editPack ? 'Saqlash' : 'Kursni Yaratish')}
+            <Save size={18} /> {submitting ? 'Saving...' : (editPack ? 'Save Pack' : 'Create Pack')}
           </button>
         </div>
       </form>

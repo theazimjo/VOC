@@ -176,14 +176,14 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
           disabled={phase !== 'show' || isFirstExposure}
           title={
             isFirstExposure
-              ? "Bu so'z birinchi marta ko'rilyapti — hali yozib test qilib bo'lmaydi"
-              : (typedMode ? "Ko'rib javob berish rejimiga o'tish" : "Yozib javob berish rejimiga o'tish (chuqurroq eslab qolish uchun)")
+              ? "First time seeing this word — typing mode is not available yet"
+              : (typedMode ? "Switch to view mode" : "Switch to typing mode (for deeper memory recall)")
           }
         >
           {typedMode ? <PenLine size={13} /> : <Eye size={13} />}
-          {typedMode ? 'Yozib' : "Ko'rib"}
+          {typedMode ? 'Type' : "View"}
         </button>
-        <button className="mem-end-btn" onClick={onEnd} title="Sessiyani tugatish">
+        <button className="mem-end-btn" onClick={onEnd} title="End session">
           ✕
         </button>
       </div>
@@ -202,7 +202,7 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
           {phase === 'show' && (
             <div className="mem-card">
               <div className="mem-card-label">
-                {typedMode ? "Tarjimasini xotiradan yozing" : "So'zni ko'ring va eslab qolishga harakat qiling"}
+                {typedMode ? "Type the translation from memory" : "Look at the word and try to recall"}
               </div>
               <div className="mem-word-display">{word}</div>
               {!typedMode && <div className="mem-translation-hidden">?</div>}
@@ -215,26 +215,26 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
                     type="text"
                     autoFocus
                     value={typedValue}
-                    placeholder="Tarjimasini shu yerga yozing..."
+                    placeholder="Type translation here..."
                     onChange={e => setTypedValue(e.target.value)}
                     onKeyDown={e => { if (e.key === 'Enter') handleTypedSubmit(); }}
                   />
                   <button className="mem-reveal-btn" onClick={handleTypedSubmit} disabled={!typedValue.trim()}>
-                    Tekshirish
+                    Check
                   </button>
-                  <button className="mem-skip-btn" onClick={onSkip} title="O'tkazib yuborish">
+                  <button className="mem-skip-btn" onClick={onSkip} title="Skip">
                     <SkipForward size={16} />
-                    O'tkazish
+                    Skip
                   </button>
                 </div>
               ) : (
                 <div className="mem-card-actions">
                   <button className="mem-reveal-btn" onClick={handleReveal}>
-                    Tarjimasini ko'rish
+                    Show translation
                   </button>
-                  <button className="mem-skip-btn" onClick={onSkip} title="O'tkazib yuborish">
+                  <button className="mem-skip-btn" onClick={onSkip} title="Skip">
                     <SkipForward size={16} />
-                    O'tkazish
+                    Skip
                   </button>
                 </div>
               )}
@@ -244,12 +244,12 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
           {/* PHASE: revealed — show translation + 1-Click judgement */}
           {phase === 'revealed' && (
             <div className="mem-card">
-              <div className="mem-card-label">Javobingiz to'g'ri edimi?</div>
+              <div className="mem-card-label">Was your answer correct?</div>
               <div className="mem-word-display">{word}</div>
 
               {typedResult && (
                 <div className={`mem-typed-answer ${typedResult.autoCorrect ? 'correct' : 'wrong'}`}>
-                  Sizning javobingiz: <strong>{typedResult.answer}</strong>
+                  Your answer: <strong>{typedResult.answer}</strong>
                 </div>
               )}
 
@@ -262,7 +262,7 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
                 {translation}
               </motion.div>
               <div className="mem-response-time">
-                ⏱ {responseTime.toFixed(1)} soniya
+                ⏱ {responseTime.toFixed(1)}s
               </div>
               <div className="mem-judgement-btns">
                 <button
@@ -270,14 +270,14 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
                   disabled={submitting}
                   onClick={() => handleJudgement(false)}
                 >
-                  ✗ Bilmadim
+                  ✗ Don't know
                 </button>
                 <button
                   className="mem-btn-correct"
                   disabled={submitting}
                   onClick={() => handleJudgement(true)}
                 >
-                  ✓ Bildim
+                  ✓ Knew it
                 </button>
               </div>
             </div>

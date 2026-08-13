@@ -208,7 +208,7 @@ export default function GrammarGuide() {
           className="gg-cta-btn"
           onClick={() => navigate(`/grammar/${level}/${topicId}`)}
         >
-          ✅ Mashqlarni boshlash
+          ✅ Start Exercises
         </button>
       </div>
     </div>

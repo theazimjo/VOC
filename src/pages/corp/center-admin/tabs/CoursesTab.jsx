@@ -17,10 +17,10 @@ export default function CoursesTab({ p }) {
   } = p;
 
   const confirmDeleteCourse = (course) => askConfirm({
-    title: 'Kursni o\'chirish',
-    message: `"${course.title}" kursini o'chirishni tasdiqlaysizmi?`,
-    confirmLabel: "O'chirish",
-    cancelLabel: 'Bekor qilish',
+    title: 'Delete Course',
+    message: `Are you sure you want to delete "${course.title}"?`,
+    confirmLabel: "Delete",
+    cancelLabel: 'Cancel',
     danger: true,
     onConfirm: () => handleDeleteCourse(course.id),
   });
@@ -40,8 +40,8 @@ export default function CoursesTab({ p }) {
           {/* Top Bar */}
           <div className="courses-top-bar">
             <div className="courses-title-area">
-              <h1>Kurslar</h1>
-              <p>{totalCourses} ta kurs · {totalSections} ta bo'lim · {totalWords} ta so'z</p>
+              <h1>Courses</h1>
+              <p>{totalCourses} courses · {totalSections} sections · {totalWords} words</p>
             </div>
 
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -49,9 +49,9 @@ export default function CoursesTab({ p }) {
                 className="btn-secondary"
                 onClick={handleSeedBeginnerCourse}
                 disabled={seedingCourse}
-                title="Tayyor Beginner (A1) kursini bir tugma bilan to'liq yuklash — 3 oy, 15 mavzu, 332 so'z"
+                title="Load full ready-made Beginner (A1) course — 3 months, 15 topics, 332 words"
               >
-                <Sparkles size={16} /> {seedingCourse ? 'Yuklanmoqda...' : 'Tayyor Beginner Kurs'}
+                <Sparkles size={16} /> {seedingCourse ? 'Loading...' : 'Preset Beginner Course'}
               </button>
             </div>
           </div>
@@ -61,25 +61,25 @@ export default function CoursesTab({ p }) {
             <div className="c-metric-card">
               <div className="c-metric-icon blue"><BookOpen size={20} /></div>
               <div className="c-metric-val">{totalCourses}</div>
-              <div className="c-metric-label">Jami Kurslar</div>
+              <div className="c-metric-label">Total Courses</div>
             </div>
 
             <div className="c-metric-card">
               <div className="c-metric-icon purple"><Layers size={20} /></div>
               <div className="c-metric-val">{totalSections}</div>
-              <div className="c-metric-label">Jami Bo'limlar</div>
+              <div className="c-metric-label">Total Sections</div>
             </div>
 
             <div className="c-metric-card">
               <div className="c-metric-icon green"><FileText size={20} /></div>
               <div className="c-metric-val">{totalWords}</div>
-              <div className="c-metric-label">Jami So'zlar</div>
+              <div className="c-metric-label">Total Words</div>
             </div>
 
             <div className="c-metric-card">
               <div className="c-metric-icon orange"><Users size={20} /></div>
               <div className="c-metric-val">{totalCourseStudents}</div>
-              <div className="c-metric-label">O'quvchilar</div>
+              <div className="c-metric-label">Students</div>
             </div>
           </div>
 
@@ -89,7 +89,7 @@ export default function CoursesTab({ p }) {
               <Search size={16} className="search-icon" />
               <input
                 type="text"
-                placeholder="Kurs qidirish..."
+                placeholder="Search courses..."
                 value={courseSearchTerm}
                 onChange={e => setCourseSearchTerm(e.target.value)}
               />
@@ -100,17 +100,17 @@ export default function CoursesTab({ p }) {
                 className="btn-filter-dropdown"
                 onClick={() => setShowCourseSortMenu(v => !v)}
               >
-                <Filter size={16} /> Saralash <ChevronDown size={14} />
+                <Filter size={16} /> Sort <ChevronDown size={14} />
               </button>
 
               {showCourseSortMenu && (
                 <div className="sort-dropdown-menu">
-                  <div className="sort-dropdown-label">Saralash</div>
+                  <div className="sort-dropdown-label">Sort by</div>
                   {[
-                    { value: 'date', label: "Sana bo'yicha" },
-                    { value: 'name', label: "Nom bo'yicha" },
-                    { value: 'units', label: "Bo'limlar soni" },
-                    { value: 'words', label: "So'zlar soni" },
+                    { value: 'date', label: "Date" },
+                    { value: 'name', label: "Name" },
+                    { value: 'units', label: "Sections count" },
+                    { value: 'words', label: "Words count" },
                   ].map(opt => (
                     <button
                       key={opt.value}
@@ -146,7 +146,7 @@ export default function CoursesTab({ p }) {
                         setShowPackEditor(true);
                       }}
                       className="btn-card-action"
-                      title="Tahrirlash"
+                      title="Edit"
                     >
                       <Edit3 size={15} />
                     </button>
@@ -154,7 +154,7 @@ export default function CoursesTab({ p }) {
                       onClick={() => confirmDeleteCourse(c)}
                       className="btn-card-action"
                       style={{ color: '#f87171' }}
-                      title="O'chirish"
+                      title="Delete"
                     >
                       <Trash2 size={15} />
                     </button>
@@ -163,28 +163,28 @@ export default function CoursesTab({ p }) {
 
                 <div className="course-card-content">
                   <h3>{c.title}</h3>
-                  <p>{c.description || "Tavsif yo'q"}</p>
+                  <p>{c.description || "No description"}</p>
                 </div>
 
                 <div className="course-card-meta">
                   <div className="course-meta-row">
                     <div className="course-meta-item">
                       <Layers size={14} />
-                      <span>{c.sectionsCount} bo'lim</span>
+                      <span>{c.sectionsCount} sections</span>
                     </div>
                     <div className="course-meta-item">
                       <FileText size={14} />
-                      <span>{c.wordsCount} so'z</span>
+                      <span>{c.wordsCount} words</span>
                     </div>
                   </div>
                   <div className="course-meta-row" style={{ marginTop: '4px' }}>
                     <div className="course-meta-item">
                       <Users size={14} />
-                      <span>{c.groupsCount} guruh</span>
+                      <span>{c.groupsCount} groups</span>
                     </div>
                     <div className="course-meta-item">
                       <GraduationCap size={14} />
-                      <span>{c.studentsCount} o'quvchi</span>
+                      <span>{c.studentsCount} students</span>
                     </div>
                   </div>
                 </div>
@@ -193,7 +193,7 @@ export default function CoursesTab({ p }) {
                   onClick={() => setSearchParams({ courseId: c.id })}
                   className="btn-manage-course outline"
                 >
-                  Boshqarish <ArrowUpRight size={16} />
+                  Manage <ArrowUpRight size={16} />
                 </button>
               </div>
             ))}
@@ -206,7 +206,7 @@ export default function CoursesTab({ p }) {
               <div className="add-new-icon-wrap">
                 <Plus size={24} />
               </div>
-              <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Yangi Kurs</span>
+              <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>New Course</span>
             </button>
           </div>
 
@@ -216,20 +216,18 @@ export default function CoursesTab({ p }) {
                 <Search className="text-gray-500" size={24} />
               </div>
               <p style={{ color: 'var(--pg-text)', fontWeight: 600, fontSize: '1rem', margin: 0 }}>
-                {courseSearchTerm ? `"${courseSearchTerm}" bo'yicha kurs topilmadi` : "Hozircha kurslar yo'q"}
+                {courseSearchTerm ? `No courses found matching "${courseSearchTerm}"` : "No courses yet"}
               </p>
-              <p style={{ color: 'var(--pg-text-secondary)', fontSize: '0.85rem', margin: 0 }}>Yangi kurs yaratish uchun tugmani bosing</p>
+              <p style={{ color: 'var(--pg-text-secondary)', fontSize: '0.85rem', margin: 0 }}>Tap the button to create a new course</p>
             </div>
           )}
 
-          {/* Floating Action Button (New Course) — same always-visible FAB
-              pattern as the teacher module's Courses tab, replacing the
-              old inline "Yangi Kurs" button. */}
+          {/* Floating Action Button (New Course) */}
           <button
             type="button"
             className="fab-add-pack-btn fab-icon-only"
             onClick={() => { setEditingPack(null); setShowPackEditor(true); }}
-            title="Yangi Kurs"
+            title="New Course"
           >
             <Plus size={26} />
           </button>

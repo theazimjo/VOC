@@ -455,20 +455,22 @@ export default function ProfilePage() {
             )}
 
             {activeSheet === 'teacher' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', padding: '4px 4px 12px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', boxSizing: 'border-box' }}>
                 {becomeTeacherError && (
-                  <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '10px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <AlertCircle size={16} /> {becomeTeacherError}
+                  <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '10px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <AlertCircle size={16} style={{ flexShrink: 0 }} /> <span>{becomeTeacherError}</span>
                   </div>
                 )}
 
                 {/* Independent Tutor card — "become" if not yet independent, "switch" if already */}
-                <div style={{ padding: '14px', borderRadius: '14px', border: '1px solid var(--border-light)', background: 'var(--bg-tertiary)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <span style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>Independent Tutor</span>
-                    {independentAffiliation && <CheckCircle2 size={15} color="#34c759" />}
+                <div style={{ padding: '16px', borderRadius: '16px', border: '1px solid var(--border-light)', background: 'var(--bg-tertiary)', display: 'flex', flexDirection: 'column', gap: '10px', boxSizing: 'border-box', width: '100%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontWeight: 700, fontSize: '0.96rem', color: 'var(--text-primary)' }}>Independent Tutor</span>
+                      {independentAffiliation && <CheckCircle2 size={16} color="#34c759" style={{ flexShrink: 0 }} />}
+                    </div>
                   </div>
-                  <p style={{ margin: '0 0 12px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                     {independentAffiliation
                       ? 'Your own group, no learning center involved.'
                       : 'Open your own group and manage your students, with no learning center involved.'}
@@ -477,7 +479,7 @@ export default function ProfilePage() {
                     <button
                       type="button"
                       onClick={handleSwitchToIndependent}
-                      style={{ width: '100%', padding: '10px 16px', borderRadius: '10px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                      style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                     >
                       Switch to Independent Mode
                     </button>
@@ -486,7 +488,7 @@ export default function ProfilePage() {
                       type="button"
                       onClick={handleBecomeIndependentTeacher}
                       disabled={becomingTeacher}
-                      style={{ width: '100%', padding: '10px 16px', borderRadius: '10px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', opacity: becomingTeacher ? 0.6 : 1 }}
+                      style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', opacity: becomingTeacher ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                     >
                       {becomingTeacher ? 'Starting...' : 'Become an Independent Tutor'}
                     </button>
@@ -495,62 +497,64 @@ export default function ProfilePage() {
 
                 {/* Learning Center card — "join" if no center/request yet,
                     "pending" while awaiting admin approval, "switch" once approved */}
-                <div style={{ padding: '14px', borderRadius: '14px', border: '1px solid var(--border-light)', background: 'var(--bg-tertiary)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <span style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
-                      {centerAffiliation?.centerName || pendingRequest?.centerName || 'Through a Learning Center'}
-                    </span>
-                    {centerAffiliation && <CheckCircle2 size={15} color="#34c759" />}
-                    {!centerAffiliation && pendingRequest && <Clock size={15} color="#ff9500" />}
+                <div style={{ padding: '16px', borderRadius: '16px', border: '1px solid var(--border-light)', background: 'var(--bg-tertiary)', display: 'flex', flexDirection: 'column', gap: '10px', boxSizing: 'border-box', width: '100%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontWeight: 700, fontSize: '0.96rem', color: 'var(--text-primary)' }}>
+                        {centerAffiliation?.centerName || pendingRequest?.centerName || 'Through a Learning Center'}
+                      </span>
+                      {centerAffiliation && <CheckCircle2 size={16} color="#34c759" style={{ flexShrink: 0 }} />}
+                      {!centerAffiliation && pendingRequest && <Clock size={16} color="#ff9500" style={{ flexShrink: 0 }} />}
+                    </div>
                   </div>
                   {centerAffiliation ? (
                     <>
-                      <p style={{ margin: '0 0 12px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                         You're a teacher at this center.
                       </p>
                       <button
                         type="button"
                         onClick={handleSwitchToCenter}
-                        style={{ width: '100%', padding: '10px 16px', borderRadius: '10px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                        style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                       >
                         Switch to Center Mode
                       </button>
                     </>
                   ) : pendingRequest ? (
                     <>
-                      <p style={{ margin: '0 0 12px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                         Your request is waiting for approval from the center admin.
                       </p>
                       <button
                         type="button"
                         onClick={handleCancelRequest}
-                        style={{ width: '100%', padding: '10px 16px', borderRadius: '10px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-secondary)', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
+                        style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-secondary)', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                       >
                         Cancel Request
                       </button>
                     </>
                   ) : (
                     <>
-                      <p style={{ margin: '0 0 12px', fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                         Enter the ID code your learning center gave you — the admin will need to approve your request.
                       </p>
                       {joinCenterError && (
-                        <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '8px 12px', borderRadius: '10px', fontSize: '0.8rem', fontWeight: 600, marginBottom: '10px' }}>
+                        <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '8px 12px', borderRadius: '10px', fontSize: '0.8rem', fontWeight: 600 }}>
                           {joinCenterError}
                         </div>
                       )}
-                      <form onSubmit={handleJoinCenterAsTeacher} style={{ display: 'flex', gap: '8px' }}>
+                      <form onSubmit={handleJoinCenterAsTeacher} style={{ display: 'flex', gap: '8px', width: '100%', boxSizing: 'border-box', marginTop: '2px' }}>
                         <input
                           type="text"
                           placeholder="Center ID"
                           value={centerCodeInput}
                           onChange={e => setCenterCodeInput(e.target.value)}
-                          style={{ flex: 1, padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none' }}
+                          style={{ flex: '1 1 0%', minWidth: 0, width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box' }}
                         />
                         <button
                           type="submit"
                           disabled={joiningCenterAsTeacher || !centerCodeInput.trim()}
-                          style={{ padding: '10px 18px', borderRadius: '10px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', opacity: (joiningCenterAsTeacher || !centerCodeInput.trim()) ? 0.6 : 1 }}
+                          style={{ flexShrink: 0, padding: '10px 18px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', whiteSpace: 'nowrap', opacity: (joiningCenterAsTeacher || !centerCodeInput.trim()) ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                         >
                           {joiningCenterAsTeacher ? '...' : 'Request'}
                         </button>
@@ -562,32 +566,32 @@ export default function ProfilePage() {
             )}
 
             {activeSheet === 'joinGroup' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '4px 4px 12px' }}>
-                <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', boxSizing: 'border-box' }}>
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                   Enter the group code your teacher gave you.
                 </p>
                 {joinGroupSuccess && (
-                  <div style={{ background: 'rgba(52, 199, 89, 0.12)', border: '1px solid rgba(52, 199, 89, 0.25)', color: '#34c759', padding: '10px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <CheckCircle2 size={16} /> {joinGroupSuccess}
+                  <div style={{ background: 'rgba(52, 199, 89, 0.12)', border: '1px solid rgba(52, 199, 89, 0.25)', color: '#34c759', padding: '10px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <CheckCircle2 size={16} style={{ flexShrink: 0 }} /> <span>{joinGroupSuccess}</span>
                   </div>
                 )}
                 {joinGroupError && (
-                  <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '10px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <AlertCircle size={16} /> {joinGroupError}
+                  <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '10px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <AlertCircle size={16} style={{ flexShrink: 0 }} /> <span>{joinGroupError}</span>
                   </div>
                 )}
-                <form onSubmit={handleJoinTeacherGroup} style={{ display: 'flex', gap: '8px' }}>
+                <form onSubmit={handleJoinTeacherGroup} style={{ display: 'flex', gap: '8px', width: '100%', boxSizing: 'border-box' }}>
                   <input
                     type="text"
                     placeholder="Group code"
                     value={groupCodeInput}
                     onChange={e => setGroupCodeInput(e.target.value)}
-                    style={{ flex: 1, padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none' }}
+                    style={{ flex: '1 1 0%', minWidth: 0, width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box' }}
                   />
                   <button
                     type="submit"
                     disabled={joiningTeacherGroup || !groupCodeInput.trim()}
-                    style={{ padding: '10px 18px', borderRadius: '10px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer', opacity: (joiningTeacherGroup || !groupCodeInput.trim()) ? 0.6 : 1 }}
+                    style={{ flexShrink: 0, padding: '10px 18px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', whiteSpace: 'nowrap', opacity: (joiningTeacherGroup || !groupCodeInput.trim()) ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                   >
                     {joiningTeacherGroup ? '...' : 'Join'}
                   </button>

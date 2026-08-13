@@ -241,19 +241,19 @@ export const partOfSpeechOptions = [
  * words during practice — set once per pack, defaults to English.
  */
 export const speechLanguages = [
-  { code: 'en-US', label: 'Ingliz', flag: '🇬🇧' },
-  { code: 'es-ES', label: 'Ispan', flag: '🇪🇸' },
-  { code: 'fr-FR', label: 'Fransuz', flag: '🇫🇷' },
-  { code: 'de-DE', label: 'Nemis', flag: '🇩🇪' },
-  { code: 'it-IT', label: 'Italyan', flag: '🇮🇹' },
-  { code: 'pt-PT', label: 'Portugal', flag: '🇵🇹' },
-  { code: 'ru-RU', label: 'Rus', flag: '🇷🇺' },
-  { code: 'tr-TR', label: 'Turk', flag: '🇹🇷' },
-  { code: 'ar-SA', label: 'Arab', flag: '🇸🇦' },
-  { code: 'zh-CN', label: 'Xitoy', flag: '🇨🇳' },
-  { code: 'ja-JP', label: 'Yapon', flag: '🇯🇵' },
-  { code: 'ko-KR', label: 'Koreys', flag: '🇰🇷' },
-  { code: 'uz-UZ', label: "O'zbek", flag: '🇺🇿' },
+  { code: 'en-US', label: 'English', flag: '🇬🇧' },
+  { code: 'es-ES', label: 'Spanish', flag: '🇪🇸' },
+  { code: 'fr-FR', label: 'French', flag: '🇫🇷' },
+  { code: 'de-DE', label: 'German', flag: '🇩🇪' },
+  { code: 'it-IT', label: 'Italian', flag: '🇮🇹' },
+  { code: 'pt-PT', label: 'Portuguese', flag: '🇵🇹' },
+  { code: 'ru-RU', label: 'Russian', flag: '🇷🇺' },
+  { code: 'tr-TR', label: 'Turkish', flag: '🇹🇷' },
+  { code: 'ar-SA', label: 'Arabic', flag: '🇸🇦' },
+  { code: 'zh-CN', label: 'Chinese', flag: '🇨🇳' },
+  { code: 'ja-JP', label: 'Japanese', flag: '🇯🇵' },
+  { code: 'ko-KR', label: 'Korean', flag: '🇰🇷' },
+  { code: 'uz-UZ', label: 'Uzbek', flag: '🇺🇿' },
 ];
 
 /**

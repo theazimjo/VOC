@@ -85,7 +85,10 @@ async function fetchCorpIdentity(fbUser) {
       return { ...centerRoleData, uid, independent: false };
     }
 
-    const centerIdentity = centerRoleData?.role === 'teacher'
+    // Same guard as getTeacherAffiliations() in corpService.js: a
+    // teacher-role record without a centerId is stale/malformed, not a real
+    // center affiliation.
+    const centerIdentity = centerRoleData?.role === 'teacher' && centerRoleData.centerId
       ? { ...centerRoleData, uid, independent: false }
       : null;
 

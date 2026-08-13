@@ -420,15 +420,16 @@
 
 .corp-profile-edit-card {
   width: 100%;
-  max-width: 380px;
+  max-width: 420px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg, 20px);
+  border-radius: var(--radius-lg, 22px);
   padding: 1.4rem;
-  box-shadow: var(--shadow-lg, var(--shadow));
+  box-shadow: var(--shadow-lg, 0 16px 36px rgba(0, 0, 0, 0.18));
   display: flex;
   flex-direction: column;
   gap: 1.15rem;
+  box-sizing: border-box;
 }
 
 .corp-profile-edit-header {
