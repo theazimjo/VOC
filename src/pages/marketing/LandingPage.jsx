@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion, useInView } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   BookOpen, Repeat, CalendarDays, TrendingUp, CheckCircle2,
   Users, ClipboardList, LineChart, ArrowRight, Menu, X,
 } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import VocLogo from '../../components/common/VocLogo';
 import bgVideo from '../../assets/VOCABRY.mp4';
 import './LandingPage.css';
@@ -134,12 +134,7 @@ export default function LandingPage() {
       <main className="lp-main">
         {/* ---------- Hero ---------- */}
         <section className="lp-hero">
-          <motion.div
-            className="lp-hero-copy"
-            initial={reduce ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <Reveal className="lp-hero-copy">
             <h1>Learn vocabulary that actually stays with you.</h1>
             <p className="lp-hero-sub">
               Spaced repetition, grammar drills, and progress tracking built around
@@ -153,7 +148,7 @@ export default function LandingPage() {
                 See how it works
               </a>
             </div>
-          </motion.div>
+          </Reveal>
 
           <div className="lp-hero-visual">
             <div className="lp-word-stack">

@@ -1,12 +1,3 @@
-/* Registered so the conic-gradient angle below is a transitionable value,
-   not just a swapped custom property - lets the mastery ring "sweep in"
-   via a plain CSS transition instead of a per-frame JS loop. */
-@property --lp-ring-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-
 /* ========== LANDING PAGE (extends the LoginPage iOS Liquid Glass system) ========== */
 .lp-page {
   --glass-fill: rgba(255, 255, 255, 0.08);
@@ -608,13 +599,7 @@
 /* ========== Reduced motion ========== */
 @media (prefers-reduced-motion: reduce) {
   .lp-btn,
-  .lp-nav-links,
-  .lp-mastery-ring {
+  .lp-nav-links {
     transition: none !important;
-  }
-  .lp-word-card--0,
-  .lp-word-card--1,
-  .lp-word-card--2 {
-    animation: none !important;
   }
 }
