@@ -180,30 +180,20 @@ export default function TeacherDashboard({ tab = 'groups' }) {
         getCenterCustomPacks(centerId),
         ensureIrregularVerbsPack(centerId).catch(err => {
           console.error('Error ensuring Irregular Verbs pack:', err);
-          return null;
+          return IRREGULAR_VERBS_CORP_PACK;
         }),
       ]);
       setGroups(groupsData || []);
-      // Packs with no ownerUid are center-wide (admin's, read-only for
-      // teachers here); packs owned by this teacher are their own private
-      // ones (full CRUD). Other teachers' private packs are dropped
-      // entirely — never shown in this teacher's list at all — while still
-      // staying in the shared customPacks collection so group assignment /
-      // student practice (which reads that collection directly) is
-      // unaffected either way.
       const myUid = auth.currentUser?.uid;
       const scoped = (packsData || [])
         .filter(p => !p.ownerUid || p.ownerUid === myUid)
         .map(p => ({ ...p, scope: p.ownerUid ? 'own' : 'center' }));
-      // Always replaced with ensureIrregularVerbsPack's own return value
-      // rather than trusting whatever getCenterCustomPacks read — that read
-      // runs concurrently with ensure()'s write/self-heal above, so it can
-      // easily win the race and hand back a stale copy (e.g. pre-rename
-      // set/unit titles) even though ensure() already fixed it server-side.
       const withoutStaleIrregular = scoped.filter(p => p.id !== IRREGULAR_VERBS_PACK_ID);
-      const withIrregular = irregularPack
-        ? [...withoutStaleIrregular, { ...irregularPack, scope: 'center' }]
-        : scoped;
+      const safeIrregular = irregularPack || IRREGULAR_VERBS_CORP_PACK;
+      const withIrregular = [
+        { ...safeIrregular, scope: 'center' },
+        ...withoutStaleIrregular
+      ];
       setCustomPacks(withIrregular);
     } catch (err) {
       console.error('Error loading teacher data:', err);
@@ -389,6 +379,7 @@ export default function TeacherDashboard({ tab = 'groups' }) {
   // ConfirmSheet) — these are pure actions so callers aren't at risk of a
   // stray native confirm() firing on top of their own styled dialog.
   const handleDeletePack = async (pack) => {
+    if (!pack || pack.id === IRREGULAR_VERBS_PACK_ID || pack.isIrregularVerbs) return;
     if (pack.scope !== 'own') return; // only a teacher's own packs can be deleted here
     try {
       await deleteCustomPack(centerId, pack.id);

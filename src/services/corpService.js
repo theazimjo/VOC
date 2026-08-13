@@ -639,6 +639,9 @@ export async function duplicateCustomPack(centerId, pack, ownerUid = null) {
  * trade-off the reference app has for its own course deletes).
  */
 export async function deleteCustomPack(centerId, packId) {
+  if (packId === IRREGULAR_VERBS_PACK_ID) {
+    throw new Error("Irregular Verbs pack is a system pack and cannot be deleted.");
+  }
   await update(ref(db), { [`centers/${centerId}/customPacks/${packId}`]: null });
 }
 

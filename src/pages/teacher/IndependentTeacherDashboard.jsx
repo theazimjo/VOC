@@ -13,7 +13,7 @@ import {
   removeIndependentStudentFromGroup, updateIndependentTeacherProfile,
   ensureIndependentIrregularVerbsPack, getIndependentGroupHomeworkList, addIndependentGroupHomework,
 } from '../../services/independentTeacherService';
-import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
+import { IRREGULAR_VERBS_PACK_ID, IRREGULAR_VERBS_CORP_PACK } from '../../data/irregularVerbsCorpPack';
 import { getHomeworkCandidates, getUsedHomeworkKeys, computeGroupStats } from '../corp/teacher/utils';
 import ConfirmSheet from '../../components/corp/ConfirmSheet';
 import GroupsTab from '../corp/teacher/tabs/GroupsTab';
@@ -172,17 +172,17 @@ export default function IndependentTeacherDashboard({ tab = 'groups' }) {
         getIndependentCustomPacks(uid),
         ensureIndependentIrregularVerbsPack(uid).catch(err => {
           console.error('Error ensuring Irregular Verbs pack:', err);
-          return null;
+          return IRREGULAR_VERBS_CORP_PACK;
         }),
       ]);
       setGroups(groupsData || []);
-      // Every independent pack is this teacher's own — no center-wide/shared
-      // concept to distinguish, unlike corpService's ownerUid split.
       const scoped = (packsData || []).map(p => ({ ...p, scope: 'own' }));
       const withoutStaleIrregular = scoped.filter(p => p.id !== IRREGULAR_VERBS_PACK_ID);
-      const withIrregular = irregularPack
-        ? [...withoutStaleIrregular, { ...irregularPack, scope: 'own' }]
-        : scoped;
+      const safeIrregular = irregularPack || IRREGULAR_VERBS_CORP_PACK;
+      const withIrregular = [
+        { ...safeIrregular, scope: 'own' },
+        ...withoutStaleIrregular
+      ];
       setCustomPacks(withIrregular);
     } catch (err) {
       console.error('Error loading teacher data:', err);
@@ -357,6 +357,7 @@ export default function IndependentTeacherDashboard({ tab = 'groups' }) {
   };
 
   const handleDeletePack = async (pack) => {
+    if (!pack || pack.id === IRREGULAR_VERBS_PACK_ID || pack.isIrregularVerbs) return;
     if (pack.scope !== 'own') return;
     try {
       await deleteIndependentCustomPack(uid, pack.id);

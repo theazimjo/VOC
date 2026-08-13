@@ -3,6 +3,7 @@ import { ArrowLeft, BookOpen, ChevronRight, Plus, Search, Trash2, X } from 'luci
 import { auth } from '../../../../firebase';
 import TeacherPackViewer from '../../../../components/corp/TeacherPackViewer';
 import CustomPackEditor from '../../../../components/corp/CustomPackEditor';
+import { IRREGULAR_VERBS_PACK_ID } from '../../../../data/irregularVerbsCorpPack';
 
 export default function CoursesTab({ p }) {
   const {
@@ -181,29 +182,33 @@ export default function CoursesTab({ p }) {
                                 </span>
                               </td>
                               <td style={{ width: '40px' }}>
-                                <button
-                                  type="button"
-                                  title="Delete"
-                                  style={{
-                                    background: 'rgba(239, 68, 68, 0.14)',
-                                    border: '1px solid rgba(239, 68, 68, 0.25)',
-                                    borderRadius: '9px',
-                                    color: '#ef4444',
-                                    width: '28px',
-                                    height: '28px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    cursor: 'pointer',
-                                    flexShrink: 0
-                                  }}
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    confirmDeletePack(pack);
-                                  }}
-                                >
-                                  <Trash2 size={15} />
-                                </button>
+                                {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
+                                  <button
+                                    type="button"
+                                    title="Delete"
+                                    style={{
+                                      background: 'rgba(239, 68, 68, 0.14)',
+                                      border: '1px solid rgba(239, 68, 68, 0.25)',
+                                      borderRadius: '9px',
+                                      color: '#ef4444',
+                                      width: '28px',
+                                      height: '28px',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      cursor: 'pointer',
+                                      flexShrink: 0
+                                    }}
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      confirmDeletePack(pack);
+                                    }}
+                                  >
+                                    <Trash2 size={15} />
+                                  </button>
+                                ) : (
+                                  <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                                )}
                               </td>
                             </tr>
                           ))}
@@ -253,29 +258,33 @@ export default function CoursesTab({ p }) {
                               {pack.wordCount || (pack.words ? pack.words.length : 0)} words
                             </span>
 
-                            <button
-                              type="button"
-                              title="Delete"
-                              style={{
-                                background: 'rgba(239, 68, 68, 0.14)',
-                                border: '1px solid rgba(239, 68, 68, 0.25)',
-                                borderRadius: '9px',
-                                color: '#ef4444',
-                                width: '28px',
-                                height: '28px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                cursor: 'pointer',
-                                flexShrink: 0
-                              }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                confirmDeletePack(pack);
-                              }}
-                            >
-                              <Trash2 size={15} />
-                            </button>
+                            {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
+                              <button
+                                type="button"
+                                title="Delete"
+                                style={{
+                                  background: 'rgba(239, 68, 68, 0.14)',
+                                  border: '1px solid rgba(239, 68, 68, 0.25)',
+                                  borderRadius: '9px',
+                                  color: '#ef4444',
+                                  width: '28px',
+                                  height: '28px',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  cursor: 'pointer',
+                                  flexShrink: 0
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  confirmDeletePack(pack);
+                                }}
+                              >
+                                <Trash2 size={15} />
+                              </button>
+                            ) : (
+                              <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                            )}
                           </div>
                         </div>
                       ))}

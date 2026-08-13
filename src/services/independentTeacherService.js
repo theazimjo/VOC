@@ -362,6 +362,9 @@ export async function duplicateIndependentCustomPack(uid, pack) {
 }
 
 export async function deleteIndependentCustomPack(uid, packId) {
+  if (packId === IRREGULAR_VERBS_PACK_ID) {
+    throw new Error("Irregular Verbs pack is a system pack and cannot be deleted.");
+  }
   await update(ref(db), { [`independentTeachers/${uid}/customPacks/${packId}`]: null });
 }
 
