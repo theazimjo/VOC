@@ -12,7 +12,6 @@ import { playSound } from '../../utils/feedback';
 import { computeRetentionStats } from '../../utils/memoryEngine';
 import { getConfusionPairs } from '../../experiment/experimentDB';
 import WordList from '../../components/Words/WordList';
-import BulkImportForm from '../../components/Words/BulkImportForm';
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
 import IosSpinner from '../../components/common/IosSpinner';
@@ -278,13 +277,6 @@ export default function PackDetail() {
         language={pack.language || 'en-US'}
       />
 
-      <BulkImportForm
-        isOpen={showBulkImportForm}
-        onClose={() => setShowBulkImportForm(false)}
-        onImport={handleBulkImport}
-        packLanguage={pack.language || 'en-US'}
-      />
-
       <PhotoWordExtractorModal
         isOpen={showPhotoExtractorModal}
         onClose={() => setShowPhotoExtractorModal(false)}
@@ -295,7 +287,7 @@ export default function PackDetail() {
       {pack.name !== 'Irregular Verbs' && (
         <SpeedDialFAB
           onAddWord={() => navigate(`/packs/${packId}/word/new`)}
-          onImportJson={() => setShowBulkImportForm(true)}
+          onImportJson={() => navigate(`/packs/${packId}/import-json`)}
           onExtractPhoto={() => setShowPhotoExtractorModal(true)}
         />
       )}
