@@ -240,19 +240,24 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
             })}
           </div>
 
-          <form onSubmit={handleSubmit} className="spelling-form">
+          <form onSubmit={handleSubmit} className="spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
             <input
               ref={inputRef}
               type="text"
-              name="spelling_answer_no_suggest"
+              name="practice_no_autofill_input"
               className={`spelling-input ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
               value={input}
               onChange={e => !answered && setInput(e.target.value)}
               disabled={answered}
-              autoComplete="one-time-code"
+              autoComplete="off"
               autoCorrect="off"
               autoCapitalize="none"
               spellCheck={false}
+              inputMode="text"
+              aria-autocomplete="none"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
               data-gramm="false"
               data-enable-grammarly="false"
               placeholder="Type the word..."

@@ -538,6 +538,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                     <input
                       ref={v1Ref}
                       type="text"
+                      name="practice_no_autofill_v1"
                       className={`trainer-input ${tablePrefillType === 1 ? 'prefilled' : ''} ${checked && !tableCorrectFlags.v1 ? 'error' : ''} ${checked && tableCorrectFlags.v1 && tablePrefillType !== 1 ? 'success' : ''}`}
                       value={tableAnswers.v1}
                       onChange={(e) => handleTableInputChange('v1', e.target.value)}
@@ -547,7 +548,12 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       autoComplete="off"
                       autoCorrect="off"
                       autoCapitalize="none"
-                      spellCheck="false"
+                      spellCheck={false}
+                      inputMode="text"
+                      aria-autocomplete="none"
+                      data-lpignore="true"
+                      data-1p-ignore="true"
+                      data-form-type="other"
                     />
                   </div>
 
@@ -556,6 +562,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                     <input
                       ref={v2Ref}
                       type="text"
+                      name="practice_no_autofill_v2"
                       className={`trainer-input ${tablePrefillType === 2 ? 'prefilled' : ''} ${checked && !tableCorrectFlags.v2 ? 'error' : ''} ${checked && tableCorrectFlags.v2 && tablePrefillType !== 2 ? 'success' : ''}`}
                       value={tableAnswers.v2}
                       onChange={(e) => handleTableInputChange('v2', e.target.value)}
@@ -565,7 +572,12 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       autoComplete="off"
                       autoCorrect="off"
                       autoCapitalize="none"
-                      spellCheck="false"
+                      spellCheck={false}
+                      inputMode="text"
+                      aria-autocomplete="none"
+                      data-lpignore="true"
+                      data-1p-ignore="true"
+                      data-form-type="other"
                     />
                   </div>
 
@@ -574,6 +586,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                     <input
                       ref={v3Ref}
                       type="text"
+                      name="practice_no_autofill_v3"
                       className={`trainer-input ${tablePrefillType === 3 ? 'prefilled' : ''} ${checked && !tableCorrectFlags.v3 ? 'error' : ''} ${checked && tableCorrectFlags.v3 && tablePrefillType !== 3 ? 'success' : ''}`}
                       value={tableAnswers.v3}
                       onChange={(e) => handleTableInputChange('v3', e.target.value)}
@@ -583,7 +596,12 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                       autoComplete="off"
                       autoCorrect="off"
                       autoCapitalize="none"
-                      spellCheck="false"
+                      spellCheck={false}
+                      inputMode="text"
+                      aria-autocomplete="none"
+                      data-lpignore="true"
+                      data-1p-ignore="true"
+                      data-form-type="other"
                     />
                   </div>
                 </div>

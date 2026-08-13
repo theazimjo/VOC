@@ -370,20 +370,25 @@ export default function MixedPractice() {
                     <span className="question-prompt">Type the English translation:</span>
                     <h2 className="question-word">{questions[currentIdx].word.translation}</h2>
 
-                    <form onSubmit={handleTextSubmit} className="mp-spelling-form">
+                    <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
                       <input
                         type="text"
-                        name="spelling_answer_no_suggest"
+                        name="practice_no_autofill_input"
                         className="mp-spelling-input"
                         placeholder="Type the English word..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
                         autoFocus
-                        autoComplete="one-time-code"
+                        autoComplete="off"
                         autoCorrect="off"
                         autoCapitalize="none"
                         spellCheck={false}
+                        inputMode="text"
+                        aria-autocomplete="none"
+                        data-lpignore="true"
+                        data-1p-ignore="true"
+                        data-form-type="other"
                         data-gramm="false"
                         data-enable-grammarly="false"
                       />
@@ -411,20 +416,25 @@ export default function MixedPractice() {
                       <span className="audio-helper-text">Tap to hear the pronunciation again</span>
                     </div>
 
-                    <form onSubmit={handleTextSubmit} className="mp-spelling-form">
+                    <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
                       <input
                         type="text"
-                        name="spelling_answer_no_suggest"
+                        name="practice_no_autofill_input"
                         className="mp-spelling-input"
                         placeholder="Type the word you heard..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
                         autoFocus
-                        autoComplete="one-time-code"
+                        autoComplete="off"
                         autoCorrect="off"
                         autoCapitalize="none"
                         spellCheck={false}
+                        inputMode="text"
+                        aria-autocomplete="none"
+                        data-lpignore="true"
+                        data-1p-ignore="true"
+                        data-form-type="other"
                         data-gramm="false"
                         data-enable-grammarly="false"
                       />
