@@ -250,48 +250,44 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               disabled={answered}
               autoComplete="off"
               autoCorrect="off"
-              spellCheck="false"
+              autoCapitalize="none"
+              spellCheck={false}
+              data-gramm="false"
               placeholder="Type the word..."
             />
-          </form>
-        </motion.div>
-      </AnimatePresence>
 
-      {/* Fixed full-width bottom bar */}
-      <div
-        className={`spelling-bottom-bar ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
-        style={keyboardInset > 0 ? { transform: `translateY(-${keyboardInset}px)` } : undefined}
-      >
-        <div className="spelling-bottom-bar-inner">
-          {!answered ? (
-            <>
-              <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                Don't know
-              </button>
-              <button
-                type="button"
-                className="btn-spell-submit"
-                onClick={() => submitAnswer()}
-                disabled={!input.trim()}
-              >
-                Check
-              </button>
-            </>
-          ) : (
-            <>
-              <div className="spelling-bottom-feedback">
+            {answered && (
+              <div className={`spelling-feedback-banner ${isCorrect ? 'correct' : 'wrong'}`}>
                 {isCorrect ? <Check size={18} strokeWidth={2.5} /> : <X size={18} strokeWidth={2.5} />}
                 <span>
                   {isCorrect ? "Correct!" : <>Answer: <strong>{currentWord.word}</strong></>}
                 </span>
               </div>
-              <button type="button" className="btn-spell-next" onClick={handleNext}>
-                {isLast ? 'Results →' : 'Next →'}
-              </button>
-            </>
-          )}
-        </div>
-      </div>
+            )}
+
+            <div className="spelling-actions">
+              {!answered ? (
+                <>
+                  <button type="button" className="btn btn-ghost" onClick={handleSkip}>
+                    Don't know
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-spell-submit"
+                    disabled={!input.trim()}
+                  >
+                    Check
+                  </button>
+                </>
+              ) : (
+                <button type="button" className="btn btn-primary btn-spell-next" onClick={handleNext} autoFocus>
+                  {isLast ? 'Results →' : 'Next →'}
+                </button>
+              )}
+            </div>
+          </form>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

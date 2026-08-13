@@ -220,64 +220,43 @@
   background: var(--error-dim);
 }
 
-/* ─── Fixed full-width bottom bar, app's own visual language ─── */
-.spelling-bottom-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 200;
-  background: var(--bg-glass-strong);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-top: 1px solid var(--border);
-  padding: env(safe-area-inset-bottom, 0px) 0 0 0;
-}
-
-.spelling-bottom-bar-inner {
-  max-width: 560px;
-  margin: 0 auto;
-  padding: var(--space-md) var(--space-lg);
+/* ─── Actions & Feedback area inside card ─── */
+.spelling-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
+  width: 100%;
+  margin-top: 4px;
 }
 
-.spelling-bottom-feedback {
+.spelling-feedback-banner {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
   font-size: var(--font-md);
   font-weight: 700;
+  margin-top: 4px;
 }
-.spelling-bottom-bar.correct .spelling-bottom-feedback { color: var(--success); }
-.spelling-bottom-bar.wrong .spelling-bottom-feedback   { color: var(--error); }
+
+.spelling-feedback-banner.correct {
+  background: var(--success-dim);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.spelling-feedback-banner.wrong {
+  background: var(--error-dim);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
 
 .btn-spell-submit {
-  background: var(--accent-1);
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 12px 32px;
-  font-size: var(--font-md);
-  font-weight: 700;
-  cursor: pointer;
-  font-family: var(--font-family);
-  transition: filter var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
-}
-.btn-spell-submit:hover:not(:disabled) {
-  filter: brightness(1.08);
-}
-.btn-spell-submit:active:not(:disabled) {
-  transform: scale(0.97);
-}
-.btn-spell-submit:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
-
-.btn-spell-next {
+  flex: 1;
   background: var(--accent-1);
   color: white;
   border: none;
@@ -287,8 +266,39 @@
   font-weight: 700;
   cursor: pointer;
   font-family: var(--font-family);
+  transition: filter var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-spell-submit:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+.btn-spell-submit:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.btn-spell-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-spell-next {
+  width: 100%;
+  background: var(--accent-1);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 28px;
+  font-size: var(--font-md);
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-family);
   transition: filter var(--transition-fast), transform var(--transition-fast);
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .btn-spell-next:hover {
   filter: brightness(1.08);
@@ -297,22 +307,11 @@
   transform: scale(0.98);
 }
 
-/* Sit above the mobile bottom tab bar instead of overlapping it */
-@media (max-width: 768px) {
-  .spelling-bottom-bar {
-    bottom: calc(60px + env(safe-area-inset-bottom, 0px));
-    padding: 0;
-  }
-}
-
 /* ─── Responsive ─── */
 @media (max-width: 600px) {
   .spelling-card { padding: var(--space-lg) var(--space-md); }
   .spelling-target { font-size: 2rem; }
   .spelling-hint { font-size: var(--font-md); letter-spacing: 2px; }
   .spelling-input { font-size: var(--font-lg); padding: var(--space-sm) var(--space-md); }
-
-  .spelling-bottom-bar-inner { padding: var(--space-sm) var(--space-md); gap: var(--space-sm); }
-  .btn-spell-submit, .btn-spell-next { padding: 10px 20px; font-size: var(--font-sm); }
-  .spelling-bottom-feedback { font-size: var(--font-sm); }
+  .btn-spell-submit, .btn-spell-next { padding: 12px 20px; font-size: var(--font-sm); }
 }
