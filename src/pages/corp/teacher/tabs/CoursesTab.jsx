@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { ArrowLeft, BookOpen, ChevronRight, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { ArrowLeft, BookOpen, ChevronRight, MoreVertical, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
 import { auth } from '../../../../firebase';
 import TeacherPackViewer from '../../../../components/corp/TeacherPackViewer';
 import CustomPackEditor from '../../../../components/corp/CustomPackEditor';
@@ -8,11 +9,51 @@ import { IRREGULAR_VERBS_PACK_ID } from '../../../../data/irregularVerbsCorpPack
 export default function CoursesTab({ p }) {
   const {
     centerId, independentUid, customPacks, setCustomPacks, filteredPacks, searchTerm, setSearchTerm,
-    setShowPackEditor, showPackEditor, viewingPack, setViewingPack,
+    setShowPackEditor, showPackEditor,
     handleDeletePack, askConfirm,
   } = p;
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [localViewingPack, setLocalViewingPack] = useState(null);
+  const viewingPack = p.viewingPack !== undefined ? p.viewingPack : localViewingPack;
+
+  const setViewingPack = (pack) => {
+    if (p.setViewingPack) {
+      p.setViewingPack(pack);
+    } else {
+      setLocalViewingPack(pack);
+    }
+    const newParams = new URLSearchParams(searchParams);
+    if (pack) {
+      newParams.set('packId', pack.id);
+    } else {
+      newParams.delete('packId');
+      newParams.delete('monthId');
+      newParams.delete('unitId');
+      newParams.delete('mode');
+    }
+    setSearchParams(newParams, { replace: true });
+  };
+
+  // Sync URL packId on F5 refresh or mount
+  useEffect(() => {
+    const urlPackId = searchParams.get('packId');
+    if (urlPackId) {
+      if (!viewingPack || viewingPack.id !== urlPackId) {
+        const found = (filteredPacks || []).find(pack => pack.id === urlPackId) ||
+                      (customPacks || []).find(pack => pack.id === urlPackId);
+        if (found) {
+          if (p.setViewingPack) p.setViewingPack(found);
+          else setLocalViewingPack(found);
+        }
+      }
+    }
+  }, [searchParams, filteredPacks, customPacks]);
+
   const [editingPack, setEditingPack] = useState(null);
+  const [activePackMenuId, setActivePackMenuId] = useState(null);
+  const [packMenuPos, setPackMenuPos] = useState({ top: 0, right: 0 });
 
   const confirmDeletePack = (pack) => askConfirm({
     title: 'Delete Pack',
@@ -73,12 +114,13 @@ export default function CoursesTab({ p }) {
           <TeacherPackViewer
             pack={viewingPack}
             onBack={() => setViewingPack(null)}
-            editable={viewingPack.scope === 'own'}
+            editable={viewingPack.scope === 'own' && viewingPack.id !== IRREGULAR_VERBS_PACK_ID && !viewingPack.isIrregularVerbs}
             centerId={centerId}
             independentUid={independentUid}
             askConfirm={askConfirm}
             onUpdate={(updatedPack) => {
               setCustomPacks(prev => prev.map(p => p.id === updatedPack.id ? { ...updatedPack, scope: p.scope } : p));
+              setViewingPack({ ...viewingPack, ...updatedPack });
             }}
           />
         ) : (
@@ -173,9 +215,9 @@ export default function CoursesTab({ p }) {
                     You haven't created any private packs yet. Tap <strong>"+"</strong> below to create one only you can see — not even the center admin.
                   </div>
                 ) : (
-                  <div className="teachers-table-card">
+                  <div className="teachers-table-card" style={{ overflow: 'visible' }}>
                     {/* Desktop: data table */}
-                    <div className="teachers-table-wrap" style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+                    <div className="teachers-table-wrap" style={{ overflowX: 'visible', WebkitOverflowScrolling: 'touch' }}>
                       <table className="teachers-table">
                         <thead>
                           <tr>
@@ -201,43 +243,19 @@ export default function CoursesTab({ p }) {
                                   {pack.wordCount || (pack.words ? pack.words.length : 0)} words
                                 </span>
                               </td>
-                              <td style={{ width: '70px' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'flex-end' }}>
-                                  <button
-                                    type="button"
-                                    title="Edit Pack"
-                                    style={{
-                                      background: 'rgba(99, 102, 241, 0.14)',
-                                      border: '1px solid rgba(99, 102, 241, 0.25)',
-                                      borderRadius: '9px',
-                                      color: '#818cf8',
-                                      width: '28px',
-                                      height: '28px',
-                                      display: 'flex',
-                                      alignItems: 'center',
-                                      justifyContent: 'center',
-                                      cursor: 'pointer',
-                                      flexShrink: 0
-                                    }}
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      setEditingPack(pack);
-                                      setShowPackEditor(true);
-                                    }}
-                                  >
-                                    <Pencil size={14} />
-                                  </button>
-                                  {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
+                              <td style={{ width: '40px' }}>
+                                {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
+                                  <div style={{ position: 'relative', display: 'flex', justifyContent: 'flex-end' }} onClick={e => e.stopPropagation()}>
                                     <button
                                       type="button"
-                                      title="Delete"
+                                      title="Options"
                                       style={{
-                                        background: 'rgba(239, 68, 68, 0.14)',
-                                        border: '1px solid rgba(239, 68, 68, 0.25)',
+                                        background: 'rgba(255, 255, 255, 0.06)',
+                                        border: '1px solid rgba(255, 255, 255, 0.1)',
                                         borderRadius: '9px',
-                                        color: '#ef4444',
-                                        width: '28px',
-                                        height: '28px',
+                                        color: 'var(--pg-text-secondary)',
+                                        width: '30px',
+                                        height: '30px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
@@ -246,15 +264,73 @@ export default function CoursesTab({ p }) {
                                       }}
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        confirmDeletePack(pack);
+                                        setActivePackMenuId(activePackMenuId === pack.id ? null : pack.id);
                                       }}
                                     >
-                                      <Trash2 size={15} />
+                                      <MoreVertical size={16} />
                                     </button>
-                                  ) : (
-                                    <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
-                                  )}
-                                </div>
+
+                                    {activePackMenuId === pack.id && (
+                                      <>
+                                        <div
+                                          style={{ position: 'fixed', inset: 0, zIndex: 999 }}
+                                          onClick={(e) => { e.stopPropagation(); setActivePackMenuId(null); }}
+                                        />
+                                        <div
+                                          style={{
+                                            position: 'absolute',
+                                            top: '100%',
+                                            right: 0,
+                                            marginTop: '4px',
+                                            zIndex: 1000,
+                                            background: 'var(--pg-card-bg, #1e293b)',
+                                            border: '1px solid var(--pg-hairline, rgba(255,255,255,0.12))',
+                                            borderRadius: '14px',
+                                            padding: '6px',
+                                            boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: '2px',
+                                            minWidth: '135px'
+                                          }}
+                                          onClick={(e) => e.stopPropagation()}
+                                        >
+                                          <button
+                                            type="button"
+                                            style={{
+                                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                                              borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
+                                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                                            }}
+                                            onClick={() => {
+                                              setActivePackMenuId(null);
+                                              setEditingPack(pack);
+                                              setShowPackEditor(true);
+                                            }}
+                                          >
+                                            <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                                          </button>
+                                          <button
+                                            type="button"
+                                            style={{
+                                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                                              borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
+                                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                                            }}
+                                            onClick={() => {
+                                              setActivePackMenuId(null);
+                                              confirmDeletePack(pack);
+                                            }}
+                                          >
+                                            <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                                          </button>
+                                        </div>
+                                      </>
+                                    )}
+                                  </div>
+                                ) : (
+                                  <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
+                                )}
                               </td>
                             </tr>
                           ))}
@@ -263,7 +339,7 @@ export default function CoursesTab({ p }) {
                     </div>
 
                     {/* Mobile: stacked cards, same data. */}
-                    <div className="teachers-mobile-list" style={{ display: 'none', flexDirection: 'column', gap: '8px', padding: '0.6rem' }}>
+                    <div className="teachers-mobile-list" style={{ flexDirection: 'column', gap: '8px', padding: '0.6rem' }}>
                       {filteredPacks.filter(p => p.scope === 'own').map((pack) => (
                         <div
                           key={pack.id}
@@ -304,55 +380,90 @@ export default function CoursesTab({ p }) {
                               {pack.wordCount || (pack.words ? pack.words.length : 0)} words
                             </span>
 
-                            <button
-                              type="button"
-                              title="Edit Pack"
-                              style={{
-                                background: 'rgba(99, 102, 241, 0.14)',
-                                border: '1px solid rgba(99, 102, 241, 0.25)',
-                                borderRadius: '9px',
-                                color: '#818cf8',
-                                width: '28px',
-                                height: '28px',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                cursor: 'pointer',
-                                flexShrink: 0
-                              }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setEditingPack(pack);
-                                setShowPackEditor(true);
-                              }}
-                            >
-                              <Pencil size={14} />
-                            </button>
-
                             {pack.id !== IRREGULAR_VERBS_PACK_ID && !pack.isIrregularVerbs ? (
-                              <button
-                                type="button"
-                                title="Delete"
-                                style={{
-                                  background: 'rgba(239, 68, 68, 0.14)',
-                                  border: '1px solid rgba(239, 68, 68, 0.25)',
-                                  borderRadius: '9px',
-                                  color: '#ef4444',
-                                  width: '28px',
-                                  height: '28px',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'center',
-                                  cursor: 'pointer',
-                                  flexShrink: 0
-                                }}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  confirmDeletePack(pack);
-                                }}
-                              >
-                                <Trash2 size={15} />
-                              </button>
+                              <div style={{ position: 'relative' }} onClick={e => e.stopPropagation()}>
+                                <button
+                                  type="button"
+                                  title="Options"
+                                  style={{
+                                    background: 'rgba(255, 255, 255, 0.06)',
+                                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                                    borderRadius: '9px',
+                                    color: 'var(--pg-text-secondary)',
+                                    width: '30px',
+                                    height: '30px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    cursor: 'pointer',
+                                    flexShrink: 0
+                                  }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setActivePackMenuId(activePackMenuId === pack.id ? null : pack.id);
+                                  }}
+                                >
+                                  <MoreVertical size={16} />
+                                </button>
+
+                                {activePackMenuId === pack.id && (
+                                  <>
+                                    <div
+                                      style={{ position: 'fixed', inset: 0, zIndex: 999 }}
+                                      onClick={(e) => { e.stopPropagation(); setActivePackMenuId(null); }}
+                                    />
+                                    <div
+                                      style={{
+                                        position: 'absolute',
+                                        top: '100%',
+                                        right: 0,
+                                        marginTop: '4px',
+                                        zIndex: 1000,
+                                        background: 'var(--pg-card-bg, #1e293b)',
+                                        border: '1px solid var(--pg-hairline, rgba(255,255,255,0.12))',
+                                        borderRadius: '14px',
+                                        padding: '6px',
+                                        boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '2px',
+                                        minWidth: '135px'
+                                      }}
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      <button
+                                        type="button"
+                                        style={{
+                                          display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                                          borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
+                                          fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                                        }}
+                                        onClick={() => {
+                                          setActivePackMenuId(null);
+                                          setEditingPack(pack);
+                                          setShowPackEditor(true);
+                                        }}
+                                      >
+                                        <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                                      </button>
+                                      <button
+                                        type="button"
+                                        style={{
+                                          display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                                          borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
+                                          fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                                        }}
+                                        onClick={() => {
+                                          setActivePackMenuId(null);
+                                          confirmDeletePack(pack);
+                                        }}
+                                      >
+                                        <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                                      </button>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
                             ) : (
                               <ChevronRight size={16} style={{ color: 'var(--pg-text-muted)' }} />
                             )}

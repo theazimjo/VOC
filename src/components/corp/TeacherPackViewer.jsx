@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X, Pencil, Trash2 } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { ArrowLeft, BookOpen, Search, ChevronRight, Plus, Check, X, Pencil, Trash2, MoreVertical } from 'lucide-react';
 import { updateCustomPack } from '../../services/corpService';
 import { updateIndependentCustomPack } from '../../services/independentTeacherService';
 import TeacherAddWordModal from './TeacherAddWordModal';
@@ -23,11 +24,17 @@ function deriveMonths(pack) {
 }
 
 export default function TeacherPackViewer({ pack, onBack, editable = false, centerId, independentUid = null, askConfirm = null, onUpdate }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [months, setMonths] = useState(() => deriveMonths(pack));
-  const [monthId, setMonthId] = useState(null);
-  const [unitId, setUnitId] = useState(null);
+  const [monthId, setMonthIdState] = useState(() => searchParams.get('monthId') || null);
+  const [unitId, setUnitIdState] = useState(() => searchParams.get('unitId') || null);
   const [search, setSearch] = useState('');
   const [saving, setSaving] = useState(false);
+
+  // Active popover menu ID state for Month, Set, or Word
+  const [activeItemMenuId, setActiveItemMenuId] = useState(null);
+  const [itemMenuPos, setItemMenuPos] = useState({ top: 0, right: 0 });
 
   // Month editing / adding state
   const [addingMonth, setAddingMonth] = useState(false);
@@ -42,14 +49,63 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
   const [editingUnitTitle, setEditingUnitTitle] = useState('');
 
   // Dedicated Word addition / editing modal state
-  const [showAddWordModal, setShowAddWordModal] = useState(false);
+  const [showAddWordModal, setShowAddWordModalState] = useState(() => searchParams.get('mode') === 'addWord');
   const [editingWord, setEditingWord] = useState(null);
 
+  const setMonthId = (mId) => {
+    setMonthIdState(mId);
+    const p = new URLSearchParams(searchParams);
+    if (mId) {
+      p.set('monthId', mId);
+    } else {
+      p.delete('monthId');
+      p.delete('unitId');
+      p.delete('mode');
+    }
+    setSearchParams(p, { replace: true });
+  };
+
+  const setUnitId = (uId) => {
+    setUnitIdState(uId);
+    const p = new URLSearchParams(searchParams);
+    if (uId) {
+      p.set('unitId', uId);
+    } else {
+      p.delete('unitId');
+      p.delete('mode');
+    }
+    setSearchParams(p, { replace: true });
+  };
+
+  const setShowAddWordModal = (val) => {
+    setShowAddWordModalState(val);
+    const p = new URLSearchParams(searchParams);
+    if (val) {
+      p.set('mode', 'addWord');
+    } else {
+      p.delete('mode');
+    }
+    setSearchParams(p, { replace: true });
+  };
+
   useEffect(() => {
-    setMonths(deriveMonths(pack));
-    setMonthId(null);
-    setUnitId(null);
-  }, [pack.id]);
+    const derived = deriveMonths(pack);
+    setMonths(derived);
+
+    const urlMonthId = searchParams.get('monthId');
+    const urlUnitId = searchParams.get('unitId');
+    const urlMode = searchParams.get('mode');
+
+    if (urlMonthId) {
+      setMonthIdState(urlMonthId);
+    }
+    if (urlUnitId) {
+      setUnitIdState(urlUnitId);
+    }
+    if (urlMode === 'addWord') {
+      setShowAddWordModalState(true);
+    }
+  }, [pack.id, searchParams]);
 
   const activeMonth = months.find(m => m.id === monthId) || null;
   const activeUnit = activeMonth?.units?.find(u => u.id === unitId) || null;
@@ -200,6 +256,7 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
         } : u),
       };
     });
+    setShowAddWordModal(false);
     persist(updated);
   };
 
@@ -249,6 +306,27 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
       executeDelete();
     }
   };
+
+  if (showAddWordModal) {
+    return (
+      <div className="tpv-container">
+        <TeacherAddWordModal
+          open={true}
+          isPage={true}
+          onClose={() => {
+            setShowAddWordModal(false);
+            setEditingWord(null);
+          }}
+          onAddWords={handleAddWords}
+          onSaveEditWord={handleSaveEditWord}
+          editWord={editingWord}
+          saving={saving}
+          monthTitle={activeMonth?.title || ''}
+          unitTitle={activeUnit?.title || ''}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="tpv-container">
@@ -305,42 +383,95 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                 </button>
               </form>
             ) : (
-              <button type="button" key={m.id} className="tpv-row" onClick={() => setMonthId(m.id)}>
+              <div key={m.id} className="tpv-row" onClick={() => setMonthId(m.id)}>
                 <span className="tpv-row-num">{idx + 1}</span>
                 <span className="tpv-row-label">{m.title}</span>
                 <span className="tpv-row-meta">{(m.units || []).length} topics</span>
                 
                 {editable && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginLeft: '6px' }} onClick={e => e.stopPropagation()}>
+                  <div style={{ marginLeft: 'auto' }} onClick={e => e.stopPropagation()}>
                     <button
                       type="button"
-                      title="Edit month"
+                      title="Options"
                       style={{
-                        background: 'rgba(99, 102, 241, 0.14)', border: '1px solid rgba(99, 102, 241, 0.25)',
-                        borderRadius: '8px', color: '#818cf8', width: '26px', height: '26px',
+                        background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '9px', color: 'var(--pg-text-secondary)', width: '28px', height: '28px',
                         display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
                       }}
-                      onClick={e => handleStartEditMonth(m, e)}
-                    >
-                      <Pencil size={13} />
-                    </button>
-                    <button
-                      type="button"
-                      title="Delete month"
-                      style={{
-                        background: 'rgba(239, 68, 68, 0.14)', border: '1px solid rgba(239, 68, 68, 0.25)',
-                        borderRadius: '8px', color: '#ef4444', width: '26px', height: '26px',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (activeItemMenuId === m.id) {
+                          setActiveItemMenuId(null);
+                        } else {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          setItemMenuPos({ top: rect.bottom + 4, right: window.innerWidth - rect.right });
+                          setActiveItemMenuId(m.id);
+                        }
                       }}
-                      onClick={e => handleDeleteMonth(m, e)}
                     >
-                      <Trash2 size={13} />
+                      <MoreVertical size={15} />
                     </button>
+
+                    {activeItemMenuId === m.id && (
+                      <>
+                        <div
+                          style={{ position: 'fixed', inset: 0, zIndex: 99998 }}
+                          onClick={(e) => { e.stopPropagation(); setActiveItemMenuId(null); }}
+                        />
+                        <div
+                          style={{
+                            position: 'fixed',
+                            top: `${itemMenuPos.top}px`,
+                            right: `${itemMenuPos.right}px`,
+                            zIndex: 99999,
+                            background: 'var(--pg-card-bg, #1e293b)',
+                            border: '1px solid var(--pg-hairline, rgba(255,255,255,0.12))',
+                            borderRadius: '14px',
+                            padding: '6px',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '2px',
+                            minWidth: '130px'
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <button
+                            type="button"
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                              borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
+                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                            }}
+                            onClick={(e) => {
+                              setActiveItemMenuId(null);
+                              handleStartEditMonth(m, e);
+                            }}
+                          >
+                            <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                          </button>
+                          <button
+                            type="button"
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                              borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
+                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                            }}
+                            onClick={(e) => {
+                              setActiveItemMenuId(null);
+                              handleDeleteMonth(m, e);
+                            }}
+                          >
+                            <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
 
                 <ChevronRight size={18} className="tpv-row-arrow" />
-              </button>
+              </div>
             )
           ))}
 
@@ -394,42 +525,95 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                 </button>
               </form>
             ) : (
-              <button type="button" key={u.id} className="tpv-row" onClick={() => setUnitId(u.id)}>
+              <div key={u.id} className="tpv-row" onClick={() => setUnitId(u.id)}>
                 <span className="tpv-row-num">{idx + 1}</span>
                 <span className="tpv-row-label">{u.title}</span>
                 <span className="tpv-row-meta">{(u.words || []).length} words</span>
 
                 {editable && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginLeft: '6px' }} onClick={e => e.stopPropagation()}>
+                  <div style={{ marginLeft: 'auto' }} onClick={e => e.stopPropagation()}>
                     <button
                       type="button"
-                      title="Edit set"
+                      title="Options"
                       style={{
-                        background: 'rgba(99, 102, 241, 0.14)', border: '1px solid rgba(99, 102, 241, 0.25)',
-                        borderRadius: '8px', color: '#818cf8', width: '26px', height: '26px',
+                        background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '9px', color: 'var(--pg-text-secondary)', width: '28px', height: '28px',
                         display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
                       }}
-                      onClick={e => handleStartEditUnit(u, e)}
-                    >
-                      <Pencil size={13} />
-                    </button>
-                    <button
-                      type="button"
-                      title="Delete set"
-                      style={{
-                        background: 'rgba(239, 68, 68, 0.14)', border: '1px solid rgba(239, 68, 68, 0.25)',
-                        borderRadius: '8px', color: '#ef4444', width: '26px', height: '26px',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexShrink: 0
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (activeItemMenuId === u.id) {
+                          setActiveItemMenuId(null);
+                        } else {
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          setItemMenuPos({ top: rect.bottom + 4, right: window.innerWidth - rect.right });
+                          setActiveItemMenuId(u.id);
+                        }
                       }}
-                      onClick={e => handleDeleteUnit(u, e)}
                     >
-                      <Trash2 size={13} />
+                      <MoreVertical size={15} />
                     </button>
+
+                    {activeItemMenuId === u.id && (
+                      <>
+                        <div
+                          style={{ position: 'fixed', inset: 0, zIndex: 99998 }}
+                          onClick={(e) => { e.stopPropagation(); setActiveItemMenuId(null); }}
+                        />
+                        <div
+                          style={{
+                            position: 'fixed',
+                            top: `${itemMenuPos.top}px`,
+                            right: `${itemMenuPos.right}px`,
+                            zIndex: 99999,
+                            background: 'var(--pg-card-bg, #1e293b)',
+                            border: '1px solid var(--pg-hairline, rgba(255,255,255,0.12))',
+                            borderRadius: '14px',
+                            padding: '6px',
+                            boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '2px',
+                            minWidth: '130px'
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <button
+                            type="button"
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                              borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
+                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                            }}
+                            onClick={(e) => {
+                              setActiveItemMenuId(null);
+                              handleStartEditUnit(u, e);
+                            }}
+                          >
+                            <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                          </button>
+                          <button
+                            type="button"
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                              borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
+                              fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                            }}
+                            onClick={(e) => {
+                              setActiveItemMenuId(null);
+                              handleDeleteUnit(u, e);
+                            }}
+                          >
+                            <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
 
                 <ChevronRight size={18} className="tpv-row-arrow" />
-              </button>
+              </div>
             )
           ))}
 
@@ -499,33 +683,86 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
                         {POS_LABELS[w.partOfSpeech] || POS_LABELS.other}
                       </span>
                       {editable && (
-                        <>
+                        <div>
                           <button
                             type="button"
-                            title="Edit word"
+                            title="Options"
                             style={{
-                              background: 'transparent', border: 'none', color: '#818cf8',
-                              cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center'
+                              background: 'transparent', border: 'none', color: 'var(--pg-text-secondary)',
+                              cursor: 'pointer', padding: '2px 4px', display: 'flex', alignItems: 'center',
+                              borderRadius: '6px'
                             }}
-                            onClick={() => {
-                              setEditingWord(w);
-                              setShowAddWordModal(true);
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (activeItemMenuId === w.id) {
+                                setActiveItemMenuId(null);
+                              } else {
+                                const rect = e.currentTarget.getBoundingClientRect();
+                                setItemMenuPos({ top: rect.bottom + 4, right: window.innerWidth - rect.right });
+                                setActiveItemMenuId(w.id);
+                              }
                             }}
                           >
-                            <Pencil size={13} />
+                            <MoreVertical size={16} />
                           </button>
-                          <button
-                            type="button"
-                            title="Delete word"
-                            style={{
-                              background: 'transparent', border: 'none', color: '#ef4444',
-                              cursor: 'pointer', padding: '2px', display: 'flex', alignItems: 'center'
-                            }}
-                            onClick={e => handleDeleteWord(w, e)}
-                          >
-                            <Trash2 size={13} />
-                          </button>
-                        </>
+
+                          {activeItemMenuId === w.id && (
+                            <>
+                              <div
+                                style={{ position: 'fixed', inset: 0, zIndex: 99998 }}
+                                onClick={(e) => { e.stopPropagation(); setActiveItemMenuId(null); }}
+                              />
+                              <div
+                                style={{
+                                  position: 'fixed',
+                                  top: `${itemMenuPos.top}px`,
+                                  right: `${itemMenuPos.right}px`,
+                                  zIndex: 99999,
+                                  background: 'var(--pg-card-bg, #1e293b)',
+                                  border: '1px solid var(--pg-hairline, rgba(255,255,255,0.12))',
+                                  borderRadius: '14px',
+                                  padding: '6px',
+                                  boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  gap: '2px',
+                                  minWidth: '130px'
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                <button
+                                  type="button"
+                                  style={{
+                                    display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                                    borderRadius: '8px', border: 'none', background: 'transparent', color: 'var(--pg-text, #f8fafc)',
+                                    fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                                  }}
+                                  onClick={() => {
+                                    setActiveItemMenuId(null);
+                                    setEditingWord(w);
+                                    setShowAddWordModal(true);
+                                  }}
+                                >
+                                  <Pencil size={14} style={{ color: '#818cf8' }} /> Edit
+                                </button>
+                                <button
+                                  type="button"
+                                  style={{
+                                    display: 'flex', alignItems: 'center', gap: '8px', width: '100%', padding: '8px 12px',
+                                    borderRadius: '8px', border: 'none', background: 'transparent', color: '#ef4444',
+                                    fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer'
+                                  }}
+                                  onClick={(e) => {
+                                    setActiveItemMenuId(null);
+                                    handleDeleteWord(w, e);
+                                  }}
+                                >
+                                  <Trash2 size={14} style={{ color: '#ef4444' }} /> Delete
+                                </button>
+                              </div>
+                            </>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -538,21 +775,6 @@ export default function TeacherPackViewer({ pack, onBack, editable = false, cent
           )}
         </div>
       )}
-
-      {/* Dedicated Word Addition & Editing Modal */}
-      <TeacherAddWordModal
-        open={showAddWordModal}
-        onClose={() => {
-          setShowAddWordModal(false);
-          setEditingWord(null);
-        }}
-        onAddWords={handleAddWords}
-        onSaveEditWord={handleSaveEditWord}
-        editWord={editingWord}
-        saving={saving}
-        monthTitle={activeMonth?.title || ''}
-        unitTitle={activeUnit?.title || ''}
-      />
     </div>
   );
 }

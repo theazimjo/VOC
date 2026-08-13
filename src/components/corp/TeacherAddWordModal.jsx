@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Plus, Copy, Check, FileText, AlertCircle, Edit3 } from 'lucide-react';
+import { ArrowLeft, Plus, Copy, Check, FileText, AlertCircle, X } from 'lucide-react';
 import './TeacherAddWordModal.css';
 
 const POS_LABELS = {
@@ -17,7 +17,7 @@ const SAMPLE_JSON = `[
     "word": "Meticulous",
     "translation": "Sinchkov, ehtiyotkor",
     "partOfSpeech": "adjective",
-    "definition": "Har bir detalga alohida e'tibor beradigan",
+    "definition": "Showing great attention to detail; very careful and precise.",
     "example": "He paid meticulous attention to detail."
   },
   {
@@ -35,7 +35,8 @@ export default function TeacherAddWordModal({
   editWord = null,
   saving = false,
   monthTitle = '',
-  unitTitle = ''
+  unitTitle = '',
+  isPage = true
 }) {
   const [activeTab, setActiveTab] = useState('single'); // 'single' | 'json'
 
@@ -82,19 +83,19 @@ export default function TeacherAddWordModal({
     try {
       const parsed = JSON.parse(raw);
       if (!Array.isArray(parsed)) {
-        setJsonError('JSON ma\'lumoti massiv (array) ko\'rinishida bo\'lishi kerak: [ { "word": "...", "translation": "..." } ]');
+        setJsonError('JSON must be an array format: [ { "word": "...", "translation": "..." } ]');
         setParsedWordsCount(0);
         return;
       }
       const valid = parsed.filter(item => item && typeof item.word === 'string' && item.word.trim() && typeof item.translation === 'string' && item.translation.trim());
       setParsedWordsCount(valid.length);
       if (valid.length === 0) {
-        setJsonError('Yaroqli so\'zlar topilmadi. Har bir obyektda "word" va "translation" maydonlari bo\'lishi shart.');
+        setJsonError('No valid word objects found. Each item must have non-empty "word" and "translation" fields.');
       } else {
         setJsonError('');
       }
     } catch (err) {
-      setJsonError('JSON formatida xatolik mavjud. Iqtiboslar (quotes) va vergullarni tekshiring.');
+      setJsonError('Invalid JSON syntax. Please check quotes and commas.');
       setParsedWordsCount(0);
     }
   }, [jsonText]);
@@ -124,7 +125,6 @@ export default function TeacherAddWordModal({
       if (onSaveEditWord) onSaveEditWord(item);
     } else {
       if (onAddWords) onAddWords([item]);
-      // reset for quick next entry
       setWord('');
       setTranslation('');
       setDefinition('');
@@ -161,14 +161,175 @@ export default function TeacherAddWordModal({
     }
   };
 
+  const formContent = (
+    <div className="tawm-card">
+      {/* Navigation Tabs (only shown when creating) */}
+      {!editWord && (
+        <div className="tawm-tabs">
+          <button
+            type="button"
+            className={`tawm-tab-btn ${activeTab === 'single' ? 'active' : ''}`}
+            onClick={() => setActiveTab('single')}
+          >
+            <Plus size={16} />
+            <span>Single Word</span>
+          </button>
+          <button
+            type="button"
+            className={`tawm-tab-btn ${activeTab === 'json' ? 'active' : ''}`}
+            onClick={() => setActiveTab('json')}
+          >
+            <FileText size={16} />
+            <span>Bulk Import (JSON)</span>
+          </button>
+        </div>
+      )}
+
+      {/* Form Body */}
+      {activeTab === 'single' ? (
+        <form onSubmit={handleSingleSubmit} className="tawm-body">
+          <div className="tawm-form-grid">
+            <div className="tawm-field">
+              <label>WORD (ENGLISH) *</label>
+              <input
+                type="text"
+                placeholder="e.g. Meticulous"
+                value={word}
+                onChange={e => setWord(e.target.value)}
+                autoFocus
+                required
+              />
+            </div>
+
+            <div className="tawm-field">
+              <label>TRANSLATION (UZBEK) *</label>
+              <input
+                type="text"
+                placeholder="e.g. Sinchkov"
+                value={translation}
+                onChange={e => setTranslation(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="tawm-field">
+            <label>PART OF SPEECH</label>
+            <select value={partOfSpeech} onChange={e => setPartOfSpeech(e.target.value)}>
+              {Object.keys(POS_LABELS).map(pos => (
+                <option key={pos} value={pos}>{POS_LABELS[pos]}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="tawm-field">
+            <label>DEFINITION (OPTIONAL)</label>
+            <input
+              type="text"
+              placeholder="e.g. Showing great attention to detail..."
+              value={definition}
+              onChange={e => setDefinition(e.target.value)}
+            />
+          </div>
+
+          <div className="tawm-field">
+            <label>EXAMPLE SENTENCE (OPTIONAL)</label>
+            <input
+              type="text"
+              placeholder="e.g. He paid meticulous attention to detail."
+              value={example}
+              onChange={e => setExample(e.target.value)}
+            />
+          </div>
+
+          <div className="tawm-footer">
+            <button type="button" className="tawm-btn-secondary" onClick={onClose}>
+              Cancel
+            </button>
+            <button type="submit" className="tawm-btn-primary" disabled={saving || !word.trim() || !translation.trim()}>
+              {saving ? 'Saving...' : editWord ? 'Save Changes' : 'Add Word'}
+            </button>
+          </div>
+        </form>
+      ) : (
+        <form onSubmit={handleJsonSubmit} className="tawm-body">
+          <div className="tawm-sample-bar">
+            <div className="tawm-sample-text">
+              <FileText size={15} />
+              <span>Format: JSON Array</span>
+            </div>
+            <button type="button" className="tawm-sample-copy-btn" onClick={handleCopySample}>
+              {copiedSample ? <Check size={14} /> : <Copy size={14} />}
+              <span>{copiedSample ? 'Copied!' : 'Copy Sample JSON'}</span>
+            </button>
+          </div>
+
+          <div className="tawm-field">
+            <textarea
+              className="tawm-textarea"
+              rows={9}
+              placeholder={SAMPLE_JSON}
+              value={jsonText}
+              onChange={e => setJsonText(e.target.value)}
+            />
+          </div>
+
+          {jsonError ? (
+            <div className="tawm-alert tawm-alert-error">
+              <AlertCircle size={16} />
+              <span>{jsonError}</span>
+            </div>
+          ) : parsedWordsCount > 0 ? (
+            <div className="tawm-alert tawm-alert-success">
+              <Check size={16} />
+              <span>{parsedWordsCount} word(s) validated and ready to import.</span>
+            </div>
+          ) : null}
+
+          <div className="tawm-footer">
+            <button type="button" className="tawm-btn-secondary" onClick={onClose}>
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="tawm-btn-primary"
+              disabled={saving || parsedWordsCount === 0}
+            >
+              {saving ? 'Importing...' : `${parsedWordsCount > 0 ? `Import ${parsedWordsCount} Words` : 'Import Words'}`}
+            </button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+
+  if (isPage) {
+    return (
+      <div className="tawm-page-container">
+        <div className="tpv-header">
+          <button type="button" className="tpv-back" onClick={onClose} title="Back">
+            <ArrowLeft size={18} />
+          </button>
+          <div className="tpv-title">
+            <h2>{editWord ? 'Edit Word' : 'Add Words'}</h2>
+            <span>
+              {unitTitle ? `${monthTitle ? monthTitle + ' · ' : ''}${unitTitle}` : 'Add words to topic'}
+            </span>
+          </div>
+        </div>
+
+        {formContent}
+      </div>
+    );
+  }
+
   return (
     <div className="tawm-backdrop" onClick={onClose}>
       <div className="tawm-modal" onClick={e => e.stopPropagation()}>
-        {/* Header */}
         <div className="tawm-header">
           <div>
             <h3 className="tawm-title">
-              {editWord ? 'So\'zni tahrirlash' : 'So\'z qo\'shish'}
+              {editWord ? 'Edit Word' : 'Add Words'}
             </h3>
             {unitTitle && (
               <p className="tawm-subtitle">
@@ -176,148 +337,11 @@ export default function TeacherAddWordModal({
               </p>
             )}
           </div>
-          <button type="button" className="tawm-close-btn" onClick={onClose} title="Yopish">
+          <button type="button" className="tawm-close-btn" onClick={onClose} title="Close">
             <X size={20} />
           </button>
         </div>
-
-        {/* Navigation Tabs (only shown when creating, not when editing single word) */}
-        {!editWord && (
-          <div className="tawm-tabs">
-            <button
-              type="button"
-              className={`tawm-tab-btn ${activeTab === 'single' ? 'active' : ''}`}
-              onClick={() => setActiveTab('single')}
-            >
-              <Plus size={16} />
-              <span>Bitta so'z qo'shish</span>
-            </button>
-            <button
-              type="button"
-              className={`tawm-tab-btn ${activeTab === 'json' ? 'active' : ''}`}
-              onClick={() => setActiveTab('json')}
-            >
-              <FileText size={16} />
-              <span>JSON orqali ko'p so'z qo'shish</span>
-            </button>
-          </div>
-        )}
-
-        {/* Content Body */}
-        {activeTab === 'single' ? (
-          <form onSubmit={handleSingleSubmit} className="tawm-body">
-            <div className="tawm-form-grid">
-              <div className="tawm-field">
-                <label>SO'Z (INGLIZCHA) *</label>
-                <input
-                  type="text"
-                  placeholder="masalan: Meticulous"
-                  value={word}
-                  onChange={e => setWord(e.target.value)}
-                  autoFocus
-                  required
-                />
-              </div>
-
-              <div className="tawm-field">
-                <label>TARCIMA (O'ZBEKCHA) *</label>
-                <input
-                  type="text"
-                  placeholder="masalan: Sinchkov"
-                  value={translation}
-                  onChange={e => setTranslation(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="tawm-field">
-              <label>SO'Z TURKUMI</label>
-              <select value={partOfSpeech} onChange={e => setPartOfSpeech(e.target.value)}>
-                {Object.keys(POS_LABELS).map(pos => (
-                  <option key={pos} value={pos}>{POS_LABELS[pos]}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="tawm-field">
-              <label>TA'RIFI (DEFINITION - IXTIYORIY)</label>
-              <input
-                type="text"
-                placeholder="masalan: Showing great attention to detail..."
-                value={definition}
-                onChange={e => setDefinition(e.target.value)}
-              />
-            </div>
-
-            <div className="tawm-field">
-              <label>MISOLLI GAP (EXAMPLE - IXTIYORIY)</label>
-              <input
-                type="text"
-                placeholder="masalan: He paid meticulous attention to detail."
-                value={example}
-                onChange={e => setExample(e.target.value)}
-              />
-            </div>
-
-            <div className="tawm-footer">
-              <button type="button" className="tawm-btn-secondary" onClick={onClose}>
-                Bekor qilish
-              </button>
-              <button type="submit" className="tawm-btn-primary" disabled={saving || !word.trim() || !translation.trim()}>
-                {saving ? 'Saqlanmoqda...' : editWord ? 'Saqlash' : 'So\'zni qo\'shish'}
-              </button>
-            </div>
-          </form>
-        ) : (
-          <form onSubmit={handleJsonSubmit} className="tawm-body">
-            <div className="tawm-sample-bar">
-              <div className="tawm-sample-text">
-                <FileText size={15} />
-                <span>Format: JSON massivi</span>
-              </div>
-              <button type="button" className="tawm-sample-copy-btn" onClick={handleCopySample}>
-                {copiedSample ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copiedSample ? 'Nusxalandi!' : 'Namuna JSON nusxalash'}</span>
-              </button>
-            </div>
-
-            <div className="tawm-field">
-              <textarea
-                className="tawm-textarea"
-                rows={9}
-                placeholder={SAMPLE_JSON}
-                value={jsonText}
-                onChange={e => setJsonText(e.target.value)}
-              />
-            </div>
-
-            {jsonError ? (
-              <div className="tawm-alert tawm-alert-error">
-                <AlertCircle size={16} />
-                <span>{jsonError}</span>
-              </div>
-            ) : parsedWordsCount > 0 ? (
-              <div className="tawm-alert tawm-alert-success">
-                <Check size={16} />
-                <span>{parsedWordsCount} ta so'z muvaffaqiyatli aniqlandi va qo'shishga tayyor.</span>
-              </div>
-            ) : null}
-
-            <div className="tawm-footer">
-              <button type="button" className="tawm-btn-secondary" onClick={onClose}>
-                Bekor qilish
-              </button>
-              <button
-                type="submit"
-                className="tawm-btn-primary"
-                disabled={saving || parsedWordsCount === 0}
-              >
-                {saving ? 'Saqlanmoqda...' : `${parsedWordsCount > 0 ? parsedWordsCount + ' ta ' : ''}So'zlarni import qilish`}
-              </button>
-            </div>
-          </form>
-        )}
+        {formContent}
       </div>
     </div>
   );
