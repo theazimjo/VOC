@@ -30,6 +30,13 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const [joinError, setJoinError] = useState('');
   const switcherRef = useRef(null);
 
+  // A membership is either a corp/center group (centerId) or an independent
+  // teacher's group (teacherUid, no centerId) — see joinGroupAsUser vs
+  // joinIndependentGroupByCode in corpService.js / independentTeacherService.js.
+  const groupPath = (m) => m.independent
+    ? `independentTeachers/${m.teacherUid}/groups/${m.groupId}`
+    : `centers/${m.centerId}/groups/${m.groupId}`;
+
   // Fetch all joined groups reactively and filter deleted ones
   useEffect(() => {
     if (!user) return;
@@ -40,7 +47,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
         const validList = [];
         for (const m of rawList) {
           try {
-            const groupSnap = await get(ref(db, `centers/${m.centerId}/groups/${m.groupId}`));
+            const groupSnap = await get(ref(db, groupPath(m)));
             if (groupSnap.exists()) {
               validList.push(m);
             } else {
@@ -87,7 +94,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     try {
       const targetM = memberships.find(m => m.groupId === groupId);
       if (targetM) {
-        const groupSnap = await get(ref(db, `centers/${targetM.centerId}/groups/${groupId}`));
+        const groupSnap = await get(ref(db, groupPath(targetM)));
         if (!groupSnap.exists()) {
           await remove(ref(db, `users/${user.uid}/groupMemberships/${groupId}`));
           setMemberships(prev => prev.filter(m => m.groupId !== groupId));
