@@ -5,6 +5,7 @@ import { ref, get, update } from 'firebase/database';
 import { db } from '../../../../firebase';
 import { usePacks } from '../../../../hooks/usePacks';
 import { updateStudentUnitProgress } from '../../../../services/corpService';
+import { updateIndependentStudentUnitProgress } from '../../../../services/independentTeacherService';
 import { weightedSelectWords, filterWordsForMode, PRACTICE_MODE_MIN_WORDS, corpWordStorageId } from '../../../../utils/helpers';
 import { playSound, triggerVibration } from '../../../../utils/feedback';
 import { classifyWord } from '../../../../experiment/semanticClassifier';
@@ -271,7 +272,8 @@ export default function CorpPractice() {
     setResults(summary);
     setStep('results');
 
-    if (membership?.centerId && membership?.groupId && user?.uid && loadedPack) {
+    const hasGroupTarget = membership?.groupId && (membership?.independent ? membership?.teacherUid : membership?.centerId);
+    if (hasGroupTarget && user?.uid && loadedPack) {
       setSaving(true);
       try {
         const decayed = sourceWords.map(w => ({ ...w, mastery: getDecayedMastery(w) }));
@@ -287,13 +289,18 @@ export default function CorpPractice() {
         // silently never show up in teacher statistics. Written per-unit
         // (monthId_unitId) so a teacher can see exactly which topic this
         // was, not just an overall pack %.
-        await updateStudentUnitProgress(membership.centerId, membership.groupId, user.uid, packId, `${monthId}_${unitId}`, {
+        const progressStats = {
           wordsLearned,
           totalWords: decayed.length,
           masteryPercent,
           retentionPercent,
           atRiskCount: atRisk,
-        });
+        };
+        if (membership.independent) {
+          await updateIndependentStudentUnitProgress(membership.teacherUid, membership.groupId, user.uid, packId, `${monthId}_${unitId}`, progressStats);
+        } else {
+          await updateStudentUnitProgress(membership.centerId, membership.groupId, user.uid, packId, `${monthId}_${unitId}`, progressStats);
+        }
       } catch (err) {
         console.error('Error saving progress:', err);
       } finally {

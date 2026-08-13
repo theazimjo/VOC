@@ -8,6 +8,7 @@ import { useGroupMode } from '../../hooks/useGroupMode';
 import { ref, onValue, get, remove } from 'firebase/database';
 import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
+import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
 import GlobalSearch from '../common/GlobalSearch';
 import './Navbar.css';
 
@@ -110,10 +111,19 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     setJoining(true);
     setJoinError('');
     try {
-      await joinGroupAsUser(pinCode.trim(), user.uid, {
-        name: user.displayName || user.email,
-        email: user.email || ''
-      });
+      const profile = { name: user.displayName || user.email, email: user.email || '' };
+      try {
+        // A code is either a corp/center group code or an independent
+        // teacher's group code — the two tables (groupCodes vs
+        // independentGroupCodes) are disjoint, so try the corp one first and
+        // only fall back to the independent one on a genuine "not found",
+        // not on some other failure (permission/network) that shouldn't be
+        // masked by a second, unrelated error.
+        await joinGroupAsUser(pinCode.trim(), user.uid, profile);
+      } catch (err) {
+        if (err.message !== 'Invalid group code!') throw err;
+        await joinIndependentGroupByCode(pinCode.trim(), user.uid, profile);
+      }
       setPinCode('');
       setShowJoinForm(false);
       setShowSwitcher(false);

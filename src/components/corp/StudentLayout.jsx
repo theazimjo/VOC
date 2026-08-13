@@ -5,6 +5,7 @@ import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import { getGroup, getCenterCustomPacks } from '../../services/corpService';
+import { getIndependentGroup, getIndependentCustomPacks } from '../../services/independentTeacherService';
 import StudentSidebar from './StudentSidebar';
 import StudentBottomNav from './StudentBottomNav';
 import Navbar from '../Layout/Navbar';
@@ -35,11 +36,17 @@ export default function StudentLayout() {
     async function loadGroupPacks() {
       setLoading(true);
       try {
-        const [freshGroup, centerPacks, centerNameSnap] = await Promise.all([
-          getGroup(membership.centerId, membership.groupId),
-          getCenterCustomPacks(membership.centerId),
-          get(ref(db, `centers/${membership.centerId}/name`))
-        ]);
+        const [freshGroup, centerPacks, centerNameSnap] = membership.independent
+          ? await Promise.all([
+              getIndependentGroup(membership.teacherUid, membership.groupId),
+              getIndependentCustomPacks(membership.teacherUid),
+              get(ref(db, `independentTeachers/${membership.teacherUid}/profile/teacherName`)),
+            ])
+          : await Promise.all([
+              getGroup(membership.centerId, membership.groupId),
+              getCenterCustomPacks(membership.centerId),
+              get(ref(db, `centers/${membership.centerId}/name`)),
+            ]);
         if (!freshGroup) {
           // Group was deleted by teacher! Clean up stale membership
           const updates = {};
@@ -93,7 +100,10 @@ export default function StudentLayout() {
   // first — see corpService.addGroupHomework.
   useEffect(() => {
     if (!membership) return;
-    const homeworkRef = ref(db, `centers/${membership.centerId}/groups/${membership.groupId}/homeworkList`);
+    const homeworkPath = membership.independent
+      ? `independentTeachers/${membership.teacherUid}/groups/${membership.groupId}/homeworkList`
+      : `centers/${membership.centerId}/groups/${membership.groupId}/homeworkList`;
+    const homeworkRef = ref(db, homeworkPath);
     const unsub = onValue(homeworkRef, (snap) => {
       if (!snap.exists()) {
         setHomeworkList([]);

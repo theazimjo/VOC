@@ -127,6 +127,12 @@ export async function createIndependentGroup(uid, groupData) {
   return payload;
 }
 
+/** Student: fetch a single group by id — mirrors corpService.getGroup. */
+export async function getIndependentGroup(teacherUid, groupId) {
+  const snap = await get(ref(db, `independentTeachers/${teacherUid}/groups/${groupId}`));
+  return snap.exists() ? { id: groupId, ...snap.val() } : null;
+}
+
 export async function getIndependentGroups(uid) {
   const snap = await get(ref(db, `independentTeachers/${uid}/groups`));
   if (!snap.exists()) return [];
@@ -254,6 +260,28 @@ export async function joinIndependentGroupByCode(code, uid, profile) {
   await set(ref(db, `users/${uid}/profile/appMode`), 'group');
 
   return { group: { id: groupId, ...group }, teacherUid, student: studentPayload, membership };
+}
+
+/**
+ * Student: update their own display name / avatar color on their group
+ * record — mirrors corpService.updateStudentProfile.
+ */
+export async function updateIndependentStudentProfile(teacherUid, groupId, studentId, updates) {
+  const studentRef = ref(db, `independentTeachers/${teacherUid}/groups/${groupId}/students/${studentId}`);
+  await update(studentRef, updates);
+}
+
+/** Student: save practice results for one unit — mirrors corpService.updateStudentUnitProgress. */
+export async function updateIndependentStudentUnitProgress(teacherUid, groupId, studentId, packId, unitKey, stats) {
+  const unitRef = ref(db, `independentTeachers/${teacherUid}/groups/${groupId}/students/${studentId}/progress/${packId}/units/${unitKey}`);
+  await update(unitRef, {
+    wordsLearned: stats.wordsLearned || 0,
+    totalWords: stats.totalWords || 0,
+    masteryPercent: stats.masteryPercent || 0,
+    retentionPercent: stats.retentionPercent || 0,
+    atRiskCount: stats.atRiskCount || 0,
+    lastActivity: new Date().toISOString(),
+  });
 }
 
 export async function getIndependentGroupStudents(uid, groupId) {

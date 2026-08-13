@@ -152,6 +152,8 @@ export default function StudentCorpLearn() {
       state: {
         pack: packToPractice,
         centerId: membership.centerId,
+        independent: membership.independent,
+        teacherUid: membership.teacherUid,
         groupId: membership.groupId,
         studentId: user.uid,
       },

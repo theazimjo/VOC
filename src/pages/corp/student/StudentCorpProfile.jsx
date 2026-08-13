@@ -6,6 +6,7 @@ import {
   Target, CheckCircle2, Building2, GraduationCap, CalendarDays, Moon, Type, Volume2
 } from 'lucide-react';
 import { setAppMode, updateStudentProfile } from '../../../services/corpService';
+import { updateIndependentStudentProfile } from '../../../services/independentTeacherService';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useTheme } from '../../../contexts/ThemeContext';
 import { useAccountWordProgress } from '../../../hooks/useAccountWordProgress';
@@ -67,12 +68,20 @@ export default function StudentCorpProfile() {
     setCustomName(nextName);
     setAvatarColor(draftColor);
     setEditingProfile(false);
-    if (!membership?.centerId || !membership?.groupId || !user?.uid) return;
+    if (!membership?.groupId || !user?.uid) return;
+    if (!membership.independent && !membership.centerId) return;
     try {
-      await updateStudentProfile(membership.centerId, membership.groupId, user.uid, {
-        name: nextName,
-        avatarColor: draftColor,
-      });
+      if (membership.independent) {
+        await updateIndependentStudentProfile(membership.teacherUid, membership.groupId, user.uid, {
+          name: nextName,
+          avatarColor: draftColor,
+        });
+      } else {
+        await updateStudentProfile(membership.centerId, membership.groupId, user.uid, {
+          name: nextName,
+          avatarColor: draftColor,
+        });
+      }
     } catch (err) {
       console.error('Error saving profile:', err);
     }
@@ -134,7 +143,7 @@ export default function StudentCorpProfile() {
           <div className="corp-profile-membership-row">
             <div className="corp-profile-membership-icon"><Building2 size={15} strokeWidth={2.2} /></div>
             <div className="corp-profile-membership-text">
-              <div className="corp-profile-membership-label">Center</div>
+              <div className="corp-profile-membership-label">{membership?.independent ? 'Teacher' : 'Center'}</div>
               <div className="corp-profile-membership-value">{membership?.centerName || '—'}</div>
             </div>
           </div>
