@@ -1,3 +1,12 @@
+/* Registered so the conic-gradient angle below is a transitionable value,
+   not just a swapped custom property - lets the mastery ring "sweep in"
+   via a plain CSS transition instead of a per-frame JS loop. */
+@property --lp-ring-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
 /* ========== LANDING PAGE (extends the LoginPage iOS Liquid Glass system) ========== */
 .lp-page {
   --glass-fill: rgba(255, 255, 255, 0.08);
@@ -212,9 +221,26 @@
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
-.lp-word-card--0 { top: 0; transform: rotate(-3deg); z-index: 3; }
-.lp-word-card--1 { top: 92px; left: 24px; right: -24px; transform: rotate(2deg); z-index: 2; }
-.lp-word-card--2 { top: 184px; left: 48px; right: -48px; transform: rotate(-1.5deg); z-index: 1; opacity: 0.85; }
+/* A slow, small vertical drift per card - communicates "live" data rather
+   than a static screenshot, at a scale subtle enough not to distract from
+   the copy beside it. Each card keeps its own base rotation inside the
+   keyframes so the float doesn't cancel out the stacked, offset look. */
+.lp-word-card--0 { top: 0; transform: rotate(-3deg); z-index: 3; animation: lp-float-0 5.5s ease-in-out infinite; }
+.lp-word-card--1 { top: 92px; left: 24px; right: -24px; transform: rotate(2deg); z-index: 2; animation: lp-float-1 6.5s ease-in-out infinite 0.3s; }
+.lp-word-card--2 { top: 184px; left: 48px; right: -48px; transform: rotate(-1.5deg); z-index: 1; opacity: 0.85; animation: lp-float-2 6s ease-in-out infinite 0.6s; }
+
+@keyframes lp-float-0 {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50% { transform: rotate(-3deg) translateY(-7px); }
+}
+@keyframes lp-float-1 {
+  0%, 100% { transform: rotate(2deg) translateY(0); }
+  50% { transform: rotate(2deg) translateY(-9px); }
+}
+@keyframes lp-float-2 {
+  0%, 100% { transform: rotate(-1.5deg) translateY(0); }
+  50% { transform: rotate(-1.5deg) translateY(-6px); }
+}
 
 .lp-word-card-text {
   display: flex;
@@ -238,6 +264,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: conic-gradient(var(--lp-ring-color, var(--accent)) var(--lp-ring-angle), rgba(255, 255, 255, 0.12) 0deg);
+  transition: --lp-ring-angle 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .lp-mastery-ring span {
   width: 34px;
@@ -598,7 +626,13 @@
 /* ========== Reduced motion ========== */
 @media (prefers-reduced-motion: reduce) {
   .lp-btn,
-  .lp-nav-links {
+  .lp-nav-links,
+  .lp-mastery-ring {
     transition: none !important;
+  }
+  .lp-word-card--0,
+  .lp-word-card--1,
+  .lp-word-card--2 {
+    animation: none !important;
   }
 }

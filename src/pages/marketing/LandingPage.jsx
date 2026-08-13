@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion, useInView } from 'framer-motion';
 import {
   BookOpen, Repeat, CalendarDays, TrendingUp, CheckCircle2,
   Users, ClipboardList, LineChart, ArrowRight, Menu, X,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import VocLogo from '../../components/common/VocLogo';
 import bgVideo from '../../assets/VOCABRY.mp4';
 import './LandingPage.css';
@@ -80,11 +80,20 @@ function Reveal({ children, className, delay = 0 }) {
   );
 }
 
+// The ring sweeps in from 0deg to its real mastery value once it enters
+// view, so the number reads as a live measurement rather than static
+// decoration - same reason the roster bars below animate their fill.
 function MasteryRing({ percent, color = '#0a84ff' }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reduce = useReducedMotion();
+  const angle = (inView || reduce) ? percent * 3.6 : 0;
+
   return (
     <div
+      ref={ref}
       className="lp-mastery-ring"
-      style={{ background: `conic-gradient(${color} ${percent * 3.6}deg, rgba(255,255,255,0.12) 0deg)` }}
+      style={{ '--lp-ring-angle': `${angle}deg`, '--lp-ring-color': color }}
     >
       <span>{percent}%</span>
     </div>
@@ -253,7 +262,13 @@ export default function LandingPage() {
                 <span className="lp-roster-dot" style={{ background: s.color }} />
                 <span className="lp-roster-name">{s.name}</span>
                 <div className="lp-roster-bar">
-                  <div className="lp-roster-bar-fill" style={{ width: `${s.progress}%` }} />
+                  <motion.div
+                    className="lp-roster-bar-fill"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${s.progress}%` }}
+                    viewport={{ once: true, amount: 0.6 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  />
                 </div>
               </div>
             ))}
