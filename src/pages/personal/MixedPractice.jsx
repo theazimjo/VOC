@@ -373,15 +373,19 @@ export default function MixedPractice() {
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form">
                       <input
                         type="text"
+                        name="spelling_answer_no_suggest"
                         className="mp-spelling-input"
                         placeholder="Type the English word..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
                         autoFocus
-                        autoComplete="off"
+                        autoComplete="one-time-code"
                         autoCorrect="off"
-                        autoCapitalize="off"
+                        autoCapitalize="none"
+                        spellCheck={false}
+                        data-gramm="false"
+                        data-enable-grammarly="false"
                       />
                       {!hasAnswered && (
                         <button type="submit" className="btn btn-primary submit-btn">
@@ -410,15 +414,19 @@ export default function MixedPractice() {
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form">
                       <input
                         type="text"
+                        name="spelling_answer_no_suggest"
                         className="mp-spelling-input"
                         placeholder="Type the word you heard..."
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
                         autoFocus
-                        autoComplete="off"
+                        autoComplete="one-time-code"
                         autoCorrect="off"
-                        autoCapitalize="off"
+                        autoCapitalize="none"
+                        spellCheck={false}
+                        data-gramm="false"
+                        data-enable-grammarly="false"
                       />
                       {!hasAnswered && (
                         <button type="submit" className="btn btn-primary submit-btn">
