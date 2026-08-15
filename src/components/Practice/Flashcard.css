@@ -106,6 +106,18 @@
   line-height: 1.5;
 }
 
+/* English-monolingual packs have no translation, so the definition takes
+   over as the card's primary answer and needs translation-level prominence. */
+.flashcard-def-large {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+  max-width: 440px;
+  line-height: 1.4;
+  margin-bottom: var(--space-md);
+}
+
 .flashcard-example {
   font-size: var(--font-xs);
   font-style: italic;
@@ -260,7 +272,12 @@
   .flashcard-translation {
     font-size: 1.5rem;
   }
-  
+
+  .flashcard-def-large {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
   .flashcard-actions {
     gap: 6px;
   }

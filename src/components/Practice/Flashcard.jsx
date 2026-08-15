@@ -29,7 +29,7 @@ function PosBadge({ pos }) {
   );
 }
 
-export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
+export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US', isEnglishPack = false }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -38,6 +38,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
   const currentWord = words[currentIndex];
   const cardStartRef = useRef(Date.now());
   const revealElapsedRef = useRef(4);
+  const isMonolingualCard = isEnglishPack || Boolean(!currentWord?.translation && currentWord?.definition);
 
   // Report progress
   useEffect(() => {
@@ -167,7 +168,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
               <PosBadge pos={currentWord.partOfSpeech} />
               {currentWord.translation && <div className="flashcard-translation">{currentWord.translation}</div>}
               {currentWord.definition && (
-                <div className="flashcard-def">{currentWord.definition}</div>
+                <div className={`flashcard-def ${isMonolingualCard ? 'flashcard-def-large' : ''}`}>{currentWord.definition}</div>
               )}
               {currentWord.example && (
                 <div className="flashcard-example">"{currentWord.example}"</div>

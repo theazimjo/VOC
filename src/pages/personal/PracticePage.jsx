@@ -353,6 +353,7 @@ export default function PracticePage() {
       onExit: handleBack,
       sourceName: selectedSource?.title || selectedSource?.name || "Library",
       language: selectedSource?.language || 'en-US',
+      isEnglishPack: selectedSource?.type === 'english' || selectedSource?.type === 'monolingual',
       onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
 
@@ -480,7 +481,7 @@ export default function PracticePage() {
                 onSelectMode={handleStartPractice}
                 isIrregularVerbs={selectedSource?.id === 'irregular-verbs' || selectedSource?.isIrregularVerbs}
                 isIeltsPack={selectedSource?.type === 'ielts'}
-                isEnglishPack={selectedSource?.type === 'english'}
+                isEnglishPack={selectedSource?.type === 'english' || selectedSource?.type === 'monolingual'}
                 words={sourceWords}
               />
             </motion.div>

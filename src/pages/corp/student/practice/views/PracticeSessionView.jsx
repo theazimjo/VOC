@@ -24,6 +24,7 @@ export default function PracticeSessionView({ p }) {
       onExit: handleBack,
       sourceName: loadedPack.title || "Kutubxona",
       language: loadedPack.language || 'en-US',
+      isEnglishPack: loadedPack?.type === 'english' || loadedPack?.type === 'monolingual',
       onProgress: (current, total) => setProgressPct(total > 0 ? (current / total) * 100 : 0)
     };
 
