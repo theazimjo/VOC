@@ -11,7 +11,7 @@ import './SpellingGame.css';
 
 const CONFUSION_THRESHOLD = 0.6;
 
-export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
+export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US', isEnglishPack = false }) {
   const { user } = useAuth();
   const keyboardInset = useKeyboardInset();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -203,10 +203,15 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     <div className="spelling-container">
       <div className="spelling-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
-        <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word, language)}>
-          <Volume2 size={14} strokeWidth={2.3} />
-          Listen
-        </button>
+        {/* Speaking the word aloud would hand over the answer in English-pack
+            mode (the definition drill's whole point is recalling the word
+            from its meaning), so the audio hint is only offered otherwise. */}
+        {!isEnglishPack && (
+          <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word, language)}>
+            <Volume2 size={14} strokeWidth={2.3} />
+            Listen
+          </button>
+        )}
       </div>
 
       {/* Card */}
@@ -219,8 +224,17 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="spelling-card-label">Type the {getLangAdjective(language)} word</div>
-          <div className={`spelling-target ${targetSizeClass}`}>{currentWord.translation}</div>
+          {isEnglishPack ? (
+            <>
+              <div className="spelling-card-label">Which word is being defined?</div>
+              <div className="spelling-definition">{currentWord.definition}</div>
+            </>
+          ) : (
+            <>
+              <div className="spelling-card-label">Type the {getLangAdjective(language)} word</div>
+              <div className={`spelling-target ${targetSizeClass}`}>{currentWord.translation}</div>
+            </>
+          )}
           <div className="spelling-scramble-label">
             Scrambled letters ({wordLength} letters):
           </div>

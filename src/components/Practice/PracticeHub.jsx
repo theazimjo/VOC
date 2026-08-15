@@ -58,9 +58,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
 
   // English-monolingual packs often leave translation blank on purpose (the
   // whole point is learning through English definitions, not Uzbek), so
-  // Spelling/Match/Quiz — which all key off translation as the graded
-  // answer — are skipped for them, same reasoning as the Irregular-Verbs-only
-  // block below. Pronunciation still works fine either way, so it's kept.
+  // Match/Quiz — which key off translation as the graded answer — are
+  // skipped for them, same reasoning as the Irregular-Verbs-only block
+  // below. Pronunciation still works fine either way, so it's kept.
   if (isEnglishPack) {
     modes.push({
       id: 'english-trainer',
@@ -72,21 +72,33 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     });
   }
 
+  // Spelling is the only OTHER active-recall (typing) drill in the app
+  // besides Pronunciation — without it, an English-monolingual pack would
+  // never be able to satisfy the "confirmed from 2 distinct angles" gate in
+  // spacedRepetition.js (MIN_CONFIRMED_MODES), permanently capping mastery
+  // at 65% no matter how many correct answers a word gets. word.definition
+  // is a required field on every English-pack word (unlike translation), so
+  // SpellingGame can safely use it as the prompt instead for this pack type.
+  if (!irregularVerbsOnly) {
+    modes.push({
+      id: 'spelling',
+      icon: PenLine,
+      title: 'Spelling Practice',
+      desc: isEnglishPack
+        ? "Read the English definition and type the word it describes"
+        : "Listen and type words correctly from memory",
+      badge: recommendation?.modeId === 'spelling'
+        ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
+        : "Min 3 words",
+      glowColor: 'hsl(265, 90%, 65%)'
+    });
+  }
+
   // The corp Irregular Verbs pack only ever needs the dedicated trainer plus
-  // flashcards — Spelling/Match/Quiz/Pronounce are built around translation
-  // recall, not V1/V2/V3 conjugation, so they're skipped entirely here.
+  // flashcards — Match/Quiz are built around translation recall, not V1/V2/V3
+  // conjugation, so they're skipped entirely here.
   if (!irregularVerbsOnly && !isEnglishPack) {
     modes.push(
-      {
-        id: 'spelling',
-        icon: PenLine,
-        title: 'Spelling Practice',
-        desc: "Listen and type words correctly from memory",
-        badge: recommendation?.modeId === 'spelling'
-          ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
-          : "Min 3 words",
-        glowColor: 'hsl(265, 90%, 65%)'
-      },
       {
         id: 'match',
         icon: Shuffle,
