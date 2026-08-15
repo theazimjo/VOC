@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, GraduationCap } from 'lucide-react';
+import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, GraduationCap, BookOpenText } from 'lucide-react';
 import { recommendPracticeMode } from '../../utils/memoryEngine';
 import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import './PracticeHub.css';
@@ -10,7 +10,7 @@ const RECOMMENDATION_BADGES = {
   reinforce: (count) => `${count} forgetting ⏰`,
 };
 
-export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, isIeltsPack, words = [] }) {
+export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, isIeltsPack, isEnglishPack, words = [] }) {
   const modes = [];
 
   // Which mode actually fits this word list's current memory state right
@@ -56,10 +56,26 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     });
   }
 
+  // English-monolingual packs often leave translation blank on purpose (the
+  // whole point is learning through English definitions, not Uzbek), so
+  // Spelling/Match/Quiz — which all key off translation as the graded
+  // answer — are skipped for them, same reasoning as the Irregular-Verbs-only
+  // block below. Pronunciation still works fine either way, so it's kept.
+  if (isEnglishPack) {
+    modes.push({
+      id: 'english-trainer',
+      icon: BookOpenText,
+      title: 'English Trainer',
+      desc: 'Learn words through English definitions, synonyms, and context — no translation',
+      badge: 'Min 3 words',
+      glowColor: 'hsl(210, 90%, 58%)'
+    });
+  }
+
   // The corp Irregular Verbs pack only ever needs the dedicated trainer plus
   // flashcards — Spelling/Match/Quiz/Pronounce are built around translation
   // recall, not V1/V2/V3 conjugation, so they're skipped entirely here.
-  if (!irregularVerbsOnly) {
+  if (!irregularVerbsOnly && !isEnglishPack) {
     modes.push(
       {
         id: 'spelling',
@@ -86,16 +102,19 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
         desc: "Select the correct translation from four options",
         badge: "Min 4 words",
         glowColor: 'hsl(38, 95%, 55%)'
-      },
-      {
-        id: 'pronounce',
-        icon: Mic,
-        title: 'Pronunciation Practice',
-        desc: "Speak into the microphone to improve pronunciation",
-        badge: "Min 1 word",
-        glowColor: 'hsl(340, 85%, 60%)'
       }
     );
+  }
+
+  if (!irregularVerbsOnly) {
+    modes.push({
+      id: 'pronounce',
+      icon: Mic,
+      title: 'Pronunciation Practice',
+      desc: "Speak into the microphone to improve pronunciation",
+      badge: "Min 1 word",
+      glowColor: 'hsl(340, 85%, 60%)'
+    });
   }
 
   return (

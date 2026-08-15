@@ -140,6 +140,10 @@ export default function PackDetail() {
       navigate(`/packs/${packId}/word/ielts/edit/${word.id}`);
       return;
     }
+    if (pack?.type === 'english') {
+      navigate(`/packs/${packId}/word/english/edit/${word.id}`);
+      return;
+    }
     navigate(`/packs/${packId}/word/edit/${word.id}`);
   };
 
@@ -216,7 +220,11 @@ export default function PackDetail() {
         <div className="pack-detail-info">
           <div className="pack-detail-icon">{pack.icon}</div>
           <div className="pack-detail-text">
-            <h1>{pack.name}{pack.type === 'ielts' && <span className="pack-type-badge">🎓 IELTS</span>}</h1>
+            <h1>
+              {pack.name}
+              {pack.type === 'ielts' && <span className="pack-type-badge">🎓 IELTS</span>}
+              {pack.type === 'english' && <span className="pack-type-badge pack-type-badge-english">🔤 English</span>}
+            </h1>
             {pack.description && <p>{pack.description}</p>}
             <div className="book-stats">
               <span className="book-stat-badge">📝 {words.length} words</span>
@@ -326,7 +334,9 @@ export default function PackDetail() {
       {pack.name !== 'Irregular Verbs' && (
         <SpeedDialFAB
           onAddWord={() => navigate(
-            pack.type === 'ielts' ? `/packs/${packId}/word/ielts/new` : `/packs/${packId}/word/new`
+            pack.type === 'ielts' ? `/packs/${packId}/word/ielts/new`
+              : pack.type === 'english' ? `/packs/${packId}/word/english/new`
+                : `/packs/${packId}/word/new`
           )}
           onImportJson={() => navigate(`/packs/${packId}/import-json`)}
           onExtractPhoto={() => setShowPhotoExtractorModal(true)}

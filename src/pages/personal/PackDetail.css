@@ -134,6 +134,12 @@
   vertical-align: middle;
 }
 
+.pack-type-badge-english {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
 .pack-detail-text p {
   color: var(--text-secondary);
   font-size: var(--font-sm);

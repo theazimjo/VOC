@@ -196,7 +196,7 @@ export function PacksProvider({ children }) {
         // 'default' unless explicitly requested otherwise - existing
         // callers never pass this, so every pre-existing pack-creation
         // path keeps behaving exactly as before.
-        type: data.type === 'ielts' ? 'ielts' : 'default',
+        type: ['ielts', 'english'].includes(data.type) ? data.type : 'default',
         createdAt: new Date().toISOString(),
         wordCount: 0,
         ...(data.marketPackId ? { marketPackId: data.marketPackId } : {}),

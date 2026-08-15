@@ -136,6 +136,7 @@ export const PRACTICE_MODE_MIN_WORDS = {
   sentence: 1,
   'irregular-verbs': 1,
   'ielts-trainer': 3,
+  'english-trainer': 3,
 };
 
 /**

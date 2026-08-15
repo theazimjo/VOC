@@ -117,6 +117,12 @@
   padding: 2px 7px;
   border-radius: var(--radius-full);
   margin-left: 6px;
+}
+
+.pack-type-badge-english {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.25);
   vertical-align: middle;
 }
 

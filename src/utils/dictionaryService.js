@@ -53,7 +53,13 @@ async function translateWord(query, fromLang, toLang) {
   return decodeHTMLEntities(translated);
 }
 
-async function fetchEnglishDictionaryInfo(word) {
+// translateToUz=true (the default, used everywhere else in this file) keeps
+// the long-standing behavior every other pack type relies on: the "Definition"
+// field is filled with a Uzbek translation of the English dictionary
+// definition, falling back to the raw English text only if that translation
+// call fails. lookupEnglishDefinition() below passes false, since a
+// monolingual English pack needs the RAW English definition, never translated.
+async function fetchEnglishDictionaryInfo(word, translateToUz = true) {
   try {
     const res = await fetch(`${FREE_DICTIONARY_ENDPOINT}/${encodeURIComponent(word)}`);
     if (!res.ok) return null;
@@ -63,21 +69,38 @@ async function fetchEnglishDictionaryInfo(word) {
     const definitionEntry = meaning?.definitions?.[0];
     if (!definitionEntry) return null;
 
-    let uzDefinition = '';
-    try {
-      uzDefinition = await translateWord(definitionEntry.definition, 'en', 'uz');
-    } catch {
-      uzDefinition = '';
+    let definitionText = definitionEntry.definition || '';
+    if (translateToUz) {
+      try {
+        const uzDefinition = await translateWord(definitionEntry.definition, 'en', 'uz');
+        if (uzDefinition) definitionText = uzDefinition;
+      } catch {
+        // keep the English definition as fallback
+      }
     }
 
     return {
       partOfSpeech: decodeHTMLEntities(meaning?.partOfSpeech || ''),
-      definition: decodeHTMLEntities(uzDefinition || definitionEntry.definition || ''),
+      definition: decodeHTMLEntities(definitionText),
       example: decodeHTMLEntities(definitionEntry.example || '')
     };
   } catch {
     return null;
   }
+}
+
+/**
+ * English-only lookup that never translates the definition - used by the
+ * monolingual English pack type, where seeing the English definition (not a
+ * Uzbek gloss of it) is the entire point.
+ * Returns { word, partOfSpeech, definition, example } or null.
+ */
+export async function lookupEnglishDefinition(word) {
+  const trimmed = (word || '').trim();
+  if (!trimmed) return null;
+  const dictInfo = await fetchEnglishDictionaryInfo(trimmed, false);
+  if (!dictInfo) return null;
+  return { word: decodeHTMLEntities(trimmed), ...dictInfo };
 }
 
 /**

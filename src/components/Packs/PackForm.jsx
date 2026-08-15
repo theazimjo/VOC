@@ -137,6 +137,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                   >
                     <option value="default">General</option>
                     <option value="ielts">IELTS Vocabulary</option>
+                    <option value="english">English (Monolingual)</option>
                   </select>
                   {isTypeLocked && (
                     <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>

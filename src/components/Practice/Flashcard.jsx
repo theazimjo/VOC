@@ -165,7 +165,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
             {/* Back */}
             <div className="flashcard-face flashcard-back">
               <PosBadge pos={currentWord.partOfSpeech} />
-              <div className="flashcard-translation">{currentWord.translation}</div>
+              {currentWord.translation && <div className="flashcard-translation">{currentWord.translation}</div>}
               {currentWord.definition && (
                 <div className="flashcard-def">{currentWord.definition}</div>
               )}

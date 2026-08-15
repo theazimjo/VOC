@@ -35,7 +35,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
               title={masteryInfo.label}
             />
           </div>
-          <div className="word-translation">{word.translation}</div>
+          {word.translation && <div className="word-translation">{word.translation}</div>}
         </div>
 
         {(word.definition || word.example || word.customSentence || word.synonyms || word.collocations || word.article || word.nounForm || word.verbForm || word.adjectiveForm || word.adverbForm) && (
