@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { Swords, Users, Play, Trophy, Check, X, Award, Zap, AlertTriangle, ArrowLeft, RefreshCw, Timer } from 'lucide-react';
+import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
+import { Swords, Users, Play, Trophy, Check, X, Award, Zap, AlertTriangle, ArrowLeft, RefreshCw, Flame } from 'lucide-react';
 import {
   subscribeGroupBattle,
   createGroupBattle,
@@ -11,6 +12,8 @@ import {
 import './GroupLiveBattle.css';
 
 const QUESTION_TIME_LIMIT = 15; // 15 seconds per question
+const TIMER_RING_RADIUS = 28;
+const TIMER_RING_CIRCUMFERENCE = 2 * Math.PI * TIMER_RING_RADIUS;
 
 // Web Audio API Sound Effects Synthesizer (Instant, zero latency, 100% browser compatible)
 function playSoundEffect(type) {
@@ -47,6 +50,19 @@ function playSoundEffect(type) {
       gain.connect(ctx.destination);
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.26);
+    } else if (type === 'tick') {
+      // Short high blip for the final countdown seconds — the "clock is
+      // running out" cue every quiz-show timer has.
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      gain.gain.setValueAtTime(0.09, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.09);
     } else if (type === 'victory') {
       // Victory fanfare notes
       const notes = [523.25, 659.25, 784.00, 1046.50, 1318.51];
@@ -78,6 +94,93 @@ function shuffleArray(arr) {
   return a;
 }
 
+// A score that jumps straight to its new value reads as flat/static — this
+// tweens the displayed digits toward the real value with a springy overshoot
+// instead, the same "counting up" feel as Kahoot/Duolingo score reveals.
+function AnimatedNumber({ value, className }) {
+  const spring = useSpring(value, { stiffness: 140, damping: 18, mass: 0.6 });
+  const rounded = useTransform(spring, (v) => Math.round(v).toLocaleString());
+  useEffect(() => { spring.set(value); }, [value, spring]);
+  return <motion.span className={className}>{rounded}</motion.span>;
+}
+
+// A flat ranked list undersells a battle's finish — a real podium (2nd-1st-3rd,
+// staggered heights) is the visual payoff players actually associate with
+// "I won". Renders whatever placings exist (works fine with only 1-2 players).
+function Podium({ list }) {
+  const [first, second, third] = list;
+  const slots = [
+    { p: second, place: 2, medal: '🥈', heightClass: 'h2' },
+    { p: first, place: 1, medal: '🥇', heightClass: 'h1' },
+    { p: third, place: 3, medal: '🥉', heightClass: 'h3' },
+  ];
+  if (!first) return null;
+  return (
+    <div className="glb-podium">
+      {slots.map(({ p, place, medal, heightClass }) => p && (
+        <motion.div
+          key={p.uid}
+          className={`glb-podium-slot ${heightClass}`}
+          initial={{ opacity: 0, y: 50, scale: 0.85 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.15 + (place === 1 ? 0.1 : place === 2 ? 0 : 0.2), type: 'spring', stiffness: 260, damping: 20 }}
+        >
+          <div className="glb-podium-medal">{medal}</div>
+          <div className="glb-podium-avatar">{(p.name || '?').charAt(0).toUpperCase()}</div>
+          <div className="glb-podium-name">{p.name}</div>
+          <div className="glb-podium-score">{p.score || 0} pts</div>
+          <div className="glb-podium-bar">
+            <span>{place}</span>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+
+const CONFETTI_COLORS = ['#fbbf24', '#22c55e', '#0a84ff', '#ec4899', '#a78bfa', '#f97316'];
+
+// A little burst of falling paper pieces — cheap, dependency-free "juice"
+// for correct answers and celebration moments. `seed` should change (e.g. an
+// incrementing counter) each time a fresh burst is wanted, since it's used
+// as both the React key (forces a full remount/replay) and the randomization
+// seed input via useMemo's dependency.
+function ConfettiBurst({ seed, count = 22, big = false }) {
+  const particles = useMemo(() => Array.from({ length: count }, (_, i) => {
+    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.6;
+    const distance = (big ? 90 : 55) + Math.random() * (big ? 90 : 55);
+    return {
+      id: i,
+      x: Math.cos(angle) * distance,
+      y: Math.sin(angle) * distance - (big ? 40 : 20),
+      fall: (big ? 160 : 90) + Math.random() * 80,
+      rotate: (Math.random() - 0.5) * 540,
+      color: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+      delay: Math.random() * 0.12,
+      w: (big ? 7 : 5) + Math.random() * 5,
+      h: (big ? 11 : 8) + Math.random() * 6,
+    };
+    // `seed` is only read here as a dependency, to force a fresh random burst
+    // each time it changes — intentionally unused inside the mapped body.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [seed, count, big]);
+
+  return (
+    <div className={`glb-confetti-layer ${big ? 'big' : ''}`} aria-hidden="true">
+      {particles.map(p => (
+        <motion.span
+          key={p.id}
+          className="glb-confetti-piece"
+          style={{ background: p.color, width: p.w, height: p.h }}
+          initial={{ opacity: 1, x: 0, y: 0, rotate: 0 }}
+          animate={{ opacity: 0, x: p.x, y: p.y + p.fall, rotate: p.rotate }}
+          transition={{ duration: (big ? 1.3 : 0.9) + Math.random() * 0.3, delay: p.delay, ease: [0.16, 1, 0.3, 1] }}
+        />
+      ))}
+    </div>
+  );
+}
+
 // Build multiple choice questions from selected sets limited to maxCount
 function generateQuestionsFromSets(selectedSets, maxCount = 10) {
   const allWords = [];
@@ -104,11 +207,14 @@ function generateQuestionsFromSets(selectedSets, maxCount = 10) {
     const correct = w.translation;
     const wrongPool = allTranslations.filter(t => t !== correct);
     const wrongShuffled = shuffleArray(wrongPool).slice(0, 3);
-    
-    const defaultFillers = ['To clarify', 'To accomplish', 'Essential', 'Substantial', 'Precise'];
-    let fillIdx = 0;
+
+    // A small selected set can run out of real translations to use as
+    // distractors — pad with neutral, language-agnostic placeholders rather
+    // than fixed English phrases (e.g. "To clarify"), which used to show up
+    // as answer options in an otherwise all-Uzbek quiz and read as broken.
+    let fillIdx = 1;
     while (wrongShuffled.length < 3) {
-      const fill = defaultFillers[fillIdx++] || `Option ${wrongShuffled.length + 1}`;
+      const fill = `— ${fillIdx++} —`;
       if (!wrongShuffled.includes(fill) && fill !== correct) {
         wrongShuffled.push(fill);
       }
@@ -152,6 +258,8 @@ export default function GroupLiveBattle({
   const [gameFinished, setGameFinished] = useState(false);
   const [lastPointsEarned, setLastPointsEarned] = useState(null);
   const [timeLeft, setTimeLeft] = useState(QUESTION_TIME_LIMIT);
+  const [streak, setStreak] = useState(0); // consecutive correct answers — fuels the combo bonus
+  const [confettiKey, setConfettiKey] = useState(0); // bumped on each correct answer to replay the burst
 
   // Timer reference for speed bonus calculation
   const questionStartTimeRef = useRef(Date.now());
@@ -177,6 +285,7 @@ export default function GroupLiveBattle({
       setGameFinished(false);
       setLastPointsEarned(null);
       setTimeLeft(QUESTION_TIME_LIMIT);
+      setStreak(0);
     }
   }, [battleData?.createdAt, battleData?.status]);
 
@@ -194,28 +303,40 @@ export default function GroupLiveBattle({
           handleTimeOut();
           return 0;
         }
-        return prev - 1;
+        const next = prev - 1;
+        if (next <= 3) playSoundEffect('tick'); // last 3 seconds tick down audibly
+        return next;
       });
     }, 1000);
 
     return () => clearInterval(interval);
   }, [currentQIndex, battleData?.status, gameFinished, isAnswering]);
 
-  // AUTO-FINISH BATTLE: When ALL joined participants have finished all questions
+  // AUTO-FINISH BATTLE: When ALL joined participants have finished all questions.
+  // This effect runs in every open client (teacher + every student), since
+  // they all subscribe to the same battle doc — but a student reaching this
+  // branch has, by definition, already finished themselves and already
+  // played their own completion chime a moment earlier (see the isLastQ
+  // branches in handleAnswerOption/handleTimeOut below), so replaying it
+  // here would double it up. Only the teacher's client — which never plays
+  // that personal chime — needs this "everyone's done!" cue. The DB write
+  // itself stays open to any client for robustness (idempotent, harmless if
+  // more than one fires) in case the teacher's tab isn't open.
   useEffect(() => {
     if (!battleData || battleData.status !== 'active') return;
     const participants = Object.values(battleData.participants || {});
     if (participants.length > 0 && participants.every(p => p.finished === true)) {
       endGroupBattle(groupId);
-      playSoundEffect('victory');
+      if (isTeacher) playSoundEffect('victory');
     }
-  }, [battleData?.participants, battleData?.status, groupId]);
+  }, [battleData?.participants, battleData?.status, groupId, isTeacher]);
 
   // Handle Question Timeout (When student doesn't answer within 15 seconds)
   const handleTimeOut = () => {
     if (isAnswering || gameFinished) return;
     setIsAnswering(true);
     playSoundEffect('wrong');
+    setStreak(0);
     setLastPointsEarned({ points: 0, speedBonus: 0, isCorrect: false, timeOut: true });
 
     const questions = battleData?.questions || [];
@@ -329,21 +450,30 @@ export default function GroupLiveBattle({
     if (!currentQ) return;
 
     const isCorrect = choice === currentQ.correctAnswer;
-    
+
     // Play Audio Effect
     playSoundEffect(isCorrect ? 'correct' : 'wrong');
+    if (isCorrect) setConfettiKey(k => k + 1);
 
     const elapsedSec = (Date.now() - questionStartTimeRef.current) / 1000;
     let basePoints = isCorrect ? 100 : 0;
     let speedBonus = 0;
+    let comboBonus = 0;
+    let newStreak = 0;
 
     if (isCorrect) {
       // Speed bonus: up to 50 bonus points for fast responses within 10 seconds!
       speedBonus = Math.max(0, Math.round((10 - elapsedSec) * 5));
+      // Combo bonus: every consecutive correct answer beyond the first adds
+      // +15 more, capped at a 5-streak (+60) so it stays a reward for
+      // consistency without letting a single lucky run snowball forever.
+      newStreak = streak + 1;
+      comboBonus = Math.min(newStreak - 1, 4) * 15;
     }
+    setStreak(newStreak);
 
-    const pointsEarned = basePoints + speedBonus;
-    setLastPointsEarned({ points: pointsEarned, speedBonus, isCorrect });
+    const pointsEarned = basePoints + speedBonus + comboBonus;
+    setLastPointsEarned({ points: pointsEarned, speedBonus, comboBonus, streak: newStreak, isCorrect });
 
     const newScore = score + pointsEarned;
     const newCorrect = correctCount + (isCorrect ? 1 : 0);
@@ -500,13 +630,23 @@ export default function GroupLiveBattle({
                 </div>
               ) : (
                 <div className="glb-participants-grid">
-                  {leaderboardList.map(p => (
-                    <div key={p.uid} className="glb-participant-chip">
-                      <div className="glb-avatar">{p.name.charAt(0).toUpperCase()}</div>
-                      <span className="glb-participant-name">{p.name}</span>
-                      <span className="glb-dot-online" />
-                    </div>
-                  ))}
+                  <AnimatePresence>
+                    {leaderboardList.map(p => (
+                      <motion.div
+                        key={p.uid}
+                        layout
+                        className="glb-participant-chip"
+                        initial={{ opacity: 0, scale: 0.6, y: 10 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.6 }}
+                        transition={{ type: 'spring', stiffness: 420, damping: 22 }}
+                      >
+                        <div className="glb-avatar">{p.name.charAt(0).toUpperCase()}</div>
+                        <span className="glb-participant-name">{p.name}</span>
+                        <span className="glb-dot-online" />
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
                 </div>
               )}
             </div>
@@ -532,6 +672,7 @@ export default function GroupLiveBattle({
       return (
         <div className="glb-card">
           <div className="glb-header-hero">
+            {battleData.status === 'finished' && <ConfettiBurst key={battleData.endedAt} seed={battleData.endedAt} count={34} big />}
             <div className="glb-icon-badge gold">
               <Trophy size={28} />
             </div>
@@ -543,6 +684,8 @@ export default function GroupLiveBattle({
             </div>
           </div>
 
+          {battleData.status === 'finished' && <Podium list={leaderboardList.slice(0, 3)} />}
+
           <div className="glb-leaderboard-card">
             <div className="glb-lb-header">
               <span>RANKING</span>
@@ -551,8 +694,16 @@ export default function GroupLiveBattle({
             </div>
 
             <div className="glb-lb-list">
-              {leaderboardList.map((p, rank) => (
-                <div key={p.uid} className={`glb-lb-row ${rank === 0 ? 'top-1' : rank === 1 ? 'top-2' : rank === 2 ? 'top-3' : ''}`}>
+              <AnimatePresence>
+                {leaderboardList.map((p, rank) => (
+                  <motion.div
+                    key={p.uid}
+                    layout
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    className={`glb-lb-row ${rank === 0 ? 'top-1' : rank === 1 ? 'top-2' : rank === 2 ? 'top-3' : ''}`}
+                  >
                   <div className="glb-lb-rank">
                     {rank === 0 ? '🥇 1' : rank === 1 ? '🥈 2' : rank === 2 ? '🥉 3' : `#${rank + 1}`}
                   </div>
@@ -566,8 +717,9 @@ export default function GroupLiveBattle({
                     <Trophy size={14} className="glb-score-icon" />
                     <span>{p.score || 0} pts</span>
                   </div>
-                </div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -589,7 +741,8 @@ export default function GroupLiveBattle({
       return (
         <div className="glb-card">
           <div className="glb-header-hero">
-            <div className="glb-icon-badge gold">
+            {battleData?.endedAt && <ConfettiBurst key={battleData.endedAt} seed={battleData.endedAt} count={myRank === 1 ? 42 : 24} big={myRank === 1} />}
+            <div className={`glb-icon-badge gold ${myRank === 1 ? 'pulsing' : ''}`}>
               <Award size={32} />
             </div>
             <div>
@@ -600,22 +753,33 @@ export default function GroupLiveBattle({
             </div>
           </div>
 
+          <Podium list={leaderboardList.slice(0, 3)} />
+
           <div className="glb-leaderboard-card">
             <span className="glb-section-label">FINAL LEADERBOARD</span>
             <div className="glb-lb-list">
-              {leaderboardList.map((p, rank) => (
-                <div key={p.uid} className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''} ${rank === 0 ? 'top-1' : rank === 1 ? 'top-2' : rank === 2 ? 'top-3' : ''}`}>
-                  <div className="glb-lb-rank">
-                    {rank === 0 ? '🥇 1' : rank === 1 ? '🥈 2' : rank === 2 ? '🥉 3' : `#${rank + 1}`}
-                  </div>
-                  <div className="glb-lb-user">
-                    <strong className="glb-lb-name">{p.name} {p.uid === userUid ? '(Siz)' : ''}</strong>
-                  </div>
-                  <div className="glb-lb-score">
-                    <span>{p.score || 0} pts</span>
-                  </div>
-                </div>
-              ))}
+              <AnimatePresence>
+                {leaderboardList.map((p, rank) => (
+                  <motion.div
+                    key={p.uid}
+                    layout
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 32, delay: rank * 0.04 }}
+                    className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''} ${rank === 0 ? 'top-1' : rank === 1 ? 'top-2' : rank === 2 ? 'top-3' : ''}`}
+                  >
+                    <div className="glb-lb-rank">
+                      {rank === 0 ? '🥇 1' : rank === 1 ? '🥈 2' : rank === 2 ? '🥉 3' : `#${rank + 1}`}
+                    </div>
+                    <div className="glb-lb-user">
+                      <strong className="glb-lb-name">{p.name} {p.uid === userUid ? '(Siz)' : ''}</strong>
+                    </div>
+                    <div className="glb-lb-score">
+                      <span>{p.score || 0} pts</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </div>
 
@@ -683,8 +847,16 @@ export default function GroupLiveBattle({
           <div className="glb-leaderboard-card">
             <span className="glb-section-label">LIVE SCOREBOARD</span>
             <div className="glb-lb-list">
-              {leaderboardList.map((p, rank) => (
-                <div key={p.uid} className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''}`}>
+              <AnimatePresence>
+                {leaderboardList.map((p, rank) => (
+                  <motion.div
+                    key={p.uid}
+                    layout
+                    initial={{ opacity: 0, x: -12 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    className={`glb-lb-row ${p.uid === userUid ? 'my-row' : ''}`}
+                  >
                   <div className="glb-lb-rank">
                     {rank === 0 ? '🥇 1' : rank === 1 ? '🥈 2' : rank === 2 ? '🥉 3' : `#${rank + 1}`}
                   </div>
@@ -697,8 +869,9 @@ export default function GroupLiveBattle({
                   <div className="glb-lb-score">
                     <span>{p.score || 0} pts</span>
                   </div>
-                </div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -707,48 +880,85 @@ export default function GroupLiveBattle({
 
     return (
       <div className="glb-card">
-        {/* Battle Top Bar with Per-Question Timer */}
+        {/* Battle Top Bar with a circular per-question countdown ring */}
         <div className="glb-game-topbar">
           <div className="glb-game-step">
+            <AnimatePresence>
+              {streak >= 2 && (
+                <motion.span
+                  className="glb-streak-chip"
+                  initial={{ opacity: 0, scale: 0.5, y: 6 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                >
+                  <Flame size={13} /> {streak}x
+                </motion.span>
+              )}
+            </AnimatePresence>
             Question {currentQIndex + 1} of {questions.length}
           </div>
 
-          <div className="glb-timer-badge">
-            <Timer size={15} className={timeLeft <= 4 ? 'timer-warn' : ''} />
-            <span className={timeLeft <= 4 ? 'timer-warn' : ''}>{timeLeft}s</span>
+          <div className="glb-timer-ring-wrap">
+            <svg className="glb-timer-ring" viewBox="0 0 64 64">
+              <circle className="glb-timer-ring-track" cx="32" cy="32" r={TIMER_RING_RADIUS} />
+              <circle
+                className={`glb-timer-ring-progress ${timeLeft <= 4 ? 'warn' : ''}`}
+                cx="32" cy="32" r={TIMER_RING_RADIUS}
+                strokeDasharray={TIMER_RING_CIRCUMFERENCE}
+                strokeDashoffset={TIMER_RING_CIRCUMFERENCE * (1 - timeLeft / QUESTION_TIME_LIMIT)}
+              />
+            </svg>
+            <span className={`glb-timer-ring-number ${timeLeft <= 4 ? 'warn' : ''}`}>{timeLeft}</span>
           </div>
 
           <div className="glb-game-score">
             <Trophy size={16} color="#f59e0b" />
-            <span>{score} pts</span>
+            <AnimatedNumber value={score} /> <span>pts</span>
           </div>
         </div>
 
-        {/* Question Timer Bar */}
-        <div className="glb-timer-track">
-          <div
-            className={`glb-timer-fill ${timeLeft <= 4 ? 'warn' : ''}`}
-            style={{ width: `${(timeLeft / QUESTION_TIME_LIMIT) * 100}%` }}
-          />
-        </div>
-
         {/* Question Box */}
-        <div className="glb-question-card">
+        <motion.div
+          key={currentQIndex}
+          className={`glb-question-card ${timeLeft <= 4 && !isAnswering ? 'urgent' : ''}`}
+          initial={{ opacity: 0, y: 16, scale: 0.97 }}
+          animate={
+            lastPointsEarned && !lastPointsEarned.isCorrect
+              ? { opacity: 1, y: 0, scale: 1, x: [0, -8, 8, -6, 6, 0] }
+              : { opacity: 1, y: 0, scale: 1 }
+          }
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {lastPointsEarned?.isCorrect && <ConfettiBurst key={confettiKey} seed={confettiKey} />}
+
           <span className="glb-pos-badge">{currentQ.partOfSpeech}</span>
           <h2 className="glb-question-word">{currentQ.word}</h2>
 
-          {lastPointsEarned && (
-            <div className={`glb-points-float ${lastPointsEarned.isCorrect ? 'plus' : 'zero'}`}>
-              {lastPointsEarned.timeOut ? (
-                <>⏰ Time's up!</>
-              ) : lastPointsEarned.isCorrect ? (
-                <>+{lastPointsEarned.points} pts {lastPointsEarned.speedBonus > 0 ? `(⚡ +${lastPointsEarned.speedBonus} speed bonus!)` : ''}</>
-              ) : (
-                <>Incorrect</>
-              )}
-            </div>
-          )}
-        </div>
+          <AnimatePresence>
+            {lastPointsEarned && (
+              <motion.div
+                className={`glb-points-float ${lastPointsEarned.isCorrect ? 'plus' : 'zero'}`}
+                initial={{ opacity: 0, scale: 0.6, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: -8 }}
+                transition={{ type: 'spring', stiffness: 500, damping: 22 }}
+              >
+                {lastPointsEarned.timeOut ? (
+                  <>⏰ Time's up!</>
+                ) : lastPointsEarned.isCorrect ? (
+                  <>
+                    +{lastPointsEarned.points} pts
+                    {lastPointsEarned.speedBonus > 0 ? ` ⚡+${lastPointsEarned.speedBonus}` : ''}
+                    {lastPointsEarned.comboBonus > 0 ? ` 🔥+${lastPointsEarned.comboBonus}` : ''}
+                  </>
+                ) : (
+                  <>Incorrect</>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
         {/* Answer Options Grid with Strict Anti-Double-Click Lock */}
         <div className="glb-options-grid">
@@ -766,15 +976,25 @@ export default function GroupLiveBattle({
             }
 
             return (
-              <button
+              <motion.button
                 key={idx}
                 type="button"
                 className={btnClass}
                 disabled={isAnswering} // STRICT DOUBLE CLICK LOCK
                 onClick={() => handleAnswerOption(opt)}
+                initial={{ opacity: 0, y: 10 }}
+                animate={
+                  isSelected && !isCorrect
+                    ? { opacity: 1, y: 0, x: [0, -6, 6, -4, 4, 0] }
+                    : isSelected || (selectedChoice !== null && isCorrect)
+                    ? { opacity: 1, y: 0, scale: [1, 1.05, 1] }
+                    : { opacity: 1, y: 0 }
+                }
+                transition={{ delay: selectedChoice === null ? idx * 0.05 : 0, duration: 0.3 }}
+                whileTap={!isAnswering ? { scale: 0.96 } : {}}
               >
                 <span>{opt}</span>
-              </button>
+              </motion.button>
             );
           })}
         </div>
@@ -791,7 +1011,7 @@ export default function GroupLiveBattle({
       <div className="glb-modal-overlay">
         <div className="glb-modal-topbar">
           <div className="glb-modal-title-group">
-            <Swords size={20} color="#818cf8" />
+            <Swords size={20} color="#0a84ff" />
             <span className="glb-modal-title">Live Battle — {groupName}</span>
           </div>
           {/* LOCK VIEW: Close button ONLY rendered if battle is finished or teacher mode! */}

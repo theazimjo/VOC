@@ -3,6 +3,14 @@
   max-width: 680px;
   margin: 0 auto;
   animation: glbFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Bridges the teacher dashboard's locked accent (--accent, iOS blue) when
+     present; falls back to the app-wide student accent token, then a
+     hardcoded blue, so Live Battle reads as one consistent brand color in
+     both the teacher and student contexts instead of the old off-brand
+     purple/indigo palette. */
+  --glb-accent: var(--accent, var(--accent-1, #0a84ff));
+  --glb-accent-rgb: var(--accent-rgb, 10, 132, 255);
+  --glb-accent-hover: var(--accent-hover, #0070db);
 }
 
 @keyframes glbFadeIn {
@@ -15,7 +23,7 @@
   background: var(--pg-card-bg, var(--bg-tertiary, #1e293b));
   border: 1px solid var(--pg-hairline, var(--border, rgba(255, 255, 255, 0.12)));
   border-radius: var(--r-xl, 22px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--card-shadow, 0 16px 40px rgba(0, 0, 0, 0.25));
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -24,18 +32,21 @@
 }
 
 .glb-header-hero {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
 .glb-icon-badge {
+  position: relative;
+  z-index: 2; /* stays above a .glb-confetti-layer.big burst in the same hero */
   width: 52px;
   height: 52px;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(79, 70, 229, 0.25) 100%);
-  border: 1px solid rgba(99, 102, 241, 0.4);
-  color: #818cf8;
+  background: linear-gradient(135deg, rgba(var(--glb-accent-rgb), 0.25) 0%, rgba(var(--glb-accent-rgb), 0.18) 100%);
+  border: 1px solid rgba(var(--glb-accent-rgb), 0.4);
+  color: var(--glb-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,9 +58,9 @@
 }
 
 @keyframes glbPulse {
-  0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
-  70% { box-shadow: 0 0 0 14px rgba(99, 102, 241, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(var(--glb-accent-rgb), 0.4); }
+  70% { box-shadow: 0 0 0 14px rgba(var(--glb-accent-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--glb-accent-rgb), 0); }
 }
 
 .glb-icon-badge.gold {
@@ -104,9 +115,13 @@
   background: rgba(255, 255, 255, 0.06);
 }
 
+.glb-set-item:active {
+  transform: scale(0.97);
+}
+
 .glb-set-item.selected {
-  background: rgba(99, 102, 241, 0.18);
-  border-color: rgba(99, 102, 241, 0.45);
+  background: rgba(var(--glb-accent-rgb), 0.18);
+  border-color: rgba(var(--glb-accent-rgb), 0.45);
 }
 
 .glb-set-checkbox {
@@ -123,8 +138,8 @@
 }
 
 .glb-set-item.selected .glb-set-checkbox {
-  background: var(--accent, #6366f1);
-  border-color: var(--accent, #6366f1);
+  background: var(--glb-accent);
+  border-color: var(--glb-accent);
 }
 
 .glb-set-info {
@@ -212,7 +227,7 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--accent, #6366f1);
+  background: var(--glb-accent);
   color: #fff;
   font-size: 0.72rem;
   font-weight: 800;
@@ -226,6 +241,112 @@
   height: 8px;
   border-radius: 50%;
   background: #22c55e;
+}
+
+/* Confetti burst — cheap dependency-free "juice" for correct answers and
+   celebration moments. Centered over whatever relatively-positioned element
+   it's dropped into; particles are plain spans animated purely via the
+   framer-motion props set in JS, this just gives them shape/color. */
+.glb-confetti-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.glb-confetti-layer.big {
+  z-index: 1; /* .glb-icon-badge sits above this at z-index: 2 */
+}
+
+.glb-confetti-piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+}
+
+/* Podium — the visual payoff for finishing a battle. Three columns of
+   staggered height (2nd-1st-3rd), so the winner is unmistakable at a glance
+   instead of just being the top row of a plain table. */
+.glb-podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.5rem 0 0.25rem;
+}
+
+.glb-podium-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100px;
+}
+
+.glb-podium-medal {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.glb-podium-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--glb-accent);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.glb-podium-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--pg-text, var(--text-primary, #fff));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.glb-podium-score {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fbbf24;
+}
+
+.glb-podium-bar {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 6px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.glb-podium-slot.h1 .glb-podium-bar {
+  height: 76px;
+  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+}
+
+.glb-podium-slot.h2 .glb-podium-bar {
+  height: 54px;
+  background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
+}
+
+.glb-podium-slot.h3 .glb-podium-bar {
+  height: 36px;
+  background: linear-gradient(180deg, #d97706 0%, #92400e 100%);
 }
 
 .glb-leaderboard-card {
@@ -276,8 +397,8 @@
 }
 
 .glb-lb-row.my-row {
-  border-color: var(--accent, #6366f1);
-  box-shadow: 0 0 0 1px var(--accent, #6366f1);
+  border-color: var(--glb-accent);
+  box-shadow: 0 0 0 1px var(--glb-accent);
 }
 
 .glb-lb-rank {
@@ -323,7 +444,23 @@
 }
 
 .glb-game-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: var(--pg-text-secondary, var(--text-muted, #94a3b8));
+}
+
+.glb-streak-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(251, 146, 60, 0.2);
+  border: 1px solid rgba(251, 146, 60, 0.4);
+  color: #fb923c;
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .glb-game-score {
@@ -332,6 +469,7 @@
   gap: 6px;
   color: #fbbf24;
   font-weight: 800;
+  font-size: 1.05rem;
 }
 
 .glb-progress-track {
@@ -344,12 +482,13 @@
 
 .glb-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--accent, #6366f1) 0%, #a855f7 100%);
+  background: linear-gradient(90deg, var(--glb-accent) 0%, var(--glb-accent-hover) 100%);
   border-radius: 999px;
   transition: width 0.3s ease;
 }
 
 .glb-question-card {
+  position: relative;
   padding: 1.5rem;
   background: rgba(15, 23, 42, 0.55);
   border: 1px solid var(--pg-hairline, var(--border, rgba(255, 255, 255, 0.12)));
@@ -359,13 +498,27 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  transition: border-color 0.3s ease;
+}
+
+/* Last few seconds of a question — a faint red pulse on the card itself
+   raises the tension, echoing the countdown ring instead of leaving the
+   time pressure purely to a number ticking down in the corner. */
+.glb-question-card.urgent {
+  border-color: rgba(239, 68, 68, 0.5);
+  animation: glbUrgentPulse 0.6s infinite alternate;
+}
+
+@keyframes glbUrgentPulse {
+  from { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  to { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.12); }
 }
 
 .glb-pos-badge {
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(129, 140, 248, 0.18);
-  color: #a5b4fc;
+  background: rgba(var(--glb-accent-rgb), 0.18);
+  color: var(--glb-accent);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -389,6 +542,20 @@
   .glb-options-grid {
     grid-template-columns: 1fr;
   }
+
+  .glb-podium-slot {
+    width: 78px;
+  }
+
+  .glb-podium-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+
+  .glb-podium-slot.h1 .glb-podium-bar { height: 60px; }
+  .glb-podium-slot.h2 .glb-podium-bar { height: 42px; }
+  .glb-podium-slot.h3 .glb-podium-bar { height: 28px; }
 }
 
 .glb-option-btn {
@@ -405,8 +572,12 @@
 }
 
 .glb-option-btn:hover:not(:disabled) {
-  border-color: #818cf8;
-  background: rgba(129, 140, 248, 0.12);
+  border-color: var(--glb-accent);
+  background: rgba(var(--glb-accent-rgb), 0.12);
+}
+
+.glb-option-btn:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .glb-option-btn:disabled {
@@ -454,10 +625,14 @@
   color: var(--pg-text, var(--text-primary, #fff));
 }
 
+.glb-btn-secondary:active {
+  transform: scale(0.96);
+}
+
 .glb-btn-primary {
   padding: 11px 22px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent, #6366f1) 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, var(--glb-accent) 0%, var(--glb-accent-hover) 100%);
   border: none;
   color: #ffffff;
   font-size: 0.88rem;
@@ -466,13 +641,17 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 14px rgba(var(--glb-accent-rgb), 0.4);
   transition: all 0.15s ease;
 }
 
 .glb-btn-primary:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 6px 18px rgba(var(--glb-accent-rgb), 0.5);
+}
+
+.glb-btn-primary:active:not(:disabled) {
+  transform: scale(0.96);
 }
 
 .glb-btn-primary:disabled {
@@ -497,6 +676,10 @@
 .glb-btn-danger:hover {
   background: rgba(239, 68, 68, 0.3);
   color: #fff;
+}
+
+.glb-btn-danger:active {
+  transform: scale(0.96);
 }
 
 .spinning {
@@ -569,6 +752,10 @@
   color: #fca5a5;
 }
 
+.glb-modal-close-btn:active {
+  transform: scale(0.92);
+}
+
 .glb-modal-body {
   flex: 1;
   overflow-y: auto;
@@ -578,47 +765,58 @@
   justify-content: center;
 }
 
-/* Timer Badge and Timer Bar */
-.glb-timer-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.88rem;
-  font-weight: 800;
-  color: var(--pg-text-secondary, #94a3b8);
-  background: rgba(15, 23, 42, 0.5);
-  padding: 4px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--pg-hairline, rgba(255, 255, 255, 0.12));
+/* Circular Countdown Ring — replaces the old flat timer bar with something
+   that reads as a ticking clock, the way a live quiz-show timer should. */
+.glb-timer-ring-wrap {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
 }
 
-.glb-timer-badge .timer-warn {
-  color: #ef4444 !important;
+.glb-timer-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* start the progress sweep at 12 o'clock */
+}
+
+.glb-timer-ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 6;
+}
+
+.glb-timer-ring-progress {
+  fill: none;
+  stroke: var(--glb-accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+
+.glb-timer-ring-progress.warn {
+  stroke: #ef4444;
+}
+
+.glb-timer-ring-number {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--pg-text, var(--text-primary, #fff));
+}
+
+.glb-timer-ring-number.warn {
+  color: #ef4444;
   animation: glbTimerPulse 0.5s infinite alternate;
 }
 
 @keyframes glbTimerPulse {
   from { opacity: 0.6; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1.1); }
-}
-
-.glb-timer-track {
-  width: 100%;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.glb-timer-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6 0%, #6366f1 100%);
-  border-radius: 999px;
-  transition: width 1s linear;
-}
-
-.glb-timer-fill.warn {
-  background: linear-gradient(90deg, #f59e0b 0%, #ef4444 100%) !important;
+  to { opacity: 1; transform: scale(1.15); }
 }
 
 /* Word Count Selector Row */
@@ -645,19 +843,23 @@
   color: #fff;
 }
 
-.glb-count-btn.active {
-  background: rgba(99, 102, 241, 0.25);
-  border-color: #6366f1;
-  color: #a5b4fc;
+.glb-count-btn:active {
+  transform: scale(0.95);
 }
 
-/* Points Float Badge */
+.glb-count-btn.active {
+  background: rgba(var(--glb-accent-rgb), 0.25);
+  border-color: var(--glb-accent);
+  color: var(--glb-accent);
+}
+
+/* Points Float Badge — entrance/exit motion now lives in the framer-motion
+   props on this element (spring pop-in, fade-out), not CSS keyframes. */
 .glb-points-float {
   font-size: 0.82rem;
   font-weight: 800;
   padding: 4px 12px;
   border-radius: 999px;
-  animation: glbBounce 0.3s ease;
 }
 
 .glb-points-float.plus {
@@ -672,30 +874,26 @@
   border: 1px solid rgba(239, 68, 68, 0.35);
 }
 
-@keyframes glbBounce {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
-
 /* Student Dashboard Battle Banner */
 .corp-ov-battle-banner {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(168, 85, 247, 0.25) 100%);
-  border: 1px solid rgba(168, 85, 247, 0.45);
+  --glb-accent: var(--accent, var(--accent-1, #0a84ff));
+  --glb-accent-rgb: var(--accent-rgb, 10, 132, 255);
+  background: linear-gradient(135deg, rgba(var(--glb-accent-rgb), 0.28) 0%, rgba(var(--glb-accent-rgb), 0.16) 100%);
+  border: 1px solid rgba(var(--glb-accent-rgb), 0.45);
   border-radius: var(--r-xl, 20px);
   padding: 1.2rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 10px 30px rgba(var(--glb-accent-rgb), 0.25);
   margin-bottom: 1.25rem;
   animation: glbPulseGlow 2s infinite alternate;
 }
 
 @keyframes glbPulseGlow {
-  from { box-shadow: 0 6px 20px rgba(99, 102, 241, 0.2); }
-  to { box-shadow: 0 12px 35px rgba(168, 85, 247, 0.35); }
+  from { box-shadow: 0 6px 20px rgba(var(--glb-accent-rgb), 0.2); }
+  to { box-shadow: 0 12px 35px rgba(var(--glb-accent-rgb), 0.35); }
 }
 
 .cobb-left {
@@ -708,9 +906,9 @@
   width: 46px;
   height: 46px;
   border-radius: 14px;
-  background: rgba(99, 102, 241, 0.3);
-  border: 1px solid rgba(168, 85, 247, 0.5);
-  color: #c084fc;
+  background: rgba(var(--glb-accent-rgb), 0.3);
+  border: 1px solid rgba(var(--glb-accent-rgb), 0.5);
+  color: var(--glb-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -735,7 +933,7 @@
   padding: 10px 20px;
   border-radius: 12px;
   background: #ffffff;
-  color: #4f46e5;
+  color: var(--glb-accent);
   border: none;
   font-size: 0.88rem;
   font-weight: 800;
@@ -748,4 +946,8 @@
 .cobb-btn:hover {
   transform: translateY(-1px) scale(1.02);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+.cobb-btn:active {
+  transform: scale(0.96);
 }
