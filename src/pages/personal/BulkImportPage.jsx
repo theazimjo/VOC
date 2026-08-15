@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Upload, Copy, Check, AlertTriangle, FileText } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
-import { lookupWordFromDictionary, toShortLangCode } from '../../utils/dictionaryService';
+import { lookupWordFromDictionary, lookupEnglishDefinition, toShortLangCode } from '../../utils/dictionaryService';
 import IosSpinner from '../../components/common/IosSpinner';
 import './BulkImportPage.css';
 
@@ -70,8 +70,23 @@ const IELTS_SAMPLE_WORDS = [
   { word: 'inevitable', translation: "muqarrar", partOfSpeech: 'adjective' }
 ];
 
-function buildSampleJson(wordLangCode, isIelts) {
-  if (isIelts) return JSON.stringify(IELTS_SAMPLE_WORDS, null, 2);
+// Shown only for 'english'-type packs - "translation" is deliberately absent
+// here since that field is optional/unused for this pack type. "definition"
+// is the required field instead of "translation" (see resolveEntry below).
+const ENGLISH_SAMPLE_WORDS = [
+  {
+    word: 'meticulous',
+    definition: 'showing great attention to detail; very careful and precise',
+    synonyms: 'careful, precise, thorough',
+    example: 'The report was the result of meticulous research.',
+    partOfSpeech: 'adjective'
+  },
+  { word: 'inevitable', definition: 'certain to happen; unavoidable', partOfSpeech: 'adjective' }
+];
+
+function buildSampleJson(wordLangCode, packType) {
+  if (packType === 'ielts') return JSON.stringify(IELTS_SAMPLE_WORDS, null, 2);
+  if (packType === 'english') return JSON.stringify(ENGLISH_SAMPLE_WORDS, null, 2);
   const items = SAMPLE_WORDS_BY_LANG[wordLangCode] || SAMPLE_WORDS_BY_LANG.en;
   return JSON.stringify(items, null, 2);
 }
@@ -92,7 +107,34 @@ async function mapWithConcurrency(items, limit, fn) {
   return results;
 }
 
-async function resolveEntry(item, wordLangCode) {
+// English-monolingual packs never require a translation - "word" +
+// "definition" is the whole pair, and the definition must stay in English
+// (never run through lookupWordFromDictionary, which translates it to
+// Uzbek - see EnglishWordFormPage.jsx for the same reasoning).
+async function resolveEnglishEntry(item) {
+  const word = String(item.word || '').trim();
+  const definition = String(item.definition || '').trim();
+  if (word && definition) return { ...item, word, definition };
+  if (!word) return null;
+
+  try {
+    const res = await lookupEnglishDefinition(word);
+    if (!res || !res.definition) return null;
+    return {
+      ...item,
+      word,
+      definition: definition || res.definition,
+      example: item.example || res.example || '',
+      partOfSpeech: item.partOfSpeech || res.partOfSpeech || 'noun'
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function resolveEntry(item, wordLangCode, isEnglishPack) {
+  if (isEnglishPack) return resolveEnglishEntry(item);
+
   const word = String(item.word || '').trim();
   const translation = String(item.translation || '').trim();
   if (word && translation) return { ...item, word, translation };
@@ -153,8 +195,8 @@ export default function BulkImportPage() {
 
   const packLanguage = pack?.language || 'en-US';
   const wordLangCode = toShortLangCode(packLanguage);
-  const isIeltsPack = pack?.type === 'ielts';
-  const sampleJson = useMemo(() => buildSampleJson(wordLangCode, isIeltsPack), [wordLangCode, isIeltsPack]);
+  const isEnglishPack = pack?.type === 'english';
+  const sampleJson = useMemo(() => buildSampleJson(wordLangCode, pack?.type), [wordLangCode, pack?.type]);
 
   const handleCopySample = () => {
     navigator.clipboard.writeText(sampleJson);
@@ -197,7 +239,7 @@ export default function BulkImportPage() {
         setProgress({ current: 0, total: parsed.length, stage: 'resolving' });
         let done = 0;
         candidateWords = await mapWithConcurrency(parsed, LOOKUP_CONCURRENCY, async (item) => {
-          const resolved = await resolveEntry(item, wordLangCode);
+          const resolved = await resolveEntry(item, wordLangCode, isEnglishPack);
           done++;
           setProgress({ current: done, total: parsed.length, stage: 'resolving' });
           return resolved;
@@ -205,12 +247,19 @@ export default function BulkImportPage() {
         candidateWords = candidateWords.filter(Boolean);
       }
 
-      const validWords = candidateWords.filter(
-        item => item && typeof item.word === 'string' && item.word.trim() && typeof item.translation === 'string' && item.translation.trim()
-      );
+      const validWords = candidateWords.filter(item => {
+        if (!item || typeof item.word !== 'string' || !item.word.trim()) return false;
+        return isEnglishPack
+          ? typeof item.definition === 'string' && item.definition.trim()
+          : typeof item.translation === 'string' && item.translation.trim();
+      });
 
       if (validWords.length === 0) {
-        setImportError('No valid words found in JSON. Each item requires "word" and "translation".');
+        setImportError(
+          isEnglishPack
+            ? 'No valid words found in JSON. Each item requires "word" and "definition".'
+            : 'No valid words found in JSON. Each item requires "word" and "translation".'
+        );
         setIsImporting(false);
         return;
       }
@@ -319,7 +368,7 @@ export default function BulkImportPage() {
                 checked={autoResolveMissing}
                 onChange={e => setAutoResolveMissing(e.target.checked)}
               />
-              <span>Auto-translate missing definitions/words via dictionary</span>
+              <span>{isEnglishPack ? 'Auto-fill missing English definitions via dictionary' : 'Auto-translate missing definitions/words via dictionary'}</span>
             </label>
           </div>
           <textarea
