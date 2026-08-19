@@ -16,7 +16,7 @@ import {
   getConfusionPairs,
 } from './experimentDB';
 import { computeRecallProbability, computeClusterCalibration, estimateDifficulty, clampStability, clampNextReview } from '../utils/memoryEngine';
-import { classifyWord } from './semanticClassifier';
+import { getWordCluster } from './semanticClassifier';
 
 // ─── Hook ────────────────────────────────────────────────────────────────────
 
@@ -81,7 +81,10 @@ export function useMemoryExperiment() {
         nextOptimalReview: nextReview,
         recallHistory,
         difficulty: estimateDifficulty(recallHistory),
-        wordData: { word: w.word, translation: w.translation, packName: w.source },
+        wordData: {
+          word: w.word, translation: w.translation, packName: w.source,
+          topic: w.topic, clusterKey: w.clusterKey, clusterName: w.clusterName, clusterIcon: w.clusterIcon,
+        },
       };
     });
     return map;
@@ -176,12 +179,11 @@ export function useMemoryExperiment() {
 
     // Self-calibrate this word's semantic cluster: compare this user's past
     // predicted-vs-actual outcomes for the cluster to nudge growth up/down.
-    const { key: clusterKey } = classifyWord(wordData?.word, wordData?.translation, wordData?.packName);
+    const { key: clusterKey } = getWordCluster(wordData);
     const clusterHistory = [];
     Object.values(memoryMap).forEach((m) => {
       if (!m.wordData) return;
-      const mKey = classifyWord(m.wordData.word, m.wordData.translation, m.wordData.packName).key;
-      if (mKey === clusterKey) clusterHistory.push(...(m.recallHistory || []));
+      if (getWordCluster(m.wordData).key === clusterKey) clusterHistory.push(...(m.recallHistory || []));
     });
     const clusterMultiplier = computeClusterCalibration(clusterHistory);
 

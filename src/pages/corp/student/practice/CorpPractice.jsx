@@ -8,7 +8,7 @@ import { updateStudentUnitProgress } from '../../../../services/corpService';
 import { updateIndependentStudentUnitProgress } from '../../../../services/independentTeacherService';
 import { weightedSelectWords, filterWordsForMode, PRACTICE_MODE_MIN_WORDS, corpWordStorageId } from '../../../../utils/helpers';
 import { playSound, triggerVibration } from '../../../../utils/feedback';
-import { classifyWord } from '../../../../experiment/semanticClassifier';
+import { getWordCluster } from '../../../../experiment/semanticClassifier';
 import { computeClusterCalibration, getDecayedMastery, computeRetentionStats } from '../../../../utils/memoryEngine';
 import { saveReviewEvent } from '../../../../experiment/experimentDB';
 import IosSpinner from '../../../../components/common/IosSpinner';
@@ -225,10 +225,10 @@ export default function CorpPractice() {
       const prevWrongCount = word.wrongCount || 0;
 
       // Semantic cluster calibration
-      const { key: clusterKey } = classifyWord(word.word, word.translation, loadedPack.title);
+      const { key: clusterKey } = getWordCluster(word);
       const clusterHistory = [];
       allWords.forEach((w) => {
-        if (classifyWord(w.word, w.translation, w.source).key === clusterKey) {
+        if (getWordCluster(w).key === clusterKey) {
           clusterHistory.push(...(w.recallHistory || []));
         }
       });

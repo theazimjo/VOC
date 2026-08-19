@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle, Stethoscope, Rocket } from 'lucide-react';
 import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision, simulateReviewDayOptions } from '../../utils/memoryEngine';
 import { diagnoseForgetting, getConfusionPairsForWord } from '../../utils/forgettingAutopsy';
-import { classifyWord } from '../semanticClassifier';
+import { getWordCluster } from '../semanticClassifier';
 
 const SIMULATOR_DAYS = [1, 3, 7, 14];
 
@@ -463,11 +463,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
   const semanticClusters = useMemo(() => {
     const clusterMap = {};
     entries.forEach(m => {
-      const word = m.wordData?.word || '';
-      const translation = m.wordData?.translation || '';
-      const packName = m.wordData?.packName || '';
-
-      const { key, name, icon } = classifyWord(word, translation, packName);
+      const { key, name, icon } = getWordCluster(m.wordData);
 
       if (!clusterMap[key]) {
         clusterMap[key] = { key, name, icon, memories: [] };

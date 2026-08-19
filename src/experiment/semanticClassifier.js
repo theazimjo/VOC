@@ -1,8 +1,19 @@
 /**
  * 🧬 Automatic Semantic & Grammatical Word Classifier
  *
- * Automatically categorizes English words into semantic/POS clusters
- * using linguistic patterns, Uzbek suffixes, and topic keyword maps.
+ * Two layers, used together (see getWordCluster below):
+ *  - classifyWord(): instant, offline, rule-based fallback. Checks topic
+ *    keywords (whole-word, not substring) BEFORE part-of-speech suffixes,
+ *    so a word like "hospital" lands in Health, not Adjectives just because
+ *    it ends in "-al". Used the moment a word is reviewed, before any
+ *    network classification has had a chance to run.
+ *  - classifyWordSemantic(): real semantic classification via Datamuse's
+ *    free, keyless "means like" endpoint (WordNet-derived distributional
+ *    similarity - not a guess from spelling patterns). Async, so it's never
+ *    called inline during a review; PacksContext runs it in the background
+ *    for words that don't have a cluster cached yet and writes the result
+ *    onto the word record, and getWordCluster() prefers that cached result
+ *    once it exists.
  */
 
 // Topic keyword dictionaries
@@ -170,29 +181,54 @@ const TOPIC_CLUSTERS = [
   }
 ];
 
+// Whole-word membership sets, built once. Fixes the old bug where the
+// 'animals' topic's "cat" keyword matched inside "vacation"/"category", or
+// 'food's "eat" matched inside "great"/"wheat" — TOPIC_CLUSTERS.keywords are
+// meant to match a whole word, never a substring.
+const TOPIC_KEYWORD_SETS = TOPIC_CLUSTERS.map(topic => ({
+  ...topic,
+  keywordSet: new Set(topic.keywords),
+  uzbekKeywordSet: new Set(topic.uzbekKeywords),
+}));
+
+const POS_BUCKETS = {
+  verbs: { key: 'pos_verbs', name: "Fe'llar (Action Verbs)", icon: '⚡' },
+  adjectives: { key: 'pos_adjectives', name: 'Sifatlar (Adjectives)', icon: '🎨' },
+  adverbs: { key: 'pos_adverbs', name: 'Ravishlar (Adverbs)', icon: '🚀' },
+  nouns: { key: 'pos_nouns', name: 'Otlar & Tushunchalar', icon: '💎' },
+};
+
+function tokenize(text) {
+  return (text.match(/[a-z']+/gi) || []).map(t => t.toLowerCase());
+}
+
 /**
- * Classify a word into a semantic cluster based on English word + Uzbek translation.
+ * Classify a word into a semantic cluster based on English word + Uzbek
+ * translation. Instant and offline (no network) — the same-frame fallback
+ * used until classifyWordSemantic() has had a chance to classify a word for
+ * real; see the module doc comment above and getWordCluster() below.
  *
  * @param {string} word - English word
  * @param {string} translation - Uzbek translation
- * @param {string} [packName] - Optional user pack name
  * @returns {{ key: string, name: string, icon: string }}
  */
-export function classifyWord(word = '', translation = '', packName = '') {
-  const w = word.trim().toLowerCase();
-  const tr = translation.trim().toLowerCase();
-  const pName = (packName || '').trim();
+export function classifyWord(word = '', translation = '') {
+  const wTokens = tokenize(word);
+  const trTokens = tokenize(translation);
 
-  // 1. If packName is specific (not 'General' or 'Kutubxona'), use user's pack
-  if (pName && pName !== 'Kutubxona' && pName !== 'General' && pName !== 'To\'plam') {
-    return {
-      key: `pack_${pName.toLowerCase().replace(/\s+/g, '_')}`,
-      name: pName,
-      icon: '📦',
-    };
+  // 1. Topic keywords, whole-word — checked BEFORE part-of-speech suffixes,
+  // so e.g. "hospital" lands in Health instead of Adjectives just because
+  // it happens to end in "-al" (see file header for why this order matters).
+  for (const topic of TOPIC_KEYWORD_SETS) {
+    if (wTokens.some(t => topic.keywordSet.has(t)) || trTokens.some(t => topic.uzbekKeywordSet.has(t))) {
+      return { key: topic.key, name: topic.name, icon: topic.icon };
+    }
   }
 
-  // 2. Check Action Verbs (Fe'llar)
+  const w = word.trim().toLowerCase();
+  const tr = translation.trim().toLowerCase();
+
+  // 2. Action Verbs (Fe'llar)
   if (
     w.startsWith('to ') ||
     tr.endsWith('moq') ||
@@ -202,10 +238,10 @@ export function classifyWord(word = '', translation = '', packName = '') {
     w.endsWith('ate') ||
     w.endsWith('fy')
   ) {
-    return { key: 'pos_verbs', name: 'Fe\'llar (Action Verbs)', icon: '⚡' };
+    return POS_BUCKETS.verbs;
   }
 
-  // 3. Check Adjectives (Sifatlar / Tasviriy)
+  // 3. Adjectives (Sifatlar / Tasviriy)
   if (
     w.endsWith('ful') ||
     w.endsWith('able') ||
@@ -220,24 +256,116 @@ export function classifyWord(word = '', translation = '', packName = '') {
     tr.endsWith('li') ||
     tr.endsWith('siz')
   ) {
-    return { key: 'pos_adjectives', name: 'Sifatlar (Adjectives)', icon: '🎨' };
+    return POS_BUCKETS.adjectives;
   }
 
-  // 4. Check Adverbs (Ravishlar)
+  // 4. Adverbs (Ravishlar)
   if (w.endsWith('ly')) {
-    return { key: 'pos_adverbs', name: 'Ravishlar (Adverbs)', icon: '🚀' };
+    return POS_BUCKETS.adverbs;
   }
 
-  // 5. Check Topic Keywords
-  for (const topic of TOPIC_CLUSTERS) {
-    if (
-      topic.keywords.some(kw => w.includes(kw)) ||
-      topic.uzbekKeywords.some(ukw => tr.includes(ukw))
-    ) {
-      return { key: topic.key, name: topic.name, icon: topic.icon };
+  // 5. Default: Otlar & Tushunchalar (General Nouns)
+  return POS_BUCKETS.nouns;
+}
+
+const DATAMUSE_ENDPOINT = 'https://api.datamuse.com/words';
+
+/**
+ * Real semantic classification via Datamuse's free, keyless "means like"
+ * endpoint (WordNet-derived distributional similarity — not a spelling
+ * guess). Scores are RANK-weighted, not raw-score-weighted: Datamuse's raw
+ * scores aren't comparable across different queries, so the closest related
+ * word gets the most weight (results.length) and it decays by 1 per rank,
+ * rather than letting one lucky top hit's huge raw score dominate.
+ *
+ * Never call this inline during a review — it's a network call. It's meant
+ * to run in the background (see PacksContext) and have its result cached
+ * onto the word record, which getWordCluster() then reads.
+ *
+ * @param {string} word
+ * @returns {Promise<{key: string, name: string, icon: string} | null>} null
+ *   on any network failure, or if nothing came back close enough to place
+ *   the word confidently in a topic or part-of-speech bucket.
+ */
+export async function classifyWordSemantic(word = '') {
+  const w = word.trim();
+  if (!w) return null;
+
+  let related;
+  try {
+    const res = await fetch(`${DATAMUSE_ENDPOINT}?ml=${encodeURIComponent(w)}&max=25`);
+    if (!res.ok) return null;
+    related = await res.json();
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(related) || related.length === 0) return null;
+
+  const topicScores = new Map();
+  const posVotes = { v: 0, adj: 0, adv: 0, n: 0 };
+
+  related.forEach((item, i) => {
+    const weight = related.length - i;
+    const tokens = tokenize(item.word || '');
+    for (const topic of TOPIC_KEYWORD_SETS) {
+      if (tokens.some(t => topic.keywordSet.has(t))) {
+        topicScores.set(topic.key, (topicScores.get(topic.key) || 0) + weight);
+      }
     }
+    const tags = item.tags || [];
+    if (tags.includes('v')) posVotes.v += weight;
+    if (tags.includes('adj')) posVotes.adj += weight;
+    if (tags.includes('adv')) posVotes.adv += weight;
+    if (tags.includes('n')) posVotes.n += weight;
+  });
+
+  let bestTopicKey = null;
+  let bestTopicScore = 0;
+  topicScores.forEach((score, key) => {
+    if (score > bestTopicScore) { bestTopicScore = score; bestTopicKey = key; }
+  });
+
+  // Require a real cluster of related-word matches (roughly 2-3 solid hits,
+  // or one very top-ranked one), not a single coincidental match, before
+  // trusting a topic over the more conservative part-of-speech fallback.
+  if (bestTopicKey && bestTopicScore >= 15) {
+    const topic = TOPIC_CLUSTERS.find(t => t.key === bestTopicKey);
+    if (topic) return { key: topic.key, name: topic.name, icon: topic.icon };
   }
 
-  // 6. Default: Otlar & Tushunchalar (General Nouns)
-  return { key: 'pos_nouns', name: 'Otlar & Tushunchalar', icon: '💎' };
+  const topPos = Object.entries(posVotes).sort((a, b) => b[1] - a[1])[0];
+  if (topPos && topPos[1] > 0) {
+    const posKeyMap = { v: 'verbs', adj: 'adjectives', adv: 'adverbs', n: 'nouns' };
+    return POS_BUCKETS[posKeyMap[topPos[0]]];
+  }
+
+  return null;
+}
+
+/**
+ * Resolve the best available cluster for a word record, in priority order:
+ *  1. A curated `topic` field (market packs like IELTS/Science set this by
+ *     hand — real, zero-cost ground truth, always trusted first).
+ *  2. A cached `clusterKey`/`clusterName`/`clusterIcon` — written once onto
+ *     the word record by PacksContext's background classifyWordSemantic()
+ *     pass, so it's re-read here for free on every later call.
+ *  3. classifyWord()'s instant offline heuristic, for a word nothing has
+ *     classified yet (the background pass hasn't reached it, or is still
+ *     mid-flight) — never leaves a word with no cluster at all.
+ *
+ * @param {{word?: string, translation?: string, topic?: string, clusterKey?: string, clusterName?: string, clusterIcon?: string}} wordRecord
+ * @returns {{ key: string, name: string, icon: string }}
+ */
+export function getWordCluster(wordRecord = {}) {
+  if (wordRecord.topic) {
+    return { key: `topic_${wordRecord.topic}`, name: wordRecord.topic, icon: '🏷️' };
+  }
+  if (wordRecord.clusterKey) {
+    return {
+      key: wordRecord.clusterKey,
+      name: wordRecord.clusterName || wordRecord.clusterKey,
+      icon: wordRecord.clusterIcon || '💎',
+    };
+  }
+  return classifyWord(wordRecord.word, wordRecord.translation);
 }

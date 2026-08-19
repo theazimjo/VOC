@@ -4,6 +4,7 @@ import { db } from '../firebase';
 import { useAuth } from './AuthContext';
 import { migratePackWordsIfNeeded } from '../utils/wordsMigration';
 import { getDecayedMastery } from '../utils/memoryEngine';
+import { classifyWordSemantic } from '../experiment/semanticClassifier';
 
 const PacksContext = createContext(null);
 
@@ -179,6 +180,42 @@ export function PacksProvider({ children }) {
     });
     return flat;
   }, [packs, wordsByPack]);
+
+  // Background semantic-cluster enrichment: words with a curated `topic`
+  // (market packs) or an already-cached `clusterKey` (classified before)
+  // don't need this. Everything else gets classified for real via Datamuse
+  // (see classifyWordSemantic) one word at a time, written back onto the
+  // word record — Practice/Memory Lab read that cache through
+  // getWordCluster() and fall back to the instant offline heuristic until
+  // it lands, so this never blocks or is required for anything to work.
+  // One word per effect run, paced by this same real-time listener's own
+  // round trip (our own write below re-triggers the `words` listener,
+  // which recomputes `allWords`, which re-fires this effect for the next
+  // word) - no manual timers, no risk of hammering the free API at once.
+  const clusteringInFlightRef = useRef(new Set());
+  useEffect(() => {
+    if (!user) return;
+    const next = allWords.find(
+      (w) => !w.topic && !w.clusterKey && !clusteringInFlightRef.current.has(w.id)
+    );
+    if (!next) return;
+
+    clusteringInFlightRef.current.add(next.id);
+    let cancelled = false;
+
+    classifyWordSemantic(next.word).then((result) => {
+      if (cancelled || !result) return;
+      return update(ref(db, `users/${user.uid}/words/${next.packId}/${next.id}`), {
+        clusterKey: result.key,
+        clusterName: result.name,
+        clusterIcon: result.icon,
+      });
+    }).catch((err) => {
+      console.warn('Background cluster classification failed for', next.word, err);
+    });
+
+    return () => { cancelled = true; };
+  }, [allWords, user]);
 
   const addPack = useCallback(
     async (data) => {

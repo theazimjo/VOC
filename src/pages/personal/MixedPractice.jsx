@@ -15,7 +15,7 @@ import { playSound, triggerVibration } from '../../utils/feedback';
 import { getDueWords } from '../../utils/spacedRepetition';
 import { inferConfidenceFromSpeed, computeClusterCalibration, getRecommendedRetrievalType } from '../../utils/memoryEngine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
-import { classifyWord } from '../../experiment/semanticClassifier';
+import { getWordCluster } from '../../experiment/semanticClassifier';
 import IosSpinner from '../../components/common/IosSpinner';
 import './MixedPractice.css';
 
@@ -186,10 +186,10 @@ export default function MixedPractice() {
       const parentId = wordObj.sourceId;
       const confidence = inferConfidenceFromSpeed(responseTime, isCorrect);
 
-      const { key: clusterKey } = classifyWord(wordObj.word, wordObj.translation, wordObj.source);
+      const { key: clusterKey } = getWordCluster(wordObj);
       const clusterHistory = [];
       allWords.forEach((w) => {
-        if (classifyWord(w.word, w.translation, w.source).key === clusterKey) {
+        if (getWordCluster(w).key === clusterKey) {
           clusterHistory.push(...(w.recallHistory || []));
         }
       });

@@ -12,7 +12,7 @@ import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACT
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { computeClusterCalibration } from '../../utils/memoryEngine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
-import { classifyWord } from '../../experiment/semanticClassifier';
+import { getWordCluster } from '../../experiment/semanticClassifier';
 import IosSpinner from '../../components/common/IosSpinner';
 import PracticeHub from '../../components/Practice/PracticeHub';
 import Flashcard from '../../components/Practice/Flashcard';
@@ -243,15 +243,13 @@ export default function PracticePage() {
       const prevWrongCount = word.wrongCount || 0;
 
       // Self-calibrate this word's semantic cluster the same way Memory Lab
-      // does, so both practice paths adapt the model consistently. Use the
-      // pack's own name (not word.source — sourceWords is read directly from
-      // Firebase and never carries that synthetic, PacksContext-only field)
-      // so this matches how allWords classifies the very same word elsewhere.
-      const packName = selectedSource?.name || '';
-      const { key: clusterKey } = classifyWord(word.word, word.translation, packName);
+      // does, so both practice paths adapt the model consistently. Prefers a
+      // curated topic or an already-classified cluster on the word record
+      // (see getWordCluster) over the instant offline heuristic.
+      const { key: clusterKey } = getWordCluster(word);
       const clusterHistory = [];
       allWords.forEach((w) => {
-        if (classifyWord(w.word, w.translation, w.source).key === clusterKey) {
+        if (getWordCluster(w).key === clusterKey) {
           clusterHistory.push(...(w.recallHistory || []));
         }
       });
