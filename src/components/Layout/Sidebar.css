@@ -24,9 +24,16 @@
 .sidebar-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: var(--space-lg) var(--space-md);
   flex-shrink: 0;
+  min-height: 64px;
+  transition: all var(--transition-base);
+}
+
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+  padding: 16px 8px;
   min-height: 64px;
 }
 
@@ -47,36 +54,26 @@
   font-size: var(--font-xl);
 }
 
-.sidebar-toggle {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: var(--bg-glass);
-  color: var(--text-secondary);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  flex-shrink: 0;
-  font-size: var(--font-lg);
-}
-
-.sidebar-toggle:hover {
-  background: var(--bg-glass-hover);
-  color: var(--text-primary);
-}
-
 /* ---------- Navigation ---------- */
 .sidebar-nav {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   padding: var(--space-sm) var(--space-sm);
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in Chrome/Safari */
+}
+
+.sidebar.collapsed .sidebar-nav {
+  padding: var(--space-sm) 8px;
+  align-items: center;
 }
 
 .sidebar-link {
@@ -89,10 +86,18 @@
   font-size: var(--font-sm);
   font-weight: 500;
   text-decoration: none;
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast);
   white-space: nowrap;
   position: relative;
   overflow: hidden;
+}
+
+.sidebar-link-active-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-1-dim);
+  border-radius: var(--radius-md);
+  z-index: 0;
 }
 
 .sidebar-link:hover {
@@ -102,7 +107,6 @@
 
 .sidebar-link.active {
   color: var(--text-primary);
-  background: var(--accent-1-dim);
 }
 
 .sidebar-link.active::before {
@@ -111,9 +115,11 @@
   left: 0;
   top: 6px;
   bottom: 6px;
-  width: 3px;
-  border-radius: 0 3px 3px 0;
+  width: 3.5px;
+  border-radius: 0 4px 4px 0;
   background: var(--accent-1);
+  box-shadow: 0 0 10px var(--accent-1);
+  z-index: 2;
 }
 
 .sidebar-link-icon {
@@ -122,23 +128,39 @@
   text-align: center;
   flex-shrink: 0;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .sidebar-link-text {
   opacity: 1;
   transition: opacity var(--transition-base);
+  position: relative;
+  z-index: 1;
 }
 
 .sidebar.collapsed .sidebar-link-text {
-  opacity: 0;
-  width: 0;
-  overflow: hidden;
+  display: none;
 }
 
-/* Tooltip for collapsed state */
 .sidebar.collapsed .sidebar-link {
   justify-content: center;
-  padding: 10px;
+  padding: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  gap: 0;
+}
+
+.sidebar.collapsed .sidebar-link.active::before {
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3.5px;
+  border-radius: 0 4px 4px 0;
 }
 
 /* ---------- User footer ---------- */
@@ -149,7 +171,16 @@
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  position: relative;
   overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-footer {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 8px;
+  gap: 10px;
 }
 
 .sidebar-avatar {
@@ -181,9 +212,7 @@
 }
 
 .sidebar.collapsed .sidebar-user-info {
-  opacity: 0;
-  width: 0;
-  overflow: hidden;
+  display: none;
 }
 
 .sidebar-user-name {
@@ -224,6 +253,18 @@
   color: var(--error);
 }
 
+.sidebar.collapsed .sidebar-logout {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+}
+
+.sidebar.collapsed .sidebar-logout:hover {
+  background: var(--error-dim);
+  color: var(--error);
+}
+
 /* ---------- Mobile overlay ---------- */
 .sidebar-overlay {
   display: none;
@@ -234,17 +275,14 @@
   z-index: 99;
 }
 
-/* ---------- Responsive ----------
-   Widened from phone-only (768px) to cover tablets too — this component
-   is only ever rendered in personal mode (group mode renders
-   StudentSidebar instead), so it's safe to move this cutover up without
-   affecting corp. ---------- */
+/* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .sidebar {
     left: -260px;
     width: var(--sidebar-width) !important;
     box-shadow: var(--shadow-lg);
     transition: left var(--transition-slow) !important;
+    overflow: hidden;
   }
 
   .sidebar.mobile-open {
@@ -255,18 +293,28 @@
     display: block;
   }
 
-  .sidebar-toggle {
-    display: none;
-  }
-
   .sidebar.collapsed .sidebar-link-text,
   .sidebar.collapsed .sidebar-user-info {
+    display: block;
     opacity: 1;
     width: auto;
+  }
+
+  .sidebar.collapsed .sidebar-header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .sidebar.collapsed .sidebar-footer {
+    flex-direction: row;
+    padding: var(--space-md) var(--space-sm);
   }
 
   .sidebar.collapsed .sidebar-link {
     justify-content: flex-start;
     padding: 10px 12px;
+    width: auto;
+    height: auto;
   }
 }
