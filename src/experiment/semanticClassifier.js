@@ -20,7 +20,7 @@
 const TOPIC_CLUSTERS = [
   {
     key: 'animals',
-    name: 'Hayvonlar & Tabiat',
+    name: 'Animals & Nature',
     icon: '🦁',
     keywords: [
       'dog', 'cat', 'bird', 'fish', 'animal', 'horse', 'wolf', 'lion', 'bear', 'tiger',
@@ -31,7 +31,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'tech',
-    name: 'Texnologiya & IT',
+    name: 'Technology & IT',
     icon: '💻',
     keywords: [
       'code', 'data', 'system', 'app', 'software', 'network', 'tech', 'web', 'computer',
@@ -41,7 +41,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'business',
-    name: 'Biznes & Moliya',
+    name: 'Business & Finance',
     icon: '💼',
     keywords: [
       'money', 'pay', 'bank', 'price', 'cost', 'market', 'trade', 'business', 'company',
@@ -51,7 +51,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'food',
-    name: 'Taomlar & Ichimliklar',
+    name: 'Food & Drink',
     icon: '🍎',
     keywords: [
       'apple', 'food', 'eat', 'drink', 'water', 'bread', 'meat', 'fruit', 'vegetable',
@@ -61,7 +61,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'time',
-    name: 'Vaqt & Harakat',
+    name: 'Time & Dates',
     icon: '⏰',
     keywords: [
       'time', 'day', 'night', 'week', 'month', 'year', 'hour', 'minute', 'today',
@@ -71,7 +71,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'travel',
-    name: 'Sayohat & Transport',
+    name: 'Travel & Transport',
     icon: '✈️',
     keywords: [
       'travel', 'trip', 'journey', 'airport', 'flight', 'airplane', 'passport', 'ticket',
@@ -82,7 +82,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'emotions',
-    name: "His-tuyg'ular",
+    name: 'Emotions',
     icon: '😊',
     keywords: [
       'happy', 'sad', 'angry', 'afraid', 'love', 'hate', 'fear', 'joy', 'excited',
@@ -93,7 +93,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'health',
-    name: "Sog'liq & Tibbiyot",
+    name: 'Health & Medicine',
     icon: '🩺',
     keywords: [
       'doctor', 'hospital', 'medicine', 'pain', 'sick', 'disease', 'health', 'patient',
@@ -104,7 +104,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'education',
-    name: "Ta'lim & O'qish",
+    name: 'Education & Learning',
     icon: '📚',
     keywords: [
       'school', 'teacher', 'student', 'class', 'lesson', 'exam', 'homework', 'university',
@@ -115,7 +115,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'family',
-    name: 'Oila & Munosabatlar',
+    name: 'Family & Relationships',
     icon: '👨‍👩‍👧',
     keywords: [
       'family', 'mother', 'father', 'sister', 'brother', 'parent', 'child', 'husband',
@@ -126,7 +126,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'clothing',
-    name: 'Kiyim & Moda',
+    name: 'Clothing & Fashion',
     icon: '👕',
     keywords: [
       'shirt', 'dress', 'shoes', 'hat', 'coat', 'jacket', 'pants', 'clothes', 'wear',
@@ -137,7 +137,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'sports',
-    name: 'Sport & Musobaqa',
+    name: 'Sports & Competition',
     icon: '⚽',
     keywords: [
       'sport', 'football', 'game', 'team', 'player', 'ball', 'win', 'lose', 'race',
@@ -148,7 +148,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'weather',
-    name: "Ob-havo & Iqlim",
+    name: 'Weather & Climate',
     icon: '⛅',
     keywords: [
       'weather', 'rain', 'sun', 'snow', 'wind', 'cloud', 'storm', 'hot', 'cold', 'warm',
@@ -159,7 +159,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'home',
-    name: 'Uy & Ro\'zg\'or',
+    name: 'Home & Household',
     icon: '🏠',
     keywords: [
       'house', 'home', 'room', 'kitchen', 'table', 'chair', 'bed', 'door', 'window',
@@ -170,7 +170,7 @@ const TOPIC_CLUSTERS = [
   },
   {
     key: 'money',
-    name: 'Pul & Xarid',
+    name: 'Money & Shopping',
     icon: '💰',
     keywords: [
       'money', 'buy', 'sell', 'shop', 'store', 'price', 'discount', 'pay', 'cash',
@@ -192,10 +192,10 @@ const TOPIC_KEYWORD_SETS = TOPIC_CLUSTERS.map(topic => ({
 }));
 
 const POS_BUCKETS = {
-  verbs: { key: 'pos_verbs', name: "Fe'llar (Action Verbs)", icon: '⚡' },
-  adjectives: { key: 'pos_adjectives', name: 'Sifatlar (Adjectives)', icon: '🎨' },
-  adverbs: { key: 'pos_adverbs', name: 'Ravishlar (Adverbs)', icon: '🚀' },
-  nouns: { key: 'pos_nouns', name: 'Otlar & Tushunchalar', icon: '💎' },
+  verbs: { key: 'pos_verbs', name: 'Action Verbs', icon: '⚡' },
+  adjectives: { key: 'pos_adjectives', name: 'Adjectives', icon: '🎨' },
+  adverbs: { key: 'pos_adverbs', name: 'Adverbs', icon: '🚀' },
+  nouns: { key: 'pos_nouns', name: 'Nouns & Concepts', icon: '💎' },
 };
 
 function tokenize(text) {
@@ -342,13 +342,26 @@ export async function classifyWordSemantic(word = '') {
   return null;
 }
 
+// Keyed by cluster key (stable — "animals", "pos_verbs", etc. never change),
+// so getWordCluster can re-derive the current display name/icon for an
+// already-classified word instead of trusting the copy that was cached onto
+// it at classification time. A wording change here (like translating these
+// from Uzbek to English) then applies to every already-classified word
+// immediately, with no Firebase migration or re-classification needed.
+const ALL_CLUSTERS_BY_KEY = new Map([
+  ...TOPIC_CLUSTERS.map(t => [t.key, { key: t.key, name: t.name, icon: t.icon }]),
+  ...Object.values(POS_BUCKETS).map(b => [b.key, b]),
+]);
+
 /**
  * Resolve the best available cluster for a word record, in priority order:
  *  1. A curated `topic` field (market packs like IELTS/Science set this by
  *     hand — real, zero-cost ground truth, always trusted first).
- *  2. A cached `clusterKey`/`clusterName`/`clusterIcon` — written once onto
- *     the word record by PacksContext's background classifyWordSemantic()
- *     pass, so it's re-read here for free on every later call.
+ *  2. A cached `clusterKey` — written once onto the word record by
+ *     PacksContext's background classifyWordSemantic() pass. Only the key
+ *     is trusted; name/icon are re-looked-up from ALL_CLUSTERS_BY_KEY above
+ *     (falling back to whatever was cached only if the key is no longer
+ *     recognized, e.g. a bucket since removed).
  *  3. classifyWord()'s instant offline heuristic, for a word nothing has
  *     classified yet (the background pass hasn't reached it, or is still
  *     mid-flight) — never leaves a word with no cluster at all.
@@ -361,6 +374,8 @@ export function getWordCluster(wordRecord = {}) {
     return { key: `topic_${wordRecord.topic}`, name: wordRecord.topic, icon: '🏷️' };
   }
   if (wordRecord.clusterKey) {
+    const known = ALL_CLUSTERS_BY_KEY.get(wordRecord.clusterKey);
+    if (known) return known;
     return {
       key: wordRecord.clusterKey,
       name: wordRecord.clusterName || wordRecord.clusterKey,

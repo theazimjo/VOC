@@ -403,7 +403,7 @@ function WordInsightCard({ memory, confusionPairs }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
-export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
+export default function MemoryInsights({ memoryMap, confusionPairs = [], loading = false }) {
   const [filter, setFilter] = useState('all'); // 'all' | 'due' | 'strong' | 'weak'
   const [search, setSearch] = useState('');
 
@@ -508,6 +508,20 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
       return a.stability - b.stability;
     });
   }, [entries, filter, search]);
+
+  // `loading` checked after every hook above (Rules of Hooks - hooks must
+  // run in the same order every render) but before the empty-state below,
+  // since an unfinished `memoryMap` looks identical to a genuinely empty
+  // one otherwise: a jarring "No words reviewed yet" flash for anyone with
+  // an actual vocabulary, right before it fills in.
+  if (loading) {
+    return (
+      <div className="mem-loading">
+        <div className="mem-spinner" />
+        <span>Loading your memory data...</span>
+      </div>
+    );
+  }
 
   if (entries.length === 0) {
     return (
@@ -615,19 +629,19 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [] }) {
 
           <div className="mem-semantic-list">
             {semanticClusters.map(c => (
-              <div key={c.name} className="mem-semantic-item">
-                <div className="mem-sem-left">
+              <div key={c.name} className="mem-semantic-item mem-semantic-item-stacked">
+                <div className="mem-sem-top">
                   <span className="mem-sem-icon">{c.icon}</span>
-                  <div>
+                  <div className="mem-sem-text">
                     <div className="mem-sem-name">{c.name}</div>
                     <div className="mem-sem-meta">{c.count} words · Avg S = {c.avgStability}d</div>
                   </div>
                 </div>
-                <div className="mem-sem-right">
-                  <div className="mem-sem-mastery">{(c.mastery * 100).toFixed(0)}% mastered</div>
-                  <div className="mem-sem-boost" title="Starting stability for new words">
+                <div className="mem-sem-badges">
+                  <span className="mem-sem-mastery">{(c.mastery * 100).toFixed(0)}% mastered</span>
+                  <span className="mem-sem-boost" title="Starting stability for new words">
                     ⚡ New word S₀ = {c.initialStability}d
-                  </div>
+                  </span>
                 </div>
               </div>
             ))}

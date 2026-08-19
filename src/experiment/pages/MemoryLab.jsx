@@ -477,7 +477,7 @@ export default function MemoryLab() {
                 />
               )}
               {activeTab === 'insights' && (
-                <MemoryInsights memoryMap={memoryMap} confusionPairs={confusionPairs} />
+                <MemoryInsights memoryMap={memoryMap} confusionPairs={confusionPairs} loading={loading} />
               )}
               {activeTab === 'stats' && (
                 <StatsPanel stats={stats} memoryMap={memoryMap} />

@@ -1090,6 +1090,15 @@
   flex-shrink: 0;
 }
 
+.mem-sem-text {
+  /* Flex items default to min-width: auto, which refuses to shrink below
+     the name's full nowrap width — without this, .mem-sem-name's ellipsis
+     never actually engages and long cluster names (e.g. "Family &
+     Relationships") overflow past the mastery % on the right instead of
+     truncating, overlapping it on narrow screens. */
+  min-width: 0;
+}
+
 .mem-sem-name {
   font-size: 0.85rem;
   font-weight: 700;
@@ -1124,6 +1133,42 @@
   color: var(--success);
   background: var(--success-dim);
   padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+/* Semantic Clusters row: name gets the full row width instead of sharing it
+   with a squeezed-right mastery column, and mastery/boost move to their own
+   wrapped badge row underneath — nothing left to overlap on a narrow screen
+   even with the longer English cluster names. Confusion Pairs below keeps
+   the original .mem-sem-left/.mem-sem-right layout untouched. */
+.mem-semantic-item-stacked {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.mem-sem-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.mem-sem-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-left: calc(1.3rem + 10px);
+}
+
+.mem-sem-badges .mem-sem-mastery {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-1);
+  background: var(--accent-1-dim);
+  padding: 2px 8px;
   border-radius: 99px;
   white-space: nowrap;
 }
