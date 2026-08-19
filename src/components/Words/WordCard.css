@@ -47,13 +47,41 @@
   font-weight: 500;
 }
 
-/* Mastery indicator */
-.word-mastery-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-left: 2px;
+/* Mastery indicator - signal-strength bars, growing taller left to right;
+   filled count + color come from getMasteryLevel's bucket for this word.
+   Pinned to the same top-right corner .word-actions occupies, so it sits
+   flush at the card's true edge, not just the end of the text row. */
+.word-mastery-signal {
+  position: absolute;
+  top: 16px;
+  right: 12px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The edit/delete buttons (two 28px icons + gap, ~60px wide) slide into this
+   same corner on hover, so push the signal clear of that full width - not
+   just far enough to no longer touch the nearest (edit) button. */
+.word-card:hover .word-mastery-signal {
+  transform: translateX(-80px);
+}
+
+.word-mastery-bar {
+  width: 3px;
+  border-radius: 1px;
+  background: var(--border);
+  opacity: 0.55;
+}
+
+.word-mastery-bar:nth-child(1) { height: 5px; }
+.word-mastery-bar:nth-child(2) { height: 8px; }
+.word-mastery-bar:nth-child(3) { height: 11px; }
+.word-mastery-bar:nth-child(4) { height: 14px; }
+
+.word-mastery-bar.filled {
+  opacity: 1;
 }
 
 /* Part of Speech badge */
@@ -139,11 +167,13 @@
   display: flex;
   gap: var(--space-xs);
   opacity: 0;
-  transition: opacity var(--transition-fast) ease;
+  transform: translateX(14px);
+  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .word-card:hover .word-actions {
   opacity: 1;
+  transform: translateX(0);
 }
 
 .btn-action-icon {
@@ -182,14 +212,100 @@
   transform: scale(0.92);
 }
 
+/* ── Options menu ("...") — mobile only, see media query below ─────────
+   Desktop keeps the hover-revealed edit/delete pair above; touch devices
+   have no hover, so this single toggle button opens a small dropdown with
+   the same two actions instead. */
+.word-options {
+  display: none;
+  position: absolute;
+  top: 14px;
+  right: 12px;
+}
+
+.word-options-btn {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.word-options-btn:active {
+  transform: scale(0.92);
+}
+
+.word-options-menu {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  min-width: 160px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg, var(--shadow));
+  overflow: hidden;
+  z-index: 20;
+}
+
+.word-options-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px var(--space-md);
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.word-options-item:active {
+  background: var(--bg-tertiary);
+}
+
+.word-options-item.delete {
+  color: var(--error);
+}
+
 /* ── Mobile ────────────────────────────── */
 @media (max-width: 768px) {
   .word-card {
     padding: 14px var(--space-md);
-    padding-right: 76px;
+    padding-right: 52px;
   }
-  
+
+  /* Edit/delete have no hover to reveal them here, so they move into the
+     "..." menu below instead of sitting exposed (or invisible) on the card. */
   .word-actions {
-    opacity: 1;
+    display: none;
+  }
+
+  .word-options {
+    display: block;
+  }
+
+  /* The "..." button (28px, no hover to react to) permanently occupies this
+     corner, so the signal sits permanently clear of it too - fixed in
+     place with no transition, since there's no hover here to animate from. */
+  .word-mastery-signal {
+    transform: translateX(-40px);
+    transition: none;
+  }
+
+  /* A tap on touch devices can leave :hover "stuck" until the next tap
+     elsewhere - without this, that higher-specificity desktop hover rule
+     (translateX(-80px), sized for the wider two-icon actions row) would
+     still win over the plain rule above and jerk the signal further left. */
+  .word-card:hover .word-mastery-signal {
+    transform: translateX(-40px);
   }
 }

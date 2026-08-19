@@ -91,12 +91,28 @@
 
 .ielts-topic-filter-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
   gap: 8px;
   margin: var(--space-sm) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  /* Fade the trailing edge so a scrollable overflow is visible at a glance,
+     instead of chips just cutting off - grows more useful as chapters do. */
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent 100%);
+  mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent 100%);
+}
+
+.ielts-topic-filter-row::-webkit-scrollbar {
+  display: none;
 }
 
 .ielts-topic-chip {
+  flex: 0 0 auto;
+  white-space: nowrap;
   padding: 6px 14px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border);

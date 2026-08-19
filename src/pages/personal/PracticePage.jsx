@@ -63,6 +63,14 @@ export default function PracticePage() {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   const querySubStep = queryParams.get('subStep');
+  // The chapter/topic (if any) this practice session was started with - kept
+  // so navigating back to PackDetail returns to the same chapter filter
+  // instead of resetting to "All" (PackDetail derives its filter from this
+  // same query param).
+  const topicParam = queryParams.get('topic');
+  const packDetailPath = urlSourceId
+    ? `/packs/${urlSourceId}${topicParam ? `?topic=${encodeURIComponent(topicParam)}` : ''}`
+    : null;
 
   // Load parameterized source if available
   useEffect(() => {
@@ -86,15 +94,25 @@ export default function PracticePage() {
               words.push({ id: childSnap.key, ...childSnap.val() });
             });
           }
+
+          // Restrict to a single chapter/topic when the pack's practice button
+          // was pressed with a chapter filter active (see PackDetail's topic
+          // chips) - "All" omits this param and practices the whole pack.
+          const queryParams = new URLSearchParams(search);
+          const queryTopic = queryParams.get('topic');
+          if (queryTopic) {
+            words = words.filter(w => w.topic === queryTopic);
+          }
+
           if (words.length === 0) {
-            showAlert("This pack has no words! Add some words first.", () => {
-              navigate(`/packs/${urlSourceId}`);
-            });
+            showAlert(
+              queryTopic ? "This chapter has no words!" : "This pack has no words! Add some words first.",
+              () => navigate(`/packs/${urlSourceId}`)
+            );
             return;
           }
           setSourceWords(words);
 
-          const queryParams = new URLSearchParams(search);
           const queryMode = queryParams.get('mode');
           const queryCount = queryParams.get('count');
           const querySubStep = queryParams.get('subStep');
@@ -291,8 +309,8 @@ export default function PracticePage() {
     if (step === 'practice' || step === 'intro') {
       showConfirm("Are you sure you want to leave the practice? Your current results will not be saved.", () => {
         if (selectedSource?.name === 'Irregular Verbs') {
-          if (urlSourceId) {
-            navigate(`/packs/${urlSourceId}`);
+          if (packDetailPath) {
+            navigate(packDetailPath);
           } else {
             setStep('source');
           }
@@ -304,16 +322,16 @@ export default function PracticePage() {
     }
 
     if (step === 'mode') {
-      if (urlSourceId) {
-        navigate(`/packs/${urlSourceId}`);
+      if (packDetailPath) {
+        navigate(packDetailPath);
       } else {
         setStep('source');
       }
     }
     else if (step === 'results') {
       if (selectedSource?.name === 'Irregular Verbs') {
-        if (urlSourceId) {
-          navigate(`/packs/${urlSourceId}`);
+        if (packDetailPath) {
+          navigate(packDetailPath);
         } else {
           setStep('source');
         }

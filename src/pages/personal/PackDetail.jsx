@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Brain, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -20,6 +20,7 @@ import './PackDetail.css';
 export default function PackDetail() {
   const { packId } = useParams();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
   const { getPack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
@@ -34,14 +35,23 @@ export default function PackDetail() {
 
   const [confusionPairs, setConfusionPairs] = useState([]);
   const marketSyncCheckedRef = useRef(false);
-  const [topicFilter, setTopicFilter] = useState(null);
+  // Kept in the URL (not plain state) so it survives navigating away to
+  // Practice and back - PracticePage reads the same `topic` param to scope
+  // the session, and passes it back on the way out so the chip selection
+  // isn't lost when this component remounts.
+  const topicFilter = searchParams.get('topic');
+  const setTopicFilter = (topic) => {
+    const next = new URLSearchParams(searchParams);
+    if (topic) next.set('topic', topic); else next.delete('topic');
+    setSearchParams(next, { replace: true });
+  };
 
   // Distinct topics present among this pack's words, for the optional
-  // study-grouping filter chips (IELTS packs only, and only once at least
-  // one word has a topic set) - "20-30 words per topic" beats a random
-  // pile, per the IELTS vocabulary research behind this feature.
-  const ieltsTopics = useMemo(() => {
-    if (!pack || pack.type !== 'ielts') return [];
+  // study-grouping filter chips - shown for any pack whose words carry a
+  // topic (IELTS packs group by theme; the Science market pack groups by
+  // book chapter), and only once at least one word has a topic set.
+  const topics = useMemo(() => {
+    if (!pack) return [];
     return [...new Set(words.map(w => w.topic).filter(Boolean))].sort();
   }, [pack, words]);
 
@@ -84,10 +94,17 @@ export default function PackDetail() {
   // this component instance persists across /packs/:packId param changes (React
   // Router doesn't remount it), so without this the sync would only ever run once
   // per session, for whichever pack happened to be opened first.
+  // The topic filter is only cleared on an actual pack switch (tracked via
+  // this ref) - not on the initial mount, so a `?topic=...` carried back from
+  // Practice (or a bookmarked/shared link) is respected instead of wiped.
+  const prevPackIdRef = useRef(packId);
   useEffect(() => {
     marketSyncCheckedRef.current = false;
-    setTopicFilter(null);
-  }, [packId]);
+    if (prevPackIdRef.current !== packId) {
+      prevPackIdRef.current = packId;
+      setSearchParams({}, { replace: true });
+    }
+  }, [packId, setSearchParams]);
 
   // On first visit after the Market source pack gained new words, silently
   // add the missing ones to this installed copy (existing words/progress are
@@ -107,6 +124,19 @@ export default function PackDetail() {
       setNewWordsAddedCount(missingWords.length);
     });
   }, [pack, words, loading, bulkAddWords]);
+
+  // Restore the scroll position handleEditWord saved before leaving for the
+  // edit page - only once the real word list has painted (not the loading
+  // spinner, which is much shorter and would just clamp scrollY back to 0),
+  // and only the one time right after coming back.
+  useEffect(() => {
+    if (!pack || loading) return;
+    const key = `wordListScroll:${packId}`;
+    const saved = sessionStorage.getItem(key);
+    if (saved === null) return;
+    sessionStorage.removeItem(key);
+    requestAnimationFrame(() => window.scrollTo(0, parseInt(saved, 10)));
+  }, [pack, loading, packId]);
 
   const handleSaveWord = async (data) => {
     if (pack?.name === 'Irregular Verbs') return;
@@ -136,6 +166,10 @@ export default function PackDetail() {
 
   const handleEditWord = (word) => {
     if (pack?.name === 'Irregular Verbs') return;
+    // The word edit pages are a separate route, so this page fully unmounts
+    // and remounts on the way back - without saving where we were, it would
+    // start over at the top of a long word list every time.
+    sessionStorage.setItem(`wordListScroll:${packId}`, String(window.scrollY));
     if (pack?.type === 'ielts') {
       navigate(`/packs/${packId}/word/ielts/edit/${word.id}`);
       return;
@@ -188,11 +222,11 @@ export default function PackDetail() {
     await bulkAddWords(uniqueWords, onProgress);
   };
 
+  // WordCard already confirms (its own styled dialog, shared by the desktop
+  // hover button and the mobile "..." menu) before ever calling this.
   const handleDeleteWord = async (wordId) => {
     if (pack?.name === 'Irregular Verbs') return;
-    if (window.confirm('Are you sure you want to delete this word?')) {
-      await deleteWord(wordId);
-    }
+    await deleteWord(wordId);
   };
 
   if (!pack) {
@@ -248,8 +282,15 @@ export default function PackDetail() {
               </button>
             </>
           ) : (
-            <button className="btn btn-primary btn-mashq" onClick={() => navigate(`/practice/packs/${packId}`)}>
-              🎮 Practice
+            <button
+              className="btn btn-primary btn-mashq"
+              onClick={() => navigate(
+                topicFilter
+                  ? `/practice/packs/${packId}?topic=${encodeURIComponent(topicFilter)}`
+                  : `/practice/packs/${packId}`
+              )}
+            >
+              🎮 Practice{topicFilter ? ` (${topicFilter})` : ''}
             </button>
           )}
         </div>
@@ -292,7 +333,7 @@ export default function PackDetail() {
         </div>
       )}
 
-      {ieltsTopics.length > 0 && (
+      {topics.length > 0 && (
         <div className="ielts-topic-filter-row">
           <button
             type="button"
@@ -301,7 +342,7 @@ export default function PackDetail() {
           >
             All
           </button>
-          {ieltsTopics.map(topic => (
+          {topics.map(topic => (
             <button
               key={topic}
               type="button"
