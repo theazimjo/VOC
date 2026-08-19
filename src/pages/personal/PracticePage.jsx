@@ -24,6 +24,8 @@ import IrregularVerbsTrainer from '../../components/Practice/IrregularVerbsTrain
 import IeltsTrainer from '../../components/Practice/IeltsTrainer';
 import EnglishTrainer from '../../components/Practice/EnglishTrainer';
 import SentenceBuilder from '../../components/Practice/SentenceBuilder';
+import SpeedGame, { getSpeedRecord } from '../../components/Practice/SpeedGame';
+import GridMatchGame from '../../components/Practice/GridMatchGame';
 import './PracticePage.css';
 
 export default function PracticePage() {
@@ -380,6 +382,8 @@ export default function PracticePage() {
       case 'quiz': return <QuizGame {...props} />;
       case 'pronounce': return <PronounceGame {...props} />;
       case 'sentence': return <SentenceBuilder {...props} />;
+      case 'speed': return <SpeedGame {...props} />;
+      case 'gridmatch': return <GridMatchGame {...props} />;
       case 'irregular-verbs': return <IrregularVerbsTrainer {...props} initialSubStep={querySubStep} />;
       case 'ielts-trainer': return <IeltsTrainer {...props} />;
       case 'english-trainer': return <EnglishTrainer {...props} />;
@@ -517,12 +521,17 @@ export default function PracticePage() {
             >
               <div className="intro-card">
                 <div className="intro-mode-icon">
-                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'irregular-verbs' ? '⚡' : selectedMode === 'ielts-trainer' ? '🎓' : selectedMode === 'english-trainer' ? '🔤' : '🎮'}
+                  {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'speed' ? '⏱️' : selectedMode === 'gridmatch' ? '🧩' : selectedMode === 'irregular-verbs' ? '⚡' : selectedMode === 'ielts-trainer' ? '🎓' : selectedMode === 'english-trainer' ? '🔤' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match the Pair' : selectedMode === 'quiz' ? 'Quiz' : selectedMode === 'pronounce' ? 'Pronunciation' : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'irregular-verbs' ? "Irregular Verbs Trainer" : selectedMode === 'ielts-trainer' ? 'IELTS Trainer' : selectedMode === 'english-trainer' ? 'English Trainer' : 'Practice'}
+                  {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match the Pair' : selectedMode === 'quiz' ? 'Quiz' : selectedMode === 'pronounce' ? 'Pronunciation' : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'speed' ? 'Speed Round' : selectedMode === 'gridmatch' ? 'Memory Grid' : selectedMode === 'irregular-verbs' ? "Irregular Verbs Trainer" : selectedMode === 'ielts-trainer' ? 'IELTS Trainer' : selectedMode === 'english-trainer' ? 'English Trainer' : 'Practice'}
                 </h2>
                 <p>{practiceWords.length} words ready</p>
+                {selectedMode === 'speed' && (
+                  <p className="intro-speed-record">
+                    🏆 Your best: <strong>{getSpeedRecord(selectedSource?.title || selectedSource?.name || "Library")}</strong> correct in 60s
+                  </p>
+                )}
 
                 <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
                   <IosSpinner />
@@ -546,7 +555,7 @@ export default function PracticePage() {
                   <ChevronLeft size={22} strokeWidth={2.5} />
                 </button>
                 <h1 className="clean-quiz-title">
-                  {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match the Pair' : selectedMode === 'quiz' ? '📝 Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation' : selectedMode === 'sentence' ? '📓 Sentence Builder' : 'Practice'}
+                  {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match the Pair' : selectedMode === 'quiz' ? '📝 Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation' : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? '⏱️ Speed Round' : selectedMode === 'gridmatch' ? '🧩 Memory Grid' : 'Practice'}
                 </h1>
                 <div style={{ width: '40px', opacity: 0 }}></div>
 

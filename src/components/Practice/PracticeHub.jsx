@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, GraduationCap, BookOpenText } from 'lucide-react';
+import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, GraduationCap, BookOpenText, Timer, Grid3x3 } from 'lucide-react';
 import { recommendPracticeMode } from '../../utils/memoryEngine';
 import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
 import './PracticeHub.css';
@@ -114,6 +114,22 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
         desc: "Select the correct translation from four options",
         badge: "Min 4 words",
         glowColor: 'hsl(38, 95%, 55%)'
+      },
+      {
+        id: 'speed',
+        icon: Timer,
+        title: 'Speed Round',
+        desc: "60 seconds, as many correct answers as you can - beats your own record",
+        badge: "Min 4 words",
+        glowColor: 'hsl(0, 85%, 60%)'
+      },
+      {
+        id: 'gridmatch',
+        icon: Grid3x3,
+        title: 'Memory Grid',
+        desc: "Flip cards to pair each word with its translation - the grid grows the better you remember",
+        badge: "Min 6 words",
+        glowColor: 'hsl(280, 80%, 62%)'
       }
     );
   }

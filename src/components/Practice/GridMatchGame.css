@@ -1,0 +1,203 @@
+.grid-match-container {
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.grid-match-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.grid-match-round {
+  font-weight: 800;
+  font-size: var(--font-md);
+  color: var(--text-primary);
+}
+
+.grid-match-round-size {
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: var(--font-sm);
+}
+
+.grid-match-tally {
+  display: flex;
+  gap: var(--space-md);
+  font-weight: 700;
+  font-size: var(--font-sm);
+}
+
+.grid-match-tally-correct,
+.grid-match-tally-wrong {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.grid-match-tally-correct { color: var(--success); }
+.grid-match-tally-wrong { color: var(--error); }
+
+.grid-match-level-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  font-size: var(--font-sm);
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  align-self: center;
+}
+
+.grid-match-board {
+  display: grid;
+  gap: 10px;
+}
+
+.grid-match-card {
+  aspect-ratio: 1;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  /* Gives the flipper's rotateY an actual sense of depth instead of just
+     stretching the card sideways. */
+  perspective: 900px;
+}
+
+.grid-match-card:disabled {
+  cursor: default;
+}
+
+/* Lifts the whole card on hover without touching .grid-match-card-flipper's
+   transform — that one is driven entirely by Framer Motion's rotateY, and a
+   competing CSS transform on it would fight the flip animation. */
+.grid-match-card:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+/* The two faces stack in the same 3D space; whichever one isn't rotated
+   toward the viewer this frame is hidden via backface-visibility, so the
+   flip reads as one card turning over, not two cards cross-fading. */
+.grid-match-card-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.grid-match-card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Face-down back: a distinct, bold color (not a border-only recolor) so a
+   flipped-vs-unflipped card is unmistakable at a glance, not just texture. */
+.grid-match-card-back {
+  background: linear-gradient(135deg, hsl(280, 75%, 58%), hsl(255, 80%, 52%));
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.grid-match-card-front {
+  background: var(--bg-glass-strong);
+  border-color: var(--accent-1);
+  transform: rotateY(180deg);
+}
+
+.grid-match-card.matched .grid-match-card-front {
+  background: var(--success-dim);
+  border-color: var(--success);
+}
+
+.grid-match-card-inner {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.grid-match-card.matched .grid-match-card-inner {
+  color: var(--success);
+}
+
+@media (max-width: 480px) {
+  .grid-match-container {
+    gap: var(--space-sm);
+  }
+
+  .grid-match-top-bar {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+
+  .grid-match-round {
+    font-size: var(--font-sm);
+  }
+
+  .grid-match-round-size {
+    font-size: var(--font-xs);
+  }
+
+  .grid-match-tally {
+    gap: var(--space-sm);
+    font-size: var(--font-xs);
+  }
+
+  .grid-match-level-banner {
+    font-size: var(--font-xs);
+    padding: 6px 10px;
+    text-align: center;
+  }
+
+  .grid-match-board {
+    gap: 6px;
+  }
+
+  .grid-match-card-face {
+    border-width: 1.5px;
+    border-radius: var(--radius-md);
+    padding: 3px;
+  }
+
+  .grid-match-card-inner {
+    font-size: 0.68rem;
+    line-height: 1.15;
+  }
+}
+
+/* Small phones (iPhone SE and similar ~360px) - the 4-column 8-pair grid is
+   the tightest case, so this shrinks cards further rather than letting text
+   overflow or the board force horizontal scroll on the page. */
+@media (max-width: 360px) {
+  .grid-match-board {
+    gap: 4px;
+  }
+
+  .grid-match-card-face {
+    padding: 2px;
+  }
+
+  .grid-match-card-inner {
+    font-size: 0.6rem;
+  }
+}

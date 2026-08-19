@@ -418,73 +418,67 @@ export default function MemoryLab() {
 
       {/* Content */}
       <div className="mem-content">
-        <AnimatePresence mode="wait">
+        {/* Active session */}
+        {inSession && !sessionDone && (
+          <motion.div
+            key="session"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            style={{ width: '100%' }}
+          >
+            <WordMemorySession
+              session={session}
+              allWords={allWords}
+              onSubmit={submitReview}
+              onSkip={skipWord}
+              onEnd={endSession}
+              onConfusionDetected={reportConfusion}
+            />
+          </motion.div>
+        )}
 
-          {/* Active session */}
-          {inSession && !sessionDone && (
-            <motion.div
-              key="session"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{ width: '100%' }}
-            >
-              <WordMemorySession
-                session={session}
+        {/* Session finished → results */}
+        {sessionDone && (
+          <motion.div
+            key="results"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            style={{ width: '100%' }}
+          >
+            <SessionResults
+              session={session}
+              onRestart={() => startSession(session.queue)}
+              onDone={endSession}
+            />
+          </motion.div>
+        )}
+
+        {/* Tab views */}
+        {!inSession && !sessionDone && (
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.15 }}
+            style={{ width: '100%' }}
+          >
+            {activeTab === 'lab' && (
+              <LabTab
+                dueWords={dueWords}
                 allWords={allWords}
-                onSubmit={submitReview}
-                onSkip={skipWord}
-                onEnd={endSession}
-                onConfusionDetected={reportConfusion}
+                memoryMap={memoryMap}
+                onStart={startSession}
+                loading={loading}
               />
-            </motion.div>
-          )}
-
-          {/* Session finished → results */}
-          {sessionDone && (
-            <motion.div
-              key="results"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              style={{ width: '100%' }}
-            >
-              <SessionResults
-                session={session}
-                onRestart={() => startSession(session.queue)}
-                onDone={endSession}
-              />
-            </motion.div>
-          )}
-
-          {/* Tab views */}
-          {!inSession && !sessionDone && (
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, x: 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -12 }}
-              transition={{ duration: 0.2 }}
-              style={{ width: '100%' }}
-            >
-              {activeTab === 'lab' && (
-                <LabTab
-                  dueWords={dueWords}
-                  allWords={allWords}
-                  memoryMap={memoryMap}
-                  onStart={startSession}
-                  loading={loading}
-                />
-              )}
-              {activeTab === 'insights' && (
-                <MemoryInsights memoryMap={memoryMap} confusionPairs={confusionPairs} loading={loading} />
-              )}
-              {activeTab === 'stats' && (
-                <StatsPanel stats={stats} memoryMap={memoryMap} />
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
+            )}
+            {activeTab === 'insights' && (
+              <MemoryInsights memoryMap={memoryMap} confusionPairs={confusionPairs} loading={loading} />
+            )}
+            {activeTab === 'stats' && (
+              <StatsPanel stats={stats} memoryMap={memoryMap} />
+            )}
+          </motion.div>
+        )}
       </div>
     </div>
   );

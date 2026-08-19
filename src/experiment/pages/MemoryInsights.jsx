@@ -5,7 +5,7 @@
  * Uses an inline SVG path drawn from the P(t) = e^(-t/S) formula.
  */
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle, Stethoscope, Rocket } from 'lucide-react';
 import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision, simulateReviewDayOptions } from '../../utils/memoryEngine';
@@ -153,20 +153,21 @@ function WordInsightCard({ memory, confusionPairs }) {
 
   const stability = Number(memory.stability) || 1.0;
 
-  // Forgetting Autopsy — only meaningful once this word has actually been forgotten at least once.
-  // Computed unconditionally (never after an early return) to satisfy Rules of Hooks,
-  // even though the result is only rendered when wordData is present below.
+  // Forgetting Autopsy — only calculated when card is expanded to prevent UI lags
   const wordConfusionPairs = useMemo(
-    () => getConfusionPairsForWord(memory.wordId, confusionPairs),
-    [memory.wordId, confusionPairs]
+    () => (expanded ? getConfusionPairsForWord(memory.wordId, confusionPairs) : []),
+    [expanded, memory.wordId, confusionPairs]
   );
   const autopsy = useMemo(
-    () => diagnoseForgetting(memory, wordConfusionPairs),
-    [memory, wordConfusionPairs]
+    () => (expanded ? diagnoseForgetting(memory, wordConfusionPairs) : { hasEnoughData: false, factors: [] }),
+    [expanded, memory, wordConfusionPairs]
   );
 
-  // Future Memory Simulator — "what if I review on day X" comparison.
-  const simulatorOptions = useMemo(() => simulateReviewDayOptions(stability, SIMULATOR_DAYS, 30), [stability]);
+  // Future Memory Simulator — only calculated when card is expanded
+  const simulatorOptions = useMemo(
+    () => (expanded ? simulateReviewDayOptions(stability, SIMULATOR_DAYS, 30) : []),
+    [expanded, stability]
+  );
   const activeSimulatorOption = simulatorOptions.find((o) => o.reviewDay === simulatorDay) || null;
 
   if (!wordData || !wordData.word || typeof wordData.word !== 'string' || !wordData.word.trim()) return null;
@@ -182,32 +183,36 @@ function WordInsightCard({ memory, confusionPairs }) {
   const health = getMemoryHealth(stability, nextOptimalReview);
   const due = isDue(nextOptimalReview);
 
-  // Build time-aware checkpoints: "Now" = P at current elapsed time, then future offsets.
-  // Future offsets are days FROM NOW, not from last review.
-  const futureOffsets = [
-    { label: 'Now', addDays: 0 },
-    { label: '+1 day', addDays: 1 },
-    { label: '+3 days', addDays: 3 },
-    { label: '+7 days', addDays: 7 },
-    { label: '+14 days', addDays: 14 },
-    { label: '+30 days', addDays: 30 },
-  ];
-  const checkpoints = futureOffsets.map(({ label, addDays }) => ({
-    label,
-    days: daysSinceLastReview + addDays,
-    probability: computeRecallProbability(stability, daysSinceLastReview + addDays),
-  }));
+  // Build time-aware checkpoints only when expanded
+  const checkpoints = useMemo(() => {
+    if (!expanded) return [];
+    const futureOffsets = [
+      { label: 'Now', addDays: 0 },
+      { label: '+1 day', addDays: 1 },
+      { label: '+3 days', addDays: 3 },
+      { label: '+7 days', addDays: 7 },
+      { label: '+14 days', addDays: 14 },
+      { label: '+30 days', addDays: 30 },
+    ];
+    return futureOffsets.map(({ label, addDays }) => ({
+      label,
+      days: daysSinceLastReview + addDays,
+      probability: computeRecallProbability(stability, daysSinceLastReview + addDays),
+    }));
+  }, [expanded, daysSinceLastReview, stability]);
 
-  const explanation = explainSchedulingDecision(stability, lastReview, nextOptimalReview);
+  const explanation = useMemo(
+    () => (expanded ? explainSchedulingDecision(stability, lastReview, nextOptimalReview) : ''),
+    [expanded, stability, lastReview, nextOptimalReview]
+  );
 
   const daysUntilNext = nextOptimalReview && !due
     ? Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
     : null;
 
   return (
-    <motion.div
+    <div
       className={`mem-insight-card ${due ? 'due' : ''}`}
-      layout
       onClick={() => setExpanded(e => !e)}
     >
       {/* Card header */}
@@ -397,7 +402,7 @@ function WordInsightCard({ memory, confusionPairs }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
@@ -406,13 +411,30 @@ function WordInsightCard({ memory, confusionPairs }) {
 export default function MemoryInsights({ memoryMap, confusionPairs = [], loading = false }) {
   const [filter, setFilter] = useState('all'); // 'all' | 'due' | 'strong' | 'weak'
   const [search, setSearch] = useState('');
+  const [visibleCount, setVisibleCount] = useState(25);
+  const [isPreparing, setIsPreparing] = useState(true);
 
-  const entries = Object.values(memoryMap).filter(m => m.wordData && m.wordData.word && typeof m.wordData.word === 'string' && m.wordData.word.trim());
+  useEffect(() => {
+    // Unblock initial paint frame so loading spinner renders instantly without black/dark gaps
+    const timer = setTimeout(() => {
+      setIsPreparing(false);
+    }, 40);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    setVisibleCount(25);
+  }, [filter, search]);
+
+  const entries = useMemo(
+    () => Object.values(memoryMap).filter(m => m.wordData && m.wordData.word && typeof m.wordData.word === 'string' && m.wordData.word.trim()),
+    [memoryMap]
+  );
 
   // Overall summary metrics
   const now = Date.now();
   const summary = useMemo(() => {
-    if (entries.length === 0) return null;
+    if (isPreparing || loading || entries.length === 0) return null;
 
     let strong = 0;   // S >= 10
     let medium = 0;   // 5 <= S < 10
@@ -457,10 +479,11 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
       avgRetention: isNaN(avgRetention) ? 0 : avgRetention,
       avgStability,
     };
-  }, [entries, now]);
+  }, [entries, now, isPreparing, loading]);
 
   // Automatic Semantic & Linguistic Clusters Breakdown
   const semanticClusters = useMemo(() => {
+    if (isPreparing || loading || entries.length === 0) return [];
     const clusterMap = {};
     entries.forEach(m => {
       const { key, name, icon } = getWordCluster(m.wordData);
@@ -483,9 +506,10 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
         initialStability: Number(s0) || 1.0,
       };
     }).sort((a, b) => b.count - a.count);
-  }, [entries]);
+  }, [entries, isPreparing, loading]);
 
   const filtered = useMemo(() => {
+    if (isPreparing || loading || entries.length === 0) return [];
     let list = entries;
 
     if (filter === 'due') list = list.filter(m => isDue(m.nextOptimalReview));
@@ -507,18 +531,19 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
       if (aDue !== bDue) return aDue - bDue;
       return a.stability - b.stability;
     });
-  }, [entries, filter, search]);
+  }, [entries, filter, search, isPreparing, loading]);
 
-  // `loading` checked after every hook above (Rules of Hooks - hooks must
-  // run in the same order every render) but before the empty-state below,
-  // since an unfinished `memoryMap` looks identical to a genuinely empty
-  // one otherwise: a jarring "No words reviewed yet" flash for anyone with
-  // an actual vocabulary, right before it fills in.
-  if (loading) {
+  const visibleWords = useMemo(() => {
+    return filtered.slice(0, visibleCount);
+  }, [filtered, visibleCount]);
+
+  if (loading || isPreparing) {
     return (
-      <div className="mem-loading">
+      <div className="mem-loading" style={{ padding: '4rem 1rem' }}>
         <div className="mem-spinner" />
-        <span>Loading your memory data...</span>
+        <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
+          Insights va xotira tahlili yuklanmoqda...
+        </span>
       </div>
     );
   }
@@ -707,10 +732,22 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
       <div className="mem-count-label">{filtered.length} words</div>
 
       <div className="mem-insight-list">
-        {filtered.map(memory => (
+        {visibleWords.map(memory => (
           <WordInsightCard key={memory.wordId} memory={memory} confusionPairs={confusionPairs} />
         ))}
       </div>
+
+      {filtered.length > visibleCount && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+          <button
+            className="mem-btn-secondary"
+            style={{ padding: '0.66rem 1.5rem', fontSize: '0.85rem', cursor: 'pointer', borderRadius: '12px' }}
+            onClick={() => setVisibleCount(prev => prev + 25)}
+          >
+            Yana ko'proq yuklash (+{filtered.length - visibleCount})
+          </button>
+        </div>
+      )}
     </div>
   );
 }

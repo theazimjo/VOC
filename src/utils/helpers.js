@@ -134,6 +134,8 @@ export const PRACTICE_MODE_MIN_WORDS = {
   quiz: 4,
   pronounce: 1,
   sentence: 1,
+  speed: 4,
+  gridmatch: 6,
   'irregular-verbs': 1,
   'ielts-trainer': 3,
   'english-trainer': 3,

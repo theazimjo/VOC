@@ -259,8 +259,14 @@
   margin-top: 4px;
 }
 
-.heard-text strong {
+/* Color matches the banner it's in - red when the attempt was wrong, but
+   the same green as "Great pronunciation!" when it was actually correct. */
+.pronounce-feedback-banner.wrong .heard-text strong {
   color: var(--error);
+}
+
+.pronounce-feedback-banner.correct .heard-text strong {
+  color: var(--success);
 }
 
 /* Action button inside card (retry / skip) */

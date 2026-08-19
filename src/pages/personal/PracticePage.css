@@ -552,6 +552,19 @@
   margin: 0;
 }
 
+.intro-speed-record {
+  margin-top: 6px !important;
+  color: var(--warning) !important;
+  background: var(--warning-dim);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem !important;
+}
+
+.intro-speed-record strong {
+  font-weight: 800;
+}
+
 /* Random Word loading card */
 .intro-random-word-box {
   background: var(--bg-tertiary);

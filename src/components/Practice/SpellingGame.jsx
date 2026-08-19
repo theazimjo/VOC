@@ -19,6 +19,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [scrambledList, setScrambledList] = useState([]);
+  const [usedTileIndices, setUsedTileIndices] = useState([]);
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const inputRef = useRef(null);
@@ -37,26 +38,42 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     if (!currentWord) return;
     setScrambledList(shuffleArray(currentWord.word.trim().split('')));
     setInput('');
+    setUsedTileIndices([]);
     setAnswered(false);
     setIsCorrect(false);
     startTimeRef.current = Date.now();
   }, [currentIndex]);
 
-  // Compute used indices in scrambledList based on current input text
-  const usedIndices = new Set();
-  const typedChars = input.toLowerCase().split('');
-  typedChars.forEach((ch) => {
-    const idx = scrambledList.findIndex((letter, i) => !usedIndices.has(i) && letter.toLowerCase() === ch);
-    if (idx !== -1) {
-      usedIndices.add(idx);
-    }
-  });
-
   useEffect(() => {
-    if (inputRef.current && !answered) {
-      inputRef.current.focus();
+    if (!answered) {
+      const timer = setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }, 50);
+      return () => clearTimeout(timer);
     }
   }, [currentIndex, answered]);
+
+  // Handle Enter keypress for both submitting answer and advancing to next word
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        if (!answered) {
+          if (input.trim()) {
+            e.preventDefault();
+            submitAnswer();
+          }
+        } else {
+          e.preventDefault();
+          handleNext();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [answered, input, currentIndex, words]);
 
   const getLangAdjective = (langCode) => {
     if (!langCode) return 'English';
@@ -121,19 +138,46 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     }
   };
 
-  const handleTileClick = (letter, isUsed) => {
+  // Tile identity is tracked by exact scrambled-tile index, in tap order —
+  // not re-derived from `input` text by matching letters position-blind.
+  // A word with a repeated letter (e.g. the two "l"s in "hello") has two
+  // tiles that look identical but sit at different positions; deriving
+  // "used" purely by scanning for the first matching letter could mark a
+  // DIFFERENT tile than the one actually tapped, making the two identical
+  // letters look like they'd been merged into one.
+  const handleTileClick = (idx) => {
     if (answered) return;
-    if (!isUsed) {
-      setInput(prev => prev + letter);
+    if (usedTileIndices.includes(idx)) {
+      const posInSequence = usedTileIndices.indexOf(idx);
+      setUsedTileIndices(prev => prev.filter(i => i !== idx));
+      setInput(prev => prev.slice(0, posInSequence) + prev.slice(posInSequence + 1));
     } else {
-      // Remove last occurrence of letter
-      const idx = input.lastIndexOf(letter.toLowerCase());
-      const altIdx = input.lastIndexOf(letter.toUpperCase());
-      const removeAt = Math.max(idx, altIdx);
-      if (removeAt !== -1) {
-        setInput(prev => prev.slice(0, removeAt) + prev.slice(removeAt + 1));
-      }
+      setUsedTileIndices(prev => [...prev, idx]);
+      setInput(prev => prev + scrambledList[idx]);
     }
+  };
+
+  // Typing directly into the text field has no tile-click identity to
+  // preserve (no specific tile was ever "the one" pressed), so this
+  // recomputes the tile highlighting best-effort, position-blind — the
+  // same approach the click path used to rely on. That's fine here: the
+  // duplicate-letter mismatch above only bites when a specific tile's
+  // pressed/not-pressed state has to track a specific tap.
+  const handleInputChange = (e) => {
+    if (answered) return;
+    const newValue = e.target.value;
+    setInput(newValue);
+
+    const used = [];
+    const usedSet = new Set();
+    newValue.toLowerCase().split('').forEach((ch) => {
+      const idx = scrambledList.findIndex((letter, i) => !usedSet.has(i) && letter.toLowerCase() === ch);
+      if (idx !== -1) {
+        usedSet.add(idx);
+        used.push(idx);
+      }
+    });
+    setUsedTileIndices(used);
   };
 
   /**
@@ -240,12 +284,12 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
           </div>
           <div className={`spelling-tiles-wrapper ${tileSizeClass}`}>
             {scrambledList.map((letter, idx) => {
-              const isUsed = usedIndices.has(idx);
+              const isUsed = usedTileIndices.includes(idx);
               return (
                 <span
                   key={idx}
                   className={`scrambled-tile ${isUsed ? 'used' : ''}`}
-                  onClick={() => handleTileClick(letter, isUsed)}
+                  onClick={() => handleTileClick(idx)}
                   title={isUsed ? "O'chirish uchun bosing" : "Tanlash uchun bosing"}
                 >
                   {letter}
@@ -256,12 +300,17 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
           <form onSubmit={handleSubmit} className="spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
             <input
-              ref={inputRef}
+              ref={(el) => {
+                inputRef.current = el;
+                if (el && !answered) {
+                  requestAnimationFrame(() => el.focus());
+                }
+              }}
               type="text"
               name="practice_no_autofill_input"
               className={`spelling-input ${answered ? (isCorrect ? 'correct' : 'wrong') : ''}`}
               value={input}
-              onChange={e => !answered && setInput(e.target.value)}
+              onChange={handleInputChange}
               disabled={answered}
               autoComplete="off"
               autoCorrect="off"

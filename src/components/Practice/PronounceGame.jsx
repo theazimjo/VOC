@@ -244,6 +244,11 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             {answered && isCorrect && (
               <div className="pronounce-feedback-banner correct">
                 Great pronunciation!
+                {heardText && (
+                  <div className="heard-text">
+                    We heard: <strong>"{heardText}"</strong>
+                  </div>
+                )}
               </div>
             )}
 

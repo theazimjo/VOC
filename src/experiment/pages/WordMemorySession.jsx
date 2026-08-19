@@ -211,6 +211,11 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
               {typedMode ? (
                 <div className="mem-card-actions">
                   <input
+                    ref={(el) => {
+                      if (el) {
+                        requestAnimationFrame(() => el.focus());
+                      }
+                    }}
                     className="mem-typed-input"
                     type="text"
                     autoFocus

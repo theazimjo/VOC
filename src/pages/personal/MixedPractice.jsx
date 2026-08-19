@@ -265,6 +265,19 @@ export default function MixedPractice() {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter' && step === 'practice') {
+        if (hasAnswered) {
+          e.preventDefault();
+          handleNext();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [step, hasAnswered, currentIdx, questions]);
+
   const pageLoading = loading || allWordsLoading;
 
   return (
@@ -372,6 +385,11 @@ export default function MixedPractice() {
 
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
                       <input
+                        ref={(el) => {
+                          if (el && !hasAnswered) {
+                            requestAnimationFrame(() => el.focus());
+                          }
+                        }}
                         type="text"
                         name="practice_no_autofill_input"
                         className="mp-spelling-input"
@@ -418,6 +436,11 @@ export default function MixedPractice() {
 
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
                       <input
+                        ref={(el) => {
+                          if (el && !hasAnswered) {
+                            requestAnimationFrame(() => el.focus());
+                          }
+                        }}
                         type="text"
                         name="practice_no_autofill_input"
                         className="mp-spelling-input"
