@@ -39,6 +39,46 @@ export default function WordFormPage() {
   const [lookupError, setLookupError] = useState(null);
   const [saveError, setSaveError] = useState(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const langMenuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (langMenuRef.current && !langMenuRef.current.contains(e.target)) {
+        setIsLangMenuOpen(false);
+      }
+    };
+    if (isLangMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isLangMenuOpen]);
+
+  // Which language the translation field is filled in - remembered per pack
+  // so switching once (e.g. to Russian for a pack you study in Russian)
+  // sticks the next time this pack's "Add New Word" page is opened.
+  const [translationLangCode, setTranslationLangCode] = useState(() => {
+    try {
+      return localStorage.getItem(`translationLang:${packId}`) || 'uz';
+    } catch {
+      return 'uz';
+    }
+  });
+  const handleTranslationLangChange = (code) => {
+    setTranslationLangCode(code);
+    try {
+      localStorage.setItem(`translationLang:${packId}`, code);
+    } catch {
+      // ignore storage errors (private mode, quota, etc.)
+    }
+    // Clear a translation that's already filled in so the auto-lookup effect
+    // (which only fires while exactly one of word/translation is filled)
+    // re-translates the existing word into the newly chosen language,
+    // instead of silently leaving the old language's result behind.
+    if (formData.word.trim() && !isEdit) {
+      setFormData(prev => ({ ...prev, translation: '' }));
+    }
+  };
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -76,6 +116,12 @@ export default function WordFormPage() {
   const wordLangCode = toShortLangCode(packLanguage);
   const wordLangMeta = speechLanguages.find(l => l.code === packLanguage) || speechLanguages[0];
 
+  // Every speech language is a valid translation target except the pack's
+  // own word language (translating a word into itself is meaningless).
+  const translationLangOptions = speechLanguages.filter(l => toShortLangCode(l.code) !== wordLangCode);
+  const translationLangMeta = speechLanguages.find(l => toShortLangCode(l.code) === translationLangCode)
+    || speechLanguages.find(l => l.code === 'uz-UZ');
+
   // `source` says which field is being searched FROM - 'word' (the button
   // next to the word field, or auto-fill while only the word is typed) or
   // 'translation' (the mirror case). Only the *other* field ever gets
@@ -94,7 +140,8 @@ export default function WordFormPage() {
       const res = await lookupWordFromDictionary(
         query,
         source === 'word' ? 'word2translation' : 'translation2word',
-        wordLangCode
+        wordLangCode,
+        translationLangCode
       );
       if (res) {
         setFormData(prev => ({
@@ -128,7 +175,10 @@ export default function WordFormPage() {
     const hasExactlyOne = Boolean(wordVal) !== Boolean(translationVal);
     if (!hasExactlyOne || isLookingUp) return;
     const source = wordVal ? 'word' : 'translation';
-    const key = `${source}:${(wordVal || translationVal).toLowerCase()}`;
+    // Keyed on the target language too, so switching the translation
+    // language while the word field is already filled re-triggers a lookup
+    // into the newly selected language instead of leaving a stale result.
+    const key = `${source}:${(wordVal || translationVal).toLowerCase()}:${translationLangCode}`;
     if (key === lastAutoLookupRef.current) return;
     const timer = setTimeout(() => {
       lastAutoLookupRef.current = key;
@@ -136,7 +186,7 @@ export default function WordFormPage() {
     }, 700);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.word, formData.translation, isLookingUp]);
+  }, [formData.word, formData.translation, isLookingUp, translationLangCode]);
 
   // Checked live against words already loaded in memory (no network call),
   // so the warning shows while typing instead of surprising the user only
@@ -272,14 +322,48 @@ export default function WordFormPage() {
             </div>
 
             <div className="input-group">
-              <label>🇺🇿 Uzbek translation *</label>
+              <div className="wfp-lang-picker-header" ref={langMenuRef}>
+                <button
+                  type="button"
+                  className={`wfp-lang-picker-btn ${isLangMenuOpen ? 'active' : ''}`}
+                  onClick={() => setIsLangMenuOpen(prev => !prev)}
+                >
+                  <span className="wfp-lang-flag">{translationLangMeta.flag}</span>
+                  <span>{translationLangMeta.label} translation</span>
+                  <ChevronDown size={14} className={`wfp-lang-picker-icon ${isLangMenuOpen ? 'open' : ''}`} />
+                </button>
+
+                {isLangMenuOpen && (
+                  <div className="wfp-lang-dropdown">
+                    {translationLangOptions.map(l => {
+                      const code = toShortLangCode(l.code);
+                      const isSelected = code === translationLangCode;
+                      return (
+                        <button
+                          key={l.code}
+                          type="button"
+                          className={`wfp-lang-option ${isSelected ? 'selected' : ''}`}
+                          onClick={() => {
+                            handleTranslationLangChange(code);
+                            setIsLangMenuOpen(false);
+                          }}
+                        >
+                          <span className="wfp-lang-option-flag">{l.flag}</span>
+                          <span className="wfp-lang-option-label">{l.label}</span>
+                          {isSelected && <span className="wfp-lang-option-dot" />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
               <div className="wfp-input-with-action">
                 <input
                   type="text"
                   className="input"
                   value={formData.translation}
                   onChange={e => setFormData({ ...formData, translation: e.target.value })}
-                  placeholder="Random luck"
+                  placeholder="Enter the translation"
                   required
                   maxLength={300}
                 />

@@ -147,6 +147,135 @@
   margin-top: 2px;
 }
 
+/* ---------- Custom Glass & Rounded Language Dropdown Menu ---------- */
+.wfp-grid .input-group > label,
+.wfp-lang-picker-header {
+  height: 26px;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-xs, 6px);
+}
+
+.wfp-lang-picker-header {
+  position: relative;
+}
+
+.wfp-lang-picker-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  padding: 2px 6px;
+  margin-left: -6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.wfp-lang-picker-btn:hover,
+.wfp-lang-picker-btn.active {
+  color: #c084fc;
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.25);
+}
+
+.wfp-lang-flag {
+  font-size: 0.95rem;
+}
+
+.wfp-lang-picker-icon {
+  color: #c084fc;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.wfp-lang-picker-btn.active .wfp-lang-picker-icon,
+.wfp-lang-picker-icon.open {
+  transform: rotate(180deg);
+}
+
+/* Custom Dropdown Popover */
+.wfp-lang-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 100;
+  min-width: 200px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: var(--bg-glass-strong, #14141d);
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.16));
+  border-radius: 16px;
+  padding: 6px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: wfp-dropdown-in 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes wfp-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.wfp-lang-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #d1d5db);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.wfp-lang-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.wfp-lang-option.selected {
+  background: rgba(124, 58, 237, 0.18);
+  color: #c084fc;
+  font-weight: 700;
+}
+
+.wfp-lang-option-flag {
+  font-size: 1.05rem;
+}
+
+.wfp-lang-option-label {
+  flex: 1;
+}
+
+.wfp-lang-option-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c084fc;
+  box-shadow: 0 0 8px #c084fc;
+}
+
 .wfp-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -213,5 +342,8 @@
   }
   .wfp-card {
     padding: var(--space-md);
+  }
+  .wfp-translang-row {
+    max-width: 100%;
   }
 }

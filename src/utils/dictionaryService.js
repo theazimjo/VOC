@@ -53,13 +53,13 @@ async function translateWord(query, fromLang, toLang) {
   return decodeHTMLEntities(translated);
 }
 
-// translateToUz=true (the default, used everywhere else in this file) keeps
-// the long-standing behavior every other pack type relies on: the "Definition"
-// field is filled with a Uzbek translation of the English dictionary
-// definition, falling back to the raw English text only if that translation
-// call fails. lookupEnglishDefinition() below passes false, since a
-// monolingual English pack needs the RAW English definition, never translated.
-async function fetchEnglishDictionaryInfo(word, translateToUz = true) {
+// targetLang (default 'uz', the long-standing behavior every other pack type
+// relies on) fills the "Definition" field with a translation of the English
+// dictionary definition into that language, falling back to the raw English
+// text only if the translation call fails. Pass null/'en' to skip translation
+// entirely - lookupEnglishDefinition() below does this, since a monolingual
+// English pack needs the RAW English definition, never translated.
+async function fetchEnglishDictionaryInfo(word, targetLang = 'uz') {
   try {
     const res = await fetch(`${FREE_DICTIONARY_ENDPOINT}/${encodeURIComponent(word)}`);
     if (!res.ok) return null;
@@ -70,10 +70,10 @@ async function fetchEnglishDictionaryInfo(word, translateToUz = true) {
     if (!definitionEntry) return null;
 
     let definitionText = definitionEntry.definition || '';
-    if (translateToUz) {
+    if (targetLang && targetLang !== 'en') {
       try {
-        const uzDefinition = await translateWord(definitionEntry.definition, 'en', 'uz');
-        if (uzDefinition) definitionText = uzDefinition;
+        const translatedDefinition = await translateWord(definitionEntry.definition, 'en', targetLang);
+        if (translatedDefinition) definitionText = translatedDefinition;
       } catch {
         // keep the English definition as fallback
       }
@@ -98,7 +98,7 @@ async function fetchEnglishDictionaryInfo(word, translateToUz = true) {
 export async function lookupEnglishDefinition(word) {
   const trimmed = (word || '').trim();
   if (!trimmed) return null;
-  const dictInfo = await fetchEnglishDictionaryInfo(trimmed, false);
+  const dictInfo = await fetchEnglishDictionaryInfo(trimmed, null);
   if (!dictInfo) return null;
   return { word: decodeHTMLEntities(trimmed), ...dictInfo };
 }
@@ -106,18 +106,19 @@ export async function lookupEnglishDefinition(word) {
 /**
  * Looks up a word from the free online database.
  * direction: 'word2translation' (query is in the pack's word language) or
- *            'translation2word' (query is the Uzbek translation).
+ *            'translation2word' (query is in the translation language).
  * wordLangCode: short language code of the pack's word side (e.g. 'en', 'es', 'fr'; default 'en').
+ * targetLangCode: short language code to translate into/from (default 'uz').
  * Returns { word, translation, partOfSpeech, definition, example } or null if nothing was found.
  */
-export async function lookupWordFromDictionary(query, direction, wordLangCode = 'en') {
+export async function lookupWordFromDictionary(query, direction, wordLangCode = 'en', targetLangCode = 'uz') {
   const trimmed = (query || '').trim();
   if (!trimmed) return null;
 
   if (direction === 'word2translation') {
     const [translation, dictInfo] = await Promise.all([
-      translateWord(trimmed, wordLangCode, 'uz'),
-      wordLangCode === 'en' ? fetchEnglishDictionaryInfo(trimmed) : Promise.resolve(null)
+      translateWord(trimmed, wordLangCode, targetLangCode),
+      wordLangCode === 'en' ? fetchEnglishDictionaryInfo(trimmed, targetLangCode) : Promise.resolve(null)
     ]);
     if (!translation && !dictInfo) return null;
     return {
@@ -129,9 +130,9 @@ export async function lookupWordFromDictionary(query, direction, wordLangCode = 
     };
   }
 
-  const word = await translateWord(trimmed, 'uz', wordLangCode);
+  const word = await translateWord(trimmed, targetLangCode, wordLangCode);
   if (!word) return null;
-  const dictInfo = wordLangCode === 'en' ? await fetchEnglishDictionaryInfo(word) : null;
+  const dictInfo = wordLangCode === 'en' ? await fetchEnglishDictionaryInfo(word, targetLangCode) : null;
   return {
     word: decodeHTMLEntities(word),
     translation: decodeHTMLEntities(trimmed),
