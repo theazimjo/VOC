@@ -420,19 +420,7 @@ export default function WordFormPage() {
                   <AlertTriangle size={13} /> This word is already in this pack
                 </div>
               )}
-              {lookupAlternate?.field === 'word' && (
-                <button
-                  type="button"
-                  className="wfp-alt-hint"
-                  onClick={() => {
-                    setFormData(prev => ({ ...prev, word: lookupAlternate.text }));
-                    setLookupAlternate(null);
-                  }}
-                  title="Use this instead"
-                >
-                  Another source says <strong>{lookupAlternate.text}</strong> — tap to use it
-                </button>
-              )}
+
             </div>
 
             <div className="input-group">
@@ -499,19 +487,7 @@ export default function WordFormPage() {
                   {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
                 </button>
               </div>
-              {lookupAlternate?.field === 'translation' && (
-                <button
-                  type="button"
-                  className="wfp-alt-hint"
-                  onClick={() => {
-                    setFormData(prev => ({ ...prev, translation: lookupAlternate.text }));
-                    setLookupAlternate(null);
-                  }}
-                  title="Use this instead"
-                >
-                  Another source says <strong>{lookupAlternate.text}</strong> — tap to use it
-                </button>
-              )}
+
             </div>
           </div>
 
@@ -529,64 +505,64 @@ export default function WordFormPage() {
             </div>
 
             <div className="wfp-compact-meanings" ref={meaningsDropdownRef}>
-              {meaningsLoading ? (
-                <div className="wfp-compact-loading">
-                  <IosSpinner size={14} />
-                  <span>Looking up meanings...</span>
-                </div>
-              ) : otherMeanings.length > 0 ? (
-                <div className="wfp-compact-picker-wrap">
-                  <button
-                    type="button"
-                    className={`wfp-compact-btn ${isMeaningsDropdownOpen ? 'active' : ''}`}
-                    onClick={() => setIsMeaningsDropdownOpen(prev => !prev)}
-                  >
-                    <span className="wfp-compact-title">Other meanings:</span>
-                    {otherMeanings[0].partOfSpeech && (
-                      <span className="wfp-compact-pos">{otherMeanings[0].partOfSpeech}</span>
-                    )}
-                    <span className="wfp-compact-preview">{otherMeanings[0].translation}</span>
-                    {otherMeanings.length > 1 && (
-                      <span className="wfp-compact-count">+{otherMeanings.length - 1}</span>
-                    )}
-                    <ChevronDown size={14} className={`wfp-compact-chevron ${isMeaningsDropdownOpen ? 'open' : ''}`} />
-                  </button>
+                {meaningsLoading ? (
+                  <div className="wfp-compact-loading">
+                    <IosSpinner size={14} />
+                    <span>Looking up meanings...</span>
+                  </div>
+                ) : otherMeanings.length > 0 ? (
+                  <div className="wfp-compact-picker-wrap">
+                    <button
+                      type="button"
+                      className={`wfp-compact-btn ${isMeaningsDropdownOpen ? 'active' : ''}`}
+                      onClick={() => setIsMeaningsDropdownOpen(prev => !prev)}
+                    >
+                      <span className="wfp-compact-title">Other meanings:</span>
+                      {otherMeanings[0].partOfSpeech && (
+                        <span className="wfp-compact-pos">{otherMeanings[0].partOfSpeech}</span>
+                      )}
+                      <span className="wfp-compact-preview">{otherMeanings[0].translation}</span>
+                      {otherMeanings.length > 1 && (
+                        <span className="wfp-compact-count">+{otherMeanings.length - 1}</span>
+                      )}
+                      <ChevronDown size={14} className={`wfp-compact-chevron ${isMeaningsDropdownOpen ? 'open' : ''}`} />
+                    </button>
 
-                  {isMeaningsDropdownOpen && (
-                    <div className="wfp-meanings-dropdown">
-                      <div className="wfp-meanings-dropdown-header">
-                        <span>Select a meaning to set as translation</span>
+                    {isMeaningsDropdownOpen && (
+                      <div className="wfp-meanings-dropdown">
+                        <div className="wfp-meanings-dropdown-header">
+                          <span>Select a meaning to set as translation</span>
+                        </div>
+                        <div className="wfp-meanings-dropdown-list">
+                          {otherMeanings.map(meaning => (
+                            <button
+                              type="button"
+                              key={meaning.id}
+                              className={`wfp-meaning-option ${selectedMeaningId === meaning.id ? 'selected' : ''}`}
+                              onClick={() => {
+                                handleSelectMeaning(meaning);
+                                setIsMeaningsDropdownOpen(false);
+                              }}
+                            >
+                              <div className="wfp-meaning-option-top">
+                                {meaning.partOfSpeech && <span className="wfp-meaning-pos">{meaning.partOfSpeech}</span>}
+                                <span className="wfp-meaning-option-trans">{meaning.translation}</span>
+                                {selectedMeaningId === meaning.id && <Check size={14} className="wfp-meaning-check" />}
+                              </div>
+                              {meaning.definition && <div className="wfp-meaning-option-def">{meaning.definition}</div>}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                      <div className="wfp-meanings-dropdown-list">
-                        {otherMeanings.map(meaning => (
-                          <button
-                            type="button"
-                            key={meaning.id}
-                            className={`wfp-meaning-option ${selectedMeaningId === meaning.id ? 'selected' : ''}`}
-                            onClick={() => {
-                              handleSelectMeaning(meaning);
-                              setIsMeaningsDropdownOpen(false);
-                            }}
-                          >
-                            <div className="wfp-meaning-option-top">
-                              {meaning.partOfSpeech && <span className="wfp-meaning-pos">{meaning.partOfSpeech}</span>}
-                              <span className="wfp-meaning-option-trans">{meaning.translation}</span>
-                              {selectedMeaningId === meaning.id && <Check size={14} className="wfp-meaning-check" />}
-                            </div>
-                            {meaning.definition && <div className="wfp-meaning-option-def">{meaning.definition}</div>}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : meaningsChecked ? (
-                <div className="wfp-compact-disabled">No other meanings found</div>
-              ) : (
-                <div className="wfp-compact-disabled">Other meanings (look up a word)</div>
-              )}
+                    )}
+                  </div>
+                ) : meaningsChecked ? (
+                  <div className="wfp-compact-disabled">No other meanings found</div>
+                ) : (
+                  <div className="wfp-compact-disabled">Other meanings (look up a word)</div>
+                )}
+              </div>
             </div>
-          </div>
 
           {showMore && (
             <div className="wfp-more-fields">

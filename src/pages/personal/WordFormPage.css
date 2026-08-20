@@ -353,6 +353,11 @@
   padding-top: var(--space-xs);
 }
 
+/* When Other meanings is hidden (non-English packs), expand More details to full width */
+.wfp-secondary-row--single {
+  grid-template-columns: 1fr;
+}
+
 .wfp-more-fields {
   display: flex;
   flex-direction: column;
@@ -377,7 +382,8 @@
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding: 12px 16px;
+  height: 48px;          /* Fixed height — never grows */
+  padding: 0 16px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--bg-tertiary, rgba(255, 255, 255, 0.03));
@@ -387,13 +393,14 @@
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
+  overflow: hidden;       /* Clip anything that still tries to overflow */
 }
 
 .wfp-compact-btn:hover,
 .wfp-compact-btn.active {
-  border-color: rgba(168, 85, 247, 0.4);
-  background: rgba(168, 85, 247, 0.08);
-  color: #c084fc;
+  border-color: var(--accent-1);
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
 }
 
 .wfp-compact-title {
@@ -407,8 +414,8 @@
 .wfp-compact-pos {
   padding: 2px 6px;
   border-radius: 4px;
-  background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -429,8 +436,8 @@
 .wfp-compact-count {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #c084fc;
-  background: rgba(168, 85, 247, 0.15);
+  color: var(--accent-1);
+  background: var(--accent-1-dim);
   padding: 2px 7px;
   border-radius: 10px;
   flex-shrink: 0;
@@ -445,7 +452,7 @@
 .wfp-compact-btn.active .wfp-compact-chevron,
 .wfp-compact-chevron.open {
   transform: rotate(180deg);
-  color: #c084fc;
+  color: var(--accent-1);
 }
 
 .wfp-compact-loading,
@@ -454,7 +461,8 @@
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding: 12px 16px;
+  height: 48px;          /* Same fixed height as the button */
+  padding: 0 16px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--bg-tertiary, rgba(255, 255, 255, 0.02));
@@ -462,6 +470,8 @@
   font-size: 0.82rem;
   font-weight: 500;
   box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* Dropdown Menu for meanings */

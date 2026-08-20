@@ -465,9 +465,56 @@ function diversifyByPartOfSpeech(senses, cap) {
   return result;
 }
 
+// Uses Google Translate's alternate-translations feature (dt=at) which
+// groups multiple target-language equivalents by part of speech for ANY
+// source language - not just English. Returns an array of
+// { partOfSpeech, translation } capped at MAX_WORD_MEANINGS.
+async function fetchAlternateTranslations(word, fromLang, toLang) {
+  try {
+    const url = `${GOOGLE_TRANSLATE_ENDPOINT}?client=gtx&sl=${fromLang}&tl=${toLang}&dt=t&dt=at&q=${encodeURIComponent(word.toLowerCase())}`;
+    const res = await fetch(url);
+    if (!res.ok) return [];
+    const data = await res.json();
+    // data[5] contains the alternate translations array, grouped by POS
+    // Each group: [pos_label, [[translation, score, ...],...]]
+    const groups = data?.[5];
+    if (!Array.isArray(groups) || groups.length === 0) return [];
+    const results = [];
+    const seen = new Set();
+    for (const group of groups) {
+      const posRaw = (group?.[0] || '').toLowerCase();
+      const entries = group?.[2];
+      if (!Array.isArray(entries)) continue;
+      for (const entry of entries) {
+        const translation = (entry?.[0] || '').trim();
+        if (!translation) continue;
+        const key = `${posRaw}:${translation.toLowerCase()}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        results.push({ partOfSpeech: posRaw, translation: decodeHTMLEntities(translation) });
+        if (results.length >= MAX_WORD_MEANINGS) break;
+      }
+      if (results.length >= MAX_WORD_MEANINGS) break;
+    }
+    return results;
+  } catch {
+    return [];
+  }
+}
+
 export async function fetchWordMeanings(word, wordLangCode = 'en', targetLangCode = 'uz') {
   const trimmed = (word || '').trim();
-  if (!trimmed || !targetLangCode || wordLangCode !== 'en' || wordLangCode === targetLangCode) return [];
+  if (!trimmed || !targetLangCode || wordLangCode === targetLangCode) return [];
+
+  // Non-English source: use Google Translate's alternate translations (dt=at)
+  // which groups results by part of speech for any language pair.
+  if (wordLangCode !== 'en') {
+    return withTimeout(
+      fetchAlternateTranslations(trimmed, wordLangCode, targetLangCode),
+      5000,
+      []
+    );
+  }
 
   const lower = trimmed.toLowerCase();
   const [rawSenses, wiktTranslations] = await Promise.all([
