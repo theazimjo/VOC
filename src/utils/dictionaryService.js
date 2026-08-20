@@ -1,16 +1,21 @@
 /**
  * Free, keyless online dictionary/translation lookup (no AI).
- * - MyMemory: free translation-memory database, used for word<->uz translation
- *   across every language the app's packs support.
+ * - Google Translate's public web endpoint (the same one translate.google.com's
+ *   own page calls, no API key) is the primary translator - it's real neural
+ *   machine translation, not a fuzzy database lookup, so it actually
+ *   understands context instead of matching against crowd-submitted phrase
+ *   fragments. It's unofficial and occasionally returns a transient error, so
+ *   MyMemory (a free translation-memory database) is kept as a fallback.
  * - dictionaryapi.dev: free English dictionary database, used for part of speech,
  *   definition and an example sentence — only reliable for English words, so
  *   it's skipped for non-English pack languages.
  * - Wiktionary's REST API (CORS-open, no key required) is used as a fallback
  *   dictionary source when dictionaryapi.dev has no entry for a word. Cambridge
- *   Dictionary and Google don't expose a free, CORS-accessible API a browser
- *   can call directly, so they can't be wired in the same way.
+ *   Dictionary doesn't expose a free, CORS-accessible API a browser can call
+ *   directly, so it can't be wired in the same way.
  */
 
+const GOOGLE_TRANSLATE_ENDPOINT = 'https://translate.googleapis.com/translate_a/single';
 const MYMEMORY_ENDPOINT = 'https://api.mymemory.translated.net/get';
 const FREE_DICTIONARY_ENDPOINT = 'https://api.dictionaryapi.dev/api/v2/entries/en';
 const WIKTIONARY_DEFINITION_ENDPOINT = 'https://en.wiktionary.org/api/rest_v1/page/definition';
@@ -53,34 +58,41 @@ export function decodeHTMLEntities(str) {
   }
 }
 
-async function translateWord(query, fromLang, toLang) {
-  if (fromLang === toLang) return decodeHTMLEntities(query);
+// Google Translate's actual NMT engine, via the same keyless endpoint the
+// translate.google.com page itself calls. Real context-aware translation
+// instead of MyMemory's exact-phrase-fragment matching, so it correctly
+// handles domain-specific words (e.g. biology "cell"/"host") that MyMemory's
+// crowd-sourced database often confuses with unrelated everyday phrases.
+async function translateViaGoogle(query, fromLang, toLang) {
+  const url = `${GOOGLE_TRANSLATE_ENDPOINT}?client=gtx&sl=${fromLang}&tl=${toLang}&dt=t&q=${encodeURIComponent(query)}`;
+  const res = await fetch(url);
+  if (!res.ok) return '';
+  const data = await res.json();
+  const segments = data?.[0];
+  if (!Array.isArray(segments) || segments.length === 0) return '';
+  const translated = segments.map(seg => seg?.[0] || '').join('').trim();
+  return decodeHTMLEntities(translated);
+}
 
-  // MyMemory's translation-memory lookup is an exact-segment match, and it's
-  // case-sensitive: "Your" and "your" pull entirely different stored segments
-  // (e.g. "Your" resolves to an unrelated "Your Email address" entry while
-  // "your" correctly resolves to "sizning"/"your" as a pronoun). Lowercasing
-  // before the query avoids landing on those noisy capitalized-sentence-start
-  // entries - translation doesn't need to preserve the input's casing anyway.
+// MyMemory fallback for when Google Translate's unofficial endpoint errors
+// or is unreachable. Its translation-memory database contains stale "echo"
+// entries where the translation is literally identical to the source word
+// (e.g. querying "cat" into Russian can return the untranslated match "cat"
+// instead of "кошка", even though a correct entry exists lower in the list).
+// Re-picking blindly by quality score caused a worse regression (it once
+// replaced the correct Latin-script "bank" -> "bank" with a Cyrillic
+// "bank" -> "Банк", wrong for this app's Latin-script Uzbek content) - so the
+// fix here is narrow: among exact-segment matches, prefer a non-echo
+// translation over an echo one, but only pick from real candidates - if
+// every candidate is an echo, it's most likely a genuine loanword (e.g.
+// "bank"), so it's kept rather than discarded.
+async function translateViaMyMemory(query, fromLang, toLang) {
   const normalizedQuery = query.trim().toLowerCase();
   const url = `${MYMEMORY_ENDPOINT}?q=${encodeURIComponent(normalizedQuery)}&langpair=${fromLang}|${toLang}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error("Tarjima bazasiga ulanib bo'lmadi");
   const data = await res.json();
 
-  // MyMemory's own top pick (`responseData.translatedText`) is usually
-  // right, but its translation-memory database contains stale "echo" entries
-  // where the translation is literally identical to the source word (e.g.
-  // querying "cat" into Russian can return the untranslated match "cat"
-  // instead of "кошка", even though a correct entry exists lower in the
-  // list). Re-picking blindly by quality score caused a worse regression
-  // (it once replaced the correct Latin-script "bank" -> "bank" with a
-  // Cyrillic "bank" -> "Банк", wrong for this app's Latin-script Uzbek
-  // content) - so the fix here is narrow and specific: among exact-segment
-  // matches, prefer a non-echo translation over an echo one (an untranslated
-  // echo is almost never right when the languages differ), but only pick
-  // from real candidates - if every candidate is an echo, it's most likely a
-  // genuine loanword (e.g. "bank"), so it's kept rather than discarded.
   let candidates = (data?.matches || [])
     .filter(m => (m.segment || '').trim().toLowerCase() === normalizedQuery);
 
@@ -100,6 +112,68 @@ async function translateWord(query, fromLang, toLang) {
   const translated = pool[0]?.translation || data?.responseData?.translatedText || '';
   if (!translated || /invalid|no translation|not available/i.test(translated)) return '';
   return decodeHTMLEntities(translated);
+}
+
+async function translateWord(query, fromLang, toLang) {
+  const trimmed = query.trim();
+  if (!trimmed) return '';
+  if (fromLang === toLang) return decodeHTMLEntities(trimmed);
+
+  // Lowercased for consistency (Google's engine is far less case-sensitive
+  // than MyMemory, but normalizing here keeps behavior predictable and
+  // sidesteps an occasional server-side quirk on Google's end where certain
+  // capitalized single words - e.g. "Apple" with sl=en explicit - 500 while
+  // the lowercase form works fine).
+  const normalized = trimmed.toLowerCase();
+
+  try {
+    const googleResult = await translateViaGoogle(normalized, fromLang, toLang);
+    if (googleResult) return googleResult;
+  } catch {
+    // fall through to MyMemory
+  }
+
+  try {
+    return await translateViaMyMemory(normalized, fromLang, toLang);
+  } catch {
+    return '';
+  }
+}
+
+function normalizeForComparison(s) {
+  return (s || '').trim().toLowerCase().replace(/['’‘`]/g, "'");
+}
+
+// Queries Google Translate AND MyMemory (a second, independently-sourced
+// dictionary) for the word being added/edited, rather than trusting a single
+// engine. When both agree, there's real confidence in the result. When they
+// don't, no free source can say which one (if either) is right - a rare
+// technical term can trip up both engines the same way (both have been seen
+// to mistranslate "tentacle" the same wrong way) - so instead of silently
+// picking one, the disagreement itself is surfaced back to the caller as
+// `alternate`, so the person adding the word can glance at both and judge.
+async function translateWordWithCrossCheck(query, fromLang, toLang) {
+  const trimmed = query.trim();
+  if (!trimmed) return { translation: '', alternate: '' };
+  if (fromLang === toLang) return { translation: decodeHTMLEntities(trimmed), alternate: '' };
+
+  const normalized = trimmed.toLowerCase();
+  const [googleOutcome, myMemoryOutcome] = await Promise.allSettled([
+    translateViaGoogle(normalized, fromLang, toLang),
+    translateViaMyMemory(normalized, fromLang, toLang)
+  ]);
+
+  const google = googleOutcome.status === 'fulfilled' ? googleOutcome.value : '';
+  const myMemory = myMemoryOutcome.status === 'fulfilled' ? myMemoryOutcome.value : '';
+
+  const translation = google || myMemory;
+  const other = google ? myMemory : '';
+  const agree = !other || normalizeForComparison(other) === normalizeForComparison(translation);
+
+  return {
+    translation: decodeHTMLEntities(translation),
+    alternate: agree ? '' : decodeHTMLEntities(other)
+  };
 }
 
 // Wiktionary fallback for when dictionaryapi.dev has no entry for a word -
@@ -208,32 +282,36 @@ export async function lookupEnglishDefinition(word) {
  *            'translation2word' (query is in the translation language).
  * wordLangCode: short language code of the pack's word side (e.g. 'en', 'es', 'fr'; default 'en').
  * targetLangCode: short language code to translate into/from (default 'uz').
- * Returns { word, translation, partOfSpeech, definition, example } or null if nothing was found.
+ * Returns { word, translation, alternateTranslation, alternateWord, partOfSpeech, definition, example }
+ * or null if nothing was found. alternateTranslation/alternateWord are only set when Google
+ * Translate and MyMemory disagree on the result, as a cross-check hint - empty otherwise.
  */
 export async function lookupWordFromDictionary(query, direction, wordLangCode = 'en', targetLangCode = 'uz') {
   const trimmed = (query || '').trim();
   if (!trimmed) return null;
 
   if (direction === 'word2translation') {
-    const [translation, dictInfo] = await Promise.all([
-      translateWord(trimmed, wordLangCode, targetLangCode),
+    const [translationResult, dictInfo] = await Promise.all([
+      translateWordWithCrossCheck(trimmed, wordLangCode, targetLangCode),
       wordLangCode === 'en' ? fetchEnglishDictionaryInfo(trimmed, targetLangCode) : Promise.resolve(null)
     ]);
-    if (!translation && !dictInfo) return null;
+    if (!translationResult.translation && !dictInfo) return null;
     return {
       word: decodeHTMLEntities(trimmed),
-      translation: decodeHTMLEntities(translation),
+      translation: translationResult.translation,
+      alternateTranslation: translationResult.alternate,
       partOfSpeech: decodeHTMLEntities(dictInfo?.partOfSpeech || ''),
       definition: decodeHTMLEntities(dictInfo?.definition || ''),
       example: decodeHTMLEntities(dictInfo?.example || '')
     };
   }
 
-  const word = await translateWord(trimmed, targetLangCode, wordLangCode);
-  if (!word) return null;
-  const dictInfo = wordLangCode === 'en' ? await fetchEnglishDictionaryInfo(word, targetLangCode) : null;
+  const wordResult = await translateWordWithCrossCheck(trimmed, targetLangCode, wordLangCode);
+  if (!wordResult.translation) return null;
+  const dictInfo = wordLangCode === 'en' ? await fetchEnglishDictionaryInfo(wordResult.translation, targetLangCode) : null;
   return {
-    word: decodeHTMLEntities(word),
+    word: wordResult.translation,
+    alternateWord: wordResult.alternate,
     translation: decodeHTMLEntities(trimmed),
     partOfSpeech: decodeHTMLEntities(dictInfo?.partOfSpeech || ''),
     definition: decodeHTMLEntities(dictInfo?.definition || ''),

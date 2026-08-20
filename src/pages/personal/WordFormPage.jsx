@@ -39,6 +39,10 @@ export default function WordFormPage() {
   const [lookupError, setLookupError] = useState(null);
   const [saveError, setSaveError] = useState(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  // Set when Google Translate and MyMemory (the two independent lookup
+  // sources) disagree on a result - lets the field's own hint offer the
+  // other source's answer instead of silently trusting just one of them.
+  const [lookupAlternate, setLookupAlternate] = useState(null); // { field: 'word'|'translation', text } | null
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const langMenuRef = useRef(null);
 
@@ -153,8 +157,11 @@ export default function WordFormPage() {
           example: decodeHTMLEntities(res.example || '')
         }));
         if (res.definition || res.example) setShowMore(true);
+        const altText = source === 'word' ? res.alternateTranslation : res.alternateWord;
+        setLookupAlternate(altText ? { field: source === 'word' ? 'translation' : 'word', text: altText } : null);
       } else {
         setLookupError('No translation found.');
+        setLookupAlternate(null);
         setFormData(prev => ({
           ...prev,
           definition: '',
@@ -222,6 +229,7 @@ export default function WordFormPage() {
           notes: '', partOfSpeech: 'noun', customSentence: ''
         });
         setShowMore(false);
+        setLookupAlternate(null);
         lastAutoLookupRef.current = '';
         wordInputRef.current?.focus();
       }
@@ -311,6 +319,7 @@ export default function WordFormPage() {
                       word: val,
                       ...(val.trim() !== prev.word.trim() ? { definition: '', example: '' } : {})
                     }));
+                    setLookupAlternate(prev => (prev?.field === 'word' ? null : prev));
                   }}
                   placeholder={wordLangCode === 'en' ? "e.g. Serendipity" : "Enter the word"}
                   required
@@ -331,6 +340,19 @@ export default function WordFormPage() {
                 <div className="wfp-inline-warning">
                   <AlertTriangle size={13} /> This word is already in this pack
                 </div>
+              )}
+              {lookupAlternate?.field === 'word' && (
+                <button
+                  type="button"
+                  className="wfp-alt-hint"
+                  onClick={() => {
+                    setFormData(prev => ({ ...prev, word: lookupAlternate.text }));
+                    setLookupAlternate(null);
+                  }}
+                  title="Use this instead"
+                >
+                  Another source says <strong>{lookupAlternate.text}</strong> — tap to use it
+                </button>
               )}
             </div>
 
@@ -382,6 +404,7 @@ export default function WordFormPage() {
                       translation: val,
                       ...(val.trim() !== prev.translation.trim() ? { definition: '', example: '' } : {})
                     }));
+                    setLookupAlternate(prev => (prev?.field === 'translation' ? null : prev));
                   }}
                   placeholder="Enter the translation"
                   required
@@ -397,6 +420,19 @@ export default function WordFormPage() {
                   {isLookingUp ? <IosSpinner size="sm" /> : <Search size={16} />}
                 </button>
               </div>
+              {lookupAlternate?.field === 'translation' && (
+                <button
+                  type="button"
+                  className="wfp-alt-hint"
+                  onClick={() => {
+                    setFormData(prev => ({ ...prev, translation: lookupAlternate.text }));
+                    setLookupAlternate(null);
+                  }}
+                  title="Use this instead"
+                >
+                  Another source says <strong>{lookupAlternate.text}</strong> — tap to use it
+                </button>
+              )}
             </div>
           </div>
 

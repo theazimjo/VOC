@@ -147,6 +147,31 @@
   margin-top: 2px;
 }
 
+/* ---------- Cross-check disagreement hint ---------- */
+.wfp-alt-hint {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  border: 1px dashed rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--text-secondary, #9ca3af);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wfp-alt-hint strong {
+  color: #38bdf8;
+}
+
+.wfp-alt-hint:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.6);
+}
+
 /* ---------- Custom Glass & Rounded Language Dropdown Menu ---------- */
 .wfp-grid .input-group > label,
 .wfp-lang-picker-header {
