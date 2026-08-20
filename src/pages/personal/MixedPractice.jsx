@@ -99,15 +99,39 @@ export default function MixedPractice() {
 
       let options = [];
       if (type === 'quiz') {
-        // Exclude words sharing the same translation too, not just the same
-        // id — otherwise two options can render with identical text (one
-        // marked correct, one wrong), which is confusing for the learner.
-        const otherWords = wordsPool.filter(w => w.id !== wordObj.id && w.translation !== wordObj.translation);
-        const wrongOptions = shuffleArray(otherWords)
-          .slice(0, 3)
-          .map(w => w.translation);
-        while (wrongOptions.length < 3) wrongOptions.push(`Option ${wrongOptions.length + 1}`);
-        options = shuffleArray([wordObj.translation, ...wrongOptions]);
+        const correctTranslation = (wordObj.translation || '').trim() || wordObj.word.trim();
+
+        // Gather all valid non-empty translations from pool and allWords
+        const candidatePool = wordsPool.length >= 4 ? wordsPool : [...wordsPool, ...allWords];
+        const validWrongTranslations = Array.from(
+          new Set(
+            candidatePool
+              .map(w => (w?.translation || '').trim())
+              .filter(t => t.length > 0 && t.toLowerCase() !== correctTranslation.toLowerCase())
+          )
+        );
+
+        // Pick 3 random wrong options
+        const wrongOptions = shuffleArray(validWrongTranslations).slice(0, 3);
+
+        // Guaranteed fallbacks if we didn't get 3 unique non-empty wrong options
+        const fallbackDistractors = [
+          "yashil o'simliklar", "asosiy manba", "hayotiy jarayon",
+          "muhim vosita", "o'zaro ta'sir", "natijaviy bosqich",
+          "boshlang'ich holat", "tashqi ko'rinish", "doimiy faoliyat"
+        ];
+        let fbIdx = 0;
+        while (wrongOptions.length < 3 && fbIdx < fallbackDistractors.length) {
+          const fb = fallbackDistractors[fbIdx++];
+          if (
+            fb.toLowerCase() !== correctTranslation.toLowerCase() &&
+            !wrongOptions.map(o => o.toLowerCase()).includes(fb.toLowerCase())
+          ) {
+            wrongOptions.push(fb);
+          }
+        }
+
+        options = shuffleArray([correctTranslation, ...wrongOptions]);
       }
 
       return {

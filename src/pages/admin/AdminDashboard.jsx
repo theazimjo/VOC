@@ -9,10 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { ref, get, update } from 'firebase/database';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import {
-  Users, Activity, BookOpen, Clock, TrendingUp,
-  ArrowLeft, RefreshCw, Shield, Zap, Award,
-  ChevronDown, ChevronUp, Search, AlertTriangle,
-  KeyRound, Key, Mail, CheckCircle2, X, Lock
+  Users, Activity, BookOpen, TrendingUp,
+  Zap, Award, ChevronDown, ChevronUp, Search, AlertTriangle,
+  KeyRound, Mail, CheckCircle2, X, Lock, Flame, Layers
 } from 'lucide-react';
 import { db, auth } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
@@ -55,14 +54,18 @@ function getActivityColor(isoString) {
 
 // ─── Stats Card ──────────────────────────────────────────────────────────────
 
-function StatCard({ icon, value, label, color, sub }) {
+function StatCard({ icon, value, label, color, sub, trend }) {
   return (
     <motion.div
-      className="adm-stat-card"
-      initial={{ opacity: 0, y: 12 }}
+      className={`adm-stat-card adm-stat-card--${color}`}
+      initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -3, transition: { duration: 0.18 } }}
     >
-      <div className={`adm-stat-icon adm-color-${color}`}>{icon}</div>
+      <div className="adm-stat-top">
+        <div className={`adm-stat-icon adm-color-${color}`}>{icon}</div>
+        {trend && <span className="adm-stat-badge">{trend}</span>}
+      </div>
       <div className="adm-stat-val">{value}</div>
       <div className="adm-stat-label">{label}</div>
       {sub && <div className="adm-stat-sub">{sub}</div>}
@@ -165,150 +168,152 @@ function UserRow({ userData, index, onResetPassword }) {
   return (
     <motion.div
       className="adm-user-row"
-      initial={{ opacity: 0, x: -10 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.04 }}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: Math.min(index * 0.03, 0.3) }}
     >
-      <div className="adm-user-main">
+      <div className="adm-user-main" onClick={() => setExpanded(e => !e)}>
         {/* Avatar */}
-        <div className="adm-user-avatar" onClick={() => setExpanded(e => !e)}>
+        <div className="adm-user-avatar">
           {profile?.photoURL ? (
             <img src={profile.photoURL} alt="" />
           ) : (
             <span>{(profile?.displayName || profile?.email || '?')[0].toUpperCase()}</span>
           )}
-          <div className={`adm-activity-dot ${activityClass}`} />
+          <div className={`adm-activity-dot ${activityClass}`} title={activityClass} />
         </div>
 
         {/* Identity */}
-        <div className="adm-user-identity" onClick={() => setExpanded(e => !e)}>
+        <div className="adm-user-identity">
           <div className="adm-user-name">
-            {profile?.displayName || 'Nomsiz'}
+            <span>{profile?.displayName || 'Nomsiz'}</span>
             {looksSuspicious && (
-              <AlertTriangle size={13} className="adm-suspicious-flag" title="Ko'p create+delete tsikli — tekshirib ko'ring" />
+              <AlertTriangle size={14} className="adm-suspicious-flag" title="Ko'p create+delete tsikli — tekshirib ko'ring" />
             )}
           </div>
           <div className="adm-user-email">{profile?.email || '—'}</div>
         </div>
 
-        {/* Quick stats */}
-        <div className="adm-user-quick" onClick={() => setExpanded(e => !e)}>
-          <div className="adm-quick-item" title="So'zlar">
+        {/* Quick stats pills */}
+        <div className="adm-user-quick">
+          <div className="adm-quick-chip" title="So'zlar">
             <BookOpen size={13} />
             <span>{wordCount}</span>
           </div>
-          <div className="adm-quick-item" title="To'plamlar">
-            <Award size={13} />
+          <div className="adm-quick-chip" title="To'plamlar">
+            <Layers size={13} />
             <span>{packCount}</span>
           </div>
-          <div className="adm-quick-item" title="Sessiyalar">
+          <div className="adm-quick-chip" title="Sessiyalar">
             <Zap size={13} />
             <span>{sessionCount}</span>
           </div>
           {streak > 0 && (
-            <div className="adm-quick-item streak" title="Streak">
-              🔥 <span>{streak}</span>
+            <div className="adm-quick-chip streak" title="Streak">
+              <Flame size={13} />
+              <span>{streak}d</span>
             </div>
           )}
         </div>
 
         {/* Actions & Last seen */}
-        <div className="adm-user-actions">
+        <div className="adm-user-actions" onClick={e => e.stopPropagation()}>
           <button
             type="button"
             className="adm-reset-pwd-btn"
             title="Parolni tiklash / yangilash"
-            onClick={(e) => {
-              e.stopPropagation();
-              onResetPassword(userData);
-            }}
+            onClick={() => onResetPassword(userData)}
           >
-            <KeyRound size={14} />
+            <KeyRound size={13} />
             <span>Parolni tiklash</span>
           </button>
-          <div className={`adm-last-seen ${activityClass}`}>{timeAgo(lastSeen)}</div>
+          <div className={`adm-last-seen-badge ${activityClass}`}>
+            {timeAgo(lastSeen)}
+          </div>
         </div>
 
-        {/* Expand */}
-        <div className="adm-expand-btn" onClick={() => setExpanded(e => !e)}>
+        {/* Expand Toggle */}
+        <div className="adm-expand-btn">
           {expanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
         </div>
       </div>
 
-      {/* Expanded detail */}
-      {expanded && (
-        <motion.div
-          className="adm-user-detail"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <div className="adm-detail-grid">
-            <div className="adm-detail-item">
-              <div className="adm-detail-label">Ro'yxatdan o'tgan</div>
-              <div className="adm-detail-value">{formatDate(profile?.createdAt)}</div>
+      {/* Expanded Detail Panel */}
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            className="adm-user-detail"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="adm-detail-grid">
+              <div className="adm-detail-card">
+                <div className="adm-detail-label">Ro'yxatdan o'tgan</div>
+                <div className="adm-detail-value">{formatDate(profile?.createdAt)}</div>
+              </div>
+              <div className="adm-detail-card">
+                <div className="adm-detail-label">Oxirgi ko'rilgan</div>
+                <div className="adm-detail-value">{formatDate(lastSeen)}</div>
+              </div>
+              <div className="adm-detail-card">
+                <div className="adm-detail-label">Jami sessiyalar</div>
+                <div className="adm-detail-value">{sessionCount} marta</div>
+              </div>
+              <div className="adm-detail-card">
+                <div className="adm-detail-label">To'plamlar</div>
+                <div className="adm-detail-value">{packCount} ta</div>
+              </div>
+              <div className="adm-detail-card">
+                <div className="adm-detail-label">Jami so'zlar</div>
+                <div className="adm-detail-value">{wordCount} ta</div>
+              </div>
+              <div className="adm-detail-card">
+                <div className="adm-detail-label">Streak</div>
+                <div className="adm-detail-value">{streak} kun 🔥</div>
+              </div>
+              <div className={`adm-detail-card ${packChurn > 30 ? 'adm-detail-card--warn' : ''}`}>
+                <div className="adm-detail-label">Umrbod yaratilgan to'plamlar</div>
+                <div className="adm-detail-value">{packsCreatedTotal} ta (hozir {packCount} ta bor)</div>
+              </div>
+              <div className={`adm-detail-card ${folderChurn > 30 ? 'adm-detail-card--warn' : ''}`}>
+                <div className="adm-detail-label">Umrbod yaratilgan papkalar</div>
+                <div className="adm-detail-value">{foldersCreatedTotal} ta (hozir {folderCount} ta bor)</div>
+              </div>
             </div>
-            <div className="adm-detail-item">
-              <div className="adm-detail-label">Oxirgi ko'rilgan</div>
-              <div className="adm-detail-value">{formatDate(lastSeen)}</div>
-            </div>
-            <div className="adm-detail-item">
-              <div className="adm-detail-label">Jami sessiyalar</div>
-              <div className="adm-detail-value">{sessionCount} marta</div>
-            </div>
-            <div className="adm-detail-item">
-              <div className="adm-detail-label">To'plamlar</div>
-              <div className="adm-detail-value">{packCount} ta</div>
-            </div>
-            <div className="adm-detail-item">
-              <div className="adm-detail-label">Jami so'zlar</div>
-              <div className="adm-detail-value">{wordCount} ta</div>
-            </div>
-            <div className="adm-detail-item">
-              <div className="adm-detail-label">Streak</div>
-              <div className="adm-detail-value">{streak} kun 🔥</div>
-            </div>
-            <div className={`adm-detail-item ${packChurn > 30 ? 'adm-detail-item--warn' : ''}`}>
-              <div className="adm-detail-label">Umrbod yaratilgan to'plamlar</div>
-              <div className="adm-detail-value">{packsCreatedTotal} ta (hozir {packCount} ta bor)</div>
-            </div>
-            <div className={`adm-detail-item ${folderChurn > 30 ? 'adm-detail-item--warn' : ''}`}>
-              <div className="adm-detail-label">Umrbod yaratilgan papkalar</div>
-              <div className="adm-detail-value">{foldersCreatedTotal} ta (hozir {folderCount} ta bor)</div>
-            </div>
-          </div>
 
-          <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
-            <button
-              type="button"
-              className="adm-reset-pwd-btn adm-reset-pwd-btn--large"
-              onClick={() => onResetPassword(userData)}
-            >
-              <KeyRound size={15} />
-              Ushbu foydalanuvchining parolini tiklash
-            </button>
-          </div>
-
-          {/* Activity Heatmap */}
-          <ActivityHeatmap activityLog={userData.streak?.activityLog} />
-
-          {/* Pack breakdown */}
-          {packCount > 0 && (
-            <div className="adm-pack-list">
-              {Object.entries(packs).map(([packId, pack]) => {
-                const pWords = words[packId] ? Object.keys(words[packId]).length : 0;
-                return (
-                  <div key={packId} className="adm-pack-chip">
-                    <span>{pack.name || pack.title || 'To\'plam'}</span>
-                    <span className="adm-pack-count">{pWords} so'z</span>
-                  </div>
-                );
-              })}
+            <div style={{ marginTop: '12px' }}>
+              <button
+                type="button"
+                className="adm-reset-pwd-btn adm-reset-pwd-btn--large"
+                onClick={() => onResetPassword(userData)}
+              >
+                <KeyRound size={15} />
+                Ushbu foydalanuvchining parolini tiklash
+              </button>
             </div>
-          )}
-        </motion.div>
-      )}
+
+            {/* Activity Heatmap */}
+            <ActivityHeatmap activityLog={userData.streak?.activityLog} />
+
+            {/* Pack breakdown */}
+            {packCount > 0 && (
+              <div className="adm-pack-list">
+                {Object.entries(packs).map(([packId, pack]) => {
+                  const pWords = words[packId] ? Object.keys(words[packId]).length : 0;
+                  return (
+                    <div key={packId} className="adm-pack-chip">
+                      <span>{pack.name || pack.title || 'To\'plam'}</span>
+                      <span className="adm-pack-count">{pWords} so'z</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
@@ -402,12 +407,10 @@ export default function AdminDashboard() {
 
     setActionLoading(true);
     let rtdbUpdated = false;
-    let emailSent = false;
 
     const userEmail = resetPasswordUser.profile?.email || resetPasswordUser.email || '';
     const cleanKey = userEmail.toLowerCase().trim().replace(/[.#$\[\]]/g, '_');
 
-    // 1. Update tempPassword and userPasswordOverrides in RTDB
     try {
       const updates = {};
       updates[`users/${resetPasswordUser.uid}/tempPassword`] = newPwd;
@@ -430,11 +433,8 @@ export default function AdminDashboard() {
       console.warn("RTDB password update warning:", err);
     }
 
-    // 2. Best-effort send reset email if valid email exists
     if (userEmail && userEmail.includes('@')) {
-      sendPasswordResetEmail(auth, userEmail).then(() => {
-        emailSent = true;
-      }).catch(() => {});
+      sendPasswordResetEmail(auth, userEmail).catch(() => {});
     }
 
     if (rtdbUpdated) {
@@ -454,6 +454,7 @@ export default function AdminDashboard() {
   // ── Compute global stats ─────────────────────────────────────
 
   const totalUsers = users.length;
+  const activeTodayCount = users.filter(u => isActiveInDays(u.activity?.lastSeen, 1)).length;
   const active7d = users.filter(u => isActiveInDays(u.activity?.lastSeen, 7)).length;
   const active30d = users.filter(u => isActiveInDays(u.activity?.lastSeen, 30)).length;
   const totalSessions = users.reduce((s, u) => s + (u.activity?.sessionCount || 0), 0);
@@ -464,6 +465,7 @@ export default function AdminDashboard() {
   }, 0);
   const totalPacks = users.reduce((s, u) => s + Object.keys(u.packs || {}).length, 0);
   const avgSessions = totalUsers > 0 ? (totalSessions / totalUsers).toFixed(1) : '—';
+  const inactiveCount = totalUsers - active30d;
 
   // ── Filter + sort ────────────────────────────────────────────
 
@@ -494,14 +496,18 @@ export default function AdminDashboard() {
 
   return (
     <div className="adm-page">
+      {/* Decorative ambient background glows */}
+      <div className="adm-glow-bg adm-glow-bg-1" />
+      <div className="adm-glow-bg adm-glow-bg-2" />
+
       {/* Toast Notification */}
       <AnimatePresence>
         {toastMsg && (
           <motion.div
             className={`adm-toast ${toastMsg.isError ? 'adm-toast--error' : ''}`}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
           >
             {toastMsg.isError ? <AlertTriangle size={18} /> : <CheckCircle2 size={18} />}
             <span>{toastMsg.msg}</span>
@@ -509,65 +515,36 @@ export default function AdminDashboard() {
         )}
       </AnimatePresence>
 
-      {/* Header */}
-      <div className="adm-header">
-        <div className="adm-header-left">
-          <button className="adm-back-btn" onClick={() => navigate('/')}>
-            <ArrowLeft size={20} />
-          </button>
-          <div className="adm-title-group">
-            <div className="adm-title">
-              <Shield size={20} />
-              Admin Panel
-            </div>
-            <div className="adm-subtitle">VOC — Foydalanuvchilar boshqaruvi</div>
-          </div>
-        </div>
-        <div className="adm-header-right">
-          {lastRefresh && (
-            <div className="adm-refresh-time">
-              <Clock size={13} />
-              {lastRefresh.toLocaleTimeString('uz-UZ')}
-            </div>
-          )}
-          <button
-            className={`adm-refresh-btn ${loading ? 'spinning' : ''}`}
-            onClick={fetchData}
-            disabled={loading}
-          >
-            <RefreshCw size={16} />
-            Yangilash
-          </button>
-        </div>
-      </div>
 
-      <div className="adm-content">
 
+      <main className="adm-content">
         {/* Global stats */}
         <div className="adm-stats-grid">
           <StatCard
-            icon={<Users size={22} />}
+            icon={<Users size={20} />}
             value={totalUsers}
             label="Jami foydalanuvchilar"
             color="blue"
-            sub={`${active7d} ta oxirgi 7 kunda faol`}
+            trend={`${active7d} ta 7 kunda faol`}
+            sub="Umumiy ro'yxatdan o'tganlar"
           />
           <StatCard
-            icon={<Activity size={22} />}
+            icon={<Activity size={20} />}
             value={active7d}
             label="Haftalik faollar"
             color="green"
+            trend={`${activeTodayCount} bugun`}
             sub={`${active30d} ta oylik faol`}
           />
           <StatCard
-            icon={<Zap size={22} />}
+            icon={<Zap size={20} />}
             value={totalSessions}
             label="Jami sessiyalar"
             color="purple"
             sub={`O'rtacha ${avgSessions} ta/foydalanuvchi`}
           />
           <StatCard
-            icon={<BookOpen size={22} />}
+            icon={<BookOpen size={20} />}
             value={totalWords}
             label="Jami so'zlar"
             color="orange"
@@ -577,35 +554,63 @@ export default function AdminDashboard() {
 
         {/* Activity breakdown */}
         <div className="adm-activity-bar">
-          <div className="adm-activity-title">
-            <TrendingUp size={16} />
-            Faollik holati
+          <div className="adm-activity-top-row">
+            <div className="adm-activity-title">
+              <TrendingUp size={16} />
+              <span>Faollik holati bo'yicha taqsimot</span>
+            </div>
+            <div className="adm-activity-items">
+              <div className="adm-activity-item">
+                <div className="adm-dot active-today" />
+                <span>Bugun faol: <strong>{activeTodayCount}</strong></span>
+              </div>
+              <div className="adm-activity-item">
+                <div className="adm-dot active-week" />
+                <span>7 kun: <strong>{active7d}</strong></span>
+              </div>
+              <div className="adm-activity-item">
+                <div className="adm-dot active-month" />
+                <span>30 kun: <strong>{active30d}</strong></span>
+              </div>
+              <div className="adm-activity-item">
+                <div className="adm-dot inactive" />
+                <span>Faolsiz: <strong>{inactiveCount}</strong></span>
+              </div>
+            </div>
           </div>
-          <div className="adm-activity-items">
-            <div className="adm-activity-item">
-              <div className="adm-dot active-today" />
-              <span>Bugun faol: <strong>{users.filter(u => isActiveInDays(u.activity?.lastSeen, 1)).length}</strong></span>
+
+          {/* Visual Activity Proportion Bar */}
+          {totalUsers > 0 && (
+            <div className="adm-activity-progress-track">
+              <div
+                className="adm-activity-progress-fill fill-today"
+                style={{ width: `${(activeTodayCount / totalUsers) * 100}%` }}
+                title={`Bugun faol: ${activeTodayCount}`}
+              />
+              <div
+                className="adm-activity-progress-fill fill-week"
+                style={{ width: `${((active7d - activeTodayCount) / totalUsers) * 100}%` }}
+                title={`7 kunda faol: ${active7d}`}
+              />
+              <div
+                className="adm-activity-progress-fill fill-month"
+                style={{ width: `${((active30d - active7d) / totalUsers) * 100}%` }}
+                title={`30 kunda faol: ${active30d}`}
+              />
+              <div
+                className="adm-activity-progress-fill fill-inactive"
+                style={{ width: `${(inactiveCount / totalUsers) * 100}%` }}
+                title={`Faolsiz: ${inactiveCount}`}
+              />
             </div>
-            <div className="adm-activity-item">
-              <div className="adm-dot active-week" />
-              <span>7 kun: <strong>{active7d}</strong></span>
-            </div>
-            <div className="adm-activity-item">
-              <div className="adm-dot active-month" />
-              <span>30 kun: <strong>{active30d}</strong></span>
-            </div>
-            <div className="adm-activity-item">
-              <div className="adm-dot inactive" />
-              <span>Faolsiz: <strong>{totalUsers - active30d}</strong></span>
-            </div>
-          </div>
+          )}
         </div>
 
-        {/* Users table */}
+        {/* Users table section */}
         <div className="adm-users-section">
           <div className="adm-users-toolbar">
             <div className="adm-search-wrap">
-              <Search size={15} className="adm-search-icon" />
+              <Search size={16} className="adm-search-icon" />
               <input
                 className="adm-search"
                 type="text"
@@ -613,7 +618,13 @@ export default function AdminDashboard() {
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
+              {search && (
+                <button className="adm-search-clear" onClick={() => setSearch('')}>
+                  <X size={14} />
+                </button>
+              )}
             </div>
+
             <div className="adm-sort-tabs">
               {[
                 { key: 'lastSeen', label: 'Faollik' },
@@ -671,11 +682,11 @@ export default function AdminDashboard() {
           )}
 
           <div className="adm-users-footer">
-            {filtered.length} ta natija · Jami {totalUsers} foydalanuvchi
+            <span>{filtered.length} ta natija ko'rsatilmoqda</span>
+            <span>Jami {totalUsers} foydalanuvchi</span>
           </div>
         </div>
-
-      </div>
+      </main>
 
       {/* Password Reset Modal */}
       <AnimatePresence>
@@ -684,14 +695,15 @@ export default function AdminDashboard() {
             <motion.div
               className="adm-modal"
               onClick={e => e.stopPropagation()}
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              exit={{ scale: 0.92, opacity: 0 }}
+              transition={{ duration: 0.2 }}
             >
               <div className="adm-modal-header">
                 <div className="adm-modal-title">
                   <KeyRound size={20} className="adm-icon-accent" />
-                  Parolni Tiklash / Yangi Parol O'rnatish
+                  <span>Parolni Tiklash / Yangi Parol O'rnatish</span>
                 </div>
                 <button
                   type="button"
@@ -720,9 +732,10 @@ export default function AdminDashboard() {
                 {/* Option 1: Direct Custom Password Setting */}
                 <form onSubmit={handleSetCustomPassword} className="adm-pwd-form">
                   <label className="adm-pwd-label">
-                    <Lock size={16} /> Yangi Parol Belgilash (Email ochish shart emas):
+                    <Lock size={15} />
+                    <span>Yangi Parol Belgilash (Email ochish shart emas):</span>
                   </label>
-                  <div style={{ fontSize: '0.78rem', color: '#94a3b8', marginBottom: '4px' }}>
+                  <div className="adm-pwd-hint">
                     Admin sifatida kiritgan yangi parolingiz saqlanadi. Foydalanuvchi darhol ushbu parol bilan tizimga kirishi mumkin.
                   </div>
                   <input
@@ -737,7 +750,6 @@ export default function AdminDashboard() {
                     type="submit"
                     className="adm-pwd-submit-btn"
                     disabled={actionLoading || !customPassword.trim()}
-                    style={{ padding: '12px', fontSize: '0.9rem' }}
                   >
                     {actionLoading ? 'Saqlanmoqda...' : 'Yangi Parolni Saqlash va Foydalanuvchiga Berish'}
                   </button>

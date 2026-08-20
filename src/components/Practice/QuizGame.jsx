@@ -36,13 +36,36 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
   // Build options when word changes
   useEffect(() => {
     if (!currentWord) return;
-    const correctOption = currentWord.translation;
-    const otherWords = words.filter(w => w.id !== currentWord.id && w.translation !== correctOption);
-    const wrongOptions = shuffleArray(otherWords).slice(0, 3).map(w => w.translation);
-    while (wrongOptions.length < 3) wrongOptions.push(`Variant ${wrongOptions.length + 1}`);
+    const correctOption = (currentWord.translation || '').trim() || currentWord.word.trim();
+
+    const validWrongTranslations = Array.from(
+      new Set(
+        words
+          .map(w => (w?.translation || '').trim())
+          .filter(t => t.length > 0 && t.toLowerCase() !== correctOption.toLowerCase())
+      )
+    );
+
+    const wrongOptions = shuffleArray(validWrongTranslations).slice(0, 3);
+
+    const fallbackDistractors = [
+      "yashil o'simliklar", "asosiy manba", "hayotiy jarayon",
+      "muhim vosita", "o'zaro ta'sir", "natijaviy bosqich"
+    ];
+    let fbIdx = 0;
+    while (wrongOptions.length < 3 && fbIdx < fallbackDistractors.length) {
+      const fb = fallbackDistractors[fbIdx++];
+      if (
+        fb.toLowerCase() !== correctOption.toLowerCase() &&
+        !wrongOptions.map(o => o.toLowerCase()).includes(fb.toLowerCase())
+      ) {
+        wrongOptions.push(fb);
+      }
+    }
+
     setOptions(shuffleArray([correctOption, ...wrongOptions]));
     questionStartRef.current = Date.now();
-  }, [currentIndex]);
+  }, [currentIndex, currentWord, words]);
 
   // Timer — only ticks when not yet answered
   useEffect(() => {
