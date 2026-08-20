@@ -263,28 +263,122 @@ async function fetchEnglishDictionaryInfo(word, targetLang = 'uz') {
 }
 
 const MAX_WORD_MEANINGS = 6;
+const WIKTIONARY_API_ENDPOINT = 'https://en.wiktionary.org/w/api.php';
+const POS_HEADER_RE = /^=+\s*(Noun|Verb|Adjective|Adverb|Preposition|Conjunction|Pronoun|Interjection|Phrase|Idiom|Numeral|Determiner|Article|Proper noun)\s*=+$/gim;
+const TRANS_BLOCK_RE = /\{\{trans-top(?:-see)?\|(?:id=[^|}]*\|)?([^\n}]*)\}\}([\s\S]*?)\{\{trans-bottom\}\}/g;
 
-// dictionaryapi.dev groups senses by part of speech, each with its own list
-// of definitions (e.g. "bank" -> noun: "a financial institution", noun: "the
-// land alongside a river", verb: "to tilt during a turn"...). The rest of
-// this file only ever reads meanings[0].definitions[0], throwing away every
-// other sense - this walks the full structure instead, falling back to
-// Wiktionary's entries (same shape) when dictionaryapi.dev has nothing.
-async function collectRawSenses(word) {
+// Google's own "bilingual dictionary" data (the grouped "Noun: book, ...
+// Verb: reserve, ..." panel translate.google.com shows) would be the ideal
+// source for this, but that sub-feature (dt=bd) isn't CORS-enabled for
+// third-party callers - it works via curl/server-side but a real browser
+// fetch() is flatly rejected, confirmed live. Wiktionary's translation
+// tables end up being the only free, CORS-open, keyless source that ties a
+// DIFFERENT TRANSLATION to each sense rather than just an alternate English
+// gloss of the same translation.
+async function fetchWiktionaryWikitext(page) {
+  const url = `${WIKTIONARY_API_ENDPOINT}?action=parse&page=${encodeURIComponent(page)}&prop=wikitext&format=json&origin=*`;
+  const res = await fetch(url);
+  if (!res.ok) return '';
+  const data = await res.json();
+  return data?.parse?.wikitext?.['*'] || '';
+}
+
+// Level-2 headers ("==English==") mark language sections; level-3+ headers
+// ("===Noun===", "===Etymology 1===") are inside them. A naive search for
+// the next "\n==" matches those level-3 sub-headings too (they also start
+// with two equals signs), cutting the section off after just a few bytes -
+// so this matches complete "==Name==" headers specifically and slices
+// between the English one and whichever level-2 header comes next.
+function extractEnglishSection(wikitext) {
+  const langHeaders = [...wikitext.matchAll(/^==([^=\n]+)==$/gm)];
+  const idx = langHeaders.findIndex(m => m[1].trim() === 'English');
+  if (idx === -1) return '';
+  const start = langHeaders[idx].index;
+  const end = idx + 1 < langHeaders.length ? langHeaders[idx + 1].index : wikitext.length;
+  return wikitext.slice(start, end);
+}
+
+function cleanWikiTranslation(raw) {
+  return (raw || '').replace(/\[\[|\]\]/g, '').split('|')[0].trim();
+}
+
+// Walks every {{trans-top|gloss}}...{{trans-bottom}} block in `text` and
+// pulls out the entry for `targetLangCode`, tagging each with whichever
+// Noun/Verb/... header most recently preceded it - translation tables live
+// under a `===Verb===`/`===Noun===` header, at whatever nesting depth that
+// word's etymology sections happen to put it at, so "nearest preceding
+// header" is the only reliable way to recover the part of speech.
+function extractTranslationsForLang(text, targetLangCode) {
+  const headers = [];
+  let hm;
+  POS_HEADER_RE.lastIndex = 0;
+  while ((hm = POS_HEADER_RE.exec(text))) {
+    headers.push({ index: hm.index, pos: hm[1].toLowerCase() });
+  }
+
+  const langRe = new RegExp('\\{\\{tt?\\+?\\|' + targetLangCode + '\\|([^|}]+)', 'i');
+  const results = [];
+  let bm;
+  TRANS_BLOCK_RE.lastIndex = 0;
+  while ((bm = TRANS_BLOCK_RE.exec(text))) {
+    const lm = bm[2].match(langRe);
+    if (!lm) continue;
+    const translation = cleanWikiTranslation(lm[1]);
+    if (!translation) continue;
+    let pos = '';
+    for (const h of headers) {
+      if (h.index <= bm.index) pos = h.pos; else break;
+    }
+    results.push({ partOfSpeech: pos, translation, gloss: bm[1].split('|')[0].trim() });
+  }
+  return results;
+}
+
+// Common words' translation tables get moved to a "Word/translations"
+// subpage to keep the main entry readable - {{see translation subpage}} is
+// the marker left behind pointing there.
+async function fetchWiktionaryTranslations(word, targetLangCode) {
+  const mainText = extractEnglishSection(await fetchWiktionaryWikitext(word));
+  if (!mainText) return [];
+
+  let results = extractTranslationsForLang(mainText, targetLangCode);
+
+  if (mainText.includes('see translation subpage')) {
+    const subText = await fetchWiktionaryWikitext(`${word}/translations`);
+    if (subText) {
+      results = results.concat(extractTranslationsForLang(subText, targetLangCode));
+    }
+  }
+
+  const seen = new Set();
+  return results.filter(r => {
+    const key = `${r.partOfSpeech}:${r.translation.toLowerCase()}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+// dictionaryapi.dev returns an ARRAY of top-level entries, one per etymology
+// - "book" has three: entry[0] is the noun (14 definitions), entry[1] and
+// entry[2] are two separate verb etymologies ("to reserve" vs "to record").
+// Reading only data[0] (as fetchEnglishDictionaryInfo above does, for a
+// single definition) silently drops every sense outside the first etymology
+// - here, with every sense needed, this walks every entry and every
+// part-of-speech group inside each, falling back to Wiktionary's definition
+// endpoint (same nested shape) when dictionaryapi.dev has nothing.
+async function collectEnglishSenses(word) {
   const senses = [];
   try {
     const res = await fetch(`${FREE_DICTIONARY_ENDPOINT}/${encodeURIComponent(word)}`);
     if (res.ok) {
       const data = await res.json();
-      const entry = Array.isArray(data) ? data[0] : null;
-      for (const meaning of entry?.meanings || []) {
-        for (const d of meaning.definitions || []) {
-          if (!d.definition) continue;
-          senses.push({
-            partOfSpeech: (meaning.partOfSpeech || '').toLowerCase(),
-            definitionRaw: d.definition,
-            example: d.example || ''
-          });
+      for (const entry of Array.isArray(data) ? data : []) {
+        for (const meaning of entry?.meanings || []) {
+          for (const d of meaning.definitions || []) {
+            if (!d.definition) continue;
+            senses.push({ partOfSpeech: (meaning.partOfSpeech || '').toLowerCase(), definitionRaw: d.definition });
+          }
         }
       }
     }
@@ -301,65 +395,150 @@ async function collectRawSenses(word) {
           for (const d of entry.definitions || []) {
             const def = stripHtmlTags(d.definition);
             if (!def) continue;
-            senses.push({
-              partOfSpeech: (entry.partOfSpeech || '').toLowerCase(),
-              definitionRaw: def,
-              example: stripHtmlTags(d.parsedExamples?.[0]?.example || '')
-            });
+            senses.push({ partOfSpeech: (entry.partOfSpeech || '').toLowerCase(), definitionRaw: def });
           }
         }
       }
     } catch {
-      // no meanings available from either source
+      // no senses available from either source
     }
   }
 
   return senses;
 }
 
+// Dictionary definitions run a full sentence long ("A collection of sheets
+// of paper bound together to hinge at one edge, containing printed or
+// written material, pictures, etc.") - translating the whole thing produces
+// a paragraph, useless as a stand-in "translation" value. Keeps just the
+// core clause (up to the first comma/semicolon/parenthetical) and caps it at
+// a handful of words, so the machine-translated fallback stays short like a
+// real word/phrase translation instead of a run-on sentence.
+function shortenForTranslation(text) {
+  const core = (text || '').split(/[(;–—]/)[0].split(',')[0].trim();
+  const words = core.split(/\s+/).filter(Boolean);
+  return words.slice(0, 6).join(' ');
+}
+
 /**
- * Every distinct sense of a word dictionaryapi.dev (or Wiktionary as
- * fallback) knows about, translated into targetLangCode - lets the caller
- * offer "this word also means..." (e.g. "bank" the riverbank vs "bank" the
- * financial institution) instead of only ever surfacing the first sense.
- * Only meaningful for English source words (dictionaryapi.dev is English-only,
- * same limitation fetchEnglishDictionaryInfo already has) - returns [] otherwise.
- * Returns an array of { partOfSpeech, definition, example }, deduplicated by
- * translated definition text and capped at MAX_WORD_MEANINGS.
+ * Every distinct sense of a word - and, crucially, the DIFFERENT TRANSLATION
+ * that sense actually takes (e.g. "book" the noun -> "kitob" vs "book" the
+ * verb, "to reserve" -> "band qilmoq") - not just alternate English glosses
+ * of the same translation. Wiktionary's per-sense translation tables are the
+ * precise source (a real dictionary entry, not a machine guess) but very
+ * sparsely populated for less-documented target languages (Uzbek included -
+ * a word with 75 distinct English senses can have exactly one with an actual
+ * Uzbek translation on file), so senses Wiktionary has nothing for fall back
+ * to machine-translating that sense's own short dictionary definition -
+ * still a real, distinctly-sensed answer, just not a curated one.
+ * Only meaningful for English source words (same limitation
+ * fetchEnglishDictionaryInfo already has) - returns [] otherwise. Returns an
+ * array of { partOfSpeech, translation, definition }, capped at MAX_WORD_MEANINGS.
  */
+function withTimeout(promise, ms, fallbackValue) {
+  return Promise.race([
+    promise,
+    new Promise(resolve => setTimeout(() => resolve(fallbackValue), ms))
+  ]);
+}
+
+// A word's noun sense alone can carry a dozen+ definitions, all listed
+// before any other part of speech - slicing the raw list to the cap would
+// only ever keep noun senses and never reach the verb ones (e.g. "book" the
+// verb, "to reserve", sits behind 14 noun definitions). Round-robins across
+// part-of-speech groups instead so the capped set stays varied.
+function diversifyByPartOfSpeech(senses, cap) {
+  const queues = new Map();
+  for (const s of senses) {
+    const key = s.partOfSpeech || '';
+    if (!queues.has(key)) queues.set(key, []);
+    queues.get(key).push(s);
+  }
+  const groups = [...queues.values()];
+  const result = [];
+  let i = 0;
+  while (result.length < cap && groups.some(q => q.length > 0)) {
+    const q = groups[i % groups.length];
+    if (q.length > 0) result.push(q.shift());
+    i++;
+  }
+  return result;
+}
+
 export async function fetchWordMeanings(word, wordLangCode = 'en', targetLangCode = 'uz') {
   const trimmed = (word || '').trim();
-  if (!trimmed || wordLangCode !== 'en') return [];
+  if (!trimmed || !targetLangCode || wordLangCode !== 'en' || wordLangCode === targetLangCode) return [];
 
-  const rawSenses = await collectRawSenses(trimmed);
-  if (rawSenses.length === 0) return [];
+  const lower = trimmed.toLowerCase();
+  const [rawSenses, wiktTranslations] = await Promise.all([
+    collectEnglishSenses(lower).catch(() => []),
+    fetchWiktionaryTranslations(lower, targetLangCode).catch(() => [])
+  ]);
+  if (rawSenses.length === 0 && wiktTranslations.length === 0) return [];
 
-  const translated = await Promise.all(rawSenses.map(async s => {
-    let definition = s.definitionRaw;
-    if (targetLangCode && targetLangCode !== 'en') {
-      try {
-        const t = await translateWord(s.definitionRaw, 'en', targetLangCode);
-        if (t) definition = t;
-      } catch {
-        // keep the English definition as fallback
-      }
-    }
-    return {
-      partOfSpeech: s.partOfSpeech,
-      definition: decodeHTMLEntities(definition),
-      example: decodeHTMLEntities(s.example)
-    };
-  }));
+  const wiktByPos = {};
+  for (const w of wiktTranslations) {
+    (wiktByPos[w.partOfSpeech] ||= []).push(w);
+  }
+  const usedWikt = new Set();
 
-  const seen = new Set();
-  const deduped = translated.filter(m => {
-    const key = m.definition.trim().toLowerCase();
-    if (!key || seen.has(key)) return false;
-    seen.add(key);
-    return true;
+  // Bounded up front so a word with dozens of dictionary senses (a couple of
+  // wiktionary translation tables ran past 70) never queues up more than a
+  // handful of fallback machine-translation calls.
+  const senses = diversifyByPartOfSpeech(
+    rawSenses.length > 0 ? rawSenses : wiktTranslations.map(w => ({ partOfSpeech: w.partOfSpeech, definitionRaw: w.gloss })),
+    MAX_WORD_MEANINGS
+  );
+
+  // Claiming exact Wiktionary matches is synchronous (no network calls), so
+  // it stays a simple sequential pass. Only the senses left without one need
+  // a network round trip, and those all fire in parallel below - run
+  // sequentially, translating 5-6 senses one at a time each with its own
+  // Google/MyMemory round trip, was slow enough to stall the page for tens
+  // of seconds. A per-call timeout keeps one slow/hanging request from
+  // blocking the rest indefinitely.
+  const withExact = senses.map(sense => {
+    const exact = (wiktByPos[sense.partOfSpeech] || []).find(w => !usedWikt.has(w));
+    if (exact) usedWikt.add(exact);
+    return { sense, exact };
   });
 
-  return deduped.slice(0, MAX_WORD_MEANINGS);
+  const translations = await Promise.all(withExact.map(({ sense, exact }) => {
+    if (exact) return Promise.resolve(exact.translation);
+    return withTimeout(
+      translateWord(shortenForTranslation(sense.definitionRaw), 'en', targetLangCode).catch(() => ''),
+      4000,
+      ''
+    );
+  }));
+
+  const seenKeys = new Set();
+  const result = [];
+  withExact.forEach(({ sense, exact }, i) => {
+    const translation = translations[i];
+    if (!translation) return;
+    const key = `${sense.partOfSpeech}:${translation.trim().toLowerCase()}`;
+    if (seenKeys.has(key)) return;
+    seenKeys.add(key);
+    result.push({
+      partOfSpeech: sense.partOfSpeech,
+      translation: decodeHTMLEntities(translation),
+      definition: decodeHTMLEntities(sense.definitionRaw || exact?.gloss || '')
+    });
+  });
+
+  // Wiktionary senses finer-grained than dictionaryapi.dev's groupings never
+  // get claimed by the pass above - append the leftovers too, up to the cap.
+  for (const w of wiktTranslations) {
+    if (result.length >= MAX_WORD_MEANINGS) break;
+    if (usedWikt.has(w)) continue;
+    const key = `${w.partOfSpeech}:${w.translation.trim().toLowerCase()}`;
+    if (seenKeys.has(key)) continue;
+    seenKeys.add(key);
+    result.push({ partOfSpeech: w.partOfSpeech, translation: w.translation, definition: decodeHTMLEntities(w.gloss || '') });
+  }
+
+  return result.slice(0, MAX_WORD_MEANINGS);
 }
 
 /**
