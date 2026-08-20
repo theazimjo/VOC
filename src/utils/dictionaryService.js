@@ -262,6 +262,106 @@ async function fetchEnglishDictionaryInfo(word, targetLang = 'uz') {
   }
 }
 
+const MAX_WORD_MEANINGS = 6;
+
+// dictionaryapi.dev groups senses by part of speech, each with its own list
+// of definitions (e.g. "bank" -> noun: "a financial institution", noun: "the
+// land alongside a river", verb: "to tilt during a turn"...). The rest of
+// this file only ever reads meanings[0].definitions[0], throwing away every
+// other sense - this walks the full structure instead, falling back to
+// Wiktionary's entries (same shape) when dictionaryapi.dev has nothing.
+async function collectRawSenses(word) {
+  const senses = [];
+  try {
+    const res = await fetch(`${FREE_DICTIONARY_ENDPOINT}/${encodeURIComponent(word)}`);
+    if (res.ok) {
+      const data = await res.json();
+      const entry = Array.isArray(data) ? data[0] : null;
+      for (const meaning of entry?.meanings || []) {
+        for (const d of meaning.definitions || []) {
+          if (!d.definition) continue;
+          senses.push({
+            partOfSpeech: (meaning.partOfSpeech || '').toLowerCase(),
+            definitionRaw: d.definition,
+            example: d.example || ''
+          });
+        }
+      }
+    }
+  } catch {
+    // fall through to Wiktionary below
+  }
+
+  if (senses.length === 0) {
+    try {
+      const res = await fetch(`${WIKTIONARY_DEFINITION_ENDPOINT}/${encodeURIComponent(word)}`);
+      if (res.ok) {
+        const data = await res.json();
+        for (const entry of data?.en || []) {
+          for (const d of entry.definitions || []) {
+            const def = stripHtmlTags(d.definition);
+            if (!def) continue;
+            senses.push({
+              partOfSpeech: (entry.partOfSpeech || '').toLowerCase(),
+              definitionRaw: def,
+              example: stripHtmlTags(d.parsedExamples?.[0]?.example || '')
+            });
+          }
+        }
+      }
+    } catch {
+      // no meanings available from either source
+    }
+  }
+
+  return senses;
+}
+
+/**
+ * Every distinct sense of a word dictionaryapi.dev (or Wiktionary as
+ * fallback) knows about, translated into targetLangCode - lets the caller
+ * offer "this word also means..." (e.g. "bank" the riverbank vs "bank" the
+ * financial institution) instead of only ever surfacing the first sense.
+ * Only meaningful for English source words (dictionaryapi.dev is English-only,
+ * same limitation fetchEnglishDictionaryInfo already has) - returns [] otherwise.
+ * Returns an array of { partOfSpeech, definition, example }, deduplicated by
+ * translated definition text and capped at MAX_WORD_MEANINGS.
+ */
+export async function fetchWordMeanings(word, wordLangCode = 'en', targetLangCode = 'uz') {
+  const trimmed = (word || '').trim();
+  if (!trimmed || wordLangCode !== 'en') return [];
+
+  const rawSenses = await collectRawSenses(trimmed);
+  if (rawSenses.length === 0) return [];
+
+  const translated = await Promise.all(rawSenses.map(async s => {
+    let definition = s.definitionRaw;
+    if (targetLangCode && targetLangCode !== 'en') {
+      try {
+        const t = await translateWord(s.definitionRaw, 'en', targetLangCode);
+        if (t) definition = t;
+      } catch {
+        // keep the English definition as fallback
+      }
+    }
+    return {
+      partOfSpeech: s.partOfSpeech,
+      definition: decodeHTMLEntities(definition),
+      example: decodeHTMLEntities(s.example)
+    };
+  }));
+
+  const seen = new Set();
+  const deduped = translated.filter(m => {
+    const key = m.definition.trim().toLowerCase();
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  return deduped.slice(0, MAX_WORD_MEANINGS);
+}
+
 /**
  * English-only lookup that never translates the definition - used by the
  * monolingual English pack type, where seeing the English definition (not a

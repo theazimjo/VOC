@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Search, Save, ChevronDown, ChevronUp, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Search, Save, ChevronDown, ChevronUp, AlertTriangle, CheckCircle2, Check } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { partOfSpeechOptions, speechLanguages } from '../../utils/helpers';
-import { lookupWordFromDictionary, toShortLangCode, decodeHTMLEntities } from '../../utils/dictionaryService';
+import { lookupWordFromDictionary, fetchWordMeanings, toShortLangCode, decodeHTMLEntities } from '../../utils/dictionaryService';
 import IosSpinner from '../../components/common/IosSpinner';
 import './WordFormPage.css';
 
@@ -45,6 +45,15 @@ export default function WordFormPage() {
   const [lookupAlternate, setLookupAlternate] = useState(null); // { field: 'word'|'translation', text } | null
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const langMenuRef = useRef(null);
+
+  // Other senses of the word (e.g. "bank" the riverbank vs the financial
+  // institution) - shown alongside the More details fields so picking one
+  // can promote it into the Definition field instead of always keeping
+  // whichever sense the dictionary happened to list first.
+  const [otherMeanings, setOtherMeanings] = useState([]);
+  const [meaningsLoading, setMeaningsLoading] = useState(false);
+  const [meaningsChecked, setMeaningsChecked] = useState(false);
+  const [selectedMeaningId, setSelectedMeaningId] = useState(null);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -133,6 +142,28 @@ export default function WordFormPage() {
   // already in the translation field's own source, and vice versa, so
   // hand-editing one field and then triggering a lookup from the other
   // can't clobber an edit you just made.
+  // Fetches every sense of `wordText` (not just the one already dropped into
+  // the Definition field) so the "Other meanings" panel has something to show.
+  const loadMeanings = async (wordText) => {
+    const trimmed = (wordText || '').trim();
+    setSelectedMeaningId(null);
+    if (!trimmed) {
+      setOtherMeanings([]);
+      setMeaningsChecked(false);
+      return;
+    }
+    setMeaningsLoading(true);
+    try {
+      const meanings = await fetchWordMeanings(trimmed, wordLangCode, translationLangCode);
+      setOtherMeanings(meanings.map((m, i) => ({ ...m, id: `${trimmed.toLowerCase()}-${i}` })));
+    } catch {
+      setOtherMeanings([]);
+    } finally {
+      setMeaningsChecked(true);
+      setMeaningsLoading(false);
+    }
+  };
+
   const handleDictionaryLookup = async (source = 'word') => {
     const query = source === 'word' ? formData.word.trim() : formData.translation.trim();
     if (!query || isLookingUp) return;
@@ -159,6 +190,8 @@ export default function WordFormPage() {
         if (res.definition || res.example) setShowMore(true);
         const altText = source === 'word' ? res.alternateTranslation : res.alternateWord;
         setLookupAlternate(altText ? { field: source === 'word' ? 'translation' : 'word', text: altText } : null);
+        const meaningWord = source === 'word' ? query : decodeHTMLEntities(res.word || '');
+        loadMeanings(meaningWord);
       } else {
         setLookupError('No translation found.');
         setLookupAlternate(null);
@@ -167,12 +200,34 @@ export default function WordFormPage() {
           definition: '',
           example: ''
         }));
+        if (source === 'word') loadMeanings(query);
       }
     } catch (err) {
       setLookupError(err.message || 'Something went wrong while searching.');
     } finally {
       setIsLookingUp(false);
     }
+  };
+
+  // The card the user tapped becomes the word's main definition/part of
+  // speech (and is pulled to the top of the list, since that's now "the"
+  // meaning being used) instead of just sitting there as a passive suggestion.
+  const handleSelectMeaning = (meaning) => {
+    setFormData(prev => ({
+      ...prev,
+      definition: meaning.definition,
+      example: meaning.example || prev.example,
+      partOfSpeech: partOfSpeechOptions.some(o => o.value === meaning.partOfSpeech) ? meaning.partOfSpeech : prev.partOfSpeech
+    }));
+    setSelectedMeaningId(meaning.id);
+    setOtherMeanings(prev => {
+      const idx = prev.findIndex(m => m.id === meaning.id);
+      if (idx <= 0) return prev;
+      const copy = [...prev];
+      const [item] = copy.splice(idx, 1);
+      copy.unshift(item);
+      return copy;
+    });
   };
 
   // Auto-fills the moment the user stops typing whichever of the two
@@ -230,6 +285,9 @@ export default function WordFormPage() {
         });
         setShowMore(false);
         setLookupAlternate(null);
+        setOtherMeanings([]);
+        setMeaningsChecked(false);
+        setSelectedMeaningId(null);
         lastAutoLookupRef.current = '';
         wordInputRef.current?.focus();
       }
@@ -320,6 +378,11 @@ export default function WordFormPage() {
                       ...(val.trim() !== prev.word.trim() ? { definition: '', example: '' } : {})
                     }));
                     setLookupAlternate(prev => (prev?.field === 'word' ? null : prev));
+                    if (val.trim().toLowerCase() !== formData.word.trim().toLowerCase()) {
+                      setOtherMeanings([]);
+                      setMeaningsChecked(false);
+                      setSelectedMeaningId(null);
+                    }
                   }}
                   placeholder={wordLangCode === 'en' ? "e.g. Serendipity" : "Enter the word"}
                   required
@@ -448,66 +511,110 @@ export default function WordFormPage() {
           </div>
 
           {showMore && (
-            <div className="wfp-more-fields">
-              <div className="input-group">
-                <label>Part of speech</label>
-                <select
-                  className="select"
-                  value={formData.partOfSpeech}
-                  onChange={e => setFormData({ ...formData, partOfSpeech: e.target.value })}
-                >
-                  {partOfSpeechOptions.map(pos => (
-                    <option key={pos.value} value={pos.value}>{pos.label}</option>
-                  ))}
-                </select>
+            <div className="wfp-more-columns">
+              <div className="wfp-more-fields">
+                <div className="input-group">
+                  <label>Part of speech</label>
+                  <select
+                    className="select"
+                    value={formData.partOfSpeech}
+                    onChange={e => setFormData({ ...formData, partOfSpeech: e.target.value })}
+                  >
+                    {partOfSpeechOptions.map(pos => (
+                      <option key={pos.value} value={pos.value}>{pos.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="input-group">
+                  <label>Definition</label>
+                  <input
+                    type="text"
+                    className="input"
+                    value={formData.definition}
+                    onChange={e => setFormData({ ...formData, definition: e.target.value })}
+                    placeholder="The word's definition or explanation"
+                    maxLength={1000}
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label>Example sentence</label>
+                  <textarea
+                    className="textarea"
+                    value={formData.example}
+                    onChange={e => setFormData({ ...formData, example: e.target.value })}
+                    placeholder="A sentence using the word"
+                    rows={3}
+                    maxLength={1500}
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label>Your own sentence</label>
+                  <textarea
+                    className="textarea"
+                    value={formData.customSentence}
+                    onChange={e => setFormData({ ...formData, customSentence: e.target.value })}
+                    placeholder="Write your own sentence to move the word into active memory"
+                    rows={3}
+                    maxLength={1500}
+                  />
+                </div>
+
+                <div className="input-group">
+                  <label>Notes</label>
+                  <input
+                    type="text"
+                    className="input"
+                    value={formData.notes}
+                    onChange={e => setFormData({ ...formData, notes: e.target.value })}
+                    placeholder="Synonyms, antonyms, or other notes"
+                    maxLength={800}
+                  />
+                </div>
               </div>
 
-              <div className="input-group">
-                <label>Definition</label>
-                <input
-                  type="text"
-                  className="input"
-                  value={formData.definition}
-                  onChange={e => setFormData({ ...formData, definition: e.target.value })}
-                  placeholder="The word's definition or explanation"
-                  maxLength={1000}
-                />
-              </div>
+              <div className="wfp-meanings-panel">
+                <div className="wfp-meanings-header">
+                  <span>Other meanings</span>
+                  {otherMeanings.length > 0 && <span className="wfp-meanings-count">{otherMeanings.length}</span>}
+                </div>
+                <p className="wfp-meanings-hint">Tap a meaning to use it as the word's main definition</p>
 
-              <div className="input-group">
-                <label>Example sentence</label>
-                <textarea
-                  className="textarea"
-                  value={formData.example}
-                  onChange={e => setFormData({ ...formData, example: e.target.value })}
-                  placeholder="A sentence using the word"
-                  rows={3}
-                  maxLength={1500}
-                />
-              </div>
+                {meaningsLoading && (
+                  <div className="wfp-meanings-loading">
+                    <IosSpinner size={16} />
+                    <span>Looking up other meanings...</span>
+                  </div>
+                )}
 
-              <div className="input-group">
-                <label>Your own sentence</label>
-                <textarea
-                  className="textarea"
-                  value={formData.customSentence}
-                  onChange={e => setFormData({ ...formData, customSentence: e.target.value })}
-                  placeholder="Write your own sentence to move the word into active memory"
-                  rows={3}
-                  maxLength={1500}
-                />
-              </div>
+                {!meaningsLoading && otherMeanings.length > 0 && (
+                  <div className="wfp-meanings-list">
+                    {otherMeanings.map(meaning => (
+                      <button
+                        type="button"
+                        key={meaning.id}
+                        className={`wfp-meaning-card ${selectedMeaningId === meaning.id ? 'selected' : ''}`}
+                        onClick={() => handleSelectMeaning(meaning)}
+                      >
+                        <div className="wfp-meaning-top">
+                          {meaning.partOfSpeech && <span className="wfp-meaning-pos">{meaning.partOfSpeech}</span>}
+                          {selectedMeaningId === meaning.id && <Check size={14} className="wfp-meaning-check" />}
+                        </div>
+                        <span className="wfp-meaning-text">{meaning.definition}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
 
-              <div className="input-group">
-                <label>Notes</label>
-                <input
-                  type="text"
-                  className="input"
-                  value={formData.notes}
-                  onChange={e => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="Synonyms, antonyms, or other notes"
-                  maxLength={800}
-                />
+                {!meaningsLoading && meaningsChecked && otherMeanings.length === 0 && (
+                  <p className="wfp-meanings-empty">No other meanings found for this word.</p>
+                )}
+
+                {!meaningsLoading && !meaningsChecked && (
+                  <p className="wfp-meanings-empty">Look up a word above to see its other meanings.</p>
+                )}
               </div>
             </div>
           )}

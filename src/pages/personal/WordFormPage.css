@@ -331,12 +331,133 @@
   background: rgba(124, 58, 237, 0.16);
 }
 
+.wfp-more-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
 .wfp-more-fields {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--border);
+}
+
+/* ---------- Other meanings panel ---------- */
+.wfp-meanings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+
+.wfp-meanings-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.wfp-meanings-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: rgba(124, 58, 237, 0.16);
+  color: var(--accent-1, #7c3aed);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.wfp-meanings-hint {
+  margin: -2px 0 2px 0;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.wfp-meanings-loading,
+.wfp-meanings-empty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding: 8px 2px;
+}
+
+.wfp-meanings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.wfp-meaning-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  text-align: left;
+  padding: 9px 11px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wfp-meaning-card:hover {
+  border-color: rgba(124, 58, 237, 0.4);
+  background: rgba(124, 58, 237, 0.06);
+}
+
+.wfp-meaning-card.selected {
+  border-color: var(--accent-1, #7c3aed);
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--text-primary);
+}
+
+.wfp-meaning-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.wfp-meaning-pos {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #c084fc;
+}
+
+.wfp-meaning-check {
+  color: var(--accent-1, #7c3aed);
+  flex-shrink: 0;
+}
+
+.wfp-meaning-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .wfp-actions {
@@ -370,5 +491,12 @@
   }
   .wfp-translang-row {
     max-width: 100%;
+  }
+  .wfp-more-columns {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .wfp-meanings-list {
+    max-height: none;
   }
 }
