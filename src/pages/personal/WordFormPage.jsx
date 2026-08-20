@@ -194,7 +194,7 @@ export default function WordFormPage() {
           definition: decodeHTMLEntities(res.definition || ''),
           example: decodeHTMLEntities(res.example || '')
         }));
-        if (res.definition || res.example) setShowMore(true);
+
         const altText = source === 'word' ? res.alternateTranslation : res.alternateWord;
         setLookupAlternate(altText ? { field: source === 'word' ? 'translation' : 'word', text: altText } : null);
         const meaningWord = source === 'word' ? query : decodeHTMLEntities(res.word || '');
@@ -229,7 +229,7 @@ export default function WordFormPage() {
       ...(meaning.definition ? { definition: meaning.definition } : {}),
       ...(meaning.example ? { example: meaning.example } : {})
     }));
-    if (meaning.definition) setShowMore(true);
+
     setSelectedMeaningId(meaning.id);
     setOtherMeanings(prev => {
       const idx = prev.findIndex(m => m.id === meaning.id);
