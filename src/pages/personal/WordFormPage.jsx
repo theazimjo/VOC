@@ -333,7 +333,7 @@ export default function WordFormPage() {
                   disabled={isLookingUp || !formData.word.trim()}
                   title="Look up this word and fill in the translation"
                 >
-                  {isLookingUp ? <IosSpinner size="sm" /> : <Search size={16} />}
+                  {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
                 </button>
               </div>
               {isDuplicate && (
@@ -417,7 +417,7 @@ export default function WordFormPage() {
                   disabled={isLookingUp || !formData.translation.trim()}
                   title="Look up this translation and fill in the word"
                 >
-                  {isLookingUp ? <IosSpinner size="sm" /> : <Search size={16} />}
+                  {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
                 </button>
               </div>
               {lookupAlternate?.field === 'translation' && (

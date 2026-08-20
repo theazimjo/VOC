@@ -15,20 +15,75 @@ function splitSentences(text) {
   return text.split(/(?<=[.!?])\s+/).filter(Boolean);
 }
 
+// Google Translate's own "listen" endpoint (translate.google.com uses it
+// itself, no API key) - real Google TTS voices, noticeably clearer than the
+// browser's built-in speechSynthesis voices, which vary wildly in quality
+// by OS. It's a plain audio URL (not fetch/XHR), so no CORS is needed to
+// play it via an <audio> element - only reading its raw bytes would require
+// CORS, and playback doesn't do that. It caps out around ~200 characters
+// per request, so longer sentences are chunked first.
+const GOOGLE_TTS_ENDPOINT = 'https://translate.google.com/translate_tts';
+const TTS_MAX_CHARS = 190;
+
+function chunkForTTS(text) {
+  if (text.length <= TTS_MAX_CHARS) return [text];
+  const chunks = [];
+  let remaining = text.trim();
+  while (remaining.length > TTS_MAX_CHARS) {
+    const window = remaining.slice(0, TTS_MAX_CHARS);
+    const clauseBoundary = Math.max(window.lastIndexOf(', '), window.lastIndexOf('; '));
+    let splitAt = clauseBoundary > 40 ? clauseBoundary + 1 : window.lastIndexOf(' ');
+    if (splitAt <= 0) splitAt = TTS_MAX_CHARS;
+    chunks.push(remaining.slice(0, splitAt).trim());
+    remaining = remaining.slice(splitAt).trim();
+  }
+  if (remaining) chunks.push(remaining);
+  return chunks;
+}
+
+// Resolves once playback finishes, rejects if Google's endpoint can't be
+// reached/played (network error, autoplay block, etc.) so the caller can
+// fall back to the browser's own voice for that one chunk.
+function playGoogleTTS(text, lang, audioRef) {
+  return new Promise((resolve, reject) => {
+    const url = `${GOOGLE_TTS_ENDPOINT}?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`;
+    const audio = new Audio(url);
+    audioRef.current = audio;
+    audio.onended = () => resolve();
+    audio.onerror = () => reject(new Error('google-tts-failed'));
+    audio.play().catch(() => reject(new Error('google-tts-play-blocked')));
+  });
+}
+
+function playBrowserTTS(text, lang, voiceLangPrefix) {
+  return new Promise((resolve) => {
+    if (!('speechSynthesis' in window)) { resolve(); return; }
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = lang;
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find(v => v.lang.startsWith(voiceLangPrefix));
+    if (voice) utterance.voice = voice;
+    utterance.onend = () => resolve();
+    utterance.onerror = () => resolve();
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
 // Chapter text can mark a multi-word expression (e.g. a phrasal verb like
 // "carry out") as `{{carry out}}` so it reads as one tappable unit instead
 // of "carry" and "out" being translated separately - neither word alone
 // carries the combined meaning.
-function WordTokens({ text, onWordTap }) {
+function WordTokens({ text, onWordTap, knownWords }) {
   const segments = text.split(/(\{\{[^}]+\}\})/);
   return segments.map((segment, segIdx) => {
     const phraseMatch = segment.match(/^\{\{([^}]+)\}\}$/);
     if (phraseMatch) {
       const phrase = phraseMatch[1];
+      const known = knownWords.has(phrase.toLowerCase());
       return (
         <span
           key={segIdx}
-          className="read-word read-phrase"
+          className={`read-word read-phrase ${known ? 'read-known' : ''}`}
           onClick={(e) => onWordTap(phrase, e.currentTarget)}
         >
           {phrase}
@@ -38,11 +93,13 @@ function WordTokens({ text, onWordTap }) {
     const parts = segment.split(/([A-Za-z']+)/);
     return parts.map((part, i) => {
       if (i % 2 === 1 && part.trim()) {
+        const clean = part.replace(/^'+|'+$/g, '');
+        const known = knownWords.has(clean.toLowerCase());
         return (
           <span
             key={`${segIdx}-${i}`}
-            className="read-word"
-            onClick={(e) => onWordTap(part.replace(/^'+|'+$/g, ''), e.currentTarget)}
+            className={`read-word ${known ? 'read-known' : ''}`}
+            onClick={(e) => onWordTap(clean, e.currentTarget)}
           >
             {part}
           </span>
@@ -69,6 +126,7 @@ export default function ReadPage() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [activeSentenceIndex, setActiveSentenceIndex] = useState(null);
   const speechCancelledRef = useRef(false);
+  const currentAudioRef = useRef(null);
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -112,6 +170,7 @@ export default function ReadPage() {
   useEffect(() => {
     return () => {
       speechCancelledRef.current = true;
+      if (currentAudioRef.current) currentAudioRef.current.pause();
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     };
   }, []);
@@ -119,12 +178,22 @@ export default function ReadPage() {
   // Stop any speech in progress whenever the page changes.
   useEffect(() => {
     speechCancelledRef.current = true;
+    if (currentAudioRef.current) currentAudioRef.current.pause();
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     setIsSpeaking(false);
     setActiveSentenceIndex(null);
   }, [pageIndex]);
 
   const page = useMemo(() => chapter?.pages[pageIndex] || [], [chapter, pageIndex]);
+
+  // Words already saved under this chapter, so the reading text can
+  // underline them - a quick visual cue for which words you've already
+  // added, without having to tap each one to check.
+  const knownWords = useMemo(() => {
+    return new Set(
+      words.filter(w => w.topic === topic).map(w => (w.word || '').trim().toLowerCase())
+    );
+  }, [words, topic]);
 
   // Flattened list of every sentence on the current page (for read-aloud
   // chaining and for matching against the rendered sentence spans' indices).
@@ -176,45 +245,41 @@ export default function ReadPage() {
 
   const stopSpeaking = () => {
     speechCancelledRef.current = true;
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current = null;
+    }
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     setIsSpeaking(false);
     setActiveSentenceIndex(null);
   };
 
-  const startSpeaking = () => {
-    if (!('speechSynthesis' in window) || pageSentences.length === 0) return;
+  const startSpeaking = async () => {
+    if (pageSentences.length === 0) return;
     speechCancelledRef.current = false;
     setIsSpeaking(true);
 
     const lang = speechLangMeta?.code || 'en-US';
-    let i = 0;
 
-    const speakNext = () => {
-      if (speechCancelledRef.current || i >= pageSentences.length) {
-        setIsSpeaking(false);
-        setActiveSentenceIndex(null);
-        return;
-      }
+    for (let i = 0; i < pageSentences.length; i++) {
+      if (speechCancelledRef.current) break;
       setActiveSentenceIndex(i);
-      const utterance = new SpeechSynthesisUtterance(pageSentences[i].text);
-      utterance.lang = lang;
-      const voices = window.speechSynthesis.getVoices();
-      const voice = voices.find(v => v.lang.startsWith(wordLangCode));
-      if (voice) utterance.voice = voice;
-      utterance.onend = () => {
-        if (speechCancelledRef.current) return;
-        i += 1;
-        speakNext();
-      };
-      utterance.onerror = () => {
-        if (speechCancelledRef.current) return;
-        i += 1;
-        speakNext();
-      };
-      window.speechSynthesis.speak(utterance);
-    };
+      const chunks = chunkForTTS(pageSentences[i].text);
+      for (const chunk of chunks) {
+        if (speechCancelledRef.current) break;
+        try {
+          await playGoogleTTS(chunk, wordLangCode, currentAudioRef);
+        } catch {
+          if (speechCancelledRef.current) break;
+          await playBrowserTTS(chunk, lang, wordLangCode);
+        }
+      }
+    }
 
-    speakNext();
+    if (!speechCancelledRef.current) {
+      setIsSpeaking(false);
+      setActiveSentenceIndex(null);
+    }
   };
 
   if (packLoading) {
@@ -279,7 +344,7 @@ export default function ReadPage() {
                     key={sIdx}
                     className={`read-sentence ${activeSentenceIndex === globalIdx ? 'active' : ''}`}
                   >
-                    <WordTokens text={sentence} onWordTap={handleWordTap} />{' '}
+                    <WordTokens text={sentence} onWordTap={handleWordTap} knownWords={knownWords} />{' '}
                   </span>
                 );
               })}

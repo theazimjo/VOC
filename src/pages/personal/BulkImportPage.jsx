@@ -403,7 +403,7 @@ export default function BulkImportPage() {
             onClick={handleImport}
             disabled={isImporting || !jsonText.trim()}
           >
-            {isImporting ? <IosSpinner size="sm" /> : <Upload size={16} />}
+            {isImporting ? <IosSpinner size={16} /> : <Upload size={16} />}
             <span>{isImporting ? 'Importing words...' : 'Import Words'}</span>
           </button>
         </div>

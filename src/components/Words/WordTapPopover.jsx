@@ -193,7 +193,7 @@ export default function WordTapPopover({
         <div className="wtp-body">
           <div className="wtp-word">{word}</div>
           {isLoading ? (
-            <div className="wtp-loading"><IosSpinner size="sm" /></div>
+            <div className="wtp-loading"><IosSpinner size={16} /></div>
           ) : lookupError ? (
             <div className="wtp-error">Tarjima topilmadi</div>
           ) : (
@@ -231,7 +231,7 @@ export default function WordTapPopover({
           {saveState === 'saved' ? (
             <><Check size={15} /> Qo'shildi!</>
           ) : saveState === 'saving' ? (
-            <IosSpinner size="sm" />
+            <IosSpinner size={16} />
           ) : (
             <><Plus size={15} /> {existingWord ? "Qayta qo'shish" : 'Shu bobga qo\'shish'}</>
           )}

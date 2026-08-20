@@ -228,7 +228,7 @@ export default function EnglishWordFormPage() {
                 disabled={isLookingUp || !formData.word.trim()}
                 title="Look up this word and fill in its English definition"
               >
-                {isLookingUp ? <IosSpinner size="sm" /> : <Search size={16} />}
+                {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
               </button>
             </div>
             {isDuplicate && (

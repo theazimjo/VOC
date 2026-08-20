@@ -146,6 +146,13 @@
   padding-bottom: 1px;
 }
 
+.read-known {
+  text-decoration: underline;
+  text-decoration-color: var(--success);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
 .read-footer {
   display: flex;
   gap: var(--space-sm);
