@@ -144,39 +144,41 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
         />
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={poolIndex}
-          className="speed-question"
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.96 }}
-          transition={{ duration: 0.16 }}
-        >
-          {currentWord.word}
-        </motion.div>
-      </AnimatePresence>
+      <div className="speed-game-body">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={poolIndex}
+            className="speed-question"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.16 }}
+          >
+            {currentWord.word}
+          </motion.div>
+        </AnimatePresence>
 
-      <div className="speed-options">
-        {options.map((opt, idx) => {
-          let state = 'idle';
-          if (answered) {
-            if (opt === currentWord.translation) state = 'correct';
-            else if (opt === selectedOption) state = 'wrong';
-            else state = 'dimmed';
-          }
-          return (
-            <button
-              key={`${poolIndex}-${idx}`}
-              type="button"
-              className={`speed-option ${state}`}
-              onClick={() => handleSelect(opt)}
-              disabled={answered}
-            >
-              {opt}
-            </button>
-          );
-        })}
+        <div className="speed-options">
+          {options.map((opt, idx) => {
+            let state = 'idle';
+            if (answered) {
+              if (opt === currentWord.translation) state = 'correct';
+              else if (opt === selectedOption) state = 'wrong';
+              else state = 'dimmed';
+            }
+            return (
+              <button
+                key={`${poolIndex}-${idx}`}
+                type="button"
+                className={`speed-option ${state}`}
+                onClick={() => handleSelect(opt)}
+                disabled={answered}
+              >
+                {opt}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

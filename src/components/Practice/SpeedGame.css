@@ -94,6 +94,13 @@
   line-height: 1.2;
 }
 
+.speed-game-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
 /* Always a single stacked column, not a 2-up grid — Speed's answers are
    full translation words/phrases (often longer than Quiz's), and under a
    timer, one wide, thumb-sized target per row beats two cramped ones. */
@@ -147,44 +154,78 @@
   opacity: 0.45;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .speed-container {
-    gap: var(--space-md);
+    min-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.85rem;
+    padding: 0.25rem 0;
   }
 
   .speed-top-bar {
-    flex-wrap: wrap;
-    row-gap: 6px;
+    padding: 0 2px;
+  }
+
+  .speed-game-body {
+    margin-top: auto;
+    margin-bottom: auto;
+    gap: 1.15rem;
   }
 
   .speed-timer {
-    font-size: var(--font-md);
+    font-size: 1.15rem;
   }
 
   .speed-tally {
     gap: var(--space-sm);
-    font-size: var(--font-xs);
+    font-size: 0.8rem;
   }
 
   .speed-record {
-    font-size: var(--font-xs);
-    padding: 3px 8px;
+    font-size: 0.8rem;
+    padding: 4px 10px;
   }
 
   .speed-question {
-    font-size: 1.8rem;
-    padding: var(--space-lg);
+    font-size: 2.2rem;
+    font-weight: 800;
+    padding: 1.75rem 1.25rem;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: var(--radius-xl);
+    border-color: var(--accent-1-dim);
+    box-shadow: var(--shadow-md), 0 0 24px rgba(129, 140, 248, 0.15);
+  }
+
+  .speed-options {
+    gap: 10px;
   }
 
   .speed-option {
-    padding: var(--space-sm) var(--space-md);
-    font-size: var(--font-sm);
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   .speed-question {
-    font-size: 1.5rem;
-    padding: var(--space-md);
+    font-size: 1.85rem;
+    padding: 1.25rem 1rem;
+    min-height: 100px;
+  }
+
+  .speed-option {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.9rem;
   }
 }

@@ -193,7 +193,7 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
 
       <div
         className="grid-match-board"
-        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+        style={{ '--grid-cols': cols }}
       >
         {cards.map((card) => {
           const isFaceUp = flipped.includes(card.key) || card.matched;
