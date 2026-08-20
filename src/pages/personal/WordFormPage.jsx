@@ -148,13 +148,18 @@ export default function WordFormPage() {
           ...prev,
           ...(source === 'word' ? { translation: decodeHTMLEntities(res.translation || prev.translation) } : {}),
           ...(source === 'translation' ? { word: decodeHTMLEntities(res.word || prev.word) } : {}),
-          partOfSpeech: res.partOfSpeech || prev.partOfSpeech,
-          definition: decodeHTMLEntities(res.definition || prev.definition),
-          example: decodeHTMLEntities(res.example || prev.example)
+          partOfSpeech: res.partOfSpeech || 'noun',
+          definition: decodeHTMLEntities(res.definition || ''),
+          example: decodeHTMLEntities(res.example || '')
         }));
-        if (res.partOfSpeech || res.definition || res.example) setShowMore(true);
+        if (res.definition || res.example) setShowMore(true);
       } else {
         setLookupError('No translation found.');
+        setFormData(prev => ({
+          ...prev,
+          definition: '',
+          example: ''
+        }));
       }
     } catch (err) {
       setLookupError(err.message || 'Something went wrong while searching.');
@@ -217,6 +222,7 @@ export default function WordFormPage() {
           notes: '', partOfSpeech: 'noun', customSentence: ''
         });
         setShowMore(false);
+        lastAutoLookupRef.current = '';
         wordInputRef.current?.focus();
       }
     } catch (err) {
@@ -298,7 +304,14 @@ export default function WordFormPage() {
                   type="text"
                   className="input"
                   value={formData.word}
-                  onChange={e => setFormData({ ...formData, word: e.target.value })}
+                  onChange={e => {
+                    const val = e.target.value;
+                    setFormData(prev => ({
+                      ...prev,
+                      word: val,
+                      ...(val.trim() !== prev.word.trim() ? { definition: '', example: '' } : {})
+                    }));
+                  }}
                   placeholder={wordLangCode === 'en' ? "e.g. Serendipity" : "Enter the word"}
                   required
                   autoFocus
@@ -362,7 +375,14 @@ export default function WordFormPage() {
                   type="text"
                   className="input"
                   value={formData.translation}
-                  onChange={e => setFormData({ ...formData, translation: e.target.value })}
+                  onChange={e => {
+                    const val = e.target.value;
+                    setFormData(prev => ({
+                      ...prev,
+                      translation: val,
+                      ...(val.trim() !== prev.translation.trim() ? { definition: '', example: '' } : {})
+                    }));
+                  }}
                   placeholder="Enter the translation"
                   required
                   maxLength={300}
