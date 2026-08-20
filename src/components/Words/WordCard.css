@@ -89,8 +89,8 @@
   border-radius: 6px !important;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: rgba(168, 85, 247, 0.15) !important;
-  color: #c084fc !important;
+  background: var(--accent-1-dim) !important;
+  color: var(--accent-1) !important;
 }
 
 /* Mastery indicator bars */
@@ -150,9 +150,9 @@
 }
 
 .btn-action-icon.edit:hover {
-  color: #c084fc;
-  background: rgba(168, 85, 247, 0.12);
-  border-color: rgba(168, 85, 247, 0.25);
+  color: var(--accent-1);
+  background: var(--accent-1-dim);
+  border-color: rgba(0, 122, 255, 0.25);
 }
 
 .btn-action-icon.delete:hover {
