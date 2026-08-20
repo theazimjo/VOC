@@ -45,6 +45,8 @@ export default function PackDetail() {
     const next = new URLSearchParams(searchParams);
     if (topic) next.set('topic', topic); else next.delete('topic');
     setSearchParams(next, { replace: true });
+    if (topic) localStorage.setItem(`lastTopic:${packId}`, topic);
+    else localStorage.removeItem(`lastTopic:${packId}`);
   };
 
   // Distinct topics present among this pack's words, for the optional
@@ -55,6 +57,25 @@ export default function PackDetail() {
     if (!pack) return [];
     return [...new Set(words.map(w => w.topic).filter(Boolean))].sort();
   }, [pack, words]);
+
+  // Restore the last chapter/topic the user was on for this pack, once, the
+  // next time they open it fresh (no `?topic=` already in the URL). Waits
+  // for `topics` to be populated so a stale/removed topic isn't applied.
+  const autoAppliedTopicRef = useRef(false);
+  useEffect(() => {
+    autoAppliedTopicRef.current = false;
+  }, [packId]);
+  useEffect(() => {
+    if (autoAppliedTopicRef.current) return;
+    if (topicFilter !== null) { autoAppliedTopicRef.current = true; return; }
+    if (topics.length === 0) return;
+    autoAppliedTopicRef.current = true;
+    const saved = localStorage.getItem(`lastTopic:${packId}`);
+    if (saved && topics.includes(saved)) setTopicFilter(saved);
+    // setTopicFilter is intentionally omitted - it's redefined every render,
+    // and the ref guard above already makes this effect run-once per pack.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topics, topicFilter, packId]);
 
   const displayedWords = topicFilter ? words.filter(w => w.topic === topicFilter) : words;
 
@@ -79,20 +100,22 @@ export default function PackDetail() {
   // Per-collection Memory Twin: mastery/retention/at-risk plus the strongest
   // confusion pair *within this pack specifically* (a pack-wide confusion
   // list wouldn't tell the user anything about the words they're actually
-  // looking at right now).
+  // looking at right now). Scoped to the selected chapter/topic when one is
+  // active, so the card reflects what the user is actually looking at.
   const memoryTwin = useMemo(() => {
-    if (!words || words.length === 0) return null;
-    const { retentionPercent, atRisk, reviewedCount } = computeRetentionStats(words);
+    const scopedWords = topicFilter ? words.filter(w => w.topic === topicFilter) : words;
+    if (!scopedWords || scopedWords.length === 0) return null;
+    const { retentionPercent, atRisk, reviewedCount } = computeRetentionStats(scopedWords);
     if (reviewedCount === 0) return null;
 
-    const masteryPercent = Math.round(words.reduce((sum, w) => sum + (w.mastery || 0), 0) / words.length);
+    const masteryPercent = Math.round(scopedWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / scopedWords.length);
 
-    const wordIds = new Set(words.map(w => w.id));
+    const wordIds = new Set(scopedWords.map(w => w.id));
     const packConfusions = confusionPairs.filter(p => wordIds.has(p.wordIdA) || wordIds.has(p.wordIdB));
     const topConfusion = [...packConfusions].sort((a, b) => (b.count || 0) - (a.count || 0))[0] || null;
 
     return { masteryPercent, retentionPercent, atRisk, confusionCount: packConfusions.length, topConfusion };
-  }, [words, confusionPairs]);
+  }, [words, topicFilter, confusionPairs]);
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -342,6 +365,7 @@ export default function PackDetail() {
           <div className="pack-memtwin-header">
             <span className="pack-memtwin-icon"><Brain size={16} strokeWidth={2.2} /></span>
             <span className="pack-memtwin-title">Memory Twin</span>
+            {topicFilter && <span className="pack-memtwin-scope">{topicFilter}</span>}
           </div>
 
           <div className="pack-memtwin-stats-grid">
