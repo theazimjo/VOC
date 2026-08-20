@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { scienceChapterText } from '../../data/scienceChapterText';
@@ -64,6 +64,10 @@ export default function ReadPage() {
   const [packLoading, setPackLoading] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
   const [tapState, setTapState] = useState(null); // { word, anchorRect } | null
+  // Which way the page most recently turned - so the flip animation rotates
+  // toward the same side a real page would (forward turns rotate away to the
+  // left, like the page lifting off the right edge; back turns mirror that).
+  const [direction, setDirection] = useState(1);
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -175,50 +179,87 @@ export default function ReadPage() {
   const isFirstPage = pageIndex <= 0;
 
   return (
-    <motion.div className="read-page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <header className="read-header">
-        <button
-          className="read-back-btn"
-          onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
-          aria-label="Back"
-        >
-          <ArrowLeft size={18} />
-        </button>
-        <div className="read-header-text">
-          <h1>{chapter.title}</h1>
-          <p>Page {pageIndex + 1} / {totalPages}</p>
-        </div>
-      </header>
-
-      <div className="read-body">
-        {page.map((block, blockIdx) => (
-          <div className={`read-block read-block-${block.type}`} key={blockIdx}>
-            <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
-          </div>
-        ))}
-      </div>
-
-      <footer className="read-footer">
-        <button
-          className="read-nav-btn"
-          onClick={() => setPageIndex(i => Math.max(0, i - 1))}
-          disabled={isFirstPage}
-        >
-          <ChevronLeft size={18} /> Prev
-        </button>
-        {isLastPage ? (
-          <button className="read-finish-btn" onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}>
-            Bob tugadi — Bobga qaytish
+    <div className="read-page-shell">
+      <div className="read-page">
+        <header className="read-header">
+          <button
+            className="read-back-btn"
+            onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
+            aria-label="Back"
+          >
+            <ArrowLeft size={18} />
           </button>
-        ) : (
+          <div className="read-header-text">
+            <h1>{chapter.title}</h1>
+          </div>
+        </header>
+
+        {/* No AnimatePresence here on purpose - with mode="wait" a second
+            click before the exit animation finished (very possible: the
+            flip is intentionally quick) could desync the animated element's
+            key from pageIndex, leaving stale text on screen under a correct
+            "Page N" header. Keying a plain motion.div swaps content the
+            instant pageIndex changes and only animates the entrance, which
+            can't get out of sync no matter how fast someone taps. */}
+        <motion.div
+          className="read-body"
+          key={pageIndex}
+          lang={wordLangCode}
+          initial={{ opacity: 0, rotateY: direction > 0 ? 14 : -14, x: direction > 0 ? 22 : -22 }}
+          animate={{ opacity: 1, rotateY: 0, x: 0 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          style={{ transformOrigin: direction > 0 ? 'left center' : 'right center' }}
+        >
+          {page.map((block, blockIdx) => (
+            block.type === 'image-group' ? (
+              <div className="read-image-group" key={blockIdx}>
+                {block.images.map((img, imgIdx) => (
+                  <figure className="read-image-item" key={imgIdx}>
+                    <img src={img.src} alt={img.caption || ''} loading="lazy" />
+                    {img.caption && <figcaption>{img.caption}</figcaption>}
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <div className={`read-block read-block-${block.type}`} key={blockIdx}>
+                <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
+              </div>
+            )
+          ))}
+        </motion.div>
+
+        <div className="read-nav">
           <button
             className="read-nav-btn"
-            onClick={() => setPageIndex(i => Math.min(totalPages - 1, i + 1))}
+            onClick={() => { setDirection(-1); setPageIndex(i => Math.max(0, i - 1)); }}
+            disabled={isFirstPage}
+            aria-label="Oldingi sahifa"
+            title="Oldingi sahifa"
           >
-            Next <ChevronRight size={18} />
+            <ChevronLeft size={18} />
           </button>
-        )}
-      </footer>
+          <span className="read-nav-count">{pageIndex + 1} / {totalPages}</span>
+          {isLastPage ? (
+            <button
+              className="read-nav-btn read-nav-btn--finish"
+              onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
+              aria-label="Bobni yakunlash"
+              title="Bobni yakunlash"
+            >
+              <Check size={18} />
+            </button>
+          ) : (
+            <button
+              className="read-nav-btn"
+              onClick={() => { setDirection(1); setPageIndex(i => Math.min(totalPages - 1, i + 1)); }}
+              aria-label="Keyingi sahifa"
+              title="Keyingi sahifa"
+            >
+              <ChevronRight size={18} />
+            </button>
+          )}
+        </div>
+      </div>
 
       <AnimatePresence>
         {tapState && (
@@ -236,6 +277,6 @@ export default function ReadPage() {
           />
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }

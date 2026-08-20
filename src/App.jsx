@@ -99,6 +99,10 @@ export default function App() {
   
                     {/* Protected routes */}
                     <Route element={<ProtectedRoute />}>
+                      {/* Full-screen reading mode - deliberately OUTSIDE Layout so
+                          the sidebar/topbar chrome doesn't eat into the page,
+                          matching an actual book/e-reader view. */}
+                      <Route path="/packs/:packId/read" element={<ReadPage />} />
                       <Route element={<Layout />}>
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/library" element={<LibraryPage />} />
@@ -106,7 +110,6 @@ export default function App() {
                         <Route path="/books/:bookId" element={<BookToPackRedirect />} />
                         <Route path="/packs" element={<Navigate to="/library" replace />} />
                         <Route path="/packs/:packId" element={<PackDetail />} />
-                        <Route path="/packs/:packId/read" element={<ReadPage />} />
                         <Route path="/packs/:packId/word/new" element={<WordFormPage />} />
                         <Route path="/packs/:packId/word/edit/:wordId" element={<WordFormPage />} />
                         <Route path="/packs/:packId/word/ielts/new" element={<IeltsWordFormPage />} />

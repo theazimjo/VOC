@@ -1,10 +1,37 @@
-.read-page {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: var(--space-md) var(--space-md) 100px;
+/* Deliberately full-screen (no sidebar/topbar - see App.jsx route comment)
+   so reading feels like its own immersive book view rather than a page
+   squeezed into the normal app chrome. The same decorative radial-gradient
+   backdrop the Dashboard/Library use keeps it on-brand instead of looking
+   like a blank, disconnected screen. */
+.read-page-shell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background:
+    radial-gradient(850px circle at 12% 8%, rgba(0, 122, 255, 0.06), transparent 65%),
+    radial-gradient(800px circle at 88% 18%, rgba(175, 82, 222, 0.05), transparent 65%),
+    radial-gradient(750px circle at 25% 92%, rgba(255, 149, 0, 0.04), transparent 65%),
+    var(--bg-primary);
+}
+
+[data-theme='android'] .read-page-shell {
+  background:
+    radial-gradient(850px circle at 12% 8%, rgba(59, 130, 246, 0.09), transparent 65%),
+    radial-gradient(800px circle at 88% 18%, rgba(168, 85, 247, 0.08), transparent 65%),
+    radial-gradient(750px circle at 25% 92%, rgba(245, 158, 11, 0.06), transparent 65%),
+    radial-gradient(750px circle at 92% 88%, rgba(52, 199, 89, 0.06), transparent 65%),
+    var(--bg-primary);
+}
+
+.read-page {
+  max-width: 840px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-md) var(--space-lg) 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  perspective: 1800px;
 }
 
 .read-page-missing {
@@ -20,30 +47,30 @@
 .read-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding-bottom: var(--space-md);
-  border-bottom: 1px solid var(--border);
-  margin-bottom: var(--space-lg);
-  position: sticky;
-  top: 0;
-  background: var(--bg-primary);
-  z-index: 5;
-  padding-top: var(--space-sm);
+  gap: 14px;
+  padding: var(--space-md) 0;
 }
 
 .read-back-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   color: var(--text-primary);
   cursor: pointer;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
+}
+
+.read-back-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--accent-1);
+  transform: translateX(-2px);
 }
 
 .read-header-text {
@@ -52,8 +79,9 @@
 }
 
 .read-header-text h1 {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--text-primary);
   margin: 0;
   white-space: nowrap;
@@ -61,17 +89,44 @@
   text-overflow: ellipsis;
 }
 
-.read-header-text p {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  margin: 2px 0 0 0;
+/* ---------- The page itself - a distinct "paper" card floating on the
+   decorative shell background, like a book lying open on a desk. ---------- */
+.read-body {
+  position: relative;
+  flex: 1;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 44px 52px;
+  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--text-primary);
 }
 
-.read-body {
-  flex: 1;
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: var(--text-primary);
+/* Justified, hyphenated text - a left-aligned ragged edge is what made this
+   read as "not quite a book" even with book-ish colors/fonts; real book
+   typesetting is flush on both edges, and hyphenation keeps that from
+   opening up ugly gaps between words at this column width. */
+.read-block-p,
+.read-block-activity,
+.read-block-sidebar {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* A faint gutter shadow down the left edge, like a page curving into a
+   book's spine - the one cheap cue that reads as "book" even at rest. */
+.read-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.09), transparent 34px);
+  pointer-events: none;
 }
 
 .read-block {
@@ -79,26 +134,30 @@
 }
 
 .read-block-heading {
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--accent-1);
   line-height: 1.3;
+  padding-bottom: 10px;
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--border);
 }
 
 .read-block-activity,
 .read-block-sidebar {
-  background: var(--bg-secondary);
+  background: var(--bg-tertiary);
   border: 1px dashed var(--border-strong, var(--border));
   border-radius: var(--radius-lg);
-  padding: var(--space-md);
-  font-size: 0.95rem;
+  padding: var(--space-lg);
+  font-size: 0.98rem;
+  line-height: 1.7;
   color: var(--text-secondary);
 }
 
 .read-block-summary {
   position: relative;
-  padding-left: 20px;
-  font-size: 0.98rem;
+  padding-left: 22px;
+  font-size: 1.02rem;
   color: var(--text-secondary);
   margin-bottom: var(--space-sm);
 }
@@ -107,7 +166,7 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 0.6em;
+  top: 0.65em;
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -137,58 +196,127 @@
   text-underline-offset: 3px;
 }
 
-.read-footer {
+/* ---------- Book-plate images - a thin mat + soft shadow instead of a flat
+   card, and an italic caption underneath, like an illustration plate in an
+   actual textbook. ---------- */
+.read-image-group {
   display: flex;
-  gap: var(--space-sm);
-  padding: var(--space-md);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  position: sticky;
-  bottom: 20px;
-  box-shadow: var(--shadow-lg);
-  margin-top: var(--space-lg);
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin: var(--space-md) 0 var(--space-lg);
 }
 
-.read-nav-btn {
-  flex: 1;
+.read-image-item {
+  flex: 1 1 220px;
+  max-width: 340px;
+  margin: 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 8px 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+}
+
+.read-image-item img {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 5px;
+  background: var(--bg-tertiary);
+}
+
+.read-image-item figcaption {
+  padding-top: 8px;
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ---------- Page nav - a small centered pill, not a full-width bar. Real
+   books don't ask you to press a giant "Next" button; this stays out of the
+   way and reads as a page-counter with two quiet arrows either side. ---------- */
+.read-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  padding: 12px;
-  border-radius: var(--radius-md);
+  gap: var(--space-md);
+  margin: var(--space-lg) auto 0;
+  padding: 6px;
+  width: fit-content;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  position: sticky;
+  bottom: 16px;
+}
+
+.read-nav-count {
+  min-width: 64px;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.read-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   border: none;
   background: var(--bg-tertiary);
   color: var(--text-primary);
-  font-weight: 700;
-  font-size: var(--font-sm);
   cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.read-nav-btn:hover:not(:disabled) {
+  background: rgba(124, 58, 237, 0.16);
+  color: var(--accent-1);
+  transform: scale(1.06);
 }
 
 .read-nav-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
-.read-finish-btn {
-  flex: 1;
-  padding: 12px;
-  border-radius: var(--radius-md);
-  border: none;
+.read-nav-btn--finish {
   background: var(--accent-1);
   color: #fff;
-  font-weight: 700;
-  font-size: var(--font-sm);
-  cursor: pointer;
+}
+
+.read-nav-btn--finish:hover {
+  background: var(--accent-1);
+  color: #fff;
+  filter: brightness(1.1);
 }
 
 @media (max-width: 640px) {
+  .read-page {
+    padding: var(--space-sm) var(--space-sm) 24px;
+  }
   .read-body {
-    font-size: 1rem;
-    line-height: 1.75;
+    padding: 26px 22px;
+    font-size: 1.02rem;
+    line-height: 1.8;
+    border-radius: 18px;
   }
   .read-block-heading {
-    font-size: 1.15rem;
+    font-size: 1.22rem;
+  }
+  .read-image-item {
+    flex-basis: 140px;
+  }
+  .read-image-item img {
+    height: 130px;
   }
 }
