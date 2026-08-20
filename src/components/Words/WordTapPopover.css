@@ -1,0 +1,240 @@
+.wtp-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: transparent;
+}
+
+.wtp-popover {
+  position: fixed;
+  z-index: 201;
+  width: 280px;
+  background: var(--bg-glass-strong, var(--bg-secondary));
+  border: 1px solid var(--border-strong, var(--border));
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wtp-top-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wtp-lang-picker {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.wtp-lang-picker-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 5px 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wtp-lang-picker-btn span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.wtp-lang-picker-btn:hover,
+.wtp-lang-picker-btn.active {
+  color: #c084fc;
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.35);
+}
+
+.wtp-lang-picker-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.wtp-lang-picker-icon.open {
+  transform: rotate(180deg);
+}
+
+.wtp-lang-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--bg-glass-strong, #14141d);
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.16));
+  border-radius: 12px;
+  padding: 4px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wtp-lang-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #d1d5db);
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.wtp-lang-option:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.wtp-lang-option.selected {
+  background: rgba(124, 58, 237, 0.18);
+  color: #c084fc;
+  font-weight: 700;
+}
+
+.wtp-lang-option-label {
+  flex: 1;
+}
+
+.wtp-close-btn {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.wtp-body {
+  text-align: center;
+  padding: 4px 0;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wtp-word {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.wtp-translation {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.wtp-pos {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-1);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-top: 2px;
+}
+
+.wtp-definition {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.wtp-loading {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.wtp-error {
+  font-size: var(--font-xs);
+  color: var(--text-muted);
+  padding: 6px 0;
+}
+
+.wtp-alt-hint {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px dashed rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.wtp-alt-hint strong {
+  color: #38bdf8;
+}
+
+.wtp-existing-note {
+  font-size: 0.72rem;
+  color: #f59e0b;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.wtp-target-note {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.wtp-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--accent-1);
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--font-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wtp-add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wtp-add-btn.saved {
+  background: var(--success);
+}

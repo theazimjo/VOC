@@ -22,7 +22,7 @@ export default function PackDetail() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
-  const { getPack } = usePacks();
+  const { getPack, updatePack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
   const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
 
@@ -152,6 +152,15 @@ export default function PackDetail() {
     const sourcePack = findSourceMarketPack(pack);
     if (!sourcePack) return;
 
+    // Packs installed before a market pack's `type` field existed (or before
+    // it changed) never get it backfilled by the word-only sync above - it's
+    // pack-level metadata, not a word. Type-gated features (like Science's
+    // Read mode) would otherwise stay invisible forever on an old install.
+    if (sourcePack.type && pack.type !== sourcePack.type) {
+      updatePack(packId, { type: sourcePack.type });
+      setPack(prev => (prev ? { ...prev, type: sourcePack.type } : prev));
+    }
+
     const missingWords = getMissingMarketWords(sourcePack, words);
     if (missingWords.length === 0) return;
 
@@ -159,7 +168,7 @@ export default function PackDetail() {
       playSound('correct');
       setNewWordsAddedCount(missingWords.length);
     });
-  }, [pack, words, loading, bulkAddWords]);
+  }, [pack, words, loading, bulkAddWords, packId, updatePack]);
 
   // Restore the scroll position saveScrollPosition() saved before leaving
   // for the edit page or Practice - only once the real word list has
@@ -343,19 +352,32 @@ export default function PackDetail() {
               </button>
             </>
           ) : (
-            <button
-              className="btn btn-primary btn-mashq"
-              onClick={() => {
-                saveScrollPosition();
-                navigate(
-                  topicFilter
-                    ? `/practice/packs/${packId}?topic=${encodeURIComponent(topicFilter)}`
-                    : `/practice/packs/${packId}`
-                );
-              }}
-            >
-              🎮 Practice{topicFilter ? ` (${topicFilter})` : ''}
-            </button>
+            <>
+              <button
+                className="btn btn-primary btn-mashq"
+                onClick={() => {
+                  saveScrollPosition();
+                  navigate(
+                    topicFilter
+                      ? `/practice/packs/${packId}?topic=${encodeURIComponent(topicFilter)}`
+                      : `/practice/packs/${packId}`
+                  );
+                }}
+              >
+                🎮 Practice{topicFilter ? ` (${topicFilter})` : ''}
+              </button>
+              {pack.type === 'science' && topicFilter && (
+                <button
+                  className="btn btn-cards"
+                  onClick={() => {
+                    saveScrollPosition();
+                    navigate(`/packs/${packId}/read?topic=${encodeURIComponent(topicFilter)}`);
+                  }}
+                >
+                  📖 Read
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
