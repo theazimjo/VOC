@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sun, Moon, BookOpen, Lightbulb } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { scienceChapterText } from '../../data/scienceChapterText';
@@ -10,10 +10,6 @@ import WordTapPopover from '../../components/Words/WordTapPopover';
 import IosSpinner from '../../components/common/IosSpinner';
 import './ReadPage.css';
 
-// Chapter text can mark a multi-word expression (e.g. a phrasal verb like
-// "carry out") as `{{carry out}}` so it reads as one tappable unit instead
-// of "carry" and "out" being translated separately - neither word alone
-// carries the combined meaning.
 function WordTokens({ text, onWordTap, knownWords }) {
   const segments = text.split(/(\{\{[^}]+\}\})/);
   return segments.map((segment, segIdx) => {
@@ -63,11 +59,39 @@ export default function ReadPage() {
   const [pack, setPack] = useState(null);
   const [packLoading, setPackLoading] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
-  const [tapState, setTapState] = useState(null); // { word, anchorRect } | null
-  // Which way the page most recently turned - so the flip animation rotates
-  // toward the same side a real page would (forward turns rotate away to the
-  // left, like the page lifting off the right edge; back turns mirror that).
+  const [tapState, setTapState] = useState(null);
   const [direction, setDirection] = useState(1);
+
+  // Reader Settings: Theme ('light' | 'sepia' | 'dark') and Font Size ('small' | 'medium' | 'large')
+  const [readerTheme, setReaderTheme] = useState(() => {
+    try {
+      return localStorage.getItem('reader_theme') || 'light';
+    } catch {
+      return 'light';
+    }
+  });
+
+  const [fontSize, setFontSize] = useState(() => {
+    try {
+      return localStorage.getItem('reader_fontsize') || 'medium';
+    } catch {
+      return 'medium';
+    }
+  });
+
+  const handleThemeChange = (newTheme) => {
+    setReaderTheme(newTheme);
+    try {
+      localStorage.setItem('reader_theme', newTheme);
+    } catch {}
+  };
+
+  const handleFontSizeChange = (newSize) => {
+    setFontSize(newSize);
+    try {
+      localStorage.setItem('reader_fontsize', newSize);
+    } catch {}
+  };
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -78,8 +102,7 @@ export default function ReadPage() {
       setPackLoading(false);
     };
     fetchPack();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [packId]);
+  }, [packId, getPack, navigate]);
 
   const chapter = scienceChapterText[topic];
 
@@ -92,27 +115,18 @@ export default function ReadPage() {
       if (Number.isFinite(savedIndex) && savedIndex >= 0 && savedIndex < chapter.pages.length) {
         setPageIndex(savedIndex);
       }
-    } catch {
-      // ignore
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topic]);
+    } catch {}
+  }, [topic, chapter, progressKey]);
 
   useEffect(() => {
     if (!chapter) return;
     try {
       localStorage.setItem(progressKey, String(pageIndex));
-    } catch {
-      // ignore
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageIndex]);
+    } catch {}
+  }, [pageIndex, chapter, progressKey]);
 
   const page = useMemo(() => chapter?.pages[pageIndex] || [], [chapter, pageIndex]);
 
-  // Words already saved under this chapter, so the reading text can
-  // underline them - a quick visual cue for which words you've already
-  // added, without having to tap each one to check.
   const knownWords = useMemo(() => {
     return new Set(
       words.filter(w => w.topic === topic).map(w => (w.word || '').trim().toLowerCase())
@@ -176,89 +190,171 @@ export default function ReadPage() {
 
   const totalPages = chapter.pages.length;
   const isLastPage = pageIndex >= totalPages - 1;
-  const isFirstPage = pageIndex <= 0;
 
   return (
-    <div className="read-page-shell">
+    <div className={`read-page-shell theme-${readerTheme}`}>
       <div className="read-page">
+        {/* Top Header */}
         <header className="read-header">
-          <button
-            className="read-back-btn"
-            onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
-            aria-label="Back"
-          >
-            <ArrowLeft size={18} />
-          </button>
-          <div className="read-header-text">
-            <h1>{chapter.title}</h1>
+          <div className="read-header-left">
+            <button
+              className="read-back-btn"
+              onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
+              aria-label="Back"
+            >
+              <ArrowLeft size={18} />
+            </button>
+            <div className="read-header-titles">
+              <h1 className="read-chapter-title">{chapter.title || 'Chapter'}</h1>
+              <span className="read-chapter-subtitle">{topic}</span>
+            </div>
+          </div>
+
+          {/* Reader Controls Toolbar */}
+          <div className="read-toolbar">
+            <div className="read-font-group">
+              <button
+                type="button"
+                className={`read-tool-btn ${fontSize === 'small' ? 'active' : ''}`}
+                onClick={() => handleFontSizeChange('small')}
+                title="Smaller font size"
+              >
+                A-
+              </button>
+              <button
+                type="button"
+                className={`read-tool-btn ${fontSize === 'large' ? 'active' : ''}`}
+                onClick={() => handleFontSizeChange('large')}
+                title="Larger font size"
+              >
+                A+
+              </button>
+            </div>
+
+            <div className="read-tool-divider" />
+
+            <div className="read-theme-group">
+              <button
+                type="button"
+                className={`read-theme-btn ${readerTheme === 'light' ? 'active' : ''}`}
+                onClick={() => handleThemeChange('light')}
+                title="Light mode"
+              >
+                <Sun size={15} />
+              </button>
+              <button
+                type="button"
+                className={`read-theme-btn read-theme-btn--sepia ${readerTheme === 'sepia' ? 'active' : ''}`}
+                onClick={() => handleThemeChange('sepia')}
+                title="Sepia warm mode"
+              >
+                <BookOpen size={15} />
+              </button>
+              <button
+                type="button"
+                className={`read-theme-btn ${readerTheme === 'dark' ? 'active' : ''}`}
+                onClick={() => handleThemeChange('dark')}
+                title="Dark mode"
+              >
+                <Moon size={15} />
+              </button>
+            </div>
           </div>
         </header>
 
-        {/* No AnimatePresence here on purpose - with mode="wait" a second
-            click before the exit animation finished (very possible: the
-            flip is intentionally quick) could desync the animated element's
-            key from pageIndex, leaving stale text on screen under a correct
-            "Page N" header. Keying a plain motion.div swaps content the
-            instant pageIndex changes and only animates the entrance, which
-            can't get out of sync no matter how fast someone taps. */}
+        {/* Page Content Body */}
         <motion.div
-          className="read-body"
+          className={`read-body font-size-${fontSize}`}
           key={pageIndex}
           lang={wordLangCode}
-          initial={{ opacity: 0, rotateY: direction > 0 ? 14 : -14, x: direction > 0 ? 22 : -22 }}
+          initial={{ opacity: 0, rotateY: direction > 0 ? 12 : -12, x: direction > 0 ? 18 : -18 }}
           animate={{ opacity: 1, rotateY: 0, x: 0 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           style={{ transformOrigin: direction > 0 ? 'left center' : 'right center' }}
         >
-          {page.map((block, blockIdx) => (
-            block.type === 'image-group' ? (
-              <div className="read-image-group" key={blockIdx}>
-                {block.images.map((img, imgIdx) => (
-                  <figure className="read-image-item" key={imgIdx}>
-                    <img src={img.src} alt={img.caption || ''} loading="lazy" />
-                    {img.caption && <figcaption>{img.caption}</figcaption>}
-                  </figure>
-                ))}
-              </div>
-            ) : (
+          {page.map((block, blockIdx) => {
+            if (block.type === 'image-group') {
+              return (
+                <div className="read-image-group" key={blockIdx}>
+                  {block.images.map((img, imgIdx) => (
+                    <figure className="read-image-item" key={imgIdx}>
+                      <img src={img.src} alt={img.caption || ''} loading="lazy" />
+                      {img.caption && <figcaption>{img.caption}</figcaption>}
+                    </figure>
+                  ))}
+                </div>
+              );
+            }
+
+            if (block.type === 'sidebar' || block.type === 'activity') {
+              return (
+                <div className="read-callout-card" key={blockIdx}>
+                  <div className="read-callout-icon">
+                    <Lightbulb size={20} />
+                  </div>
+                  <div className="read-callout-content">
+                    <h4 className="read-callout-title">
+                      {block.type === 'sidebar' ? 'Did You Know?' : 'Reading Tip & Activity'}
+                    </h4>
+                    <div className="read-callout-body">
+                      <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
               <div className={`read-block read-block-${block.type}`} key={blockIdx}>
                 <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
               </div>
-            )
-          ))}
+            );
+          })}
         </motion.div>
 
-        <div className="read-nav">
-          <button
-            className="read-nav-btn"
-            onClick={() => { setDirection(-1); setPageIndex(i => Math.max(0, i - 1)); }}
-            disabled={isFirstPage}
-            aria-label="Oldingi sahifa"
-            title="Oldingi sahifa"
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <span className="read-nav-count">{pageIndex + 1} / {totalPages}</span>
-          {isLastPage ? (
-            <button
-              className="read-nav-btn read-nav-btn--finish"
-              onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
-              aria-label="Bobni yakunlash"
-              title="Bobni yakunlash"
-            >
-              <Check size={18} />
-            </button>
-          ) : (
-            <button
-              className="read-nav-btn"
-              onClick={() => { setDirection(1); setPageIndex(i => Math.min(totalPages - 1, i + 1)); }}
-              aria-label="Keyingi sahifa"
-              title="Keyingi sahifa"
-            >
-              <ChevronRight size={18} />
-            </button>
-          )}
-        </div>
+        {/* Reader Footer Progress & Navigation */}
+        <footer className="read-footer">
+          <div className="read-page-indicator">
+            <div className="read-page-badge">{pageIndex + 1}</div>
+            <div className="read-page-info">
+              <span className="read-page-label">PAGE</span>
+              <span className="read-page-total">of {totalPages}</span>
+            </div>
+          </div>
+
+          <div className="read-nav-actions">
+            {pageIndex > 0 && (
+              <button
+                type="button"
+                className="read-nav-prev-btn"
+                onClick={() => { setDirection(-1); setPageIndex(i => i - 1); }}
+                title="Previous page"
+              >
+                <ChevronLeft size={16} /> Prev
+              </button>
+            )}
+
+            {isLastPage ? (
+              <button
+                type="button"
+                className="read-next-chapter-btn"
+                onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
+              >
+                <span>Finish Chapter</span>
+                <Check size={16} />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="read-next-chapter-btn"
+                onClick={() => { setDirection(1); setPageIndex(i => i + 1); }}
+              >
+                <span>Next Page</span>
+                <ChevronRight size={16} />
+              </button>
+            )}
+          </div>
+        </footer>
       </div>
 
       <AnimatePresence>

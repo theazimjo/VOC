@@ -1,220 +1,336 @@
-/* Deliberately full-screen (no sidebar/topbar - see App.jsx route comment)
-   so reading feels like its own immersive book view rather than a page
-   squeezed into the normal app chrome. The same decorative radial-gradient
-   backdrop the Dashboard/Library use keeps it on-brand instead of looking
-   like a blank, disconnected screen. */
+/* ========== READ PAGE SHELL & THEMES ========== */
 .read-page-shell {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(850px circle at 12% 8%, rgba(0, 122, 255, 0.06), transparent 65%),
-    radial-gradient(800px circle at 88% 18%, rgba(175, 82, 222, 0.05), transparent 65%),
-    radial-gradient(750px circle at 25% 92%, rgba(255, 149, 0, 0.04), transparent 65%),
-    var(--bg-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-[data-theme='android'] .read-page-shell {
-  background:
-    radial-gradient(850px circle at 12% 8%, rgba(59, 130, 246, 0.09), transparent 65%),
-    radial-gradient(800px circle at 88% 18%, rgba(168, 85, 247, 0.08), transparent 65%),
-    radial-gradient(750px circle at 25% 92%, rgba(245, 158, 11, 0.06), transparent 65%),
-    radial-gradient(750px circle at 92% 88%, rgba(52, 199, 89, 0.06), transparent 65%),
-    var(--bg-primary);
+/* Light Mode (Default) */
+.read-page-shell.theme-light {
+  --reader-bg: #FAFAFC;
+  --reader-text: #18181B;
+  --reader-subtitle: #64748B;
+  --reader-border: #E2E8F0;
+  --reader-callout-bg: #F1F5F9;
+  --reader-callout-border: #E2E8F0;
+  --highlight-bg: #FEF3C7;
+  --highlight-text: #92400E;
+  background: var(--reader-bg);
+  color: var(--reader-text);
+}
+
+/* Sepia Warm Mode */
+.read-page-shell.theme-sepia {
+  --reader-bg: #FBF0D9;
+  --reader-text: #3A2F25;
+  --reader-subtitle: #7C6A58;
+  --reader-border: #E6D7BD;
+  --reader-callout-bg: #F2E3C6;
+  --reader-callout-border: #E2D0AF;
+  --highlight-bg: #FED7AA;
+  --highlight-text: #7C2D12;
+  background: var(--reader-bg);
+  color: var(--reader-text);
+}
+
+/* Dark Mode */
+.read-page-shell.theme-dark {
+  --reader-bg: #121216;
+  --reader-text: #E4E4E7;
+  --reader-subtitle: #9CA3AF;
+  --reader-border: #27273A;
+  --reader-callout-bg: #1E1E28;
+  --reader-callout-border: #2A2A3C;
+  --highlight-bg: rgba(245, 158, 11, 0.22);
+  --highlight-text: #FDE68A;
+  background: var(--reader-bg);
+  color: var(--reader-text);
 }
 
 .read-page {
-  max-width: 840px;
+  max-width: 720px;
   width: 100%;
   margin: 0 auto;
-  padding: var(--space-md) var(--space-lg) 40px;
+  padding: 24px 20px 60px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  perspective: 1800px;
 }
 
 .read-page-missing {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-md);
-  padding: 80px var(--space-md);
+  gap: 16px;
+  padding: 80px 16px;
   text-align: center;
-  color: var(--text-secondary);
 }
 
+/* ========== TOP HEADER & TOOLBAR ========== */
 .read-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 24px;
+  margin-bottom: 12px;
+}
+
+.read-header-left {
+  display: flex;
+  align-items: flex-start;
   gap: 14px;
-  padding: var(--space-md) 0;
 }
 
 .read-back-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 12px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--reader-border);
+  color: var(--reader-text);
   cursor: pointer;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease;
 }
 
 .read-back-btn:hover {
-  background: var(--bg-tertiary);
-  color: var(--accent-1);
+  border-color: #f97316;
+  color: #f97316;
   transform: translateX(-2px);
 }
 
-.read-header-text {
-  flex: 1;
-  min-width: 0;
+.read-header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.read-header-text h1 {
-  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
+.read-chapter-title {
+  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--reader-text);
   margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
-/* ---------- The page itself - a distinct "paper" card floating on the
-   decorative shell background, like a book lying open on a desk. ---------- */
+.read-chapter-subtitle {
+  font-family: Georgia, 'Iowan Old Style', serif;
+  font-size: 0.96rem;
+  font-style: italic;
+  color: var(--reader-subtitle);
+}
+
+/* Toolbar */
+.read-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: transparent;
+  border: 1px solid var(--reader-border);
+  border-radius: 9999px;
+}
+
+.read-font-group,
+.read-theme-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.read-tool-btn,
+.read-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 8px;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--reader-subtitle);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.read-theme-btn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+}
+
+.read-tool-btn:hover,
+.read-theme-btn:hover {
+  color: var(--reader-text);
+}
+
+.read-tool-btn.active,
+.read-theme-btn.active {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--reader-text);
+}
+
+.theme-dark .read-tool-btn.active,
+.theme-dark .read-theme-btn.active {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.read-tool-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--reader-border);
+}
+
+/* ========== READING BODY & TYPOGRAPHY ========== */
 .read-body {
   position: relative;
   flex: 1;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: 44px 52px;
-  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
-  font-size: 1.12rem;
-  line-height: 1.65;
-  color: var(--text-primary);
+  width: 100%;
+  padding: 12px 0 28px;
+  font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+  color: var(--reader-text);
+  transition: color 0.3s ease;
 }
 
-/* Justified, hyphenated text - a left-aligned ragged edge is what made this
-   read as "not quite a book" even with book-ish colors/fonts; real book
-   typesetting is flush on both edges, and hyphenation keeps that from
-   opening up ugly gaps between words at this column width. */
-.read-block-p,
-.read-block-activity,
-.read-block-sidebar {
+.read-body.font-size-small {
+  font-size: 1.02rem;
+  line-height: 1.78;
+}
+
+.read-body.font-size-medium {
+  font-size: 1.16rem;
+  line-height: 1.88;
+}
+
+.read-body.font-size-large {
+  font-size: 1.32rem;
+  line-height: 1.95;
+}
+
+.read-block {
+  max-width: 100%;
+  margin-bottom: 24px;
+}
+
+.read-block-p {
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
   -webkit-hyphens: auto;
 }
 
-/* A faint gutter shadow down the left edge, like a page curving into a
-   book's spine - the one cheap cue that reads as "book" even at rest. */
-.read-body::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.09), transparent 34px);
-  pointer-events: none;
-}
-
-.read-block {
-  margin-bottom: var(--space-lg);
-}
-
 .read-block-heading {
-  font-size: 1.5rem;
+  font-family: Georgia, serif;
+  font-size: 1.45rem;
   font-weight: 700;
-  color: var(--accent-1);
+  color: var(--reader-text);
   line-height: 1.3;
-  padding-bottom: 10px;
-  margin-bottom: var(--space-md);
-  border-bottom: 2px solid var(--border);
+  padding-bottom: 8px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--reader-border);
 }
 
-.read-block-activity,
-.read-block-sidebar {
-  background: var(--bg-tertiary);
-  border: 1px dashed var(--border-strong, var(--border));
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-
-.read-block-summary {
-  position: relative;
-  padding-left: 22px;
-  font-size: 1.02rem;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-sm);
-}
-
-.read-block-summary::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.65em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-1);
-}
-
+/* Highlighted Target Vocabulary Words & Phrases */
 .read-word {
   cursor: pointer;
-  border-radius: 3px;
-  transition: background 0.12s ease;
+  border-radius: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
-.read-word:active,
 .read-word:hover {
-  background: rgba(124, 58, 237, 0.14);
+  background: var(--highlight-bg);
+  color: var(--highlight-text);
 }
 
 .read-phrase {
-  border-bottom: 2px dotted rgba(124, 58, 237, 0.45);
-  padding-bottom: 1px;
+  background: var(--highlight-bg);
+  color: var(--highlight-text);
+  padding: 2px 7px;
+  margin: 0 1px;
+  border-radius: 5px;
+  font-weight: 500;
+  display: inline-block;
 }
 
 .read-known {
   text-decoration: underline;
-  text-decoration-color: var(--success);
+  text-decoration-color: #22c55e;
   text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-underline-offset: 4px;
 }
 
-/* ---------- Book-plate images - a thin mat + soft shadow instead of a flat
-   card, and an italic caption underneath, like an illustration plate in an
-   actual textbook. ---------- */
+/* ========== READING TIP / CALLOUT CARD ========== */
+.read-callout-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 32px 0;
+  padding: 22px 26px;
+  background: var(--reader-callout-bg);
+  border: 1px solid var(--reader-callout-border);
+  border-radius: 18px;
+  transition: all 0.2s ease;
+}
+
+.read-callout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--reader-text);
+  flex-shrink: 0;
+}
+
+.theme-dark .read-callout-icon {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.read-callout-content {
+  flex: 1;
+}
+
+.read-callout-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--reader-text);
+  margin: 0 0 6px 0;
+}
+
+.read-callout-body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--reader-subtitle);
+}
+
+/* ========== IMAGE GROUPS ========== */
 .read-image-group {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-md);
-  margin: var(--space-md) 0 var(--space-lg);
+  gap: 16px;
+  margin: 20px 0 28px;
 }
 
 .read-image-item {
   flex: 1 1 220px;
   max-width: 340px;
   margin: 0;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  background: var(--reader-callout-bg);
+  border: 1px solid var(--reader-callout-border);
+  border-radius: 12px;
   padding: 8px 8px 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
 }
 
 .read-image-item img {
@@ -222,8 +338,7 @@
   width: 100%;
   height: 190px;
   object-fit: cover;
-  border-radius: 5px;
-  background: var(--bg-tertiary);
+  border-radius: 8px;
 }
 
 .read-image-item figcaption {
@@ -231,92 +346,241 @@
   font-size: 0.8rem;
   font-style: italic;
   line-height: 1.35;
-  color: var(--text-muted);
+  color: var(--reader-subtitle);
   text-align: center;
 }
 
-/* ---------- Page nav - a small centered pill, not a full-width bar. Real
-   books don't ask you to press a giant "Next" button; this stays out of the
-   way and reads as a page-counter with two quiet arrows either side. ---------- */
-.read-nav {
+/* ========== FOOTER PROGRESS & NAV ========== */
+.read-footer {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--reader-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.read-page-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.read-page-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
-  margin: var(--space-lg) auto 0;
-  padding: 6px;
-  width: fit-content;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  position: sticky;
-  bottom: 16px;
-}
-
-.read-nav-count {
-  min-width: 64px;
-  text-align: center;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--reader-text);
   font-variant-numeric: tabular-nums;
 }
 
-.read-nav-btn {
+.theme-dark .read-page-badge {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.read-page-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.read-page-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--reader-subtitle);
+  text-transform: uppercase;
+}
+
+.read-page-total {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--reader-text);
+}
+
+.read-nav-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  gap: 10px;
+}
+
+.read-nav-prev-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  border: 1px solid var(--reader-border);
+  background: transparent;
+  color: var(--reader-text);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.read-nav-prev-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.read-next-chapter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 9999px;
   border: none;
-  background: var(--bg-tertiary);
-  color: var(--text-primary);
+  background: #000000;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
-  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
-.read-nav-btn:hover:not(:disabled) {
-  background: rgba(124, 58, 237, 0.16);
-  color: var(--accent-1);
-  transform: scale(1.06);
+.theme-dark .read-next-chapter-btn {
+  background: #ffffff;
+  color: #000000;
 }
 
-.read-nav-btn:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
+.read-next-chapter-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-.read-nav-btn--finish {
-  background: var(--accent-1);
-  color: #fff;
-}
-
-.read-nav-btn--finish:hover {
-  background: var(--accent-1);
-  color: #fff;
-  filter: brightness(1.1);
-}
-
+/* ========== RESPONSIVE ========== */
 @media (max-width: 640px) {
   .read-page {
-    padding: var(--space-sm) var(--space-sm) 24px;
+    padding: 14px 16px 40px;
   }
+  .read-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+  }
+  .read-header-left {
+    align-items: center;
+    gap: 10px;
+  }
+  .read-back-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+  .read-chapter-title {
+    font-size: 1.3rem;
+  }
+  .read-chapter-subtitle {
+    font-size: 0.85rem;
+  }
+  .read-toolbar {
+    width: 100%;
+    justify-content: space-between;
+    padding: 3px 6px;
+  }
+  .read-tool-btn,
+  .read-theme-btn {
+    padding: 4px 7px;
+    font-size: 0.76rem;
+  }
+  .read-theme-btn {
+    width: 26px;
+    height: 26px;
+  }
+
   .read-body {
-    padding: 26px 22px;
-    font-size: 1.02rem;
-    line-height: 1.8;
-    border-radius: 18px;
+    padding: 10px 0 20px;
   }
-  .read-block-heading {
-    font-size: 1.22rem;
+
+  .read-body.font-size-small {
+    font-size: 0.98rem;
+    line-height: 1.7;
   }
+  .read-body.font-size-medium {
+    font-size: 1.08rem;
+    line-height: 1.78;
+  }
+  .read-body.font-size-large {
+    font-size: 1.2rem;
+    line-height: 1.85;
+  }
+
+  .read-block-p {
+    text-align: left;
+  }
+
+  .read-callout-card {
+    padding: 16px 18px;
+    gap: 12px;
+    margin: 20px 0;
+    border-radius: 14px;
+  }
+  .read-callout-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .read-callout-title {
+    font-size: 0.96rem;
+  }
+  .read-callout-body {
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
   .read-image-item {
-    flex-basis: 140px;
+    flex-basis: 100%;
+    max-width: 100%;
   }
   .read-image-item img {
-    height: 130px;
+    height: 160px;
+  }
+
+  .read-footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    gap: 10px;
+  }
+
+  .read-page-indicator {
+    gap: 8px;
+  }
+  .read-page-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.82rem;
+  }
+  .read-page-label {
+    font-size: 0.6rem;
+  }
+  .read-page-total {
+    font-size: 0.82rem;
+  }
+
+  .read-nav-prev-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  .read-next-chapter-btn {
+    padding: 9px 18px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .read-page {
+    padding: 10px 12px 32px;
+  }
+  .read-chapter-title {
+    font-size: 1.15rem;
   }
 }
