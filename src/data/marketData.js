@@ -2,7 +2,7 @@ export const marketPacks = [
   {
     id: "irregular-verbs",
     name: "Irregular Verbs",
-    description: "Ingliz tilidagi eng ko'p ishlatiladigan noto'g'ri fe'llarning to'liq to'plami. V1, V2 va V3 shakllarini yozib mashq qilish uchun maxsus trenajyor ulanadi.",
+    description: "A comprehensive collection of the most frequently used English irregular verbs. Includes a dedicated trainer to practice writing V1, V2, and V3 forms.",
     icon: "📋",
     color: "linear-gradient(135deg, #14B8A6 0%, #06B6D4 100%)",
     level: "intermediate",
@@ -1004,7 +1004,7 @@ export const marketPacks = [
   {
     id: "phrasal-verbs",
     name: "Phrasal Verbs",
-    description: "Kundalik muloqotda va yozishda eng ko'p ishlatiladigan fe'l + old ko'makchi birikmalari (phrasal verbs) to'plami. Har biri ma'nosi, misoli va ajraladigan/ajralmasligi haqida qisqa izoh bilan.",
+    description: "A collection of the most common phrasal verbs used in everyday conversation and writing. Features detailed meanings, example sentences, and notes on separability.",
     icon: "🔗",
     color: "linear-gradient(135deg, #F59E0B 0%, #EF4444 100%)",
     level: "intermediate",
@@ -1138,7 +1138,7 @@ export const marketPacks = [
   {
     id: "collocations",
     name: "Collocations",
-    description: "Ingliz tilida tabiiy va ravon gapirish uchun eng ko'p ishlatiladigan so'z birikmalari (collocations) to'plami — fe'l+ot, sifat+ot, ravish+sifat va ot+ot qoliplari bilan.",
+    description: "A collection of essential collocations for natural and fluent English communication — featuring verb+noun, adjective+noun, adverb+adjective, and noun+noun patterns.",
     icon: "🧩",
     color: "linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%)",
     level: "intermediate",
@@ -1209,7 +1209,7 @@ export const marketPacks = [
   {
     id: "prepositions",
     name: "Prepositions",
-    description: "Joy, vaqt va harakatni bildiruvchi asosiy predloglar hamda fe'l/sifat bilan qat'iy birikadigan predlog iboralarining to'liq to'plami.",
+    description: "A complete collection of essential prepositions of place, time, and movement, alongside fixed prepositional phrases with verbs and adjectives.",
     icon: "🧭",
     color: "linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%)",
     level: "beginner",
@@ -1333,7 +1333,7 @@ export const marketPacks = [
   {
     id: "ielts-vocabulary-starter",
     name: "IELTS Vocabulary",
-    description: "IELTS akademik yozish va gapirish uchun eng ko'p ishlatiladigan so'zlar to'plami - ta'rif, sinonim, so'z oilasi va artikl bo'yicha maxsus IELTS Trainer bilan.",
+    description: "An essential vocabulary collection for IELTS Academic Writing and Speaking — complete with definitions, synonyms, word families, and a dedicated IELTS Trainer.",
     icon: "🎓",
     color: "linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)",
     level: "advanced",
@@ -1435,7 +1435,7 @@ export const marketPacks = [
   {
     id: "science",
     name: "Science",
-    description: "Silver Burdett Science darsligidagi bo'lim-bo'lim (chapter-by-chapter) qiyin ilmiy-biologik atamalar to'plami. Hozircha 12 ta bob qo'shilgan, qolganlari asta-sekin qo'shib boriladi.",
+    description: "A chapter-by-chapter collection of key scientific and biological terms from the Silver Burdett Science textbook. Features 12 chapters with more being added gradually.",
     icon: "🔬",
     color: "linear-gradient(135deg, #22C55E 0%, #0EA5E9 100%)",
     level: "intermediate",
