@@ -90,8 +90,20 @@ export default function WordTapPopover({
 
   useEffect(() => {
     cancelledRef.current = false;
-    setIsLoading(true);
     setLookupError(false);
+
+    // If word already exists in pack/data, display its data directly without searching internet dictionary API
+    if (existingWord && existingWord.translation) {
+      setTranslation(existingWord.translation);
+      setAlternate('');
+      setDefinition(existingWord.definition || '');
+      setPartOfSpeech(existingWord.partOfSpeech || '');
+      setExample(existingWord.example || '');
+      setIsLoading(false);
+      return;
+    }
+
+    setIsLoading(true);
     setTranslation('');
     setAlternate('');
     setDefinition('');
@@ -113,7 +125,7 @@ export default function WordTapPopover({
       .catch(() => { if (!cancelledRef.current) setLookupError(true); })
       .finally(() => { if (!cancelledRef.current) setIsLoading(false); });
     return () => { cancelledRef.current = true; };
-  }, [word, wordLangCode, translationLangCode]);
+  }, [word, wordLangCode, translationLangCode, existingWord]);
 
   const handleLangChange = (code) => {
     setTranslationLangCode(code);

@@ -434,11 +434,7 @@ export default function MixedPractice() {
                         data-gramm="false"
                         data-enable-grammarly="false"
                       />
-                      {!hasAnswered && (
-                        <button type="submit" className="btn btn-primary submit-btn">
-                          Check
-                        </button>
-                      )}
+                      <button type="submit" style={{ display: 'none' }} />
                     </form>
                   </div>
                 )}
@@ -485,44 +481,53 @@ export default function MixedPractice() {
                         data-gramm="false"
                         data-enable-grammarly="false"
                       />
-                      {!hasAnswered && (
-                        <button type="submit" className="btn btn-primary submit-btn">
-                          Check
-                        </button>
-                      )}
+                      <button type="submit" style={{ display: 'none' }} />
                     </form>
                   </div>
                 )}
               </div>
 
-              {/* Feedback footer */}
-              {hasAnswered && (
-                <motion.div
-                  className={`feedback-footer ${questions[currentIdx].isCorrect ? 'correct' : 'incorrect'}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <div className="feedback-content">
-                    <span className="feedback-icon">
-                      {questions[currentIdx].isCorrect
-                        ? <CheckCircle2 size={22} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
-                        : <XCircle size={22} strokeWidth={2.2} style={{ color: 'var(--error)' }} />}
-                    </span>
-                    <div className="feedback-text">
-                      <h4>{questions[currentIdx].isCorrect ? "Correct! Well done!" : "Incorrect!"}</h4>
-                      {!questions[currentIdx].isCorrect && (
-                        <p>
-                          Correct answer: <strong>{questions[currentIdx].word.word}</strong>
-                          {questions[currentIdx].word.translation && ` — ${questions[currentIdx].word.translation}`}
-                        </p>
-                      )}
-                    </div>
-                    <button className="btn btn-next" onClick={handleNext}>
-                      {currentIdx === questions.length - 1 ? 'View results' : 'Next →'}
-                    </button>
-                  </div>
-                </motion.div>
-              )}
+              {/* Feedback footer — always present to prevent layout shift */}
+              <div className={`feedback-footer ${hasAnswered ? (questions[currentIdx].isCorrect ? 'correct' : 'incorrect') : 'idle'}`}>
+                <div className="feedback-content">
+                  {!hasAnswered ? (
+                    questions[currentIdx].type === 'quiz' ? (
+                      <div className="feedback-hint-text">Select the correct translation</div>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-primary submit-btn"
+                        onClick={handleTextSubmit}
+                        disabled={!typedAnswer.trim()}
+                      >
+                        Check
+                      </button>
+                    )
+                  ) : (
+                    <>
+                      <div className="feedback-text-wrapper">
+                        <span className="feedback-icon">
+                          {questions[currentIdx].isCorrect
+                            ? <CheckCircle2 size={22} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
+                            : <XCircle size={22} strokeWidth={2.2} style={{ color: 'var(--error)' }} />}
+                        </span>
+                        <div className="feedback-text">
+                          <h4>{questions[currentIdx].isCorrect ? "Correct! Well done!" : "Incorrect!"}</h4>
+                          {!questions[currentIdx].isCorrect && (
+                            <p>
+                              Answer: <strong>{questions[currentIdx].word.word}</strong>
+                              {questions[currentIdx].word.translation && ` — ${questions[currentIdx].word.translation}`}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <button className="btn btn-next" onClick={handleNext}>
+                        {currentIdx === questions.length - 1 ? 'View results' : 'Next →'}
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
             </motion.div>
             </div>
           )}
