@@ -35,6 +35,7 @@ export default function PackDetail() {
 
   const [confusionPairs, setConfusionPairs] = useState([]);
   const marketSyncCheckedRef = useRef(false);
+  const topicRowRef = useRef(null);
   // Kept in the URL (not plain state) so it survives navigating away to
   // Practice and back - PracticePage reads the same `topic` param to scope
   // the session, and passes it back on the way out so the chip selection
@@ -56,6 +57,18 @@ export default function PackDetail() {
   }, [pack, words]);
 
   const displayedWords = topicFilter ? words.filter(w => w.topic === topicFilter) : words;
+
+  // Average mastery per topic, so each chapter chip can show at a glance how
+  // well the user knows that chapter's words (rendered as a background fill).
+  const topicMastery = useMemo(() => {
+    const map = {};
+    topics.forEach(topic => {
+      const topicWords = words.filter(w => w.topic === topic);
+      if (topicWords.length === 0) return;
+      map[topic] = Math.round(topicWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / topicWords.length);
+    });
+    return map;
+  }, [topics, words]);
 
   // One-time fetch, same pattern as the Dashboard's Memory Twin card.
   useEffect(() => {
@@ -125,10 +138,10 @@ export default function PackDetail() {
     });
   }, [pack, words, loading, bulkAddWords]);
 
-  // Restore the scroll position handleEditWord saved before leaving for the
-  // edit page - only once the real word list has painted (not the loading
-  // spinner, which is much shorter and would just clamp scrollY back to 0),
-  // and only the one time right after coming back.
+  // Restore the scroll position saveScrollPosition() saved before leaving
+  // for the edit page or Practice - only once the real word list has
+  // painted (not the loading spinner, which is much shorter and would just
+  // clamp scrollY back to 0), and only the one time right after coming back.
   useEffect(() => {
     if (!pack || loading) return;
     const key = `wordListScroll:${packId}`;
@@ -137,6 +150,26 @@ export default function PackDetail() {
     sessionStorage.removeItem(key);
     requestAnimationFrame(() => window.scrollTo(0, parseInt(saved, 10)));
   }, [pack, loading, packId]);
+
+  // The chapter chip row (.ielts-topic-filter-row) scrolls horizontally on
+  // its own, independent of the page's vertical scroll restored above. On a
+  // fresh mount - coming back from Practice, for instance - it always
+  // starts scrolled to the left, so a chapter picked from further along
+  // (Ch.07+) would otherwise leave the active chip hidden off-screen with
+  // no visible sign it's still selected. Sets row.scrollLeft directly
+  // (not scrollIntoView) so this can never also drag the page's own
+  // vertical scroll along with it and fight the restore above.
+  useEffect(() => {
+    if (!topicFilter || topics.length === 0) return;
+    const row = topicRowRef.current;
+    if (!row) return;
+    const activeChip = row.querySelector('.ielts-topic-chip.active');
+    if (!activeChip) return;
+    const rowRect = row.getBoundingClientRect();
+    const chipRect = activeChip.getBoundingClientRect();
+    const offset = (chipRect.left + chipRect.width / 2) - (rowRect.left + rowRect.width / 2);
+    row.scrollLeft += offset;
+  }, [topicFilter, topics]);
 
   const handleSaveWord = async (data) => {
     if (pack?.name === 'Irregular Verbs') return;
@@ -164,12 +197,17 @@ export default function PackDetail() {
     setEditingWord(null);
   };
 
+  // The word-edit pages AND Practice are separate routes, so this page fully
+  // unmounts and remounts on the way back from either - without saving where
+  // we were first, it would start over at the top of a long word list every
+  // time (see the matching restore effect above).
+  const saveScrollPosition = () => {
+    sessionStorage.setItem(`wordListScroll:${packId}`, String(window.scrollY));
+  };
+
   const handleEditWord = (word) => {
     if (pack?.name === 'Irregular Verbs') return;
-    // The word edit pages are a separate route, so this page fully unmounts
-    // and remounts on the way back - without saving where we were, it would
-    // start over at the top of a long word list every time.
-    sessionStorage.setItem(`wordListScroll:${packId}`, String(window.scrollY));
+    saveScrollPosition();
     if (pack?.type === 'ielts') {
       navigate(`/packs/${packId}/word/ielts/edit/${word.id}`);
       return;
@@ -268,15 +306,15 @@ export default function PackDetail() {
         <div className="pack-detail-actions">
           {pack.name === 'Irregular Verbs' ? (
             <>
-              <button 
-                className="btn btn-cards" 
-                onClick={() => navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=study`)}
+              <button
+                className="btn btn-cards"
+                onClick={() => { saveScrollPosition(); navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=study`); }}
               >
                 🃏 Flashcards
               </button>
               <button
                 className="btn btn-primary btn-mashq"
-                onClick={() => navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=practice&count=10`)}
+                onClick={() => { saveScrollPosition(); navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=practice&count=10`); }}
               >
                 ⚡ Practice
               </button>
@@ -284,11 +322,14 @@ export default function PackDetail() {
           ) : (
             <button
               className="btn btn-primary btn-mashq"
-              onClick={() => navigate(
-                topicFilter
-                  ? `/practice/packs/${packId}?topic=${encodeURIComponent(topicFilter)}`
-                  : `/practice/packs/${packId}`
-              )}
+              onClick={() => {
+                saveScrollPosition();
+                navigate(
+                  topicFilter
+                    ? `/practice/packs/${packId}?topic=${encodeURIComponent(topicFilter)}`
+                    : `/practice/packs/${packId}`
+                );
+              }}
             >
               🎮 Practice{topicFilter ? ` (${topicFilter})` : ''}
             </button>
@@ -334,7 +375,7 @@ export default function PackDetail() {
       )}
 
       {topics.length > 0 && (
-        <div className="ielts-topic-filter-row">
+        <div className="ielts-topic-filter-row" ref={topicRowRef}>
           <button
             type="button"
             className={`ielts-topic-chip ${topicFilter === null ? 'active' : ''}`}
@@ -347,9 +388,13 @@ export default function PackDetail() {
               key={topic}
               type="button"
               className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
+              style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
               onClick={() => setTopicFilter(topic)}
             >
-              {topic}
+              {topicMastery[topic] !== undefined && (
+                <span className="ielts-topic-chip-fill" aria-hidden="true" />
+              )}
+              <span className="ielts-topic-chip-label">{topic}</span>
             </button>
           ))}
         </div>

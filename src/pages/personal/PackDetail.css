@@ -111,6 +111,9 @@
 }
 
 .ielts-topic-chip {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   flex: 0 0 auto;
   white-space: nowrap;
   padding: 6px 14px;
@@ -121,7 +124,7 @@
   font-size: var(--font-xs);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: border-color 0.15s ease, color 0.15s ease;
 }
 
 .ielts-topic-chip:hover {
@@ -133,6 +136,28 @@
   background: rgba(124, 58, 237, 0.14);
   border-color: #7c3aed;
   color: #7c3aed;
+}
+
+/* Fills the chip's own background left-to-right, proportional to how well
+   the user knows that chapter's words - a mastery bar built into the chip
+   itself, so progress is visible without opening the chapter. */
+.ielts-topic-chip-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: var(--chip-mastery, 0%);
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.32), rgba(34, 197, 94, 0.18));
+  transition: width 0.4s ease;
+  pointer-events: none;
+}
+
+.ielts-topic-chip.active .ielts-topic-chip-fill {
+  background: linear-gradient(90deg, rgba(124, 58, 237, 0.38), rgba(124, 58, 237, 0.22));
+}
+
+.ielts-topic-chip-label {
+  position: relative;
+  z-index: 1;
 }
 
 .pack-type-badge {
