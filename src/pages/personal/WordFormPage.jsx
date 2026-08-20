@@ -54,6 +54,13 @@ export default function WordFormPage() {
   const [meaningsLoading, setMeaningsLoading] = useState(false);
   const [meaningsChecked, setMeaningsChecked] = useState(false);
   const [selectedMeaningId, setSelectedMeaningId] = useState(null);
+  const meaningsListRef = useRef(null);
+
+  useEffect(() => {
+    if (meaningsListRef.current) {
+      meaningsListRef.current.scrollTop = 0;
+    }
+  }, [otherMeanings]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -597,7 +604,7 @@ export default function WordFormPage() {
               )}
 
               {!meaningsLoading && otherMeanings.length > 0 && (
-                <div className="wfp-meanings-list">
+                <div className="wfp-meanings-list" ref={meaningsListRef}>
                   {otherMeanings.map(meaning => (
                     <button
                       type="button"
