@@ -1,5 +1,5 @@
 /* ========================================
-   WORD CARD — iOS HIG STYLE
+   WORD CARD — PREVENT TEXT OVERFLOW & CLEAN FLEX LAYOUT
    ======================================== */
 
 .word-card {
@@ -7,10 +7,9 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md) !important;
   padding: 16px var(--space-md);
-  padding-right: 80px; /* space for actions */
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   position: relative;
   box-shadow: var(--shadow);
@@ -20,59 +19,92 @@
   border-color: var(--accent-1);
 }
 
-.word-main {
+/* ---------- Header Row: Word Title (Left) & Badges/Actions (Right) ---------- */
+.word-card-header {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
 }
 
-.word-english {
+.word-title-group {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
   flex-wrap: wrap;
 }
 
 .word-english-text {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: -0.015em;
-  line-height: 1.2;
+  line-height: 1.25;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
-.word-translation {
-  color: var(--text-secondary);
-  font-size: var(--font-sm);
-  font-weight: 500;
+/* Audio pronounce button */
+.btn-speak {
+  background: rgba(168, 85, 247, 0.12);
+  border: none;
+  color: #c084fc;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
 }
 
-/* Mastery indicator - signal-strength bars, growing taller left to right;
-   filled count + color come from getMasteryLevel's bucket for this word.
-   Pinned to the same top-right corner .word-actions occupies, so it sits
-   flush at the card's true edge, not just the end of the text row. */
+.btn-speak:hover {
+  background: rgba(168, 85, 247, 0.24);
+  color: #e9d5ff;
+  transform: scale(1.06);
+}
+
+.btn-speak:active {
+  transform: scale(0.92);
+}
+
+/* Right side meta (POS, Mastery bars, Actions) */
+.word-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Part of Speech badge */
+.pos-badge {
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  padding: 3px 8px !important;
+  border-radius: 6px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #3b82f6 !important;
+}
+
+/* Mastery indicator bars */
 .word-mastery-signal {
-  position: absolute;
-  top: 16px;
-  right: 12px;
   display: flex;
   align-items: flex-end;
   gap: 2px;
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* The edit/delete buttons (two 28px icons + gap, ~60px wide) slide into this
-   same corner on hover, so push the signal clear of that full width - not
-   just far enough to no longer touch the nearest (edit) button. */
-.word-card:hover .word-mastery-signal {
-  transform: translateX(-80px);
 }
 
 .word-mastery-bar {
   width: 3px;
   border-radius: 1px;
   background: var(--border);
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .word-mastery-bar:nth-child(1) { height: 5px; }
@@ -84,96 +116,17 @@
   opacity: 1;
 }
 
-/* Part of Speech badge */
-.pos-badge {
-  font-size: 0.65rem !important;
-  font-weight: 700 !important;
-  padding: 2px 7px !important;
-  border-radius: 6px !important;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-/* Audio button */
-.btn-speak {
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-light);
-  color: var(--text-secondary);
-  cursor: pointer;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
+/* Actions Wrapper */
+.word-actions-wrap {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: all var(--transition-fast);
 }
 
-.btn-speak:hover {
-  background: var(--accent-1-dim);
-  color: var(--accent-1);
-  border-color: rgba(0, 162, 232, 0.2);
-}
-
-.btn-speak:active {
-  transform: scale(0.92);
-}
-
-/* Description & Examples */
-.word-details {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.word-def,
-.word-synonyms,
-.word-collocations,
-.word-family,
-.word-article {
-  font-size: var(--font-xs);
-  color: var(--text-muted);
-  line-height: 1.4;
-}
-
-.detail-label {
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.word-example {
-  font-size: var(--font-xs);
-  color: var(--text-secondary);
-  font-style: italic;
-  line-height: 1.4;
-  border-left: 2px solid var(--border);
-  padding-left: 8px;
-  margin-top: 2px;
-}
-
-.word-custom-sentence {
-  font-size: var(--font-xs);
-  color: var(--accent-2);
-  font-weight: 600;
-  margin-top: 4px;
-}
-
-/* ── Actions Row ────────────────────────── */
 .word-actions {
-  position: absolute;
-  top: 14px;
-  right: 12px;
   display: flex;
-  gap: var(--space-xs);
-  opacity: 0;
-  transform: translateX(14px);
-  transition: opacity 220ms cubic-bezier(0.22, 1, 0.36, 1), transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.word-card:hover .word-actions {
-  opacity: 1;
-  transform: translateX(0);
+  align-items: center;
+  gap: 4px;
 }
 
 .btn-action-icon {
@@ -212,15 +165,57 @@
   transform: scale(0.92);
 }
 
-/* ── Options menu ("...") — mobile only, see media query below ─────────
-   Desktop keeps the hover-revealed edit/delete pair above; touch devices
-   have no hover, so this single toggle button opens a small dropdown with
-   the same two actions instead. */
+/* Translation text */
+.word-translation {
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Details: Definition, Synonyms, Collocations, Family, Examples */
+.word-details {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.word-def,
+.word-synonyms,
+.word-collocations,
+.word-family,
+.word-article {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.detail-label {
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.word-example {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.45;
+  border-left: 2px solid #c084fc;
+  padding-left: 10px;
+  margin-top: 4px;
+}
+
+.word-custom-sentence {
+  font-size: 0.84rem;
+  color: #30d158;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Mobile options ("...") */
 .word-options {
   display: none;
-  position: absolute;
-  top: 14px;
-  right: 12px;
 }
 
 .word-options-btn {
@@ -244,7 +239,7 @@
   position: absolute;
   top: 34px;
   right: 0;
-  min-width: 160px;
+  min-width: 150px;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -276,36 +271,14 @@
   color: var(--error);
 }
 
-/* ── Mobile ────────────────────────────── */
-@media (max-width: 768px) {
-  .word-card {
-    padding: 14px var(--space-md);
-    padding-right: 52px;
-  }
-
-  /* Edit/delete have no hover to reveal them here, so they move into the
-     "..." menu below instead of sitting exposed (or invisible) on the card. */
+@media (max-width: 640px) {
   .word-actions {
     display: none;
   }
-
   .word-options {
     display: block;
   }
-
-  /* The "..." button (28px, no hover to react to) permanently occupies this
-     corner, so the signal sits permanently clear of it too - fixed in
-     place with no transition, since there's no hover here to animate from. */
-  .word-mastery-signal {
-    transform: translateX(-40px);
-    transition: none;
-  }
-
-  /* A tap on touch devices can leave :hover "stuck" until the next tap
-     elsewhere - without this, that higher-specificity desktop hover rule
-     (translateX(-80px), sized for the wider two-icon actions row) would
-     still win over the plain rule above and jerk the signal further left. */
-  .word-card:hover .word-mastery-signal {
-    transform: translateX(-40px);
+  .word-card-header {
+    flex-wrap: wrap;
   }
 }
