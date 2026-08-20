@@ -31,8 +31,7 @@
   padding-top: var(--space-sm);
 }
 
-.read-back-btn,
-.read-speak-btn {
+.read-back-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,12 +44,6 @@
   cursor: pointer;
   flex-shrink: 0;
   transition: all 0.2s ease;
-}
-
-.read-speak-btn.active {
-  background: rgba(124, 58, 237, 0.16);
-  border-color: #7c3aed;
-  color: #7c3aed;
 }
 
 .read-header-text {
@@ -119,15 +112,6 @@
   height: 6px;
   border-radius: 50%;
   background: var(--accent-1);
-}
-
-.read-sentence {
-  transition: background 0.2s ease;
-  border-radius: 4px;
-}
-
-.read-sentence.active {
-  background: rgba(124, 58, 237, 0.16);
 }
 
 .read-word {

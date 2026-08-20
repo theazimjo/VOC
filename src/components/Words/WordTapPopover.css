@@ -143,11 +143,37 @@
   justify-content: center;
 }
 
+.wtp-word-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
 .wtp-word {
   font-size: var(--font-sm);
   font-weight: 600;
   color: var(--text-secondary);
-  margin-bottom: 2px;
+}
+
+.wtp-speak-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: rgba(124, 58, 237, 0.12);
+  color: var(--accent-1);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.wtp-speak-btn:hover {
+  background: rgba(124, 58, 237, 0.22);
 }
 
 .wtp-translation {

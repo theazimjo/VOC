@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, X, Check, ChevronDown } from 'lucide-react';
-import { speechLanguages } from '../../utils/helpers';
+import { Plus, X, Check, ChevronDown, Volume2 } from 'lucide-react';
+import { speechLanguages, speakWord } from '../../utils/helpers';
 import { lookupWordFromDictionary, toShortLangCode } from '../../utils/dictionaryService';
 import IosSpinner from '../common/IosSpinner';
 import './WordTapPopover.css';
@@ -34,6 +34,7 @@ export default function WordTapPopover({
   anchorRect,
   packId,
   wordLangCode,
+  wordLocale,
   currentTopic,
   existingWords,
   onAdd,
@@ -79,6 +80,13 @@ export default function WordTapPopover({
     if (isLangMenuOpen) document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isLangMenuOpen]);
+
+  // Pronounce the tapped word/phrase as soon as the popover opens for it -
+  // hearing it is often the first thing you want, before the translation
+  // even loads.
+  useEffect(() => {
+    speakWord(word, wordLocale);
+  }, [word, wordLocale]);
 
   useEffect(() => {
     cancelledRef.current = false;
@@ -191,7 +199,18 @@ export default function WordTapPopover({
         </div>
 
         <div className="wtp-body">
-          <div className="wtp-word">{word}</div>
+          <div className="wtp-word-row">
+            <span className="wtp-word">{word}</span>
+            <button
+              type="button"
+              className="wtp-speak-btn"
+              onClick={() => speakWord(word, wordLocale)}
+              aria-label="Pronounce"
+              title="Pronounce"
+            >
+              <Volume2 size={14} />
+            </button>
+          </div>
           {isLoading ? (
             <div className="wtp-loading"><IosSpinner size={16} /></div>
           ) : lookupError ? (

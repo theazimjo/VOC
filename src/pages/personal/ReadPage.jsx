@@ -1,73 +1,14 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Volume2, VolumeX } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { scienceChapterText } from '../../data/scienceChapterText';
-import { speechLanguages } from '../../utils/helpers';
 import { toShortLangCode } from '../../utils/dictionaryService';
 import WordTapPopover from '../../components/Words/WordTapPopover';
 import IosSpinner from '../../components/common/IosSpinner';
 import './ReadPage.css';
-
-function splitSentences(text) {
-  return text.split(/(?<=[.!?])\s+/).filter(Boolean);
-}
-
-// Google Translate's own "listen" endpoint (translate.google.com uses it
-// itself, no API key) - real Google TTS voices, noticeably clearer than the
-// browser's built-in speechSynthesis voices, which vary wildly in quality
-// by OS. It's a plain audio URL (not fetch/XHR), so no CORS is needed to
-// play it via an <audio> element - only reading its raw bytes would require
-// CORS, and playback doesn't do that. It caps out around ~200 characters
-// per request, so longer sentences are chunked first.
-const GOOGLE_TTS_ENDPOINT = 'https://translate.google.com/translate_tts';
-const TTS_MAX_CHARS = 190;
-
-function chunkForTTS(text) {
-  if (text.length <= TTS_MAX_CHARS) return [text];
-  const chunks = [];
-  let remaining = text.trim();
-  while (remaining.length > TTS_MAX_CHARS) {
-    const window = remaining.slice(0, TTS_MAX_CHARS);
-    const clauseBoundary = Math.max(window.lastIndexOf(', '), window.lastIndexOf('; '));
-    let splitAt = clauseBoundary > 40 ? clauseBoundary + 1 : window.lastIndexOf(' ');
-    if (splitAt <= 0) splitAt = TTS_MAX_CHARS;
-    chunks.push(remaining.slice(0, splitAt).trim());
-    remaining = remaining.slice(splitAt).trim();
-  }
-  if (remaining) chunks.push(remaining);
-  return chunks;
-}
-
-// Resolves once playback finishes, rejects if Google's endpoint can't be
-// reached/played (network error, autoplay block, etc.) so the caller can
-// fall back to the browser's own voice for that one chunk.
-function playGoogleTTS(text, lang, audioRef) {
-  return new Promise((resolve, reject) => {
-    const url = `${GOOGLE_TTS_ENDPOINT}?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${lang}&client=tw-ob`;
-    const audio = new Audio(url);
-    audioRef.current = audio;
-    audio.onended = () => resolve();
-    audio.onerror = () => reject(new Error('google-tts-failed'));
-    audio.play().catch(() => reject(new Error('google-tts-play-blocked')));
-  });
-}
-
-function playBrowserTTS(text, lang, voiceLangPrefix) {
-  return new Promise((resolve) => {
-    if (!('speechSynthesis' in window)) { resolve(); return; }
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang;
-    const voices = window.speechSynthesis.getVoices();
-    const voice = voices.find(v => v.lang.startsWith(voiceLangPrefix));
-    if (voice) utterance.voice = voice;
-    utterance.onend = () => resolve();
-    utterance.onerror = () => resolve();
-    window.speechSynthesis.speak(utterance);
-  });
-}
 
 // Chapter text can mark a multi-word expression (e.g. a phrasal verb like
 // "carry out") as `{{carry out}}` so it reads as one tappable unit instead
@@ -123,10 +64,6 @@ export default function ReadPage() {
   const [packLoading, setPackLoading] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
   const [tapState, setTapState] = useState(null); // { word, anchorRect } | null
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [activeSentenceIndex, setActiveSentenceIndex] = useState(null);
-  const speechCancelledRef = useRef(false);
-  const currentAudioRef = useRef(null);
 
   useEffect(() => {
     const fetchPack = async () => {
@@ -167,23 +104,6 @@ export default function ReadPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageIndex]);
 
-  useEffect(() => {
-    return () => {
-      speechCancelledRef.current = true;
-      if (currentAudioRef.current) currentAudioRef.current.pause();
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    };
-  }, []);
-
-  // Stop any speech in progress whenever the page changes.
-  useEffect(() => {
-    speechCancelledRef.current = true;
-    if (currentAudioRef.current) currentAudioRef.current.pause();
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    setIsSpeaking(false);
-    setActiveSentenceIndex(null);
-  }, [pageIndex]);
-
   const page = useMemo(() => chapter?.pages[pageIndex] || [], [chapter, pageIndex]);
 
   // Words already saved under this chapter, so the reading text can
@@ -195,20 +115,7 @@ export default function ReadPage() {
     );
   }, [words, topic]);
 
-  // Flattened list of every sentence on the current page (for read-aloud
-  // chaining and for matching against the rendered sentence spans' indices).
-  const pageSentences = useMemo(() => {
-    const list = [];
-    page.forEach((block, blockIdx) => {
-      splitSentences(block.text).forEach((sentence) => {
-        list.push({ blockIdx, text: sentence });
-      });
-    });
-    return list;
-  }, [page]);
-
   const wordLangCode = toShortLangCode(pack?.language || 'en-US');
-  const speechLangMeta = speechLanguages.find(l => l.code === (pack?.language || 'en-US'));
 
   const handleWordTap = useCallback((word, anchorEl) => {
     if (!word) return;
@@ -243,45 +150,6 @@ export default function ReadPage() {
     }
   }, [addWord, updateWord, topic]);
 
-  const stopSpeaking = () => {
-    speechCancelledRef.current = true;
-    if (currentAudioRef.current) {
-      currentAudioRef.current.pause();
-      currentAudioRef.current = null;
-    }
-    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    setIsSpeaking(false);
-    setActiveSentenceIndex(null);
-  };
-
-  const startSpeaking = async () => {
-    if (pageSentences.length === 0) return;
-    speechCancelledRef.current = false;
-    setIsSpeaking(true);
-
-    const lang = speechLangMeta?.code || 'en-US';
-
-    for (let i = 0; i < pageSentences.length; i++) {
-      if (speechCancelledRef.current) break;
-      setActiveSentenceIndex(i);
-      const chunks = chunkForTTS(pageSentences[i].text);
-      for (const chunk of chunks) {
-        if (speechCancelledRef.current) break;
-        try {
-          await playGoogleTTS(chunk, wordLangCode, currentAudioRef);
-        } catch {
-          if (speechCancelledRef.current) break;
-          await playBrowserTTS(chunk, lang, wordLangCode);
-        }
-      }
-    }
-
-    if (!speechCancelledRef.current) {
-      setIsSpeaking(false);
-      setActiveSentenceIndex(null);
-    }
-  };
-
   if (packLoading) {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
@@ -306,8 +174,6 @@ export default function ReadPage() {
   const isLastPage = pageIndex >= totalPages - 1;
   const isFirstPage = pageIndex <= 0;
 
-  let sentenceCursor = -1;
-
   return (
     <motion.div className="read-page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <header className="read-header">
@@ -322,35 +188,14 @@ export default function ReadPage() {
           <h1>{chapter.title}</h1>
           <p>Page {pageIndex + 1} / {totalPages}</p>
         </div>
-        <button
-          className={`read-speak-btn ${isSpeaking ? 'active' : ''}`}
-          onClick={isSpeaking ? stopSpeaking : startSpeaking}
-          aria-label="Read aloud"
-        >
-          {isSpeaking ? <VolumeX size={18} /> : <Volume2 size={18} />}
-        </button>
       </header>
 
       <div className="read-body">
-        {page.map((block, blockIdx) => {
-          const sentences = splitSentences(block.text);
-          return (
-            <div className={`read-block read-block-${block.type}`} key={blockIdx}>
-              {sentences.map((sentence, sIdx) => {
-                sentenceCursor += 1;
-                const globalIdx = sentenceCursor;
-                return (
-                  <span
-                    key={sIdx}
-                    className={`read-sentence ${activeSentenceIndex === globalIdx ? 'active' : ''}`}
-                  >
-                    <WordTokens text={sentence} onWordTap={handleWordTap} knownWords={knownWords} />{' '}
-                  </span>
-                );
-              })}
-            </div>
-          );
-        })}
+        {page.map((block, blockIdx) => (
+          <div className={`read-block read-block-${block.type}`} key={blockIdx}>
+            <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
+          </div>
+        ))}
       </div>
 
       <footer className="read-footer">
@@ -383,6 +228,7 @@ export default function ReadPage() {
             anchorRect={tapState.anchorRect}
             packId={packId}
             wordLangCode={wordLangCode}
+            wordLocale={pack?.language || 'en-US'}
             currentTopic={topic}
             existingWords={words}
             onAdd={handleAddWord}
