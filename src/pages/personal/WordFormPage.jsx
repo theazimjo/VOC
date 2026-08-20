@@ -266,9 +266,22 @@ export default function WordFormPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.word, formData.translation, isLookingUp, translationLangCode]);
 
-  // Checked live against words already loaded in memory (no network call),
-  // so the warning shows while typing instead of surprising the user only
-  // after they've filled out the whole form and hit save.
+  const [isMeaningsDropdownOpen, setIsMeaningsDropdownOpen] = useState(false);
+  const meaningsDropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (meaningsDropdownRef.current && !meaningsDropdownRef.current.contains(e.target)) {
+        setIsMeaningsDropdownOpen(false);
+      }
+    };
+    if (isMeaningsDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMeaningsDropdownOpen]);
+
+  // Everyday duplicate check...
   const trimmedWord = formData.word.trim().toLowerCase();
   const isDuplicate = !isEdit && trimmedWord.length > 0
     && words.some(w => (w.word || '').trim().toLowerCase() === trimmedWord);
@@ -282,11 +295,6 @@ export default function WordFormPage() {
       } else {
         await addWord(formData);
       }
-      // Stay on the form instead of navigating away - adding vocabulary is
-      // almost always a "several words in a row" task, so bouncing back to
-      // the pack after every single word just adds an extra click/re-open
-      // for the next one. A toast confirms the save; the add form also
-      // resets and refocuses so the next word can be typed immediately.
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 2500);
       if (!isEdit) {
@@ -313,9 +321,6 @@ export default function WordFormPage() {
     e.preventDefault();
     if (!formData.word.trim() || !formData.translation.trim() || isSubmitting) return;
     if (pack?.name === 'Irregular Verbs') return;
-
-    // Duplicates are already flagged inline as the user types (see
-    // isDuplicate above) - saving anyway is a deliberate, informed choice.
     await saveWord();
   };
 
@@ -510,128 +515,143 @@ export default function WordFormPage() {
             </div>
           </div>
 
-          <div className="wfp-columns">
-            <div className="wfp-left-col">
-              <div className="wfp-more-toggle">
-                <button
-                  type="button"
-                  className="btn-more-options-page"
-                  onClick={() => setShowMore(!showMore)}
-                >
-                  {showMore ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                  <span>{showMore ? 'Show less' : 'More details (definition, example, etc.)'}</span>
-                </button>
-              </div>
-
-              {showMore && (
-                <div className="wfp-more-fields">
-                  <div className="input-group">
-                    <label>Part of speech</label>
-                    <select
-                      className="select"
-                      value={formData.partOfSpeech}
-                      onChange={e => setFormData({ ...formData, partOfSpeech: e.target.value })}
-                    >
-                      {partOfSpeechOptions.map(pos => (
-                        <option key={pos.value} value={pos.value}>{pos.label}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="input-group">
-                    <label>Definition</label>
-                    <input
-                      type="text"
-                      className="input"
-                      value={formData.definition}
-                      onChange={e => setFormData({ ...formData, definition: e.target.value })}
-                      placeholder="The word's definition or explanation"
-                      maxLength={1000}
-                    />
-                  </div>
-
-                  <div className="input-group">
-                    <label>Example sentence</label>
-                    <textarea
-                      className="textarea"
-                      value={formData.example}
-                      onChange={e => setFormData({ ...formData, example: e.target.value })}
-                      placeholder="A sentence using the word"
-                      rows={3}
-                      maxLength={1500}
-                    />
-                  </div>
-
-                  <div className="input-group">
-                    <label>Your own sentence</label>
-                    <textarea
-                      className="textarea"
-                      value={formData.customSentence}
-                      onChange={e => setFormData({ ...formData, customSentence: e.target.value })}
-                      placeholder="Write your own sentence to move the word into active memory"
-                      rows={3}
-                      maxLength={1500}
-                    />
-                  </div>
-
-                  <div className="input-group">
-                    <label>Notes</label>
-                    <input
-                      type="text"
-                      className="input"
-                      value={formData.notes}
-                      onChange={e => setFormData({ ...formData, notes: e.target.value })}
-                      placeholder="Synonyms, antonyms, or other notes"
-                      maxLength={800}
-                    />
-                  </div>
-                </div>
-              )}
+          {/* Symmetrical 2-column secondary row: More details (left) & Other meanings dropdown picker (right) */}
+          <div className="wfp-secondary-row">
+            <div className="wfp-more-toggle">
+              <button
+                type="button"
+                className="btn-more-options-page"
+                onClick={() => setShowMore(!showMore)}
+              >
+                {showMore ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                <span>{showMore ? 'Show less' : 'More details (definition, example, etc.)'}</span>
+              </button>
             </div>
 
-            <div className="wfp-meanings-panel">
-              <div className="wfp-meanings-header">
-                <span>Other meanings</span>
-                {otherMeanings.length > 0 && <span className="wfp-meanings-count">{otherMeanings.length}</span>}
-              </div>
-              <p className="wfp-meanings-hint">Tap a meaning to use it as this word's translation</p>
-
-              {meaningsLoading && (
-                <div className="wfp-meanings-loading">
-                  <IosSpinner size={16} />
-                  <span>Looking up other meanings...</span>
+            <div className="wfp-compact-meanings" ref={meaningsDropdownRef}>
+              {meaningsLoading ? (
+                <div className="wfp-compact-loading">
+                  <IosSpinner size={14} />
+                  <span>Looking up meanings...</span>
                 </div>
-              )}
+              ) : otherMeanings.length > 0 ? (
+                <div className="wfp-compact-picker-wrap">
+                  <button
+                    type="button"
+                    className={`wfp-compact-btn ${isMeaningsDropdownOpen ? 'active' : ''}`}
+                    onClick={() => setIsMeaningsDropdownOpen(prev => !prev)}
+                  >
+                    <span className="wfp-compact-title">Other meanings:</span>
+                    {otherMeanings[0].partOfSpeech && (
+                      <span className="wfp-compact-pos">{otherMeanings[0].partOfSpeech}</span>
+                    )}
+                    <span className="wfp-compact-preview">{otherMeanings[0].translation}</span>
+                    {otherMeanings.length > 1 && (
+                      <span className="wfp-compact-count">+{otherMeanings.length - 1}</span>
+                    )}
+                    <ChevronDown size={14} className={`wfp-compact-chevron ${isMeaningsDropdownOpen ? 'open' : ''}`} />
+                  </button>
 
-              {!meaningsLoading && otherMeanings.length > 0 && (
-                <div className="wfp-meanings-list" ref={meaningsListRef}>
-                  {otherMeanings.map(meaning => (
-                    <button
-                      type="button"
-                      key={meaning.id}
-                      className={`wfp-meaning-card ${selectedMeaningId === meaning.id ? 'selected' : ''}`}
-                      onClick={() => handleSelectMeaning(meaning)}
-                    >
-                      <div className="wfp-meaning-top">
-                        {meaning.partOfSpeech && <span className="wfp-meaning-pos">{meaning.partOfSpeech}</span>}
-                        {selectedMeaningId === meaning.id && <Check size={14} className="wfp-meaning-check" />}
+                  {isMeaningsDropdownOpen && (
+                    <div className="wfp-meanings-dropdown">
+                      <div className="wfp-meanings-dropdown-header">
+                        <span>Select a meaning to set as translation</span>
                       </div>
-                      <span className="wfp-meaning-translation">{meaning.translation}</span>
-                      {meaning.definition && <span className="wfp-meaning-text">{meaning.definition}</span>}
-                    </button>
-                  ))}
+                      <div className="wfp-meanings-dropdown-list">
+                        {otherMeanings.map(meaning => (
+                          <button
+                            type="button"
+                            key={meaning.id}
+                            className={`wfp-meaning-option ${selectedMeaningId === meaning.id ? 'selected' : ''}`}
+                            onClick={() => {
+                              handleSelectMeaning(meaning);
+                              setIsMeaningsDropdownOpen(false);
+                            }}
+                          >
+                            <div className="wfp-meaning-option-top">
+                              {meaning.partOfSpeech && <span className="wfp-meaning-pos">{meaning.partOfSpeech}</span>}
+                              <span className="wfp-meaning-option-trans">{meaning.translation}</span>
+                              {selectedMeaningId === meaning.id && <Check size={14} className="wfp-meaning-check" />}
+                            </div>
+                            {meaning.definition && <div className="wfp-meaning-option-def">{meaning.definition}</div>}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-
-              {!meaningsLoading && meaningsChecked && otherMeanings.length === 0 && (
-                <p className="wfp-meanings-empty">No other meanings found for this word.</p>
-              )}
-
-              {!meaningsLoading && !meaningsChecked && (
-                <p className="wfp-meanings-empty">Look up a word above to see its other meanings.</p>
+              ) : meaningsChecked ? (
+                <div className="wfp-compact-disabled">No other meanings found</div>
+              ) : (
+                <div className="wfp-compact-disabled">Other meanings (look up a word)</div>
               )}
             </div>
           </div>
+
+          {showMore && (
+            <div className="wfp-more-fields">
+              <div className="input-group">
+                <label>Part of speech</label>
+                <select
+                  className="select"
+                  value={formData.partOfSpeech}
+                  onChange={e => setFormData({ ...formData, partOfSpeech: e.target.value })}
+                >
+                  {partOfSpeechOptions.map(pos => (
+                    <option key={pos.value} value={pos.value}>{pos.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="input-group">
+                <label>Definition</label>
+                <input
+                  type="text"
+                  className="input"
+                  value={formData.definition}
+                  onChange={e => setFormData({ ...formData, definition: e.target.value })}
+                  placeholder="The word's definition or explanation"
+                  maxLength={1000}
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Example sentence</label>
+                <textarea
+                  className="textarea"
+                  value={formData.example}
+                  onChange={e => setFormData({ ...formData, example: e.target.value })}
+                  placeholder="A sentence using the word"
+                  rows={3}
+                  maxLength={1500}
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Your own sentence</label>
+                <textarea
+                  className="textarea"
+                  value={formData.customSentence}
+                  onChange={e => setFormData({ ...formData, customSentence: e.target.value })}
+                  placeholder="Write your own sentence to move the word into active memory"
+                  rows={3}
+                  maxLength={1500}
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Notes</label>
+                <input
+                  type="text"
+                  className="input"
+                  value={formData.notes}
+                  onChange={e => setFormData({ ...formData, notes: e.target.value })}
+                  placeholder="Synonyms, antonyms, or other notes"
+                  maxLength={800}
+                />
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Bottom Action Footer */}

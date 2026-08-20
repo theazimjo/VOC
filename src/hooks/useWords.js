@@ -76,18 +76,43 @@ export function useWords(collectionType, collectionId) {
         wordsRef,
         (snapshot) => {
           const wordsData = [];
+          const seenWords = new Set();
+          const duplicatesToRemove = [];
+
           snapshot.forEach((childSnap) => {
-            wordsData.push({
-              id: childSnap.key,
-              ...childSnap.val()
-            });
+            const val = childSnap.val();
+            const norm = (val?.word || '').trim().toLowerCase();
+
+            if (norm && seenWords.has(norm)) {
+              duplicatesToRemove.push(childSnap.key);
+            } else {
+              if (norm) seenWords.add(norm);
+              wordsData.push({
+                id: childSnap.key,
+                ...val
+              });
+            }
           });
+
+          // Clean up duplicate entries from RTDB in background
+          if (duplicatesToRemove.length > 0 && user && collectionId) {
+            duplicatesToRemove.forEach(dupKey => {
+              remove(ref(db, `users/${user.uid}/words/${collectionId}/${dupKey}`)).catch(() => {});
+            });
+            try {
+              const wordCountRef = getWordCountRef();
+              if (wordCountRef) {
+                runTransaction(wordCountRef, (count) => Math.max(0, (count || 0) - duplicatesToRemove.length)).catch(() => {});
+              }
+            } catch (e) {
+              console.warn("Error updating word count after deduplication:", e);
+            }
+          }
 
           // Sort by addedAt descending
           wordsData.sort((a, b) => new Date(b.addedAt || 0) - new Date(a.addedAt || 0));
 
-          // Cache the raw (undecayed) data so re-hydration on next load
-          // recomputes decay against the fresh current time, not a stale one.
+          // Cache raw data
           localStorage.setItem(cacheKey, JSON.stringify(wordsData));
 
           setWords(decayWordsMastery(wordsData));
@@ -106,13 +131,34 @@ export function useWords(collectionType, collectionId) {
       cancelled = true;
       unsubscribe();
     };
-  }, [user, collectionType, collectionId, getWordsRef]);
+  }, [user, collectionType, collectionId, getWordsRef, getWordCountRef]);
 
   // Add a new word with SM-2 initial data
   const addWord = useCallback(
     async (data) => {
       const wordsRef = getWordsRef();
       if (!wordsRef) return null;
+
+      const targetText = (data.word || '').trim().toLowerCase();
+
+      // Check if word already exists in this pack (case-insensitive)
+      const existing = targetText
+        ? words.find(w => (w.word || '').trim().toLowerCase() === targetText)
+        : null;
+
+      if (existing) {
+        // Update existing word instead of creating a duplicate key!
+        const existingRef = ref(db, `users/${user.uid}/words/${collectionId}/${existing.id}`);
+        await update(existingRef, {
+          translation: data.translation || existing.translation || '',
+          definition: data.definition || existing.definition || '',
+          example: data.example || existing.example || '',
+          notes: data.notes || existing.notes || '',
+          partOfSpeech: data.partOfSpeech || existing.partOfSpeech || 'noun',
+          topic: data.topic || existing.topic || ''
+        });
+        return existing.id;
+      }
 
       const newWordRef = push(wordsRef);
       const wordData = {
@@ -123,9 +169,6 @@ export function useWords(collectionType, collectionId) {
         notes: data.notes || '',
         customSentence: data.customSentence || '',
         partOfSpeech: data.partOfSpeech || 'noun',
-        // IELTS-pack-only fields - always written with a safe '' default so
-        // they're harmless no-ops for every default-pack word (see the
-        // "IELTS Pack Type" plan).
         synonyms: data.synonyms || '',
         collocations: data.collocations || '',
         nounForm: data.nounForm || '',
@@ -144,8 +187,6 @@ export function useWords(collectionType, collectionId) {
 
       await set(newWordRef, wordData);
 
-      // Increment wordCount via transaction (touches only the counter leaf,
-      // not the whole pack + all its words)
       try {
         const wordCountRef = getWordCountRef();
         if (wordCountRef) {
@@ -157,7 +198,7 @@ export function useWords(collectionType, collectionId) {
 
       return newWordRef.key;
     },
-    [getWordsRef, getWordCountRef]
+    [getWordsRef, getWordCountRef, words, user, collectionId]
   );
 
   // Update a word (partial update)
