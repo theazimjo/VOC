@@ -119,6 +119,13 @@
 .personal-bottom-nav-label {
   line-height: 1;
   transition: color 0.2s ease;
+  white-space: nowrap;
+  font-size: 0.62rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  padding: 0 2px;
+  text-align: center;
 }
 
 /* ── Hover (Desktop Touch Preview) ─────────── */

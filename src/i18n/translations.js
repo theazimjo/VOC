@@ -1607,7 +1607,7 @@ export const translations = {
 
   uz: {
     nav: {
-      dashboard: 'Boshqaruv paneli',
+      dashboard: 'Boshqaruv',
       library: 'Kutubxona',
       grammar: 'Grammatika',
       lab: 'Laboratoriya',
@@ -1714,7 +1714,7 @@ export const translations = {
     },
     library: {
       myPacks: "Mening to'plamlarim",
-      market: "Bozor",
+      market: "Market",
       loading: "Yuklanmoqda...",
       back: "Orqaga",
       editFolder: "Papkani tahrirlash",
@@ -1722,7 +1722,7 @@ export const translations = {
       emptyFolderHint: "Bu papkaga to'plam qo'shish uchun quyidagi + tugmasini bosing.",
       newFolder: "+ Yangi papka",
       noPacks: "To'plamlar topilmadi",
-      noPacksHint: "Mavzu bo'yicha so'z to'plamlari yarating yoki Bozordan yuklab oling.",
+      noPacksHint: "Mavzu bo'yicha so'z to'plamlari yarating yoki Marketdan yuklab oling.",
       words: "{count} ta so'z",
       installing: "⌛ O'rnatilmoqda...",
       updating: "⌛ Yangilanmoqda...",
