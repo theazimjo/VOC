@@ -1421,4 +1421,200 @@ export const scienceChapterText = {
       ],
     ]
   },
+  "Ch.13 · Support and Movement of the Body": {
+    title: "Support and Movement of the Body",
+    pages: [
+      [
+        { type: 'heading', text: 'Chapter 13 · Support and Movement of the Body' },
+        { type: 'p', text: "Have you ever played volleyball? Have you ever thought about how your body moves when you run or jump up to hit the ball? Every time your body moves, dozens of muscles and bones are put into action. Muscles and bones work together to move your whole body when you play volleyball. And muscles and bones work together to move your fingers, hand, and arm when you write." },
+        { type: 'p', text: "In this chapter you will learn about bones and muscles. You will learn what they look like and how they work together. You will also learn how to keep them healthy." }
+      ],
+      [
+        { type: 'heading', text: 'Your Body\'s Framework' },
+        { type: 'p', text: "What jobs does the skeleton do? Some animals have a soft body, and the water they live in helps support it. Some animals have a hard outer covering that supports and protects their body. Still other living things have bones inside their body — these bones make up the skeleton. The skeleton is the system of bones that supports and protects the body and the organs inside it. The skeleton is also called the skeletal system." },
+        { type: 'p', text: "The skeleton of your body can be compared with the steel framework of a building. The steel beams give a building its shape and support, and the skeletal system forms the framework of the body in much the same way — it supports the body and gives it shape. But it does other jobs too: some parts of the skeleton protect soft parts of the body, such as the brain, heart, and lungs." },
+        { type: 'p', text: "The skeleton is different from the framework of a building in an important way. The steel framework of a building cannot move, but the skeleton can move, because muscles are attached to the bones of the skeleton and make the bones move. In fact, the skeleton has 206 bones that help it do its jobs. There are two kinds of bones in the head — the bones of the face and the bones that protect the brain — and together they are joined to form the skull." }
+      ],
+      [
+        { type: 'p', text: "The skeleton in the middle part of the body is made up of the backbone and ribs. As you learned earlier, the backbone is made of many small bones called vertebrae. These bones protect many nerves in your back and also help support your body. Some of the bones of the backbone are attached to ribs — there are 12 pairs of them — and the ribs protect organs inside the body, such as the lungs." },
+        { type: 'p', text: "The shoulders, arms, hips, and legs are also parts of the skeleton. The shoulders are made of flat bones: the collarbones and the shoulder blades. The hips are made of bones in the shape of a bowl, and this bowl shape helps support and protect the organs inside the body." }
+      ],
+      [
+        { type: 'p', text: "Long bones make up the arms and legs. The center of these bones contains a soft material called bone marrow, which produces new blood cells — another important job of the skeletal system." },
+        { type: 'p', text: "The leg bones are longer and heavier than the bones in the arm. The strength of the leg bones allows them to hold the body upright when walking or running. The long bone in the thigh is called the femur. It is the longest and heaviest bone in the body." }
+      ],
+      [
+        { type: 'p', text: "When you were born, your skeleton was made of a soft, bonelike material that bends, called cartilage. As you grow older, much of this cartilage changes to hard bone. Not all the cartilage in the body changes to bone, though — the tip of your nose and your ears are made of cartilage." },
+        { type: 'p', text: "Cartilage is important in other places in your body too. The backbone is made of many small bones, and nerves travel out from between these bones. If the bones were able to rub against one another, they would also rub against the nerves, which would be very painful — but pads of cartilage between the bones prevent this. Pads of cartilage are also found at the ends of the long bones in your arms and legs, where they act as cushions, or shock absorbers." },
+        { type: 'sidebar', text: "Do you know? Some scientists believe that human cartilage may one day be used to prevent, treat, and even cure some diseases. Research shows that cartilage contains a special substance called anti-invasion factor (AIF). Scientists have removed AIF from cartilage and found that it stops the growth of cancer — they believe it may also prevent blindness caused by diabetes and even cure some gum diseases. Scientists hope that they will one day be able to produce AIF in the laboratory." }
+      ],
+      [
+        { type: 'heading', text: 'Where Bones Meet' },
+        { type: 'p', text: "What are four kinds of joints? Parts of your skeleton can move because of the way bones are joined together. The place where two or more bones are joined together is called a joint. Most joints in the body allow the body to move. Bones are held together at joints by strong cords of tissue called ligaments." },
+        { type: 'p', text: "The kind of joint that allows the most movement of bones is a ball-and-socket joint. This joint is formed by a round knob at the end of one bone, which fits into a hollow cavity, or socket, at the end of another bone — the joint that connects the upper arm to the shoulder works this way, which is why your arm can move in so many directions." }
+      ],
+      [
+        { type: 'p', text: "A ball-and-socket joint allows bones to move in many directions, but some bones can only move back and forth, because they are connected by another kind of joint. A hinge joint allows bones to move back and forth — your knee is a hinge joint." },
+        { type: 'p', text: "Your skull is attached to your backbone by a pivot joint, between the first two vertebrae, and a pivot joint allows for movement from side to side — this is what lets you turn your head. The bones of the skull, on the other hand, are joined together but cannot move at all. The kind of joint between bones that cannot move is called a fixed joint." }
+      ],
+      [
+        { type: 'heading', text: 'Muscles Move Bones' },
+        { type: 'p', text: "How do muscles move bones? Bones form the framework of your body, and bones are able to move because muscles move them. The whole skeletal system is covered with muscles, made of soft but strong tissue. The muscles in the body make up the muscular system, and you have more than 600 of them." },
+        { type: 'p', text: "Muscles are attached to bones by tough cords called tendons — you can feel tendons in your hand and wrist, and also the big tendon that connects the large muscle in the calf of your leg to your heel." }
+      ],
+      [
+        { type: 'p', text: "Most muscles of the body move bones by contracting. When a muscle contracts, it becomes shorter and thicker; when a muscle relaxes, it becomes longer and thinner. Muscle is the only kind of tissue that can contract and relax, and this contracting and relaxing is what causes movement." },
+        { type: 'p', text: "Most muscles that move bones work in pairs. One muscle pulls a bone in one direction, and the other muscle of the pair pulls it in the opposite direction — because muscles can only pull, never push. To make a bone move, one muscle contracts and pulls the bone, while the other muscle of the pair relaxes." }
+      ],
+      [
+        { type: 'p', text: "You can observe how pairs of muscles contract and relax to move a bone in your own body. Place your left hand over the muscle on the top of your upper right arm, then move the lower half of your right arm upward. You should feel the muscle in your right arm bulge — it bulges because it is contracting, pulling the bones in your lower arm upward. Now feel the muscle on the underside of your right arm; it should feel soft, because it is relaxed." },
+        { type: 'p', text: "Now lower your arm and feel the same pair of muscles again. Which one contracts this time, and which one relaxes?" }
+      ],
+      [
+        { type: 'activity', text: "Hands-on: What happens when muscles become tired? Copy a paragraph from any page in a book, then move the fingers of your writing hand quickly, as though playing a piano, until your fingers or arm feel tired. Copy the same paragraph again and compare your handwriting in the two samples — was it harder to write when your fingers were tired, and how did the samples differ? Next, while seated, raise one leg and record how long you can keep it raised before it becomes tired. Rest for 30 seconds, then repeat immediately. How does the second time compare with the first? What do the results tell you about how tired muscles affect your ability to do a task, both in quality and in how long you can keep it up?" }
+      ],
+      [
+        { type: 'heading', text: 'Two Groups of Muscles' },
+        { type: 'p', text: "What are two groups of muscles? You can control some of the muscles in your body — the ones that help you walk, run, sit down, get up, or jump. The muscles you can control are called voluntary muscles. Voluntary muscles are attached to bones and other muscles, and they move these bones and muscles." },
+        { type: 'p', text: "Muscles that you cannot control are called involuntary muscles, and you need them to stay alive. Suppose you had to control your own heartbeat — you would have to think about moving your heart muscle every moment of your life. Other involuntary muscles are in the stomach and intestines, where they move food along; involuntary muscles also move blood through the blood vessels, and even cause you to blush or turn pale." }
+      ],
+      [
+        { type: 'sidebar', text: "Try this: Are your eyelids controlled by both voluntary and involuntary muscles? Look at your eyes in a mirror and see how long you can go without blinking — then blink four times in a row on purpose. Which kind of muscle stops you from blinking, and which kind lets you choose to blink? Now look at the pupil of one eye, the dark circular opening at its center that controls how much light enters. Have someone shine a dim flashlight on it and watch what happens to its size. Since you cannot control that change yourself, what kind of muscle must be controlling the pupil?" },
+        { type: 'p', text: "There are three kinds of muscles. Most muscles that move bones are made of long fibers — these are voluntary muscles called skeletal muscles. The involuntary muscles that make up most body organs, such as the blood vessels, stomach, and intestines, are called smooth muscles. A third kind of muscle, found only in the heart, is called heart muscle — it too is involuntary. The heart is the hardest-working muscle in the body: it beats between 2 billion and 3 billion times during an average lifetime." }
+      ],
+      [
+        { type: 'heading', text: 'Bone and Muscle Injuries' },
+        { type: 'p', text: "What are some common injuries of bones and muscles? Even though bones are strong, they can be damaged. A crack or a break in a bone is called a fracture, and there are different kinds. Usually when a bone breaks, it does not push through the muscle and skin — this is called a simple fracture. Sometimes the broken end of a bone does push through the muscle and skin, which is called a compound fracture and carries a much greater risk of infection." },
+        { type: 'p', text: "Because bones contain living tissue, they can repair themselves. A doctor puts the parts of a broken bone back in place, or sets it, and a cast holds the broken bones in place while they grow back together." }
+      ],
+      [
+        { type: 'p', text: "The ligaments that connect bones can also be injured. A sprain is an injury in which a ligament is stretched or torn, which happens when a joint is forced to move in a way other than the way it normally moves — football players, for example, often suffer torn ligaments in the knee when hit from the side, and ankle and wrist sprains happen the same way." },
+        { type: 'p', text: "Muscles can be injured too, often from overuse. A muscle strain is an injury caused by overstretching a muscle or tendon, and it often happens when someone lifts a heavy object the wrong way. A cramp is a sudden, strong, and often painful contraction of a muscle — it does not usually last long, and rubbing the muscle can often help get rid of it." }
+      ],
+      [
+        { type: 'heading', text: 'Care of Bones and Muscles' },
+        { type: 'p', text: "How can you keep bones and muscles healthy? Three important things help: a proper diet, the right kind of exercise, and enough rest. A proper diet includes foods from four main groups. The meat group contains protein needed for cell growth and to make new cells. The dairy group includes foods with minerals that make bones hard. The fruit and vegetable group provides needed vitamins. And the bread and cereal group provides the energy that muscles need to move bones." }
+      ],
+      [
+        { type: 'activity', text: "Hands-on: What happens to bones when minerals are removed? Remove all the meat from an uncooked chicken leg bone, wash it, dry it, and gently try to bend it — does it feel hard or soft, and does it bend? Half fill a jar with vinegar, place the bone in it, and let it sit for five days; vinegar removes minerals from bone. Afterward, wash and dry the bone again and try bending it once more. How does it feel now compared to before, and does it bend more easily? What does this tell you about what your bones would be like without enough minerals in your diet, and how would that affect your skeleton's ability to support your body?" }
+      ],
+      [
+        { type: 'p', text: "In addition to a proper diet, exercise is important for the growth and development of muscles. When muscles are not used, they shrink — they become smaller and weaker. Exercise keeps muscles strong." },
+        { type: 'p', text: "While exercise is important, it also creates a problem: as energy is used and food is burned during exercise, waste products are left behind in the muscles. Rest helps get rid of these wastes and keeps muscles from being overused. Sleep helps relax muscles and rid them of waste materials." }
+      ],
+      [
+        { type: 'summary', text: "The skeletal system forms the framework of the body and protects soft body parts." },
+        { type: 'summary', text: "Most joints allow the body to move. The main kinds are ball-and-socket joints, hinge joints, and pivot joints; fixed joints do not allow movement." },
+        { type: 'summary', text: "Bones are moved when muscles contract and relax." },
+        { type: 'summary', text: "Skeletal muscle is voluntary muscle. Smooth muscle and heart muscle are involuntary muscle." },
+        { type: 'summary', text: "Injuries to the skeletal system include fractures and sprains." },
+        { type: 'summary', text: "Injuries to the muscular system include strains and cramps." },
+        { type: 'summary', text: "Muscles and bones can be kept healthy with proper diet, exercise, and rest." }
+      ]
+    ]
+  },
+  "Ch.14 · Transport Systems of the Body": {
+    title: "Transport Systems of the Body",
+    pages: [
+      [
+        { type: 'heading', text: 'Chapter 14 · Transport Systems of the Body' },
+        { type: 'p', text: "Imagine a doctor testing a patient's heart while the patient exercises, watching closely the whole time. A test like this can reveal a great deal about the health of a person's heart and blood vessels." },
+        { type: 'p', text: "The heart and blood vessels carry food and oxygen throughout the body and also remove certain wastes — together they form a transport system. In this chapter you will learn about the three main transport systems of the body, the structures that make them up, how they work, and some of the diseases that affect them." }
+      ],
+      [
+        { type: 'heading', text: 'The Circulatory System' },
+        { type: 'p', text: "What are the two jobs of the circulatory system? The circulatory system is one of the body's transport systems. It carries needed materials, such as food and oxygen, to the cells of the body, and it also carries away waste products. Another important job of the circulatory system is to protect the body from disease — it serves as a defense system. The circulatory system has three main parts that help it perform its jobs: the blood, the heart, and the blood vessels." },
+        { type: 'p', text: "How much blood is in the body? An average adult has about 5 liters of blood." }
+      ],
+      [
+        { type: 'p', text: "Blood is a liquid with solid parts floating in it. The liquid part of the blood is called plasma. Plasma is yellowish in color, is mostly water, and contains many important chemicals — it makes up over half of the blood." },
+        { type: 'p', text: "There are three different kinds of solid parts in the blood. The first is the red blood cells, which carry oxygen to all the cells of the body. They can do this because they contain a special chemical called hemoglobin, which contains iron and gives blood its red color. A red blood cell looks something like a doughnut without a hole, and it is very small — a single drop of blood contains about 5 million red blood cells." }
+      ],
+      [
+        { type: 'p', text: "White blood cells are the second solid part of the blood. They help the body fight infection. White blood cells do not contain hemoglobin, so despite their name, they have no real color. They can change shape as they move, and sometimes they even squeeze through the walls of blood vessels to reach infected parts of the body, where they surround and destroy bacteria and other harmful things." },
+        { type: 'p', text: "Platelets are the third solid part of blood. They are not whole cells, but parts of cells that control bleeding, and like white blood cells they have no color — they are also much smaller than red blood cells. When you get a cut or scratch, it bleeds for a short time, but the platelets in the blood cause it to thicken and clot, which stops the bleeding. Without platelets to control bleeding, a person could bleed to death from a small cut." }
+      ],
+      [
+        { type: 'sidebar', text: "Do you know? On December 2, 1982, a medical milestone took place: the first permanent artificial heart was placed in a human being. Made of plastic and aluminum and built to run on electricity, it was named the Jarvik-7, after its inventor, Dr. Robert Jarvik. A 61-year-old man, Dr. Barney Clark, received the heart — without it, he would have died within a few hours. The artificial heart replaced the two diseased lower chambers of his heart and was attached to the two upper chambers. Dr. Clark lived 112 days with the artificial heart." }
+      ],
+      [
+        { type: 'heading', text: 'Circulation of Blood' },
+        { type: 'p', text: "How does blood move through the body? The heart, the second main part of the circulatory system, is a strong, hollow muscle about the size of a fist, located in the center of the chest. As long as you are alive, your heart never stops working — a normal heart beats about 70 to 80 times per minute." },
+        { type: 'p', text: "There are four hollow chambers, or cavities, in the heart. Each upper chamber is called an atrium — there is a right atrium and a left atrium — and blood collects in these thin-walled chambers. Each lower chamber is called a ventricle, and there is a right ventricle and a left ventricle; ventricles have thick, muscular walls and are the pumping chambers of the heart. Between the upper and lower chambers is a flap of tissue that acts as a valve, keeping blood from flowing backward." }
+      ],
+      [
+        { type: 'p', text: "There are three kinds of blood vessels: arteries, veins, and capillaries. An artery is a thick-walled blood vessel that carries blood away from the heart, usually blood that is rich in food and oxygen. A vein is a blood vessel that carries blood back to the heart from the body's cells, usually carrying mostly waste products. A capillary is a tiny blood vessel that connects an artery and a vein — capillaries are the smallest blood vessels in the body, and they allow food, oxygen, and wastes to pass directly between the blood and the cells." }
+      ],
+      [
+        { type: 'p', text: "Here is the path blood takes through the circulatory system. Blood that has just left the lungs, rich in oxygen, arrives in the left atrium. It passes through a valve into the left ventricle, from where it is pumped into a large artery. That artery branches into smaller and smaller arteries that reach all parts of the body. Blood from the arteries then enters the capillaries, where food and oxygen pass through the capillary walls into the cells, while carbon dioxide and waste products from the cells pass the other way, into the blood." },
+        { type: 'p', text: "From the capillaries, blood enters the smallest veins and flows into larger and larger veins, eventually reaching the largest veins, which return blood — now poor in oxygen — to the right atrium. From there it passes through a valve to the right ventricle and is pumped into a large artery leading to the lungs. In the lungs the blood loses carbon dioxide and picks up a fresh supply of oxygen, then returns through veins to the left atrium, and the whole cycle begins again." }
+      ],
+      [
+        { type: 'heading', text: 'Diseases and Care of the Circulatory System' },
+        { type: 'p', text: "What are some circulatory problems? Severe cuts can cause a serious loss of blood. The best way to stop bleeding is to apply direct pressure to the wound with a clean cloth, then cover it with a bandage to prevent infection — a large, deep cut should be checked by a doctor. The best way to stop a nosebleed is to hold the head straight and pinch the nostrils together; a severe nosebleed may need to be treated by a doctor." }
+      ],
+      [
+        { type: 'p', text: "Each of the three main parts of the circulatory system can become diseased. For example, fat may build up in the walls of arteries, clogging them much like mineral buildup clogs a water pipe. A heart attack, a common and serious heart problem, occurs when the supply of blood to part of the heart is cut off — usually because the arteries that carry blood to the heart are clogged. If the blood supply is cut off too long, the heart can be permanently damaged, and a person can die from a heart attack; it is a leading cause of death in the United States." },
+        { type: 'p', text: "High blood pressure is another serious problem. Blood flowing through the arteries presses against the artery walls, and this pressure is called blood pressure. When it is too high, the heart has to work harder than it should, though high blood pressure can often be controlled with medicine." }
+      ],
+      [
+        { type: 'p', text: "A longer and healthier life can be enjoyed by people who take care of themselves. Foods high in fat can clog the arteries, which makes the heart work harder and can also cause high blood pressure — so it is a good idea to eat foods that are low in fat and to watch your diet to avoid becoming overweight." },
+        { type: 'p', text: "Exercise is also important for a healthy circulatory system. Like other muscles, the heart benefits from exercise — making it work harder helps make it stronger. Exercise such as swimming, jogging, and jumping rope is good for the heart." }
+      ],
+      [
+        { type: 'activity', text: "Hands-on: How does exercise affect the pulse rate? With a partner, sit quietly and find your pulse by pressing your index and middle fingers against your wrist at the base of your thumb. Take your pulse for one minute and record it, then repeat two more times and find the average. Next, jog in place for one minute and take your pulse again right afterward; repeat this two more times, resting between each, and find the average jogging pulse rate. How does your average pulse rate after jogging compare with your average pulse rate while sitting quietly? When is your pulse rate greater, and by how much?" }
+      ],
+      [
+        { type: 'heading', text: 'The Respiratory System' },
+        { type: 'p', text: "How does air move in and out of the lungs? A healthy person can live several weeks without food and a few days without water, but only a few minutes without air — a constant supply of air is necessary for life." },
+        { type: 'p', text: "When you breathe, air enters your body through your respiratory system, another of the body's transport systems, which works closely with the circulatory system to put the oxygen in the air you breathe to use. Recall that oxygen from the air is needed by living cells to release energy from food — this combining of oxygen with food is called respiration, and it also produces carbon dioxide and water as byproducts. The respiratory and circulatory systems work together to carry out this process." }
+      ],
+      [
+        { type: 'p', text: "Here is how oxygen in the air travels from outside the body to the cells inside. When a person breathes in, air enters the nose, travels to the throat, and then enters a soft tube ringed with cartilage — the windpipe, or trachea. The voice box, or larynx, sits at the top of the trachea, and air passing through it lets a person make sounds for speaking or singing. The trachea then divides into two tubes called the bronchial tubes, which lead to the lungs." },
+        { type: 'p', text: "The lungs are made of spongy tissue, and inside them the bronchial tubes divide many times into smaller and smaller branches — the smallest is thinner than a human hair." }
+      ],
+      [
+        { type: 'p', text: "At the ends of the tiniest branches in the lungs are the air sacs, which look something like a bunch of grapes and have very thin walls. Each sac is surrounded by a capillary, and gases can pass between the sacs and the capillaries. Every time a person breathes in, the air sacs fill with air, and oxygen from that air leaves the sacs and enters the blood through the capillaries." },
+        { type: 'p', text: "The oxygen that reaches the body's cells is used to break down food, releasing energy — and carbon dioxide is released from the cell as a waste product. That carbon dioxide passes into the blood, is carried to the lungs, and passes from the capillaries into the air sacs. When a person breathes out, it moves from the air sacs to the bronchial tubes and out to the outside air." }
+      ],
+      [
+        { type: 'p', text: "The diaphragm is a thick sheet of muscle at the bottom of the chest cavity. It moves down when a person breathes in, spreading the ribs and letting the lungs expand — this process is called inhaling. When a person breathes out, the diaphragm moves up and the ribs come together, pushing air out of the lungs — this process is called exhaling." },
+        { type: 'activity', text: "Try this: How does the diaphragm help fill the lungs? Cut a 2-liter plastic bottle in half. Stretch a round balloon over the bottle's opening and secure it with a rubber band — this balloon represents the lungs. Cut the neck off a second balloon and stretch it across the bottom of the bottle, securing it the same way — this one represents the diaphragm. Pull down on the stretched balloon at the bottom. What happens to the balloon inside the bottle? Explain how this models the way the lungs and diaphragm work together." }
+      ],
+      [
+        { type: 'activity', text: "Hands-on: How much air do your lungs hold? With a partner, fill a large plastic jug completely with water, cap it, and turn it upside down in a dishpan partly filled with water. Carefully remove the cap underwater so no air bubbles enter the jug, then have your partner hold it steady. Put one end of a length of rubber tubing inside the jug and a straw in the other end, take a deep breath, and blow through the straw. Notice what happens to the water level in the jug — the air you blew in has taken the place of the water that spilled out. Recap the jug, turn it right side up, and use a graduated container to refill it with water up to the mark, measuring how much water it takes. That amount equals the volume of air you blew into the jug. Repeat the whole process two more times and average your results — that average is roughly how much air your lungs hold in one breath." }
+      ],
+      [
+        { type: 'heading', text: 'Diseases and Care of the Respiratory System' },
+        { type: 'p', text: "What are some common respiratory diseases? Colds are among the most common diseases of the respiratory system, and they spread easily from person to person. Every time someone sneezes or coughs, germs are sprayed into the air, and people nearby may breathe them in. Always cover your nose and mouth when you sneeze or cough, and always wash your hands." },
+        { type: 'p', text: "An allergy is a strong reaction to a substance that is not normally in the body, such as plant pollen or dust. These substances often enter the body through the respiratory system and can cause sneezing, headaches, or difficult breathing — many people, for instance, are allergic to ragweed pollen." }
+      ],
+      [
+        { type: 'p', text: "Bronchitis is another respiratory disease, in which the bronchial tubes become red and swollen; it can sometimes lead to other diseases of the lungs." },
+        { type: 'p', text: "Lung cancer is another disease of the respiratory system, with several causes — one is breathing polluted air, and another is smoking cigarettes. Over half the people with lung cancer smoked, which is why every package of cigarettes must carry a warning label." },
+        { type: 'p', text: "Regular exercise is important for a healthy respiratory system. Strenuous exercise strengthens the diaphragm, and a stronger diaphragm allows a person to take in more air — with more air in the lungs, more oxygen can reach the body's cells, letting them release energy from food more effectively." }
+      ],
+      [
+        { type: 'heading', text: 'The Excretory System' },
+        { type: 'p', text: "What waste products are removed by the excretory system? The excretory system is the transport system that removes waste products from the body — the unwanted materials left over from life processes such as respiration. Living things will die if they do not get rid of these waste products." },
+        { type: 'p', text: "Many body parts help remove waste. The kidneys are among the main organs of the excretory system, but the lungs and skin also play a part. The lungs get rid of carbon dioxide and some moisture every time a person exhales. The skin is also part of the excretory system — one layer of skin contains sweat glands, and when a person sweats, water carrying many waste materials leaves the body, ridding it of extra water and wastes." }
+      ],
+      [
+        { type: 'p', text: "Most of the waste water in the body is removed by the kidneys. A person normally has two kidneys, located in the lower back, one on each side of the backbone. All the blood passes through the kidneys, and as it does, they filter out waste materials and excess water. These dissolved wastes and water are carried through small tubes to the bladder for storage, and finally leave the body as urine — water with wastes and salts dissolved in it. Solid human waste, by contrast, is removed by the large intestine, which is part of the digestive system." },
+        { type: 'p', text: "If the kidneys become diseased, they may stop working properly, and harmful waste products can build up in the body. People with diseased kidneys can use a special machine to filter wastes from the blood — these machines have saved many lives." }
+      ],
+      [
+        { type: 'p', text: "To keep the excretory system healthy, a person should drink several glasses of water each day, to replace the water that is lost as waste products are removed. Water is also supplied to the body by foods such as milk, soup, juice, and juicy fruits and vegetables." }
+      ],
+      [
+        { type: 'summary', text: "The transport systems of the body are the circulatory system, the respiratory system, and the excretory system." },
+        { type: 'summary', text: "The blood, the heart, and the blood vessels are parts of the circulatory system." },
+        { type: 'summary', text: "The circulatory system carries food and oxygen to cells and carries away wastes. It also protects the body from disease." },
+        { type: 'summary', text: "The nose, the trachea, the bronchial tubes, the lungs, and the air sacs are parts of the respiratory system." },
+        { type: 'summary', text: "The respiratory system brings oxygen into the body and removes carbon dioxide and some water." },
+        { type: 'summary', text: "The parts of the excretory system include the kidneys, the skin, and the lungs." },
+        { type: 'summary', text: "The excretory system gets rid of waste products." }
+      ]
+    ]
+  },
 };
