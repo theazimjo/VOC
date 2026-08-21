@@ -67,14 +67,7 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
   const finishedRef = useRef(false);
 
   const currentWord = pool.length > 0 ? pool[poolIndex % pool.length] : null;
-
-  useEffect(() => {
-    if (!currentWord) return;
-    setOptions(buildOptions(currentWord, words));
-    setAnswered(false);
-    setSelectedOption(null);
-    questionStartRef.current = Date.now();
-  }, [poolIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+  const correctOption = currentWord ? ((currentWord.translation || '').trim() || (currentWord.word || '').trim()) : '';
 
   // One global countdown, independent of per-question state — the whole
   // point of "Speed" is answering as many as possible before it hits zero,
@@ -106,14 +99,24 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
   }, [finished]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const advance = useCallback(() => {
+    setAnswered(false);
+    setSelectedOption(null);
+    questionStartRef.current = Date.now();
+
     setPoolIndex(i => {
       const next = i + 1;
-      // Reshuffle once we've cycled the whole pool so a short pack doesn't
-      // just repeat in the exact same order for the rest of the minute.
-      if (pool.length > 0 && next % pool.length === 0) setPool(shuffleArray(words));
+      let currentPool = pool;
+      if (pool.length > 0 && next % pool.length === 0) {
+        currentPool = shuffleArray(words);
+        setPool(currentPool);
+      }
+      const nextWord = currentPool.length > 0 ? currentPool[next % currentPool.length] : null;
+      if (nextWord) {
+        setOptions(buildOptions(nextWord, words));
+      }
       return next;
     });
-  }, [pool.length, words]);
+  }, [pool, words]);
 
   const handleSelect = (option) => {
     if (answered || finished || !currentWord) return;
@@ -121,7 +124,7 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
     setAnswered(true);
 
     const responseTime = (Date.now() - questionStartRef.current) / 1000;
-    const isCorrect = option === currentWord.translation;
+    const isCorrect = option === correctOption || option === currentWord.translation;
     if (onAnswer) onAnswer(currentWord, isCorrect);
     onUpdateWord(currentWord.id, {
       isCorrect,
@@ -186,7 +189,7 @@ export default function SpeedGame({ words, sourceName, onComplete, onUpdateWord,
           {options.map((opt, idx) => {
             let state = 'idle';
             if (answered) {
-              if (opt === currentWord.translation) state = 'correct';
+              if (opt === correctOption || opt === currentWord.translation) state = 'correct';
               else if (opt === selectedOption) state = 'wrong';
               else state = 'dimmed';
             }

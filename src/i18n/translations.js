@@ -176,6 +176,7 @@ export const translations = {
     },
     packDetail: {
       libraryBack: '← Library',
+      loading: 'Loading...',
       wordsCount: '📝 {count} words',
       flashcards: '🃏 Flashcards',
       practice: '⚡ Practice',
@@ -321,6 +322,7 @@ export const translations = {
       bestSpeedRecord: '🏆 Your best: {record} correct in 60s',
       preparingPractice: 'Preparing your practice...',
       loading: 'Loading...',
+      start: 'Start',
       greatJob: 'Great job!',
       goodJob: 'Good job!',
       keepGoing: 'Keep going!',
@@ -973,6 +975,7 @@ export const translations = {
     },
     packDetail: {
       libraryBack: '← Библиотека',
+      loading: 'Загрузка...',
       wordsCount: '📝 {count} слов',
       flashcards: '🃏 Карточки',
       practice: '⚡ Практика',
@@ -1118,6 +1121,7 @@ export const translations = {
       bestSpeedRecord: '🏆 Ваш рекорд: {record} правильных за 60с',
       preparingPractice: 'Подготовка практики...',
       loading: 'Загрузка...',
+      start: 'Начать',
       greatJob: 'Отличная работа!',
       goodJob: 'Хорошая работа!',
       keepGoing: 'Продолжайте в том же духе!',
@@ -1770,6 +1774,7 @@ export const translations = {
     },
     packDetail: {
       libraryBack: "← Kutubxona",
+      loading: "Yuklanmoqda...",
       wordsCount: "📝 {count} ta so'z",
       flashcards: "🃏 Kartochkalar",
       practice: "⚡ Mashq",
@@ -1915,6 +1920,7 @@ export const translations = {
       bestSpeedRecord: "🏆 Eng yaxshi natijangiz: 60 sekda {record} ta to'g'ri",
       preparingPractice: "Mashq tayyorlanmoqda...",
       loading: "Yuklanmoqda...",
+      start: "Boshlash",
       greatJob: "Ajoyib natija!",
       goodJob: "Yaxshi natija!",
       keepGoing: "Davom eting!",
