@@ -275,7 +275,8 @@ export default function LibraryPage() {
         color: marketPack.color,
         level: marketPack.level,
         marketPackId: marketPack.id,
-        type: marketPack.type || 'default'
+        type: marketPack.type || 'default',
+        ...(marketPack.language ? { language: marketPack.language } : {})
       });
 
       if (newPackId) {
