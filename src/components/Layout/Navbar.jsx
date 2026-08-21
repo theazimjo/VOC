@@ -371,7 +371,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                   gap: '6px'
                 }}
               >
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 500 }}>Enter 6-digit PIN:</div>
+                <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 500 }}>{t('profile.pinLabel')}</div>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <input
                     type="text"
@@ -407,7 +407,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                       cursor: 'pointer'
                     }}
                   >
-                    {joining ? '...' : "Add"}
+                    {joining ? '...' : t('profile.addBtn')}
                   </button>
                 </div>
                 {joinError && (

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Check } from 'lucide-react';
 import { packIcons, bookColors, speechLanguages } from '../../utils/helpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './PackForm.css';
 
 export default function PackForm({ isOpen, onClose, onSave, editPack = null, onDelete = null, folders = [], defaultFolderId = null }) {
@@ -15,6 +16,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [folderMenuOpen, setFolderMenuOpen] = useState(false);
   const folderMenuRef = useRef(null);
+  const { t } = useLanguage();
 
   const isLocked = editPack && editPack.name === 'Irregular Verbs';
   // Pack type drives which word-entry form and practice trainer a pack
@@ -64,7 +66,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
     ? folders.find(f => f.id === folderId)
     : null;
   const selectedFolderIcon = selectedFolder ? (selectedFolder.icon || '📁') : '📂';
-  const selectedFolderName = selectedFolder ? selectedFolder.name : "Main List";
+  const selectedFolderName = selectedFolder ? selectedFolder.name : t('library.mainList');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,7 +93,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
           >
             <div className="modal-header">
-              <h2>{editPack ? "Edit Pack" : "New Pack"}</h2>
+              <h2>{editPack ? t('library.editPack') : t('library.newPack2')}</h2>
               <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
             </div>
             
@@ -108,18 +110,18 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     lineHeight: '1.4',
                     marginBottom: 'var(--space-sm)'
                   }}>
-                    ℹ️ The name and icon of this preset pack cannot be modified. You can only delete it.
+                    {t('library.packLockedHint')}
                   </div>
                 )}
 
                 <div className="input-group">
-                  <label>Pack Name *</label>
+                  <label>{t('library.packName')}</label>
                   <input 
                     type="text" 
                     className="input" 
                     value={name} 
                     onChange={e => setName(e.target.value)} 
-                    placeholder="E.g.: IELTS Vocabulary"
+                    placeholder={t('library.packNamePlaceholder')}
                     required
                     autoFocus
                     disabled={isLocked}
@@ -128,27 +130,27 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                 </div>
 
                 <div className="input-group">
-                  <label>Pack Type</label>
+                  <label>{t('library.packType')}</label>
                   <select
                     className="select"
                     value={type}
                     onChange={e => setType(e.target.value)}
                     disabled={isTypeLocked}
                   >
-                    <option value="default">General</option>
-                    <option value="ielts">IELTS Vocabulary</option>
-                    <option value="english">English (Monolingual)</option>
+                    <option value="default">{t('library.packTypeGeneral')}</option>
+                    <option value="ielts">{t('library.packTypeIelts')}</option>
+                    <option value="english">{t('library.packTypeEnglish')}</option>
                   </select>
                   {isTypeLocked && (
                     <span style={{ fontSize: 'var(--font-xs)', color: 'var(--text-muted)' }}>
-                      Pack type can't be changed after creation.
+                      {t('library.packTypeLocked')}
                     </span>
                   )}
                 </div>
 
                 {folders.length > 0 && (
                   <div className="input-group">
-                    <label>Folder</label>
+                    <label>{t('library.folder')}</label>
                     <div className="folder-select" ref={folderMenuRef}>
                       <button
                         type="button"
@@ -182,7 +184,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                               onClick={() => { setFolderId(''); setFolderMenuOpen(false); }}
                             >
                               <span className="folder-select-option-icon">📂</span>
-                              <span className="folder-select-option-name">Main List</span>
+                              <span className="folder-select-option-name">{t('library.mainList')}</span>
                               {!folderId && <Check size={15} className="folder-select-option-check" />}
                             </button>
                             {folders.map((f) => (
@@ -207,7 +209,7 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                 )}
 
                 <div className="input-group">
-                  <label>Word Language (for pronunciation)</label>
+                  <label>{t('library.wordLanguage')}</label>
                   <select
                     className="select"
                     value={language}
@@ -226,18 +228,18 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
                     type="button" 
                     className="btn btn-danger" 
                     onClick={() => {
-                      if (window.confirm("Are you sure you want to delete this pack and all its words?")) {
+                      if (window.confirm(t('library.deletePackConfirm'))) {
                         onDelete();
                       }
                     }}
                   >
-                    🗑 Delete
+                    {t('library.deletePack')}
                   </button>
                 )}
                 <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>Cancel</button>
+                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>{t('library.cancel')}</button>
                   <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                    {isSubmitting ? 'Saving...' : 'Save'}
+                    {isSubmitting ? t('library.saving') : t('library.save')}
                   </button>
                 </div>
               </div>

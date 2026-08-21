@@ -35,7 +35,7 @@ export default function ProfilePage() {
     font: { icon: SHEET_ICONS.font, title: t('profile.chooseTextSize') },
     language: { icon: SHEET_ICONS.language, title: t('profile.chooseLanguage') },
     teacher: { icon: SHEET_ICONS.teacher, title: t('profile.teaching') },
-    joinGroup: { icon: SHEET_ICONS.joinGroup, title: "Join a Teacher's Group" },
+    joinGroup: { icon: SHEET_ICONS.joinGroup, title: t('profile.joinGroupSheetTitle') },
   };
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
   // Reads both possible teacher affiliations directly — independent of
@@ -510,14 +510,14 @@ export default function ProfilePage() {
                 <div style={{ padding: '16px', borderRadius: '16px', border: '1px solid var(--border-light)', background: 'var(--bg-tertiary)', display: 'flex', flexDirection: 'column', gap: '10px', boxSizing: 'border-box', width: '100%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontWeight: 700, fontSize: '0.96rem', color: 'var(--text-primary)' }}>Independent Tutor</span>
+                      <span style={{ fontWeight: 700, fontSize: '0.96rem', color: 'var(--text-primary)' }}>{t('profile.independentTutorTitle')}</span>
                       {independentAffiliation && <CheckCircle2 size={16} color="#34c759" style={{ flexShrink: 0 }} />}
                     </div>
                   </div>
                   <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
                     {independentAffiliation
-                      ? 'Your own group, no learning center involved.'
-                      : 'Open your own group and manage your students, with no learning center involved.'}
+                      ? t('profile.independentTutorDescOwned')
+                      : t('profile.independentTutorDescNew')}
                   </p>
                   {independentAffiliation ? (
                     <button
@@ -525,7 +525,7 @@ export default function ProfilePage() {
                       onClick={handleSwitchToIndependent}
                       style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                     >
-                      Switch to Independent Mode
+                      {t('profile.switchToIndependentMode')}
                     </button>
                   ) : (
                     <button
@@ -534,7 +534,7 @@ export default function ProfilePage() {
                       disabled={becomingTeacher}
                       style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', opacity: becomingTeacher ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                     >
-                      {becomingTeacher ? 'Starting...' : 'Become an Independent Tutor'}
+                      {becomingTeacher ? t('profile.starting') : t('profile.becomeIndependentTutor')}
                     </button>
                   )}
                 </div>
@@ -545,7 +545,7 @@ export default function ProfilePage() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span style={{ fontWeight: 700, fontSize: '0.96rem', color: 'var(--text-primary)' }}>
-                        {centerAffiliation?.centerName || pendingRequest?.centerName || 'Through a Learning Center'}
+                        {centerAffiliation?.centerName || pendingRequest?.centerName || t('profile.learningCenterFallback')}
                       </span>
                       {centerAffiliation && <CheckCircle2 size={16} color="#34c759" style={{ flexShrink: 0 }} />}
                       {!centerAffiliation && pendingRequest && <Clock size={16} color="#ff9500" style={{ flexShrink: 0 }} />}
@@ -554,33 +554,33 @@ export default function ProfilePage() {
                   {centerAffiliation ? (
                     <>
                       <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                        You're a teacher at this center.
+                        {t('profile.youreTeacherAtCenter')}
                       </p>
                       <button
                         type="button"
                         onClick={handleSwitchToCenter}
                         style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                       >
-                        Switch to Center Mode
+                        {t('profile.switchToCenterMode')}
                       </button>
                     </>
                   ) : pendingRequest ? (
                     <>
                       <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                        Your request is waiting for approval from the center admin.
+                        {t('profile.requestPending')}
                       </p>
                       <button
                         type="button"
                         onClick={handleCancelRequest}
                         style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-secondary)', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                       >
-                        Cancel Request
+                        {t('profile.cancelRequest')}
                       </button>
                     </>
                   ) : (
                     <>
                       <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                        Enter the ID code your learning center gave you — the admin will need to approve your request.
+                        {t('profile.centerCodeDesc')}
                       </p>
                       {joinCenterError && (
                         <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '8px 12px', borderRadius: '10px', fontSize: '0.8rem', fontWeight: 600 }}>
@@ -590,7 +590,7 @@ export default function ProfilePage() {
                       <form onSubmit={handleJoinCenterAsTeacher} style={{ display: 'flex', gap: '8px', width: '100%', boxSizing: 'border-box', marginTop: '2px' }}>
                         <input
                           type="text"
-                          placeholder="Center ID"
+                          placeholder={t('profile.centerCodePlaceholder')}
                           value={centerCodeInput}
                           onChange={e => setCenterCodeInput(e.target.value)}
                           style={{ flex: '1 1 0%', minWidth: 0, width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box' }}
@@ -600,7 +600,7 @@ export default function ProfilePage() {
                           disabled={joiningCenterAsTeacher || !centerCodeInput.trim()}
                           style={{ flexShrink: 0, padding: '10px 18px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', whiteSpace: 'nowrap', opacity: (joiningCenterAsTeacher || !centerCodeInput.trim()) ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                         >
-                          {joiningCenterAsTeacher ? '...' : 'Request'}
+                          {joiningCenterAsTeacher ? t('profile.requesting') : t('profile.requestBtn')}
                         </button>
                       </form>
                     </>
@@ -612,7 +612,7 @@ export default function ProfilePage() {
             {activeSheet === 'joinGroup' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', boxSizing: 'border-box' }}>
                 <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                  Enter the group code your teacher gave you.
+                  {t('profile.joinGroupDesc')}
                 </p>
                 {joinGroupSuccess && (
                   <div style={{ background: 'rgba(52, 199, 89, 0.12)', border: '1px solid rgba(52, 199, 89, 0.25)', color: '#34c759', padding: '10px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -627,7 +627,7 @@ export default function ProfilePage() {
                 <form onSubmit={handleJoinTeacherGroup} style={{ display: 'flex', gap: '8px', width: '100%', boxSizing: 'border-box' }}>
                   <input
                     type="text"
-                    placeholder="Group code"
+                    placeholder={t('profile.groupCodePlaceholder')}
                     value={groupCodeInput}
                     onChange={e => setGroupCodeInput(e.target.value)}
                     style={{ flex: '1 1 0%', minWidth: 0, width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box' }}
@@ -637,7 +637,7 @@ export default function ProfilePage() {
                     disabled={joiningTeacherGroup || !groupCodeInput.trim()}
                     style={{ flexShrink: 0, padding: '10px 18px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', whiteSpace: 'nowrap', opacity: (joiningTeacherGroup || !groupCodeInput.trim()) ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
                   >
-                    {joiningTeacherGroup ? '...' : 'Join'}
+                    {joiningTeacherGroup ? t('profile.joining') : t('profile.joinBtn')}
                   </button>
                 </form>
               </div>

@@ -4,12 +4,14 @@ import { motion } from 'framer-motion';
 import { MoreVertical } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { speechLanguages } from '../../utils/helpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './PackCard.css';
 
 export default function PackCard({ pack, onLongPress }) {
   const [isLongPress, setIsLongPress] = useState(false);
   const timerRef = useRef(null);
   const { allWords } = usePacks();
+  const { t } = useLanguage();
 
   const memoryHealth = useMemo(() => {
     const packWords = allWords.filter(w => w.packId === pack.id);
@@ -72,7 +74,7 @@ export default function PackCard({ pack, onLongPress }) {
         onTouchMove={handleMove}
         onClick={handleClick}
         onContextMenu={handleContextMenu}
-        title="Hold to edit or delete"
+        title={t('library.holdToEdit')}
       >
         <div className="pack-card-top">
           <div
@@ -88,7 +90,7 @@ export default function PackCard({ pack, onLongPress }) {
             {packLanguage && packLanguage.code !== 'en-US' && (
               <span className="pack-card-lang" title={packLanguage.label}>{packLanguage.flag}</span>
             )}
-            <span className="pack-card-count">{pack.wordCount || 0} ta so'z</span>
+            <span className="pack-card-count">{t('library.wordCount', { count: pack.wordCount || 0 })}</span>
             {onLongPress && (
               <button
                 type="button"
@@ -98,8 +100,8 @@ export default function PackCard({ pack, onLongPress }) {
                   e.stopPropagation();
                   onLongPress();
                 }}
-                title="To'plam sozlamalari / o'chirish"
-                aria-label="To'plam sozlamalari"
+                title={t('library.packSettings')}
+                aria-label={t('library.packSettings')}
               >
                 <MoreVertical size={18} />
               </button>
@@ -126,10 +128,10 @@ export default function PackCard({ pack, onLongPress }) {
                   style={{ width: `${memoryHealth.masteryPercent}%`, background: accentColor }}
                 />
               </div>
-              <span className="pack-card-progress-label">{memoryHealth.masteryPercent}% mastered</span>
+              <span className="pack-card-progress-label">{t('library.mastered', { pct: memoryHealth.masteryPercent })}</span>
             </div>
           ) : (
-            <span className="pack-card-new-label">✨ Yangi to'plam</span>
+            <span className="pack-card-new-label">{t('library.newPack')}</span>
           )}
           <span className="pack-card-arrow">→</span>
         </div>

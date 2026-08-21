@@ -5,6 +5,7 @@ import { ref, push, update, get, remove, set, serverTimestamp } from 'firebase/d
 import { ArrowLeft, MoreVertical } from 'lucide-react';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useBooks } from '../../hooks/useBooks';
 import { usePacks } from '../../hooks/usePacks';
 import PackList from '../../components/Packs/PackList';
@@ -22,6 +23,7 @@ import './LibraryPage.css';
 
 export default function LibraryPage() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { books, loading: booksLoading } = useBooks(); // Loaded strictly for automatic migration
   const {
     packs, loading: packsLoading, addPack, updatePack, deletePack, allWords,
@@ -353,7 +355,7 @@ export default function LibraryPage() {
             {activeTab === 'library' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label">🏠 My Packs</span>
+            <span className="tab-label">🏠 {t('library.myPacks')}</span>
             {!isLoading && packs.length > 0 && (
               <span className="tab-count-badge">{packs.length}</span>
             )}
@@ -365,7 +367,7 @@ export default function LibraryPage() {
             {activeTab === 'market' && (
               <motion.div className="active-tab-pill" layoutId="activeTabPill" />
             )}
-            <span className="tab-label">🛒 Market</span>
+            <span className="tab-label">🛒 {t('library.market')}</span>
             <span className="tab-count-badge">
               {marketPacks.length}
             </span>
@@ -378,7 +380,7 @@ export default function LibraryPage() {
         {isLoading ? (
           <div className="ios-activity-indicator" style={{ marginTop: '50px' }}>
             <IosSpinner />
-            <span>Loading...</span>
+            <span>{t('library.loading')}</span>
           </div>
         ) : (
           <AnimatePresence mode="wait">
@@ -398,13 +400,13 @@ export default function LibraryPage() {
                       <>
                         <div className="library-folder-detail-header">
                           <button className="library-folder-back-btn" onClick={() => setOpenFolderId(null)}>
-                            <ArrowLeft size={22} /> Back
+                            <ArrowLeft size={22} /> {t('library.back')}
                           </button>
                           <h2>{openFolder.icon} {openFolder.name}</h2>
                           <button
                             className="btn btn-ghost btn-icon"
                             onClick={() => { setEditingFolder(openFolder); setShowFolderForm(true); }}
-                            title="Edit folder"
+                            title={t('library.editFolder')}
                           >
                             <MoreVertical size={22} />
                           </button>
@@ -418,8 +420,8 @@ export default function LibraryPage() {
                         ) : (
                           <div className="empty-state" style={{ padding: 'var(--space-2xl) var(--space-lg)' }}>
                             <div className="empty-state-icon">📦</div>
-                            <h3>This folder is empty</h3>
-                            <p>Use the + button below to add a pack to this folder.</p>
+                            <h3>{t('library.emptyFolder')}</h3>
+                             <p>{t('library.emptyFolderHint')}</p>
                           </div>
                         )}
                       </>
@@ -428,7 +430,7 @@ export default function LibraryPage() {
                       <>
                         <div className="library-folders-row-header">
                           <button className="btn btn-ghost" onClick={() => { setEditingFolder(null); setShowFolderForm(true); }}>
-                            + New Folder
+                           {t('library.newFolder')}
                           </button>
                         </div>
 
@@ -454,8 +456,8 @@ export default function LibraryPage() {
                         ) : (
                           <div className="empty-state" style={{ padding: 'var(--space-2xl) var(--space-lg)' }}>
                             <div className="empty-state-icon">📦</div>
-                            <h3>No packs found</h3>
-                            <p>Create word packs by topic, or download them from the Market.</p>
+                            <h3>{t('library.noPacks')}</h3>
+                             <p>{t('library.noPacksHint')}</p>
                           </div>
                         )}
                       </>
@@ -494,7 +496,7 @@ export default function LibraryPage() {
 
                           <div className="market-card-bottom">
                             <span className="market-card-words">
-                              📊 {pack.words.length} words
+                              📊 {t('library.words', { count: pack.words.length })}
                             </span>
                             <button
                               className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
@@ -504,15 +506,15 @@ export default function LibraryPage() {
                                 : handleInstallPack(pack)}
                             >
                               {isInstalling ? (
-                                <>⌛ Installing...</>
+                                <>{t('library.installing')}</>
                               ) : isUpdating ? (
-                                <>⌛ Updating...</>
+                                <>{t('library.updating')}</>
                               ) : hasUpdate ? (
                                 <>Update (+{missingWords.length}) 🔄</>
                               ) : isInstalled ? (
-                                <>Installed ✅</>
+                                <>{t('library.installed')}</>
                               ) : (
-                                <>Download 📥</>
+                                <>{t('library.download')}</>
                               )}
                             </button>
                           </div>

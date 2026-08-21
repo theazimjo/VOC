@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { packIcons } from '../../utils/helpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './PackForm.css';
 
 export default function FolderForm({ isOpen, onClose, onSave, editFolder = null, onDelete = null }) {
   const [name, setName] = useState('');
   const [icon, setIcon] = useState(packIcons[0]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (editFolder) {
@@ -44,20 +46,20 @@ export default function FolderForm({ isOpen, onClose, onSave, editFolder = null,
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
           >
             <div className="modal-header">
-              <h2>{editFolder ? 'Edit Folder' : 'New Folder'}</h2>
+              <h2>{editFolder ? t('library.editFolderTitle') : t('library.newFolderTitle')}</h2>
               <button className="btn btn-ghost btn-icon" onClick={onClose}>✕</button>
             </div>
 
             <form onSubmit={handleSubmit}>
               <div className="modal-body flex-col gap-md">
                 <div className="input-group">
-                  <label>Folder Name *</label>
+                  <label>{t('library.folderName')}</label>
                   <input
                     type="text"
                     className="input"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="E.g.: Science Book"
+                    placeholder={t('library.folderNamePlaceholder')}
                     required
                     autoFocus
                     maxLength={100}
@@ -65,7 +67,7 @@ export default function FolderForm({ isOpen, onClose, onSave, editFolder = null,
                 </div>
 
                 <div className="input-group">
-                  <label>Icon</label>
+                  <label>{t('library.folderIcon')}</label>
                   <div className="icon-picker">
                     {packIcons.map((ic) => (
                       <div
@@ -86,18 +88,18 @@ export default function FolderForm({ isOpen, onClose, onSave, editFolder = null,
                     type="button"
                     className="btn btn-danger"
                     onClick={() => {
-                      if (window.confirm("Delete this folder? Packs inside will not be deleted, they will return to the main list.")) {
+                      if (window.confirm(t('library.deleteFolderConfirm'))) {
                         onDelete();
                       }
                     }}
                   >
-                    🗑 Delete
+                    {t('library.deleteFolder')}
                   </button>
                 )}
                 <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
-                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>Cancel</button>
+                  <button type="button" className="btn btn-ghost" onClick={onClose} disabled={isSubmitting}>{t('library.cancel')}</button>
                   <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                    {isSubmitting ? 'Saving...' : 'Save'}
+                    {isSubmitting ? t('library.saving') : t('library.save')}
                   </button>
                 </div>
               </div>
