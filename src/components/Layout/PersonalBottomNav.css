@@ -29,6 +29,11 @@
   border-color: rgba(255, 255, 255, 0.12);
 }
 
+[data-theme='sepia'] .personal-bottom-nav {
+  background: rgba(244, 228, 193, 0.97);
+  border-color: rgba(112, 91, 69, 0.2);
+}
+
 /* Specular edge — the bright rim of light a glass surface catches along
    its top, fading through the sides (same recipe as the auth card). */
 .personal-bottom-nav::before {

@@ -1167,3 +1167,106 @@
   .adm-sort-tabs { display: none; }
   .adm-live-badge { display: none; }
 }
+
+/* ════════════════════════════════════════════════════════════
+   Sepia Theme Override for Admin Dashboard
+   ════════════════════════════════════════════════════════════ */
+[data-theme="sepia"] .adm-page {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="sepia"] .adm-header {
+  background: var(--bg-glass-strong);
+  border-bottom-color: var(--border);
+}
+
+[data-theme="sepia"] .adm-title {
+  color: var(--text-primary);
+}
+
+[data-theme="sepia"] .adm-subtitle {
+  color: var(--text-secondary);
+}
+
+[data-theme="sepia"] .adm-stat-card,
+[data-theme="sepia"] .adm-activity-bar,
+[data-theme="sepia"] .adm-users-section {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+[data-theme="sepia"] .adm-stat-val,
+[data-theme="sepia"] .adm-user-name,
+[data-theme="sepia"] .adm-detail-value,
+[data-theme="sepia"] .adm-activity-title {
+  color: var(--text-primary);
+}
+
+[data-theme="sepia"] .adm-stat-label,
+[data-theme="sepia"] .adm-user-email,
+[data-theme="sepia"] .adm-detail-label,
+[data-theme="sepia"] .adm-heatmap-title {
+  color: var(--text-secondary);
+}
+
+[data-theme="sepia"] .adm-search {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="sepia"] .adm-sort-tabs {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+[data-theme="sepia"] .adm-sort-tab {
+  color: var(--text-secondary);
+}
+
+[data-theme="sepia"] .adm-sort-tab.active {
+  background: var(--accent-1);
+  color: #ffffff;
+}
+
+[data-theme="sepia"] .adm-user-main:hover {
+  background: var(--bg-glass-hover);
+}
+
+[data-theme="sepia"] .adm-users-header {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-bottom-color: var(--border);
+}
+
+[data-theme="sepia"] .adm-quick-chip {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+[data-theme="sepia"] .adm-heatmap-section,
+[data-theme="sepia"] .adm-user-detail,
+[data-theme="sepia"] .adm-detail-card {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+[data-theme="sepia"] .adm-modal {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="sepia"] .adm-user-info-box {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+}
+
+[data-theme="sepia"] .adm-pwd-input {
+  background: var(--bg-primary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}

@@ -448,7 +448,7 @@ export default function ProfilePage() {
                       className={`corp-profile-sheet-option ${isActive ? 'active' : ''}`}
                       onClick={() => { setTheme(th.id); closeSheet(); }}
                     >
-                      <span>{th.id === 'android' ? t('profile.darkMode') : t('profile.lightMode')}</span>
+                      <span>{th.id === 'android' ? t('profile.darkMode') : th.id === 'sepia' ? t('profile.sepiaMode') : t('profile.lightMode')}</span>
                       {isActive && <Check size={16} strokeWidth={2.6} className="corp-profile-sheet-check" />}
                     </button>
                   );

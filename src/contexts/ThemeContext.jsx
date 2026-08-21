@@ -4,13 +4,14 @@ const ThemeContext = createContext();
 
 export const themes = [
   { id: 'ios', name: 'Light Mode', desc: 'Clean light background with system accent colors' },
-  { id: 'android', name: 'Dark Mode', desc: 'Sleek dark background with system accent colors' }
+  { id: 'android', name: 'Dark Mode', desc: 'Sleek dark background with system accent colors' },
+  { id: 'sepia', name: 'Sepia Mode', desc: 'Warm paper background for comfortable reading' }
 ];
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('voc-theme') || 'ios';
-    return ['ios', 'android'].includes(saved) ? saved : 'ios';
+    return ['ios', 'android', 'sepia'].includes(saved) ? saved : 'ios';
   });
   const [fontSize, setFontSize] = useState(() => localStorage.getItem('voc-font-size') || 'normal'); // small, normal, large
   const [audioEnabled, setAudioEnabled] = useState(() => {

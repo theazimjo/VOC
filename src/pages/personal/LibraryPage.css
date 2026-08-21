@@ -110,6 +110,31 @@
   color: #ffffff;
 }
 
+/* Sepia theme segmented control overrides */
+[data-theme="sepia"] .library-tabs {
+  background: #EAE0CD;
+  border-color: rgba(107, 85, 65, 0.2);
+}
+
+[data-theme="sepia"] .active-tab-pill {
+  background: #FFF8EA;
+  box-shadow: 0 2px 8px rgba(80, 60, 40, 0.15);
+}
+
+[data-theme="sepia"] .library-tab-btn {
+  color: #6B5541;
+}
+
+[data-theme="sepia"] .library-tab-btn.active,
+[data-theme="sepia"] .library-tab-btn:hover {
+  color: #3B2D1F;
+}
+
+[data-theme="sepia"] .tab-count-badge {
+  background: rgba(200, 100, 20, 0.14);
+  color: #C86414;
+}
+
 /* Folder detail header: back arrow, folder title, edit/delete trigger */
 .library-folder-detail-header {
   display: flex;

@@ -191,6 +191,43 @@ html[data-font-size="large"] {
   --radius-xl: 24px;
 }
 
+/* Sepia appearance -> Rich warm paper reading palette */
+[data-theme="sepia"] {
+  --bg-primary: #F7EEDC;          /* Warm parchment background */
+  --bg-secondary: #FFF8EA;        /* Crisp ivory paper card background */
+  --bg-tertiary: #EFE0C7;         /* Warm subtle beige container background */
+  --bg-glass: rgba(255, 248, 234, 0.88);
+  --bg-glass-hover: rgba(239, 224, 199, 0.95);
+  --bg-glass-strong: rgba(255, 248, 234, 0.97);
+
+  --accent-1: #C86414;            /* Terracotta warm amber */
+  --accent-2: #2E7D32;            /* Forest green */
+  --accent-3: #D97706;            /* Warm amber */
+  --accent-1-dim: rgba(200, 100, 20, 0.12);
+  --accent-2-dim: rgba(46, 125, 50, 0.12);
+  --accent-3-dim: rgba(217, 119, 6, 0.12);
+
+  --text-primary: #3B2D1F;        /* Deep espresso brown - high contrast & clear */
+  --text-secondary: #6B5541;      /* Cocoa warm brown */
+  --text-muted: #9A846E;         /* Warm muted tan */
+
+  --border: rgba(107, 85, 65, 0.2);
+  --border-light: rgba(107, 85, 65, 0.12);
+  --shadow-sm: 0 1px 3px rgba(80, 60, 40, 0.06), 0 2px 6px rgba(80, 60, 40, 0.04);
+  --shadow: 0 3px 10px rgba(80, 60, 40, 0.08), 0 1px 3px rgba(80, 60, 40, 0.05);
+  --shadow-lg: 0 8px 22px rgba(80, 60, 40, 0.12), 0 24px 48px rgba(80, 60, 40, 0.12);
+  --shadow-glow: 0 1px 3px rgba(80, 60, 40, 0.06);
+
+  --segmented-bg: #EAE0CD;
+  --segmented-active-bg: #FFF8EA;
+
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
 
 html {
   font-size: 16px;
@@ -919,13 +956,32 @@ a:hover {
 [data-theme="android"] .stats-card,
 [data-theme="android"] .practice-session-header,
 [data-theme="android"] .login-card,
-[data-theme="android"] .register-card {
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border: 1px solid var(--border) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04) !important;
-  border-radius: 14px !important;
-  background: var(--bg-glass-strong) !important;
+[data-theme="android"] .register-card,
+[data-theme="sepia"] .sidebar,
+[data-theme="sepia"] .navbar,
+[data-theme="sepia"] .card,
+[data-theme="sepia"] .settings-card,
+[data-theme="sepia"] .book-card,
+[data-theme="sepia"] .pack-card,
+[data-theme="sepia"] .word-card,
+[data-theme="sepia"] .practice-card,
+[data-theme="sepia"] .stats-card,
+[data-theme="sepia"] .practice-session-header,
+[data-theme="sepia"] .login-card,
+[data-theme="sepia"] .register-card {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+[data-theme="sepia"] .pack-card-icon,
+[data-theme="sepia"] .market-card-icon {
+  background: var(--bg-tertiary) !important;
+  border-color: var(--border) !important;
+}
+
+[data-theme="sepia"] .pack-card-progress-track {
+  background: var(--bg-tertiary) !important;
 }
 
 /* iOS Segmented control themes */

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useCorpRole } from '../../hooks/useCorpRole';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
 import {
@@ -14,6 +15,7 @@ export default function Settings() {
   const { user, changePassword, resetPassword } = useAuth();
   const { identity } = useCorpRole();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const {
     theme,
     setTheme,
@@ -130,7 +132,7 @@ export default function Settings() {
           </div>
           <div className="ios-settings-right">
             <span className="ios-detail-text">
-              {themes.find(t => t.id === theme)?.name || theme}
+              {theme === 'android' ? t('profile.darkMode') : theme === 'sepia' ? t('profile.sepiaMode') : t('profile.lightMode')}
             </span>
             <ChevronRight size={14} className="ios-chevron" />
           </div>
@@ -370,7 +372,7 @@ export default function Settings() {
                         setActiveSheet(null);
                       }}
                     >
-                      <span>{t.name}</span>
+                      <span>{t.id === 'android' ? t('profile.darkMode') : t.id === 'sepia' ? t('profile.sepiaMode') : t('profile.lightMode')}</span>
                       {theme === t.id && <Check size={16} className="ios-accent-check" />}
                     </button>
                   ))}
