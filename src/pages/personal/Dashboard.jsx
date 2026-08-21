@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Target, CheckCircle2, CalendarDays, RotateCcw, X, Check, ChevronRight, PartyPopper } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useWordTarget } from '../../hooks/useWordTarget';
 import { updateStudentWordTarget } from '../../services/corpService';
@@ -13,11 +14,6 @@ import WhatsNewModal, { WHATS_NEW_VERSION } from '../../components/Onboarding/Wh
 import PackHeaderHero from '../../components/corp/PackHeaderHero';
 import './Dashboard.css';
 
-const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const MONTH_NAMES = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
 const TARGET_STEP = 10;
 const TARGET_MIN = 10;
 // Kept far below corp's 5000 — an individual learner's realistic goal is a
@@ -91,6 +87,9 @@ function buildActivityLog(words) {
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const { t } = useLanguage();
+  const WEEKDAY_LABELS = t('dashboard.weekdays');
+  const MONTH_NAMES = t('dashboard.months');
   const { allWords, packs, loading: packsLoading } = usePacks();
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showWhatsNew, setShowWhatsNew] = useState(false);
@@ -259,13 +258,13 @@ export default function Dashboard() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 6) return 'Hello';
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    return 'Good evening';
+    if (hour < 6) return t('dashboard.hello');
+    if (hour < 12) return t('dashboard.goodMorning');
+    if (hour < 18) return t('dashboard.goodAfternoon');
+    return t('dashboard.goodEvening');
   };
 
-  const displayName = user?.displayName || user?.email?.split('@')[0] || 'User';
+  const displayName = user?.displayName || user?.email?.split('@')[0] || t('nav.user');
 
   return (
     <div className="dash-ov-container">
@@ -280,25 +279,25 @@ export default function Dashboard() {
         {/* ── Target words ── */}
         <PackHeaderHero
           icon={<Target size={22} />}
-          tag={targetReached ? 'Target reached 🎉' : null}
-          title="Target Words"
+          tag={targetReached ? t('dashboard.targetReachedTag') : null}
+          title={t('dashboard.targetWords')}
           subtitle={targetReached
-            ? `You've reached your goal of ${targetWords} words — set a new target to keep going`
-            : `${displayLearned} / ${targetWords} words learned`}
+            ? t('dashboard.reachedGoal', { count: targetWords })
+            : t('dashboard.wordsLearnedOf', { learned: displayLearned, target: targetWords })}
           masteryPct={learnedPct}
           metrics={[
-            { icon: <Target size={16} />, label: 'TARGET', value: targetWords, color: 'blue', onClick: openEditor },
-            { icon: <CheckCircle2 size={16} />, label: 'LEARNED', value: displayLearned, color: 'green' },
+            { icon: <Target size={16} />, label: t('dashboard.target'), value: targetWords, color: 'blue', onClick: openEditor },
+            { icon: <CheckCircle2 size={16} />, label: t('dashboard.learned'), value: displayLearned, color: 'green' },
           ]}
         />
 
         {/* ── Personal calendar ── */}
         <div className="dash-ov-cal-card">
           <div className="dash-ov-cal-header">
-            <span className="dash-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> Activity Calendar</span>
+            <span className="dash-ov-cal-title"><CalendarDays size={16} strokeWidth={2.2} /> {t('dashboard.activityCalendar')}</span>
             <span className="dash-ov-cal-month">{MONTH_NAMES[month]}</span>
           </div>
-          <p className="dash-ov-cal-summary">You've completed <strong>{monthTotal}</strong> reviews this month</p>
+          <p className="dash-ov-cal-summary">{t('dashboard.reviewsThisMonth', { count: monthTotal })}</p>
 
           <div className="dash-ov-cal-weekdays">
             {WEEKDAY_LABELS.map(d => <span key={d} className="dash-ov-cal-weekday">{d}</span>)}
@@ -323,15 +322,15 @@ export default function Dashboard() {
           <div className="dash-ov-hw-header">
             <div className="dash-ov-hw-header-left">
               <div className="dash-ov-hw-icon"><RotateCcw size={20} strokeWidth={2.2} /></div>
-              <h3>Due for Review</h3>
+              <h3>{t('dashboard.dueForReview')}</h3>
             </div>
             {dueWords > 0 && (
-              <span className="dash-ov-hw-count">{dueWords} words</span>
+              <span className="dash-ov-hw-count">{t('dashboard.wordsCount', { count: dueWords })}</span>
             )}
           </div>
 
           {dueWords === 0 ? (
-            <p>No words due for review right now. Great job!</p>
+            <p>{t('dashboard.noWordsDue')}</p>
           ) : (
             <>
               <div className="dash-ov-hw-list">
@@ -361,7 +360,7 @@ export default function Dashboard() {
                 className="dash-ov-hw-practice-btn"
                 onClick={() => navigate('/mixed-practice?filter=due')}
               >
-                Start Review
+                {t('dashboard.startReview')}
               </button>
             </>
           )}
@@ -379,13 +378,13 @@ export default function Dashboard() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="dash-ov-congrats-icon"><PartyPopper size={34} strokeWidth={2} /></div>
-            <h3 className="dash-ov-congrats-title">Congratulations! 🎉</h3>
+            <h3 className="dash-ov-congrats-title">{t('dashboard.congrats')}</h3>
             <p className="dash-ov-congrats-text">
-              You've reached your target — <strong>{targetWords} / {targetWords}</strong> words learned!
+              {t('dashboard.reachedTargetText', { learned: targetWords, target: targetWords })}
             </p>
 
             <button type="button" className="dash-ov-target-save-btn" onClick={startNewTarget}>
-              <Target size={18} strokeWidth={2.6} /> Set New Target
+              <Target size={18} strokeWidth={2.6} /> {t('dashboard.setNewTarget')}
             </button>
           </motion.div>
         </div>
@@ -403,7 +402,7 @@ export default function Dashboard() {
           >
             <div className="dash-ov-target-header">
               <div className="dash-ov-target-header-icon"><Target size={18} strokeWidth={2.3} /></div>
-              <h3>Set Your Target</h3>
+              <h3>{t('dashboard.setYourTarget')}</h3>
               {!mustRaiseTarget && (
                 <button type="button" className="dash-ov-target-close" onClick={closeEditor} aria-label="Close">
                   <X size={18} strokeWidth={2.3} />
@@ -443,14 +442,14 @@ export default function Dashboard() {
               />
               <div className="dash-ov-dial-center">
                 <span className="dash-ov-dial-value">{draftTarget}</span>
-                <span className="dash-ov-dial-unit">words</span>
+                <span className="dash-ov-dial-unit">{t('dashboard.wordsUnit')}</span>
               </div>
             </div>
 
             <p className="dash-ov-dial-hint">
               {mustRaiseTarget
-                ? `You've hit ${targetWords} — drag to set a higher target to keep going`
-                : 'Drag the ring to set your target'}
+                ? t('dashboard.hitTargetHint', { target: targetWords })
+                : t('dashboard.dragHint')}
             </p>
 
             <button
@@ -459,7 +458,7 @@ export default function Dashboard() {
               onClick={saveTarget}
               disabled={mustRaiseTarget && draftTarget <= targetWords}
             >
-              <Check size={18} strokeWidth={2.6} /> Save Target
+              <Check size={18} strokeWidth={2.6} /> {t('dashboard.saveTarget')}
             </button>
           </motion.div>
         </div>

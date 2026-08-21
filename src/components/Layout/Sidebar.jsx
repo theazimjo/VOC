@@ -1,21 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical } from 'lucide-react';
 import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
-const baseNavItems = [
-  { to: '/',         icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/library',  icon: BookOpen,        label: 'Library' },
-  { to: '/grammar',  icon: GraduationCap,   label: 'Grammar' },
-  { to: '/experiment', icon: FlaskConical,   label: 'Lab' },
-];
-
 export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
+
+  const baseNavItems = [
+    { to: '/',         icon: LayoutDashboard, label: t('nav.dashboard') },
+    { to: '/library',  icon: BookOpen,        label: t('nav.library') },
+    { to: '/grammar',  icon: GraduationCap,   label: t('nav.grammar') },
+    { to: '/experiment', icon: FlaskConical,   label: t('nav.lab') },
+  ];
 
   const handleLogout = async () => {
     try {
@@ -38,7 +40,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
   const navItems = [...baseNavItems];
   const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
   if (user?.email && SUPER_ADMINS.includes(user.email.toLowerCase())) {
-    navItems.push({ to: '/admin', icon: Shield, label: 'Admin Panel' });
+    navItems.push({ to: '/admin', icon: Shield, label: t('nav.admin') });
   }
 
   return (
@@ -71,7 +73,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.92 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            title={collapsed ? 'Kengaytirish' : 'Yig\'ish'}
+            title={collapsed ? t('nav.expand') : t('nav.collapse')}
           >
             <VocLogo collapsed={collapsed} />
           </motion.div>
@@ -133,7 +135,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
         <div className="sidebar-footer">
           <motion.div 
             className="sidebar-avatar"
-            title={collapsed ? (user?.displayName || 'Foydalanuvchi') : undefined}
+            title={collapsed ? (user?.displayName || t('nav.user')) : undefined}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -155,7 +157,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                 transition={{ duration: 0.18 }}
               >
                 <div className="sidebar-user-name">
-                  {user?.displayName || 'Foydalanuvchi'}
+                  {user?.displayName || t('nav.user')}
                 </div>
                 <div className="sidebar-user-email">{user?.email}</div>
               </motion.div>
@@ -165,8 +167,8 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
           <motion.button
             className="sidebar-logout"
             onClick={handleLogout}
-            aria-label="Log Out"
-            title="Chiqish"
+            aria-label={t('nav.logout')}
+            title={t('nav.logout')}
             whileHover={{ scale: 1.12, rotate: -6 }}
             whileTap={{ scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 400, damping: 20 }}

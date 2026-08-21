@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, User, Pencil, X, Check,
-  Moon, Type, Volume2, GraduationCap, Users, Repeat, AlertCircle, CheckCircle2, Clock
+  Moon, Type, Volume2, Globe, GraduationCap, Users, Repeat, AlertCircle, CheckCircle2, Clock
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { clearCorpIdentityCache } from '../../hooks/useCorpRole';
 import { setActiveProfile, setActiveTeacherAffiliation } from '../../utils/activeProfile';
@@ -16,17 +17,26 @@ import '../corp/student/StudentCorpProfile.css';
 
 const AVATAR_COLORS = ['#0A84FF', '#30D158', '#FF9500', '#AF52DE', '#FF375F', '#5AC8FA'];
 
-const SHEET_META = {
-  theme: { icon: Moon, title: 'Choose Theme' },
-  font: { icon: Type, title: 'Choose Text Size' },
-  teacher: { icon: GraduationCap, title: 'Teaching' },
-  joinGroup: { icon: Users, title: "Join a Teacher's Group" },
+const SHEET_ICONS = {
+  theme: Moon,
+  font: Type,
+  language: Globe,
+  teacher: GraduationCap,
+  joinGroup: Users,
 };
 
 export default function ProfilePage() {
   const { user, logout, updateUserProfile } = useAuth();
   const navigate = useNavigate();
+  const { t, language, setLanguage, languages } = useLanguage();
   const { theme, setTheme, fontSize, setFontSize, audioEnabled, setAudioEnabled, themes } = useTheme();
+  const SHEET_META = {
+    theme: { icon: SHEET_ICONS.theme, title: t('profile.chooseTheme') },
+    font: { icon: SHEET_ICONS.font, title: t('profile.chooseTextSize') },
+    language: { icon: SHEET_ICONS.language, title: t('profile.chooseLanguage') },
+    teacher: { icon: SHEET_ICONS.teacher, title: t('profile.teaching') },
+    joinGroup: { icon: SHEET_ICONS.joinGroup, title: "Join a Teacher's Group" },
+  };
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
   // Reads both possible teacher affiliations directly — independent of
   // useCorpRole's identity, which for a super-admin-allowlisted email only
@@ -230,23 +240,23 @@ export default function ProfilePage() {
             </div>
           )}
         </div>
-        <button type="button" className="corp-profile-edit-btn" onClick={openEditor} aria-label="Edit profile">
+        <button type="button" className="corp-profile-edit-btn" onClick={openEditor} aria-label={t('profile.editProfileAria')}>
           <Pencil size={16} strokeWidth={2.3} />
         </button>
       </div>
 
       {/* ── Appearance ── */}
-      <div className="corp-profile-section-title">Appearance</div>
+      <div className="corp-profile-section-title">{t('profile.appearance')}</div>
       <div className="corp-profile-appearance-card">
         <div className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => setActiveSheet('theme')}>
           <div className="corp-profile-appearance-row-left">
             <div className="corp-profile-appearance-icon" style={{ background: '#0a7aff' }}>
               <Moon size={15} strokeWidth={2.2} />
             </div>
-            <span className="corp-profile-appearance-title">Theme</span>
+            <span className="corp-profile-appearance-title">{t('profile.theme')}</span>
           </div>
           <div className="corp-profile-appearance-right">
-            <span className="corp-profile-appearance-detail">{themes.find(t => t.id === theme)?.name || theme}</span>
+            <span className="corp-profile-appearance-detail">{theme === 'android' ? t('profile.darkMode') : t('profile.lightMode')}</span>
             <ChevronRight size={14} className="corp-profile-appearance-chevron" />
           </div>
         </div>
@@ -256,11 +266,26 @@ export default function ProfilePage() {
             <div className="corp-profile-appearance-icon" style={{ background: '#8e8e93' }}>
               <Type size={15} strokeWidth={2.2} />
             </div>
-            <span className="corp-profile-appearance-title">Text Size</span>
+            <span className="corp-profile-appearance-title">{t('profile.textSize')}</span>
           </div>
           <div className="corp-profile-appearance-right">
             <span className="corp-profile-appearance-detail">
-              {fontSize === 'small' ? 'Small (14px)' : fontSize === 'large' ? 'Large (19px)' : 'Medium (16px)'}
+              {fontSize === 'small' ? t('profile.small') : fontSize === 'large' ? t('profile.large') : t('profile.medium')}
+            </span>
+            <ChevronRight size={14} className="corp-profile-appearance-chevron" />
+          </div>
+        </div>
+
+        <div className="corp-profile-appearance-row" style={{ cursor: 'pointer' }} onClick={() => setActiveSheet('language')}>
+          <div className="corp-profile-appearance-row-left">
+            <div className="corp-profile-appearance-icon" style={{ background: '#5856d6' }}>
+              <Globe size={15} strokeWidth={2.2} />
+            </div>
+            <span className="corp-profile-appearance-title">{t('profile.language')}</span>
+          </div>
+          <div className="corp-profile-appearance-right">
+            <span className="corp-profile-appearance-detail">
+              {languages.find(l => l.code === language)?.label || language}
             </span>
             <ChevronRight size={14} className="corp-profile-appearance-chevron" />
           </div>
@@ -271,7 +296,7 @@ export default function ProfilePage() {
             <div className="corp-profile-appearance-icon" style={{ background: '#ff2d55' }}>
               <Volume2 size={15} strokeWidth={2.2} />
             </div>
-            <span className="corp-profile-appearance-title">Audio Effects</span>
+            <span className="corp-profile-appearance-title">{t('profile.audioEffects')}</span>
           </div>
           <div className="corp-profile-appearance-right">
             <label className="corp-profile-switch">
@@ -285,7 +310,7 @@ export default function ProfilePage() {
       {/* ── Teaching ── one entry point regardless of affiliation count; the
           sheet itself adapts (become / switch) per affiliation — see
           activeSheet === 'teacher' below. */}
-      <div className="corp-profile-section-title">Teaching</div>
+      <div className="corp-profile-section-title">{t('profile.teaching')}</div>
       <div className="corp-profile-tiles">
         <div
           className="corp-profile-tile"
@@ -294,7 +319,7 @@ export default function ProfilePage() {
           <div className="corp-profile-tile-icon" style={{ background: '#34c759' }}>
             {isTeacher ? <Repeat size={17} strokeWidth={2.2} /> : <GraduationCap size={17} strokeWidth={2.2} />}
           </div>
-          <span className="corp-profile-tile-text">{isTeacher ? 'Teaching' : 'Become a Teacher'}</span>
+          <span className="corp-profile-tile-text">{isTeacher ? t('profile.teaching') : t('profile.becomeTeacher')}</span>
         </div>
         <div
           className="corp-profile-tile"
@@ -303,22 +328,22 @@ export default function ProfilePage() {
           <div className="corp-profile-tile-icon" style={{ background: '#0a7aff' }}>
             <Users size={17} strokeWidth={2.2} />
           </div>
-          <span className="corp-profile-tile-text">Join a Group</span>
+          <span className="corp-profile-tile-text">{t('profile.joinAGroup')}</span>
         </div>
       </div>
 
       {/* ── Account actions ── */}
-      <div className="corp-profile-section-title">Account</div>
+      <div className="corp-profile-section-title">{t('profile.account')}</div>
       <div className="corp-profile-tiles">
         <div className="corp-profile-tile danger" onClick={() => setShowLogoutModal(true)}>
           <div className="corp-profile-tile-icon" style={{ background: 'var(--error, #ff3b30)' }}>
             <LogOut size={17} strokeWidth={2.2} />
           </div>
-          <span className="corp-profile-tile-text">Log Out</span>
+          <span className="corp-profile-tile-text">{t('profile.logOut')}</span>
         </div>
       </div>
 
-      <p className="corp-profile-footer">VOCABRY · Personal Profile</p>
+      <p className="corp-profile-footer">{t('profile.footer')}</p>
 
       {/* ── Logout Confirmation Modal ── */}
       {showLogoutModal && (
@@ -348,10 +373,10 @@ export default function ProfilePage() {
             </div>
 
             <h3 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
-              Log Out?
+              {t('profile.logOutConfirmTitle')}
             </h3>
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', margin: '0 0 0.5rem 0', lineHeight: 1.4 }}>
-              Are you sure you want to log out of your account?
+              {t('profile.logOutConfirmText')}
             </p>
 
             <div style={{ display: 'flex', gap: '0.75rem', width: '100%' }}>
@@ -370,7 +395,7 @@ export default function ProfilePage() {
                 }}
                 onClick={() => setShowLogoutModal(false)}
               >
-                Cancel
+                {t('profile.cancel')}
               </button>
               <button
                 type="button"
@@ -387,7 +412,7 @@ export default function ProfilePage() {
                 }}
                 onClick={handleConfirmLogout}
               >
-                Log Out
+                {t('profile.logOut')}
               </button>
             </div>
           </motion.div>
@@ -414,16 +439,16 @@ export default function ProfilePage() {
 
             {activeSheet === 'theme' && (
               <div className="corp-profile-sheet-options">
-                {themes.map(t => {
-                  const isActive = theme === t.id;
+                {themes.map(th => {
+                  const isActive = theme === th.id;
                   return (
                     <button
-                      key={t.id}
+                      key={th.id}
                       type="button"
                       className={`corp-profile-sheet-option ${isActive ? 'active' : ''}`}
-                      onClick={() => { setTheme(t.id); closeSheet(); }}
+                      onClick={() => { setTheme(th.id); closeSheet(); }}
                     >
-                      <span>{t.name}</span>
+                      <span>{th.id === 'android' ? t('profile.darkMode') : t('profile.lightMode')}</span>
                       {isActive && <Check size={16} strokeWidth={2.6} className="corp-profile-sheet-check" />}
                     </button>
                   );
@@ -434,9 +459,9 @@ export default function ProfilePage() {
             {activeSheet === 'font' && (
               <div className="corp-profile-sheet-options">
                 {[
-                  { id: 'small', label: 'Small (14px)' },
-                  { id: 'normal', label: 'Medium (16px)' },
-                  { id: 'large', label: 'Large (19px)' },
+                  { id: 'small', label: t('profile.small') },
+                  { id: 'normal', label: t('profile.medium') },
+                  { id: 'large', label: t('profile.large') },
                 ].map(opt => {
                   const isActive = fontSize === opt.id;
                   return (
@@ -447,6 +472,25 @@ export default function ProfilePage() {
                       onClick={() => { setFontSize(opt.id); closeSheet(); }}
                     >
                       <span>{opt.label}</span>
+                      {isActive && <Check size={16} strokeWidth={2.6} className="corp-profile-sheet-check" />}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {activeSheet === 'language' && (
+              <div className="corp-profile-sheet-options">
+                {languages.map(l => {
+                  const isActive = language === l.code;
+                  return (
+                    <button
+                      key={l.code}
+                      type="button"
+                      className={`corp-profile-sheet-option ${isActive ? 'active' : ''}`}
+                      onClick={() => { setLanguage(l.code); closeSheet(); }}
+                    >
+                      <span>{l.flag} {l.label}</span>
                       {isActive && <Check size={16} strokeWidth={2.6} className="corp-profile-sheet-check" />}
                     </button>
                   );
@@ -614,7 +658,7 @@ export default function ProfilePage() {
           >
             <div className="corp-profile-edit-header">
               <div className="corp-profile-edit-header-icon"><Pencil size={17} strokeWidth={2.2} /></div>
-              <h3>Edit Profile</h3>
+              <h3>{t('profile.editProfile')}</h3>
               <button type="button" className="corp-profile-edit-close" onClick={closeEditor}>
                 <X size={15} strokeWidth={2.3} />
               </button>
@@ -633,20 +677,20 @@ export default function ProfilePage() {
 
 
             <div className="corp-profile-edit-field">
-              <label htmlFor="student-profile-name-input">Display Name</label>
+              <label htmlFor="student-profile-name-input">{t('profile.displayName')}</label>
               <input
                 id="student-profile-name-input"
                 className="corp-profile-edit-input"
                 type="text"
                 value={draftName}
                 onChange={e => setDraftName(e.target.value)}
-                placeholder="Enter your name"
+                placeholder={t('profile.enterName')}
                 maxLength={40}
               />
             </div>
 
             <button type="button" className="corp-profile-edit-save-btn" onClick={saveProfile}>
-              <Check size={16} strokeWidth={2.5} /> Save Changes
+              <Check size={16} strokeWidth={2.5} /> {t('profile.saveChanges')}
             </button>
           </motion.div>
         </div>

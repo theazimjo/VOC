@@ -2,14 +2,8 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { LayoutDashboard, BookOpen, GraduationCap, FlaskConical } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './PersonalBottomNav.css';
-
-const NAV_ITEMS = [
-  { to: '/', icon: LayoutDashboard, label: 'Dashboard', end: true },
-  { to: '/library', icon: BookOpen, label: 'Library', end: false },
-  { to: '/grammar', icon: GraduationCap, label: 'Grammar', end: false },
-  { to: '/experiment', icon: FlaskConical, label: 'Lab', end: false },
-];
 
 function isItemActive(pathname, item) {
   if (item.end) return pathname === item.to;
@@ -18,6 +12,13 @@ function isItemActive(pathname, item) {
 
 export default function BottomNav() {
   const location = useLocation();
+  const { t } = useLanguage();
+  const NAV_ITEMS = [
+    { to: '/', icon: LayoutDashboard, label: t('nav.dashboard'), end: true },
+    { to: '/library', icon: BookOpen, label: t('nav.library'), end: false },
+    { to: '/grammar', icon: GraduationCap, label: t('nav.grammar'), end: false },
+    { to: '/experiment', icon: FlaskConical, label: t('nav.lab'), end: false },
+  ];
   const itemRefs = useRef([]);
   // Measured in real pixels from the rendered tabs, not guessed via CSS
   // percentages — a percentage of the bar's own padded width doesn't land

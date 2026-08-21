@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, Check, ArrowLeft, Sparkles } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import { ref, onValue, get, remove } from 'firebase/database';
@@ -14,6 +15,7 @@ import './Navbar.css';
 
 export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: layoutAppMode }) {
   const { user, logout } = useAuth();
+  const { t } = useLanguage();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -224,7 +226,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
       <button
         className="navbar-hamburger"
         onClick={onHamburgerClick}
-        aria-label="Menyuni ochish"
+        aria-label={t('nav.openMenu')}
       >
         <Menu size={20} strokeWidth={2.2} />
       </button>
@@ -270,7 +272,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
             </div>
           )}
           <span>
-            {appMode === 'individual' ? 'Personal' : (membership?.groupName || 'Group')}
+            {appMode === 'individual' ? t('nav.personal') : (membership?.groupName || t('nav.group'))}
           </span>
           <ChevronDown size={12} style={{ color: 'var(--text-secondary)', transform: showSwitcher ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
         </button>
@@ -298,7 +300,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 }}>
                   <User size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? '#fff' : '#94a3b8', fontWeight: appMode === 'individual' ? 600 : 500, textAlign: 'center' }}>Personal</span>
+                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? '#fff' : '#94a3b8', fontWeight: appMode === 'individual' ? 600 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
               </div>
 
               {/* Groups Cards */}
@@ -352,7 +354,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 }}>
                   <Plus size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 500, textAlign: 'center' }}>Add</span>
+                <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 500, textAlign: 'center' }}>{t('nav.add')}</span>
               </div>
             </div>
 
@@ -423,18 +425,18 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
         <button
           className="navbar-search-btn"
           onClick={() => setSearchOpen(true)}
-          aria-label="Qidirish"
-          title="Qidirish (Ctrl+K)"
+          aria-label={t('nav.search')}
+          title={t('nav.searchHint')}
         >
           <Search size={18} strokeWidth={2.2} />
         </button>
         {!isOnline && (
           <div
             className="navbar-offline-badge"
-            title="Internet aloqasi yo'q. Loyihangiz offline rejimda ishlaydi va o'zgarishlar avtomatik saqlanib boradi."
+            title={t('nav.offlineHint')}
           >
             <span className="offline-dot"></span>
-            <span>Offline</span>
+            <span>{t('nav.offline')}</span>
           </div>
         )}
         <div className="navbar-user" ref={dropdownRef}>
@@ -442,7 +444,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
           <button
             className="navbar-avatar-btn"
             onClick={handleAvatarClick}
-            aria-label="Profil"
+            aria-label={t('nav.profile')}
             style={{ cursor: 'pointer' }}
           >
             {avatarSrc && !avatarError ? (
@@ -464,7 +466,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 >
                   <div className="navbar-dropdown-header">
                     <div className="navbar-dropdown-name">
-                      {user?.displayName || 'Foydalanuvchi'}
+                      {user?.displayName || t('nav.user')}
                     </div>
                     <div className="navbar-dropdown-email">{user?.email}</div>
                   </div>
@@ -474,7 +476,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                     className="navbar-dropdown-item"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <User size={16} strokeWidth={2.2} /> Profil
+                    <User size={16} strokeWidth={2.2} /> {t('nav.profile')}
                   </Link>
 
                   <Link
@@ -482,7 +484,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                     className="navbar-dropdown-item"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <BarChart3 size={16} strokeWidth={2.2} /> Statistika
+                    <BarChart3 size={16} strokeWidth={2.2} /> {t('nav.statistics')}
                   </Link>
 
                   <Link
@@ -490,14 +492,14 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                     className="navbar-dropdown-item"
                     onClick={() => setDropdownOpen(false)}
                   >
-                    <Settings size={16} strokeWidth={2.2} /> Sozlamalar
+                    <Settings size={16} strokeWidth={2.2} /> {t('nav.settings')}
                   </Link>
 
                   <button
                     className="navbar-dropdown-item danger"
                     onClick={handleLogout}
                   >
-                    <LogOut size={16} strokeWidth={2.2} /> Chiqish
+                    <LogOut size={16} strokeWidth={2.2} /> {t('nav.logout')}
                   </button>
                 </motion.div>
               )}

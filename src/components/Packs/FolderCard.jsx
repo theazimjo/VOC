@@ -50,7 +50,7 @@ export default function FolderCard({ folder, packCount, onOpen, onLongPress }) {
         onClick={handleClick}
         onKeyDown={(e) => { if (e.key === 'Enter') onOpen(); }}
         onContextMenu={handleContextMenu}
-        title="Ochish uchun bosing, tahrirlash uchun bosib turing"
+        title="Click to open, hold to edit or delete"
       >
         <div className="pack-card-top">
           <div className="pack-card-icon">
@@ -82,7 +82,7 @@ export default function FolderCard({ folder, packCount, onOpen, onLongPress }) {
         </div>
 
         <div className="pack-card-footer">
-          <span className="pack-card-new-label">📁 Papkani ochish</span>
+          <span className="pack-card-new-label">📁 Open folder</span>
           <span className="pack-card-arrow">→</span>
         </div>
       </div>

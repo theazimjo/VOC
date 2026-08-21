@@ -72,7 +72,7 @@ export default function PackCard({ pack, onLongPress }) {
         onTouchMove={handleMove}
         onClick={handleClick}
         onContextMenu={handleContextMenu}
-        title="Tahrirlash yoki o'chirish uchun bosib turing"
+        title="Hold to edit or delete"
       >
         <div className="pack-card-top">
           <div

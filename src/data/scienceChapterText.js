@@ -390,10 +390,19 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "Fish are vertebrates that live in water. They are cold-blooded animals. A cold-blooded animal is an animal whose body temperature changes with the temperature of the water or air around it. When the air or water around such an animal is cold, the animal becomes cold. A cold-blooded animal becomes warm when the air or water around it is warm." },
         { type: 'p', text: "The skeleton (skel'e tan) of a fish is simpler than that of other vertebrates. Most fish have skeletons made of bone. The shark and the sting- ray have skeletons made of cartilage (kar'ta lij). So some scientists believe that sharks and sting- rays are not true fish. Cartilage is a soft, bonelike material that bends. You can feel cartilage in the tip of your nose." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/trout.jpg', caption: 'Trout' },
+          { src: '/images/science/ch03/shark.jpg', caption: 'Shark' }
+        ] }
       ],
       [
         { type: 'p', text: "Most fish are covered with scales. A scale is a flat bony structure. Scales cover the body of a fish and protect it. Fish also have fins. A fin is a struc- ture on a fish that helps it move through the water. The drawing shows the different fins on a fish. How many fins can you count on this fish?" },
         { type: 'p', text: "Almost all living things need oxygen. Animals that live on land get oxygen from the air. You may wonder how fish get oxygen under water. There is oxygen dissolved in the water. Fish take in the oxygen found in water through their gills. Gills are thin, feathery structures that are filled with blood. Fish use gills for breathing. To breathe, a fish takes water into its mouth. The water then flows over the gills. Oxygen from the water goes into the blood in the gills. The blood in the gills picks up a waste material from the rest of the fish's body. This waste material is carbon dioxide. The carbon dioxide passes through the gills and then out of the body into the water. This » is how the fish breathes under water." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/fish-scales-types.jpg', caption: 'Types of fish scales' },
+          { src: '/images/science/ch03/fish-structure-diagram.jpg', caption: 'Structure of a fish' },
+          { src: '/images/science/ch03/gills-diagram.jpg', caption: 'How gills work' }
+        ] }
       ],
       [
         { type: 'heading', text: "DIFFERENT TYPES OF FISH" },
@@ -407,39 +416,78 @@ export const scienceChapterText = {
         { type: 'p', text: "Most adult amphibians live on land. They return to water to lay their eggs. A few amphibians spend almost their entire life in water. These include bullfrogs and some salamanders, such as mud puppies." },
         { type: 'heading', text: "SALAMANDER" },
         { type: 'p', text: "Most adult amphibians breathe through lungs. Lungs are organs through which animals get oxygen from air. The mud puppy does not have lungs. It has gills outside its body through which it can breathe under water. Amphibians with lungs cannot live completely in water. They must come to the surface to breathe air. Amphibians can also get oxygen through their skin." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/mud-puppy-gills.jpg', caption: 'Gills of a mud puppy' }
+        ] }
       ],
       [
         { type: 'p', text: "Amphibians such as frogs and toads go through several stages of growth during their life. Look at the drawings and follow the life of the frog. The frog lays its eggs in the water. Fishlike animals called tadpoles hatch from these eggs. Tadpoles live in water and have gills. As the tadpole gets older it grows a tail. At this stage the tadpole looks more like a fish. Then back legs and front legs form. Thp frog develops lungs and comes out on land. Adult frogs usually live on land and have lungs. Other amphibians go through stages of growth like this." },
         { type: 'p', text: "What are the main characteristics of reptiles?" },
         { type: 'p', text: "A reptile (rep'tU) is a cold-blooded vertebrate that has lungs and dry skin. Almost all reptiles have scales. Most reptiles live on land and lay eggs. Some give birth to live young. The eggs of reptiles are laid on land. These eggs have a tough covering that prevents the eggs from drying out on land." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/frog-lifecycle-top.jpg', caption: 'Life cycle of a frog' },
+          { src: '/images/science/ch03/frog-lifecycle-underwater.jpg', caption: 'Tadpole stages underwater' }
+        ] }
       ],
       [
         { type: 'p', text: "There are four main groups of reptiles. These are the alligators and crocodiles, the snakes, the lizards, and the turtles." },
         { type: 'p', text: "Pine snakes hatching from eggs Alligators and crocodiles make up one group of reptiles. They are large four-legged reptiles. They look alike, but their color and the shape of their snout help to tell them apart. Crocodiles are green and gray, while alligators are gray and black. Crocodiles have a more slender and pointed snout than do alligators. The two drawings show how the crocodile and the alligator are different. Can you tell them apart?" },
         { type: 'p', text: "Snakes make up the largest group of reptiles. They do not have legs, and their bodies are covered with thin scales. Snakes can be large or they can be small. The anaconda, from South America, can be more than 9 m long. The thread snake is only about 1 2 cm long." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/pine-snakes-eggs.jpg', caption: 'Pine snakes hatching from eggs' },
+          { src: '/images/science/ch03/gator-croc-heads.jpg', caption: 'Alligator and crocodile snouts' },
+          { src: '/images/science/ch03/anaconda.jpg', caption: 'Anaconda' }
+        ] }
       ],
       [
         { type: 'p', text: "Snake eating mouse and snake's curved teeth Snakes have an interesting way of eating. They swallow their food whole. The picture shows a snake with a whole mouse in its mouth. Most of the things snakes eat are larger than their mouth. When a snake eats an animal larger than its mouth, the snake's lower jaw separates from the upper jaw. This allows the snake's mouth to open very wide. Also, the snake's teeth are curved backward. This makes it hard for an animal to escape from the snake's jaws." },
         { type: 'p', text: "Another group of reptiles is the lizards. There are many different kinds of lizards. Mhny live in deserts and other hot, dry areas. Lizards have claws on their toes, as shown in the picture. The body of a lizard is covered with scales." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/snake-eating-mouse.jpg', caption: "Snake eating mouse and snake's curved teeth" },
+          { src: '/images/science/ch03/lizard-clawed-foot.jpg', caption: 'Lizard and clawed foot' }
+        ] }
       ],
       [
         { type: 'p', text: "The chameleon (ka me'le an) is one of the most interesting lizards. Chameleons live in trees and catch insects for food. They can change color. These lizards can change from brown to green to gray. The chameleon in the picture is changing color. These changes help these animals to blend in with their surroundingsA How can this be helpful?" },
         { type: 'p', text: "Turtles make up the last group of reptiles. The body of a turtle is protected by a shell. When in danger, a turtle pulls its legs and head into its shell. How does this help it to survive? The turtles in the picture are box turtles. They can close their shells very tightly. Some turtles live on land. Others spend most of their time in water." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/chameleon.jpg', caption: 'Chameleon' },
+          { src: '/images/science/ch03/box-turtles.jpg', caption: 'Box turtles' }
+        ] }
       ],
       [
         { type: 'p', text: "What are the main characteristics of birds?" },
         { type: 'p', text: "Birds are warm-blooded animals that are covered with feathers. A warm-blooded animal is an animal whose body temperature stays the same even when the temperature of the air or water around it changes. Birds are vertebrates with lungs. Like reptiles, birds lay eggs. Their eggs are in a hard shell. Wings and feathers make birds different from other vertebrates. Most birds use their wings to fly. Some birds, such as penguins, have feathers and wings but cannot fly. Birds can be found living on land, in trees, and on water. What birds can be found on water?" },
         { type: 'p', text: "The bones and feathers of birds are made in a special way to help birds fly. The bones are hollow and light. The feathers have a hollow central shaft..This shaft makes feathers strong but light. Some large birds may have as many as 25,000 feathers. All birds lose and replace their feathers during a year. This regular loss of feathers is called molting." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/penguins.jpg', caption: 'Penguins' },
+          { src: '/images/science/ch03/bird-bones.jpg', caption: 'Bird bones' }
+        ] }
       ],
       [
         { type: 'p', text: "The major use of feathers is to help birds to fly. Feathers are also needed to keep birds warm. Some birds fluff their feathers when they are cold. This fluffing forms more air spaces between the feathers and helps to keep the birds warm. Ducks and geese have small fluffy feathers called down near their skin. Down traps air and helps to keep the birds warm. Perhaps you have a jacket or blanket filled wilh down. These small feathers Because birds are very active animals, they need a great deal of energy. So they eat a lot of food. Some birds spend most of their life hunting for food. The diet of birds is varied. Some birds eat nuts, while others eat seeds. Birds such as the on6 shown above eat oysters. Birds living near the water sometimes eat fish that they spear with their beaks. Still others, such as ducks and the flamingo below, eat tiny water plants and animals." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/down-feathers.jpg', caption: 'Down feathers' },
+          { src: '/images/science/ch03/oystercatcher.jpg', caption: 'Oyster catcher' },
+          { src: '/images/science/ch03/snowy-egret.jpg', caption: 'Snowy egret and young' },
+          { src: '/images/science/ch03/flamingo.jpg', caption: 'Flamingo' }
+        ] }
       ],
       [
         { type: 'p', text: "Birds show a great variety in nests and nest building. The nests of some birds are built by the male bird. Others are built by the female bird. Still others are built by both male and female. Nests are of all shapes and sizes. Some nests, such as those of the weaverbirds, are extremely large. As many as 600 birds may work together to build huge nests. Nests can be made of twigs, leaves, or feathers. They can also be made of mud or other substances that birds find. Nests can hang from tree branches or rest on the ground. Some nests are even built under piles of rotting leaves." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/nests-weaverbirds.jpg', caption: 'Nests of weaverbirds' },
+          { src: '/images/science/ch03/nest-plover.jpg', caption: 'Nest of plover' }
+        ] }
       ],
       [
         { type: 'p', text: "Some birds can be harmful to people. For example, pigeons c n carry diseases that harm people's lungs. Pigeons are also pests because they damage buildings." },
         { type: 'activity', text: "What is the structure of a bird's feather and a bird's bone? Materials bird feather / scissors / hand fens / chicken bone / pliers / beef bone Procedure A. Look at the drawing of the bird feather on this page. Point out the central shaft and the side branches. Each side branch is called a barb. B. Look at a bird feather. Find the central shaft. Use scissors to cut through the central shaft. 1. Is the central shaft hollow or solid? C. Find the barbs on the feather. Gently pull some of the barbs apart, then put them together by pulling them through your fingers. 2. Why do you think the barbs can be locked to- gether? D. ’Look at the feather with a hand lens. Draw the feather as you see it through a hand lens. E. Look at a chicken bone. Break It In half with pliers. 3. Describe what you see inside the chicken bone. F. Compare the chicken bone with the beef bone. 4. What are the differences between the chicken bone and the beef bone? Conclusion 1. Describe a few important features of a feather and a chicken bone. What features of a bird's feathers and bones help it to fly? 2. Why is a beef bone not suitable for flight?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/feather-diagram.jpg', caption: "Parts of a bird's feather" },
+          { src: '/images/science/ch03/activity-feather-hand.jpg', caption: 'Examining a feather with a hand lens' },
+          { src: '/images/science/ch03/activity-foot-hand.jpg', caption: 'Examining a claw with a hand lens' }
+        ] }
       ],
       [
         { type: 'p', text: "------------ MAMMALS ------------- What are the main characteristics of mammals?" },
@@ -449,17 +497,31 @@ export const scienceChapterText = {
       ],
       [
         { type: 'sidebar', text: "110,000 kg. The common shrew is one of the smallest mammals. It is only about 10 cm long and has a mass of less than 3 g. These tiny mammals are insect eaters. * Do you know? Suppose you find an animal that looks like this: It has a duck's bill and webbed feet. It has a tail like a beaver and fur on its body. It feeds its young milk. Strangely, it also lays eggs. How would you classify this animal? Is it a bird? Is it a reptile? Is it a mammal? This strange animal is an egg-laying mammal. It is called a duck-billed platypus (plat' e pas). The platypus lives In and around Australia." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/shrew.jpg', caption: 'Shrew' },
+          { src: '/images/science/ch03/platypus.jpg', caption: 'Duck-billed platypus' }
+        ] }
       ],
       [
         { type: 'p', text: "The young of most mammals develop inside the mother's body. Some mammals produce a large number of young at one time. For example, mice may give birth to as many as eight to ten young. Large mammals, such as elephants, usually have only one baby. The time needed for the young to grow inside the mother's body is not always the same. It varies from one kind of mammal to another. Large mammals take longer to grow than small mammals. A small mammal such as a hamster grows in 16 days. A large mammal such as a giraffe takes about 442 days. Dogs take about 63 days to grow in the mother's body. Whales grow in about 450 days." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/elephant-baby.jpg', caption: 'Elephant and baby' }
+        ] }
       ],
       [
         { type: 'p', text: "Some mammal babies grow for a very short time inside the mother's body. When they are bom, they are not fully farmed. They are very small and helpless. They crawl into the mother's warm pouch and continue to grow there. The kangaroo and the opossum are mammals whose young develop in a pouch. The picture shows tiny opossum babies feeding inside their mother's pouch and a kangaroo with its young." },
         { type: 'p', text: "Opossums feeding Kangaroo with young Some mammals are important to people. These are the mammals that are used for food and other products. Cattle, pigs, and sheep are raised for meat. Foods such as cheese, cream, and butter come from the milk produced by cows. Belts, shoes, footballs, and leather coats are products made from mammal skins." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/opossums-feeding.jpg', caption: 'Opossums feeding' },
+          { src: '/images/science/ch03/kangaroo-young.jpg', caption: 'Kangaroo with young' }
+        ] }
       ],
       [
         { type: 'p', text: "Some mammals can be harmful to people. Rats are harmful mammals. Rats spread disease to humans. Often rats will eat stored food, such as fruits and grains. Millions of dollars are lost each year because of damage from rats." },
         { type: 'activity', text: "of vertebrates? Materials 5 small index cards l wire coat hanger I yarn / drawing paper / scissors / transparent tape / felt-tip pens or crayons / old magazines Procedure A. You are going to make a mobile showing how the vertebrates are grouped. Write the names of the five main groups of vertebrates on index cards. Using the yarn, attach the cards to the coat hanger as shown. 1. What are the five main groups of vertebrates? B. Cut five strips of drawing paper. On these strips list the main characteristics of each group of vertebrates. C. Using the yarn, attach the lists to the right cards. 2. Did you find any characteristics that ap- peared in more than one group? 3. What are these characteristics? In which D. Below the list of characteristics, hang pictures of animals from each group. You may either draw the animals or cut pictures of animals out of magazines. Attach the pictures with yarn as shown. Conclusion What do all five groups of vertebrates have in common? Using science ideas You can use your mobile to play a science game called \"The Vertebrate Detective.\" Think of one of the animals hanging on the mobile. On an index card list five characteristics of this animal. Read these characteristics one at a time to the class. Have membersof the class guess the animal you are thinking of." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/rat.jpg', caption: 'Rat' }
+        ] }
       ],
     ]
   },
@@ -470,36 +532,68 @@ export const scienceChapterText = {
         { type: 'heading', text: "THE LIVING AND NONLIVING" },
         { type: 'p', text: "All living things are surrounded by other living things. They are also surrounded by nonliving things. These living and nonliving things affect each other. Everything that surrounds and affects a living thing is called its environment (en vT'ran- ment). What are some living things in your home environment? What are some nonliving things? In what ways do these living and nonliving things affect each other? The study of how living and nonliving things affect each other is called ecology (e kol'e je). Scientists who study this subject are called ecologists." },
         { type: 'p', text: "Look at the picture of the fish tank. What living and nonliving things do you see? The living and nonliving things in the tank affect, or interact with, each other. Both the fish and the plants need water to survive. The plants give off oxygen, which goes into the water. The fish, which need oxygen to live, take the oxygen from the water. As they breathe, J:he fish give off carbon dioxide. The plants use the carbon dioxide to make food. Without the fish, the plants would die. And without the plants, the fish would die." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/desert-scene.jpg', caption: 'Desert plants' }
+        ] }
       ],
       [
         { type: 'p', text: "The fish tank is an example of an ecosystem (e'ka sis tom). An ecosystem is a group of living things and their nonliving environment. An ecosystem includes all the ways the living things in a group interact with each other! It also includes the way living things interact with their An ecosystem can be as small as a single fish and a single plant in a fishbowl. Or an ecosystem can be as large as a forest, a desert, or an ocean. Look at the picture of the city park. The park is an qcosystem that may contain several smaller ecosystems. For example, under a rock you may find a small ecosystem that has many kinds of living things. A single tree in the park may be another ecosystem. The tree may be the home of squirrels, birds, and insects. Nongreen plants as well as green plants may also live on the tree." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/city-park.jpg', caption: 'City park' },
+          { src: '/images/science/ch04/ecosystem-under-rock.jpg', caption: 'Ecosystem under a rock' }
+        ] }
       ],
       [
         { type: 'heading', text: "LIVING THINGS IN ECOSYSTEMS" },
         { type: 'p', text: "You have learned that an ecosystem is made up of living and nonliving things. The living things in an ecosystem are known as a community (kemyii'ne te). A community is all the plants and animals that live and interact with each other in a place." },
         { type: 'p', text: "Communities are often named for the kind of place in which they live. There are forest, marsh, and pond communities. What are some other kinds of communities?" },
         { type: 'p', text: "Communities are made up of populations (popya la'shanz). A population is a group of the same kind of living thing in a community. For example, all the pine trees in this forest make up one population. It is a population of pine trees. Which picture shows a population of grass plants? What other populations are shown?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/pine-forest.jpg', caption: 'A population of pine trees' },
+          { src: '/images/science/ch04/house-lawn.jpg', caption: 'A population of grass plants' }
+        ] }
       ],
       [
         { type: 'p', text: "Members of the geese population can easily be seen in the picture of the marsh. What other animal populations live in a marsh? There are also many different plant populations in the marsh. The different populations in a community interact with each other. The geese feed on the marsh plants. When they feed on these plants, the geese make room for new plants to grow. The geese also release wastes into the soil. This enriches the soil and helps the new plants grow." },
         { type: 'activity', text: "Materials meterstick or metric tape / 4 sticks / 4.5 m of string / hand lens / 2 jars with lids / small shovel / white paper Procedure A. Choose a place outdoors to study. Measure a square area of ground 1 m on each side. Push four sticks into the ground to mark the four corners of your square. Tie string around the sticks to enclose the area. B. Study the area clo.sely for several minutes. Look for moving insects or other animals. Make a list of all the kinds of animals and plants that you see. Use a hand lens to help you see small plants and animals, 1. How many kinds of animals do you see? 2. How many kinds of plants do you see? C. Collect a sample of each kind of plant and animal you find. Put these samples in a jar. D. Use a small shovel to collect a sample of the soil. Put this sample in another jar. E. Pour the soil sample onto a sheet of white paper. Examine the sample with a hand lens. Look for living things. Look at the samples in the other jar. 3. What living things can you identify? Conclusion 1. What populations did you find in the ecosystem you studied? 2. In what ways might these populations affect each other? Using science ideas Suppose you studied this same area at another time of the year. How might this affect the number and kinds of populations you could see? Explain." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/geese-marsh.jpg', caption: 'Geese in a marsh' },
+          { src: '/images/science/ch04/marsh-inset-column.jpg', caption: 'Cattails, dragonfly, snake, salamander, and fish' }
+        ] }
       ],
       [
         { type: 'p', text: "Every living thing in a community has a special place in which it is usually found. The special place in a community in which a plant or animal lives is called its habitat (hab’a tat). You can think of an ecosystem as the neighborhood that a living thing is part of. The habitat can be thought of as its address in that neighborhood." },
         { type: 'p', text: "s Within a community there are many habitats." },
         { type: 'p', text: "In a forest the soil is the habitat of ants and earthworms. A rotten tree stump is the habitat of termites. Squirrels live in the trees. Mosses grow on the forest floor, in the shade of trees. Ants and earthworms, termites, squirrels, and mosses each have their own habitat. But these living things are all part of the same community." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/forest-habitats.jpg', caption: 'Some forest habitats' }
+        ] }
       ],
       [
         { type: 'p', text: "The populations and habitats in a desert are different from those in a forest. Look at the picture. The cactus plant is the habitat of the elf owl. The habitats of many other desert animals are burrows under the ground." },
         { type: 'p', text: "The habitat of a plant or animal supplies it with many of the things that it needs to survive. Some Living things are able to live in more than one habitat. Others can live in only one habitat. For example, flies can live in many habitats. They move to different places to get food. Mice can also live in more than one habitat. They are found in city buildings as well as in country fields." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/elf-owl-cactus.jpg', caption: 'Elf owl in nest in saguaro cactus' },
+          { src: '/images/science/ch04/mouse-city.jpg', caption: 'Mouse in city building' },
+          { src: '/images/science/ch04/mouse-field.jpg', caption: 'Mouse in country field' }
+        ] }
       ],
       [
         { type: 'p', text: "Some animals are very limited in their habitat. Trout can only live in cool streams. The koala (koa'le) of Australia eats only one kind of plant. It eats the leaves of the eucalyptus (yu ke lip'tes) tree. So the koala can only live where this kind of tree grows. Food also limits the habitat of the panda. It only eats bamboo. How many different habitats could you live in?" },
         { type: 'sidebar', text: "Do you know?. Panda populations are in danger. There may be only 1,000 pandas left in the wild. The reason for this is the amount of food available. Pandas live in forests in China where bamboo grows. Bamboo is the main food of pandas. The growth cycle of bamboo takes 100 years to complete. Every 100 years bamboo plants flower, produce seeds, and then die. It takes many years for new bamboo plants to grow. In the past, when bamboo plants died, pandas moved to other parts of the forests to find growing bamboo. But huge farms have been built in some parts of the forests. The pandas will not cross these farms. So they starve. In one case, farmers found the bodies of more than 130 starved pandas. Panda eating bamboo Many plants and animals share the same habitat. Earthworms share the soil with many plants. Termites share a rotten tree stump with ants and other insects. Birds share their tree habitat with squirrels. Although they share the same habitat, the way these animals live may be very different from each other. The role that each living thing plays in a habitat is called its niche (nich)." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/koala-eating.jpg', caption: 'Koala eating eucalyptus leaf' },
+          { src: '/images/science/ch04/panda-bamboo.jpg', caption: 'Panda eating bamboo' }
+        ] }
       ],
       [
         { type: 'p', text: "Some squirrels and birds share the same habitat. Yet these animals each have a different niche. Squirrels gather nuts and stay close to their habitat. Some birds are insect eaters. They travel great distances from their habitat to get food. Both animals share the same habitat. But Remote cardinal they do not have a great effect on each other." },
         { type: 'p', text: "Sometimes the niche of one population does affect other populations. A creek is the habitat of a population of beavers. The beavers build dams across the creek. The dams they build create ponds. The ponds become the habitat of fish and plants. The beavers also cut down many trees. How does this affect the tree population?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/remote-cardinal.jpg', caption: 'Remote cardinal' },
+          { src: '/images/science/ch04/red-squirrel.jpg', caption: 'Red squirrel' },
+          { src: '/images/science/ch04/beaver-dam.jpg', caption: 'Beaver cutting down tree and building dam' }
+        ] }
       ],
       [
         { type: 'heading', text: "CHANGES IN POPULATIONS" },
@@ -522,19 +616,37 @@ export const scienceChapterText = {
         { type: 'heading', text: "CHANGES IN COMMUNITIES" },
         { type: 'p', text: "You learned that a sudden major change, such as a fire, can affect the size of populations. Sudden changes can also affect whole communities." },
         { type: 'p', text: "On May 18, 1980, a volcano in Washington erupted. The volcano, Mount St. Helens, ex- ploded with great force. The force was equal to almost 10 million metric tons of dynamite. One picture shows how the area looked before the blast. The other shows the same area 4 months Mount St. Helens before the eruption Mount St. Helens 4 months otter the eruption 95 after the blast. Millions of trees were blown down. Many plants were burned or covered with layers of ash as much as 180 m deep. Scientists believe that thousands of bear, deer, and other animals lost their lives. Few living things in the area survived." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/trees-blown-down.jpg', caption: 'Trees blown down by eruption' }
+        ] }
       ],
       [
         { type: 'p', text: "A fire destroyed many square kilometers of the forest below. Trees, shrubs, grasses, and other plants were burned in the fire. Many animals were also killed. Among these were snakes, lizards, rabbits, and baby birds. Some animals were able to escape the fire, and so they lived. But many of the animals that lived lost their food sup- People also cause changes in communities. The picture shows a major change in a redwood forest. People are cutting dovfln the trees to use the wood. What changes might result from clearing the trees in this forest? In what ways are these changes like the changes from a forest fire? What are some living things that will lose their habitat?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/forest-fire-colorado.jpg', caption: 'Colorado forest destroyed by fire' },
+          { src: '/images/science/ch04/redwood-clearing.jpg', caption: 'People clearing a redwood forest' }
+        ] }
       ],
       [
         { type: 'p', text: "What changes have occurred in your environment? Interview some adults who have lived in your neighborhood for a long time. Find out what the area was like many years ago. What changes have there been? Find out whether each change was brought about by people or was a natural change." },
         { type: 'p', text: "Ask about the kinds of plants and animals that lived in the neighborhood. Find out how these living things were affected by each change. Be sure to ask about the effect that the changes might have had on people." },
         { type: 'p', text: "What happens after a sudden major change destroys an ecosystem? The same community does not come back right away. It may take 100 or more years for it to return. During this time there are many changes in the kinds of living things in an ecosystem. The series of changes in the communities of an ecosystem is called succession (sek sesh'en)." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/interview-photo.jpg', caption: 'Interviewing an adult about neighborhood changes' }
+        ] }
       ],
       [
         { type: 'p', text: "These drawings show succession in a forest after a fire." },
         { type: 'p', text: "1 . Before the fire a forest of beech and maple trees is the habitat of many living things. 2. A fire burns the trees and other plants. 3. Several years after the fire the area has be- come a field. There are grasses and other low plants. Insects, birds, groundhogs, and other animals live in the field. 4. In a few years shrubs and young trees grow. 5. The beech and maple trees reappear after 100 years. What animals live in the forest?" },
         { type: 'p', text: "Ecologists have found that there are different stages in the succession of any ecosystem. The first stage of succession is called the pioneer (pi anir') stage. What is the number of the drawing that shows the pioneer stage in the succession of the forest? This picture shows the beginning of the pioneer stage after the Mount St. Helens blast. New plants are growing out of the ash." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/succession-panel-1.jpg', caption: 'Succession after a fire, stage 1' },
+          { src: '/images/science/ch04/succession-panel-2.jpg', caption: 'Succession after a fire, stage 2' },
+          { src: '/images/science/ch04/succession-panel-3.jpg', caption: 'Succession after a fire, stage 3' },
+          { src: '/images/science/ch04/succession-panel-4.jpg', caption: 'Succession after a fire, stage 4' },
+          { src: '/images/science/ch04/succession-panel-5.jpg', caption: 'Succession after a fire, stage 5' },
+          { src: '/images/science/ch04/pioneer-mt-st-helens.jpg', caption: 'Pioneer stage, Mount St. Helens' }
+        ] }
       ],
       [
         { type: 'p', text: "The last stage in the process of succession is called the climax (klf'maks) stage. Which drawing shows the climax stage? The climax stage in a community is usually stable. This means that it rarely changes. What might cause it to change?" },
@@ -550,11 +662,18 @@ export const scienceChapterText = {
         { type: 'p', text: "Using a telescope or things that are very far away. They use microscopes to see very small objects. They use telescopes to study the stars. All the scientists in the pictures are gathering information about matter." },
         { type: 'p', text: "Scientists have learned that all matter is made of small particles. They have never seen these particles with the unaided eye. From the results of tests, scientists believe that the particles exist." },
         { type: 'p', text: "Scientists make guesses about many things they cannot test directly. They make guesses about what the inside of the earth is like. They make guesses about what the stars are made of. So far, scientists have not been able to drill into the center of the earth. They have not yet traveled to a star. But they have made guesses about the matter in these places." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/telescope.jpg', caption: 'Using a telescope' }
+        ] }
       ],
       [
         { type: 'p', text: "The guesses that scientists make are based on many careful studies. These studies give scientists clues about things that they cannot see or test directly. Indirect evidence (in da rekt' ev'a dans) is a set of clues that scientists use to make guesses about things they cannot see or test directly." },
         { type: 'p', text: "The picture shows two closed boxes. An umbrella is inside one box. A fish bowl is inside the other box. Guess which box holds the umbrella. You probably guessed box A. What clues did you base your guess on? These clues are indirect evidence of what is inside each box." },
         { type: 'p', text: "The girl in the picture cannot see what is in the box. By shaking the box, she is trying to find out what is inside. By holding the box in her hands, she is learning about its mass." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/boxes-ab.jpg', caption: 'Two closed boxes, A and B' },
+          { src: '/images/science/ch05/girl-collecting-evidence.jpg', caption: 'Collecting indirect evidence' }
+        ] }
       ],
       [
         { type: 'p', text: "As you have read, scientists use indirect evidence to find out about the world around them. They gather facts, or data, about things they can- not observe directly. Scientists use indirect evidence to learn about distant objects. They also use indirect evidence to study very small objects. Collecting indirect evidence" },
@@ -568,22 +687,37 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "Have you ever made a model of a ship, a plane, a house, or a car? The picture shows a model of an airplane. This model is much smaller than the real thing. But models of atoms are much larger than real atoms." },
         { type: 'p', text: "For many years scientists have been making models of the atom. What do the models show? Scientists think the atom hSs a central part called a nucleus (nii'kle as). The nucleus of an atom contains two kinds of particles, protons (prO'tonz) and neutrons (nii'tronz). Protons and neutrons are tightly packed together in the nucleus. Tiny particles called electrons (i lek'tronz) travel around the nucleus. The drawing shows a model of a hydrogen atom." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/model-airplane.jpg', caption: 'Model airplane' }
+        ] }
       ],
       [
         { type: 'p', text: "An atom is almost all empty space. Suppose you were to make a model of a hydrogen atom. , The nucleus of the atom would be the size of an orange. The electrons would be in the space outside the orange. Then your model of the atom would be very large. It would be about 22 football fields across!" },
         { type: 'p', text: "The electrons in your model would be very small. They would each be smaller than the head of a pin. The electrons would be moving quickly all around the orange. This shows that in a real atom there is mostly empty space between the nucleus and the electrons." },
         { type: 'p', text: "What is an easy way to write the names of Some kinds of matter cannot be broken down into simpler kinds of matter. Suppose a silver bar is broken down into the smallest particle that is still silver. The smallest particle of the silver bar would be a silver atom. A silver atom cannot be broken down into a simpler kind of matter and still be silver." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/silver-candlestick.jpg', caption: 'Silver candlestick' },
+          { src: '/images/science/ch05/silver-bar.jpg', caption: 'Silver bar' }
+        ] }
       ],
       [
         { type: 'p', text: "Silver is an element (el'o ment). An element is matter that is made up of only one kind of atom. It is a basic kind of matter. The smallest particle of an element is an atom." },
         { type: 'p', text: "Scientists have discovered 106 different elements. The atoms of these elements are different from one another. One way in which they differ is in the number of protons. Different atoms have different numbers of protons. For example, an atom of silver has 47 protons. An atom of gold has 79 protons. Of the 106 elements, 92 of these oc-" },
         { type: 'sidebar', text: "cur naturally on the earth. The other 14 elements have been made by scientists using special machines, The picture shows bjects made mainly of only one element. Can you name the elements that make up the objects in the picture? Each of the elements has its own symbol. A symbol is a short way to write the name of an element. The symbol stands for the name of the element. Why do scientists use symbols? They find it easier and quicker to write the symbol than to write the whole name of the element. Scientists all over the world use the same symbols. Do you know? Some of the elements were named in an interesting way. The element tungsten was dis- covered in Sweden and in Spain at the same time. In Sweden it was>found in a heavy yellow rock. The element was named tungsten. The name comes from two Swedish words. Tung means \"heavy\" and sten means \"stone.\" The Spanish scientists called the same element wolfram. It was found In a mineral called wolframite. Today in most parts of the world the element is called wolfram. In the United States it is called tungsten. But it is known by the symbol W. The picture shows a bulb with a tungsten filament." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/objects-one-element.jpg', caption: 'Objects made mainly of one element' },
+          { src: '/images/science/ch05/tungsten-bulb.jpg', caption: 'Light bulb with a tungsten filament' }
+        ] }
       ],
       [
         { type: 'p', text: "How can you group the elements? One way scientists group the elements is to put all metals in one group and all nonmetals into a second group. Most metals are good conductors of electricity and are shiny. Most nonmetals are poor conductors of electricity and are not shiny. Many nonmetals are gases. Which of the ob- jects shown here is made mainly of a metal? Which is made mainly of a nonmetal? Which of the elements in the following list are metals? Which are nonmetals? aluminum carbon helium lead nickel oxygen The table on page 121 lists some elements and their symbols. It describes how the elements look. Look at the list of symbols. You will see that sometimes the symbol for an element is the first letter of its name. For example, the symbol for carbon is C. Sometimes the symbol is two letters. For example, the symbol for calcium is Ca. A twoletter symbol is sometimes used because the names of some elements begin with the same letter. So the symbol Ca stands for calcium and the symbol Co stands for cobalt." },
       ],
       [
         { type: 'p', text: "Look at the symbol for iron. It is Fe. The word for iron in Latin is ferrum (fer'em). So the symbol for iron comes from that word. Find the symbol for silver. It is Ag. The word for silver in Latin is argentum (ar jen'tam). The symbol for silver comes from that word. The symbols for some other elements also come from their names in Latin and other languages. Find mercury in the table. It is an unusual metal. Is mercury a solid, a liquid, or a gas at room temperature? Helium-fllled balloons Diamond—a form of carbon Calcium Ca Silver-white metal Carbon C Black solid or colorless crystal Chlorine Cl Greenish-yellow poisonous gas Cobalt Co Silver-white metal Gold Au Heavy yellow metal * Helium He Light gas with no color, taste, or odor Hydrogen H Gas with no color, taste, or odor Iron Fe Gray-white metal Mercury Hg Heavy silver-colored metal; liquid at room temperature Nitrogen N Gas with no color, taste, or odor Oxygen O Gas with no color, taste, or odor Silver Ag Shiny white metal Sodium Na Soft silvery metal Sulfur S Powdery yellow solid" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/diamond-carbon.jpg', caption: 'Diamond, a form of carbon' },
+          { src: '/images/science/ch05/common-elements-table.jpg', caption: 'Some common elements' }
+        ] }
       ],
       [
         { type: 'heading', text: "MOLECULES AND COMPOUNDS" },
@@ -592,18 +726,36 @@ export const scienceChapterText = {
       ],
       [
         { type: 'activity', text: "Can you form a compound? Materials 2 test tubes / steel wool pad / magnet water / 2 test-tube clamps / ring stand / 600-ml beaker / wax pencil / hand lens Procedure A. Test a steel wool pad with a magnet. 1. Is the steel wool attracted to the magnet? B. Wet the steel wool pad with water. Fill the lower 2 cm of a test tube with a piece of the steel wool pad as shown. Use a pencil to push the pad into the tube. Use a wax pencil to make a mark 2 cm from the open end of each test tube. C. Half fill a beaker with water. Set up the two test tubes with the beaker and a ring stand. One test tube will be empty. Make sure the wax pencil mark is even with the surface of the water. 2. Predict what will happen in each test tube. D. Observe the test tubes for 5 days. Note any changes that occur inside the test tubes each day. 3. How has the steel wool pad changed? 4. How has the water level changed? E. After 5 days remove the steel wool pad and look at it with a hand lens. Test it with a magnet. ’ 5. Describe how the steel wool pad looks. 6. Is the steel wool attracted to the magnet? Conclusion A new compound has been formed. It is called iron oxide. Iron oxide is made from iron and oxygen. The oxygen came from the air. 1. Where did the iron come from? 2. Why do you think the water level changed? Using science ideas There are many things around you that are made of iron. Name some ways that you can prevent Iron objects from changing to iron oxide." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/compound-setup.jpg', caption: 'Setting up the compound experiment' },
+          { src: '/images/science/ch05/compound-hand.jpg', caption: 'Adding steel wool to a test tube' }
+        ] }
       ],
       [
         { type: 'p', text: "You have learned that the atoms in a compound are from different elements. Table salt, for example, is made of the elements sodium and chlo- rine. Sugar is another compound. It is made of atoms of the elements carbon, hydrogen, and oxygen. A compound may be very different from the atoms it is made of. Sugar is a white crystal that tastes sweet. It is formed of the elements carbon, hydrogen, and oxygen. Are these three elements very different from sugar?" },
         { type: 'p', text: "Look at the table of the compounds on page 125. The table lists four common compounds. It shows the elements they are made of and describes these elements. Find the description of the elements that make up sugar. You will find that the elements making up sugar are different from the compound sugar." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/salt-pouring.jpg', caption: 'Salt and salt crystals' },
+          { src: '/images/science/ch05/sugar-pouring.jpg', caption: 'Sugar and sugar crystals' }
+        ] }
       ],
       [
         { type: 'p', text: "Find the elements that make up table salt. Do the elements sodium and chlorine look like table salt? No. Sodium is a silvery metal. Chlorine is a greenish-yellow poisonous gas. Table salt is a white crystal us£d to season food. Notice that the compound salt is different from the elements that make it up." },
         { type: 'p', text: "Elements In compound; symbol for elements Description of elements Enlarged salt crystals Water droplets Enlarged su ar crystals Ammonia In water Here is another example. Water is a compound formed from elements that are different from wa- ter. On the earth water can be found as a liquid, as a solid, and as a gas. We drink it and we bathe in it. It makes up about two thirds of our body." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/compounds-table.jpg', caption: 'Four common compounds' },
+          { src: '/images/science/ch05/salt-crystals-enlarged.jpg', caption: 'Enlarged salt crystals' },
+          { src: '/images/science/ch05/water-droplets.jpg', caption: 'Water droplets' },
+          { src: '/images/science/ch05/sugar-crystals-enlarged.jpg', caption: 'Enlarged sugar crystals' },
+          { src: '/images/science/ch05/ammonia-bottle.jpg', caption: 'Ammonia in water' }
+        ] }
       ],
       [
         { type: 'p', text: "Water is made up of the elements hydrogen and oxygen. Hydrogen is a gas that has no color, taste, or odor. Oxygen is also a gas. It, too, has no color, taste, or odor. It makes up about one fifth of the air. The elements that make up water are very different from the compound water." },
         { type: 'p', text: "Remember that scientists use symbols for the names of elements. It is easier to write the symbol for an element than to spell out its name. Scientists also use these symbols to write the names of compounds. Water is written H2O. H2O stands for one molecule#of water. The symbol for hydrogen (H) is joined with the symbol for oxygen (0)." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/water-recreation.jpg', caption: 'Water for recreation' }
+        ] }
       ],
       [
         { type: 'sidebar', text: "The small number 2 after the H means there are two atoms of hydrogen in a molecule of water. Notice that there is no number*after the O. This means there is only one atom of oxygen in a molecule of water. Do you know? The chemical symbols used by scientists today were not always used. Over the centuries the symbols for the elements have changed. In the sixteenth century the symbol for gold was a picture of the sun. The symbol for mercury was a staff carried by the god Mercury. Lead was represented by a farm tool carried by the god Saturn. In 1814 all this changed. A chemist in Sweden decided to use letter symbols for the elements. These symbols were based on the ancient names of the elements. Au. used for gold, stands for aurum (or'em). Hg. used for mercury, stands for hydrargyrum (hi drdr'jer am). Pb. used for lead, stands for plumbum. These same letter symbols are still used today by chemists all over the world. gold Q @ mercury *i © lead K T? © Pb" },
@@ -611,6 +763,9 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "H2O is the formula (for'mye le) for water. A formula is a group of symbols and numbers that stands for a compound. The symbols in a formula show the kinds of atoms in a compound. The numbers in a formula show the number of atoms in the smallest particle of a compound." },
         { type: 'p', text: "Every compound can be written with a formula. The formula for one type of sugar is C12H22O n . What does this formula show you? It shows you" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/ocean-waves-molecule.jpg', caption: 'A water molecule' }
+        ] }
       ],
     ]
   },

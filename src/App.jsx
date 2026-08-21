@@ -1,6 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { PacksProvider } from './contexts/PacksContext';
 import { GroupModeProvider } from './contexts/GroupModeContext';
@@ -83,6 +84,7 @@ export default function App() {
       <BrowserRouter>
         <ThemeProvider>
           <AuthProvider>
+            <LanguageProvider>
             <GroupModeProvider>
               <PacksProvider>
                 {/* Deliberately OUTSIDE Suspense: if it were inside, the
@@ -209,6 +211,7 @@ export default function App() {
                 </SuccessTransitionProvider>
               </PacksProvider>
             </GroupModeProvider>
+            </LanguageProvider>
           </AuthProvider>
         </ThemeProvider>
       </BrowserRouter>
