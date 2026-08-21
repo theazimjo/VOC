@@ -34,6 +34,11 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
+[data-theme='sepia'] .navbar--corp-student {
+  background: rgba(244, 228, 193, 0.97);
+  border-bottom-color: rgba(112, 91, 69, 0.2);
+}
+
 /* left offset matches sidebar */
 .navbar--expanded {
   left: var(--sidebar-width);
@@ -309,14 +314,14 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  background: #16161f;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 1rem;
   width: max-content;
   max-width: 380px;
   z-index: 1001;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow-lg);
 }
 
 @media (max-width: 1024px) {

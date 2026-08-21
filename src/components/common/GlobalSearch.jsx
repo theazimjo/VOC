@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Package, ChevronRight } from 'lucide-react';
@@ -203,7 +204,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
     }
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -216,7 +217,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
         >
           <motion.div
             className="global-search-sheet"
-            initial={{ opacity: 0, y: -16, scale: 0.98 }}
+            initial={{ opacity: 0, y: -20, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -16, scale: 0.98 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -315,6 +316,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

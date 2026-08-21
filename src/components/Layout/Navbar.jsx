@@ -290,17 +290,17 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                   width: '46px',
                   height: '46px',
                   borderRadius: '12px',
-                  background: 'rgba(59, 130, 246, 0.12)',
-                  color: '#3b82f6',
+                  background: 'var(--accent-1-dim)',
+                  color: 'var(--accent-1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: appMode === 'individual' ? '2px solid #3b82f6' : 'none',
-                  boxShadow: appMode === 'individual' ? '0 0 10px rgba(59, 130, 246, 0.3)' : 'none'
+                  border: appMode === 'individual' ? '2px solid var(--accent-1)' : '1px solid var(--border)',
+                  boxShadow: appMode === 'individual' ? '0 0 10px var(--accent-1-dim)' : 'none'
                 }}>
                   <User size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? '#fff' : '#94a3b8', fontWeight: appMode === 'individual' ? 600 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
+                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: appMode === 'individual' ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
               </div>
 
               {/* Groups Cards */}
@@ -317,19 +317,19 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                       width: '46px',
                       height: '46px',
                       borderRadius: '12px',
-                      background: isActive ? '#22c55e' : '#14532d',
-                      color: isActive ? '#fff' : '#4ade80',
+                      background: isActive ? 'var(--accent-2)' : 'var(--bg-tertiary)',
+                      color: isActive ? '#fff' : 'var(--accent-2)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontSize: '0.85rem',
                       fontWeight: 700,
-                      border: isActive ? '2px solid #22c55e' : 'none',
-                      boxShadow: isActive ? '0 0 10px rgba(34, 197, 94, 0.3)' : 'none'
+                      border: isActive ? '2px solid var(--accent-2)' : '1px solid var(--border)',
+                      boxShadow: isActive ? '0 0 10px var(--accent-2-dim)' : 'none'
                     }}>
                       {badge}
                     </div>
-                    <span style={{ fontSize: '0.72rem', color: isActive ? '#fff' : '#94a3b8', fontWeight: isActive ? 600 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
+                    <span style={{ fontSize: '0.72rem', color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: isActive ? 700 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
                       {g.groupName}
                     </span>
                   </div>
@@ -345,16 +345,16 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                   width: '46px',
                   height: '46px',
                   borderRadius: '12px',
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px dashed rgba(255, 255, 255, 0.15)',
-                  color: '#3b82f6',
+                  background: 'var(--bg-tertiary)',
+                  border: '1px dashed var(--border)',
+                  color: 'var(--accent-1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}>
                   <Plus size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 500, textAlign: 'center' }}>{t('nav.add')}</span>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 500, textAlign: 'center' }}>{t('nav.add')}</span>
               </div>
             </div>
 
@@ -365,13 +365,13 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 style={{ 
                   marginTop: '1rem', 
                   paddingTop: '1rem', 
-                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderTop: '1px solid var(--border)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '6px'
                 }}
               >
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 500 }}>{t('profile.pinLabel')}</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{t('profile.pinLabel')}</div>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   <input
                     type="text"
@@ -380,10 +380,10 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                     value={pinCode}
                     onChange={e => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
                     style={{
-                      background: 'rgba(0, 0, 0, 0.2)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      background: 'var(--bg-tertiary)',
+                      border: '1px solid var(--border)',
                       borderRadius: '6px',
-                      color: '#fff',
+                      color: 'var(--text-primary)',
                       padding: '6px 8px',
                       fontSize: '0.8rem',
                       outline: 'none',

@@ -1,13 +1,19 @@
 .global-search-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 2000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999;
   display: flex;
   justify-content: center;
-  padding: 12vh 16px 16px;
+  padding: 10vh 16px 16px;
+  box-sizing: border-box;
 }
 
 .global-search-sheet {
@@ -31,6 +37,11 @@
 [data-theme='android'] .global-search-sheet {
   background: rgba(30, 30, 32, 0.97);
   border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme='sepia'] .global-search-sheet {
+  background: rgba(244, 228, 193, 0.97);
+  border-color: rgba(112, 91, 69, 0.2);
 }
 
 /* ---------- Search field — an iOS-style filled pill, not a flush row with
