@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Check } from 'lucide-react';
 import { grammarData } from '../../data/grammarData';
 import { russianGrammarData } from '../../data/russianGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
@@ -39,6 +40,8 @@ const headerVariants = {
 export default function GrammarPage() {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const optionsRef = useRef(null);
   const [activeLang, setActiveLangState] = useState(() => {
     return localStorage.getItem('grammar_lang') || 'english';
   });
@@ -46,6 +49,16 @@ export default function GrammarPage() {
     return localStorage.getItem('grammar_level') || 'beginner';
   });
   const { stats: grammarStats } = useGrammarStats();
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (optionsRef.current && !optionsRef.current.contains(e.target)) {
+        setOptionsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const setActiveLang = (lang) => {
     setActiveLangState(lang);
@@ -97,39 +110,74 @@ export default function GrammarPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Page Header */}
+      {/* Main Header / Overview Card */}
       <motion.div
         className="grammar-header"
         variants={headerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="grammar-header-glow" />
-        <div className="grammar-header-content">
-          <div className="grammar-header-icon">📖</div>
-          <div className="grammar-header-titles">
+        <div className="grammar-header-top-row">
+          <div className="grammar-header-titles-left">
+            <div className="grammar-header-icon">📖</div>
             <h1 className="grammar-title">{t('grammar.title')}</h1>
           </div>
 
-          <div className="grammar-lang-switcher-right">
+          {/* Options Dropdown Button on the right of Grammar title */}
+          <div className="grammar-options-dropdown-wrapper" ref={optionsRef}>
             <button
               type="button"
-              className={`lang-switch-btn ${activeLang === 'english' ? 'active' : ''}`}
-              onClick={() => setActiveLang('english')}
-              title={t('grammar.englishGrammar')}
+              className="grammar-options-btn"
+              onClick={() => setOptionsOpen((prev) => !prev)}
+              aria-label="Options"
+              title="Grammar Options"
             >
-              <span className="lang-flag">🇬🇧</span>
-              <span className="lang-name">EN</span>
+              <span className="current-lang-flag">{activeLang === 'english' ? '🇬🇧' : '🇷🇺'}</span>
+              <span className="current-lang-code">{activeLang === 'english' ? 'EN' : 'RU'}</span>
+              <ChevronDown size={14} className={`options-chevron ${optionsOpen ? 'open' : ''}`} />
             </button>
-            <button
-              type="button"
-              className={`lang-switch-btn ${activeLang === 'russian' ? 'active' : ''}`}
-              onClick={() => setActiveLang('russian')}
-              title={t('grammar.russianGrammar')}
-            >
-              <span className="lang-flag">🇷🇺</span>
-              <span className="lang-name">RU</span>
-            </button>
+
+            <AnimatePresence>
+              {optionsOpen && (
+                <motion.div
+                  className="grammar-options-menu"
+                  initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                >
+                  <div className="grammar-options-menu-header">
+                    <span>Language / Язык</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    className={`grammar-option-item ${activeLang === 'english' ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveLang('english');
+                      setOptionsOpen(false);
+                    }}
+                  >
+                    <span className="option-flag">🇬🇧</span>
+                    <span className="option-text">{t('grammar.englishGrammar')}</span>
+                    {activeLang === 'english' && <Check size={16} className="option-check" />}
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`grammar-option-item ${activeLang === 'russian' ? 'active' : ''}`}
+                    onClick={() => {
+                      setActiveLang('russian');
+                      setOptionsOpen(false);
+                    }}
+                  >
+                    <span className="option-flag">🇷🇺</span>
+                    <span className="option-text">{t('grammar.russianGrammar')}</span>
+                    {activeLang === 'russian' && <Check size={16} className="option-check" />}
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 
