@@ -72,6 +72,8 @@
   flex-direction: column;
   gap: var(--space-md);
   box-shadow: var(--shadow-lg);
+  /* Allow dropdown menus inside to overflow the card visually */
+  overflow: visible;
 }
 
 .wfp-error-badge {
@@ -328,7 +330,8 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 12px 18px;
+  min-height: 48px;
+  padding: 10px 14px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: var(--bg-tertiary, rgba(255, 255, 255, 0.03));
@@ -337,6 +340,9 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+  line-height: 1.35;
+  box-sizing: border-box;
 }
 
 .btn-more-options-page:hover {
@@ -345,12 +351,24 @@
   color: #c084fc;
 }
 
+.btn-more-options-page span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .wfp-secondary-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: start;
   gap: var(--space-lg);
   padding-top: var(--space-xs);
+  /* Prevent children from visually overflowing the card layout */
+  min-width: 0;
+}
+
+.wfp-secondary-row > * {
+  min-width: 0;
 }
 
 /* When Other meanings is hidden (non-English packs), expand More details to full width */
@@ -605,11 +623,18 @@
   .wfp-card {
     padding: var(--space-md);
   }
+  .wfp-secondary-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
   .wfp-columns {
     grid-template-columns: 1fr;
     gap: var(--space-md);
   }
   .wfp-meanings-list {
     max-height: none;
+  }
+  .btn-more-options-page {
+    font-size: 0.82rem;
   }
 }

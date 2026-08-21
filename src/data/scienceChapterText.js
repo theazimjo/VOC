@@ -203,10 +203,18 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "Scientists who study animals classify (klas'a fl), or group, them. To classify is to arrange in Zebras, wildebeests, and springboks groups by features that are alike. Scientists classify animals by structure (struk'char). The struc- ture of an animal is the kind of body parts it has and the way these parts are arranged. One structure scientists look for in classifying animals is the backbone. The backbone is made up of many small bones called vertebrae (ver'te bra). Ver- tebrae are linked together to form the backbone." },
         { type: 'p', text: "Some animals have a backbone and some do not. Scientists have classified all animals into two large groups. One group is made up of animals with a backbone. An animal with a backbone is called a vertebrate (ver'te brit). The other group is made up of animals without a backbone. An animal without a backbone is called an invertebrate (in ver'te brit). In this chapter you will learn about invertebrates. Which animals in these pictures have a backbone? Which do not have a backbone?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/zebras-wildebeests.jpg', caption: 'Zebras and wildebeests' },
+          { src: '/images/science/ch02/chimpanzee.jpg', caption: 'Chimpanzee' },
+          { src: '/images/science/ch02/gannet.jpg', caption: 'Gannet' }
+        ] }
       ],
       [
         { type: 'p', text: "What do you think of when you hear the word sponge? You may think of a pink or blue pad used to clean the dishes. That kind of sponge is made by people. A sponge is also an animal. A sponge is an invertebrate that has many cells. Almost all sponges live in oceans. A few live in freshwater streams and lakes. The orange sponge in the pic- ture lives in the Atlantic Ocean off the northeast coast of the United States." },
         { type: 'p', text: "Sponges do not have many of the parts we usually think of as animal parts. Most animals move about, but adult sponges stay in one place. They ’ are found attached to rocksor other objects at the bottom of the ocean. In fact, for many years scientists thought sponges were plants. Why do you think they did?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/orange-sponge.jpg', caption: 'Orange sponge' }
+        ] }
       ],
       [
         { type: 'p', text: "The structure of a sponge is simple. Its body is full of small holes called pores. The pores are connected to one another by narrow canals." },
@@ -216,11 +224,18 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "The skeleton of some sponges is made up of hard material. But other sponges are made up of soft material. This soft skeleton is sometimes used in the home as a cleaning sponge or bath ’sponge. It is usually a light brown or yellowish color. It is not the same as the pink or blue sponge made by people. Are any sponges in your home from the soft skeleton of the animal?" },
         { type: 'p', text: "out How much water can a sponge hold? Get an animal sponge, a container of water, and a measuring cup. Soak the sponge in the water for about 5 minutes. Remove the sponge from the water. Squeeze the water into the measuring cup. Measure the volume of water that was in the sponge. Record this volume of water. How much water did the sponge hold? Why is a cleaning sponge made similar to an animal sponge?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/sponge-diagram.jpg', caption: 'How a sponge moves water through its body' },
+          { src: '/images/science/ch02/finding-out-water.jpg', caption: 'Finding Out: how much water can a sponge hold?' }
+        ] }
       ],
       [
         { type: 'heading', text: "ANIMALS WITH STINGING CELLS" },
         { type: 'p', text: "The hydra, jellyfish, and sea anemone (a nem'ane) are also invertebrates. Like sponges, they do not have a backbone. Hydras live in freshwater ponds and streams. Most jellyfish and sea anemones live in oceans." },
         { type: 'p', text: "These animals are more complex than sponges. Their body is shaped like a hollow sac. The sac is open at one end. The hydra uses the opening in two ways. It is used for taking in food and for getting rid of wastes. The opening is surrounded by one or more rings of tentacles (ten'te kelz). A tentacle is a long, armlike part'. The picture shows a hydra with six tentacles around the opening." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/hydra.jpg', caption: 'Hydra with tentacles' }
+        ] }
       ],
       [
         { type: 'p', text: "Hydras and jellyfish use their tentacles to catch small animals for food. Sea anemones catch food in the same way. The tentacles contain many stinging cells. A stinging cell is a special struc- ture used to help capture food. How does a stinging cell help capture food? When a small animal" },
@@ -232,6 +247,11 @@ export const scienceChapterText = {
         { type: 'p', text: "The Portuguese man-of-war is an animal similar to the jellyfish. It has tentacles and stinging cells. This is one animal that can be dangerous to people. A swimmer can be tangled in the tentacles. The stinging cells can cause a painful injury to the swimmer." },
         { type: 'p', text: "------------- WORMS -------------- What are the three main groups of worms?" },
         { type: 'p', text: "Scientists classify worms into three main groups. These groups are the flatworms, the roundworms, and the segmented (seg'men ted) worms. The structure of worms is more complex than that of sponges. It is more complex than the structure of the animals with stinging cells." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/jellyfish.jpg', caption: 'Jellyfish' },
+          { src: '/images/science/ch02/portuguese-man-of-war.jpg', caption: 'Portuguese man-of-war' },
+          { src: '/images/science/ch02/sea-anemone.jpg', caption: 'Sea anemone' }
+        ] }
       ],
       [
         { type: 'p', text: "The first group of worms is the flatworms. The flatworm is the simplest type of worm. Some live in streams and ponds. What is the shape of a flatworm's body?" },
@@ -249,14 +269,26 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "Segmented worms are much more complex than flatworms or roundworms. A series of hearts pump blood through the worm's body. The blood travels in a system of closed tubes. Like roundworms, segmented worms have two body openings and a digestiv system." },
         { type: 'p', text: "The earthworm is the best-known segmented worm. Earthworms live inside tunnels in wet soil. Their body structure allows them to move easily through soil. Each segment, except the first and last, has four pairs of bristles (bris'elz). A bristle is a stiff, strong hair used for moving. You can see the bristles in the drawing of the earthworm. The earthworm also uses the bristles for clinging to the walls of the tunnels it lives in." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/earthworm-diagram.jpg', caption: 'Diagram of an earthworm' }
+        ] }
       ],
       [
         { type: 'activity', text: "Materials earthworm / metric ruler / hand lens / paper towel / pan or tray Procedure A. Carefully hold the earthworm in one hand. Use a hand lens to examine the earthworm. Measure the length of the earthworm's body. 1. How long is the earthworm's body? B. Count the number of body segments. 2. How many segments does the earthworm have? C. Find the mouth. Find the light-colored swelling on the earthworm's body. It is about one third from the front end of the body. It is used in reproduction. D. Gently run your index finger over the segments. You should be able to feel bristles on the segments. Look at the bristles with a hand lens. 3. Draw the earthworm. Label its parts. E. Place a moist paper towel in a pan or tray. Place the earthworm on the towel. F. Watch the earthworm move on the towel. 4. How do the segments change? 5. How does the earthworm use its bristles? Conclusion 1. In your own words describe the parts of an earthworm's body. 2. Describe how the earthworm moves. Using science ideas Place the earthworm in a container of loose moist soil. Use a hand lens to observe the way it behaves in the soil..How migfct the earthworm's behavior be helpful to the soil and to plants growing in the soil?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/earthworm-photo.jpg', caption: 'Earthworm' }
+        ] }
       ],
       [
         { type: 'p', text: "— ANIMALS WITH SPINY SKIN ------ What are echinoderms, and how do they look?" },
         { type: 'p', text: "If you have ever been to the seashore, you may have seen some echinoderms (i ki'na dermz). An echinoderm is a spiny-skinned invertebrate that lives in the ocean. A spine is a sharp, pointy structure. The body of an echinoderm is hard and covered with spines. Some of these animals have short spines. Others have long spines. The pic- tures show some well-known echinoderms." },
         { type: 'p', text: "A common echinoderm is the starfish. Most starfish have five arms that come out from the center part of the animal. On the underside of each arm are two rows of tiny tube feet. A tube foot is a hollow structure with a sucker at the end. Most echinoderms have tube feet. The picture shows a closeup of the tube feet on a starfish." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/starfish-tubefeet.jpg', caption: 'Starfish and close-up of tube feet' },
+          { src: '/images/science/ch02/purple-sea-urchin.jpg', caption: 'Purple sea urchin' },
+          { src: '/images/science/ch02/sand-dollars.jpg', caption: 'Sand dollars' },
+          { src: '/images/science/ch02/sea-cucumber.jpg', caption: 'Sea cucumber' }
+        ] }
       ],
       [
         { type: 'p', text: "The starfish uses its tube feet to pull itself over the ocean floor. Tube feet also help the starfish Starfish Close-up of tube feel 39 get food. When a starfish finds a clam, it begins a kind of tug-of-war. The clam protects itself by tightly closing its two shells together. The starfish attaches its tube feet to both shells and begins pulling. It tries to pry the shells apart. Sometimes the tug-of-war goes on for a long time. But the starfish almost always wins." },
@@ -267,41 +299,81 @@ export const scienceChapterText = {
         { type: 'p', text: "What are mollusks, and how do they look?" },
         { type: 'p', text: "The clam and the Octopus belong to a group of animals called the mollusks (mol'asks). A mollusk is an invertebrate with a soft body. Some mollusks have two outer shells. Others live inside a one-piece shell or have no shell at all. Many mollusks live in the ocean. Others live in fresh water or on land." },
         { type: 'p', text: "The body of a mollusk is more complex than the body of an echinoderm. For example, the mollusk has the beginning of a true eye. The picture shows the eyes on the body of a scallop. Mollusks also have a more complex system for pumping blood. Blood is pumped through blood vessels into spaces in the animal's body." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/scallop-liny-eyes.jpg', caption: 'Scallop with tiny blue eyes' }
+        ] }
       ],
       [
         { type: 'p', text: "Scallop with liny blue eyes Clams, oysters, and scallops are two-shelled mollusks. The shells are held together by muscles. The muscles open and close the shells like a hinge. The two-shelled mollusks have a part called a foot. This foot, made of a strong muscle, is used for digging. It is also used for pulling the animal along the ocean floor. Notice the foot of the scallop in the picture." },
         { type: 'p', text: "Snails, and slugs are other common mollusks. Both have a large muscular foot. The foot gives off a layer of slime. Snails and slugs glide along on this layer of slime. The main difference between a slug and a snail is the shell. Usually slugs do not have a shell, while snails have a shell. The snail's shell protects it from enemies. When in danger, the snail can hide inside its shell. Some other mollusks in this group are limpets and periwinkles (per'e wing kalz). These two mollusks are shown in the pictures." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/foot-of-scallop.jpg', caption: 'Foot of a scallop' },
+          { src: '/images/science/ch02/slug.jpg', caption: 'Slug' },
+          { src: '/images/science/ch02/land-snail-leaf.jpg', caption: 'Land snail' },
+          { src: '/images/science/ch02/limpet.jpg', caption: 'Limpet' },
+          { src: '/images/science/ch02/periwinkles.jpg', caption: 'Periwinkles' }
+        ] }
       ],
       [
         { type: 'p', text: "There are two other common mollusks that have no shell. These mollusks are the squid and the octopus. Both have long tentacles. The tentacles are lined with suckers. These suckers help them to catch other animals for food. The squid and the octopus have an unusual way to protect Octopus and close-up of suckers themselves. They give off a cloud of dark liquid when they are in danger. This dark liquid, called ink, keeps them from being seen while they escape from their enemy." },
         { type: 'p', text: "Mollusks such as clams, oysters, and scallops are a source of food for many people. In some countries certain land snails are gathered and cooked for food. The abalone (ab a lo'ne) is an ocean snail that is gathered by divers. Its foot is so large that it is cut up and served as abalone steaks. Squid and octopus are also favorite foods of many people." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/octopus-full.jpg', caption: 'Octopus and close-up of suckers' },
+          { src: '/images/science/ch02/squid.jpg', caption: 'Squid' }
+        ] }
       ],
       [
         { type: 'p', text: "There are invertebrates that produce pearls, Some oysters that live in tropical waters make pearls that are very valuable. Large, perfectly shaped pearls areas valuable as some of the most expensive diamonds. A pearl forms Inside the shell of an oyster when a grain of sand or other particle enters the shell. Cells inside the oyster's shell produce a material called nacre (nd'ker) that forms around the particle. Nacre is also called mother-of-pearl. The particle becomes coated by many thin layers of nacre. After several years, the particle is completely covered. A bright, shiny pearl has been formed." },
         { type: 'heading', text: "ANIMALS WITH JOINTED LEGS" },
         { type: 'p', text: "What are the four main groups of arthropods?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/oyster.jpg', caption: 'Oyster' },
+          { src: '/images/science/ch02/pearl-oyster.jpg', caption: 'Pearl oyster' }
+        ] }
       ],
       [
         { type: 'p', text: "The arthropods (ar'thra podz) make up the largest group of animals. Some people think there may be as many as 10 million types. An arthropod is an invertebrate that has a segmented body and jointed legs. The body has two or three seg- ments. The number of jointed legs is used to divide the arthropods into groups. Can you find the three body segments on the pictures of the ant?" },
         { type: 'p', text: "jointed legs Segmented body of ont All arthropods have a hard outer covering. In some arthropods the covering is harder than in others. This hard outer covering is called the exoskeleton (ek so skel'a tan). It is like a skeleton on the outside of the animal's body. It protects the soft parts of the body. Arthropods also have well-developed sense organs and a head with special mouth parts." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/ant-segmented-body.jpg', caption: 'Segmented body of an ant' },
+          { src: '/images/science/ch02/ant-diagram-segments.jpg', caption: 'Segments of an ant' }
+        ] }
       ],
       [
         { type: 'p', text: "There are four main groups of arthropods. The first group includes millipedes and centipedes. A millipede looks very much Like a worm with many legs. The word millipede means \"thousand legs.” (Milli- means \"thousand\" and -pede means \"foot.\") Each segment of a millipede has two pairs of legs. The millipede is a harmless animal that eats plants. When in danger, it may curl up into a ball." },
         { type: 'p', text: "A centipede is also wormlike but has fewer legs than a millipede. The word centipede means \"hundred legs.\" (Centi- means \"hundred\" and -pede means “foot.\") Unlike a millipede the centipede eats other animals. It uses a pair of poison claws near its mouth to capture its food. With these claws the centipede can inject poison into another animal." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/millipede.jpg', caption: 'Millipede' },
+          { src: '/images/science/ch02/centipede.jpg', caption: 'Centipede' }
+        ] }
       ],
       [
         { type: 'p', text: "The second group of arthropods includes shrimps, lobsters, and crayfish. Animals in this group are also called crustaceans (krus ta'shenz)." },
         { type: 'p', text: "Almost all the arthropods in this group live in water. Shrimps and lobsters live in the ocean. Crayfish live in fresh water. Crustaceans have five pairs of legs. Their exoskeleton is divided into two main parts. These arthropods move by muscles attached to their exoskeleton." },
         { type: 'p', text: "The third group of arthropods includes animals such as spiders, ticks, and mites. These animals have four pairs of legs. They also have two main body parts. Most spiders are harmless. In fact, many are useful because they kill insects that are problems for people. You probably have seen spider webs. Why do you think spiders make webs?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/shrimp.jpg', caption: 'Shrimp' },
+          { src: '/images/science/ch02/lobster.jpg', caption: 'Lobster' },
+          { src: '/images/science/ch02/garden-spider.jpg', caption: 'Garden spider' }
+        ] }
       ],
       [
         { type: 'p', text: "A few spiders, such as the black widow, are poisonous. Ticks and mites are parasites that live by sucking blood from other animals. Ticks are also very annoying to pets, such as dogs and cats." },
         { type: 'p', text: "The fourth and largest group of arthropods is made up of insects. There are more different kinds of insects than all other animals and plants. An insect is an arthropod that has three pairs of legs and a body that is divided into three parts. The three parts of the body are the head, the abdomen (ab'da men), and the thorax (thor'aks). The abdomen is the rear part of an insect's body. The thorax is the middle part of an insect's body. Wings and legs are joined to the thorax. The drawing shows the three main parts of an insect's body." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/black-widow.jpg', caption: 'Black widow' },
+          { src: '/images/science/ch02/tick-on-skin.jpg', caption: 'Tick on skin' },
+          { src: '/images/science/ch02/wasp-parts-diagram.jpg', caption: 'Parts of an insect' }
+        ] }
       ],
       [
         { type: 'p', text: "Compound eyes of Insect Close-up of compound eye Insects have very unusual sense organs. Most adult insects have compound eyes. The compound eye has thousands of lenses, as you can see in the picture. It lets the insect see motion. For example, bees can see flowers moving in a slight breeze. But they cannot see the details of the flower." },
         { type: 'p', text: "An insect's head has two feelers, or antennae (an ten'e). The antennae help the insect smell and feel. Sometimes the antennae are used for tasting and hearing." },
         { type: 'activity', text: "Materials egg carton / 8 pipe cleaners / several small buttons / scraps of fabric / 8 Styrofoam balls, 4 each of 2 different sizes / glue / construction paper / felt-tip pens / twist-ties / scissors / clay Procedure A. Use your Imagination! Create your own insect. The insect does not have to look like any known insect. But it must have all the body parts needed by an insect. 1. How many body parts will your insect have? 2. How many legs will your insect have? B. You may use any of the materials supplied. You may bend and Iwist the pipe cleaners and the twist-ties. You may glue parts of the body together. 3. What are the names of the three parts of your insect's body? 4. To what parts of the insect's body are the legs attached? C. Try giving your insect special mouth parts. Decide whether you want your insect to chew, suck, or pierce with its mouth parts. 5. Is your insect beginning to look like any insect you have seen? Which one? D. Be sure you add antennae to your insect's head. 6. How does an insect use Its antennae? Conclusion 1. Insects have four common characteristics. What are they? 2. List all the parts of your insect. Next to each write what it does. Using science ideas Describe the type of surroundings where your insect might live." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/activity-insect-1.jpg', caption: 'Compound eyes of an insect' },
+          { src: '/images/science/ch02/activity-insect-2.jpg', caption: 'Close-up of a compound eye' }
+        ] }
       ],
       [
         { type: 'p', text: "Insects have special mouth parts. These parts are formed for chewing, sucking, or piercing. The kind of mouth parts an insect has depends on the food it eats. For example, beetles and grasshop- pers eat leaves. Their mouths have parts that cut and chew. Butterflies and moths have mouth parts that suck up juices from flowers. Mosquitoes have mouth parts for piercing the skin and sucking blood." },

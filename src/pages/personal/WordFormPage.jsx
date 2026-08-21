@@ -500,7 +500,7 @@ export default function WordFormPage() {
                 onClick={() => setShowMore(!showMore)}
               >
                 {showMore ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                <span>{showMore ? 'Show less' : 'More details (definition, example, etc.)'}</span>
+                <span>{showMore ? 'Show less' : 'More details'}</span>
               </button>
             </div>
 
