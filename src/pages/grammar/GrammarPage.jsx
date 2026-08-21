@@ -110,6 +110,27 @@ export default function GrammarPage() {
           <div className="grammar-header-titles">
             <h1 className="grammar-title">{t('grammar.title')}</h1>
           </div>
+
+          <div className="grammar-lang-switcher-right">
+            <button
+              type="button"
+              className={`lang-switch-btn ${activeLang === 'english' ? 'active' : ''}`}
+              onClick={() => setActiveLang('english')}
+              title={t('grammar.englishGrammar')}
+            >
+              <span className="lang-flag">🇬🇧</span>
+              <span className="lang-name">EN</span>
+            </button>
+            <button
+              type="button"
+              className={`lang-switch-btn ${activeLang === 'russian' ? 'active' : ''}`}
+              onClick={() => setActiveLang('russian')}
+              title={t('grammar.russianGrammar')}
+            >
+              <span className="lang-flag">🇷🇺</span>
+              <span className="lang-name">RU</span>
+            </button>
+          </div>
         </div>
 
         {/* Global Level Stats */}
@@ -142,26 +163,6 @@ export default function GrammarPage() {
           </div>
         </div>
       </motion.div>
-
-      {/* Language Switcher Tabs */}
-      <div className="grammar-lang-tabs">
-        <button
-          type="button"
-          className={`grammar-lang-tab ${activeLang === 'english' ? 'active' : ''}`}
-          onClick={() => setActiveLang('english')}
-        >
-          <span className="lang-flag">🇬🇧</span>
-          <span>{t('grammar.englishGrammar')}</span>
-        </button>
-        <button
-          type="button"
-          className={`grammar-lang-tab ${activeLang === 'russian' ? 'active' : ''}`}
-          onClick={() => setActiveLang('russian')}
-        >
-          <span className="lang-flag">🇷🇺</span>
-          <span>{t('grammar.russianGrammar')}</span>
-        </button>
-      </div>
 
       {/* Level Tabs (iOS Segmented Control) */}
       <motion.div

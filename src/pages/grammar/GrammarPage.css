@@ -143,51 +143,56 @@
   letter-spacing: 0.04em;
 }
 
-/* ── Language Switcher Tabs ───────────────── */
-.grammar-lang-tabs {
-  display: flex;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 4px;
-  gap: 4px;
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-.grammar-lang-tab {
-  position: relative;
-  flex: 1;
+/* ── Header Right Language Switcher ───────────── */
+.grammar-lang-switcher-right {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border: none;
-  background: none;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.lang-switch-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--text-secondary);
   font-family: var(--font-family);
   font-size: var(--font-xs);
   font-weight: 700;
+  border-radius: var(--radius-full);
   cursor: pointer;
-  border-radius: calc(var(--radius-md) - 2px);
   transition: all var(--transition-fast);
   outline: none;
 }
 
-.grammar-lang-tab:hover {
+.lang-switch-btn:hover {
   color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.04);
 }
 
-.grammar-lang-tab.active {
-  color: var(--text-primary);
+.lang-switch-btn.active {
   background: var(--bg-secondary);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  color: var(--accent-1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-light);
 }
 
-.lang-flag {
+.lang-switch-btn .lang-flag {
   font-size: 1.1rem;
+  line-height: 1;
+}
+
+.lang-switch-btn .lang-name {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  font-weight: 800;
 }
 
 /* ── Level Tabs (iOS Segmented Control) ──── */
