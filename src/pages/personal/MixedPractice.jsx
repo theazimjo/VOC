@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useStreak } from '../../hooks/useStreak';
 import { shuffleArray } from '../../utils/helpers';
@@ -21,10 +22,10 @@ import './MixedPractice.css';
 
 const LEECH_THRESHOLD = 3;
 
-function getResultTier(ratio) {
-  if (ratio >= 0.8) return { Icon: Trophy, label: 'Great result!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
-  if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Good effort, keep it up!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
-  return { Icon: Dumbbell, label: "Keep going, you'll get there!", color: 'var(--success)', dim: 'var(--success-dim)' };
+function getResultTier(ratio, t) {
+  if (ratio >= 0.8) return { Icon: Trophy, label: t ? t('mixedPractice.greatResult') : 'Great result!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
+  if (ratio >= 0.5) return { Icon: ThumbsUp, label: t ? t('mixedPractice.goodEffort') : 'Good effort, keep it up!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
+  return { Icon: Dumbbell, label: t ? t('mixedPractice.keepGoing') : "Keep going, you'll get there!", color: 'var(--success)', dim: 'var(--success-dim)' };
 }
 
 // Recognition-before-production sequencing: brand-new / weak words get the
@@ -50,6 +51,7 @@ function pickQuestionType(wordObj, poolSize) {
 
 export default function MixedPractice() {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { allWords, allWordsLoading } = usePacks();
   const { incrementActivity } = useStreak();
   const navigate = useNavigate();
@@ -191,7 +193,7 @@ export default function MixedPractice() {
 
   const handleExit = () => {
     if (step === 'practice') {
-      if (window.confirm("Are you sure you want to leave the practice? Your current results will not be saved.")) {
+      if (window.confirm(t('mixedPractice.exitConfirm'))) {
         navigate('/');
       }
     } else {
@@ -311,21 +313,21 @@ export default function MixedPractice() {
       {pageLoading ? (
         <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
           <IosSpinner />
-          <span>Loading...</span>
+          <span>{t('mixedPractice.loading')}</span>
         </div>
       ) : mixedWordsPool.length === 0 ? (
         <div className="empty-state">
           <div className="empty-state-icon">{isLeechMode ? '🎯' : isDueMode ? '✅' : '🎮'}</div>
-          <h3>{isLeechMode ? "No tricky words" : isDueMode ? "No words due for review" : "No words found"}</h3>
+          <h3>{isLeechMode ? t('mixedPractice.noTrickyTitle') : isDueMode ? t('mixedPractice.noDueTitle') : t('mixedPractice.noWordsTitle')}</h3>
           <p>
             {isLeechMode
-              ? "Nice work! There are no words with more than 3 mistakes right now."
+              ? t('mixedPractice.noTrickyDesc')
               : isDueMode
-                ? "Great! There are no words due for review right now — check back later."
-                : "To do a mixed practice, go to the Library, open a book or pack, and add some words!"}
+                ? t('mixedPractice.noDueDesc')
+                : t('mixedPractice.noWordsDesc')}
           </p>
           <Link to={isLeechMode ? '/stats' : isDueMode ? '/' : '/library'} className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
-            {isLeechMode ? 'Back to Stats →' : isDueMode ? 'Back to Dashboard →' : "Go to Library →"}
+            {isLeechMode ? t('mixedPractice.backToStats') : isDueMode ? t('mixedPractice.backToDashboard') : t('mixedPractice.goToLibrary')}
           </Link>
         </div>
       ) : (
@@ -336,10 +338,10 @@ export default function MixedPractice() {
               <div className="practice-session-header">
                 <span className="practice-session-title">
                   {isLeechMode ? <Target size={17} strokeWidth={2.3} /> : isDueMode ? <RotateCcw size={17} strokeWidth={2.3} /> : <Shuffle size={17} strokeWidth={2.3} />}
-                  {isLeechMode ? "Tricky words practice" : isDueMode ? "Today's review" : "Mixed Practice"}
+                  {isLeechMode ? t('mixedPractice.trickyPracticeTitle') : isDueMode ? t('mixedPractice.todaysReviewTitle') : t('mixedPractice.mixedPracticeTitle')}
                 </span>
-                <button className="btn-exit-practice" onClick={handleExit} title="Exit practice">
-                  <X size={14} strokeWidth={2.4} /> Exit
+                <button className="btn-exit-practice" onClick={handleExit} title={t('mixedPractice.exitBtn')}>
+                  <X size={14} strokeWidth={2.4} /> {t('mixedPractice.exitBtn')}
                 </button>
               </div>
 
@@ -354,7 +356,7 @@ export default function MixedPractice() {
               {/* Progress bar */}
               <div className="practice-progress-bar-container">
                 <div className="progress-bar-label">
-                  Question {currentIdx + 1} / {questions.length}
+                  {t('mixedPractice.questionProgress', { current: currentIdx + 1, total: questions.length })}
                 </div>
                 <div className="progress-bar-track">
                   <div
@@ -368,7 +370,7 @@ export default function MixedPractice() {
               <div className="question-content">
                 {questions[currentIdx].type === 'quiz' && (
                   <div className="mp-quiz-question">
-                    <span className="question-prompt">Choose the translation:</span>
+                    <span className="question-prompt">{t('mixedPractice.chooseTranslation')}</span>
                     <h2 className="question-word">{questions[currentIdx].word.word}</h2>
 
                     <div className="quiz-options-grid">
@@ -404,7 +406,7 @@ export default function MixedPractice() {
 
                 {questions[currentIdx].type === 'spelling' && (
                   <div className="spelling-question">
-                    <span className="question-prompt">Type the English translation:</span>
+                    <span className="question-prompt">{t('mixedPractice.typeEnglishTranslation')}</span>
                     <h2 className="question-word">{questions[currentIdx].word.translation}</h2>
 
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
@@ -417,7 +419,7 @@ export default function MixedPractice() {
                         type="text"
                         name="practice_no_autofill_input"
                         className="mp-spelling-input"
-                        placeholder="Type the English word..."
+                        placeholder={t('mixedPractice.typeEnglishWordPlaceholder')}
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
@@ -441,7 +443,7 @@ export default function MixedPractice() {
 
                 {questions[currentIdx].type === 'dictation' && (
                   <div className="dictation-question">
-                    <span className="question-prompt">Type the English word you hear:</span>
+                    <span className="question-prompt">{t('mixedPractice.typeWordHear')}</span>
                     <div className="audio-player-container">
                       <button
                         className="audio-play-btn"
@@ -451,7 +453,7 @@ export default function MixedPractice() {
                       >
                         <Volume2 size={20} strokeWidth={2.2} />
                       </button>
-                      <span className="audio-helper-text">Tap to hear the pronunciation again</span>
+                      <span className="audio-helper-text">{t('mixedPractice.tapHearAgain')}</span>
                     </div>
 
                     <form onSubmit={handleTextSubmit} className="mp-spelling-form" autoComplete="off" noValidate data-lpignore="true" data-1p-ignore="true">
@@ -464,7 +466,7 @@ export default function MixedPractice() {
                         type="text"
                         name="practice_no_autofill_input"
                         className="mp-spelling-input"
-                        placeholder="Type the word you heard..."
+                        placeholder={t('mixedPractice.typeWordHeardPlaceholder')}
                         value={typedAnswer}
                         onChange={(e) => setTypedAnswer(e.target.value)}
                         disabled={hasAnswered}
@@ -492,7 +494,7 @@ export default function MixedPractice() {
                 <div className="feedback-content">
                   {!hasAnswered ? (
                     questions[currentIdx].type === 'quiz' ? (
-                      <div className="feedback-hint-text">Select the correct translation</div>
+                      <div className="feedback-hint-text">{t('mixedPractice.selectCorrectTranslationHint')}</div>
                     ) : (
                       <button
                         type="button"
@@ -500,7 +502,7 @@ export default function MixedPractice() {
                         onClick={handleTextSubmit}
                         disabled={!typedAnswer.trim()}
                       >
-                        Check
+                        {t('mixedPractice.checkBtn')}
                       </button>
                     )
                   ) : (
@@ -512,17 +514,17 @@ export default function MixedPractice() {
                             : <XCircle size={22} strokeWidth={2.2} style={{ color: 'var(--error)' }} />}
                         </span>
                         <div className="feedback-text">
-                          <h4>{questions[currentIdx].isCorrect ? "Correct! Well done!" : "Incorrect!"}</h4>
+                          <h4>{questions[currentIdx].isCorrect ? t('mixedPractice.correctTitle') : t('mixedPractice.incorrectTitle')}</h4>
                           {!questions[currentIdx].isCorrect && (
                             <p>
-                              Answer: <strong>{questions[currentIdx].word.word}</strong>
+                              {t('mixedPractice.answerLabel')} <strong>{questions[currentIdx].word.word}</strong>
                               {questions[currentIdx].word.translation && ` — ${questions[currentIdx].word.translation}`}
                             </p>
                           )}
                         </div>
                       </div>
                       <button className="btn btn-next" onClick={handleNext}>
-                        {currentIdx === questions.length - 1 ? 'View results' : 'Next →'}
+                        {currentIdx === questions.length - 1 ? t('mixedPractice.viewResultsBtn') : t('mixedPractice.nextBtn')}
                       </button>
                     </>
                   )}
@@ -534,7 +536,7 @@ export default function MixedPractice() {
 
           {/* Step 2: Results Summary */}
           {step === 'results' && (() => {
-            const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0);
+            const tier = getResultTier(questions.length > 0 ? correctCount / questions.length : 0, t);
             return (
             <div className="mixed-practice-container">
             <motion.div
@@ -547,7 +549,7 @@ export default function MixedPractice() {
                 <tier.Icon size={44} strokeWidth={2.2} />
               </div>
               <h2>{tier.label}</h2>
-              <p className="results-subtitle">{isDueMode ? 'Review complete' : 'Mixed practice complete'}</p>
+              <p className="results-subtitle">{isDueMode ? t('mixedPractice.reviewCompleteSub') : t('mixedPractice.mixedPracticeCompleteSub')}</p>
 
               <div className="results-score-badge">
                 <span className="score-value">{correctCount}</span>
@@ -555,12 +557,12 @@ export default function MixedPractice() {
                 <span className="score-total">{questions.length}</span>
               </div>
 
-              <div className="results-label">Words answered correctly</div>
+              <div className="results-label">{t('mixedPractice.wordsAnsweredCorrectly')}</div>
 
               {/* Mistakes review */}
               {questions.some(q => !q.isCorrect) && (
                 <div className="mistakes-review-container">
-                  <h3>Review your mistakes:</h3>
+                  <h3>{t('mixedPractice.reviewMistakesHeader')}</h3>
                   <div className="mistakes-list">
                     {questions.filter(q => !q.isCorrect).map((q, idx) => (
                       <div key={idx} className="mistake-item">
@@ -569,7 +571,7 @@ export default function MixedPractice() {
                           <span className="mistake-translation">{q.word.translation}</span>
                         </div>
                         <span className="mistake-your-answer">
-                          You: <del>{q.userAnswer || '(no answer)'}</del>
+                          {t('mixedPractice.youAnswer')} <del>{q.userAnswer || t('mixedPractice.noAnswerGiven')}</del>
                         </span>
                         <button
                           className="btn-speak-mistake"
@@ -587,10 +589,10 @@ export default function MixedPractice() {
 
               <div className="result-actions">
                 <button className="btn btn-primary" onClick={() => startSession(mixedWordsPool)}>
-                  <RotateCcw size={16} strokeWidth={2.3} /> Practice again
+                  <RotateCcw size={16} strokeWidth={2.3} /> {t('mixedPractice.practiceAgainBtn')}
                 </button>
                 <button className="btn btn-secondary" onClick={() => navigate('/')}>
-                  Back to Dashboard
+                  {t('mixedPractice.backToDashboardBtn')}
                 </button>
               </div>
             </motion.div>
