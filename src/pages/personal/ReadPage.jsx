@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sun, Moon, BookOpen, Lightbulb } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { scienceChapterText } from '../../data/scienceChapterText';
 import { toShortLangCode } from '../../utils/dictionaryService';
 import WordTapPopover from '../../components/Words/WordTapPopover';
@@ -50,6 +51,7 @@ function WordTokens({ text, onWordTap, knownWords }) {
 export default function ReadPage() {
   const { packId } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [searchParams] = useSearchParams();
   const topic = searchParams.get('topic') || '';
 
@@ -172,7 +174,7 @@ export default function ReadPage() {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
         <IosSpinner />
-        <span>Loading...</span>
+        <span>{t('read.loading')}</span>
       </div>
     );
   }
@@ -180,9 +182,9 @@ export default function ReadPage() {
   if (!pack || !chapter) {
     return (
       <div className="read-page-missing">
-        <p>Bu bob uchun o'qish matni hali mavjud emas.</p>
+        <p>{t('read.missingText')}</p>
         <button className="btn btn-primary" onClick={() => navigate(`/packs/${packId}`)}>
-          ← Orqaga
+          {t('read.backBtn')}
         </button>
       </div>
     );
@@ -205,7 +207,7 @@ export default function ReadPage() {
               <ArrowLeft size={18} />
             </button>
             <div className="read-header-titles">
-              <h1 className="read-chapter-title">{chapter.title || 'Chapter'}</h1>
+              <h1 className="read-chapter-title">{chapter.title || t('read.chapterFallback')}</h1>
               <span className="read-chapter-subtitle">{topic}</span>
             </div>
           </div>
@@ -217,7 +219,7 @@ export default function ReadPage() {
                 type="button"
                 className={`read-tool-btn ${fontSize === 'small' ? 'active' : ''}`}
                 onClick={() => handleFontSizeChange('small')}
-                title="Smaller font size"
+                title={t('read.fontSmaller')}
               >
                 A-
               </button>
@@ -225,7 +227,7 @@ export default function ReadPage() {
                 type="button"
                 className={`read-tool-btn ${fontSize === 'large' ? 'active' : ''}`}
                 onClick={() => handleFontSizeChange('large')}
-                title="Larger font size"
+                title={t('read.fontLarger')}
               >
                 A+
               </button>
@@ -238,7 +240,7 @@ export default function ReadPage() {
                 type="button"
                 className={`read-theme-btn ${readerTheme === 'light' ? 'active' : ''}`}
                 onClick={() => handleThemeChange('light')}
-                title="Light mode"
+                title={t('read.themeLight')}
               >
                 <Sun size={15} />
               </button>
@@ -246,7 +248,7 @@ export default function ReadPage() {
                 type="button"
                 className={`read-theme-btn read-theme-btn--sepia ${readerTheme === 'sepia' ? 'active' : ''}`}
                 onClick={() => handleThemeChange('sepia')}
-                title="Sepia warm mode"
+                title={t('read.themeSepia')}
               >
                 <BookOpen size={15} />
               </button>
@@ -254,7 +256,7 @@ export default function ReadPage() {
                 type="button"
                 className={`read-theme-btn ${readerTheme === 'dark' ? 'active' : ''}`}
                 onClick={() => handleThemeChange('dark')}
-                title="Dark mode"
+                title={t('read.themeDark')}
               >
                 <Moon size={15} />
               </button>
@@ -294,7 +296,7 @@ export default function ReadPage() {
                   </div>
                   <div className="read-callout-content">
                     <h4 className="read-callout-title">
-                      {block.type === 'sidebar' ? 'Did You Know?' : 'Reading Tip & Activity'}
+                      {block.type === 'sidebar' ? t('read.didYouKnow') : t('read.readingTip')}
                     </h4>
                     <div className="read-callout-body">
                       <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
@@ -317,8 +319,8 @@ export default function ReadPage() {
           <div className="read-page-indicator">
             <div className="read-page-badge">{pageIndex + 1}</div>
             <div className="read-page-info">
-              <span className="read-page-label">PAGE</span>
-              <span className="read-page-total">of {totalPages}</span>
+              <span className="read-page-label">{t('read.pageLabel')}</span>
+              <span className="read-page-total">{t('read.ofPages', { total: totalPages })}</span>
             </div>
           </div>
 
@@ -328,9 +330,9 @@ export default function ReadPage() {
                 type="button"
                 className="read-nav-prev-btn"
                 onClick={() => { setDirection(-1); setPageIndex(i => i - 1); }}
-                title="Previous page"
+                title={t('read.prevPage')}
               >
-                <ChevronLeft size={16} /> Prev
+                <ChevronLeft size={16} /> {t('read.prevPage')}
               </button>
             )}
 
@@ -340,7 +342,7 @@ export default function ReadPage() {
                 className="read-next-chapter-btn"
                 onClick={() => navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`)}
               >
-                <span>Finish Chapter</span>
+                <span>{t('read.finishChapter')}</span>
                 <Check size={16} />
               </button>
             ) : (
@@ -349,7 +351,7 @@ export default function ReadPage() {
                 className="read-next-chapter-btn"
                 onClick={() => { setDirection(1); setPageIndex(i => i + 1); }}
               >
-                <span>Next Page</span>
+                <span>{t('read.nextPage')}</span>
                 <ChevronRight size={16} />
               </button>
             )}

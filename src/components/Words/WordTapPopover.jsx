@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, X, Check, ChevronDown, Volume2 } from 'lucide-react';
 import { speechLanguages, speakWord } from '../../utils/helpers';
 import { lookupWordFromDictionary, toShortLangCode } from '../../utils/dictionaryService';
+import { useLanguage } from '../../contexts/LanguageContext';
 import IosSpinner from '../common/IosSpinner';
 import './WordTapPopover.css';
 
@@ -40,6 +41,7 @@ export default function WordTapPopover({
   onAdd,
   onClose
 }) {
+  const { t } = useLanguage();
   const [translationLangCode, setTranslationLangCode] = useState(() => {
     try {
       return localStorage.getItem(`translationLang:${packId}`) || 'uz';
@@ -226,7 +228,7 @@ export default function WordTapPopover({
           {isLoading ? (
             <div className="wtp-loading"><IosSpinner size={16} /></div>
           ) : lookupError ? (
-            <div className="wtp-error">Tarjima topilmadi</div>
+            <div className="wtp-error">{t('read.translationNotFound')}</div>
           ) : (
             <>
               <div className="wtp-translation">{translation}</div>
@@ -238,7 +240,7 @@ export default function WordTapPopover({
                   className="wtp-alt-hint"
                   onClick={() => setTranslation(alternate)}
                 >
-                  Boshqa manba: <strong>{alternate}</strong>
+                  {t('read.altTranslation', { alt: alternate })}
                 </button>
               )}
             </>
@@ -247,7 +249,7 @@ export default function WordTapPopover({
 
         {existingWord ? (
           <div className="wtp-existing-note">
-            Bu so'z allaqachon to'plamda — qo'shsangiz, bilish darajasi boshiga qaytadi.
+            {t('read.alreadyInPackNote')}
           </div>
         ) : (
           <div className="wtp-target-note">→ {currentTopic}</div>
@@ -260,11 +262,11 @@ export default function WordTapPopover({
           disabled={!translation || saveState !== 'idle'}
         >
           {saveState === 'saved' ? (
-            <><Check size={15} /> Qo'shildi!</>
+            <><Check size={15} /> {t('read.addedBtn')}</>
           ) : saveState === 'saving' ? (
             <IosSpinner size={16} />
           ) : (
-            <><Plus size={15} /> {existingWord ? "Qayta qo'shish" : 'Shu bobga qo\'shish'}</>
+            <><Plus size={15} /> {existingWord ? t('read.reAddBtn') : t('read.addToChapterBtn')}</>
           )}
         </button>
       </motion.div>
