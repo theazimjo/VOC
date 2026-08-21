@@ -424,6 +424,8 @@ export const translations = {
       continueBtn: 'Continue',
     },
     grammar: {
+      englishGrammar: 'English Grammar',
+      russianGrammar: 'Russian Grammar',
       title: 'Grammar',
       beginner: 'Beginner',
       elementary: 'Elementary',
@@ -1218,6 +1220,8 @@ export const translations = {
       continueBtn: 'Продолжить',
     },
     grammar: {
+      englishGrammar: 'Английская грамматика',
+      russianGrammar: 'Русская грамматика',
       title: 'Грамматика',
       beginner: 'Начинающий',
       elementary: 'Элементарный',
@@ -2012,6 +2016,8 @@ export const translations = {
       continueBtn: "Davom etish",
     },
     grammar: {
+      englishGrammar: 'Ingliz tili grammatikasi',
+      russianGrammar: 'Rus tili grammatikasi',
       title: "Grammatika",
       beginner: "Boshlang'ich",
       elementary: "Boshlang'ich II",

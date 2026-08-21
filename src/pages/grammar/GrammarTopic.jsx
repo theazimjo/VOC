@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
+import { russianGrammarData } from '../../data/russianGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { getQuestionsForExercise, getExerciseType } from '../../utils/grammarHelpers';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -210,8 +211,8 @@ export default function GrammarTopic() {
   const { t } = useLanguage();
   const { saveGrammarResult } = useGrammarStats();
 
-  const levelData = grammarData[level];
-  const topic = levelData?.topics?.find((t) => t.id === topicId);
+  const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
+                russianGrammarData[level]?.topics?.find((t) => t.id === topicId);
 
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState(null);

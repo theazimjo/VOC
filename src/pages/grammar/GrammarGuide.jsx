@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
+import { russianGrammarData } from '../../data/russianGrammarData';
 import { parseGuide } from '../../utils/grammarGuideParser';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarGuide.css';
@@ -20,8 +21,8 @@ export default function GrammarGuide() {
   const navigate = useNavigate();
   const { t } = useLanguage();
 
-  const levelData = grammarData[level];
-  const topic = levelData?.topics?.find((t) => t.id === topicId);
+  const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
+                russianGrammarData[level]?.topics?.find((t) => t.id === topicId);
 
   useEffect(() => {
     window.scrollTo(0, 0);

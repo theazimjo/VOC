@@ -143,6 +143,53 @@
   letter-spacing: 0.04em;
 }
 
+/* ── Language Switcher Tabs ───────────────── */
+.grammar-lang-tabs {
+  display: flex;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.grammar-lang-tab {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-xs);
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: calc(var(--radius-md) - 2px);
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.grammar-lang-tab:hover {
+  color: var(--text-primary);
+}
+
+.grammar-lang-tab.active {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.lang-flag {
+  font-size: 1.1rem;
+}
+
 /* ── Level Tabs (iOS Segmented Control) ──── */
 .grammar-level-tabs {
   display: flex;

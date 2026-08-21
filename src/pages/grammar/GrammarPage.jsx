@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { grammarData } from '../../data/grammarData';
+import { russianGrammarData } from '../../data/russianGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
@@ -38,17 +39,26 @@ const headerVariants = {
 export default function GrammarPage() {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [activeLang, setActiveLangState] = useState(() => {
+    return localStorage.getItem('grammar_lang') || 'english';
+  });
   const [activeLevel, setActiveLevelState] = useState(() => {
     return localStorage.getItem('grammar_level') || 'beginner';
   });
   const { stats: grammarStats } = useGrammarStats();
+
+  const setActiveLang = (lang) => {
+    setActiveLangState(lang);
+    localStorage.setItem('grammar_lang', lang);
+  };
 
   const setActiveLevel = (level) => {
     setActiveLevelState(level);
     localStorage.setItem('grammar_level', level);
   };
 
-  const topics = grammarData[activeLevel]?.topics ?? [];
+  const currentDataSource = activeLang === 'russian' ? russianGrammarData : grammarData;
+  const topics = currentDataSource[activeLevel]?.topics ?? [];
 
   // Calculate statistics for the active level. Legacy German-grammar topic
   // stats (that language option was removed) are excluded so old
@@ -133,7 +143,27 @@ export default function GrammarPage() {
         </div>
       </motion.div>
 
-      {/* Level Tabs */}
+      {/* Language Switcher Tabs */}
+      <div className="grammar-lang-tabs">
+        <button
+          type="button"
+          className={`grammar-lang-tab ${activeLang === 'english' ? 'active' : ''}`}
+          onClick={() => setActiveLang('english')}
+        >
+          <span className="lang-flag">🇬🇧</span>
+          <span>{t('grammar.englishGrammar')}</span>
+        </button>
+        <button
+          type="button"
+          className={`grammar-lang-tab ${activeLang === 'russian' ? 'active' : ''}`}
+          onClick={() => setActiveLang('russian')}
+        >
+          <span className="lang-flag">🇷🇺</span>
+          <span>{t('grammar.russianGrammar')}</span>
+        </button>
+      </div>
+
+      {/* Level Tabs (iOS Segmented Control) */}
       <motion.div
         className="grammar-level-tabs"
         initial={{ opacity: 0, y: 10 }}
