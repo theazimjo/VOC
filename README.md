@@ -1,156 +1,239 @@
-# ⚡ VOC — Adaptive Vocabulary, Grammar & IELTS Mastery Platform
+<div align="center">
 
-> **VOC** is a full-featured, intelligent language learning platform engineered for English learners. Powered by an adaptive cognitive memory model, VOC elevates vocabulary acquisition, solidifies English grammar, and prepares learners for high-stakes exams like IELTS. Built with React 19, Tailwind CSS v4, and Firebase, VOC runs seamlessly as a Progressive Web App (PWA) and as a native Android application via Capacitor.
+# ⚡ VOC — Adaptive Vocabulary, Grammar & IELTS Platform
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-Realtime_DB_%26_Auth-FFCA28?logo=firebase&logoColor=black)
-![Capacitor](https://img.shields.io/badge/Capacitor-Android-119EFF?logo=capacitor&logoColor=white)
-![Vitest](https://img.shields.io/badge/Vitest-Tested-6E9F18?logo=vitest&logoColor=white)
+**Next-generation cognitive language learning system powered by an adaptive memory engine.**
+
+[![React 19](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite 8](https://img.shields.io/badge/Vite-8.0.12-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.3.1-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-12.14.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Capacitor](https://img.shields.io/badge/Capacitor-Android-119EFF?style=for-the-badge&logo=capacitor&logoColor=white)](https://capacitorjs.com/)
+[![Vitest](https://img.shields.io/badge/Vitest-4.1.10-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+[Features](#-key-features) • [Memory Architecture](#-cognitive-memory-engine) • [System Architecture](#-system-architecture) • [Roadmap](#-memory-twin-roadmap) • [Getting Started](#-getting-started) • [Deployment](#-deployment)
+
+</div>
 
 ---
 
-### 📊 Live Usage Metrics
-* **40+ Active Learners**
-* **2,600+ Mastered Words**
+## 📌 Executive Summary
 
----
+**VOC** is an enterprise-grade, intelligent language acquisition platform built for English learners. Unlike traditional learning apps that rely on static intervals or generic flashcards, VOC leverages a custom **Individual Memory Dynamics Engine** (`src/utils/memoryEngine.js`) that models how each learner's brain retains, calibrates, and forgets vocabulary.
 
-## 🧠 Why VOC is Different: The Memory Engine
-
-Traditional spaced repetition systems (SRS) like SuperMemo SM-2 or standard Leitner boxes rely on fixed mathematical intervals. VOC features an in-house cognitive retention architecture called the **Individual Memory Dynamics Engine** (`src/utils/memoryEngine.js`).
-
-At its core, memory retention probability $P(t)$ after $t$ days is modeled as:
-
-$$P(t) = e^{-\frac{t}{S}}$$
-
-Where **$S$** represents individual **Memory Stability**, dynamically computed and updated per user, per word.
-
-```
-       Memory Retention Curve over Time
-  100% | *
-       |   *
-   P(t)|     *  <- Standard Decay
-       |       * . . . . . . . -> Extended Stability (S) after active review
-    0% +---------------------------------> Time (t in days)
-```
-
-### Key Dynamics & Multi-Factor Inputs:
-* **Response Latency Tuning**: Rapid answers signal high implicit confidence, dynamically boosting stability.
-* **Retrieval Effect Calibration**: Active recall (typing/spelling) provides significantly higher memory consolidation than passive self-assessment.
-* **Overnight Sleep Consolidation**: Applies a cognitive stabilization bonus when reviews span across sleep cycles.
-* **Semantic Cluster Self-Calibration**: Automatically groups vocabulary into semantic domains (e.g., technology, emotions, verbs) and adjusts stability predictions based on topical accuracy trends.
+VOC operates cross-platform as a progressive web application (PWA) and as a native Android app via Capacitor, serving **40+ active learners** with **2,600+ mastered vocabulary terms**.
 
 > *"Duolingo tells you what to study. Anki tells you when to review. VOC learns how your brain retains and forgets."*
 
 ---
 
-## 🗺️ Memory Twin — Product Roadmap & Research State
+## 🎯 Table of Contents
 
-VOC's long-term vision is to evolve from a spaced-repetition algorithm into a user's **Memory Twin** — a digital counterpart of their cognitive retention profile that understands *why* a word was forgotten, *which terms* trigger confusion, and *which learning modalities* yield optimal results.
-
-### 🟢 Production (Active in App)
-
-| Component | Architecture / File Location | Description |
-| :--- | :--- | :--- |
-| **Individual Memory Dynamics Engine** | `memoryEngine.js` (`updateStability`, `computeRecallProbability`) | $P(t) = e^{-t/S}$ retention decay modeling with per-user $\times$ per-word stability scores. |
-| **Future Memory Simulator** | `memoryEngine.js` $\rightarrow$ `MemoryInsights.jsx` | Interactive forecasting comparing retention projections over 30 days under different review schedules (0, 1, 3, 7, 14 days). |
-| **Forgetting Autopsy** | `forgettingAutopsy.js` $\rightarrow$ `MemoryInsights.jsx` | Diagnostic engine that analyzes decay signals (interval, latency, confusions) upon recall failure and suggests optimal remedial practice types. |
-| **Confusion Network** | `textSimilarity.js` + `reportConfusion` $\rightarrow$ `MemoryInsights.jsx` | Phonetic and orthographic similarity matching that identifies paired words prone to mutual confusion during spelling and practice modes. |
-| **Semantic Clustering** | `semanticClassifier.js` + `computeClusterCalibration` | Automated taxonomy grouping with dynamic cluster-level accuracy calibration. |
-| **Scheduling Transparency** | `explainSchedulingDecision` | Plain-English explanations detailing *why* specific words are scheduled for review at any moment. |
-| **Retrieval Type Weighting** | `applyReview` (`retrievalType`) | Differentiates active retrieval (typing) vs. passive recognition for calibrated stability gains. |
-
-### 🟡 Near-Term Pipeline (Infrastructure Ready)
-
-| Feature | Gap / Next Step | Effort & Feasibility |
-| :--- | :--- | :--- |
-| **Automated Intervention Engine** | Connect Forgetting Autopsy diagnostics directly to active game mode routing. | **Low**: Practice modes exist; requires navigation link binding. |
-| **Cross-Mode Confusion Detection** | Expand spelling confusion detection across Quiz, Flashcards, and Sentence Builder modes. | **Low**: Uses shared `findConfusableMatch` utility across remaining game engines. |
-
-### 🔮 Future Research (Long-Term Exploration)
-
-| Feature | Objective | Requirements |
-| :--- | :--- | :--- |
-| **Memory Fingerprint** | Modality-specific retention profiling (Visual vs. Auditory vs. Contextual). | Requires fine-grained modality tracking across all game types. |
-| **Linguistic Memory Genome** | Native language interference research (L1 transfer error patterns). | Requires longitudinal datasets and linguistic corpus analysis. |
-| **Knowledge Graph** | Semantic association graph mapping word distance and relationships. | Requires curated lexical database integration (e.g., WordNet API). |
-| **Historical Memory Replay** | 90-day time-series snapshot playback of retention evolution. | Requires daily state snapshots database persistence. |
+- [🧠 Cognitive Memory Engine](#-cognitive-memory-engine)
+- [🏗 System Architecture](#-system-architecture)
+- [🗺 Memory Twin Roadmap](#-memory-twin-roadmap)
+- [✨ Key Features](#-key-features)
+  - [📚 Vocabulary Boost Engine](#-vocabulary-boost-engine)
+  - [📖 Grammar & IELTS Prep](#-grammar--ielts-prep)
+  - [🧬 Memory Lab & Insights](#-memory-lab--insights)
+  - [🏆 Gamification & Analytics](#-gamification--analytics)
+- [🛠 Tech Stack & Dependencies](#-tech-stack--dependencies)
+- [📂 Directory Structure](#-directory-structure)
+- [🚀 Getting Started](#-getting-started)
+- [🧪 Testing & Quality Control](#-testing--quality-control)
+- [📱 Deployment & Build Pipeline](#-deployment--build-pipeline)
+- [🤝 Contributing & License](#-contributing--license)
 
 ---
 
-## ✨ Core Features
+## 🧠 Cognitive Memory Engine
+
+Standard spaced repetition algorithms (such as SM-2 or Leitner systems) rely on static global multipliers. VOC implements a personalized continuous forgetting function based on cognitive stability dynamics:
+
+$$P(t) = e^{-\frac{t}{S}}$$
+
+Where:
+* **$P(t)$**: Probability of successful recall after $t$ elapsed days.
+* **$S$**: Dynamic **Memory Stability** score calculated individually per user $\times$ per word pair.
+
+```
+                  Memory Retention Probability P(t) over Time
+  100% | *
+       |   *
+  P(t) |     *  <-- Forgetting Curve (Decay rate inversely proportional to S)
+       |       * . . . . . . . . . . . . . . . . . -> Extended Stability (S') after Active Review
+    0% +------------------------------------------------------------------------------------> Time (t in days)
+```
+
+### Algorithmic Signals & Multi-Factor Inputs
+
+```mermaid
+flowchart LR
+    A[Recall Attempt] --> B{Result?}
+    B -->|Correct| C[Latency Bonus + Active Recall Weight]
+    B -->|Incorrect| D[Forgetting Autopsy & Confusion Network]
+    C --> E[Sleep Consolidation & Cluster Calibration]
+    D --> F[Stability Penalty + Remedial Recommendation]
+    E --> G[Updated Stability S']
+    F --> G[Updated Stability S']
+    G --> H[Next Review Interval Schedule]
+```
+
+1. **Response Latency Tuning ($\Delta L$)**: Reaction speed serves as an implicit indicator of recall confidence. Rapid correct responses boost stability growth, whereas hesitant correct answers yield reduced gains.
+2. **Retrieval Mode Weighting ($w_{\text{retrieval}}$)**: Differentiates active retrieval (orthographic typing/spelling) from passive self-assessment (flashcard flipping). Active recall produces significantly higher stability increments (the *testing effect*).
+3. **Sleep-Cycle Consolidation**: Reviews spanning overnight rest receive a cognitive consolidation factor, rewarding long-term retention.
+4. **Semantic Domain Calibration**: Automatically categorizes vocabulary into semantic clusters (e.g., *Technology*, *Emotions*, *Academic Verbs*). Empirical accuracy within a cluster automatically tunes stability predictions across related terms.
+
+---
+
+## 🏗 System Architecture
+
+```mermaid
+graph TD
+    subgraph Client Layer
+        ReactApp[React 19 SPA / React Router 7]
+        TailwindUI[Tailwind CSS v4 & Framer Motion]
+        CapacitorBridge[Capacitor Native Android Shell]
+    end
+
+    subgraph Core Engine Layer
+        MemoryEngine[Memory Dynamics Engine]
+        SemanticClassifier[Semantic Classifier & Clustering]
+        TextSimilarity[Orthographic & Phonetic Similarity Engine]
+        GrammarEngine[Grammar Rules & Evaluation Engine]
+    end
+
+    subgraph Data & Storage Layer
+        FirebaseAuth[Firebase Auth - Email/OAuth]
+        FirebaseDB[Firebase Realtime Database]
+        LocalStorage[Offline PWA Cache / IndexDB]
+    end
+
+    ReactApp --> TailwindUI
+    CapacitorBridge --> ReactApp
+    ReactApp --> MemoryEngine
+    ReactApp --> SemanticClassifier
+    ReactApp --> TextSimilarity
+    ReactApp --> GrammarEngine
+    MemoryEngine --> FirebaseDB
+    FirebaseAuth --> FirebaseDB
+    ReactApp --> LocalStorage
+```
+
+---
+
+## 🗺 Memory Twin Roadmap
+
+VOC's long-term vision is to evolve from a spaced-repetition scheduler into a digital **Memory Twin** — a personal cognitive profile that models recall bottlenecks, inter-word interference, and optimal learning modalities.
+
+### 🟢 Production Status (Active in Application)
+
+| Module / Component | Architecture / File Source | Operational Scope |
+| :--- | :--- | :--- |
+| **Memory Dynamics Engine** | `src/utils/memoryEngine.js` | $P(t) = e^{-t/S}$ retention decay with per-word stability state. |
+| **Future Memory Simulator** | `memoryEngine.js` $\rightarrow$ `MemoryInsights.jsx` | 30-day interactive simulation comparing retention under 0, 1, 3, 7, 14-day review intervals. |
+| **Forgetting Autopsy** | `src/utils/forgettingAutopsy.js` | Diagnostic analysis of failure factors (latency, interval, confusion) with targeted practice suggestions. |
+| **Confusion Pair Network** | `src/experiment/textSimilarity.js` | Distance-based similarity detection mapping confusable word pairs in spelling modes. |
+| **Semantic Taxonomy Calibration** | `src/utils/semanticClassifier.js` | Automated domain grouping with per-cluster accuracy calibration. |
+| **Scheduling Transparency** | `explainSchedulingDecision()` | Human-readable explanation of review timing logic for every word. |
+
+### 🟡 Pipeline & In-Progress (Infrastructure Ready)
+
+| Feature | Description | Implementation Complexity |
+| :--- | :--- | :--- |
+| **Automated Remedial Routing** | Direct auto-launch of practice modes based on Forgetting Autopsy diagnostics. | **Low**: Practice games ready; route navigation binding needed. |
+| **Omni-Mode Confusion Tracking** | Extend confusion pairing across Flashcards, Quiz, and Sentence Builder. | **Low**: Leverages existing `findConfusableMatch` helper. |
+
+### 🔮 Future Research & Exploration
+
+| Research Goal | Objective | Technical Prerequisites |
+| :--- | :--- | :--- |
+| **Memory Fingerprint** | Modality retention breakdown (Visual vs. Auditory vs. Contextual). | Multi-game modality telemetry tracking. |
+| **L1 Interference Genome** | Native language error transfer pattern analysis. | Longitudinal error corpus dataset. |
+| **Lexical Knowledge Graph** | Word association and semantic distance mapping. | WordNet / Lexical graph database integration. |
+| **Historical Retention Replay** | 90-day time-series snapshot visualizer. | Time-series state snapshot database persistence. |
+
+---
+
+## ✨ Key Features
 
 ### 📚 Vocabulary Boost Engine
-* **Custom Pack Management**: Create, customize, export, and manage personal word packs.
-* **Marketplace Integration**: One-click installation of curated packs (Irregular Verbs, Phrasal Verbs, Academic Word List, IELTS Essentials) with automatic sync updates.
-* **7 Interactive Practice Modes**:
-  1. 🎴 **Smart Flashcards** — Interactive cards with audio pronunciation and confidence scoring.
-  2. ✍️ **Spelling Trainer** — Active orthographic recall with instant feedback & confusion tracking.
-  3. 🧩 **Match Pairs** — High-speed visual association game.
-  4. ❓ **Multiple Choice Quiz** — Distractor-driven recall under pressure.
-  5. 🎙️ **Speech Pronunciation** — Real-time Web Speech API speech-to-text evaluation.
-  6. 📝 **Sentence Builder** — Contextual word ordering and syntax practice.
-  7. ⚡ **Irregular Verbs Trainer** — Dedicated 3-form verb conjugate trainer.
-* **Leech Word Detection**: Automatic identification of persistently failed words for focused intervention.
+* **Custom Packs**: Create, edit, tag, export, and import personalized word collections.
+* **Marketplace Packs**: Instant 1-click installation of curated packs (*Irregular Verbs*, *Phrasal Verbs*, *Academic Word List*, *IELTS High-Frequency*).
+* **7 Interactive Practice Engines**:
+  1. 🎴 **Smart Flashcards**: Flip cards with native audio synthesis and confidence scoring.
+  2. ✍️ **Spelling Trainer**: Active orthographic recall with instant error highlight & confusion pairing.
+  3. 🧩 **Match Pairs**: Speed association matching under time pressure.
+  4. ❓ **Multiple Choice Quiz**: Distractor-boosted vocabulary recognition.
+  5. 🎙️ **Speech Pronunciation**: Real-time Web Speech API audio evaluation.
+  6. 📝 **Sentence Builder**: Syntax order puzzle constructor.
+  7. ⚡ **Irregular Verbs Trainer**: Dedicated 3-form verb conjugate matrix trainer.
+* **Leech Word Detection**: Automatic isolation of high-failure terms for targeted remediation.
 
-### 📖 Grammar & IELTS Mastery
-* **34 Structured Topics**: 22 Beginner and 12 Intermediate units featuring concise rule explanations, usage examples, and common pitfalls.
-* **6 Exercise Types per Topic**: Multiple choice, fill-in-the-blanks, sentence assembly, error identification, sentence transformation, and dialogue completion.
-* **Full IELTS Practice Tests**: Timed examination environment, real-time timer, open-ended writing response evaluation, and granular band performance reports.
+### 📖 Grammar & IELTS Prep
+* **34 Curriculum Modules**: 22 Beginner and 12 Intermediate topics with concise rules, structural diagrams, and usage examples.
+* **6 Exercise Types per Topic**: Multiple choice, blank filling, sentence assembly, error spotter, transformation, and dialog completion.
+* **Full-Length IELTS Practice Suite**: Real-time timed exam simulator, open-ended writing response evaluation, and granular band performance reports.
 
-### 🧬 Memory Lab (Research & Insights)
-* Visualized retention curves, stability distributions, and real-time confusion pair networks.
-* Detailed analytical breakdown of personal learning speed, retention decay rates, and optimal review windows.
+### 🧬 Memory Lab & Insights
+* Real-time interactive charts illustrating retention decay curves, stability distributions, and confusion networks.
+* Personal learning velocity diagnostics and stability growth analytics.
 
 ### 🏆 Gamification & Progress Tracking
-* **Daily Streaks**: Habit tracking with visual streak counters and protection mechanics.
-* **Activity Heatmap**: GitHub-style visual contribution grid tracking daily study volume.
-* **Milestone Achievements**: Unlockable badges for vocabulary growth, mastery milestones, and practice streaks.
-* **Comprehensive Analytics**: Interactive charts powered by Recharts detailing total words, active review queue, mastery ratio, and learning velocity.
-
-### 🛠 Platform & Security
-* **Firebase Authentication**: Email/Password and Google OAuth login.
-* **Admin Dashboard (`/admin`)**: Operational view for monitoring platform activity and manually scoring open-ended IELTS writing submissions.
-* **PWA & Mobile**: Offline capability, installable app shell, daily browser notifications, and Android APK deployment via Capacitor.
+* **Daily Streaks**: Streak counters with protection mechanics.
+* **Contribution Heatmap**: GitHub-style activity grid tracking study volume over time.
+* **Milestone Achievements**: System-wide achievement badges for vocabulary size, mastery milestones, and practice consistency.
+* **Deep Analytics**: Powered by Recharts with mastery ratios, review queue projections, and learning rates.
 
 ---
 
-## 🏗 Tech Stack
+## 🛠 Tech Stack & Dependencies
 
-| Domain | Technology |
-| :--- | :--- |
-| **Frontend Framework** | React 19, React Router 7, Vite 8 |
-| **Styling & Motion** | Tailwind CSS v4, Framer Motion |
-| **State & Context** | React Context (AuthContext, PacksContext, ThemeContext) |
-| **Data & Auth** | Firebase (Realtime Database & Authentication) |
-| **Mobile Runtime** | Capacitor (Android) |
-| **Testing** | Vitest, Testing Library (React & Jest DOM), JSDOM |
-| **Code Quality** | ESLint 10 with React Hooks & Refresh plugins |
-| **Charts & Icons** | Recharts, Lucide React |
+```
++-----------------------------------------------------------------------+
+|                             FRONTEND                                  |
+|   React 19  |  React Router 7  |  Vite 8  |  Tailwind CSS v4          |
+|   Framer Motion  |  Recharts  |  Lucide React                        |
++-----------------------------------------------------------------------+
+|                             BACKEND & DATA                            |
+|   Firebase Authentication  |  Firebase Realtime Database              |
++-----------------------------------------------------------------------+
+|                             MOBILE & PWA                              |
+|   Capacitor (Android Wrapper)  |  Web Service Worker (Offline PWA)    |
++-----------------------------------------------------------------------+
+|                             QUALITY & TEST                            |
+|   Vitest  |  Testing Library  |  ESLint 10  |  TypeScript (Types)     |
++-----------------------------------------------------------------------+
+```
 
 ---
 
-## 📂 Project Structure
+## 📂 Directory Structure
 
 ```
 VOC/
-├── android/              # Capacitor Android native project files
-├── public/               # Static assets, icons, manifest, service worker
+├── android/                    # Capacitor Android native platform codebase
+├── public/                     # Static assets, PWA manifest, service worker
 ├── src/
-│   ├── components/       # Reusable UI modules (Auth, Practice, Words, Layout, Common)
-│   ├── contexts/         # Global state providers (Auth, Packs, Theme)
-│   ├── data/             # Static datasets (Grammar rules, Market packs, IELTS tests)
-│   ├── experiment/       # Memory Lab — research components & confusion analysis
-│   ├── hooks/            # Firebase custom hooks (useWords, usePacks, useStreak, etc.)
-│   ├── pages/            # Top-level route views (Dashboard, Library, Practice, Admin, etc.)
-│   ├── utils/            # Core logic (memoryEngine, spacedRepetition, achievements, etc.)
-│   └── main.jsx          # Application entry point
-├── database.rules.json   # Firebase Realtime Database security rules
-├── firestore.rules       # Firestore security rules
-├── vite.config.js        # Vite & Vitest configuration
-└── vercel.json           # Vercel SPA routing & headers deployment config
+│   ├── components/             # Reusable UI component library
+│   │   ├── Auth/               # Login, Signup, Protected Routes
+│   │   ├── Layout/             # Navbar, Sidebar, Footer, Page Containers
+│   │   ├── Practice/           # 7 Practice game mode implementations
+│   │   └── Words/              # Word list management, Pack cards, Modals
+│   ├── contexts/               # React Context Providers (Auth, Packs, Theme)
+│   ├── data/                   # Static Datasets (Grammar, IELTS, Market Packs)
+│   ├── experiment/             # Memory Lab & Research diagnostic tools
+│   ├── hooks/                  # Firebase & Application Custom React Hooks
+│   ├── pages/                  # Page-level route views (Dashboard, Practice, Admin, etc.)
+│   ├── utils/                  # Algorithmic engine (Memory Engine, Similarity, Achievements)
+│   ├── App.jsx                 # Main application component & routes
+│   └── main.jsx                # DOM entry point
+├── database.rules.json         # Firebase Realtime Database Security Rules
+├── firestore.rules             # Firestore Security Rules
+├── vite.config.js              # Vite & Vitest configuration manifest
+├── vercel.json                 # Vercel SPA routing & asset caching headers
+└── package.json                # Project dependencies & scripts
 ```
 
 ---
@@ -158,18 +241,18 @@ VOC/
 ## 🚀 Getting Started
 
 ### Prerequisites
-* **Node.js** $\ge 18.0.0$
-* **npm** $\ge 9.0.0$
+* **Node.js**: `^18.0.0` or `^20.0.0`
+* **npm**: `^9.0.0` or higher
 
-### 1. Clone & Install
+### 1. Repository Setup
 ```bash
 git clone https://github.com/your-username/voc.git
 cd voc
 npm install
 ```
 
-### 2. Environment Configuration
-Create a `.env` file in the root directory with your Firebase setup credentials:
+### 2. Environment Setup
+Create a `.env` file in the root directory:
 ```env
 VITE_FIREBASE_API_KEY=your_api_key
 VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
@@ -180,61 +263,68 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 ```
 
-### 3. Run Development Server
+### 3. Launch Local Server
 ```bash
 npm run dev
 ```
-Open `http://localhost:5173` in your browser.
+Navigate to `http://localhost:5173`.
 
 ---
 
-## 🧪 Testing & Code Quality
+## 🧪 Testing & Quality Control
 
-VOC includes unit tests covering pure algorithmic logic (Memory Engine, Spaced Repetition scheduling, Text Similarity matching, and Achievement calculators).
+VOC includes unit tests covering pure algorithmic modules (`memoryEngine.js`, `textSimilarity.js`, `spacedRepetition.js`, `achievements.js`).
 
 ```bash
-# Run all unit tests once
+# Run unit test suite
 npm test
 
 # Run tests in watch mode
 npm run test:watch
 
-# Run linter
+# Execute ESLint verification
 npm run lint
 ```
 
 ---
 
-## 📱 Build & Deployment
+## 📱 Deployment & Build Pipeline
 
-### Web Deployment (Vercel)
-The project includes a ready-to-use `vercel.json` configured for SPA client-side routing and cache controls for PWA assets.
+### Production Web Build
 ```bash
 npm run build
 npm run preview
 ```
 
-### Firebase Rules Deployment
-Security rules enforce strict user-level data isolation. Deploy updated rules using Firebase CLI:
+### Deploying Database Rules
 ```bash
 firebase deploy --only database
 ```
 
-### Native Android Build (Capacitor)
+### Compiling Native Android Application
 ```bash
-# Build Vite web production assets
+# Build production web bundle
 npm run build
 
-# Sync web assets to Capacitor Android wrapper
+# Sync assets to Capacitor native container
 npx cap sync android
 
-# Open Android Studio to compile APK / App Bundle
+# Open Android Studio to build APK or AAB bundle
 npx cap open android
 ```
 
 ---
 
-## 📄 License
+## 🤝 Contributing & License
 
-Distributed under the MIT License. See `LICENSE` for more details.
+Contributions are welcome! Please feel free to open issues or submit pull requests.
 
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+<div align="center">
+
+Crafted with ❤️ for English language learners worldwide.
+
+</div>
