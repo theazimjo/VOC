@@ -3,6 +3,7 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Brain, AlertTriangle } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { useDailyNewWordLimit } from '../../hooks/useDailyNewWordLimit';
@@ -22,6 +23,7 @@ export default function PackDetail() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { getPack, updatePack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
   const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
@@ -212,14 +214,14 @@ export default function PackDetail() {
       const isDuplicate = trimmedWord && words.some(w => (w.word || '').trim().toLowerCase() === trimmedWord);
       if (isDuplicate) {
         const proceed = window.confirm(
-          `"${data.word}" already exists in this pack. Add it anyway?`
+          t('packDetail.duplicateWarning', { word: data.word })
         );
         if (!proceed) return;
       }
 
       if (todayCount >= dailyWordLimit) {
         const proceed = window.confirm(
-          `You've already added ${todayCount} new words today (daily goal: ${dailyWordLimit}). Adding too many words in one day makes them harder to memorize — it's recommended to reinforce these first. Continue anyway?`
+          t('packDetail.dailyLimitWarning', { count: todayCount, limit: dailyWordLimit })
         );
         if (!proceed) return;
       }
@@ -272,20 +274,20 @@ export default function PackDetail() {
 
     if (duplicateCount > 0) {
       const proceed = window.confirm(
-        `${duplicateCount} duplicate word(s) will be skipped. ${uniqueWords.length} new word(s) will be added. Continue?`
+        t('packDetail.importDuplicateSkip', { dupCount: duplicateCount, uniqueCount: uniqueWords.length })
       );
       if (!proceed) return;
     }
 
     if (uniqueWords.length === 0) {
-      window.alert('No new words to add — every word in the list already exists.');
+      window.alert(t('packDetail.noNewWordsToAdd'));
       return;
     }
 
     const projectedTotal = todayCount + uniqueWords.length;
     if (projectedTotal > dailyWordLimit) {
       const proceed = window.confirm(
-        `This import will bring today's total new words to ${projectedTotal} (daily goal: ${dailyWordLimit}). Continue anyway?`
+        t('packDetail.importDailyLimitWarning', { total: projectedTotal, limit: dailyWordLimit })
       );
       if (!proceed) return;
     }
@@ -303,7 +305,7 @@ export default function PackDetail() {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
         <IosSpinner />
-        <span>Loading...</span>
+        <span>{t('packDetail.loading')}</span>
       </div>
     );
   }
@@ -316,7 +318,7 @@ export default function PackDetail() {
     >
       <div className="detail-back-navigation">
         <button className="btn-back" onClick={() => navigate('/library?tab=packs')}>
-          ← Library
+          {t('packDetail.libraryBack')}
         </button>
       </div>
 
@@ -331,7 +333,7 @@ export default function PackDetail() {
             </h1>
             {pack.description && <p>{pack.description}</p>}
             <div className="book-stats">
-              <span className="book-stat-badge">📝 {words.length} words</span>
+              <span className="book-stat-badge">{t('packDetail.wordsCount', { count: words.length })}</span>
             </div>
           </div>
         </div>
@@ -342,13 +344,13 @@ export default function PackDetail() {
                 className="btn btn-cards"
                 onClick={() => { saveScrollPosition(); navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=study`); }}
               >
-                🃏 Flashcards
+                {t('packDetail.flashcards')}
               </button>
               <button
                 className="btn btn-primary btn-mashq"
                 onClick={() => { saveScrollPosition(); navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=practice&count=10`); }}
               >
-                ⚡ Practice
+                {t('packDetail.practice')}
               </button>
             </>
           ) : (
@@ -364,7 +366,7 @@ export default function PackDetail() {
                   );
                 }}
               >
-                🎮 Practice{topicFilter ? ` (${topicFilter})` : ''}
+                {t('packDetail.gamePractice')}{topicFilter ? ` (${topicFilter})` : ''}
               </button>
               {pack.type === 'science' && topicFilter && (
                 <button
@@ -374,7 +376,7 @@ export default function PackDetail() {
                     navigate(`/packs/${packId}/read?topic=${encodeURIComponent(topicFilter)}`);
                   }}
                 >
-                  📖 Read
+                  {t('packDetail.read')}
                 </button>
               )}
             </>
@@ -386,35 +388,35 @@ export default function PackDetail() {
         <div className="pack-memtwin-card">
           <div className="pack-memtwin-header">
             <span className="pack-memtwin-icon"><Brain size={16} strokeWidth={2.2} /></span>
-            <span className="pack-memtwin-title">Memory Twin</span>
+            <span className="pack-memtwin-title">{t('packDetail.memoryTwin')}</span>
             {topicFilter && <span className="pack-memtwin-scope">{topicFilter}</span>}
           </div>
 
           <div className="pack-memtwin-stats-grid">
             <div className="pack-memtwin-stat">
               <span className="pack-memtwin-stat-value">{memoryTwin.masteryPercent}%</span>
-              <span className="pack-memtwin-stat-label">Mastery</span>
+              <span className="pack-memtwin-stat-label">{t('packDetail.mastery')}</span>
             </div>
             <div className="pack-memtwin-stat">
               <span className="pack-memtwin-stat-value">{memoryTwin.retentionPercent}%</span>
-              <span className="pack-memtwin-stat-label">Retention</span>
+              <span className="pack-memtwin-stat-label">{t('packDetail.retention')}</span>
             </div>
             <div className="pack-memtwin-stat">
               <span className="pack-memtwin-stat-value">{memoryTwin.atRisk}</span>
-              <span className="pack-memtwin-stat-label">At risk</span>
+              <span className="pack-memtwin-stat-label">{t('packDetail.atRisk')}</span>
             </div>
             <div className="pack-memtwin-stat">
               <span className="pack-memtwin-stat-value">{memoryTwin.confusionCount}</span>
-              <span className="pack-memtwin-stat-label">Confusions</span>
+              <span className="pack-memtwin-stat-label">{t('packDetail.confusions')}</span>
             </div>
           </div>
 
           {memoryTwin.topConfusion && (
             <div className="pack-memtwin-insight">
               <p className="pack-memtwin-insight-text">
-                <AlertTriangle size={13} strokeWidth={2.3} /> Frequently confused: <strong>{memoryTwin.topConfusion.wordA}</strong> ↔ <strong>{memoryTwin.topConfusion.wordB}</strong>
+                <AlertTriangle size={13} strokeWidth={2.3} /> {t('packDetail.freqConfused', { wordA: memoryTwin.topConfusion.wordA, wordB: memoryTwin.topConfusion.wordB })}
               </p>
-              <p className="pack-memtwin-insight-sub">Recommendation: Contrastive Practice</p>
+              <p className="pack-memtwin-insight-sub">{t('packDetail.recContrastive')}</p>
             </div>
           )}
         </div>
@@ -427,7 +429,7 @@ export default function PackDetail() {
             className={`ielts-topic-chip ${topicFilter === null ? 'active' : ''}`}
             onClick={() => setTopicFilter(null)}
           >
-            All
+            {t('packDetail.allTopics')}
           </button>
           {topics.map(topic => (
             <button
@@ -485,9 +487,9 @@ export default function PackDetail() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="ios-alert-icon">✨</div>
-            <h3>New words added!</h3>
-            <p>{newWordsAddedCount} new word(s) were automatically added to this pack.</p>
-            <button className="ios-alert-btn" onClick={() => setNewWordsAddedCount(null)}>OK</button>
+            <h3>{t('packDetail.newWordsAddedTitle')}</h3>
+            <p>{t('packDetail.newWordsAddedMsg', { count: newWordsAddedCount })}</p>
+            <button className="ios-alert-btn" onClick={() => setNewWordsAddedCount(null)}>{t('packDetail.ok')}</button>
           </motion.div>
         </div>
       )}

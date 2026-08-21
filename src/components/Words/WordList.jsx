@@ -3,17 +3,19 @@ import { AnimatePresence } from 'framer-motion';
 import { Search } from 'lucide-react';
 import WordCard from './WordCard';
 import IosSpinner from '../common/IosSpinner';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './WordList.css';
 
 export default function WordList({ words, onEdit, onDelete, loading, readOnly, groupFn, language = 'en-US' }) {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState(groupFn ? 'group' : 'date-desc');
+  const { t } = useLanguage();
 
   if (loading) {
     return (
       <div className="ios-activity-indicator">
         <IosSpinner />
-        <span>Loading...</span>
+        <span>{t('wordList.loading')}</span>
       </div>
     );
   }
@@ -22,8 +24,8 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly, g
     return (
       <div className="empty-state">
         <div className="empty-state-icon">📝</div>
-        <h3>No words yet</h3>
-        <p>Tap "+ Add Word" to enter new words</p>
+        <h3>{t('wordList.noWords')}</h3>
+        <p>{t('wordList.noWordsHint')}</p>
       </div>
     );
   }
@@ -56,19 +58,19 @@ export default function WordList({ words, onEdit, onDelete, loading, readOnly, g
           <input 
             type="text" 
             className="input" 
-            placeholder="Search word or translation..." 
+            placeholder={t('wordList.searchPlaceholder')} 
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
         </div>
         <div className="word-list-filters">
           <select className="select" value={sortBy} onChange={e => setSortBy(e.target.value)}>
-            {groupFn && <option value="group">By group</option>}
-            <option value="date-desc">Newest first</option>
-            <option value="date-asc">Oldest first</option>
-            <option value="alpha-asc">Alphabetical (A-Z)</option>
-            <option value="mastery-desc">Mastery (High to Low)</option>
-            <option value="mastery-asc">Mastery (Low to High)</option>
+            {groupFn && <option value="group">{t('wordList.byGroup')}</option>}
+            <option value="date-desc">{t('wordList.dateDesc')}</option>
+            <option value="date-asc">{t('wordList.dateAsc')}</option>
+            <option value="alpha-asc">{t('wordList.alphaAsc')}</option>
+            <option value="mastery-desc">{t('wordList.masteryDesc')}</option>
+            <option value="mastery-asc">{t('wordList.masteryAsc')}</option>
           </select>
         </div>
       </div>

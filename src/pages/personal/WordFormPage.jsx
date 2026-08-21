@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Search, Save, ChevronDown, ChevronUp, AlertTriangle, CheckCircle2, Check } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { partOfSpeechOptions, speechLanguages } from '../../utils/helpers';
@@ -14,6 +15,7 @@ export default function WordFormPage() {
   const { packId, wordId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { getPack } = usePacks();
   const { words, loading: wordsLoading, addWord, updateWord } = useWords('packs', packId);
 
@@ -328,7 +330,7 @@ export default function WordFormPage() {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
         <IosSpinner />
-        <span>Loading...</span>
+        <span>{t('wordForm.loading')}</span>
       </div>
     );
   }
@@ -353,8 +355,8 @@ export default function WordFormPage() {
           <ArrowLeft size={18} />
         </button>
         <div className="wfp-title-wrap">
-          <h1>{isEdit ? 'Edit Word' : 'Add New Word'}</h1>
-          <p>{pack?.name || 'Pack'}</p>
+          <h1>{isEdit ? t('wordForm.editWord') : t('wordForm.addWord')}</h1>
+          <p>{pack?.name || t('wordForm.pack')}</p>
         </div>
       </header>
 
@@ -363,7 +365,7 @@ export default function WordFormPage() {
         <div className="wfp-card">
           {saveSuccess && (
             <div className="wfp-success-badge">
-              <CheckCircle2 size={16} /> Word saved!
+              <CheckCircle2 size={16} /> {t('wordForm.wordSaved')}
             </div>
           )}
           {lookupError && (
@@ -379,7 +381,7 @@ export default function WordFormPage() {
 
           <div className="wfp-grid">
             <div className="input-group">
-              <label>{wordLangMeta.flag} {wordLangMeta.label} word *</label>
+              <label>{t('wordForm.wordLabel', { flag: wordLangMeta.flag, label: wordLangMeta.label })}</label>
               <div className="wfp-input-with-action">
                 <input
                   ref={wordInputRef}
@@ -400,7 +402,7 @@ export default function WordFormPage() {
                       setSelectedMeaningId(null);
                     }
                   }}
-                  placeholder={wordLangCode === 'en' ? "e.g. Serendipity" : "Enter the word"}
+                  placeholder={wordLangCode === 'en' ? t('wordForm.wordPlaceholderEn') : t('wordForm.wordPlaceholderDefault')}
                   required
                   autoFocus
                   maxLength={300}
@@ -410,14 +412,14 @@ export default function WordFormPage() {
                   className="wfp-input-lookup-btn"
                   onClick={() => handleDictionaryLookup('word')}
                   disabled={isLookingUp || !formData.word.trim()}
-                  title="Look up this word and fill in the translation"
+                  title={t('wordForm.wordLookupTitle')}
                 >
                   {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
                 </button>
               </div>
               {isDuplicate && (
                 <div className="wfp-inline-warning">
-                  <AlertTriangle size={13} /> This word is already in this pack
+                  <AlertTriangle size={13} /> {t('wordForm.alreadyInPack')}
                 </div>
               )}
 
@@ -431,7 +433,7 @@ export default function WordFormPage() {
                   onClick={() => setIsLangMenuOpen(prev => !prev)}
                 >
                   <span className="wfp-lang-flag">{translationLangMeta.flag}</span>
-                  <span>{translationLangMeta.label} translation</span>
+                  <span>{t('wordForm.translationLabel', { flag: translationLangMeta.flag, label: translationLangMeta.label })}</span>
                   <ChevronDown size={14} className={`wfp-lang-picker-icon ${isLangMenuOpen ? 'open' : ''}`} />
                 </button>
 
@@ -473,7 +475,7 @@ export default function WordFormPage() {
                     }));
                     setLookupAlternate(prev => (prev?.field === 'translation' ? null : prev));
                   }}
-                  placeholder="Enter the translation"
+                  placeholder={t('wordForm.translationPlaceholder')}
                   required
                   maxLength={300}
                 />
@@ -482,7 +484,7 @@ export default function WordFormPage() {
                   className="wfp-input-lookup-btn"
                   onClick={() => handleDictionaryLookup('translation')}
                   disabled={isLookingUp || !formData.translation.trim()}
-                  title="Look up this translation and fill in the word"
+                  title={t('wordForm.translationLookupTitle')}
                 >
                   {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
                 </button>
@@ -500,7 +502,7 @@ export default function WordFormPage() {
                 onClick={() => setShowMore(!showMore)}
               >
                 {showMore ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                <span>{showMore ? 'Show less' : 'More details'}</span>
+                <span>{showMore ? t('wordForm.showLess') : t('wordForm.moreDetails')}</span>
               </button>
             </div>
 
@@ -508,7 +510,7 @@ export default function WordFormPage() {
                 {meaningsLoading ? (
                   <div className="wfp-compact-loading">
                     <IosSpinner size={14} />
-                    <span>Looking up meanings...</span>
+                    <span>{t('wordForm.lookingUpMeanings')}</span>
                   </div>
                 ) : otherMeanings.length > 0 ? (
                   <div className="wfp-compact-picker-wrap">
@@ -517,7 +519,7 @@ export default function WordFormPage() {
                       className={`wfp-compact-btn ${isMeaningsDropdownOpen ? 'active' : ''}`}
                       onClick={() => setIsMeaningsDropdownOpen(prev => !prev)}
                     >
-                      <span className="wfp-compact-title">Other meanings:</span>
+                      <span className="wfp-compact-title">{t('wordForm.otherMeaningsTitle')}</span>
                       {otherMeanings[0].partOfSpeech && (
                         <span className="wfp-compact-pos">{otherMeanings[0].partOfSpeech}</span>
                       )}
@@ -531,7 +533,7 @@ export default function WordFormPage() {
                     {isMeaningsDropdownOpen && (
                       <div className="wfp-meanings-dropdown">
                         <div className="wfp-meanings-dropdown-header">
-                          <span>Select a meaning to set as translation</span>
+                          <span>{t('wordForm.selectMeaningHeader')}</span>
                         </div>
                         <div className="wfp-meanings-dropdown-list">
                           {otherMeanings.map(meaning => (
@@ -557,9 +559,9 @@ export default function WordFormPage() {
                     )}
                   </div>
                 ) : meaningsChecked ? (
-                  <div className="wfp-compact-disabled">No other meanings found</div>
+                  <div className="wfp-compact-disabled">{t('wordForm.noOtherMeanings')}</div>
                 ) : (
-                  <div className="wfp-compact-disabled">Other meanings (look up a word)</div>
+                  <div className="wfp-compact-disabled">{t('wordForm.otherMeaningsHint')}</div>
                 )}
               </div>
             </div>
@@ -567,7 +569,7 @@ export default function WordFormPage() {
           {showMore && (
             <div className="wfp-more-fields">
               <div className="input-group">
-                <label>Part of speech</label>
+                <label>{t('wordForm.partOfSpeech')}</label>
                 <select
                   className="select"
                   value={formData.partOfSpeech}
@@ -580,49 +582,49 @@ export default function WordFormPage() {
               </div>
 
               <div className="input-group">
-                <label>Definition</label>
+                <label>{t('wordForm.definition')}</label>
                 <input
                   type="text"
                   className="input"
                   value={formData.definition}
                   onChange={e => setFormData({ ...formData, definition: e.target.value })}
-                  placeholder="The word's definition or explanation"
+                  placeholder={t('wordForm.defPlaceholder')}
                   maxLength={1000}
                 />
               </div>
 
               <div className="input-group">
-                <label>Example sentence</label>
+                <label>{t('wordForm.exampleSentence')}</label>
                 <textarea
                   className="textarea"
                   value={formData.example}
                   onChange={e => setFormData({ ...formData, example: e.target.value })}
-                  placeholder="A sentence using the word"
+                  placeholder={t('wordForm.examplePlaceholder')}
                   rows={3}
                   maxLength={1500}
                 />
               </div>
 
               <div className="input-group">
-                <label>Your own sentence</label>
+                <label>{t('wordForm.customSentence')}</label>
                 <textarea
                   className="textarea"
                   value={formData.customSentence}
                   onChange={e => setFormData({ ...formData, customSentence: e.target.value })}
-                  placeholder="Write your own sentence to move the word into active memory"
+                  placeholder={t('wordForm.customSentencePlaceholder')}
                   rows={3}
                   maxLength={1500}
                 />
               </div>
 
               <div className="input-group">
-                <label>Notes</label>
+                <label>{t('wordForm.notes')}</label>
                 <input
                   type="text"
                   className="input"
                   value={formData.notes}
                   onChange={e => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="Synonyms, antonyms, or other notes"
+                  placeholder={t('wordForm.notesPlaceholder')}
                   maxLength={800}
                 />
               </div>
@@ -638,7 +640,7 @@ export default function WordFormPage() {
             disabled={isSubmitting || !formData.word.trim() || !formData.translation.trim()}
           >
             <Save size={16} />
-            <span>{isSubmitting ? 'Saving...' : (isEdit ? 'Save changes' : 'Save word')}</span>
+            <span>{isSubmitting ? t('wordForm.saving') : (isEdit ? t('wordForm.saveChanges') : t('wordForm.saveWord'))}</span>
           </button>
         </div>
       </form>

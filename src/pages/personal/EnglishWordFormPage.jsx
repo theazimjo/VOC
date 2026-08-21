@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Search, Save, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useWords } from '../../hooks/useWords';
 import { partOfSpeechOptions } from '../../utils/helpers';
 import { lookupEnglishDefinition, decodeHTMLEntities } from '../../utils/dictionaryService';
@@ -29,6 +30,7 @@ const EMPTY_FORM = {
 export default function EnglishWordFormPage() {
   const { packId, wordId } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const { getPack } = usePacks();
   const { words, loading: wordsLoading, addWord, updateWord } = useWords('packs', packId);
 
@@ -160,7 +162,7 @@ export default function EnglishWordFormPage() {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
         <IosSpinner />
-        <span>Loading...</span>
+        <span>{t('wordForm.loading')}</span>
       </div>
     );
   }
@@ -184,8 +186,8 @@ export default function EnglishWordFormPage() {
           <ArrowLeft size={18} />
         </button>
         <div className="ewfp-title-wrap">
-          <h1>{isEdit ? 'Edit Word' : 'Add Word'}</h1>
-          <p>{pack?.name || 'Pack'}</p>
+          <h1>{isEdit ? t('englishForm.editEnglishWord') : t('englishForm.addEnglishWord')}</h1>
+          <p>{pack?.name || t('wordForm.pack')}</p>
         </div>
       </header>
 
@@ -193,7 +195,7 @@ export default function EnglishWordFormPage() {
         <div className="ewfp-card">
           {saveSuccess && (
             <div className="ewfp-success-badge">
-              <CheckCircle2 size={16} /> Word saved!
+              <CheckCircle2 size={16} /> {t('wordForm.wordSaved')}
             </div>
           )}
           {lookupError && (
@@ -208,7 +210,7 @@ export default function EnglishWordFormPage() {
           )}
 
           <div className="input-group">
-            <label>🇬🇧 English word *</label>
+            <label>{t('englishForm.englishWordLabel')}</label>
             <div className="ewfp-input-with-action">
               <input
                 ref={wordInputRef}
@@ -226,25 +228,25 @@ export default function EnglishWordFormPage() {
                 className="ewfp-input-lookup-btn"
                 onClick={handleDictionaryLookup}
                 disabled={isLookingUp || !formData.word.trim()}
-                title="Look up this word and fill in its English definition"
+                title={t('englishForm.lookupTitleEnglish')}
               >
                 {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
               </button>
             </div>
             {isDuplicate && (
               <div className="ewfp-inline-warning">
-                <AlertTriangle size={13} /> This word is already in this pack
+                <AlertTriangle size={13} /> {t('wordForm.alreadyInPack')}
               </div>
             )}
           </div>
 
           <div className="input-group">
-            <label>Definition (in English) *</label>
+            <label>{t('englishForm.defLabelEnglish')}</label>
             <textarea
               className="textarea"
               value={formData.definition}
               onChange={setField('definition')}
-              placeholder="Explain the word using other English words - this is what you'll be quizzed on, never a translation"
+              placeholder={t('englishForm.defPlaceholderEnglish')}
               rows={3}
               required
               maxLength={1000}
@@ -252,12 +254,12 @@ export default function EnglishWordFormPage() {
           </div>
 
           <div className="input-group">
-            <label>Example sentence</label>
+            <label>{t('wordForm.exampleSentence')}</label>
             <textarea
               className="textarea"
               value={formData.example}
               onChange={setField('example')}
-              placeholder="A sentence using the word in context"
+              placeholder={t('englishForm.examplePlaceholderEnglish')}
               rows={2}
               maxLength={1500}
             />
@@ -265,7 +267,7 @@ export default function EnglishWordFormPage() {
 
           <div className="ewfp-grid">
             <div className="input-group">
-              <label>Synonyms</label>
+              <label>{t('wordCard.synonyms')}</label>
               <input
                 type="text"
                 className="input"
@@ -277,7 +279,7 @@ export default function EnglishWordFormPage() {
             </div>
 
             <div className="input-group">
-              <label>Part of speech</label>
+              <label>{t('wordForm.partOfSpeech')}</label>
               <select className="select" value={formData.partOfSpeech} onChange={setField('partOfSpeech')}>
                 {partOfSpeechOptions.map(pos => (
                   <option key={pos.value} value={pos.value}>{pos.label}</option>
@@ -287,21 +289,21 @@ export default function EnglishWordFormPage() {
           </div>
 
           <div className="ewfp-section">
-            <div className="ewfp-section-title">Optional reference (not used in practice)</div>
+            <div className="ewfp-section-title">{t('englishForm.optRefTitle')}</div>
             <div className="ewfp-grid">
               <div className="input-group">
-                <label>🇺🇿 Uzbek translation</label>
+                <label>{t('englishForm.uzbekTranslationOptional')}</label>
                 <input
                   type="text"
                   className="input"
                   value={formData.translation}
                   onChange={setField('translation')}
-                  placeholder="Only for your own reference"
+                  placeholder={t('englishForm.uzbekRefPlaceholder')}
                   maxLength={300}
                 />
               </div>
               <div className="input-group">
-                <label>Notes</label>
+                <label>{t('wordForm.notes')}</label>
                 <input
                   type="text"
                   className="input"
@@ -322,7 +324,7 @@ export default function EnglishWordFormPage() {
             disabled={isSubmitting || !formData.word.trim() || !formData.definition.trim()}
           >
             <Save size={16} />
-            <span>{isSubmitting ? 'Saving...' : (isEdit ? 'Save changes' : 'Save word')}</span>
+            <span>{isSubmitting ? t('wordForm.saving') : (isEdit ? t('wordForm.saveChanges') : t('wordForm.saveWord'))}</span>
           </button>
         </div>
       </form>

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Upload, Copy, Check, AlertTriangle, FileText } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useWords } from '../../hooks/useWords';
 import { lookupWordFromDictionary, lookupEnglishDefinition, toShortLangCode } from '../../utils/dictionaryService';
 import IosSpinner from '../../components/common/IosSpinner';
@@ -168,6 +169,7 @@ async function resolveEntry(item, wordLangCode, isEnglishPack) {
 export default function BulkImportPage() {
   const { packId } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const { getPack } = usePacks();
   const { words: existingWords, bulkAddWords, loading: wordsLoading } = useWords('packs', packId);
 
@@ -213,22 +215,22 @@ export default function BulkImportPage() {
     try {
       parsed = JSON.parse(raw);
     } catch {
-      setImportError('Invalid JSON format. Please check syntax (quotes, commas, brackets).');
+      setImportError(t('bulkImport.errInvalidJson'));
       return;
     }
 
     if (!Array.isArray(parsed)) {
-      setImportError('JSON must be an array of word objects: [ { "word": "...", "translation": "..." } ]');
+      setImportError(t('bulkImport.errMustBeArray'));
       return;
     }
 
     if (parsed.length === 0) {
-      setImportError('JSON array is empty.');
+      setImportError(t('bulkImport.errEmptyArray'));
       return;
     }
 
     if (parsed.length > MAX_WORDS_PER_IMPORT) {
-      setImportError(`Cannot import more than ${MAX_WORDS_PER_IMPORT} words at once.`);
+      setImportError(t('bulkImport.errMaxLimit', { limit: MAX_WORDS_PER_IMPORT }));
       return;
     }
 
@@ -257,8 +259,8 @@ export default function BulkImportPage() {
       if (validWords.length === 0) {
         setImportError(
           isEnglishPack
-            ? 'No valid words found in JSON. Each item requires "word" and "definition".'
-            : 'No valid words found in JSON. Each item requires "word" and "translation".'
+            ? t('bulkImport.errNoValidWordsEnglish')
+            : t('bulkImport.errNoValidWordsDefault')
         );
         setIsImporting(false);
         return;
@@ -280,7 +282,7 @@ export default function BulkImportPage() {
 
       if (duplicateCount > 0) {
         const proceed = window.confirm(
-          `${duplicateCount} duplicate word(s) already in pack will be skipped. ${uniqueWords.length} new word(s) will be added. Continue?`
+          t('packDetail.importDuplicateSkip', { dupCount: duplicateCount, uniqueCount: uniqueWords.length })
         );
         if (!proceed) {
           setIsImporting(false);
@@ -289,7 +291,7 @@ export default function BulkImportPage() {
       }
 
       if (uniqueWords.length === 0) {
-        setImportError('All words in the JSON list already exist in this pack.');
+        setImportError(t('bulkImport.errAllExist'));
         setIsImporting(false);
         return;
       }
@@ -312,7 +314,7 @@ export default function BulkImportPage() {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
         <IosSpinner />
-        <span>Loading...</span>
+        <span>{t('wordForm.loading')}</span>
       </div>
     );
   }
@@ -336,8 +338,8 @@ export default function BulkImportPage() {
           <ArrowLeft size={18} />
         </button>
         <div className="bip-title-wrap">
-          <h1>Import Words from JSON</h1>
-          <p>{pack?.name || 'Pack'}</p>
+          <h1>{t('bulkImport.title')}</h1>
+          <p>{pack?.name || t('wordForm.pack')}</p>
         </div>
       </header>
 
@@ -351,24 +353,24 @@ export default function BulkImportPage() {
         <div className="bip-sample-bar">
           <div className="bip-sample-info">
             <FileText size={16} />
-            <span>Format: JSON array of objects</span>
+            <span>{t('bulkImport.sampleFormat')}</span>
           </div>
           <button type="button" className="btn-copy-sample" onClick={handleCopySample}>
             {copiedSample ? <Check size={14} /> : <Copy size={14} />}
-            <span>{copiedSample ? 'Copied sample!' : 'Copy sample JSON'}</span>
+            <span>{copiedSample ? t('bulkImport.copiedSample') : t('bulkImport.copySample')}</span>
           </button>
         </div>
 
         <div className="input-group">
           <div className="bip-label-row">
-            <span>Paste JSON code</span>
+            <span>{t('bulkImport.pasteLabel')}</span>
             <label className="bip-checkbox-label">
               <input
                 type="checkbox"
                 checked={autoResolveMissing}
                 onChange={e => setAutoResolveMissing(e.target.checked)}
               />
-              <span>{isEnglishPack ? 'Auto-fill missing English definitions via dictionary' : 'Auto-translate missing definitions/words via dictionary'}</span>
+              <span>{isEnglishPack ? t('bulkImport.autoResolveEnglish') : t('bulkImport.autoResolveDefault')}</span>
             </label>
           </div>
           <textarea
@@ -384,7 +386,7 @@ export default function BulkImportPage() {
         {progress && (
           <div className="bip-progress-card">
             <div className="bip-progress-text">
-              <span>{progress.stage === 'resolving' ? 'Looking up dictionary translations...' : 'Saving words to pack...'}</span>
+              <span>{progress.stage === 'resolving' ? t('bulkImport.stageResolving') : t('bulkImport.stageSaving')}</span>
               <span>{progress.current} / {progress.total}</span>
             </div>
             <div className="bip-progress-bar">
@@ -404,7 +406,7 @@ export default function BulkImportPage() {
             disabled={isImporting || !jsonText.trim()}
           >
             {isImporting ? <IosSpinner size={16} /> : <Upload size={16} />}
-            <span>{isImporting ? 'Importing words...' : 'Import Words'}</span>
+            <span>{isImporting ? t('bulkImport.importingWords') : t('bulkImport.importWordsBtn')}</span>
           </button>
         </div>
       </div>

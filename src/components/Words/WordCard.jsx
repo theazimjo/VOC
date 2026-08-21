@@ -3,13 +3,16 @@ import { motion } from 'framer-motion';
 import { getMasteryLevel } from '../../utils/spacedRepetition';
 import { partOfSpeechOptions, speakWord } from '../../utils/helpers';
 import { Volume2, Edit2, Trash2, MoreVertical } from 'lucide-react';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './WordCard.css';
 
-const MASTERY_LEVELS = ["Yangi", "Boshlanish", "O'rtacha", "Yaxshi", "O'zlashtirilgan"];
-
 export default function WordCard({ word, onEdit, onDelete, readOnly, language = 'en-US' }) {
+  const { t } = useLanguage();
+  const masteryLevels = t('wordCard.masteryLevels');
   const masteryInfo = getMasteryLevel(word.mastery || 0);
-  const filledBars = MASTERY_LEVELS.indexOf(masteryInfo.label);
+  const rawLabelIndex = ["Yangi", "Boshlanish", "O'rtacha", "Yaxshi", "O'zlashtirilgan"].indexOf(masteryInfo.label);
+  const filledBars = rawLabelIndex !== -1 ? rawLabelIndex : 0;
+  const localizedMasteryLabel = Array.isArray(masteryLevels) && masteryLevels[filledBars] ? masteryLevels[filledBars] : masteryInfo.label;
   const pos = partOfSpeechOptions.find(p => p.value === word.partOfSpeech) || partOfSpeechOptions[0];
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -46,7 +49,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
             type="button"
             className="btn-speak"
             onClick={() => speakWord(word.word, language)}
-            title="Talaffuz qilish"
+            title={t('wordCard.pronounce')}
             aria-label="Pronounce"
           >
             <Volume2 size={15} strokeWidth={2.4} />
@@ -58,7 +61,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
             <span className="badge badge-accent pos-badge">{pos.label.split(' ')[0]}</span>
           )}
 
-          <div className="word-mastery-signal" title={masteryInfo.label}>
+          <div className="word-mastery-signal" title={localizedMasteryLabel}>
             {[1, 2, 3, 4].map(bar => (
               <span
                 key={bar}
@@ -75,7 +78,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
                   type="button"
                   className="btn-action-icon edit"
                   onClick={() => onEdit(word)}
-                  title="Tahrirlash"
+                  title={t('wordCard.edit')}
                 >
                   <Edit2 size={14} strokeWidth={2.5} />
                 </button>
@@ -83,7 +86,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
                   type="button"
                   className="btn-action-icon delete"
                   onClick={() => setShowDeleteConfirm(true)}
-                  title="O'chirish"
+                  title={t('wordCard.delete')}
                 >
                   <Trash2 size={14} strokeWidth={2.5} />
                 </button>
@@ -94,8 +97,8 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
                   type="button"
                   className="word-options-btn"
                   onClick={() => setMenuOpen(o => !o)}
-                  aria-label="Options"
-                  title="Options"
+                  aria-label={t('wordCard.options')}
+                  title={t('wordCard.options')}
                 >
                   <MoreVertical size={16} strokeWidth={2.4} />
                 </button>
@@ -106,14 +109,14 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
                       className="word-options-item"
                       onClick={() => { setMenuOpen(false); onEdit(word); }}
                     >
-                      <Edit2 size={15} strokeWidth={2.3} /> Edit
+                      <Edit2 size={15} strokeWidth={2.3} /> {t('wordCard.edit')}
                     </button>
                     <button
                       type="button"
                       className="word-options-item delete"
                       onClick={() => { setMenuOpen(false); setShowDeleteConfirm(true); }}
                     >
-                      <Trash2 size={15} strokeWidth={2.3} /> Delete
+                      <Trash2 size={15} strokeWidth={2.3} /> {t('wordCard.delete')}
                     </button>
                   </div>
                 )}
@@ -131,28 +134,28 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
         <div className="word-details">
           {word.definition && (
             <div className="word-def">
-              <span className="detail-label">Def:</span> {word.definition}
+              <span className="detail-label">{t('wordCard.def')}</span> {word.definition}
             </div>
           )}
           {word.synonyms && (
             <div className="word-synonyms">
-              <span className="detail-label">Synonyms:</span> {word.synonyms}
+              <span className="detail-label">{t('wordCard.synonyms')}</span> {word.synonyms}
             </div>
           )}
           {word.collocations && (
             <div className="word-collocations">
-              <span className="detail-label">Collocations:</span> {word.collocations}
+              <span className="detail-label">{t('wordCard.collocations')}</span> {word.collocations}
             </div>
           )}
           {(word.nounForm || word.verbForm || word.adjectiveForm || word.adverbForm) && (
             <div className="word-family">
-              <span className="detail-label">Word family:</span>{' '}
+              <span className="detail-label">{t('wordCard.wordFamily')}</span>{' '}
               {[word.nounForm, word.verbForm, word.adjectiveForm, word.adverbForm].filter(Boolean).join(' · ')}
             </div>
           )}
           {word.article && (
             <div className="word-article">
-              <span className="detail-label">Article:</span> {word.article}
+              <span className="detail-label">{t('wordCard.article')}</span> {word.article}
             </div>
           )}
           {word.example && (
@@ -172,20 +175,20 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
       {showDeleteConfirm && (
         <div className="custom-alert-overlay" onClick={() => setShowDeleteConfirm(false)}>
           <div className="custom-alert-card" onClick={(e) => e.stopPropagation()}>
-            <p className="custom-alert-message">Delete "{word.word}"? This can't be undone.</p>
+            <p className="custom-alert-message">{t('wordCard.deleteConfirm', { word: word.word })}</p>
             <div className="custom-alert-actions-row">
               <button
                 className="custom-alert-btn"
                 onClick={() => { setShowDeleteConfirm(false); onDelete(word.id); }}
               >
-                Delete
+                {t('wordCard.delete')}
               </button>
               <button
                 className="custom-alert-btn"
                 style={{ fontWeight: 700 }}
                 onClick={() => setShowDeleteConfirm(false)}
               >
-                Cancel
+                {t('wordCard.cancel')}
               </button>
             </div>
           </div>

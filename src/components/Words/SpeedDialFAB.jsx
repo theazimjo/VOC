@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './SpeedDialFAB.css';
 
 export default function SpeedDialFAB({ onAddWord, onImportJson }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
+  const { t } = useLanguage();
 
   // Close speed dial when clicking outside
   useEffect(() => {
@@ -33,9 +35,9 @@ export default function SpeedDialFAB({ onAddWord, onImportJson }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 15, scale: 0.8 }}
               transition={{ duration: 0.2, delay: 0.05 }}
-              title="JSON Import"
+              title={t('speedDial.jsonImport')}
             >
-              <span className="speed-dial-action-label">JSON Import</span>
+              <span className="speed-dial-action-label">{t('speedDial.jsonImport')}</span>
               <span className="speed-dial-action-icon">📥</span>
             </motion.button>
 
@@ -50,9 +52,9 @@ export default function SpeedDialFAB({ onAddWord, onImportJson }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 15, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              title="Add Word"
+              title={t('speedDial.addWord')}
             >
-              <span className="speed-dial-action-label">Add Word</span>
+              <span className="speed-dial-action-label">{t('speedDial.addWord')}</span>
               <span className="speed-dial-action-icon">📝</span>
             </motion.button>
           </div>
@@ -65,7 +67,7 @@ export default function SpeedDialFAB({ onAddWord, onImportJson }) {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
-        title="Actions"
+        title={t('speedDial.actions')}
       >
         <span className="speed-dial-trigger-icon">+</span>
       </motion.button>

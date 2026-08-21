@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Search, Save, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useWords } from '../../hooks/useWords';
 import { partOfSpeechOptions, speechLanguages } from '../../utils/helpers';
 import { lookupWordFromDictionary, toShortLangCode, decodeHTMLEntities } from '../../utils/dictionaryService';
@@ -58,6 +59,7 @@ const EMPTY_FORM = {
 export default function IeltsWordFormPage() {
   const { packId, wordId } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const { getPack } = usePacks();
   const { words, loading: wordsLoading, addWord, updateWord } = useWords('packs', packId);
 
@@ -207,7 +209,7 @@ export default function IeltsWordFormPage() {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
         <IosSpinner />
-        <span>Loading...</span>
+        <span>{t('wordForm.loading')}</span>
       </div>
     );
   }
@@ -231,8 +233,8 @@ export default function IeltsWordFormPage() {
           <ArrowLeft size={18} />
         </button>
         <div className="iwfp-title-wrap">
-          <h1>{isEdit ? 'Edit IELTS Word' : 'Add IELTS Word'}</h1>
-          <p>{pack?.name || 'Pack'}</p>
+          <h1>{isEdit ? t('ieltsForm.editIeltsWord') : t('ieltsForm.addIeltsWord')}</h1>
+          <p>{pack?.name || t('wordForm.pack')}</p>
         </div>
       </header>
 
@@ -240,7 +242,7 @@ export default function IeltsWordFormPage() {
         <div className="iwfp-card">
           {saveSuccess && (
             <div className="iwfp-success-badge">
-              <CheckCircle2 size={16} /> Word saved!
+              <CheckCircle2 size={16} /> {t('wordForm.wordSaved')}
             </div>
           )}
           {lookupError && (
@@ -256,7 +258,7 @@ export default function IeltsWordFormPage() {
 
           <div className="iwfp-grid">
             <div className="input-group">
-              <label>{wordLangMeta.flag} {wordLangMeta.label} word *</label>
+              <label>{t('wordForm.wordLabel', { flag: wordLangMeta.flag, label: wordLangMeta.label })}</label>
               <div className="iwfp-input-with-action">
                 <input
                   ref={wordInputRef}
@@ -274,20 +276,20 @@ export default function IeltsWordFormPage() {
                   className="iwfp-input-lookup-btn"
                   onClick={() => handleDictionaryLookup('word')}
                   disabled={isLookingUp || !formData.word.trim()}
-                  title="Look up this word and fill in the translation"
+                  title={t('wordForm.wordLookupTitle')}
                 >
                   {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
                 </button>
               </div>
               {isDuplicate && (
                 <div className="iwfp-inline-warning">
-                  <AlertTriangle size={13} /> This word is already in this pack
+                  <AlertTriangle size={13} /> {t('wordForm.alreadyInPack')}
                 </div>
               )}
             </div>
 
             <div className="input-group">
-              <label>🇺🇿 Uzbek translation *</label>
+              <label>{t('ieltsForm.uzbekTranslation')}</label>
               <div className="iwfp-input-with-action">
                 <input
                   type="text"
@@ -303,7 +305,7 @@ export default function IeltsWordFormPage() {
                   className="iwfp-input-lookup-btn"
                   onClick={() => handleDictionaryLookup('translation')}
                   disabled={isLookingUp || !formData.translation.trim()}
-                  title="Look up this translation and fill in the word"
+                  title={t('wordForm.translationLookupTitle')}
                 >
                   {isLookingUp ? <IosSpinner size={16} /> : <Search size={16} />}
                 </button>
@@ -312,15 +314,15 @@ export default function IeltsWordFormPage() {
           </div>
 
           <div className="iwfp-section">
-            <div className="iwfp-section-title">IELTS details</div>
+            <div className="iwfp-section-title">{t('ieltsForm.ieltsDetails')}</div>
 
             <div className="input-group">
-              <label>Definition</label>
+              <label>{t('wordForm.definition')}</label>
               <textarea
                 className="textarea"
                 value={formData.definition}
                 onChange={setField('definition')}
-                placeholder="A clear definition - the main source for Definition Recall drills"
+                placeholder={t('ieltsForm.defPlaceholderIelts')}
                 rows={2}
                 maxLength={1000}
               />
@@ -328,32 +330,32 @@ export default function IeltsWordFormPage() {
 
             <div className="iwfp-grid">
               <div className="input-group">
-                <label>Synonyms</label>
+                <label>{t('wordCard.synonyms')}</label>
                 <input
                   type="text"
                   className="input"
                   value={formData.synonyms}
                   onChange={setField('synonyms')}
-                  placeholder="e.g. widespread, pervasive, omnipresent"
+                  placeholder={t('ieltsForm.synonymsPlaceholder')}
                   maxLength={500}
                 />
               </div>
 
               <div className="input-group">
-                <label>Collocations</label>
+                <label>{t('wordCard.collocations')}</label>
                 <input
                   type="text"
                   className="input"
                   value={formData.collocations}
                   onChange={setField('collocations')}
-                  placeholder="e.g. make a decision, come to a decision"
+                  placeholder={t('ieltsForm.collocationsPlaceholder')}
                   maxLength={500}
                 />
               </div>
             </div>
 
             <div className="input-group">
-              <label>Word family</label>
+              <label>{t('ieltsForm.wordFamily')}</label>
               <div className="iwfp-family-grid">
                 <input
                   type="text"
@@ -392,7 +394,7 @@ export default function IeltsWordFormPage() {
 
             <div className="iwfp-grid">
               <div className="input-group">
-                <label>Article</label>
+                <label>{t('ieltsForm.article')}</label>
                 <select className="select" value={formData.article} onChange={setField('article')}>
                   {ARTICLE_OPTIONS.map(opt => (
                     <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -401,7 +403,7 @@ export default function IeltsWordFormPage() {
               </div>
 
               <div className="input-group">
-                <label>Topic</label>
+                <label>{t('ieltsForm.topic')}</label>
                 <select className="select" value={formData.topic} onChange={setField('topic')}>
                   {TOPIC_OPTIONS.map(opt => (
                     <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -411,12 +413,12 @@ export default function IeltsWordFormPage() {
             </div>
 
             <div className="input-group">
-              <label>Example sentence</label>
+              <label>{t('wordForm.exampleSentence')}</label>
               <textarea
                 className="textarea"
                 value={formData.example}
                 onChange={setField('example')}
-                placeholder="A sentence using the word"
+                placeholder={t('wordForm.examplePlaceholder')}
                 rows={2}
                 maxLength={1500}
               />
@@ -424,7 +426,7 @@ export default function IeltsWordFormPage() {
 
             <div className="iwfp-grid">
               <div className="input-group">
-                <label>Part of speech</label>
+                <label>{t('wordForm.partOfSpeech')}</label>
                 <select className="select" value={formData.partOfSpeech} onChange={setField('partOfSpeech')}>
                   {partOfSpeechOptions.map(pos => (
                     <option key={pos.value} value={pos.value}>{pos.label}</option>
@@ -433,13 +435,13 @@ export default function IeltsWordFormPage() {
               </div>
 
               <div className="input-group">
-                <label>Notes</label>
+                <label>{t('wordForm.notes')}</label>
                 <input
                   type="text"
                   className="input"
                   value={formData.notes}
                   onChange={setField('notes')}
-                  placeholder="Usage nuance, register, etc."
+                  placeholder={t('ieltsForm.notesPlaceholderIelts')}
                   maxLength={800}
                 />
               </div>
@@ -454,7 +456,7 @@ export default function IeltsWordFormPage() {
             disabled={isSubmitting || !formData.word.trim() || !formData.translation.trim()}
           >
             <Save size={16} />
-            <span>{isSubmitting ? 'Saving...' : (isEdit ? 'Save changes' : 'Save word')}</span>
+            <span>{isSubmitting ? t('wordForm.saving') : (isEdit ? t('wordForm.saveChanges') : t('wordForm.saveWord'))}</span>
           </button>
         </div>
       </form>
