@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { shuffleArray, speakWord } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './QuizGame.css';
 
 export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null); // the chosen option text
@@ -150,13 +152,13 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
           exit={{ opacity: 0, y: -20, scale: 0.96 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="quiz-question-label">Choose the translation</div>
+          <div className="quiz-question-label">{t('practice.chooseTranslation')}</div>
           <div className="quiz-question">
             {currentWord.word}
             <button
               className="btn-speak-quiz"
               onClick={() => speakWord(currentWord.word, language)}
-              title="Listen"
+              title={t('practice.listen')}
               type="button"
             >
               <Volume2 size={18} strokeWidth={2.2} />
@@ -208,15 +210,15 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       <div className={`quiz-bottom-bar ${answered ? (isCorrectAnswer && !timedOut ? 'correct' : 'wrong') : ''}`}>
         <div className="quiz-bottom-bar-inner">
           {!answered ? (
-            <div className="quiz-feedback quiz-feedback-hint">Select the correct translation</div>
+            <div className="quiz-feedback quiz-feedback-hint">{t('practice.selectCorrectHint')}</div>
           ) : (
             <>
               <div className="quiz-feedback">
                 {timedOut
-                  ? `Time is up! Answer: ${currentWord.translation}`
+                  ? t('practice.timeUp', { answer: currentWord.translation })
                   : isCorrectAnswer
-                    ? "Correct!"
-                    : `Answer: ${currentWord.translation}`
+                    ? t('practice.greatSentence').split('!')[0] + '!'
+                    : t('practice.answerIs', { answer: currentWord.translation })
                 }
               </div>
               <button
@@ -224,7 +226,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
                 className="btn-quiz-next"
                 onClick={handleNext}
               >
-                {isLast ? 'Results →' : 'Next →'}
+                {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
               </button>
             </>
           )}

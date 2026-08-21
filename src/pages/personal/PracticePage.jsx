@@ -5,6 +5,7 @@ import { Trophy, ThumbsUp, Dumbbell, TrendingDown, Sparkles, BookOpen, CheckCirc
 import { ref, get, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useStreak } from '../../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../../utils/wordsMigration';
@@ -32,6 +33,7 @@ export default function PracticePage() {
   const { sourceType: urlSourceType, sourceId: urlSourceId } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { packs, allWords, loading: packsLoading } = usePacks();
   const { incrementActivity } = useStreak();
 
@@ -307,7 +309,7 @@ export default function PracticePage() {
 
   const handleBack = () => {
     if (step === 'practice' || step === 'intro') {
-      showConfirm("Are you sure you want to leave the practice? Your current results will not be saved.", () => {
+      showConfirm(t('practice.confirmLeave'), () => {
         if (selectedSource?.name === 'Irregular Verbs') {
           if (packDetailPath) {
             navigate(packDetailPath);
@@ -395,9 +397,9 @@ export default function PracticePage() {
 
   const getResultTier = (r) => {
     const ratio = r.totalWords > 0 ? r.correctCount / r.totalWords : 0;
-    if (ratio >= 0.8) return { Icon: Trophy, label: 'Great job!', color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
-    if (ratio >= 0.5) return { Icon: ThumbsUp, label: 'Good job!', color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
-    return { Icon: Dumbbell, label: 'Keep going!', color: 'var(--success)', dim: 'var(--success-dim)' };
+    if (ratio >= 0.8) return { Icon: Trophy, label: t('practice.greatJob'), color: 'var(--accent-3)', dim: 'var(--warning-dim)' };
+    if (ratio >= 0.5) return { Icon: ThumbsUp, label: t('practice.goodJob'), color: 'var(--accent-1)', dim: 'var(--accent-1-dim)' };
+    return { Icon: Dumbbell, label: t('practice.keepGoing'), color: 'var(--success)', dim: 'var(--success-dim)' };
   };
 
   return (
@@ -409,7 +411,7 @@ export default function PracticePage() {
           </button>
         )}
         <h1>
-          🎮 Practice {selectedSource && `(${selectedSource.title || selectedSource.name})`}
+          {t('practice.title')} {selectedSource && `(${selectedSource.title || selectedSource.name})`}
         </h1>
       </div>
 
@@ -426,7 +428,7 @@ export default function PracticePage() {
             transition={{ duration: 0.15 }}
           >
             <IosSpinner />
-            <span>Loading...</span>
+            <span>{t('practice.loading')}</span>
           </motion.div>
         )}
 
@@ -439,7 +441,7 @@ export default function PracticePage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <h2>📦 Choose a pack</h2>
+              <h2>{t('practice.choosePack')}</h2>
 
               {packs.length > 0 ? (
                 <div className="source-list">
@@ -457,7 +459,7 @@ export default function PracticePage() {
                           {source.name}
                         </div>
                         <div className="source-option-count">
-                          {source.wordCount || 0} words
+                          {t('library.words', { count: source.wordCount || 0 })}
                         </div>
                       </div>
                       <div className="source-option-arrow">→</div>
@@ -467,8 +469,8 @@ export default function PracticePage() {
               ) : (
                 <div className="empty-state">
                   <div className="empty-state-icon">📦</div>
-                  <h3>No packs found</h3>
-                  <p>Create a pack and add some words first</p>
+                  <h3>{t('practice.noPacks')}</h3>
+                  <p>{t('practice.noPacksHint')}</p>
                 </div>
               )}
             </motion.div>
@@ -484,7 +486,7 @@ export default function PracticePage() {
             >
               {/* Word Count Selector for Free Practice */}
               <div className="practice-word-count-bar">
-                <span className="practice-word-count-label">🔢 Number of words to practice:</span>
+                <span className="practice-word-count-label">{t('practice.numWordsToPractice')}</span>
                 <div className="word-count-options">
                   {[5, 10, 20, 'all'].map(count => (
                     <button
@@ -492,7 +494,7 @@ export default function PracticePage() {
                       className={`word-count-btn ${wordCount === count ? 'active' : ''}`}
                       onClick={() => setWordCount(count)}
                     >
-                      {count === 'all' ? 'All' : `${count}`}
+                      {count === 'all' ? t('practice.all') : `${count}`}
                     </button>
                   ))}
                 </div>
@@ -524,18 +526,18 @@ export default function PracticePage() {
                   {selectedMode === 'flashcard' ? '🧠' : selectedMode === 'spelling' ? '✍️' : selectedMode === 'match' ? '🔀' : selectedMode === 'quiz' ? '📝' : selectedMode === 'pronounce' ? '🎙️' : selectedMode === 'sentence' ? '📓' : selectedMode === 'speed' ? '⏱️' : selectedMode === 'gridmatch' ? '🧩' : selectedMode === 'irregular-verbs' ? '⚡' : selectedMode === 'ielts-trainer' ? '🎓' : selectedMode === 'english-trainer' ? '🔤' : '🎮'}
                 </div>
                 <h2>
-                  {selectedMode === 'flashcard' ? 'Smart Flashcards' : selectedMode === 'spelling' ? 'Spelling Practice' : selectedMode === 'match' ? 'Match the Pair' : selectedMode === 'quiz' ? 'Quiz' : selectedMode === 'pronounce' ? 'Pronunciation' : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'speed' ? 'Speed Round' : selectedMode === 'gridmatch' ? 'Memory Grid' : selectedMode === 'irregular-verbs' ? "Irregular Verbs Trainer" : selectedMode === 'ielts-trainer' ? 'IELTS Trainer' : selectedMode === 'english-trainer' ? 'English Trainer' : 'Practice'}
+                  {selectedMode === 'flashcard' ? t('practice.flashcardsTitle') : selectedMode === 'spelling' ? t('practice.spellingTitle') : selectedMode === 'match' ? t('practice.matchTitle') : selectedMode === 'quiz' ? t('practice.quizTitle') : selectedMode === 'pronounce' ? t('practice.pronounceTitle') : selectedMode === 'sentence' ? 'Sentence Builder' : selectedMode === 'speed' ? t('practice.speedTitle') : selectedMode === 'gridmatch' ? t('practice.gridmatchTitle') : selectedMode === 'irregular-verbs' ? t('practice.irregularVerbsTitle') : selectedMode === 'ielts-trainer' ? t('practice.ieltsTrainerTitle') : selectedMode === 'english-trainer' ? t('practice.englishTrainerTitle') : t('practice.title')}
                 </h2>
-                <p>{practiceWords.length} words ready</p>
+                <p>{t('practice.wordsReady', { count: practiceWords.length })}</p>
                 {selectedMode === 'speed' && (
                   <p className="intro-speed-record">
-                    🏆 Your best: <strong>{getSpeedRecord(selectedSource?.title || selectedSource?.name || "Library")}</strong> correct in 60s
+                    {t('practice.bestSpeedRecord', { record: getSpeedRecord(selectedSource?.title || selectedSource?.name || "Library") })}
                   </p>
                 )}
 
                 <div className="ios-activity-indicator" style={{ marginTop: 'var(--space-md)' }}>
                   <IosSpinner />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>Preparing your practice...</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)' }}>{t('practice.preparingPractice')}</span>
                 </div>
               </div>
             </motion.div>
@@ -555,7 +557,7 @@ export default function PracticePage() {
                   <ChevronLeft size={22} strokeWidth={2.5} />
                 </button>
                 <h1 className="clean-quiz-title">
-                  {selectedMode === 'flashcard' ? '🧠 Smart Flashcards' : selectedMode === 'spelling' ? '✍️ Spelling Practice' : selectedMode === 'match' ? '🔀 Match the Pair' : selectedMode === 'quiz' ? '📝 Quiz' : selectedMode === 'pronounce' ? '🎙️ Pronunciation' : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? '⏱️ Speed Round' : selectedMode === 'gridmatch' ? '🧩 Memory Grid' : 'Practice'}
+                  {selectedMode === 'flashcard' ? `🧠 ${t('practice.flashcardsTitle')}` : selectedMode === 'spelling' ? `✍️ ${t('practice.spellingTitle')}` : selectedMode === 'match' ? `🔀 ${t('practice.matchTitle')}` : selectedMode === 'quiz' ? `📝 ${t('practice.quizTitle')}` : selectedMode === 'pronounce' ? `🎙️ ${t('practice.pronounceTitle')}` : selectedMode === 'sentence' ? '📓 Sentence Builder' : selectedMode === 'speed' ? `⏱️ ${t('practice.speedTitle')}` : selectedMode === 'gridmatch' ? `🧩 ${t('practice.gridmatchTitle')}` : selectedMode === 'irregular-verbs' ? `⚡ ${t('practice.irregularVerbsTitle')}` : selectedMode === 'ielts-trainer' ? `🎓 ${t('practice.ieltsTrainerTitle')}` : selectedMode === 'english-trainer' ? `🔤 ${t('practice.englishTrainerTitle')}` : t('practice.title')}
                 </h1>
                 <div style={{ width: '40px', opacity: 0 }}></div>
 
@@ -588,22 +590,22 @@ export default function PracticePage() {
                   <tier.Icon size={36} strokeWidth={2.2} />
                 </div>
                 <h2>{tier.label}</h2>
-                <p>Practice complete</p>
+                <p>{t('practice.practiceComplete')}</p>
                 <div className="result-stats">
                   <div className="result-stat">
                     <BookOpen className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--accent-2)' }} />
                     <div className="value" style={{ color: 'var(--accent-2)' }}>{results.totalWords}</div>
-                    <div className="label">Total words</div>
+                    <div className="label">{t('practice.totalWords')}</div>
                   </div>
                   <div className="result-stat">
                     <CheckCircle2 className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--success)' }} />
                     <div className="value" style={{ color: 'var(--success)' }}>{results.correctCount}</div>
-                    <div className="label">Correct</div>
+                    <div className="label">{t('practice.correct')}</div>
                   </div>
                   <div className="result-stat">
                     <XCircle className="result-stat-icon" size={18} strokeWidth={2.2} style={{ color: 'var(--error)' }} />
                     <div className="value" style={{ color: 'var(--error)' }}>{results.incorrectCount}</div>
-                    <div className="label">Incorrect</div>
+                    <div className="label">{t('practice.incorrect')}</div>
                   </div>
                 </div>
 
@@ -612,7 +614,7 @@ export default function PracticePage() {
                   <div className="results-mistakes-container">
                     <div className="results-mistakes-title">
                       <TrendingDown size={14} strokeWidth={2.4} />
-                      Recommended for review (mistakes)
+                      {t('practice.recommendedReview')}
                     </div>
                     <div className="results-mistake-list">
                       {wrongWords.map(word => (
@@ -636,13 +638,13 @@ export default function PracticePage() {
                 ) : (
                   <div className="perfect-score-banner">
                     <Sparkles size={16} strokeWidth={2.3} />
-                    Perfect score! No mistakes at all.
+                    {t('practice.perfectScore')}
                   </div>
                 )}
 
                 <div className="result-actions">
                   <button className="btn-results-back" onClick={handleReset}>
-                    Back to practice menu
+                    {t('practice.backToMenu')}
                   </button>
                 </div>
               </div>
@@ -664,7 +666,7 @@ export default function PracticePage() {
                     if (customModal.onCancel) customModal.onCancel();
                   }}
                 >
-                  No
+                  {t('practice.no')}
                 </button>
                 <button
                   className="custom-alert-btn"
@@ -674,7 +676,7 @@ export default function PracticePage() {
                     if (customModal.onConfirm) customModal.onConfirm();
                   }}
                 >
-                  Yes
+                  {t('practice.yes')}
                 </button>
               </div>
             ) : (
@@ -686,7 +688,7 @@ export default function PracticePage() {
                   if (customModal.onConfirm) customModal.onConfirm();
                 }}
               >
-                Got it
+                {t('practice.gotIt')}
               </button>
             )}
           </div>

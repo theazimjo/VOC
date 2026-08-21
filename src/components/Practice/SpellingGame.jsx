@@ -6,6 +6,7 @@ import { speakWord, shuffleArray } from '../../utils/helpers';
 import { findConfusableMatch } from '../../experiment/textSimilarity';
 import { recordConfusionPair } from '../../experiment/experimentDB';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useKeyboardInset } from '../../hooks/useKeyboardInset';
 import './SpellingGame.css';
 
@@ -13,6 +14,7 @@ const CONFUSION_THRESHOLD = 0.6;
 
 export default function SpellingGame({ words, allWords, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US', isEnglishPack = false }) {
   const { user } = useAuth();
+  const { t } = useLanguage();
   const keyboardInset = useKeyboardInset();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
@@ -253,7 +255,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
         {!isEnglishPack && (
           <button className="btn-spell-speak" type="button" onClick={() => speakWord(currentWord.word, language)}>
             <Volume2 size={14} strokeWidth={2.3} />
-            Listen
+            {t('practice.listen')}
           </button>
         )}
       </div>
@@ -270,17 +272,17 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
         >
           {isEnglishPack ? (
             <>
-              <div className="spelling-card-label">Which word is being defined?</div>
+              <div className="spelling-card-label">{t('practice.whichWordDefined')}</div>
               <div className="spelling-definition">{currentWord.definition}</div>
             </>
           ) : (
             <>
-              <div className="spelling-card-label">Type the {getLangAdjective(language)} word</div>
+              <div className="spelling-card-label">{t('practice.typeWord', { lang: getLangAdjective(language) })}</div>
               <div className={`spelling-target ${targetSizeClass}`}>{currentWord.translation}</div>
             </>
           )}
           <div className="spelling-scramble-label">
-            Scrambled letters ({wordLength} letters):
+            {t('practice.scrambledLetters', { count: wordLength })}
           </div>
           <div className={`spelling-tiles-wrapper ${tileSizeClass}`}>
             {scrambledList.map((letter, idx) => {
@@ -323,7 +325,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               data-form-type="other"
               data-gramm="false"
               data-enable-grammarly="false"
-              placeholder="Type the word..."
+              placeholder={t('practice.typeWordPlaceholder')}
             />
           </form>
         </motion.div>
@@ -338,7 +340,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
           {!answered ? (
             <>
               <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                Don't know
+                {t('practice.dontKnow')}
               </button>
               <button
                 type="button"
@@ -346,7 +348,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
                 onClick={() => submitAnswer()}
                 disabled={!input.trim()}
               >
-                Check
+                {t('practice.check')}
               </button>
             </>
           ) : (
@@ -354,11 +356,11 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               <div className="spelling-bottom-feedback">
                 {isCorrect ? <Check size={18} strokeWidth={2.5} /> : <X size={18} strokeWidth={2.5} />}
                 <span>
-                  {isCorrect ? "Correct!" : <>Answer: <strong>{currentWord.word}</strong></>}
+                  {isCorrect ? t('practice.greatSentence').split('!')[0] + '!' : <> {t('practice.answerIs', { answer: '' })} <strong>{currentWord.word}</strong></>}
                 </span>
               </div>
               <button type="button" className="btn-spell-next" onClick={handleNext}>
-                {isLast ? 'Results →' : 'Next →'}
+                {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
               </button>
             </>
           )}

@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Mic, RotateCcw } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './PronounceGame.css';
 
 export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isListening, setIsListening] = useState(false);
   const [status, setStatus] = useState('playing'); // playing, correct, wrong, unsupported, skipped
@@ -183,10 +185,10 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             className="btn-pronounce-speak-target"
             type="button"
             onClick={() => speakWord(currentWord.word, language)}
-            title="Listen"
+            title={t('practice.listen')}
           >
             <Volume2 size={14} strokeWidth={2.3} />
-            Listen
+            {t('practice.listen')}
           </button>
         )}
       </div>
@@ -198,7 +200,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
           animate={status === 'wrong' ? { x: [-10, 10, -10, 10, 0] } : {}}
           transition={{ duration: 0.4 }}
         >
-          <div className="pronounce-card-label">Pronounce the word</div>
+          <div className="pronounce-card-label">{t('practice.pronounceWord')}</div>
           <div className="pronounce-target-word">
             {currentWord.word}
           </div>
@@ -228,12 +230,12 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
                 </button>
 
                 {isListening ? (
-                  <div className="listening-status text-pulse">Listening... Speak now</div>
+                  <div className="listening-status text-pulse">{t('practice.listening')}</div>
                 ) : (
                   <div className="listening-status instruction">
                     {status === 'wrong' 
-                      ? "Try speaking again or skip" 
-                      : "Tap the microphone and speak"
+                      ? t('practice.tryAgainOrSkip')
+                      : t('practice.tapMic')
                     }
                   </div>
                 )}
@@ -243,10 +245,10 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             {/* Banners inside the card for immediate clean feedback */}
             {answered && isCorrect && (
               <div className="pronounce-feedback-banner correct">
-                Great pronunciation!
+                {t('practice.greatPronunciation')}
                 {heardText && (
                   <div className="heard-text">
-                    We heard: <strong>"{heardText}"</strong>
+                    {t('practice.weHeard', { text: heardText })}
                   </div>
                 )}
               </div>
@@ -254,10 +256,10 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
 
             {answered && !isCorrect && (
               <div className="pronounce-feedback-banner wrong">
-                {status === 'skipped' ? "Skipped" : "Incorrect pronunciation"}
+                {status === 'skipped' ? t('practice.skipped') : t('practice.incorrectPronunciation')}
                 {heardText && (
                   <div className="heard-text">
-                    We heard: <strong>"{heardText}"</strong>
+                    {t('practice.weHeard', { text: heardText })}
                   </div>
                 )}
               </div>
@@ -265,7 +267,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
 
             {status === 'unsupported' && (
               <div className="pronounce-feedback-banner unsupported">
-                Speech recognition is not supported in this browser
+                {t('practice.notSupported')}
               </div>
             )}
           </div>
@@ -275,10 +277,10 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
             <div className="pronounce-action-buttons">
               <button type="button" className="btn btn-secondary" onClick={handleRetry}>
                 <RotateCcw size={14} strokeWidth={2.3} />
-                Try again
+                {t('practice.tryAgain')}
               </button>
               <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                Skip
+                {t('practice.skip')}
               </button>
             </div>
           )}
@@ -291,19 +293,19 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
           {!answered ? (
             status === 'playing' ? (
               <button type="button" className="btn btn-ghost" onClick={handleSkip} disabled={isListening}>
-                Skip
+                {t('practice.skip')}
               </button>
             ) : status === 'wrong' ? (
-              <div className="pronounce-bottom-hint">Try again or skip</div>
+              <div className="pronounce-bottom-hint">{t('practice.tryAgainOrSkip')}</div>
             ) : null
           ) : (
             <button type="button" className="btn-pronounce-next" onClick={handleNext}>
-              {isLast ? 'Results →' : 'Next →'}
+              {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
             </button>
           )}
           {status === 'unsupported' && (
             <button type="button" className="btn-pronounce-next" onClick={handleUnsupportedSkip}>
-              {isLast ? 'Results →' : 'Next →'}
+              {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
             </button>
           )}
         </div>

@@ -4,6 +4,7 @@ import { Volume2, Eye } from 'lucide-react';
 import { playSound } from '../../utils/feedback';
 import { weightedSelectWords, shuffleArray } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './IrregularVerbsTrainer.css';
 
 const escapeRegex = (str) => str.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -25,6 +26,7 @@ function highlightForms(text, forms) {
 }
 
 export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, onProgress, initialSubStep, onExit }) {
+  const { t } = useLanguage();
   const [sessionVerbs, setSessionVerbs] = useState([]);
   const [subStep, setSubStep] = useState(initialSubStep || 'study'); // 'study' | 'practice'
   const [studyIndex, setStudyIndex] = useState(0);
@@ -412,7 +414,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
       {subStep === 'study' && (
         <div className="study-flow">
           <div className="practice-card-header study-header">
-            <span className="practice-source-badge">Study Verbs</span>
+            <span className="practice-source-badge">{t('practice.studyVerbs')}</span>
             <span className="practice-source-badge">{studyIndex + 1} / {sessionVerbs.length}</span>
           </div>
 
@@ -435,29 +437,29 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   onClick={() => setStudyRevealed(true)}
                 >
                   <Eye size={16} strokeWidth={2.3} />
-                  Try to recall the forms, then tap
+                  {t('practice.tryToRecall')}
                 </button>
               ) : (
                 <>
                   {/* iOS-Style Grouped Rows */}
                   <div className="study-card-rows-list">
                     <div className="study-card-row-item">
-                      <span className="study-row-title">Infinitive</span>
+                      <span className="study-row-title">{t('practice.infinitive')}</span>
                       <span className="study-row-val">{sessionVerbs[studyIndex].v1}</span>
                     </div>
                     <div className="study-card-row-item">
-                      <span className="study-row-title">Past Simple</span>
+                      <span className="study-row-title">{t('practice.pastSimple')}</span>
                       <span className="study-row-val">{sessionVerbs[studyIndex].v2}</span>
                     </div>
                     <div className="study-card-row-item">
-                      <span className="study-row-title">Past Participle</span>
+                      <span className="study-row-title">{t('practice.pastParticiple')}</span>
                       <span className="study-row-val">{sessionVerbs[studyIndex].v3}</span>
                     </div>
                   </div>
 
                   {sessionVerbs[studyIndex].example && (
                     <div className="study-card-example-box">
-                      <div className="example-label">For example</div>
+                      <div className="example-label">{t('practice.forExample')}</div>
                       <div className="example-sentences">
                         {sessionVerbs[studyIndex].example.split('/').map((s, i) => {
                           const trimmed = s.trim();
@@ -482,7 +484,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                     onClick={() => speakVerbs(sessionVerbs[studyIndex].v1, sessionVerbs[studyIndex].v2, sessionVerbs[studyIndex].v3)}
                   >
                     <Volume2 size={18} strokeWidth={2.2} />
-                    Listen
+                    {t('practice.listen')}
                   </button>
                 </>
               )}
@@ -494,13 +496,13 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
               className="btn btn-secondary"
               onClick={studyIndex === 0 ? onExit : handlePrevStudyCard}
             >
-              {studyIndex === 0 ? "Exit" : "Back"}
+              {studyIndex === 0 ? t('profile.exit') || "Exit" : t('library.back') || "Back"}
             </button>
             <button
               className="btn btn-primary"
               onClick={handleNextStudyCard}
             >
-              {studyIndex + 1 === sessionVerbs.length ? "Start" : "Next"}
+              {studyIndex + 1 === sessionVerbs.length ? t('practice.start') || "Start" : t('practice.nextBtn') || "Next"}
             </button>
           </div>
         </div>
@@ -529,7 +531,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   <span>{currentVerb.translation}</span>
                 </div>
                 <div className="trainer-instruction">
-                  Fill in the remaining forms
+                  {t('practice.fillRemaining')}
                 </div>
 
                 <div className="trainer-grid">
@@ -617,7 +619,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   <span>{currentVerb.translation}</span>
                 </div>
                 <div className="trainer-instruction">
-                  Tap in order: V1 → V2 → V3
+                  {t('practice.tapInOrder')}
                 </div>
 
                 <div className="order-grid">
@@ -657,7 +659,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   {sentenceQuestion.before}<strong>_______</strong>{sentenceQuestion.after}
                 </div>
                 <div className="trainer-instruction">
-                  Choose the matching verb
+                  {t('practice.chooseMatchingVerb')}
                 </div>
 
                 <div className="choices-grid">
@@ -697,7 +699,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
-                  <div className="reveal-title">Correct Answer</div>
+                  <div className="reveal-title">{t('practice.correctAnswer')}</div>
                   <div className="reveal-forms">
                     <span className="reveal-form-item">{currentVerb.v1}</span>
                     <span className="reveal-divider">→</span>
@@ -719,16 +721,16 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
               {!checked ? (
                 qType === 0 ? (
                   <button className="btn btn-primary btn-submit-trainer" onClick={handleTableSubmit}>
-                    Check
+                    {t('practice.check')}
                   </button>
                 ) : qType === 1 ? (
                   <button className="btn btn-ghost btn-submit-trainer" onClick={handleOrderSkipReveal}>
-                    Show Answer
+                    {t('practice.showAnswer')}
                   </button>
                 ) : null
               ) : (
                 <button className="btn btn-success btn-submit-trainer" onClick={handleNextQuestion}>
-                  {currentIndex + 1 === sessionVerbs.length ? "Results" : "Continue"}
+                  {currentIndex + 1 === sessionVerbs.length ? t('practice.resultsBtn') : t('practice.continueBtn')}
                 </button>
               )}
             </div>

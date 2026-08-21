@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 import { shuffleArray, weightedSelectWords } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './IeltsTrainer.css';
 
 const FAMILY_FIELDS = [
@@ -48,32 +49,32 @@ function buildQuestion(word, pool) {
   if (type === 'definition') {
     const correct = word.word;
     const options = shuffleArray([correct, ...pickDistractors(others.map(w => w.word), correct, 3)]);
-    return { id: word.id, word, type, label: 'Which word matches this definition?', prompt: word.definition, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'whichWordDef', labelParams: {}, prompt: word.definition, options, correctAnswer: correct };
   }
   if (type === 'synonym') {
     const syns = parseList(word.synonyms);
     const correct = syns[Math.floor(Math.random() * syns.length)];
     const distractorPool = others.flatMap(w => parseList(w.synonyms).length ? parseList(w.synonyms) : [w.word]);
     const options = shuffleArray([correct, ...pickDistractors(distractorPool, correct, 3)]);
-    return { id: word.id, word, type, label: `Choose a synonym for "${word.word}"`, prompt: word.word, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'synonymFor', labelParams: { word: word.word }, prompt: word.word, options, correctAnswer: correct };
   }
   if (type === 'article') {
     const correct = word.article;
-    return { id: word.id, word, type, label: 'Which article fits this word?', prompt: word.word, options: shuffleArray(ARTICLE_CHOICES), correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'articleFits', labelParams: {}, prompt: word.word, options: shuffleArray(ARTICLE_CHOICES), correctAnswer: correct };
   }
   if (type === 'wordFamily') {
     const { field, label } = filledFamilyFields[Math.floor(Math.random() * filledFamilyFields.length)];
     const correct = word[field];
     const distractorPool = others.map(w => w[field]).filter(Boolean);
     const options = shuffleArray([correct, ...pickDistractors(distractorPool, correct, 3)]);
-    return { id: word.id, word, type, label: `Give the ${label} form of "${word.word}"`, prompt: word.word, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'formOf', labelParams: { label, word: word.word }, prompt: word.word, options, correctAnswer: correct };
   }
   if (type === 'collocation') {
     const cols = parseList(word.collocations);
     const correct = cols[Math.floor(Math.random() * cols.length)];
     const distractorPool = others.flatMap(w => parseList(w.collocations));
     const options = shuffleArray([correct, ...pickDistractors(distractorPool, correct, 3)]);
-    return { id: word.id, word, type, label: `Choose a natural collocation with "${word.word}"`, prompt: word.word, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'collocationWith', labelParams: { word: word.word }, prompt: word.word, options, correctAnswer: correct };
   }
   return null;
 }
@@ -85,6 +86,7 @@ function buildQuestion(word, pool) {
 // always picks it from PracticeHub's mode grid alongside the generic
 // modes, which stay available for IELTS packs too.
 export default function IeltsTrainer({ words, onComplete, onUpdateWord, onAnswer, onProgress, onExit }) {
+  const { t } = useLanguage();
   const [questions, setQuestions] = useState(null); // null = not built yet
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -114,8 +116,8 @@ export default function IeltsTrainer({ words, onComplete, onUpdateWord, onAnswer
   if (questions.length === 0) {
     return (
       <div className="empty-state">
-        <p>No IELTS drill questions yet - add a definition, synonyms, an article, a word family form, or collocations to some words first.</p>
-        {onExit && <button className="btn btn-secondary" onClick={onExit}>Back</button>}
+        <p>{t('practice.noIeltsQuestions')}</p>
+        {onExit && <button className="btn btn-secondary" onClick={onExit}>{t('practice.backToMenu')}</button>}
       </div>
     );
   }
@@ -168,7 +170,7 @@ export default function IeltsTrainer({ words, onComplete, onUpdateWord, onAnswer
           exit={{ opacity: 0, y: -20, scale: 0.96 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="ielts-trainer-question-label">{currentQuestion.label}</div>
+          <div className="ielts-trainer-question-label">{t(`practice.${currentQuestion.labelKey}`, currentQuestion.labelParams)}</div>
           <div className="ielts-trainer-question">{currentQuestion.prompt}</div>
         </motion.div>
       </AnimatePresence>
@@ -205,14 +207,14 @@ export default function IeltsTrainer({ words, onComplete, onUpdateWord, onAnswer
       <div className={`ielts-trainer-bottom-bar ${answered ? (isCorrectAnswer ? 'correct' : 'wrong') : ''}`}>
         <div className="ielts-trainer-bottom-bar-inner">
           {!answered ? (
-            <div className="ielts-trainer-feedback ielts-trainer-feedback-hint">Pick the best answer</div>
+            <div className="ielts-trainer-feedback ielts-trainer-feedback-hint">{t('practice.pickBestAnswer')}</div>
           ) : (
             <>
               <div className="ielts-trainer-feedback">
-                {isCorrectAnswer ? 'Correct!' : `Answer: ${currentQuestion.correctAnswer}`}
+                {isCorrectAnswer ? t('practice.greatSentence').split('!')[0] + '!' : t('practice.answerIs', { answer: currentQuestion.correctAnswer })}
               </div>
               <button type="button" className="ielts-trainer-next-btn" onClick={handleNext}>
-                {isLast ? 'Results →' : 'Next →'}
+                {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
               </button>
             </>
           )}

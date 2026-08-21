@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, TrendingUp, Sparkles } from 'lucide-react';
 import { shuffleArray } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './GridMatchGame.css';
 
 // Pairs per round, in increasing order. How well the player just did decides
@@ -21,6 +22,7 @@ function buildRound(words, pairCount) {
 }
 
 export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswer, onProgress }) {
+  const { t } = useLanguage();
   const [levelIdx, setLevelIdx] = useState(0);
   const [round, setRound] = useState(1);
   const [cards, setCards] = useState(() => buildRound(words, LEVELS[0]));
@@ -169,7 +171,7 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
     <div className="grid-match-container">
       <div className="grid-match-top-bar">
         <div className="grid-match-round">
-          Round {round} <span className="grid-match-round-size">· {totalPairsThisRound} pairs</span>
+          {t('practice.roundPairs', { round, pairs: totalPairsThisRound })}
         </div>
         <div className="grid-match-tally">
           <span className="grid-match-tally-correct"><Check size={13} strokeWidth={2.8} />{totalCorrect}</span>
@@ -186,7 +188,7 @@ export default function GridMatchGame({ words, onComplete, onUpdateWord, onAnswe
             exit={{ opacity: 0 }}
           >
             <TrendingUp size={14} strokeWidth={2.4} />
-            {roundBanner === 'grew' ? `Grid grew to ${totalPairsThisRound} pairs - keep it up!` : 'New round'}
+            {roundBanner === 'grew' ? t('practice.gridGrew', { pairs: totalPairsThisRound }) : t('practice.newRound')}
           </motion.div>
         )}
       </AnimatePresence>

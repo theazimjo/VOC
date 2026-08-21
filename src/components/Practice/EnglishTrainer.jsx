@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 import { shuffleArray, weightedSelectWords } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './EnglishTrainer.css';
 
 function parseList(str) {
@@ -42,26 +43,26 @@ function buildQuestion(word, pool) {
   if (type === 'defToWord') {
     const correct = word.word;
     const options = shuffleArray([correct, ...pickDistractors(others.map(w => w.word), correct, 3)]);
-    return { id: word.id, word, type, label: 'Which word matches this definition?', prompt: word.definition, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'whichWordDef', labelParams: {}, prompt: word.definition, options, correctAnswer: correct };
   }
   if (type === 'wordToDef') {
     const correct = word.definition;
     const distractorPool = others.map(w => w.definition).filter(Boolean);
     const options = shuffleArray([correct, ...pickDistractors(distractorPool, correct, 3)]);
-    return { id: word.id, word, type, label: `What does "${word.word}" mean?`, prompt: word.word, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'whatDoesMean', labelParams: { word: word.word }, prompt: word.word, options, correctAnswer: correct };
   }
   if (type === 'synonym') {
     const syns = parseList(word.synonyms);
     const correct = syns[Math.floor(Math.random() * syns.length)];
     const distractorPool = others.flatMap(w => parseList(w.synonyms).length ? parseList(w.synonyms) : [w.word]);
     const options = shuffleArray([correct, ...pickDistractors(distractorPool, correct, 3)]);
-    return { id: word.id, word, type, label: `Choose a synonym for "${word.word}"`, prompt: word.word, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'synonymFor', labelParams: { word: word.word }, prompt: word.word, options, correctAnswer: correct };
   }
   if (type === 'cloze') {
     const correct = word.word;
     const blanked = word.example.replace(wordRegex, '_____');
     const options = shuffleArray([correct, ...pickDistractors(others.map(w => w.word), correct, 3)]);
-    return { id: word.id, word, type, label: 'Which word completes the sentence?', prompt: blanked, options, correctAnswer: correct };
+    return { id: word.id, word, type, labelKey: 'completesSentence', labelParams: {}, prompt: blanked, options, correctAnswer: correct };
   }
   return null;
 }
@@ -72,6 +73,7 @@ function buildQuestion(word, pool) {
 // repetition engine. Never auto-selected - the user always picks it from
 // PracticeHub's mode grid.
 export default function EnglishTrainer({ words, onComplete, onUpdateWord, onAnswer, onProgress, onExit }) {
+  const { t } = useLanguage();
   const [questions, setQuestions] = useState(null); // null = not built yet
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -101,8 +103,8 @@ export default function EnglishTrainer({ words, onComplete, onUpdateWord, onAnsw
   if (questions.length === 0) {
     return (
       <div className="empty-state">
-        <p>No drill questions yet - add an English definition (and ideally an example sentence or synonyms) to some words first.</p>
-        {onExit && <button className="btn btn-secondary" onClick={onExit}>Back</button>}
+        <p>{t('practice.noEnglishQuestions')}</p>
+        {onExit && <button className="btn btn-secondary" onClick={onExit}>{t('practice.backToMenu')}</button>}
       </div>
     );
   }
@@ -155,7 +157,7 @@ export default function EnglishTrainer({ words, onComplete, onUpdateWord, onAnsw
           exit={{ opacity: 0, y: -20, scale: 0.96 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="english-trainer-question-label">{currentQuestion.label}</div>
+          <div className="english-trainer-question-label">{t(`practice.${currentQuestion.labelKey}`, currentQuestion.labelParams)}</div>
           <div className="english-trainer-question">{currentQuestion.prompt}</div>
         </motion.div>
       </AnimatePresence>
@@ -192,14 +194,14 @@ export default function EnglishTrainer({ words, onComplete, onUpdateWord, onAnsw
       <div className={`english-trainer-bottom-bar ${answered ? (isCorrectAnswer ? 'correct' : 'wrong') : ''}`}>
         <div className="english-trainer-bottom-bar-inner">
           {!answered ? (
-            <div className="english-trainer-feedback english-trainer-feedback-hint">Pick the best answer</div>
+            <div className="english-trainer-feedback english-trainer-feedback-hint">{t('practice.pickBestAnswer')}</div>
           ) : (
             <>
               <div className="english-trainer-feedback">
-                {isCorrectAnswer ? 'Correct!' : `Answer: ${currentQuestion.correctAnswer}`}
+                {isCorrectAnswer ? t('practice.greatSentence').split('!')[0] + '!' : t('practice.answerIs', { answer: currentQuestion.correctAnswer })}
               </div>
               <button type="button" className="english-trainer-next-btn" onClick={handleNext}>
-                {isLast ? 'Results →' : 'Next →'}
+                {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
               </button>
             </>
           )}

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, PenLine } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './Flashcard.css';
 
 // Short Uzbek labels for each part of speech
@@ -30,6 +31,7 @@ function PosBadge({ pos }) {
 }
 
 export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US', isEnglishPack = false }) {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -154,13 +156,13 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
               <button
                 className="btn-speak-card"
                 onClick={e => { e.stopPropagation(); speakWord(currentWord.word, language); }}
-                title="Listen"
+                title={t('practice.listen')}
               >
                 <Volume2 size={18} strokeWidth={2.2} />
               </button>
               <PosBadge pos={currentWord.partOfSpeech} />
               <div className="flashcard-word">{currentWord.word}</div>
-              <div className="flashcard-hint">Tap to flip card</div>
+              <div className="flashcard-hint">{t('practice.tapToFlip')}</div>
             </div>
 
             {/* Back */}
@@ -190,10 +192,10 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
           else in the app. */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
         <button className="flashcard-rating-btn again" onClick={() => handleJudge(false)} disabled={answered}>
-          <span className="rating-label">✗ Don't know</span>
+          <span className="rating-label">{t('practice.dontKnow')}</span>
         </button>
         <button className="flashcard-rating-btn easy" onClick={() => handleJudge(true)} disabled={answered}>
-          <span className="rating-label">✓ Know</span>
+          <span className="rating-label">{t('practice.know')}</span>
         </button>
       </div>
     </div>

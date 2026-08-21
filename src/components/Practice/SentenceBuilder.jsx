@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, Check, X } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
 import { speakWord } from '../../utils/helpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { useKeyboardInset } from '../../hooks/useKeyboardInset';
 import './SentenceBuilder.css';
 
@@ -64,6 +65,7 @@ function sentenceUsesWord(sentence, word) {
 }
 
 export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAnswer, onProgress, language = 'en-US' }) {
+  const { t } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
@@ -168,7 +170,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="sentence-card-label">Write a sentence using the word that matches this meaning</div>
+          <div className="sentence-card-label">{t('practice.sentenceInstruction')}</div>
           <div className="sentence-target">{currentWord.translation}</div>
           {currentWord.definition && (
             <div className="sentence-definition">{currentWord.definition}</div>
@@ -185,7 +187,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
               autoCorrect="off"
               spellCheck="false"
               rows={3}
-              placeholder="Write an English sentence..."
+              placeholder={t('practice.sentencePlaceholder')}
             />
           </form>
 
@@ -202,8 +204,8 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
                     : <X size={18} strokeWidth={2.5} />}
                   <span>
                     {isCorrect
-                      ? (isTooShort ? 'Word used correctly, but try a longer sentence' : 'Great! Word used correctly')
-                      : 'Word not used in the sentence'}
+                      ? (isTooShort ? t('practice.tooShort') : t('practice.greatSentence'))
+                      : t('practice.wordNotUsed')}
                   </span>
                 </div>
                 <div className="sentence-answer-word">
@@ -212,7 +214,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
                     type="button"
                     className="btn-sentence-speak"
                     onClick={() => speakWord(currentWord.word, language)}
-                    title="Listen"
+                    title={t('practice.listen')}
                   >
                     <Volume2 size={15} strokeWidth={2.3} />
                   </button>
@@ -237,7 +239,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
           {!answered ? (
             <>
               <button type="button" className="btn btn-ghost" onClick={handleSkip}>
-                Don't know
+                {t('practice.dontKnow')}
               </button>
               <button
                 type="button"
@@ -245,12 +247,12 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
                 onClick={submitAnswer}
                 disabled={!input.trim()}
               >
-                Check
+                {t('practice.check')}
               </button>
             </>
           ) : (
             <button type="button" className="btn-sentence-next" onClick={handleNext}>
-              {isLast ? 'Results →' : 'Next →'}
+              {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
             </button>
           )}
         </div>

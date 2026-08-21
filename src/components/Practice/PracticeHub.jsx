@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Zap, Brain, PenLine, Shuffle, ListChecks, Mic, NotebookPen, GraduationCap, BookOpenText, Timer, Grid3x3 } from 'lucide-react';
 import { recommendPracticeMode } from '../../utils/memoryEngine';
 import { PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './PracticeHub.css';
 
 const RECOMMENDATION_BADGES = {
@@ -11,6 +12,7 @@ const RECOMMENDATION_BADGES = {
 };
 
 export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularVerbsOnly, isIeltsPack, isEnglishPack, words = [] }) {
+  const { t } = useLanguage();
   const modes = [];
 
   // Which mode actually fits this word list's current memory state right
@@ -24,9 +26,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     modes.push({
       id: 'irregular-verbs',
       icon: Zap,
-      title: "Irregular Verbs",
-      desc: "Practice V1, V2, V3 verb forms",
-      badge: 'Recommended 🌟',
+      title: t('practice.irregularVerbsTitle'),
+      desc: t('practice.irregularVerbsDesc'),
+      badge: t('practice.recBadge'),
       glowColor: 'hsl(165, 85%, 50%)'
     });
   }
@@ -34,10 +36,12 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
   modes.push({
     id: 'flashcard',
     icon: Brain,
-    title: 'Smart Flashcards',
-    desc: "Review words with intelligent spaced repetition flashcards",
+    title: t('practice.flashcardsTitle'),
+    desc: t('practice.flashcardsDesc'),
     badge: recommendation?.modeId === 'flashcard'
-      ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
+      ? (recommendation.reason === 'new' ? t('practice.recBadge')
+        : recommendation.reason === 'confirm' ? t('practice.toConfirmBadge', { count: recommendation.count })
+        : t('practice.forgettingBadge', { count: recommendation.count }))
       : null,
     glowColor: 'hsl(200, 90%, 55%)'
   });
@@ -49,9 +53,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     modes.push({
       id: 'ielts-trainer',
       icon: GraduationCap,
-      title: 'IELTS Trainer',
-      desc: 'Definition recall, synonyms, articles, word family, and collocations',
-      badge: 'Min 3 words',
+      title: t('practice.ieltsTrainerTitle'),
+      desc: t('practice.ieltsTrainerDesc'),
+      badge: t('practice.minWordsBadge', { min: 3 }),
       glowColor: 'hsl(258, 85%, 62%)'
     });
   }
@@ -65,9 +69,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     modes.push({
       id: 'english-trainer',
       icon: BookOpenText,
-      title: 'English Trainer',
-      desc: 'Learn words through English definitions, synonyms, and context — no translation',
-      badge: 'Min 3 words',
+      title: t('practice.englishTrainerTitle'),
+      desc: t('practice.englishTrainerDesc'),
+      badge: t('practice.minWordsBadge', { min: 3 }),
       glowColor: 'hsl(210, 90%, 58%)'
     });
   }
@@ -83,13 +87,15 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     modes.push({
       id: 'spelling',
       icon: PenLine,
-      title: 'Spelling Practice',
+      title: t('practice.spellingTitle'),
       desc: isEnglishPack
-        ? "Read the English definition and type the word it describes"
-        : "Listen and type words correctly from memory",
+        ? t('practice.spellingDescEnglish')
+        : t('practice.spellingDescGeneric'),
       badge: recommendation?.modeId === 'spelling'
-        ? RECOMMENDATION_BADGES[recommendation.reason](recommendation.count)
-        : "Min 3 words",
+        ? (recommendation.reason === 'new' ? t('practice.recBadge')
+          : recommendation.reason === 'confirm' ? t('practice.toConfirmBadge', { count: recommendation.count })
+          : t('practice.forgettingBadge', { count: recommendation.count }))
+        : t('practice.minWordsBadge', { min: 3 }),
       glowColor: 'hsl(265, 90%, 65%)'
     });
   }
@@ -102,33 +108,33 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
       {
         id: 'match',
         icon: Shuffle,
-        title: 'Match Game',
-        desc: "Match English words with their correct translations",
-        badge: "Min 4 words",
+        title: t('practice.matchTitle'),
+        desc: t('practice.matchDesc'),
+        badge: t('practice.minWordsBadge', { min: 4 }),
         glowColor: 'hsl(150, 80%, 45%)'
       },
       {
         id: 'quiz',
         icon: ListChecks,
-        title: 'Multiple Choice Quiz',
-        desc: "Select the correct translation from four options",
-        badge: "Min 4 words",
+        title: t('practice.quizTitle'),
+        desc: t('practice.quizDesc'),
+        badge: t('practice.minWordsBadge', { min: 4 }),
         glowColor: 'hsl(38, 95%, 55%)'
       },
       {
         id: 'speed',
         icon: Timer,
-        title: 'Speed Round',
-        desc: "60 seconds, as many correct answers as you can - beats your own record",
-        badge: "Min 4 words",
+        title: t('practice.speedTitle'),
+        desc: t('practice.speedDesc'),
+        badge: t('practice.minWordsBadge', { min: 4 }),
         glowColor: 'hsl(0, 85%, 60%)'
       },
       {
         id: 'gridmatch',
         icon: Grid3x3,
-        title: 'Memory Grid',
-        desc: "Flip cards to pair each word with its translation - the grid grows the better you remember",
-        badge: "Min 6 words",
+        title: t('practice.gridmatchTitle'),
+        desc: t('practice.gridmatchDesc'),
+        badge: t('practice.minWordsBadge', { min: 6 }),
         glowColor: 'hsl(280, 80%, 62%)'
       }
     );
@@ -138,9 +144,9 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
     modes.push({
       id: 'pronounce',
       icon: Mic,
-      title: 'Pronunciation Practice',
-      desc: "Speak into the microphone to improve pronunciation",
-      badge: "Min 1 word",
+      title: t('practice.pronounceTitle'),
+      desc: t('practice.pronounceDesc'),
+      badge: t('practice.minWordsBadge', { min: 1 }),
       glowColor: 'hsl(340, 85%, 60%)'
     });
   }
@@ -174,7 +180,7 @@ export default function PracticeHub({ onSelectMode, isIrregularVerbs, irregularV
               <div className="practice-mode-footer">
                 {isDisabled ? (
                   <span className="practice-mode-badge practice-mode-badge-warning">
-                    Min {minWords} words needed
+                    {t('practice.minWordsNeeded', { min: minWords })}
                   </span>
                 ) : (
                   mode.badge && <span className="practice-mode-badge">{mode.badge}</span>
