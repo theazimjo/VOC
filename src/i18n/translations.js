@@ -63,6 +63,7 @@ export const translations = {
       months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     },
     profile: {
+      exit: 'Exit',
       editProfile: 'Edit Profile',
       editProfileAria: 'Edit profile',
       displayName: 'Display Name',
@@ -859,6 +860,7 @@ export const translations = {
       months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
     },
     profile: {
+      exit: 'Выход',
       editProfile: 'Редактировать профиль',
       editProfileAria: 'Редактировать профиль',
       displayName: 'Отображаемое имя',
@@ -1655,6 +1657,7 @@ export const translations = {
       months: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'],
     },
     profile: {
+      exit: 'Chiqish',
       editProfile: 'Profilni tahrirlash',
       editProfileAria: 'Profilni tahrirlash',
       displayName: "Ko'rsatiladigan ism",
