@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Package, ChevronRight } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import { ref, get } from 'firebase/database';
 import { db } from '../../firebase';
 import { setAppMode, switchActiveGroup } from '../../services/corpService';
@@ -18,6 +19,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const { allWords, packs } = usePacks();
 
   const [corpData, setCorpData] = useState({ words: [], packs: [] });
@@ -226,7 +228,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
                 ref={inputRef}
                 type="text"
                 className="global-search-input"
-                placeholder="Search words, translations, or topics..."
+                placeholder={t('search.placeholder')}
                 value={query}
                 onChange={e => setQuery(e.target.value)}
               />
@@ -237,16 +239,16 @@ export default function GlobalSearch({ isOpen, onClose }) {
 
             <div className="global-search-results">
               {!trimmedQuery && (
-                <div className="global-search-empty">Start typing to search</div>
+                <div className="global-search-empty">{t('search.startTyping')}</div>
               )}
 
               {trimmedQuery && !hasResults && (
-                <div className="global-search-empty">No results found</div>
+                <div className="global-search-empty">{t('search.noResults')}</div>
               )}
 
               {packResults.length > 0 && (
                 <div className="global-search-section">
-                  <div className="global-search-section-title">Topics</div>
+                  <div className="global-search-section-title">{t('search.sectionTopics')}</div>
                   <div className="global-search-card">
                     {packResults.map(pack => (
                       <button
@@ -261,10 +263,10 @@ export default function GlobalSearch({ isOpen, onClose }) {
                           <div className="global-search-pack-name">{pack.name}</div>
                           {pack.isCorp && (
                             <div style={{ fontSize: '0.62rem', background: '#22c55e', color: '#fff', padding: '1px 5px', borderRadius: '4px', width: 'fit-content', marginTop: '2px', fontWeight: 600 }}>
-                              Group
+                              {t('search.groupBadge')}
                             </div>
                           )}
-                          <div className="global-search-pack-count">{pack.wordCount || 0} words</div>
+                          <div className="global-search-pack-count">{t('search.wordsCount', { count: pack.wordCount || 0 })}</div>
                         </div>
                         <ChevronRight size={16} strokeWidth={2.3} className="global-search-chevron" />
                       </button>
@@ -275,7 +277,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
 
               {wordResults.length > 0 && (
                 <div className="global-search-section">
-                  <div className="global-search-section-title">Words</div>
+                  <div className="global-search-section-title">{t('search.sectionWords')}</div>
                   <div className="global-search-card">
                     {wordResults.map(word => {
                       const masteryInfo = getMasteryLevel(word.mastery || 0);
@@ -299,7 +301,7 @@ export default function GlobalSearch({ isOpen, onClose }) {
                             <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>{word.source}</span>
                             {word.sourceType === 'corp' && (
                               <span style={{ fontSize: '0.62rem', background: 'rgba(34, 197, 94, 0.15)', color: '#22c55e', padding: '1px 5px', borderRadius: '3px', fontWeight: 600 }}>
-                                Group
+                                {t('search.groupBadge')}
                               </span>
                             )}
                           </div>

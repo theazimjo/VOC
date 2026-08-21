@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { getQuestionsForExercise, getExerciseType } from '../../utils/grammarHelpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarTopic.css';
 
 // ─── AUDIO + HAPTIC HELPERS ─────────────────────────────────────────────────
@@ -78,20 +79,21 @@ function vibrate(pattern) {
 
 // ─── EXIT CONFIRM MODAL ──────────────────────────────────────────────────────
 function ExitModal({ onConfirm, onCancel }) {
+  const { t } = useLanguage();
   return (
     <div className="gt-exit-overlay" onClick={onCancel}>
       <div className="gt-exit-modal" onClick={e => e.stopPropagation()}>
         <div className="gt-exit-icon">🚪</div>
-        <h2 className="gt-exit-title">Exit the exercise?</h2>
+        <h2 className="gt-exit-title">{t('grammar.exitModalTitle')}</h2>
         <p className="gt-exit-desc">
-          The exercise isn't finished. Your results won't be saved.
+          {t('grammar.exitModalDesc')}
         </p>
         <div className="gt-exit-actions">
           <button className="gt-exit-btn confirm" onClick={onConfirm}>
-            Yes, exit
+            {t('grammar.yesExit')}
           </button>
           <button className="gt-exit-btn cancel" onClick={onCancel}>
-            Continue
+            {t('grammar.continueEx')}
           </button>
         </div>
       </div>
@@ -101,6 +103,7 @@ function ExitModal({ onConfirm, onCancel }) {
 
 // ─── SCRAMBLED SENTENCE EXERCISE ────────────────────────────────────────────
 function ScrambledExercise({ question, answered, onAnswer }) {
+  const { t } = useLanguage();
   const [selected, setSelected] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
 
@@ -148,12 +151,12 @@ function ScrambledExercise({ question, answered, onAnswer }) {
 
   return (
     <div className="scrambled-exercise">
-      <p className="scrambled-instruction">Select the words in the correct order:</p>
+      <p className="scrambled-instruction">{t('grammar.scrambledInstruction')}</p>
 
       {/* Built sentence area */}
       <div className="scrambled-built-area">
         {selected.length === 0 ? (
-          <span className="scrambled-placeholder">Select words here...</span>
+          <span className="scrambled-placeholder">{t('grammar.scrambledPlaceholder')}</span>
         ) : (
           selected.map((w, i) => (
             <button key={i} className="scrambled-word selected" onClick={() => toggleWord(w, true)}>
@@ -185,7 +188,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
       {/* Result feedback */}
       {isCorrect !== null && (
         <div className={`scrambled-result ${isCorrect ? 'correct' : 'wrong'}`}>
-          {isCorrect ? '✓ Correct!' : `✗ Incorrect. Correct answer: "${question.answer}"`}
+          {isCorrect ? t('grammar.correctBadge') : t('grammar.wrongBadge', { answer: question.answer })}
           {question.explanation && <p className="scrambled-explanation">{question.explanation}</p>}
         </div>
       )}
@@ -193,7 +196,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
       {/* Check button */}
       {isCorrect === null && selected.length > 0 && (
         <button className="clean-next-btn" onClick={checkAnswer}>
-          Check
+          {t('grammar.check')}
         </button>
       )}
     </div>
@@ -204,6 +207,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
 export default function GrammarTopic() {
   const { level = 'beginner', topicId, exerciseId = '1' } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const { saveGrammarResult } = useGrammarStats();
 
   const levelData = grammarData[level];
@@ -273,10 +277,10 @@ export default function GrammarTopic() {
     return (
       <div className="grammar-topic-error">
         <div className="error-icon">🔍</div>
-        <h2>Topic not found</h2>
-        <p>Sorry, this topic doesn't exist yet.</p>
+        <h2>{t('grammar.topicNotFound')}</h2>
+        <p>{t('grammar.topicNotFoundDesc')}</p>
         <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
-          ← Back to Grammar
+          {t('grammar.backToGrammar')}
         </button>
       </div>
     );
@@ -337,10 +341,10 @@ export default function GrammarTopic() {
 
   const getScoreGrade = () => {
     const pct = (score / totalQ) * 100;
-    if (pct >= 90) return { emoji: '🏆', label: 'Excellent!', color: 'var(--accent-2)' };
-    if (pct >= 70) return { emoji: '🌟', label: 'Good!', color: 'var(--accent-1)' };
-    if (pct >= 50) return { emoji: '📚', label: 'Satisfactory', color: 'var(--accent-3)' };
-    return { emoji: '💪', label: 'Practice more', color: 'var(--error)' };
+    if (pct >= 90) return { emoji: '🏆', label: t('grammar.gradeExcellent'), color: 'var(--accent-2)' };
+    if (pct >= 70) return { emoji: '🌟', label: t('grammar.gradeGood'), color: 'var(--accent-1)' };
+    if (pct >= 50) return { emoji: '📚', label: t('grammar.gradeSatisfactory'), color: 'var(--accent-3)' };
+    return { emoji: '💪', label: t('grammar.gradePracticeMore'), color: 'var(--error)' };
   };
 
   // ─── FINISHED SCREEN ───────────────────────────────────────────────────────
@@ -350,7 +354,7 @@ export default function GrammarTopic() {
       <div className="grammar-topic-page">
         <div className="grammar-topic-header">
           <button className="btn-back" onClick={() => navigate(`/grammar/${level}/${topicId}`)}>
-            ← Back
+            {t('grammar.back')}
           </button>
           <div className="topic-header-info">
             <span className="topic-header-icon">{topic.icon}</span>
@@ -366,15 +370,15 @@ export default function GrammarTopic() {
           <div className="results-stats-row">
             <div className="results-stat correct">
               <span className="stat-num">{score}</span>
-              <span className="stat-lbl">Correct</span>
+              <span className="stat-lbl">{t('grammar.correctLbl')}</span>
             </div>
             <div className="results-stat wrong">
               <span className="stat-num">{wrongCount}</span>
-              <span className="stat-lbl">Incorrect</span>
+              <span className="stat-lbl">{t('grammar.incorrectLbl')}</span>
             </div>
             <div className="results-stat total">
               <span className="stat-num">{totalQ}</span>
-              <span className="stat-lbl">Total</span>
+              <span className="stat-lbl">{t('grammar.totalLbl')}</span>
             </div>
           </div>
           <div className="results-progress-bar">
@@ -383,21 +387,21 @@ export default function GrammarTopic() {
               style={{ width: `${(score / totalQ) * 100}%` }}
             />
           </div>
-          <p className="results-pct">{Math.round((score / totalQ) * 100)}% correct</p>
+          <p className="results-pct">{t('grammar.pctCorrect', { pct: Math.round((score / totalQ) * 100) })}</p>
 
           <div className="results-actions">
             <button className="btn btn-primary" onClick={handleRestart}>
-              🔄 Try Again
+              {t('grammar.tryAgain')}
             </button>
             <button className="btn btn-ghost" onClick={() => navigate(`/grammar/${level}/${topicId}`)}>
-              ← Back
+              {t('grammar.back')}
             </button>
           </div>
 
           {/* Wrong answers review */}
           {wrongCount > 0 && (
             <div className="wrong-answers-review">
-              <h3 className="review-title">❌ Incorrect Answers</h3>
+              <h3 className="review-title">{t('grammar.incorrectAnswersTitle')}</h3>
               {answers.filter((a) => !a.isCorrect).map((a, i) => (
                 <div key={i} className="review-item">
                   <p className="review-question">{a.questionText}</p>
@@ -437,7 +441,7 @@ export default function GrammarTopic() {
         <button className="clean-back-arrow" onClick={handleExitRequest} title="Back">
           ←
         </button>
-        <h1 className="clean-quiz-title">{getExerciseType(exerciseId).icon} Exercise {exerciseId}</h1>
+        <h1 className="clean-quiz-title">{getExerciseType(exerciseId, t).icon} {t('grammar.exerciseHeader', { id: exerciseId })}</h1>
         <div className="clean-guide-icon" style={{ opacity: 0, pointerEvents: 'none' }} aria-hidden="true">📖</div>
       </div>
 
@@ -452,13 +456,13 @@ export default function GrammarTopic() {
       {/* Metadata Card */}
       <div className="clean-meta-card">
         <div className="meta-line question-progress">
-          Question: <span className="highlight-white">{currentQ + 1} of {totalQ}</span>
+          {t('grammar.questionProgress', { current: currentQ + 1, total: totalQ })}
         </div>
         <div className="meta-line topic-name">
           {topic.title}
         </div>
         <div className="meta-line exercise-type-line">
-          <span style={{ color: getExerciseType(exerciseId).color }}>{getExerciseType(exerciseId).icon} {getExerciseType(exerciseId).name}</span>
+          <span style={{ color: getExerciseType(exerciseId, t).color }}>{getExerciseType(exerciseId, t).icon} {getExerciseType(exerciseId, t).name}</span>
         </div>
       </div>
 
@@ -475,7 +479,7 @@ export default function GrammarTopic() {
       {!question.situation && (
         <p className="clean-question-text">
           {parseInt(exerciseId, 10) === 3
-            ? "Form the correct sentence from the given words:"
+            ? t('grammar.scrambledFormHint')
             : (question.text || question.answer)}
         </p>
       )}
@@ -540,7 +544,7 @@ export default function GrammarTopic() {
             className="clean-explanation-toggle"
             onClick={() => setShowExplanation((s) => !s)}
           >
-            💡 {showExplanation ? "Hide explanation" : "Show explanation"}
+            {showExplanation ? t('grammar.hideExplanation') : t('grammar.showExplanation')}
           </button>
           {showExplanation && (
             <p className="clean-explanation-text">{question.explanation}</p>
@@ -551,7 +555,7 @@ export default function GrammarTopic() {
       {/* Next/Finish button */}
       {answered && (
         <button className="clean-next-btn" onClick={handleNext}>
-          {currentQ + 1 >= totalQ ? '🏁 View Results' : 'Next question →'}
+          {currentQ + 1 >= totalQ ? t('grammar.viewResults') : t('grammar.nextQuestion')}
         </button>
       )}
     </div>

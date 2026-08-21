@@ -11,6 +11,7 @@ import { TrendingUp, TrendingDown, Clock, Brain, Lightbulb, AlertTriangle, Steth
 import { getForgettingCurvePoints, getMemoryHealth, computeRecallProbability, isDue, computeCategoryMastery, computeInitialStability, explainSchedulingDecision, simulateReviewDayOptions } from '../../utils/memoryEngine';
 import { diagnoseForgetting, getConfusionPairsForWord } from '../../utils/forgettingAutopsy';
 import { getWordCluster } from '../semanticClassifier';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const SIMULATOR_DAYS = [1, 3, 7, 14];
 
@@ -147,6 +148,7 @@ function ForgettingCurve({ stability, daysSince = 0, width = 280, height = 100 }
 // ─── Word Insight Card ────────────────────────────────────────────────────────
 
 function WordInsightCard({ memory, confusionPairs }) {
+  const { t } = useLanguage();
   const [expanded, setExpanded] = useState(false);
   const [simulatorDay, setSimulatorDay] = useState(null);
   const { wordData, lastReview, nextOptimalReview, recallHistory } = memory;
@@ -181,30 +183,52 @@ function WordInsightCard({ memory, confusionPairs }) {
     : 0;
 
   const health = getMemoryHealth(stability, nextOptimalReview);
+  const getHealthLabel = () => {
+    if (!nextOptimalReview) return t('memoryLab.healthNew');
+    if (stability >= 20) return t('memoryLab.healthStrong');
+    if (stability >= 10) return t('memoryLab.healthGood');
+    if (stability >= 5)  return t('memoryLab.healthMedium');
+    return t('memoryLab.healthWeak');
+  };
+
   const due = isDue(nextOptimalReview);
 
   // Build time-aware checkpoints only when expanded
   const checkpoints = useMemo(() => {
     if (!expanded) return [];
     const futureOffsets = [
-      { label: 'Now', addDays: 0 },
-      { label: '+1 day', addDays: 1 },
-      { label: '+3 days', addDays: 3 },
-      { label: '+7 days', addDays: 7 },
-      { label: '+14 days', addDays: 14 },
-      { label: '+30 days', addDays: 30 },
+      { label: t('memoryLab.cpNow'), addDays: 0 },
+      { label: `+1 ${t('memoryLab.day')}`, addDays: 1 },
+      { label: `+3 ${t('memoryLab.days')}`, addDays: 3 },
+      { label: `+7 ${t('memoryLab.days')}`, addDays: 7 },
+      { label: `+14 ${t('memoryLab.days')}`, addDays: 14 },
+      { label: `+30 ${t('memoryLab.days')}`, addDays: 30 },
     ];
     return futureOffsets.map(({ label, addDays }) => ({
       label,
       days: daysSinceLastReview + addDays,
       probability: computeRecallProbability(stability, daysSinceLastReview + addDays),
     }));
-  }, [expanded, daysSinceLastReview, stability]);
+  }, [expanded, daysSinceLastReview, stability, t]);
 
-  const explanation = useMemo(
-    () => (expanded ? explainSchedulingDecision(stability, lastReview, nextOptimalReview) : ''),
-    [expanded, stability, lastReview, nextOptimalReview]
-  );
+  const explanation = useMemo(() => {
+    if (!expanded) return '';
+    if (!lastReview) return t('memoryLab.explainNotSeen');
+    const daysSince = (Date.now() - new Date(lastReview).getTime()) / (86400 * 1000);
+    const p = computeRecallProbability(stability, daysSince);
+    const pct = Math.round(p * 100);
+    if (p <= 0.75) {
+      return t('memoryLab.explainDropped', { pct, targetPct: 75 });
+    }
+    const daysUntil = nextOptimalReview
+      ? Math.min(70, Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000))))
+      : null;
+    let text = t('memoryLab.explainStrong', { pct });
+    if (daysUntil !== null) {
+      text += ' ' + t('memoryLab.explainNextReviewIn', { days: daysUntil });
+    }
+    return text;
+  }, [expanded, stability, lastReview, nextOptimalReview, t]);
 
   const daysUntilNext = nextOptimalReview && !due
     ? Math.max(0, Math.round((new Date(nextOptimalReview) - Date.now()) / (86400 * 1000)))
@@ -223,9 +247,9 @@ function WordInsightCard({ memory, confusionPairs }) {
         </div>
         <div className="mem-insight-meta">
           <span className="mem-health-badge" style={{ color: health.color }}>
-            {health.icon} {health.label}
+            {health.icon} {getHealthLabel()}
           </span>
-          {due && <span className="mem-due-badge">Review today</span>}
+          {due && <span className="mem-due-badge">{t('memoryLab.reviewTodayBadge')}</span>}
           <span className="mem-expand-arrow" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
         </div>
       </div>
@@ -234,20 +258,20 @@ function WordInsightCard({ memory, confusionPairs }) {
       <div className="mem-insight-metrics">
         <div className="mem-metric">
           <Brain size={12} />
-          <span>S = {stability.toFixed(1)} days</span>
+          <span>S = {stability.toFixed(1)} {t('memoryLab.days')}</span>
         </div>
         <div className="mem-metric">
           <TrendingDown size={12} />
-          <span>Difficulty: {Math.round(difficulty * 100)}%</span>
+          <span>{t('memoryLab.difficulty')}: {Math.round(difficulty * 100)}%</span>
         </div>
         <div className="mem-metric">
           <Clock size={12} />
-          <span>Reviewed {totalReviews} times</span>
+          <span>{t('memoryLab.reviewedTimes', { count: totalReviews })}</span>
         </div>
         {daysUntilNext !== null && (
           <div className="mem-metric">
             <TrendingUp size={12} />
-            <span>in {daysUntilNext} days</span>
+            <span>{t('memoryLab.inDays', { count: daysUntilNext })}</span>
           </div>
         )}
       </div>
@@ -263,13 +287,13 @@ function WordInsightCard({ memory, confusionPairs }) {
             transition={{ duration: 0.25 }}
           >
             <div className="mem-curve-container">
-              <div className="mem-curve-label">Forgetting curve (P = e⁻ᵗ/ˢ)</div>
+              <div className="mem-curve-label">{t('memoryLab.curveFormula')}</div>
               <ForgettingCurve stability={stability} daysSince={daysSinceLastReview} />
               <div className="mem-curve-legend">
-                <span style={{ color: 'var(--success)' }}>— 75% target</span>
+                <span style={{ color: 'var(--success)' }}>{t('memoryLab.target75')}</span>
                 {daysSinceLastReview > 0.1 && (
                   <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>
-                    ● now ({Math.round(daysSinceLastReview)} days since last review)
+                    {t('memoryLab.daysSinceLastReview', { days: Math.round(daysSinceLastReview) })}
                   </span>
                 )}
               </div>
@@ -283,7 +307,7 @@ function WordInsightCard({ memory, confusionPairs }) {
             <div className="mem-checkpoint-table">
               {totalReviews === 0 ? (
                 <div className="mem-explain-box" style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-                  No review data yet — recall probabilities will appear after the first session.
+                  {t('memoryLab.noReviewDataYet')}
                 </div>
               ) : checkpoints.map(cp => (
                 <div key={cp.label} className="mem-checkpoint-row">
@@ -312,33 +336,51 @@ function WordInsightCard({ memory, confusionPairs }) {
             {autopsy.hasEnoughData && (
               <div className="mem-autopsy-box">
                 <div className="mem-curve-label mem-section-title">
-                  <Stethoscope size={13} /> Why do you forget? (likely reasons)
+                  <Stethoscope size={13} /> {t('memoryLab.whyForgetTitle')}
                 </div>
                 <div className="mem-checkpoint-table">
-                  {autopsy.factors.map((f) => (
-                    <div key={f.key} className="mem-checkpoint-row">
-                      <span className="mem-cp-label mem-autopsy-label">{f.label}</span>
-                      <div className="mem-cp-bar-wrap">
-                        <div
-                          className="mem-cp-bar"
-                          style={{
-                            width: `${Math.round(f.weight * 100)}%`,
-                            background: f.key === autopsy.primaryCause ? 'var(--accent-1)' : 'var(--border-light)',
-                          }}
-                        />
+                  {autopsy.factors.map((f) => {
+                    let factorName = f.label;
+                    if (f.key === 'confusion') factorName = t('memoryLab.factorConfusion');
+                    else if (f.key === 'interval') factorName = t('memoryLab.factorInterval');
+                    else if (f.key === 'confidence') factorName = t('memoryLab.factorConfidence');
+                    else if (f.key === 'exposure') factorName = t('memoryLab.factorExposure');
+
+                    return (
+                      <div key={f.key} className="mem-checkpoint-row">
+                        <span className="mem-cp-label mem-autopsy-label">{factorName}</span>
+                        <div className="mem-cp-bar-wrap">
+                          <div
+                            className="mem-cp-bar"
+                            style={{
+                              width: `${Math.round(f.weight * 100)}%`,
+                              background: f.key === autopsy.primaryCause ? 'var(--accent-1)' : 'var(--border-light)',
+                            }}
+                          />
+                        </div>
+                        <span className="mem-cp-pct">{Math.round(f.weight * 100)}%</span>
                       </div>
-                      <span className="mem-cp-pct">{Math.round(f.weight * 100)}%</span>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 {autopsy.recommendation && (
                   <div className="mem-explain-box" style={{ marginTop: '0.6rem' }}>
                     <Lightbulb size={14} />
-                    <span><strong>{autopsy.recommendation.label}.</strong> {autopsy.recommendation.description}</span>
+                    <span>
+                      {autopsy.primaryCause === 'confusion' ? (
+                        <><strong>{t('memoryLab.recConfusionTitle')}.</strong> {t('memoryLab.recConfusionDesc', { word: wordData.word, partnerWord: autopsy.factors.find(f => f.key === 'confusion')?.detail?.partnerWord || '' })}</>
+                      ) : autopsy.primaryCause === 'interval' ? (
+                        <><strong>{t('memoryLab.recIntervalTitle')}.</strong> {t('memoryLab.recIntervalDesc')}</>
+                      ) : autopsy.primaryCause === 'confidence' ? (
+                        <><strong>{t('memoryLab.recConfidenceTitle')}.</strong> {t('memoryLab.recConfidenceDesc')}</>
+                      ) : (
+                        <><strong>{t('memoryLab.recExposureTitle')}.</strong> {t('memoryLab.recExposureDesc')}</>
+                      )}
+                    </span>
                   </div>
                 )}
                 <div className="mem-autopsy-disclaimer">
-                  This is an estimate (a relative weighting computed from several signals), not a scientifically validated statistical conclusion.
+                  {t('memoryLab.autopsyDisclaimer')}
                 </div>
               </div>
             )}
@@ -346,7 +388,7 @@ function WordInsightCard({ memory, confusionPairs }) {
             {/* Future Memory Simulator — "what if I review on day X" comparison */}
             <div className="mem-simulator-box">
               <div className="mem-curve-label mem-section-title">
-                <Rocket size={13} /> Future memory: what if you review?
+                <Rocket size={13} /> {t('memoryLab.futureMemoryTitle')}
               </div>
               <div className="mem-simulator-days">
                 {simulatorOptions.map((opt) => (
@@ -359,20 +401,20 @@ function WordInsightCard({ memory, confusionPairs }) {
                       setSimulatorDay((prev) => (prev === opt.reviewDay ? null : opt.reviewDay));
                     }}
                   >
-                    Day {opt.reviewDay}
+                    {t('memoryLab.dayNum', { day: opt.reviewDay })}
                   </button>
                 ))}
               </div>
               <div className="mem-simulator-compare">
                 <div className="mem-simulator-stat">
-                  <span className="mem-simulator-stat-label">If you don't review (after 30 days)</span>
+                  <span className="mem-simulator-stat-label">{t('memoryLab.withoutReview30')}</span>
                   <span className="mem-simulator-stat-value bad">
                     {Math.round((activeSimulatorOption ?? simulatorOptions[0]).withoutReview * 100)}%
                   </span>
                 </div>
                 {activeSimulatorOption && (
                   <div className="mem-simulator-stat">
-                    <span className="mem-simulator-stat-label">If you review on day {activeSimulatorOption.reviewDay}</span>
+                    <span className="mem-simulator-stat-label">{t('memoryLab.withReviewDay', { day: activeSimulatorOption.reviewDay })}</span>
                     <span className="mem-simulator-stat-value good">
                       {Math.round(activeSimulatorOption.withReview * 100)}%
                     </span>
@@ -380,14 +422,14 @@ function WordInsightCard({ memory, confusionPairs }) {
                 )}
               </div>
               {!activeSimulatorOption && (
-                <div className="mem-simulator-note">Pick a day to see the 30-day forecast.</div>
+                <div className="mem-simulator-note">{t('memoryLab.pickDayForecast')}</div>
               )}
             </div>
 
             {/* Recent history */}
             {recallHistory && recallHistory.length > 0 && (
               <div className="mem-history-strip">
-                <div className="mem-history-label">Recent results</div>
+                <div className="mem-history-label">{t('memoryLab.recentResultsLabel')}</div>
                 <div className="mem-history-dots">
                   {recallHistory.slice(-12).map((h, i) => (
                     <div
@@ -409,6 +451,7 @@ function WordInsightCard({ memory, confusionPairs }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function MemoryInsights({ memoryMap, confusionPairs = [], loading = false }) {
+  const { t } = useLanguage();
   const [filter, setFilter] = useState('all'); // 'all' | 'due' | 'strong' | 'weak'
   const [search, setSearch] = useState('');
   const [visibleCount, setVisibleCount] = useState(25);
@@ -542,7 +585,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
       <div className="mem-loading" style={{ padding: '4rem 1rem' }}>
         <div className="mem-spinner" />
         <span style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>
-          Insights va xotira tahlili yuklanmoqda...
+          {t('memoryLab.insightsLoading')}
         </span>
       </div>
     );
@@ -552,8 +595,8 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
     return (
       <div className="mem-empty-state">
         <div className="mem-empty-icon">🧠</div>
-        <h3>No words reviewed yet</h3>
-        <p>Start your first session and your memory analysis will appear here.</p>
+        <h3>{t('memoryLab.noWordsReviewedYet')}</h3>
+        <p>{t('memoryLab.noWordsReviewedSub')}</p>
       </div>
     );
   }
@@ -566,12 +609,12 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
         <div className="mem-overall-card">
           <div className="mem-overall-header">
             <div>
-              <div className="mem-overall-title">🧠 Overall Memory Health</div>
-              <div className="mem-overall-sub">Recall dynamics across all {summary.total} words</div>
+              <div className="mem-overall-title">{t('memoryLab.overallHealthTitle')}</div>
+              <div className="mem-overall-sub">{t('memoryLab.overallHealthSub', { total: summary.total })}</div>
             </div>
             <div className="mem-retention-badge" title="Average recall strength">
               <span className="mem-retention-num">{summary.avgRetention}%</span>
-              <span className="mem-retention-lbl">Memory strength</span>
+              <span className="mem-retention-lbl">{t('memoryLab.memoryStrength')}</span>
             </div>
           </div>
 
@@ -611,31 +654,31 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
           <div className="mem-overall-legend">
             <div className="mem-legend-pill">
               <div className="mem-leg-dot strong" />
-              <span>💪 Strong: <strong>{summary.strong}</strong></span>
+              <span>{t('memoryLab.strongPill', { count: summary.strong })}</span>
             </div>
             <div className="mem-legend-pill">
               <div className="mem-leg-dot medium" />
-              <span>⭐ Medium: <strong>{summary.medium}</strong></span>
+              <span>{t('memoryLab.mediumPill', { count: summary.medium })}</span>
             </div>
             <div className="mem-legend-pill">
               <div className="mem-leg-dot weak" />
-              <span>🌱 Weak: <strong>{summary.weak}</strong></span>
+              <span>{t('memoryLab.weakPill', { count: summary.weak })}</span>
             </div>
             <div className="mem-legend-pill">
               <div className="mem-leg-dot new" />
-              <span>🆕 New: <strong>{summary.unreviewed}</strong></span>
+              <span>{t('memoryLab.newPill', { count: summary.unreviewed })}</span>
             </div>
           </div>
 
           {/* Overall Forgetting Curve Graph */}
           <div className="mem-curve-container" style={{ marginTop: '0.25rem' }}>
             <div className="mem-curve-label" style={{ fontWeight: 700, color: 'var(--text-secondary)', display: 'flex', justifyContent: 'space-between' }}>
-              <span>📉 Overall Forgetting Dynamics (P = e⁻ᵗ/ˢ)</span>
+              <span>{t('memoryLab.overallDynamics')}</span>
               <span>Avg S = {summary.avgStability.toFixed(1)}d</span>
             </div>
             <ForgettingCurve stability={summary.avgStability} />
             <div className="mem-curve-legend">
-              <span style={{ color: 'var(--success)' }}>— 75% optimal review threshold</span>
+              <span style={{ color: 'var(--success)' }}>{t('memoryLab.optimalThreshold')}</span>
             </div>
           </div>
         </div>
@@ -646,10 +689,10 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
         <div className="mem-semantic-card">
           <div className="mem-semantic-header">
             <div>
-              <div className="mem-semantic-title">🧬 Semantic Clusters & Context Transfer</div>
-              <div className="mem-semantic-sub">How the memory model adapts across topics and packs</div>
+              <div className="mem-semantic-title">{t('memoryLab.semanticClustersTitle')}</div>
+              <div className="mem-semantic-sub">{t('memoryLab.semanticClustersSub')}</div>
             </div>
-            <span className="mem-sem-badge">Context-Aware AI</span>
+            <span className="mem-sem-badge">{t('memoryLab.contextAwareAi')}</span>
           </div>
 
           <div className="mem-semantic-list">
@@ -659,13 +702,13 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
                   <span className="mem-sem-icon">{c.icon}</span>
                   <div className="mem-sem-text">
                     <div className="mem-sem-name">{c.name}</div>
-                    <div className="mem-sem-meta">{c.count} words · Avg S = {c.avgStability}d</div>
+                    <div className="mem-sem-meta">{t('memoryLab.clusterMeta', { count: c.count, avgS: c.avgStability })}</div>
                   </div>
                 </div>
                 <div className="mem-sem-badges">
-                  <span className="mem-sem-mastery">{(c.mastery * 100).toFixed(0)}% mastered</span>
-                  <span className="mem-sem-boost" title="Starting stability for new words">
-                    ⚡ New word S₀ = {c.initialStability}d
+                  <span className="mem-sem-mastery">{t('memoryLab.masteredPct', { pct: (c.mastery * 100).toFixed(0) })}</span>
+                  <span className="mem-sem-boost" title={t('memoryLab.startingStabilityTooltip')}>
+                    {t('memoryLab.initialS0', { s0: c.initialStability })}
                   </span>
                 </div>
               </div>
@@ -679,8 +722,8 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
         <div className="mem-semantic-card mem-confusion-card">
           <div className="mem-semantic-header">
             <div>
-              <div className="mem-semantic-title"><AlertTriangle size={16} style={{ verticalAlign: '-2px' }} /> Confused Words</div>
-              <div className="mem-semantic-sub">Word pairs you consistently mix up when typing answers</div>
+              <div className="mem-semantic-title"><AlertTriangle size={16} style={{ verticalAlign: '-2px' }} /> {t('memoryLab.confusedWordsTitle')}</div>
+              <div className="mem-semantic-sub">{t('memoryLab.confusedWordsSub')}</div>
             </div>
           </div>
           <div className="mem-semantic-list">
@@ -694,7 +737,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
                   </div>
                 </div>
                 <div className="mem-sem-right">
-                  <div className="mem-sem-mastery">{pair.count}x confused</div>
+                  <div className="mem-sem-mastery">{t('memoryLab.confusedCount', { count: pair.count })}</div>
                 </div>
               </div>
             ))}
@@ -707,16 +750,16 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
         <input
           className="mem-search-input"
           type="text"
-          placeholder="Search words..."
+          placeholder={t('memoryLab.searchPlaceholder')}
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
         <div className="mem-filter-tabs">
           {[
-            { key: 'all', label: 'All' },
-            { key: 'due', label: '⏰ Today' },
-            { key: 'weak', label: '🌱 Weak' },
-            { key: 'strong', label: '💪 Strong' },
+            { key: 'all', label: t('memoryLab.allFilter') },
+            { key: 'due', label: t('memoryLab.todayFilter') },
+            { key: 'weak', label: t('memoryLab.weakFilter') },
+            { key: 'strong', label: t('memoryLab.strongFilter') },
           ].map(f => (
             <button
               key={f.key}
@@ -729,7 +772,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
         </div>
       </div>
 
-      <div className="mem-count-label">{filtered.length} words</div>
+      <div className="mem-count-label">{t('memoryLab.wordsCount', { count: filtered.length })}</div>
 
       <div className="mem-insight-list">
         {visibleWords.map(memory => (
@@ -744,7 +787,7 @@ export default function MemoryInsights({ memoryMap, confusionPairs = [], loading
             style={{ padding: '0.66rem 1.5rem', fontSize: '0.85rem', cursor: 'pointer', borderRadius: '12px' }}
             onClick={() => setVisibleCount(prev => prev + 25)}
           >
-            Yana ko'proq yuklash (+{filtered.length - visibleCount})
+            {t('memoryLab.loadMore', { count: filtered.length - visibleCount })}
           </button>
         </div>
       )}

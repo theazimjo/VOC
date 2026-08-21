@@ -23,6 +23,7 @@ import {
 
 import { useMemoryExperiment } from '../useMemoryExperiment';
 import { simulateReviewScenarios } from '../../utils/memoryEngine';
+import { useLanguage } from '../../contexts/LanguageContext';
 import WordMemorySession from './WordMemorySession';
 import MemoryInsights from './MemoryInsights';
 import './MemoryLab.css';
@@ -30,6 +31,7 @@ import './MemoryLab.css';
 // ─── Stats Panel ─────────────────────────────────────────────────────────────
 
 function StatsPanel({ stats, memoryMap }) {
+  const { t } = useLanguage();
   const words = Object.values(memoryMap).filter(m => m.wordData && m.totalReviews > 0);
 
   // Stability distribution buckets
@@ -77,35 +79,35 @@ function StatsPanel({ stats, memoryMap }) {
             <BookOpen size={20} />
           </div>
           <div className="mem-stat-val">{stats?.totalWords ?? Object.keys(memoryMap).length}</div>
-          <div className="mem-stat-lbl">Words added</div>
+          <div className="mem-stat-lbl">{t('memoryLab.wordsAdded')}</div>
         </div>
         <div className="mem-stat-card">
           <div className="mem-stat-icon" style={{ background: 'var(--warning-dim)', color: 'var(--warning)' }}>
             <Clock size={20} />
           </div>
           <div className="mem-stat-val">{overallAccuracy !== null ? `${overallAccuracy}%` : '—'}</div>
-          <div className="mem-stat-lbl">Overall accuracy</div>
+          <div className="mem-stat-lbl">{t('memoryLab.overallAccuracy')}</div>
         </div>
         <div className="mem-stat-card">
           <div className="mem-stat-icon" style={{ background: 'var(--success-dim)', color: 'var(--success)' }}>
             <TrendingUp size={20} />
           </div>
           <div className="mem-stat-val">{stats?.avgStability ?? '—'}</div>
-          <div className="mem-stat-lbl">Average stability (days)</div>
+          <div className="mem-stat-lbl">{t('memoryLab.avgStability')}</div>
         </div>
         <div className="mem-stat-card">
           <div className="mem-stat-icon" style={{ background: 'var(--error-dim)', color: 'var(--error)' }}>
             <Zap size={20} />
           </div>
           <div className="mem-stat-val">{overallAvgSpeed ? `${overallAvgSpeed}s` : '—'}</div>
-          <div className="mem-stat-lbl">Average response speed</div>
+          <div className="mem-stat-lbl">{t('memoryLab.avgResponseSpeed')}</div>
         </div>
       </div>
 
       {/* Stability distribution */}
       {words.length > 0 && (
         <div className="mem-dist-section">
-          <div className="mem-section-title">📊 Stability distribution</div>
+          <div className="mem-section-title">{t('memoryLab.stabilityDistTitle')}</div>
           <div className="mem-dist-bars">
             {bucketCounts.map(b => (
               <div key={b.label} className="mem-dist-row">
@@ -129,7 +131,7 @@ function StatsPanel({ stats, memoryMap }) {
       {/* Recent accuracy */}
       {correctRate !== null && (
         <div className="mem-recent-section">
-          <div className="mem-section-title">⚡ Last 10 review results</div>
+          <div className="mem-section-title">{t('memoryLab.last10Title')}</div>
           <div className="mem-recent-dots">
             {last10.map((h, i) => (
               <div
@@ -140,7 +142,7 @@ function StatsPanel({ stats, memoryMap }) {
             ))}
           </div>
           <div className="mem-accuracy-label">
-            Last 10 review accuracy: <strong>{correctRate}%</strong>
+            {t('memoryLab.last10Accuracy', { rate: correctRate })}
           </div>
         </div>
       )}
@@ -148,7 +150,7 @@ function StatsPanel({ stats, memoryMap }) {
       {words.length === 0 && (
         <div className="mem-empty-state">
           <div className="mem-empty-icon">📈</div>
-          <p>Once you finish your first session, your stats will appear here.</p>
+          <p>{t('memoryLab.statsEmpty')}</p>
         </div>
       )}
     </div>
@@ -158,6 +160,7 @@ function StatsPanel({ stats, memoryMap }) {
 // ─── Session Results ──────────────────────────────────────────────────────────
 
 function SessionResults({ session, onRestart, onDone }) {
+  const { t } = useLanguage();
   const results = session?.results || [];
   const correct = results.filter(r => r.isCorrect).length;
   const total = results.length;
@@ -179,7 +182,7 @@ function SessionResults({ session, onRestart, onDone }) {
       <div className="mem-results-trophy">
         {pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪'}
       </div>
-      <h2 className="mem-results-title">Session complete!</h2>
+      <h2 className="mem-results-title">{t('memoryLab.sessionComplete')}</h2>
 
       <div className="mem-results-ring">
         <svg viewBox="0 0 80 80" width={120}>
@@ -201,19 +204,19 @@ function SessionResults({ session, onRestart, onDone }) {
       <div className="mem-results-stats">
         <div className="mem-result-pill">
           <CheckCircle size={14} color="#34d399" />
-          <span>{correct} correct</span>
+          <span>{t('memoryLab.correctPill', { correct })}</span>
         </div>
         <div className="mem-result-pill">
           <XCircle size={14} color="#f87171" />
-          <span>{total - correct} wrong</span>
+          <span>{t('memoryLab.wrongPill', { wrong: total - correct })}</span>
         </div>
         <div className="mem-result-pill">
           <Clock size={14} color="#818cf8" />
-          <span>Avg {avgTime}s</span>
+          <span>{t('memoryLab.avgTimePill', { time: avgTime })}</span>
         </div>
         <div className="mem-result-pill">
           <Brain size={14} color="#f59e0b" />
-          <span>Confidence {avgConf}/5</span>
+          <span>{t('memoryLab.confidencePill', { conf: avgConf })}</span>
         </div>
       </div>
 
@@ -231,11 +234,11 @@ function SessionResults({ session, onRestart, onDone }) {
 
       <div className="mem-results-actions">
         <button className="mem-btn-secondary" onClick={onDone}>
-          <ArrowLeft size={16} /> Back to Lab
+          <ArrowLeft size={16} /> {t('memoryLab.backToLabBtn')}
         </button>
         {session?.queue?.length > 0 && (
           <button className="mem-btn-primary" onClick={onRestart}>
-            <RefreshCw size={16} /> Restart
+            <RefreshCw size={16} /> {t('memoryLab.restartBtn')}
           </button>
         )}
       </div>
@@ -246,6 +249,7 @@ function SessionResults({ session, onRestart, onDone }) {
 // ─── Lab Tab ─────────────────────────────────────────────────────────────────
 
 function LabTab({ dueWords, allWords, onStart, loading }) {
+  const { t } = useLanguage();
   const SESSION_SIZE = 20;
   const queue = dueWords.filter(w => w.wordData);
   const batch = queue.slice(0, SESSION_SIZE);
@@ -269,9 +273,9 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       <div className="mem-lab-hero">
         <div className="mem-lab-hero-icon">🧬</div>
         <div>
-          <h2 className="mem-lab-hero-title">Memory Laboratory</h2>
+          <h2 className="mem-lab-hero-title">{t('memoryLab.heroTitle')}</h2>
           <p className="mem-lab-hero-sub">
-            Sequential learning and review, driven by your own forgetting curve
+            {t('memoryLab.heroSub')}
           </p>
         </div>
       </div>
@@ -280,14 +284,14 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       {loading ? (
         <div className="mem-loading">
           <div className="mem-spinner" />
-          <span>Loading every word in your vocabulary...</span>
+          <span>{t('memoryLab.loadingWords')}</span>
         </div>
       ) : queue.length > 0 ? (
         <div className="mem-due-section">
           <div className="mem-due-header">
-            <span className="mem-due-title">🧠 Smart Review Queue</span>
+            <span className="mem-due-title">{t('memoryLab.queueTitle')}</span>
             <span className="mem-due-badge-count">
-              {strictlyDueCount > 0 ? `⏰ ${strictlyDueCount} reviews ready` : `✨ Stable`}
+              {strictlyDueCount > 0 ? t('memoryLab.reviewsReady', { count: strictlyDueCount }) : t('memoryLab.stableBadge')}
             </span>
           </div>
 
@@ -313,20 +317,19 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
             onClick={() => onStart(batch)}
           >
             <Play size={18} />
-            Start learning · {batch.length}
+            {t('memoryLab.startLearning', { count: batch.length })}
           </button>
 
           <div className="mem-remaining-note">
-            ✦ <strong>{queue.length}</strong> words have been ranked by your individual forgetting probability.
-            {' '}The top <strong>{batch.length}</strong> were picked for today's session.
-            {remaining > 0 && ` ${remaining} more words are waiting for the next session.`}
+            {t('memoryLab.queueNote', { total: queue.length, batch: batch.length })}
+            {remaining > 0 && t('memoryLab.queueNoteRemaining', { count: remaining })}
           </div>
         </div>
       ) : (
         <div className="mem-no-due">
           <div className="mem-no-due-icon">📚</div>
-          <h3>Your vocabulary doesn't have any words yet</h3>
-          <p>Add new words and packs from the library!</p>
+          <h3>{t('memoryLab.noWordsTitle')}</h3>
+          <p>{t('memoryLab.noWordsSub')}</p>
         </div>
       )}
 
@@ -334,22 +337,22 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       {batch.length > 0 && (
         <div className="mem-lab-sim-card">
           <div className="mem-lab-sim-title">
-            <Sparkles size={15} strokeWidth={2.2} /> Why exactly now?
+            <Sparkles size={15} strokeWidth={2.2} /> {t('memoryLab.whyNowTitle')}
           </div>
           <p className="mem-lab-sim-text">
-            If you review these {batch.length} words today, your chance of still remembering them 30 days from now will be much higher:
+            {t('memoryLab.whyNowText', { count: batch.length })}
           </p>
           <div className="mem-lab-sim-compare">
             <div className="mem-lab-sim-stat">
-              <span className="mem-lab-sim-stat-label">If you review now</span>
+              <span className="mem-lab-sim-stat-label">{t('memoryLab.reviewNow')}</span>
               <span className="mem-lab-sim-stat-value good">{Math.round(simNow.withReview * 100)}%</span>
             </div>
             <div className="mem-lab-sim-stat">
-              <span className="mem-lab-sim-stat-label">If you review in 2 weeks</span>
+              <span className="mem-lab-sim-stat-label">{t('memoryLab.reviewLater')}</span>
               <span className="mem-lab-sim-stat-value bad">{Math.round(simLater.withReview * 100)}%</span>
             </div>
           </div>
-          <div className="mem-lab-sim-note">30-day recall probability (based on average stability)</div>
+          <div className="mem-lab-sim-note">{t('memoryLab.recallProbabilityNote')}</div>
         </div>
       )}
 
@@ -357,7 +360,7 @@ function LabTab({ dueWords, allWords, onStart, loading }) {
       {allWords.length > 0 && (
         <div className="mem-enrolled-info">
           <Award size={14} />
-          <strong>{allWords.length}</strong> words total in your vocabulary
+          {t('memoryLab.totalTrackedWords', { count: allWords.length })}
         </div>
       )}
     </div>
@@ -374,6 +377,7 @@ const TABS = [
 
 export default function MemoryLab() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('lab');
 
   const {
@@ -403,7 +407,11 @@ export default function MemoryLab() {
       {/* Tab bar (hidden during active session) */}
       {!inSession && !sessionDone && (
         <div className="mem-tab-bar">
-          {TABS.map(tab => (
+          {[
+            { key: 'lab', icon: <FlaskConical size={16} />, label: t('memoryLab.labTab') },
+            { key: 'insights', icon: <BarChart2 size={16} />, label: t('memoryLab.insightsTab') },
+            { key: 'stats', icon: <Brain size={16} />, label: t('memoryLab.statsTab') },
+          ].map(tab => (
             <button
               key={tab.key}
               className={`mem-tab ${activeTab === tab.key ? 'active' : ''}`}

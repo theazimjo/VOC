@@ -15,20 +15,21 @@ import {
 } from 'lucide-react';
 import { db, auth } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './AdminDashboard.css';
 
 const ADMIN_EMAILS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function timeAgo(isoString) {
+function timeAgo(isoString, t) {
   if (!isoString) return '—';
   const diff = (Date.now() - new Date(isoString).getTime()) / 1000;
-  if (diff < 60) return 'Hozirgina';
-  if (diff < 3600) return `${Math.floor(diff / 60)} daqiqa oldin`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} soat oldin`;
-  if (diff < 86400 * 7) return `${Math.floor(diff / 86400)} kun oldin`;
-  return new Date(isoString).toLocaleDateString('uz-UZ');
+  if (diff < 60) return t ? t('admin.justNow') : 'Hozirgina';
+  if (diff < 3600) return t ? t('admin.minsAgo', { count: Math.floor(diff / 60) }) : `${Math.floor(diff / 60)} daqiqa oldin`;
+  if (diff < 86400) return t ? t('admin.hoursAgo', { count: Math.floor(diff / 3600) }) : `${Math.floor(diff / 3600)} soat oldin`;
+  if (diff < 86400 * 7) return t ? t('admin.daysAgo', { count: Math.floor(diff / 86400) }) : `${Math.floor(diff / 86400)} kun oldin`;
+  return new Date(isoString).toLocaleDateString();
 }
 
 function formatDate(isoString) {
@@ -76,6 +77,7 @@ function StatCard({ icon, value, label, color, sub, trend }) {
 // ─── Activity Heatmap ─────────────────────────────────────────────────────────
 
 function ActivityHeatmap({ activityLog = {} }) {
+  const { t } = useLanguage();
   const DAYS = 70;
   const today = new Date();
   const cells = [];
@@ -101,20 +103,20 @@ function ActivityHeatmap({ activityLog = {} }) {
     return 'adm-heat-4';
   };
 
-  const DAY_LABELS = ['Ya','Du','Se','Ch','Pa','Ju','Sh'];
+  const DAY_LABELS = [t('admin.sun'), t('admin.mon'), t('admin.tue'), t('admin.wed'), t('admin.thu'), t('admin.fri'), t('admin.sat')];
   const firstDayOfWeek = cells[0]?.dayOfWeek ?? 0;
   const paddedCells = [...Array(firstDayOfWeek).fill(null), ...cells];
 
   return (
     <div className="adm-heatmap-section">
       <div className="adm-heatmap-header">
-        <span className="adm-heatmap-title">📅 Kunlik faollik (oxirgi 10 hafta)</span>
+        <span className="adm-heatmap-title">{t('admin.dailyActivity')}</span>
         <div className="adm-heatmap-summary">
-          <span>{totalActiveDays} faol kun</span>
+          <span>{t('admin.activeDays', { count: totalActiveDays })}</span>
           <span>·</span>
-          <span>{totalWords} so'z</span>
+          <span>{t('admin.totalWordsCount', { count: totalWords })}</span>
           <span>·</span>
-          <span>O'rtacha {avgPerActiveDay} ta/kun</span>
+          <span>{t('admin.avgPerDay', { avg: avgPerActiveDay })}</span>
         </div>
       </div>
       <div className="adm-heatmap-wrap">
@@ -126,17 +128,17 @@ function ActivityHeatmap({ activityLog = {} }) {
             <div
               key={i}
               className={`adm-heat-cell ${cell ? getHeat(cell.count) : 'adm-heat-pad'}`}
-              title={cell ? `${cell.date}: ${cell.count} so'z` : ''}
+              title={cell ? `${cell.date}: ${cell.count}` : ''}
             />
           ))}
         </div>
       </div>
       <div className="adm-heatmap-legend">
-        <span>Kam</span>
+        <span>{t('admin.heatLow')}</span>
         {['adm-heat-0','adm-heat-1','adm-heat-2','adm-heat-3','adm-heat-4'].map(cls => (
           <div key={cls} className={`adm-heat-cell-sm ${cls}`} />
         ))}
-        <span>Ko'p</span>
+        <span>{t('admin.heatHigh')}</span>
       </div>
     </div>
   );
@@ -145,6 +147,7 @@ function ActivityHeatmap({ activityLog = {} }) {
 // ─── User Row ─────────────────────────────────────────────────────────────────
 
 function UserRow({ userData, index, onResetPassword }) {
+  const { t } = useLanguage();
   const [expanded, setExpanded] = useState(false);
   const { profile, activity, packs = {}, words = {}, meta = {} } = userData;
 
@@ -186,9 +189,9 @@ function UserRow({ userData, index, onResetPassword }) {
         {/* Identity */}
         <div className="adm-user-identity">
           <div className="adm-user-name">
-            <span>{profile?.displayName || 'Nomsiz'}</span>
+            <span>{profile?.displayName || t('admin.unnamed')}</span>
             {looksSuspicious && (
-              <AlertTriangle size={14} className="adm-suspicious-flag" title="Ko'p create+delete tsikli — tekshirib ko'ring" />
+              <AlertTriangle size={14} className="adm-suspicious-flag" title="High churn rate" />
             )}
           </div>
           <div className="adm-user-email">{profile?.email || '—'}</div>
@@ -196,20 +199,20 @@ function UserRow({ userData, index, onResetPassword }) {
 
         {/* Quick stats pills */}
         <div className="adm-user-quick">
-          <div className="adm-quick-chip" title="So'zlar">
+          <div className="adm-quick-chip" title={t('admin.sortWords')}>
             <BookOpen size={13} />
             <span>{wordCount}</span>
           </div>
-          <div className="adm-quick-chip" title="To'plamlar">
+          <div className="adm-quick-chip" title={t('admin.packsCount')}>
             <Layers size={13} />
             <span>{packCount}</span>
           </div>
-          <div className="adm-quick-chip" title="Sessiyalar">
+          <div className="adm-quick-chip" title={t('admin.sortSessions')}>
             <Zap size={13} />
             <span>{sessionCount}</span>
           </div>
           {streak > 0 && (
-            <div className="adm-quick-chip streak" title="Streak">
+            <div className="adm-quick-chip streak" title={t('admin.streakCount')}>
               <Flame size={13} />
               <span>{streak}d</span>
             </div>
@@ -221,14 +224,14 @@ function UserRow({ userData, index, onResetPassword }) {
           <button
             type="button"
             className="adm-reset-pwd-btn"
-            title="Parolni tiklash / yangilash"
+            title={t('admin.resetPassword')}
             onClick={() => onResetPassword(userData)}
           >
             <KeyRound size={13} />
-            <span>Parolni tiklash</span>
+            <span>{t('admin.resetPassword')}</span>
           </button>
           <div className={`adm-last-seen-badge ${activityClass}`}>
-            {timeAgo(lastSeen)}
+            {timeAgo(lastSeen, t)}
           </div>
         </div>
 
@@ -250,36 +253,36 @@ function UserRow({ userData, index, onResetPassword }) {
           >
             <div className="adm-detail-grid">
               <div className="adm-detail-card">
-                <div className="adm-detail-label">Ro'yxatdan o'tgan</div>
+                <div className="adm-detail-label">{t('admin.registeredDate')}</div>
                 <div className="adm-detail-value">{formatDate(profile?.createdAt)}</div>
               </div>
               <div className="adm-detail-card">
-                <div className="adm-detail-label">Oxirgi ko'rilgan</div>
+                <div className="adm-detail-label">{t('admin.lastSeenDate')}</div>
                 <div className="adm-detail-value">{formatDate(lastSeen)}</div>
               </div>
               <div className="adm-detail-card">
-                <div className="adm-detail-label">Jami sessiyalar</div>
-                <div className="adm-detail-value">{sessionCount} marta</div>
+                <div className="adm-detail-label">{t('admin.totalSessionsCount')}</div>
+                <div className="adm-detail-value">{sessionCount}</div>
               </div>
               <div className="adm-detail-card">
-                <div className="adm-detail-label">To'plamlar</div>
-                <div className="adm-detail-value">{packCount} ta</div>
+                <div className="adm-detail-label">{t('admin.packsCount')}</div>
+                <div className="adm-detail-value">{packCount}</div>
               </div>
               <div className="adm-detail-card">
-                <div className="adm-detail-label">Jami so'zlar</div>
-                <div className="adm-detail-value">{wordCount} ta</div>
+                <div className="adm-detail-label">{t('admin.totalWordsCountDetail')}</div>
+                <div className="adm-detail-value">{wordCount}</div>
               </div>
               <div className="adm-detail-card">
-                <div className="adm-detail-label">Streak</div>
-                <div className="adm-detail-value">{streak} kun 🔥</div>
+                <div className="adm-detail-label">{t('admin.streakCount')}</div>
+                <div className="adm-detail-value">{streak} 🔥</div>
               </div>
               <div className={`adm-detail-card ${packChurn > 30 ? 'adm-detail-card--warn' : ''}`}>
-                <div className="adm-detail-label">Umrbod yaratilgan to'plamlar</div>
-                <div className="adm-detail-value">{packsCreatedTotal} ta (hozir {packCount} ta bor)</div>
+                <div className="adm-detail-label">{t('admin.packsCreatedTotal')}</div>
+                <div className="adm-detail-value">{packsCreatedTotal}</div>
               </div>
               <div className={`adm-detail-card ${folderChurn > 30 ? 'adm-detail-card--warn' : ''}`}>
-                <div className="adm-detail-label">Umrbod yaratilgan papkalar</div>
-                <div className="adm-detail-value">{foldersCreatedTotal} ta (hozir {folderCount} ta bor)</div>
+                <div className="adm-detail-label">{t('admin.foldersCreatedTotal')}</div>
+                <div className="adm-detail-value">{foldersCreatedTotal}</div>
               </div>
             </div>
 
@@ -323,6 +326,7 @@ function UserRow({ userData, index, onResetPassword }) {
 export default function AdminDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -523,32 +527,32 @@ export default function AdminDashboard() {
           <StatCard
             icon={<Users size={20} />}
             value={totalUsers}
-            label="Jami foydalanuvchilar"
+            label={t('admin.totalUsers')}
             color="blue"
-            trend={`${active7d} ta 7 kunda faol`}
-            sub="Umumiy ro'yxatdan o'tganlar"
+            trend={t('admin.active7dTrend', { active: active7d })}
+            sub={t('admin.totalRegistered')}
           />
           <StatCard
             icon={<Activity size={20} />}
             value={active7d}
-            label="Haftalik faollar"
+            label={t('admin.weeklyActive')}
             color="green"
-            trend={`${activeTodayCount} bugun`}
-            sub={`${active30d} ta oylik faol`}
+            trend={t('admin.activeTodayTrend', { today: activeTodayCount })}
+            sub={t('admin.monthlyActiveSub', { monthly: active30d })}
           />
           <StatCard
             icon={<Zap size={20} />}
             value={totalSessions}
-            label="Jami sessiyalar"
+            label={t('admin.totalSessions')}
             color="purple"
-            sub={`O'rtacha ${avgSessions} ta/foydalanuvchi`}
+            sub={t('admin.avgPerUser', { avg: avgSessions })}
           />
           <StatCard
             icon={<BookOpen size={20} />}
             value={totalWords}
-            label="Jami so'zlar"
+            label={t('admin.totalWords')}
             color="orange"
-            sub={`${totalPacks} ta to'plam`}
+            sub={t('admin.totalPacksSub', { count: totalPacks })}
           />
         </div>
 
@@ -557,24 +561,24 @@ export default function AdminDashboard() {
           <div className="adm-activity-top-row">
             <div className="adm-activity-title">
               <TrendingUp size={16} />
-              <span>Faollik holati bo'yicha taqsimot</span>
+              <span>{t('admin.activityDistribution')}</span>
             </div>
             <div className="adm-activity-items">
               <div className="adm-activity-item">
                 <div className="adm-dot active-today" />
-                <span>Bugun faol: <strong>{activeTodayCount}</strong></span>
+                <span>{t('admin.activeToday', { count: activeTodayCount })}</span>
               </div>
               <div className="adm-activity-item">
                 <div className="adm-dot active-week" />
-                <span>7 kun: <strong>{active7d}</strong></span>
+                <span>{t('admin.days7', { count: active7d })}</span>
               </div>
               <div className="adm-activity-item">
                 <div className="adm-dot active-month" />
-                <span>30 kun: <strong>{active30d}</strong></span>
+                <span>{t('admin.days30', { count: active30d })}</span>
               </div>
               <div className="adm-activity-item">
                 <div className="adm-dot inactive" />
-                <span>Faolsiz: <strong>{inactiveCount}</strong></span>
+                <span>{t('admin.inactive', { count: inactiveCount })}</span>
               </div>
             </div>
           </div>
@@ -614,7 +618,7 @@ export default function AdminDashboard() {
               <input
                 className="adm-search"
                 type="text"
-                placeholder="Ism yoki email bo'yicha qidirish..."
+                placeholder={t('admin.searchPlaceholder')}
                 value={search}
                 onChange={e => setSearch(e.target.value)}
               />
@@ -627,10 +631,10 @@ export default function AdminDashboard() {
 
             <div className="adm-sort-tabs">
               {[
-                { key: 'lastSeen', label: 'Faollik' },
-                { key: 'sessions', label: 'Sessiyalar' },
-                { key: 'words', label: "So'zlar" },
-                { key: 'created', label: "Ro'yxat" },
+                { key: 'lastSeen', label: t('admin.sortActivity') },
+                { key: 'sessions', label: t('admin.sortSessions') },
+                { key: 'words', label: t('admin.sortWords') },
+                { key: 'created', label: t('admin.sortRegistered') },
               ].map(s => (
                 <button
                   key={s.key}
@@ -644,16 +648,16 @@ export default function AdminDashboard() {
           </div>
 
           <div className="adm-users-header">
-            <span>Foydalanuvchi</span>
-            <span className="adm-col-stats">So'z / To'plam / Sessiya</span>
-            <span className="adm-col-seen">Oxirgi faollik</span>
+            <span>{t('admin.colUser')}</span>
+            <span className="adm-col-stats">{t('admin.colStats')}</span>
+            <span className="adm-col-seen">{t('admin.colLastSeen')}</span>
             <span />
           </div>
 
           {loading ? (
             <div className="adm-loading">
               <div className="adm-spinner" />
-              <span>Ma'lumotlar yuklanmoqda...</span>
+              <span>{t('admin.loadingData')}</span>
             </div>
           ) : error ? (
             <div className="adm-error">
@@ -663,7 +667,7 @@ export default function AdminDashboard() {
           ) : filtered.length === 0 ? (
             <div className="adm-empty">
               <Users size={36} />
-              <p>{search ? 'Hech narsa topilmadi' : 'Foydalanuvchilar yo\'q'}</p>
+              <p>{t('admin.noResults')}</p>
             </div>
           ) : (
             <div className="adm-users-list">
@@ -682,8 +686,8 @@ export default function AdminDashboard() {
           )}
 
           <div className="adm-users-footer">
-            <span>{filtered.length} ta natija ko'rsatilmoqda</span>
-            <span>Jami {totalUsers} foydalanuvchi</span>
+            <span>{t('admin.showingResults', { count: filtered.length })}</span>
+            <span>{t('admin.totalUsersFooter', { count: totalUsers })}</span>
           </div>
         </div>
       </main>
@@ -703,7 +707,7 @@ export default function AdminDashboard() {
               <div className="adm-modal-header">
                 <div className="adm-modal-title">
                   <KeyRound size={20} className="adm-icon-accent" />
-                  <span>Parolni Tiklash / Yangi Parol O'rnatish</span>
+                  <span>{t('admin.resetModalTitle')}</span>
                 </div>
                 <button
                   type="button"
@@ -721,7 +725,7 @@ export default function AdminDashboard() {
                   </div>
                   <div>
                     <div className="adm-user-info-name">
-                      {resetPasswordUser.profile?.displayName || 'Nomsiz foydalanuvchi'}
+                      {resetPasswordUser.profile?.displayName || t('admin.unnamed')}
                     </div>
                     <div className="adm-user-info-email">
                       {resetPasswordUser.profile?.email || 'Email kiritilmagan'}
@@ -733,15 +737,15 @@ export default function AdminDashboard() {
                 <form onSubmit={handleSetCustomPassword} className="adm-pwd-form">
                   <label className="adm-pwd-label">
                     <Lock size={15} />
-                    <span>Yangi Parol Belgilash (Email ochish shart emas):</span>
+                    <span>{t('admin.setNewPasswordLabel')}</span>
                   </label>
                   <div className="adm-pwd-hint">
-                    Admin sifatida kiritgan yangi parolingiz saqlanadi. Foydalanuvchi darhol ushbu parol bilan tizimga kirishi mumkin.
+                    {t('admin.setNewPasswordHint')}
                   </div>
                   <input
                     type="text"
                     className="adm-pwd-input"
-                    placeholder="Masalan: 123456 yoki yangi parol..."
+                    placeholder={t('admin.passwordPlaceholder')}
                     value={customPassword}
                     onChange={e => setCustomPassword(e.target.value)}
                     disabled={actionLoading}
@@ -751,12 +755,12 @@ export default function AdminDashboard() {
                     className="adm-pwd-submit-btn"
                     disabled={actionLoading || !customPassword.trim()}
                   >
-                    {actionLoading ? 'Saqlanmoqda...' : 'Yangi Parolni Saqlash va Foydalanuvchiga Berish'}
+                    {actionLoading ? t('admin.saving') : t('admin.savePasswordBtn')}
                   </button>
                 </form>
 
                 <div className="adm-modal-divider">
-                  <span>YOKI</span>
+                  <span>{t('admin.orDivider')}</span>
                 </div>
 
                 {/* Option 2: Send Reset Link via Email */}
@@ -767,7 +771,7 @@ export default function AdminDashboard() {
                   disabled={actionLoading || !resetPasswordUser.profile?.email}
                 >
                   <Mail size={16} />
-                  <span>Email ga parolni tiklash havolasini yuborish</span>
+                  <span>{t('admin.sendEmailBtn')}</span>
                 </button>
               </div>
 
@@ -777,7 +781,7 @@ export default function AdminDashboard() {
                   className="adm-modal-cancel-btn"
                   onClick={() => setResetPasswordUser(null)}
                 >
-                  Yopish
+                  {t('admin.closeBtn')}
                 </button>
               </div>
             </motion.div>

@@ -42,14 +42,14 @@ export function getQuestionsForExercise(topic, exerciseIdStr) {
   return shuffled.slice(0, Math.min(20, shuffled.length));
 }
 
-export function getExerciseType(exerciseId) {
+export function getExerciseType(exerciseId, t) {
   const types = {
-    1: { name: 'Multiple Choice', icon: '🎯', color: '#F59E0B' },
-    2: { name: 'Fill in the Blanks', icon: '✏️', color: '#10B981' },
-    3: { name: 'Sentence Building', icon: '🔀', color: '#6366F1' },
-    4: { name: 'Error Correction', icon: '🔍', color: '#EF4444' },
-    5: { name: 'Sentence Transformation', icon: '🔄', color: '#8B5CF6' },
-    6: { name: 'Situational Dialogues', icon: '💬', color: '#06B6D4' },
+    1: { name: t ? t('grammar.exType1') : 'Multiple Choice', icon: '🎯', color: '#F59E0B' },
+    2: { name: t ? t('grammar.exType2') : 'Fill in the Blanks', icon: '✏️', color: '#10B981' },
+    3: { name: t ? t('grammar.exType3') : 'Sentence Building', icon: '🔀', color: '#6366F1' },
+    4: { name: t ? t('grammar.exType4') : 'Error Correction', icon: '🔍', color: '#EF4444' },
+    5: { name: t ? t('grammar.exType5') : 'Sentence Transformation', icon: '🔄', color: '#8B5CF6' },
+    6: { name: t ? t('grammar.exType6') : 'Situational Dialogues', icon: '💬', color: '#06B6D4' },
   };
   return types[parseInt(exerciseId, 10)] || types[1];
 }

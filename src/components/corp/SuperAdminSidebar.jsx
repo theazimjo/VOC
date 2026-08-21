@@ -5,6 +5,7 @@ import {
   Megaphone, Settings, LogOut, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import VocLogo from '../common/VocLogo';
 import './CorpAdminSidebar.css';
 
@@ -12,6 +13,7 @@ export default function SuperAdminSidebar({ email }) {
   const [collapsed, setCollapsed] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleLogout = async () => {
     await logout();
@@ -19,11 +21,11 @@ export default function SuperAdminSidebar({ email }) {
   };
 
   const navItems = [
-    { to: '/corp/super-admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
-    { to: '/corp/super-admin/centers', label: 'Centers', icon: Building2 },
-    { to: '/corp/super-admin/users', label: 'Users', icon: Users },
-    { to: '/corp/super-admin/announcements', label: 'Announcements', icon: Megaphone },
-    { to: '/corp/super-admin/settings', label: 'Settings', icon: Settings },
+    { to: '/corp/super-admin', label: t('admin.navDashboard'), icon: LayoutDashboard, end: true },
+    { to: '/corp/super-admin/centers', label: t('admin.navCenters'), icon: Building2 },
+    { to: '/corp/super-admin/users', label: t('admin.navUsers'), icon: Users },
+    { to: '/corp/super-admin/announcements', label: t('admin.navAnnouncements'), icon: Megaphone },
+    { to: '/corp/super-admin/settings', label: t('admin.navSettings'), icon: Settings },
   ];
 
   return (
@@ -70,9 +72,9 @@ export default function SuperAdminSidebar({ email }) {
           </div>
         )}
 
-        <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
+        <button className="btn-corp-logout" onClick={handleLogout} title={t('admin.logoutBtn')}>
           <LogOut size={16} strokeWidth={2.2} />
-          {!collapsed && <span>Log out</span>}
+          {!collapsed && <span>{t('admin.logoutBtn')}</span>}
         </button>
       </div>
     </aside>

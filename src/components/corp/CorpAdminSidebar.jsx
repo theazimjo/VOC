@@ -5,6 +5,7 @@ import {
   BarChart3, Settings, LogOut, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguage } from '../../contexts/LanguageContext';
 import VocLogo from '../common/VocLogo';
 import './CorpAdminSidebar.css';
 
@@ -12,6 +13,7 @@ export default function CorpAdminSidebar({ centerName, email }) {
   const [collapsed, setCollapsed] = useState(false);
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const handleLogout = async () => {
     await logout();
@@ -19,12 +21,12 @@ export default function CorpAdminSidebar({ centerName, email }) {
   };
 
   const navItems = [
-    { to: '/corp/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
-    { to: '/corp/admin/teachers', label: 'Teachers', icon: Users },
-    { to: '/corp/admin/students', label: 'Students', icon: GraduationCap },
-    { to: '/corp/admin/courses', label: 'Courses', icon: BookOpen },
-    { to: '/corp/admin/statistics', label: 'Statistics', icon: BarChart3 },
-    { to: '/corp/admin/settings', label: 'Settings', icon: Settings },
+    { to: '/corp/admin', label: t('admin.navDashboard'), icon: LayoutDashboard, end: true },
+    { to: '/corp/admin/teachers', label: t('admin.navTeachers'), icon: Users },
+    { to: '/corp/admin/students', label: t('admin.navStudents'), icon: GraduationCap },
+    { to: '/corp/admin/courses', label: t('admin.navCourses'), icon: BookOpen },
+    { to: '/corp/admin/statistics', label: t('admin.navStatistics'), icon: BarChart3 },
+    { to: '/corp/admin/settings', label: t('admin.navSettings'), icon: Settings },
   ];
 
   return (
@@ -76,9 +78,9 @@ export default function CorpAdminSidebar({ centerName, email }) {
           </div>
         )}
 
-        <button className="btn-corp-logout" onClick={handleLogout} title="Log out">
+        <button className="btn-corp-logout" onClick={handleLogout} title={t('admin.logoutBtn')}>
           <LogOut size={16} strokeWidth={2.2} />
-          {!collapsed && <span>Log out</span>}
+          {!collapsed && <span>{t('admin.logoutBtn')}</span>}
         </button>
       </div>
     </aside>

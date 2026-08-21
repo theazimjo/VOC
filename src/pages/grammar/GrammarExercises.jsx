@@ -4,12 +4,14 @@ import { motion } from 'framer-motion';
 import { grammarData } from '../../data/grammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { getExerciseType } from '../../utils/grammarHelpers';
+import { useLanguage } from '../../contexts/LanguageContext';
 import IosSpinner from '../../components/common/IosSpinner';
 import './GrammarExercises.css';
 
 export default function GrammarExercises() {
   const { level = 'beginner', topicId } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const { stats: grammarStats, loading } = useGrammarStats();
 
   const levelData = grammarData[level];
@@ -31,9 +33,9 @@ export default function GrammarExercises() {
   if (!topic) {
     return (
       <div className="grammar-exercises-page error">
-        <h2>Topic not found</h2>
+        <h2>{t('grammar.topicNotFound')}</h2>
         <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
-          ← Back to Grammar
+          {t('grammar.backToGrammar')}
         </button>
       </div>
     );
@@ -49,9 +51,9 @@ export default function GrammarExercises() {
   };
 
   const getLevelLabel = () => {
-    if (level === 'beginner') return 'Beginner';
-    if (level === 'intermediate') return 'Elementary';
-    return 'Intermediate';
+    if (level === 'beginner') return t('grammar.beginner');
+    if (level === 'intermediate') return t('grammar.elementary');
+    return t('grammar.intermediate');
   };
 
   const completedCount = Object.keys(exercisesData).length;
@@ -65,7 +67,7 @@ export default function GrammarExercises() {
           ←
         </button>
         <div className="header-title-wrapper">
-          <span className="header-category">MIXED: {getLevelLabel()}</span>
+          <span className="header-category">{t('grammar.mixedCategory', { level: getLevelLabel() })}</span>
           <h1 className="header-topic-title">{topic.title}</h1>
         </div>
 
@@ -80,8 +82,8 @@ export default function GrammarExercises() {
         >
           <span className="guide-entry-icon">📖</span>
           <div className="guide-entry-text">
-            <span className="guide-entry-title">Study Guide</span>
-            <span className="guide-entry-desc">View rules, formulas, and examples</span>
+            <span className="guide-entry-title">{t('grammar.studyGuide')}</span>
+            <span className="guide-entry-desc">{t('grammar.studyGuideDesc')}</span>
           </div>
           <span className="guide-entry-chevron">→</span>
         </button>
@@ -89,9 +91,9 @@ export default function GrammarExercises() {
         {/* Progress summary card */}
         <div className="exercises-progress-card">
           <div className="progress-card-info">
-            <span className="progress-card-label">Topic mastery</span>
+            <span className="progress-card-label">{t('grammar.topicMastery')}</span>
             <span className="progress-card-value">
-              {completedCount} / {TOTAL_EXERCISES} completed ({progressPercent}%)
+              {t('grammar.masteryCompleted', { completed: completedCount, total: TOTAL_EXERCISES, percent: progressPercent })}
             </span>
           </div>
           <div className="progress-card-bar-bg">
@@ -108,7 +110,7 @@ export default function GrammarExercises() {
           <div className="exercises-list">
             {Array.from({ length: TOTAL_EXERCISES }, (_, i) => {
               const exId = i + 1;
-              const exType = getExerciseType(exId);
+              const exType = getExerciseType(exId, t);
               const exStats = exercisesData[exId];
               const isCompleted = !!exStats;
               
@@ -160,13 +162,13 @@ export default function GrammarExercises() {
                   {/* Card Content */}
                   <div className="exercise-card-details">
                     <div className="exercise-type-badge">
-                      EXERCISE {exId}
+                      {t('grammar.exerciseTitle', { id: exId })}
                     </div>
                     <h3 className="exercise-title">{exType.name}</h3>
 
                     <div className="exercise-meta-row">
                       <span className="meta-item questions-count">
-                        📄 20 questions
+                        {t('grammar.questions20')}
                       </span>
                       
                       {isCompleted && (

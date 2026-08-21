@@ -33,6 +33,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { SkipForward, PenLine, Eye } from 'lucide-react';
 import { inferConfidenceFromSpeed, getRecommendedRetrievalType } from '../../utils/memoryEngine';
 import { similarityRatio, findConfusableMatch } from '../textSimilarity';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const AUTO_CORRECT_THRESHOLD = 0.82;
 const CONFUSION_THRESHOLD = 0.6;
@@ -69,6 +70,7 @@ function Timer({ isRunning }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function WordMemorySession({ session, allWords, onSubmit, onSkip, onEnd, onConfusionDetected }) {
+  const { t } = useLanguage();
   const [phase, setPhase] = useState('show');   // 'show' | 'revealed'
   const [responseTime, setResponseTime] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -176,14 +178,14 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
           disabled={phase !== 'show' || isFirstExposure}
           title={
             isFirstExposure
-              ? "First time seeing this word — typing mode is not available yet"
-              : (typedMode ? "Switch to view mode" : "Switch to typing mode (for deeper memory recall)")
+              ? t('memoryLab.firstTimeTooltip')
+              : (typedMode ? t('memoryLab.switchViewTooltip') : t('memoryLab.switchTypeTooltip'))
           }
         >
           {typedMode ? <PenLine size={13} /> : <Eye size={13} />}
-          {typedMode ? 'Type' : "View"}
+          {typedMode ? t('memoryLab.typeLabel') : t('memoryLab.viewLabel')}
         </button>
-        <button className="mem-end-btn" onClick={onEnd} title="End session">
+        <button className="mem-end-btn" onClick={onEnd} title={t('memoryLab.endSessionTooltip')}>
           ✕
         </button>
       </div>
@@ -202,7 +204,7 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
           {phase === 'show' && (
             <div className="mem-card">
               <div className="mem-card-label">
-                {typedMode ? "Type the translation from memory" : "Look at the word and try to recall"}
+                {typedMode ? t('memoryLab.typeInstruction') : t('memoryLab.viewInstruction')}
               </div>
               <div className="mem-word-display">{word}</div>
               {!typedMode && <div className="mem-translation-hidden">?</div>}
@@ -220,26 +222,26 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
                     type="text"
                     autoFocus
                     value={typedValue}
-                    placeholder="Type translation here..."
+                    placeholder={t('memoryLab.typePlaceholder')}
                     onChange={e => setTypedValue(e.target.value)}
                     onKeyDown={e => { if (e.key === 'Enter') handleTypedSubmit(); }}
                   />
                   <button className="mem-reveal-btn" onClick={handleTypedSubmit} disabled={!typedValue.trim()}>
-                    Check
+                    {t('memoryLab.checkBtn')}
                   </button>
-                  <button className="mem-skip-btn" onClick={onSkip} title="Skip">
+                  <button className="mem-skip-btn" onClick={onSkip} title={t('memoryLab.skipBtn')}>
                     <SkipForward size={16} />
-                    Skip
+                    {t('memoryLab.skipBtn')}
                   </button>
                 </div>
               ) : (
                 <div className="mem-card-actions">
                   <button className="mem-reveal-btn" onClick={handleReveal}>
-                    Show translation
+                    {t('memoryLab.showTranslationBtn')}
                   </button>
-                  <button className="mem-skip-btn" onClick={onSkip} title="Skip">
+                  <button className="mem-skip-btn" onClick={onSkip} title={t('memoryLab.skipBtn')}>
                     <SkipForward size={16} />
-                    Skip
+                    {t('memoryLab.skipBtn')}
                   </button>
                 </div>
               )}
@@ -249,12 +251,12 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
           {/* PHASE: revealed — show translation + 1-Click judgement */}
           {phase === 'revealed' && (
             <div className="mem-card">
-              <div className="mem-card-label">Was your answer correct?</div>
+              <div className="mem-card-label">{t('memoryLab.judgementQuestion')}</div>
               <div className="mem-word-display">{word}</div>
 
               {typedResult && (
                 <div className={`mem-typed-answer ${typedResult.autoCorrect ? 'correct' : 'wrong'}`}>
-                  Your answer: <strong>{typedResult.answer}</strong>
+                  {t('memoryLab.yourAnswer', { answer: typedResult.answer })}
                 </div>
               )}
 
@@ -275,14 +277,14 @@ export default function WordMemorySession({ session, allWords, onSubmit, onSkip,
                   disabled={submitting}
                   onClick={() => handleJudgement(false)}
                 >
-                  ✗ Don't know
+                  {t('memoryLab.dontKnowBtn')}
                 </button>
                 <button
                   className="mem-btn-correct"
                   disabled={submitting}
                   onClick={() => handleJudgement(true)}
                 >
-                  ✓ Knew it
+                  {t('memoryLab.knewItBtn')}
                 </button>
               </div>
             </div>

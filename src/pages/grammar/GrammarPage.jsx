@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { grammarData } from '../../data/grammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
 
 const LEVELS = [
@@ -36,6 +37,7 @@ const headerVariants = {
 
 export default function GrammarPage() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [activeLevel, setActiveLevelState] = useState(() => {
     return localStorage.getItem('grammar_level') || 'beginner';
   });
@@ -96,7 +98,7 @@ export default function GrammarPage() {
         <div className="grammar-header-content">
           <div className="grammar-header-icon">📖</div>
           <div className="grammar-header-titles">
-            <h1 className="grammar-title">Grammar</h1>
+            <h1 className="grammar-title">{t('grammar.title')}</h1>
           </div>
         </div>
 
@@ -104,17 +106,17 @@ export default function GrammarPage() {
         <div className="grammar-header-stats">
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">{topics.length}</span>
-            <span className="grammar-stat-lbl">topics</span>
+            <span className="grammar-stat-lbl">{t('grammar.topicsCount')}</span>
           </div>
           <div className="grammar-stat-divider" />
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">{totalExercisesOfLevel}</span>
-            <span className="grammar-stat-lbl">exercises</span>
+            <span className="grammar-stat-lbl">{t('grammar.exercisesCount')}</span>
           </div>
           <div className="grammar-stat-divider" />
           <div className="grammar-stat-chip">
             <span className="grammar-stat-num">3</span>
-            <span className="grammar-stat-lbl">levels</span>
+            <span className="grammar-stat-lbl">{t('grammar.levelsCount')}</span>
           </div>
         </div>
 
@@ -122,11 +124,11 @@ export default function GrammarPage() {
         <div className="grammar-user-stats">
           <div className="user-stat-card">
             <span className="user-stat-value">{completedExercisesCount} / {totalExercisesOfLevel}</span>
-            <span className="user-stat-label">Exercises completed</span>
+            <span className="user-stat-label">{t('grammar.completedExercises')}</span>
           </div>
           <div className="user-stat-card">
             <span className="user-stat-value">{averageAccuracy}%</span>
-            <span className="user-stat-label">Average score</span>
+            <span className="user-stat-label">{t('grammar.averageScore')}</span>
           </div>
         </div>
       </motion.div>
@@ -138,7 +140,11 @@ export default function GrammarPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.15 }}
       >
-        {LEVELS.map((lvl) => (
+        {[
+          { id: 'beginner',     label: t('grammar.beginner'),     emoji: '🌱', locked: false },
+          { id: 'intermediate', label: t('grammar.elementary'),   emoji: '🔥', locked: false },
+          { id: 'advanced',     label: t('grammar.intermediate'), emoji: '⚡', locked: true  },
+        ].map((lvl) => (
           <button
             key={lvl.id}
             className={[
@@ -148,7 +154,7 @@ export default function GrammarPage() {
             ].filter(Boolean).join(' ')}
             onClick={() => !lvl.locked && setActiveLevel(lvl.id)}
             disabled={lvl.locked}
-            title={lvl.locked ? 'Coming soon...' : lvl.label}
+            title={lvl.locked ? t('grammar.comingSoonDots') : lvl.label}
           >
             {activeLevel === lvl.id && !lvl.locked && (
               <motion.div
@@ -160,7 +166,7 @@ export default function GrammarPage() {
             <span className="tab-emoji">{lvl.locked ? '🔒' : lvl.emoji}</span>
             <span className="tab-label-text">{lvl.label}</span>
             {lvl.locked && (
-              <span className="tab-soon-badge">Coming soon</span>
+              <span className="tab-soon-badge">{t('grammar.comingSoon')}</span>
             )}
           </button>
         ))}
@@ -208,15 +214,15 @@ export default function GrammarPage() {
                   </div>
                   <div className="topic-card-meta">
                     <span className="topic-badge topic-badge-questions">
-                      📚 6 exercises
+                      {t('grammar.exercisesBadge', { count: 6 })}
                     </span>
                     {completedExCount > 0 ? (
                       <span className="topic-badge topic-badge-completed">
-                        ✅ {completedExCount} / 6 completed
+                        {t('grammar.exCompletedBadge', { completed: completedExCount, total: 6 })}
                       </span>
                     ) : (
                       <span className="topic-badge topic-badge-todo">
-                        ⏳ Not started
+                        {t('grammar.notStartedBadge')}
                       </span>
                     )}
                     {topic.tag && (
@@ -234,8 +240,8 @@ export default function GrammarPage() {
               transition={{ duration: 0.3 }}
             >
               <div className="empty-icon">🚧</div>
-              <h3>Coming soon...</h3>
-              <p>Topics for this level are being prepared</p>
+              <h3>{t('grammar.comingSoonDots')}</h3>
+              <p>{t('grammar.comingSoonDesc')}</p>
             </motion.div>
           )}
         </motion.div>

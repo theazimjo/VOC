@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
 import { parseGuide } from '../../utils/grammarGuideParser';
+import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarGuide.css';
 
 function Segments({ segments }) {
@@ -17,6 +18,7 @@ function Segments({ segments }) {
 export default function GrammarGuide() {
   const { level = 'beginner', topicId } = useParams();
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const levelData = grammarData[level];
   const topic = levelData?.topics?.find((t) => t.id === topicId);
@@ -29,9 +31,9 @@ export default function GrammarGuide() {
     return (
       <div className="grammar-guide-page gg-error-state">
         <div className="gg-error-icon">🔍</div>
-        <h2>Topic not found</h2>
+        <h2>{t('grammar.topicNotFound')}</h2>
         <button className="btn btn-primary" onClick={() => navigate('/grammar')}>
-          ← Back to Grammar
+          {t('grammar.backToGrammar')}
         </button>
       </div>
     );
@@ -50,7 +52,7 @@ export default function GrammarGuide() {
           ←
         </button>
         <div className="gg-header-title-wrap">
-          <span className="gg-header-eyebrow">Study Guide</span>
+          <span className="gg-header-eyebrow">{t('grammar.studyGuide')}</span>
           <h1 className="gg-header-title">
             <span className="gg-header-icon">{topic.icon}</span> {topic.title}
           </h1>
@@ -208,7 +210,7 @@ export default function GrammarGuide() {
           className="gg-cta-btn"
           onClick={() => navigate(`/grammar/${level}/${topicId}`)}
         >
-          ✅ Start Exercises
+          {t('grammar.startExercises')}
         </button>
       </div>
     </div>
