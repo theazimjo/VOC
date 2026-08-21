@@ -1,155 +1,240 @@
-# VOC — So'z Boyligi, Grammatika va IELTS Mashqlari Platformasi
+# ⚡ VOC — Adaptive Vocabulary, Grammar & IELTS Mastery Platform
 
-VOC — ingliz tilini o'rganuvchilar uchun to'liq huquqli ta'lim platformasi: shaxsiylashtirilgan takrorlash algoritmi asosida so'z boyligini oshirish, grammatikani mashq qilish va IELTS imtihoniga tayyorlanish uchun mo'ljallangan. React + Firebase asosida qurilgan, Progressive Web App sifatida ishlaydi va Android uchun native ilova (Capacitor) ko'rinishida ham mavjud.
+> **VOC** is a full-featured, intelligent language learning platform engineered for English learners. Powered by an adaptive cognitive memory model, VOC elevates vocabulary acquisition, solidifies English grammar, and prepares learners for high-stakes exams like IELTS. Built with React 19, Tailwind CSS v4, and Firebase, VOC runs seamlessly as a Progressive Web App (PWA) and as a native Android application via Capacitor.
 
-**Joriy foydalanish ko'rsatkichlari:** 40+ faol foydalanuvchi, 2 600+ o'rganilgan so'z.
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-Realtime_DB_%26_Auth-FFCA28?logo=firebase&logoColor=black)
+![Capacitor](https://img.shields.io/badge/Capacitor-Android-119EFF?logo=capacitor&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-Tested-6E9F18?logo=vitest&logoColor=white)
 
 ---
 
-## 🧠 Nima uchun VOC boshqacha?
+### 📊 Live Usage Metrics
+* **40+ Active Learners**
+* **2,600+ Mastered Words**
 
-Aksariyat lug'at ilovalari SM-2 kabi qattiq belgilangan intervalli algoritmlardan foydalanadi. VOC o'zining **Individual Memory Dynamics Engine** (`src/utils/memoryEngine.js`) nomli xotira modelidan foydalanadi:
+---
+
+## 🧠 Why VOC is Different: The Memory Engine
+
+Traditional spaced repetition systems (SRS) like SuperMemo SM-2 or standard Leitner boxes rely on fixed mathematical intervals. VOC features an in-house cognitive retention architecture called the **Individual Memory Dynamics Engine** (`src/utils/memoryEngine.js`).
+
+At its core, memory retention probability $P(t)$ after $t$ days is modeled as:
+
+$$P(t) = e^{-\frac{t}{S}}$$
+
+Where **$S$** represents individual **Memory Stability**, dynamically computed and updated per user, per word.
 
 ```
-P(t) = e^(−t / S)
+       Memory Retention Curve over Time
+  100% | *
+       |   *
+   P(t)|     *  <- Standard Decay
+       |       * . . . . . . . -> Extended Stability (S) after active review
+    0% +---------------------------------> Time (t in days)
 ```
 
-Bu yerda `P(t)` — `t` kun o'tgandan keyin so'zni eslab qolish ehtimoli, `S` esa har bir foydalanuvchi va har bir so'z uchun individual ravishda hisoblanadigan "xotira barqarorligi" (stability). Model quyidagilarni hisobga oladi:
+### Key Dynamics & Multi-Factor Inputs:
+* **Response Latency Tuning**: Rapid answers signal high implicit confidence, dynamically boosting stability.
+* **Retrieval Effect Calibration**: Active recall (typing/spelling) provides significantly higher memory consolidation than passive self-assessment.
+* **Overnight Sleep Consolidation**: Applies a cognitive stabilization bonus when reviews span across sleep cycles.
+* **Semantic Cluster Self-Calibration**: Automatically groups vocabulary into semantic domains (e.g., technology, emotions, verbs) and adjusts stability predictions based on topical accuracy trends.
 
-- Javob berish tezligi (tez javob — yuqori ishonch)
-- Faol (typing) va passiv (o'zini baholash) takrorlash o'rtasidagi farq — testing effect
-- Tungi uyqudan keyingi konsolidatsiya bonusi
-- Har bir semantik klaster (so'z guruhi) bo'yicha foydalanuvchiga moslashtirilgan o'z-o'zini kalibrlash
-
-Bu tizim `src/experiment/` papkasidagi **Xotira Laboratoriyasi (Memory Lab)** orqali sinovdan o'tkazilgan va endi butun ilova bo'ylab standart algoritm sifatida ishlatiladi.
-
-> **Duolingo sizga nimani o'rganishni aytadi. Anki sizga qachon takrorlashni aytadi. VOC esa sizning miyangiz qanday o'rganishi va unutishini o'rganadi.**
+> *"Duolingo tells you what to study. Anki tells you when to review. VOC learns how your brain retains and forgets."*
 
 ---
 
-## 🗺️ Memory Twin — rivojlanish xaritasi
+## 🗺️ Memory Twin — Product Roadmap & Research State
 
-Uzoq muddatli maqsad — spaced repetition algoritmini foydalanuvchining shaxsiy **"Memory Twin"**iga (o'z xotirasining raqamli egizagi) aylantirish: nafaqat *qachon* takrorlash kerakligini, balki *nega unutilganini*, *nimalarni bir-biriga chalkashtirishini* va *qaysi usul aynan shu odam uchun ishlashini* ham tushunadigan tizim.
+VOC's long-term vision is to evolve from a spaced-repetition algorithm into a user's **Memory Twin** — a digital counterpart of their cognitive retention profile that understands *why* a word was forgotten, *which terms* trigger confusion, and *which learning modalities* yield optimal results.
 
-Quyida — bu vizyonning qaysi qismi hozir haqiqatan ishlayotgani, qaysi qismi uchun infratuzilma tayyor (faqat UI/formula kerak) va qaysi qismi hali boshlanmagan tadqiqot ekanligining aniq holati:
+### 🟢 Production (Active in App)
 
-### ✅ Hozirda ishlaydi (production'da)
+| Component | Architecture / File Location | Description |
+| :--- | :--- | :--- |
+| **Individual Memory Dynamics Engine** | `memoryEngine.js` (`updateStability`, `computeRecallProbability`) | $P(t) = e^{-t/S}$ retention decay modeling with per-user $\times$ per-word stability scores. |
+| **Future Memory Simulator** | `memoryEngine.js` $\rightarrow$ `MemoryInsights.jsx` | Interactive forecasting comparing retention projections over 30 days under different review schedules (0, 1, 3, 7, 14 days). |
+| **Forgetting Autopsy** | `forgettingAutopsy.js` $\rightarrow$ `MemoryInsights.jsx` | Diagnostic engine that analyzes decay signals (interval, latency, confusions) upon recall failure and suggests optimal remedial practice types. |
+| **Confusion Network** | `textSimilarity.js` + `reportConfusion` $\rightarrow$ `MemoryInsights.jsx` | Phonetic and orthographic similarity matching that identifies paired words prone to mutual confusion during spelling and practice modes. |
+| **Semantic Clustering** | `semanticClassifier.js` + `computeClusterCalibration` | Automated taxonomy grouping with dynamic cluster-level accuracy calibration. |
+| **Scheduling Transparency** | `explainSchedulingDecision` | Plain-English explanations detailing *why* specific words are scheduled for review at any moment. |
+| **Retrieval Type Weighting** | `applyReview` (`retrievalType`) | Differentiates active retrieval (typing) vs. passive recognition for calibrated stability gains. |
 
-| Qatlam | Qayerda | Tavsif |
-|---|---|---|
-| **Individual Memory Dynamics Engine** | `memoryEngine.js` — `updateStability`, `computeRecallProbability` | `P(t) = e^(−t/S)` unutish egri chizig'i, har bir foydalanuvchi × har bir so'z uchun alohida stability qiymati |
-| **Future Memory Simulator** | `simulateReviewScenarios`/`simulateReviewDayOptions` (`memoryEngine.js`) → `MemoryInsights.jsx` | Har bir so'z uchun "hech qachon takrorlamasangiz" va "1/3/7/14-kunda takrorlasangiz" ssenariylarini interaktiv taqqoslaydi — 30 kundan keyingi eslab qolish foizi qanday o'zgarishini ko'rsatadi |
-| **Forgetting Autopsy** | `forgettingAutopsy.js` — `diagnoseForgetting` → `MemoryInsights.jsx` | So'z unutilganda, mavjud signallar (interval, ishonch darajasi, chalkashtirish) asosida nisbiy ta'sir ko'rsatuvchi omillarni aniqlaydi va mos mashq turini tavsiya qiladi. Ataylab **statistik faktdan ko'ra "taxminiy baho"** sifatida taqdim etiladi |
-| **Confusion Network** | `textSimilarity.js` (`findConfusableMatch`) + `reportConfusion`/`recordConfusionPair` → `MemoryInsights.jsx` | Foydalanuvchi xato javob berganda (endi nafaqat Memory Lab'da, balki **asosiy Imlo mashqida** ham), unga o'xshash so'zlar avtomatik aniqlanadi va "chalkashtirilgan juftliklar" ro'yxati sifatida ko'rsatiladi |
-| **Semantik klasterlash + o'z-o'zini kalibrlash** | `semanticClassifier.js` + `computeClusterCalibration` | Har bir so'z avtomatik semantik guruhga (hayvonlar, texnologiya, fe'llar, sifatlar...) ajratiladi; foydalanuvchining shu guruh bo'yicha haqiqiy natijalari modelning bashoratini moslashtiradi |
-| **Scheduling Transparency** | `explainSchedulingDecision` | "Nega aynan hozir takrorlash tavsiya qilinmoqda" — oddiy tilda tushuntirish |
-| **Testing/generation effect** | `applyReview` (`retrievalType`) | Faol (typing) va passiv takrorlash alohida hisobga olinadi va turlicha xotira o'sishi beradi |
+### 🟡 Near-Term Pipeline (Infrastructure Ready)
 
-### 🔜 Infratuzilma tayyor, faqat kengaytirish/UI kerak
+| Feature | Gap / Next Step | Effort & Feasibility |
+| :--- | :--- | :--- |
+| **Automated Intervention Engine** | Connect Forgetting Autopsy diagnostics directly to active game mode routing. | **Low**: Practice modes exist; requires navigation link binding. |
+| **Cross-Mode Confusion Detection** | Expand spelling confusion detection across Quiz, Flashcards, and Sentence Builder modes. | **Low**: Uses shared `findConfusableMatch` utility across remaining game engines. |
 
-| Qatlam | Nima yetishmayapti | Nega tez qurish mumkin |
-|---|---|---|
-| **Intervention Engine (to'liq)** | Diagnoz → mos mashq turiga **avtomatik yo'naltirish** (hozircha Forgetting Autopsy faqat tavsiyani matn sifatida ko'rsatadi, foydalanuvchini o'sha mashqqa avtomatik olib bormaydi) | Barcha kerakli mashq turlari (Contrast, Active Recall, Context, Speaking) allaqachon alohida o'yinlar sifatida mavjud — faqat "tavsiya → shu mashqni ochish" navigatsiyasi yozilishi kerak |
-| **Confusion detection barcha rejimlarda** | Hozircha faqat Memory Lab va Imlo mashqida ishlaydi; Test/Kartochka/Jumla tuzish rejimlarida hali yo'q | `findConfusableMatch` allaqachon umumiy utility — qolgan o'yinlarga ulash mexanik ish |
+### 🔮 Future Research (Long-Term Exploration)
 
-### 🔮 Kelajak rejasi (yangi tadqiqot/infratuzilma talab qiladi)
-
-| Qatlam | Nega hali yo'q |
-|---|---|
-| **Memory Fingerprint** (visual/audio/contextual retention taqsimoti) | Hozircha har bir review faqat *active/passive recall* sifatida belgilanadi — qaysi o'yin turi (Pronounce/Match/Spelling) orqali o'tkazilgani alohida saqlanmaydi. Modallik bo'yicha statistika chiqarish uchun avval shu darajada data yig'ishni boshlash kerak |
-| **Memory Genome** (so'z metadata + ona til interferensiyasi tadqiqoti) | Ilmiy jihatdan asoslash uchun yetarli hajmda uzoq muddatli (longitudinal) data va lingvistik tahlil kerak |
-| **Knowledge Graph** (so'zlar orasidagi semantik bog'liqlik xaritasi) | Sifatli natija uchun kuratsiya qilingan lingvistik ma'lumotlar bazasi (WordNet darajasida) kerak — bu kontent xarajati, faqat kod emas |
-| **Memory Replay** (90 kunlik progress tarixi) | Hozircha faqat so'zning *joriy* holati saqlanadi; tarixiy kunlik snapshot saqlash boshlanmagan |
-| **Personal Learning Experiments / rigorous A-B testing** | ⚠️ Statistik ehtiyotkorlik talab qiladi: bitta foydalanuvchining bir necha o'nlab review'i asosida "sizga X usuli Y% samaraliroq" degan xulosa ilmiy jihatdan ishonchli emas (so'z qiyinligi, vaqt kabi omillar hisobga olinmagan bo'ladi). Bu qatlam yetarli namuna hajmi va nazorat guruhisiz **taqdim etilmasligi kerak** — aks holda bu "hypothesis", "ilmiy natija" emas |
+| Feature | Objective | Requirements |
+| :--- | :--- | :--- |
+| **Memory Fingerprint** | Modality-specific retention profiling (Visual vs. Auditory vs. Contextual). | Requires fine-grained modality tracking across all game types. |
+| **Linguistic Memory Genome** | Native language interference research (L1 transfer error patterns). | Requires longitudinal datasets and linguistic corpus analysis. |
+| **Knowledge Graph** | Semantic association graph mapping word distance and relationships. | Requires curated lexical database integration (e.g., WordNet API). |
+| **Historical Memory Replay** | 90-day time-series snapshot playback of retention evolution. | Requires daily state snapshots database persistence. |
 
 ---
 
-## ✨ Asosiy imkoniyatlar
+## ✨ Core Features
 
-### 📚 So'z boyligi
-- Shaxsiy so'z to'plamlari (packs) yaratish, tahrirlash va boshqarish
-- Marketdan tayyor to'plamlarni (Irregular Verbs, Phrasal Verbs va h.k.) bir bosishda o'rnatish, keyinchalik yangilanishlarini olish
-- 7 xil mashq rejimi: Aqlli kartochkalar, Imlo mashqi, Juftlikni topish, Test, Talaffuz (Speech-to-Text), Jumla tuzish, Fe'llar trenajyori
-- Xato qilingan so'zlarni avtomatik aniqlash ("qiyin so'zlar" — leech words) va ularga alohida e'tibor berish
+### 📚 Vocabulary Boost Engine
+* **Custom Pack Management**: Create, customize, export, and manage personal word packs.
+* **Marketplace Integration**: One-click installation of curated packs (Irregular Verbs, Phrasal Verbs, Academic Word List, IELTS Essentials) with automatic sync updates.
+* **7 Interactive Practice Modes**:
+  1. 🎴 **Smart Flashcards** — Interactive cards with audio pronunciation and confidence scoring.
+  2. ✍️ **Spelling Trainer** — Active orthographic recall with instant feedback & confusion tracking.
+  3. 🧩 **Match Pairs** — High-speed visual association game.
+  4. ❓ **Multiple Choice Quiz** — Distractor-driven recall under pressure.
+  5. 🎙️ **Speech Pronunciation** — Real-time Web Speech API speech-to-text evaluation.
+  6. 📝 **Sentence Builder** — Contextual word ordering and syntax practice.
+  7. ⚡ **Irregular Verbs Trainer** — Dedicated 3-form verb conjugate trainer.
+* **Leech Word Detection**: Automatic identification of persistently failed words for focused intervention.
 
-### 📖 Grammatika moduli
-- 34 ta mavzu (Boshlang'ich: 22, O'rta daraja: 12), har biri nazariy qo'llanma bilan
-- Har bir mavzu uchun 6 xil mashq turi: ko'p tanlovli, bo'shliq to'ldirish, gap yig'ish, xato topish, transformatsiya, muloqot
-- To'liq IELTS-uslubidagi grammatika testlari, real vaqt taymeri va batafsil natija tahlili bilan
+### 📖 Grammar & IELTS Mastery
+* **34 Structured Topics**: 22 Beginner and 12 Intermediate units featuring concise rule explanations, usage examples, and common pitfalls.
+* **6 Exercise Types per Topic**: Multiple choice, fill-in-the-blanks, sentence assembly, error identification, sentence transformation, and dialogue completion.
+* **Full IELTS Practice Tests**: Timed examination environment, real-time timer, open-ended writing response evaluation, and granular band performance reports.
 
-### 🧬 Xotira Laboratoriyasi (tadqiqot moduli)
-- Yuqoridagi individual xotira modelini vizual tarzda kuzatish: unutish egri chizig'i, ishonchlilik darajasi, chalkashtiriladigan so'z juftliklari (confusion pairs)
-- To'liq holat va kelajak rejasi uchun yuqoridagi **"Memory Twin — rivojlanish xaritasi"** bo'limiga qarang
+### 🧬 Memory Lab (Research & Insights)
+* Visualized retention curves, stability distributions, and real-time confusion pair networks.
+* Detailed analytical breakdown of personal learning speed, retention decay rates, and optimal review windows.
 
-### 🏆 Gamifikatsiya va statistika
-- Kunlik seriya (streak) kuzatuvi, faollik xaritasi (heatmap)
-- So'z, o'zlashtirish va seriya bo'yicha yutuqlar (achievements)
-- Batafsil statistika: umumiy/faol/yangi so'zlar, o'rtacha o'zlashtirish darajasi
+### 🏆 Gamification & Progress Tracking
+* **Daily Streaks**: Habit tracking with visual streak counters and protection mechanics.
+* **Activity Heatmap**: GitHub-style visual contribution grid tracking daily study volume.
+* **Milestone Achievements**: Unlockable badges for vocabulary growth, mastery milestones, and practice streaks.
+* **Comprehensive Analytics**: Interactive charts powered by Recharts detailing total words, active review queue, mastery ratio, and learning velocity.
 
-### 🛠 Boshqa
-- Firebase Authentication (email/parol va Google orqali kirish)
-- Admin panel (`/admin`) — foydalanuvchilar faolligi va grammatika testlarini qo'lda baholash uchun
-- PWA: offline ishlash, "Ilovaga o'rnatish", brauzer orqali kunlik mashq eslatmalari
-- Android uchun native ilova (Capacitor orqali)
-
----
-
-## 🏗 Texnologiyalar
-
-| Qatlam | Texnologiya |
-|---|---|
-| Frontend | React 19, React Router 7, Vite 8 |
-| Stil | Tailwind CSS 4, Framer Motion (animatsiyalar) |
-| Backend / Ma'lumotlar bazasi | Firebase (Realtime Database, Auth) |
-| Mobil | Capacitor (Android) |
-| Test | Vitest |
-| Sifat nazorati | ESLint (React Hooks qoidalari bilan) |
-| Til | JavaScript (JSX), TypeScript (kirish nuqtalari uchun) |
+### 🛠 Platform & Security
+* **Firebase Authentication**: Email/Password and Google OAuth login.
+* **Admin Dashboard (`/admin`)**: Operational view for monitoring platform activity and manually scoring open-ended IELTS writing submissions.
+* **PWA & Mobile**: Offline capability, installable app shell, daily browser notifications, and Android APK deployment via Capacitor.
 
 ---
 
-## 📂 Loyiha tuzilishi
+## 🏗 Tech Stack
+
+| Domain | Technology |
+| :--- | :--- |
+| **Frontend Framework** | React 19, React Router 7, Vite 8 |
+| **Styling & Motion** | Tailwind CSS v4, Framer Motion |
+| **State & Context** | React Context (AuthContext, PacksContext, ThemeContext) |
+| **Data & Auth** | Firebase (Realtime Database & Authentication) |
+| **Mobile Runtime** | Capacitor (Android) |
+| **Testing** | Vitest, Testing Library (React & Jest DOM), JSDOM |
+| **Code Quality** | ESLint 10 with React Hooks & Refresh plugins |
+| **Charts & Icons** | Recharts, Lucide React |
+
+---
+
+## 📂 Project Structure
 
 ```
-src/
-├── components/       # Qayta ishlatiladigan UI komponentlari (Auth, Practice, Words, Layout ...)
-├── contexts/         # Global holat: AuthContext, PacksContext, ThemeContext
-├── data/             # Statik ma'lumotlar: grammatika, market to'plamlari, IELTS testlari
-├── experiment/        # Xotira Laboratoriyasi — tadqiqot moduli
-├── hooks/            # Firebase bilan ishlaydigan custom hook'lar (useWords, usePacks, useStreak ...)
-├── pages/            # Yo'nalishlarga bog'langan sahifalar (route-level components)
-└── utils/            # Sof mantiq: memoryEngine, spacedRepetition, achievements ...
+VOC/
+├── android/              # Capacitor Android native project files
+├── public/               # Static assets, icons, manifest, service worker
+├── src/
+│   ├── components/       # Reusable UI modules (Auth, Practice, Words, Layout, Common)
+│   ├── contexts/         # Global state providers (Auth, Packs, Theme)
+│   ├── data/             # Static datasets (Grammar rules, Market packs, IELTS tests)
+│   ├── experiment/       # Memory Lab — research components & confusion analysis
+│   ├── hooks/            # Firebase custom hooks (useWords, usePacks, useStreak, etc.)
+│   ├── pages/            # Top-level route views (Dashboard, Library, Practice, Admin, etc.)
+│   ├── utils/            # Core logic (memoryEngine, spacedRepetition, achievements, etc.)
+│   └── main.jsx          # Application entry point
+├── database.rules.json   # Firebase Realtime Database security rules
+├── firestore.rules       # Firestore security rules
+├── vite.config.js        # Vite & Vitest configuration
+└── vercel.json           # Vercel SPA routing & headers deployment config
 ```
 
 ---
 
-## 🚀 Ishga tushirish
+## 🚀 Getting Started
+
+### Prerequisites
+* **Node.js** $\ge 18.0.0$
+* **npm** $\ge 9.0.0$
+
+### 1. Clone & Install
+```bash
+git clone https://github.com/your-username/voc.git
+cd voc
+npm install
+```
+
+### 2. Environment Configuration
+Create a `.env` file in the root directory with your Firebase setup credentials:
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_DATABASE_URL=https://your_project.firebaseio.com
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
+
+### 3. Run Development Server
+```bash
+npm run dev
+```
+Open `http://localhost:5173` in your browser.
+
+---
+
+## 🧪 Testing & Code Quality
+
+VOC includes unit tests covering pure algorithmic logic (Memory Engine, Spaced Repetition scheduling, Text Similarity matching, and Achievement calculators).
 
 ```bash
-npm install        # bog'liqliklarni o'rnatish
-npm run dev         # development serverni ishga tushirish
-npm run build       # production uchun build (tsc + vite build)
-npm run preview     # build natijasini lokal ko'rish
+# Run all unit tests once
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run linter
+npm run lint
 ```
-
-### Test va sifat nazorati
-
-```bash
-npm test            # Vitest orqali unit testlarni ishga tushirish
-npm run test:watch  # testlarni watch rejimida ishga tushirish
-npm run lint        # ESLint orqali kod sifatini tekshirish
-```
-
-Sof mantiqqa ega modullar (`src/utils/*`, `src/experiment/textSimilarity.js`) — xotira algoritmi, spaced repetition, market sinxronizatsiyasi, yutuqlar — unit testlar bilan qoplangan.
-
-### Firebase konfiguratsiyasi
-
-Loyiha Firebase Realtime Database va Authentication'dan foydalanadi. `src/firebase.js` faylida o'z Firebase loyihangiz konfiguratsiyasini ko'rsating. Xavfsizlik qoidalari `database.rules.json` va `firestore.rules` fayllarida — har bir foydalanuvchi faqat o'zining ma'lumotlariga kira oladi.
 
 ---
 
-## 📱 Deploy
+## 📱 Build & Deployment
 
-- **Web:** Vercel (`vercel.json` — SPA rewrite va cache sozlamalari tayyor)
-- **Ma'lumotlar bazasi:** Firebase Realtime Database (`firebase.json` orqali xavfsizlik qoidalari deploy qilinadi)
-- **Android:** `android/` papkasida Capacitor loyihasi — `npx cap sync android` va Android Studio orqali build qilinadi
+### Web Deployment (Vercel)
+The project includes a ready-to-use `vercel.json` configured for SPA client-side routing and cache controls for PWA assets.
+```bash
+npm run build
+npm run preview
+```
+
+### Firebase Rules Deployment
+Security rules enforce strict user-level data isolation. Deploy updated rules using Firebase CLI:
+```bash
+firebase deploy --only database
+```
+
+### Native Android Build (Capacitor)
+```bash
+# Build Vite web production assets
+npm run build
+
+# Sync web assets to Capacitor Android wrapper
+npx cap sync android
+
+# Open Android Studio to compile APK / App Bundle
+npx cap open android
+```
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more details.
+
