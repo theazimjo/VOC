@@ -6560,6 +6560,207 @@ Preposition'dan keyin doim -ing keladi, infinitive emas:
           { id: 19, situation: "Talking about traffic.", dialogue: "A: How do you feel about commuting?\nB: They can't stand ___ in traffic.", options: ["waiting", "to wait", "wait", "waited"], correct: 0, explanation: "can't stand + gerund (-ing)." },
           { id: 20, situation: "Talking about summer plans.", dialogue: "A: Any plans for summer?\nB: We plan ___ next summer.", options: ["to travel", "traveling", "travel", "traveled"], correct: 0, explanation: "plan + to + infinitive." }
         ]
+      },
+      {
+        id: "noun-clauses",
+        title: "Noun Clauses",
+        icon: "🔗",
+        guide: `## Noun Clauses (Ot boʻlaklar)
+
+Noun clause — gap ichida ot vazifasini bajaradigan tobelik qurilmasi. U gap ega, toʻldiruvchi yoki ot sifatida ishlatilishi mumkin.
+
+## 1. Noun clause nima?
+
+Noun clause — oʻz ichida ega va kesim saqlaydigan, lekin mustaqil gap boʻlmagan jumlaning bir qismi.
+  - **What you said** is true. (Siz aytganing toʻgʻri.) — ega sifatida
+  - I know **that she is tired**. (Men uni charchagansini bilaman.) — toʻldiruvchi sifatida
+  - The question is **whether he will come**. (Savol shuki u keladimi.) — keyingi ot sifatida
+
+## 2. Noun clause turlari
+
+### 2a. "That" bilan boshlanuvchi noun clauselar
+  - She believes **that he is honest**. (U uni halol deb hisoblaydi.)
+  - I think **that they are right**. (Men ularning toʻgʻri deb oʻylayman.)
+  - It is clear **that she passed the exam**. (U imtihondan oʻtgani aniq.)
+
+*Eslatma: Soʻzlashuvda "that" koʻpincha tushirib qoldiriladi.*
+  - She believes (that) he is honest.
+
+### 2b. "Wh-" soʻzlari bilan boshlanuvchi noun clauselar (Indirect Questions)
+  - I know **where she lives**. (Men u qayerda yashashini bilaman.)
+  - Tell me **what you want**. (Menga nima xoʻhlaganingizni ayting.)
+  - He asked **who called him**. (U kim qoʻngʻiroq qilganini soʻradi.)
+  - I wonder **why she is sad**. (Men u nega xafadir deb oʻylayman.)
+
+*Diqqat: Noun clause ichida soʻz tartibi toʻgʻri gap tartibida — savol tartibida emas!*
+  - ✅ I know **where she lives**. (toʻgʻri)
+  - ❌ I know **where does she live**. (notoʻgʻri)
+
+### 2c. "Whether / If" bilan boshlanuvchi noun clauselar
+  - I don't know **whether she is coming**. (Men u kelishini bilmayman.)
+  - He asked **if the store was open**. (U doʻkon ochiqmi deb soʻradi.)
+  - I wonder **whether they will agree**. (Men ular rozi boʻlishini bilmoqchiman.)
+
+## 3. Noun clauselarning vazifalari
+
+| Vazifa | Misol |
+|---|---|
+| Ega (Subject) | **What she said** surprised me. |
+| Toʻldiruvchi (Object) | I know **that you are tired**. |
+| Ot (Predicate nominative) | The truth is **that he lied**. |
+| Preposition toʻldiruvchisi | I am interested in **what you said**. |
+
+## 4. Muhim qoidalar
+
+1. **Soʻz tartibi**: Noun clause ichida toʻgʻri gap tartibi (S+V) ishlatiladi — savol tartibi emas.
+   - ✅ I wonder **where he went**.
+   - ❌ I wonder **where did he go**.
+2. **"That" tushirilishi**: "that" bilan boshlanuvchi noun clause toʻldiruvchi sifatida kelganda "that" tushirilishi mumkin.
+   - She knows (that) I am here.
+3. **"Whether" vs "if"**: Ikkalasi ham "yoki yoʻq" maʼnosini beradi; "whether" rasmiyroq va "or not" bilan koʻproq ishlatiladi.
+   - I wonder **whether or not** she will come.`,
+        questions: [
+          { id: 1, text: "Choose the correct noun clause:", options: ["I know where does she live.", "I know where she lives.", "I know where she does live.", "I know where lives she."], correct: 1, explanation: "Noun clause ichida toʻgʻri gap tartibi (S+V) ishlatiladi: where she lives." },
+          { id: 2, text: "What she told me ___ very surprising.", options: ["were", "was", "is being", "are"], correct: 1, explanation: "Noun clause ega sifatida birlikda ishlatilsa, kesim ham birlikda boʻladi: was." },
+          { id: 3, text: "I don't know ___ he is coming tomorrow.", options: ["that if", "whether", "where", "which"], correct: 1, explanation: "\"Whether\" — ha/yoʻq shaklidagi noun clause boshlatadi." },
+          { id: 4, text: "She told me ___ she had finished the project.", options: ["what", "whether", "that", "how much"], correct: 2, explanation: "\"That\" — taxmin yoki fakt ifodalovchi noun clause boshlatadi." },
+          { id: 5, text: "Can you tell me ___ the library is?", options: ["where", "that", "whether", "what"], correct: 0, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
+          { id: 6, text: "Which is a noun clause used as a subject?", options: ["She woke up early.", "I believe that she passed.", "That she passed the exam surprised everyone.", "She is happy about the news."], correct: 2, explanation: "\"That she passed the exam\" — ega vazifasini bajaruvchi noun clause." },
+          { id: 7, text: "I wonder ___ she is angry.", options: ["that", "why", "which", "whose"], correct: 1, explanation: "Sabab soʻralanda \"why\" ishlatiladi." },
+          { id: 8, text: "The problem is ___ we don't have enough money.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "\"The problem is that...\" — predicate nominative vazifasini bajaruvchi noun clause." },
+          { id: 9, text: "Tell me ___ you want for your birthday.", options: ["that", "whether", "if", "what"], correct: 3, explanation: "\"What\" — narsa yoki narsalar soʻralanda ishlatiladi." },
+          { id: 10, text: "I'm not sure ___ she will accept the offer or not.", options: ["that", "what", "whether", "who"], correct: 2, explanation: "\"Whether...or not\" — ikki variant orasida tanlov ifodalaydi." },
+          { id: 11, text: "He asked me ___ I had seen his keys.", options: ["that", "if", "what", "where"], correct: 1, explanation: "Bilvosita ha/yoʻq savollarda \"if\" ishlatiladi." },
+          { id: 12, text: "Choose the correct word order in the noun clause: \"I know ___ (she, lives, where).\"", options: ["where does she live", "where she lives", "where lives she", "where she does live"], correct: 1, explanation: "Noun clause ichida toʻgʻri tartib: where + she + lives." },
+          { id: 13, text: "Identify the noun clause: \"I believe that honesty is the best policy.\"", options: ["I believe", "that honesty", "that honesty is the best policy", "the best policy"], correct: 2, explanation: "\"That honesty is the best policy\" — toʻliq noun clause." },
+          { id: 14, text: "___ he was late didn't surprise me.", options: ["If", "That", "What", "Whether"], correct: 1, explanation: "Ega vazifasidagi noun clause \"That\" bilan boshlanadi." },
+          { id: 15, text: "I am interested in ___ you did last summer.", options: ["that", "if", "what", "whether"], correct: 2, explanation: "Preposition (in) dan keyin \"what\" bilan boshlanuvchi noun clause keladi." },
+          { id: 16, text: "Nobody knows ___ the meeting will be held.", options: ["what", "that", "where", "if that"], correct: 2, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
+          { id: 17, text: "She didn't say ___ she was upset.", options: ["whether", "what", "who", "that"], correct: 3, explanation: "Fakt yoki his-tuyg'u ifodalanda \"that\" ishlatiladi." },
+          { id: 18, text: "Which sentence contains a noun clause used as an object?", options: ["Running is healthy.", "I know that she passed.", "She runs every day.", "The book on the table is mine."], correct: 1, explanation: "\"That she passed\" — toʻldiruvchi vazifasidagi noun clause." },
+          { id: 19, text: "The question is ___ we should accept their proposal.", options: ["what", "whether", "who", "how much"], correct: 1, explanation: "\"Whether\" — ikki imkoniyat orasidan birini tanlash vaziyatida." },
+          { id: 20, text: "Tell me ___ you found the answer.", options: ["that", "how", "if", "which"], correct: 1, explanation: "Usul/yo'l soʻralanda \"how\" ishlatiladi." },
+          { id: 21, text: "I don't understand ___ she is crying.", options: ["what", "that", "why", "if"], correct: 2, explanation: "Sabab soʻralanda \"why\" ishlatiladi." },
+          { id: 22, text: "Do you know ___ called while I was out?", options: ["that", "whether", "who", "which"], correct: 2, explanation: "Shaxs soʻralanda \"who\" ishlatiladi." },
+          { id: 23, text: "She believes ___ hard work pays off.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "E'tiqod/fikr ifodalanda \"that\" ishlatiladi." },
+          { id: 24, text: "I'm curious about ___ she reacted to the news.", options: ["that", "how", "if", "whether"], correct: 1, explanation: "Reaktsiya usuli soʻralanda \"how\" ishlatiladi." },
+          { id: 25, text: "What surprised everyone was ___ she finished first.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "Predicate nominative vazifasida \"that\" ishlatiladi." },
+          { id: 26, text: "He explained ___ the machine works.", options: ["if", "that", "how", "whether"], correct: 2, explanation: "Usul/mexanizm tushuntiranda \"how\" ishlatiladi." },
+          { id: 27, text: "I wonder ___ she has already left.", options: ["that", "how", "if", "which"], correct: 2, explanation: "Noaniqlik ifodalanda \"if/whether\" ishlatiladi." },
+          { id: 28, text: "Which sentence is grammatically correct?", options: ["I know where does he live.", "I know where he lives.", "I know where he does live.", "I know where live he."], correct: 1, explanation: "Noun clause ichida soʻz tartibi: where + he + lives (S+V)." },
+          { id: 29, text: "They haven't decided ___ to hold the party indoors or outdoors.", options: ["what", "that", "whether", "who"], correct: 2, explanation: "Ikki variant orasida tanlov ifodalanda \"whether\" ishlatiladi." },
+          { id: 30, text: "The truth is ___ nobody told her about the change.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "\"The truth is that...\" — predicate nominative vazifasidagi noun clause." },
+        ],
+        fillBlanks: [
+          { id: 1, text: "I know ___ she is telling the truth.", options: ["if", "that", "how", "whether"], correct: 1, explanation: "Fakt ifodalanda \"that\" ishlatiladi." },
+          { id: 2, text: "Can you tell me ___ the nearest bank is?", options: ["what", "that", "where", "whether"], correct: 2, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
+          { id: 3, text: "I'm not sure ___ he will pass the test.", options: ["that", "how", "whether", "who"], correct: 2, explanation: "Noaniqlik ifodalanda \"whether\" ishlatiladi." },
+          { id: 4, text: "___ she said really upset me.", options: ["That", "Whether", "If", "How"], correct: 0, explanation: "Ega vazifasidagi noun clause \"What\" yoki \"That\" bilan boshlanishi mumkin; bu yerda \"What\" toʻgʻriroq, lekin \"That\" ham maʼnoni beradi." },
+          { id: 5, text: "He doesn't know ___ to do next.", options: ["that", "if", "what", "whether"], correct: 2, explanation: "Nima qilish kerakligini bildiruvchi noun clause: what." },
+          { id: 6, text: "I wonder ___ they arrived safely.", options: ["that", "whether", "who", "which"], correct: 1, explanation: "Noaniqlik/tashvish ifodalanda \"whether\" ishlatiladi." },
+          { id: 7, text: "Tell me ___ you finished the homework.", options: ["when", "that", "if", "who"], correct: 0, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
+          { id: 8, text: "The question is ___ we have enough time.", options: ["what", "that", "whether", "who"], correct: 2, explanation: "Ha/yoʻq muammo ifodalanda \"whether\" ishlatiladi." },
+          { id: 9, text: "She thinks ___ you should try harder.", options: ["if", "that", "whether", "how"], correct: 1, explanation: "Fikr yoki maslahat ifodalanda \"that\" ishlatiladi." },
+          { id: 10, text: "I don't understand ___ she got so upset.", options: ["what", "why", "that", "whether"], correct: 1, explanation: "Sabab soʻralanda \"why\" ishlatiladi." },
+          { id: 11, text: "Do you know ___ the store closes?", options: ["if", "whether", "when", "that"], correct: 2, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
+          { id: 12, text: "He asked ___ I had finished the report.", options: ["that", "if", "what", "how"], correct: 1, explanation: "Bilvosita ha/yoʻq savollarda \"if\" ishlatiladi." },
+          { id: 13, text: "She showed me ___ to use the new software.", options: ["that", "if", "how", "whether"], correct: 2, explanation: "Usul/yoʻl koʻrsatishda \"how\" ishlatiladi." },
+          { id: 14, text: "I believe ___ honesty is very important.", options: ["if", "whether", "that", "how"], correct: 2, explanation: "E'tiqod ifodalanda \"that\" ishlatiladi." },
+          { id: 15, text: "___ you decide is fine with me.", options: ["That", "Whether", "What", "If"], correct: 2, explanation: "\"What\" — ega vazifasidagi noun clause boshlatadi: \"What you decide\"." },
+          { id: 16, text: "I'm curious about ___ she learned to paint.", options: ["that", "if", "how", "whether"], correct: 2, explanation: "Preposition (about) dan keyin \"how\" bilan noun clause keladi." },
+          { id: 17, text: "Nobody told me ___ the meeting was cancelled.", options: ["whether", "how", "that", "who"], correct: 2, explanation: "Fakt xabari: \"that\" ishlatiladi." },
+          { id: 18, text: "I'm not sure ___ she accepted the job offer.", options: ["whether", "that", "how", "who"], correct: 0, explanation: "Ha/yoʻq noaniqligida \"whether\" ishlatiladi." },
+          { id: 19, text: "He asked ___ had called while he was away.", options: ["that", "if", "what", "who"], correct: 3, explanation: "Shaxs soʻralanda \"who\" ishlatiladi." },
+          { id: 20, text: "The fact is ___ we need more data.", options: ["if", "whether", "that", "how"], correct: 2, explanation: "Fakt ifodalanda \"that\" ishlatiladi." },
+        ],
+        scrambled: [
+          { id: 1, words: ["know", "I", "she", "where", "lives"], answer: "I know where she lives.", explanation: "Noun clause: where + S + V tartibi." },
+          { id: 2, words: ["said", "me", "she", "that", "told", "she", "was", "happy"], answer: "She told me that she was happy.", explanation: "Main clause + that + noun clause." },
+          { id: 3, words: ["coming", "know", "don't", "I", "whether", "he", "is"], answer: "I don't know whether he is coming.", explanation: "Noaniqlik: whether + S + V." },
+          { id: 4, words: ["surprised", "what", "she", "said", "me"], answer: "What she said surprised me.", explanation: "Noun clause ega sifatida: What + S + V + main verb." },
+          { id: 5, words: ["that", "they", "believe", "right", "I", "are"], answer: "I believe that they are right.", explanation: "E'tiqod: main clause + that + noun clause." },
+          { id: 6, words: ["happened", "tell", "what", "me"], answer: "Tell me what happened.", explanation: "Buyruq gap + noun clause (what + V)." },
+          { id: 7, words: ["is", "the", "she", "question", "coming", "whether"], answer: "The question is whether she is coming.", explanation: "Predicate nominative: The question is + whether + S + V." },
+          { id: 8, words: ["know", "he", "why", "not", "does", "she", "left"], answer: "He does not know why she left.", explanation: "Sabab: main clause + why + S + V." },
+          { id: 9, words: ["me", "she", "how", "showed", "machine", "the", "works"], answer: "She showed me how the machine works.", explanation: "Usul: main clause + how + S + V." },
+          { id: 10, words: ["you", "need", "is", "that", "all", "do"], answer: "All you need is that you do.", explanation: "Ega vazifasida noun clause." },
+          { id: 11, words: ["him", "asked", "if", "I", "was", "he", "ready"], answer: "I asked him if he was ready.", explanation: "Bilvosita savol: main clause + if + S + V." },
+          { id: 12, words: ["interested", "in", "you", "what", "am", "I", "said"], answer: "I am interested in what you said.", explanation: "Preposition (in) + noun clause (what + S + V)." },
+          { id: 13, words: ["clear", "she", "that", "is", "passed", "it"], answer: "It is clear that she passed.", explanation: "It + is + adjective + that + noun clause." },
+          { id: 14, words: ["he", "wonder", "late", "I", "why", "was"], answer: "I wonder why he was late.", explanation: "Sabab: main clause + why + S + V." },
+          { id: 15, words: ["knows", "nobody", "will", "happen", "what"], answer: "Nobody knows what will happen.", explanation: "Kelajak noaniqlik: what + V + S tartibi (nisbiy savol)." },
+          { id: 16, words: ["did", "you", "tell", "she", "last", "me", "what", "summer"], answer: "She told me what you did last summer.", explanation: "main clause + noun clause (what + S + V)." },
+          { id: 17, words: ["is", "finish", "the", "whether", "problem", "we", "can", "on", "time"], answer: "The problem is whether we can finish on time.", explanation: "Ha/yoʻq muammo: The problem is + whether + S + V." },
+          { id: 18, words: ["decided", "they", "haven't", "or", "stay", "go", "whether", "to", "to"], answer: "They haven't decided whether to stay or to go.", explanation: "Whether + to + infinitive — noun clause." },
+          { id: 19, words: ["the", "truth", "is", "nobody", "that", "told", "her"], answer: "The truth is that nobody told her.", explanation: "Predicate nominative: The truth is + that + noun clause." },
+          { id: 20, words: ["matters", "is", "what", "you", "do", "next"], answer: "What matters is what you do next.", explanation: "Ega: What matters + predicate: what you do next." },
+        ],
+        errorCorrection: [
+          { id: 1, text: "I know where does she live.", options: ["I know", "where does", "she live", "No error"], correct: 1, wrongPart: "where does", correction: "where she", explanation: "Noun clause ichida savol tartibi ishlatilmaydi: I know where she lives." },
+          { id: 2, text: "She asked me that I had seen the report.", options: ["She asked me", "that", "I had seen", "the report"], correct: 1, wrongPart: "that", correction: "if / whether", explanation: "Ha/yoʻq bilvosita savollarda \"if\" yoki \"whether\" ishlatiladi." },
+          { id: 3, text: "I wonder whether does he agree.", options: ["I wonder", "whether does", "he agree", "No error"], correct: 1, wrongPart: "whether does", correction: "whether he", explanation: "Noun clause ichida: whether + S + V, savol tartibi emas." },
+          { id: 4, text: "What she said it made me sad.", options: ["What she said", "it made", "me sad", "No error"], correct: 1, wrongPart: "it made", correction: "made", explanation: "Noun clause ega sifatida kelganda, qoʻshimcha \"it\" kerak emas." },
+          { id: 5, text: "Tell me where is the nearest hospital.", options: ["Tell me", "where is", "the nearest", "hospital"], correct: 1, wrongPart: "where is", correction: "where the nearest hospital is", explanation: "Bilvosita savol: where + S + V tartibi kerak." },
+          { id: 6, text: "That she arrived early was pleased everyone.", options: ["That she arrived", "early was", "pleased everyone", "No error"], correct: 1, wrongPart: "early was", correction: "early pleased", explanation: "Ega noun clause — kesim \"was pleased\" emas, \"pleased\" boʻlishi kerak." },
+          { id: 7, text: "I don't understand why did she leave so suddenly.", options: ["I don't understand", "why did she", "leave so", "suddenly"], correct: 1, wrongPart: "why did she", correction: "why she", explanation: "Noun clause: why + S + V tartibi, savol tartibi emas." },
+          { id: 8, text: "He told me what does she want.", options: ["He told me", "what does", "she want", "No error"], correct: 1, wrongPart: "what does", correction: "what she wants", explanation: "Bilvosita savol: what + S + V tartibi." },
+          { id: 9, text: "I'm not sure if whether she is ready.", options: ["I'm not sure", "if whether", "she is", "ready"], correct: 1, wrongPart: "if whether", correction: "if / whether", explanation: "\"If\" va \"whether\" bir vaqtda ishlatilmaydi — faqat bittasi tanlanadi." },
+          { id: 10, text: "The problem is that do we have enough time.", options: ["The problem is", "that do we", "have enough", "time"], correct: 1, wrongPart: "that do we", correction: "whether we", explanation: "Ha/yoʻq savol: whether + S + V; \"that do we\" notoʻgʻri." },
+          { id: 11, text: "I believe that she can to do it.", options: ["I believe", "that she", "can to do", "it"], correct: 2, wrongPart: "can to do", correction: "can do", explanation: "Modal verb (can) dan keyin base form ishlatiladi: can do." },
+          { id: 12, text: "Do you know who did called?", options: ["Do you know", "who did", "called", "No error"], correct: 1, wrongPart: "who did", correction: "who", explanation: "\"Who\" ega vazifasida kelsa, qoʻshimcha \"did\" kerak emas: who called." },
+          { id: 13, text: "What you said was it true.", options: ["What you said", "was it", "true", "No error"], correct: 1, wrongPart: "was it", correction: "was", explanation: "Noun clause ega sifatida: qoʻshimcha \"it\" ishlatilmaydi." },
+          { id: 14, text: "I wonder that she is coming.", options: ["I wonder", "that", "she is coming", "No error"], correct: 1, wrongPart: "that", correction: "if / whether", explanation: "\"wonder\" + ha/yoʻq noaniqlik: whether/if ishlatiladi, \"that\" emas." },
+          { id: 15, text: "Nobody knows what will she do next.", options: ["Nobody knows", "what will she", "do next", "No error"], correct: 1, wrongPart: "what will she", correction: "what she will", explanation: "Noun clause: what + S + V tartibi; \"will she\" savol tartibi notoʻgʻri." },
+          { id: 16, text: "She explained me how to use the app.", options: ["She explained", "me how", "to use", "the app"], correct: 1, wrongPart: "me how", correction: "to me how", explanation: "\"explain\" preposition \"to\" bilan ishlatiladi: explained to me how." },
+          { id: 17, text: "That is interesting what you found.", options: ["That is interesting", "what", "you found", "No error"], correct: 0, wrongPart: "That is interesting", correction: "What you found is interesting", explanation: "Toʻgʻri tartib: noun clause ega birinchi, keyin kesim." },
+          { id: 18, text: "I asked her where was she going.", options: ["I asked her", "where was", "she going", "No error"], correct: 1, wrongPart: "where was", correction: "where she was", explanation: "Bilvosita savol: where + S + V, savol tartibi emas." },
+          { id: 19, text: "The fact is if she lied to us.", options: ["The fact is", "if", "she lied", "to us"], correct: 1, wrongPart: "if", correction: "that", explanation: "Fakt ifodalanda \"that\" ishlatiladi: The fact is that she lied." },
+          { id: 20, text: "He doesn't know whether or not to accepts the offer.", options: ["He doesn't know", "whether or not", "to accepts", "the offer"], correct: 2, wrongPart: "to accepts", correction: "to accept", explanation: "\"to + infinitive\" da base form ishlatiladi: to accept." },
+        ],
+        transform: [
+          { id: 1, text: "Change to noun clause: 'Where does she live?' → I know ___.", options: ["I know where she lives.", "I know where does she live.", "I know where she does live.", "I know where lived she."], correct: 0, explanation: "Bilvosita savol: where + S + V tartibi." },
+          { id: 2, text: "Change to reported speech: 'She said, \"I am tired.\"' → She said ___.", options: ["she was tired.", "that she is tired.", "that she was tired.", "if she was tired."], correct: 2, explanation: "Reported speech: that + S + V (past tense)." },
+          { id: 3, text: "Make a noun clause: 'Will he come?' → I wonder ___.", options: ["I wonder if he will come.", "I wonder will he come.", "I wonder that he comes.", "I wonder whether does he come."], correct: 0, explanation: "Ha/yoʻq bilvosita savol: whether/if + S + V." },
+          { id: 4, text: "'What is she doing?' → Tell me ___.", options: ["Tell me what is she doing.", "Tell me what she is doing.", "Tell me that she is doing.", "Tell me what she does."], correct: 1, explanation: "Bilvosita savol: what + S + V tartibi." },
+          { id: 5, text: "'Why did he leave?' → I don't know ___.", options: ["I don't know why he left.", "I don't know why did he leave.", "I don't know that he left.", "I don't know why he did leave."], correct: 0, explanation: "Sabab bilvosita savol: why + S + V (past)." },
+          { id: 6, text: "Make the noun clause a subject: '___ is surprising. (She won the prize)' →", options: ["That she won the prize is surprising.", "She won the prize is surprising.", "If she won the prize is surprising.", "Whether she won is it surprising."], correct: 0, explanation: "Ega vazifasidagi noun clause: That + S + V." },
+          { id: 7, text: "'How does the machine work?' → He explained ___.", options: ["He explained how the machine works.", "He explained how does the machine work.", "He explained that machine works.", "He explained when the machine works."], correct: 0, explanation: "Usul bilvosita savol: how + S + V tartibi." },
+          { id: 8, text: "'Is she happy?' → I'm not sure ___.", options: ["I'm not sure whether she is happy.", "I'm not sure that she is happy.", "I'm not sure if she happy.", "I'm not sure whether is she happy."], correct: 0, explanation: "Ha/yoʻq noaniqlik: whether + S + V." },
+          { id: 9, text: "'Who called me?' → Do you know ___.", options: ["Do you know who called me?", "Do you know who did call me?", "Do you know that who called?", "Do you know who me called?"], correct: 0, explanation: "Shaxs bilvosita savol: who + V (when who is subject)." },
+          { id: 10, text: "Make a noun clause: 'She passed the exam.' → The news is ___.", options: ["The news is that she passed the exam.", "The news is if she passed the exam.", "The news is whether she passed.", "The news is she passing the exam."], correct: 0, explanation: "Fakt predicate nominative: that + S + V." },
+          { id: 11, text: "'When does the train leave?' → Do you know ___?", options: ["Do you know when the train leaves?", "Do you know when does the train leave?", "Do you know that the train leaves?", "Do you know when it leaves the train?"], correct: 0, explanation: "Vaqt bilvosita savol: when + S + V tartibi." },
+          { id: 12, text: "\"I don't remember where I put the keys.\" — Which part is the noun clause?", options: ["I don't remember", "where I put the keys", "where I put", "I put the keys"], correct: 1, explanation: "\"Where I put the keys\" — toʻldiruvchi vazifasidagi noun clause." },
+          { id: 13, text: "'Can she drive?' → He asked ___.", options: ["He asked if she could drive.", "He asked that she can drive.", "He asked whether can she drive.", "He asked if she can drove."], correct: 0, explanation: "Bilvosita savol: if + S + past modal (could)." },
+          { id: 14, text: "Combine into one sentence using a noun clause: 'He told me. The store is closed.' →", options: ["He told me that the store was closed.", "He told me if the store is closed.", "He told me the store whether closed.", "He told me how the store is closed."], correct: 0, explanation: "Fakt/xabar: told + that + noun clause." },
+          { id: 15, text: "'Where was she born?' → Nobody knows ___.", options: ["Nobody knows where she was born.", "Nobody knows where was she born.", "Nobody knows that she born.", "Nobody knows whether she was born."], correct: 0, explanation: "Joy bilvosita savol: where + S + V tartibi." },
+          { id: 16, text: "Make it an object noun clause: 'She is talented.' → Everyone agrees ___.", options: ["Everyone agrees that she is talented.", "Everyone agrees if she is talented.", "Everyone agrees whether she is talented.", "Everyone agrees she talented."], correct: 0, explanation: "E'tiqod/fikr: that + noun clause." },
+          { id: 17, text: "'Why is she upset?' → I don't understand ___.", options: ["I don't understand why she is upset.", "I don't understand why is she upset.", "I don't understand that she is upset.", "I don't understand if she upset."], correct: 0, explanation: "Sabab bilvosita savol: why + S + V tartibi." },
+          { id: 18, text: "Change to noun clause as subject: 'He quit his job.' →", options: ["That he quit his job shocked everyone.", "If he quit his job shocked everyone.", "Whether he quit is shocked everyone.", "He quit his job that shocked everyone."], correct: 0, explanation: "Ega vazifasidagi noun clause: That + S + V + main verb." },
+          { id: 19, text: "'How much did it cost?' → She didn't say ___.", options: ["She didn't say how much it cost.", "She didn't say how much did it cost.", "She didn't say that how much cost.", "She didn't say whether it cost."], correct: 0, explanation: "Miqdor bilvosita savol: how much + S + V tartibi." },
+          { id: 20, text: "Make a noun clause: 'Will they win?' → It depends on ___.", options: ["It depends on whether they will win.", "It depends on that they will win.", "It depends on if they win will.", "It depends on whether will they win."], correct: 0, explanation: "Preposition (on) dan keyin: whether + S + V." },
+        ],
+        dialogue: [
+          { id: 1, situation: "You ask a friend about a new restaurant.", dialogue: "A: Do you know ___ the restaurant closes?\nB: I think it closes at 10 PM.", options: ["that", "if", "when", "whether"], correct: 2, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
+          { id: 2, situation: "Your colleague asks about the meeting.", dialogue: "A: Did the boss say ___ the meeting was postponed?\nB: Yes, she confirmed it.", options: ["if", "how", "that", "whether"], correct: 2, explanation: "Fakt xabari: \"that\" ishlatiladi." },
+          { id: 3, situation: "You are not sure about a plan.", dialogue: "A: Are you coming to the party?\nB: I'm not sure ___ I can make it.", options: ["that", "when", "whether", "who"], correct: 2, explanation: "Noaniqlik: \"whether\" ishlatiladi." },
+          { id: 4, situation: "A student asks the teacher for help.", dialogue: "A: Can you show me ___ to solve this problem?\nB: Of course! Let me explain.", options: ["that", "how", "whether", "if"], correct: 1, explanation: "Usul/yoʻl: \"how\" ishlatiladi." },
+          { id: 5, situation: "A friend is surprised by news.", dialogue: "A: ___ she got the job surprised everyone!\nB: I know! She's so talented.", options: ["Whether", "If", "That", "How"], correct: 2, explanation: "Fakt ega sifatida: \"That\" ishlatiladi." },
+          { id: 6, situation: "You ask about someone's location.", dialogue: "A: Excuse me, do you know ___ the post office is?\nB: Yes, it's two blocks down.", options: ["that", "how", "where", "whether"], correct: 2, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
+          { id: 7, situation: "Two friends discuss a choice.", dialogue: "A: Have you decided ___ to take the job or not?\nB: Not yet. I need more time.", options: ["that", "how", "whether", "who"], correct: 2, explanation: "Tanlov noaniqligida \"whether\" ishlatiladi." },
+          { id: 8, situation: "A parent asks a child.", dialogue: "A: Tell me ___ happened at school today.\nB: Nothing special, Mom.", options: ["that", "if", "what", "whether"], correct: 2, explanation: "Nima soʻralanda \"what\" ishlatiladi." },
+          { id: 9, situation: "Two coworkers talk about a report.", dialogue: "A: Do you know ___ she finished the report?\nB: I believe she did, yes.", options: ["that", "if", "how", "whether"], correct: 1, explanation: "Ha/yoʻq bilvosita savol: \"if\" ishlatiladi." },
+          { id: 10, situation: "A friend explains something.", dialogue: "A: I can show you ___ I made this dish.\nB: That would be great!", options: ["that", "if", "how", "whether"], correct: 2, explanation: "Usul: \"how\" ishlatiladi." },
+          { id: 11, situation: "Someone is curious about a person.", dialogue: "A: Do you know ___ called while I was out?\nB: I think it was your sister.", options: ["that", "if", "who", "whether"], correct: 2, explanation: "Shaxs soʻralanda \"who\" ishlatiladi." },
+          { id: 12, situation: "A student explains a concept.", dialogue: "A: I finally understand ___ the formula works!\nB: Great! Practice makes perfect.", options: ["that", "why", "how", "whether"], correct: 2, explanation: "Mexanizm/usul: \"how\" ishlatiladi." },
+          { id: 13, situation: "Two friends discuss someone's mood.", dialogue: "A: I wonder ___ she's upset about something.\nB: She seemed fine to me.", options: ["that", "if", "how", "who"], correct: 1, explanation: "Noaniqlik/tashvish: \"if\" yoki \"whether\" ishlatiladi." },
+          { id: 14, situation: "You explain your plans.", dialogue: "A: I've decided ___ I will study abroad next year.\nB: That's exciting!", options: ["if", "whether", "that", "how"], correct: 2, explanation: "Qaror/fakt: \"that\" ishlatiladi." },
+          { id: 15, situation: "A boss checks with an employee.", dialogue: "A: Please confirm ___ you received the documents.\nB: Yes, I got them this morning.", options: ["that", "how", "who", "why"], correct: 0, explanation: "Tasdiqlash: \"that\" ishlatiladi." },
+          { id: 16, situation: "A friend asks for advice.", dialogue: "A: I don't know ___ I should take the new job.\nB: Think about what makes you happy.", options: ["that", "how", "whether", "who"], correct: 2, explanation: "Tanlov noaniqligida \"whether\" ishlatiladi." },
+          { id: 17, situation: "You ask about a schedule.", dialogue: "A: Do you know ___ the flight departs?\nB: I think it's at 7 AM.", options: ["that", "when", "whether", "who"], correct: 1, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
+          { id: 18, situation: "A teacher asks a student.", dialogue: "A: Can you explain ___ the experiment failed?\nB: I think the temperature was too high.", options: ["that", "if", "why", "whether"], correct: 2, explanation: "Sabab: \"why\" ishlatiladi." },
+          { id: 19, situation: "A manager announces something.", dialogue: "A: The truth is ___ we didn't reach our targets this quarter.\nB: We need to work harder.", options: ["if", "whether", "that", "how"], correct: 2, explanation: "Fakt ifodalanda \"that\" ishlatiladi." },
+          { id: 20, situation: "Two students talk after an exam.", dialogue: "A: ___ you passed is what matters!\nB: Thank you! I'm really relieved.", options: ["Whether", "If", "That", "How"], correct: 2, explanation: "Ega vazifasidagi noun clause: \"That\" bilan boshlanadi." },
+        ]
       }
     ]
   }
