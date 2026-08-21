@@ -100,7 +100,7 @@
   padding: 11px 22px;
   border-radius: 999px;
   background: var(--accent);
-  color: #fff;
+  color: #ffffff !important;
   font-size: 0.92rem;
   font-weight: 700;
   text-decoration: none;
@@ -110,6 +110,7 @@
 }
 .lp-btn:hover {
   background: var(--accent-active);
+  color: #ffffff !important;
 }
 .lp-btn:active {
   transform: scale(0.97);
@@ -125,10 +126,11 @@
 .lp-btn--ghost {
   background: var(--glass-fill);
   border: 1px solid var(--glass-border);
-  color: var(--glass-text);
+  color: var(--glass-text) !important;
 }
 .lp-btn--ghost:hover {
   background: var(--glass-fill-strong);
+  color: var(--glass-text) !important;
 }
 
 /* ---------- Shared section rhythm ---------- */
@@ -602,4 +604,57 @@
   .lp-nav-links {
     transition: none !important;
   }
+}
+
+/* ════════════════════════════════════════════════════════════
+   Sepia Theme Override for Landing Page
+   ════════════════════════════════════════════════════════════ */
+[data-theme="sepia"] .lp-page {
+  --glass-fill: rgba(255, 248, 234, 0.85);
+  --glass-fill-strong: rgba(255, 248, 234, 0.95);
+  --glass-border: rgba(107, 85, 65, 0.22);
+  --glass-text: #3B2D1F;
+  --glass-text-dim: #6B5541;
+  --accent: #C86414;
+  --accent-active: #A8520D;
+  background: var(--bg-primary);
+  color: var(--glass-text);
+}
+
+[data-theme="sepia"] .lp-bg-video {
+  opacity: 0.15;
+}
+
+[data-theme="sepia"] .lp-bg-overlay {
+  background: linear-gradient(180deg, rgba(247, 238, 220, 0.82) 0%, rgba(247, 238, 220, 0.95) 40%, #F7EEDC 75%);
+}
+
+[data-theme="sepia"] .lp-nav {
+  background: rgba(247, 238, 220, 0.92);
+  border-bottom-color: var(--glass-border);
+}
+
+[data-theme="sepia"] .lp-bento-cell,
+[data-theme="sepia"] .lp-word-card,
+[data-theme="sepia"] .lp-roster-card,
+[data-theme="sepia"] .lp-step-icon {
+  background: var(--bg-secondary);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+[data-theme="sepia"] .lp-bento-cell--lg {
+  background: linear-gradient(135deg, rgba(200, 100, 20, 0.12), rgba(255, 248, 234, 0.8));
+}
+
+[data-theme="sepia"] .lp-mastery-ring span {
+  background: #FFF8EA;
+}
+
+[data-theme="sepia"] .lp-steps-section {
+  border-color: var(--border);
+}
+
+[data-theme="sepia"] .lp-footer {
+  border-top-color: var(--border);
 }

@@ -489,3 +489,78 @@
     margin-top: 20px;
   }
 }
+
+/* ════════════════════════════════════════════════════════════
+   Sepia Theme Override for Auth Pages (Login / Register)
+   ════════════════════════════════════════════════════════════ */
+[data-theme="sepia"] .auth-page {
+  --glass-fill: rgba(255, 248, 234, 0.92);
+  --glass-fill-strong: rgba(255, 248, 234, 0.98);
+  --glass-border: rgba(107, 85, 65, 0.22);
+  --glass-text: #3B2D1F;
+  --glass-text-dim: #6B5541;
+  --glass-accent: #C86414;
+  --glass-accent-active: #A8520D;
+  background: var(--bg-primary);
+  color: var(--glass-text);
+}
+
+[data-theme="sepia"] .auth-bg-overlay {
+  background: rgba(247, 238, 220, 0.75);
+}
+
+[data-theme="sepia"] .auth-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+[data-theme="sepia"] .auth-sheet-handle {
+  background: rgba(107, 85, 65, 0.25);
+}
+
+[data-theme="sepia"] .auth-input {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="sepia"] .auth-input:-webkit-autofill,
+[data-theme="sepia"] .auth-input:-webkit-autofill:hover,
+[data-theme="sepia"] .auth-input:-webkit-autofill:focus,
+[data-theme="sepia"] .auth-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #EFE0C7 inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+}
+
+[data-theme="sepia"] .auth-input:focus {
+  border-color: var(--accent-1);
+  background: var(--bg-secondary);
+  box-shadow: 0 0 0 4px rgba(200, 100, 20, 0.12);
+}
+
+[data-theme="sepia"] .auth-input:focus + .auth-label {
+  color: var(--accent-1);
+}
+
+[data-theme="sepia"] .auth-submit {
+  background: var(--accent-1);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(200, 100, 20, 0.25);
+}
+
+[data-theme="sepia"] .auth-google-btn {
+  background: var(--bg-tertiary);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="sepia"] .auth-forgot-link,
+[data-theme="sepia"] .auth-footer a {
+  color: var(--accent-1);
+}
+
+[data-theme="sepia"] .auth-divider::before,
+[data-theme="sepia"] .auth-divider::after {
+  background: var(--border);
+}
