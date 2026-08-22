@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
-import { Check, ChevronRight } from 'lucide-react';
+import { Check, ChevronRight, Sparkles } from 'lucide-react';
 import { useWords } from '../../../hooks/useWords';
 import { useLessonProgress } from '../../../hooks/useLessonProgress';
 import { useLanguage } from '../../../contexts/LanguageContext';
@@ -38,10 +38,47 @@ export default function CourseDashboard() {
   const masteredCount = words.filter((w) => (w.mastery || 0) >= MASTERY_DONE_THRESHOLD).length;
   const overallPercent = words.length ? Math.round((masteredCount / words.length) * 100) : 0;
 
+  const RING_SIZE = 64;
+  const RING_STROKE = 6;
+  const ringRadius = (RING_SIZE - RING_STROKE) / 2;
+  const ringCircumference = 2 * Math.PI * ringRadius;
+  const ringOffset = ringCircumference - (overallPercent / 100) * ringCircumference;
+
   return (
     <div className="course-dashboard">
       <div className="course-progress-card">
-        <div className="course-progress-ring">{overallPercent}%</div>
+        <Sparkles size={72} className="course-progress-card-deco" />
+        <div className="course-progress-ring">
+          <svg viewBox={`0 0 ${RING_SIZE} ${RING_SIZE}`}>
+            <defs>
+              <linearGradient id="course-ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="var(--course-cta-1)" />
+                <stop offset="100%" stopColor="var(--course-cta-2)" />
+              </linearGradient>
+            </defs>
+            <circle
+              className="course-progress-ring-track"
+              cx={RING_SIZE / 2}
+              cy={RING_SIZE / 2}
+              r={ringRadius}
+              strokeWidth={RING_STROKE}
+              fill="none"
+            />
+            <circle
+              className="course-progress-ring-fill"
+              cx={RING_SIZE / 2}
+              cy={RING_SIZE / 2}
+              r={ringRadius}
+              strokeWidth={RING_STROKE}
+              fill="none"
+              strokeLinecap="round"
+              strokeDasharray={ringCircumference}
+              strokeDashoffset={ringOffset}
+              transform={`rotate(-90 ${RING_SIZE / 2} ${RING_SIZE / 2})`}
+            />
+          </svg>
+          <span className="course-progress-ring-label">{overallPercent}%</span>
+        </div>
         <div className="course-progress-info">
           <div className="course-progress-title">{pack.name}</div>
           <div className="course-progress-sub">

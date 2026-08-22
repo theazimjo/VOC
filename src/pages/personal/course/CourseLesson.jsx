@@ -86,6 +86,8 @@ export default function CourseLesson() {
     reading: grammarDone,
     listening: readingDone,
   };
+  const doneCount = Object.values(stageDone).filter(Boolean).length;
+  const currentStageKey = STAGES.find((s) => stageUnlocked[s.key] && !stageDone[s.key])?.key;
 
   const goToStageList = () => setSearchParams({ unit: unitTitle });
   const openStage = (key) => {
@@ -128,21 +130,26 @@ export default function CourseLesson() {
       </button>
       <h2 className="course-lesson-title">{unit.title}</h2>
 
+      <div className="course-unit-progress-track">
+        <div className="course-unit-progress-fill" style={{ '--pct': doneCount / STAGES.length }} />
+      </div>
+
       <div className="course-stage-list">
         {STAGES.map((stage) => {
           const Icon = stage.icon;
           const unlocked = stageUnlocked[stage.key];
           const done = stageDone[stage.key];
+          const isCurrent = stage.key === currentStageKey;
           return (
             <div
               key={stage.key}
-              className={`course-stage-row ${unlocked ? '' : 'locked'} ${done ? 'done' : ''}`}
+              className={`course-stage-row stage-${stage.key} ${unlocked ? '' : 'locked'} ${done ? 'done' : ''} ${isCurrent ? 'current' : ''}`}
               onClick={() => openStage(stage.key)}
               role="button"
               tabIndex={unlocked ? 0 : -1}
             >
               <div className="course-stage-row-icon">
-                {done ? <Check size={18} /> : unlocked ? <Icon size={18} /> : <Lock size={16} />}
+                {done ? <Check size={19} strokeWidth={3} /> : unlocked ? <Icon size={18} strokeWidth={2.3} /> : <Lock size={16} />}
               </div>
               <div className="course-stage-row-label">{t(stage.labelKey)}</div>
               {unlocked && <ChevronRight size={15} className="course-unit-arrow" />}

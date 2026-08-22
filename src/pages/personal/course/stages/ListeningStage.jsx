@@ -72,7 +72,7 @@ export default function ListeningStage({ unit, onComplete }) {
       <div className="course-listening-player">
         <button
           type="button"
-          className="course-listening-play-btn"
+          className={`course-listening-play-btn ${isPlaying ? 'playing' : ''}`}
           onClick={isPlaying ? () => { audioRef.current?.pause(); setIsPlaying(false); } : handlePlay}
           disabled={loadingAudio}
         >

@@ -1,4 +1,24 @@
 /* ========== COURSE CONTENT ========== */
+
+/* Scoped design tokens for the course/lesson experience — a livelier,
+   Duolingo-style layer on top of the app's flat iOS palette. Shadow
+   companions use color-mix() so the chunky "3D" edge stays correct across
+   every theme (ios/android/sepia) without hand-tuned hex per theme. */
+:root {
+  --course-purple: #8B5CF6;
+  --course-purple-dim: rgba(139, 92, 246, 0.12);
+  --course-teal: #14B8A6;
+  --course-teal-dim: rgba(20, 184, 166, 0.12);
+  --course-cta-1: #A855F7;
+  --course-cta-2: #6366F1;
+  --course-cta-shadow: color-mix(in srgb, var(--course-cta-2) 55%, black);
+  --course-shadow-words: color-mix(in srgb, var(--accent-1) 65%, black);
+  --course-shadow-grammar: color-mix(in srgb, var(--course-purple) 65%, black);
+  --course-shadow-reading: color-mix(in srgb, var(--accent-3) 65%, black);
+  --course-shadow-listening: color-mix(in srgb, var(--course-teal) 65%, black);
+  --course-shadow-done: color-mix(in srgb, var(--success) 65%, black);
+}
+
 .course-missing {
   display: flex;
   flex-direction: column;
@@ -24,42 +44,76 @@
   color: var(--text-secondary);
 }
 
-/* ---------- Dashboard ---------- */
+/* ---------- Dashboard hero ---------- */
 .course-progress-card {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 18px;
-  border-radius: var(--radius-lg);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  margin-bottom: 16px;
+  gap: 18px;
+  padding: 20px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--accent-1-dim), var(--course-purple-dim));
+  border: 1px solid var(--border-light);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.course-progress-card-deco {
+  position: absolute;
+  top: -14px;
+  right: -10px;
+  color: var(--course-purple);
+  opacity: 0.14;
+  transform: rotate(12deg);
+  pointer-events: none;
 }
 
 .course-progress-ring {
-  width: 56px;
-  height: 56px;
+  position: relative;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
+  z-index: 1;
+}
+
+.course-progress-ring svg {
+  width: 100%;
+  height: 100%;
+}
+
+.course-progress-ring-track {
+  stroke: var(--bg-tertiary);
+}
+
+.course-progress-ring-fill {
+  stroke: url(#course-ring-gradient);
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.course-progress-ring-label {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: var(--accent-1-dim);
-  color: var(--accent-1);
   font-weight: 800;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  color: var(--text-primary);
 }
 
 .course-progress-title {
   font-size: var(--font-md);
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-primary);
+  z-index: 1;
 }
 
 .course-progress-sub {
   font-size: var(--font-sm);
   color: var(--text-secondary);
+  font-weight: 600;
   margin-top: 2px;
+  z-index: 1;
 }
 
 .course-continue-btn {
@@ -67,15 +121,35 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 20px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
   border: none;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, #a855f7, #6366f1);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--course-cta-1), var(--course-cta-2));
   color: #fff;
   font-size: var(--font-sm);
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.01em;
   cursor: pointer;
+  box-shadow: 0 5px 0 var(--course-cta-shadow), 0 8px 18px rgba(99, 102, 241, 0.25);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+}
+
+.course-continue-btn:hover {
+  filter: brightness(1.05);
+}
+
+.course-continue-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 var(--course-cta-shadow);
+}
+
+.course-continue-btn svg {
+  transition: transform var(--transition-fast);
+}
+
+.course-continue-btn:hover svg {
+  transform: translateX(3px);
 }
 
 .course-months {
@@ -96,32 +170,37 @@
 .course-unit-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .course-unit-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: var(--radius-md);
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
 }
 
 .course-unit-row:hover {
-  background: var(--bg-glass-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.course-unit-row:active {
+  transform: translateY(0) scale(0.99);
 }
 
 .course-unit-row.done {
-  border-color: var(--accent-1);
+  border-color: var(--success);
 }
 
 .course-unit-check {
-  width: 20px;
-  height: 20px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -131,10 +210,15 @@
   color: var(--accent-1);
 }
 
+.course-unit-row.done .course-unit-check {
+  background: var(--success);
+  color: #fff;
+}
+
 .course-unit-name {
   flex: 1;
   font-size: var(--font-sm);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
@@ -155,13 +239,20 @@
   align-items: center;
   gap: 6px;
   border: none;
-  background: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
   color: var(--accent-1);
   font-size: var(--font-sm);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  padding: 0;
-  margin-bottom: 12px;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 14px;
+  transition: all var(--transition-fast);
+}
+
+.course-lesson-back:hover {
+  background: var(--accent-1-dim);
 }
 
 .course-lesson-title {
@@ -169,6 +260,7 @@
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 16px;
+  letter-spacing: -0.01em;
 }
 
 .course-lesson-words {
@@ -178,10 +270,23 @@
 }
 
 .course-lesson-word-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   padding: 14px;
   border-radius: var(--radius-md);
   background: var(--bg-secondary);
   border: 1px solid var(--border);
+  transition: border-color var(--transition-fast);
+}
+
+.course-lesson-word-card.mastered {
+  border-color: var(--success);
+}
+
+.course-lesson-word-main {
+  flex: 1;
+  min-width: 0;
 }
 
 .course-lesson-word-row {
@@ -216,6 +321,46 @@
   margin-top: 4px;
 }
 
+/* Small per-word mastery "gem": a conic-gradient ring that fills as the
+   word's mastery score climbs, with a checkmark once it crosses the done
+   threshold — the same shape language as the stage path rings. */
+.course-word-mastery-ring {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent-1) calc(var(--pct) * 1%), var(--bg-tertiary) 0);
+}
+
+.course-word-mastery-ring::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+}
+
+.course-word-mastery-ring-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: var(--accent-1);
+}
+
+.course-lesson-word-card.mastered .course-word-mastery-ring {
+  background: conic-gradient(var(--success) calc(var(--pct) * 1%), var(--bg-tertiary) 0);
+}
+
+.course-lesson-word-card.mastered .course-word-mastery-ring-inner {
+  color: var(--success);
+}
+
 .course-lesson-nav {
   display: flex;
   align-items: center;
@@ -228,25 +373,47 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 10px 14px;
+  padding: 11px 16px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: var(--font-sm);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: transform 0.1s ease, background var(--transition-fast);
+}
+
+.course-lesson-nav-btn:hover:not(:disabled) {
+  background: var(--bg-glass-hover);
+  transform: translateY(-1px);
+}
+
+.course-lesson-nav-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
 }
 
 .course-lesson-practice-btn {
-  padding: 10px 18px;
+  padding: 13px 24px;
   border: none;
-  border-radius: var(--radius-md);
-  background: var(--accent-1);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--course-cta-1), var(--course-cta-2));
   color: #fff;
   font-size: var(--font-sm);
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.01em;
   cursor: pointer;
+  box-shadow: 0 5px 0 var(--course-cta-shadow), 0 6px 14px rgba(99, 102, 241, 0.22);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+}
+
+.course-lesson-practice-btn:hover {
+  filter: brightness(1.05);
+}
+
+.course-lesson-practice-btn:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 var(--course-cta-shadow);
 }
 
 /* ---------- Vocabulary ---------- */

@@ -36,6 +36,15 @@ export default function ReadingStage({ unit, onComplete }) {
     <div className="course-stage-view">
       <h2 className="course-lesson-title">{reading.title}</h2>
 
+      <div className="course-reading-dots">
+        {reading.pages.map((_, i) => (
+          <span
+            key={i}
+            className={`course-reading-dot ${i === pageIndex ? 'active' : i < pageIndex ? 'read' : ''}`}
+          />
+        ))}
+      </div>
+
       <AnimatePresence mode="wait">
         <motion.div
           key={pageIndex}

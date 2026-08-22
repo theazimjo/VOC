@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { RotateCcw } from 'lucide-react';
 import { grammarData } from '../../../../data/grammarData';
 import { parseGuide } from '../../../../utils/grammarGuideParser';
 import { GuideBlocks } from '../../../../components/grammar/GuideRenderer';
@@ -76,7 +77,7 @@ export default function GrammarStage({ pack, unit, onComplete }) {
           )}
           {sentenceResult && !sentenceResult.passed && (
             <div className="mini-quiz-result failed">
-              <div className="mini-quiz-result-icon">🔁</div>
+              <div className="mini-quiz-result-icon"><RotateCcw size={32} strokeWidth={2.2} /></div>
               <div className="mini-quiz-result-score">
                 {sentenceResult.correctCount} / {sentenceResult.totalWords}
               </div>

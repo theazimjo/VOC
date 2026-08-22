@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X } from 'lucide-react';
+import { Check, X, PartyPopper, RotateCcw } from 'lucide-react';
 import { useLanguage } from '../../../../contexts/LanguageContext';
 
 // Small sequential multiple-choice quiz shared by the Grammar/Reading/
@@ -44,7 +44,9 @@ export default function MiniQuiz({ questions, passRatio = 0.7, onFinish }) {
     const passed = correctCount / questions.length >= passRatio;
     return (
       <div className={`mini-quiz-result ${passed ? 'passed' : 'failed'}`}>
-        <div className="mini-quiz-result-icon">{passed ? '🎉' : '🔁'}</div>
+        <div className="mini-quiz-result-icon">
+          {passed ? <PartyPopper size={32} strokeWidth={2.2} /> : <RotateCcw size={32} strokeWidth={2.2} />}
+        </div>
         <div className="mini-quiz-result-score">{correctCount} / {questions.length}</div>
         <div className="mini-quiz-result-msg">
           {passed ? t('course.quizPassed') : t('course.quizFailed')}
@@ -60,7 +62,15 @@ export default function MiniQuiz({ questions, passRatio = 0.7, onFinish }) {
 
   return (
     <div className="mini-quiz">
-      <div className="mini-quiz-progress">{index + 1} / {questions.length}</div>
+      <div className="mini-quiz-progress">
+        <div className="mini-quiz-progress-track">
+          <div
+            className="mini-quiz-progress-fill"
+            style={{ '--pct': (index + (selected !== null ? 1 : 0)) / questions.length }}
+          />
+        </div>
+        <span className="mini-quiz-progress-label">{index + 1} / {questions.length}</span>
+      </div>
 
       <AnimatePresence mode="wait">
         <motion.div

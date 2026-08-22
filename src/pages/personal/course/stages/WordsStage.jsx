@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Check } from 'lucide-react';
+import { Check, PartyPopper } from 'lucide-react';
 import { useWords } from '../../../../hooks/useWords';
 import { useLanguage } from '../../../../contexts/LanguageContext';
 import PracticePage from '../../PracticePage';
@@ -70,30 +70,42 @@ export default function WordsStage({ pack, unit }) {
         <div className="course-stage-progress-track">
           <div
             className="course-stage-progress-fill"
-            style={{ width: unitWords.length ? `${(masteredCount / unitWords.length) * 100}%` : '0%' }}
+            style={{ '--pct': unitWords.length ? masteredCount / unitWords.length : 0 }}
           />
         </div>
       </div>
 
       <div className="course-lesson-words">
         {unitWords.map((w) => {
-          const mastered = (w.mastery || 0) >= MASTERY_DONE_THRESHOLD;
+          const mastery = Math.min(100, w.mastery || 0);
+          const mastered = mastery >= MASTERY_DONE_THRESHOLD;
           return (
             <div className={`course-lesson-word-card ${mastered ? 'mastered' : ''}`} key={w.id}>
-              <div className="course-lesson-word-row">
-                <span className="course-lesson-word">{w.word}</span>
-                <span className="course-lesson-translation">{w.translation}</span>
-                {mastered && <Check size={16} className="course-word-mastered-icon" />}
+              <div className="course-lesson-word-main">
+                <div className="course-lesson-word-row">
+                  <span className="course-lesson-word">{w.word}</span>
+                  <span className="course-lesson-translation">{w.translation}</span>
+                </div>
+                {w.definition && <div className="course-lesson-definition">{w.definition}</div>}
+                {w.example && <div className="course-lesson-example">{w.example}</div>}
               </div>
-              {w.definition && <div className="course-lesson-definition">{w.definition}</div>}
-              {w.example && <div className="course-lesson-example">{w.example}</div>}
+              <div className="course-word-mastery-ring" style={{ '--pct': mastery }}>
+                {mastered && (
+                  <span className="course-word-mastery-ring-inner">
+                    <Check size={14} strokeWidth={3} />
+                  </span>
+                )}
+              </div>
             </div>
           );
         })}
       </div>
 
       {allMastered ? (
-        <div className="course-stage-unlocked-msg">{t('course.stageWordsDone')}</div>
+        <div className="course-stage-unlocked-msg">
+          <PartyPopper size={16} strokeWidth={2.4} />
+          {t('course.stageWordsDone')}
+        </div>
       ) : (
         <button
           type="button"
