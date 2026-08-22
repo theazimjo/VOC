@@ -117,6 +117,14 @@ export const translations = {
       // Navbar pin form
       pinLabel: 'Enter 6-digit PIN:',
       addBtn: 'Add',
+      // Navbar add modal
+      addModalTitle: 'Add',
+      addTabJoinGroup: 'Join a Group',
+      addTabCourses: 'Courses',
+      coursesEmptyHint: 'Ready-made courses you can start right away.',
+      courseWordsCount: '{count} words',
+      startCourse: 'Start',
+      startingCourse: 'Starting...',
     },
     library: {
       myPacks: 'My Packs',
@@ -916,6 +924,14 @@ export const translations = {
       // Navbar pin form
       pinLabel: 'Введите 6-значный PIN:',
       addBtn: 'Добавить',
+      // Navbar add modal
+      addModalTitle: 'Добавить',
+      addTabJoinGroup: 'Вступить в группу',
+      addTabCourses: 'Курсы',
+      coursesEmptyHint: 'Готовые курсы, которые можно начать сразу.',
+      courseWordsCount: '{count} слов',
+      startCourse: 'Начать',
+      startingCourse: 'Запуск...',
     },
     library: {
       myPacks: 'Мои наборы',
@@ -1715,6 +1731,14 @@ export const translations = {
       // Navbar pin form
       pinLabel: '6 xonali PIN kodni kiriting:',
       addBtn: "Qo'shish",
+      // Navbar add modal
+      addModalTitle: "Qo'shish",
+      addTabJoinGroup: "Guruhga qo'shilish",
+      addTabCourses: 'Kurslar',
+      coursesEmptyHint: "Darhol boshlash mumkin bo'lgan tayyor kurslar.",
+      courseWordsCount: '{count} ta so\'z',
+      startCourse: 'Boshlash',
+      startingCourse: 'Boshlanmoqda...',
     },
     library: {
       myPacks: "Mening to'plamlarim",

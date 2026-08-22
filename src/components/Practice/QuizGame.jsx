@@ -25,6 +25,10 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
 
   // Report progress
   useEffect(() => {
+    if (currentIndex === 0) {
+      correctCountRef.current = 0;
+      incorrectCountRef.current = 0;
+    }
     if (onProgress && words) {
       onProgress(currentIndex, words.length);
     }
@@ -69,6 +73,41 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
     questionStartRef.current = Date.now();
   }, [currentIndex, currentWord, words]);
 
+  const nextTimeoutRef = useRef(null);
+  const correctCountRef = useRef(0);
+  const incorrectCountRef = useRef(0);
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (nextTimeoutRef.current) {
+        clearTimeout(nextTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (nextTimeoutRef.current) {
+      clearTimeout(nextTimeoutRef.current);
+      nextTimeoutRef.current = null;
+    }
+
+    if (currentIndex < words.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+      setSelectedOption(null);
+      setAnswered(false);
+      setTimedOut(false);
+      setTimeLeft(15);
+      setOptions([]);
+    } else {
+      onComplete({
+        totalWords: words.length,
+        correctCount: correctCountRef.current,
+        incorrectCount: incorrectCountRef.current
+      });
+    }
+  }, [currentIndex, words.length, onComplete]);
+
   // Timer — only ticks when not yet answered
   useEffect(() => {
     if (answered) return;
@@ -78,6 +117,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       setTimedOut(true);
       setAnswered(true);
       setIncorrectCount(c => c + 1);
+      incorrectCountRef.current += 1;
       if (onAnswer) onAnswer(currentWord, false);
       onUpdateWord(currentWord.id, {
         isCorrect: false,
@@ -85,14 +125,23 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
         responseTime,
         retrievalType: 'passive_recall',
       });
+      nextTimeoutRef.current = setTimeout(() => {
+        handleNext();
+      }, 800);
       return;
     }
     const id = setTimeout(() => setTimeLeft(t => t - 1), 1000);
     return () => clearTimeout(id);
-  }, [timeLeft, answered]);
+  }, [timeLeft, answered, currentWord, onAnswer, onUpdateWord, handleNext]);
 
-  const handleSelect = useCallback(async (option) => {
+  const handleSelect = useCallback((option) => {
     if (answered) return;
+
+    if (nextTimeoutRef.current) {
+      clearTimeout(nextTimeoutRef.current);
+      nextTimeoutRef.current = null;
+    }
+
     setSelectedOption(option);
     setAnswered(true);
 
@@ -107,26 +156,19 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       retrievalType: 'passive_recall',
     });
 
-    if (isCorrect) setCorrectCount(c => c + 1);
-    else setIncorrectCount(c => c + 1);
-  }, [answered, currentWord, onUpdateWord, onAnswer]);
-
-  const handleNext = () => {
-    if (currentIndex < words.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-      setSelectedOption(null);
-      setAnswered(false);
-      setTimedOut(false);
-      setTimeLeft(15);
-      setOptions([]);
+    if (isCorrect) {
+      setCorrectCount(c => c + 1);
+      correctCountRef.current += 1;
     } else {
-      onComplete({
-        totalWords: words.length,
-        correctCount,
-        incorrectCount
-      });
+      setIncorrectCount(c => c + 1);
+      incorrectCountRef.current += 1;
     }
-  };
+
+    const delay = isCorrect ? 600 : 900;
+    nextTimeoutRef.current = setTimeout(() => {
+      handleNext();
+    }, delay);
+  }, [answered, currentWord, onAnswer, onUpdateWord, handleNext]);
 
   if (!currentWord) return null;
 

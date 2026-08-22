@@ -1,17 +1,25 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, Check, ArrowLeft, Sparkles } from 'lucide-react';
+import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, Check, ArrowLeft, Sparkles, X, BookOpen, Users } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useGroupMode } from '../../hooks/useGroupMode';
-import { ref, onValue, get, remove } from 'firebase/database';
+import { usePacks } from '../../hooks/usePacks';
+import { ref, onValue, get, remove, push, update } from 'firebase/database';
 import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
 import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
+import { BEGINNER_ENGLISH_PACK } from '../../data/beginnerEnglishCoursePack';
 import GlobalSearch from '../common/GlobalSearch';
 import './Navbar.css';
+
+// Courses offered in the navbar's "Add" modal — ready-made packs a personal
+// user can start with one tap, alongside joining a teacher's group.
+const AVAILABLE_COURSES = [
+  { id: 'beginner-english', icon: '📘', data: BEGINNER_ENGLISH_PACK },
+];
 
 export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: layoutAppMode }) {
   const { user, logout } = useAuth();
@@ -24,13 +32,20 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
 
   const navigate = useNavigate();
   const { appMode, membership } = useGroupMode();
+  const { addPack, updatePack } = usePacks();
   const [showSwitcher, setShowSwitcher] = useState(false);
   const [memberships, setMemberships] = useState([]);
-  const [showJoinForm, setShowJoinForm] = useState(false);
   const [pinCode, setPinCode] = useState('');
   const [joining, setJoining] = useState(false);
   const [joinError, setJoinError] = useState('');
   const switcherRef = useRef(null);
+
+  // "Add" modal — opened from the Plus card in the group switcher. Two
+  // sections: joining a teacher's group by PIN, and starting a ready-made
+  // course from AVAILABLE_COURSES.
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [addTab, setAddTab] = useState('join');
+  const [startingCourseId, setStartingCourseId] = useState(null);
 
   // A membership is either a corp/center group (centerId) or an independent
   // teacher's group (teacherUid, no centerId) — see joinGroupAsUser vs
@@ -73,9 +88,6 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     const handleClickOutside = (e) => {
       if (switcherRef.current && !switcherRef.current.contains(e.target)) {
         setShowSwitcher(false);
-        setShowJoinForm(false);
-        setPinCode('');
-        setJoinError('');
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -134,13 +146,76 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
         await joinIndependentGroupByCode(pinCode.trim(), user.uid, profile);
       }
       setPinCode('');
-      setShowJoinForm(false);
+      setShowAddModal(false);
       setShowSwitcher(false);
       navigate('/corp/student');
     } catch (err) {
       setJoinError(err.message || 'An error occurred while joining group.');
     } finally {
       setJoining(false);
+    }
+  };
+
+  const handleOpenAddModal = () => {
+    setPinCode('');
+    setJoinError('');
+    setAddTab('join');
+    setShowSwitcher(false);
+    setShowAddModal(true);
+  };
+
+  const handleStartCourse = async (course) => {
+    if (!user || startingCourseId) return;
+    setStartingCourseId(course.id);
+    try {
+      const { title, level, description, months } = course.data;
+      const wordsList = months.flatMap(m => m.units).flatMap(u => u.words);
+
+      const packId = await addPack({
+        name: title,
+        description: description || '',
+        icon: course.icon || '📘',
+        level: (level || 'beginner').toLowerCase(),
+        language: 'en-US',
+        type: 'default',
+      });
+
+      const wordsRef = ref(db, `users/${user.uid}/words/${packId}`);
+      const wordUpdates = {};
+      wordsList.forEach((w) => {
+        const newWordRef = push(wordsRef);
+        wordUpdates[newWordRef.key] = {
+          word: w.word || '',
+          translation: w.translation || '',
+          definition: w.definition || '',
+          example: w.example || '',
+          notes: '',
+          partOfSpeech: w.partOfSpeech || 'noun',
+          synonyms: '',
+          collocations: '',
+          nounForm: '',
+          verbForm: '',
+          adjectiveForm: '',
+          adverbForm: '',
+          article: '',
+          topic: '',
+          addedAt: new Date().toISOString(),
+          mastery: 0,
+          interval: 0,
+          reviewCount: 0,
+          nextReview: null,
+          lastReviewed: null,
+        };
+      });
+      await update(wordsRef, wordUpdates);
+      await updatePack(packId, { wordCount: wordsList.length });
+
+      setShowAddModal(false);
+      navigate(`/packs/${packId}`);
+    } catch (err) {
+      console.error('Error starting course:', err);
+    } finally {
+      setStartingCourseId(null);
     }
   };
 
@@ -337,8 +412,8 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
               })}
 
               {/* Join Card */}
-              <div 
-                onClick={() => { setShowJoinForm(!showJoinForm); setJoinError(''); }}
+              <div
+                onClick={handleOpenAddModal}
                 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer', width: '60px' }}
               >
                 <div style={{
@@ -357,64 +432,6 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 500, textAlign: 'center' }}>{t('nav.add')}</span>
               </div>
             </div>
-
-            {/* Pin Form */}
-            {showJoinForm && (
-              <form 
-                onSubmit={handleJoinNewGroup}
-                style={{ 
-                  marginTop: '1rem', 
-                  paddingTop: '1rem', 
-                  borderTop: '1px solid var(--border)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '6px'
-                }}
-              >
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{t('profile.pinLabel')}</div>
-                <div style={{ display: 'flex', gap: '6px' }}>
-                  <input
-                    type="text"
-                    maxLength={6}
-                    placeholder="123456"
-                    value={pinCode}
-                    onChange={e => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
-                    style={{
-                      background: 'var(--bg-tertiary)',
-                      border: '1px solid var(--border)',
-                      borderRadius: '6px',
-                      color: 'var(--text-primary)',
-                      padding: '6px 8px',
-                      fontSize: '0.8rem',
-                      outline: 'none',
-                      flex: 1,
-                      fontFamily: 'monospace',
-                      letterSpacing: '1px',
-                      textAlign: 'center'
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    disabled={joining}
-                    style={{
-                      background: 'linear-gradient(135deg, #a855f7, #6366f1)',
-                      color: '#fff',
-                      border: 'none',
-                      borderRadius: '6px',
-                      padding: '6px 12px',
-                      fontSize: '0.78rem',
-                      fontWeight: 600,
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {joining ? '...' : t('profile.addBtn')}
-                  </button>
-                </div>
-                {joinError && (
-                  <span style={{ fontSize: '0.7rem', color: '#f87171', marginTop: '2px' }}>{joinError}</span>
-                )}
-              </form>
-            )}
           </div>
         )}
       </div>
@@ -509,6 +526,100 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
       </div>
 
       <GlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      <AnimatePresence>
+        {showAddModal && (
+          <motion.div
+            className="modal-overlay"
+            onClick={() => setShowAddModal(false)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.14, ease: 'easeOut' } }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+          >
+            <motion.div
+              className="modal navbar-add-modal"
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, scale: 0.95, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 4, transition: { duration: 0.14, ease: 'easeOut' } }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <div className="modal-header">
+                <h2>{t('profile.addModalTitle')}</h2>
+                <button className="btn btn-ghost btn-icon" onClick={() => setShowAddModal(false)} aria-label="Close">
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="navbar-add-tabs">
+                <button
+                  type="button"
+                  className={`navbar-add-tab ${addTab === 'join' ? 'active' : ''}`}
+                  onClick={() => setAddTab('join')}
+                >
+                  <Users size={15} /> {t('profile.addTabJoinGroup')}
+                </button>
+                <button
+                  type="button"
+                  className={`navbar-add-tab ${addTab === 'courses' ? 'active' : ''}`}
+                  onClick={() => setAddTab('courses')}
+                >
+                  <BookOpen size={15} /> {t('profile.addTabCourses')}
+                </button>
+              </div>
+
+              <div className="modal-body">
+                {addTab === 'join' ? (
+                  <form onSubmit={handleJoinNewGroup} className="navbar-join-form">
+                    <div className="navbar-join-form-label">{t('profile.pinLabel')}</div>
+                    <div className="navbar-join-form-row">
+                      <input
+                        type="text"
+                        maxLength={6}
+                        placeholder="123456"
+                        value={pinCode}
+                        onChange={(e) => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
+                        className="navbar-join-form-input"
+                        autoFocus
+                      />
+                      <button type="submit" disabled={joining} className="navbar-join-form-submit">
+                        {joining ? '...' : t('profile.addBtn')}
+                      </button>
+                    </div>
+                    {joinError && <span className="navbar-join-form-error">{joinError}</span>}
+                  </form>
+                ) : (
+                  <div className="navbar-course-list">
+                    <p className="navbar-course-hint">{t('profile.coursesEmptyHint')}</p>
+                    {AVAILABLE_COURSES.map((course) => {
+                      const wordCount = course.data.months.flatMap((m) => m.units).flatMap((u) => u.words).length;
+                      const isStarting = startingCourseId === course.id;
+                      return (
+                        <div className="navbar-course-card" key={course.id}>
+                          <div className="navbar-course-icon">{course.icon}</div>
+                          <div className="navbar-course-info">
+                            <div className="navbar-course-title">{course.data.title}</div>
+                            <div className="navbar-course-meta">{t('profile.courseWordsCount', { count: wordCount })}</div>
+                          </div>
+                          <button
+                            type="button"
+                            className="navbar-course-start-btn"
+                            disabled={Boolean(startingCourseId)}
+                            onClick={() => handleStartCourse(course)}
+                          >
+                            {isStarting ? t('profile.startingCourse') : t('profile.startCourse')}
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
