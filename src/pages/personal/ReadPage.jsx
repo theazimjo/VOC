@@ -6,10 +6,13 @@ import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { scienceChapterText } from '../../data/scienceChapterText';
+import { healthChapterText } from '../../data/healthChapterText';
 import { toShortLangCode } from '../../utils/dictionaryService';
 import WordTapPopover from '../../components/Words/WordTapPopover';
 import IosSpinner from '../../components/common/IosSpinner';
 import './ReadPage.css';
+
+const chapterTextByTopic = { ...scienceChapterText, ...healthChapterText };
 
 function WordTokens({ text, onWordTap, knownWords }) {
   const segments = text.split(/(\{\{[^}]+\}\})/);
@@ -106,7 +109,7 @@ export default function ReadPage() {
     fetchPack();
   }, [packId, getPack, navigate]);
 
-  const chapter = scienceChapterText[topic];
+  const chapter = chapterTextByTopic[topic];
 
   const progressKey = `readProgress:${packId}:${topic}`;
   useEffect(() => {
