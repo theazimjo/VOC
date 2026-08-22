@@ -108,30 +108,25 @@ function ScrambledExercise({ question, answered, onAnswer }) {
   const [selected, setSelected] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
 
-  // Generate words from the correct answer to guarantee that all words are present
-  // and match the answer exactly.
+  // Generate words from the correct answer with unique IDs to handle duplicate words cleanly
   const [shuffledWords] = useState(() => {
     const rawAnswer = question.answer || '';
-    const wordsFromAnswer = rawAnswer.split(/\s+/).filter(Boolean).map(word => {
+    const wordsFromAnswer = rawAnswer.split(/\s+/).filter(Boolean).map((word, idx) => {
       // Remove trailing punctuation: .,?!
-      return word.replace(/[.,?!]+$/, "");
+      const cleanText = word.replace(/[.,?!]+$/, "");
+      return { id: idx, text: cleanText };
     });
     return [...wordsFromAnswer].sort(() => Math.random() - 0.5);
   });
 
-  const toggleWord = (word, fromSelected) => {
+  const handleSelectWord = (item) => {
     if (answered || isCorrect !== null) return;
-    if (fromSelected) {
-      setSelected(prev => {
-        const idx = prev.indexOf(word);
-        if (idx === -1) return prev;
-        const next = [...prev];
-        next.splice(idx, 1);
-        return next;
-      });
-    } else {
-      setSelected(prev => [...prev, word]);
-    }
+    setSelected(prev => [...prev, item]);
+  };
+
+  const handleRemoveWord = (item) => {
+    if (answered || isCorrect !== null) return;
+    setSelected(prev => prev.filter(w => w.id !== item.id));
   };
 
   const checkAnswer = () => {
@@ -144,7 +139,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
         .trim();
     };
 
-    const userAnswer = selected.join(' ');
+    const userAnswer = selected.map(w => w.text).join(' ');
     const correct = normalize(userAnswer) === normalize(question.answer || '');
     setIsCorrect(correct);
     onAnswer(correct);
@@ -159,9 +154,9 @@ function ScrambledExercise({ question, answered, onAnswer }) {
         {selected.length === 0 ? (
           <span className="scrambled-placeholder">{t('grammar.scrambledPlaceholder')}</span>
         ) : (
-          selected.map((w, i) => (
-            <button key={i} className="scrambled-word selected" onClick={() => toggleWord(w, true)}>
-              {w}
+          selected.map((item) => (
+            <button key={item.id} className="scrambled-word selected" onClick={() => handleRemoveWord(item)}>
+              {item.text}
             </button>
           ))
         )}
@@ -169,18 +164,16 @@ function ScrambledExercise({ question, answered, onAnswer }) {
 
       {/* Word bank */}
       <div className="scrambled-word-bank">
-        {shuffledWords.map((w, i) => {
-          const usedCount = selected.filter(s => s === w).length;
-          const totalCount = shuffledWords.filter(s => s === w).length;
-          const available = usedCount < totalCount;
+        {shuffledWords.map((item) => {
+          const isUsed = selected.some(s => s.id === item.id);
           return (
             <button
-              key={i}
-              className={`scrambled-word ${!available ? 'used' : ''}`}
-              onClick={() => available && toggleWord(w, false)}
-              disabled={!available}
+              key={item.id}
+              className={`scrambled-word ${isUsed ? 'used' : ''}`}
+              onClick={() => !isUsed && handleSelectWord(item)}
+              disabled={isUsed}
             >
-              {w}
+              {item.text}
             </button>
           );
         })}
