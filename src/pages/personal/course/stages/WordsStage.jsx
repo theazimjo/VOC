@@ -66,7 +66,10 @@ export default function WordsStage({ pack, unit }) {
         <button
           type="button"
           className="course-lesson-practice-btn"
-          onClick={() => navigate(`/practice/packs/${pack.id}?topic=${encodeURIComponent(unit.title)}`)}
+          onClick={() => navigate(
+            `/practice/packs/${pack.id}?topic=${encodeURIComponent(unit.title)}`,
+            { state: { pack } }
+          )}
         >
           {t('course.practiceUnit')}
         </button>

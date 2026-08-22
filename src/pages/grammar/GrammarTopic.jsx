@@ -5,6 +5,7 @@ import { russianGrammarData } from '../../data/russianGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { getQuestionsForExercise, getExerciseType } from '../../utils/grammarHelpers';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { getFormattedExplanation } from '../../utils/grammarExplanationTranslator';
 import './GrammarTopic.css';
 
 // ─── AUDIO + HAPTIC HELPERS ─────────────────────────────────────────────────
@@ -103,7 +104,7 @@ function ExitModal({ onConfirm, onCancel }) {
 }
 
 // ─── SCRAMBLED SENTENCE EXERCISE ────────────────────────────────────────────
-function ScrambledExercise({ question, answered, onAnswer }) {
+function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz' }) {
   const { t } = useLanguage();
   const [selected, setSelected] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
@@ -183,7 +184,7 @@ function ScrambledExercise({ question, answered, onAnswer }) {
       {isCorrect !== null && (
         <div className={`scrambled-result ${isCorrect ? 'correct' : 'wrong'}`}>
           {isCorrect ? t('grammar.correctBadge') : t('grammar.wrongBadge', { answer: question.answer })}
-          {question.explanation && <p className="scrambled-explanation">{question.explanation}</p>}
+          {question.explanation && <p className="scrambled-explanation">{getFormattedExplanation(question.explanation, guideLang)}</p>}
         </div>
       )}
 
@@ -201,8 +202,13 @@ function ScrambledExercise({ question, answered, onAnswer }) {
 export default function GrammarTopic() {
   const { level = 'beginner', topicId, exerciseId = '1' } = useParams();
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language: appLang } = useLanguage();
   const { saveGrammarResult } = useGrammarStats();
+
+  const manualGuideLang = localStorage.getItem('grammar_guide_manual_lang');
+  const activeGuideLang = (manualGuideLang === 'uz' || manualGuideLang === 'ru')
+    ? manualGuideLang
+    : (appLang === 'ru' ? 'ru' : 'uz');
 
   const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
                 russianGrammarData[level]?.topics?.find((t) => t.id === topicId);
@@ -408,7 +414,7 @@ export default function GrammarTopic() {
                     </span>
                   </div>
                   {a.explanation && (
-                    <p className="review-explanation">💡 {a.explanation}</p>
+                    <p className="review-explanation">💡 {getFormattedExplanation(a.explanation, activeGuideLang)}</p>
                   )}
                 </div>
               ))}
@@ -484,6 +490,7 @@ export default function GrammarTopic() {
           key={question.id || currentQ}
           question={question}
           answered={answered}
+          guideLang={activeGuideLang}
           onAnswer={(isCorrect) => {
             setAnswered(true);
             if (isCorrect) { playCorrectSound(); vibrate([50, 30, 50]); setScore(s => s + 1); }
@@ -541,7 +548,7 @@ export default function GrammarTopic() {
             {showExplanation ? t('grammar.hideExplanation') : t('grammar.showExplanation')}
           </button>
           {showExplanation && (
-            <p className="clean-explanation-text">{question.explanation}</p>
+            <p className="clean-explanation-text">{getFormattedExplanation(question.explanation, activeGuideLang)}</p>
           )}
         </div>
       )}

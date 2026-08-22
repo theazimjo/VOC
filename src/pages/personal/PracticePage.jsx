@@ -64,7 +64,7 @@ export default function PracticePage() {
     setSourceLoaded(false);
   }, [urlSourceType, urlSourceId]);
 
-  const { search } = useLocation();
+  const { search, state: locationState } = useLocation();
   const queryParams = new URLSearchParams(search);
   const querySubStep = queryParams.get('subStep');
   // The chapter/topic (if any) this practice session was started with - kept
@@ -80,8 +80,15 @@ export default function PracticePage() {
   useEffect(() => {
     if (sourceLoaded || !user) return; // Wait for user info to load before executing search and fetch
 
-    if (resolvedSourceType && urlSourceId && !packsLoading) {
-      const foundSource = packs.find(s => s.id === urlSourceId);
+    // A caller that already has the pack loaded (e.g. a course lesson stage,
+    // right after seeding/creating it) can hand it over directly via router
+    // state, instead of waiting on the global packs list — which can lag
+    // behind a pack that was only just created in this same session.
+    const statePack = locationState?.pack;
+    const passedDirectly = statePack && statePack.id === urlSourceId;
+
+    if (resolvedSourceType && urlSourceId && (passedDirectly || !packsLoading)) {
+      const foundSource = passedDirectly ? statePack : packs.find(s => s.id === urlSourceId);
       if (foundSource) {
         setStep('loading');
         setSelectedSource(foundSource);
@@ -147,7 +154,7 @@ export default function PracticePage() {
         navigate('/library');
       }
     }
-  }, [urlSourceType, resolvedSourceType, urlSourceId, packsLoading, packs, user, navigate, sourceLoaded, search]);
+  }, [urlSourceType, resolvedSourceType, urlSourceId, packsLoading, packs, user, navigate, sourceLoaded, search, locationState]);
 
   // Warn before closing tab during active practice
   useEffect(() => {
