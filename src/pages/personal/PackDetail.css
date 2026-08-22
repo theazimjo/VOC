@@ -160,6 +160,13 @@
   z-index: 1;
 }
 
+.ielts-topic-chip-pages {
+  font-size: 0.82em;
+  opacity: 0.82;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
 .pack-type-badge {
   display: inline-flex;
   align-items: center;

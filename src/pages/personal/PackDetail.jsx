@@ -12,6 +12,7 @@ import { findSourceMarketPack, getMissingMarketWords } from '../../utils/marketS
 import { playSound } from '../../utils/feedback';
 import { computeRetentionStats } from '../../utils/memoryEngine';
 import { getConfusionPairs } from '../../experiment/experimentDB';
+import { formatPageRange } from '../../utils/chapterPageRanges';
 import WordList from '../../components/Words/WordList';
 import PhotoWordExtractorModal from '../../components/Words/PhotoWordExtractorModal';
 import SpeedDialFAB from '../../components/Words/SpeedDialFAB';
@@ -23,7 +24,7 @@ export default function PackDetail() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { getPack, updatePack } = usePacks();
   const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
   const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
@@ -369,7 +370,7 @@ export default function PackDetail() {
                 <span className="btn-label-main">{t('packDetail.gamePractice')}</span>
                 {topicFilter && (
                   <span className="btn-label-topic" title={topicFilter}>
-                    {topicFilter}
+                    {topicFilter}{formatPageRange(topicFilter) ? ` (${formatPageRange(topicFilter)})` : ''}
                   </span>
                 )}
               </button>
@@ -436,20 +437,26 @@ export default function PackDetail() {
           >
             {t('packDetail.allTopics')}
           </button>
-          {topics.map(topic => (
-            <button
-              key={topic}
-              type="button"
-              className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
-              style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
-              onClick={() => setTopicFilter(topic)}
-            >
-              {topicMastery[topic] !== undefined && (
-                <span className="ielts-topic-chip-fill" aria-hidden="true" />
-              )}
-              <span className="ielts-topic-chip-label">{topic}</span>
-            </button>
-          ))}
+          {topics.map(topic => {
+            const pageRangeStr = formatPageRange(topic);
+            return (
+              <button
+                key={topic}
+                type="button"
+                className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
+                style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
+                onClick={() => setTopicFilter(topic)}
+              >
+                {topicMastery[topic] !== undefined && (
+                  <span className="ielts-topic-chip-fill" aria-hidden="true" />
+                )}
+                <span className="ielts-topic-chip-label">
+                  {topic}
+                  {pageRangeStr && <span className="ielts-topic-chip-pages"> ({pageRangeStr})</span>}
+                </span>
+              </button>
+            );
+          })}
         </div>
       )}
 
