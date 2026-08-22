@@ -816,6 +816,18 @@ export const translations = {
       themeSepia: 'Sepia warm mode',
       themeDark: 'Dark mode',
     },
+    course: {
+      tabDashboard: 'Dashboard',
+      tabLesson: 'Lesson',
+      tabVocabulary: 'Vocabulary',
+      missing: 'This course could not be found.',
+      noData: 'No course content available.',
+      wordsMastered: '{count} / {total} words mastered',
+      continueBtn: 'Continue',
+      allUnits: 'All Units',
+      practiceUnit: 'Practice This Unit',
+      manageWords: 'Manage words',
+    },
   },
 
   ru: {
@@ -1623,6 +1635,18 @@ export const translations = {
       themeSepia: 'Теплый режим (Сепия)',
       themeDark: 'Темный режим',
     },
+    course: {
+      tabDashboard: 'Обзор',
+      tabLesson: 'Урок',
+      tabVocabulary: 'Слова',
+      missing: 'Этот курс не найден.',
+      noData: 'Нет содержимого курса.',
+      wordsMastered: '{count} / {total} слов освоено',
+      continueBtn: 'Продолжить',
+      allUnits: 'Все темы',
+      practiceUnit: 'Практика по теме',
+      manageWords: 'Управлять словами',
+    },
   },
 
   uz: {
@@ -2429,6 +2453,18 @@ export const translations = {
       themeLight: "Yorug' rejim",
       themeSepia: "Iliq sepia rejimi",
       themeDark: "Qorong'u rejim",
+    },
+    course: {
+      tabDashboard: "Umumiy",
+      tabLesson: "Dars",
+      tabVocabulary: "So'zlar",
+      missing: "Bu kurs topilmadi.",
+      noData: "Kurs mazmuni mavjud emas.",
+      wordsMastered: "{count} / {total} ta so'z o'zlashtirildi",
+      continueBtn: "Davom etish",
+      allUnits: "Barcha mavzular",
+      practiceUnit: "Shu mavzuni mashq qilish",
+      manageWords: "So'zlarni boshqarish",
     },
   },
 };

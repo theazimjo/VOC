@@ -19,6 +19,10 @@ import { lazyWithRetry } from './utils/lazyWithRetry';
 const Dashboard = lazyWithRetry(() => import('./pages/personal/Dashboard'));
 const PackDetail = lazyWithRetry(() => import('./pages/personal/PackDetail'));
 const ReadPage = lazyWithRetry(() => import('./pages/personal/ReadPage'));
+const CourseLayout = lazyWithRetry(() => import('./pages/personal/course/CourseLayout'));
+const CourseDashboard = lazyWithRetry(() => import('./pages/personal/course/CourseDashboard'));
+const CourseLesson = lazyWithRetry(() => import('./pages/personal/course/CourseLesson'));
+const CourseVocabulary = lazyWithRetry(() => import('./pages/personal/course/CourseVocabulary'));
 const WordFormPage = lazyWithRetry(() => import('./pages/personal/WordFormPage'));
 const IeltsWordFormPage = lazyWithRetry(() => import('./pages/personal/IeltsWordFormPage'));
 const EnglishWordFormPage = lazyWithRetry(() => import('./pages/personal/EnglishWordFormPage'));
@@ -105,6 +109,11 @@ export default function App() {
                           the sidebar/topbar chrome doesn't eat into the page,
                           matching an actual book/e-reader view. */}
                       <Route path="/packs/:packId/read" element={<ReadPage />} />
+                      <Route path="/course/:packId" element={<CourseLayout />}>
+                        <Route index element={<CourseDashboard />} />
+                        <Route path="lesson" element={<CourseLesson />} />
+                        <Route path="vocabulary" element={<CourseVocabulary />} />
+                      </Route>
                       <Route element={<Layout />}>
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/library" element={<LibraryPage />} />

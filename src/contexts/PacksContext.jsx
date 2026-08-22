@@ -237,7 +237,8 @@ export function PacksProvider({ children }) {
         createdAt: new Date().toISOString(),
         wordCount: 0,
         ...(data.marketPackId ? { marketPackId: data.marketPackId } : {}),
-        ...(data.folderId ? { folderId: data.folderId } : {})
+        ...(data.folderId ? { folderId: data.folderId } : {}),
+        ...(data.courseId ? { courseId: data.courseId } : {})
       };
 
       // Written as one atomic multi-path update, alongside a server-clock

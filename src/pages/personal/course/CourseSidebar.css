@@ -1,0 +1,17 @@
+.course-sidebar-header {
+  gap: 10px;
+}
+
+.course-sidebar-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.course-sidebar-name {
+  font-size: var(--font-md);
+  font-weight: 700;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

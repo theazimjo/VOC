@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, Check, ArrowLeft, Sparkles, X, BookOpen, Users } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -8,19 +8,13 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useGroupMode } from '../../hooks/useGroupMode';
 import { usePacks } from '../../hooks/usePacks';
-import { ref, onValue, get, remove, push, update } from 'firebase/database';
+import { ref, onValue, get, remove } from 'firebase/database';
 import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
 import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
-import { BEGINNER_ENGLISH_PACK } from '../../data/beginnerEnglishCoursePack';
+import { AVAILABLE_COURSES } from '../../data/coursesCatalog';
 import GlobalSearch from '../common/GlobalSearch';
 import './Navbar.css';
-
-// Courses offered in the navbar's "Add" modal — ready-made packs a personal
-// user can start with one tap, alongside joining a teacher's group.
-const AVAILABLE_COURSES = [
-  { id: 'beginner-english', icon: '📘', data: BEGINNER_ENGLISH_PACK },
-];
 
 export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: layoutAppMode }) {
   const { user, logout } = useAuth();
@@ -32,8 +26,15 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const dropdownRef = useRef(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const { appMode, membership } = useGroupMode();
-  const { addPack, updatePack } = usePacks();
+  const { packs, addPack } = usePacks();
+  const myCourses = packs.filter((p) => p.courseId);
+  // A course has no global appMode of its own (see CourseSidebar — it's left
+  // only via this switcher, not stored state) — its "active" status is
+  // derived straight from the URL instead.
+  const activeCoursePackId = location.pathname.match(/^\/course\/([^/]+)/)?.[1] || null;
+  const activeCourse = activeCoursePackId ? myCourses.find((c) => c.id === activeCoursePackId) : null;
   const [showSwitcher, setShowSwitcher] = useState(false);
   const [memberships, setMemberships] = useState([]);
   const [pinCode, setPinCode] = useState('');
@@ -165,13 +166,14 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     setShowAddModal(true);
   };
 
+  // Creates the course's pack shell only — no ready-made word content yet
+  // (AVAILABLE_COURSES is empty for now; what goes into a started course is
+  // still to be decided).
   const handleStartCourse = async (course) => {
     if (!user || startingCourseId) return;
     setStartingCourseId(course.id);
     try {
-      const { title, level, description, months } = course.data;
-      const wordsList = months.flatMap(m => m.units).flatMap(u => u.words);
-
+      const { title, level, description } = course.data;
       const packId = await addPack({
         name: title,
         description: description || '',
@@ -179,40 +181,11 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
         level: (level || 'beginner').toLowerCase(),
         language: 'en-US',
         type: 'default',
+        courseId: course.id,
       });
-
-      const wordsRef = ref(db, `users/${user.uid}/words/${packId}`);
-      const wordUpdates = {};
-      wordsList.forEach((w) => {
-        const newWordRef = push(wordsRef);
-        wordUpdates[newWordRef.key] = {
-          word: w.word || '',
-          translation: w.translation || '',
-          definition: w.definition || '',
-          example: w.example || '',
-          notes: '',
-          partOfSpeech: w.partOfSpeech || 'noun',
-          synonyms: '',
-          collocations: '',
-          nounForm: '',
-          verbForm: '',
-          adjectiveForm: '',
-          adverbForm: '',
-          article: '',
-          topic: '',
-          addedAt: new Date().toISOString(),
-          mastery: 0,
-          interval: 0,
-          reviewCount: 0,
-          nextReview: null,
-          lastReviewed: null,
-        };
-      });
-      await update(wordsRef, wordUpdates);
-      await updatePack(packId, { wordCount: wordsList.length });
 
       setShowAddModal(false);
-      navigate(`/packs/${packId}`);
+      navigate(`/course/${packId}`);
     } catch (err) {
       console.error('Error starting course:', err);
     } finally {
@@ -313,7 +286,23 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
           onClick={() => setShowSwitcher(!showSwitcher)}
           className="navbar-group-switcher-btn"
         >
-          {appMode === 'individual' ? (
+          {activeCourse ? (
+            <div style={{
+              background: 'var(--bg-tertiary)',
+              color: 'var(--accent-1)',
+              width: '24px',
+              height: '24px',
+              minWidth: '24px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.8rem',
+              flexShrink: 0,
+            }}>
+              {activeCourse.icon || '📘'}
+            </div>
+          ) : appMode === 'individual' ? (
             <div style={{
               background: 'rgba(59, 130, 246, 0.15)',
               color: '#3b82f6',
@@ -348,7 +337,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
             </div>
           )}
           <span>
-            {appMode === 'individual' ? t('nav.personal') : (membership?.groupName || t('nav.group'))}
+            {activeCourse ? activeCourse.name : (appMode === 'individual' ? t('nav.personal') : (membership?.groupName || t('nav.group')))}
           </span>
           <ChevronDown size={12} style={{ color: 'var(--text-secondary)', transform: showSwitcher ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
         </button>
@@ -358,7 +347,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
           <div className="navbar-group-switcher-popover">
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {/* Personal Card */}
-              <div 
+              <div
                 onClick={handleSwitchToIndividual}
                 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer', width: '60px' }}
               >
@@ -371,17 +360,17 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: appMode === 'individual' ? '2px solid var(--accent-1)' : '1px solid var(--border)',
-                  boxShadow: appMode === 'individual' ? '0 0 10px var(--accent-1-dim)' : 'none'
+                  border: (!activeCourse && appMode === 'individual') ? '2px solid var(--accent-1)' : '1px solid var(--border)',
+                  boxShadow: (!activeCourse && appMode === 'individual') ? '0 0 10px var(--accent-1-dim)' : 'none'
                 }}>
                   <User size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: appMode === 'individual' ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
+                <span style={{ fontSize: '0.72rem', color: (!activeCourse && appMode === 'individual') ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: (!activeCourse && appMode === 'individual') ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
               </div>
 
               {/* Groups Cards */}
               {memberships.map((g) => {
-                const isActive = appMode === 'group' && g.groupId === membership?.groupId;
+                const isActive = !activeCourse && appMode === 'group' && g.groupId === membership?.groupId;
                 const badge = getGroupBadgeText(g);
                 return (
                   <div 
@@ -407,6 +396,37 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                     </div>
                     <span style={{ fontSize: '0.72rem', color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: isActive ? 700 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
                       {g.groupName}
+                    </span>
+                  </div>
+                );
+              })}
+
+              {/* Course Cards — packs started from the Add modal's Courses tab */}
+              {myCourses.map((c) => {
+                const isActive = activeCoursePackId === c.id;
+                return (
+                  <div
+                    key={c.id}
+                    onClick={() => { setShowSwitcher(false); if (!isActive) navigate(`/course/${c.id}`); }}
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer', width: '60px' }}
+                  >
+                    <div style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: 'var(--bg-tertiary)',
+                      color: 'var(--accent-1)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.3rem',
+                      border: isActive ? '2px solid var(--accent-1)' : '1px solid var(--border)',
+                      boxShadow: isActive ? '0 0 10px var(--accent-1-dim)' : 'none'
+                    }}>
+                      {c.icon || '📘'}
+                    </div>
+                    <span style={{ fontSize: '0.72rem', color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: isActive ? 700 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
+                      {c.name}
                     </span>
                   </div>
                 );

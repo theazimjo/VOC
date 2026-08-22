@@ -7,7 +7,7 @@ import { useWords } from '../../hooks/useWords';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { scienceChapterText } from '../../data/scienceChapterText';
 import { healthChapterText } from '../../data/healthChapterText';
-import { formatPageRange } from '../../utils/chapterPageRanges';
+import { formatPageRange, getTopicPageRangeInfo } from '../../utils/chapterPageRanges';
 import { toShortLangCode } from '../../utils/dictionaryService';
 import WordTapPopover from '../../components/Words/WordTapPopover';
 import IosSpinner from '../../components/common/IosSpinner';
@@ -196,7 +196,14 @@ export default function ReadPage() {
 
   const totalPages = chapter.pages.length;
   const isLastPage = pageIndex >= totalPages - 1;
-  const currentReadPage = pageIndex + 1;
+
+  const topicRange = getTopicPageRangeInfo(topic);
+  const currentReadPage = topicRange
+    ? Math.min(topicRange.start + pageIndex, topicRange.end)
+    : pageIndex + 1;
+  const displayTotalPages = topicRange
+    ? topicRange.end
+    : totalPages;
 
   return (
     <div className={`read-page-shell theme-${readerTheme}`}>
@@ -374,7 +381,7 @@ export default function ReadPage() {
             <div className="read-page-badge">{currentReadPage}</div>
             <div className="read-page-info">
               <span className="read-page-label">{t('read.pageLabel')}</span>
-              <span className="read-page-total">{t('read.ofPages', { total: totalPages })}</span>
+              <span className="read-page-total">{t('read.ofPages', { total: displayTotalPages })}</span>
             </div>
           </div>
 
