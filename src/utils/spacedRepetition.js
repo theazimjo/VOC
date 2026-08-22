@@ -127,10 +127,12 @@ export function applyReview(word = {}, options = {}) {
     if (!confirmedModes.includes(tag)) confirmedModes.push(tag);
   }
 
-  if (confirmedModes.length < MIN_CONFIRMED_MODES) {
+  const isConfirmed = activeRecallPasses >= 2 || confirmedModes.length >= MIN_CONFIRMED_MODES;
+
+  if (!isConfirmed) {
     // Never lower stability a word already had (e.g. legacy words reviewed
     // before this field existed) — only stop it from growing further past
-    // the ceiling until it earns confirmation from enough distinct angles.
+    // the ceiling until it earns confirmation from enough distinct angles or active recall passes.
     newStability = Math.min(newStability, Math.max(UNCONFIRMED_STABILITY_CAP, seedStability));
   }
 

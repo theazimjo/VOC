@@ -1,13 +1,15 @@
 // Lesson 1 content for "Essential 3000", sourced from Unit 1 of the real
 // book — "4000 Essential English Words 1" by Paul Nation (Compass
 // Publishing) — via pdftotext extraction of src/assets/data/essential
-// english 1.pdf. Words, their sentence definitions, example sentences, and
-// the "The Lion and the Rabbit" reading story + its comprehension questions
-// are transcribed from the book (question 5's answer choices were lost to
-// an OCR/layout gap in the source PDF, so those four options are original).
-// Uzbek translations are original (the book is English-only). The listening
-// dialogue is original narration written to reuse this unit's 20 target
-// words, since the book itself has no audio/listening component.
+// english 1.pdf. Words, their sentence definitions, example sentences, the
+// "The Lion and the Rabbit" reading story + its comprehension questions, and
+// the grammar-stage word exercises (definition matching + "which sentence
+// makes better sense") are transcribed from the book (question 5's reading
+// answer choices were lost to an OCR/layout gap in the source PDF, so those
+// four options are original). Uzbek translations are original (the book is
+// English-only). The listening dialogue is original narration written to
+// reuse this unit's 20 target words, since the book itself has no audio/
+// listening component.
 
 const lesson1Words = [
   { id: 'l1w1', word: 'afraid', translation: "qo'rqqan", definition: 'When someone is afraid, they feel fear.', example: 'The woman was afraid of what she saw.', partOfSpeech: 'adjective' },
@@ -31,6 +33,31 @@ const lesson1Words = [
   { id: 'l1w19', word: 'trick', translation: 'hiyla, aldov', definition: 'A trick is something you do to fool another person.', example: 'His card trick really surprised us.', partOfSpeech: 'noun' },
   { id: 'l1w20', word: 'well', translation: 'yaxshi', definition: 'You use well to say that something was done in a good way.', example: 'The couple can dance quite well.', partOfSpeech: 'adverb' },
 ];
+
+const lesson1Grammar = {
+  questions: [
+    { id: 1, text: 'Which word means "bad or hurting others"?', options: ['afraid', 'clever', 'cruel', 'hunt'], correct: 2 },
+    { id: 2, text: 'Which word means "at last or at the end"?', options: ['angry', 'clever', 'finally', 'reply'], correct: 2 },
+    { id: 3, text: 'Which word means "to try to fight or hurt"?', options: ['attack', 'middle', 'pleased', 'trick'], correct: 0 },
+    { id: 4, text: 'Which word means "to not let others see"?', options: ['agree', 'hide', 'safe', 'well'], correct: 1 },
+    { id: 5, text: 'Which word means "the lowest part"?', options: ['bottom', 'lot', 'moment', 'promise'], correct: 0 },
+    { id: 6, text: 'What does "angry" mean?', options: ['happy', 'low', 'mad', 'scared'], correct: 2 },
+    { id: 7, text: 'What does "moment" mean?', options: ['a hole with water in it', 'a short time', 'at the center', 'at the end'], correct: 1 },
+    { id: 8, text: 'What does "promise" mean?', options: ['to say "good job"', 'to say "I will"', 'to say "the end"', 'to say "maybe"'], correct: 1 },
+    { id: 9, text: 'What does "reply" mean?', options: ['to answer', 'to get to a place', 'to look for in order to kill', 'to try to fight or hurt'], correct: 0 },
+    { id: 10, text: 'What does "safe" mean?', options: ['fool', 'having much or many', 'not seen', 'not worried about being hurt'], correct: 3 },
+    { id: 11, text: 'Which sentence makes better sense?', options: ['A clever person can solve a puzzle easily.', 'When a plane arrives, it leaves the ground and goes into the sky.'], correct: 0 },
+    { id: 12, text: 'Which sentence makes better sense?', options: ['At noon, the sun is near the bottom of the sky.', 'If I break my brother\'s bike, he will be angry.'], correct: 1 },
+    { id: 13, text: 'Which sentence makes better sense?', options: ['It is easy to hide in a dark place.', 'Many kinds of fish are afraid of water.'], correct: 0 },
+    { id: 14, text: 'Which sentence makes better sense?', options: ['At night, your parents may say, "Hide your eyes and go to sleep."', 'Heavy things will go down to the bottom of the ocean.'], correct: 1 },
+    { id: 15, text: 'Which sentence makes better sense?', options: ['It is cruel to keep a dog in a small cage all day.', 'Your mother will be angry when you get good grades in school.'], correct: 0 },
+    { id: 16, text: 'Which sentence makes better sense?', options: ['Animals cannot hunt because they do not have hands.', 'It is a good idea to arrive early for class.'], correct: 1 },
+    { id: 17, text: 'Which sentence makes better sense?', options: ['People sometimes attack pictures to email messages.', 'Some people are afraid of spiders.'], correct: 1 },
+    { id: 18, text: 'Which sentence makes better sense?', options: ['A moment is like a second or two.', 'New shoes are usually not very comfortable or clever.'], correct: 0 },
+    { id: 19, text: 'Which sentence makes better sense?', options: ['Small animals do not usually attack big animals.', 'There are twelve moments in a year.'], correct: 0 },
+    { id: 20, text: 'Which sentence makes better sense?', options: ['A cruel person will try to help others at all times.', 'You can use a gun to hunt in the forest.'], correct: 1 },
+  ],
+};
 
 const lesson1Reading = {
   title: 'The Lion and the Rabbit',
@@ -67,7 +94,7 @@ const lesson1Reading = {
 
 const lesson1Listening = {
   title: 'Walking Home',
-  script: "Last night, Sarah was walking home alone. In the middle of the dark street, she suddenly felt afraid. She thought someone might attack her, so she decided to hide behind a car for a moment. After a moment, she realized it was only her clever cat, and she felt very pleased. She promised herself she would arrive home earlier next time.\n\nFinally, when she reached the bottom of her street, a lot of her neighbors were outside talking. One of them smiled and said, \"It's safer to walk with a friend.\" Sarah had to agree. She replied, \"You're right, that wasn't very clever of me.\"\n\nHer neighbor laughed. \"Don't be angry with yourself. It wasn't a trick, I really mean it.\" Sarah felt safe again as they walked home together, well past midnight, without needing to hunt for excuses. From then on, she never walked alone at night again.",
+  script: "Last night, Sarah was walking home alone. In the middle of the dark street, she suddenly felt afraid. She thought a cruel stranger might attack her, so she decided to hide behind a car for a moment. After a moment, she realized it was only her clever cat, and she felt very pleased. She promised herself she would arrive home earlier next time.\n\nFinally, when she reached the bottom of her street, a lot of her neighbors were outside talking. One of them smiled and said, \"It's safer to walk with a friend.\" Sarah had to agree. She replied, \"You're right, that wasn't very clever of me.\"\n\nHer neighbor laughed. \"Don't be angry with yourself. It wasn't a trick, I really mean it.\" Sarah felt safe again as they walked home together, well past midnight, without needing to hunt for excuses. From then on, she never walked alone at night again.",
   questions: [
     { id: 1, text: 'Where was Sarah walking when she felt afraid?', options: ['In the middle of a dark street', 'In a shopping mall', 'In her kitchen', 'At school'], correct: 0 },
     { id: 2, text: 'What was actually making the noise that scared Sarah?', options: ['A stranger', 'Her clever cat', 'Her neighbor', 'A dog'], correct: 1 },
@@ -86,6 +113,7 @@ export const essential3000Months = [
         id: 'essential-lesson-1',
         title: 'Lesson 1',
         words: lesson1Words,
+        grammar: lesson1Grammar,
         reading: lesson1Reading,
         listening: lesson1Listening,
       },

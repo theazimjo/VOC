@@ -130,6 +130,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
       confidence,
       responseTime,
       retrievalType: 'active_recall',
+      mode: 'spelling',
     });
 
     if (correct) {
@@ -223,6 +224,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
       confidence: inferConfidenceFromSpeed(responseTime, false),
       responseTime,
       retrievalType: 'active_recall',
+      mode: 'spelling',
     });
     setIncorrectCount(c => c + 1);
   };

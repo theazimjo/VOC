@@ -106,6 +106,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
         confidence: inferConfidenceFromSpeed(responseTime, true),
         responseTime,
         retrievalType: 'active_recall',
+        mode: 'pronounce',
       });
     } else {
       setStatus('wrong');
@@ -116,6 +117,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
         confidence: inferConfidenceFromSpeed(responseTime, false),
         responseTime,
         retrievalType: 'active_recall',
+        mode: 'pronounce',
       });
     }
   };
@@ -134,6 +136,7 @@ export default function PronounceGame({ words, onComplete, onUpdateWord, onAnswe
       confidence: inferConfidenceFromSpeed(responseTime, false),
       responseTime,
       retrievalType: 'active_recall',
+      mode: 'pronounce',
     });
   };
 

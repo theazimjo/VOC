@@ -117,6 +117,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
       confidence: inferConfidenceFromSpeed(responseTime, usesWord),
       responseTime,
       retrievalType: 'active_recall',
+      mode: 'sentence',
     });
 
     if (usesWord) setCorrectCount(c => c + 1);
@@ -139,6 +140,7 @@ export default function SentenceBuilder({ words, onComplete, onUpdateWord, onAns
       confidence: inferConfidenceFromSpeed(responseTime, false),
       responseTime,
       retrievalType: 'active_recall',
+      mode: 'sentence',
     });
     setIncorrectCount(c => c + 1);
   };

@@ -373,6 +373,8 @@ export const translations = {
       gridmatchDesc: 'Flip cards to pair each word with its translation - the grid grows the better you remember',
       pronounceTitle: 'Pronunciation Practice',
       pronounceDesc: 'Speak into the microphone to improve pronunciation',
+      sentenceTitle: 'Sentence Builder',
+      sentenceDesc: 'Write sentences using target words from memory',
       
       // Flashcard
       tapToFlip: 'Tap to flip card',
@@ -1212,6 +1214,8 @@ export const translations = {
       gridmatchDesc: 'Переворачивайте карточки, чтобы сопоставить слово с переводом',
       pronounceTitle: 'Практика произношения',
       pronounceDesc: 'Говорите в микрофон, чтобы улучшить произношение',
+      sentenceTitle: 'Составление предложений',
+      sentenceDesc: 'Составляйте предложения с изученными словами по памяти',
       
       // Flashcard
       tapToFlip: 'Нажмите, чтобы перевернуть',
@@ -2051,6 +2055,8 @@ export const translations = {
       gridmatchDesc: "So'z va tarjimani juftlash uchun kartalarni oching",
       pronounceTitle: "Talaffuz mashqi",
       pronounceDesc: "Talaffuzni yaxshilash uchun mikrofonga gapiring",
+      sentenceTitle: "Jumla tuzish",
+      sentenceDesc: "O'rganilgan so'zlar bilan xotiradan gaplar tuzing",
       
       // Flashcard
       tapToFlip: "Aylantirish uchun bosing",

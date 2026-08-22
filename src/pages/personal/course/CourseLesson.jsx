@@ -111,7 +111,7 @@ export default function CourseLesson() {
 
         {activeStage === 'words' && <WordsStage pack={pack} unit={unit} />}
         {activeStage === 'grammar' && (
-          <GrammarStage pack={pack} unit={unit} onComplete={(data) => markStageDone(unit.id, 'grammar', data)} />
+          <GrammarStage unit={unit} onComplete={(data) => markStageDone(unit.id, 'grammar', data)} />
         )}
         {activeStage === 'reading' && (
           <ReadingStage unit={unit} onComplete={(data) => markStageDone(unit.id, 'reading', data)} />
