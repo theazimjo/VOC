@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, Check, ArrowLeft, Sparkles, X, BookOpen, Users } from 'lucide-react';
+import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, ChevronRight, Plus, Check, ArrowLeft, Sparkles, X, BookOpen, Users } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
@@ -166,11 +166,20 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     setShowAddModal(true);
   };
 
-  // Creates the course's pack shell only — no ready-made word content yet
-  // (AVAILABLE_COURSES is empty for now; what goes into a started course is
-  // still to be decided).
+  // First tap creates the course's pack shell — no ready-made word content
+  // yet, just title/icon (what goes inside is still to be decided). Every
+  // tap after that just opens the one pack already created for it, instead
+  // of spawning a duplicate.
   const handleStartCourse = async (course) => {
     if (!user || startingCourseId) return;
+
+    const existing = myCourses.find((c) => c.courseId === course.id);
+    if (existing) {
+      setShowAddModal(false);
+      navigate(`/course/${existing.id}`);
+      return;
+    }
+
     setStartingCourseId(course.id);
     try {
       const { title, level, description } = course.data;
@@ -615,23 +624,24 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                     <div className="navbar-course-list">
                       <p className="navbar-course-hint">{t('profile.coursesEmptyHint')}</p>
                       {AVAILABLE_COURSES.map((course) => {
-                        const wordCount = course.data.months.flatMap((m) => m.units).flatMap((u) => u.words).length;
                         const isStarting = startingCourseId === course.id;
                         return (
-                          <div className="navbar-course-card" key={course.id}>
+                          <div
+                            className={`navbar-course-card ${startingCourseId ? 'disabled' : ''}`}
+                            key={course.id}
+                            onClick={() => handleStartCourse(course)}
+                            role="button"
+                            tabIndex={0}
+                          >
                             <div className="navbar-course-icon">{course.icon}</div>
                             <div className="navbar-course-info">
                               <div className="navbar-course-title">{course.data.title}</div>
-                              <div className="navbar-course-meta">{t('profile.courseWordsCount', { count: wordCount })}</div>
                             </div>
-                            <button
-                              type="button"
-                              className="navbar-course-start-btn"
-                              disabled={Boolean(startingCourseId)}
-                              onClick={() => handleStartCourse(course)}
-                            >
-                              {isStarting ? t('profile.startingCourse') : t('profile.startCourse')}
-                            </button>
+                            {isStarting ? (
+                              <span className="navbar-course-loading">{t('profile.startingCourse')}</span>
+                            ) : (
+                              <ChevronRight size={18} className="navbar-course-arrow" />
+                            )}
                           </div>
                         );
                       })}

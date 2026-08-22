@@ -13,6 +13,7 @@ export default function CourseDashboard() {
   const { t } = useLanguage();
   const { words } = useWords('packs', pack.id);
   const catalog = getCourseCatalog(pack.courseId);
+  const months = catalog?.data?.months || [];
 
   const wordsByUnit = useMemo(() => {
     const map = {};
@@ -29,17 +30,16 @@ export default function CourseDashboard() {
   };
 
   const firstIncompleteUnit = useMemo(() => {
-    if (!catalog) return null;
-    for (const month of catalog.data.months) {
+    for (const month of months) {
       for (const unit of month.units) {
         if (!isUnitDone(unit.title)) return unit;
       }
     }
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [catalog, wordsByUnit]);
+  }, [months, wordsByUnit]);
 
-  if (!catalog) {
+  if (!catalog || months.length === 0) {
     return <div className="course-empty">{t('course.noData')}</div>;
   }
 
@@ -70,7 +70,7 @@ export default function CourseDashboard() {
       )}
 
       <div className="course-months">
-        {catalog.data.months.map((month) => (
+        {months.map((month) => (
           <div className="course-month" key={month.id}>
             <div className="course-month-title">{month.title}</div>
             <div className="course-unit-list">

@@ -11,20 +11,20 @@ export default function CourseLesson() {
   const [searchParams, setSearchParams] = useSearchParams();
   const unitTitle = searchParams.get('unit');
   const catalog = getCourseCatalog(pack.courseId);
+  const months = catalog?.data?.months || [];
 
   const flatUnits = useMemo(() => {
-    if (!catalog) return [];
-    return catalog.data.months.flatMap((m) => m.units);
-  }, [catalog]);
+    return months.flatMap((m) => m.units);
+  }, [months]);
 
-  if (!catalog) {
+  if (!catalog || months.length === 0) {
     return <div className="course-empty">{t('course.noData')}</div>;
   }
 
   if (!unitTitle) {
     return (
       <div className="course-lesson-toc">
-        {catalog.data.months.map((month) => (
+        {months.map((month) => (
           <div className="course-month" key={month.id}>
             <div className="course-month-title">{month.title}</div>
             <div className="course-unit-list">

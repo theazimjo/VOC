@@ -455,6 +455,17 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--bg-glass);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.navbar-course-card:hover {
+  background: var(--bg-glass-hover);
+}
+
+.navbar-course-card.disabled {
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .navbar-course-icon {
@@ -483,25 +494,13 @@
   white-space: nowrap;
 }
 
-.navbar-course-meta {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  margin-top: 2px;
-}
-
-.navbar-course-start-btn {
+.navbar-course-arrow {
   flex-shrink: 0;
-  background: var(--accent-1);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 7px 14px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
+  color: var(--text-muted);
 }
 
-.navbar-course-start-btn:disabled {
-  opacity: 0.6;
-  cursor: default;
+.navbar-course-loading {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
 }

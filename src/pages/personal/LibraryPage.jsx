@@ -26,9 +26,13 @@ export default function LibraryPage() {
   const { t } = useLanguage();
   const { books, loading: booksLoading } = useBooks(); // Loaded strictly for automatic migration
   const {
-    packs, loading: packsLoading, addPack, updatePack, deletePack, allWords,
+    packs: allPacks, loading: packsLoading, addPack, updatePack, deletePack, allWords,
     folders, addFolder, updateFolder, deleteFolder
   } = usePacks();
+  // Course packs (started from the navbar's Add modal) live in their own
+  // section reached only via the navbar switcher — they don't belong in the
+  // regular Library list.
+  const packs = allPacks.filter((p) => !p.courseId);
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Tabs: 'library' (my packs) or 'market'
