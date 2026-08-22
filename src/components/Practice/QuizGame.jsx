@@ -13,15 +13,22 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
   const [selectedOption, setSelectedOption] = useState(null); // the chosen option text
   const [answered, setAnswered] = useState(false);            // explicit answered flag
   const [timedOut, setTimedOut] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(15);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
-  // Tracked via a ref (not the ticking timeLeft state) so the elapsed time
-  // is precise and unaffected by the 1s-granularity countdown or stale
-  // closures in the memoized handlers below.
+
   const questionStartRef = useRef(Date.now());
+  const nextTimeoutRef = useRef(null);
+  const correctCountRef = useRef(0);
+  const incorrectCountRef = useRef(0);
+  const isAdvancingRef = useRef(false);
 
   const currentWord = words[currentIndex];
+
+  // Reset advancing flag on question change
+  useEffect(() => {
+    isAdvancingRef.current = false;
+  }, [currentIndex]);
 
   // Report progress
   useEffect(() => {
@@ -73,10 +80,6 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
     questionStartRef.current = Date.now();
   }, [currentIndex, currentWord, words]);
 
-  const nextTimeoutRef = useRef(null);
-  const correctCountRef = useRef(0);
-  const incorrectCountRef = useRef(0);
-
   // Clear timeout on unmount
   useEffect(() => {
     return () => {
@@ -97,7 +100,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       setSelectedOption(null);
       setAnswered(false);
       setTimedOut(false);
-      setTimeLeft(15);
+      setTimeLeft(10);
       setOptions([]);
     } else {
       onComplete({
@@ -110,9 +113,9 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
 
   // Timer — only ticks when not yet answered
   useEffect(() => {
-    if (answered) return;
+    if (answered || isAdvancingRef.current) return;
     if (timeLeft <= 0) {
-      // Time's up — mark as wrong without selecting any option
+      isAdvancingRef.current = true;
       const responseTime = (Date.now() - questionStartRef.current) / 1000;
       setTimedOut(true);
       setAnswered(true);
@@ -127,7 +130,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
       });
       nextTimeoutRef.current = setTimeout(() => {
         handleNext();
-      }, 800);
+      }, 900);
       return;
     }
     const id = setTimeout(() => setTimeLeft(t => t - 1), 1000);
@@ -135,7 +138,8 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
   }, [timeLeft, answered, currentWord, onAnswer, onUpdateWord, handleNext]);
 
   const handleSelect = useCallback((option) => {
-    if (answered) return;
+    if (answered || isAdvancingRef.current) return;
+    isAdvancingRef.current = true;
 
     if (nextTimeoutRef.current) {
       clearTimeout(nextTimeoutRef.current);
@@ -170,16 +174,38 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
     }, delay);
   }, [answered, currentWord, onAnswer, onUpdateWord, handleNext]);
 
+  // Keyboard navigation: 1, 2, 3, 4 (and A, B, C, D)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+      if (answered || isAdvancingRef.current) return;
+
+      const key = e.key.toLowerCase();
+      let idx = -1;
+      if (key === '1' || key === 'a') idx = 0;
+      else if (key === '2' || key === 'b') idx = 1;
+      else if (key === '3' || key === 'c') idx = 2;
+      else if (key === '4' || key === 'd') idx = 3;
+
+      if (idx >= 0 && idx < options.length) {
+        e.preventDefault();
+        handleSelect(options[idx]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [answered, options, handleSelect]);
+
   if (!currentWord) return null;
 
   const isCorrectAnswer = selectedOption === currentWord.translation;
-  const isLast = currentIndex === words.length - 1;
 
   return (
     <div className="quiz-container">
       <div className="quiz-progress-label">
         <span>{currentIndex + 1} / {words.length}</span>
-        <span className={`quiz-timer ${timeLeft <= 4 ? 'danger' : timeLeft <= 8 ? 'warning' : ''}`}>
+        <span className={`quiz-timer ${timeLeft <= 3 ? 'danger' : timeLeft <= 6 ? 'warning' : ''}`}>
           {timeLeft}s
         </span>
       </div>
@@ -210,8 +236,8 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
             <div
               className="quiz-timer-fill"
               style={{
-                width: `${(timeLeft / 15) * 100}%`,
-                background: timeLeft <= 4 ? 'var(--error)' : timeLeft <= 8 ? 'var(--warning)' : 'var(--accent-3)'
+                width: `${(timeLeft / 10) * 100}%`,
+                background: timeLeft <= 3 ? 'var(--error)' : timeLeft <= 6 ? 'var(--warning)' : 'var(--accent-3)'
               }}
             />
           </div>
@@ -239,7 +265,7 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
               transition={{ delay: idx * 0.06 }}
               whileTap={!answered ? { scale: 0.97 } : {}}
             >
-              <span className="quiz-option-letter">{['A', 'B', 'C', 'D'][idx]}</span>
+              <span className="quiz-option-letter">{['1', '2', '3', '4'][idx]}</span>
               <span className="quiz-option-text">{opt}</span>
               {answered && state === 'correct' && <Check className="quiz-option-icon" size={18} strokeWidth={2.5} />}
               {answered && state === 'wrong'   && <X className="quiz-option-icon" size={18} strokeWidth={2.5} />}
@@ -248,29 +274,20 @@ export default function QuizGame({ words, onComplete, onUpdateWord, onAnswer, on
         })}
       </div>
 
-      {/* Fixed full-width bottom bar — always present, same as Spelling's, just swaps its content */}
+      {/* Fixed full-width bottom bar */}
       <div className={`quiz-bottom-bar ${answered ? (isCorrectAnswer && !timedOut ? 'correct' : 'wrong') : ''}`}>
         <div className="quiz-bottom-bar-inner">
           {!answered ? (
             <div className="quiz-feedback quiz-feedback-hint">{t('practice.selectCorrectHint')}</div>
           ) : (
-            <>
-              <div className="quiz-feedback">
-                {timedOut
-                  ? t('practice.timeUp', { answer: currentWord.translation })
-                  : isCorrectAnswer
-                    ? t('practice.greatSentence').split('!')[0] + '!'
-                    : t('practice.answerIs', { answer: currentWord.translation })
-                }
-              </div>
-              <button
-                type="button"
-                className="btn-quiz-next"
-                onClick={handleNext}
-              >
-                {isLast ? t('practice.resultsBtn') : t('practice.nextBtn')}
-              </button>
-            </>
+            <div className="quiz-feedback">
+              {timedOut
+                ? t('practice.timeUp', { answer: currentWord.translation })
+                : isCorrectAnswer
+                  ? t('practice.greatSentence').split('!')[0] + '!'
+                  : t('practice.answerIs', { answer: currentWord.translation })
+              }
+            </div>
           )}
         </div>
       </div>

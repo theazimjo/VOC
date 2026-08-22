@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, Check, ArrowLeft, Sparkles, X, BookOpen, Users } from 'lucide-react';
@@ -527,99 +528,102 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
 
       <GlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <AnimatePresence>
-        {showAddModal && (
-          <motion.div
-            className="modal-overlay"
-            onClick={() => setShowAddModal(false)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.14, ease: 'easeOut' } }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
-          >
+      {createPortal(
+        <AnimatePresence>
+          {showAddModal && (
             <motion.div
-              className="modal navbar-add-modal"
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.95, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 4, transition: { duration: 0.14, ease: 'easeOut' } }}
-              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              className="modal-overlay"
+              onClick={() => setShowAddModal(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.14, ease: 'easeOut' } }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
             >
-              <div className="modal-header">
-                <h2>{t('profile.addModalTitle')}</h2>
-                <button className="btn btn-ghost btn-icon" onClick={() => setShowAddModal(false)} aria-label="Close">
-                  <X size={18} />
-                </button>
-              </div>
+              <motion.div
+                className="modal navbar-add-modal"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 4, transition: { duration: 0.14, ease: 'easeOut' } }}
+                transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              >
+                <div className="modal-header">
+                  <h2>{t('profile.addModalTitle')}</h2>
+                  <button className="btn btn-ghost btn-icon" onClick={() => setShowAddModal(false)} aria-label="Close">
+                    <X size={18} />
+                  </button>
+                </div>
 
-              <div className="navbar-add-tabs">
-                <button
-                  type="button"
-                  className={`navbar-add-tab ${addTab === 'join' ? 'active' : ''}`}
-                  onClick={() => setAddTab('join')}
-                >
-                  <Users size={15} /> {t('profile.addTabJoinGroup')}
-                </button>
-                <button
-                  type="button"
-                  className={`navbar-add-tab ${addTab === 'courses' ? 'active' : ''}`}
-                  onClick={() => setAddTab('courses')}
-                >
-                  <BookOpen size={15} /> {t('profile.addTabCourses')}
-                </button>
-              </div>
+                <div className="navbar-add-tabs">
+                  <button
+                    type="button"
+                    className={`navbar-add-tab ${addTab === 'join' ? 'active' : ''}`}
+                    onClick={() => setAddTab('join')}
+                  >
+                    <Users size={15} /> {t('profile.addTabJoinGroup')}
+                  </button>
+                  <button
+                    type="button"
+                    className={`navbar-add-tab ${addTab === 'courses' ? 'active' : ''}`}
+                    onClick={() => setAddTab('courses')}
+                  >
+                    <BookOpen size={15} /> {t('profile.addTabCourses')}
+                  </button>
+                </div>
 
-              <div className="modal-body">
-                {addTab === 'join' ? (
-                  <form onSubmit={handleJoinNewGroup} className="navbar-join-form">
-                    <div className="navbar-join-form-label">{t('profile.pinLabel')}</div>
-                    <div className="navbar-join-form-row">
-                      <input
-                        type="text"
-                        maxLength={6}
-                        placeholder="123456"
-                        value={pinCode}
-                        onChange={(e) => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
-                        className="navbar-join-form-input"
-                        autoFocus
-                      />
-                      <button type="submit" disabled={joining} className="navbar-join-form-submit">
-                        {joining ? '...' : t('profile.addBtn')}
-                      </button>
-                    </div>
-                    {joinError && <span className="navbar-join-form-error">{joinError}</span>}
-                  </form>
-                ) : (
-                  <div className="navbar-course-list">
-                    <p className="navbar-course-hint">{t('profile.coursesEmptyHint')}</p>
-                    {AVAILABLE_COURSES.map((course) => {
-                      const wordCount = course.data.months.flatMap((m) => m.units).flatMap((u) => u.words).length;
-                      const isStarting = startingCourseId === course.id;
-                      return (
-                        <div className="navbar-course-card" key={course.id}>
-                          <div className="navbar-course-icon">{course.icon}</div>
-                          <div className="navbar-course-info">
-                            <div className="navbar-course-title">{course.data.title}</div>
-                            <div className="navbar-course-meta">{t('profile.courseWordsCount', { count: wordCount })}</div>
+                <div className="modal-body">
+                  {addTab === 'join' ? (
+                    <form onSubmit={handleJoinNewGroup} className="navbar-join-form">
+                      <div className="navbar-join-form-label">{t('profile.pinLabel')}</div>
+                      <div className="navbar-join-form-row">
+                        <input
+                          type="text"
+                          maxLength={6}
+                          placeholder="123456"
+                          value={pinCode}
+                          onChange={(e) => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
+                          className="navbar-join-form-input"
+                          autoFocus
+                        />
+                        <button type="submit" disabled={joining} className="navbar-join-form-submit">
+                          {joining ? '...' : t('profile.addBtn')}
+                        </button>
+                      </div>
+                      {joinError && <span className="navbar-join-form-error">{joinError}</span>}
+                    </form>
+                  ) : (
+                    <div className="navbar-course-list">
+                      <p className="navbar-course-hint">{t('profile.coursesEmptyHint')}</p>
+                      {AVAILABLE_COURSES.map((course) => {
+                        const wordCount = course.data.months.flatMap((m) => m.units).flatMap((u) => u.words).length;
+                        const isStarting = startingCourseId === course.id;
+                        return (
+                          <div className="navbar-course-card" key={course.id}>
+                            <div className="navbar-course-icon">{course.icon}</div>
+                            <div className="navbar-course-info">
+                              <div className="navbar-course-title">{course.data.title}</div>
+                              <div className="navbar-course-meta">{t('profile.courseWordsCount', { count: wordCount })}</div>
+                            </div>
+                            <button
+                              type="button"
+                              className="navbar-course-start-btn"
+                              disabled={Boolean(startingCourseId)}
+                              onClick={() => handleStartCourse(course)}
+                            >
+                              {isStarting ? t('profile.startingCourse') : t('profile.startCourse')}
+                            </button>
                           </div>
-                          <button
-                            type="button"
-                            className="navbar-course-start-btn"
-                            disabled={Boolean(startingCourseId)}
-                            onClick={() => handleStartCourse(course)}
-                          >
-                            {isStarting ? t('profile.startingCourse') : t('profile.startCourse')}
-                          </button>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </header>
   );
 }

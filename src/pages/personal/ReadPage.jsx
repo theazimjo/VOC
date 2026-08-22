@@ -200,6 +200,40 @@ export default function ReadPage() {
 
   return (
     <div className={`read-page-shell theme-${readerTheme}`}>
+      {/* Floating Side Navigation Arrows (Middle height beside text) */}
+      <button
+        type="button"
+        className={`read-side-arrow read-side-arrow-prev ${pageIndex === 0 ? 'disabled' : ''}`}
+        onClick={() => {
+          if (pageIndex > 0) {
+            setDirection(-1);
+            setPageIndex(i => i - 1);
+          }
+        }}
+        disabled={pageIndex === 0}
+        aria-label={t('read.prevPage')}
+        title={t('read.prevPage')}
+      >
+        <ChevronLeft size={22} strokeWidth={2.4} />
+      </button>
+
+      <button
+        type="button"
+        className="read-side-arrow read-side-arrow-next"
+        onClick={() => {
+          if (isLastPage) {
+            navigate(`/packs/${packId}?topic=${encodeURIComponent(topic)}`);
+          } else {
+            setDirection(1);
+            setPageIndex(i => i + 1);
+          }
+        }}
+        aria-label={isLastPage ? t('read.finishChapter') : t('read.nextPage')}
+        title={isLastPage ? t('read.finishChapter') : t('read.nextPage')}
+      >
+        {isLastPage ? <Check size={22} strokeWidth={2.4} /> : <ChevronRight size={22} strokeWidth={2.4} />}
+      </button>
+
       <div className="read-page">
         {/* Top Header */}
         <header className="read-header">
@@ -323,6 +357,19 @@ export default function ReadPage() {
 
         {/* Reader Footer Progress & Navigation */}
         <footer className="read-footer">
+          <div className="read-footer-nav read-footer-nav-prev">
+            <button
+              type="button"
+              className="read-nav-prev-btn"
+              onClick={() => { setDirection(-1); setPageIndex(i => i - 1); }}
+              disabled={pageIndex === 0}
+              style={{ opacity: pageIndex === 0 ? 0.3 : 1, pointerEvents: pageIndex === 0 ? 'none' : 'auto' }}
+              title={t('read.prevPage')}
+            >
+              <ChevronLeft size={16} /> <span>{t('read.prevPage')}</span>
+            </button>
+          </div>
+
           <div className="read-page-indicator">
             <div className="read-page-badge">{currentReadPage}</div>
             <div className="read-page-info">
@@ -331,18 +378,7 @@ export default function ReadPage() {
             </div>
           </div>
 
-          <div className="read-nav-actions">
-            {pageIndex > 0 && (
-              <button
-                type="button"
-                className="read-nav-prev-btn"
-                onClick={() => { setDirection(-1); setPageIndex(i => i - 1); }}
-                title={t('read.prevPage')}
-              >
-                <ChevronLeft size={16} /> {t('read.prevPage')}
-              </button>
-            )}
-
+          <div className="read-footer-nav read-footer-nav-next">
             {isLastPage ? (
               <button
                 type="button"
