@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { grammarData } from '../../data/grammarData';
+import { russianGuidesData } from '../../data/russianGuidesData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
@@ -176,6 +177,18 @@ export default function GrammarPage() {
               const topicStats = grammarStats?.topics?.[topic.id];
               const completedExCount = topicStats?.exercises ? Object.keys(topicStats.exercises).length : 0;
 
+              const activeGuideLang = localStorage.getItem('grammar_guide_lang') || 'uz';
+              const rawGuide = (activeGuideLang === 'ru' && russianGuidesData[topic.id])
+                ? russianGuidesData[topic.id]
+                : (topic.guide || topic.description || '');
+
+              const cleanSnippet = rawGuide
+                .replace(/#+\s*/g, '')
+                .replace(/\*+/g, '')
+                .replace(/💡\s*/g, '')
+                .replace(/\n+/g, ' ')
+                .trim();
+
               return (
                 <motion.div
                   key={topic.id}
@@ -196,9 +209,7 @@ export default function GrammarPage() {
                   <div className="card-body">
                     <h3 className="topic-card-title">{topic.title}</h3>
                     <p className="topic-card-desc">
-                      {topic.guide
-                        ? topic.guide.slice(0, 80) + (topic.guide.length > 80 ? '…' : '')
-                        : topic.description ?? ''}
+                      {cleanSnippet.slice(0, 90) + (cleanSnippet.length > 90 ? '…' : '')}
                     </p>
                   </div>
                   <div className="topic-card-meta">
