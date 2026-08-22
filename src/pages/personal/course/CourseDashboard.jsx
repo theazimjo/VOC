@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import { Check, ChevronRight } from 'lucide-react';
 import { useWords } from '../../../hooks/useWords';
+import { useLessonProgress } from '../../../hooks/useLessonProgress';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { getCourseCatalog } from '../../../data/coursesCatalog';
 
@@ -12,32 +13,23 @@ export default function CourseDashboard() {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { words } = useWords('packs', pack.id);
+  const { progress } = useLessonProgress(pack.id);
   const catalog = getCourseCatalog(pack.courseId);
   const months = catalog?.data?.months || [];
 
-  const wordsByUnit = useMemo(() => {
-    const map = {};
-    words.forEach((w) => {
-      if (!w.topic) return;
-      (map[w.topic] = map[w.topic] || []).push(w);
-    });
-    return map;
-  }, [words]);
-
-  const isUnitDone = (unitTitle) => {
-    const unitWords = wordsByUnit[unitTitle] || [];
-    return unitWords.length > 0 && unitWords.every((w) => (w.mastery || 0) >= MASTERY_DONE_THRESHOLD);
-  };
+  // A unit is only fully done once its last stage (Listening) is passed —
+  // word mastery alone just unlocks Grammar, see CourseLesson's gating.
+  const isUnitDone = (unit) => Boolean(progress?.[unit.id]?.listening?.done);
 
   const firstIncompleteUnit = useMemo(() => {
     for (const month of months) {
       for (const unit of month.units) {
-        if (!isUnitDone(unit.title)) return unit;
+        if (!isUnitDone(unit)) return unit;
       }
     }
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [months, wordsByUnit]);
+  }, [months, progress]);
 
   if (!catalog || months.length === 0) {
     return <div className="course-empty">{t('course.noData')}</div>;
@@ -75,7 +67,7 @@ export default function CourseDashboard() {
             <div className="course-month-title">{month.title}</div>
             <div className="course-unit-list">
               {month.units.map((unit) => {
-                const done = isUnitDone(unit.title);
+                const done = isUnitDone(unit);
                 return (
                   <div
                     className={`course-unit-row ${done ? 'done' : ''}`}

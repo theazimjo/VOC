@@ -1,3 +1,5 @@
+import { essential3000Months } from './essential3000';
+
 // Ready-made courses offered from the navbar's "Add" modal. Each entry maps
 // a stable `id` (persisted on the personal pack as `courseId` once started)
 // to the data that powers the course's Dashboard/Lesson/Vocabulary pages at
@@ -11,6 +13,7 @@ export const AVAILABLE_COURSES = [
       title: 'Essential 3000',
       level: 'Intermediate',
       description: '',
+      months: essential3000Months,
     },
   },
 ];
