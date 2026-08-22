@@ -344,19 +344,19 @@ export default function PackDetail() {
                 className="btn btn-cards"
                 onClick={() => { saveScrollPosition(); navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=study`); }}
               >
-                {t('packDetail.flashcards')}
+                <span className="btn-label-main">{t('packDetail.flashcards')}</span>
               </button>
               <button
                 className="btn btn-primary btn-mashq"
                 onClick={() => { saveScrollPosition(); navigate(`/practice/packs/${packId}?mode=irregular-verbs&subStep=practice&count=10`); }}
               >
-                {t('packDetail.practice')}
+                <span className="btn-label-main">{t('packDetail.practice')}</span>
               </button>
             </>
           ) : (
             <>
               <button
-                className="btn btn-primary btn-mashq"
+                className={`btn btn-primary btn-mashq ${topicFilter ? 'has-topic' : ''}`}
                 onClick={() => {
                   saveScrollPosition();
                   navigate(
@@ -366,7 +366,12 @@ export default function PackDetail() {
                   );
                 }}
               >
-                {t('packDetail.gamePractice')}{topicFilter ? ` (${topicFilter})` : ''}
+                <span className="btn-label-main">{t('packDetail.gamePractice')}</span>
+                {topicFilter && (
+                  <span className="btn-label-topic" title={topicFilter}>
+                    {topicFilter}
+                  </span>
+                )}
               </button>
               {pack.type === 'science' && topicFilter && (
                 <button
@@ -376,7 +381,7 @@ export default function PackDetail() {
                     navigate(`/packs/${packId}/read?topic=${encodeURIComponent(topicFilter)}`);
                   }}
                 >
-                  {t('packDetail.read')}
+                  <span className="btn-label-main">{t('packDetail.read')}</span>
                 </button>
               )}
             </>
