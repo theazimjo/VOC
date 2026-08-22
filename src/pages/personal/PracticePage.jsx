@@ -72,8 +72,15 @@ export default function PracticePage() {
   // instead of resetting to "All" (PackDetail derives its filter from this
   // same query param).
   const topicParam = queryParams.get('topic');
+  // A course pack (courseId set) has no PackDetail page of its own — sending
+  // "back"/"done" there would land on the generic word-list page instead of
+  // where the session actually started, so course sessions return to their
+  // lesson's Words stage instead.
+  const isCourseSession = Boolean(locationState?.pack?.courseId);
   const packDetailPath = urlSourceId
-    ? `/packs/${urlSourceId}${topicParam ? `?topic=${encodeURIComponent(topicParam)}` : ''}`
+    ? (isCourseSession
+        ? `/course/${urlSourceId}/lesson?unit=${encodeURIComponent(topicParam || '')}&stage=words`
+        : `/packs/${urlSourceId}${topicParam ? `?topic=${encodeURIComponent(topicParam)}` : ''}`)
     : null;
 
   // Load parameterized source if available
