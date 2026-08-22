@@ -32,7 +32,7 @@ const headerVariants = {
 
 export default function GrammarPage() {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language: appLang } = useLanguage();
   const [activeLevel, setActiveLevelState] = useState(() => {
     return localStorage.getItem('grammar_level') || 'beginner';
   });
@@ -177,7 +177,10 @@ export default function GrammarPage() {
               const topicStats = grammarStats?.topics?.[topic.id];
               const completedExCount = topicStats?.exercises ? Object.keys(topicStats.exercises).length : 0;
 
-              const activeGuideLang = localStorage.getItem('grammar_guide_lang') || 'uz';
+              const manualGuideLang = localStorage.getItem('grammar_guide_manual_lang');
+              const activeGuideLang = (manualGuideLang === 'uz' || manualGuideLang === 'ru')
+                ? manualGuideLang
+                : (appLang === 'ru' ? 'ru' : 'uz');
               const rawGuide = (activeGuideLang === 'ru' && russianGuidesData[topic.id])
                 ? russianGuidesData[topic.id]
                 : (topic.guide || topic.description || '');

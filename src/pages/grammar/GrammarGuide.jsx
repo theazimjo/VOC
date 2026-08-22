@@ -11,15 +11,24 @@ import './GrammarGuide.css';
 export default function GrammarGuide() {
   const { level = 'beginner', topicId } = useParams();
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language: appLang } = useLanguage();
 
   const [guideLang, setGuideLangState] = useState(() => {
-    return localStorage.getItem('grammar_guide_lang') || 'uz';
+    const manual = localStorage.getItem('grammar_guide_manual_lang');
+    if (manual === 'uz' || manual === 'ru') return manual;
+    return appLang === 'ru' ? 'ru' : 'uz';
   });
+
+  useEffect(() => {
+    const manual = localStorage.getItem('grammar_guide_manual_lang');
+    if (!manual) {
+      setGuideLangState(appLang === 'ru' ? 'ru' : 'uz');
+    }
+  }, [appLang]);
 
   const setGuideLang = (lang) => {
     setGuideLangState(lang);
-    localStorage.setItem('grammar_guide_lang', lang);
+    localStorage.setItem('grammar_guide_manual_lang', lang);
   };
 
   const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
