@@ -90,11 +90,9 @@ export default function WordsStage({ pack, unit }) {
                 {w.example && <div className="course-lesson-example">{w.example}</div>}
               </div>
               <div className="course-word-mastery-ring" style={{ '--pct': mastery }}>
-                {mastered && (
-                  <span className="course-word-mastery-ring-inner">
-                    <Check size={14} strokeWidth={3} />
-                  </span>
-                )}
+                <span className="course-word-mastery-ring-inner">
+                  {mastered ? <Check size={14} strokeWidth={3} /> : (mastery > 0 ? `${mastery}%` : '')}
+                </span>
               </div>
             </div>
           );
