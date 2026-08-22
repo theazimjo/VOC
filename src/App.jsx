@@ -113,6 +113,7 @@ export default function App() {
                         <Route index element={<CourseDashboard />} />
                         <Route path="lesson" element={<CourseLesson />} />
                         <Route path="vocabulary" element={<CourseVocabulary />} />
+                        <Route path="practice" element={<PracticePage />} />
                       </Route>
                       <Route element={<Layout />}>
                         <Route path="/" element={<Dashboard />} />

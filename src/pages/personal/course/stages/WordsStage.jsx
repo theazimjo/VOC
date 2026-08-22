@@ -1,8 +1,8 @@
-import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import { Check } from 'lucide-react';
 import { useWords } from '../../../../hooks/useWords';
 import { useLanguage } from '../../../../contexts/LanguageContext';
+import PracticePage from '../../PracticePage';
 
 const MASTERY_DONE_THRESHOLD = 80;
 
@@ -11,23 +11,55 @@ const MASTERY_DONE_THRESHOLD = 80;
 // engine and practice modes just work — this stage is "done" once every
 // word in the unit has crossed the mastery threshold.
 export default function WordsStage({ pack, unit }) {
-  const navigate = useNavigate();
   const { t } = useLanguage();
-  const { words, loading, bulkAddWords } = useWords('packs', pack.id);
+  const { words, loading, bulkAddWords, deleteWord } = useWords('packs', pack.id);
   const seedAttempted = useRef(false);
+  const [showPractice, setShowPractice] = useState(false);
 
   const unitWords = words.filter((w) => w.topic === unit.title);
 
+  // Reconciles the topic's seeded words with the unit's current word list
+  // once per mount — deletes stale words (e.g. leftover placeholder content
+  // from before real book content was wired in) and adds any missing ones,
+  // instead of only seeding when the topic is completely empty.
   useEffect(() => {
     if (loading || seedAttempted.current) return;
-    if (unitWords.length > 0) return;
     seedAttempted.current = true;
-    bulkAddWords(unit.words.map((w) => ({ ...w, topic: unit.title })));
+
+    const expectedWords = new Set(unit.words.map((w) => w.word.toLowerCase()));
+    const staleWords = unitWords.filter((w) => !expectedWords.has((w.word || '').toLowerCase()));
+    const existingWords = new Set(unitWords.map((w) => (w.word || '').toLowerCase()));
+    const missingWords = unit.words.filter((w) => !existingWords.has(w.word.toLowerCase()));
+
+    staleWords.forEach((w) => deleteWord(w.id));
+    if (missingWords.length > 0) {
+      bulkAddWords(missingWords.map((w) => ({ ...w, topic: unit.title })));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, unitWords.length]);
 
   const masteredCount = unitWords.filter((w) => (w.mastery || 0) >= MASTERY_DONE_THRESHOLD).length;
   const allMastered = unitWords.length > 0 && masteredCount === unitWords.length;
+
+  const handlePracticeClick = async () => {
+    if (unitWords.length === 0 && unit.words && unit.words.length > 0) {
+      await bulkAddWords(unit.words.map((w) => ({ ...w, topic: unit.title })));
+    }
+    setShowPractice(true);
+  };
+
+  if (showPractice) {
+    return (
+      <div className="course-stage-view">
+        <PracticePage
+          embedded={true}
+          initialSource={pack}
+          initialTopic={unit.title}
+          onExit={() => setShowPractice(false)}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="course-stage-view">
@@ -66,10 +98,7 @@ export default function WordsStage({ pack, unit }) {
         <button
           type="button"
           className="course-lesson-practice-btn"
-          onClick={() => navigate(
-            `/practice/packs/${pack.id}?topic=${encodeURIComponent(unit.title)}`,
-            { state: { pack } }
-          )}
+          onClick={handlePracticeClick}
         >
           {t('course.practiceUnit')}
         </button>

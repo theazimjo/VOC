@@ -29,8 +29,9 @@ import SpeedGame, { getSpeedRecord } from '../../components/Practice/SpeedGame';
 import GridMatchGame from '../../components/Practice/GridMatchGame';
 import './PracticePage.css';
 
-export default function PracticePage() {
-  const { sourceType: urlSourceType, sourceId: urlSourceId } = useParams();
+export default function PracticePage({ embedded = false, initialSource = null, initialTopic = null, onExit = null }) {
+  const { sourceType: urlSourceType, sourceId: urlSourceIdParam, packId: routePackId } = useParams();
+  const urlSourceId = initialSource?.id || urlSourceIdParam || routePackId;
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -71,12 +72,18 @@ export default function PracticePage() {
   // so navigating back to PackDetail returns to the same chapter filter
   // instead of resetting to "All" (PackDetail derives its filter from this
   // same query param).
-  const topicParam = queryParams.get('topic');
+  const topicParam = initialTopic || queryParams.get('topic');
   // A course pack (courseId set) has no PackDetail page of its own — sending
   // "back"/"done" there would land on the generic word-list page instead of
   // where the session actually started, so course sessions return to their
   // lesson's Words stage instead.
-  const isCourseSession = Boolean(locationState?.pack?.courseId);
+  const isCourseSession = Boolean(
+    embedded ||
+    routePackId ||
+    locationState?.pack?.courseId ||
+    selectedSource?.courseId ||
+    (urlSourceId && packs.find((s) => s.id === urlSourceId)?.courseId)
+  );
   const packDetailPath = urlSourceId
     ? (isCourseSession
         ? `/course/${urlSourceId}/lesson?unit=${encodeURIComponent(topicParam || '')}&stage=words`
@@ -91,11 +98,11 @@ export default function PracticePage() {
     // right after seeding/creating it) can hand it over directly via router
     // state, instead of waiting on the global packs list — which can lag
     // behind a pack that was only just created in this same session.
-    const statePack = locationState?.pack;
-    const passedDirectly = statePack && statePack.id === urlSourceId;
+    const statePack = initialSource || locationState?.pack;
+    const passedDirectly = Boolean(statePack && statePack.id === urlSourceId);
 
-    if (resolvedSourceType && urlSourceId && (passedDirectly || !packsLoading)) {
-      const foundSource = passedDirectly ? statePack : packs.find(s => s.id === urlSourceId);
+    if (initialSource || (resolvedSourceType && urlSourceId && (passedDirectly || !packsLoading))) {
+      const foundSource = initialSource || (passedDirectly ? statePack : packs.find(s => s.id === urlSourceId));
       if (foundSource) {
         setStep('loading');
         setSelectedSource(foundSource);
@@ -117,15 +124,19 @@ export default function PracticePage() {
           // was pressed with a chapter filter active (see PackDetail's topic
           // chips) - "All" omits this param and practices the whole pack.
           const queryParams = new URLSearchParams(search);
-          const queryTopic = queryParams.get('topic');
+          const queryTopic = initialTopic || queryParams.get('topic');
           if (queryTopic) {
             words = words.filter(w => w.topic === queryTopic);
           }
 
           if (words.length === 0) {
+            const fallbackPath = packDetailPath || (foundSource.courseId ? `/course/${urlSourceId}` : `/packs/${urlSourceId}`);
             showAlert(
               queryTopic ? "This chapter has no words!" : "This pack has no words! Add some words first.",
-              () => navigate(`/packs/${urlSourceId}`)
+              () => {
+                if (onExit) onExit();
+                else navigate(fallbackPath);
+              }
             );
             return;
           }
@@ -158,10 +169,12 @@ export default function PracticePage() {
         };
         fetchWords();
       } else {
-        navigate('/library');
+        const isCourse = packs.find(s => s.id === urlSourceId)?.courseId;
+        if (onExit) onExit();
+        else navigate(isCourse ? `/course/${urlSourceId}` : '/library');
       }
     }
-  }, [urlSourceType, resolvedSourceType, urlSourceId, packsLoading, packs, user, navigate, sourceLoaded, search, locationState]);
+  }, [urlSourceType, resolvedSourceType, urlSourceId, packsLoading, packs, user, navigate, sourceLoaded, search, locationState, packDetailPath, initialSource, initialTopic, onExit]);
 
   // Warn before closing tab during active practice
   useEffect(() => {
@@ -321,15 +334,21 @@ export default function PracticePage() {
     incrementActivity(resultData.totalWords || 1);
   };
 
+  const exitSession = () => {
+    if (onExit) {
+      onExit();
+    } else if (packDetailPath) {
+      navigate(packDetailPath);
+    } else {
+      setStep('source');
+    }
+  };
+
   const handleBack = () => {
     if (step === 'practice' || step === 'intro') {
       showConfirm(t('practice.confirmLeave'), () => {
         if (selectedSource?.name === 'Irregular Verbs') {
-          if (packDetailPath) {
-            navigate(packDetailPath);
-          } else {
-            setStep('source');
-          }
+          exitSession();
         } else {
           setStep('mode');
         }
@@ -338,19 +357,11 @@ export default function PracticePage() {
     }
 
     if (step === 'mode') {
-      if (packDetailPath) {
-        navigate(packDetailPath);
-      } else {
-        setStep('source');
-      }
+      exitSession();
     }
     else if (step === 'results') {
       if (selectedSource?.name === 'Irregular Verbs') {
-        if (packDetailPath) {
-          navigate(packDetailPath);
-        } else {
-          setStep('source');
-        }
+        exitSession();
       } else {
         setStep('mode');
       }
