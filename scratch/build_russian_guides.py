@@ -1,5 +1,12 @@
-export const russianGuidesData = {
-  'sentence-structure': `## Normal Sentence Structure (Обычная структура предложения)
+import json
+import re
+
+# We will define precise, rich Russian translations matching the 4-section structure of each Uzbek guide
+
+russian_guides = {}
+
+# 1. sentence-structure
+russian_guides['sentence-structure'] = """## Normal Sentence Structure (Обычная структура предложения)
 
 В английском языке порядок слов **строгий**: Подлежащее (Subject) + Глагол (Verb) + Дополнение (Object). В отличие от русского языка, где слова можно свободно менять местами, в английском порядок слов почти всегда один и тот же!
 
@@ -34,9 +41,10 @@ export const russianGuidesData = {
   - I **go** to school every day. *(Я хожу в школу каждый день.)*
   - My sister **studies** medicine. *(Моя сестра изучает медицину.)*
   - We **play** tennis on Sundays. *(Мы играем в теннис по воскресеньям.)*
-  - The children **play** in the garden. *(Дети играют в саду.)*`,
+  - The children **play** in the garden. *(Дети играют в саду.)*"""
 
-  'pronouns': `## Pronouns (Местоимения)
+# 2. pronouns
+russian_guides['pronouns'] = """## Pronouns (Местоимения)
 
 Местоимение — это слово, которое употребляется вместо существительного, чтобы избежать повторяющихся слов.
 
@@ -65,9 +73,10 @@ export const russianGuidesData = {
 ## 4. Важные правила
 1. **Избежание повторов**: местоимения заменяют ранее упомянутые существительные.
 2. **Род и число**: выбирайте местоимение строго по роду и числу объекта.
-3. **Правило "It"**: для предметов и животных используется "It" (если пол не важен).`,
+3. **Правило "It"**: для предметов и животных используется "It" (если пол не важен)."""
 
-  'personal-pronouns': `## Personal Pronouns (Личные местоимения)
+# 3. personal-pronouns
+russian_guides['personal-pronouns'] = """## Personal Pronouns (Личные местоимения)
 
 Личные местоимения выполняют функцию подлежащего в предложении.
 
@@ -93,9 +102,10 @@ export const russianGuidesData = {
 1. **Местоимение "I"**: всегда пишется с заглавной буквы!
 2. **Форма "You"**: одинакова для единственного и множественного числа.
 3. **Выбор рода**: "He" — мужчина, "She" — женщина, "It" — предмет или животное.
-4. **Окончание глагола**: в 3-м лице единственного числа в Present Simple добавляется -s/-es.`,
+4. **Окончание глагола**: в 3-м лице единственного числа в Present Simple добавляется -s/-es."""
 
-  'object-pronouns': `## Object Pronouns (Объектные местоимения)
+# 4. object-pronouns
+russian_guides['object-pronouns'] = """## Object Pronouns (Объектные местоимения)
 
 Объектные местоимения стоят после глагола или предлога и указывают на объект, на который направлено действие (кого? кому? кем? о ком?).
 
@@ -126,9 +136,10 @@ export const russianGuidesData = {
 *(Личные местоимения (I, they) НЕЛЬЗЯ использовать на месте дополнения — вместо них нужны me, them)*
   - ❌ She loves I. ➔ ✅ She loves **me**.
   - ❌ Tell I the truth. ➔ ✅ Tell **me** the truth.
-  - ❌ Give it to they. ➔ ✅ Give it to **them**.`,
+  - ❌ Give it to they. ➔ ✅ Give it to **them**."""
 
-  'possessive-pronouns': `## Possessive Pronouns (Притяжательные местоимения)
+# 5. possessive-pronouns
+russian_guides['possessive-pronouns'] = """## Possessive Pronouns (Притяжательные местоимения)
 
 Притяжательные местоимения указывают на принадлежность предмета и употребляются вместо существительного.
 
@@ -157,9 +168,10 @@ export const russianGuidesData = {
 
 ## 4. Важное правило
 *(Притяжательные местоимения никогда не пишутся с апострофом)*
-  - ❌ it's *(это сокращение от "it is")* ➔ ✅ **its** *(это притяжательное прилагательное)*`,
+  - ❌ it's *(это сокращение от "it is")* ➔ ✅ **its** *(это притяжательное прилагательное)*"""
 
-  'reflexive-pronouns': `## Reflexive Pronouns (Возвратные местоимения)
+# 6. reflexive-pronouns
+russian_guides['reflexive-pronouns'] = """## Reflexive Pronouns (Возвратные местоимения)
 
 Возвратные местоимения используются, когда действие субъекта направлено на него самого (себя / сам).
 
@@ -187,9 +199,10 @@ export const russianGuidesData = {
 ## 3. Примеры
   - Be careful, don't hurt **yourself**. *(Будь осторожен, не поранься.)*
   - The cat cleaned **itself**. *(Кошка умылась.)*
-  - We enjoyed **ourselves** at the party. *(Мы отлично провели время на вечеринке.)*`,
+  - We enjoyed **ourselves** at the party. *(Мы отлично провели время на вечеринке.)*"""
 
-  'plurals': `## Plurals (Множественное число существительных)
+# 7. plurals
+russian_guides['plurals'] = """## Plurals (Множественное число существительных)
 
 Множественное число большинства существительных образуется путем добавления окончания **-s**, **-es** или **-ies**.
 
@@ -225,9 +238,10 @@ export const russianGuidesData = {
 | foot | **feet** | ступни |
 | tooth | **teeth** | зубы |
 | mouse | **mice** | мыши |
-| sheep / fish / deer | **sheep / fish / deer** | овцы / рыбы / олени |`,
+| sheep / fish / deer | **sheep / fish / deer** | овцы / рыбы / олени |"""
 
-  'always-plurals': `## Always Plurals (Существительные только во множественном числе)
+# 8. always-plurals
+russian_guides['always-plurals'] = """## Always Plurals (Существительные только во множественном числе)
 
 Некоторые существительные в английском языке употребляются **только во множественном числе** и требуют глагола во множественном числе (**are / have / do**).
 
@@ -250,9 +264,10 @@ export const russianGuidesData = {
 2. Чтобы подсчитать количество таких предметов, используется фраза **a pair of / pairs of**:
    - **a pair of** jeans *(одни джинсы)*
    - **two pairs of** glasses *(двое очков)*
-   - **three pairs of** scissors *(трое ножниц)*`,
+   - **three pairs of** scissors *(трое ножниц)*"""
 
-  'countable-uncountable': `## Countable & Uncountable Nouns (Исчисляемые и неисчисляемые существительные)
+# 9. countable-uncountable
+russian_guides['countable-uncountable'] = """## Countable & Uncountable Nouns (Исчисляемые и неисчисляемые существительные)
 
 Все существительные делятся на **исчисляемые** (можно посчитать штуками) и **неисчисляемые** (посчитать нельзя).
 
@@ -272,9 +287,10 @@ export const russianGuidesData = {
 | **Much** *(много)* | Uncountable | **much** water |
 | **A lot of** *(много)* | Countable & Uncountable | **a lot of** books / water |
 | **Some** *(немного/несколько)* | Утвердительные предложения | I have **some** milk. |
-| **Any** *(сколько-нибудь)* | Отрицания и вопросы | I don't have **any** money. |`,
+| **Any** *(сколько-нибудь)* | Отрицания и вопросы | I don't have **any** money. |"""
 
-  'degrees-adjectives': `## Degrees of Adjectives (Степени сравнения прилагательных)
+# 10. degrees-adjectives
+russian_guides['degrees-adjectives'] = """## Degrees of Adjectives (Степени сравнения прилагательных)
 
 Качественные прилагательные имеют 3 формы: **Положительная** (cold), **Сравнительная** (colder) и **Превосходная** (the coldest).
 
@@ -291,9 +307,10 @@ export const russianGuidesData = {
 ## 3. Сравнение с союзом "than"
 Когда мы сравниваем два объекта, используется союз **than** *(чем)*:
   - My car is fast**er than** yours. *(Моя машина быстрее, чем твоя.)*
-  - Today is hot**ter than** yesterday. *(Сегодня жарче, чем вчера.)*`,
+  - Today is hot**ter than** yesterday. *(Сегодня жарче, чем вчера.)*"""
 
-  'irregular-adjectives': `## Irregular Adjectives (Исключения среди прилагательных)
+# 11. irregular-adjectives
+russian_guides['irregular-adjectives'] = """## Irregular Adjectives (Исключения среди прилагательных)
 
 Некоторые прилагательные образуют степени сравнения не по общим правилам. Их формы необходимо запомнить!
 
@@ -309,9 +326,10 @@ export const russianGuidesData = {
 ## 2. Примеры в предложениях
   - This plan is **better than** the old one. *(Этот план лучше, чем старый.)*
   - Yesterday was **the worst** day of my week. *(Вчера был самый худший день недели.)*
-  - She is my **best** friend. *(Она моя самая лучшая подруга.)*`,
+  - She is my **best** friend. *(Она моя самая лучшая подруга.)*"""
 
-  'degrees-adjectives-2': `## Advanced Degrees of Adjectives (Сложные степени сравнения)
+# 12. degrees-adjectives-2
+russian_guides['degrees-adjectives-2'] = """## Advanced Degrees of Adjectives (Сложные степени сравнения)
 
 Многосложные прилагательные (состоящие из 2 и более слогов) образуют степени сравнения с помощью слов **more** *(более)* и **the most** *(самый)*.
 
@@ -328,9 +346,10 @@ export const russianGuidesData = {
   - This is **the most interesting** book I have ever read. *(Это самая интересная книга, которую я читал.)*
 
 ⚠️ **Распространенная ошибка**: Нельзя использовать *more* и *-er* одновременно!
-  - ❌ more cheaper ➔ ✅ **cheaper** или **more expensive**`,
+  - ❌ more cheaper ➔ ✅ **cheaper** или **more expensive**"""
 
-  'as-adjective-as': `## As...as Comparisons (Сравнение с помощью As...as)
+# 13. as-adjective-as
+russian_guides['as-adjective-as'] = """## As...as Comparisons (Сравнение с помощью As...as)
 
 Конструкция **as + прилагательное + as** используется для выражения одинакового качества объектов («такой же ..., как ...»).
 
@@ -347,9 +366,10 @@ export const russianGuidesData = {
 
 ## 3. Важное правило
 Между **as** и **as** всегда стоит **начальная форма** прилагательного (без окончаний -er, -est и без слова more)!
-  - ✅ as **big** as ➔ ❌ as bigger as`,
+  - ✅ as **big** as ➔ ❌ as bigger as"""
 
-  'adverbs': `## Adverbs (Наречия)
+# 14. adverbs
+russian_guides['adverbs'] = """## Adverbs (Наречия)
 
 Наречие описывает глагол, прилагательное или другое наречие и отвечает на вопрос «Как? Каким образом? Где? Когда?».
 
@@ -372,9 +392,10 @@ export const russianGuidesData = {
 | **late** *(поздний)* | **late** *(поздно)* |
 
   - He speaks English **well**. *(Он хорошо говорит по-английски.)*
-  - She runs very **fast**. *(Она бегает очень быстро.)*`,
+  - She runs very **fast**. *(Она бегает очень быстро.)*"""
 
-  'numerals': `## Numerals (Числительные)
+# 15. numerals
+russian_guides['numerals'] = """## Numerals (Числительные)
 
 Числительные в английском языке делятся на **Количественные** (Cardinal) и **Порядковые** (Ordinal).
 
@@ -395,9 +416,10 @@ export const russianGuidesData = {
 ## 3. Чтение дат
 При чтении дат вслух используется порядковое числительное с артиклем **the** и предлогом **of**:
   - May 5th ➔ *the fifth of May*
-  - In the 21st century ➔ *in the twenty-first century*`,
+  - In the 21st century ➔ *in the twenty-first century*"""
 
-  'articles': `## Articles (Артикли: A, An, The)
+# 16. articles
+russian_guides['articles'] = """## Articles (Артикли: A, An, The)
 
 Артикли служат указателями существительного. Различают **Неопределенный артикль (A / An)** и **Определенный артикль (The)**.
 
@@ -415,9 +437,10 @@ export const russianGuidesData = {
 Артикль НЕ ставится:
   - Перед именами собственными и названиями городов/стран: Tashkent, Alex, Uzbekistan.
   - Перед множественным числом и неисчисляемыми существительными в общем смысле: Cats like milk.
-  - Перед названиями языков и предметных дисциплин: English, History.`,
+  - Перед названиями языков и предметных дисциплин: English, History."""
 
-  'present-continuous': `## Present Continuous (Настоящее длительное время)
+# 17. present-continuous
+russian_guides['present-continuous'] = """## Present Continuous (Настоящее длительное время)
 
 Present Continuous передает действие, происходящее **прямо сейчас, в момент речи**, или временную ситуацию.
 
@@ -442,9 +465,10 @@ Present Continuous передает действие, происходящее *
 3. **Запланированное действие в ближайшем будущем**: We are meeting tomorrow.
 
 ## 3. Маркеры времени (Time Expressions)
-• **now**, **at the moment**, **right now**, **Look!**, **Listen!**`,
+• **now**, **at the moment**, **right now**, **Look!**, **Listen!**"""
 
-  'present-simple': `## Present Simple (Настоящее простое время)
+# 18. present-simple
+russian_guides['present-simple'] = """## Present Simple (Настоящее простое время)
 
 Present Simple выражает **повторяющиеся, регулярные действия, привычки, расписания и общеизвестные факты**.
 
@@ -467,9 +491,10 @@ Present Simple выражает **повторяющиеся, регулярны
 3. **Расписания**: The train leaves at 9 PM.
 
 ## 3. Маркеры времени (Time Expressions)
-• **always**, **usually**, **often**, **sometimes**, **never**, **every day / week**`,
+• **always**, **usually**, **often**, **sometimes**, **never**, **every day / week**"""
 
-  'past-simple': `## Past Simple (Прошедшее простое время)
+# 19. past-simple
+russian_guides['past-simple'] = """## Past Simple (Прошедшее простое время)
 
 Past Simple описывает действие, которое **произошло и завершилось в прошлом** в определенное время.
 
@@ -491,9 +516,10 @@ Past Simple описывает действие, которое **произош
 • **Неправильные глаголы (Irregular)**: 2-я колонка таблицы *(go ➔ went, see ➔ saw, buy ➔ bought)*
 
 ## 3. Маркеры времени (Time Expressions)
-• **yesterday**, **last week / month / year**, **2 days ago**, **in 2020**`,
+• **yesterday**, **last week / month / year**, **2 days ago**, **in 2020**"""
 
-  'past-continuous': `## Past Continuous (Прошедшее длительное время)
+# 20. past-continuous
+russian_guides['past-continuous'] = """## Past Continuous (Прошедшее длительное время)
 
 Past Continuous выражает **действие, которое длилось в определенный момент в прошлом**.
 
@@ -516,9 +542,10 @@ Past Continuous выражает **действие, которое длилос
 3. **Два одновременных длительных действия**: While I was writing, she was reading.
 
 ## 3. Маркеры времени (Time Expressions)
-• **at 5 o'clock yesterday**, **when**, **while**, **all day yesterday**`,
+• **at 5 o'clock yesterday**, **when**, **while**, **all day yesterday**"""
 
-  'future-simple': `## Future Simple (Будущее простое время)
+# 21. future-simple
+russian_guides['future-simple'] = """## Future Simple (Будущее простое время)
 
 Future Simple (Will) используется для передачи **спонтанных решений, прогнозов на будущее и обещаний**.
 
@@ -541,9 +568,10 @@ Future Simple (Will) используется для передачи **спон
 3. **Предсказание будущего**: I think humans will live on Mars.
 
 ## 3. Маркеры времени (Time Expressions)
-• **tomorrow**, **next week / month / year**, **in 2 days**, **soon**`,
+• **tomorrow**, **next week / month / year**, **in 2 days**, **soon**"""
 
-  'future-continuous': `## Future Continuous (Будущее длительное время)
+# 22. future-continuous
+russian_guides['future-continuous'] = """## Future Continuous (Будущее длительное время)
 
 Future Continuous выражает **процесс, который будет происходить в определенный момент в будущем**.
 
@@ -561,9 +589,10 @@ Future Continuous выражает **процесс, который будет �
 2. **Вежливый вопрос о чьих-либо планах**: Will you be going to the supermarket today?
 
 ## 3. Маркеры времени (Time Expressions)
-• **at 3 PM tomorrow**, **this time next week**, **at this moment tomorrow**`,
+• **at 3 PM tomorrow**, **this time next week**, **at this moment tomorrow**"""
 
-  'present-perfect-simple': `## Present Perfect Simple (Настоящее совершенное время)
+# 23. present-perfect-simple
+russian_guides['present-perfect-simple'] = """## Present Perfect Simple (Настоящее совершенное время)
 
 Present Perfect связывает **прошедшее действие с настоящим результатом**. Важен сам результат или факт совершения действия, а не точное время.
 
@@ -586,9 +615,10 @@ Present Perfect связывает **прошедшее действие с на
 3. **Незавершенный период времени**: I have drunk two cups of coffee today.
 
 ## 3. Маркеры времени (Time Expressions)
-• **already**, **just**, **yet**, **ever**, **never**, **recently**, **so far**`,
+• **already**, **just**, **yet**, **ever**, **never**, **recently**, **so far**"""
 
-  'present-perfect-continuous': `## Present Perfect Continuous (Настоящее совершенное длительное)
+# 24. present-perfect-continuous
+russian_guides['present-perfect-continuous'] = """## Present Perfect Continuous (Настоящее совершенное длительное)
 
 Present Perfect Continuous выражает **действие, которое началось в прошлом, продолжалось некоторое время и всё ещё длится или только что завершилось**.
 
@@ -610,9 +640,10 @@ Present Perfect Continuous выражает **действие, которое �
 2. **Действие только что завершилось с видимым результатом**: Why are you wet? — I have been running.
 
 ## 3. Маркеры времени (Time Expressions)
-• **for**, **since**, **how long**, **all day / week**`,
+• **for**, **since**, **how long**, **all day / week**"""
 
-  'be-going-to': `## Be going to (Конструкция намерений и планов)
+# 25. be-going-to
+russian_guides['be-going-to'] = """## Be going to (Конструкция намерений и планов)
 
 Конструкция **be going to** выражает **заранее запланированные намерения** или очевидные предсказания на основе увиденных фактов.
 
@@ -634,9 +665,10 @@ Present Perfect Continuous выражает **действие, которое �
 
 ## 3. Сравнение с Will
 • **Will**: Спонтанное решение *(I'm hungry. I will order pizza.)*
-• **Be going to**: Заранее продуманный план *(I booked a table. We are going to eat out.)*`,
+• **Be going to**: Заранее продуманный план *(I booked a table. We are going to eat out.)*"""
 
-  'past-perfect-simple': `## Past Perfect Simple (Предпрошедшее время)
+# 26. past-perfect-simple
+russian_guides['past-perfect-simple'] = """## Past Perfect Simple (Предпрошедшее время)
 
 Past Perfect описывает **действие, которое завершилось РАНЬШЕ другого действия или момента в прошлом**.
 
@@ -658,9 +690,10 @@ Past Perfect описывает **действие, которое заверш�
    - He failed the exam because he **hadn't studied**.
 
 ## 3. Маркеры времени (Time Expressions)
-• **by the time**, **before**, **after**, **already**, **just**, **never**`,
+• **by the time**, **before**, **after**, **already**, **just**, **never**"""
 
-  'past-perfect-continuous': `## Past Perfect Continuous (Предпрошедшее длительное время)
+# 27. past-perfect-continuous
+russian_guides['past-perfect-continuous'] = """## Past Perfect Continuous (Предпрошедшее длительное время)
 
 Past Perfect Continuous передает действие, которое **началось и длилось некоторое время ДО определенного момента в прошлом**.
 
@@ -688,9 +721,10 @@ Past Perfect Continuous передает действие, которое **на
 • **Past Perfect Continuous**: длительность процесса *(I had been writing emails all morning)*
 
 ## 4. Маркеры времени (Time Expressions)
-• **for**, **since**, **before**, **when**, **how long**`,
+• **for**, **since**, **before**, **when**, **how long**"""
 
-  'future-perfect-simple': `## Future Perfect Simple (Будущее совершенное время)
+# 28. future-perfect-simple
+russian_guides['future-perfect-simple'] = """## Future Perfect Simple (Будущее совершенное время)
 
 Future Perfect выражает **действие, которое будет полностью завершено К определенному моменту в будущем**.
 
@@ -707,9 +741,10 @@ Future Perfect выражает **действие, которое будет п
 1. **Действие завершится до указанного времени в будущем**: By 2030, scientists will have found a cure.
 
 ## 3. Маркеры времени (Time Expressions)
-• **by tomorrow**, **by 5 o'clock**, **by the end of the month**, **by the time**`,
+• **by tomorrow**, **by 5 o'clock**, **by the end of the month**, **by the time**"""
 
-  'future-perfect-continuous': `## Future Perfect Continuous (Будущее совершенное длительное)
+# 29. future-perfect-continuous
+russian_guides['future-perfect-continuous'] = """## Future Perfect Continuous (Будущее совершенное длительное)
 
 Future Perfect Continuous показывает, **как долго будет длиться процесс К определенному моменту в будущем**.
 
@@ -722,9 +757,10 @@ Future Perfect Continuous показывает, **как долго будет �
   - **How long will** you **have been living** here by 2026? *(Как долго ты будешь жить здесь к 2026 году?)*
 
 ## 2. Маркеры времени (Time Expressions)
-• **by... for...**, **by next year for 10 years**`,
+• **by... for...**, **by next year for 10 years**"""
 
-  'passive-voice': `## Passive Voice (Пассивный залог)
+# 30. passive-voice
+russian_guides['passive-voice'] = """## Passive Voice (Пассивный залог)
 
 Пассивный залог используется, когда **действие или его объект важнее, чем исполнитель действия**.
 
@@ -745,9 +781,10 @@ Future Perfect Continuous показывает, **как долго будет �
 
 ## 3. Исполнитель действия (By / With)
 • **by** — указывает на человека или автора: *written by Pushkin*
-• **with** — указывает на инструмент или материал: *cut with a knife*`,
+• **with** — указывает на инструмент или материал: *cut with a knife*"""
 
-  'modal-verbs': `## Modal Verbs (Модальные глаголы)
+# 31. modal-verbs
+russian_guides['modal-verbs'] = """## Modal Verbs (Модальные глаголы)
 
 Модальные глаголы выражают отношение к действию: **возможность, необходимость, разрешение или совет**.
 
@@ -767,9 +804,10 @@ Future Perfect Continuous показывает, **как долго будет �
   - You **don't have to come** tomorrow. *(Завтра приходить необязательно.)*
 
 ⚠️ **Главное правило**: После большинства модальных глаголов частица **to** НЕ ставится!
-  - ✅ I can speak ➔ ❌ I can to speak`,
+  - ✅ I can speak ➔ ❌ I can to speak"""
 
-  'first-conditional': `## First Conditional (Первый тип условных предложений)
+# 32. first-conditional
+russian_guides['first-conditional'] = """## First Conditional (Первый тип условных предложений)
 
 First Conditional выражает **реальные, возможные будущие события**, если выполнится условие.
 
@@ -782,9 +820,10 @@ First Conditional выражает **реальные, возможные буд
 
 ⚠️ **Главное правило**: После союза **IF** всегда используется Present Simple (НЕЛЬЗЯ ставить will сразу после if)!
   - ✅ If I **see** him, I will tell him.
-  - ❌ If I will see him...`,
+  - ❌ If I will see him..."""
 
-  'second-conditional': `## Second Conditional (Второй тип условных предложений)
+# 33. second-conditional
+russian_guides['second-conditional'] = """## Second Conditional (Второй тип условных предложений)
 
 Second Conditional описывает **нереальные, воображаемые ситуации в настоящем или будущем** («если бы..., то...»).
 
@@ -796,9 +835,10 @@ Second Conditional описывает **нереальные, воображае
 ## 2. Использование форме "were"
 В условных предложениях второго типа форма **were** часто используется для ВСЕХ лиц (включая I, he, she, it):
   - **If** I **were** you, I **would accept** the job. *(Если бы я был на твоем месте, я бы согласился.)*
-  - **If** he **were** taller, he **would play** basketball. *(Если бы он был выше, он бы играл в баскетбол.)*`,
+  - **If** he **were** taller, he **would play** basketball. *(Если бы он был выше, он бы играл в баскетбол.)*"""
 
-  'reported-speech': `## Reported Speech (Косвенная речь)
+# 34. reported-speech
+russian_guides['reported-speech'] = """## Reported Speech (Косвенная речь)
 
 Reported Speech используется для **пересказа слов другого человека**. Время глагола сдвигается назад во времени (**Backshift of tenses**).
 
@@ -821,9 +861,10 @@ Reported Speech используется для **пересказа слов д
 ## 3. Изменение указателей времени
 • today ➔ **that day**
 • tomorrow ➔ **the next day / the following day**
-• yesterday ➔ **the day before**`,
+• yesterday ➔ **the day before**"""
 
-  'relative-clauses': `## Relative Clauses (Относительные придаточные)
+# 35. relative-clauses
+russian_guides['relative-clauses'] = """## Relative Clauses (Относительные придаточные)
 
 Relative Clauses соединяют два предложения и дают дополнительную информацию о существительном с помощью местоимений **who, which, that, where, whose**.
 
@@ -836,9 +877,10 @@ Relative Clauses соединяют два предложения и дают д
 
 ## 2. Примеры
   - I met a woman **who** speaks 5 languages. *(Я встретил женщину, которая говорит на 5 языках.)*
-  - This is the house **where** I grew up. *(Это дом, где я вырос.)*`,
+  - This is the house **where** I grew up. *(Это дом, где я вырос.)*"""
 
-  'used-to-would': `## Used to & Would (Прошлые привычки и состояния)
+# 36. used-to-would
+russian_guides['used-to-would'] = """## Used to & Would (Прошлые привычки и состояния)
 
 Обе конструкции описывают **действия и привычки в прошлом, которых больше нет в настоящем**.
 
@@ -856,9 +898,10 @@ Relative Clauses соединяют два предложения и дают д
 • **Negative**: Subject + didn't use to + Base Verb
   - I **didn't use to like** coffee.
 • **Question**: Did + Subject + use to + Base Verb?
-  - **Did** you **use to play** football?`,
+  - **Did** you **use to play** football?"""
 
-  'gerunds-infinitives': `## Gerunds & Infinitives (Герундий и инфинитив)
+# 37. gerunds-infinitives
+russian_guides['gerunds-infinitives'] = """## Gerunds & Infinitives (Герундий и инфинитив)
 
 Герундий (**Verb-ing**) и Инфинитив (**to + Verb**) — формы глагола, следующие за основным глаголом.
 
@@ -874,9 +917,10 @@ Relative Clauses соединяют два предложения и дают д
 
 ## 3. После предлогов
 После любого предлога (in, on, at, about, for, without, before, after) ВСЕГДА используется **Герундий (-ing)**!
-  - Thank you **for helping** me. *(Спасибо за помощь.)*`,
+  - Thank you **for helping** me. *(Спасибо за помощь.)*"""
 
-  'noun-clauses': `## Noun Clauses (Придаточные существительные)
+# 38. noun-clauses
+russian_guides['noun-clauses'] = """## Noun Clauses (Придаточные существительные)
 
 Noun Clause — это придаточное предложение, которое выполняет роль существительного (подлежащего, дополнения или сказуемого).
 
@@ -902,6 +946,15 @@ Noun Clause — это придаточное предложение, котор
 |---|---|
 | Подлежащее (Subject) | **What she said** surprised me. |
 | Дополнение (Object) | I know **that you are tired**. |
-| Сказуемое (Predicate) | The truth is **that he lied**. |`,
+| Сказуемое (Predicate) | The truth is **that he lied**. |"""
 
-};
+# Write to file
+with open('d:/Projects/VOC/src/data/russianGuidesData.js', 'w', encoding='utf-8') as f:
+    f.write("export const russianGuidesData = {\n")
+    for key, content in russian_guides.items():
+        # Escape backticks if any
+        escaped_content = content.replace("`", "\\`")
+        f.write(f"  '{key}': `{escaped_content}`,\n\n")
+    f.write("};\n")
+
+print(f"Successfully generated russianGuidesData.js with {len(russian_guides)} full-structure guides!")
