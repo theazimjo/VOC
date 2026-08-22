@@ -6,6 +6,183 @@ import { parseGuide } from '../../utils/grammarGuideParser';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarGuide.css';
 
+const russianSentenceStructureGuide = `## Структура обычного предложения (Sentence Structure)
+
+В английском языке порядок слов **строгий**: Подлежащее (Subject) + Глагол (Verb) + Дополнение (Object). В отличие от русского языка, где слова можно менять местами, в английском порядок слов почти всегда один и тот же!
+
+💡 **Главный секрет — формула S + V + O:**
+• **S** (Subject / Кто?) + **V** (Verb / Что делает?) + **O** (Object / Кого? Что?)
+  - **She** (S) **reads** (V) **books** (O). *(Она читает книги.)*
+  - **They** (S) **play** (V) **football** (O). *(Они играют в футбол.)*
+
+## 1. Схема 3-х типов предложений
+
+### 1a. Утверждение (Positive)
+**Подлежащее + Глагол (+ s/es) + Дополнение**
+  - Tom **drinks** coffee every morning. *(Том пьет кофе каждое утро.)*
+  - We **like** ice cream. *(Мы любим мороженое.)*
+
+### 1b. Отрицание (Negative)
+**Подлежащее + do not (don't) / does not (doesn't) + Глагол + Дополнение**
+  - I **don't like** fish. *(Я не люблю рыбу.)*
+  - She **doesn't eat** meat. *(Она не ест мясо.)*
+
+### 1c. Вопрос (Question)
+**Do / Does + Подлежащее + Глагол + Дополнение?**
+  - **Do** you **speak** English? *(Ты говоришь по-английски?)*
+  - **Does** she **work** here? *(Она работает здесь?)*
+
+## 2. 4 главных правила
+
+1. **Кто делает — всегда на 1-м месте:** *She reads books* (нельзя сказать: *Reads she books*).
+2. **Окончание -s / -es:** добавляется к глаголу только для **he / she / it**.
+3. **Объект — после глагола:** *I go to school every day*.
+4. **Время и место — в самом конце:** *We play tennis on Sundays*.`;
+
+const russianPronounsGuide = `## Местоимения (Pronouns)
+
+Местоимение — это слово, которое заменяет существительное, чтобы не повторять одно и то же слово много раз.
+
+💡 **Зачем нужны местоимения?**
+Вместо: «Антон купил машину. Антон очень любит машину Антона.»
+Мы говорим: «Антон купил машину. **Он** очень любит **свою** машину.»
+
+## 1. 4 главных вида местоимений
+
+| Вид | Описание | Примеры |
+|---|---|---|
+| **Personal** (Личные) | Кто выполняет действие | I, you, he, she, it, we, they |
+| **Object** (Объектные) | На кого направлено действие | me, you, him, her, it, us, them |
+| **Possessive** (Притяжательные) | Кому принадлежит | mine, yours, his, hers, ours, theirs |
+| **Reflexive** (Возвратные) | Сам / себя | myself, yourself, himself, herself |
+
+## 2. Главные правила употребления
+
+1. **Замена существительных:** местоимения выбираются по роду и числу:
+  - My brother is a doctor. **He** works in a hospital. *(Брат ➔ He)*
+  - The book is on the table. **It** is interesting. *(Книга ➔ It)*
+  - My parents are teachers. **They** live here. *(Родители ➔ They)*
+
+2. **Правило "It":** для предметов, животных и неодушевленных вещей всегда используется **It** (в множественном числе — **They**).`;
+
+const russianPersonalPronounsGuide = `## Личные местоимения (Personal Pronouns)
+
+Личные местоимения стоят на месте подлежащего (кто? что?) в самом начале предложения.
+
+💡 **Все 7 личных местоимений:**
+
+### 1. Единственное число (Singular)
+• **I** — Я *(всегда пишется с БОЛЬШОЙ буквы!)*
+• **You** — Ты / Вы
+• **He** — Он *(для мужчин и мальчиков)*
+• **She** — Она *(для женщин и девочек)*
+• **It** — Оно / Он / Она *(для предметов, вещей и животных)*
+
+### 2. Множественное число (Plural)
+• **We** — Мы
+• **You** — Вы / Ребята
+• **They** — Они *(для людей, предметов и животных)*
+
+## 1. Связка с глаголом "to be" (am / is / are)
+
+  - **I am** a student. *(Я студент)*
+  - **He / She / It is** happy. *(Он / Она счастлива)*
+  - **We / You / They are** friends. *(Мы / Вы / Они друзья)*
+
+## 2. Глаголы в Present Simple
+
+Для **he / she / it** к глаголу всегда добавляется **-s** или **-es**:
+  - I **work** ➔ He **works**
+  - We **go** ➔ She **goes**`;
+
+const russianObjectPronounsGuide = `## Объектные местоимения (Object Pronouns)
+
+Объектные местоимения используются, когда действие направлено **на человека или предмет** (кого? кому? кем? о ком?). Они всегда стоят **ПОСЛЕ глагола** или предлога!
+
+💡 **Таблица перевода:**
+
+| Личное (Кто?) | Объектное (Кого? Кому?) | Пример |
+|---|---|---|
+| **I** (Я) | **me** (меня, мне) | She loves **me**. |
+| **You** (Ты) | **you** (тебя, тебе) | I see **you**. |
+| **He** (Он) | **him** (его, ему) | Call **him**. |
+| **She** (Она) | **her** (ее, ей) | Help **her**. |
+| **It** (Оно) | **it** (его, ему, ее) | I like **it**. |
+| **We** (Мы) | **us** (нас, нам) | Join **us**. |
+| **They** (Они) | **them** (их, им) | Look at **them**. |
+
+## 1. Главные правила
+
+1. **После глаголов:**
+  - She loves **him**. *(Она любит его.)*
+  - Tell **me** the truth. *(Скажи мне правду.)*
+
+2. **После предлогов (to, for, with, about, between):**
+  - Give it **to me**. *(Дай это мне.)*
+  - Between you and **me**. *(Между мной и тобой.)*
+
+⚠️ **Ошибка:** Нельзя использовать *I* или *she* после глагола:
+  - ❌ She loves I.
+  - ✅ She loves **me**.`;
+
+const russianPossessivePronounsGuide = `## Притяжательные местоимения (Possessive Pronouns)
+
+Притяжательные местоимения отвечают на вопрос **«Чей? Чья? Чьё? Чьи?»** и указывают на принадлежность предмета.
+
+💡 **Сравнение: Притяжательное прилагательное vs Местоимение**
+
+• **Притяжательное прилагательное** (ставится ПЕРЕД существительным):
+  - This is **my** car. *(Это моя машина.)*
+• **Притяжательное местоимение** (стоит САМО ПО СЕБЕ, без существительного):
+  - This car is **mine**. *(Эта машина — моя / принадлежит мне.)*
+
+## 1. Таблица форм
+
+| Лицо | Прилагательное (+ существительное) | Местоимение (само по себе) |
+|---|---|---|
+| **I** | **my** book | **mine** *(моя)* |
+| **You** | **your** car | **yours** *(твоя)* |
+| **He** | **his** phone | **his** *(его)* |
+| **She** | **her** bag | **hers** *(ее)* |
+| **We** | **our** house | **ours** *(наш)* |
+| **They** | **their** key | **theirs** *(их)* |
+
+## 2. Примеры в предложениях
+
+  - Is this pen **yours**? — No, it's **hers**. *(Это твоя ручка? — Нет, ее.)*
+  - Their house is big, but **ours** is bigger. *(Их дом большой, но наш еще больше.)*
+  - That blue coat is **mine**. *(То синее пальто — мое.)*
+
+*Примечание: Притяжательные местоимения пишутся БЕЗ апострофа (никаких yours', her's)!*`;
+
+const russianReflexivePronounsGuide = `## Возвратные местоимения (Reflexive Pronouns)
+
+Возвратные местоимения используются, когда подлежащее и дополнение — это **одно и то же лицо** (когда человек делает что-то **сам** или **себя**).
+
+💡 **Соответствие лиц:**
+
+• **I** ➔ **myself** *(я сам / себя)*
+• **You (ед.ч.)** ➔ **yourself** *(ты сам / себя)*
+• **He** ➔ **himself** *(он сам / себя)*
+• **She** ➔ **herself** *(она сама / себя)*
+• **It** ➔ **itself** *(оно само / себя)*
+• **We** ➔ **ourselves** *(мы сами)*
+• **You (мн.ч.)** ➔ **yourselves** *(вы сами)*
+• **They** ➔ **themselves** *(они сами)*
+
+## 1. Основные случаи использования
+
+### 1a. Действие на самого себя (-ся / себя)
+  - He cut **himself** while cooking. *(Он порезался во время готовки.)*
+  - She looked at **herself** in the mirror. *(Она посмотрела на себя в зеркало.)*
+
+### 1b. Самостоятельное выполнение (Сам / Без помощи)
+  - I fixed the car **myself**. *(Я сам починил машину.)*
+  - They built the house **themselves**. *(Они сами построили дом.)*
+
+### 1c. Выражение "by myself" (В одиночку)
+  - I live **by myself**. *(Я живу один / в одиночку.)*`;
+
 const russianNounClausesGuide = `## Noun Clauses (Придаточные существительные)
 
 Noun Clause — это придаточное предложение, которое работает как одно существительное (как слово «что-то» или «это»).
@@ -53,6 +230,16 @@ Noun Clause — это придаточное предложение, котор
 | Дополнение (в конце) | I know **that you are tired**. | (Я знаю, что ты устал) |
 | Сказуемое (после is/was) | The truth is **that he lied**. | (Правда в том, что он солгал) |`;
 
+const russianGuides = {
+  'sentence-structure': russianSentenceStructureGuide,
+  'pronouns': russianPronounsGuide,
+  'personal-pronouns': russianPersonalPronounsGuide,
+  'object-pronouns': russianObjectPronounsGuide,
+  'possessive-pronouns': russianPossessivePronounsGuide,
+  'reflexive-pronouns': russianReflexivePronounsGuide,
+  'noun-clauses': russianNounClausesGuide,
+};
+
 function Segments({ segments }) {
   return segments.map((seg, i) =>
     seg.bold ? (
@@ -97,8 +284,8 @@ export default function GrammarGuide() {
   }
 
   let activeGuideText = topic.guide;
-  if (guideLang === 'ru' && topicId === 'noun-clauses') {
-    activeGuideText = russianNounClausesGuide;
+  if (guideLang === 'ru' && russianGuides[topicId]) {
+    activeGuideText = russianGuides[topicId];
   }
 
   const blocks = parseGuide(activeGuideText);
