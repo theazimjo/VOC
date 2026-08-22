@@ -1,18 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Check } from 'lucide-react';
 import { grammarData } from '../../data/grammarData';
-import { russianGrammarData } from '../../data/russianGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
-
-const LEVELS = [
-  { id: 'beginner',     label: 'Beginner',     emoji: '🌱', locked: false },
-  { id: 'intermediate', label: 'Elementary',   emoji: '🔥', locked: false },
-  { id: 'advanced',     label: 'Intermediate', emoji: '⚡', locked: true  },
-];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -40,42 +32,18 @@ const headerVariants = {
 export default function GrammarPage() {
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const [optionsOpen, setOptionsOpen] = useState(false);
-  const optionsRef = useRef(null);
-  const [activeLang, setActiveLangState] = useState(() => {
-    return localStorage.getItem('grammar_lang') || 'english';
-  });
   const [activeLevel, setActiveLevelState] = useState(() => {
     return localStorage.getItem('grammar_level') || 'beginner';
   });
   const { stats: grammarStats } = useGrammarStats();
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (optionsRef.current && !optionsRef.current.contains(e.target)) {
-        setOptionsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const setActiveLang = (lang) => {
-    setActiveLangState(lang);
-    localStorage.setItem('grammar_lang', lang);
-  };
 
   const setActiveLevel = (level) => {
     setActiveLevelState(level);
     localStorage.setItem('grammar_level', level);
   };
 
-  const currentDataSource = activeLang === 'russian' ? russianGrammarData : grammarData;
-  const topics = currentDataSource[activeLevel]?.topics ?? [];
+  const topics = grammarData[activeLevel]?.topics ?? [];
 
-  // Calculate statistics for the active level. Legacy German-grammar topic
-  // stats (that language option was removed) are excluded so old
-  // completions don't skew the counts below.
   const completedTopicsOfLevel = Object.entries(grammarStats?.topics || {})
     .filter(([topicId, t]) => t.level === activeLevel && !topicId.startsWith('de-'))
     .map(([_, t]) => t);
@@ -85,7 +53,6 @@ export default function GrammarPage() {
     if (t.exercises) {
       completedExercisesCount += Object.keys(t.exercises).length;
     } else {
-      // fallback for old stats structure where exercises didn't exist
       completedExercisesCount += 1;
     }
   });
@@ -121,63 +88,6 @@ export default function GrammarPage() {
           <div className="grammar-header-titles-left">
             <div className="grammar-header-icon">📖</div>
             <h1 className="grammar-title">{t('grammar.title')}</h1>
-          </div>
-
-          {/* Options Dropdown Button on the right of Grammar title */}
-          <div className="grammar-options-dropdown-wrapper" ref={optionsRef}>
-            <button
-              type="button"
-              className="grammar-options-btn"
-              onClick={() => setOptionsOpen((prev) => !prev)}
-              aria-label="Options"
-              title="Grammar Options"
-            >
-              <span className="current-lang-flag">{activeLang === 'english' ? '🇬🇧' : '🇷🇺'}</span>
-              <span className="current-lang-code">{activeLang === 'english' ? 'EN' : 'RU'}</span>
-              <ChevronDown size={14} className={`options-chevron ${optionsOpen ? 'open' : ''}`} />
-            </button>
-
-            <AnimatePresence>
-              {optionsOpen && (
-                <motion.div
-                  className="grammar-options-menu"
-                  initial={{ opacity: 0, y: -8, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.95 }}
-                  transition={{ duration: 0.18, ease: 'easeOut' }}
-                >
-                  <div className="grammar-options-menu-header">
-                    <span>Language / Язык</span>
-                  </div>
-
-                  <button
-                    type="button"
-                    className={`grammar-option-item ${activeLang === 'english' ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveLang('english');
-                      setOptionsOpen(false);
-                    }}
-                  >
-                    <span className="option-flag">🇬🇧</span>
-                    <span className="option-text">{t('grammar.englishGrammar')}</span>
-                    {activeLang === 'english' && <Check size={16} className="option-check" />}
-                  </button>
-
-                  <button
-                    type="button"
-                    className={`grammar-option-item ${activeLang === 'russian' ? 'active' : ''}`}
-                    onClick={() => {
-                      setActiveLang('russian');
-                      setOptionsOpen(false);
-                    }}
-                  >
-                    <span className="option-flag">🇷🇺</span>
-                    <span className="option-text">{t('grammar.russianGrammar')}</span>
-                    {activeLang === 'russian' && <Check size={16} className="option-check" />}
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </div>
 

@@ -30,6 +30,7 @@
     "firebase": "^12.14.0",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.21.0",
+    "msedge-tts": "^2.0.7",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.17.0",

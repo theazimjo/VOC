@@ -1,10 +1,57 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
 import { russianGrammarData } from '../../data/russianGrammarData';
 import { parseGuide } from '../../utils/grammarGuideParser';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarGuide.css';
+
+const russianNounClausesGuide = `## Noun Clauses (Придаточные существительные)
+
+Noun Clause — это придаточное предложение, которое работает как одно существительное (как слово «что-то» или «это»).
+
+💡 Главный секрет: Любой Noun Clause можно мысленно заменить словом «что-то» или «это»:
+• I know **your secret**. (Я знаю твой секрет.)
+• I know **where you live**. (Я знаю [где ты живешь / что-то].)
+
+## 1. Главное правило: Прямой порядок слов
+
+Внутри Noun Clause порядок слов ВСЕГДА как в обычном утвердительном предложении (не как в вопросе)!
+
+  - ✅ I know **where she lives**. (Я знаю, где она живет — правильно)
+  - ❌ I know **where does she live**. (НЕПРАВИЛЬНО — никаких does/did в середине!)
+  - ✅ Tell me **what you want**. (Скажи мне, чего ты хочешь — правильно)
+  - ❌ Tell me **what do you want**. (НЕПРАВИЛЬНО!)
+
+## 2. 3 основных типа Noun Clauses
+
+### 2a. Факты и мысли (союз "that" = «что»)
+Союз "that" показывает факт. В разговорной речи "that" можно свободно опускать!
+  - She believes **that he is honest**. (Она верит, что он честен.)
+  - I think **that they are right**. (Я считаю, что они правы.)
+  - It is clear **that she passed the exam**. (Очевидно, что она сдала экзамен.)
+  - She believes (that) he is honest. (Разговорный вариант без "that")
+
+### 2b. Косвенные вопросы (слова "what", "where", "why", "who", "how", "when")
+Используются, когда мы передаем чьи-то вопросы или неизвестную информацию.
+  - I know **where she lives**. (Я знаю, где она живет.)
+  - Tell me **what you want**. (Скажи мне, чего ты хочешь.)
+  - He asked **who called him**. (Он спросил, кто ему звонил.)
+  - I wonder **why she is sad**. (Интересно, почему она грустит.)
+
+### 2c. Сомнение и выбор да/нет (союзы "whether / if" = «ли»)
+Используются, когда есть сомнение: «да или нет».
+  - I don't know **whether she is coming**. (Я не знаю, придет ли она.)
+  - He asked **if the store was open**. (Он спросил, открыт ли магазин.)
+  - I wonder **whether they will agree**. (Интересно, согласятся ли они.)
+
+## 3. Где Noun Clause стоит в предложении?
+
+| Позиция | Пример | Пояснение |
+|---|---|---|
+| Подлежащее (в начале) | **What she said** surprised me. | (То, что она сказала, удивило меня) |
+| Дополнение (в конце) | I know **that you are tired**. | (Я знаю, что ты устал) |
+| Сказуемое (после is/was) | The truth is **that he lied**. | (Правда в том, что он солгал) |`;
 
 function Segments({ segments }) {
   return segments.map((seg, i) =>
@@ -20,6 +67,15 @@ export default function GrammarGuide() {
   const { level = 'beginner', topicId } = useParams();
   const navigate = useNavigate();
   const { t } = useLanguage();
+
+  const [guideLang, setGuideLangState] = useState(() => {
+    return localStorage.getItem('grammar_guide_lang') || 'uz';
+  });
+
+  const setGuideLang = (lang) => {
+    setGuideLangState(lang);
+    localStorage.setItem('grammar_guide_lang', lang);
+  };
 
   const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
                 russianGrammarData[level]?.topics?.find((t) => t.id === topicId);
@@ -40,7 +96,12 @@ export default function GrammarGuide() {
     );
   }
 
-  const blocks = parseGuide(topic.guide);
+  let activeGuideText = topic.guide;
+  if (guideLang === 'ru' && topicId === 'noun-clauses') {
+    activeGuideText = russianNounClausesGuide;
+  }
+
+  const blocks = parseGuide(activeGuideText);
 
   return (
     <div className="grammar-guide-page">
@@ -57,6 +118,24 @@ export default function GrammarGuide() {
           <h1 className="gg-header-title">
             <span className="gg-header-icon">{topic.icon}</span> {topic.title}
           </h1>
+        </div>
+
+        {/* UZB / RUS language selector tabs */}
+        <div className="gg-lang-selector">
+          <button
+            type="button"
+            className={`gg-lang-btn ${guideLang === 'uz' ? 'active' : ''}`}
+            onClick={() => setGuideLang('uz')}
+          >
+            🇺🇿 UZB
+          </button>
+          <button
+            type="button"
+            className={`gg-lang-btn ${guideLang === 'ru' ? 'active' : ''}`}
+            onClick={() => setGuideLang('ru')}
+          >
+            🇷🇺 RUS
+          </button>
         </div>
       </div>
 
