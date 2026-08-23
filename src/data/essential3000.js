@@ -2,14 +2,17 @@
 // book — "4000 Essential English Words 1" by Paul Nation (Compass
 // Publishing) — via pdftotext extraction of src/assets/data/essential
 // english 1.pdf. Words, their sentence definitions, example sentences, the
-// "The Lion and the Rabbit" reading story + its comprehension questions, and
-// the grammar-stage word exercises (definition matching + "which sentence
-// makes better sense") are transcribed from the book (question 5's reading
-// answer choices were lost to an OCR/layout gap in the source PDF, so those
-// four options are original). Uzbek translations are original (the book is
-// English-only). The listening dialogue is original narration written to
-// reuse this unit's 20 target words, since the book itself has no audio/
-// listening component.
+// "The Lion and the Rabbit" reading story + its comprehension questions are
+// transcribed from the book (question 5's reading answer choices were lost
+// to an OCR/layout gap in the source PDF, so those four options are
+// original). Uzbek translations are original (the book is English-only).
+// The listening dialogue is original narration written to reuse this
+// unit's 20 target words, since the book itself has no audio/listening
+// component. The grammar-stage exercises are original, aligned with the
+// app's "Normal Sentence Structure" topic (src/data/grammarData.js) —
+// Subject+Verb+Object word order, adjective placement, verb agreement,
+// do/does, is/are, negation, questions, and adverb placement — each of the
+// 20 target words used in exactly one question.
 
 const lesson1Words = [
   { id: 'l1w1', word: 'afraid', translation: "qo'rqqan", definition: 'When someone is afraid, they feel fear.', example: 'The woman was afraid of what she saw.', partOfSpeech: 'adjective' },
@@ -36,26 +39,26 @@ const lesson1Words = [
 
 const lesson1Grammar = {
   questions: [
-    { id: 1, text: 'Which word means "bad or hurting others"?', options: ['afraid', 'clever', 'cruel', 'hunt'], correct: 2 },
-    { id: 2, text: 'Which word means "at last or at the end"?', options: ['angry', 'clever', 'finally', 'reply'], correct: 2 },
-    { id: 3, text: 'Which word means "to try to fight or hurt"?', options: ['attack', 'middle', 'pleased', 'trick'], correct: 0 },
-    { id: 4, text: 'Which word means "to not let others see"?', options: ['agree', 'hide', 'safe', 'well'], correct: 1 },
-    { id: 5, text: 'Which word means "the lowest part"?', options: ['bottom', 'lot', 'moment', 'promise'], correct: 0 },
-    { id: 6, text: 'What does "angry" mean?', options: ['happy', 'low', 'mad', 'scared'], correct: 2 },
-    { id: 7, text: 'What does "moment" mean?', options: ['a hole with water in it', 'a short time', 'at the center', 'at the end'], correct: 1 },
-    { id: 8, text: 'What does "promise" mean?', options: ['to say "good job"', 'to say "I will"', 'to say "the end"', 'to say "maybe"'], correct: 1 },
-    { id: 9, text: 'What does "reply" mean?', options: ['to answer', 'to get to a place', 'to look for in order to kill', 'to try to fight or hurt'], correct: 0 },
-    { id: 10, text: 'What does "safe" mean?', options: ['fool', 'having much or many', 'not seen', 'not worried about being hurt'], correct: 3 },
-    { id: 11, text: 'Which sentence makes better sense?', options: ['A clever person can solve a puzzle easily.', 'When a plane arrives, it leaves the ground and goes into the sky.'], correct: 0 },
-    { id: 12, text: 'Which sentence makes better sense?', options: ['At noon, the sun is near the bottom of the sky.', 'If I break my brother\'s bike, he will be angry.'], correct: 1 },
-    { id: 13, text: 'Which sentence makes better sense?', options: ['It is easy to hide in a dark place.', 'Many kinds of fish are afraid of water.'], correct: 0 },
-    { id: 14, text: 'Which sentence makes better sense?', options: ['At night, your parents may say, "Hide your eyes and go to sleep."', 'Heavy things will go down to the bottom of the ocean.'], correct: 1 },
-    { id: 15, text: 'Which sentence makes better sense?', options: ['It is cruel to keep a dog in a small cage all day.', 'Your mother will be angry when you get good grades in school.'], correct: 0 },
-    { id: 16, text: 'Which sentence makes better sense?', options: ['Animals cannot hunt because they do not have hands.', 'It is a good idea to arrive early for class.'], correct: 1 },
-    { id: 17, text: 'Which sentence makes better sense?', options: ['People sometimes attack pictures to email messages.', 'Some people are afraid of spiders.'], correct: 1 },
-    { id: 18, text: 'Which sentence makes better sense?', options: ['A moment is like a second or two.', 'New shoes are usually not very comfortable or clever.'], correct: 0 },
-    { id: 19, text: 'Which sentence makes better sense?', options: ['Small animals do not usually attack big animals.', 'There are twelve moments in a year.'], correct: 0 },
-    { id: 20, text: 'Which sentence makes better sense?', options: ['A cruel person will try to help others at all times.', 'You can use a gun to hunt in the forest.'], correct: 1 },
+    { id: 1, text: 'The children ___ afraid of the dark.', options: ['is', 'am', 'are', 'does'], correct: 2, explanation: '"Children" is plural, so use "are" with the adjective "afraid".' },
+    { id: 2, text: 'Choose the correct question:', options: ['Do you agree with me?', 'Does you agree with me?', 'Are you agree with me?', 'Do you agrees with me?'], correct: 0, explanation: 'Use "Do" + subject + base verb in questions: Do you agree...?' },
+    { id: 3, text: 'Choose the correct word order:', options: ['My father was angry about the news.', 'My father angry was about the news.', 'Angry was my father about the news.', 'About the news my father angry was.'], correct: 0, explanation: 'Subject + Verb (to be) + Adjective is the normal order: My father (S) was (V) angry (Adj).' },
+    { id: 4, text: 'Choose the correct question:', options: ['Does the train arrive at noon?', 'Do the train arrive at noon?', 'Does the train arrives at noon?', 'Is the train arrive at noon?'], correct: 0, explanation: '"The train" is singular, so use "Does" + base verb: Does...arrive.' },
+    { id: 5, text: 'The soldiers ___ the city at dawn.', options: ['attack', 'attacks', 'is attacking', 'has attack'], correct: 0, explanation: '"Soldiers" is plural, so the verb takes no -s: they attack.' },
+    { id: 6, text: 'Choose the correct word order:', options: ['The keys are at the bottom of the bag.', 'The keys at the bottom of the bag are.', 'At the bottom of the bag the keys are.', 'Are the keys at the bottom of the bag the.'], correct: 0, explanation: 'Subject + Verb (are) + Place phrase (at the bottom of the bag) is the normal order.' },
+    { id: 7, text: 'Choose the correct word order:', options: ['The clever student solved the problem.', 'The student clever solved the problem.', 'Solved the clever student the problem.', 'The problem the clever student solved.'], correct: 0, explanation: 'Adjectives like "clever" go before the noun, and the sentence keeps Subject + Verb + Object order.' },
+    { id: 8, text: 'It ___ cruel to leave a dog outside in winter.', options: ['is', 'are', 'do', 'does'], correct: 0, explanation: '"It" is singular, so use "is" with the adjective "cruel".' },
+    { id: 9, text: 'Choose the correct word order:', options: ['She finally finished her homework.', 'She finished finally her homework.', 'Finally she her homework finished.', 'Her homework she finally finished the.'], correct: 0, explanation: 'Adverbs like "finally" often go right before the main verb: She finally finished...' },
+    { id: 10, text: 'The cats ___ under the bed when guests arrive.', options: ['hide', 'hides', 'is hiding', 'was hide'], correct: 0, explanation: '"Cats" is plural, so no -s: they hide.' },
+    { id: 11, text: 'Choose the correct word order:', options: ['Wolves hunt small animals at night.', 'Wolves small animals hunt at night.', 'Hunt wolves small animals at night.', 'At night wolves animals small hunt.'], correct: 0, explanation: 'Subject + Verb + Object + Time is the normal order: Wolves (S) hunt (V) small animals (O) at night (Time).' },
+    { id: 12, text: 'There ___ a lot of clouds in the sky.', options: ['is', 'are', 'do', 'does'], correct: 1, explanation: '"A lot of clouds" is plural, so use "are".' },
+    { id: 13, text: 'Choose the correct word order:', options: ['The lamp stands in the middle of the room.', 'The lamp in the middle of the room stands.', 'In the middle of the room the lamp stands.', 'Stands the lamp in the middle of the room.'], correct: 0, explanation: 'Subject + Verb + Place phrase (in the middle of the room) is the normal order.' },
+    { id: 14, text: 'Choose the correct word order:', options: ['Wait a moment, please.', 'A moment wait, please.', 'Please a moment wait.', 'Wait please a moment.'], correct: 0, explanation: 'In an imperative sentence, the verb comes first: Wait (V) a moment (O).' },
+    { id: 15, text: 'We ___ pleased with your work.', options: ['is', 'am', 'are', 'be'], correct: 2, explanation: '"We" always uses "are" with the verb to be.' },
+    { id: 16, text: 'Choose the correct word order:', options: ['I promise to call you tomorrow.', 'I to call you tomorrow promise.', 'Promise I to call you tomorrow.', 'To call you tomorrow I promise.'], correct: 0, explanation: 'Subject + Verb + Object (an infinitive phrase) is the normal order: I (S) promise (V) to call you tomorrow (O).' },
+    { id: 17, text: 'She ___ not reply to my message.', options: ['do', 'does', 'is', 'are'], correct: 1, explanation: '"She" uses "does not" (doesn\'t) + base verb: does not reply.' },
+    { id: 18, text: 'Seat belts ___ safe for everyone in the car.', options: ['is', 'are', 'do', 'does'], correct: 1, explanation: '"Seat belts" is plural, so use "are".' },
+    { id: 19, text: 'Choose the correct word order:', options: ['The magician showed us a clever trick.', 'The magician a clever trick showed us.', 'Showed the magician us a clever trick.', 'A clever trick the magician showed us.'], correct: 0, explanation: 'Subject + Verb + Indirect Object + Object is the normal order: The magician (S) showed (V) us (IO) a clever trick (O).' },
+    { id: 20, text: 'Choose the correct word order:', options: ['He speaks English well.', 'He well speaks English.', 'Well he speaks English.', 'He speaks well English.'], correct: 0, explanation: 'The adverb "well" usually comes at the end of the sentence, after the verb and object.' },
   ],
 };
 
