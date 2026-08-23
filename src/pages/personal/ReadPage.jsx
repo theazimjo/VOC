@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -9,24 +9,59 @@ import { scienceChapterText } from '../../data/scienceChapterText';
 import { healthChapterText } from '../../data/healthChapterText';
 import { formatPageRange, getTopicPageRangeInfo } from '../../utils/chapterPageRanges';
 import { toShortLangCode } from '../../utils/dictionaryService';
+import { useSpeechRecognitionTracker } from '../../hooks/useSpeechRecognitionTracker';
+import VoiceReadAlongBar from '../../components/Read/VoiceReadAlongBar';
 import WordTapPopover from '../../components/Words/WordTapPopover';
 import IosSpinner from '../../components/common/IosSpinner';
 import './ReadPage.css';
 
 const chapterTextByTopic = { ...scienceChapterText, ...healthChapterText };
 
-function WordTokens({ text, onWordTap, knownWords }) {
+function getBlockWordCount(text) {
+  if (!text) return 0;
+  let count = 0;
   const segments = text.split(/(\{\{[^}]+\}\})/);
+  segments.forEach(segment => {
+    const phraseMatch = segment.match(/^\{\{([^}]+)\}\}$/);
+    if (phraseMatch) {
+      count++;
+    } else {
+      const matches = segment.match(/[A-Za-z']+/g);
+      if (matches) count += matches.length;
+    }
+  });
+  return count;
+}
+
+function WordTokens({
+  text,
+  onWordTap,
+  knownWords,
+  startIndex = 0,
+  activeWordIndex = -1,
+  passedWordIndices = new Set(),
+  onWordClickIndex
+}) {
+  const segments = text.split(/(\{\{[^}]+\}\})/);
+  let currentWordIdx = startIndex;
+
   return segments.map((segment, segIdx) => {
     const phraseMatch = segment.match(/^\{\{([^}]+)\}\}$/);
     if (phraseMatch) {
       const phrase = phraseMatch[1];
       const known = knownWords.has(phrase.toLowerCase());
+      const wordIdx = currentWordIdx++;
+      const isPassed = passedWordIndices.has(wordIdx);
+      const isActive = activeWordIndex === wordIdx;
+
       return (
         <span
           key={segIdx}
-          className={`read-word read-phrase ${known ? 'read-known' : ''}`}
-          onClick={(e) => onWordTap(phrase, e.currentTarget)}
+          className={`read-word read-phrase ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''}`}
+          onClick={(e) => {
+            if (onWordClickIndex) onWordClickIndex(wordIdx);
+            onWordTap(phrase, e.currentTarget);
+          }}
         >
           {phrase}
         </span>
@@ -37,11 +72,18 @@ function WordTokens({ text, onWordTap, knownWords }) {
       if (i % 2 === 1 && part.trim()) {
         const clean = part.replace(/^'+|'+$/g, '');
         const known = knownWords.has(clean.toLowerCase());
+        const wordIdx = currentWordIdx++;
+        const isPassed = passedWordIndices.has(wordIdx);
+        const isActive = activeWordIndex === wordIdx;
+
         return (
           <span
             key={`${segIdx}-${i}`}
-            className={`read-word ${known ? 'read-known' : ''}`}
-            onClick={(e) => onWordTap(clean, e.currentTarget)}
+            className={`read-word ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''}`}
+            onClick={(e) => {
+              if (onWordClickIndex) onWordClickIndex(wordIdx);
+              onWordTap(clean, e.currentTarget);
+            }}
           >
             {part}
           </span>
@@ -184,6 +226,28 @@ export default function ReadPage() {
 
   const page = useMemo(() => chapter?.pages[pageIndex] || [], [chapter, pageIndex]);
 
+  const [isSpeakMode, setIsSpeakMode] = useState(false);
+
+  const pageWords = useMemo(() => {
+    if (!page || !Array.isArray(page)) return [];
+    const words = [];
+    page.forEach(block => {
+      if (block.text) {
+        const segments = block.text.split(/(\{\{[^}]+\}\})/);
+        segments.forEach(segment => {
+          const phraseMatch = segment.match(/^\{\{([^}]+)\}\}$/);
+          if (phraseMatch) {
+            words.push(phraseMatch[1]);
+          } else {
+            const matches = segment.match(/[A-Za-z']+/g);
+            if (matches) words.push(...matches);
+          }
+        });
+      }
+    });
+    return words;
+  }, [page]);
+
   const knownWords = useMemo(() => {
     return new Set(
       words.filter(w => w.topic === topic).map(w => (w.word || '').trim().toLowerCase())
@@ -191,6 +255,35 @@ export default function ReadPage() {
   }, [words, topic]);
 
   const wordLangCode = toShortLangCode(pack?.language || 'en-US');
+
+  const {
+    isSupported: isSpeechSupported,
+    isListening: isSpeechListening,
+    activeWordIndex,
+    passedWordIndices,
+    wpm,
+    accuracy,
+    error: speechError,
+    startListening,
+    stopListening,
+    toggleListening,
+    resetTracker,
+    setActiveWordIndex
+  } = useSpeechRecognitionTracker({
+    pageWords,
+    langCode: pack?.language || 'en-US',
+    enabled: isSpeakMode
+  });
+
+  // Auto-scroll to currently spoken word
+  useEffect(() => {
+    if (isSpeakMode && activeWordIndex >= 0) {
+      const el = document.querySelector('.read-spoken-active');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }, [isSpeakMode, activeWordIndex]);
 
   const handleWordTap = useCallback((word, anchorEl) => {
     if (!word) return;
@@ -256,6 +349,8 @@ export default function ReadPage() {
     ? topicRange.end
     : totalPages;
 
+  let wordOffsetCounter = 0;
+
   return (
     <div className={`read-page-shell theme-${readerTheme}`}>
       {/* Floating Side Navigation Arrows (Middle height beside text) */}
@@ -313,6 +408,26 @@ export default function ReadPage() {
 
           {/* Reader Controls Toolbar */}
           <div className="read-toolbar">
+            <button
+              type="button"
+              className={`read-tool-btn read-speak-mode-btn ${isSpeakMode ? 'active' : ''}`}
+              onClick={() => {
+                const nextMode = !isSpeakMode;
+                setIsSpeakMode(nextMode);
+                if (nextMode) {
+                  startListening();
+                } else {
+                  stopListening();
+                }
+              }}
+              title="Ovozli o'qish va Karaoke belgilash (Speak Mode)"
+            >
+              <Mic size={15} />
+              <span>Speak</span>
+            </button>
+
+            <div className="read-tool-divider" />
+
             <div className="read-font-group">
               <button
                 type="button"
@@ -363,6 +478,28 @@ export default function ReadPage() {
           </div>
         </header>
 
+        {/* Speak Mode Karaoke Control Bar */}
+        <AnimatePresence>
+          {isSpeakMode && (
+            <VoiceReadAlongBar
+              isListening={isSpeechListening}
+              onToggleListening={toggleListening}
+              onReset={resetTracker}
+              onClose={() => {
+                stopListening();
+                setIsSpeakMode(false);
+              }}
+              passedCount={passedWordIndices.size}
+              totalWords={pageWords.length}
+              wpm={wpm}
+              accuracy={accuracy}
+              isSupported={isSpeechSupported}
+              error={speechError}
+              t={t}
+            />
+          )}
+        </AnimatePresence>
+
         {/* Page Content Body */}
         <motion.div
           className={`read-body font-size-${fontSize}`}
@@ -391,6 +528,11 @@ export default function ReadPage() {
               );
             }
 
+            const currentStartIndex = wordOffsetCounter;
+            if (block.text) {
+              wordOffsetCounter += getBlockWordCount(block.text);
+            }
+
             if (block.type === 'sidebar' || block.type === 'activity') {
               return (
                 <div className="read-callout-card" key={blockIdx}>
@@ -402,7 +544,17 @@ export default function ReadPage() {
                       {block.type === 'sidebar' ? t('read.didYouKnow') : t('read.readingTip')}
                     </h4>
                     <div className="read-callout-body">
-                      <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
+                      <WordTokens
+                        text={block.text}
+                        onWordTap={handleWordTap}
+                        knownWords={knownWords}
+                        startIndex={currentStartIndex}
+                        activeWordIndex={activeWordIndex}
+                        passedWordIndices={passedWordIndices}
+                        onWordClickIndex={(idx) => {
+                          if (isSpeakMode) setActiveWordIndex(idx);
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -411,7 +563,17 @@ export default function ReadPage() {
 
             return (
               <div className={`read-block read-block-${block.type}`} key={blockIdx}>
-                <WordTokens text={block.text} onWordTap={handleWordTap} knownWords={knownWords} />
+                <WordTokens
+                  text={block.text}
+                  onWordTap={handleWordTap}
+                  knownWords={knownWords}
+                  startIndex={currentStartIndex}
+                  activeWordIndex={activeWordIndex}
+                  passedWordIndices={passedWordIndices}
+                  onWordClickIndex={(idx) => {
+                    if (isSpeakMode) setActiveWordIndex(idx);
+                  }}
+                />
               </div>
             );
           })}
