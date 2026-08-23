@@ -806,6 +806,46 @@ Future Perfect Continuous показывает, **как долго будет �
 ⚠️ **Главное правило**: После модального глагола частица **to** НЕ ставится!
   - ✅ It must be true ➔ ❌ It must to be true`,
 
+  'modal-verbs-semi-passive': `## Modal Verbs: Semi-Modals & Passive (Полумодальные обороты и пассив с модальными)
+
+Здесь рассматриваются обороты **be capable of, be likely to**, форма **shan't**, а также **пассивный залог** с модальными глаголами.
+
+## 1. Таблица
+| Оборот | Значение | Пример |
+|---|---|---|
+| **be capable of + V-ing** | Формальный аналог "can" (способность) | She **is capable of solving** this. |
+| **be likely to + V** | Формальный аналог "may/might" (вероятность) | It **is likely to rain**. |
+| **be likely to be + V3** | Пассивная вероятность | The plan **is likely to be approved**. |
+| **be likely to have + V3** | Вероятность в прошлом | He **is likely to have left**. |
+| **shan't** | = shall not, формально, с I/we | I **shan't** be able to come. |
+
+## 2. Пассив с модальными глаголами
+• **Настоящее**: Modal + **be** + V3
+  - This letter **must be sent** today. This problem **can be solved**.
+• **Прошедшее (перфектный пассив)**: Modal + **have been** + V3
+  - The window **must have been broken** by someone.
+  - The letter **should have been sent** yesterday, but it wasn't.
+
+⚠️ **Главное правило**: После модального глагола частица **to** НЕ ставится, и **be** не меняется по лицам!
+  - ✅ It must be done ➔ ❌ It must to be done / It musts be done`,
+
+  'modal-verbs-past': `## Modal Verbs: Past Modals (Модальные глаголы для прошедшего времени)
+
+Формула: **Modal + have + V3** — выражает вывод, вероятность, сожаление или критику о прошлом. **have** никогда не меняется на **has/had**.
+
+## 1. Таблица
+| Оборот | Значение | Пример |
+|---|---|---|
+| **must have + V3** | Уверенный положительный вывод о прошлом | The ground is wet — it **must have rained**. |
+| **can't / couldn't have + V3** | Уверенный отрицательный вывод | He **can't have finished** it that fast! |
+| **might / may have + V3** | Неуверенная вероятность о прошлом | She **might have forgotten**. |
+| **could have + V3** | Упущенная возможность | We **could have won**, but we didn't try. |
+| **should / shouldn't have + V3** | Сожаление, критика | You **should have called** me. You **shouldn't have shouted**. |
+| **needn't have + V3** | Ненужное, но совершённое действие | You **needn't have brought** an umbrella. |
+
+⚠️ **Главное правило**: После модального глагола всегда **have** (не "has", не "had")!
+  - ✅ She must have left ➔ ❌ She must has left / She must had left`,
+
   'first-conditional': `## First Conditional (Первый тип условных предложений)
 
 First Conditional выражает **реальные, возможные будущие события**, если выполнится условие.

@@ -5867,6 +5867,356 @@ Bu modal fe'llar bir voqeaning qanchalik mumkinligini baholash (possibility/dedu
         ]
       },
       {
+        id: 'modal-verbs-semi-passive',
+        title: 'Modal Verbs 4: Semi-Modals & Passive',
+        icon: '⚙️',
+        guide: `## Modal Verbs: Semi-Modals & Modal Passive (Yarim-modallar va modal fe'llar bilan majhul nisbat)
+
+Bu blokda modal ma'nolarni ifodalovchi **yarim-modal iboralar** (be capable of, be likely to), rasmiy **shan't** shakli va modal fe'llarning **majhul nisbatdagi (passive)** shakli o'rganiladi.
+
+## 1. Yarim-modal iboralar (Semi-modals)
+1. **be capable of + V-ing** — "can"ning rasmiyroq muqobili (qobiliyat):
+   - She **is capable of solving** this problem. = She **can solve** this problem.
+   - Inkor: **not capable of**: He **isn't capable of lying**.
+2. **be likely to + base verb** — "may/might"ning muqobili (ehtimollik):
+   - It **is likely to rain** tomorrow. = It **may rain** tomorrow.
+   - Inkor: **unlikely to** / **not likely to**: She **is unlikely to come**.
+3. **be likely to be + V3** — passiv ehtimollik (hozirgi/kelasi):
+   - The plan **is likely to be approved** next week.
+4. **be likely to have + V3** — o'tmishdagi ehtimollik (perfect infinitive):
+   - He **is likely to have left** already. (U allaqachon ketgan bo'lishi mumkin.)
+
+## 2. shan't (shall not)
+• **shall** — rasmiy taklif/va'da (asosan I/we bilan, Britaniya ingliz tilida):
+  - **Shall** I open the window? I **shall** never forget this day.
+• **shan't** = shall not — inkor shakli, hozirgi kunda kamdan-kam, ko'proq rasmiy/adabiy uslubda:
+  - I **shan't** be able to come tomorrow. = I **won't** be able to come tomorrow.
+
+## 3. Modal Passive — hozirgi (Modal fe'llar bilan majhul nisbat)
+Formula: **Modal + be + V3 (Past Participle)**
+• Tasdiq: This letter **must be sent** today. The work **should be finished** by Friday.
+• Inkor: This **mustn't be touched**. The report **can't be finished** on time.
+• Savol: **Must** this **be done** today? **Can** this problem **be solved**?
+
+## 4. Modal Passive — o'tmish (Modal Perfect Passive)
+Formula: **Modal + have been + V3**
+• The window **must have been broken** by someone. (Kimdir uni sindirgan bo'lishi kerak.)
+• The letter **should have been sent** yesterday, but it wasn't. (Kecha yuborilishi kerak edi, lekin yuborilmadi.)
+
+## 5. Signal so'zlar
+• be capable of, not capable of
+• be likely to, unlikely to
+• shall, shan't
+• must be done, should be finished, can be seen, may be affected
+• must have been done, should have been sent`,
+        questions: [
+          { id: 1, text: 'She ___ solving even the hardest math problems.', options: ['is capable of', 'is capable to', 'capable of', 'can capable of'], correct: 0, explanation: '"be capable of" — "can"ning rasmiy muqobili.' },
+          { id: 2, text: 'My grandfather ___ fixing old clocks perfectly.', options: ['was capable of', 'was capable to', 'capable of', 'could capable of'], correct: 0, explanation: '"be capable of" — o\'tmishdagi qobiliyat.' },
+          { id: 3, text: "He ___ hurting anyone — it's just not in his nature.", options: ["isn't capable of", "isn't capable to", "not capable of", "can't capable of"], correct: 0, explanation: '"not capable of" — qobiliyat/xarakter yo\'qligi.' },
+          { id: 4, text: 'This team ___ winning the championship this year.', options: ['is capable of', 'is capable to', 'capable of', 'can capable of'], correct: 0, explanation: '"be capable of" — qobiliyat.' },
+          { id: 5, text: 'It ___ rain later — the sky is getting dark.', options: ['is likely to', 'is likely of', 'is like to', 'likely to'], correct: 0, explanation: '"be likely to" — ehtimollik.' },
+          { id: 6, text: 'The new policy ___ approved by the board next week.', options: ['is likely to be', 'is likely to being', 'is likely be', 'likely to be'], correct: 0, explanation: '"be likely to be" — passiv ehtimollik.' },
+          { id: 7, text: "He ___ left already — his car isn't here.", options: ['is likely to have', 'is likely to had', 'is likely have', 'likely to have'], correct: 0, explanation: '"be likely to have" — o\'tmishdagi ehtimollik.' },
+          { id: 8, text: "She ___ come to the party — she's very busy this week.", options: ['is unlikely to', 'is unlike to', 'unlikely to', 'is likely not to'], correct: 0, explanation: '"be unlikely to" — "be likely to"ning inkor shakli.' },
+          { id: 9, text: "I ___ be able to attend the meeting tomorrow, I'm afraid.", options: ["shan't", "shalln't", "shall not to", "don't shall"], correct: 0, explanation: '"shan\'t" = shall not.' },
+          { id: 10, text: 'We ___ forget this wonderful trip.', options: ['shall never', 'shall to never', 'shalls never', 'never shall to'], correct: 0, explanation: '"shall" — rasmiy va\'da (I/we bilan).' },
+          { id: 11, text: "This letter ___ sent today — it's urgent.", options: ['must be', 'must be being', 'must to be', 'must been'], correct: 0, explanation: 'Modal passiv: must + be + V3.' },
+          { id: 12, text: 'The work ___ finished by Friday.', options: ['should be', 'should being', 'should to be', 'should been'], correct: 0, explanation: 'Modal passiv: should + be + V3.' },
+          { id: 13, text: "This problem ___ solved easily with a bit of effort.", options: ['can be', 'can being', 'can to be', 'can been'], correct: 0, explanation: 'Modal passiv: can + be + V3.' },
+          { id: 14, text: 'The results ___ announced tomorrow morning.', options: ['may be', 'may being', 'may to be', 'may been'], correct: 0, explanation: 'Modal passiv: may + be + V3.' },
+          { id: 15, text: '___ the bridge be repaired before winter?', options: ['Must', 'Musts', 'Must to', 'Musting'], correct: 0, explanation: 'Modal passiv savol: Must + subject + be + V3?' },
+          { id: 16, text: "This exercise ___ done without a calculator.", options: ["can't be", "can't being", "can't to be", "cant's be"], correct: 0, explanation: 'Modal passiv inkor: can\'t + be + V3.' },
+          { id: 17, text: "The window ___ broken by someone — look at the crack.", options: ['must have been', 'must have be', 'must been have', 'must has been'], correct: 0, explanation: 'Modal perfect passiv: must + have been + V3.' },
+          { id: 18, text: 'The letter ___ sent yesterday, but it wasn\'t.', options: ['should have been', 'should has been', 'should have be', 'should been have'], correct: 0, explanation: 'Modal perfect passiv: should + have been + V3.' },
+          { id: 19, text: "The keys ___ left in the office — no one has seen them since.", options: ['might have been', 'might had been', 'might have be', 'might been have'], correct: 0, explanation: 'Modal perfect passiv: might + have been + V3.' },
+          { id: 20, text: 'This mistake ___ avoided if we had checked earlier.', options: ['could have been', 'could had been', 'could have be', 'could been have'], correct: 0, explanation: 'Modal perfect passiv: could + have been + V3.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'She ___ (is capable of / solve) even the hardest math problems.', options: ['is capable of solving', 'is capable to solve', 'capable of solve', 'can capable of solving'], correct: 0, explanation: '"be capable of" + V-ing (solve → solving).' },
+          { id: 2, text: 'My grandfather ___ (was capable of / fix) old clocks perfectly.', options: ['was capable of fixing', 'was capable to fix', 'capable of fixing', 'could capable of fixing'], correct: 0, explanation: '"was capable of" + V-ing (fix → fixing).' },
+          { id: 3, text: 'He ___ (isn\'t capable of / hurt) anyone.', options: ["isn't capable of hurting", "isn't capable to hurt", "not capable of hurting", "can't capable of hurting"], correct: 0, explanation: '"isn\'t capable of" + V-ing (hurt → hurting).' },
+          { id: 4, text: 'This team ___ (is capable of / win) the championship this year.', options: ['is capable of winning', 'is capable to win', 'capable of winning', 'can capable of winning'], correct: 0, explanation: '"is capable of" + V-ing (win → winning).' },
+          { id: 5, text: 'It ___ (is likely to / rain) later.', options: ['is likely to rain', 'is likely to raining', 'is like to rain', 'likely to rain'], correct: 0, explanation: '"is likely to" + base verb (rain).' },
+          { id: 6, text: 'The new policy ___ (is likely to be / approve) by the board next week.', options: ['is likely to be approved', 'is likely to being approved', 'is likely be approved', 'likely to be approved'], correct: 0, explanation: '"is likely to be" + V3 (approve → approved), passiv.' },
+          { id: 7, text: 'He ___ (is likely to have / leave) already.', options: ['is likely to have left', 'is likely to have leave', 'is likely have left', 'likely to have left'], correct: 0, explanation: '"is likely to have" + V3 (leave → left).' },
+          { id: 8, text: 'She ___ (is unlikely to / come) to the party.', options: ['is unlikely to come', 'is unlike to come', 'unlikely to come', 'is likely not to come'], correct: 0, explanation: '"is unlikely to" + base verb (come).' },
+          { id: 9, text: 'I ___ (shan\'t / be) able to attend tomorrow.', options: ["shan't be", "shalln't be", "shall not to be", "don't shall be"], correct: 0, explanation: '"shan\'t" + base verb (be).' },
+          { id: 10, text: 'We ___ (shall never / forget) this wonderful trip.', options: ['shall never forget', 'shall to never forget', 'shalls never forget', 'never shall to forget'], correct: 0, explanation: '"shall never" + base verb (forget).' },
+          { id: 11, text: 'This letter ___ (must be / send) today.', options: ['must be sent', 'must be sending', 'must to be sent', 'must been sent'], correct: 0, explanation: '"must be" + V3 (send → sent), passiv.' },
+          { id: 12, text: 'The work ___ (should be / finish) by Friday.', options: ['should be finished', 'should being finished', 'should to be finished', 'should been finished'], correct: 0, explanation: '"should be" + V3 (finish → finished), passiv.' },
+          { id: 13, text: 'This problem ___ (can be / solve) easily.', options: ['can be solved', 'can being solved', 'can to be solved', 'can been solved'], correct: 0, explanation: '"can be" + V3 (solve → solved), passiv.' },
+          { id: 14, text: 'The results ___ (may be / announce) tomorrow morning.', options: ['may be announced', 'may being announced', 'may to be announced', 'may been announced'], correct: 0, explanation: '"may be" + V3 (announce → announced), passiv.' },
+          { id: 15, text: '___ (must / the bridge / be / repair) before winter?', options: ['Must the bridge be repaired', 'The bridge must be repaired', 'Must the bridge being repaired', 'Must the bridge to be repaired'], correct: 0, explanation: 'Modal passiv savol: Must + subject + be + V3?' },
+          { id: 16, text: 'This exercise ___ (can\'t be / do) without a calculator.', options: ["can't be done", "can't being done", "can't to be done", "cant's be done"], correct: 0, explanation: '"can\'t be" + V3 (do → done), passiv inkor.' },
+          { id: 17, text: 'The window ___ (must have been / break) by someone.', options: ['must have been broken', 'must have be broken', 'must been have broken', 'must has been broken'], correct: 0, explanation: '"must have been" + V3 (break → broken), perfect passiv.' },
+          { id: 18, text: 'The letter ___ (should have been / send) yesterday.', options: ['should have been sent', 'should has been sent', 'should have be sent', 'should been have sent'], correct: 0, explanation: '"should have been" + V3 (send → sent), perfect passiv.' },
+          { id: 19, text: 'The keys ___ (might have been / leave) in the office.', options: ['might have been left', 'might had been left', 'might have be left', 'might been have left'], correct: 0, explanation: '"might have been" + V3 (leave → left), perfect passiv.' },
+          { id: 20, text: 'This mistake ___ (could have been / avoid) if we had checked earlier.', options: ['could have been avoided', 'could had been avoided', 'could have be avoided', 'could been have avoided'], correct: 0, explanation: '"could have been" + V3 (avoid → avoided), perfect passiv.' }
+        ],
+        scrambled: [
+          { id: 1, words: ['solving', 'she', 'is', 'capable', 'of', 'difficult', 'problems'], answer: 'she is capable of solving difficult problems', explanation: 'Subject + is capable of + V-ing.' },
+          { id: 2, words: ['fixing', 'my', 'grandfather', 'was', 'capable', 'of', 'old', 'clocks'], answer: 'my grandfather was capable of fixing old clocks', explanation: 'Subject + was capable of + V-ing.' },
+          { id: 3, words: ['hurting', 'he', "isn't", 'capable', 'of', 'anyone'], answer: "he isn't capable of hurting anyone", explanation: 'Subject + isn\'t capable of + V-ing.' },
+          { id: 4, words: ['winning', 'this', 'team', 'is', 'capable', 'of', 'the', 'championship'], answer: 'this team is capable of winning the championship', explanation: 'Subject + is capable of + V-ing.' },
+          { id: 5, words: ['rain', 'it', 'is', 'likely', 'to', 'later'], answer: 'it is likely to rain later', explanation: 'Subject + is likely to + base verb.' },
+          { id: 6, words: ['approved', 'the', 'policy', 'is', 'likely', 'to', 'be', 'next', 'week'], answer: 'the policy is likely to be approved next week', explanation: 'Subject + is likely to be + V3 (passiv).' },
+          { id: 7, words: ['left', 'he', 'is', 'likely', 'to', 'have', 'already'], answer: 'he is likely to have left already', explanation: 'Subject + is likely to have + V3.' },
+          { id: 8, words: ['come', 'she', 'is', 'unlikely', 'to', 'to', 'the', 'party'], answer: 'she is unlikely to come to the party', explanation: 'Subject + is unlikely to + base verb.' },
+          { id: 9, words: ['able', 'I', "shan't", 'be', 'tomorrow'], answer: "I shan't be able tomorrow", explanation: 'Subject + shan\'t + base verb.' },
+          { id: 10, words: ['forget', 'we', 'shall', 'never', 'this', 'trip'], answer: 'we shall never forget this trip', explanation: 'Subject + shall + base verb.' },
+          { id: 11, words: ['sent', 'this', 'letter', 'must', 'be', 'today'], answer: 'this letter must be sent today', explanation: 'Subject + must be + V3 (passiv).' },
+          { id: 12, words: ['finished', 'the', 'work', 'should', 'be', 'by', 'Friday'], answer: 'the work should be finished by Friday', explanation: 'Subject + should be + V3 (passiv).' },
+          { id: 13, words: ['solved', 'this', 'problem', 'can', 'be', 'easily'], answer: 'this problem can be solved easily', explanation: 'Subject + can be + V3 (passiv).' },
+          { id: 14, words: ['announced', 'the', 'results', 'may', 'be', 'tomorrow'], answer: 'the results may be announced tomorrow', explanation: 'Subject + may be + V3 (passiv).' },
+          { id: 15, words: ['repaired', 'must', 'the', 'bridge', 'be', 'before', 'winter', '?'], answer: 'must the bridge be repaired before winter', explanation: 'Must + subject + be + V3? (passiv savol)' },
+          { id: 16, words: ['done', 'this', 'exercise', "can't", 'be', 'without', 'a', 'calculator'], answer: "this exercise can't be done without a calculator", explanation: 'Subject + can\'t be + V3 (passiv inkor).' },
+          { id: 17, words: ['broken', 'the', 'window', 'must', 'have', 'been', 'by', 'someone'], answer: 'the window must have been broken by someone', explanation: 'Subject + must have been + V3 (perfect passiv).' },
+          { id: 18, words: ['sent', 'the', 'letter', 'should', 'have', 'been', 'yesterday'], answer: 'the letter should have been sent yesterday', explanation: 'Subject + should have been + V3 (perfect passiv).' },
+          { id: 19, words: ['left', 'the', 'keys', 'might', 'have', 'been', 'in', 'the', 'office'], answer: 'the keys might have been left in the office', explanation: 'Subject + might have been + V3 (perfect passiv).' },
+          { id: 20, words: ['avoided', 'this', 'mistake', 'could', 'have', 'been'], answer: 'this mistake could have been avoided', explanation: 'Subject + could have been + V3 (perfect passiv).' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'She is capable to solve even the hardest problems.', options: ['She', 'is capable to solve', 'even the hardest', 'problems'], correct: 1, wrongPart: 'is capable to solve', correction: 'is capable of solving', explanation: '"be capable of" is followed by a gerund (-ing), not "to + verb": "capable of solving".' },
+          { id: 2, text: 'My grandfather was capable of fix old clocks.', options: ['My grandfather', 'was capable of', 'fix', 'old clocks'], correct: 2, wrongPart: 'fix', correction: 'fixing', explanation: 'After "capable of", use the gerund: "fixing", not "fix".' },
+          { id: 3, text: "He isn't capable to hurt anyone.", options: ['He', "isn't capable to hurt", 'anyone', 'No error'], correct: 1, wrongPart: "isn't capable to hurt", correction: "isn't capable of hurting", explanation: '"capable of" is followed by a gerund, not "to + verb": "capable of hurting".' },
+          { id: 4, text: 'This team is capable to win the championship.', options: ['This team', 'is capable to win', 'the', 'championship'], correct: 1, wrongPart: 'is capable to win', correction: 'is capable of winning', explanation: '"be capable of" is followed by a gerund: "capable of winning".' },
+          { id: 5, text: 'It is like to rain later.', options: ['It', 'is like to rain', 'later', 'No error'], correct: 1, wrongPart: 'is like to rain', correction: 'is likely to rain', explanation: 'The correct expression is "likely to", not "like to".' },
+          { id: 6, text: 'The policy is likely to approved next week.', options: ['The policy', 'is likely to approved', 'next', 'week'], correct: 1, wrongPart: 'is likely to approved', correction: 'is likely to be approved', explanation: 'The passive form needs "be": "is likely to be approved".' },
+          { id: 7, text: 'He is likely to left already.', options: ['He', 'is likely to left', 'already', 'No error'], correct: 1, wrongPart: 'is likely to left', correction: 'is likely to have left', explanation: 'For a past probability, use the perfect infinitive: "is likely to have left".' },
+          { id: 8, text: 'She is unlike to come to the party.', options: ['She', 'is unlike to come', 'to the party', 'No error'], correct: 1, wrongPart: 'is unlike to come', correction: 'is unlikely to come', explanation: 'The correct expression is "unlikely to", not "unlike to".' },
+          { id: 9, text: "I shalln't be able to attend tomorrow.", options: ['I', "shalln't be able", 'to attend', 'tomorrow'], correct: 1, wrongPart: "shalln't be able", correction: "shan't be able", explanation: '"shall not" is contracted as "shan\'t", not "shalln\'t".' },
+          { id: 10, text: 'We shall to never forget this trip.', options: ['We', 'shall to never forget', 'this', 'trip'], correct: 1, wrongPart: 'shall to never forget', correction: 'shall never forget', explanation: 'Modal verbs are followed directly by the base verb, no "to": "shall never forget".' },
+          { id: 11, text: 'This letter must be send today.', options: ['This letter', 'must be send', 'today', 'No error'], correct: 1, wrongPart: 'must be send', correction: 'must be sent', explanation: 'Passive modal: modal + be + past participle: "must be sent", not "send".' },
+          { id: 12, text: 'The work should being finished by Friday.', options: ['The work', 'should being finished', 'by', 'Friday'], correct: 1, wrongPart: 'should being finished', correction: 'should be finished', explanation: 'Passive modal: modal + be + past participle: "should be finished".' },
+          { id: 13, text: 'This problem can to be solved easily.', options: ['This problem', 'can to be solved', 'easily', 'No error'], correct: 1, wrongPart: 'can to be solved', correction: 'can be solved', explanation: 'Modal verbs are followed directly by "be", no "to": "can be solved".' },
+          { id: 14, text: 'The results may been announced tomorrow.', options: ['The results', 'may been announced', 'tomorrow', 'No error'], correct: 1, wrongPart: 'may been announced', correction: 'may be announced', explanation: 'Passive modal: modal + be + past participle: "may be announced", not "been".' },
+          { id: 15, text: 'Must the bridge to be repaired before winter?', options: ['Must', 'the bridge to be repaired', 'before winter', 'No error'], correct: 1, wrongPart: 'the bridge to be repaired', correction: 'the bridge be repaired', explanation: 'Modal verbs are followed directly by "be", no "to": "Must the bridge be repaired".' },
+          { id: 16, text: "This exercise can't being done without a calculator.", options: ['This exercise', "can't being done", 'without a calculator', 'No error'], correct: 1, wrongPart: "can't being done", correction: "can't be done", explanation: 'Passive modal: modal + be + past participle: "can\'t be done", not "being".' },
+          { id: 17, text: 'The window must has been broken by someone.', options: ['The window', 'must has been broken', 'by', 'someone'], correct: 1, wrongPart: 'must has been broken', correction: 'must have been broken', explanation: 'Perfect passive modal: modal + have been + past participle: "must have been broken", not "has been".' },
+          { id: 18, text: 'The letter should have be sent yesterday.', options: ['The letter', 'should have be sent', 'yesterday', 'No error'], correct: 1, wrongPart: 'should have be sent', correction: 'should have been sent', explanation: 'Perfect passive modal: modal + have been + past participle: "should have been sent".' },
+          { id: 19, text: 'The keys might had been left in the office.', options: ['The keys', 'might had been left', 'in the', 'office'], correct: 1, wrongPart: 'might had been left', correction: 'might have been left', explanation: 'Perfect passive modal: modal + have been + past participle: "might have been left", not "had been".' },
+          { id: 20, text: 'This mistake could been have avoided if we had checked earlier.', options: ['This mistake', 'could been have avoided', 'if we had', 'checked earlier'], correct: 1, wrongPart: 'could been have avoided', correction: 'could have been avoided', explanation: 'Perfect passive modal: modal + have been + past participle: "could have been avoided".' }
+        ],
+        transform: [
+          { id: 1, text: 'Express formal ability: "She has the skill to solve even the hardest problems."', options: ['She is capable of solving even the hardest problems.', 'She must solve even the hardest problems.', 'She should solve even the hardest problems.', 'She is likely to solve even the hardest problems.'], correct: 0, explanation: '"be capable of" expresses ability, a more formal alternative to "can".' },
+          { id: 2, text: 'Express past ability: "My grandfather had the skill to fix old clocks."', options: ['My grandfather was capable of fixing old clocks.', 'My grandfather must fix old clocks.', 'My grandfather should fix old clocks.', 'My grandfather is likely to fix old clocks.'], correct: 0, explanation: '"be capable of" expresses ability (past: "was capable of").' },
+          { id: 3, text: 'Express lack of character: "It is not in his nature to hurt anyone."', options: ["He isn't capable of hurting anyone.", "He mustn't hurt anyone.", "He shouldn't hurt anyone.", "He isn't likely to hurt anyone."], correct: 0, explanation: '"not capable of" expresses lack of ability/character.' },
+          { id: 4, text: 'Express ability: "This team has what it takes to win the championship."', options: ['This team is capable of winning the championship.', 'This team must win the championship.', 'This team should win the championship.', 'This team is likely to win the championship.'], correct: 0, explanation: '"be capable of" expresses ability.' },
+          { id: 5, text: 'Express probability: "It is probable that it will rain later."', options: ['It is likely to rain later.', 'It is capable of raining later.', 'It must rain later.', "It can't rain later."], correct: 0, explanation: '"be likely to" expresses probability, similar to "may/might".' },
+          { id: 6, text: 'Express passive probability: "It is probable that the board will approve the policy next week."', options: ['The policy is likely to be approved next week.', 'The policy is capable of being approved next week.', 'The policy must approve next week.', 'The policy can approve next week.'], correct: 0, explanation: '"be likely to be + V3" expresses passive probability.' },
+          { id: 7, text: 'Express past probability: "It is probable that he has already left."', options: ['He is likely to have left already.', 'He is likely to leave already.', 'He must leave already.', "He can't leave already."], correct: 0, explanation: '"be likely to have + V3" expresses probability about the past.' },
+          { id: 8, text: 'Express improbability: "It is not probable that she will come to the party."', options: ['She is unlikely to come to the party.', 'She is capable of coming to the party.', "She mustn't come to the party.", "She shouldn't come to the party."], correct: 0, explanation: '"be unlikely to" expresses improbability.' },
+          { id: 9, text: 'Make a formal statement about future inability: "I will not be able to attend tomorrow."', options: ["I shan't be able to attend tomorrow.", "I mustn't be able to attend tomorrow.", "I couldn't be able to attend tomorrow.", "I amn't able to attend tomorrow."], correct: 0, explanation: '"shan\'t" (shall not) is a formal way of saying "will not", mainly with I/we.' },
+          { id: 10, text: 'Make a formal promise: "I promise that we will never forget this trip."', options: ['We shall never forget this trip.', 'We should never forget this trip.', 'We must never forget this trip.', 'We may never forget this trip.'], correct: 0, explanation: '"shall" expresses a formal promise, especially with I/we.' },
+          { id: 11, text: 'Express passive obligation: "It is necessary to send this letter today."', options: ['This letter must be sent today.', 'This letter must send today.', 'This letter must sending today.', 'This letter must to send today.'], correct: 0, explanation: 'Passive modal: modal + be + past participle — "must be sent".' },
+          { id: 12, text: 'Express passive advice: "It would be a good idea to finish the work by Friday."', options: ['The work should be finished by Friday.', 'The work should finish by Friday.', 'The work should finishing by Friday.', 'The work should to finish by Friday.'], correct: 0, explanation: 'Passive modal: modal + be + past participle — "should be finished".' },
+          { id: 13, text: 'Express passive ability: "It is possible to solve this problem easily."', options: ['This problem can be solved easily.', 'This problem can solve easily.', 'This problem can solving easily.', 'This problem can to solve easily.'], correct: 0, explanation: 'Passive modal: modal + be + past participle — "can be solved".' },
+          { id: 14, text: 'Express passive possibility: "It is possible that the results will be announced tomorrow."', options: ['The results may be announced tomorrow.', 'The results may announce tomorrow.', 'The results may announcing tomorrow.', 'The results may to announce tomorrow.'], correct: 0, explanation: 'Passive modal: modal + be + past participle — "may be announced".' },
+          { id: 15, text: 'Ask about passive obligation: "Is it necessary to repair the bridge before winter?"', options: ['Must the bridge be repaired before winter?', 'Must the bridge repair before winter?', 'Must the bridge repairing before winter?', 'Must the bridge to be repaired before winter?'], correct: 0, explanation: 'Passive modal question: Must + subject + be + V3?' },
+          { id: 16, text: 'Express passive impossibility: "It is impossible to do this exercise without a calculator."', options: ["This exercise can't be done without a calculator.", "This exercise can't do without a calculator.", "This exercise can't doing without a calculator.", "This exercise can't to do without a calculator."], correct: 0, explanation: 'Passive modal negative: modal + be + past participle — "can\'t be done".' },
+          { id: 17, text: 'Express a confident conclusion about the past: "I\'m sure someone broke the window."', options: ['The window must have been broken by someone.', 'The window must be broken by someone.', 'The window must broken by someone.', 'The window must have broke by someone.'], correct: 0, explanation: 'Perfect passive modal: modal + have been + V3 — "must have been broken".' },
+          { id: 18, text: 'Express an unfulfilled past obligation: "It was necessary to send the letter yesterday, but it wasn\'t done."', options: ['The letter should have been sent yesterday.', 'The letter should be sent yesterday.', 'The letter should have sent yesterday.', 'The letter should had been sent yesterday.'], correct: 0, explanation: 'Perfect passive modal: modal + have been + V3 — "should have been sent".' },
+          { id: 19, text: 'Express past possibility: "It is possible that someone left the keys in the office."', options: ['The keys might have been left in the office.', 'The keys might be left in the office.', 'The keys might left in the office.', 'The keys might had been left in the office.'], correct: 0, explanation: 'Perfect passive modal: modal + have been + V3 — "might have been left".' },
+          { id: 20, text: 'Express a missed opportunity: "It was possible to avoid this mistake if we had checked earlier."', options: ['This mistake could have been avoided if we had checked earlier.', 'This mistake could be avoided if we had checked earlier.', 'This mistake could avoided if we had checked earlier.', 'This mistake could had been avoided if we had checked earlier.'], correct: 0, explanation: 'Perfect passive modal: modal + have been + V3 — "could have been avoided".' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Praising a student.', dialogue: 'A: Is she good at math?\nB: Yes, she ___ solving even the hardest problems.', options: ['is capable of', 'is capable to', 'capable of', 'can capable of'], correct: 0, explanation: '"be capable of" — qobiliyat (rasmiy).' },
+          { id: 2, situation: 'Talking about a relative.', dialogue: 'A: Was your grandfather good with his hands?\nB: Yes, he ___ fixing old clocks perfectly.', options: ['was capable of', 'was capable to', 'capable of', 'could capable of'], correct: 0, explanation: '"be capable of" — o\'tmishdagi qobiliyat.' },
+          { id: 3, situation: "Defending someone's character.", dialogue: 'A: Do you think he did it on purpose?\nB: No way, he ___ hurting anyone.', options: ["isn't capable of", "isn't capable to", "not capable of", "can't capable of"], correct: 0, explanation: '"not capable of" — qobiliyat/xarakter yo\'qligi.' },
+          { id: 4, situation: 'Talking about a sports team.', dialogue: 'A: Do they have a chance this year?\nB: Definitely, this team ___ winning the championship.', options: ['is capable of', 'is capable to', 'capable of', 'can capable of'], correct: 0, explanation: '"be capable of" — qobiliyat.' },
+          { id: 5, situation: 'Checking the weather.', dialogue: 'A: Should I take an umbrella?\nB: Yes, it ___ rain later.', options: ['is likely to', 'is likely of', 'is like to', 'likely to'], correct: 0, explanation: '"be likely to" — ehtimollik.' },
+          { id: 6, situation: 'Talking about a proposal.', dialogue: 'A: Do you think they will accept it?\nB: Yes, the policy ___ approved next week.', options: ['is likely to be', 'is likely to being', 'is likely be', 'likely to be'], correct: 0, explanation: '"be likely to be" — passiv ehtimollik.' },
+          { id: 7, situation: "Wondering about someone's absence.", dialogue: "A: Why isn't his car here?\nB: He ___ left already.", options: ['is likely to have', 'is likely to had', 'is likely have', 'likely to have'], correct: 0, explanation: '"be likely to have" — o\'tmishdagi ehtimollik.' },
+          { id: 8, situation: 'Talking about plans.', dialogue: "A: Is she coming to the party?\nB: I doubt it, she ___ come — she's too busy.", options: ['is unlikely to', 'is unlike to', 'unlikely to', 'is likely not to'], correct: 0, explanation: '"be unlikely to" — ehtimoli past.' },
+          { id: 9, situation: 'Apologizing in advance.', dialogue: "A: Will you be at the meeting tomorrow?\nB: I'm afraid I ___ be able to attend.", options: ["shan't", "shalln't", "shall not to", "don't shall"], correct: 0, explanation: '"shan\'t" = shall not.' },
+          { id: 10, situation: 'Reminiscing about a trip.', dialogue: 'A: That was an amazing holiday!\nB: Yes, we ___ forget it.', options: ['shall never', 'shall to never', 'shalls never', 'never shall to'], correct: 0, explanation: '"shall" — rasmiy va\'da.' },
+          { id: 11, situation: 'Urgent office task.', dialogue: "A: What needs to happen today?\nB: This letter ___ sent — it's urgent.", options: ['must be', 'must be being', 'must to be', 'must been'], correct: 0, explanation: 'Modal passiv: must + be + V3.' },
+          { id: 12, situation: 'Talking about a deadline.', dialogue: 'A: When is this due?\nB: The work ___ finished by Friday.', options: ['should be', 'should being', 'should to be', 'should been'], correct: 0, explanation: 'Modal passiv: should + be + V3.' },
+          { id: 13, situation: 'Reassuring a colleague.', dialogue: "A: I'm worried about this problem.\nB: Don't worry, it ___ solved easily.", options: ['can be', 'can being', 'can to be', 'can been'], correct: 0, explanation: 'Modal passiv: can + be + V3.' },
+          { id: 14, situation: 'Waiting for news.', dialogue: 'A: When will we know the results?\nB: They ___ announced tomorrow morning.', options: ['may be', 'may being', 'may to be', 'may been'], correct: 0, explanation: 'Modal passiv: may + be + V3.' },
+          { id: 15, situation: 'Discussing infrastructure.', dialogue: 'A: Is the bridge in good condition?\nB: Not really — ___ it be repaired before winter?', options: ['must', 'musts', 'must to', 'musting'], correct: 0, explanation: 'Modal passiv savol: Must + subject + be + V3?' },
+          { id: 16, situation: 'Talking about a hard exercise.', dialogue: 'A: Can we use a calculator?\nB: No, this exercise ___ done without one.', options: ["can't be", "can't being", "can't to be", "cant's be"], correct: 0, explanation: 'Modal passiv inkor: can\'t + be + V3.' },
+          { id: 17, situation: 'Investigating a broken window.', dialogue: 'A: What happened here?\nB: The window ___ broken by someone.', options: ['must have been', 'must have be', 'must been have', 'must has been'], correct: 0, explanation: 'Modal perfect passiv: must + have been + V3.' },
+          { id: 18, situation: 'Realizing a mistake.', dialogue: "A: Why didn't he get the letter?\nB: It ___ sent yesterday, but it wasn't.", options: ['should have been', 'should has been', 'should have be', 'should been have'], correct: 0, explanation: 'Modal perfect passiv: should + have been + V3.' },
+          { id: 19, situation: 'Looking for lost keys.', dialogue: 'A: Where could they be?\nB: They ___ left in the office.', options: ['might have been', 'might had been', 'might have be', 'might been have'], correct: 0, explanation: 'Modal perfect passiv: might + have been + V3.' },
+          { id: 20, situation: 'Reflecting on an error.', dialogue: 'A: That was such a costly mistake.\nB: Yes, it ___ avoided if we had checked earlier.', options: ['could have been', 'could had been', 'could have be', 'could been have'], correct: 0, explanation: 'Modal perfect passiv: could + have been + V3.' }
+        ]
+      },
+      {
+        id: 'modal-verbs-past',
+        title: 'Modal Verbs 5: Past Modals (Modal + Have)',
+        icon: '🕰️',
+        guide: `## Modal Verbs: Past Modals (Modal + have + V3) — O'tmish uchun modal fe'llar
+
+Bu modal fe'llar o'tmishdagi voqealar haqida xulosa, ehtimollik, afsus yoki tanqidni ifodalash uchun ishlatiladi. Formula: **Modal + have + V3 (Past Participle)** — bu yerda **have** hech qachon **has/had** ga aylanmaydi va o'zgarmaydi.
+
+## 1. Shakllanishi (Form)
+• Subject + modal + have + V3
+  - She **must have left**. He **could have called**. You **should have told** me.
+• Qisqa shakl: yozma nutqda odatda to'liq yoziladi, og'zaki nutqda "must've", "could've", "should've" kabi talaffuz qilinadi.
+• **Inkor**: modal + not + have + V3
+  - He **can't have finished** already. You **shouldn't have said** that.
+
+## 2. Ishlatilishi (Usage)
+1. **must have + V3** — o'tmish haqida kuchli ijobiy xulosa (dalillarga asoslangan):
+   - The ground is wet — it **must have rained** last night.
+2. **can't have / couldn't have + V3** — o'tmish haqida kuchli salbiy xulosa ("bo'lishi mumkin emas edi"):
+   - He **can't have finished** the whole book in one day!
+3. **might have / may have + V3** — o'tmish haqida noaniq ehtimollik:
+   - She **might have forgotten** about the meeting. I'm not sure.
+4. **could have + V3** — o'tmishda imkoniyat bo'lgan, lekin ro'y bermagan (bajarilmagan imkoniyat):
+   - We **could have won** the match, but we didn't try hard enough.
+5. **should have / shouldn't have + V3** — afsus, tanqid (qilinishi kerak edi, lekin qilinmadi / qilinmasligi kerak edi, lekin qilindi):
+   - You **should have called** me. (Qo'ng'iroq qilishing kerak edi, lekin qilmading.)
+   - You **shouldn't have shouted** at her. (Qichqirmasliging kerak edi, lekin qichqirding.)
+6. **needn't have + V3** — kerak bo'lmagan ish qilingan (keraksiz harakat):
+   - You **needn't have brought** an umbrella — it didn't rain. (Olib kelishing shart emas edi, lekin olib kelding.)
+
+## 3. Solishtirish jadvali
+• must have (ijobiy xulosa) vs can't have (salbiy xulosa)
+• could have (bajarilmagan imkoniyat) vs should have (afsus/tanqid — qilinishi kerak edi)
+• shouldn't have (qilinmasligi kerak edi) vs needn't have (kerak emas edi, lekin baribir qilindi)
+
+## 4. Signal so'zlar
+• must have, can't have, couldn't have
+• might have, may have
+• could have
+• should have, shouldn't have
+• needn't have`,
+        questions: [
+          { id: 1, text: 'The ground is wet — it ___ rained last night.', options: ['must have', "can't have", 'might have', 'should have'], correct: 0, explanation: '"must have" — kuchli ijobiy xulosa (o\'tmish).' },
+          { id: 2, text: "He ___ finished the whole book in one day — that's impossible!", options: ["can't have", 'must have', 'might have', 'should have'], correct: 0, explanation: '"can\'t have" — kuchli salbiy xulosa.' },
+          { id: 3, text: "She ___ forgotten about the meeting — I'm honestly not sure.", options: ['might have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"might have" — noaniq ehtimollik (o\'tmish).' },
+          { id: 4, text: "We ___ won the match, but we didn't try hard enough.", options: ['could have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"could have" — bajarilmagan imkoniyat.' },
+          { id: 5, text: 'You ___ called me before coming over.', options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid (qilinishi kerak edi).' },
+          { id: 6, text: "You ___ shouted at her — it wasn't her fault.", options: ["shouldn't have", "mustn't have", "couldn't have", "needn't have"], correct: 0, explanation: '"shouldn\'t have" — tanqid (qilinmasligi kerak edi).' },
+          { id: 7, text: "You ___ brought an umbrella — it didn't rain at all.", options: ["needn't have", "shouldn't have", "mustn't have", "couldn't have"], correct: 0, explanation: '"needn\'t have" — keraksiz harakat.' },
+          { id: 8, text: 'The lights are off and the car is gone — they ___ left already.', options: ['must have', 'might have', "can't have", 'should have'], correct: 0, explanation: '"must have" — kuchli ijobiy xulosa.' },
+          { id: 9, text: 'That ___ been him at the party — he was in another city that night.', options: ["can't have", 'must have', 'might have', 'should have'], correct: 0, explanation: '"can\'t have" — kuchli salbiy xulosa.' },
+          { id: 10, text: "I'm not certain, but she ___ taken the wrong bus.", options: ['might have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"might have" — noaniq ehtimollik.' },
+          { id: 11, text: "He didn't pass the exam. He ___ studied harder.", options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid.' },
+          { id: 12, text: 'They ___ finished the project earlier, but they were too busy with other things.', options: ['could have', 'should have', 'must have', "needn't have"], correct: 0, explanation: '"could have" — bajarilmagan imkoniyat (imkon bor edi).' },
+          { id: 13, text: 'You ___ told me the truth from the start.', options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid.' },
+          { id: 14, text: 'You ___ worried about the test — it turned out to be very easy.', options: ["needn't have", "shouldn't have", "mustn't have", "couldn't have"], correct: 0, explanation: '"needn\'t have" — keraksiz harakat.' },
+          { id: 15, text: "I ___ locked the door twice — I only remember doing it once, but it's locked.", options: ['must have', 'might have', "can't have", 'should have'], correct: 0, explanation: '"must have" — kuchli ijobiy xulosa.' },
+          { id: 16, text: 'She ___ seen the message — she never checks her phone at work.', options: ["can't have", 'must have', 'might have', 'should have'], correct: 0, explanation: '"can\'t have" — kuchli salbiy xulosa.' },
+          { id: 17, text: "He ___ left the keys at the office; I really don't know where else they'd be.", options: ['might have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"might have" — noaniq ehtimollik.' },
+          { id: 18, text: 'We ___ taken a taxi — the bus took forever and we were late anyway.', options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid.' },
+          { id: 19, text: "You ___ apologized to him — it wasn't even your mistake.", options: ["shouldn't have", "mustn't have", "couldn't have", "needn't have"], correct: 0, explanation: '"shouldn\'t have" — tanqid.' },
+          { id: 20, text: 'You ___ bought more bread — we already had plenty at home.', options: ["needn't have", "shouldn't have", "mustn't have", "couldn't have"], correct: 0, explanation: '"needn\'t have" — keraksiz harakat.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'The ground is wet — it ___ (must have / rain) last night.', options: ['must have rained', 'must have rain', 'must has rained', 'must having rained'], correct: 0, explanation: '"must have" + V3 (rain → rained).' },
+          { id: 2, text: 'He ___ (can\'t have / finish) the whole book in one day.', options: ["can't have finished", "can't have finish", "can't has finished", "can't having finished"], correct: 0, explanation: '"can\'t have" + V3 (finish → finished).' },
+          { id: 3, text: 'She ___ (might have / forget) about the meeting.', options: ['might have forgotten', 'might have forget', 'might has forgotten', 'might having forgotten'], correct: 0, explanation: '"might have" + V3 (forget → forgotten).' },
+          { id: 4, text: "We ___ (could have / win) the match, but we didn't try hard enough.", options: ['could have won', 'could have win', 'could has won', 'could having won'], correct: 0, explanation: '"could have" + V3 (win → won).' },
+          { id: 5, text: 'You ___ (should have / call) me before coming over.', options: ['should have called', 'should have call', 'should has called', 'should having called'], correct: 0, explanation: '"should have" + V3 (call → called).' },
+          { id: 6, text: 'You ___ (shouldn\'t have / shout) at her.', options: ["shouldn't have shouted", "shouldn't have shout", "shouldn't has shouted", "shouldn't having shouted"], correct: 0, explanation: '"shouldn\'t have" + V3 (shout → shouted).' },
+          { id: 7, text: 'You ___ (needn\'t have / bring) an umbrella.', options: ["needn't have brought", "needn't have bring", "needn't has brought", "needn't having brought"], correct: 0, explanation: '"needn\'t have" + V3 (bring → brought).' },
+          { id: 8, text: 'They ___ (must have / leave) already.', options: ['must have left', 'must have leave', 'must has left', 'must having left'], correct: 0, explanation: '"must have" + V3 (leave → left).' },
+          { id: 9, text: 'That ___ (can\'t have / be) him at the party.', options: ["can't have been", "can't have be", "can't has been", "can't having been"], correct: 0, explanation: '"can\'t have" + V3 (be → been).' },
+          { id: 10, text: 'She ___ (might have / take) the wrong bus.', options: ['might have taken', 'might have take', 'might has taken', 'might having taken'], correct: 0, explanation: '"might have" + V3 (take → taken).' },
+          { id: 11, text: 'He ___ (should have / study) harder for the exam.', options: ['should have studied', 'should have study', 'should has studied', 'should having studied'], correct: 0, explanation: '"should have" + V3 (study → studied).' },
+          { id: 12, text: 'They ___ (could have / finish) the project earlier.', options: ['could have finished', 'could have finish', 'could has finished', 'could having finished'], correct: 0, explanation: '"could have" + V3 (finish → finished).' },
+          { id: 13, text: 'You ___ (should have / tell) me the truth from the start.', options: ['should have told', 'should have tell', 'should has told', 'should having told'], correct: 0, explanation: '"should have" + V3 (tell → told).' },
+          { id: 14, text: 'You ___ (needn\'t have / worry) about the test.', options: ["needn't have worried", "needn't have worry", "needn't has worried", "needn't having worried"], correct: 0, explanation: '"needn\'t have" + V3 (worry → worried).' },
+          { id: 15, text: 'I ___ (must have / lock) the door twice.', options: ['must have locked', 'must have lock', 'must has locked', 'must having locked'], correct: 0, explanation: '"must have" + V3 (lock → locked).' },
+          { id: 16, text: 'She ___ (can\'t have / see) the message.', options: ["can't have seen", "can't have see", "can't has seen", "can't having seen"], correct: 0, explanation: '"can\'t have" + V3 (see → seen).' },
+          { id: 17, text: 'He ___ (might have / leave) the keys at the office.', options: ['might have left', 'might have leave', 'might has left', 'might having left'], correct: 0, explanation: '"might have" + V3 (leave → left).' },
+          { id: 18, text: 'We ___ (should have / take) a taxi.', options: ['should have taken', 'should have take', 'should has taken', 'should having taken'], correct: 0, explanation: '"should have" + V3 (take → taken).' },
+          { id: 19, text: 'You ___ (shouldn\'t have / apologize) to him.', options: ["shouldn't have apologized", "shouldn't have apologize", "shouldn't has apologized", "shouldn't having apologized"], correct: 0, explanation: '"shouldn\'t have" + V3 (apologize → apologized).' },
+          { id: 20, text: 'You ___ (needn\'t have / buy) more bread.', options: ["needn't have bought", "needn't have buy", "needn't has bought", "needn't having bought"], correct: 0, explanation: '"needn\'t have" + V3 (buy → bought).' }
+        ],
+        scrambled: [
+          { id: 1, words: ['rained', 'it', 'must', 'have', 'last', 'night'], answer: 'it must have rained last night', explanation: 'Subject + must have + V3.' },
+          { id: 2, words: ['finished', 'he', "can't", 'have', 'the', 'whole', 'book', 'in', 'one', 'day'], answer: "he can't have finished the whole book in one day", explanation: 'Subject + can\'t have + V3.' },
+          { id: 3, words: ['forgotten', 'she', 'might', 'have', 'about', 'the', 'meeting'], answer: 'she might have forgotten about the meeting', explanation: 'Subject + might have + V3.' },
+          { id: 4, words: ['won', 'we', 'could', 'have', 'the', 'match'], answer: 'we could have won the match', explanation: 'Subject + could have + V3.' },
+          { id: 5, words: ['called', 'you', 'should', 'have', 'me'], answer: 'you should have called me', explanation: 'Subject + should have + V3.' },
+          { id: 6, words: ['shouted', 'you', "shouldn't", 'have', 'at', 'her'], answer: "you shouldn't have shouted at her", explanation: 'Subject + shouldn\'t have + V3.' },
+          { id: 7, words: ['brought', 'you', "needn't", 'have', 'an', 'umbrella'], answer: "you needn't have brought an umbrella", explanation: 'Subject + needn\'t have + V3.' },
+          { id: 8, words: ['left', 'they', 'must', 'have', 'already'], answer: 'they must have left already', explanation: 'Subject + must have + V3.' },
+          { id: 9, words: ['been', 'that', "can't", 'have', 'him'], answer: "that can't have been him", explanation: 'Subject + can\'t have + V3.' },
+          { id: 10, words: ['taken', 'she', 'might', 'have', 'the', 'wrong', 'bus'], answer: 'she might have taken the wrong bus', explanation: 'Subject + might have + V3.' },
+          { id: 11, words: ['studied', 'he', 'should', 'have', 'harder'], answer: 'he should have studied harder', explanation: 'Subject + should have + V3.' },
+          { id: 12, words: ['finished', 'they', 'could', 'have', 'the', 'project', 'earlier'], answer: 'they could have finished the project earlier', explanation: 'Subject + could have + V3.' },
+          { id: 13, words: ['told', 'you', 'should', 'have', 'me', 'the', 'truth'], answer: 'you should have told me the truth', explanation: 'Subject + should have + V3.' },
+          { id: 14, words: ['worried', 'you', "needn't", 'have', 'about', 'the', 'test'], answer: "you needn't have worried about the test", explanation: 'Subject + needn\'t have + V3.' },
+          { id: 15, words: ['locked', 'I', 'must', 'have', 'the', 'door', 'twice'], answer: 'I must have locked the door twice', explanation: 'Subject + must have + V3.' },
+          { id: 16, words: ['seen', 'she', "can't", 'have', 'the', 'message'], answer: "she can't have seen the message", explanation: 'Subject + can\'t have + V3.' },
+          { id: 17, words: ['left', 'he', 'might', 'have', 'the', 'keys', 'at', 'the', 'office'], answer: 'he might have left the keys at the office', explanation: 'Subject + might have + V3.' },
+          { id: 18, words: ['taken', 'we', 'should', 'have', 'a', 'taxi'], answer: 'we should have taken a taxi', explanation: 'Subject + should have + V3.' },
+          { id: 19, words: ['apologized', 'you', "shouldn't", 'have', 'to', 'him'], answer: "you shouldn't have apologized to him", explanation: 'Subject + shouldn\'t have + V3.' },
+          { id: 20, words: ['bought', 'you', "needn't", 'have', 'more', 'bread'], answer: "you needn't have bought more bread", explanation: 'Subject + needn\'t have + V3.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'It must has rained last night.', options: ['It', 'must has rained', 'last', 'night'], correct: 1, wrongPart: 'must has rained', correction: 'must have rained', explanation: 'Past modal: modal + have + V3 — "must have rained", not "must has rained".' },
+          { id: 2, text: "He can't have finish the whole book in one day.", options: ['He', "can't have finish", 'the whole book', 'in one day'], correct: 1, wrongPart: "can't have finish", correction: "can't have finished", explanation: 'Past modal: modal + have + V3 — "can\'t have finished", not "finish".' },
+          { id: 3, text: 'She might have forget about the meeting.', options: ['She', 'might have forget', 'about', 'the meeting'], correct: 1, wrongPart: 'might have forget', correction: 'might have forgotten', explanation: 'Past modal: modal + have + V3 — "might have forgotten", not "forget".' },
+          { id: 4, text: 'We could have win the match.', options: ['We', 'could have win', 'the', 'match'], correct: 1, wrongPart: 'could have win', correction: 'could have won', explanation: 'Past modal: modal + have + V3 — "could have won", not "win".' },
+          { id: 5, text: 'You should have call me before coming over.', options: ['You', 'should have call', 'me', 'before coming over'], correct: 1, wrongPart: 'should have call', correction: 'should have called', explanation: 'Past modal: modal + have + V3 — "should have called", not "call".' },
+          { id: 6, text: "You shouldn't has shouted at her.", options: ['You', "shouldn't has shouted", 'at', 'her'], correct: 1, wrongPart: "shouldn't has shouted", correction: "shouldn't have shouted", explanation: 'Past modal always uses "have", not "has": "shouldn\'t have shouted".' },
+          { id: 7, text: "You needn't have bring an umbrella.", options: ['You', "needn't have bring", 'an', 'umbrella'], correct: 1, wrongPart: "needn't have bring", correction: "needn't have brought", explanation: 'Past modal: modal + have + V3 — "needn\'t have brought", not "bring".' },
+          { id: 8, text: 'They must had left already.', options: ['They', 'must had left', 'already', 'No error'], correct: 1, wrongPart: 'must had left', correction: 'must have left', explanation: 'Past modal always uses "have", not "had": "must have left".' },
+          { id: 9, text: "That can't have be him.", options: ['That', "can't have be", 'him', 'No error'], correct: 1, wrongPart: "can't have be", correction: "can't have been", explanation: 'Past modal: modal + have + V3 — "can\'t have been", not "be".' },
+          { id: 10, text: 'She might have take the wrong bus.', options: ['She', 'might have take', 'the', 'wrong bus'], correct: 1, wrongPart: 'might have take', correction: 'might have taken', explanation: 'Past modal: modal + have + V3 — "might have taken", not "take".' },
+          { id: 11, text: 'He should have study harder for the exam.', options: ['He', 'should have study', 'harder', 'for the exam'], correct: 1, wrongPart: 'should have study', correction: 'should have studied', explanation: 'Past modal: modal + have + V3 — "should have studied", not "study".' },
+          { id: 12, text: 'They could have finish the project earlier.', options: ['They', 'could have finish', 'the project', 'earlier'], correct: 1, wrongPart: 'could have finish', correction: 'could have finished', explanation: 'Past modal: modal + have + V3 — "could have finished", not "finish".' },
+          { id: 13, text: 'You should have tell me the truth from the start.', options: ['You', 'should have tell', 'me the truth', 'from the start'], correct: 1, wrongPart: 'should have tell', correction: 'should have told', explanation: 'Past modal: modal + have + V3 — "should have told", not "tell".' },
+          { id: 14, text: "You needn't has worried about the test.", options: ['You', "needn't has worried", 'about', 'the test'], correct: 1, wrongPart: "needn't has worried", correction: "needn't have worried", explanation: 'Past modal always uses "have", not "has": "needn\'t have worried".' },
+          { id: 15, text: 'I must have lock the door twice.', options: ['I', 'must have lock', 'the door', 'twice'], correct: 1, wrongPart: 'must have lock', correction: 'must have locked', explanation: 'Past modal: modal + have + V3 — "must have locked", not "lock".' },
+          { id: 16, text: "She can't have see the message.", options: ['She', "can't have see", 'the', 'message'], correct: 1, wrongPart: "can't have see", correction: "can't have seen", explanation: 'Past modal: modal + have + V3 — "can\'t have seen", not "see".' },
+          { id: 17, text: 'He might have leave the keys at the office.', options: ['He', 'might have leave', 'the keys', 'at the office'], correct: 1, wrongPart: 'might have leave', correction: 'might have left', explanation: 'Past modal: modal + have + V3 — "might have left", not "leave".' },
+          { id: 18, text: 'We should have take a taxi.', options: ['We', 'should have take', 'a', 'taxi'], correct: 1, wrongPart: 'should have take', correction: 'should have taken', explanation: 'Past modal: modal + have + V3 — "should have taken", not "take".' },
+          { id: 19, text: "You shouldn't have apologize to him.", options: ['You', "shouldn't have apologize", 'to', 'him'], correct: 1, wrongPart: "shouldn't have apologize", correction: "shouldn't have apologized", explanation: 'Past modal: modal + have + V3 — "shouldn\'t have apologized", not "apologize".' },
+          { id: 20, text: "You needn't have buy more bread.", options: ['You', "needn't have buy", 'more', 'bread'], correct: 1, wrongPart: "needn't have buy", correction: "needn't have bought", explanation: 'Past modal: modal + have + V3 — "needn\'t have bought", not "buy".' }
+        ],
+        transform: [
+          { id: 1, text: 'Express a confident conclusion about the past: "I\'m sure it rained last night — the ground is wet."', options: ['It must have rained last night.', 'It must rain last night.', 'It must have rain last night.', "It can't have rained last night."], correct: 0, explanation: '"must have + V3" expresses a confident conclusion about the past.' },
+          { id: 2, text: "Express a confident negative conclusion about the past: \"It's impossible that he finished the whole book in one day.\"", options: ["He can't have finished the whole book in one day.", "He mustn't have finished the whole book in one day.", "He shouldn't have finished the whole book in one day.", 'He might have finished the whole book in one day.'], correct: 0, explanation: '"can\'t have + V3" expresses a confident negative conclusion about the past.' },
+          { id: 3, text: "Express uncertainty about the past: \"It's possible, but I'm not sure, that she forgot about the meeting.\"", options: ['She might have forgotten about the meeting.', 'She must have forgotten about the meeting.', "She can't have forgotten about the meeting.", 'She should have forgotten about the meeting.'], correct: 0, explanation: '"might have + V3" expresses uncertainty about the past.' },
+          { id: 4, text: 'Express a missed opportunity: "It was possible for us to win the match, but we didn\'t try hard enough."', options: ["We could have won the match, but we didn't try hard enough.", "We should have won the match, but we didn't try hard enough.", "We must have won the match, but we didn't try hard enough.", "We needn't have won the match, but we didn't try hard enough."], correct: 0, explanation: '"could have + V3" expresses a missed opportunity — something possible that didn\'t happen.' },
+          { id: 5, text: 'Express regret/criticism: "It would have been better if you had called me before coming over."', options: ['You should have called me before coming over.', 'You could have called me before coming over.', 'You must have called me before coming over.', "You needn't have called me before coming over."], correct: 0, explanation: '"should have + V3" expresses regret or criticism about the past.' },
+          { id: 6, text: 'Criticize a past action: "It was wrong of you to shout at her."', options: ["You shouldn't have shouted at her.", "You mustn't have shouted at her.", "You couldn't have shouted at her.", "You needn't have shouted at her."], correct: 0, explanation: '"shouldn\'t have + V3" criticizes a past action that was done but shouldn\'t have been.' },
+          { id: 7, text: "Express an unnecessary past action: \"Bringing an umbrella wasn't necessary — it didn't rain.\"", options: ["You needn't have brought an umbrella.", "You shouldn't have brought an umbrella.", "You mustn't have brought an umbrella.", "You couldn't have brought an umbrella."], correct: 0, explanation: '"needn\'t have + V3" expresses an unnecessary action that was done anyway.' },
+          { id: 8, text: 'Express a confident conclusion about the past: "I\'m sure they left already — the lights are off."', options: ['They must have left already.', 'They might have left already.', "They can't have left already.", 'They should have left already.'], correct: 0, explanation: '"must have + V3" expresses a confident conclusion about the past.' },
+          { id: 9, text: "Express a confident negative conclusion: \"It's impossible that was him at the party — he was in another city.\"", options: ["That can't have been him at the party.", "That mustn't have been him at the party.", "That might have been him at the party.", "That should have been him at the party."], correct: 0, explanation: '"can\'t have + V3" expresses a confident negative conclusion about the past.' },
+          { id: 10, text: "Express uncertainty about the past: \"It's possible, but I'm not sure, that she took the wrong bus.\"", options: ['She might have taken the wrong bus.', 'She must have taken the wrong bus.', "She can't have taken the wrong bus.", 'She should have taken the wrong bus.'], correct: 0, explanation: '"might have + V3" expresses uncertainty about the past.' },
+          { id: 11, text: 'Express regret: "It would have been better if he had studied harder for the exam."', options: ['He should have studied harder for the exam.', 'He could have studied harder for the exam.', 'He must have studied harder for the exam.', "He needn't have studied harder for the exam."], correct: 0, explanation: '"should have + V3" expresses regret about the past.' },
+          { id: 12, text: "Express a missed opportunity: \"It was possible for them to finish the project earlier, but they didn't.\"", options: ['They could have finished the project earlier.', 'They should have finished the project earlier.', 'They must have finished the project earlier.', "They needn't have finished the project earlier."], correct: 0, explanation: '"could have + V3" expresses a missed opportunity.' },
+          { id: 13, text: 'Express regret/criticism: "It would have been better if you had told me the truth from the start."', options: ['You should have told me the truth from the start.', 'You could have told me the truth from the start.', 'You must have told me the truth from the start.', "You needn't have told me the truth from the start."], correct: 0, explanation: '"should have + V3" expresses regret or criticism.' },
+          { id: 14, text: "Express an unnecessary past action: \"Worrying about the test wasn't necessary — it was very easy.\"", options: ["You needn't have worried about the test.", "You shouldn't have worried about the test.", "You mustn't have worried about the test.", "You couldn't have worried about the test."], correct: 0, explanation: '"needn\'t have + V3" expresses an unnecessary action that was done anyway.' },
+          { id: 15, text: "Express a confident conclusion about the past: \"I'm sure I locked the door twice — it's locked now.\"", options: ['I must have locked the door twice.', 'I might have locked the door twice.', "I can't have locked the door twice.", 'I should have locked the door twice.'], correct: 0, explanation: '"must have + V3" expresses a confident conclusion about the past.' },
+          { id: 16, text: "Express a confident negative conclusion: \"It's impossible that she saw the message — she never checks her phone at work.\"", options: ["She can't have seen the message.", "She mustn't have seen the message.", 'She might have seen the message.', 'She should have seen the message.'], correct: 0, explanation: '"can\'t have + V3" expresses a confident negative conclusion.' },
+          { id: 17, text: "Express uncertainty about the past: \"It's possible, but I'm not sure, that he left the keys at the office.\"", options: ['He might have left the keys at the office.', 'He must have left the keys at the office.', "He can't have left the keys at the office.", 'He should have left the keys at the office.'], correct: 0, explanation: '"might have + V3" expresses uncertainty about the past.' },
+          { id: 18, text: 'Express regret: "It would have been better if we had taken a taxi."', options: ['We should have taken a taxi.', 'We could have taken a taxi.', 'We must have taken a taxi.', "We needn't have taken a taxi."], correct: 0, explanation: '"should have + V3" expresses regret about a past decision.' },
+          { id: 19, text: "Criticize a past action: \"It was wrong of you to apologize to him — it wasn't even your mistake.\"", options: ["You shouldn't have apologized to him.", "You mustn't have apologized to him.", "You couldn't have apologized to him.", "You needn't have apologized to him."], correct: 0, explanation: '"shouldn\'t have + V3" criticizes a past action.' },
+          { id: 20, text: "Express an unnecessary past action: \"Buying more bread wasn't necessary — we already had plenty.\"", options: ["You needn't have bought more bread.", "You shouldn't have bought more bread.", "You mustn't have bought more bread.", "You couldn't have bought more bread."], correct: 0, explanation: '"needn\'t have + V3" expresses an unnecessary action that was done anyway.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Noticing wet ground.', dialogue: 'A: Look, everything is wet outside.\nB: It ___ rained last night.', options: ['must have', "can't have", 'might have', 'should have'], correct: 0, explanation: '"must have" — kuchli ijobiy xulosa.' },
+          { id: 2, situation: 'Doubting a claim.', dialogue: "A: He says he read the whole book in one day.\nB: That's impossible — he ___ finished it that fast.", options: ["can't have", 'must have', 'might have', 'should have'], correct: 0, explanation: '"can\'t have" — kuchli salbiy xulosa.' },
+          { id: 3, situation: 'Explaining an absence.', dialogue: "A: Why wasn't she at the meeting?\nB: I'm not sure, she ___ forgotten about it.", options: ['might have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"might have" — noaniq ehtimollik.' },
+          { id: 4, situation: 'Talking about a lost match.', dialogue: "A: That was such a close game.\nB: Yeah, we ___ won it if we'd tried harder.", options: ['could have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"could have" — bajarilmagan imkoniyat.' },
+          { id: 5, situation: 'After a surprise visit.', dialogue: 'A: I just showed up without warning.\nB: You ___ called me first!', options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid.' },
+          { id: 6, situation: 'Regretting harsh words.', dialogue: "A: I lost my temper and yelled at her.\nB: You ___ shouted at her — it wasn't her fault.", options: ["shouldn't have", "mustn't have", "couldn't have", "needn't have"], correct: 0, explanation: '"shouldn\'t have" — tanqid.' },
+          { id: 7, situation: 'Talking about the weather.', dialogue: "A: I brought my umbrella for nothing.\nB: Yeah, you ___ brought it — it didn't rain at all.", options: ["needn't have", "shouldn't have", "mustn't have", "couldn't have"], correct: 0, explanation: '"needn\'t have" — keraksiz harakat.' },
+          { id: 8, situation: 'Arriving at an empty house.', dialogue: "A: No one's home and the car is gone.\nB: They ___ left already.", options: ['must have', 'might have', "can't have", 'should have'], correct: 0, explanation: '"must have" — kuchli ijobiy xulosa.' },
+          { id: 9, situation: 'Clearing up confusion.', dialogue: "A: Was that him at the party?\nB: No, that ___ been him — he was in another city.", options: ["can't have", 'must have', 'might have', 'should have'], correct: 0, explanation: '"can\'t have" — kuchli salbiy xulosa.' },
+          { id: 10, situation: 'Explaining a delay.', dialogue: "A: Why is she so late?\nB: I'm not certain, she ___ taken the wrong bus.", options: ['might have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"might have" — noaniq ehtimollik.' },
+          { id: 11, situation: 'Talking about exam results.', dialogue: 'A: He failed the exam.\nB: He ___ studied harder.', options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid.' },
+          { id: 12, situation: 'Discussing a missed deadline.', dialogue: 'A: The project was late.\nB: They ___ finished it earlier, but they got too busy.', options: ['could have', 'should have', 'must have', "needn't have"], correct: 0, explanation: '"could have" — bajarilmagan imkoniyat.' },
+          { id: 13, situation: 'Talking honestly.', dialogue: 'A: I lied to you at first.\nB: You ___ told me the truth from the start.', options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid.' },
+          { id: 14, situation: 'After an easy test.', dialogue: 'A: I studied all weekend for that test.\nB: You ___ worried so much — it was really easy.', options: ["needn't have", "shouldn't have", "mustn't have", "couldn't have"], correct: 0, explanation: '"needn\'t have" — keraksiz harakat.' },
+          { id: 15, situation: 'Checking the door.', dialogue: "A: The door is locked, but I don't remember locking it.\nB: You ___ locked it twice without noticing.", options: ['must have', 'might have', "can't have", 'should have'], correct: 0, explanation: '"must have" — kuchli ijobiy xulosa.' },
+          { id: 16, situation: 'Talking about a missed message.', dialogue: "A: Did she reply to your text?\nB: No, she ___ seen it — she never checks her phone at work.", options: ["can't have", 'must have', 'might have', 'should have'], correct: 0, explanation: '"can\'t have" — kuchli salbiy xulosa.' },
+          { id: 17, situation: 'Looking for keys.', dialogue: "A: I can't find my keys anywhere.\nB: You ___ left them at the office.", options: ['might have', 'must have', "can't have", 'should have'], correct: 0, explanation: '"might have" — noaniq ehtimollik.' },
+          { id: 18, situation: 'Reflecting on a late arrival.', dialogue: 'A: The bus took forever and we were still late.\nB: We ___ taken a taxi instead.', options: ['should have', 'could have', 'must have', "needn't have"], correct: 0, explanation: '"should have" — afsus/tanqid.' },
+          { id: 19, situation: 'Feeling guilty.', dialogue: "A: I apologized to him even though it wasn't my fault.\nB: You ___ apologized — it really wasn't your mistake.", options: ["shouldn't have", "mustn't have", "couldn't have", "needn't have"], correct: 0, explanation: '"shouldn\'t have" — tanqid.' },
+          { id: 20, situation: 'Talking about groceries.', dialogue: 'A: I bought extra bread today.\nB: You ___ bought more — we already had plenty at home.', options: ["needn't have", "shouldn't have", "mustn't have", "couldn't have"], correct: 0, explanation: '"needn\'t have" — keraksiz harakat.' }
+        ]
+      },
+      {
         id: 'first-conditional',
         title: 'First Conditional',
         icon: '🌦️',
