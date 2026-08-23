@@ -747,27 +747,64 @@ Future Perfect Continuous показывает, **как долго будет �
 • **by** — указывает на человека или автора: *written by Pushkin*
 • **with** — указывает на инструмент или материал: *cut with a knife*`,
 
-  'modal-verbs': `## Modal Verbs (Модальные глаголы)
+  'modal-verbs-ability': `## Modal Verbs: Ability & Permission (Способность и разрешение)
 
-Модальные глаголы выражают отношение к действию: **возможность, необходимость, разрешение или совет**.
+Эти модальные глаголы выражают **способность** (ability) или **разрешение** (permission): **can, could, may, be able to**.
 
-## 1. Таблица главных модальных глаголов
+## 1. Таблица
 | Глагол | Значение | Пример |
 |---|---|---|
-| **Can / Could** | Физическая возможность / умение | I **can** swim. I **could** run fast in youth. |
-| **Must** | Строгая обязанность / закон | You **must** wear a seatbelt. |
-| **Have to** | Вынужденность по обстоятельствам | I **have to** wake up early for work. |
-| **Should** | Совет («Тебе следует...») | You **should** see a doctor. |
-| **May / Might** | Вероятность / разрешение | It **may** rain. **May** I come in? |
+| **Can** | Способность сейчас / неформальное разрешение | She **can speak** French. **Can** I use your phone? |
+| **Could** | Способность в прошлом / вежливая просьба | I **could swim** at five. **Could** you help me? |
+| **May** | Формальное разрешение | **May** I come in? |
+| **Be able to** | Замена "can" во всех временах / единичный успех в прошлом | She **was able to** finish the race. |
+
+## 2. Отрицательные формы
+• **can't / couldn't** — отсутствие способности
+• **may not** — формальный запрет
+  - He **can't drive**. *(Он не умеет водить.)*
+  - You **may not enter**. *(Входить не разрешено.)*
+
+⚠️ **Главное правило**: После модального глагола частица **to** НЕ ставится!
+  - ✅ I can swim ➔ ❌ I can to swim`,
+
+  'modal-verbs-obligation': `## Modal Verbs: Obligation & Advice (Обязанность и совет)
+
+Эти модальные глаголы выражают **обязанность, необходимость, запрет и совет**: **must, have to, should, ought to, need to, had better**.
+
+## 1. Таблица
+| Глагол | Значение | Пример |
+|---|---|---|
+| **Must** | Строгая личная обязанность / закон | You **must** wear a seatbelt. |
+| **Have to** | Вынужденность по внешним обстоятельствам | I **have to** wake up early for work. |
+| **Should / Ought to** | Совет («Тебе следует...») | You **should** see a doctor. |
+| **Need to** | Обычная необходимость | I **need to** buy some milk. |
+| **Had better** | Сильный, срочный совет-предупреждение | You **had better hurry**. |
 
 ## 2. Отрицательные формы
 • **mustn't** — категорический запрет *(нельзя!)*
-• **don't have to** — отсутствие необходимости *(необязательно)*
+• **don't have to / needn't** — отсутствие необходимости *(необязательно)*
   - You **mustn't smoke** here. *(Курить запрещено!)*
   - You **don't have to come** tomorrow. *(Завтра приходить необязательно.)*
 
-⚠️ **Главное правило**: После большинства модальных глаголов частица **to** НЕ ставится!
-  - ✅ I can speak ➔ ❌ I can to speak`,
+⚠️ **Главное правило**: После большинства модальных глаголов частица **to** НЕ ставится (кроме **have to**, **ought to**, **need to**)!
+  - ✅ I must go ➔ ❌ I must to go`,
+
+  'modal-verbs-possibility': `## Modal Verbs: Possibility, Deduction & Offers (Вероятность, вывод и предложения)
+
+Эти модальные глаголы выражают **вероятность, логический вывод** и **вежливые просьбы/предложения**: **may, might, could, must, can't, would, shall**.
+
+## 1. Таблица
+| Глагол | Значение | Пример |
+|---|---|---|
+| **May / Might / Could** | Вероятность (might — менее уверенно) | It **may rain**. She **might be** at home. |
+| **Must** | Уверенный положительный вывод | The lights are on — she **must be** home. |
+| **Can't** | Уверенный отрицательный вывод | He **can't be** serious! |
+| **Would you like...?** | Вежливое предложение | **Would** you **like** some tea? |
+| **Shall I/we...?** | Предложение помощи (только с I/we) | **Shall** I **help** you? |
+
+⚠️ **Главное правило**: После модального глагола частица **to** НЕ ставится!
+  - ✅ It must be true ➔ ❌ It must to be true`,
 
   'first-conditional': `## First Conditional (Первый тип условных предложений)
 

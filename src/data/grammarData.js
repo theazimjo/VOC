@@ -5341,182 +5341,529 @@ Passive Voice harakatni bajaruvchi shaxs emas, balki harakat ta'sir etuvchi ob'e
         ]
       },
       {
-        id: 'modal-verbs',
-        title: 'Modal Verbs',
-        icon: '🧩',
-        guide: `## Modal Verbs (Modal fe'llar: majburiyat, ruxsat, maslahat, ehtimollik)
+        id: 'modal-verbs-ability',
+        title: 'Modal Verbs 1: Ability & Permission',
+        icon: '💪',
+        guide: `## Modal Verbs: Ability & Permission (Qobiliyat va ruxsat)
 
-Modal fe'llar asosiy fe'lga qo'shimcha ma'no (majburiyat, ruxsat, maslahat, ehtimollik, qobiliyat) qo'shadi. Ular hech qachon "-s", "-ing", "-ed" olmaydi va o'zidan keyin doim **base verb** keladi.
+Bu modal fe'llar kimningdir biror narsani qila olish qobiliyatini (ability) yoki biror ish qilishga ruxsatni (permission) ifodalash uchun ishlatiladi: **can, could, may, be able to**.
 
 ## 1. Shakllanishi (Form)
-• Subject + modal + base verb (to'siqsiz)
-  - She **must go** now. She **can swim**. You **should study**.
-• **Inkor**: modal + not
-  - You **mustn't smoke** here. He **can't drive**.
-• **Savol**: Modal + Subject + base verb?
-  - **Must** I **finish** this today? **Can** you **help** me?
+• Subject + can/could/may + base verb
+  - I **can swim**. She **could read** at four. You **may leave** now.
+• **Inkor**: can't/cannot, couldn't, may not
+  - He **can't drive**. I **couldn't hear** you. You **may not enter**.
+• **Savol**: Can/Could/May + Subject + base verb?
+  - **Can** you **drive**? **Could** I **borrow** your pen? **May** I **sit** here?
+• **be able to**: barcha zamonlarda ishlatilishi mumkin (can'ning o'rnini bosadi)
+  - I **am able to** swim. I **was able to** finish it. I **will be able to** help you tomorrow.
 
 ## 2. Ishlatilishi (Usage)
-1. **must** — kuchli shaxsiy majburiyat/ishonch:
-   - I **must finish** this report today. (o'zim his qilgan zaruriyat)
-   - You **must be** tired after that trip. (kuchli ishonch/xulosa)
-2. **have to** — tashqi qoida/majburiyat (qonun, boshqa odam):
-   - Employees **have to wear** a uniform. (kompaniya qoidasi)
-   - **must** va **have to** ko'pincha almashinadi, lekin **have to** tashqi manbadan, **must** ichki his-tuyg'udan kelib chiqadi
-3. **mustn't** vs **don't have to**:
-   - You **mustn't** enter. (taqiqlangan — kirish MAN ETILGAN)
-   - You **don't have to** come. (majburiy emas — kelish SHART EMAS, lekin mumkin)
-4. **should** — maslahat, tavsiya:
-   - You **should see** a doctor. (maslahat, majburiyat emas)
-5. **can** — qobiliyat, ruxsat, so'rov:
-   - She **can speak** three languages. (qobiliyat)
-   - **Can** I **open** the window? (ruxsat so'rash, norasmiy)
-6. **may** — ruxsat (rasmiy), ehtimollik:
-   - **May** I **come** in? (ruxsat so'rash, rasmiy)
-   - It **may rain** later. (ehtimollik)
+1. **can** — hozirgi qobiliyat, norasmiy ruxsat:
+   - She **can play** the piano. (qobiliyat)
+   - **Can** I **use** your phone? (norasmiy ruxsat so'rash)
+2. **could** — o'tmishdagi umumiy qobiliyat, xushmuomala so'rov:
+   - When I was young, I **could run** fast. (o'tmishdagi qobiliyat)
+   - **Could** you **pass** the salt, please? (xushmuomala, kamroq to'g'ridan-to'g'ri so'rov)
+3. **may** — rasmiy ruxsat:
+   - **May** I **leave** early today? (rasmiy so'rov)
+4. **be able to** — can bo'lmagan zamonlarda (kelasi, present perfect) yoki bitta muvaffaqiyatli holatni ta'kidlashda:
+   - I **haven't been able to** contact him.
+   - After years of practice, she **was able to** win the competition. (bitta muvaffaqiyat — "could" emas)
+
+## 3. Solishtirish jadvali
+• can (hozirgi qobiliyat/norasmiy ruxsat) vs could (o'tmishdagi qobiliyat/xushmuomala so'rov)
+• can/could (norasmiy ruxsat) vs may (rasmiy ruxsat)
+• could (umumiy o'tmishdagi qobiliyat) vs was/were able to (bitta aniq muvaffaqiyat)
+
+## 4. Signal so'zlar
+• can, can't/cannot
+• could, couldn't
+• may, may not
+• be able to, wasn't/weren't able to`,
+        questions: [
+          { id: 1, text: 'She ___ speak three languages fluently.', options: ['can', 'must', 'should', 'may'], correct: 0, explanation: '"can" — hozirgi qobiliyat.' },
+          { id: 2, text: '___ I borrow your pen for a second?', options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 3, text: 'When he was a child, he ___ climb trees very easily.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
+          { id: 4, text: '___ I leave the room now, sir?', options: ['May', 'Can', 'Must', 'Should'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
+          { id: 5, text: '___ you pass me the salt, please?', options: ['Could', 'Must', 'Should', 'May not'], correct: 0, explanation: '"Could" — xushmuomala so\'rov.' },
+          { id: 6, text: 'I ___ swim well, but I can\'t dive at all.', options: ['can', 'could', 'may', 'must'], correct: 0, explanation: '"can" — hozirgi qobiliyat.' },
+          { id: 7, text: 'After months of training, she ___ finally run a full marathon.', options: ['was able to', 'could', 'can', 'may'], correct: 0, explanation: '"was able to" — bitta aniq muvaffaqiyat (o\'tmishda).' },
+          { id: 8, text: 'He ___ attend the meeting yesterday because he was ill.', options: ["couldn't", "can't", "mayn't", "shouldn't"], correct: 0, explanation: '"couldn\'t" — o\'tmishdagi qobiliyat yo\'qligi.' },
+          { id: 9, text: '___ I use your phone for a minute?', options: ['Can', 'Must', 'Should', 'Ought to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 10, text: 'Students ___ not use their phones during the exam.', options: ['may', 'can', 'must', 'should'], correct: 0, explanation: '"may not" — rasmiy taqiq/ruxsat berilmaslik.' },
+          { id: 11, text: 'My grandmother ___ speak four languages when she was young.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi umumiy qobiliyat.' },
+          { id: 12, text: 'I haven\'t been ___ to contact her since Monday.', options: ['able', 'can', 'could', 'may'], correct: 0, explanation: '"be able to" — present perfectda "can" o\'rniga ishlatiladi.' },
+          { id: 13, text: '___ you help me carry this heavy bag?', options: ['Could', 'Must', 'Should', 'May not'], correct: 0, explanation: '"Could" — xushmuomala so\'rov.' },
+          { id: 14, text: '___ I sit here? Is this seat free?', options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
+          { id: 15, text: 'He ___ swim when he was five, but now he can.', options: ["couldn't", "can't", "mayn't", "shouldn't"], correct: 0, explanation: '"couldn\'t" — o\'tmishdagi qobiliyat yo\'qligi (could + not).' },
+          { id: 16, text: 'Despite the storm, the pilot ___ land the plane safely.', options: ['was able to', 'could', 'can', 'may'], correct: 0, explanation: '"was able to" — bitta aniq muvaffaqiyatli holat.' },
+          { id: 17, text: '___ we borrow these books from the library?', options: ['Can', 'Must', 'Should', 'Ought to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 18, text: 'Visitors ___ not enter after 9 p.m. without permission.', options: ['may', 'can', 'must', 'should'], correct: 0, explanation: '"may not" — rasmiy taqiq.' },
+          { id: 19, text: 'By the age of six, she ___ already read and write.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
+          { id: 20, text: '___ you turn the music down a little, please?', options: ['Could', 'Must', 'Should', 'May not'], correct: 0, explanation: '"Could" — xushmuomala so\'rov.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'She ___ (can / speak) three languages.', options: ['can speak', 'can speaks', 'can to speak', 'can speaking'], correct: 0, explanation: '"can" + base verb (speak).' },
+          { id: 2, text: '___ (can / I / borrow) your pen?', options: ['Can I borrow', 'Can I to borrow', 'I can borrow', 'Can I borrowing'], correct: 0, explanation: 'Modal question: Can + subject + base verb?' },
+          { id: 3, text: 'When he was a child, he ___ (could / climb) trees easily.', options: ['could climb', 'could climbed', 'could to climb', 'could climbing'], correct: 0, explanation: '"could" + base verb (climb).' },
+          { id: 4, text: '___ (may / I / leave) the room now?', options: ['May I leave', 'May I to leave', 'I may leave', 'May I leaving'], correct: 0, explanation: 'Modal question: May + subject + base verb?' },
+          { id: 5, text: '___ (could / you / pass) me the salt, please?', options: ['Could you pass', 'Could you to pass', 'You could pass', 'Could you passing'], correct: 0, explanation: 'Modal question: Could + subject + base verb?' },
+          { id: 6, text: 'I ___ (can / swim) well, but I can\'t dive.', options: ['can swim', 'can swims', 'can to swim', 'can swimming'], correct: 0, explanation: '"can" + base verb (swim).' },
+          { id: 7, text: 'After months of training, she ___ (be able to / run) a full marathon.', options: ['was able to run', 'could run', 'can run', 'was able to running'], correct: 0, explanation: '"be able to" + base verb (run), bitta muvaffaqiyat.' },
+          { id: 8, text: 'He ___ (couldn\'t / attend) the meeting yesterday.', options: ["couldn't attend", "can't attend", "couldn't attended", "couldn't to attend"], correct: 0, explanation: '"couldn\'t" + base verb (attend).' },
+          { id: 9, text: '___ (can / I / use) your phone for a minute?', options: ['Can I use', 'Can I to use', 'I can use', 'Can I using'], correct: 0, explanation: 'Modal question: Can + subject + base verb?' },
+          { id: 10, text: 'Students ___ (may not / use) their phones during the exam.', options: ['may not use', 'may not used', 'may not to use', 'may not using'], correct: 0, explanation: '"may not" + base verb (use), rasmiy taqiq.' },
+          { id: 11, text: 'My grandmother ___ (could / speak) four languages.', options: ['could speak', 'could speaks', 'could to speak', 'could speaking'], correct: 0, explanation: '"could" + base verb (speak).' },
+          { id: 12, text: 'I haven\'t ___ (been able to / contact) her since Monday.', options: ['been able to contact', 'could contact', 'can contact', 'been able to contacted'], correct: 0, explanation: '"haven\'t been able to" + base verb (contact).' },
+          { id: 13, text: '___ (could / you / help) me carry this bag?', options: ['Could you help', 'Could you to help', 'You could help', 'Could you helping'], correct: 0, explanation: 'Modal question: Could + subject + base verb?' },
+          { id: 14, text: '___ (may / I / sit) here?', options: ['May I sit', 'May I to sit', 'I may sit', 'May I sitting'], correct: 0, explanation: 'Modal question: May + subject + base verb?' },
+          { id: 15, text: 'He ___ (couldn\'t / swim) when he was five.', options: ["couldn't swim", "can't swim", "couldn't swam", "couldn't to swim"], correct: 0, explanation: '"couldn\'t" + base verb (swim).' },
+          { id: 16, text: 'Despite the storm, the pilot ___ (be able to / land) the plane safely.', options: ['was able to land', 'could land', 'can land', 'was able to landed'], correct: 0, explanation: '"be able to" + base verb (land), bitta muvaffaqiyat.' },
+          { id: 17, text: '___ (can / we / borrow) these books from the library?', options: ['Can we borrow', 'Can we to borrow', 'We can borrow', 'Can we borrowing'], correct: 0, explanation: 'Modal question: Can + subject + base verb?' },
+          { id: 18, text: 'Visitors ___ (may not / enter) after 9 p.m.', options: ['may not enter', 'may not entered', 'may not to enter', 'may not entering'], correct: 0, explanation: '"may not" + base verb (enter).' },
+          { id: 19, text: 'By the age of six, she ___ (could / read and write) already.', options: ['could read and write', 'could reads and writes', 'could to read and write', 'could reading and writing'], correct: 0, explanation: '"could" + base verb (read and write).' },
+          { id: 20, text: '___ (could / you / turn) the music down, please?', options: ['Could you turn', 'Could you to turn', 'You could turn', 'Could you turning'], correct: 0, explanation: 'Modal question: Could + subject + base verb?' }
+        ],
+        scrambled: [
+          { id: 1, words: ['speak', 'she', 'can', 'three', 'languages'], answer: 'she can speak three languages', explanation: 'Subject + can + base verb.' },
+          { id: 2, words: ['borrow', 'can', 'I', 'your', 'pen', '?'], answer: 'can I borrow your pen', explanation: 'Can + subject + base verb?' },
+          { id: 3, words: ['climb', 'he', 'could', 'trees', 'easily'], answer: 'he could climb trees easily', explanation: 'Subject + could + base verb.' },
+          { id: 4, words: ['leave', 'may', 'I', 'the', 'room', '?'], answer: 'may I leave the room', explanation: 'May + subject + base verb?' },
+          { id: 5, words: ['pass', 'could', 'you', 'me', 'the', 'salt', '?'], answer: 'could you pass me the salt', explanation: 'Could + subject + base verb? (xushmuomala so\'rov)' },
+          { id: 6, words: ['swim', 'I', 'can', 'well'], answer: 'I can swim well', explanation: 'Subject + can + base verb.' },
+          { id: 7, words: ['run', 'she', 'was', 'able', 'to', 'a', 'marathon'], answer: 'she was able to run a marathon', explanation: 'Subject + was able to + base verb.' },
+          { id: 8, words: ['attend', 'he', "couldn't", 'the', 'meeting'], answer: "he couldn't attend the meeting", explanation: 'Subject + couldn\'t + base verb.' },
+          { id: 9, words: ['use', 'can', 'I', 'your', 'phone', '?'], answer: 'can I use your phone', explanation: 'Can + subject + base verb?' },
+          { id: 10, words: ['use', 'students', 'may', 'not', 'their', 'phones'], answer: 'students may not use their phones', explanation: 'Subject + may not + base verb.' },
+          { id: 11, words: ['speak', 'my', 'grandmother', 'could', 'four', 'languages'], answer: 'my grandmother could speak four languages', explanation: 'Subject + could + base verb.' },
+          { id: 12, words: ['contact', 'I', "haven't", 'been', 'able', 'to', 'her'], answer: "I haven't been able to contact her", explanation: 'Subject + haven\'t been able to + base verb.' },
+          { id: 13, words: ['help', 'could', 'you', 'me', 'carry', 'this', 'bag', '?'], answer: 'could you help me carry this bag', explanation: 'Could + subject + base verb?' },
+          { id: 14, words: ['sit', 'may', 'I', 'here', '?'], answer: 'may I sit here', explanation: 'May + subject + base verb?' },
+          { id: 15, words: ['swim', 'he', "couldn't", 'when', 'he', 'was', 'five'], answer: "he couldn't swim when he was five", explanation: 'Subject + couldn\'t + base verb.' },
+          { id: 16, words: ['land', 'the', 'pilot', 'was', 'able', 'to', 'the', 'plane', 'safely'], answer: 'the pilot was able to land the plane safely', explanation: 'Subject + was able to + base verb.' },
+          { id: 17, words: ['borrow', 'can', 'we', 'these', 'books', '?'], answer: 'can we borrow these books', explanation: 'Can + subject + base verb?' },
+          { id: 18, words: ['enter', 'visitors', 'may', 'not', 'after', '9', 'p.m.'], answer: 'visitors may not enter after 9 p.m.', explanation: 'Subject + may not + base verb.' },
+          { id: 19, words: ['read', 'she', 'could', 'already'], answer: 'she could read already', explanation: 'Subject + could + base verb.' },
+          { id: 20, words: ['turn', 'could', 'you', 'the', 'music', 'down', '?'], answer: 'could you turn the music down', explanation: 'Could + subject + base verb? (xushmuomala so\'rov)' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'She can speaks three languages.', options: ['She', 'can', 'speaks', 'three languages'], correct: 2, wrongPart: 'speaks', correction: 'speak', explanation: 'After a modal verb, use the base verb without "-s": "speak".' },
+          { id: 2, text: 'Can I to borrow your pen?', options: ['Can', 'I to borrow', 'your pen', 'No error'], correct: 1, wrongPart: 'I to borrow', correction: 'I borrow', explanation: 'Modal verbs are followed directly by the base verb, no "to": "Can I borrow".' },
+          { id: 3, text: 'He could climbed trees very easily as a child.', options: ['He', 'could climbed', 'trees very easily', 'as a child'], correct: 1, wrongPart: 'could climbed', correction: 'could climb', explanation: 'After "could", use the base verb: "climb", not "climbed".' },
+          { id: 4, text: 'May I to leave the room now?', options: ['May', 'I to leave', 'the room now', 'No error'], correct: 1, wrongPart: 'I to leave', correction: 'I leave', explanation: 'Modal verbs are followed directly by the base verb, no "to": "May I leave".' },
+          { id: 5, text: 'Could you passes me the salt, please?', options: ['Could you', 'passes', 'me the salt', 'please'], correct: 1, wrongPart: 'passes', correction: 'pass', explanation: 'After "could", use the base verb without "-s": "pass".' },
+          { id: 6, text: "I can swimming well, but I can't dive.", options: ['I', 'can swimming', 'well', "but I can't dive"], correct: 1, wrongPart: 'can swimming', correction: 'can swim', explanation: 'After "can", use the base verb: "swim", not "swimming".' },
+          { id: 7, text: 'She was able to ran a full marathon.', options: ['She', 'was able to ran', 'a full', 'marathon'], correct: 1, wrongPart: 'was able to ran', correction: 'was able to run', explanation: '"be able to" is followed by the base verb: "run", not "ran".' },
+          { id: 8, text: "He can't attended the meeting yesterday.", options: ['He', "can't attended", 'the meeting', 'yesterday'], correct: 1, wrongPart: "can't attended", correction: "couldn't attend", explanation: 'For past inability, use "couldn\'t" + base verb, not "can\'t attended".' },
+          { id: 9, text: 'Can I using your phone for a minute?', options: ['Can', 'I using', 'your phone', 'for a minute'], correct: 1, wrongPart: 'I using', correction: 'I use', explanation: 'Modal verbs are followed directly by the base verb, no "-ing": "Can I use".' },
+          { id: 10, text: 'Students may not to use their phones during the exam.', options: ['Students', 'may not to use', 'their phones', 'during the exam'], correct: 1, wrongPart: 'may not to use', correction: 'may not use', explanation: 'Modal verbs are followed directly by the base verb, no "to": "may not use".' },
+          { id: 11, text: 'My grandmother could speaks four languages.', options: ['My grandmother', 'could speaks', 'four', 'languages'], correct: 1, wrongPart: 'could speaks', correction: 'could speak', explanation: 'After "could", use the base verb without "-s": "speak".' },
+          { id: 12, text: "I haven't could contact her since Monday.", options: ['I', "haven't could", 'contact her', 'since Monday'], correct: 1, wrongPart: "haven't could", correction: "haven't been able to", explanation: '"can/could" has no present perfect form; use "haven\'t been able to" instead.' },
+          { id: 13, text: 'Could you helping me carry this bag?', options: ['Could you', 'helping', 'me carry', 'this bag'], correct: 1, wrongPart: 'helping', correction: 'help', explanation: 'After "could", use the base verb: "help", not "helping".' },
+          { id: 14, text: 'May I sitting here?', options: ['May', 'I', 'sitting', 'here'], correct: 2, wrongPart: 'sitting', correction: 'sit', explanation: 'After "may", use the base verb: "sit", not "sitting".' },
+          { id: 15, text: "He can't swim when he was five.", options: ['He', "can't swim", 'when he', 'was five'], correct: 1, wrongPart: "can't swim", correction: "couldn't swim", explanation: 'For past inability, use "couldn\'t", the past form of "can\'t".' },
+          { id: 16, text: 'The pilot was able to landed the plane safely despite the storm.', options: ['The pilot', 'was able to landed', 'the plane safely', 'despite the storm'], correct: 1, wrongPart: 'was able to landed', correction: 'was able to land', explanation: '"be able to" is followed by the base verb: "land", not "landed".' },
+          { id: 17, text: 'Can we to borrow these books from the library?', options: ['Can', 'we to borrow', 'these books', 'from the library'], correct: 1, wrongPart: 'we to borrow', correction: 'we borrow', explanation: 'Modal verbs are followed directly by the base verb, no "to": "Can we borrow".' },
+          { id: 18, text: 'Visitors may not entered after 9 p.m.', options: ['Visitors', 'may not entered', 'after', '9 p.m.'], correct: 1, wrongPart: 'may not entered', correction: 'may not enter', explanation: 'After "may not", use the base verb: "enter", not "entered".' },
+          { id: 19, text: 'By the age of six, she could reads and writes.', options: ['By the age of six', 'she', 'could reads and writes', 'No error'], correct: 2, wrongPart: 'could reads and writes', correction: 'could read and write', explanation: 'After "could", use the base verb without "-s": "read and write".' },
+          { id: 20, text: 'Could you turning the music down, please?', options: ['Could you', 'turning', 'the music down', 'please'], correct: 1, wrongPart: 'turning', correction: 'turn', explanation: 'After "could", use the base verb: "turn", not "turning".' }
+        ],
+        transform: [
+          { id: 1, text: 'Express ability: "She has the skill to speak three languages."', options: ['She can speak three languages.', 'She must speak three languages.', 'She should speak three languages.', 'She may speak three languages.'], correct: 0, explanation: '"can" expresses present ability.' },
+          { id: 2, text: 'Ask for informal permission: "I want permission to borrow your pen."', options: ['Can I borrow your pen?', 'Must I borrow your pen?', 'Should I borrow your pen?', 'Have I to borrow your pen?'], correct: 0, explanation: '"Can" is used for informal permission requests.' },
+          { id: 3, text: 'Express past ability: "He had the skill to climb trees easily as a child."', options: ['He could climb trees easily as a child.', 'He can climb trees easily as a child.', 'He must climb trees easily as a child.', 'He should climb trees easily as a child.'], correct: 0, explanation: '"could" expresses general past ability.' },
+          { id: 4, text: 'Ask for formal permission: "I want polite permission to leave the room."', options: ['May I leave the room?', 'Must I leave the room?', 'Should I leave the room?', 'Can I to leave the room?'], correct: 0, explanation: '"May" is used for formal permission requests.' },
+          { id: 5, text: 'Make a polite request: "I want you to pass me the salt, politely."', options: ['Could you pass me the salt, please?', 'You must pass me the salt.', 'You should pass me the salt.', 'Can you to pass me the salt?'], correct: 0, explanation: '"Could" is used for polite requests.' },
+          { id: 6, text: 'Express present ability: "I have the skill to swim well."', options: ['I can swim well.', 'I must swim well.', 'I should swim well.', 'I may swim well.'], correct: 0, explanation: '"can" expresses present ability.' },
+          { id: 7, text: 'Express a single past achievement: "After months of training, she succeeded in running a full marathon."', options: ['She was able to run a full marathon.', 'She could run a full marathon.', 'She can run a full marathon.', 'She may run a full marathon.'], correct: 0, explanation: '"was able to" is used for a single successful past achievement, not "could".' },
+          { id: 8, text: 'Express past inability: "He didn\'t have the ability to attend the meeting yesterday."', options: ["He couldn't attend the meeting yesterday.", "He can't attend the meeting yesterday.", "He mustn't attend the meeting yesterday.", "He shouldn't attend the meeting yesterday."], correct: 0, explanation: '"couldn\'t" expresses past inability.' },
+          { id: 9, text: 'Ask for informal permission: "I want permission to use your phone."', options: ['Can I use your phone?', 'Must I use your phone?', 'Should I use your phone?', 'Have I to use your phone?'], correct: 0, explanation: '"Can" is used for informal permission requests.' },
+          { id: 10, text: 'Express formal prohibition: "Students are not allowed to use their phones during the exam."', options: ['Students may not use their phones during the exam.', 'Students must use their phones during the exam.', 'Students should use their phones during the exam.', 'Students have to use their phones during the exam.'], correct: 0, explanation: '"may not" expresses formal prohibition.' },
+          { id: 11, text: 'Express past ability: "My grandmother had the skill to speak four languages."', options: ['My grandmother could speak four languages.', 'My grandmother can speak four languages.', 'My grandmother must speak four languages.', 'My grandmother should speak four languages.'], correct: 0, explanation: '"could" expresses general past ability.' },
+          { id: 12, text: 'Express inability up to now: "I haven\'t had the chance to contact her since Monday."', options: ["I haven't been able to contact her since Monday.", "I haven't could contact her since Monday.", "I can't contact her since Monday.", "I couldn't contact her since Monday."], correct: 0, explanation: '"can/could" has no present perfect form; use "haven\'t been able to".' },
+          { id: 13, text: 'Make a polite request: "I want you to help me carry this bag, politely."', options: ['Could you help me carry this bag?', 'You must help me carry this bag.', 'You should help me carry this bag.', 'Can you to help me carry this bag?'], correct: 0, explanation: '"Could" is used for polite requests.' },
+          { id: 14, text: 'Ask for formal permission: "I want polite permission to sit here."', options: ['May I sit here?', 'Must I sit here?', 'Should I sit here?', 'Can I to sit here?'], correct: 0, explanation: '"May" is used for formal permission requests.' },
+          { id: 15, text: 'Express past inability: "He didn\'t have the ability to swim when he was five."', options: ["He couldn't swim when he was five.", "He can't swim when he was five.", "He mustn't swim when he was five.", "He shouldn't swim when he was five."], correct: 0, explanation: '"couldn\'t" expresses past inability.' },
+          { id: 16, text: 'Express a single past achievement: "Despite the storm, the pilot succeeded in landing the plane safely."', options: ['The pilot was able to land the plane safely.', 'The pilot could land the plane safely.', 'The pilot can land the plane safely.', 'The pilot may land the plane safely.'], correct: 0, explanation: '"was able to" is used for a single successful past achievement.' },
+          { id: 17, text: 'Ask for informal permission: "I want permission to borrow these books."', options: ['Can we borrow these books?', 'Must we borrow these books?', 'Should we borrow these books?', 'Have we to borrow these books?'], correct: 0, explanation: '"Can" is used for informal permission requests.' },
+          { id: 18, text: 'Express formal prohibition: "Visitors are not allowed to enter after 9 p.m."', options: ['Visitors may not enter after 9 p.m.', 'Visitors must enter after 9 p.m.', 'Visitors should enter after 9 p.m.', 'Visitors have to enter after 9 p.m.'], correct: 0, explanation: '"may not" expresses formal prohibition.' },
+          { id: 19, text: 'Express past ability: "By the age of six, she had the skill to read and write."', options: ['By the age of six, she could read and write.', 'By the age of six, she can read and write.', 'By the age of six, she must read and write.', 'By the age of six, she should read and write.'], correct: 0, explanation: '"could" expresses general past ability.' },
+          { id: 20, text: 'Make a polite request: "I want you to turn the music down, politely."', options: ['Could you turn the music down, please?', 'You must turn the music down.', 'You should turn the music down.', 'Can you to turn the music down?'], correct: 0, explanation: '"Could" is used for polite requests.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Talking about language skills.', dialogue: 'A: Is she good with languages?\nB: Yes, she ___ speak three of them.', options: ['can', 'must', 'should', 'may'], correct: 0, explanation: '"can" — hozirgi qobiliyat.' },
+          { id: 2, situation: 'Borrowing something small.', dialogue: 'A: I forgot my pen.\nB: ___ I borrow yours?', options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 3, situation: 'Talking about childhood.', dialogue: 'A: Were you active as a kid?\nB: Yes, I ___ climb trees really easily.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
+          { id: 4, situation: 'In a formal office.', dialogue: 'A: Excuse me, ___ I leave the room for a moment?\nB: Of course.', options: ['may', 'must', 'should', 'have to'], correct: 0, explanation: '"may" — rasmiy ruxsat so\'rash.' },
+          { id: 5, situation: 'At the dinner table.', dialogue: 'A: ___ you pass me the salt, please?\nB: Sure, here you go.', options: ['Could', 'Must', 'Should', 'May not'], correct: 0, explanation: '"Could" — xushmuomala so\'rov.' },
+          { id: 6, situation: 'Talking about swimming.', dialogue: "A: Are you a good swimmer?\nB: I ___ swim well, but I can't dive.", options: ['can', 'could', 'may', 'must'], correct: 0, explanation: '"can" — hozirgi qobiliyat.' },
+          { id: 7, situation: 'After a big race.', dialogue: 'A: Did she finish the marathon?\nB: Yes! After months of training, she ___ finally run the whole thing.', options: ['was able to', 'could', 'can', 'may'], correct: 0, explanation: '"was able to" — bitta aniq muvaffaqiyat.' },
+          { id: 8, situation: 'Explaining an absence.', dialogue: 'A: Why wasn\'t he at the meeting?\nB: He ___ attend because he was ill.', options: ["couldn't", "can't", "mayn't", "shouldn't"], correct: 0, explanation: '"couldn\'t" — o\'tmishdagi qobiliyat yo\'qligi.' },
+          { id: 9, situation: 'Asking to use a phone.', dialogue: 'A: My battery died.\nB: ___ I use your phone for a minute?', options: ['Can', 'Must', 'Should', 'Ought to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 10, situation: 'Talking about exam rules.', dialogue: 'A: Can we use our phones during the test?\nB: No, students ___ use their phones during the exam.', options: ['may not', 'can', 'must', 'should'], correct: 0, explanation: '"may not" — rasmiy taqiq.' },
+          { id: 11, situation: 'Talking about a relative.', dialogue: 'A: Did your grandmother know many languages?\nB: Yes, she ___ speak four of them.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
+          { id: 12, situation: 'Explaining a delay in communication.', dialogue: 'A: Have you talked to her recently?\nB: No, I haven\'t been ___ contact her since Monday.', options: ['able to', 'could to', 'can to', 'may to'], correct: 0, explanation: '"been able to" — present perfectda "can" o\'rniga ishlatiladi.' },
+          { id: 13, situation: 'Moving heavy things.', dialogue: 'A: This bag is so heavy!\nB: ___ you help me carry it?', options: ['Could', 'Must', 'Should', 'May not'], correct: 0, explanation: '"Could" — xushmuomala so\'rov.' },
+          { id: 14, situation: 'Finding a seat.', dialogue: 'A: ___ I sit here? Is this seat free?\nB: Yes, go ahead.', options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
+          { id: 15, situation: 'Talking about childhood skills.', dialogue: 'A: Could he always swim?\nB: No, he ___ swim when he was five.', options: ["couldn't", "can't", "mayn't", "shouldn't"], correct: 0, explanation: '"couldn\'t" — o\'tmishdagi qobiliyat yo\'qligi.' },
+          { id: 16, situation: 'Discussing a difficult flight.', dialogue: 'A: Was the landing dangerous?\nB: Yes, but despite the storm, the pilot ___ land the plane safely.', options: ['was able to', 'could', 'can', 'may'], correct: 0, explanation: '"was able to" — bitta aniq muvaffaqiyat.' },
+          { id: 17, situation: 'At the library.', dialogue: 'A: ___ we borrow these books?\nB: Yes, of course.', options: ['Can', 'Must', 'Should', 'Ought to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
+          { id: 18, situation: 'Talking about visiting hours.', dialogue: 'A: Can we come late?\nB: No, visitors ___ enter after 9 p.m.', options: ['may not', 'can', 'must', 'should'], correct: 0, explanation: '"may not" — rasmiy taqiq.' },
+          { id: 19, situation: 'Talking about an early reader.', dialogue: 'A: Was she a smart child?\nB: Yes, by the age of six, she ___ already read and write.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
+          { id: 20, situation: 'At a loud party.', dialogue: "A: I can barely hear you!\nB: ___ you turn the music down, please?", options: ['Could', 'Must', 'Should', 'May not'], correct: 0, explanation: '"Could" — xushmuomala so\'rov.' }
+        ]
+      },
+      {
+        id: 'modal-verbs-obligation',
+        title: 'Modal Verbs 2: Obligation & Advice',
+        icon: '📋',
+        guide: `## Modal Verbs: Obligation & Advice (Majburiyat va maslahat)
+
+Bu modal fe'llar zarurat, majburiyat, taqiq va maslahatni ifodalash uchun ishlatiladi: **must, have to, should, ought to, need to, had better**.
+
+## 1. Shakllanishi (Form)
+• Subject + modal + base verb
+  - I **must finish** this today. Employees **have to wear** a uniform. You **should rest**.
+• **Inkor**:
+  - You **mustn't smoke** here. (taqiq)
+  - You **don't have to come**. (shart emas)
+  - You **needn't worry**. (shart emas, rasmiyroq)
+  - You **shouldn't shout**. (maslahat emas)
+• **Savol**: Modal/Do + Subject + (modal +) base verb?
+  - **Must** I **finish** this today? **Do** I **have to come**? **Should** I **call** her?
+
+## 2. Ishlatilishi (Usage)
+1. **must** — kuchli ichki majburiyat/qat'iy qoida:
+   - I **must finish** this report today.
+2. **have to** — tashqi majburiyat (qonun, boshqa odam):
+   - Employees **have to wear** a uniform.
+3. **mustn't** vs **don't have to** vs **needn't**:
+   - You **mustn't** enter. (taqiq — MAN ETILGAN)
+   - You **don't have to** come. / You **needn't** come. (shart emas, lekin mumkin)
+4. **should / ought to** — maslahat, tavsiya (deyarli bir xil, "should" ko'proq ishlatiladi):
+   - You **should see** a doctor. = You **ought to see** a doctor.
+5. **need to** — zaruriyat (odatiy, neytral):
+   - I **need to buy** some milk.
+6. **had better** — kuchli, tezkor maslahat (ogohlantirish ma'nosida, natija salbiy bo'lishi mumkin):
+   - You **had better hurry**, or you'll miss the bus. (**'d better** — qisqa shakli)
 
 ## 3. Solishtirish jadvali
 • must (ichki majburiyat) vs have to (tashqi majburiyat)
-• mustn't (taqiq) vs don't have to (ixtiyoriy)
-• can (norasmiy ruxsat/qobiliyat) vs may (rasmiy ruxsat/ehtimollik)
-• should (maslahat) vs must (majburiyat) — should kuchsizroq
+• mustn't (taqiq) vs don't have to / needn't (ixtiyoriy)
+• should/ought to (maslahat) vs must/have to (majburiyat) — should kuchsizroq
+• should (umumiy maslahat) vs had better (kuchli, tezkor ogohlantirish)
 
 ## 4. Signal so'zlar
-• must, have to/has to, mustn't, don't have to/doesn't have to
-• should, shouldn't
-• can, can't, could (o'tmishda)
-• may, might (ehtimollik, kamroq aniq)`,
+• must, mustn't
+• have to/has to, don't have to/doesn't have to
+• should, shouldn't, ought to
+• need to, needn't
+• had better, 'd better, had better not`,
         questions: [
-          { id: 1, text: 'I ___ finish this report today — it\'s urgent.', options: ['must', 'may', 'could', 'was'], correct: 0, explanation: '"must" — kuchli shaxsiy majburiyat.' },
-          { id: 2, text: 'Employees ___ wear a uniform at this company.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida/majburiyat.' },
-          { id: 3, text: 'You ___ enter this room — it\'s strictly forbidden.', options: ["mustn't", "don't have to", "shouldn't", "can't"], correct: 0, explanation: '"mustn\'t" — taqiq, kirish man etilgan.' },
-          { id: 4, text: 'You ___ come to the party if you don\'t want to — it\'s optional.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — majburiy emas, ixtiyoriy.' },
-          { id: 5, text: 'You ___ see a doctor about that cough.', options: ['should', 'must', 'can', 'may'], correct: 0, explanation: '"should" — maslahat, tavsiya.' },
-          { id: 6, text: 'She ___ speak three languages fluently.', options: ['can', 'must', 'should', 'may'], correct: 0, explanation: '"can" — qobiliyatni bildiradi.' },
-          { id: 7, text: '___ I open the window? It\'s hot in here.', options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
-          { id: 8, text: '___ I come in, please?', options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
-          { id: 9, text: 'It ___ rain later, so take an umbrella just in case.', options: ['may', 'must', 'should', 'have to'], correct: 0, explanation: '"may" — ehtimollikni bildiradi.' },
-          { id: 10, text: 'You ___ be tired after such a long trip.', options: ['must', 'can', 'should', 'may not'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
-          { id: 11, text: 'He ___ swim when he was five years old.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
-          { id: 12, text: 'Students ___ hand in their homework by Friday.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida (maktab qoidasi).' },
-          { id: 13, text: 'You ___ smoke inside the building.', options: ["mustn't", "don't have to", "shouldn't", "may not"], correct: 0, explanation: '"mustn\'t" — taqiq, chekish man etilgan.' },
-          { id: 14, text: 'You ___ bring your own laptop — we provide one.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — ixtiyoriy, shart emas.' },
-          { id: 15, text: 'You ___ apologize to her — it was a small mistake.', options: ['should', 'must', 'can', 'have to'], correct: 0, explanation: '"should" — maslahat, tavsiya.' },
-          { id: 16, text: 'They ___ afford a new car this year.', options: ["can't", "mustn't", "shouldn't", "mayn't"], correct: 0, explanation: '"can\'t" — imkoniyat/qobiliyat yo\'qligi.' },
-          { id: 17, text: '___ you help me carry these boxes?', options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy so\'rov.' },
-          { id: 18, text: '___ I ask you a personal question?', options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
-          { id: 19, text: 'The lights are off — they ___ be asleep already.', options: ['must', 'can', 'should', 'have to'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
-          { id: 20, text: 'We ___ leave early tomorrow to catch the flight.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi zaruriyat (parvoz vaqti).' }
+          { id: 1, text: 'I ___ finish this project by Friday — my boss insists on it.', options: ['must', 'may', 'could', 'was'], correct: 0, explanation: '"must" — kuchli ichki majburiyat.' },
+          { id: 2, text: 'Employees ___ arrive before 9 a.m., according to company rules.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
+          { id: 3, text: "You ___ touch that — it's extremely dangerous!", options: ["mustn't", "don't have to", "shouldn't", "needn't"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
+          { id: 4, text: 'You ___ pay now — you can pay next week if you prefer.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — shart emas.' },
+          { id: 5, text: "You ___ eat so much junk food — it's bad for your health.", options: ["shouldn't", "mustn't", "can't", "needn't"], correct: 0, explanation: '"shouldn\'t" — maslahat (salbiy).' },
+          { id: 6, text: 'We ___ recycle more to protect the environment.', options: ['ought to', 'must', 'can', 'may'], correct: 0, explanation: '"ought to" — maslahat/tavsiya, should bilan bir xil.' },
+          { id: 7, text: 'I ___ buy some milk on my way home.', options: ['need to', 'must', 'may', 'should'], correct: 0, explanation: '"need to" — oddiy zaruriyat.' },
+          { id: 8, text: "You ___ worry about the exam — it's very easy.", options: ["needn't", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"needn\'t" — shart emas.' },
+          { id: 9, text: "You ___ hurry, or you'll miss the train.", options: ['had better', 'must', 'should', 'may'], correct: 0, explanation: '"had better" — kuchli, tezkor maslahat.' },
+          { id: 10, text: 'She ___ take her medicine every morning; the doctor insists.', options: ['must', 'may', 'could', 'was'], correct: 0, explanation: '"must" — kuchli ichki majburiyat/talab.' },
+          { id: 11, text: "Passengers ___ fasten their seatbelts during takeoff — it's the law.", options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida (qonun).' },
+          { id: 12, text: "You ___ park here — it's reserved for staff only.", options: ["mustn't", "don't have to", "shouldn't", "needn't"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
+          { id: 13, text: "You ___ bring a gift — it's just a casual get-together.", options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — shart emas.' },
+          { id: 14, text: 'You ___ stay up so late — you have an early class tomorrow.', options: ["shouldn't", "mustn't", "can't", "needn't"], correct: 0, explanation: '"shouldn\'t" — maslahat.' },
+          { id: 15, text: 'We ___ save more money each month.', options: ['ought to', 'must', 'can', 'may'], correct: 0, explanation: '"ought to" — maslahat/tavsiya.' },
+          { id: 16, text: 'I ___ finish my homework before dinner.', options: ['need to', 'must', 'may', 'should'], correct: 0, explanation: '"need to" — oddiy zaruriyat.' },
+          { id: 17, text: "You ___ bring an umbrella — it's not going to rain.", options: ["needn't", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"needn\'t" — shart emas.' },
+          { id: 18, text: "You ___ apologize right now, or she'll be really upset.", options: ['had better', 'must', 'should', 'may'], correct: 0, explanation: '"had better" — kuchli, tezkor maslahat/ogohlantirish.' },
+          { id: 19, text: "Students ___ submit their assignments online — it's the school's rule.", options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
+          { id: 20, text: "You ___ shout at your little brother — it's not kind.", options: ["shouldn't", "mustn't", "can't", "needn't"], correct: 0, explanation: '"shouldn\'t" — maslahat.' }
         ],
         fillBlanks: [
-          { id: 1, text: 'I ___ (must / finish) this report today.', options: ['must finish', 'have to finished', 'must to finish', 'musting finish'], correct: 0, explanation: 'Modal + base verb, hech qanday qo\'shimcha qo\'shilmaydi.' },
-          { id: 2, text: 'Employees ___ (have to / wear) a uniform.', options: ['have to wear', 'has to wear', 'have to wearing', 'must to wear'], correct: 0, explanation: '"have to" + base verb (wear).' },
-          { id: 3, text: 'You ___ (mustn\'t / enter) this room.', options: ["mustn't enter", "don't must enter", "mustn't to enter", "mustn't entering"], correct: 0, explanation: '"mustn\'t" + base verb (enter), taqiq.' },
-          { id: 4, text: 'You ___ (don\'t have to / come) if you don\'t want to.', options: ["don't have to come", "mustn't come", "don't must come", "haven't to come"], correct: 0, explanation: '"don\'t have to" + base verb (come), ixtiyoriy.' },
-          { id: 5, text: 'You ___ (should / see) a doctor about that cough.', options: ['should see', 'should to see', 'should seeing', 'shoulds see'], correct: 0, explanation: '"should" + base verb (see).' },
-          { id: 6, text: 'She ___ (can / speak) three languages.', options: ['can speak', 'can to speak', 'cans speak', 'can speaking'], correct: 0, explanation: '"can" + base verb (speak).' },
-          { id: 7, text: '___ (can / I / open) the window?', options: ['Can I open', 'Can I to open', 'Can I opening', 'I can open'], correct: 0, explanation: 'Modal question: Can + subject + base verb?' },
-          { id: 8, text: '___ (may / I / come) in?', options: ['May I come', 'May I to come', 'I may come', 'May I coming'], correct: 0, explanation: 'Modal question: May + subject + base verb?' },
-          { id: 9, text: 'It ___ (may / rain) later.', options: ['may rain', 'may to rain', 'may raining', 'mays rain'], correct: 0, explanation: '"may" + base verb (rain), ehtimollik.' },
-          { id: 10, text: 'You ___ (must / be) tired after that trip.', options: ['must be', 'must to be', 'must being', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli ishonch.' },
-          { id: 11, text: 'He ___ (could / swim) when he was five.', options: ['could swim', 'could to swim', 'coulds swim', 'could swimming'], correct: 0, explanation: '"could" + base verb (swim), o\'tmishdagi qobiliyat.' },
-          { id: 12, text: 'Students ___ (have to / hand) in homework by Friday.', options: ['have to hand', 'has to hand', 'have to handing', 'must to hand'], correct: 0, explanation: '"have to" + base verb (hand).' },
-          { id: 13, text: 'You ___ (mustn\'t / smoke) inside the building.', options: ["mustn't smoke", "don't must smoke", "mustn't to smoke", "mustn't smoking"], correct: 0, explanation: '"mustn\'t" + base verb (smoke), taqiq.' },
-          { id: 14, text: 'You ___ (don\'t have to / bring) your own laptop.', options: ["don't have to bring", "mustn't bring", "don't must bring", "haven't to bring"], correct: 0, explanation: '"don\'t have to" + base verb (bring), ixtiyoriy.' },
-          { id: 15, text: 'You ___ (should / apologize) to her.', options: ['should apologize', 'should to apologize', 'shoulds apologize', 'should apologizing'], correct: 0, explanation: '"should" + base verb (apologize).' },
-          { id: 16, text: 'They ___ (can\'t / afford) a new car.', options: ["can't afford", "can't to afford", "cant's afford", "can't affording"], correct: 0, explanation: '"can\'t" + base verb (afford).' },
-          { id: 17, text: '___ (can / you / help) me carry these boxes?', options: ['Can you help', 'Can you to help', 'You can help', 'Can you helping'], correct: 0, explanation: 'Modal question: Can + subject + base verb?' },
-          { id: 18, text: '___ (may / I / ask) you a personal question?', options: ['May I ask', 'May I to ask', 'I may ask', 'May I asking'], correct: 0, explanation: 'Modal question: May + subject + base verb?' },
-          { id: 19, text: 'The lights are off — they ___ (must / be) asleep.', options: ['must be', 'must to be', 'must being', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli ishonch.' },
-          { id: 20, text: 'We ___ (have to / leave) early tomorrow.', options: ['have to leave', 'has to leave', 'have to leaving', 'must to leave'], correct: 0, explanation: '"have to" + base verb (leave).' }
+          { id: 1, text: 'I ___ (must / finish) this project by Friday.', options: ['must finish', 'have to finished', 'must to finish', 'musting finish'], correct: 0, explanation: 'Modal + base verb, hech qanday qo\'shimcha qo\'shilmaydi.' },
+          { id: 2, text: 'Employees ___ (have to / arrive) before 9 a.m.', options: ['have to arrive', 'has to arrive', 'have to arriving', 'must to arrive'], correct: 0, explanation: '"have to" + base verb (arrive).' },
+          { id: 3, text: "You ___ (mustn't / touch) that — it's dangerous.", options: ["mustn't touch", "don't must touch", "mustn't to touch", "mustn't touching"], correct: 0, explanation: '"mustn\'t" + base verb (touch), taqiq.' },
+          { id: 4, text: "You ___ (don't have to / pay) now.", options: ["don't have to pay", "mustn't pay", "don't must pay", "haven't to pay"], correct: 0, explanation: '"don\'t have to" + base verb (pay), ixtiyoriy.' },
+          { id: 5, text: 'You ___ (shouldn\'t / eat) so much junk food.', options: ["shouldn't eat", "shouldn't ate", "shouldn't to eat", "shouldn't eating"], correct: 0, explanation: '"shouldn\'t" + base verb (eat).' },
+          { id: 6, text: 'We ___ (ought to / recycle) more to protect the environment.', options: ['ought to recycle', 'ought recycle', 'ought to recycled', 'ought to recycling'], correct: 0, explanation: '"ought to" + base verb (recycle).' },
+          { id: 7, text: 'I ___ (need to / buy) some milk on my way home.', options: ['need to buy', 'needs to buy', 'need to bought', 'need to buying'], correct: 0, explanation: '"need to" + base verb (buy).' },
+          { id: 8, text: 'You ___ (needn\'t / worry) about the exam.', options: ["needn't worry", "don't needn't worry", "needn't to worry", "needn't worrying"], correct: 0, explanation: '"needn\'t" + base verb (worry), shart emas.' },
+          { id: 9, text: "You ___ (had better / hurry), or you'll miss the train.", options: ['had better hurry', 'had better to hurry', 'had better hurrying', 'have better hurry'], correct: 0, explanation: '"had better" + base verb (hurry).' },
+          { id: 10, text: 'She ___ (must / take) her medicine every morning.', options: ['must take', 'must takes', 'must to take', 'must taking'], correct: 0, explanation: '"must" + base verb (take).' },
+          { id: 11, text: 'Passengers ___ (have to / fasten) their seatbelts during takeoff.', options: ['have to fasten', 'has to fasten', 'have to fastening', 'must to fasten'], correct: 0, explanation: '"have to" + base verb (fasten).' },
+          { id: 12, text: "You ___ (mustn't / park) here — it's reserved for staff.", options: ["mustn't park", "don't must park", "mustn't to park", "mustn't parking"], correct: 0, explanation: '"mustn\'t" + base verb (park), taqiq.' },
+          { id: 13, text: "You ___ (don't have to / bring) a gift.", options: ["don't have to bring", "mustn't bring", "don't must bring", "haven't to bring"], correct: 0, explanation: '"don\'t have to" + base verb (bring), ixtiyoriy.' },
+          { id: 14, text: 'You ___ (shouldn\'t / stay) up so late.', options: ["shouldn't stay", "shouldn't stayed", "shouldn't to stay", "shouldn't staying"], correct: 0, explanation: '"shouldn\'t" + base verb (stay).' },
+          { id: 15, text: 'We ___ (ought to / save) more money each month.', options: ['ought to save', 'ought save', 'ought to saved', 'ought to saving'], correct: 0, explanation: '"ought to" + base verb (save).' },
+          { id: 16, text: 'I ___ (need to / finish) my homework before dinner.', options: ['need to finish', 'needs to finish', 'need to finished', 'need to finishing'], correct: 0, explanation: '"need to" + base verb (finish).' },
+          { id: 17, text: 'You ___ (needn\'t / bring) an umbrella.', options: ["needn't bring", "don't needn't bring", "needn't to bring", "needn't bringing"], correct: 0, explanation: '"needn\'t" + base verb (bring), shart emas.' },
+          { id: 18, text: 'You ___ (had better / apologize) right now.', options: ['had better apologize', 'had better to apologize', 'had better apologizing', 'have better apologize'], correct: 0, explanation: '"had better" + base verb (apologize).' },
+          { id: 19, text: 'Students ___ (have to / submit) their assignments online.', options: ['have to submit', 'has to submit', 'have to submitting', 'must to submit'], correct: 0, explanation: '"have to" + base verb (submit).' },
+          { id: 20, text: 'You ___ (shouldn\'t / shout) at your little brother.', options: ["shouldn't shout", "shouldn't shouted", "shouldn't to shout", "shouldn't shouting"], correct: 0, explanation: '"shouldn\'t" + base verb (shout).' }
         ],
         scrambled: [
-          { id: 1, words: ['finish', 'I', 'must', 'this', 'report', 'today'], answer: 'I must finish this report today', explanation: 'Subject + must + base verb.' },
-          { id: 2, words: ['wear', 'employees', 'have', 'to', 'a', 'uniform'], answer: 'employees have to wear a uniform', explanation: 'Subject + have to + base verb.' },
-          { id: 3, words: ['enter', 'you', "mustn't", 'this', 'room'], answer: "you mustn't enter this room", explanation: 'Subject + mustn\'t + base verb.' },
-          { id: 4, words: ['come', 'you', "don't", 'have', 'to', 'if', 'you', "don't", 'want', 'to'], answer: "you don't have to come if you don't want to", explanation: 'Subject + don\'t have to + base verb.' },
-          { id: 5, words: ['see', 'you', 'should', 'a', 'doctor'], answer: 'you should see a doctor', explanation: 'Subject + should + base verb.' },
-          { id: 6, words: ['speak', 'she', 'can', 'three', 'languages'], answer: 'she can speak three languages', explanation: 'Subject + can + base verb.' },
-          { id: 7, words: ['open', 'can', 'I', 'the', 'window', '?'], answer: 'can I open the window', explanation: 'Can + subject + base verb?' },
-          { id: 8, words: ['come', 'may', 'I', 'in', '?'], answer: 'may I come in', explanation: 'May + subject + base verb?' },
-          { id: 9, words: ['rain', 'it', 'may', 'later'], answer: 'it may rain later', explanation: 'Subject + may + base verb.' },
-          { id: 10, words: ['be', 'you', 'must', 'tired', 'after', 'that', 'trip'], answer: 'you must be tired after that trip', explanation: 'Subject + must + base verb.' },
-          { id: 11, words: ['swim', 'he', 'could', 'when', 'he', 'was', 'five'], answer: 'he could swim when he was five', explanation: 'Subject + could + base verb.' },
-          { id: 12, words: ['hand', 'students', 'have', 'to', 'in', 'homework', 'by', 'Friday'], answer: 'students have to hand in homework by Friday', explanation: 'Subject + have to + base verb.' },
-          { id: 13, words: ['smoke', 'you', "mustn't", 'inside', 'the', 'building'], answer: "you mustn't smoke inside the building", explanation: 'Subject + mustn\'t + base verb.' },
-          { id: 14, words: ['bring', 'you', "don't", 'have', 'to', 'your', 'own', 'laptop'], answer: "you don't have to bring your own laptop", explanation: 'Subject + don\'t have to + base verb.' },
-          { id: 15, words: ['apologize', 'you', 'should', 'to', 'her'], answer: 'you should apologize to her', explanation: 'Subject + should + base verb.' },
-          { id: 16, words: ['afford', 'they', "can't", 'a', 'new', 'car'], answer: "they can't afford a new car", explanation: 'Subject + can\'t + base verb.' },
-          { id: 17, words: ['help', 'can', 'you', 'me', 'carry', 'these', 'boxes', '?'], answer: 'can you help me carry these boxes', explanation: 'Can + subject + base verb?' },
-          { id: 18, words: ['ask', 'may', 'I', 'you', 'a', 'personal', 'question', '?'], answer: 'may I ask you a personal question', explanation: 'May + subject + base verb?' },
-          { id: 19, words: ['be', 'they', 'must', 'asleep', 'already'], answer: 'they must be asleep already', explanation: 'Subject + must + base verb.' },
-          { id: 20, words: ['leave', 'we', 'have', 'to', 'early', 'tomorrow'], answer: 'we have to leave early tomorrow', explanation: 'Subject + have to + base verb.' }
+          { id: 1, words: ['finish', 'I', 'must', 'this', 'project', 'by', 'Friday'], answer: 'I must finish this project by Friday', explanation: 'Subject + must + base verb.' },
+          { id: 2, words: ['arrive', 'employees', 'have', 'to', 'before', '9', 'a.m.'], answer: 'employees have to arrive before 9 a.m.', explanation: 'Subject + have to + base verb.' },
+          { id: 3, words: ['touch', 'you', "mustn't", 'that'], answer: "you mustn't touch that", explanation: 'Subject + mustn\'t + base verb.' },
+          { id: 4, words: ['pay', 'you', "don't", 'have', 'to', 'now'], answer: "you don't have to pay now", explanation: 'Subject + don\'t have to + base verb.' },
+          { id: 5, words: ['eat', 'you', "shouldn't", 'so', 'much', 'junk', 'food'], answer: "you shouldn't eat so much junk food", explanation: 'Subject + shouldn\'t + base verb.' },
+          { id: 6, words: ['recycle', 'we', 'ought', 'to', 'more'], answer: 'we ought to recycle more', explanation: 'Subject + ought to + base verb.' },
+          { id: 7, words: ['buy', 'I', 'need', 'to', 'some', 'milk'], answer: 'I need to buy some milk', explanation: 'Subject + need to + base verb.' },
+          { id: 8, words: ['worry', 'you', "needn't", 'about', 'the', 'exam'], answer: "you needn't worry about the exam", explanation: 'Subject + needn\'t + base verb.' },
+          { id: 9, words: ['hurry', 'you', 'had', 'better', 'or', "you'll", 'miss', 'the', 'train'], answer: "you had better hurry or you'll miss the train", explanation: 'Subject + had better + base verb.' },
+          { id: 10, words: ['take', 'she', 'must', 'her', 'medicine', 'every', 'morning'], answer: 'she must take her medicine every morning', explanation: 'Subject + must + base verb.' },
+          { id: 11, words: ['fasten', 'passengers', 'have', 'to', 'their', 'seatbelts'], answer: 'passengers have to fasten their seatbelts', explanation: 'Subject + have to + base verb.' },
+          { id: 12, words: ['park', 'you', "mustn't", 'here'], answer: "you mustn't park here", explanation: 'Subject + mustn\'t + base verb.' },
+          { id: 13, words: ['bring', 'you', "don't", 'have', 'to', 'a', 'gift'], answer: "you don't have to bring a gift", explanation: 'Subject + don\'t have to + base verb.' },
+          { id: 14, words: ['stay', 'you', "shouldn't", 'up', 'so', 'late'], answer: "you shouldn't stay up so late", explanation: 'Subject + shouldn\'t + base verb.' },
+          { id: 15, words: ['save', 'we', 'ought', 'to', 'more', 'money'], answer: 'we ought to save more money', explanation: 'Subject + ought to + base verb.' },
+          { id: 16, words: ['finish', 'I', 'need', 'to', 'my', 'homework'], answer: 'I need to finish my homework', explanation: 'Subject + need to + base verb.' },
+          { id: 17, words: ['bring', 'you', "needn't", 'an', 'umbrella'], answer: "you needn't bring an umbrella", explanation: 'Subject + needn\'t + base verb.' },
+          { id: 18, words: ['apologize', 'you', 'had', 'better', 'right', 'now'], answer: 'you had better apologize right now', explanation: 'Subject + had better + base verb.' },
+          { id: 19, words: ['submit', 'students', 'have', 'to', 'their', 'assignments'], answer: 'students have to submit their assignments', explanation: 'Subject + have to + base verb.' },
+          { id: 20, words: ['shout', 'you', "shouldn't", 'at', 'your', 'little', 'brother'], answer: "you shouldn't shout at your little brother", explanation: 'Subject + shouldn\'t + base verb.' }
         ],
         errorCorrection: [
-          { id: 1, text: 'I must to finish this report today.', options: ['I', 'must to finish', 'this report', 'today'], correct: 1, wrongPart: 'must to finish', correction: 'must finish', explanation: 'Modal verbs are followed directly by the base verb, no "to": "must finish".' },
-          { id: 2, text: 'Employees have to wearing a uniform.', options: ['Employees', 'have to', 'wearing', 'a uniform'], correct: 2, wrongPart: 'wearing', correction: 'wear', explanation: 'After "have to", use the base verb: "wear", not "wearing".' },
-          { id: 3, text: "You don't must enter this room.", options: ['You', "don't must", 'enter', 'this room'], correct: 1, wrongPart: "don't must", correction: "mustn't", explanation: '"must" is negated as "mustn\'t", not "don\'t must".' },
-          { id: 4, text: "You mustn't come if you don't want to.", options: ['You', "mustn't come", 'if you', "don't want to"], correct: 1, wrongPart: "mustn't come", correction: "don't have to come", explanation: '"mustn\'t" means forbidden; for "not necessary" use "don\'t have to".' },
-          { id: 5, text: 'You should to see a doctor.', options: ['You', 'should to see', 'a doctor', 'No error'], correct: 1, wrongPart: 'should to see', correction: 'should see', explanation: 'Modal verbs are followed directly by the base verb, no "to": "should see".' },
-          { id: 6, text: 'She can speaks three languages.', options: ['She', 'can', 'speaks', 'three languages'], correct: 2, wrongPart: 'speaks', correction: 'speak', explanation: 'After a modal verb, use the base verb without "-s": "speak".' },
-          { id: 7, text: 'Can I opening the window?', options: ['Can', 'I', 'opening', 'the window'], correct: 2, wrongPart: 'opening', correction: 'open', explanation: 'After "can", use the base verb: "open", not "opening".' },
-          { id: 8, text: 'May I to come in?', options: ['May', 'I to come', 'in', 'No error'], correct: 1, wrongPart: 'I to come', correction: 'I come', explanation: 'Modal verbs are followed directly by the base verb, no "to": "May I come".' },
-          { id: 9, text: 'It mays rain later.', options: ['It', 'mays', 'rain', 'later'], correct: 1, wrongPart: 'mays', correction: 'may', explanation: 'Modal verbs never take "-s": "may", not "mays".' },
-          { id: 10, text: 'You must being tired after that trip.', options: ['You', 'must', 'being', 'tired after that trip'], correct: 2, wrongPart: 'being', correction: 'be', explanation: 'After "must", use the base verb: "be", not "being".' },
-          { id: 11, text: 'He can swim when he was five years old.', options: ['He', 'can swim', 'when he was', 'five years old'], correct: 1, wrongPart: 'can swim', correction: 'could swim', explanation: 'For a past ability, use "could", the past form of "can".' },
-          { id: 12, text: 'Students has to hand in their homework.', options: ['Students', 'has to', 'hand in', 'their homework'], correct: 1, wrongPart: 'has to', correction: 'have to', explanation: 'With plural subject "Students", use "have to", not "has to".' },
-          { id: 13, text: "You don't have to smoke inside the building.", options: ['You', "don't have to smoke", 'inside', 'the building'], correct: 1, wrongPart: "don't have to smoke", correction: "mustn't smoke", explanation: 'To express a prohibition (forbidden), use "mustn\'t", not "don\'t have to".' },
-          { id: 14, text: 'You mustn\'t bring your own laptop — it\'s optional.', options: ['You', "mustn't bring", 'your own laptop', "it's optional"], correct: 1, wrongPart: "mustn't bring", correction: "don't have to bring", explanation: 'Since it is optional (not forbidden), use "don\'t have to".' },
-          { id: 15, text: 'You should apologizing to her.', options: ['You', 'should', 'apologizing', 'to her'], correct: 2, wrongPart: 'apologizing', correction: 'apologize', explanation: 'After "should", use the base verb: "apologize", not "apologizing".' },
-          { id: 16, text: "They can't affords a new car.", options: ['They', "can't", 'affords', 'a new car'], correct: 2, wrongPart: 'affords', correction: 'afford', explanation: 'After a modal verb, use the base verb without "-s": "afford".' },
-          { id: 17, text: 'Can you helping me carry these boxes?', options: ['Can', 'you', 'helping', 'me carry these boxes'], correct: 2, wrongPart: 'helping', correction: 'help', explanation: 'After "can", use the base verb: "help", not "helping".' },
-          { id: 18, text: 'May I asks you a personal question?', options: ['May', 'I', 'asks', 'you a personal question'], correct: 2, wrongPart: 'asks', correction: 'ask', explanation: 'Modal verbs never take "-s": "ask", not "asks".' },
-          { id: 19, text: 'The lights are off — they must to be asleep.', options: ['The lights are off', 'they', 'must to be', 'asleep'], correct: 2, wrongPart: 'must to be', correction: 'must be', explanation: 'Modal verbs are followed directly by the base verb, no "to": "must be".' },
-          { id: 20, text: 'We have to leaving early tomorrow.', options: ['We', 'have to', 'leaving', 'early tomorrow'], correct: 2, wrongPart: 'leaving', correction: 'leave', explanation: 'After "have to", use the base verb: "leave", not "leaving".' }
+          { id: 1, text: 'I must to finish this project by Friday.', options: ['I', 'must to finish', 'this project', 'by Friday'], correct: 1, wrongPart: 'must to finish', correction: 'must finish', explanation: 'Modal verbs are followed directly by the base verb, no "to": "must finish".' },
+          { id: 2, text: 'Employees have to arriving before 9 a.m.', options: ['Employees', 'have to', 'arriving', 'before 9 a.m.'], correct: 2, wrongPart: 'arriving', correction: 'arrive', explanation: 'After "have to", use the base verb: "arrive", not "arriving".' },
+          { id: 3, text: "You don't must touch that.", options: ['You', "don't must", 'touch', 'that'], correct: 1, wrongPart: "don't must", correction: "mustn't", explanation: '"must" is negated as "mustn\'t", not "don\'t must".' },
+          { id: 4, text: "You mustn't pay now — you can pay next week.", options: ['You', "mustn't pay", 'now', 'you can pay next week'], correct: 1, wrongPart: "mustn't pay", correction: "don't have to pay", explanation: 'Since paying now is optional, not forbidden, use "don\'t have to".' },
+          { id: 5, text: "You shouldn't ate so much junk food.", options: ['You', "shouldn't", 'ate', 'so much junk food'], correct: 2, wrongPart: 'ate', correction: 'eat', explanation: 'After "shouldn\'t", use the base verb: "eat", not "ate".' },
+          { id: 6, text: 'We ought recycle more.', options: ['We', 'ought', 'recycle', 'more'], correct: 1, wrongPart: 'ought', correction: 'ought to', explanation: '"ought" must be followed by "to": "ought to recycle".' },
+          { id: 7, text: 'I needs to buy some milk.', options: ['I', 'needs to', 'buy', 'some milk'], correct: 1, wrongPart: 'needs to', correction: 'need to', explanation: 'With subject "I", use "need to", not "needs to".' },
+          { id: 8, text: "You needn't to worry about the exam.", options: ['You', "needn't to worry", 'about', 'the exam'], correct: 1, wrongPart: "needn't to worry", correction: "needn't worry", explanation: '"needn\'t" is followed directly by the base verb, no "to": "needn\'t worry".' },
+          { id: 9, text: "You had better to hurry, or you'll miss the train.", options: ['You', 'had better to hurry', "or you'll", 'miss the train'], correct: 1, wrongPart: 'had better to hurry', correction: 'had better hurry', explanation: '"had better" is followed directly by the base verb, no "to": "had better hurry".' },
+          { id: 10, text: 'She must takes her medicine every morning.', options: ['She', 'must takes', 'her medicine', 'every morning'], correct: 1, wrongPart: 'must takes', correction: 'must take', explanation: 'After a modal verb, use the base verb without "-s": "take".' },
+          { id: 11, text: 'Passengers has to fasten their seatbelts.', options: ['Passengers', 'has to', 'fasten', 'their seatbelts'], correct: 1, wrongPart: 'has to', correction: 'have to', explanation: 'With plural subject "Passengers", use "have to", not "has to".' },
+          { id: 12, text: "You don't have to park here — it's reserved for staff.", options: ['You', "don't have to park", 'here', "it's reserved for staff"], correct: 1, wrongPart: "don't have to park", correction: "mustn't park", explanation: 'Since parking there is forbidden, use "mustn\'t", not "don\'t have to".' },
+          { id: 13, text: "You mustn't bring a gift — it's just a casual get-together.", options: ['You', "mustn't bring", 'a gift', 'No error'], correct: 1, wrongPart: "mustn't bring", correction: "don't have to bring", explanation: 'Since bringing a gift is optional, not forbidden, use "don\'t have to".' },
+          { id: 14, text: "You shouldn't staying up so late.", options: ['You', "shouldn't", 'staying', 'up so late'], correct: 2, wrongPart: 'staying', correction: 'stay', explanation: 'After "shouldn\'t", use the base verb: "stay", not "staying".' },
+          { id: 15, text: 'We ought to saved more money.', options: ['We', 'ought to saved', 'more', 'money'], correct: 1, wrongPart: 'ought to saved', correction: 'ought to save', explanation: '"ought to" is followed by the base verb: "save", not "saved".' },
+          { id: 16, text: 'I need to finishing my homework before dinner.', options: ['I', 'need to', 'finishing', 'my homework before dinner'], correct: 2, wrongPart: 'finishing', correction: 'finish', explanation: 'After "need to", use the base verb: "finish", not "finishing".' },
+          { id: 17, text: "You mustn't bring an umbrella — it's not going to rain.", options: ['You', "mustn't bring", 'an umbrella', "it's not going to rain"], correct: 1, wrongPart: "mustn't bring", correction: "needn't bring", explanation: 'Since bringing an umbrella is simply unnecessary, not forbidden, use "needn\'t", not "mustn\'t".' },
+          { id: 18, text: 'You had better apologizing right now.', options: ['You', 'had better', 'apologizing', 'right now'], correct: 2, wrongPart: 'apologizing', correction: 'apologize', explanation: 'After "had better", use the base verb: "apologize", not "apologizing".' },
+          { id: 19, text: 'Students has to submit their assignments online.', options: ['Students', 'has to', 'submit', 'their assignments online'], correct: 1, wrongPart: 'has to', correction: 'have to', explanation: 'With plural subject "Students", use "have to", not "has to".' },
+          { id: 20, text: "You shouldn't shouts at your little brother.", options: ['You', "shouldn't", 'shouts', 'at your little brother'], correct: 2, wrongPart: 'shouts', correction: 'shout', explanation: 'After "shouldn\'t", use the base verb without "-s": "shout".' }
         ],
         transform: [
-          { id: 1, text: 'Express strong personal obligation: "It\'s necessary for me to finish this report today."', options: ['I must finish this report today.', 'I can finish this report today.', 'I may finish this report today.', 'I should finish this report today.'], correct: 0, explanation: '"must" expresses strong personal obligation.' },
-          { id: 2, text: 'Express an external rule: "Company policy requires employees to wear a uniform."', options: ['Employees have to wear a uniform.', 'Employees must to wear a uniform.', 'Employees may wear a uniform.', 'Employees should wear a uniform.'], correct: 0, explanation: '"have to" expresses an external rule/obligation.' },
-          { id: 3, text: 'Express prohibition: "It is forbidden to enter this room."', options: ["You mustn't enter this room.", "You don't have to enter this room.", "You shouldn't enter this room.", "You can't enter this room."], correct: 0, explanation: '"mustn\'t" expresses prohibition.' },
-          { id: 4, text: 'Express that something is optional: "Coming to the party is not required."', options: ["You don't have to come to the party.", "You mustn't come to the party.", "You can't come to the party.", "You shouldn't come to the party."], correct: 0, explanation: '"don\'t have to" expresses lack of obligation.' },
-          { id: 5, text: 'Give advice: "I recommend that you see a doctor."', options: ['You should see a doctor.', 'You must see a doctor.', 'You can see a doctor.', 'You have to see a doctor.'], correct: 0, explanation: '"should" is used for advice/recommendation.' },
-          { id: 6, text: 'Express ability: "She has the ability to speak three languages."', options: ['She can speak three languages.', 'She must speak three languages.', 'She should speak three languages.', 'She may speak three languages.'], correct: 0, explanation: '"can" expresses ability.' },
-          { id: 7, text: 'Ask for informal permission: "I want permission to open the window."', options: ['Can I open the window?', 'Must I open the window?', 'Should I open the window?', 'Have I to open the window?'], correct: 0, explanation: '"Can" is used for informal permission requests.' },
-          { id: 8, text: 'Ask for formal permission: "I want polite permission to come in."', options: ['May I come in?', 'Must I come in?', 'Should I come in?', 'Have I to come in?'], correct: 0, explanation: '"May" is used for formal permission requests.' },
-          { id: 9, text: 'Express possibility: "It is possible that it will rain later."', options: ['It may rain later.', 'It must rain later.', 'It should rain later.', 'It has to rain later.'], correct: 0, explanation: '"may" expresses possibility.' },
-          { id: 10, text: 'Express a logical conclusion: "I am sure you are tired after that trip."', options: ['You must be tired after that trip.', 'You can be tired after that trip.', 'You may not be tired after that trip.', 'You should be tired after that trip.'], correct: 0, explanation: '"must" expresses a strong logical conclusion.' },
-          { id: 11, text: 'Express past ability: "He had the ability to swim at age five."', options: ['He could swim when he was five.', 'He can swim when he was five.', 'He must swim when he was five.', 'He should swim when he was five.'], correct: 0, explanation: '"could" is the past form of "can" for ability.' },
-          { id: 12, text: 'Express an external requirement: "School rules require students to hand in homework by Friday."', options: ['Students have to hand in their homework by Friday.', 'Students must to hand in their homework by Friday.', 'Students may hand in their homework by Friday.', 'Students should hand in their homework by Friday.'], correct: 0, explanation: '"have to" expresses an external rule.' },
-          { id: 13, text: 'Express prohibition: "Smoking inside the building is forbidden."', options: ["You mustn't smoke inside the building.", "You don't have to smoke inside the building.", "You shouldn't smoke inside the building.", "You can't smoke inside the building."], correct: 0, explanation: '"mustn\'t" expresses prohibition.' },
-          { id: 14, text: 'Express that something is optional: "Bringing your own laptop is not required — we provide one."', options: ["You don't have to bring your own laptop.", "You mustn't bring your own laptop.", "You can't bring your own laptop.", "You shouldn't bring your own laptop."], correct: 0, explanation: '"don\'t have to" expresses lack of obligation.' },
-          { id: 15, text: 'Give advice: "I recommend that you apologize to her."', options: ['You should apologize to her.', 'You must apologize to her.', 'You have to apologize to her.', 'You may apologize to her.'], correct: 0, explanation: '"should" is used for advice/recommendation.' },
-          { id: 16, text: 'Express lack of ability: "They don\'t have the money for a new car."', options: ["They can't afford a new car.", "They mustn't afford a new car.", "They shouldn't afford a new car.", "They may not afford a new car."], correct: 0, explanation: '"can\'t" expresses lack of ability/possibility.' },
-          { id: 17, text: 'Make an informal request: "I want you to help me carry these boxes."', options: ['Can you help me carry these boxes?', 'Must you help me carry these boxes?', 'Should you help me carry these boxes?', 'Have you to help me carry these boxes?'], correct: 0, explanation: '"Can" is used for informal requests.' },
-          { id: 18, text: 'Make a formal, polite request: "I want polite permission to ask you a personal question."', options: ['May I ask you a personal question?', 'Must I ask you a personal question?', 'Should I ask you a personal question?', 'Can I ask you a personal question, formally?'], correct: 0, explanation: '"May" is used for formal, polite permission requests.' },
-          { id: 19, text: 'Express a logical conclusion: "I\'m sure they are asleep — the lights are off."', options: ['They must be asleep already.', 'They can be asleep already.', 'They may not be asleep already.', 'They should be asleep already.'], correct: 0, explanation: '"must" expresses a strong logical conclusion.' },
-          { id: 20, text: 'Express an external requirement: "The flight schedule requires us to leave early tomorrow."', options: ['We have to leave early tomorrow.', 'We must to leave early tomorrow.', 'We may leave early tomorrow.', 'We should leave early tomorrow.'], correct: 0, explanation: '"have to" expresses an external requirement.' }
+          { id: 1, text: 'Express strong personal obligation: "It is essential for me to finish this project by Friday."', options: ['I must finish this project by Friday.', 'I can finish this project by Friday.', 'I may finish this project by Friday.', 'I should finish this project by Friday.'], correct: 0, explanation: '"must" expresses strong personal obligation.' },
+          { id: 2, text: 'Express a company rule: "Company policy requires employees to arrive before 9 a.m."', options: ['Employees have to arrive before 9 a.m.', 'Employees must to arrive before 9 a.m.', 'Employees may arrive before 9 a.m.', 'Employees should arrive before 9 a.m.'], correct: 0, explanation: '"have to" expresses an external rule.' },
+          { id: 3, text: "Express prohibition: \"It is forbidden to touch that — it's dangerous.\"", options: ["You mustn't touch that.", "You don't have to touch that.", "You shouldn't touch that.", "You can't touch that."], correct: 0, explanation: '"mustn\'t" expresses prohibition.' },
+          { id: 4, text: 'Express that something is optional: "Paying now is not required — you can pay next week."', options: ["You don't have to pay now.", "You mustn't pay now.", "You can't pay now.", "You shouldn't pay now."], correct: 0, explanation: '"don\'t have to" expresses lack of obligation.' },
+          { id: 5, text: "Give advice against something: \"I recommend that you don't eat so much junk food.\"", options: ["You shouldn't eat so much junk food.", "You mustn't eat so much junk food.", "You can't eat so much junk food.", "You needn't eat so much junk food."], correct: 0, explanation: '"shouldn\'t" is used for negative advice.' },
+          { id: 6, text: 'Give advice/recommendation: "It would be a good idea for us to recycle more."', options: ['We ought to recycle more.', 'We must recycle more.', 'We can recycle more.', 'We may recycle more.'], correct: 0, explanation: '"ought to" expresses advice, similar to "should".' },
+          { id: 7, text: 'Express a simple necessity: "It\'s necessary for me to buy some milk on my way home."', options: ['I need to buy some milk on my way home.', 'I must to buy some milk on my way home.', 'I may buy some milk on my way home.', 'I should to buy some milk on my way home.'], correct: 0, explanation: '"need to" expresses a simple, neutral necessity.' },
+          { id: 8, text: "Express that something is unnecessary: \"Worrying about the exam is not necessary — it's very easy.\"", options: ["You needn't worry about the exam.", "You mustn't worry about the exam.", "You can't worry about the exam.", "You shouldn't worry about the exam."], correct: 0, explanation: '"needn\'t" expresses lack of necessity.' },
+          { id: 9, text: "Give a strong, urgent warning: \"If you don't hurry, you'll miss the train.\"", options: ["You'd better hurry, or you'll miss the train.", "You must hurry, or you'll miss the train.", "You should hurry, or you'll miss the train.", "You may hurry, or you'll miss the train."], correct: 0, explanation: '"had better" (\'d better) is used for a strong, urgent warning.' },
+          { id: 10, text: 'Express strong personal obligation: "The doctor insists that she take her medicine every morning."', options: ['She must take her medicine every morning.', 'She can take her medicine every morning.', 'She may take her medicine every morning.', 'She should take her medicine every morning.'], correct: 0, explanation: '"must" expresses strong obligation/insistence.' },
+          { id: 11, text: 'Express a legal requirement: "The law requires passengers to fasten their seatbelts."', options: ['Passengers have to fasten their seatbelts.', 'Passengers must to fasten their seatbelts.', 'Passengers may fasten their seatbelts.', 'Passengers should fasten their seatbelts.'], correct: 0, explanation: '"have to" expresses an external, legal requirement.' },
+          { id: 12, text: "Express prohibition: \"Parking here is forbidden — it's reserved for staff only.\"", options: ["You mustn't park here.", "You don't have to park here.", "You shouldn't park here.", "You can't park here."], correct: 0, explanation: '"mustn\'t" expresses prohibition.' },
+          { id: 13, text: "Express that something is optional: \"Bringing a gift is not required — it's just a casual get-together.\"", options: ["You don't have to bring a gift.", "You mustn't bring a gift.", "You can't bring a gift.", "You shouldn't bring a gift."], correct: 0, explanation: '"don\'t have to" expresses lack of obligation.' },
+          { id: 14, text: "Give advice against something: \"I recommend that you don't stay up so late.\"", options: ["You shouldn't stay up so late.", "You mustn't stay up so late.", "You can't stay up so late.", "You needn't stay up so late."], correct: 0, explanation: '"shouldn\'t" is used for negative advice.' },
+          { id: 15, text: 'Give advice/recommendation: "It would be a good idea for us to save more money."', options: ['We ought to save more money.', 'We must save more money.', 'We can save more money.', 'We may save more money.'], correct: 0, explanation: '"ought to" expresses advice, similar to "should".' },
+          { id: 16, text: 'Express a simple necessity: "It\'s necessary for me to finish my homework before dinner."', options: ['I need to finish my homework before dinner.', 'I must to finish my homework before dinner.', 'I may finish my homework before dinner.', 'I should to finish my homework before dinner.'], correct: 0, explanation: '"need to" expresses a simple, neutral necessity.' },
+          { id: 17, text: "Express that something is unnecessary: \"Bringing an umbrella is not necessary — it's not going to rain.\"", options: ["You needn't bring an umbrella.", "You mustn't bring an umbrella.", "You can't bring an umbrella.", "You shouldn't bring an umbrella."], correct: 0, explanation: '"needn\'t" expresses lack of necessity.' },
+          { id: 18, text: "Give a strong, urgent warning: \"If you don't apologize now, she'll be really upset.\"", options: ["You'd better apologize right now.", "You must apologize right now.", "You should apologize right now.", "You may apologize right now."], correct: 0, explanation: '"had better" (\'d better) is used for a strong, urgent warning.' },
+          { id: 19, text: 'Express a school rule: "The school requires students to submit their assignments online."', options: ['Students have to submit their assignments online.', 'Students must to submit their assignments online.', 'Students may submit their assignments online.', 'Students should submit their assignments online.'], correct: 0, explanation: '"have to" expresses an external rule.' },
+          { id: 20, text: "Give advice against something: \"I recommend that you don't shout at your little brother.\"", options: ["You shouldn't shout at your little brother.", "You mustn't shout at your little brother.", "You can't shout at your little brother.", "You needn't shout at your little brother."], correct: 0, explanation: '"shouldn\'t" is used for negative advice.' }
         ],
         dialogue: [
-          { id: 1, situation: 'Working under deadline pressure.', dialogue: 'A: Can you come out tonight?\nB: Sorry, I ___ finish this report today.', options: ['must', 'may', 'could', 'was'], correct: 0, explanation: '"must" — kuchli shaxsiy majburiyat.' },
-          { id: 2, situation: 'Talking about a new job.', dialogue: 'A: Is there a dress code?\nB: Yes, employees ___ wear a uniform.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
-          { id: 3, situation: 'Warning a visitor.', dialogue: 'A: Can I go in there?\nB: No, you ___ enter — it\'s strictly forbidden.', options: ["mustn't", "don't have to", "shouldn't", "can't"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
-          { id: 4, situation: 'Inviting a friend to a party.', dialogue: 'A: Do I have to come tonight?\nB: No, you ___ come if you don\'t want to.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — ixtiyoriy.' },
-          { id: 5, situation: 'Talking about health.', dialogue: 'A: I have a bad cough.\nB: You ___ see a doctor about that.', options: ['should', 'must', 'can', 'may'], correct: 0, explanation: '"should" — maslahat.' },
-          { id: 6, situation: 'Talking about language skills.', dialogue: 'A: Is she good with languages?\nB: Yes, she ___ speak three of them fluently.', options: ['can', 'must', 'should', 'may'], correct: 0, explanation: '"can" — qobiliyat.' },
-          { id: 7, situation: 'In a hot classroom.', dialogue: "A: It's so hot in here!\nB: ___ I open the window?", options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy ruxsat so\'rash.' },
-          { id: 8, situation: 'At a formal office.', dialogue: "A: Excuse me, ___ I come in?\nB: Yes, please.", options: ['may', 'must', 'should', 'have to'], correct: 0, explanation: '"may" — rasmiy ruxsat so\'rash.' },
-          { id: 9, situation: 'Checking the weather.', dialogue: 'A: Should I bring an umbrella?\nB: Good idea, it ___ rain later.', options: ['may', 'must', 'should', 'have to'], correct: 0, explanation: '"may" — ehtimollik.' },
-          { id: 10, situation: 'Welcoming someone home.', dialogue: "A: I just got back from a 12-hour flight.\nB: Wow, you ___ be exhausted!", options: ['must', 'can', 'should', 'may not'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
-          { id: 11, situation: 'Talking about childhood.', dialogue: 'A: Were you a good swimmer as a kid?\nB: Yes, I ___ swim when I was five.', options: ['could', 'can', 'may', 'must'], correct: 0, explanation: '"could" — o\'tmishdagi qobiliyat.' },
-          { id: 12, situation: 'Discussing school deadlines.', dialogue: 'A: When is the homework due?\nB: Students ___ hand it in by Friday.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
-          { id: 13, situation: 'Pointing out a building rule.', dialogue: "A: Can I smoke here?\nB: No, you ___ smoke inside the building.", options: ["mustn't", "don't have to", "shouldn't", "may not"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
-          { id: 14, situation: 'Preparing for a meeting.', dialogue: 'A: Should I bring my own laptop?\nB: No, you ___ — we provide one.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — ixtiyoriy.' },
-          { id: 15, situation: 'After an argument.', dialogue: 'A: I feel bad about what I said.\nB: You ___ apologize to her.', options: ['should', 'must', 'can', 'have to'], correct: 0, explanation: '"should" — maslahat.' },
-          { id: 16, situation: 'Talking about finances.', dialogue: "A: Are they getting a new car?\nB: No, they ___ afford one this year.", options: ["can't", "mustn't", "shouldn't", "mayn't"], correct: 0, explanation: '"can\'t" — imkoniyat yo\'qligi.' },
-          { id: 17, situation: 'Moving furniture.', dialogue: "A: These boxes are so heavy!\nB: ___ you help me carry them?", options: ['Can', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Can" — norasmiy so\'rov.' },
-          { id: 18, situation: 'Approaching a sensitive topic.', dialogue: "A: ___ I ask you a personal question?\nB: Sure, go ahead.", options: ['May', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"May" — rasmiy ruxsat so\'rash.' },
-          { id: 19, situation: 'Late at night.', dialogue: 'A: All the lights are off next door.\nB: They ___ be asleep already.', options: ['must', 'can', 'should', 'have to'], correct: 0, explanation: '"must" — kuchli ishonch/xulosa.' },
-          { id: 20, situation: 'Planning a flight departure.', dialogue: "A: What time should we leave?\nB: We ___ leave early to catch the flight.", options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi zaruriyat.' }
+          { id: 1, situation: 'Working under deadline pressure.', dialogue: 'A: Can this wait until Monday?\nB: No, I ___ finish it by Friday — my boss insists.', options: ['must', 'may', 'could', 'was'], correct: 0, explanation: '"must" — kuchli ichki majburiyat.' },
+          { id: 2, situation: 'Talking about a new job.', dialogue: 'A: Is there a strict schedule?\nB: Yes, employees ___ arrive before 9 a.m.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
+          { id: 3, situation: 'Warning about danger.', dialogue: "A: Can I touch this wire?\nB: No, you ___ — it's extremely dangerous!", options: ["mustn't", "don't have to", "shouldn't", "needn't"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
+          { id: 4, situation: 'Talking about a bill.', dialogue: 'A: Do I have to pay right now?\nB: No, you ___ — you can pay next week.', options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — shart emas.' },
+          { id: 5, situation: 'Giving health advice.', dialogue: "A: I eat a lot of fast food.\nB: You ___ eat so much junk food — it's bad for you.", options: ["shouldn't", "mustn't", "can't", "needn't"], correct: 0, explanation: '"shouldn\'t" — salbiy maslahat.' },
+          { id: 6, situation: 'Talking about the environment.', dialogue: 'A: What can we do to help the planet?\nB: We ___ recycle more.', options: ['ought to', 'must', 'can', 'may'], correct: 0, explanation: '"ought to" — maslahat/tavsiya.' },
+          { id: 7, situation: 'Planning errands.', dialogue: 'A: What do you need from the shop?\nB: I ___ buy some milk on the way home.', options: ['need to', 'must', 'may', 'should'], correct: 0, explanation: '"need to" — oddiy zaruriyat.' },
+          { id: 8, situation: 'Before an easy test.', dialogue: "A: I'm really nervous about the exam.\nB: You ___ worry — it's very easy.", options: ["needn't", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"needn\'t" — shart emas.' },
+          { id: 9, situation: 'Rushing to the station.', dialogue: "A: What time is the train?\nB: You ___ hurry, or you'll miss it!", options: ['had better', 'must', 'should', 'may'], correct: 0, explanation: '"had better" — kuchli, tezkor ogohlantirish.' },
+          { id: 10, situation: 'Talking about a health routine.', dialogue: 'A: Does she take medicine regularly?\nB: Yes, she ___ take it every morning — the doctor insists.', options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ichki majburiyat/talab.' },
+          { id: 11, situation: 'On an airplane.', dialogue: 'A: Do we need our seatbelts on now?\nB: Yes, passengers ___ fasten their seatbelts during takeoff.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida (qonun).' },
+          { id: 12, situation: 'In a parking lot.', dialogue: "A: Can I park here?\nB: No, you ___ — it's reserved for staff only.", options: ["mustn't", "don't have to", "shouldn't", "needn't"], correct: 0, explanation: '"mustn\'t" — taqiq.' },
+          { id: 13, situation: 'Before a casual party.', dialogue: "A: Should I bring a gift?\nB: No, you ___ — it's just a casual get-together.", options: ["don't have to", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"don\'t have to" — shart emas.' },
+          { id: 14, situation: 'Talking about sleep habits.', dialogue: 'A: I usually go to bed at 2 a.m.\nB: You ___ stay up so late — you have an early class.', options: ["shouldn't", "mustn't", "can't", "needn't"], correct: 0, explanation: '"shouldn\'t" — maslahat.' },
+          { id: 15, situation: 'Discussing finances.', dialogue: 'A: We never have enough money saved.\nB: We ___ save more each month.', options: ['ought to', 'must', 'can', 'may'], correct: 0, explanation: '"ought to" — maslahat/tavsiya.' },
+          { id: 16, situation: 'Before dinner.', dialogue: 'A: Are you done with your homework?\nB: Not yet, I ___ finish it before dinner.', options: ['need to', 'must', 'may', 'should'], correct: 0, explanation: '"need to" — oddiy zaruriyat.' },
+          { id: 17, situation: 'Checking the weather.', dialogue: "A: Should I take an umbrella?\nB: No, you ___ — it's not going to rain.", options: ["needn't", "mustn't", "can't", "shouldn't"], correct: 0, explanation: '"needn\'t" — shart emas.' },
+          { id: 18, situation: 'After an argument.', dialogue: "A: She's really upset with me.\nB: You ___ apologize right now.", options: ['had better', 'must', 'should', 'may'], correct: 0, explanation: '"had better" — kuchli, tezkor maslahat.' },
+          { id: 19, situation: 'Talking about coursework.', dialogue: 'A: How do we turn in our assignments?\nB: Students ___ submit them online.', options: ['have to', 'may', 'could', 'were'], correct: 0, explanation: '"have to" — tashqi qoida.' },
+          { id: 20, situation: 'Sibling conflict.', dialogue: "A: I got so angry I yelled at him.\nB: You ___ shout at your little brother — it's not kind.", options: ["shouldn't", "mustn't", "can't", "needn't"], correct: 0, explanation: '"shouldn\'t" — maslahat.' }
+        ]
+      },
+      {
+        id: 'modal-verbs-possibility',
+        title: 'Modal Verbs 3: Possibility, Deduction & Offers',
+        icon: '🔮',
+        guide: `## Modal Verbs: Possibility, Deduction, Requests & Offers (Ehtimollik, xulosa, so'rov va taklif)
+
+Bu modal fe'llar bir voqeaning qanchalik mumkinligini baholash (possibility/deduction) va so'rov, taklif bildirish (requests/offers) uchun ishlatiladi: **may, might, could, must, can't, would, shall**.
+
+## 1. Shakllanishi (Form)
+• Subject + modal + base verb (ehtimollik)
+  - It **may rain**. She **might be** at home. He **could be** right.
+• **Ishonch bilan xulosa**: must (ijobiy xulosa) / can't (salbiy xulosa)
+  - The lights are on — she **must be** home. He **can't be** serious!
+• **So'rov/taklif**: Would/Could/Can/Shall + Subject + base verb?
+  - **Would** you **like** some tea? **Shall** I **open** the window?
+
+## 2. Ishlatilishi (Usage)
+1. **may / might** — ehtimollik (may biroz ko'proq ishonch, might kamroq):
+   - It **may rain** later. It **might snow** tonight, but I'm not sure.
+2. **could** — ehtimollik (may/might bilan deyarli bir xil):
+   - That **could be** true.
+3. **must** — kuchli ijobiy xulosa (dalillarga asoslangan ishonch):
+   - The lights are on — she **must be** home.
+4. **can't** — kuchli salbiy xulosa ("bo'lishi mumkin emas"):
+   - He **can't be** serious — that's impossible!
+5. **would you like...?** — xushmuomala taklif:
+   - **Would** you **like** something to drink?
+6. **shall I/we...?** — taklif, yordam taklif qilish (I/we bilan):
+   - **Shall** I **help** you with that? **Shall** we **go** now?
+
+## 3. Solishtirish jadvali
+• may/might/could (ehtimollik — turli darajada ishonch)
+• must (ijobiy xulosa) vs can't (salbiy xulosa)
+• would you like...? (taklif) vs shall I/we...? (yordam/taklif, faqat I/we bilan)
+
+## 4. Signal so'zlar
+• may, might, could (ehtimollik)
+• must, can't (xulosa)
+• would you like, would you mind
+• shall I, shall we`,
+        questions: [
+          { id: 1, text: 'It ___ rain later, so take an umbrella just in case.', options: ['may', 'must', "can't", 'should'], correct: 0, explanation: '"may" — ehtimollik.' },
+          { id: 2, text: "I'm not sure, but she ___ be at home right now.", options: ['might', 'must', "can't", 'should'], correct: 0, explanation: '"might" — kamroq ishonchli ehtimollik.' },
+          { id: 3, text: "That ___ be true — I've heard the same story from different people.", options: ['could', "mustn't", "shouldn't", 'may not'], correct: 0, explanation: '"could" — ehtimollik.' },
+          { id: 4, text: 'The lights are on and her car is outside — she ___ be home.', options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' },
+          { id: 5, text: "He ___ be serious — he's always joking around!", options: ["can't", 'must', 'may', 'should'], correct: 0, explanation: '"can\'t" — kuchli salbiy xulosa.' },
+          { id: 6, text: '___ you like some tea or coffee?', options: ['Would', 'Should', 'Must', 'Have to'], correct: 0, explanation: '"Would" — xushmuomala taklif.' },
+          { id: 7, text: '___ I help you carry those bags?', options: ['Shall', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Shall" — yordam taklifi (I bilan).' },
+          { id: 8, text: "It's cloudy — it ___ snow tonight.", options: ['might', 'must', "can't", 'should'], correct: 0, explanation: '"might" — ehtimollik.' },
+          { id: 9, text: 'The kitchen light is off — they ___ be asleep already.', options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' },
+          { id: 10, text: 'That answer ___ be right — the calculation is completely wrong.', options: ["can't", 'must', 'may', 'should'], correct: 0, explanation: '"can\'t" — kuchli salbiy xulosa.' },
+          { id: 11, text: 'We ___ go on holiday this summer, but nothing is decided yet.', options: ['may', 'must', "can't", 'should'], correct: 0, explanation: '"may" — ehtimollik.' },
+          { id: 12, text: '___ we start the meeting now, or should we wait for James?', options: ['Shall', 'Must', 'Have to', 'Should'], correct: 0, explanation: '"Shall" — taklif (we bilan).' },
+          { id: 13, text: '___ you mind opening the window a little?', options: ['Would', 'Should', 'Must', 'Have to'], correct: 0, explanation: '"Would" — xushmuomala so\'rov (would you mind).' },
+          { id: 14, text: 'I ___ be wrong, but I think the shop closes at six.', options: ['could', 'must', "can't", 'should'], correct: 0, explanation: '"could" — ehtimollik (o\'zi haqida ham ishlatiladi).' },
+          { id: 15, text: "There's no answer — he ___ be out of the office.", options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' },
+          { id: 16, text: "That ___ be him at the door — he's on holiday in Spain!", options: ["can't", 'must', 'may', 'should'], correct: 0, explanation: '"can\'t" — kuchli salbiy xulosa.' },
+          { id: 17, text: '___ I get you something to eat?', options: ['Shall', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Shall" — taklif qilish (I bilan).' },
+          { id: 18, text: '___ you like to join us for dinner tonight?', options: ['Would', 'Should', 'Must', 'Have to'], correct: 0, explanation: '"Would" — xushmuomala taklif.' },
+          { id: 19, text: "She's not answering her phone — she ___ be busy at work.", options: ['might', 'must', "can't", 'should'], correct: 0, explanation: '"might" — ehtimollik.' },
+          { id: 20, text: "It ___ be a mistake — the numbers just don't add up.", options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' }
+        ],
+        fillBlanks: [
+          { id: 1, text: 'It ___ (may / rain) later, so take an umbrella.', options: ['may rain', 'may raining', 'may to rain', 'mays rain'], correct: 0, explanation: '"may" + base verb (rain).' },
+          { id: 2, text: 'She ___ (might / be) at home right now.', options: ['might be', 'might being', 'might to be', 'mights be'], correct: 0, explanation: '"might" + base verb (be).' },
+          { id: 3, text: 'That ___ (could / be) true.', options: ['could be', 'could being', 'could to be', 'coulds be'], correct: 0, explanation: '"could" + base verb (be).' },
+          { id: 4, text: 'She ___ (must / be) home — the lights are on.', options: ['must be', 'must being', 'must to be', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli xulosa.' },
+          { id: 5, text: "He ___ (can't / be) serious!", options: ["can't be", "can't being", "can't to be", "cants be"], correct: 0, explanation: '"can\'t" + base verb (be), kuchli salbiy xulosa.' },
+          { id: 6, text: '___ (would / you / like) some tea?', options: ['Would you like', 'Would you to like', 'You would like', 'Would you liking'], correct: 0, explanation: 'Modal question: Would + subject + base verb?' },
+          { id: 7, text: '___ (shall / I / help) you carry those bags?', options: ['Shall I help', 'Shall I to help', 'I shall help', 'Shall I helping'], correct: 0, explanation: 'Modal question: Shall + subject + base verb?' },
+          { id: 8, text: 'It ___ (might / snow) tonight.', options: ['might snow', 'might snowed', 'might to snow', 'might snowing'], correct: 0, explanation: '"might" + base verb (snow).' },
+          { id: 9, text: 'They ___ (must / be) asleep already.', options: ['must be', 'must being', 'must to be', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli xulosa.' },
+          { id: 10, text: 'That answer ___ (can\'t / be) right.', options: ["can't be", "can't being", "can't to be", "cants be"], correct: 0, explanation: '"can\'t" + base verb (be), kuchli salbiy xulosa.' },
+          { id: 11, text: 'We ___ (may / go) on holiday this summer.', options: ['may go', 'may going', 'may to go', 'mays go'], correct: 0, explanation: '"may" + base verb (go).' },
+          { id: 12, text: '___ (shall / we / start) the meeting now?', options: ['Shall we start', 'Shall we to start', 'We shall start', 'Shall we starting'], correct: 0, explanation: 'Modal question: Shall + subject + base verb?' },
+          { id: 13, text: '___ (would / you / mind) opening the window?', options: ['Would you mind', 'Would you to mind', 'You would mind', 'Would you minding'], correct: 0, explanation: '"Would you mind" + -ing shakli.' },
+          { id: 14, text: 'I ___ (could / be) wrong, but I think it closes at six.', options: ['could be', 'could being', 'could to be', 'coulds be'], correct: 0, explanation: '"could" + base verb (be).' },
+          { id: 15, text: 'He ___ (must / be) out of the office.', options: ['must be', 'must being', 'must to be', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli xulosa.' },
+          { id: 16, text: "That ___ (can't / be) him — he's on holiday!", options: ["can't be", "can't being", "can't to be", "cants be"], correct: 0, explanation: '"can\'t" + base verb (be), kuchli salbiy xulosa.' },
+          { id: 17, text: '___ (shall / I / get) you something to eat?', options: ['Shall I get', 'Shall I to get', 'I shall get', 'Shall I getting'], correct: 0, explanation: 'Modal question: Shall + subject + base verb?' },
+          { id: 18, text: '___ (would / you / like) to join us for dinner?', options: ['Would you like', 'Would you to like', 'You would like', 'Would you liking'], correct: 0, explanation: 'Modal question: Would + subject + base verb?' },
+          { id: 19, text: 'She ___ (might / be) busy at work.', options: ['might be', 'might being', 'might to be', 'mights be'], correct: 0, explanation: '"might" + base verb (be).' },
+          { id: 20, text: 'It ___ (must / be) a mistake.', options: ['must be', 'must being', 'must to be', 'musts be'], correct: 0, explanation: '"must" + base verb (be), kuchli xulosa.' }
+        ],
+        scrambled: [
+          { id: 1, words: ['rain', 'it', 'may', 'later'], answer: 'it may rain later', explanation: 'Subject + may + base verb.' },
+          { id: 2, words: ['be', 'she', 'might', 'at', 'home'], answer: 'she might be at home', explanation: 'Subject + might + base verb.' },
+          { id: 3, words: ['be', 'that', 'could', 'true'], answer: 'that could be true', explanation: 'Subject + could + base verb.' },
+          { id: 4, words: ['be', 'she', 'must', 'home'], answer: 'she must be home', explanation: 'Subject + must + base verb.' },
+          { id: 5, words: ['be', 'he', "can't", 'serious'], answer: "he can't be serious", explanation: 'Subject + can\'t + base verb.' },
+          { id: 6, words: ['like', 'would', 'you', 'some', 'tea', '?'], answer: 'would you like some tea', explanation: 'Would + subject + base verb?' },
+          { id: 7, words: ['help', 'shall', 'I', 'you', '?'], answer: 'shall I help you', explanation: 'Shall + subject + base verb?' },
+          { id: 8, words: ['snow', 'it', 'might', 'tonight'], answer: 'it might snow tonight', explanation: 'Subject + might + base verb.' },
+          { id: 9, words: ['be', 'they', 'must', 'asleep', 'already'], answer: 'they must be asleep already', explanation: 'Subject + must + base verb.' },
+          { id: 10, words: ['be', 'that', 'answer', "can't", 'right'], answer: "that answer can't be right", explanation: 'Subject + can\'t + base verb.' },
+          { id: 11, words: ['go', 'we', 'may', 'on', 'holiday'], answer: 'we may go on holiday', explanation: 'Subject + may + base verb.' },
+          { id: 12, words: ['start', 'shall', 'we', 'the', 'meeting', 'now', '?'], answer: 'shall we start the meeting now', explanation: 'Shall + subject + base verb?' },
+          { id: 13, words: ['mind', 'would', 'you', 'opening', 'the', 'window', '?'], answer: 'would you mind opening the window', explanation: 'Would you mind + -ing?' },
+          { id: 14, words: ['be', 'I', 'could', 'wrong'], answer: 'I could be wrong', explanation: 'Subject + could + base verb.' },
+          { id: 15, words: ['be', 'he', 'must', 'out', 'of', 'the', 'office'], answer: 'he must be out of the office', explanation: 'Subject + must + base verb.' },
+          { id: 16, words: ['be', 'that', "can't", 'him'], answer: "that can't be him", explanation: 'Subject + can\'t + base verb.' },
+          { id: 17, words: ['get', 'shall', 'I', 'you', 'something', 'to', 'eat', '?'], answer: 'shall I get you something to eat', explanation: 'Shall + subject + base verb?' },
+          { id: 18, words: ['like', 'would', 'you', 'to', 'join', 'us', 'for', 'dinner', '?'], answer: 'would you like to join us for dinner', explanation: 'Would + subject + base verb?' },
+          { id: 19, words: ['be', 'she', 'might', 'busy', 'at', 'work'], answer: 'she might be busy at work', explanation: 'Subject + might + base verb.' },
+          { id: 20, words: ['be', 'it', 'must', 'a', 'mistake'], answer: 'it must be a mistake', explanation: 'Subject + must + base verb.' }
+        ],
+        errorCorrection: [
+          { id: 1, text: 'It mays rain later.', options: ['It', 'mays', 'rain', 'later'], correct: 1, wrongPart: 'mays', correction: 'may', explanation: 'Modal verbs never take "-s": "may", not "mays".' },
+          { id: 2, text: 'She might is at home right now.', options: ['She', 'might is', 'at home', 'right now'], correct: 1, wrongPart: 'might is', correction: 'might be', explanation: 'After "might", use the base verb: "be", not "is".' },
+          { id: 3, text: 'That could to be true.', options: ['That', 'could to be', 'true', 'No error'], correct: 1, wrongPart: 'could to be', correction: 'could be', explanation: 'Modal verbs are followed directly by the base verb, no "to": "could be".' },
+          { id: 4, text: 'She must being home — the lights are on.', options: ['She', 'must', 'being', 'home'], correct: 2, wrongPart: 'being', correction: 'be', explanation: 'After "must", use the base verb: "be", not "being".' },
+          { id: 5, text: "He can't is serious!", options: ['He', "can't is", 'serious', 'No error'], correct: 1, wrongPart: "can't is", correction: "can't be", explanation: 'After "can\'t", use the base verb: "be", not "is".' },
+          { id: 6, text: 'Would you to like some tea?', options: ['Would', 'you to like', 'some tea', 'No error'], correct: 1, wrongPart: 'you to like', correction: 'you like', explanation: 'Modal verbs are followed directly by the base verb, no "to": "Would you like".' },
+          { id: 7, text: 'Shall I helping you carry those bags?', options: ['Shall', 'I', 'helping', 'you carry those bags'], correct: 2, wrongPart: 'helping', correction: 'help', explanation: 'After "Shall I", use the base verb: "help", not "helping".' },
+          { id: 8, text: 'It might snowing tonight.', options: ['It', 'might', 'snowing', 'tonight'], correct: 2, wrongPart: 'snowing', correction: 'snow', explanation: 'After "might", use the base verb: "snow", not "snowing".' },
+          { id: 9, text: 'They must to be asleep already.', options: ['They', 'must to be', 'asleep', 'already'], correct: 1, wrongPart: 'must to be', correction: 'must be', explanation: 'Modal verbs are followed directly by the base verb, no "to": "must be".' },
+          { id: 10, text: "That answer can't is right.", options: ['That answer', "can't is", 'right', 'No error'], correct: 1, wrongPart: "can't is", correction: "can't be", explanation: 'After "can\'t", use the base verb: "be", not "is".' },
+          { id: 11, text: 'We may going on holiday this summer.', options: ['We', 'may', 'going', 'on holiday this summer'], correct: 2, wrongPart: 'going', correction: 'go', explanation: 'After "may", use the base verb: "go", not "going".' },
+          { id: 12, text: 'Shall we to start the meeting now?', options: ['Shall', 'we to start', 'the meeting now', 'No error'], correct: 1, wrongPart: 'we to start', correction: 'we start', explanation: 'Modal verbs are followed directly by the base verb, no "to": "Shall we start".' },
+          { id: 13, text: 'Would you mind to open the window?', options: ['Would you mind', 'to open', 'the window', 'No error'], correct: 1, wrongPart: 'to open', correction: 'opening', explanation: '"Would you mind" is followed by a gerund (-ing), not "to + verb": "opening".' },
+          { id: 14, text: 'I could to be wrong.', options: ['I', 'could to be', 'wrong', 'No error'], correct: 1, wrongPart: 'could to be', correction: 'could be', explanation: 'Modal verbs are followed directly by the base verb, no "to": "could be".' },
+          { id: 15, text: 'He must is out of the office.', options: ['He', 'must is', 'out of the office', 'No error'], correct: 1, wrongPart: 'must is', correction: 'must be', explanation: 'After "must", use the base verb: "be", not "is".' },
+          { id: 16, text: "That can't to be him.", options: ['That', "can't to be", 'him', 'No error'], correct: 1, wrongPart: "can't to be", correction: "can't be", explanation: 'Modal verbs are followed directly by the base verb, no "to": "can\'t be".' },
+          { id: 17, text: 'Shall I getting you something to eat?', options: ['Shall', 'I', 'getting', 'you something to eat'], correct: 2, wrongPart: 'getting', correction: 'get', explanation: 'After "Shall I", use the base verb: "get", not "getting".' },
+          { id: 18, text: 'Would you liking to join us for dinner?', options: ['Would you', 'liking', 'to join us', 'for dinner'], correct: 1, wrongPart: 'liking', correction: 'like', explanation: 'After "Would you", use the base verb: "like", not "liking".' },
+          { id: 19, text: 'She might is busy at work.', options: ['She', 'might is', 'busy', 'at work'], correct: 1, wrongPart: 'might is', correction: 'might be', explanation: 'After "might", use the base verb: "be", not "is".' },
+          { id: 20, text: 'It must is a mistake.', options: ['It', 'must is', 'a mistake', 'No error'], correct: 1, wrongPart: 'must is', correction: 'must be', explanation: 'After "must", use the base verb: "be", not "is".' }
+        ],
+        transform: [
+          { id: 1, text: 'Express weak possibility: "It is possible that it will rain later."', options: ['It may rain later.', 'It must rain later.', "It can't rain later.", 'It should rain later.'], correct: 0, explanation: '"may" expresses possibility.' },
+          { id: 2, text: "Express uncertain possibility: \"It is possible, but I'm not sure, that she is at home.\"", options: ['She might be at home.', 'She must be at home.', "She can't be at home.", 'She should be at home.'], correct: 0, explanation: '"might" expresses a less certain possibility than "may".' },
+          { id: 3, text: 'Express possibility: "It is possible that that story is true."', options: ['That could be true.', "That mustn't be true.", "That shouldn't be true.", 'That may not be true.'], correct: 0, explanation: '"could" expresses possibility.' },
+          { id: 4, text: "Express a confident conclusion: \"I'm sure she is home — the lights are on.\"", options: ['She must be home.', 'She may be home.', 'She could be home.', 'She should be home.'], correct: 0, explanation: '"must" expresses a strong, confident conclusion.' },
+          { id: 5, text: "Express a confident negative conclusion: \"I'm sure he isn't serious — it's impossible.\"", options: ["He can't be serious.", "He mustn't be serious.", 'He may not be serious.', "He shouldn't be serious."], correct: 0, explanation: '"can\'t" expresses a strong negative conclusion.' },
+          { id: 6, text: 'Make a polite offer: "I want to offer you tea or coffee, politely."', options: ['Would you like some tea or coffee?', 'Must you like some tea or coffee?', 'Should you like some tea or coffee?', 'Do you have to like some tea or coffee?'], correct: 0, explanation: '"Would you like...?" is used for polite offers.' },
+          { id: 7, text: 'Offer help: "I am offering to help you carry those bags."', options: ['Shall I help you carry those bags?', 'Must I help you carry those bags?', 'Should I help you carry those bags?', 'Do I have to help you carry those bags?'], correct: 0, explanation: '"Shall I...?" is used to offer help.' },
+          { id: 8, text: "Express uncertain possibility: \"It is possible, but I'm not sure, that it will snow tonight.\"", options: ['It might snow tonight.', 'It must snow tonight.', "It can't snow tonight.", 'It should snow tonight.'], correct: 0, explanation: '"might" expresses a less certain possibility.' },
+          { id: 9, text: "Express a confident conclusion: \"I'm sure they are asleep — the light is off.\"", options: ['They must be asleep already.', 'They may be asleep already.', 'They could be asleep already.', 'They should be asleep already.'], correct: 0, explanation: '"must" expresses a strong, confident conclusion.' },
+          { id: 10, text: "Express a confident negative conclusion: \"I'm sure that answer isn't right — the calculation is wrong.\"", options: ["That answer can't be right.", "That answer mustn't be right.", 'That answer may not be right.', "That answer shouldn't be right."], correct: 0, explanation: '"can\'t" expresses a strong negative conclusion.' },
+          { id: 11, text: 'Express weak possibility: "It is possible that we will go on holiday this summer, but nothing is decided."', options: ['We may go on holiday this summer.', "We can't go on holiday this summer.", 'We must go on holiday this summer.', 'We should go on holiday this summer.'], correct: 0, explanation: '"may" expresses possibility.' },
+          { id: 12, text: 'Suggest starting something: "I am suggesting that we start the meeting now."', options: ['Shall we start the meeting now?', 'Must we start the meeting now?', 'Should we start the meeting now?', 'Do we have to start the meeting now?'], correct: 0, explanation: '"Shall we...?" is used to make a suggestion.' },
+          { id: 13, text: 'Make a very polite request: "I am politely asking if you would open the window."', options: ['Would you mind opening the window?', 'Must you open the window?', 'Should you open the window?', 'Have you to open the window?'], correct: 0, explanation: '"Would you mind + -ing?" is a very polite way to make a request.' },
+          { id: 14, text: 'Express possibility about yourself: "It is possible that I am wrong."', options: ['I could be wrong.', "I can't be wrong.", 'I must be wrong.', 'I should be wrong.'], correct: 0, explanation: '"could" expresses possibility, even about oneself.' },
+          { id: 15, text: "Express a confident conclusion: \"I'm sure he is out of the office — there's no answer.\"", options: ['He must be out of the office.', 'He may be out of the office.', 'He could be out of the office.', 'He should be out of the office.'], correct: 0, explanation: '"must" expresses a strong, confident conclusion.' },
+          { id: 16, text: "Express a confident negative conclusion: \"I'm sure that isn't him — he's on holiday in Spain!\"", options: ["That can't be him.", "That mustn't be him.", 'That may not be him.', "That shouldn't be him."], correct: 0, explanation: '"can\'t" expresses a strong negative conclusion.' },
+          { id: 17, text: 'Offer food: "I am offering to get you something to eat."', options: ['Shall I get you something to eat?', 'Must I get you something to eat?', 'Should I get you something to eat?', 'Do I have to get you something to eat?'], correct: 0, explanation: '"Shall I...?" is used to offer something.' },
+          { id: 18, text: 'Make a polite invitation: "I want to politely invite you to join us for dinner."', options: ['Would you like to join us for dinner?', 'Must you join us for dinner?', 'Should you join us for dinner?', 'Do you have to join us for dinner?'], correct: 0, explanation: '"Would you like...?" is used for polite invitations.' },
+          { id: 19, text: "Express uncertain possibility: \"It is possible, but I'm not sure, that she is busy at work.\"", options: ['She might be busy at work.', 'She must be busy at work.', "She can't be busy at work.", 'She should be busy at work.'], correct: 0, explanation: '"might" expresses a less certain possibility.' },
+          { id: 20, text: "Express a confident conclusion: \"I'm sure it is a mistake — the numbers don't add up.\"", options: ['It must be a mistake.', 'It may be a mistake.', 'It could be a mistake.', 'It should be a mistake.'], correct: 0, explanation: '"must" expresses a strong, confident conclusion.' }
+        ],
+        dialogue: [
+          { id: 1, situation: 'Checking the weather.', dialogue: 'A: Should I bring an umbrella?\nB: Good idea — it ___ rain later.', options: ['may', 'must', "can't", 'should'], correct: 0, explanation: '"may" — ehtimollik.' },
+          { id: 2, situation: 'Trying to reach someone.', dialogue: 'A: Is she at home?\nB: I\'m not sure, she ___ be, but she might also be out.', options: ['might', 'must', "can't", 'should'], correct: 0, explanation: '"might" — kamroq ishonchli ehtimollik.' },
+          { id: 3, situation: 'Hearing a rumor.', dialogue: "A: Do you believe that story?\nB: It ___ be true — I've heard it from a few people.", options: ['could', "mustn't", "shouldn't", 'may not'], correct: 0, explanation: '"could" — ehtimollik.' },
+          { id: 4, situation: 'Guessing who is home.', dialogue: 'A: Is anyone home?\nB: The lights are on — she ___ be home.', options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' },
+          { id: 5, situation: 'Reacting to surprising news.', dialogue: "A: He said he's quitting his job tomorrow.\nB: He ___ be serious — he's always joking!", options: ["can't", 'must', 'may', 'should'], correct: 0, explanation: '"can\'t" — kuchli salbiy xulosa.' },
+          { id: 6, situation: 'Welcoming a guest.', dialogue: 'A: Come in, please! ___ you like some tea or coffee?\nB: Tea would be lovely, thanks.', options: ['Would', 'Should', 'Must', 'Have to'], correct: 0, explanation: '"Would" — xushmuomala taklif.' },
+          { id: 7, situation: 'Helping with luggage.', dialogue: 'A: These bags are so heavy!\nB: ___ I help you carry them?', options: ['Shall', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Shall" — yordam taklifi (I bilan).' },
+          { id: 8, situation: 'Looking at dark clouds.', dialogue: 'A: Look at those clouds!\nB: Yes, it ___ snow tonight.', options: ['might', 'must', "can't", 'should'], correct: 0, explanation: '"might" — ehtimollik.' },
+          { id: 9, situation: 'Late at night, next door is quiet.', dialogue: "A: It's so quiet next door.\nB: They ___ be asleep already.", options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' },
+          { id: 10, situation: 'Checking a math answer.', dialogue: 'A: Is this the right answer?\nB: No, that answer ___ be right — the calculation is wrong.', options: ["can't", 'must', 'may', 'should'], correct: 0, explanation: '"can\'t" — kuchli salbiy xulosa.' },
+          { id: 11, situation: 'Talking about summer plans.', dialogue: 'A: Any plans for the summer?\nB: We ___ go on holiday, but nothing is decided yet.', options: ['may', "can't", 'must', 'should'], correct: 0, explanation: '"may" — ehtimollik.' },
+          { id: 12, situation: 'Starting a meeting.', dialogue: 'A: Is everyone here?\nB: Almost — ___ we start the meeting now?', options: ['Shall', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Shall" — taklif (we bilan).' },
+          { id: 13, situation: 'It\'s hot in the room.', dialogue: "A: It's stuffy in here.\nB: ___ you mind opening the window a little?", options: ['Would', 'Should', 'Must', 'Have to'], correct: 0, explanation: '"Would" — xushmuomala so\'rov (would you mind).' },
+          { id: 14, situation: 'Checking store hours.', dialogue: "A: What time does the shop close?\nB: I ___ be wrong, but I think it's six.", options: ['could', 'must', "can't", 'should'], correct: 0, explanation: '"could" — ehtimollik (o\'zi haqida ham).' },
+          { id: 15, situation: 'No one answers the phone.', dialogue: "A: He's not picking up.\nB: He ___ be out of the office.", options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' },
+          { id: 16, situation: 'A knock at the door.', dialogue: "A: Someone's at the door!\nB: That ___ be him — he's on holiday in Spain!", options: ["can't", 'must', 'may', 'should'], correct: 0, explanation: '"can\'t" — kuchli salbiy xulosa.' },
+          { id: 17, situation: 'Being a good host.', dialogue: "A: I'm getting a bit hungry.\nB: ___ I get you something to eat?", options: ['Shall', 'Must', 'Should', 'Have to'], correct: 0, explanation: '"Shall" — taklif qilish (I bilan).' },
+          { id: 18, situation: 'Planning an evening.', dialogue: 'A: We\'re having a small dinner tonight.\nB: ___ you like to join us?', options: ['Would', 'Should', 'Must', 'Have to'], correct: 0, explanation: '"Would" — xushmuomala taklif.' },
+          { id: 19, situation: 'Trying to reach a colleague.', dialogue: "A: She's not answering her phone.\nB: She ___ be busy at work.", options: ['might', 'must', "can't", 'should'], correct: 0, explanation: '"might" — ehtimollik.' },
+          { id: 20, situation: 'Reviewing a report.', dialogue: "A: These numbers don't add up.\nB: It ___ be a mistake.", options: ['must', 'may', 'could', 'should'], correct: 0, explanation: '"must" — kuchli ijobiy xulosa.' }
         ]
       },
       {
