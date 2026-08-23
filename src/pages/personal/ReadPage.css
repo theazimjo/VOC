@@ -315,6 +315,131 @@
   color: var(--reader-subtitle);
 }
 
+/* ========== END-OF-CHAPTER REVIEW ========== */
+.read-review-card {
+  margin: 36px 0 24px;
+  padding: 24px 26px 8px;
+  background: var(--reader-callout-bg);
+  border: 1px solid var(--reader-callout-border);
+  border-radius: 18px;
+}
+
+.read-review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.read-review-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--reader-text);
+  flex-shrink: 0;
+}
+
+.theme-dark .read-review-icon {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.read-review-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--reader-text);
+  margin: 0;
+}
+
+.read-review-section {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--reader-border);
+}
+
+.read-review-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.read-review-section-heading {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--reader-subtitle);
+  margin: 0 0 6px;
+}
+
+.read-review-instructions {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--reader-subtitle);
+  margin: 0 0 12px;
+  font-style: italic;
+}
+
+.read-review-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.read-review-item {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif;
+}
+
+.read-review-prompt {
+  display: flex;
+  gap: 8px;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: var(--reader-text);
+}
+
+.read-review-index {
+  font-weight: 700;
+  color: var(--reader-subtitle);
+  flex-shrink: 0;
+}
+
+.read-review-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0 22px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--reader-text);
+  background: transparent;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.read-review-toggle:hover {
+  background: var(--highlight-bg);
+}
+
+.read-review-answer {
+  margin: 8px 0 0 22px;
+  padding: 8px 14px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--reader-text);
+  background: var(--highlight-bg);
+  color: var(--highlight-text);
+  border-radius: 10px;
+}
+
 /* ========== IMAGE GROUPS ========== */
 .read-image-group {
   display: flex;
@@ -600,6 +725,22 @@
   .read-callout-body {
     font-size: 0.86rem;
     line-height: 1.55;
+  }
+
+  .read-review-card {
+    padding: 18px 16px 6px;
+    margin: 24px 0 18px;
+    border-radius: 14px;
+  }
+  .read-review-title {
+    font-size: 1rem;
+  }
+  .read-review-prompt {
+    font-size: 0.88rem;
+  }
+  .read-review-toggle,
+  .read-review-answer {
+    margin-left: 0;
   }
 
   .read-image-item {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sun, Moon, BookOpen, Lightbulb } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -50,6 +50,57 @@ function WordTokens({ text, onWordTap, knownWords }) {
       return part;
     });
   });
+}
+
+function ReviewItem({ item, t }) {
+  const [revealed, setRevealed] = useState(false);
+  return (
+    <div className="read-review-item">
+      <div className="read-review-prompt">
+        <span className="read-review-index">{item.num ? `${item.num}.` : ''}</span>
+        <span>{item.prompt}</span>
+      </div>
+      {item.answer && (
+        <button
+          type="button"
+          className="read-review-toggle"
+          onClick={() => setRevealed(r => !r)}
+        >
+          {revealed ? <EyeOff size={14} /> : <Eye size={14} />}
+          {revealed ? t('read.hideAnswer') : t('read.showAnswer')}
+        </button>
+      )}
+      {item.answer && revealed && (
+        <div className="read-review-answer">{item.answer}</div>
+      )}
+    </div>
+  );
+}
+
+function ReviewBlock({ block, t }) {
+  return (
+    <div className="read-review-card">
+      <div className="read-review-header">
+        <div className="read-review-icon">
+          <HelpCircle size={20} />
+        </div>
+        <h3 className="read-review-title">{block.title}</h3>
+      </div>
+      {block.sections.map((section, sIdx) => (
+        <div className="read-review-section" key={sIdx}>
+          <h4 className="read-review-section-heading">{section.heading}</h4>
+          {section.instructions && (
+            <p className="read-review-instructions">{section.instructions}</p>
+          )}
+          <div className="read-review-items">
+            {section.items.map((item, iIdx) => (
+              <ReviewItem key={iIdx} item={{ ...item, num: iIdx + 1 }} t={t} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default function ReadPage() {
@@ -323,6 +374,10 @@ export default function ReadPage() {
           style={{ transformOrigin: direction > 0 ? 'left center' : 'right center' }}
         >
           {page.map((block, blockIdx) => {
+            if (block.type === 'review') {
+              return <ReviewBlock block={block} t={t} key={blockIdx} />;
+            }
+
             if (block.type === 'image-group') {
               return (
                 <div className="read-image-group" key={blockIdx}>

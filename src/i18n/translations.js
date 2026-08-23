@@ -817,6 +817,9 @@ export const translations = {
       themeLight: 'Light mode',
       themeSepia: 'Sepia warm mode',
       themeDark: 'Dark mode',
+
+      showAnswer: 'Show answer',
+      hideAnswer: 'Hide answer',
     },
     course: {
       tabDashboard: 'Dashboard',
@@ -1658,6 +1661,9 @@ export const translations = {
       themeLight: 'Светлый режим',
       themeSepia: 'Теплый режим (Сепия)',
       themeDark: 'Темный режим',
+
+      showAnswer: 'Показать ответ',
+      hideAnswer: 'Скрыть ответ',
     },
     course: {
       tabDashboard: 'Обзор',
@@ -2499,6 +2505,9 @@ export const translations = {
       themeLight: "Yorug' rejim",
       themeSepia: "Iliq sepia rejimi",
       themeDark: "Qorong'u rejim",
+
+      showAnswer: "Javobni ko'rsatish",
+      hideAnswer: "Javobni yashirish",
     },
     course: {
       tabDashboard: "Umumiy",
