@@ -2,17 +2,15 @@ import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, ChevronRight, Plus, Check, ArrowLeft, Sparkles, X, BookOpen, Users } from 'lucide-react';
+import { Menu, User, BarChart3, Settings, LogOut, Search, ChevronDown, Plus, X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useGroupMode } from '../../hooks/useGroupMode';
-import { usePacks } from '../../hooks/usePacks';
 import { ref, onValue, get, remove } from 'firebase/database';
 import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
 import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
-import { AVAILABLE_COURSES } from '../../data/coursesCatalog';
 import GlobalSearch from '../common/GlobalSearch';
 import './Navbar.css';
 
@@ -26,15 +24,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const dropdownRef = useRef(null);
 
   const navigate = useNavigate();
-  const location = useLocation();
   const { appMode, membership } = useGroupMode();
-  const { packs, addPack } = usePacks();
-  const myCourses = packs.filter((p) => p.courseId);
-  // A course has no global appMode of its own (see CourseSidebar — it's left
-  // only via this switcher, not stored state) — its "active" status is
-  // derived straight from the URL instead.
-  const activeCoursePackId = location.pathname.match(/^\/course\/([^/]+)/)?.[1] || null;
-  const activeCourse = activeCoursePackId ? myCourses.find((c) => c.id === activeCoursePackId) : null;
   const [showSwitcher, setShowSwitcher] = useState(false);
   const [memberships, setMemberships] = useState([]);
   const [pinCode, setPinCode] = useState('');
@@ -42,12 +32,8 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const [joinError, setJoinError] = useState('');
   const switcherRef = useRef(null);
 
-  // "Add" modal — opened from the Plus card in the group switcher. Two
-  // sections: joining a teacher's group by PIN, and starting a ready-made
-  // course from AVAILABLE_COURSES.
+  // "Add" modal — opened from the Plus card in the group switcher (Join group by PIN)
   const [showAddModal, setShowAddModal] = useState(false);
-  const [addTab, setAddTab] = useState('join');
-  const [startingCourseId, setStartingCourseId] = useState(null);
 
   // A membership is either a corp/center group (centerId) or an independent
   // teacher's group (teacherUid, no centerId) — see joinGroupAsUser vs
@@ -161,45 +147,8 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const handleOpenAddModal = () => {
     setPinCode('');
     setJoinError('');
-    setAddTab('join');
     setShowSwitcher(false);
     setShowAddModal(true);
-  };
-
-  // First tap creates the course's pack shell — no ready-made word content
-  // yet, just title/icon (what goes inside is still to be decided). Every
-  // tap after that just opens the one pack already created for it, instead
-  // of spawning a duplicate.
-  const handleStartCourse = async (course) => {
-    if (!user || startingCourseId) return;
-
-    const existing = myCourses.find((c) => c.courseId === course.id);
-    if (existing) {
-      setShowAddModal(false);
-      navigate(`/course/${existing.id}`);
-      return;
-    }
-
-    setStartingCourseId(course.id);
-    try {
-      const { title, level, description } = course.data;
-      const packId = await addPack({
-        name: title,
-        description: description || '',
-        icon: course.icon || '📘',
-        level: (level || 'beginner').toLowerCase(),
-        language: 'en-US',
-        type: 'default',
-        courseId: course.id,
-      });
-
-      setShowAddModal(false);
-      navigate(`/course/${packId}`);
-    } catch (err) {
-      console.error('Error starting course:', err);
-    } finally {
-      setStartingCourseId(null);
-    }
   };
 
   const getGroupBadgeText = (m) => {
@@ -295,23 +244,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
           onClick={() => setShowSwitcher(!showSwitcher)}
           className="navbar-group-switcher-btn"
         >
-          {activeCourse ? (
-            <div style={{
-              background: 'var(--bg-tertiary)',
-              color: 'var(--accent-1)',
-              width: '24px',
-              height: '24px',
-              minWidth: '24px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '0.8rem',
-              flexShrink: 0,
-            }}>
-              {activeCourse.icon || '📘'}
-            </div>
-          ) : appMode === 'individual' ? (
+          {appMode === 'individual' ? (
             <div style={{
               background: 'rgba(59, 130, 246, 0.15)',
               color: '#3b82f6',
@@ -346,7 +279,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
             </div>
           )}
           <span>
-            {activeCourse ? activeCourse.name : (appMode === 'individual' ? t('nav.personal') : (membership?.groupName || t('nav.group')))}
+            {appMode === 'individual' ? t('nav.personal') : (membership?.groupName || t('nav.group'))}
           </span>
           <ChevronDown size={12} style={{ color: 'var(--text-secondary)', transform: showSwitcher ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
         </button>
@@ -369,17 +302,17 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: (!activeCourse && appMode === 'individual') ? '2px solid var(--accent-1)' : '1px solid var(--border)',
-                  boxShadow: (!activeCourse && appMode === 'individual') ? '0 0 10px var(--accent-1-dim)' : 'none'
+                  border: appMode === 'individual' ? '2px solid var(--accent-1)' : '1px solid var(--border)',
+                  boxShadow: appMode === 'individual' ? '0 0 10px var(--accent-1-dim)' : 'none'
                 }}>
                   <User size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: (!activeCourse && appMode === 'individual') ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: (!activeCourse && appMode === 'individual') ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
+                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: appMode === 'individual' ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
               </div>
 
               {/* Groups Cards */}
               {memberships.map((g) => {
-                const isActive = !activeCourse && appMode === 'group' && g.groupId === membership?.groupId;
+                const isActive = appMode === 'group' && g.groupId === membership?.groupId;
                 const badge = getGroupBadgeText(g);
                 return (
                   <div 
@@ -405,37 +338,6 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                     </div>
                     <span style={{ fontSize: '0.72rem', color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: isActive ? 700 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
                       {g.groupName}
-                    </span>
-                  </div>
-                );
-              })}
-
-              {/* Course Cards — packs started from the Add modal's Courses tab */}
-              {myCourses.map((c) => {
-                const isActive = activeCoursePackId === c.id;
-                return (
-                  <div
-                    key={c.id}
-                    onClick={() => { setShowSwitcher(false); if (!isActive) navigate(`/course/${c.id}`); }}
-                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer', width: '60px' }}
-                  >
-                    <div style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: '12px',
-                      background: 'var(--bg-tertiary)',
-                      color: 'var(--accent-1)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '1.3rem',
-                      border: isActive ? '2px solid var(--accent-1)' : '1px solid var(--border)',
-                      boxShadow: isActive ? '0 0 10px var(--accent-1-dim)' : 'none'
-                    }}>
-                      {c.icon || '📘'}
-                    </div>
-                    <span style={{ fontSize: '0.72rem', color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: isActive ? 700 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
-                      {c.name}
                     </span>
                   </div>
                 );
@@ -577,76 +479,31 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
               >
                 <div className="modal-header">
-                  <h2>{t('profile.addModalTitle')}</h2>
+                  <h2>{t('profile.addTabJoinGroup')}</h2>
                   <button className="btn btn-ghost btn-icon" onClick={() => setShowAddModal(false)} aria-label="Close">
                     <X size={18} />
                   </button>
                 </div>
 
-                <div className="navbar-add-tabs">
-                  <button
-                    type="button"
-                    className={`navbar-add-tab ${addTab === 'join' ? 'active' : ''}`}
-                    onClick={() => setAddTab('join')}
-                  >
-                    <Users size={15} /> {t('profile.addTabJoinGroup')}
-                  </button>
-                  <button
-                    type="button"
-                    className={`navbar-add-tab ${addTab === 'courses' ? 'active' : ''}`}
-                    onClick={() => setAddTab('courses')}
-                  >
-                    <BookOpen size={15} /> {t('profile.addTabCourses')}
-                  </button>
-                </div>
-
                 <div className="modal-body">
-                  {addTab === 'join' ? (
-                    <form onSubmit={handleJoinNewGroup} className="navbar-join-form">
-                      <div className="navbar-join-form-label">{t('profile.pinLabel')}</div>
-                      <div className="navbar-join-form-row">
-                        <input
-                          type="text"
-                          maxLength={6}
-                          placeholder="123456"
-                          value={pinCode}
-                          onChange={(e) => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
-                          className="navbar-join-form-input"
-                          autoFocus
-                        />
-                        <button type="submit" disabled={joining} className="navbar-join-form-submit">
-                          {joining ? '...' : t('profile.addBtn')}
-                        </button>
-                      </div>
-                      {joinError && <span className="navbar-join-form-error">{joinError}</span>}
-                    </form>
-                  ) : (
-                    <div className="navbar-course-list">
-                      <p className="navbar-course-hint">{t('profile.coursesEmptyHint')}</p>
-                      {AVAILABLE_COURSES.map((course) => {
-                        const isStarting = startingCourseId === course.id;
-                        return (
-                          <div
-                            className={`navbar-course-card ${startingCourseId ? 'disabled' : ''}`}
-                            key={course.id}
-                            onClick={() => handleStartCourse(course)}
-                            role="button"
-                            tabIndex={0}
-                          >
-                            <div className="navbar-course-icon">{course.icon}</div>
-                            <div className="navbar-course-info">
-                              <div className="navbar-course-title">{course.data.title}</div>
-                            </div>
-                            {isStarting ? (
-                              <span className="navbar-course-loading">{t('profile.startingCourse')}</span>
-                            ) : (
-                              <ChevronRight size={18} className="navbar-course-arrow" />
-                            )}
-                          </div>
-                        );
-                      })}
+                  <form onSubmit={handleJoinNewGroup} className="navbar-join-form">
+                    <div className="navbar-join-form-label">{t('profile.pinLabel')}</div>
+                    <div className="navbar-join-form-row">
+                      <input
+                        type="text"
+                        maxLength={6}
+                        placeholder="123456"
+                        value={pinCode}
+                        onChange={(e) => setPinCode(e.target.value.replace(/[^0-9]/g, ''))}
+                        className="navbar-join-form-input"
+                        autoFocus
+                      />
+                      <button type="submit" disabled={joining} className="navbar-join-form-submit">
+                        {joining ? '...' : t('profile.addBtn')}
+                      </button>
                     </div>
-                  )}
+                    {joinError && <span className="navbar-join-form-error">{joinError}</span>}
+                  </form>
                 </div>
               </motion.div>
             </motion.div>
