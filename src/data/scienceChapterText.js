@@ -1054,34 +1054,60 @@ export const scienceChapterText = {
         { type: 'p', text: "Matter changes in different ways. Do you know what the objects stacked around the flower were? They were cars. The cars were changed to solid cubes when they were crushed, or compacted, into this shape." },
         { type: 'p', text: "In what ways has the matter that makes up the cars changed? What has happened to the metal body and glass windows of the cars? The metal and glass have changed shape. They have also changed in size. These are two ways in which matter can change." },
         { type: 'p', text: "In this chapter you will learn about some of the ways in which matter can change. You will also learn how matter can be identified." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/crushed-cars.jpg', caption: 'Cars crushed into solid cubes of metal and glass' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Physical Properties' },
         { type: 'p', text: "What are physical properties of matter? The children in the picture are playing a game. The girl is blindfolded and then asked to smell two different kinds of food. She must identify which is a piece of onion and which is a piece of orange. The girl is using odor as a way of identifying matter." },
         { type: 'p', text: "These pictures show two elements — gold and carbon. How can you tell the piece of gold from the piece of carbon? One way to tell is by observing how each one looks. The color of gold is different from the color of carbon. Based on color, which piece is gold and which is carbon?" },
         { type: 'p', text: "Odor and color are physical properties of matter. A physical property is one that can be used to identify matter. Two other physical properties are shape and hardness." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/smell-test-game.jpg', caption: 'Identifying food by smell alone' },
+          { src: '/images/science/ch06/gold-and-carbon.jpg', caption: 'Gold and carbon, identified by color' }
+        ] }
       ],
       [
         { type: 'p', text: "Density is also a physical property of matter. It is the mass in a certain volume of matter. For example, a piece of wood has a certain volume. Its mass is 8 g. A piece of iron has the same volume as the wood, but its mass is 136 g. So the density of the iron is greater than the density of the wood. How many times greater?" },
         { type: 'p', text: "You can use the property of density to help you identify matter. In the pictures below, the glasses labeled A and B each contain a colorless liquid. One liquid is water and the other is alcohol. Water has a greater density than alcohol. An ice cube has been put into each liquid — the ice floats in the denser liquid and sinks in the less dense liquid. Which glass contains alcohol, A or B? How do you know?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/wood-vs-iron-mass.jpg', caption: 'Equal volumes of wood and iron with different mass' },
+          { src: '/images/science/ch06/glasses-before-ice.jpg', caption: 'Glasses A and B, before an ice cube is added' },
+          { src: '/images/science/ch06/glasses-after-ice.jpg', caption: 'The ice cube floats in one liquid and sinks in the other' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Physical Changes' },
         { type: 'p', text: "What kinds of physical changes can occur in matter? Matter can change in different ways. The pictures show a glass cup before and after it was dropped. Breaking the glass cup changes its size and shape. This kind of change is a physical change. A physical change is a change in the size, shape, or state of matter. New materials are not formed when there is a physical change. The same kind of matter is present both before and after a physical change. The pieces of the cup are no longer in the shape of a cup, but you can see that the pieces are still glass." },
         { type: 'p', text: "Changes in size and shape are common physical changes. When you write with chalk, tiny bits of chalk are rubbed from the stick of chalk onto the chalkboard. However, the bits of chalk are still chalk. The atoms and molecules in the chalk are not changed — they have simply been spread out across the chalkboard." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/glass-cup-before.jpg', caption: 'A glass cup before it was dropped' },
+          { src: '/images/science/ch06/glass-cup-after.jpg', caption: 'The same glass cup after it broke' },
+          { src: '/images/science/ch06/writing-with-chalk.jpg', caption: 'Writing with chalk on a chalkboard' }
+        ] }
       ],
       [
         { type: 'p', text: "In each case, a physical change has taken place. The size and shape of matter have been changed, but the atoms and molecules in the matter have not been changed. The same kind of matter is present before and after each change." },
         { type: 'p', text: "Matter can exist in three forms, or states. The three states of matter are solid, liquid, and gas. Many kinds of matter can change from one state to another. A change in state is another kind of physical change." },
         { type: 'p', text: "Water is one of the few kinds of matter that commonly exists in all three states. Rain is liquid water. Ice cubes and icebergs are solid water. Water as a gas is invisible — it is called water vapor. Although you cannot see it, there is always water vapor in the air." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/iceberg-water-states.jpg', caption: 'Water as rain, as an iceberg, and as vapor in the air' }
+        ] }
       ],
       [
         { type: 'p', text: "How do the three states of matter differ? Remember that all matter is made of tiny particles. Different states of matter differ in how far apart these particles are. There is an attraction between the particles in matter, and the strength of this attraction varies with the amount of space between particles. Also, the way in which particles in each state of matter move is different." },
         { type: 'p', text: "Particles in solid matter are packed very close together. This causes the attraction between these particles to be strong. The particles move back and forth in a very small space. Because the particles have a strong attraction for each other, they do not move around very much. For this reason, solids have a definite shape, and it is also why solids have a definite volume. A cube of sugar and a brick are solids. What are some other solids?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/three-states-of-matter-diagram.jpg', caption: 'How particles are arranged in a solid, a liquid, and a gas' }
+        ] }
       ],
       [
         { type: 'p', text: "Particles in liquid matter are not as close together as those in a solid, so the attraction between particles in a liquid is weaker than in a solid. The weaker attraction allows particles in a liquid to slip and slide over and around one another. Because of the way the particles move, liquids have no definite shape — liquids take the shape of the container they are in. As the particles in liquids move, the spaces between them do not change, so liquids have a definite volume." },
         { type: 'p', text: "The picture shows containers of different sizes and shapes, each holding the same volume of water. What property of liquids does this show?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/containers-same-volume.jpg', caption: 'Containers of different shapes holding the same volume of water' }
+        ] }
       ],
       [
         { type: 'p', text: "Particles in gases are spread farther apart than the particles in liquids, so the attraction between them is very weak. This very weak attraction allows particles in a gas to move freely. Because the attraction is so weak and the spaces so great, gases have no definite shape or volume. Suppose a gas is put in a closed box or jar — the particles of the gas will spread out until they fill the box or jar." },
@@ -1090,40 +1116,74 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "A glass of ice cubes left out on a hot summer day will melt. Melting is the change of state from a solid to a liquid. When heat is added to a solid, what happens to the particles in the solid? How does this explain why the solid melts? The temperature at which a solid changes to a liquid is called the melting point." },
         { type: 'p', text: "Cooking food often involves boiling liquids. When something boils, it changes from a liquid to a gas. As heat energy is added, some particles in the liquid have enough energy to escape from the liquid — the escaped particles are now particles in a gas. The temperature at which a liquid changes to a gas is called the boiling point." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/melting-ice.jpg', caption: 'Ice cubes melting on a hot day' },
+          { src: '/images/science/ch06/boiling-water.jpg', caption: 'Water boiling as it cooks' }
+        ] }
       ],
       [
         { type: 'activity', text: "How fast and how far can particles in a gas move? Get a bottle of perfume and some absorbent cotton. Have a partner stand about 5 m away. Have your partner open the bottle of perfume and pour a small amount of it onto the cotton — note the time. When you can smell the perfume, note the time again. How long did it take for you to smell the perfume? How far did the perfume particles travel to reach you? What conditions in the room might have affected how quickly the perfume particles reached you?" },
         { type: 'p', text: "Most substances have a definite melting point and boiling point. Melting point and boiling point are physical properties of matter. The melting point of water is 0°C. Its boiling point is 100°C." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/perfume-diffusion-activity.jpg', caption: 'Testing how far perfume particles travel through the air' }
+        ] }
       ],
       [
         { type: 'p', text: "Some changes of state involve taking energy away. To change a gas to a liquid or a liquid to a solid, energy must be removed. The energy that is removed is usually heat energy. When heat energy is removed, the particles in matter move more slowly, so the spaces between the particles become smaller. What happens to the attraction between particles? How does this cause a liquid to change to a solid? How is liquid orange juice changed to a solid?" },
         { type: 'p', text: "Melting, boiling, and other changes in state may not seem like physical changes, but they are. Molecules in liquid water are not changed when the water changes to a gas or a solid. Liquid iron is made up of the same kinds of atoms that make up solid iron. Physical changes do not change the particles that make up matter." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/liquid-orange-juice.jpg', caption: 'Orange juice as a liquid' },
+          { src: '/images/science/ch06/solid-orange-juice.jpg', caption: 'Orange juice frozen solid' },
+          { src: '/images/science/ch06/liquid-iron.jpg', caption: 'Liquid iron' },
+          { src: '/images/science/ch06/solid-iron.jpg', caption: 'Solid iron' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Mixtures' },
         { type: 'p', text: "What are the properties of a mixture? The children in the picture below are making a salad. They are mixing some lettuce, carrots, green peppers, and other vegetables. A salad is a mixture (miks'cher) of different vegetables. A mixture is a material formed by the physical combining of two or more different materials. Mixed nuts are another example of a mixture." },
         { type: 'p', text: "The materials in a mixture are not combined as they are in a compound. In a compound, substances have combined to form a new substance. But the materials that are in a mixture do not change to something else — lettuce remains lettuce when it is mixed with carrots. The materials in a mixture can be physically separated. How could you separate the pieces of vegetable in the salad mixture?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/kids-making-salad.jpg', caption: 'Children mixing a salad' },
+          { src: '/images/science/ch06/mixture-of-nuts.jpg', caption: 'Mixed nuts, another example of a mixture' }
+        ] }
       ],
       [
         { type: 'activity', text: "How can substances in a mixture be separated? Materials: spoon / table salt / sand / dark-colored paper / hand lens / 2 jars / filter paper / funnel / paper towel / glass or plastic dish. Procedure: A. Put a spoonful of table salt and a spoonful of sand on a sheet of dark paper. Use a hand lens to look at the sand and the salt, and draw some particles of each. 1. How are the particles different? B. Mix the sand and the salt together. Put water into a jar so the jar is half full. Add the salt-sand mixture to the water in the jar and stir with the spoon. 2. What happens? C. Fold a piece of filter paper and put it into a clean funnel. Put the funnel in another jar so it rests on the mouth of the jar. D. Slowly pour all the salt-sand-water mixture into the funnel. Take the filter paper out, open it, and place it on a paper towel, then allow the material on the filter paper to dry. E. Pour a small amount of the liquid from the jar into a dish and allow it to evaporate. 3. What material do you think will be left in the dish after the water evaporates? F. Use a hand lens to look at the dried materials on the filter paper and in the dish. 4. What material is left on the filter paper? 5. What material is left in the dish? Conclusion: 1. When you made the salt-sand-water mixture, what kind of change in matter occurred? 2. Describe how the materials in the mixture were separated." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/filter-paper-folding.jpg', caption: 'Folding filter paper for the activity' },
+          { src: '/images/science/ch06/activity-pouring-mixture.jpg', caption: 'Pouring the salt-sand-water mixture through the funnel' }
+        ] }
       ],
       [
         { type: 'p', text: "The pieces or particles in a mixture can be of different sizes. The pieces of vegetable in the salad are large. Suppose you mix sand and salt together — the particles are small, but they can be seen, and they can also be separated from each other by physical means." },
         { type: 'p', text: "Mixtures are found everywhere. Almost all foods are mixtures. Nearly all the water on the earth is a mixture too — if you have ever tasted ocean water, you know it is salty. Ocean water is a mixture of water and different kinds of salts." },
         { type: 'sidebar', text: "Do you know? One special type of mixture is called an alloy (al'oi). Most alloys are mixtures of two or more metals, and they are usually harder and stronger than each of the metals they are made from. For example, when iron is mixed with carbon and certain other elements, steel is formed. Steel is stronger and better able to resist rust than iron alone. Some scientists think that alloys can be made cheaper and better in space. They are testing this idea by making certain alloys during missions of the Space Shuttle. Some day most of the alloys we use on the earth may be made in factories in space." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/household-mixtures.jpg', caption: 'Everyday mixtures found around the home' },
+          { src: '/images/science/ch06/space-shuttle-alloys.jpg', caption: 'Testing alloys aboard the Space Shuttle' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Two Kinds of Mixtures' },
         { type: 'p', text: "How are a solution and a suspension different? You have learned that the particles in some mixtures are large enough to be seen — you can see the grains that make up a mixture of sand and salt. In other mixtures the particles that are mixed together are individual molecules. You cannot see the particles in a mixture of sugar and water — the particles of sugar and water are individual molecules." },
         { type: 'p', text: "A mixture of sugar and water is a special kind of mixture called a solution (sa lu'shen). A solution is a mixture that forms when one substance dissolves in another. In a solution the particles of the substances are evenly mixed. Most solutions are a solid dissolved in a liquid, and these solutions are clear, even if they are colored." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/sugar-dissolving-in-water.jpg', caption: 'Sugar dissolving in water' }
+        ] }
       ],
       [
         { type: 'p', text: "What happens when sugar mixes with water? The sugar particles seem to disappear in the water. Of course the sugar has not disappeared — it has dissolved in the water. This means that the sugar molecules are evenly mixed with the water molecules. You cannot see the tiny sugar molecules, but if the water evaporates, the sugar molecules form solid sugar again." },
         { type: 'p', text: "A solution has two parts. The solute (sol'yut) is the substance in a solution that dissolves — in a sugar-and-water solution, sugar is the solute. Water is the solvent. The solvent (sol'vent) is the substance in a solution that does the dissolving." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/sugar-water-solution-diagram.jpg', caption: 'How sugar molecules mix evenly with water molecules' }
+        ] }
       ],
       [
         { type: 'p', text: "Several things affect how fast a solute dissolves in a solvent. Stirring makes a solute dissolve faster. Temperature also affects how fast a solute dissolves — most solutes dissolve faster in a warm solvent than in a cold one. The picture shows powdered tea in hot water and in cold water. The same amount of tea was put into each glass at the same time. Why is there a difference in the amount of tea dissolved in each glass?" },
         { type: 'p', text: "The size of the solute particles also affects how fast the solute dissolves. Small solute particles dissolve faster than large solute particles — for example, small grains of sugar will dissolve faster than a whole sugar cube." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/tea-hot-vs-cold.jpg', caption: 'Powdered tea dissolving in hot water and in cold water' }
+        ] }
       ],
       [
         { type: 'activity', text: "How does the size of solute particles affect how fast a solute dissolves? Materials: 2 jars / 2 sugar cubes / paper / plastic bag. Procedure: A. Half fill two jars with warm water. B. Wrap a sugar cube in a piece of paper, put the wrapped cube into a plastic bag, and crush the sugar cube into a powder by stepping on the bag. C. Pour all of the crushed sugar into one of the jars of water. Quickly drop a whole sugar cube into the other jar of water. 1. Which do you think will dissolve first, the sugar cube or the crushed sugar? D. Watch each jar and note in which one the sugar dissolves first. 2. Which dissolves first, the sugar cube or the crushed sugar? 3. How is the size of the solute particles different in each jar? Conclusion: How does the size of the solute particles affect how fast a solute dissolves? Using science ideas: Repeat steps A through D, but put hot water in one jar and cold water in the other, with the whole sugar cube in the hot water and the crushed sugar cube in the cold water. Does this affect whether the cube or the crushed sugar dissolves first? Explain the results." },
@@ -1199,76 +1259,140 @@ export const scienceChapterText = {
     pages: [
       [
         { type: 'p', text: "You live in a world that depends on electricity. Look around — you may have many things in your home that run on electricity: a television, a stereo, and a radio. The lights in your house, the clock on the wall, and the toaster in the kitchen all need electricity. You may have toys and games that run on electricity. Your home may be heated by electricity, and your food may be cooked in an electric oven." },
-        { type: 'p', text: "In this chapter you will learn what electricity is, how it is produced, used, and measured. You will also learn about some of the dangers of electricity and how it can be used safely." }
+        { type: 'p', text: "In this chapter you will learn what electricity is, how it is produced, used, and measured. You will also learn about some of the dangers of electricity and how it can be used safely." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/electrical-appliances-shelf.jpg', caption: 'Everyday appliances that run on electricity' },
+          { src: '/images/science/ch07/world-trade-center-night.jpg', caption: 'A city lit up by electricity at night' }
+        ] }
       ],
       [
         { type: 'heading', text: 'What Is Electricity?' },
         { type: 'p', text: "You depend a great deal on electricity, but what is electricity? You cannot see it — you can only see what it does. For a long time, scientists have been interested in what electricity is and does." },
         { type: 'p', text: "What is known about electricity? Scientists know that everything is either matter or energy. Matter has mass and takes up space. Since electricity does not have mass or take up space, it must be a form of energy." },
-        { type: 'p', text: "To understand electrical energy, you must understand matter. Remember that all matter is made of atoms, and that the atom has a central part called a nucleus. There are particles in the nucleus — some of these particles have a positive charge and are called protons. Moving around the nucleus are other particles, called electrons. The electrons in an atom have a negative charge. If the number of protons and the number of electrons in an atom are the same, their charges balance one another, and the atom has no charge. An atom with no charge is neutral. Under normal conditions, the atoms in most matter are neutral." }
+        { type: 'p', text: "To understand electrical energy, you must understand matter. Remember that all matter is made of atoms, and that the atom has a central part called a nucleus. There are particles in the nucleus — some of these particles have a positive charge and are called protons. Moving around the nucleus are other particles, called electrons. The electrons in an atom have a negative charge. If the number of protons and the number of electrons in an atom are the same, their charges balance one another, and the atom has no charge. An atom with no charge is neutral. Under normal conditions, the atoms in most matter are neutral." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/neutral-atom-diagram.jpg', caption: 'A neutral atom, with equal protons and electrons' }
+        ] }
       ],
       [
         { type: 'p', text: "Think of a game of tug-of-war in which one team has six children and the other has only four — the teams are not balanced. To balance the teams, some children have to move from the side with the larger number to the side with the smaller number." },
         { type: 'p', text: "In some ways electricity is like this game of tug-of-war. Suppose the number of protons and the number of electrons in an atom are not the same — this happens when an atom gains or loses electrons. If an atom has more electrons than protons, the atom has a negative charge. An atom with more protons than electrons has a positive charge. This movement of electrons produces electricity." },
-        { type: 'activity', text: "Finding out: Does clear tape have an electric charge? You will need a roll of clear tape. Remove two strips of tape from the roll, each about 8 cm long, making sure you only touch one end of each strip. Slowly move the two sticky sides of the tape toward each other, then slowly move the two smooth sides toward each other. Watch what happens — do the pieces of tape have an electric charge? How can you tell?" }
+        { type: 'activity', text: "Finding out: Does clear tape have an electric charge? You will need a roll of clear tape. Remove two strips of tape from the roll, each about 8 cm long, making sure you only touch one end of each strip. Slowly move the two sticky sides of the tape toward each other, then slowly move the two smooth sides toward each other. Watch what happens — do the pieces of tape have an electric charge? How can you tell?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/tug-of-war-electrons-analogy.jpg', caption: 'A tug-of-war, like the balance of protons and electrons' },
+          { src: '/images/science/ch07/atoms-gaining-losing-electron.jpg', caption: 'An atom gaining and losing an electron' },
+          { src: '/images/science/ch07/tape-static-charge-test.jpg', caption: 'Testing whether strips of tape have an electric charge' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Kinds of Electricity' },
         { type: 'p', text: "It is a cold, dry day in winter. You walk across a wool carpet and reach out to turn a doorknob — you feel a shock. What happened? As you moved across the carpet, your shoes rubbed electrons off the carpet, and you gained electrons. The electrons built up on your body and stayed there. This buildup of electrons gave your body an electric charge. An electric charge that does not move is called {{static electricity}}." },
         { type: 'p', text: "When you touched the doorknob, electrons moved from you to the doorknob. Electrons move from a place where there are many electrons to a place where there are fewer electrons. Your body had more electrons than the doorknob, so when you touched it, the extra electrons moved from your body to the doorknob. This movement of extra electrons is called an {{electric discharge}}. After the electric discharge, you became neutral again." },
-        { type: 'p', text: "Lightning is another example of a discharge of static electricity. It is often caused by a buildup of electrons on a cloud — the cloud has more electrons than the ground. When the difference between the charge on the cloud and the charge on the ground is great enough, an electric discharge occurs, which you see as lightning." }
+        { type: 'p', text: "Lightning is another example of a discharge of static electricity. It is often caused by a buildup of electrons on a cloud — the cloud has more electrons than the ground. When the difference between the charge on the cloud and the charge on the ground is great enough, an electric discharge occurs, which you see as lightning." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/boy-touching-doorknob.jpg', caption: 'Feeling a shock after touching a doorknob' },
+          { src: '/images/science/ch07/electric-discharge-diagram.jpg', caption: 'How an electric discharge happens' },
+          { src: '/images/science/ch07/lightning-electric-discharge.jpg', caption: 'Lightning, a discharge of static electricity' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Why Lightning Strikes' },
         { type: 'p', text: "Electrons move when they jump from a finger to a doorknob, and they also move when lightning strikes the earth. This movement of electrons is called {{current electricity}}. Current electricity is more useful than static electricity because it can be controlled." },
         { type: 'p', text: "The electricity that jumps to a doorknob has to move through some form of matter — in that case, air. Electricity can also move through other forms of matter, such as metal. Matter through which an electric current moves easily is called a {{conductor}}. Most metals are good conductors, though some are better than others: gold, silver, and copper are all good conductors. Copper is low-priced and easy to obtain, so it is often used as a conductor." },
-        { type: 'p', text: "Not all kinds of matter are good conductors. Current cannot move easily through wood, rubber, glass, or plastic. Matter that is not a good conductor is called an {{insulator}}. Rubber is often used as an insulator around copper wire — it helps keep electricity in the wire and prevents electric shock." }
+        { type: 'p', text: "Not all kinds of matter are good conductors. Current cannot move easily through wood, rubber, glass, or plastic. Matter that is not a good conductor is called an {{insulator}}. Rubber is often used as an insulator around copper wire — it helps keep electricity in the wire and prevents electric shock." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/why-lightning-strikes-diagram.jpg', caption: 'Why lightning strikes the ground' },
+          { src: '/images/science/ch07/insulated-wire-types.jpg', caption: 'Copper wire insulated with rubber' }
+        ] }
       ],
       [
         { type: 'sidebar', text: "Do you know? The first person to prove that lightning is a form of electricity was Benjamin Franklin. He did this by flying a silk kite during a thunderstorm, with a metal wire attached to the kite string near the top and a metal key tied to the lower end of the string. Electrons from the clouds collected on the wire and flowed down the string to the key. When Franklin touched the key, he felt a small shock — the electrons had jumped onto his fingers. Franklin concluded that the electricity he felt came from the clouds. If lightning had struck the kite instead, he could have died from a powerful shock." },
-        { type: 'activity', text: "Which materials are conductors? Materials: 6-volt battery, light bulb and socket, 3 test leads, copper penny, cardboard strip, toothpick, aluminum foil, paper clip, rubber band. Procedure: Test different materials to see if they are conductors or insulators, and make a chart to record what you find. Connect the battery, test leads, and light bulb. Remove one test lead from the bulb and clip it to a copper penny, then use another test lead to clip the penny to the bulb — does the bulb light up? Is the penny a conductor or an insulator? Repeat for each of the other materials and fill in your chart. Conclusion: Which materials are conductors of electricity? How are all the conductors alike? Which materials are insulators, and how do you know? Using science ideas: Look around your home for tools used to repair electric devices — the handles of some tools are covered with rubber. Explain why." }
+        { type: 'activity', text: "Which materials are conductors? Materials: 6-volt battery, light bulb and socket, 3 test leads, copper penny, cardboard strip, toothpick, aluminum foil, paper clip, rubber band. Procedure: Test different materials to see if they are conductors or insulators, and make a chart to record what you find. Connect the battery, test leads, and light bulb. Remove one test lead from the bulb and clip it to a copper penny, then use another test lead to clip the penny to the bulb — does the bulb light up? Is the penny a conductor or an insulator? Repeat for each of the other materials and fill in your chart. Conclusion: Which materials are conductors of electricity? How are all the conductors alike? Which materials are insulators, and how do you know? Using science ideas: Look around your home for tools used to repair electric devices — the handles of some tools are covered with rubber. Explain why." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/franklin-kite-experiment.jpg', caption: 'Benjamin Franklin\'s kite experiment' },
+          { src: '/images/science/ch07/activity-conductor-test-1.jpg', caption: 'Testing whether a penny conducts electricity' },
+          { src: '/images/science/ch07/activity-conductor-test-2.jpg', caption: 'Testing another material for the conductor activity' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Electric Circuits' },
         { type: 'p', text: "Electricity must flow through a path to be useful. The path through which an electric current flows is called a {{circuit}}. A circuit lets electrons flow from a place where there are many electrons to a place where there are few. The flow of electrons in a circuit is similar to the flow of water in a pipe — like water, electrons need a path to follow. The pipe gives water a path to follow, and the circuit gives electrons a path to follow." },
-        { type: 'p', text: "An electric circuit must be complete for electricity to flow through it. A circuit that is complete is called a closed circuit. If there is a break in the circuit, electricity will not flow through it — a circuit that is broken, or incomplete, is called an open circuit. The opening and closing of a circuit is controlled by a device called a switch." }
+        { type: 'p', text: "An electric circuit must be complete for electricity to flow through it. A circuit that is complete is called a closed circuit. If there is a break in the circuit, electricity will not flow through it — a circuit that is broken, or incomplete, is called an open circuit. The opening and closing of a circuit is controlled by a device called a switch." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/electric-circuit-dry-cell.jpg', caption: 'A simple electric circuit with a dry cell' },
+          { src: '/images/science/ch07/open-vs-closed-circuit.jpg', caption: 'An open circuit and a closed circuit' }
+        ] }
       ],
       [
         { type: 'p', text: "There are two kinds of electric circuits. One kind is a {{series circuit}} — a circuit in which current can follow only one path. An open switch or a broken wire stops the flow of current in a series circuit. If one bulb in a series circuit burns out, the path is broken and the current no longer has a path to move through." },
         { type: 'p', text: "The other kind of electric circuit is a {{parallel circuit}} — one in which current can follow more than one path. Most circuits used in homes are parallel circuits. If you turn off one light in your home, the other lights stay on, because the parallel circuit provides another path for the current to follow. It's like taking a detour on a road — traffic can still flow from one point to another, just along a different path." },
-        { type: 'activity', text: "Are bulbs brighter in a series circuit or a parallel circuit? Materials: 6-volt battery, 2 light bulbs and sockets, 5 test leads, insulated copper wire. Procedure: Connect one light bulb in a circuit and observe its brightness. Add a second bulb in series and observe the brightness of both bulbs — are they brighter or dimmer than the single bulb, and why? Then connect the two bulbs in a parallel circuit and observe their brightness — are they as bright as the bulb in the first circuit? Conclusion: Which circuit has the brighter bulbs? Explain, in your own words, the difference between a series circuit and a parallel circuit. Using science ideas: Draw a series circuit with five bulbs — what would happen to the other bulbs if one burned out? Now draw a parallel circuit with five bulbs — what would happen if one burned out there?" }
+        { type: 'activity', text: "Are bulbs brighter in a series circuit or a parallel circuit? Materials: 6-volt battery, 2 light bulbs and sockets, 5 test leads, insulated copper wire. Procedure: Connect one light bulb in a circuit and observe its brightness. Add a second bulb in series and observe the brightness of both bulbs — are they brighter or dimmer than the single bulb, and why? Then connect the two bulbs in a parallel circuit and observe their brightness — are they as bright as the bulb in the first circuit? Conclusion: Which circuit has the brighter bulbs? Explain, in your own words, the difference between a series circuit and a parallel circuit. Using science ideas: Draw a series circuit with five bulbs — what would happen to the other bulbs if one burned out? Now draw a parallel circuit with five bulbs — what would happen if one burned out there?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/series-circuit-two-bulbs.jpg', caption: 'Two bulbs in a series circuit' },
+          { src: '/images/science/ch07/parallel-circuit-two-bulbs.jpg', caption: 'Two bulbs in a parallel circuit' },
+          { src: '/images/science/ch07/activity-brightness-panel-1.jpg', caption: 'Testing bulb brightness, step 1' },
+          { src: '/images/science/ch07/activity-brightness-panel-2.jpg', caption: 'Testing bulb brightness, step 2' },
+          { src: '/images/science/ch07/activity-brightness-panel-3.jpg', caption: 'Testing bulb brightness, step 3' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Producing Electricity' },
         { type: 'p', text: "Have you ever used a magnet to pick up pins or paper clips? Did you know a magnet can also be used to produce electricity? This property of magnets was discovered in 1831 by a scientist named Michael Faraday, who found that a magnet can be used to produce electricity." },
-        { type: 'p', text: "Faraday moved a strong magnet back and forth through a coil of wire, and electrons moved along the wire — even though electrons were not moving along the wire before the magnet passed through it. A magnet has lines of force around it, and these lines of force can make electrons move inside a wire. Moving electrons produce an electric current." }
+        { type: 'p', text: "Faraday moved a strong magnet back and forth through a coil of wire, and electrons moved along the wire — even though electrons were not moving along the wire before the magnet passed through it. A magnet has lines of force around it, and these lines of force can make electrons move inside a wire. Moving electrons produce an electric current." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/faradays-coil-diagram.jpg', caption: 'Faraday\'s coil, showing how a magnet produces a current' },
+          { src: '/images/science/ch07/magnetic-lines-of-force.jpg', caption: 'Lines of force around a magnet' }
+        ] }
       ],
       [
         { type: 'p', text: "Faraday's discovery was used to make a machine that is still used today — a {{generator}}. A generator changes energy of motion into electrical energy. When coils of wire cut through a strong magnetic field, electrons move through the wire; to keep the electrons moving, either the wire or the magnet must be kept moving." },
-        { type: 'p', text: "To produce electricity, a generator needs energy from an outside source. Most of this energy comes from burning fuels such as coal, oil, and gas. Here is how a generator produces electrical energy: fuel is burned to heat water and produce steam; the steam turns the blades of a {{turbine}}, a device made up of a wheel and blades; the turbine is attached to a generator — as the turbine turns, it turns a magnet inside a coil of wire, producing an electric current in the coil; and the current produced in the coil of wire lights the bulb." }
+        { type: 'p', text: "To produce electricity, a generator needs energy from an outside source. Most of this energy comes from burning fuels such as coal, oil, and gas. Here is how a generator produces electrical energy: fuel is burned to heat water and produce steam; the steam turns the blades of a {{turbine}}, a device made up of a wheel and blades; the turbine is attached to a generator — as the turbine turns, it turns a magnet inside a coil of wire, producing an electric current in the coil; and the current produced in the coil of wire lights the bulb." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/generator-power-plant.jpg', caption: 'A generator inside a power plant' },
+          { src: '/images/science/ch07/how-generator-produces-electricity.jpg', caption: 'How a generator produces electricity' }
+        ] }
       ],
       [
         { type: 'p', text: "Generators are not the only way to produce electricity. Flashlights, small radios, and toys that need a supply of energy often don't have generators — instead, they use a device commonly called a battery. A battery is really two or more {{electric cells}} joined together. An electric cell is a device that changes chemical energy into electrical energy." },
         { type: 'p', text: "One type of electric cell is a dry cell, which uses a chemical paste, a carbon rod, and a zinc case to produce a flow of electrons. Chemical reactions inside the dry cell cause the walls of the zinc case to become negatively charged, and the carbon rod to become positively charged — the zinc case is called the negative pole, and the carbon rod the positive pole. If the dry cell is connected to a circuit, electrons flow from the negative pole to the positive pole, forming an electric current." },
-        { type: 'p', text: "A true battery is made of two or more cells. Most car batteries are made of six cells, and instead of a chemical paste, they use acid and water, which react with metal plates. This chemical reaction of metal and acid produces a flow of electrons — such a battery is called a wet cell battery." }
+        { type: 'p', text: "A true battery is made of two or more cells. Most car batteries are made of six cells, and instead of a chemical paste, they use acid and water, which react with metal plates. This chemical reaction of metal and acid produces a flow of electrons — such a battery is called a wet cell battery." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/inside-dry-cell-diagram.jpg', caption: 'Inside a dry cell' },
+          { src: '/images/science/ch07/car-battery-cutaway.jpg', caption: 'Inside a car battery, made of wet cells' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Using Electricity' },
         { type: 'p', text: "Every day you use electricity in many ways — you may wake up to an electric alarm clock, eat breakfast cooked on an electric stove, and use electricity at home, at school, in stores, and in factories." },
         { type: 'p', text: "To be useful, electricity must be changed into other kinds of energy. An electromagnet is a magnet that forms when a current passes through a wire coiled around a metal core — a giant electromagnet can be used to lift heavy metal objects in a scrapyard. This is one example of electricity being changed into another kind of energy." },
-        { type: 'p', text: "Electrical energy can also be changed into mechanical energy — the energy of moving machine parts. You can see this change in an electric motor, a machine that changes electrical energy into mechanical energy. When you plug a motor into a wall outlet, the electricity turns the motor. Mixers, fans, and power tools all have motors." }
+        { type: 'p', text: "Electrical energy can also be changed into mechanical energy — the energy of moving machine parts. You can see this change in an electric motor, a machine that changes electrical energy into mechanical energy. When you plug a motor into a wall outlet, the electricity turns the motor. Mixers, fans, and power tools all have motors." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/house-electricity-uses-cutaway.jpg', caption: 'Ways electricity is used throughout a house' },
+          { src: '/images/science/ch07/electric-train-bart.jpg', caption: 'An electric train, powered by a motor' },
+          { src: '/images/science/ch07/motors-in-appliances.jpg', caption: 'Motors found inside household appliances' }
+        ] }
       ],
       [
-        { type: 'p', text: "Electricity is also an important source of light and heat — in a light bulb or a toaster, for example, electricity is changed into light or heat energy. A light bulb has a glass cover, a base, and a {{filament}}. The filament is a thin coil of wire; when a current moves through it, it becomes hot. The hot filament glows and gives off light. The glass cover prevents air from reaching the filament — if air did reach the glowing filament, it would burn up." }
+        { type: 'p', text: "Electricity is also an important source of light and heat — in a light bulb or a toaster, for example, electricity is changed into light or heat energy. A light bulb has a glass cover, a base, and a {{filament}}. The filament is a thin coil of wire; when a current moves through it, it becomes hot. The hot filament glows and gives off light. The glass cover prevents air from reaching the filament — if air did reach the glowing filament, it would burn up." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/light-bulb-filament-diagram.jpg', caption: 'The parts of a light bulb, including the filament' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Measuring Electricity' },
         { type: 'p', text: "Each day, great amounts of electrical energy are used in homes, schools, and offices. You use a certain amount of electricity when you watch television for an hour, and a different amount when you read for two hours by lamplight. Energy use costs money, and before anyone can pay for it, it has to be measured." },
-        { type: 'p', text: "Electricity is used to do work — the more work a device does, the more electricity it uses, and the faster a device works, the more electricity it uses. The amount of work done in a certain period of time is called power. Small amounts of electric power are measured in units called {{watts}}. Large amounts of power are measured in kilowatts — a kilowatt is 1,000 watts." }
+        { type: 'p', text: "Electricity is used to do work — the more work a device does, the more electricity it uses, and the faster a device works, the more electricity it uses. The amount of work done in a certain period of time is called power. Small amounts of electric power are measured in units called {{watts}}. Large amounts of power are measured in kilowatts — a kilowatt is 1,000 watts." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/light-bulbs-wattage.jpg', caption: 'Light bulbs labeled with their wattage' }
+        ] }
       ],
       [
         { type: 'p', text: "Most electric devices have the number of watts they use printed on them. A 100-watt motor uses twice as much energy as a 50-watt motor in the same amount of time." },
-        { type: 'p', text: "Electric companies measure how much electricity a customer uses in {{kilowatt-hours}}. A kilowatt-hour is equal to 1,000 watts of electricity used for 1 hour. A 100-watt motor can run for 10 hours before it uses a kilowatt-hour of electricity. Meters measure the amount of electricity used in a building, showing how many kilowatt-hours were used — each kilowatt-hour costs a certain amount of money." }
+        { type: 'p', text: "Electric companies measure how much electricity a customer uses in {{kilowatt-hours}}. A kilowatt-hour is equal to 1,000 watts of electricity used for 1 hour. A 100-watt motor can run for 10 hours before it uses a kilowatt-hour of electricity. Meters measure the amount of electricity used in a building, showing how many kilowatt-hours were used — each kilowatt-hour costs a certain amount of money." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/electric-bill.jpg', caption: 'An electric bill, showing kilowatt-hours used' },
+          { src: '/images/science/ch07/reading-electric-meter.jpg', caption: 'Reading an electric meter' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Using Electricity Safely' },
@@ -1338,75 +1462,133 @@ export const scienceChapterText = {
     pages: [
       [
         { type: 'p', text: "Think about how you used energy today. You used energy to get dressed — that energy came from the food you ate. Perhaps you rode to school in a bus or a car. Where do buses and cars get the energy to move?" },
-        { type: 'p', text: "A \"solar power tower\" is a modern device that uses the sun as a source of energy: many mirrors focus sunlight onto the tower, and the sunlight is used to produce electricity. The sun is one source of energy that people use, but the earth has other energy sources too. Some of these sources are plentiful but hard to collect; others are scarce. In this chapter you will learn about these energy sources and some of the problems involved in using them." }
+        { type: 'p', text: "A \"solar power tower\" is a modern device that uses the sun as a source of energy: many mirrors focus sunlight onto the tower, and the sunlight is used to produce electricity. The sun is one source of energy that people use, but the earth has other energy sources too. Some of these sources are plentiful but hard to collect; others are scarce. In this chapter you will learn about these energy sources and some of the problems involved in using them." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/solar-power-tower.jpg', caption: 'A solar power tower, using mirrors to focus sunlight' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Energy from Fossil Fuels' },
         { type: 'p', text: "All machines need energy to do work. Some machines get their energy from muscle power — a bicycle is a machine that runs on muscle power. But most machines used today run on another source of energy: fossil fuels. A {{fossil fuel}} is a fuel that forms from the remains of dead plants and animals. Coal, oil, and natural gas are fossil fuels." },
-        { type: 'p', text: "Millions of years ago the earth was warm and wet, and much of its surface was swampy. Many green plants grew and died in these swamps, and each plant had energy stored in it. Year after year, more plants died and piled up, and the land sank beneath their weight. Seas began to form, and streams emptying into the seas carried sand and other material, which pushed down hard on the dead plants. Over the years, heat and pressure caused the dead plants to change into coal." }
+        { type: 'p', text: "Millions of years ago the earth was warm and wet, and much of its surface was swampy. Many green plants grew and died in these swamps, and each plant had energy stored in it. Year after year, more plants died and piled up, and the land sank beneath their weight. Seas began to form, and streams emptying into the seas carried sand and other material, which pushed down hard on the dead plants. Over the years, heat and pressure caused the dead plants to change into coal." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/boy-on-bicycle.jpg', caption: 'A bicycle, a machine that runs on muscle power' },
+          { src: '/images/science/ch08/swamp-plants-coal.jpg', caption: 'Ancient swamp plants that became coal' }
+        ] }
       ],
       [
         { type: 'p', text: "In other places, the earth of the past was covered with shallow seas. Tiny living things in these seas died and fell to the bottom; after many years they became covered with sand, mud, and other material. Heat and pressure changed the remains of these living things into oil and natural gas." },
-        { type: 'p', text: "Coal, oil, and gas are taken from the earth. Coal and gas do not have to be changed for use as fuels, but oil taken from the earth — called {{crude oil}} — must be changed before it can be used. Crude oil is changed into useful products in a refinery. These products include fuels such as gasoline, diesel fuel, and home heating oil." }
+        { type: 'p', text: "Coal, oil, and gas are taken from the earth. Coal and gas do not have to be changed for use as fuels, but oil taken from the earth — called {{crude oil}} — must be changed before it can be used. Crude oil is changed into useful products in a refinery. These products include fuels such as gasoline, diesel fuel, and home heating oil." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/oil-well.jpg', caption: 'An oil well, drawing crude oil from the earth' },
+          { src: '/images/science/ch08/oil-refinery-diagram.jpg', caption: 'A refinery, changing crude oil into useful products' }
+        ] }
       ],
       [
         { type: 'p', text: "Fossil fuels have many uses, but the most important is as a source of energy. Before their energy can be used, fossil fuels must be burned — this process is called {{combustion}}. In combustion, oxygen from the air combines with a fuel, producing heat and light." },
-        { type: 'p', text: "Most of our electricity comes from the heat of burning fossil fuels. Coal, for example, can be burned to heat water — when the water boils, it changes to steam, and the steam is forced against a fan-shaped turbine. The force of the steam turns the blades of the turbine, which is attached to a generator. As the turbine turns the generator, it produces electricity, and power lines carry that electricity to other places." }
+        { type: 'p', text: "Most of our electricity comes from the heat of burning fossil fuels. Coal, for example, can be burned to heat water — when the water boils, it changes to steam, and the steam is forced against a fan-shaped turbine. The force of the steam turns the blades of the turbine, which is attached to a generator. As the turbine turns the generator, it produces electricity, and power lines carry that electricity to other places." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/coal-electricity-diagram.jpg', caption: 'How burning coal is used to produce electricity' }
+        ] }
       ],
       [
         { type: 'p', text: "Fossil fuels are used in many other ways too. Cars, trucks, planes, and trains all burn fossil fuels — the heat from burning them is changed into the energy of motion by engines. Factories also burn fossil fuels to make their products. Coal is mainly used for producing electricity, manufacturing (such as making steel), and home heating. Crude oil supplies gasoline for automobiles, diesel fuel for cars, trucks, and trains, jet fuel, and kerosene and oil for home heating. Natural gas is used for home heating, cooking, and as bottled gas for campers and outdoor grills." },
         { type: 'p', text: "Supplies of fossil fuels are limited. Once they are used, they are gone forever — they cannot be replaced. The world will someday run out of this major energy source, so people must make wise use of fossil fuels." },
-        { type: 'activity', text: "Finding out: Are you wasting energy? You can locate heat energy leaks at home and at school. Get a pencil, a piece of plastic wrap, and some transparent tape. Tape the plastic wrap along one side of the pencil so it hangs down about 15 cm — you have made an energy-leak finder. Test your classroom or a room at home for energy leaks by holding the finder where you think air might be leaking to the outside, such as around windows and doors. If there is a leak, the plastic wrap will move. Find out what could be done to prevent this waste of energy." }
+        { type: 'activity', text: "Finding out: Are you wasting energy? You can locate heat energy leaks at home and at school. Get a pencil, a piece of plastic wrap, and some transparent tape. Tape the plastic wrap along one side of the pencil so it hangs down about 15 cm — you have made an energy-leak finder. Test your classroom or a room at home for energy leaks by holding the finder where you think air might be leaking to the outside, such as around windows and doors. If there is a leak, the plastic wrap will move. Find out what could be done to prevent this waste of energy." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/fossil-fuel-uses-table.jpg', caption: 'Uses of coal, oil, and natural gas' },
+          { src: '/images/science/ch08/energy-leak-finder.jpg', caption: 'Making an energy-leak finder for the activity' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Energy from Atoms' },
         { type: 'p', text: "The second major source of energy used in the world is {{nuclear energy}}. You have learned that the atom is a small particle from which all matter is made, and that there is a nucleus at the center of every atom. The energy stored in the nucleus of an atom is called nuclear energy, and it has to be released before it can be used." },
-        { type: 'p', text: "There are two ways to release the energy stored in an atom. The most common process is called {{fission}} — in nuclear fission, the nucleus of an atom is split, releasing energy. The atom most often used in fission is the uranium atom." }
+        { type: 'p', text: "There are two ways to release the energy stored in an atom. The most common process is called {{fission}} — in nuclear fission, the nucleus of an atom is split, releasing energy. The atom most often used in fission is the uranium atom." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/nuclear-energy-diagram.jpg', caption: 'Nuclear fission, splitting the nucleus of an atom' }
+        ] }
       ],
       [
         { type: 'p', text: "The other process used to release the energy stored in an atom is called {{fusion}}. Fusion is the opposite of fission: in nuclear fusion, the nuclei of atoms are combined, releasing energy. In both fission and fusion, large amounts of energy are released." },
-        { type: 'p', text: "The most important use of nuclear energy today is to produce electricity. Fission is the process used to produce this energy. It takes place in a special structure called a nuclear reactor, where the large amounts of heat energy that result from fission are controlled. In nuclear power plants, the heat from fission is used to change water into steam — just as in coal-burning power plants, the steam turns a turbine that is attached to a generator, which produces electricity." }
+        { type: 'p', text: "The most important use of nuclear energy today is to produce electricity. Fission is the process used to produce this energy. It takes place in a special structure called a nuclear reactor, where the large amounts of heat energy that result from fission are controlled. In nuclear power plants, the heat from fission is used to change water into steam — just as in coal-burning power plants, the steam turns a turbine that is attached to a generator, which produces electricity." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/nuclear-test-reactor.jpg', caption: 'A nuclear reactor' }
+        ] }
       ],
       [
         { type: 'p', text: "Fusion is not used today to produce useful energy, because scientists have not yet learned to control the great amount of energy it releases. Although fusion cannot yet be controlled, almost all the energy on the earth comes from fusion, because the sun is the source of most of the earth's energy, and the sun produces energy through fusion." },
-        { type: 'p', text: "Nuclear energy is one way to meet the world's energy needs. People who favor using nuclear energy say it helps save fossil fuels — in fact, just 1 gram of uranium produces as much energy as 3 metric tons of coal or 14 barrels of oil. Supporters also say it is clean energy, since it does not release harmful smoke into the air the way burning coal does." }
+        { type: 'p', text: "Nuclear energy is one way to meet the world's energy needs. People who favor using nuclear energy say it helps save fossil fuels — in fact, just 1 gram of uranium produces as much energy as 3 metric tons of coal or 14 barrels of oil. Supporters also say it is clean energy, since it does not release harmful smoke into the air the way burning coal does." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/uranium-coal-oil-comparison.jpg', caption: 'How much energy a gram of uranium produces, compared to coal and oil' }
+        ] }
       ],
       [
         { type: 'p', text: "But other people point to the problems of using nuclear energy. The fuel used inside these power plants gives off radiation — the release of energy and particles from atoms — which can harm living things, and some people fear that radiation inside power plants might leak to the outside." },
-        { type: 'p', text: "Another problem is where to put the wastes from nuclear reactors. Some of these wastes give off harmful radiation for hundreds of years, so getting rid of them safely is important, and scientists are still looking for ways to do this." }
+        { type: 'p', text: "Another problem is where to put the wastes from nuclear reactors. Some of these wastes give off harmful radiation for hundreds of years, so getting rid of them safely is important, and scientists are still looking for ways to do this." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/nuclear-power-plant.jpg', caption: 'A nuclear power plant' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Energy from the Sun' },
         { type: 'p', text: "Almost all the energy on the earth comes from {{solar energy}} — energy from the sun. Today solar energy is used mostly as a source of heat: office buildings and houses are heated with it." },
-        { type: 'p', text: "One way to use solar energy is to \"trap\" it. Have you ever gotten into a closed car that had been parked in direct sunlight? A lot of heat gets trapped inside, and the air in the car may become much warmer than the air outside. Solar energy passes through the glass windows, and when it strikes the material inside the car, it changes to heat. This warms the air inside the car — and because the car is sealed, very little heat escapes, so the air keeps getting warmer. This buildup of heat is called the {{greenhouse effect}}." }
+        { type: 'p', text: "One way to use solar energy is to \"trap\" it. Have you ever gotten into a closed car that had been parked in direct sunlight? A lot of heat gets trapped inside, and the air in the car may become much warmer than the air outside. Solar energy passes through the glass windows, and when it strikes the material inside the car, it changes to heat. This warms the air inside the car — and because the car is sealed, very little heat escapes, so the air keeps getting warmer. This buildup of heat is called the {{greenhouse effect}}." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/greenhouse-effect-car.jpg', caption: 'Heat trapped inside a sealed, sunlit car — the greenhouse effect' }
+        ] }
       ],
       [
-        { type: 'p', text: "The greenhouse effect is used to heat some houses and other buildings — this kind of heating is called passive solar heating. There are other ways to use solar energy too. One method uses large solar collectors: a {{solar collector}} is a device that collects sunlight and changes it into heat energy. Inside a solar collector there are rows of black tubes carrying water or air. Sunlight strikes the tubes and heats the water or air inside them, and the heated material is carried through pipes that run through the building. If the heat isn't needed right away, it goes to a storage area, so it can be used later on a cloudy day or at night. Systems that use pumps or other moving parts are called active solar heating." }
+        { type: 'p', text: "The greenhouse effect is used to heat some houses and other buildings — this kind of heating is called passive solar heating. There are other ways to use solar energy too. One method uses large solar collectors: a {{solar collector}} is a device that collects sunlight and changes it into heat energy. Inside a solar collector there are rows of black tubes carrying water or air. Sunlight strikes the tubes and heats the water or air inside them, and the heated material is carried through pipes that run through the building. If the heat isn't needed right away, it goes to a storage area, so it can be used later on a cloudy day or at night. Systems that use pumps or other moving parts are called active solar heating." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/greenhouse-interior.jpg', caption: 'A greenhouse, heated by trapped sunlight' },
+          { src: '/images/science/ch08/solar-collectors-roof.jpg', caption: 'Solar collectors mounted on a roof' }
+        ] }
       ],
       [
         { type: 'p', text: "In addition to producing heat, solar energy can also be used to produce electricity, in two different ways. One is an indirect method: solar energy is first used to produce heat, the heat changes liquid water to steam, and the steam turns a turbine attached to a generator. Some solar collectors use large mirrors to gather sunlight and reflect it onto a small area on a tower, where a boiler holds water to be heated this way." },
-        { type: 'p', text: "The other way to use solar energy to produce electricity is a direct method. A device called a {{solar cell}} changes solar energy directly into electrical energy. Solar cells are an energy source for many spacecraft and some buildings." }
+        { type: 'p', text: "The other way to use solar energy to produce electricity is a direct method. A device called a {{solar cell}} changes solar energy directly into electrical energy. Solar cells are an energy source for many spacecraft and some buildings." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/solar-mirror-collector.jpg', caption: 'Mirrors reflecting sunlight to heat water for steam' },
+          { src: '/images/science/ch08/viking-spacecraft-solar-cells.jpg', caption: 'Solar cells powering a spacecraft' }
+        ] }
       ],
       [
         { type: 'p', text: "Solar energy seems to be a perfect energy source — it is clean, plentiful, and free. But there are problems in using it. One problem is that not all places receive enough sunlight to make solar energy useful. Also, solar energy is not constant: if there are several cloudy days in a row, stored heat or electrical energy may be used up." },
-        { type: 'sidebar', text: "Do you know? The Solar Challenger is an airplane powered solely by the sun's energy. A total of 16,128 solar cells cover the upper surface of this one-person plane, producing electricity that runs two small motors turning the plane's propeller. The entire plane weighs less than 98 kg. On July 5, 1981, the Solar Challenger made a record-setting flight — it took off from France, flew across the English Channel, and landed more than 267 km away in England, reaching an air speed of over 75 km/h, using only energy from the sun." }
+        { type: 'sidebar', text: "Do you know? The Solar Challenger is an airplane powered solely by the sun's energy. A total of 16,128 solar cells cover the upper surface of this one-person plane, producing electricity that runs two small motors turning the plane's propeller. The entire plane weighs less than 98 kg. On July 5, 1981, the Solar Challenger made a record-setting flight — it took off from France, flew across the English Channel, and landed more than 267 km away in England, reaching an air speed of over 75 km/h, using only energy from the sun." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/solar-challenger-plane.jpg', caption: 'The Solar Challenger, an airplane powered by the sun' }
+        ] }
       ],
       [
-        { type: 'activity', text: "Which direction receives more solar energy? Materials: 2 cardboard shoe boxes with lids, scissors, clear plastic wrap, transparent tape, 2 thermometers, a compass. Procedure: Cut a rectangular hole in one side of each shoe box, and cover each hole with a piece of clear plastic wrap taped in place. Place a thermometer inside each box and put the lids on. Take the boxes outdoors on a sunny day, and use a compass to find north and south — place one box so its \"window\" faces south, and the other so its window faces north. Open the boxes, check and record the starting temperature in each, then close them again. Every 10 minutes for the next 40 minutes, record the temperature inside each box, and make a graph showing how the temperature in each box changed. Conclusion: What was the difference between the starting and final temperature in each box? Which lets in more solar energy, a north-facing window or a south-facing window? In which direction should the windows of a passive-solar house face, and why?" }
+        { type: 'activity', text: "Which direction receives more solar energy? Materials: 2 cardboard shoe boxes with lids, scissors, clear plastic wrap, transparent tape, 2 thermometers, a compass. Procedure: Cut a rectangular hole in one side of each shoe box, and cover each hole with a piece of clear plastic wrap taped in place. Place a thermometer inside each box and put the lids on. Take the boxes outdoors on a sunny day, and use a compass to find north and south — place one box so its \"window\" faces south, and the other so its window faces north. Open the boxes, check and record the starting temperature in each, then close them again. Every 10 minutes for the next 40 minutes, record the temperature inside each box, and make a graph showing how the temperature in each box changed. Conclusion: What was the difference between the starting and final temperature in each box? Which lets in more solar energy, a north-facing window or a south-facing window? In which direction should the windows of a passive-solar house face, and why?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/solar-box-activity-1.jpg', caption: 'Setting up the solar-box activity' },
+          { src: '/images/science/ch08/solar-box-activity-2.jpg', caption: 'Recording temperatures during the solar-box activity' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Energy from Water' },
         { type: 'p', text: "Moving water is an important source of energy used to produce electricity. In a {{hydroelectric power plant}}, the energy of moving water turns turbines attached to generators that produce electricity. Hydroelectric power plants are built as part of dams on rivers — falling water flows through pipes inside the dam and over turbine blades at the bottom, and the moving blades turn generators." },
-        { type: 'p', text: "The number of places where hydroelectric power plants can be built is limited, and when dams are built on rivers, large land areas may be flooded, which can destroy places where many plants and animals live." }
+        { type: 'p', text: "The number of places where hydroelectric power plants can be built is limited, and when dams are built on rivers, large land areas may be flooded, which can destroy places where many plants and animals live." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/hydroelectric-dam.jpg', caption: 'A hydroelectric dam' }
+        ] }
       ],
       [
         { type: 'p', text: "There is another way of using the energy of flowing water. If you've ever spent a day at an ocean beach, you've probably noticed that the water level along the shore rises and falls — in most areas, twice a day. These daily movements of the water level are called {{tides}}." },
-        { type: 'p', text: "{{Tidal energy}} — the energy of rising and falling tides — is another energy source that can be used to produce electricity. A dam is built across a narrow opening to the ocean; during high and low tides, water moves in and out of openings in the dam, flowing over turbine blades inside it, and the turbines turn generators. Very few tidal power plants are in use today — tidal energy will probably never be a major energy source, because there are only a few places in the world with a large enough difference between low and high tides to produce much energy." }
+        { type: 'p', text: "{{Tidal energy}} — the energy of rising and falling tides — is another energy source that can be used to produce electricity. A dam is built across a narrow opening to the ocean; during high and low tides, water moves in and out of openings in the dam, flowing over turbine blades inside it, and the turbines turn generators. Very few tidal power plants are in use today — tidal energy will probably never be a major energy source, because there are only a few places in the world with a large enough difference between low and high tides to produce much energy." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/tidal-energy-diagram.jpg', caption: 'How a tidal power plant produces electricity' },
+          { src: '/images/science/ch08/tidal-power-plant.jpg', caption: 'A tidal power plant' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Energy from Heat in the Earth' },
         { type: 'p', text: "Almost all energy on the earth comes from solar energy, but there is also an energy source deep inside the earth, called {{geothermal energy}} — energy from natural heat trapped beneath the earth's surface. This heat melts rock inside the earth, forming magma. In some places the magma comes close to the earth's surface and collects in areas called hot spots — these are areas of geothermal energy." },
-        { type: 'p', text: "When water in the ground comes into contact with a hot spot, it turns to steam. By drilling wells into the earth at hot spots, this steam can be released and used to turn turbines that run generators. In some places, steam and hot water reach the surface without drilling, moving up through deep cracks in the rock — when they gush out of the ground on their own, this is called a geyser." }
+        { type: 'p', text: "When water in the ground comes into contact with a hot spot, it turns to steam. By drilling wells into the earth at hot spots, this steam can be released and used to turn turbines that run generators. In some places, steam and hot water reach the surface without drilling, moving up through deep cracks in the rock — when they gush out of the ground on their own, this is called a geyser." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/geothermal-energy-diagram.jpg', caption: 'How geothermal energy is used to produce electricity' }
+        ] }
       ],
       [
         { type: 'p', text: "The largest geothermal power plant in the world, called The Geysers, is located in California, and it supplies enough electricity to run a large city. But there are problems with geothermal energy: many areas of geothermal energy are far from any large towns or cities, so electricity produced there would have to be carried great distances, which can be very costly." },
@@ -1496,7 +1678,10 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Chapter 9 · Changes in the Earth' },
         { type: 'p', text: "Have you ever seen a place that looked like Bryce Canyon in Utah? The rocks there were shaped by the movement of water over millions of years." },
-        { type: 'p', text: "The land that covers the earth has changed its shape many times during the history of the earth. The force of moving water, ice, and air have caused these changes. In this chapter you will learn how the earth is worn away in some places, and how it is built up in others. You will see how water, ice, and wind {{move}} materials from place to place." }
+        { type: 'p', text: "The land that covers the earth has changed its shape many times during the history of the earth. The force of moving water, ice, and air have caused these changes. In this chapter you will learn how the earth is worn away in some places, and how it is built up in others. You will see how water, ice, and wind {{move}} materials from place to place." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/bryce-canyon.jpg', caption: 'Bryce Canyon, Utah' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Weathering Changes the Land' },
@@ -1506,50 +1691,98 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "The effect that the freezing and melting of water has on rock is a type of physical weathering. In some mountain regions the daytime temperatures are above the freezing point of water. Water seeps into cracks in rock. At night, temperatures drop below the freezing point, so the water turns to ice." },
         { type: 'p', text: "When water freezes, it expands. As the water in a crack expands, it pushes with great force against both sides of the crack. This causes the crack to become larger. The daily freezing and melting of water causes large rocks to break up into smaller pieces. This kind of physical weathering is called frost action. During the winter, large cracks can form in sidewalks, and many potholes form in roads this way." },
-        { type: 'p', text: "Plants can also cause rocks to crack and break apart. Small plants and trees can grow in soil found in the cracks of rocks. As they grow, the plants push against the sides of the cracks, causing them to get larger, and in time they split the rocks. You may have seen tree roots that have lifted up parts of a sidewalk." }
+        { type: 'p', text: "Plants can also cause rocks to crack and break apart. Small plants and trees can grow in soil found in the cracks of rocks. As they grow, the plants push against the sides of the cracks, causing them to get larger, and in time they split the rocks. You may have seen tree roots that have lifted up parts of a sidewalk." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/ice-on-rock.jpg', caption: 'Ice on rock' },
+          { src: '/images/science/ch09/cliffs-weathered-frost-action.jpg', caption: 'Cliffs weathered by frost action' },
+          { src: '/images/science/ch09/pothole-frost-action.jpg', caption: 'A pothole caused by frost action' },
+          { src: '/images/science/ch09/tree-trunk-split-rock.jpg', caption: 'A tree trunk that has split a large rock' },
+          { src: '/images/science/ch09/sidewalk-lifted-tree-roots.jpg', caption: 'Tree roots lifting up part of a sidewalk' }
+        ] }
       ],
       [
-        { type: 'activity', text: "How does the freezing and melting of water weather rocks? Wash out an empty milk carton. Open the top of the carton and fill it completely with water. Close the top and tape it shut with masking tape. Place the carton in a freezer overnight. The next day, remove the carton from the freezer. Describe what you see. What has happened, and what do you think caused it? How could this process weather rocks?" }
+        { type: 'activity', text: "How does the freezing and melting of water weather rocks? Wash out an empty milk carton. Open the top of the carton and fill it completely with water. Close the top and tape it shut with masking tape. Place the carton in a freezer overnight. The next day, remove the carton from the freezer. Describe what you see. What has happened, and what do you think caused it? How could this process weather rocks?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/activity-milk-carton-freezer.jpg', caption: 'Finding Out: freezing a full milk carton' }
+        ] }
       ],
       [
         { type: 'p', text: "Physical weathering can also be seen along an ocean shore. Large waves pound rocks at the shore. When waves crash against rocky cliffs, cracks can form. After a while, rocks may break away and fall into the ocean. The rocks may be lifted and dropped many times by the waves. As they are moved, the rocks strike other rocks, and in time they may be ground into small stones and pebbles. Waves may throw the stones and pebbles back against the cliffs, which helps to weather the rocks and cliffs even more. Have you ever picked up smooth, round stones from a beach? That is another example of physical weathering by ocean waves." },
-        { type: 'p', text: "Wind can also weather rocks. Wind can blow small pieces of sand against rocks, which can polish and smooth them. But the wind alone does not weather rocks very much." }
+        { type: 'p', text: "Wind can also weather rocks. Wind can blow small pieces of sand against rocks, which can polish and smooth them. But the wind alone does not weather rocks very much." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/ocean-waves-rocky-cliffs.jpg', caption: 'Ocean waves pounding rocky cliffs' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Another Kind of Weathering' },
         { type: 'p', text: "How does chemical weathering occur? Rock is also broken apart by chemical weathering. Chemical weathering is all the processes that break apart rock by changing its chemical makeup." },
-        { type: 'p', text: "In some places there are large amounts of limestone and water in the ground, and chemical weathering is common there. As rain falls through air, it mixes with carbon dioxide gas, and some of this gas dissolves in the rainwater. This changes the rainwater into a weak carbonic acid, which drains through rock and soil. When it reaches limestone in the ground, it seeps into cracks and dissolves some of the limestone, making the cracks grow larger. Over thousands of years, the dissolving of limestone can form a whole system of tunnels — and large caves — under the ground." }
+        { type: 'p', text: "In some places there are large amounts of limestone and water in the ground, and chemical weathering is common there. As rain falls through air, it mixes with carbon dioxide gas, and some of this gas dissolves in the rainwater. This changes the rainwater into a weak carbonic acid, which drains through rock and soil. When it reaches limestone in the ground, it seeps into cracks and dissolves some of the limestone, making the cracks grow larger. Over thousands of years, the dissolving of limestone can form a whole system of tunnels — and large caves — under the ground." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/limestone-caves-diagram.jpg', caption: 'How limestone caves form' },
+          { src: '/images/science/ch09/limestone-cave-photo.jpg', caption: 'A limestone cave' }
+        ] }
       ],
       [
         { type: 'p', text: "Chemical weathering also breaks up rocks that contain iron. Rainwater contains oxygen dissolved from the air. Iron in rocks joins with this oxygen to form iron oxide, or rust — a new substance that is soft and easily breaks off rock. When it breaks off, even more of the rock's surface can be changed by falling rain. A red-orange color in rock is often a sign of iron oxide." },
         { type: 'p', text: "Mosses and other tiny plants called lichens also weather rock by chemical action. These plants grow on rock and send out rootlike parts that grow into tiny openings in the rock, producing acids that dissolve some of the rock." },
-        { type: 'p', text: "Both physical and chemical weathering cause rock to break down. Chemical weathering happens fastest in places that are wet and fairly warm. Physical weathering is greatest in wet places that are cooler. Dry places show little weathering effect, except for that caused by wind. Both kinds of weathering result in the forming of soil, as pieces of weathered rock mix with the remains of living things." }
+        { type: 'p', text: "Both physical and chemical weathering cause rock to break down. Chemical weathering happens fastest in places that are wet and fairly warm. Physical weathering is greatest in wet places that are cooler. Dry places show little weathering effect, except for that caused by wind. Both kinds of weathering result in the forming of soil, as pieces of weathered rock mix with the remains of living things." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/rock-iron-oxide.jpg', caption: 'Rock containing iron oxide' },
+          { src: '/images/science/ch09/lichens-on-rock.jpg', caption: 'Lichens on rock' },
+          { src: '/images/science/ch09/mosses-on-rock.jpg', caption: 'Mosses on rock' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Water Changes the Land' },
         { type: 'p', text: "How does water change the land? Most weathered materials are carried to other places. The movement of weathered rock and soil from one place to another is called erosion. Water, ice, and wind are called the agents of erosion, because moving water, moving ice, and moving air all carry away weathered materials." },
         { type: 'p', text: "The most important agent of erosion is water. The force behind water erosion is gravity, which causes water to run downhill — the steeper the hill, the faster the water flows, and the faster it flows, the greater the rate of erosion. The amount of water also affects the rate of erosion: the more water there is, the more erosion there will be." },
-        { type: 'p', text: "Erosion may begin when raindrops hit the soil and break up large lumps of it. Some of the water from rain and melting snow flows over the earth's surface — this is called runoff. As runoff moves downhill, it may form small streams, which join together into larger streams and then rivers. Rivers flow into lakes or oceans." }
+        { type: 'p', text: "Erosion may begin when raindrops hit the soil and break up large lumps of it. Some of the water from rain and melting snow flows over the earth's surface — this is called runoff. As runoff moves downhill, it may form small streams, which join together into larger streams and then rivers. Rivers flow into lakes or oceans." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/runoff-diagram.jpg', caption: 'How rain becomes runoff, streams, and rivers' }
+        ] }
       ],
       [
         { type: 'p', text: "As water moves over the surface, it may erode soil and rocks. The amount of material moved depends partly on the amount of water, but the speed of the water is an even more important factor — fast-moving water erodes far more material than slower-moving water. If there are no plants growing in the soil, moving water may erode a lot of it." },
-        { type: 'p', text: "The erosion of soil by runoff can be a problem for farmers, since the top layers of soil are rich in materials that plants need. There is a lot of erosion in hilly places, so farmers often plant rows of crops that follow the curve of the land — when it rains, the rows hold the water and soil in place. Another way to prevent soil erosion on hills is to build terraces, which are flat areas cut into a hillside that also keep water and soil from washing down. Soil erosion can also be reduced by not clearing the land of all plants." }
+        { type: 'p', text: "The erosion of soil by runoff can be a problem for farmers, since the top layers of soil are rich in materials that plants need. There is a lot of erosion in hilly places, so farmers often plant rows of crops that follow the curve of the land — when it rains, the rows hold the water and soil in place. Another way to prevent soil erosion on hills is to build terraces, which are flat areas cut into a hillside that also keep water and soil from washing down. Soil erosion can also be reduced by not clearing the land of all plants." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/erosion-soil-runoff.jpg', caption: 'Erosion of soil by runoff' },
+          { src: '/images/science/ch09/contour-crops-erosion-prevention.jpg', caption: 'Crops following the curve of the land to prevent erosion' },
+          { src: '/images/science/ch09/terraces-erosion-prevention.jpg', caption: 'Terraces built to prevent erosion' }
+        ] }
       ],
       [
         { type: 'p', text: "Soil erosion is not the only effect of moving water. As water flows in a river, it wears away the riverbed — the rock under the river. The moving water carries materials that act like sandpaper, grinding the rock and wearing it away, and the weathered materials are then carried along by the river." },
-        { type: 'p', text: "The downward cutting of a riverbed can create a deep valley with steep sides, called a canyon. The Colorado River has been cutting the rocks of its riverbed for millions of years, forming the Grand Canyon, which is over 1.5 km deep." }
+        { type: 'p', text: "The downward cutting of a riverbed can create a deep valley with steep sides, called a canyon. The Colorado River has been cutting the rocks of its riverbed for millions of years, forming the Grand Canyon, which is over 1.5 km deep." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/grand-canyon-view1.jpg', caption: 'The Grand Canyon and Colorado River' },
+          { src: '/images/science/ch09/grand-canyon-view2.jpg', caption: 'The Grand Canyon and Colorado River, another view' }
+        ] }
       ],
       [
         { type: 'p', text: "Ocean waves can erode sand from beaches along the shore — in some places the shoreline may lose as much as 380 cubic meters of sand each day. You have learned that erosion is greatest in fast-moving water. As a river flows downstream, the water starts to slow down, and this slowing causes the river to drop some sediments. Sediments are the materials that are dropped by the agents of erosion, including sand, soil, and rocks. The dropping of sediments by the agents of erosion is called deposition." },
-        { type: 'p', text: "Erosion and deposition are related. Weathered materials are picked up and carried away from one place, then dropped, or deposited, as sediment in another place. In this way the land is constantly changing — worn down by erosion in some places, and built up by deposition in others." }
+        { type: 'p', text: "Erosion and deposition are related. Weathered materials are picked up and carried away from one place, then dropped, or deposited, as sediment in another place. In this way the land is constantly changing — worn down by erosion in some places, and built up by deposition in others." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/lighthouse-1890s.jpg', caption: 'A lighthouse at the tip of Long Island, about 90 years ago' },
+          { src: '/images/science/ch09/lighthouse-recent.jpg', caption: 'The same lighthouse today, after decades of shoreline erosion' }
+        ] }
       ],
       [
         { type: 'p', text: "In the spring, snow on the ground melts and there is often a lot of rain, so spring floods are common in some places. Flooding can erode valuable soil and destroy property, but flooding of rivers can also be helpful because of deposition. The floodwaters that overflow the banks of a river carry a lot of material, and when they soak into the ground, sediments are deposited on the land along the river. These sediments enrich the soil, so land near rivers is often good farmland." },
         { type: 'p', text: "Most rivers empty into the ocean. The place where a river empties into the ocean is called the mouth of the river. The water there moves very slowly, and much of the material carried by the river is deposited at the mouth, forming a fan-shaped landmass called a delta. The delta at the mouth of the Mississippi River is the largest in the United States." },
-        { type: 'p', text: "The few remaining sediments not deposited on a delta are carried out to sea by ocean currents. Waves may carry some of these sediments back to shore, forming sand beaches, or deposit them as sandbars near the shore." }
+        { type: 'p', text: "The few remaining sediments not deposited on a delta are carried out to sea by ocean currents. Waves may carry some of these sediments back to shore, forming sand beaches, or deposit them as sandbars near the shore." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/spring-flood.jpg', caption: 'A spring flood' },
+          { src: '/images/science/ch09/rich-farmland-floodwaters.jpg', caption: 'Rich farmland deposited by floodwaters' },
+          { src: '/images/science/ch09/mississippi-river-delta.jpg', caption: 'The Mississippi River delta' },
+          { src: '/images/science/ch09/sandbar.jpg', caption: 'A sandbar' }
+        ] }
       ],
       [
-        { type: 'activity', text: "What factors affect the rate of erosion by water? Materials: sand-and-gravel mixture, rectangular metal baking pan, metric ruler, 2 books, plastic squeeze bottle, clock or watch with second hand. Procedure: A. Put a sand-and-gravel mixture about 3 cm deep into one half of the pan. B. Raise that end of the pan with a book, to represent material on a hillside. C. Fill a squeeze bottle with water and drop it onto the mixture at a rate of one drop every 3 seconds — what do you observe? D. Increase the rate to two drops every 3 seconds and compare the amount of erosion. E. Put another book under the same end of the pan, increasing the angle. F. Again drop two drops every 3 seconds and compare your results. Conclusion: What did the water do to the mixture? Did increasing the rate of water flow affect the amount of material moved? Did increasing the angle of the pan affect it? Using science ideas: How would a steady stream of running water affect the amount of material moved, and what body of water would this be like?" }
+        { type: 'activity', text: "What factors affect the rate of erosion by water? Materials: sand-and-gravel mixture, rectangular metal baking pan, metric ruler, 2 books, plastic squeeze bottle, clock or watch with second hand. Procedure: A. Put a sand-and-gravel mixture about 3 cm deep into one half of the pan. B. Raise that end of the pan with a book, to represent material on a hillside. C. Fill a squeeze bottle with water and drop it onto the mixture at a rate of one drop every 3 seconds — what do you observe? D. Increase the rate to two drops every 3 seconds and compare the amount of erosion. E. Put another book under the same end of the pan, increasing the angle. F. Again drop two drops every 3 seconds and compare your results. Conclusion: What did the water do to the mixture? Did increasing the rate of water flow affect the amount of material moved? Did increasing the angle of the pan affect it? Using science ideas: How would a steady stream of running water affect the amount of material moved, and what body of water would this be like?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/activity-sand-gravel-tray.jpg', caption: 'Finding Out: setting up a sand-and-gravel tray' },
+          { src: '/images/science/ch09/activity-water-drops-erosion.jpg', caption: 'Finding Out: dripping water onto the mixture' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Ice Changes the Land' },
@@ -1558,27 +1791,52 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "As the huge ice sheets moved forward, they weathered and eroded the land over which they moved, carrying soil, rock, and huge boulders great distances. The materials carried by glaciers scraped and cut the land, smoothing, polishing, and scratching rock. In some places, the tops of mountains were weathered and eroded by glaciers, forming rounded hills." },
-        { type: 'p', text: "During the warm periods, the southern edge of the glaciers melted, leaving behind large hilly ridges of rocky material that mark the places where the glaciers stopped — such ridges can still be seen today in the northern United States and Canada. In some places, glaciers dug out large amounts of rock and soil, and many of these dug-out areas filled in with water when the glaciers melted, becoming lakes. The lake regions of Wisconsin and Minnesota were formed this way, and glaciers even helped form the Great Lakes." }
+        { type: 'p', text: "During the warm periods, the southern edge of the glaciers melted, leaving behind large hilly ridges of rocky material that mark the places where the glaciers stopped — such ridges can still be seen today in the northern United States and Canada. In some places, glaciers dug out large amounts of rock and soil, and many of these dug-out areas filled in with water when the glaciers melted, becoming lakes. The lake regions of Wisconsin and Minnesota were formed this way, and glaciers even helped form the Great Lakes." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/rock-polished-glacier.jpg', caption: 'Rock polished by a glacier' },
+          { src: '/images/science/ch09/rock-scratched-glacier.jpg', caption: 'Rock scratched by a glacier' },
+          { src: '/images/science/ch09/rocky-material-glacier-deposit.jpg', caption: 'Rocky material deposited when a glacier stopped' },
+          { src: '/images/science/ch09/lakes-formed-by-glacier.jpg', caption: 'A chain of lakes formed by a glacier' }
+        ] }
       ],
       [
         { type: 'p', text: "In some places glaciers exist today. Ice sheets, much like the glaciers of the ice ages, are found in Greenland and the South Pole region. Smaller mountain glaciers are found in high mountains, such as the Alps and the Rocky Mountains — mountain glaciers are sometimes called rivers of ice." },
-        { type: 'p', text: "Mountain glaciers scoop out material from valleys, widening them and giving them a U shape. Glaciers of past ice ages have had a great effect on changing the shape of the land, and although the erosion done by today's glaciers is limited, some scientists believe that ice sheets will return someday and spread across the earth once again." }
+        { type: 'p', text: "Mountain glaciers scoop out material from valleys, widening them and giving them a U shape. Glaciers of past ice ages have had a great effect on changing the shape of the land, and although the erosion done by today's glaciers is limited, some scientists believe that ice sheets will return someday and spread across the earth once again." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/ice-sheet.jpg', caption: 'An ice sheet' },
+          { src: '/images/science/ch09/mountain-glacier.jpg', caption: 'A mountain glacier' },
+          { src: '/images/science/ch09/u-shaped-valley-glacier.jpg', caption: 'A U-shaped valley formed by a glacier' }
+        ] }
       ],
       [
-        { type: 'activity', text: "How does a glacier change the land? Materials: sand-and-gravel mixture, small paper cup, metric ruler, freezer, metal baking pan, modeling clay. Procedure: A. Place about 2 cm of the sand-and-gravel mixture in a paper cup. B. Fill the cup with water, stir, and freeze it overnight. C. Line the bottom of a baking pan with about 1 cm of modeling clay, then top it with about 1 cm of the sand-and-gravel mixture. D. The next day, remove the frozen mixture from the paper cup — this represents a glacier. E. Place the ice mixture in the pan and press down as you slowly move it across the tray. What happens to the sand-and-gravel mixture and to the clay? Conclusion: What do the particles frozen in the ice represent? How do glaciers affect loose rock and soil, and layers of smooth, soft rock, as they move over them? Using science ideas: What must happen to cause a glacier to deposit the material it carries?" }
+        { type: 'activity', text: "How does a glacier change the land? Materials: sand-and-gravel mixture, small paper cup, metric ruler, freezer, metal baking pan, modeling clay. Procedure: A. Place about 2 cm of the sand-and-gravel mixture in a paper cup. B. Fill the cup with water, stir, and freeze it overnight. C. Line the bottom of a baking pan with about 1 cm of modeling clay, then top it with about 1 cm of the sand-and-gravel mixture. D. The next day, remove the frozen mixture from the paper cup — this represents a glacier. E. Place the ice mixture in the pan and press down as you slowly move it across the tray. What happens to the sand-and-gravel mixture and to the clay? Conclusion: What do the particles frozen in the ice represent? How do glaciers affect loose rock and soil, and layers of smooth, soft rock, as they move over them? Using science ideas: What must happen to cause a glacier to deposit the material it carries?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/activity-glacier-model.jpg', caption: 'Finding Out: modeling how a glacier moves material' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Wind Changes the Land' },
         { type: 'p', text: "How does wind change the land? Like water and ice, wind carries materials from one place to another. When the wind blows, it lifts and carries small dry particles — mostly sand, soil, and dust. When these particles are blown against rock, they can cause physical weathering." },
         { type: 'p', text: "As wind blows sand from one place to another, its speed may be slowed by rocks or plants. When the wind slows, it deposits the sand it carries, causing the sand to pile up. This deposition of wind-carried sand forms piles called sand dunes, some of which may be as much as 50 m high." },
-        { type: 'p', text: "In some desert places, wind blows away all the loose sand, leaving only coarse pebbles and other small rocks behind. Such areas are known as desert pavement. Once desert pavement forms, almost no further wind erosion will occur." }
+        { type: 'p', text: "In some desert places, wind blows away all the loose sand, leaving only coarse pebbles and other small rocks behind. Such areas are known as desert pavement. Once desert pavement forms, almost no further wind erosion will occur." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/sand-dunes.jpg', caption: 'Sand dunes' },
+          { src: '/images/science/ch09/desert-pavement.jpg', caption: 'Desert pavement' }
+        ] }
       ],
       [
-        { type: 'sidebar', text: "Do you know? Sand dunes are moved by the wind — some dunes travel as much as 30 m in a single year, which can create problems for people, since moving dunes have buried farms, towns, and forests. On the southern shore of Lake Michigan, strong winds blowing from the west have caused a series of large sand dunes to move inland. The dunes are slowly burying trees in an Indiana forest known as Indiana Dunes." }
+        { type: 'sidebar', text: "Do you know? Sand dunes are moved by the wind — some dunes travel as much as 30 m in a single year, which can create problems for people, since moving dunes have buried farms, towns, and forests. On the southern shore of Lake Michigan, strong winds blowing from the west have caused a series of large sand dunes to move inland. The dunes are slowly burying trees in an Indiana forest known as Indiana Dunes." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/indiana-dunes.jpg', caption: 'Indiana Dunes, Indiana' }
+        ] }
       ],
       [
         { type: 'p', text: "Sometimes wind erosion can affect a large region. During the 1930s there were several years of drought — a long period without rain — in the Great Plains of the United States. Many kinds of plants died, and the land became bare. Strong winds eroded the loose, dry topsoil, and the land affected by this drought and erosion became known as the Dust Bowl, named for the many dust storms that occurred — some so bad that they blocked out all sunlight during the day." },
-        { type: 'p', text: "There are ways for farmers to help prevent wind erosion. One way is to plant rows of trees or bushes, which act like fences or walls that block the force of the wind — something that does this is called a windbreak. Where fields are not being used, farmers can also plant ground cover: plants that hold soil in place and prevent erosion." }
+        { type: 'p', text: "There are ways for farmers to help prevent wind erosion. One way is to plant rows of trees or bushes, which act like fences or walls that block the force of the wind — something that does this is called a windbreak. Where fields are not being used, farmers can also plant ground cover: plants that hold soil in place and prevent erosion." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/dust-storm-1930s.jpg', caption: 'A dust storm during the 1930s' },
+          { src: '/images/science/ch09/windbreak.jpg', caption: 'A windbreak' }
+        ] }
       ],
       [
         { type: 'summary', text: "Weathering is all the processes that break rock into smaller pieces." },
@@ -1644,75 +1902,149 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Chapter 10 · Cleaning Up the Earth' },
         { type: 'p', text: "Imagine that you are living 100 years ago. The air today is not as clean as it was then. This is an industrial age — thousands of factories have been built during the past 100 years, and in many areas, highways have become crowded with cars and trucks." },
-        { type: 'p', text: "Each year huge amounts of wastes pour into the air, water, and soil. In this chapter you will learn about the sources of these wastes, how they affect the air, water, and land, and what is being done to control them." }
+        { type: 'p', text: "Each year huge amounts of wastes pour into the air, water, and soil. In this chapter you will learn about the sources of these wastes, how they affect the air, water, and land, and what is being done to control them." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/traffic-jam-street.jpg', caption: 'City street crowded with traffic' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Natural Resources' },
         { type: 'p', text: "Why is there a shortage of some resources? Look around at the things you use. You use paper, pencils, and books. You walk on the land, drink the water, and breathe the air. All these things are natural resources or come from natural resources. A natural resource is a useful material found in or on the earth. The paper, pencils, and books you use come from trees, and so are all other plants. Air, water, and land are also valuable natural resources." },
-        { type: 'p', text: "Some resources can be replaced after they are used. For example, as trees are cut down for wood, new trees can be planted. A tree is a renewable resource — a resource that can be replaced after it is used. Air, water, and land are also renewable resources." }
+        { type: 'p', text: "Some resources can be replaced after they are used. For example, as trees are cut down for wood, new trees can be planted. A tree is a renewable resource — a resource that can be replaced after it is used. Air, water, and land are also renewable resources." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/uses-of-trees-diagram.jpg', caption: 'Uses of trees' }
+        ] }
       ],
       [
-        { type: 'p', text: "Since some resources can be renewed, there should be no shortages — there should be a large enough supply for everyone. But the supply has become smaller because of pollution. Pollution is the presence of waste or other unwanted materials in a resource. The substances that cause pollution are called pollutants. Pollution of air, water, and land has reduced the useful supply of these resources." }
+        { type: 'p', text: "Since some resources can be renewed, there should be no shortages — there should be a large enough supply for everyone. But the supply has become smaller because of pollution. Pollution is the presence of waste or other unwanted materials in a resource. The substances that cause pollution are called pollutants. Pollution of air, water, and land has reduced the useful supply of these resources." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/littered-forest.jpg', caption: 'Littered forest' },
+          { src: '/images/science/ch10/planting-tree-seedlings.jpg', caption: 'Planting tree seedlings' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Air Pollution' },
         { type: 'p', text: "What causes air pollution? Pure air is made up mostly of nitrogen (78%) and oxygen (21%), along with small amounts of argon, carbon dioxide, and other gases. The air you breathe often contains unwanted substances — when these are added to pure air, air pollution results. Most pollutants in air come from cars, trucks, homes, factories, and power plants, and some come from burning leaves and garbage. Some pollutants occur in nature too, such as fumes and smoke from forest fires and volcanoes." },
-        { type: 'p', text: "Cars, trucks, homes, and factories burn fossil fuels — coal, oil, and gas — for energy. Over the past 100 years, the use of fossil fuels has increased greatly. Millions of cars and trucks are now on the roads, and there are many more factories, so more fossil fuels are burned and more waste products are given off into the air. Carbon dioxide and carbon monoxide are examples of waste products given off by burning fuels. Smoke also carries soot, ash, and dust into the air — these light particles may float for a long time, and winds can carry them far from the source of pollution." }
+        { type: 'p', text: "Cars, trucks, homes, and factories burn fossil fuels — coal, oil, and gas — for energy. Over the past 100 years, the use of fossil fuels has increased greatly. Millions of cars and trucks are now on the roads, and there are many more factories, so more fossil fuels are burned and more waste products are given off into the air. Carbon dioxide and carbon monoxide are examples of waste products given off by burning fuels. Smoke also carries soot, ash, and dust into the air — these light particles may float for a long time, and winds can carry them far from the source of pollution." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/parts-of-air-chart.jpg', caption: 'The parts of air' },
+          { src: '/images/science/ch10/traffic-on-bridge.jpg', caption: 'Traffic on bridge' },
+          { src: '/images/science/ch10/coal-burning-power-plant.jpg', caption: 'Coal-burning power plant' }
+        ] }
       ],
       [
         { type: 'p', text: "In parts of the United States and Canada, there is much concern over acid rain. Its major cause is the burning of fossil fuels, though volcanoes and forest fires add to it too. When fuels burn and volcanoes erupt, chemical wastes enter the air. Water vapor in the air combines with these chemicals to form weak acids, which fall to the ground as snow or rain — this is called acid rain." },
-        { type: 'p', text: "Acid rain falls on the land and into lakes and streams. When it reaches them, it increases the amount of acid in the water, which can kill fish and other living things. Acid rain also breaks down minerals in the soil, robbing plants of important materials for growth, so some plants cannot live where there is acid rain. Acid rain even damages buildings, water systems, and statues. Scientists know the causes of acid rain, and must find a way to stop it from forming." }
+        { type: 'p', text: "Acid rain falls on the land and into lakes and streams. When it reaches them, it increases the amount of acid in the water, which can kill fish and other living things. Acid rain also breaks down minerals in the soil, robbing plants of important materials for growth, so some plants cannot live where there is acid rain. Acid rain even damages buildings, water systems, and statues. Scientists know the causes of acid rain, and must find a way to stop it from forming." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/statue-acid-rain-damage.jpg', caption: 'Statue damaged by acid rain' }
+        ] }
       ],
       [
         { type: 'p', text: "Another kind of pollution, called smog, occurs in towns and cities with many factories, cars, and trucks. Most smog is a mixture of smoke and fog. It occurs when calm, moist air near the ground is trapped and does not move away — the longer the air stays in one place, the worse the pollution becomes. Smog can be harmful, and can even cause death. In certain cities, smog is not as common as it once was, because those cities have worked to control air pollution." },
-        { type: 'p', text: "Today, people are aware that air pollution is a big problem, and there are many ways to control it. Since cars and trucks cause much of the pollution, people can walk, ride bicycles, or take trains and buses, or join car pools — this means fewer cars and trucks on the roads." }
+        { type: 'p', text: "Today, people are aware that air pollution is a big problem, and there are many ways to control it. Since cars and trucks cause much of the pollution, people can walk, ride bicycles, or take trains and buses, or join car pools — this means fewer cars and trucks on the roads." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/nyc-in-smog.jpg', caption: 'New York City in smog' },
+          { src: '/images/science/ch10/nyc-clear-day.jpg', caption: 'New York City on a clear day' },
+          { src: '/images/science/ch10/using-trains-and-buses.jpg', caption: 'Using trains and buses' }
+        ] }
       ],
       [
         { type: 'p', text: "Today, new cars must have devices that trap or burn up harmful gases in exhaust, and most new cars are built to burn only unleaded gasoline, since burning leaded gasoline releases harmful substances. Factories are required to use special devices in their smokestacks — these use an electrical charge to attract particles from smoke, and also remove harmful waste gases." },
-        { type: 'p', text: "An important law, the Clean Air Act, was passed in 1970. It limits the amount of pollution allowed in the air — when levels get too high, factories are ordered to stop burning certain fuels, and can resume once pollution is reduced to a safe level." }
+        { type: 'p', text: "An important law, the Clean Air Act, was passed in 1970. It limits the amount of pollution allowed in the air — when levels get too high, factories are ordered to stop burning certain fuels, and can resume once pollution is reduced to a safe level." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/checking-car-exhaust.jpg', caption: 'Checking car exhaust' },
+          { src: '/images/science/ch10/checking-air-pollutants.jpg', caption: 'Checking air pollutants in air' }
+        ] }
       ],
       [
-        { type: 'activity', text: "Are there solid particles in the air you breathe? Materials: large empty coffee can, 1 m of wire, scissors, white paper, glue, petroleum jelly, hand lens. Procedure: A. Wrap wire once around the can and twist it into a handle. B. Cut a round piece of white paper a little smaller than the bottom of the can and glue it inside. C. Spread petroleum jelly over the paper — why do you think this is needed? D. Hang the can outdoors in an open area, such as on a clothesline or fence. E. After 1 or 2 weeks, bring the can indoors, remove the paper, and examine it with a hand lens — did you find anything on the jelly-covered paper? Compare your findings with classmates'. Conclusion: Are there solid particles in the air you breathe? If so, where might they come from? Using science ideas: Describe an activity that would show the difference between pollution in the city and pollution in the country." }
+        { type: 'activity', text: "Are there solid particles in the air you breathe? Materials: large empty coffee can, 1 m of wire, scissors, white paper, glue, petroleum jelly, hand lens. Procedure: A. Wrap wire once around the can and twist it into a handle. B. Cut a round piece of white paper a little smaller than the bottom of the can and glue it inside. C. Spread petroleum jelly over the paper — why do you think this is needed? D. Hang the can outdoors in an open area, such as on a clothesline or fence. E. After 1 or 2 weeks, bring the can indoors, remove the paper, and examine it with a hand lens — did you find anything on the jelly-covered paper? Compare your findings with classmates'. Conclusion: Are there solid particles in the air you breathe? If so, where might they come from? Using science ideas: Describe an activity that would show the difference between pollution in the city and pollution in the country." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/activity-can-wire-handle.jpg', caption: 'Making the coffee-can air trap' },
+          { src: '/images/science/ch10/activity-cutting-paper-circle.jpg', caption: 'Cutting the paper circle' },
+          { src: '/images/science/ch10/activity-examining-filter-paper.jpg', caption: 'Examining the paper for particles' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Water Pollution' },
         { type: 'p', text: "What causes water pollution? Most of the water on the earth is in the oceans, but because of the salt in it, this water cannot be used for drinking, industry, or farming. People must depend on fresh water for their needs, which mostly comes from under the ground or from lakes, rivers, and streams — so it is important to take care of the limited supply of water." },
-        { type: 'p', text: "Some studies show that each person in the United States uses nearly 400 L of water a day, and industries may use billions of liters more. Large amounts are also needed to water farmland. If the freshwater supply is polluted, there is less water left for people, farms, industries, fishing, and swimming." }
+        { type: 'p', text: "Some studies show that each person in the United States uses nearly 400 L of water a day, and industries may use billions of liters more. Large amounts are also needed to water farmland. If the freshwater supply is polluted, there is less water left for people, farms, industries, fishing, and swimming." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/watering-crops.jpg', caption: 'Watering crops' },
+          { src: '/images/science/ch10/boy-drinking-fountain.jpg', caption: 'Drinking clean water' },
+          { src: '/images/science/ch10/polluted-water-warning-sign.jpg', caption: 'Warning sign: polluted water' }
+        ] }
       ],
       [
-        { type: 'p', text: "Water can be polluted when sewage is dumped into it. Sewage contains waste from sinks, toilets, and showers, and can cause disease in people who drink polluted water. Most cities have sewage-treatment plants that remove most pollutants: first, sewage passes through screens that filter out large objects; then it passes to a settling tank, where light materials float to the top to be skimmed off and heavier materials sink and are removed; the water is then pumped through a filter and a second settling tank, and finally treated with the chemical chlorine, which kills certain harmful living things, before being returned to lakes, streams, and rivers." }
+        { type: 'p', text: "Water can be polluted when sewage is dumped into it. Sewage contains waste from sinks, toilets, and showers, and can cause disease in people who drink polluted water. Most cities have sewage-treatment plants that remove most pollutants: first, sewage passes through screens that filter out large objects; then it passes to a settling tank, where light materials float to the top to be skimmed off and heavier materials sink and are removed; the water is then pumped through a filter and a second settling tank, and finally treated with the chemical chlorine, which kills certain harmful living things, before being returned to lakes, streams, and rivers." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/sewage-treatment-diagram.jpg', caption: 'How a sewage-treatment plant works' },
+          { src: '/images/science/ch10/sewage-treatment-plant.jpg', caption: 'Sewage treatment plant' }
+        ] }
       ],
       [
         { type: 'p', text: "Water can also be polluted by fertilizers and chemical sprays. Many farmers use chemical fertilizers — substances that help plants grow — and chemical sprays to kill insects and weeds that damage crops. Chemicals from fertilizers and sprays soak into the soil when it rains, and in time water carrying these chemicals drains into streams and rivers, and eventually into lakes and oceans." },
         { type: 'p', text: "Fertilizers entering the water increase the growth of small plants called algae. When the algae die, they pile up on the bottoms of ponds and lakes, and as they decay they use up oxygen from the water. As the oxygen supply decreases, fish and other animals that get oxygen from the water may die." },
-        { type: 'p', text: "Chemicals from insect and weed sprays can poison fish and other living things in the water, and can even affect living things near the water through a food chain — a small fish may take in poison from eating small plants, a larger fish eats the small fish, and a bird eats the larger fish, so poisons build up in the bird until it eventually dies from the poison." }
+        { type: 'p', text: "Chemicals from insect and weed sprays can poison fish and other living things in the water, and can even affect living things near the water through a food chain — a small fish may take in poison from eating small plants, a larger fish eats the small fish, and a bird eats the larger fish, so poisons build up in the bird until it eventually dies from the poison." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/fertilizer-runoff-diagram.jpg', caption: 'Effect of fertilizer runoff' },
+          { src: '/images/science/ch10/algae-covering-water.jpg', caption: 'Algae covering water' },
+          { src: '/images/science/ch10/poison-in-food-chain-diagram.jpg', caption: 'Poison in the food chain' }
+        ] }
       ],
       [
         { type: 'p', text: "Pollution from fertilizers and insect sprays can be reduced by using less of these chemicals. Sometimes farmers plant shrubs and grasses near water to help prevent soil erosion, so that soil carrying chemicals will not enter the water." },
-        { type: 'p', text: "Industries can also pollute water — when making products, they may dump liquid or solid wastes into rivers and lakes, poisoning the water and making it unsafe for drinking and swimming. Many industries have built their own waste-treatment plants to remove harmful substances before water enters rivers, lakes, or streams." }
+        { type: 'p', text: "Industries can also pollute water — when making products, they may dump liquid or solid wastes into rivers and lakes, poisoning the water and making it unsafe for drinking and swimming. Many industries have built their own waste-treatment plants to remove harmful substances before water enters rivers, lakes, or streams." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/taking-water-samples.jpg', caption: 'Taking water samples' }
+        ] }
       ],
       [
         { type: 'p', text: "Some industries also release hot water into streams and lakes. The dumping of heated material into water is called thermal pollution. Hot water cannot hold as much oxygen as cold water, so with lower amounts of oxygen, certain plants and animals cannot live there." },
-        { type: 'p', text: "There are ways for industries and power plants to stop thermal pollution. Instead of releasing heated water into lakes and rivers, the heat can be released into the air — some nuclear power plants have large cooling towers, where hot water from the plant is pumped through coiled pipes while cool air is blown over them. The now-heated air is released through the top of the tower, and the cooled water is returned to the power plant for reuse." }
+        { type: 'p', text: "There are ways for industries and power plants to stop thermal pollution. Instead of releasing heated water into lakes and rivers, the heat can be released into the air — some nuclear power plants have large cooling towers, where hot water from the plant is pumped through coiled pipes while cool air is blown over them. The now-heated air is released through the top of the tower, and the cooled water is returned to the power plant for reuse." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/cooling-tower-diagram.jpg', caption: 'How a cooling tower works' },
+          { src: '/images/science/ch10/cooling-tower-photo.jpg', caption: 'Cooling tower' }
+        ] }
       ],
       [
         { type: 'p', text: "In recent years a new problem has developed: oil spills. Huge ships carry oil across the oceans, and sometimes their tanks leak oil into the ocean. Another source of oil spills is offshore drilling. Long stretches of beach have been damaged because of oil spills from offshore wells, and fish and other wildlife have been killed by them." },
-        { type: 'sidebar', text: "Do you know? Several years ago, a disaster occurred off the coast of England: the merchant ship Torrey Canyon, carrying thousands of metric tons of crude oil, crashed into rocks and began spilling oil. Ships sent to help dumped hundreds of metric tons of detergent into the water to try to break up the spreading oil slick, but it did not break up. Workers tried to burn the floating oil, but the fire spread far across the water and the oil kept spreading. Soon it reached the nearby French coast, where chicken wire and straw were laid over oyster beds to try to keep the oil out — still, it kept spreading. Several weeks passed before the oil could be controlled. By then, 192 km of British beaches had been ruined, and thousands of oysters, mussels, birds, fish, and plants had died." }
+        { type: 'sidebar', text: "Do you know? Several years ago, a disaster occurred off the coast of England: the merchant ship Torrey Canyon, carrying thousands of metric tons of crude oil, crashed into rocks and began spilling oil. Ships sent to help dumped hundreds of metric tons of detergent into the water to try to break up the spreading oil slick, but it did not break up. Workers tried to burn the floating oil, but the fire spread far across the water and the oil kept spreading. Soon it reached the nearby French coast, where chicken wire and straw were laid over oyster beds to try to keep the oil out — still, it kept spreading. Several weeks passed before the oil could be controlled. By then, 192 km of British beaches had been ruined, and thousands of oysters, mussels, birds, fish, and plants had died." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/bird-rescued-oil-spill.jpg', caption: 'Bird rescued from oil spill' },
+          { src: '/images/science/ch10/oil-spill-cleanup.jpg', caption: 'Cleanup after oil spill' },
+          { src: '/images/science/ch10/torrey-canyon-oil-spill.jpg', caption: 'The wrecked tanker Torrey Canyon' }
+        ] }
       ],
       [
-        { type: 'activity', text: "Does dilution help to reduce water pollution? Materials: graduate, 2-L plastic soft-drink bottle, clear plastic pill bottle, red or blue food coloring, white paper, water, 500-mL beaker. Procedure: A. Measure 10 mL of water into the pill bottle. B. Add 1 drop of food coloring, swirl to mix, and observe the color against white paper. C. Pour 1,000 mL of water into the soft-drink bottle. D. Add 1 drop of food coloring, swirl to mix, and observe the color against white paper — is it deeper than in the pill bottle? E. Imagine the food coloring is a harmful pollutant, the pill bottle a small pond, and the soft-drink bottle a lake — will the pollutant do more harm in the pond or the lake? Conclusion: What is the difference between the effect of the food coloring in each bottle? Compare the effect of the same amount of pollution on a small versus a large body of water." }
+        { type: 'activity', text: "Does dilution help to reduce water pollution? Materials: graduate, 2-L plastic soft-drink bottle, clear plastic pill bottle, red or blue food coloring, white paper, water, 500-mL beaker. Procedure: A. Measure 10 mL of water into the pill bottle. B. Add 1 drop of food coloring, swirl to mix, and observe the color against white paper. C. Pour 1,000 mL of water into the soft-drink bottle. D. Add 1 drop of food coloring, swirl to mix, and observe the color against white paper — is it deeper than in the pill bottle? E. Imagine the food coloring is a harmful pollutant, the pill bottle a small pond, and the soft-drink bottle a lake — will the pollutant do more harm in the pond or the lake? Conclusion: What is the difference between the effect of the food coloring in each bottle? Compare the effect of the same amount of pollution on a small versus a large body of water." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/activity-measuring-water.jpg', caption: 'Measuring water with a graduate' },
+          { src: '/images/science/ch10/activity-adding-food-coloring.jpg', caption: 'Adding food coloring to the pill bottle' },
+          { src: '/images/science/ch10/activity-pouring-into-bottle.jpg', caption: 'Pouring water into the soft-drink bottle' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Land Pollution' },
         { type: 'p', text: "What causes land pollution? There are several things that threaten the soil. One of the most serious is soil erosion — if it is not controlled, valuable land can be lost forever." },
-        { type: 'p', text: "Soil can be polluted by toxic wastes — wastes that are poisonous. These wastes may be produced by certain industries and buried in the soil. Even toxic wastes stored in drums can reach the soil if the drums leak, and the chemicals can stay in the soil a long time, harming or killing living things and even seeping into water supplies. Governments and industries are working to clean up chemical dump sites, and new ways to store and get rid of chemical wastes are being studied." }
+        { type: 'p', text: "Soil can be polluted by toxic wastes — wastes that are poisonous. These wastes may be produced by certain industries and buried in the soil. Even toxic wastes stored in drums can reach the soil if the drums leak, and the chemicals can stay in the soil a long time, harming or killing living things and even seeping into water supplies. Governments and industries are working to clean up chemical dump sites, and new ways to store and get rid of chemical wastes are being studied." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/plants-prevent-erosion.jpg', caption: 'Plants that prevent erosion' },
+          { src: '/images/science/ch10/drums-of-toxic-wastes.jpg', caption: 'Drums of toxic wastes' },
+          { src: '/images/science/ch10/checking-leaking-drums.jpg', caption: 'Checking leaking drums' }
+        ] }
       ],
       [
         { type: 'p', text: "One of the ugliest kinds of pollution is litter — on city streets, country roads, and in fields and forests. Some forms of litter are more of a problem than others. Paper, cloth, cardboard, and wood are biodegradable materials, meaning they decay, or are broken down by living things. Small organisms in the soil break down biodegradable materials as they use them for food, and these materials become part of the soil." },
-        { type: 'p', text: "But not all materials are biodegradable. Plastic and aluminum are not broken down by living things — these are called nonbiodegradable materials, and they litter the land long after they have been thrown away." }
+        { type: 'p', text: "But not all materials are biodegradable. Plastic and aluminum are not broken down by living things — these are called nonbiodegradable materials, and they litter the land long after they have been thrown away." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/no-litter-fine-sign.jpg', caption: 'No Litter — $200 Fine sign' }
+        ] }
       ],
       [
-        { type: 'activity', text: "Which materials are biodegradable? Collect several items you might throw out — for example, a cardboard cereal box, an aluminum can, and table scraps. You will also need a shallow pan and enough soil to fill it. Place a thin layer of soil in the pan, place the items over it with space between each one, then cover with more soil and moisten it with water. Place the pan outdoors for a week, then bring it inside and dig out the items. Have any changed? Have any stayed the same?" }
+        { type: 'activity', text: "Which materials are biodegradable? Collect several items you might throw out — for example, a cardboard cereal box, an aluminum can, and table scraps. You will also need a shallow pan and enough soil to fill it. Place a thin layer of soil in the pan, place the items over it with space between each one, then cover with more soil and moisten it with water. Place the pan outdoors for a week, then bring it inside and dig out the items. Have any changed? Have any stayed the same?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/sorting-biodegradable-items.jpg', caption: 'Testing which materials are biodegradable' }
+        ] }
       ],
       [
         { type: 'p', text: "Laws have been passed in many areas to help stop litter. Most states fine people who are caught littering, and some states have even stopped the sale of throw-away bottles." },
@@ -1778,90 +2110,163 @@ export const scienceChapterText = {
         { type: 'heading', text: 'Chapter 11 · Changes in the Weather' },
         { type: 'p', text: "People often talk about the condition of the atmosphere in a place. You may talk about it every day. This popular topic is the weather. What is the weather like where you live today?" },
         { type: 'p', text: "When people talk about weather, they usually discuss the changing conditions of the atmosphere. The atmosphere is the layer of air that surrounds the earth. In just a few hours the weather in a place may be very different, because conditions in the atmosphere can change rapidly." },
-        { type: 'p', text: "In this chapter you will learn what causes weather and why weather changes. You will also learn about some unusual kinds of weather." }
+        { type: 'p', text: "In this chapter you will learn what causes weather and why weather changes. You will also learn about some unusual kinds of weather." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/sky-tree-title.jpg', caption: 'The sky at dusk' }
+        ] }
       ],
       [
         { type: 'heading', text: 'How Weather Begins' },
         { type: 'p', text: "What causes uneven heating of the atmosphere? How does weather begin? It begins with energy from the sun. You have learned that energy from the sun is called solar energy. It is this energy that causes weather." },
         { type: 'p', text: "What happens to the sun's energy as it enters the atmosphere? Some of it is reflected, or bounced back, into space by clouds, dust, and air particles. A small amount is absorbed, or {{taken in}}, by the atmosphere. Absorbed solar energy changes to heat energy. So only a small amount of the atmosphere is heated directly by the sun." },
-        { type: 'p', text: "About half of the sun's energy that enters the atmosphere passes through the air and strikes the earth's surface. Some of this energy is absorbed and changed to heat. This warms the earth's surface. Heat from the earth's surface then warms the air above it. You can see that the atmosphere gets most of its energy secondhand." }
+        { type: 'p', text: "About half of the sun's energy that enters the atmosphere passes through the air and strikes the earth's surface. Some of this energy is absorbed and changed to heat. This warms the earth's surface. Heat from the earth's surface then warms the air above it. You can see that the atmosphere gets most of its energy secondhand." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/hazy-sunset.jpg', caption: 'A hazy sunset' },
+          { src: '/images/science/ch11/solar-energy-diagram.jpg', caption: 'What happens to solar energy that reaches the atmosphere' }
+        ] }
       ],
       [
         { type: 'p', text: "Weather is caused by the uneven heating of the atmosphere. The air is heated unevenly because the earth's surface is heated unevenly. Why does this happen? There are several reasons. One reason is the round shape of the earth. It causes different parts of the earth to receive different amounts of solar energy." },
-        { type: 'p', text: "The rays of the sun strike the equator directly. When the sun's rays strike the earth directly, the earth's surface is heated the most. Look at the areas north and south of the equator. In these places the sun's rays strike the earth's surface at a slant. When the rays strike the surface at a slant, the surface is heated less. You can see why the earth is heated more at the equator than at the poles." }
+        { type: 'p', text: "The rays of the sun strike the equator directly. When the sun's rays strike the earth directly, the earth's surface is heated the most. Look at the areas north and south of the equator. In these places the sun's rays strike the earth's surface at a slant. When the rays strike the surface at a slant, the surface is heated less. You can see why the earth is heated more at the equator than at the poles." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/sun-rays-equator-diagram.jpg', caption: 'The sun\'s rays strike the equator directly and the areas near the poles at a slant' }
+        ] }
       ],
       [
         { type: 'p', text: "Another reason that the earth's surface is heated unevenly can be seen in pictures taken from a plane. Such pictures show places covered by white snow and dark soil. They show green fields and forests, blue water, and red deserts. These different-colored surfaces absorb different amounts of energy from the sun, and the amount of solar energy that they reflect is also different." },
         { type: 'p', text: "Light-colored surfaces reflect much of the sun's energy that strikes them. Dark-colored surfaces absorb much of the sun's energy that strikes them. Which gets warmer, a light-colored surface or a dark-colored surface? What color clothing is best to wear on a hot summer day? Why?" },
-        { type: 'p', text: "The more solar energy a surface absorbs, the more the surface warms the air above it. Do you think that snow reflects, or absorbs, most of the solar energy that strikes it? Would dark soil absorb, or reflect, more solar energy?" }
+        { type: 'p', text: "The more solar energy a surface absorbs, the more the surface warms the air above it. Do you think that snow reflects, or absorbs, most of the solar energy that strikes it? Would dark soil absorb, or reflect, more solar energy?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/ocean-waves-aerial.jpg', caption: 'Ocean water reflects much of the sun\'s energy' },
+          { src: '/images/science/ch11/aerial-fields-forest.jpg', caption: 'An aerial view of fields and forest' },
+          { src: '/images/science/ch11/desert-cliffs.jpg', caption: 'Dark desert soil absorbs much of the sun\'s energy' }
+        ] }
       ],
       [
         { type: 'p', text: "There is another factor that causes the earth's surface to heat unevenly. About three-fourths of the earth is covered by water. Water and land areas absorb solar energy at different rates." },
         { type: 'p', text: "Land and water heat up at different rates. During the day, the sun shines and the land heats up faster than the water. So the air over the land becomes warmer than the air over the water. While the land heats up faster than the water, it also loses heat faster. At night, when there is no sunlight, the warm land cools quickly, so the air over the land becomes cooler. The water holds heat and stays warm at night." },
-        { type: 'p', text: "Very little heat from the earth's surface and atmosphere escapes into space. This is because clouds, dust, and air particles trap the heat. This is an example of the greenhouse effect. On a large scale, the greenhouse effect keeps the earth warm." }
+        { type: 'p', text: "Very little heat from the earth's surface and atmosphere escapes into space. This is because clouds, dust, and air particles trap the heat. This is an example of the greenhouse effect. On a large scale, the greenhouse effect keeps the earth warm." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/forest-lake.jpg', caption: 'A forest lake — land heats and cools faster than water' }
+        ] }
       ],
       [
-        { type: 'activity', text: "How do materials differ in the way they heat and cool? Materials: 6 paper cups / scissors / dark-colored soil / light-colored sand / 3 thermometers / lamp. Procedure: A. Cut the tops off three paper cups so that the remaining part is about 4 cm deep. Fill each cup with one of the following materials: dark-colored soil, light-colored sand, and water. B. Place the cups together. Put a thermometer into each cup, with the bulb covered by about 0.5 cm of sand, soil, or water. C. Copy a chart and record the starting temperature in each cup. 1. Do you think the materials will heat at different rates? Explain your answer. D. Place a lamp so its bulb is about 15 cm from the tops of the cups. Turn on the lamp. After 5 minutes, read and record the temperature in each cup. 2. Which material was heated the most? Which was heated the least? 3. If you turn off the lamp, do you think the materials will cool at different rates? Explain your answer. E. Turn off the lamp. After 5 minutes, read and record the temperature in each cup again. 4. Which material cooled the least? The most? Conclusion: How does this activity help explain the uneven heating of the earth?" }
+        { type: 'activity', text: "How do materials differ in the way they heat and cool? Materials: 6 paper cups / scissors / dark-colored soil / light-colored sand / 3 thermometers / lamp. Procedure: A. Cut the tops off three paper cups so that the remaining part is about 4 cm deep. Fill each cup with one of the following materials: dark-colored soil, light-colored sand, and water. B. Place the cups together. Put a thermometer into each cup, with the bulb covered by about 0.5 cm of sand, soil, or water. C. Copy a chart and record the starting temperature in each cup. 1. Do you think the materials will heat at different rates? Explain your answer. D. Place a lamp so its bulb is about 15 cm from the tops of the cups. Turn on the lamp. After 5 minutes, read and record the temperature in each cup. 2. Which material was heated the most? Which was heated the least? 3. If you turn off the lamp, do you think the materials will cool at different rates? Explain your answer. E. Turn off the lamp. After 5 minutes, read and record the temperature in each cup again. 4. Which material cooled the least? The most? Conclusion: How does this activity help explain the uneven heating of the earth?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/activity-mixing-cups.jpg', caption: 'Filling cups with soil, sand, and water for the heating and cooling activity' },
+          { src: '/images/science/ch11/activity-lamp-cups.jpg', caption: 'Testing how the materials heat under a lamp' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Air Pressure and Winds' },
         { type: 'p', text: "What causes winds? Air is {{made up of}} particles of matter. Like all matter, air has mass. The mass of the atmosphere above the earth pushes down on the surface. This causes air pressure. The pressure of air changes from day to day and from place to place. The temperature of the air affects the pressure of the air." },
-        { type: 'p', text: "When air is heated, it expands. This means that the particles in air move farther apart. When this happens, the air becomes less dense, so there are fewer air particles over a certain part of the earth's surface. This lowers the air pressure in that place. Usually, when temperature increases, air pressure decreases." }
+        { type: 'p', text: "When air is heated, it expands. This means that the particles in air move farther apart. When this happens, the air becomes less dense, so there are fewer air particles over a certain part of the earth's surface. This lowers the air pressure in that place. Usually, when temperature increases, air pressure decreases." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/air-pressure-before-after-heating.jpg', caption: 'Air before heating (higher pressure) and after heating (lower pressure)' },
+          { src: '/images/science/ch11/warm-cold-air-balance.jpg', caption: 'Equal volumes of warm air and cold air' }
+        ] }
       ],
       [
         { type: 'p', text: "The amount of water in the air also affects the air pressure. The more water vapor there is in air, the lower the air pressure. This may seem strange, but keep in mind that water vapor is a gas, and water vapor is less dense than air. So 1 L of water vapor has less mass than 1 L of air. Usually, the more water vapor in air, the lower the air pressure." },
-        { type: 'p', text: "Differences in air pressure cause air to move. This movement of air is wind. Winds may be gentle breezes, or they may be strong gusts. The greater the difference in air pressure from one place to another, the greater the strength of the wind. Air always moves from regions of high pressure, called highs, to regions of low pressure, called lows." }
+        { type: 'p', text: "Differences in air pressure cause air to move. This movement of air is wind. Winds may be gentle breezes, or they may be strong gusts. The greater the difference in air pressure from one place to another, the greater the strength of the wind. Air always moves from regions of high pressure, called highs, to regions of low pressure, called lows." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/water-vapor-air-balance.jpg', caption: 'Water vapor is less dense than air' }
+        ] }
       ],
       [
         { type: 'p', text: "There are different groups of winds. Some winds are local winds. Local winds are caused by local differences in pressure. For example, there are differences in air pressure over land and water. These differences cause winds to change direction along coastal regions." },
-        { type: 'p', text: "During the day the air over the land is heated more than the air over the water, so the pressure of the air over the land is lower. The cooler, high-pressure air over the water blows toward the land. It moves under the warm, low-pressure air and pushes it up. This movement of air from water to land is called a sea breeze. On a summer day at the beach, you can often feel cool breezes blowing from the sea to the land." }
+        { type: 'p', text: "During the day the air over the land is heated more than the air over the water, so the pressure of the air over the land is lower. The cooler, high-pressure air over the water blows toward the land. It moves under the warm, low-pressure air and pushes it up. This movement of air from water to land is called a sea breeze. On a summer day at the beach, you can often feel cool breezes blowing from the sea to the land." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/sea-breeze-diagram.jpg', caption: 'A sea breeze: cool, high-pressure air moves from water to land' }
+        ] }
       ],
       [
         { type: 'p', text: "At night the air over the land becomes cooler than the air over the water, so the pressure of the air over the land is higher. This air blows toward the water. It pushes up the warm, low-pressure air over the water. This movement of air from land to water is called a land breeze." },
         { type: 'p', text: "Sea and land breezes are local winds, but the earth also has large regions of high and low pressure. Air moves from the high-pressure regions to the low-pressure regions. This movement of air, along with the rotation of the earth, creates wind belts that circle the earth, called global winds." },
-        { type: 'p', text: "The global winds in each belt blow steadily in one direction. The winds are named for the direction from which they come. Most of the United States lies within a global wind belt called the westerlies, which is why much of the weather in the United States moves from west to east across the country." }
+        { type: 'p', text: "The global winds in each belt blow steadily in one direction. The winds are named for the direction from which they come. Most of the United States lies within a global wind belt called the westerlies, which is why much of the weather in the United States moves from west to east across the country." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/land-breeze-diagram.jpg', caption: 'A land breeze: cool, high-pressure air moves from land to water' },
+          { src: '/images/science/ch11/global-wind-belts.jpg', caption: 'Global wind belts circling the earth' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Air Masses and Weather' },
         { type: 'p', text: "Have you ever noticed how hot and humid it can be on a summer day, and then, the very next day, the air is cool and dry? This type of change in the weather is caused by the movement of air masses. An air mass is a large body of air that has about the same temperature and moisture throughout. When air stays over a region of the earth for a long time, the air {{takes on}} the properties of that region." },
-        { type: 'p', text: "There are four basic kinds of air masses. Air masses are named for their temperature and for the amount of moisture they contain. The kind of air mass that forms depends on where it forms. Cold, wet air masses form over cold ocean waters. Cold, dry air masses form over cold land areas near the poles, regions usually covered by snow and ice. Warm, wet air masses form over oceans near the equator. Warm, dry air masses form over warm land areas." }
+        { type: 'p', text: "There are four basic kinds of air masses. Air masses are named for their temperature and for the amount of moisture they contain. The kind of air mass that forms depends on where it forms. Cold, wet air masses form over cold ocean waters. Cold, dry air masses form over cold land areas near the poles, regions usually covered by snow and ice. Warm, wet air masses form over oceans near the equator. Warm, dry air masses form over warm land areas." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/iceberg-polar-bear.jpg', caption: 'A cold, wet air mass forms over icy polar waters' },
+          { src: '/images/science/ch11/glacier-aerial.jpg', caption: 'A cold, dry air mass forms over snow and ice near the poles' }
+        ] }
       ],
       [
         { type: 'p', text: "Six major areas of North America produce the air masses that affect the continent's weather. During winter a cold, dry air mass will bring clear but very cold weather. In summer a warm, wet air mass will mean hot, humid weather. How long any kind of weather remains in an area depends on how fast an air mass is moving." },
         { type: 'heading', text: 'When Air Masses Meet' },
-        { type: 'p', text: "How do cold fronts and warm fronts differ? You have learned that air masses move. As one air mass moves away from a region, another air mass moves in. The place where two air masses meet is called a front. Changes in weather take place at a front." }
+        { type: 'p', text: "How do cold fronts and warm fronts differ? You have learned that air masses move. As one air mass moves away from a region, another air mass moves in. The place where two air masses meet is called a front. Changes in weather take place at a front." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/desert-cactus.jpg', caption: 'A warm, dry air mass forms over desert land' },
+          { src: '/images/science/ch11/tropical-island.jpg', caption: 'A warm, wet air mass forms over oceans near the equator' },
+          { src: '/images/science/ch11/major-air-masses-map.jpg', caption: 'Major air masses of North America' }
+        ] }
       ],
       [
         { type: 'p', text: "Fronts are named for the kind of air mass moving into a region. When a cold air mass moves into a warmer air mass, the place where these air masses meet is a cold front." },
-        { type: 'p', text: "As the dense, cold air mass moves forward, it remains close to the ground and moves under the less dense, warm air mass. This forces the warm air to rise quite rapidly. As the warm air is forced up, it cools. Water vapor in the air condenses, changing to tiny drops of liquid water. These drops form clouds. The clouds that form along a cold front are often dark, towering clouds." }
+        { type: 'p', text: "As the dense, cold air mass moves forward, it remains close to the ground and moves under the less dense, warm air mass. This forces the warm air to rise quite rapidly. As the warm air is forced up, it cools. Water vapor in the air condenses, changing to tiny drops of liquid water. These drops form clouds. The clouds that form along a cold front are often dark, towering clouds." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/cold-front-diagram.jpg', caption: 'A cold front — cold air pushes under warm air, forcing it up rapidly' }
+        ] }
       ],
       [
         { type: 'p', text: "Brief but heavy rain may occur along cold fronts, and wind speed may increase a great deal. Thunderstorms are common along cold fronts. Sometimes very wet, warm air is pushed up by a cold front, forming a line of thunderstorms ahead of the front. Under certain conditions, tornadoes can form along with a line of thunderstorms. A tornado is the most violent kind of storm." },
-        { type: 'p', text: "Tornadoes are narrow, funnel-shaped spirals of air. Wind speeds in a tornado may be as much as 800 km/h. Tornadoes hang from the bottom of storm clouds and move in a twisting path. From time to time, they touch the ground. When they do, they can destroy buildings, uproot trees, and carry cars many meters through the air." }
+        { type: 'p', text: "Tornadoes are narrow, funnel-shaped spirals of air. Wind speeds in a tornado may be as much as 800 km/h. Tornadoes hang from the bottom of storm clouds and move in a twisting path. From time to time, they touch the ground. When they do, they can destroy buildings, uproot trees, and carry cars many meters through the air." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/thunderstorm-lightning.jpg', caption: 'A thunderstorm along a cold front' },
+          { src: '/images/science/ch11/tornado-photo.jpg', caption: 'A tornado — the most violent kind of storm' }
+        ] }
       ],
       [
         { type: 'p', text: "During winter, a blizzard may form along a cold front. Blizzards occur when there are large differences in pressure between two air masses. Blizzards are snowstorms in which temperatures are below freezing and winds are very high. After a cold front passes, the temperature in the region drops. The sky usually clears and fluffy white clouds may be seen." },
         { type: 'p', text: "A warm front is the place where a moving warm air mass meets a colder air mass. The dense, cold air mass remains close to the ground. As the less dense, warm air mass moves forward, it slowly slides up and over the cold air mass. As it slowly rises, the warm air cools. Water vapor in the warm air condenses, and high, thin, feathery clouds may form — a sign that a warm front is coming." },
-        { type: 'p', text: "A warm front passes through a region more slowly than a cold front does. As the warm front moves, thick low clouds may form ahead of it, and steady, light rain may fall for a day or more. When the warm front passes, the temperature rises and the sky slowly clears." }
+        { type: 'p', text: "A warm front passes through a region more slowly than a cold front does. As the warm front moves, thick low clouds may form ahead of it, and steady, light rain may fall for a day or more. When the warm front passes, the temperature rises and the sky slowly clears." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/blizzard-photo.jpg', caption: 'A blizzard buries a street in snow' },
+          { src: '/images/science/ch11/warm-front-diagram.jpg', caption: 'A warm front — warm air slowly rises up and over cold air' }
+        ] }
       ],
       [
         { type: 'sidebar', text: "Do you know? Sometimes changes in weather during a single day can be extreme. The greatest daily temperature change ever recorded occurred in Browning, Montana. On the afternoon of January 23, 1916, the temperature was 6.7°C. During the night it dropped to -49°C — a difference of almost 56°C! The highest temperature ever recorded was in Libya: on September 13, 1922, the temperature reached 58°C. The lowest recorded temperature was in Antarctica on July 31, 1983, at -89.2°C. Other records include 1,946 mm of rain that fell in a single 24-hour period on an island in the Indian Ocean, and the greatest recorded snowfall during a 24-hour period, 193 cm, at Silver Lake, Colorado." }
       ],
       [
-        { type: 'activity', text: "How does the weather change? Materials: thermometer / barometer. Procedure: A. Scientists observe changes in the weather to help them better understand and predict them — you can too. Make a chart with columns for the day, the temperature, the amount of clouds, the air pressure, wind direction, and the weather conditions. B. Write what day it is in your chart. C. Read a thermometer that is in a shady place outside, and record the temperature. D. Read a barometer, and note in your chart whether the air pressure is rising, falling, or steady since the last reading. E. Look at the cloud cover and indicate whether it is clear, partly cloudy, or cloudy, and note the direction the wind is coming from. F. Note the weather conditions, using terms such as rainy, clear, or hazy. G. Repeat steps B through F at the same time each day for 1 week. Conclusion: 1. On what day was the temperature the highest? The lowest? 2. How did the barometer change? 3. Based on how the weather changed during the week, what do you think the weather will be like tomorrow?" }
+        { type: 'activity', text: "How does the weather change? Materials: thermometer / barometer. Procedure: A. Scientists observe changes in the weather to help them better understand and predict them — you can too. Make a chart with columns for the day, the temperature, the amount of clouds, the air pressure, wind direction, and the weather conditions. B. Write what day it is in your chart. C. Read a thermometer that is in a shady place outside, and record the temperature. D. Read a barometer, and note in your chart whether the air pressure is rising, falling, or steady since the last reading. E. Look at the cloud cover and indicate whether it is clear, partly cloudy, or cloudy, and note the direction the wind is coming from. F. Note the weather conditions, using terms such as rainy, clear, or hazy. G. Repeat steps B through F at the same time each day for 1 week. Conclusion: 1. On what day was the temperature the highest? The lowest? 2. How did the barometer change? 3. Based on how the weather changed during the week, what do you think the weather will be like tomorrow?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/activity-reading-barometer.jpg', caption: 'Reading a barometer' },
+          { src: '/images/science/ch11/activity-weather-chart.jpg', caption: 'Recording daily weather observations in a chart' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Clouds' },
         { type: 'p', text: "How are cloud types related to weather? There are many types of clouds. You have learned that different types of clouds form along cold fronts and warm fronts. Clouds are named for their shape, and the type of cloud that forms depends on the conditions of the atmosphere — so the type of cloud you see depends on the weather." },
-        { type: 'p', text: "The large, fluffy white clouds often seen during fair weather are called cumulus clouds. Cumulus means \"heap.\" These clouds are flat on the bottom, and their rounded tops can billow high into the sky." }
+        { type: 'p', text: "The large, fluffy white clouds often seen during fair weather are called cumulus clouds. Cumulus means \"heap.\" These clouds are flat on the bottom, and their rounded tops can billow high into the sky." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/cumulus-clouds.jpg', caption: 'Cumulus clouds' }
+        ] }
       ],
       [
         { type: 'p', text: "The thin, wispy clouds that look like feathers or curls of hair are called cirrus clouds. Cirrus means \"curl.\" Cirrus clouds form high in the sky, where the air is very cold, so cirrus clouds are made up of tiny ice crystals. You often see cirrus clouds in a blue sky — they are sometimes a sign that a warm front is moving in and that the weather will soon change." },
-        { type: 'p', text: "Thick, low clouds that cover the sky are called stratus clouds. Stratus means \"layer.\" These sheetlike clouds are a sign of rainy weather. Fog is a stratus cloud near the ground." }
+        { type: 'p', text: "Thick, low clouds that cover the sky are called stratus clouds. Stratus means \"layer.\" These sheetlike clouds are a sign of rainy weather. Fog is a stratus cloud near the ground." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/cirrus-clouds.jpg', caption: 'Cirrus clouds' },
+          { src: '/images/science/ch11/stratus-clouds.jpg', caption: 'Stratus clouds' }
+        ] }
       ],
       [
         { type: 'activity', text: "Finding out: What weather forecasts can you make by looking at clouds? Make a chart with columns for date, cloud type and temperature, and forecast. For the next 7 days, observe the clouds and try to identify the types you see. Find out the temperature at the time of your observation, and record all of this in your chart. Using what you know about clouds and fronts, try to forecast the weather for the next day. Predict how the temperature and other weather conditions will change. The next day, check your forecast and see how accurate it was." },
-        { type: 'p', text: "There are many other types of clouds. Sometimes clouds have two names because they have features of two types of clouds — for example, stratocumulus clouds are layers of cumulus clouds that cover the sky. Other word parts are added to the names of clouds: nimbo or nimbus means \"rain,\" so cumulonimbus clouds are dark, towering clouds that usually bring thunderstorms. They form when rapidly rising air causes cumulus clouds to build up. Alto is a word part that means \"high.\"" }
+        { type: 'p', text: "There are many other types of clouds. Sometimes clouds have two names because they have features of two types of clouds — for example, stratocumulus clouds are layers of cumulus clouds that cover the sky. Other word parts are added to the names of clouds: nimbo or nimbus means \"rain,\" so cumulonimbus clouds are dark, towering clouds that usually bring thunderstorms. They form when rapidly rising air causes cumulus clouds to build up. Alto is a word part that means \"high.\"" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/altocumulus-clouds.jpg', caption: 'Altocumulus clouds' },
+          { src: '/images/science/ch11/stratocumulus-clouds.jpg', caption: 'Stratocumulus clouds' },
+          { src: '/images/science/ch11/cumulonimbus-clouds.jpg', caption: 'Cumulonimbus clouds' },
+          { src: '/images/science/ch11/nimbostratus-clouds.jpg', caption: 'Nimbostratus clouds' }
+        ] }
       ],
       [
         { type: 'summary', text: "The earth's surface and atmosphere are heated unevenly. Weather is caused by the uneven heating of the atmosphere." },
@@ -1921,15 +2326,25 @@ export const scienceChapterText = {
         { type: 'heading', text: 'Distances in Space' },
         { type: 'p', text: "What is a light-year? You know that the sun and nine planets make up most of the solar system. The sun is at the center of this system, and all the planets move in orbits around the sun. Now imagine how large the solar system must be." },
         { type: 'p', text: "The solar system is very large, but it is only one small part of a much larger system. The sun is just one of billions of stars that make up a large family of stars." },
-        { type: 'p', text: "Do you have any idea how far bodies in space are from the earth? The moon is about 400,000 km away; the sun is about 150,000,000 km away. Pluto, one of the farthest planets, is about 4,520,000,000 km away. Proxima Centauri, the closest star to the earth besides the sun, is about 41,000,000,000,000 km away. As the distances get larger, the numbers become more difficult to read." }
+        { type: 'p', text: "Do you have any idea how far bodies in space are from the earth? The moon is about 400,000 km away; the sun is about 150,000,000 km away. Pluto, one of the farthest planets, is about 4,520,000,000 km away. Proxima Centauri, the closest star to the earth besides the sun, is about 41,000,000,000,000 km away. As the distances get larger, the numbers become more difficult to read." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/distances-table.jpg', caption: 'Distances from the earth to the moon, sun, Pluto, and Proxima Centauri' }
+        ] }
       ],
       [
         { type: 'p', text: "You are used to traveling much shorter distances. Even if you were to travel across the United States, you would only go about 4,800 km. So the distances between bodies in space may be too large to fully understand. It may help to think about how long it would take to travel to different bodies in space." },
-        { type: 'p', text: "Imagine you are in a spacecraft moving at a speed of 40,000 km/h — the speed needed to escape gravity once the rocket engines are turned off, more than 400 times faster than a car on a highway. At this speed it would take about 10 hours to reach the moon, about 156 days to reach the sun, about 6,187 days to reach Pluto, and about 116,906 years to reach Proxima Centauri. It is even more difficult to imagine how long it would take to reach a star that is farther away. Do you think people from the earth will ever visit other stars?" }
+        { type: 'p', text: "Imagine you are in a spacecraft moving at a speed of 40,000 km/h — the speed needed to escape gravity once the rocket engines are turned off, more than 400 times faster than a car on a highway. At this speed it would take about 10 hours to reach the moon, about 156 days to reach the sun, about 6,187 days to reach Pluto, and about 116,906 years to reach Proxima Centauri. It is even more difficult to imagine how long it would take to reach a star that is farther away. Do you think people from the earth will ever visit other stars?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/travel-time-diagram.jpg', caption: 'How long it would take to reach different bodies in space' }
+        ] }
       ],
       [
         { type: 'p', text: "For centuries people have wondered about the size of the universe. The universe includes all of space and all the matter and energy in it. People have wondered how far out space goes, and where — and even if — it ends." },
-        { type: 'p', text: "The study of the universe and all the objects in it is a science called astronomy. Astronomy includes the study of stars, planets, moons, and other objects in space. It is one of the oldest sciences. Scientists who study the universe are called astronomers. The Italian astronomer Galileo was one of the first people to study the sky with a telescope, in the early 1600s." }
+        { type: 'p', text: "The study of the universe and all the objects in it is a science called astronomy. Astronomy includes the study of stars, planets, moons, and other objects in space. It is one of the oldest sciences. Scientists who study the universe are called astronomers. The Italian astronomer Galileo was one of the first people to study the sky with a telescope, in the early 1600s." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/galileo-telescope.jpg', caption: 'Galileo, one of the first astronomers to study the sky with a telescope' },
+          { src: '/images/science/ch12/sacramento-peak-observatory.jpg', caption: 'An observatory used by astronomers today' }
+        ] }
       ],
       [
         { type: 'p', text: "You have learned that distances between certain bodies in the universe are very great. How do astronomers work with such great distances? Units such as meters and kilometers are used to measure much shorter distances — a larger unit is needed to measure distances in space." },
@@ -1937,49 +2352,85 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "Astronomers decided to use 1 year as their time period. First they found the number of seconds in 1 year, then multiplied this number by 300,000 km. They found that the distance light travels in 1 year is 9.5 trillion km. The distance that light travels in 1 year is known as a light-year. Astronomers use this very large unit of distance to measure distances in space." },
-        { type: 'p', text: "Distances from the earth to other stars are usually given in light-years. Can you imagine these distances written in smaller units, such as kilometers? The star Rigel, for example, is about 650 light-years away." }
+        { type: 'p', text: "Distances from the earth to other stars are usually given in light-years. Can you imagine these distances written in smaller units, such as kilometers? The star Rigel, for example, is about 650 light-years away." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/star-distances-lightyears.jpg', caption: 'Distances to stars, measured in light-years' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Characteristics of Stars' },
         { type: 'p', text: "How are stars different from each other? You may think all stars look alike, but by looking closely you might observe that some seem brighter than others, and some appear to be slightly different in color. The great distances between stars and the earth make it hard to see all the differences. The most visible difference is brightness. The measure of the brightness of a star as seen from the earth is known as magnitude." },
-        { type: 'p', text: "The magnitude of a star depends on three things. The first is the star's distance from the earth. Suppose two stars are exactly alike except for their distance from the earth — the one that is closer will appear brighter and have a greater magnitude. You can compare this to the headlights of a car: the closer the car is, the brighter its headlights will seem." }
+        { type: 'p', text: "The magnitude of a star depends on three things. The first is the star's distance from the earth. Suppose two stars are exactly alike except for their distance from the earth — the one that is closer will appear brighter and have a greater magnitude. You can compare this to the headlights of a car: the closer the car is, the brighter its headlights will seem." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/car-headlights-magnitude.jpg', caption: 'Comparing star magnitude to the brightness of headlights' }
+        ] }
       ],
       [
         { type: 'p', text: "The second thing that affects the magnitude of a star is size. Stars differ greatly in size. Some stars are smaller than the earth. The sun, with a diameter of 1,392,000 km, is a medium-sized star. There are stars with a diameter 10 to 100 times that of the sun, and supergiant stars with a diameter 100 to 1,000 times that of the sun." },
         { type: 'p', text: "The third thing that affects the magnitude of a star is temperature. Stars differ greatly in temperature, and the temperature of a star also determines its color — red stars are the coolest, and blue stars are the hottest. Suppose that two stars are the same distance from the earth and the same size, but one is blue and one is red — the blue star will seem brighter because it is hotter, and it will have a greater magnitude." },
-        { type: 'p', text: "A star's magnitude, then, depends on its distance from the earth, its size, and its temperature. All three things must be considered." }
+        { type: 'p', text: "A star's magnitude, then, depends on its distance from the earth, its size, and its temperature. All three things must be considered." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/star-temperature-color.jpg', caption: 'How a star\'s color relates to its temperature' }
+        ] }
       ],
       [
-        { type: 'activity', text: "What things affect brightness? Materials: 3 identical flashlights labeled X, Y, and Z / scissors / cardboard / tape / meterstick. Procedure: A. Cut three cardboard circles to cover the end of each flashlight, each with a 1-cm hole in the center, and tape one to each flashlight. B. Mark three positions on the floor: Position 1 is 1 m away, Position 2 is 10 m away, and Position 3 is 20 m away. C. Have three classmates each hold a labeled flashlight and stand in a row at Position 1. D. Darken the room and turn on the flashlights. 1. How would you describe the brightness of each flashlight? E. Keep flashlight X at Position 1; move Y to Position 2 and Z to Position 3. 2. Which flashlight looks brightest? Dimmest? F. Replace the circles on flashlights Y and Z with ones that have 2-cm and 3-cm holes. G. Have all three students stand at Position 3 and turn on the flashlights. 3. Which flashlight looks brightest now? Dimmest? Conclusion: What two things affect how bright the flashlights look?" }
+        { type: 'activity', text: "What things affect brightness? Materials: 3 identical flashlights labeled X, Y, and Z / scissors / cardboard / tape / meterstick. Procedure: A. Cut three cardboard circles to cover the end of each flashlight, each with a 1-cm hole in the center, and tape one to each flashlight. B. Mark three positions on the floor: Position 1 is 1 m away, Position 2 is 10 m away, and Position 3 is 20 m away. C. Have three classmates each hold a labeled flashlight and stand in a row at Position 1. D. Darken the room and turn on the flashlights. 1. How would you describe the brightness of each flashlight? E. Keep flashlight X at Position 1; move Y to Position 2 and Z to Position 3. 2. Which flashlight looks brightest? Dimmest? F. Replace the circles on flashlights Y and Z with ones that have 2-cm and 3-cm holes. G. Have all three students stand at Position 3 and turn on the flashlights. 3. Which flashlight looks brightest now? Dimmest? Conclusion: What two things affect how bright the flashlights look?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/activity-flashlight-cutting.jpg', caption: 'Cutting holes in cardboard circles for the brightness activity' },
+          { src: '/images/science/ch12/activity-flashlight-positions.jpg', caption: 'Testing flashlight brightness at different positions' }
+        ] }
       ],
       [
         { type: 'heading', text: 'The Life of a Star' },
         { type: 'p', text: "What is the life cycle of a star? You may be surprised to know that stars have a life cycle. New stars are being \"born\" and old stars are \"dying.\" Of course, the life and death of a star does not happen overnight — changes in stars take place over billions of years." },
-        { type: 'p', text: "A star is formed from dust and gas in space. A cloud of dust and gas found in space is called a nebula. The dust and gas in such a cloud come together because of gravitational attraction — a tremendous amount of matter must collect for a new star to form, as much as there is in the sun. As the matter in the nebula presses together, it gets hot, and when enough matter has come together and the temperature is high enough, a new star is \"born.\"" }
+        { type: 'p', text: "A star is formed from dust and gas in space. A cloud of dust and gas found in space is called a nebula. The dust and gas in such a cloud come together because of gravitational attraction — a tremendous amount of matter must collect for a new star to form, as much as there is in the sun. As the matter in the nebula presses together, it gets hot, and when enough matter has come together and the temperature is high enough, a new star is \"born.\"" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/horsehead-nebula.jpg', caption: 'The Horsehead Nebula, a cloud of dust and gas' },
+          { src: '/images/science/ch12/starfield-nebula.jpg', caption: 'A nebula, where new stars form' }
+        ] }
       ],
       [
         { type: 'p', text: "When a star first forms, it has a red glow — in this stage the star is large and cool, and the matter of the star continues to come together. When a star is \"middle-aged,\" it may be blue, white, yellow, or red, depending on its temperature, which in turn depends on how much matter has collected: the more matter, the hotter the star. A hot, blue star forms when a great deal of matter collects; a cool, red star forms when a smaller amount collects. The sun is a yellow star — larger and hotter than a red star, but smaller and cooler than a blue star." },
-        { type: 'p', text: "A star beginning \"old age\" often swells up to form a red giant, a star many times larger than the sun but with a lower temperature. Some scientists believe that the sun will enter this stage millions of years from now." }
+        { type: 'p', text: "A star beginning \"old age\" often swells up to form a red giant, a star many times larger than the sun but with a lower temperature. Some scientists believe that the sun will enter this stage millions of years from now." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/star-life-cycle-panel-1-3.jpg', caption: 'The early stages of a star\'s life cycle' }
+        ] }
       ],
       [
         { type: 'p', text: "After a while, a red giant begins to collapse into a smaller star. It becomes hotter and appears white in color — a small star in this stage is called a white dwarf. It may be about as large as the earth, and because it is small, a white dwarf does not appear bright." },
         { type: 'p', text: "Once most of a star's fuel is gone, it enters the last stage of its life and becomes a black dwarf. In this stage the star has no heat or light — it is a cold, dense object in space." },
-        { type: 'p', text: "Not all stars follow these stages. Stars that collapse into the white dwarf stage sometimes explode and become very bright — an exploding star of this type is called a nova. After the explosion, the star will slowly shrink and grow dim. Sometimes a very large star may explode violently, and this is called a supernova." }
+        { type: 'p', text: "Not all stars follow these stages. Stars that collapse into the white dwarf stage sometimes explode and become very bright — an exploding star of this type is called a nova. After the explosion, the star will slowly shrink and grow dim. Sometimes a very large star may explode violently, and this is called a supernova." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/star-life-cycle-panel-4-6.jpg', caption: 'The later stages of a star\'s life cycle' },
+          { src: '/images/science/ch12/star-life-cycle-sun-comparison.jpg', caption: 'Comparing the sun\'s size to other stages of a star\'s life' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Black Holes' },
         { type: 'p', text: "Stars that explode into supernovas sometimes collapse into very dense stars called neutron stars. A neutron star is much smaller than a white dwarf, even though it has more matter packed into it." },
-        { type: 'p', text: "Some scientists think that the gravitational pull of a neutron star can be so great that the star disappears. When this happens, a black hole forms. A black hole is a region in space that was once occupied by a star. Some people believe that the gravity of a black hole is so great that not even light can escape." }
+        { type: 'p', text: "Some scientists think that the gravitational pull of a neutron star can be so great that the star disappears. When this happens, a black hole forms. A black hole is a region in space that was once occupied by a star. Some people believe that the gravity of a black hole is so great that not even light can escape." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/black-hole-drawing.jpg', caption: 'A black hole' },
+          { src: '/images/science/ch12/supernova-neutron-star.jpg', caption: 'A supernova collapsing into a neutron star' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Families of Stars' },
         { type: 'p', text: "What are the shapes of galaxies? There is gravity everywhere in the universe — each body in space attracts every other body. Because of gravity, no bodies are all alone in space; instead, bodies in space collect in families. The sun is one of billions of stars that form the family called the Milky Way. A large group of stars and other bodies in space is called a galaxy. The Milky Way is a spiral galaxy, a type shaped like a flat disk, or wheel, with curved arms coming out from the center." },
-        { type: 'p', text: "The Milky Way is about 100,000 light-years from edge to edge. The solar system is about one third of the way from the outer edge of the Milky Way, and the sun is believed to be one of about 200 billion stars in it." }
+        { type: 'p', text: "The Milky Way is about 100,000 light-years from edge to edge. The solar system is about one third of the way from the outer edge of the Milky Way, and the sun is believed to be one of about 200 billion stars in it." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/milky-way-spiral-diagram.jpg', caption: 'The Milky Way, a spiral galaxy' },
+          { src: '/images/science/ch12/spiral-galaxy-photo.jpg', caption: 'A spiral galaxy' }
+        ] }
       ],
       [
         { type: 'p', text: "Many scientists believe that all the objects in the Milky Way revolve around its center — meaning the sun and its planets are moving around the center of the galaxy. The Milky Way is so large that it takes the sun 250 million years to go once around." },
         { type: 'p', text: "All galaxies are not spiral-shaped. An elliptical galaxy is like a spiral one, but it does not have arms — there are more elliptical galaxies than spiral galaxies, but they are not as large or as bright, and most of their stars are very old. An irregular galaxy does not have a definite shape or size; some scientists believe this type of galaxy may have formed when two or more galaxies bumped into one another." },
-        { type: 'p', text: "Many astronomers believe that entire galaxies are moving, toward the outer edges of the universe, and that galaxies seem to be moving away from each other. The belief that galaxies are moving is part of a theory that suggests the universe is expanding. No one seems to know why the universe is expanding, or whether it will ever stop." }
+        { type: 'p', text: "Many astronomers believe that entire galaxies are moving, toward the outer edges of the universe, and that galaxies seem to be moving away from each other. The belief that galaxies are moving is part of a theory that suggests the universe is expanding. No one seems to know why the universe is expanding, or whether it will ever stop." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/elliptical-spiral-galaxies.jpg', caption: 'Elliptical and spiral galaxies compared' },
+          { src: '/images/science/ch12/movement-of-galaxies.jpg', caption: 'Galaxies moving apart as the universe expands' }
+        ] }
       ],
       [
         { type: 'activity', text: "Can you make a model of the moving galaxies? Materials: round balloon / felt-tip pen / string / 10-cm twist-tie / metric ruler. Procedure: A. Blow up a round balloon to a small size and twist-tie it closed — the balloon represents the universe. B. Mark five dots on the balloon with a felt-tip pen, labeled V, W, X, Y, and Z, with V in the center and the others an equal distance from V — the dots represent galaxies. C. Use string to measure the distance from V to each of the other dots in millimeters, and record these distances. D. Untie the balloon, blow it up to a medium size, and re-tie it. Repeat step C. 1. Have the distances between dots changed? 2. Find the difference between the small- and medium-balloon measurements. E. Blow the balloon up to a large size and repeat step C again. 3. Have the distances changed further? 4. Find the difference between the medium- and large-balloon measurements. Conclusion: 1. How is the expanding balloon like the universe? 2. If dot V represents the Milky Way and the other dots represent other galaxies, what is happening to the galaxies?" }
@@ -1987,7 +2438,10 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Star Patterns' },
         { type: 'p', text: "What is a constellation? People have always been interested in the objects they could see in the sky. For centuries people have gazed into the night sky and wondered about stars — what they were made of and how big they were. As people watched, they noticed that stars seemed to form groups, and that even though the stars seemed to change position, the groups stayed together." },
-        { type: 'p', text: "Ancient people saw patterns in these groups of stars and gave them names. Today we call these star patterns constellations. One of the best-known constellations is the Big Dipper. Another is Scorpio. Have you ever seen these constellations? Can you name other constellations?" }
+        { type: 'p', text: "Ancient people saw patterns in these groups of stars and gave them names. Today we call these star patterns constellations. One of the best-known constellations is the Big Dipper. Another is Scorpio. Have you ever seen these constellations? Can you name other constellations?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/star-field-brightness.jpg', caption: 'A field of stars in the night sky' }
+        ] }
       ],
       [
         { type: 'activity', text: "Finding out: Why do stars seem to move? You may know that the stars seem to move in the sky, but you do not see them moving — they seem to move because the earth moves. You can show how the stars seem to move using a black umbrella and a star chart. Use chalk to draw a few familiar constellations on the underside of the opened umbrella, and be sure to draw the North Star at the point where the handle connects with the ribs of the umbrella. Slowly turn the handle of the umbrella counterclockwise. This shows how the stars seem to move in the sky as the earth turns." }
@@ -2263,39 +2717,72 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Chapter 14 · Transport Systems of the Body' },
         { type: 'p', text: "Imagine a doctor testing a patient's heart while the patient exercises, watching closely the whole time. A test like this can reveal a great deal about the health of a person's heart and blood vessels." },
-        { type: 'p', text: "The heart and blood vessels carry food and oxygen throughout the body and also remove certain wastes — together they form a transport system. In this chapter you will learn about the three main transport systems of the body, the structures that make them up, how they work, and some of the diseases that affect them." }
+        { type: 'p', text: "The heart and blood vessels carry food and oxygen throughout the body and also remove certain wastes — together they form a transport system. In this chapter you will learn about the three main transport systems of the body, the structures that make them up, how they work, and some of the diseases that affect them." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/heart-monitor-equipment.jpg', caption: 'A doctor testing a patient\'s heart during exercise' }
+        ] }
       ],
       [
         { type: 'heading', text: 'The Circulatory System' },
         { type: 'p', text: "What are the two jobs of the circulatory system? The circulatory system is one of the body's transport systems. It carries needed materials, such as food and oxygen, to the cells of the body, and it also carries away waste products. Another important job of the circulatory system is to protect the body from disease — it serves as a defense system. The circulatory system has three main parts that help it perform its jobs: the blood, the heart, and the blood vessels." },
-        { type: 'p', text: "How much blood is in the body? An average adult has about 5 liters of blood." }
+        { type: 'p', text: "How much blood is in the body? An average adult has about 5 liters of blood." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/five-liters-milk-bottles.jpg', caption: 'Five liters, about how much blood an adult has' },
+          { src: '/images/science/ch14/donating-blood.jpg', caption: 'Donating blood' }
+        ] }
       ],
       [
         { type: 'p', text: "Blood is a liquid with solid parts floating in it. The liquid part of the blood is called plasma. Plasma is yellowish in color, is mostly water, and contains many important chemicals — it makes up over half of the blood." },
-        { type: 'p', text: "There are three different kinds of solid parts in the blood. The first is the red blood cells, which carry oxygen to all the cells of the body. They can do this because they contain a special chemical called hemoglobin, which contains iron and gives blood its red color. A red blood cell looks something like a doughnut without a hole, and it is very small — a single drop of blood contains about 5 million red blood cells." }
+        { type: 'p', text: "There are three different kinds of solid parts in the blood. The first is the red blood cells, which carry oxygen to all the cells of the body. They can do this because they contain a special chemical called hemoglobin, which contains iron and gives blood its red color. A red blood cell looks something like a doughnut without a hole, and it is very small — a single drop of blood contains about 5 million red blood cells." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/container-of-plasma.jpg', caption: 'Plasma, the liquid part of blood' },
+          { src: '/images/science/ch14/red-blood-cells.jpg', caption: 'Red blood cells, which carry oxygen' }
+        ] }
       ],
       [
         { type: 'p', text: "White blood cells are the second solid part of the blood. They help the body fight infection. White blood cells do not contain hemoglobin, so despite their name, they have no real color. They can change shape as they move, and sometimes they even squeeze through the walls of blood vessels to reach infected parts of the body, where they surround and destroy bacteria and other harmful things." },
-        { type: 'p', text: "Platelets are the third solid part of blood. They are not whole cells, but parts of cells that control bleeding, and like white blood cells they have no color — they are also much smaller than red blood cells. When you get a cut or scratch, it bleeds for a short time, but the platelets in the blood cause it to thicken and clot, which stops the bleeding. Without platelets to control bleeding, a person could bleed to death from a small cut." }
+        { type: 'p', text: "Platelets are the third solid part of blood. They are not whole cells, but parts of cells that control bleeding, and like white blood cells they have no color — they are also much smaller than red blood cells. When you get a cut or scratch, it bleeds for a short time, but the platelets in the blood cause it to thicken and clot, which stops the bleeding. Without platelets to control bleeding, a person could bleed to death from a small cut." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/red-white-blood-cells-microscope.jpg', caption: 'Red and white blood cells seen through a microscope' },
+          { src: '/images/science/ch14/platelets.jpg', caption: 'Platelets, which control bleeding' },
+          { src: '/images/science/ch14/blood-clotting-diagram.jpg', caption: 'How platelets help blood clot' }
+        ] }
       ],
       [
-        { type: 'sidebar', text: "Do you know? On December 2, 1982, a medical milestone took place: the first permanent artificial heart was placed in a human being. Made of plastic and aluminum and built to run on electricity, it was named the Jarvik-7, after its inventor, Dr. Robert Jarvik. A 61-year-old man, Dr. Barney Clark, received the heart — without it, he would have died within a few hours. The artificial heart replaced the two diseased lower chambers of his heart and was attached to the two upper chambers. Dr. Clark lived 112 days with the artificial heart." }
+        { type: 'sidebar', text: "Do you know? On December 2, 1982, a medical milestone took place: the first permanent artificial heart was placed in a human being. Made of plastic and aluminum and built to run on electricity, it was named the Jarvik-7, after its inventor, Dr. Robert Jarvik. A 61-year-old man, Dr. Barney Clark, received the heart — without it, he would have died within a few hours. The artificial heart replaced the two diseased lower chambers of his heart and was attached to the two upper chambers. Dr. Clark lived 112 days with the artificial heart." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/artificial-heart-jarvik7.jpg', caption: 'The Jarvik-7, the first permanent artificial heart' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Circulation of Blood' },
         { type: 'p', text: "How does blood move through the body? The heart, the second main part of the circulatory system, is a strong, hollow muscle about the size of a fist, located in the center of the chest. As long as you are alive, your heart never stops working — a normal heart beats about 70 to 80 times per minute." },
-        { type: 'p', text: "There are four hollow chambers, or cavities, in the heart. Each upper chamber is called an atrium — there is a right atrium and a left atrium — and blood collects in these thin-walled chambers. Each lower chamber is called a ventricle, and there is a right ventricle and a left ventricle; ventricles have thick, muscular walls and are the pumping chambers of the heart. Between the upper and lower chambers is a flap of tissue that acts as a valve, keeping blood from flowing backward." }
+        { type: 'p', text: "There are four hollow chambers, or cavities, in the heart. Each upper chamber is called an atrium — there is a right atrium and a left atrium — and blood collects in these thin-walled chambers. Each lower chamber is called a ventricle, and there is a right ventricle and a left ventricle; ventricles have thick, muscular walls and are the pumping chambers of the heart. Between the upper and lower chambers is a flap of tissue that acts as a valve, keeping blood from flowing backward." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/heart-chambers-diagram.jpg', caption: 'The four chambers of the heart' }
+        ] }
       ],
       [
-        { type: 'p', text: "There are three kinds of blood vessels: arteries, veins, and capillaries. An artery is a thick-walled blood vessel that carries blood away from the heart, usually blood that is rich in food and oxygen. A vein is a blood vessel that carries blood back to the heart from the body's cells, usually carrying mostly waste products. A capillary is a tiny blood vessel that connects an artery and a vein — capillaries are the smallest blood vessels in the body, and they allow food, oxygen, and wastes to pass directly between the blood and the cells." }
+        { type: 'p', text: "There are three kinds of blood vessels: arteries, veins, and capillaries. An artery is a thick-walled blood vessel that carries blood away from the heart, usually blood that is rich in food and oxygen. A vein is a blood vessel that carries blood back to the heart from the body's cells, usually carrying mostly waste products. A capillary is a tiny blood vessel that connects an artery and a vein — capillaries are the smallest blood vessels in the body, and they allow food, oxygen, and wastes to pass directly between the blood and the cells." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/vein-artery-capillaries-diagram.jpg', caption: 'Arteries, veins, and capillaries' }
+        ] }
       ],
       [
         { type: 'p', text: "Here is the path blood takes through the circulatory system. Blood that has just left the lungs, rich in oxygen, arrives in the left atrium. It passes through a valve into the left ventricle, from where it is pumped into a large artery. That artery branches into smaller and smaller arteries that reach all parts of the body. Blood from the arteries then enters the capillaries, where food and oxygen pass through the capillary walls into the cells, while carbon dioxide and waste products from the cells pass the other way, into the blood." },
-        { type: 'p', text: "From the capillaries, blood enters the smallest veins and flows into larger and larger veins, eventually reaching the largest veins, which return blood — now poor in oxygen — to the right atrium. From there it passes through a valve to the right ventricle and is pumped into a large artery leading to the lungs. In the lungs the blood loses carbon dioxide and picks up a fresh supply of oxygen, then returns through veins to the left atrium, and the whole cycle begins again." }
+        { type: 'p', text: "From the capillaries, blood enters the smallest veins and flows into larger and larger veins, eventually reaching the largest veins, which return blood — now poor in oxygen — to the right atrium. From there it passes through a valve to the right ventricle and is pumped into a large artery leading to the lungs. In the lungs the blood loses carbon dioxide and picks up a fresh supply of oxygen, then returns through veins to the left atrium, and the whole cycle begins again." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/path-of-blood-diagram.jpg', caption: 'The path blood takes through the circulatory system' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Diseases and Care of the Circulatory System' },
-        { type: 'p', text: "What are some circulatory problems? Severe cuts can cause a serious loss of blood. The best way to stop bleeding is to apply direct pressure to the wound with a clean cloth, then cover it with a bandage to prevent infection — a large, deep cut should be checked by a doctor. The best way to stop a nosebleed is to hold the head straight and pinch the nostrils together; a severe nosebleed may need to be treated by a doctor." }
+        { type: 'p', text: "What are some circulatory problems? Severe cuts can cause a serious loss of blood. The best way to stop bleeding is to apply direct pressure to the wound with a clean cloth, then cover it with a bandage to prevent infection — a large, deep cut should be checked by a doctor. The best way to stop a nosebleed is to hold the head straight and pinch the nostrils together; a severe nosebleed may need to be treated by a doctor." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/applying-direct-pressure.jpg', caption: 'Applying direct pressure to stop bleeding' },
+          { src: '/images/science/ch14/bleeding-finger.jpg', caption: 'A cut that needs a bandage' },
+          { src: '/images/science/ch14/treating-nosebleed.jpg', caption: 'Treating a nosebleed' }
+        ] }
       ],
       [
         { type: 'p', text: "Each of the three main parts of the circulatory system can become diseased. For example, fat may build up in the walls of arteries, clogging them much like mineral buildup clogs a water pipe. A heart attack, a common and serious heart problem, occurs when the supply of blood to part of the heart is cut off — usually because the arteries that carry blood to the heart are clogged. If the blood supply is cut off too long, the heart can be permanently damaged, and a person can die from a heart attack; it is a leading cause of death in the United States." },
