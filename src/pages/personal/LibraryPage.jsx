@@ -41,7 +41,18 @@ export default function LibraryPage() {
   const [editingPack, setEditingPack] = useState(null);
 
   // Folders: null = top-level grid, otherwise the id of the folder being viewed
-  const [openFolderId, setOpenFolderId] = useState(null);
+  const openFolderId = searchParams.get('folderId') || null;
+  const setOpenFolderId = (fId) => {
+    const nextParams = new URLSearchParams(searchParams);
+    if (fId) {
+      nextParams.set('folderId', fId);
+      sessionStorage.setItem('lastOpenFolderId', fId);
+    } else {
+      nextParams.delete('folderId');
+      sessionStorage.removeItem('lastOpenFolderId');
+    }
+    setSearchParams(nextParams, { replace: true });
+  };
   const [showFolderForm, setShowFolderForm] = useState(false);
   const [editingFolder, setEditingFolder] = useState(null);
   const openFolder = openFolderId ? folders.find((f) => f.id === openFolderId) : null;
@@ -163,7 +174,7 @@ export default function LibraryPage() {
   };
 
   const handleDeletePack = async () => {
-    if (editingPack && window.confirm("Delete this pack and all its words?")) {
+    if (editingPack) {
       await deletePack(editingPack.id);
       setShowPackForm(false);
       setEditingPack(null);

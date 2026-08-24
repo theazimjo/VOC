@@ -318,7 +318,17 @@ export default function PackDetail() {
       animate={{ opacity: 1 }}
     >
       <div className="detail-back-navigation">
-        <button className="btn-back" onClick={() => navigate('/library?tab=packs')}>
+        <button
+          className="btn-back"
+          onClick={() => {
+            const targetFolderId = pack?.folderId || sessionStorage.getItem('lastOpenFolderId');
+            if (targetFolderId) {
+              navigate(`/library?tab=packs&folderId=${targetFolderId}`);
+            } else {
+              navigate('/library?tab=packs');
+            }
+          }}
+        >
           {t('packDetail.libraryBack')}
         </button>
       </div>
