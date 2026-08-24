@@ -61,6 +61,11 @@ function WordTokens({
           key={segIdx}
           className={`read-word read-phrase ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
           onClick={(e) => {
+            const sel = window.getSelection();
+            const selText = sel ? sel.toString().trim() : '';
+            if (selText && selText.length > 0 && selText.toLowerCase() !== phrase.toLowerCase()) {
+              return;
+            }
             if (onWordClickIndex) onWordClickIndex(wordIdx);
             onWordTap(phrase, e.currentTarget, wordIdx);
           }}
@@ -84,6 +89,11 @@ function WordTokens({
             key={`${segIdx}-${i}`}
             className={`read-word ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
             onClick={(e) => {
+              const sel = window.getSelection();
+              const selText = sel ? sel.toString().trim() : '';
+              if (selText && selText.length > 0 && selText.toLowerCase() !== clean.toLowerCase()) {
+                return;
+              }
               if (onWordClickIndex) onWordClickIndex(wordIdx);
               onWordTap(clean, e.currentTarget, wordIdx);
             }}
@@ -164,6 +174,16 @@ export default function ReadPage() {
   const [tapState, setTapState] = useState(null);
   const [selectedWordIdx, setSelectedWordIdx] = useState(null);
   const [direction, setDirection] = useState(1);
+
+  const recentStorageKey = `readRecentLookups:${packId}`;
+  const [recentWords, setRecentWords] = useState(() => {
+    try {
+      const saved = localStorage.getItem(recentStorageKey);
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
 
   // Reader Settings: Theme ('light' | 'sepia' | 'dark') and Font Size ('small' | 'medium' | 'large')
   const [readerTheme, setReaderTheme] = useState(() => {
@@ -358,11 +378,41 @@ export default function ReadPage() {
     }
   }, [pageIndex]);
 
+  const handleSelectionEnd = useCallback(() => {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) return;
+    const selectedText = selection.toString().replace(/\s+/g, ' ').trim();
+    if (!selectedText || selectedText.length < 2) return;
+
+    try {
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      if (rect && rect.width > 0 && rect.height > 0) {
+        setSelectedWordIdx(null);
+        setTapState({
+          word: selectedText,
+          anchorRect: rect
+        });
+      }
+    } catch {}
+  }, []);
+
   const handleWordTap = useCallback((word, anchorEl, wordIdx) => {
     if (!word) return;
+    const cleanWord = word.trim().toLowerCase();
     setSelectedWordIdx(wordIdx ?? null);
     setTapState({ word, anchorRect: anchorEl.getBoundingClientRect() });
-  }, []);
+
+    setRecentWords(prev => {
+      if (prev.has(cleanWord)) return prev;
+      const next = new Set(prev);
+      next.add(cleanWord);
+      try {
+        localStorage.setItem(recentStorageKey, JSON.stringify([...next]));
+      } catch {}
+      return next;
+    });
+  }, [recentStorageKey]);
 
   const handleAddWord = useCallback(async ({ word, translation, definition, partOfSpeech, example, existingWord }) => {
     if (existingWord) {
@@ -606,6 +656,8 @@ export default function ReadPage() {
           className={`read-body font-size-${fontSize}`}
           key={pageIndex}
           lang={wordLangCode}
+          onMouseUp={handleSelectionEnd}
+          onTouchEnd={handleSelectionEnd}
           initial={{ opacity: 0, rotateY: direction > 0 ? 12 : -12, x: direction > 0 ? 18 : -18 }}
           animate={{ opacity: 1, rotateY: 0, x: 0 }}
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -649,6 +701,7 @@ export default function ReadPage() {
                         text={block.text}
                         onWordTap={handleWordTap}
                         knownWords={knownWords}
+                        recentWords={recentWords}
                         startIndex={currentStartIndex}
                         activeWordIndex={activeWordIndex}
                         passedWordIndices={passedWordIndices}
@@ -669,6 +722,7 @@ export default function ReadPage() {
                   text={block.text}
                   onWordTap={handleWordTap}
                   knownWords={knownWords}
+                  recentWords={recentWords}
                   startIndex={currentStartIndex}
                   activeWordIndex={activeWordIndex}
                   passedWordIndices={passedWordIndices}
@@ -741,6 +795,7 @@ export default function ReadPage() {
             wordLocale={pack?.language || 'en-US'}
             currentTopic={topic}
             existingWords={words}
+            isRecentlyViewed={recentWords.has(tapState.word.trim().toLowerCase())}
             onAdd={handleAddWord}
             onClose={() => {
               setTapState(null);

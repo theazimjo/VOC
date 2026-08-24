@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, X, Check, ChevronDown, Volume2, BookOpen, Sparkles } from 'lucide-react';
+import { Plus, X, Check, ChevronDown, Volume2, BookOpen, Sparkles, Eye } from 'lucide-react';
 import { speechLanguages, speakWord } from '../../utils/helpers';
 import { lookupWordFromDictionary, fetchWordMeanings, toShortLangCode } from '../../utils/dictionaryService';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -34,6 +34,7 @@ export default function WordTapPopover({
   wordLocale,
   currentTopic,
   existingWords,
+  isRecentlyViewed = false,
   onAdd,
   onClose
 }) {
@@ -120,8 +121,11 @@ export default function WordTapPopover({
     setPhonetic('');
     setMeanings([]);
 
-    lookupWordFromDictionary(word, 'word2translation', wordLangCode, translationLangCode)
-      .then(res => {
+    Promise.all([
+      lookupWordFromDictionary(word, 'word2translation', wordLangCode, translationLangCode),
+      fetchWordMeanings(word, wordLangCode, translationLangCode).catch(() => [])
+    ])
+      .then(([res, mList]) => {
         if (cancelledRef.current) return;
         if (res?.translation) {
           setTranslation(res.translation);
@@ -133,17 +137,12 @@ export default function WordTapPopover({
         } else {
           setLookupError(true);
         }
-      })
-      .catch(() => { if (!cancelledRef.current) setLookupError(true); })
-      .finally(() => { if (!cancelledRef.current) setIsLoading(false); });
-
-    fetchWordMeanings(word, wordLangCode, translationLangCode)
-      .then(mList => {
-        if (!cancelledRef.current && Array.isArray(mList)) {
+        if (Array.isArray(mList)) {
           setMeanings(mList);
         }
       })
-      .catch(() => {});
+      .catch(() => { if (!cancelledRef.current) setLookupError(true); })
+      .finally(() => { if (!cancelledRef.current) setIsLoading(false); });
 
     return () => { cancelledRef.current = true; };
   }, [word, wordLangCode, translationLangCode, existingWord]);
@@ -170,11 +169,16 @@ export default function WordTapPopover({
 
   const pos = computePosition(anchorRect);
 
+  const isSentence = useMemo(() => {
+    const trimmed = (word || '').trim();
+    return trimmed.includes(' ') || trimmed.length > 28;
+  }, [word]);
+
   const extraMeanings = useMemo(() => {
-    if (!meanings || meanings.length === 0) return [];
+    if (!meanings || meanings.length === 0 || isSentence) return [];
     const primaryLower = (translation || '').trim().toLowerCase();
     return meanings.filter(m => (m.translation || '').trim().toLowerCase() !== primaryLower).slice(0, 4);
-  }, [meanings, translation]);
+  }, [meanings, translation, isSentence]);
 
   return (
     <>
@@ -248,18 +252,24 @@ export default function WordTapPopover({
         </div>
 
         <div className="wtp-body">
-          {/* Main Word Header */}
-          <div className="wtp-word-header">
+          {/* Main Word or Sentence Header */}
+          <div className={`wtp-word-header ${isSentence ? 'wtp-sentence-header' : ''}`}>
             <div className="wtp-word-title-group">
-              <span className="wtp-word">{word}</span>
-              {phonetic && <span className="wtp-phonetic">/{phonetic.replace(/^\/|\/$/g, '')}/</span>}
+              {isSentence ? (
+                <span className="wtp-sentence-quote">“{word}”</span>
+              ) : (
+                <>
+                  <span className="wtp-word">{word}</span>
+                  {phonetic && <span className="wtp-phonetic">/{phonetic.replace(/^\/|\/$/g, '')}/</span>}
+                </>
+              )}
             </div>
             <button
               type="button"
               className="wtp-speak-btn"
               onClick={() => speakWord(word, wordLocale)}
               aria-label="Pronounce"
-              title="Pronounce word"
+              title={isSentence ? "Read sentence aloud" : "Pronounce word"}
             >
               <Volume2 size={15} />
             </button>
@@ -275,9 +285,9 @@ export default function WordTapPopover({
           ) : (
             <div className="wtp-content-scroll">
               {/* Primary Translation & Part of Speech */}
-              <div className="wtp-primary-translation-block">
-                <div className="wtp-translation">{translation}</div>
-                {partOfSpeech && <span className="wtp-pos-badge">{partOfSpeech}</span>}
+              <div className={`wtp-primary-translation-block ${isSentence ? 'wtp-sentence-translation-block' : ''}`}>
+                <div className={`wtp-translation ${isSentence ? 'wtp-sentence-translation' : ''}`}>{translation}</div>
+                {!isSentence && partOfSpeech && <span className="wtp-pos-badge">{partOfSpeech}</span>}
               </div>
 
               {/* Definition Section (Ma'nosi) */}
@@ -335,6 +345,11 @@ export default function WordTapPopover({
 
         {/* Footer Target Chapter & Action Button */}
         <div className="wtp-footer-block">
+          {isRecentlyViewed && !existingWord && (
+            <div className="wtp-recent-note">
+              <Eye size={12} /> <span>{t('read.recentlyViewedNote') || 'Yaqinda ko\'rgansan'}</span>
+            </div>
+          )}
           {existingWord ? (
             <div className="wtp-existing-note">
               {t('read.alreadyInPackNote')}

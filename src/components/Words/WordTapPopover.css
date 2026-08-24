@@ -234,9 +234,30 @@
   margin-top: 2px;
 }
 
+.wtp-sentence-quote {
+  font-size: 0.92rem;
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--reader-text, inherit);
+  max-height: 90px;
+  overflow-y: auto;
+  display: block;
+}
+
 .wtp-translation {
   font-size: 1.35rem;
   font-weight: 800;
+  color: #ea580c;
+}
+
+.wtp-sentence-translation-block {
+  margin-top: 4px;
+}
+
+.wtp-sentence-translation {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  font-weight: 700;
   color: #ea580c;
 }
 
@@ -357,6 +378,20 @@
   color: #f59e0b;
   text-align: center;
   font-weight: 600;
+}
+
+.wtp-recent-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.12);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .wtp-target-note {

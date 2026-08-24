@@ -60,7 +60,14 @@ function WordTokens({ text, onWordTap, knownWords, startIndex = 0, activeWordInd
         <span
           key={segIdx}
           className={`science-word science-phrase ${known ? 'science-known' : ''} ${isPassed ? 'science-spoken-passed' : ''} ${isActive ? 'science-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
-          onClick={(e) => onWordTap(phrase, e.currentTarget, wordIdx)}
+          onClick={(e) => {
+            const sel = window.getSelection();
+            const selText = sel ? sel.toString().trim() : '';
+            if (selText && selText.length > 0 && selText.toLowerCase() !== phrase.toLowerCase()) {
+              return;
+            }
+            onWordTap(phrase, e.currentTarget, wordIdx);
+          }}
         >
           {phrase}
         </span>
@@ -79,7 +86,14 @@ function WordTokens({ text, onWordTap, knownWords, startIndex = 0, activeWordInd
           <span
             key={`${segIdx}-${i}`}
             className={`science-word ${known ? 'science-known' : ''} ${isPassed ? 'science-spoken-passed' : ''} ${isActive ? 'science-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
-            onClick={(e) => onWordTap(clean, e.currentTarget, wordIdx)}
+            onClick={(e) => {
+              const sel = window.getSelection();
+              const selText = sel ? sel.toString().trim() : '';
+              if (selText && selText.length > 0 && selText.toLowerCase() !== clean.toLowerCase()) {
+                return;
+              }
+              onWordTap(clean, e.currentTarget, wordIdx);
+            }}
           >
             {part}
           </span>
@@ -90,7 +104,7 @@ function WordTokens({ text, onWordTap, knownWords, startIndex = 0, activeWordInd
   });
 }
 
-function ScienceBlock({ block, startIndex, onWordTap, knownWords, activeWordIndex, passedWordIndices, selectedWordIdx }) {
+function ScienceBlock({ block, startIndex, onWordTap, knownWords, recentWords, activeWordIndex, passedWordIndices, selectedWordIdx }) {
   if (block.type === 'image-group') {
     return (
       <div className="science-image-group">
@@ -117,6 +131,7 @@ function ScienceBlock({ block, startIndex, onWordTap, knownWords, activeWordInde
             text={block.text}
             onWordTap={onWordTap}
             knownWords={knownWords}
+            recentWords={recentWords}
             startIndex={startIndex}
             activeWordIndex={activeWordIndex}
             passedWordIndices={passedWordIndices}
@@ -133,6 +148,7 @@ function ScienceBlock({ block, startIndex, onWordTap, knownWords, activeWordInde
         text={block.text}
         onWordTap={onWordTap}
         knownWords={knownWords}
+        recentWords={recentWords}
         startIndex={startIndex}
         activeWordIndex={activeWordIndex}
         passedWordIndices={passedWordIndices}
@@ -153,6 +169,16 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
   const [subIndex, setSubIndex] = useState(0);
   const [tapState, setTapState] = useState(null);
   const [selectedWordIdx, setSelectedWordIdx] = useState(null);
+
+  const recentStorageKey = `readRecentLookups:${pack?.id || 'science'}`;
+  const [recentWords, setRecentWords] = useState(() => {
+    try {
+      const saved = localStorage.getItem(recentStorageKey);
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
 
   const chapter = scienceChapterText[topic];
   const pageIdx = batch.pageIndices[subIndex];
@@ -192,10 +218,39 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
   // the user on a page they have no way to complete.
   const isPageReadyForNext = !isAloudPage || !isSupported || aloudThresholdReached;
 
+  const handleSelectionEnd = useCallback(() => {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) return;
+    const selectedText = selection.toString().replace(/\s+/g, ' ').trim();
+    if (!selectedText || selectedText.length < 2) return;
+
+    try {
+      const range = selection.getRangeAt(0);
+      const rect = range.getBoundingClientRect();
+      if (rect && rect.width > 0 && rect.height > 0) {
+        setSelectedWordIdx(null);
+        setTapState({
+          word: selectedText,
+          anchorRect: rect
+        });
+      }
+    } catch {}
+  }, []);
+
   const handleWordTap = useCallback((word, el, wordIdx) => {
+    const cleanWord = (word || '').trim().toLowerCase();
     setSelectedWordIdx(wordIdx ?? null);
     setTapState({ word, anchorRect: el.getBoundingClientRect() });
-  }, []);
+    setRecentWords(prev => {
+      if (prev.has(cleanWord)) return prev;
+      const next = new Set(prev);
+      next.add(cleanWord);
+      try {
+        localStorage.setItem(recentStorageKey, JSON.stringify([...next]));
+      } catch {}
+      return next;
+    });
+  }, [recentStorageKey]);
 
   const handleAddWord = useCallback(async ({ word, translation, definition, partOfSpeech, example, existingWord }) => {
     if (existingWord) {
@@ -271,6 +326,8 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
           key={pageIdx}
           className="science-page-body"
           lang={wordLangCode}
+          onMouseUp={handleSelectionEnd}
+          onTouchEnd={handleSelectionEnd}
           initial={{ opacity: 0, x: 16 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -16 }}
@@ -286,6 +343,7 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
                 startIndex={start}
                 onWordTap={handleWordTap}
                 knownWords={knownWords}
+                recentWords={recentWords}
                 activeWordIndex={activeWordIndex}
                 passedWordIndices={passedWordIndices}
                 selectedWordIdx={selectedWordIdx}
@@ -318,6 +376,7 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
             wordLocale={pack?.language || 'en-US'}
             currentTopic={topic}
             existingWords={words}
+            isRecentlyViewed={recentWords.has(tapState.word.trim().toLowerCase())}
             onAdd={handleAddWord}
             onClose={() => {
               setTapState(null);

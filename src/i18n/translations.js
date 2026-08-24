@@ -820,6 +820,12 @@ export const translations = {
 
       showAnswer: 'Show answer',
       hideAnswer: 'Hide answer',
+
+      definitionLabel: 'Definition',
+      exampleLabel: 'Example',
+      otherMeaningsLabel: 'Other Meanings',
+      recentlyViewedNote: 'Recently viewed by you',
+      recentlyViewedBadge: 'Recently viewed',
     },
     course: {
       tabDashboard: 'Dashboard',
@@ -1677,6 +1683,12 @@ export const translations = {
 
       showAnswer: 'Показать ответ',
       hideAnswer: 'Скрыть ответ',
+
+      definitionLabel: 'Значение',
+      exampleLabel: 'Пример',
+      otherMeaningsLabel: 'Другие значения',
+      recentlyViewedNote: 'Недавно просмотрено',
+      recentlyViewedBadge: 'Недавно просмотрено',
     },
     course: {
       tabDashboard: 'Обзор',
@@ -2534,6 +2546,12 @@ export const translations = {
 
       showAnswer: "Javobni ko'rsatish",
       hideAnswer: "Javobni yashirish",
+
+      definitionLabel: "Ma'nosi",
+      exampleLabel: "Misol",
+      otherMeaningsLabel: "Boshqa ma'nolari",
+      recentlyViewedNote: "Yaqinda ko'rgansan",
+      recentlyViewedBadge: "Yaqinda ko'rilgan",
     },
     course: {
       tabDashboard: "Umumiy",
