@@ -275,6 +275,35 @@ export default function ReadPage() {
     enabled: isSpeakMode
   });
 
+  const completedStorageKey = `readCompletedPages:${packId}:${topic}`;
+
+  const [completedPages, setCompletedPages] = useState(() => {
+    try {
+      const saved = localStorage.getItem(completedStorageKey);
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+
+  // Track page completion when all/most words on current page are read in Speak mode
+  useEffect(() => {
+    if (isSpeakMode && pageWords.length > 0) {
+      const isPageDone = passedWordIndices.size >= Math.ceil(pageWords.length * 0.9) || activeWordIndex >= pageWords.length - 1;
+      if (isPageDone) {
+        setCompletedPages(prev => {
+          if (prev.has(pageIndex)) return prev;
+          const next = new Set(prev);
+          next.add(pageIndex);
+          try {
+            localStorage.setItem(completedStorageKey, JSON.stringify([...next]));
+          } catch {}
+          return next;
+        });
+      }
+    }
+  }, [isSpeakMode, passedWordIndices, activeWordIndex, pageWords, pageIndex, completedStorageKey]);
+
   // Auto-scroll to currently spoken word
   useEffect(() => {
     if (isSpeakMode && activeWordIndex >= 0) {
@@ -284,6 +313,46 @@ export default function ReadPage() {
       }
     }
   }, [isSpeakMode, activeWordIndex]);
+
+  // Keyboard navigation (<, >, ArrowLeft, ArrowRight)
+  useEffect(() => {
+    if (!chapter || !chapter.pages) return;
+    const totalPages = chapter.pages.length;
+
+    const handleKeyDown = (e) => {
+      const tag = e.target?.tagName?.toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || e.target?.isContentEditable) return;
+
+      if (e.key === 'ArrowLeft' || e.key === '<' || e.key === ',') {
+        setPageIndex(current => {
+          if (current > 0) {
+            setDirection(-1);
+            return current - 1;
+          }
+          return current;
+        });
+      } else if (e.key === 'ArrowRight' || e.key === '>' || e.key === '.') {
+        setPageIndex(current => {
+          if (current < totalPages - 1) {
+            setDirection(1);
+            return current + 1;
+          }
+          return current;
+        });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [chapter]);
+
+  // Auto-scroll active page button into view in PC left rail
+  useEffect(() => {
+    const activeBtn = document.querySelector('.read-pc-page-rail .read-pc-page-btn.active');
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [pageIndex]);
 
   const handleWordTap = useCallback((word, anchorEl) => {
     if (!word) return;
@@ -353,6 +422,33 @@ export default function ReadPage() {
 
   return (
     <div className={`read-page-shell theme-${readerTheme}`}>
+      {/* PC Left Side Floating Page Numbers Rail */}
+      <div className="read-pc-page-rail">
+        <div className="read-pc-page-rail-inner">
+          {chapter.pages.map((_, idx) => {
+            const pageNum = topicRange ? (topicRange.start + idx) : (idx + 1);
+            const isActive = idx === pageIndex;
+            const isCompleted = completedPages.has(idx);
+            return (
+              <button
+                key={idx}
+                type="button"
+                className={`read-pc-page-btn ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+                onClick={() => {
+                  if (idx !== pageIndex) {
+                    setDirection(idx > pageIndex ? 1 : -1);
+                    setPageIndex(idx);
+                  }
+                }}
+                title={`Page ${pageNum}${isCompleted ? ' (To\'liq o\'qilgan)' : ''}`}
+              >
+                {pageNum}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Floating Side Navigation Arrows (Middle height beside text) */}
       <button
         type="button"
@@ -594,6 +690,7 @@ export default function ReadPage() {
             </button>
           </div>
 
+          {/* Page Indicator */}
           <div className="read-page-indicator">
             <div className="read-page-badge">{currentReadPage}</div>
             <div className="read-page-info">
