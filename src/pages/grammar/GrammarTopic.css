@@ -754,14 +754,22 @@
   margin-bottom: var(--space-lg);
 }
 
-/* Main Quiz Body Container (Vertically Centered) */
+/* Main Quiz Body Container: Top-aligned on Desktop for clean reading hierarchy, Centered on Mobile */
 .clean-quiz-body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 32px;
   padding-bottom: 40px;
   animation: fadeIn 0.25s ease;
+}
+
+@media (max-width: 767px) {
+  .clean-quiz-body {
+    justify-content: center;
+    padding-top: 0;
+  }
 }
 
 /* Metadata Card - Dark Grey */
