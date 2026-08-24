@@ -45,6 +45,9 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   const highestPIdxRef = useRef(0);
   const enabledRef = useRef(enabled);
   const restartTimerRef = useRef(null);
+  const isNoSpeechRef = useRef(false);
+  const hasFatalErrorRef = useRef(false);
+  const consecutiveRestartsRef = useRef(0);
 
   useEffect(() => {
     enabledRef.current = enabled;
@@ -58,11 +61,13 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
     setWpm(0);
     setTranscript('');
     startTimeRef.current = null;
+    consecutiveRestartsRef.current = 0;
   }, []);
 
   const handleSpeechResult = useCallback((event) => {
     if (!pageWords || pageWords.length === 0) return;
     setIsListening(true);
+    consecutiveRestartsRef.current = 0;
 
     let fullSessionTranscript = '';
     for (let i = 0; i < event.results.length; i++) {
@@ -114,6 +119,21 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
     }
   }, [pageWords]);
 
+  const stopListening = useCallback(() => {
+    enabledRef.current = false;
+    if (restartTimerRef.current) {
+      clearTimeout(restartTimerRef.current);
+      restartTimerRef.current = null;
+    }
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.abort();
+      } catch {}
+      recognitionRef.current = null;
+    }
+    setIsListening(false);
+  }, []);
+
   const startListening = useCallback(() => {
     if (!isSupported || !SpeechRecognitionAPI) {
       setError('Speech recognition is not supported in this browser.');
@@ -121,86 +141,103 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
     }
 
     enabledRef.current = true;
+    hasFatalErrorRef.current = false;
+    consecutiveRestartsRef.current = 0;
     setIsListening(true);
+    setError(null);
+
+    if (restartTimerRef.current) {
+      clearTimeout(restartTimerRef.current);
+      restartTimerRef.current = null;
+    }
 
     if (recognitionRef.current) {
       try {
-        recognitionRef.current.stop();
+        recognitionRef.current.abort();
       } catch {}
+      recognitionRef.current = null;
     }
 
     sessionStartPIdxRef.current = highestPIdxRef.current;
 
-    try {
-      const recognition = new SpeechRecognitionAPI();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = langCode || 'en-US';
+    const createAndStart = () => {
+      if (!enabledRef.current || hasFatalErrorRef.current) return;
 
-      recognition.onstart = () => {
-        setIsListening(true);
-        setError(null);
-      };
-
-      recognition.onresult = (event) => {
-        handleSpeechResult(event);
-      };
-
-      recognition.onerror = (event) => {
-        if (event.error === 'no-speech' || event.error === 'aborted') return;
-        console.warn('Speech recognition error:', event.error);
-        if (event.error === 'not-allowed') {
-          setError('Microphone access was denied.');
-          setIsListening(false);
-          enabledRef.current = false;
-        } else {
-          setError(`Speech error: ${event.error}`);
-        }
-      };
-
-      recognition.onend = () => {
-        if (enabledRef.current) {
-          sessionStartPIdxRef.current = highestPIdxRef.current;
-          if (restartTimerRef.current) clearTimeout(restartTimerRef.current);
-          restartTimerRef.current = setTimeout(() => {
-            if (!enabledRef.current) return;
-            try {
-              recognition.start();
-              setIsListening(true);
-            } catch (err) {
-              if (err.name === 'InvalidStateError') {
-                setIsListening(true);
-              } else {
-                console.warn('Speech restart error:', err);
-                setIsListening(false);
-              }
-            }
-          }, 50);
-        } else {
-          setIsListening(false);
-        }
-      };
-
-      recognition.start();
-      recognitionRef.current = recognition;
-    } catch (err) {
-      console.error('Failed to start speech recognition:', err);
-      setError('Could not access microphone.');
-      setIsListening(false);
-    }
-  }, [isSupported, SpeechRecognitionAPI, langCode, handleSpeechResult]);
-
-  const stopListening = useCallback(() => {
-    enabledRef.current = false;
-    if (restartTimerRef.current) clearTimeout(restartTimerRef.current);
-    if (recognitionRef.current) {
       try {
-        recognitionRef.current.stop();
-      } catch {}
-      recognitionRef.current = null;
-    }
-    setIsListening(false);
-  }, []);
+        const recognition = new SpeechRecognitionAPI();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = langCode || 'en-US';
+
+        recognition.onstart = () => {
+          setIsListening(true);
+          setError(null);
+          isNoSpeechRef.current = false;
+        };
+
+        recognition.onresult = (event) => {
+          isNoSpeechRef.current = false;
+          handleSpeechResult(event);
+        };
+
+        recognition.onerror = (event) => {
+          if (event.error === 'no-speech') {
+            isNoSpeechRef.current = true;
+            return;
+          }
+          if (event.error === 'aborted') return;
+
+          console.warn('Speech recognition error:', event.error);
+          hasFatalErrorRef.current = true;
+          enabledRef.current = false;
+          setIsListening(false);
+
+          if (event.error === 'not-allowed') {
+            setError('Microphone access was denied. Please allow mic access in your browser.');
+          } else if (event.error === 'network') {
+            setError('Speech network error. Please check your internet connection.');
+          } else {
+            setError(`Speech error: ${event.error}`);
+          }
+        };
+
+        recognition.onend = () => {
+          recognitionRef.current = null;
+
+          if (enabledRef.current && !hasFatalErrorRef.current) {
+            sessionStartPIdxRef.current = highestPIdxRef.current;
+            consecutiveRestartsRef.current += 1;
+
+            if (consecutiveRestartsRef.current > 3) {
+              console.log('Max consecutive speech restarts reached.');
+              enabledRef.current = false;
+              setIsListening(false);
+              return;
+            }
+
+            if (restartTimerRef.current) clearTimeout(restartTimerRef.current);
+            const delay = isNoSpeechRef.current ? 800 : 300;
+            restartTimerRef.current = setTimeout(() => {
+              createAndStart();
+            }, delay);
+          } else {
+            setIsListening(false);
+          }
+        };
+
+        recognition.start();
+        recognitionRef.current = recognition;
+      } catch (err) {
+        console.error('Failed to create/start speech recognition:', err);
+        hasFatalErrorRef.current = true;
+        enabledRef.current = false;
+        setIsListening(false);
+        setError('Could not access microphone.');
+      }
+    };
+
+    createAndStart();
+  }, [isSupported, SpeechRecognitionAPI, langCode, handleSpeechResult]);
 
   const toggleListening = useCallback(() => {
     if (enabledRef.current || isListening) {
