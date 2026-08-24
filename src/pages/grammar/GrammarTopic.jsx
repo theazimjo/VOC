@@ -442,7 +442,9 @@ export default function GrammarTopic() {
           ←
         </button>
         <h1 className="clean-quiz-title">{getExerciseType(exerciseId, t).icon} {t('grammar.exerciseHeader', { id: exerciseId })}</h1>
-        <div className="clean-guide-icon" style={{ opacity: 0, pointerEvents: 'none' }} aria-hidden="true">📖</div>
+        <div className="clean-quiz-progress-pill">
+          {currentQ + 1} / {totalQ}
+        </div>
       </div>
 
       {/* Subtle Progress Bar */}
@@ -453,112 +455,102 @@ export default function GrammarTopic() {
         />
       </div>
 
-      {/* Metadata Card */}
-      <div className="clean-meta-card">
-        <div className="meta-line question-progress">
-          {t('grammar.questionProgress', { current: currentQ + 1, total: totalQ })}
-        </div>
-        <div className="meta-line topic-name">
-          {topic.title}
-        </div>
-        <div className="meta-line exercise-type-line">
-          <span style={{ color: getExerciseType(exerciseId, t).color }}>{getExerciseType(exerciseId, t).icon} {getExerciseType(exerciseId, t).name}</span>
-        </div>
-      </div>
+      {/* Main Quiz Body Container (Vertically Centered) */}
+      <div className="clean-quiz-body">
+        {/* Question Text or Context */}
+        {question.situation && (
+          <div className="clean-situation-box">
+            <p className="situation-text">{question.situation}</p>
+            {question.dialogue && (
+              <pre className="dialogue-text">{question.dialogue}</pre>
+            )}
+          </div>
+        )}
 
-      {/* Question Text or Context */}
-      {question.situation && (
-        <div className="clean-situation-box">
-          <p className="situation-text">{question.situation}</p>
-          {question.dialogue && (
-            <pre className="dialogue-text">{question.dialogue}</pre>
-          )}
-        </div>
-      )}
+        {!question.situation && (
+          <p className="clean-question-text">
+            {parseInt(exerciseId, 10) === 3
+              ? t('grammar.scrambledFormHint')
+              : (question.text || question.answer)}
+          </p>
+        )}
 
-      {!question.situation && (
-        <p className="clean-question-text">
-          {parseInt(exerciseId, 10) === 3
-            ? t('grammar.scrambledFormHint')
-            : (question.text || question.answer)}
-        </p>
-      )}
+        {/* Scrambled Sentence Exercise */}
+        {parseInt(exerciseId, 10) === 3 ? (
+          <ScrambledExercise
+            key={question.id || currentQ}
+            question={question}
+            answered={answered}
+            guideLang={activeGuideLang}
+            onAnswer={(isCorrect) => {
+              setAnswered(true);
+              if (isCorrect) { playCorrectSound(); vibrate([50, 30, 50]); setScore(s => s + 1); }
+              else { playWrongSound(); vibrate([200]); setWrongCount(w => w + 1); }
+              setAnswers(prev => [...prev, {
+                questionId: question.id,
+                questionText: `Sentence building exercise`,
+                selected: 0,
+                correct: 0,
+                isCorrect,
+                explanation: question.explanation,
+                options: [question.answer],
+              }]);
+            }}
+          />
+        ) : (
+          /* Standard Options List */
+          <div className="clean-options-list">
+            {(shuffled?.options || []).map((opt, idx) => {
+              let cls = 'clean-option-btn';
+              if (answered) {
+                if (idx === shuffled.correct) cls += ' correct';
+                else if (idx === selected) cls += ' wrong';
+                else cls += ' dimmed';
+              } else if (selected === idx) {
+                cls += ' selected';
+              }
+              return (
+                <button
+                  key={idx}
+                  className={cls}
+                  onClick={() => handleSelect(idx)}
+                  disabled={answered}
+                >
+                  <span className="option-text-only">{opt}</span>
+                  {answered && idx === shuffled.correct && (
+                    <span className="option-badge-icon correct-badge">✓</span>
+                  )}
+                  {answered && idx === selected && idx !== shuffled.correct && (
+                    <span className="option-badge-icon wrong-badge">✗</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
-      {/* Scrambled Sentence Exercise */}
-      {parseInt(exerciseId, 10) === 3 ? (
-        <ScrambledExercise
-          key={question.id || currentQ}
-          question={question}
-          answered={answered}
-          guideLang={activeGuideLang}
-          onAnswer={(isCorrect) => {
-            setAnswered(true);
-            if (isCorrect) { playCorrectSound(); vibrate([50, 30, 50]); setScore(s => s + 1); }
-            else { playWrongSound(); vibrate([200]); setWrongCount(w => w + 1); }
-            setAnswers(prev => [...prev, {
-              questionId: question.id,
-              questionText: `Sentence building exercise`,
-              selected: 0,
-              correct: 0,
-              isCorrect,
-              explanation: question.explanation,
-              options: [question.answer],
-            }]);
-          }}
-        />
-      ) : (
-        /* Standard Options List */
-        <div className="clean-options-list">
-          {(shuffled?.options || []).map((opt, idx) => {
-            let cls = 'clean-option-btn';
-            if (answered) {
-              if (idx === shuffled.correct) cls += ' correct';
-              else if (idx === selected) cls += ' wrong';
-              else cls += ' dimmed';
-            } else if (selected === idx) {
-              cls += ' selected';
-            }
-            return (
-              <button
-                key={idx}
-                className={cls}
-                onClick={() => handleSelect(idx)}
-                disabled={answered}
-              >
-                <span className="option-text-only">{opt}</span>
-                {answered && idx === shuffled.correct && (
-                  <span className="option-badge-icon correct-badge">✓</span>
-                )}
-                {answered && idx === selected && idx !== shuffled.correct && (
-                  <span className="option-badge-icon wrong-badge">✗</span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      )}
+        {/* Explanation toggling */}
+        {answered && question.explanation && (
+          <div className="clean-explanation-block">
+            <button
+              className="clean-explanation-toggle"
+              onClick={() => setShowExplanation((s) => !s)}
+            >
+              {showExplanation ? t('grammar.hideExplanation') : t('grammar.showExplanation')}
+            </button>
+            {showExplanation && (
+              <p className="clean-explanation-text">{getFormattedExplanation(question.explanation, activeGuideLang)}</p>
+            )}
+          </div>
+        )}
 
-      {/* Explanation toggling */}
-      {answered && question.explanation && (
-        <div className="clean-explanation-block">
-          <button
-            className="clean-explanation-toggle"
-            onClick={() => setShowExplanation((s) => !s)}
-          >
-            {showExplanation ? t('grammar.hideExplanation') : t('grammar.showExplanation')}
+        {/* Next/Finish button */}
+        {answered && (
+          <button className="clean-next-btn" onClick={handleNext}>
+            {currentQ + 1 >= totalQ ? t('grammar.viewResults') : t('grammar.nextQuestion')}
           </button>
-          {showExplanation && (
-            <p className="clean-explanation-text">{getFormattedExplanation(question.explanation, activeGuideLang)}</p>
-          )}
-        </div>
-      )}
-
-      {/* Next/Finish button */}
-      {answered && (
-        <button className="clean-next-btn" onClick={handleNext}>
-          {currentQ + 1 >= totalQ ? t('grammar.viewResults') : t('grammar.nextQuestion')}
-        </button>
-      )}
+        )}
+      </div>
     </div>
   );
 }

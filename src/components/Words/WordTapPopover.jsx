@@ -190,31 +190,27 @@ export default function WordTapPopover({
         exit={{ opacity: 0 }}
       />
       <motion.div
-        className={`wtp-popover ${isDesktop ? 'wtp-popover-desktop' : ''}`}
-        style={
-          isDesktop
-            ? undefined
-            : {
-                left: pos.left,
-                top: pos.openUp ? undefined : pos.top,
-                bottom: pos.openUp ? pos.bottom : undefined,
-                transformOrigin: pos.openUp ? 'bottom center' : 'top center'
-              }
-        }
+        className={`wtp-popover ${isDesktop ? 'wtp-popover-desktop' : 'wtp-popover-mobile'}`}
         initial={
           isDesktop
             ? { opacity: 0, y: 24, scale: 0.95 }
-            : { opacity: 0, scale: 0.92, y: pos.openUp ? 6 : -6 }
+            : { y: '100%', opacity: 0.8 }
         }
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={
           isDesktop
             ? { opacity: 0, y: 24, scale: 0.95 }
-            : { opacity: 0, scale: 0.92 }
+            : { y: '100%', opacity: 0 }
         }
-        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        transition={
+          isDesktop
+            ? { duration: 0.2, ease: [0.16, 1, 0.3, 1] }
+            : { type: 'spring', damping: 30, stiffness: 350 }
+        }
         onClick={e => e.stopPropagation()}
       >
+        {!isDesktop && <div className="wtp-mobile-handle" />}
+
         <div className="wtp-top-row">
           <div className="wtp-lang-picker" ref={langMenuRef}>
             <button

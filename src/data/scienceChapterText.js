@@ -2058,34 +2058,66 @@ export const scienceChapterText = {
         { type: 'heading', text: 'Your Body\'s Framework' },
         { type: 'p', text: "What jobs does the skeleton do? Some animals have a soft body, and the water they live in helps support it. Some animals have a hard outer covering that supports and protects their body. Still other living things have bones inside their body — these bones make up the skeleton. The skeleton is the system of bones that supports and protects the body and the organs inside it. The skeleton is also called the skeletal system." },
         { type: 'p', text: "The skeleton of your body can be compared with the steel framework of a building. The steel beams give a building its shape and support, and the skeletal system forms the framework of the body in much the same way — it supports the body and gives it shape. But it does other jobs too: some parts of the skeleton protect soft parts of the body, such as the brain, heart, and lungs." },
-        { type: 'p', text: "The skeleton is different from the framework of a building in an important way. The steel framework of a building cannot move, but the skeleton can move, because muscles are attached to the bones of the skeleton and make the bones move. In fact, the skeleton has 206 bones that help it do its jobs. There are two kinds of bones in the head — the bones of the face and the bones that protect the brain — and together they are joined to form the skull." }
+        { type: 'p', text: "The skeleton is different from the framework of a building in an important way. The steel framework of a building cannot move, but the skeleton can move, because muscles are attached to the bones of the skeleton and make the bones move. In fact, the skeleton has 206 bones that help it do its jobs. There are two kinds of bones in the head — the bones of the face and the bones that protect the brain — and together they are joined to form the skull." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/human-skeleton-diagram.jpg', caption: 'The human skeleton' },
+          { src: '/images/science/ch13/skull-front-side-view.jpg', caption: 'Bones of the skull, front and side view' },
+          { src: '/images/science/ch13/skyscraper-construction.jpg', caption: 'A skyscraper being built' }
+        ] }
       ],
       [
         { type: 'p', text: "The skeleton in the middle part of the body is made up of the backbone and ribs. As you learned earlier, the backbone is made of many small bones called vertebrae. These bones protect many nerves in your back and also help support your body. Some of the bones of the backbone are attached to ribs — there are 12 pairs of them — and the ribs protect organs inside the body, such as the lungs." },
-        { type: 'p', text: "The shoulders, arms, hips, and legs are also parts of the skeleton. The shoulders are made of flat bones: the collarbones and the shoulder blades. The hips are made of bones in the shape of a bowl, and this bowl shape helps support and protect the organs inside the body." }
+        { type: 'p', text: "The shoulders, arms, hips, and legs are also parts of the skeleton. The shoulders are made of flat bones: the collarbones and the shoulder blades. The hips are made of bones in the shape of a bowl, and this bowl shape helps support and protect the organs inside the body." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/hip-bones-diagram.jpg', caption: 'Hip bones' },
+          { src: '/images/science/ch13/backbone-vertebrae-diagram.jpg', caption: 'The backbone, made of vertebrae' },
+          { src: '/images/science/ch13/ribs-lungs-heart-diagram.jpg', caption: 'The ribs, protecting the lungs and heart' }
+        ] }
       ],
       [
         { type: 'p', text: "Long bones make up the arms and legs. The center of these bones contains a soft material called bone marrow, which produces new blood cells — another important job of the skeletal system." },
-        { type: 'p', text: "The leg bones are longer and heavier than the bones in the arm. The strength of the leg bones allows them to hold the body upright when walking or running. The long bone in the thigh is called the femur. It is the longest and heaviest bone in the body." }
+        { type: 'p', text: "The leg bones are longer and heavier than the bones in the arm. The strength of the leg bones allows them to hold the body upright when walking or running. The long bone in the thigh is called the femur. It is the longest and heaviest bone in the body." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/bone-marrow-cross-section.jpg', caption: 'Bone marrow inside a long bone' },
+          { src: '/images/science/ch13/arm-leg-bones-diagram.jpg', caption: 'Arm bones and leg bones compared' }
+        ] }
       ],
       [
         { type: 'p', text: "When you were born, your skeleton was made of a soft, bonelike material that bends, called cartilage. As you grow older, much of this cartilage changes to hard bone. Not all the cartilage in the body changes to bone, though — the tip of your nose and your ears are made of cartilage." },
         { type: 'p', text: "Cartilage is important in other places in your body too. The backbone is made of many small bones, and nerves travel out from between these bones. If the bones were able to rub against one another, they would also rub against the nerves, which would be very painful — but pads of cartilage between the bones prevent this. Pads of cartilage are also found at the ends of the long bones in your arms and legs, where they act as cushions, or shock absorbers." },
-        { type: 'sidebar', text: "Do you know? Some scientists believe that human cartilage may one day be used to prevent, treat, and even cure some diseases. Research shows that cartilage contains a special substance called anti-invasion factor (AIF). Scientists have removed AIF from cartilage and found that it stops the growth of cancer — they believe it may also prevent blindness caused by diabetes and even cure some gum diseases. Scientists hope that they will one day be able to produce AIF in the laboratory." }
+        { type: 'sidebar', text: "Do you know? Some scientists believe that human cartilage may one day be used to prevent, treat, and even cure some diseases. Research shows that cartilage contains a special substance called anti-invasion factor (AIF). Scientists have removed AIF from cartilage and found that it stops the growth of cancer — they believe it may also prevent blindness caused by diabetes and even cure some gum diseases. Scientists hope that they will one day be able to produce AIF in the laboratory." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/vertebrae-cartilage-pads.jpg', caption: 'Pads of cartilage between vertebrae' },
+          { src: '/images/science/ch13/cartilage-microscope.jpg', caption: 'Cartilage seen through a microscope' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Where Bones Meet' },
         { type: 'p', text: "What are four kinds of joints? Parts of your skeleton can move because of the way bones are joined together. The place where two or more bones are joined together is called a joint. Most joints in the body allow the body to move. Bones are held together at joints by strong cords of tissue called ligaments." },
-        { type: 'p', text: "The kind of joint that allows the most movement of bones is a ball-and-socket joint. This joint is formed by a round knob at the end of one bone, which fits into a hollow cavity, or socket, at the end of another bone — the joint that connects the upper arm to the shoulder works this way, which is why your arm can move in so many directions." }
+        { type: 'p', text: "The kind of joint that allows the most movement of bones is a ball-and-socket joint. This joint is formed by a round knob at the end of one bone, which fits into a hollow cavity, or socket, at the end of another bone — the joint that connects the upper arm to the shoulder works this way, which is why your arm can move in so many directions." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/knee-ligaments-diagram.jpg', caption: 'Ligaments in the knee' },
+          { src: '/images/science/ch13/ball-and-socket-shoulder-joint.jpg', caption: 'Ball-and-socket joint of the shoulder' }
+        ] }
       ],
       [
         { type: 'p', text: "A ball-and-socket joint allows bones to move in many directions, but some bones can only move back and forth, because they are connected by another kind of joint. A hinge joint allows bones to move back and forth — your knee is a hinge joint." },
-        { type: 'p', text: "Your skull is attached to your backbone by a pivot joint, between the first two vertebrae, and a pivot joint allows for movement from side to side — this is what lets you turn your head. The bones of the skull, on the other hand, are joined together but cannot move at all. The kind of joint between bones that cannot move is called a fixed joint." }
+        { type: 'p', text: "Your skull is attached to your backbone by a pivot joint, between the first two vertebrae, and a pivot joint allows for movement from side to side — this is what lets you turn your head. The bones of the skull, on the other hand, are joined together but cannot move at all. The kind of joint between bones that cannot move is called a fixed joint." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/hinge-joint-knee.jpg', caption: 'Hinge joint of the knee' },
+          { src: '/images/science/ch13/pivot-joint-neck.jpg', caption: 'Pivot joint of the neck' },
+          { src: '/images/science/ch13/fixed-joints-skull.jpg', caption: 'Fixed joints of the skull' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Muscles Move Bones' },
         { type: 'p', text: "How do muscles move bones? Bones form the framework of your body, and bones are able to move because muscles move them. The whole skeletal system is covered with muscles, made of soft but strong tissue. The muscles in the body make up the muscular system, and you have more than 600 of them." },
-        { type: 'p', text: "Muscles are attached to bones by tough cords called tendons — you can feel tendons in your hand and wrist, and also the big tendon that connects the large muscle in the calf of your leg to your heel." }
+        { type: 'p', text: "Muscles are attached to bones by tough cords called tendons — you can feel tendons in your hand and wrist, and also the big tendon that connects the large muscle in the calf of your leg to your heel." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/muscles-of-runner-diagram.jpg', caption: 'Muscles of someone running' },
+          { src: '/images/science/ch13/runner-photo.jpg', caption: 'A runner in motion' },
+          { src: '/images/science/ch13/calf-muscle-tendon-diagram.jpg', caption: 'The calf muscle and its tendon' }
+        ] }
       ],
       [
         { type: 'p', text: "Most muscles of the body move bones by contracting. When a muscle contracts, it becomes shorter and thicker; when a muscle relaxes, it becomes longer and thinner. Muscle is the only kind of tissue that can contract and relax, and this contracting and relaxing is what causes movement." },
@@ -2093,35 +2125,72 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "You can observe how pairs of muscles contract and relax to move a bone in your own body. Place your left hand over the muscle on the top of your upper right arm, then move the lower half of your right arm upward. You should feel the muscle in your right arm bulge — it bulges because it is contracting, pulling the bones in your lower arm upward. Now feel the muscle on the underside of your right arm; it should feel soft, because it is relaxed." },
-        { type: 'p', text: "Now lower your arm and feel the same pair of muscles again. Which one contracts this time, and which one relaxes?" }
+        { type: 'p', text: "Now lower your arm and feel the same pair of muscles again. Which one contracts this time, and which one relaxes?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/upper-arm-muscle-pair.jpg', caption: 'Contracted and relaxed muscles of the upper arm' },
+          { src: '/images/science/ch13/lower-arm-muscle-pair.jpg', caption: 'How muscles move bones of the lower arm' }
+        ] }
       ],
       [
-        { type: 'activity', text: "Hands-on: What happens when muscles become tired? Copy a paragraph from any page in a book, then move the fingers of your writing hand quickly, as though playing a piano, until your fingers or arm feel tired. Copy the same paragraph again and compare your handwriting in the two samples — was it harder to write when your fingers were tired, and how did the samples differ? Next, while seated, raise one leg and record how long you can keep it raised before it becomes tired. Rest for 30 seconds, then repeat immediately. How does the second time compare with the first? What do the results tell you about how tired muscles affect your ability to do a task, both in quality and in how long you can keep it up?" }
+        { type: 'activity', text: "Hands-on: What happens when muscles become tired? Copy a paragraph from any page in a book, then move the fingers of your writing hand quickly, as though playing a piano, until your fingers or arm feel tired. Copy the same paragraph again and compare your handwriting in the two samples — was it harder to write when your fingers were tired, and how did the samples differ? Next, while seated, raise one leg and record how long you can keep it raised before it becomes tired. Rest for 30 seconds, then repeat immediately. How does the second time compare with the first? What do the results tell you about how tired muscles affect your ability to do a task, both in quality and in how long you can keep it up?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/activity-writing-hand.jpg', caption: 'Testing handwriting before and after tired fingers' },
+          { src: '/images/science/ch13/activity-boy-raised-leg.jpg', caption: 'Timing how long a raised leg stays up' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Two Groups of Muscles' },
         { type: 'p', text: "What are two groups of muscles? You can control some of the muscles in your body — the ones that help you walk, run, sit down, get up, or jump. The muscles you can control are called voluntary muscles. Voluntary muscles are attached to bones and other muscles, and they move these bones and muscles." },
-        { type: 'p', text: "Muscles that you cannot control are called involuntary muscles, and you need them to stay alive. Suppose you had to control your own heartbeat — you would have to think about moving your heart muscle every moment of your life. Other involuntary muscles are in the stomach and intestines, where they move food along; involuntary muscles also move blood through the blood vessels, and even cause you to blush or turn pale." }
+        { type: 'p', text: "Muscles that you cannot control are called involuntary muscles, and you need them to stay alive. Suppose you had to control your own heartbeat — you would have to think about moving your heart muscle every moment of your life. Other involuntary muscles are in the stomach and intestines, where they move food along; involuntary muscles also move blood through the blood vessels, and even cause you to blush or turn pale." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/kids-running-activity.jpg', caption: 'Voluntary muscles at work, running' },
+          { src: '/images/science/ch13/sack-race-activity.jpg', caption: 'Voluntary muscles at work, a sack race' },
+          { src: '/images/science/ch13/ball-game-activity.jpg', caption: 'Voluntary muscles at work, playing ball' }
+        ] }
       ],
       [
         { type: 'sidebar', text: "Try this: Are your eyelids controlled by both voluntary and involuntary muscles? Look at your eyes in a mirror and see how long you can go without blinking — then blink four times in a row on purpose. Which kind of muscle stops you from blinking, and which kind lets you choose to blink? Now look at the pupil of one eye, the dark circular opening at its center that controls how much light enters. Have someone shine a dim flashlight on it and watch what happens to its size. Since you cannot control that change yourself, what kind of muscle must be controlling the pupil?" },
-        { type: 'p', text: "There are three kinds of muscles. Most muscles that move bones are made of long fibers — these are voluntary muscles called skeletal muscles. The involuntary muscles that make up most body organs, such as the blood vessels, stomach, and intestines, are called smooth muscles. A third kind of muscle, found only in the heart, is called heart muscle — it too is involuntary. The heart is the hardest-working muscle in the body: it beats between 2 billion and 3 billion times during an average lifetime." }
+        { type: 'p', text: "There are three kinds of muscles. Most muscles that move bones are made of long fibers — these are voluntary muscles called skeletal muscles. The involuntary muscles that make up most body organs, such as the blood vessels, stomach, and intestines, are called smooth muscles. A third kind of muscle, found only in the heart, is called heart muscle — it too is involuntary. The heart is the hardest-working muscle in the body: it beats between 2 billion and 3 billion times during an average lifetime." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/eye-flashlight-activity.jpg', caption: 'Testing how the pupil responds to light' },
+          { src: '/images/science/ch13/skeletal-muscle-microscope.jpg', caption: 'Skeletal muscle' },
+          { src: '/images/science/ch13/smooth-muscle-microscope.jpg', caption: 'Smooth muscle' },
+          { src: '/images/science/ch13/heart-muscle-microscope.jpg', caption: 'Heart muscle' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Bone and Muscle Injuries' },
         { type: 'p', text: "What are some common injuries of bones and muscles? Even though bones are strong, they can be damaged. A crack or a break in a bone is called a fracture, and there are different kinds. Usually when a bone breaks, it does not push through the muscle and skin — this is called a simple fracture. Sometimes the broken end of a bone does push through the muscle and skin, which is called a compound fracture and carries a much greater risk of infection." },
-        { type: 'p', text: "Because bones contain living tissue, they can repair themselves. A doctor puts the parts of a broken bone back in place, or sets it, and a cast holds the broken bones in place while they grow back together." }
+        { type: 'p', text: "Because bones contain living tissue, they can repair themselves. A doctor puts the parts of a broken bone back in place, or sets it, and a cast holds the broken bones in place while they grow back together." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/simple-compound-fracture-diagram.jpg', caption: 'Simple fracture and compound fracture' },
+          { src: '/images/science/ch13/cast-being-applied.jpg', caption: 'A cast being applied' }
+        ] }
       ],
       [
         { type: 'p', text: "The ligaments that connect bones can also be injured. A sprain is an injury in which a ligament is stretched or torn, which happens when a joint is forced to move in a way other than the way it normally moves — football players, for example, often suffer torn ligaments in the knee when hit from the side, and ankle and wrist sprains happen the same way." },
-        { type: 'p', text: "Muscles can be injured too, often from overuse. A muscle strain is an injury caused by overstretching a muscle or tendon, and it often happens when someone lifts a heavy object the wrong way. A cramp is a sudden, strong, and often painful contraction of a muscle — it does not usually last long, and rubbing the muscle can often help get rid of it." }
+        { type: 'p', text: "Muscles can be injured too, often from overuse. A muscle strain is an injury caused by overstretching a muscle or tendon, and it often happens when someone lifts a heavy object the wrong way. A cramp is a sudden, strong, and often painful contraction of a muscle — it does not usually last long, and rubbing the muscle can often help get rid of it." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/football-knee-injury.jpg', caption: 'Checking a football player\'s knee injury' },
+          { src: '/images/science/ch13/proper-lifting-technique.jpg', caption: 'The proper way to lift a heavy object' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Care of Bones and Muscles' },
-        { type: 'p', text: "How can you keep bones and muscles healthy? Three important things help: a proper diet, the right kind of exercise, and enough rest. A proper diet includes foods from four main groups. The meat group contains protein needed for cell growth and to make new cells. The dairy group includes foods with minerals that make bones hard. The fruit and vegetable group provides needed vitamins. And the bread and cereal group provides the energy that muscles need to move bones." }
+        { type: 'p', text: "How can you keep bones and muscles healthy? Three important things help: a proper diet, the right kind of exercise, and enough rest. A proper diet includes foods from four main groups. The meat group contains protein needed for cell growth and to make new cells. The dairy group includes foods with minerals that make bones hard. The fruit and vegetable group provides needed vitamins. And the bread and cereal group provides the energy that muscles need to move bones." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/food-meat-group.jpg', caption: 'Meat group' },
+          { src: '/images/science/ch13/food-dairy-group.jpg', caption: 'Dairy group' },
+          { src: '/images/science/ch13/food-fruit-vegetable-group.jpg', caption: 'Fruit and vegetable group' },
+          { src: '/images/science/ch13/food-bread-cereal-group.jpg', caption: 'Bread and cereal group' }
+        ] }
       ],
       [
-        { type: 'activity', text: "Hands-on: What happens to bones when minerals are removed? Remove all the meat from an uncooked chicken leg bone, wash it, dry it, and gently try to bend it — does it feel hard or soft, and does it bend? Half fill a jar with vinegar, place the bone in it, and let it sit for five days; vinegar removes minerals from bone. Afterward, wash and dry the bone again and try bending it once more. How does it feel now compared to before, and does it bend more easily? What does this tell you about what your bones would be like without enough minerals in your diet, and how would that affect your skeleton's ability to support your body?" }
+        { type: 'activity', text: "Hands-on: What happens to bones when minerals are removed? Remove all the meat from an uncooked chicken leg bone, wash it, dry it, and gently try to bend it — does it feel hard or soft, and does it bend? Half fill a jar with vinegar, place the bone in it, and let it sit for five days; vinegar removes minerals from bone. Afterward, wash and dry the bone again and try bending it once more. How does it feel now compared to before, and does it bend more easily? What does this tell you about what your bones would be like without enough minerals in your diet, and how would that affect your skeleton's ability to support your body?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/activity-girl-vinegar-bone.jpg', caption: 'Soaking a chicken bone in vinegar' },
+          { src: '/images/science/ch13/activity-bending-bone.jpg', caption: 'Testing whether the bone bends' }
+        ] }
       ],
       [
         { type: 'p', text: "In addition to a proper diet, exercise is important for the growth and development of muscles. When muscles are not used, they shrink — they become smaller and weaker. Exercise keeps muscles strong." },
