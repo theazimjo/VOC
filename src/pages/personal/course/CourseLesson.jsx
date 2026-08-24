@@ -9,6 +9,7 @@ import WordsStage from './stages/WordsStage';
 import GrammarStage from './stages/GrammarStage';
 import ReadingStage from './stages/ReadingStage';
 import ListeningStage from './stages/ListeningStage';
+import ScienceLesson from './science/ScienceLesson';
 import './stages/CourseStages.css';
 
 const MASTERY_DONE_THRESHOLD = 80;
@@ -35,6 +36,14 @@ export default function CourseLesson() {
   const flatUnits = useMemo(() => {
     return months.flatMap((m) => m.units);
   }, [months]);
+
+  // Science doesn't use the words/grammar/reading/listening-per-unit model
+  // above — it's a continuous page-batch flow, handled entirely by its own
+  // component (all the hooks above are still called unconditionally first,
+  // per the rules of hooks; they're simply unused on this branch).
+  if (pack.courseId === 'science') {
+    return <ScienceLesson />;
+  }
 
   if (!catalog || months.length === 0) {
     return <div className="course-empty">{t('course.noData')}</div>;

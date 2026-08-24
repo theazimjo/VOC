@@ -16,6 +16,20 @@ export const AVAILABLE_COURSES = [
       months: essential3000Months,
     },
   },
+  {
+    id: 'science',
+    icon: '🔬',
+    data: {
+      title: 'Science',
+      level: 'Intermediate',
+      description: '',
+      // Science doesn't use the months/units stage model — its own
+      // ScienceDashboard/ScienceLesson components (branched on
+      // pack.courseId in CourseDashboard.jsx/CourseLesson.jsx) read
+      // chapters straight from src/data/scienceCourse.js instead.
+      months: [],
+    },
+  },
 ];
 
 export function getCourseCatalog(courseId) {

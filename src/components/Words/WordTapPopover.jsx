@@ -1,17 +1,15 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, X, Check, ChevronDown, Volume2 } from 'lucide-react';
+import { Plus, X, Check, ChevronDown, Volume2, BookOpen, Sparkles } from 'lucide-react';
 import { speechLanguages, speakWord } from '../../utils/helpers';
-import { lookupWordFromDictionary, toShortLangCode } from '../../utils/dictionaryService';
+import { lookupWordFromDictionary, fetchWordMeanings, toShortLangCode } from '../../utils/dictionaryService';
 import { useLanguage } from '../../contexts/LanguageContext';
 import IosSpinner from '../common/IosSpinner';
 import './WordTapPopover.css';
 
-const POPOVER_WIDTH = 280;
+const POPOVER_WIDTH = 300;
 const POPOVER_GAP = 10;
 
-// Clamps the popover's position so it always stays fully on-screen,
-// anchored as close as possible to the tapped word's bounding rect.
 function computePosition(anchorRect) {
   if (!anchorRect) return { left: 0, top: 0, openUp: false };
   const vw = window.innerWidth;
@@ -21,10 +19,8 @@ function computePosition(anchorRect) {
   left = Math.max(POPOVER_GAP, Math.min(left, vw - POPOVER_WIDTH - POPOVER_GAP));
 
   const spaceBelow = vh - anchorRect.bottom;
-  const openUp = spaceBelow < 260 && anchorRect.top > 260;
+  const openUp = spaceBelow < 300 && anchorRect.top > 300;
 
-  // Anchored via `top` (growing downward) or `bottom` (growing upward) so no
-  // rendered-height measurement is needed to keep the popover on-screen.
   return openUp
     ? { left, bottom: vh - anchorRect.top + POPOVER_GAP, openUp: true }
     : { left, top: anchorRect.bottom + POPOVER_GAP, openUp: false };
@@ -42,6 +38,8 @@ export default function WordTapPopover({
   onClose
 }) {
   const { t } = useLanguage();
+  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 768);
+
   const [translationLangCode, setTranslationLangCode] = useState(() => {
     try {
       return localStorage.getItem(`translationLang:${packId}`) || 'uz';
@@ -57,10 +55,20 @@ export default function WordTapPopover({
   const [definition, setDefinition] = useState('');
   const [partOfSpeech, setPartOfSpeech] = useState('');
   const [example, setExample] = useState('');
+  const [phonetic, setPhonetic] = useState('');
+  const [meanings, setMeanings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [lookupError, setLookupError] = useState(false);
   const [saveState, setSaveState] = useState('idle'); // idle | saving | saved
   const cancelledRef = useRef(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const langOptions = useMemo(
     () => speechLanguages.filter(l => toShortLangCode(l.code) !== wordLangCode),
@@ -83,9 +91,7 @@ export default function WordTapPopover({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isLangMenuOpen]);
 
-  // Pronounce the tapped word/phrase as soon as the popover opens for it -
-  // hearing it is often the first thing you want, before the translation
-  // even loads.
+  // Pronounce tapped word
   useEffect(() => {
     speakWord(word, wordLocale);
   }, [word, wordLocale]);
@@ -94,13 +100,13 @@ export default function WordTapPopover({
     cancelledRef.current = false;
     setLookupError(false);
 
-    // If word already exists in pack/data, display its data directly without searching internet dictionary API
     if (existingWord && existingWord.translation) {
       setTranslation(existingWord.translation);
       setAlternate('');
       setDefinition(existingWord.definition || '');
       setPartOfSpeech(existingWord.partOfSpeech || '');
       setExample(existingWord.example || '');
+      setPhonetic(existingWord.phonetic || '');
       setIsLoading(false);
       return;
     }
@@ -111,6 +117,9 @@ export default function WordTapPopover({
     setDefinition('');
     setPartOfSpeech('');
     setExample('');
+    setPhonetic('');
+    setMeanings([]);
+
     lookupWordFromDictionary(word, 'word2translation', wordLangCode, translationLangCode)
       .then(res => {
         if (cancelledRef.current) return;
@@ -120,12 +129,22 @@ export default function WordTapPopover({
           setDefinition(res.definition || '');
           setPartOfSpeech(res.partOfSpeech || '');
           setExample(res.example || '');
+          setPhonetic(res.phonetic || '');
         } else {
           setLookupError(true);
         }
       })
       .catch(() => { if (!cancelledRef.current) setLookupError(true); })
       .finally(() => { if (!cancelledRef.current) setIsLoading(false); });
+
+    fetchWordMeanings(word, wordLangCode, translationLangCode)
+      .then(mList => {
+        if (!cancelledRef.current && Array.isArray(mList)) {
+          setMeanings(mList);
+        }
+      })
+      .catch(() => {});
+
     return () => { cancelledRef.current = true; };
   }, [word, wordLangCode, translationLangCode, existingWord]);
 
@@ -134,9 +153,7 @@ export default function WordTapPopover({
     setIsLangMenuOpen(false);
     try {
       localStorage.setItem(`translationLang:${packId}`, code);
-    } catch {
-      // ignore storage errors
-    }
+    } catch {}
   };
 
   const handleAdd = async () => {
@@ -153,27 +170,45 @@ export default function WordTapPopover({
 
   const pos = computePosition(anchorRect);
 
+  const extraMeanings = useMemo(() => {
+    if (!meanings || meanings.length === 0) return [];
+    const primaryLower = (translation || '').trim().toLowerCase();
+    return meanings.filter(m => (m.translation || '').trim().toLowerCase() !== primaryLower).slice(0, 4);
+  }, [meanings, translation]);
+
   return (
     <>
       <motion.div
-        className="wtp-backdrop"
+        className={`wtp-backdrop ${isDesktop ? 'wtp-backdrop-desktop' : ''}`}
         onClick={onClose}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       />
       <motion.div
-        className="wtp-popover"
-        style={{
-          left: pos.left,
-          top: pos.openUp ? undefined : pos.top,
-          bottom: pos.openUp ? pos.bottom : undefined,
-          transformOrigin: pos.openUp ? 'bottom center' : 'top center'
-        }}
-        initial={{ opacity: 0, scale: 0.92, y: pos.openUp ? 6 : -6 }}
+        className={`wtp-popover ${isDesktop ? 'wtp-popover-desktop' : ''}`}
+        style={
+          isDesktop
+            ? undefined
+            : {
+                left: pos.left,
+                top: pos.openUp ? undefined : pos.top,
+                bottom: pos.openUp ? pos.bottom : undefined,
+                transformOrigin: pos.openUp ? 'bottom center' : 'top center'
+              }
+        }
+        initial={
+          isDesktop
+            ? { opacity: 0, y: 24, scale: 0.95 }
+            : { opacity: 0, scale: 0.92, y: pos.openUp ? 6 : -6 }
+        }
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.92 }}
-        transition={{ duration: 0.15 }}
+        exit={
+          isDesktop
+            ? { opacity: 0, y: 24, scale: 0.95 }
+            : { opacity: 0, scale: 0.92 }
+        }
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         onClick={e => e.stopPropagation()}
       >
         <div className="wtp-top-row">
@@ -213,27 +248,78 @@ export default function WordTapPopover({
         </div>
 
         <div className="wtp-body">
-          <div className="wtp-word-row">
-            <span className="wtp-word">{word}</span>
+          {/* Main Word Header */}
+          <div className="wtp-word-header">
+            <div className="wtp-word-title-group">
+              <span className="wtp-word">{word}</span>
+              {phonetic && <span className="wtp-phonetic">/{phonetic.replace(/^\/|\/$/g, '')}/</span>}
+            </div>
             <button
               type="button"
               className="wtp-speak-btn"
               onClick={() => speakWord(word, wordLocale)}
               aria-label="Pronounce"
-              title="Pronounce"
+              title="Pronounce word"
             >
-              <Volume2 size={14} />
+              <Volume2 size={15} />
             </button>
           </div>
+
           {isLoading ? (
-            <div className="wtp-loading"><IosSpinner size={16} /></div>
+            <div className="wtp-loading">
+              <IosSpinner size={18} />
+              <span>Yuklanmoqda...</span>
+            </div>
           ) : lookupError ? (
             <div className="wtp-error">{t('read.translationNotFound')}</div>
           ) : (
-            <>
-              <div className="wtp-translation">{translation}</div>
-              {partOfSpeech && <div className="wtp-pos">{partOfSpeech}</div>}
-              {definition && <div className="wtp-definition">{definition}</div>}
+            <div className="wtp-content-scroll">
+              {/* Primary Translation & Part of Speech */}
+              <div className="wtp-primary-translation-block">
+                <div className="wtp-translation">{translation}</div>
+                {partOfSpeech && <span className="wtp-pos-badge">{partOfSpeech}</span>}
+              </div>
+
+              {/* Definition Section (Ma'nosi) */}
+              {definition && (
+                <div className="wtp-detail-card">
+                  <div className="wtp-detail-header">
+                    <BookOpen size={12} />
+                    <span>{t('read.definitionLabel') || 'Ma\'nosi'}</span>
+                  </div>
+                  <p className="wtp-detail-text">{definition}</p>
+                </div>
+              )}
+
+              {/* Example Sentence Section (Misol) */}
+              {example && (
+                <div className="wtp-detail-card wtp-detail-example">
+                  <div className="wtp-detail-header">
+                    <Sparkles size={12} />
+                    <span>{t('read.exampleLabel') || 'Misol'}</span>
+                  </div>
+                  <p className="wtp-detail-text italic">"{example}"</p>
+                </div>
+              )}
+
+              {/* Extra Senses / Meanings Section */}
+              {extraMeanings.length > 0 && (
+                <div className="wtp-detail-card wtp-detail-meanings">
+                  <div className="wtp-detail-header">
+                    <span>{t('read.otherMeaningsLabel') || 'Boshqa ma\'nolari'}</span>
+                  </div>
+                  <div className="wtp-meanings-list">
+                    {extraMeanings.map((m, idx) => (
+                      <div key={idx} className="wtp-meaning-row">
+                        {m.partOfSpeech && <span className="wtp-meaning-pos">{m.partOfSpeech}</span>}
+                        <span className="wtp-meaning-trans">{m.translation}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Cross-check Alternate Suggestion */}
               {alternate && (
                 <button
                   type="button"
@@ -243,33 +329,37 @@ export default function WordTapPopover({
                   {t('read.altTranslation', { alt: alternate })}
                 </button>
               )}
-            </>
+            </div>
           )}
         </div>
 
-        {existingWord ? (
-          <div className="wtp-existing-note">
-            {t('read.alreadyInPackNote')}
-          </div>
-        ) : (
-          <div className="wtp-target-note">→ {currentTopic}</div>
-        )}
-
-        <button
-          type="button"
-          className={`wtp-add-btn ${saveState}`}
-          onClick={handleAdd}
-          disabled={!translation || saveState !== 'idle'}
-        >
-          {saveState === 'saved' ? (
-            <><Check size={15} /> {t('read.addedBtn')}</>
-          ) : saveState === 'saving' ? (
-            <IosSpinner size={16} />
+        {/* Footer Target Chapter & Action Button */}
+        <div className="wtp-footer-block">
+          {existingWord ? (
+            <div className="wtp-existing-note">
+              {t('read.alreadyInPackNote')}
+            </div>
           ) : (
-            <><Plus size={15} /> {existingWord ? t('read.reAddBtn') : t('read.addToChapterBtn')}</>
+            <div className="wtp-target-note">→ {currentTopic}</div>
           )}
-        </button>
+
+          <button
+            type="button"
+            className={`wtp-add-btn ${saveState}`}
+            onClick={handleAdd}
+            disabled={!translation || saveState !== 'idle'}
+          >
+            {saveState === 'saved' ? (
+              <><Check size={15} /> {t('read.addedBtn')}</>
+            ) : saveState === 'saving' ? (
+              <IosSpinner size={16} />
+            ) : (
+              <><Plus size={15} /> {existingWord ? t('read.reAddBtn') : t('read.addToChapterBtn')}</>
+            )}
+          </button>
+        </div>
       </motion.div>
     </>
   );
 }
+

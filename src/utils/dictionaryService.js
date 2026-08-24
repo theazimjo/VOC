@@ -214,11 +214,13 @@ async function fetchEnglishDictionaryInfo(word, targetLang = 'uz') {
     let partOfSpeech = '';
     let definitionRaw = '';
     let example = '';
+    let phonetic = '';
 
     const res = await fetch(`${FREE_DICTIONARY_ENDPOINT}/${encodeURIComponent(word)}`);
     if (res.ok) {
       const data = await res.json();
       const entry = Array.isArray(data) ? data[0] : null;
+      phonetic = entry?.phonetic || (entry?.phonetics || []).find(p => p.text)?.text || '';
       const meaning = entry?.meanings?.[0];
       const definitionEntry = meaning?.definitions?.[0];
       if (definitionEntry) {
@@ -240,10 +242,10 @@ async function fetchEnglishDictionaryInfo(word, targetLang = 'uz') {
       }
     }
 
-    if (!definitionRaw) return null;
+    if (!definitionRaw && !phonetic) return null;
 
     let definitionText = definitionRaw;
-    if (targetLang && targetLang !== 'en') {
+    if (targetLang && targetLang !== 'en' && definitionRaw) {
       try {
         const translatedDefinition = await translateWord(definitionRaw, 'en', targetLang);
         if (translatedDefinition) definitionText = translatedDefinition;
@@ -255,7 +257,8 @@ async function fetchEnglishDictionaryInfo(word, targetLang = 'uz') {
     return {
       partOfSpeech: decodeHTMLEntities(partOfSpeech),
       definition: decodeHTMLEntities(definitionText),
-      example: decodeHTMLEntities(example)
+      example: decodeHTMLEntities(example),
+      phonetic: decodeHTMLEntities(phonetic)
     };
   } catch {
     return null;
@@ -628,7 +631,8 @@ export async function lookupWordFromDictionary(query, direction, wordLangCode = 
       alternateTranslation: translationResult.alternate,
       partOfSpeech: decodeHTMLEntities(dictInfo?.partOfSpeech || ''),
       definition: decodeHTMLEntities(dictInfo?.definition || ''),
-      example: decodeHTMLEntities(dictInfo?.example || '')
+      example: decodeHTMLEntities(dictInfo?.example || ''),
+      phonetic: decodeHTMLEntities(dictInfo?.phonetic || '')
     };
   }
 
@@ -641,6 +645,7 @@ export async function lookupWordFromDictionary(query, direction, wordLangCode = 
     translation: decodeHTMLEntities(trimmed),
     partOfSpeech: decodeHTMLEntities(dictInfo?.partOfSpeech || ''),
     definition: decodeHTMLEntities(dictInfo?.definition || ''),
-    example: decodeHTMLEntities(dictInfo?.example || '')
+    example: decodeHTMLEntities(dictInfo?.example || ''),
+    phonetic: decodeHTMLEntities(dictInfo?.phonetic || '')
   };
 }

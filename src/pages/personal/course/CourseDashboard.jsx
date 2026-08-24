@@ -5,6 +5,7 @@ import { useWords } from '../../../hooks/useWords';
 import { useLessonProgress } from '../../../hooks/useLessonProgress';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { getCourseCatalog } from '../../../data/coursesCatalog';
+import ScienceDashboard from './science/ScienceDashboard';
 
 const MASTERY_DONE_THRESHOLD = 80;
 
@@ -30,6 +31,13 @@ export default function CourseDashboard() {
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [months, progress]);
+
+  // Science has its own dashboard (chapter list + batch progress instead
+  // of months/units/word-mastery) — see the note in CourseLesson.jsx. All
+  // hooks above are called unconditionally first, per the rules of hooks.
+  if (pack.courseId === 'science') {
+    return <ScienceDashboard />;
+  }
 
   if (!catalog || months.length === 0) {
     return <div className="course-empty">{t('course.noData')}</div>;

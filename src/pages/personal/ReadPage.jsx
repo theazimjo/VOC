@@ -40,6 +40,7 @@ function WordTokens({
   startIndex = 0,
   activeWordIndex = -1,
   passedWordIndices = new Set(),
+  selectedWordIdx = null,
   onWordClickIndex
 }) {
   const segments = text.split(/(\{\{[^}]+\}\})/);
@@ -53,14 +54,15 @@ function WordTokens({
       const wordIdx = currentWordIdx++;
       const isPassed = passedWordIndices.has(wordIdx);
       const isActive = activeWordIndex === wordIdx;
+      const isSelected = selectedWordIdx === wordIdx;
 
       return (
         <span
           key={segIdx}
-          className={`read-word read-phrase ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''}`}
+          className={`read-word read-phrase ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
           onClick={(e) => {
             if (onWordClickIndex) onWordClickIndex(wordIdx);
-            onWordTap(phrase, e.currentTarget);
+            onWordTap(phrase, e.currentTarget, wordIdx);
           }}
         >
           {phrase}
@@ -75,14 +77,15 @@ function WordTokens({
         const wordIdx = currentWordIdx++;
         const isPassed = passedWordIndices.has(wordIdx);
         const isActive = activeWordIndex === wordIdx;
+        const isSelected = selectedWordIdx === wordIdx;
 
         return (
           <span
             key={`${segIdx}-${i}`}
-            className={`read-word ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''}`}
+            className={`read-word ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
             onClick={(e) => {
               if (onWordClickIndex) onWordClickIndex(wordIdx);
-              onWordTap(clean, e.currentTarget);
+              onWordTap(clean, e.currentTarget, wordIdx);
             }}
           >
             {part}
@@ -159,6 +162,7 @@ export default function ReadPage() {
   const [packLoading, setPackLoading] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
   const [tapState, setTapState] = useState(null);
+  const [selectedWordIdx, setSelectedWordIdx] = useState(null);
   const [direction, setDirection] = useState(1);
 
   // Reader Settings: Theme ('light' | 'sepia' | 'dark') and Font Size ('small' | 'medium' | 'large')
@@ -354,8 +358,9 @@ export default function ReadPage() {
     }
   }, [pageIndex]);
 
-  const handleWordTap = useCallback((word, anchorEl) => {
+  const handleWordTap = useCallback((word, anchorEl, wordIdx) => {
     if (!word) return;
+    setSelectedWordIdx(wordIdx ?? null);
     setTapState({ word, anchorRect: anchorEl.getBoundingClientRect() });
   }, []);
 
@@ -647,6 +652,7 @@ export default function ReadPage() {
                         startIndex={currentStartIndex}
                         activeWordIndex={activeWordIndex}
                         passedWordIndices={passedWordIndices}
+                        selectedWordIdx={selectedWordIdx}
                         onWordClickIndex={(idx) => {
                           if (isSpeakMode) setActiveWordIndex(idx);
                         }}
@@ -666,6 +672,7 @@ export default function ReadPage() {
                   startIndex={currentStartIndex}
                   activeWordIndex={activeWordIndex}
                   passedWordIndices={passedWordIndices}
+                  selectedWordIdx={selectedWordIdx}
                   onWordClickIndex={(idx) => {
                     if (isSpeakMode) setActiveWordIndex(idx);
                   }}
@@ -735,7 +742,10 @@ export default function ReadPage() {
             currentTopic={topic}
             existingWords={words}
             onAdd={handleAddWord}
-            onClose={() => setTapState(null)}
+            onClose={() => {
+              setTapState(null);
+              setSelectedWordIdx(null);
+            }}
           />
         )}
       </AnimatePresence>
