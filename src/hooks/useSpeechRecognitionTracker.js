@@ -44,6 +44,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   const sessionStartPIdxRef = useRef(0);
   const highestPIdxRef = useRef(0);
   const enabledRef = useRef(enabled);
+  const restartTimerRef = useRef(null);
 
   useEffect(() => {
     enabledRef.current = enabled;
@@ -61,6 +62,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
 
   const handleSpeechResult = useCallback((event) => {
     if (!pageWords || pageWords.length === 0) return;
+    setIsListening(true);
 
     let fullSessionTranscript = '';
     for (let i = 0; i < event.results.length; i++) {
@@ -118,6 +120,9 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
       return;
     }
 
+    enabledRef.current = true;
+    setIsListening(true);
+
     if (recognitionRef.current) {
       try {
         recognitionRef.current.stop();
@@ -147,6 +152,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
         if (event.error === 'not-allowed') {
           setError('Microphone access was denied.');
           setIsListening(false);
+          enabledRef.current = false;
         } else {
           setError(`Speech error: ${event.error}`);
         }
@@ -155,11 +161,21 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
       recognition.onend = () => {
         if (enabledRef.current) {
           sessionStartPIdxRef.current = highestPIdxRef.current;
-          try {
-            recognition.start();
-          } catch {
-            setIsListening(false);
-          }
+          if (restartTimerRef.current) clearTimeout(restartTimerRef.current);
+          restartTimerRef.current = setTimeout(() => {
+            if (!enabledRef.current) return;
+            try {
+              recognition.start();
+              setIsListening(true);
+            } catch (err) {
+              if (err.name === 'InvalidStateError') {
+                setIsListening(true);
+              } else {
+                console.warn('Speech restart error:', err);
+                setIsListening(false);
+              }
+            }
+          }, 50);
         } else {
           setIsListening(false);
         }
@@ -176,6 +192,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
 
   const stopListening = useCallback(() => {
     enabledRef.current = false;
+    if (restartTimerRef.current) clearTimeout(restartTimerRef.current);
     if (recognitionRef.current) {
       try {
         recognitionRef.current.stop();
@@ -186,7 +203,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   }, []);
 
   const toggleListening = useCallback(() => {
-    if (isListening) {
+    if (enabledRef.current || isListening) {
       stopListening();
     } else {
       startListening();
@@ -196,31 +213,15 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   useEffect(() => {
     resetTracker();
     if (enabled) {
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.stop();
-        } catch {}
-        recognitionRef.current = null;
-      }
       startListening();
     } else {
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.stop();
-        } catch {}
-        recognitionRef.current = null;
-      }
-      setIsListening(false);
+      stopListening();
     }
 
     return () => {
-      if (recognitionRef.current) {
-        try {
-          recognitionRef.current.stop();
-        } catch {}
-      }
+      stopListening();
     };
-  }, [pageWords, enabled, resetTracker, startListening]);
+  }, [pageWords, enabled, resetTracker, startListening, stopListening]);
 
   const totalWords = pageWords.length;
   const accuracy = totalWords > 0 ? Math.round((passedWordIndices.size / totalWords) * 100) : 0;
