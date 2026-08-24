@@ -10,8 +10,16 @@ function wordsMatch(w1, w2) {
   const c2 = cleanWord(w2);
   if (!c1 || !c2) return false;
   if (c1 === c2) return true;
-  // If words are long (>=4 chars) and match stem or 1 char diff
-  if (c1.length >= 4 && c2.length >= 4) {
+
+  // Simple English suffix normalization (e.g. roots -> root, growing -> grow, cells -> cell)
+  const stem1 = c1.replace(/(ing|ed|es|s)$/, '');
+  const stem2 = c2.replace(/(ing|ed|es|s)$/, '');
+  if (stem1 && stem2 && (stem1 === stem2 || stem1 === c2 || c1 === stem2)) {
+    return true;
+  }
+
+  // Prefix match ONLY for long words (>= 5 chars) with minimal length difference (<= 2 chars)
+  if (c1.length >= 5 && c2.length >= 5 && Math.abs(c1.length - c2.length) <= 2) {
     if (c1.startsWith(c2) || c2.startsWith(c1)) return true;
   }
   return false;
@@ -33,34 +41,33 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
 
   const recognitionRef = useRef(null);
   const startTimeRef = useRef(null);
-  const currentIndexRef = useRef(0);
+  const sessionStartPIdxRef = useRef(0);
+  const highestPIdxRef = useRef(0);
   const enabledRef = useRef(enabled);
 
   useEffect(() => {
     enabledRef.current = enabled;
   }, [enabled]);
 
-  // Sync ref with state
-  useEffect(() => {
-    currentIndexRef.current = activeWordIndex >= 0 ? activeWordIndex : 0;
-  }, [activeWordIndex]);
-
   const resetTracker = useCallback(() => {
     setActiveWordIndex(-1);
     setPassedWordIndices(new Set());
-    currentIndexRef.current = 0;
+    sessionStartPIdxRef.current = 0;
+    highestPIdxRef.current = 0;
     setWpm(0);
     setTranscript('');
     startTimeRef.current = null;
   }, []);
 
   const handleSpeechResult = useCallback((event) => {
-    let currentTranscript = '';
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      currentTranscript += event.results[i][0].transcript + ' ';
+    if (!pageWords || pageWords.length === 0) return;
+
+    let fullSessionTranscript = '';
+    for (let i = 0; i < event.results.length; i++) {
+      fullSessionTranscript += event.results[i][0].transcript + ' ';
     }
 
-    const trimmed = currentTranscript.trim();
+    const trimmed = fullSessionTranscript.trim();
     if (!trimmed) return;
     setTranscript(trimmed);
 
@@ -69,46 +76,37 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
     }
 
     const spokenTokens = trimmed.split(/\s+/).map(cleanWord).filter(Boolean);
-    if (spokenTokens.length === 0 || pageWords.length === 0) return;
+    if (spokenTokens.length === 0) return;
 
-    let targetIdx = currentIndexRef.current;
-    if (targetIdx < 0) targetIdx = 0;
+    // Align spokenTokens sequentially with pageWords starting from sessionStartPIdxRef
+    let pIdx = sessionStartPIdxRef.current;
 
-    let updatedTarget = targetIdx;
-    let matchedAny = false;
-
-    // Process spoken tokens sequentially from current target position
     for (const spoken of spokenTokens) {
-      if (!spoken) continue;
-      if (updatedTarget >= pageWords.length) break;
+      if (pIdx >= pageWords.length) break;
 
-      // Check current word at updatedTarget, or next word at updatedTarget + 1 (allowing max 1 word skip)
-      if (wordsMatch(spoken, pageWords[updatedTarget])) {
-        updatedTarget++;
-        matchedAny = true;
-      } else if (updatedTarget + 1 < pageWords.length && wordsMatch(spoken, pageWords[updatedTarget + 1])) {
-        updatedTarget += 2;
-        matchedAny = true;
+      if (wordsMatch(spoken, pageWords[pIdx])) {
+        pIdx++;
+      } else if (pIdx + 1 < pageWords.length && wordsMatch(spoken, pageWords[pIdx + 1])) {
+        pIdx += 2;
       }
     }
 
-    if (matchedAny && updatedTarget !== targetIdx) {
-      const activeIdx = Math.min(updatedTarget - 1, pageWords.length - 1);
-      setActiveWordIndex(activeIdx);
-      currentIndexRef.current = updatedTarget;
+    if (pIdx > highestPIdxRef.current) {
+      highestPIdxRef.current = pIdx;
+      const newActiveIdx = Math.min(pIdx - 1, pageWords.length - 1);
+      setActiveWordIndex(newActiveIdx);
 
       setPassedWordIndices(prev => {
         const next = new Set(prev);
-        for (let i = 0; i < updatedTarget; i++) {
+        for (let i = 0; i < pIdx; i++) {
           next.add(i);
         }
         return next;
       });
 
-      // Calculate WPM
       const elapsedMinutes = (Date.now() - startTimeRef.current) / 60000;
       if (elapsedMinutes > 0.05) {
-        const calculatedWpm = Math.round(updatedTarget / elapsedMinutes);
+        const calculatedWpm = Math.round(pIdx / elapsedMinutes);
         setWpm(calculatedWpm);
       }
     }
@@ -125,6 +123,8 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
         recognitionRef.current.stop();
       } catch {}
     }
+
+    sessionStartPIdxRef.current = highestPIdxRef.current;
 
     try {
       const recognition = new SpeechRecognitionAPI();
@@ -154,7 +154,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
 
       recognition.onend = () => {
         if (enabledRef.current) {
-          // Restart automatically if browser stops continuous recognition while Speak mode is active
+          sessionStartPIdxRef.current = highestPIdxRef.current;
           try {
             recognition.start();
           } catch {
@@ -193,7 +193,6 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
     }
   }, [isListening, startListening, stopListening]);
 
-  // Reset & Auto-restart when pageWords or enabled state changes
   useEffect(() => {
     resetTracker();
     if (enabled) {
