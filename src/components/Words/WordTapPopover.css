@@ -346,8 +346,45 @@
 .wtp-meaning-row {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.84rem;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wtp-meaning-clickable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.wtp-meaning-clickable:hover {
+  background: rgba(234, 88, 12, 0.08);
+  border-color: rgba(234, 88, 12, 0.2);
+}
+
+.wtp-meaning-clickable.selected {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.theme-dark .wtp-meaning-clickable.selected {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.wtp-meaning-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.wtp-meaning-check {
+  color: #10b981;
+  flex-shrink: 0;
 }
 
 .wtp-meaning-pos {
@@ -358,6 +395,7 @@
   background: rgba(139, 92, 246, 0.1);
   padding: 1px 4px;
   border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .wtp-meaning-trans {

@@ -219,26 +219,33 @@ async function fetchEnglishDictionaryInfo(word, targetLang = 'uz') {
     const res = await fetch(`${FREE_DICTIONARY_ENDPOINT}/${encodeURIComponent(word)}`);
     if (res.ok) {
       const data = await res.json();
-      const entry = Array.isArray(data) ? data[0] : null;
-      phonetic = entry?.phonetic || (entry?.phonetics || []).find(p => p.text)?.text || '';
-      const meaning = entry?.meanings?.[0];
-      const definitionEntry = meaning?.definitions?.[0];
-      if (definitionEntry) {
-        partOfSpeech = meaning?.partOfSpeech || '';
-        definitionRaw = definitionEntry.definition || '';
-        example = definitionEntry.example || '';
+      if (Array.isArray(data)) {
+        for (const entry of data) {
+          if (!phonetic) {
+            phonetic = entry?.phonetic || (entry?.phonetics || []).find(p => p.text)?.text || '';
+          }
+          for (const meaning of entry?.meanings || []) {
+            if (!partOfSpeech) partOfSpeech = meaning?.partOfSpeech || '';
+            for (const d of meaning.definitions || []) {
+              if (!definitionRaw && d.definition) {
+                definitionRaw = d.definition;
+              }
+              if (!example && d.example) {
+                example = d.example;
+              }
+            }
+          }
+        }
       }
     }
 
-    // dictionaryapi.dev sometimes has no entry (newer/rarer words, or a
-    // brief outage) - Wiktionary covers a much larger vocabulary and acts
-    // as a genuine cross-check here, not just a last resort.
-    if (!definitionRaw) {
+    // dictionaryapi.dev sometimes has no definition or example - Wiktionary covers a much larger vocabulary
+    if (!definitionRaw || !example) {
       const wikt = await fetchWiktionaryInfo(word);
       if (wikt) {
-        partOfSpeech = wikt.partOfSpeech || partOfSpeech;
-        definitionRaw = wikt.definition || '';
-        example = wikt.example || example;
+        if (!partOfSpeech) partOfSpeech = wikt.partOfSpeech || '';
+        if (!definitionRaw) definitionRaw = wikt.definition || '';
+        if (!example) example = wikt.example || '';
       }
     }
 
@@ -472,33 +479,61 @@ function diversifyByPartOfSpeech(senses, cap) {
 // groups multiple target-language equivalents by part of speech for ANY
 // source language - not just English. Returns an array of
 // { partOfSpeech, translation } capped at MAX_WORD_MEANINGS.
+// Uses Google Translate's alternate-translations and structured dictionary features (dt=at&dt=bd)
+// which group multiple concise target-language equivalents by part of speech.
+// Returns an array of { partOfSpeech, translation } capped at MAX_WORD_MEANINGS.
 async function fetchAlternateTranslations(word, fromLang, toLang) {
   try {
-    const url = `${GOOGLE_TRANSLATE_ENDPOINT}?client=gtx&sl=${fromLang}&tl=${toLang}&dt=t&dt=at&q=${encodeURIComponent(word.toLowerCase())}`;
+    const url = `${GOOGLE_TRANSLATE_ENDPOINT}?client=gtx&sl=${fromLang}&tl=${toLang}&dt=t&dt=bd&dt=at&q=${encodeURIComponent(word.toLowerCase())}`;
     const res = await fetch(url);
     if (!res.ok) return [];
     const data = await res.json();
-    // data[5] contains the alternate translations array, grouped by POS
-    // Each group: [pos_label, [[translation, score, ...],...]]
-    const groups = data?.[5];
-    if (!Array.isArray(groups) || groups.length === 0) return [];
+
     const results = [];
     const seen = new Set();
-    for (const group of groups) {
-      const posRaw = (group?.[0] || '').toLowerCase();
-      const entries = group?.[2];
-      if (!Array.isArray(entries)) continue;
-      for (const entry of entries) {
-        const translation = (entry?.[0] || '').trim();
-        if (!translation) continue;
-        const key = `${posRaw}:${translation.toLowerCase()}`;
-        if (seen.has(key)) continue;
-        seen.add(key);
-        results.push({ partOfSpeech: posRaw, translation: decodeHTMLEntities(translation) });
-        if (results.length >= MAX_WORD_MEANINGS) break;
+
+    // 1. Structured dictionary entries (data[1]: pos, terms array)
+    const dictGroups = data?.[1];
+    if (Array.isArray(dictGroups)) {
+      for (const group of dictGroups) {
+        const posRaw = (group?.[0] || '').toLowerCase();
+        const terms = group?.[1];
+        if (Array.isArray(terms)) {
+          for (const term of terms) {
+            const translation = (term || '').trim();
+            if (!translation) continue;
+            // Only keep concise word meanings (<= 3 words, <= 28 chars)
+            if (translation.split(/\s+/).length > 3 || translation.length > 28) continue;
+            const key = `${posRaw}:${translation.toLowerCase()}`;
+            if (seen.has(key)) continue;
+            seen.add(key);
+            results.push({ partOfSpeech: posRaw, translation: decodeHTMLEntities(translation) });
+            if (results.length >= MAX_WORD_MEANINGS) break;
+          }
+        }
       }
-      if (results.length >= MAX_WORD_MEANINGS) break;
     }
+
+    // 2. Alternate translations array (data[5])
+    const altGroups = data?.[5];
+    if (Array.isArray(altGroups) && results.length < MAX_WORD_MEANINGS) {
+      for (const group of altGroups) {
+        const posRaw = (group?.[0] || '').toLowerCase();
+        const entries = group?.[2];
+        if (!Array.isArray(entries)) continue;
+        for (const entry of entries) {
+          const translation = (entry?.[0] || '').trim();
+          if (!translation) continue;
+          if (translation.split(/\s+/).length > 3 || translation.length > 28) continue;
+          const key = `${posRaw}:${translation.toLowerCase()}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          results.push({ partOfSpeech: posRaw, translation: decodeHTMLEntities(translation) });
+          if (results.length >= MAX_WORD_MEANINGS) break;
+        }
+      }
+    }
+
     return results;
   } catch {
     return [];
@@ -509,22 +544,29 @@ export async function fetchWordMeanings(word, wordLangCode = 'en', targetLangCod
   const trimmed = (word || '').trim();
   if (!trimmed || !targetLangCode || wordLangCode === targetLangCode) return [];
 
-  // Non-English source: use Google Translate's alternate translations (dt=at)
-  // which groups results by part of speech for any language pair.
-  if (wordLangCode !== 'en') {
-    return withTimeout(
-      fetchAlternateTranslations(trimmed, wordLangCode, targetLangCode),
-      5000,
-      []
-    );
+  // First fetch concise alternate dictionary translations (dt=bd & dt=at)
+  const alternates = await withTimeout(
+    fetchAlternateTranslations(trimmed, wordLangCode, targetLangCode),
+    4000,
+    []
+  );
+
+  // Filter alternates to keep only concise, exact meanings (<= 3 words, <= 28 chars)
+  const conciseAlternates = alternates.filter(m => {
+    const text = (m.translation || '').trim();
+    return text && text.split(/\s+/).length <= 3 && text.length <= 28;
+  });
+
+  if (conciseAlternates.length >= 2) {
+    return conciseAlternates.slice(0, MAX_WORD_MEANINGS);
   }
 
+  // Fallback to Wiktionary / English senses if alternate translations are sparse
   const lower = trimmed.toLowerCase();
   const [rawSenses, wiktTranslations] = await Promise.all([
     collectEnglishSenses(lower).catch(() => []),
     fetchWiktionaryTranslations(lower, targetLangCode).catch(() => [])
   ]);
-  if (rawSenses.length === 0 && wiktTranslations.length === 0) return [];
 
   const wiktByPos = {};
   for (const w of wiktTranslations) {
@@ -532,21 +574,11 @@ export async function fetchWordMeanings(word, wordLangCode = 'en', targetLangCod
   }
   const usedWikt = new Set();
 
-  // Bounded up front so a word with dozens of dictionary senses (a couple of
-  // wiktionary translation tables ran past 70) never queues up more than a
-  // handful of fallback machine-translation calls.
   const senses = diversifyByPartOfSpeech(
     rawSenses.length > 0 ? rawSenses : wiktTranslations.map(w => ({ partOfSpeech: w.partOfSpeech, definitionRaw: w.gloss })),
     MAX_WORD_MEANINGS
   );
 
-  // Claiming exact Wiktionary matches is synchronous (no network calls), so
-  // it stays a simple sequential pass. Only the senses left without one need
-  // a network round trip, and those all fire in parallel below - run
-  // sequentially, translating 5-6 senses one at a time each with its own
-  // Google/MyMemory round trip, was slow enough to stall the page for tens
-  // of seconds. A per-call timeout keeps one slow/hanging request from
-  // blocking the rest indefinitely.
   const withExact = senses.map(sense => {
     const exact = (wiktByPos[sense.partOfSpeech] || []).find(w => !usedWikt.has(w));
     if (exact) usedWikt.add(exact);
@@ -563,32 +595,26 @@ export async function fetchWordMeanings(word, wordLangCode = 'en', targetLangCod
   }));
 
   const seenKeys = new Set();
-  const result = [];
+  const combined = [...conciseAlternates];
+  combined.forEach(m => seenKeys.add(`${m.partOfSpeech}:${m.translation.trim().toLowerCase()}`));
+
   withExact.forEach(({ sense, exact }, i) => {
     const translation = translations[i];
     if (!translation) return;
-    const key = `${sense.partOfSpeech}:${translation.trim().toLowerCase()}`;
+    const text = decodeHTMLEntities(translation).trim();
+    // Only include if short and concise (<= 3 words, <= 28 chars)
+    if (text.split(/\s+/).length > 3 || text.length > 28) return;
+    const key = `${sense.partOfSpeech}:${text.toLowerCase()}`;
     if (seenKeys.has(key)) return;
     seenKeys.add(key);
-    result.push({
+    combined.push({
       partOfSpeech: sense.partOfSpeech,
-      translation: decodeHTMLEntities(translation),
+      translation: text,
       definition: decodeHTMLEntities(sense.definitionRaw || exact?.gloss || '')
     });
   });
 
-  // Wiktionary senses finer-grained than dictionaryapi.dev's groupings never
-  // get claimed by the pass above - append the leftovers too, up to the cap.
-  for (const w of wiktTranslations) {
-    if (result.length >= MAX_WORD_MEANINGS) break;
-    if (usedWikt.has(w)) continue;
-    const key = `${w.partOfSpeech}:${w.translation.trim().toLowerCase()}`;
-    if (seenKeys.has(key)) continue;
-    seenKeys.add(key);
-    result.push({ partOfSpeech: w.partOfSpeech, translation: w.translation, definition: decodeHTMLEntities(w.gloss || '') });
-  }
-
-  return result.slice(0, MAX_WORD_MEANINGS);
+  return combined.slice(0, MAX_WORD_MEANINGS);
 }
 
 /**
@@ -615,20 +641,39 @@ export async function lookupEnglishDefinition(word) {
  * or null if nothing was found. alternateTranslation/alternateWord are only set when Google
  * Translate and MyMemory disagree on the result, as a cross-check hint - empty otherwise.
  */
-export async function lookupWordFromDictionary(query, direction, wordLangCode = 'en', targetLangCode = 'uz') {
+export async function lookupWordFromDictionary(query, direction, wordLangCode = 'en', targetLangCode = 'uz', contextSentence = '') {
   const trimmed = (query || '').trim();
   if (!trimmed) return null;
 
   if (direction === 'word2translation') {
+    let contextualTranslation = '';
+    if (contextSentence && contextSentence.length > 5) {
+      try {
+        const fullTranslatedSentence = await translateWord(contextSentence, wordLangCode, targetLangCode);
+        if (fullTranslatedSentence) {
+          const alternates = await fetchAlternateTranslations(trimmed, wordLangCode, targetLangCode);
+          for (const alt of alternates) {
+            const transWord = (alt.translation || '').trim().toLowerCase();
+            if (transWord && transWord.length >= 2 && fullTranslatedSentence.toLowerCase().includes(transWord)) {
+              contextualTranslation = alt.translation;
+              break;
+            }
+          }
+        }
+      } catch {}
+    }
+
     const [translationResult, dictInfo] = await Promise.all([
       translateWordWithCrossCheck(trimmed, wordLangCode, targetLangCode),
       wordLangCode === 'en' ? fetchEnglishDictionaryInfo(trimmed, targetLangCode) : Promise.resolve(null)
     ]);
-    if (!translationResult.translation && !dictInfo) return null;
+
+    if (!translationResult.translation && !dictInfo && !contextualTranslation) return null;
+
     return {
       word: decodeHTMLEntities(trimmed),
-      translation: translationResult.translation,
-      alternateTranslation: translationResult.alternate,
+      translation: contextualTranslation || translationResult.translation,
+      alternateTranslation: contextualTranslation ? translationResult.translation : translationResult.alternate,
       partOfSpeech: decodeHTMLEntities(dictInfo?.partOfSpeech || ''),
       definition: decodeHTMLEntities(dictInfo?.definition || ''),
       example: decodeHTMLEntities(dictInfo?.example || ''),

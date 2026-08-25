@@ -237,10 +237,10 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
     } catch {}
   }, []);
 
-  const handleWordTap = useCallback((word, el, wordIdx) => {
+  const handleWordTap = useCallback((word, el, wordIdx, contextSentence) => {
     const cleanWord = (word || '').trim().toLowerCase();
     setSelectedWordIdx(wordIdx ?? null);
-    setTapState({ word, anchorRect: el.getBoundingClientRect() });
+    setTapState({ word, anchorRect: el.getBoundingClientRect(), contextSentence });
     setRecentWords(prev => {
       if (prev.has(cleanWord)) return prev;
       const next = new Set(prev);
@@ -377,6 +377,7 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
             currentTopic={topic}
             existingWords={words}
             isRecentlyViewed={recentWords.has(tapState.word.trim().toLowerCase())}
+            contextSentence={tapState.contextSentence}
             onAdd={handleAddWord}
             onClose={() => {
               setTapState(null);

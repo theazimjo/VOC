@@ -70,7 +70,7 @@ function WordTokens({
               return;
             }
             if (onWordClickIndex) onWordClickIndex(wordIdx);
-            onWordTap(phrase, e.currentTarget, wordIdx);
+            onWordTap(phrase, e.currentTarget, wordIdx, text);
           }}
         >
           {phrase}
@@ -98,7 +98,7 @@ function WordTokens({
                 return;
               }
               if (onWordClickIndex) onWordClickIndex(wordIdx);
-              onWordTap(clean, e.currentTarget, wordIdx);
+              onWordTap(clean, e.currentTarget, wordIdx, text);
             }}
           >
             {part}
@@ -460,11 +460,11 @@ export default function ReadPage() {
     } catch {}
   }, []);
 
-  const handleWordTap = useCallback((word, anchorEl, wordIdx) => {
+  const handleWordTap = useCallback((word, anchorEl, wordIdx, contextSentence) => {
     if (!word) return;
     const cleanWord = word.trim().toLowerCase();
     setSelectedWordIdx(wordIdx ?? null);
-    setTapState({ word, anchorRect: anchorEl.getBoundingClientRect() });
+    setTapState({ word, anchorRect: anchorEl.getBoundingClientRect(), contextSentence });
 
     setRecentWords(prev => {
       if (prev.has(cleanWord)) return prev;
@@ -873,6 +873,7 @@ export default function ReadPage() {
             currentTopic={topic}
             existingWords={words}
             isRecentlyViewed={recentWords.has(tapState.word.trim().toLowerCase())}
+            contextSentence={tapState.contextSentence}
             onAdd={handleAddWord}
             onClose={() => {
               setTapState(null);

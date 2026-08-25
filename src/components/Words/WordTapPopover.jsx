@@ -35,6 +35,7 @@ export default function WordTapPopover({
   currentTopic,
   existingWords,
   isRecentlyViewed = false,
+  contextSentence = '',
   onAdd,
   onClose
 }) {
@@ -122,7 +123,7 @@ export default function WordTapPopover({
     setMeanings([]);
 
     Promise.all([
-      lookupWordFromDictionary(word, 'word2translation', wordLangCode, translationLangCode),
+      lookupWordFromDictionary(word, 'word2translation', wordLangCode, translationLangCode, contextSentence),
       fetchWordMeanings(word, wordLangCode, translationLangCode).catch(() => [])
     ])
       .then(([res, mList]) => {
@@ -174,11 +175,29 @@ export default function WordTapPopover({
     return trimmed.includes(' ') || trimmed.length > 28;
   }, [word]);
 
-  const extraMeanings = useMemo(() => {
+  const displayMeanings = useMemo(() => {
     if (!meanings || meanings.length === 0 || isSentence) return [];
-    const primaryLower = (translation || '').trim().toLowerCase();
-    return meanings.filter(m => (m.translation || '').trim().toLowerCase() !== primaryLower).slice(0, 4);
-  }, [meanings, translation, isSentence]);
+    const seen = new Set();
+    const list = [];
+    meanings.forEach(m => {
+      const trans = (m.translation || '').trim();
+      const key = trans.toLowerCase();
+      const wordCount = trans.split(/\s+/).length;
+      // Filter out long sentence explanations (> 3 words or > 28 chars)
+      if (key && !seen.has(key) && wordCount <= 3 && trans.length <= 28) {
+        seen.add(key);
+        list.push(m);
+      }
+    });
+    return list.slice(0, 5);
+  }, [meanings, isSentence]);
+
+  const handleSelectMeaning = (m) => {
+    if (!m || !m.translation) return;
+    setTranslation(m.translation);
+    if (m.partOfSpeech) setPartOfSpeech(m.partOfSpeech);
+    if (m.definition) setDefinition(m.definition);
+  };
 
   return (
     <>
@@ -309,18 +328,29 @@ export default function WordTapPopover({
               )}
 
               {/* Extra Senses / Meanings Section */}
-              {extraMeanings.length > 0 && (
+              {displayMeanings.length > 0 && (
                 <div className="wtp-detail-card wtp-detail-meanings">
                   <div className="wtp-detail-header">
                     <span>{t('read.otherMeaningsLabel') || 'Boshqa ma\'nolari'}</span>
                   </div>
                   <div className="wtp-meanings-list">
-                    {extraMeanings.map((m, idx) => (
-                      <div key={idx} className="wtp-meaning-row">
-                        {m.partOfSpeech && <span className="wtp-meaning-pos">{m.partOfSpeech}</span>}
-                        <span className="wtp-meaning-trans">{m.translation}</span>
-                      </div>
-                    ))}
+                    {displayMeanings.map((m, idx) => {
+                      const isSelected = (translation || '').trim().toLowerCase() === (m.translation || '').trim().toLowerCase();
+                      return (
+                        <div
+                          key={idx}
+                          className={`wtp-meaning-row wtp-meaning-clickable ${isSelected ? 'selected' : ''}`}
+                          onClick={() => handleSelectMeaning(m)}
+                          title="Tanlash uchun bosing"
+                        >
+                          <div className="wtp-meaning-left">
+                            {m.partOfSpeech && <span className="wtp-meaning-pos">{m.partOfSpeech}</span>}
+                            <span className="wtp-meaning-trans">{m.translation}</span>
+                          </div>
+                          {isSelected && <Check size={14} className="wtp-meaning-check" />}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
