@@ -173,7 +173,18 @@ export default function ReadPage() {
 
   const [pack, setPack] = useState(null);
   const [packLoading, setPackLoading] = useState(true);
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState(() => {
+    // Read saved progress immediately — avoids the 0→restore race condition
+    try {
+      const key = `readProgress:${packId}:${new URLSearchParams(window.location.search).get('topic') || ''}`;
+      const saved = localStorage.getItem(key);
+      if (saved !== null) {
+        const n = parseInt(saved, 10);
+        if (Number.isFinite(n) && n >= 0) return n;
+      }
+    } catch {}
+    return 0;
+  });
   const [tapState, setTapState] = useState(null);
   const [selectedWordIdx, setSelectedWordIdx] = useState(null);
   const [direction, setDirection] = useState(1);
@@ -242,19 +253,9 @@ export default function ReadPage() {
   }, [packId, getPack, navigate]);
 
   const chapter = chapterTextByTopic[topic];
-
   const progressKey = `readProgress:${packId}:${topic}`;
-  useEffect(() => {
-    if (!chapter) return;
-    try {
-      const saved = localStorage.getItem(progressKey);
-      const savedIndex = saved !== null ? parseInt(saved, 10) : 0;
-      if (Number.isFinite(savedIndex) && savedIndex >= 0 && savedIndex < chapter.pages.length) {
-        setPageIndex(savedIndex);
-      }
-    } catch {}
-  }, [topic, chapter, progressKey]);
 
+  // Save current page whenever it changes
   useEffect(() => {
     if (!chapter) return;
     try {
