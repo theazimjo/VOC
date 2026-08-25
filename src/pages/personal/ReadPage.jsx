@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic, X } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Minus, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic, X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { ref, onValue, set } from 'firebase/database';
 import { db } from '../../firebase';
@@ -34,6 +34,20 @@ function getBlockWordCount(text) {
     }
   });
   return count;
+}
+
+// Activity/sidebar text is authored as one long string (e.g. "Materials: ...
+// Procedure: A. Fold a paper towel... B. Place four seeds..."), which reads
+// as a wall of text. Break it into its own line wherever a new lettered
+// step ("A. "), numbered sub-question ("1. "), or named section
+// ("Materials:", "Procedure:", "Conclusion:", "Using science ideas:")
+// starts right after the end of the previous sentence.
+const CALLOUT_LINE_BREAK_RE = /(?<=[.?:])\s+(?=(?:[A-Z]\.\s|[0-9]+\.\s|Materials:|Procedure:|Conclusion:|Using science ideas:))/;
+const CALLOUT_STEP_RE = /^(?:[A-Z]\.\s|[0-9]+\.\s)/;
+
+function splitCalloutLines(text) {
+  if (!text) return [];
+  return text.split(CALLOUT_LINE_BREAK_RE).map(s => s.trim()).filter(Boolean);
 }
 
 function WordTokens({
@@ -191,15 +205,6 @@ export default function ReadPage() {
   const [activeImageModal, setActiveImageModal] = useState(null);
   const railInnerRef = useRef(null);
 
-  // Auto-scroll the rail to keep the active page button visible
-  useEffect(() => {
-    if (!railInnerRef.current) return;
-    const activeBtn = railInnerRef.current.querySelector('.read-pc-page-btn.active');
-    if (activeBtn) {
-      activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }
-  }, [pageIndex]);
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && activeImageModal) {
@@ -264,6 +269,41 @@ export default function ReadPage() {
 
   const chapter = chapterTextByTopic[topic];
   const progressKey = `readProgress:${packId}:${topic}`;
+
+  const [railScrollState, setRailScrollState] = useState({ isAtTop: true, isAtBottom: false });
+
+  const handleRailScroll = useCallback(() => {
+    const el = railInnerRef.current;
+    if (!el) return;
+    const isAtTop = el.scrollTop <= 4;
+    const isAtBottom = Math.ceil(el.scrollTop + el.clientHeight) >= el.scrollHeight - 4;
+    setRailScrollState({ isAtTop, isAtBottom });
+  }, []);
+
+  useEffect(() => {
+    const el = railInnerRef.current;
+    if (!el) return;
+    handleRailScroll();
+    el.addEventListener('scroll', handleRailScroll);
+    window.addEventListener('resize', handleRailScroll);
+    return () => {
+      el.removeEventListener('scroll', handleRailScroll);
+      window.removeEventListener('resize', handleRailScroll);
+    };
+  }, [handleRailScroll, chapter, pageIndex, packLoading]);
+
+  // Auto-scroll the page rail to center the active page button (works on initial mount, F5 refresh & page switch)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!railInnerRef.current) return;
+      const activeBtn = railInnerRef.current.querySelector('.read-pc-page-btn.active');
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+      handleRailScroll();
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [pageIndex, chapter, packLoading, handleRailScroll]);
 
   // Save current page whenever it changes
   useEffect(() => {
@@ -555,14 +595,17 @@ export default function ReadPage() {
       <div className="read-pc-page-rail">
         <button
           type="button"
-          className="read-pc-rail-scroll-btn top"
+          className={`read-pc-rail-scroll-btn top ${railScrollState.isAtTop ? 'disabled' : ''}`}
           onClick={() => {
-            if (railInnerRef.current) railInnerRef.current.scrollBy({ top: -120, behavior: 'smooth' });
+            if (!railScrollState.isAtTop && railInnerRef.current) {
+              railInnerRef.current.scrollBy({ top: -120, behavior: 'smooth' });
+            }
           }}
-          title="Tepaga siljitish"
+          disabled={railScrollState.isAtTop}
+          title={railScrollState.isAtTop ? "Eng tepadasiz" : "Tepaga siljitish"}
           aria-label="Scroll up page list"
         >
-          <ChevronUp size={13} />
+          {railScrollState.isAtTop ? <Minus size={11} className="read-pc-rail-line-icon" /> : <ChevronUp size={13} />}
         </button>
         <div className="read-pc-page-rail-inner" ref={railInnerRef}>
           {chapter.pages.map((_, idx) => {
@@ -589,14 +632,17 @@ export default function ReadPage() {
         </div>
         <button
           type="button"
-          className="read-pc-rail-scroll-btn bottom"
+          className={`read-pc-rail-scroll-btn bottom ${railScrollState.isAtBottom ? 'disabled' : ''}`}
           onClick={() => {
-            if (railInnerRef.current) railInnerRef.current.scrollBy({ top: 120, behavior: 'smooth' });
+            if (!railScrollState.isAtBottom && railInnerRef.current) {
+              railInnerRef.current.scrollBy({ top: 120, behavior: 'smooth' });
+            }
           }}
-          title="Pastga siljitish"
+          disabled={railScrollState.isAtBottom}
+          title={railScrollState.isAtBottom ? "Eng pastdasiz" : "Pastga siljitish"}
           aria-label="Scroll down page list"
         >
-          <ChevronDown size={13} />
+          {railScrollState.isAtBottom ? <Minus size={11} className="read-pc-rail-line-icon" /> : <ChevronDown size={13} />}
         </button>
       </div>
 
@@ -804,6 +850,8 @@ export default function ReadPage() {
             }
 
             if (block.type === 'sidebar' || block.type === 'activity') {
+              const calloutLines = splitCalloutLines(block.text);
+              let lineStartIndex = currentStartIndex;
               return (
                 <div className="read-callout-card" key={blockIdx}>
                   <div className="read-callout-icon">
@@ -814,19 +862,31 @@ export default function ReadPage() {
                       {block.type === 'sidebar' ? t('read.didYouKnow') : t('read.readingTip')}
                     </h4>
                     <div className="read-callout-body">
-                      <WordTokens
-                        text={block.text}
-                        onWordTap={handleWordTap}
-                        knownWords={knownWords}
-                        recentWords={recentWords}
-                        startIndex={currentStartIndex}
-                        activeWordIndex={activeWordIndex}
-                        passedWordIndices={passedWordIndices}
-                        selectedWordIdx={selectedWordIdx}
-                        onWordClickIndex={(idx) => {
-                          if (isSpeakMode) setActiveWordIndex(idx);
-                        }}
-                      />
+                      {calloutLines.map((line, lineIdx) => {
+                        const lineStart = lineStartIndex;
+                        lineStartIndex += getBlockWordCount(line);
+                        const isStep = CALLOUT_STEP_RE.test(line);
+                        return (
+                          <p
+                            className={`read-callout-line${isStep ? ' read-callout-step' : ''}`}
+                            key={lineIdx}
+                          >
+                            <WordTokens
+                              text={line}
+                              onWordTap={handleWordTap}
+                              knownWords={knownWords}
+                              recentWords={recentWords}
+                              startIndex={lineStart}
+                              activeWordIndex={activeWordIndex}
+                              passedWordIndices={passedWordIndices}
+                              selectedWordIdx={selectedWordIdx}
+                              onWordClickIndex={(idx) => {
+                                if (isSpeakMode) setActiveWordIndex(idx);
+                              }}
+                            />
+                          </p>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

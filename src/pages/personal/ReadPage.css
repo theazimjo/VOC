@@ -327,6 +327,22 @@
   color: var(--reader-subtitle);
 }
 
+.read-callout-line {
+  margin: 0 0 10px;
+}
+
+.read-callout-line:last-child {
+  margin-bottom: 0;
+}
+
+/* Lettered ("A.") and numbered ("1.") steps get a hanging indent so the
+   marker sits at the margin and wrapped text lines up beneath it, like a
+   real procedure list instead of a run-on paragraph. */
+.read-callout-step {
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}
+
 /* ========== END-OF-CHAPTER REVIEW ========== */
 .read-review-card {
   margin: 36px 0 24px;
@@ -730,10 +746,23 @@
   border-radius: 4px;
 }
 
-.read-pc-rail-scroll-btn:hover {
+.read-pc-rail-scroll-btn:hover:not(:disabled) {
   opacity: 1;
   color: #ea580c;
   background: rgba(234, 88, 12, 0.12);
+}
+
+.read-pc-rail-scroll-btn.disabled,
+.read-pc-rail-scroll-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+  color: var(--reader-subtitle);
+  background: transparent !important;
+}
+
+.read-pc-rail-line-icon {
+  opacity: 0.6;
+  stroke-width: 3px;
 }
 
 .read-pc-page-rail-inner {

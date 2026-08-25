@@ -43,6 +43,20 @@ function getBlockWordCount(text) {
   return count;
 }
 
+// Activity/sidebar text is authored as one long string (e.g. "Materials: ...
+// Procedure: A. Fold a paper towel... B. Place four seeds..."), which reads
+// as a wall of text. Break it into its own line wherever a new lettered
+// step ("A. "), numbered sub-question ("1. "), or named section
+// ("Materials:", "Procedure:", "Conclusion:", "Using science ideas:")
+// starts right after the end of the previous sentence.
+const CALLOUT_LINE_BREAK_RE = /(?<=[.?:])\s+(?=(?:[A-Z]\.\s|[0-9]+\.\s|Materials:|Procedure:|Conclusion:|Using science ideas:))/;
+const CALLOUT_STEP_RE = /^(?:[A-Z]\.\s|[0-9]+\.\s)/;
+
+function splitCalloutLines(text) {
+  if (!text) return [];
+  return text.split(CALLOUT_LINE_BREAK_RE).map((s) => s.trim()).filter(Boolean);
+}
+
 function WordTokens({ text, onWordTap, knownWords, startIndex = 0, activeWordIndex = -1, passedWordIndices, selectedWordIdx = null }) {
   const segments = text.split(/(\{\{[^}]+\}\})/);
   let idx = startIndex;
@@ -130,20 +144,34 @@ function ScienceBlock({ block, startIndex, onWordTap, knownWords, recentWords, a
   }
 
   if (block.type === 'activity' || block.type === 'sidebar') {
+    const calloutLines = splitCalloutLines(block.text);
+    let lineStart = startIndex;
     return (
       <div className="science-callout">
         <div className="science-callout-icon"><Lightbulb size={18} /></div>
         <div className="science-callout-body">
-          <WordTokens
-            text={block.text}
-            onWordTap={onWordTap}
-            knownWords={knownWords}
-            recentWords={recentWords}
-            startIndex={startIndex}
-            activeWordIndex={activeWordIndex}
-            passedWordIndices={passedWordIndices}
-            selectedWordIdx={selectedWordIdx}
-          />
+          {calloutLines.map((line, lineIdx) => {
+            const lineStartIndex = lineStart;
+            lineStart += getBlockWordCount(line);
+            const isStep = CALLOUT_STEP_RE.test(line);
+            return (
+              <p
+                className={`science-callout-line${isStep ? ' science-callout-step' : ''}`}
+                key={lineIdx}
+              >
+                <WordTokens
+                  text={line}
+                  onWordTap={onWordTap}
+                  knownWords={knownWords}
+                  recentWords={recentWords}
+                  startIndex={lineStartIndex}
+                  activeWordIndex={activeWordIndex}
+                  passedWordIndices={passedWordIndices}
+                  selectedWordIdx={selectedWordIdx}
+                />
+              </p>
+            );
+          })}
         </div>
       </div>
     );

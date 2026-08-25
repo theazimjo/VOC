@@ -192,6 +192,22 @@
   color: var(--text-secondary);
 }
 
+.science-callout-line {
+  margin: 0 0 10px;
+}
+
+.science-callout-line:last-child {
+  margin-bottom: 0;
+}
+
+/* Lettered ("A.") and numbered ("1.") steps get a hanging indent so the
+   marker sits at the margin and wrapped text lines up beneath it, like a
+   real procedure list instead of a run-on paragraph. */
+.science-callout-step {
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}
+
 .science-image-group {
   display: flex;
   flex-wrap: wrap;
