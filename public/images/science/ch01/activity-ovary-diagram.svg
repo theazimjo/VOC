@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="700" fill="#FBF8F1"/>
+
+  <!-- paper the ovary is pinned on -->
+  <rect x="150" y="150" width="600" height="420" fill="#FDFCF7" stroke="#C9B98D" stroke-width="3"/>
+
+  <!-- ovary pulled open into two halves -->
+  <path d="M310 250 C 250 300, 250 420, 310 470 C 340 495, 400 500, 420 460 C 400 400, 400 320, 420 260 C 400 230, 340 225, 310 250 Z" fill="#B7DA9E" stroke="#4F7A3B" stroke-width="3"/>
+  <path d="M590 250 C 650 300, 650 420, 590 470 C 560 495, 500 500, 480 460 C 500 400, 500 320, 480 260 C 500 230, 560 225, 590 250 Z" fill="#B7DA9E" stroke="#4F7A3B" stroke-width="3"/>
+
+  <!-- ovules inside -->
+  <g fill="#F3DFA6" stroke="#B8850C" stroke-width="2">
+    <circle cx="360" cy="300" r="16"/>
+    <circle cx="380" cy="350" r="16"/>
+    <circle cx="360" cy="400" r="16"/>
+    <circle cx="380" cy="445" r="16"/>
+    <circle cx="540" cy="300" r="16"/>
+    <circle cx="520" cy="350" r="16"/>
+    <circle cx="540" cy="400" r="16"/>
+    <circle cx="520" cy="445" r="16"/>
+  </g>
+
+  <!-- pin -->
+  <line x1="450" y1="180" x2="450" y2="520" stroke="#7C8896" stroke-width="5"/>
+  <circle cx="450" cy="175" r="12" fill="#9AA6B2" stroke="#5B6472" stroke-width="2"/>
+
+  <!-- labels -->
+  <g font-size="24" fill="#3E3A34">
+    <line x1="640" y1="300" x2="760" y2="260" stroke="#3E3A34" stroke-width="2"/>
+    <text x="620" y="240">ovules</text>
+
+    <line x1="420" y1="220" x2="330" y2="130" stroke="#3E3A34" stroke-width="2"/>
+    <text x="200" y="120">straight pin</text>
+
+    <text x="450" y="600" text-anchor="middle">ovary, opened to show the ovules inside</text>
+  </g>
+</svg>

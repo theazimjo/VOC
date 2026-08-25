@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="800" fill="#FBF8F1"/>
+
+  <!-- stem -->
+  <rect x="435" y="560" width="30" height="220" fill="#7CA860" stroke="#4F7A3B" stroke-width="3"/>
+
+  <!-- petals -->
+  <g fill="#F3B6C9" stroke="#C46F8E" stroke-width="3">
+    <ellipse cx="450" cy="380" rx="70" ry="130" transform="rotate(0 450 480)"/>
+    <ellipse cx="450" cy="380" rx="70" ry="130" transform="rotate(72 450 480)"/>
+    <ellipse cx="450" cy="380" rx="70" ry="130" transform="rotate(144 450 480)"/>
+    <ellipse cx="450" cy="380" rx="70" ry="130" transform="rotate(216 450 480)"/>
+    <ellipse cx="450" cy="380" rx="70" ry="130" transform="rotate(288 450 480)"/>
+  </g>
+
+  <!-- pistil (center, female part) -->
+  <line x1="450" y1="480" x2="450" y2="380" stroke="#5B8A3A" stroke-width="10" stroke-linecap="round"/>
+  <ellipse cx="450" cy="360" rx="16" ry="22" fill="#8FBE6E" stroke="#4F7A3B" stroke-width="3"/>
+  <ellipse cx="450" cy="500" rx="26" ry="20" fill="#6FAE5B" stroke="#4F7A3B" stroke-width="3"/>
+  <!-- ovules inside ovary -->
+  <circle cx="440" cy="500" r="4" fill="#FBF8F1"/>
+  <circle cx="450" cy="505" r="4" fill="#FBF8F1"/>
+  <circle cx="460" cy="500" r="4" fill="#FBF8F1"/>
+
+  <!-- stamens (male parts) around pistil -->
+  <g stroke="#D9A62E" stroke-width="7" stroke-linecap="round">
+    <line x1="450" y1="480" x2="400" y2="370"/>
+    <line x1="450" y1="480" x2="500" y2="370"/>
+    <line x1="450" y1="480" x2="380" y2="430"/>
+    <line x1="450" y1="480" x2="520" y2="430"/>
+  </g>
+  <g fill="#F0B429" stroke="#B8850C" stroke-width="2">
+    <ellipse cx="400" cy="360" rx="14" ry="18"/>
+    <ellipse cx="500" cy="360" rx="14" ry="18"/>
+    <ellipse cx="375" cy="424" rx="14" ry="18"/>
+    <ellipse cx="525" cy="424" rx="14" ry="18"/>
+  </g>
+
+  <!-- labels with leader lines -->
+  <g font-size="27" fill="#3E3A34">
+    <line x1="450" y1="360" x2="620" y2="230" stroke="#3E3A34" stroke-width="2"/>
+    <text x="628" y="235">pistil</text>
+
+    <line x1="400" y1="360" x2="200" y2="230" stroke="#3E3A34" stroke-width="2"/>
+    <text x="80" y="235">stamen</text>
+
+    <line x1="480" y1="440" x2="700" y2="480" stroke="#3E3A34" stroke-width="2"/>
+    <text x="708" y="486">petal</text>
+
+    <line x1="450" y1="500" x2="230" y2="590" stroke="#3E3A34" stroke-width="2"/>
+    <text x="70" y="596">ovary (with ovules)</text>
+
+    <line x1="450" y1="640" x2="650" y2="660" stroke="#3E3A34" stroke-width="2"/>
+    <text x="658" y="666">stem</text>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="700" fill="#FBF8F1"/>
+
+  <!-- table -->
+  <rect x="0" y="560" width="900" height="20" fill="#C9B98D"/>
+
+  <!-- flower on the table -->
+  <g transform="translate(420 540)">
+    <line x1="0" y1="0" x2="0" y2="-90" stroke="#7CA860" stroke-width="8" stroke-linecap="round"/>
+    <g fill="#F3B6C9" stroke="#C46F8E" stroke-width="3">
+      <ellipse cx="0" cy="-150" rx="34" ry="60" transform="rotate(0 0 -110)"/>
+      <ellipse cx="0" cy="-150" rx="34" ry="60" transform="rotate(72 0 -110)"/>
+      <ellipse cx="0" cy="-150" rx="34" ry="60" transform="rotate(144 0 -110)"/>
+      <ellipse cx="0" cy="-150" rx="34" ry="60" transform="rotate(216 0 -110)"/>
+      <ellipse cx="0" cy="-150" rx="34" ry="60" transform="rotate(288 0 -110)"/>
+    </g>
+    <circle cx="0" cy="-110" r="16" fill="#F0B429" stroke="#B8850C" stroke-width="2"/>
+  </g>
+
+  <!-- hand holding a magnifying glass over the flower -->
+  <g transform="translate(560 260) rotate(20)">
+    <circle cx="0" cy="0" r="80" fill="#EAF3FB" fill-opacity="0.5" stroke="#4F3B22" stroke-width="10"/>
+    <rect x="-14" y="76" width="28" height="120" rx="12" fill="#B9895A" stroke="#7A5A38" stroke-width="4"/>
+  </g>
+  <!-- magnified view line -->
+  <line x1="500" y1="330" x2="440" y2="470" stroke="#9AA6B2" stroke-width="2" stroke-dasharray="6 6"/>
+  <line x1="620" y1="330" x2="440" y2="470" stroke="#9AA6B2" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <text x="450" y="640" font-size="26" fill="#3E3A34" text-anchor="middle">examining a flower with a hand lens</text>
+</svg>

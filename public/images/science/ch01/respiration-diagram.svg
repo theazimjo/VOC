@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="1000" height="680" fill="#FBF8F1"/>
+
+  <!-- enlarged root cell -->
+  <rect x="270" y="140" width="460" height="400" rx="40" fill="#FBEFD9" stroke="#4F3B22" stroke-width="4"/>
+  <!-- nucleus -->
+  <circle cx="500" cy="340" r="70" fill="#E7C98C" stroke="#8A6412" stroke-width="3"/>
+  <text x="500" y="348" font-size="24" fill="#5B4419" text-anchor="middle" font-style="italic">cell</text>
+
+  <!-- oxygen in (top left) -->
+  <path d="M120 160 C 200 190, 250 220, 300 260" fill="none" stroke="#4A90D9" stroke-width="7" stroke-linecap="round" marker-end="url(#r1)"/>
+  <text x="60" y="130" font-size="26" fill="#2E6199" font-style="italic">oxygen</text>
+
+  <!-- sugar in (bottom left) -->
+  <path d="M120 560 C 200 520, 250 480, 305 430" fill="none" stroke="#C9822E" stroke-width="7" stroke-linecap="round" marker-end="url(#r2)"/>
+  <text x="70" y="600" font-size="26" fill="#8A5314" font-style="italic">sugar</text>
+
+  <!-- carbon dioxide out (top right) -->
+  <path d="M700 260 C 750 220, 800 190, 870 155" fill="none" stroke="#7C8896" stroke-width="7" stroke-linecap="round" marker-end="url(#r3)"/>
+  <text x="740" y="125" font-size="26" fill="#4E5762" font-style="italic">carbon dioxide</text>
+
+  <!-- water out (bottom right) -->
+  <path d="M695 430 C 745 480, 790 520, 865 560" fill="none" stroke="#4A90D9" stroke-width="7" stroke-linecap="round" marker-end="url(#r4)"/>
+  <text x="770" y="605" font-size="26" fill="#2E6199" font-style="italic">water</text>
+
+  <!-- energy released, centered below nucleus -->
+  <g>
+    <path d="M470 430 L500 470 L470 470 L510 520 L470 500 L500 440 Z" fill="#F0B429" stroke="#B8850C" stroke-width="2"/>
+    <text x="530" y="470" font-size="26" fill="#8A6412" font-style="italic">energy released</text>
+  </g>
+
+  <defs>
+    <marker id="r1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4A90D9"/></marker>
+    <marker id="r2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#C9822E"/></marker>
+    <marker id="r3" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7C8896"/></marker>
+    <marker id="r4" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4A90D9"/></marker>
+  </defs>
+</svg>

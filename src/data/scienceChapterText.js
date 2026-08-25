@@ -77,7 +77,7 @@ export const scienceChapterText = {
         { type: 'p', text: "From the roots, water is transported to the stem. The stem is the part of the plant between the roots and the leaves. The stem transports water and food to all parts of the plant through tubes. There are two kinds of tubes within the stem, occurring in bundles: one kind transports water upward from the roots to the leaves, and the other transports food from the leaves downward to all parts of the plant." },
         { type: 'p', text: "Water is transported from the stem to the leaves. Most leaves contain small thin tubes called veins, much like the tubes in the stem — they carry water and food to and from leaf cells." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch01/stem-cross-section.jpg', caption: 'Water-carrying and food-carrying tubes inside a stem' }
+          { src: '/images/science/ch01/stem-cross-section.svg', caption: 'Water-carrying and food-carrying tubes inside a stem' }
         ] }
       ],
       [
@@ -86,7 +86,7 @@ export const scienceChapterText = {
         { type: 'p', text: "To sum up how a plant gets materials for food making: water enters the roots and moves through the stem to the leaf; air, containing carbon dioxide, enters the leaf through the stomata; and sunlight striking the leaf provides the energy that leaf cells need to make food." },
         { type: 'image-group', images: [
           { src: '/images/science/ch01/leaf-veins-stomata.jpg', caption: 'Veins and stomata in a leaf' },
-          { src: '/images/science/ch01/plant-materials-diagram.jpg', caption: 'How a plant gets materials for food making' }
+          { src: '/images/science/ch01/plant-materials-diagram.svg', caption: 'How a plant gets materials for food making' }
         ] }
       ],
       [
@@ -102,7 +102,7 @@ export const scienceChapterText = {
         { type: 'p', text: "To better understand photosynthesis, it helps to know what the inside of a leaf is like. Leaf cells contain chloroplasts — small green bodies inside plant cells. The green color comes from a special material needed by the plant to make food, called chlorophyll." },
         { type: 'p', text: "The cells inside a leaf, seen under a microscope, show a waxy covering on the top and bottom. Beneath this covering is a single layer of cells that help protect the leaf from damage — these usually don't contain chloroplasts. The stomata sit in the bottom layer of these cells, and gases enter and leave the plant through these openings." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch01/leaf-cross-section.jpg', caption: 'Leaf cross section' }
+          { src: '/images/science/ch01/leaf-cross-section.svg', caption: 'Leaf cross section' }
         ] }
       ],
       [
@@ -113,7 +113,7 @@ export const scienceChapterText = {
         { type: 'p', text: "The sun's energy is used to change water into two gases: hydrogen and oxygen. The oxygen gas, a waste product, moves out of the leaf through the stomata. Meanwhile, carbon dioxide gas enters the leaf through the stomata and moves to the food-making cells. The hydrogen gas joins with the carbon dioxide gas to make food — a type of sugar. The sugar is then carried by the vein to the rest of the plant." },
         { type: 'p', text: "A simple way to show what happens during photosynthesis is: water + carbon dioxide + energy (from sunlight) → sugar + oxygen." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch01/photosynthesis-diagram.jpg', caption: 'Food making in a leaf' }
+          { src: '/images/science/ch01/photosynthesis-diagram.svg', caption: 'Food making in a leaf' }
         ] }
       ],
       [
@@ -135,7 +135,7 @@ export const scienceChapterText = {
         { type: 'p', text: "A simple way to show what happens during respiration is: sugar + oxygen → energy + carbon dioxide + water." },
         { type: 'p', text: "The process of respiration is the opposite of photosynthesis. Photosynthesis takes place only in cells with chlorophyll, makes food (sugar), stores the sun's energy in sugar, {{takes in}} carbon dioxide and water, and {{gives off}} oxygen. Respiration takes place in all cells, breaks food (sugar) down, releases the energy stored in sugar, and produces and {{gives off}} carbon dioxide and water while using oxygen." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch01/respiration-diagram.jpg', caption: 'Respiration in an enlarged root cell' }
+          { src: '/images/science/ch01/respiration-diagram.svg', caption: 'Respiration in an enlarged root cell' }
         ] }
       ],
       [
@@ -143,7 +143,7 @@ export const scienceChapterText = {
         { type: 'p', text: "How do flowers produce seeds? Some of the energy released by plants during respiration is used for reproduction — the process by which living things produce new living things of the same kind. Many green plants grow flowers. A flower is the reproductive part of a flowering plant." },
         { type: 'p', text: "Many flowers have three main parts: the petals, the stamen, and the pistil. Each part plays a role in reproduction." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch01/flower-parts-diagram.jpg', caption: 'Parts of a typical flower' },
+          { src: '/images/science/ch01/flower-parts-diagram.svg', caption: 'Parts of a typical flower' },
           { src: '/images/science/ch01/lily.jpg', caption: 'Lily' }
         ] }
       ],
@@ -160,9 +160,9 @@ export const scienceChapterText = {
         { type: 'p', text: "The pistil is the female reproductive part. The bottom part of the pistil contains the ovary. The ovary is the part of the plant that contains ovules. An ovule is a small round body that contains the female reproductive cells." },
         { type: 'activity', text: "Hands-on: What are the parts of a typical flower? Materials: 2 different kinds of flowers / hand lens / microscope slide / microscope / straight pin / sheet of paper. Procedure: A. Look at and compare two flowers. Identify the petals of each flower. Smell them. 1. What color are the petals of each flower? 2. Do the petals of either flower have an odor? B. Identify the stamens and the pistil of each flower. Use a hand lens to help you see the parts. C. Choose one flower and look at its inner parts. Carefully tear off any leafy parts around the petals. Then tear off the petals. D. Gently remove one stamen and look at the top part with a hand lens. The powdery material is made up of many pollen grains. Shake some of the pollen grains onto a microscope slide. Look at the slide under a microscope. 3. Draw some pollen grains. E. Remove the rest of the stamens. Place the pistil on a sheet of paper. Use a straight pin to pick apart the base of the pistil. The ovules are inside this base. Use a hand lens to look at the ovules. 4. Draw what you see. Conclusion: 1. What parts do the two flowers have in common? 2. What are some differences between the flowers? Using science ideas: Suppose you wanted to know how many seeds the flower you looked at could produce. How could you find out?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch01/activity-boy-flower-lens.jpg', caption: 'Examining a flower with a hand lens' },
-          { src: '/images/science/ch01/activity-stamen-closeup.jpg', caption: 'Removing a stamen to look at its pollen' },
-          { src: '/images/science/ch01/activity-ovary-diagram.jpg', caption: 'Ovary and ovules, pulled open with a pin' }
+          { src: '/images/science/ch01/activity-boy-flower-lens.svg', caption: 'Examining a flower with a hand lens' },
+          { src: '/images/science/ch01/activity-stamen-closeup.svg', caption: 'Removing a stamen to look at its pollen' },
+          { src: '/images/science/ch01/activity-ovary-diagram.svg', caption: 'Ovary and ovules, pulled open with a pin' }
         ] }
       ],
       [
@@ -178,13 +178,13 @@ export const scienceChapterText = {
         { type: 'image-group', images: [
           { src: '/images/science/ch01/black-birch-tree.jpg', caption: 'Black birch tree, wind-pollinated' },
           { src: '/images/science/ch01/grass-wheat.jpg', caption: 'Grass (wheat), wind-pollinated' },
-          { src: '/images/science/ch01/fertilization-diagram.jpg', caption: 'A pollen tube growing to an ovule' }
+          { src: '/images/science/ch01/fertilization-diagram.svg', caption: 'A pollen tube growing to an ovule' }
         ] }
       ],
       [
         { type: 'p', text: "The fertilized ovule becomes a seed containing a tiny young plant and stored food. The tiny young plant is called an embryo. When conditions are right, the embryo begins to grow — this growth of a plant embryo from a seed is called germination. As the embryo grows, it uses the food stored in the seed. Once it reaches a certain size, the young plant will make its own food by photosynthesis." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch01/bean-seed-cross-section.jpg', caption: 'Bean seed cross section' },
+          { src: '/images/science/ch01/bean-seed-cross-section.svg', caption: 'Bean seed cross section' },
           { src: '/images/science/ch01/germinating-squash-seeds.jpg', caption: 'Germinating squash seeds' }
         ] }
       ],

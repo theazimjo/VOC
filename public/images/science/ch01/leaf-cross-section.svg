@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="1000" height="620" fill="#FBF8F1"/>
+
+  <!-- layer stack -->
+  <rect x="80" y="120" width="620" height="20" fill="#DCEEDB" stroke="#4F7A3B" stroke-width="2"/> <!-- waxy top -->
+  <rect x="80" y="140" width="620" height="40" fill="#B7DA9E" stroke="#4F7A3B" stroke-width="2"/> <!-- upper protective layer -->
+
+  <!-- food-making cells with chloroplasts -->
+  <rect x="80" y="180" width="620" height="220" fill="#EFF6E8" stroke="#4F7A3B" stroke-width="2"/>
+  <g fill="#8FBE6E" stroke="#4F7A3B" stroke-width="2">
+    <ellipse cx="140" cy="240" rx="32" ry="44"/>
+    <ellipse cx="212" cy="240" rx="32" ry="44"/>
+    <ellipse cx="284" cy="240" rx="32" ry="44"/>
+    <ellipse cx="356" cy="240" rx="32" ry="44"/>
+    <ellipse cx="428" cy="240" rx="32" ry="44"/>
+    <ellipse cx="500" cy="240" rx="32" ry="44"/>
+    <ellipse cx="572" cy="240" rx="32" ry="44"/>
+    <ellipse cx="644" cy="240" rx="32" ry="44"/>
+  </g>
+  <!-- vein running through -->
+  <ellipse cx="390" cy="340" rx="90" ry="34" fill="#F6ECC9" stroke="#C9822E" stroke-width="3"/>
+  <text x="390" y="348" font-size="22" text-anchor="middle" fill="#8A5314" font-style="italic">vein</text>
+  <!-- air spaces -->
+  <g fill="#FBF8F1" stroke="#9AA6B2" stroke-width="1.5">
+    <circle cx="150" cy="370" r="14"/>
+    <circle cx="210" cy="380" r="12"/>
+    <circle cx="580" cy="375" r="13"/>
+    <circle cx="630" cy="365" r="14"/>
+  </g>
+
+  <rect x="80" y="400" width="620" height="40" fill="#B7DA9E" stroke="#4F7A3B" stroke-width="2"/> <!-- lower protective layer -->
+  <rect x="80" y="440" width="620" height="20" fill="#DCEEDB" stroke="#4F7A3B" stroke-width="2"/> <!-- waxy bottom -->
+
+  <!-- stomata openings in bottom layer -->
+  <g fill="#FBF8F1" stroke="#4F7A3B" stroke-width="2.5">
+    <ellipse cx="200" cy="450" rx="16" ry="8"/>
+    <ellipse cx="390" cy="450" rx="16" ry="8"/>
+    <ellipse cx="560" cy="450" rx="16" ry="8"/>
+  </g>
+  <!-- air arrows through stomata -->
+  <g stroke="#7C8896" stroke-width="4" stroke-linecap="round" marker-end="url(#la)">
+    <path d="M200 520 L200 462"/>
+    <path d="M390 520 L390 462"/>
+    <path d="M560 520 L560 462"/>
+  </g>
+
+  <!-- labels -->
+  <g font-size="24" fill="#3E3A34">
+    <line x1="700" y1="130" x2="740" y2="100" stroke="#3E3A34" stroke-width="2"/>
+    <text x="748" y="106">waxy covering</text>
+
+    <line x1="700" y1="160" x2="740" y2="155" stroke="#3E3A34" stroke-width="2"/>
+    <text x="748" y="161">protective layer</text>
+
+    <line x1="676" y1="240" x2="740" y2="230" stroke="#3E3A34" stroke-width="2"/>
+    <text x="748" y="236">food-making cells</text>
+    <text x="748" y="264">(with chloroplasts)</text>
+
+    <line x1="700" y1="420" x2="740" y2="405" stroke="#3E3A34" stroke-width="2"/>
+    <text x="748" y="411">protective layer</text>
+
+    <line x1="576" y1="450" x2="700" y2="500" stroke="#3E3A34" stroke-width="2"/>
+    <text x="708" y="506">stomata</text>
+  </g>
+
+  <defs>
+    <marker id="la" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7C8896"/></marker>
+  </defs>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="700" fill="#FBF8F1"/>
+
+  <!-- outer stem circle -->
+  <circle cx="450" cy="350" r="220" fill="#E9F1DE" stroke="#4F7A3B" stroke-width="4"/>
+  <circle cx="450" cy="350" r="195" fill="#F3F8ED" stroke="#7CA860" stroke-width="2"/>
+
+  <!-- bundles arranged in a ring -->
+  <g>
+    <g transform="translate(450 175)">
+      <ellipse rx="30" ry="46" fill="#4A90D9" stroke="#2E6199" stroke-width="2"/>
+      <ellipse cx="0" cy="34" rx="30" ry="30" fill="#C9822E" stroke="#8A5314" stroke-width="2"/>
+    </g>
+    <g transform="translate(610 260) rotate(60)">
+      <ellipse rx="30" ry="46" fill="#4A90D9" stroke="#2E6199" stroke-width="2"/>
+      <ellipse cx="0" cy="34" rx="30" ry="30" fill="#C9822E" stroke="#8A5314" stroke-width="2"/>
+    </g>
+    <g transform="translate(610 440) rotate(120)">
+      <ellipse rx="30" ry="46" fill="#4A90D9" stroke="#2E6199" stroke-width="2"/>
+      <ellipse cx="0" cy="34" rx="30" ry="30" fill="#C9822E" stroke="#8A5314" stroke-width="2"/>
+    </g>
+    <g transform="translate(450 525) rotate(180)">
+      <ellipse rx="30" ry="46" fill="#4A90D9" stroke="#2E6199" stroke-width="2"/>
+      <ellipse cx="0" cy="34" rx="30" ry="30" fill="#C9822E" stroke="#8A5314" stroke-width="2"/>
+    </g>
+    <g transform="translate(290 440) rotate(240)">
+      <ellipse rx="30" ry="46" fill="#4A90D9" stroke="#2E6199" stroke-width="2"/>
+      <ellipse cx="0" cy="34" rx="30" ry="30" fill="#C9822E" stroke="#8A5314" stroke-width="2"/>
+    </g>
+    <g transform="translate(290 260) rotate(300)">
+      <ellipse rx="30" ry="46" fill="#4A90D9" stroke="#2E6199" stroke-width="2"/>
+      <ellipse cx="0" cy="34" rx="30" ry="30" fill="#C9822E" stroke="#8A5314" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- pith center -->
+  <circle cx="450" cy="350" r="55" fill="#F6ECC9" stroke="#C9B98D" stroke-width="2"/>
+
+  <!-- legend -->
+  <g font-size="24" fill="#3E3A34">
+    <rect x="70" y="600" width="26" height="26" fill="#4A90D9" stroke="#2E6199" stroke-width="2"/>
+    <text x="106" y="620">water-carrying tubes</text>
+    <rect x="70" y="640" width="26" height="26" fill="#C9822E" stroke="#8A5314" stroke-width="2"/>
+    <text x="106" y="660">food-carrying tubes</text>
+  </g>
+
+  <line x1="450" y1="175" x2="700" y2="90" stroke="#3E3A34" stroke-width="2"/>
+  <text x="708" y="96" font-size="24" fill="#3E3A34">bundle of tubes</text>
+</svg>

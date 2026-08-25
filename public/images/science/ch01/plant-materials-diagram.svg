@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="700" fill="#FBF8F1"/>
+
+  <!-- sky -->
+  <rect x="0" y="0" width="900" height="480" fill="#EAF3FB"/>
+  <!-- ground -->
+  <rect x="0" y="480" width="900" height="220" fill="#E7DCC4"/>
+  <rect x="0" y="480" width="900" height="10" fill="#C9B98D"/>
+
+  <!-- sun -->
+  <circle cx="700" cy="110" r="60" fill="#F5C242" stroke="#D89B1E" stroke-width="3"/>
+  <g stroke="#F5C242" stroke-width="6" stroke-linecap="round">
+    <line x1="700" y1="20" x2="700" y2="0"/>
+    <line x1="620" y1="45" x2="605" y2="30"/>
+    <line x1="780" y1="45" x2="795" y2="30"/>
+    <line x1="595" y1="110" x2="575" y2="110"/>
+    <line x1="805" y1="110" x2="825" y2="110"/>
+  </g>
+  <!-- light rays to leaf -->
+  <g stroke="#F0B429" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round">
+    <line x1="660" y1="150" x2="540" y2="290"/>
+    <line x1="690" y1="165" x2="580" y2="300"/>
+    <line x1="715" y1="180" x2="620" y2="305"/>
+  </g>
+  <text x="565" y="230" font-size="26" fill="#9A6B0C" font-style="italic">3 light energy</text>
+
+  <!-- stem -->
+  <rect x="430" y="300" width="34" height="230" rx="10" fill="#7CA860" stroke="#4F7A3B" stroke-width="3"/>
+
+  <!-- leaf -->
+  <path d="M464 330 C 560 300, 610 350, 560 410 C 520 450, 470 420, 464 380 Z" fill="#8FBE6E" stroke="#4F7A3B" stroke-width="3"/>
+  <path d="M470 340 C 520 350, 545 375, 550 400" fill="none" stroke="#4F7A3B" stroke-width="2.5"/>
+
+  <!-- air / CO2 arrow into leaf -->
+  <g>
+    <path d="M660 380 C 610 385, 570 390, 545 385" fill="none" stroke="#8C97A6" stroke-width="6" stroke-linecap="round" marker-end="url(#arrowGray)"/>
+    <text x="600" y="365" font-size="26" fill="#5B6472" font-style="italic">2 air</text>
+  </g>
+
+  <!-- roots -->
+  <path d="M447 530 C 420 560, 400 590, 390 630 M447 530 C 460 565, 470 600, 468 640 M447 530 C 435 570, 415 610, 400 650 M447 530 C 465 555, 500 590, 520 620 M447 530 C 480 545, 520 555, 555 560" fill="none" stroke="#B9895A" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- water arrow from soil up into stem -->
+  <g>
+    <path d="M420 660 C 430 600, 440 560, 447 535" fill="none" stroke="#4A90D9" stroke-width="7" stroke-linecap="round" marker-end="url(#arrowBlue)"/>
+    <text x="300" y="620" font-size="26" fill="#2E6199" font-style="italic">1 water</text>
+  </g>
+
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#4A90D9"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#8C97A6"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="675" font-size="24" fill="#5B4A32" text-anchor="middle">soil</text>
+</svg>

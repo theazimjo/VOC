@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="800" fill="#FBF8F1"/>
+
+  <!-- pistil silhouette: top style bulb, long tube, ovary base -->
+  <ellipse cx="450" cy="120" rx="30" ry="24" fill="#B7DA9E" stroke="#4F7A3B" stroke-width="3"/>
+  <path d="M425 135 C 410 300, 410 500, 430 640 L470 640 C 490 500, 490 300, 475 135 Z" fill="#DDEEDA" stroke="#4F7A3B" stroke-width="3"/>
+  <ellipse cx="450" cy="680" rx="70" ry="55" fill="#8FBE6E" stroke="#4F7A3B" stroke-width="3"/>
+
+  <!-- pollen grain landing on stigma -->
+  <circle cx="450" cy="115" r="14" fill="#F0B429" stroke="#B8850C" stroke-width="2"/>
+  <text x="500" y="100" font-size="24" fill="#8A6412" font-style="italic">pollen grain</text>
+  <line x1="490" y1="105" x2="465" y2="115" stroke="#3E3A34" stroke-width="2"/>
+
+  <!-- pollen tube growing down -->
+  <path d="M450 130 C 445 260, 448 420, 450 600" fill="none" stroke="#D9A62E" stroke-width="6" stroke-linecap="round" stroke-dasharray="1 10"/>
+  <text x="500" y="380" font-size="24" fill="#8A6412" font-style="italic">pollen tube</text>
+  <line x1="490" y1="372" x2="452" y2="380" stroke="#3E3A34" stroke-width="2"/>
+
+  <!-- ovule inside ovary -->
+  <circle cx="450" cy="680" r="26" fill="#FBF8F1" stroke="#4F7A3B" stroke-width="3"/>
+  <circle cx="450" cy="680" r="8" fill="#C46F8E"/>
+  <text x="540" y="690" font-size="24" fill="#3E3A34" font-style="italic">ovule</text>
+  <line x1="530" y1="685" x2="478" y2="680" stroke="#3E3A34" stroke-width="2"/>
+
+  <!-- male + female cell join label -->
+  <text x="330" y="600" font-size="22" fill="#3E3A34" text-anchor="end" font-style="italic">male cell (from pollen)</text>
+  <line x1="335" y1="595" x2="440" y2="605" stroke="#3E3A34" stroke-width="2"/>
+  <text x="330" y="720" font-size="22" fill="#3E3A34" text-anchor="end" font-style="italic">female cell (in ovule)</text>
+  <line x1="335" y1="715" x2="440" y2="685" stroke="#3E3A34" stroke-width="2"/>
+
+  <text x="450" y="60" font-size="24" fill="#3E3A34" text-anchor="middle" font-style="italic">top of pistil (stigma)</text>
+</svg>

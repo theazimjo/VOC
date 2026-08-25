@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="1000" height="720" fill="#FBF8F1"/>
+
+  <!-- sun -->
+  <circle cx="500" cy="90" r="46" fill="#F5C242" stroke="#D89B1E" stroke-width="3"/>
+  <g stroke="#F5C242" stroke-width="5" stroke-linecap="round">
+    <line x1="500" y1="20" x2="500" y2="0"/>
+    <line x1="440" y1="40" x2="428" y2="26"/>
+    <line x1="560" y1="40" x2="572" y2="26"/>
+  </g>
+
+  <!-- leaf outline -->
+  <ellipse cx="500" cy="420" rx="330" ry="220" fill="#DDEEDA" stroke="#4F7A3B" stroke-width="4"/>
+
+  <!-- chloroplast cells scattered -->
+  <g fill="#8FBE6E" stroke="#4F7A3B" stroke-width="2" opacity="0.9">
+    <ellipse cx="340" cy="330" rx="34" ry="46"/>
+    <ellipse cx="420" cy="310" rx="34" ry="46"/>
+    <ellipse cx="500" cy="300" rx="34" ry="46"/>
+    <ellipse cx="580" cy="315" rx="34" ry="46"/>
+    <ellipse cx="655" cy="345" rx="34" ry="46"/>
+    <ellipse cx="330" cy="430" rx="34" ry="46"/>
+    <ellipse cx="410" cy="415" rx="34" ry="46"/>
+    <ellipse cx="590" cy="420" rx="34" ry="46"/>
+    <ellipse cx="665" cy="440" rx="34" ry="46"/>
+    <ellipse cx="365" cy="520" rx="34" ry="46"/>
+    <ellipse cx="450" cy="530" rx="34" ry="46"/>
+    <ellipse cx="545" cy="525" rx="34" ry="46"/>
+    <ellipse cx="625" cy="510" rx="34" ry="46"/>
+  </g>
+  <!-- little chlorophyll dots inside each cell -->
+  <g fill="#4F7A3B" opacity="0.55">
+    <circle cx="335" cy="320" r="4"/><circle cx="348" cy="340" r="4"/>
+    <circle cx="415" cy="300" r="4"/><circle cx="428" cy="320" r="4"/>
+    <circle cx="495" cy="292" r="4"/><circle cx="508" cy="312" r="4"/>
+    <circle cx="575" cy="308" r="4"/><circle cx="588" cy="326" r="4"/>
+    <circle cx="450" cy="410" r="4"/><circle cx="405" cy="425" r="4"/>
+    <circle cx="540" cy="418" r="4"/><circle cx="585" cy="430" r="4"/>
+  </g>
+
+  <!-- central meeting point -->
+  <circle cx="500" cy="410" r="10" fill="#3E3A34"/>
+
+  <!-- 1 light energy -->
+  <path d="M500 145 L500 395" fill="none" stroke="#D9A62E" stroke-width="7" stroke-linecap="round" marker-end="url(#ar1)"/>
+  <text x="510" y="270" font-size="24" fill="#8A6412" font-style="italic">1 light energy passes through</text>
+
+  <!-- 2 water carried to cells by the vein (from lower left) -->
+  <path d="M215 620 C 300 540, 400 470, 490 415" fill="none" stroke="#4A90D9" stroke-width="7" stroke-linecap="round" marker-end="url(#ar2)"/>
+  <text x="150" y="600" font-size="24" fill="#2E6199" font-style="italic">2 water is carried to cells by the vein</text>
+
+  <!-- 3 oxygen gas moves out (upper left, outward) -->
+  <path d="M495 405 C 400 340, 300 270, 210 200" fill="none" stroke="#7C8896" stroke-width="7" stroke-linecap="round" marker-end="url(#ar3)"/>
+  <text x="120" y="180" font-size="24" fill="#4E5762" font-style="italic">3 oxygen gas moves out of the leaf</text>
+
+  <!-- 4 carbon dioxide enters (lower left, inward) -->
+  <path d="M175 650 C 280 600, 380 500, 485 425" fill="none" stroke="#9AA6B2" stroke-width="7" stroke-linecap="round" marker-end="url(#ar4)" stroke-dasharray="1 12"/>
+  <text x="95" y="680" font-size="24" fill="#4E5762" font-style="italic">4 carbon dioxide gas enters the leaf</text>
+
+  <!-- 5 sugar carried by vein to rest of plant (to the right, outward) -->
+  <path d="M512 415 C 620 460, 730 520, 830 590" fill="none" stroke="#C9822E" stroke-width="7" stroke-linecap="round" marker-end="url(#ar5)"/>
+  <text x="640" y="640" font-size="24" fill="#8A5314" font-style="italic">5 sugar is carried by the vein</text>
+  <text x="640" y="670" font-size="24" fill="#8A5314" font-style="italic">to the rest of the plant</text>
+
+  <defs>
+    <marker id="ar1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#D9A62E"/></marker>
+    <marker id="ar2" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#4A90D9"/></marker>
+    <marker id="ar3" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#7C8896"/></marker>
+    <marker id="ar4" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#9AA6B2"/></marker>
+    <marker id="ar5" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#C9822E"/></marker>
+  </defs>
+</svg>

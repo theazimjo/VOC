@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Georgia, 'Times New Roman', serif">
+  <rect width="900" height="700" fill="#FBF8F1"/>
+
+  <!-- flower base, petals pulled back -->
+  <g transform="translate(420 420)">
+    <g fill="#F3B6C9" stroke="#C46F8E" stroke-width="3" opacity="0.85">
+      <ellipse cx="-90" cy="60" rx="34" ry="70" transform="rotate(-40 -90 60)"/>
+      <ellipse cx="90" cy="60" rx="34" ry="70" transform="rotate(40 90 60)"/>
+      <ellipse cx="-60" cy="90" rx="34" ry="70" transform="rotate(-70 -60 90)"/>
+      <ellipse cx="60" cy="90" rx="34" ry="70" transform="rotate(70 60 90)"/>
+      <ellipse cx="0" cy="100" rx="34" ry="70" transform="rotate(180 0 100)"/>
+    </g>
+    <!-- remaining stamens -->
+    <g stroke="#D9A62E" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="0" x2="-24" y2="-40"/>
+      <line x1="0" y1="0" x2="24" y2="-40"/>
+      <line x1="0" y1="0" x2="0" y2="-50"/>
+    </g>
+    <g fill="#F0B429" stroke="#B8850C" stroke-width="2">
+      <ellipse cx="-24" cy="-44" rx="10" ry="14"/>
+      <ellipse cx="24" cy="-44" rx="10" ry="14"/>
+      <ellipse cx="0" cy="-54" rx="10" ry="14"/>
+    </g>
+    <ellipse cx="0" cy="10" rx="18" ry="16" fill="#6FAE5B" stroke="#4F7A3B" stroke-width="3"/>
+  </g>
+
+  <!-- tweezers lifting one stamen away -->
+  <g transform="translate(560 260) rotate(25)">
+    <path d="M-8 0 L-40 -140 L-16 -140 L0 -20 Z" fill="#B9C2CB" stroke="#5B6472" stroke-width="3"/>
+    <path d="M8 0 L40 -140 L16 -140 L0 -20 Z" fill="#B9C2CB" stroke="#5B6472" stroke-width="3"/>
+  </g>
+  <!-- the plucked stamen held between the tweezer tips -->
+  <g transform="translate(548 250) rotate(15)">
+    <line x1="0" y1="0" x2="0" y2="40" stroke="#D9A62E" stroke-width="6" stroke-linecap="round"/>
+    <ellipse cx="0" cy="46" rx="10" ry="14" fill="#F0B429" stroke="#B8850C" stroke-width="2"/>
+  </g>
+
+  <text x="450" y="640" font-size="26" fill="#3E3A34" text-anchor="middle">removing a stamen to look at its pollen</text>
+</svg>
