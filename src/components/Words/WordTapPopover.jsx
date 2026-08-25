@@ -105,7 +105,13 @@ export default function WordTapPopover({
   useEffect(() => {
     cancelledRef.current = false;
     setLookupError(false);
+    setShowMeanings(false);
+    setDefExpanded(false);
+    setExExpanded(false);
+    setMeanings([]);
+    setWordImage(null);
 
+    // Pre-populate from cache so UI isn't blank while fetching
     if (existingWord && existingWord.translation) {
       setTranslation(existingWord.translation);
       setAlternate('');
@@ -113,23 +119,18 @@ export default function WordTapPopover({
       setPartOfSpeech(existingWord.partOfSpeech || '');
       setExample(existingWord.example || '');
       setPhonetic(existingWord.phonetic || '');
-      setIsLoading(false);
-      return;
+      setIsLoading(false); // show cached data immediately
+    } else {
+      setIsLoading(true);
+      setTranslation('');
+      setAlternate('');
+      setDefinition('');
+      setPartOfSpeech('');
+      setExample('');
+      setPhonetic('');
     }
 
-    setIsLoading(true);
-    setTranslation('');
-    setAlternate('');
-    setDefinition('');
-    setPartOfSpeech('');
-    setExample('');
-    setPhonetic('');
-    setMeanings([]);
-    setWordImage(null);
-    setShowMeanings(false);
-    setDefExpanded(false);
-    setExExpanded(false);
-
+    // Always fetch fresh data: image, meanings, and (for language switches) new translation
     const isMultiWord = word.trim().includes(' ') || word.trim().length > 28;
 
     const tasks = [
@@ -153,7 +154,8 @@ export default function WordTapPopover({
           setPartOfSpeech(res.partOfSpeech || '');
           setExample(res.example || '');
           setPhonetic(res.phonetic || '');
-        } else {
+        } else if (!existingWord) {
+          // Only show error if there's no cached data to fall back on
           setLookupError(true);
         }
         if (Array.isArray(mList)) {
@@ -163,11 +165,12 @@ export default function WordTapPopover({
           setWordImage({ src: wikiData.thumbnail.source, alt: wikiData.title || word });
         }
       })
-      .catch(() => { if (!cancelledRef.current) setLookupError(true); })
+      .catch(() => { if (!cancelledRef.current && !existingWord) setLookupError(true); })
       .finally(() => { if (!cancelledRef.current) setIsLoading(false); });
 
     return () => { cancelledRef.current = true; };
   }, [word, wordLangCode, translationLangCode, existingWord]);
+
 
   const handleLangChange = (code) => {
     setTranslationLangCode(code);
