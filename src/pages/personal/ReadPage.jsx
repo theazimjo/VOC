@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -310,23 +310,22 @@ export default function ReadPage() {
     }
   });
 
-  // Track page completion when all/most words on current page are read in Speak mode
-  useEffect(() => {
-    if (isSpeakMode && pageWords.length > 0) {
-      const isPageDone = passedWordIndices.size >= Math.ceil(pageWords.length * 0.9) || activeWordIndex >= pageWords.length - 1;
-      if (isPageDone) {
-        setCompletedPages(prev => {
-          if (prev.has(pageIndex)) return prev;
-          const next = new Set(prev);
-          next.add(pageIndex);
-          try {
-            localStorage.setItem(completedStorageKey, JSON.stringify([...next]));
-          } catch {}
-          return next;
-        });
+  const isCurrentPageCompleted = completedPages.has(pageIndex);
+
+  const togglePageCompleted = useCallback(() => {
+    setCompletedPages(prev => {
+      const next = new Set(prev);
+      if (next.has(pageIndex)) {
+        next.delete(pageIndex);
+      } else {
+        next.add(pageIndex);
       }
-    }
-  }, [isSpeakMode, passedWordIndices, activeWordIndex, pageWords, pageIndex, completedStorageKey]);
+      try {
+        localStorage.setItem(completedStorageKey, JSON.stringify([...next]));
+      } catch {}
+      return next;
+    });
+  }, [pageIndex, completedStorageKey]);
 
   // Auto-scroll to currently spoken word
   useEffect(() => {
@@ -575,6 +574,15 @@ export default function ReadPage() {
             >
               <Mic size={15} />
               <span>Speak</span>
+            </button>
+
+            <button
+              type="button"
+              className={`read-tool-btn read-mark-read-btn ${isCurrentPageCompleted ? 'completed' : ''}`}
+              onClick={togglePageCompleted}
+              title={isCurrentPageCompleted ? "O'qilmagan deb belgilash" : "O'qilgan deb belgilash"}
+            >
+              <CheckCircle2 size={16} />
             </button>
 
             <div className="read-tool-divider" />

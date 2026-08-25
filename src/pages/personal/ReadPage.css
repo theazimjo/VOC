@@ -980,6 +980,36 @@
   border-color: rgba(245, 158, 11, 0.4);
 }
 
+/* Mark as Read Manual Button */
+.read-mark-read-btn {
+  padding: 5px 8px;
+  background: transparent;
+  color: var(--reader-subtitle);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.read-mark-read-btn:hover {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.read-mark-read-btn.completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.theme-dark .read-mark-read-btn.completed {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
 /* Passed spoken word - Soft, natural pastel book highlighter (NO LAYOUT SHIFT: display inline, 0 padding) */
 .read-spoken-passed {
   display: inline;
