@@ -21,7 +21,10 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Chapter 1 · Activities of Green Plants' },
         { type: 'p', text: "In the spring the weather becomes warm, and green plants begin to grow from the soil. In a few weeks many plants produce beautifully colored flowers. Flowers do more than add beauty to the world — they are an important part of the plant. Without flowers, many plants could not produce more of their kind." },
-        { type: 'p', text: "Producing new plants is one special activity that green plants {{carry out}}. What are some other special activities of green plants? How do the parts of green plants help them {{carry out}} these activities? You will {{find out}} in this chapter." }
+        { type: 'p', text: "Producing new plants is one special activity that green plants {{carry out}}. What are some other special activities of green plants? How do the parts of green plants help them {{carry out}} these activities? You will {{find out}} in this chapter." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch01/daffodil-shoots.jpg', caption: 'Daffodil shoots coming up in spring' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Living Things Are Alike' },
@@ -59,7 +62,7 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'activity', text: "Hands-on: What do root hairs look like? Fold a damp paper towel in half inside a plastic bag and place a few radish or bean seeds on it. Seal and hang the bag so the seeds stay moist. Check the seeds each day — when the roots are about 3 cm long, carefully examine the fuzzy areas on them with a hand lens, then under a microscope. Describe what you see, and think about why it's helpful for a plant to have many root hairs." },
+        { type: 'activity', text: "Hands-on: What do root hairs look like? Materials: paper towel / self-sealing plastic bag / 4 radish or bean seeds / stapler / 2 pushpins / jar / hand lens / scissors / tweezers / microscope slide / microscope. Procedure: A. Fold a paper towel in half and put it in a plastic bag. Place the bag on a table. B. Place four seeds on the paper towel inside the bag. Staple the bag and towel beneath each seed as shown. Then staple the sides of the bag. C. Use two pushpins to put the bag on a bulletin board. Open the bag and carefully pour some water behind the towel. The water level should not go above the staples beneath the seeds. Seal the bag. D. Check the seeds each day. When the roots are about 3 cm long, take the bag down. Carefully remove the seeds from the bag. Examine the fuzzy areas on the roots with a hand lens. 1. Describe what you see. 2. Draw a root and show where the root hairs are. Label the drawing. E. Use scissors to cut off one root from a seed. Carefully pick up the root with tweezers and place it on a microscope slide. Examine the fuzzy areas of the root under a microscope. 3. Make a drawing of the root hairs as they look under a microscope. Conclusion: 1. Describe what the root hairs look like. 2. Why is it helpful for a plant to have many root hairs? Using science ideas: Many plants that live in water do not have root hairs. Why don't these plants need root hairs?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch01/activity-seeds-bag.jpg', caption: 'Seeds in a damp paper towel' },
           { src: '/images/science/ch01/activity-bag-board.jpg', caption: 'Hang the bag to keep it moist' },
@@ -155,7 +158,12 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "The pistil is the female reproductive part. The bottom part of the pistil contains the ovary. The ovary is the part of the plant that contains ovules. An ovule is a small round body that contains the female reproductive cells." },
-        { type: 'activity', text: "Hands-on: What are the parts of a typical flower? Compare two different flowers — look at and smell their petals, then identify the stamens and pistil using a hand lens. Carefully take one flower apart: remove a stamen and look at its powdery pollen grains under a microscope, then use a straight pin to open the base of the pistil and examine the ovules inside with a hand lens." }
+        { type: 'activity', text: "Hands-on: What are the parts of a typical flower? Materials: 2 different kinds of flowers / hand lens / microscope slide / microscope / straight pin / sheet of paper. Procedure: A. Look at and compare two flowers. Identify the petals of each flower. Smell them. 1. What color are the petals of each flower? 2. Do the petals of either flower have an odor? B. Identify the stamens and the pistil of each flower. Use a hand lens to help you see the parts. C. Choose one flower and look at its inner parts. Carefully tear off any leafy parts around the petals. Then tear off the petals. D. Gently remove one stamen and look at the top part with a hand lens. The powdery material is made up of many pollen grains. Shake some of the pollen grains onto a microscope slide. Look at the slide under a microscope. 3. Draw some pollen grains. E. Remove the rest of the stamens. Place the pistil on a sheet of paper. Use a straight pin to pick apart the base of the pistil. The ovules are inside this base. Use a hand lens to look at the ovules. 4. Draw what you see. Conclusion: 1. What parts do the two flowers have in common? 2. What are some differences between the flowers? Using science ideas: Suppose you wanted to know how many seeds the flower you looked at could produce. How could you find out?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch01/activity-boy-flower-lens.jpg', caption: 'Examining a flower with a hand lens' },
+          { src: '/images/science/ch01/activity-stamen-closeup.jpg', caption: 'Removing a stamen to look at its pollen' },
+          { src: '/images/science/ch01/activity-ovary-diagram.jpg', caption: 'Ovary and ovules, pulled open with a pin' }
+        ] }
       ],
       [
         { type: 'p', text: "For reproduction to take place, pollen grains must reach the top of the pistil. Pollination is the process by which pollen grains move from the stamen to the pistil. There are two main ways in which flowers are pollinated: by insects, or by the wind." },
@@ -240,7 +248,15 @@ export const scienceChapterText = {
     title: "Invertebrates",
     pages: [
       [
-        { type: 'heading', text: "Chapter 2 · Animals Without a Backbone" },
+        { type: 'heading', text: 'Chapter 2 · Animals Without a Backbone' },
+        { type: 'p', text: "The spider on this page is a great hunter. Did you know it can jump great distances? It can jump 40 times the length of its body. Can you see its four large eyes? It can see its insect victim from very far away." },
+        { type: 'p', text: "In this chapter you will learn about all kinds of animals. Some of the animals are small, like the spider. Others are much larger than the spider. Some of these animals live in and near your home. Others live in oceans or on mountaintops." },
+        { type: 'p', text: "You will find out about flying animals, floating animals, and creeping animals. You will learn about how they look and where they live. This chapter will show you how they are different and how they are alike." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/jumping-spider.jpg', caption: 'A jumping spider, a great hunter' }
+        ] }
+      ],
+      [
         { type: 'p', text: "For a few minutes make a list of all the animals you can think of. How many animals did you think of? There are many different kinds of animals." },
         { type: 'p', text: "Did you think of a dog, a cat, and a horse? You probably did. The chances are you did not include a sponge, a clam, or an earthworm — but these are animals, too." },
         { type: 'p', text: "Think of a way to divide your list of animals into groups. For example, you could group all large animals together and all small animals together, or group all fast animals and all slow animals together. Putting animals into groups is one way to sort them out, and it makes them easier to study." }
@@ -250,14 +266,16 @@ export const scienceChapterText = {
         { type: 'p', text: "How do scientists classify animals? Scientists who study animals classify, or group, them. To classify is to arrange living things into groups by features that are alike. Scientists classify animals by structure — the structure of an animal is the kind of body parts it has and the way these parts are arranged." },
         { type: 'p', text: "One structure scientists look for in classifying animals is the backbone. The backbone is made up of many small bones called vertebrae, which are linked together to form the backbone." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch02/zebras-wildebeests.jpg', caption: 'Zebras and wildebeests' }
+          { src: '/images/science/ch02/gannet.jpg', caption: 'Gannet' },
+          { src: '/images/science/ch02/garden-spider.jpg', caption: 'Garden spider' }
         ] }
       ],
       [
         { type: 'p', text: "Some animals have a backbone and some do not. Scientists have classified all animals into two large groups: one group is made up of animals with a backbone, and an animal with a backbone is called a vertebrate. The other group is made up of animals without a backbone, and an animal without a backbone is called an invertebrate. In this chapter you will learn about invertebrates." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch02/chimpanzee.jpg', caption: 'Chimpanzee — a vertebrate' },
-          { src: '/images/science/ch02/gannet.jpg', caption: 'Gannet — a vertebrate' }
+          { src: '/images/science/ch02/zebras-wildebeests.jpg', caption: 'Zebras, wildebeests, and springboks' },
+          { src: '/images/science/ch02/chimpanzee.jpg', caption: 'Chimpanzee mother with baby' },
+          { src: '/images/science/ch02/purple-sea-urchin.jpg', caption: 'Purple sea urchin' }
         ] }
       ],
       [
@@ -275,7 +293,7 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "The skeleton of some sponges is made of hard material, but other sponges are made of soft material. This soft skeleton is sometimes used in the home as a cleaning or bath sponge — usually a light brown or yellowish color, unlike the pink or blue sponge made by people." },
-        { type: 'activity', text: "Finding Out: How much water can a sponge hold? Soak a sponge in a container of water for about 5 minutes, then remove it and squeeze the water into a measuring cup. Measure and record the volume of water that was in the sponge. Why might a cleaning sponge be made similar to an animal sponge?" },
+        { type: 'activity', text: "Finding Out: How much water can a sponge hold? Materials: animal sponge / container of water / measuring cup. Soak the sponge in the water for about 5 minutes. Remove the sponge from the water. Squeeze the water into the measuring cup. Measure the volume of water that was in the sponge. Record this volume of water. How much water did the sponge hold? Why is a cleaning sponge made similar to an animal sponge?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/sponge-diagram.jpg', caption: 'How a sponge moves water through its body' },
           { src: '/images/science/ch02/finding-out-water.jpg', caption: 'Finding Out: how much water can a sponge hold?' }
@@ -309,12 +327,16 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "Planarians have a very unusual ability: they can regenerate, or regrow, body parts that are missing. If their tail is cut off, planarians grow a new tail; if their head is cut off, a new head will grow. They can even regenerate part of their body — if a cut is made down the center of the head, two heads will grow." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch02/earthworm-diagram.jpg', caption: 'Regeneration in a planarian' }
+          { src: '/images/science/ch02/planarian-regeneration.jpg', caption: 'Regeneration in a planarian' }
         ] }
       ],
       [
         { type: 'p', text: "Most flatworms are parasites. A parasite is an animal or plant that depends on and harms another animal or plant. The animal or plant on which a parasite depends is called the host, and a parasite often depends on its host for food." },
-        { type: 'p', text: "The tapeworm is an example of a flatworm that is a parasite. Tapeworms live in the digestive system of animals — a digestive system is a group of body parts that breaks down food. A tapeworm does not have its own digestive system: the host animal does the eating and digesting, and the tapeworm takes in already-digested food through an opening in its body. The host loses weight and becomes weak, and some tapeworms may grow as long as 9 m." }
+        { type: 'p', text: "The tapeworm is an example of a flatworm that is a parasite. Tapeworms live in the digestive system of animals — a digestive system is a group of body parts that breaks down food. A tapeworm does not have its own digestive system: the host animal does the eating and digesting, and the tapeworm takes in already-digested food through an opening in its body. The host loses weight and becomes weak, and some tapeworms may grow as long as 9 m." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch02/tapeworm-photo.jpg', caption: 'Tapeworm' },
+          { src: '/images/science/ch02/tapeworm-diagram.jpg', caption: 'Tapeworm, showing head and segments' }
+        ] }
       ],
       [
         { type: 'p', text: "The second group of worms is the roundworms. A roundworm has a long, tube-shaped body with a digestive system made up of a tube with an opening at each end — food is taken in through the mouth opening, and wastes leave through the other. Most roundworms live in soil, where they eat dead plant and animal matter, though other roundworms are parasites that live in host animals — dogs must be treated to get rid of roundworms." },
@@ -328,7 +350,7 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'activity', text: "Hands-on: examine an earthworm with a hand lens and measure its length. Count its body segments, then find the mouth and the light-colored swelling about a third of the way from the front end (used in reproduction). Gently run a finger over the segments to feel the bristles, then place the earthworm on a moist paper towel and watch how it moves. How do the segments change as it moves, and how does it use its bristles? Placed in loose, moist soil, how might the earthworm's behavior help the soil and the plants growing in it?" },
+        { type: 'activity', text: "Hands-on: How does an earthworm look? How does it move? Materials: earthworm / metric ruler / hand lens / paper towel / pan or tray. Procedure: A. Carefully hold the earthworm in one hand. Use a hand lens to examine the earthworm. Measure the length of the earthworm's body. 1. How long is the earthworm's body? B. Count the number of body segments. 2. How many segments does the earthworm have? C. Find the mouth. Find the light-colored swelling on the earthworm's body. It is about one third from the front end of the body. It is used in reproduction. D. Gently run your index finger over the segments. You should be able to feel bristles on the segments. Look at the bristles with a hand lens. 3. Draw the earthworm. Label its parts. E. Place a moist paper towel in a pan or tray. Place the earthworm on the towel. F. Watch the earthworm move on the towel. 4. How do the segments change? 5. How does the earthworm use its bristles? Conclusion: 1. In your own words describe the parts of an earthworm's body. 2. Describe how the earthworm moves. Using science ideas: Place the earthworm in a container of loose moist soil. Use a hand lens to observe the way it behaves in the soil. How might the earthworm's behavior be helpful to the soil and to plants growing in the soil?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/earthworm-photo.jpg', caption: 'Earthworm' }
         ] }
@@ -339,7 +361,6 @@ export const scienceChapterText = {
         { type: 'p', text: "A common echinoderm is the starfish. Most starfish have five arms that come out from the center part of the animal, and on the underside of each arm are two rows of tiny tube feet. A tube foot is a hollow structure with a sucker at the end — most echinoderms have tube feet." },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/starfish-tubefeet.jpg', caption: 'Starfish and close-up of tube feet' },
-          { src: '/images/science/ch02/purple-sea-urchin.jpg', caption: 'Purple sea urchin' },
           { src: '/images/science/ch02/sand-dollars.jpg', caption: 'Sand dollars' },
           { src: '/images/science/ch02/sea-cucumber.jpg', caption: 'Sea cucumber' }
         ] }
@@ -426,7 +447,7 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'activity', text: "Can you create an insect? Using pipe cleaners, Styrofoam balls, buttons, fabric scraps, and other craft materials, build your own imaginary insect — it doesn't need to look like a real one, but it must have all the body parts a true insect needs: three body segments, six legs attached to the thorax, a head with antennae, and mouth parts built for chewing, sucking, or piercing. What kind of surroundings might your insect live in, given the body it has?" }
+        { type: 'activity', text: "Hands-on: Can you create an insect? Materials: egg carton / 8 pipe cleaners / several small buttons / scraps of fabric / 8 Styrofoam balls, 4 each of 2 different sizes / glue / construction paper / felt-tip pens / twist-ties / scissors / clay. Procedure: A. Use your imagination! Create your own insect. The insect does not have to look like any known insect, but it must have all the body parts needed by an insect. 1. How many body parts will your insect have? 2. How many legs will your insect have? B. You may use any of the materials supplied. You may bend and twist the pipe cleaners and the twist-ties. You may glue parts of the body together. 3. What are the names of the three parts of your insect's body? 4. To what parts of the insect's body are the legs attached? C. Try giving your insect special mouth parts. Decide whether you want your insect to chew, suck, or pierce with its mouth parts. 5. Is your insect beginning to look like any insect you have seen? Which one? D. Be sure you add antennae to your insect's head. 6. How does an insect use its antennae? Conclusion: 1. Insects have four common characteristics. What are they? 2. List all the parts of your insect. Next to each write what it does. Using science ideas: Describe the type of surroundings where your insect might live." }
       ],
       [
         { type: 'p', text: "Insects have special mouth parts formed for chewing, sucking, or piercing — the kind of mouth parts an insect has depends on the food it eats. Beetles and grasshoppers, for example, eat leaves, so their mouths have parts that cut and chew. Butterflies and moths have mouth parts that suck up juices from flowers. Mosquitoes have mouth parts for piercing skin and sucking blood." },
@@ -456,7 +477,7 @@ export const scienceChapterText = {
             instructions: 'Complete each sentence using a science term from the chapter.',
             items: [
               { prompt: 'Scientists ___ animals by their structure.', answer: 'classify' },
-              { prompt: 'Shrimps, lobsters, and crabs are examples of ___.', answer: 'crustaceans' },
+              { prompt: 'Shrimps, lobsters, and clams are examples of ___.', answer: 'crustaceans' },
               { prompt: 'Another name for a spiny-skinned animal is ___.', answer: 'echinoderm' },
               { prompt: 'To shed the hard outer covering is to ___.', answer: 'molt' },
               { prompt: "The animal or plant on which a parasite lives is the ___.", answer: 'host' }
@@ -496,8 +517,16 @@ export const scienceChapterText = {
     ]
   },
   "Ch.03 · Vertebrates": {
-    title: "Vertebrates",
+    title: "Animals With a Backbone",
     pages: [
+      [
+        { type: 'heading', text: 'Chapter 3 · Animals With a Backbone' },
+        { type: 'p', text: "Can you imagine a baby that has a mass of over 7,000 kg and is over 7 m long? This is the mass and length of a baby blue whale when it is born. Its mother may have a mass of over 110,000 kg!" },
+        { type: 'p', text: "The blue whale belongs to a group of animals called the vertebrates. Vertebrates are animals with a backbone. There are five main groups of vertebrates. Fish, frogs, snakes, birds, and dogs are examples of animals from each main group. In this chapter you will learn about the animals from each of the groups. You will see how the animals are different and how they are alike." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/blue-whale.jpg', caption: 'Blue whale' }
+        ] }
+      ],
       [
         { type: 'p', text: "Fish are vertebrates that live in water. They are cold-blooded animals. A cold-blooded animal is an animal whose body temperature changes with the temperature of the water or air around it. When the air or water around such an animal is cold, the animal becomes cold. A cold-blooded animal becomes warm when the air or water around it is warm." },
         { type: 'p', text: "The skeleton (skel'e tan) of a fish is simpler than that of other vertebrates. Most fish have skeletons made of bone. The shark and the sting- ray have skeletons made of cartilage (kar'ta lij). So some scientists believe that sharks and sting- rays are not true fish. Cartilage is a soft, bonelike material that bends. You can feel cartilage in the tip of your nose." },
@@ -516,9 +545,16 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'heading', text: "DIFFERENT TYPES OF FISH" },
-        { type: 'p', text: "seahorse Fish are found in both fresh water and salt water. They are found in many shapes and sizes. Some fish look very different from most other fish. The seahorse looks like a tiny horse. The eel has a long slender body and small scales." },
-        { type: 'p', text: "Fish are a major source of food for people. For thousands of years fish have been gathered from streams, rivers, and oceans. Each year about 66 billion kg of fish are caught. This is enough to feed each person on earth about 17 kg of fish a What does a fish scale tell about the age of a fish? Each year a fish adds another ring to its scales. You can tell the age of a fish by counting the rings in its scales. You will need a hand lens and some fish scales. Look at the fish scales with a hand lens. Count the number of rings on one scale. How many rings are there? How old is the fish? Do all the scales you looked at have the same number of rings? Try looking at the scales of other fish." },
+        { type: 'heading', text: "Different Types of Fish" },
+        { type: 'p', text: "Fish are found in both fresh water and salt water. They are found in many shapes and sizes. Some fish look very different from most other fish. The seahorse looks like a tiny horse. The eel has a long slender body and small scales." },
+        { type: 'p', text: "Fish are a major source of food for people. For thousands of years fish have been gathered from streams, rivers, and oceans. Each year about 66 billion kg of fish are caught. This is enough to feed each person on earth about 17 kg of fish a year." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/different-types-of-fish.jpg', caption: 'Shark, flying fish, swordfish, skate, catfish, eel, and seahorse' }
+        ] },
+        { type: 'activity', text: "Finding Out: What does a fish scale tell about the age of a fish? Each year a fish adds another ring to its scales. You can tell the age of a fish by counting the rings in its scales. You will need a hand lens and some fish scales. Look at the fish scales with a hand lens. Count the number of rings on one scale. How many rings are there? How old is the fish? Do all the scales you looked at have the same number of rings? Try looking at the scales of other fish." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/activity-girl-fish-scale.jpg', caption: 'Finding Out: examining a fish scale with a hand lens' }
+        ] }
       ],
       [
         { type: 'heading', text: "AMPHIBIANS" },
@@ -693,11 +729,21 @@ export const scienceChapterText = {
     title: "Living Communities",
     pages: [
       [
+        { type: 'heading', text: 'Chapter 4 · Living Communities' },
+        { type: 'p', text: "The picture shows a place in a desert in Arizona. A desert is a hot, dry place. It does not seem like a place where plants and animals could live. Yet snakes, lizards, insects, birds, rats, and rabbits make their homes in the desert. What plants do you see growing in the desert?" },
+        { type: 'p', text: "In many ways the desert is like other parts of the earth. There are living and nonliving things in all parts of the earth. The living things affect each other and are also affected by the nonliving things around them. And the living things affect the nonliving things. In this chapter you will learn about the ways in which living and nonliving things affect each other. You will also learn about different ways in which the living and nonliving parts of our world can change." }
+      ],
+      [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/desert-scene.jpg', caption: 'A desert in Arizona' }
+        ] }
+      ],
+      [
         { type: 'heading', text: "THE LIVING AND NONLIVING WORLD" },
         { type: 'p', text: "All living things are surrounded by other living things. They are also surrounded by nonliving things. These living and nonliving things affect each other. Everything that surrounds and affects a living thing is called its environment (en vT'ran- ment). What are some living things in your home environment? What are some nonliving things? In what ways do these living and nonliving things affect each other? The study of how living and nonliving things affect each other is called ecology (e kol'e je). Scientists who study this subject are called ecologists." },
         { type: 'p', text: "Look at the picture of the fish tank. What living and nonliving things do you see? The living and nonliving things in the tank affect, or interact with, each other. Both the fish and the plants need water to survive. The plants give off oxygen, which goes into the water. The fish, which need oxygen to live, take the oxygen from the water. As they breathe, the fish give off carbon dioxide. The plants use the carbon dioxide to make food. Without the fish, the plants would die. And without the plants, the fish would die." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch04/desert-scene.jpg', caption: 'Desert plants' }
+          { src: '/images/science/ch04/fish-tank.jpg', caption: 'A fish tank ecosystem' }
         ] }
       ],
       [
@@ -764,14 +810,24 @@ export const scienceChapterText = {
         { type: 'p', text: "What factors affect the size of a population?" },
         { type: 'p', text: "Ecologists study communities of living things. They try to find out what living things are present. They also want to know the size of each population. They try to learn whether the populations are changing in size. Ecologists want to know if populations are getting larger, getting smaller, or staying the same." },
         { type: 'p', text: "When an animal population changes in size, it often means there is a change in the birth rate or the death rate. The birth rate is the number of animals that are born in a period of time. What is the death rate? Many factors can cause a change in the birth rate or the death rate." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/ecologist-bird-population.jpg', caption: 'Ecologist studying a bird population' }
+        ] }
       ],
       [
         { type: 'p', text: "Why might the birth rate of a population go up? Suppose a deer population has a large supply of food and water. Deer eat plants. If the deer are healthy, many will live long enough to produce young deer. So the birth rate will go up." },
         { type: 'p', text: "As the birth rate goes up, the deer population will get larger. After a while, the kinds of plants that deer eat will be scarce. Some deer may move away in search of food. What will this do to the size of the deer population? The deer that stay will still have little food. Some deer will get sick and die. Other deer may become very weak. They may be unable to run from other animals that hunt them for food. The size of a population may also change because of a sudden change in the amount of food that can be found. Suppose a fire or a disease destroys the deer's food source. Then the death rate of the deer population would go up. As the death rate goes up, population size goes down." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/deer-eating.jpg', caption: 'Young male white-tailed deer eating' },
+          { src: '/images/science/ch04/deer-population.jpg', caption: 'Buck and does, members of a white-tailed deer population' }
+        ] }
       ],
       [
         { type: 'p', text: "The size of a population may also be affected by the presence of a predator (pred'a tor). A predator is an animal that hunts other animals for food. The animal that is hunted is the prey (pra). The picture shows a predator with its prey. The predator is a lynx (lingks). A lynx is a small catlike animal. The prey is a snowshoe rabbit. Both animals live in the United States and Canada." },
         { type: 'p', text: "Suppose the number of snowshoe rabbits goes up. Then the number of lynx goes up, too. This is because the lynx now have a larger food supply. But an increase in the lynx population means more rabbits will be eaten. After a while, there will be very few rabbits left. With less food, many of the lynx will starve to death. This decreases the number of lynx. What will then happen to the size of the rabbit population?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/lynx-rabbit.jpg', caption: 'Lynx and snowshoe rabbit' }
+        ] }
       ],
       [
         { type: 'activity', text: "What factors affect the size of a population? Materials metric ruler / buttons Procedure A. Draw a grid such as the one shown. Each box should be 2 cm on a side. There should be six squares across and six squares down. The grid represents a forest. B. Suppose each box represents the amount of space, food, and water needed by one deer. Use buttons to represent deer. Begin with two deer. Put each deer into a different box on the grid. C. Imagine that a year has passed. The deer population has doubled in size. Add the correct number of buttons to the grid. 1. How many deer are there now? D. Another year passes and the deer population has doubled again. Add the correct number of buttons to the grid. 2. How many deer are there now? E. The next year three deer die of disease. Remove three buttons. Then the remaining deer population doubles once again. Add the correct number of buttons to the grid. 3. How many deer are there now? 4. Suppose that from now on, the deer population doubles each year and no more deer die. In how many more years will there be too many deer for the amount of space, food, and water in the forest? Conclusion 1. What is the greatest number of deer that could live in the forest? 2. What are some reasons for a decrease in the size of a population?" },
@@ -781,23 +837,26 @@ export const scienceChapterText = {
         { type: 'p', text: "You learned that a sudden major change, such as a fire, can affect the size of populations. Sudden changes can also affect whole communities." },
         { type: 'p', text: "On May 18, 1980, a volcano in Washington erupted. The volcano, Mount St. Helens, exploded with great force. The force was equal to almost 10 million metric tons of dynamite. One picture shows how the area looked before the blast. The other shows the same area 4 months after the blast. Millions of trees were blown down. Many plants were burned or covered with layers of ash as much as 180 m deep. Scientists believe that thousands of bear, deer, and other animals lost their lives. Few living things in the area survived." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch04/trees-blown-down.jpg', caption: 'Trees blown down by eruption' }
+          { src: '/images/science/ch04/mt-st-helens-before.jpg', caption: 'Mount St. Helens before the eruption' },
+          { src: '/images/science/ch04/mt-st-helens-after.jpg', caption: 'Mount St. Helens 4 months after the eruption' }
         ] }
       ],
       [
         { type: 'p', text: "A fire destroyed many square kilometers of the forest below. Trees, shrubs, grasses, and other plants were burned in the fire. Many animals were also killed. Among these were snakes, lizards, rabbits, and baby birds. Some animals were able to escape the fire, and so they lived. But many of the animals that lived lost their food supply and their habitat. People also cause changes in communities. The picture shows a major change in a redwood forest. People are cutting down the trees to use the wood. What changes might result from clearing the trees in this forest? In what ways are these changes like the changes from a forest fire? What are some living things that will lose their habitat?" },
         { type: 'image-group', images: [
+          { src: '/images/science/ch04/trees-blown-down.jpg', caption: 'Trees blown down by eruption' },
           { src: '/images/science/ch04/forest-fire-colorado.jpg', caption: 'Colorado forest destroyed by fire' },
           { src: '/images/science/ch04/redwood-clearing.jpg', caption: 'People clearing a redwood forest' }
         ] }
       ],
       [
-        { type: 'p', text: "What changes have occurred in your environment? Interview some adults who have lived in your neighborhood for a long time. Find out what the area was like many years ago. What changes have there been? Find out whether each change was brought about by people or was a natural change." },
-        { type: 'p', text: "Ask about the kinds of plants and animals that lived in the neighborhood. Find out how these living things were affected by each change. Be sure to ask about the effect that the changes might have had on people." },
-        { type: 'p', text: "What happens after a sudden major change destroys an ecosystem? The same community does not come back right away. It may take 100 or more years for it to return. During this time there are many changes in the kinds of living things in an ecosystem. The series of changes in the communities of an ecosystem is called succession (sek sesh'en)." },
+        { type: 'activity', text: "Finding out: What changes have occurred in your environment? Interview some adults who have lived in your neighborhood for a long time. Find out what the area was like many years ago. What changes have there been? Find out whether each change was brought about by people or was a natural change. Ask about the kinds of plants and animals that lived in the neighborhood. Find out how these living things were affected by each change. Be sure to ask about the effect that the changes might have had on people." },
         { type: 'image-group', images: [
           { src: '/images/science/ch04/interview-photo.jpg', caption: 'Interviewing an adult about neighborhood changes' }
         ] }
+      ],
+      [
+        { type: 'p', text: "What happens after a sudden major change destroys an ecosystem? The same community does not come back right away. It may take 100 or more years for it to return. During this time there are many changes in the kinds of living things in an ecosystem. The series of changes in the communities of an ecosystem is called succession (sek sesh'en)." },
       ],
       [
         { type: 'p', text: "These drawings show succession in a forest after a fire." },
@@ -875,6 +934,29 @@ export const scienceChapterText = {
   "Ch.05 · Building Blocks of Matter": {
     title: "Building Blocks of Matter",
     pages: [
+      [
+        { type: 'heading', text: 'Chapter 5 · Building Blocks of Matter' },
+        { type: 'p', text: "Have you ever wondered what things are made of? Look at all the many things in the picture. What is an orange made of? An apple? A strand of hair? A piece of glass? A brick? Air?" },
+        { type: 'p', text: "For thousands of years people have asked such questions. The answers have taken a long time to find. Scientists working all over the world at different times have found some of the answers." },
+        { type: 'p', text: "In this chapter you will learn how scientists study the world around them. You will find out about the smallest particles that things are made of. You will learn about some common materials that are formed of these particles. You will also read about the special names scientists use to talk about these materials." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/street-scene-shopping-cart.jpg', caption: 'A city street, full of things made of matter' }
+        ] }
+      ],
+      [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/fruit-vegetable-stand.jpg', caption: 'A fruit and vegetable stand — how many different kinds of matter can you find?' }
+        ] }
+      ],
+      [
+        { type: 'heading', text: 'Studying Matter' },
+        { type: 'p', text: "How do scientists study the world around them? Scientists study the world around them. They have found that all things are alike in some ways. All things are made up of matter. Matter is anything that has mass and takes up space. Mass is a measure of the amount of matter in an object. An elephant has more mass than a mouse. An iceberg has more mass than an ice cube. Scientists are curious about what makes up matter." },
+        { type: 'p', text: "How do scientists study matter? They use their senses. The senses of sight, smell, hearing, taste, and touch help scientists learn about matter. Sometimes scientists use special devices to study matter. They use devices to see very small things" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/collecting-water-samples.jpg', caption: 'Collecting water samples' },
+          { src: '/images/science/ch05/using-a-microscope.jpg', caption: 'Using a microscope' }
+        ] }
+      ],
       [
         { type: 'p', text: "Using a telescope or things that are very far away. They use microscopes to see very small objects. They use telescopes to study the stars. All the scientists in the pictures are gathering information about matter." },
         { type: 'p', text: "Scientists have learned that all matter is made of small particles. They have never seen these particles with the unaided eye. From the results of tests, scientists believe that the particles exist." },
@@ -1019,6 +1101,7 @@ export const scienceChapterText = {
             items: [
               { prompt: "ulelomec", answer: "molecule" },
               { prompt: "notrop", answer: "proton" },
+              { prompt: "tiiuhnferb", answer: "neutron" },
               { prompt: "myblos", answer: "symbol" },
             ]
           },
@@ -1191,6 +1274,10 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "The picture on the left shows what happens when crushed chalk is mixed with water. You can see that the water becomes very cloudy, but the chalk and water do not form a solution. The particles of chalk do not dissolve in the water — the chalk particles float in the water. The mixture of chalk and water is called a suspension (sa spen'shen). A suspension is a mixture in which particles of a substance do not dissolve in another substance. Suspensions are cloudy mixtures." },
         { type: 'p', text: "In the chalk-and-water mixture, the chalk particles are suspended in the water. If they are not disturbed, the particles in a suspension will separate from the liquid and settle to the bottom. A photo of the chalk-and-water mixture after 2 days shows the chalk particles settled to the bottom." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/suspension-chalk-water.jpg', caption: 'A suspension of chalk and water' },
+          { src: '/images/science/ch06/settled-chalk-particles.jpg', caption: 'Settled chalk particles after 2 days' }
+        ] }
       ],
       [
         { type: 'p', text: "You may have seen bottles labeled \"Shake well before using.\" Many such bottles contain some kind of suspension. A vinegar-and-oil salad dressing is a suspension. Orange juice and some liquid medicines are also suspensions." },
@@ -1199,10 +1286,22 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "The physical properties of matter change when there is a chemical change. Iron is a dark-gray metal that is attracted by a magnet. Sulfur is a yellow powder that is not attracted by a magnet. When iron and sulfur are mixed together, they can easily be separated, and neither substance has changed. But when iron and sulfur are heated together, a chemical change takes place — a new substance is formed. This substance is iron sulfide. It is brown-black in color, and it is not attracted to a magnet." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/iron-sample-magnet.jpg', caption: 'Iron — attracted by a magnet' },
+          { src: '/images/science/ch06/sulfur-sample-magnet.jpg', caption: 'Sulfur — not attracted by a magnet' },
+          { src: '/images/science/ch06/iron-and-sulfur-mixed.jpg', caption: 'Iron and sulfur mixed — still separable with a magnet' },
+          { src: '/images/science/ch06/iron-sulfide-formed.jpg', caption: 'Iron sulfide — the new substance formed when heated together' }
+        ] },
         { type: 'p', text: "Some chemical changes take place slowly. The rust on the body of an old car formed from a slow chemical change — oxygen from the air joined with iron to form the compound iron oxide, commonly called rust. How does paint help stop rust from forming?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/rusting-car.jpg', caption: 'Rusting — a slow chemical change' }
+        ] }
       ],
       [
         { type: 'p', text: "Other chemical changes take place more quickly. When vinegar is poured on baking soda, a rapid chemical change takes place, and new substances are formed. One new substance is carbon dioxide gas." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch06/vinegar-baking-soda-reaction.jpg', caption: 'A rapid chemical change — vinegar poured on baking soda' }
+        ] },
         { type: 'summary', text: "A physical property is one that can be used to identify matter. Color, odor, shape, hardness, and density are physical properties." },
         { type: 'summary', text: "A physical change is a change in the size, shape, or state of matter." },
         { type: 'summary', text: "The three states of matter — solid, liquid, and gas — differ in how particles move, in how far apart particles are, and in the strength of attraction between particles." },
@@ -1677,7 +1776,7 @@ export const scienceChapterText = {
     pages: [
       [
         { type: 'heading', text: 'Chapter 9 · Changes in the Earth' },
-        { type: 'p', text: "Have you ever seen a place that looked like Bryce Canyon in Utah? The rocks there were shaped by the movement of water over millions of years." },
+        { type: 'p', text: "Have you ever seen a place that looked like this? What caused the rocks to be shaped in these ways? This place is Bryce Canyon in Utah. The rocks in Bryce Canyon were shaped by the movement of water over millions of years." },
         { type: 'p', text: "The land that covers the earth has changed its shape many times during the history of the earth. The force of moving water, ice, and air have caused these changes. In this chapter you will learn how the earth is worn away in some places, and how it is built up in others. You will see how water, ice, and wind {{move}} materials from place to place." },
         { type: 'image-group', images: [
           { src: '/images/science/ch09/bryce-canyon.jpg', caption: 'Bryce Canyon, Utah' }
@@ -1881,7 +1980,8 @@ export const scienceChapterText = {
                 { prompt: "A canyon: erosion or deposition, and by which agent?", answer: "Erosion, by moving water" },
                 { prompt: "A U-shaped valley: erosion or deposition, and by which agent?", answer: "Erosion, by moving ice" },
                 { prompt: "A delta: erosion or deposition, and by which agent?", answer: "Deposition, by moving water" },
-                { prompt: "A hilly ridge of rocky material: erosion or deposition, and by which agent?", answer: "Deposition, by moving ice" }
+                { prompt: "A hilly ridge of rocky material: erosion or deposition, and by which agent?", answer: "Deposition, by moving ice" },
+                { prompt: "A dust storm: erosion or deposition, and by which agent?", answer: "Erosion, by wind" }
               ]
             },
             {
@@ -2061,6 +2161,9 @@ export const scienceChapterText = {
         { type: 'summary', text: "Laws are helping to control pollution of air, water, and land." }
       ],
       [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch10/pollution-scene-drawing.jpg', caption: 'A scene showing several examples of pollution' }
+        ] },
         {
           type: 'review',
           title: 'Reviewing the Chapter',
@@ -2085,6 +2188,7 @@ export const scienceChapterText = {
               heading: 'Understanding Ideas',
               instructions: "Identify each item, and for the cause/effect pairs, say which sentence is the cause and which is the effect.",
               items: [
+                { prompt: "The drawing above shows at least six examples of pollution. Describe each of the types of pollution shown.", answer: "Examples in the scene include: smoke from factory smokestacks (air pollution), exhaust from trucks and cars (air pollution), a pile of junk/litter dumped near the road (land pollution), fertilizer or waste runoff from the farm into the stream (water pollution), farm animals near polluted runoff, and litter left at the picnic table by the river (land/water pollution)." },
                 { prompt: "It could be plastic. It could be aluminum. It does not decay. What is it?", answer: "A nonbiodegradable material" },
                 { prompt: "It can take the nose off a statue. It can kill the fish in a lake. It can travel great distances. It falls from clouds. What is it?", answer: "Acid rain" },
                 { prompt: "\"A picnic area is littered with nonbiodegradable materials\" vs. \"A family leaves aluminum cans and plastic bags at a picnic area\" — which is the cause, which is the effect?", answer: "The family leaving the litter is the cause; the littered picnic area is the effect." },
@@ -2108,7 +2212,7 @@ export const scienceChapterText = {
     pages: [
       [
         { type: 'heading', text: 'Chapter 11 · Changes in the Weather' },
-        { type: 'p', text: "People often talk about the condition of the atmosphere in a place. You may talk about it every day. This popular topic is the weather. What is the weather like where you live today?" },
+        { type: 'p', text: "People often talk about the condition of the atmosphere in a place. You may talk about it every day. This popular topic is the weather. What is the weather like in the picture?" },
         { type: 'p', text: "When people talk about weather, they usually discuss the changing conditions of the atmosphere. The atmosphere is the layer of air that surrounds the earth. In just a few hours the weather in a place may be very different, because conditions in the atmosphere can change rapidly." },
         { type: 'p', text: "In this chapter you will learn what causes weather and why weather changes. You will also learn about some unusual kinds of weather." },
         { type: 'image-group', images: [
@@ -2224,7 +2328,7 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'p', text: "During winter, a blizzard may form along a cold front. Blizzards occur when there are large differences in pressure between two air masses. Blizzards are snowstorms in which temperatures are below freezing and winds are very high. After a cold front passes, the temperature in the region drops. The sky usually clears and fluffy white clouds may be seen." },
+        { type: 'p', text: "During winter, a blizzard may form along a cold front. Blizzards occur when there are large differences in pressure between two air masses. Blizzards are snowstorms in which temperatures are below freezing and winds are very high. After a cold front passes, the temperature in the region drops. The sky usually clears and fluffy white clouds may be seen. Why does the temperature drop after a cold front passes?" },
         { type: 'p', text: "A warm front is the place where a moving warm air mass meets a colder air mass. The dense, cold air mass remains close to the ground. As the less dense, warm air mass moves forward, it slowly slides up and over the cold air mass. As it slowly rises, the warm air cools. Water vapor in the warm air condenses, and high, thin, feathery clouds may form — a sign that a warm front is coming." },
         { type: 'p', text: "A warm front passes through a region more slowly than a cold front does. As the warm front moves, thick low clouds may form ahead of it, and steady, light rain may fall for a day or more. When the warm front passes, the temperature rises and the sky slowly clears." },
         { type: 'image-group', images: [
@@ -2511,12 +2615,16 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Your Body\'s Framework' },
         { type: 'p', text: "What jobs does the skeleton do? Some animals have a soft body, and the water they live in helps support it. Some animals have a hard outer covering that supports and protects their body. Still other living things have bones inside their body — these bones make up the skeleton. The skeleton is the system of bones that supports and protects the body and the organs inside it. The skeleton is also called the skeletal system." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/human-skeleton-diagram.jpg', caption: 'The human skeleton' }
+        ] }
+      ],
+      [
         { type: 'p', text: "The skeleton of your body can be compared with the steel framework of a building. The steel beams give a building its shape and support, and the skeletal system forms the framework of the body in much the same way — it supports the body and gives it shape. But it does other jobs too: some parts of the skeleton protect soft parts of the body, such as the brain, heart, and lungs." },
         { type: 'p', text: "The skeleton is different from the framework of a building in an important way. The steel framework of a building cannot move, but the skeleton can move, because muscles are attached to the bones of the skeleton and make the bones move. In fact, the skeleton has 206 bones that help it do its jobs. There are two kinds of bones in the head — the bones of the face and the bones that protect the brain — and together they are joined to form the skull." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch13/human-skeleton-diagram.jpg', caption: 'The human skeleton' },
-          { src: '/images/science/ch13/skull-front-side-view.jpg', caption: 'Bones of the skull, front and side view' },
-          { src: '/images/science/ch13/skyscraper-construction.jpg', caption: 'A skyscraper being built' }
+          { src: '/images/science/ch13/skyscraper-construction.jpg', caption: 'A skyscraper being built' },
+          { src: '/images/science/ch13/skull-front-side-view.jpg', caption: 'Bones of the skull, front and side view' }
         ] }
       ],
       [
@@ -2586,7 +2694,7 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'activity', text: "Hands-on: What happens when muscles become tired? Copy a paragraph from any page in a book, then move the fingers of your writing hand quickly, as though playing a piano, until your fingers or arm feel tired. Copy the same paragraph again and compare your handwriting in the two samples — was it harder to write when your fingers were tired, and how did the samples differ? Next, while seated, raise one leg and record how long you can keep it raised before it becomes tired. Rest for 30 seconds, then repeat immediately. How does the second time compare with the first? What do the results tell you about how tired muscles affect your ability to do a task, both in quality and in how long you can keep it up?" },
+        { type: 'activity', text: "Hands-on: What happens when muscles become tired? Materials: clock or watch with second hand. Procedure: A. Copy a paragraph from any page in this book. Then move the fingers of your writing hand quickly, as though you were playing a piano. Keep moving your fingers until your fingers or arm become tired. Now copy the same paragraph again. Compare the way your handwriting looks in the two samples. 1. Was it harder to write when your fingers were tired? 2. How do your two handwriting samples differ? B. While seated, raise one leg as shown. Record the time you begin. Keep your leg raised until it becomes tired. Record the time when you put your leg down. Rest for 30 seconds. 3. How long did you keep your leg raised? C. Repeat step B at once. 4. How long did you keep your leg raised this time? 5. How do the results for step B compare with these results? Conclusion: 1. How do tired muscles affect how well you can do a task? 2. How do tired muscles affect how long you can do a task? Using science ideas: Repeat steps B and C five times in a row. Graph your results. Suppose someone rides a bicycle every day for an hour. How might this affect that person's results for steps B and C?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch13/activity-writing-hand.jpg', caption: 'Testing handwriting before and after tired fingers' },
           { src: '/images/science/ch13/activity-boy-raised-leg.jpg', caption: 'Timing how long a raised leg stays up' }
@@ -2640,7 +2748,7 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'activity', text: "Hands-on: What happens to bones when minerals are removed? Remove all the meat from an uncooked chicken leg bone, wash it, dry it, and gently try to bend it — does it feel hard or soft, and does it bend? Half fill a jar with vinegar, place the bone in it, and let it sit for five days; vinegar removes minerals from bone. Afterward, wash and dry the bone again and try bending it once more. How does it feel now compared to before, and does it bend more easily? What does this tell you about what your bones would be like without enough minerals in your diet, and how would that affect your skeleton's ability to support your body?" },
+        { type: 'activity', text: "Hands-on: What happens to bones when minerals are removed from them? Materials: leg or thigh bone from uncooked chicken / jar / vinegar / paper towel. Procedure: A. Remove all the meat from a chicken bone. Wash the bone in water and then dry it with a paper towel. Feel the bone. Then gently try to bend the bone. 1. Does the bone feel hard or soft? 2. Does the bone bend? B. Half fill a jar with vinegar. Place the bone in the jar. Allow the bone to remain in the vinegar for 5 days. Vinegar removes minerals from bone. C. After 5 days, remove the bone from the jar. Wash the bone in water and then dry it with a paper towel. Feel the bone. Gently try to bend the bone. 3. How does the bone feel now compared with the way it felt in step A? 4. Does the bone bend? Conclusion: 1. If you did not eat foods containing minerals, what would your bones be like? 2. How would a lack of minerals affect the ability of your skeleton to support your body? Using science ideas: Vitamin D is needed for strong bones and teeth. Find out why this vitamin is often called the sunshine vitamin." },
         { type: 'image-group', images: [
           { src: '/images/science/ch13/activity-girl-vinegar-bone.jpg', caption: 'Soaking a chicken bone in vinegar' },
           { src: '/images/science/ch13/activity-bending-bone.jpg', caption: 'Testing whether the bone bends' }
@@ -2785,15 +2893,31 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'p', text: "Each of the three main parts of the circulatory system can become diseased. For example, fat may build up in the walls of arteries, clogging them much like mineral buildup clogs a water pipe. A heart attack, a common and serious heart problem, occurs when the supply of blood to part of the heart is cut off — usually because the arteries that carry blood to the heart are clogged. If the blood supply is cut off too long, the heart can be permanently damaged, and a person can die from a heart attack; it is a leading cause of death in the United States." },
-        { type: 'p', text: "High blood pressure is another serious problem. Blood flowing through the arteries presses against the artery walls, and this pressure is called blood pressure. When it is too high, the heart has to work harder than it should, though high blood pressure can often be controlled with medicine." }
+        { type: 'p', text: "Each of the three main parts of the circulatory system can become diseased. For example, fat may build up in the walls of arteries, clogging them much like mineral buildup clogs a water pipe. The drawings show how clogged arteries and clogged pipes are alike." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/artery-vs-pipe-diagram.jpg', caption: 'Normal artery vs. clean pipe, clogged artery vs. clogged pipe' },
+          { src: '/images/science/ch14/normal-artery-photo.jpg', caption: 'Normal artery' },
+          { src: '/images/science/ch14/clogged-artery-photo.jpg', caption: 'Clogged artery' }
+        ] },
+        { type: 'p', text: "A heart attack, a common and serious heart problem, occurs when the supply of blood to part of the heart is cut off — usually because the arteries that carry blood to the heart are clogged. If the blood supply is cut off too long, the heart can be permanently damaged, and a person can die from a heart attack; it is a leading cause of death in the United States." },
+        { type: 'p', text: "High blood pressure is another serious problem. Blood flowing through the arteries presses against the artery walls, and this pressure is called blood pressure. It can be measured with a special device. The picture shows a person having his blood pressure tested. When it is too high, the heart has to work harder than it should, though high blood pressure can often be controlled with medicine." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/taking-blood-pressure.jpg', caption: 'Taking blood pressure' }
+        ] }
       ],
       [
         { type: 'p', text: "A longer and healthier life can be enjoyed by people who take care of themselves. Foods high in fat can clog the arteries, which makes the heart work harder and can also cause high blood pressure — so it is a good idea to eat foods that are low in fat and to watch your diet to avoid becoming overweight." },
-        { type: 'p', text: "Exercise is also important for a healthy circulatory system. Like other muscles, the heart benefits from exercise — making it work harder helps make it stronger. Exercise such as swimming, jogging, and jumping rope is good for the heart." }
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/checking-weight.jpg', caption: 'Checking weight' },
+          { src: '/images/science/ch14/low-fat-foods.jpg', caption: 'Low-fat foods' }
+        ] },
+        { type: 'p', text: "Exercise is also important for a healthy circulatory system. Like other muscles, the heart benefits from exercise — making it work harder helps make it stronger. Exercise such as swimming, jogging, and jumping rope is good for the heart." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/runners.jpg', caption: 'Runners' }
+        ] }
       ],
       [
-        { type: 'activity', text: "Hands-on: How does exercise affect the pulse rate? With a partner, sit quietly and find your pulse by pressing your index and middle fingers against your wrist at the base of your thumb. Take your pulse for one minute and record it, then repeat two more times and find the average. Next, jog in place for one minute and take your pulse again right afterward; repeat this two more times, resting between each, and find the average jogging pulse rate. How does your average pulse rate after jogging compare with your average pulse rate while sitting quietly? When is your pulse rate greater, and by how much?" }
+        { type: 'activity', text: "Hands-on: How does exercise affect the pulse rate? Materials: stopwatch or wristwatch with second hand. Procedure: A. Work with a partner. Sit quietly and find your pulse as shown. Hold your index finger and middle finger against your wrist at the base of the thumb. Press firmly. Make sure you can feel the pulse. B. Take your pulse for 1 minute. Have your partner tell you when 1 minute has passed. Record your pulse. 1. What was your pulse rate? C. Take and record your pulse rate two more times. Find and record the average rate. (Add the three readings and divide by 3.) 2. What was your average pulse rate? D. Jog in place for 1 minute. Then take your pulse rate again. 3. What is your pulse rate after jogging? E. Take your pulse rate after jogging two more times. Be sure there is a rest period before each 1-minute period of jogging. F. Record your pulse rate after jogging. Find and record the average pulse rate after jogging. 4. What is your average pulse rate after jogging? How does it differ from your average pulse rate while sitting quietly? Conclusion: 1. When is your pulse rate greater, while sitting or after jogging? 2. What is the difference between the average sitting pulse rate and the average jogging pulse rate?" }
       ],
       [
         { type: 'heading', text: 'The Respiratory System' },
@@ -2810,29 +2934,52 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "The diaphragm is a thick sheet of muscle at the bottom of the chest cavity. It moves down when a person breathes in, spreading the ribs and letting the lungs expand — this process is called inhaling. When a person breathes out, the diaphragm moves up and the ribs come together, pushing air out of the lungs — this process is called exhaling." },
-        { type: 'activity', text: "Try this: How does the diaphragm help fill the lungs? Cut a 2-liter plastic bottle in half. Stretch a round balloon over the bottle's opening and secure it with a rubber band — this balloon represents the lungs. Cut the neck off a second balloon and stretch it across the bottom of the bottle, securing it the same way — this one represents the diaphragm. Pull down on the stretched balloon at the bottom. What happens to the balloon inside the bottle? Explain how this models the way the lungs and diaphragm work together." }
+        { type: 'activity', text: "Try this: How does the diaphragm help to fill up the lungs? You will need a 2-L plastic bottle, two round balloons, scissors, and 2 rubber bands. Cut the bottle in half. Place one of the balloons through the opening of the bottle. Stretch the balloon opening over the bottle opening. Hold the balloon in place with a rubber band. Think of this balloon as the lungs. Cut the neck off the other balloon. Stretch this balloon across the bottom of the bottle. Hold the balloon in place with a rubber band. Think of this balloon as the diaphragm. Pull down on the stretched balloon. What happens to the balloon inside the bottle? Explain how this action is like that of the lungs and the diaphragm." }
       ],
       [
-        { type: 'activity', text: "Hands-on: How much air do your lungs hold? With a partner, fill a large plastic jug completely with water, cap it, and turn it upside down in a dishpan partly filled with water. Carefully remove the cap underwater so no air bubbles enter the jug, then have your partner hold it steady. Put one end of a length of rubber tubing inside the jug and a straw in the other end, take a deep breath, and blow through the straw. Notice what happens to the water level in the jug — the air you blew in has taken the place of the water that spilled out. Recap the jug, turn it right side up, and use a graduated container to refill it with water up to the mark, measuring how much water it takes. That amount equals the volume of air you blew into the jug. Repeat the whole process two more times and average your results — that average is roughly how much air your lungs hold in one breath." }
+        { type: 'activity', text: "Hands-on: How much air do your lungs hold? Materials: large empty plastic milk jug with cap / plastic dishpan / rubber tubing / drinking straw / masking tape / grease pencil / graduate. Procedure: A. Work with a partner. Place a piece of masking tape on a plastic milk jug from top to bottom as shown. B. Fill the jug with water. Screw the cap on the jug. Fill a dishpan about one third full of water. Place the jug upside down in the water. Carefully remove the cap. Do not let air bubbles enter the jug. C. Ask your partner to hold the jug so that it does not tip over. Place one end of the tubing inside the jug. Put a straw in the other end of the tubing. Take a deep breath and blow through the straw. 1. What happens to the water in the jug? 2. Where did the air in your lungs go? D. Replace the cap on the jug. Do not let any extra water out of the jug. E. Remove the jug from the dishpan. Turn the jug right side up. Mark the level of water on the tape. F. Use a graduate to fill the jug with water. 3. How much water did you add? What does this water represent? G. The amount of water you just added to the jug is equal to the amount of air you blew into the jug. 4. How much air did you blow into the jug? H. Repeat steps B-F two more times. Take an average of the three volumes of air collected. 5. What was the average volume of air blown into the jug? Conclusion: How much air do your lungs hold?" }
       ],
       [
         { type: 'heading', text: 'Diseases and Care of the Respiratory System' },
         { type: 'p', text: "What are some common respiratory diseases? Colds are among the most common diseases of the respiratory system, and they spread easily from person to person. Every time someone sneezes or coughs, germs are sprayed into the air, and people nearby may breathe them in. Always cover your nose and mouth when you sneeze or cough, and always wash your hands." },
-        { type: 'p', text: "An allergy is a strong reaction to a substance that is not normally in the body, such as plant pollen or dust. These substances often enter the body through the respiratory system and can cause sneezing, headaches, or difficult breathing — many people, for instance, are allergic to ragweed pollen." }
+        { type: 'p', text: "An allergy is a strong reaction to a substance that is not normally in the body, such as plant pollen or dust. These substances often enter the body through the respiratory system and can cause sneezing, headaches, or difficult breathing — many people, for instance, are allergic to ragweed pollen." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/ragweed.jpg', caption: 'Ragweed — a plant that causes allergies' }
+        ] }
       ],
       [
         { type: 'p', text: "Bronchitis is another respiratory disease, in which the bronchial tubes become red and swollen; it can sometimes lead to other diseases of the lungs." },
-        { type: 'p', text: "Lung cancer is another disease of the respiratory system, with several causes — one is breathing polluted air, and another is smoking cigarettes. Over half the people with lung cancer smoked, which is why every package of cigarettes must carry a warning label." },
-        { type: 'p', text: "Regular exercise is important for a healthy respiratory system. Strenuous exercise strengthens the diaphragm, and a stronger diaphragm allows a person to take in more air — with more air in the lungs, more oxygen can reach the body's cells, letting them release energy from food more effectively." }
+        { type: 'p', text: "Lung cancer is another disease of the respiratory system, with several causes — one is breathing polluted air, and another is smoking cigarettes. The pictures show a lung from a person who did not smoke and a lung from a smoker. Over half the people with lung cancer smoked, which is why every package of cigarettes must carry a warning label." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/warning-labels-cigarettes.jpg', caption: 'Warning labels on cigarettes' },
+          { src: '/images/science/ch14/healthy-lung.jpg', caption: 'Healthy lung' },
+          { src: '/images/science/ch14/smokers-lung.jpg', caption: "Smoker's lung" }
+        ] },
+        { type: 'p', text: "Regular exercise is important for a healthy respiratory system. Strenuous exercise strengthens the diaphragm, and a stronger diaphragm allows a person to take in more air — with more air in the lungs, more oxygen can reach the body's cells, letting them release energy from food more effectively." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/exercising-good-health.jpg', caption: 'Exercising for good health' }
+        ] }
       ],
       [
         { type: 'heading', text: 'The Excretory System' },
         { type: 'p', text: "What waste products are removed by the excretory system? The excretory system is the transport system that removes waste products from the body — the unwanted materials left over from life processes such as respiration. Living things will die if they do not get rid of these waste products." },
-        { type: 'p', text: "Many body parts help remove waste. The kidneys are among the main organs of the excretory system, but the lungs and skin also play a part. The lungs get rid of carbon dioxide and some moisture every time a person exhales. The skin is also part of the excretory system — one layer of skin contains sweat glands, and when a person sweats, water carrying many waste materials leaves the body, ridding it of extra water and wastes." }
+        { type: 'p', text: "Many body parts help remove waste. The kidneys are among the main organs of the excretory system, but the lungs and skin also play a part. The lungs get rid of carbon dioxide and some moisture every time a person exhales. The skin is also part of the excretory system — one layer of skin contains sweat glands, and when a person sweats, water carrying many waste materials leaves the body, ridding it of extra water and wastes." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/replacing-lost-fluids.jpg', caption: 'Replacing lost fluids' },
+          { src: '/images/science/ch14/layer-of-skin-diagram.jpg', caption: 'A layer of skin, showing sweat glands' }
+        ] }
       ],
       [
-        { type: 'p', text: "Most of the waste water in the body is removed by the kidneys. A person normally has two kidneys, located in the lower back, one on each side of the backbone. All the blood passes through the kidneys, and as it does, they filter out waste materials and excess water. These dissolved wastes and water are carried through small tubes to the bladder for storage, and finally leave the body as urine — water with wastes and salts dissolved in it. Solid human waste, by contrast, is removed by the large intestine, which is part of the digestive system." },
-        { type: 'p', text: "If the kidneys become diseased, they may stop working properly, and harmful waste products can build up in the body. People with diseased kidneys can use a special machine to filter wastes from the blood — these machines have saved many lives." }
+        { type: 'p', text: "Most of the waste water in the body is removed by the kidneys. A person normally has two kidneys, located in the lower back, one on each side of the backbone. The drawing shows where the kidneys are located." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/xray-of-kidneys.jpg', caption: 'X-ray of kidneys' },
+          { src: '/images/science/ch14/excretory-system-diagram.jpg', caption: 'The excretory system, showing the kidneys, vein, artery, and bladder' }
+        ] },
+        { type: 'p', text: "All the blood passes through the kidneys, and as it does, they filter out waste materials and excess water. These dissolved wastes and water are carried through small tubes to the bladder for storage, and finally leave the body as urine — water with wastes and salts dissolved in it. Solid human waste, by contrast, is removed by the large intestine, which is part of the digestive system." },
+        { type: 'p', text: "If the kidneys become diseased, they may stop working properly, and harmful waste products can build up in the body. People with diseased kidneys can use a special machine to filter wastes from the blood — these machines have saved many lives." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch14/kidney-machine.jpg', caption: 'Person using a kidney machine' }
+        ] }
       ],
       [
         { type: 'p', text: "To keep the excretory system healthy, a person should drink several glasses of water each day, to replace the water that is lost as waste products are removed. Water is also supplied to the body by foods such as milk, soup, juice, and juicy fruits and vegetables." }
