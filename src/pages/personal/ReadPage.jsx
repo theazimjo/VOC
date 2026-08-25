@@ -1,7 +1,7 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic, X } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, ChevronUp, ChevronDown, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic, X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { ref, onValue, set } from 'firebase/database';
 import { db } from '../../firebase';
@@ -189,6 +189,16 @@ export default function ReadPage() {
   const [selectedWordIdx, setSelectedWordIdx] = useState(null);
   const [direction, setDirection] = useState(1);
   const [activeImageModal, setActiveImageModal] = useState(null);
+  const railInnerRef = useRef(null);
+
+  // Auto-scroll the rail to keep the active page button visible
+  useEffect(() => {
+    if (!railInnerRef.current) return;
+    const activeBtn = railInnerRef.current.querySelector('.read-pc-page-btn.active');
+    if (activeBtn) {
+      activeBtn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [pageIndex]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -543,7 +553,18 @@ export default function ReadPage() {
     <div className={`read-page-shell theme-${readerTheme}`}>
       {/* PC Left Side Floating Page Numbers Rail */}
       <div className="read-pc-page-rail">
-        <div className="read-pc-page-rail-inner">
+        <button
+          type="button"
+          className="read-pc-rail-scroll-btn top"
+          onClick={() => {
+            if (railInnerRef.current) railInnerRef.current.scrollBy({ top: -120, behavior: 'smooth' });
+          }}
+          title="Tepaga siljitish"
+          aria-label="Scroll up page list"
+        >
+          <ChevronUp size={13} />
+        </button>
+        <div className="read-pc-page-rail-inner" ref={railInnerRef}>
           {chapter.pages.map((_, idx) => {
             const pageNum = topicRange ? (topicRange.start + idx) : (idx + 1);
             const isActive = idx === pageIndex;
@@ -566,6 +587,17 @@ export default function ReadPage() {
             );
           })}
         </div>
+        <button
+          type="button"
+          className="read-pc-rail-scroll-btn bottom"
+          onClick={() => {
+            if (railInnerRef.current) railInnerRef.current.scrollBy({ top: 120, behavior: 'smooth' });
+          }}
+          title="Pastga siljitish"
+          aria-label="Scroll down page list"
+        >
+          <ChevronDown size={13} />
+        </button>
       </div>
 
       {/* Floating Side Navigation Arrows (Middle height beside text) */}

@@ -700,8 +700,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 72vh;
-  padding: 8px 6px;
+  max-height: 75vh;
+  padding: 4px 6px;
   background: var(--reader-callout-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -714,6 +714,28 @@
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
+.read-pc-rail-scroll-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: var(--reader-subtitle);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.read-pc-rail-scroll-btn:hover {
+  opacity: 1;
+  color: #ea580c;
+  background: rgba(234, 88, 12, 0.12);
+}
+
 .read-pc-page-rail-inner {
   display: flex;
   flex-direction: column;
@@ -722,6 +744,8 @@
   overflow-y: auto;
   padding: 4px 2px;
   scrollbar-width: none;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14px, black calc(100% - 14px), transparent 100%);
 }
 
 .read-pc-page-rail-inner::-webkit-scrollbar {
