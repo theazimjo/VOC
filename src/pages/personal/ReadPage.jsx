@@ -2,6 +2,9 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ChevronLeft, ChevronRight, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { ref, onValue, set } from 'firebase/database';
+import { db } from '../../firebase';
 import { usePacks } from '../../hooks/usePacks';
 import { useWords } from '../../hooks/useWords';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -299,6 +302,7 @@ export default function ReadPage() {
     enabled: isSpeakMode
   });
 
+  const { user } = useAuth();
   const completedStorageKey = `readCompletedPages:${packId}:${topic}`;
 
   const [completedPages, setCompletedPages] = useState(() => {
@@ -310,6 +314,31 @@ export default function ReadPage() {
     }
   });
 
+  // Sync completedPages with Firebase Realtime Database across all devices safely
+  useEffect(() => {
+    if (!user?.uid || !packId || !topic) return;
+    const safeTopic = encodeURIComponent(topic).replace(/\./g, '%2E');
+    try {
+      const completedRef = ref(db, `users/${user.uid}/completedPages/${packId}/${safeTopic}`);
+      const unsub = onValue(completedRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const arr = snapshot.val();
+          if (Array.isArray(arr)) {
+            setCompletedPages(new Set(arr));
+            try {
+              localStorage.setItem(completedStorageKey, JSON.stringify(arr));
+            } catch {}
+          }
+        }
+      }, (err) => {
+        console.warn('Firebase completedPages listener error:', err);
+      });
+      return () => unsub();
+    } catch (err) {
+      console.warn('Firebase ref creation error:', err);
+    }
+  }, [user?.uid, packId, topic, completedStorageKey]);
+
   const isCurrentPageCompleted = completedPages.has(pageIndex);
 
   const togglePageCompleted = useCallback(() => {
@@ -320,12 +349,25 @@ export default function ReadPage() {
       } else {
         next.add(pageIndex);
       }
+      const arr = [...next];
       try {
-        localStorage.setItem(completedStorageKey, JSON.stringify([...next]));
+        localStorage.setItem(completedStorageKey, JSON.stringify(arr));
       } catch {}
+
+      if (user?.uid && packId && topic) {
+        try {
+          const safeTopic = encodeURIComponent(topic).replace(/\./g, '%2E');
+          set(ref(db, `users/${user.uid}/completedPages/${packId}/${safeTopic}`), arr).catch((err) => {
+            console.warn('Error syncing completedPages to Firebase:', err);
+          });
+        } catch (err) {
+          console.warn('Firebase set error:', err);
+        }
+      }
+
       return next;
     });
-  }, [pageIndex, completedStorageKey]);
+  }, [pageIndex, completedStorageKey, user?.uid, packId, topic]);
 
   // Auto-scroll to currently spoken word
   useEffect(() => {
@@ -570,7 +612,7 @@ export default function ReadPage() {
                   stopListening();
                 }
               }}
-              title="Ovozli o'qish va Karaoke belgilash (Speak Mode)"
+              title={t('read.speakModeTitle')}
             >
               <Mic size={15} />
               <span>Speak</span>
@@ -580,7 +622,7 @@ export default function ReadPage() {
               type="button"
               className={`read-tool-btn read-mark-read-btn ${isCurrentPageCompleted ? 'completed' : ''}`}
               onClick={togglePageCompleted}
-              title={isCurrentPageCompleted ? "O'qilmagan deb belgilash" : "O'qilgan deb belgilash"}
+              title={isCurrentPageCompleted ? t('read.markAsUnread') : t('read.markAsRead')}
             >
               <CheckCircle2 size={16} />
             </button>

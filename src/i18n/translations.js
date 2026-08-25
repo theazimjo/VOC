@@ -872,6 +872,16 @@ export const translations = {
       scienceChaptersLabel: 'Chapters',
       scienceBatchesDone: '{count} / {total} parts complete',
     },
+    read: {
+      chapterFallback: 'Chapter',
+      fontSmaller: 'Smaller font',
+      fontLarger: 'Larger font',
+      speakModeTitle: 'Voice reading & Karaoke highlighting (Speak Mode)',
+      markAsRead: 'Mark as read',
+      markAsUnread: 'Mark as unread',
+      showAnswer: 'Show Answer',
+      hideAnswer: 'Hide Answer',
+    },
   },
 
   ru: {
@@ -1735,6 +1745,16 @@ export const translations = {
       scienceChaptersLabel: 'Главы',
       scienceBatchesDone: '{count} / {total} частей пройдено',
     },
+    read: {
+      chapterFallback: 'Глава',
+      fontSmaller: 'Уменьшить шрифт',
+      fontLarger: 'Увеличить шрифт',
+      speakModeTitle: 'Голосовое чтение и караоке-выделение (Режим Speak)',
+      markAsRead: 'Отметить как прочитанное',
+      markAsUnread: 'Отметить как непрочитанное',
+      showAnswer: 'Показать ответ',
+      hideAnswer: 'Скрыть ответ',
+    },
   },
 
   uz: {
@@ -2597,6 +2617,16 @@ export const translations = {
       scienceBackToChapters: "Boblar ro'yxatiga qaytish",
       scienceChaptersLabel: "Boblar",
       scienceBatchesDone: "{count} / {total} ta qism tugallandi",
+    },
+    read: {
+      chapterFallback: 'Bob',
+      fontSmaller: 'Kichikroq shrift',
+      fontLarger: 'Kattaroq shrift',
+      speakModeTitle: "O'vozli o'qish va Karaoke belgilash (Speak Mode)",
+      markAsRead: "O'qilgan deb belgilash",
+      markAsUnread: "O'qilmagan deb belgilash",
+      showAnswer: "Javobni ko'rsatish",
+      hideAnswer: "Javobni yashirish",
     },
   },
 };
