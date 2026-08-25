@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ChevronLeft, ChevronRight, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, CheckCircle2, Sun, Moon, BookOpen, Lightbulb, HelpCircle, Eye, EyeOff, Mic, X } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { ref, onValue, set } from 'firebase/database';
 import { db } from '../../firebase';
@@ -177,6 +177,17 @@ export default function ReadPage() {
   const [tapState, setTapState] = useState(null);
   const [selectedWordIdx, setSelectedWordIdx] = useState(null);
   const [direction, setDirection] = useState(1);
+  const [activeImageModal, setActiveImageModal] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && activeImageModal) {
+        setActiveImageModal(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeImageModal]);
 
   const recentStorageKey = `readRecentLookups:${packId}`;
   const [recentWords, setRecentWords] = useState(() => {
@@ -733,7 +744,12 @@ export default function ReadPage() {
               return (
                 <div className="read-image-group" key={blockIdx}>
                   {block.images.map((img, imgIdx) => (
-                    <figure className="read-image-item" key={imgIdx}>
+                    <figure
+                      className="read-image-item read-image-clickable"
+                      key={imgIdx}
+                      onClick={() => setActiveImageModal({ src: img.src, caption: img.caption })}
+                      title="Kattalashtirish uchun bosing"
+                    >
                       <img src={img.src} alt={img.caption || ''} loading="lazy" />
                       {img.caption && <figcaption>{img.caption}</figcaption>}
                     </figure>
@@ -863,6 +879,47 @@ export default function ReadPage() {
               setSelectedWordIdx(null);
             }}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Lightbox Image Preview Modal */}
+      <AnimatePresence>
+        {activeImageModal && (
+          <motion.div
+            className="read-lightbox-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImageModal(null)}
+          >
+            <motion.div
+              className="read-lightbox-card"
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="read-lightbox-close-btn"
+                onClick={() => setActiveImageModal(null)}
+                title="Yopish"
+              >
+                <X size={20} />
+              </button>
+              <img
+                src={activeImageModal.src}
+                alt={activeImageModal.caption || ''}
+                className="read-lightbox-img"
+              />
+              {activeImageModal.caption && (
+                <div className="read-lightbox-caption">
+                  {activeImageModal.caption}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
