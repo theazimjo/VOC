@@ -483,6 +483,97 @@
   color: var(--reader-subtitle, inherit);
 }
 
+/* ===== SKELETON LOADER ===== */
+@keyframes wtp-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.wtp-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.wtp-sk-block {
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--reader-callout-bg, rgba(0,0,0,0.06)) 25%,
+    var(--reader-border,    rgba(0,0,0,0.11)) 50%,
+    var(--reader-callout-bg, rgba(0,0,0,0.06)) 75%
+  );
+  background-size: 800px 100%;
+  animation: wtp-shimmer 1.4s ease-in-out infinite;
+}
+
+/* Image placeholder */
+.wtp-sk-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+}
+
+/* Translation row */
+.wtp-sk-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wtp-sk-translation {
+  height: 26px;
+  width: 45%;
+  border-radius: 8px;
+}
+
+.wtp-sk-badge {
+  height: 20px;
+  width: 18%;
+  border-radius: 999px;
+}
+
+/* Definition card */
+.wtp-sk-card {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--reader-border, rgba(0,0,0,0.06));
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.wtp-sk-label {
+  height: 10px;
+  width: 30%;
+  border-radius: 4px;
+}
+
+.wtp-sk-line {
+  height: 12px;
+  border-radius: 4px;
+}
+
+.wtp-sk-line-full { width: 100%; }
+.wtp-sk-line-75   { width: 72%; }
+
+/* Chips row */
+.wtp-sk-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.wtp-sk-chip {
+  height: 28px;
+  width: 72px;
+  border-radius: 999px;
+}
+
+.wtp-sk-chip-wide {
+  width: 96px;
+}
+
 .wtp-error {
   font-size: 0.82rem;
   color: #ef4444;

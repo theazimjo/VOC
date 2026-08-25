@@ -315,9 +315,26 @@ export default function WordTapPopover({
           </div>
 
           {isLoading ? (
-            <div className="wtp-loading">
-              <IosSpinner size={18} />
-              <span>Yuklanmoqda...</span>
+            <div className="wtp-skeleton">
+              {/* Image placeholder */}
+              <div className="wtp-sk-block wtp-sk-image" />
+              {/* Translation + badge */}
+              <div className="wtp-sk-row">
+                <div className="wtp-sk-block wtp-sk-translation" />
+                <div className="wtp-sk-block wtp-sk-badge" />
+              </div>
+              {/* Definition card */}
+              <div className="wtp-sk-card">
+                <div className="wtp-sk-block wtp-sk-label" />
+                <div className="wtp-sk-block wtp-sk-line wtp-sk-line-full" />
+                <div className="wtp-sk-block wtp-sk-line wtp-sk-line-75" />
+              </div>
+              {/* Meaning chips */}
+              <div className="wtp-sk-chips">
+                <div className="wtp-sk-block wtp-sk-chip" />
+                <div className="wtp-sk-block wtp-sk-chip wtp-sk-chip-wide" />
+                <div className="wtp-sk-block wtp-sk-chip" />
+              </div>
             </div>
           ) : lookupError ? (
             <div className="wtp-error">{t('read.translationNotFound')}</div>
