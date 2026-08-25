@@ -1167,6 +1167,23 @@
   box-shadow: inset 0 -2px 0 0 #b45309;
 }
 
+/* Misread/skipped spoken word - red squiggly underline, no background so it can
+   still show the active/passed highlight underneath while the reader corrects it */
+.read-spoken-error {
+  display: inline;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: #ef4444;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.theme-dark .read-spoken-error {
+  text-decoration-color: #f87171;
+}
+
 /* Minimalist Non-Intrusive Floating Bar */
 .voice-read-along-bar {
   position: fixed;

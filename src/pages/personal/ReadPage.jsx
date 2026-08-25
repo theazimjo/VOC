@@ -57,6 +57,7 @@ function WordTokens({
   startIndex = 0,
   activeWordIndex = -1,
   passedWordIndices = new Set(),
+  errorWordIndices = new Set(),
   selectedWordIdx = null,
   onWordClickIndex
 }) {
@@ -71,12 +72,13 @@ function WordTokens({
       const wordIdx = currentWordIdx++;
       const isPassed = passedWordIndices.has(wordIdx);
       const isActive = activeWordIndex === wordIdx;
+      const isError = errorWordIndices.has(wordIdx);
       const isSelected = selectedWordIdx === wordIdx;
 
       return (
         <span
           key={segIdx}
-          className={`read-word read-phrase ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
+          className={`read-word read-phrase ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isError ? 'read-spoken-error' : ''} ${isSelected ? 'read-selected' : ''}`}
           onClick={(e) => {
             const sel = window.getSelection();
             const selText = sel ? sel.toString().trim() : '';
@@ -99,12 +101,13 @@ function WordTokens({
         const wordIdx = currentWordIdx++;
         const isPassed = passedWordIndices.has(wordIdx);
         const isActive = activeWordIndex === wordIdx;
+        const isError = errorWordIndices.has(wordIdx);
         const isSelected = selectedWordIdx === wordIdx;
 
         return (
           <span
             key={`${segIdx}-${i}`}
-            className={`read-word ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isSelected ? 'read-selected' : ''}`}
+            className={`read-word ${known ? 'read-known' : ''} ${isPassed ? 'read-spoken-passed' : ''} ${isActive ? 'read-spoken-active' : ''} ${isError ? 'read-spoken-error' : ''} ${isSelected ? 'read-selected' : ''}`}
             onClick={(e) => {
               const sel = window.getSelection();
               const selText = sel ? sel.toString().trim() : '';
@@ -350,6 +353,7 @@ export default function ReadPage() {
     isListening: isSpeechListening,
     activeWordIndex,
     passedWordIndices,
+    errorWordIndices,
     wpm,
     accuracy,
     error: speechError,
@@ -879,6 +883,7 @@ export default function ReadPage() {
                               startIndex={lineStart}
                               activeWordIndex={activeWordIndex}
                               passedWordIndices={passedWordIndices}
+                              errorWordIndices={errorWordIndices}
                               selectedWordIdx={selectedWordIdx}
                               onWordClickIndex={(idx) => {
                                 if (isSpeakMode) setActiveWordIndex(idx);

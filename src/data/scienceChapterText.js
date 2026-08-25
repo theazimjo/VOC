@@ -253,7 +253,9 @@ export const scienceChapterText = {
         { type: 'heading', text: 'Chapter 2 · Animals Without a Backbone' },
         { type: 'p', text: "The spider on this page is a great hunter. Did you know it can jump great distances? It can jump 40 times the length of its body. Can you see its four large eyes? It can see its insect victim from very far away." },
         { type: 'p', text: "In this chapter you will learn about all kinds of animals. Some of the animals are small, like the spider. Others are much larger than the spider. Some of these animals live in and near your home. Others live in oceans or on mountaintops." },
-        { type: 'p', text: "You will find out about flying animals, floating animals, and creeping animals. You will learn about how they look and where they live. This chapter will show you how they are different and how they are alike." },
+        { type: 'p', text: "You will find out about flying animals, floating animals, and creeping animals. You will learn about how they look and where they live. This chapter will show you how they are different and how they are alike." }
+      ],
+      [
         { type: 'image-group', images: [
           { src: '/images/science/ch02/jumping-spider.jpg', caption: 'A jumping spider, a great hunter' }
         ] }
@@ -450,7 +452,7 @@ export const scienceChapterText = {
         { type: 'p', text: "Insects have special mouth parts formed for chewing, sucking, or piercing — the kind of mouth parts an insect has depends on the food it eats. Beetles and grasshoppers, for example, eat leaves, so their mouths have parts that cut and chew. Butterflies and moths have mouth parts that suck up juices from flowers. Mosquitoes have mouth parts for piercing skin and sucking blood." },
         { type: 'p', text: "An insect's body is covered by an exoskeleton that does not grow as the insect grows. When the covering gets too small, the insect molts — to molt is to shed the hard outer covering. The exoskeleton splits down the middle, the insect works its way out, and once the old covering is shed, it forms a new exoskeleton." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch02/tick-on-skin.jpg', caption: 'Molting exoskeleton' }
+          { src: '/images/science/ch02/molting-exoskeleton.jpg', caption: 'Molting exoskeleton' }
         ] }
       ],
       [

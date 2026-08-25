@@ -35,6 +35,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   const [isListening, setIsListening] = useState(false);
   const [activeWordIndex, setActiveWordIndex] = useState(-1);
   const [passedWordIndices, setPassedWordIndices] = useState(() => new Set());
+  const [errorWordIndices, setErrorWordIndices] = useState(() => new Set());
   const [transcript, setTranscript] = useState('');
   const [error, setError] = useState(null);
   const [wpm, setWpm] = useState(0);
@@ -48,6 +49,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   const isNoSpeechRef = useRef(false);
   const hasFatalErrorRef = useRef(false);
   const consecutiveRestartsRef = useRef(0);
+  const lastStartTimeRef = useRef(0);
 
   useEffect(() => {
     enabledRef.current = enabled;
@@ -56,6 +58,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   const resetTracker = useCallback(() => {
     setActiveWordIndex(-1);
     setPassedWordIndices(new Set());
+    setErrorWordIndices(new Set());
     sessionStartPIdxRef.current = 0;
     highestPIdxRef.current = 0;
     setWpm(0);
@@ -85,15 +88,46 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
     const spokenTokens = trimmed.split(/\s+/).map(cleanWord).filter(Boolean);
     if (spokenTokens.length === 0) return;
 
-    // Align spokenTokens sequentially with pageWords starting from sessionStartPIdxRef
+    // Align spokenTokens sequentially with pageWords starting from sessionStartPIdxRef.
+    // Some pageWords entries are multi-word phrases (e.g. "carry out", tokenized from
+    // {{carry out}} so tap-to-translate can treat them as one unit) - a spoken reader
+    // says these as separate words, so match them one sub-word at a time.
     let pIdx = sessionStartPIdxRef.current;
+    let phraseSubIdx = 0;
+    let phraseStallCount = 0;
+    const skippedIndices = [];
 
     for (const spoken of spokenTokens) {
       if (pIdx >= pageWords.length) break;
 
-      if (wordsMatch(spoken, pageWords[pIdx])) {
+      const targetWords = pageWords[pIdx].split(/\s+/).filter(Boolean);
+
+      if (targetWords.length > 1) {
+        if (wordsMatch(spoken, targetWords[phraseSubIdx])) {
+          phraseSubIdx++;
+          phraseStallCount = 0;
+          if (phraseSubIdx >= targetWords.length) {
+            pIdx++;
+            phraseSubIdx = 0;
+          }
+        } else if (phraseSubIdx === 0 && pIdx + 1 < pageWords.length && wordsMatch(spoken, pageWords[pIdx + 1])) {
+          skippedIndices.push(pIdx);
+          pIdx += 2;
+        } else {
+          // A misheard sub-word inside a multi-word phrase shouldn't freeze tracking
+          // forever - bail out and count the phrase as spoken once we've clearly moved on.
+          phraseStallCount++;
+          if (phraseStallCount > targetWords.length + 1) {
+            skippedIndices.push(pIdx);
+            pIdx++;
+            phraseSubIdx = 0;
+            phraseStallCount = 0;
+          }
+        }
+      } else if (wordsMatch(spoken, pageWords[pIdx])) {
         pIdx++;
       } else if (pIdx + 1 < pageWords.length && wordsMatch(spoken, pageWords[pIdx + 1])) {
+        skippedIndices.push(pIdx);
         pIdx += 2;
       }
     }
@@ -110,6 +144,14 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
         }
         return next;
       });
+
+      if (skippedIndices.length > 0) {
+        setErrorWordIndices(prev => {
+          const next = new Set(prev);
+          skippedIndices.forEach(i => next.add(i));
+          return next;
+        });
+      }
 
       const elapsedMinutes = (Date.now() - startTimeRef.current) / 60000;
       if (elapsedMinutes > 0.05) {
@@ -173,6 +215,7 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
           setIsListening(true);
           setError(null);
           isNoSpeechRef.current = false;
+          lastStartTimeRef.current = Date.now();
         };
 
         recognition.onresult = (event) => {
@@ -206,17 +249,30 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
 
           if (enabledRef.current && !hasFatalErrorRef.current) {
             sessionStartPIdxRef.current = highestPIdxRef.current;
-            consecutiveRestartsRef.current += 1;
 
-            if (consecutiveRestartsRef.current > 3) {
-              console.log('Max consecutive speech restarts reached.');
+            // Chrome's continuous recognition naturally ends every time it detects a
+            // pause (e.g. between sentences) and has to be restarted - that's expected
+            // and shouldn't count against the give-up threshold. Only a session that
+            // dies almost immediately after starting (never got a chance to listen)
+            // signals a real failure loop (e.g. mic contention).
+            const sessionDuration = Date.now() - lastStartTimeRef.current;
+            if (sessionDuration < 500) {
+              consecutiveRestartsRef.current += 1;
+            } else {
+              consecutiveRestartsRef.current = 0;
+            }
+
+            if (consecutiveRestartsRef.current > 6) {
+              console.warn('Speech recognition kept failing to start; giving up.');
+              hasFatalErrorRef.current = true;
               enabledRef.current = false;
               setIsListening(false);
+              setError('Mikrofon bilan bog\'lanishda muammo. Qayta urinib ko\'ring.');
               return;
             }
 
             if (restartTimerRef.current) clearTimeout(restartTimerRef.current);
-            const delay = isNoSpeechRef.current ? 800 : 300;
+            const delay = isNoSpeechRef.current ? 400 : 120;
             restartTimerRef.current = setTimeout(() => {
               createAndStart();
             }, delay);
@@ -261,13 +317,16 @@ export function useSpeechRecognitionTracker({ pageWords = [], langCode = 'en-US'
   }, [pageWords, enabled, resetTracker, startListening, stopListening]);
 
   const totalWords = pageWords.length;
-  const accuracy = totalWords > 0 ? Math.round((passedWordIndices.size / totalWords) * 100) : 0;
+  const accuracy = totalWords > 0
+    ? Math.round((Math.max(passedWordIndices.size - errorWordIndices.size, 0) / totalWords) * 100)
+    : 0;
 
   return {
     isSupported,
     isListening,
     activeWordIndex,
     passedWordIndices,
+    errorWordIndices,
     transcript,
     error,
     wpm,
