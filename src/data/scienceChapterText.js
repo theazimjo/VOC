@@ -1357,149 +1357,201 @@ export const scienceChapterText = {
     title: "Understanding Electricity",
     pages: [
       [
-        { type: 'p', text: "You live in a world that depends on electricity. Look around — you may have many things in your home that run on electricity: a television, a stereo, and a radio. The lights in your house, the clock on the wall, and the toaster in the kitchen all need electricity. You may have toys and games that run on electricity. Your home may be heated by electricity, and your food may be cooked in an electric oven." },
-        { type: 'p', text: "In this chapter you will learn what electricity is, how it is produced, used, and measured. You will also learn about some of the dangers of electricity and how it can be used safely." },
+        { type: 'heading', text: 'Chapter 7 · Understanding Electricity' },
+        { type: 'p', text: "You live in a world that depends on electricity. Look around. You may have many things in your home that run on electricity. A television, a stereo, and a radio use electricity. The lights in your house, the clock on the wall, and the toaster in the kitchen all need electricity. You may have toys and games that run on electricity. Your home may be heated by electricity. Your food may be cooked in an electric oven." },
+        { type: 'p', text: "The boy in the picture is looking at the many electrical devices on display. Can you imagine your life without electricity?" },
+        { type: 'p', text: "In this chapter you will learn what electricity is. You will learn how it is produced, used, and measured. You will also learn about some of the dangers of electricity and how it can be used safely." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/electrical-appliances-shelf.jpg', caption: 'Everyday appliances that run on electricity' },
-          { src: '/images/science/ch07/world-trade-center-night.jpg', caption: 'A city lit up by electricity at night' }
+          { src: '/images/science/ch07/electrical-appliances-shelf.jpg', caption: 'A boy looking at electrical devices on display' }
         ] }
       ],
       [
         { type: 'heading', text: 'What Is Electricity?' },
-        { type: 'p', text: "You depend a great deal on electricity, but what is electricity? You cannot see it — you can only see what it does. For a long time, scientists have been interested in what electricity is and does." },
-        { type: 'p', text: "What is known about electricity? Scientists know that everything is either matter or energy. Matter has mass and takes up space. Since electricity does not have mass or take up space, it must be a form of energy." },
-        { type: 'p', text: "To understand electrical energy, you must understand matter. Remember that all matter is made of atoms, and that the atom has a central part called a nucleus. There are particles in the nucleus — some of these particles have a positive charge and are called protons. Moving around the nucleus are other particles, called electrons. The electrons in an atom have a negative charge. If the number of protons and the number of electrons in an atom are the same, their charges balance one another, and the atom has no charge. An atom with no charge is neutral. Under normal conditions, the atoms in most matter are neutral." },
+        { type: 'p', text: "You depend a great deal on electricity. But what is electricity? You cannot see it. You can only see what it does. For a long time scientists have been interested in what electricity is and does." },
+        { type: 'p', text: "What is known about electricity? Scientists know that everything is either matter or energy. Matter has mass and takes up space. Since electricity does not have mass or take up space, it must be energy." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/neutral-atom-diagram.jpg', caption: 'A neutral atom, with equal protons and electrons' }
-        ] }
+          { src: '/images/science/ch07/electric-train-bart-new.jpg', caption: 'Train running on electricity' }
+        ] },
+        { type: 'p', text: "You know that electricity can do work. What kind of work is being done in the picture?" }
       ],
       [
-        { type: 'p', text: "Think of a game of tug-of-war in which one team has six children and the other has only four — the teams are not balanced. To balance the teams, some children have to move from the side with the larger number to the side with the smaller number." },
-        { type: 'p', text: "In some ways electricity is like this game of tug-of-war. Suppose the number of protons and the number of electrons in an atom are not the same — this happens when an atom gains or loses electrons. If an atom has more electrons than protons, the atom has a negative charge. An atom with more protons than electrons has a positive charge. This movement of electrons produces electricity." },
-        { type: 'activity', text: "Finding out: Does clear tape have an electric charge? You will need a roll of clear tape. Remove two strips of tape from the roll, each about 8 cm long, making sure you only touch one end of each strip. Slowly move the two sticky sides of the tape toward each other, then slowly move the two smooth sides toward each other. Watch what happens — do the pieces of tape have an electric charge? How can you tell?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/tug-of-war-electrons-analogy.jpg', caption: 'A tug-of-war, like the balance of protons and electrons' },
-          { src: '/images/science/ch07/atoms-gaining-losing-electron.jpg', caption: 'An atom gaining and losing an electron' },
+          { src: '/images/science/ch07/neutral-atom-diagram.jpg', caption: 'A neutral atom, with a balanced number of electrons and protons' }
+        ] },
+        { type: 'p', text: "To understand electrical energy, you must understand matter. Remember that all matter is made of atoms. Knowing the structure of the atom will help solve the mystery of electricity. You have learned that the atom has a central part called a nucleus. There are particles in the nucleus. Some of these particles have a positive charge. They are called protons. Moving around the nucleus are other particles, called electrons. The electrons in an atom have a negative charge. If the number of protons and the number of electrons in an atom are the same, their charges balance one another. When this happens, the atom has no charge. An atom with no charge is neutral. Under normal conditions the atoms in most matter are neutral. As the drawing shows, the number of electrons and protons is balanced." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/tug-of-war-electrons-analogy.jpg', caption: 'Children playing tug-of-war, with unbalanced teams' }
+        ] },
+        { type: 'p', text: "Look at the drawing of the children playing tug-of-war. You can see that the teams are not balanced. One team has six children and the other has four. To balance the teams, some children will have to move. They can move in only one direction. Some children will have to move from the side with the larger number to the side with the smaller number. How many children will have to move to balance the teams?" }
+      ],
+      [
+        { type: 'p', text: "In some ways electricity is like this game of tug-of-war. Suppose the number of protons and the number of electrons in an atom are not the same. This happens when an atom gains or loses electrons. If an atom has more electrons than protons, the atom has a negative charge. An atom with more protons than electrons has a positive charge." },
+        { type: 'p', text: "Look at the drawings of the atoms. As you can see, atoms can gain or lose electrons. Atom A is losing an electron. Atom B is gaining an electron. This movement of electrons produces electricity. Which atom has a positive charge? Which atom has a negative charge?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/atoms-gaining-losing-electron.jpg', caption: 'Atom A losing an electron, atom B gaining an electron' }
+        ] },
+        { type: 'activity', text: "Finding out: Does clear tape have an electric charge? You will need a roll of clear tape. Remove two strips of tape from the roll. Each strip should be about 8 cm long. Make sure that you touch only one end of the tape. Slowly move the two sticky sides of the tape toward each other. Then slowly move the two smooth sides toward each other. Watch what happens. Do the pieces of tape have an electric charge? How can you tell?" },
+        { type: 'image-group', images: [
           { src: '/images/science/ch07/tape-static-charge-test.jpg', caption: 'Testing whether strips of tape have an electric charge' }
         ] }
       ],
       [
         { type: 'heading', text: 'Kinds of Electricity' },
-        { type: 'p', text: "It is a cold, dry day in winter. You walk across a wool carpet and reach out to turn a doorknob — you feel a shock. What happened? As you moved across the carpet, your shoes rubbed electrons off the carpet, and you gained electrons. The electrons built up on your body and stayed there. This buildup of electrons gave your body an electric charge. An electric charge that does not move is called {{static electricity}}." },
-        { type: 'p', text: "When you touched the doorknob, electrons moved from you to the doorknob. Electrons move from a place where there are many electrons to a place where there are fewer electrons. Your body had more electrons than the doorknob, so when you touched it, the extra electrons moved from your body to the doorknob. This movement of extra electrons is called an {{electric discharge}}. After the electric discharge, you became neutral again." },
-        { type: 'p', text: "Lightning is another example of a discharge of static electricity. It is often caused by a buildup of electrons on a cloud — the cloud has more electrons than the ground. When the difference between the charge on the cloud and the charge on the ground is great enough, an electric discharge occurs, which you see as lightning." },
+        { type: 'p', text: "It is a cold, dry day in winter. You walk across a wool carpet and reach out to turn a doorknob. You feel a shock. What happened? When you moved across the carpet, you gained electrons. Your shoes rubbed electrons off the carpet. The electrons built up on your body and stayed there. This buildup of electrons gave your body an electric charge. An electric charge that does not move is called {{static electricity}}." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/boy-touching-doorknob.jpg', caption: 'Feeling a shock after touching a doorknob' },
-          { src: '/images/science/ch07/electric-discharge-diagram.jpg', caption: 'How an electric discharge happens' },
-          { src: '/images/science/ch07/lightning-electric-discharge.jpg', caption: 'Lightning, a discharge of static electricity' }
+          { src: '/images/science/ch07/electric-discharge-diagram.jpg', caption: 'Electric discharge — a collection of electrons jumping from a doorknob to a hand' },
+          { src: '/images/science/ch07/boy-touching-doorknob.jpg', caption: 'Feeling a shock after touching a doorknob' }
         ] }
       ],
       [
-        { type: 'heading', text: 'Why Lightning Strikes' },
-        { type: 'p', text: "Electrons move when they jump from a finger to a doorknob, and they also move when lightning strikes the earth. This movement of electrons is called {{current electricity}}. Current electricity is more useful than static electricity because it can be controlled." },
-        { type: 'p', text: "The electricity that jumps to a doorknob has to move through some form of matter — in that case, air. Electricity can also move through other forms of matter, such as metal. Matter through which an electric current moves easily is called a {{conductor}}. Most metals are good conductors, though some are better than others: gold, silver, and copper are all good conductors. Copper is low-priced and easy to obtain, so it is often used as a conductor." },
-        { type: 'p', text: "Not all kinds of matter are good conductors. Current cannot move easily through wood, rubber, glass, or plastic. Matter that is not a good conductor is called an {{insulator}}. Rubber is often used as an insulator around copper wire — it helps keep electricity in the wire and prevents electric shock." },
+        { type: 'p', text: "When you touched the doorknob, electrons moved from you to the doorknob. Why did this happen? Electrons move from a place where there are many electrons to a place where there are fewer electrons. Your body had more electrons than the doorknob. When you touched the doorknob, the extra electrons moved from your body to the doorknob. This movement of the extra electrons is called an {{electric discharge}}. After the electric discharge, you became neutral again." },
+        { type: 'p', text: "Lightning is another example of a discharge of static electricity. Lightning is often caused by a buildup of electrons on a cloud. The cloud has more electrons than the ground. When the difference between the charge on the cloud and the charge on the ground is great enough, an electric discharge occurs. You can see this discharge as lightning." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/why-lightning-strikes-diagram.jpg', caption: 'Why lightning strikes the ground' },
-          { src: '/images/science/ch07/insulated-wire-types.jpg', caption: 'Copper wire insulated with rubber' }
+          { src: '/images/science/ch07/lightning-electric-discharge.jpg', caption: 'Electric discharge (lightning)' },
+          { src: '/images/science/ch07/why-lightning-strikes-diagram.jpg', caption: 'Why lightning strikes: electron buildup on a cloud' }
+        ] },
+        { type: 'p', text: "Electrons move when they jump from a finger to a doorknob. They also move when lightning strikes the earth. This movement of electrons is called {{current electricity}}. Current electricity is more useful than static electricity. What are some ways that current electricity is used?" }
+      ],
+      [
+        { type: 'sidebar', text: "Do you know? The first person to prove that lightning is a form of electricity was Benjamin Franklin. He did this by flying a silk kite during a thunderstorm. He attached a metal wire to the kite string near the top of the kite. He then tied a metal key to the lower end of the string. Electrons from the clouds collected on the wire. They then flowed down the string to the key. When Franklin touched the key, he felt a small shock. The electrons had jumped onto his fingers. Franklin concluded that the electricity he felt came from the clouds. If lightning had struck the kite, he would have died from a powerful shock." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/franklin-kite-experiment.jpg', caption: 'Benjamin Franklin\'s kite experiment' }
+        ] },
+        { type: 'p', text: "The electricity that jumped to the doorknob had to move through some form of matter. It moved through air. Electricity can move through other forms of matter, such as metal. Matter through which an electric current moves easily is called a {{conductor}}. Most metals are good conductors. Some metals are better conductors than others. Gold, silver, and copper are all good conductors. Copper is low-priced and easy to obtain. So it is often used as a conductor." },
+        { type: 'p', text: "Not all kinds of matter are good conductors. Current cannot move easily through wood, rubber, glass, or plastic. Matter that is not a good conductor is called an {{insulator}}. Rubber is often used as an insulator around copper wire. The rubber helps to keep electricity in the wire. An insulator helps to prevent electric shock." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/insulated-wire-types.jpg', caption: 'Types of insulated wire: rubber, plastic, and rubber/cloth/paper/metal insulation' }
         ] }
       ],
       [
-        { type: 'sidebar', text: "Do you know? The first person to prove that lightning is a form of electricity was Benjamin Franklin. He did this by flying a silk kite during a thunderstorm, with a metal wire attached to the kite string near the top and a metal key tied to the lower end of the string. Electrons from the clouds collected on the wire and flowed down the string to the key. When Franklin touched the key, he felt a small shock — the electrons had jumped onto his fingers. Franklin concluded that the electricity he felt came from the clouds. If lightning had struck the kite instead, he could have died from a powerful shock." },
-        { type: 'activity', text: "Which materials are conductors? Materials: 6-volt battery, light bulb and socket, 3 test leads, copper penny, cardboard strip, toothpick, aluminum foil, paper clip, rubber band. Procedure: Test different materials to see if they are conductors or insulators, and make a chart to record what you find. Connect the battery, test leads, and light bulb. Remove one test lead from the bulb and clip it to a copper penny, then use another test lead to clip the penny to the bulb — does the bulb light up? Is the penny a conductor or an insulator? Repeat for each of the other materials and fill in your chart. Conclusion: Which materials are conductors of electricity? How are all the conductors alike? Which materials are insulators, and how do you know? Using science ideas: Look around your home for tools used to repair electric devices — the handles of some tools are covered with rubber. Explain why." },
+        { type: 'heading', text: 'Which Materials Are Conductors?' },
+        { type: 'activity', text: "Materials: 6-volt battery / light bulb and socket / 3 test leads / copper penny / cardboard strip / toothpick / aluminum foil / paper clip / rubber band. Procedure: A. You are going to test different materials to see if they are conductors or insulators. Make a chart like the one shown below, listing copper penny, toothpick, cardboard strip, aluminum foil, paper clip, and rubber band, with columns for Conductor and Insulator. B. Connect the battery, test leads, and light bulb as shown. C. Remove one of the test leads from the bulb. Clip it to a copper penny. Use another test lead to clip the penny to the bulb as shown. 1. What happens to the bulb? 2. Is the penny a conductor or an insulator? D. Repeat step C for each of the other materials. Fill in your chart. Conclusion: 1. Which materials are conductors of electricity? 2. How are all the conductors alike? 3. Which materials are insulators? How do you know? Using science ideas: Look around your home for tools that are used to repair electric devices. The handles of some of the tools will be covered with rubber. Explain why." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/franklin-kite-experiment.jpg', caption: 'Benjamin Franklin\'s kite experiment' },
-          { src: '/images/science/ch07/activity-conductor-test-1.jpg', caption: 'Testing whether a penny conducts electricity' },
-          { src: '/images/science/ch07/activity-conductor-test-2.jpg', caption: 'Testing another material for the conductor activity' }
+          { src: '/images/science/ch07/activity-conductor-test-1.jpg', caption: 'Connecting the battery, test leads, and light bulb' },
+          { src: '/images/science/ch07/activity-conductor-test-2.jpg', caption: 'Testing whether a penny conducts electricity' }
         ] }
       ],
       [
         { type: 'heading', text: 'Electric Circuits' },
-        { type: 'p', text: "Electricity must flow through a path to be useful. The path through which an electric current flows is called a {{circuit}}. A circuit lets electrons flow from a place where there are many electrons to a place where there are few. The flow of electrons in a circuit is similar to the flow of water in a pipe — like water, electrons need a path to follow. The pipe gives water a path to follow, and the circuit gives electrons a path to follow." },
-        { type: 'p', text: "An electric circuit must be complete for electricity to flow through it. A circuit that is complete is called a closed circuit. If there is a break in the circuit, electricity will not flow through it — a circuit that is broken, or incomplete, is called an open circuit. The opening and closing of a circuit is controlled by a device called a switch." },
+        { type: 'p', text: "Electricity must flow through a path to be useful. The path through which an electric current flows is a {{circuit}}. A circuit lets electrons flow from a place where there are many electrons to a place where there are few. The flow of electrons in a circuit is similar to the flow of water in a pipe. Like water, electrons need a path to follow. The pipe gives water a path to follow. The circuit gives electrons a path to follow. The drawing shows a light bulb in an electric circuit. Electricity flowing through the wire lights the bulb." },
+        { type: 'p', text: "An electric circuit must be complete for electricity to flow through it. A circuit that is complete is called a closed circuit. If there is a break in the circuit, electricity will not flow through it. A circuit that is broken, or incomplete, is called an open circuit. The opening and closing of a circuit is controlled by a device called a switch." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/electric-circuit-dry-cell.jpg', caption: 'A simple electric circuit with a dry cell' },
+          { src: '/images/science/ch07/electric-circuit-dry-cell.jpg', caption: 'An electric circuit, showing the flow of electrons from a dry cell' },
           { src: '/images/science/ch07/open-vs-closed-circuit.jpg', caption: 'An open circuit and a closed circuit' }
         ] }
       ],
       [
-        { type: 'p', text: "There are two kinds of electric circuits. One kind is a {{series circuit}} — a circuit in which current can follow only one path. An open switch or a broken wire stops the flow of current in a series circuit. If one bulb in a series circuit burns out, the path is broken and the current no longer has a path to move through." },
-        { type: 'p', text: "The other kind of electric circuit is a {{parallel circuit}} — one in which current can follow more than one path. Most circuits used in homes are parallel circuits. If you turn off one light in your home, the other lights stay on, because the parallel circuit provides another path for the current to follow. It's like taking a detour on a road — traffic can still flow from one point to another, just along a different path." },
-        { type: 'activity', text: "Are bulbs brighter in a series circuit or a parallel circuit? Materials: 6-volt battery, 2 light bulbs and sockets, 5 test leads, insulated copper wire. Procedure: Connect one light bulb in a circuit and observe its brightness. Add a second bulb in series and observe the brightness of both bulbs — are they brighter or dimmer than the single bulb, and why? Then connect the two bulbs in a parallel circuit and observe their brightness — are they as bright as the bulb in the first circuit? Conclusion: Which circuit has the brighter bulbs? Explain, in your own words, the difference between a series circuit and a parallel circuit. Using science ideas: Draw a series circuit with five bulbs — what would happen to the other bulbs if one burned out? Now draw a parallel circuit with five bulbs — what would happen if one burned out there?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/series-circuit-two-bulbs.jpg', caption: 'Two bulbs in a series circuit' },
-          { src: '/images/science/ch07/parallel-circuit-two-bulbs.jpg', caption: 'Two bulbs in a parallel circuit' },
-          { src: '/images/science/ch07/activity-brightness-panel-1.jpg', caption: 'Testing bulb brightness, step 1' },
-          { src: '/images/science/ch07/activity-brightness-panel-2.jpg', caption: 'Testing bulb brightness, step 2' },
-          { src: '/images/science/ch07/activity-brightness-panel-3.jpg', caption: 'Testing bulb brightness, step 3' }
+          { src: '/images/science/ch07/series-circuit-two-bulbs.jpg', caption: 'A series circuit with two light bulbs' }
+        ] },
+        { type: 'p', text: "There are two kinds of electric circuits. One kind is a {{series circuit}}. A series circuit is one in which current can follow only one path. An open switch or a broken wire stops the flow of current in a series circuit. The drawing shows a simple series circuit. It has an energy source, a copper wire, a switch, and two light bulbs. What happens to the flow of current when the switch is open? What happens when the switch is closed? Suppose one more light bulb is added to the circuit. The current must flow through it also. If one of the bulbs burns out, the path is broken. The current no longer has a path to move through." }
+      ],
+      [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/parallel-circuit-two-bulbs.jpg', caption: 'A parallel circuit with two light bulbs' }
+        ] },
+        { type: 'p', text: "The other kind of electric circuit is a {{parallel circuit}}. A parallel circuit is one in which current can follow more than one path. Look at the parallel circuit with two bulbs shown in the drawing. The current does not have to flow through the green bulb to reach the red bulb. Compare it with the drawing of the series circuit. How many paths can you trace in the parallel circuit?" },
+        { type: 'p', text: "Most circuits used in homes are parallel circuits. If you turn off one light in your home, the other lights will stay on. The parallel circuit provides another path for the current to follow. It is like taking a detour on a road. Traffic can flow from one point to another, but it goes along a different route. What would happen if the lights in your home were not wired in a parallel circuit?" }
+      ],
+      [
+        { type: 'heading', text: 'Are Bulbs Brighter in a Series Circuit or a Parallel Circuit?' },
+        { type: 'activity', text: "Materials: 6-volt battery / 2 light bulbs and sockets / 5 test leads / insulated copper wire. Procedure: A. Connect one light bulb in a circuit, as shown in the top picture. 1. Observe the brightness of the bulb. 2. What would happen if you added one more bulb? B. Add one more bulb to the circuit, as shown in the middle picture. You have connected the bulbs in a series circuit. Observe the brightness of the two bulbs. 3. Are the two bulbs brighter than the one bulb? 4. Why is there a difference? C. Connect two bulbs in the circuit, as shown in the bottom picture. This is a parallel circuit. Observe the brightness of the bulbs. 5. Are the bulbs as bright as the bulbs in step B? 6. Are the bulbs as bright as the bulb in step A? Conclusion: 1. Which circuit has the brighter bulbs? 2. Explain in your own words the difference between a series circuit and a parallel circuit. Using science ideas: 1. Draw a series circuit that has five bulbs. Suppose one bulb burned out. What would happen to the other bulbs? 2. Draw a parallel circuit that has five bulbs. Suppose one bulb burned out. What would happen to the other bulbs?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/activity-brightness-panel-1.jpg', caption: 'Step A — one bulb connected in a circuit' },
+          { src: '/images/science/ch07/activity-brightness-panel-2.jpg', caption: 'Step B — two bulbs in a series circuit' },
+          { src: '/images/science/ch07/activity-brightness-panel-3.jpg', caption: 'Step C — two bulbs in a parallel circuit' }
         ] }
       ],
       [
         { type: 'heading', text: 'Producing Electricity' },
-        { type: 'p', text: "Have you ever used a magnet to pick up pins or paper clips? Did you know a magnet can also be used to produce electricity? This property of magnets was discovered in 1831 by a scientist named Michael Faraday, who found that a magnet can be used to produce electricity." },
-        { type: 'p', text: "Faraday moved a strong magnet back and forth through a coil of wire, and electrons moved along the wire — even though electrons were not moving along the wire before the magnet passed through it. A magnet has lines of force around it, and these lines of force can make electrons move inside a wire. Moving electrons produce an electric current." },
+        { type: 'p', text: "Have you ever used a magnet to pick up pins or paper clips? Did you know that a magnet can also be used to produce electricity? This property of magnets was known in 1831. A scientist named Michael Faraday found that a magnet can be used to produce electricity." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/faradays-coil-diagram.jpg', caption: 'Faraday\'s coil, showing how a magnet produces a current' },
-          { src: '/images/science/ch07/magnetic-lines-of-force.jpg', caption: 'Lines of force around a magnet' }
+          { src: '/images/science/ch07/faradays-coil-diagram.jpg', caption: "Faraday's coil: a magnet moved back and forth through a wire coil" }
+        ] },
+        { type: 'p', text: "The drawing shows, in a simple way, what Faraday did. He moved a strong magnet back and forth through a coil of wire. Electrons moved along the wire! How did this happen? Electrons were not moving along the wire before the magnet was passed through it." },
+        { type: 'p', text: "You may know that a magnet has lines of force around it. These lines of force cause some metal objects to move toward the magnet. They can also make electrons move inside a wire. Moving electrons produce an electric current." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/magnetic-lines-of-force.jpg', caption: 'Magnetic lines of force' }
         ] }
       ],
       [
-        { type: 'p', text: "Faraday's discovery was used to make a machine that is still used today — a {{generator}}. A generator changes energy of motion into electrical energy. When coils of wire cut through a strong magnetic field, electrons move through the wire; to keep the electrons moving, either the wire or the magnet must be kept moving." },
-        { type: 'p', text: "To produce electricity, a generator needs energy from an outside source. Most of this energy comes from burning fuels such as coal, oil, and gas. Here is how a generator produces electrical energy: fuel is burned to heat water and produce steam; the steam turns the blades of a {{turbine}}, a device made up of a wheel and blades; the turbine is attached to a generator — as the turbine turns, it turns a magnet inside a coil of wire, producing an electric current in the coil; and the current produced in the coil of wire lights the bulb." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/generator-power-plant.jpg', caption: 'A generator inside a power plant' },
+          { src: '/images/science/ch07/generator-power-plant.jpg', caption: 'Generator' }
+        ] },
+        { type: 'p', text: "Faraday's discovery was used to make a machine that is still in use today. This machine is a {{generator}}. A generator changes energy of motion into electrical energy. When coils of wire cut through a strong magnetic field, electrons move through the wire. To keep the electrons moving, either the wire or the magnet must be kept moving." },
+        { type: 'p', text: "To produce electricity, a generator needs energy from an outside source. Most of this energy comes from the burning of fuels, such as coal, oil, and gas." },
+        { type: 'p', text: "The drawing shows how electrical energy is produced by a generator. Look at the drawing as you read each step. 1. Gas is burned to heat water to produce steam. 2. The steam turns the blades of a {{turbine}}. A turbine is a device that is made up of a wheel and blades." }
+      ],
+      [
+        { type: 'image-group', images: [
           { src: '/images/science/ch07/how-generator-produces-electricity.jpg', caption: 'How a generator produces electricity' }
-        ] }
+        ] },
+        { type: 'p', text: "3. The turbine is attached to a generator, which is shown as a magnet inside a coil of wire. As the turbine moves, it turns the magnet. This produces an electric current inside the coil of wire. 4. The current produced in the coil of wire lights the bulb." },
+        { type: 'p', text: "Generators are not the only way we can produce electricity. You may own flashlights, small radios, and toys that need a supply of energy. They do not have generators. Instead they use a device commonly called a battery. A battery is really two or more {{electric cells}} joined together. An electric cell is a device that changes chemical energy to electrical energy." }
       ],
       [
-        { type: 'p', text: "Generators are not the only way to produce electricity. Flashlights, small radios, and toys that need a supply of energy often don't have generators — instead, they use a device commonly called a battery. A battery is really two or more {{electric cells}} joined together. An electric cell is a device that changes chemical energy into electrical energy." },
-        { type: 'p', text: "One type of electric cell is a dry cell, which uses a chemical paste, a carbon rod, and a zinc case to produce a flow of electrons. Chemical reactions inside the dry cell cause the walls of the zinc case to become negatively charged, and the carbon rod to become positively charged — the zinc case is called the negative pole, and the carbon rod the positive pole. If the dry cell is connected to a circuit, electrons flow from the negative pole to the positive pole, forming an electric current." },
-        { type: 'p', text: "A true battery is made of two or more cells. Most car batteries are made of six cells, and instead of a chemical paste, they use acid and water, which react with metal plates. This chemical reaction of metal and acid produces a flow of electrons — such a battery is called a wet cell battery." },
+        { type: 'p', text: "One type of electric cell is called a dry cell. A dry cell uses a chemical paste, carbon rod, and zinc case to produce a flow of electrons. Chemical reactions occur inside the dry cell. One reaction causes the walls of the zinc case to become negatively charged. Another reaction causes the carbon rod to become positively charged. The zinc case is called the negative pole. The carbon rod is called the positive pole. If the dry cell is connected to a circuit, electrons flow from the negative pole to the positive. This movement of electrons forms an electric current." },
+        { type: 'p', text: "A true battery is made of two or more cells. Most car batteries are made of six cells. A car battery does not use a chemical paste to make electricity. Instead it uses acid and water, which react with metal plates. The chemical reaction of the metal and acid produces a flow of electrons. Such a battery is called a wet cell battery." },
         { type: 'image-group', images: [
           { src: '/images/science/ch07/inside-dry-cell-diagram.jpg', caption: 'Inside a dry cell' },
-          { src: '/images/science/ch07/car-battery-cutaway.jpg', caption: 'Inside a car battery, made of wet cells' }
+          { src: '/images/science/ch07/car-battery-cutaway.jpg', caption: 'A car battery, a wet cell battery' }
         ] }
       ],
       [
         { type: 'heading', text: 'Using Electricity' },
-        { type: 'p', text: "Every day you use electricity in many ways — you may wake up to an electric alarm clock, eat breakfast cooked on an electric stove, and use electricity at home, at school, in stores, and in factories." },
-        { type: 'p', text: "To be useful, electricity must be changed into other kinds of energy. An electromagnet is a magnet that forms when a current passes through a wire coiled around a metal core — a giant electromagnet can be used to lift heavy metal objects in a scrapyard. This is one example of electricity being changed into another kind of energy." },
-        { type: 'p', text: "Electrical energy can also be changed into mechanical energy — the energy of moving machine parts. You can see this change in an electric motor, a machine that changes electrical energy into mechanical energy. When you plug a motor into a wall outlet, the electricity turns the motor. Mixers, fans, and power tools all have motors." },
+        { type: 'p', text: "Every day you use electricity in many ways. You may wake up to the sound of an electric alarm clock. You may eat breakfast cooked on an electric stove. You use electricity at home and in school. It is also used in stores and factories. Look at the drawing of the house. How many uses of electricity can you find?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/house-electricity-uses-cutaway.jpg', caption: 'Ways electricity is used throughout a house' },
-          { src: '/images/science/ch07/electric-train-bart.jpg', caption: 'An electric train, powered by a motor' },
-          { src: '/images/science/ch07/motors-in-appliances.jpg', caption: 'Motors found inside household appliances' }
-        ] }
+          { src: '/images/science/ch07/house-electricity-uses-cutaway.jpg', caption: 'Ways electricity is used throughout a house' }
+        ] },
+        { type: 'p', text: "To be useful, electricity must be changed to other kinds of energy. Think back to what you know about magnets. The electromagnet is a magnet that forms when a current passes through a wire coiled around a metal core. A giant electromagnet can be used to lift heavy metal objects in a scrapyard. This is an example of how electricity can be changed to another kind of energy." }
       ],
       [
-        { type: 'p', text: "Electricity is also an important source of light and heat — in a light bulb or a toaster, for example, electricity is changed into light or heat energy. A light bulb has a glass cover, a base, and a {{filament}}. The filament is a thin coil of wire; when a current moves through it, it becomes hot. The hot filament glows and gives off light. The glass cover prevents air from reaching the filament — if air did reach the glowing filament, it would burn up." },
+        { type: 'p', text: "Electrical energy can also be changed to mechanical energy. Mechanical energy is energy of moving machine parts. You can see this change in an electric motor. An electric motor is a machine that changes electrical energy to mechanical energy. When you plug a motor into a wall outlet, the electricity turns the motor. Mixers, fans, and power tools all have motors. Look again at the drawing of the house on page 171. Where are motors used?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/light-bulb-filament-diagram.jpg', caption: 'The parts of a light bulb, including the filament' }
+          { src: '/images/science/ch07/motors-in-appliances.jpg', caption: 'Motors in electric appliances' }
+        ] },
+        { type: 'p', text: "Electricity is also an important source of light and heat. For example, in a light bulb or a toaster, electricity is changed to light or heat energy. Let's see how a light bulb produces light. The light bulb has a glass cover, a base, and a {{filament}}. The filament is a thin coil of wire. When a current moves through the filament it becomes hot. The hot filament glows and gives off light. The glass cover prevents air from reaching the filament. What would happen if air reached the glowing filament?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/light-bulb-filament-diagram.jpg', caption: 'The parts of a light bulb: glass cover, filament, and base' }
         ] }
       ],
       [
         { type: 'heading', text: 'Measuring Electricity' },
-        { type: 'p', text: "Each day, great amounts of electrical energy are used in homes, schools, and offices. You use a certain amount of electricity when you watch television for an hour, and a different amount when you read for two hours by lamplight. Energy use costs money, and before anyone can pay for it, it has to be measured." },
-        { type: 'p', text: "Electricity is used to do work — the more work a device does, the more electricity it uses, and the faster a device works, the more electricity it uses. The amount of work done in a certain period of time is called power. Small amounts of electric power are measured in units called {{watts}}. Large amounts of power are measured in kilowatts — a kilowatt is 1,000 watts." },
+        { type: 'p', text: "Each day great amounts of electrical energy are used in homes, schools, and offices. How is electricity used in the picture of the office building? You use a certain amount of electricity when you watch television for an hour. You use a different amount when you read for 2 hours by the light of a lamp. Have you ever had someone tell you to turn off a light? Energy use costs money. Someone must pay for all the energy you use. But before you can pay for it, it has to be measured. The person in the picture is reading a meter that measures the amount of electricity used." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/light-bulbs-wattage.jpg', caption: 'Light bulbs labeled with their wattage' }
-        ] }
+          { src: '/images/science/ch07/world-trade-center-night.jpg', caption: 'The World Trade Center, New York City' },
+          { src: '/images/science/ch07/reading-electric-meter.jpg', caption: 'Reading an electric meter' }
+        ] },
+        { type: 'p', text: "Electricity is used to do work. The more work a device does, the more electricity it uses. Also, the faster a device works, the more electricity it uses. The amount of work that is done in a certain period of time is called power. Small amounts of electric power are measured in units called {{watts}}. Large amounts of power are measured in kilowatts. A kilowatt is 1,000 watts." }
       ],
       [
-        { type: 'p', text: "Most electric devices have the number of watts they use printed on them. A 100-watt motor uses twice as much energy as a 50-watt motor in the same amount of time." },
-        { type: 'p', text: "Electric companies measure how much electricity a customer uses in {{kilowatt-hours}}. A kilowatt-hour is equal to 1,000 watts of electricity used for 1 hour. A 100-watt motor can run for 10 hours before it uses a kilowatt-hour of electricity. Meters measure the amount of electricity used in a building, showing how many kilowatt-hours were used — each kilowatt-hour costs a certain amount of money." },
+        { type: 'p', text: "Most electric devices have the number of watts they use printed on them. One motor may have 50 watts printed on it. Another motor may have 100 watts printed on it. The 100-watt motor uses twice as much energy as the 50-watt motor in the same amount of time. Look at the light bulbs in the picture. How many watts does each bulb use? Which one uses the most power?" },
+        { type: 'p', text: "Electric companies measure how much electricity a customer uses in {{kilowatt-hours}}. A kilowatt-hour is equal to 1,000 watts of electricity used for 1 hour. A 100-watt motor can run for 10 hours before it uses a kilowatt-hour of electricity. How long can a 50-watt light bulb burn before it uses a kilowatt-hour of electricity?" },
+        { type: 'p', text: "Meters measure the amount of electricity used in a building. Do you know where the meter is at your house? The meter shows how many kilowatt-hours of electricity were used in your home. Each kilowatt-hour costs a certain amount of money. Look at the picture of an electric bill. How many kilowatt-hours of electricity were used during the month? How much did the electricity cost?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch07/electric-bill.jpg', caption: 'An electric bill, showing kilowatt-hours used' },
-          { src: '/images/science/ch07/reading-electric-meter.jpg', caption: 'Reading an electric meter' }
+          { src: '/images/science/ch07/light-bulbs-wattage.jpg', caption: 'Light bulbs of different wattages' },
+          { src: '/images/science/ch07/electric-bill.jpg', caption: 'Electric bill' }
         ] }
       ],
       [
         { type: 'heading', text: 'Using Electricity Safely' },
-        { type: 'p', text: "Every building has safety devices to help keep electricity safe. {{Fuses}} and circuit breakers protect buildings against fire. Each circuit is made to handle a certain amount of electric current — if too many appliances are plugged into a circuit, the wires may become too hot, and fuses and circuit breakers help keep fires from starting." },
-        { type: 'p', text: "These two safety devices are made to break the circuit if the wires become too hot. A metal strip inside a fuse melts and the fuse blows, breaking the circuit. A special switch in a circuit breaker turns off to break the circuit. Electricity should not be allowed to flow again until the cause of the problem is found — the number of appliances on the circuit should be checked, since there may be too many, or something may be wrong with one of the appliances. Once the circuit has been checked, the current can be turned on again: a blown fuse can be replaced with a new one, or the switch on the circuit breaker can be turned back on." }
+        { type: 'p', text: "Every building has safety devices to help keep electricity safe. {{Fuses}} and circuit breakers protect buildings against fire. How do they do this? Each circuit is made to handle a certain amount of electric current. If too many appliances are plugged into a circuit, the wires may become too hot. When this happens, fuses and circuit breakers help to keep fires from starting." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/good-blown-fuse.jpg', caption: 'A good fuse and a blown fuse' },
+          { src: '/images/science/ch07/fuse-box.jpg', caption: 'Fuse box' },
+          { src: '/images/science/ch07/circuit-breakers.jpg', caption: 'Circuit breakers' }
+        ] },
+        { type: 'p', text: "These two safety devices are made to break the circuit if the wires become too hot. A metal strip inside a fuse melts and the fuse blows. This breaks the circuit. A special switch in a circuit breaker turns off to break the circuit." },
+        { type: 'p', text: "Electricity should not be allowed to flow again until the cause of the problem is found. The number of appliances on the circuit should be checked. There may be too many. There may also be something wrong with one of the appliances. When the circuit has been checked, the current can be turned on again. The blown fuse can be replaced with a new fuse. The switch on the circuit breaker can be turned on again." }
       ],
       [
-        { type: 'sidebar', text: "You too can help prevent electrical accidents. These simple rules will help protect you from harm: don't put anything except an electrical plug into an electrical outlet; don't touch any electric appliance while you are wet; don't use an electric appliance that has a frayed cord; don't run an electrical cord under a carpet; don't plug too many electric devices into one outlet; don't touch a fallen power line; don't fly a kite near power lines; and don't swim, play in an open field, or stand under a tree during a lightning storm." },
+        { type: 'sidebar', text: "You too can help prevent electrical accidents. The following simple rules will help protect you from harm: DON'T put anything except an electrical plug into an electrical outlet. DON'T touch any electric appliance while you are wet. DON'T use an electric appliance that has a frayed cord. DON'T run an electrical cord under a carpet. DON'T plug too many electric devices into one outlet. DON'T touch a fallen power line. DON'T fly a kite near power lines. DON'T swim, play in an open field, or stand under a tree during a lightning storm." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/safety-donts-outlet-toaster.jpg', caption: "Don't put anything but a plug into an outlet; don't touch an appliance while wet" },
+          { src: '/images/science/ch07/safety-donts-grid.jpg', caption: "Don't run a cord under a carpet, overload an outlet, or touch a fallen power line; don't fly a kite near power lines or stay outside during a lightning storm" }
+        ] }
+      ],
+      [
         { type: 'summary', text: "There are two kinds of electricity — static electricity and current electricity." },
         { type: 'summary', text: "Static electricity is an electric charge that does not move." },
         { type: 'summary', text: "Current electricity is the movement of electrons." },
@@ -1517,14 +1569,14 @@ export const scienceChapterText = {
             heading: 'Science Words',
             instructions: 'Identify each of the following.',
             items: [
-              { prompt: "It protects your home from fire, is made of glass and metal, and is small enough to hold in your hand. What is it?", answer: "a fuse" },
-              { prompt: "It is coiled and it glows. Electric current passes through it, and it sits inside a glass case. What is it?", answer: "a filament" },
-              { prompt: "It contains a chemical paste, and a carbon rod passes through the middle of it. Electricity is produced inside it. What is it?", answer: "a dry cell (electric cell)" }
+              { prompt: "It protects your home from fire. It is made of glass and metal. It is small enough to hold in your hand. What is it?", answer: "a fuse" },
+              { prompt: "It is coiled and it glows. Electric current passes through it. It is inside a glass case. What is it?", answer: "a filament" },
+              { prompt: "It contains a chemical paste. A carbon rod passes through the middle of it. Electricity is produced inside it. What is it?", answer: "a dry cell (electric cell)" }
             ]
           },
           {
             heading: 'Matching',
-            instructions: 'Write the term that best matches the definition.',
+            instructions: 'Write the letter of the term that best matches the definition. Not all the terms will be used.',
             items: [
               { prompt: "Unit for measuring small amounts of electric power", answer: "watt" },
               { prompt: "Circuit in which current can follow only one path", answer: "series circuit" },
@@ -1535,21 +1587,28 @@ export const scienceChapterText = {
               { prompt: "Circuit in which current can follow more than one path", answer: "parallel circuit" },
               { prompt: "Machine that changes energy of motion into electrical energy", answer: "generator" }
             ]
-          },
+          }
+        ] }
+      ],
+      [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch07/review-drawings-dry-cell-bulb.jpg', caption: 'Numbered drawings of a dry cell and a light bulb' }
+        ] },
+        { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Understanding Ideas',
             items: [
-              { prompt: "In a dry cell, which part is the positive pole and which is the negative pole?", answer: "The carbon rod is the positive pole; the zinc case is the negative pole." },
-              { prompt: "List all the electrical appliances you can find in your own home.", answer: "Answers will vary — look for lights, kitchen appliances, heating and cooling devices, and electronics." },
-              { prompt: "Explain how electrical energy is produced by a generator. How could you make a model of a generator?", answer: "A turbine spins a magnet inside a coil of wire; the moving magnetic field pushes electrons through the coil, producing an electric current." },
+              { prompt: "Write the correct term for each number in the drawings.", answer: "1. positive pole  2. negative pole  3. carbon rod  4. zinc case  5. chemical paste  6. dry cell  7. glass cover  8. filament  9. base" },
+              { prompt: "Look at the drawing of the house on page 171. List all the electrical appliances shown.", answer: "Answers will vary — look for lights, kitchen appliances, heating and cooling devices, and electronics shown in the house cutaway." },
+              { prompt: "Explain how electrical energy is produced by a generator. Describe how you could make a model of a generator.", answer: "A turbine spins a magnet inside a coil of wire; the moving magnetic field pushes electrons through the coil, producing an electric current." },
               { prompt: "Name five safety rules that should be followed when using electricity.", answer: "For example: never touch an appliance with wet hands, don't overload an outlet, keep cords away from carpets and heat, never touch a fallen power line, and replace frayed cords." }
             ]
           },
           {
             heading: 'Using Ideas',
             items: [
-              { prompt: "Look at an electric bill from your home. How many kilowatt-hours were used, and how much do you pay per kilowatt-hour?", answer: "Answers will vary depending on your household's electric bill." },
-              { prompt: "Do a safety survey of your home. Look for anything that doesn't follow the electrical safety rules, and discuss with your family how the hazards could be corrected.", answer: "Answers will vary depending on what you find at home." }
+              { prompt: "Look at the next electric bill you get at your house. How many kilowatt-hours did you use? How much do you have to pay for each kilowatt-hour?", answer: "Answers will vary depending on your household's electric bill." },
+              { prompt: "Do a survey of electrical safety in your home. Look for things that do not follow the safety rules found on page 176. Discuss with your family how the hazards can be corrected.", answer: "Answers will vary depending on what you find at home." }
             ]
           }
         ] }
@@ -1560,10 +1619,13 @@ export const scienceChapterText = {
     title: "Sources of Energy",
     pages: [
       [
+        { type: 'heading', text: 'Chapter 8 · Sources of Energy' },
         { type: 'p', text: "Think about how you used energy today. You used energy to get dressed — that energy came from the food you ate. Perhaps you rode to school in a bus or a car. Where do buses and cars get the energy to move?" },
-        { type: 'p', text: "A \"solar power tower\" is a modern device that uses the sun as a source of energy: many mirrors focus sunlight onto the tower, and the sunlight is used to produce electricity. The sun is one source of energy that people use, but the earth has other energy sources too. Some of these sources are plentiful but hard to collect; others are scarce. In this chapter you will learn about these energy sources and some of the problems involved in using them." },
+        { type: 'p', text: "The \"solar power tower\" in the picture is a modern device that uses the sun as a source of energy: the many mirrors focus sunlight onto the tower, and the sunlight is used to produce electricity. The sun is one source of energy that people use, but the earth has other energy sources too. Some of these sources are plentiful but hard to collect; others are scarce. In this chapter you will learn about these energy sources and some of the problems involved in using them." }
+      ],
+      [
         { type: 'image-group', images: [
-          { src: '/images/science/ch08/solar-power-tower.jpg', caption: 'A solar power tower, using mirrors to focus sunlight' }
+          { src: '/images/science/ch08/solar-power-tower.jpg', caption: 'A solar power tower, using mirrors to focus sunlight onto a central tower' }
         ] }
       ],
       [
@@ -1588,14 +1650,16 @@ export const scienceChapterText = {
         { type: 'p', text: "Most of our electricity comes from the heat of burning fossil fuels. Coal, for example, can be burned to heat water — when the water boils, it changes to steam, and the steam is forced against a fan-shaped turbine. The force of the steam turns the blades of the turbine, which is attached to a generator. As the turbine turns the generator, it produces electricity, and power lines carry that electricity to other places." },
         { type: 'image-group', images: [
           { src: '/images/science/ch08/coal-electricity-diagram.jpg', caption: 'How burning coal is used to produce electricity' }
-        ] }
+        ] },
+        { type: 'p', text: "Fossil fuels are used in many other ways too. Cars, trucks, planes, and trains all burn fossil fuels — the heat from burning them is changed into the energy of motion by engines. Factories burn fossil fuels to make their products. The table on the next page lists the main energy uses of fossil fuels." }
       ],
       [
-        { type: 'p', text: "Fossil fuels are used in many other ways too. Cars, trucks, planes, and trains all burn fossil fuels — the heat from burning them is changed into the energy of motion by engines. Factories also burn fossil fuels to make their products. Coal is mainly used for producing electricity, manufacturing (such as making steel), and home heating. Crude oil supplies gasoline for automobiles, diesel fuel for cars, trucks, and trains, jet fuel, and kerosene and oil for home heating. Natural gas is used for home heating, cooking, and as bottled gas for campers and outdoor grills." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/fossil-fuel-uses-table.jpg', caption: 'Energy uses of fossil fuels' }
+        ] },
         { type: 'p', text: "Supplies of fossil fuels are limited. Once they are used, they are gone forever — they cannot be replaced. The world will someday run out of this major energy source, so people must make wise use of fossil fuels." },
         { type: 'activity', text: "Finding out: Are you wasting energy? You can locate heat energy leaks at home and at school. Get a pencil, a piece of plastic wrap, and some transparent tape. Tape the plastic wrap along one side of the pencil so it hangs down about 15 cm — you have made an energy-leak finder. Test your classroom or a room at home for energy leaks by holding the finder where you think air might be leaking to the outside, such as around windows and doors. If there is a leak, the plastic wrap will move. Find out what could be done to prevent this waste of energy." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch08/fossil-fuel-uses-table.jpg', caption: 'Uses of coal, oil, and natural gas' },
           { src: '/images/science/ch08/energy-leak-finder.jpg', caption: 'Making an energy-leak finder for the activity' }
         ] }
       ],
@@ -1604,29 +1668,32 @@ export const scienceChapterText = {
         { type: 'p', text: "The second major source of energy used in the world is {{nuclear energy}}. You have learned that the atom is a small particle from which all matter is made, and that there is a nucleus at the center of every atom. The energy stored in the nucleus of an atom is called nuclear energy, and it has to be released before it can be used." },
         { type: 'p', text: "There are two ways to release the energy stored in an atom. The most common process is called {{fission}} — in nuclear fission, the nucleus of an atom is split, releasing energy. The atom most often used in fission is the uranium atom." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch08/nuclear-energy-diagram.jpg', caption: 'Nuclear fission, splitting the nucleus of an atom' }
+          { src: '/images/science/ch08/nuclear-power-plant.jpg', caption: 'Nuclear power plant' }
         ] }
       ],
       [
         { type: 'p', text: "The other process used to release the energy stored in an atom is called {{fusion}}. Fusion is the opposite of fission: in nuclear fusion, the nuclei of atoms are combined, releasing energy. In both fission and fusion, large amounts of energy are released." },
         { type: 'p', text: "The most important use of nuclear energy today is to produce electricity. Fission is the process used to produce this energy. It takes place in a special structure called a nuclear reactor, where the large amounts of heat energy that result from fission are controlled. In nuclear power plants, the heat from fission is used to change water into steam — just as in coal-burning power plants, the steam turns a turbine that is attached to a generator, which produces electricity." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch08/nuclear-test-reactor.jpg', caption: 'A nuclear reactor' }
+          { src: '/images/science/ch08/nuclear-energy-diagram.jpg', caption: 'How nuclear energy is used to produce electricity' }
         ] }
       ],
       [
-        { type: 'p', text: "Fusion is not used today to produce useful energy, because scientists have not yet learned to control the great amount of energy it releases. Although fusion cannot yet be controlled, almost all the energy on the earth comes from fusion, because the sun is the source of most of the earth's energy, and the sun produces energy through fusion." },
-        { type: 'p', text: "Nuclear energy is one way to meet the world's energy needs. People who favor using nuclear energy say it helps save fossil fuels — in fact, just 1 gram of uranium produces as much energy as 3 metric tons of coal or 14 barrels of oil. Supporters also say it is clean energy, since it does not release harmful smoke into the air the way burning coal does." },
+        { type: 'p', text: "Fusion is not used today to produce useful energy. This is because scientists have not yet learned to control the great amount of energy released from fusion." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/nuclear-test-reactor.jpg', caption: 'Nuclear test reactor' }
+        ] },
+        { type: 'p', text: "Although fusion cannot be controlled, almost all the energy on the earth comes from fusion, because the sun is the source of most of the earth's energy, and the sun produces energy through fusion." },
+        { type: 'p', text: "Nuclear energy is one way to meet the world's energy needs — some people think its benefits outweigh its problems. People who favor using nuclear energy say it helps save fossil fuels." }
+      ],
+      [
         { type: 'image-group', images: [
           { src: '/images/science/ch08/uranium-coal-oil-comparison.jpg', caption: 'How much energy a gram of uranium produces, compared to coal and oil' }
-        ] }
-      ],
-      [
+        ] },
+        { type: 'p', text: "Electricity can be produced by using a lot less uranium than by using either coal or oil. In fact, just 1 gram of uranium produces as much energy as 3 metric tons of coal or 14 barrels of oil." },
+        { type: 'p', text: "Supporters of nuclear energy also say that it is clean energy: it does not release harmful smoke into the air, as happens when coal is burned." },
         { type: 'p', text: "But other people point to the problems of using nuclear energy. The fuel used inside these power plants gives off radiation — the release of energy and particles from atoms — which can harm living things, and some people fear that radiation inside power plants might leak to the outside." },
-        { type: 'p', text: "Another problem is where to put the wastes from nuclear reactors. Some of these wastes give off harmful radiation for hundreds of years, so getting rid of them safely is important, and scientists are still looking for ways to do this." },
-        { type: 'image-group', images: [
-          { src: '/images/science/ch08/nuclear-power-plant.jpg', caption: 'A nuclear power plant' }
-        ] }
+        { type: 'p', text: "Another problem is where to put the wastes from nuclear reactors. Some of these wastes give off harmful radiation for hundreds of years, so getting rid of them safely is important, and scientists are still looking for ways to do this." }
       ],
       [
         { type: 'heading', text: 'Energy from the Sun' },
@@ -1684,32 +1751,57 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Energy from Heat in the Earth' },
         { type: 'p', text: "Almost all energy on the earth comes from solar energy, but there is also an energy source deep inside the earth, called {{geothermal energy}} — energy from natural heat trapped beneath the earth's surface. This heat melts rock inside the earth, forming magma. In some places the magma comes close to the earth's surface and collects in areas called hot spots — these are areas of geothermal energy." },
-        { type: 'p', text: "When water in the ground comes into contact with a hot spot, it turns to steam. By drilling wells into the earth at hot spots, this steam can be released and used to turn turbines that run generators. In some places, steam and hot water reach the surface without drilling, moving up through deep cracks in the rock — when they gush out of the ground on their own, this is called a geyser." },
+        { type: 'p', text: "How can geothermal energy be used to produce electricity? When water in the ground comes into contact with a hot spot, it turns to steam. By drilling wells into the earth at hot spots, this steam can be released." },
         { type: 'image-group', images: [
           { src: '/images/science/ch08/geothermal-energy-diagram.jpg', caption: 'How geothermal energy is used to produce electricity' }
         ] }
       ],
       [
-        { type: 'p', text: "The largest geothermal power plant in the world, called The Geysers, is located in California, and it supplies enough electricity to run a large city. But there are problems with geothermal energy: many areas of geothermal energy are far from any large towns or cities, so electricity produced there would have to be carried great distances, which can be very costly." },
-        { type: 'heading', text: 'Energy from the Wind' },
-        { type: 'p', text: "The wind has been used as a source of energy for more than a thousand years. Wind energy is the energy of moving air — long ago people used windmills to grind wheat into flour, and today windmills are being used to make electricity." }
+        { type: 'p', text: "The released steam can be used to turn turbines that run generators." },
+        { type: 'p', text: "In some places, steam and hot water reach the surface without drilling — there are deep cracks in rock inside the earth through which the steam and hot water can move, and when they reach the surface, they may gush out of the ground on their own. This is called a geyser. You can see one geyser, Old Faithful, in the picture." },
+        { type: 'p', text: "The geothermal power plant in the picture is the largest in the world. This plant, called The Geysers, is located in California, and it supplies enough electricity to run a large city. There are plans to expand The Geysers." },
+        { type: 'p', text: "But there are problems with geothermal energy: many areas of geothermal energy are far from any large towns or cities, so electricity produced there would have to be carried great distances, which can be very costly." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/geyser-old-faithful.jpg', caption: 'A geyser — Old Faithful' },
+          { src: '/images/science/ch08/geothermal-power-plant.jpg', caption: 'Geothermal power plant' }
+        ] }
       ],
       [
+        { type: 'heading', text: 'Energy from the Wind' },
+        { type: 'p', text: "The wind has been used as a source of energy for more than a thousand years. Wind energy is the energy of moving air — long ago people used windmills to grind wheat into flour, and today windmills are being used to make electricity." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/old-windmill.jpg', caption: 'Old windmill used for grinding wheat' }
+        ] },
         { type: 'p', text: "Modern windmills look different from windmills of long ago, but they work in much the same way: the wind turns blades at the top of the windmill, and the blades are connected to a generator that produces electricity. This device is often called a wind turbine." },
         { type: 'p', text: "The high cost of other energy sources has made windmills popular in some places, but there are problems with wind energy too. One is that there aren't many places where the wind blows strong and steady. Another is the high cost of building and fixing windmills. So energy from the wind is not likely to do much to help meet the world's future energy needs." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/modern-wind-turbine.jpg', caption: 'Modern wind turbine' }
+        ] }
+      ],
+      [
         { type: 'activity', text: "Can the wind make electricity where you live? Materials: nylon thread (20 cm), a Ping-Pong ball, transparent tape, a colored marking pen, a protractor, a cardboard strip. Procedure: Tape one end of the thread to the ball, color the thread so it's easier to see, and tape the other end to the center of a protractor, with a cardboard strip taped on as a handle — you've made a device to measure wind speed. Take it outdoors and hold the protractor level with the ground; when the wind blows the ball, the thread will line up with a mark on the protractor. Use a table converting mark number to wind speed (in km/h) to read the wind speed. Take readings several times a day for 4–5 days and record your findings. A wind turbine needs a wind speed of 13 km/h or over to produce electricity. Conclusion: Is there enough wind to make electricity where you live? What effect would the steadiness of the wind have on a wind turbine's ability to produce electricity?" }
       ],
       [
         { type: 'heading', text: 'Energy from Living Things' },
         { type: 'p', text: "Millions of years must pass before the remains of living things become fossil fuels. Today scientists are looking for ways to change plant and animal matter directly into energy. Plant and animal matter is called {{biomass}}, and the process of changing biomass into usable energy is called bioconversion." },
-        { type: 'p', text: "A campfire is a simple example of bioconversion — wood is the biomass that is changed to produce energy. Many people heat their homes with wood-burning stoves, saving money since oil and natural gas are so costly." }
+        { type: 'p', text: "A campfire is a simple example of bioconversion — wood is the biomass that is changed to produce energy. In recent years many people in the United States have bought wood-burning stoves, and use them to heat their homes. People save money by using wood as a fuel, since oil and natural gas are so costly." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/wood-burning-stove.jpg', caption: 'Wood-burning stove used to heat a home' }
+        ] }
       ],
       [
         { type: 'p', text: "There is also biomass in the trash people throw away. In the United States, the average person produces more than 1 kg of trash each day, and much of it can be burned to make heat — this heat can be used to change water into steam, which can run generators. Bioconversion of trash helps in two ways: it produces useful energy from low-cost fuel, and it gets rid of unwanted materials." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/bioconversion-power-plant.jpg', caption: 'Bioconversion power plant' }
+        ] },
         { type: 'p', text: "Trash containing dead plant and animal matter can be used to make energy in another way too. Tiny living things called bacteria can use the biomass in trash as a source of food, and in the process they produce a fuel called methane gas, which can be burned for heat energy." },
-        { type: 'p', text: "There is yet another way plants can supply energy: alcohol is added to gasoline to help stretch the fuel supply, making a gasoline-and-alcohol mixture called gasohol. The alcohol comes from a process in which corn and yeast are mixed — yeasts are tiny nongreen plants that use the sugar stored in corn as food, and as they do, they produce alcohol." }
+        { type: 'p', text: "There is yet another way plants can supply energy: alcohol is added to gasoline to help stretch the fuel supply, making a gasoline-and-alcohol mixture called gasohol. The alcohol comes from a process in which corn and yeast are mixed — yeasts are tiny nongreen plants that use the sugar stored in corn as food, and as they do, they produce alcohol." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch08/gasohol-pump.jpg', caption: 'Gasohol — a gasoline-and-alcohol mixture' }
+        ] }
       ],
       [
+        { type: 'p', text: "You can see that there are many ways in which living things and the remains of living things help supply energy." },
         { type: 'summary', text: "A fossil fuel is a fuel that forms from the remains of dead plants and animals." },
         { type: 'summary', text: "Fission and fusion are processes used to release the nuclear energy of atoms." },
         { type: 'summary', text: "Solar energy can be used to heat buildings and produce electricity." },
@@ -1746,7 +1838,11 @@ export const scienceChapterText = {
               { prompt: "Daily movement of the water level along the shore", answer: "tides" },
               { prompt: "Energy from the sun", answer: "solar energy" }
             ]
-          },
+          }
+        ] }
+      ],
+      [
+        { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Understanding Ideas',
             items: [
@@ -2423,8 +2519,12 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Chapter 12 · Beyond the Solar System' },
         { type: 'p', text: "Have you ever looked into the night sky and wondered how far it is to the edge of space? On a clear night you can see thousands of stars. Are there any stars so far away you cannot see them?" },
-        { type: 'p', text: "People have always been interested in space. Scientists are trying to find out what lies beyond the solar system, and they are also interested in finding out how far space extends." },
-        { type: 'p', text: "In this chapter you will see how to measure distances to objects in space. You will learn about the life cycle of a star. You will also find out how stars are grouped in patterns." }
+        { type: 'p', text: "People have always been interested in space. What do you think this picture shows? It is a cloud of dust and gas in space. Scientists think it was left when a star exploded in the year 1054." },
+        { type: 'p', text: "Objects like this are of great interest to people who study space. Scientists are trying to find out what lies beyond the solar system. They are also interested in finding out how far space extends." },
+        { type: 'p', text: "In this chapter you will see how to measure distances to objects in space. You will learn about the life cycle of a star. You will also find out how stars are grouped in patterns." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/crab-nebula-opener.jpg', caption: 'A cloud of dust and gas left by a star that exploded in the year 1054' }
+        ] }
       ],
       [
         { type: 'heading', text: 'Distances in Space' },
@@ -2443,16 +2543,19 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'p', text: "For centuries people have wondered about the size of the universe. The universe includes all of space and all the matter and energy in it. People have wondered how far out space goes, and where — and even if — it ends." },
-        { type: 'p', text: "The study of the universe and all the objects in it is a science called astronomy. Astronomy includes the study of stars, planets, moons, and other objects in space. It is one of the oldest sciences. Scientists who study the universe are called astronomers. The Italian astronomer Galileo was one of the first people to study the sky with a telescope, in the early 1600s." },
+        { type: 'p', text: "For centuries people have wondered about the size of the universe. The universe includes all of space and all the matter and energy in it. People have wondered how far out space goes. They have wondered where it ends, and even if it ends." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/galileo-telescope.jpg', caption: 'Galileo, one of the first astronomers to study the sky with a telescope' },
-          { src: '/images/science/ch12/sacramento-peak-observatory.jpg', caption: 'An observatory used by astronomers today' }
-        ] }
+          { src: '/images/science/ch12/galileo-telescope.jpg', caption: 'Astronomer looking through telescope' }
+        ] },
+        { type: 'p', text: "The study of the universe and all the objects in it is a science called astronomy. Astronomy includes the study of stars, planets, moons, and other objects in space. It is one of the oldest sciences. Scientists who study the universe are called astronomers." },
+        { type: 'p', text: "In the picture above, the Italian astronomer Galileo is shown with his telescope. The scene may have occurred in the early 1600s. A modern telescope is shown on page 287." }
       ],
       [
-        { type: 'p', text: "You have learned that distances between certain bodies in the universe are very great. How do astronomers work with such great distances? Units such as meters and kilometers are used to measure much shorter distances — a larger unit is needed to measure distances in space." },
-        { type: 'p', text: "Astronomers use the speed of light in measuring distances in space. Light travels great distances in a short time — for example, light from the sun reaches the earth in about 8 minutes. Light travels 300,000 km in 1 second, which is equal to 1,080,000,000 km/h. That is more than 10 million times faster than a car on a highway." }
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/sacramento-peak-observatory.jpg', caption: 'Sacramento Peak Observatory' }
+        ] },
+        { type: 'p', text: "You have learned that distances between certain bodies in the universe are very great. How do astronomers work with such great distances? Units such as meters and kilometers are used to measure much shorter distances. A larger unit is needed to measure distances in space." },
+        { type: 'p', text: "Astronomers use the speed of light in measuring distances in space. Light travels great distances in a short time. For example, light from the sun reaches the earth in about 8 minutes. Light travels 300,000 km in 1 second (km/s), which is equal to 1,080,000,000 km/h. How much faster is this than a car on a highway? To find out, divide 1,080,000,000 by 100, which is about the speed of a car on a highway (100 km/h)." }
       ],
       [
         { type: 'p', text: "Astronomers decided to use 1 year as their time period. First they found the number of seconds in 1 year, then multiplied this number by 300,000 km. They found that the distance light travels in 1 year is 9.5 trillion km. The distance that light travels in 1 year is known as a light-year. Astronomers use this very large unit of distance to measure distances in space." },
@@ -2489,24 +2592,24 @@ export const scienceChapterText = {
         { type: 'p', text: "What is the life cycle of a star? You may be surprised to know that stars have a life cycle. New stars are being \"born\" and old stars are \"dying.\" Of course, the life and death of a star does not happen overnight — changes in stars take place over billions of years." },
         { type: 'p', text: "A star is formed from dust and gas in space. A cloud of dust and gas found in space is called a nebula. The dust and gas in such a cloud come together because of gravitational attraction — a tremendous amount of matter must collect for a new star to form, as much as there is in the sun. As the matter in the nebula presses together, it gets hot, and when enough matter has come together and the temperature is high enough, a new star is \"born.\"" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/horsehead-nebula.jpg', caption: 'The Horsehead Nebula, a cloud of dust and gas' },
-          { src: '/images/science/ch12/starfield-nebula.jpg', caption: 'A nebula, where new stars form' }
+          { src: '/images/science/ch12/horsehead-nebula.jpg', caption: 'Horsehead Nebula' },
+          { src: '/images/science/ch12/star-life-cycle-panel-1-3.jpg', caption: 'The life cycle of a star: 1. nebula, 2. young star, 3. middle-aged star' }
         ] }
       ],
       [
         { type: 'p', text: "When a star first forms, it has a red glow — in this stage the star is large and cool, and the matter of the star continues to come together. When a star is \"middle-aged,\" it may be blue, white, yellow, or red, depending on its temperature, which in turn depends on how much matter has collected: the more matter, the hotter the star. A hot, blue star forms when a great deal of matter collects; a cool, red star forms when a smaller amount collects. The sun is a yellow star — larger and hotter than a red star, but smaller and cooler than a blue star." },
         { type: 'p', text: "A star beginning \"old age\" often swells up to form a red giant, a star many times larger than the sun but with a lower temperature. Some scientists believe that the sun will enter this stage millions of years from now." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/star-life-cycle-panel-1-3.jpg', caption: 'The early stages of a star\'s life cycle' }
+          { src: '/images/science/ch12/star-life-cycle-sun-comparison.jpg', caption: 'The life cycle of a star: sun compared to a red giant' },
+          { src: '/images/science/ch12/star-life-cycle-panel-4-6.jpg', caption: 'The life cycle of a star: 4. red giant, 5. white dwarf, 6. black dwarf' }
         ] }
       ],
       [
         { type: 'p', text: "After a while, a red giant begins to collapse into a smaller star. It becomes hotter and appears white in color — a small star in this stage is called a white dwarf. It may be about as large as the earth, and because it is small, a white dwarf does not appear bright." },
         { type: 'p', text: "Once most of a star's fuel is gone, it enters the last stage of its life and becomes a black dwarf. In this stage the star has no heat or light — it is a cold, dense object in space." },
-        { type: 'p', text: "Not all stars follow these stages. Stars that collapse into the white dwarf stage sometimes explode and become very bright — an exploding star of this type is called a nova. After the explosion, the star will slowly shrink and grow dim. Sometimes a very large star may explode violently, and this is called a supernova." },
+        { type: 'p', text: "Not all stars follow these stages. Stars that collapse into the white dwarf stage sometimes explode and become very bright — an exploding star of this type is called a nova. After the explosion, the star will slowly shrink and grow dim. Sometimes a very large star may explode violently, and this is called a supernova. The Crab Nebula shown at the start of this chapter is a supernova." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/star-life-cycle-panel-4-6.jpg', caption: 'The later stages of a star\'s life cycle' },
-          { src: '/images/science/ch12/star-life-cycle-sun-comparison.jpg', caption: 'Comparing the sun\'s size to other stages of a star\'s life' }
+          { src: '/images/science/ch12/supernova-neutron-star.jpg', caption: 'Supernova (left) and neutron star (right)' }
         ] }
       ],
       [
@@ -2514,26 +2617,34 @@ export const scienceChapterText = {
         { type: 'p', text: "Stars that explode into supernovas sometimes collapse into very dense stars called neutron stars. A neutron star is much smaller than a white dwarf, even though it has more matter packed into it." },
         { type: 'p', text: "Some scientists think that the gravitational pull of a neutron star can be so great that the star disappears. When this happens, a black hole forms. A black hole is a region in space that was once occupied by a star. Some people believe that the gravity of a black hole is so great that not even light can escape." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/black-hole-drawing.jpg', caption: 'A black hole' },
-          { src: '/images/science/ch12/supernova-neutron-star.jpg', caption: 'A supernova collapsing into a neutron star' }
+          { src: '/images/science/ch12/black-hole-drawing.jpg', caption: 'A black hole' }
         ] }
       ],
       [
         { type: 'heading', text: 'Families of Stars' },
-        { type: 'p', text: "What are the shapes of galaxies? There is gravity everywhere in the universe — each body in space attracts every other body. Because of gravity, no bodies are all alone in space; instead, bodies in space collect in families. The sun is one of billions of stars that form the family called the Milky Way. A large group of stars and other bodies in space is called a galaxy. The Milky Way is a spiral galaxy, a type shaped like a flat disk, or wheel, with curved arms coming out from the center." },
-        { type: 'p', text: "The Milky Way is about 100,000 light-years from edge to edge. The solar system is about one third of the way from the outer edge of the Milky Way, and the sun is believed to be one of about 200 billion stars in it." },
+        { type: 'p', text: "What are the shapes of galaxies? By this time you probably know that there is gravity everywhere in the universe. Each body in space attracts every other body. Because of gravity, no bodies are all alone in space — instead, bodies in space collect in families. The sun is one of billions of stars that form the family called the Milky Way. A large group of stars and other bodies in space is called a galaxy. The Milky Way is a spiral galaxy — this type of galaxy is shaped like a flat disk, or wheel, with curved arms coming out from the center." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/milky-way-spiral-diagram.jpg', caption: 'The Milky Way, a spiral galaxy' },
-          { src: '/images/science/ch12/spiral-galaxy-photo.jpg', caption: 'A spiral galaxy' }
+          { src: '/images/science/ch12/milky-way-spiral-diagram.jpg', caption: 'The Milky Way, a spiral galaxy' }
         ] }
       ],
       [
-        { type: 'p', text: "Many scientists believe that all the objects in the Milky Way revolve around its center — meaning the sun and its planets are moving around the center of the galaxy. The Milky Way is so large that it takes the sun 250 million years to go once around." },
-        { type: 'p', text: "All galaxies are not spiral-shaped. An elliptical galaxy is like a spiral one, but it does not have arms — there are more elliptical galaxies than spiral galaxies, but they are not as large or as bright, and most of their stars are very old. An irregular galaxy does not have a definite shape or size; some scientists believe this type of galaxy may have formed when two or more galaxies bumped into one another." },
-        { type: 'p', text: "Many astronomers believe that entire galaxies are moving, toward the outer edges of the universe, and that galaxies seem to be moving away from each other. The belief that galaxies are moving is part of a theory that suggests the universe is expanding. No one seems to know why the universe is expanding, or whether it will ever stop." },
+        { type: 'p', text: "The Milky Way is about 100,000 light-years from edge to edge. The solar system is about one third of the way from the outer edge of the Milky Way. The sun is believed to be one of about 200 billion stars in the Milky Way. Can you find the sun in the drawing of the Milky Way?" },
+        { type: 'p', text: "Many scientists believe that all the objects in the Milky Way revolve around its center. This means that the sun and its planets are moving around the center of the Milky Way. The Milky Way is so large that it takes the sun 250 million years to go once around. It is possible that the sun is just now returning to the place where it was before dinosaurs were on the earth." }
+      ],
+      [
+        { type: 'p', text: "All galaxies are not spiral-shaped. Two other types of galaxies have been discovered. One of these is the elliptical galaxy. An elliptical galaxy is like a spiral one, but it does not have arms. There are more elliptical galaxies than spiral galaxies. But the elliptical galaxies are not as large or as bright. Most of the stars in elliptical galaxies are very old." },
+        { type: 'p', text: "Another kind of galaxy is called an irregular galaxy. An irregular galaxy does not have a definite shape or size. Some scientists believe that this type of galaxy may have formed when two or more galaxies bumped into one another." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/elliptical-spiral-galaxies.jpg', caption: 'Elliptical and spiral galaxies compared' },
-          { src: '/images/science/ch12/movement-of-galaxies.jpg', caption: 'Galaxies moving apart as the universe expands' }
+          { src: '/images/science/ch12/elliptical-spiral-galaxies.jpg', caption: 'Elliptical galaxy (top); spiral galaxy (bottom)' }
+        ] }
+      ],
+      [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/spiral-galaxy-photo.jpg', caption: 'Spiral galaxy' }
+        ] },
+        { type: 'p', text: "Many astronomers believe that entire galaxies are moving. They think that galaxies are moving toward the outer edges of the universe. The galaxies seem to be moving away from each other. The belief that galaxies are moving is part of a theory that suggests that the universe is expanding. No one seems to know why the universe is expanding. No one knows if it will ever stop expanding. What is your theory about the universe?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/movement-of-galaxies.jpg', caption: 'Movement of galaxies' }
         ] }
       ],
       [
