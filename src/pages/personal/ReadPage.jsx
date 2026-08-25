@@ -329,6 +329,17 @@ export default function ReadPage() {
               localStorage.setItem(completedStorageKey, JSON.stringify(arr));
             } catch {}
           }
+        } else {
+          // If Firebase has no record yet, upload existing local storage pages to Firebase
+          try {
+            const saved = localStorage.getItem(completedStorageKey);
+            if (saved) {
+              const localArr = JSON.parse(saved);
+              if (Array.isArray(localArr) && localArr.length > 0) {
+                set(completedRef, localArr).catch(() => {});
+              }
+            }
+          } catch {}
         }
       }, (err) => {
         console.warn('Firebase completedPages listener error:', err);
