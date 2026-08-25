@@ -20,8 +20,10 @@ export const scienceChapterText = {
     pages: [
       [
         { type: 'heading', text: 'Chapter 1 · Activities of Green Plants' },
-        { type: 'p', text: "In the spring the weather becomes warm, and green plants begin to grow from the soil. In a few weeks many plants produce beautifully colored flowers. Flowers do more than add beauty to the world — they are an important part of the plant. Without flowers, many plants could not produce more of their kind." },
-        { type: 'p', text: "Producing new plants is one special activity that green plants {{carry out}}. What are some other special activities of green plants? How do the parts of green plants help them {{carry out}} these activities? You will {{find out}} in this chapter." },
+        { type: 'p', text: "In the spring the weather becomes warm, and green plants begin to grow from the soil. In a few weeks many plants produce beautifully colored flowers. The picture shows the stages in the opening of a daffodil flower. Flowers do more than add beauty to the world — they are an important part of the plant. Without flowers, many plants could not produce more of their kind." },
+        { type: 'p', text: "Producing new plants is one special activity that green plants {{carry out}}. What are some other special activities of green plants? How do the parts of green plants help them {{carry out}} these activities? You will {{find out}} in this chapter." }
+      ],
+      [
         { type: 'image-group', images: [
           { src: '/images/science/ch01/daffodil-shoots.jpg', caption: 'Daffodil shoots coming up in spring' }
         ] }

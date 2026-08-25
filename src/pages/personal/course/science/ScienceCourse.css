@@ -200,7 +200,7 @@
 }
 
 .science-image-item {
-  flex: 1 1 180px;
+  flex: 1 1 260px;
   max-width: 100%;
   margin: 0;
 }
@@ -208,8 +208,11 @@
 .science-image-item img {
   width: 100%;
   height: auto;
+  max-height: 320px;
+  object-fit: contain;
   border-radius: var(--radius-md);
   display: block;
+  margin: 0 auto;
 }
 
 .science-image-item figcaption {
@@ -217,6 +220,54 @@
   color: var(--text-muted);
   margin-top: 4px;
   text-align: center;
+}
+
+/* A single image in its group is shown big and full-width, like the
+   book's own plate, instead of being squeezed to a small flex column. */
+.science-image-group--solo .science-image-item {
+  flex-basis: 100%;
+}
+
+.science-image-group--solo .science-image-item img {
+  max-height: 480px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+/* A page whose only content is one image (the book's full-bleed plate
+   pages, e.g. a chapter-opener photo with no body text) gets the most
+   prominent, chrome-free treatment. */
+.science-image-group--page {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 12px;
+}
+
+.science-image-group--page .science-image-item img {
+  max-height: 62vh;
+  width: auto;
+  max-width: 100%;
+  border-radius: var(--radius-lg, 16px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+}
+
+.science-image-group--page .science-image-item figcaption {
+  font-size: var(--font-sm);
+  margin-top: 14px;
+}
+
+@media (max-width: 640px) {
+  .science-image-group--solo .science-image-item img {
+    max-height: 320px;
+  }
+  .science-image-group--page {
+    min-height: 38vh;
+  }
+  .science-image-group--page .science-image-item img {
+    max-height: 48vh;
+  }
 }
 
 /* CourseLayout.css's shared .course-lesson-practice-btn has no :disabled

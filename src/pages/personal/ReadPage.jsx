@@ -742,8 +742,15 @@ export default function ReadPage() {
             }
 
             if (block.type === 'image-group') {
+              const isSolo = block.images.length === 1;
+              const isPageHero = isSolo && page.length === 1;
+              const groupClassName = [
+                'read-image-group',
+                isSolo && 'read-image-group--solo',
+                isPageHero && 'read-image-group--page',
+              ].filter(Boolean).join(' ');
               return (
-                <div className="read-image-group" key={blockIdx}>
+                <div className={groupClassName} key={blockIdx}>
                   {block.images.map((img, imgIdx) => (
                     <figure
                       className="read-image-item read-image-clickable"

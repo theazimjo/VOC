@@ -104,10 +104,17 @@ function WordTokens({ text, onWordTap, knownWords, startIndex = 0, activeWordInd
   });
 }
 
-function ScienceBlock({ block, startIndex, onWordTap, knownWords, recentWords, activeWordIndex, passedWordIndices, selectedWordIdx }) {
+function ScienceBlock({ block, startIndex, onWordTap, knownWords, recentWords, activeWordIndex, passedWordIndices, selectedWordIdx, isOnlyBlock }) {
   if (block.type === 'image-group') {
+    const isSolo = block.images.length === 1;
+    const isPageHero = isSolo && isOnlyBlock;
+    const groupClassName = [
+      'science-image-group',
+      isSolo && 'science-image-group--solo',
+      isPageHero && 'science-image-group--page',
+    ].filter(Boolean).join(' ');
     return (
-      <div className="science-image-group">
+      <div className={groupClassName}>
         {block.images.map((img, i) => (
           <figure className="science-image-item" key={i}>
             <img src={img.src} alt={img.caption || ''} loading="lazy" />
@@ -347,6 +354,7 @@ export default function ScienceReadingPages({ pack, topic, batch, onDone }) {
                 activeWordIndex={activeWordIndex}
                 passedWordIndices={passedWordIndices}
                 selectedWordIdx={selectedWordIdx}
+                isOnlyBlock={page.length === 1}
               />
             );
           })}

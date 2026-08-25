@@ -487,6 +487,54 @@
   text-align: center;
 }
 
+/* A single image in its group is shown big and uncropped, like the book's
+   full-width plate — not squeezed into the same small thumbnail as a
+   multi-photo row. */
+.read-image-group--solo {
+  margin: 20px 0 32px;
+}
+
+.read-image-group--solo .read-image-item {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+.read-image-group--solo .read-image-item img {
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  background: var(--reader-bg);
+}
+
+/* A page whose only content is one image (the book's full-bleed plate
+   pages, e.g. a chapter-opener photo with no body text) gets the most
+   prominent, chrome-free treatment. */
+.read-image-group--page {
+  margin: 8px 0 12px;
+  min-height: 52vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.read-image-group--page .read-image-item {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+}
+
+.read-image-group--page .read-image-item img {
+  max-height: 66vh;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+}
+
+.read-image-group--page .read-image-item figcaption {
+  padding-top: 16px;
+  font-size: 0.95rem;
+}
+
 /* ========== FLOATING SIDE NAV ARROWS ========== */
 .read-side-arrow {
   position: fixed;
@@ -867,6 +915,15 @@
   }
   .read-image-item img {
     height: 160px;
+  }
+  .read-image-group--solo .read-image-item img {
+    max-height: 320px;
+  }
+  .read-image-group--page {
+    min-height: 40vh;
+  }
+  .read-image-group--page .read-image-item img {
+    max-height: 52vh;
   }
 
   .read-footer {
