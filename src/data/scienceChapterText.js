@@ -257,20 +257,17 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'p', text: "For a few minutes make a list of all the animals you can think of. How many animals did you think of? There are many different kinds of animals." },
-        { type: 'p', text: "Did you think of a dog, a cat, and a horse? You probably did. The chances are you did not include a sponge, a clam, or an earthworm — but these are animals, too." },
-        { type: 'p', text: "Think of a way to divide your list of animals into groups. For example, you could group all large animals together and all small animals together, or group all fast animals and all slow animals together. Putting animals into groups is one way to sort them out, and it makes them easier to study." }
-      ],
-      [
         { type: 'heading', text: "Classifying Living Things" },
-        { type: 'p', text: "How do scientists classify animals? Scientists who study animals classify, or group, them. To classify is to arrange living things into groups by features that are alike. Scientists classify animals by structure — the structure of an animal is the kind of body parts it has and the way these parts are arranged." },
-        { type: 'p', text: "One structure scientists look for in classifying animals is the backbone. The backbone is made up of many small bones called vertebrae, which are linked together to form the backbone." },
+        { type: 'p', text: "How do scientists classify animals? For a few minutes make a list of all the animals you can think of. How many animals did you think of? There are many different kinds of animals." },
+        { type: 'p', text: "Did you think of a dog, a cat, and a horse? You probably did. The chances are you did not include a sponge, a clam, or an earthworm — but these are animals, too." },
+        { type: 'p', text: "Think of a way to divide your list of animals into groups. For example, you could group all large animals together and all small animals together, or group all fast animals and all slow animals together. Putting animals into groups is one way to sort them out, and it makes them easier to study." },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/gannet.jpg', caption: 'Gannet' },
           { src: '/images/science/ch02/garden-spider.jpg', caption: 'Garden spider' }
         ] }
       ],
       [
+        { type: 'p', text: "Scientists who study animals classify, or group, them. To classify is to arrange living things into groups by features that are alike. Scientists classify animals by structure — the structure of an animal is the kind of body parts it has and the way these parts are arranged. One structure scientists look for in classifying animals is the backbone. The backbone is made up of many small bones called vertebrae, which are linked together to form the backbone." },
         { type: 'p', text: "Some animals have a backbone and some do not. Scientists have classified all animals into two large groups: one group is made up of animals with a backbone, and an animal with a backbone is called a vertebrate. The other group is made up of animals without a backbone, and an animal without a backbone is called an invertebrate. In this chapter you will learn about invertebrates." },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/zebras-wildebeests.jpg', caption: 'Zebras, wildebeests, and springboks' },
@@ -282,16 +279,14 @@ export const scienceChapterText = {
         { type: 'heading', text: "Animals With Many Cells but No Backbone" },
         { type: 'p', text: "What do you think of when you hear the word sponge? You may think of a pink or blue pad used to clean dishes — that kind of sponge is made by people. But a sponge is also an animal. A sponge is an invertebrate that has many cells. Almost all sponges live in oceans, though a few live in freshwater streams and lakes." },
         { type: 'p', text: "Sponges do not have many of the parts we usually think of as animal parts. Most animals move about, but adult sponges stay in one place — they are found attached to rocks or other objects at the bottom of the ocean. In fact, for many years scientists thought sponges were plants." },
+        { type: 'p', text: "The structure of a sponge is simple. Its body is full of small holes called pores, which are connected to one another by narrow canals." },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/orange-sponge.jpg', caption: 'Orange sponge, off the northeast coast of the United States' }
         ] }
       ],
       [
-        { type: 'p', text: "The structure of a sponge is simple. Its body is full of small holes called pores, which are connected to one another by narrow canals." },
         { type: 'p', text: "Special cells line the canals inside the sponge. Each cell has a threadlike part that whips back and forth, and the movement of these threads sends water through the body of the sponge. The water that passes through the sponge carries food and oxygen — cells inside the sponge {{break down}} the food, and the oxygen is used to release the energy in it." },
-        { type: 'p', text: "Sponges have many different shapes — some are shaped like cups, some like fans, and others like vases. The shape of a sponge depends on its skeleton, which is the structure that supports the body of an animal." }
-      ],
-      [
+        { type: 'p', text: "Sponges have many different shapes — some are shaped like cups, some like fans, and others like vases. The shape of a sponge depends on its skeleton, which is the structure that supports the body of an animal." },
         { type: 'p', text: "The skeleton of some sponges is made of hard material, but other sponges are made of soft material. This soft skeleton is sometimes used in the home as a cleaning or bath sponge — usually a light brown or yellowish color, unlike the pink or blue sponge made by people." },
         { type: 'activity', text: "Finding Out: How much water can a sponge hold? Materials: animal sponge / container of water / measuring cup. Soak the sponge in the water for about 5 minutes. Remove the sponge from the water. Squeeze the water into the measuring cup. Measure the volume of water that was in the sponge. Record this volume of water. How much water did the sponge hold? Why is a cleaning sponge made similar to an animal sponge?" },
         { type: 'image-group', images: [
@@ -303,14 +298,13 @@ export const scienceChapterText = {
         { type: 'heading', text: "Animals With Stinging Cells" },
         { type: 'p', text: "The hydra, jellyfish, and sea anemone are also invertebrates. Like sponges, they do not have a backbone. Hydras live in freshwater ponds and streams, while most jellyfish and sea anemones live in oceans." },
         { type: 'p', text: "These animals are more complex than sponges. Their body is shaped like a hollow sac, open at one end. The hydra uses this opening in two ways: for taking in food, and for getting rid of wastes. The opening is surrounded by one or more rings of tentacles — a tentacle is a long, armlike part." },
+        { type: 'p', text: "Hydras and jellyfish use their tentacles to catch small animals for food, and sea anemones catch food the same way. The tentacles contain many stinging cells — a stinging cell is a special structure used to help capture food. How does a stinging cell help capture food?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/hydra.jpg', caption: 'Hydra with tentacles' }
         ] }
       ],
       [
-        { type: 'p', text: "Hydras and jellyfish use their tentacles to catch small animals for food, and sea anemones catch food the same way. The tentacles contain many stinging cells — a stinging cell is a special structure used to help capture food. When a small animal comes close, the stinging cells explode, pushing tiny poisonous threads into the victim. These threads prevent the animal from moving, and may even kill it. The animal is then pushed into the mouth by the tentacles and swallowed." },
-      ],
-      [
+        { type: 'p', text: "When a small animal comes close, the stinging cells explode, pushing tiny poisonous threads into the victim. These threads prevent the animal from moving, and may even kill it. The animal is then pushed into the mouth by the tentacles and swallowed." },
         { type: 'p', text: "Have you ever walked along a beach and seen a clear blob floating in the water, or washed up on the sand? This blob was a jellyfish, and if you stepped on it, it could give you a painful sting." },
         { type: 'p', text: "The Portuguese man-of-war is an animal similar to the jellyfish — it has tentacles and stinging cells, and can be dangerous to people. A swimmer can become tangled in its tentacles, and the stinging cells can cause a painful injury." },
         { type: 'image-group', images: [
@@ -443,7 +437,8 @@ export const scienceChapterText = {
         { type: 'p', text: "An insect's head has two feelers, or antennae, which help it smell and feel — and are sometimes used for tasting and hearing too." },
         { type: 'image-group', images: [
           { src: '/images/science/ch02/activity-insect-1.jpg', caption: 'Compound eyes of an insect' },
-          { src: '/images/science/ch02/activity-insect-2.jpg', caption: 'Close-up of a compound eye' }
+          { src: '/images/science/ch02/activity-insect-2.jpg', caption: 'Close-up of a compound eye' },
+          { src: '/images/science/ch02/antennae-moth.jpg', caption: 'Antennae' }
         ] }
       ],
       [
@@ -557,37 +552,47 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'heading', text: "AMPHIBIANS" },
-        { type: 'p', text: "What are the main characteristics of amphibians?" },
-        { type: 'p', text: "An amphibian (am fib'e an) is a cold-blooded vertebrate that lives part of its life in water and part on land. Frogs, toads, and salamanders are some common amphibians. The outside of an am- phibian's body is usually moist and slimy. Amphibians do not have scales." },
-        { type: 'p', text: "Most adult amphibians live on land. They return to water to lay their eggs. A few amphibians spend almost their entire life in water. These include bullfrogs and some salamanders, such as mud puppies." },
-        { type: 'heading', text: "SALAMANDER" },
-        { type: 'p', text: "Most adult amphibians breathe through lungs. Lungs are organs through which animals get oxygen from air. The mud puppy does not have lungs. It has gills outside its body through which it can breathe under water. Amphibians with lungs cannot live completely in water. They must come to the surface to breathe air. Amphibians can also get oxygen through their skin." },
+        { type: 'heading', text: "Amphibians" },
+        { type: 'p', text: "What are the main characteristics of amphibians? An amphibian is a cold-blooded vertebrate that lives part of its life in water and part on land. Frogs, toads, and salamanders are some common amphibians. The outside of an amphibian's body is usually moist and slimy. Amphibians do not have scales." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch03/mud-puppy-gills.jpg', caption: 'Gills of a mud puppy' }
+          { src: '/images/science/ch03/bullfrog.jpg', caption: 'Bullfrog' },
+          { src: '/images/science/ch03/southern-toad.jpg', caption: 'Southern toad' }
+        ] },
+        { type: 'p', text: "Most adult amphibians live on land. They return to water to lay their eggs. A few amphibians spend almost their entire life in water. These include bullfrogs and some salamanders, such as mud puppies." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/salamander-drawing.jpg', caption: 'Salamander' }
         ] }
       ],
       [
+        { type: 'p', text: "Most adult amphibians breathe through lungs. Lungs are organs through which animals get oxygen from air. The mud puppy does not have lungs — it has gills outside its body through which it can breathe under water. Amphibians with lungs cannot live completely in water, and must come to the surface to breathe air. Amphibians can also get oxygen through their skin." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/mud-puppy-gills.jpg', caption: 'Gills of a mud puppy' }
+        ] },
+        { type: 'heading', text: "Life Cycle of a Frog" },
         { type: 'p', text: "Amphibians such as frogs and toads go through several stages of growth during their life. Look at the drawings and follow the life of the frog. The frog lays its eggs in the water. Fishlike animals called tadpoles hatch from these eggs. Tadpoles live in water and have gills. As the tadpole gets older it grows a tail. At this stage the tadpole looks more like a fish. Then back legs and front legs form. The frog develops lungs and comes out on land. Adult frogs usually live on land and have lungs. Other amphibians go through stages of growth like this." },
-        { type: 'p', text: "What are the main characteristics of reptiles?" },
-        { type: 'p', text: "A reptile (rep'til) is a cold-blooded vertebrate that has lungs and dry skin. Almost all reptiles have scales. Most reptiles live on land and lay eggs. Some give birth to live young. The eggs of reptiles are laid on land. These eggs have a tough covering that prevents the eggs from drying out on land." },
         { type: 'image-group', images: [
           { src: '/images/science/ch03/frog-lifecycle-top.jpg', caption: 'Life cycle of a frog' },
           { src: '/images/science/ch03/frog-lifecycle-underwater.jpg', caption: 'Tadpole stages underwater' }
         ] }
       ],
       [
+        { type: 'heading', text: "Reptiles" },
+        { type: 'p', text: "What are the main characteristics of reptiles? A reptile is a cold-blooded vertebrate that has lungs and dry skin. Almost all reptiles have scales. Most reptiles live on land and lay eggs. Some give birth to live young. The eggs of reptiles are laid on land — these eggs have a tough covering that prevents the eggs from drying out on land." },
         { type: 'p', text: "There are four main groups of reptiles. These are the alligators and crocodiles, the snakes, the lizards, and the turtles." },
-        { type: 'p', text: "Pine snakes hatching from eggs Alligators and crocodiles make up one group of reptiles. They are large four-legged reptiles. They look alike, but their color and the shape of their snout help to tell them apart. Crocodiles are green and gray, while alligators are gray and black. Crocodiles have a more slender and pointed snout than do alligators. The two drawings show how the crocodile and the alligator are different. Can you tell them apart?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/pine-snakes-eggs.jpg', caption: 'Pine snakes hatching from eggs' }
+        ] }
+      ],
+      [
+        { type: 'p', text: "Alligators and crocodiles make up one group of reptiles. They are large four-legged reptiles. They look alike, but their color and the shape of their snout help to tell them apart. Crocodiles are green and gray, while alligators are gray and black. Crocodiles have a more slender and pointed snout than do alligators. The two drawings show how the crocodile and the alligator are different. Can you tell them apart?" },
         { type: 'p', text: "Snakes make up the largest group of reptiles. They do not have legs, and their bodies are covered with thin scales. Snakes can be large or they can be small. The anaconda, from South America, can be more than 9 m long. The thread snake is only about 12 cm long." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch03/pine-snakes-eggs.jpg', caption: 'Pine snakes hatching from eggs' },
           { src: '/images/science/ch03/gator-croc-heads.jpg', caption: 'Alligator and crocodile snouts' },
           { src: '/images/science/ch03/anaconda.jpg', caption: 'Anaconda' }
         ] }
       ],
       [
-        { type: 'p', text: "Snake eating mouse and snake's curved teeth Snakes have an interesting way of eating. They swallow their food whole. The picture shows a snake with a whole mouse in its mouth. Most of the things snakes eat are larger than their mouth. When a snake eats an animal larger than its mouth, the snake's lower jaw separates from the upper jaw. This allows the snake's mouth to open very wide. Also, the snake's teeth are curved backward. This makes it hard for an animal to escape from the snake's jaws." },
+        { type: 'p', text: "Snake eating mouse and snake's curved teeth. Snakes have an interesting way of eating — they swallow their food whole. The picture shows a snake with a whole mouse in its mouth. Most of the things snakes eat are larger than their mouth. When a snake eats an animal larger than its mouth, the snake's lower jaw separates from the upper jaw. This allows the snake's mouth to open very wide. Also, the snake's teeth are curved backward. This makes it hard for an animal to escape from the snake's jaws." },
         { type: 'p', text: "Another group of reptiles is the lizards. There are many different kinds of lizards. Many live in deserts and other hot, dry areas. Lizards have claws on their toes, as shown in the picture. The body of a lizard is covered with scales." },
         { type: 'image-group', images: [
           { src: '/images/science/ch03/snake-eating-mouse.jpg', caption: "Snake eating mouse and snake's curved teeth" },
@@ -595,7 +600,7 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'p', text: "The chameleon (ka me'le an) is one of the most interesting lizards. Chameleons live in trees and catch insects for food. They can change color. These lizards can change from brown to green to gray. The chameleon in the picture is changing color. These changes help these animals to blend in with their surroundings. How can this be helpful?" },
+        { type: 'p', text: "The chameleon is one of the most interesting lizards. Chameleons live in trees and catch insects for food. They can change color. These lizards can change from brown to green to gray. The chameleon in the picture is changing color. These changes help these animals to blend in with their surroundings. How can this be helpful?" },
         { type: 'p', text: "Turtles make up the last group of reptiles. The body of a turtle is protected by a shell. When in danger, a turtle pulls its legs and head into its shell. How does this help it to survive? The turtles in the picture are box turtles. They can close their shells very tightly. Some turtles live on land. Others spend most of their time in water." },
         { type: 'image-group', images: [
           { src: '/images/science/ch03/chameleon.jpg', caption: 'Chameleon' },
@@ -603,18 +608,23 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'p', text: "What are the main characteristics of birds?" },
-        { type: 'p', text: "Birds are warm-blooded animals that are covered with feathers. A warm-blooded animal is an animal whose body temperature stays the same even when the temperature of the air or water around it changes. Birds are vertebrates with lungs. Like reptiles, birds lay eggs. Their eggs are in a hard shell. Wings and feathers make birds different from other vertebrates. Most birds use their wings to fly. Some birds, such as penguins, have feathers and wings but cannot fly. Birds can be found living on land, in trees, and on water. What birds can be found on water?" },
-        { type: 'p', text: "The bones and feathers of birds are made in a special way to help birds fly. The bones are hollow and light. The feathers have a hollow central shaft. This shaft makes feathers strong but light. Some large birds may have as many as 25,000 feathers. All birds lose and replace their feathers during a year. This regular loss of feathers is called molting." },
+        { type: 'heading', text: "Birds" },
+        { type: 'p', text: "What are the main characteristics of birds? Birds are warm-blooded animals that are covered with feathers. A warm-blooded animal is an animal whose body temperature stays the same even when the temperature of the air or water around it changes. Birds are vertebrates with lungs. Like reptiles, birds lay eggs. Their eggs are in a hard shell. Wings and feathers make birds different from other vertebrates. Most birds use their wings to fly. Some birds, such as penguins, have feathers and wings but cannot fly. Birds can be found living on land, in trees, and on water. What birds can be found on water?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch03/penguins.jpg', caption: 'Penguins' },
-          { src: '/images/science/ch03/bird-bones.jpg', caption: 'Bird bones' }
+          { src: '/images/science/ch03/penguins.jpg', caption: 'Penguins' }
         ] }
       ],
       [
-        { type: 'p', text: "The major use of feathers is to help birds to fly. Feathers are also needed to keep birds warm. Some birds fluff their feathers when they are cold. This fluffing forms more air spaces between the feathers and helps to keep the birds warm. Ducks and geese have small fluffy feathers called down near their skin. Down traps air and helps to keep the birds warm. Perhaps you have a jacket or blanket filled with down. These small feathers help to keep your body warm. Because birds are very active animals, they need a great deal of energy. So they eat a lot of food. Some birds spend most of their life hunting for food. The diet of birds is varied. Some birds eat nuts, while others eat seeds. Birds such as the one shown above eat oysters. Birds living near the water sometimes eat fish that they spear with their beaks. Still others, such as ducks and the flamingo below, eat tiny water plants and animals." },
+        { type: 'p', text: "The bones and feathers of birds are made in a special way to help birds fly. The bones are hollow and light. The feathers have a hollow central shaft. This shaft makes feathers strong but light. Some large birds may have as many as 25,000 feathers. All birds lose and replace their feathers during a year. This regular loss of feathers is called molting." },
+        { type: 'p', text: "The major use of feathers is to help birds to fly. Feathers are also needed to keep birds warm. Some birds fluff their feathers when they are cold. This fluffing forms more air spaces between the feathers and helps to keep the birds warm. Ducks and geese have small fluffy feathers called down near their skin. Down traps air and helps to keep the birds warm. Perhaps you have a jacket or blanket filled with down. These small feathers help to keep your body warm." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch03/down-feathers.jpg', caption: 'Down feathers' },
+          { src: '/images/science/ch03/bird-bones.jpg', caption: 'Bird bones' },
+          { src: '/images/science/ch03/down-feathers.jpg', caption: 'Down feathers' }
+        ] }
+      ],
+      [
+        { type: 'p', text: "Because birds are very active animals, they need a great deal of energy. So they eat a lot of food. Some birds spend most of their life hunting for food. The diet of birds is varied. Some birds eat nuts, while others eat seeds. Birds such as the one shown above eat oysters. Birds living near the water sometimes eat fish that they spear with their beaks. Still others, such as ducks and the flamingo below, eat tiny water plants and animals." },
+        { type: 'image-group', images: [
           { src: '/images/science/ch03/oystercatcher.jpg', caption: 'Oyster catcher' },
           { src: '/images/science/ch03/snowy-egret.jpg', caption: 'Snowy egret and young' },
           { src: '/images/science/ch03/flamingo.jpg', caption: 'Flamingo' }
@@ -623,12 +633,14 @@ export const scienceChapterText = {
       [
         { type: 'p', text: "Birds show a great variety in nests and nest building. The nests of some birds are built by the male bird. Others are built by the female bird. Still others are built by both male and female. Nests are of all shapes and sizes. Some nests, such as those of the weaverbirds, are extremely large. As many as 600 birds may work together to build huge nests. Nests can be made of twigs, leaves, or feathers. They can also be made of mud or other substances that birds find. Nests can hang from tree branches or rest on the ground. Some nests are even built under piles of rotting leaves." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch03/nests-weaverbirds.jpg', caption: 'Nests of weaverbirds' },
+          { src: '/images/science/ch03/nests-weaverbirds.jpg', caption: 'Nests of weaverbirds' }
+        ] },
+        { type: 'p', text: "Some birds can be harmful to people. For example, pigeons can carry diseases that harm people's lungs. Pigeons are also pests because they damage buildings." },
+        { type: 'image-group', images: [
           { src: '/images/science/ch03/nest-plover.jpg', caption: 'Nest of plover' }
         ] }
       ],
       [
-        { type: 'p', text: "Some birds can be harmful to people. For example, pigeons can carry diseases that harm people's lungs. Pigeons are also pests because they damage buildings." },
         { type: 'activity', text: "What is the structure of a bird's feather and a bird's bone? Materials bird feather / scissors / hand lens / chicken bone / pliers / beef bone Procedure A. Look at the drawing of the bird feather on this page. Point out the central shaft and the side branches. Each side branch is called a barb. B. Look at a bird feather. Find the central shaft. Use scissors to cut through the central shaft. 1. Is the central shaft hollow or solid? C. Find the barbs on the feather. Gently pull some of the barbs apart, then put them together by pulling them through your fingers. 2. Why do you think the barbs can be locked together? D. Look at the feather with a hand lens. Draw the feather as you see it through a hand lens. E. Look at a chicken bone. Break it in half with pliers. 3. Describe what you see inside the chicken bone. F. Compare the chicken bone with the beef bone. 4. What are the differences between the chicken bone and the beef bone? Conclusion 1. Describe a few important features of a feather and a chicken bone. What features of a bird's feathers and bones help it to fly? 2. Why is a beef bone not suitable for flight?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch03/feather-diagram.jpg', caption: "Parts of a bird's feather" },
@@ -641,7 +653,10 @@ export const scienceChapterText = {
         { type: 'p', text: "What are the main characteristics of mammals?" },
         { type: 'p', text: "The most complex group of vertebrates is the mammals. A mammal is a warm-blooded vertebrate that is usually covered with fur or hair. Mammals are different from other vertebrates in two main ways. First, the body of a mammal is all or partly covered with fur or hair. A very hairy mammal is the gorilla. A mammal with just a small amount of hair is the elephant." },
         { type: 'p', text: "A second way mammals differ from other vertebrates is that all mammals produce milk for their young. The picture shows springer spaniel puppies getting milk from their mother." },
-        { type: 'p', text: "Springer spaniel and pups Mammals differ from each other in many ways. Most mammals live on land. A few mammals, such as whales and dolphins, live in water. There are great differences in the size of mammals. The blue whale is the largest mammal. It can grow to be as long as 32 m and have a mass of over" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch03/springer-spaniel-pups.jpg', caption: 'Springer spaniel and pups' }
+        ] },
+        { type: 'p', text: "Mammals differ from each other in many ways. Most mammals live on land. A few mammals, such as whales and dolphins, live in water. There are great differences in the size of mammals. The blue whale is the largest mammal. It can grow to be as long as 32 m and have a mass of over" },
       ],
       [
         { type: 'sidebar', text: "110,000 kg. The common shrew is one of the smallest mammals. It is only about 10 cm long and has a mass of less than 3 g. These tiny mammals are insect eaters. Do you know? Suppose you find an animal that looks like this: It has a duck's bill and webbed feet. It has a tail like a beaver and fur on its body. It feeds its young milk. Strangely, it also lays eggs. How would you classify this animal? Is it a bird? Is it a reptile? Is it a mammal? This strange animal is an egg-laying mammal. It is called a duck-billed platypus (plat'e pas). The platypus lives in and around Australia." },
@@ -658,18 +673,18 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "Some mammal babies grow for a very short time inside the mother's body. When they are born, they are not fully formed. They are very small and helpless. They crawl into the mother's warm pouch and continue to grow there. The kangaroo and the opossum are mammals whose young develop in a pouch. The picture shows tiny opossum babies feeding inside their mother's pouch and a kangaroo with its young." },
-        { type: 'p', text: "Opossums feeding Kangaroo with young Some mammals are important to people. These are the mammals that are used for food and other products. Cattle, pigs, and sheep are raised for meat. Foods such as cheese, cream, and butter come from the milk produced by cows. Belts, shoes, footballs, and leather coats are products made from mammal skins." },
         { type: 'image-group', images: [
           { src: '/images/science/ch03/opossums-feeding.jpg', caption: 'Opossums feeding' },
           { src: '/images/science/ch03/kangaroo-young.jpg', caption: 'Kangaroo with young' }
-        ] }
-      ],
-      [
+        ] },
+        { type: 'p', text: "Some mammals are important to people. These are the mammals that are used for food and other products. Cattle, pigs, and sheep are raised for meat. Foods such as cheese, cream, and butter come from the milk produced by cows. Belts, shoes, footballs, and leather coats are products made from mammal skins." },
         { type: 'p', text: "Some mammals can be harmful to people. Rats are harmful mammals. Rats spread disease to humans. Often rats will eat stored food, such as fruits and grains. Millions of dollars are lost each year because of damage from rats." },
-        { type: 'activity', text: "What are the characteristics of the five groups of vertebrates? Materials 5 small index cards / wire coat hanger / yarn / drawing paper / scissors / transparent tape / felt-tip pens or crayons / old magazines Procedure A. You are going to make a mobile showing how the vertebrates are grouped. Write the names of the five main groups of vertebrates on index cards. Using the yarn, attach the cards to the coat hanger as shown. 1. What are the five main groups of vertebrates? B. Cut five strips of drawing paper. On these strips list the main characteristics of each group of vertebrates. C. Using the yarn, attach the lists to the right cards. 2. Did you find any characteristics that appeared in more than one group? 3. What are these characteristics? In which groups did these characteristics appear? D. Below the list of characteristics, hang pictures of animals from each group. You may either draw the animals or cut pictures of animals out of magazines. Attach the pictures with yarn as shown. Conclusion What do all five groups of vertebrates have in common? Using science ideas You can use your mobile to play a science game called \"The Vertebrate Detective.\" Think of one of the animals hanging on the mobile. On an index card list five characteristics of this animal. Read these characteristics one at a time to the class. Have members of the class guess the animal you are thinking of." },
         { type: 'image-group', images: [
           { src: '/images/science/ch03/rat.jpg', caption: 'Rat' }
         ] }
+      ],
+      [
+        { type: 'activity', text: "What are the characteristics of the five groups of vertebrates? Materials 5 small index cards / wire coat hanger / yarn / drawing paper / scissors / transparent tape / felt-tip pens or crayons / old magazines Procedure A. You are going to make a mobile showing how the vertebrates are grouped. Write the names of the five main groups of vertebrates on index cards. Using the yarn, attach the cards to the coat hanger as shown. 1. What are the five main groups of vertebrates? B. Cut five strips of drawing paper. On these strips list the main characteristics of each group of vertebrates. C. Using the yarn, attach the lists to the right cards. 2. Did you find any characteristics that appeared in more than one group? 3. What are these characteristics? In which groups did these characteristics appear? D. Below the list of characteristics, hang pictures of animals from each group. You may either draw the animals or cut pictures of animals out of magazines. Attach the pictures with yarn as shown. Conclusion What do all five groups of vertebrates have in common? Using science ideas You can use your mobile to play a science game called \"The Vertebrate Detective.\" Think of one of the animals hanging on the mobile. On an index card list five characteristics of this animal. Read these characteristics one at a time to the class. Have members of the class guess the animal you are thinking of." }
       ],
       [
         { type: 'summary', text: "Vertebrates are animals with a backbone." },
@@ -700,7 +715,15 @@ export const scienceChapterText = {
                 { prompt: 'It is a cold-blooded vertebrate. Its body is covered with scales. It can change color for protection. What is it?', answer: 'A chameleon (a lizard)' },
                 { prompt: 'It is a cold-blooded vertebrate. It hatches from an egg. It is fishlike. It will change into a frog. What is it?', answer: 'A tadpole' },
               ]
-            },
+            }
+          ]
+        }
+      ],
+      [
+        {
+          type: 'review',
+          title: 'Reviewing the Chapter',
+          sections: [
             {
               heading: 'Understanding Ideas',
               instructions: 'Put the stages in order and describe what happens at each one.',
@@ -835,17 +858,25 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: "CHANGES IN COMMUNITIES" },
         { type: 'p', text: "You learned that a sudden major change, such as a fire, can affect the size of populations. Sudden changes can also affect whole communities." },
-        { type: 'p', text: "On May 18, 1980, a volcano in Washington erupted. The volcano, Mount St. Helens, exploded with great force. The force was equal to almost 10 million metric tons of dynamite. One picture shows how the area looked before the blast. The other shows the same area 4 months after the blast. Millions of trees were blown down. Many plants were burned or covered with layers of ash as much as 180 m deep. Scientists believe that thousands of bear, deer, and other animals lost their lives. Few living things in the area survived." },
+        { type: 'p', text: "On May 18, 1980, a volcano in Washington erupted. The volcano, Mount St. Helens, exploded with great force. The force was equal to almost 10 million metric tons of dynamite. One picture shows how the area looked before the blast. The other shows the same area 4 months after the blast." },
         { type: 'image-group', images: [
           { src: '/images/science/ch04/mt-st-helens-before.jpg', caption: 'Mount St. Helens before the eruption' },
           { src: '/images/science/ch04/mt-st-helens-after.jpg', caption: 'Mount St. Helens 4 months after the eruption' }
         ] }
       ],
       [
-        { type: 'p', text: "A fire destroyed many square kilometers of the forest below. Trees, shrubs, grasses, and other plants were burned in the fire. Many animals were also killed. Among these were snakes, lizards, rabbits, and baby birds. Some animals were able to escape the fire, and so they lived. But many of the animals that lived lost their food supply and their habitat. People also cause changes in communities. The picture shows a major change in a redwood forest. People are cutting down the trees to use the wood. What changes might result from clearing the trees in this forest? In what ways are these changes like the changes from a forest fire? What are some living things that will lose their habitat?" },
+        { type: 'p', text: "Millions of trees were blown down. Many plants were burned or covered with layers of ash as much as 180 m deep. Scientists believe that thousands of bear, deer, and other animals lost their lives. Few living things in the area survived." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch04/trees-blown-down.jpg', caption: 'Trees blown down by eruption' },
-          { src: '/images/science/ch04/forest-fire-colorado.jpg', caption: 'Colorado forest destroyed by fire' },
+          { src: '/images/science/ch04/trees-blown-down.jpg', caption: 'Trees blown down by eruption' }
+        ] },
+        { type: 'p', text: "A fire destroyed many square kilometers of the forest below. Trees, shrubs, grasses, and other plants were burned in the fire. Many animals were also killed. Among these were snakes, lizards, rabbits, and baby birds. Some animals were able to escape the fire, and so they lived. But many of the animals that lived lost their food supply and their habitat." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch04/forest-fire-colorado.jpg', caption: 'Colorado forest destroyed by fire' }
+        ] }
+      ],
+      [
+        { type: 'p', text: "People also cause changes in communities. The picture shows a major change in a redwood forest. People are cutting down the trees to use the wood. What changes might result from clearing the trees in this forest? In what ways are these changes like the changes from a forest fire? What are some living things that will lose their habitat?" },
+        { type: 'image-group', images: [
           { src: '/images/science/ch04/redwood-clearing.jpg', caption: 'People clearing a redwood forest' }
         ] }
       ],
@@ -908,7 +939,15 @@ export const scienceChapterText = {
                 { prompt: 'It is an animal that hunts other animals for food. What is it?', answer: 'A predator' },
                 { prompt: 'It is an animal that is hunted by other animals for food. What is it?', answer: 'Prey' },
               ]
-            },
+            }
+          ]
+        }
+      ],
+      [
+        {
+          type: 'review',
+          title: 'Reviewing the Chapter',
+          sections: [
             {
               heading: 'Understanding Ideas',
               instructions: 'A cause makes things happen. An effect is what happens. For each pair, say which is the cause and which is the effect.',
@@ -979,51 +1018,70 @@ export const scienceChapterText = {
         { type: 'activity', text: "What can you learn from indirect evidence? Materials: sealed box with unknown object / metric ruler / balance and masses / magnet. Procedure: A. Lift and shake the box. Use the balance to measure the object's mass. Move the magnet along the outside of the box. Measure the box. 1. What happens when you lift and shake the box? B. Gather all the information you can. Make a chart like the one below. List each thing you did and what you learned (result of shaking, effect of magnet, mass, size of box). C. Study your chart. 2. From your information, what do you guess is in the box? D. Open the box and look inside. Compare your guess with what actually is in the box. 3. In what ways was your guess correct? 4. In what ways was it wrong? Conclusion: You have just collected indirect evidence. What can you learn from indirect evidence? Using science ideas: List some other ways you can learn about the contents of a sealed box." },
       ],
       [
+        { type: 'heading', text: 'The Atom' },
         { type: 'p', text: "Scientists have problems studying matter they cannot see. They use indirect evidence to make guesses about what matter is made of. They have found that all matter is made up of small particles. Each particle is called an atom (at'am). An atom is the basic unit of all matter. Atoms are very small. Suppose a million of the smallest atoms were stacked on top of one another. The stack would not be as thick as this page." },
         { type: 'p', text: "Scientists must use indirect evidence to learn about atoms. Can you explain why? They use their indirect evidence to make models of atoms." },
         { type: 'p', text: "A model is a way to describe how something looks or acts. A model can be made of wood or clay. Or a model can be a picture. A model can even be words that describe an idea." },
-      ],
-      [
         { type: 'p', text: "Have you ever made a model of a ship, a plane, a house, or a car? The picture shows a model of an airplane. This model is much smaller than the real thing. But models of atoms are much larger than real atoms." },
-        { type: 'p', text: "For many years scientists have been making models of the atom. What do the models show? Scientists think the atom has a central part called a nucleus (nu'kle as). The nucleus of an atom contains two kinds of particles, protons (pro'tonz) and neutrons (nu'tronz). Protons and neutrons are tightly packed together in the nucleus. Tiny particles called electrons (i lek'tronz) travel around the nucleus. The drawing shows a model of a hydrogen atom." },
         { type: 'image-group', images: [
           { src: '/images/science/ch05/model-airplane.jpg', caption: 'Model airplane' }
         ] }
       ],
       [
-        { type: 'p', text: "An atom is almost all empty space. Suppose you were to make a model of a hydrogen atom. The nucleus of the atom would be the size of an orange. The electrons would be in the space outside the orange. Then your model of the atom would be very large. It would be about 22 football fields across!" },
-        { type: 'p', text: "The electrons in your model would be very small. They would each be smaller than the head of a pin. The electrons would be moving quickly all around the orange. This shows that in a real atom there is mostly empty space between the nucleus and the electrons." },
+        { type: 'p', text: "For many years scientists have been making models of the atom. What do the models show? Scientists think the atom has a central part called a nucleus (nu'kle as). The nucleus of an atom contains two kinds of particles, protons (pro'tonz) and neutrons (nu'tronz). Protons and neutrons are tightly packed together in the nucleus. Tiny particles called electrons (i lek'tronz) travel around the nucleus. The drawing shows a model of a hydrogen atom." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/hydrogen-atom-model.jpg', caption: 'Model of a hydrogen atom' }
+        ] },
+        { type: 'p', text: "An atom is almost all empty space. Suppose you were to make a model of a hydrogen atom. The nucleus of the atom would be the size of an orange. The electrons would be in the space outside the orange. Then your model of the atom would be very large. It would be about 22 football fields across! The electrons in your model would be very small. They would each be smaller than the head of a pin. The electrons would be moving quickly all around the orange. This shows that in a real atom there is mostly empty space between the nucleus and the electrons." },
+      ],
+      [
         { type: 'heading', text: "Elements" },
         { type: 'p', text: "What is an easy way to write the names of elements? Some kinds of matter cannot be broken down into simpler kinds of matter. Suppose a silver bar is broken down into the smallest particle that is still silver. The smallest particle of the silver bar would be a silver atom. A silver atom cannot be broken down into a simpler kind of matter and still be silver." },
         { type: 'image-group', images: [
           { src: '/images/science/ch05/silver-candlestick.jpg', caption: 'Silver candlestick' },
           { src: '/images/science/ch05/silver-bar.jpg', caption: 'Silver bar' }
-        ] }
-      ],
-      [
+        ] },
         { type: 'p', text: "Silver is an element (el'a ment). An element is matter that is made up of only one kind of atom. It is a basic kind of matter. The smallest particle of an element is an atom." },
         { type: 'p', text: "Scientists have discovered 106 different elements. The atoms of these elements are different from one another. One way in which they differ is in the number of protons. Different atoms have different numbers of protons. For example, an atom of silver has 47 protons. An atom of gold has 79 protons. Of the 106 elements, 92 occur naturally on the earth." },
-        { type: 'sidebar', text: "The other 14 elements have been made by scientists using special machines. The picture shows objects made mainly of only one element. Can you name the elements that make up the objects in the picture? Each of the elements has its own symbol. A symbol is a short way to write the name of an element. The symbol stands for the name of the element. Why do scientists use symbols? They find it easier and quicker to write the symbol than to write the whole name of the element. Scientists all over the world use the same symbols. Do you know? Some of the elements were named in an interesting way. The element tungsten was discovered in Sweden and in Spain at the same time. In Sweden it was found in a heavy yellow rock. The element was named tungsten. The name comes from two Swedish words. Tung means \"heavy\" and sten means \"stone.\" The Spanish scientists called the same element wolfram. It was found in a mineral called wolframite. Today in most parts of the world the element is called wolfram. In the United States it is called tungsten. But it is known by the symbol W. The picture shows a bulb with a tungsten filament." },
+      ],
+      [
+        { type: 'p', text: "The other 14 elements have been made by scientists using special machines. The picture shows objects made mainly of only one element. Can you name the elements that make up the objects in the picture?" },
         { type: 'image-group', images: [
-          { src: '/images/science/ch05/objects-one-element.jpg', caption: 'Objects made mainly of one element' },
+          { src: '/images/science/ch05/objects-one-element.jpg', caption: 'Objects made mainly of one element' }
+        ] },
+        { type: 'p', text: "Each of the elements has its own symbol. A symbol is a short way to write the name of an element. The symbol stands for the name of the element. Why do scientists use symbols? They find it easier and quicker to write the symbol than to write the whole name of the element. Scientists all over the world use the same symbols." },
+        { type: 'sidebar', text: "Do you know? Some of the elements were named in an interesting way. The element tungsten was discovered in Sweden and in Spain at the same time. In Sweden it was found in a heavy yellow rock. The element was named tungsten. The name comes from two Swedish words. Tung means \"heavy\" and sten means \"stone.\" The Spanish scientists called the same element wolfram. It was found in a mineral called wolframite. Today in most parts of the world the element is called wolfram. In the United States it is called tungsten. But it is known by the symbol W. The picture shows a bulb with a tungsten filament." },
+        { type: 'image-group', images: [
           { src: '/images/science/ch05/tungsten-bulb.jpg', caption: 'Light bulb with a tungsten filament' }
         ] }
       ],
       [
-        { type: 'p', text: "How can you group the elements? One way scientists group the elements is to put all metals in one group and all nonmetals into a second group. Most metals are good conductors of electricity and are shiny. Most nonmetals are poor conductors of electricity and are not shiny. Many nonmetals are gases. Which elements in this list are metals, and which are nonmetals: aluminum, carbon, helium, lead, nickel, oxygen?" },
-        { type: 'p', text: "The table on the next page lists some elements and their symbols. Sometimes the symbol for an element is the first letter of its name — the symbol for carbon is C. Sometimes the symbol is two letters, like Ca for calcium. A two-letter symbol is sometimes used because the names of some elements begin with the same letter. So the symbol Ca stands for calcium and the symbol Co stands for cobalt." },
+        { type: 'activity', text: "Finding out: How can you group the elements? One way scientists group the elements is to put all metals in one group and all nonmetals into a second group. Most metals are good conductors of electricity and are shiny. Most nonmetals are poor conductors of electricity and are not shiny. Many nonmetals are gases. Which of the objects shown here is made mainly of a metal? Which is made mainly of a nonmetal? Which of the elements in the following list are metals? Which are nonmetals? aluminum, carbon, helium, lead, nickel, oxygen." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/finding-out-metals-nonmetals.jpg', caption: 'A bottle, a watch, and coins — which are made mainly of metal?' }
+        ] },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/helium-balloons.jpg', caption: 'Helium-filled balloons' }
+        ] },
+        { type: 'p', text: "The table on the next page lists some elements and their symbols. It describes how the elements look. Look at the list of symbols. You will see that sometimes the symbol for an element is the first letter of its name. For example, the symbol for carbon is C. Sometimes the symbol is two letters. For example, the symbol for calcium is Ca. A two-letter symbol is sometimes used because the names of some elements begin with the same letter. So the symbol Ca stands for calcium and the symbol Co stands for cobalt." },
+        { type: 'p', text: "Look at the symbol for iron. It is Fe. The word for iron in Latin is ferrum (fer'em). So the symbol for iron comes from that word. Find the symbol for silver. It is Ag. The word for silver in Latin is argentum (ar jen'tam). The symbol for silver comes from that word. The symbols for some other elements also come from their names in Latin and other languages. Find mercury in the table. It is an unusual metal. Is mercury a solid, a liquid, or a gas at room temperature?" },
       ],
       [
-        { type: 'p', text: "Look at the symbol for iron. It is Fe. The word for iron in Latin is ferrum (fer'em). So the symbol for iron comes from that word. Find the symbol for silver. It is Ag. The word for silver in Latin is argentum (ar jen'tam). The symbol for silver comes from that word. The symbols for some other elements also come from their names in Latin and other languages. Mercury is an unusual metal — is it a solid, a liquid, or a gas at room temperature?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/diamond-carbon.jpg', caption: 'Diamond, a form of carbon' }
+        ] },
         { type: 'activity', text: "Some common elements — Element: symbol, description. Calcium: Ca, silver-white metal. Carbon: C, black solid or colorless crystal. Chlorine: Cl, greenish-yellow poisonous gas. Cobalt: Co, silver-white metal. Gold: Au, heavy yellow metal. Helium: He, light gas with no color, taste, or odor. Hydrogen: H, gas with no color, taste, or odor. Iron: Fe, gray-white metal. Mercury: Hg, heavy silver-colored metal, liquid at room temperature. Nitrogen: N, gas with no color, taste, or odor. Oxygen: O, gas with no color, taste, or odor. Silver: Ag, shiny white metal. Sodium: Na, soft silvery metal. Sulfur: S, powdery yellow solid." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch05/diamond-carbon.jpg', caption: 'Diamond, a form of carbon' },
           { src: '/images/science/ch05/common-elements-table.jpg', caption: 'Some common elements' }
         ] }
       ],
       [
         { type: 'heading', text: "Molecules and Compounds" },
         { type: 'p', text: "What happens when atoms combine? You have learned that the smallest particle of matter is the atom. Atoms do not usually exist alone on earth. They combine, sometimes in pairs, sometimes in threes. Sometimes hundreds of atoms combine. New substances form when atoms of different elements combine. These new substances are called compounds (kom'poundz). The simplest particle of many compounds is a molecule (mol'a kyul). Most molecules are made of two or more atoms." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/hydrogen-oxygen-gas.jpg', caption: 'Hydrogen gas and oxygen gas' },
+          { src: '/images/science/ch05/oxygen-molecule-diagram.jpg', caption: 'Oxygen molecule' }
+        ] },
         { type: 'p', text: "Sometimes two atoms of the same element combine to form a molecule. Two atoms of the element oxygen join to form a molecule of oxygen. In the same way, two atoms of the element hydrogen join to form a molecule of hydrogen. The oxygen and hydrogen molecules are not compounds — compounds are formed only when atoms of different elements join." },
       ],
       [
@@ -1039,11 +1097,12 @@ export const scienceChapterText = {
         { type: 'image-group', images: [
           { src: '/images/science/ch05/salt-pouring.jpg', caption: 'Salt and salt crystals' },
           { src: '/images/science/ch05/sugar-pouring.jpg', caption: 'Sugar and sugar crystals' }
-        ] }
+        ] },
+        { type: 'p', text: "Find the elements that make up table salt. Do the elements sodium and chlorine look like table salt? No. Sodium is a silvery metal. Chlorine is a greenish-yellow poisonous gas. Table salt is a white crystal used to season food. Notice that the compound salt is different from the elements that make it up." },
       ],
       [
-        { type: 'p', text: "Find the elements that make up table salt. Do the elements sodium and chlorine look like table salt? No. Sodium is a silvery metal. Chlorine is a greenish-yellow poisonous gas. Table salt is a white crystal used to season food. Notice that the compound salt is different from the elements that make it up." },
-        { type: 'p', text: "Here is another example. Water is a compound formed from elements that are different from water. On the earth water can be found as a liquid, as a solid, and as a gas. We drink it and we bathe in it. It makes up about two thirds of our body." },
+        { type: 'heading', text: 'Four Common Compounds' },
+        { type: 'activity', text: "Compound: description — elements and their descriptions. Table salt: salty-tasting white crystal used to season food — Sodium (Na): soft silvery metal; Chlorine (Cl): greenish-yellow poisonous gas. Water: liquid found over three fourths of the earth's surface — Hydrogen (H): gas with no color, taste, or odor; Oxygen (O): gas with no color, taste, or odor. Sugar: sweet-tasting white crystal used to sweeten food — Carbon (C): black solid found in coal, charcoal, and diamonds; Hydrogen (H): gas with no color, taste, or odor; Oxygen (O): gas with no color, taste, or odor. Ammonia: strong-smelling gas that dissolves in water — Nitrogen (N): gas with no color, taste, or odor; Hydrogen (H): gas with no color, taste, or odor." },
         { type: 'image-group', images: [
           { src: '/images/science/ch05/compounds-table.jpg', caption: 'Four common compounds' },
           { src: '/images/science/ch05/salt-crystals-enlarged.jpg', caption: 'Enlarged salt crystals' },
@@ -1053,11 +1112,12 @@ export const scienceChapterText = {
         ] }
       ],
       [
-        { type: 'p', text: "Water is made up of the elements hydrogen and oxygen. Hydrogen is a gas that has no color, taste, or odor. Oxygen is also a gas. It, too, has no color, taste, or odor. It makes up about one fifth of the air. The elements that make up water are very different from the compound water." },
-        { type: 'p', text: "Remember that scientists use symbols for the names of elements. It is easier to write the symbol for an element than to spell out its name. Scientists also use these symbols to write the names of compounds. Water is written H2O — the symbol for hydrogen (H) is joined with the symbol for oxygen (O)." },
         { type: 'image-group', images: [
           { src: '/images/science/ch05/water-recreation.jpg', caption: 'Water for recreation' }
-        ] }
+        ] },
+        { type: 'p', text: "Here is another example. Water is a compound formed from elements that are different from water. On the earth water can be found as a liquid, as a solid, and as a gas. We drink it and we bathe in it. It makes up about two thirds of our body." },
+        { type: 'p', text: "Water is made up of the elements hydrogen and oxygen. Hydrogen is a gas that has no color, taste, or odor. Oxygen is also a gas. It, too, has no color, taste, or odor. It makes up about one fifth of the air. The elements that make up water are very different from the compound water." },
+        { type: 'p', text: "Remember that scientists use symbols for the names of elements. It is easier to write the symbol for an element than to spell out its name. Scientists also use these symbols to write the names of compounds. Water is written H2O. H2O stands for one molecule of water. The symbol for hydrogen (H) is joined with the symbol for oxygen (O)." },
       ],
       [
         { type: 'sidebar', text: "The small number 2 after the H means there are two atoms of hydrogen in a molecule of water. Notice that there is no number after the O — this means there is only one atom of oxygen in a molecule of water. Do you know? The chemical symbols used by scientists today were not always used. Over the centuries the symbols for the elements have changed. In the sixteenth century the symbol for gold was a picture of the sun. The symbol for mercury was a staff carried by the god Mercury. Lead was represented by a farm tool carried by the god Saturn. In 1814 all this changed. A chemist in Sweden decided to use letter symbols for the elements, based on the ancient names of the elements. Au, used for gold, stands for aurum (or'em). Hg, used for mercury, stands for hydrargyrum (hi drdr'jer am). Pb, used for lead, stands for plumbum. These same letter symbols are still used today by chemists all over the world." },
@@ -1083,7 +1143,7 @@ export const scienceChapterText = {
         { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Science Words',
-            instructions: 'Use science terms from the chapter to complete each sentence.',
+            instructions: 'Copy the sentences below. Use science terms from the chapter to complete the sentences.',
             items: [
               { prompt: "Scientists call a group of symbols and numbers that stands for a compound a/an ___.", answer: "formula" },
               { prompt: "The central part of the atom is called the ___.", answer: "nucleus" },
@@ -1097,7 +1157,7 @@ export const scienceChapterText = {
           },
           {
             heading: 'Science Words — Unscramble',
-            instructions: "Unscramble each group of letters to find a science term from the chapter, then use it in a sentence.",
+            instructions: "Unscramble each group of letters to find a science term from the chapter. Write a sentence using each term.",
             items: [
               { prompt: "ulelomec", answer: "molecule" },
               { prompt: "notrop", answer: "proton" },
@@ -1107,22 +1167,30 @@ export const scienceChapterText = {
           },
           {
             heading: 'Science Words — Identify',
+            instructions: "Identify each of the following.",
             items: [
               { prompt: "It is a very tiny particle. It is part of an atom. It travels around the nucleus. What is it?", answer: "electron" },
               { prompt: "It is made of numbers. It is made of symbols. It stands for a compound. What is it?", answer: "formula" },
             ]
           },
+        ] }
+      ],
+      [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch05/water-molecule-numbered.jpg', caption: 'A water molecule, with numbered parts' }
+        ] },
+        { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Understanding Ideas',
             items: [
-              { prompt: "A water molecule is written with the formula H2O. How many hydrogen atoms and how many oxygen atoms does one water molecule contain?", answer: "Two hydrogen atoms and one oxygen atom — that's why the formula is H2O." },
-              { prompt: "Complete the element-symbol chart: Carbon → ___, Iron → ___, Silver → ___, Sodium → ___, Mercury → ___, Gold → ___.", answer: "Carbon → C, Iron → Fe, Silver → Ag, Sodium → Na, Mercury → Hg, Gold → Au." },
+              { prompt: "The drawing shows a water molecule. Write the correct term for each number in the drawing. What is the formula for this compound?", answer: "1 = hydrogen atom, 2 = oxygen atom, 3 = hydrogen atom. The formula for this compound is H2O." },
+              { prompt: "Make a chart like the one shown below. Write the correct information in the empty boxes: Carbon → ___, Mercury → ___, ___ → Fe, ___ → Ag, Sodium → ___, ___ → Au.", answer: "Carbon → C, Mercury → Hg, Iron → Fe, Silver → Ag, Sodium → Na, Gold → Au." },
             ]
           },
           {
             heading: 'Using Ideas',
             items: [
-              { prompt: "Play an indirect-evidence guessing game with a group: put an object from home or school into a paper bag without letting the others see it, then give clues about what's inside without naming it. The winner is whoever's object is guessed with the fewest clues. What does this activity teach you about indirect evidence?", answer: "That you can gather clues — weight, shape, sound, smell — to make a good guess about something you cannot see directly, the same method scientists use to study atoms and other things too small or too far away to observe directly." },
+              { prompt: "You can use indirect evidence to play a game. You will need at least four players. Collect objects from around your home or school. Put each object into a paper bag. Each player is given a bag and looks at the object. He or she gives clues to the other players about what is in the bag. The winner is the person whose object is guessed with the fewest clues.", answer: "That you can gather clues — weight, shape, sound, smell — to make a good guess about something you cannot see directly, the same method scientists use to study atoms and other things too small or too far away to observe directly." },
             ]
           },
         ] }
@@ -1190,28 +1258,21 @@ export const scienceChapterText = {
         { type: 'p', text: "The picture shows containers of different sizes and shapes, each holding the same volume of water. What property of liquids does this show?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch06/containers-same-volume.jpg', caption: 'Containers of different shapes holding the same volume of water' }
-        ] }
-      ],
-      [
+        ] },
         { type: 'p', text: "Particles in gases are spread farther apart than the particles in liquids, so the attraction between them is very weak. This very weak attraction allows particles in a gas to move freely. Because the attraction is so weak and the spaces so great, gases have no definite shape or volume. Suppose a gas is put in a closed box or jar — the particles of the gas will spread out until they fill the box or jar." },
-        { type: 'p', text: "Changes in state are common physical changes. Energy is involved when matter changes from one state to another. Energy must be added to change a solid to a liquid, and energy must also be added to change a liquid to a gas. The energy that is added is usually in the form of heat. Heat energy causes the particles in solids and liquids to move faster. This increases the spaces between the particles and weakens the attraction, so a solid changes to a liquid and a liquid to a gas." },
       ],
       [
+        { type: 'p', text: "Changes in state are common physical changes. Energy is involved when matter changes from one state to another. Energy must be added to change a solid to a liquid, and energy must also be added to change a liquid to a gas. The energy that is added is usually in the form of heat. Heat energy causes the particles in solids and liquids to move faster. This increases the spaces between the particles and weakens the attraction, so a solid changes to a liquid and a liquid to a gas." },
         { type: 'p', text: "A glass of ice cubes left out on a hot summer day will melt. Melting is the change of state from a solid to a liquid. When heat is added to a solid, what happens to the particles in the solid? How does this explain why the solid melts? The temperature at which a solid changes to a liquid is called the melting point." },
         { type: 'p', text: "Cooking food often involves boiling liquids. When something boils, it changes from a liquid to a gas. As heat energy is added, some particles in the liquid have enough energy to escape from the liquid — the escaped particles are now particles in a gas. The temperature at which a liquid changes to a gas is called the boiling point." },
         { type: 'image-group', images: [
           { src: '/images/science/ch06/melting-ice.jpg', caption: 'Ice cubes melting on a hot day' },
           { src: '/images/science/ch06/boiling-water.jpg', caption: 'Water boiling as it cooks' }
-        ] }
+        ] },
+        { type: 'activity', text: "Finding out: How fast and how far can particles in a gas move? Get a bottle of perfume and some absorbent cotton. Have a partner stand about 5 m away. Have your partner open the bottle of perfume and pour a small amount of it onto the cotton — note the time. When you can smell the perfume, note the time again. How long did it take for you to smell the perfume? How far did the perfume particles travel to reach you? What conditions in the room might have affected how quickly the perfume particles reached you?" },
       ],
       [
-        { type: 'activity', text: "How fast and how far can particles in a gas move? Get a bottle of perfume and some absorbent cotton. Have a partner stand about 5 m away. Have your partner open the bottle of perfume and pour a small amount of it onto the cotton — note the time. When you can smell the perfume, note the time again. How long did it take for you to smell the perfume? How far did the perfume particles travel to reach you? What conditions in the room might have affected how quickly the perfume particles reached you?" },
         { type: 'p', text: "Most substances have a definite melting point and boiling point. Melting point and boiling point are physical properties of matter. The melting point of water is 0°C. Its boiling point is 100°C." },
-        { type: 'image-group', images: [
-          { src: '/images/science/ch06/perfume-diffusion-activity.jpg', caption: 'Testing how far perfume particles travel through the air' }
-        ] }
-      ],
-      [
         { type: 'p', text: "Some changes of state involve taking energy away. To change a gas to a liquid or a liquid to a solid, energy must be removed. The energy that is removed is usually heat energy. When heat energy is removed, the particles in matter move more slowly, so the spaces between the particles become smaller. What happens to the attraction between particles? How does this cause a liquid to change to a solid? How is liquid orange juice changed to a solid?" },
         { type: 'p', text: "Melting, boiling, and other changes in state may not seem like physical changes, but they are. Molecules in liquid water are not changed when the water changes to a gas or a solid. Liquid iron is made up of the same kinds of atoms that make up solid iron. Physical changes do not change the particles that make up matter." },
         { type: 'image-group', images: [
@@ -1250,18 +1311,16 @@ export const scienceChapterText = {
         { type: 'heading', text: 'Two Kinds of Mixtures' },
         { type: 'p', text: "How are a solution and a suspension different? You have learned that the particles in some mixtures are large enough to be seen — you can see the grains that make up a mixture of sand and salt. In other mixtures the particles that are mixed together are individual molecules. You cannot see the particles in a mixture of sugar and water — the particles of sugar and water are individual molecules." },
         { type: 'p', text: "A mixture of sugar and water is a special kind of mixture called a solution (sa lu'shen). A solution is a mixture that forms when one substance dissolves in another. In a solution the particles of the substances are evenly mixed. Most solutions are a solid dissolved in a liquid, and these solutions are clear, even if they are colored." },
+        { type: 'p', text: "What happens when sugar mixes with water? The sugar particles seem to disappear in the water. Of course the sugar has not disappeared — it has dissolved in the water. This means that the sugar molecules are evenly mixed with the water molecules. You cannot see the tiny sugar molecules, but if the water evaporates, the sugar molecules form solid sugar again." },
         { type: 'image-group', images: [
           { src: '/images/science/ch06/sugar-dissolving-in-water.jpg', caption: 'Sugar dissolving in water' }
         ] }
       ],
       [
-        { type: 'p', text: "What happens when sugar mixes with water? The sugar particles seem to disappear in the water. Of course the sugar has not disappeared — it has dissolved in the water. This means that the sugar molecules are evenly mixed with the water molecules. You cannot see the tiny sugar molecules, but if the water evaporates, the sugar molecules form solid sugar again." },
         { type: 'p', text: "A solution has two parts. The solute (sol'yut) is the substance in a solution that dissolves — in a sugar-and-water solution, sugar is the solute. Water is the solvent. The solvent (sol'vent) is the substance in a solution that does the dissolving." },
         { type: 'image-group', images: [
           { src: '/images/science/ch06/sugar-water-solution-diagram.jpg', caption: 'How sugar molecules mix evenly with water molecules' }
-        ] }
-      ],
-      [
+        ] },
         { type: 'p', text: "Several things affect how fast a solute dissolves in a solvent. Stirring makes a solute dissolve faster. Temperature also affects how fast a solute dissolves — most solutes dissolve faster in a warm solvent than in a cold one. The picture shows powdered tea in hot water and in cold water. The same amount of tea was put into each glass at the same time. Why is there a difference in the amount of tea dissolved in each glass?" },
         { type: 'p', text: "The size of the solute particles also affects how fast the solute dissolves. Small solute particles dissolve faster than large solute particles — for example, small grains of sugar will dissolve faster than a whole sugar cube." },
         { type: 'image-group', images: [
@@ -1277,31 +1336,31 @@ export const scienceChapterText = {
         { type: 'image-group', images: [
           { src: '/images/science/ch06/suspension-chalk-water.jpg', caption: 'A suspension of chalk and water' },
           { src: '/images/science/ch06/settled-chalk-particles.jpg', caption: 'Settled chalk particles after 2 days' }
-        ] }
+        ] },
+        { type: 'p', text: "You may have seen bottles labeled \"Shake well before using.\" Many such bottles contain some kind of suspension. A vinegar-and-oil salad dressing is a suspension. Orange juice and some liquid medicines are also suspensions." },
       ],
       [
-        { type: 'p', text: "You may have seen bottles labeled \"Shake well before using.\" Many such bottles contain some kind of suspension. A vinegar-and-oil salad dressing is a suspension. Orange juice and some liquid medicines are also suspensions." },
         { type: 'heading', text: 'Another Kind of Change' },
         { type: 'p', text: "What is a chemical change? You have learned about many different physical changes in matter, but matter can change in another way. When a piece of wood burns, it changes into new substances. Burning wood is an example of a chemical change. A chemical change is a change in matter in which one or more different kinds of matter form." },
-      ],
-      [
         { type: 'p', text: "The physical properties of matter change when there is a chemical change. Iron is a dark-gray metal that is attracted by a magnet. Sulfur is a yellow powder that is not attracted by a magnet. When iron and sulfur are mixed together, they can easily be separated, and neither substance has changed. But when iron and sulfur are heated together, a chemical change takes place — a new substance is formed. This substance is iron sulfide. It is brown-black in color, and it is not attracted to a magnet." },
         { type: 'image-group', images: [
           { src: '/images/science/ch06/iron-sample-magnet.jpg', caption: 'Iron — attracted by a magnet' },
           { src: '/images/science/ch06/sulfur-sample-magnet.jpg', caption: 'Sulfur — not attracted by a magnet' },
-          { src: '/images/science/ch06/iron-and-sulfur-mixed.jpg', caption: 'Iron and sulfur mixed — still separable with a magnet' },
-          { src: '/images/science/ch06/iron-sulfide-formed.jpg', caption: 'Iron sulfide — the new substance formed when heated together' }
+          { src: '/images/science/ch06/iron-and-sulfur-mixed.jpg', caption: 'Iron and sulfur mixed' },
+          { src: '/images/science/ch06/iron-sulfide-formed.jpg', caption: 'Iron sulfide' }
         ] },
+      ],
+      [
         { type: 'p', text: "Some chemical changes take place slowly. The rust on the body of an old car formed from a slow chemical change — oxygen from the air joined with iron to form the compound iron oxide, commonly called rust. How does paint help stop rust from forming?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch06/rusting-car.jpg', caption: 'Rusting — a slow chemical change' }
-        ] }
-      ],
-      [
+        ] },
         { type: 'p', text: "Other chemical changes take place more quickly. When vinegar is poured on baking soda, a rapid chemical change takes place, and new substances are formed. One new substance is carbon dioxide gas." },
         { type: 'image-group', images: [
           { src: '/images/science/ch06/vinegar-baking-soda-reaction.jpg', caption: 'A rapid chemical change — vinegar poured on baking soda' }
         ] },
+      ],
+      [
         { type: 'summary', text: "A physical property is one that can be used to identify matter. Color, odor, shape, hardness, and density are physical properties." },
         { type: 'summary', text: "A physical change is a change in the size, shape, or state of matter." },
         { type: 'summary', text: "The three states of matter — solid, liquid, and gas — differ in how particles move, in how far apart particles are, and in the strength of attraction between particles." },
@@ -1314,7 +1373,7 @@ export const scienceChapterText = {
         { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Science Words',
-            instructions: 'Use science terms from the chapter to complete each sentence.',
+            instructions: 'Copy the sentences below. Use science terms from the chapter to complete the sentences.',
             items: [
               { prompt: "The temperature at which a solid changes to a liquid is the ___.", answer: "melting point" },
               { prompt: "The same kind of matter is present both before and after a ___ in matter.", answer: "physical change" },
@@ -1325,7 +1384,7 @@ export const scienceChapterText = {
           },
           {
             heading: 'Science Words — Matching',
-            instructions: 'Write the term that best matches each definition.',
+            instructions: 'Write the letter of the term that best matches the definition. Not all the terms will be used. (a. solute, b. particle, c. mixture, d. solution, e. liquid, f. suspension, g. solvent)',
             items: [
               { prompt: "Mixture in which particles of a substance do not dissolve in another substance", answer: "suspension" },
               { prompt: "Substance in a solution that dissolves", answer: "solute" },
@@ -1334,13 +1393,25 @@ export const scienceChapterText = {
               { prompt: "Material formed by the physical combining of two or more different materials", answer: "mixture" },
             ]
           },
+        ] }
+      ],
+      [
+        { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Understanding Ideas',
+            instructions: "A. Write whether each situation describes a physical change or a chemical change, and describe each change.",
             items: [
-              { prompt: "Say whether each situation describes a physical change or a chemical change, and explain why: (a) crushing a car into a solid cube of metal and glass; (b) heating iron and sulfur together until a new brown-black substance, iron sulfide, forms.", answer: "(a) A physical change — the metal and glass only change size and shape; they're still the same matter. (b) A chemical change — a brand-new substance, iron sulfide, forms that is neither iron nor sulfur." },
-              { prompt: "It is the state of matter in which particles slip and slide over and around one another. Matter in this state has no definite shape, but it does have a definite volume. What state is it?", answer: "liquid" },
-              { prompt: "It is the state of matter in which particles move freely and are spread far apart. Matter in this state has no definite shape or volume. What state is it?", answer: "gas" },
-              { prompt: "It is the state of matter in which particles move back and forth in a very small space. Matter in this state has a definite shape and a definite volume. What state is it?", answer: "solid" },
+              { prompt: "Crushing a car into a solid cube of metal and glass.", answer: "A physical change — the metal and glass only change size and shape; they're still the same matter." },
+              { prompt: "Heating iron and sulfur together until a new brown-black substance, iron sulfide, forms.", answer: "A chemical change — a brand-new substance, iron sulfide, forms that is neither iron nor sulfur." },
+            ]
+          },
+          {
+            heading: 'Understanding Ideas — B',
+            instructions: "Identify each of the following as matter that is solid, liquid, or gas.",
+            items: [
+              { prompt: "It is the state of matter in which particles slip and slide over and around one another. Matter in this state has no definite shape, but it does have a definite volume.", answer: "liquid" },
+              { prompt: "It is the state of matter in which particles move freely and are spread far apart. Matter in this state has no definite shape or volume.", answer: "gas" },
+              { prompt: "It is the state of matter in which particles move back and forth in a very small space. Matter in this state has a definite shape and a definite volume.", answer: "solid" },
             ]
           },
           {
@@ -1881,15 +1952,25 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Weathering Changes the Land' },
         { type: 'p', text: "How does physical weathering occur? If you view the earth while flying in a plane, you can see many features of its surface — high mountains, rolling hills, flat land, valleys, and cliffs. The surface of the earth is always changing. It is changed by natural processes. In time, flat land may become a mountain range, and hills and mountains may slowly be worn down. The land is worn down by weathering. Weathering is all the processes that break rock into smaller pieces. The processes of weathering can be put into two groups." },
-        { type: 'p', text: "One kind of weathering is called physical weathering. Physical weathering is all the processes that break apart rock without changing its chemical makeup. This weathering causes rock to change its size and shape — the rock is broken into smaller pieces, but the pieces have the same makeup as the rock they came from. The only change they have gone through is a physical one." }
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/mountain-erosion-view.jpg', caption: 'A weathered mountain, seen from the air' },
+          { src: '/images/science/ch09/eroded-hills-valley.jpg', caption: 'Hills and a valley shaped by weathering' },
+          { src: '/images/science/ch09/eroded-canyon-aerial.jpg', caption: 'Weathered cliffs and a canyon, seen from the air' }
+        ] }
       ],
       [
+        { type: 'p', text: "One kind of weathering is called physical weathering. Physical weathering is all the processes that break apart rock without changing its chemical makeup. This weathering causes rock to change its size and shape — the rock is broken into smaller pieces, but the pieces have the same makeup as the rock they came from. The only change they have gone through is a physical one." },
         { type: 'p', text: "The effect that the freezing and melting of water has on rock is a type of physical weathering. In some mountain regions the daytime temperatures are above the freezing point of water. Water seeps into cracks in rock. At night, temperatures drop below the freezing point, so the water turns to ice." },
-        { type: 'p', text: "When water freezes, it expands. As the water in a crack expands, it pushes with great force against both sides of the crack. This causes the crack to become larger. The daily freezing and melting of water causes large rocks to break up into smaller pieces. This kind of physical weathering is called frost action. During the winter, large cracks can form in sidewalks, and many potholes form in roads this way." },
-        { type: 'p', text: "Plants can also cause rocks to crack and break apart. Small plants and trees can grow in soil found in the cracks of rocks. As they grow, the plants push against the sides of the cracks, causing them to get larger, and in time they split the rocks. You may have seen tree roots that have lifted up parts of a sidewalk." },
+        { type: 'p', text: "When water freezes, it expands. As the water in a crack expands, it pushes with great force against both sides of the crack. This causes the crack to become larger. The daily freezing and melting of water causes large rocks to break up into smaller pieces. This kind of physical weathering is called frost action." },
         { type: 'image-group', images: [
           { src: '/images/science/ch09/ice-on-rock.jpg', caption: 'Ice on rock' },
-          { src: '/images/science/ch09/cliffs-weathered-frost-action.jpg', caption: 'Cliffs weathered by frost action' },
+          { src: '/images/science/ch09/cliffs-weathered-frost-action.jpg', caption: 'Cliffs weathered by frost action' }
+        ] }
+      ],
+      [
+        { type: 'p', text: "If you live in a place where it gets cold enough, you may see the result of frost action. During the winter, large cracks can form in sidewalks. Many cracks and holes, such as potholes, also form in roads. These are caused by the freezing and melting of water." },
+        { type: 'p', text: "Plants can also cause rocks to crack and break apart. Small plants and trees can grow in soil found in the cracks of rocks. As they grow, the plants push against the sides of the cracks, causing them to get larger, and in time they split the rocks. You may have seen tree roots that have lifted up parts of a sidewalk." },
+        { type: 'image-group', images: [
           { src: '/images/science/ch09/pothole-frost-action.jpg', caption: 'A pothole caused by frost action' },
           { src: '/images/science/ch09/tree-trunk-split-rock.jpg', caption: 'A tree trunk that has split a large rock' },
           { src: '/images/science/ch09/sidewalk-lifted-tree-roots.jpg', caption: 'Tree roots lifting up part of a sidewalk' }
@@ -1899,9 +1980,7 @@ export const scienceChapterText = {
         { type: 'activity', text: "How does the freezing and melting of water weather rocks? Wash out an empty milk carton. Open the top of the carton and fill it completely with water. Close the top and tape it shut with masking tape. Place the carton in a freezer overnight. The next day, remove the carton from the freezer. Describe what you see. What has happened, and what do you think caused it? How could this process weather rocks?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch09/activity-milk-carton-freezer.jpg', caption: 'Finding Out: freezing a full milk carton' }
-        ] }
-      ],
-      [
+        ] },
         { type: 'p', text: "Physical weathering can also be seen along an ocean shore. Large waves pound rocks at the shore. When waves crash against rocky cliffs, cracks can form. After a while, rocks may break away and fall into the ocean. The rocks may be lifted and dropped many times by the waves. As they are moved, the rocks strike other rocks, and in time they may be ground into small stones and pebbles. Waves may throw the stones and pebbles back against the cliffs, which helps to weather the rocks and cliffs even more. Have you ever picked up smooth, round stones from a beach? That is another example of physical weathering by ocean waves." },
         { type: 'p', text: "Wind can also weather rocks. Wind can blow small pieces of sand against rocks, which can polish and smooth them. But the wind alone does not weather rocks very much." },
         { type: 'image-group', images: [
@@ -1938,35 +2017,40 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "As water moves over the surface, it may erode soil and rocks. The amount of material moved depends partly on the amount of water, but the speed of the water is an even more important factor — fast-moving water erodes far more material than slower-moving water. If there are no plants growing in the soil, moving water may erode a lot of it." },
-        { type: 'p', text: "The erosion of soil by runoff can be a problem for farmers, since the top layers of soil are rich in materials that plants need. There is a lot of erosion in hilly places, so farmers often plant rows of crops that follow the curve of the land — when it rains, the rows hold the water and soil in place. Another way to prevent soil erosion on hills is to build terraces, which are flat areas cut into a hillside that also keep water and soil from washing down. Soil erosion can also be reduced by not clearing the land of all plants." },
+        { type: 'p', text: "The erosion of soil by runoff can be a problem for farmers, since the top layers of soil are rich in materials that plants need. There is a lot of erosion in hilly places, so farmers often plant rows of crops that follow the curve of the land — when it rains, the rows hold the water and soil in place." },
         { type: 'image-group', images: [
           { src: '/images/science/ch09/erosion-soil-runoff.jpg', caption: 'Erosion of soil by runoff' },
-          { src: '/images/science/ch09/contour-crops-erosion-prevention.jpg', caption: 'Crops following the curve of the land to prevent erosion' },
-          { src: '/images/science/ch09/terraces-erosion-prevention.jpg', caption: 'Terraces built to prevent erosion' }
+          { src: '/images/science/ch09/contour-crops-erosion-prevention.jpg', caption: 'Crops following the curve of the land to prevent erosion' }
         ] }
       ],
       [
-        { type: 'p', text: "Soil erosion is not the only effect of moving water. As water flows in a river, it wears away the riverbed — the rock under the river. The moving water carries materials that act like sandpaper, grinding the rock and wearing it away, and the weathered materials are then carried along by the river." },
-        { type: 'p', text: "The downward cutting of a riverbed can create a deep valley with steep sides, called a canyon. The Colorado River has been cutting the rocks of its riverbed for millions of years, forming the Grand Canyon, which is over 1.5 km deep." },
+        { type: 'p', text: "Another way to prevent soil erosion on hills is to build terraces, which are flat areas cut into a hillside that also keep water and soil from washing down. Soil erosion can also be reduced by not clearing the land of all plants." },
+        { type: 'p', text: "Soil erosion is not the only effect of moving water. As water flows in a river, it wears away the riverbed — the rock under the river. The moving water carries materials that act like sandpaper, grinding the rock and wearing it away, and the weathered materials are then carried along by the river. The downward cutting of a riverbed can create a deep valley with steep sides, called a canyon. The Colorado River has been cutting the rocks of its riverbed for millions of years, forming the Grand Canyon, which is over 1.5 km deep." },
         { type: 'image-group', images: [
+          { src: '/images/science/ch09/terraces-erosion-prevention.jpg', caption: 'Terraces built to prevent erosion' },
           { src: '/images/science/ch09/grand-canyon-view1.jpg', caption: 'The Grand Canyon and Colorado River' },
           { src: '/images/science/ch09/grand-canyon-view2.jpg', caption: 'The Grand Canyon and Colorado River, another view' }
         ] }
       ],
       [
         { type: 'p', text: "Ocean waves can erode sand from beaches along the shore — in some places the shoreline may lose as much as 380 cubic meters of sand each day. You have learned that erosion is greatest in fast-moving water. As a river flows downstream, the water starts to slow down, and this slowing causes the river to drop some sediments. Sediments are the materials that are dropped by the agents of erosion, including sand, soil, and rocks. The dropping of sediments by the agents of erosion is called deposition." },
-        { type: 'p', text: "Erosion and deposition are related. Weathered materials are picked up and carried away from one place, then dropped, or deposited, as sediment in another place. In this way the land is constantly changing — worn down by erosion in some places, and built up by deposition in others." },
         { type: 'image-group', images: [
           { src: '/images/science/ch09/lighthouse-1890s.jpg', caption: 'A lighthouse at the tip of Long Island, about 90 years ago' },
           { src: '/images/science/ch09/lighthouse-recent.jpg', caption: 'The same lighthouse today, after decades of shoreline erosion' }
         ] }
       ],
       [
-        { type: 'p', text: "In the spring, snow on the ground melts and there is often a lot of rain, so spring floods are common in some places. Flooding can erode valuable soil and destroy property, but flooding of rivers can also be helpful because of deposition. The floodwaters that overflow the banks of a river carry a lot of material, and when they soak into the ground, sediments are deposited on the land along the river. These sediments enrich the soil, so land near rivers is often good farmland." },
+        { type: 'p', text: "Erosion and deposition are related. Weathered materials are picked up and carried away from one place, then dropped, or deposited, as sediment in another place. In this way the land is constantly changing — worn down by erosion in some places, and built up by deposition in others." },
+        { type: 'p', text: "In the spring, snow on the ground melts and there is often a lot of rain, so spring floods are common in some places. Flooding can erode valuable soil and destroy property, but flooding of rivers can also be helpful because of deposition. The floodwaters that overflow the banks of a river carry a lot of material, and when they soak into the ground, sediments are deposited on the land along the river." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/spring-flood.jpg', caption: 'A spring flood' }
+        ] }
+      ],
+      [
+        { type: 'p', text: "These sediments enrich the soil, so land near rivers is often good farmland." },
         { type: 'p', text: "Most rivers empty into the ocean. The place where a river empties into the ocean is called the mouth of the river. The water there moves very slowly, and much of the material carried by the river is deposited at the mouth, forming a fan-shaped landmass called a delta. The delta at the mouth of the Mississippi River is the largest in the United States." },
         { type: 'p', text: "The few remaining sediments not deposited on a delta are carried out to sea by ocean currents. Waves may carry some of these sediments back to shore, forming sand beaches, or deposit them as sandbars near the shore." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch09/spring-flood.jpg', caption: 'A spring flood' },
           { src: '/images/science/ch09/rich-farmland-floodwaters.jpg', caption: 'Rich farmland deposited by floodwaters' },
           { src: '/images/science/ch09/mississippi-river-delta.jpg', caption: 'The Mississippi River delta' },
           { src: '/images/science/ch09/sandbar.jpg', caption: 'A sandbar' }
@@ -1982,14 +2066,17 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Ice Changes the Land' },
         { type: 'p', text: "How do glaciers change the land? In the past, there were long periods of very cold temperatures during which ice and snow built up on the land. These periods are known as ice ages. During these ice ages, the land was covered by large, slow-moving masses of ice called glaciers. The movement of glaciers during ice ages changed the shape of much of the land. The last ice age ended about 10,000 years ago." },
-        { type: 'p', text: "During the last ice age, temperatures over the earth changed from cold to warm and back again several times. During the cold periods, a lot of snow and ice piled up and the glaciers grew larger. The weight of the snow and ice caused the glaciers to move southward." }
-      ],
-      [
+        { type: 'p', text: "During the last ice age, temperatures over the earth changed from cold to warm and back again several times. During the cold periods, a lot of snow and ice piled up and the glaciers grew larger. The weight of the snow and ice caused the glaciers to move southward." },
         { type: 'p', text: "As the huge ice sheets moved forward, they weathered and eroded the land over which they moved, carrying soil, rock, and huge boulders great distances. The materials carried by glaciers scraped and cut the land, smoothing, polishing, and scratching rock. In some places, the tops of mountains were weathered and eroded by glaciers, forming rounded hills." },
-        { type: 'p', text: "During the warm periods, the southern edge of the glaciers melted, leaving behind large hilly ridges of rocky material that mark the places where the glaciers stopped — such ridges can still be seen today in the northern United States and Canada. In some places, glaciers dug out large amounts of rock and soil, and many of these dug-out areas filled in with water when the glaciers melted, becoming lakes. The lake regions of Wisconsin and Minnesota were formed this way, and glaciers even helped form the Great Lakes." },
         { type: 'image-group', images: [
           { src: '/images/science/ch09/rock-polished-glacier.jpg', caption: 'Rock polished by a glacier' },
-          { src: '/images/science/ch09/rock-scratched-glacier.jpg', caption: 'Rock scratched by a glacier' },
+          { src: '/images/science/ch09/rock-scratched-glacier.jpg', caption: 'Rock scratched by a glacier' }
+        ] }
+      ],
+      [
+        { type: 'p', text: "During the warm periods, the southern edge of the glaciers melted, leaving behind large hilly ridges of rocky material that mark the places where the glaciers stopped — such ridges can still be seen today in the northern United States and Canada." },
+        { type: 'p', text: "In some places, glaciers dug out large amounts of rock and soil, and many of these dug-out areas filled in with water when the glaciers melted, becoming lakes. The lake regions of Wisconsin and Minnesota were formed this way, and glaciers even helped form the Great Lakes." },
+        { type: 'image-group', images: [
           { src: '/images/science/ch09/rocky-material-glacier-deposit.jpg', caption: 'Rocky material deposited when a glacier stopped' },
           { src: '/images/science/ch09/lakes-formed-by-glacier.jpg', caption: 'A chain of lakes formed by a glacier' }
         ] }
@@ -2023,17 +2110,17 @@ export const scienceChapterText = {
         { type: 'sidebar', text: "Do you know? Sand dunes are moved by the wind — some dunes travel as much as 30 m in a single year, which can create problems for people, since moving dunes have buried farms, towns, and forests. On the southern shore of Lake Michigan, strong winds blowing from the west have caused a series of large sand dunes to move inland. The dunes are slowly burying trees in an Indiana forest known as Indiana Dunes." },
         { type: 'image-group', images: [
           { src: '/images/science/ch09/indiana-dunes.jpg', caption: 'Indiana Dunes, Indiana' }
+        ] },
+        { type: 'p', text: "Sometimes wind erosion can affect a large region. During the 1930s there were several years of drought — a long period without rain — in the Great Plains of the United States. Many kinds of plants died, and the land became bare. Strong winds eroded the loose, dry topsoil, and the land affected by this drought and erosion became known as the Dust Bowl, named for the many dust storms that occurred — some so bad that they blocked out all sunlight during the day." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch09/dust-storm-1930s.jpg', caption: 'A dust storm during the 1930s' }
         ] }
       ],
       [
-        { type: 'p', text: "Sometimes wind erosion can affect a large region. During the 1930s there were several years of drought — a long period without rain — in the Great Plains of the United States. Many kinds of plants died, and the land became bare. Strong winds eroded the loose, dry topsoil, and the land affected by this drought and erosion became known as the Dust Bowl, named for the many dust storms that occurred — some so bad that they blocked out all sunlight during the day." },
         { type: 'p', text: "There are ways for farmers to help prevent wind erosion. One way is to plant rows of trees or bushes, which act like fences or walls that block the force of the wind — something that does this is called a windbreak. Where fields are not being used, farmers can also plant ground cover: plants that hold soil in place and prevent erosion." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch09/dust-storm-1930s.jpg', caption: 'A dust storm during the 1930s' },
           { src: '/images/science/ch09/windbreak.jpg', caption: 'A windbreak' }
-        ] }
-      ],
-      [
+        ] },
         { type: 'summary', text: "Weathering is all the processes that break rock into smaller pieces." },
         { type: 'summary', text: "Physical weathering breaks apart rock without changing its chemical makeup; chemical weathering breaks apart rock by changing its chemical makeup." },
         { type: 'summary', text: "Erosion is the movement of weathered rock and soil from one place to another." },
@@ -2062,7 +2149,15 @@ export const scienceChapterText = {
                 { prompt: "Trees or bushes that block the force of the wind", answer: "windbreak" },
                 { prompt: "Water that comes from rain and melting snow and flows over the earth's surface", answer: "runoff" }
               ]
-            },
+            }
+          ]
+        }
+      ],
+      [
+        {
+          type: 'review',
+          title: 'Reviewing the Chapter',
+          sections: [
             {
               heading: 'Understanding Ideas',
               instructions: "Sort each example, then identify the agent of erosion involved.",
@@ -2105,13 +2200,13 @@ export const scienceChapterText = {
       ],
       [
         { type: 'heading', text: 'Natural Resources' },
-        { type: 'p', text: "Why is there a shortage of some resources? Look around at the things you use. You use paper, pencils, and books. You walk on the land, drink the water, and breathe the air. All these things are natural resources or come from natural resources. A natural resource is a useful material found in or on the earth. The paper, pencils, and books you use come from trees, and so are all other plants. Air, water, and land are also valuable natural resources." },
-        { type: 'p', text: "Some resources can be replaced after they are used. For example, as trees are cut down for wood, new trees can be planted. A tree is a renewable resource — a resource that can be replaced after it is used. Air, water, and land are also renewable resources." },
+        { type: 'p', text: "Why is there a shortage of some resources? Look around at the things you use. You use paper, pencils, and books. You walk on the land, drink the water, and breathe the air. All these things are natural resources or come from natural resources. A natural resource is a useful material found in or on the earth. The paper, pencils, and books you use come from trees, and so are all other plants. Air, water, and land are also valuable natural resources. Can you name other natural resources?" },
         { type: 'image-group', images: [
           { src: '/images/science/ch10/uses-of-trees-diagram.jpg', caption: 'Uses of trees' }
         ] }
       ],
       [
+        { type: 'p', text: "Some resources can be replaced after they are used. For example, as trees are cut down for wood, new trees can be planted. A tree is a renewable resource — a resource that can be replaced after it is used. Air, water, and land are also renewable resources." },
         { type: 'p', text: "Since some resources can be renewed, there should be no shortages — there should be a large enough supply for everyone. But the supply has become smaller because of pollution. Pollution is the presence of waste or other unwanted materials in a resource. The substances that cause pollution are called pollutants. Pollution of air, water, and land has reduced the useful supply of these resources." },
         { type: 'image-group', images: [
           { src: '/images/science/ch10/littered-forest.jpg', caption: 'Littered forest' },
@@ -2446,29 +2541,32 @@ export const scienceChapterText = {
         { type: 'heading', text: 'Clouds' },
         { type: 'p', text: "How are cloud types related to weather? There are many types of clouds. You have learned that different types of clouds form along cold fronts and warm fronts. Clouds are named for their shape, and the type of cloud that forms depends on the conditions of the atmosphere — so the type of cloud you see depends on the weather." },
         { type: 'p', text: "The large, fluffy white clouds often seen during fair weather are called cumulus clouds. Cumulus means \"heap.\" These clouds are flat on the bottom, and their rounded tops can billow high into the sky." },
+        { type: 'p', text: "The thin, wispy clouds that look like feathers or curls of hair are called cirrus clouds. Cirrus means \"curl.\" Cirrus clouds form high in the sky, where the air is very cold, so cirrus clouds are made up of tiny ice crystals." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch11/cumulus-clouds.jpg', caption: 'Cumulus clouds' }
+          { src: '/images/science/ch11/cumulus-clouds.jpg', caption: 'Cumulus clouds' },
+          { src: '/images/science/ch11/cirrus-clouds.jpg', caption: 'Cirrus clouds' }
         ] }
       ],
       [
-        { type: 'p', text: "The thin, wispy clouds that look like feathers or curls of hair are called cirrus clouds. Cirrus means \"curl.\" Cirrus clouds form high in the sky, where the air is very cold, so cirrus clouds are made up of tiny ice crystals. You often see cirrus clouds in a blue sky — they are sometimes a sign that a warm front is moving in and that the weather will soon change." },
+        { type: 'p', text: "You often see cirrus clouds in a blue sky — they are sometimes a sign that a warm front is moving in and that the weather will soon change." },
         { type: 'p', text: "Thick, low clouds that cover the sky are called stratus clouds. Stratus means \"layer.\" These sheetlike clouds are a sign of rainy weather. Fog is a stratus cloud near the ground." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch11/cirrus-clouds.jpg', caption: 'Cirrus clouds' },
           { src: '/images/science/ch11/stratus-clouds.jpg', caption: 'Stratus clouds' }
-        ] }
+        ] },
+        { type: 'activity', text: "Finding out: What weather forecasts can you make by looking at clouds? Make a chart with columns for date, cloud type and temperature, and forecast. For the next 7 days, observe the clouds and try to identify the types you see. Find out the temperature at the time of your observation, and record all of this in your chart. Using what you know about clouds and fronts, try to forecast the weather for the next day. Predict how the temperature and other weather conditions will change. The next day, check your forecast and see how accurate it was." }
       ],
       [
-        { type: 'activity', text: "Finding out: What weather forecasts can you make by looking at clouds? Make a chart with columns for date, cloud type and temperature, and forecast. For the next 7 days, observe the clouds and try to identify the types you see. Find out the temperature at the time of your observation, and record all of this in your chart. Using what you know about clouds and fronts, try to forecast the weather for the next day. Predict how the temperature and other weather conditions will change. The next day, check your forecast and see how accurate it was." },
-        { type: 'p', text: "There are many other types of clouds. Sometimes clouds have two names because they have features of two types of clouds — for example, stratocumulus clouds are layers of cumulus clouds that cover the sky. Other word parts are added to the names of clouds: nimbo or nimbus means \"rain,\" so cumulonimbus clouds are dark, towering clouds that usually bring thunderstorms. They form when rapidly rising air causes cumulus clouds to build up. Alto is a word part that means \"high.\"" },
+        { type: 'p', text: "There are many other types of clouds. Sometimes clouds have two names because they have features of two types of clouds — for example, stratocumulus clouds are layers of cumulus clouds that cover the sky. Other word parts are added to the names of clouds: nimbo or nimbus means \"rain,\" so cumulonimbus clouds are dark, towering clouds that usually bring thunderstorms. They form when rapidly rising air causes cumulus clouds to build up. Alto is a word part that means \"high.\" Look at the clouds shown here. See if you can tell why each cloud was given that name." },
         { type: 'image-group', images: [
           { src: '/images/science/ch11/altocumulus-clouds.jpg', caption: 'Altocumulus clouds' },
           { src: '/images/science/ch11/stratocumulus-clouds.jpg', caption: 'Stratocumulus clouds' },
-          { src: '/images/science/ch11/cumulonimbus-clouds.jpg', caption: 'Cumulonimbus clouds' },
-          { src: '/images/science/ch11/nimbostratus-clouds.jpg', caption: 'Nimbostratus clouds' }
+          { src: '/images/science/ch11/cumulonimbus-clouds.jpg', caption: 'Cumulonimbus clouds' }
         ] }
       ],
       [
+        { type: 'image-group', images: [
+          { src: '/images/science/ch11/nimbostratus-clouds.jpg', caption: 'Nimbostratus clouds' }
+        ] },
         { type: 'summary', text: "The earth's surface and atmosphere are heated unevenly. Weather is caused by the uneven heating of the atmosphere." },
         { type: 'summary', text: "Weather is related to air pressure. Cold, dry air has the highest pressure; warm, wet air has the lowest pressure." },
         { type: 'summary', text: "An air mass is a large body of air that has about the same temperature and moisture throughout. The kind of air mass present determines the weather." },
@@ -2493,7 +2591,11 @@ export const scienceChapterText = {
               { prompt: "The movement of air from land to water is called a/an ___.", answer: "land breeze" },
               { prompt: "The place where two air masses meet is called a/an ___.", answer: "front" }
             ]
-          },
+          }
+        ] }
+      ],
+      [
+        { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Understanding Ideas',
             items: [
@@ -2566,7 +2668,10 @@ export const scienceChapterText = {
       ],
       [
         { type: 'heading', text: 'Characteristics of Stars' },
-        { type: 'p', text: "How are stars different from each other? You may think all stars look alike, but by looking closely you might observe that some seem brighter than others, and some appear to be slightly different in color. The great distances between stars and the earth make it hard to see all the differences. The most visible difference is brightness. The measure of the brightness of a star as seen from the earth is known as magnitude." },
+        { type: 'p', text: "How are stars different from each other? You may think all stars look alike, but by looking closely you might observe that some seem brighter than others, and some appear to be slightly different in color. The great distances between stars and the earth make it hard to see all the differences. The most visible difference is brightness. The measure of the brightness of a star as seen from the earth is known as magnitude. In the picture, which star is the brightest?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/star-field-brightness.jpg', caption: 'A field of stars, showing different degrees of brightness' }
+        ] },
         { type: 'p', text: "The magnitude of a star depends on three things. The first is the star's distance from the earth. Suppose two stars are exactly alike except for their distance from the earth — the one that is closer will appear brighter and have a greater magnitude. You can compare this to the headlights of a car: the closer the car is, the brighter its headlights will seem." },
         { type: 'image-group', images: [
           { src: '/images/science/ch12/car-headlights-magnitude.jpg', caption: 'Comparing star magnitude to the brightness of headlights' }
@@ -2653,18 +2758,23 @@ export const scienceChapterText = {
       [
         { type: 'heading', text: 'Star Patterns' },
         { type: 'p', text: "What is a constellation? People have always been interested in the objects they could see in the sky. For centuries people have gazed into the night sky and wondered about stars — what they were made of and how big they were. As people watched, they noticed that stars seemed to form groups, and that even though the stars seemed to change position, the groups stayed together." },
-        { type: 'p', text: "Ancient people saw patterns in these groups of stars and gave them names. Today we call these star patterns constellations. One of the best-known constellations is the Big Dipper. Another is Scorpio. Have you ever seen these constellations? Can you name other constellations?" },
+        { type: 'p', text: "Ancient people saw patterns in these groups of stars and gave them names. Today we call these star patterns constellations. One of the best-known constellations is the Big Dipper. Another is Scorpio, shown on page 289. Have you ever seen these constellations? Can you name other constellations?" },
+        { type: 'activity', text: "Finding out: Why do stars seem to move? You may know that the stars seem to move in the sky, but you do not see them moving — they seem to move because the earth moves. You can show how the stars seem to move using a black umbrella and a star chart. Use chalk to draw a few familiar constellations on the underside of the opened umbrella, and be sure to draw the North Star at the point where the handle connects with the ribs of the umbrella. Slowly turn the handle of the umbrella counterclockwise. This shows how the stars seem to move in the sky as the earth turns." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch12/star-field-brightness.jpg', caption: 'A field of stars in the night sky' }
+          { src: '/images/science/ch12/activity-star-motion-umbrella.jpg', caption: 'A student uses a black umbrella with chalk-drawn constellations to show how the stars seem to move' }
         ] }
-      ],
-      [
-        { type: 'activity', text: "Finding out: Why do stars seem to move? You may know that the stars seem to move in the sky, but you do not see them moving — they seem to move because the earth moves. You can show how the stars seem to move using a black umbrella and a star chart. Use chalk to draw a few familiar constellations on the underside of the opened umbrella, and be sure to draw the North Star at the point where the handle connects with the ribs of the umbrella. Slowly turn the handle of the umbrella counterclockwise. This shows how the stars seem to move in the sky as the earth turns." }
       ],
       [
         { type: 'p', text: "The constellations helped people keep track of certain stars in the sky. People could watch the movements of these stars and use them to measure time and the seasons." },
         { type: 'p', text: "How did the constellations first get their names? Years ago, ancient people named many constellations for people or animals — some examples are the Great Bear, the Little Bear, and Draco (the Dragon). These names are still used today." },
-        { type: 'p', text: "The main stars in a constellation have names too. Sirius, part of the Big Dog, is the brightest star in the sky. Vega is a star in Lyra, a constellation shaped like a lyre, a type of harp. Pollux is part of the constellation called the Twins. Do the constellations really look like the things for which they were named?" }
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/constellation-great-bear.jpg', caption: 'Great Bear' },
+          { src: '/images/science/ch12/constellation-twins.jpg', caption: 'Twins, with Pollux marked' }
+        ] },
+        { type: 'p', text: "Some constellations are shown on this page. The drawings show the main stars in the constellations. They also show the figure that each star pattern looks like. The main stars in a constellation have names too. Sirius, part of the Big Dog, is the brightest star in the sky. Vega is a star in Lyra, a constellation shaped like a lyre, a type of harp. Pollux is part of the constellation called the Twins. See if you can find some of these stars in the drawings of the constellations. Do the constellations really look like the things for which they were named?" },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/constellations-lyra-draco-bigdog.jpg', caption: 'Lyra, with Vega marked; Draco; and Big Dog, with Sirius marked' }
+        ] }
       ],
       [
         { type: 'summary', text: "Astronomy is the study of the universe and all the objects in it. Scientists who study the universe are called astronomers." },
@@ -2679,29 +2789,39 @@ export const scienceChapterText = {
         { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Science Words',
-            instructions: 'Use the terms astronomers, astronomy, light-year, and universe to complete the sentences, then match each definition to the correct term.',
+            instructions: 'A. Use all the terms below to fill in the blanks: astronomers, astronomy, light-year, universe.',
             items: [
               { prompt: "Space and all the matter and energy in it is called the ___.", answer: "universe" },
               { prompt: "The study of the stars, planets, moons, and other objects in space is called ___.", answer: "astronomy" },
               { prompt: "Scientists who do this study are called ___.", answer: "astronomers" },
-              { prompt: "To measure distances in space, scientists use a unit called a/an ___.", answer: "light-year" },
-              { prompt: "A large group of stars and other bodies in space", answer: "galaxy" },
-              { prompt: "An exploding star", answer: "nova" },
-              { prompt: "A region in space once occupied by a star", answer: "black hole" },
-              { prompt: "The last stage in the life cycle of a star", answer: "black dwarf" },
-              { prompt: "A pattern of stars", answer: "constellation" },
-              { prompt: "A measure of the brightness of a star as seen from the earth", answer: "magnitude" },
-              { prompt: "A galaxy shaped like a wheel, with arms coming out of its center", answer: "spiral galaxy" },
-              { prompt: "A cloud of dust and gas in space", answer: "nebula" },
-              { prompt: "A very dense, collapsed star", answer: "neutron star" },
-              { prompt: "A star much larger than the sun, with a lower temperature", answer: "red giant" }
+              { prompt: "To measure distances in space, scientists use a unit called a/an ___.", answer: "light-year" }
             ]
           },
+          {
+            heading: 'Science Words — Matching',
+            instructions: 'B. Write the letter of the term that best matches the definition. Not all the terms will be used.',
+            items: [
+              { prompt: "A large group of stars and other bodies in space", answer: "galaxy" },
+              { prompt: "An exploding star", answer: "nova" },
+              { prompt: "Region in space once occupied by a star", answer: "black hole" },
+              { prompt: "Last stage in the life cycle of a star", answer: "black dwarf" },
+              { prompt: "Pattern of stars", answer: "constellation" },
+              { prompt: "Measure of the brightness of a star as seen from the earth", answer: "magnitude" },
+              { prompt: "Galaxy shaped like a wheel with arms coming out of center", answer: "spiral galaxy" },
+              { prompt: "Cloud of dust and gas in space", answer: "nebula" },
+              { prompt: "A very dense star", answer: "neutron star" },
+              { prompt: "Star much larger than the sun", answer: "red giant" }
+            ]
+          }
+        ] }
+      ],
+      [
+        { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Understanding Ideas',
             items: [
               { prompt: "List the three characteristics that determine the magnitude of a star.", answer: "Its distance from the earth, its size, and its temperature." },
-              { prompt: "Put the stages of a typical star's life cycle in order, and describe each one: red giant, white dwarf, middle-aged star, nebula, black dwarf.", answer: "1. Nebula — a cloud of dust and gas begins to collect. 2. Middle-aged star — the star glows blue, white, yellow, or red depending on temperature. 3. Red giant — the aging star swells and cools. 4. White dwarf — the star collapses and becomes small and hot. 5. Black dwarf — the star's fuel is gone and it no longer gives off heat or light." }
+              { prompt: "The drawings below show some of the stages in the life cycle of a star. Write the numbers of the drawings to show the correct order. Describe each stage.", answer: "Order: 1 (nebula) → 4 (middle-aged star) → 2 (red giant) → 3 (supernova/white dwarf remnant). 1. A cloud of dust and gas begins to collect into a new star. 4. The star glows and shines steadily as a middle-aged star. 2. The aging star swells into a large, cooler red giant. 3. The star's outer layers are blown off, leaving behind a remnant such as a white dwarf or the debris of a supernova." }
             ]
           },
           {
@@ -2711,6 +2831,9 @@ export const scienceChapterText = {
               { prompt: "Make up your own constellation. Write a story telling how it got its name.", answer: "Answers will vary — invent an original star pattern and an origin story to go with it." }
             ]
           }
+        ] },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch12/star-life-cycle-order-quiz.jpg', caption: 'Four stages in the life cycle of a star, shown out of order' }
         ] }
       ],
     ]
@@ -2784,15 +2907,17 @@ export const scienceChapterText = {
       ],
       [
         { type: 'heading', text: 'Muscles Move Bones' },
-        { type: 'p', text: "How do muscles move bones? Bones form the framework of your body, and bones are able to move because muscles move them. The whole skeletal system is covered with muscles, made of soft but strong tissue. The muscles in the body make up the muscular system, and you have more than 600 of them." },
-        { type: 'p', text: "Muscles are attached to bones by tough cords called tendons — you can feel tendons in your hand and wrist, and also the big tendon that connects the large muscle in the calf of your leg to your heel." },
+        { type: 'p', text: "How do muscles move bones? Bones form the framework of your body, and bones are able to move because muscles move them. The whole skeletal system is covered with muscles, made of soft but strong tissue. The muscles in the body make up the muscular system, and you have more than 600 of them. The drawing shows the muscles of someone who is running." },
         { type: 'image-group', images: [
-          { src: '/images/science/ch13/muscles-of-runner-diagram.jpg', caption: 'Muscles of someone running' },
           { src: '/images/science/ch13/runner-photo.jpg', caption: 'A runner in motion' },
-          { src: '/images/science/ch13/calf-muscle-tendon-diagram.jpg', caption: 'The calf muscle and its tendon' }
+          { src: '/images/science/ch13/muscles-of-runner-diagram.jpg', caption: 'Muscles of someone running' }
         ] }
       ],
       [
+        { type: 'p', text: "Muscles are attached to bones by tough cords called tendons — you can feel tendons in your hand and wrist, and also the big tendon that connects the large muscle in the calf of your leg to your heel. The drawing below shows this tendon." },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/calf-muscle-tendon-diagram.jpg', caption: 'The calf muscle and its tendon' }
+        ] },
         { type: 'p', text: "Most muscles of the body move bones by contracting. When a muscle contracts, it becomes shorter and thicker; when a muscle relaxes, it becomes longer and thinner. Muscle is the only kind of tissue that can contract and relax, and this contracting and relaxing is what causes movement." },
         { type: 'p', text: "Most muscles that move bones work in pairs. One muscle pulls a bone in one direction, and the other muscle of the pair pulls it in the opposite direction — because muscles can only pull, never push. To make a bone move, one muscle contracts and pulls the bone, while the other muscle of the pair relaxes." }
       ],
@@ -2842,7 +2967,8 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "The ligaments that connect bones can also be injured. A sprain is an injury in which a ligament is stretched or torn, which happens when a joint is forced to move in a way other than the way it normally moves — football players, for example, often suffer torn ligaments in the knee when hit from the side, and ankle and wrist sprains happen the same way." },
-        { type: 'p', text: "Muscles can be injured too, often from overuse. A muscle strain is an injury caused by overstretching a muscle or tendon, and it often happens when someone lifts a heavy object the wrong way. A cramp is a sudden, strong, and often painful contraction of a muscle — it does not usually last long, and rubbing the muscle can often help get rid of it." },
+        { type: 'p', text: "Sometimes muscles are injured. Some muscle injuries are caused by overuse of a muscle. A muscle strain is an injury caused by overstretching a muscle or tendon. Muscle strain often results when someone lifts a heavy object in the wrong way. The pictures show the correct way to lift a heavy object." },
+        { type: 'p', text: "Did you ever wake up in the middle of the night with a cramp in your leg or foot? A cramp is a sudden, strong contraction of a muscle. It can be very painful, but it does not usually last long. Often you can help get rid of a cramp by rubbing the muscle." },
         { type: 'image-group', images: [
           { src: '/images/science/ch13/football-knee-injury.jpg', caption: 'Checking a football player\'s knee injury' },
           { src: '/images/science/ch13/proper-lifting-technique.jpg', caption: 'The proper way to lift a heavy object' }
@@ -2867,9 +2993,7 @@ export const scienceChapterText = {
       ],
       [
         { type: 'p', text: "In addition to a proper diet, exercise is important for the growth and development of muscles. When muscles are not used, they shrink — they become smaller and weaker. Exercise keeps muscles strong." },
-        { type: 'p', text: "While exercise is important, it also creates a problem: as energy is used and food is burned during exercise, waste products are left behind in the muscles. Rest helps get rid of these wastes and keeps muscles from being overused. Sleep helps relax muscles and rid them of waste materials." }
-      ],
-      [
+        { type: 'p', text: "While exercise is important, it also creates a problem: as energy is used and food is burned during exercise, waste products are left behind in the muscles. Rest helps get rid of these wastes and keeps muscles from being overused. Sleep helps relax muscles and rid them of waste materials." },
         { type: 'summary', text: "The skeletal system forms the framework of the body and protects soft body parts." },
         { type: 'summary', text: "Most joints allow the body to move. The main kinds are ball-and-socket joints, hinge joints, and pivot joints; fixed joints do not allow movement." },
         { type: 'summary', text: "Bones are moved when muscles contract and relax." },
@@ -2906,16 +3030,35 @@ export const scienceChapterText = {
               { prompt: "A sudden, strong muscle contraction", answer: "cramp" },
               { prompt: "Injury in which a ligament is torn or stretched", answer: "sprain" }
             ]
-          },
+          }
+        ] }
+      ],
+      [
+        { type: 'review', title: 'Reviewing the Chapter', sections: [
           {
             heading: 'Using Ideas',
-            instructions: 'Identify each of the following.',
+            instructions: 'A. Identify each of the following.',
             items: [
-              { prompt: "A kind of muscle that makes up the hardest-working muscle in the body. What is it?", answer: "Heart muscle" },
-              { prompt: "A kind of muscle that makes up the inside of the blood vessels, stomach, and other organs. What is it?", answer: "Smooth muscle" },
-              { prompt: "A kind of muscle that moves bones. What is it?", answer: "Skeletal muscle" },
-              { prompt: "Name the four kinds of joints in the body and give one example of each.", answer: "Ball-and-socket (shoulder), hinge (knee), pivot (neck), and fixed (skull)." },
-              { prompt: "Name the four food groups needed for healthy bones and muscles, and what each one provides.", answer: "Meat group — protein for cell growth; dairy group — minerals that make bones hard; fruit and vegetable group — vitamins; bread and cereal group — energy for muscles to move bones." }
+              { prompt: "It is a kind of muscle. It makes up the hardest working muscle in the body. What is it?", answer: "Heart muscle" },
+              { prompt: "It is a kind of muscle. It makes up the inside of the blood vessels, stomach, and other organs. What is it?", answer: "Smooth muscle" },
+              { prompt: "It is a kind of muscle. It is muscle that moves bones. What is it?", answer: "Skeletal muscle" }
+            ]
+          },
+          {
+            heading: 'Using Ideas — Joints',
+            instructions: 'B. Write the name of each kind of joint in the drawings.',
+            items: [
+              { prompt: "Joints 1 and 2 (hip, and backbone/vertebrae)", answer: "Ball-and-socket joint (1, hip) and a joint of the backbone" },
+              { prompt: "Joint 3 (skull)", answer: "Fixed joint" },
+              { prompt: "Joint 4 (shoulder)", answer: "Ball-and-socket joint" }
+            ]
+          },
+          {
+            heading: 'Using Ideas — Food Groups',
+            instructions: 'C. Name the four food groups.',
+            items: [
+              { prompt: "Identify three different foods in each group.", answer: "Meat group, dairy group, fruit and vegetable group, bread and cereal group — answers will vary for the three foods named in each." },
+              { prompt: "Write what each food group provides that keeps your bones and muscles healthy and working properly.", answer: "Meat group — protein for cell growth; dairy group — minerals that make bones hard; fruit and vegetable group — vitamins; bread and cereal group — energy for muscles to move bones." }
             ]
           },
           {
@@ -2926,6 +3069,9 @@ export const scienceChapterText = {
               { prompt: "Use a reference book to find out what kind of injury a dislocated bone is, and describe the treatment that is usually given.", answer: "A dislocation happens when a bone is forced out of its normal position at a joint. Treatment usually involves a doctor carefully guiding the bone back into place (called reduction) and then immobilizing the joint with a splint or cast so it can heal." }
             ]
           }
+        ] },
+        { type: 'image-group', images: [
+          { src: '/images/science/ch13/joint-types-quiz-drawings.jpg', caption: 'Four kinds of joints, numbered for the quiz' }
         ] }
       ]
     ]
