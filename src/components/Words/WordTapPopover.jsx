@@ -59,6 +59,10 @@ export default function WordTapPopover({
   const [example, setExample] = useState('');
   const [phonetic, setPhonetic] = useState('');
   const [meanings, setMeanings] = useState([]);
+  const [wordImage, setWordImage] = useState(null); // { src, alt }
+  const [showMeanings, setShowMeanings] = useState(false);
+  const [defExpanded, setDefExpanded] = useState(false);
+  const [exExpanded, setExExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [lookupError, setLookupError] = useState(false);
   const [saveState, setSaveState] = useState('idle'); // idle | saving | saved
@@ -121,12 +125,26 @@ export default function WordTapPopover({
     setExample('');
     setPhonetic('');
     setMeanings([]);
+    setWordImage(null);
+    setShowMeanings(false);
+    setDefExpanded(false);
+    setExExpanded(false);
 
-    Promise.all([
+    const isMultiWord = word.trim().includes(' ') || word.trim().length > 28;
+
+    const tasks = [
       lookupWordFromDictionary(word, 'word2translation', wordLangCode, translationLangCode, contextSentence),
-      fetchWordMeanings(word, wordLangCode, translationLangCode).catch(() => [])
-    ])
-      .then(([res, mList]) => {
+      fetchWordMeanings(word, wordLangCode, translationLangCode).catch(() => []),
+      // Fetch Wikipedia image only for single words in English packs
+      (!isMultiWord && wordLangCode === 'en')
+        ? fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(word.toLowerCase())}`, { headers: { 'Accept': 'application/json' } })
+            .then(r => r.ok ? r.json() : null)
+            .catch(() => null)
+        : Promise.resolve(null)
+    ];
+
+    Promise.all(tasks)
+      .then(([res, mList, wikiData]) => {
         if (cancelledRef.current) return;
         if (res?.translation) {
           setTranslation(res.translation);
@@ -140,6 +158,9 @@ export default function WordTapPopover({
         }
         if (Array.isArray(mList)) {
           setMeanings(mList);
+        }
+        if (wikiData?.thumbnail?.source) {
+          setWordImage({ src: wikiData.thumbnail.source, alt: wikiData.title || word });
         }
       })
       .catch(() => { if (!cancelledRef.current) setLookupError(true); })
@@ -299,61 +320,76 @@ export default function WordTapPopover({
             <div className="wtp-error">{t('read.translationNotFound')}</div>
           ) : (
             <div className="wtp-content-scroll">
+              {/* Word Image from Wikipedia */}
+              {wordImage && !isSentence && (
+                <div className="wtp-word-image-wrap">
+                  <img
+                    src={wordImage.src}
+                    alt={wordImage.alt}
+                    className="wtp-word-image"
+                    loading="lazy"
+                    onError={(e) => { e.currentTarget.closest('.wtp-word-image-wrap').style.display = 'none'; }}
+                  />
+                </div>
+              )}
+
               {/* Primary Translation & Part of Speech */}
               <div className={`wtp-primary-translation-block ${isSentence ? 'wtp-sentence-translation-block' : ''}`}>
                 <div className={`wtp-translation ${isSentence ? 'wtp-sentence-translation' : ''}`}>{translation}</div>
                 {!isSentence && partOfSpeech && <span className="wtp-pos-badge">{partOfSpeech}</span>}
               </div>
 
-              {/* Definition Section (Ma'nosi) */}
+              {/* Definition Section — 2-line clamp, tap to expand */}
               {definition && (
-                <div className="wtp-detail-card">
+                <div
+                  className="wtp-detail-card wtp-detail-card-clickable"
+                  onClick={() => setDefExpanded(v => !v)}
+                >
                   <div className="wtp-detail-header">
                     <BookOpen size={12} />
-                    <span>{t('read.definitionLabel') || 'Ma\'nosi'}</span>
+                    <span>{t('read.definitionLabel') || "Ma'nosi"}</span>
+                    <ChevronDown size={11} className={`wtp-expand-chevron ${defExpanded ? 'open' : ''}`} />
                   </div>
-                  <p className="wtp-detail-text">{definition}</p>
+                  <p className={`wtp-detail-text ${defExpanded ? '' : 'wtp-clamped'}`}>{definition}</p>
                 </div>
               )}
 
-              {/* Example Sentence Section (Misol) */}
+              {/* Example Sentence — collapsed by default, tap header to open */}
               {example && (
-                <div className="wtp-detail-card wtp-detail-example">
+                <div
+                  className="wtp-detail-card wtp-detail-example wtp-detail-card-clickable"
+                  onClick={() => setExExpanded(v => !v)}
+                >
                   <div className="wtp-detail-header">
                     <Sparkles size={12} />
                     <span>{t('read.exampleLabel') || 'Misol'}</span>
+                    <ChevronDown size={11} className={`wtp-expand-chevron ${exExpanded ? 'open' : ''}`} />
                   </div>
-                  <p className="wtp-detail-text italic">"{example}"</p>
+                  {exExpanded && (
+                    <p className="wtp-detail-text italic">"{example}"</p>
+                  )}
                 </div>
               )}
 
-              {/* Extra Senses / Meanings Section */}
+              {/* Extra Senses / Meanings – horizontal chips */}
               {displayMeanings.length > 0 && (
-                <div className="wtp-detail-card wtp-detail-meanings">
-                  <div className="wtp-detail-header">
-                    <span>{t('read.otherMeaningsLabel') || 'Boshqa ma\'nolari'}</span>
-                  </div>
-                  <div className="wtp-meanings-list">
-                    {displayMeanings.map((m, idx) => {
-                      const isSelected = (translation || '').trim().toLowerCase() === (m.translation || '').trim().toLowerCase();
-                      return (
-                        <div
-                          key={idx}
-                          className={`wtp-meaning-row wtp-meaning-clickable ${isSelected ? 'selected' : ''}`}
-                          onClick={() => handleSelectMeaning(m)}
-                          title="Tanlash uchun bosing"
-                        >
-                          <div className="wtp-meaning-left">
-                            {m.partOfSpeech && <span className="wtp-meaning-pos">{m.partOfSpeech}</span>}
-                            <span className="wtp-meaning-trans">{m.translation}</span>
-                          </div>
-                          {isSelected && <Check size={14} className="wtp-meaning-check" />}
-                        </div>
-                      );
-                    })}
-                  </div>
+                <div className="wtp-meanings-chips-wrap">
+                  {displayMeanings.map((m, idx) => {
+                    const isSelected = (translation || '').trim().toLowerCase() === (m.translation || '').trim().toLowerCase();
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        className={`wtp-meaning-chip ${isSelected ? 'selected' : ''}`}
+                        onClick={() => handleSelectMeaning(m)}
+                      >
+                        {m.translation}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
+
 
               {/* Cross-check Alternate Suggestion */}
               {alternate && (
@@ -371,11 +407,6 @@ export default function WordTapPopover({
 
         {/* Footer Target Chapter & Action Button */}
         <div className="wtp-footer-block">
-          {isRecentlyViewed && !existingWord && (
-            <div className="wtp-recent-note">
-              <Eye size={12} /> <span>{t('read.recentlyViewedNote') || 'Yaqinda ko\'rgansan'}</span>
-            </div>
-          )}
           {existingWord ? (
             <div className="wtp-existing-note">
               {t('read.alreadyInPackNote')}
