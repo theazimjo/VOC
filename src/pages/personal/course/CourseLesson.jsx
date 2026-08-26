@@ -92,7 +92,7 @@ export default function CourseLesson() {
   const stageUnlocked = {
     words: true,
     grammar: wordsDone,
-    reading: grammarDone,
+    reading: true,
     listening: readingDone,
   };
   const doneCount = Object.values(stageDone).filter(Boolean).length;

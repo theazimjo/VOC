@@ -384,15 +384,24 @@ export default function PackDetail() {
                   </span>
                 )}
               </button>
-              {pack.type === 'science' && topicFilter && (
+              {pack.type === 'science' && (
                 <button
-                  className="btn btn-cards"
+                  className={`btn btn-cards ${topicFilter ? 'has-topic' : ''}`}
                   onClick={() => {
                     saveScrollPosition();
-                    navigate(`/packs/${packId}/read?topic=${encodeURIComponent(topicFilter)}`);
+                    const targetTopic = topicFilter || (topics.length > 0 ? topics[0] : null);
+                    if (targetTopic) {
+                      navigate(`/packs/${packId}/read?topic=${encodeURIComponent(targetTopic)}`);
+                    }
                   }}
+                  title={topicFilter ? `${t('packDetail.read')}: ${topicFilter}` : `${t('packDetail.read')} (${topics[0] || ''})`}
                 >
                   <span className="btn-label-main">{t('packDetail.read')}</span>
+                  {topicFilter && (
+                    <span className="btn-label-topic" title={topicFilter}>
+                      {topicFilter}{formatPageRange(topicFilter) ? ` (${formatPageRange(topicFilter)})` : ''}
+                    </span>
+                  )}
                 </button>
               )}
             </>

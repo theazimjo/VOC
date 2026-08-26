@@ -13,6 +13,7 @@ import PackCard from '../../components/Packs/PackCard';
 import PackForm from '../../components/Packs/PackForm';
 import FolderCard from '../../components/Packs/FolderCard';
 import FolderForm from '../../components/Packs/FolderForm';
+import MarketPackPreviewModal from '../../components/Packs/MarketPackPreviewModal';
 import { packIcons } from '../../utils/helpers';
 import { playSound } from '../../utils/feedback';
 import { marketPacks } from '../../data/marketData';
@@ -61,6 +62,7 @@ export default function LibraryPage() {
   const [installingPackId, setInstallingPackId] = useState(null);
   const [justInstalledIds, setJustInstalledIds] = useState([]);
   const [updatingPackId, setUpdatingPackId] = useState(null);
+  const [previewMarketPack, setPreviewMarketPack] = useState(null);
 
   // Find the user's own pack that was installed from a given market pack
   // (matched by marketPackId when available, falling back to name for
@@ -495,7 +497,8 @@ export default function LibraryPage() {
                         <div 
                           className="market-card" 
                           key={pack.id}
-                          style={{ '--card-border-gradient': pack.color }}
+                          style={{ '--card-border-gradient': pack.color, cursor: 'pointer' }}
+                          onClick={() => setPreviewMarketPack(pack)}
                         >
                           <div className="market-card-top">
                             <div className="market-card-header">
@@ -516,9 +519,14 @@ export default function LibraryPage() {
                             <button
                               className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
                               disabled={isInstalling || isUpdating || (isInstalled && !hasUpdate)}
-                              onClick={() => hasUpdate
-                                ? handleUpdatePack(pack, installedPack, missingWords)
-                                : handleInstallPack(pack)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (hasUpdate) {
+                                  handleUpdatePack(pack, installedPack, missingWords);
+                                } else {
+                                  handleInstallPack(pack);
+                                }
+                              }}
                             >
                               {isInstalling ? (
                                 <>{t('library.installing')}</>
@@ -562,6 +570,31 @@ export default function LibraryPage() {
         editFolder={editingFolder}
         onDelete={handleDeleteFolder}
       />
+
+      {previewMarketPack && (() => {
+        const installedPack = findInstalledPack(previewMarketPack);
+        const isInstalled = !!installedPack || justInstalledIds.includes(previewMarketPack.id);
+        const isInstalling = installingPackId === previewMarketPack.id;
+        const isUpdating = updatingPackId === previewMarketPack.id;
+        const missingWords = installedPack ? getMissingWords(previewMarketPack, installedPack) : [];
+        const hasUpdate = isInstalled && installedPack && missingWords.length > 0;
+
+        return (
+          <MarketPackPreviewModal
+            isOpen={Boolean(previewMarketPack)}
+            onClose={() => setPreviewMarketPack(null)}
+            marketPack={previewMarketPack}
+            installedPack={installedPack}
+            isInstalled={isInstalled}
+            hasUpdate={hasUpdate}
+            missingWords={missingWords}
+            isInstalling={isInstalling}
+            isUpdating={isUpdating}
+            onInstall={handleInstallPack}
+            onUpdate={handleUpdatePack}
+          />
+        );
+      })()}
 
       {/* Floating Action Button (FAB) for adding a pack */}
       {activeTab === 'library' && (
