@@ -14,6 +14,13 @@
 // do/does, is/are, negation, questions, and adverb placement — each of the
 // 20 target words used in exactly one question.
 
+import { lessons02to06 } from './essential3000/lessons02-06';
+import { lessons07to11 } from './essential3000/lessons07-11';
+import { lessons12to16 } from './essential3000/lessons12-16';
+import { lessons17to21 } from './essential3000/lessons17-21';
+import { lessons22to26 } from './essential3000/lessons22-26';
+import { lessons27to30 } from './essential3000/lessons27-30';
+
 const lesson1Words = [
   { id: 'l1w1', word: 'afraid', translation: "qo'rqqan", definition: 'When someone is afraid, they feel fear.', example: 'The woman was afraid of what she saw.', partOfSpeech: 'adjective' },
   { id: 'l1w2', word: 'agree', translation: 'rozi bo\'lmoq', definition: 'To agree is to say "yes" or to think the same way.', example: 'A: The food is very good in that restaurant. B: I agree with you.', partOfSpeech: 'verb' },
@@ -120,6 +127,12 @@ export const essential3000Months = [
         reading: lesson1Reading,
         listening: lesson1Listening,
       },
+      ...lessons02to06,
+      ...lessons07to11,
+      ...lessons12to16,
+      ...lessons17to21,
+      ...lessons22to26,
+      ...lessons27to30,
     ],
   },
 ];
