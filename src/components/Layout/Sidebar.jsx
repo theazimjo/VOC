@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical, ChevronLeft, ChevronRight } from 'lucide-react';
 import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
@@ -67,16 +67,25 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
       >
         {/* Header */}
         <div className="sidebar-header">
-          <motion.div 
-            className="sidebar-logo-wrapper"
-            onClick={onToggle} 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.92 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-            title={collapsed ? t('nav.expand') : t('nav.collapse')}
-          >
+          <div className="sidebar-logo-wrapper">
             <VocLogo collapsed={collapsed} />
-          </motion.div>
+          </div>
+
+          <motion.button
+            className="sidebar-edge-toggle-btn"
+            onClick={onToggle}
+            aria-label={collapsed ? t('nav.expand') : t('nav.collapse')}
+            title={collapsed ? t('nav.expand') : t('nav.collapse')}
+            whileHover={{ scale: 1.14 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+          >
+            {collapsed ? (
+              <ChevronRight size={15} strokeWidth={2.4} />
+            ) : (
+              <ChevronLeft size={15} strokeWidth={2.4} />
+            )}
+          </motion.button>
         </div>
 
         {/* Navigation */}

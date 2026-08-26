@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   LogOut, ChevronRight, Mail, User, Pencil, X, Check,
-  Moon, Type, Volume2, Globe, GraduationCap, Users, Repeat, AlertCircle, CheckCircle2, Clock
+  Moon, Type, Volume2, Globe, Users, AlertCircle, CheckCircle2
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { clearCorpIdentityCache } from '../../hooks/useCorpRole';
-import { setActiveProfile, setActiveTeacherAffiliation } from '../../utils/activeProfile';
-import { requestToJoinCenter, getMyTeacherJoinRequest, cancelTeacherRequest, getTeacherAffiliations } from '../../services/corpService';
-import { becomeIndependentTeacher, joinIndependentGroupByCode } from '../../services/independentTeacherService';
+import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
 import '../corp/student/StudentCorpProfile.css';
 
 const AVATAR_COLORS = ['#0A84FF', '#30D158', '#FF9500', '#AF52DE', '#FF375F', '#5AC8FA'];
@@ -21,7 +18,6 @@ const SHEET_ICONS = {
   theme: Moon,
   font: Type,
   language: Globe,
-  teacher: GraduationCap,
   joinGroup: Users,
 };
 
@@ -34,43 +30,9 @@ export default function ProfilePage() {
     theme: { icon: SHEET_ICONS.theme, title: t('profile.chooseTheme') },
     font: { icon: SHEET_ICONS.font, title: t('profile.chooseTextSize') },
     language: { icon: SHEET_ICONS.language, title: t('profile.chooseLanguage') },
-    teacher: { icon: SHEET_ICONS.teacher, title: t('profile.teaching') },
     joinGroup: { icon: SHEET_ICONS.joinGroup, title: t('profile.joinGroupSheetTitle') },
   };
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
-  // Reads both possible teacher affiliations directly — independent of
-  // useCorpRole's identity, which for a super-admin-allowlisted email only
-  // reports 'teacher' once activeProfile is *already* 'teacher' (see
-  // resolveCorpIdentity), and which only ever reports ONE affiliation even
-  // when the account has both. This gives the Teaching section the full,
-  // accurate picture from the start.
-  const [affiliations, setAffiliations] = useState({ independentAffiliation: null, centerAffiliation: null, nonTeacherRole: null });
-  const refreshAffiliations = () => {
-    if (!user?.uid) return Promise.resolve();
-    return getTeacherAffiliations(user.uid).then(setAffiliations).catch(() => {});
-  };
-  useEffect(() => {
-    let cancelled = false;
-    if (!user?.uid) return;
-    getTeacherAffiliations(user.uid).then(result => { if (!cancelled) setAffiliations(result); }).catch(() => {});
-    return () => { cancelled = true; };
-  }, [user?.uid]);
-  const { independentAffiliation, centerAffiliation } = affiliations;
-  const isTeacher = !!(independentAffiliation || centerAffiliation);
-
-  // A submitted-but-not-yet-approved center join request — see
-  // requestToJoinCenter/approveTeacherRequest in corpService.js.
-  const [pendingRequest, setPendingRequest] = useState(null);
-  const refreshPendingRequest = () => {
-    if (!user?.uid) return Promise.resolve();
-    return getMyTeacherJoinRequest(user.uid).then(setPendingRequest).catch(() => {});
-  };
-  useEffect(() => {
-    let cancelled = false;
-    if (!user?.uid) return;
-    getMyTeacherJoinRequest(user.uid).then(result => { if (!cancelled) setPendingRequest(result); }).catch(() => {});
-    return () => { cancelled = true; };
-  }, [user?.uid]);
 
   const [activeSheet, setActiveSheet] = useState(null); // 'theme', 'font', or null
   const closeSheet = () => setActiveSheet(null);
@@ -84,12 +46,7 @@ export default function ProfilePage() {
   const [draftName, setDraftName] = useState('');
   const [draftColor, setDraftColor] = useState(AVATAR_COLORS[0]);
 
-  // Become a Teacher / Join a teacher's group states
-  const [becomingTeacher, setBecomingTeacher] = useState(false);
-  const [becomeTeacherError, setBecomeTeacherError] = useState('');
-  const [centerCodeInput, setCenterCodeInput] = useState('');
-  const [joiningCenterAsTeacher, setJoiningCenterAsTeacher] = useState(false);
-  const [joinCenterError, setJoinCenterError] = useState('');
+  // Join a teacher's group states
   const [groupCodeInput, setGroupCodeInput] = useState('');
   const [joiningTeacherGroup, setJoiningTeacherGroup] = useState(false);
   const [joinGroupError, setJoinGroupError] = useState('');
@@ -122,77 +79,6 @@ export default function ProfilePage() {
     setShowLogoutModal(false);
     await logout();
     navigate('/login');
-  };
-
-  const handleSwitchToIndependent = () => {
-    setActiveProfile('teacher');
-    setActiveTeacherAffiliation('independent');
-    clearCorpIdentityCache(user?.uid);
-    navigate('/teacher');
-  };
-
-  const handleSwitchToCenter = () => {
-    setActiveProfile('teacher');
-    setActiveTeacherAffiliation('center');
-    clearCorpIdentityCache(user?.uid);
-    navigate('/corp/teacher');
-  };
-
-  const handleBecomeIndependentTeacher = async () => {
-    if (!user) return;
-    setBecomingTeacher(true);
-    setBecomeTeacherError('');
-    try {
-      await becomeIndependentTeacher(user.uid, {
-        name: user.displayName || 'Teacher',
-        email: user.email || '',
-        phone: '',
-      });
-      await refreshAffiliations();
-      setActiveProfile('teacher');
-      setActiveTeacherAffiliation('independent');
-      clearCorpIdentityCache(user.uid);
-      closeSheet();
-      navigate('/teacher');
-    } catch (err) {
-      setBecomeTeacherError(err.message || "Something went wrong.");
-    } finally {
-      setBecomingTeacher(false);
-    }
-  };
-
-  const handleJoinCenterAsTeacher = async (e) => {
-    e.preventDefault();
-    if (!user || !centerCodeInput.trim()) return;
-    setJoiningCenterAsTeacher(true);
-    setJoinCenterError('');
-    try {
-      // Submits a request only — the center admin has to approve it before
-      // this account actually becomes a teacher there (approveTeacherRequest
-      // in corpService.js is what writes corpUsers/{uid}). So no profile
-      // switch or navigation here; just reflect the new pending state.
-      await requestToJoinCenter(centerCodeInput.trim(), user.uid, {
-        name: user.displayName || 'Teacher',
-        email: user.email || '',
-        phone: '',
-      });
-      await refreshPendingRequest();
-      setCenterCodeInput('');
-    } catch (err) {
-      setJoinCenterError(err.message || "Something went wrong.");
-    } finally {
-      setJoiningCenterAsTeacher(false);
-    }
-  };
-
-  const handleCancelRequest = async () => {
-    if (!user || !pendingRequest) return;
-    try {
-      await cancelTeacherRequest(user.uid, pendingRequest.centerId);
-      setPendingRequest(null);
-    } catch (err) {
-      setJoinCenterError(err.message || "Something went wrong.");
-    }
   };
 
   const handleJoinTeacherGroup = async (e) => {
@@ -307,20 +193,9 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* ── Teaching ── one entry point regardless of affiliation count; the
-          sheet itself adapts (become / switch) per affiliation — see
-          activeSheet === 'teacher' below. */}
+      {/* ── Teaching ── */}
       <div className="corp-profile-section-title">{t('profile.teaching')}</div>
       <div className="corp-profile-tiles">
-        <div
-          className="corp-profile-tile"
-          onClick={() => { setBecomeTeacherError(''); setJoinCenterError(''); setActiveSheet('teacher'); }}
-        >
-          <div className="corp-profile-tile-icon" style={{ background: '#34c759' }}>
-            {isTeacher ? <Repeat size={17} strokeWidth={2.2} /> : <GraduationCap size={17} strokeWidth={2.2} />}
-          </div>
-          <span className="corp-profile-tile-text">{isTeacher ? t('profile.teaching') : t('profile.becomeTeacher')}</span>
-        </div>
         <div
           className="corp-profile-tile"
           onClick={() => { setJoinGroupError(''); setJoinGroupSuccess(''); setActiveSheet('joinGroup'); }}
@@ -495,117 +370,6 @@ export default function ProfilePage() {
                     </button>
                   );
                 })}
-              </div>
-            )}
-
-            {activeSheet === 'teacher' && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', width: '100%', boxSizing: 'border-box' }}>
-                {becomeTeacherError && (
-                  <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '10px 14px', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <AlertCircle size={16} style={{ flexShrink: 0 }} /> <span>{becomeTeacherError}</span>
-                  </div>
-                )}
-
-                {/* Independent Tutor card — "become" if not yet independent, "switch" if already */}
-                <div style={{ padding: '16px', borderRadius: '16px', border: '1px solid var(--border-light)', background: 'var(--bg-tertiary)', display: 'flex', flexDirection: 'column', gap: '10px', boxSizing: 'border-box', width: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontWeight: 700, fontSize: '0.96rem', color: 'var(--text-primary)' }}>{t('profile.independentTutorTitle')}</span>
-                      {independentAffiliation && <CheckCircle2 size={16} color="#34c759" style={{ flexShrink: 0 }} />}
-                    </div>
-                  </div>
-                  <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                    {independentAffiliation
-                      ? t('profile.independentTutorDescOwned')
-                      : t('profile.independentTutorDescNew')}
-                  </p>
-                  {independentAffiliation ? (
-                    <button
-                      type="button"
-                      onClick={handleSwitchToIndependent}
-                      style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
-                    >
-                      {t('profile.switchToIndependentMode')}
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={handleBecomeIndependentTeacher}
-                      disabled={becomingTeacher}
-                      style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#34c759', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', opacity: becomingTeacher ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
-                    >
-                      {becomingTeacher ? t('profile.starting') : t('profile.becomeIndependentTutor')}
-                    </button>
-                  )}
-                </div>
-
-                {/* Learning Center card — "join" if no center/request yet,
-                    "pending" while awaiting admin approval, "switch" once approved */}
-                <div style={{ padding: '16px', borderRadius: '16px', border: '1px solid var(--border-light)', background: 'var(--bg-tertiary)', display: 'flex', flexDirection: 'column', gap: '10px', boxSizing: 'border-box', width: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontWeight: 700, fontSize: '0.96rem', color: 'var(--text-primary)' }}>
-                        {centerAffiliation?.centerName || pendingRequest?.centerName || t('profile.learningCenterFallback')}
-                      </span>
-                      {centerAffiliation && <CheckCircle2 size={16} color="#34c759" style={{ flexShrink: 0 }} />}
-                      {!centerAffiliation && pendingRequest && <Clock size={16} color="#ff9500" style={{ flexShrink: 0 }} />}
-                    </div>
-                  </div>
-                  {centerAffiliation ? (
-                    <>
-                      <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                        {t('profile.youreTeacherAtCenter')}
-                      </p>
-                      <button
-                        type="button"
-                        onClick={handleSwitchToCenter}
-                        style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
-                      >
-                        {t('profile.switchToCenterMode')}
-                      </button>
-                    </>
-                  ) : pendingRequest ? (
-                    <>
-                      <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                        {t('profile.requestPending')}
-                      </p>
-                      <button
-                        type="button"
-                        onClick={handleCancelRequest}
-                        style={{ width: '100%', padding: '11px 16px', borderRadius: '12px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-secondary)', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', transition: 'all 0.15s ease', boxSizing: 'border-box' }}
-                      >
-                        {t('profile.cancelRequest')}
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <p style={{ margin: 0, fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.45 }}>
-                        {t('profile.centerCodeDesc')}
-                      </p>
-                      {joinCenterError && (
-                        <div style={{ background: 'rgba(255, 59, 48, 0.12)', border: '1px solid rgba(255, 59, 48, 0.25)', color: '#ff3b30', padding: '8px 12px', borderRadius: '10px', fontSize: '0.8rem', fontWeight: 600 }}>
-                          {joinCenterError}
-                        </div>
-                      )}
-                      <form onSubmit={handleJoinCenterAsTeacher} style={{ display: 'flex', gap: '8px', width: '100%', boxSizing: 'border-box', marginTop: '2px' }}>
-                        <input
-                          type="text"
-                          placeholder={t('profile.centerCodePlaceholder')}
-                          value={centerCodeInput}
-                          onChange={e => setCenterCodeInput(e.target.value)}
-                          style={{ flex: '1 1 0%', minWidth: 0, width: '100%', padding: '10px 14px', borderRadius: '12px', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box' }}
-                        />
-                        <button
-                          type="submit"
-                          disabled={joiningCenterAsTeacher || !centerCodeInput.trim()}
-                          style={{ flexShrink: 0, padding: '10px 18px', borderRadius: '12px', border: 'none', background: '#0a7aff', color: '#fff', fontWeight: 700, fontSize: '0.88rem', cursor: 'pointer', whiteSpace: 'nowrap', opacity: (joiningCenterAsTeacher || !centerCodeInput.trim()) ? 0.6 : 1, transition: 'all 0.15s ease', boxSizing: 'border-box' }}
-                        >
-                          {joiningCenterAsTeacher ? t('profile.requesting') : t('profile.requestBtn')}
-                        </button>
-                      </form>
-                    </>
-                  )}
-                </div>
               </div>
             )}
 
