@@ -19,6 +19,7 @@ export const healthChapterText = {
     pages: [
       [
         { type: 'heading', text: 'Chapter 1 · Choosing Wellness' },
+        { type: 'activity', text: "As You Read, Think About — what is meant by the terms health and wellness. How your behavior affects your level of wellness. How you can start to improve your health now." },
         { type: 'p', text: "Imagine gliding across a frozen lake with a friend, the air clean and cold, your whole body alive with energy and good health. Everyone wants to feel good and have moments like that. The choices you make every day contribute to your ability to enjoy life to its fullest — and in this chapter you'll find out how you can choose and maintain the particular life style that suits you, one that keeps you feeling fit, energetic, and happy. The choices you make every day affect your health now and in the future." }
       ],
       [
@@ -110,6 +111,7 @@ export const healthChapterText = {
     pages: [
       [
         { type: 'heading', text: 'Chapter 2 · Your Personality' },
+        { type: 'activity', text: "As You Read, Think About — the ways in which your personality contributes to your mental health. How personality is formed. Why it's important to learn to express your emotions in healthful ways." },
         { type: 'p', text: "Everyone is a bit nervous before a party, though most people won't admit it — everyone feels shy and unsure sometimes. These are normal feelings you can't get rid of entirely, but you can learn to keep them in perspective and deal with them positively. In this chapter you'll learn about ways to build your self-image so you'll feel better about yourself, and how to improve the way you reveal your personality to others. You express your unique personality in everything you do." }
       ],
       [
@@ -120,6 +122,9 @@ export const healthChapterText = {
       [
         { type: 'p', text: "When psychologists — people who study the human mind and behavior — describe a healthy personality, they often speak of mental health: the state of being comfortable with yourself, with others, and with your surroundings. Mentally healthy people also tend to be realistic about their strengths and weaknesses, able to take on the responsibilities of daily living, caring toward themselves and others, able to handle disappointments and learn from them, and able to feel enjoyment and a sense of achievement." },
         { type: 'p', text: "Psychologists like to think of mental health as a continuum, much like the Illness-Wellness continuum from Chapter 1 — people can move toward the wellness end by developing the characteristics above. Mentally healthy people tend to be friendly, optimistic, and loving; they can be assertive, laugh at themselves, try new experiences, and strive to do their best." }
+      ],
+      [
+        { type: 'activity', text: "Check Your Wellness — do your attitudes and behaviors contribute to your mental health? See if you can answer yes to questions like these. (1) Do you usually feel good about yourself and your life? (2) Are you aware of your strengths and your weaknesses? (3) Are you able to give love and receive it? (4) Do you enjoy spending time alone? (5) Can you handle your disappointments and learn from them? (6) When you feel sad or angry, do you express your feelings in appropriate ways? (7) Can you share your feelings with close friends and family members? (8) Are you open to new ideas and experiences?" }
       ],
       [
         { type: 'heading', text: 'How Is Personality Formed?' },
