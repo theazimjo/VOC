@@ -84,14 +84,14 @@
 .tab-count-badge {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.08);
   border: none;
   min-width: 20px;
   height: 20px;
   padding: 0 6px;
   border-radius: 10px;
   font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-secondary, rgba(60, 60, 67, 0.7));
   font-weight: 700;
   display: inline-flex;
   align-items: center;
@@ -101,12 +101,36 @@
 }
 
 .library-tab-btn:hover .tab-count-badge {
-  background: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
+  background: rgba(0, 122, 255, 0.12);
+  color: #007AFF;
 }
 
 .library-tab-btn.active .tab-count-badge {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(0, 122, 255, 0.14);
+  color: #007AFF;
+}
+
+/* Light theme overrides */
+[data-theme="ios"] .tab-count-badge {
+  background: rgba(0, 0, 0, 0.08);
+  color: rgba(60, 60, 67, 0.75);
+}
+
+[data-theme="ios"] .library-tab-btn.active .tab-count-badge,
+[data-theme="ios"] .library-tab-btn:hover .tab-count-badge {
+  background: rgba(0, 122, 255, 0.14);
+  color: #007AFF;
+}
+
+/* Dark theme overrides */
+[data-theme="android"] .tab-count-badge {
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="android"] .library-tab-btn.active .tab-count-badge,
+[data-theme="android"] .library-tab-btn:hover .tab-count-badge {
+  background: rgba(255, 255, 255, 0.24);
   color: #ffffff;
 }
 
@@ -133,6 +157,12 @@
 [data-theme="sepia"] .tab-count-badge {
   background: rgba(200, 100, 20, 0.14);
   color: #C86414;
+}
+
+[data-theme="sepia"] .library-tab-btn.active .tab-count-badge,
+[data-theme="sepia"] .library-tab-btn:hover .tab-count-badge {
+  background: rgba(200, 100, 20, 0.22);
+  color: #8C3A00;
 }
 
 /* Folder detail header: back arrow, folder title, edit/delete trigger */
