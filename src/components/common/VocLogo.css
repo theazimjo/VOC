@@ -5,6 +5,8 @@
   user-select: none;
   white-space: nowrap;
   text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .voc-logo-img-wrap {
@@ -17,13 +19,11 @@
   justify-content: center;
   box-shadow: 0 0 16px rgba(168, 85, 247, 0.25);
   flex-shrink: 0;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
   background: #0b0f19;
-}
-
-.voc-logo-brand:hover .voc-logo-img-wrap {
-  box-shadow: 0 0 22px rgba(168, 85, 247, 0.45);
-  transform: scale(1.05);
+  border: 1px solid rgba(168, 85, 247, 0.2);
 }
 
 .voc-logo-img {
@@ -31,6 +31,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .voc-logo-text-group {
@@ -45,11 +46,16 @@
   font-size: 1.28rem;
   font-weight: 850;
   letter-spacing: 0.07em;
-  background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 50%, #60a5fa 100%);
+  background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 40%, #60a5fa 70%, #f3e8ff 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-shadow: 0 0 24px rgba(192, 132, 252, 0.25);
   display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              letter-spacing 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-position 0.5s ease;
 }
 
 .voc-logo-subtitle {
@@ -59,6 +65,45 @@
   color: #94a3b8;
   text-transform: uppercase;
   margin-top: 2px;
+  transition: color 0.3s ease;
+}
+
+/* Hover effects (Gated for fine pointers) */
+@media (hover: hover) and (pointer: fine) {
+  .voc-logo-brand:hover .voc-logo-img-wrap {
+    transform: translateY(-2px) scale(1.08) rotate(-4deg);
+    box-shadow: 0 4px 22px rgba(168, 85, 247, 0.45), 0 0 32px rgba(96, 165, 250, 0.3);
+    border-color: rgba(192, 132, 252, 0.5);
+  }
+
+  .voc-logo-brand:hover .voc-logo-img {
+    transform: scale(1.06);
+  }
+
+  .voc-logo-brand:hover .voc-logo-title {
+    transform: translateX(2px) scale(1.03);
+    letter-spacing: 0.09em;
+    background-position: right center;
+  }
+
+  .voc-logo-brand:hover .voc-logo-subtitle {
+    color: #c084fc;
+  }
+
+  .voc-logo-brand:active {
+    transform: scale(0.96);
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .voc-logo-img-wrap,
+  .voc-logo-img,
+  .voc-logo-title,
+  .voc-logo-brand {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 /* Size Variants */
