@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef, useMemo } from 'react';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Search, Save, ChevronDown, ChevronUp, AlertTriangle, CheckCircle2, Check } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -14,6 +14,7 @@ import './WordFormPage.css';
 export default function WordFormPage() {
   const { packId, wordId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user } = useAuth();
   const { t } = useLanguage();
   const { getPack } = usePacks();
@@ -32,7 +33,8 @@ export default function WordFormPage() {
     example: '',
     notes: '',
     partOfSpeech: 'noun',
-    customSentence: ''
+    customSentence: '',
+    topic: searchParams.get('topic') || ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -127,12 +129,24 @@ export default function WordFormPage() {
           example: decodeHTMLEntities(target.example || ''),
           notes: decodeHTMLEntities(target.notes || ''),
           partOfSpeech: target.partOfSpeech || 'noun',
-          customSentence: decodeHTMLEntities(target.customSentence || '')
+          customSentence: decodeHTMLEntities(target.customSentence || ''),
+          topic: target.topic || ''
         });
         setShowMore(Boolean(target.definition || target.example || target.notes || target.customSentence));
       }
     }
   }, [isEdit, wordId, words]);
+
+  // Chapters already used in this pack, so the user can pick an existing one
+  // instead of retyping it (and risking a typo that'd silently create a
+  // second, near-duplicate chapter). Includes `pack.chapters` too, since a
+  // chapter created via "Add chapter" on the pack page may still be empty
+  // (no words carry it as a topic yet).
+  const existingTopics = useMemo(() => {
+    const fromWords = words.map(w => w.topic).filter(Boolean);
+    const fromPack = pack?.chapters || [];
+    return [...new Set([...fromWords, ...fromPack])].sort();
+  }, [words, pack]);
 
   const packLanguage = pack?.language || 'en-US';
   const wordLangCode = toShortLangCode(packLanguage);
@@ -300,10 +314,11 @@ export default function WordFormPage() {
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 2500);
       if (!isEdit) {
-        setFormData({
+        setFormData(prev => ({
           word: '', translation: '', definition: '', example: '',
-          notes: '', partOfSpeech: 'noun', customSentence: ''
-        });
+          notes: '', partOfSpeech: 'noun', customSentence: '',
+          topic: prev.topic
+        }));
         setShowMore(false);
         setLookupAlternate(null);
         setOtherMeanings([]);
@@ -491,6 +506,32 @@ export default function WordFormPage() {
               </div>
 
             </div>
+          </div>
+
+          <div className="input-group wfp-chapter-group">
+            <label>{t('wordForm.chapterLabel')}</label>
+            <input
+              type="text"
+              className="input"
+              value={formData.topic}
+              onChange={e => setFormData({ ...formData, topic: e.target.value })}
+              placeholder={t('wordForm.chapterPlaceholder')}
+              maxLength={120}
+            />
+            {existingTopics.length > 0 && (
+              <div className="wfp-chapter-chips">
+                {existingTopics.map(topic => (
+                  <button
+                    type="button"
+                    key={topic}
+                    className={`wfp-chapter-chip ${formData.topic === topic ? 'active' : ''}`}
+                    onClick={() => setFormData(prev => ({ ...prev, topic: prev.topic === topic ? '' : topic }))}
+                  >
+                    {topic}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Symmetrical 2-column secondary row: More details (left) & Other meanings dropdown picker (right) */}

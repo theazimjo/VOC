@@ -206,6 +206,10 @@ export const translations = {
       importDuplicateSkip: '{dupCount} duplicate word(s) will be skipped. {uniqueCount} new word(s) will be added. Continue?',
       noNewWordsToAdd: 'No new words to add — every word in the list already exists.',
       importDailyLimitWarning: "This import will bring today's total new words to {total} (daily goal: {limit}). Continue anyway?",
+      addChapterTitle: 'New chapter',
+      addChapterMsg: 'Give this chapter a name, then add words to it.',
+      addChapterPlaceholder: 'e.g. Chapter 1: Plants',
+      addChapterCreate: 'Create',
     },
     wordList: {
       loading: 'Loading...',
@@ -236,6 +240,7 @@ export const translations = {
     speedDial: {
       jsonImport: 'JSON Import',
       addWord: 'Add Word',
+      addChapter: 'Add Chapter',
       actions: 'Actions',
     },
     wordForm: {
@@ -268,6 +273,9 @@ export const translations = {
       customSentencePlaceholder: 'Write your own sentence to move the word into active memory',
       notes: 'Notes',
       notesPlaceholder: 'Synonyms, antonyms, or other notes',
+      chapterLabel: 'Chapter (optional)',
+      chapterPlaceholder: 'e.g. Chapter 1: Plants',
+      chapterHint: 'Group words into chapters, just like the market packs',
       saving: 'Saving...',
       saveChanges: 'Save changes',
       saveWord: 'Save word',
@@ -1102,6 +1110,10 @@ export const translations = {
       importDuplicateSkip: '{dupCount} дубликат(ов) будет пропущено. Будет добавлено {uniqueCount} новых слов. Продолжить?',
       noNewWordsToAdd: 'Нет новых слов для добавления — каждое слово из списка уже существует.',
       importDailyLimitWarning: 'Этот импорт увеличит количество новых слов за сегодня до {total} (дневная цель: {limit}). Всё равно продолжить?',
+      addChapterTitle: 'Новая глава',
+      addChapterMsg: 'Придумайте название главы, затем добавляйте в неё слова.',
+      addChapterPlaceholder: 'например, Глава 1: Растения',
+      addChapterCreate: 'Создать',
     },
     wordList: {
       loading: 'Загрузка...',
@@ -1132,6 +1144,7 @@ export const translations = {
     speedDial: {
       jsonImport: 'Импорт JSON',
       addWord: 'Добавить слово',
+      addChapter: 'Добавить главу',
       actions: 'Действия',
     },
     wordForm: {
@@ -1164,6 +1177,9 @@ export const translations = {
       customSentencePlaceholder: 'Напишите своё предложение, чтобы перевести слово в активную память',
       notes: 'Заметки',
       notesPlaceholder: 'Синонимы, антонимы или другие заметки',
+      chapterLabel: 'Глава (необязательно)',
+      chapterPlaceholder: 'например, Глава 1: Растения',
+      chapterHint: 'Группируйте слова по главам, как в наборах из маркета',
       saving: 'Сохранение...',
       saveChanges: 'Сохранить изменения',
       saveWord: 'Сохранить слово',
@@ -1998,6 +2014,10 @@ export const translations = {
       importDuplicateSkip: "{dupCount} ta takroriy so'z o'tkazib yuboriladi. {uniqueCount} ta yangi so'z qo'shiladi. Davom etasizmi?",
       noNewWordsToAdd: "Qo'shish uchun yangi so'z yo'q — ro'yxatdagi har bir so'z allaqachon mavjud.",
       importDailyLimitWarning: "Bu import bugungi yangi so'zlar sonini {total} taga yetkazadi (kunlik maqsad: {limit}). Baribir davom etasizmi?",
+      addChapterTitle: "Yangi bob",
+      addChapterMsg: "Bobga nom bering, so'ng unga so'zlar qo'shing.",
+      addChapterPlaceholder: "masalan, 1-bob: O'simliklar",
+      addChapterCreate: "Yaratish",
     },
     wordList: {
       loading: "Yuklanmoqda...",
@@ -2028,6 +2048,7 @@ export const translations = {
     speedDial: {
       jsonImport: "JSON Import",
       addWord: "So'z qo'shish",
+      addChapter: "Bob qo'shish",
       actions: "Harakatlar",
     },
     wordForm: {
@@ -2060,6 +2081,9 @@ export const translations = {
       customSentencePlaceholder: "So'zni faol xotiraga o'tkazish uchun o'z jumlangizni yozing",
       notes: "Qaydlar",
       notesPlaceholder: "Sinonimlar, antonimlar yoki boshqa qaydlar",
+      chapterLabel: "Bob / mavzu (ixtiyoriy)",
+      chapterPlaceholder: "masalan, 1-bob: O'simliklar",
+      chapterHint: "So'zlarni marketdagi kitoblar kabi boblarga guruhlang",
       saving: "Saqlanmoqda...",
       saveChanges: "O'zgarishlarni saqlash",
       saveWord: "So'zni saqlash",

@@ -49,9 +49,9 @@
 
 /* Audio pronounce button */
 .btn-speak {
-  background: rgba(168, 85, 247, 0.12);
+  background: var(--accent-1-dim);
   border: none;
-  color: #c084fc;
+  color: var(--accent-1);
   cursor: pointer;
   width: 28px;
   height: 28px;
@@ -64,9 +64,10 @@
 }
 
 .btn-speak:hover {
-  background: rgba(168, 85, 247, 0.24);
-  color: #e9d5ff;
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
   transform: scale(1.06);
+  filter: brightness(1.15);
 }
 
 .btn-speak:active {
@@ -201,7 +202,7 @@
   color: var(--text-secondary);
   font-style: italic;
   line-height: 1.45;
-  border-left: 2px solid #c084fc;
+  border-left: 2px solid var(--accent-1);
   padding-left: 10px;
   margin-top: 4px;
 }

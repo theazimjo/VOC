@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './SpeedDialFAB.css';
 
-export default function SpeedDialFAB({ onAddWord, onImportJson }) {
+export default function SpeedDialFAB({ onAddWord, onImportJson, onAddChapter }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
   const { t } = useLanguage();
@@ -24,6 +24,25 @@ export default function SpeedDialFAB({ onAddWord, onImportJson }) {
       <AnimatePresence>
         {isOpen && (
           <div className="speed-dial-actions">
+            {/* Action 0: Add chapter (only offered where the pack supports free-text chapters) */}
+            {onAddChapter && (
+              <motion.button
+                className="speed-dial-action"
+                onClick={() => {
+                  onAddChapter();
+                  setIsOpen(false);
+                }}
+                initial={{ opacity: 0, y: 15, scale: 0.8 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 15, scale: 0.8 }}
+                transition={{ duration: 0.2, delay: 0.1 }}
+                title={t('speedDial.addChapter')}
+              >
+                <span className="speed-dial-action-label">{t('speedDial.addChapter')}</span>
+                <span className="speed-dial-action-icon">📚</span>
+              </motion.button>
+            )}
+
             {/* Action 1: JSON Import */}
             <motion.button
               className="speed-dial-action"

@@ -44,8 +44,8 @@
 }
 
 select option {
-  background-color: #181824;
-  color: #ffffff;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 /* Font size configurations */

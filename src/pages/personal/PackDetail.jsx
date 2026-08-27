@@ -35,6 +35,8 @@ export default function PackDetail() {
   const [showPhotoExtractorModal, setShowPhotoExtractorModal] = useState(false);
   const [editingWord, setEditingWord] = useState(null);
   const [newWordsAddedCount, setNewWordsAddedCount] = useState(null);
+  const [showAddChapterModal, setShowAddChapterModal] = useState(false);
+  const [newChapterName, setNewChapterName] = useState('');
 
   const [confusionPairs, setConfusionPairs] = useState([]);
   const marketSyncCheckedRef = useRef(false);
@@ -55,10 +57,15 @@ export default function PackDetail() {
   // Distinct topics present among this pack's words, for the optional
   // study-grouping filter chips - shown for any pack whose words carry a
   // topic (IELTS packs group by theme; the Science market pack groups by
-  // book chapter), and only once at least one word has a topic set.
+  // book chapter), and only once at least one word has a topic set. Also
+  // folds in `pack.chapters` - chapters the user created via "Add chapter"
+  // before adding any words to them yet, so a brand-new empty chapter shows
+  // up as a chip immediately instead of only appearing once it has a word.
   const topics = useMemo(() => {
     if (!pack) return [];
-    return [...new Set(words.map(w => w.topic).filter(Boolean))].sort();
+    const fromWords = words.map(w => w.topic).filter(Boolean);
+    const fromPack = pack.chapters || [];
+    return [...new Set([...fromWords, ...fromPack])].sort();
   }, [pack, words]);
 
   // Restore the last chapter/topic the user was on for this pack, once, the
@@ -230,6 +237,25 @@ export default function PackDetail() {
     }
     setShowWordForm(false);
     setEditingWord(null);
+  };
+
+  // Chapters normally only "exist" once a word carries their name as its
+  // topic - this stores an empty chapter directly on the pack (pack.chapters)
+  // so it shows up as a chip right away, before any word has been added to
+  // it. Stays on this page (doesn't jump into the add-word form) - the user
+  // picks the new chip and adds words to it whenever they're ready.
+  const handleCreateChapter = async () => {
+    const name = newChapterName.trim();
+    if (!name) return;
+    const alreadyExists = (pack.chapters || []).includes(name) || words.some(w => w.topic === name);
+    if (!alreadyExists) {
+      const nextChapters = [...(pack.chapters || []), name];
+      await updatePack(packId, { chapters: nextChapters });
+      setPack(prev => ({ ...prev, chapters: nextChapters }));
+    }
+    setShowAddChapterModal(false);
+    setNewChapterName('');
+    setTopicFilter(name);
   };
 
   // The word-edit pages AND Practice are separate routes, so this page fully
@@ -501,11 +527,59 @@ export default function PackDetail() {
           onAddWord={() => navigate(
             pack.type === 'ielts' ? `/packs/${packId}/word/ielts/new`
               : pack.type === 'english' ? `/packs/${packId}/word/english/new`
-                : `/packs/${packId}/word/new`
+                : `/packs/${packId}/word/new${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`
           )}
           onImportJson={() => navigate(`/packs/${packId}/import-json`)}
           onExtractPhoto={() => setShowPhotoExtractorModal(true)}
+          onAddChapter={
+            pack.type === 'ielts' || pack.type === 'english'
+              ? undefined
+              : () => setShowAddChapterModal(true)
+          }
         />
+      )}
+
+      {showAddChapterModal && (
+        <div className="ios-alert-overlay" onClick={() => setShowAddChapterModal(false)}>
+          <motion.div
+            className="ios-alert-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="ios-alert-icon">📚</div>
+            <h3>{t('packDetail.addChapterTitle')}</h3>
+            <p>{t('packDetail.addChapterMsg')}</p>
+            <input
+              type="text"
+              className="input"
+              style={{ width: '100%', marginBottom: 'var(--space-lg)' }}
+              value={newChapterName}
+              onChange={e => setNewChapterName(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') handleCreateChapter(); }}
+              placeholder={t('packDetail.addChapterPlaceholder')}
+              maxLength={120}
+              autoFocus
+            />
+            <div style={{ display: 'flex', gap: 'var(--space-sm)', width: '100%' }}>
+              <button
+                className="ios-alert-btn"
+                style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+                onClick={() => { setShowAddChapterModal(false); setNewChapterName(''); }}
+              >
+                {t('wordCard.cancel')}
+              </button>
+              <button
+                className="ios-alert-btn"
+                disabled={!newChapterName.trim()}
+                onClick={handleCreateChapter}
+              >
+                {t('packDetail.addChapterCreate')}
+              </button>
+            </div>
+          </motion.div>
+        </div>
       )}
 
       {newWordsAddedCount !== null && (
