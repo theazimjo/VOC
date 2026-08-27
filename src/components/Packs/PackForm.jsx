@@ -19,11 +19,8 @@ export default function PackForm({ isOpen, onClose, onSave, editPack = null, onD
   const folderMenuRef = useRef(null);
   const { t } = useLanguage();
 
-  const isLocked = editPack && editPack.name === 'Irregular Verbs';
-  // Pack type drives which word-entry form and practice trainer a pack
-  // uses, so it can't be changed once words may already exist against it -
-  // locked for any existing pack, not just the Irregular Verbs preset.
-  const isTypeLocked = Boolean(editPack);
+  const isLocked = Boolean(editPack && (editPack.name === 'Irregular Verbs' || editPack.isSystem));
+  const isTypeLocked = isLocked;
 
   useEffect(() => {
     if (editPack) {
