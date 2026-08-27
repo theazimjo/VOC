@@ -61,7 +61,11 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
             <span className="badge badge-accent pos-badge">{pos.label.split(' ')[0]}</span>
           )}
 
-          <div className="word-mastery-signal" title={localizedMasteryLabel}>
+          <div className="word-mastery-signal">
+            <div className="word-mastery-tooltip">
+              <span className="word-mastery-tooltip-label">{localizedMasteryLabel}</span>
+              <span className="word-mastery-tooltip-percent">{Math.round(word.mastery || 0)}%</span>
+            </div>
             {[1, 2, 3, 4].map(bar => (
               <span
                 key={bar}
