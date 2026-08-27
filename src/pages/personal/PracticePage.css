@@ -288,6 +288,7 @@
   z-index: 10000;
   overflow: hidden;
   box-sizing: border-box;
+  margin-bottom: var(--space-md);
 }
 
 .practice-session-header .clean-back-arrow {
@@ -389,7 +390,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding-top: var(--space-xs);
+  padding-top: var(--space-sm);
 }
 
 /* Results Screen */

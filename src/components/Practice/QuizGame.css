@@ -34,7 +34,8 @@
   font-size: var(--font-sm);
   color: var(--text-secondary);
   font-weight: 600;
-  margin-top: -8px;
+  margin-top: 0;
+  padding: 4px 0;
 }
 
 .quiz-timer {
@@ -282,7 +283,8 @@
   }
 
   .quiz-progress-label {
-    margin-top: -4px;
+    margin-top: 0;
+    padding: 2px 0;
   }
 
   .quiz-question-card {
