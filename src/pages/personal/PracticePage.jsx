@@ -132,7 +132,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
           if (words.length === 0) {
             const fallbackPath = packDetailPath || (foundSource.courseId ? `/course/${urlSourceId}` : `/packs/${urlSourceId}`);
             showAlert(
-              queryTopic ? "This chapter has no words!" : "This pack has no words! Add some words first.",
+              queryTopic ? t('practice.noWordsInChapter') : t('practice.noWordsInPack'),
               () => {
                 if (onExit) onExit();
                 else navigate(fallbackPath);
@@ -162,7 +162,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
             setStep('intro');
           } else {
             if (mode) {
-              showAlert(`This mode needs at least ${minWords} words. Choose a different mode.`);
+              showAlert(t('practice.modeNeedsMinWords', { min: minWords }));
             }
             setStep('mode');
           }
@@ -214,7 +214,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
     }
 
     if (words.length === 0) {
-      showAlert("This pack has no words! Add some words from the Library first.");
+      showAlert(t('practice.noWordsInPackFromLibrary'));
       return;
     }
 
@@ -230,7 +230,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
 
   const handleStartPractice = async (mode) => {
     if (sourceWords.length === 0) {
-      showAlert("This pack has no words!");
+      showAlert(t('practice.noWordsInPack'));
       return;
     }
 
@@ -240,7 +240,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
     const pool = filterWordsForMode(sourceWords, mode);
     const minWords = PRACTICE_MODE_MIN_WORDS[mode] || 1;
     if (pool.length < minWords) {
-      showAlert(`This mode needs at least ${minWords} words (you currently have ${pool.length}).`);
+      showAlert(t('practice.modeNeedsMinWordsCount', { min: minWords, count: pool.length }));
       return;
     }
 
