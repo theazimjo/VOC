@@ -1,15 +1,16 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical, ChevronLeft, ChevronRight, User } from 'lucide-react';
 import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
 export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const { avatarSrc, avatarError } = useAvatar(user?.photoURL);
 
   const baseNavItems = [
@@ -17,6 +18,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
     { to: '/library',  icon: BookOpen,        label: t('nav.library') },
     { to: '/grammar',  icon: GraduationCap,   label: t('nav.grammar') },
     { to: '/experiment', icon: FlaskConical,   label: t('nav.lab') },
+    { to: '/profile',  icon: User,            label: t('nav.profile') },
   ];
 
   const handleLogout = async () => {
@@ -38,10 +40,15 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
   };
 
   const navItems = [...baseNavItems];
-  const SUPER_ADMINS = ['azimjon29042006@gmail.com', 'azimjonxolmirzayev30@gmail.com'];
-  if (user?.email && SUPER_ADMINS.includes(user.email.toLowerCase())) {
-    navItems.push({ to: '/admin', icon: Shield, label: t('nav.admin') });
-  }
+
+  const handleProfileClick = (e) => {
+    e.stopPropagation();
+    if (collapsed) {
+      onToggle();
+    }
+    navigate('/profile');
+    if (onMobileClose) onMobileClose();
+  };
 
   return (
     <>
@@ -62,13 +69,16 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
         className={`sidebar ${collapsed ? 'collapsed' : ''} ${
           mobileOpen ? 'mobile-open' : ''
         }`}
-        layout
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        animate={{ width: collapsed ? 72 : 260 }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* Header */}
         <div className="sidebar-header">
-          <div className="sidebar-logo-wrapper">
-            <VocLogo collapsed={collapsed} />
+          <div 
+            className="sidebar-logo-wrapper" 
+            title={collapsed ? t('nav.expand') : t('nav.collapse')}
+          >
+            <VocLogo collapsed={collapsed} onClick={onToggle} />
           </div>
 
           <motion.button
@@ -80,11 +90,13 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
             whileTap={{ scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           >
-            {collapsed ? (
-              <ChevronRight size={15} strokeWidth={2.4} />
-            ) : (
+            <motion.span
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              animate={{ rotate: collapsed ? 180 : 0 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
               <ChevronLeft size={15} strokeWidth={2.4} />
-            )}
+            </motion.span>
           </motion.button>
         </div>
 
@@ -120,14 +132,14 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                     >
                       <IconComponent size={20} strokeWidth={2.2} />
                     </motion.span>
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence initial={false}>
                       {!collapsed && (
                         <motion.span 
                           className="sidebar-link-text"
                           initial={{ opacity: 0, x: -8 }}
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: -8 }}
-                          transition={{ duration: 0.18 }}
+                          transition={{ duration: 0.18, ease: 'easeOut' }}
                         >
                           {item.label}
                         </motion.span>
@@ -142,48 +154,63 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
 
         {/* Footer — user info */}
         <div className="sidebar-footer">
-          <motion.div 
-            className="sidebar-avatar"
-            title={collapsed ? (user?.displayName || t('nav.user')) : undefined}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
+          <motion.div
+            className="sidebar-profile-card"
+            onClick={handleProfileClick}
+            title={collapsed ? `${t('nav.profile')} (${t('nav.expand')})` : t('nav.profile')}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 400, damping: 25 }}
           >
-            {avatarSrc && !avatarError ? (
-              <img src={avatarSrc} alt={user?.displayName || 'Avatar'} />
-            ) : (
-              getInitials()
-            )}
+            <motion.div 
+              className="sidebar-avatar"
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            >
+              {avatarSrc && !avatarError ? (
+                <img src={avatarSrc} alt={user?.displayName || 'Avatar'} />
+              ) : (
+                getInitials()
+              )}
+            </motion.div>
+
+            <AnimatePresence initial={false}>
+              {!collapsed && (
+                <motion.div 
+                  className="sidebar-user-info"
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -8 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                >
+                  <div className="sidebar-user-name">
+                    {user?.displayName || t('nav.user')}
+                  </div>
+                  <div className="sidebar-user-email">{user?.email}</div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
 
-          <AnimatePresence mode="wait">
+          <AnimatePresence initial={false}>
             {!collapsed && (
-              <motion.div 
-                className="sidebar-user-info"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                transition={{ duration: 0.18 }}
+              <motion.button
+                className="sidebar-logout"
+                onClick={(e) => { e.stopPropagation(); handleLogout(); }}
+                aria-label={t('nav.logout')}
+                title={t('nav.logout')}
+                whileHover={{ scale: 1.12, rotate: -6 }}
+                whileTap={{ scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
               >
-                <div className="sidebar-user-name">
-                  {user?.displayName || t('nav.user')}
-                </div>
-                <div className="sidebar-user-email">{user?.email}</div>
-              </motion.div>
+                <LogOut size={16} strokeWidth={2.2} />
+              </motion.button>
             )}
           </AnimatePresence>
-
-          <motion.button
-            className="sidebar-logout"
-            onClick={handleLogout}
-            aria-label={t('nav.logout')}
-            title={t('nav.logout')}
-            whileHover={{ scale: 1.12, rotate: -6 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-          >
-            <LogOut size={16} strokeWidth={2.2} />
-          </motion.button>
         </div>
       </motion.aside>
     </>
