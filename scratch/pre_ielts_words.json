@@ -1,0 +1,1922 @@
+[
+  {
+    "word": "behavior",
+    "translation": "xulq-atvor, hatti-harakat",
+    "definition": "the way a person acts",
+    "example": "Understanding 'behavior' (the way a person acts) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "understand",
+    "translation": "tushunmoq",
+    "definition": "to know the meaning of something",
+    "example": "Understanding 'understand' (to know the meaning of something) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "wonder",
+    "translation": "bilishni xohlamoq",
+    "definition": "to want to know; to ask oneself",
+    "example": "Understanding 'wonder' (to want to know; to ask oneself) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "neighbor",
+    "translation": "qo'shni",
+    "definition": "a person living nearby",
+    "example": "Understanding 'neighbor' (a person living nearby) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "friendly",
+    "translation": "do'stona, samimiy",
+    "definition": "kind and pleasant to others",
+    "example": "Understanding 'friendly' (kind and pleasant to others) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "behave",
+    "translation": "o'zini tutmoq",
+    "definition": "to act in a particular way",
+    "example": "Understanding 'behave' (to act in a particular way) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "complex",
+    "translation": "murakkab",
+    "definition": "complicated; hard to understand",
+    "example": "Understanding 'complex' (complicated; hard to understand) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "source",
+    "translation": "manba",
+    "definition": "the place something comes from",
+    "example": "Understanding 'source' (the place something comes from) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "function",
+    "translation": "ishlamoq, faoliyat ko'rsatmoq",
+    "definition": "to work or operate",
+    "example": "Understanding 'function' (to work or operate) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "link",
+    "translation": "bog'lamoq, aloqa",
+    "definition": "to connect one thing to another",
+    "example": "Understanding 'link' (to connect one thing to another) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "certain",
+    "translation": "muayyan, aniq",
+    "definition": "particular; specific",
+    "example": "Understanding 'certain' (particular; specific) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "bravery",
+    "translation": "jasorat",
+    "definition": "courage; lack of fear",
+    "example": "Understanding 'bravery' (courage; lack of fear) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "furthermore",
+    "translation": "buning ustiga",
+    "definition": "in addition; moreover",
+    "example": "Understanding 'furthermore' (in addition; moreover) helps in reading comprehension.",
+    "partOfSpeech": "adverb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "bump",
+    "translation": "do'nglik, bo'rtiq",
+    "definition": "a raised round lump on a surface",
+    "example": "Understanding 'bump' (a raised round lump on a surface) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "skull",
+    "translation": "bosh suyak",
+    "definition": "the bone around the head",
+    "example": "Understanding 'skull' (the bone around the head) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "analyze",
+    "translation": "tahlil qilmoq",
+    "definition": "to examine in detail",
+    "example": "Understanding 'analyze' (to examine in detail) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "location",
+    "translation": "joylashuv",
+    "definition": "a particular place or position",
+    "example": "Understanding 'location' (a particular place or position) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "measure",
+    "translation": "o'lchamoq",
+    "definition": "to find the size or amount",
+    "example": "Understanding 'measure' (to find the size or amount) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "average",
+    "translation": "o'rtacha",
+    "definition": "typical; ordinary",
+    "example": "Understanding 'average' (typical; ordinary) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "label",
+    "translation": "yorliq yopishtirmoq",
+    "definition": "to mark with a name or description",
+    "example": "Understanding 'label' (to mark with a name or description) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "memory",
+    "translation": "xotira",
+    "definition": "",
+    "example": "Scientists study how memory relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "humor",
+    "translation": "yumor, hazil",
+    "definition": "",
+    "example": "Scientists study how humor relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "interest",
+    "translation": "qiziqish",
+    "definition": "",
+    "example": "Scientists study how interest relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "scientific",
+    "translation": "ilmiy",
+    "definition": "",
+    "example": "Scientists study how scientific relates to an early brain map.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "advice",
+    "translation": "maslahat",
+    "definition": "",
+    "example": "Scientists study how advice relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "contrast",
+    "translation": "farq, qarama-qarshilik",
+    "definition": "",
+    "example": "Scientists study how contrast relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "joke",
+    "translation": "hazil, latifa",
+    "definition": "",
+    "example": "Scientists study how joke relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "laugh",
+    "translation": "kulmoq",
+    "definition": "",
+    "example": "Scientists study how laugh relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "impossible",
+    "translation": "imkonsiz",
+    "definition": "",
+    "example": "Scientists study how impossible relates to an early brain map.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "personality",
+    "translation": "shaxsiyat",
+    "definition": "",
+    "example": "Scientists study how personality relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "important",
+    "translation": "muhim",
+    "definition": "",
+    "example": "Scientists study how important relates to an early brain map.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "explain",
+    "translation": "tushuntirmoq",
+    "definition": "",
+    "example": "Scientists study how explain relates to an early brain map.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "explanation",
+    "translation": "tushuntirish",
+    "definition": "",
+    "example": "Scientists study how explanation relates to an early brain map.",
+    "partOfSpeech": "noun",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "agree",
+    "translation": "rozi bo'lmoq",
+    "definition": "",
+    "example": "Scientists study how agree relates to an early brain map.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "attempt",
+    "translation": "urinish",
+    "definition": "",
+    "example": "Scientists study how attempt relates to an early brain map.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "originate",
+    "translation": "kelib chiqmoq",
+    "definition": "",
+    "example": "Scientists study how originate relates to an early brain map.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "reliable",
+    "translation": "ishonchli",
+    "definition": "",
+    "example": "Scientists study how reliable relates to an early brain map.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "observe",
+    "translation": "kuzatmoq",
+    "definition": "",
+    "example": "Scientists study how observe relates to an early brain map.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "examine",
+    "translation": "tekshirmoq",
+    "definition": "",
+    "example": "Scientists study how examine relates to an early brain map.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "replace",
+    "translation": "almashtirmoq",
+    "definition": "",
+    "example": "Scientists study how replace relates to an early brain map.",
+    "partOfSpeech": "verb",
+    "topic": "Text 01 · An Early Brain Map"
+  },
+  {
+    "word": "control",
+    "translation": "boshqarmoq",
+    "definition": "to direct or manage something",
+    "example": "Understanding 'control' (to direct or manage something) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "behavior",
+    "translation": "xulq-atvor, hatti-harakat",
+    "definition": "the way a person acts",
+    "example": "Understanding 'behavior' (the way a person acts) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "link",
+    "translation": "bog'lamoq, aloqa",
+    "definition": "a connection between things",
+    "example": "Understanding 'link' (a connection between things) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "living",
+    "translation": "tirik, yashayotgan",
+    "definition": "alive; not dead",
+    "example": "Understanding 'living' (alive; not dead) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "technology",
+    "translation": "texnologiya",
+    "definition": "scientific tools and methods",
+    "example": "Understanding 'technology' (scientific tools and methods) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "billion",
+    "translation": "milliard",
+    "definition": "the number one thousand million",
+    "example": "Understanding 'billion' (the number one thousand million) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "cell",
+    "translation": "hujayra",
+    "definition": "the smallest unit of a living thing",
+    "example": "Understanding 'cell' (the smallest unit of a living thing) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "complex",
+    "translation": "murakkab",
+    "definition": "complicated; having many parts",
+    "example": "Understanding 'complex' (complicated; having many parts) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "function",
+    "translation": "ishlamoq, faoliyat ko'rsatmoq",
+    "definition": "the special activity of something",
+    "example": "Understanding 'function' (the special activity of something) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "describe",
+    "translation": "tasvirlamoq",
+    "definition": "to say what something is like",
+    "example": "Understanding 'describe' (to say what something is like) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "electronic",
+    "translation": "elektron",
+    "definition": "using electricity and microchips",
+    "example": "Understanding 'electronic' (using electricity and microchips) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "scan",
+    "translation": "skanerlamoq",
+    "definition": "to examine with a special machine",
+    "example": "Understanding 'scan' (to examine with a special machine) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "image",
+    "translation": "tasvir",
+    "definition": "a picture of something",
+    "example": "Understanding 'image' (a picture of something) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "appear",
+    "translation": "paydo bo'lmoq",
+    "definition": "to come into view; to become visible",
+    "example": "Understanding 'appear' (to come into view; to become visible) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "analyze",
+    "translation": "tahlil qilmoq",
+    "definition": "to examine in detail",
+    "example": "Understanding 'analyze' (to examine in detail) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "stand for",
+    "translation": "anglatmoq",
+    "definition": "to represent or mean",
+    "example": "Understanding 'stand for' (to represent or mean) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "magnetic",
+    "translation": "magnitli",
+    "definition": "having the power of a magnet",
+    "example": "Understanding 'magnetic' (having the power of a magnet) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "force",
+    "translation": "kuch, quvvat",
+    "definition": "physical power or energy",
+    "example": "Understanding 'force' (physical power or energy) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "wave",
+    "translation": "to'lqin",
+    "definition": "a moving form of energy",
+    "example": "Understanding 'wave' (a moving form of energy) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "process",
+    "translation": "jarayon",
+    "definition": "a series of actions or steps",
+    "example": "Understanding 'process' (a series of actions or steps) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "scanner",
+    "translation": "skaner apparati",
+    "definition": "",
+    "example": "Scientists study how scanner relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "location",
+    "translation": "joylashuv",
+    "definition": "",
+    "example": "Scientists study how location relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "functional",
+    "translation": "funktsional",
+    "definition": "",
+    "example": "Scientists study how functional relates to brain mapping today.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "activity",
+    "translation": "faoliyat",
+    "definition": "",
+    "example": "Scientists study how activity relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "active",
+    "translation": "faol",
+    "definition": "",
+    "example": "Scientists study how active relates to brain mapping today.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "flow",
+    "translation": "oqim, oqmoq",
+    "definition": "",
+    "example": "Scientists study how flow relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "blood",
+    "translation": "qon",
+    "definition": "",
+    "example": "Scientists study how blood relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "hearing",
+    "translation": "eshitish",
+    "definition": "",
+    "example": "Scientists study how hearing relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "smell",
+    "translation": "hid, hidlamoq",
+    "definition": "",
+    "example": "Scientists study how smell relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "average",
+    "translation": "o'rtacha",
+    "definition": "",
+    "example": "Scientists study how average relates to brain mapping today.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "collect",
+    "translation": "to'plamoq",
+    "definition": "",
+    "example": "Scientists study how collect relates to brain mapping today.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "example",
+    "translation": "misol",
+    "definition": "",
+    "example": "Scientists study how example relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "measurement",
+    "translation": "o'lchov",
+    "definition": "",
+    "example": "Scientists study how measurement relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "speech",
+    "translation": "nutq",
+    "definition": "",
+    "example": "Scientists study how speech relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "healthy",
+    "translation": "sog'lom",
+    "definition": "",
+    "example": "Scientists study how healthy relates to brain mapping today.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "compare",
+    "translation": "solishtirmoq",
+    "definition": "",
+    "example": "Scientists study how compare relates to brain mapping today.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "patient",
+    "translation": "bemor",
+    "definition": "",
+    "example": "Scientists study how patient relates to brain mapping today.",
+    "partOfSpeech": "noun",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "operate",
+    "translation": "operatsiya qilmoq, ishlamoq",
+    "definition": "",
+    "example": "Scientists study how operate relates to brain mapping today.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "exact",
+    "translation": "aniq",
+    "definition": "",
+    "example": "Scientists study how exact relates to brain mapping today.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "examine",
+    "translation": "tekshirmoq",
+    "definition": "",
+    "example": "Scientists study how examine relates to brain mapping today.",
+    "partOfSpeech": "verb",
+    "topic": "Text 02 · Brain Mapping Today"
+  },
+  {
+    "word": "clock",
+    "translation": "soat",
+    "definition": "a device that shows the time",
+    "example": "Understanding 'clock' (a device that shows the time) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "appear",
+    "translation": "paydo bo'lmoq",
+    "definition": "to come into view; to become visible",
+    "example": "Understanding 'appear' (to come into view; to become visible) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "hunt",
+    "translation": "ov qilmoq",
+    "definition": "to chase and kill animals for food",
+    "example": "Understanding 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "shine",
+    "translation": "porlamoq",
+    "definition": "to give out bright light",
+    "example": "Understanding 'shine' (to give out bright light) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "darkness",
+    "translation": "qorong'ilik",
+    "definition": "the absence of light",
+    "example": "Understanding 'darkness' (the absence of light) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "measure",
+    "translation": "o'lchamoq",
+    "definition": "to find the size or amount",
+    "example": "Understanding 'measure' (to find the size or amount) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "ancient",
+    "translation": "qadimiy",
+    "definition": "very old; from long ago",
+    "example": "Understanding 'ancient' (very old; from long ago) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "develop",
+    "translation": "rivojlantirmoq",
+    "definition": "to create or improve gradually",
+    "example": "Understanding 'develop' (to create or improve gradually) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "divide",
+    "translation": "bo'lmoq",
+    "definition": "to separate into parts",
+    "example": "Understanding 'divide' (to separate into parts) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "shadow",
+    "translation": "soya",
+    "definition": "a dark shape made by blocking light",
+    "example": "Understanding 'shadow' (a dark shape made by blocking light) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "mark",
+    "translation": "belgilamoq",
+    "definition": "to make a sign or line on something",
+    "example": "Understanding 'mark' (to make a sign or line on something) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "shift",
+    "translation": "siljimoq, o'zgarmoq",
+    "definition": "to move from one place to another",
+    "example": "Understanding 'shift' (to move from one place to another) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "method",
+    "translation": "usul",
+    "definition": "a way of doing something",
+    "example": "Understanding 'method' (a way of doing something) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "useful",
+    "translation": "foydali",
+    "definition": "able to be used for a purpose",
+    "example": "Understanding 'useful' (able to be used for a purpose) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "accurate",
+    "translation": "aniq",
+    "definition": "correct; exact",
+    "example": "Understanding 'accurate' (correct; exact) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "sundial",
+    "translation": "quyosh soati",
+    "definition": "a clock using sun shadows",
+    "example": "Understanding 'sundial' (a clock using sun shadows) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "hidden",
+    "translation": "yashirin",
+    "definition": "not able to be seen",
+    "example": "Understanding 'hidden' (not able to be seen) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "confused",
+    "translation": "sarsam, chalkashgan",
+    "definition": "unable to understand clearly",
+    "example": "Understanding 'confused' (unable to understand clearly) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "vary",
+    "translation": "farqlanmoq, o'zgarmoq",
+    "definition": "to change; to be different",
+    "example": "Understanding 'vary' (to change; to be different) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "season",
+    "translation": "fasl",
+    "definition": "a period of the year",
+    "example": "Understanding 'season' (a period of the year) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "candle",
+    "translation": "sham",
+    "definition": "",
+    "example": "Scientists study how candle relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "burn",
+    "translation": "yonmoq",
+    "definition": "",
+    "example": "Scientists study how burn relates to what time is it?.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "pass",
+    "translation": "o'tmoq",
+    "definition": "",
+    "example": "Scientists study how pass relates to what time is it?.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "connect",
+    "translation": "bog'lamoq",
+    "definition": "",
+    "example": "Scientists study how connect relates to what time is it?.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "hole",
+    "translation": "teshik",
+    "definition": "",
+    "example": "Scientists study how hole relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "fill",
+    "translation": "to'ldirmoq",
+    "definition": "",
+    "example": "Scientists study how fill relates to what time is it?.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "similar",
+    "translation": "o'xshash",
+    "definition": "",
+    "example": "Scientists study how similar relates to what time is it?.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "difference",
+    "translation": "farq",
+    "definition": "",
+    "example": "Scientists study how difference relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "sand",
+    "translation": "qum",
+    "definition": "",
+    "example": "Scientists study how sand relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "function",
+    "translation": "ishlamoq, faoliyat ko'rsatmoq",
+    "definition": "",
+    "example": "Scientists study how function relates to what time is it?.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "object",
+    "translation": "narsa, obyekt",
+    "definition": "",
+    "example": "Scientists study how object relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "engineer",
+    "translation": "muhandis",
+    "definition": "",
+    "example": "Scientists study how engineer relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "mechanical",
+    "translation": "mexanik",
+    "definition": "",
+    "example": "Scientists study how mechanical relates to what time is it?.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "feature",
+    "translation": "xususiyat",
+    "definition": "",
+    "example": "Scientists study how feature relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "gear",
+    "translation": "tishli gildirak",
+    "definition": "",
+    "example": "Scientists study how gear relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "spread",
+    "translation": "tarqalmoq",
+    "definition": "",
+    "example": "Scientists study how spread relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "wind",
+    "translation": "soatni buramoq",
+    "definition": "",
+    "example": "Scientists study how wind relates to what time is it?.",
+    "partOfSpeech": "verb",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "tool",
+    "translation": "asbob",
+    "definition": "",
+    "example": "Scientists study how tool relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "dial",
+    "translation": "siferblat",
+    "definition": "",
+    "example": "Scientists study how dial relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "power",
+    "translation": "kuch",
+    "definition": "",
+    "example": "Scientists study how power relates to what time is it?.",
+    "partOfSpeech": "noun",
+    "topic": "Text 03 · What Time Is It?"
+  },
+  {
+    "word": "set",
+    "translation": "soatni to'g'rilamoq",
+    "definition": "to adjust to the correct point",
+    "example": "Understanding 'set' (to adjust to the correct point) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "exactly",
+    "translation": "aynan, aniq",
+    "definition": "in a precise way; just",
+    "example": "Understanding 'exactly' (in a precise way; just) helps in reading comprehension.",
+    "partOfSpeech": "adverb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "noon",
+    "translation": "peshin",
+    "definition": "twelve o'clock in the daytime",
+    "example": "Understanding 'noon' (twelve o'clock in the daytime) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "nearby",
+    "translation": "yaqin atrofdagi",
+    "definition": "close; not far away",
+    "example": "Understanding 'nearby' (close; not far away) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "location",
+    "translation": "joylashuv",
+    "definition": "a particular place or position",
+    "example": "Understanding 'location' (a particular place or position) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "local",
+    "translation": "mahalliy",
+    "definition": "relating to a particular area",
+    "example": "Understanding 'local' (relating to a particular area) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "turn",
+    "translation": "aylanmoq",
+    "definition": "to move in a circle; to rotate",
+    "example": "Understanding 'turn' (to move in a circle; to rotate) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "appear",
+    "translation": "paydo bo'lmoq",
+    "definition": "to seem; to come into view",
+    "example": "Understanding 'appear' (to seem; to come into view) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "shift",
+    "translation": "siljimoq, o'zgarmoq",
+    "definition": "to move from one place to another",
+    "example": "Understanding 'shift' (to move from one place to another) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "vary",
+    "translation": "farqlanmoq, o'zgarmoq",
+    "definition": "to change; to be different",
+    "example": "Understanding 'vary' (to change; to be different) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "differ",
+    "translation": "farq qilmoq",
+    "definition": "to be unlike; to be different",
+    "example": "Understanding 'differ' (to be unlike; to be different) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "distance",
+    "translation": "masofa",
+    "definition": "the amount of space between things",
+    "example": "Understanding 'distance' (the amount of space between things) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "imagine",
+    "translation": "tasavvur qilmoq",
+    "definition": "to form a picture in the mind",
+    "example": "Understanding 'imagine' (to form a picture in the mind) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "earlier",
+    "translation": "vaqliroq",
+    "definition": "before a particular time",
+    "example": "Understanding 'earlier' (before a particular time) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "apart",
+    "translation": "bir-biridan ajralgan",
+    "definition": "separated by a distance",
+    "example": "Understanding 'apart' (separated by a distance) helps in reading comprehension.",
+    "partOfSpeech": "adverb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "history",
+    "translation": "tarix",
+    "definition": "events of the past",
+    "example": "Understanding 'history' (events of the past) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "difference",
+    "translation": "farq",
+    "definition": "a way in which things are not alike",
+    "example": "Understanding 'difference' (a way in which things are not alike) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "important",
+    "translation": "muhim",
+    "definition": "having great value or meaning",
+    "example": "Understanding 'important' (having great value or meaning) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "railroad",
+    "translation": "temir yo'l",
+    "definition": "a track and system for trains",
+    "example": "Understanding 'railroad' (a track and system for trains) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "carry",
+    "translation": "tashimoq",
+    "definition": "to take from one place to another",
+    "example": "Understanding 'carry' (to take from one place to another) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "traveler",
+    "translation": "yo'lovchi",
+    "definition": "",
+    "example": "Scientists study how traveler relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "confused",
+    "translation": "sarsam, chalkashgan",
+    "definition": "",
+    "example": "Scientists study how confused relates to time zones.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "watch",
+    "translation": "qo'l soati",
+    "definition": "",
+    "example": "Scientists study how watch relates to time zones.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "distant",
+    "translation": "olis, uzoq",
+    "definition": "",
+    "example": "Scientists study how distant relates to time zones.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "accurate",
+    "translation": "aniq",
+    "definition": "",
+    "example": "Scientists study how accurate relates to time zones.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "match",
+    "translation": "mos kelmoq",
+    "definition": "",
+    "example": "Scientists study how match relates to time zones.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "official",
+    "translation": "rasmiy",
+    "definition": "",
+    "example": "Scientists study how official relates to time zones.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "link",
+    "translation": "bog'lamoq, aloqa",
+    "definition": "",
+    "example": "Scientists study how link relates to time zones.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "committee",
+    "translation": "qo'mita",
+    "definition": "",
+    "example": "Scientists study how committee relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "feature",
+    "translation": "xususiyat",
+    "definition": "",
+    "example": "Scientists study how feature relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "zone",
+    "translation": "zona, hudud",
+    "definition": "",
+    "example": "Scientists study how zone relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "divide",
+    "translation": "bo'lmoq",
+    "definition": "",
+    "example": "Scientists study how divide relates to time zones.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "equal",
+    "translation": "teng",
+    "definition": "",
+    "example": "Scientists study how equal relates to time zones.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "add",
+    "translation": "qo'shmoq",
+    "definition": "",
+    "example": "Scientists study how add relates to time zones.",
+    "partOfSpeech": "verb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "similarly",
+    "translation": "xuddi shunday",
+    "definition": "",
+    "example": "Scientists study how similarly relates to time zones.",
+    "partOfSpeech": "adverb",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "center",
+    "translation": "markaz",
+    "definition": "",
+    "example": "Scientists study how center relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "calendar",
+    "translation": "taqvim",
+    "definition": "",
+    "example": "Scientists study how calendar relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "date",
+    "translation": "sana",
+    "definition": "",
+    "example": "Scientists study how date relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "transportation",
+    "translation": "transport",
+    "definition": "",
+    "example": "Scientists study how transportation relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "communication",
+    "translation": "aloqa",
+    "definition": "",
+    "example": "Scientists study how communication relates to time zones.",
+    "partOfSpeech": "noun",
+    "topic": "Text 04 · Time Zones"
+  },
+  {
+    "word": "harmful",
+    "translation": "zararli",
+    "definition": "causing damage or injury",
+    "example": "Understanding 'harmful' (causing damage or injury) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "helpful",
+    "translation": "foydali",
+    "definition": "giving useful aid",
+    "example": "Understanding 'helpful' (giving useful aid) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "bacteria",
+    "translation": "bakteriyalar",
+    "definition": "tiny living organisms",
+    "example": "Understanding 'bacteria' (tiny living organisms) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "microscope",
+    "translation": "mikroskop",
+    "definition": "a device for seeing tiny things",
+    "example": "Understanding 'microscope' (a device for seeing tiny things) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "react",
+    "translation": "reaktsiya bildirmoq",
+    "definition": "to respond to something",
+    "example": "Understanding 'react' (to respond to something) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "surprise",
+    "translation": "hayratda qoldirmoq",
+    "definition": "an unexpected feeling",
+    "example": "Understanding 'surprise' (an unexpected feeling) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "appear",
+    "translation": "paydo bo'lmoq",
+    "definition": "to come into view; to become visible",
+    "example": "Understanding 'appear' (to come into view; to become visible) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "proceed",
+    "translation": "davom ettirmoq",
+    "definition": "to continue; to go on",
+    "example": "Understanding 'proceed' (to continue; to go on) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "tiny",
+    "translation": "juda kichik",
+    "definition": "extremely small",
+    "example": "Understanding 'tiny' (extremely small) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "harm",
+    "translation": "zarar yetkazmoq",
+    "definition": "to cause damage or injury",
+    "example": "Understanding 'harm' (to cause damage or injury) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "exist",
+    "translation": "mavjud bo'lmoq",
+    "definition": "to be present; to live",
+    "example": "Understanding 'exist' (to be present; to live) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "environment",
+    "translation": "atrof-muhit",
+    "definition": "the natural world around us",
+    "example": "Understanding 'environment' (the natural world around us) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "effect",
+    "translation": "ta'sir",
+    "definition": "a result or influence",
+    "example": "Understanding 'effect' (a result or influence) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "harmless",
+    "translation": "zararsiz",
+    "definition": "not able to cause damage",
+    "example": "Understanding 'harmless' (not able to cause damage) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "germ",
+    "translation": "mikrob",
+    "definition": "a tiny organism causing disease",
+    "example": "Understanding 'germ' (a tiny organism causing disease) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "describe",
+    "translation": "tasvirlamoq",
+    "definition": "to say what something is like",
+    "example": "Understanding 'describe' (to say what something is like) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "disease",
+    "translation": "kasallik",
+    "definition": "an illness or sickness",
+    "example": "Understanding 'disease' (an illness or sickness) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "infect",
+    "translation": "yuqtirmoq",
+    "definition": "to give a disease to",
+    "example": "Understanding 'infect' (to give a disease to) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "digestive",
+    "translation": "hazm qilish",
+    "definition": "relating to digesting food",
+    "example": "Understanding 'digestive' (relating to digesting food) helps in reading comprehension.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "suffer",
+    "translation": "aziyat chekmoq",
+    "definition": "to experience pain or harm",
+    "example": "Understanding 'suffer' (to experience pain or harm) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "transfer",
+    "translation": "o'tkazmoq, yuqtirmoq",
+    "definition": "",
+    "example": "Scientists study how transfer relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "cough",
+    "translation": "yo'talmoq",
+    "definition": "",
+    "example": "Scientists study how cough relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "sneeze",
+    "translation": "aksirmoq",
+    "definition": "",
+    "example": "Scientists study how sneeze relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "surrounding",
+    "translation": "atrofdagi",
+    "definition": "",
+    "example": "Scientists study how surrounding relates to harmful and helpful bacteria.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "breathe",
+    "translation": "nafas olmoq",
+    "definition": "",
+    "example": "Scientists study how breathe relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "grow",
+    "translation": "o'smoq, ko'paymoq",
+    "definition": "",
+    "example": "Scientists study how grow relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "prevent",
+    "translation": "oldini olmoq",
+    "definition": "",
+    "example": "Scientists study how prevent relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "destroy",
+    "translation": "yo'q qilmoq",
+    "definition": "",
+    "example": "Scientists study how destroy relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "safe",
+    "translation": "xavfsiz",
+    "definition": "",
+    "example": "Scientists study how safe relates to harmful and helpful bacteria.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "benefit",
+    "translation": "foyda keltirmoq",
+    "definition": "",
+    "example": "Scientists study how benefit relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "vitamin",
+    "translation": "vitamin",
+    "definition": "",
+    "example": "Scientists study how vitamin relates to harmful and helpful bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "certain",
+    "translation": "muayyan, aniq",
+    "definition": "",
+    "example": "Scientists study how certain relates to harmful and helpful bacteria.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "break down",
+    "translation": "parchalamoq",
+    "definition": "",
+    "example": "Scientists study how break down relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "material",
+    "translation": "modda",
+    "definition": "",
+    "example": "Scientists study how material relates to harmful and helpful bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "mix",
+    "translation": "aralashtirmoq",
+    "definition": "",
+    "example": "Scientists study how mix relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "soil",
+    "translation": "tuproq",
+    "definition": "",
+    "example": "Scientists study how soil relates to harmful and helpful bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "spill",
+    "translation": "to'kilmoq",
+    "definition": "",
+    "example": "Scientists study how spill relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "clean up",
+    "translation": "tozalamaoq",
+    "definition": "",
+    "example": "Scientists study how clean up relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "waste",
+    "translation": "chiqindi",
+    "definition": "",
+    "example": "Scientists study how waste relates to harmful and helpful bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "catch",
+    "translation": "yuqtirib olmoq",
+    "definition": "",
+    "example": "Scientists study how catch relates to harmful and helpful bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 05 · Harmful and Helpful Bacteria"
+  },
+  {
+    "word": "fight",
+    "translation": "kurashmoq",
+    "definition": "to struggle against something",
+    "example": "Understanding 'fight' (to struggle against something) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "infection",
+    "translation": "infeksiya",
+    "definition": "illness caused by germs",
+    "example": "Understanding 'infection' (illness caused by germs) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "illness",
+    "translation": "kasallik",
+    "definition": "the state of being sick",
+    "example": "Understanding 'illness' (the state of being sick) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "transfer",
+    "translation": "o'tkazmoq, yuqtirmoq",
+    "definition": "to move from one place to another",
+    "example": "Understanding 'transfer' (to move from one place to another) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "cause",
+    "translation": "sabab bo'lmoq",
+    "definition": "to make something happen",
+    "example": "Understanding 'cause' (to make something happen) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "cure",
+    "translation": "davo, davolamoq",
+    "definition": "to make a sick person healthy",
+    "example": "Understanding 'cure' (to make a sick person healthy) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "environment",
+    "translation": "atrof-muhit",
+    "definition": "the natural world around us",
+    "example": "Understanding 'environment' (the natural world around us) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "exist",
+    "translation": "mavjud bo'lmoq",
+    "definition": "to be present; to live",
+    "example": "Understanding 'exist' (to be present; to live) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "discovery",
+    "translation": "kashfiyot",
+    "definition": "the act of finding something new",
+    "example": "Understanding 'discovery' (the act of finding something new) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "observe",
+    "translation": "kuzatmoq",
+    "definition": "to watch carefully",
+    "example": "Understanding 'observe' (to watch carefully) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "link",
+    "translation": "bog'lamoq, aloqa",
+    "definition": "to connect one thing to another",
+    "example": "Understanding 'link' (to connect one thing to another) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "suffer",
+    "translation": "aziyat chekmoq",
+    "definition": "to experience pain or harm",
+    "example": "Understanding 'suffer' (to experience pain or harm) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "develop",
+    "translation": "rivojlantirmoq",
+    "definition": "to create or improve gradually",
+    "example": "Understanding 'develop' (to create or improve gradually) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "prevent",
+    "translation": "oldini olmoq",
+    "definition": "to stop something from happening",
+    "example": "Understanding 'prevent' (to stop something from happening) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "procedure",
+    "translation": "protsedura",
+    "definition": "a way of doing something",
+    "example": "Understanding 'procedure' (a way of doing something) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "destroy",
+    "translation": "yo'q qilmoq",
+    "definition": "to damage so it no longer exists",
+    "example": "Understanding 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "heat",
+    "translation": "issiq, issiqlik",
+    "definition": "to make something hot",
+    "example": "Understanding 'heat' (to make something hot) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "temperature",
+    "translation": "harorat",
+    "definition": "how hot or cold something is",
+    "example": "Understanding 'temperature' (how hot or cold something is) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "process",
+    "translation": "jarayon",
+    "definition": "a series of actions or steps",
+    "example": "Understanding 'process' (a series of actions or steps) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "reaction",
+    "translation": "reaktsiya",
+    "definition": "a response to something",
+    "example": "Understanding 'reaction' (a response to something) helps in reading comprehension.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "chemical",
+    "translation": "kimyoviy modda",
+    "definition": "",
+    "example": "Scientists study how chemical relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "laboratory",
+    "translation": "laboratoriya",
+    "definition": "",
+    "example": "Scientists study how laboratory relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "equipment",
+    "translation": "uskuna",
+    "definition": "",
+    "example": "Scientists study how equipment relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "surgeon",
+    "translation": "xirurg",
+    "definition": "",
+    "example": "Scientists study how surgeon relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "surgery",
+    "translation": "operatsiya",
+    "definition": "",
+    "example": "Scientists study how surgery relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "dangerous",
+    "translation": "xavfli",
+    "definition": "",
+    "example": "Scientists study how dangerous relates to fighting bacteria.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "analyze",
+    "translation": "tahlil qilmoq",
+    "definition": "",
+    "example": "Scientists study how analyze relates to fighting bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "spray",
+    "translation": "purkamoq",
+    "definition": "",
+    "example": "Scientists study how spray relates to fighting bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "bandage",
+    "translation": "bint",
+    "definition": "",
+    "example": "Scientists study how bandage relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "effective",
+    "translation": "samarali",
+    "definition": "",
+    "example": "Scientists study how effective relates to fighting bacteria.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "treatment",
+    "translation": "davolash",
+    "definition": "",
+    "example": "Scientists study how treatment relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "react",
+    "translation": "reaktsiya bildirmoq",
+    "definition": "",
+    "example": "Scientists study how react relates to fighting bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "already",
+    "translation": "allaqachon",
+    "definition": "",
+    "example": "Scientists study how already relates to fighting bacteria.",
+    "partOfSpeech": "adverb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "notice",
+    "translation": "payqamoq",
+    "definition": "",
+    "example": "Scientists study how notice relates to fighting bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "fungus",
+    "translation": "zamburug'",
+    "definition": "",
+    "example": "Scientists study how fungus relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "growth",
+    "translation": "o'sish",
+    "definition": "",
+    "example": "Scientists study how growth relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "harmless",
+    "translation": "zararsiz",
+    "definition": "",
+    "example": "Scientists study how harmless relates to fighting bacteria.",
+    "partOfSpeech": "adjective",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "swallow",
+    "translation": "yutmoq",
+    "definition": "",
+    "example": "Scientists study how swallow relates to fighting bacteria.",
+    "partOfSpeech": "verb",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "antibiotic",
+    "translation": "antibiotik",
+    "definition": "",
+    "example": "Scientists study how antibiotic relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  },
+  {
+    "word": "medicine",
+    "translation": "dori",
+    "definition": "",
+    "example": "Scientists study how medicine relates to fighting bacteria.",
+    "partOfSpeech": "noun",
+    "topic": "Text 06 · Fighting Bacteria"
+  }
+]

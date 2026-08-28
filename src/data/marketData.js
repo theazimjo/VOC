@@ -2684,46 +2684,3846 @@ export const marketPacks = [
     category: "IELTS",
     type: "science",
     words: [
-      { word: "behavior", translation: "xulq-atvor, hatti-harakat", definition: "the way a person acts", example: "Scientists studied human behavior to understand how the mind works.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "understand", translation: "tushunmoq", definition: "to know the meaning of something", example: "It is important to understand how different brain areas interact.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "wonder", translation: "bilishni xohlamoq, ajablanmoq", definition: "to want to know; to ask oneself", example: "Many people wonder how memories are stored in the skull.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "neighbor", translation: "qo'shni", definition: "a person living nearby", example: "My neighbor shares a strong interest in scientific discoveries.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "friendly", translation: "do'stona, samimiy", definition: "kind and pleasant to others", example: "A friendly smile can positively affect a person's behavior.", partOfSpeech: "adjective", topic: "Text 01 · An Early Brain Map" },
-      { word: "behave", translation: "o'zini tutmoq", definition: "to act in a particular way", example: "Patients may behave differently after experiencing brain injury.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "complex", translation: "murakkab", definition: "complicated; hard to understand", example: "The human brain is a complex system of billions of cells.", partOfSpeech: "adjective", topic: "Text 01 · An Early Brain Map" },
-      { word: "source", translation: "manba", definition: "the place something comes from", example: "The brain is the main source of all thoughts and actions.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "function", translation: "ishlamoq, faoliyat ko'rsatmoq", definition: "to work or operate", example: "Each region of the brain functions to perform specific duties.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "link", translation: "bog'lamoq, aloqa", definition: "to connect one thing to another", example: "Researchers tried to link specific brain areas to personality traits.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "certain", translation: "muayyan, aniq", definition: "particular; specific", example: "Certain bumps on the head were believed to control bravery.", partOfSpeech: "adjective", topic: "Text 01 · An Early Brain Map" },
-      { word: "bravery", translation: "jasorat, dovyuraklik", definition: "courage; lack of fear", example: "The soldier demonstrated immense bravery during the battle.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "furthermore", translation: "buning ustiga, bundan tashqari", definition: "in addition; moreover", example: "Furthermore, early brain maps lacked reliable evidence.", partOfSpeech: "adverb", topic: "Text 01 · An Early Brain Map" },
-      { word: "bump", translation: "do'nglik, bo'rtiq", definition: "a raised round lump on a surface", example: "Early mappers measured every bump on a patient's skull.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "skull", translation: "bosh suyak", definition: "the bone around the head", example: "The thick skull serves to protect the brain from injury.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "analyze", translation: "tahlil qilmoq", definition: "to examine in detail", example: "Doctors analyze brain images to find exact locations of damage.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "location", translation: "joylashuv, o'rin", definition: "a particular place or position", example: "The exact location of speech processing was discovered later.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "measure", translation: "o'lchamoq", definition: "to find the size or amount", example: "Phrenologists used special tools to measure the human head.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "average", translation: "o'rtacha", definition: "typical; ordinary", example: "An average brain contains roughly 86 billion neurons.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "label", translation: "yorliq yopishtirmoq, belgilamoq", definition: "to mark with a name or description", example: "Early scientists began to label different sections of the brain map.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "memory", translation: "xotira", definition: "the ability to remember", example: "A strong memory allows people to recall past experiences easily.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "humor", translation: "yumor, hazil-mutoyiba", definition: "the quality of being funny", example: "His sense of humor helped make the difficult lecture engaging.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "interest", translation: "qiziqish", definition: "a feeling of wanting to know more", example: "Public interest in brain science grew rapidly in the 19th century.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "scientific", translation: "ilmiy", definition: "based on science; systematic", example: "Early phrenology was eventually replaced by modern scientific study.", partOfSpeech: "adjective", topic: "Text 01 · An Early Brain Map" },
-      { word: "advice", translation: "maslahat", definition: "an opinion about what to do", example: "Patients often sought medical advice for unexplained head pain.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "contrast", translation: "farq, qarama-qarshilik", definition: "a clear difference", example: "There is a sharp contrast between early theories and modern neuroscience.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "joke", translation: "hazil, latifa", definition: "something said to make people laugh", example: "Some critics treated phrenology maps as nothing more than a joke.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "laugh", translation: "kulmoq", definition: "to make sounds showing amusement", example: "People used to laugh at early attempts to read character from head shapes.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "impossible", translation: "imkonsiz", definition: "not able to happen or be done", example: "Without advanced scanners, inspecting living brain tissue was impossible.", partOfSpeech: "adjective", topic: "Text 01 · An Early Brain Map" },
-      { word: "personality", translation: "shaxsiyat, fe'l-atvor", definition: "the qualities that form a character", example: "Gall believed that human personality could be judged by head shape.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "important", translation: "muhim", definition: "having great value or meaning", example: "Mapping the brain was an important milestone in medical history.", partOfSpeech: "adjective", topic: "Text 01 · An Early Brain Map" },
-      { word: "explain", translation: "tushuntirmoq, izohlamoq", definition: "to make something clear", example: "Scientists tried to explain how mental faculties operate.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "explanation", translation: "tushuntirish, izoh", definition: "a statement that makes something clear", example: "He provided a logical explanation for why head shapes vary.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "agree", translation: "rozi bo'lmoq, qo'shilmoq", definition: "to have the same opinion", example: "Not all doctors could agree on the validity of early brain maps.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "attempt", translation: "urinish", definition: "an effort to do something", example: "The first attempt to map the brain paved the way for modern research.", partOfSpeech: "noun", topic: "Text 01 · An Early Brain Map" },
-      { word: "originate", translation: "kelib chiqmoq, boshlanmoq", definition: "to begin or start from", example: "Phrenology originated in Europe in the late eighteenth century.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "reliable", translation: "ishonchli", definition: "able to be trusted; dependable", example: "Modern MRI scanners provide a much more reliable brain map.", partOfSpeech: "adjective", topic: "Text 01 · An Early Brain Map" },
-      { word: "observe", translation: "kuzatmoq", definition: "to watch carefully", example: "Physicians observe patients to see how brain damage affects behavior.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "examine", translation: "tekshirmoq, ko'zdan kechirmoq", definition: "to look at closely; to inspect", example: "Doctors examine brain scans to detect unusual growth or injury.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" },
-      { word: "replace", translation: "almashtirmoq, o'rnini egallamoq", definition: "to take the place of something", example: "Scientific discoveries eventually replaced ancient theories about the mind.", partOfSpeech: "verb", topic: "Text 01 · An Early Brain Map" }
-    ]
+      {
+            "word": "behavior",
+            "translation": "xulq-atvor, hatti-harakat",
+            "definition": "the way a person acts",
+            "example": "Studying 'behavior' (the way a person acts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "understand",
+            "translation": "tushunmoq",
+            "definition": "to know the meaning of something",
+            "example": "Studying 'understand' (to know the meaning of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "wonder",
+            "translation": "bilishni xohlamoq",
+            "definition": "to want to know; to ask oneself",
+            "example": "Studying 'wonder' (to want to know; to ask oneself) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "neighbor",
+            "translation": "qo'shni",
+            "definition": "a person living nearby",
+            "example": "Studying 'neighbor' (a person living nearby) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "friendly",
+            "translation": "do'stona, samimiy",
+            "definition": "kind and pleasant to others",
+            "example": "Studying 'friendly' (kind and pleasant to others) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "behave",
+            "translation": "o'zini tutmoq",
+            "definition": "to act in a particular way",
+            "example": "Studying 'behave' (to act in a particular way) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "complex",
+            "translation": "murakkab",
+            "definition": "complicated; hard to understand",
+            "example": "Studying 'complex' (complicated; hard to understand) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "source",
+            "translation": "manba",
+            "definition": "the place something comes from",
+            "example": "Studying 'source' (the place something comes from) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "function",
+            "translation": "ishlamoq, faoliyat ko'rsatmoq",
+            "definition": "to work or operate",
+            "example": "Studying 'function' (to work or operate) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "link",
+            "translation": "bog'lamoq, aloqa",
+            "definition": "to connect one thing to another",
+            "example": "Studying 'link' (to connect one thing to another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "certain",
+            "translation": "muayyan, aniq",
+            "definition": "particular; specific",
+            "example": "Studying 'certain' (particular; specific) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "bravery",
+            "translation": "jasorat",
+            "definition": "courage; lack of fear",
+            "example": "Studying 'bravery' (courage; lack of fear) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "furthermore",
+            "translation": "buning ustiga",
+            "definition": "in addition; moreover",
+            "example": "Studying 'furthermore' (in addition; moreover) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "bump",
+            "translation": "do'nglik, bo'rtiq",
+            "definition": "a raised round lump on a surface",
+            "example": "Studying 'bump' (a raised round lump on a surface) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "skull",
+            "translation": "bosh suyak",
+            "definition": "the bone around the head",
+            "example": "Studying 'skull' (the bone around the head) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "analyze",
+            "translation": "tahlil qilmoq",
+            "definition": "to examine in detail",
+            "example": "Studying 'analyze' (to examine in detail) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "location",
+            "translation": "joylashuv",
+            "definition": "a particular place or position",
+            "example": "Studying 'location' (a particular place or position) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "measure",
+            "translation": "o'lchamoq",
+            "definition": "to find the size or amount",
+            "example": "Studying 'measure' (to find the size or amount) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "average",
+            "translation": "o'rtacha",
+            "definition": "typical; ordinary",
+            "example": "Studying 'average' (typical; ordinary) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "label",
+            "translation": "yorliq yopishtirmoq",
+            "definition": "to mark with a name or description",
+            "example": "Studying 'label' (to mark with a name or description) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "memory",
+            "translation": "xotira",
+            "definition": "",
+            "example": "The word 'memory' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "humor",
+            "translation": "yumor, hazil",
+            "definition": "",
+            "example": "The word 'humor' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "interest",
+            "translation": "qiziqish",
+            "definition": "",
+            "example": "The word 'interest' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "scientific",
+            "translation": "ilmiy",
+            "definition": "",
+            "example": "The word 'scientific' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "advice",
+            "translation": "maslahat",
+            "definition": "",
+            "example": "The word 'advice' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "contrast",
+            "translation": "farq, qarama-qarshilik",
+            "definition": "",
+            "example": "The word 'contrast' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "joke",
+            "translation": "hazil, latifa",
+            "definition": "",
+            "example": "The word 'joke' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "laugh",
+            "translation": "kulmoq",
+            "definition": "",
+            "example": "The word 'laugh' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "impossible",
+            "translation": "imkonsiz",
+            "definition": "",
+            "example": "The word 'impossible' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "personality",
+            "translation": "shaxsiyat",
+            "definition": "",
+            "example": "The word 'personality' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "important",
+            "translation": "muhim",
+            "definition": "",
+            "example": "The word 'important' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "explain",
+            "translation": "tushuntirmoq",
+            "definition": "",
+            "example": "The word 'explain' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "explanation",
+            "translation": "tushuntirish",
+            "definition": "",
+            "example": "The word 'explanation' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "agree",
+            "translation": "rozi bo'lmoq",
+            "definition": "",
+            "example": "The word 'agree' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "attempt",
+            "translation": "urinish",
+            "definition": "",
+            "example": "The word 'attempt' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "originate",
+            "translation": "kelib chiqmoq",
+            "definition": "",
+            "example": "The word 'originate' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "reliable",
+            "translation": "ishonchli",
+            "definition": "",
+            "example": "The word 'reliable' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "observe",
+            "translation": "kuzatmoq",
+            "definition": "",
+            "example": "The word 'observe' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "examine",
+            "translation": "tekshirmoq",
+            "definition": "",
+            "example": "The word 'examine' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "replace",
+            "translation": "almashtirmoq",
+            "definition": "",
+            "example": "The word 'replace' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 01 · An Early Brain Map"
+      },
+      {
+            "word": "control",
+            "translation": "boshqarmoq",
+            "definition": "to direct or manage something",
+            "example": "Studying 'control' (to direct or manage something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "behavior",
+            "translation": "xulq-atvor, hatti-harakat",
+            "definition": "the way a person acts",
+            "example": "Studying 'behavior' (the way a person acts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "link",
+            "translation": "bog'lamoq, aloqa",
+            "definition": "a connection between things",
+            "example": "Studying 'link' (a connection between things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "living",
+            "translation": "tirik, yashayotgan",
+            "definition": "alive; not dead",
+            "example": "Studying 'living' (alive; not dead) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "technology",
+            "translation": "texnologiya",
+            "definition": "scientific tools and methods",
+            "example": "Studying 'technology' (scientific tools and methods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "billion",
+            "translation": "milliard",
+            "definition": "the number one thousand million",
+            "example": "Studying 'billion' (the number one thousand million) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "cell",
+            "translation": "hujayra",
+            "definition": "the smallest unit of a living thing",
+            "example": "Studying 'cell' (the smallest unit of a living thing) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "complex",
+            "translation": "murakkab",
+            "definition": "complicated; having many parts",
+            "example": "Studying 'complex' (complicated; having many parts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "function",
+            "translation": "ishlamoq, faoliyat ko'rsatmoq",
+            "definition": "the special activity of something",
+            "example": "Studying 'function' (the special activity of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "describe",
+            "translation": "tasvirlamoq",
+            "definition": "to say what something is like",
+            "example": "Studying 'describe' (to say what something is like) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "electronic",
+            "translation": "elektron",
+            "definition": "using electricity and microchips",
+            "example": "Studying 'electronic' (using electricity and microchips) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "scan",
+            "translation": "skanerlamoq",
+            "definition": "to examine with a special machine",
+            "example": "Studying 'scan' (to examine with a special machine) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "image",
+            "translation": "tasvir",
+            "definition": "a picture of something",
+            "example": "Studying 'image' (a picture of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "appear",
+            "translation": "paydo bo'lmoq",
+            "definition": "to come into view; to become visible",
+            "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "analyze",
+            "translation": "tahlil qilmoq",
+            "definition": "to examine in detail",
+            "example": "Studying 'analyze' (to examine in detail) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "stand for",
+            "translation": "anglatmoq",
+            "definition": "to represent or mean",
+            "example": "Studying 'stand for' (to represent or mean) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "magnetic",
+            "translation": "magnitli",
+            "definition": "having the power of a magnet",
+            "example": "Studying 'magnetic' (having the power of a magnet) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "force",
+            "translation": "kuch, quvvat",
+            "definition": "physical power or energy",
+            "example": "Studying 'force' (physical power or energy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "wave",
+            "translation": "to'lqin",
+            "definition": "a moving form of energy",
+            "example": "Studying 'wave' (a moving form of energy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "process",
+            "translation": "jarayon",
+            "definition": "a series of actions or steps",
+            "example": "Studying 'process' (a series of actions or steps) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "scanner",
+            "translation": "skaner apparati",
+            "definition": "",
+            "example": "The word 'scanner' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "location",
+            "translation": "joylashuv",
+            "definition": "",
+            "example": "The word 'location' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "functional",
+            "translation": "funktsional",
+            "definition": "",
+            "example": "The word 'functional' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "activity",
+            "translation": "faoliyat",
+            "definition": "",
+            "example": "The word 'activity' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "active",
+            "translation": "faol",
+            "definition": "",
+            "example": "The word 'active' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "flow",
+            "translation": "oqim, oqmoq",
+            "definition": "",
+            "example": "The word 'flow' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "blood",
+            "translation": "qon",
+            "definition": "",
+            "example": "The word 'blood' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "hearing",
+            "translation": "eshitish",
+            "definition": "",
+            "example": "The word 'hearing' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "smell",
+            "translation": "hid, hidlamoq",
+            "definition": "",
+            "example": "The word 'smell' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "average",
+            "translation": "o'rtacha",
+            "definition": "",
+            "example": "The word 'average' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "collect",
+            "translation": "to'plamoq",
+            "definition": "",
+            "example": "The word 'collect' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "example",
+            "translation": "misol",
+            "definition": "",
+            "example": "The word 'example' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "measurement",
+            "translation": "o'lchov",
+            "definition": "",
+            "example": "The word 'measurement' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "speech",
+            "translation": "nutq",
+            "definition": "",
+            "example": "The word 'speech' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "healthy",
+            "translation": "sog'lom",
+            "definition": "",
+            "example": "The word 'healthy' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "compare",
+            "translation": "solishtirmoq",
+            "definition": "",
+            "example": "The word 'compare' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "patient",
+            "translation": "bemor",
+            "definition": "",
+            "example": "The word 'patient' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "operate",
+            "translation": "operatsiya qilmoq, ishlamoq",
+            "definition": "",
+            "example": "The word 'operate' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "exact",
+            "translation": "aniq",
+            "definition": "",
+            "example": "The word 'exact' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "examine",
+            "translation": "tekshirmoq",
+            "definition": "",
+            "example": "The word 'examine' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 02 · Brain Mapping Today"
+      },
+      {
+            "word": "clock",
+            "translation": "soat",
+            "definition": "a device that shows the time",
+            "example": "Studying 'clock' (a device that shows the time) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "appear",
+            "translation": "paydo bo'lmoq",
+            "definition": "to come into view; to become visible",
+            "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "hunt",
+            "translation": "ov qilmoq",
+            "definition": "to chase and kill animals for food",
+            "example": "Studying 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "shine",
+            "translation": "porlamoq",
+            "definition": "to give out bright light",
+            "example": "Studying 'shine' (to give out bright light) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "darkness",
+            "translation": "qorong'ilik",
+            "definition": "the absence of light",
+            "example": "Studying 'darkness' (the absence of light) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "measure",
+            "translation": "o'lchamoq",
+            "definition": "to find the size or amount",
+            "example": "Studying 'measure' (to find the size or amount) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "ancient",
+            "translation": "qadimiy",
+            "definition": "very old; from long ago",
+            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "develop",
+            "translation": "rivojlantirmoq",
+            "definition": "to create or improve gradually",
+            "example": "Studying 'develop' (to create or improve gradually) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "divide",
+            "translation": "bo'lmoq",
+            "definition": "to separate into parts",
+            "example": "Studying 'divide' (to separate into parts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "shadow",
+            "translation": "soya",
+            "definition": "a dark shape made by blocking light",
+            "example": "Studying 'shadow' (a dark shape made by blocking light) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "mark",
+            "translation": "belgilamoq",
+            "definition": "to make a sign or line on something",
+            "example": "Studying 'mark' (to make a sign or line on something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "shift",
+            "translation": "siljimoq, o'zgarmoq",
+            "definition": "to move from one place to another",
+            "example": "Studying 'shift' (to move from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "method",
+            "translation": "usul",
+            "definition": "a way of doing something",
+            "example": "Studying 'method' (a way of doing something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "useful",
+            "translation": "foydali",
+            "definition": "able to be used for a purpose",
+            "example": "Studying 'useful' (able to be used for a purpose) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "accurate",
+            "translation": "aniq",
+            "definition": "correct; exact",
+            "example": "Studying 'accurate' (correct; exact) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "sundial",
+            "translation": "quyosh soati",
+            "definition": "a clock using sun shadows",
+            "example": "Studying 'sundial' (a clock using sun shadows) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "hidden",
+            "translation": "yashirin",
+            "definition": "not able to be seen",
+            "example": "Studying 'hidden' (not able to be seen) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "confused",
+            "translation": "sarsam, chalkashgan",
+            "definition": "unable to understand clearly",
+            "example": "Studying 'confused' (unable to understand clearly) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "vary",
+            "translation": "farqlanmoq, o'zgarmoq",
+            "definition": "to change; to be different",
+            "example": "Studying 'vary' (to change; to be different) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "season",
+            "translation": "fasl",
+            "definition": "a period of the year",
+            "example": "Studying 'season' (a period of the year) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "candle",
+            "translation": "sham",
+            "definition": "",
+            "example": "The word 'candle' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "burn",
+            "translation": "yonmoq",
+            "definition": "",
+            "example": "The word 'burn' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "pass",
+            "translation": "o'tmoq",
+            "definition": "",
+            "example": "The word 'pass' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "connect",
+            "translation": "bog'lamoq",
+            "definition": "",
+            "example": "The word 'connect' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "hole",
+            "translation": "teshik",
+            "definition": "",
+            "example": "The word 'hole' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "fill",
+            "translation": "to'ldirmoq",
+            "definition": "",
+            "example": "The word 'fill' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "similar",
+            "translation": "o'xshash",
+            "definition": "",
+            "example": "The word 'similar' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "difference",
+            "translation": "farq",
+            "definition": "",
+            "example": "The word 'difference' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "sand",
+            "translation": "qum",
+            "definition": "",
+            "example": "The word 'sand' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "function",
+            "translation": "ishlamoq, faoliyat ko'rsatmoq",
+            "definition": "",
+            "example": "The word 'function' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "object",
+            "translation": "narsa, obyekt",
+            "definition": "",
+            "example": "The word 'object' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "engineer",
+            "translation": "muhandis",
+            "definition": "",
+            "example": "The word 'engineer' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "mechanical",
+            "translation": "mexanik",
+            "definition": "",
+            "example": "The word 'mechanical' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "feature",
+            "translation": "xususiyat",
+            "definition": "",
+            "example": "The word 'feature' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "gear",
+            "translation": "tishli gildirak",
+            "definition": "",
+            "example": "The word 'gear' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "spread",
+            "translation": "tarqalmoq",
+            "definition": "",
+            "example": "The word 'spread' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "wind",
+            "translation": "soatni buramoq",
+            "definition": "",
+            "example": "The word 'wind' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "tool",
+            "translation": "asbob",
+            "definition": "",
+            "example": "The word 'tool' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "dial",
+            "translation": "siferblat",
+            "definition": "",
+            "example": "The word 'dial' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "power",
+            "translation": "kuch",
+            "definition": "",
+            "example": "The word 'power' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 03 · What Time Is It?"
+      },
+      {
+            "word": "set",
+            "translation": "soatni to'g'rilamoq",
+            "definition": "to adjust to the correct point",
+            "example": "Studying 'set' (to adjust to the correct point) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "exactly",
+            "translation": "aynan, aniq",
+            "definition": "in a precise way; just",
+            "example": "Studying 'exactly' (in a precise way; just) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "noon",
+            "translation": "peshin",
+            "definition": "twelve o'clock in the daytime",
+            "example": "Studying 'noon' (twelve o'clock in the daytime) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "nearby",
+            "translation": "yaqin atrofdagi",
+            "definition": "close; not far away",
+            "example": "Studying 'nearby' (close; not far away) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "location",
+            "translation": "joylashuv",
+            "definition": "a particular place or position",
+            "example": "Studying 'location' (a particular place or position) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "local",
+            "translation": "mahalliy",
+            "definition": "relating to a particular area",
+            "example": "Studying 'local' (relating to a particular area) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "turn",
+            "translation": "aylanmoq",
+            "definition": "to move in a circle; to rotate",
+            "example": "Studying 'turn' (to move in a circle; to rotate) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "appear",
+            "translation": "paydo bo'lmoq",
+            "definition": "to seem; to come into view",
+            "example": "Studying 'appear' (to seem; to come into view) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "shift",
+            "translation": "siljimoq, o'zgarmoq",
+            "definition": "to move from one place to another",
+            "example": "Studying 'shift' (to move from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "vary",
+            "translation": "farqlanmoq, o'zgarmoq",
+            "definition": "to change; to be different",
+            "example": "Studying 'vary' (to change; to be different) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "differ",
+            "translation": "farq qilmoq",
+            "definition": "to be unlike; to be different",
+            "example": "Studying 'differ' (to be unlike; to be different) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "distance",
+            "translation": "masofa",
+            "definition": "the amount of space between things",
+            "example": "Studying 'distance' (the amount of space between things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "imagine",
+            "translation": "tasavvur qilmoq",
+            "definition": "to form a picture in the mind",
+            "example": "Studying 'imagine' (to form a picture in the mind) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "earlier",
+            "translation": "vaqliroq",
+            "definition": "before a particular time",
+            "example": "Studying 'earlier' (before a particular time) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "apart",
+            "translation": "bir-biridan ajralgan",
+            "definition": "separated by a distance",
+            "example": "Studying 'apart' (separated by a distance) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "history",
+            "translation": "tarix",
+            "definition": "events of the past",
+            "example": "Studying 'history' (events of the past) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "difference",
+            "translation": "farq",
+            "definition": "a way in which things are not alike",
+            "example": "Studying 'difference' (a way in which things are not alike) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "important",
+            "translation": "muhim",
+            "definition": "having great value or meaning",
+            "example": "Studying 'important' (having great value or meaning) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "railroad",
+            "translation": "temir yo'l",
+            "definition": "a track and system for trains",
+            "example": "Studying 'railroad' (a track and system for trains) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "carry",
+            "translation": "tashimoq",
+            "definition": "to take from one place to another",
+            "example": "Studying 'carry' (to take from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "traveler",
+            "translation": "yo'lovchi",
+            "definition": "",
+            "example": "The word 'traveler' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "confused",
+            "translation": "sarsam, chalkashgan",
+            "definition": "",
+            "example": "The word 'confused' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "watch",
+            "translation": "qo'l soati",
+            "definition": "",
+            "example": "The word 'watch' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "distant",
+            "translation": "olis, uzoq",
+            "definition": "",
+            "example": "The word 'distant' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "accurate",
+            "translation": "aniq",
+            "definition": "",
+            "example": "The word 'accurate' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "match",
+            "translation": "mos kelmoq",
+            "definition": "",
+            "example": "The word 'match' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "official",
+            "translation": "rasmiy",
+            "definition": "",
+            "example": "The word 'official' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "link",
+            "translation": "bog'lamoq, aloqa",
+            "definition": "",
+            "example": "The word 'link' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "committee",
+            "translation": "qo'mita",
+            "definition": "",
+            "example": "The word 'committee' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "feature",
+            "translation": "xususiyat",
+            "definition": "",
+            "example": "The word 'feature' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "zone",
+            "translation": "zona",
+            "definition": "",
+            "example": "The word 'zone' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "divide",
+            "translation": "bo'lmoq",
+            "definition": "",
+            "example": "The word 'divide' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "equal",
+            "translation": "teng",
+            "definition": "",
+            "example": "The word 'equal' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "add",
+            "translation": "qo'shmoq",
+            "definition": "",
+            "example": "The word 'add' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "similarly",
+            "translation": "xuddi shunday",
+            "definition": "",
+            "example": "The word 'similarly' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "center",
+            "translation": "markaz",
+            "definition": "",
+            "example": "The word 'center' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "calendar",
+            "translation": "taqvim",
+            "definition": "",
+            "example": "The word 'calendar' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "date",
+            "translation": "sana",
+            "definition": "",
+            "example": "The word 'date' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "transportation",
+            "translation": "transport",
+            "definition": "",
+            "example": "The word 'transportation' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "communication",
+            "translation": "aloqa",
+            "definition": "",
+            "example": "The word 'communication' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 04 · Time Zones"
+      },
+      {
+            "word": "harmful",
+            "translation": "zararli",
+            "definition": "causing damage or injury",
+            "example": "Studying 'harmful' (causing damage or injury) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "helpful",
+            "translation": "foydali",
+            "definition": "giving useful aid",
+            "example": "Studying 'helpful' (giving useful aid) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "bacteria",
+            "translation": "bakteriyalar",
+            "definition": "tiny living organisms",
+            "example": "Studying 'bacteria' (tiny living organisms) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "microscope",
+            "translation": "mikroskop",
+            "definition": "a device for seeing tiny things",
+            "example": "Studying 'microscope' (a device for seeing tiny things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "react",
+            "translation": "reaktsiya bildirmoq",
+            "definition": "to respond to something",
+            "example": "Studying 'react' (to respond to something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "surprise",
+            "translation": "hayratda qoldirmoq",
+            "definition": "an unexpected feeling",
+            "example": "Studying 'surprise' (an unexpected feeling) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "appear",
+            "translation": "paydo bo'lmoq",
+            "definition": "to come into view; to become visible",
+            "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "proceed",
+            "translation": "davom ettirmoq",
+            "definition": "to continue; to go on",
+            "example": "Studying 'proceed' (to continue; to go on) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "tiny",
+            "translation": "juda kichik",
+            "definition": "extremely small",
+            "example": "Studying 'tiny' (extremely small) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "harm",
+            "translation": "zarar yetkazmoq",
+            "definition": "to cause damage or injury",
+            "example": "Studying 'harm' (to cause damage or injury) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "exist",
+            "translation": "mavjud bo'lmoq",
+            "definition": "to be present; to live",
+            "example": "Studying 'exist' (to be present; to live) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "environment",
+            "translation": "atrof-muhit",
+            "definition": "the natural world around us",
+            "example": "Studying 'environment' (the natural world around us) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "effect",
+            "translation": "ta'sir",
+            "definition": "a result or influence",
+            "example": "Studying 'effect' (a result or influence) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "harmless",
+            "translation": "zararsiz",
+            "definition": "not able to cause damage",
+            "example": "Studying 'harmless' (not able to cause damage) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "germ",
+            "translation": "mikrob",
+            "definition": "a tiny organism causing disease",
+            "example": "Studying 'germ' (a tiny organism causing disease) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "describe",
+            "translation": "tasvirlamoq",
+            "definition": "to say what something is like",
+            "example": "Studying 'describe' (to say what something is like) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "disease",
+            "translation": "kasallik",
+            "definition": "an illness or sickness",
+            "example": "Studying 'disease' (an illness or sickness) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "infect",
+            "translation": "yuqtirmoq",
+            "definition": "to give a disease to",
+            "example": "Studying 'infect' (to give a disease to) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "digestive",
+            "translation": "hazm qilish",
+            "definition": "relating to digesting food",
+            "example": "Studying 'digestive' (relating to digesting food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "suffer",
+            "translation": "aziyat chekmoq",
+            "definition": "to experience pain or harm",
+            "example": "Studying 'suffer' (to experience pain or harm) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "transfer",
+            "translation": "o'tkazmoq, yuqtirmoq",
+            "definition": "",
+            "example": "The word 'transfer' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "cough",
+            "translation": "yo'talmoq",
+            "definition": "",
+            "example": "The word 'cough' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "sneeze",
+            "translation": "aksirmoq",
+            "definition": "",
+            "example": "The word 'sneeze' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "surrounding",
+            "translation": "atrofdagi",
+            "definition": "",
+            "example": "The word 'surrounding' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "breathe",
+            "translation": "nafas olmoq",
+            "definition": "",
+            "example": "The word 'breathe' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "grow",
+            "translation": "o'smoq, ko'paymoq",
+            "definition": "",
+            "example": "The word 'grow' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "prevent",
+            "translation": "oldini olmoq",
+            "definition": "",
+            "example": "The word 'prevent' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "destroy",
+            "translation": "yo'q qilmoq",
+            "definition": "",
+            "example": "The word 'destroy' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "safe",
+            "translation": "xavfsiz",
+            "definition": "",
+            "example": "The word 'safe' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "benefit",
+            "translation": "foyda keltirmoq",
+            "definition": "",
+            "example": "The word 'benefit' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "vitamin",
+            "translation": "vitamin",
+            "definition": "",
+            "example": "The word 'vitamin' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "certain",
+            "translation": "muayyan, aniq",
+            "definition": "",
+            "example": "The word 'certain' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "break down",
+            "translation": "parchalamoq",
+            "definition": "",
+            "example": "The word 'break down' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "material",
+            "translation": "material",
+            "definition": "",
+            "example": "The word 'material' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "mix",
+            "translation": "aralashtirmoq",
+            "definition": "",
+            "example": "The word 'mix' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "soil",
+            "translation": "tuproq",
+            "definition": "",
+            "example": "The word 'soil' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "spill",
+            "translation": "to'kilmoq",
+            "definition": "",
+            "example": "The word 'spill' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "clean up",
+            "translation": "tozalamaoq",
+            "definition": "",
+            "example": "The word 'clean up' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "waste",
+            "translation": "chiqindi",
+            "definition": "",
+            "example": "The word 'waste' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "catch",
+            "translation": "yuqtirib olmoq",
+            "definition": "",
+            "example": "The word 'catch' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 05 · Harmful and Helpful Bacteria"
+      },
+      {
+            "word": "fight",
+            "translation": "kurashmoq",
+            "definition": "to struggle against something",
+            "example": "Studying 'fight' (to struggle against something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "infection",
+            "translation": "infeksiya",
+            "definition": "illness caused by germs",
+            "example": "Studying 'infection' (illness caused by germs) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "illness",
+            "translation": "kasallik",
+            "definition": "the state of being sick",
+            "example": "Studying 'illness' (the state of being sick) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "transfer",
+            "translation": "o'tkazmoq, yuqtirmoq",
+            "definition": "to move from one place to another",
+            "example": "Studying 'transfer' (to move from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "cause",
+            "translation": "sabab bo'lmoq",
+            "definition": "to make something happen",
+            "example": "Studying 'cause' (to make something happen) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "cure",
+            "translation": "davo, davolamoq",
+            "definition": "to make a sick person healthy",
+            "example": "Studying 'cure' (to make a sick person healthy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "environment",
+            "translation": "atrof-muhit",
+            "definition": "the natural world around us",
+            "example": "Studying 'environment' (the natural world around us) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "exist",
+            "translation": "mavjud bo'lmoq",
+            "definition": "to be present; to live",
+            "example": "Studying 'exist' (to be present; to live) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "discovery",
+            "translation": "kashfiyot",
+            "definition": "the act of finding something new",
+            "example": "Studying 'discovery' (the act of finding something new) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "observe",
+            "translation": "kuzatmoq",
+            "definition": "to watch carefully",
+            "example": "Studying 'observe' (to watch carefully) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "link",
+            "translation": "bog'lamoq, aloqa",
+            "definition": "to connect one thing to another",
+            "example": "Studying 'link' (to connect one thing to another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "suffer",
+            "translation": "aziyat chekmoq",
+            "definition": "to experience pain or harm",
+            "example": "Studying 'suffer' (to experience pain or harm) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "develop",
+            "translation": "rivojlantirmoq",
+            "definition": "to create or improve gradually",
+            "example": "Studying 'develop' (to create or improve gradually) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "prevent",
+            "translation": "oldini olmoq",
+            "definition": "to stop something from happening",
+            "example": "Studying 'prevent' (to stop something from happening) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "procedure",
+            "translation": "protsedura",
+            "definition": "a way of doing something",
+            "example": "Studying 'procedure' (a way of doing something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "destroy",
+            "translation": "yo'q qilmoq",
+            "definition": "to damage so it no longer exists",
+            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "heat",
+            "translation": "issiq, issiqlik",
+            "definition": "to make something hot",
+            "example": "Studying 'heat' (to make something hot) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "temperature",
+            "translation": "harorat",
+            "definition": "how hot or cold something is",
+            "example": "Studying 'temperature' (how hot or cold something is) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "process",
+            "translation": "jarayon",
+            "definition": "a series of actions or steps",
+            "example": "Studying 'process' (a series of actions or steps) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "reaction",
+            "translation": "reaktsiya",
+            "definition": "a response to something",
+            "example": "Studying 'reaction' (a response to something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "chemical",
+            "translation": "kimyoviy modda",
+            "definition": "",
+            "example": "The word 'chemical' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "laboratory",
+            "translation": "laboratoriya",
+            "definition": "",
+            "example": "The word 'laboratory' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "equipment",
+            "translation": "uskuna",
+            "definition": "",
+            "example": "The word 'equipment' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "surgeon",
+            "translation": "xirurg",
+            "definition": "",
+            "example": "The word 'surgeon' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "surgery",
+            "translation": "operatsiya",
+            "definition": "",
+            "example": "The word 'surgery' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "dangerous",
+            "translation": "xavfli",
+            "definition": "",
+            "example": "The word 'dangerous' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "analyze",
+            "translation": "tahlil qilmoq",
+            "definition": "",
+            "example": "The word 'analyze' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "spray",
+            "translation": "purkamoq",
+            "definition": "",
+            "example": "The word 'spray' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "bandage",
+            "translation": "bint",
+            "definition": "",
+            "example": "The word 'bandage' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "effective",
+            "translation": "samarali",
+            "definition": "",
+            "example": "The word 'effective' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "treatment",
+            "translation": "davolash",
+            "definition": "",
+            "example": "The word 'treatment' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "react",
+            "translation": "reaktsiya bildirmoq",
+            "definition": "",
+            "example": "The word 'react' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "already",
+            "translation": "allaqachon",
+            "definition": "",
+            "example": "The word 'already' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "notice",
+            "translation": "payqamoq",
+            "definition": "",
+            "example": "The word 'notice' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "fungus",
+            "translation": "zamburug'",
+            "definition": "",
+            "example": "The word 'fungus' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "growth",
+            "translation": "o'sish",
+            "definition": "",
+            "example": "The word 'growth' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "harmless",
+            "translation": "zararsiz",
+            "definition": "",
+            "example": "The word 'harmless' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "swallow",
+            "translation": "yutmoq",
+            "definition": "",
+            "example": "The word 'swallow' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "antibiotic",
+            "translation": "antibiotik",
+            "definition": "",
+            "example": "The word 'antibiotic' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "medicine",
+            "translation": "dori",
+            "definition": "",
+            "example": "The word 'medicine' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 06 · Fighting Bacteria"
+      },
+      {
+            "word": "traditional",
+            "translation": "an'anaviy",
+            "definition": "based on long-established custom",
+            "example": "Studying 'traditional' (based on long-established custom) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "farmer",
+            "translation": "dehqon, fermer",
+            "definition": "a person who works the land",
+            "example": "Studying 'farmer' (a person who works the land) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "physical",
+            "translation": "jismoniy",
+            "definition": "relating to the body",
+            "example": "Studying 'physical' (relating to the body) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "assume",
+            "translation": "taxmin qilmoq",
+            "definition": "to suppose to be true",
+            "example": "Studying 'assume' (to suppose to be true) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "community",
+            "translation": "jamiyat, jamoa",
+            "definition": "a group of people living together",
+            "example": "Studying 'community' (a group of people living together) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "define",
+            "translation": "aniqlamoq, belgilamoq",
+            "definition": "to state clearly the meaning of",
+            "example": "Studying 'define' (to state clearly the meaning of) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "take care of",
+            "translation": "g'amxo'rlik qilmoq",
+            "definition": "to look after; to manage",
+            "example": "Studying 'take care of' (to look after; to manage) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "aging",
+            "translation": "qarish, keksayish",
+            "definition": "growing old",
+            "example": "Studying 'aging' (growing old) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "factor",
+            "translation": "omil",
+            "definition": "something that influences a result",
+            "example": "Studying 'factor' (something that influences a result) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "seek",
+            "translation": "izlamoq",
+            "definition": "to try to find or get",
+            "example": "Studying 'seek' (to try to find or get) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "consequence",
+            "translation": "oqibat",
+            "definition": "a result of an action",
+            "example": "Studying 'consequence' (a result of an action) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "draw",
+            "translation": "tortmoq, jalb qilmoq",
+            "definition": "to attract toward something",
+            "example": "Studying 'draw' (to attract toward something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "earn",
+            "translation": "pul topshirmoq, daromad qilmoq",
+            "definition": "to get money by working",
+            "example": "Studying 'earn' (to get money by working) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "sufficient",
+            "translation": "yetarli",
+            "definition": "enough for a purpose",
+            "example": "Studying 'sufficient' (enough for a purpose) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "modern",
+            "translation": "zamonaviy",
+            "definition": "of the present or recent times",
+            "example": "Studying 'modern' (of the present or recent times) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "assist",
+            "translation": "yordam bermoq",
+            "definition": "to help",
+            "example": "Studying 'assist' (to help) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "economic",
+            "translation": "iqtisodiy",
+            "definition": "relating to money and trade",
+            "example": "Studying 'economic' (relating to money and trade) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "government",
+            "translation": "hukumat",
+            "definition": "the group that rules a country",
+            "example": "Studying 'government' (the group that rules a country) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "leader",
+            "translation": "rahbar, yetakchi",
+            "definition": "a person who guides others",
+            "example": "Studying 'leader' (a person who guides others) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "nation",
+            "translation": "xalq, millat",
+            "definition": "a country and its people",
+            "example": "Studying 'nation' (a country and its people) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "poor",
+            "translation": "kambag'al",
+            "definition": "",
+            "example": "The word 'poor' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "plan",
+            "translation": "reja",
+            "definition": "",
+            "example": "The word 'plan' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "economy",
+            "translation": "iqtisodiyot",
+            "definition": "",
+            "example": "The word 'economy' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "factory",
+            "translation": "fabrika, zavod",
+            "definition": "",
+            "example": "The word 'factory' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "offer",
+            "translation": "taklif qilmoq",
+            "definition": "",
+            "example": "The word 'offer' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "product",
+            "translation": "mahsulot",
+            "definition": "",
+            "example": "The word 'product' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "ship",
+            "translation": "tashimoq / kema",
+            "definition": "",
+            "example": "The word 'ship' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "country",
+            "translation": "mamlakat",
+            "definition": "",
+            "example": "The word 'country' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "housing",
+            "translation": "uy-joy",
+            "definition": "",
+            "example": "The word 'housing' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "hire",
+            "translation": "ishga olmoq",
+            "definition": "",
+            "example": "The word 'hire' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "apartment",
+            "translation": "kvartira",
+            "definition": "",
+            "example": "The word 'apartment' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "store",
+            "translation": "do'kon",
+            "definition": "",
+            "example": "The word 'store' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "business",
+            "translation": "biznes, tadbirkorlik",
+            "definition": "",
+            "example": "The word 'business' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "bridge",
+            "translation": "ko'prik",
+            "definition": "",
+            "example": "The word 'bridge' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "expect",
+            "translation": "kutmoq",
+            "definition": "",
+            "example": "The word 'expect' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "cheap",
+            "translation": "arzon",
+            "definition": "",
+            "example": "The word 'cheap' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "land",
+            "translation": "yer",
+            "definition": "",
+            "example": "The word 'land' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "cost",
+            "translation": "narx",
+            "definition": "",
+            "example": "The word 'cost' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "industrial",
+            "translation": "sanoat",
+            "definition": "",
+            "example": "The word 'industrial' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "ride",
+            "translation": "minmoq, haydamoq",
+            "definition": "",
+            "example": "The word 'ride' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 07 · Changing a Traditional Way of Life"
+      },
+      {
+            "word": "independent",
+            "translation": "mustaqil",
+            "definition": "not relying on others",
+            "example": "Studying 'independent' (not relying on others) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "culture",
+            "translation": "madaniyat",
+            "definition": "the customs of a society",
+            "example": "Studying 'culture' (the customs of a society) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "earn",
+            "translation": "pul topshirmoq, daromad qilmoq",
+            "definition": "to get money by working",
+            "example": "Studying 'earn' (to get money by working) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "community",
+            "translation": "jamiyat, jamoa",
+            "definition": "a group of people living together",
+            "example": "Studying 'community' (a group of people living together) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "factor",
+            "translation": "omil",
+            "definition": "something that influences a result",
+            "example": "Studying 'factor' (something that influences a result) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "automation",
+            "translation": "avtomatlashtirish",
+            "definition": "the use of machines instead of people",
+            "example": "Studying 'automation' (the use of machines instead of people) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "business",
+            "translation": "biznes, tadbirkorlik",
+            "definition": "an organisation that sells goods",
+            "example": "Studying 'business' (an organisation that sells goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "machine",
+            "translation": "mashina",
+            "definition": "a device that does work",
+            "example": "Studying 'machine' (a device that does work) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "instead of",
+            "translation": "o'rniga",
+            "definition": "in place of",
+            "example": "Studying 'instead of' (in place of) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "factory",
+            "translation": "fabrika, zavod",
+            "definition": "a building where goods are made",
+            "example": "Studying 'factory' (a building where goods are made) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "leather",
+            "translation": "leather",
+            "definition": "material made from animal skin",
+            "example": "Studying 'leather' (material made from animal skin) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "sew",
+            "translation": "tikmoq",
+            "definition": "to join with thread and needle",
+            "example": "Studying 'sew' (to join with thread and needle) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "physical",
+            "translation": "jismoniy",
+            "definition": "relating to the body",
+            "example": "Studying 'physical' (relating to the body) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "consequence",
+            "translation": "oqibat",
+            "definition": "a result of an action",
+            "example": "Studying 'consequence' (a result of an action) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "offer",
+            "translation": "taklif qilmoq",
+            "definition": "to present for acceptance",
+            "example": "Studying 'offer' (to present for acceptance) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "training",
+            "translation": "tayyorgarlik, o'quv",
+            "definition": "the process of learning a skill",
+            "example": "Studying 'training' (the process of learning a skill) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "degree",
+            "translation": "daraja, diplom",
+            "definition": "a qualification from a university",
+            "example": "Studying 'degree' (a qualification from a university) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "company",
+            "translation": "kompaniya",
+            "definition": "a business organisation",
+            "example": "Studying 'company' (a business organisation) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "hire",
+            "translation": "ishga olmoq",
+            "definition": "to employ someone for work",
+            "example": "Studying 'hire' (to employ someone for work) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "insufficient",
+            "translation": "yetarsiz",
+            "definition": "not enough",
+            "example": "Studying 'insufficient' (not enough) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "education",
+            "translation": "ta'lim",
+            "definition": "",
+            "example": "The word 'education' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "economy",
+            "translation": "iqtisodiyot",
+            "definition": "",
+            "example": "The word 'economy' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "serious",
+            "translation": "jiddiy",
+            "definition": "",
+            "example": "The word 'serious' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "seek",
+            "translation": "izlamoq",
+            "definition": "",
+            "example": "The word 'seek' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "sufficient",
+            "translation": "yetarli",
+            "definition": "",
+            "example": "The word 'sufficient' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "support",
+            "translation": "suyamoq, ushlab turmoq",
+            "definition": "",
+            "example": "The word 'support' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "market",
+            "translation": "bozor",
+            "definition": "",
+            "example": "The word 'market' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "traditional",
+            "translation": "an'anaviy",
+            "definition": "",
+            "example": "The word 'traditional' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "define",
+            "translation": "aniqlamoq, belgilamoq",
+            "definition": "",
+            "example": "The word 'define' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "definition",
+            "translation": "ta'rif",
+            "definition": "",
+            "example": "The word 'definition' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "assist",
+            "translation": "yordam bermoq",
+            "definition": "",
+            "example": "The word 'assist' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "assume",
+            "translation": "taxmin qilmoq",
+            "definition": "",
+            "example": "The word 'assume' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "percentage",
+            "translation": "foiz",
+            "definition": "",
+            "example": "The word 'percentage' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "single",
+            "translation": "yakka, yolg'iz",
+            "definition": "",
+            "example": "The word 'single' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "average",
+            "translation": "o'rtacha",
+            "definition": "",
+            "example": "The word 'average' is commonly used in English reading.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "rise",
+            "translation": "ko'tarilmoq",
+            "definition": "",
+            "example": "The word 'rise' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "birth rate",
+            "translation": "tug'ilish darajasi",
+            "definition": "",
+            "example": "The word 'birth rate' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "lack",
+            "translation": "yetishmaslik",
+            "definition": "",
+            "example": "The word 'lack' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "pattern",
+            "translation": "pattern",
+            "definition": "",
+            "example": "The word 'pattern' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "cause",
+            "translation": "sabab bo'lmoq",
+            "definition": "",
+            "example": "The word 'cause' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 08 · Changing the Future"
+      },
+      {
+            "word": "skyscraper",
+            "translation": "osmono'par bino",
+            "definition": "a very tall building",
+            "example": "Studying 'skyscraper' (a very tall building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "structure",
+            "translation": "tuzilma, bino",
+            "definition": "something that is built",
+            "example": "Studying 'structure' (something that is built) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "tall",
+            "translation": "tall",
+            "definition": "of great height",
+            "example": "Studying 'tall' (of great height) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "ancient",
+            "translation": "qadimiy",
+            "definition": "very old; from long ago",
+            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "height",
+            "translation": "balandlik",
+            "definition": "how tall something is",
+            "example": "Studying 'height' (how tall something is) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "story",
+            "translation": "story",
+            "definition": "a level or floor of a building",
+            "example": "Studying 'story' (a level or floor of a building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "construct",
+            "translation": "construct",
+            "definition": "to build something",
+            "example": "Studying 'construct' (to build something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "recently",
+            "translation": "recently",
+            "definition": "a short time ago",
+            "example": "Studying 'recently' (a short time ago) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "exact",
+            "translation": "aniq",
+            "definition": "completely correct; precise",
+            "example": "Studying 'exact' (completely correct; precise) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "definition",
+            "translation": "ta'rif",
+            "definition": "a statement of meaning",
+            "example": "Studying 'definition' (a statement of meaning) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "climb",
+            "translation": "climb",
+            "definition": "to go up using effort",
+            "example": "Studying 'climb' (to go up using effort) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "stairs",
+            "translation": "stairs",
+            "definition": "steps for going up or down",
+            "example": "Studying 'stairs' (steps for going up or down) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "entire",
+            "translation": "entire",
+            "definition": "whole; complete",
+            "example": "Studying 'entire' (whole; complete) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "support",
+            "translation": "suyamoq, ushlab turmoq",
+            "definition": "to hold up; to bear weight",
+            "example": "Studying 'support' (to hold up; to bear weight) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "vertical",
+            "translation": "vertical",
+            "definition": "going straight up and down",
+            "example": "Studying 'vertical' (going straight up and down) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "pile",
+            "translation": "pile",
+            "definition": "a heap of things on top of each other",
+            "example": "Studying 'pile' (a heap of things on top of each other) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "brick",
+            "translation": "brick",
+            "definition": "a block used for building",
+            "example": "Studying 'brick' (a block used for building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "thick",
+            "translation": "thick",
+            "definition": "wide between two surfaces",
+            "example": "Studying 'thick' (wide between two surfaces) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "restrict",
+            "translation": "restrict",
+            "definition": "to limit; to keep within bounds",
+            "example": "Studying 'restrict' (to limit; to keep within bounds) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "invention",
+            "translation": "invention",
+            "definition": "a new device that is created",
+            "example": "Studying 'invention' (a new device that is created) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "process",
+            "translation": "jarayon",
+            "definition": "",
+            "example": "The word 'process' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "steel",
+            "translation": "po'lat",
+            "definition": "",
+            "example": "The word 'steel' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "beam",
+            "translation": "to'sin",
+            "definition": "",
+            "example": "The word 'beam' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "design",
+            "translation": "loyihalamoq",
+            "definition": "",
+            "example": "The word 'design' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "framework",
+            "translation": "framework",
+            "definition": "",
+            "example": "The word 'framework' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "cover",
+            "translation": "cover",
+            "definition": "",
+            "example": "The word 'cover' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "concrete",
+            "translation": "beton",
+            "definition": "",
+            "example": "The word 'concrete' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "attractive",
+            "translation": "attractive",
+            "definition": "",
+            "example": "The word 'attractive' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "area",
+            "translation": "area",
+            "definition": "",
+            "example": "The word 'area' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "elevator",
+            "translation": "lift",
+            "definition": "",
+            "example": "The word 'elevator' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "previously",
+            "translation": "previously",
+            "definition": "",
+            "example": "The word 'previously' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "lift",
+            "translation": "lift",
+            "definition": "",
+            "example": "The word 'lift' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "dangerous",
+            "translation": "xavfli",
+            "definition": "",
+            "example": "The word 'dangerous' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "rope",
+            "translation": "rope",
+            "definition": "",
+            "example": "The word 'rope' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "brake",
+            "translation": "brake",
+            "definition": "",
+            "example": "The word 'brake' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "prevent",
+            "translation": "oldini olmoq",
+            "definition": "",
+            "example": "The word 'prevent' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "valuable",
+            "translation": "valuable",
+            "definition": "",
+            "example": "The word 'valuable' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "space",
+            "translation": "fazoy, joy",
+            "definition": "",
+            "example": "The word 'space' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "pump",
+            "translation": "pump",
+            "definition": "",
+            "example": "The word 'pump' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "limit",
+            "translation": "limit",
+            "definition": "",
+            "example": "The word 'limit' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 09 · Skyscrapers"
+      },
+      {
+            "word": "population",
+            "translation": "aholi",
+            "definition": "the number of people in a place",
+            "example": "Studying 'population' (the number of people in a place) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "billion",
+            "translation": "milliard",
+            "definition": "the number one thousand million",
+            "example": "Studying 'billion' (the number one thousand million) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "previously",
+            "translation": "previously",
+            "definition": "before now; earlier",
+            "example": "Studying 'previously' (before now; earlier) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "farm",
+            "translation": "farm",
+            "definition": "land used for growing crops or animals",
+            "example": "Studying 'farm' (land used for growing crops or animals) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "grow",
+            "translation": "o'smoq, ko'paymoq",
+            "definition": "to become larger or greater",
+            "example": "Studying 'grow' (to become larger or greater) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "major",
+            "translation": "major",
+            "definition": "very important or large",
+            "example": "Studying 'major' (very important or large) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "business",
+            "translation": "biznes, tadbirkorlik",
+            "definition": "an organisation that sells goods",
+            "example": "Studying 'business' (an organisation that sells goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "center",
+            "translation": "markaz",
+            "definition": "a place of main activity",
+            "example": "Studying 'center' (a place of main activity) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "factory",
+            "translation": "fabrika, zavod",
+            "definition": "a building where goods are made",
+            "example": "Studying 'factory' (a building where goods are made) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "locate",
+            "translation": "locate",
+            "definition": "to be situated in a place",
+            "example": "Studying 'locate' (to be situated in a place) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "support",
+            "translation": "suyamoq, ushlab turmoq",
+            "definition": "to provide money or help",
+            "example": "Studying 'support' (to provide money or help) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "port",
+            "translation": "port",
+            "definition": "a place where ships load and unload",
+            "example": "Studying 'port' (a place where ships load and unload) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "international",
+            "translation": "international",
+            "definition": "between different countries",
+            "example": "Studying 'international' (between different countries) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "trade",
+            "translation": "trade",
+            "definition": "the buying and selling of goods",
+            "example": "Studying 'trade' (the buying and selling of goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "increase",
+            "translation": "increase",
+            "definition": "to become greater in amount",
+            "example": "Studying 'increase' (to become greater in amount) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "material",
+            "translation": "material",
+            "definition": "the substance goods are made of",
+            "example": "Studying 'material' (the substance goods are made of) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "unload",
+            "translation": "unload",
+            "definition": "to remove goods from a vehicle or ship",
+            "example": "Studying 'unload' (to remove goods from a vehicle or ship) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "deliver",
+            "translation": "deliver",
+            "definition": "to take goods to a place",
+            "example": "Studying 'deliver' (to take goods to a place) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "transportation",
+            "translation": "transport",
+            "definition": "the movement of people or goods",
+            "example": "Studying 'transportation' (the movement of people or goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "station",
+            "translation": "station",
+            "definition": "a stopping place for trains or buses",
+            "example": "Studying 'station' (a stopping place for trains or buses) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "convenient",
+            "translation": "convenient",
+            "definition": "",
+            "example": "The word 'convenient' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "visitor",
+            "translation": "visitor",
+            "definition": "",
+            "example": "The word 'visitor' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "attract",
+            "translation": "o'ziga jalb qilmoq",
+            "definition": "",
+            "example": "The word 'attract' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "limited",
+            "translation": "limited",
+            "definition": "",
+            "example": "The word 'limited' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "construct",
+            "translation": "construct",
+            "definition": "",
+            "example": "The word 'construct' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "empty",
+            "translation": "empty",
+            "definition": "",
+            "example": "The word 'empty' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "space",
+            "translation": "fazoy, joy",
+            "definition": "",
+            "example": "The word 'space' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "plot",
+            "translation": "plot",
+            "definition": "",
+            "example": "The word 'plot' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "expensive",
+            "translation": "expensive",
+            "definition": "",
+            "example": "The word 'expensive' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "remove",
+            "translation": "remove",
+            "definition": "",
+            "example": "The word 'remove' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "replace",
+            "translation": "almashtirmoq",
+            "definition": "",
+            "example": "The word 'replace' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "vertical",
+            "translation": "vertical",
+            "definition": "",
+            "example": "The word 'vertical' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "provide",
+            "translation": "provide",
+            "definition": "",
+            "example": "The word 'provide' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "occupy",
+            "translation": "occupy",
+            "definition": "",
+            "example": "The word 'occupy' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "efficient",
+            "translation": "efficient",
+            "definition": "",
+            "example": "The word 'efficient' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "install",
+            "translation": "install",
+            "definition": "",
+            "example": "The word 'install' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "trash",
+            "translation": "trash",
+            "definition": "",
+            "example": "The word 'trash' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "dispose",
+            "translation": "dispose",
+            "definition": "",
+            "example": "The word 'dispose' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "pollution",
+            "translation": "ifloslanish",
+            "definition": "",
+            "example": "The word 'pollution' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "restrict",
+            "translation": "restrict",
+            "definition": "",
+            "example": "The word 'restrict' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 10 · The Growth of Cities"
+      },
+      {
+            "word": "culture",
+            "translation": "madaniyat",
+            "definition": "the customs and beliefs of a society",
+            "example": "Studying 'culture' (the customs and beliefs of a society) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "belief",
+            "translation": "belief",
+            "definition": "something accepted as true",
+            "example": "Studying 'belief' (something accepted as true) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "custom",
+            "translation": "urf-odat",
+            "definition": "a traditional way of doing things",
+            "example": "Studying 'custom' (a traditional way of doing things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "develop",
+            "translation": "rivojlantirmoq",
+            "definition": "to grow or come into being gradually",
+            "example": "Studying 'develop' (to grow or come into being gradually) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "diet",
+            "translation": "diet",
+            "definition": "the food a person usually eats",
+            "example": "Studying 'diet' (the food a person usually eats) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "depend on",
+            "translation": "depend on",
+            "definition": "to be decided by; to rely on",
+            "example": "Studying 'depend on' (to be decided by; to rely on) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "available",
+            "translation": "available",
+            "definition": "able to be obtained or used",
+            "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "environment",
+            "translation": "atrof-muhit",
+            "definition": "the natural surroundings",
+            "example": "Studying 'environment' (the natural surroundings) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "rely on",
+            "translation": "rely on",
+            "definition": "to depend on for support",
+            "example": "Studying 'rely on' (to depend on for support) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "supply",
+            "translation": "supply",
+            "definition": "to provide what is needed",
+            "example": "Studying 'supply' (to provide what is needed) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "in contrast",
+            "translation": "in contrast",
+            "definition": "showing a clear difference",
+            "example": "Studying 'in contrast' (showing a clear difference) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "forest",
+            "translation": "forest",
+            "definition": "a large area covered with trees",
+            "example": "Studying 'forest' (a large area covered with trees) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "hunt",
+            "translation": "ov qilmoq",
+            "definition": "to chase and kill animals for food",
+            "example": "Studying 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "wild",
+            "translation": "wild",
+            "definition": "living or growing in nature",
+            "example": "Studying 'wild' (living or growing in nature) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "flavoring",
+            "translation": "flavoring",
+            "definition": "something added to give taste",
+            "example": "Studying 'flavoring' (something added to give taste) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "spice",
+            "translation": "ziravor",
+            "definition": "a substance used to flavour food",
+            "example": "Studying 'spice' (a substance used to flavour food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "seed",
+            "translation": "seed",
+            "definition": "the part of a plant that grows new plants",
+            "example": "Studying 'seed' (the part of a plant that grows new plants) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "flavor",
+            "translation": "maza, ta'm",
+            "definition": "the taste of food",
+            "example": "Studying 'flavor' (the taste of food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "traditional",
+            "translation": "an'anaviy",
+            "definition": "based on long-established custom",
+            "example": "Studying 'traditional' (based on long-established custom) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "farm",
+            "translation": "farm",
+            "definition": "to grow crops and raise animals",
+            "example": "Studying 'farm' (to grow crops and raise animals) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "tame",
+            "translation": "tame",
+            "definition": "",
+            "example": "The word 'tame' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "plant",
+            "translation": "plant",
+            "definition": "",
+            "example": "The word 'plant' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "grain",
+            "translation": "grain",
+            "definition": "",
+            "example": "The word 'grain' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "spread",
+            "translation": "tarqalmoq",
+            "definition": "",
+            "example": "The word 'spread' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "crop",
+            "translation": "crop",
+            "definition": "",
+            "example": "The word 'crop' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "raise",
+            "translation": "raise",
+            "definition": "",
+            "example": "The word 'raise' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "desert",
+            "translation": "desert",
+            "definition": "",
+            "example": "The word 'desert' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "ensure",
+            "translation": "ensure",
+            "definition": "",
+            "example": "The word 'ensure' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "neighbor",
+            "translation": "qo'shni",
+            "definition": "",
+            "example": "The word 'neighbor' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "traveler",
+            "translation": "yo'lovchi",
+            "definition": "",
+            "example": "The word 'traveler' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "technique",
+            "translation": "technique",
+            "definition": "",
+            "example": "The word 'technique' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "distant",
+            "translation": "olis, uzoq",
+            "definition": "",
+            "example": "The word 'distant' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "discover",
+            "translation": "discover",
+            "definition": "",
+            "example": "The word 'discover' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "explorer",
+            "translation": "explorer",
+            "definition": "",
+            "example": "The word 'explorer' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "sail",
+            "translation": "sail",
+            "definition": "",
+            "example": "The word 'sail' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "significant",
+            "translation": "significant",
+            "definition": "",
+            "example": "The word 'significant' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "preserve",
+            "translation": "saqlamoq, konservalash",
+            "definition": "",
+            "example": "The word 'preserve' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "tool",
+            "translation": "asbob",
+            "definition": "",
+            "example": "The word 'tool' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "pointed",
+            "translation": "pointed",
+            "definition": "",
+            "example": "The word 'pointed' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "proud",
+            "translation": "proud",
+            "definition": "",
+            "example": "The word 'proud' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 11 · Food Traditions"
+      },
+      {
+            "word": "preserve",
+            "translation": "saqlamoq, konservalash",
+            "definition": "to keep food safe from decay",
+            "example": "Studying 'preserve' (to keep food safe from decay) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "diet",
+            "translation": "diet",
+            "definition": "the food a person usually eats",
+            "example": "Studying 'diet' (the food a person usually eats) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "depend on",
+            "translation": "depend on",
+            "definition": "to be decided by; to rely on",
+            "example": "Studying 'depend on' (to be decided by; to rely on) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "search",
+            "translation": "search",
+            "definition": "to look carefully for something",
+            "example": "Studying 'search' (to look carefully for something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "available",
+            "translation": "available",
+            "definition": "able to be obtained or used",
+            "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "root",
+            "translation": "root",
+            "definition": "the underground part of a plant",
+            "example": "Studying 'root' (the underground part of a plant) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "hunt",
+            "translation": "ov qilmoq",
+            "definition": "to chase and kill animals for food",
+            "example": "Studying 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "wild",
+            "translation": "wild",
+            "definition": "living or growing in nature",
+            "example": "Studying 'wild' (living or growing in nature) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "rot",
+            "translation": "chirimoq",
+            "definition": "to decay; to go bad",
+            "example": "Studying 'rot' (to decay; to go bad) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "taste",
+            "translation": "tatib ko'rmoq",
+            "definition": "to sense the flavour of food",
+            "example": "Studying 'taste' (to sense the flavour of food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "safe",
+            "translation": "xavfsiz",
+            "definition": "not dangerous; free from harm",
+            "example": "Studying 'safe' (not dangerous; free from harm) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "technique",
+            "translation": "technique",
+            "definition": "a particular way of doing something",
+            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "discover",
+            "translation": "discover",
+            "definition": "to find something for the first time",
+            "example": "Studying 'discover' (to find something for the first time) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "cooling",
+            "translation": "cooling",
+            "definition": "the process of making cold",
+            "example": "Studying 'cooling' (the process of making cold) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "drag",
+            "translation": "drag",
+            "definition": "to pull something heavy",
+            "example": "Studying 'drag' (to pull something heavy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "cave",
+            "translation": "cave",
+            "definition": "a hollow space in rock or hill",
+            "example": "Studying 'cave' (a hollow space in rock or hill) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "hide",
+            "translation": "hide",
+            "definition": "to keep out of sight",
+            "example": "Studying 'hide' (to keep out of sight) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "raw",
+            "translation": "raw",
+            "definition": "not cooked",
+            "example": "Studying 'raw' (not cooked) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "cool",
+            "translation": "salqin",
+            "definition": "fairly cold",
+            "example": "Studying 'cool' (fairly cold) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "freeze",
+            "translation": "muzlatmoq",
+            "definition": "to turn solid because of cold",
+            "example": "Studying 'freeze' (to turn solid because of cold) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "bacteria",
+            "translation": "bakteriyalar",
+            "definition": "",
+            "example": "The word 'bacteria' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "cause",
+            "translation": "sabab bo'lmoq",
+            "definition": "",
+            "example": "The word 'cause' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "growth",
+            "translation": "o'sish",
+            "definition": "",
+            "example": "The word 'growth' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "dried",
+            "translation": "dried",
+            "definition": "",
+            "example": "The word 'dried' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "last",
+            "translation": "last",
+            "definition": "",
+            "example": "The word 'last' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "moisture",
+            "translation": "moisture",
+            "definition": "",
+            "example": "The word 'moisture' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "significantly",
+            "translation": "significantly",
+            "definition": "",
+            "example": "The word 'significantly' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "rely on",
+            "translation": "rely on",
+            "definition": "",
+            "example": "The word 'rely on' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "supply",
+            "translation": "supply",
+            "definition": "",
+            "example": "The word 'supply' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "grain",
+            "translation": "grain",
+            "definition": "",
+            "example": "The word 'grain' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "fresh",
+            "translation": "fresh",
+            "definition": "",
+            "example": "The word 'fresh' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "pack",
+            "translation": "pack",
+            "definition": "",
+            "example": "The word 'pack' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "vinegar",
+            "translation": "vinegar",
+            "definition": "",
+            "example": "The word 'vinegar' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "combine",
+            "translation": "combine",
+            "definition": "",
+            "example": "The word 'combine' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "significant",
+            "translation": "significant",
+            "definition": "",
+            "example": "The word 'significant' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "seal",
+            "translation": "seal",
+            "definition": "",
+            "example": "The word 'seal' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "boil",
+            "translation": "kaynatmoq",
+            "definition": "",
+            "example": "The word 'boil' is commonly used in English reading.",
+            "partOfSpeech": "verb",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "destroy",
+            "translation": "yo'q qilmoq",
+            "definition": "",
+            "example": "The word 'destroy' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "store",
+            "translation": "do'kon",
+            "definition": "",
+            "example": "The word 'store' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "refrigerator",
+            "translation": "refrigerator",
+            "definition": "",
+            "example": "The word 'refrigerator' is commonly used in English reading.",
+            "partOfSpeech": "noun",
+            "topic": "Text 12 · Preserving Foods"
+      }
+]
   }
 ];

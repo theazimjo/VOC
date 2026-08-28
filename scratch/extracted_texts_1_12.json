@@ -1,0 +1,2462 @@
+{
+  "1": {
+    "title": "AN EARLY BRAIN MAP",
+    "words": [
+      {
+        "num": 1,
+        "word": "behavior",
+        "definition": "the way a person acts"
+      },
+      {
+        "num": 2,
+        "word": "understand",
+        "definition": "to know the meaning of something"
+      },
+      {
+        "num": 3,
+        "word": "wonder",
+        "definition": "to want to know; to ask oneself"
+      },
+      {
+        "num": 4,
+        "word": "neighbor",
+        "definition": "a person living nearby"
+      },
+      {
+        "num": 5,
+        "word": "friendly",
+        "definition": "kind and pleasant to others"
+      },
+      {
+        "num": 6,
+        "word": "behave",
+        "definition": "to act in a particular way"
+      },
+      {
+        "num": 7,
+        "word": "complex",
+        "definition": "complicated; hard to understand"
+      },
+      {
+        "num": 8,
+        "word": "source",
+        "definition": "the place something comes from"
+      },
+      {
+        "num": 9,
+        "word": "function",
+        "definition": "to work or operate"
+      },
+      {
+        "num": 10,
+        "word": "link",
+        "definition": "to connect one thing to another"
+      },
+      {
+        "num": 11,
+        "word": "certain",
+        "definition": "particular; specific"
+      },
+      {
+        "num": 12,
+        "word": "bravery",
+        "definition": "courage; lack of fear"
+      },
+      {
+        "num": 13,
+        "word": "furthermore",
+        "definition": "in addition; moreover"
+      },
+      {
+        "num": 14,
+        "word": "bump",
+        "definition": "a raised round lump on a surface"
+      },
+      {
+        "num": 15,
+        "word": "skull",
+        "definition": "the bone around the head"
+      },
+      {
+        "num": 16,
+        "word": "analyze",
+        "definition": "to examine in detail"
+      },
+      {
+        "num": 17,
+        "word": "location",
+        "definition": "a particular place or position"
+      },
+      {
+        "num": 18,
+        "word": "measure",
+        "definition": "to find the size or amount"
+      },
+      {
+        "num": 19,
+        "word": "average",
+        "definition": "typical; ordinary"
+      },
+      {
+        "num": 20,
+        "word": "label",
+        "definition": "to mark with a name or description"
+      },
+      {
+        "num": 21,
+        "word": "memory",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "humor",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "interest",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "scientific",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "advice",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "contrast",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "joke",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "laugh",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "impossible",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "personality",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "important",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "explain",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "explanation",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "agree",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "attempt",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "originate",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "reliable",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "observe",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "examine",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "replace",
+        "definition": ""
+      }
+    ]
+  },
+  "2": {
+    "title": "BRAIN MAPPING TODAY",
+    "words": [
+      {
+        "num": 1,
+        "word": "control",
+        "definition": "to direct or manage something"
+      },
+      {
+        "num": 2,
+        "word": "behavior",
+        "definition": "the way a person acts"
+      },
+      {
+        "num": 3,
+        "word": "link",
+        "definition": "a connection between things"
+      },
+      {
+        "num": 4,
+        "word": "living",
+        "definition": "alive; not dead"
+      },
+      {
+        "num": 5,
+        "word": "technology",
+        "definition": "scientific tools and methods"
+      },
+      {
+        "num": 6,
+        "word": "billion",
+        "definition": "the number one thousand million"
+      },
+      {
+        "num": 7,
+        "word": "cell",
+        "definition": "the smallest unit of a living thing"
+      },
+      {
+        "num": 8,
+        "word": "complex",
+        "definition": "complicated; having many parts"
+      },
+      {
+        "num": 9,
+        "word": "function",
+        "definition": "the special activity of something"
+      },
+      {
+        "num": 10,
+        "word": "describe",
+        "definition": "to say what something is like"
+      },
+      {
+        "num": 11,
+        "word": "electronic",
+        "definition": "using electricity and microchips"
+      },
+      {
+        "num": 12,
+        "word": "scan",
+        "definition": "to examine with a special machine"
+      },
+      {
+        "num": 13,
+        "word": "image",
+        "definition": "a picture of something"
+      },
+      {
+        "num": 14,
+        "word": "appear",
+        "definition": "to come into view; to become visible"
+      },
+      {
+        "num": 15,
+        "word": "analyze",
+        "definition": "to examine in detail"
+      },
+      {
+        "num": 16,
+        "word": "stand for",
+        "definition": "to represent or mean"
+      },
+      {
+        "num": 17,
+        "word": "magnetic",
+        "definition": "having the power of a magnet"
+      },
+      {
+        "num": 18,
+        "word": "force",
+        "definition": "physical power or energy"
+      },
+      {
+        "num": 19,
+        "word": "wave",
+        "definition": "a moving form of energy"
+      },
+      {
+        "num": 20,
+        "word": "process",
+        "definition": "a series of actions or steps"
+      },
+      {
+        "num": 21,
+        "word": "scanner",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "location",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "functional",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "activity",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "active",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "flow",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "blood",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "hearing",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "smell",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "average",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "collect",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "example",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "measurement",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "speech",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "healthy",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "compare",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "patient",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "operate",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "exact",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "examine",
+        "definition": ""
+      }
+    ]
+  },
+  "3": {
+    "title": "WHAT TIME IS IT?",
+    "words": [
+      {
+        "num": 1,
+        "word": "clock",
+        "definition": "a device that shows the time"
+      },
+      {
+        "num": 2,
+        "word": "appear",
+        "definition": "to come into view; to become visible"
+      },
+      {
+        "num": 3,
+        "word": "hunt",
+        "definition": "to chase and kill animals for food"
+      },
+      {
+        "num": 4,
+        "word": "shine",
+        "definition": "to give out bright light"
+      },
+      {
+        "num": 5,
+        "word": "darkness",
+        "definition": "the absence of light"
+      },
+      {
+        "num": 6,
+        "word": "measure",
+        "definition": "to find the size or amount"
+      },
+      {
+        "num": 7,
+        "word": "ancient",
+        "definition": "very old; from long ago"
+      },
+      {
+        "num": 8,
+        "word": "develop",
+        "definition": "to create or improve gradually"
+      },
+      {
+        "num": 9,
+        "word": "divide",
+        "definition": "to separate into parts"
+      },
+      {
+        "num": 10,
+        "word": "shadow",
+        "definition": "a dark shape made by blocking light"
+      },
+      {
+        "num": 11,
+        "word": "mark",
+        "definition": "to make a sign or line on something"
+      },
+      {
+        "num": 12,
+        "word": "shift",
+        "definition": "to move from one place to another"
+      },
+      {
+        "num": 13,
+        "word": "method",
+        "definition": "a way of doing something"
+      },
+      {
+        "num": 14,
+        "word": "useful",
+        "definition": "able to be used for a purpose"
+      },
+      {
+        "num": 15,
+        "word": "accurate",
+        "definition": "correct; exact"
+      },
+      {
+        "num": 16,
+        "word": "sundial",
+        "definition": "a clock using sun shadows"
+      },
+      {
+        "num": 17,
+        "word": "hidden",
+        "definition": "not able to be seen"
+      },
+      {
+        "num": 18,
+        "word": "confused",
+        "definition": "unable to understand clearly"
+      },
+      {
+        "num": 19,
+        "word": "vary",
+        "definition": "to change; to be different"
+      },
+      {
+        "num": 20,
+        "word": "season",
+        "definition": "a period of the year"
+      },
+      {
+        "num": 21,
+        "word": "candle",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "burn",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "pass",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "connect",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "hole",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "fill",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "similar",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "difference",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "sand",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "function",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "object",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "engineer",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "mechanical",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "feature",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "gear",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "spread",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "wind",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "tool",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "dial",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "power",
+        "definition": ""
+      }
+    ]
+  },
+  "4": {
+    "title": "TIME ZONES",
+    "words": [
+      {
+        "num": 1,
+        "word": "set",
+        "definition": "to adjust to the correct point"
+      },
+      {
+        "num": 2,
+        "word": "exactly",
+        "definition": "in a precise way; just"
+      },
+      {
+        "num": 3,
+        "word": "noon",
+        "definition": "twelve o'clock in the daytime"
+      },
+      {
+        "num": 4,
+        "word": "nearby",
+        "definition": "close; not far away"
+      },
+      {
+        "num": 5,
+        "word": "location",
+        "definition": "a particular place or position"
+      },
+      {
+        "num": 6,
+        "word": "local",
+        "definition": "relating to a particular area"
+      },
+      {
+        "num": 7,
+        "word": "turn",
+        "definition": "to move in a circle; to rotate"
+      },
+      {
+        "num": 8,
+        "word": "appear",
+        "definition": "to seem; to come into view"
+      },
+      {
+        "num": 9,
+        "word": "shift",
+        "definition": "to move from one place to another"
+      },
+      {
+        "num": 10,
+        "word": "vary",
+        "definition": "to change; to be different"
+      },
+      {
+        "num": 11,
+        "word": "differ",
+        "definition": "to be unlike; to be different"
+      },
+      {
+        "num": 12,
+        "word": "distance",
+        "definition": "the amount of space between things"
+      },
+      {
+        "num": 13,
+        "word": "imagine",
+        "definition": "to form a picture in the mind"
+      },
+      {
+        "num": 14,
+        "word": "earlier",
+        "definition": "before a particular time"
+      },
+      {
+        "num": 15,
+        "word": "apart",
+        "definition": "separated by a distance"
+      },
+      {
+        "num": 16,
+        "word": "history",
+        "definition": "events of the past"
+      },
+      {
+        "num": 17,
+        "word": "difference",
+        "definition": "a way in which things are not alike"
+      },
+      {
+        "num": 18,
+        "word": "important",
+        "definition": "having great value or meaning"
+      },
+      {
+        "num": 19,
+        "word": "railroad",
+        "definition": "a track and system for trains"
+      },
+      {
+        "num": 20,
+        "word": "carry",
+        "definition": "to take from one place to another"
+      },
+      {
+        "num": 21,
+        "word": "traveler",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "confused",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "watch",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "distant",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "accurate",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "match",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "official",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "link",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "committee",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "feature",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "zone",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "divide",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "equal",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "add",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "similarly",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "center",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "calendar",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "date",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "transportation",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "communication",
+        "definition": ""
+      }
+    ]
+  },
+  "5": {
+    "title": "HARMFUL AND HELPFUL BACTERIA",
+    "words": [
+      {
+        "num": 1,
+        "word": "harmful",
+        "definition": "causing damage or injury"
+      },
+      {
+        "num": 2,
+        "word": "helpful",
+        "definition": "giving useful aid"
+      },
+      {
+        "num": 3,
+        "word": "bacteria",
+        "definition": "tiny living organisms"
+      },
+      {
+        "num": 4,
+        "word": "microscope",
+        "definition": "a device for seeing tiny things"
+      },
+      {
+        "num": 5,
+        "word": "react",
+        "definition": "to respond to something"
+      },
+      {
+        "num": 6,
+        "word": "surprise",
+        "definition": "an unexpected feeling"
+      },
+      {
+        "num": 7,
+        "word": "appear",
+        "definition": "to come into view; to become visible"
+      },
+      {
+        "num": 8,
+        "word": "proceed",
+        "definition": "to continue; to go on"
+      },
+      {
+        "num": 9,
+        "word": "tiny",
+        "definition": "extremely small"
+      },
+      {
+        "num": 10,
+        "word": "harm",
+        "definition": "to cause damage or injury"
+      },
+      {
+        "num": 11,
+        "word": "exist",
+        "definition": "to be present; to live"
+      },
+      {
+        "num": 12,
+        "word": "environment",
+        "definition": "the natural world around us"
+      },
+      {
+        "num": 13,
+        "word": "effect",
+        "definition": "a result or influence"
+      },
+      {
+        "num": 14,
+        "word": "harmless",
+        "definition": "not able to cause damage"
+      },
+      {
+        "num": 15,
+        "word": "germ",
+        "definition": "a tiny organism causing disease"
+      },
+      {
+        "num": 16,
+        "word": "describe",
+        "definition": "to say what something is like"
+      },
+      {
+        "num": 17,
+        "word": "disease",
+        "definition": "an illness or sickness"
+      },
+      {
+        "num": 18,
+        "word": "infect",
+        "definition": "to give a disease to"
+      },
+      {
+        "num": 19,
+        "word": "digestive",
+        "definition": "relating to digesting food"
+      },
+      {
+        "num": 20,
+        "word": "suffer",
+        "definition": "to experience pain or harm"
+      },
+      {
+        "num": 21,
+        "word": "transfer",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "cough",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "sneeze",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "surrounding",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "breathe",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "grow",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "prevent",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "destroy",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "safe",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "benefit",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "vitamin",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "certain",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "break down",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "material",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "mix",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "soil",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "spill",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "clean up",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "waste",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "catch",
+        "definition": ""
+      }
+    ]
+  },
+  "6": {
+    "title": "FIGHTING BACTERIA",
+    "words": [
+      {
+        "num": 1,
+        "word": "fight",
+        "definition": "to struggle against something"
+      },
+      {
+        "num": 2,
+        "word": "infection",
+        "definition": "illness caused by germs"
+      },
+      {
+        "num": 3,
+        "word": "illness",
+        "definition": "the state of being sick"
+      },
+      {
+        "num": 4,
+        "word": "transfer",
+        "definition": "to move from one place to another"
+      },
+      {
+        "num": 5,
+        "word": "cause",
+        "definition": "to make something happen"
+      },
+      {
+        "num": 6,
+        "word": "cure",
+        "definition": "to make a sick person healthy"
+      },
+      {
+        "num": 7,
+        "word": "environment",
+        "definition": "the natural world around us"
+      },
+      {
+        "num": 8,
+        "word": "exist",
+        "definition": "to be present; to live"
+      },
+      {
+        "num": 9,
+        "word": "discovery",
+        "definition": "the act of finding something new"
+      },
+      {
+        "num": 10,
+        "word": "observe",
+        "definition": "to watch carefully"
+      },
+      {
+        "num": 11,
+        "word": "link",
+        "definition": "to connect one thing to another"
+      },
+      {
+        "num": 12,
+        "word": "suffer",
+        "definition": "to experience pain or harm"
+      },
+      {
+        "num": 13,
+        "word": "develop",
+        "definition": "to create or improve gradually"
+      },
+      {
+        "num": 14,
+        "word": "prevent",
+        "definition": "to stop something from happening"
+      },
+      {
+        "num": 15,
+        "word": "procedure",
+        "definition": "a way of doing something"
+      },
+      {
+        "num": 16,
+        "word": "destroy",
+        "definition": "to damage so it no longer exists"
+      },
+      {
+        "num": 17,
+        "word": "heat",
+        "definition": "to make something hot"
+      },
+      {
+        "num": 18,
+        "word": "temperature",
+        "definition": "how hot or cold something is"
+      },
+      {
+        "num": 19,
+        "word": "process",
+        "definition": "a series of actions or steps"
+      },
+      {
+        "num": 20,
+        "word": "reaction",
+        "definition": "a response to something"
+      },
+      {
+        "num": 21,
+        "word": "chemical",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "laboratory",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "equipment",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "surgeon",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "surgery",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "dangerous",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "analyze",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "spray",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "bandage",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "effective",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "treatment",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "react",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "already",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "notice",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "fungus",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "growth",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "harmless",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "swallow",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "antibiotic",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "medicine",
+        "definition": ""
+      }
+    ]
+  },
+  "7": {
+    "title": "CHANGING A TRADITIONAL WAY OF LIFE",
+    "words": [
+      {
+        "num": 1,
+        "word": "traditional",
+        "definition": "based on long-established custom"
+      },
+      {
+        "num": 2,
+        "word": "farmer",
+        "definition": "a person who works the land"
+      },
+      {
+        "num": 3,
+        "word": "physical",
+        "definition": "relating to the body"
+      },
+      {
+        "num": 4,
+        "word": "assume",
+        "definition": "to suppose to be true"
+      },
+      {
+        "num": 5,
+        "word": "community",
+        "definition": "a group of people living together"
+      },
+      {
+        "num": 6,
+        "word": "define",
+        "definition": "to state clearly the meaning of"
+      },
+      {
+        "num": 7,
+        "word": "take care of",
+        "definition": "to look after; to manage"
+      },
+      {
+        "num": 8,
+        "word": "aging",
+        "definition": "growing old"
+      },
+      {
+        "num": 9,
+        "word": "factor",
+        "definition": "something that influences a result"
+      },
+      {
+        "num": 10,
+        "word": "seek",
+        "definition": "to try to find or get"
+      },
+      {
+        "num": 11,
+        "word": "consequence",
+        "definition": "a result of an action"
+      },
+      {
+        "num": 12,
+        "word": "draw",
+        "definition": "to attract toward something"
+      },
+      {
+        "num": 13,
+        "word": "earn",
+        "definition": "to get money by working"
+      },
+      {
+        "num": 14,
+        "word": "sufficient",
+        "definition": "enough for a purpose"
+      },
+      {
+        "num": 15,
+        "word": "modern",
+        "definition": "of the present or recent times"
+      },
+      {
+        "num": 16,
+        "word": "assist",
+        "definition": "to help"
+      },
+      {
+        "num": 17,
+        "word": "economic",
+        "definition": "relating to money and trade"
+      },
+      {
+        "num": 18,
+        "word": "government",
+        "definition": "the group that rules a country"
+      },
+      {
+        "num": 19,
+        "word": "leader",
+        "definition": "a person who guides others"
+      },
+      {
+        "num": 20,
+        "word": "nation",
+        "definition": "a country and its people"
+      },
+      {
+        "num": 21,
+        "word": "poor",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "plan",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "economy",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "factory",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "offer",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "product",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "ship",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "country",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "housing",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "hire",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "apartment",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "store",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "business",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "bridge",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "expect",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "cheap",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "land",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "cost",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "industrial",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "ride",
+        "definition": ""
+      }
+    ]
+  },
+  "8": {
+    "title": "CHANGING THE FUTURE",
+    "words": [
+      {
+        "num": 1,
+        "word": "independent",
+        "definition": "not relying on others"
+      },
+      {
+        "num": 2,
+        "word": "culture",
+        "definition": "the customs of a society"
+      },
+      {
+        "num": 3,
+        "word": "earn",
+        "definition": "to get money by working"
+      },
+      {
+        "num": 4,
+        "word": "community",
+        "definition": "a group of people living together"
+      },
+      {
+        "num": 5,
+        "word": "factor",
+        "definition": "something that influences a result"
+      },
+      {
+        "num": 6,
+        "word": "automation",
+        "definition": "the use of machines instead of people"
+      },
+      {
+        "num": 7,
+        "word": "business",
+        "definition": "an organisation that sells goods"
+      },
+      {
+        "num": 8,
+        "word": "machine",
+        "definition": "a device that does work"
+      },
+      {
+        "num": 9,
+        "word": "instead of",
+        "definition": "in place of"
+      },
+      {
+        "num": 10,
+        "word": "factory",
+        "definition": "a building where goods are made"
+      },
+      {
+        "num": 11,
+        "word": "leather",
+        "definition": "material made from animal skin"
+      },
+      {
+        "num": 12,
+        "word": "sew",
+        "definition": "to join with thread and needle"
+      },
+      {
+        "num": 13,
+        "word": "physical",
+        "definition": "relating to the body"
+      },
+      {
+        "num": 14,
+        "word": "consequence",
+        "definition": "a result of an action"
+      },
+      {
+        "num": 15,
+        "word": "offer",
+        "definition": "to present for acceptance"
+      },
+      {
+        "num": 16,
+        "word": "training",
+        "definition": "the process of learning a skill"
+      },
+      {
+        "num": 17,
+        "word": "degree",
+        "definition": "a qualification from a university"
+      },
+      {
+        "num": 18,
+        "word": "company",
+        "definition": "a business organisation"
+      },
+      {
+        "num": 19,
+        "word": "hire",
+        "definition": "to employ someone for work"
+      },
+      {
+        "num": 20,
+        "word": "insufficient",
+        "definition": "not enough"
+      },
+      {
+        "num": 21,
+        "word": "education",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "economy",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "serious",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "seek",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "sufficient",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "support",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "market",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "traditional",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "define",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "definition",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "assist",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "assume",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "percentage",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "single",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "average",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "rise",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "birth rate",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "lack",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "pattern",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "cause",
+        "definition": ""
+      }
+    ]
+  },
+  "9": {
+    "title": "SKYSCRAPERS",
+    "words": [
+      {
+        "num": 1,
+        "word": "skyscraper",
+        "definition": "a very tall building"
+      },
+      {
+        "num": 2,
+        "word": "structure",
+        "definition": "something that is built"
+      },
+      {
+        "num": 3,
+        "word": "tall",
+        "definition": "of great height"
+      },
+      {
+        "num": 4,
+        "word": "ancient",
+        "definition": "very old; from long ago"
+      },
+      {
+        "num": 5,
+        "word": "height",
+        "definition": "how tall something is"
+      },
+      {
+        "num": 6,
+        "word": "story",
+        "definition": "a level or floor of a building"
+      },
+      {
+        "num": 7,
+        "word": "construct",
+        "definition": "to build something"
+      },
+      {
+        "num": 8,
+        "word": "recently",
+        "definition": "a short time ago"
+      },
+      {
+        "num": 9,
+        "word": "exact",
+        "definition": "completely correct; precise"
+      },
+      {
+        "num": 10,
+        "word": "definition",
+        "definition": "a statement of meaning"
+      },
+      {
+        "num": 11,
+        "word": "climb",
+        "definition": "to go up using effort"
+      },
+      {
+        "num": 12,
+        "word": "stairs",
+        "definition": "steps for going up or down"
+      },
+      {
+        "num": 13,
+        "word": "entire",
+        "definition": "whole; complete"
+      },
+      {
+        "num": 14,
+        "word": "support",
+        "definition": "to hold up; to bear weight"
+      },
+      {
+        "num": 15,
+        "word": "vertical",
+        "definition": "going straight up and down"
+      },
+      {
+        "num": 16,
+        "word": "pile",
+        "definition": "a heap of things on top of each other"
+      },
+      {
+        "num": 17,
+        "word": "brick",
+        "definition": "a block used for building"
+      },
+      {
+        "num": 18,
+        "word": "thick",
+        "definition": "wide between two surfaces"
+      },
+      {
+        "num": 19,
+        "word": "restrict",
+        "definition": "to limit; to keep within bounds"
+      },
+      {
+        "num": 20,
+        "word": "invention",
+        "definition": "a new device that is created"
+      },
+      {
+        "num": 21,
+        "word": "process",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "steel",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "beam",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "design",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "framework",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "cover",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "concrete",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "attractive",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "area",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "elevator",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "previously",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "lift",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "dangerous",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "rope",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "brake",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "prevent",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "valuable",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "space",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "pump",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "limit",
+        "definition": ""
+      }
+    ]
+  },
+  "10": {
+    "title": "THE GROWTH OF CITIES",
+    "words": [
+      {
+        "num": 1,
+        "word": "population",
+        "definition": "the number of people in a place"
+      },
+      {
+        "num": 2,
+        "word": "billion",
+        "definition": "the number one thousand million"
+      },
+      {
+        "num": 3,
+        "word": "previously",
+        "definition": "before now; earlier"
+      },
+      {
+        "num": 4,
+        "word": "farm",
+        "definition": "land used for growing crops or animals"
+      },
+      {
+        "num": 5,
+        "word": "grow",
+        "definition": "to become larger or greater"
+      },
+      {
+        "num": 6,
+        "word": "major",
+        "definition": "very important or large"
+      },
+      {
+        "num": 7,
+        "word": "business",
+        "definition": "an organisation that sells goods"
+      },
+      {
+        "num": 8,
+        "word": "center",
+        "definition": "a place of main activity"
+      },
+      {
+        "num": 9,
+        "word": "factory",
+        "definition": "a building where goods are made"
+      },
+      {
+        "num": 10,
+        "word": "locate",
+        "definition": "to be situated in a place"
+      },
+      {
+        "num": 11,
+        "word": "support",
+        "definition": "to provide money or help"
+      },
+      {
+        "num": 12,
+        "word": "port",
+        "definition": "a place where ships load and unload"
+      },
+      {
+        "num": 13,
+        "word": "international",
+        "definition": "between different countries"
+      },
+      {
+        "num": 14,
+        "word": "trade",
+        "definition": "the buying and selling of goods"
+      },
+      {
+        "num": 15,
+        "word": "increase",
+        "definition": "to become greater in amount"
+      },
+      {
+        "num": 16,
+        "word": "material",
+        "definition": "the substance goods are made of"
+      },
+      {
+        "num": 17,
+        "word": "unload",
+        "definition": "to remove goods from a vehicle or ship"
+      },
+      {
+        "num": 18,
+        "word": "deliver",
+        "definition": "to take goods to a place"
+      },
+      {
+        "num": 19,
+        "word": "transportation",
+        "definition": "the movement of people or goods"
+      },
+      {
+        "num": 20,
+        "word": "station",
+        "definition": "a stopping place for trains or buses"
+      },
+      {
+        "num": 21,
+        "word": "convenient",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "visitor",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "attract",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "limited",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "construct",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "empty",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "space",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "plot",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "expensive",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "remove",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "replace",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "vertical",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "provide",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "occupy",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "efficient",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "install",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "trash",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "dispose",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "pollution",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "restrict",
+        "definition": ""
+      }
+    ]
+  },
+  "11": {
+    "title": "FOOD TRADITIONS",
+    "words": [
+      {
+        "num": 1,
+        "word": "culture",
+        "definition": "the customs and beliefs of a society"
+      },
+      {
+        "num": 2,
+        "word": "belief",
+        "definition": "something accepted as true"
+      },
+      {
+        "num": 3,
+        "word": "custom",
+        "definition": "a traditional way of doing things"
+      },
+      {
+        "num": 4,
+        "word": "develop",
+        "definition": "to grow or come into being gradually"
+      },
+      {
+        "num": 5,
+        "word": "diet",
+        "definition": "the food a person usually eats"
+      },
+      {
+        "num": 6,
+        "word": "depend on",
+        "definition": "to be decided by; to rely on"
+      },
+      {
+        "num": 7,
+        "word": "available",
+        "definition": "able to be obtained or used"
+      },
+      {
+        "num": 8,
+        "word": "environment",
+        "definition": "the natural surroundings"
+      },
+      {
+        "num": 9,
+        "word": "rely on",
+        "definition": "to depend on for support"
+      },
+      {
+        "num": 10,
+        "word": "supply",
+        "definition": "to provide what is needed"
+      },
+      {
+        "num": 11,
+        "word": "in contrast",
+        "definition": "showing a clear difference"
+      },
+      {
+        "num": 12,
+        "word": "forest",
+        "definition": "a large area covered with trees"
+      },
+      {
+        "num": 13,
+        "word": "hunt",
+        "definition": "to chase and kill animals for food"
+      },
+      {
+        "num": 14,
+        "word": "wild",
+        "definition": "living or growing in nature"
+      },
+      {
+        "num": 15,
+        "word": "flavoring",
+        "definition": "something added to give taste"
+      },
+      {
+        "num": 16,
+        "word": "spice",
+        "definition": "a substance used to flavour food"
+      },
+      {
+        "num": 17,
+        "word": "seed",
+        "definition": "the part of a plant that grows new plants"
+      },
+      {
+        "num": 18,
+        "word": "flavor",
+        "definition": "the taste of food"
+      },
+      {
+        "num": 19,
+        "word": "traditional",
+        "definition": "based on long-established custom"
+      },
+      {
+        "num": 20,
+        "word": "farm",
+        "definition": "to grow crops and raise animals"
+      },
+      {
+        "num": 21,
+        "word": "tame",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "plant",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "grain",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "spread",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "crop",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "raise",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "desert",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "ensure",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "neighbor",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "traveler",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "technique",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "distant",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "discover",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "explorer",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "sail",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "significant",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "preserve",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "tool",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "pointed",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "proud",
+        "definition": ""
+      }
+    ]
+  },
+  "12": {
+    "title": "PRESERVING FOODS",
+    "words": [
+      {
+        "num": 1,
+        "word": "preserve",
+        "definition": "to keep food safe from decay"
+      },
+      {
+        "num": 2,
+        "word": "diet",
+        "definition": "the food a person usually eats"
+      },
+      {
+        "num": 3,
+        "word": "depend on",
+        "definition": "to be decided by; to rely on"
+      },
+      {
+        "num": 4,
+        "word": "search",
+        "definition": "to look carefully for something"
+      },
+      {
+        "num": 5,
+        "word": "available",
+        "definition": "able to be obtained or used"
+      },
+      {
+        "num": 6,
+        "word": "root",
+        "definition": "the underground part of a plant"
+      },
+      {
+        "num": 7,
+        "word": "hunt",
+        "definition": "to chase and kill animals for food"
+      },
+      {
+        "num": 8,
+        "word": "wild",
+        "definition": "living or growing in nature"
+      },
+      {
+        "num": 9,
+        "word": "rot",
+        "definition": "to decay; to go bad"
+      },
+      {
+        "num": 10,
+        "word": "taste",
+        "definition": "to sense the flavour of food"
+      },
+      {
+        "num": 11,
+        "word": "safe",
+        "definition": "not dangerous; free from harm"
+      },
+      {
+        "num": 12,
+        "word": "technique",
+        "definition": "a particular way of doing something"
+      },
+      {
+        "num": 13,
+        "word": "discover",
+        "definition": "to find something for the first time"
+      },
+      {
+        "num": 14,
+        "word": "cooling",
+        "definition": "the process of making cold"
+      },
+      {
+        "num": 15,
+        "word": "drag",
+        "definition": "to pull something heavy"
+      },
+      {
+        "num": 16,
+        "word": "cave",
+        "definition": "a hollow space in rock or hill"
+      },
+      {
+        "num": 17,
+        "word": "hide",
+        "definition": "to keep out of sight"
+      },
+      {
+        "num": 18,
+        "word": "raw",
+        "definition": "not cooked"
+      },
+      {
+        "num": 19,
+        "word": "cool",
+        "definition": "fairly cold"
+      },
+      {
+        "num": 20,
+        "word": "freeze",
+        "definition": "to turn solid because of cold"
+      },
+      {
+        "num": 21,
+        "word": "bacteria",
+        "definition": ""
+      },
+      {
+        "num": 22,
+        "word": "cause",
+        "definition": ""
+      },
+      {
+        "num": 23,
+        "word": "growth",
+        "definition": ""
+      },
+      {
+        "num": 24,
+        "word": "dried",
+        "definition": ""
+      },
+      {
+        "num": 25,
+        "word": "last",
+        "definition": ""
+      },
+      {
+        "num": 26,
+        "word": "moisture",
+        "definition": ""
+      },
+      {
+        "num": 27,
+        "word": "significantly",
+        "definition": ""
+      },
+      {
+        "num": 28,
+        "word": "rely on",
+        "definition": ""
+      },
+      {
+        "num": 29,
+        "word": "supply",
+        "definition": ""
+      },
+      {
+        "num": 30,
+        "word": "grain",
+        "definition": ""
+      },
+      {
+        "num": 31,
+        "word": "fresh",
+        "definition": ""
+      },
+      {
+        "num": 32,
+        "word": "pack",
+        "definition": ""
+      },
+      {
+        "num": 33,
+        "word": "vinegar",
+        "definition": ""
+      },
+      {
+        "num": 34,
+        "word": "combine",
+        "definition": ""
+      },
+      {
+        "num": 35,
+        "word": "significant",
+        "definition": ""
+      },
+      {
+        "num": 36,
+        "word": "seal",
+        "definition": ""
+      },
+      {
+        "num": 37,
+        "word": "boil",
+        "definition": ""
+      },
+      {
+        "num": 38,
+        "word": "destroy",
+        "definition": ""
+      },
+      {
+        "num": 39,
+        "word": "store",
+        "definition": ""
+      },
+      {
+        "num": 40,
+        "word": "refrigerator",
+        "definition": ""
+      }
+    ]
+  }
+}
