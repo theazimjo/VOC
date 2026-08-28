@@ -5,12 +5,14 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { essential3000ChapterText } from '../../data/essential3000ChapterText';
 import { scienceChapterText } from '../../data/scienceChapterText';
 import { healthChapterText } from '../../data/healthChapterText';
+import { preIeltsChapterText } from '../../data/preIeltsChapterText';
 import './MarketPackPreviewModal.css';
 
 const allChapterText = {
   ...essential3000ChapterText,
   ...scienceChapterText,
-  ...healthChapterText
+  ...healthChapterText,
+  ...preIeltsChapterText
 };
 
 export default function MarketPackPreviewModal({
