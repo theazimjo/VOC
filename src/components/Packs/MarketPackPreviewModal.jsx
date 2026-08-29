@@ -47,6 +47,24 @@ export default function MarketPackPreviewModal({
     }));
   }, [marketPack]);
 
+  const getCategoryLabel = (catKey) => {
+    if (!catKey) return '';
+    const translated = t(`library.categories.${catKey}`);
+    if (translated && typeof translated === 'string' && !translated.startsWith('library.categories.')) {
+      return translated;
+    }
+    return catKey;
+  };
+
+  const getLevelLabel = (levelKey) => {
+    if (!levelKey) return '';
+    const translated = t(`library.levels.${levelKey.toLowerCase()}`);
+    if (translated && typeof translated === 'string' && !translated.startsWith('library.levels.')) {
+      return translated;
+    }
+    return levelKey;
+  };
+
   if (!isOpen || !marketPack) return null;
 
   const currentStory = selectedStoryTopic ? allChapterText[selectedStoryTopic] : null;
@@ -68,8 +86,8 @@ export default function MarketPackPreviewModal({
             <div className="market-preview-titles">
               <h2>{marketPack.name}</h2>
               <div className="market-preview-badges">
-                <span className="market-badge category">{marketPack.category}</span>
-                <span className="market-badge level">{marketPack.level}</span>
+                <span className="market-badge category">{getCategoryLabel(marketPack.category)}</span>
+                <span className={`market-badge level level-${marketPack.level}`}>{getLevelLabel(marketPack.level)}</span>
               </div>
             </div>
           </div>

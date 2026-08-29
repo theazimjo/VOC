@@ -277,6 +277,67 @@
     padding: 6px 10px;
     font-size: var(--font-xs);
   }
+
+  /* Market mobile controls and responsive layout */
+  .market-controls {
+    gap: 8px;
+    margin-bottom: var(--space-md);
+  }
+
+  .market-search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .market-search-input {
+    height: 40px;
+    font-size: 0.86rem;
+  }
+
+  .market-category-chips {
+    width: 100%;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .market-chip {
+    padding: 6px 12px;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+  }
+
+  .market-select-filters {
+    width: 100%;
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .market-filter-select {
+    width: 100%;
+    height: 36px;
+    font-size: 0.8rem;
+    padding: 0 8px;
+  }
+
+  .market-card {
+    min-height: 200px;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .market-card-title {
+    font-size: 1rem;
+  }
+
+  .market-card-desc {
+    font-size: 0.8rem;
+    -webkit-line-clamp: 2;
+  }
 }
 
 /* Combined Library Sections */
@@ -319,6 +380,172 @@
 }
 
 /* Market Tab Styling */
+.market-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.market-search-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.market-search-box {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.market-search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.market-search-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 42px 0 42px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  color: var(--text-primary);
+  outline: none;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.market-search-input:focus {
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 3px var(--accent-1-dim), 0 4px 16px rgba(0, 122, 255, 0.12);
+  background: var(--bg-primary);
+}
+
+.market-search-clear-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color var(--transition-base);
+}
+
+.market-search-clear-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+/* Category Chips Row */
+.market-category-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.market-category-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.market-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+  user-select: none;
+}
+
+.market-chip:hover {
+  background: var(--bg-glass-hover);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+}
+
+.market-chip.active {
+  background: var(--accent-1);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 122, 255, 0.3);
+}
+
+.market-chip-icon {
+  font-size: 0.9rem;
+}
+
+.market-chip-count {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.08);
+  color: inherit;
+  opacity: 0.9;
+}
+
+.market-chip.active .market-chip-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.market-select-filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.market-filter-select {
+  height: 44px;
+  padding: 0 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+  outline: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.market-filter-select:hover,
+.market-filter-select:focus {
+  border-color: var(--accent-1);
+  color: var(--text-primary);
+}
+
 .market-header {
   text-align: center;
   margin-bottom: var(--space-xl);
@@ -344,7 +571,8 @@
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
-  height: 240px;
+  min-height: 220px;
+  height: auto;
 }
 
 .market-card:hover {
@@ -404,10 +632,48 @@
   border: 1px solid rgba(175, 82, 222, 0.2);
 }
 
+.market-badge.level.level-beginner {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.market-badge.level.level-intermediate {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0EA5E9;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+}
+
+.market-badge.level.level-advanced {
+  background: rgba(168, 85, 247, 0.12);
+  color: #A855F7;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
 .market-badge.category {
   background: var(--accent-2-dim);
   color: var(--accent-2);
   border: 1px solid transparent;
+}
+
+.market-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-xl);
+  margin-top: var(--space-md);
+}
+
+.market-reset-btn {
+  margin-top: var(--space-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .market-card-desc {

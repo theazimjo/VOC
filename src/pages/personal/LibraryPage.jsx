@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, push, update, get, remove, set, serverTimestamp } from 'firebase/database';
-import { ArrowLeft, MoreVertical } from 'lucide-react';
+import { ArrowLeft, MoreVertical, Search, X, RotateCcw } from 'lucide-react';
 import { db } from '../../firebase';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -65,6 +65,12 @@ export default function LibraryPage() {
   const [updatingPackId, setUpdatingPackId] = useState(null);
   const [previewMarketPack, setPreviewMarketPack] = useState(null);
 
+  // Market Search & Filtering state
+  const [marketSearchQuery, setMarketSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeLevel, setActiveLevel] = useState('all');
+  const [activeStatus, setActiveStatus] = useState('all');
+
   // Find the user's own pack that was installed from a given market pack
   // (matched by marketPackId when available, falling back to name for
   // packs installed before that field existed).
@@ -72,6 +78,89 @@ export default function LibraryPage() {
     return packs.find((p) => p.marketPackId === marketPack.id)
       || packs.find((p) => p.name === marketPack.name);
   };
+
+  // Helper to translate category names
+  const getCategoryLabel = useCallback((catKey) => {
+    if (!catKey) return '';
+    if (catKey === 'all') return t('library.allCategories') || 'Barchasi';
+    const translated = t(`library.categories.${catKey}`);
+    if (translated && typeof translated === 'string' && !translated.startsWith('library.categories.')) {
+      return translated;
+    }
+    return catKey;
+  }, [t]);
+
+  // Helper to translate level names
+  const getLevelLabel = useCallback((levelKey) => {
+    if (!levelKey) return '';
+    const translated = t(`library.levels.${levelKey.toLowerCase()}`);
+    if (translated && typeof translated === 'string' && !translated.startsWith('library.levels.')) {
+      return translated;
+    }
+    return levelKey;
+  }, [t]);
+
+  // Categories list with counts for filter chips
+  const categoryChips = useMemo(() => {
+    const counts = { all: marketPacks.length };
+    marketPacks.forEach((p) => {
+      if (p.category) counts[p.category] = (counts[p.category] || 0) + 1;
+    });
+
+    const categoryIcons = {
+      all: '✨',
+      'IELTS': '🎓',
+      'Grammatika': '📋',
+      'Iboralar': '🔗',
+      "So'z birikmalari": '🧩',
+      'English': '🔤',
+      'Fan': '🔬',
+      'Salomatlik': '🩺',
+      'Til': '📚'
+    };
+
+    const categories = ['all', ...Object.keys(counts).filter(c => c !== 'all')];
+    return categories.map((catKey) => ({
+      id: catKey,
+      label: getCategoryLabel(catKey),
+      count: counts[catKey] || 0,
+      icon: categoryIcons[catKey] || '🏷️'
+    }));
+  }, [getCategoryLabel]);
+
+  // Filtered market packs based on search query, category, level, and status
+  const filteredMarketPacks = useMemo(() => {
+    const query = marketSearchQuery.trim().toLowerCase();
+
+    return marketPacks.filter((pack) => {
+      if (query) {
+        const matchesName = (pack.name || '').toLowerCase().includes(query);
+        const matchesDesc = (pack.description || '').toLowerCase().includes(query);
+        const matchesCat = (pack.category || '').toLowerCase().includes(query);
+        const matchesLevel = (pack.level || '').toLowerCase().includes(query);
+        if (!matchesName && !matchesDesc && !matchesCat && !matchesLevel) {
+          return false;
+        }
+      }
+
+      if (activeCategory !== 'all' && pack.category !== activeCategory) {
+        return false;
+      }
+
+      if (activeLevel !== 'all' && pack.level !== activeLevel) {
+        return false;
+      }
+
+      if (activeStatus !== 'all') {
+        const installedPack = findInstalledPack(pack);
+        const isInstalled = !!installedPack || justInstalledIds.includes(pack.id);
+        if (activeStatus === 'installed' && !isInstalled) return false;
+        if (activeStatus === 'available' && isInstalled) return false;
+      }
+
+      return true;
+    });
+  }, [marketSearchQuery, activeCategory, activeLevel, activeStatus, packs, justInstalledIds]);
 
   // Words already present in the user's installed copy of a market pack,
   // used to figure out which market words are new.
@@ -499,74 +588,158 @@ export default function LibraryPage() {
                   </div>
                 </div>
               ) : (
-                /* Market view with ready-made packs list */
+                /* Market view with ready-made packs list, search bar, and filters */
                 <div className="market-container">
-                  <div className="grid-cards market-cards-grid">
-                    {marketPacks.map((pack) => {
-                      const installedPack = findInstalledPack(pack);
-                      const isInstalled = !!installedPack || justInstalledIds.includes(pack.id);
-                      const isInstalling = installingPackId === pack.id;
-                      const isUpdating = updatingPackId === pack.id;
-                      const missingWords = installedPack ? getMissingWords(pack, installedPack) : [];
-                      const hasUpdate = isInstalled && installedPack && missingWords.length > 0;
+                  {/* Search and Filter Controls */}
+                  <div className="market-controls">
+                    <div className="market-search-row">
+                      <div className="market-search-box">
+                        <Search size={18} className="market-search-icon" />
+                        <input
+                          type="text"
+                          className="market-search-input"
+                          placeholder={t('library.marketSearchPlaceholder')}
+                          value={marketSearchQuery}
+                          onChange={(e) => setMarketSearchQuery(e.target.value)}
+                        />
+                        {marketSearchQuery && (
+                          <button
+                            type="button"
+                            className="market-search-clear-btn"
+                            onClick={() => setMarketSearchQuery('')}
+                            title="Clear search"
+                          >
+                            <X size={16} />
+                          </button>
+                        )}
+                      </div>
 
-                      return (
-                        <div 
-                          className="market-card" 
-                          key={pack.id}
-                          style={{ '--card-border-gradient': pack.color, cursor: 'pointer' }}
-                          onClick={() => setPreviewMarketPack(pack)}
+                      <div className="market-select-filters">
+                        <select
+                          className="market-filter-select"
+                          value={activeLevel}
+                          onChange={(e) => setActiveLevel(e.target.value)}
                         >
-                          <div className="market-card-top">
-                            <div className="market-card-header">
-                              <span className="market-card-icon">{pack.icon}</span>
-                              <h3 className="market-card-title">{pack.name}</h3>
-                            </div>
-                            <div className="market-card-badges">
-                              <span className="market-badge category">{pack.category}</span>
-                              <span className="market-badge level">{pack.level}</span>
-                            </div>
-                            <p className="market-card-desc">{pack.description}</p>
-                          </div>
+                          <option value="all">{getLevelLabel('all')}</option>
+                          <option value="beginner">{getLevelLabel('beginner')}</option>
+                          <option value="intermediate">{getLevelLabel('intermediate')}</option>
+                          <option value="advanced">{getLevelLabel('advanced')}</option>
+                        </select>
 
-                          <div className="market-card-bottom">
-                            {(() => {
-                              const uniqueCount = new Set((pack.words || []).map(w => (w.word || '').trim().toLowerCase())).size;
-                              return (
-                                <span className="market-card-words">
-                                  📊 {t('library.words', { count: uniqueCount })}
-                                </span>
-                              );
-                            })()}
-                            <button
-                              className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
-                              disabled={isInstalling || isUpdating || (isInstalled && !hasUpdate)}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                if (hasUpdate) {
-                                  handleUpdatePack(pack, installedPack, missingWords);
-                                } else {
-                                  handleInstallPack(pack);
-                                }
-                              }}
-                            >
-                              {isInstalling ? (
-                                <>{t('library.installing')}</>
-                              ) : isUpdating ? (
-                                <>{t('library.updating')}</>
-                              ) : hasUpdate ? (
-                                <>Update (+{missingWords.length}) 🔄</>
-                              ) : isInstalled ? (
-                                <>{t('library.installed')}</>
-                              ) : (
-                                <>{t('library.download')}</>
-                              )}
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })}
+                        <select
+                          className="market-filter-select"
+                          value={activeStatus}
+                          onChange={(e) => setActiveStatus(e.target.value)}
+                        >
+                          <option value="all">{t('library.allStatus')}</option>
+                          <option value="available">{t('library.notInstalledOnly')}</option>
+                          <option value="installed">{t('library.installedOnly')}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="market-category-chips">
+                      {categoryChips.map((chip) => (
+                        <button
+                          key={chip.id}
+                          type="button"
+                          className={`market-chip ${activeCategory === chip.id ? 'active' : ''}`}
+                          onClick={() => setActiveCategory(chip.id)}
+                        >
+                          <span className="market-chip-icon">{chip.icon}</span>
+                          <span className="market-chip-label">{chip.label}</span>
+                          <span className="market-chip-count">{chip.count}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
+
+                  {filteredMarketPacks.length > 0 ? (
+                    <div className="grid-cards market-cards-grid">
+                      {filteredMarketPacks.map((pack) => {
+                        const installedPack = findInstalledPack(pack);
+                        const isInstalled = !!installedPack || justInstalledIds.includes(pack.id);
+                        const isInstalling = installingPackId === pack.id;
+                        const isUpdating = updatingPackId === pack.id;
+                        const missingWords = installedPack ? getMissingWords(pack, installedPack) : [];
+                        const hasUpdate = isInstalled && installedPack && missingWords.length > 0;
+
+                        return (
+                          <div 
+                            className="market-card" 
+                            key={pack.id}
+                            style={{ '--card-border-gradient': pack.color, cursor: 'pointer' }}
+                            onClick={() => setPreviewMarketPack(pack)}
+                          >
+                            <div className="market-card-top">
+                              <div className="market-card-header">
+                                <span className="market-card-icon">{pack.icon}</span>
+                                <h3 className="market-card-title">{pack.name}</h3>
+                              </div>
+                              <div className="market-card-badges">
+                                <span className="market-badge category">{getCategoryLabel(pack.category)}</span>
+                                <span className={`market-badge level level-${pack.level}`}>{getLevelLabel(pack.level)}</span>
+                              </div>
+                              <p className="market-card-desc">{pack.description}</p>
+                            </div>
+
+                            <div className="market-card-bottom">
+                              {(() => {
+                                const uniqueCount = new Set((pack.words || []).map(w => (w.word || '').trim().toLowerCase())).size;
+                                return (
+                                  <span className="market-card-words">
+                                    📊 {t('library.words', { count: uniqueCount })}
+                                  </span>
+                                );
+                              })()}
+                              <button
+                                className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
+                                disabled={isInstalling || isUpdating || (isInstalled && !hasUpdate)}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (hasUpdate) {
+                                    handleUpdatePack(pack, installedPack, missingWords);
+                                  } else {
+                                    handleInstallPack(pack);
+                                  }
+                                }}
+                              >
+                                {isInstalling ? (
+                                  <>{t('library.installing')}</>
+                                ) : isUpdating ? (
+                                  <>{t('library.updating')}</>
+                                ) : hasUpdate ? (
+                                  <>Update (+{missingWords.length}) 🔄</>
+                                ) : isInstalled ? (
+                                  <>{t('library.installed')}</>
+                                ) : (
+                                  <>{t('library.download')}</>
+                                )}
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="empty-state market-empty-state">
+                      <div className="empty-state-icon">🔍</div>
+                      <h3>{t('library.noMarketResults')}</h3>
+                      <p>{t('library.noMarketResultsHint')}</p>
+                      <button
+                        type="button"
+                        className="btn btn-ghost market-reset-btn"
+                        onClick={() => {
+                          setMarketSearchQuery('');
+                          setActiveCategory('all');
+                          setActiveLevel('all');
+                          setActiveStatus('all');
+                        }}
+                      >
+                        <RotateCcw size={15} /> {t('library.clearFilters')}
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </motion.div>
