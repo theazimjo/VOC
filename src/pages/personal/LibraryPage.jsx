@@ -592,53 +592,55 @@ export default function LibraryPage() {
                 <div className="market-container">
                   {/* Search and Filter Controls */}
                   <div className="market-controls">
-                    <div className="market-search-row">
-                      <div className="market-search-box">
-                        <Search size={18} className="market-search-icon" />
-                        <input
-                          type="text"
-                          className="market-search-input"
-                          placeholder={t('library.marketSearchPlaceholder')}
-                          value={marketSearchQuery}
-                          onChange={(e) => setMarketSearchQuery(e.target.value)}
-                        />
-                        {marketSearchQuery && (
-                          <button
-                            type="button"
-                            className="market-search-clear-btn"
-                            onClick={() => setMarketSearchQuery('')}
-                            title="Clear search"
-                          >
-                            <X size={16} />
-                          </button>
-                        )}
-                      </div>
+                    <div className="market-search-box">
+                      <Search size={18} className="market-search-icon" />
+                      <input
+                        type="text"
+                        className="market-search-input"
+                        placeholder={t('library.marketSearchPlaceholder')}
+                        value={marketSearchQuery}
+                        onChange={(e) => setMarketSearchQuery(e.target.value)}
+                      />
+                      {marketSearchQuery && (
+                        <button
+                          type="button"
+                          className="market-search-clear-btn"
+                          onClick={() => setMarketSearchQuery('')}
+                          title="Clear search"
+                        >
+                          <X size={16} />
+                        </button>
+                      )}
+                    </div>
 
-                      <div className="market-select-filters">
+                    <div className="market-chips-scroll-container">
+                      <div className="market-select-pill-wrapper">
                         <select
-                          className="market-filter-select"
+                          className="market-select-pill"
                           value={activeLevel}
                           onChange={(e) => setActiveLevel(e.target.value)}
                         >
-                          <option value="all">{getLevelLabel('all')}</option>
-                          <option value="beginner">{getLevelLabel('beginner')}</option>
-                          <option value="intermediate">{getLevelLabel('intermediate')}</option>
-                          <option value="advanced">{getLevelLabel('advanced')}</option>
+                          <option value="all">🎛️ {getLevelLabel('all')}</option>
+                          <option value="beginner">🟢 {getLevelLabel('beginner')}</option>
+                          <option value="intermediate">🔵 {getLevelLabel('intermediate')}</option>
+                          <option value="advanced">🟣 {getLevelLabel('advanced')}</option>
                         </select>
+                      </div>
 
+                      <div className="market-select-pill-wrapper">
                         <select
-                          className="market-filter-select"
+                          className="market-select-pill"
                           value={activeStatus}
                           onChange={(e) => setActiveStatus(e.target.value)}
                         >
-                          <option value="all">{t('library.allStatus')}</option>
-                          <option value="available">{t('library.notInstalledOnly')}</option>
-                          <option value="installed">{t('library.installedOnly')}</option>
+                          <option value="all">📦 {t('library.allStatus')}</option>
+                          <option value="available">📥 {t('library.notInstalledOnly')}</option>
+                          <option value="installed">✅ {t('library.installedOnly')}</option>
                         </select>
                       </div>
-                    </div>
 
-                    <div className="market-category-chips">
+                      <div className="market-chips-divider" />
+
                       {categoryChips.map((chip) => (
                         <button
                           key={chip.id}
