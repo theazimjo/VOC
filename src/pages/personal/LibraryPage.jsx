@@ -319,9 +319,10 @@ export default function LibraryPage() {
         const wordsRef = ref(db, `users/${user.uid}/words/${newPackId}`);
         await update(wordsRef, buildWordUpdates(wordsRef, marketPack.words));
 
-        // 3. Set the final word count exactly once
+        // 3. Set the final word count (unique words) exactly once
+        const uniqueCount = new Set((marketPack.words || []).map(w => (w.word || '').trim().toLowerCase())).size;
         const packRef = ref(db, `users/${user.uid}/packs/${newPackId}`);
-        await update(packRef, { wordCount: marketPack.words.length });
+        await update(packRef, { wordCount: uniqueCount });
 
         // Play feedback sound and mark as installed
         playSound('correct');
@@ -529,9 +530,14 @@ export default function LibraryPage() {
                           </div>
 
                           <div className="market-card-bottom">
-                            <span className="market-card-words">
-                              📊 {t('library.words', { count: pack.words.length })}
-                            </span>
+                            {(() => {
+                              const uniqueCount = new Set((pack.words || []).map(w => (w.word || '').trim().toLowerCase())).size;
+                              return (
+                                <span className="market-card-words">
+                                  📊 {t('library.words', { count: uniqueCount })}
+                                </span>
+                              );
+                            })()}
                             <button
                               className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
                               disabled={isInstalling || isUpdating || (isInstalled && !hasUpdate)}

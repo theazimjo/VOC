@@ -10,18 +10,28 @@ import './PackCard.css';
 export default function PackCard({ pack, onLongPress }) {
   const [isLongPress, setIsLongPress] = useState(false);
   const timerRef = useRef(null);
-  const { allWords } = usePacks();
+  const { allWords, allWordsLoading } = usePacks();
   const { t } = useLanguage();
 
+  const packWords = useMemo(() => {
+    return allWords.filter(w => w.packId === pack.id);
+  }, [allWords, pack.id]);
+
   const memoryHealth = useMemo(() => {
-    const packWords = allWords.filter(w => w.packId === pack.id);
     if (packWords.length === 0) return null;
 
     const totalMastery = packWords.reduce((sum, w) => sum + (w.mastery || 0), 0);
     const masteryPercent = Math.round(totalMastery / packWords.length);
 
     return { masteryPercent };
-  }, [allWords, pack.id]);
+  }, [packWords]);
+
+  const displayWordCount = useMemo(() => {
+    if (!allWordsLoading) {
+      return packWords.length;
+    }
+    return pack.wordCount || 0;
+  }, [allWordsLoading, packWords.length, pack.wordCount]);
 
   const startPress = () => {
     setIsLongPress(false);
@@ -90,7 +100,7 @@ export default function PackCard({ pack, onLongPress }) {
             {packLanguage && packLanguage.code !== 'en-US' && (
               <span className="pack-card-lang" title={packLanguage.label}>{packLanguage.flag}</span>
             )}
-            <span className="pack-card-count">{t('library.wordCount', { count: pack.wordCount || 0 })}</span>
+            <span className="pack-card-count">{t('library.wordCount', { count: displayWordCount })}</span>
             {onLongPress && (
               <button
                 type="button"

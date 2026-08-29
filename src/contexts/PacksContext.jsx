@@ -158,14 +158,22 @@ export function PacksProvider({ children }) {
     packs.forEach((p) => { packById[p.id] = p; });
 
     const flat = [];
+    const seenByPack = {};
+
     Object.keys(wordsByPack).forEach((packId) => {
       const pack = packById[packId];
       const wordsObj = wordsByPack[packId] || {};
+      if (!seenByPack[packId]) seenByPack[packId] = new Set();
+
       Object.keys(wordsObj).forEach((wordId) => {
         const word = wordsObj[wordId];
         if (!word || typeof word !== 'object' || !word.word || typeof word.word !== 'string' || !word.word.trim()) {
           return;
         }
+        const norm = word.word.trim().toLowerCase();
+        if (seenByPack[packId].has(norm)) return;
+        seenByPack[packId].add(norm);
+
         flat.push({
           id: wordId,
           ...word,
@@ -180,6 +188,25 @@ export function PacksProvider({ children }) {
     });
     return flat;
   }, [packs, wordsByPack]);
+
+  // Self-healing: Ensure RTDB pack.wordCount stays in sync with actual unique word count
+  useEffect(() => {
+    if (!user || loading || wordsLoading || packs.length === 0) return;
+
+    const countByPack = {};
+    allWords.forEach((w) => {
+      countByPack[w.packId] = (countByPack[w.packId] || 0) + 1;
+    });
+
+    packs.forEach((pack) => {
+      const actualCount = countByPack[pack.id] || 0;
+      if (pack.wordCount !== actualCount) {
+        update(ref(db, `users/${user.uid}/packs/${pack.id}`), { wordCount: actualCount }).catch((err) => {
+          console.warn('Failed to self-heal pack wordCount:', pack.id, err);
+        });
+      }
+    });
+  }, [user, loading, wordsLoading, packs, allWords]);
 
   // Background semantic-cluster enrichment: words with a curated `topic`
   // (market packs) or an already-cached `clusterKey` (classified before)

@@ -162,9 +162,14 @@ export default function MarketPackPreviewModal({
 
         {/* Footer */}
         <div className="market-preview-footer">
-          <span className="market-preview-footer-words">
-            📊 {marketPack.words.length} words total
-          </span>
+          {(() => {
+            const uniqueCount = new Set((marketPack.words || []).map(w => (w.word || '').trim().toLowerCase())).size;
+            return (
+              <span className="market-preview-footer-words">
+                📊 {uniqueCount} words total
+              </span>
+            );
+          })()}
 
           <button
             className={`market-install-btn market-preview-action-btn${hasUpdate ? ' has-update' : ''}`}
