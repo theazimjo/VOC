@@ -343,5 +343,38 @@ export const preIeltsChapterText = {
         { type: "p", text: "Sadly, a stage cannon accidentally set fire to the artificial thatch roof, and flames quickly destroyed the original wooden building. A new Globe rose from its foundation soon after, built to enforce stricter fire restrictions than its predecessor, leaving only a small remnant of the earlier structure undisturbed. Modern visitors to a rebuilt replica, complete with wooden columns supporting the amphitheatre and a capacity carefully estimated by contemporary engineers, can still imagine spectators of the past descending into their seats to enjoy a play." }
       ]
     ]
+  },
+  "Text 33 · The History of Dolls": {
+    title: "The History of Dolls",
+    pages: [
+      [
+        { type: "heading", text: "The History of Dolls" },
+        { type: "p", text: "Long before a doll became a simple plaything for children, primitive figures made from clay or other material were constructed for a far more serious purpose. Archaeologists have found small dolls left in a grave as a cherished possession, offered perhaps to a goddess so the dead would not travel alone into the next life." },
+        { type: "p", text: "Over time, craftsmen wanted their dolls to look more lifelike, so they built a movable body with jointed limbs and a removable garment that could be changed like real clothing. This became a hub of skilled production, since a doll's face had to resemble a real person, and its composition often used a mixture of materials poured into a careful mould to keep the shape durable." },
+        { type: "p", text: "Makers would guard their best recipe closely: a plaster cast might work well, but fine porcelain, hardened through careful firing in a kiln and finished with a glazed surface, was considered unrivalled for its beauty. This kind of artistry made a doll expensive, and fabric clothing sewn for just a small subset of the market only added to its value. Dolls sold commercially still carried some risk, though, since certain materials had a troubling flammability, and paint could fade over the years, which is exactly why a serious collector prizes an old doll that survived in fine condition." }
+      ]
+    ]
+  },
+  "Text 34 · The History of Building Telegraph Lines": {
+    title: "The History of Building Telegraph Lines",
+    pages: [
+      [
+        { type: "heading", text: "The History of Building Telegraph Lines" },
+        { type: "p", text: "Long before electrical communication existed, a monk in a quiet monastery might send a message using nothing more than iron and wire, since even the abbot understood that a primitive discharge of static electricity could jump between two points. This was hardly a simultaneous, reliable signal, but the basic detection of electricity in a distant colony inspired scientists to propose a working dial that could relay a single letter using a simple code, and eventually proficient operators would master transmitting messages this way." },
+        { type: "p", text: "Once a true telegraph was constructed, workers required a long line of wooden poles to spread the signal, and each cable had to be strung carefully across an empire's vast, unconnected regions. A major breakthrough came when engineers learned to insulate a wire using latex gathered from tropical trees, since ordinary materials would not float or resist water once laid beneath the sea, and untreated cable could otherwise be weighed down and ruined." },
+        { type: "p", text: "It was reputed that even a local fisherman gathering seaweed for a living could accidentally damage a hidden line. Still, this technology enabled a submarine cable to connect distant continents, and completing such an undertaking meant working through parched deserts and freezing seas alike. Engineers eventually added a repeater along the route, since boosting the essential signal periodically was the only way to keep such a long telegraph line working reliably." }
+      ]
+    ]
+  },
+  "Text 35 · The History and Impact of the Potato": {
+    title: "The History and Impact of the Potato",
+    pages: [
+      [
+        { type: "heading", text: "The History and Impact of the Potato" },
+        { type: "p", text: "Long before Europeans learned to cultivate the potato, this humble tuber had already originated in the mountains of South America. An early chronicler once recorded how a misused, careless approach to storage could ruin the crop's value as a staple food, yet farmers still relied on it as their main harvest each season." },
+        { type: "p", text: "When Spanish conquistadors first encountered the plant, they treated it less like a treasure and more like fodder to ration out for livestock. Many Europeans regarded the potato with real suspicion, and their initial distaste led to slow consumption, since a poor peasant's food was seen as unfit for a wealthier table." },
+        { type: "p", text: "This view changed once people began to look past the potato's misshapen resemblance to other unfamiliar plants. As respected voices began to recommend it during a period of food shortage, farmers were encouraged to see its beneficial qualities. Once royal approval and public approval followed, and its blossom's true potential outweighed old prejudice, the potato helped prevent famine rather than cause it. Reversing centuries of doubt, it became a staple part of the average diet, supplementing other crops and boosting the overall yield of a farm. As different countries came to embrace this humble plant, adapting it to every regional climate, the resulting expansion of cultivation proved to be one of history's most valuable agricultural investments." }
+      ]
+    ]
   }
 };
