@@ -18,6 +18,7 @@ import { packIcons } from '../../utils/helpers';
 import { playSound } from '../../utils/feedback';
 import { marketPacks } from '../../data/marketData';
 import { getMissingMarketWords } from '../../utils/marketSync';
+import { findKnownSnapshot } from '../../utils/crossPackKnowledge';
 import { IRREGULAR_VERBS_PACK_ID } from '../../data/irregularVerbsCorpPack';
 import IosSpinner from '../../components/common/IosSpinner';
 import './LibraryPage.css';
@@ -211,30 +212,45 @@ export default function LibraryPage() {
   // Shared field shape for a market word being written into a pack's flat
   // words node — used both for a normal push()-keyed word and (below) for
   // the Irregular Verbs pack's fixed, text-keyed words.
-  const buildWordPayload = (wordData) => ({
-    word: wordData.word || '',
-    translation: wordData.translation || '',
-    definition: wordData.definition || '',
-    example: wordData.example || '',
-    notes: wordData.notes || '',
-    partOfSpeech: wordData.partOfSpeech || 'noun',
-    // IELTS-pack-only fields - '' default, harmless no-op for every other
-    // market pack (see the "IELTS Pack Type" plan).
-    synonyms: wordData.synonyms || '',
-    collocations: wordData.collocations || '',
-    nounForm: wordData.nounForm || '',
-    verbForm: wordData.verbForm || '',
-    adjectiveForm: wordData.adjectiveForm || '',
-    adverbForm: wordData.adverbForm || '',
-    article: wordData.article || '',
-    topic: wordData.topic || '',
-    addedAt: new Date().toISOString(),
-    mastery: 0,
-    interval: 0,
-    reviewCount: 0,
-    nextReview: null,
-    lastReviewed: null
-  });
+  //
+  // If the user already knows this exact word+sense from a different pack
+  // (same word text and same translation — see crossPackKnowledge.js), the
+  // new copy starts pre-leveled from that snapshot instead of at zero, so
+  // the same word showing up in two packs doesn't mean relearning it twice.
+  // A different sense of the same word (different translation) still
+  // starts fresh, since it genuinely hasn't been learned yet.
+  const buildWordPayload = (wordData) => {
+    const known = findKnownSnapshot(wordData, allWords);
+    return {
+      word: wordData.word || '',
+      translation: wordData.translation || '',
+      definition: wordData.definition || '',
+      example: wordData.example || '',
+      notes: wordData.notes || '',
+      partOfSpeech: wordData.partOfSpeech || 'noun',
+      // IELTS-pack-only fields - '' default, harmless no-op for every other
+      // market pack (see the "IELTS Pack Type" plan).
+      synonyms: wordData.synonyms || '',
+      collocations: wordData.collocations || '',
+      nounForm: wordData.nounForm || '',
+      verbForm: wordData.verbForm || '',
+      adjectiveForm: wordData.adjectiveForm || '',
+      adverbForm: wordData.adverbForm || '',
+      article: wordData.article || '',
+      topic: wordData.topic || '',
+      addedAt: new Date().toISOString(),
+      mastery: known?.mastery ?? 0,
+      interval: known?.interval ?? 0,
+      reviewCount: known?.reviewCount ?? 0,
+      nextReview: known?.nextReview ?? null,
+      lastReviewed: known?.lastReviewed ?? null,
+      ...(known ? {
+        stability: known.stability,
+        activeRecallPasses: known.activeRecallPasses,
+        confirmedModes: known.confirmedModes
+      } : {})
+    };
+  };
 
   // Builds the Firebase update payload for a batch of market words being
   // written into a pack's flat words node.
