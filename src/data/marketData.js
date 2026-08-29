@@ -6523,6 +6523,6406 @@ export const marketPacks = [
             "example": "The word 'refrigerator' is commonly used in English reading.",
             "partOfSpeech": "noun",
             "topic": "Text 12 · Preserving Foods"
+      },
+      {
+            "word": "item",
+            "translation": "narsa, buyum",
+            "definition": "a single object or article",
+            "example": "Studying 'item' (a single object or article) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "purchase",
+            "translation": "sotib olmoq",
+            "definition": "to buy something",
+            "example": "Studying 'purchase' (to buy something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "recently",
+            "translation": "yaqinda",
+            "definition": "a short time ago",
+            "example": "Studying 'recently' (a short time ago) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "package",
+            "translation": "qadoq, o'ram",
+            "definition": "the wrapping of a product",
+            "example": "Studying 'package' (the wrapping of a product) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "pattern",
+            "translation": "naqsh, andoza",
+            "definition": "a regular arrangement of lines or shapes",
+            "example": "Studying 'pattern' (a regular arrangement of lines or shapes) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "contain",
+            "translation": "o'z ichiga olmoq",
+            "definition": "to have something inside",
+            "example": "Studying 'contain' (to have something inside) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "information",
+            "translation": "ma'lumot",
+            "definition": "facts or knowledge",
+            "example": "Studying 'information' (facts or knowledge) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "common",
+            "translation": "keng tarqalgan",
+            "definition": "happening or seen very often",
+            "example": "Studying 'common' (happening or seen very often) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "technology",
+            "translation": "texnologiya",
+            "definition": "scientific tools and methods",
+            "example": "Studying 'technology' (scientific tools and methods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "useful",
+            "translation": "foydali",
+            "definition": "able to be used for a purpose",
+            "example": "Studying 'useful' (able to be used for a purpose) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "invent",
+            "translation": "ixtiro qilmoq",
+            "definition": "to create something new",
+            "example": "Studying 'invent' (to create something new) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "customer",
+            "translation": "mijoz",
+            "definition": "a person who buys goods",
+            "example": "Studying 'customer' (a person who buys goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "clerk",
+            "translation": "sotuvchi, xodim",
+            "definition": "a worker who serves customers",
+            "example": "Studying 'clerk' (a worker who serves customers) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "cost",
+            "translation": "narx",
+            "definition": "the price of something",
+            "example": "Studying 'cost' (the price of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "search",
+            "translation": "qidirmoq",
+            "definition": "to look carefully for something",
+            "example": "Studying 'search' (to look carefully for something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "sticker",
+            "translation": "yorliq, stiker",
+            "definition": "a small label that sticks on",
+            "example": "Studying 'sticker' (a small label that sticks on) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "amount",
+            "translation": "miqdor",
+            "definition": "a quantity of something",
+            "example": "Studying 'amount' (a quantity of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "enter",
+            "translation": "kiritmoq",
+            "definition": "to type information into a system",
+            "example": "Studying 'enter' (to type information into a system) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "register",
+            "translation": "kassa apparati",
+            "definition": "a machine that records sales",
+            "example": "Studying 'register' (a machine that records sales) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "accurately",
+            "translation": "aniq tarzda",
+            "definition": "in a correct and exact way",
+            "example": "Studying 'accurately' (in a correct and exact way) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "checkout",
+            "translation": "kassa",
+            "definition": "the place where customers pay",
+            "example": "Studying 'checkout' (the place where customers pay) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "process",
+            "translation": "jarayon",
+            "definition": "a series of actions or steps",
+            "example": "Studying 'process' (a series of actions or steps) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "scanner",
+            "translation": "skaner",
+            "definition": "a device that reads bar codes",
+            "example": "Studying 'scanner' (a device that reads bar codes) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "memory",
+            "translation": "xotira",
+            "definition": "the part of a computer storing data",
+            "example": "Studying 'memory' (the part of a computer storing data) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "matching",
+            "translation": "mos keluvchi",
+            "definition": "the same as another; corresponding",
+            "example": "Studying 'matching' (the same as another; corresponding) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "automatically",
+            "translation": "avtomatik tarzda",
+            "definition": "by itself without human action",
+            "example": "Studying 'automatically' (by itself without human action) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "correct",
+            "translation": "to'g'ri",
+            "definition": "right; without error",
+            "example": "Studying 'correct' (right; without error) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "manager",
+            "translation": "menejer",
+            "definition": "a person in charge of a business",
+            "example": "Studying 'manager' (a person in charge of a business) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "sale",
+            "translation": "sotuv, chegirma",
+            "definition": "the selling of goods, often cheaper",
+            "example": "Studying 'sale' (the selling of goods, often cheaper) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "count",
+            "translation": "sanamoq",
+            "definition": "to find the total number of",
+            "example": "Studying 'count' (to find the total number of) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "sold",
+            "translation": "sotilgan",
+            "definition": "past form of 'sell'",
+            "example": "Studying 'sold' (past form of 'sell') helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "order",
+            "translation": "buyurtma bermoq",
+            "definition": "to ask for goods to be supplied",
+            "example": "Studying 'order' (to ask for goods to be supplied) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "available",
+            "translation": "mavjud",
+            "definition": "able to be obtained or used",
+            "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "design",
+            "translation": "ishlab chiqmoq",
+            "definition": "to plan how something is made",
+            "example": "Studying 'design' (to plan how something is made) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "unique",
+            "translation": "noyob",
+            "definition": "being the only one of its kind",
+            "example": "Studying 'unique' (being the only one of its kind) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "identification",
+            "translation": "identifikatsiya",
+            "definition": "the act of recognising something",
+            "example": "Studying 'identification' (the act of recognising something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "manufacturer",
+            "translation": "ishlab chiqaruvchi",
+            "definition": "a company that makes goods",
+            "example": "Studying 'manufacturer' (a company that makes goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "digit",
+            "translation": "raqam",
+            "definition": "a single number from 0 to 9",
+            "example": "Studying 'digit' (a single number from 0 to 9) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "product",
+            "translation": "mahsulot",
+            "definition": "something that is made or grown",
+            "example": "Studying 'product' (something that is made or grown) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "efficient",
+            "translation": "samarali",
+            "definition": "working well without waste",
+            "example": "Studying 'efficient' (working well without waste) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 13 · Bar Codes"
+      },
+      {
+            "word": "scan",
+            "translation": "skanerlamoq",
+            "definition": "to read a code with a machine",
+            "example": "Studying 'scan' (to read a code with a machine) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "print",
+            "translation": "chop etmoq",
+            "definition": "to put text or images on paper",
+            "example": "Studying 'print' (to put text or images on paper) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "significant",
+            "translation": "muhim",
+            "definition": "important; large enough to matter",
+            "example": "Studying 'significant' (important; large enough to matter) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "event",
+            "translation": "voqea",
+            "definition": "something that happens",
+            "example": "Studying 'event' (something that happens) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "immediately",
+            "translation": "darhol",
+            "definition": "at once; without delay",
+            "example": "Studying 'immediately' (at once; without delay) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "appear",
+            "translation": "paydo bo'lmoq",
+            "definition": "to come into view; to become visible",
+            "example": "Studying 'appear' (to come into view; to become visible) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "product",
+            "translation": "mahsulot",
+            "definition": "something that is made or grown",
+            "example": "Studying 'product' (something that is made or grown) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "install",
+            "translation": "o'rnatmoq",
+            "definition": "to put equipment in place to use",
+            "example": "Studying 'install' (to put equipment in place to use) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "scanner",
+            "translation": "skaner",
+            "definition": "a device that reads bar codes",
+            "example": "Studying 'scanner' (a device that reads bar codes) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "link",
+            "translation": "bog'lamoq",
+            "definition": "to connect one thing to another",
+            "example": "Studying 'link' (to connect one thing to another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "format",
+            "translation": "format",
+            "definition": "the way something is arranged",
+            "example": "Studying 'format' (the way something is arranged) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "dimensional",
+            "translation": "o'lchamli",
+            "definition": "relating to measurable directions",
+            "example": "Studying 'dimensional' (relating to measurable directions) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "code",
+            "translation": "kodlamoq",
+            "definition": "to store information in a system",
+            "example": "Studying 'code' (to store information in a system) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "pattern",
+            "translation": "naqsh, andoza",
+            "definition": "a regular arrangement of lines or shapes",
+            "example": "Studying 'pattern' (a regular arrangement of lines or shapes) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "direction",
+            "translation": "yo'nalish",
+            "definition": "the way something points or moves",
+            "example": "Studying 'direction' (the way something points or moves) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "identify",
+            "translation": "aniqlamoq",
+            "definition": "to recognise or name something",
+            "example": "Studying 'identify' (to recognise or name something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "manufacturer",
+            "translation": "ishlab chiqaruvchi",
+            "definition": "a company that makes goods",
+            "example": "Studying 'manufacturer' (a company that makes goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "include",
+            "translation": "o'z ichiga olmoq",
+            "definition": "to contain as a part",
+            "example": "Studying 'include' (to contain as a part) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "invention",
+            "translation": "ixtiro",
+            "definition": "a new device that is created",
+            "example": "Studying 'invention' (a new device that is created) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "track",
+            "translation": "kuzatib bormoq",
+            "definition": "to follow the progress of",
+            "example": "Studying 'track' (to follow the progress of) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "production",
+            "translation": "ishlab chiqarish",
+            "definition": "the making of goods",
+            "example": "Studying 'production' (the making of goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "consist of",
+            "translation": "dan iborat bo'lmoq",
+            "definition": "to be made up of",
+            "example": "Studying 'consist of' (to be made up of) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "vertical",
+            "translation": "vertikal",
+            "definition": "going straight up and down",
+            "example": "Studying 'vertical' (going straight up and down) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "horizontal",
+            "translation": "gorizontal",
+            "definition": "going across; level",
+            "example": "Studying 'horizontal' (going across; level) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "combination",
+            "translation": "kombinatsiya",
+            "definition": "a joining of two or more things",
+            "example": "Studying 'combination' (a joining of two or more things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "hold",
+            "translation": "saqlamoq",
+            "definition": "to contain or store",
+            "example": "Studying 'hold' (to contain or store) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "unique",
+            "translation": "noyob",
+            "definition": "being the only one of its kind",
+            "example": "Studying 'unique' (being the only one of its kind) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "complex",
+            "translation": "murakkab",
+            "definition": "complicated; having many parts",
+            "example": "Studying 'complex' (complicated; having many parts) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "require",
+            "translation": "talab qilmoq",
+            "definition": "to need something",
+            "example": "Studying 'require' (to need something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "powerful",
+            "translation": "kuchli",
+            "definition": "having great strength or capacity",
+            "example": "Studying 'powerful' (having great strength or capacity) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "analyze",
+            "translation": "tahlil qilmoq",
+            "definition": "to examine in detail",
+            "example": "Studying 'analyze' (to examine in detail) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "download",
+            "translation": "yuklab olmoq",
+            "definition": "to copy data onto a device",
+            "example": "Studying 'download' (to copy data onto a device) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "advertising",
+            "translation": "reklama",
+            "definition": "the promoting of products",
+            "example": "Studying 'advertising' (the promoting of products) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "advertisement",
+            "translation": "reklama e'loni",
+            "definition": "a notice promoting a product",
+            "example": "Studying 'advertisement' (a notice promoting a product) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "notice",
+            "translation": "sezmoq",
+            "definition": "to become aware of something",
+            "example": "Studying 'notice' (to become aware of something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "video",
+            "translation": "video",
+            "definition": "a recording of moving images",
+            "example": "Studying 'video' (a recording of moving images) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "billboard",
+            "translation": "reklama taxtasi",
+            "definition": "a large outdoor advertising board",
+            "example": "Studying 'billboard' (a large outdoor advertising board) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "attach",
+            "translation": "biriktirmoq",
+            "definition": "to join or fix to something",
+            "example": "Studying 'attach' (to join or fix to something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "tool",
+            "translation": "asbob",
+            "definition": "a device used to do work",
+            "example": "Studying 'tool' (a device used to do work) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "rental",
+            "translation": "ijaraga oid",
+            "definition": "relating to renting; for rent",
+            "example": "Studying 'rental' (relating to renting; for rent) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 14 · 2-D Bar Codes"
+      },
+      {
+            "word": "theft",
+            "translation": "o'g'irlik",
+            "definition": "the act of stealing",
+            "example": "Studying 'theft' (the act of stealing) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "display",
+            "translation": "namoyish, ko'rgazma",
+            "definition": "an arrangement of items to be seen",
+            "example": "Studying 'display' (an arrangement of items to be seen) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "sculpture",
+            "translation": "haykal",
+            "definition": "a work of art carved or shaped",
+            "example": "Studying 'sculpture' (a work of art carved or shaped) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "ancient",
+            "translation": "qadimiy",
+            "definition": "very old; from long ago",
+            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "artifact",
+            "translation": "arxeologik topilma",
+            "definition": "an old human-made object",
+            "example": "Studying 'artifact' (an old human-made object) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "pottery",
+            "translation": "sopol buyumlar",
+            "definition": "objects made from baked clay",
+            "example": "Studying 'pottery' (objects made from baked clay) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "source",
+            "translation": "manba",
+            "definition": "the place something comes from",
+            "example": "Studying 'source' (the place something comes from) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "civilization",
+            "translation": "tsivilizatsiya",
+            "definition": "an advanced human society",
+            "example": "Studying 'civilization' (an advanced human society) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "culture",
+            "translation": "madaniyat",
+            "definition": "the customs and beliefs of a society",
+            "example": "Studying 'culture' (the customs and beliefs of a society) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "belong to",
+            "translation": "tegishli bo'lmoq",
+            "definition": "to be owned by",
+            "example": "Studying 'belong to' (to be owned by) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "preserve",
+            "translation": "saqlab qolmoq",
+            "definition": "to keep safe and unchanged",
+            "example": "Studying 'preserve' (to keep safe and unchanged) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "collection",
+            "translation": "to'plam",
+            "definition": "a group of items gathered together",
+            "example": "Studying 'collection' (a group of items gathered together) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "valuable",
+            "translation": "qimmatbaho",
+            "definition": "worth a lot of money",
+            "example": "Studying 'valuable' (worth a lot of money) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "thief",
+            "translation": "o'g'ri",
+            "definition": "a person who steals",
+            "example": "Studying 'thief' (a person who steals) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "unique",
+            "translation": "noyob",
+            "definition": "being the only one of its kind",
+            "example": "Studying 'unique' (being the only one of its kind) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "weapon",
+            "translation": "qurol",
+            "definition": "an object used to cause harm",
+            "example": "Studying 'weapon' (an object used to cause harm) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "worth",
+            "translation": "qiymatga ega",
+            "definition": "having a particular value",
+            "example": "Studying 'worth' (having a particular value) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "prevent",
+            "translation": "oldini olmoq",
+            "definition": "to stop something from happening",
+            "example": "Studying 'prevent' (to stop something from happening) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "security",
+            "translation": "xavfsizlik",
+            "definition": "protection against danger or theft",
+            "example": "Studying 'security' (protection against danger or theft) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "guard",
+            "translation": "qorovul",
+            "definition": "a person who protects a place",
+            "example": "Studying 'guard' (a person who protects a place) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "secure",
+            "translation": "mahkamlamoq",
+            "definition": "to fix firmly; to make safe",
+            "example": "Studying 'secure' (to fix firmly; to make safe) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "wire",
+            "translation": "sim",
+            "definition": "a thin metal thread",
+            "example": "Studying 'wire' (a thin metal thread) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "lock",
+            "translation": "qulflamoq",
+            "definition": "to fasten with a key",
+            "example": "Studying 'lock' (to fasten with a key) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "alarm",
+            "translation": "signalizatsiya",
+            "definition": "a warning device that sounds",
+            "example": "Studying 'alarm' (a warning device that sounds) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "remove",
+            "translation": "olib tashlamoq",
+            "definition": "to take away",
+            "example": "Studying 'remove' (to take away) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "arrest",
+            "translation": "hibsga olmoq",
+            "definition": "to take into custody by police",
+            "example": "Studying 'arrest' (to take into custody by police) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "steal",
+            "translation": "o'g'irlamoq",
+            "definition": "to take without permission",
+            "example": "Studying 'steal' (to take without permission) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "circumstance",
+            "translation": "vaziyat",
+            "definition": "a condition affecting a situation",
+            "example": "Studying 'circumstance' (a condition affecting a situation) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "hide",
+            "translation": "yashirmoq",
+            "definition": "to keep out of sight",
+            "example": "Studying 'hide' (to keep out of sight) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "frame",
+            "translation": "ramka",
+            "definition": "a border around a picture",
+            "example": "Studying 'frame' (a border around a picture) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "pocket",
+            "translation": "cho'ntak",
+            "definition": "a small bag sewn into clothing",
+            "example": "Studying 'pocket' (a small bag sewn into clothing) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "initially",
+            "translation": "dastlab",
+            "definition": "at the beginning; at first",
+            "example": "Studying 'initially' (at the beginning; at first) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "commit",
+            "translation": "sodir etmoq",
+            "definition": "to carry out a crime",
+            "example": "Studying 'commit' (to carry out a crime) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "issue",
+            "translation": "e'lon qilmoq",
+            "definition": "to send out officially",
+            "example": "Studying 'issue' (to send out officially) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "warning",
+            "translation": "ogohlantirish",
+            "definition": "a statement of possible danger",
+            "example": "Studying 'warning' (a statement of possible danger) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "dealer",
+            "translation": "diler, sotuvchi",
+            "definition": "a person who buys and sells goods",
+            "example": "Studying 'dealer' (a person who buys and sells goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "recognize",
+            "translation": "tanimoq",
+            "definition": "to know from having seen before",
+            "example": "Studying 'recognize' (to know from having seen before) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "pretend",
+            "translation": "o'zini boshqacha qilib ko'rsatmoq",
+            "definition": "to behave as if something is true",
+            "example": "Studying 'pretend' (to behave as if something is true) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "evidence",
+            "translation": "dalil",
+            "definition": "facts showing what happened",
+            "example": "Studying 'evidence' (facts showing what happened) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "successful",
+            "translation": "muvaffaqiyatli",
+            "definition": "achieving the desired result",
+            "example": "Studying 'successful' (achieving the desired result) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 15 · Museum Theft"
+      },
+      {
+            "word": "solve",
+            "translation": "hal qilmoq",
+            "definition": "to find the answer to a problem",
+            "example": "Studying 'solve' (to find the answer to a problem) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "crime",
+            "translation": "jinoyat",
+            "definition": "an illegal act",
+            "example": "Studying 'crime' (an illegal act) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "evidence",
+            "translation": "dalil",
+            "definition": "facts showing what happened",
+            "example": "Studying 'evidence' (facts showing what happened) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "fingerprint",
+            "translation": "barmoq izi",
+            "definition": "a mark made by a finger",
+            "example": "Studying 'fingerprint' (a mark made by a finger) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "match",
+            "translation": "mos kelmoq",
+            "definition": "to be the same as; to correspond",
+            "example": "Studying 'match' (to be the same as; to correspond) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "identify",
+            "translation": "aniqlamoq",
+            "definition": "to recognise or name someone",
+            "example": "Studying 'identify' (to recognise or name someone) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "criminal",
+            "translation": "jinoyatchi",
+            "definition": "a person who commits a crime",
+            "example": "Studying 'criminal' (a person who commits a crime) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "security",
+            "translation": "xavfsizlik",
+            "definition": "protection against danger or theft",
+            "example": "Studying 'security' (protection against danger or theft) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "commit",
+            "translation": "sodir etmoq",
+            "definition": "to carry out a crime",
+            "example": "Studying 'commit' (to carry out a crime) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "valuable",
+            "translation": "qimmatbaho",
+            "definition": "worth a lot of money",
+            "example": "Studying 'valuable' (worth a lot of money) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "steal",
+            "translation": "o'g'irlamoq",
+            "definition": "to take without permission",
+            "example": "Studying 'steal' (to take without permission) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "stolen",
+            "translation": "o'g'irlangan",
+            "definition": "taken without permission",
+            "example": "Studying 'stolen' (taken without permission) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "collection",
+            "translation": "to'plam",
+            "definition": "a group of items gathered together",
+            "example": "Studying 'collection' (a group of items gathered together) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "initial",
+            "translation": "dastlabki",
+            "definition": "first; at the beginning",
+            "example": "Studying 'initial' (first; at the beginning) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "theft",
+            "translation": "o'g'irlik",
+            "definition": "the act of stealing",
+            "example": "Studying 'theft' (the act of stealing) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "ancient",
+            "translation": "qadimiy",
+            "definition": "very old; from long ago",
+            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "castle",
+            "translation": "qal'a",
+            "definition": "a large fortified building",
+            "example": "Studying 'castle' (a large fortified building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "guard",
+            "translation": "qorovul",
+            "definition": "a person who protects a place",
+            "example": "Studying 'guard' (a person who protects a place) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "remove",
+            "translation": "olib tashlamoq",
+            "definition": "to take away",
+            "example": "Studying 'remove' (to take away) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "frame",
+            "translation": "ramka",
+            "definition": "a border around a picture",
+            "example": "Studying 'frame' (a border around a picture) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "hide",
+            "translation": "yashirmoq",
+            "definition": "to keep out of sight",
+            "example": "Studying 'hide' (to keep out of sight) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "jacket",
+            "translation": "kurtka",
+            "definition": "a short coat",
+            "example": "Studying 'jacket' (a short coat) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "weapon",
+            "translation": "qurol",
+            "definition": "an object used to cause harm",
+            "example": "Studying 'weapon' (an object used to cause harm) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "museum",
+            "translation": "muzey",
+            "definition": "a building displaying objects of value",
+            "example": "Studying 'museum' (a building displaying objects of value) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "complex",
+            "translation": "murakkab",
+            "definition": "complicated; having many parts",
+            "example": "Studying 'complex' (complicated; having many parts) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "notice",
+            "translation": "sezmoq",
+            "definition": "to become aware of something",
+            "example": "Studying 'notice' (to become aware of something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "display",
+            "translation": "namoyish",
+            "definition": "an arrangement of items to be seen",
+            "example": "Studying 'display' (an arrangement of items to be seen) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "likely",
+            "translation": "ehtimol",
+            "definition": "probable; expected to happen",
+            "example": "Studying 'likely' (probable; expected to happen) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "instrument",
+            "translation": "asbob",
+            "definition": "a tool, especially for making music",
+            "example": "Studying 'instrument' (a tool, especially for making music) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "return",
+            "translation": "qaytmoq",
+            "definition": "to come back to a place",
+            "example": "Studying 'return' (to come back to a place) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "arrest",
+            "translation": "hibsga olmoq",
+            "definition": "to take into custody by police",
+            "example": "Studying 'arrest' (to take into custody by police) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "reaction",
+            "translation": "reaksiya",
+            "definition": "a response to something",
+            "example": "Studying 'reaction' (a response to something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "destroy",
+            "translation": "yo'q qilmoq",
+            "definition": "to damage so it no longer exists",
+            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "garbage",
+            "translation": "axlat",
+            "definition": "waste material; rubbish",
+            "example": "Studying 'garbage' (waste material; rubbish) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "sculpture",
+            "translation": "haykal",
+            "definition": "a work of art carved or shaped",
+            "example": "Studying 'sculpture' (a work of art carved or shaped) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "toss",
+            "translation": "uloqtirmoq",
+            "definition": "to throw lightly or carelessly",
+            "example": "Studying 'toss' (to throw lightly or carelessly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "search",
+            "translation": "qidirmoq",
+            "definition": "to look carefully for something",
+            "example": "Studying 'search' (to look carefully for something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "missing",
+            "translation": "yo'qolgan",
+            "definition": "not able to be found; absent",
+            "example": "Studying 'missing' (not able to be found; absent) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "confess",
+            "translation": "tan olmoq",
+            "definition": "to admit to a crime",
+            "example": "Studying 'confess' (to admit to a crime) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "prison",
+            "translation": "qamoqxona",
+            "definition": "a place where criminals are kept",
+            "example": "Studying 'prison' (a place where criminals are kept) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 16 · A Bold Thief"
+      },
+      {
+            "word": "hydroponics",
+            "translation": "gidroponika",
+            "definition": "growing plants in water without soil",
+            "example": "Studying 'hydroponics' (growing plants in water without soil) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "soil",
+            "translation": "tuproq",
+            "definition": "the top layer of earth plants grow in",
+            "example": "Studying 'soil' (the top layer of earth plants grow in) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "principle",
+            "translation": "printsip, asos",
+            "definition": "a basic idea or rule",
+            "example": "Studying 'principle' (a basic idea or rule) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "nutrient",
+            "translation": "ozuqa moddasi",
+            "definition": "a substance that helps living things grow",
+            "example": "Studying 'nutrient' (a substance that helps living things grow) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "mineral",
+            "translation": "mineral",
+            "definition": "a natural substance in the earth",
+            "example": "Studying 'mineral' (a natural substance in the earth) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "require",
+            "translation": "talab qilmoq",
+            "definition": "to need something",
+            "example": "Studying 'require' (to need something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "root",
+            "translation": "ildiz",
+            "definition": "the underground part of a plant",
+            "example": "Studying 'root' (the underground part of a plant) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "mixture",
+            "translation": "aralashma",
+            "definition": "a combination of substances",
+            "example": "Studying 'mixture' (a combination of substances) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "absorb",
+            "translation": "shimib olmoq",
+            "definition": "to take in liquid or substances",
+            "example": "Studying 'absorb' (to take in liquid or substances) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "strategy",
+            "translation": "strategiya",
+            "definition": "a plan to achieve a goal",
+            "example": "Studying 'strategy' (a plan to achieve a goal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "provide",
+            "translation": "ta'minlamoq",
+            "definition": "to give or supply",
+            "example": "Studying 'provide' (to give or supply) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "naturally",
+            "translation": "tabiiy ravishda",
+            "definition": "in a normal or expected way",
+            "example": "Studying 'naturally' (in a normal or expected way) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "surround",
+            "translation": "o'rab olmoq",
+            "definition": "to be all around something",
+            "example": "Studying 'surround' (to be all around something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "maintain",
+            "translation": "saqlab turmoq",
+            "definition": "to keep in the same state",
+            "example": "Studying 'maintain' (to keep in the same state) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "vertical",
+            "translation": "vertikal",
+            "definition": "going straight up and down",
+            "example": "Studying 'vertical' (going straight up and down) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "growth",
+            "translation": "o'sish",
+            "definition": "the process of increasing in size",
+            "example": "Studying 'growth' (the process of increasing in size) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "pattern",
+            "translation": "qonuniyat, tartib",
+            "definition": "a regular way that something happens",
+            "example": "Studying 'pattern' (a regular way that something happens) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "benefit",
+            "translation": "foyda",
+            "definition": "an advantage or helpful effect",
+            "example": "Studying 'benefit' (an advantage or helpful effect) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "method",
+            "translation": "usul",
+            "definition": "a way of doing something",
+            "example": "Studying 'method' (a way of doing something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "depend on",
+            "translation": "bog'liq bo'lmoq",
+            "definition": "to be decided by",
+            "example": "Studying 'depend on' (to be decided by) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "factor",
+            "translation": "omil",
+            "definition": "something that influences a result",
+            "example": "Studying 'factor' (something that influences a result) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "vary",
+            "translation": "o'zgarmoq",
+            "definition": "to change; to be different",
+            "example": "Studying 'vary' (to change; to be different) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "type",
+            "translation": "tur",
+            "definition": "a kind or category",
+            "example": "Studying 'type' (a kind or category) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "vegetable",
+            "translation": "sabzavot",
+            "definition": "a plant grown for food",
+            "example": "Studying 'vegetable' (a plant grown for food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "supply",
+            "translation": "ta'minlamoq",
+            "definition": "to provide what is needed",
+            "example": "Studying 'supply' (to provide what is needed) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "fresh",
+            "translation": "yangi",
+            "definition": "newly produced; not stale",
+            "example": "Studying 'fresh' (newly produced; not stale) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "in contrast",
+            "translation": "farqli o'laroq",
+            "definition": "showing a clear difference",
+            "example": "Studying 'in contrast' (showing a clear difference) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "commercial",
+            "translation": "tijorat",
+            "definition": "relating to business and trade",
+            "example": "Studying 'commercial' (relating to business and trade) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "transport",
+            "translation": "tashimoq",
+            "definition": "to carry from one place to another",
+            "example": "Studying 'transport' (to carry from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "greenhouse",
+            "translation": "issiqxona",
+            "definition": "a glass building for growing plants",
+            "example": "Studying 'greenhouse' (a glass building for growing plants) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "protect",
+            "translation": "himoya qilmoq",
+            "definition": "to keep safe from harm",
+            "example": "Studying 'protect' (to keep safe from harm) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "insect",
+            "translation": "hasharot",
+            "definition": "a small animal such as a fly or ant",
+            "example": "Studying 'insect' (a small animal such as a fly or ant) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "pipe",
+            "translation": "quvur",
+            "definition": "a tube for carrying liquid",
+            "example": "Studying 'pipe' (a tube for carrying liquid) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "deliver",
+            "translation": "yetkazib bermoq",
+            "definition": "to bring or supply to a place",
+            "example": "Studying 'deliver' (to bring or supply to a place) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "tray",
+            "translation": "laganda, patnis",
+            "definition": "a flat container for holding things",
+            "example": "Studying 'tray' (a flat container for holding things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "drain",
+            "translation": "oqizib yubormoq",
+            "definition": "to let liquid flow away",
+            "example": "Studying 'drain' (to let liquid flow away) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "automatic",
+            "translation": "avtomatik",
+            "definition": "working by itself without a person",
+            "example": "Studying 'automatic' (working by itself without a person) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "regulate",
+            "translation": "boshqarmoq",
+            "definition": "to control or manage",
+            "example": "Studying 'regulate' (to control or manage) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "schedule",
+            "translation": "jadval",
+            "definition": "a plan of times for doing things",
+            "example": "Studying 'schedule' (a plan of times for doing things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "experiment",
+            "translation": "tajriba",
+            "definition": "a scientific test",
+            "example": "Studying 'experiment' (a scientific test) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 17 · Hydroponics"
+      },
+      {
+            "word": "population",
+            "translation": "aholi",
+            "definition": "the number of people in a place",
+            "example": "Studying 'population' (the number of people in a place) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "billion",
+            "translation": "milliard",
+            "definition": "the number one thousand million",
+            "example": "Studying 'billion' (the number one thousand million) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "expert",
+            "translation": "mutaxassis",
+            "definition": "a person with special knowledge",
+            "example": "Studying 'expert' (a person with special knowledge) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "estimate",
+            "translation": "taxmin qilmoq",
+            "definition": "to make an approximate judgement",
+            "example": "Studying 'estimate' (to make an approximate judgement) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "strategy",
+            "translation": "strategiya",
+            "definition": "a plan to achieve a goal",
+            "example": "Studying 'strategy' (a plan to achieve a goal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "supply",
+            "translation": "zaxira, ta'minot",
+            "definition": "an amount available to use",
+            "example": "Studying 'supply' (an amount available to use) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "feed",
+            "translation": "oziqlantirmoq",
+            "definition": "to give food to",
+            "example": "Studying 'feed' (to give food to) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "maintain",
+            "translation": "qat'iy turmoq",
+            "definition": "to state firmly; to keep up",
+            "example": "Studying 'maintain' (to state firmly; to keep up) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "hydroponic",
+            "translation": "gidroponik",
+            "definition": "growing plants in water without soil",
+            "example": "Studying 'hydroponic' (growing plants in water without soil) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "surface",
+            "translation": "sirt",
+            "definition": "the outer or top layer",
+            "example": "Studying 'surface' (the outer or top layer) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "suitable",
+            "translation": "mos, qulay",
+            "definition": "right or appropriate for a purpose",
+            "example": "Studying 'suitable' (right or appropriate for a purpose) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "soil",
+            "translation": "tuproq",
+            "definition": "the top layer of earth plants grow in",
+            "example": "Studying 'soil' (the top layer of earth plants grow in) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "occupy",
+            "translation": "egallamoq",
+            "definition": "to take up space or area",
+            "example": "Studying 'occupy' (to take up space or area) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "technique",
+            "translation": "usul, texnika",
+            "definition": "a particular way of doing something",
+            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "various",
+            "translation": "xilma-xil",
+            "definition": "of several different kinds",
+            "example": "Studying 'various' (of several different kinds) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "benefit",
+            "translation": "foyda",
+            "definition": "an advantage or helpful effect",
+            "example": "Studying 'benefit' (an advantage or helpful effect) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "greenhouse",
+            "translation": "issiqxona",
+            "definition": "a glass building for growing plants",
+            "example": "Studying 'greenhouse' (a glass building for growing plants) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "artificial",
+            "translation": "sun'iy",
+            "definition": "made by people, not natural",
+            "example": "Studying 'artificial' (made by people, not natural) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "climate",
+            "translation": "iqlim",
+            "definition": "the usual weather of an area",
+            "example": "Studying 'climate' (the usual weather of an area) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "compared to",
+            "translation": "solishtirganda",
+            "definition": "in relation to; measured against",
+            "example": "Studying 'compared to' (in relation to; measured against) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "traditional",
+            "translation": "an'anaviy",
+            "definition": "based on long-established custom",
+            "example": "Studying 'traditional' (based on long-established custom) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "require",
+            "translation": "talab qilmoq",
+            "definition": "to need something",
+            "example": "Studying 'require' (to need something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "produce",
+            "translation": "yetishtirmoq",
+            "definition": "to make or grow something",
+            "example": "Studying 'produce' (to make or grow something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "recycle",
+            "translation": "qayta ishlamoq",
+            "definition": "to use again after processing",
+            "example": "Studying 'recycle' (to use again after processing) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "increase",
+            "translation": "oshmoq",
+            "definition": "to become greater in amount",
+            "example": "Studying 'increase' (to become greater in amount) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "nutritional",
+            "translation": "oziqaviy",
+            "definition": "relating to nourishment in food",
+            "example": "Studying 'nutritional' (relating to nourishment in food) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "adjust",
+            "translation": "moslashtirmoq",
+            "definition": "to change slightly to improve",
+            "example": "Studying 'adjust' (to change slightly to improve) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "nutrient",
+            "translation": "ozuqa moddasi",
+            "definition": "a substance that helps living things grow",
+            "example": "Studying 'nutrient' (a substance that helps living things grow) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "absorb",
+            "translation": "shimib olmoq",
+            "definition": "to take in liquid or substances",
+            "example": "Studying 'absorb' (to take in liquid or substances) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "principle",
+            "translation": "printsip",
+            "definition": "a basic idea or rule",
+            "example": "Studying 'principle' (a basic idea or rule) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "equipment",
+            "translation": "jihoz",
+            "definition": "tools needed for an activity",
+            "example": "Studying 'equipment' (tools needed for an activity) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "achieve",
+            "translation": "erishmoq",
+            "definition": "to succeed in doing something",
+            "example": "Studying 'achieve' (to succeed in doing something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "depend on",
+            "translation": "bog'liq bo'lmoq",
+            "definition": "to rely on for support",
+            "example": "Studying 'depend on' (to rely on for support) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "transport",
+            "translation": "tashimoq",
+            "definition": "to carry from one place to another",
+            "example": "Studying 'transport' (to carry from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "distant",
+            "translation": "uzoq",
+            "definition": "far away",
+            "example": "Studying 'distant' (far away) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "fresh",
+            "translation": "yangi",
+            "definition": "newly produced; not stale",
+            "example": "Studying 'fresh' (newly produced; not stale) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "expensive",
+            "translation": "qimmat",
+            "definition": "costing a lot of money",
+            "example": "Studying 'expensive' (costing a lot of money) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "vertical",
+            "translation": "vertikal",
+            "definition": "going straight up and down",
+            "example": "Studying 'vertical' (going straight up and down) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "skyscraper",
+            "translation": "osmono'par bino",
+            "definition": "a very tall building",
+            "example": "Studying 'skyscraper' (a very tall building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "regulate",
+            "translation": "boshqarmoq",
+            "definition": "to control or manage",
+            "example": "Studying 'regulate' (to control or manage) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 18 · Farming in Many Places"
+      },
+      {
+            "word": "depend on",
+            "translation": "bog'liq bo'lmoq",
+            "definition": "to rely on for support",
+            "example": "Studying 'depend on' (to rely on for support) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "power",
+            "translation": "kuch, quvvat",
+            "definition": "strength or energy; force",
+            "example": "Studying 'power' (strength or energy; force) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "nature",
+            "translation": "tabiat",
+            "definition": "the physical world and its forces",
+            "example": "Studying 'nature' (the physical world and its forces) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "survive",
+            "translation": "omon qolmoq",
+            "definition": "to continue to live",
+            "example": "Studying 'survive' (to continue to live) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "source",
+            "translation": "manba",
+            "definition": "the place something comes from",
+            "example": "Studying 'source' (the place something comes from) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "obtain",
+            "translation": "olmoq, erishmoq",
+            "definition": "to get something",
+            "example": "Studying 'obtain' (to get something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "combine",
+            "translation": "birlashtirmoq",
+            "definition": "to join or mix together",
+            "example": "Studying 'combine' (to join or mix together) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "consume",
+            "translation": "iste'mol qilmoq",
+            "definition": "to use up; to eat or drink",
+            "example": "Studying 'consume' (to use up; to eat or drink) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "hunt",
+            "translation": "ov qilmoq",
+            "definition": "to chase and kill animals for food",
+            "example": "Studying 'hunt' (to chase and kill animals for food) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "seed",
+            "translation": "urug'",
+            "definition": "the part of a plant that grows new plants",
+            "example": "Studying 'seed' (the part of a plant that grows new plants) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "sail",
+            "translation": "yelkan",
+            "definition": "cloth that catches wind to move a boat",
+            "example": "Studying 'sail' (cloth that catches wind to move a boat) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "bake",
+            "translation": "qizdirib qurutmoq",
+            "definition": "to make very hot and dry",
+            "example": "Studying 'bake' (to make very hot and dry) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "soil",
+            "translation": "tuproq",
+            "definition": "the top layer of earth",
+            "example": "Studying 'soil' (the top layer of earth) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "starve",
+            "translation": "ochlikdan qiynalmoq",
+            "definition": "to suffer or die from lack of food",
+            "example": "Studying 'starve' (to suffer or die from lack of food) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "gentle",
+            "translation": "yumshoq, mayin",
+            "definition": "calm; not forceful",
+            "example": "Studying 'gentle' (calm; not forceful) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "potential",
+            "translation": "imkoniyatli",
+            "definition": "possible but not yet actual",
+            "example": "Studying 'potential' (possible but not yet actual) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "drown",
+            "translation": "cho'kib ketmoq",
+            "definition": "to die under water from lack of air",
+            "example": "Studying 'drown' (to die under water from lack of air) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "flood",
+            "translation": "suv toshqini",
+            "definition": "an overflow of water onto land",
+            "example": "Studying 'flood' (an overflow of water onto land) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "disappear",
+            "translation": "yo'qolmoq",
+            "definition": "to stop being visible or to exist",
+            "example": "Studying 'disappear' (to stop being visible or to exist) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "indication",
+            "translation": "belgi, ko'rsatkich",
+            "definition": "a sign that shows something",
+            "example": "Studying 'indication' (a sign that shows something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "approach",
+            "translation": "yaqinlashmoq",
+            "definition": "to come near to",
+            "example": "Studying 'approach' (to come near to) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "powerful",
+            "translation": "kuchli",
+            "definition": "having great strength or force",
+            "example": "Studying 'powerful' (having great strength or force) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "destroy",
+            "translation": "yo'q qilmoq",
+            "definition": "to damage so it no longer exists",
+            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "uproot",
+            "translation": "ildizi bilan yulib olmoq",
+            "definition": "to pull a plant out by the roots",
+            "example": "Studying 'uproot' (to pull a plant out by the roots) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "affect",
+            "translation": "ta'sir qilmoq",
+            "definition": "to have an influence on",
+            "example": "Studying 'affect' (to have an influence on) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "machine",
+            "translation": "mashina",
+            "definition": "a device that does work",
+            "example": "Studying 'machine' (a device that does work) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "fuel",
+            "translation": "yoqilg'i",
+            "definition": "material burned to produce energy",
+            "example": "Studying 'fuel' (material burned to produce energy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "burn",
+            "translation": "yonmoq",
+            "definition": "to be on fire; to use as fuel",
+            "example": "Studying 'burn' (to be on fire; to use as fuel) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "coal",
+            "translation": "ko'mir",
+            "definition": "a black rock burned for energy",
+            "example": "Studying 'coal' (a black rock burned for energy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "engine",
+            "translation": "dvigatel",
+            "definition": "a machine that produces power",
+            "example": "Studying 'engine' (a machine that produces power) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "produce",
+            "translation": "ishlab chiqarmoq",
+            "definition": "to make or generate",
+            "example": "Studying 'produce' (to make or generate) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "electricity",
+            "translation": "elektr energiyasi",
+            "definition": "energy used to power devices",
+            "example": "Studying 'electricity' (energy used to power devices) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "data",
+            "translation": "ma'lumotlar",
+            "definition": "facts and figures; information",
+            "example": "Studying 'data' (facts and figures; information) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "indicate",
+            "translation": "ko'rsatmoq",
+            "definition": "to show or point out",
+            "example": "Studying 'indicate' (to show or point out) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "melt",
+            "translation": "eritmoq",
+            "definition": "to turn from solid to liquid by heat",
+            "example": "Studying 'melt' (to turn from solid to liquid by heat) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "climate",
+            "translation": "iqlim",
+            "definition": "the usual weather of an area",
+            "example": "Studying 'climate' (the usual weather of an area) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "blame",
+            "translation": "ayblamoq",
+            "definition": "to say someone is responsible",
+            "example": "Studying 'blame' (to say someone is responsible) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "derive",
+            "translation": "kelib chiqmoq",
+            "definition": "to obtain from a source",
+            "example": "Studying 'derive' (to obtain from a source) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "energy",
+            "translation": "energiya",
+            "definition": "power used to do work",
+            "example": "Studying 'energy' (power used to do work) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "renewable",
+            "translation": "qayta tiklanadigan",
+            "definition": "able to be replaced naturally",
+            "example": "Studying 'renewable' (able to be replaced naturally) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 19 · Sun, Wind, and Water"
+      },
+      {
+            "word": "renewable",
+            "translation": "qayta tiklanadigan",
+            "definition": "able to be replaced naturally",
+            "example": "Studying 'renewable' (able to be replaced naturally) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "power",
+            "translation": "quvvatlantirmoq",
+            "definition": "to supply energy to operate",
+            "example": "Studying 'power' (to supply energy to operate) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "burn",
+            "translation": "yoqmoq",
+            "definition": "to use as fuel; to be on fire",
+            "example": "Studying 'burn' (to use as fuel; to be on fire) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "fuel",
+            "translation": "yoqilg'i",
+            "definition": "material burned to produce energy",
+            "example": "Studying 'fuel' (material burned to produce energy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "electricity",
+            "translation": "elektr energiyasi",
+            "definition": "energy used to power devices",
+            "example": "Studying 'electricity' (energy used to power devices) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "natural",
+            "translation": "tabiiy",
+            "definition": "existing in or produced by nature",
+            "example": "Studying 'natural' (existing in or produced by nature) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "force",
+            "translation": "kuch",
+            "definition": "physical power or strength",
+            "example": "Studying 'force' (physical power or strength) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "source",
+            "translation": "manba",
+            "definition": "the place something comes from",
+            "example": "Studying 'source' (the place something comes from) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "create",
+            "translation": "yaratmoq",
+            "definition": "to make something new",
+            "example": "Studying 'create' (to make something new) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "resource",
+            "translation": "resurs",
+            "definition": "a supply that can be used",
+            "example": "Studying 'resource' (a supply that can be used) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "available",
+            "translation": "mavjud",
+            "definition": "able to be obtained or used",
+            "example": "Studying 'available' (able to be obtained or used) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "wave",
+            "translation": "to'lqin",
+            "definition": "a moving ridge of water",
+            "example": "Studying 'wave' (a moving ridge of water) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "approach",
+            "translation": "yaqinlashmoq",
+            "definition": "to come near to",
+            "example": "Studying 'approach' (to come near to) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "engineer",
+            "translation": "muhandis",
+            "definition": "a person who designs machines or structures",
+            "example": "Studying 'engineer' (a person who designs machines or structures) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "potential",
+            "translation": "imkoniyat",
+            "definition": "the possibility to develop or succeed",
+            "example": "Studying 'potential' (the possibility to develop or succeed) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "develop",
+            "translation": "rivojlantirmoq",
+            "definition": "to create or improve gradually",
+            "example": "Studying 'develop' (to create or improve gradually) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "technology",
+            "translation": "texnologiya",
+            "definition": "scientific tools and methods",
+            "example": "Studying 'technology' (scientific tools and methods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "secure",
+            "translation": "mahkamlamoq",
+            "definition": "to fix firmly in place",
+            "example": "Studying 'secure' (to fix firmly in place) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "floor",
+            "translation": "tag qism, tub",
+            "definition": "the bottom surface; the seabed",
+            "example": "Studying 'floor' (the bottom surface; the seabed) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "connect",
+            "translation": "ulamoq",
+            "definition": "to join together",
+            "example": "Studying 'connect' (to join together) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "float",
+            "translation": "suv yuzasida turmoq",
+            "definition": "to rest on the surface of water",
+            "example": "Studying 'float' (to rest on the surface of water) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "motion",
+            "translation": "harakat",
+            "definition": "the act of moving",
+            "example": "Studying 'motion' (the act of moving) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "spin",
+            "translation": "aylanmoq",
+            "definition": "to turn round quickly",
+            "example": "Studying 'spin' (to turn round quickly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "turbine",
+            "translation": "turbina",
+            "definition": "a machine turned to make power",
+            "example": "Studying 'turbine' (a machine turned to make power) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "generate",
+            "translation": "ishlab chiqarmoq",
+            "definition": "to produce energy or power",
+            "example": "Studying 'generate' (to produce energy or power) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "estimate",
+            "translation": "taxmin qilmoq",
+            "definition": "to make an approximate judgement",
+            "example": "Studying 'estimate' (to make an approximate judgement) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "coast",
+            "translation": "qirg'oq",
+            "definition": "land along the edge of the sea",
+            "example": "Studying 'coast' (land along the edge of the sea) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "concept",
+            "translation": "tushuncha",
+            "definition": "an idea or principle",
+            "example": "Studying 'concept' (an idea or principle) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "steady",
+            "translation": "barqaror",
+            "definition": "continuous and regular",
+            "example": "Studying 'steady' (continuous and regular) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "collect",
+            "translation": "to'plamoq",
+            "definition": "to gather together",
+            "example": "Studying 'collect' (to gather together) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "propeller",
+            "translation": "propeller",
+            "definition": "rotating blades that produce movement",
+            "example": "Studying 'propeller' (rotating blades that produce movement) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "blade",
+            "translation": "parrak, tig'",
+            "definition": "a long flat part of a propeller",
+            "example": "Studying 'blade' (a long flat part of a propeller) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "consumer",
+            "translation": "iste'molchi",
+            "definition": "a person who uses goods or energy",
+            "example": "Studying 'consumer' (a person who uses goods or energy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "solar",
+            "translation": "quyoshga oid",
+            "definition": "relating to the sun",
+            "example": "Studying 'solar' (relating to the sun) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "device",
+            "translation": "qurilma",
+            "definition": "a piece of equipment for a purpose",
+            "example": "Studying 'device' (a piece of equipment for a purpose) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "mirror",
+            "translation": "oyna",
+            "definition": "a surface that reflects images",
+            "example": "Studying 'mirror' (a surface that reflects images) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "reflect",
+            "translation": "aks ettirmoq",
+            "definition": "to throw back light or heat",
+            "example": "Studying 'reflect' (to throw back light or heat) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "benefit",
+            "translation": "foyda keltirmoq",
+            "definition": "to help or be useful to",
+            "example": "Studying 'benefit' (to help or be useful to) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "complain",
+            "translation": "shikoyat qilmoq",
+            "definition": "to express dissatisfaction",
+            "example": "Studying 'complain' (to express dissatisfaction) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "recreation",
+            "translation": "dam olish",
+            "definition": "activity done for enjoyment",
+            "example": "Studying 'recreation' (activity done for enjoyment) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 20 · Using Renewable Energy Sources"
+      },
+      {
+            "word": "graphite",
+            "translation": "grafit",
+            "definition": "a soft black form of carbon",
+            "example": "Studying 'graphite' (a soft black form of carbon) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "material",
+            "translation": "material",
+            "definition": "the substance something is made of",
+            "example": "Studying 'material' (the substance something is made of) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "discover",
+            "translation": "kashf qilmoq",
+            "definition": "to find something for the first time",
+            "example": "Studying 'discover' (to find something for the first time) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "lightning",
+            "translation": "chaqmoq",
+            "definition": "a flash of electricity in the sky",
+            "example": "Studying 'lightning' (a flash of electricity in the sky) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "strike",
+            "translation": "urmoq",
+            "definition": "to hit with force",
+            "example": "Studying 'strike' (to hit with force) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "substance",
+            "translation": "modda",
+            "definition": "a particular kind of matter",
+            "example": "Studying 'substance' (a particular kind of matter) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "root",
+            "translation": "ildiz",
+            "definition": "the underground part of a plant",
+            "example": "Studying 'root' (the underground part of a plant) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "mark",
+            "translation": "belgi",
+            "definition": "a small visible sign left on a surface",
+            "example": "Studying 'mark' (a small visible sign left on a surface) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "mistake",
+            "translation": "xato qilmoq",
+            "definition": "to wrongly identify something",
+            "example": "Studying 'mistake' (to wrongly identify something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "lead",
+            "translation": "qo'rg'oshin",
+            "definition": "a heavy grey metal",
+            "example": "Studying 'lead' (a heavy grey metal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "ownership",
+            "translation": "egalik huquqi",
+            "definition": "the state of owning something",
+            "example": "Studying 'ownership' (the state of owning something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "calculation",
+            "translation": "hisob-kitob",
+            "definition": "the act of working out an amount",
+            "example": "Studying 'calculation' (the act of working out an amount) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "mine",
+            "translation": "kon",
+            "definition": "a place where minerals are dug out",
+            "example": "Studying 'mine' (a place where minerals are dug out) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "detect",
+            "translation": "aniqlamoq",
+            "definition": "to discover or notice",
+            "example": "Studying 'detect' (to discover or notice) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "require",
+            "translation": "talab qilmoq",
+            "definition": "to need something",
+            "example": "Studying 'require' (to need something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "wrap",
+            "translation": "o'rab qo'ymoq",
+            "definition": "to cover by folding material around",
+            "example": "Studying 'wrap' (to cover by folding material around) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "string",
+            "translation": "ip",
+            "definition": "thin cord for tying",
+            "example": "Studying 'string' (thin cord for tying) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "stability",
+            "translation": "barqarorlik",
+            "definition": "the state of being firm and steady",
+            "example": "Studying 'stability' (the state of being firm and steady) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "blueprint",
+            "translation": "chizma, loyiha",
+            "definition": "a detailed plan or design",
+            "example": "Studying 'blueprint' (a detailed plan or design) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "compact",
+            "translation": "ixcham",
+            "definition": "small and neatly fitted together",
+            "example": "Studying 'compact' (small and neatly fitted together) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "hollow",
+            "translation": "ichini bo'shatmoq",
+            "definition": "to make an empty space inside",
+            "example": "Studying 'hollow' (to make an empty space inside) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "technique",
+            "translation": "usul",
+            "definition": "a particular way of doing something",
+            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "carve",
+            "translation": "o'ymoq",
+            "definition": "to cut into a shape",
+            "example": "Studying 'carve' (to cut into a shape) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "insert",
+            "translation": "joylashtirmoq",
+            "definition": "to put inside something",
+            "example": "Studying 'insert' (to put inside something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "glue",
+            "translation": "yelimlamoq",
+            "definition": "to stick together with glue",
+            "example": "Studying 'glue' (to stick together with glue) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "spread",
+            "translation": "tarqalmoq",
+            "definition": "to reach more places",
+            "example": "Studying 'spread' (to reach more places) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "core",
+            "translation": "yadro, markaz",
+            "definition": "the central part of something",
+            "example": "Studying 'core' (the central part of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "mixture",
+            "translation": "aralashma",
+            "definition": "a combination of substances",
+            "example": "Studying 'mixture' (a combination of substances) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "clay",
+            "translation": "loy",
+            "definition": "soft earth used in pottery",
+            "example": "Studying 'clay' (soft earth used in pottery) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "hardness",
+            "translation": "qattiqlik",
+            "definition": "the quality of being hard",
+            "example": "Studying 'hardness' (the quality of being hard) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "determine",
+            "translation": "aniqlamoq, belgilamoq",
+            "definition": "to decide or control the result",
+            "example": "Studying 'determine' (to decide or control the result) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "grade",
+            "translation": "saralamoq",
+            "definition": "to sort by quality or level",
+            "example": "Studying 'grade' (to sort by quality or level) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "production",
+            "translation": "ishlab chiqarish",
+            "definition": "the making of goods in large amounts",
+            "example": "Studying 'production' (the making of goods in large amounts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "demand",
+            "translation": "talab",
+            "definition": "the desire of buyers for goods",
+            "example": "Studying 'demand' (the desire of buyers for goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "government",
+            "translation": "hukumat",
+            "definition": "the group that rules a country",
+            "example": "Studying 'government' (the group that rules a country) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "guard",
+            "translation": "qo'riqlamoq",
+            "definition": "to protect or watch over",
+            "example": "Studying 'guard' (to protect or watch over) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "offence",
+            "translation": "huquqbuzarlik",
+            "definition": "an illegal act; a crime",
+            "example": "Studying 'offence' (an illegal act; a crime) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "punishable",
+            "translation": "jazolanadigan",
+            "definition": "deserving of punishment",
+            "example": "Studying 'punishable' (deserving of punishment) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "mechanical",
+            "translation": "mexanik",
+            "definition": "operated by a machine",
+            "example": "Studying 'mechanical' (operated by a machine) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "widespread",
+            "translation": "keng tarqalgan",
+            "definition": "found or happening in many places",
+            "example": "Studying 'widespread' (found or happening in many places) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 21 · The History of the Pencil"
+      },
+      {
+            "word": "legend",
+            "translation": "afsona",
+            "definition": "an old story, perhaps not true",
+            "example": "Studying 'legend' (an old story, perhaps not true) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "emperor",
+            "translation": "imperator",
+            "definition": "the ruler of an empire",
+            "example": "Studying 'emperor' (the ruler of an empire) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "servant",
+            "translation": "xizmatkor",
+            "definition": "a person who works for another",
+            "example": "Studying 'servant' (a person who works for another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "renowned",
+            "translation": "mashhur",
+            "definition": "famous; well known",
+            "example": "Studying 'renowned' (famous; well known) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "infusion",
+            "translation": "damlama",
+            "definition": "a drink made by soaking in water",
+            "example": "Studying 'infusion' (a drink made by soaking in water) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "accidentally",
+            "translation": "tasodifan",
+            "definition": "by chance; not on purpose",
+            "example": "Studying 'accidentally' (by chance; not on purpose) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "establish",
+            "translation": "tashkil etmoq",
+            "definition": "to set up firmly; to start",
+            "example": "Studying 'establish' (to set up firmly; to start) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "century",
+            "translation": "asr",
+            "definition": "a period of one hundred years",
+            "example": "Studying 'century' (a period of one hundred years) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "container",
+            "translation": "idish",
+            "definition": "an object used to hold things",
+            "example": "Studying 'container' (an object used to hold things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "tomb",
+            "translation": "maqbara",
+            "definition": "a place where a dead body is buried",
+            "example": "Studying 'tomb' (a place where a dead body is buried) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "dynasty",
+            "translation": "sulola",
+            "definition": "a series of rulers from one family",
+            "example": "Studying 'dynasty' (a series of rulers from one family) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "introduce",
+            "translation": "kiritmoq",
+            "definition": "to bring in for the first time",
+            "example": "Studying 'introduce' (to bring in for the first time) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "monk",
+            "translation": "rohib",
+            "definition": "a man who lives in a religious group",
+            "example": "Studying 'monk' (a man who lives in a religious group) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "imperial",
+            "translation": "imperiyaga oid",
+            "definition": "relating to an empire or emperor",
+            "example": "Studying 'imperial' (relating to an empire or emperor) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "spread",
+            "translation": "tarqalmoq",
+            "definition": "to reach more places",
+            "example": "Studying 'spread' (to reach more places) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "lag behind",
+            "translation": "orqada qolmoq",
+            "definition": "to fail to keep up; to fall behind",
+            "example": "Studying 'lag behind' (to fail to keep up; to fall behind) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "trader",
+            "translation": "savdogar",
+            "definition": "a person who buys and sells goods",
+            "example": "Studying 'trader' (a person who buys and sells goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "missionary",
+            "translation": "missioner",
+            "definition": "a person sent to spread religion",
+            "example": "Studying 'missionary' (a person sent to spread religion) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "sample",
+            "translation": "namuna",
+            "definition": "a small amount used as an example",
+            "example": "Studying 'sample' (a small amount used as an example) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "commercial",
+            "translation": "tijorat",
+            "definition": "relating to business and trade",
+            "example": "Studying 'commercial' (relating to business and trade) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "import",
+            "translation": "import qilmoq",
+            "definition": "goods brought into a country",
+            "example": "Studying 'import' (goods brought into a country) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "ship",
+            "translation": "kemada jo'natmoq",
+            "definition": "to send goods, especially by sea",
+            "example": "Studying 'ship' (to send goods, especially by sea) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "consignment",
+            "translation": "yuk partiyasi",
+            "definition": "a quantity of goods sent at once",
+            "example": "Studying 'consignment' (a quantity of goods sent at once) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "fashionable",
+            "translation": "moda",
+            "definition": "popular at a particular time",
+            "example": "Studying 'fashionable' (popular at a particular time) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "wealthy",
+            "translation": "boy",
+            "definition": "having a lot of money; rich",
+            "example": "Studying 'wealthy' (having a lot of money; rich) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "monopoly",
+            "translation": "monopoliya",
+            "definition": "exclusive control of a trade",
+            "example": "Studying 'monopoly' (exclusive control of a trade) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "curiosity",
+            "translation": "qiziqarli narsa",
+            "definition": "something unusual and interesting",
+            "example": "Studying 'curiosity' (something unusual and interesting) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "expensive",
+            "translation": "qimmat",
+            "definition": "costing a lot of money",
+            "example": "Studying 'expensive' (costing a lot of money) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "widespread",
+            "translation": "keng tarqalgan",
+            "definition": "found or happening in many places",
+            "example": "Studying 'widespread' (found or happening in many places) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "taxation",
+            "translation": "soliqqa tortish",
+            "definition": "the system of charging taxes",
+            "example": "Studying 'taxation' (the system of charging taxes) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "consequence",
+            "translation": "oqibat",
+            "definition": "a result of an action",
+            "example": "Studying 'consequence' (a result of an action) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "smuggling",
+            "translation": "kontrabanda",
+            "definition": "moving goods illegally across borders",
+            "example": "Studying 'smuggling' (moving goods illegally across borders) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "adulteration",
+            "translation": "sifatini pasaytirish",
+            "definition": "making impure by adding substances",
+            "example": "Studying 'adulteration' (making impure by adding substances) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "afford",
+            "translation": "mablag'i yetmoq",
+            "definition": "to have enough money for",
+            "example": "Studying 'afford' (to have enough money for) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "reduce",
+            "translation": "kamaytirmoq",
+            "definition": "to make smaller in amount",
+            "example": "Studying 'reduce' (to make smaller in amount) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "impetus",
+            "translation": "turtki",
+            "definition": "a force that makes something happen",
+            "example": "Studying 'impetus' (a force that makes something happen) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "origin",
+            "translation": "kelib chiqishi",
+            "definition": "the point where something begins",
+            "example": "Studying 'origin' (the point where something begins) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "cultivation",
+            "translation": "yetishtirish",
+            "definition": "the growing of crops",
+            "example": "Studying 'cultivation' (the growing of crops) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "merchant",
+            "translation": "savdogar",
+            "definition": "a person who trades goods",
+            "example": "Studying 'merchant' (a person who trades goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "clipper",
+            "translation": "tezyurar kema",
+            "definition": "a fast sailing ship",
+            "example": "Studying 'clipper' (a fast sailing ship) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 22 · The History of Tea"
+      },
+      {
+            "word": "ancestor",
+            "translation": "ajdod",
+            "definition": "a person from whom one descends",
+            "example": "Studying 'ancestor' (a person from whom one descends) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "seismic",
+            "translation": "juda katta, keng ta'sirli",
+            "definition": "very great; far-reaching",
+            "example": "Studying 'seismic' (very great; far-reaching) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "impact",
+            "translation": "ta'sir",
+            "definition": "a strong effect or influence",
+            "example": "Studying 'impact' (a strong effect or influence) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "discovery",
+            "translation": "kashfiyot",
+            "definition": "the act of finding something new",
+            "example": "Studying 'discovery' (the act of finding something new) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "emergence",
+            "translation": "paydo bo'lish",
+            "definition": "the process of appearing or arising",
+            "example": "Studying 'emergence' (the process of appearing or arising) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "agriculture",
+            "translation": "dehqonchilik",
+            "definition": "the practice of farming",
+            "example": "Studying 'agriculture' (the practice of farming) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "preserve",
+            "translation": "saqlamoq",
+            "definition": "to keep food safe from decay",
+            "example": "Studying 'preserve' (to keep food safe from decay) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "raw",
+            "translation": "xom",
+            "definition": "not cooked",
+            "example": "Studying 'raw' (not cooked) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "inedible",
+            "translation": "yeb bo'lmaydigan",
+            "definition": "not fit to be eaten",
+            "example": "Studying 'inedible' (not fit to be eaten) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "edible",
+            "translation": "yeyish mumkin bo'lgan",
+            "definition": "fit to be eaten",
+            "example": "Studying 'edible' (fit to be eaten) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "destroy",
+            "translation": "yo'q qilmoq",
+            "definition": "to put an end to; to eliminate",
+            "example": "Studying 'destroy' (to put an end to; to eliminate) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "toxic",
+            "translation": "zaharli",
+            "definition": "poisonous; harmful",
+            "example": "Studying 'toxic' (poisonous; harmful) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "chemical",
+            "translation": "kimyoviy modda",
+            "definition": "a substance used in chemistry",
+            "example": "Studying 'chemical' (a substance used in chemistry) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "manufacture",
+            "translation": "ishlab chiqarmoq",
+            "definition": "to make or produce",
+            "example": "Studying 'manufacture' (to make or produce) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "protect",
+            "translation": "himoya qilmoq",
+            "definition": "to keep safe from harm",
+            "example": "Studying 'protect' (to keep safe from harm) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "consume",
+            "translation": "iste'mol qilmoq",
+            "definition": "to eat or use up",
+            "example": "Studying 'consume' (to eat or use up) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "bitter",
+            "translation": "achchiq",
+            "definition": "having a sharp, unpleasant taste",
+            "example": "Studying 'bitter' (having a sharp, unpleasant taste) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "digestible",
+            "translation": "hazm bo'ladigan",
+            "definition": "able to be broken down by the body",
+            "example": "Studying 'digestible' (able to be broken down by the body) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "tough",
+            "translation": "qattiq, mustahkam",
+            "definition": "hard to cut, chew or break",
+            "example": "Studying 'tough' (hard to cut, chew or break) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "energy",
+            "translation": "energiya",
+            "definition": "the power to do work",
+            "example": "Studying 'energy' (the power to do work) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "expend",
+            "translation": "sarflamoq",
+            "definition": "to use up or spend",
+            "example": "Studying 'expend' (to use up or spend) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "replace",
+            "translation": "almashtirmoq",
+            "definition": "to take the place of something",
+            "example": "Studying 'replace' (to take the place of something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "ratio",
+            "translation": "nisbat",
+            "definition": "the relation between two amounts",
+            "example": "Studying 'ratio' (the relation between two amounts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "dramatic",
+            "translation": "keskin",
+            "definition": "sudden and noticeable",
+            "example": "Studying 'dramatic' (sudden and noticeable) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "population",
+            "translation": "aholi",
+            "definition": "the number of people in a place",
+            "example": "Studying 'population' (the number of people in a place) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "specialisation",
+            "translation": "ixtisoslashuv",
+            "definition": "focusing on one particular task",
+            "example": "Studying 'specialisation' (focusing on one particular task) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "maintain",
+            "translation": "saqlab turmoq",
+            "definition": "to keep up; to continue",
+            "example": "Studying 'maintain' (to keep up; to continue) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "record",
+            "translation": "yozib qo'ymoq",
+            "definition": "written information kept for use",
+            "example": "Studying 'record' (written information kept for use) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "establish",
+            "translation": "joriy etmoq",
+            "definition": "to set up firmly",
+            "example": "Studying 'establish' (to set up firmly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "seasonality",
+            "translation": "fasllilik",
+            "definition": "variation according to the seasons",
+            "example": "Studying 'seasonality' (variation according to the seasons) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "fermentation",
+            "translation": "achitish, bijg'ish",
+            "definition": "a chemical change using bacteria or yeast",
+            "example": "Studying 'fermentation' (a chemical change using bacteria or yeast) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "hostile",
+            "translation": "noqulay, dushmanona",
+            "definition": "unfriendly; unfavourable",
+            "example": "Studying 'hostile' (unfriendly; unfavourable) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "spoil",
+            "translation": "buzilmoq",
+            "definition": "to go bad; to become unfit to eat",
+            "example": "Studying 'spoil' (to go bad; to become unfit to eat) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "decay",
+            "translation": "chirish",
+            "definition": "the process of rotting",
+            "example": "Studying 'decay' (the process of rotting) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "seal",
+            "translation": "berkitmoq",
+            "definition": "to close tightly",
+            "example": "Studying 'seal' (to close tightly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "fabricate",
+            "translation": "tayyorlamoq",
+            "definition": "to make or manufacture",
+            "example": "Studying 'fabricate' (to make or manufacture) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "texture",
+            "translation": "tuzilish, tekstura",
+            "definition": "the feel or structure of a substance",
+            "example": "Studying 'texture' (the feel or structure of a substance) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "resistant",
+            "translation": "chidamli",
+            "definition": "able to withstand damage",
+            "example": "Studying 'resistant' (able to withstand damage) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "chisel",
+            "translation": "iskana",
+            "definition": "a tool for cutting wood or metal",
+            "example": "Studying 'chisel' (a tool for cutting wood or metal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "observe",
+            "translation": "kuzatmoq",
+            "definition": "to notice or watch carefully",
+            "example": "Studying 'observe' (to notice or watch carefully) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 23 · A Brief History of Humans and Food"
+      },
+      {
+            "word": "appearance",
+            "translation": "ko'rinish",
+            "definition": "the way something looks",
+            "example": "Studying 'appearance' (the way something looks) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "continuously",
+            "translation": "uzluksiz",
+            "definition": "without stopping; constantly",
+            "example": "Studying 'continuously' (without stopping; constantly) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "commercial",
+            "translation": "tijorat",
+            "definition": "relating to business and trade",
+            "example": "Studying 'commercial' (relating to business and trade) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "announcement",
+            "translation": "e'lon",
+            "definition": "a public statement of news",
+            "example": "Studying 'announcement' (a public statement of news) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "type",
+            "translation": "shrift, harflar",
+            "definition": "printed letters; printing blocks",
+            "example": "Studying 'type' (printed letters; printing blocks) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "produce",
+            "translation": "ishlab chiqarmoq",
+            "definition": "to make or manufacture",
+            "example": "Studying 'produce' (to make or manufacture) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "crudely",
+            "translation": "qo'pol tarzda",
+            "definition": "in a rough, unskilled way",
+            "example": "Studying 'crudely' (in a rough, unskilled way) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "quantity",
+            "translation": "miqdor",
+            "definition": "an amount or number",
+            "example": "Studying 'quantity' (an amount or number) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "lettering",
+            "translation": "yozuv uslubi",
+            "definition": "the style of written letters",
+            "example": "Studying 'lettering' (the style of written letters) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "disadvantage",
+            "translation": "kamchilik",
+            "definition": "an unfavourable feature",
+            "example": "Studying 'disadvantage' (an unfavourable feature) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "storage",
+            "translation": "saqlash",
+            "definition": "the keeping of things for later",
+            "example": "Studying 'storage' (the keeping of things for later) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "demand",
+            "translation": "talab",
+            "definition": "the desire of buyers for goods",
+            "example": "Studying 'demand' (the desire of buyers for goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "drill",
+            "translation": "burg'u",
+            "definition": "a tool for making holes or cutting",
+            "example": "Studying 'drill' (a tool for making holes or cutting) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "pantograph",
+            "translation": "pantograf",
+            "definition": "a device for copying drawings",
+            "example": "Studying 'pantograph' (a device for copying drawings) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "craftsman",
+            "translation": "hunarmand",
+            "definition": "a skilled maker of things",
+            "example": "Studying 'craftsman' (a skilled maker of things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "decorative",
+            "translation": "bezakli",
+            "definition": "making something look attractive",
+            "example": "Studying 'decorative' (making something look attractive) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "coherent",
+            "translation": "izchil",
+            "definition": "well organised and consistent",
+            "example": "Studying 'coherent' (well organised and consistent) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "lack",
+            "translation": "yetishmaslik",
+            "definition": "to be without something",
+            "example": "Studying 'lack' (to be without something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "lithography",
+            "translation": "litografiya",
+            "definition": "a printing method using stone",
+            "example": "Studying 'lithography' (a printing method using stone) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "unlimited",
+            "translation": "cheksiz",
+            "definition": "without any limit",
+            "example": "Studying 'unlimited' (without any limit) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "crayon",
+            "translation": "rangli qalam",
+            "definition": "a stick of coloured wax for drawing",
+            "example": "Studying 'crayon' (a stick of coloured wax for drawing) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "limestone",
+            "translation": "ohaktosh",
+            "definition": "a type of rock used in building",
+            "example": "Studying 'limestone' (a type of rock used in building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "transfer",
+            "translation": "ko'chirmoq",
+            "definition": "to move from one place to another",
+            "example": "Studying 'transfer' (to move from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "reverse",
+            "translation": "teskari tomon",
+            "definition": "the opposite direction or order",
+            "example": "Studying 'reverse' (the opposite direction or order) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "technique",
+            "translation": "usul",
+            "definition": "a particular way of doing something",
+            "example": "Studying 'technique' (a particular way of doing something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "spectrum",
+            "translation": "spektr",
+            "definition": "a full range of something",
+            "example": "Studying 'spectrum' (a full range of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "striking",
+            "translation": "ajoyib, diqqatga sazovor",
+            "definition": "very noticeable; impressive",
+            "example": "Studying 'striking' (very noticeable; impressive) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "combine",
+            "translation": "birlashtirmoq",
+            "definition": "to join or mix together",
+            "example": "Studying 'combine' (to join or mix together) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "economical",
+            "translation": "tejamkor",
+            "definition": "not wasteful; cheap to use",
+            "example": "Studying 'economical' (not wasteful; cheap to use) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "medium",
+            "translation": "vosita",
+            "definition": "a means of communication",
+            "example": "Studying 'medium' (a means of communication) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "dominant",
+            "translation": "hukmron, ustun",
+            "definition": "most important or powerful",
+            "example": "Studying 'dominant' (most important or powerful) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "exhibition",
+            "translation": "ko'rgazma",
+            "definition": "a public display of works",
+            "example": "Studying 'exhibition' (a public display of works) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "celebrate",
+            "translation": "nishonlamoq",
+            "definition": "to mark or honour something",
+            "example": "Studying 'celebrate' (to mark or honour something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "institution",
+            "translation": "muassasa",
+            "definition": "an established organisation",
+            "example": "Studying 'institution' (an established organisation) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "evolve",
+            "translation": "rivojlanmoq",
+            "definition": "to develop gradually",
+            "example": "Studying 'evolve' (to develop gradually) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "typographic",
+            "translation": "tipografik",
+            "definition": "relating to printed type and design",
+            "example": "Studying 'typographic' (relating to printed type and design) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "accessibility",
+            "translation": "qulaylik, ochiqlik",
+            "definition": "the quality of being easy to use or reach",
+            "example": "Studying 'accessibility' (the quality of being easy to use or reach) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "universal",
+            "translation": "umumiy, universal",
+            "definition": "applying to all cases everywhere",
+            "example": "Studying 'universal' (applying to all cases everywhere) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "rigid",
+            "translation": "qattiq, o'zgarmas",
+            "definition": "strict and unable to change",
+            "example": "Studying 'rigid' (strict and unable to change) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "inspire",
+            "translation": "ilhomlantirmoq",
+            "definition": "to give someone an idea or motivation",
+            "example": "Studying 'inspire' (to give someone an idea or motivation) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 24 · The History of the Poster"
+      },
+      {
+            "word": "origin",
+            "translation": "kelib chiqishi",
+            "definition": "the point where something begins",
+            "example": "Studying 'origin' (the point where something begins) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "natural",
+            "translation": "tabiiy",
+            "definition": "existing in or formed by nature",
+            "example": "Studying 'natural' (existing in or formed by nature) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "obsidian",
+            "translation": "obsidian",
+            "definition": "a natural glass from volcanoes",
+            "example": "Studying 'obsidian' (a natural glass from volcanoes) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "volcano",
+            "translation": "vulqon",
+            "definition": "a mountain that erupts lava",
+            "example": "Studying 'volcano' (a mountain that erupts lava) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "intense",
+            "translation": "kuchli, jadal",
+            "definition": "very strong or extreme",
+            "example": "Studying 'intense' (very strong or extreme) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "eruption",
+            "translation": "otilish",
+            "definition": "the bursting out of a volcano",
+            "example": "Studying 'eruption' (the bursting out of a volcano) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "melt",
+            "translation": "eritmoq",
+            "definition": "to turn solid to liquid with heat",
+            "example": "Studying 'melt' (to turn solid to liquid with heat) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "tip",
+            "translation": "uchi",
+            "definition": "the pointed end of something",
+            "example": "Studying 'tip' (the pointed end of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "spear",
+            "translation": "nayza",
+            "definition": "a long weapon with a sharp point",
+            "example": "Studying 'spear' (a long weapon with a sharp point) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "evidence",
+            "translation": "dalil",
+            "definition": "facts showing what is true",
+            "example": "Studying 'evidence' (facts showing what is true) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "glaze",
+            "translation": "sir",
+            "definition": "a glassy coating on a surface",
+            "example": "Studying 'glaze' (a glassy coating on a surface) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "coat",
+            "translation": "qoplamoq",
+            "definition": "to cover with a layer",
+            "example": "Studying 'coat' (to cover with a layer) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "bead",
+            "translation": "munchoq",
+            "definition": "a small ball with a hole for thread",
+            "example": "Studying 'bead' (a small ball with a hole for thread) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "hollow",
+            "translation": "ichi bo'sh",
+            "definition": "having an empty space inside",
+            "example": "Studying 'hollow' (having an empty space inside) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "container",
+            "translation": "idish",
+            "definition": "an object used to hold things",
+            "example": "Studying 'container' (an object used to hold things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "molten",
+            "translation": "eritilgan",
+            "definition": "melted by heat",
+            "example": "Studying 'molten' (melted by heat) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "impurity",
+            "translation": "aralashma, iflos modda",
+            "definition": "an unwanted substance mixed in",
+            "example": "Studying 'impurity' (an unwanted substance mixed in) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "raw",
+            "translation": "qayta ishlanmagan",
+            "definition": "in a natural state; not processed",
+            "example": "Studying 'raw' (in a natural state; not processed) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "tint",
+            "translation": "bo'yamoq",
+            "definition": "to colour slightly",
+            "example": "Studying 'tint' (to colour slightly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "guard",
+            "translation": "saqlamoq",
+            "definition": "to protect or keep secret",
+            "example": "Studying 'guard' (to protect or keep secret) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "empire",
+            "translation": "imperiya",
+            "definition": "a group of countries under one ruler",
+            "example": "Studying 'empire' (a group of countries under one ruler) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "collapse",
+            "translation": "qulamoq",
+            "definition": "to fall down or fail completely",
+            "example": "Studying 'collapse' (to fall down or fail completely) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "widespread",
+            "translation": "keng tarqalgan",
+            "definition": "found or happening in many places",
+            "example": "Studying 'widespread' (found or happening in many places) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "reputation",
+            "translation": "obro'",
+            "definition": "the opinion people have of someone",
+            "example": "Studying 'reputation' (the opinion people have of someone) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "craftsman",
+            "translation": "hunarmand",
+            "definition": "a skilled maker of things",
+            "example": "Studying 'craftsman' (a skilled maker of things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "milestone",
+            "translation": "muhim bosqich",
+            "definition": "an important stage or event",
+            "example": "Studying 'milestone' (an important stage or event) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "invention",
+            "translation": "ixtiro",
+            "definition": "a new device that is created",
+            "example": "Studying 'invention' (a new device that is created) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "manufacturer",
+            "translation": "ishlab chiqaruvchi",
+            "definition": "a company that makes goods",
+            "example": "Studying 'manufacturer' (a company that makes goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "counter",
+            "translation": "qarshi chiqmoq",
+            "definition": "to act against; to prevent",
+            "example": "Studying 'counter' (to act against; to prevent) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "clouding",
+            "translation": "loyqalanish",
+            "definition": "becoming cloudy or unclear",
+            "example": "Studying 'clouding' (becoming cloudy or unclear) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "decorate",
+            "translation": "bezamoq",
+            "definition": "to make more attractive",
+            "example": "Studying 'decorate' (to make more attractive) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "invaluable",
+            "translation": "bebaho",
+            "definition": "extremely useful; priceless",
+            "example": "Studying 'invaluable' (extremely useful; priceless) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "repeal",
+            "translation": "bekor qilish",
+            "definition": "the official ending of a law",
+            "example": "Studying 'repeal' (the official ending of a law) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "levy",
+            "translation": "soliq solmoq",
+            "definition": "to officially charge a tax",
+            "example": "Studying 'levy' (to officially charge a tax) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "domestic",
+            "translation": "uy sharoitiga oid",
+            "definition": "relating to the home",
+            "example": "Studying 'domestic' (relating to the home) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "semi-automatic",
+            "translation": "yarim avtomatik",
+            "definition": "partly automatic",
+            "example": "Studying 'semi-automatic' (partly automatic) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "previous",
+            "translation": "oldingi",
+            "definition": "happening before; earlier",
+            "example": "Studying 'previous' (happening before; earlier) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "install",
+            "translation": "o'rnatmoq",
+            "definition": "to put equipment in place to use",
+            "example": "Studying 'install' (to put equipment in place to use) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "competitive",
+            "translation": "raqobatbardosh",
+            "definition": "involving strong rivalry",
+            "example": "Studying 'competitive' (involving strong rivalry) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "recycle",
+            "translation": "qayta ishlamoq",
+            "definition": "to process used items for reuse",
+            "example": "Studying 'recycle' (to process used items for reuse) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 25 · The History of Glass"
+      },
+      {
+            "word": "pastime",
+            "translation": "mashg'ulot, ko'ngil ochish",
+            "definition": "an activity done for enjoyment",
+            "example": "Studying 'pastime' (an activity done for enjoyment) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "upper class",
+            "translation": "yuqori tabaqa",
+            "definition": "the wealthiest social group",
+            "example": "Studying 'upper class' (the wealthiest social group) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "initially",
+            "translation": "dastlab",
+            "definition": "at the beginning; at first",
+            "example": "Studying 'initially' (at the beginning; at first) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "indoor",
+            "translation": "xona ichidagi",
+            "definition": "happening inside a building",
+            "example": "Studying 'indoor' (happening inside a building) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "hire",
+            "translation": "ijaraga olmoq",
+            "definition": "to rent for temporary use",
+            "example": "Studying 'hire' (to rent for temporary use) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "assume",
+            "translation": "taxmin qilmoq",
+            "definition": "to suppose to be true",
+            "example": "Studying 'assume' (to suppose to be true) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "contribute",
+            "translation": "hissa qo'shmoq",
+            "definition": "to give a share of money or help",
+            "example": "Studying 'contribute' (to give a share of money or help) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "dish",
+            "translation": "taom",
+            "definition": "food prepared in a particular way",
+            "example": "Studying 'dish' (food prepared in a particular way) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "share",
+            "translation": "ulush",
+            "definition": "a part of a total amount",
+            "example": "Studying 'share' (a part of a total amount) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "associate",
+            "translation": "bog'lamoq",
+            "definition": "to connect in the mind",
+            "example": "Studying 'associate' (to connect in the mind) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "refinement",
+            "translation": "nafislik",
+            "definition": "elegance and good taste",
+            "example": "Studying 'refinement' (elegance and good taste) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "gathering",
+            "translation": "yig'in",
+            "definition": "a meeting of people",
+            "example": "Studying 'gathering' (a meeting of people) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "adaptable",
+            "translation": "moslashuvchan",
+            "definition": "able to change to suit conditions",
+            "example": "Studying 'adaptable' (able to change to suit conditions) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "aristocrat",
+            "translation": "aristokrat",
+            "definition": "a member of the highest class",
+            "example": "Studying 'aristocrat' (a member of the highest class) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "flee",
+            "translation": "qochib ketmoq",
+            "definition": "to run away from danger",
+            "example": "Studying 'flee' (to run away from danger) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "wealthy",
+            "translation": "boy",
+            "definition": "having a lot of money; rich",
+            "example": "Studying 'wealthy' (having a lot of money; rich) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "maintain",
+            "translation": "davom ettirmoq",
+            "definition": "to keep up; to continue",
+            "example": "Studying 'maintain' (to keep up; to continue) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "introduce",
+            "translation": "kiritmoq",
+            "definition": "to bring in for the first time",
+            "example": "Studying 'introduce' (to bring in for the first time) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "refined",
+            "translation": "nafis, madaniyatli",
+            "definition": "elegant and cultured",
+            "example": "Studying 'refined' (elegant and cultured) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "found",
+            "translation": "asos solmoq",
+            "definition": "to establish or start",
+            "example": "Studying 'found' (to establish or start) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "require",
+            "translation": "talab qilmoq",
+            "definition": "to need or demand",
+            "example": "Studying 'require' (to need or demand) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "costly",
+            "translation": "qimmat",
+            "definition": "expensive",
+            "example": "Studying 'costly' (expensive) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "outdo",
+            "translation": "o'zib ketmoq",
+            "definition": "to do better than another",
+            "example": "Studying 'outdo' (to do better than another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "luxury",
+            "translation": "hashamat",
+            "definition": "great comfort and expense",
+            "example": "Studying 'luxury' (great comfort and expense) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "entertainment",
+            "translation": "ko'ngilochar tadbir",
+            "definition": "activity that amuses people",
+            "example": "Studying 'entertainment' (activity that amuses people) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "emerge",
+            "translation": "paydo bo'lmoq",
+            "definition": "to come into being; to appear",
+            "example": "Studying 'emerge' (to come into being; to appear) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "adopt",
+            "translation": "qabul qilmoq",
+            "definition": "to start using or doing",
+            "example": "Studying 'adopt' (to start using or doing) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "fashionable",
+            "translation": "moda",
+            "definition": "popular at a particular time",
+            "example": "Studying 'fashionable' (popular at a particular time) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "cease",
+            "translation": "to'xtamoq",
+            "definition": "to stop happening",
+            "example": "Studying 'cease' (to stop happening) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "genteel",
+            "translation": "odobli, nafis",
+            "definition": "polite and refined",
+            "example": "Studying 'genteel' (polite and refined) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "idealization",
+            "translation": "ideallashtirish",
+            "definition": "regarding as perfect",
+            "example": "Studying 'idealization' (regarding as perfect) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "innocent",
+            "translation": "begunoh, zararsiz",
+            "definition": "pure and harmless",
+            "example": "Studying 'innocent' (pure and harmless) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "setting",
+            "translation": "joy, muhit",
+            "definition": "the place where something happens",
+            "example": "Studying 'setting' (the place where something happens) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "civilization",
+            "translation": "tsivilizatsiya",
+            "definition": "an advanced human society",
+            "example": "Studying 'civilization' (an advanced human society) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "restoration",
+            "translation": "tiklash",
+            "definition": "bringing back to a former state",
+            "example": "Studying 'restoration' (bringing back to a former state) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "monarchy",
+            "translation": "monarxiya",
+            "definition": "rule by a king or queen",
+            "example": "Studying 'monarchy' (rule by a king or queen) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "predominate",
+            "translation": "ustunlik qilmoq",
+            "definition": "to be the strongest or main one",
+            "example": "Studying 'predominate' (to be the strongest or main one) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "suspicion",
+            "translation": "shubha",
+            "definition": "a feeling of doubt or distrust",
+            "example": "Studying 'suspicion' (a feeling of doubt or distrust) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "transport",
+            "translation": "transport",
+            "definition": "a means of moving people or goods",
+            "example": "Studying 'transport' (a means of moving people or goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "accessible",
+            "translation": "qulay, yetib bo'ladigan",
+            "definition": "able to be reached easily",
+            "example": "Studying 'accessible' (able to be reached easily) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 26 · The History of the Picnic"
+      },
+      {
+            "word": "invent",
+            "translation": "ixtiro qilmoq",
+            "definition": "to create something new",
+            "example": "Studying 'invent' (to create something new) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "individual",
+            "translation": "shaxs",
+            "definition": "a single person",
+            "example": "Studying 'individual' (a single person) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "modern",
+            "translation": "zamonaviy",
+            "definition": "of the present or recent times",
+            "example": "Studying 'modern' (of the present or recent times) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "revolutionize",
+            "translation": "tubdan o'zgartirmoq",
+            "definition": "to change completely and greatly",
+            "example": "Studying 'revolutionize' (to change completely and greatly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "appear",
+            "translation": "paydo bo'lmoq",
+            "definition": "to come into view; to become available",
+            "example": "Studying 'appear' (to come into view; to become available) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "wheel",
+            "translation": "g'ildirak",
+            "definition": "a round part that turns to move",
+            "example": "Studying 'wheel' (a round part that turns to move) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "pedal",
+            "translation": "pedal",
+            "definition": "a foot lever that drives a machine",
+            "example": "Studying 'pedal' (a foot lever that drives a machine) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "rider",
+            "translation": "haydovchi, minuvchi",
+            "definition": "a person who rides a vehicle",
+            "example": "Studying 'rider' (a person who rides a vehicle) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "forward",
+            "translation": "oldinga",
+            "definition": "toward the front; ahead",
+            "example": "Studying 'forward' (toward the front; ahead) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "inventor",
+            "translation": "ixtirochi",
+            "definition": "a person who creates new things",
+            "example": "Studying 'inventor' (a person who creates new things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "vehicle",
+            "translation": "transport vositasi",
+            "definition": "a machine for transporting people",
+            "example": "Studying 'vehicle' (a machine for transporting people) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "heavy",
+            "translation": "og'ir",
+            "definition": "weighing a lot",
+            "example": "Studying 'heavy' (weighing a lot) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "framework",
+            "translation": "karkas",
+            "definition": "a supporting structure",
+            "example": "Studying 'framework' (a supporting structure) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "solid",
+            "translation": "qattiq, mustahkam",
+            "definition": "firm and not hollow",
+            "example": "Studying 'solid' (firm and not hollow) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "steel",
+            "translation": "po'lat",
+            "definition": "a strong metal made from iron",
+            "example": "Studying 'steel' (a strong metal made from iron) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "wooden",
+            "translation": "yog'och",
+            "definition": "made of wood",
+            "example": "Studying 'wooden' (made of wood) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "transportation",
+            "translation": "transport, tashish",
+            "definition": "the movement of people or goods",
+            "example": "Studying 'transportation' (the movement of people or goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "manufacturer",
+            "translation": "ishlab chiqaruvchi",
+            "definition": "a company that makes goods",
+            "example": "Studying 'manufacturer' (a company that makes goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "overseas",
+            "translation": "chet elga",
+            "definition": "in or to a foreign country",
+            "example": "Studying 'overseas' (in or to a foreign country) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "hollow",
+            "translation": "ichi bo'sh",
+            "definition": "having an empty space inside",
+            "example": "Studying 'hollow' (having an empty space inside) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "alteration",
+            "translation": "o'zgartirish",
+            "definition": "a change or adjustment",
+            "example": "Studying 'alteration' (a change or adjustment) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "steering",
+            "translation": "boshqaruv, rul",
+            "definition": "the act of guiding a vehicle",
+            "example": "Studying 'steering' (the act of guiding a vehicle) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "bumpy",
+            "translation": "notekis",
+            "definition": "having an uneven surface",
+            "example": "Studying 'bumpy' (having an uneven surface) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "rent",
+            "translation": "ijaraga olmoq",
+            "definition": "to pay to use for a time",
+            "example": "Studying 'rent' (to pay to use for a time) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "subsequent",
+            "translation": "keyingi",
+            "definition": "coming after; following",
+            "example": "Studying 'subsequent' (coming after; following) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "alter",
+            "translation": "o'zgartirmoq",
+            "definition": "to change something",
+            "example": "Studying 'alter' (to change something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "efficient",
+            "translation": "samarali",
+            "definition": "working well without waste",
+            "example": "Studying 'efficient' (working well without waste) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "reason",
+            "translation": "xulosa chiqarmoq",
+            "definition": "to think logically; to conclude",
+            "example": "Studying 'reason' (to think logically; to conclude) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "giant",
+            "translation": "ulkan",
+            "definition": "extremely large",
+            "example": "Studying 'giant' (extremely large) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "rear",
+            "translation": "orqa qism",
+            "definition": "at the back",
+            "example": "Studying 'rear' (at the back) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "balance",
+            "translation": "muvozanat saqlamoq",
+            "definition": "to keep steady without falling",
+            "example": "Studying 'balance' (to keep steady without falling) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "inherent",
+            "translation": "tabiiy xos bo'lgan",
+            "definition": "existing as a natural part",
+            "example": "Studying 'inherent' (existing as a natural part) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "danger",
+            "translation": "xavf",
+            "definition": "the possibility of harm",
+            "example": "Studying 'danger' (the possibility of harm) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "substitute",
+            "translation": "almashtirmoq",
+            "definition": "to replace with another",
+            "example": "Studying 'substitute' (to replace with another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "mechanism",
+            "translation": "mexanizm",
+            "definition": "a system of moving parts",
+            "example": "Studying 'mechanism' (a system of moving parts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "lever",
+            "translation": "richag",
+            "definition": "a bar moved to operate something",
+            "example": "Studying 'lever' (a bar moved to operate something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "axle",
+            "translation": "o'q",
+            "definition": "a rod on which a wheel turns",
+            "example": "Studying 'axle' (a rod on which a wheel turns) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "minimize",
+            "translation": "kamaytirmoq",
+            "definition": "to reduce to the smallest amount",
+            "example": "Studying 'minimize' (to reduce to the smallest amount) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "chain",
+            "translation": "zanjir",
+            "definition": "a series of connected metal links",
+            "example": "Studying 'chain' (a series of connected metal links) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "improvement",
+            "translation": "yaxshilanish",
+            "definition": "a change that makes better",
+            "example": "Studying 'improvement' (a change that makes better) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 27 · The History of Bicycles"
+      },
+      {
+            "word": "stringed",
+            "translation": "torli",
+            "definition": "having strings (of an instrument)",
+            "example": "Studying 'stringed' (having strings (of an instrument)) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "instrument",
+            "translation": "asbob",
+            "definition": "a device for making music",
+            "example": "Studying 'instrument' (a device for making music) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "archaeologist",
+            "translation": "arxeolog",
+            "definition": "a scientist who studies remains",
+            "example": "Studying 'archaeologist' (a scientist who studies remains) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "resonator",
+            "translation": "rezonator",
+            "definition": "a part that increases sound",
+            "example": "Studying 'resonator' (a part that increases sound) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "neck",
+            "translation": "dastasi",
+            "definition": "the long thin part of a guitar",
+            "example": "Studying 'neck' (the long thin part of a guitar) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "ancient",
+            "translation": "qadimiy",
+            "definition": "very old; from long ago",
+            "example": "Studying 'ancient' (very old; from long ago) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "civilisation",
+            "translation": "tsivilizatsiya",
+            "definition": "an advanced human society",
+            "example": "Studying 'civilisation' (an advanced human society) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "carved",
+            "translation": "o'yib ishlangan",
+            "definition": "shaped by cutting",
+            "example": "Studying 'carved' (shaped by cutting) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "tomb",
+            "translation": "maqbara",
+            "definition": "a place where a dead body is buried",
+            "example": "Studying 'tomb' (a place where a dead body is buried) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "advanced",
+            "translation": "rivojlangan",
+            "definition": "highly developed",
+            "example": "Studying 'advanced' (highly developed) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "develop",
+            "translation": "rivojlanmoq",
+            "definition": "to grow or come from gradually",
+            "example": "Studying 'develop' (to grow or come from gradually) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "note",
+            "translation": "nota",
+            "definition": "a single musical sound",
+            "example": "Studying 'note' (a single musical sound) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "relic",
+            "translation": "qadimgi yodgorlik",
+            "definition": "an object surviving from the past",
+            "example": "Studying 'relic' (an object surviving from the past) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "survive",
+            "translation": "saqlanib qolmoq",
+            "definition": "to continue to exist",
+            "example": "Studying 'survive' (to continue to exist) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "unchanged",
+            "translation": "o'zgarmagan",
+            "definition": "not altered; the same",
+            "example": "Studying 'unchanged' (not altered; the same) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "suspend",
+            "translation": "osib qo'ymoq",
+            "definition": "to hang from above",
+            "example": "Studying 'suspend' (to hang from above) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "volume",
+            "translation": "ovoz balandligi",
+            "definition": "the loudness of sound",
+            "example": "Studying 'volume' (the loudness of sound) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "polished",
+            "translation": "silliqlangan",
+            "definition": "made smooth and shiny",
+            "example": "Studying 'polished' (made smooth and shiny) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "distinguish",
+            "translation": "farqlamoq",
+            "definition": "to tell apart; to see the difference",
+            "example": "Studying 'distinguish' (to tell apart; to see the difference) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "definition",
+            "translation": "ta'rif",
+            "definition": "a statement of meaning",
+            "example": "Studying 'definition' (a statement of meaning) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "fretted",
+            "translation": "pardali",
+            "definition": "having ridges on the neck",
+            "example": "Studying 'fretted' (having ridges on the neck) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "representation",
+            "translation": "tasvir",
+            "definition": "an image or depiction",
+            "example": "Studying 'representation' (an image or depiction) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "curve",
+            "translation": "egmoq",
+            "definition": "to bend in a smooth shape",
+            "example": "Studying 'curve' (to bend in a smooth shape) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "prefix",
+            "translation": "old qo'shimcha",
+            "definition": "a part added to the front of a word",
+            "example": "Studying 'prefix' (a part added to the front of a word) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "indicate",
+            "translation": "ko'rsatmoq",
+            "definition": "to show or point out",
+            "example": "Studying 'indicate' (to show or point out) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "evolve",
+            "translation": "rivojlanmoq",
+            "definition": "to develop gradually",
+            "example": "Studying 'evolve' (to develop gradually) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "radically",
+            "translation": "tubdan",
+            "definition": "in a basic and complete way",
+            "example": "Studying 'radically' (in a basic and complete way) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "spread",
+            "translation": "tarqalmoq",
+            "definition": "to reach more places",
+            "example": "Studying 'spread' (to reach more places) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "merchant",
+            "translation": "savdogar",
+            "definition": "a person who trades goods",
+            "example": "Studying 'merchant' (a person who trades goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "variation",
+            "translation": "variant, ko'rinish",
+            "definition": "a different form of something",
+            "example": "Studying 'variation' (a different form of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "manuscript",
+            "translation": "qo'lyozma",
+            "definition": "a hand-written document",
+            "example": "Studying 'manuscript' (a hand-written document) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "construction",
+            "translation": "qurilish, tuzilish",
+            "definition": "the way something is built",
+            "example": "Studying 'construction' (the way something is built) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "acquire",
+            "translation": "orttirmoq",
+            "definition": "to gain or obtain",
+            "example": "Studying 'acquire' (to gain or obtain) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "dominant",
+            "translation": "ustun, hukmron",
+            "definition": "most common or powerful",
+            "example": "Studying 'dominant' (most common or powerful) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "innovation",
+            "translation": "yangilik",
+            "definition": "a new method or idea",
+            "example": "Studying 'innovation' (a new method or idea) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "proportion",
+            "translation": "nisbat",
+            "definition": "the size or shape relation of parts",
+            "example": "Studying 'proportion' (the size or shape relation of parts) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "tone",
+            "translation": "tovush ohangi",
+            "definition": "the quality of a musical sound",
+            "example": "Studying 'tone' (the quality of a musical sound) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "immigrant",
+            "translation": "immigrant",
+            "definition": "a person who moves to a new country",
+            "example": "Studying 'immigrant' (a person who moves to a new country) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "tension",
+            "translation": "taranglik",
+            "definition": "the state of being stretched tight",
+            "example": "Studying 'tension' (the state of being stretched tight) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "pickup",
+            "translation": "pikap",
+            "definition": "a device that converts sound to signal",
+            "example": "Studying 'pickup' (a device that converts sound to signal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 28 · The History of the Guitar"
+      },
+      {
+            "word": "universal",
+            "translation": "umumjahon, hamma joyda",
+            "definition": "found or used everywhere",
+            "example": "Studying 'universal' (found or used everywhere) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "cultural",
+            "translation": "madaniy",
+            "definition": "relating to a society's customs",
+            "example": "Studying 'cultural' (relating to a society's customs) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "boundary",
+            "translation": "chegara",
+            "definition": "a dividing line or limit",
+            "example": "Studying 'boundary' (a dividing line or limit) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "uniform",
+            "translation": "bir xil",
+            "definition": "the same throughout",
+            "example": "Studying 'uniform' (the same throughout) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "texture",
+            "translation": "tuzilish",
+            "definition": "the feel or structure of something",
+            "example": "Studying 'texture' (the feel or structure of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "cuisine",
+            "translation": "oshxona uslubi, taomlar",
+            "definition": "a style of cooking",
+            "example": "Studying 'cuisine' (a style of cooking) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "industrial",
+            "translation": "sanoat",
+            "definition": "relating to factories and industry",
+            "example": "Studying 'industrial' (relating to factories and industry) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "contribution",
+            "translation": "hissa",
+            "definition": "something given to help or add",
+            "example": "Studying 'contribution' (something given to help or add) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "domestic",
+            "translation": "uy sharoitidagi, xonaki",
+            "definition": "kept by humans; not wild",
+            "example": "Studying 'domestic' (kept by humans; not wild) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "inspire",
+            "translation": "ilhomlantirmoq",
+            "definition": "to give ideas or motivation",
+            "example": "Studying 'inspire' (to give ideas or motivation) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "sacred",
+            "translation": "muqaddas",
+            "definition": "holy; deserving great respect",
+            "example": "Studying 'sacred' (holy; deserving great respect) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "fertility",
+            "translation": "unumdorlik",
+            "definition": "the ability to produce offspring",
+            "example": "Studying 'fertility' (the ability to produce offspring) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "domesticate",
+            "translation": "qo'lga o'rgatmoq",
+            "definition": "to tame animals for human use",
+            "example": "Studying 'domesticate' (to tame animals for human use) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "ancestor",
+            "translation": "ajdod",
+            "definition": "an earlier form from which others come",
+            "example": "Studying 'ancestor' (an earlier form from which others come) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "resemblance",
+            "translation": "o'xshashlik",
+            "definition": "the state of looking alike",
+            "example": "Studying 'resemblance' (the state of looking alike) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "distinctive",
+            "translation": "o'ziga xos",
+            "definition": "clearly different and recognisable",
+            "example": "Studying 'distinctive' (clearly different and recognisable) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "breed",
+            "translation": "zot, nasl",
+            "definition": "a particular type of animal",
+            "example": "Studying 'breed' (a particular type of animal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "habitat",
+            "translation": "yashash muhiti",
+            "definition": "the natural home of an animal",
+            "example": "Studying 'habitat' (the natural home of an animal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "trait",
+            "translation": "xususiyat",
+            "definition": "a particular quality or feature",
+            "example": "Studying 'trait' (a particular quality or feature) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "capture",
+            "translation": "tutib olmoq",
+            "definition": "to catch and hold",
+            "example": "Studying 'capture' (to catch and hold) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "sole",
+            "translation": "yagona",
+            "definition": "only; single",
+            "example": "Studying 'sole' (only; single) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "species",
+            "translation": "tur",
+            "definition": "a group of similar living things",
+            "example": "Studying 'species' (a group of similar living things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "inherit",
+            "translation": "meros qilib olmoq",
+            "definition": "to receive from an ancestor",
+            "example": "Studying 'inherit' (to receive from an ancestor) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "migration",
+            "translation": "migratsiya, ko'chish",
+            "definition": "movement from one region to another",
+            "example": "Studying 'migration' (movement from one region to another) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "decorate",
+            "translation": "bezamoq",
+            "definition": "to add ornament to make attractive",
+            "example": "Studying 'decorate' (to add ornament to make attractive) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "royal",
+            "translation": "qirollik",
+            "definition": "relating to a king or queen",
+            "example": "Studying 'royal' (relating to a king or queen) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "artificial",
+            "translation": "sun'iy",
+            "definition": "made by people, not natural",
+            "example": "Studying 'artificial' (made by people, not natural) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "incubation",
+            "translation": "inkubatsiya",
+            "definition": "keeping eggs warm so they hatch",
+            "example": "Studying 'incubation' (keeping eggs warm so they hatch) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "hatch",
+            "translation": "tuxumdan chiqmoq",
+            "definition": "to break out of an egg",
+            "example": "Studying 'hatch' (to break out of an egg) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "humidity",
+            "translation": "namlik",
+            "definition": "the amount of moisture in the air",
+            "example": "Studying 'humidity' (the amount of moisture in the air) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "stable",
+            "translation": "barqaror",
+            "definition": "steady; not changing",
+            "example": "Studying 'stable' (steady; not changing) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "regulate",
+            "translation": "boshqarmoq",
+            "definition": "to control or manage",
+            "example": "Studying 'regulate' (to control or manage) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "delicacy",
+            "translation": "noyob taom",
+            "definition": "a rare and delicious food",
+            "example": "Studying 'delicacy' (a rare and delicious food) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "fatten",
+            "translation": "semirtirmoq",
+            "definition": "to make an animal fat for food",
+            "example": "Studying 'fatten' (to make an animal fat for food) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "diminish",
+            "translation": "kamaymoq",
+            "definition": "to become smaller or less",
+            "example": "Studying 'diminish' (to become smaller or less) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "collapse",
+            "translation": "qulash",
+            "definition": "a sudden failure or fall",
+            "example": "Studying 'collapse' (a sudden failure or fall) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "enterprise",
+            "translation": "korxona",
+            "definition": "a business or undertaking",
+            "example": "Studying 'enterprise' (a business or undertaking) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "protect",
+            "translation": "himoya qilmoq",
+            "definition": "to keep safe from harm",
+            "example": "Studying 'protect' (to keep safe from harm) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "predator",
+            "translation": "yirtqich",
+            "definition": "an animal that hunts others",
+            "example": "Studying 'predator' (an animal that hunts others) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "convert",
+            "translation": "aylantirmoq",
+            "definition": "to change into another form",
+            "example": "Studying 'convert' (to change into another form) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 29 · The History of the Chicken"
+      },
+      {
+            "word": "antiquity",
+            "translation": "qadimiylik",
+            "definition": "the ancient past",
+            "example": "Studying 'antiquity' (the ancient past) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "customarily",
+            "translation": "odatda",
+            "definition": "according to custom; usually",
+            "example": "Studying 'customarily' (according to custom; usually) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "celebrate",
+            "translation": "nishonlamoq",
+            "definition": "to mark a special occasion",
+            "example": "Studying 'celebrate' (to mark a special occasion) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "ceremony",
+            "translation": "marosim",
+            "definition": "a formal event or ritual",
+            "example": "Studying 'ceremony' (a formal event or ritual) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "finalize",
+            "translation": "yakunlamoq",
+            "definition": "to complete; to bring to an end",
+            "example": "Studying 'finalize' (to complete; to bring to an end) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "symbol",
+            "translation": "ramz",
+            "definition": "something that represents an idea",
+            "example": "Studying 'symbol' (something that represents an idea) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "fortune",
+            "translation": "baxt, boylik",
+            "definition": "luck or wealth",
+            "example": "Studying 'fortune' (luck or wealth) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "crumb",
+            "translation": "non-kek qoldig'i",
+            "definition": "a tiny piece of bread or cake",
+            "example": "Studying 'crumb' (a tiny piece of bread or cake) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "token",
+            "translation": "belgi, ramz",
+            "definition": "a sign or symbol of something",
+            "example": "Studying 'token' (a sign or symbol of something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "confetti",
+            "translation": "konfetti",
+            "definition": "small pieces thrown at celebrations",
+            "example": "Studying 'confetti' (small pieces thrown at celebrations) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "shower",
+            "translation": "sochib tashlamoq",
+            "definition": "to throw down in large quantities",
+            "example": "Studying 'shower' (to throw down in large quantities) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "replace",
+            "translation": "almashtirmoq",
+            "definition": "to put in place of another",
+            "example": "Studying 'replace' (to put in place of another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "custom",
+            "translation": "urf-odat",
+            "definition": "a traditional way of doing things",
+            "example": "Studying 'custom' (a traditional way of doing things) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "tradition",
+            "translation": "an'ana",
+            "definition": "a long-established practice",
+            "example": "Studying 'tradition' (a long-established practice) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "invade",
+            "translation": "bosib olmoq",
+            "definition": "to enter by force to take control",
+            "example": "Studying 'invade' (to enter by force to take control) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "medieval",
+            "translation": "o'rta asrlarga oid",
+            "definition": "relating to the Middle Ages",
+            "example": "Studying 'medieval' (relating to the Middle Ages) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "stack",
+            "translation": "uyub qo'ymoq",
+            "definition": "to arrange in a pile",
+            "example": "Studying 'stack' (to arrange in a pile) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "augur",
+            "translation": "bashorat qilmoq",
+            "definition": "to be a sign of the future",
+            "example": "Studying 'augur' (to be a sign of the future) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "riches",
+            "translation": "boylik",
+            "definition": "great wealth",
+            "example": "Studying 'riches' (great wealth) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "recipe",
+            "translation": "retsept",
+            "definition": "instructions for cooking a dish",
+            "example": "Studying 'recipe' (instructions for cooking a dish) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "exclusively",
+            "translation": "faqat, yolg'iz",
+            "definition": "only; restricted to one purpose",
+            "example": "Studying 'exclusively' (only; restricted to one purpose) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "elaborately",
+            "translation": "naqshinkor tarzda",
+            "definition": "with much detail and decoration",
+            "example": "Studying 'elaborately' (with much detail and decoration) helps in reading comprehension.",
+            "partOfSpeech": "adverb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "conceal",
+            "translation": "yashirmoq",
+            "definition": "to hide from view",
+            "example": "Studying 'conceal' (to hide from view) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "impolite",
+            "translation": "odobsiz",
+            "definition": "rude; not showing good manners",
+            "example": "Studying 'impolite' (rude; not showing good manners) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "predecessor",
+            "translation": "salaf",
+            "definition": "something that came before",
+            "example": "Studying 'predecessor' (something that came before) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "centrepiece",
+            "translation": "markaziy bezak",
+            "definition": "the main central item",
+            "example": "Studying 'centrepiece' (the main central item) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "pastry",
+            "translation": "xamir mahsuloti",
+            "definition": "a dough of flour, fat and water",
+            "example": "Studying 'pastry' (a dough of flour, fat and water) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "currant",
+            "translation": "mayiz",
+            "definition": "a small dried grape",
+            "example": "Studying 'currant' (a small dried grape) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "sprinkle",
+            "translation": "sepmoq",
+            "definition": "to scatter small amounts over",
+            "example": "Studying 'sprinkle' (to scatter small amounts over) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "hearth",
+            "translation": "o'choq",
+            "definition": "the floor of a fireplace",
+            "example": "Studying 'hearth' (the floor of a fireplace) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "revival",
+            "translation": "qayta tiklanish",
+            "definition": "a return to use or popularity",
+            "example": "Studying 'revival' (a return to use or popularity) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "depict",
+            "translation": "tasvirlamoq",
+            "definition": "to show or represent in a picture",
+            "example": "Studying 'depict' (to show or represent in a picture) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "icing",
+            "translation": "shirin qoplama, glazur",
+            "definition": "a sweet coating for cakes",
+            "example": "Studying 'icing' (a sweet coating for cakes) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "refined",
+            "translation": "tozalangan",
+            "definition": "made pure by processing",
+            "example": "Studying 'refined' (made pure by processing) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "status",
+            "translation": "maqom",
+            "definition": "a person's rank or standing",
+            "example": "Studying 'status' (a person's rank or standing) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "display",
+            "translation": "namoyish qilmoq",
+            "definition": "to show publicly",
+            "example": "Studying 'display' (to show publicly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "embellish",
+            "translation": "bezamoq",
+            "definition": "to decorate to make more attractive",
+            "example": "Studying 'embellish' (to decorate to make more attractive) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "tiered",
+            "translation": "qavatli",
+            "definition": "arranged in layers or levels",
+            "example": "Studying 'tiered' (arranged in layers or levels) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "separate",
+            "translation": "ajratmoq",
+            "definition": "to set or keep apart",
+            "example": "Studying 'separate' (to set or keep apart) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "dimension",
+            "translation": "o'lcham",
+            "definition": "a measurement of size",
+            "example": "Studying 'dimension' (a measurement of size) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 30 · The History of Cakes at Weddings"
+      },
+      {
+            "word": "liver",
+            "translation": "jigar",
+            "definition": "a large organ inside the body",
+            "example": "Studying 'liver' (a large organ inside the body) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "purpose",
+            "translation": "maqsad",
+            "definition": "the reason something is done",
+            "example": "Studying 'purpose' (the reason something is done) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "community",
+            "translation": "jamoa",
+            "definition": "a group of people living together",
+            "example": "Studying 'community' (a group of people living together) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "chemist",
+            "translation": "kimyogar",
+            "definition": "a scientist who studies chemistry",
+            "example": "Studying 'chemist' (a scientist who studies chemistry) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "manufacture",
+            "translation": "ishlab chiqarish",
+            "definition": "the making of goods",
+            "example": "Studying 'manufacture' (the making of goods) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "grade",
+            "translation": "daraja, sifat",
+            "definition": "a level of quality",
+            "example": "Studying 'grade' (a level of quality) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "analysis",
+            "translation": "tahlil",
+            "definition": "a detailed examination",
+            "example": "Studying 'analysis' (a detailed examination) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "conclude",
+            "translation": "xulosa chiqarmoq",
+            "definition": "to decide after thinking",
+            "example": "Studying 'conclude' (to decide after thinking) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "attribute",
+            "translation": "bog'lamoq",
+            "definition": "to say something is caused by",
+            "example": "Studying 'attribute' (to say something is caused by) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "superiority",
+            "translation": "ustunlik",
+            "definition": "the state of being better",
+            "example": "Studying 'superiority' (the state of being better) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "quantity",
+            "translation": "miqdor",
+            "definition": "an amount or number",
+            "example": "Studying 'quantity' (an amount or number) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "obtain",
+            "translation": "olmoq",
+            "definition": "to get something",
+            "example": "Studying 'obtain' (to get something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "pure",
+            "translation": "toza",
+            "definition": "not mixed with anything else",
+            "example": "Studying 'pure' (not mixed with anything else) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "market",
+            "translation": "sotmoq, bozorga chiqarmoq",
+            "definition": "to advertise and sell",
+            "example": "Studying 'market' (to advertise and sell) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "export",
+            "translation": "eksport qilmoq",
+            "definition": "to send goods abroad to sell",
+            "example": "Studying 'export' (to send goods abroad to sell) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "guarantee",
+            "translation": "kafolat bermoq",
+            "definition": "to promise something is true",
+            "example": "Studying 'guarantee' (to promise something is true) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "credentials",
+            "translation": "malaka hujjatlari",
+            "definition": "qualifications proving ability",
+            "example": "Studying 'credentials' (qualifications proving ability) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "testimonial",
+            "translation": "tavsiyanoma",
+            "definition": "a statement of approval",
+            "example": "Studying 'testimonial' (a statement of approval) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "disagreeable",
+            "translation": "yoqimsiz",
+            "definition": "unpleasant; not nice",
+            "example": "Studying 'disagreeable' (unpleasant; not nice) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "obstacle",
+            "translation": "to'siq",
+            "definition": "something that blocks progress",
+            "example": "Studying 'obstacle' (something that blocks progress) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "overcome",
+            "translation": "yengib o'tmoq",
+            "definition": "to succeed in dealing with",
+            "example": "Studying 'overcome' (to succeed in dealing with) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "perseverance",
+            "translation": "matonat, sabot",
+            "definition": "continued effort despite difficulty",
+            "example": "Studying 'perseverance' (continued effort despite difficulty) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "combine",
+            "translation": "birlashtirmoq",
+            "definition": "to join or mix together",
+            "example": "Studying 'combine' (to join or mix together) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "experiment",
+            "translation": "sinab ko'rmoq",
+            "definition": "to test to discover something",
+            "example": "Studying 'experiment' (to test to discover something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "preparation",
+            "translation": "tayyorlangan aralashma",
+            "definition": "a mixture made for a purpose",
+            "example": "Studying 'preparation' (a mixture made for a purpose) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "establish",
+            "translation": "tashkil etmoq",
+            "definition": "to set up; to found",
+            "example": "Studying 'establish' (to set up; to found) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "pharmacist",
+            "translation": "dorixonachi",
+            "definition": "a person who prepares medicines",
+            "example": "Studying 'pharmacist' (a person who prepares medicines) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "opportunity",
+            "translation": "imkoniyat",
+            "definition": "a favourable chance",
+            "example": "Studying 'opportunity' (a favourable chance) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "propel",
+            "translation": "oldinga surmoq",
+            "definition": "to drive or push forward",
+            "example": "Studying 'propel' (to drive or push forward) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "fishery",
+            "translation": "baliqchilik joyi",
+            "definition": "a place where fish are caught",
+            "example": "Studying 'fishery' (a place where fish are caught) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "stream",
+            "translation": "oqib turmoq",
+            "definition": "to move in a continuous flow",
+            "example": "Studying 'stream' (to move in a continuous flow) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "breeding",
+            "translation": "naslchilik",
+            "definition": "the producing of young animals",
+            "example": "Studying 'breeding' (the producing of young animals) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "trademark",
+            "translation": "savdo belgisi",
+            "definition": "a legally registered brand sign",
+            "example": "Studying 'trademark' (a legally registered brand sign) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "palatable",
+            "translation": "mazali, yoqimli",
+            "definition": "pleasant to taste",
+            "example": "Studying 'palatable' (pleasant to taste) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "permanent",
+            "translation": "doimiy",
+            "definition": "lasting; not changing",
+            "example": "Studying 'permanent' (lasting; not changing) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "separate",
+            "translation": "ajralmoq",
+            "definition": "to divide or come apart",
+            "example": "Studying 'separate' (to divide or come apart) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "reproduce",
+            "translation": "nusxa ko'chirmoq",
+            "definition": "to make a copy of",
+            "example": "Studying 'reproduce' (to make a copy of) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "secure",
+            "translation": "mahkamlamoq",
+            "definition": "to fix or fasten firmly",
+            "example": "Studying 'secure' (to fix or fasten firmly) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "recognizable",
+            "translation": "taniqli",
+            "definition": "able to be identified",
+            "example": "Studying 'recognizable' (able to be identified) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "reassurance",
+            "translation": "ishonch beruvchi narsa",
+            "definition": "something that removes doubt",
+            "example": "Studying 'reassurance' (something that removes doubt) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 31 · Scott and Bowne's Cod Liver Oil"
+      },
+      {
+            "word": "original",
+            "translation": "dastlabki, asl",
+            "definition": "existing from the beginning; first",
+            "example": "Studying 'original' (existing from the beginning; first) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "theatre",
+            "translation": "teatr",
+            "definition": "a building where plays are performed",
+            "example": "Studying 'theatre' (a building where plays are performed) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "major",
+            "translation": "muhim, katta",
+            "definition": "important or large",
+            "example": "Studying 'major' (important or large) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "playhouse",
+            "translation": "teatr",
+            "definition": "a theatre",
+            "example": "Studying 'playhouse' (a theatre) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "theatrical",
+            "translation": "teatrga oid",
+            "definition": "relating to theatre or drama",
+            "example": "Studying 'theatrical' (relating to theatre or drama) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "company",
+            "translation": "truppa",
+            "definition": "a group of actors or performers",
+            "example": "Studying 'company' (a group of actors or performers) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "playwright",
+            "translation": "dramaturg",
+            "definition": "a person who writes plays",
+            "example": "Studying 'playwright' (a person who writes plays) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "belong to",
+            "translation": "a'zosi bo'lmoq",
+            "definition": "to be a member of",
+            "example": "Studying 'belong to' (to be a member of) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "stage",
+            "translation": "sahnalashtirmoq",
+            "definition": "to present a play to the public",
+            "example": "Studying 'stage' (to present a play to the public) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "timber",
+            "translation": "qurilish yog'ochi",
+            "definition": "wood used for building",
+            "example": "Studying 'timber' (wood used for building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "lease",
+            "translation": "ijara shartnomasi",
+            "definition": "a contract to rent property",
+            "example": "Studying 'lease' (a contract to rent property) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "expire",
+            "translation": "muddati tugamoq",
+            "definition": "to come to an end",
+            "example": "Studying 'expire' (to come to an end) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "construct",
+            "translation": "qurmoq",
+            "definition": "to build something",
+            "example": "Studying 'construct' (to build something) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "transport",
+            "translation": "tashimoq",
+            "definition": "to carry from one place to another",
+            "example": "Studying 'transport' (to carry from one place to another) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "successful",
+            "translation": "muvaffaqiyatli",
+            "definition": "achieving the desired result",
+            "example": "Studying 'successful' (achieving the desired result) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "artificial",
+            "translation": "sun'iy",
+            "definition": "made by people, not natural",
+            "example": "Studying 'artificial' (made by people, not natural) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "merchandise",
+            "translation": "sotuv mahsulotlari",
+            "definition": "goods for sale",
+            "example": "Studying 'merchandise' (goods for sale) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "refreshment",
+            "translation": "yengil taom-ichimlik",
+            "definition": "light food or drink",
+            "example": "Studying 'refreshment' (light food or drink) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "conceal",
+            "translation": "yashirmoq",
+            "definition": "to hide from view",
+            "example": "Studying 'conceal' (to hide from view) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "identity",
+            "translation": "o'ziga xoslik, shaxs",
+            "definition": "who a person is",
+            "example": "Studying 'identity' (who a person is) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "destroy",
+            "translation": "vayron qilmoq",
+            "definition": "to damage so it no longer exists",
+            "example": "Studying 'destroy' (to damage so it no longer exists) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "ignite",
+            "translation": "alangalantirmoq",
+            "definition": "to set on fire",
+            "example": "Studying 'ignite' (to set on fire) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "beam",
+            "translation": "yog'och/temir bo'lak",
+            "definition": "a long thick piece of wood or metal",
+            "example": "Studying 'beam' (a long thick piece of wood or metal) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "contemporary",
+            "translation": "zamondosh",
+            "definition": "from the same time period",
+            "example": "Studying 'contemporary' (from the same time period) helps in reading comprehension.",
+            "partOfSpeech": "adjective",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "foundation",
+            "translation": "poydevor, asos",
+            "definition": "the base of a building",
+            "example": "Studying 'foundation' (the base of a building) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "predecessor",
+            "translation": "o'tmishdosh",
+            "definition": "something that came before",
+            "example": "Studying 'predecessor' (something that came before) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "enforce",
+            "translation": "amalga majburlamoq",
+            "definition": "to make people obey a rule",
+            "example": "Studying 'enforce' (to make people obey a rule) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "restriction",
+            "translation": "cheklov",
+            "definition": "a rule that limits something",
+            "example": "Studying 'restriction' (a rule that limits something) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "remnant",
+            "translation": "qoldiq",
+            "definition": "a small remaining part",
+            "example": "Studying 'remnant' (a small remaining part) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "disturb",
+            "translation": "bezovta qilmoq",
+            "definition": "to interfere with; to disrupt",
+            "example": "Studying 'disturb' (to interfere with; to disrupt) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "amphitheatre",
+            "translation": "amfiteatr",
+            "definition": "an open round building for shows",
+            "example": "Studying 'amphitheatre' (an open round building for shows) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "spectator",
+            "translation": "tomoshabin",
+            "definition": "a person who watches an event",
+            "example": "Studying 'spectator' (a person who watches an event) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "column",
+            "translation": "ustun",
+            "definition": "a tall upright supporting post",
+            "example": "Studying 'column' (a tall upright supporting post) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "support",
+            "translation": "ko'tarib turmoq",
+            "definition": "to hold up; to bear weight",
+            "example": "Studying 'support' (to hold up; to bear weight) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "thatch",
+            "translation": "somon tom",
+            "definition": "a roof covering of dry straw",
+            "example": "Studying 'thatch' (a roof covering of dry straw) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "descend",
+            "translation": "pastga tushmoq",
+            "definition": "to come or go down",
+            "example": "Studying 'descend' (to come or go down) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "replica",
+            "translation": "aniq nusxa",
+            "definition": "an exact copy",
+            "example": "Studying 'replica' (an exact copy) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "modernisation",
+            "translation": "modernizatsiya",
+            "definition": "the act of making modern",
+            "example": "Studying 'modernisation' (the act of making modern) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "capacity",
+            "translation": "sig'im",
+            "definition": "the amount that can be held",
+            "example": "Studying 'capacity' (the amount that can be held) helps in reading comprehension.",
+            "partOfSpeech": "noun",
+            "topic": "Text 32 · The History of the Globe Theatre"
+      },
+      {
+            "word": "estimate",
+            "translation": "taxminan hisoblamoq",
+            "definition": "to judge an approximate amount",
+            "example": "Studying 'estimate' (to judge an approximate amount) helps in reading comprehension.",
+            "partOfSpeech": "verb",
+            "topic": "Text 32 · The History of the Globe Theatre"
       }
 ]
   }
