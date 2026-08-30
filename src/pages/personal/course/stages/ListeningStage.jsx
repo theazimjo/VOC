@@ -36,7 +36,10 @@ export default function ListeningStage({ unit, onComplete }) {
     setLoadingAudio(true);
     setAudioError(null);
     try {
-      const url = await synthesizeSpeech(listening.script);
+      // listening.voice lets a non-English course (e.g. Sicilian) request an
+      // Edge neural voice in its own language — undefined falls back to the
+      // API's English default, so existing English-only units are unaffected.
+      const url = await synthesizeSpeech(listening.script, listening.voice);
       setAudioUrl(url);
     } catch (err) {
       setAudioError(err.message || 'TTS failed');

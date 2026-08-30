@@ -1,4 +1,5 @@
 import { essential3000Months } from './essential3000';
+import { sicilianA1Months } from './sicilianCourse';
 
 // Ready-made courses offered from the navbar's "Add" modal. Each entry maps
 // a stable `id` (persisted on the personal pack as `courseId` once started)
@@ -28,6 +29,16 @@ export const AVAILABLE_COURSES = [
       // pack.courseId in CourseDashboard.jsx/CourseLesson.jsx) read
       // chapters straight from src/data/scienceCourse.js instead.
       months: [],
+    },
+  },
+  {
+    id: 'sicilian-a1',
+    icon: '🌋',
+    data: {
+      title: 'Sitsiliya tili A1',
+      level: 'Beginner',
+      description: "0 dan A1 darajasigacha sitsiliya tili kursi — har hafta so'z boyligi, grammatika, o'qish va tinglash birga o'tiladi.",
+      months: sicilianA1Months,
     },
   },
 ];
