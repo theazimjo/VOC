@@ -180,9 +180,9 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
         <div className="custom-alert-overlay" onClick={() => setShowDeleteConfirm(false)}>
           <div className="custom-alert-card" onClick={(e) => e.stopPropagation()}>
             <p className="custom-alert-message">{t('wordCard.deleteConfirm', { word: word.word })}</p>
-            <div className="custom-alert-actions-row">
+            <div className="custom-alert-actions-row has-destructive">
               <button
-                className="custom-alert-btn"
+                className="custom-alert-btn destructive"
                 onClick={() => { setShowDeleteConfirm(false); onDelete(word.id); }}
               >
                 {t('wordCard.delete')}

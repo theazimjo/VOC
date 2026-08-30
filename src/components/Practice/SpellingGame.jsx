@@ -20,6 +20,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
   const [input, setInput] = useState('');
   const [answered, setAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [answeredWord, setAnsweredWord] = useState('');
   const [scrambledList, setScrambledList] = useState([]);
   const [usedTileIndices, setUsedTileIndices] = useState([]);
   const [correctCount, setCorrectCount] = useState(0);
@@ -43,6 +44,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     setUsedTileIndices([]);
     setAnswered(false);
     setIsCorrect(false);
+    setAnsweredWord('');
     startTimeRef.current = Date.now();
   }, [currentIndex]);
 
@@ -122,6 +124,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     const correct = cleanSubmitted === cleanTarget || normalizeForComparison(cleanSubmitted) === normalizeForComparison(cleanTarget);
     setAnswered(true);
     setIsCorrect(correct);
+    setAnsweredWord(currentWord.word);
     if (onAnswer) onAnswer(currentWord, correct);
 
     const confidence = inferConfidenceFromSpeed(responseTime, correct);
@@ -218,6 +221,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
     setInput(currentWord.word.trim());
     setAnswered(true);
     setIsCorrect(false);
+    setAnsweredWord(currentWord.word);
     if (onAnswer) onAnswer(currentWord, false);
     onUpdateWord(currentWord.id, {
       isCorrect: false,
@@ -231,7 +235,18 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
 
   const handleNext = () => {
     if (currentIndex < words.length - 1) {
-      setCurrentIndex(prev => prev + 1);
+      const nextIndex = currentIndex + 1;
+      const nextWord = words[nextIndex];
+      setCurrentIndex(nextIndex);
+      setInput('');
+      setUsedTileIndices([]);
+      setAnswered(false);
+      setIsCorrect(false);
+      setAnsweredWord('');
+      if (nextWord) {
+        setScrambledList(shuffleArray(nextWord.word.trim().split('')));
+      }
+      startTimeRef.current = Date.now();
     } else {
       onComplete({ totalWords: words.length, correctCount, incorrectCount });
     }
@@ -358,7 +373,7 @@ export default function SpellingGame({ words, allWords, onComplete, onUpdateWord
               <div className="spelling-bottom-feedback">
                 {isCorrect ? <Check size={18} strokeWidth={2.5} /> : <X size={18} strokeWidth={2.5} />}
                 <span>
-                  {isCorrect ? t('practice.greatSentence').split('!')[0] + '!' : <> {t('practice.answerIs', { answer: '' })} <strong>{currentWord.word}</strong></>}
+                  {isCorrect ? t('practice.greatSentence').split('!')[0] + '!' : <> {t('practice.answerIs', { answer: '' })} <strong>{answeredWord || currentWord.word}</strong></>}
                 </span>
               </div>
               <button type="button" className="btn-spell-next" onClick={handleNext}>

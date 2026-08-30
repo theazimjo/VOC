@@ -9,7 +9,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
 import { useStreak } from '../../hooks/useStreak';
 import { migratePackWordsIfNeeded } from '../../utils/wordsMigration';
-import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACTICE_MODE_MIN_WORDS } from '../../utils/helpers';
+import { weightedSelectWords, filterWordsForMode, shuffleArray, speakWord, PRACTICE_MODE_MIN_WORDS, RECALL_ONLY_MODES } from '../../utils/helpers';
 import { playSound, triggerVibration } from '../../utils/feedback';
 import { computeClusterCalibration } from '../../utils/memoryEngine';
 import { saveReviewEvent } from '../../experiment/experimentDB';
@@ -47,15 +47,15 @@ export default function PracticePage({ embedded = false, initialSource = null, i
   const [sourceWords, setSourceWords] = useState([]);
   const [sourceLoaded, setSourceLoaded] = useState(false);
   const [wrongWords, setWrongWords] = useState([]);
-  const [customModal, setCustomModal] = useState({ show: false, type: 'alert', message: '', onConfirm: null, onCancel: null });
+  const [customModal, setCustomModal] = useState({ show: false, type: 'alert', message: '', onConfirm: null, onCancel: null, confirmText: '', cancelText: '' });
   const [progressPct, setProgressPct] = useState(0);
 
   const showAlert = (message, onClose = null) => {
-    setCustomModal({ show: true, type: 'alert', message, onConfirm: onClose, onCancel: null });
+    setCustomModal({ show: true, type: 'alert', message, onConfirm: onClose, onCancel: null, confirmText: '', cancelText: '' });
   };
 
-  const showConfirm = (message, onConfirm, onCancel = null) => {
-    setCustomModal({ show: true, type: 'confirm', message, onConfirm, onCancel });
+  const showConfirm = (message, onConfirm, onCancel = null, confirmText = '', cancelText = '') => {
+    setCustomModal({ show: true, type: 'confirm', message, onConfirm, onCancel, confirmText, cancelText });
   };
 
   const resolvedSourceType = urlSourceType === 'books' ? 'packs' : (urlSourceType || 'packs');
@@ -240,7 +240,17 @@ export default function PracticePage({ embedded = false, initialSource = null, i
     const pool = filterWordsForMode(sourceWords, mode);
     const minWords = PRACTICE_MODE_MIN_WORDS[mode] || 1;
     if (pool.length < minWords) {
-      showAlert(t('practice.modeNeedsMinWordsCount', { min: minWords, count: pool.length }));
+      if (RECALL_ONLY_MODES.has(mode) && sourceWords.length >= minWords) {
+        showConfirm(
+          t('practice.recallModeNeedFlashcards', { min: minWords, count: pool.length }),
+          () => handleStartPractice('flashcard'),
+          null,
+          t('practice.goToFlashcards'),
+          t('practice.gotIt')
+        );
+      } else {
+        showAlert(t('practice.modeNeedsMinWordsCount', { min: minWords, count: pool.length }));
+      }
       return;
     }
 
@@ -691,7 +701,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
                     if (customModal.onCancel) customModal.onCancel();
                   }}
                 >
-                  {t('practice.no')}
+                  {customModal.cancelText || t('practice.no')}
                 </button>
                 <button
                   className="custom-alert-btn"
@@ -701,7 +711,7 @@ export default function PracticePage({ embedded = false, initialSource = null, i
                     if (customModal.onConfirm) customModal.onConfirm();
                   }}
                 >
-                  {t('practice.yes')}
+                  {customModal.confirmText || t('practice.yes')}
                 </button>
               </div>
             ) : (

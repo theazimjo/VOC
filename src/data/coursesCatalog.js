@@ -34,6 +34,9 @@ export const AVAILABLE_COURSES = [
   {
     id: 'sicilian-a1',
     icon: '🌋',
+    // Personal users can self-start this one from the navbar's "Add" course
+    // picker (see src/data/coursePicker.js) — essential-3000/science above
+    // have no such flow yet and stay corp/admin-provisioned only.
     data: {
       title: 'Sitsiliya tili A1',
       level: 'Beginner',

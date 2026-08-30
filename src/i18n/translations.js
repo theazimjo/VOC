@@ -474,6 +474,8 @@ export const translations = {
       noWordsInPackFromLibrary: 'This pack has no words! Add some words from the Library first.',
       modeNeedsMinWords: 'This mode needs at least {min} words. Choose a different mode.',
       modeNeedsMinWordsCount: 'This mode needs at least {min} words (you currently have {count}).',
+      recallModeNeedFlashcards: 'To practice this mode, you need to have reviewed at least {min} words at least once in Flashcards (you currently have {count}). Start with Flashcards first!',
+      goToFlashcards: 'Start Flashcards 🃏',
     },
     grammar: {
       englishGrammar: 'English Grammar',
@@ -1409,6 +1411,8 @@ export const translations = {
       noWordsInPackFromLibrary: 'В этом наборе нет слов! Сначала добавьте слова из библиотеки.',
       modeNeedsMinWords: 'Для этого режима требуется минимум {min} слов(а). Выберите другой режим.',
       modeNeedsMinWordsCount: 'Для этого режима требуется минимум {min} слов(а) (у вас сейчас {count}).',
+      recallModeNeedFlashcards: 'Для практики в этом режиме нужно просмотреть хотя бы {min} слов(а) в Карточках (у вас пока {count}). Сначала повторите слова в Карточках!',
+      goToFlashcards: 'Перейти к Карточкам 🃏',
     },
     grammar: {
       englishGrammar: 'Английская грамматика',
@@ -2344,6 +2348,8 @@ export const translations = {
       noWordsInPackFromLibrary: "Bu to'plamda so'zlar yo'q! Avval Kutubxonadan so'zlar qo'shing.",
       modeNeedsMinWords: "Ushbu rejim uchun kamida {min} ta so'z kerak. Boshqa rejimni tanlang.",
       modeNeedsMinWordsCount: "Ushbu rejim uchun kamida {min} ta so'z kerak (sizda hozir {count} ta).",
+      recallModeNeedFlashcards: "Ushbu rejimda mashq qilish uchun kamida {min} ta so'zni Aqlli kartochkalarda ko'rib chiqqan bo'lishingiz kerak (sizda hozir {count} ta). Avval kartochkalarda tanishib chiqing!",
+      goToFlashcards: "Kartochkalarga o'tish 🃏",
     },
     grammar: {
       englishGrammar: 'Ingliz tili grammatikasi',

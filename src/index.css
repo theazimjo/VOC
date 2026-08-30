@@ -1003,33 +1003,33 @@ a:hover {
   --segmented-active-bg: rgba(255, 255, 255, 0.08);
 }
 
-/* ========== GLOBAL CUSTOM ALERT MODAL (iOS System Style Dialog) ========== */
+/* ========== GLOBAL CUSTOM ALERT MODAL (Modern iOS/Mac Style Dialog) ========== */
 .custom-alert-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 11000;
-  padding: 32px;
+  padding: 24px;
   animation: fadeIn 0.2s ease;
 }
 
 .custom-alert-card {
-  background: var(--bg-glass-strong);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  max-width: 290px;
+  border-radius: 18px;
+  max-width: 360px;
   width: 100%;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  animation: iosAlertPop 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: iosAlertPop 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.15);
 }
 
 /* Hide big circle icons in iOS alert style */
@@ -1038,30 +1038,36 @@ a:hover {
 }
 
 .custom-alert-message {
-  font-size: var(--font-sm);
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: var(--text-primary);
-  line-height: 1.45;
+  line-height: 1.5;
   margin: 0;
-  padding: 22px var(--space-lg);
+  padding: 24px 20px;
   border-bottom: 1px solid var(--border);
 }
 
 .custom-alert-btn {
   width: 100%;
-  padding: 14px var(--space-md);
+  padding: 14px 12px;
   font-weight: 600;
   border-radius: 0 !important;
   border: none;
   background: transparent !important;
-  color: #007aff !important; /* Standard iOS action color */
-  font-size: var(--font-md);
+  color: var(--accent-1, #007aff);
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.15s;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .custom-alert-btn:hover {
-  background: rgba(120, 120, 128, 0.1) !important;
+  background: var(--bg-tertiary, rgba(120, 120, 128, 0.12)) !important;
 }
 
 /* Confirm layout double action divider lines */
@@ -1072,11 +1078,25 @@ a:hover {
 
 .custom-alert-actions-row button {
   flex: 1;
+  min-width: 0;
 }
 
 .custom-alert-actions-row button:first-child {
   border-right: 1px solid var(--border);
-  color: #ef4444 !important; /* Destructive action is red */
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.custom-alert-actions-row button.destructive,
+.custom-alert-actions-row.has-destructive button:first-child {
+  color: #ef4444 !important;
+  font-weight: 600;
+}
+
+.custom-alert-btn.confirm-btn,
+.custom-alert-actions-row button:last-child {
+  color: var(--accent-1, #007aff);
+  font-weight: 700;
 }
 
 @keyframes iosAlertPop {

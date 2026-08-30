@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ref, push, update, get, remove, set, serverTimestamp } from 'firebase/database';
 import { ArrowLeft, MoreVertical, Search, X, RotateCcw } from 'lucide-react';
@@ -36,7 +36,6 @@ export default function LibraryPage() {
   // regular Library list.
   const packs = allPacks.filter((p) => !p.courseId);
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   // Tabs: 'library' (my packs) or 'market'
   const activeTab = searchParams.get('tab') === 'market' ? 'market' : 'library';
@@ -120,8 +119,7 @@ export default function LibraryPage() {
       'English': '🔤',
       'Fan': '🔬',
       'Salomatlik': '🩺',
-      'Til': '📚',
-      'Kurs': '🎯'
+      'Til': '📚'
     };
 
     const categories = ['all', ...Object.keys(counts).filter(c => c !== 'all')];
@@ -393,33 +391,6 @@ export default function LibraryPage() {
 
         playSound('correct');
         setJustInstalledIds(prev => [...prev, marketPack.id]);
-        return;
-      }
-
-      // A course pack (e.g. the Sicilian A1 curriculum) doesn't carry its
-      // vocabulary as a flat words array to bulk-upload — each unit's words
-      // live in coursesCatalog data instead and are seeded lazily by
-      // WordsStage as the learner reaches that unit. So we only create the
-      // pack shell here, tagged with courseId, and skip the bulk word write.
-      if (marketPack.courseId) {
-        const newCoursePackId = await addPack({
-          name: marketPack.name,
-          description: marketPack.description,
-          icon: marketPack.icon,
-          color: marketPack.color,
-          level: marketPack.level,
-          marketPackId: marketPack.id,
-          courseId: marketPack.courseId,
-          ...(marketPack.language ? { language: marketPack.language } : {})
-        });
-
-        playSound('correct');
-        setJustInstalledIds(prev => [...prev, marketPack.id]);
-        // Course packs have no page of their own in the regular Library list
-        // (see the `packs` filter above) — land the learner straight in the
-        // course dashboard instead of leaving them on a card with nowhere to
-        // click next.
-        if (newCoursePackId) navigate(`/course/${newCoursePackId}`);
         return;
       }
 
@@ -698,19 +669,12 @@ export default function LibraryPage() {
                         const missingWords = installedPack ? getMissingWords(pack, installedPack) : [];
                         const hasUpdate = isInstalled && installedPack && missingWords.length > 0;
 
-                        // A course pack (e.g. Sicilian A1) has no useful word-list
-                        // preview — once installed, both the card and its button
-                        // should take the learner straight back into the course
-                        // instead of opening the generic preview modal or sitting
-                        // on a dead-end "Installed" label.
-                        const courseEnterPath = pack.courseId && installedPack ? `/course/${installedPack.id}` : null;
-
                         return (
                           <div
                             className="market-card"
                             key={pack.id}
                             style={{ '--card-border-gradient': pack.color, cursor: 'pointer' }}
-                            onClick={() => courseEnterPath ? navigate(courseEnterPath) : setPreviewMarketPack(pack)}
+                            onClick={() => setPreviewMarketPack(pack)}
                           >
                             <div className="market-card-top">
                               <div className="market-card-header">
@@ -735,12 +699,10 @@ export default function LibraryPage() {
                               })()}
                               <button
                                 className={`market-install-btn${hasUpdate ? ' has-update' : ''}`}
-                                disabled={!courseEnterPath && (isInstalling || isUpdating || (isInstalled && !hasUpdate))}
+                                disabled={isInstalling || isUpdating || (isInstalled && !hasUpdate)}
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  if (courseEnterPath) {
-                                    navigate(courseEnterPath);
-                                  } else if (hasUpdate) {
+                                  if (hasUpdate) {
                                     handleUpdatePack(pack, installedPack, missingWords);
                                   } else {
                                     handleInstallPack(pack);
@@ -753,8 +715,6 @@ export default function LibraryPage() {
                                   <>{t('library.updating')}</>
                                 ) : hasUpdate ? (
                                   <>Update (+{missingWords.length}) 🔄</>
-                                ) : courseEnterPath ? (
-                                  <>Kursga kirish →</>
                                 ) : isInstalled ? (
                                   <>{t('library.installed')}</>
                                 ) : (

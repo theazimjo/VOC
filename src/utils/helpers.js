@@ -100,7 +100,7 @@ export function weightedSelectWords(words, count) {
 // word — the English form is never shown up front, only revealed after
 // answering. A word with zero prior reviews has no trace to draw on, so
 // picking it here is just an unwinnable guess, not practice.
-const RECALL_ONLY_MODES = new Set(['spelling', 'sentence']);
+export const RECALL_ONLY_MODES = new Set(['spelling', 'sentence']);
 
 /**
  * Narrow a word pool to what's actually appropriate for the chosen practice
@@ -118,7 +118,7 @@ const RECALL_ONLY_MODES = new Set(['spelling', 'sentence']);
 export function filterWordsForMode(words, mode) {
   if (!words || !RECALL_ONLY_MODES.has(mode)) return words;
   const seen = words.filter(w => (w.reviewCount || 0) > 0);
-  return seen.length > 0 ? seen : words;
+  return seen;
 }
 
 /**

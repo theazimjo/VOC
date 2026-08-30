@@ -64,17 +64,28 @@ describe('filterWordsForMode', () => {
     expect(filterWordsForMode(mixed, 'pronounce')).toEqual(mixed);
   });
 
-  it('drops never-reviewed words for spelling and sentence modes', () => {
-    const spelling = filterWordsForMode(mixed, 'spelling');
-    expect(spelling.map(w => w.id)).toEqual([2, 4]);
+  it('drops never-reviewed words for spelling and sentence modes when enough reviewed words exist', () => {
+    const pool = [
+      { id: 1, reviewCount: 0 },
+      { id: 2, reviewCount: 3 },
+      { id: 3, reviewCount: 0 },
+      { id: 4, reviewCount: 1 },
+      { id: 5, reviewCount: 2 },
+    ];
+    const spelling = filterWordsForMode(pool, 'spelling');
+    expect(spelling.map(w => w.id)).toEqual([2, 4, 5]);
 
-    const sentence = filterWordsForMode(mixed, 'sentence');
-    expect(sentence.map(w => w.id)).toEqual([2, 4]);
+    const sentence = filterWordsForMode(pool, 'sentence');
+    expect(sentence.map(w => w.id)).toEqual([2, 4, 5]);
   });
 
-  it('falls back to the full pool if nothing has ever been reviewed', () => {
-    const allNew = [{ id: 1, reviewCount: 0 }, { id: 2, reviewCount: 0 }];
-    expect(filterWordsForMode(allNew, 'spelling')).toEqual(allNew);
+  it('returns reviewed words for spelling and sentence modes', () => {
+    const pool = [
+      { id: 1, reviewCount: 0 },
+      { id: 2, reviewCount: 3 },
+      { id: 3, reviewCount: 0 },
+    ];
+    expect(filterWordsForMode(pool, 'spelling')).toEqual([{ id: 2, reviewCount: 3 }]);
   });
 });
 

@@ -7,10 +7,12 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
 import { useGroupMode } from '../../hooks/useGroupMode';
+import { usePacks } from '../../hooks/usePacks';
 import { ref, onValue, get, remove } from 'firebase/database';
 import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
 import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
+import { SELECTABLE_COURSES } from '../../data/coursePicker';
 import GlobalSearch from '../common/GlobalSearch';
 import './Navbar.css';
 
@@ -24,7 +26,9 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const dropdownRef = useRef(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const { appMode, membership } = useGroupMode();
+  const { packs, addPack } = usePacks();
   const [showSwitcher, setShowSwitcher] = useState(false);
   const [memberships, setMemberships] = useState([]);
   const [pinCode, setPinCode] = useState('');
@@ -32,8 +36,49 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   const [joinError, setJoinError] = useState('');
   const switcherRef = useRef(null);
 
-  // "Add" modal — opened from the Plus card in the group switcher (Join group by PIN)
+  // "Add" modal — opened from the Plus card in the group switcher. Offers
+  // both joining a group by PIN and starting a self-serve course (e.g.
+  // Sicilian A1) Duolingo-style; a started course then shows up as its own
+  // card in the switcher row, before the group cards.
   const [showAddModal, setShowAddModal] = useState(false);
+  const [startingCourseId, setStartingCourseId] = useState(null);
+
+  const myCourses = packs.filter((p) => p.courseId);
+  // Whichever course pack the URL is currently inside — drives the switcher
+  // button's own icon/label the same way group mode drives it for a group,
+  // instead of it staying stuck on "Personal" while you're in a course.
+  const activeCourse = myCourses.find((c) => location.pathname.startsWith(`/course/${c.id}`));
+  const selectableCourses = SELECTABLE_COURSES.filter(
+    (c) => !myCourses.some((p) => p.courseId === c.id)
+  );
+
+  const handleStartCourse = async (course) => {
+    if (!user || startingCourseId) return;
+    setStartingCourseId(course.id);
+    try {
+      const newPackId = await addPack({
+        name: course.title,
+        description: course.description || '',
+        icon: course.icon,
+        color: course.color || 'var(--accent-gradient)',
+        level: course.level || 'beginner',
+        courseId: course.id,
+        ...(course.language ? { language: course.language } : {}),
+      });
+      setShowAddModal(false);
+      setShowSwitcher(false);
+      if (newPackId) navigate(`/course/${newPackId}`);
+    } catch (err) {
+      console.error('Failed to start course:', err);
+    } finally {
+      setStartingCourseId(null);
+    }
+  };
+
+  const handleOpenCourse = (packId) => {
+    setShowSwitcher(false);
+    navigate(`/course/${packId}`);
+  };
 
   // A membership is either a corp/center group (centerId) or an independent
   // teacher's group (teacherUid, no centerId) — see joinGroupAsUser vs
@@ -244,7 +289,24 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
           onClick={() => setShowSwitcher(!showSwitcher)}
           className="navbar-group-switcher-btn"
         >
-          {appMode === 'individual' ? (
+          {activeCourse ? (
+            <div style={{
+              background: 'var(--accent-1-dim)',
+              width: '24px',
+              height: '24px',
+              minWidth: '24px',
+              minHeight: '24px',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.75rem',
+              flexShrink: 0,
+              lineHeight: 1
+            }}>
+              {activeCourse.icon}
+            </div>
+          ) : appMode === 'individual' ? (
             <div style={{
               background: 'rgba(59, 130, 246, 0.15)',
               color: '#3b82f6',
@@ -279,7 +341,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
             </div>
           )}
           <span>
-            {appMode === 'individual' ? t('nav.personal') : (membership?.groupName || t('nav.group'))}
+            {activeCourse ? activeCourse.name : (appMode === 'individual' ? t('nav.personal') : (membership?.groupName || t('nav.group')))}
           </span>
           <ChevronDown size={12} style={{ color: 'var(--text-secondary)', transform: showSwitcher ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
         </button>
@@ -302,13 +364,44 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: appMode === 'individual' ? '2px solid var(--accent-1)' : '1px solid var(--border)',
-                  boxShadow: appMode === 'individual' ? '0 0 10px var(--accent-1-dim)' : 'none'
+                  border: appMode === 'individual' && !activeCourse ? '2px solid var(--accent-1)' : '1px solid var(--border)',
+                  boxShadow: appMode === 'individual' && !activeCourse ? '0 0 10px var(--accent-1-dim)' : 'none'
                 }}>
                   <User size={18} />
                 </div>
-                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: appMode === 'individual' ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
+                <span style={{ fontSize: '0.72rem', color: appMode === 'individual' && !activeCourse ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: appMode === 'individual' && !activeCourse ? 700 : 500, textAlign: 'center' }}>{t('nav.personal')}</span>
               </div>
+
+              {/* Course Cards — self-started courses (e.g. Sicilian A1), shown before the group cards */}
+              {myCourses.map((c) => {
+                const isActive = location.pathname.startsWith(`/course/${c.id}`);
+                return (
+                  <div
+                    key={c.id}
+                    onClick={() => !isActive && handleOpenCourse(c.id)}
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer', width: '60px' }}
+                  >
+                    <div style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: isActive ? 'var(--accent-1)' : 'var(--bg-tertiary)',
+                      color: isActive ? '#fff' : 'var(--accent-1)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '1.1rem',
+                      border: isActive ? '2px solid var(--accent-1)' : '1px solid var(--border)',
+                      boxShadow: isActive ? '0 0 10px var(--accent-1-dim)' : 'none'
+                    }}>
+                      {c.icon}
+                    </div>
+                    <span style={{ fontSize: '0.72rem', color: isActive ? 'var(--text-primary)' : 'var(--text-secondary)', fontWeight: isActive ? 700 : 500, textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%' }}>
+                      {c.name}
+                    </span>
+                  </div>
+                );
+              })}
 
               {/* Groups Cards */}
               {memberships.map((g) => {
@@ -479,15 +572,56 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
               >
                 <div className="modal-header">
-                  <h2>{t('profile.addTabJoinGroup')}</h2>
+                  <h2>{t('nav.add')}</h2>
                   <button className="btn btn-ghost btn-icon" onClick={() => setShowAddModal(false)} aria-label="Close">
                     <X size={18} />
                   </button>
                 </div>
 
                 <div className="modal-body">
+                  {selectableCourses.length > 0 && (
+                    <div style={{ marginBottom: '1.25rem' }}>
+                      <div className="navbar-join-form-label">Kurs boshlash</div>
+                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '8px' }}>
+                        {selectableCourses.map((c) => (
+                          <div
+                            key={c.id}
+                            onClick={() => handleStartCourse(c)}
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              alignItems: 'center',
+                              gap: '4px',
+                              cursor: startingCourseId ? 'wait' : 'pointer',
+                              width: '72px',
+                              opacity: startingCourseId && startingCourseId !== c.id ? 0.5 : 1,
+                            }}
+                          >
+                            <div style={{
+                              width: '52px',
+                              height: '52px',
+                              borderRadius: '14px',
+                              background: c.color || 'var(--accent-1-dim)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '1.4rem',
+                              border: '1px solid var(--border)',
+                            }}>
+                              {startingCourseId === c.id ? '…' : c.icon}
+                            </div>
+                            <span style={{ fontSize: '0.72rem', color: 'var(--text-primary)', fontWeight: 600, textAlign: 'center' }}>
+                              {c.title}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="navbar-join-form-label">{t('profile.addTabJoinGroup')}</div>
                   <form onSubmit={handleJoinNewGroup} className="navbar-join-form">
-                    <div className="navbar-join-form-label">{t('profile.pinLabel')}</div>
+                    <div className="navbar-join-form-label" style={{ marginTop: 0 }}>{t('profile.pinLabel')}</div>
                     <div className="navbar-join-form-row">
                       <input
                         type="text"

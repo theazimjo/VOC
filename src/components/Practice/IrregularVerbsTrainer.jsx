@@ -402,6 +402,7 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
         wrongWords: wrongVerbs
       });
     } else {
+      setChecked(false);
       setCurrentIndex(prev => prev + 1);
     }
   };

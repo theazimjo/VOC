@@ -15127,24 +15127,5 @@ export const marketPacks = [
       { word: "menu", translation: "kamroq", definition: "Miqdor yoki darajaning kamligini bildiruvchi ravish.", example: "Aju menu tempu ora.", partOfSpeech: "adverb", topic: "Bog'lovchilar va ravishlar" },
       { word: "tantu", translation: "juda, ko'p", definition: "Katta miqdor yoki darajani bildiruvchi ravish.", example: "Ti vogghiu tantu beni.", partOfSpeech: "adverb", topic: "Bog'lovchilar va ravishlar" }
     ]
-  },
-  {
-    id: "sicilian-a1-course",
-    name: "Sitsiliya tili A1 — 0 dan kurs",
-    description: "0 dan A1 darajasigacha to'liq kurs: har hafta yangi so'zlar, grammatika, o'qish va tinglash birga o'tiladi. Oddiy so'z to'plami emas — bosqichma-bosqich dars dasturi.",
-    icon: "🎯",
-    color: "linear-gradient(135deg, #7C3AED 0%, #B7472A 100%)",
-    level: "beginner",
-    category: "Kurs",
-    language: "it-IT",
-    courseId: "sicilian-a1",
-    words: [
-      { word: "Bongiornu", translation: "salom, xayrli kun", definition: "Kun davomida uchrashganda aytiladigan salomlashish so'zi.", example: "Bongiornu, comu stai?", partOfSpeech: "interjection", topic: "1-hafta: Salomlashish va olmoshlar" },
-      { word: "Grazii", translation: "rahmat", definition: "Minnatdorchilik bildirish uchun ishlatiladigan so'z.", example: "Grazii assai pi tuttu.", partOfSpeech: "interjection", topic: "1-hafta: Salomlashish va olmoshlar" },
-      { word: "iu", translation: "men", definition: "Gapiruvchi shaxsni bildiruvchi olmosh.", example: "Iu sugnu sicilianu.", partOfSpeech: "pronoun", topic: "1-hafta: Salomlashish va olmoshlar" },
-      { word: "tu", translation: "sen", definition: "Suhbatdoshni bildiruvchi olmosh.", example: "Tu si simpaticu.", partOfSpeech: "pronoun", topic: "1-hafta: Salomlashish va olmoshlar" },
-      { word: "nomu", translation: "ism", definition: "Odamning ismini bildiruvchi so'z.", example: "Chi nomu hai?", partOfSpeech: "noun", topic: "1-hafta: Salomlashish va olmoshlar" },
-      { word: "città", translation: "shahar", definition: "Ko'p odamlar yashaydigan katta aholi punkti.", example: "Palermu è 'na città bedda.", partOfSpeech: "noun", topic: "1-hafta: Salomlashish va olmoshlar" }
-    ]
   }
 ];
