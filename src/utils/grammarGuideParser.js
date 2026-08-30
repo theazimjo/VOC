@@ -2,7 +2,7 @@
 // indented examples, notes, numbered steps, markdown tables) into a flat
 // list of typed blocks that GrammarGuide.jsx can render without re-parsing.
 
-function splitBoldSegments(text) {
+export function splitBoldSegments(text) {
   const segments = [];
   const re = /\*\*(.+?)\*\*/g;
   let lastIndex = 0;

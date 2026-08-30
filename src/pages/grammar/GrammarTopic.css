@@ -870,6 +870,35 @@
   opacity: 0.3;
 }
 
+.option-left-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.option-speak-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+  font-size: 0.95rem;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  opacity: 0.55;
+  transition: opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.option-speak-btn:hover {
+  opacity: 1;
+  background: var(--bg-tertiary);
+}
+
 .option-badge-icon {
   font-size: 1.1rem;
   font-weight: 700;
@@ -1144,6 +1173,12 @@
   background: var(--error-dim);
   border: 1px solid var(--error);
   color: var(--error);
+}
+
+.scrambled-result-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .scrambled-explanation {

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { grammarData } from '../../data/grammarData';
 import { russianGrammarData } from '../../data/russianGrammarData';
+import { sicilianGrammarData } from '../../data/sicilianGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { getExerciseType } from '../../utils/grammarHelpers';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -16,7 +17,8 @@ export default function GrammarExercises() {
   const { stats: grammarStats, loading } = useGrammarStats();
 
   const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
-                russianGrammarData[level]?.topics?.find((t) => t.id === topicId);
+                russianGrammarData[level]?.topics?.find((t) => t.id === topicId) ||
+                sicilianGrammarData[level]?.topics?.find((t) => t.id === topicId);
 
   useEffect(() => {
     window.scrollTo(0, 0);

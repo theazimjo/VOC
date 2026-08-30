@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { grammarData } from '../../data/grammarData';
+import { russianGrammarData } from '../../data/russianGrammarData';
+import { sicilianGrammarData } from '../../data/sicilianGrammarData';
 import { russianGuidesData } from '../../data/russianGuidesData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -30,11 +32,25 @@ const headerVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
 };
 
+// Each grammar track is a fully separate curriculum (own topic ids, own
+// language of instruction) so it must never be blended with another track's
+// topics or progress stats. Topic ids are namespaced per track (ru-/scn-,
+// English has no prefix) — that prefix is also how stats below are isolated.
+const GRAMMAR_TRACKS = {
+  en: { data: grammarData, prefix: null, label: '🇬🇧 English', icon: '🇬🇧' },
+  ru: { data: russianGrammarData, prefix: 'ru-', label: '🇷🇺 Rus tili', icon: '🇷🇺' },
+  scn: { data: sicilianGrammarData, prefix: 'scn-', label: '🌋 Sitsiliya', icon: '🌋' },
+};
+
 export default function GrammarPage() {
   const navigate = useNavigate();
   const { t, language: appLang } = useLanguage();
   const [activeLevel, setActiveLevelState] = useState(() => {
     return localStorage.getItem('grammar_level') || 'beginner';
+  });
+  const [activeTrack, setActiveTrackState] = useState(() => {
+    const saved = localStorage.getItem('grammar_track');
+    return GRAMMAR_TRACKS[saved] ? saved : 'en';
   });
   const { stats: grammarStats } = useGrammarStats();
 
@@ -43,10 +59,25 @@ export default function GrammarPage() {
     localStorage.setItem('grammar_level', level);
   };
 
-  const topics = grammarData[activeLevel]?.topics ?? [];
+  const setActiveTrack = (track) => {
+    setActiveTrackState(track);
+    localStorage.setItem('grammar_track', track);
+  };
+
+  const topics = GRAMMAR_TRACKS[activeTrack].data[activeLevel]?.topics ?? [];
+  const trackPrefix = GRAMMAR_TRACKS[activeTrack].prefix;
+
+  // Only count stats that belong to the currently selected track — a topicId's
+  // prefix (or lack of one) tells us which track it came from, so English
+  // progress never bleeds into Sicilian's numbers or vice versa.
+  const belongsToActiveTrack = (topicId) => {
+    if (topicId.startsWith('de-')) return false;
+    if (trackPrefix) return topicId.startsWith(trackPrefix);
+    return !topicId.startsWith('ru-') && !topicId.startsWith('scn-');
+  };
 
   const completedTopicsOfLevel = Object.entries(grammarStats?.topics || {})
-    .filter(([topicId, t]) => t.level === activeLevel && !topicId.startsWith('de-'))
+    .filter(([topicId, t]) => t.level === activeLevel && belongsToActiveTrack(topicId))
     .map(([_, t]) => t);
 
   let completedExercisesCount = 0;
@@ -121,6 +152,33 @@ export default function GrammarPage() {
             <span className="user-stat-label">{t('grammar.averageScore')}</span>
           </div>
         </div>
+      </motion.div>
+
+      {/* Track Tabs (which grammar curriculum — never blended together) */}
+      <motion.div
+        className="grammar-level-tabs grammar-track-tabs"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, delay: 0.1 }}
+      >
+        {Object.entries(GRAMMAR_TRACKS).map(([id, track]) => (
+          <button
+            key={id}
+            className={['grammar-level-tab', activeTrack === id ? 'active' : ''].filter(Boolean).join(' ')}
+            onClick={() => setActiveTrack(id)}
+            title={track.label}
+          >
+            {activeTrack === id && (
+              <motion.div
+                className="grammar-tab-pill"
+                layoutId="grammarTrackPill"
+                transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+              />
+            )}
+            <span className="tab-emoji">{track.icon}</span>
+            <span className="tab-label-text">{track.label.replace(/^\S+\s/, '')}</span>
+          </button>
+        ))}
       </motion.div>
 
       {/* Level Tabs (iOS Segmented Control) */}

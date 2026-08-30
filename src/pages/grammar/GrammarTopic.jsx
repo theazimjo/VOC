@@ -2,10 +2,12 @@ import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
 import { russianGrammarData } from '../../data/russianGrammarData';
+import { sicilianGrammarData } from '../../data/sicilianGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { getQuestionsForExercise, getExerciseType } from '../../utils/grammarHelpers';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { getFormattedExplanation } from '../../utils/grammarExplanationTranslator';
+import { speakWord } from '../../utils/helpers';
 import './GrammarTopic.css';
 
 // ─── AUDIO + HAPTIC HELPERS ─────────────────────────────────────────────────
@@ -104,7 +106,7 @@ function ExitModal({ onConfirm, onCancel }) {
 }
 
 // ─── SCRAMBLED SENTENCE EXERCISE ────────────────────────────────────────────
-function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz' }) {
+function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz', lang = 'en-US' }) {
   const { t } = useLanguage();
   const [selected, setSelected] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
@@ -183,7 +185,20 @@ function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz' }) {
       {/* Result feedback */}
       {isCorrect !== null && (
         <div className={`scrambled-result ${isCorrect ? 'correct' : 'wrong'}`}>
-          {isCorrect ? t('grammar.correctBadge') : t('grammar.wrongBadge', { answer: question.answer })}
+          <span className="scrambled-result-row">
+            {isCorrect ? t('grammar.correctBadge') : t('grammar.wrongBadge', { answer: question.answer })}
+            {question.answer && (
+              <button
+                type="button"
+                className="option-speak-btn"
+                onClick={() => speakWord(question.answer, lang)}
+                aria-label="Listen"
+                title="Listen"
+              >
+                🔊
+              </button>
+            )}
+          </span>
           {question.explanation && <p className="scrambled-explanation">{getFormattedExplanation(question.explanation, guideLang)}</p>}
         </div>
       )}
@@ -210,8 +225,14 @@ export default function GrammarTopic() {
     ? manualGuideLang
     : (appLang === 'ru' ? 'ru' : 'uz');
 
+  // Which language a question's Sicilian/Russian words should be read aloud
+  // in — inferred from the topic id's track prefix, same convention GrammarPage
+  // and GrammarGuide use to keep each track's own language of instruction.
+  const speakLang = topicId.startsWith('scn-') ? 'it-IT' : topicId.startsWith('ru-') ? 'ru-RU' : 'en-US';
+
   const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
-                russianGrammarData[level]?.topics?.find((t) => t.id === topicId);
+                russianGrammarData[level]?.topics?.find((t) => t.id === topicId) ||
+                sicilianGrammarData[level]?.topics?.find((t) => t.id === topicId);
 
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -482,6 +503,7 @@ export default function GrammarTopic() {
             question={question}
             answered={answered}
             guideLang={activeGuideLang}
+            lang={speakLang}
             onAnswer={(isCorrect) => {
               setAnswered(true);
               if (isCorrect) { playCorrectSound(); vibrate([50, 30, 50]); setScore(s => s + 1); }
@@ -516,7 +538,19 @@ export default function GrammarTopic() {
                   onClick={() => handleSelect(idx)}
                   disabled={answered}
                 >
-                  <span className="option-text-only">{opt}</span>
+                  <span className="option-left-group">
+                    <span className="option-text-only">{opt}</span>
+                    <span
+                      className="option-speak-btn"
+                      role="button"
+                      tabIndex={-1}
+                      aria-label="Listen"
+                      title="Listen"
+                      onClick={(e) => { e.stopPropagation(); speakWord(opt, speakLang); }}
+                    >
+                      🔊
+                    </span>
+                  </span>
                   {answered && idx === shuffled.correct && (
                     <span className="option-badge-icon correct-badge">✓</span>
                   )}

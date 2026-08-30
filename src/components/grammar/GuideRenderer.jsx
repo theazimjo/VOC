@@ -2,6 +2,9 @@
 // Shared by the standalone grammar guide page (GrammarGuide.jsx) and the
 // course lesson's embedded Grammar stage, so both stay visually consistent
 // and a parser/renderer fix only has to happen in one place.
+import { splitBoldSegments } from '../../utils/grammarGuideParser';
+import { speakWord } from '../../utils/helpers';
+
 export function Segments({ segments }) {
   return segments.map((seg, i) =>
     seg.bold ? (
@@ -12,7 +15,7 @@ export function Segments({ segments }) {
   );
 }
 
-export function GuideBlocks({ blocks }) {
+export function GuideBlocks({ blocks, lang = 'en-US' }) {
   return blocks.map((block, idx) => {
     switch (block.type) {
       case 'titleSub':
@@ -103,15 +106,31 @@ export function GuideBlocks({ blocks }) {
           </div>
         );
 
-      case 'example':
+      case 'example': {
+        // The bolded run inside an example line is always the target-language
+        // sentence (the Uzbek translation follows unbolded) — that's what a
+        // listener wants read aloud, not the translation.
+        const speakText = block.segments.filter((s) => s.bold).map((s) => s.text).join(' ').trim();
         return (
           <div key={idx} className="gg-example">
             <span className="gg-example-mark">›</span>
             <p className="gg-example-text">
               <Segments segments={block.segments} />
             </p>
+            {speakText && (
+              <button
+                type="button"
+                className="gg-example-speak"
+                onClick={() => speakWord(speakText, lang)}
+                aria-label="Listen"
+                title="Listen"
+              >
+                🔊
+              </button>
+            )}
           </div>
         );
+      }
 
       case 'bullet':
         return (
@@ -138,7 +157,7 @@ export function GuideBlocks({ blocks }) {
                 {block.rows.map((row, ri) => (
                   <tr key={ri}>
                     {row.map((cell, ci) => (
-                      <td key={ci}>{cell}</td>
+                      <td key={ci}><Segments segments={splitBoldSegments(cell)} /></td>
                     ))}
                   </tr>
                 ))}
