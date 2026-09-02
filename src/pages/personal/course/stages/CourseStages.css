@@ -271,6 +271,16 @@
   transition: transform 0.08s ease, border-color var(--transition-fast), background var(--transition-fast);
 }
 
+.mini-quiz-option span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.mini-quiz-option svg {
+  flex-shrink: 0;
+}
+
 .mini-quiz-option:not(:disabled):hover {
   border-color: var(--course-purple);
   background: var(--bg-glass-hover);
@@ -521,4 +531,87 @@
   align-items: center;
   gap: 6px;
   color: var(--error);
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .course-stage-row {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .course-stage-row-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .course-stage-row-label {
+    font-size: var(--font-xs);
+  }
+
+  .mini-quiz-card {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .mini-quiz-question {
+    font-size: var(--font-sm);
+  }
+
+  .mini-quiz-option {
+    padding: 12px 14px;
+    font-size: var(--font-xs);
+  }
+
+  .mini-quiz-result {
+    padding: 32px 14px;
+  }
+
+  .mini-quiz-result-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .mini-quiz-result-score {
+    font-size: var(--font-2xl);
+  }
+
+  .course-reading-page {
+    padding: 16px;
+    min-height: 180px;
+    gap: 10px;
+  }
+
+  .course-reading-heading {
+    font-size: var(--font-md);
+  }
+
+  .course-reading-p {
+    font-size: var(--font-sm);
+    line-height: 1.55;
+  }
+
+  .course-reading-nav {
+    gap: 8px;
+  }
+
+  .course-reading-nav .course-lesson-nav-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .course-listening-player {
+    padding: 28px 14px;
+  }
+
+  .course-listening-play-btn {
+    width: 68px;
+    height: 68px;
+  }
+
+  .course-stage-primary-btn {
+    width: 100%;
+    text-align: center;
+    padding: 13px 16px;
+  }
 }

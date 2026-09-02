@@ -101,11 +101,17 @@
   color: var(--text-primary);
 }
 
+.course-progress-info {
+  flex: 1;
+  min-width: 0;
+  z-index: 1;
+}
+
 .course-progress-title {
   font-size: var(--font-md);
   font-weight: 800;
   color: var(--text-primary);
-  z-index: 1;
+  overflow-wrap: break-word;
 }
 
 .course-progress-sub {
@@ -113,13 +119,13 @@
   color: var(--text-secondary);
   font-weight: 600;
   margin-top: 2px;
-  z-index: 1;
 }
 
 .course-continue-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   width: 100%;
   padding: 16px 20px;
   margin-bottom: 22px;
@@ -133,6 +139,17 @@
   cursor: pointer;
   box-shadow: 0 5px 0 var(--course-cta-shadow), 0 8px 18px rgba(99, 102, 241, 0.25);
   transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+}
+
+.course-continue-btn span {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+.course-continue-btn svg {
+  flex-shrink: 0;
 }
 
 .course-continue-btn:hover {
@@ -292,20 +309,23 @@
 .course-lesson-word-row {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 4px 12px;
 }
 
 .course-lesson-word {
   font-size: var(--font-md);
   font-weight: 700;
   color: var(--text-primary);
+  overflow-wrap: break-word;
 }
 
 .course-lesson-translation {
   font-size: var(--font-sm);
   color: var(--accent-1);
   font-weight: 600;
+  margin-left: auto;
+  overflow-wrap: break-word;
 }
 
 .course-lesson-definition {
@@ -428,4 +448,64 @@
 
 .course-manage-link:hover {
   text-decoration: underline;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .course-progress-card {
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .course-progress-ring {
+    width: 52px;
+    height: 52px;
+  }
+
+  .course-progress-title {
+    font-size: var(--font-sm);
+  }
+
+  .course-progress-sub {
+    font-size: var(--font-xs);
+  }
+
+  .course-continue-btn {
+    padding: 14px 16px;
+    font-size: var(--font-xs);
+  }
+
+  .course-unit-row {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .course-unit-check {
+    width: 30px;
+    height: 30px;
+  }
+
+  .course-lesson-title {
+    font-size: var(--font-lg);
+  }
+
+  .course-lesson-word-card {
+    padding: 12px;
+  }
+
+  .course-lesson-nav {
+    gap: 8px;
+  }
+
+  .course-lesson-nav-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 11px 10px;
+    font-size: var(--font-xs);
+  }
+
+  .course-lesson-practice-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
