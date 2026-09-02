@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Volume2, PenLine } from 'lucide-react';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
@@ -65,18 +65,6 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
     revealElapsedRef.current = 4;
   }, [currentIndex]);
 
-  // Space to flip
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.code === 'Space') {
-        e.preventDefault();
-        setIsFlipped(prev => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
   const handleCardClick = () => {
     if (!isFlipped) revealElapsedRef.current = (Date.now() - cardStartRef.current) / 1000;
     setIsFlipped(prev => !prev);
@@ -92,8 +80,8 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
     setCurrentIndex(0);
   }, [words]);
 
-  const handleJudge = (isCorrect) => {
-    if (answered) return;
+  const handleJudge = useCallback((isCorrect) => {
+    if (answered || !currentWord) return;
     setAnswered(true);
 
     if (isCorrect) {
@@ -105,31 +93,73 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
     if (onAnswer) onAnswer(currentWord, isCorrect);
 
     const confidence = inferConfidenceFromSpeed(revealElapsedRef.current, isCorrect);
-    onUpdateWord(currentWord.id, {
-      isCorrect,
-      confidence,
-      responseTime: revealElapsedRef.current,
-      retrievalType: 'passive_recall',
-    });
-
-    const newResults = {
-      correctCount: results.correctCount + (isCorrect ? 1 : 0),
-      incorrectCount: results.incorrectCount + (isCorrect ? 0 : 1)
-    };
-    setResults(newResults);
-
-    if (currentIndex < words.length - 1) {
-      setIsFlipped(false);
-      setTimeout(() => setCurrentIndex(prev => prev + 1), 180);
-    } else {
-      onComplete({
-        totalWords: words.length,
-        ...newResults,
-        knownWords: knownWordsRef.current,
-        reviewWords: reviewWordsRef.current,
+    if (onUpdateWord) {
+      onUpdateWord(currentWord.id, {
+        isCorrect,
+        confidence,
+        responseTime: revealElapsedRef.current,
+        retrievalType: 'passive_recall',
       });
     }
-  };
+
+    setResults(prev => {
+      const newResults = {
+        correctCount: prev.correctCount + (isCorrect ? 1 : 0),
+        incorrectCount: prev.incorrectCount + (isCorrect ? 0 : 1)
+      };
+
+      if (currentIndex < words.length - 1) {
+        setIsFlipped(false);
+        setTimeout(() => setCurrentIndex(c => c + 1), 180);
+      } else {
+        if (onComplete) {
+          onComplete({
+            totalWords: words.length,
+            ...newResults,
+            knownWords: knownWordsRef.current,
+            reviewWords: reviewWordsRef.current,
+          });
+        }
+      }
+      return newResults;
+    });
+  }, [answered, currentWord, currentIndex, words.length, onAnswer, onUpdateWord, onComplete]);
+
+  // Keyboard navigation on PC: Space/Enter/Arrows to flip; 1 (Don't Know) & 2 (Know) to judge
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+      if (answered) return;
+
+      const key = e.key;
+      const code = e.code;
+
+      if (code === 'Space' || key === 'Enter' || key === 'ArrowUp' || key === 'ArrowDown') {
+        e.preventDefault();
+        if (!isFlipped) {
+          revealElapsedRef.current = (Date.now() - cardStartRef.current) / 1000;
+        }
+        setIsFlipped(prev => !prev);
+      } else if (key === '1' || code === 'Digit1' || code === 'Numpad1') {
+        e.preventDefault();
+        if (!isFlipped) {
+          revealElapsedRef.current = (Date.now() - cardStartRef.current) / 1000;
+          setIsFlipped(true);
+        }
+        handleJudge(false);
+      } else if (key === '2' || code === 'Digit2' || code === 'Numpad2') {
+        e.preventDefault();
+        if (!isFlipped) {
+          revealElapsedRef.current = (Date.now() - cardStartRef.current) / 1000;
+          setIsFlipped(true);
+        }
+        handleJudge(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFlipped, answered, handleJudge]);
 
   if (!currentWord) return null;
 
@@ -186,10 +216,7 @@ export default function Flashcard({ words, onComplete, onUpdateWord, onAnswer, o
         </motion.div>
       </AnimatePresence>
 
-      {/* Judgement buttons — visible only when flipped. Confidence is
-          auto-inferred from response speed (same as Memory Lab), not
-          manually self-rated, so this is a binary choice like everywhere
-          else in the app. */}
+      {/* Judgement buttons — visible only when flipped. Keyboard shortcuts 1 & 2 */}
       <div className={`flashcard-actions ${isFlipped ? '' : 'hidden'}`}>
         <button className="flashcard-rating-btn again" onClick={() => handleJudge(false)} disabled={answered}>
           <span className="rating-label">{t('practice.dontKnow')}</span>
