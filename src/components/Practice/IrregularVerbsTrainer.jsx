@@ -83,6 +83,35 @@ export default function IrregularVerbsTrainer({
   const [typeCorrect, setTypeCorrect] = useState(false);
   const typeRef = useRef(null);
 
+  // ── Global keyboard handler (Enter = next/submit; Space = submit) ─────────────
+  useEffect(() => {
+    if (subStep !== 'practice') return;
+
+    const onKey = (e) => {
+      // Don't intercept when an input is focused (those have their own handlers)
+      const tag = document.activeElement?.tagName;
+      const isInputFocused = tag === 'INPUT' || tag === 'TEXTAREA';
+
+      if (e.key === 'Enter') {
+        if (checked) {
+          e.preventDefault();
+          handleNext();
+          return;
+        }
+        // Submit for non-input game types when Enter is pressed and nothing focused
+        if (!isInputFocused) {
+          if (qType === QT_TABLE)  { e.preventDefault(); handleTableSubmit(); }
+          if (qType === QT_TYPE)   { e.preventDefault(); handleTypeSubmit(); }
+          if (qType === QT_ORDER)  { e.preventDefault(); handleOrderReveal(); }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subStep, checked, qType, currentIndex, sessionVerbs, tableAnswers, tablePrefill, typeAnswer, typeMask, correctCount, incorrectCount, wrongVerbs]);
+
   // ── Progress reporting ────────────────────────────────────────────────────────
   useEffect(() => {
     if (!onProgress) return;
@@ -199,7 +228,7 @@ export default function IrregularVerbsTrainer({
       setTimeout(() => {
         if (prefill === 0 || prefill === 2 || prefill === 3) v1Ref.current?.focus();
         else if (prefill === 1) v2Ref.current?.focus();
-      }, 60);
+      }, 300);
 
     } else if (chosen === QT_ORDER) {
       setOrderStep(0);
@@ -236,7 +265,7 @@ export default function IrregularVerbsTrainer({
       setTypeMask(masks[Math.floor(Math.random() * masks.length)]);
       setTypeAnswer('');
       setTypeCorrect(false);
-      setTimeout(() => typeRef.current?.focus(), 80);
+      setTimeout(() => typeRef.current?.focus(), 300);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [subStep, currentVerb, currentIndex]);
@@ -407,11 +436,11 @@ export default function IrregularVerbsTrainer({
     : 0;
 
   const qTypeLabel = {
-    [QT_TABLE]:    t('practice.fillRemaining')    || 'Fill in the verb forms',
-    [QT_ORDER]:    t('practice.tapInOrder')        || 'Tap in order: V1 → V2 → V3',
-    [QT_SENTENCE]: t('practice.chooseMatchingVerb')|| 'Choose the correct form',
-    [QT_CHOICE]:   t('practice.chooseCorrectVerb') || 'Choose the correct verb',
-    [QT_TYPE]:     t('practice.typeTheMissing')    || 'Type the missing form',
+    [QT_TABLE]:    'Fill in the verb forms',
+    [QT_ORDER]:    'Tap in order: V1 → V2 → V3',
+    [QT_SENTENCE]: 'Choose the correct form',
+    [QT_CHOICE]:   'Choose the correct verb',
+    [QT_TYPE]:     'Type the missing form',
   };
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -526,19 +555,6 @@ export default function IrregularVerbsTrainer({
       {/* ───────────────────────────────────────────────────────────────────── */}
       {subStep === 'practice' && currentVerb && (
         <div className="practice-phase">
-
-          {/* Progress bar */}
-          <div className="trainer-progress-wrap">
-            <div className="trainer-progress-bar">
-              <div
-                className="trainer-progress-fill"
-                style={{ width: `${progressPct}%` }}
-              />
-            </div>
-            <span className="trainer-progress-label">
-              {currentIndex + 1} / {sessionVerbs.length}
-            </span>
-          </div>
 
           {/* Mode pill */}
           <div className="trainer-mode-pill">

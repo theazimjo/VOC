@@ -46,3 +46,25 @@
   justify-content: center;
   padding: 20px 0;
 }
+
+.greek-vocab-learn-done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-vocab-learn-done h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 4px 0 0;
+}
+
+.greek-vocab-learn-done p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}

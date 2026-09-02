@@ -1,75 +1,47 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { X } from 'lucide-react';
-import { GREEK_VOCABULARY } from '../../data/greekVocabulary';
-import { buildVocabPracticeRound } from '../../utils/greekVocabExercises';
+import { useMemo, useRef, useState } from 'react';
+import { X, PartyPopper } from 'lucide-react';
 import { MASTERY_CORRECT_DELTA, MASTERY_WRONG_DELTA, clampMastery } from '../../utils/greekMastery';
-import GreekVocabStepTeach from './GreekVocabStepTeach';
-import GreekLessonRunner from './GreekLessonRunner';
-import GreekVocabExerciseChoice from './GreekVocabExerciseChoice';
-import GreekVocabExerciseType from './GreekVocabExerciseType';
-import GreekVocabExerciseMatch from './GreekVocabExerciseMatch';
+import GreekVocabFlashcard from './GreekVocabFlashcard';
+import GreekVocabSpelling from './GreekVocabSpelling';
 import './GreekLearnFlow.css';
 
-function renderVocabExercise(exercise, onAnswer) {
-  if (exercise.type === 'match') return <GreekVocabExerciseMatch exercise={exercise} onAnswer={onAnswer} />;
-  if (exercise.type === 'type-translit') return <GreekVocabExerciseType exercise={exercise} onAnswer={onAnswer} />;
-  return <GreekVocabExerciseChoice exercise={exercise} onAnswer={onAnswer} />;
-}
-
-function vocabItemIds(exercise) {
-  return exercise.type === 'match' ? exercise.words.map((w) => w.id) : [exercise.word.id];
-}
-
-// Vocabulary counterpart to GreekLearnFlow — same idea, one step lighter:
-// just Show (GreekVocabStepTeach) for each brand-new word (no trace/cursive
-// step, since words are only ever shown in print), then the shared
-// GreekLessonRunner runs the mixed practice round.
+// Vocabulary counterpart to GreekLearnFlow, deliberately simpler — same
+// two-stage shape as the main app's own practice flow (Flashcard, then
+// SpellingGame): flip through the round's words to see their meaning, then
+// spell each one from scrambled letter tiles. No hearts, no multi-type
+// exercise queue — mastery is driven entirely by the spelling stage's
+// correct/incorrect results, accumulated locally and flushed once at the
+// end (same pattern as GreekLearnFlow.jsx).
 export default function GreekVocabLearnFlow({ newWords, reviewWords, initialMastery, onExit, onComplete }) {
-  const [stepIndex, setStepIndex] = useState(0);
+  // Flashcards only cover brand-new words — skip straight to spelling once
+  // every word has already been introduced (pure spaced-review sessions).
+  const [phase, setPhase] = useState(newWords.length > 0 ? 'flashcards' : 'spelling'); // flashcards | spelling | done
   const deltasRef = useRef({});
+  const [spellingScore, setSpellingScore] = useState({ correct: 0, total: 0 });
 
-  const inPractice = stepIndex >= newWords.length;
   const roundWords = useMemo(() => [...newWords, ...reviewWords], [newWords, reviewWords]);
 
-  const handleExerciseResult = (wordIds, isCorrect) => {
-    const delta = isCorrect ? MASTERY_CORRECT_DELTA : MASTERY_WRONG_DELTA;
-    wordIds.forEach((id) => {
-      deltasRef.current[id] = (deltasRef.current[id] || 0) + delta;
-    });
+  const handleSpellingAnswer = (wordId, isCorrect) => {
+    deltasRef.current[wordId] = isCorrect ? MASTERY_CORRECT_DELTA : MASTERY_WRONG_DELTA;
+    setSpellingScore((s) => ({ correct: s.correct + (isCorrect ? 1 : 0), total: s.total + 1 }));
   };
 
-  const handlePracticeComplete = () => {
+  const handleSpellingComplete = () => {
     const masteryUpdates = {};
     roundWords.forEach((word) => {
       const base = initialMastery[word.id] ?? 0;
       masteryUpdates[word.id] = clampMastery(base + (deltasRef.current[word.id] || 0));
     });
+    // A brand-new word always ends the session "introduced" even with a
+    // net-zero delta, otherwise it never leaves the "next up" slot.
     newWords.forEach((word) => {
       if (masteryUpdates[word.id] === undefined) masteryUpdates[word.id] = 0;
     });
-    onComplete(masteryUpdates);
+    setPhase('done');
+    // Hand off after the brief "done" screen renders, not before — onExit/
+    // onComplete unmount this component immediately.
+    setTimeout(() => onComplete(masteryUpdates), 900);
   };
-
-  const buildExercises = useCallback((words, allWords) => buildVocabPracticeRound(words, allWords), []);
-
-  if (inPractice) {
-    return (
-      <GreekLessonRunner
-        items={roundWords}
-        allItems={GREEK_VOCABULARY}
-        buildExercises={buildExercises}
-        renderExercise={renderVocabExercise}
-        getItemIds={vocabItemIds}
-        onExit={onExit}
-        onExerciseResult={handleExerciseResult}
-        onComplete={handlePracticeComplete}
-      />
-    );
-  }
-
-  const word = newWords[stepIndex];
-  const goNext = () => setStepIndex((i) => i + 1);
 
   return (
     <div className="greek-learn-flow">
@@ -77,26 +49,26 @@ export default function GreekVocabLearnFlow({ newWords, reviewWords, initialMast
         <button className="greek-learn-flow-exit" onClick={onExit} aria-label="Chiqish">
           <X size={20} strokeWidth={2.2} />
         </button>
-        <div className="greek-learn-flow-progress-track">
-          <div
-            className="greek-learn-flow-progress-fill"
-            style={{ width: `${(stepIndex / newWords.length) * 100}%` }}
-          />
-        </div>
       </div>
 
       <div className="greek-learn-flow-body">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={word.id}
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -24 }}
-            transition={{ duration: 0.2 }}
-          >
-            <GreekVocabStepTeach word={word} onNext={goNext} />
-          </motion.div>
-        </AnimatePresence>
+        {phase === 'flashcards' && (
+          <GreekVocabFlashcard words={newWords} onComplete={() => setPhase('spelling')} />
+        )}
+        {phase === 'spelling' && (
+          <GreekVocabSpelling
+            words={roundWords}
+            onAnswer={handleSpellingAnswer}
+            onComplete={handleSpellingComplete}
+          />
+        )}
+        {phase === 'done' && (
+          <div className="greek-vocab-learn-done">
+            <PartyPopper size={40} strokeWidth={1.6} />
+            <h2>Ajoyib!</h2>
+            <p>{spellingScore.correct}/{spellingScore.total} to'g'ri yozildi</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,121 @@
+.greek-vocab-flashcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.greek-vocab-flashcard-progress {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.greek-vocab-flashcard-scene {
+  width: 100%;
+  height: 200px;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.greek-vocab-flashcard-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+
+.greek-vocab-flashcard-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.greek-vocab-flashcard-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-xl);
+  backface-visibility: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.greek-vocab-flashcard-back {
+  transform: rotateY(180deg);
+}
+
+.greek-vocab-flashcard-speak-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-vocab-flashcard-word {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.greek-vocab-flashcard-hint {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.greek-vocab-flashcard-translit {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.greek-vocab-flashcard-meaning {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--greek-blue, #0d5eaf);
+  text-align: center;
+}
+
+.greek-vocab-flashcard-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.greek-vocab-flashcard-actions.hidden {
+  visibility: hidden;
+}
+
+.greek-vocab-flashcard-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.greek-vocab-flashcard-btn.again {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.greek-vocab-flashcard-btn.know {
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+}
