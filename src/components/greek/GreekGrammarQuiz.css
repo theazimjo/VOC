@@ -1,0 +1,207 @@
+.greek-grammar-quiz {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 140px);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px 20px 40px;
+}
+
+.greek-grammar-quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.greek-grammar-quiz-exit {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.greek-grammar-quiz-progress-track {
+  flex: 1;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.greek-grammar-quiz-progress-fill {
+  height: 100%;
+  background: var(--greek-blue, #0d5eaf);
+  border-radius: var(--radius-full);
+  transition: width 0.35s ease;
+}
+
+.greek-grammar-quiz-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.greek-grammar-quiz-step {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.greek-grammar-quiz-question {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0;
+}
+
+.greek-grammar-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.greek-grammar-quiz-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.greek-grammar-quiz-option[aria-disabled="true"] {
+  cursor: default;
+}
+
+.greek-grammar-quiz-option-text {
+  flex: 1;
+}
+
+.greek-grammar-quiz-option-speak,
+.greek-grammar-quiz-answer-speak {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-grammar-quiz-option.correct .greek-grammar-quiz-option-speak {
+  background: rgba(52, 199, 89, 0.18);
+  color: var(--success, #34c759);
+}
+
+.greek-grammar-quiz-option.wrong .greek-grammar-quiz-option-speak {
+  background: rgba(255, 69, 58, 0.18);
+  color: #ff453a;
+}
+
+.greek-grammar-quiz-option:not([aria-disabled="true"]):hover {
+  border-color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-grammar-quiz-option.correct {
+  background: var(--success-dim, rgba(52, 199, 89, 0.14));
+  border-color: var(--success, #34c759);
+  color: var(--success, #34c759);
+}
+
+.greek-grammar-quiz-option.wrong {
+  background: rgba(255, 69, 58, 0.12);
+  border-color: #ff453a;
+  color: #ff453a;
+}
+
+.greek-grammar-quiz-explanation {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+}
+
+.greek-grammar-quiz-answer-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.greek-grammar-quiz-built {
+  min-height: 50px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.greek-grammar-quiz-built.correct { border-color: var(--success, #34c759); }
+.greek-grammar-quiz-built.wrong { border-color: #ff453a; }
+
+.greek-grammar-quiz-built-placeholder {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.greek-grammar-quiz-bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.greek-grammar-quiz-tile {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.greek-grammar-quiz-tile.selected {
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  border-color: var(--greek-blue, #0d5eaf);
+  color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-grammar-quiz-tile.used {
+  opacity: 0.3;
+}
+
+.greek-grammar-quiz-check-btn {
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}

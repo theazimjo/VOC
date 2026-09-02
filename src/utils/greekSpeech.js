@@ -57,3 +57,19 @@ export async function speakGreekVocab(wordId, fallbackText) {
     speakWithBrowserVoice(fallbackText);
   }
 }
+
+// Grammar track: `clipId` is a value from GREEK_GRAMMAR_AUDIO_MAP (see
+// greekGrammarSpeakable.js's extractGreekSpeakable + greekGrammarAudioMap.js
+// — not every quiz option/answer has one, since mixed Greek+Uzbek text is
+// deliberately excluded there). No text fallback is passed here: unlike
+// the alphabet/vocab tracks, there's no per-string Latin transliteration on
+// hand for arbitrary grammar sentences, so a missing clip just no-ops
+// rather than mispronouncing through the browser voice.
+export async function speakGreekGrammarClip(clipId) {
+  if (!clipId) return;
+  try {
+    await playClip(`/audio/greek/grammar/${clipId}.mp3`);
+  } catch {
+    // No reliable fallback for arbitrary grammar sentences — see above.
+  }
+}

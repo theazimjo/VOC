@@ -1,0 +1,185 @@
+.greek-grammar-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.greek-grammar-header {
+  margin-bottom: 20px;
+}
+
+.greek-grammar-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.greek-grammar-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.greek-grammar-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.greek-grammar-topic-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.greek-grammar-topic-card.completed {
+  border-color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-grammar-topic-icon {
+  font-size: 1.6rem;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+}
+
+.greek-grammar-topic-body h3 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.greek-grammar-topic-badge {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.greek-grammar-topic-badge.done {
+  color: var(--greek-blue, #0d5eaf);
+}
+
+/* Guide page */
+.greek-grammar-guide-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.greek-grammar-guide-header {
+  margin-bottom: 20px;
+}
+
+.greek-grammar-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+.greek-grammar-guide-header h1 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.greek-grammar-guide-body {
+  margin-bottom: 28px;
+}
+
+.greek-grammar-guide-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.greek-grammar-guide-best {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.greek-grammar-guide-cta {
+  padding: 13px 32px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+/* Results */
+.greek-grammar-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: calc(100vh - 200px);
+  text-align: center;
+  padding: 20px;
+}
+
+.greek-grammar-results-icon {
+  color: var(--greek-blue, #0d5eaf);
+  margin-bottom: 6px;
+}
+
+.greek-grammar-results h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.greek-grammar-results p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 20px;
+}
+
+.greek-grammar-results-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.greek-grammar-results-retry {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 20px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.greek-grammar-results-back {
+  padding: 11px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+}

@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { Type, BookOpenText, GraduationCap, ArrowRight } from 'lucide-react';
 import { GREEK_ALPHABET } from '../../data/greekAlphabet';
 import { GREEK_VOCABULARY } from '../../data/greekVocabulary';
+import { greekGrammarData } from '../../data/greekGrammarData';
 import { useGreekAlphabetProgress } from '../../hooks/useGreekAlphabetProgress';
 import { useGreekVocabWords } from '../../hooks/useGreekVocabWords';
+import { useGreekGrammarStats } from '../../hooks/useGreekGrammarStats';
 import './GreekDashboard.css';
 
 const cardVariants = {
@@ -20,6 +22,7 @@ export default function GreekDashboard() {
   const navigate = useNavigate();
   const { progress } = useGreekAlphabetProgress();
   const { words: vocabWords } = useGreekVocabWords();
+  const { stats: grammarStats } = useGreekGrammarStats();
 
   const mastery = progress.mastery || {};
   const introducedCount = GREEK_ALPHABET.filter((l) => mastery[l.id] !== undefined).length;
@@ -30,6 +33,18 @@ export default function GreekDashboard() {
   const vocabIntroducedCount = vocabWords.filter((w) => (w.reviewCount || 0) > 0).length;
   const vocabPct = vocabWords.length
     ? Math.round(vocabWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / vocabWords.length)
+    : 0;
+
+  const grammarTopics = greekGrammarData.beginner.topics;
+  const grammarTopicStats = grammarStats.topics || {};
+  const grammarCompletedCount = grammarTopics.filter((t) => grammarTopicStats[t.id]).length;
+  const grammarPct = grammarTopics.length
+    ? Math.round(
+        grammarTopics.reduce((sum, t) => {
+          const s = grammarTopicStats[t.id];
+          return sum + (s && s.totalQuestions > 0 ? (s.bestScore / s.totalQuestions) * 100 : 0);
+        }, 0) / grammarTopics.length
+      )
     : 0;
 
   const sections = [
@@ -56,9 +71,9 @@ export default function GreekDashboard() {
       to: `/greek/${pack.id}/grammar`,
       icon: GraduationCap,
       title: 'Grammatika',
-      desc: 'Tez orada',
-      pct: 0,
-      available: false,
+      desc: `${grammarCompletedCount}/${grammarTopics.length} mavzu, ${grammarPct}% o'zlashtirilgan`,
+      pct: grammarPct,
+      available: true,
     },
   ];
 
