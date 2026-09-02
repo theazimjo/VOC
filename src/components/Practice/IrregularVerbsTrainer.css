@@ -540,11 +540,16 @@
    ────────────────────────────────────────────────── */
 .type-verb-display {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 24px;
   flex-wrap: wrap;
+}
+.type-form-slot {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
 }
 .type-sep { color: var(--ios-text-sec); opacity: 0.4; font-weight: 500; font-size: 18px; }
 .type-form-block {
@@ -552,6 +557,7 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  justify-content: flex-end;
 }
 .type-form-label {
   font-size: 10px;

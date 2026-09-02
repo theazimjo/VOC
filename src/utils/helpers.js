@@ -4,6 +4,8 @@
 
 import { getDecayedMastery } from './memoryEngine';
 import { IRREGULAR_VERBS_PACK_ID } from '../data/irregularVerbsCorpPack';
+import { GREEK_VOCABULARY } from '../data/greekVocabulary';
+import { speakGreekVocab } from './greekSpeech';
 
 /**
  * Shuffle an array (Fisher-Yates algorithm)
@@ -290,10 +292,25 @@ export function debounce(fn, delay = 300) {
 }
 
 /**
- * Speaks text using Web Speech API (SpeechSynthesis)
+ * Speaks text using Web Speech API (SpeechSynthesis).
+ *
+ * Special case: browsers have no installed Greek voice (verified — see
+ * greekSpeech.js), so SpeechSynthesis alone would misread Greek script
+ * through the wrong-language default voice. Word-bank UI (WordCard,
+ * Flashcard, SpellingGame) is shared across every language pack including
+ * the standalone Greek vocabulary track, so this one call site reroutes to
+ * the Greek track's pre-recorded audio clips instead — every other
+ * language's behavior is completely unchanged.
  */
 export function speakWord(text, lang = 'en-US') {
   if (!text) return;
+  if (lang?.toLowerCase().startsWith('el')) {
+    const entry = GREEK_VOCABULARY.find((w) => w.greek === text);
+    if (entry) {
+      speakGreekVocab(entry.id, entry.translit);
+      return;
+    }
+  }
   if ('speechSynthesis' in window) {
     // Cancel any current utterances playing
     window.speechSynthesis.cancel();

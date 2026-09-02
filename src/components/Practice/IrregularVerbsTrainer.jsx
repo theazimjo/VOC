@@ -741,7 +741,7 @@ export default function IrregularVerbsTrainer({
                       { key: 'v2', label: 'V2' },
                       { key: 'v3', label: 'V3' },
                     ].map(({ key, label }, i) => (
-                      <span key={key}>
+                      <span key={key} className="type-form-slot">
                         {i > 0 && <span className="type-sep">→</span>}
                         <span className={`type-form-block ${key === typeMask ? 'type-blank' : ''}`}>
                           <span className="type-form-label">{label}</span>
@@ -796,9 +796,7 @@ export default function IrregularVerbsTrainer({
                         : <XCircle size={18} strokeWidth={2.2} className="reveal-icon wrong" />
                       }
                       <div className="reveal-title">
-                        {lastCorrect
-                          ? (t('practice.correctTitle') || 'Correct!')
-                          : (t('practice.incorrectTitle') || 'Incorrect')}
+                        {lastCorrect ? 'Correct!' : 'Incorrect'}
                       </div>
                     </div>
                     <div className="reveal-forms">

@@ -1,0 +1,115 @@
+.greek-vocab-practice-picker,
+.greek-vocab-practice-results,
+.greek-vocab-practice-session {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px 20px 40px;
+  min-height: calc(100vh - 140px);
+}
+
+.greek-vocab-practice-exit {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.greek-vocab-practice-picker h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.greek-vocab-practice-warning {
+  max-width: 400px;
+  margin: 0 auto 20px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 159, 10, 0.12);
+  color: #b26a00;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.greek-vocab-practice-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.greek-vocab-practice-mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.greek-vocab-practice-mode-icon {
+  font-size: 1.5rem;
+}
+
+.greek-vocab-practice-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.greek-vocab-practice-results-icon {
+  color: var(--greek-blue, #0d5eaf);
+  margin-bottom: 6px;
+}
+
+.greek-vocab-practice-results h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 10px;
+}
+
+.greek-vocab-practice-results-stats {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 20px;
+}
+
+.greek-vocab-practice-results-stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.greek-vocab-practice-results-stats strong {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+.greek-vocab-practice-results-stats span {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.greek-vocab-practice-back-btn {
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
