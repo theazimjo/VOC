@@ -1,0 +1,56 @@
+.greek-ex-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.greek-ex-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.greek-ex-choices-glyph {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.greek-ex-choice-btn {
+  padding: 14px 10px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+}
+
+.greek-ex-choice-btn-glyph {
+  font-size: 1.4rem;
+  padding: 16px 6px;
+}
+
+.greek-ex-choice-btn:not(:disabled):hover {
+  border-color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-ex-choice-btn.correct {
+  background: var(--success-dim, rgba(52, 199, 89, 0.14));
+  border-color: var(--success, #34c759);
+  color: var(--success, #34c759);
+}
+
+.greek-ex-choice-btn.wrong {
+  background: rgba(255, 69, 58, 0.12);
+  border-color: #ff453a;
+  color: #ff453a;
+}
+
+@media (max-width: 480px) {
+  .greek-ex-choices-glyph { grid-template-columns: repeat(2, 1fr); }
+}

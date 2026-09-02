@@ -1,0 +1,55 @@
+.greek-ex-match {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.greek-ex-match-grid {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+}
+
+.greek-ex-match-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.greek-ex-match-tile {
+  padding: 14px 8px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.15s ease;
+}
+
+.greek-ex-match-tile-glyph {
+  font-size: 1.3rem;
+}
+
+.greek-ex-match-tile.selected {
+  border-color: var(--greek-blue, #0d5eaf);
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+}
+
+.greek-ex-match-tile.matched {
+  border-color: var(--success, #34c759);
+  background: var(--success-dim, rgba(52, 199, 89, 0.14));
+  color: var(--success, #34c759);
+  opacity: 0.6;
+}
+
+.greek-ex-match-tile.wrong {
+  border-color: #ff453a;
+  background: rgba(255, 69, 58, 0.12);
+  color: #ff453a;
+}

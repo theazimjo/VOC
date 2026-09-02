@@ -1,0 +1,110 @@
+.greek-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.greek-dashboard-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--greek-blue, #0d5eaf) 0%, #1565c0 100%);
+  color: #fff;
+  margin-bottom: 24px;
+}
+
+.greek-dashboard-hero-icon {
+  font-size: 2.2rem;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.greek-dashboard-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0 0 2px;
+}
+
+.greek-dashboard-subtitle {
+  font-size: 0.82rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.greek-dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.greek-dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.greek-dashboard-card.is-locked {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.greek-dashboard-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  color: var(--greek-blue, #0d5eaf);
+  flex-shrink: 0;
+}
+
+.greek-dashboard-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.greek-dashboard-card-body h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 2px;
+}
+
+.greek-dashboard-card-body p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.greek-dashboard-card-progress-track {
+  margin-top: 8px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.greek-dashboard-card-progress-fill {
+  height: 100%;
+  background: var(--greek-blue, #0d5eaf);
+}
+
+.greek-dashboard-card-arrow {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}

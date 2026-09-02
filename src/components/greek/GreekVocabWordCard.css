@@ -1,0 +1,83 @@
+.greek-vocab-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.greek-vocab-card.is-locked {
+  opacity: 0.55;
+}
+
+.greek-vocab-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.greek-vocab-card-word {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.greek-vocab-card-translit {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.greek-vocab-card-speak-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  color: var(--greek-blue, #0d5eaf);
+  flex-shrink: 0;
+}
+
+.greek-vocab-card-meaning {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.greek-vocab-card-mastery {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.greek-vocab-card-mastery-track {
+  flex: 1;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.greek-vocab-card-mastery-fill {
+  height: 100%;
+  background: var(--greek-blue, #0d5eaf);
+  border-radius: var(--radius-full);
+}
+
+.greek-vocab-card-mastery-pct {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--greek-blue, #0d5eaf);
+  white-space: nowrap;
+}
+
+.greek-vocab-card-mastery-pending {
+  font-size: 0.64rem;
+  color: var(--text-secondary);
+}

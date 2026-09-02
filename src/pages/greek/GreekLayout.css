@@ -1,0 +1,20 @@
+/* Mynerve is one of the few Google Fonts with a real, hand-designed Greek
+   glyph set in a genuine cursive/handwriting style (verified by rendering
+   all 24 letters — most "handwriting" fonts either lack Greek entirely or
+   just reuse the print shapes). Loaded here, scoped to the Greek section's
+   own lazy chunk, rather than in index.html, so no other route pays for it. */
+@import url('https://fonts.googleapis.com/css2?family=Mynerve&display=swap');
+
+/* Scoped design tokens for the standalone Greek track — its own accent
+   (Greek-flag blue) layered on top of the app's theme-aware bg/text/border
+   vars, same approach CourseLayout.css takes for its purple/teal palette. */
+:root {
+  --greek-blue: #0d5eaf;
+  --greek-blue-dim: rgba(13, 94, 175, 0.1);
+  --greek-cursive-font: 'Mynerve', cursive;
+}
+
+[data-theme='android'] {
+  --greek-blue: #4d9fff;
+  --greek-blue-dim: rgba(77, 159, 255, 0.16);
+}

@@ -1,0 +1,55 @@
+/* Shared across every exercise type in a lesson (GreekExerciseChoice,
+   GreekExerciseType, GreekExerciseMatch) — the prompt line and the big
+   round "play audio" button look identical everywhere they appear. */
+.greek-ex-prompt {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-align: center;
+}
+
+.greek-ex-audio-btn {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  box-shadow: 0 6px 18px var(--greek-blue-dim, rgba(13, 94, 175, 0.3));
+}
+
+.greek-ex-glyph-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 36px;
+}
+
+.greek-ex-glyph {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.greek-ex-speak-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  color: var(--greek-blue, #0d5eaf);
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .greek-ex-glyph-row { padding: 16px 26px; }
+  .greek-ex-glyph { font-size: 2.4rem; }
+}

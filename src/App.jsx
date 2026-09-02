@@ -41,6 +41,14 @@ const GrammarTest = lazyWithRetry(() => import('./pages/grammar/GrammarTest'));
 const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
 const AdminDashboard = lazyWithRetry(() => import('./pages/admin/AdminDashboard'));
 
+// Standalone Greek track — own layout/pages, deliberately not sharing the
+// generic Course* components (see pages/greek/GreekLayout.jsx).
+const GreekLayout = lazyWithRetry(() => import('./pages/greek/GreekLayout'));
+const GreekDashboard = lazyWithRetry(() => import('./pages/greek/GreekDashboard'));
+const GreekAlphabet = lazyWithRetry(() => import('./pages/greek/GreekAlphabet'));
+const GreekVocabulary = lazyWithRetry(() => import('./pages/greek/GreekVocabulary'));
+const GreekGrammar = lazyWithRetry(() => import('./pages/greek/GreekGrammar'));
+
 // Corporate / Learning Center Portal Routes (fully independent of the
 // individual-learner auth/route tree above — see CorpProtectedRoute)
 const CorpLayout = lazyWithRetry(() => import('./components/corp/CorpLayout'));
@@ -114,6 +122,12 @@ export default function App() {
                         <Route path="lesson" element={<CourseLesson />} />
                         <Route path="vocabulary" element={<CourseVocabulary />} />
                         <Route path="practice" element={<PracticePage />} />
+                      </Route>
+                      <Route path="/greek/:packId" element={<GreekLayout />}>
+                        <Route index element={<GreekDashboard />} />
+                        <Route path="alphabet" element={<GreekAlphabet />} />
+                        <Route path="vocabulary" element={<GreekVocabulary />} />
+                        <Route path="grammar" element={<GreekGrammar />} />
                       </Route>
                       <Route element={<Layout />}>
                         <Route path="/" element={<Dashboard />} />

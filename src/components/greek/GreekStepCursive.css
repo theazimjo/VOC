@@ -1,0 +1,70 @@
+.greek-step-cursive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 340px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.greek-step-cursive-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.greek-step-cursive-row {
+  display: flex;
+  gap: 14px;
+}
+
+.greek-step-cursive-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.greek-step-cursive-glyph {
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.greek-step-cursive-glyph.cursive {
+  font-family: var(--greek-cursive-font, cursive);
+  color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-step-cursive-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.greek-step-cursive-hint {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.greek-step-cursive-next {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}

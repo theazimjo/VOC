@@ -16,4 +16,16 @@ export const SELECTABLE_COURSES = [
     language: 'it-IT',
     color: 'linear-gradient(135deg, #7C3AED 0%, #B7472A 100%)',
   },
+  {
+    id: 'greek-a1',
+    icon: '🏛️',
+    title: 'Yunon tili',
+    description: "Yunon alifbosidan boshlab — mustaqil dastur: alifbo, so'z boyligi va grammatika boshqa kurslardan alohida o'tiladi.",
+    level: 'beginner',
+    language: 'el-GR',
+    color: 'linear-gradient(135deg, #0D5EAF 0%, #1565C0 100%)',
+    // Routed to its own /greek/:packId section (GreekLayout), not the
+    // shared /course/:packId one — see Navbar's courseBasePath().
+    basePath: '/greek',
+  },
 ];

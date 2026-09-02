@@ -1,0 +1,68 @@
+.greek-vocab-ex-type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.greek-vocab-ex-type-input-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.greek-vocab-ex-type-input-row input {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.greek-vocab-ex-type-input-row input:focus {
+  outline: none;
+  border-color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-vocab-ex-type-input-row.correct input {
+  border-color: var(--success, #34c759);
+  color: var(--success, #34c759);
+  background: var(--success-dim, rgba(52, 199, 89, 0.1));
+}
+
+.greek-vocab-ex-type-input-row.wrong input {
+  border-color: #ff453a;
+  color: #ff453a;
+  background: rgba(255, 69, 58, 0.08);
+}
+
+.greek-vocab-ex-type-submit {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.greek-vocab-ex-type-submit:disabled {
+  opacity: 0.4;
+}
+
+.greek-vocab-ex-type-answer {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.greek-vocab-ex-type-answer strong {
+  color: var(--text-primary);
+}

@@ -1,0 +1,79 @@
+.greek-vocab-ex-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.greek-vocab-ex-word {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.greek-vocab-ex-meaning-prompt {
+  padding: 20px 32px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.greek-vocab-ex-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.greek-vocab-ex-choice-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 14px 10px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+}
+
+.greek-vocab-ex-choice-word {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.greek-vocab-ex-choice-translit {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.greek-vocab-ex-choice-btn:not(:disabled):hover {
+  border-color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-vocab-ex-choice-btn.correct {
+  background: var(--success-dim, rgba(52, 199, 89, 0.14));
+  border-color: var(--success, #34c759);
+  color: var(--success, #34c759);
+}
+
+.greek-vocab-ex-choice-btn.correct .greek-vocab-ex-choice-translit { color: inherit; }
+
+.greek-vocab-ex-choice-btn.wrong {
+  background: rgba(255, 69, 58, 0.12);
+  border-color: #ff453a;
+  color: #ff453a;
+}
+
+.greek-vocab-ex-choice-btn.wrong .greek-vocab-ex-choice-translit { color: inherit; }

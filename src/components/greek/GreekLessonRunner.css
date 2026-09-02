@@ -1,0 +1,116 @@
+.greek-lesson-runner {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 140px);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px 20px 40px;
+}
+
+.greek-lesson-runner-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.greek-lesson-runner-exit {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.greek-lesson-runner-progress-track {
+  flex: 1;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.greek-lesson-runner-progress-fill {
+  height: 100%;
+  background: var(--greek-blue, #0d5eaf);
+  border-radius: var(--radius-full);
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.greek-lesson-runner-hearts {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+  color: #ff453a;
+}
+
+.heart-empty {
+  color: var(--border);
+}
+
+.greek-lesson-runner-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.greek-lesson-runner-exercise {
+  width: 100%;
+}
+
+.greek-lesson-runner-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  max-width: 320px;
+}
+
+.greek-lesson-runner-result-icon.success {
+  color: var(--greek-blue, #0d5eaf);
+  margin-bottom: 6px;
+}
+
+.greek-lesson-runner-result-icon.fail {
+  color: #ff453a;
+  margin-bottom: 6px;
+}
+
+.greek-lesson-runner-result h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.greek-lesson-runner-result p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+}
+
+.greek-lesson-runner-stars {
+  font-size: 1.8rem;
+  letter-spacing: 4px;
+  margin: 4px 0;
+}
+
+.star-filled { color: #ffb800; }
+.star-empty { color: var(--bg-tertiary); }
+
+.greek-lesson-runner-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}

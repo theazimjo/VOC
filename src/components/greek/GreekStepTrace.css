@@ -1,0 +1,48 @@
+.greek-step-trace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.greek-step-trace-canvas {
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed var(--border);
+  background: var(--bg-secondary);
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.greek-step-trace-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.greek-step-trace-clear {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.greek-step-trace-clear:disabled {
+  opacity: 0.4;
+}
+
+.greek-step-trace-next {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}

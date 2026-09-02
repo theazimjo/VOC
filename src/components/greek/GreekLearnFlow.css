@@ -1,0 +1,48 @@
+.greek-learn-flow {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 140px);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px 20px 40px;
+}
+
+.greek-learn-flow-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.greek-learn-flow-exit {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.greek-learn-flow-progress-track {
+  flex: 1;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.greek-learn-flow-progress-fill {
+  height: 100%;
+  background: var(--greek-blue, #0d5eaf);
+  border-radius: var(--radius-full);
+  transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.greek-learn-flow-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}

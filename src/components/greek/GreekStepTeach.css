@@ -1,0 +1,111 @@
+.greek-step-teach {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 340px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.greek-step-teach-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--greek-blue, #0d5eaf);
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+}
+
+.greek-step-teach-glyph-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.greek-step-teach-glyph {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.greek-step-teach-speak-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+}
+
+.greek-step-teach-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.greek-step-teach-name span {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.greek-step-teach-ipa {
+  font-size: 0.8rem;
+  color: var(--greek-blue, #0d5eaf);
+  font-weight: 600;
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+}
+
+.greek-step-teach-example {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.greek-step-teach-example-word {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.greek-step-teach-example-word svg { color: var(--greek-blue, #0d5eaf); flex-shrink: 0; }
+
+.greek-step-teach-example-meaning {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.greek-step-teach-note {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.greek-step-teach-next {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}

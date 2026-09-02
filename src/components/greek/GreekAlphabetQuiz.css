@@ -1,0 +1,113 @@
+.greek-quiz {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.greek-quiz-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.greek-quiz-progress-track {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  overflow: hidden;
+}
+
+.greek-quiz-progress-fill {
+  height: 100%;
+  background: var(--greek-blue, #0d5eaf);
+  transition: width 0.3s ease;
+}
+
+.greek-quiz-progress-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.greek-quiz-question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.greek-quiz-prompt {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.greek-quiz-glyph-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 32px;
+}
+
+.greek-quiz-glyph {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.greek-quiz-speak-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  color: var(--greek-blue, #0d5eaf);
+  flex-shrink: 0;
+}
+
+.greek-quiz-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.greek-quiz-choice {
+  padding: 14px 10px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+}
+
+.greek-quiz-choice:not(:disabled):hover {
+  border-color: var(--greek-blue, #0d5eaf);
+}
+
+.greek-quiz-choice.correct {
+  background: var(--success-dim, rgba(48, 209, 88, 0.14));
+  border-color: var(--success, #30d158);
+  color: var(--success, #30d158);
+}
+
+.greek-quiz-choice.wrong {
+  background: rgba(255, 69, 58, 0.12);
+  border-color: #ff453a;
+  color: #ff453a;
+}
+
+@media (max-width: 480px) {
+  .greek-quiz-glyph-row { padding: 16px 24px; }
+  .greek-quiz-glyph { font-size: 2.4rem; }
+}

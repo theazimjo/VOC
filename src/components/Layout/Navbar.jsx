@@ -13,6 +13,13 @@ import { db } from '../../firebase';
 import { switchActiveGroup, joinGroupAsUser, setAppMode } from '../../services/corpService';
 import { joinIndependentGroupByCode } from '../../services/independentTeacherService';
 import { SELECTABLE_COURSES } from '../../data/coursePicker';
+
+// Most courses (Sicilian, Essential 3000, Science) share the generic
+// /course/:packId Dashboard/Lesson/Vocabulary pages; a course can opt into
+// its own fully separate section (e.g. Greek → /greek/:packId, see
+// pages/greek/GreekLayout.jsx) via `basePath` in coursePicker.js.
+const getCourseBasePath = (courseId) =>
+  SELECTABLE_COURSES.find((c) => c.id === courseId)?.basePath || '/course';
 import GlobalSearch from '../common/GlobalSearch';
 import './Navbar.css';
 
@@ -47,7 +54,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
   // Whichever course pack the URL is currently inside — drives the switcher
   // button's own icon/label the same way group mode drives it for a group,
   // instead of it staying stuck on "Personal" while you're in a course.
-  const activeCourse = myCourses.find((c) => location.pathname.startsWith(`/course/${c.id}`));
+  const activeCourse = myCourses.find((c) => location.pathname.startsWith(`${getCourseBasePath(c.courseId)}/${c.id}`));
   const selectableCourses = SELECTABLE_COURSES.filter(
     (c) => !myCourses.some((p) => p.courseId === c.id)
   );
@@ -67,7 +74,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
       });
       setShowAddModal(false);
       setShowSwitcher(false);
-      if (newPackId) navigate(`/course/${newPackId}`);
+      if (newPackId) navigate(`${course.basePath || '/course'}/${newPackId}`);
     } catch (err) {
       console.error('Failed to start course:', err);
     } finally {
@@ -75,9 +82,9 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
     }
   };
 
-  const handleOpenCourse = (packId) => {
+  const handleOpenCourse = (pack) => {
     setShowSwitcher(false);
-    navigate(`/course/${packId}`);
+    navigate(`${getCourseBasePath(pack.courseId)}/${pack.id}`);
   };
 
   // A membership is either a corp/center group (centerId) or an independent
@@ -378,7 +385,7 @@ export default function Navbar({ sidebarCollapsed, onHamburgerClick, appMode: la
                 return (
                   <div
                     key={c.id}
-                    onClick={() => !isActive && handleOpenCourse(c.id)}
+                    onClick={() => !isActive && handleOpenCourse(c)}
                     style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer', width: '60px' }}
                   >
                     <div style={{

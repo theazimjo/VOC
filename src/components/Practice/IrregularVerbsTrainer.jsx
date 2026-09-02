@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, Eye } from 'lucide-react';
+import { Volume2, Eye, CheckCircle2, XCircle, ChevronRight, ChevronLeft } from 'lucide-react';
 import { playSound } from '../../utils/feedback';
 import { weightedSelectWords, shuffleArray } from '../../utils/helpers';
 import { inferConfidenceFromSpeed } from '../../utils/memoryEngine';
@@ -9,237 +9,156 @@ import './IrregularVerbsTrainer.css';
 
 const escapeRegex = (str) => str.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
 
-// Wraps occurrences of the given verb forms in <strong> WITHOUT going through
-// dangerouslySetInnerHTML — `text` comes from a pack's own (user-authored)
-// `example` field, so building raw HTML from it would let a malicious pack
-// inject arbitrary markup/scripts into anyone practicing it. Returns an array
-// of strings/elements safe to render directly as React children.
+// Safe highlighted text renderer (no dangerouslySetInnerHTML)
 function highlightForms(text, forms) {
   const cleanForms = [...new Set(forms.map(f => f.trim()).filter(Boolean))];
   if (cleanForms.length === 0) return [text];
-
   const sorted = cleanForms.sort((a, b) => b.length - a.length);
   const pattern = new RegExp(`\\b(${sorted.map(escapeRegex).join('|')})\\b`, 'gi');
-  return text.split(pattern).map((part, i) => (
+  return text.split(pattern).map((part, i) =>
     i % 2 === 1 ? <strong key={i}>{part}</strong> : part
-  ));
+  );
 }
 
-export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord, onProgress, initialSubStep, onExit }) {
+// Compare user answer vs correct (handles "burned/burnt" style alternatives)
+const isCorrectMatch = (userInput, correctOption) => {
+  const inputParts = userInput.trim().toLowerCase().split('/').map(t => t.trim()).filter(Boolean);
+  const targets = correctOption.toLowerCase().split('/').map(t => t.trim());
+  return inputParts.some(p => targets.includes(p));
+};
+
+// ─── Question-type constants ───────────────────────────────────────────────────
+const QT_TABLE   = 0;  // Fill all three forms (one may be pre-filled)
+const QT_ORDER   = 1;  // Tap shuffled buttons in V1→V2→V3 order
+const QT_SENTENCE = 2; // See a gapped sentence, choose V1/V2/V3 card
+const QT_CHOICE  = 3;  // See translation, choose correct verb card (MC)
+const QT_TYPE    = 4;  // See "V1 = ___, V2 = go → V3 = ___" — type the missing form
+
+export default function IrregularVerbsTrainer({
+  words, onComplete, onUpdateWord, onProgress, initialSubStep, onExit
+}) {
   const { t } = useLanguage();
+
+  // ── Session ──────────────────────────────────────────────────────────────────
   const [sessionVerbs, setSessionVerbs] = useState([]);
-  const [subStep, setSubStep] = useState(initialSubStep || 'study'); // 'study' | 'practice'
-  const [studyIndex, setStudyIndex] = useState(0);
+  const [subStep, setSubStep]           = useState(initialSubStep || 'study');
+  const [studyIndex, setStudyIndex]     = useState(0);
   const [studyRevealed, setStudyRevealed] = useState(false);
 
-  // Practice States
+  // ── Practice shared state ─────────────────────────────────────────────────────
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [qType, setQType] = useState(0); // 0: Table fill, 1: Shuffled order, 2: Sentence choice
-  const [checked, setChecked] = useState(false);
+  const [qType, setQType]               = useState(QT_TABLE);
+  const [checked, setChecked]           = useState(false);
+  const [lastCorrect, setLastCorrect]   = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
-  const [wrongVerbs, setWrongVerbs] = useState([]);
+  const [wrongVerbs, setWrongVerbs]     = useState([]);
+  const questionStartRef = useRef(Date.now());
 
-  // States for Type 0: Table Fill-in
-  const [tableAnswers, setTableAnswers] = useState({ v1: '', v2: '', v3: '' });
+  // ── QT_TABLE state ────────────────────────────────────────────────────────────
+  const [tableAnswers, setTableAnswers]           = useState({ v1: '', v2: '', v3: '' });
   const [tableCorrectFlags, setTableCorrectFlags] = useState({ v1: true, v2: true, v3: true });
-  const [tablePrefillType, setTablePrefillType] = useState(0); // 0: hide all, 1: prefill V1, 2: prefill V2, 3: prefill V3
+  const [tablePrefill, setTablePrefill]           = useState(0); // 0=hide all, 1=show V1, 2=show V2, 3=show V3
   const v1Ref = useRef(null);
   const v2Ref = useRef(null);
   const v3Ref = useRef(null);
-  const questionStartRef = useRef(Date.now());
 
-  // States for Type 1: Shuffled V1->V2->V3 Order
-  const [orderButtons, setOrderButtons] = useState([]); // [{ id, text, clicked, index }]
-  const [orderStep, setOrderStep] = useState(0); // 0: waiting V1, 1: waiting V2, 2: waiting V3
-  const [orderFailed, setOrderFailed] = useState(false);
+  // ── QT_ORDER state ────────────────────────────────────────────────────────────
+  const [orderButtons, setOrderButtons] = useState([]);
+  const [orderStep, setOrderStep]       = useState(0);
+  const [orderFailed, setOrderFailed]   = useState(false);
+  const [orderShake, setOrderShake]     = useState(null); // index of wrong button
 
-  // States for Type 2: Sentence Context Choice
-  const [sentenceQuestion, setSentenceQuestion] = useState(null); // { text, correctFormIndex, correctText }
-  const [selectedChoice, setSelectedChoice] = useState(null); // index of chosen option
+  // ── QT_SENTENCE state ─────────────────────────────────────────────────────────
+  const [sentenceQ, setSentenceQ]       = useState(null);
+  const [selectedChoice, setSelectedChoice] = useState(null);
 
-  // Helper to split options. Both sides are split on '/' (not just
-  // `correctOption`) — a verb form itself can be a multi-form string like
-  // "burned/burnt" (e.g. a prefilled table cell, or an order-game button
-  // whose label IS the verb's stored text verbatim), and comparing that raw
-  // string against the split targets would never match, wrongly marking an
-  // untouched/correct field as wrong.
-  const isCorrectMatch = (userInput, correctOption) => {
-    const inputParts = userInput.trim().toLowerCase().split('/').map(t => t.trim()).filter(Boolean);
-    const targets = correctOption.toLowerCase().split('/').map(t => t.trim());
-    return inputParts.some(p => targets.includes(p));
-  };
+  // ── QT_CHOICE state ───────────────────────────────────────────────────────────
+  const [choiceOptions, setChoiceOptions]   = useState([]); // [{v1,v2,v3,translation,isTarget}]
+  const [choiceSelected, setChoiceSelected] = useState(null);
 
-  // Report progress
+  // ── QT_TYPE state ─────────────────────────────────────────────────────────────
+  const [typeMask, setTypeMask]   = useState(null); // 'v1'|'v2'|'v3'
+  const [typeAnswer, setTypeAnswer] = useState('');
+  const [typeCorrect, setTypeCorrect] = useState(false);
+  const typeRef = useRef(null);
+
+  // ── Progress reporting ────────────────────────────────────────────────────────
   useEffect(() => {
-    if (onProgress) {
-      if (subStep === 'study' && sessionVerbs) {
-        onProgress(studyIndex, sessionVerbs.length || words.length);
-      } else if (subStep === 'practice' && sessionVerbs) {
-        onProgress(currentIndex, sessionVerbs.length);
-      }
+    if (!onProgress) return;
+    if (subStep === 'study') {
+      onProgress(studyIndex, sessionVerbs.length || words.length);
+    } else {
+      onProgress(currentIndex, sessionVerbs.length);
     }
   }, [subStep, studyIndex, currentIndex, sessionVerbs, words, onProgress]);
 
-  // Speak verbs
+  // ── Audio ─────────────────────────────────────────────────────────────────────
   const speakVerbs = (v1, v2, v3) => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const cleanV1 = v1.replace('/', ' or ');
-      const cleanV2 = v2.replace('/', ' or ');
-      const cleanV3 = v3.replace('/', ' or ');
-
-      const utterance = new SpeechSynthesisUtterance(`${cleanV1}, ${cleanV2}, ${cleanV3}`);
-      utterance.lang = 'en-US';
-      utterance.rate = 0.8;
-      window.speechSynthesis.speak(utterance);
-    }
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(
+      `${v1.replace('/', ' or ')}, ${v2.replace('/', ' or ')}, ${v3.replace('/', ' or ')}`
+    );
+    u.lang = 'en-US';
+    u.rate = 0.8;
+    window.speechSynthesis.speak(u);
   };
 
-  // Extract / Parse verbs from words
+  const speakSingle = (text) => {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace('/', ' or '));
+    u.lang = 'en-US';
+    u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  };
+
+  // ── Build session ─────────────────────────────────────────────────────────────
   useEffect(() => {
     const pool = words.map(w => {
-      let v1 = w.v1;
-      let v2 = w.v2;
-      let v3 = w.v3;
-
+      let v1 = w.v1, v2 = w.v2, v3 = w.v3;
       if ((!v1 || !v2 || !v3) && w.definition) {
         const parts = w.definition.split('-').map(p => p.trim());
-        if (parts.length === 3) {
-          v1 = parts[0];
-          v2 = parts[1];
-          v3 = parts[2];
-        }
+        if (parts.length === 3) { v1 = parts[0]; v2 = parts[1]; v3 = parts[2]; }
       }
-
       if ((!v1 || !v2 || !v3) && w.notes && w.word) {
         const parts = w.notes.split('|').map(p => p.trim());
-        if (parts.length === 2) {
-          v1 = w.word;
-          v2 = parts[0];
-          v3 = parts[1];
-        }
+        if (parts.length === 2) { v1 = w.word; v2 = parts[0]; v3 = parts[1]; }
       }
-
       return { ...w, v1, v2, v3 };
     }).filter(w => w.v1 && w.v2 && w.v3);
-
-    // Weighted, spaced-repetition-aware pick: verbs the user gets wrong
-    // or hasn't mastered yet surface more often than ones already known well.
     setSessionVerbs(weightedSelectWords(pool, Math.min(10, pool.length)));
   }, [words]);
 
-  // Reset the "cover before you recall" state whenever the study card changes.
-  useEffect(() => {
-    setStudyRevealed(false);
-  }, [studyIndex]);
+  useEffect(() => { setStudyRevealed(false); }, [studyIndex]);
 
-  const currentVerb = sessionVerbs[currentIndex];
-
-  // Setup current practice question. Depends on the current verb's identity,
-  // NOT the sessionVerbs array — processResult re-queues a missed verb by
-  // splicing a copy into sessionVerbs, and re-running this effect on that
-  // array change would instantly wipe the just-revealed answer (checked=false)
-  // and re-randomize the current question.
-  useEffect(() => {
-    if (subStep !== 'practice' || !currentVerb) return;
-
-    const verb = currentVerb;
-    setChecked(false);
-    questionStartRef.current = Date.now();
-
-    // Randomize question type: 0 (Table fill), 1 (Shuffled order), 2 (Sentence context choice)
-    const parsedSentence = parseSentenceQuestion(verb);
-    let chosenType = Math.floor(Math.random() * 3); // 0, 1 or 2
-    if (chosenType === 2 && !parsedSentence) {
-      chosenType = Math.random() > 0.5 ? 0 : 1;
-    }
-    setQType(chosenType);
-
-    if (chosenType === 0) {
-      // Type 0: Table Fill-in
-      const prefill = Math.floor(Math.random() * 4); // 0, 1, 2, or 3
-      setTablePrefillType(prefill);
-      setTableAnswers({
-        v1: prefill === 1 ? verb.v1 : '',
-        v2: prefill === 2 ? verb.v2 : '',
-        v3: prefill === 3 ? verb.v3 : ''
-      });
-      setTableCorrectFlags({ v1: true, v2: true, v3: true });
-
-      // Focus first editable input
-      setTimeout(() => {
-        if (prefill === 0 || prefill === 2 || prefill === 3) {
-          v1Ref.current?.focus();
-        } else if (prefill === 1) {
-          v2Ref.current?.focus();
-        }
-      }, 60);
-
-    } else if (chosenType === 1) {
-      // Type 1: Shuffled V1->V2->V3 Order
-      setOrderStep(0);
-      setOrderFailed(false);
-      
-      const buttons = [
-        { id: 'v1', text: verb.v1, clicked: false },
-        { id: 'v2', text: verb.v2, clicked: false },
-        { id: 'v3', text: verb.v3, clicked: false }
-      ].sort(() => Math.random() - 0.5);
-
-      setOrderButtons(buttons);
-
-    } else if (chosenType === 2 && parsedSentence) {
-      // Type 2: Sentence Choice
-      setSentenceQuestion(parsedSentence);
-      setSelectedChoice(null);
-    }
-  }, [subStep, currentVerb, currentIndex]);
-
-  // Helper: Sentence parser
+  // ── Parse sentence question helper ────────────────────────────────────────────
   const parseSentenceQuestion = (verb) => {
     if (!verb.example) return null;
     const sentences = verb.example.split('/').map(s => s.trim());
-
     for (const sentence of sentences) {
-      const cleanSentence = sentence.replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g, "");
-      const wordsInSentence = cleanSentence.toLowerCase().split(/\s+/);
-
-      const v1Option = verb.v1.toLowerCase();
-      const v2Option = verb.v2.toLowerCase();
-      const v3Option = verb.v3.toLowerCase();
-
-      // Check V2 or V3 first to make it a good tense test
-      const orderCheck = [
-        { key: 'v2', val: v2Option },
-        { key: 'v3', val: v3Option },
-        { key: 'v1', val: v1Option }
+      const clean = sentence.replace(/[.,/#!$%^&*;:{}=\-_`~()?]/g, '');
+      const wordsIn = clean.toLowerCase().split(/\s+/);
+      const checks = [
+        { key: 'v2', val: verb.v2.toLowerCase() },
+        { key: 'v3', val: verb.v3.toLowerCase() },
+        { key: 'v1', val: verb.v1.toLowerCase() },
       ];
-
-      for (const check of orderCheck) {
-        const targets = check.val.split('/').map(t => t.trim());
-        for (const t of targets) {
-          if (wordsInSentence.includes(t)) {
+      for (const check of checks) {
+        for (const t of check.val.split('/').map(x => x.trim())) {
+          if (wordsIn.includes(t)) {
             const regex = new RegExp(`\\b${escapeRegex(t)}\\b`, 'i');
             const match = regex.exec(sentence);
             const before = match ? sentence.slice(0, match.index) : sentence;
-            const after = match ? sentence.slice(match.index + match[0].length) : '';
-
+            const after  = match ? sentence.slice(match.index + match[0].length) : '';
             const choices = shuffleArray([
               { label: 'V1', text: verb.v1 },
               { label: 'V2', text: verb.v2 },
-              { label: 'V3', text: verb.v3 }
+              { label: 'V3', text: verb.v3 },
             ]);
-
             const correctIndex = choices.findIndex(c => c.label.toLowerCase() === check.key);
-
-            return {
-              before,
-              after,
-              choices,
-              correctIndex,
-              correctText: check.val
-            };
+            return { before, after, choices, correctIndex, correctText: check.val };
           }
         }
       }
@@ -247,6 +166,82 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     return null;
   };
 
+  // ── Pick game type for current verb ──────────────────────────────────────────
+  const pickQType = (verb) => {
+    const hasSentence = !!parseSentenceQuestion(verb);
+    const available = [QT_TABLE, QT_ORDER, QT_CHOICE, QT_TYPE];
+    if (hasSentence) available.push(QT_SENTENCE);
+    return available[Math.floor(Math.random() * available.length)];
+  };
+
+  // ── Setup question when verb or index changes ─────────────────────────────────
+  const currentVerb = sessionVerbs[currentIndex];
+
+  useEffect(() => {
+    if (subStep !== 'practice' || !currentVerb) return;
+
+    setChecked(false);
+    setLastCorrect(false);
+    questionStartRef.current = Date.now();
+
+    const chosen = pickQType(currentVerb);
+    setQType(chosen);
+
+    if (chosen === QT_TABLE) {
+      const prefill = Math.floor(Math.random() * 4);
+      setTablePrefill(prefill);
+      setTableAnswers({
+        v1: prefill === 1 ? currentVerb.v1 : '',
+        v2: prefill === 2 ? currentVerb.v2 : '',
+        v3: prefill === 3 ? currentVerb.v3 : '',
+      });
+      setTableCorrectFlags({ v1: true, v2: true, v3: true });
+      setTimeout(() => {
+        if (prefill === 0 || prefill === 2 || prefill === 3) v1Ref.current?.focus();
+        else if (prefill === 1) v2Ref.current?.focus();
+      }, 60);
+
+    } else if (chosen === QT_ORDER) {
+      setOrderStep(0);
+      setOrderFailed(false);
+      setOrderShake(null);
+      setOrderButtons(shuffleArray([
+        { id: 'v1', text: currentVerb.v1, clicked: false },
+        { id: 'v2', text: currentVerb.v2, clicked: false },
+        { id: 'v3', text: currentVerb.v3, clicked: false },
+      ]));
+
+    } else if (chosen === QT_SENTENCE) {
+      setSentenceQ(parseSentenceQuestion(currentVerb));
+      setSelectedChoice(null);
+
+    } else if (chosen === QT_CHOICE) {
+      // Build distractors from other session verbs
+      const others = sessionVerbs.filter((_, i) => i !== currentIndex);
+      const distractors = shuffleArray(others).slice(0, 2);
+      // Pad with dummy if not enough verbs
+      while (distractors.length < 2) {
+        distractors.push({ v1: '—', v2: '—', v3: '—' });
+      }
+      const allOpts = shuffleArray([
+        { v1: currentVerb.v1, v2: currentVerb.v2, v3: currentVerb.v3, isTarget: true },
+        ...distractors.map(v => ({ v1: v.v1, v2: v.v2, v3: v.v3, isTarget: false })),
+      ]);
+      setChoiceOptions(allOpts);
+      setChoiceSelected(null);
+
+    } else if (chosen === QT_TYPE) {
+      // Pick which form to hide: prefer v2 or v3 (harder)
+      const masks = ['v2', 'v3', 'v1'];
+      setTypeMask(masks[Math.floor(Math.random() * masks.length)]);
+      setTypeAnswer('');
+      setTypeCorrect(false);
+      setTimeout(() => typeRef.current?.focus(), 80);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subStep, currentVerb, currentIndex]);
+
+  // ── Empty state ───────────────────────────────────────────────────────────────
   if (sessionVerbs.length === 0) {
     return (
       <div className="empty-state">
@@ -255,41 +250,72 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
     );
   }
 
-  // --- STUDY PHASE HANDLERS ---
-  const handleNextStudyCard = () => {
-    if (studyIndex + 1 < sessionVerbs.length) {
-      setStudyIndex(prev => prev + 1);
+  // ── Study phase handlers ──────────────────────────────────────────────────────
+  const handleNextStudy = () => {
+    if (studyIndex + 1 < sessionVerbs.length) setStudyIndex(p => p + 1);
+    else setSubStep('practice');
+  };
+  const handlePrevStudy = () => {
+    if (studyIndex > 0) setStudyIndex(p => p - 1);
+  };
+
+  // ── Common result handler ─────────────────────────────────────────────────────
+  const processResult = (isCorrect) => {
+    const verb = sessionVerbs[currentIndex];
+    const responseTime = (Date.now() - questionStartRef.current) / 1000;
+    const confidence = inferConfidenceFromSpeed(responseTime, isCorrect);
+
+    setLastCorrect(isCorrect);
+    setChecked(true);
+
+    if (isCorrect) {
+      playSound('correct');
+      setCorrectCount(p => p + 1);
     } else {
-      setSubStep('practice');
+      playSound('wrong');
+      setIncorrectCount(p => p + 1);
+      setWrongVerbs(p => [...p, verb]);
+    }
+
+    if (!isCorrect && !verb._requeued) {
+      setSessionVerbs(prev => {
+        const next = [...prev];
+        next.splice(Math.min(next.length, currentIndex + 4), 0, { ...verb, _requeued: true });
+        return next;
+      });
+    }
+
+    if (onUpdateWord) {
+      onUpdateWord(verb.id, { isCorrect, confidence, responseTime, retrievalType: 'active_recall' })
+        .catch(err => console.error('Persist failed:', err));
+    }
+
+    speakVerbs(verb.v1, verb.v2, verb.v3);
+  };
+
+  const handleNext = () => {
+    if (currentIndex + 1 >= sessionVerbs.length) {
+      onComplete({ totalWords: sessionVerbs.length, correctCount, incorrectCount, wrongWords: wrongVerbs });
+    } else {
+      setCurrentIndex(p => p + 1);
     }
   };
 
-  const handlePrevStudyCard = () => {
-    if (studyIndex > 0) {
-      setStudyIndex(prev => prev - 1);
-    }
-  };
-
-  // --- TYPE 0: TABLE FILL INPUT HANDLERS ---
-  const handleTableInputChange = (field, val) => {
+  // ── QT_TABLE handlers ─────────────────────────────────────────────────────────
+  const handleTableChange = (field, val) => {
     if (checked) return;
-    setTableAnswers(prev => ({ ...prev, [field]: val }));
+    setTableAnswers(p => ({ ...p, [field]: val }));
   };
 
-  const handleTableKeyPress = (e, field) => {
+  const handleTableKey = (e, field) => {
     if (e.key !== 'Enter') return;
-    if (checked) {
-      handleNextQuestion();
-      return;
-    }
-
+    if (checked) { handleNext(); return; }
     if (field === 'v1') {
-      if (tablePrefillType !== 2) v2Ref.current?.focus();
-      else v3Ref.current?.focus();
+      (tablePrefill !== 2 ? v2Ref : v3Ref).current?.focus();
     } else if (field === 'v2') {
-      if (tablePrefillType !== 3) v3Ref.current?.focus();
+      if (tablePrefill !== 3) v3Ref.current?.focus();
       else handleTableSubmit();
-    } else if (field === 'v3') {
+    } else {
       handleTableSubmit();
     }
   };
@@ -297,125 +323,110 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
   const handleTableSubmit = () => {
     if (checked) return;
     const verb = sessionVerbs[currentIndex];
-    const v1Correct = isCorrectMatch(tableAnswers.v1, verb.v1);
-    const v2Correct = isCorrectMatch(tableAnswers.v2, verb.v2);
-    const v3Correct = isCorrectMatch(tableAnswers.v3, verb.v3);
-
-    const isAllCorrect = v1Correct && v2Correct && v3Correct;
-
-    setTableCorrectFlags({ v1: v1Correct, v2: v2Correct, v3: v3Correct });
-    setChecked(true);
-
-    processResult(isAllCorrect);
+    const v1ok = tablePrefill === 1 || isCorrectMatch(tableAnswers.v1, verb.v1);
+    const v2ok = tablePrefill === 2 || isCorrectMatch(tableAnswers.v2, verb.v2);
+    const v3ok = tablePrefill === 3 || isCorrectMatch(tableAnswers.v3, verb.v3);
+    setTableCorrectFlags({ v1: v1ok, v2: v2ok, v3: v3ok });
+    // Show correct answers for wrong fields
+    setTableAnswers(prev => ({
+      v1: v1ok ? prev.v1 : verb.v1,
+      v2: v2ok ? prev.v2 : verb.v2,
+      v3: v3ok ? prev.v3 : verb.v3,
+    }));
+    processResult(v1ok && v2ok && v3ok);
   };
 
-  // --- TYPE 1: SHUFFLED ORDER CLICK HANDLER ---
+  // ── QT_ORDER handlers ─────────────────────────────────────────────────────────
   const handleOrderClick = (btn, btnIdx) => {
     if (checked || btn.clicked) return;
-
     const verb = sessionVerbs[currentIndex];
-    const expectedForms = [verb.v1, verb.v2, verb.v3];
-    const expectedFormText = expectedForms[orderStep];
-
-    const isCorrectChoice = isCorrectMatch(btn.text, expectedFormText);
-
-    if (isCorrectChoice) {
-      const updatedButtons = orderButtons.map((b, idx) =>
-        idx === btnIdx ? { ...b, clicked: true, clickedIndex: orderStep } : b
+    const expected = [verb.v1, verb.v2, verb.v3][orderStep];
+    if (isCorrectMatch(btn.text, expected)) {
+      const updated = orderButtons.map((b, i) =>
+        i === btnIdx ? { ...b, clicked: true, clickedIndex: orderStep } : b
       );
-      setOrderButtons(updatedButtons);
-
+      setOrderButtons(updated);
       if (orderStep === 2) {
-        setChecked(true);
         processResult(!orderFailed);
       } else {
-        setOrderStep(prev => prev + 1);
+        setOrderStep(p => p + 1);
       }
     } else {
       setOrderFailed(true);
+      setOrderShake(btnIdx);
       playSound('wrong');
+      setTimeout(() => setOrderShake(null), 500);
     }
   };
 
-  const handleOrderSkipReveal = () => {
-    setChecked(true);
+  const handleOrderReveal = () => {
+    // Mark all as clicked to reveal labels, then finish as wrong
+    const verb = sessionVerbs[currentIndex];
+    setOrderButtons([
+      { id: 'v1', text: verb.v1, clicked: true, clickedIndex: 0 },
+      { id: 'v2', text: verb.v2, clicked: true, clickedIndex: 1 },
+      { id: 'v3', text: verb.v3, clicked: true, clickedIndex: 2 },
+    ]);
     processResult(false);
   };
 
-  // --- TYPE 2: SENTENCE CHOICE HANDLER ---
-  const handleChoiceClick = (choiceIdx) => {
+  // ── QT_SENTENCE handlers ──────────────────────────────────────────────────────
+  const handleSentenceChoice = (idx) => {
     if (checked) return;
-    setSelectedChoice(choiceIdx);
-    setChecked(true);
-
-    const isAllCorrect = choiceIdx === sentenceQuestion.correctIndex;
-    processResult(isAllCorrect);
+    setSelectedChoice(idx);
+    processResult(idx === sentenceQ.correctIndex);
   };
 
-  // Common Results Processing
-  const processResult = (isCorrect) => {
+  // ── QT_CHOICE handlers ────────────────────────────────────────────────────────
+  const handleChoiceSelect = (idx) => {
+    if (checked) return;
+    setChoiceSelected(idx);
+    processResult(choiceOptions[idx]?.isTarget === true);
+  };
+
+  // ── QT_TYPE handlers ──────────────────────────────────────────────────────────
+  const handleTypeSubmit = () => {
+    if (checked) return;
     const verb = sessionVerbs[currentIndex];
-    const responseTime = (Date.now() - questionStartRef.current) / 1000;
-    const confidence = inferConfidenceFromSpeed(responseTime, isCorrect);
-
-    if (isCorrect) {
-      playSound('correct');
-      setCorrectCount(prev => prev + 1);
-    } else {
-      playSound('wrong');
-      setIncorrectCount(prev => prev + 1);
-      setWrongVerbs(prev => [...prev, verb]);
-    }
-
-    // Requeue a missed verb immediately, synchronously — never gated behind
-    // the Firebase round-trip below. Awaiting it first (as this used to)
-    // meant that on a slow connection, answering the *next* question before
-    // this promise resolved could land the requeue splice at a position
-    // that had already been reached, silently swapping out whatever verb
-    // the user was currently looking at. The verb's own linguistic fields
-    // (v1/v2/v3/translation/example) — the only ones this component ever
-    // renders — don't change, so there's nothing to wait for here; the
-    // persisted stability/mastery update below is fire-and-forget.
-    if (!isCorrect && !verb._requeued) {
-      setSessionVerbs(prev => {
-        const next = [...prev];
-        const reinsertAt = Math.min(next.length, currentIndex + 4);
-        next.splice(reinsertAt, 0, { ...verb, _requeued: true });
-        return next;
-      });
-    }
-
-    if (onUpdateWord) {
-      onUpdateWord(verb.id, { isCorrect, confidence, responseTime, retrievalType: 'active_recall' })
-        .catch((err) => console.error('Failed to persist verb review:', err));
-    }
-
-    speakVerbs(verb.v1, verb.v2, verb.v3);
+    const correct = isCorrectMatch(typeAnswer, verb[typeMask]);
+    setTypeCorrect(correct);
+    if (!correct) setTypeAnswer(verb[typeMask]); // show correct answer
+    processResult(correct);
   };
 
-  const handleNextQuestion = () => {
-    if (currentIndex + 1 >= sessionVerbs.length) {
-      onComplete({
-        totalWords: sessionVerbs.length,
-        correctCount,
-        incorrectCount,
-        wrongWords: wrongVerbs
-      });
-    } else {
-      setChecked(false);
-      setCurrentIndex(prev => prev + 1);
+  const handleTypeKey = (e) => {
+    if (e.key === 'Enter') {
+      if (checked) handleNext();
+      else handleTypeSubmit();
     }
   };
 
+  // ── Helpers ───────────────────────────────────────────────────────────────────
+  const progressPct = sessionVerbs.length > 0
+    ? ((currentIndex) / sessionVerbs.length) * 100
+    : 0;
+
+  const qTypeLabel = {
+    [QT_TABLE]:    t('practice.fillRemaining')    || 'Fill in the verb forms',
+    [QT_ORDER]:    t('practice.tapInOrder')        || 'Tap in order: V1 → V2 → V3',
+    [QT_SENTENCE]: t('practice.chooseMatchingVerb')|| 'Choose the correct form',
+    [QT_CHOICE]:   t('practice.chooseCorrectVerb') || 'Choose the correct verb',
+    [QT_TYPE]:     t('practice.typeTheMissing')    || 'Type the missing form',
+  };
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // RENDER
+  // ─────────────────────────────────────────────────────────────────────────────
   return (
     <div className="practice-card-container irregular-trainer-container">
-      {/* -------------------------------------------------------- */}
-      {/* PHASE 1: STUDY CARDS */}
-      {/* -------------------------------------------------------- */}
+
+      {/* ───────────────────────────────────────────────────────────────────── */}
+      {/* PHASE 1: STUDY CARDS                                                  */}
+      {/* ───────────────────────────────────────────────────────────────────── */}
       {subStep === 'study' && (
         <div className="study-flow">
           <div className="practice-card-header study-header">
-            <span className="practice-source-badge">{t('practice.studyVerbs')}</span>
+            <span className="practice-source-badge">{t('practice.studyVerbs') || 'Study'}</span>
             <span className="practice-source-badge">{studyIndex + 1} / {sessionVerbs.length}</span>
           </div>
 
@@ -423,11 +434,22 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
             <motion.div
               key={studyIndex}
               className="study-card"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.2 }}
             >
+              <button
+                className="btn-speak-study-card study-card-listen"
+                onClick={() => speakVerbs(
+                  sessionVerbs[studyIndex].v1,
+                  sessionVerbs[studyIndex].v2,
+                  sessionVerbs[studyIndex].v3
+                )}
+              >
+                <Volume2 size={16} strokeWidth={2.2} />
+              </button>
+
               <div className="study-card-uz-title">
                 {sessionVerbs[studyIndex].translation}
               </div>
@@ -438,55 +460,42 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
                   onClick={() => setStudyRevealed(true)}
                 >
                   <Eye size={16} strokeWidth={2.3} />
-                  {t('practice.tryToRecall')}
+                  {t('practice.tryToRecall') || 'Show forms'}
                 </button>
               ) : (
                 <>
-                  {/* iOS-Style Grouped Rows */}
                   <div className="study-card-rows-list">
-                    <div className="study-card-row-item">
-                      <span className="study-row-title">{t('practice.infinitive')}</span>
-                      <span className="study-row-val">{sessionVerbs[studyIndex].v1}</span>
-                    </div>
-                    <div className="study-card-row-item">
-                      <span className="study-row-title">{t('practice.pastSimple')}</span>
-                      <span className="study-row-val">{sessionVerbs[studyIndex].v2}</span>
-                    </div>
-                    <div className="study-card-row-item">
-                      <span className="study-row-title">{t('practice.pastParticiple')}</span>
-                      <span className="study-row-val">{sessionVerbs[studyIndex].v3}</span>
-                    </div>
+                    {[
+                      { title: t('practice.infinitive') || 'Infinitive (V1)', val: sessionVerbs[studyIndex].v1 },
+                      { title: t('practice.pastSimple')  || 'Past Simple (V2)', val: sessionVerbs[studyIndex].v2 },
+                      { title: t('practice.pastParticiple') || 'Past Participle (V3)', val: sessionVerbs[studyIndex].v3 },
+                    ].map(({ title, val }) => (
+                      <div key={title} className="study-card-row-item">
+                        <span className="study-row-title">{title}</span>
+                        <span className="study-row-val">{val}</span>
+                      </div>
+                    ))}
                   </div>
 
                   {sessionVerbs[studyIndex].example && (
                     <div className="study-card-example-box">
-                      <div className="example-label">{t('practice.forExample')}</div>
+                      <div className="example-label">{t('practice.forExample') || 'Example'}</div>
                       <div className="example-sentences">
                         {sessionVerbs[studyIndex].example.split('/').map((s, i) => {
-                          const trimmed = s.trim();
                           const forms = [
                             ...sessionVerbs[studyIndex].v1.split('/'),
                             ...sessionVerbs[studyIndex].v2.split('/'),
-                            ...sessionVerbs[studyIndex].v3.split('/')
+                            ...sessionVerbs[studyIndex].v3.split('/'),
                           ];
-
                           return (
                             <div key={i} className="example-sentence-item">
-                              {highlightForms(trimmed, forms)}
+                              {highlightForms(s.trim(), forms)}
                             </div>
                           );
                         })}
                       </div>
                     </div>
                   )}
-
-                  <button
-                    className="btn-speak-study-card"
-                    onClick={() => speakVerbs(sessionVerbs[studyIndex].v1, sessionVerbs[studyIndex].v2, sessionVerbs[studyIndex].v3)}
-                  >
-                    <Volume2 size={18} strokeWidth={2.2} />
-                    {t('practice.listen')}
-                  </button>
                 </>
               )}
             </motion.div>
@@ -495,247 +504,360 @@ export default function IrregularVerbsTrainer({ words, onComplete, onUpdateWord,
           <div className="study-card-footer">
             <button
               className="btn btn-secondary"
-              onClick={studyIndex === 0 ? onExit : handlePrevStudyCard}
+              onClick={studyIndex === 0 ? onExit : handlePrevStudy}
             >
-              {studyIndex === 0 ? t('profile.exit') || "Exit" : t('library.back') || "Back"}
+              <ChevronLeft size={18} strokeWidth={2.3} />
+              {studyIndex === 0
+                ? (t('profile.exit') || 'Exit')
+                : (t('library.back') || 'Back')}
             </button>
-            <button
-              className="btn btn-primary"
-              onClick={handleNextStudyCard}
-            >
-              {studyIndex + 1 === sessionVerbs.length ? t('practice.start') || "Start" : t('practice.nextBtn') || "Next"}
+            <button className="btn btn-primary" onClick={handleNextStudy}>
+              {studyIndex + 1 === sessionVerbs.length
+                ? (t('practice.start') || 'Start Practice')
+                : (t('practice.nextBtn') || 'Next')}
+              <ChevronRight size={18} strokeWidth={2.3} />
             </button>
           </div>
         </div>
       )}
 
-      {/* -------------------------------------------------------- */}
-      {/* PHASE 2: PRACTICE GAMES */}
-      {/* -------------------------------------------------------- */}
-      {subStep === 'practice' && (
-        <div>
-          <div className="practice-card-header study-header">
-            <span className="practice-source-badge">Practice</span>
-            <div className="practice-source-badge">
-              {currentIndex + 1} of {sessionVerbs.length}
+      {/* ───────────────────────────────────────────────────────────────────── */}
+      {/* PHASE 2: PRACTICE GAMES                                               */}
+      {/* ───────────────────────────────────────────────────────────────────── */}
+      {subStep === 'practice' && currentVerb && (
+        <div className="practice-phase">
+
+          {/* Progress bar */}
+          <div className="trainer-progress-wrap">
+            <div className="trainer-progress-bar">
+              <div
+                className="trainer-progress-fill"
+                style={{ width: `${progressPct}%` }}
+              />
             </div>
+            <span className="trainer-progress-label">
+              {currentIndex + 1} / {sessionVerbs.length}
+            </span>
           </div>
 
-          <div className="trainer-board">
-            
-            {/* ------------------------------------ */}
-            {/* GAME TYPE 0: TABLE FILL-IN */}
-            {/* ------------------------------------ */}
-            {qType === 0 && (
-              <div className="game-type-wrap" style={{ width: '100%' }}>
-                <div className="verb-uz-translation">
-                  <span>{currentVerb.translation}</span>
-                </div>
-                <div className="trainer-instruction">
-                  {t('practice.fillRemaining')}
-                </div>
+          {/* Mode pill */}
+          <div className="trainer-mode-pill">
+            {qTypeLabel[qType]}
+          </div>
 
-                <div className="trainer-grid">
-                  <div className="trainer-col">
-                    <label className="trainer-col-label">V1</label>
-                    <input
-                      ref={v1Ref}
-                      type="text"
-                      name="practice_no_autofill_v1"
-                      className={`trainer-input ${tablePrefillType === 1 ? 'prefilled' : ''} ${checked && !tableCorrectFlags.v1 ? 'error' : ''} ${checked && tableCorrectFlags.v1 && tablePrefillType !== 1 ? 'success' : ''}`}
-                      value={tableAnswers.v1}
-                      onChange={(e) => handleTableInputChange('v1', e.target.value)}
-                      onKeyDown={(e) => handleTableKeyPress(e, 'v1')}
-                      disabled={tablePrefillType === 1 || checked}
-                      placeholder={tablePrefillType === 1 ? "" : "Infinitive"}
-                      autoComplete="off"
-                      autoCorrect="off"
-                      autoCapitalize="none"
-                      spellCheck={false}
-                      inputMode="text"
-                      aria-autocomplete="none"
-                      data-lpignore="true"
-                      data-1p-ignore="true"
-                      data-form-type="other"
-                    />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`${currentIndex}-${qType}`}
+              className="trainer-board"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.2 }}
+            >
+              {/* ───────────────── QT_TABLE ───────────────── */}
+              {qType === QT_TABLE && (
+                <div className="game-type-wrap">
+                  <div className="verb-uz-translation">
+                    {currentVerb.translation}
                   </div>
 
-                  <div className="trainer-col">
-                    <label className="trainer-col-label">V2</label>
-                    <input
-                      ref={v2Ref}
-                      type="text"
-                      name="practice_no_autofill_v2"
-                      className={`trainer-input ${tablePrefillType === 2 ? 'prefilled' : ''} ${checked && !tableCorrectFlags.v2 ? 'error' : ''} ${checked && tableCorrectFlags.v2 && tablePrefillType !== 2 ? 'success' : ''}`}
-                      value={tableAnswers.v2}
-                      onChange={(e) => handleTableInputChange('v2', e.target.value)}
-                      onKeyDown={(e) => handleTableKeyPress(e, 'v2')}
-                      disabled={tablePrefillType === 2 || checked}
-                      placeholder={tablePrefillType === 2 ? "" : "Past"}
-                      autoComplete="off"
-                      autoCorrect="off"
-                      autoCapitalize="none"
-                      spellCheck={false}
-                      inputMode="text"
-                      aria-autocomplete="none"
-                      data-lpignore="true"
-                      data-1p-ignore="true"
-                      data-form-type="other"
-                    />
-                  </div>
-
-                  <div className="trainer-col">
-                    <label className="trainer-col-label">V3</label>
-                    <input
-                      ref={v3Ref}
-                      type="text"
-                      name="practice_no_autofill_v3"
-                      className={`trainer-input ${tablePrefillType === 3 ? 'prefilled' : ''} ${checked && !tableCorrectFlags.v3 ? 'error' : ''} ${checked && tableCorrectFlags.v3 && tablePrefillType !== 3 ? 'success' : ''}`}
-                      value={tableAnswers.v3}
-                      onChange={(e) => handleTableInputChange('v3', e.target.value)}
-                      onKeyDown={(e) => handleTableKeyPress(e, 'v3')}
-                      disabled={tablePrefillType === 3 || checked}
-                      placeholder={tablePrefillType === 3 ? "" : "Participle"}
-                      autoComplete="off"
-                      autoCorrect="off"
-                      autoCapitalize="none"
-                      spellCheck={false}
-                      inputMode="text"
-                      aria-autocomplete="none"
-                      data-lpignore="true"
-                      data-1p-ignore="true"
-                      data-form-type="other"
-                    />
+                  <div className="trainer-grid">
+                    {[
+                      { key: 'v1', ref: v1Ref, label: 'V1', placeholder: 'Infinitive', prefillIdx: 1 },
+                      { key: 'v2', ref: v2Ref, label: 'V2', placeholder: 'Past Simple', prefillIdx: 2 },
+                      { key: 'v3', ref: v3Ref, label: 'V3', placeholder: 'Participle', prefillIdx: 3 },
+                    ].map(({ key, ref, label, placeholder, prefillIdx }) => {
+                      const isPrefilled = tablePrefill === prefillIdx;
+                      const isOk       = tableCorrectFlags[key];
+                      let cls = 'trainer-input';
+                      if (isPrefilled)                               cls += ' prefilled';
+                      else if (checked && !isOk)                     cls += ' error';
+                      else if (checked && isOk)                      cls += ' success';
+                      return (
+                        <div key={key} className="trainer-col">
+                          <label className="trainer-col-label">{label}</label>
+                          <input
+                            ref={ref}
+                            type="text"
+                            name={`no_autofill_${key}`}
+                            className={cls}
+                            value={tableAnswers[key]}
+                            onChange={e => handleTableChange(key, e.target.value)}
+                            onKeyDown={e => handleTableKey(e, key)}
+                            disabled={isPrefilled || checked}
+                            placeholder={isPrefilled ? '' : placeholder}
+                            autoComplete="off" autoCorrect="off"
+                            autoCapitalize="none" spellCheck={false}
+                            data-lpignore="true" data-1p-ignore="true"
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* ------------------------------------ */}
-            {/* GAME TYPE 1: SHUFFLED ORDER */}
-            {/* ------------------------------------ */}
-            {qType === 1 && (
-              <div className="game-type-wrap" style={{ width: '100%' }}>
-                <div className="verb-uz-translation">
-                  <span>{currentVerb.translation}</span>
-                </div>
-                <div className="trainer-instruction">
-                  {t('practice.tapInOrder')}
-                </div>
+              {/* ───────────────── QT_ORDER ───────────────── */}
+              {qType === QT_ORDER && (
+                <div className="game-type-wrap">
+                  <div className="verb-uz-translation">
+                    {currentVerb.translation}
+                  </div>
 
-                <div className="order-grid">
-                  {orderButtons.map((btn, idx) => (
-                    <button
-                      key={idx}
-                      className={`btn-order-item ${btn.clicked ? 'clicked disabled' : ''}`}
-                      onClick={() => handleOrderClick(btn, idx)}
-                      disabled={btn.clicked || checked}
-                    >
-                      <span>{btn.text}</span>
-                      {btn.clicked && (
-                        <span className="order-badge">
-                          V{btn.clickedIndex + 1}
+                  {/* Progress strip showing what's been tapped */}
+                  <div className="order-sequence-indicator">
+                    {['V1', 'V2', 'V3'].map((label, i) => {
+                      const isActive = orderStep > i || checked;
+                      const tapped   = orderButtons.find(b => b.clickedIndex === i);
+                      return (
+                        <span key={label}>
+                          <span className={`seq-dot ${isActive ? 'active' : ''}`}>
+                            {isActive && tapped ? tapped.text : label}
+                          </span>
+                          {i < 2 && <span className="seq-arrow">→</span>}
                         </span>
-                      )}
-                    </button>
-                  ))}
-                </div>
+                      );
+                    })}
+                  </div>
 
-                <div className="order-sequence-indicator">
-                  <span className={`seq-dot ${orderStep >= 1 || checked ? 'active' : ''}`}>{checked || orderStep >= 1 ? currentVerb.v1 : 'V1'}</span>
-                  <span className="seq-arrow">→</span>
-                  <span className={`seq-dot ${orderStep >= 2 || checked ? 'active' : ''}`}>{checked || orderStep >= 2 ? currentVerb.v2 : 'V2'}</span>
-                  <span className="seq-arrow">→</span>
-                  <span className={`seq-dot ${checked ? 'active' : ''}`}>{checked ? currentVerb.v3 : 'V3'}</span>
-                </div>
-              </div>
-            )}
-
-            {/* ------------------------------------ */}
-            {/* GAME TYPE 2: SENTENCE CHOICE */}
-            {/* ------------------------------------ */}
-            {qType === 2 && sentenceQuestion && (
-              <div className="game-type-wrap" style={{ width: '100%' }}>
-                <div className="sentence-text-question">
-                  {sentenceQuestion.before}<strong>_______</strong>{sentenceQuestion.after}
-                </div>
-                <div className="trainer-instruction">
-                  {t('practice.chooseMatchingVerb')}
-                </div>
-
-                <div className="choices-grid">
-                  {sentenceQuestion.choices.map((choice, idx) => {
-                    const isSelected = selectedChoice === idx;
-                    const isCorrect = idx === sentenceQuestion.correctIndex;
-                    let btnClass = '';
-                    
-                    if (checked) {
-                      if (isCorrect) btnClass = 'success';
-                      else if (isSelected) btnClass = 'error';
-                      else btnClass = 'disabled';
-                    }
-
-                    return (
+                  <div className="order-grid">
+                    {orderButtons.map((btn, idx) => (
                       <button
                         key={idx}
-                        className={`btn-choice-item ${btnClass}`}
-                        onClick={() => handleChoiceClick(idx)}
-                        disabled={checked}
+                        className={[
+                          'btn-order-item',
+                          btn.clicked ? 'clicked' : '',
+                          orderShake === idx ? 'shake' : '',
+                        ].filter(Boolean).join(' ')}
+                        onClick={() => handleOrderClick(btn, idx)}
+                        disabled={btn.clicked || checked}
                       >
-                        <div className="choice-label">{choice.label}</div>
-                        <div className="choice-val">{choice.text}</div>
+                        <span>{btn.text}</span>
+                        {btn.clicked && (
+                          <span className="order-badge">V{btn.clickedIndex + 1}</span>
+                        )}
                       </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* Reveal Answer Box */}
-            <AnimatePresence>
-              {checked && (
-                <motion.div
-                  className="trainer-reveal-box"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                >
-                  <div className="reveal-title">{t('practice.correctAnswer')}</div>
-                  <div className="reveal-forms">
-                    <span className="reveal-form-item">{currentVerb.v1}</span>
-                    <span className="reveal-divider">→</span>
-                    <span className="reveal-form-item">{currentVerb.v2}</span>
-                    <span className="reveal-divider">→</span>
-                    <span className="reveal-form-item">{currentVerb.v3}</span>
+                    ))}
                   </div>
-                  {currentVerb.example && (
-                    <div className="reveal-example">
-                      {currentVerb.example}
-                    </div>
-                  )}
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
 
-            {/* Footer Buttons */}
-            <div className="trainer-footer">
-              {!checked ? (
-                qType === 0 ? (
-                  <button className="btn btn-primary btn-submit-trainer" onClick={handleTableSubmit}>
-                    {t('practice.check')}
-                  </button>
-                ) : qType === 1 ? (
-                  <button className="btn btn-ghost btn-submit-trainer" onClick={handleOrderSkipReveal}>
-                    {t('practice.showAnswer')}
-                  </button>
-                ) : null
-              ) : (
-                <button className="btn btn-success btn-submit-trainer" onClick={handleNextQuestion}>
-                  {currentIndex + 1 === sessionVerbs.length ? t('practice.resultsBtn') : t('practice.continueBtn')}
-                </button>
+              {/* ───────────────── QT_SENTENCE ───────────────── */}
+              {qType === QT_SENTENCE && sentenceQ && (
+                <div className="game-type-wrap">
+                  <div className="sentence-text-question">
+                    {sentenceQ.before}
+                    <strong className="sentence-gap">_______</strong>
+                    {sentenceQ.after}
+                  </div>
+
+                  <div className="choices-grid">
+                    {sentenceQ.choices.map((choice, idx) => {
+                      const isSelected = selectedChoice === idx;
+                      const isCorrect  = idx === sentenceQ.correctIndex;
+                      let cls = 'btn-choice-item';
+                      if (checked) {
+                        if (isCorrect)            cls += ' success';
+                        else if (isSelected)      cls += ' error';
+                        else                      cls += ' dimmed';
+                      }
+                      return (
+                        <button
+                          key={idx}
+                          className={cls}
+                          onClick={() => handleSentenceChoice(idx)}
+                          disabled={checked}
+                        >
+                          <div className="choice-label">{choice.label}</div>
+                          <div className="choice-val">{choice.text}</div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               )}
-            </div>
-          </div>
+
+              {/* ───────────────── QT_CHOICE ───────────────── */}
+              {qType === QT_CHOICE && (
+                <div className="game-type-wrap">
+                  <div className="verb-uz-translation choice-question-title">
+                    {currentVerb.translation}
+                  </div>
+                  <p className="trainer-instruction" style={{ marginBottom: 16 }}>
+                    {t('practice.chooseCorrectVerb') || 'Choose the correct verb'}
+                  </p>
+
+                  <div className="choice-cards-grid">
+                    {choiceOptions.map((opt, idx) => {
+                      let cls = 'btn-choice-card';
+                      if (checked) {
+                        if (opt.isTarget)          cls += ' success';
+                        else if (choiceSelected === idx) cls += ' error';
+                        else                       cls += ' dimmed';
+                      } else if (choiceSelected === idx) {
+                        cls += ' selected';
+                      }
+                      return (
+                        <button
+                          key={idx}
+                          className={cls}
+                          onClick={() => handleChoiceSelect(idx)}
+                          disabled={checked}
+                        >
+                          <span className="choice-card-form">{opt.v1}</span>
+                          <span className="choice-card-sep">→</span>
+                          <span className="choice-card-form">{opt.v2}</span>
+                          <span className="choice-card-sep">→</span>
+                          <span className="choice-card-form">{opt.v3}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* ───────────────── QT_TYPE ───────────────── */}
+              {qType === QT_TYPE && typeMask && (
+                <div className="game-type-wrap">
+                  <div className="type-verb-display">
+                    {[
+                      { key: 'v1', label: 'V1' },
+                      { key: 'v2', label: 'V2' },
+                      { key: 'v3', label: 'V3' },
+                    ].map(({ key, label }, i) => (
+                      <span key={key}>
+                        {i > 0 && <span className="type-sep">→</span>}
+                        <span className={`type-form-block ${key === typeMask ? 'type-blank' : ''}`}>
+                          <span className="type-form-label">{label}</span>
+                          {key === typeMask ? (
+                            <span className="type-hidden">?</span>
+                          ) : (
+                            <span className="type-form-val">{currentVerb[key]}</span>
+                          )}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="type-input-wrap">
+                    <input
+                      ref={typeRef}
+                      type="text"
+                      className={[
+                        'trainer-input type-input',
+                        checked && typeCorrect  ? 'success' : '',
+                        checked && !typeCorrect ? 'error'   : '',
+                      ].filter(Boolean).join(' ')}
+                      value={typeAnswer}
+                      onChange={e => { if (!checked) setTypeAnswer(e.target.value); }}
+                      onKeyDown={handleTypeKey}
+                      disabled={checked}
+                      placeholder={`Type ${typeMask?.toUpperCase()}...`}
+                      autoComplete="off" autoCorrect="off"
+                      autoCapitalize="none" spellCheck={false}
+                      data-lpignore="true" data-1p-ignore="true"
+                    />
+                    <div className="type-translation-hint">
+                      {currentVerb.translation}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ───────────────── Reveal box ───────────────── */}
+              <AnimatePresence>
+                {checked && (
+                  <motion.div
+                    className={`trainer-reveal-box ${lastCorrect ? 'reveal-correct' : 'reveal-wrong'}`}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <div className="reveal-status-row">
+                      {lastCorrect
+                        ? <CheckCircle2 size={18} strokeWidth={2.2} className="reveal-icon correct" />
+                        : <XCircle size={18} strokeWidth={2.2} className="reveal-icon wrong" />
+                      }
+                      <div className="reveal-title">
+                        {lastCorrect
+                          ? (t('practice.correctTitle') || 'Correct!')
+                          : (t('practice.incorrectTitle') || 'Incorrect')}
+                      </div>
+                    </div>
+                    <div className="reveal-forms">
+                      <span className="reveal-form-item">{currentVerb.v1}</span>
+                      <span className="reveal-divider">→</span>
+                      <span className="reveal-form-item">{currentVerb.v2}</span>
+                      <span className="reveal-divider">→</span>
+                      <span className="reveal-form-item">{currentVerb.v3}</span>
+                    </div>
+                    {currentVerb.example && (
+                      <div className="reveal-example">
+                        {currentVerb.example.split('/')[0]?.trim()}
+                      </div>
+                    )}
+                    <button
+                      className="reveal-listen-btn"
+                      onClick={() => speakVerbs(currentVerb.v1, currentVerb.v2, currentVerb.v3)}
+                    >
+                      <Volume2 size={14} strokeWidth={2.2} />
+                      {t('practice.listen') || 'Listen'}
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* ───────────────── Footer buttons ───────────────── */}
+              <div className="trainer-footer">
+                {!checked ? (
+                  <>
+                    {qType === QT_TABLE && (
+                      <button
+                        className="btn btn-primary btn-submit-trainer"
+                        onClick={handleTableSubmit}
+                        disabled={
+                          (tablePrefill !== 1 && !tableAnswers.v1.trim()) ||
+                          (tablePrefill !== 2 && !tableAnswers.v2.trim()) ||
+                          (tablePrefill !== 3 && !tableAnswers.v3.trim())
+                        }
+                      >
+                        {t('practice.check') || 'Check'}
+                      </button>
+                    )}
+                    {qType === QT_ORDER && (
+                      <button
+                        className="btn btn-ghost btn-submit-trainer"
+                        onClick={handleOrderReveal}
+                      >
+                        {t('practice.showAnswer') || 'Show Answer'}
+                      </button>
+                    )}
+                    {qType === QT_TYPE && (
+                      <button
+                        className="btn btn-primary btn-submit-trainer"
+                        onClick={handleTypeSubmit}
+                        disabled={!typeAnswer.trim()}
+                      >
+                        {t('practice.check') || 'Check'}
+                      </button>
+                    )}
+                    {/* QT_SENTENCE and QT_CHOICE have no footer button — tap a card */}
+                  </>
+                ) : (
+                  <button
+                    className="btn btn-submit-trainer btn-next-trainer"
+                    onClick={handleNext}
+                  >
+                    {currentIndex + 1 >= sessionVerbs.length
+                      ? (t('practice.resultsBtn') || 'Results')
+                      : (t('practice.continueBtn') || 'Continue')}
+                    <ChevronRight size={18} strokeWidth={2.3} />
+                  </button>
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       )}
     </div>
