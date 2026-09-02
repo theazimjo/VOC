@@ -1,104 +1,124 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap } from 'lucide-react';
-import { GREEK_VOCABULARY, GREEK_VOCAB_CATEGORIES, getVocabByCategory } from '../../data/greekVocabulary';
-import { useGreekVocabularyProgress } from '../../hooks/useGreekVocabularyProgress';
-import GreekVocabWordCard from '../../components/greek/GreekVocabWordCard';
-import GreekVocabLearnFlow from '../../components/greek/GreekVocabLearnFlow';
+import { Brain } from 'lucide-react';
+import { GREEK_VOCABULARY, GREEK_VOCAB_CATEGORIES } from '../../data/greekVocabulary';
+import { useAuth } from '../../contexts/AuthContext';
+import { useGreekVocabWords } from '../../hooks/useGreekVocabWords';
+import { saveGreekVocabReview } from '../../utils/greekVocabReview';
+import { computeRetentionStats } from '../../utils/memoryEngine';
+import WordList from '../../components/Words/WordList';
+import GreekVocabPractice from '../../components/greek/GreekVocabPractice';
 import './GreekVocabulary.css';
 
-const NEW_PER_SESSION = 3;
-const REVIEW_PER_SESSION = 2;
-
-// Same continuous "pick up where you left off" model as the alphabet
-// track's pickSession (see GreekAlphabet.jsx) — next unintroduced words in
-// list order (which happens to walk category by category), plus the
-// weakest-mastery already-introduced words for spaced review.
-function pickSession(mastery) {
-  const notIntroduced = GREEK_VOCABULARY.filter((w) => mastery[w.id] === undefined);
-  const introduced = GREEK_VOCABULARY.filter((w) => mastery[w.id] !== undefined);
-  const reviewPool = [...introduced].sort((a, b) => (mastery[a.id] ?? 0) - (mastery[b.id] ?? 0));
-
-  if (notIntroduced.length === 0) {
-    return { newWords: [], reviewWords: reviewPool.slice(0, NEW_PER_SESSION + REVIEW_PER_SESSION) };
-  }
-  return {
-    newWords: notIntroduced.slice(0, NEW_PER_SESSION),
-    reviewWords: reviewPool.slice(0, REVIEW_PER_SESSION),
-  };
-}
-
+// Mirrors the personal PackDetail.jsx page (header stats + Memory Twin +
+// topic chips + WordList), minus everything that only makes sense for a
+// user-editable pack (add/edit/delete word, photo import, daily limits,
+// custom chapters) — this is a fixed, curated 37-word curriculum. Words
+// live at their own RTDB path (see useGreekVocabWords), seeded once here,
+// so this never touches or appears in the personal library/Dashboard/Stats.
 export default function GreekVocabulary() {
-  const { progress, applyMasteryUpdates } = useGreekVocabularyProgress();
-  const [session, setSession] = useState(null);
+  const { user } = useAuth();
+  const { words, loading, bulkAddWords } = useGreekVocabWords();
+  const [topicFilter, setTopicFilter] = useState(null);
+  const [showPractice, setShowPractice] = useState(false);
+  const seedAttempted = useRef(false);
 
-  const mastery = progress.mastery || {};
-  const overallPct = Math.round(
-    GREEK_VOCABULARY.reduce((sum, w) => sum + (mastery[w.id] ?? 0), 0) / GREEK_VOCABULARY.length
-  );
+  useEffect(() => {
+    if (loading || seedAttempted.current || words.length > 0) return;
+    seedAttempted.current = true;
+    bulkAddWords(
+      GREEK_VOCABULARY.map((w) => ({
+        word: w.greek,
+        translation: w.uz,
+        notes: w.translit,
+        topic: w.category,
+      }))
+    );
+  }, [loading, words.length, bulkAddWords]);
 
-  const handleStartLearning = () => setSession(pickSession(mastery));
+  const displayedWords = topicFilter ? words.filter((w) => w.topic === topicFilter) : words;
 
-  const handleSessionComplete = (masteryUpdates) => {
-    applyMasteryUpdates(masteryUpdates);
-    setSession(null);
+  const topicMastery = {};
+  GREEK_VOCAB_CATEGORIES.forEach((cat) => {
+    const catWords = words.filter((w) => w.topic === cat.id);
+    if (catWords.length === 0) return;
+    topicMastery[cat.id] = Math.round(catWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / catWords.length);
+  });
+
+  const memoryStats = (() => {
+    const { retentionPercent, atRisk, reviewedCount } = computeRetentionStats(displayedWords);
+    if (reviewedCount === 0) return null;
+    const masteryPercent = Math.round(
+      displayedWords.reduce((sum, w) => sum + (w.mastery || 0), 0) / displayedWords.length
+    );
+    return { masteryPercent, retentionPercent, atRisk };
+  })();
+
+  const handleUpdateWord = async (wordId, reviewInput) => {
+    const word = words.find((w) => w.id === wordId);
+    if (!word || !user) return null;
+    return saveGreekVocabReview(user.uid, wordId, word, reviewInput);
   };
 
-  if (session) {
+  if (showPractice) {
     return (
-      <GreekVocabLearnFlow
-        newWords={session.newWords}
-        reviewWords={session.reviewWords}
-        initialMastery={mastery}
-        onExit={() => setSession(null)}
-        onComplete={handleSessionComplete}
+      <GreekVocabPractice
+        words={displayedWords}
+        allWords={words}
+        onUpdateWord={handleUpdateWord}
+        onExit={() => setShowPractice(false)}
       />
     );
   }
 
   return (
-    <div className="greek-vocab-page">
+    <motion.div className="greek-vocab-page" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <div className="greek-vocab-header">
         <div>
           <h1 className="greek-vocab-title">So'z boyligi</h1>
-          <p className="greek-vocab-subtitle">{GREEK_VOCABULARY.length} ta so'z — Ελληνικό λεξιλόγιο</p>
+          <p className="greek-vocab-subtitle">{words.length} ta so'z — Ελληνικό λεξιλόγιο</p>
         </div>
-        <div className="greek-vocab-progress-chip">
-          <span className="greek-vocab-progress-num">{overallPct}%</span>
-          <span className="greek-vocab-progress-lbl">bilaman</span>
-        </div>
+        <button className="greek-vocab-practice-cta" onClick={() => setShowPractice(true)}>
+          Mashq qilish
+        </button>
       </div>
 
-      <button className="greek-vocab-learn-cta" onClick={handleStartLearning}>
-        <GraduationCap size={20} strokeWidth={2.2} /> So'z o'rganish
-      </button>
+      {memoryStats && (
+        <div className="greek-vocab-memtwin">
+          <div className="greek-vocab-memtwin-header">
+            <Brain size={15} strokeWidth={2.2} />
+            <span>Xotira holati</span>
+            {topicFilter && <span className="greek-vocab-memtwin-scope">{topicFilter}</span>}
+          </div>
+          <div className="greek-vocab-memtwin-stats">
+            <div><strong>{memoryStats.masteryPercent}%</strong><span>o'zlashtirilgan</span></div>
+            <div><strong>{memoryStats.retentionPercent}%</strong><span>eslab qolish</span></div>
+            <div><strong>{memoryStats.atRisk}</strong><span>xavf ostida</span></div>
+          </div>
+        </div>
+      )}
 
-      {GREEK_VOCAB_CATEGORIES.map((category) => {
-        const words = getVocabByCategory(category.id);
-        const catPct = Math.round(
-          words.reduce((sum, w) => sum + (mastery[w.id] ?? 0), 0) / words.length
-        );
-        return (
-          <motion.section
-            key={category.id}
-            className="greek-vocab-category"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25 }}
+      <div className="greek-vocab-topic-row">
+        <button
+          className={`greek-vocab-topic-chip ${topicFilter === null ? 'active' : ''}`}
+          onClick={() => setTopicFilter(null)}
+        >
+          Barchasi
+        </button>
+        {GREEK_VOCAB_CATEGORIES.map((cat) => (
+          <button
+            key={cat.id}
+            className={`greek-vocab-topic-chip ${topicFilter === cat.id ? 'active' : ''}`}
+            style={topicMastery[cat.id] !== undefined ? { '--chip-mastery': `${topicMastery[cat.id]}%` } : undefined}
+            onClick={() => setTopicFilter(cat.id)}
           >
-            <div className="greek-vocab-category-header">
-              <span className="greek-vocab-category-icon">{category.icon}</span>
-              <span className="greek-vocab-category-title">{category.title}</span>
-              <span className="greek-vocab-category-pct">{catPct}%</span>
-            </div>
-            <div className="greek-vocab-grid">
-              {words.map((word) => (
-                <GreekVocabWordCard key={word.id} word={word} mastery={mastery[word.id]} />
-              ))}
-            </div>
-          </motion.section>
-        );
-      })}
-    </div>
+            {topicMastery[cat.id] !== undefined && <span className="greek-vocab-topic-chip-fill" aria-hidden="true" />}
+            <span className="greek-vocab-topic-chip-label">{cat.icon} {cat.title}</span>
+          </button>
+        ))}
+      </div>
+
+      <WordList words={displayedWords} loading={loading} readOnly language="el-GR" />
+    </motion.div>
   );
 }

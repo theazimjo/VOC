@@ -1,5 +1,5 @@
 .greek-vocab-page {
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -9,7 +9,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .greek-vocab-title {
@@ -25,80 +25,103 @@
   margin: 0;
 }
 
-.greek-vocab-progress-chip {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.greek-vocab-practice-cta {
+  padding: 12px 22px;
+  border-radius: var(--radius-md);
+  background: var(--greek-blue, #0d5eaf);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px var(--greek-blue-dim, rgba(13, 94, 175, 0.3));
+}
+
+.greek-vocab-memtwin {
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
   background: var(--bg-secondary);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 8px 14px;
-  flex-shrink: 0;
+  margin-bottom: 16px;
 }
 
-.greek-vocab-progress-num {
-  font-size: 1.1rem;
-  font-weight: 800;
+.greek-vocab-memtwin-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
   color: var(--greek-blue, #0d5eaf);
+  margin-bottom: 10px;
 }
 
-.greek-vocab-progress-lbl {
+.greek-vocab-memtwin-scope {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.greek-vocab-memtwin-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.greek-vocab-memtwin-stats div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.greek-vocab-memtwin-stats strong {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+}
+
+.greek-vocab-memtwin-stats span {
   font-size: 0.68rem;
   color: var(--text-secondary);
 }
 
-.greek-vocab-learn-cta {
+.greek-vocab-topic-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 8px;
-  width: 100%;
-  padding: 16px;
-  border-radius: var(--radius-lg);
-  background: var(--greek-blue, #0d5eaf);
-  color: #fff;
-  font-weight: 800;
-  font-size: 1rem;
-  margin-bottom: 28px;
-  box-shadow: 0 4px 14px var(--greek-blue-dim, rgba(13, 94, 175, 0.3));
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
 }
 
-.greek-vocab-category {
-  margin-bottom: 24px;
-}
-
-.greek-vocab-category-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.greek-vocab-category-icon {
-  font-size: 1.1rem;
-}
-
-.greek-vocab-category-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  flex: 1;
-}
-
-.greek-vocab-category-pct {
+.greek-vocab-topic-chip {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 600;
+}
+
+.greek-vocab-topic-chip.active {
+  background: var(--greek-blue-dim, rgba(13, 94, 175, 0.1));
+  border-color: var(--greek-blue, #0d5eaf);
   color: var(--greek-blue, #0d5eaf);
 }
 
-.greek-vocab-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 10px;
+.greek-vocab-topic-chip-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: var(--chip-mastery, 0%);
+  background: linear-gradient(90deg, rgba(52, 199, 89, 0.3), rgba(52, 199, 89, 0.16));
+  transition: width 0.4s ease;
+  pointer-events: none;
 }
 
-@media (max-width: 640px) {
-  .greek-vocab-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  }
+.greek-vocab-topic-chip-label {
+  position: relative;
+  z-index: 1;
 }

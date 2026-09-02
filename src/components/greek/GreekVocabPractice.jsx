@@ -29,6 +29,16 @@ function getTier(results) {
 
 export default function GreekVocabPractice({ words, allWords, onUpdateWord, onExit }) {
   const [mode, setMode] = useState(null);
+  // Frozen once per session, exactly like PracticePage.jsx's own
+  // `practiceWords` state: Flashcard/MatchGame both reset their internal
+  // progress via a `useEffect(..., [words])` whenever the `words` prop's
+  // ARRAY REFERENCE changes. `words`/`allWords` come from the parent's live
+  // word list, which gets a new reference after every single review
+  // (onUpdateWord triggers a re-render) — deriving the game's word list
+  // inline from that live prop on every render was silently resetting the
+  // session back to card 1 after every answer. Freezing a snapshot here the
+  // moment a mode is picked is what PracticePage does too.
+  const [sessionWords, setSessionWords] = useState(null);
   const [results, setResults] = useState(null);
   const [warning, setWarning] = useState(null);
 
@@ -44,6 +54,7 @@ export default function GreekVocabPractice({ words, allWords, onUpdateWord, onEx
       return;
     }
     setResults(null);
+    setSessionWords(pool);
     setMode(modeId);
   };
 
@@ -58,7 +69,7 @@ export default function GreekVocabPractice({ words, allWords, onUpdateWord, onEx
           <div><strong>{results.correctCount}</strong><span>to'g'ri</span></div>
           <div><strong>{results.incorrectCount}</strong><span>xato</span></div>
         </div>
-        <button className="greek-vocab-practice-back-btn" onClick={() => { setResults(null); setMode(null); }}>
+        <button className="greek-vocab-practice-back-btn" onClick={() => { setResults(null); setMode(null); setSessionWords(null); }}>
           Orqaga
         </button>
       </div>
@@ -67,7 +78,7 @@ export default function GreekVocabPractice({ words, allWords, onUpdateWord, onEx
 
   if (mode) {
     const props = {
-      words: filterWordsForMode(words, mode),
+      words: sessionWords,
       allWords: allWords || words,
       onComplete: setResults,
       onUpdateWord,
