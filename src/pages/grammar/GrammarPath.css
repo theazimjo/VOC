@@ -811,3 +811,183 @@
   text-align: center;
   margin-bottom: 8px;
 }
+
+/* ── Monospace Green Formula Line ── */
+.gpl-formula-wrapper {
+  margin: 12px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gpl-formula-title-label {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent-1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gpl-formula-code-line {
+  display: block;
+  margin: 2px 0 6px;
+  background: rgba(16, 185, 129, 0.06);
+  border-left: 3px solid #10b981;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.gpl-formula-text {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #047857;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+/* ── Formula Breakdown Legend ── */
+.gpl-formula-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 4px;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+
+.gpl-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+}
+
+.gpl-legend-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-weight: 800;
+  font-size: 0.75rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.gpl-legend-tag.verb {
+  background: rgba(234, 88, 12, 0.1);
+  color: #ea580c;
+}
+
+.gpl-legend-tag.complement {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.gpl-legend-desc {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+/* ── Mobile Responsive Enhancements ── */
+@media (max-width: 640px) {
+  .gp-page {
+    padding: var(--space-md) 10px 90px;
+  }
+
+  .gp-header {
+    gap: 8px;
+  }
+
+  .gp-back {
+    padding: 5px 10px;
+    font-size: 0.82rem;
+  }
+
+  .gp-header-title {
+    font-size: 1.12rem;
+  }
+
+  .gp-header-progress {
+    font-size: 0.76rem;
+    padding: 3px 10px;
+  }
+
+  .gp-progress-card {
+    padding: 14px 16px;
+    border-radius: 14px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .gp-timeline-row {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .gp-timeline-col {
+    width: 36px;
+  }
+
+  .gp-timeline-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 1.05rem;
+  }
+
+  .gp-clean-card {
+    padding: 14px 14px;
+    border-radius: 16px;
+    gap: 10px;
+  }
+
+  .gp-clean-title {
+    font-size: 1.02rem;
+  }
+
+  .gp-clean-subtitle {
+    font-size: 0.82rem;
+  }
+
+  .gp-action-group {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gp-primary-btn {
+    padding: 11px 14px;
+    font-size: 0.88rem;
+  }
+
+  .gp-sub-btn,
+  .gp-ghost-btn {
+    padding: 9px 12px;
+    font-size: 0.82rem;
+    flex: 1;
+  }
+
+  .gpl-teach-card {
+    padding: 18px 14px;
+    border-radius: 16px;
+    gap: 14px;
+  }
+
+  .gpl-teach-intro {
+    font-size: 1.02rem;
+    line-height: 1.48;
+  }
+
+  .gpl-example-box {
+    padding: 12px 14px;
+  }
+
+  .gpl-example-text {
+    font-size: 0.98rem;
+  }
+}

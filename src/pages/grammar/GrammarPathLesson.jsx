@@ -364,6 +364,36 @@ export default function GrammarPathLesson() {
 
             <h2 className="gpl-teach-intro">{formatRuleText(rawRule)}</h2>
 
+            {/* Formula (Code-style green text with title label & Breakdown Legend) */}
+            {(unit.teach.formula || unit.teach.structure) && (
+              <div className="gpl-formula-wrapper">
+                <div className="gpl-formula-title-label">
+                  📐 {isRu ? 'ФОРМУЛА ПРЕДЛОЖЕНИЯ:' : 'FORMULA (GAP STRUKTURASI):'}
+                </div>
+                <div className="gpl-formula-code-line">
+                  <code className="gpl-formula-text">
+                    {unit.teach.formula || unit.teach.structure}
+                  </code>
+                </div>
+
+                {/* Formula Breakdown Legend / Explanation */}
+                <div className="gpl-formula-legend">
+                  <div className="gpl-legend-item">
+                    <span className="gpl-legend-tag">Subject</span>
+                    <span className="gpl-legend-desc">{isRu ? 'Подлежащее (Кто? Что?)' : 'Ega (Kim? Nima?)'}</span>
+                  </div>
+                  <div className="gpl-legend-item">
+                    <span className="gpl-legend-tag verb">Verb</span>
+                    <span className="gpl-legend-desc">{isRu ? 'Глагол (Действие)' : 'Fe\'l (Harakat / Ish)'}</span>
+                  </div>
+                  <div className="gpl-legend-item">
+                    <span className="gpl-legend-tag complement">Complement</span>
+                    <span className="gpl-legend-desc">{isRu ? 'Дополнение / Обстоятельство' : 'To\'ldiruvchi / Hol'}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {unit.teach.example && (
               <div className="gpl-example-box">
                 <div className="gpl-example-header">
@@ -397,7 +427,7 @@ export default function GrammarPathLesson() {
             )}
 
             <button className="clean-next-btn gpl-start-btn" onClick={handleStartUnit}>
-              {t('grammar.pathStartLesson')} →
+              {isRu ? 'Начать урок' : 'Mashqlarni boshlash'} →
             </button>
           </div>
         </div>

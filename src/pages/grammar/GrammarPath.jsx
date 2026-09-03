@@ -91,8 +91,8 @@ function buildNodes(sections, progress) {
       const practiceCompleted = !!progress.completedPractices[lesson.id];
       const practiceData = progress.completedPractices[lesson.id];
 
-      const isUnlocked = sectionUnlocked && lessonUnlockCursor;
-      const isLocked = !isUnlocked;
+      const isUnlocked = true;
+      const isLocked = false;
 
       const isBothDone = lessonCompleted && practiceCompleted;
       if (!isBothDone) allLessonsDone = false;
@@ -117,13 +117,13 @@ function buildNodes(sections, progress) {
         practiceScore: practiceData?.score || 0,
         practiceTotal: practiceData?.total || 0,
         isCompleted: isBothDone,
-        isNext: isUnlocked && !isBothDone,
+        isNext: !isBothDone,
         isLocked,
       });
     });
 
     const reviewCompleted = !!progress.completedReviews[section.id];
-    const reviewUnlocked = sectionUnlocked && allLessonsDone;
+    const reviewUnlocked = true;
 
     nodes.push({
       kind: 'review',
@@ -138,8 +138,8 @@ function buildNodes(sections, progress) {
       icon: '🏆',
       orderInSection: section.lessons.length + 1,
       isCompleted: reviewCompleted,
-      isNext: reviewUnlocked && !reviewCompleted,
-      isLocked: !reviewUnlocked,
+      isNext: !reviewCompleted,
+      isLocked: false,
     });
 
     sectionUnlocked = reviewCompleted;
@@ -172,6 +172,29 @@ export default function GrammarPath() {
   const nodes = useMemo(() => buildNodes(grammarPathSections, progress), [progress]);
   const completedCount = nodes.filter((n) => n.isCompleted).length;
   const progressPct = nodes.length > 0 ? Math.round((completedCount / nodes.length) * 100) : 0;
+
+  // Auto-scroll to last active or next recommended lesson on mount
+  useEffect(() => {
+    const lastActiveId = localStorage.getItem('last_active_grammar_node');
+    const targetId = lastActiveId || nodes.find((n) => n.isNext || !n.isCompleted)?.id;
+
+    if (targetId) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById(`gp-node-${targetId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleOpenNode = (path, nodeId) => {
+    if (nodeId) {
+      localStorage.setItem('last_active_grammar_node', nodeId);
+    }
+    navigate(path);
+  };
 
   let lastSection = null;
 
@@ -215,7 +238,7 @@ export default function GrammarPath() {
             const reviewCls = node.isCompleted ? 'completed' : node.isLocked ? 'locked' : 'active';
 
             return (
-              <div key={`review-${node.id}`} className="gp-timeline-item">
+              <div key={`review-${node.id}`} id={`gp-node-${node.id}`} className="gp-timeline-item">
                 {sectionBanner && (
                   <div className="gp-unit-header">
                     <span className="gp-unit-chip">📌 {sectionBanner}</span>
@@ -232,7 +255,7 @@ export default function GrammarPath() {
 
                   <motion.div
                     className={`gp-clean-card review ${reviewCls}`}
-                    onClick={() => !node.isLocked && navigate(`/grammar/path/review/${node.sectionId}`)}
+                    onClick={() => !node.isLocked && handleOpenNode(`/grammar/path/review/${node.sectionId}`, node.id)}
                     whileHover={!node.isLocked ? { y: -2 } : {}}
                     whileTap={!node.isLocked ? { scale: 0.99 } : {}}
                   >
@@ -270,7 +293,7 @@ export default function GrammarPath() {
           }
 
           return (
-            <div key={`lesson-${node.id}`} className="gp-timeline-item">
+            <div key={`lesson-${node.id}`} id={`gp-node-${node.id}`} className="gp-timeline-item">
               {sectionBanner && (
                 <div className="gp-unit-header">
                   <span className="gp-unit-chip">📌 {sectionBanner}</span>
@@ -317,7 +340,7 @@ export default function GrammarPath() {
                         <button
                           type="button"
                           className="gp-primary-btn teach-btn"
-                          onClick={() => navigate(`/grammar/path/lesson/${node.id}`)}
+                          onClick={() => handleOpenNode(`/grammar/path/lesson/${node.id}`, node.id)}
                         >
                           {labels.learnBtn}
                         </button>
@@ -328,14 +351,14 @@ export default function GrammarPath() {
                           <button
                             type="button"
                             className="gp-primary-btn practice-btn"
-                            onClick={() => navigate(`/grammar/path/practice/${node.id}`)}
+                            onClick={() => handleOpenNode(`/grammar/path/practice/${node.id}`, node.id)}
                           >
                             {labels.practiceBtn}
                           </button>
                           <button
                             type="button"
                             className="gp-sub-btn"
-                            onClick={() => navigate(`/grammar/path/lesson/${node.id}`)}
+                            onClick={() => handleOpenNode(`/grammar/path/lesson/${node.id}`, node.id)}
                           >
                             {labels.ruleBtn}
                           </button>
@@ -347,14 +370,14 @@ export default function GrammarPath() {
                           <button
                             type="button"
                             className="gp-ghost-btn"
-                            onClick={() => navigate(`/grammar/path/lesson/${node.id}`)}
+                            onClick={() => handleOpenNode(`/grammar/path/lesson/${node.id}`, node.id)}
                           >
                             {labels.theoryBtn}
                           </button>
                           <button
                             type="button"
                             className="gp-ghost-btn"
-                            onClick={() => navigate(`/grammar/path/practice/${node.id}`)}
+                            onClick={() => handleOpenNode(`/grammar/path/practice/${node.id}`, node.id)}
                           >
                             {labels.practiceBtnShort}
                           </button>
