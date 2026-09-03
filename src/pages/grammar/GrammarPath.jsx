@@ -1,9 +1,10 @@
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { grammarPathSections } from '../../data/grammarPathData';
 import { useLanguage } from '../../contexts/LanguageContext';
-import { loadPathProgress } from '../../utils/grammarPathProgress';
+import { useAuth } from '../../contexts/AuthContext';
+import { loadPathProgress, subscribePathProgress } from '../../utils/grammarPathProgress';
 import './GrammarPath.css';
 
 function buildNodes(sections, progress) {
@@ -75,8 +76,20 @@ function buildNodes(sections, progress) {
 export default function GrammarPath() {
   const navigate = useNavigate();
   const { t, language } = useLanguage();
+  const { user } = useAuth();
   const isRu = language === 'ru';
-  const progress = useMemo(() => loadPathProgress(), []);
+  const [progress, setProgress] = useState(() => loadPathProgress());
+
+  useEffect(() => {
+    if (user?.uid) {
+      const unsubscribe = subscribePathProgress(user.uid, (remoteProgress) => {
+        if (remoteProgress) {
+          setProgress(remoteProgress);
+        }
+      });
+      return () => unsubscribe();
+    }
+  }, [user]);
 
   const nodes = useMemo(() => buildNodes(grammarPathSections, progress), [progress]);
   const completedCount = nodes.filter((n) => n.isCompleted).length;
