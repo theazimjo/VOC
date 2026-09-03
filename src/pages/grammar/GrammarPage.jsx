@@ -221,6 +221,26 @@ export default function GrammarPage() {
         ))}
       </motion.div>
 
+      {/* Sequential "0 dan" Duolingo-style grammar path (English track only) */}
+      {activeTrack === 'en' && (
+        <motion.button
+          className="ggt-entry-card"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.14 }}
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.99 }}
+          onClick={() => navigate('/grammar/path')}
+        >
+          <span className="ggt-entry-icon">🧗</span>
+          <span className="ggt-entry-text">
+            <span className="ggt-entry-title">{t('grammar.pathTitle')}</span>
+            <span className="ggt-entry-desc">{t('grammar.pathEntryDesc')}</span>
+          </span>
+          <span className="ggt-entry-chevron">→</span>
+        </motion.button>
+      )}
+
       {/* General mixed test entry (English track, beginner content) */}
       {activeTrack === 'en' && (
         <motion.button

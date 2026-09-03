@@ -39,6 +39,10 @@ const GrammarExercises = lazyWithRetry(() => import('./pages/grammar/GrammarExer
 const GrammarGuide = lazyWithRetry(() => import('./pages/grammar/GrammarGuide'));
 const GrammarTest = lazyWithRetry(() => import('./pages/grammar/GrammarTest'));
 const GeneralGrammarTest = lazyWithRetry(() => import('./pages/grammar/GeneralGrammarTest'));
+const GrammarPath = lazyWithRetry(() => import('./pages/grammar/GrammarPath'));
+const GrammarPathLesson = lazyWithRetry(() => import('./pages/grammar/GrammarPathLesson'));
+const GrammarPathPractice = lazyWithRetry(() => import('./pages/grammar/GrammarPathPractice'));
+const GrammarPathReview = lazyWithRetry(() => import('./pages/grammar/GrammarPathReview'));
 const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
 const AdminDashboard = lazyWithRetry(() => import('./pages/admin/AdminDashboard'));
 
@@ -152,6 +156,10 @@ export default function App() {
                         <Route path="/settings" element={<Settings />} />
                         <Route path="/grammar" element={<GrammarPage />} />
                         <Route path="/grammar/general-test" element={<GeneralGrammarTest />} />
+                        <Route path="/grammar/path" element={<GrammarPath />} />
+                        <Route path="/grammar/path/lesson/:lessonId" element={<GrammarPathLesson />} />
+                        <Route path="/grammar/path/practice/:lessonId" element={<GrammarPathPractice />} />
+                        <Route path="/grammar/path/review/:sectionId" element={<GrammarPathReview />} />
                         <Route path="/grammar/:level/:topicId" element={<GrammarExercises />} />
                         <Route path="/grammar/:level/:topicId/guide" element={<GrammarGuide />} />
                         <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />
