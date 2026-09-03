@@ -551,7 +551,7 @@ export const translations = {
 
       // General mixed test (single continuous session across all topics)
       generalTestTitle: 'General Grammar Test',
-      generalTestEntryDesc: '10 random mixed questions each round — all topics, including structure-identification exercises',
+      generalTestEntryDesc: '10 random mixed questions each round — all topics, plus structure-identification and formula-building exercises',
       generalTestStructurePrompt: 'Which grammar structure is used in this sentence?',
       generalTestBuildPrompt: 'Build the formula for this structure:',
       generalTestBuildInstruction: 'Tap the correct pieces in the right order — watch out, a few decoys from other tenses are mixed in:',
@@ -1496,7 +1496,7 @@ export const translations = {
 
       // General mixed test (single continuous session across all topics)
       generalTestTitle: 'Общий грамматический тест',
-      generalTestEntryDesc: '10 случайных вопросов за раунд — все темы, включая упражнения на определение структуры',
+      generalTestEntryDesc: '10 случайных вопросов за раунд — все темы, плюс упражнения на определение и составление структуры',
       generalTestStructurePrompt: 'Какая грамматическая структура используется в этом предложении?',
       generalTestBuildPrompt: 'Соберите формулу для этой структуры:',
       generalTestBuildInstruction: 'Нажимайте на нужные части в правильном порядке — среди них есть лишние из других времён:',
@@ -2441,7 +2441,7 @@ export const translations = {
 
       // General mixed test (single continuous session across all topics)
       generalTestTitle: "Umumiy Grammatika Testi",
-      generalTestEntryDesc: "Har safar 10 ta tasodifiy aralash savol — barcha mavzular, jumladan struktura aniqlash mashqlari",
+      generalTestEntryDesc: "Har safar 10 ta tasodifiy aralash savol — barcha mavzular, struktura aniqlash va formula yasash mashqlari bilan birga",
       generalTestStructurePrompt: "Bu gapda qaysi grammatik struktura ishlatilgan?",
       generalTestBuildPrompt: "Ushbu struktura formulasini tuzing:",
       generalTestBuildInstruction: "Bo'laklarni to'g'ri tartibda bosib chiqing — orasida boshqa zamonlardan aldamchi bo'laklar ham bor:",
