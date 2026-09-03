@@ -38,6 +38,7 @@ const GrammarTopic = lazyWithRetry(() => import('./pages/grammar/GrammarTopic'))
 const GrammarExercises = lazyWithRetry(() => import('./pages/grammar/GrammarExercises'));
 const GrammarGuide = lazyWithRetry(() => import('./pages/grammar/GrammarGuide'));
 const GrammarTest = lazyWithRetry(() => import('./pages/grammar/GrammarTest'));
+const GeneralGrammarTest = lazyWithRetry(() => import('./pages/grammar/GeneralGrammarTest'));
 const MemoryLab = lazyWithRetry(() => import('./experiment/pages/MemoryLab'));
 const AdminDashboard = lazyWithRetry(() => import('./pages/admin/AdminDashboard'));
 
@@ -150,6 +151,7 @@ export default function App() {
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/settings" element={<Settings />} />
                         <Route path="/grammar" element={<GrammarPage />} />
+                        <Route path="/grammar/general-test" element={<GeneralGrammarTest />} />
                         <Route path="/grammar/:level/:topicId" element={<GrammarExercises />} />
                         <Route path="/grammar/:level/:topicId/guide" element={<GrammarGuide />} />
                         <Route path="/grammar/:level/:topicId/:exerciseId" element={<GrammarTopic />} />

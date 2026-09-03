@@ -1,0 +1,124 @@
+/* ─── General Grammar Test: tense-structure "chip picking" exercise ─────── */
+
+.ggt-structure-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-md) 0;
+}
+
+.ggt-sentence-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: var(--space-xl);
+}
+
+.ggt-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--space-xl);
+}
+
+.ggt-chip {
+  position: relative;
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 12px 20px;
+  color: var(--text-primary) !important;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ggt-chip:hover:not(:disabled) {
+  background: var(--bg-glass-hover) !important;
+  border-color: var(--text-muted);
+}
+
+.ggt-chip.selected {
+  border-color: var(--accent-1);
+  box-shadow: var(--shadow-glow);
+}
+
+.ggt-chip.correct {
+  background: var(--success-dim) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+}
+
+.ggt-chip.wrong {
+  background: var(--error-dim) !important;
+  border-color: var(--error) !important;
+  color: var(--error) !important;
+}
+
+.ggt-chip.dimmed {
+  opacity: 0.3;
+}
+
+.ggt-chip-badge {
+  font-size: 0.9rem;
+}
+
+/* Entry card on GrammarPage */
+.ggt-entry-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 18px 20px;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: var(--space-lg);
+  transition: all var(--transition-base);
+}
+
+.ggt-entry-card:hover {
+  border-color: var(--accent-1);
+  background: var(--bg-glass-hover);
+}
+
+.ggt-entry-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.ggt-entry-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ggt-entry-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ggt-entry-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.ggt-entry-chevron {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}

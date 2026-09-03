@@ -548,6 +548,13 @@ export const translations = {
       exType4: 'Error Correction',
       exType5: 'Sentence Transformation',
       exType6: 'Situational Dialogues',
+
+      // General mixed test (single continuous session across all topics)
+      generalTestTitle: 'General Grammar Test',
+      generalTestEntryDesc: '10 random mixed questions each round — all topics, including structure-identification exercises',
+      generalTestStructurePrompt: 'Which grammar structure is used in this sentence?',
+      generalTestBuildPrompt: 'Build the formula for this structure:',
+      generalTestBuildInstruction: 'Tap the correct pieces in the right order — watch out, a few decoys from other tenses are mixed in:',
     },
     memoryLab: {
       labTab: 'Lab',
@@ -1486,6 +1493,13 @@ export const translations = {
       exType4: 'Исправление ошибок',
       exType5: 'Трансформация предложений',
       exType6: 'Ситуационные диалоги',
+
+      // General mixed test (single continuous session across all topics)
+      generalTestTitle: 'Общий грамматический тест',
+      generalTestEntryDesc: '10 случайных вопросов за раунд — все темы, включая упражнения на определение структуры',
+      generalTestStructurePrompt: 'Какая грамматическая структура используется в этом предложении?',
+      generalTestBuildPrompt: 'Соберите формулу для этой структуры:',
+      generalTestBuildInstruction: 'Нажимайте на нужные части в правильном порядке — среди них есть лишние из других времён:',
     },
     memoryLab: {
       labTab: 'Лаборатория',
@@ -2424,6 +2438,13 @@ export const translations = {
       exType4: "Xatolarni tuzatish",
       exType5: "Jumlani o'zgartirish",
       exType6: "Situatsion muloqotlar",
+
+      // General mixed test (single continuous session across all topics)
+      generalTestTitle: "Umumiy Grammatika Testi",
+      generalTestEntryDesc: "Har safar 10 ta tasodifiy aralash savol — barcha mavzular, jumladan struktura aniqlash mashqlari",
+      generalTestStructurePrompt: "Bu gapda qaysi grammatik struktura ishlatilgan?",
+      generalTestBuildPrompt: "Ushbu struktura formulasini tuzing:",
+      generalTestBuildInstruction: "Bo'laklarni to'g'ri tartibda bosib chiqing — orasida boshqa zamonlardan aldamchi bo'laklar ham bor:",
     },
     memoryLab: {
       labTab: "Laboratoriya",

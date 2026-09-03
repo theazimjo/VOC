@@ -8,6 +8,7 @@ import { russianGuidesData } from '../../data/russianGuidesData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
+import './GeneralGrammarTest.css';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -219,6 +220,26 @@ export default function GrammarPage() {
           </button>
         ))}
       </motion.div>
+
+      {/* General mixed test entry (English track, beginner content) */}
+      {activeTrack === 'en' && (
+        <motion.button
+          className="ggt-entry-card"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.18 }}
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.99 }}
+          onClick={() => navigate('/grammar/general-test')}
+        >
+          <span className="ggt-entry-icon">🧠</span>
+          <span className="ggt-entry-text">
+            <span className="ggt-entry-title">{t('grammar.generalTestTitle')}</span>
+            <span className="ggt-entry-desc">{t('grammar.generalTestEntryDesc')}</span>
+          </span>
+          <span className="ggt-entry-chevron">→</span>
+        </motion.button>
+      )}
 
       {/* Topics Grid */}
       <AnimatePresence mode="wait">

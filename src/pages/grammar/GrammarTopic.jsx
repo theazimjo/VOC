@@ -187,17 +187,7 @@ function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz', lan
         <div className={`scrambled-result ${isCorrect ? 'correct' : 'wrong'}`}>
           <span className="scrambled-result-row">
             {isCorrect ? t('grammar.correctBadge') : t('grammar.wrongBadge', { answer: question.answer })}
-            {question.answer && (
-              <button
-                type="button"
-                className="option-speak-btn"
-                onClick={() => speakWord(question.answer, lang)}
-                aria-label="Listen"
-                title="Listen"
-              >
-                🔊
-              </button>
-            )}
+
           </span>
           {question.explanation && <p className="scrambled-explanation">{getFormattedExplanation(question.explanation, guideLang)}</p>}
         </div>
@@ -540,16 +530,6 @@ export default function GrammarTopic() {
                 >
                   <span className="option-left-group">
                     <span className="option-text-only">{opt}</span>
-                    <span
-                      className="option-speak-btn"
-                      role="button"
-                      tabIndex={-1}
-                      aria-label="Listen"
-                      title="Listen"
-                      onClick={(e) => { e.stopPropagation(); speakWord(opt, speakLang); }}
-                    >
-                      🔊
-                    </span>
                   </span>
                   {answered && idx === shuffled.correct && (
                     <span className="option-badge-icon correct-badge">✓</span>
