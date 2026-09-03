@@ -7,6 +7,77 @@ import { useAuth } from '../../contexts/AuthContext';
 import { loadPathProgress, subscribePathProgress } from '../../utils/grammarPathProgress';
 import './GrammarPath.css';
 
+const TXT = {
+  ru: {
+    ready: 'Доступен',
+    theoryPassed: 'Теория усвоена ✓',
+    completed: 'Пройдено ✓',
+    locked: 'Заблокировано 🔒',
+    step1: 'Шаг 1 из 2: Изучение правила',
+    step2: 'Шаг 2 из 2: Практическое задание по теме',
+    doneDesc: (s, t) => `Урок и практика успешно пройдены! Результат: ${s}/${t}`,
+    lockedDesc: 'Пройдите предыдущий урок для разблокировки',
+    learnBtn: '📖 Изучить теорию →',
+    practiceBtn: '🎯 Начать практику →',
+    ruleBtn: '📖 Правило',
+    theoryBtn: '📖 Теория',
+    practiceBtnShort: '🎯 Практика',
+    reviewLockedDesc: 'Заблокировано — пройдите все уроки',
+    reviewDesc: 'Итоговый тест по разделу',
+  },
+  uz: {
+    ready: 'Boshlashga tayyor',
+    theoryPassed: 'Teoriya o\'tildi ✓',
+    completed: 'Barchasi o\'tildi ✓',
+    locked: 'Qulflangan 🔒',
+    step1: '1-qadam: Qoidani o\'rganish',
+    step2: '2-qadam: Mavzuga doir amaliy mashq',
+    doneDesc: (s, t) => `Dars va mashqlar o'tildi! Natija: ${s}/${t}`,
+    lockedDesc: 'Ochish uchun oldingi darsni yakunlang',
+    learnBtn: '📖 Darsni o\'rganish →',
+    practiceBtn: '🎯 Mashqni bajarish →',
+    ruleBtn: '📖 Qoida',
+    theoryBtn: '📖 Teoriya',
+    practiceBtnShort: '🎯 Mashq',
+    reviewLockedDesc: 'Qulflangan — barcha darslarni o\'ting',
+    reviewDesc: 'Bo\'lim bo\'yicha yakuniy test',
+  },
+  en: {
+    ready: 'Ready to start',
+    theoryPassed: 'Theory passed ✓',
+    completed: 'Completed ✓',
+    locked: 'Locked 🔒',
+    step1: 'Step 1 of 2: Learn the rule',
+    step2: 'Step 2 of 2: Topic practice quiz',
+    doneDesc: (s, t) => `Lesson and practice completed! Score: ${s}/${t}`,
+    lockedDesc: 'Pass the previous lesson to unlock',
+    learnBtn: '📖 Start Lesson →',
+    practiceBtn: '🎯 Start Practice →',
+    ruleBtn: '📖 Rule',
+    theoryBtn: '📖 Theory',
+    practiceBtnShort: '🎯 Practice',
+    reviewLockedDesc: 'Locked — complete all section lessons first',
+    reviewDesc: 'Final section checkpoint exam',
+  },
+};
+
+function getNodeTitle(node, lang) {
+  if (lang === 'ru' && node.titleRu) return node.titleRu;
+  if (lang === 'en') {
+    if (node.titleEn) return node.titleEn;
+    if (node.title && node.title.includes('—')) {
+      return node.title.split('—')[0].trim();
+    }
+  }
+  return node.title;
+}
+
+function getSectionTitle(node, lang) {
+  if (lang === 'ru' && node.sectionTitleRu) return node.sectionTitleRu;
+  if (lang === 'en' && node.sectionTitleEn) return node.sectionTitleEn;
+  return node.sectionTitle;
+}
+
 function buildNodes(sections, progress) {
   const nodes = [];
   let sectionUnlocked = true;
@@ -34,9 +105,11 @@ function buildNodes(sections, progress) {
         sectionId: section.id,
         sectionTitle: section.title,
         sectionTitleRu: section.titleRu,
+        sectionTitleEn: section.titleEn,
         id: lesson.id,
         title: lesson.title,
         titleRu: lesson.titleRu,
+        titleEn: lesson.titleEn,
         icon: lesson.icon,
         orderInSection: i + 1,
         lessonCompleted,
@@ -57,9 +130,11 @@ function buildNodes(sections, progress) {
       sectionId: section.id,
       sectionTitle: section.title,
       sectionTitleRu: section.titleRu,
+      sectionTitleEn: section.titleEn,
       id: section.id,
       title: section.review.title,
       titleRu: section.review.titleRu,
+      titleEn: section.review.titleEn,
       icon: '🏆',
       orderInSection: section.lessons.length + 1,
       isCompleted: reviewCompleted,
@@ -77,7 +152,10 @@ export default function GrammarPath() {
   const navigate = useNavigate();
   const { t, language } = useLanguage();
   const { user } = useAuth();
-  const isRu = language === 'ru';
+
+  const lang = language === 'ru' ? 'ru' : language === 'en' ? 'en' : 'uz';
+  const labels = TXT[lang];
+
   const [progress, setProgress] = useState(() => loadPathProgress());
 
   useEffect(() => {
@@ -127,13 +205,13 @@ export default function GrammarPath() {
         {nodes.map((node, i) => {
           let sectionBanner = null;
           if (node.sectionId !== lastSection) {
-            sectionBanner = isRu && node.sectionTitleRu ? node.sectionTitleRu : node.sectionTitle;
+            sectionBanner = getSectionTitle(node, lang);
             lastSection = node.sectionId;
           }
 
           // ─── SECTION REVIEW NODE ─────────────────────────────────────────
           if (node.kind === 'review') {
-            const reviewTitle = isRu && node.titleRu ? node.titleRu : node.title;
+            const reviewTitle = getNodeTitle(node, lang);
             const reviewCls = node.isCompleted ? 'completed' : node.isLocked ? 'locked' : 'active';
 
             return (
@@ -167,8 +245,8 @@ export default function GrammarPath() {
                         {node.isCompleted
                           ? t('grammar.pathLessonPassed')
                           : node.isLocked
-                          ? (isRu ? 'Заблокировано — пройдите все уроки' : 'Qulflangan — barcha darslarni o\'ting')
-                          : (isRu ? 'Итоговый тест по разделу' : 'Bo\'lim bo\'yicha yakuniy test')}
+                          ? labels.reviewLockedDesc
+                          : labels.reviewDesc}
                       </p>
                     </div>
                     <div className="gp-clean-arrow">
@@ -181,7 +259,7 @@ export default function GrammarPath() {
           }
 
           // ─── LESSON NODE (Single Primary Action Flow) ──────────────────────
-          const lessonTitle = isRu && node.titleRu ? node.titleRu : node.title;
+          const lessonTitle = getNodeTitle(node, lang);
 
           // Determine current phase
           let phase = 'locked';
@@ -215,10 +293,10 @@ export default function GrammarPath() {
                     <div className="gp-clean-meta">
                       <span className="gp-card-tag">{t('grammar.pathLessonN', { n: node.orderInSection })}</span>
                       <span className={`gp-status-badge ${phase}`}>
-                        {phase === 'completed' && (isRu ? 'Пройдено ✓' : 'Barchasi o\'tildi ✓')}
-                        {phase === 'practice' && (isRu ? 'Теория усвоена ✓' : 'Teoriya o\'tildi ✓')}
-                        {phase === 'teach' && (isRu ? 'Доступен' : 'Boshlashga tayyor')}
-                        {phase === 'locked' && (isRu ? 'Заблокировано 🔒' : 'Qulflangan 🔒')}
+                        {phase === 'completed' && labels.completed}
+                        {phase === 'practice' && labels.theoryPassed}
+                        {phase === 'teach' && labels.ready}
+                        {phase === 'locked' && labels.locked}
                       </span>
                     </div>
                     <h3 className="gp-clean-title">{lessonTitle}</h3>
@@ -226,13 +304,13 @@ export default function GrammarPath() {
 
                   {/* Subtitle & Step Context */}
                   <p className="gp-clean-subtitle">
-                    {phase === 'teach' && (isRu ? 'Шаг 1 из 2: Изучение правила' : '1-qadam: Qoidani o\'rganish')}
-                    {phase === 'practice' && (isRu ? 'Шаг 2 из 2: Практическое задание по теме' : '2-qadam: Mavzuga doir amaliy mashq')}
-                    {phase === 'completed' && (isRu ? `Отличная работа! Natija: ${node.practiceScore}/${node.practiceTotal}` : `Ajoyib natija! Natija: ${node.practiceScore}/${node.practiceTotal}`)}
-                    {phase === 'locked' && (isRu ? 'Пройдите предыдущий урок для разблокировки' : 'Ochish uchun oldingi darsni yakunlang')}
+                    {phase === 'teach' && labels.step1}
+                    {phase === 'practice' && labels.step2}
+                    {phase === 'completed' && labels.doneDesc(node.practiceScore, node.practiceTotal)}
+                    {phase === 'locked' && labels.lockedDesc}
                   </p>
 
-                  {/* SINGLE INTUITIVE ACTION BUTTON (No cluttered dual buttons!) */}
+                  {/* SINGLE INTUITIVE ACTION BUTTON */}
                   {!node.isLocked && (
                     <div className="gp-clean-actions">
                       {phase === 'teach' && (
@@ -241,7 +319,7 @@ export default function GrammarPath() {
                           className="gp-primary-btn teach-btn"
                           onClick={() => navigate(`/grammar/path/lesson/${node.id}`)}
                         >
-                          📖 {isRu ? 'Изучить теорию' : 'Darsni o\'rganish'} →
+                          {labels.learnBtn}
                         </button>
                       )}
 
@@ -252,15 +330,14 @@ export default function GrammarPath() {
                             className="gp-primary-btn practice-btn"
                             onClick={() => navigate(`/grammar/path/practice/${node.id}`)}
                           >
-                            🎯 {isRu ? 'Начать практику' : 'Mashqni bajarish'} →
+                            {labels.practiceBtn}
                           </button>
                           <button
                             type="button"
                             className="gp-sub-btn"
                             onClick={() => navigate(`/grammar/path/lesson/${node.id}`)}
-                            title={isRu ? 'Повторить правило' : 'Qoidani qayta ko\'rish'}
                           >
-                            📖 {isRu ? 'Правило' : 'Qoida'}
+                            {labels.ruleBtn}
                           </button>
                         </div>
                       )}
@@ -272,14 +349,14 @@ export default function GrammarPath() {
                             className="gp-ghost-btn"
                             onClick={() => navigate(`/grammar/path/lesson/${node.id}`)}
                           >
-                            📖 {isRu ? 'Теория' : 'Teoriya'}
+                            {labels.theoryBtn}
                           </button>
                           <button
                             type="button"
                             className="gp-ghost-btn"
                             onClick={() => navigate(`/grammar/path/practice/${node.id}`)}
                           >
-                            🎯 {isRu ? 'Практика' : 'Mashq'}
+                            {labels.practiceBtnShort}
                           </button>
                         </div>
                       )}

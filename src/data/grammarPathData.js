@@ -538,4 +538,524 @@ export const grammarPathSections = [
       ],
     },
   },
+  {
+    id: 'sec-tobe',
+    order: 2,
+    title: "'To be' fe'li",
+    titleRu: 'Глагол "to be"',
+    icon: '✅',
+    lessons: [
+      {
+        id: 'sec-tobe-l1',
+        order: 1,
+        title: 'Tasdiq shakllar',
+        titleRu: 'Утвердительные формы',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"To be" fe\'lining uchta shakli bor: am, is, are. Ular ega (subject)ga qarab tanlanadi.',
+              ruleRu: 'У глагола "to be" три формы: am, is, are. Они выбираются в зависимости от подлежащего.',
+              example: 'I am, you are, he is. (Men -man, sen -san, u -dir.)',
+              exampleRu: 'I am, you are, he is. (Я есть, ты есть, он есть.)',
+            },
+            exercises: [
+              { text: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.' },
+              { text: 'They ___ teachers.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"He", "she", "it" — barchasi "is" bilan keladi.',
+              ruleRu: '"He", "she", "it" — все используются с "is".',
+              example: 'He is tall. She is tall. It is small.',
+              exampleRu: 'He is tall. She is tall. It is small.',
+            },
+            exercises: [
+              { text: 'The cat ___ small.', options: ['am', 'is', 'are'], correct: 1, explanation: '"The cat" = it = is.' },
+              { text: 'My brother ___ busy.', options: ['am', 'is', 'are'], correct: 1, explanation: '"My brother" = he = is.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"You", "we", "they" — barchasi "are" bilan keladi.',
+              ruleRu: '"You", "we", "they" — все используются с "are".',
+              example: 'You are kind. We are ready. They are here.',
+              exampleRu: 'You are kind. We are ready. They are here.',
+            },
+            exercises: [
+              { text: 'My friends ___ here.', options: ['am', 'is', 'are'], correct: 2, explanation: '"My friends" = they = are.' },
+              { text: 'You and I ___ classmates.', options: ['am', 'is', 'are'], correct: 2, explanation: '"You and I" = we = are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Faqat "I" — "am" bilan keladi.',
+              ruleRu: 'Только "I" используется с "am".',
+              example: 'I am hungry.',
+              exampleRu: 'I am hungry.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I are hungry.', 'I is hungry.', 'I am hungry.'], correct: 2, explanation: '"I" faqat "am" bilan keladi.' },
+              { text: 'Which subject uses "am"?', options: ['I', 'You', 'We'], correct: 0, explanation: '"am" faqat "I" bilan ishlatiladi.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Barcha shakllarni birlashtiramiz: I am / He-She-It is / You-We-They are.",
+              ruleRu: 'Обобщим все формы: I am / He-She-It is / You-We-They are.',
+              example: 'I am busy. She is busy. We are busy.',
+              exampleRu: 'I am busy. She is busy. We are busy.',
+            },
+            exercises: [
+              { text: 'She ___ my teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.' },
+              { text: 'We ___ friends.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.' },
+              { text: 'I ___ ready.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-l2',
+        order: 2,
+        title: "Qisqartma shakllar",
+        titleRu: 'Сокращённые формы',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"I am" — qisqartmasi: I\'m.',
+              ruleRu: '"I am" сокращается до "I\'m".',
+              example: "I'm tired.",
+              exampleRu: "I'm tired.",
+            },
+            exercises: [
+              { text: 'Choose the contraction of "I am":', options: ["I'm", "I's", "I'am"], correct: 0, explanation: '"I am" -> I\'m.' },
+              { text: 'Choose the correct sentence:', options: ["I'm happy.", 'Im happy.', "I'am happy."], correct: 0, explanation: 'To\'g\'ri qisqartma: I\'m.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"You are" = You\'re, "We are" = We\'re, "They are" = They\'re.',
+              ruleRu: '"You are" = You\'re, "We are" = We\'re, "They are" = They\'re.',
+              example: "You're welcome. We're ready. They're here.",
+              exampleRu: "You're welcome. We're ready. They're here.",
+            },
+            exercises: [
+              { text: 'Choose the contraction of "They are":', options: ["They're", "They's", "Theyr'e"], correct: 0, explanation: '"They are" -> They\'re.' },
+              { text: 'Choose the contraction of "We are":', options: ["We're", "We's", "Wer'e"], correct: 0, explanation: '"We are" -> We\'re.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"He is" = He\'s, "She is" = She\'s, "It is" = It\'s.',
+              ruleRu: '"He is" = He\'s, "She is" = She\'s, "It is" = It\'s.',
+              example: "He's tall. She's smart. It's cold.",
+              exampleRu: "He's tall. She's smart. It's cold.",
+            },
+            exercises: [
+              { text: 'Choose the contraction of "She is":', options: ["She's", "She'is", "Shes'"], correct: 0, explanation: '"She is" -> She\'s.' },
+              { text: 'Choose the contraction of "It is":', options: ["It's", "Its'", "I'ts"], correct: 0, explanation: '"It is" -> It\'s.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Qisqa javoblarda qisqartma ishlatilmaydi — to'liq shakl kerak.",
+              ruleRu: 'В коротких ответах сокращения не используются — нужна полная форма.',
+              example: "Yes, I am. (Yes, I'm emas.)",
+              exampleRu: "Yes, I am. (Не Yes, I'm.)",
+            },
+            exercises: [
+              { text: 'Choose the correct short answer:', options: ['Yes, I am.', "Yes, I'm."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, I am.' },
+              { text: 'Choose the correct sentence:', options: ["She's my sister.", "She is' my sister."], correct: 0, explanation: 'Gap ichida qisqartma to\'g\'ri: She\'s my sister.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Barcha qisqartmalarni birlashtiramiz: I'm / You're / He's / She's / It's / We're / They're.",
+              ruleRu: 'Обобщим все сокращения: I\'m / You\'re / He\'s / She\'s / It\'s / We\'re / They\'re.',
+              example: "He's my friend, and they're my classmates.",
+              exampleRu: "He's my friend, and they're my classmates.",
+            },
+            exercises: [
+              { text: 'Choose the contraction of "He is":', options: ["He's", "He'is"], correct: 0, explanation: '"He is" -> He\'s.' },
+              { text: 'Choose the contraction of "You are":', options: ["You're", "You'is"], correct: 0, explanation: '"You are" -> You\'re.' },
+              { text: 'Choose the correct short answer:', options: ['Yes, they are.', "Yes, they're."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, they are.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-l3',
+        order: 3,
+        title: 'Inkor shakllar',
+        titleRu: 'Отрицательные формы',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Inkorda "not" qo\'shiladi: is not, are not, am not.',
+              ruleRu: 'В отрицании добавляется "not": is not, are not, am not.',
+              example: 'He is not ready.',
+              exampleRu: 'He is not ready.',
+            },
+            exercises: [
+              { text: 'She ___ not busy.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is not.' },
+              { text: 'They ___ not ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are not.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqartma inkor: isn\'t, aren\'t.',
+              ruleRu: 'Сокращённое отрицание: isn\'t, aren\'t.',
+              example: "He isn't here. They aren't ready.",
+              exampleRu: "He isn't here. They aren't ready.",
+            },
+            exercises: [
+              { text: 'Choose the contraction of "is not":', options: ["isn't", "is'nt"], correct: 0, explanation: '"is not" -> isn\'t.' },
+              { text: 'Choose the contraction of "are not":', options: ["aren't", "are'nt"], correct: 0, explanation: '"are not" -> aren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"am not" ning qisqartmasi yo\'q — faqat "I\'m not" ishlatiladi.',
+              ruleRu: 'У "am not" нет сокращения — используется только "I\'m not".',
+              example: "I'm not tired.",
+              exampleRu: "I'm not tired.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ["I amn't tired.", "I'm not tired."], correct: 1, explanation: '"am not" ning qisqartmasi yo\'q: I\'m not.' },
+              { text: "I ___ ready yet.", options: ["'m not", "isn't", "aren't"], correct: 0, explanation: '"I" inkorida: \'m not.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Turli egalar bilan inkorni mustahkamlaymiz.",
+              ruleRu: 'Закрепим отрицание с разными подлежащими.',
+              example: "It isn't working. We aren't late.",
+              exampleRu: "It isn't working. We aren't late.",
+            },
+            exercises: [
+              { text: 'It ___ working.', options: ["isn't", "aren't", "'m not"], correct: 0, explanation: '"It" inkorida: isn\'t.' },
+              { text: 'We ___ late.', options: ["isn't", "aren't", "'m not"], correct: 1, explanation: '"We" inkorida: aren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Barcha inkor shakllarni birlashtiramiz: I'm not / isn't / aren't.",
+              ruleRu: 'Обобщим все отрицательные формы: I\'m not / isn\'t / aren\'t.',
+              example: "He isn't ready, and I'm not either.",
+              exampleRu: "He isn't ready, and I'm not either.",
+            },
+            exercises: [
+              { text: 'He ___ my brother.', options: ["isn't", "aren't"], correct: 0, explanation: '"He" inkorida: isn\'t.' },
+              { text: 'You ___ wrong.', options: ["isn't", "aren't"], correct: 1, explanation: '"You" inkorida: aren\'t.' },
+              { text: 'Choose the correct sentence:', options: ["She isn't home.", 'She not is home.'], correct: 0, explanation: 'To\'g\'ri inkor: She isn\'t home.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-l4',
+        order: 4,
+        title: 'Savol shakllari',
+        titleRu: 'Вопросительные формы',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Savol yasashda "to be" eganing oldiga chiqadi.',
+              ruleRu: 'В вопросе "to be" ставится перед подлежащим.',
+              example: 'Is he ready?',
+              exampleRu: 'Is he ready?',
+            },
+            exercises: [
+              { text: 'Choose the correct question:', options: ['Is she happy?', 'She is happy?'], correct: 0, explanation: 'Savolda "is" oldinga chiqadi: Is she happy?' },
+              { text: '___ you tired?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Am I ...?" — faqat "I" bilan ishlatiladi.',
+              ruleRu: '"Am I ...?" — используется только с "I".',
+              example: 'Am I late?',
+              exampleRu: 'Am I late?',
+            },
+            exercises: [
+              { text: '___ I right?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.' },
+              { text: 'Choose the correct question:', options: ['Am I late?', 'I am late?'], correct: 0, explanation: 'Savolda "am" oldinga chiqadi: Am I late?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Is he/she/it ...?"',
+              ruleRu: '"Is he/she/it ...?"',
+              example: 'Is it cold?',
+              exampleRu: 'Is it cold?',
+            },
+            exercises: [
+              { text: '___ it raining?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"It" savolida: Is.' },
+              { text: '___ she a teacher?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"She" savolida: Is.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Are you/we/they ...?"',
+              ruleRu: '"Are you/we/they ...?"',
+              example: 'Are they ready?',
+              exampleRu: 'Are they ready?',
+            },
+            exercises: [
+              { text: '___ we late?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"We" savolida: Are.' },
+              { text: '___ they students?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"They" savolida: Are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Barcha savol shakllarini birlashtiramiz: Am I? / Is he-she-it? / Are you-we-they?",
+              ruleRu: 'Обобщим все вопросительные формы: Am I? / Is he-she-it? / Are you-we-they?',
+              example: 'Are you okay? Is he your friend?',
+              exampleRu: 'Are you okay? Is he your friend?',
+            },
+            exercises: [
+              { text: '___ you okay?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.' },
+              { text: '___ he your friend?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"He" savolida: Is.' },
+              { text: '___ I wrong?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-l5',
+        order: 5,
+        title: 'Qisqa javoblar',
+        titleRu: 'Краткие ответы',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"Ha" javobida: Yes, + subject + to be.',
+              ruleRu: 'В ответе "да": Yes, + подлежащее + to be.',
+              example: 'Are you ready? Yes, I am.',
+              exampleRu: 'Are you ready? Yes, I am.',
+            },
+            exercises: [
+              { text: 'Is she a doctor? Yes, ___.', options: ['she is', 'she are', 'she am'], correct: 0, explanation: '"She" + is.' },
+              { text: 'Are they students? Yes, ___.', options: ['they are', 'they is'], correct: 0, explanation: '"They" + are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Yo\'q" javobida: No, + subject + to be + not.',
+              ruleRu: 'В ответе "нет": No, + подлежащее + to be + not.',
+              example: "Is he here? No, he isn't.",
+              exampleRu: "Is he here? No, he isn't.",
+            },
+            exercises: [
+              { text: 'Is it cold? No, ___.', options: ["it isn't", "it aren't"], correct: 0, explanation: '"It" inkorida: isn\'t.' },
+              { text: 'Are you tired? No, ___.', options: ["I'm not", 'I not'], correct: 0, explanation: '"I" inkorida: \'m not.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Qisqa javobda fe'l/sifat takrorlanmaydi, faqat 'to be' qoladi.",
+              ruleRu: 'В коротком ответе глагол/прилагательное не повторяется, остаётся только "to be".',
+              example: 'Are you a teacher? Yes, I am.',
+              exampleRu: 'Are you a teacher? Yes, I am.',
+            },
+            exercises: [
+              { text: 'Choose the correct short answer:', options: ['Yes, I am.', 'Yes, I am a student.'], correct: 0, explanation: 'Qisqa javob qisqa bo\'ladi: Yes, I am.' },
+              { text: 'Am I right? Yes, ___.', options: ['you are', 'you am'], correct: 0, explanation: '"You" + are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Turli egalar bilan qisqa javoblarni mustahkamlaymiz.",
+              ruleRu: 'Закрепим короткие ответы с разными подлежащими.',
+              example: "Is she happy? No, she isn't.",
+              exampleRu: "Is she happy? No, she isn't.",
+            },
+            exercises: [
+              { text: 'Is she happy? No, ___.', options: ["she isn't", "she aren't"], correct: 0, explanation: '"She" inkorida: isn\'t.' },
+              { text: 'Are we late? Yes, ___.', options: ['we are', 'we is'], correct: 0, explanation: '"We" + are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Barcha qisqa javob turlarini birlashtiramiz.",
+              ruleRu: 'Обобщим все виды коротких ответов.',
+              example: "Is it Monday? Yes, it is. Are they here? No, they aren't.",
+              exampleRu: "Is it Monday? Yes, it is. Are they here? No, they aren't.",
+            },
+            exercises: [
+              { text: 'Is it Monday? Yes, ___.', options: ['it is', 'it are'], correct: 0, explanation: '"It" + is.' },
+              { text: 'Are they here? No, ___.', options: ["they aren't", "they isn't"], correct: 0, explanation: '"They" inkorida: aren\'t.' },
+              { text: 'Are you ready? No, ___.', options: ["I'm not", "I isn't"], correct: 0, explanation: '"I" inkorida: \'m not.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-l6',
+        order: 6,
+        title: "Wh- savollar bilan",
+        titleRu: 'С вопросительными словами',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"What" + to be + subject?',
+              ruleRu: '"What" + to be + подлежащее?',
+              example: 'What is your name?',
+              exampleRu: 'What is your name?',
+            },
+            exercises: [
+              { text: '___ is your name?', options: ['What', 'Who', 'Where'], correct: 0, explanation: 'Narsa/ism so\'ralganda: What.' },
+              { text: 'Choose the correct question:', options: ['What is this?', 'What this is?'], correct: 0, explanation: '"to be" "What" dan keyin darrov keladi: What is this?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Who" + to be + subject? (kim ekanini so\'rash)',
+              ruleRu: '"Who" + to be + подлежащее? (спрашиваем, кто это)',
+              example: 'Who is she?',
+              exampleRu: 'Who is she?',
+            },
+            exercises: [
+              { text: '___ is that man?', options: ['What', 'Who', 'Where'], correct: 1, explanation: 'Kim ekani so\'ralganda: Who.' },
+              { text: '___ are they?', options: ['What', 'Who', 'Where'], correct: 1, explanation: 'Kim ekanlari so\'ralganda: Who.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Where" + to be + subject? (qayerdaligini so\'rash)',
+              ruleRu: '"Where" + to be + подлежащее? (спрашиваем, где)',
+              example: 'Where is the book?',
+              exampleRu: 'Where is the book?',
+            },
+            exercises: [
+              { text: '___ is my phone?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Joy so\'ralganda: Where.' },
+              { text: '___ are you from?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Kelib chiqish joyi so\'ralganda: Where.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"How" + to be + subject? (holatini so\'rash)',
+              ruleRu: '"How" + to be + подлежащее? (спрашиваем о состоянии)',
+              example: 'How are you?',
+              exampleRu: 'How are you?',
+            },
+            exercises: [
+              { text: '___ are you today?', options: ['What', 'How', 'Where'], correct: 1, explanation: 'Holat so\'ralganda: How.' },
+              { text: 'Choose the correct question:', options: ['How is the weather?', 'How weather is?'], correct: 0, explanation: '"to be" "How" dan keyin darrov keladi: How is the weather?' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Barcha savol so'zlarini birlashtiramiz: What / Who / Where / How.",
+              ruleRu: 'Обобщим все вопросительные слова: What / Who / Where / How.',
+              example: 'Who is your teacher? Where is the station? How are you?',
+              exampleRu: 'Who is your teacher? Where is the station? How are you?',
+            },
+            exercises: [
+              { text: '___ is your teacher?', options: ['Who', 'Where', 'How'], correct: 0, explanation: 'Kim ekani so\'ralganda: Who.' },
+              { text: '___ is the station?', options: ['Who', 'Where', 'How'], correct: 1, explanation: 'Joy so\'ralganda: Where.' },
+              { text: '___ are you?', options: ['Who', 'Where', 'How'], correct: 2, explanation: 'Holat so\'ralganda: How.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-l7',
+        order: 7,
+        title: "Ishlatilishi",
+        titleRu: 'Употребление',
+        icon: '7️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"To be" + sifat: holatni tasvirlash uchun.',
+              ruleRu: '"To be" + прилагательное: для описания состояния.',
+              example: 'She is happy. I am tired.',
+              exampleRu: 'She is happy. I am tired.',
+            },
+            exercises: [
+              { text: 'He ___ angry.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
+              { text: 'Choose the correct sentence:', options: ['I am tired.', 'I tired.'], correct: 0, explanation: 'Sifat oldidan "to be" kerak: I am tired.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"To be" + kasb: kim ekanini aytish uchun.',
+              ruleRu: '"To be" + профессия: чтобы сказать, кто есть кто.',
+              example: 'He is a doctor. I am a student.',
+              exampleRu: 'He is a doctor. I am a student.',
+            },
+            exercises: [
+              { text: 'She ___ a nurse.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.' },
+              { text: 'They ___ engineers.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"To be" + joy: qayerda ekanini aytish uchun.',
+              ruleRu: '"To be" + место: чтобы сказать, где находится.',
+              example: 'The book is on the table. We are at home.',
+              exampleRu: 'The book is on the table. We are at home.',
+            },
+            exercises: [
+              { text: 'The keys ___ in my bag.', options: ['am', 'is', 'are'], correct: 2, explanation: '"The keys" = they = are.' },
+              { text: 'My mother ___ at work.', options: ['am', 'is', 'are'], correct: 1, explanation: '"My mother" = she = is.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"To be" + yosh: yoshini aytish uchun.',
+              ruleRu: '"To be" + возраст: чтобы сказать, сколько лет.',
+              example: 'I am 20 years old. She is 15.',
+              exampleRu: 'I am 20 years old. She is 15.',
+            },
+            exercises: [
+              { text: 'He ___ 30 years old.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
+              { text: 'My grandparents ___ 70 years old.', options: ['am', 'is', 'are'], correct: 2, explanation: '"My grandparents" = they = are.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Barcha ishlatilishlarni birlashtiramiz: sifat, kasb, joy, yosh.",
+              ruleRu: 'Обобщим все случаи употребления: прилагательное, профессия, место, возраст.',
+              example: 'She is a teacher. She is kind. She is at school. She is 28.',
+              exampleRu: 'She is a teacher. She is kind. She is at school. She is 28.',
+            },
+            exercises: [
+              { text: 'She ___ a teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is (kasb).' },
+              { text: 'The cat ___ under the table.', options: ['am', 'is', 'are'], correct: 1, explanation: '"The cat" = it = is (joy).' },
+              { text: 'We ___ 18 years old.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are (yosh).' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: 'To be' fe'li",
+      titleRu: 'Тест раздела: Глагол "to be"',
+      exercises: [
+        { text: 'He ___ a doctor.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
+        { text: 'We ___ ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.' },
+        { text: 'I ___ tired.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.' },
+        { text: 'Choose the contraction of "They are":', options: ["They're", "They's"], correct: 0, explanation: '"They are" -> They\'re.' },
+        { text: 'Choose the contraction of "She is":', options: ["She's", "She'is"], correct: 0, explanation: '"She is" -> She\'s.' },
+        { text: 'He ___ not ready.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is not.' },
+        { text: 'Choose the contraction of "is not":', options: ["isn't", "is'nt"], correct: 0, explanation: '"is not" -> isn\'t.' },
+        { text: '___ you tired?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.' },
+        { text: '___ I late?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.' },
+        { text: 'Is she a doctor? Yes, ___.', options: ['she is', 'she are'], correct: 0, explanation: '"She" + is.' },
+        { text: 'Are they ready? No, ___.', options: ["they aren't", "they isn't"], correct: 0, explanation: '"They" inkorida: aren\'t.' },
+        { text: '___ is your name?', options: ['What', 'Who', 'Where'], correct: 0, explanation: 'Ism so\'ralganda: What.' },
+        { text: '___ is the book?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Joy so\'ralganda: Where.' },
+        { text: '___ are you?', options: ['Who', 'Where', 'How'], correct: 2, explanation: 'Holat so\'ralganda: How.' },
+        { text: 'She ___ a teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is (kasb).' },
+      ],
+    },
+  },
 ];
