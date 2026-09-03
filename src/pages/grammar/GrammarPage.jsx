@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { grammarData } from '../../data/grammarData';
-import { russianGrammarData } from '../../data/russianGrammarData';
-import { sicilianGrammarData } from '../../data/sicilianGrammarData';
-import { russianGuidesData } from '../../data/russianGuidesData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
@@ -33,26 +30,17 @@ const headerVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: 'easeOut' } },
 };
 
-// Each grammar track is a fully separate curriculum (own topic ids, own
-// language of instruction) so it must never be blended with another track's
-// topics or progress stats. Topic ids are namespaced per track (ru-/scn-,
-// English has no prefix) — that prefix is also how stats below are isolated.
 const GRAMMAR_TRACKS = {
   en: { data: grammarData, prefix: null, label: '🇬🇧 English', icon: '🇬🇧' },
-  ru: { data: russianGrammarData, prefix: 'ru-', label: '🇷🇺 Rus tili', icon: '🇷🇺' },
-  scn: { data: sicilianGrammarData, prefix: 'scn-', label: '🌋 Sitsiliya', icon: '🌋' },
 };
 
 export default function GrammarPage() {
   const navigate = useNavigate();
-  const { t, language: appLang } = useLanguage();
+  const { t } = useLanguage();
   const [activeLevel, setActiveLevelState] = useState(() => {
     return localStorage.getItem('grammar_level') || 'beginner';
   });
-  const [activeTrack, setActiveTrackState] = useState(() => {
-    const saved = localStorage.getItem('grammar_track');
-    return GRAMMAR_TRACKS[saved] ? saved : 'en';
-  });
+  const [activeTrack] = useState('en');
   const { stats: grammarStats } = useGrammarStats();
 
   const setActiveLevel = (level) => {
@@ -60,44 +48,7 @@ export default function GrammarPage() {
     localStorage.setItem('grammar_level', level);
   };
 
-  const setActiveTrack = (track) => {
-    setActiveTrackState(track);
-    localStorage.setItem('grammar_track', track);
-  };
-
   const topics = GRAMMAR_TRACKS[activeTrack].data[activeLevel]?.topics ?? [];
-  const trackPrefix = GRAMMAR_TRACKS[activeTrack].prefix;
-
-  // Only count stats that belong to the currently selected track — a topicId's
-  // prefix (or lack of one) tells us which track it came from, so English
-  // progress never bleeds into Sicilian's numbers or vice versa.
-  const belongsToActiveTrack = (topicId) => {
-    if (topicId.startsWith('de-')) return false;
-    if (trackPrefix) return topicId.startsWith(trackPrefix);
-    return !topicId.startsWith('ru-') && !topicId.startsWith('scn-');
-  };
-
-  const completedTopicsOfLevel = Object.entries(grammarStats?.topics || {})
-    .filter(([topicId, t]) => t.level === activeLevel && belongsToActiveTrack(topicId))
-    .map(([_, t]) => t);
-
-  let completedExercisesCount = 0;
-  completedTopicsOfLevel.forEach((t) => {
-    if (t.exercises) {
-      completedExercisesCount += Object.keys(t.exercises).length;
-    } else {
-      completedExercisesCount += 1;
-    }
-  });
-
-  const totalExercisesOfLevel = topics.length * 6;
-
-  const averageAccuracy = completedTopicsOfLevel.length > 0
-    ? Math.round(
-        completedTopicsOfLevel.reduce((sum, t) => sum + (t.bestScore / t.totalQuestions) * 100, 0) /
-        completedTopicsOfLevel.length
-      )
-    : 0;
 
   const handleTopicClick = (topicId) => {
     navigate(`/grammar/${activeLevel}/${topicId}`);
@@ -110,7 +61,7 @@ export default function GrammarPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Main Header / Overview Card */}
+      {/* Main Header / Title */}
       <motion.div
         className="grammar-header"
         variants={headerVariants}
@@ -122,64 +73,29 @@ export default function GrammarPage() {
             <div className="grammar-header-icon">📖</div>
             <h1 className="grammar-title">{t('grammar.title')}</h1>
           </div>
-        </div>
 
-        {/* Global Level Stats */}
-        <div className="grammar-header-stats">
-          <div className="grammar-stat-chip">
-            <span className="grammar-stat-num">{topics.length}</span>
-            <span className="grammar-stat-lbl">{t('grammar.topicsCount')}</span>
-          </div>
-          <div className="grammar-stat-divider" />
-          <div className="grammar-stat-chip">
-            <span className="grammar-stat-num">{totalExercisesOfLevel}</span>
-            <span className="grammar-stat-lbl">{t('grammar.exercisesCount')}</span>
-          </div>
-          <div className="grammar-stat-divider" />
-          <div className="grammar-stat-chip">
-            <span className="grammar-stat-num">3</span>
-            <span className="grammar-stat-lbl">{t('grammar.levelsCount')}</span>
-          </div>
-        </div>
+          <div className="grammar-header-actions">
+            <motion.button
+              className="grammar-action-btn grammar-path-action-btn"
+              whileHover={{ scale: 1.02, y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/grammar/path')}
+            >
+              <span className="grammar-action-icon">🧗</span>
+              <span className="grammar-action-text">{t('grammar.pathTitle')}</span>
+            </motion.button>
 
-        {/* User Specific Progress for this Level */}
-        <div className="grammar-user-stats">
-          <div className="user-stat-card">
-            <span className="user-stat-value">{completedExercisesCount} / {totalExercisesOfLevel}</span>
-            <span className="user-stat-label">{t('grammar.completedExercises')}</span>
-          </div>
-          <div className="user-stat-card">
-            <span className="user-stat-value">{averageAccuracy}%</span>
-            <span className="user-stat-label">{t('grammar.averageScore')}</span>
+            <motion.button
+              className="grammar-action-btn grammar-test-action-btn"
+              whileHover={{ scale: 1.02, y: -1 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/grammar/general-test')}
+            >
+              <span className="grammar-action-icon">🧠</span>
+              <span className="grammar-action-text">{t('grammar.generalTestTitle')}</span>
+            </motion.button>
           </div>
         </div>
-      </motion.div>
-
-      {/* Track Tabs (which grammar curriculum — never blended together) */}
-      <motion.div
-        className="grammar-level-tabs grammar-track-tabs"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, delay: 0.1 }}
-      >
-        {Object.entries(GRAMMAR_TRACKS).map(([id, track]) => (
-          <button
-            key={id}
-            className={['grammar-level-tab', activeTrack === id ? 'active' : ''].filter(Boolean).join(' ')}
-            onClick={() => setActiveTrack(id)}
-            title={track.label}
-          >
-            {activeTrack === id && (
-              <motion.div
-                className="grammar-tab-pill"
-                layoutId="grammarTrackPill"
-                transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-              />
-            )}
-            <span className="tab-emoji">{track.icon}</span>
-            <span className="tab-label-text">{track.label.replace(/^\S+\s/, '')}</span>
-          </button>
-        ))}
       </motion.div>
 
       {/* Level Tabs (iOS Segmented Control) */}
@@ -221,46 +137,6 @@ export default function GrammarPage() {
         ))}
       </motion.div>
 
-      {/* Sequential "0 dan" Duolingo-style grammar path (English track only) */}
-      {activeTrack === 'en' && (
-        <motion.button
-          className="ggt-entry-card"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, delay: 0.14 }}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.99 }}
-          onClick={() => navigate('/grammar/path')}
-        >
-          <span className="ggt-entry-icon">🧗</span>
-          <span className="ggt-entry-text">
-            <span className="ggt-entry-title">{t('grammar.pathTitle')}</span>
-            <span className="ggt-entry-desc">{t('grammar.pathEntryDesc')}</span>
-          </span>
-          <span className="ggt-entry-chevron">→</span>
-        </motion.button>
-      )}
-
-      {/* General mixed test entry (English track, beginner content) */}
-      {activeTrack === 'en' && (
-        <motion.button
-          className="ggt-entry-card"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, delay: 0.18 }}
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.99 }}
-          onClick={() => navigate('/grammar/general-test')}
-        >
-          <span className="ggt-entry-icon">🧠</span>
-          <span className="ggt-entry-text">
-            <span className="ggt-entry-title">{t('grammar.generalTestTitle')}</span>
-            <span className="ggt-entry-desc">{t('grammar.generalTestEntryDesc')}</span>
-          </span>
-          <span className="ggt-entry-chevron">→</span>
-        </motion.button>
-      )}
-
       {/* Topics Grid */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -276,13 +152,7 @@ export default function GrammarPage() {
               const topicStats = grammarStats?.topics?.[topic.id];
               const completedExCount = topicStats?.exercises ? Object.keys(topicStats.exercises).length : 0;
 
-              const manualGuideLang = localStorage.getItem('grammar_guide_manual_lang');
-              const activeGuideLang = (manualGuideLang === 'uz' || manualGuideLang === 'ru')
-                ? manualGuideLang
-                : (appLang === 'ru' ? 'ru' : 'uz');
-              const rawGuide = (activeGuideLang === 'ru' && russianGuidesData[topic.id])
-                ? russianGuidesData[topic.id]
-                : (topic.guide || topic.description || '');
+              const rawGuide = topic.guide || topic.description || '';
 
               const cleanSnippet = rawGuide
                 .replace(/#+\s*/g, '')

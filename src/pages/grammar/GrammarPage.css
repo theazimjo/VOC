@@ -65,6 +65,57 @@
   margin: 0;
 }
 
+/* ── Header Actions (Grammar Path & General Test Buttons) ── */
+.grammar-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.grammar-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+  outline: none;
+  white-space: nowrap;
+}
+
+.grammar-path-action-btn {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.grammar-path-action-btn:hover {
+  border-color: var(--accent-1);
+  background: var(--bg-glass-hover);
+}
+
+.grammar-test-action-btn {
+  background: var(--accent-1-dim);
+  color: var(--accent-1);
+  border-color: transparent;
+}
+
+.grammar-test-action-btn:hover {
+  background: var(--accent-1);
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 162, 232, 0.3);
+}
+
+.grammar-action-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
 /* ── Options Dropdown Menu (Top Right of Card) ──── */
 .grammar-options-dropdown-wrapper {
   position: relative;
@@ -598,8 +649,25 @@
     gap: var(--space-sm);
   }
 
+  .grammar-header-top-row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
   .grammar-header-titles-left {
     gap: 8px;
+  }
+
+  .grammar-header-actions {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .grammar-action-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 7px 10px;
+    font-size: 0.76rem;
   }
 
   .grammar-header-icon {
