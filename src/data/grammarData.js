@@ -4483,6 +4483,3278 @@ Present Perfect Continuous o'tmishda boshlangan va hozirgi paytgacha davom etib 
           { id: 20, situation: 'Discussing a farewell.', dialogue: 'A: Will you write to me?\nB: Yes, I ___ write every week, I promise.', options: ['am going to', 'is going to', 'are going to', 'will going to'], correct: 0, explanation: 'A firm intention uses "am going to".' }
         ]
       },
+    ,
+{
+        id: "relative-clauses",
+        title: "Relative Clauses",
+        icon: "🔗",
+        guide: `## Relative Clauses (Aniqlovchi ergash gaplar) — Sodiqjon darsligi bo'yicha to'liq qo'llanma
+
+Relative clause — otdan keyin kelib, o'sha otni (**antecedent**) aniqlab yoki izohlab keladigan ergash gap.
+
+**STRUKTURA:** '[antecedent] + [relative word] + [ergash gap]'
+• *The book **which is on the table** is mine.* — antecedent = *the book*
+• *The woman **who called you** left a number.* — antecedent = *the woman*
+
+Relative word ergash gapda ham vazifa bajaradi: **ega (subject)**, **to'ldiruvchi (object)**, **egalik (possessive)** yoki **hol (adverbial)**.
+
+---
+
+## 1. Ikki asosiy tur: Defining va Non-defining
+
+| Belgi | DEFINING (Aniqlovchi) | NON-DEFINING (Izohlovchi) |
+|---|---|---|
+| **Vazifasi** | Qaysi otligini aniqlaydi — zarur ma'lumot | Qo'shimcha izoh beradi — olib tashlasa ham bo'ladi |
+| **Vergul** | **YO'Q** | **BOR (ikki tomondan: , ... ,)** |
+| **that** | Mumkin | **Mutlaqo mumkin emas** |
+| **Olmoshni tushirish** | Object bo'lsa — **mumkin** | **Hech qachon mumkin emas** |
+| **Ohang** | Pauzasiz o'qiladi | Pauza bilan o'qiladi |
+
+### Ma'no farqi — bu eng muhim nuqta:
+• *My brother **who lives in London** is a doctor.* — Bir nechta akam bor; gap Londondagisi haqida.
+• *My brother, **who lives in London**, is a doctor.* — Yolg'iz akam bor; Londonda yashashi — qo'shimcha ma'lumot.
+
+Vergul ma'noni o'zgartiradi — u bezak emas, grammatik belgi!
+
+---
+
+## 2. Relative Pronouns (Nisbiy olmoshlar)
+
+| Olmosh | Nimaga ishora | Vazifasi | Muhim cheklov |
+|---|---|---|---|
+| **who** | odam | subject / object | Predlogdan keyin darhol kelmaydi |
+| **whom** | odam | faqat object | Predlogdan keyin **MAJBURIY** (*to whom*) |
+| **which** | narsa, hayvon | subject / object | Butun gapga ham ishora qila oladi |
+| **that** | odam va narsa | subject / object | Faqat defining; **vergul va predlogdan keyin KELMAYDI** |
+| **whose** | egalik (odam va narsa) | possessive | Ketidan darhol ot keladi (*whose car*) |
+
+▸ *The novelist **whose diaries** were published...*
+▸ *The house **whose roof** was damaged has been sold.* (whose jonsiz otga ham ishlaydi!)
+
+---
+
+## 3. Relative Adverbs (Nisbiy ravishlar)
+
+| Ravish | Antecedent | Teng ma'noli shakl | Misol |
+|---|---|---|---|
+| **where** | joy | in / at / on which | *the town **where** I grew up* |
+| **when** | vaqt | in / on / at which | *the year **when** we met* |
+| **why** | sabab (*the reason*) | for which | *the reason **why** he left* |
+
+**MUHIM FARQ:** *where / when* dan keyin gap TO'LIQ bo'ladi. Agar gapda predlog saqlanib to'ldiruvchi yetishmasa — *that / which* kerak!
+• ✅ *The house **where** I live is old.* (live — to'liq)
+• ✅ *The house **(that)** I live **in** is old.* (in dan keyin to'ldiruvchi yetishmaydi)
+• ❌ *The house where I live in is old.* (ikki marta belgilangan!)
+
+---
+
+## 4. Predlogning o'rni
+
+Predlog ikki joyda tura oladi: relative olmosh oldida (rasmiy) yoki ergash gap oxirida (og'zaki).
+
+• *The colleague **with whom** I shared an office has retired.* — rasmiy / yozma
+• *The colleague **(who / that)** I shared an office **with** has retired.* — neytral / og'zaki
+
+### Qat'iy qoidalar:
+1. Predlogdan keyin faqat **whom** va **which** keladi:
+   • ❌ *the man to who I spoke* / *the theory on that it rests*
+   • ✅ *the man **to whom** I spoke* / *the theory **on which** it rests*
+2. Predlog oldinga chiqsa, olmoshni tushirib bo'lmaydi va *that* ishlatilmaydi.
+3. Phrasal verb bo'lsa, predlog odatda oxirida qoladi: *the problem (that) we have to deal with*.
+
+---
+
+## 5. Omission — olmoshni tushirish (Zero Relative)
+
+| TUSHIRISH MUMKIN | TUSHIRISH MUMKIN EMAS |
+|---|---|
+| Defining gapda **object** bo'lsa | **Subject** bo'lsa |
+| Predlog oxirida qolgan bo'lsa | Predlog oldinga chiqqan bo'lsa |
+| *be* fe'lining otkesimi bo'lsa | Non-defining (vergulli) gapda |
+| Cleft gapda object (*It was Marta (that) I saw*) | *whose* bo'lsa — **hech qachon!** |
+
+• ✅ *The flat **(that)** we rented in Lisbon was tiny.* (object — tushdi)
+• ❌ *The novel won the Booker Prize has been translated.* (subject tushmaydi!)
+• ❌ *My sister, works for the UN, lives in Geneva.* (non-defining'da tushmaydi)
+
+**TEKSHIRISH USULI:** relative olmoshdan keyin darhol **fe'l** kelsa — u subject, tushirib bo'lmaydi. Agar **ot yoki olmosh** kelsa — u object, tushirsa bo'ladi!
+
+---
+
+## 6. Miqdor so'zi + of + which / whom
+
+Non-defining gaplarda ikki gapni bog'lash uchun ishlatiladi: *all, both, most, many, some, several, none, neither, half, one, two, the majority...*
+
+• *There were forty applicants, **three of whom** were shortlisted.*
+• *He owns five galleries, **one of which** is in Vienna.*
+• ❌ *There were forty applicants, three of them were shortlisted.* (comma splice xatosi!)
+
+---
+
+## 7. Sentential "which" — butun gapga ishora
+
+*which* oldingi **butun gapga** ishora qilishi mumkin. Bunda *that* ham, *what* ham ISHLATILMAYDI, vergul esa **MAJBURIY**.
+
+• *She passed with distinction, **which** surprised nobody.*
+• *The funding was cut in March, **which** explains the delay.*
+• ❌ *She passed with distinction, what surprised nobody.*
+
+---
+
+## 8. "that" va "which" — qaysi biri afzal?
+
+### "that" afzal ko'riladi:
+1. *all, everything, nothing, anything, something, little, much* dan keyin
+2. *the only, the very, the first, the last, the next* dan keyin
+3. Orttirma daraja (*superlative*) dan keyin
+4. Cleft gaplarda: *It was John that told me.*
+
+### "which" MAJBURIY:
+1. Non-defining (vergulli) gaplarda
+2. Predlogdan keyin (*on which*)
+3. Butun gapga ishora qilganda (*..., which annoyed me*)
+
+---
+
+## 9. Reduced relative clauses — ergash gapni qisqartirish
+
+**ASOSIY SHART:** Faqat **SUBJECT** relative clause qisqaradi! Relative olmosh object bo'lsa, qisqartirib bo'lmaydi.
+
+| Tur | To'liq shakl | Qisqargan shakl |
+|---|---|---|
+| **Active → V-ing** | the delegates who are attending | the delegates **attending** |
+| **Passive → V3** | the paintings which were stolen | the paintings **stolen** |
+| **be + predlogli ibora** | the man who is behind the counter | the man **behind the counter** |
+| **be + ot (appositive)** | Ada Lovelace, who was a mathematician, | Ada Lovelace, **a mathematician**, |
+| **Modal / majburiyat** | forms which must be signed | forms **to be signed** |
+| **the only / first / last** | the last passenger who boarded | the last passenger **to board** |
+| **Perfect** | students who have submitted | students **having submitted** |
+
+---
+
+## 10. Nominal relatives (what, whoever va boshqalar)
+
+Bular relative clause emas, ot vazifasidagi gaplardir. Ularning antecedent'i yo'q, chunki antecedent so'zning o'z ichida:
+• *What he said was true.* (*what = the thing which*)
+• *Whoever arrives last must lock up.* (*whoever = the person who*)
+• ❌ *The book what I read was boring.* → ✅ *The book (that) I read was boring.*
+
+---
+
+## 11. Fe'lning moslashuvi (Agreement)
+
+Ergash gapdagi fe'l relative olmoshning antecedent'iga qarab o'zgaradi:
+• ✅ *He is one of those managers who **take** credit for everything.* (*who = those managers*, ko'plik)
+• ✅ *She is the only one of the students who **has** passed.* (*the only one* — birlik)
+
+---
+
+## 12. Eng ko'p uchraydigan 8 ta xato
+
+1. ❌ *The report that I referred to it...* → ✅ *The report that I referred to...* (it ortiqcha)
+2. ❌ *The house, that we bought...* → ✅ *The house, which we bought...* (vergul + that yo'q)
+3. ❌ *The novel, which opening chapter...* → ✅ *whose opening chapter*
+4. ❌ *the principle on that it rests* → ✅ *on which*
+5. ❌ *..., three of them were shortlisted.* → ✅ *three of whom*
+6. ❌ *The book what I read* → ✅ *that / which* (antecedent bor)
+7. ❌ *one of those people who never admits* → ✅ *admit* (ko'plik antecedent)
+8. ❌ *The reason why ... was because ...* → ✅ *was that* (qo'sh ortiqchalik)
+`,
+        guideRu: `## Relative Clauses (Относительные придаточные) — Полное руководство по материалам Содикжона
+
+Relative Clause — это придаточное предложение, которое следует за существительным (**antecedent**) и определяет или описывает его.
+
+**СТРУКТУРА:** '[antecedent] + [relative word] + [придаточное предложение]'
+• *The book **which is on the table** is mine.* — antecedent = *the book*
+• *The woman **who called you** left a number.* — antecedent = *the woman*
+
+Относительное слово выполняет синтаксическую роль в придаточном: **подлежащее (subject)**, **дополнение (object)**, **принадлежность (possessive)** или **обстоятельство (adverbial)**.
+
+---
+
+## 1. Два основных типа: Defining и Non-defining
+
+| Признак | DEFINING (Определительное) | NON-DEFINING (Распространительное) |
+|---|---|---|
+| **Функция** | Определяет предмет — необходимая информация | Дополнительная информация — можно удалить |
+| **Запятая** | **НЕТ** | **ЕСТЬ (с двух сторон: , ... ,)** |
+| **that** | Можно использовать | **Строго запрещено** |
+| **Опускание местоимения** | В роли дополнения — **можно** | **Никогда нельзя** |
+
+### Смысловая разница:
+• *My brother **who lives in London** is a doctor.* — У меня несколько братьев; речь о том, который живёт в Лондоне.
+• *My brother, **who lives in London**, is a doctor.* — У меня один брат; то, что он живёт в Лондоне — дополнительная деталь.
+
+Запятая меняет смысл предложения — это грамматический знак!
+
+---
+
+## 2. Относительные местоимения (Relative Pronouns)
+
+| Местоимение | К чему относится | Функция | Важное ограничение |
+|---|---|---|---|
+| **who** | люди | подлежащее / дополнение | Не употребляется сразу после предлога |
+| **whom** | люди | только дополнение | Обязательно после предлогов (*to whom*) |
+| **which** | предметы, животные | подлежащее / дополнение | Может относиться ко всему предложению |
+| **that** | люди и предметы | подлежащее / дополнение | Только в defining; **нельзя после запятой и предлогов** |
+| **whose** | чей / которого | принадлежность | Сразу после него идёт существительное |
+
+▸ *The house **whose roof** was damaged has been sold.* (whose применяется и к неодушевлённым предметам!)
+
+---
+
+## 3. Относительные наречия (Relative Adverbs)
+
+| Наречие | Antecedent | Эквивалент | Пример |
+|---|---|---|---|
+| **where** | место | in / at / on which | *the town **where** I grew up* |
+| **when** | время | in / on / at which | *the year **when** we met* |
+| **why** | причина | for which | *the reason **why** he left* |
+
+**ВАЖНОЕ ОТЛИЧИЕ:** после *where / when* предложение закончено. Если предлог остаётся в конце, используется *that / which*:
+• ✅ *The house **where** I live is old.*
+• ✅ *The house **(that)** I live **in** is old.*
+• ❌ *The house where I live in is old.* (двойное указание ошибки!)
+
+---
+
+## 4. Позиция предлога
+
+Предлог может стоять перед местоимением (официальный стиль) или в конце придаточного (разговорный стиль):
+• *The colleague **with whom** I worked...* (официально)
+• *The colleague **(who / that)** I worked **with**...* (разговорно)
+
+---
+
+## 5. Опускание местоимения (Zero Relative)
+
+| МОЖНО ОПУСКАТЬ | НЕЛЬЗЯ ОПУСКАТЬ |
+|---|---|
+| В defining придаточном в роли **дополнения** | В роли **подлежащего** |
+| Когда предлог остаётся в конце | Когда предлог вынесен вперёд |
+| С местоимением *whose* — **никогда!** | В non-defining (с запятыми) |
+
+• ✅ *The flat **(that)** we rented was tiny.* (дополнение — опускается)
+• ❌ *The novel won the prize was translated.* (подлежащее — опускать нельзя)
+
+---
+
+## 6. Местоимение количества + of + which / whom
+
+В non-defining предложениях для связи союзов: *all of which, three of whom, one of which, several of whom...*
+• *There were forty applicants, **three of whom** were shortlisted.*
+• ❌ *There were forty applicants, three of them were shortlisted.* (ошибка comma splice!)
+
+---
+
+## 7. Sentential "which" (Отношение к целому предложению)
+
+*which* может относиться ко всему предшествующему предложению. Запятая **ОБЯЗАТЕЛЬНА**, союзы *that* и *what* НЕ ИСПОЛЬЗУЮТСЯ.
+• *She passed with distinction, **which** surprised nobody.*
+
+---
+
+## 8. Сокращение относительных придаточных (Reduced Relative Clauses)
+
+Сокращать можно **ТОЛЬКО** придаточные в роли подлежащего:
+• Active → **V-ing**: *the delegates **attending***
+• Passive → **V3**: *the paintings **stolen***
+• be + предлог: *the man **behind the counter***
+• the first / last → **to-infinitive**: *the last passenger **to board***
+`,
+        questions: [
+          {
+                    "id": 1,
+                    "text": "The man ___ lives next door is a world-famous surgeon.",
+                    "options": [
+                              "which",
+                              "who",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Odamlar uchun subject vazifasida 'who' ishlatiladi."
+          },
+          {
+                    "id": 2,
+                    "text": "The car ___ he bought last week broke down yesterday.",
+                    "options": [
+                              "who",
+                              "whose",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 2,
+                    "explanation": "Narsalar uchun 'which' yoki 'that' ishlatiladi."
+          },
+          {
+                    "id": 3,
+                    "text": "That is the girl ___ dog won first prize at the show.",
+                    "options": [
+                              "who",
+                              "whom",
+                              "whose",
+                              "which"
+                    ],
+                    "correct": 2,
+                    "explanation": "Egalik (kimgadir tegishli it) uchun 'whose' ishlatiladi."
+          },
+          {
+                    "id": 4,
+                    "text": "The colleague to ___ I sent the proposal has not responded yet.",
+                    "options": [
+                              "who",
+                              "whom",
+                              "that",
+                              "which"
+                    ],
+                    "correct": 1,
+                    "explanation": "Predlogdan (to) keyin har doim 'whom' majburiy."
+          },
+          {
+                    "id": 5,
+                    "text": "My father, ___ is 65 years old, still runs every morning.",
+                    "options": [
+                              "that",
+                              "who",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Non-defining clause (vergulli gapda) 'that' ISHLATILMAYDI; 'who' kerak."
+          },
+          {
+                    "id": 6,
+                    "text": "The house ___ I grew up in has been demolished.",
+                    "options": [
+                              "where",
+                              "that",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Gap oxirida predlog (in) saqlangani uchun 'that' yoki 'which' ishlatiladi ('where' emas)."
+          },
+          {
+                    "id": 7,
+                    "text": "This is the town ___ I spent my childhood.",
+                    "options": [
+                              "where",
+                              "which",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Joy ifodalaganda va predlog bo'lmaganda 'where' ishlatiladi."
+          },
+          {
+                    "id": 8,
+                    "text": "In which sentence can the relative pronoun BE OMITTED?",
+                    "options": [
+                              "The man who stole the car was caught.",
+                              "The book which I borrowed was great.",
+                              "The doctor who treated me was nice.",
+                              "The girl whose phone rang left."
+                    ],
+                    "correct": 1,
+                    "explanation": "Defining clause ichida relative pronoun OBJECT bo'lsa (which I borrowed), uni tushirish mumkin."
+          },
+          {
+                    "id": 9,
+                    "text": "There were 50 applicants, three of ___ were invited for an interview.",
+                    "options": [
+                              "them",
+                              "whom",
+                              "which",
+                              "who"
+                    ],
+                    "correct": 1,
+                    "explanation": "Miqdor so'zi + of + whom (three of whom) - non-defining clause."
+          },
+          {
+                    "id": 10,
+                    "text": "She passed the exam with top marks, ___ surprised everyone.",
+                    "options": [
+                              "what",
+                              "that",
+                              "which",
+                              "it"
+                    ],
+                    "correct": 2,
+                    "explanation": "Butun gapga ishora qilganda vergul + 'which' (sentential which) ishlatiladi."
+          },
+          {
+                    "id": 11,
+                    "text": "He is the only candidate ___ answered all questions correctly.",
+                    "options": [
+                              "which",
+                              "that",
+                              "whom",
+                              "whose"
+                    ],
+                    "correct": 1,
+                    "explanation": "'The only' dan keyin 'that' nisbiy olmoshi afzal ko'riladi."
+          },
+          {
+                    "id": 12,
+                    "text": "The delegates ___ the conference arrived early this morning.",
+                    "options": [
+                              "attended",
+                              "attending",
+                              "attend",
+                              "were attended"
+                    ],
+                    "correct": 1,
+                    "explanation": "Active reduced relative clause: who are attending → attending."
+          },
+          {
+                    "id": 13,
+                    "text": "The laptop ___ on the table belongs to the professor.",
+                    "options": [
+                              "left",
+                              "leaving",
+                              "was left",
+                              "leaves"
+                    ],
+                    "correct": 0,
+                    "explanation": "Passive reduced relative clause: which was left → left."
+          },
+          {
+                    "id": 14,
+                    "text": "Everything ___ she told us turned out to be true.",
+                    "options": [
+                              "what",
+                              "that",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 1,
+                    "explanation": "'Everything' so'zidan keyin 'that' ishlatiladi ('what' emas)."
+          },
+          {
+                    "id": 15,
+                    "text": "He is one of those people who ___ never satisfied.",
+                    "options": [
+                              "is",
+                              "are",
+                              "am",
+                              "be"
+                    ],
+                    "correct": 1,
+                    "explanation": "'One of those people who...' - antecedent 'people' (ko'plik), shuning uchun 'are'."
+          },
+          {
+                    "id": 16,
+                    "text": "She is the only one of the students who ___ passed the exam.",
+                    "options": [
+                              "have",
+                              "has",
+                              "having",
+                              "are"
+                    ],
+                    "correct": 1,
+                    "explanation": "'The only one of...' - antecedent 'the only one' (birlik), shuning uchun 'has'."
+          },
+          {
+                    "id": 17,
+                    "text": "The reason ___ he was late was that his car broke down.",
+                    "options": [
+                              "why",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sabab antecedent'i (the reason) uchun 'why' ishlatiladi."
+          },
+          {
+                    "id": 18,
+                    "text": "Which sentence is INCORRECT?",
+                    "options": [
+                              "The book what I read was boring.",
+                              "The book that I read was boring.",
+                              "The book I read was boring.",
+                              "The book which I read was boring."
+                    ],
+                    "correct": 0,
+                    "explanation": "Antecedent bo'lganda 'what' ishlatilmaydi; 'that' yoki 'which' kerak."
+          },
+          {
+                    "id": 19,
+                    "text": "The building, the roof ___ was damaged in the storm, is being repaired.",
+                    "options": [
+                              "whose",
+                              "of which",
+                              "which",
+                              "that"
+                    ],
+                    "correct": 1,
+                    "explanation": "Jonsiz otlar uchun rasmiy uslubda 'the roof of which' yoki 'whose roof'."
+          },
+          {
+                    "id": 20,
+                    "text": "Ada Lovelace, ___ was a brilliant mathematician, wrote the first algorithm.",
+                    "options": [
+                              "that",
+                              "who",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Non-defining clause (vergulli) odamlar uchun 'who' ishlatiladi ('that' taqiqlanadi)."
+          }
+],
+        fillBlanks: [
+          {
+                    "id": 1,
+                    "text": "The woman ___ lives next door is an architect.",
+                    "options": [
+                              "who",
+                              "which",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "People subject: who."
+          },
+          {
+                    "id": 2,
+                    "text": "The book ___ I bought yesterday is very interesting.",
+                    "options": [
+                              "which",
+                              "who",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing object: which/that."
+          },
+          {
+                    "id": 3,
+                    "text": "The boy ___ phone was stolen reported it to the police.",
+                    "options": [
+                              "whose",
+                              "who",
+                              "whom",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possession: whose."
+          },
+          {
+                    "id": 4,
+                    "text": "The company to ___ she applied offered her a job.",
+                    "options": [
+                              "which",
+                              "that",
+                              "who",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + which."
+          },
+          {
+                    "id": 5,
+                    "text": "This is the restaurant ___ we celebrated your birthday.",
+                    "options": [
+                              "where",
+                              "which",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Place adverb: where."
+          },
+          {
+                    "id": 6,
+                    "text": "My uncle, ___ is a doctor, lives in Samarkand.",
+                    "options": [
+                              "who",
+                              "that",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Non-defining relative clause: who (not that)."
+          },
+          {
+                    "id": 7,
+                    "text": "All the money ___ was donated will be used for charity.",
+                    "options": [
+                              "that",
+                              "what",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "After 'all': that."
+          },
+          {
+                    "id": 8,
+                    "text": "He has three brothers, two of ___ are lawyers.",
+                    "options": [
+                              "whom",
+                              "them",
+                              "which",
+                              "who"
+                    ],
+                    "correct": 0,
+                    "explanation": "Quantity + of + whom."
+          },
+          {
+                    "id": 9,
+                    "text": "She won first place, ___ surprised everyone.",
+                    "options": [
+                              "which",
+                              "that",
+                              "what",
+                              "it"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sentential which referring to whole sentence."
+          },
+          {
+                    "id": 10,
+                    "text": "The student ___ the highest score will receive a scholarship.",
+                    "options": [
+                              "getting",
+                              "got",
+                              "gets",
+                              "is getting"
+                    ],
+                    "correct": 0,
+                    "explanation": "Active reduced relative clause: getting."
+          },
+          {
+                    "id": 11,
+                    "text": "The paintings ___ from the museum were recovered.",
+                    "options": [
+                              "stolen",
+                              "stealing",
+                              "stole",
+                              "were stolen"
+                    ],
+                    "correct": 0,
+                    "explanation": "Passive reduced relative clause: stolen."
+          },
+          {
+                    "id": 12,
+                    "text": "The man ___ I spoke to yesterday was very helpful.",
+                    "options": [
+                              "who",
+                              "whose",
+                              "which",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "People object with preposition at end: who/that."
+          },
+          {
+                    "id": 13,
+                    "text": "The reason ___ she missed the train was a traffic jam.",
+                    "options": [
+                              "why",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Reason: why."
+          },
+          {
+                    "id": 14,
+                    "text": "He is one of those students who ___ hard every day.",
+                    "options": [
+                              "study",
+                              "studies",
+                              "studying",
+                              "is studying"
+                    ],
+                    "correct": 0,
+                    "explanation": "Plural agreement with antecedent 'students': study."
+          },
+          {
+                    "id": 15,
+                    "text": "She is the only person ___ understood the instructions.",
+                    "options": [
+                              "that",
+                              "which",
+                              "what",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "After 'the only': that."
+          },
+          {
+                    "id": 16,
+                    "text": "The year ___ we graduated was unforgettable.",
+                    "options": [
+                              "when",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Time adverb: when."
+          },
+          {
+                    "id": 17,
+                    "text": "The house ___ roof was blown off in the storm has been repaired.",
+                    "options": [
+                              "whose",
+                              "which",
+                              "that",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive whose for things."
+          },
+          {
+                    "id": 18,
+                    "text": "I didn't like the film ___ we watched last night.",
+                    "options": [
+                              "that",
+                              "what",
+                              "whose",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing object: that."
+          },
+          {
+                    "id": 19,
+                    "text": "The professor with ___ I discussed my thesis was encouraging.",
+                    "options": [
+                              "whom",
+                              "who",
+                              "that",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + whom."
+          },
+          {
+                    "id": 20,
+                    "text": "The last passenger ___ the plane was arrested.",
+                    "options": [
+                              "to board",
+                              "boarded",
+                              "boarding",
+                              "boards"
+                    ],
+                    "correct": 0,
+                    "explanation": "After 'the last': to-infinitive reduction (to board)."
+          }
+],
+        scrambled: [
+          {
+                    "id": 1,
+                    "words": [
+                              "man",
+                              "the",
+                              "who",
+                              "called",
+                              "you",
+                              "is",
+                              "my",
+                              "brother"
+                    ],
+                    "answer": "The man who called you is my brother.",
+                    "explanation": "Defining relative clause: Subject + who + V."
+          },
+          {
+                    "id": 2,
+                    "words": [
+                              "book",
+                              "the",
+                              "which",
+                              "I",
+                              "bought",
+                              "is",
+                              "great"
+                    ],
+                    "answer": "The book which I bought is great.",
+                    "explanation": "Relative clause for objects: which + S + V."
+          },
+          {
+                    "id": 3,
+                    "words": [
+                              "girl",
+                              "that",
+                              "is",
+                              "the",
+                              "whose",
+                              "car",
+                              "was",
+                              "stolen"
+                    ],
+                    "answer": "That is the girl whose car was stolen.",
+                    "explanation": "Possessive relative clause: whose + noun."
+          },
+          {
+                    "id": 4,
+                    "words": [
+                              "house",
+                              "this",
+                              "is",
+                              "where",
+                              "grew",
+                              "I",
+                              "up"
+                    ],
+                    "answer": "This is the house where I grew up.",
+                    "explanation": "Relative adverb of place: where + S + V."
+          },
+          {
+                    "id": 5,
+                    "words": [
+                              "brother",
+                              "my",
+                              "who",
+                              "lives",
+                              "in",
+                              "London",
+                              "is",
+                              "a",
+                              "doctor"
+                    ],
+                    "answer": "My brother who lives in London is a doctor.",
+                    "explanation": "Defining relative clause without commas."
+          },
+          {
+                    "id": 6,
+                    "words": [
+                              "passed",
+                              "she",
+                              "which",
+                              "surprised",
+                              "everyone"
+                    ],
+                    "answer": "She passed which surprised everyone.",
+                    "explanation": "Sentential which: clause + , which + verb."
+          },
+          {
+                    "id": 7,
+                    "words": [
+                              "applicants",
+                              "there",
+                              "were",
+                              "many",
+                              "two",
+                              "of",
+                              "whom",
+                              "passed"
+                    ],
+                    "answer": "There were many applicants two of whom passed.",
+                    "explanation": "Quantity + of + whom."
+          },
+          {
+                    "id": 8,
+                    "words": [
+                              "colleague",
+                              "the",
+                              "with",
+                              "whom",
+                              "I",
+                              "worked",
+                              "retired"
+                    ],
+                    "answer": "The colleague with whom I worked retired.",
+                    "explanation": "Preposition fronting: with whom + S + V."
+          },
+          {
+                    "id": 9,
+                    "words": [
+                              "everything",
+                              "that",
+                              "she",
+                              "said",
+                              "was",
+                              "true"
+                    ],
+                    "answer": "Everything that she said was true.",
+                    "explanation": "Relative clause after 'everything': that."
+          },
+          {
+                    "id": 10,
+                    "words": [
+                              "delegates",
+                              "the",
+                              "attending",
+                              "the",
+                              "meeting",
+                              "were",
+                              "kind"
+                    ],
+                    "answer": "The delegates attending the meeting were kind.",
+                    "explanation": "Reduced active relative clause: V-ing."
+          },
+          {
+                    "id": 11,
+                    "words": [
+                              "paintings",
+                              "stolen",
+                              "the",
+                              "were",
+                              "found"
+                    ],
+                    "answer": "The paintings stolen were found.",
+                    "explanation": "Reduced passive relative clause: V3."
+          },
+          {
+                    "id": 12,
+                    "words": [
+                              "man",
+                              "the",
+                              "behind",
+                              "the",
+                              "counter",
+                              "smiled"
+                    ],
+                    "answer": "The man behind the counter smiled.",
+                    "explanation": "Reduced prepositional relative clause."
+          },
+          {
+                    "id": 13,
+                    "words": [
+                              "only",
+                              "the",
+                              "person",
+                              "that",
+                              "helped",
+                              "me"
+                    ],
+                    "answer": "He was the only person that helped me.",
+                    "explanation": "After 'the only': that."
+          },
+          {
+                    "id": 14,
+                    "words": [
+                              "last",
+                              "the",
+                              "train",
+                              "to",
+                              "arrive",
+                              "was",
+                              "late"
+                    ],
+                    "answer": "The last train to arrive was late.",
+                    "explanation": "The last + to-infinitive reduction."
+          },
+          {
+                    "id": 15,
+                    "words": [
+                              "reason",
+                              "the",
+                              "why",
+                              "he",
+                              "left",
+                              "is",
+                              "clear"
+                    ],
+                    "answer": "The reason why he left is clear.",
+                    "explanation": "The reason why + S + V."
+          }
+],
+        errorCorrection: [
+          {
+                    "id": 1,
+                    "text": "The report that I referred to it was accurate.",
+                    "options": [
+                              "that I referred",
+                              "to it",
+                              "was accurate",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "to it",
+                    "correction": "to",
+                    "explanation": "Relative clause'da takroriy olmosh (it) tushiriladi: referred to."
+          },
+          {
+                    "id": 2,
+                    "text": "My father, that is a lawyer, lives in Chicago.",
+                    "options": [
+                              "My father",
+                              "that is",
+                              "a lawyer",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "that is",
+                    "correction": "who is",
+                    "explanation": "Non-defining clause (vergulli gapda) 'that' ISHLATILMAYDI; 'who' kerak."
+          },
+          {
+                    "id": 3,
+                    "text": "The house, which opening chapter was sad, is famous.",
+                    "options": [
+                              "which opening",
+                              "chapter was",
+                              "sad is",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "which opening",
+                    "correction": "whose opening",
+                    "explanation": "Egalik ma'nosi bo'lgani uchun 'whose' ishlatiladi."
+          },
+          {
+                    "id": 4,
+                    "text": "This is the theory on that his argument rests.",
+                    "options": [
+                              "on that",
+                              "his argument",
+                              "rests",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "on that",
+                    "correction": "on which",
+                    "explanation": "Predlogdan keyin 'that' kelmaydi; 'on which' kerak."
+          },
+          {
+                    "id": 5,
+                    "text": "There were 40 students, five of them failed.",
+                    "options": [
+                              "five of them",
+                              "failed",
+                              "40 students",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "five of them",
+                    "correction": "five of whom",
+                    "explanation": "Comma splice xatosi: ergash gap bog'lash uchun 'five of whom' kerak."
+          },
+          {
+                    "id": 6,
+                    "text": "The book what I borrowed was very interesting.",
+                    "options": [
+                              "what I borrowed",
+                              "was very",
+                              "interesting",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "what I borrowed",
+                    "correction": "that I borrowed",
+                    "explanation": "Antecedent (the book) bo'lganda 'what' ishlatilmaydi; 'that' / 'which' kerak."
+          },
+          {
+                    "id": 7,
+                    "text": "He is one of those managers who never admits mistakes.",
+                    "options": [
+                              "who never",
+                              "admits mistakes",
+                              "one of those",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "admits mistakes",
+                    "correction": "admit mistakes",
+                    "explanation": "Antecedent 'those managers' (ko'plik), fe'l ko'plikda bo'lishi kerak: admit."
+          },
+          {
+                    "id": 8,
+                    "text": "The reason why he left was because he was tired.",
+                    "options": [
+                              "was because",
+                              "he was tired",
+                              "The reason why",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "was because",
+                    "correction": "was that",
+                    "explanation": "'The reason why... was because...' - qo'sh ortiqchalik xatosi; 'was that' to'g'ri."
+          },
+          {
+                    "id": 9,
+                    "text": "The house where I live in is very comfortable.",
+                    "options": [
+                              "where I live in",
+                              "is very",
+                              "comfortable",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "where I live in",
+                    "correction": "where I live",
+                    "explanation": "'where' bilan birga gap oxirida predlog (in) ishlatilmaydi."
+          },
+          {
+                    "id": 10,
+                    "text": "The proposal the board rejected it was revised.",
+                    "options": [
+                              "rejected it",
+                              "was revised",
+                              "The proposal",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "rejected it",
+                    "correction": "rejected",
+                    "explanation": "Relative clause to'ldiruvchisi bo'lgan takroriy 'it' tushiriladi."
+          },
+          {
+                    "id": 11,
+                    "text": "She passed her exams, what pleased her parents.",
+                    "options": [
+                              "what pleased",
+                              "her parents",
+                              "passed her exams",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "what pleased",
+                    "correction": "which pleased",
+                    "explanation": "Butun gapga ishora qilganda vergul + 'which' ishlatiladi ('what' emas)."
+          },
+          {
+                    "id": 12,
+                    "text": "The novel won the prize has been translated.",
+                    "options": [
+                              "The novel won",
+                              "the prize",
+                              "has been translated",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "The novel won",
+                    "correction": "The novel which won",
+                    "explanation": "Subject position relative pronoun tushirib bo'lmaydi."
+          },
+          {
+                    "id": 13,
+                    "text": "My sister, works for the UN, lives in Geneva.",
+                    "options": [
+                              "My sister,",
+                              "works for",
+                              "the UN",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "works for",
+                    "correction": "who works for",
+                    "explanation": "Non-defining clause olmoshi (who) tushirilmaydi."
+          },
+          {
+                    "id": 14,
+                    "text": "The man to who I spoke was very helpful.",
+                    "options": [
+                              "to who",
+                              "I spoke",
+                              "was very",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "to who",
+                    "correction": "to whom",
+                    "explanation": "Predlogdan keyin har doim 'whom' ishlatiladi ('who' emas)."
+          },
+          {
+                    "id": 15,
+                    "text": "The proposal rejecting by the board was cancelled.",
+                    "options": [
+                              "rejecting by",
+                              "the board",
+                              "was cancelled",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "rejecting by",
+                    "correction": "rejected by",
+                    "explanation": "Passive reduced clause: V3 (rejected by) ishlatilishi kerak."
+          }
+],
+        transform: [
+          {
+                    "id": 1,
+                    "text": "Combine into defining relative clause: 'I met a doctor. He lives next door.' →",
+                    "options": [
+                              "I met a doctor who lives next door.",
+                              "I met a doctor, who lives next door.",
+                              "I met a doctor that he lives next door.",
+                              "I met a doctor which lives next door."
+                    ],
+                    "correct": 0,
+                    "explanation": "Defining relative clause for people: who lives next door."
+          },
+          {
+                    "id": 2,
+                    "text": "Combine into non-defining clause: 'London is huge. It is the capital of the UK.' →",
+                    "options": [
+                              "London, which is the capital of the UK, is huge.",
+                              "London that is the capital of the UK is huge.",
+                              "London where is the capital of the UK is huge.",
+                              "London which it is the capital is huge."
+                    ],
+                    "correct": 0,
+                    "explanation": "Non-defining clause with commas: London, which is..."
+          },
+          {
+                    "id": 3,
+                    "text": "Reduce the relative clause: 'The delegates who are attending the meeting are from Asia.' →",
+                    "options": [
+                              "The delegates attending the meeting are from Asia.",
+                              "The delegates attended the meeting are from Asia.",
+                              "The delegates attend the meeting are from Asia.",
+                              "The delegates to attend the meeting are from Asia."
+                    ],
+                    "correct": 0,
+                    "explanation": "Active relative clause reduction: who are attending → attending."
+          },
+          {
+                    "id": 4,
+                    "text": "Reduce the passive clause: 'The paintings which were stolen last night were famous.' →",
+                    "options": [
+                              "The paintings stolen last night were famous.",
+                              "The paintings stealing last night were famous.",
+                              "The paintings steal last night were famous.",
+                              "The paintings having stolen were famous."
+                    ],
+                    "correct": 0,
+                    "explanation": "Passive relative clause reduction: which were stolen → stolen."
+          },
+          {
+                    "id": 5,
+                    "text": "Combine with preposition: 'The colleague is friendly. I work with him.' →",
+                    "options": [
+                              "The colleague with whom I work is friendly.",
+                              "The colleague with who I work is friendly.",
+                              "The colleague with that I work is friendly.",
+                              "The colleague with which I work is friendly."
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition fronting: with whom I work."
+          },
+          {
+                    "id": 6,
+                    "text": "Combine using possessive: 'A girl called the police. Her phone was stolen.' →",
+                    "options": [
+                              "A girl whose phone was stolen called the police.",
+                              "A girl who her phone was stolen called the police.",
+                              "A girl which phone was stolen called the police.",
+                              "A girl that her phone was stolen called the police."
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive relative clause: whose phone."
+          },
+          {
+                    "id": 7,
+                    "text": "Combine using sentential which: 'She won the race. This surprised everyone.' →",
+                    "options": [
+                              "She won the race, which surprised everyone.",
+                              "She won the race that surprised everyone.",
+                              "She won the race what surprised everyone.",
+                              "She won the race it surprised everyone."
+                    ],
+                    "correct": 0,
+                    "explanation": "Sentential which: , which surprised everyone."
+          },
+          {
+                    "id": 8,
+                    "text": "Combine using quantity of: 'He bought 10 laptops. Three of them were broken.' →",
+                    "options": [
+                              "He bought 10 laptops, three of which were broken.",
+                              "He bought 10 laptops, three of them were broken.",
+                              "He bought 10 laptops three of that were broken.",
+                              "He bought 10 laptops three of whom were broken."
+                    ],
+                    "correct": 0,
+                    "explanation": "Quantity + of + which for things."
+          },
+          {
+                    "id": 9,
+                    "text": "Omit relative pronoun: 'The book that I bought was expensive.' →",
+                    "options": [
+                              "The book I bought was expensive.",
+                              "The book bought was expensive.",
+                              "The book I was bought expensive.",
+                              "The book bought I was expensive."
+                    ],
+                    "correct": 0,
+                    "explanation": "Defining object pronoun omitted: The book I bought..."
+          },
+          {
+                    "id": 10,
+                    "text": "Reduce to-infinitive: 'He was the last passenger who boarded the plane.' →",
+                    "options": [
+                              "He was the last passenger to board the plane.",
+                              "He was the last passenger boarding the plane.",
+                              "He was the last passenger boarded the plane.",
+                              "He was the last passenger board the plane."
+                    ],
+                    "correct": 0,
+                    "explanation": "The last + to-infinitive reduction."
+          },
+          {
+                    "id": 11,
+                    "text": "Combine using relative adverb: 'This is the town. I grew up here.' →",
+                    "options": [
+                              "This is the town where I grew up.",
+                              "This is the town where I grew up in.",
+                              "This is the town which I grew up.",
+                              "This is the town that I grew up here."
+                    ],
+                    "correct": 0,
+                    "explanation": "Relative adverb of place: where I grew up."
+          },
+          {
+                    "id": 12,
+                    "text": "Fix double pronoun: 'The man who I met him yesterday was kind.' →",
+                    "options": [
+                              "The man who I met yesterday was kind.",
+                              "The man who I met he yesterday was kind.",
+                              "The man who I met him yesterday was kind.",
+                              "The man which I met yesterday was kind."
+                    ],
+                    "correct": 0,
+                    "explanation": "Redundant pronoun 'him' removed."
+          },
+          {
+                    "id": 13,
+                    "text": "Apply 'that' preference: 'It was John who told me the news.' →",
+                    "options": [
+                              "It was John that told me the news.",
+                              "It was John which told me the news.",
+                              "It was John what told me the news.",
+                              "It was John whom told me the news."
+                    ],
+                    "correct": 0,
+                    "explanation": "Cleft sentence prefers 'that': It was John that told me."
+          },
+          {
+                    "id": 14,
+                    "text": "Combine using reason: 'He left early. That is the reason.' →",
+                    "options": [
+                              "That is the reason why he left early.",
+                              "That is the reason how he left early.",
+                              "That is the reason where he left early.",
+                              "That is the reason which he left early."
+                    ],
+                    "correct": 0,
+                    "explanation": "The reason why he left early."
+          },
+          {
+                    "id": 15,
+                    "text": "Reduce prepositional phrase: 'The man who is behind the counter smiled.' →",
+                    "options": [
+                              "The man behind the counter smiled.",
+                              "The man being behind the counter smiled.",
+                              "The man to be behind the counter smiled.",
+                              "The man was behind the counter smiled."
+                    ],
+                    "correct": 0,
+                    "explanation": "be + prepositional phrase reduction."
+          }
+],
+        dialogue: [
+          {
+                    "id": 1,
+                    "situation": "Talking about a coworker.",
+                    "dialogue": "A: Who is that woman over there?\nB: She's the engineer ___ joined our team last week.",
+                    "options": [
+                              "who",
+                              "which",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Person subject: who."
+          },
+          {
+                    "id": 2,
+                    "situation": "Discussing a missing item.",
+                    "dialogue": "A: Did you find the keys ___ you lost?\nB: Yes, they were under the sofa.",
+                    "options": [
+                              "that",
+                              "who",
+                              "whose",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing object: that."
+          },
+          {
+                    "id": 3,
+                    "situation": "Recommending a place.",
+                    "dialogue": "A: Where should we have dinner?\nB: Let's go to the Italian place ___ we met last month.",
+                    "options": [
+                              "where",
+                              "which",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Place adverb: where."
+          },
+          {
+                    "id": 4,
+                    "situation": "Talking about a neighbor.",
+                    "dialogue": "A: Do you know the man ___ dog barks all night?\nB: Yes, I spoke to him yesterday.",
+                    "options": [
+                              "whose",
+                              "who",
+                              "whom",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive: whose."
+          },
+          {
+                    "id": 5,
+                    "situation": "Sharing news about a friend.",
+                    "dialogue": "A: Did you hear about Sarah?\nB: Yes, she passed all her exams, ___ is fantastic news!",
+                    "options": [
+                              "which",
+                              "that",
+                              "what",
+                              "it"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sentential which referring to whole situation."
+          },
+          {
+                    "id": 6,
+                    "situation": "Discussing job applicants.",
+                    "dialogue": "A: How were the candidates?\nB: There were ten applicants, three of ___ had master's degrees.",
+                    "options": [
+                              "whom",
+                              "them",
+                              "which",
+                              "who"
+                    ],
+                    "correct": 0,
+                    "explanation": "Quantity + of + whom."
+          },
+          {
+                    "id": 7,
+                    "situation": "Talking about a hotel.",
+                    "dialogue": "A: Was the hotel nice?\nB: Yes, the room ___ we stayed in was huge.",
+                    "options": [
+                              "that",
+                              "where",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition 'in' at end: that/which."
+          },
+          {
+                    "id": 8,
+                    "situation": "Talking about a professor.",
+                    "dialogue": "A: Is Professor Davis strict?\nB: He is one of those teachers who ___ high standards.",
+                    "options": [
+                              "have",
+                              "has",
+                              "having",
+                              "is having"
+                    ],
+                    "correct": 0,
+                    "explanation": "Plural antecedent 'teachers': have."
+          },
+          {
+                    "id": 9,
+                    "situation": "Describing a movie.",
+                    "dialogue": "A: How was the movie?\nB: It was the best film ___ I have ever seen!",
+                    "options": [
+                              "that",
+                              "which",
+                              "what",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Superlative 'the best film' takes 'that'."
+          },
+          {
+                    "id": 10,
+                    "situation": "Discussing an assignment.",
+                    "dialogue": "A: Have you finished the report?\nB: I'm working on the section ___ deals with market research.",
+                    "options": [
+                              "which",
+                              "who",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing subject: which/that."
+          },
+          {
+                    "id": 11,
+                    "situation": "Asking about a vehicle.",
+                    "dialogue": "A: Whose car is parked outside?\nB: It belongs to the doctor ___ lives on the second floor.",
+                    "options": [
+                              "who",
+                              "which",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Person subject: who."
+          },
+          {
+                    "id": 12,
+                    "situation": "Talking about a city.",
+                    "dialogue": "A: Have you been to Samarkand?\nB: Yes, it's a city ___ rich history attracts many tourists.",
+                    "options": [
+                              "whose",
+                              "which",
+                              "that",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive 'whose rich history'."
+          },
+          {
+                    "id": 13,
+                    "situation": "Meeting a famous author.",
+                    "dialogue": "A: I met J.K. Rowling yesterday!\nB: Wow! She is the author ___ books changed modern literature.",
+                    "options": [
+                              "whose",
+                              "who",
+                              "whom",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive: whose books."
+          },
+          {
+                    "id": 14,
+                    "situation": "Discussing event participants.",
+                    "dialogue": "A: Who were those people in front?\nB: They were the delegates ___ from Germany.",
+                    "options": [
+                              "arriving",
+                              "arrived",
+                              "arrive",
+                              "were arrived"
+                    ],
+                    "correct": 0,
+                    "explanation": "Reduced active clause: arriving."
+          },
+          {
+                    "id": 15,
+                    "situation": "Explaining a delay.",
+                    "dialogue": "A: Why was the flight delayed?\nB: The reason ___ the flight was delayed was heavy fog.",
+                    "options": [
+                              "why",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Reason: why."
+          }
+]
+      },
+{
+        id: "noun-clauses",
+        title: "Noun Clauses",
+        icon: "🔗",
+        guide: `## Noun Clauses (Ot ergash gaplar) — Sodiqjon darsligi bo'yicha to'liq qo'llanma
+
+Noun clause — gap ichida **OT (noun)** vazifasini bajaradigan ergash gap. Relative clause otni aniqlaydi, noun clause esa otning o'rnida turadi. Bu ikkisining eng asosiy farqi.
+
+**TEKSHIRISH USULI:** ergash gapni *"it"*, *"something"* yoki *"the news"* so'zi bilan almashtirib ko'ring. Gap buzilmasa — bu noun clause!
+• *I know that he lied.* → *I know it.* (noun clause = object)
+• *What he said was true.* → *It was true.* (noun clause = subject)
+
+Noun clause hech qachon vergul bilan ajratilmaydi va uni gapdan olib tashlab bo'lmaydi — u gapning ajralmas bo'lagi.
+
+---
+
+## 1. Gapdagi 5 ta asosiy vazifasi
+
+| Vazifasi | O'rni | Misol |
+|---|---|---|
+| **Subject (Ega)** | Gap boshida | **That he resigned** surprised everyone. / **What she said** was true. |
+| **Object of verb (Fe'l to'ldiruvchisi)** | Fe'ldan keyin | She admitted **that she was wrong**. / I know **where she lives**. |
+| **Object of preposition (Predlog to'ldiruvchisi)** | Predlogdan keyin | We talked **about what happened**. / It depends **on whether they agree**. |
+| **Subject complement (Ot kesim)** | be fe'lidan keyin | The problem is **that we have no money**. |
+| **Adjective complement (Sifat to'ldiruvchisi)** | Sifatdan keyin | I am afraid **that he will refuse**. |
+
+---
+
+## 2. Uch turi va bog'lovchilari
+
+Manba savol turi qanday bo'lsa, bog'lovchi ham shunga mos bo'ladi:
+• **wh-savol** → wh-so'z (*where, what, who, when, why, how, how long/many/much*)
+• **yes/no savol** → *whether / if*
+• **darak/fakt** → *that*
+
+| Turi | Bog'lovchi | Misol |
+|---|---|---|
+| **that-clause** | that (tushishi mumkin) | I think **(that) she is right**. |
+| **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
+| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
+
+▸ *Where does he live?* → I don't know **where he lives**.
+▸ *Does he live here?* → I don't know **whether he lives here**.
+
+---
+
+## 3. SO'Z TARTIBI — eng ko'p xato qilinadigan joy!
+
+Noun clause ichida darak gap tartibi (**Subject + Verb**) ishlatiladi. Noun clause ichida savol tartibi (*do / does / did / is / are / will*) ISHLATILMAYDI!
+
+• ❌ *I don't know where does he live.* → ✅ *I don't know **where he lives**.*
+• ❌ *Do you know what is the time?* → ✅ *Do you know **what the time is**?*
+• ❌ *Tell me why did she leave.* → ✅ *Tell me **why she left**.*
+
+### Bitta istisno: wh-so'zning o'zi ega bo'lsa
+Agar wh-so'z ergash gapning egasi bo'lsa, tartib o'zgarmaydi:
+• ✅ *I don't know **who broke the window**.* (who = ega)
+• ✅ *Nobody knows **what happened**.* (what = ega)
+
+### Savol belgisi masalasi
+• ✅ *Do you know where he is?* — bosh gap savol → savol belgisi (?)
+• ✅ *I wonder where he is.* — bosh gap darak → nuqta (.)
+
+---
+
+## 4. "that" ni qachon tushirish mumkin?
+
+| TUSHIRISH MUMKIN | TUSHIRISH MUMKIN EMAS |
+|---|---|
+| *say, think, know, believe* kabi fe'llardan keyin (object position) | Gap boshida **ega** bo'lsa (*That he lied is obvious*) |
+| Og'zaki va neytral uslubda | Rasmiy yozma uslubda |
+| *I'm sure / glad / afraid (that)...* kabi sifatlardan keyin | *so that, in order that, now that* kabi bog'lovchilarda |
+| Bitta qisqa ergash gapda | Ikki ergash gap bog'langanda ikkinchisida saqlanadi (*He said that... and that...*) |
+
+---
+
+## 5. "whether" va "if" — farqi
+
+Ikkalasi ham **"-mi"** (ha/yo'q) ma'nosini beradi, lekin **if** ning ishlatilishi cheklangan:
+
+| Holat | whether | if |
+|---|---|---|
+| Fe'ldan keyin object | ✅ | ✅ |
+| Predlogdan keyin | ✅ | ❌ |
+| Gap boshida ega bo'lsa | ✅ | ❌ |
+| *or not* bevosita yonida | ✅ (*whether or not*) | ❌ |
+| *to-infinitive* oldidan | ✅ (*whether to go*) | ❌ |
+| Rasmiy uslubda | ✅ | kamroq |
+
+• ✅ *It depends on **whether** he agrees.* (predlogdan keyin)
+• ❌ *It depends on if he agrees.*
+• ✅ ***Whether** he agrees is not my problem.* (ega)
+• ❌ *If he agrees is not my problem.*
+• ✅ *I don't know **whether or not** to accept.*
+• ✅ *I don't know **whether to accept** the offer.*
+• ❌ *I don't know if to accept.*
+
+---
+
+## 6. Wh-so'z + to-infinitive (Qisqargan shakl)
+
+Ega ikkala gapda bir xil bo'lsa va ma'noda "kerak / mumkin" tushunchasi bo'lsa, noun clause qisqaradi:
+• *I don't know what I should do.* → *I don't know **what to do**.*
+• *She explained how we could fix it.* → *She explained **how to fix it**.*
+• *He couldn't decide whether he should stay.* → *...**whether to stay**.*
+
+**MUHIM:** ***why*** bu shaklda ishlatilmaydi va ***that-clause*** umuman qisqarmaydi!
+• ❌ *I don't know why to go.*
+• ❌ *I know that to do.*
+
+---
+
+## 7. Zamon moslashuvi (Backshift)
+
+Bosh gapdagi fe'l o'tgan zamonda bo'lsa, noun clause fe'li ham bir pog'ona orqaga suriladi:
+• is / are → **was / were**
+• works → **worked**
+• worked / has worked → **had worked**
+• will → **would**
+• can / may / must → **could / might / had to**
+
+▸ *“I am busy,” he said.* → *He said that he **was** busy.*
+
+### Backshift qilinmaydigan holatlar:
+1. **Umumiy haqiqat:** *The teacher said that water **boils** at 100°C.*
+2. **Hozir ham o'z kuchida bo'lgan holat:** *She said she **lives** in Tashkent.*
+3. **Bosh gap hozirgi zamonda bo'lsa:** *He says that he **is** tired.*
+
+---
+
+## 8. Subjunctive — that + fe'lning asosiy shakli (Bare Infinitive)
+
+Talab, taklif, buyruq bildiruvchi so'zlardan keyin that-clause ichida fe'l shaxsga qarab o'zgarmaydi: to'g'ridan-to'g'ri **asosiy shakl (bare infinitive = V1)** ishlatiladi. Inkor: **not + V1**.
+
+• **Fe'llar:** *suggest, recommend, demand, insist, require, request, propose, urge, ask, order, command*
+• **Sifatlar (It is ... that ...):** *essential, important, vital, necessary, crucial, imperative, advisable*
+
+• ✅ *The board demanded that he **resign** immediately.* (resigns emas)
+• ✅ *It is essential that every student **be** present.* (is emas)
+• ✅ *She insisted that he **not be** told.* (inkor shakli)
+• ❌ *The board demanded that he resigned immediately.*
+
+*Britaniya uslubida ko'pincha "should" qo'shiladi: "demanded that he should resign". Amerika uslubida "should" tushiriladi.*
+
+---
+
+## 9. Ega bo'lgan noun clause va "it" bilan almashtirish (Extraposition)
+
+Uzun noun clause gap boshida og'ir eshitiladi. Shuning uchun uni oxiriga ko'chirib, o'rniga formal **"it"** qo'yiladi:
+• *That he lied to us is obvious.* → ***It is obvious that** he lied to us.* (tabiiyroq)
+• *Whether he agrees doesn't matter.* → ***It doesn't matter whether** he agrees.*
+
+### Fe'lning moslashuvi:
+Noun clause ega bo'lganda fe'l **DOIM BIRLIKDA** bo'ladi — ergash gap ichida ko'plik so'zlar bo'lsa ham:
+• ✅ ***What we need is** more chairs.*
+• ❌ *What we need are more chairs.* (testda xato!)
+
+---
+
+## 10. Predlogdan keyin noun clause va "the fact that"
+
+Predlogdan keyin *wh-clause* va *whether-clause* bemalol keladi, lekin ***that-clause* KELMAYDI!**
+• ✅ *I'm worried **about what he will say**.*
+• ✅ *It depends **on whether they agree**.*
+• ❌ *I'm worried about that he will leave.*
+
+**YECHIM:** predlogni olib tashlang yoki **"the fact that"** qolipini ishlating:
+▸ *I'm worried **that he will leave**.* / *I'm worried **about the fact that he will leave**.*
+
+*Istisnolar:* ***in that***, ***except that***, ***save that*** — bu bog'lovchilar that bilan keladi: *"The plan is good except that it costs too much."*
+
+---
+
+## 11. Appositive noun clause — otdan keyingi izoh
+
+Ba'zi mavhum otlardan keyin ularning mazmunini ochib beruvchi that-clause keladi: *fact, idea, belief, news, rumour, claim, hope, possibility, suggestion, question*.
+• *The news **that the factory would close** shocked the town.*
+• *The possibility **that we may lose** has not been discussed.*
+
+**FARQI:**
+• *The news **that shocked the town*** → Relative clause (*that* = ega, o'zi ot o'rnida)
+• *The news **that the factory would close*** → Noun clause (*that* bo'sh bog'lovchi, to'liq gap keladi)
+
+---
+
+## 12. Noun clause va Relative clause — solishtirma jadval
+
+| Belgi | NOUN CLAUSE | RELATIVE CLAUSE |
+|---|---|---|
+| **Vazifasi** | Otning o'rnida turadi | Otni aniqlaydi |
+| **Antecedent (oldidagi ot)** | YO'Q | BOR |
+| **Olib tashlash** | Mumkin emas — gap buziladi | Mumkin (non-defining'da) |
+| **what** | Ishlatiladi | Hech qachon ishlatilmaydi |
+| **that ning roli** | Bo'sh bog'lovchi, vazifasi yo'q | Olmosh: ega yoki to'ldiruvchi |
+| **Vergul** | Hech qachon | Non-defining'da majburiy |
+
+---
+
+## 13. Eng ko'p uchraydigan 8 ta xato
+
+1. ❌ *I don't know where does he live.* → ✅ *where he lives* (savol tartibi yo'q)
+2. ❌ *Do you know what is the time?* → ✅ *what the time is*
+3. ❌ *Tell me why did she leave.* → ✅ *why she left* (did tushadi)
+4. ❌ *It depends on if he comes.* → ✅ *on whether* (predlogdan keyin if yo'q)
+5. ❌ *I'm sure about that he will come.* → ✅ *I'm sure that he will come*
+6. ❌ *The words what he said...* → ✅ *that / which* (antecedent bor)
+7. ❌ *They demanded that he resigned.* → ✅ *that he resign* (subjunctive)
+8. ❌ *What we need are more chairs.* → ✅ *is* (noun clause ega — birlik)
+
+---
+
+## 14. Bir sahifalik xulosa jadvali
+
+| Savol | Javob / Natija | Misol |
+|---|---|---|
+| Manba wh-savolmi? | wh-so'z + ega + kesim (*do/does/did* yo'q) | *I know where he lives.* |
+| Manba yes/no savolmi? | whether (yoki if — cheklovlar bilan) | *I wonder whether he knows.* |
+| Predlogdan keyinmi? | that yo'q → *the fact that* / *whether* | *depends on whether...* |
+| Ega vazifasidami? | that tushmaydi; fe'l birlikda | *That he lied is true.* |
+| demand / suggest / essential dan keyinmi? | that + fe'lning asosiy shakli (V1) | *demanded that he resign* |
+| Ega ikkala gapda bir xilmi? | wh-so'z + to-infinitive bilan qisqaradi | *I don't know what to do.* |
+| Oldida ot bormi? | Relative clause bo'lishi mumkin — farqlang! | *The news that he left...* |
+`,
+        guideRu: `## Noun Clauses (Придаточные существительные) — Полное руководство по материалам Содикжона
+
+Noun Clause — это придаточное предложение, которое выполняет роль **существительного (подлежащего, дополнения или сказуемого)**. В отличие от Relative Clause, оно не описывает существительное, а занимает его место.
+
+**СПОСОБ ПРОВЕРКИ:** замените придаточное предложение словом *"it"*, *"something"* или *"the news"*. Если предложение остаётся грамматически корректным — перед вами Noun Clause!
+• *I know that he lied.* → *I know it.* (noun clause = дополнение)
+• *What he said was true.* → *It was true.* (noun clause = подлежащее)
+
+Noun clause никогда не выделяется запятыми и не может быть удалено из предложения без потери грамматической целостности.
+
+---
+
+## 1. 5 основных синтаксических функций
+
+| Функция | Позиция | Пример |
+|---|---|---|
+| **Subject (Подлежащее)** | В начале предложения | **That he resigned** surprised everyone. / **What she said** was true. |
+| **Object of verb (Прямое дополнение)** | После глагола | She admitted **that she was wrong**. / I know **where she lives**. |
+| **Object of preposition (Предложное дополнение)** | После предлога | We talked **about what happened**. / It depends **on whether they agree**. |
+| **Subject complement (Именная часть сказуемого)** | После глагола be | The problem is **that we have no money**. |
+| **Adjective complement (Дополнение к прилагательному)** | После прилагательного | I am afraid **that he will refuse**. |
+
+---
+
+## 2. 3 основных типа и их союзы
+
+Тип союза зависит от исходного предложения:
+• **wh-вопрос** → wh-слово (*where, what, who, when, why, how, how long/many/much*)
+• **вопрос да/нет** → *whether / if*
+• **утверждение / факт** → *that*
+
+| Тип | Союз | Пример |
+|---|---|---|
+| **that-clause** | that (может опускаться) | I think **(that) she is right**. |
+| **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
+| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
+
+▸ *Where does he live?* → I don't know **where he lives**.
+▸ *Does he live here?* → I don't know **whether he lives here**.
+
+---
+
+## 3. ПОРЯДОК СЛОВ — Самая частая ошибка!
+
+Внутри Noun Clause используется **прямой порядок слов (Подлежащее + Сказуемое)**. Вопросительный порядок слов (*do / does / did / is / are / will*) в Noun Clause НЕ ИСПОЛЬЗУЕТСЯ!
+
+• ❌ *I don't know where does he live.* → ✅ *I don't know **where he lives**.*
+• ❌ *Do you know what is the time?* → ✅ *Do you know **what the time is**?*
+• ❌ *Tell me why did she leave.* → ✅ *Tell me **why she left**.*
+
+### Исключение: когда wh-слово само является подлежащим
+Если вопросительное слово выступает подлежащим придаточного, порядок слов не меняется:
+• ✅ *I don't know **who broke the window**.* (who = подлежащее)
+• ✅ *Nobody knows **what happened**.* (what = подлежащее)
+
+### Знак вопроса
+• ✅ *Do you know where he is?* — главное предложение вопросительное → знак вопроса (?)
+• ✅ *I wonder where he is.* — главное предложение утвердительное → точка (.)
+
+---
+
+## 4. Когда можно опускать союз "that"?
+
+| МОЖНО ОПУСКАТЬ | НЕЛЬЗЯ ОПУСКАТЬ |
+|---|---|
+| После глаголов речи и мысли (*say, think, know, believe*) в роли дополнения | В позиции **подлежащего** в начале предложения (*That he lied is obvious*) |
+| В разговорной и нейтральной речи | В официальном письменном стиле |
+| После прилагательных (*I'm sure / glad / afraid (that)...*) | В составных союзах (*so that, in order that, now that*) |
+| В одиночном коротком придаточном | При объединении двух придаточных второй союз сохраняется (*He said that... and that...*) |
+
+---
+
+## 5. Разница между "whether" и "if"
+
+Оба союза переводятся как частица **"ли"**, но использование **if** строго ограничено:
+
+| Условие | whether | if |
+|---|---|---|
+| Дополнение после глагола | ✅ | ✅ |
+| После предлога | ✅ | ❌ |
+| В начале предложения (подлежащее) | ✅ | ❌ |
+| Непосредственно перед *or not* | ✅ (*whether or not*) | ❌ |
+| Перед *to-infinitive* | ✅ (*whether to go*) | ❌ |
+| В официальном стиле | ✅ | реже |
+
+• ✅ *It depends on **whether** he agrees.* (после предлога)
+• ❌ *It depends on if he agrees.*
+• ✅ ***Whether** he agrees is not my problem.* (подлежащее)
+• ❌ *If he agrees is not my problem.*
+• ✅ *I don't know **whether or not** to accept.*
+• ✅ *I don't know **whether to accept** the offer.*
+• ❌ *I don't know if to accept.*
+
+---
+
+## 6. Wh-слово + to-infinitive (Сокращённая форма)
+
+Если подлежащие главного и придаточного предложений совпадают и значение передаёт модальность "следует / можно", Noun Clause сокращается:
+• *I don't know what I should do.* → *I don't know **what to do**.*
+• *She explained how we could fix it.* → *She explained **how to fix it**.*
+• *He couldn't decide whether he should stay.* → *...**whether to stay**.*
+
+**ВАЖНО:** союз ***why*** в такой форме НЕ используется, а ***that-clause*** никогда не сокращается!
+• ❌ *I don't know why to go.*
+• ❌ *I know that to do.*
+
+---
+
+## 7. Согласование времён (Backshift)
+
+Если глагол главного предложения стоит в прошедшем времени, глагол в Noun Clause сдвигается на шаг назад:
+• is / are → **was / were**
+• works → **worked**
+• worked / has worked → **had worked**
+• will → **would**
+• can / may / must → **could / might / had to**
+
+▸ *«I am busy,» he said.* → *He said that he **was** busy.*
+
+### Исключения из согласования времён:
+1. **Общеизвестные факты:** *The teacher said that water **boils** at 100°C.*
+2. **Ситуация, актуальная сейчас:** *She said she **lives** in Tashkent.*
+3. **Главное предложение в настоящем времени:** *He says that he **is** tired.*
+
+---
+
+## 8. Сослагательное наклонение (Subjunctive: 'that + Bare Infinitive')
+
+После глаголов и прилагательных со значением требования, совета или необходимости в 'that-clause' используется начальная форма глагола **без окончаний (Bare Infinitive = V1)**. Отрицание: **not + V1**.
+
+• **Глаголы:** *suggest, recommend, demand, insist, require, request, propose, urge, ask, order, command*
+• **Прилагательные (It is ... that ...):** *essential, important, vital, necessary, crucial, imperative, advisable*
+
+• ✅ *The board demanded that he **resign** immediately.* (не resigns)
+• ✅ *It is essential that every student **be** present.* (не is)
+• ✅ *She insisted that he **not be** told.* (форма отрицания)
+• ❌ *The board demanded that he resigned immediately.*
+
+---
+
+## 9. Noun Clause в роли подлежащего и конструктивный союз "it" (Extraposition)
+
+Длинный Noun Clause в начале предложения звучит тяжело. Поэтому его переносят в конец, а в начало ставят формальное подлежащее **"it"**:
+• *That he lied to us is obvious.* → ***It is obvious that** he lied to us.* (естественнее)
+• *Whether he agrees doesn't matter.* → ***It doesn't matter whether** he agrees.*
+
+### Согласование глагола:
+Когда Noun Clause выступает подлежащим, сказуемое **ВСЕГДА В ЕДИНСТВЕННОМ ЧИСЛЕ**:
+• ✅ ***What we need is** more chairs.*
+• ❌ *What we need are more chairs.* (ошибка в тестах!)
+
+---
+
+## 10. Noun Clause после предлогов и конструкция "the fact that"
+
+После предлогов допускаются *wh-clause* и *whether-clause*, но **'that-clause' СТРОГО ЗАПРЕЩЁН!**
+• ✅ *I'm worried **about what he will say**.*
+• ✅ *It depends **on whether they agree**.*
+• ❌ *I'm worried about that he will leave.*
+
+**РЕШЕНИЕ:** убрать предлог или использовать конструкцию **"the fact that"**:
+▸ *I'm worried **that he will leave**.* / *I'm worried **about the fact that he will leave**.*
+
+*Исключения:* ***in that***, ***except that***, ***save that*** — эти союзы используются с 'that': *"The plan is good except that it costs too much."*
+
+---
+
+## 11. Appositive Noun Clause (Изъяснительное придаточное после существительного)
+
+После абстрактных существительных (*fact, idea, belief, news, rumour, claim, hope, possibility, suggestion, question*) придаточное 'that-clause' раскрывает их содержание.
+• *The news **that the factory would close** shocked the town.*
+• *The possibility **that we may lose** has not been discussed.*
+
+**РАЗНИЦА:**
+• *The news **that shocked the town*** → Relative Clause (*that* = подлежащее, заменяет новость)
+• *The news **that the factory would close*** → Noun Clause (*that* = союз, после него идёт законченное предложение)
+
+---
+
+## 12. Сравнительная таблица Noun Clause и Relative Clause
+
+| Признак | NOUN CLAUSE | RELATIVE CLAUSE |
+|---|---|---|
+| **Функция** | Заменяет существительное | Определяет существительное |
+| **Antecedent (определяемое слово)** | НЕТ | ЕСТЬ |
+| **Удаление из предложения** | Невозможно | Возможно (в non-defining) |
+| **what** | Используется | Никогда не используется |
+| **Роль союза that** | Простой союз, не член предложения | Относительное местоимение |
+| **Запятая** | Никогда | Обязательна в non-defining |
+
+---
+
+## 13. 8 самых распространенных ошибок
+
+1. ❌ *I don't know where does he live.* → ✅ *where he lives* (прямой порядок слов)
+2. ❌ *Do you know what is the time?* → ✅ *what the time is*
+3. ❌ *Tell me why did she leave.* → ✅ *why she left*
+4. ❌ *It depends on if he comes.* → ✅ *on whether* (после предлога нельзя if)
+5. ❌ *I'm sure about that he will come.* → ✅ *I'm sure that he will come*
+6. ❌ *The words what he said...* → ✅ *that / which* (есть antecedent)
+7. ❌ *They demanded that he resigned.* → ✅ *that he resign* (subjunctive)
+8. ❌ *What we need are more chairs.* → ✅ *is* (Noun Clause = единственное число)
+
+---
+
+## 14. Одностраничная сводная таблица решений
+
+| Вопрос | Результат | Пример |
+|---|---|---|
+| Исходный вопрос с wh-словом? | wh-слово + подлежащее + сказуемое | *I know where he lives.* |
+| Исходный вопрос да/нет? | whether (или if с ограничениями) | *I wonder whether he knows.* |
+| После предлога? | без that → *the fact that* / *whether* | *depends on whether...* |
+| В роли подлежащего? | that не опускается; глагол в ед. ч. | *That he lied is true.* |
+| После demand / suggest / essential? | that + глагол в начальной форме (V1) | *demanded that he resign* |
+| Подлежащие совпадают? | wh-слово + to-infinitive | *I don't know what to do.* |
+`,
+        questions: [
+          {
+                    "id": 1,
+                    "text": "Choose the correct indirect question:",
+                    "options": [
+                              "I don't know where does he live.",
+                              "I don't know where he lives.",
+                              "I don't know where lives he.",
+                              "I don't know where does live he."
+                    ],
+                    "correct": 1,
+                    "explanation": "Noun clause ichida darak gap tartibi (S+V) ishlatiladi: where he lives."
+          },
+          {
+                    "id": 2,
+                    "text": "Do you know what time ___?",
+                    "options": [
+                              "is it",
+                              "it is",
+                              "does it be",
+                              "is it being"
+                    ],
+                    "correct": 1,
+                    "explanation": "Noun clause savol emas, darak tartibida bo'ladi: what time it is."
+          },
+          {
+                    "id": 3,
+                    "text": "___ he resigned surprised everyone in the office.",
+                    "options": [
+                              "What",
+                              "That",
+                              "If",
+                              "Whether"
+                    ],
+                    "correct": 1,
+                    "explanation": "Gap boshida ega bo'lgan darak noun clause 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 4,
+                    "text": "It depends on ___ they will agree to the proposal.",
+                    "options": [
+                              "if",
+                              "whether",
+                              "that",
+                              "what"
+                    ],
+                    "correct": 1,
+                    "explanation": "Predlogdan (on) keyin 'if' ishlatilmaydi, faqat 'whether' ishlatiladi."
+          },
+          {
+                    "id": 5,
+                    "text": "I don't know ___ to do next.",
+                    "options": [
+                              "that",
+                              "if",
+                              "what",
+                              "whether"
+                    ],
+                    "correct": 2,
+                    "explanation": "Harakatni (nima qilishni) bildiruvchi qisqargan noun clause: what to do."
+          },
+          {
+                    "id": 6,
+                    "text": "The manager demanded that every employee ___ on time.",
+                    "options": [
+                              "is",
+                              "be",
+                              "was",
+                              "are"
+                    ],
+                    "correct": 1,
+                    "explanation": "Demanded (taklif/talab) fe'lidan keyin Subjunctive mood: bare infinitive (be) ishlatiladi."
+          },
+          {
+                    "id": 7,
+                    "text": "It is essential that he ___ the report by Friday.",
+                    "options": [
+                              "submits",
+                              "submit",
+                              "submitted",
+                              "has submitted"
+                    ],
+                    "correct": 1,
+                    "explanation": "It is essential that... qurilmasida subjunctive: bare infinitive (submit) ishlatiladi."
+          },
+          {
+                    "id": 8,
+                    "text": "What we need most ___ more experienced engineers.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "to be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause ega bo'lganda fe'l DOIM birlikda (is) bo'ladi."
+          },
+          {
+                    "id": 9,
+                    "text": "She was worried about the fact ___ she had lost her passport.",
+                    "options": [
+                              "if",
+                              "whether",
+                              "that",
+                              "what"
+                    ],
+                    "correct": 2,
+                    "explanation": "Predlogdan keyin that-clause ishlatish uchun 'the fact that' qolipi kerak."
+          },
+          {
+                    "id": 10,
+                    "text": "Nobody knows who ___ the window last night.",
+                    "options": [
+                              "did break",
+                              "broke",
+                              "does break",
+                              "has broken"
+                    ],
+                    "correct": 1,
+                    "explanation": "Wh-so'z (who) ergash gapning egasi bo'lsa, oddiy o'tgan zamon fe'li (broke) ishlatiladi."
+          },
+          {
+                    "id": 11,
+                    "text": "He asked me ___ I could help him with his assignment.",
+                    "options": [
+                              "that",
+                              "whether",
+                              "what",
+                              "where"
+                    ],
+                    "correct": 1,
+                    "explanation": "Ha/yo'q savolni bilvosita gapga aylantirganda 'whether' yoki 'if' ishlatiladi."
+          },
+          {
+                    "id": 12,
+                    "text": "The news ___ the factory would close shocked the community.",
+                    "options": [
+                              "which",
+                              "what",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 2,
+                    "explanation": "Appositive noun clause: 'the news that...' - that bu yerda bo'sh bog'lovchi."
+          },
+          {
+                    "id": 13,
+                    "text": "I can't decide whether ___ the job offer or stay here.",
+                    "options": [
+                              "accepting",
+                              "to accept",
+                              "accept",
+                              "accepted"
+                    ],
+                    "correct": 1,
+                    "explanation": "Whether + to-infinitive (whether to accept) qisqargan noun clause shakli."
+          },
+          {
+                    "id": 14,
+                    "text": "She said that she ___ for the exam all night.",
+                    "options": [
+                              "has studied",
+                              "had studied",
+                              "studies",
+                              "will study"
+                    ],
+                    "correct": 1,
+                    "explanation": "Bosh gap o'tgan zamonda (said) bo'lgani uchun backshift: past perfect (had studied)."
+          },
+          {
+                    "id": 15,
+                    "text": "I wonder ___ she didn't come to the meeting.",
+                    "options": [
+                              "why",
+                              "that",
+                              "what",
+                              "whether or not"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sabab so'ralganda 'why' bog'lovchisi ishlatiladi."
+          },
+          {
+                    "id": 16,
+                    "text": "Which sentence is INCORRECT?",
+                    "options": [
+                              "I don't know why to go.",
+                              "I don't know where to go.",
+                              "I don't know what to do.",
+                              "I don't know whether to stay."
+                    ],
+                    "correct": 0,
+                    "explanation": "'why' bilan to-infinitive qisqartirish ISHLATILMAYDI."
+          },
+          {
+                    "id": 17,
+                    "text": "Which sentence is CORRECT?",
+                    "options": [
+                              "It depends on if he comes.",
+                              "It depends on whether he comes.",
+                              "It depends on that he comes.",
+                              "It depends if he comes or no."
+                    ],
+                    "correct": 1,
+                    "explanation": "Predlogdan (on) keyin faqat 'whether' to'g'ri."
+          },
+          {
+                    "id": 18,
+                    "text": "He explained to us ___ the new system works.",
+                    "options": [
+                              "how",
+                              "that how",
+                              "if how",
+                              "what how"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ishlash usulini tushuntirganda 'how' noun clause boshlatadi."
+          },
+          {
+                    "id": 19,
+                    "text": "She insisted that he ___ invited to the ceremony.",
+                    "options": [
+                              "is not",
+                              "was not",
+                              "not be",
+                              "doesn't be"
+                    ],
+                    "correct": 2,
+                    "explanation": "Subjunctive mood inkor shakli: not + bare infinitive (not be)."
+          },
+          {
+                    "id": 20,
+                    "text": "___ he will win the election remains uncertain.",
+                    "options": [
+                              "If",
+                              "Whether",
+                              "That if",
+                              "What"
+                    ],
+                    "correct": 1,
+                    "explanation": "Gap boshida ega bo'lgan yes/no noun clause faqat 'Whether' bilan boshlanadi."
+          }
+],
+        fillBlanks: [
+          {
+                    "id": 1,
+                    "text": "I have no idea where she ___ (live).",
+                    "options": [
+                              "lives",
+                              "does live",
+                              "living",
+                              "is live"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause ichida darak gap tartibi (lives)."
+          },
+          {
+                    "id": 2,
+                    "text": "Do you know what time the bank ___ (close)?",
+                    "options": [
+                              "closes",
+                              "does close",
+                              "closing",
+                              "close"
+                    ],
+                    "correct": 0,
+                    "explanation": "Indirect question: subject + verb (the bank closes)."
+          },
+          {
+                    "id": 3,
+                    "text": "It is essential that every member ___ (be) informed.",
+                    "options": [
+                              "be",
+                              "is",
+                              "was",
+                              "are"
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive after 'essential that': bare infinitive (be)."
+          },
+          {
+                    "id": 4,
+                    "text": "They discussed whether ___ (buy) a new house.",
+                    "options": [
+                              "to buy",
+                              "buying",
+                              "buy",
+                              "bought"
+                    ],
+                    "correct": 0,
+                    "explanation": "Whether + to-infinitive."
+          },
+          {
+                    "id": 5,
+                    "text": "She admitted that she ___ (make) a huge mistake.",
+                    "options": [
+                              "had made",
+                              "has made",
+                              "makes",
+                              "will make"
+                    ],
+                    "correct": 0,
+                    "explanation": "Backshift after past verb 'admitted': had made."
+          },
+          {
+                    "id": 6,
+                    "text": "What we urgent need ___ (be) more time.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "to be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause as subject takes singular verb (is)."
+          },
+          {
+                    "id": 7,
+                    "text": "I am not sure ___ she will accept the invitation.",
+                    "options": [
+                              "whether",
+                              "that if",
+                              "what",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Uncertainty uses 'whether'."
+          },
+          {
+                    "id": 8,
+                    "text": "He asked me why I ___ (be) late yesterday.",
+                    "options": [
+                              "was",
+                              "were",
+                              "am",
+                              "had been"
+                    ],
+                    "correct": 0,
+                    "explanation": "Indirect question word order: why I was late."
+          },
+          {
+                    "id": 9,
+                    "text": "The doctor recommended that he ___ (take) a week off.",
+                    "options": [
+                              "take",
+                              "takes",
+                              "took",
+                              "taking"
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive mood: recommend that + bare infinitive (take)."
+          },
+          {
+                    "id": 10,
+                    "text": "Could you tell me how much this coat ___ (cost)?",
+                    "options": [
+                              "costs",
+                              "does cost",
+                              "costing",
+                              "cost"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause word order: how much this coat costs."
+          },
+          {
+                    "id": 11,
+                    "text": "It depends on ___ he passes the exam or not.",
+                    "options": [
+                              "whether",
+                              "if",
+                              "that",
+                              "what"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + whether."
+          },
+          {
+                    "id": 12,
+                    "text": "___ she said shocked everyone in the room.",
+                    "options": [
+                              "What",
+                              "That",
+                              "If",
+                              "Which"
+                    ],
+                    "correct": 0,
+                    "explanation": "'What' as subject noun clause connector."
+          },
+          {
+                    "id": 13,
+                    "text": "I didn't realize that you ___ (be) waiting so long.",
+                    "options": [
+                              "had been",
+                              "have been",
+                              "are",
+                              "will be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Past backshift: had been."
+          },
+          {
+                    "id": 14,
+                    "text": "She explained how to ___ (solve) the problem.",
+                    "options": [
+                              "solve",
+                              "solving",
+                              "solved",
+                              "solves"
+                    ],
+                    "correct": 0,
+                    "explanation": "wh-word + to-infinitive (how to solve)."
+          },
+          {
+                    "id": 15,
+                    "text": "The belief that the earth ___ (be) flat was common.",
+                    "options": [
+                              "was",
+                              "is",
+                              "were",
+                              "be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Appositive noun clause backshift."
+          },
+          {
+                    "id": 16,
+                    "text": "He suggested that we ___ (start) early tomorrow.",
+                    "options": [
+                              "start",
+                              "starts",
+                              "started",
+                              "starting"
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive bare infinitive (start)."
+          },
+          {
+                    "id": 17,
+                    "text": "I don't know who ___ (break) the computer.",
+                    "options": [
+                              "broke",
+                              "did break",
+                              "breaks",
+                              "is break"
+                    ],
+                    "correct": 0,
+                    "explanation": "Wh-word as subject: broke."
+          },
+          {
+                    "id": 18,
+                    "text": "It is obvious that he ___ (tell) the truth.",
+                    "options": [
+                              "is telling",
+                              "tells",
+                              "told",
+                              "be telling"
+                    ],
+                    "correct": 0,
+                    "explanation": "Extraposition with 'it is obvious that'."
+          },
+          {
+                    "id": 19,
+                    "text": "She is worried about the fact that she ___ (not have) enough experience.",
+                    "options": [
+                              "does not have",
+                              "not has",
+                              "had not",
+                              "not having"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + the fact that + clause."
+          },
+          {
+                    "id": 20,
+                    "text": "Whether we win or lose ___ (depend) on our team spirit.",
+                    "options": [
+                              "depends",
+                              "depend",
+                              "depending",
+                              "are depending"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause subject takes singular verb (depends)."
+          }
+],
+        scrambled: [
+          {
+                    "id": 1,
+                    "words": [
+                              "know",
+                              "I",
+                              "she",
+                              "where",
+                              "lives"
+                    ],
+                    "answer": "I know where she lives.",
+                    "explanation": "Noun clause: where + S + V tartibi."
+          },
+          {
+                    "id": 2,
+                    "words": [
+                              "told",
+                              "me",
+                              "she",
+                              "that",
+                              "was",
+                              "happy"
+                    ],
+                    "answer": "She told me that she was happy.",
+                    "explanation": "Main clause + that + noun clause."
+          },
+          {
+                    "id": 3,
+                    "words": [
+                              "surprised",
+                              "what",
+                              "she",
+                              "said",
+                              "me"
+                    ],
+                    "answer": "What she said surprised me.",
+                    "explanation": "Noun clause ega sifatida: What + S + V + main verb."
+          },
+          {
+                    "id": 4,
+                    "words": [
+                              "happened",
+                              "tell",
+                              "what",
+                              "me"
+                    ],
+                    "answer": "Tell me what happened.",
+                    "explanation": "Buyruq gap + noun clause (what + V)."
+          },
+          {
+                    "id": 5,
+                    "words": [
+                              "interested",
+                              "in",
+                              "what",
+                              "you",
+                              "said",
+                              "am",
+                              "I"
+                    ],
+                    "answer": "I am interested in what you said.",
+                    "explanation": "Preposition (in) + noun clause (what + S + V)."
+          },
+          {
+                    "id": 6,
+                    "words": [
+                              "obvious",
+                              "it",
+                              "is",
+                              "that",
+                              "he",
+                              "lied"
+                    ],
+                    "answer": "It is obvious that he lied.",
+                    "explanation": "It + is + adjective + that + noun clause."
+          },
+          {
+                    "id": 7,
+                    "words": [
+                              "decided",
+                              "they",
+                              "haven't",
+                              "whether",
+                              "to",
+                              "stay"
+                    ],
+                    "answer": "They haven't decided whether to stay.",
+                    "explanation": "Whether + to + infinitive — qisqargan noun clause."
+          },
+          {
+                    "id": 8,
+                    "words": [
+                              "truth",
+                              "the",
+                              "is",
+                              "that",
+                              "nobody",
+                              "knew"
+                    ],
+                    "answer": "The truth is that nobody knew.",
+                    "explanation": "Subject complement: The truth is + that + noun clause."
+          },
+          {
+                    "id": 9,
+                    "words": [
+                              "demanded",
+                              "he",
+                              "resigned",
+                              "not",
+                              "be"
+                    ],
+                    "answer": "He demanded that he not be fired.",
+                    "explanation": "Subjunctive mood inkor shakli."
+          },
+          {
+                    "id": 10,
+                    "words": [
+                              "depends",
+                              "on",
+                              "whether",
+                              "it",
+                              "agrees",
+                              "he"
+                    ],
+                    "answer": "It depends on whether he agrees.",
+                    "explanation": "Preposition + whether + S + V."
+          },
+          {
+                    "id": 11,
+                    "words": [
+                              "what",
+                              "need",
+                              "we",
+                              "is",
+                              "more",
+                              "time"
+                    ],
+                    "answer": "What we need is more time.",
+                    "explanation": "What + S + V + is (birlik fe'l)."
+          },
+          {
+                    "id": 12,
+                    "words": [
+                              "wonder",
+                              "I",
+                              "why",
+                              "she",
+                              "left"
+                    ],
+                    "answer": "I wonder why she left.",
+                    "explanation": "Noun clause: why + S + V."
+          },
+          {
+                    "id": 13,
+                    "words": [
+                              "essential",
+                              "it",
+                              "is",
+                              "that",
+                              "be",
+                              "everyone",
+                              "here"
+                    ],
+                    "answer": "It is essential that everyone be here.",
+                    "explanation": "Subjunctive mood: essential that + S + bare infinitive."
+          },
+          {
+                    "id": 14,
+                    "words": [
+                              "explained",
+                              "she",
+                              "how",
+                              "to",
+                              "fix",
+                              "it"
+                    ],
+                    "answer": "She explained how to fix it.",
+                    "explanation": "Wh-word + to-infinitive."
+          },
+          {
+                    "id": 15,
+                    "words": [
+                              "that",
+                              "he",
+                              "surprised",
+                              "resigned",
+                              "us"
+                    ],
+                    "answer": "That he resigned surprised us.",
+                    "explanation": "Subject noun clause: That + S + V + main verb."
+          }
+],
+        errorCorrection: [
+          {
+                    "id": 1,
+                    "text": "I don't know where does he live.",
+                    "options": [
+                              "I don't know",
+                              "where does",
+                              "he live",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "where does",
+                    "correction": "where he",
+                    "explanation": "Noun clause ichida savol tartibi ishlatilmaydi: I know where she lives."
+          },
+          {
+                    "id": 2,
+                    "text": "Do you know what is the time?",
+                    "options": [
+                              "Do you know",
+                              "what is",
+                              "the time",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "what is",
+                    "correction": "what the time is",
+                    "explanation": "Indirect question: what + subject + verb."
+          },
+          {
+                    "id": 3,
+                    "text": "It depends on if he comes.",
+                    "options": [
+                              "It depends",
+                              "on if",
+                              "he comes",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "on if",
+                    "correction": "on whether",
+                    "explanation": "Predlogdan keyin 'if' ishlatilmaydi; 'whether' kerak."
+          },
+          {
+                    "id": 4,
+                    "text": "What she said it made me sad.",
+                    "options": [
+                              "What she said",
+                              "it made",
+                              "me sad",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "it made",
+                    "correction": "made",
+                    "explanation": "Noun clause ega bo'lganda ortiqcha 'it' ishlatilmaydi."
+          },
+          {
+                    "id": 5,
+                    "text": "They demanded that he resigned immediately.",
+                    "options": [
+                              "They demanded",
+                              "that he",
+                              "resigned immediately",
+                              "No error"
+                    ],
+                    "correct": 2,
+                    "wrongPart": "resigned immediately",
+                    "correction": "resign immediately",
+                    "explanation": "Subjunctive mood: demanded that + bare infinitive (resign)."
+          },
+          {
+                    "id": 6,
+                    "text": "What we need are more experienced workers.",
+                    "options": [
+                              "What we need",
+                              "are more",
+                              "experienced workers",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "are more",
+                    "correction": "is more",
+                    "explanation": "Noun clause ega bo'lganda fe'l DOIM birlikda (is) bo'ladi."
+          },
+          {
+                    "id": 7,
+                    "text": "I don't know why to go to the party.",
+                    "options": [
+                              "I don't know",
+                              "why to go",
+                              "to the party",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "why to go",
+                    "correction": "why I should go",
+                    "explanation": "'why' bilan to-infinitive qisqartirib bo'lmaydi."
+          },
+          {
+                    "id": 8,
+                    "text": "She was worried about that she had lost the keys.",
+                    "options": [
+                              "about that",
+                              "she had lost",
+                              "the keys",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "about that",
+                    "correction": "about the fact that",
+                    "explanation": "Predlogdan keyin that-clause kelmaydi; 'the fact that' kerak."
+          },
+          {
+                    "id": 9,
+                    "text": "Tell me why did she leave so early.",
+                    "options": [
+                              "Tell me",
+                              "why did she",
+                              "leave so early",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "why did she",
+                    "correction": "why she left",
+                    "explanation": "Noun clause ichida did tushib qoladi va fe'l past simple ga o'tadi."
+          },
+          {
+                    "id": 10,
+                    "text": "The news what the plane crashed shocked us.",
+                    "options": [
+                              "The news",
+                              "what the plane",
+                              "crashed shocked us",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "what the plane",
+                    "correction": "that the plane",
+                    "explanation": "Appositive noun clause: the news THAT..."
+          },
+          {
+                    "id": 11,
+                    "text": "He lied is obvious to everyone.",
+                    "options": [
+                              "He lied",
+                              "is obvious",
+                              "to everyone",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "He lied",
+                    "correction": "That he lied",
+                    "explanation": "Ega vazifasidagi noun clause boshida 'That' tushib qolmaydi."
+          },
+          {
+                    "id": 12,
+                    "text": "I wonder whether if she will agree.",
+                    "options": [
+                              "I wonder",
+                              "whether if",
+                              "she will agree",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "whether if",
+                    "correction": "whether",
+                    "explanation": "'whether' va 'if' bir vaqtda ishlatilmaydi."
+          },
+          {
+                    "id": 13,
+                    "text": "It is vital that she is present at the hearing.",
+                    "options": [
+                              "It is vital",
+                              "that she is",
+                              "present at the hearing",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "that she is",
+                    "correction": "that she be",
+                    "explanation": "Subjunctive mood after 'vital that': be."
+          },
+          {
+                    "id": 14,
+                    "text": "I don't know that to do next.",
+                    "options": [
+                              "I don't know",
+                              "that to do",
+                              "next",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "that to do",
+                    "correction": "what to do",
+                    "explanation": "'that' bilan to-infinitive qisqartirib bo'lmaydi."
+          },
+          {
+                    "id": 15,
+                    "text": "Nobody knows what will she do tomorrow.",
+                    "options": [
+                              "Nobody knows",
+                              "what will she",
+                              "do tomorrow",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "what will she",
+                    "correction": "what she will",
+                    "explanation": "Indirect question: what she will do."
+          }
+],
+        transform: [
+          {
+                    "id": 1,
+                    "text": "Change to indirect question: 'Where does she live?' → I know ___.",
+                    "options": [
+                              "where she lives",
+                              "where does she live",
+                              "where she does live",
+                              "where lives she"
+                    ],
+                    "correct": 0,
+                    "explanation": "Bilvosita savol: where + S + V tartibi."
+          },
+          {
+                    "id": 2,
+                    "text": "Change to noun clause subject: 'She won the prize.' → ___ surprised everyone.",
+                    "options": [
+                              "That she won the prize",
+                              "If she won the prize",
+                              "Whether she won the prize",
+                              "She won the prize"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ega vazifasidagi noun clause 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 3,
+                    "text": "Make a noun clause: 'Will he come?' → I wonder ___.",
+                    "options": [
+                              "whether he will come",
+                              "will he come",
+                              "that he comes",
+                              "whether does he come"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ha/yo'q savol: whether + S + V."
+          },
+          {
+                    "id": 4,
+                    "text": "Reduce the clause: 'I don't know what I should do.' → I don't know ___.",
+                    "options": [
+                              "what to do",
+                              "what doing",
+                              "what do",
+                              "what I to do"
+                    ],
+                    "correct": 0,
+                    "explanation": "wh-word + to-infinitive reduction."
+          },
+          {
+                    "id": 5,
+                    "text": "Apply Subjunctive: 'The teacher demanded that he (apologize).' →",
+                    "options": [
+                              "The teacher demanded that he apologize.",
+                              "The teacher demanded that he apologized.",
+                              "The teacher demanded that he apologizing.",
+                              "The teacher demanded that he apologizes."
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive mood: bare infinitive (apologize)."
+          },
+          {
+                    "id": 6,
+                    "text": "Combine using Extraposition: 'That he succeeded is clear.' →",
+                    "options": [
+                              "It is clear that he succeeded.",
+                              "That it is clear he succeeded.",
+                              "He succeeded that is clear.",
+                              "Is clear that he succeeded."
+                    ],
+                    "correct": 0,
+                    "explanation": "Extraposition with formal 'It'."
+          },
+          {
+                    "id": 7,
+                    "text": "Fix preposition error: 'I am worried about that he is ill.' →",
+                    "options": [
+                              "I am worried about the fact that he is ill.",
+                              "I am worried about if he is ill.",
+                              "I am worried on that he is ill.",
+                              "I am worried which he is ill."
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + the fact that."
+          },
+          {
+                    "id": 8,
+                    "text": "Change to indirect question: 'What time is it?' → Do you know ___?",
+                    "options": [
+                              "what time it is",
+                              "what time is it",
+                              "what is the time",
+                              "what time it be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Indirect question: what time + S + V."
+          },
+          {
+                    "id": 9,
+                    "text": "Change to noun clause object: 'He is innocent.' → She believes ___.",
+                    "options": [
+                              "that he is innocent",
+                              "if he is innocent",
+                              "whether he is innocent",
+                              "what he is innocent"
+                    ],
+                    "correct": 0,
+                    "explanation": "Darak gap to'ldiruvchisi: that + S + V."
+          },
+          {
+                    "id": 10,
+                    "text": "Reduce the clause: 'She explained how we could fix it.' →",
+                    "options": [
+                              "She explained how to fix it.",
+                              "She explained how fixing it.",
+                              "She explained how fix it.",
+                              "She explained that to fix it."
+                    ],
+                    "correct": 0,
+                    "explanation": "how + to-infinitive reduction."
+          },
+          {
+                    "id": 11,
+                    "text": "Apply Backshift: 'He said: \"I am working.\"' → He said that he ___.",
+                    "options": [
+                              "was working",
+                              "is working",
+                              "had worked",
+                              "has been working"
+                    ],
+                    "correct": 0,
+                    "explanation": "Backshift: am working → was working."
+          },
+          {
+                    "id": 12,
+                    "text": "Change to noun clause subject: 'What do we need?' → ___ is more money.",
+                    "options": [
+                              "What we need",
+                              "What do we need",
+                              "That we need",
+                              "Whether we need"
+                    ],
+                    "correct": 0,
+                    "explanation": "What + S + V as subject."
+          },
+          {
+                    "id": 13,
+                    "text": "Fix error: 'It depends on if he agrees.' →",
+                    "options": [
+                              "It depends on whether he agrees.",
+                              "It depends if he agrees.",
+                              "It depends that he agrees.",
+                              "It depends on that he agrees."
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + whether."
+          },
+          {
+                    "id": 14,
+                    "text": "Make indirect question: 'Why did she leave?' → Tell me ___.",
+                    "options": [
+                              "why she left",
+                              "why did she leave",
+                              "why she did leave",
+                              "why left she"
+                    ],
+                    "correct": 0,
+                    "explanation": "why + S + V (past simple: left)."
+          },
+          {
+                    "id": 15,
+                    "text": "Apply Subjunctive: 'It is essential that everyone ___ (be) present.' →",
+                    "options": [
+                              "It is essential that everyone be present.",
+                              "It is essential that everyone is present.",
+                              "It is essential that everyone was present.",
+                              "It is essential that everyone to be present."
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive: essential that + bare infinitive (be)."
+          }
+],
+        dialogue: [
+          {
+                    "id": 1,
+                    "situation": "You ask a friend about a new restaurant.",
+                    "dialogue": "A: Do you know ___ the restaurant closes?\nB: I think it closes at 10 PM.",
+                    "options": [
+                              "when",
+                              "that",
+                              "if",
+                              "whether"
+                    ],
+                    "correct": 0,
+                    "explanation": "Vaqt so'ralganda 'when' ishlatiladi."
+          },
+          {
+                    "id": 2,
+                    "situation": "Your colleague asks about the meeting.",
+                    "dialogue": "A: Did the boss say ___ the meeting was postponed?\nB: Yes, she confirmed it.",
+                    "options": [
+                              "that",
+                              "if",
+                              "how",
+                              "whether"
+                    ],
+                    "correct": 0,
+                    "explanation": "Fakt xabari: 'that' ishlatiladi."
+          },
+          {
+                    "id": 3,
+                    "situation": "You are not sure about a plan.",
+                    "dialogue": "A: Are you coming to the party?\nB: I'm not sure ___ I can make it.",
+                    "options": [
+                              "whether",
+                              "that",
+                              "when",
+                              "who"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noaniqlik: 'whether' ishlatiladi."
+          },
+          {
+                    "id": 4,
+                    "situation": "A student asks the teacher for help.",
+                    "dialogue": "A: Can you show me ___ to solve this problem?\nB: Of course! Let me explain.",
+                    "options": [
+                              "how",
+                              "that",
+                              "whether",
+                              "if"
+                    ],
+                    "correct": 0,
+                    "explanation": "Usul/yo'l so'ralganda 'how' (how to solve) ishlatiladi."
+          },
+          {
+                    "id": 5,
+                    "situation": "A friend is surprised by news.",
+                    "dialogue": "A: ___ she got the job surprised everyone!\nB: I know! She's so talented.",
+                    "options": [
+                              "That",
+                              "Whether",
+                              "If",
+                              "How"
+                    ],
+                    "correct": 0,
+                    "explanation": "Fakt ega sifatida: 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 6,
+                    "situation": "A boss checks with an employee.",
+                    "dialogue": "A: Please confirm ___ you received the documents.\nB: Yes, I got them this morning.",
+                    "options": [
+                              "that",
+                              "how",
+                              "who",
+                              "why"
+                    ],
+                    "correct": 0,
+                    "explanation": "Tasdiqlash: 'that' ishlatiladi."
+          },
+          {
+                    "id": 7,
+                    "situation": "A manager announces something.",
+                    "dialogue": "A: The truth is ___ we didn't reach our targets this quarter.\nB: We need to work harder.",
+                    "options": [
+                              "that",
+                              "if",
+                              "whether",
+                              "how"
+                    ],
+                    "correct": 0,
+                    "explanation": "Fakt ifodalanganda: 'that' (predicate nominative) ishlatiladi."
+          },
+          {
+                    "id": 8,
+                    "situation": "Two students talk after an exam.",
+                    "dialogue": "A: ___ you passed is what matters!\nB: Thank you! I'm really relieved.",
+                    "options": [
+                              "That",
+                              "Whether",
+                              "If",
+                              "How"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ega vazifasidagi noun clause 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 9,
+                    "situation": "Asking for directions.",
+                    "dialogue": "A: Excuse me, do you know ___ the nearest metro station is?\nB: Yes, walk straight for two blocks.",
+                    "options": [
+                              "where",
+                              "that",
+                              "if",
+                              "whether"
+                    ],
+                    "correct": 0,
+                    "explanation": "Joy so'ralganda 'where' ishlatiladi."
+          },
+          {
+                    "id": 10,
+                    "situation": "Discussing a decision.",
+                    "dialogue": "A: Have you decided ___ to accept the offer?\nB: I'm still thinking about it.",
+                    "options": [
+                              "whether",
+                              "that",
+                              "if",
+                              "how"
+                    ],
+                    "correct": 0,
+                    "explanation": "Whether + to-infinitive tanlov noaniqligida."
+          },
+          {
+                    "id": 11,
+                    "situation": "Asking about an event.",
+                    "dialogue": "A: Can you tell me ___ happened at the conference?\nB: Sure, we discussed the new project.",
+                    "options": [
+                              "what",
+                              "that",
+                              "whether",
+                              "if"
+                    ],
+                    "correct": 0,
+                    "explanation": "Nima sodir bo'lganini so'rashda 'what' (ega) ishlatiladi."
+          },
+          {
+                    "id": 12,
+                    "situation": "Talking about an employee recommendation.",
+                    "dialogue": "A: What did the board decide?\nB: They recommended that he ___ promoted.",
+                    "options": [
+                              "be",
+                              "is",
+                              "was",
+                              "to be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Recommended that + bare infinitive (be)."
+          },
+          {
+                    "id": 13,
+                    "situation": "Checking flight details.",
+                    "dialogue": "A: Do you know what time the flight ___?\nB: It departs at 8:00 AM.",
+                    "options": [
+                              "departs",
+                              "does depart",
+                              "departing",
+                              "is depart"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause word order: flight departs."
+          },
+          {
+                    "id": 14,
+                    "situation": "Expressing concern.",
+                    "dialogue": "A: Why are you worried?\nB: I'm worried about the fact ___ we don't have enough budget.",
+                    "options": [
+                              "that",
+                              "if",
+                              "whether",
+                              "what"
+                    ],
+                    "correct": 0,
+                    "explanation": "about the fact that..."
+          },
+          {
+                    "id": 15,
+                    "situation": "Asking about a person.",
+                    "dialogue": "A: Do you know ___ called you earlier?\nB: No, I didn't see the number.",
+                    "options": [
+                              "who",
+                              "that",
+                              "whether",
+                              "if"
+                    ],
+                    "correct": 0,
+                    "explanation": "Shaxs so'ralganda 'who' ishlatiladi."
+          }
+]
+      }
     ]
   },
   intermediate: {
@@ -6741,176 +10013,1567 @@ Agar reporting fe'l **o'tgan zamonda** bo'lsa (said, told), asosiy gapdagi zamon
         id: "relative-clauses",
         title: "Relative Clauses",
         icon: "🔗",
-        guide: `## Relative Clauses (Aniqlovchi ergash gaplar)
+        guide: `## Relative Clauses (Aniqlovchi ergash gaplar) — Sodiqjon darsligi bo'yicha to'liq qo'llanma
 
-Relative Clauses ot yoki olmoshni aniqlashtirish, unga qo'shimcha ma'lumot berish uchun ishlatiladi. Ular relative pronoun (who, which, that, whose, where, when, why) bilan boshlanadi.
+Relative clause — otdan keyin kelib, o'sha otni (**antecedent**) aniqlab yoki izohlab keladigan ergash gap.
 
-## 1. Relative Pronoun'lar
-• **who** — odamlar uchun (subject yoki object)
-  - The man **who** called you is my brother.
-• **which** — narsalar/hayvonlar uchun
-  - The book **which** I bought is amazing.
-• **that** — odamlar va narsalar uchun (ko'proq so'zlashuv tilida, defining clause'da)
-  - The car **that** he drives is new.
-• **whose** — egalik bildiradi (odamlar va narsalar uchun)
-  - That's the woman **whose** car was stolen.
-• **where** — joy uchun
-  - This is the house **where** I grew up.
-• **when** — vaqt uchun
-  - I remember the day **when** we met.
-• **why** — sabab uchun
-  - I don't know the reason **why** he left.
+**STRUKTURA:** '[antecedent] + [relative word] + [ergash gap]'
+• *The book **which is on the table** is mine.* — antecedent = *the book*
+• *The woman **who called you** left a number.* — antecedent = *the woman*
 
-## 2. Defining (Aniqlovchi) vs Non-defining (Aniqlovchi bo'lmagan) Clauses
-• **Defining clause** — gapning ma'nosi uchun zarur ma'lumot, vergul QO'YILMAYDI, "that" ishlatilishi mumkin.
-  - Students **who study hard** usually succeed. (qaysi studentlar — muhim ma'lumot)
-• **Non-defining clause** — qo'shimcha, olib tashlash mumkin bo'lgan ma'lumot, vergul bilan ajratiladi, "that" ISHLATILMAYDI.
-  - My brother, **who lives in London**, is a doctor. (bitta akam bor, qo'shimcha ma'lumot)
+Relative word ergash gapda ham vazifa bajaradi: **ega (subject)**, **to'ldiruvchi (object)**, **egalik (possessive)** yoki **hol (adverbial)**.
 
-## 3. Relative Pronoun'ni tushirish (Omission)
-Agar relative pronoun clause ichida OBJECT bo'lsa va clause defining bo'lsa, uni tushirish mumkin:
-  - The book (**which/that**) I bought is amazing. → The book I bought is amazing.
-Agar relative pronoun SUBJECT bo'lsa, uni tushirib bo'lmaydi:
-  - The man **who** called you is my brother. (tushirib bo'lmaydi)
+---
 
-## 4. Prepositions bilan
-Preposition clause oxirida yoki (rasmiy uslubda) whom/which oldida kelishi mumkin:
-  - The person **who** I spoke **to** was very helpful. (norasmiy)
-  - The person **to whom** I spoke was very helpful. (rasmiy)`,
+## 1. Ikki asosiy tur: Defining va Non-defining
+
+| Belgi | DEFINING (Aniqlovchi) | NON-DEFINING (Izohlovchi) |
+|---|---|---|
+| **Vazifasi** | Qaysi otligini aniqlaydi — zarur ma'lumot | Qo'shimcha izoh beradi — olib tashlasa ham bo'ladi |
+| **Vergul** | **YO'Q** | **BOR (ikki tomondan: , ... ,)** |
+| **that** | Mumkin | **Mutlaqo mumkin emas** |
+| **Olmoshni tushirish** | Object bo'lsa — **mumkin** | **Hech qachon mumkin emas** |
+| **Ohang** | Pauzasiz o'qiladi | Pauza bilan o'qiladi |
+
+### Ma'no farqi — bu eng muhim nuqta:
+• *My brother **who lives in London** is a doctor.* — Bir nechta akam bor; gap Londondagisi haqida.
+• *My brother, **who lives in London**, is a doctor.* — Yolg'iz akam bor; Londonda yashashi — qo'shimcha ma'lumot.
+
+Vergul ma'noni o'zgartiradi — u bezak emas, grammatik belgi!
+
+---
+
+## 2. Relative Pronouns (Nisbiy olmoshlar)
+
+| Olmosh | Nimaga ishora | Vazifasi | Muhim cheklov |
+|---|---|---|---|
+| **who** | odam | subject / object | Predlogdan keyin darhol kelmaydi |
+| **whom** | odam | faqat object | Predlogdan keyin **MAJBURIY** (*to whom*) |
+| **which** | narsa, hayvon | subject / object | Butun gapga ham ishora qila oladi |
+| **that** | odam va narsa | subject / object | Faqat defining; **vergul va predlogdan keyin KELMAYDI** |
+| **whose** | egalik (odam va narsa) | possessive | Ketidan darhol ot keladi (*whose car*) |
+
+▸ *The novelist **whose diaries** were published...*
+▸ *The house **whose roof** was damaged has been sold.* (whose jonsiz otga ham ishlaydi!)
+
+---
+
+## 3. Relative Adverbs (Nisbiy ravishlar)
+
+| Ravish | Antecedent | Teng ma'noli shakl | Misol |
+|---|---|---|---|
+| **where** | joy | in / at / on which | *the town **where** I grew up* |
+| **when** | vaqt | in / on / at which | *the year **when** we met* |
+| **why** | sabab (*the reason*) | for which | *the reason **why** he left* |
+
+**MUHIM FARQ:** *where / when* dan keyin gap TO'LIQ bo'ladi. Agar gapda predlog saqlanib to'ldiruvchi yetishmasa — *that / which* kerak!
+• ✅ *The house **where** I live is old.* (live — to'liq)
+• ✅ *The house **(that)** I live **in** is old.* (in dan keyin to'ldiruvchi yetishmaydi)
+• ❌ *The house where I live in is old.* (ikki marta belgilangan!)
+
+---
+
+## 4. Predlogning o'rni
+
+Predlog ikki joyda tura oladi: relative olmosh oldida (rasmiy) yoki ergash gap oxirida (og'zaki).
+
+• *The colleague **with whom** I shared an office has retired.* — rasmiy / yozma
+• *The colleague **(who / that)** I shared an office **with** has retired.* — neytral / og'zaki
+
+### Qat'iy qoidalar:
+1. Predlogdan keyin faqat **whom** va **which** keladi:
+   • ❌ *the man to who I spoke* / *the theory on that it rests*
+   • ✅ *the man **to whom** I spoke* / *the theory **on which** it rests*
+2. Predlog oldinga chiqsa, olmoshni tushirib bo'lmaydi va *that* ishlatilmaydi.
+3. Phrasal verb bo'lsa, predlog odatda oxirida qoladi: *the problem (that) we have to deal with*.
+
+---
+
+## 5. Omission — olmoshni tushirish (Zero Relative)
+
+| TUSHIRISH MUMKIN | TUSHIRISH MUMKIN EMAS |
+|---|---|
+| Defining gapda **object** bo'lsa | **Subject** bo'lsa |
+| Predlog oxirida qolgan bo'lsa | Predlog oldinga chiqqan bo'lsa |
+| *be* fe'lining otkesimi bo'lsa | Non-defining (vergulli) gapda |
+| Cleft gapda object (*It was Marta (that) I saw*) | *whose* bo'lsa — **hech qachon!** |
+
+• ✅ *The flat **(that)** we rented in Lisbon was tiny.* (object — tushdi)
+• ❌ *The novel won the Booker Prize has been translated.* (subject tushmaydi!)
+• ❌ *My sister, works for the UN, lives in Geneva.* (non-defining'da tushmaydi)
+
+**TEKSHIRISH USULI:** relative olmoshdan keyin darhol **fe'l** kelsa — u subject, tushirib bo'lmaydi. Agar **ot yoki olmosh** kelsa — u object, tushirsa bo'ladi!
+
+---
+
+## 6. Miqdor so'zi + of + which / whom
+
+Non-defining gaplarda ikki gapni bog'lash uchun ishlatiladi: *all, both, most, many, some, several, none, neither, half, one, two, the majority...*
+
+• *There were forty applicants, **three of whom** were shortlisted.*
+• *He owns five galleries, **one of which** is in Vienna.*
+• ❌ *There were forty applicants, three of them were shortlisted.* (comma splice xatosi!)
+
+---
+
+## 7. Sentential "which" — butun gapga ishora
+
+*which* oldingi **butun gapga** ishora qilishi mumkin. Bunda *that* ham, *what* ham ISHLATILMAYDI, vergul esa **MAJBURIY**.
+
+• *She passed with distinction, **which** surprised nobody.*
+• *The funding was cut in March, **which** explains the delay.*
+• ❌ *She passed with distinction, what surprised nobody.*
+
+---
+
+## 8. "that" va "which" — qaysi biri afzal?
+
+### "that" afzal ko'riladi:
+1. *all, everything, nothing, anything, something, little, much* dan keyin
+2. *the only, the very, the first, the last, the next* dan keyin
+3. Orttirma daraja (*superlative*) dan keyin
+4. Cleft gaplarda: *It was John that told me.*
+
+### "which" MAJBURIY:
+1. Non-defining (vergulli) gaplarda
+2. Predlogdan keyin (*on which*)
+3. Butun gapga ishora qilganda (*..., which annoyed me*)
+
+---
+
+## 9. Reduced relative clauses — ergash gapni qisqartirish
+
+**ASOSIY SHART:** Faqat **SUBJECT** relative clause qisqaradi! Relative olmosh object bo'lsa, qisqartirib bo'lmaydi.
+
+| Tur | To'liq shakl | Qisqargan shakl |
+|---|---|---|
+| **Active → V-ing** | the delegates who are attending | the delegates **attending** |
+| **Passive → V3** | the paintings which were stolen | the paintings **stolen** |
+| **be + predlogli ibora** | the man who is behind the counter | the man **behind the counter** |
+| **be + ot (appositive)** | Ada Lovelace, who was a mathematician, | Ada Lovelace, **a mathematician**, |
+| **Modal / majburiyat** | forms which must be signed | forms **to be signed** |
+| **the only / first / last** | the last passenger who boarded | the last passenger **to board** |
+| **Perfect** | students who have submitted | students **having submitted** |
+
+---
+
+## 10. Nominal relatives (what, whoever va boshqalar)
+
+Bular relative clause emas, ot vazifasidagi gaplardir. Ularning antecedent'i yo'q, chunki antecedent so'zning o'z ichida:
+• *What he said was true.* (*what = the thing which*)
+• *Whoever arrives last must lock up.* (*whoever = the person who*)
+• ❌ *The book what I read was boring.* → ✅ *The book (that) I read was boring.*
+
+---
+
+## 11. Fe'lning moslashuvi (Agreement)
+
+Ergash gapdagi fe'l relative olmoshning antecedent'iga qarab o'zgaradi:
+• ✅ *He is one of those managers who **take** credit for everything.* (*who = those managers*, ko'plik)
+• ✅ *She is the only one of the students who **has** passed.* (*the only one* — birlik)
+
+---
+
+## 12. Eng ko'p uchraydigan 8 ta xato
+
+1. ❌ *The report that I referred to it...* → ✅ *The report that I referred to...* (it ortiqcha)
+2. ❌ *The house, that we bought...* → ✅ *The house, which we bought...* (vergul + that yo'q)
+3. ❌ *The novel, which opening chapter...* → ✅ *whose opening chapter*
+4. ❌ *the principle on that it rests* → ✅ *on which*
+5. ❌ *..., three of them were shortlisted.* → ✅ *three of whom*
+6. ❌ *The book what I read* → ✅ *that / which* (antecedent bor)
+7. ❌ *one of those people who never admits* → ✅ *admit* (ko'plik antecedent)
+8. ❌ *The reason why ... was because ...* → ✅ *was that* (qo'sh ortiqchalik)
+`,
+        guideRu: `## Relative Clauses (Относительные придаточные) — Полное руководство по материалам Содикжона
+
+Relative Clause — это придаточное предложение, которое следует за существительным (**antecedent**) и определяет или описывает его.
+
+**СТРУКТУРА:** '[antecedent] + [relative word] + [придаточное предложение]'
+• *The book **which is on the table** is mine.* — antecedent = *the book*
+• *The woman **who called you** left a number.* — antecedent = *the woman*
+
+Относительное слово выполняет синтаксическую роль в придаточном: **подлежащее (subject)**, **дополнение (object)**, **принадлежность (possessive)** или **обстоятельство (adverbial)**.
+
+---
+
+## 1. Два основных типа: Defining и Non-defining
+
+| Признак | DEFINING (Определительное) | NON-DEFINING (Распространительное) |
+|---|---|---|
+| **Функция** | Определяет предмет — необходимая информация | Дополнительная информация — можно удалить |
+| **Запятая** | **НЕТ** | **ЕСТЬ (с двух сторон: , ... ,)** |
+| **that** | Можно использовать | **Строго запрещено** |
+| **Опускание местоимения** | В роли дополнения — **можно** | **Никогда нельзя** |
+
+### Смысловая разница:
+• *My brother **who lives in London** is a doctor.* — У меня несколько братьев; речь о том, который живёт в Лондоне.
+• *My brother, **who lives in London**, is a doctor.* — У меня один брат; то, что он живёт в Лондоне — дополнительная деталь.
+
+Запятая меняет смысл предложения — это грамматический знак!
+
+---
+
+## 2. Относительные местоимения (Relative Pronouns)
+
+| Местоимение | К чему относится | Функция | Важное ограничение |
+|---|---|---|---|
+| **who** | люди | подлежащее / дополнение | Не употребляется сразу после предлога |
+| **whom** | люди | только дополнение | Обязательно после предлогов (*to whom*) |
+| **which** | предметы, животные | подлежащее / дополнение | Может относиться ко всему предложению |
+| **that** | люди и предметы | подлежащее / дополнение | Только в defining; **нельзя после запятой и предлогов** |
+| **whose** | чей / которого | принадлежность | Сразу после него идёт существительное |
+
+▸ *The house **whose roof** was damaged has been sold.* (whose применяется и к неодушевлённым предметам!)
+
+---
+
+## 3. Относительные наречия (Relative Adverbs)
+
+| Наречие | Antecedent | Эквивалент | Пример |
+|---|---|---|---|
+| **where** | место | in / at / on which | *the town **where** I grew up* |
+| **when** | время | in / on / at which | *the year **when** we met* |
+| **why** | причина | for which | *the reason **why** he left* |
+
+**ВАЖНОЕ ОТЛИЧИЕ:** после *where / when* предложение закончено. Если предлог остаётся в конце, используется *that / which*:
+• ✅ *The house **where** I live is old.*
+• ✅ *The house **(that)** I live **in** is old.*
+• ❌ *The house where I live in is old.* (двойное указание ошибки!)
+
+---
+
+## 4. Позиция предлога
+
+Предлог может стоять перед местоимением (официальный стиль) или в конце придаточного (разговорный стиль):
+• *The colleague **with whom** I worked...* (официально)
+• *The colleague **(who / that)** I worked **with**...* (разговорно)
+
+---
+
+## 5. Опускание местоимения (Zero Relative)
+
+| МОЖНО ОПУСКАТЬ | НЕЛЬЗЯ ОПУСКАТЬ |
+|---|---|
+| В defining придаточном в роли **дополнения** | В роли **подлежащего** |
+| Когда предлог остаётся в конце | Когда предлог вынесен вперёд |
+| С местоимением *whose* — **никогда!** | В non-defining (с запятыми) |
+
+• ✅ *The flat **(that)** we rented was tiny.* (дополнение — опускается)
+• ❌ *The novel won the prize was translated.* (подлежащее — опускать нельзя)
+
+---
+
+## 6. Местоимение количества + of + which / whom
+
+В non-defining предложениях для связи союзов: *all of which, three of whom, one of which, several of whom...*
+• *There were forty applicants, **three of whom** were shortlisted.*
+• ❌ *There were forty applicants, three of them were shortlisted.* (ошибка comma splice!)
+
+---
+
+## 7. Sentential "which" (Отношение к целому предложению)
+
+*which* может относиться ко всему предшествующему предложению. Запятая **ОБЯЗАТЕЛЬНА**, союзы *that* и *what* НЕ ИСПОЛЬЗУЮТСЯ.
+• *She passed with distinction, **which** surprised nobody.*
+
+---
+
+## 8. Сокращение относительных придаточных (Reduced Relative Clauses)
+
+Сокращать можно **ТОЛЬКО** придаточные в роли подлежащего:
+• Active → **V-ing**: *the delegates **attending***
+• Passive → **V3**: *the paintings **stolen***
+• be + предлог: *the man **behind the counter***
+• the first / last → **to-infinitive**: *the last passenger **to board***
+`,
         questions: [
-          { id: 1, text: "The man ___ called you is my brother.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject of the clause." },
-          { id: 2, text: "The book ___ I bought is amazing.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
-          { id: 3, text: "That's the woman ___ car was stolen.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 4, text: "This is the house ___ I grew up.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
-          { id: 5, text: "I remember the day ___ we met.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
-          { id: 6, text: "The car ___ he drives is new.", options: ["that", "who", "whose", "when"], correct: 0, explanation: "Use that/which for things." },
-          { id: 7, text: "Students ___ study hard usually succeed.", options: ["who", "whom", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 8, text: "The teacher ___ class I love is very kind.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 9, text: "This is the restaurant ___ we had dinner.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
-          { id: 10, text: "The girl ___ won the competition is my classmate.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 11, text: "I have a friend ___ father is a doctor.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 12, text: "The movie ___ we watched last night was boring.", options: ["which", "who", "whose", "when"], correct: 0, explanation: "Use which/that for things." },
-          { id: 13, text: "Do you remember the year ___ we graduated?", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
-          { id: 14, text: "People ___ exercise regularly feel healthier.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 15, text: "The company ___ hired me is very professional.", options: ["that", "who", "whose", "where"], correct: 0, explanation: "Use that/which for things (a company)." },
-          { id: 16, text: "This is the town ___ I was born.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
-          { id: 17, text: "The keys ___ I lost were expensive.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
-          { id: 18, text: "My neighbor, ___ works at a bank, is very friendly.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 19, text: "The house ___ roof is red belongs to my uncle.", options: ["whose", "which", "who", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 20, text: "Can you tell me the reason ___ you were late?", options: ["why", "where", "when", "which"], correct: 0, explanation: "Use why for a reason." }
-        ],
+          {
+                    "id": 1,
+                    "text": "The man ___ lives next door is a world-famous surgeon.",
+                    "options": [
+                              "which",
+                              "who",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Odamlar uchun subject vazifasida 'who' ishlatiladi."
+          },
+          {
+                    "id": 2,
+                    "text": "The car ___ he bought last week broke down yesterday.",
+                    "options": [
+                              "who",
+                              "whose",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 2,
+                    "explanation": "Narsalar uchun 'which' yoki 'that' ishlatiladi."
+          },
+          {
+                    "id": 3,
+                    "text": "That is the girl ___ dog won first prize at the show.",
+                    "options": [
+                              "who",
+                              "whom",
+                              "whose",
+                              "which"
+                    ],
+                    "correct": 2,
+                    "explanation": "Egalik (kimgadir tegishli it) uchun 'whose' ishlatiladi."
+          },
+          {
+                    "id": 4,
+                    "text": "The colleague to ___ I sent the proposal has not responded yet.",
+                    "options": [
+                              "who",
+                              "whom",
+                              "that",
+                              "which"
+                    ],
+                    "correct": 1,
+                    "explanation": "Predlogdan (to) keyin har doim 'whom' majburiy."
+          },
+          {
+                    "id": 5,
+                    "text": "My father, ___ is 65 years old, still runs every morning.",
+                    "options": [
+                              "that",
+                              "who",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Non-defining clause (vergulli gapda) 'that' ISHLATILMAYDI; 'who' kerak."
+          },
+          {
+                    "id": 6,
+                    "text": "The house ___ I grew up in has been demolished.",
+                    "options": [
+                              "where",
+                              "that",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Gap oxirida predlog (in) saqlangani uchun 'that' yoki 'which' ishlatiladi ('where' emas)."
+          },
+          {
+                    "id": 7,
+                    "text": "This is the town ___ I spent my childhood.",
+                    "options": [
+                              "where",
+                              "which",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Joy ifodalaganda va predlog bo'lmaganda 'where' ishlatiladi."
+          },
+          {
+                    "id": 8,
+                    "text": "In which sentence can the relative pronoun BE OMITTED?",
+                    "options": [
+                              "The man who stole the car was caught.",
+                              "The book which I borrowed was great.",
+                              "The doctor who treated me was nice.",
+                              "The girl whose phone rang left."
+                    ],
+                    "correct": 1,
+                    "explanation": "Defining clause ichida relative pronoun OBJECT bo'lsa (which I borrowed), uni tushirish mumkin."
+          },
+          {
+                    "id": 9,
+                    "text": "There were 50 applicants, three of ___ were invited for an interview.",
+                    "options": [
+                              "them",
+                              "whom",
+                              "which",
+                              "who"
+                    ],
+                    "correct": 1,
+                    "explanation": "Miqdor so'zi + of + whom (three of whom) - non-defining clause."
+          },
+          {
+                    "id": 10,
+                    "text": "She passed the exam with top marks, ___ surprised everyone.",
+                    "options": [
+                              "what",
+                              "that",
+                              "which",
+                              "it"
+                    ],
+                    "correct": 2,
+                    "explanation": "Butun gapga ishora qilganda vergul + 'which' (sentential which) ishlatiladi."
+          },
+          {
+                    "id": 11,
+                    "text": "He is the only candidate ___ answered all questions correctly.",
+                    "options": [
+                              "which",
+                              "that",
+                              "whom",
+                              "whose"
+                    ],
+                    "correct": 1,
+                    "explanation": "'The only' dan keyin 'that' nisbiy olmoshi afzal ko'riladi."
+          },
+          {
+                    "id": 12,
+                    "text": "The delegates ___ the conference arrived early this morning.",
+                    "options": [
+                              "attended",
+                              "attending",
+                              "attend",
+                              "were attended"
+                    ],
+                    "correct": 1,
+                    "explanation": "Active reduced relative clause: who are attending → attending."
+          },
+          {
+                    "id": 13,
+                    "text": "The laptop ___ on the table belongs to the professor.",
+                    "options": [
+                              "left",
+                              "leaving",
+                              "was left",
+                              "leaves"
+                    ],
+                    "correct": 0,
+                    "explanation": "Passive reduced relative clause: which was left → left."
+          },
+          {
+                    "id": 14,
+                    "text": "Everything ___ she told us turned out to be true.",
+                    "options": [
+                              "what",
+                              "that",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 1,
+                    "explanation": "'Everything' so'zidan keyin 'that' ishlatiladi ('what' emas)."
+          },
+          {
+                    "id": 15,
+                    "text": "He is one of those people who ___ never satisfied.",
+                    "options": [
+                              "is",
+                              "are",
+                              "am",
+                              "be"
+                    ],
+                    "correct": 1,
+                    "explanation": "'One of those people who...' - antecedent 'people' (ko'plik), shuning uchun 'are'."
+          },
+          {
+                    "id": 16,
+                    "text": "She is the only one of the students who ___ passed the exam.",
+                    "options": [
+                              "have",
+                              "has",
+                              "having",
+                              "are"
+                    ],
+                    "correct": 1,
+                    "explanation": "'The only one of...' - antecedent 'the only one' (birlik), shuning uchun 'has'."
+          },
+          {
+                    "id": 17,
+                    "text": "The reason ___ he was late was that his car broke down.",
+                    "options": [
+                              "why",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sabab antecedent'i (the reason) uchun 'why' ishlatiladi."
+          },
+          {
+                    "id": 18,
+                    "text": "Which sentence is INCORRECT?",
+                    "options": [
+                              "The book what I read was boring.",
+                              "The book that I read was boring.",
+                              "The book I read was boring.",
+                              "The book which I read was boring."
+                    ],
+                    "correct": 0,
+                    "explanation": "Antecedent bo'lganda 'what' ishlatilmaydi; 'that' yoki 'which' kerak."
+          },
+          {
+                    "id": 19,
+                    "text": "The building, the roof ___ was damaged in the storm, is being repaired.",
+                    "options": [
+                              "whose",
+                              "of which",
+                              "which",
+                              "that"
+                    ],
+                    "correct": 1,
+                    "explanation": "Jonsiz otlar uchun rasmiy uslubda 'the roof of which' yoki 'whose roof'."
+          },
+          {
+                    "id": 20,
+                    "text": "Ada Lovelace, ___ was a brilliant mathematician, wrote the first algorithm.",
+                    "options": [
+                              "that",
+                              "who",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 1,
+                    "explanation": "Non-defining clause (vergulli) odamlar uchun 'who' ishlatiladi ('that' taqiqlanadi)."
+          }
+],
         fillBlanks: [
-          { id: 1, text: "The scientist ___ discovered this won a prize.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 2, text: "The laptop ___ I bought last week is already broken.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
-          { id: 3, text: "The man ___ dog barks all night is my neighbor.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 4, text: "This is the park ___ we used to play.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
-          { id: 5, text: "I'll never forget the moment ___ I met her.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
-          { id: 6, text: "The film ___ won the award was excellent.", options: ["that", "who", "whose", "when"], correct: 0, explanation: "Use that/which for things." },
-          { id: 7, text: "Employees ___ work hard get promoted.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 8, text: "The woman ___ bag was stolen called the police.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 9, text: "This is the office ___ I work.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
-          { id: 10, text: "The singer ___ performed last night was amazing.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 11, text: "I met a man ___ son studies medicine.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 12, text: "The novel ___ she wrote became a bestseller.", options: ["which", "who", "whose", "when"], correct: 0, explanation: "Use which/that for things." },
-          { id: 13, text: "Do you know the date ___ the exam starts?", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
-          { id: 14, text: "Drivers ___ break the law get fined.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 15, text: "The hospital ___ treated him is excellent.", options: ["that", "who", "whose", "where"], correct: 0, explanation: "Use that/which for things (a hospital)." },
-          { id: 16, text: "This is the village ___ my grandparents lived.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
-          { id: 17, text: "The phone ___ I dropped still works.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
-          { id: 18, text: "My colleague, ___ speaks five languages, just got promoted.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for people as the subject." },
-          { id: 19, text: "The building ___ roof collapsed has been closed.", options: ["whose", "which", "who", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 20, text: "Nobody knows the reason ___ she resigned.", options: ["why", "where", "when", "which"], correct: 0, explanation: "Use why for a reason." }
-        ],
+          {
+                    "id": 1,
+                    "text": "The woman ___ lives next door is an architect.",
+                    "options": [
+                              "who",
+                              "which",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "People subject: who."
+          },
+          {
+                    "id": 2,
+                    "text": "The book ___ I bought yesterday is very interesting.",
+                    "options": [
+                              "which",
+                              "who",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing object: which/that."
+          },
+          {
+                    "id": 3,
+                    "text": "The boy ___ phone was stolen reported it to the police.",
+                    "options": [
+                              "whose",
+                              "who",
+                              "whom",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possession: whose."
+          },
+          {
+                    "id": 4,
+                    "text": "The company to ___ she applied offered her a job.",
+                    "options": [
+                              "which",
+                              "that",
+                              "who",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + which."
+          },
+          {
+                    "id": 5,
+                    "text": "This is the restaurant ___ we celebrated your birthday.",
+                    "options": [
+                              "where",
+                              "which",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Place adverb: where."
+          },
+          {
+                    "id": 6,
+                    "text": "My uncle, ___ is a doctor, lives in Samarkand.",
+                    "options": [
+                              "who",
+                              "that",
+                              "which",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Non-defining relative clause: who (not that)."
+          },
+          {
+                    "id": 7,
+                    "text": "All the money ___ was donated will be used for charity.",
+                    "options": [
+                              "that",
+                              "what",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "After 'all': that."
+          },
+          {
+                    "id": 8,
+                    "text": "He has three brothers, two of ___ are lawyers.",
+                    "options": [
+                              "whom",
+                              "them",
+                              "which",
+                              "who"
+                    ],
+                    "correct": 0,
+                    "explanation": "Quantity + of + whom."
+          },
+          {
+                    "id": 9,
+                    "text": "She won first place, ___ surprised everyone.",
+                    "options": [
+                              "which",
+                              "that",
+                              "what",
+                              "it"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sentential which referring to whole sentence."
+          },
+          {
+                    "id": 10,
+                    "text": "The student ___ the highest score will receive a scholarship.",
+                    "options": [
+                              "getting",
+                              "got",
+                              "gets",
+                              "is getting"
+                    ],
+                    "correct": 0,
+                    "explanation": "Active reduced relative clause: getting."
+          },
+          {
+                    "id": 11,
+                    "text": "The paintings ___ from the museum were recovered.",
+                    "options": [
+                              "stolen",
+                              "stealing",
+                              "stole",
+                              "were stolen"
+                    ],
+                    "correct": 0,
+                    "explanation": "Passive reduced relative clause: stolen."
+          },
+          {
+                    "id": 12,
+                    "text": "The man ___ I spoke to yesterday was very helpful.",
+                    "options": [
+                              "who",
+                              "whose",
+                              "which",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "People object with preposition at end: who/that."
+          },
+          {
+                    "id": 13,
+                    "text": "The reason ___ she missed the train was a traffic jam.",
+                    "options": [
+                              "why",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Reason: why."
+          },
+          {
+                    "id": 14,
+                    "text": "He is one of those students who ___ hard every day.",
+                    "options": [
+                              "study",
+                              "studies",
+                              "studying",
+                              "is studying"
+                    ],
+                    "correct": 0,
+                    "explanation": "Plural agreement with antecedent 'students': study."
+          },
+          {
+                    "id": 15,
+                    "text": "She is the only person ___ understood the instructions.",
+                    "options": [
+                              "that",
+                              "which",
+                              "what",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "After 'the only': that."
+          },
+          {
+                    "id": 16,
+                    "text": "The year ___ we graduated was unforgettable.",
+                    "options": [
+                              "when",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Time adverb: when."
+          },
+          {
+                    "id": 17,
+                    "text": "The house ___ roof was blown off in the storm has been repaired.",
+                    "options": [
+                              "whose",
+                              "which",
+                              "that",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive whose for things."
+          },
+          {
+                    "id": 18,
+                    "text": "I didn't like the film ___ we watched last night.",
+                    "options": [
+                              "that",
+                              "what",
+                              "whose",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing object: that."
+          },
+          {
+                    "id": 19,
+                    "text": "The professor with ___ I discussed my thesis was encouraging.",
+                    "options": [
+                              "whom",
+                              "who",
+                              "that",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + whom."
+          },
+          {
+                    "id": 20,
+                    "text": "The last passenger ___ the plane was arrested.",
+                    "options": [
+                              "to board",
+                              "boarded",
+                              "boarding",
+                              "boards"
+                    ],
+                    "correct": 0,
+                    "explanation": "After 'the last': to-infinitive reduction (to board)."
+          }
+],
         scrambled: [
-          { id: 1, words: ["brother", "the", "man", "who", "called", "you", "is", "my"], answer: "the man who called you is my brother", explanation: "Relative clause with who for a person as subject." },
-          { id: 2, words: ["amazing", "the", "book", "which", "I", "bought", "is"], answer: "the book which I bought is amazing", explanation: "Relative clause with which for a thing as object." },
-          { id: 3, words: ["stolen", "that's", "the", "woman", "whose", "car", "was"], answer: "that's the woman whose car was stolen", explanation: "Relative clause with whose showing possession." },
-          { id: 4, words: ["grew", "this", "is", "the", "house", "where", "I", "up"], answer: "this is the house where I grew up", explanation: "Relative clause with where for a place." },
-          { id: 5, words: ["met", "I", "remember", "the", "day", "when", "we"], answer: "I remember the day when we met", explanation: "Relative clause with when for a time." },
-          { id: 6, words: ["new", "the", "car", "that", "he", "drives", "is"], answer: "the car that he drives is new", explanation: "Relative clause with that for a thing." },
-          { id: 7, words: ["succeed", "students", "who", "study", "hard", "usually"], answer: "students who study hard usually succeed", explanation: "Defining relative clause, no comma needed." },
-          { id: 8, words: ["kind", "the", "teacher", "whose", "class", "I", "love", "is", "very"], answer: "the teacher whose class I love is very kind", explanation: "Relative clause with whose showing possession." },
-          { id: 9, words: ["dinner", "this", "is", "the", "restaurant", "where", "we", "had"], answer: "this is the restaurant where we had dinner", explanation: "Relative clause with where for a place." },
-          { id: 10, words: ["classmate", "the", "girl", "who", "won", "the", "competition", "is", "my"], answer: "the girl who won the competition is my classmate", explanation: "Relative clause with who for a person as subject." },
-          { id: 11, words: ["doctor", "I", "have", "a", "friend", "whose", "father", "is", "a"], answer: "I have a friend whose father is a doctor", explanation: "Relative clause with whose showing possession." },
-          { id: 12, words: ["boring", "the", "movie", "which", "we", "watched", "last", "night", "was"], answer: "the movie which we watched last night was boring", explanation: "Relative clause with which for a thing." },
-          { id: 13, words: ["graduated", "do", "you", "remember", "the", "year", "when", "we"], answer: "do you remember the year when we graduated", explanation: "Relative clause with when for a time." },
-          { id: 14, words: ["healthier", "people", "who", "exercise", "regularly", "feel"], answer: "people who exercise regularly feel healthier", explanation: "Defining relative clause with who." },
-          { id: 15, words: ["professional", "the", "company", "that", "hired", "me", "is", "very"], answer: "the company that hired me is very professional", explanation: "Relative clause with that for a thing." },
-          { id: 16, words: ["born", "this", "is", "the", "town", "where", "I", "was"], answer: "this is the town where I was born", explanation: "Relative clause with where for a place." },
-          { id: 17, words: ["expensive", "the", "keys", "which", "I", "lost", "were"], answer: "the keys which I lost were expensive", explanation: "Relative clause with which for things." },
-          { id: 18, words: ["friendly", "my", "neighbor", "who", "works", "at", "a", "bank", "is", "very"], answer: "my neighbor who works at a bank is very friendly", explanation: "Relative clause with who for a person." },
-          { id: 19, words: ["uncle", "the", "house", "whose", "roof", "is", "red", "belongs", "to", "my"], answer: "the house whose roof is red belongs to my uncle", explanation: "Relative clause with whose showing possession." },
-          { id: 20, words: ["left", "I", "don't", "know", "the", "reason", "why", "he"], answer: "I don't know the reason why he left", explanation: "Relative clause with why for a reason." }
-        ],
+          {
+                    "id": 1,
+                    "words": [
+                              "man",
+                              "the",
+                              "who",
+                              "called",
+                              "you",
+                              "is",
+                              "my",
+                              "brother"
+                    ],
+                    "answer": "The man who called you is my brother.",
+                    "explanation": "Defining relative clause: Subject + who + V."
+          },
+          {
+                    "id": 2,
+                    "words": [
+                              "book",
+                              "the",
+                              "which",
+                              "I",
+                              "bought",
+                              "is",
+                              "great"
+                    ],
+                    "answer": "The book which I bought is great.",
+                    "explanation": "Relative clause for objects: which + S + V."
+          },
+          {
+                    "id": 3,
+                    "words": [
+                              "girl",
+                              "that",
+                              "is",
+                              "the",
+                              "whose",
+                              "car",
+                              "was",
+                              "stolen"
+                    ],
+                    "answer": "That is the girl whose car was stolen.",
+                    "explanation": "Possessive relative clause: whose + noun."
+          },
+          {
+                    "id": 4,
+                    "words": [
+                              "house",
+                              "this",
+                              "is",
+                              "where",
+                              "grew",
+                              "I",
+                              "up"
+                    ],
+                    "answer": "This is the house where I grew up.",
+                    "explanation": "Relative adverb of place: where + S + V."
+          },
+          {
+                    "id": 5,
+                    "words": [
+                              "brother",
+                              "my",
+                              "who",
+                              "lives",
+                              "in",
+                              "London",
+                              "is",
+                              "a",
+                              "doctor"
+                    ],
+                    "answer": "My brother who lives in London is a doctor.",
+                    "explanation": "Defining relative clause without commas."
+          },
+          {
+                    "id": 6,
+                    "words": [
+                              "passed",
+                              "she",
+                              "which",
+                              "surprised",
+                              "everyone"
+                    ],
+                    "answer": "She passed which surprised everyone.",
+                    "explanation": "Sentential which: clause + , which + verb."
+          },
+          {
+                    "id": 7,
+                    "words": [
+                              "applicants",
+                              "there",
+                              "were",
+                              "many",
+                              "two",
+                              "of",
+                              "whom",
+                              "passed"
+                    ],
+                    "answer": "There were many applicants two of whom passed.",
+                    "explanation": "Quantity + of + whom."
+          },
+          {
+                    "id": 8,
+                    "words": [
+                              "colleague",
+                              "the",
+                              "with",
+                              "whom",
+                              "I",
+                              "worked",
+                              "retired"
+                    ],
+                    "answer": "The colleague with whom I worked retired.",
+                    "explanation": "Preposition fronting: with whom + S + V."
+          },
+          {
+                    "id": 9,
+                    "words": [
+                              "everything",
+                              "that",
+                              "she",
+                              "said",
+                              "was",
+                              "true"
+                    ],
+                    "answer": "Everything that she said was true.",
+                    "explanation": "Relative clause after 'everything': that."
+          },
+          {
+                    "id": 10,
+                    "words": [
+                              "delegates",
+                              "the",
+                              "attending",
+                              "the",
+                              "meeting",
+                              "were",
+                              "kind"
+                    ],
+                    "answer": "The delegates attending the meeting were kind.",
+                    "explanation": "Reduced active relative clause: V-ing."
+          },
+          {
+                    "id": 11,
+                    "words": [
+                              "paintings",
+                              "stolen",
+                              "the",
+                              "were",
+                              "found"
+                    ],
+                    "answer": "The paintings stolen were found.",
+                    "explanation": "Reduced passive relative clause: V3."
+          },
+          {
+                    "id": 12,
+                    "words": [
+                              "man",
+                              "the",
+                              "behind",
+                              "the",
+                              "counter",
+                              "smiled"
+                    ],
+                    "answer": "The man behind the counter smiled.",
+                    "explanation": "Reduced prepositional relative clause."
+          },
+          {
+                    "id": 13,
+                    "words": [
+                              "only",
+                              "the",
+                              "person",
+                              "that",
+                              "helped",
+                              "me"
+                    ],
+                    "answer": "He was the only person that helped me.",
+                    "explanation": "After 'the only': that."
+          },
+          {
+                    "id": 14,
+                    "words": [
+                              "last",
+                              "the",
+                              "train",
+                              "to",
+                              "arrive",
+                              "was",
+                              "late"
+                    ],
+                    "answer": "The last train to arrive was late.",
+                    "explanation": "The last + to-infinitive reduction."
+          },
+          {
+                    "id": 15,
+                    "words": [
+                              "reason",
+                              "the",
+                              "why",
+                              "he",
+                              "left",
+                              "is",
+                              "clear"
+                    ],
+                    "answer": "The reason why he left is clear.",
+                    "explanation": "The reason why + S + V."
+          }
+],
         errorCorrection: [
-          { id: 1, text: "The man which called you is my brother.", options: ["The man", "which", "called you", "is my brother"], correct: 1, wrongPart: "which", correction: "who", explanation: "Use who for people, not which." },
-          { id: 2, text: "The book who I bought is amazing.", options: ["The book", "who", "I bought", "is amazing"], correct: 1, wrongPart: "who", correction: "which", explanation: "Use which/that for things, not who." },
-          { id: 3, text: "That's the woman who car was stolen.", options: ["That's the woman", "who", "car was stolen", "No error"], correct: 1, wrongPart: "who", correction: "whose", explanation: "Use whose to show possession, not who." },
-          { id: 4, text: "This is the house which I grew up.", options: ["This is the house", "which", "I grew", "up"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
-          { id: 5, text: "I remember the day where we met.", options: ["I remember the day", "where", "we", "met"], correct: 1, wrongPart: "where", correction: "when", explanation: "Use when for a time, not where." },
-          { id: 6, text: "Students which study hard usually succeed.", options: ["Students", "which", "study hard", "usually succeed"], correct: 1, wrongPart: "which", correction: "who", explanation: "Use who for people, not which." },
-          { id: 7, text: "My brother who lives in London is a doctor is very tall.", options: ["My brother", "who lives in London", "is a doctor", "is very tall"], correct: 2, wrongPart: "is a doctor", correction: ", who lives in London, is a doctor,", explanation: "A non-defining clause about an only brother needs commas: My brother, who lives in London, is a doctor." },
-          { id: 8, text: "The teacher which class I love is very kind.", options: ["The teacher", "which", "class I love", "is very kind"], correct: 1, wrongPart: "which", correction: "whose", explanation: "Use whose to show possession, not which." },
-          { id: 9, text: "This is the restaurant which we had dinner.", options: ["This is the restaurant", "which", "we had", "dinner"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
-          { id: 10, text: "The girl which won the competition is my classmate.", options: ["The girl", "which", "won the competition", "is my classmate"], correct: 1, wrongPart: "which", correction: "who", explanation: "Use who for people, not which." },
-          { id: 11, text: "I have a friend who father is a doctor.", options: ["I have a friend", "who", "father", "is a doctor"], correct: 1, wrongPart: "who", correction: "whose", explanation: "Use whose to show possession, not who." },
-          { id: 12, text: "Do you know the date which the exam starts?", options: ["Do you know", "the date", "which", "the exam starts?"], correct: 2, wrongPart: "which", correction: "when", explanation: "Use when for a time, not which." },
-          { id: 13, text: "The car who he drives is new.", options: ["The car", "who", "he drives", "is new"], correct: 1, wrongPart: "who", correction: "that", explanation: "Use that/which for things, not who." },
-          { id: 14, text: "This is the office which I work.", options: ["This is the office", "which", "I", "work"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
-          { id: 15, text: "The novel whose she wrote became a bestseller.", options: ["The novel", "whose", "she wrote", "became a bestseller"], correct: 1, wrongPart: "whose", correction: "which", explanation: "Use which for a thing as object, not whose." },
-          { id: 16, text: "Drivers whose break the law get fined.", options: ["Drivers", "whose", "break the law", "get fined"], correct: 1, wrongPart: "whose", correction: "who", explanation: "Use who for people, not whose, unless showing possession." },
-          { id: 17, text: "This is the village which my grandparents lived.", options: ["This is the village", "which", "my grandparents", "lived"], correct: 1, wrongPart: "which", correction: "where", explanation: "Use where for a place, not which." },
-          { id: 18, text: "The phone which I dropped it still works.", options: ["The phone", "which I dropped", "it", "still works"], correct: 2, wrongPart: "it", correction: "", explanation: "Do not repeat the object with a pronoun after a relative clause: remove it." },
-          { id: 19, text: "The building who roof collapsed has been closed.", options: ["The building", "who", "roof collapsed", "has been closed"], correct: 1, wrongPart: "who", correction: "whose", explanation: "Use whose to show possession, not who." },
-          { id: 20, text: "Nobody knows the reason which she resigned.", options: ["Nobody knows", "the reason", "which", "she resigned"], correct: 2, wrongPart: "which", correction: "why", explanation: "Use why for a reason, not which." }
-        ],
+          {
+                    "id": 1,
+                    "text": "The report that I referred to it was accurate.",
+                    "options": [
+                              "that I referred",
+                              "to it",
+                              "was accurate",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "to it",
+                    "correction": "to",
+                    "explanation": "Relative clause'da takroriy olmosh (it) tushiriladi: referred to."
+          },
+          {
+                    "id": 2,
+                    "text": "My father, that is a lawyer, lives in Chicago.",
+                    "options": [
+                              "My father",
+                              "that is",
+                              "a lawyer",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "that is",
+                    "correction": "who is",
+                    "explanation": "Non-defining clause (vergulli gapda) 'that' ISHLATILMAYDI; 'who' kerak."
+          },
+          {
+                    "id": 3,
+                    "text": "The house, which opening chapter was sad, is famous.",
+                    "options": [
+                              "which opening",
+                              "chapter was",
+                              "sad is",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "which opening",
+                    "correction": "whose opening",
+                    "explanation": "Egalik ma'nosi bo'lgani uchun 'whose' ishlatiladi."
+          },
+          {
+                    "id": 4,
+                    "text": "This is the theory on that his argument rests.",
+                    "options": [
+                              "on that",
+                              "his argument",
+                              "rests",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "on that",
+                    "correction": "on which",
+                    "explanation": "Predlogdan keyin 'that' kelmaydi; 'on which' kerak."
+          },
+          {
+                    "id": 5,
+                    "text": "There were 40 students, five of them failed.",
+                    "options": [
+                              "five of them",
+                              "failed",
+                              "40 students",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "five of them",
+                    "correction": "five of whom",
+                    "explanation": "Comma splice xatosi: ergash gap bog'lash uchun 'five of whom' kerak."
+          },
+          {
+                    "id": 6,
+                    "text": "The book what I borrowed was very interesting.",
+                    "options": [
+                              "what I borrowed",
+                              "was very",
+                              "interesting",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "what I borrowed",
+                    "correction": "that I borrowed",
+                    "explanation": "Antecedent (the book) bo'lganda 'what' ishlatilmaydi; 'that' / 'which' kerak."
+          },
+          {
+                    "id": 7,
+                    "text": "He is one of those managers who never admits mistakes.",
+                    "options": [
+                              "who never",
+                              "admits mistakes",
+                              "one of those",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "admits mistakes",
+                    "correction": "admit mistakes",
+                    "explanation": "Antecedent 'those managers' (ko'plik), fe'l ko'plikda bo'lishi kerak: admit."
+          },
+          {
+                    "id": 8,
+                    "text": "The reason why he left was because he was tired.",
+                    "options": [
+                              "was because",
+                              "he was tired",
+                              "The reason why",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "was because",
+                    "correction": "was that",
+                    "explanation": "'The reason why... was because...' - qo'sh ortiqchalik xatosi; 'was that' to'g'ri."
+          },
+          {
+                    "id": 9,
+                    "text": "The house where I live in is very comfortable.",
+                    "options": [
+                              "where I live in",
+                              "is very",
+                              "comfortable",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "where I live in",
+                    "correction": "where I live",
+                    "explanation": "'where' bilan birga gap oxirida predlog (in) ishlatilmaydi."
+          },
+          {
+                    "id": 10,
+                    "text": "The proposal the board rejected it was revised.",
+                    "options": [
+                              "rejected it",
+                              "was revised",
+                              "The proposal",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "rejected it",
+                    "correction": "rejected",
+                    "explanation": "Relative clause to'ldiruvchisi bo'lgan takroriy 'it' tushiriladi."
+          },
+          {
+                    "id": 11,
+                    "text": "She passed her exams, what pleased her parents.",
+                    "options": [
+                              "what pleased",
+                              "her parents",
+                              "passed her exams",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "what pleased",
+                    "correction": "which pleased",
+                    "explanation": "Butun gapga ishora qilganda vergul + 'which' ishlatiladi ('what' emas)."
+          },
+          {
+                    "id": 12,
+                    "text": "The novel won the prize has been translated.",
+                    "options": [
+                              "The novel won",
+                              "the prize",
+                              "has been translated",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "The novel won",
+                    "correction": "The novel which won",
+                    "explanation": "Subject position relative pronoun tushirib bo'lmaydi."
+          },
+          {
+                    "id": 13,
+                    "text": "My sister, works for the UN, lives in Geneva.",
+                    "options": [
+                              "My sister,",
+                              "works for",
+                              "the UN",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "works for",
+                    "correction": "who works for",
+                    "explanation": "Non-defining clause olmoshi (who) tushirilmaydi."
+          },
+          {
+                    "id": 14,
+                    "text": "The man to who I spoke was very helpful.",
+                    "options": [
+                              "to who",
+                              "I spoke",
+                              "was very",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "to who",
+                    "correction": "to whom",
+                    "explanation": "Predlogdan keyin har doim 'whom' ishlatiladi ('who' emas)."
+          },
+          {
+                    "id": 15,
+                    "text": "The proposal rejecting by the board was cancelled.",
+                    "options": [
+                              "rejecting by",
+                              "the board",
+                              "was cancelled",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "rejecting by",
+                    "correction": "rejected by",
+                    "explanation": "Passive reduced clause: V3 (rejected by) ishlatilishi kerak."
+          }
+],
         transform: [
-          { id: 1, text: "Combine: \"The man is my brother. He called you.\"", options: ["The man who called you is my brother.", "The man which called you is my brother.", "The man whose called you is my brother.", "The man where called you is my brother."], correct: 0, explanation: "Use who for a person as subject of the relative clause." },
-          { id: 2, text: "Combine: \"The book is amazing. I bought it.\"", options: ["The book which I bought is amazing.", "The book who I bought is amazing.", "The book whose I bought is amazing.", "The book I am bought is amazing."], correct: 0, explanation: "Use which/that for a thing as object." },
-          { id: 3, text: "Combine: \"That's the woman. Her car was stolen.\"", options: ["That's the woman whose car was stolen.", "That's the woman who car was stolen.", "That's the woman which car was stolen.", "That's the woman her car was stolen."], correct: 0, explanation: "Use whose to show possession." },
-          { id: 4, text: "Combine: \"This is the house. I grew up there.\"", options: ["This is the house where I grew up.", "This is the house which I grew up.", "This is the house who I grew up.", "This is the house when I grew up."], correct: 0, explanation: "Use where for a place." },
-          { id: 5, text: "Combine: \"I remember the day. We met on that day.\"", options: ["I remember the day when we met.", "I remember the day where we met.", "I remember the day which we met.", "I remember the day who we met."], correct: 0, explanation: "Use when for a time." },
-          { id: 6, text: "Combine: \"Students usually succeed. They study hard.\" (defining clause)", options: ["Students who study hard usually succeed.", "Students, who study hard, usually succeed.", "Students which study hard usually succeed.", "Students whose study hard usually succeed."], correct: 0, explanation: "Defining clause with who, no commas needed." },
-          { id: 7, text: "Combine: \"My brother is a doctor. He lives in London.\" (only one brother, non-defining)", options: ["My brother, who lives in London, is a doctor.", "My brother who lives in London is a doctor.", "My brother, which lives in London, is a doctor.", "My brother whose lives in London is a doctor."], correct: 0, explanation: "Non-defining clause needs commas around it." },
-          { id: 8, text: "Combine: \"The teacher is very kind. I love her class.\"", options: ["The teacher whose class I love is very kind.", "The teacher who class I love is very kind.", "The teacher which class I love is very kind.", "The teacher where class I love is very kind."], correct: 0, explanation: "Use whose to show possession." },
-          { id: 9, text: "Combine: \"This is the restaurant. We had dinner there.\"", options: ["This is the restaurant where we had dinner.", "This is the restaurant which we had dinner.", "This is the restaurant when we had dinner.", "This is the restaurant who we had dinner."], correct: 0, explanation: "Use where for a place." },
-          { id: 10, text: "Combine: \"The girl is my classmate. She won the competition.\"", options: ["The girl who won the competition is my classmate.", "The girl which won the competition is my classmate.", "The girl whose won the competition is my classmate.", "The girl where won the competition is my classmate."], correct: 0, explanation: "Use who for a person as subject." },
-          { id: 11, text: "Combine: \"I have a friend. His father is a doctor.\"", options: ["I have a friend whose father is a doctor.", "I have a friend who father is a doctor.", "I have a friend which father is a doctor.", "I have a friend where father is a doctor."], correct: 0, explanation: "Use whose to show possession." },
-          { id: 12, text: "Combine: \"The movie was boring. We watched it last night.\"", options: ["The movie which we watched last night was boring.", "The movie who we watched last night was boring.", "The movie whose we watched last night was boring.", "The movie where we watched last night was boring."], correct: 0, explanation: "Use which/that for a thing as object." },
-          { id: 13, text: "Combine: \"Do you remember the year? We graduated that year.\"", options: ["Do you remember the year when we graduated?", "Do you remember the year where we graduated?", "Do you remember the year which we graduated?", "Do you remember the year who we graduated?"], correct: 0, explanation: "Use when for a time." },
-          { id: 14, text: "Combine: \"The company is very professional. It hired me.\"", options: ["The company that hired me is very professional.", "The company who hired me is very professional.", "The company whose hired me is very professional.", "The company where hired me is very professional."], correct: 0, explanation: "Use that/which for a thing as subject." },
-          { id: 15, text: "Combine: \"This is the town. I was born there.\"", options: ["This is the town where I was born.", "This is the town which I was born.", "This is the town when I was born.", "This is the town who I was born."], correct: 0, explanation: "Use where for a place." },
-          { id: 16, text: "Combine: \"My colleague just got promoted. She speaks five languages.\" (non-defining)", options: ["My colleague, who speaks five languages, just got promoted.", "My colleague who speaks five languages just got promoted.", "My colleague, which speaks five languages, just got promoted.", "My colleague whose speaks five languages just got promoted."], correct: 0, explanation: "Non-defining clause with who needs commas." },
-          { id: 17, text: "Combine: \"The building has been closed. Its roof collapsed.\"", options: ["The building whose roof collapsed has been closed.", "The building which roof collapsed has been closed.", "The building who roof collapsed has been closed.", "The building where roof collapsed has been closed."], correct: 0, explanation: "Use whose to show possession." },
-          { id: 18, text: "Combine: \"Nobody knows the reason. She resigned for that reason.\"", options: ["Nobody knows the reason why she resigned.", "Nobody knows the reason where she resigned.", "Nobody knows the reason which she resigned.", "Nobody knows the reason who she resigned."], correct: 0, explanation: "Use why for a reason." },
-          { id: 19, text: "Combine: \"The phone still works. I dropped it.\" (object pronoun can be omitted)", options: ["The phone I dropped still works.", "The phone which I dropped it still works.", "The phone who I dropped still works.", "The phone whose I dropped still works."], correct: 0, explanation: "The relative pronoun as object can be omitted in defining clauses; do not repeat the object with it." },
-          { id: 20, text: "Combine: \"The singer was amazing. She performed last night.\"", options: ["The singer who performed last night was amazing.", "The singer which performed last night was amazing.", "The singer whose performed last night was amazing.", "The singer where performed last night was amazing."], correct: 0, explanation: "Use who for a person as subject." }
-        ],
+          {
+                    "id": 1,
+                    "text": "Combine into defining relative clause: 'I met a doctor. He lives next door.' →",
+                    "options": [
+                              "I met a doctor who lives next door.",
+                              "I met a doctor, who lives next door.",
+                              "I met a doctor that he lives next door.",
+                              "I met a doctor which lives next door."
+                    ],
+                    "correct": 0,
+                    "explanation": "Defining relative clause for people: who lives next door."
+          },
+          {
+                    "id": 2,
+                    "text": "Combine into non-defining clause: 'London is huge. It is the capital of the UK.' →",
+                    "options": [
+                              "London, which is the capital of the UK, is huge.",
+                              "London that is the capital of the UK is huge.",
+                              "London where is the capital of the UK is huge.",
+                              "London which it is the capital is huge."
+                    ],
+                    "correct": 0,
+                    "explanation": "Non-defining clause with commas: London, which is..."
+          },
+          {
+                    "id": 3,
+                    "text": "Reduce the relative clause: 'The delegates who are attending the meeting are from Asia.' →",
+                    "options": [
+                              "The delegates attending the meeting are from Asia.",
+                              "The delegates attended the meeting are from Asia.",
+                              "The delegates attend the meeting are from Asia.",
+                              "The delegates to attend the meeting are from Asia."
+                    ],
+                    "correct": 0,
+                    "explanation": "Active relative clause reduction: who are attending → attending."
+          },
+          {
+                    "id": 4,
+                    "text": "Reduce the passive clause: 'The paintings which were stolen last night were famous.' →",
+                    "options": [
+                              "The paintings stolen last night were famous.",
+                              "The paintings stealing last night were famous.",
+                              "The paintings steal last night were famous.",
+                              "The paintings having stolen were famous."
+                    ],
+                    "correct": 0,
+                    "explanation": "Passive relative clause reduction: which were stolen → stolen."
+          },
+          {
+                    "id": 5,
+                    "text": "Combine with preposition: 'The colleague is friendly. I work with him.' →",
+                    "options": [
+                              "The colleague with whom I work is friendly.",
+                              "The colleague with who I work is friendly.",
+                              "The colleague with that I work is friendly.",
+                              "The colleague with which I work is friendly."
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition fronting: with whom I work."
+          },
+          {
+                    "id": 6,
+                    "text": "Combine using possessive: 'A girl called the police. Her phone was stolen.' →",
+                    "options": [
+                              "A girl whose phone was stolen called the police.",
+                              "A girl who her phone was stolen called the police.",
+                              "A girl which phone was stolen called the police.",
+                              "A girl that her phone was stolen called the police."
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive relative clause: whose phone."
+          },
+          {
+                    "id": 7,
+                    "text": "Combine using sentential which: 'She won the race. This surprised everyone.' →",
+                    "options": [
+                              "She won the race, which surprised everyone.",
+                              "She won the race that surprised everyone.",
+                              "She won the race what surprised everyone.",
+                              "She won the race it surprised everyone."
+                    ],
+                    "correct": 0,
+                    "explanation": "Sentential which: , which surprised everyone."
+          },
+          {
+                    "id": 8,
+                    "text": "Combine using quantity of: 'He bought 10 laptops. Three of them were broken.' →",
+                    "options": [
+                              "He bought 10 laptops, three of which were broken.",
+                              "He bought 10 laptops, three of them were broken.",
+                              "He bought 10 laptops three of that were broken.",
+                              "He bought 10 laptops three of whom were broken."
+                    ],
+                    "correct": 0,
+                    "explanation": "Quantity + of + which for things."
+          },
+          {
+                    "id": 9,
+                    "text": "Omit relative pronoun: 'The book that I bought was expensive.' →",
+                    "options": [
+                              "The book I bought was expensive.",
+                              "The book bought was expensive.",
+                              "The book I was bought expensive.",
+                              "The book bought I was expensive."
+                    ],
+                    "correct": 0,
+                    "explanation": "Defining object pronoun omitted: The book I bought..."
+          },
+          {
+                    "id": 10,
+                    "text": "Reduce to-infinitive: 'He was the last passenger who boarded the plane.' →",
+                    "options": [
+                              "He was the last passenger to board the plane.",
+                              "He was the last passenger boarding the plane.",
+                              "He was the last passenger boarded the plane.",
+                              "He was the last passenger board the plane."
+                    ],
+                    "correct": 0,
+                    "explanation": "The last + to-infinitive reduction."
+          },
+          {
+                    "id": 11,
+                    "text": "Combine using relative adverb: 'This is the town. I grew up here.' →",
+                    "options": [
+                              "This is the town where I grew up.",
+                              "This is the town where I grew up in.",
+                              "This is the town which I grew up.",
+                              "This is the town that I grew up here."
+                    ],
+                    "correct": 0,
+                    "explanation": "Relative adverb of place: where I grew up."
+          },
+          {
+                    "id": 12,
+                    "text": "Fix double pronoun: 'The man who I met him yesterday was kind.' →",
+                    "options": [
+                              "The man who I met yesterday was kind.",
+                              "The man who I met he yesterday was kind.",
+                              "The man who I met him yesterday was kind.",
+                              "The man which I met yesterday was kind."
+                    ],
+                    "correct": 0,
+                    "explanation": "Redundant pronoun 'him' removed."
+          },
+          {
+                    "id": 13,
+                    "text": "Apply 'that' preference: 'It was John who told me the news.' →",
+                    "options": [
+                              "It was John that told me the news.",
+                              "It was John which told me the news.",
+                              "It was John what told me the news.",
+                              "It was John whom told me the news."
+                    ],
+                    "correct": 0,
+                    "explanation": "Cleft sentence prefers 'that': It was John that told me."
+          },
+          {
+                    "id": 14,
+                    "text": "Combine using reason: 'He left early. That is the reason.' →",
+                    "options": [
+                              "That is the reason why he left early.",
+                              "That is the reason how he left early.",
+                              "That is the reason where he left early.",
+                              "That is the reason which he left early."
+                    ],
+                    "correct": 0,
+                    "explanation": "The reason why he left early."
+          },
+          {
+                    "id": 15,
+                    "text": "Reduce prepositional phrase: 'The man who is behind the counter smiled.' →",
+                    "options": [
+                              "The man behind the counter smiled.",
+                              "The man being behind the counter smiled.",
+                              "The man to be behind the counter smiled.",
+                              "The man was behind the counter smiled."
+                    ],
+                    "correct": 0,
+                    "explanation": "be + prepositional phrase reduction."
+          }
+],
         dialogue: [
-          { id: 1, situation: "Describing a person.", dialogue: "A: Who is that man over there?\nB: He's the man ___ called you yesterday.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for a person as subject." },
-          { id: 2, situation: "Talking about a purchase.", dialogue: "A: Is your new laptop good?\nB: The one ___ I bought is already broken!", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for a thing." },
-          { id: 3, situation: "Talking about a stolen item.", dialogue: "A: Do you know that woman?\nB: Yes, she's the one ___ car was stolen.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 4, situation: "Talking about childhood.", dialogue: "A: Is this your hometown?\nB: Yes, this is the house ___ I grew up.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
-          { id: 5, situation: "Talking about memories.", dialogue: "A: Do you remember your wedding day?\nB: Of course, I'll never forget the day ___ we got married.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
-          { id: 6, situation: "Describing a car.", dialogue: "A: Is that your new car?\nB: Yes, it's the car ___ I bought last month.", options: ["that", "who", "whose", "when"], correct: 0, explanation: "Use that/which for a thing." },
-          { id: 7, situation: "Talking about success.", dialogue: "A: What is the secret to success?\nB: Students ___ study hard usually succeed.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as subject." },
-          { id: 8, situation: "Talking about a favorite class.", dialogue: "A: Which teacher do you like most?\nB: The teacher ___ class I love the most is Mrs. Smith.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 9, situation: "Talking about a restaurant.", dialogue: "A: Where did you two meet?\nB: This is the restaurant ___ we had our first dinner.", options: ["where", "which", "who", "whose"], correct: 0, explanation: "Use where for a place." },
-          { id: 10, situation: "Talking about a competition.", dialogue: "A: Who won the prize?\nB: The girl ___ won the competition is my classmate.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for a person as subject." },
-          { id: 11, situation: "Talking about friends.", dialogue: "A: Do you know any doctors?\nB: Yes, I have a friend ___ father is a doctor.", options: ["whose", "who", "which", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 12, situation: "Talking about a movie.", dialogue: "A: Did you enjoy the film?\nB: Not really, the movie ___ we watched last night was boring.", options: ["which", "who", "whose", "when"], correct: 0, explanation: "Use which/that for a thing." },
-          { id: 13, situation: "Talking about graduation.", dialogue: "A: Do you remember 2020?\nB: Yes, that's the year ___ we graduated.", options: ["when", "where", "which", "who"], correct: 0, explanation: "Use when for a time." },
-          { id: 14, situation: "Talking about health.", dialogue: "A: What is your advice for staying healthy?\nB: People ___ exercise regularly feel healthier.", options: ["who", "whose", "which", "where"], correct: 0, explanation: "Use who for people as subject." },
-          { id: 15, situation: "Talking about a new job.", dialogue: "A: How do you like your new job?\nB: The company ___ hired me is very professional.", options: ["that", "who", "whose", "where"], correct: 0, explanation: "Use that/which for a thing (a company)." },
-          { id: 16, situation: "Talking about origins.", dialogue: "A: Where were you born?\nB: This is the town ___ I was born.", options: ["where", "which", "who", "when"], correct: 0, explanation: "Use where for a place." },
-          { id: 17, situation: "Talking about lost items.", dialogue: "A: Did you find your keys?\nB: Yes, but the keys ___ I lost were quite expensive to replace.", options: ["which", "who", "whose", "where"], correct: 0, explanation: "Use which/that for things." },
-          { id: 18, situation: "Introducing a neighbor.", dialogue: "A: Who is that friendly person?\nB: My neighbor, ___ works at a bank, is always so kind.", options: ["who", "which", "whose", "where"], correct: 0, explanation: "Use who for a person as subject." },
-          { id: 19, situation: "Talking about property.", dialogue: "A: Whose house is that with the red roof?\nB: The house ___ roof is red belongs to my uncle.", options: ["whose", "which", "who", "where"], correct: 0, explanation: "Use whose to show possession." },
-          { id: 20, situation: "Asking about a resignation.", dialogue: "A: Do you know why she quit?\nB: Nobody knows the reason ___ she resigned.", options: ["why", "where", "when", "which"], correct: 0, explanation: "Use why for a reason." }
-        ]
+          {
+                    "id": 1,
+                    "situation": "Talking about a coworker.",
+                    "dialogue": "A: Who is that woman over there?\nB: She's the engineer ___ joined our team last week.",
+                    "options": [
+                              "who",
+                              "which",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Person subject: who."
+          },
+          {
+                    "id": 2,
+                    "situation": "Discussing a missing item.",
+                    "dialogue": "A: Did you find the keys ___ you lost?\nB: Yes, they were under the sofa.",
+                    "options": [
+                              "that",
+                              "who",
+                              "whose",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing object: that."
+          },
+          {
+                    "id": 3,
+                    "situation": "Recommending a place.",
+                    "dialogue": "A: Where should we have dinner?\nB: Let's go to the Italian place ___ we met last month.",
+                    "options": [
+                              "where",
+                              "which",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Place adverb: where."
+          },
+          {
+                    "id": 4,
+                    "situation": "Talking about a neighbor.",
+                    "dialogue": "A: Do you know the man ___ dog barks all night?\nB: Yes, I spoke to him yesterday.",
+                    "options": [
+                              "whose",
+                              "who",
+                              "whom",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive: whose."
+          },
+          {
+                    "id": 5,
+                    "situation": "Sharing news about a friend.",
+                    "dialogue": "A: Did you hear about Sarah?\nB: Yes, she passed all her exams, ___ is fantastic news!",
+                    "options": [
+                              "which",
+                              "that",
+                              "what",
+                              "it"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sentential which referring to whole situation."
+          },
+          {
+                    "id": 6,
+                    "situation": "Discussing job applicants.",
+                    "dialogue": "A: How were the candidates?\nB: There were ten applicants, three of ___ had master's degrees.",
+                    "options": [
+                              "whom",
+                              "them",
+                              "which",
+                              "who"
+                    ],
+                    "correct": 0,
+                    "explanation": "Quantity + of + whom."
+          },
+          {
+                    "id": 7,
+                    "situation": "Talking about a hotel.",
+                    "dialogue": "A: Was the hotel nice?\nB: Yes, the room ___ we stayed in was huge.",
+                    "options": [
+                              "that",
+                              "where",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition 'in' at end: that/which."
+          },
+          {
+                    "id": 8,
+                    "situation": "Talking about a professor.",
+                    "dialogue": "A: Is Professor Davis strict?\nB: He is one of those teachers who ___ high standards.",
+                    "options": [
+                              "have",
+                              "has",
+                              "having",
+                              "is having"
+                    ],
+                    "correct": 0,
+                    "explanation": "Plural antecedent 'teachers': have."
+          },
+          {
+                    "id": 9,
+                    "situation": "Describing a movie.",
+                    "dialogue": "A: How was the movie?\nB: It was the best film ___ I have ever seen!",
+                    "options": [
+                              "that",
+                              "which",
+                              "what",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Superlative 'the best film' takes 'that'."
+          },
+          {
+                    "id": 10,
+                    "situation": "Discussing an assignment.",
+                    "dialogue": "A: Have you finished the report?\nB: I'm working on the section ___ deals with market research.",
+                    "options": [
+                              "which",
+                              "who",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Thing subject: which/that."
+          },
+          {
+                    "id": 11,
+                    "situation": "Asking about a vehicle.",
+                    "dialogue": "A: Whose car is parked outside?\nB: It belongs to the doctor ___ lives on the second floor.",
+                    "options": [
+                              "who",
+                              "which",
+                              "whose",
+                              "whom"
+                    ],
+                    "correct": 0,
+                    "explanation": "Person subject: who."
+          },
+          {
+                    "id": 12,
+                    "situation": "Talking about a city.",
+                    "dialogue": "A: Have you been to Samarkand?\nB: Yes, it's a city ___ rich history attracts many tourists.",
+                    "options": [
+                              "whose",
+                              "which",
+                              "that",
+                              "where"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive 'whose rich history'."
+          },
+          {
+                    "id": 13,
+                    "situation": "Meeting a famous author.",
+                    "dialogue": "A: I met J.K. Rowling yesterday!\nB: Wow! She is the author ___ books changed modern literature.",
+                    "options": [
+                              "whose",
+                              "who",
+                              "whom",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Possessive: whose books."
+          },
+          {
+                    "id": 14,
+                    "situation": "Discussing event participants.",
+                    "dialogue": "A: Who were those people in front?\nB: They were the delegates ___ from Germany.",
+                    "options": [
+                              "arriving",
+                              "arrived",
+                              "arrive",
+                              "were arrived"
+                    ],
+                    "correct": 0,
+                    "explanation": "Reduced active clause: arriving."
+          },
+          {
+                    "id": 15,
+                    "situation": "Explaining a delay.",
+                    "dialogue": "A: Why was the flight delayed?\nB: The reason ___ the flight was delayed was heavy fog.",
+                    "options": [
+                              "why",
+                              "where",
+                              "which",
+                              "whose"
+                    ],
+                    "correct": 0,
+                    "explanation": "Reason: why."
+          }
+]
       },
-      {
+{
         id: "used-to-would",
         title: "Used to & Would",
         icon: "🕰️",
@@ -7262,203 +11925,1710 @@ Preposition'dan keyin doim -ing keladi, infinitive emas:
         id: "noun-clauses",
         title: "Noun Clauses",
         icon: "🔗",
-        guide: `## Noun Clauses (Ot boʻlaklar)
+        guide: `## Noun Clauses (Ot ergash gaplar) — Sodiqjon darsligi bo'yicha to'liq qo'llanma
 
-Noun clause — gap ichida ot vazifasini bajaradigan tobelik qurilmasi. U gap ega, toʻldiruvchi yoki ot sifatida ishlatilishi mumkin.
+Noun clause — gap ichida **OT (noun)** vazifasini bajaradigan ergash gap. Relative clause otni aniqlaydi, noun clause esa otning o'rnida turadi. Bu ikkisining eng asosiy farqi.
 
-## 1. Noun clause nima?
+**TEKSHIRISH USULI:** ergash gapni *"it"*, *"something"* yoki *"the news"* so'zi bilan almashtirib ko'ring. Gap buzilmasa — bu noun clause!
+• *I know that he lied.* → *I know it.* (noun clause = object)
+• *What he said was true.* → *It was true.* (noun clause = subject)
 
-Noun clause — oʻz ichida ega va kesim saqlaydigan, lekin mustaqil gap boʻlmagan jumlaning bir qismi.
-  - **What you said** is true. (Siz aytganing toʻgʻri.) — ega sifatida
-  - I know **that she is tired**. (Men uni charchagansini bilaman.) — toʻldiruvchi sifatida
-  - The question is **whether he will come**. (Savol shuki u keladimi.) — keyingi ot sifatida
+Noun clause hech qachon vergul bilan ajratilmaydi va uni gapdan olib tashlab bo'lmaydi — u gapning ajralmas bo'lagi.
 
-## 2. Noun clause turlari
+---
 
-### 2a. "That" bilan boshlanuvchi noun clauselar
-  - She believes **that he is honest**. (U uni halol deb hisoblaydi.)
-  - I think **that they are right**. (Men ularning toʻgʻri deb oʻylayman.)
-  - It is clear **that she passed the exam**. (U imtihondan oʻtgani aniq.)
+## 1. Gapdagi 5 ta asosiy vazifasi
 
-*Eslatma: Soʻzlashuvda "that" koʻpincha tushirib qoldiriladi.*
-  - She believes (that) he is honest.
+| Vazifasi | O'rni | Misol |
+|---|---|---|
+| **Subject (Ega)** | Gap boshida | **That he resigned** surprised everyone. / **What she said** was true. |
+| **Object of verb (Fe'l to'ldiruvchisi)** | Fe'ldan keyin | She admitted **that she was wrong**. / I know **where she lives**. |
+| **Object of preposition (Predlog to'ldiruvchisi)** | Predlogdan keyin | We talked **about what happened**. / It depends **on whether they agree**. |
+| **Subject complement (Ot kesim)** | be fe'lidan keyin | The problem is **that we have no money**. |
+| **Adjective complement (Sifat to'ldiruvchisi)** | Sifatdan keyin | I am afraid **that he will refuse**. |
 
-### 2b. "Wh-" soʻzlari bilan boshlanuvchi noun clauselar (Indirect Questions)
-  - I know **where she lives**. (Men u qayerda yashashini bilaman.)
-  - Tell me **what you want**. (Menga nima xoʻhlaganingizni ayting.)
-  - He asked **who called him**. (U kim qoʻngʻiroq qilganini soʻradi.)
-  - I wonder **why she is sad**. (Men u nega xafadir deb oʻylayman.)
+---
 
-*Diqqat: Noun clause ichida soʻz tartibi toʻgʻri gap tartibida — savol tartibida emas!*
-  - ✅ I know **where she lives**. (toʻgʻri)
-  - ❌ I know **where does she live**. (notoʻgʻri)
+## 2. Uch turi va bog'lovchilari
 
-### 2c. "Whether / If" bilan boshlanuvchi noun clauselar
-  - I don't know **whether she is coming**. (Men u kelishini bilmayman.)
-  - He asked **if the store was open**. (U doʻkon ochiqmi deb soʻradi.)
-  - I wonder **whether they will agree**. (Men ular rozi boʻlishini bilmoqchiman.)
+Manba savol turi qanday bo'lsa, bog'lovchi ham shunga mos bo'ladi:
+• **wh-savol** → wh-so'z (*where, what, who, when, why, how, how long/many/much*)
+• **yes/no savol** → *whether / if*
+• **darak/fakt** → *that*
 
-## 3. Noun clauselarning vazifalari
+| Turi | Bog'lovchi | Misol |
+|---|---|---|
+| **that-clause** | that (tushishi mumkin) | I think **(that) she is right**. |
+| **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
+| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
 
-| Vazifa | Misol |
+▸ *Where does he live?* → I don't know **where he lives**.
+▸ *Does he live here?* → I don't know **whether he lives here**.
+
+---
+
+## 3. SO'Z TARTIBI — eng ko'p xato qilinadigan joy!
+
+Noun clause ichida darak gap tartibi (**Subject + Verb**) ishlatiladi. Noun clause ichida savol tartibi (*do / does / did / is / are / will*) ISHLATILMAYDI!
+
+• ❌ *I don't know where does he live.* → ✅ *I don't know **where he lives**.*
+• ❌ *Do you know what is the time?* → ✅ *Do you know **what the time is**?*
+• ❌ *Tell me why did she leave.* → ✅ *Tell me **why she left**.*
+
+### Bitta istisno: wh-so'zning o'zi ega bo'lsa
+Agar wh-so'z ergash gapning egasi bo'lsa, tartib o'zgarmaydi:
+• ✅ *I don't know **who broke the window**.* (who = ega)
+• ✅ *Nobody knows **what happened**.* (what = ega)
+
+### Savol belgisi masalasi
+• ✅ *Do you know where he is?* — bosh gap savol → savol belgisi (?)
+• ✅ *I wonder where he is.* — bosh gap darak → nuqta (.)
+
+---
+
+## 4. "that" ni qachon tushirish mumkin?
+
+| TUSHIRISH MUMKIN | TUSHIRISH MUMKIN EMAS |
 |---|---|
-| Ega (Subject) | **What she said** surprised me. |
-| Toʻldiruvchi (Object) | I know **that you are tired**. |
-| Ot (Predicate nominative) | The truth is **that he lied**. |
-| Preposition toʻldiruvchisi | I am interested in **what you said**. |
+| *say, think, know, believe* kabi fe'llardan keyin (object position) | Gap boshida **ega** bo'lsa (*That he lied is obvious*) |
+| Og'zaki va neytral uslubda | Rasmiy yozma uslubda |
+| *I'm sure / glad / afraid (that)...* kabi sifatlardan keyin | *so that, in order that, now that* kabi bog'lovchilarda |
+| Bitta qisqa ergash gapda | Ikki ergash gap bog'langanda ikkinchisida saqlanadi (*He said that... and that...*) |
 
-## 4. Muhim qoidalar
+---
 
-1. **Soʻz tartibi**: Noun clause ichida toʻgʻri gap tartibi (S+V) ishlatiladi — savol tartibi emas.
-   - ✅ I wonder **where he went**.
-   - ❌ I wonder **where did he go**.
-2. **"That" tushirilishi**: "that" bilan boshlanuvchi noun clause toʻldiruvchi sifatida kelganda "that" tushirilishi mumkin.
-   - She knows (that) I am here.
-3. **"Whether" vs "if"**: Ikkalasi ham "yoki yoʻq" maʼnosini beradi; "whether" rasmiyroq va "or not" bilan koʻproq ishlatiladi.
-   - I wonder **whether or not** she will come.`,
+## 5. "whether" va "if" — farqi
+
+Ikkalasi ham **"-mi"** (ha/yo'q) ma'nosini beradi, lekin **if** ning ishlatilishi cheklangan:
+
+| Holat | whether | if |
+|---|---|---|
+| Fe'ldan keyin object | ✅ | ✅ |
+| Predlogdan keyin | ✅ | ❌ |
+| Gap boshida ega bo'lsa | ✅ | ❌ |
+| *or not* bevosita yonida | ✅ (*whether or not*) | ❌ |
+| *to-infinitive* oldidan | ✅ (*whether to go*) | ❌ |
+| Rasmiy uslubda | ✅ | kamroq |
+
+• ✅ *It depends on **whether** he agrees.* (predlogdan keyin)
+• ❌ *It depends on if he agrees.*
+• ✅ ***Whether** he agrees is not my problem.* (ega)
+• ❌ *If he agrees is not my problem.*
+• ✅ *I don't know **whether or not** to accept.*
+• ✅ *I don't know **whether to accept** the offer.*
+• ❌ *I don't know if to accept.*
+
+---
+
+## 6. Wh-so'z + to-infinitive (Qisqargan shakl)
+
+Ega ikkala gapda bir xil bo'lsa va ma'noda "kerak / mumkin" tushunchasi bo'lsa, noun clause qisqaradi:
+• *I don't know what I should do.* → *I don't know **what to do**.*
+• *She explained how we could fix it.* → *She explained **how to fix it**.*
+• *He couldn't decide whether he should stay.* → *...**whether to stay**.*
+
+**MUHIM:** ***why*** bu shaklda ishlatilmaydi va ***that-clause*** umuman qisqarmaydi!
+• ❌ *I don't know why to go.*
+• ❌ *I know that to do.*
+
+---
+
+## 7. Zamon moslashuvi (Backshift)
+
+Bosh gapdagi fe'l o'tgan zamonda bo'lsa, noun clause fe'li ham bir pog'ona orqaga suriladi:
+• is / are → **was / were**
+• works → **worked**
+• worked / has worked → **had worked**
+• will → **would**
+• can / may / must → **could / might / had to**
+
+▸ *“I am busy,” he said.* → *He said that he **was** busy.*
+
+### Backshift qilinmaydigan holatlar:
+1. **Umumiy haqiqat:** *The teacher said that water **boils** at 100°C.*
+2. **Hozir ham o'z kuchida bo'lgan holat:** *She said she **lives** in Tashkent.*
+3. **Bosh gap hozirgi zamonda bo'lsa:** *He says that he **is** tired.*
+
+---
+
+## 8. Subjunctive — that + fe'lning asosiy shakli (Bare Infinitive)
+
+Talab, taklif, buyruq bildiruvchi so'zlardan keyin that-clause ichida fe'l shaxsga qarab o'zgarmaydi: to'g'ridan-to'g'ri **asosiy shakl (bare infinitive = V1)** ishlatiladi. Inkor: **not + V1**.
+
+• **Fe'llar:** *suggest, recommend, demand, insist, require, request, propose, urge, ask, order, command*
+• **Sifatlar (It is ... that ...):** *essential, important, vital, necessary, crucial, imperative, advisable*
+
+• ✅ *The board demanded that he **resign** immediately.* (resigns emas)
+• ✅ *It is essential that every student **be** present.* (is emas)
+• ✅ *She insisted that he **not be** told.* (inkor shakli)
+• ❌ *The board demanded that he resigned immediately.*
+
+*Britaniya uslubida ko'pincha "should" qo'shiladi: "demanded that he should resign". Amerika uslubida "should" tushiriladi.*
+
+---
+
+## 9. Ega bo'lgan noun clause va "it" bilan almashtirish (Extraposition)
+
+Uzun noun clause gap boshida og'ir eshitiladi. Shuning uchun uni oxiriga ko'chirib, o'rniga formal **"it"** qo'yiladi:
+• *That he lied to us is obvious.* → ***It is obvious that** he lied to us.* (tabiiyroq)
+• *Whether he agrees doesn't matter.* → ***It doesn't matter whether** he agrees.*
+
+### Fe'lning moslashuvi:
+Noun clause ega bo'lganda fe'l **DOIM BIRLIKDA** bo'ladi — ergash gap ichida ko'plik so'zlar bo'lsa ham:
+• ✅ ***What we need is** more chairs.*
+• ❌ *What we need are more chairs.* (testda xato!)
+
+---
+
+## 10. Predlogdan keyin noun clause va "the fact that"
+
+Predlogdan keyin *wh-clause* va *whether-clause* bemalol keladi, lekin ***that-clause* KELMAYDI!**
+• ✅ *I'm worried **about what he will say**.*
+• ✅ *It depends **on whether they agree**.*
+• ❌ *I'm worried about that he will leave.*
+
+**YECHIM:** predlogni olib tashlang yoki **"the fact that"** qolipini ishlating:
+▸ *I'm worried **that he will leave**.* / *I'm worried **about the fact that he will leave**.*
+
+*Istisnolar:* ***in that***, ***except that***, ***save that*** — bu bog'lovchilar that bilan keladi: *"The plan is good except that it costs too much."*
+
+---
+
+## 11. Appositive noun clause — otdan keyingi izoh
+
+Ba'zi mavhum otlardan keyin ularning mazmunini ochib beruvchi that-clause keladi: *fact, idea, belief, news, rumour, claim, hope, possibility, suggestion, question*.
+• *The news **that the factory would close** shocked the town.*
+• *The possibility **that we may lose** has not been discussed.*
+
+**FARQI:**
+• *The news **that shocked the town*** → Relative clause (*that* = ega, o'zi ot o'rnida)
+• *The news **that the factory would close*** → Noun clause (*that* bo'sh bog'lovchi, to'liq gap keladi)
+
+---
+
+## 12. Noun clause va Relative clause — solishtirma jadval
+
+| Belgi | NOUN CLAUSE | RELATIVE CLAUSE |
+|---|---|---|
+| **Vazifasi** | Otning o'rnida turadi | Otni aniqlaydi |
+| **Antecedent (oldidagi ot)** | YO'Q | BOR |
+| **Olib tashlash** | Mumkin emas — gap buziladi | Mumkin (non-defining'da) |
+| **what** | Ishlatiladi | Hech qachon ishlatilmaydi |
+| **that ning roli** | Bo'sh bog'lovchi, vazifasi yo'q | Olmosh: ega yoki to'ldiruvchi |
+| **Vergul** | Hech qachon | Non-defining'da majburiy |
+
+---
+
+## 13. Eng ko'p uchraydigan 8 ta xato
+
+1. ❌ *I don't know where does he live.* → ✅ *where he lives* (savol tartibi yo'q)
+2. ❌ *Do you know what is the time?* → ✅ *what the time is*
+3. ❌ *Tell me why did she leave.* → ✅ *why she left* (did tushadi)
+4. ❌ *It depends on if he comes.* → ✅ *on whether* (predlogdan keyin if yo'q)
+5. ❌ *I'm sure about that he will come.* → ✅ *I'm sure that he will come*
+6. ❌ *The words what he said...* → ✅ *that / which* (antecedent bor)
+7. ❌ *They demanded that he resigned.* → ✅ *that he resign* (subjunctive)
+8. ❌ *What we need are more chairs.* → ✅ *is* (noun clause ega — birlik)
+
+---
+
+## 14. Bir sahifalik xulosa jadvali
+
+| Savol | Javob / Natija | Misol |
+|---|---|---|
+| Manba wh-savolmi? | wh-so'z + ega + kesim (*do/does/did* yo'q) | *I know where he lives.* |
+| Manba yes/no savolmi? | whether (yoki if — cheklovlar bilan) | *I wonder whether he knows.* |
+| Predlogdan keyinmi? | that yo'q → *the fact that* / *whether* | *depends on whether...* |
+| Ega vazifasidami? | that tushmaydi; fe'l birlikda | *That he lied is true.* |
+| demand / suggest / essential dan keyinmi? | that + fe'lning asosiy shakli (V1) | *demanded that he resign* |
+| Ega ikkala gapda bir xilmi? | wh-so'z + to-infinitive bilan qisqaradi | *I don't know what to do.* |
+| Oldida ot bormi? | Relative clause bo'lishi mumkin — farqlang! | *The news that he left...* |
+`,
+        guideRu: `## Noun Clauses (Придаточные существительные) — Полное руководство по материалам Содикжона
+
+Noun Clause — это придаточное предложение, которое выполняет роль **существительного (подлежащего, дополнения или сказуемого)**. В отличие от Relative Clause, оно не описывает существительное, а занимает его место.
+
+**СПОСОБ ПРОВЕРКИ:** замените придаточное предложение словом *"it"*, *"something"* или *"the news"*. Если предложение остаётся грамматически корректным — перед вами Noun Clause!
+• *I know that he lied.* → *I know it.* (noun clause = дополнение)
+• *What he said was true.* → *It was true.* (noun clause = подлежащее)
+
+Noun clause никогда не выделяется запятыми и не может быть удалено из предложения без потери грамматической целостности.
+
+---
+
+## 1. 5 основных синтаксических функций
+
+| Функция | Позиция | Пример |
+|---|---|---|
+| **Subject (Подлежащее)** | В начале предложения | **That he resigned** surprised everyone. / **What she said** was true. |
+| **Object of verb (Прямое дополнение)** | После глагола | She admitted **that she was wrong**. / I know **where she lives**. |
+| **Object of preposition (Предложное дополнение)** | После предлога | We talked **about what happened**. / It depends **on whether they agree**. |
+| **Subject complement (Именная часть сказуемого)** | После глагола be | The problem is **that we have no money**. |
+| **Adjective complement (Дополнение к прилагательному)** | После прилагательного | I am afraid **that he will refuse**. |
+
+---
+
+## 2. 3 основных типа и их союзы
+
+Тип союза зависит от исходного предложения:
+• **wh-вопрос** → wh-слово (*where, what, who, when, why, how, how long/many/much*)
+• **вопрос да/нет** → *whether / if*
+• **утверждение / факт** → *that*
+
+| Тип | Союз | Пример |
+|---|---|---|
+| **that-clause** | that (может опускаться) | I think **(that) she is right**. |
+| **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
+| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
+
+▸ *Where does he live?* → I don't know **where he lives**.
+▸ *Does he live here?* → I don't know **whether he lives here**.
+
+---
+
+## 3. ПОРЯДОК СЛОВ — Самая частая ошибка!
+
+Внутри Noun Clause используется **прямой порядок слов (Подлежащее + Сказуемое)**. Вопросительный порядок слов (*do / does / did / is / are / will*) в Noun Clause НЕ ИСПОЛЬЗУЕТСЯ!
+
+• ❌ *I don't know where does he live.* → ✅ *I don't know **where he lives**.*
+• ❌ *Do you know what is the time?* → ✅ *Do you know **what the time is**?*
+• ❌ *Tell me why did she leave.* → ✅ *Tell me **why she left**.*
+
+### Исключение: когда wh-слово само является подлежащим
+Если вопросительное слово выступает подлежащим придаточного, порядок слов не меняется:
+• ✅ *I don't know **who broke the window**.* (who = подлежащее)
+• ✅ *Nobody knows **what happened**.* (what = подлежащее)
+
+### Знак вопроса
+• ✅ *Do you know where he is?* — главное предложение вопросительное → знак вопроса (?)
+• ✅ *I wonder where he is.* — главное предложение утвердительное → точка (.)
+
+---
+
+## 4. Когда можно опускать союз "that"?
+
+| МОЖНО ОПУСКАТЬ | НЕЛЬЗЯ ОПУСКАТЬ |
+|---|---|
+| После глаголов речи и мысли (*say, think, know, believe*) в роли дополнения | В позиции **подлежащего** в начале предложения (*That he lied is obvious*) |
+| В разговорной и нейтральной речи | В официальном письменном стиле |
+| После прилагательных (*I'm sure / glad / afraid (that)...*) | В составных союзах (*so that, in order that, now that*) |
+| В одиночном коротком придаточном | При объединении двух придаточных второй союз сохраняется (*He said that... and that...*) |
+
+---
+
+## 5. Разница между "whether" и "if"
+
+Оба союза переводятся как частица **"ли"**, но использование **if** строго ограничено:
+
+| Условие | whether | if |
+|---|---|---|
+| Дополнение после глагола | ✅ | ✅ |
+| После предлога | ✅ | ❌ |
+| В начале предложения (подлежащее) | ✅ | ❌ |
+| Непосредственно перед *or not* | ✅ (*whether or not*) | ❌ |
+| Перед *to-infinitive* | ✅ (*whether to go*) | ❌ |
+| В официальном стиле | ✅ | реже |
+
+• ✅ *It depends on **whether** he agrees.* (после предлога)
+• ❌ *It depends on if he agrees.*
+• ✅ ***Whether** he agrees is not my problem.* (подлежащее)
+• ❌ *If he agrees is not my problem.*
+• ✅ *I don't know **whether or not** to accept.*
+• ✅ *I don't know **whether to accept** the offer.*
+• ❌ *I don't know if to accept.*
+
+---
+
+## 6. Wh-слово + to-infinitive (Сокращённая форма)
+
+Если подлежащие главного и придаточного предложений совпадают и значение передаёт модальность "следует / можно", Noun Clause сокращается:
+• *I don't know what I should do.* → *I don't know **what to do**.*
+• *She explained how we could fix it.* → *She explained **how to fix it**.*
+• *He couldn't decide whether he should stay.* → *...**whether to stay**.*
+
+**ВАЖНО:** союз ***why*** в такой форме НЕ используется, а ***that-clause*** никогда не сокращается!
+• ❌ *I don't know why to go.*
+• ❌ *I know that to do.*
+
+---
+
+## 7. Согласование времён (Backshift)
+
+Если глагол главного предложения стоит в прошедшем времени, глагол в Noun Clause сдвигается на шаг назад:
+• is / are → **was / were**
+• works → **worked**
+• worked / has worked → **had worked**
+• will → **would**
+• can / may / must → **could / might / had to**
+
+▸ *«I am busy,» he said.* → *He said that he **was** busy.*
+
+### Исключения из согласования времён:
+1. **Общеизвестные факты:** *The teacher said that water **boils** at 100°C.*
+2. **Ситуация, актуальная сейчас:** *She said she **lives** in Tashkent.*
+3. **Главное предложение в настоящем времени:** *He says that he **is** tired.*
+
+---
+
+## 8. Сослагательное наклонение (Subjunctive: 'that + Bare Infinitive')
+
+После глаголов и прилагательных со значением требования, совета или необходимости в 'that-clause' используется начальная форма глагола **без окончаний (Bare Infinitive = V1)**. Отрицание: **not + V1**.
+
+• **Глаголы:** *suggest, recommend, demand, insist, require, request, propose, urge, ask, order, command*
+• **Прилагательные (It is ... that ...):** *essential, important, vital, necessary, crucial, imperative, advisable*
+
+• ✅ *The board demanded that he **resign** immediately.* (не resigns)
+• ✅ *It is essential that every student **be** present.* (не is)
+• ✅ *She insisted that he **not be** told.* (форма отрицания)
+• ❌ *The board demanded that he resigned immediately.*
+
+---
+
+## 9. Noun Clause в роли подлежащего и конструктивный союз "it" (Extraposition)
+
+Длинный Noun Clause в начале предложения звучит тяжело. Поэтому его переносят в конец, а в начало ставят формальное подлежащее **"it"**:
+• *That he lied to us is obvious.* → ***It is obvious that** he lied to us.* (естественнее)
+• *Whether he agrees doesn't matter.* → ***It doesn't matter whether** he agrees.*
+
+### Согласование глагола:
+Когда Noun Clause выступает подлежащим, сказуемое **ВСЕГДА В ЕДИНСТВЕННОМ ЧИСЛЕ**:
+• ✅ ***What we need is** more chairs.*
+• ❌ *What we need are more chairs.* (ошибка в тестах!)
+
+---
+
+## 10. Noun Clause после предлогов и конструкция "the fact that"
+
+После предлогов допускаются *wh-clause* и *whether-clause*, но **'that-clause' СТРОГО ЗАПРЕЩЁН!**
+• ✅ *I'm worried **about what he will say**.*
+• ✅ *It depends **on whether they agree**.*
+• ❌ *I'm worried about that he will leave.*
+
+**РЕШЕНИЕ:** убрать предлог или использовать конструкцию **"the fact that"**:
+▸ *I'm worried **that he will leave**.* / *I'm worried **about the fact that he will leave**.*
+
+*Исключения:* ***in that***, ***except that***, ***save that*** — эти союзы используются с 'that': *"The plan is good except that it costs too much."*
+
+---
+
+## 11. Appositive Noun Clause (Изъяснительное придаточное после существительного)
+
+После абстрактных существительных (*fact, idea, belief, news, rumour, claim, hope, possibility, suggestion, question*) придаточное 'that-clause' раскрывает их содержание.
+• *The news **that the factory would close** shocked the town.*
+• *The possibility **that we may lose** has not been discussed.*
+
+**РАЗНИЦА:**
+• *The news **that shocked the town*** → Relative Clause (*that* = подлежащее, заменяет новость)
+• *The news **that the factory would close*** → Noun Clause (*that* = союз, после него идёт законченное предложение)
+
+---
+
+## 12. Сравнительная таблица Noun Clause и Relative Clause
+
+| Признак | NOUN CLAUSE | RELATIVE CLAUSE |
+|---|---|---|
+| **Функция** | Заменяет существительное | Определяет существительное |
+| **Antecedent (определяемое слово)** | НЕТ | ЕСТЬ |
+| **Удаление из предложения** | Невозможно | Возможно (в non-defining) |
+| **what** | Используется | Никогда не используется |
+| **Роль союза that** | Простой союз, не член предложения | Относительное местоимение |
+| **Запятая** | Никогда | Обязательна в non-defining |
+
+---
+
+## 13. 8 самых распространенных ошибок
+
+1. ❌ *I don't know where does he live.* → ✅ *where he lives* (прямой порядок слов)
+2. ❌ *Do you know what is the time?* → ✅ *what the time is*
+3. ❌ *Tell me why did she leave.* → ✅ *why she left*
+4. ❌ *It depends on if he comes.* → ✅ *on whether* (после предлога нельзя if)
+5. ❌ *I'm sure about that he will come.* → ✅ *I'm sure that he will come*
+6. ❌ *The words what he said...* → ✅ *that / which* (есть antecedent)
+7. ❌ *They demanded that he resigned.* → ✅ *that he resign* (subjunctive)
+8. ❌ *What we need are more chairs.* → ✅ *is* (Noun Clause = единственное число)
+
+---
+
+## 14. Одностраничная сводная таблица решений
+
+| Вопрос | Результат | Пример |
+|---|---|---|
+| Исходный вопрос с wh-словом? | wh-слово + подлежащее + сказуемое | *I know where he lives.* |
+| Исходный вопрос да/нет? | whether (или if с ограничениями) | *I wonder whether he knows.* |
+| После предлога? | без that → *the fact that* / *whether* | *depends on whether...* |
+| В роли подлежащего? | that не опускается; глагол в ед. ч. | *That he lied is true.* |
+| После demand / suggest / essential? | that + глагол в начальной форме (V1) | *demanded that he resign* |
+| Подлежащие совпадают? | wh-слово + to-infinitive | *I don't know what to do.* |
+`,
         questions: [
-          { id: 1, text: "Choose the correct noun clause:", options: ["I know where does she live.", "I know where she lives.", "I know where she does live.", "I know where lives she."], correct: 1, explanation: "Noun clause ichida toʻgʻri gap tartibi (S+V) ishlatiladi: where she lives." },
-          { id: 2, text: "What she told me ___ very surprising.", options: ["were", "was", "is being", "are"], correct: 1, explanation: "Noun clause ega sifatida birlikda ishlatilsa, kesim ham birlikda boʻladi: was." },
-          { id: 3, text: "I don't know ___ he is coming tomorrow.", options: ["that if", "whether", "where", "which"], correct: 1, explanation: "\"Whether\" — ha/yoʻq shaklidagi noun clause boshlatadi." },
-          { id: 4, text: "She told me ___ she had finished the project.", options: ["what", "whether", "that", "how much"], correct: 2, explanation: "\"That\" — taxmin yoki fakt ifodalovchi noun clause boshlatadi." },
-          { id: 5, text: "Can you tell me ___ the library is?", options: ["where", "that", "whether", "what"], correct: 0, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
-          { id: 6, text: "Which is a noun clause used as a subject?", options: ["She woke up early.", "I believe that she passed.", "That she passed the exam surprised everyone.", "She is happy about the news."], correct: 2, explanation: "\"That she passed the exam\" — ega vazifasini bajaruvchi noun clause." },
-          { id: 7, text: "I wonder ___ she is angry.", options: ["that", "why", "which", "whose"], correct: 1, explanation: "Sabab soʻralanda \"why\" ishlatiladi." },
-          { id: 8, text: "The problem is ___ we don't have enough money.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "\"The problem is that...\" — predicate nominative vazifasini bajaruvchi noun clause." },
-          { id: 9, text: "Tell me ___ you want for your birthday.", options: ["that", "whether", "if", "what"], correct: 3, explanation: "\"What\" — narsa yoki narsalar soʻralanda ishlatiladi." },
-          { id: 10, text: "I'm not sure ___ she will accept the offer or not.", options: ["that", "what", "whether", "who"], correct: 2, explanation: "\"Whether...or not\" — ikki variant orasida tanlov ifodalaydi." },
-          { id: 11, text: "He asked me ___ I had seen his keys.", options: ["that", "if", "what", "where"], correct: 1, explanation: "Bilvosita ha/yoʻq savollarda \"if\" ishlatiladi." },
-          { id: 12, text: "Choose the correct word order in the noun clause: \"I know ___ (she, lives, where).\"", options: ["where does she live", "where she lives", "where lives she", "where she does live"], correct: 1, explanation: "Noun clause ichida toʻgʻri tartib: where + she + lives." },
-          { id: 13, text: "Identify the noun clause: \"I believe that honesty is the best policy.\"", options: ["I believe", "that honesty", "that honesty is the best policy", "the best policy"], correct: 2, explanation: "\"That honesty is the best policy\" — toʻliq noun clause." },
-          { id: 14, text: "___ he was late didn't surprise me.", options: ["If", "That", "What", "Whether"], correct: 1, explanation: "Ega vazifasidagi noun clause \"That\" bilan boshlanadi." },
-          { id: 15, text: "I am interested in ___ you did last summer.", options: ["that", "if", "what", "whether"], correct: 2, explanation: "Preposition (in) dan keyin \"what\" bilan boshlanuvchi noun clause keladi." },
-          { id: 16, text: "Nobody knows ___ the meeting will be held.", options: ["what", "that", "where", "if that"], correct: 2, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
-          { id: 17, text: "She didn't say ___ she was upset.", options: ["whether", "what", "who", "that"], correct: 3, explanation: "Fakt yoki his-tuyg'u ifodalanda \"that\" ishlatiladi." },
-          { id: 18, text: "Which sentence contains a noun clause used as an object?", options: ["Running is healthy.", "I know that she passed.", "She runs every day.", "The book on the table is mine."], correct: 1, explanation: "\"That she passed\" — toʻldiruvchi vazifasidagi noun clause." },
-          { id: 19, text: "The question is ___ we should accept their proposal.", options: ["what", "whether", "who", "how much"], correct: 1, explanation: "\"Whether\" — ikki imkoniyat orasidan birini tanlash vaziyatida." },
-          { id: 20, text: "Tell me ___ you found the answer.", options: ["that", "how", "if", "which"], correct: 1, explanation: "Usul/yo'l soʻralanda \"how\" ishlatiladi." },
-          { id: 21, text: "I don't understand ___ she is crying.", options: ["what", "that", "why", "if"], correct: 2, explanation: "Sabab soʻralanda \"why\" ishlatiladi." },
-          { id: 22, text: "Do you know ___ called while I was out?", options: ["that", "whether", "who", "which"], correct: 2, explanation: "Shaxs soʻralanda \"who\" ishlatiladi." },
-          { id: 23, text: "She believes ___ hard work pays off.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "E'tiqod/fikr ifodalanda \"that\" ishlatiladi." },
-          { id: 24, text: "I'm curious about ___ she reacted to the news.", options: ["that", "how", "if", "whether"], correct: 1, explanation: "Reaktsiya usuli soʻralanda \"how\" ishlatiladi." },
-          { id: 25, text: "What surprised everyone was ___ she finished first.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "Predicate nominative vazifasida \"that\" ishlatiladi." },
-          { id: 26, text: "He explained ___ the machine works.", options: ["if", "that", "how", "whether"], correct: 2, explanation: "Usul/mexanizm tushuntiranda \"how\" ishlatiladi." },
-          { id: 27, text: "I wonder ___ she has already left.", options: ["that", "how", "if", "which"], correct: 2, explanation: "Noaniqlik ifodalanda \"if/whether\" ishlatiladi." },
-          { id: 28, text: "Which sentence is grammatically correct?", options: ["I know where does he live.", "I know where he lives.", "I know where he does live.", "I know where live he."], correct: 1, explanation: "Noun clause ichida soʻz tartibi: where + he + lives (S+V)." },
-          { id: 29, text: "They haven't decided ___ to hold the party indoors or outdoors.", options: ["what", "that", "whether", "who"], correct: 2, explanation: "Ikki variant orasida tanlov ifodalanda \"whether\" ishlatiladi." },
-          { id: 30, text: "The truth is ___ nobody told her about the change.", options: ["if", "whether", "that", "what"], correct: 2, explanation: "\"The truth is that...\" — predicate nominative vazifasidagi noun clause." },
-        ],
+          {
+                    "id": 1,
+                    "text": "Choose the correct indirect question:",
+                    "options": [
+                              "I don't know where does he live.",
+                              "I don't know where he lives.",
+                              "I don't know where lives he.",
+                              "I don't know where does live he."
+                    ],
+                    "correct": 1,
+                    "explanation": "Noun clause ichida darak gap tartibi (S+V) ishlatiladi: where he lives."
+          },
+          {
+                    "id": 2,
+                    "text": "Do you know what time ___?",
+                    "options": [
+                              "is it",
+                              "it is",
+                              "does it be",
+                              "is it being"
+                    ],
+                    "correct": 1,
+                    "explanation": "Noun clause savol emas, darak tartibida bo'ladi: what time it is."
+          },
+          {
+                    "id": 3,
+                    "text": "___ he resigned surprised everyone in the office.",
+                    "options": [
+                              "What",
+                              "That",
+                              "If",
+                              "Whether"
+                    ],
+                    "correct": 1,
+                    "explanation": "Gap boshida ega bo'lgan darak noun clause 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 4,
+                    "text": "It depends on ___ they will agree to the proposal.",
+                    "options": [
+                              "if",
+                              "whether",
+                              "that",
+                              "what"
+                    ],
+                    "correct": 1,
+                    "explanation": "Predlogdan (on) keyin 'if' ishlatilmaydi, faqat 'whether' ishlatiladi."
+          },
+          {
+                    "id": 5,
+                    "text": "I don't know ___ to do next.",
+                    "options": [
+                              "that",
+                              "if",
+                              "what",
+                              "whether"
+                    ],
+                    "correct": 2,
+                    "explanation": "Harakatni (nima qilishni) bildiruvchi qisqargan noun clause: what to do."
+          },
+          {
+                    "id": 6,
+                    "text": "The manager demanded that every employee ___ on time.",
+                    "options": [
+                              "is",
+                              "be",
+                              "was",
+                              "are"
+                    ],
+                    "correct": 1,
+                    "explanation": "Demanded (taklif/talab) fe'lidan keyin Subjunctive mood: bare infinitive (be) ishlatiladi."
+          },
+          {
+                    "id": 7,
+                    "text": "It is essential that he ___ the report by Friday.",
+                    "options": [
+                              "submits",
+                              "submit",
+                              "submitted",
+                              "has submitted"
+                    ],
+                    "correct": 1,
+                    "explanation": "It is essential that... qurilmasida subjunctive: bare infinitive (submit) ishlatiladi."
+          },
+          {
+                    "id": 8,
+                    "text": "What we need most ___ more experienced engineers.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "to be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause ega bo'lganda fe'l DOIM birlikda (is) bo'ladi."
+          },
+          {
+                    "id": 9,
+                    "text": "She was worried about the fact ___ she had lost her passport.",
+                    "options": [
+                              "if",
+                              "whether",
+                              "that",
+                              "what"
+                    ],
+                    "correct": 2,
+                    "explanation": "Predlogdan keyin that-clause ishlatish uchun 'the fact that' qolipi kerak."
+          },
+          {
+                    "id": 10,
+                    "text": "Nobody knows who ___ the window last night.",
+                    "options": [
+                              "did break",
+                              "broke",
+                              "does break",
+                              "has broken"
+                    ],
+                    "correct": 1,
+                    "explanation": "Wh-so'z (who) ergash gapning egasi bo'lsa, oddiy o'tgan zamon fe'li (broke) ishlatiladi."
+          },
+          {
+                    "id": 11,
+                    "text": "He asked me ___ I could help him with his assignment.",
+                    "options": [
+                              "that",
+                              "whether",
+                              "what",
+                              "where"
+                    ],
+                    "correct": 1,
+                    "explanation": "Ha/yo'q savolni bilvosita gapga aylantirganda 'whether' yoki 'if' ishlatiladi."
+          },
+          {
+                    "id": 12,
+                    "text": "The news ___ the factory would close shocked the community.",
+                    "options": [
+                              "which",
+                              "what",
+                              "that",
+                              "whose"
+                    ],
+                    "correct": 2,
+                    "explanation": "Appositive noun clause: 'the news that...' - that bu yerda bo'sh bog'lovchi."
+          },
+          {
+                    "id": 13,
+                    "text": "I can't decide whether ___ the job offer or stay here.",
+                    "options": [
+                              "accepting",
+                              "to accept",
+                              "accept",
+                              "accepted"
+                    ],
+                    "correct": 1,
+                    "explanation": "Whether + to-infinitive (whether to accept) qisqargan noun clause shakli."
+          },
+          {
+                    "id": 14,
+                    "text": "She said that she ___ for the exam all night.",
+                    "options": [
+                              "has studied",
+                              "had studied",
+                              "studies",
+                              "will study"
+                    ],
+                    "correct": 1,
+                    "explanation": "Bosh gap o'tgan zamonda (said) bo'lgani uchun backshift: past perfect (had studied)."
+          },
+          {
+                    "id": 15,
+                    "text": "I wonder ___ she didn't come to the meeting.",
+                    "options": [
+                              "why",
+                              "that",
+                              "what",
+                              "whether or not"
+                    ],
+                    "correct": 0,
+                    "explanation": "Sabab so'ralganda 'why' bog'lovchisi ishlatiladi."
+          },
+          {
+                    "id": 16,
+                    "text": "Which sentence is INCORRECT?",
+                    "options": [
+                              "I don't know why to go.",
+                              "I don't know where to go.",
+                              "I don't know what to do.",
+                              "I don't know whether to stay."
+                    ],
+                    "correct": 0,
+                    "explanation": "'why' bilan to-infinitive qisqartirish ISHLATILMAYDI."
+          },
+          {
+                    "id": 17,
+                    "text": "Which sentence is CORRECT?",
+                    "options": [
+                              "It depends on if he comes.",
+                              "It depends on whether he comes.",
+                              "It depends on that he comes.",
+                              "It depends if he comes or no."
+                    ],
+                    "correct": 1,
+                    "explanation": "Predlogdan (on) keyin faqat 'whether' to'g'ri."
+          },
+          {
+                    "id": 18,
+                    "text": "He explained to us ___ the new system works.",
+                    "options": [
+                              "how",
+                              "that how",
+                              "if how",
+                              "what how"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ishlash usulini tushuntirganda 'how' noun clause boshlatadi."
+          },
+          {
+                    "id": 19,
+                    "text": "She insisted that he ___ invited to the ceremony.",
+                    "options": [
+                              "is not",
+                              "was not",
+                              "not be",
+                              "doesn't be"
+                    ],
+                    "correct": 2,
+                    "explanation": "Subjunctive mood inkor shakli: not + bare infinitive (not be)."
+          },
+          {
+                    "id": 20,
+                    "text": "___ he will win the election remains uncertain.",
+                    "options": [
+                              "If",
+                              "Whether",
+                              "That if",
+                              "What"
+                    ],
+                    "correct": 1,
+                    "explanation": "Gap boshida ega bo'lgan yes/no noun clause faqat 'Whether' bilan boshlanadi."
+          }
+],
         fillBlanks: [
-          { id: 1, text: "I know ___ she is telling the truth.", options: ["if", "that", "how", "whether"], correct: 1, explanation: "Fakt ifodalanda \"that\" ishlatiladi." },
-          { id: 2, text: "Can you tell me ___ the nearest bank is?", options: ["what", "that", "where", "whether"], correct: 2, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
-          { id: 3, text: "I'm not sure ___ he will pass the test.", options: ["that", "how", "whether", "who"], correct: 2, explanation: "Noaniqlik ifodalanda \"whether\" ishlatiladi." },
-          { id: 4, text: "___ she said really upset me.", options: ["That", "Whether", "If", "How"], correct: 0, explanation: "Ega vazifasidagi noun clause \"What\" yoki \"That\" bilan boshlanishi mumkin; bu yerda \"What\" toʻgʻriroq, lekin \"That\" ham maʼnoni beradi." },
-          { id: 5, text: "He doesn't know ___ to do next.", options: ["that", "if", "what", "whether"], correct: 2, explanation: "Nima qilish kerakligini bildiruvchi noun clause: what." },
-          { id: 6, text: "I wonder ___ they arrived safely.", options: ["that", "whether", "who", "which"], correct: 1, explanation: "Noaniqlik/tashvish ifodalanda \"whether\" ishlatiladi." },
-          { id: 7, text: "Tell me ___ you finished the homework.", options: ["when", "that", "if", "who"], correct: 0, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
-          { id: 8, text: "The question is ___ we have enough time.", options: ["what", "that", "whether", "who"], correct: 2, explanation: "Ha/yoʻq muammo ifodalanda \"whether\" ishlatiladi." },
-          { id: 9, text: "She thinks ___ you should try harder.", options: ["if", "that", "whether", "how"], correct: 1, explanation: "Fikr yoki maslahat ifodalanda \"that\" ishlatiladi." },
-          { id: 10, text: "I don't understand ___ she got so upset.", options: ["what", "why", "that", "whether"], correct: 1, explanation: "Sabab soʻralanda \"why\" ishlatiladi." },
-          { id: 11, text: "Do you know ___ the store closes?", options: ["if", "whether", "when", "that"], correct: 2, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
-          { id: 12, text: "He asked ___ I had finished the report.", options: ["that", "if", "what", "how"], correct: 1, explanation: "Bilvosita ha/yoʻq savollarda \"if\" ishlatiladi." },
-          { id: 13, text: "She showed me ___ to use the new software.", options: ["that", "if", "how", "whether"], correct: 2, explanation: "Usul/yoʻl koʻrsatishda \"how\" ishlatiladi." },
-          { id: 14, text: "I believe ___ honesty is very important.", options: ["if", "whether", "that", "how"], correct: 2, explanation: "E'tiqod ifodalanda \"that\" ishlatiladi." },
-          { id: 15, text: "___ you decide is fine with me.", options: ["That", "Whether", "What", "If"], correct: 2, explanation: "\"What\" — ega vazifasidagi noun clause boshlatadi: \"What you decide\"." },
-          { id: 16, text: "I'm curious about ___ she learned to paint.", options: ["that", "if", "how", "whether"], correct: 2, explanation: "Preposition (about) dan keyin \"how\" bilan noun clause keladi." },
-          { id: 17, text: "Nobody told me ___ the meeting was cancelled.", options: ["whether", "how", "that", "who"], correct: 2, explanation: "Fakt xabari: \"that\" ishlatiladi." },
-          { id: 18, text: "I'm not sure ___ she accepted the job offer.", options: ["whether", "that", "how", "who"], correct: 0, explanation: "Ha/yoʻq noaniqligida \"whether\" ishlatiladi." },
-          { id: 19, text: "He asked ___ had called while he was away.", options: ["that", "if", "what", "who"], correct: 3, explanation: "Shaxs soʻralanda \"who\" ishlatiladi." },
-          { id: 20, text: "The fact is ___ we need more data.", options: ["if", "whether", "that", "how"], correct: 2, explanation: "Fakt ifodalanda \"that\" ishlatiladi." },
-        ],
+          {
+                    "id": 1,
+                    "text": "I have no idea where she ___ (live).",
+                    "options": [
+                              "lives",
+                              "does live",
+                              "living",
+                              "is live"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause ichida darak gap tartibi (lives)."
+          },
+          {
+                    "id": 2,
+                    "text": "Do you know what time the bank ___ (close)?",
+                    "options": [
+                              "closes",
+                              "does close",
+                              "closing",
+                              "close"
+                    ],
+                    "correct": 0,
+                    "explanation": "Indirect question: subject + verb (the bank closes)."
+          },
+          {
+                    "id": 3,
+                    "text": "It is essential that every member ___ (be) informed.",
+                    "options": [
+                              "be",
+                              "is",
+                              "was",
+                              "are"
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive after 'essential that': bare infinitive (be)."
+          },
+          {
+                    "id": 4,
+                    "text": "They discussed whether ___ (buy) a new house.",
+                    "options": [
+                              "to buy",
+                              "buying",
+                              "buy",
+                              "bought"
+                    ],
+                    "correct": 0,
+                    "explanation": "Whether + to-infinitive."
+          },
+          {
+                    "id": 5,
+                    "text": "She admitted that she ___ (make) a huge mistake.",
+                    "options": [
+                              "had made",
+                              "has made",
+                              "makes",
+                              "will make"
+                    ],
+                    "correct": 0,
+                    "explanation": "Backshift after past verb 'admitted': had made."
+          },
+          {
+                    "id": 6,
+                    "text": "What we urgent need ___ (be) more time.",
+                    "options": [
+                              "is",
+                              "are",
+                              "were",
+                              "to be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause as subject takes singular verb (is)."
+          },
+          {
+                    "id": 7,
+                    "text": "I am not sure ___ she will accept the invitation.",
+                    "options": [
+                              "whether",
+                              "that if",
+                              "what",
+                              "which"
+                    ],
+                    "correct": 0,
+                    "explanation": "Uncertainty uses 'whether'."
+          },
+          {
+                    "id": 8,
+                    "text": "He asked me why I ___ (be) late yesterday.",
+                    "options": [
+                              "was",
+                              "were",
+                              "am",
+                              "had been"
+                    ],
+                    "correct": 0,
+                    "explanation": "Indirect question word order: why I was late."
+          },
+          {
+                    "id": 9,
+                    "text": "The doctor recommended that he ___ (take) a week off.",
+                    "options": [
+                              "take",
+                              "takes",
+                              "took",
+                              "taking"
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive mood: recommend that + bare infinitive (take)."
+          },
+          {
+                    "id": 10,
+                    "text": "Could you tell me how much this coat ___ (cost)?",
+                    "options": [
+                              "costs",
+                              "does cost",
+                              "costing",
+                              "cost"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause word order: how much this coat costs."
+          },
+          {
+                    "id": 11,
+                    "text": "It depends on ___ he passes the exam or not.",
+                    "options": [
+                              "whether",
+                              "if",
+                              "that",
+                              "what"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + whether."
+          },
+          {
+                    "id": 12,
+                    "text": "___ she said shocked everyone in the room.",
+                    "options": [
+                              "What",
+                              "That",
+                              "If",
+                              "Which"
+                    ],
+                    "correct": 0,
+                    "explanation": "'What' as subject noun clause connector."
+          },
+          {
+                    "id": 13,
+                    "text": "I didn't realize that you ___ (be) waiting so long.",
+                    "options": [
+                              "had been",
+                              "have been",
+                              "are",
+                              "will be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Past backshift: had been."
+          },
+          {
+                    "id": 14,
+                    "text": "She explained how to ___ (solve) the problem.",
+                    "options": [
+                              "solve",
+                              "solving",
+                              "solved",
+                              "solves"
+                    ],
+                    "correct": 0,
+                    "explanation": "wh-word + to-infinitive (how to solve)."
+          },
+          {
+                    "id": 15,
+                    "text": "The belief that the earth ___ (be) flat was common.",
+                    "options": [
+                              "was",
+                              "is",
+                              "were",
+                              "be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Appositive noun clause backshift."
+          },
+          {
+                    "id": 16,
+                    "text": "He suggested that we ___ (start) early tomorrow.",
+                    "options": [
+                              "start",
+                              "starts",
+                              "started",
+                              "starting"
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive bare infinitive (start)."
+          },
+          {
+                    "id": 17,
+                    "text": "I don't know who ___ (break) the computer.",
+                    "options": [
+                              "broke",
+                              "did break",
+                              "breaks",
+                              "is break"
+                    ],
+                    "correct": 0,
+                    "explanation": "Wh-word as subject: broke."
+          },
+          {
+                    "id": 18,
+                    "text": "It is obvious that he ___ (tell) the truth.",
+                    "options": [
+                              "is telling",
+                              "tells",
+                              "told",
+                              "be telling"
+                    ],
+                    "correct": 0,
+                    "explanation": "Extraposition with 'it is obvious that'."
+          },
+          {
+                    "id": 19,
+                    "text": "She is worried about the fact that she ___ (not have) enough experience.",
+                    "options": [
+                              "does not have",
+                              "not has",
+                              "had not",
+                              "not having"
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + the fact that + clause."
+          },
+          {
+                    "id": 20,
+                    "text": "Whether we win or lose ___ (depend) on our team spirit.",
+                    "options": [
+                              "depends",
+                              "depend",
+                              "depending",
+                              "are depending"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause subject takes singular verb (depends)."
+          }
+],
         scrambled: [
-          { id: 1, words: ["know", "I", "she", "where", "lives"], answer: "I know where she lives.", explanation: "Noun clause: where + S + V tartibi." },
-          { id: 2, words: ["said", "me", "she", "that", "told", "she", "was", "happy"], answer: "She told me that she was happy.", explanation: "Main clause + that + noun clause." },
-          { id: 3, words: ["coming", "know", "don't", "I", "whether", "he", "is"], answer: "I don't know whether he is coming.", explanation: "Noaniqlik: whether + S + V." },
-          { id: 4, words: ["surprised", "what", "she", "said", "me"], answer: "What she said surprised me.", explanation: "Noun clause ega sifatida: What + S + V + main verb." },
-          { id: 5, words: ["that", "they", "believe", "right", "I", "are"], answer: "I believe that they are right.", explanation: "E'tiqod: main clause + that + noun clause." },
-          { id: 6, words: ["happened", "tell", "what", "me"], answer: "Tell me what happened.", explanation: "Buyruq gap + noun clause (what + V)." },
-          { id: 7, words: ["is", "the", "she", "question", "coming", "whether"], answer: "The question is whether she is coming.", explanation: "Predicate nominative: The question is + whether + S + V." },
-          { id: 8, words: ["know", "he", "why", "not", "does", "she", "left"], answer: "He does not know why she left.", explanation: "Sabab: main clause + why + S + V." },
-          { id: 9, words: ["me", "she", "how", "showed", "machine", "the", "works"], answer: "She showed me how the machine works.", explanation: "Usul: main clause + how + S + V." },
-          { id: 10, words: ["you", "need", "is", "that", "all", "do"], answer: "All you need is that you do.", explanation: "Ega vazifasida noun clause." },
-          { id: 11, words: ["him", "asked", "if", "I", "was", "he", "ready"], answer: "I asked him if he was ready.", explanation: "Bilvosita savol: main clause + if + S + V." },
-          { id: 12, words: ["interested", "in", "you", "what", "am", "I", "said"], answer: "I am interested in what you said.", explanation: "Preposition (in) + noun clause (what + S + V)." },
-          { id: 13, words: ["clear", "she", "that", "is", "passed", "it"], answer: "It is clear that she passed.", explanation: "It + is + adjective + that + noun clause." },
-          { id: 14, words: ["he", "wonder", "late", "I", "why", "was"], answer: "I wonder why he was late.", explanation: "Sabab: main clause + why + S + V." },
-          { id: 15, words: ["knows", "nobody", "will", "happen", "what"], answer: "Nobody knows what will happen.", explanation: "Kelajak noaniqlik: what + V + S tartibi (nisbiy savol)." },
-          { id: 16, words: ["did", "you", "tell", "she", "last", "me", "what", "summer"], answer: "She told me what you did last summer.", explanation: "main clause + noun clause (what + S + V)." },
-          { id: 17, words: ["is", "finish", "the", "whether", "problem", "we", "can", "on", "time"], answer: "The problem is whether we can finish on time.", explanation: "Ha/yoʻq muammo: The problem is + whether + S + V." },
-          { id: 18, words: ["decided", "they", "haven't", "or", "stay", "go", "whether", "to", "to"], answer: "They haven't decided whether to stay or to go.", explanation: "Whether + to + infinitive — noun clause." },
-          { id: 19, words: ["the", "truth", "is", "nobody", "that", "told", "her"], answer: "The truth is that nobody told her.", explanation: "Predicate nominative: The truth is + that + noun clause." },
-          { id: 20, words: ["matters", "is", "what", "you", "do", "next"], answer: "What matters is what you do next.", explanation: "Ega: What matters + predicate: what you do next." },
-        ],
+          {
+                    "id": 1,
+                    "words": [
+                              "know",
+                              "I",
+                              "she",
+                              "where",
+                              "lives"
+                    ],
+                    "answer": "I know where she lives.",
+                    "explanation": "Noun clause: where + S + V tartibi."
+          },
+          {
+                    "id": 2,
+                    "words": [
+                              "told",
+                              "me",
+                              "she",
+                              "that",
+                              "was",
+                              "happy"
+                    ],
+                    "answer": "She told me that she was happy.",
+                    "explanation": "Main clause + that + noun clause."
+          },
+          {
+                    "id": 3,
+                    "words": [
+                              "surprised",
+                              "what",
+                              "she",
+                              "said",
+                              "me"
+                    ],
+                    "answer": "What she said surprised me.",
+                    "explanation": "Noun clause ega sifatida: What + S + V + main verb."
+          },
+          {
+                    "id": 4,
+                    "words": [
+                              "happened",
+                              "tell",
+                              "what",
+                              "me"
+                    ],
+                    "answer": "Tell me what happened.",
+                    "explanation": "Buyruq gap + noun clause (what + V)."
+          },
+          {
+                    "id": 5,
+                    "words": [
+                              "interested",
+                              "in",
+                              "what",
+                              "you",
+                              "said",
+                              "am",
+                              "I"
+                    ],
+                    "answer": "I am interested in what you said.",
+                    "explanation": "Preposition (in) + noun clause (what + S + V)."
+          },
+          {
+                    "id": 6,
+                    "words": [
+                              "obvious",
+                              "it",
+                              "is",
+                              "that",
+                              "he",
+                              "lied"
+                    ],
+                    "answer": "It is obvious that he lied.",
+                    "explanation": "It + is + adjective + that + noun clause."
+          },
+          {
+                    "id": 7,
+                    "words": [
+                              "decided",
+                              "they",
+                              "haven't",
+                              "whether",
+                              "to",
+                              "stay"
+                    ],
+                    "answer": "They haven't decided whether to stay.",
+                    "explanation": "Whether + to + infinitive — qisqargan noun clause."
+          },
+          {
+                    "id": 8,
+                    "words": [
+                              "truth",
+                              "the",
+                              "is",
+                              "that",
+                              "nobody",
+                              "knew"
+                    ],
+                    "answer": "The truth is that nobody knew.",
+                    "explanation": "Subject complement: The truth is + that + noun clause."
+          },
+          {
+                    "id": 9,
+                    "words": [
+                              "demanded",
+                              "he",
+                              "resigned",
+                              "not",
+                              "be"
+                    ],
+                    "answer": "He demanded that he not be fired.",
+                    "explanation": "Subjunctive mood inkor shakli."
+          },
+          {
+                    "id": 10,
+                    "words": [
+                              "depends",
+                              "on",
+                              "whether",
+                              "it",
+                              "agrees",
+                              "he"
+                    ],
+                    "answer": "It depends on whether he agrees.",
+                    "explanation": "Preposition + whether + S + V."
+          },
+          {
+                    "id": 11,
+                    "words": [
+                              "what",
+                              "need",
+                              "we",
+                              "is",
+                              "more",
+                              "time"
+                    ],
+                    "answer": "What we need is more time.",
+                    "explanation": "What + S + V + is (birlik fe'l)."
+          },
+          {
+                    "id": 12,
+                    "words": [
+                              "wonder",
+                              "I",
+                              "why",
+                              "she",
+                              "left"
+                    ],
+                    "answer": "I wonder why she left.",
+                    "explanation": "Noun clause: why + S + V."
+          },
+          {
+                    "id": 13,
+                    "words": [
+                              "essential",
+                              "it",
+                              "is",
+                              "that",
+                              "be",
+                              "everyone",
+                              "here"
+                    ],
+                    "answer": "It is essential that everyone be here.",
+                    "explanation": "Subjunctive mood: essential that + S + bare infinitive."
+          },
+          {
+                    "id": 14,
+                    "words": [
+                              "explained",
+                              "she",
+                              "how",
+                              "to",
+                              "fix",
+                              "it"
+                    ],
+                    "answer": "She explained how to fix it.",
+                    "explanation": "Wh-word + to-infinitive."
+          },
+          {
+                    "id": 15,
+                    "words": [
+                              "that",
+                              "he",
+                              "surprised",
+                              "resigned",
+                              "us"
+                    ],
+                    "answer": "That he resigned surprised us.",
+                    "explanation": "Subject noun clause: That + S + V + main verb."
+          }
+],
         errorCorrection: [
-          { id: 1, text: "I know where does she live.", options: ["I know", "where does", "she live", "No error"], correct: 1, wrongPart: "where does", correction: "where she", explanation: "Noun clause ichida savol tartibi ishlatilmaydi: I know where she lives." },
-          { id: 2, text: "She asked me that I had seen the report.", options: ["She asked me", "that", "I had seen", "the report"], correct: 1, wrongPart: "that", correction: "if / whether", explanation: "Ha/yoʻq bilvosita savollarda \"if\" yoki \"whether\" ishlatiladi." },
-          { id: 3, text: "I wonder whether does he agree.", options: ["I wonder", "whether does", "he agree", "No error"], correct: 1, wrongPart: "whether does", correction: "whether he", explanation: "Noun clause ichida: whether + S + V, savol tartibi emas." },
-          { id: 4, text: "What she said it made me sad.", options: ["What she said", "it made", "me sad", "No error"], correct: 1, wrongPart: "it made", correction: "made", explanation: "Noun clause ega sifatida kelganda, qoʻshimcha \"it\" kerak emas." },
-          { id: 5, text: "Tell me where is the nearest hospital.", options: ["Tell me", "where is", "the nearest", "hospital"], correct: 1, wrongPart: "where is", correction: "where the nearest hospital is", explanation: "Bilvosita savol: where + S + V tartibi kerak." },
-          { id: 6, text: "That she arrived early was pleased everyone.", options: ["That she arrived", "early was", "pleased everyone", "No error"], correct: 1, wrongPart: "early was", correction: "early pleased", explanation: "Ega noun clause — kesim \"was pleased\" emas, \"pleased\" boʻlishi kerak." },
-          { id: 7, text: "I don't understand why did she leave so suddenly.", options: ["I don't understand", "why did she", "leave so", "suddenly"], correct: 1, wrongPart: "why did she", correction: "why she", explanation: "Noun clause: why + S + V tartibi, savol tartibi emas." },
-          { id: 8, text: "He told me what does she want.", options: ["He told me", "what does", "she want", "No error"], correct: 1, wrongPart: "what does", correction: "what she wants", explanation: "Bilvosita savol: what + S + V tartibi." },
-          { id: 9, text: "I'm not sure if whether she is ready.", options: ["I'm not sure", "if whether", "she is", "ready"], correct: 1, wrongPart: "if whether", correction: "if / whether", explanation: "\"If\" va \"whether\" bir vaqtda ishlatilmaydi — faqat bittasi tanlanadi." },
-          { id: 10, text: "The problem is that do we have enough time.", options: ["The problem is", "that do we", "have enough", "time"], correct: 1, wrongPart: "that do we", correction: "whether we", explanation: "Ha/yoʻq savol: whether + S + V; \"that do we\" notoʻgʻri." },
-          { id: 11, text: "I believe that she can to do it.", options: ["I believe", "that she", "can to do", "it"], correct: 2, wrongPart: "can to do", correction: "can do", explanation: "Modal verb (can) dan keyin base form ishlatiladi: can do." },
-          { id: 12, text: "Do you know who did called?", options: ["Do you know", "who did", "called", "No error"], correct: 1, wrongPart: "who did", correction: "who", explanation: "\"Who\" ega vazifasida kelsa, qoʻshimcha \"did\" kerak emas: who called." },
-          { id: 13, text: "What you said was it true.", options: ["What you said", "was it", "true", "No error"], correct: 1, wrongPart: "was it", correction: "was", explanation: "Noun clause ega sifatida: qoʻshimcha \"it\" ishlatilmaydi." },
-          { id: 14, text: "I wonder that she is coming.", options: ["I wonder", "that", "she is coming", "No error"], correct: 1, wrongPart: "that", correction: "if / whether", explanation: "\"wonder\" + ha/yoʻq noaniqlik: whether/if ishlatiladi, \"that\" emas." },
-          { id: 15, text: "Nobody knows what will she do next.", options: ["Nobody knows", "what will she", "do next", "No error"], correct: 1, wrongPart: "what will she", correction: "what she will", explanation: "Noun clause: what + S + V tartibi; \"will she\" savol tartibi notoʻgʻri." },
-          { id: 16, text: "She explained me how to use the app.", options: ["She explained", "me how", "to use", "the app"], correct: 1, wrongPart: "me how", correction: "to me how", explanation: "\"explain\" preposition \"to\" bilan ishlatiladi: explained to me how." },
-          { id: 17, text: "That is interesting what you found.", options: ["That is interesting", "what", "you found", "No error"], correct: 0, wrongPart: "That is interesting", correction: "What you found is interesting", explanation: "Toʻgʻri tartib: noun clause ega birinchi, keyin kesim." },
-          { id: 18, text: "I asked her where was she going.", options: ["I asked her", "where was", "she going", "No error"], correct: 1, wrongPart: "where was", correction: "where she was", explanation: "Bilvosita savol: where + S + V, savol tartibi emas." },
-          { id: 19, text: "The fact is if she lied to us.", options: ["The fact is", "if", "she lied", "to us"], correct: 1, wrongPart: "if", correction: "that", explanation: "Fakt ifodalanda \"that\" ishlatiladi: The fact is that she lied." },
-          { id: 20, text: "He doesn't know whether or not to accepts the offer.", options: ["He doesn't know", "whether or not", "to accepts", "the offer"], correct: 2, wrongPart: "to accepts", correction: "to accept", explanation: "\"to + infinitive\" da base form ishlatiladi: to accept." },
-        ],
+          {
+                    "id": 1,
+                    "text": "I don't know where does he live.",
+                    "options": [
+                              "I don't know",
+                              "where does",
+                              "he live",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "where does",
+                    "correction": "where he",
+                    "explanation": "Noun clause ichida savol tartibi ishlatilmaydi: I know where she lives."
+          },
+          {
+                    "id": 2,
+                    "text": "Do you know what is the time?",
+                    "options": [
+                              "Do you know",
+                              "what is",
+                              "the time",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "what is",
+                    "correction": "what the time is",
+                    "explanation": "Indirect question: what + subject + verb."
+          },
+          {
+                    "id": 3,
+                    "text": "It depends on if he comes.",
+                    "options": [
+                              "It depends",
+                              "on if",
+                              "he comes",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "on if",
+                    "correction": "on whether",
+                    "explanation": "Predlogdan keyin 'if' ishlatilmaydi; 'whether' kerak."
+          },
+          {
+                    "id": 4,
+                    "text": "What she said it made me sad.",
+                    "options": [
+                              "What she said",
+                              "it made",
+                              "me sad",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "it made",
+                    "correction": "made",
+                    "explanation": "Noun clause ega bo'lganda ortiqcha 'it' ishlatilmaydi."
+          },
+          {
+                    "id": 5,
+                    "text": "They demanded that he resigned immediately.",
+                    "options": [
+                              "They demanded",
+                              "that he",
+                              "resigned immediately",
+                              "No error"
+                    ],
+                    "correct": 2,
+                    "wrongPart": "resigned immediately",
+                    "correction": "resign immediately",
+                    "explanation": "Subjunctive mood: demanded that + bare infinitive (resign)."
+          },
+          {
+                    "id": 6,
+                    "text": "What we need are more experienced workers.",
+                    "options": [
+                              "What we need",
+                              "are more",
+                              "experienced workers",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "are more",
+                    "correction": "is more",
+                    "explanation": "Noun clause ega bo'lganda fe'l DOIM birlikda (is) bo'ladi."
+          },
+          {
+                    "id": 7,
+                    "text": "I don't know why to go to the party.",
+                    "options": [
+                              "I don't know",
+                              "why to go",
+                              "to the party",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "why to go",
+                    "correction": "why I should go",
+                    "explanation": "'why' bilan to-infinitive qisqartirib bo'lmaydi."
+          },
+          {
+                    "id": 8,
+                    "text": "She was worried about that she had lost the keys.",
+                    "options": [
+                              "about that",
+                              "she had lost",
+                              "the keys",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "about that",
+                    "correction": "about the fact that",
+                    "explanation": "Predlogdan keyin that-clause kelmaydi; 'the fact that' kerak."
+          },
+          {
+                    "id": 9,
+                    "text": "Tell me why did she leave so early.",
+                    "options": [
+                              "Tell me",
+                              "why did she",
+                              "leave so early",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "why did she",
+                    "correction": "why she left",
+                    "explanation": "Noun clause ichida did tushib qoladi va fe'l past simple ga o'tadi."
+          },
+          {
+                    "id": 10,
+                    "text": "The news what the plane crashed shocked us.",
+                    "options": [
+                              "The news",
+                              "what the plane",
+                              "crashed shocked us",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "what the plane",
+                    "correction": "that the plane",
+                    "explanation": "Appositive noun clause: the news THAT..."
+          },
+          {
+                    "id": 11,
+                    "text": "He lied is obvious to everyone.",
+                    "options": [
+                              "He lied",
+                              "is obvious",
+                              "to everyone",
+                              "No error"
+                    ],
+                    "correct": 0,
+                    "wrongPart": "He lied",
+                    "correction": "That he lied",
+                    "explanation": "Ega vazifasidagi noun clause boshida 'That' tushib qolmaydi."
+          },
+          {
+                    "id": 12,
+                    "text": "I wonder whether if she will agree.",
+                    "options": [
+                              "I wonder",
+                              "whether if",
+                              "she will agree",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "whether if",
+                    "correction": "whether",
+                    "explanation": "'whether' va 'if' bir vaqtda ishlatilmaydi."
+          },
+          {
+                    "id": 13,
+                    "text": "It is vital that she is present at the hearing.",
+                    "options": [
+                              "It is vital",
+                              "that she is",
+                              "present at the hearing",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "that she is",
+                    "correction": "that she be",
+                    "explanation": "Subjunctive mood after 'vital that': be."
+          },
+          {
+                    "id": 14,
+                    "text": "I don't know that to do next.",
+                    "options": [
+                              "I don't know",
+                              "that to do",
+                              "next",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "that to do",
+                    "correction": "what to do",
+                    "explanation": "'that' bilan to-infinitive qisqartirib bo'lmaydi."
+          },
+          {
+                    "id": 15,
+                    "text": "Nobody knows what will she do tomorrow.",
+                    "options": [
+                              "Nobody knows",
+                              "what will she",
+                              "do tomorrow",
+                              "No error"
+                    ],
+                    "correct": 1,
+                    "wrongPart": "what will she",
+                    "correction": "what she will",
+                    "explanation": "Indirect question: what she will do."
+          }
+],
         transform: [
-          { id: 1, text: "Change to noun clause: 'Where does she live?' → I know ___.", options: ["I know where she lives.", "I know where does she live.", "I know where she does live.", "I know where lived she."], correct: 0, explanation: "Bilvosita savol: where + S + V tartibi." },
-          { id: 2, text: "Change to reported speech: 'She said, \"I am tired.\"' → She said ___.", options: ["she was tired.", "that she is tired.", "that she was tired.", "if she was tired."], correct: 2, explanation: "Reported speech: that + S + V (past tense)." },
-          { id: 3, text: "Make a noun clause: 'Will he come?' → I wonder ___.", options: ["I wonder if he will come.", "I wonder will he come.", "I wonder that he comes.", "I wonder whether does he come."], correct: 0, explanation: "Ha/yoʻq bilvosita savol: whether/if + S + V." },
-          { id: 4, text: "'What is she doing?' → Tell me ___.", options: ["Tell me what is she doing.", "Tell me what she is doing.", "Tell me that she is doing.", "Tell me what she does."], correct: 1, explanation: "Bilvosita savol: what + S + V tartibi." },
-          { id: 5, text: "'Why did he leave?' → I don't know ___.", options: ["I don't know why he left.", "I don't know why did he leave.", "I don't know that he left.", "I don't know why he did leave."], correct: 0, explanation: "Sabab bilvosita savol: why + S + V (past)." },
-          { id: 6, text: "Make the noun clause a subject: '___ is surprising. (She won the prize)' →", options: ["That she won the prize is surprising.", "She won the prize is surprising.", "If she won the prize is surprising.", "Whether she won is it surprising."], correct: 0, explanation: "Ega vazifasidagi noun clause: That + S + V." },
-          { id: 7, text: "'How does the machine work?' → He explained ___.", options: ["He explained how the machine works.", "He explained how does the machine work.", "He explained that machine works.", "He explained when the machine works."], correct: 0, explanation: "Usul bilvosita savol: how + S + V tartibi." },
-          { id: 8, text: "'Is she happy?' → I'm not sure ___.", options: ["I'm not sure whether she is happy.", "I'm not sure that she is happy.", "I'm not sure if she happy.", "I'm not sure whether is she happy."], correct: 0, explanation: "Ha/yoʻq noaniqlik: whether + S + V." },
-          { id: 9, text: "'Who called me?' → Do you know ___.", options: ["Do you know who called me?", "Do you know who did call me?", "Do you know that who called?", "Do you know who me called?"], correct: 0, explanation: "Shaxs bilvosita savol: who + V (when who is subject)." },
-          { id: 10, text: "Make a noun clause: 'She passed the exam.' → The news is ___.", options: ["The news is that she passed the exam.", "The news is if she passed the exam.", "The news is whether she passed.", "The news is she passing the exam."], correct: 0, explanation: "Fakt predicate nominative: that + S + V." },
-          { id: 11, text: "'When does the train leave?' → Do you know ___?", options: ["Do you know when the train leaves?", "Do you know when does the train leave?", "Do you know that the train leaves?", "Do you know when it leaves the train?"], correct: 0, explanation: "Vaqt bilvosita savol: when + S + V tartibi." },
-          { id: 12, text: "\"I don't remember where I put the keys.\" — Which part is the noun clause?", options: ["I don't remember", "where I put the keys", "where I put", "I put the keys"], correct: 1, explanation: "\"Where I put the keys\" — toʻldiruvchi vazifasidagi noun clause." },
-          { id: 13, text: "'Can she drive?' → He asked ___.", options: ["He asked if she could drive.", "He asked that she can drive.", "He asked whether can she drive.", "He asked if she can drove."], correct: 0, explanation: "Bilvosita savol: if + S + past modal (could)." },
-          { id: 14, text: "Combine into one sentence using a noun clause: 'He told me. The store is closed.' →", options: ["He told me that the store was closed.", "He told me if the store is closed.", "He told me the store whether closed.", "He told me how the store is closed."], correct: 0, explanation: "Fakt/xabar: told + that + noun clause." },
-          { id: 15, text: "'Where was she born?' → Nobody knows ___.", options: ["Nobody knows where she was born.", "Nobody knows where was she born.", "Nobody knows that she born.", "Nobody knows whether she was born."], correct: 0, explanation: "Joy bilvosita savol: where + S + V tartibi." },
-          { id: 16, text: "Make it an object noun clause: 'She is talented.' → Everyone agrees ___.", options: ["Everyone agrees that she is talented.", "Everyone agrees if she is talented.", "Everyone agrees whether she is talented.", "Everyone agrees she talented."], correct: 0, explanation: "E'tiqod/fikr: that + noun clause." },
-          { id: 17, text: "'Why is she upset?' → I don't understand ___.", options: ["I don't understand why she is upset.", "I don't understand why is she upset.", "I don't understand that she is upset.", "I don't understand if she upset."], correct: 0, explanation: "Sabab bilvosita savol: why + S + V tartibi." },
-          { id: 18, text: "Change to noun clause as subject: 'He quit his job.' →", options: ["That he quit his job shocked everyone.", "If he quit his job shocked everyone.", "Whether he quit is shocked everyone.", "He quit his job that shocked everyone."], correct: 0, explanation: "Ega vazifasidagi noun clause: That + S + V + main verb." },
-          { id: 19, text: "'How much did it cost?' → She didn't say ___.", options: ["She didn't say how much it cost.", "She didn't say how much did it cost.", "She didn't say that how much cost.", "She didn't say whether it cost."], correct: 0, explanation: "Miqdor bilvosita savol: how much + S + V tartibi." },
-          { id: 20, text: "Make a noun clause: 'Will they win?' → It depends on ___.", options: ["It depends on whether they will win.", "It depends on that they will win.", "It depends on if they win will.", "It depends on whether will they win."], correct: 0, explanation: "Preposition (on) dan keyin: whether + S + V." },
-        ],
+          {
+                    "id": 1,
+                    "text": "Change to indirect question: 'Where does she live?' → I know ___.",
+                    "options": [
+                              "where she lives",
+                              "where does she live",
+                              "where she does live",
+                              "where lives she"
+                    ],
+                    "correct": 0,
+                    "explanation": "Bilvosita savol: where + S + V tartibi."
+          },
+          {
+                    "id": 2,
+                    "text": "Change to noun clause subject: 'She won the prize.' → ___ surprised everyone.",
+                    "options": [
+                              "That she won the prize",
+                              "If she won the prize",
+                              "Whether she won the prize",
+                              "She won the prize"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ega vazifasidagi noun clause 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 3,
+                    "text": "Make a noun clause: 'Will he come?' → I wonder ___.",
+                    "options": [
+                              "whether he will come",
+                              "will he come",
+                              "that he comes",
+                              "whether does he come"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ha/yo'q savol: whether + S + V."
+          },
+          {
+                    "id": 4,
+                    "text": "Reduce the clause: 'I don't know what I should do.' → I don't know ___.",
+                    "options": [
+                              "what to do",
+                              "what doing",
+                              "what do",
+                              "what I to do"
+                    ],
+                    "correct": 0,
+                    "explanation": "wh-word + to-infinitive reduction."
+          },
+          {
+                    "id": 5,
+                    "text": "Apply Subjunctive: 'The teacher demanded that he (apologize).' →",
+                    "options": [
+                              "The teacher demanded that he apologize.",
+                              "The teacher demanded that he apologized.",
+                              "The teacher demanded that he apologizing.",
+                              "The teacher demanded that he apologizes."
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive mood: bare infinitive (apologize)."
+          },
+          {
+                    "id": 6,
+                    "text": "Combine using Extraposition: 'That he succeeded is clear.' →",
+                    "options": [
+                              "It is clear that he succeeded.",
+                              "That it is clear he succeeded.",
+                              "He succeeded that is clear.",
+                              "Is clear that he succeeded."
+                    ],
+                    "correct": 0,
+                    "explanation": "Extraposition with formal 'It'."
+          },
+          {
+                    "id": 7,
+                    "text": "Fix preposition error: 'I am worried about that he is ill.' →",
+                    "options": [
+                              "I am worried about the fact that he is ill.",
+                              "I am worried about if he is ill.",
+                              "I am worried on that he is ill.",
+                              "I am worried which he is ill."
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + the fact that."
+          },
+          {
+                    "id": 8,
+                    "text": "Change to indirect question: 'What time is it?' → Do you know ___?",
+                    "options": [
+                              "what time it is",
+                              "what time is it",
+                              "what is the time",
+                              "what time it be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Indirect question: what time + S + V."
+          },
+          {
+                    "id": 9,
+                    "text": "Change to noun clause object: 'He is innocent.' → She believes ___.",
+                    "options": [
+                              "that he is innocent",
+                              "if he is innocent",
+                              "whether he is innocent",
+                              "what he is innocent"
+                    ],
+                    "correct": 0,
+                    "explanation": "Darak gap to'ldiruvchisi: that + S + V."
+          },
+          {
+                    "id": 10,
+                    "text": "Reduce the clause: 'She explained how we could fix it.' →",
+                    "options": [
+                              "She explained how to fix it.",
+                              "She explained how fixing it.",
+                              "She explained how fix it.",
+                              "She explained that to fix it."
+                    ],
+                    "correct": 0,
+                    "explanation": "how + to-infinitive reduction."
+          },
+          {
+                    "id": 11,
+                    "text": "Apply Backshift: 'He said: \"I am working.\"' → He said that he ___.",
+                    "options": [
+                              "was working",
+                              "is working",
+                              "had worked",
+                              "has been working"
+                    ],
+                    "correct": 0,
+                    "explanation": "Backshift: am working → was working."
+          },
+          {
+                    "id": 12,
+                    "text": "Change to noun clause subject: 'What do we need?' → ___ is more money.",
+                    "options": [
+                              "What we need",
+                              "What do we need",
+                              "That we need",
+                              "Whether we need"
+                    ],
+                    "correct": 0,
+                    "explanation": "What + S + V as subject."
+          },
+          {
+                    "id": 13,
+                    "text": "Fix error: 'It depends on if he agrees.' →",
+                    "options": [
+                              "It depends on whether he agrees.",
+                              "It depends if he agrees.",
+                              "It depends that he agrees.",
+                              "It depends on that he agrees."
+                    ],
+                    "correct": 0,
+                    "explanation": "Preposition + whether."
+          },
+          {
+                    "id": 14,
+                    "text": "Make indirect question: 'Why did she leave?' → Tell me ___.",
+                    "options": [
+                              "why she left",
+                              "why did she leave",
+                              "why she did leave",
+                              "why left she"
+                    ],
+                    "correct": 0,
+                    "explanation": "why + S + V (past simple: left)."
+          },
+          {
+                    "id": 15,
+                    "text": "Apply Subjunctive: 'It is essential that everyone ___ (be) present.' →",
+                    "options": [
+                              "It is essential that everyone be present.",
+                              "It is essential that everyone is present.",
+                              "It is essential that everyone was present.",
+                              "It is essential that everyone to be present."
+                    ],
+                    "correct": 0,
+                    "explanation": "Subjunctive: essential that + bare infinitive (be)."
+          }
+],
         dialogue: [
-          { id: 1, situation: "You ask a friend about a new restaurant.", dialogue: "A: Do you know ___ the restaurant closes?\nB: I think it closes at 10 PM.", options: ["that", "if", "when", "whether"], correct: 2, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
-          { id: 2, situation: "Your colleague asks about the meeting.", dialogue: "A: Did the boss say ___ the meeting was postponed?\nB: Yes, she confirmed it.", options: ["if", "how", "that", "whether"], correct: 2, explanation: "Fakt xabari: \"that\" ishlatiladi." },
-          { id: 3, situation: "You are not sure about a plan.", dialogue: "A: Are you coming to the party?\nB: I'm not sure ___ I can make it.", options: ["that", "when", "whether", "who"], correct: 2, explanation: "Noaniqlik: \"whether\" ishlatiladi." },
-          { id: 4, situation: "A student asks the teacher for help.", dialogue: "A: Can you show me ___ to solve this problem?\nB: Of course! Let me explain.", options: ["that", "how", "whether", "if"], correct: 1, explanation: "Usul/yoʻl: \"how\" ishlatiladi." },
-          { id: 5, situation: "A friend is surprised by news.", dialogue: "A: ___ she got the job surprised everyone!\nB: I know! She's so talented.", options: ["Whether", "If", "That", "How"], correct: 2, explanation: "Fakt ega sifatida: \"That\" ishlatiladi." },
-          { id: 6, situation: "You ask about someone's location.", dialogue: "A: Excuse me, do you know ___ the post office is?\nB: Yes, it's two blocks down.", options: ["that", "how", "where", "whether"], correct: 2, explanation: "Joy soʻralanda \"where\" ishlatiladi." },
-          { id: 7, situation: "Two friends discuss a choice.", dialogue: "A: Have you decided ___ to take the job or not?\nB: Not yet. I need more time.", options: ["that", "how", "whether", "who"], correct: 2, explanation: "Tanlov noaniqligida \"whether\" ishlatiladi." },
-          { id: 8, situation: "A parent asks a child.", dialogue: "A: Tell me ___ happened at school today.\nB: Nothing special, Mom.", options: ["that", "if", "what", "whether"], correct: 2, explanation: "Nima soʻralanda \"what\" ishlatiladi." },
-          { id: 9, situation: "Two coworkers talk about a report.", dialogue: "A: Do you know ___ she finished the report?\nB: I believe she did, yes.", options: ["that", "if", "how", "whether"], correct: 1, explanation: "Ha/yoʻq bilvosita savol: \"if\" ishlatiladi." },
-          { id: 10, situation: "A friend explains something.", dialogue: "A: I can show you ___ I made this dish.\nB: That would be great!", options: ["that", "if", "how", "whether"], correct: 2, explanation: "Usul: \"how\" ishlatiladi." },
-          { id: 11, situation: "Someone is curious about a person.", dialogue: "A: Do you know ___ called while I was out?\nB: I think it was your sister.", options: ["that", "if", "who", "whether"], correct: 2, explanation: "Shaxs soʻralanda \"who\" ishlatiladi." },
-          { id: 12, situation: "A student explains a concept.", dialogue: "A: I finally understand ___ the formula works!\nB: Great! Practice makes perfect.", options: ["that", "why", "how", "whether"], correct: 2, explanation: "Mexanizm/usul: \"how\" ishlatiladi." },
-          { id: 13, situation: "Two friends discuss someone's mood.", dialogue: "A: I wonder ___ she's upset about something.\nB: She seemed fine to me.", options: ["that", "if", "how", "who"], correct: 1, explanation: "Noaniqlik/tashvish: \"if\" yoki \"whether\" ishlatiladi." },
-          { id: 14, situation: "You explain your plans.", dialogue: "A: I've decided ___ I will study abroad next year.\nB: That's exciting!", options: ["if", "whether", "that", "how"], correct: 2, explanation: "Qaror/fakt: \"that\" ishlatiladi." },
-          { id: 15, situation: "A boss checks with an employee.", dialogue: "A: Please confirm ___ you received the documents.\nB: Yes, I got them this morning.", options: ["that", "how", "who", "why"], correct: 0, explanation: "Tasdiqlash: \"that\" ishlatiladi." },
-          { id: 16, situation: "A friend asks for advice.", dialogue: "A: I don't know ___ I should take the new job.\nB: Think about what makes you happy.", options: ["that", "how", "whether", "who"], correct: 2, explanation: "Tanlov noaniqligida \"whether\" ishlatiladi." },
-          { id: 17, situation: "You ask about a schedule.", dialogue: "A: Do you know ___ the flight departs?\nB: I think it's at 7 AM.", options: ["that", "when", "whether", "who"], correct: 1, explanation: "Vaqt soʻralanda \"when\" ishlatiladi." },
-          { id: 18, situation: "A teacher asks a student.", dialogue: "A: Can you explain ___ the experiment failed?\nB: I think the temperature was too high.", options: ["that", "if", "why", "whether"], correct: 2, explanation: "Sabab: \"why\" ishlatiladi." },
-          { id: 19, situation: "A manager announces something.", dialogue: "A: The truth is ___ we didn't reach our targets this quarter.\nB: We need to work harder.", options: ["if", "whether", "that", "how"], correct: 2, explanation: "Fakt ifodalanda \"that\" ishlatiladi." },
-          { id: 20, situation: "Two students talk after an exam.", dialogue: "A: ___ you passed is what matters!\nB: Thank you! I'm really relieved.", options: ["Whether", "If", "That", "How"], correct: 2, explanation: "Ega vazifasidagi noun clause: \"That\" bilan boshlanadi." },
-        ]
+          {
+                    "id": 1,
+                    "situation": "You ask a friend about a new restaurant.",
+                    "dialogue": "A: Do you know ___ the restaurant closes?\nB: I think it closes at 10 PM.",
+                    "options": [
+                              "when",
+                              "that",
+                              "if",
+                              "whether"
+                    ],
+                    "correct": 0,
+                    "explanation": "Vaqt so'ralganda 'when' ishlatiladi."
+          },
+          {
+                    "id": 2,
+                    "situation": "Your colleague asks about the meeting.",
+                    "dialogue": "A: Did the boss say ___ the meeting was postponed?\nB: Yes, she confirmed it.",
+                    "options": [
+                              "that",
+                              "if",
+                              "how",
+                              "whether"
+                    ],
+                    "correct": 0,
+                    "explanation": "Fakt xabari: 'that' ishlatiladi."
+          },
+          {
+                    "id": 3,
+                    "situation": "You are not sure about a plan.",
+                    "dialogue": "A: Are you coming to the party?\nB: I'm not sure ___ I can make it.",
+                    "options": [
+                              "whether",
+                              "that",
+                              "when",
+                              "who"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noaniqlik: 'whether' ishlatiladi."
+          },
+          {
+                    "id": 4,
+                    "situation": "A student asks the teacher for help.",
+                    "dialogue": "A: Can you show me ___ to solve this problem?\nB: Of course! Let me explain.",
+                    "options": [
+                              "how",
+                              "that",
+                              "whether",
+                              "if"
+                    ],
+                    "correct": 0,
+                    "explanation": "Usul/yo'l so'ralganda 'how' (how to solve) ishlatiladi."
+          },
+          {
+                    "id": 5,
+                    "situation": "A friend is surprised by news.",
+                    "dialogue": "A: ___ she got the job surprised everyone!\nB: I know! She's so talented.",
+                    "options": [
+                              "That",
+                              "Whether",
+                              "If",
+                              "How"
+                    ],
+                    "correct": 0,
+                    "explanation": "Fakt ega sifatida: 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 6,
+                    "situation": "A boss checks with an employee.",
+                    "dialogue": "A: Please confirm ___ you received the documents.\nB: Yes, I got them this morning.",
+                    "options": [
+                              "that",
+                              "how",
+                              "who",
+                              "why"
+                    ],
+                    "correct": 0,
+                    "explanation": "Tasdiqlash: 'that' ishlatiladi."
+          },
+          {
+                    "id": 7,
+                    "situation": "A manager announces something.",
+                    "dialogue": "A: The truth is ___ we didn't reach our targets this quarter.\nB: We need to work harder.",
+                    "options": [
+                              "that",
+                              "if",
+                              "whether",
+                              "how"
+                    ],
+                    "correct": 0,
+                    "explanation": "Fakt ifodalanganda: 'that' (predicate nominative) ishlatiladi."
+          },
+          {
+                    "id": 8,
+                    "situation": "Two students talk after an exam.",
+                    "dialogue": "A: ___ you passed is what matters!\nB: Thank you! I'm really relieved.",
+                    "options": [
+                              "That",
+                              "Whether",
+                              "If",
+                              "How"
+                    ],
+                    "correct": 0,
+                    "explanation": "Ega vazifasidagi noun clause 'That' bilan boshlanadi."
+          },
+          {
+                    "id": 9,
+                    "situation": "Asking for directions.",
+                    "dialogue": "A: Excuse me, do you know ___ the nearest metro station is?\nB: Yes, walk straight for two blocks.",
+                    "options": [
+                              "where",
+                              "that",
+                              "if",
+                              "whether"
+                    ],
+                    "correct": 0,
+                    "explanation": "Joy so'ralganda 'where' ishlatiladi."
+          },
+          {
+                    "id": 10,
+                    "situation": "Discussing a decision.",
+                    "dialogue": "A: Have you decided ___ to accept the offer?\nB: I'm still thinking about it.",
+                    "options": [
+                              "whether",
+                              "that",
+                              "if",
+                              "how"
+                    ],
+                    "correct": 0,
+                    "explanation": "Whether + to-infinitive tanlov noaniqligida."
+          },
+          {
+                    "id": 11,
+                    "situation": "Asking about an event.",
+                    "dialogue": "A: Can you tell me ___ happened at the conference?\nB: Sure, we discussed the new project.",
+                    "options": [
+                              "what",
+                              "that",
+                              "whether",
+                              "if"
+                    ],
+                    "correct": 0,
+                    "explanation": "Nima sodir bo'lganini so'rashda 'what' (ega) ishlatiladi."
+          },
+          {
+                    "id": 12,
+                    "situation": "Talking about an employee recommendation.",
+                    "dialogue": "A: What did the board decide?\nB: They recommended that he ___ promoted.",
+                    "options": [
+                              "be",
+                              "is",
+                              "was",
+                              "to be"
+                    ],
+                    "correct": 0,
+                    "explanation": "Recommended that + bare infinitive (be)."
+          },
+          {
+                    "id": 13,
+                    "situation": "Checking flight details.",
+                    "dialogue": "A: Do you know what time the flight ___?\nB: It departs at 8:00 AM.",
+                    "options": [
+                              "departs",
+                              "does depart",
+                              "departing",
+                              "is depart"
+                    ],
+                    "correct": 0,
+                    "explanation": "Noun clause word order: flight departs."
+          },
+          {
+                    "id": 14,
+                    "situation": "Expressing concern.",
+                    "dialogue": "A: Why are you worried?\nB: I'm worried about the fact ___ we don't have enough budget.",
+                    "options": [
+                              "that",
+                              "if",
+                              "whether",
+                              "what"
+                    ],
+                    "correct": 0,
+                    "explanation": "about the fact that..."
+          },
+          {
+                    "id": 15,
+                    "situation": "Asking about a person.",
+                    "dialogue": "A: Do you know ___ called you earlier?\nB: No, I didn't see the number.",
+                    "options": [
+                              "who",
+                              "that",
+                              "whether",
+                              "if"
+                    ],
+                    "correct": 0,
+                    "explanation": "Shaxs so'ralganda 'who' ishlatiladi."
+          }
+]
       }
+
     ]
   }
 };

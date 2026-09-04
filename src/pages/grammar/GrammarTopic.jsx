@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
 import { russianGrammarData } from '../../data/russianGrammarData';
 import { sicilianGrammarData } from '../../data/sicilianGrammarData';
+import { greekGrammarData } from '../../data/greekGrammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { getQuestionsForExercise, getExerciseType } from '../../utils/grammarHelpers';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -218,11 +219,12 @@ export default function GrammarTopic() {
   // Which language a question's Sicilian/Russian words should be read aloud
   // in — inferred from the topic id's track prefix, same convention GrammarPage
   // and GrammarGuide use to keep each track's own language of instruction.
-  const speakLang = topicId.startsWith('scn-') ? 'it-IT' : topicId.startsWith('ru-') ? 'ru-RU' : 'en-US';
+  const speakLang = topicId?.startsWith('scn-') ? 'it-IT' : topicId?.startsWith('ru-') ? 'ru-RU' : 'en-US';
 
-  const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
-                russianGrammarData[level]?.topics?.find((t) => t.id === topicId) ||
-                sicilianGrammarData[level]?.topics?.find((t) => t.id === topicId);
+  const topic = grammarData[level]?.topics?.find((t) => t?.id === topicId) ||
+                russianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
+                sicilianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
+                greekGrammarData[level]?.topics?.find((t) => t?.id === topicId);
 
   const [currentQ, setCurrentQ] = useState(0);
   const [selected, setSelected] = useState(null);

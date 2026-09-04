@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
 import { russianGrammarData } from '../../data/russianGrammarData';
 import { sicilianGrammarData } from '../../data/sicilianGrammarData';
+import { greekGrammarData } from '../../data/greekGrammarData';
 import { russianGuidesData } from '../../data/russianGuidesData';
 import { parseGuide } from '../../utils/grammarGuideParser';
 import { GuideBlocks } from '../../components/grammar/GuideRenderer';
@@ -32,9 +33,10 @@ export default function GrammarGuide() {
     localStorage.setItem('grammar_guide_manual_lang', lang);
   };
 
-  const topic = grammarData[level]?.topics?.find((t) => t.id === topicId) ||
-                russianGrammarData[level]?.topics?.find((t) => t.id === topicId) ||
-                sicilianGrammarData[level]?.topics?.find((t) => t.id === topicId);
+  const topic = grammarData[level]?.topics?.find((t) => t?.id === topicId) ||
+                russianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
+                sicilianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
+                greekGrammarData[level]?.topics?.find((t) => t?.id === topicId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -53,8 +55,8 @@ export default function GrammarGuide() {
   }
 
   let activeGuideText = topic.guide;
-  if (guideLang === 'ru' && russianGuidesData[topicId]) {
-    activeGuideText = russianGuidesData[topicId];
+  if (guideLang === 'ru') {
+    activeGuideText = topic.guideRu || russianGuidesData[topicId] || topic.guide;
   }
 
   const blocks = parseGuide(activeGuideText);
@@ -62,7 +64,7 @@ export default function GrammarGuide() {
   // Which language the example sentences should be read aloud in — inferred
   // from the topic id's track prefix (ru-/scn-), never from the UZB/RUS guide
   // -language toggle above, which only translates the explanation text.
-  const speakLang = topicId.startsWith('scn-') ? 'it-IT' : topicId.startsWith('ru-') ? 'ru-RU' : 'en-US';
+  const speakLang = topicId?.startsWith('scn-') ? 'it-IT' : topicId?.startsWith('ru-') ? 'ru-RU' : 'en-US';
 
   return (
     <div className="grammar-guide-page">

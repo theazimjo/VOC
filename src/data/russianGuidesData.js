@@ -899,21 +899,108 @@ Reported Speech используется для **пересказа слов д
 • today ➔ **that day**
 • tomorrow ➔ **the next day / the following day**
 • yesterday ➔ **the day before**`,
+  'relative-clauses': `## Relative Clauses (Относительные придаточные) — Полное руководство по материалам Содикжона
 
-  'relative-clauses': `## Relative Clauses (Относительные придаточные)
+Relative Clause — это придаточное предложение, которое следует за существительным (**antecedent**) и определяет или описывает его.
 
-Relative Clauses соединяют два предложения и дают дополнительную информацию о существительном с помощью местоимений **who, which, that, where, whose**.
+**СТРУКТУРА:** '[antecedent] + [relative word] + [придаточное предложение]'
+• *The book **which is on the table** is mine.* — antecedent = *the book*
+• *The woman **who called you** left a number.* — antecedent = *the woman*
 
-## 1. Относительные местоимения
-• **Who**: для людей *(The man **who** lives next door is a doctor)*
-• **Which**: для предметов и животных *(The car **which** is parked outside is mine)*
-• **That**: универсально для людей и предметов *(The book **that** I read was good)*
-• **Where**: для мест *(The restaurant **where** we met)*
-• **Whose**: для принадлежности *(The boy **whose** bike was stolen)*
+Относительное слово выполняет синтаксическую роль в придаточном: **подлежащее (subject)**, **дополнение (object)**, **принадлежность (possessive)** или **обстоятельство (adverbial)**.
 
-## 2. Примеры
-  - I met a woman **who** speaks 5 languages. *(Я встретил женщину, которая говорит на 5 языках.)*
-  - This is the house **where** I grew up. *(Это дом, где я вырос.)*`,
+---
+
+## 1. Два основных типа: Defining и Non-defining
+
+| Признак | DEFINING (Определительное) | NON-DEFINING (Распространительное) |
+|---|---|---|
+| **Функция** | Определяет предмет — необходимая информация | Дополнительная информация — можно удалить |
+| **Запятая** | **НЕТ** | **ЕСТЬ (с двух сторон: , ... ,)** |
+| **that** | Можно использовать | **Строго запрещено** |
+| **Опускание местоимения** | В роли дополнения — **можно** | **Никогда нельзя** |
+
+### Смысловая разница:
+• *My brother **who lives in London** is a doctor.* — У меня несколько братьев; речь о том, который живёт в Лондоне.
+• *My brother, **who lives in London**, is a doctor.* — У меня один брат; то, что он живёт в Лондоне — дополнительная деталь.
+
+Запятая меняет смысл предложения — это грамматический знак!
+
+---
+
+## 2. Относительные местоимения (Relative Pronouns)
+
+| Местоимение | К чему относится | Функция | Важное ограничение |
+|---|---|---|---|
+| **who** | люди | подлежащее / дополнение | Не употребляется сразу после предлога |
+| **whom** | люди | только дополнение | Обязательно после предлогов (*to whom*) |
+| **which** | предметы, животные | подлежащее / дополнение | Может относиться ко всему предложению |
+| **that** | люди и предметы | подлежащее / дополнение | Только в defining; **нельзя после запятой и предлогов** |
+| **whose** | чей / которого | принадлежность | Сразу после него идёт существительное |
+
+▸ *The house **whose roof** was damaged has been sold.* (whose применяется и к неодушевлённым предметам!)
+
+---
+
+## 3. Относительные наречия (Relative Adverbs)
+
+| Наречие | Antecedent | Эквивалент | Пример |
+|---|---|---|---|
+| **where** | место | in / at / on which | *the town **where** I grew up* |
+| **when** | время | in / on / at which | *the year **when** we met* |
+| **why** | причина | for which | *the reason **why** he left* |
+
+**ВАЖНОЕ ОТЛИЧИЕ:** после *where / when* предложение закончено. Если предлог остаётся в конце, используется *that / which*:
+• ✅ *The house **where** I live is old.*
+• ✅ *The house **(that)** I live **in** is old.*
+• ❌ *The house where I live in is old.* (двойное указание ошибки!)
+
+---
+
+## 4. Позиция предлога
+
+Предлог может стоять перед местоимением (официальный стиль) или в конце придаточного (разговорный стиль):
+• *The colleague **with whom** I worked...* (официально)
+• *The colleague **(who / that)** I worked **with**...* (разговорно)
+
+---
+
+## 5. Опускание местоимения (Zero Relative)
+
+| МОЖНО ОПУСКАТЬ | НЕЛЬЗЯ ОПУСКАТЬ |
+|---|---|
+| В defining придаточном в роли **дополнения** | В роли **подлежащего** |
+| Когда предлог остаётся в конце | Когда предлог вынесен вперёд |
+| С местоимением *whose* — **никогда!** | В non-defining (с запятыми) |
+
+• ✅ *The flat **(that)** we rented was tiny.* (дополнение — опускается)
+• ❌ *The novel won the prize was translated.* (подлежащее — опускать нельзя)
+
+---
+
+## 6. Местоимение количества + of + which / whom
+
+В non-defining предложениях для связи союзов: *all of which, three of whom, one of which, several of whom...*
+• *There were forty applicants, **three of whom** were shortlisted.*
+• ❌ *There were forty applicants, three of them were shortlisted.* (ошибка comma splice!)
+
+---
+
+## 7. Sentential "which" (Отношение к целому предложению)
+
+*which* может относиться ко всему предшествующему предложению. Запятая **ОБЯЗАТЕЛЬНА**, союзы *that* и *what* НЕ ИСПОЛЬЗУЮТСЯ.
+• *She passed with distinction, **which** surprised nobody.*
+
+---
+
+## 8. Сокращение относительных придаточных (Reduced Relative Clauses)
+
+Сокращать можно **ТОЛЬКО** придаточные в роли подлежащего:
+• Active → **V-ing**: *the delegates **attending***
+• Passive → **V3**: *the paintings **stolen***
+• be + предлог: *the man **behind the counter***
+• the first / last → **to-infinitive**: *the last passenger **to board***
+`,
 
   'used-to-would': `## Used to & Would (Прошлые привычки и состояния)
 
@@ -952,33 +1039,221 @@ Relative Clauses соединяют два предложения и дают д
 ## 3. После предлогов
 После любого предлога (in, on, at, about, for, without, before, after) ВСЕГДА используется **Герундий (-ing)**!
   - Thank you **for helping** me. *(Спасибо за помощь.)*`,
+  'noun-clauses': `## Noun Clauses (Придаточные существительные) — Полное руководство по материалам Содикжона
 
-  'noun-clauses': `## Noun Clauses (Придаточные существительные)
+Noun Clause — это придаточное предложение, которое выполняет роль **существительного (подлежащего, дополнения или сказуемого)**. В отличие от Relative Clause, оно не описывает существительное, а занимает его место.
 
-Noun Clause — это придаточное предложение, которое выполняет роль существительного (подлежащего, дополнения или сказуемого).
+**СПОСОБ ПРОВЕРКИ:** замените придаточное предложение словом *"it"*, *"something"* или *"the news"*. Если предложение остаётся грамматически корректным — перед вами Noun Clause!
+• *I know that he lied.* → *I know it.* (noun clause = дополнение)
+• *What he said was true.* → *It was true.* (noun clause = подлежащее)
 
-## 1. Главное правило: Прямой порядок слов
-Внутри Noun Clause порядок слов ВСЕГДА прямой (как в обычном утверждении, без вопросительного порядка)!
-  - ✅ I know **where she lives**. *(Я знаю, где она живет — правильно)*
-  - ❌ I know **where does she live**. *(НЕПРАВИЛЬНО — никаких does/did в середине!)*
-  - ✅ Tell me **what you want**. *(Скажи мне, чего ты хочешь)*
+Noun clause никогда не выделяется запятыми и не может быть удалено из предложения без потери грамматической целостности.
 
-## 2. 3 основных типа Noun Clauses
-• **2a. С союзом "That" (факты и мысли)**:
-  - She believes **that he is honest**. *(Она верит, что он честен.)*
-  - I think **that they are right**. *(Я считаю, что они правы.)*
-• **2b. С вопросительными словами "Wh-" (косвенные вопросы)**:
-  - I know **where she lives**. *(Я знаю, где она живет.)*
-  - Tell me **what you want**. *(Скажи мне, чего ты хочешь.)*
-• **2c. С союзами "Whether / If" (сомнение да/нет)**:
-  - I don't know **whether she is coming**. *(Я не знаю, придет ли она.)*
-  - He asked **if the store was open**. *(Он спросил, открыт ли магазин.)*
+---
 
-## 3. Функции в предложении
-| Функция | Пример |
+## 1. 5 основных синтаксических функций
+
+| Функция | Позиция | Пример |
+|---|---|---|
+| **Subject (Подлежащее)** | В начале предложения | **That he resigned** surprised everyone. / **What she said** was true. |
+| **Object of verb (Прямое дополнение)** | После глагола | She admitted **that she was wrong**. / I know **where she lives**. |
+| **Object of preposition (Предложное дополнение)** | После предлога | We talked **about what happened**. / It depends **on whether they agree**. |
+| **Subject complement (Именная часть сказуемого)** | После глагола be | The problem is **that we have no money**. |
+| **Adjective complement (Дополнение к прилагательному)** | После прилагательного | I am afraid **that he will refuse**. |
+
+---
+
+## 2. 3 основных типа и их союзы
+
+Тип союза зависит от исходного предложения:
+• **wh-вопрос** → wh-слово (*where, what, who, when, why, how, how long/many/much*)
+• **вопрос да/нет** → *whether / if*
+• **утверждение / факт** → *that*
+
+| Тип | Союз | Пример |
+|---|---|---|
+| **that-clause** | that (может опускаться) | I think **(that) she is right**. |
+| **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
+| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
+
+▸ *Where does he live?* → I don't know **where he lives**.
+▸ *Does he live here?* → I don't know **whether he lives here**.
+
+---
+
+## 3. ПОРЯДОК СЛОВ — Самая частая ошибка!
+
+Внутри Noun Clause используется **прямой порядок слов (Подлежащее + Сказуемое)**. Вопросительный порядок слов (*do / does / did / is / are / will*) в Noun Clause НЕ ИСПОЛЬЗУЕТСЯ!
+
+• ❌ *I don't know where does he live.* → ✅ *I don't know **where he lives**.*
+• ❌ *Do you know what is the time?* → ✅ *Do you know **what the time is**?*
+• ❌ *Tell me why did she leave.* → ✅ *Tell me **why she left**.*
+
+### Исключение: когда wh-слово само является подлежащим
+Если вопросительное слово выступает подлежащим придаточного, порядок слов не меняется:
+• ✅ *I don't know **who broke the window**.* (who = подлежащее)
+• ✅ *Nobody knows **what happened**.* (what = подлежащее)
+
+### Знак вопроса
+• ✅ *Do you know where he is?* — главное предложение вопросительное → знак вопроса (?)
+• ✅ *I wonder where he is.* — главное предложение утвердительное → точка (.)
+
+---
+
+## 4. Когда можно опускать союз "that"?
+
+| МОЖНО ОПУСКАТЬ | НЕЛЬЗЯ ОПУСКАТЬ |
 |---|---|
-| Подлежащее (Subject) | **What she said** surprised me. |
-| Дополнение (Object) | I know **that you are tired**. |
-| Сказуемое (Predicate) | The truth is **that he lied**. |`,
+| После глаголов речи и мысли (*say, think, know, believe*) в роли дополнения | В позиции **подлежащего** в начале предложения (*That he lied is obvious*) |
+| В разговорной и нейтральной речи | В официальном письменном стиле |
+| После прилагательных (*I'm sure / glad / afraid (that)...*) | В составных союзах (*so that, in order that, now that*) |
+| В одиночном коротком придаточном | При объединении двух придаточных второй союз сохраняется (*He said that... and that...*) |
+
+---
+
+## 5. Разница между "whether" и "if"
+
+Оба союза переводятся как частица **"ли"**, но использование **if** строго ограничено:
+
+| Условие | whether | if |
+|---|---|---|
+| Дополнение после глагола | ✅ | ✅ |
+| После предлога | ✅ | ❌ |
+| В начале предложения (подлежащее) | ✅ | ❌ |
+| Непосредственно перед *or not* | ✅ (*whether or not*) | ❌ |
+| Перед *to-infinitive* | ✅ (*whether to go*) | ❌ |
+| В официальном стиле | ✅ | реже |
+
+• ✅ *It depends on **whether** he agrees.* (после предлога)
+• ❌ *It depends on if he agrees.*
+• ✅ ***Whether** he agrees is not my problem.* (подлежащее)
+• ❌ *If he agrees is not my problem.*
+• ✅ *I don't know **whether or not** to accept.*
+• ✅ *I don't know **whether to accept** the offer.*
+• ❌ *I don't know if to accept.*
+
+---
+
+## 6. Wh-слово + to-infinitive (Сокращённая форма)
+
+Если подлежащие главного и придаточного предложений совпадают и значение передаёт модальность "следует / можно", Noun Clause сокращается:
+• *I don't know what I should do.* → *I don't know **what to do**.*
+• *She explained how we could fix it.* → *She explained **how to fix it**.*
+• *He couldn't decide whether he should stay.* → *...**whether to stay**.*
+
+**ВАЖНО:** союз ***why*** в такой форме НЕ используется, а ***that-clause*** никогда не сокращается!
+• ❌ *I don't know why to go.*
+• ❌ *I know that to do.*
+
+---
+
+## 7. Согласование времён (Backshift)
+
+Если глагол главного предложения стоит в прошедшем времени, глагол в Noun Clause сдвигается на шаг назад:
+• is / are → **was / were**
+• works → **worked**
+• worked / has worked → **had worked**
+• will → **would**
+• can / may / must → **could / might / had to**
+
+▸ *«I am busy,» he said.* → *He said that he **was** busy.*
+
+### Исключения из согласования времён:
+1. **Общеизвестные факты:** *The teacher said that water **boils** at 100°C.*
+2. **Ситуация, актуальная сейчас:** *She said she **lives** in Tashkent.*
+3. **Главное предложение в настоящем времени:** *He says that he **is** tired.*
+
+---
+
+## 8. Сослагательное наклонение (Subjunctive: 'that + Bare Infinitive')
+
+После глаголов и прилагательных со значением требования, совета или необходимости в 'that-clause' используется начальная форма глагола **без окончаний (Bare Infinitive = V1)**. Отрицание: **not + V1**.
+
+• **Глаголы:** *suggest, recommend, demand, insist, require, request, propose, urge, ask, order, command*
+• **Прилагательные (It is ... that ...):** *essential, important, vital, necessary, crucial, imperative, advisable*
+
+• ✅ *The board demanded that he **resign** immediately.* (не resigns)
+• ✅ *It is essential that every student **be** present.* (не is)
+• ✅ *She insisted that he **not be** told.* (форма отрицания)
+• ❌ *The board demanded that he resigned immediately.*
+
+---
+
+## 9. Noun Clause в роли подлежащего и конструктивный союз "it" (Extraposition)
+
+Длинный Noun Clause в начале предложения звучит тяжело. Поэтому его переносят в конец, а в начало ставят формальное подлежащее **"it"**:
+• *That he lied to us is obvious.* → ***It is obvious that** he lied to us.* (естественнее)
+• *Whether he agrees doesn't matter.* → ***It doesn't matter whether** he agrees.*
+
+### Согласование глагола:
+Когда Noun Clause выступает подлежащим, сказуемое **ВСЕГДА В ЕДИНСТВЕННОМ ЧИСЛЕ**:
+• ✅ ***What we need is** more chairs.*
+• ❌ *What we need are more chairs.* (ошибка в тестах!)
+
+---
+
+## 10. Noun Clause после предлогов и конструкция "the fact that"
+
+После предлогов допускаются *wh-clause* и *whether-clause*, но **'that-clause' СТРОГО ЗАПРЕЩЁН!**
+• ✅ *I'm worried **about what he will say**.*
+• ✅ *It depends **on whether they agree**.*
+• ❌ *I'm worried about that he will leave.*
+
+**РЕШЕНИЕ:** убрать предлог или использовать конструкцию **"the fact that"**:
+▸ *I'm worried **that he will leave**.* / *I'm worried **about the fact that he will leave**.*
+
+*Исключения:* ***in that***, ***except that***, ***save that*** — эти союзы используются с 'that': *"The plan is good except that it costs too much."*
+
+---
+
+## 11. Appositive Noun Clause (Изъяснительное придаточное после существительного)
+
+После абстрактных существительных (*fact, idea, belief, news, rumour, claim, hope, possibility, suggestion, question*) придаточное 'that-clause' раскрывает их содержание.
+• *The news **that the factory would close** shocked the town.*
+• *The possibility **that we may lose** has not been discussed.*
+
+**РАЗНИЦА:**
+• *The news **that shocked the town*** → Relative Clause (*that* = подлежащее, заменяет новость)
+• *The news **that the factory would close*** → Noun Clause (*that* = союз, после него идёт законченное предложение)
+
+---
+
+## 12. Сравнительная таблица Noun Clause и Relative Clause
+
+| Признак | NOUN CLAUSE | RELATIVE CLAUSE |
+|---|---|---|
+| **Функция** | Заменяет существительное | Определяет существительное |
+| **Antecedent (определяемое слово)** | НЕТ | ЕСТЬ |
+| **Удаление из предложения** | Невозможно | Возможно (в non-defining) |
+| **what** | Используется | Никогда не используется |
+| **Роль союза that** | Простой союз, не член предложения | Относительное местоимение |
+| **Запятая** | Никогда | Обязательна в non-defining |
+
+---
+
+## 13. 8 самых распространенных ошибок
+
+1. ❌ *I don't know where does he live.* → ✅ *where he lives* (прямой порядок слов)
+2. ❌ *Do you know what is the time?* → ✅ *what the time is*
+3. ❌ *Tell me why did she leave.* → ✅ *why she left*
+4. ❌ *It depends on if he comes.* → ✅ *on whether* (после предлога нельзя if)
+5. ❌ *I'm sure about that he will come.* → ✅ *I'm sure that he will come*
+6. ❌ *The words what he said...* → ✅ *that / which* (есть antecedent)
+7. ❌ *They demanded that he resigned.* → ✅ *that he resign* (subjunctive)
+8. ❌ *What we need are more chairs.* → ✅ *is* (Noun Clause = единственное число)
+
+---
+
+## 14. Одностраничная сводная таблица решений
+
+| Вопрос | Результат | Пример |
+|---|---|---|
+| Исходный вопрос с wh-словом? | wh-слово + подлежащее + сказуемое | *I know where he lives.* |
+| Исходный вопрос да/нет? | whether (или if с ограничениями) | *I wonder whether he knows.* |
+| После предлога? | без that → *the fact that* / *whether* | *depends on whether...* |
+| В роли подлежащего? | that не опускается; глагол в ед. ч. | *That he lied is true.* |
+| После demand / suggest / essential? | that + глагол в начальной форме (V1) | *demanded that he resign* |
+| Подлежащие совпадают? | wh-слово + to-infinitive | *I don't know what to do.* |
+`,
 
 };
