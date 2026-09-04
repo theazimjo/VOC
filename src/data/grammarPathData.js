@@ -3485,4 +3485,964 @@ export const grammarPathSections = [
       ],
     },
   },
+  {
+    id: 'sec-present-continuous',
+    order: 8,
+    title: "Present Continuous Zamoni (Hozirgi Davomli Zamon)",
+    titleRu: 'Настоящее длительное время (Present Continuous)',
+    icon: '⚡',
+    lessons: [
+      {
+        id: 'sec-present-continuous-l1',
+        order: 1,
+        title: "Present Continuous va Darak gaplar (am/is/are + V-ing)",
+        titleRu: 'Present Continuous и утверждения (am/is/are + V-ing)',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: "Present Continuous — aynan hozir, ayni daqiqada sodir bo'layotgan ish-harakatlar uchun ishlatiladi.",
+              ruleRu: 'Present Continuous используется для действий, происходящих прямо сейчас, в данный момент.',
+              formula: 'Subject + am / is / are + Verb-ing + Complement',
+              example: 'I am reading a book now. (Men hozir kitob o\'qiyapman.) She is sleeping.',
+              exampleRu: 'I am reading a book now. She is sleeping.',
+            },
+            exercises: [
+              { text: 'Present Continuous da fe\'ldan oldin nima keladi?', options: ['am / is / are', 'do / does', 'have / has'], correct: 0, explanation: 'Present Continuous da to be (am/is/are) yordamchi fe\'li ishlatiladi.' },
+              { text: 'I ___ reading a book right now.', options: ['am', 'is', 'are'], correct: 0, explanation: 'I bilan "am" ishlatiladi.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ega va yordamchi fe\'l mosligi: I am, He/She/It is, We/You/They are.',
+              ruleRu: 'Согласование: I am, He/She/It is, We/You/They are.',
+              formula: 'I am | He/She/It is | We/You/They are + V-ing',
+              example: 'He is working. They are playing football in the garden.',
+              exampleRu: 'He is working. They are playing football.',
+            },
+            exercises: [
+              { text: 'She ___ watching TV at the moment.', options: ['is', 'are', 'am'], correct: 0, explanation: 'She bilan "is" ishlatiladi.' },
+              { text: 'They ___ playing football in the yard.', options: ['are', 'is', 'am'], correct: 0, explanation: 'They bilan "are" ishlatiladi.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hozirgi vaqt kalit so\'zlari: now (hozir), right now, at the moment (ayni damda), Look!, Listen!.',
+              ruleRu: 'Указатели времени: now, right now, at the moment, Look!, Listen!.',
+              formula: 'Look! / Listen! + Subject + am/is/are + Verb-ing',
+              example: 'Look! The bus is coming. Listen! Someone is singing.',
+              exampleRu: 'Look! The bus is coming. Listen! Someone is singing.',
+            },
+            exercises: [
+              { text: 'Look! The train ___ .', options: ['is coming', 'comes', 'come'], correct: 0, explanation: 'Look! -> Hozir sodir bo\'layotgan harakat (is coming).' },
+              { text: 'Listen! The baby ___ .', options: ['is crying', 'cries', 'cry'], correct: 0, explanation: 'Listen! -> is crying.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqartma shakllar: I\'m, He\'s, She\'s, It\'s, We\'re, You\'re, They\'re.',
+              ruleRu: 'Сокращенные формы: I\'m, He\'s, She\'s, We\'re, They\'re.',
+              formula: 'Subject\'m / \'s / \'re + Verb-ing',
+              example: 'I\'m learning English. They\'re coming home.',
+              exampleRu: 'I\'m learning English. They\'re coming home.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I\'m writing an email now.', 'I writing an email now.'], correct: 0, explanation: 'I\'m writing (am shart!).' },
+              { text: 'Choose the correct sentence:', options: ['They\'re listening to music.', 'They listening to music.'], correct: 0, explanation: 'They\'re listening.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Darak gaplar qoidalarini birlashtiramiz (am/is/are + V-ing).',
+              ruleRu: 'Обобщим утвердительные предложения в Present Continuous.',
+              formula: 'Subject + am/is/are + Verb-ing + Complement',
+              example: 'I am studying, he is eating, and they are dancing.',
+              exampleRu: 'I am studying, he is eating, and they are dancing.',
+            },
+            exercises: [
+              { text: 'We ___ for the bus right now.', options: ['are waiting', 'is waiting', 'wait'], correct: 0, explanation: 'We + are waiting.' },
+              { text: 'Tom ___ his car now.', options: ['is washing', 'are washing', 'washes'], correct: 0, explanation: 'Tom (he) + is washing.' },
+              { text: 'Select the correct sentence:', options: ['She is reading a magazine.', 'She reading a magazine.'], correct: 0, explanation: 'She is reading.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-continuous-l2',
+        order: 2,
+        title: "Fe'llarga -ing qo'shish qoidalari",
+        titleRu: 'Правила добавления окончания -ing к глаголам',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: "Ko'pchilik fe'llarga shunchaki -ing qo'shiladi (work -> working, play -> playing).",
+              ruleRu: 'К большинству глаголов просто добавляется -ing (work -> working).',
+              formula: 'Verb + -ing (work ➔ working | play ➔ playing)',
+              example: 'do -> doing, speak -> speaking, read -> reading',
+              exampleRu: 'do -> doing, speak -> speaking',
+            },
+            exercises: [
+              { text: '"read" fe\'liga -ing qo\'shilsa qanday bo\'ladi?', options: ['reading', 'readed', 'readings'], correct: 0, explanation: 'read + ing -> reading.' },
+              { text: '"play" fe\'liga -ing qo\'shilishi:', options: ['playing', 'plaing', 'playng'], correct: 0, explanation: 'play + ing -> playing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Fe\'l o\'qilmaydigan "-e" bilan tugasa, "-e" tushib qoladi (make -> making, write -> writing).',
+              ruleRu: 'Если глагол оканчивается на немую "-e", она опускается (make -> making).',
+              formula: 'Verb (-e) ➔ drop "e" + -ing (make ➔ making)',
+              example: 'write -> writing, come -> coming, live -> living, take -> taking',
+              exampleRu: 'write -> writing, come -> coming',
+            },
+            exercises: [
+              { text: '"write" fe\'liga -ing qo\'shilganda qanday yoziladi?', options: ['writing', 'writeing', 'writting'], correct: 0, explanation: 'e tushib qoladi: writing.' },
+              { text: '"make" fe\'lining -ing shakli:', options: ['making', 'makeing'], correct: 0, explanation: 'make -> making.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa fe\'l 1 unli + 1 undosh bilan tugasa, oxirgi undosh Ikki baravar ko\'payadi (run -> running, sit -> sitting, swim -> swimming).',
+              ruleRu: 'Если короткий глагол оканчивается на 1 гласную + 1 согласную, согласная удваивается (run -> running).',
+              formula: 'Short Verb (1 Vowel + 1 Consonant) ➔ Double Consonant + -ing',
+              example: 'swim -> swimming, stop -> stopping, get -> getting, run -> running',
+              exampleRu: 'swim -> swimming, stop -> stopping',
+            },
+            exercises: [
+              { text: '"run" fe\'liga -ing qo\'shilsa qanday yoziladi?', options: ['running', 'runing', 'runed'], correct: 0, explanation: 'undosh ikkilanadi: running.' },
+              { text: '"swim" fe\'lining -ing shakli:', options: ['swimming', 'swiming'], correct: 0, explanation: 'swim -> swimming.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Fe\'l "-ie" bilan tugasa, "-ie" harflari "y" ga aylanadi (die -> dying, lie -> lying).',
+              ruleRu: 'Если глагол оканчивается на "-ie", они меняются на "y" (die -> dying).',
+              formula: 'Verb (-ie) ➔ -ie changes to "y" + -ing (lie ➔ lying)',
+              example: 'die -> dying, lie -> lying, tie -> tying',
+              exampleRu: 'die -> dying, lie -> lying',
+            },
+            exercises: [
+              { text: '"lie" fe\'lining -ing shaklini toping:', options: ['lying', 'lieing', 'ling'], correct: 0, explanation: 'lie -> lying.' },
+              { text: '"die" fe\'liga -ing qo\'shilishi:', options: ['dying', 'dieing'], correct: 0, explanation: 'die -> dying.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '-ing imlo qoidalarini birlashtiramiz (working, writing, running, lying).',
+              ruleRu: 'Обобщим правила правописания -ing.',
+              formula: 'Check ending: standard (-ing) | -e (drop e) | 1v+1c (double) | -ie (y+ing)',
+              example: 'playing, dancing, swimming, dying',
+              exampleRu: 'playing, dancing, swimming, dying',
+            },
+            exercises: [
+              { text: 'Choose the correct form of "dance":', options: ['dancing', 'danceing'], correct: 0, explanation: 'dance -> dancing (-e tushadi).' },
+              { text: 'Choose the correct form of "sit":', options: ['sitting', 'siting'], correct: 0, explanation: 'sit -> sitting (undosh ikkilanadi).' },
+              { text: 'Choose the correct sentence:', options: ['He is running in the park.', 'He is runing in the park.'], correct: 0, explanation: 'running.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-continuous-l3',
+        order: 3,
+        title: "Inkor gaplar: am not / isn't / aren't + V-ing",
+        titleRu: 'Отрицание: am not / isn\'t / aren\'t + V-ing',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Present Continuous inkor shakli yordamchi fe\'ldan keyin "not" qo\'yish bilan yasaladi.',
+              ruleRu: 'Отрицание образуется путем добавления "not" после am/is/are.',
+              formula: 'Subject + am not / is not / are not + Verb-ing + Complement',
+              example: 'I am not working now. (Men hozir ishlamayapman.) She is not reading.',
+              exampleRu: 'I am not working now. She is not reading.',
+            },
+            exercises: [
+              { text: 'I ___ working right now.', options: ["am not", "is not", "don't"], correct: 0, explanation: 'I + am not working.' },
+              { text: 'He ___ sleeping at the moment.', options: ["isn't", "aren't", "doesn't"], correct: 0, explanation: 'He + isn\'t sleeping.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqartma inkor shakllar: isn\'t (is not), aren\'t (are not). (am not qisqarmaydi: I\'m not).',
+              ruleRu: 'Сокращения: isn\'t, aren\'t. Для I: I\'m not.',
+              formula: 'I\'m not | He/She/It isn\'t | We/You/They aren\'t + V-ing',
+              example: 'We aren\'t playing. He isn\'t listening to music.',
+              exampleRu: 'We aren\'t playing. He isn\'t listening.',
+            },
+            exercises: [
+              { text: 'They ___ coming with us today.', options: ["aren't", "isn't", "don't"], correct: 0, explanation: 'They + aren\'t.' },
+              { text: 'She ___ listening to you.', options: ["isn't", "aren't"], correct: 0, explanation: 'She + isn\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hozir sodir bo\'lmayotgan harakat haqida gapirish.',
+              ruleRu: 'Выражение действий, не происходящих в данный момент.',
+              formula: 'Subject + isn\'t / aren\'t + Verb-ing + now',
+              example: 'It isn\'t raining now. You aren\'t concentrating.',
+              exampleRu: 'It isn\'t raining now. You aren\'t concentrating.',
+            },
+            exercises: [
+              { text: 'It ___ raining right now. The sun is shining.', options: ["isn't", "aren't", "not"], correct: 0, explanation: 'It + isn\'t raining.' },
+              { text: 'We ___ watching TV now. We are studying.', options: ["aren't", "isn't"], correct: 0, explanation: 'We + aren\'t watching.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Darak va inkor gaplarni taqqoslash (He is working -> He isn\'t working).',
+              ruleRu: 'Сравнение утверждений и отрицаний.',
+              formula: 'Affirmative: is/are + V-ing  |  Negative: isn\'t/aren\'t + V-ing',
+              example: 'I\'m not eating, I\'m drinking water.',
+              exampleRu: 'I\'m not eating, I\'m drinking water.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She isn\'t working today.', 'She not working today.'], correct: 0, explanation: 'She isn\'t working.' },
+              { text: 'Choose the correct sentence:', options: ['They aren\'t playing football.', 'They don\'t playing football.'], correct: 0, explanation: 'aren\'t playing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor qoidalarini birlashtiramiz (I\'m not, isn\'t, aren\'t).',
+              ruleRu: 'Обобщим отрицательные предложения в Present Continuous.',
+              formula: 'Subject + am not / isn\'t / aren\'t + Verb-ing',
+              example: 'I\'m not sleeping, he isn\'t working, and they aren\'t coming.',
+              exampleRu: 'I\'m not sleeping, he isn\'t working.',
+            },
+            exercises: [
+              { text: 'Tom ___ driving a car right now.', options: ["isn't", "aren't"], correct: 0, explanation: 'Tom (he) + isn\'t.' },
+              { text: 'You ___ listening to the teacher.', options: ["aren't", "isn't"], correct: 0, explanation: 'You + aren\'t.' },
+              { text: 'Select the correct sentence:', options: ['I\'m not crying.', 'I am no crying.'], correct: 0, explanation: 'I\'m not crying.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-continuous-l4',
+        order: 4,
+        title: "So'roq gaplar: Am / Is / Are ... + V-ing ?",
+        titleRu: 'Вопросы: Am / Is / Are ... + V-ing ?',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Present Continuous so\'roq gaplarida am/is/are ega (subject)dan OLDINGA o\'tadi.',
+              ruleRu: 'В вопросах am/is/are ставятся ПЕРЕД подлежащим.',
+              formula: 'Am / Is / Are + Subject + Verb-ing + Complement ?',
+              example: 'Are you reading? (Kitob o\'qiyapsizmi?) Is he sleeping?',
+              exampleRu: 'Are you reading? Is he sleeping?',
+            },
+            exercises: [
+              { text: '___ you working right now?', options: ['Are', 'Is', 'Do'], correct: 0, explanation: 'Are you working...?' },
+              { text: '___ she cooking dinner at the moment?', options: ['Is', 'Are', 'Does'], correct: 0, explanation: 'Is she cooking...?' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa javoblar: Yes, I am. / No, I\'m not. Yes, he is. / No, he isn\'t.',
+              ruleRu: 'Краткие ответы: Yes, I am. / No, I\'m not. Yes, he is. / No, he isn\'t.',
+              formula: 'Yes, Subject + am/is/are  |  No, Subject + \'m not/isn\'t/aren\'t',
+              example: 'Are you listening? — Yes, I am. / No, I\'m not.',
+              exampleRu: 'Are you listening? — Yes, I am.',
+            },
+            exercises: [
+              { text: 'Is Tom sleeping? — Yes, he ___ .', options: ['is', 'does', 'am'], correct: 0, explanation: 'Yes, he is.' },
+              { text: 'Are they coming? — No, they ___ .', options: ["aren't", "don't"], correct: 0, explanation: 'No, they aren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maxsus so\'roq gaplar (Wh- questions): What, Where, Why + am/is/are + Ega + V-ing ?.',
+              ruleRu: 'Специальные вопросы (Wh-): What/Where/Why + am/is/are + Подлежащее + V-ing ?',
+              formula: 'Wh- word + am / is / are + Subject + Verb-ing ?',
+              example: 'What are you doing? Where is he going?',
+              exampleRu: 'What are you doing? Where is he going?',
+            },
+            exercises: [
+              { text: 'What ___ you doing right now?', options: ['are', 'is', 'do'], correct: 0, explanation: 'What are you doing?' },
+              { text: 'Where ___ she going at this hour?', options: ['is', 'are', 'does'], correct: 0, explanation: 'Where is she going?' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'So\'roq gap so\'z tartibi: Yordamchi fe\'l + Ega + Asosiy fe\'l-ing.',
+              ruleRu: 'Порядок слов: Am/Is/Are + Подлежащее + Глагол-ing.',
+              formula: 'Am/Is/Are + Subject + Verb-ing ?',
+              example: 'Is it raining outside?',
+              exampleRu: 'Is it raining outside?',
+            },
+            exercises: [
+              { text: 'Choose the correct question:', options: ['Are you studying English?', 'You are studying English?'], correct: 0, explanation: 'Are + subject + V-ing.' },
+              { text: 'Choose the correct question:', options: ['Why is he crying?', 'Why he is crying?'], correct: 0, explanation: 'Why is he crying?' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'So\'roq qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим вопросительные предложения в Present Continuous.',
+              formula: 'Am/Is/Are + Subject + Verb-ing + ?',
+              example: 'Are you listening? What are you reading?',
+              exampleRu: 'Are you listening? What are you reading?',
+            },
+            exercises: [
+              { text: '___ they playing tennis in the court?', options: ['Are', 'Is'], correct: 0, explanation: 'Are they playing...?' },
+              { text: 'Is Anna writing a letter? — No, she ___ .', options: ["isn't", "doesn't"], correct: 0, explanation: 'No, she isn\'t.' },
+              { text: 'Select the correct question:', options: ['Where are we going?', 'Where we are going?'], correct: 0, explanation: 'Where are we going?' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-continuous-l5',
+        order: 5,
+        title: 'Present Continuous vs Present Simple (Hozir vs Har doim)',
+        titleRu: 'Present Continuous vs Present Simple (Сейчас vs Всегда)',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'DIQQAT! Present Simple — doimiy odat va rejim (har kuni). Present Continuous — faqat hozir sodir bo\'layotgan harakat.',
+              ruleRu: 'Present Simple — обычные регулярные действия. Present Continuous — действия прямо сейчас.',
+              formula: 'Present Simple (Every day / Usually)  vs  Present Continuous (Now / Right now)',
+              example: 'I drink coffee every day (PS). But now I am drinking tea (PC).',
+              exampleRu: 'I drink coffee every day vs I am drinking tea now.',
+            },
+            exercises: [
+              { text: 'I usually ___ tea, but today I ___ coffee.', options: ['drink / am drinking', 'am drinking / drink'], correct: 0, explanation: 'usually drink (PS) / today am drinking (PC).' },
+              { text: 'He ___ football every Sunday, but now he ___ books.', options: ['plays / is reading', 'is playing / reads'], correct: 0, explanation: 'every Sunday plays / now is reading.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kalit so\'zlarni solishtirish: always, usually, every day (Simple) vs now, at the moment, today (Continuous).',
+              ruleRu: 'Сравнение маркеров времени: every day (Simple) vs right now (Continuous).',
+              formula: 'Simple: every day | Continuous: right now',
+              example: 'She drives to work every day. She is driving now.',
+              exampleRu: 'She drives to work every day. She is driving now.',
+            },
+            exercises: [
+              { text: 'Look! The sun ___ . (shine)', options: ['is shining', 'shines'], correct: 0, explanation: 'Look! -> Present Continuous (is shining).' },
+              { text: 'The sun ___ in the east. (rise)', options: ['rises', 'is rising'], correct: 0, explanation: 'Umumiy haqiqat -> Present Simple (rises).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqtinchalik holatlar (Temporary Situations): This week, these days -> Present Continuous.',
+              ruleRu: 'Временные ситуации (this week, these days) -> Present Continuous.',
+              formula: 'Subject + am/is/are + Verb-ing (this week / temporary)',
+              example: 'I live in Tashkent (doimiy). I am staying at a hotel this week (vaqtinchalik).',
+              exampleRu: 'I live in Tashkent vs I am staying at a hotel this week.',
+            },
+            exercises: [
+              { text: 'I ___ with my friend this week.', options: ['am staying', 'stay'], correct: 0, explanation: 'this week (vaqtinchalik) -> am staying.' },
+              { text: 'She usually ___ in London, but this month she ___ in Paris.', options: ['lives / is living', 'is living / lives'], correct: 0, explanation: 'usually lives / this month is living.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ikkala zamonni bitta gapda ishlatish.',
+              ruleRu: 'Использование обоих времен в одном предложении.',
+              formula: 'Habit (Present Simple) + but + Current Action (Present Continuous)',
+              example: 'He doesn\'t usually wear glasses, but he is wearing them today.',
+              exampleRu: 'He doesn\'t usually wear glasses, but he is wearing them today.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['He works every day, but today he is resting.', 'He is working every day, but today he rests.'], correct: 0, explanation: 'works every day / today is resting.' },
+              { text: 'Choose the correct sentence:', options: ['I don\'t usually drink milk, but I\'m drinking it now.', 'I\'m not usually drinking milk, but I drink it now.'], correct: 0, explanation: 'don\'t usually drink / drinking it now.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Taqqoslash qoidalarini birlashtiramiz.',
+              ruleRu: 'Итоговое сравнение Present Simple и Present Continuous.',
+              formula: 'Routine (V1 / V-s)  vs  Right Now (am/is/are + V-ing)',
+              example: 'I learn English every day, and I am studying grammar now.',
+              exampleRu: 'I learn English every day, and I am studying grammar now.',
+            },
+            exercises: [
+              { text: '— What are you doing? — I ___ an essay.', options: ['am writing', 'write'], correct: 0, explanation: 'Savol "doing?" -> am writing.' },
+              { text: '— What do you do? — I ___ a teacher.', options: ['am', 'am being'], correct: 0, explanation: 'Kasb/Har doim -> am a teacher.' },
+              { text: 'Select the correct sentence:', options: ['Listen! Somebody is playing the piano.', 'Listen! Somebody plays the piano.'], correct: 0, explanation: 'Listen! -> is playing.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-continuous-l6',
+        order: 6,
+        title: 'Stative Verbs (Harakat bildirmaydigan fe\'llar)',
+        titleRu: 'Глаголы состояния (Stative Verbs)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'MUHIM! Ba\'zi fe\'llar (Stative Verbs) harakat emas, holat bildiradi va Present Continuous (-ing) da ishlatilmaydi! Ularni doim Present Simple da ishlatamiz.',
+              ruleRu: 'ВАЖНО! Глаголы состояния (like, know, want) НЕ используются в Present Continuous! Используйте Present Simple.',
+              formula: 'Stative Verbs (know, want, like) ➔ Present Simple ONLY! (NO -ing!)',
+              example: 'I want ice cream (I am wanting... ❌). I know the answer (I am knowing... ❌).',
+              exampleRu: 'I want ice cream. I know the answer.',
+            },
+            exercises: [
+              { text: 'Qaysi fe\'l Present Continuous da ishlatilmaydi?', options: ['know (bilmoq)', 'run (yugurmoq)', 'read (o\'qimoq)'], correct: 0, explanation: 'know (holat fe\'li) Continuous bo\'lmaydi.' },
+              { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'I know (am knowing xato!).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan Stative Verbs: know, want, like, love, understand, remember, need, believe, prefer.',
+              ruleRu: 'Основные глаголы состояния: know, want, like, love, understand, remember, need.',
+              formula: 'Subject + know / want / like / understand (NO -ing)',
+              example: 'Do you understand? (Are you understanding...? ❌) She likes chocolate.',
+              exampleRu: 'Do you understand? She likes chocolate.',
+            },
+            exercises: [
+              { text: 'She ___ a cup of tea now.', options: ['wants', 'is wanting'], correct: 0, explanation: 'want -> Present Simple (wants).' },
+              { text: 'Do you ___ me?', options: ['understand', 'understanding'], correct: 0, explanation: 'Do you understand?' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hissiyot va fikrlash fe\'llari: love, hate, believe, remember, forget.',
+              ruleRu: 'Глаголы чувств и мыслей: love, hate, believe, remember.',
+              formula: 'Subject + love / believe / remember + Object',
+              example: 'I love this song! (I am loving... ❌) I remember his name.',
+              exampleRu: 'I love this song! I remember his name.',
+            },
+            exercises: [
+              { text: 'I ___ this movie!', options: ['love', 'am loving'], correct: 0, explanation: 'I love.' },
+              { text: 'He ___ his phone number.', options: ['remembers', 'is remembering'], correct: 0, explanation: 'He remembers.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ba\'zi fe\'llar 2 ta ma\'noga ega: think (o\'ylamoq/fikr -> Simple) va think (xayoldan o\'tkazmoq/process -> Continuous).',
+              ruleRu: 'Двойное значение: think (считать -> Simple) vs think (обдумывать -> Continuous).',
+              formula: 'Opinion: I think he is smart  |  Process: I am thinking about my test',
+              example: 'I think it is a good idea (fikrimcha). I am thinking about my holiday (o\'ylayapman).',
+              exampleRu: 'I think it is good vs I am thinking about holiday.',
+            },
+            exercises: [
+              { text: 'I ___ he is a great doctor.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr bildirish -> think.' },
+              { text: 'Be quiet! I ___ about a problem.', options: ['am thinking', 'think'], correct: 0, explanation: 'Hozirgi fikrlash jarayoni -> am thinking.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Stative Verbs qoidalarini va barcha 6 ta darsni yakunlaymiz.',
+              ruleRu: 'Обобщим правила глаголов состояния и всего раздела.',
+              formula: 'Action Verbs ➔ Continuous (am/is/are + V-ing) | Stative ➔ Simple (V1)',
+              example: 'I am eating pizza (Action) and I love it (Stative).',
+              exampleRu: 'I am eating pizza and I love it.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I need help right now.', 'I am needing help right now.'], correct: 0, explanation: 'need -> Present Simple (I need).' },
+              { text: 'Choose the correct sentence:', options: ['She is reading a book and she likes it.', 'She is reading a book and she is liking it.'], correct: 0, explanation: 'likes it.' },
+              { text: 'Select the correct sentence:', options: ['Do you know the answer?', 'Are you knowing the answer?'], correct: 0, explanation: 'Do you know...?' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Present Continuous Zamoni",
+      titleRu: 'Тест раздела: Настоящее длительное время (Present Continuous)',
+      exercises: [
+        { text: 'I ___ reading a newspaper right now.', options: ['am', 'is', 'are'], correct: 0, explanation: 'I + am.' },
+        { text: 'She ___ sleeping at the moment.', options: ['is', 'are', 'am'], correct: 0, explanation: 'She + is.' },
+        { text: 'They ___ playing football in the yard.', options: ['are', 'is', 'am'], correct: 0, explanation: 'They + are.' },
+        { text: 'Look! The bus ___ .', options: ['is coming', 'comes', 'come'], correct: 0, explanation: 'Look! -> is coming.' },
+        { text: 'Choose the correct -ing form of "write":', options: ['writing', 'writeing'], correct: 0, explanation: 'write -> writing.' },
+        { text: 'Choose the correct -ing form of "run":', options: ['running', 'runing'], correct: 0, explanation: 'run -> running.' },
+        { text: 'Choose the correct -ing form of "lie":', options: ['lying', 'lieing'], correct: 0, explanation: 'lie -> lying.' },
+        { text: 'He ___ working today. He is ill.', options: ["isn't", "aren't", "don't"], correct: 0, explanation: 'He + isn\'t.' },
+        { text: 'We ___ watching TV now.', options: ["aren't", "isn't", "don't"], correct: 0, explanation: 'We + aren\'t.' },
+        { text: '___ you listening to music right now?', options: ['Are', 'Is', 'Do'], correct: 0, explanation: 'Are you listening...?' },
+        { text: 'Is Tom playing games? — Yes, he ___ .', options: ['is', 'does', 'am'], correct: 0, explanation: 'Yes, he is.' },
+        { text: 'What ___ she doing at the moment?', options: ['is', 'are', 'does'], correct: 0, explanation: 'What is she doing?' },
+        { text: 'I usually ___ coffee, but today I ___ tea.', options: ['drink / am drinking', 'am drinking / drink'], correct: 0, explanation: 'usually drink / today am drinking.' },
+        { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'know -> Stative Verb (Present Simple).' },
+        { text: 'Choose the correct sentence:', options: ['She is reading and she likes the book.', 'She is reading and she is liking the book.'], correct: 0, explanation: 'likes (Stative verb).' },
+      ],
+    },
+  },
+  {
+    id: 'sec-simple-vs-continuous',
+    order: 9,
+    title: "Present Simple vs Present Continuous (Taqqoslash)",
+    titleRu: 'Present Simple vs Present Continuous (Сравнение)',
+    icon: '⚖️',
+    lessons: [
+      {
+        id: 'sec-simple-vs-continuous-l1',
+        order: 1,
+        title: "Doimiy odatlar (Habits) vs Hozirgi harakat (Right Now)",
+        titleRu: 'Привычки (Habits) vs Действие прямо сейчас (Right Now)',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: "Present Simple — doimiy odatlar va har kuni takrorlanadigan rejimlar uchun (I play football on Sundays). Present Continuous — ayni shu soniyada sodir bo'layotgan harakat uchun (I am playing football now).",
+              ruleRu: 'Present Simple — постоянные привычки и режим. Present Continuous — действия прямо сейчас.',
+              formula: 'Habit (Every day ➔ Present Simple)  vs  Current Action (Now ➔ Present Continuous)',
+              example: 'I drink coffee every morning (Simple). Look! I am drinking tea now (Continuous).',
+              exampleRu: 'I drink coffee every morning vs I am drinking tea now.',
+            },
+            exercises: [
+              { text: 'Har kuni takrorlanadigan odat uchun qaysi zamon ishlatiladi?', options: ['Present Simple', 'Present Continuous'], correct: 0, explanation: 'Odatlar va kun tartibi -> Present Simple.' },
+              { text: 'I usually ___ at 7 AM, but today I ___ at 8 AM.', options: ['wake up / am waking up', 'am waking up / wake up'], correct: 0, explanation: 'usually wake up (PS) / today am waking up (PC).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ega va fe\'l ko\'rinishidagi farq: Present Simple (V1 / V-s) vs Present Continuous (am/is/are + V-ing).',
+              ruleRu: 'Разница в форме: Present Simple (V1 / V-s) vs Present Continuous (am/is/are + V-ing).',
+              formula: 'Simple: V1 / V-s  |  Continuous: am/is/are + V-ing',
+              example: 'He works in a bank (Simple). He is working on a computer now (Continuous).',
+              exampleRu: 'He works in a bank vs He is working now.',
+            },
+            exercises: [
+              { text: 'She ___ English books every week.', options: ['reads', 'is reading'], correct: 0, explanation: 'every week (odat) -> reads.' },
+              { text: 'She ___ an English book right now.', options: ['is reading', 'reads'], correct: 0, explanation: 'right now (hozir) -> is reading.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Savol gaplardagi yordamchi fe\'l farqi: Do/Does (Simple) vs Am/Is/Are (Continuous).',
+              ruleRu: 'Разница в вопросах: Do/Does (Simple) vs Am/Is/Are (Continuous).',
+              formula: 'Simple Question: Do / Does + Subj + V1 ?  |  Continuous Question: Am / Is / Are + Subj + V-ing ?',
+              example: 'Do you play tennis? (Umuman o\'ynaysizmi?) vs Are you playing tennis now? (Hozir o\'ynayapsizmi?)',
+              exampleRu: 'Do you play tennis? vs Are you playing tennis now?',
+            },
+            exercises: [
+              { text: '— ___ you speak French? — Yes, I do.', options: ['Do', 'Are'], correct: 0, explanation: 'Umumiy savol -> Do you speak...?' },
+              { text: '— ___ you speaking French to Alex right now? — Yes, I am.', options: ['Are', 'Do'], correct: 0, explanation: 'right now -> Are you speaking...?' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor gaplardagi farq: don\'t/doesn\'t + V1 (Simple) vs am not/isn\'t/aren\'t + V-ing (Continuous).',
+              ruleRu: 'Разница в отрицаниях: don\'t/doesn\'t (Simple) vs isn\'t/aren\'t (Continuous).',
+              formula: 'Simple Negative: don\'t / doesn\'t + V1  |  Continuous Negative: isn\'t / aren\'t + V-ing',
+              example: 'I don\'t eat meat (umuman yemayman). I\'m not eating meat today (bugun yemayapman).',
+              exampleRu: 'I don\'t eat meat vs I\'m not eating meat today.',
+            },
+            exercises: [
+              { text: 'He ___ watch TV on weekdays.', options: ["doesn't", "isn't"], correct: 0, explanation: 'on weekdays (odat) -> doesn\'t watch.' },
+              { text: 'He ___ watching TV now. He is asleep.', options: ["isn't", "doesn't"], correct: 0, explanation: 'now (hozir) -> isn\'t watching.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Darak, inkor va so\'roqdagi asosiy farqlarni birlashtiramiz.',
+              ruleRu: 'Обобщим основные различия между Simple и Continuous.',
+              formula: 'Routine ➔ Simple (V1 / V-s) | Right Now ➔ Continuous (am/is/are + V-ing)',
+              example: 'They live in Tashkent, but they are visiting Samarkand this weekend.',
+              exampleRu: 'They live in Tashkent, but they are visiting Samarkand.',
+            },
+            exercises: [
+              { text: 'Tom ___ to school by bus every day.', options: ['goes', 'is going'], correct: 0, explanation: 'every day -> goes.' },
+              { text: 'Listen! Tom ___ the piano in the room.', options: ['is playing', 'plays'], correct: 0, explanation: 'Listen! -> is playing.' },
+              { text: 'Choose the correct sentence:', options: ['I work every day, but now I am sleeping.', 'I am working every day, but now I sleep.'], correct: 0, explanation: 'work every day / am sleeping now.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-simple-vs-continuous-l2',
+        order: 2,
+        title: "Doimiy holat (Permanent) vs Vaqtinchalik holat (Temporary)",
+        titleRu: 'Постоянные состояния (Permanent) vs Временные (Temporary)',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: "Present Simple — doimiy holat (Permanent situation) uchun ishlatiladi (I live in Uzbekistan). Present Continuous — vaqtinchalik holat (Temporary situation) uchun (I am staying at a hotel this week).",
+              ruleRu: 'Present Simple — постоянная ситуация. Present Continuous — временная ситуация.',
+              formula: 'Permanent ➔ Present Simple  |  Temporary (this week/month) ➔ Present Continuous',
+              example: 'My mother works as a doctor (doimiy). She is working on a new project this month (vaqtinchalik).',
+              exampleRu: 'My mother works as a doctor vs She is working on a new project this month.',
+            },
+            exercises: [
+              { text: 'Vaqtinchalik (this week, these days) holatlar uchun qaysi zamon ishlatiladi?', options: ['Present Continuous', 'Present Simple'], correct: 0, explanation: 'Vaqtinchalik vaziyatlar -> Present Continuous.' },
+              { text: 'Where do you live? — I ___ in Tashkent.', options: ['live', 'am living'], correct: 0, explanation: 'Doimiy yashash joyi -> live.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'This week, these days, at present — vaqtinchalik davr ko\'rsatgichlari.',
+              ruleRu: 'Маркеры временных ситуаций: this week, these days, at present.',
+              formula: 'Subject + am/is/are + Verb-ing (this week / these days)',
+              example: 'He is living with his friends this month until he finds a flat.',
+              exampleRu: 'He is living with his friends this month.',
+            },
+            exercises: [
+              { text: 'She ___ a French course this month.', options: ['is taking', 'takes'], correct: 0, explanation: 'this month (vaqtinchalik) -> is taking.' },
+              { text: 'My dad ___ a lot of hours this week.', options: ['is working', 'works'], correct: 0, explanation: 'this week -> is working.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'O\'zgarib borayotgan jarayonlar (Changing / Developing situations) -> Present Continuous.',
+              ruleRu: 'Развивающиеся и меняющиеся ситуации -> Present Continuous.',
+              formula: 'Subject + am/is/are + getting / becoming / growing + Adjective',
+              example: 'The weather is getting colder. Your English is improving.',
+              exampleRu: 'The weather is getting colder. Your English is improving.',
+            },
+            exercises: [
+              { text: 'Your English ___ better and better!', options: ['is getting', 'gets'], correct: 0, explanation: 'O\'zgarib borayotgan jarayon -> is getting.' },
+              { text: 'The city ___ very fast.', options: ['is growing', 'grows'], correct: 0, explanation: 'Rivojlanayotgan jarayon -> is growing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Doimiy va vaqtinchalik vaziyatlarni bitta gapda taqqoslash.',
+              ruleRu: 'Сравнение постоянных и временных ситуаций в одном предложении.',
+              formula: 'Permanent Habit (Present Simple) + but + Temporary Action (Present Continuous)',
+              example: 'He usually drives a car, but this week he is riding a bike.',
+              exampleRu: 'He usually drives a car, but this week he is riding a bike.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I live in Tashkent, but I am staying in Samarkand this week.', 'I am living in Tashkent, but I stay in Samarkand this week.'], correct: 0, explanation: 'live in Tashkent (permanent) / staying this week (temporary).' },
+              { text: 'Choose the correct sentence:', options: ['She usually eats at home, but today she is eating at a restaurant.', 'She is usually eating at home, but today she eats at a restaurant.'], correct: 0, explanation: 'usually eats / today is eating.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Doimiy va vaqtinchalik vaziyatlar qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила постоянных и временных ситуаций.',
+              formula: 'Permanent ➔ Simple | Temporary ➔ Continuous',
+              example: 'I work at a school, but today I am resting at home.',
+              exampleRu: 'I work at a school, but today I am resting at home.',
+            },
+            exercises: [
+              { text: 'The climate ___ warmer every year.', options: ['is becoming', 'becomes'], correct: 0, explanation: 'O\'zgarayotgan jarayon -> is becoming.' },
+              { text: 'They ___ in London permanently.', options: ['live', 'are living'], correct: 0, explanation: 'Permanently -> live.' },
+              { text: 'Select the correct sentence:', options: ['He is taking driving lessons this month.', 'He takes driving lessons this month.'], correct: 0, explanation: 'this month -> is taking.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-simple-vs-continuous-l3',
+        order: 3,
+        title: "Kalit so'zlar qarama-qarshiligi (Time Markers)",
+        titleRu: 'Сравнение маркеров времени (Time Markers)',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Present Simple va Present Continuous kalit so\'zlarini hech qachon aralashtirmang!',
+              ruleRu: 'Не путайте указатели времени двух времен!',
+              formula: 'Simple: always, usually, often, every day | Continuous: now, right now, Look!, Listen!',
+              example: 'I always do homework (Simple). Look! She is doing homework (Continuous).',
+              exampleRu: 'I always do homework vs Look! She is doing homework.',
+            },
+            exercises: [
+              { text: '"Look!" kalit so\'zidan so\'ng qaysi zamon keladi?', options: ['Present Continuous', 'Present Simple'], correct: 0, explanation: 'Look! -> Present Continuous.' },
+              { text: '"usually" kalit so\'zi qaysi zamonga xos?', options: ['Present Simple', 'Present Continuous'], correct: 0, explanation: 'usually -> Present Simple.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Present Simple kalit so\'zlari: always (doim), usually (odatda), often (tez-tez), sometimes (ba\'zan), never (hech qachon), every day/week/year, on Mondays.',
+              ruleRu: 'Маркеры Present Simple: always, usually, often, sometimes, never, every day.',
+              formula: 'Subject + frequency adverb (always/usually) + Verb (V1 / V-s)',
+              example: 'He often plays chess on Sundays. We never eat fast food.',
+              exampleRu: 'He often plays chess on Sundays. We never eat fast food.',
+            },
+            exercises: [
+              { text: 'She ___ comes late. (hech qachon)', options: ['never', 'now'], correct: 0, explanation: 'never comes.' },
+              { text: 'We go to the park ___ .', options: ['every weekend', 'right now'], correct: 0, explanation: 'go (Simple) -> every weekend.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Present Continuous kalit so\'zlari: now (hozir), right now, at present, at the moment (ayni damda), today, this morning, Look!, Listen!.',
+              ruleRu: 'Маркеры Present Continuous: now, right now, at the moment, today, Look!, Listen!.',
+              formula: 'Look! / Listen! / Now ➔ am/is/are + Verb-ing',
+              example: 'Listen! The phone is ringing. I am working at the moment.',
+              exampleRu: 'Listen! The phone is ringing. I am working at the moment.',
+            },
+            exercises: [
+              { text: 'Listen! Someone ___ at the door.', options: ['is knocking', 'knocks'], correct: 0, explanation: 'Listen! -> is knocking.' },
+              { text: 'What are you reading ___ ?', options: ['right now', 'every day'], correct: 0, explanation: 'are you reading -> right now.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kalit so\'zlarga qarab zamonni to\'g\'ri tanlash amaliyoti.',
+              ruleRu: 'Практика выбора времени по маркерам.',
+              formula: 'Check time signal ➔ Select Simple or Continuous',
+              example: 'I study English every day. I am studying right now.',
+              exampleRu: 'I study English every day. I am studying right now.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['He always drinks tea in the morning.', 'He is always drinking tea in the morning.'], correct: 0, explanation: 'always in the morning -> drinks.' },
+              { text: 'Choose the correct sentence:', options: ['Look! The cat is jumping on the sofa.', 'Look! The cat jumps on the sofa.'], correct: 0, explanation: 'Look! -> is jumping.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kalit so\'zlar qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила применения маркеров времени.',
+              formula: 'every day ➔ Simple | right now ➔ Continuous',
+              example: 'They usually play football, but today they are playing basketball.',
+              exampleRu: 'They usually play football, but today they are playing basketball.',
+            },
+            exercises: [
+              { text: 'Anna ___ her grandma every Sunday.', options: ['visits', 'is visiting'], correct: 0, explanation: 'every Sunday -> visits.' },
+              { text: 'Anna ___ her grandma at the moment.', options: ['is visiting', 'visits'], correct: 0, explanation: 'at the moment -> is visiting.' },
+              { text: 'Select the correct sentence:', options: ['Listen! The teacher is speaking.', 'Listen! The teacher speaks.'], correct: 0, explanation: 'Listen! -> is speaking.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-simple-vs-continuous-l4',
+        order: 4,
+        title: "Stative Verbs istisnolari (Hissiyot va Fikr fe'llari)",
+        titleRu: 'Исключения: Глаголы состояния (Stative Verbs)',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'QAYTA TAKRORLAYMIZ! Harakat bildirmaydigan fe\'llar (Stative Verbs) sharoit "now / right now" bo\'lsa ham, HECH QACHON Present Continuous (-ing) da ishlatilmaydi! Har doim Present Simple ishlatiladi.',
+              ruleRu: 'Глаголы состояния (know, like, want, understand) НЕ используются в Continuous даже со словом "now"!',
+              formula: 'Stative Verbs (know, want, like, understand) ➔ Present Simple ONLY! (NO -ing!)',
+              example: 'I understand you now (I am understanding... ❌). She wants tea now (She is wanting... ❌).',
+              exampleRu: 'I understand you now. She wants tea now.',
+            },
+            exercises: [
+              { text: 'I ___ what you mean right now.', options: ['understand', 'am understanding'], correct: 0, explanation: 'understand -> Stative Verb (Simple).' },
+              { text: 'She ___ a cup of coffee right now.', options: ['wants', 'is wanting'], correct: 0, explanation: 'want -> Stative Verb (Simple).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Eng muhim Stative Verbs ro\'yxati: know (bilmoq), want (xohlamoq), like (yoqtirmoq), love (sewmoq), hate (yomon ko\'rmoq), understand (tushunmoq), remember (eslamoq), forget (unutmoq), need (muhtoj bo\'lmoq), prefer (afzal ko\'rmoq), believe (ishonmoq).',
+              ruleRu: 'Список глаголов состояния: know, want, like, love, understand, remember, need, believe.',
+              formula: 'Subject + Stative Verb (Simple) + Object',
+              example: 'Do you believe him? (Are you believing... ❌). I remember your name.',
+              exampleRu: 'Do you believe him? I remember your name.',
+            },
+            exercises: [
+              { text: 'Do you ___ him?', options: ['believe', 'believing'], correct: 0, explanation: 'Do you believe?' },
+              { text: 'He ___ help right now.', options: ['needs', 'is needing'], correct: 0, explanation: 'need -> Present Simple (needs).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Sezgi a\'zolari fe\'llari: hear (eshitmoq), see (ko\'rmoq), smell (hid bilmoq), taste (maza bilmoq) -> Present Simple da ishlatiladi.',
+              ruleRu: 'Глаголы чувств: hear, see, smell, taste -> Present Simple.',
+              formula: 'Subject + hear / see / smell / taste',
+              example: 'I hear a strange noise (I am hearing... ❌). This soup tastes delicious.',
+              exampleRu: 'I hear a strange noise. This soup tastes delicious.',
+            },
+            exercises: [
+              { text: 'I ___ a noise outside right now.', options: ['hear', 'am hearing'], correct: 0, explanation: 'hear -> Present Simple.' },
+              { text: 'This coffee ___ great.', options: ['tastes', 'is tasting'], correct: 0, explanation: 'taste -> Present Simple.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Harakat va Holat fe\'llarini ajratish mashqi.',
+              ruleRu: 'Различение глаголов действия и состояния.',
+              formula: 'Action (run, eat, read ➔ Continuous ok) | Stative (know, want, like ➔ Simple only)',
+              example: 'I am eating pizza (Action - Continuous ok). I like pizza (Stative - Simple only).',
+              exampleRu: 'I am eating pizza vs I like pizza.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I know the answer right now.', 'I am knowing the answer right now.'], correct: 0, explanation: 'know -> Present Simple.' },
+              { text: 'Choose the correct sentence:', options: ['She is drinking water because she likes it.', 'She is drinking water because she is liking it.'], correct: 0, explanation: 'likes it (Stative).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Stative Verbs istisnolarini birlashtiramiz.',
+              ruleRu: 'Обобщим исключения глаголов состояния.',
+              formula: 'NO -ing for: know, want, like, love, understand, need, remember!',
+              example: 'I am studying now (Action) and I understand everything (Stative).',
+              exampleRu: 'I am studying now and I understand everything.',
+            },
+            exercises: [
+              { text: 'I ___ you are right.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr -> think.' },
+              { text: 'She ___ two sisters.', options: ['has', 'is having'], correct: 0, explanation: 'Egalik -> has.' },
+              { text: 'Select the correct sentence:', options: ['Do you remember my phone number?', 'Are you remembering my phone number?'], correct: 0, explanation: 'remember -> Simple.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-simple-vs-continuous-l5',
+        order: 5,
+        title: "Ikki ma'noli fe'llar (Dynamic vs Stative Meanings)",
+        titleRu: 'Глаголы с двойным значением (think, have, see)',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'DIQQAT! Ba\'zi fe\'llar 2 xil ma\'noga ega: Holat bildirganda Present Simple, Harakat/Jarayon bildirganda Present Continuous bo\'ladi!',
+              ruleRu: 'Некоторые глаголы имеют 2 значения: состояние (Simple) и процесс (Continuous).',
+              formula: 'State (Opinion / Possession ➔ Simple)  vs  Action (Process / Event ➔ Continuous)',
+              example: 'I think he is nice (Fikrimcha - Simple) vs I am thinking about the exam (O\'ylayapman - Continuous).',
+              exampleRu: 'I think he is nice vs I am thinking about the exam.',
+            },
+            exercises: [
+              { text: 'I ___ he is right. (fikrimcha)', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr bildirish -> think.' },
+              { text: 'Quiet! I ___ about a difficult question.', options: ['am thinking', 'think'], correct: 0, explanation: 'Jarayon/O\'ylash -> am thinking.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"have" fe\'li: Egalik ma\'nosida -> Simple (I have a car). Harakat/Iste\'mol ma\'nosida -> Continuous (I am having breakfast).',
+              ruleRu: 'Глагол "have": владение (Simple) vs процесс (Continuous: have breakfast/shower).',
+              formula: 'Possession: I have a car (Simple)  |  Action: I am having breakfast (Continuous)',
+              example: 'She has a big house (Simple). She is having a shower now (Continuous).',
+              exampleRu: 'She has a big house vs She is having a shower now.',
+            },
+            exercises: [
+              { text: 'Tom ___ a nice bicycle.', options: ['has', 'is having'], correct: 0, explanation: 'Egalik -> has.' },
+              { text: 'Look! They ___ lunch in the kitchen.', options: ['are having', 'have'], correct: 0, explanation: 'Tushlik qilish (harakat) -> are having.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"see" fe\'li: Ko\'rmoq/Tushunmoq -> Simple (I see a bird). Uchrashmoq -> Continuous (I am seeing a doctor tomorrow).',
+              ruleRu: 'Глагол "see": видеть (Simple) vs встречаться (Continuous).',
+              formula: 'Vision: I see a bird (Simple)  |  Meeting: I am seeing my doctor today (Continuous)',
+              example: 'I see what you mean (tushunyapman). I am seeing my boss at 3 PM (uchrashyapman).',
+              exampleRu: 'I see what you mean vs I am seeing my boss today.',
+            },
+            exercises: [
+              { text: 'I ___ a bird in the tree right now.', options: ['see', 'am seeing'], correct: 0, explanation: 'Ko\'rish sezgisi -> see.' },
+              { text: 'She ___ her dentist tomorrow afternoon.', options: ['is seeing', 'sees'], correct: 0, explanation: 'Uchrashuv rejasi -> is seeing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"taste" va "smell": Xususiyat bildirganda -> Simple. Hidlash/Tatib ko\'rish harakati -> Continuous.',
+              ruleRu: 'taste / smell: свойство (Simple) vs процесс пробы/нюхания (Continuous).',
+              formula: 'Property: The soup tastes good (Simple)  |  Action: The chef is tasting the soup (Continuous)',
+              example: 'This flower smells nice (Simple). She is smelling the rose (Continuous).',
+              exampleRu: 'This flower smells nice vs She is smelling the rose.',
+            },
+            exercises: [
+              { text: 'This cake ___ delicious!', options: ['tastes', 'is tasting'], correct: 0, explanation: 'Maza xususiyati -> tastes.' },
+              { text: 'Look! The cook ___ the sauce.', options: ['is tasting', 'tastes'], correct: 0, explanation: 'Tatib ko\'rish harakati -> is tasting.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ikki ma\'noli fe\'llar qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила глаголов с двойным значением.',
+              formula: 'State / Opinion ➔ Simple | Process / Action ➔ Continuous',
+              example: 'I have a car and I am having a great time.',
+              exampleRu: 'I have a car and I am having a great time.',
+            },
+            exercises: [
+              { text: 'I ___ a great time at the party right now!', options: ['am having', 'have'], correct: 0, explanation: 'Vaqt o\'tkazish harakati -> am having.' },
+              { text: 'Do you ___ a pen?', options: ['have', 'having'], correct: 0, explanation: 'Egalik -> have.' },
+              { text: 'Select the correct sentence:', options: ['I think she is friendly.', 'I am thinking she is friendly.'], correct: 0, explanation: 'Fikr -> think.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-simple-vs-continuous-l6',
+        order: 6,
+        title: "Aralash gaplar va Xatolarni tuzatish (Error Correction)",
+        titleRu: 'Исправление ошибок и смешанная практика (Error Correction)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta katta xato: 1) Stative verb ga -ing qo\'shish ❌ 2) Present Continuous da am/is/are ni tushirib qoldirish ❌ 3) Hozirgi harakatga Present Simple ishlatish ❌.',
+              ruleRu: '3 главные ошибки: 1) -ing к глаголу состояния 2) пропуск am/is/are 3) Simple вместо Continuous для "сейчас".',
+              formula: 'Check 3 Errors: 1. I know (not I am knowing) 2. She is working (not She working) 3. He is playing now (not He plays now)',
+              example: 'I am knowing ❌ ➔ I know ✅; She working ❌ ➔ She is working ✅; He plays now ❌ ➔ He is playing now ✅.',
+              exampleRu: 'I know. She is working. He is playing now.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I know the answer.', 'I am knowing the answer.'], correct: 0, explanation: 'know -> Present Simple.' },
+              { text: 'Choose the correct sentence:', options: ['Look! He is running fast.', 'Look! He running fast.'], correct: 0, explanation: 'is running (is yordamchi fe\'li shart!).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Real muloqot va dialoglarda Present Simple hamda Present Continuous ni to\'g\'ri qo\'llash.',
+              ruleRu: 'Практика диалогов в Present Simple и Continuous.',
+              formula: 'Dialogue Context: Routine ➔ Simple | Current Moment ➔ Continuous',
+              example: '— What are you doing? — I am reading. — Do you read every day? — Yes, I do.',
+              exampleRu: '— What are you doing? — I am reading. — Do you read every day? — Yes, I do.',
+            },
+            exercises: [
+              { text: '— What ___ you doing? — I ___ my homework.', options: ['are / am doing', 'do / do'], correct: 0, explanation: 'Hozirgi mashg\'ulot -> are you doing / am doing.' },
+              { text: '— Where ___ your brother work? — He ___ in a bank.', options: ['does / works', 'is / working'], correct: 0, explanation: 'Doimiy ish joyi -> does / works.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Lug\'at va zamonlar uyg\'unligini sinash mashqi.',
+              ruleRu: 'Практика гармонии времен и лексики.',
+              formula: 'Check context markers: usually ➔ Simple | right now ➔ Continuous',
+              example: 'She usually plays tennis, but today she is playing golf.',
+              exampleRu: 'She usually plays tennis, but today she is playing golf.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I don\'t understand this rule.', 'I am not understanding this rule.'], correct: 0, explanation: 'understand -> Present Simple.' },
+              { text: 'Choose the correct sentence:', options: ['Listen! The birds are singing.', 'Listen! The birds sing.'], correct: 0, explanation: 'Listen! -> are singing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Murakkab matn va hikoyalarda 2 zamonni ajratish.',
+              ruleRu: 'Различение двух времен в сложных контекстах.',
+              formula: 'Identify Habit vs Current Progress',
+              example: 'Mark is an engineer. He designs bridges. Currently, he is building a new tower.',
+              exampleRu: 'Mark is an engineer. He designs bridges. Currently, he is building a new tower.',
+            },
+            exercises: [
+              { text: 'Mark is a pilot. He ___ planes, but today he ___ at home.', options: ['flies / is resting', 'is flying / rests'], correct: 0, explanation: 'flies (kasb) / today is resting (hozir).' },
+              { text: 'Sarah ___ Spanish. She ___ a book right now.', options: ['speaks / is reading', 'is speaking / reads'], correct: 0, explanation: 'speaks (til bilish) / right now is reading.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha 9 ta bo\'lim va 2 zamon taqqoslashining yakuniy xulosasi.',
+              ruleRu: 'Итоговое обобщение всех правил сравнения времен.',
+              formula: 'Master Formula: Habit/State ➔ Simple (V1) | Now/Process ➔ Continuous (be+Ving)',
+              example: 'I live in Tashkent, I know English, and right now I am mastering grammar!',
+              exampleRu: 'I live in Tashkent, I know English, and right now I am mastering grammar!',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She is a teacher and she is teaching now.', 'She is a teacher and she teaches now.'], correct: 0, explanation: 'teaches (kasb) / is teaching now.' },
+              { text: 'Choose the correct sentence:', options: ['I understand the lesson now.', 'I am understanding the lesson now.'], correct: 0, explanation: 'understand.' },
+              { text: 'Select the correct sentence:', options: ['They are playing football in the garden at the moment.', 'They play football in the garden at the moment.'], correct: 0, explanation: 'at the moment -> are playing.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Present Simple vs Present Continuous",
+      titleRu: 'Тест раздела: Present Simple vs Present Continuous',
+      exercises: [
+        { text: 'I usually ___ coffee in the morning.', options: ['drink', 'am drinking'], correct: 0, explanation: 'usually -> drink.' },
+        { text: 'Look! She ___ a red dress today.', options: ['is wearing', 'wears'], correct: 0, explanation: 'Look! -> is wearing.' },
+        { text: 'Where ___ you live?', options: ['do', 'are'], correct: 0, explanation: 'Doimiy yashash joyi -> do you live?' },
+        { text: 'What ___ you doing right now?', options: ['are', 'do'], correct: 0, explanation: 'right now -> are you doing?' },
+        { text: 'I ___ with my uncle this week.', options: ['am staying', 'stay'], correct: 0, explanation: 'this week (vaqtinchalik) -> am staying.' },
+        { text: 'The weather ___ warmer these days.', options: ['is getting', 'gets'], correct: 0, explanation: 'O\'zgarayotgan jarayon -> is getting.' },
+        { text: 'He ___ drinks alcohol. (hech qachon)', options: ['never', 'now'], correct: 0, explanation: 'never drinks.' },
+        { text: 'Listen! Somebody ___ at the door.', options: ['is knocking', 'knocks'], correct: 0, explanation: 'Listen! -> is knocking.' },
+        { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'know -> Stative Verb (Present Simple).' },
+        { text: 'She ___ a new laptop today.', options: ['needs', 'is needing'], correct: 0, explanation: 'need -> Present Simple (needs).' },
+        { text: 'I ___ he is a smart guy.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr -> think.' },
+        { text: 'Look! They ___ lunch in the cafe.', options: ['are having', 'have'], correct: 0, explanation: 'Lanch qilish harakati -> are having.' },
+        { text: 'Choose the correct sentence:', options: ['I don\'t understand this question.', 'I am not understanding this question.'], correct: 0, explanation: 'understand.' },
+        { text: 'Choose the correct sentence:', options: ['He works every day, but today he is resting.', 'He is working every day, but today he rests.'], correct: 0, explanation: 'works every day / today is resting.' },
+        { text: 'Select the correct sentence:', options: ['Listen! The telephone is ringing.', 'Listen! The telephone rings.'], correct: 0, explanation: 'Listen! -> is ringing.' },
+      ],
+    },
+  },
 ];
