@@ -1,4 +1,246 @@
 export const russianGuidesData = {
+  'sodiqjon-lesson-1': `## 🧩 Урок 1: Введение в предложения и придаточные части (Clauses) — По материалам Sodiqjon
+
+Основным строительным блоком предложения в английском языке является **Clause (придаточная или независимая часть предложения)**, содержащая подлежащее и сказуемое.
+
+### Что такое Clause?
+Clause — это группа слов, содержащая как минимум:
+▪ **Subject (Подлежащее)**
+▪ **Verb (Сказуемое)**
+▪ Пример: *She plays tennis.* (Subject: *She*, Verb: *plays*)
+
+---
+
+## 1. Независимые и зависимые части предложения
+
+| Тип части | Значение | Свойство | Пример |
+|---|---|---|---|
+| **Independent Clause (Главное предложение)** | Завершенная мысль | Может стоять самостоятельно | *She went home.* / *I like coffee.* |
+| **Dependent Clause (Придаточное предложение)** | Незавершенная мысль | Требует главное предложение | *because I was tired* / *when she arrived* |
+
+▸ *I slept early **because I was tired**.* (Главное + Придаточное = Полное предложение)
+
+---
+
+## 2. 3 основных типа придаточных предложений (Dependent Clauses)
+
+1. **Adjective Clauses (Relative Clauses) — Определительные придаточные:**
+   • Описывают существительное.
+   • Союзы: *who, whom, whose, which, that*
+   • Пример: *The man **who lives next door** is kind.*
+
+2. **Adverb Clauses — Обстоятельственные придаточные:**
+   • Указывают время, причину, условие, уступку.
+   • Союзы: *because, when, if, although, since, while, as, unless*
+   • Пример: *I stayed home **because I was sick**.*
+
+3. **Noun Clauses — Придаточные предложения-существительные:**
+   • Выполняют роль существительного (подлежащее, дополнение).
+   • Союзы: *that, what, whether, if, wh- слова*
+   • Пример: ***What she said** surprised everyone.* / *I know **that he is honest**.*
+
+---
+
+## 3. Типы предложений по структуре (Sentence Structures)
+
+1. **Simple Sentence (Простое предложение):**
+   • Состоит из одного независимого предложения.
+   • Пример: *The baby is sleeping.*
+
+2. **Compound Sentence (Сложносочиненное предложение):**
+   • Два независимых предложения, соединенных сочинительными союзами (*and, but, or, so, yet*).
+   • Пример: *I was tired, **but** I finished my homework.*
+
+3. **Complex Sentence (Сложноподчиненное предложение):**
+   • Одно главное предложение + одно придаточное предложение.
+   • Пример: ***Because it was raining**, we stayed inside.*
+
+4. **Compound-Complex Sentence (Сложное предложение с разными видами связи):**
+   • Минимум два главных предложения + минимум одно придаточное.
+   • Пример: *I wanted to go outside, **but** it was raining **because the storm had started**.*
+`,
+  'sodiqjon-lesson-2': `## 🔗 Урок 2: Основы относительных придаточных предложений (Relative / Adjective Clauses) — По материалам Sodiqjon
+
+**Adjective Clause (Relative Clause)** — это придаточное предложение, которое описывает существительное и стоит сразу после него.
+
+### Структура (Structure)
+'Noun + Relative Word + (Subject) + Verb + Complement'
+• *The girl **who is wearing a red dress** is my sister.*
+
+---
+
+## 1. Таблица относительных местоимений (Relative Pronouns)
+
+| Местоимение | Для чего используется | Пример |
+|---|---|---|
+| **who** | Люди (Подлежащее / Subject) | The boy **who** called me is my friend. |
+| **whom** | Люди (Дополнение / Object) | The woman **whom** we met was kind. |
+| **whose** | Притяжательное значение (Possession) | The man **whose** car was stolen is sad. |
+| **which** | Предметы и животные | The phone **which** I bought is expensive. |
+| **that** | Люди и предметы | The book **that** I read was interesting. |
+| **where** | Места (*where + S + V*) | The café **where** we met was quiet. |
+
+---
+
+## 2. Описание подлежащего и дополнения
+
+1. **Модификация подлежащего (Modifying the Subject):**
+   • *The student **who studies every night** gets excellent grades.*
+   • *The movie **that we watched** was exciting.*
+
+2. **Модификация дополнения (Modifying the Object):**
+   • *I met the woman **whose husband is a doctor**.*
+   • *She bought the car **that was parked outside**.*
+
+---
+
+## 3. Важные правила и ограничения
+
+1. **WHO vs WHOM:**
+   • *WHO* → роль подлежащего (*The girl who called me...*)
+   • *WHOM* → роль дополнения (*The man whom we visited...*)
+   • В разговорной речи *whom* часто заменяется на *who*: *The man who we visited...*
+
+2. **WHOSE:**
+   • Всегда требует после себя существительное: 'whose + noun'.
+   • ❌ Нельзя ставить глагол или местоимение сразу после *whose*.
+   • Пример: *The student **whose phone** rang was embarrassed.*
+
+3. **WHERE:**
+   • Используется в структуре 'where + подлежащее + сказуемое'.
+   • ❌ Конструкция *where + глагол* является ошибочной.
+
+4. **Правило позиции (Position Rule):**
+   • Придаточное предложение должно идти СРАЗУ ПОСЛЕ описываемого существительного.
+   • ✅ *The boy **who is wearing glasses** is my cousin.*
+
+---
+
+## 4. Сокращенные относительные придаточные (Shortened Relative Clauses)
+
+• Active (V-ing): *The man **standing** near the door...* (= *who is standing*)
+• Passive (V3): *The book **written** by Tom...* (= *that was written*)
+`,
+  'sodiqjon-lesson-3': `## ✂️ Урок 3: Опущение относительных местоимений и предлоги — По материалам Sodiqjon
+
+**Omission (Опущение)** — это исключение относительного местоимения (*who, whom, which, that*) из предложения без изменения его смысла.
+
+---
+
+## 1. Когда МОЖНО и когда НЕЛЬЗЯ опускать местоимение?
+
+| Роль местоимения | Можно опустить? | Причина | Пример |
+|---|---|---|---|
+| **OBJECT (Дополнение)** | ✅ ДА | В придаточном есть свое подлежащее | The man **(who/whom)** I saw yesterday was friendly. → *The man I saw yesterday...* |
+| **SUBJECT (Подлежащее)** | ❌ НЕТ | Местоимение само является подлежащим | The man **who** robbed the bank was arrested. (who опускать нельзя!) |
+
+---
+
+## 💡 Простой способ проверки (Easy Way to Check)
+
+Посмотрите, что идет сразу за относительным местоимением:
+• **Relative pronoun + Subject (Местоимение/Существительное) + Verb** → **OBJECT** → Можно опустить!
+  ▸ *The car (that) **I** bought is fast.* (Подлежащее = I)
+• **Relative pronoun + Verb** → **SUBJECT** → НЕЛЬЗЯ опускать!
+  ▸ *The dog **that** barked all night was noisy.* (that = подлежащее)
+
+---
+
+## 2. Особое использование слова "THAT" (Use of "THAT")
+
+Относительное местоимение **THAT** (а не *which*) обязательно/предпочтительно использовать после:
+• **all, everything, little, much, none, no**
+• **Superlatives** (Превосходная степень прилагательных: *the best, the most...*)
+
+▸ *Everything **that** he said was true.* (everything which ❌)
+▸ *This is the best movie **that** I have ever seen.*
+▸ *All the books **that** I bought are useful.*
+
+---
+
+## 3. Предлоги и относительные местоимения
+
+1. **Предлог в КОНЦЕ придательного предложения:**
+   • Местоимение МОЖНО опустить (Разговорный/нейтральный стиль).
+   • Пример: *The man **I spoke to** was helpful.*
+
+2. **Предлог ПЕРЕД относительным местоимением:**
+   • Используются ТОЛЬКО **whom** (для людей) и **which** (для предметов)!
+   • ❌ Местоимения *who* и *that* НЕ ИСПОЛЬЗУЮТСЯ, и опускать местоимение НЕЛЬЗЯ!
+   • Пример: *The man **to whom** I spoke was helpful.* (to who ❌ / to that ❌)
+
+---
+
+## 📊 Официальный и разговорный стиль
+
+| Стиль | Конструкция | Пример |
+|---|---|---|
+| **Formal (Официальный)** | Предлог + whom / which | The friend **with whom** I traveled speaks French. |
+| **Everyday (Разговорный)** | Без местоимения + Предлог в конце | The friend **I traveled with** speaks French. |
+`,
+  'sodiqjon-lesson-4': `## 🌟 Урок 4: Определительные и нераспространяющие придаточные предложения — По материалам Sodiqjon
+
+В зависимости от важности предоставляемой информации относительные придаточные предложения делятся на **Defining (Определительные)** и **Non-Defining (Нераспространяющие / Изъяснительные)**.
+
+---
+
+## 1. Defining Relative Clause (Определительное придаточное)
+
+• **Функция:** Предоставляет существенную (essential) информацию. Без этой части смысл предложения меняется или становится непонятным.
+• ❌ **Запятые НЕ ИСПОЛЬЗУЮТСЯ (No commas).**
+• **Местоимения:** *who, whom, whose, which, that*
+• Примеры:
+  ▸ *The students **who studied hard** passed the exam.* (Только те студенты, которые усердно учились)
+  ▸ *The book **that I bought yesterday** is interesting.*
+
+---
+
+## 2. Non-Defining Relative Clause (Нераспространяющее придаточное)
+
+• **Функция:** Предоставляет дополнительную (extra) информацию. Нам уже четко понятно, о ком или о чем идет речь.
+• ✅ **ВЫДЕЛЯЕТСЯ ЗАПЯТЫМИ (Use commas).**
+• ❌ **ИСПОЛЬЗОВАНИЕ СЛОВА "THAT" КАТЕГОРИЧЕСКИ ЗАПРЕЩЕНО!**
+• **Местоимения:** *who, whom, whose, which* (но НЕ that!)
+• Примеры:
+  ▸ *Mr. Ali, **who teaches English**, is very patient.*
+  ▸ *Paris, **which is famous for art**, attracts many tourists.*
+  ▸ *My sister, **who lives in Korea**, is visiting us next month.*
+
+---
+
+## ⚠️ Как запятые меняют смысл предложения (Commas Change Meaning)
+
+| Тип | Пример | Смысл |
+|---|---|---|
+| **Defining (Без запятых)** | *The travelers **who knew about the flood** took another road.* | Только **НЕКОТОРЫЕ** путешественники знали о наводнении. |
+| **Non-Defining (С запятыми)** | *The travelers, **who knew about the flood**, took another road.* | **ВСЕ** путешественники знали о наводнении. |
+
+---
+
+## 3. Формальные конструкции: "OF WHOM / OF WHICH"
+
+В официальном и академическом английском языке для плавности речи используются конструкции с местоимениями количества:
+
+1. **Quantifiers + of whom / of which:**
+   • *some of whom / most of whom / both of whom / several of which / many of which / few of whom*
+   ▸ *I met many students, **several of whom** spoke Korean.*
+   ▸ *She has two sons, **both of whom** work abroad.*
+
+2. **Noun + of which / of whom:**
+   • *noun + of which* (для свойств: цель, крыша, цена, название и т.д.)
+   ▸ *We started a project, **the purpose of which** is improving education.*
+   ▸ *He bought a house, **the roof of which** was damaged.*
+   ▸ *Uzbekistan exports cotton, **the price of which** changes every year.*
+
+---
+
+## 📊 Сводная таблица (Summary Table)
+
+| Тип | Запятые (Commas)? | Использование "That"? | Смысл |
+|---|---|---|---|
+| **Defining** | ❌ Нет | ✅ Да | Важная информация (Essential) |
+| **Non-Defining** | ✅ Да | ❌ НЕТ! | Дополнительная информация (Extra) |
+`,
   'sentence-structure': `## Normal Sentence Structure (Обычная структура предложения)
 
 В английском языке порядок слов **строгий**: Подлежащее (Subject) + Глагол (Verb) + Дополнение (Object). В отличие от русского языка, где слова можно свободно менять местами, в английском порядок слов почти всегда один и тот же!
