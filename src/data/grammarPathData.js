@@ -5481,4 +5481,2886 @@ export const grammarPathSections = [
       ],
     },
   },
+  {
+    id: 'sec-past-simple',
+    order: 12,
+    title: "Past Simple — muntazam (-ed) va noto'g'ri fe'llar",
+    titleRu: 'Past Simple — правильные (-ed) и неправильные глаголы',
+    icon: '📜',
+    lessons: [
+      {
+        id: 'sec-past-simple-l1',
+        order: 1,
+        title: "Muntazam fe'llar (-ed qo'shimchasi)",
+        titleRu: 'Правильные глаголы (окончание -ed)',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'O\'tgan zamonda sodir bo\'lgan va tugagan harakatlar uchun Past Simple ishlatiladi. Muntazam (regular) fe\'llarga "-ed" qo\'shiladi.',
+              ruleRu: 'Past Simple используется для действий, завершенных в прошлом. К правильным глаголам добавляется окончание "-ed".',
+              formula: 'Subject + Verb + -ed',
+              example: 'I worked yesterday. (Men kecha ishladim.) She played tennis. (U tennis o\'ynadi.)',
+              exampleRu: 'I worked yesterday. (Я работал вчера.) She played tennis. (Она играла в теннис.)',
+            },
+            exercises: [
+              { text: 'I ___ TV yesterday evening.', options: ['watched', 'watch', 'watching'], correct: 0, explanation: 'Past Simple da muntazam fe\'lga -ed qo\'shiladi: watched.' },
+              { text: 'They ___ football last Sunday.', options: ['played', 'play', 'plays'], correct: 0, explanation: 'last Sunday -> played.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Yozilish qoidalari: 1) -e bilan tugasa faqat -d qo\'shiladi (like ➔ liked). 2) Undosh + y ➔ -ied (study ➔ studied). 3) Qisqa unli + undosh ➔ oxirgi harf ikkilanadi (stop ➔ stopped).',
+              ruleRu: 'Правила правописания: 1) like ➔ liked, 2) study ➔ studied, 3) stop ➔ stopped.',
+              formula: 'like ➔ liked  |  study ➔ studied  |  stop ➔ stopped',
+              example: 'He lived in Tashkent. She studied English. The car stopped.',
+              exampleRu: 'He lived in Tashkent. She studied English. The car stopped.',
+            },
+            exercises: [
+              { text: 'Past Simple form of "study":', options: ['studied', 'studyed', 'studyd'], correct: 0, explanation: 'study -> studied (y ➔ ied).' },
+              { text: 'Past Simple form of "stop":', options: ['stopped', 'stoped', 'stopping'], correct: 0, explanation: 'stop -> stopped (p ikkilanadi).' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"-ed" ning talaffuzi: 1) /t/ (p, k, f, s dan keyin: worked, walked). 2) /d/ (unlilar va b, g, v, m, n, l va h.k. dan keyin: played, lived). 3) /ɪd/ (t, d dan keyin: wanted, needed).',
+              ruleRu: 'Произношение -ed: /t/ после глухих, /d/ после звонких/гласных, /ɪd/ после t, d.',
+              formula: 'want ➔ wanted (/ɪd/)  |  work ➔ worked (/t/)  |  play ➔ played (/d/)',
+              example: 'I wanted ice cream. He walked home. We played games.',
+              exampleRu: 'I wanted ice cream. He walked home. We played games.',
+            },
+            exercises: [
+              { text: 'Which word has the /ɪd/ sound for "-ed"?', options: ['wanted', 'worked', 'played'], correct: 0, explanation: 't bilan tugagani uchun wanted /ɪd/ deb o\'qiladi.' },
+              { text: 'Past Simple form of "live":', options: ['lived', 'livede', 'livet'], correct: 0, explanation: 'live -> lived.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Simple vaqt ko\'rsatkichlari: yesterday (kecha), last night/week/month (o\'tgan tun/hafta/oy), ago (ilgari: 2 days ago), in 2018.',
+              ruleRu: 'Маркеры прошедшего времени: yesterday, last week, 3 days ago, in 2015.',
+              formula: 'Verb + -ed + yesterday / last week / ... ago',
+              example: 'We visited Samarkand last month. He called me 2 hours ago.',
+              exampleRu: 'We visited Samarkand last month. He called me 2 hours ago.',
+            },
+            exercises: [
+              { text: 'She ___ her room yesterday.', options: ['cleaned', 'cleans', 'cleaning'], correct: 0, explanation: 'yesterday -> cleaned.' },
+              { text: 'We ___ in London in 2020.', options: ['lived', 'live', 'lives'], correct: 0, explanation: 'in 2020 -> lived.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Muntazam fe\'llar (-ed) bo\'yicha bilganlarimizni birlashtiramiz.',
+              ruleRu: 'Обобщим все знания о правильных глаголах (-ed).',
+              formula: 'Subject + Verb-ed + Past time marker',
+              example: 'I studied hard and passed the exam yesterday.',
+              exampleRu: 'I studied hard and passed the exam yesterday.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['They cooked dinner last night.', 'They cook dinner last night.'], correct: 0, explanation: 'last night -> cooked.' },
+              { text: 'Choose the correct sentence:', options: ['He walked to school yesterday.', 'He walk to school yesterday.'], correct: 0, explanation: 'yesterday -> walked.' },
+              { text: 'Select the correct sentence:', options: ['My sister invited me to the party.', 'My sister invite me to the party.'], correct: 0, explanation: 'Past Simple: invited.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-simple-l2',
+        order: 2,
+        title: "Noto'g'ri fe'llar (Irregular Verbs - V2)",
+        titleRu: 'Неправильные глаголы (Irregular Verbs - V2)',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: "Noto'g'ri (irregular) fe'llarga '-ed' qo'shilmaydi. Ularning Past Simple (V2) shakli yodlanishi kerak: go ➔ went, see ➔ saw.",
+              ruleRu: 'Неправильные глаголы не берут -ed. В Past Simple используется вторая форма (V2): go ➔ went, see ➔ saw.',
+              formula: 'Subject + V2 (Irregular Verb)',
+              example: 'I went to school yesterday. (Men kecha maktabga bordim.)',
+              exampleRu: 'I went to school yesterday. (Я пошел в школу вчера.)',
+            },
+            exercises: [
+              { text: 'Past Simple form of "go":', options: ['went', 'goed', 'goes'], correct: 0, explanation: 'go ning Past Simple shakli: went.' },
+              { text: 'Yesterday I ___ my friend in the park.', options: ['saw', 'see', 'seed'], correct: 0, explanation: 'see -> saw.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Eng ko'p ishlatiladigan noto'g'ri fe'llar (1-guruh): go ➔ went, do ➔ did, have ➔ had, get ➔ got, take ➔ took.",
+              ruleRu: 'Основные неправильные глаголы (1 группа): go➔went, do➔did, have➔had, get➔got, take➔took.',
+              formula: 'go➔went | do➔did | have➔had | get➔got | take➔took',
+              example: 'We had lunch at 1 PM. He took a taxi yesterday.',
+              exampleRu: 'We had lunch at 1 PM. He took a taxi yesterday.',
+            },
+            exercises: [
+              { text: 'Past Simple form of "have":', options: ['had', 'haved', 'has'], correct: 0, explanation: 'have -> had.' },
+              { text: 'He ___ his homework last night.', options: ['did', 'doed', 'does'], correct: 0, explanation: 'do -> did.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Eng ko'p ishlatiladigan noto'g'ri fe'llar (2-guruh): come ➔ came, make ➔ made, say ➔ said, buy ➔ bought, give ➔ gave.",
+              ruleRu: 'Основные неправильные глаголы (2 группа): come➔came, make➔made, say➔said, buy➔bought, give➔gave.',
+              formula: 'come➔came | make➔made | say➔said | buy➔bought | give➔gave',
+              example: 'She bought a new phone yesterday. My friend came to visit.',
+              exampleRu: 'She bought a new phone yesterday. My friend came to visit.',
+            },
+            exercises: [
+              { text: 'Past Simple form of "buy":', options: ['bought', 'buyed', 'buys'], correct: 0, explanation: 'buy -> bought.' },
+              { text: 'She ___ me a present last week.', options: ['gave', 'gived', 'gives'], correct: 0, explanation: 'give -> gave.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "O'zgarmaydigan noto'g'ri fe'llar: cut ➔ cut, put ➔ put, hurt ➔ hurt, cost ➔ cost. (read ➔ read: yozilishi bir xil, lekin /red/ deb talaffuz qilinadi).",
+              ruleRu: 'Глаголы, не меняющие форму: cut➔cut, put➔put, hurt➔hurt, cost➔cost. (read читается как /red/).',
+              formula: 'cut➔cut | put➔put | read➔read (/red/) | cost➔cost',
+              example: 'I read a great book yesterday. He put the key on the table.',
+              exampleRu: 'I read a great book yesterday. He put the key on the table.',
+            },
+            exercises: [
+              { text: 'Past Simple form of "put":', options: ['put', 'puted', 'putton'], correct: 0, explanation: 'put ning o\'tgan zamon shakli o\'zgarmaydi: put.' },
+              { text: 'Yesterday I ___ an interesting news article.', options: ['read', 'readed', 'reading'], correct: 0, explanation: 'read ning Past Simple shakli read yoziladi (/red/ o\'qiladi).' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Noto'g'ri fe'llar (V2) bo'yicha bilganlarimizni birlashtiramiz.",
+              ruleRu: 'Обобщим знания о неправильных глаголах (V2).',
+              formula: 'Subject + V2 (went, saw, bought, had...)',
+              example: 'I woke up early, had breakfast, and went to work.',
+              exampleRu: 'I woke up early, had breakfast, and went to work.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She wrote a letter yesterday.', 'She writed a letter yesterday.'], correct: 0, explanation: 'write -> wrote.' },
+              { text: 'Choose the correct sentence:', options: ['We ate pizza last night.', 'We eated pizza last night.'], correct: 0, explanation: 'eat -> ate.' },
+              { text: 'Select the correct sentence:', options: ['He came home late last night.', 'He comed home late last night.'], correct: 0, explanation: 'come -> came.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-simple-l3',
+        order: 3,
+        title: "Inkor shakli: \"didn't + V1\"",
+        titleRu: 'Отрицательная форма: "didn\'t + V1"',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: "Past Simple inkorida barcha shaxslar uchun \"didn't\" (did not) ishlatiladi. Muhim: didn't dan keyin fe'l BOSH (V1) shaklga qaytadi!",
+              ruleRu: 'Для отрицания используется "didn\'t" (did not) для всех лиц. ВАЖНО: после didn\'t глагол возвращается в начальную форму (V1)!',
+              formula: 'Subject + didn\'t + V1 (infinitive without to)',
+              example: 'I didn\'t work yesterday. (worked EMAS) She didn\'t go. (went EMAS)',
+              exampleRu: 'I didn\'t work yesterday. She didn\'t go.',
+            },
+            exercises: [
+              { text: 'I ___ to school yesterday.', options: ["didn't go", "didn't went", "not go"], correct: 0, explanation: "didn't dan keyin fe'l bosh shaklda: didn't go." },
+              { text: 'She ___ TV last night.', options: ["didn't watch", "didn't watched", "not watched"], correct: 0, explanation: "didn't + V1: didn't watch." },
+            ],
+          },
+          {
+            teach: {
+              rule: "Muntazam fe'llar inkorida -ed DUSHADI: worked ➔ didn't work | played ➔ didn't play.",
+              ruleRu: 'В отрицании правильных глаголов окончание -ed ОТПАДАЕТ: worked ➔ didn\'t work.',
+              formula: 'Subject + didn\'t + Verb (NO -ed!)',
+              example: 'He didn\'t call me yesterday.',
+              exampleRu: 'He didn\'t call me yesterday.',
+            },
+            exercises: [
+              { text: 'They ___ football yesterday.', options: ["didn't play", "didn't played", "don't played"], correct: 0, explanation: "didn't + play (-ed siz)." },
+              { text: 'We ___ the car last week.', options: ["didn't clean", "didn't cleaned", "not clean"], correct: 0, explanation: "didn't + clean." },
+            ],
+          },
+          {
+            teach: {
+              rule: "Noto'g'ri fe'llar inkorida V2 V1 ga qaytadi: went ➔ didn't go | saw ➔ didn't see | bought ➔ didn't buy.",
+              ruleRu: 'В отрицании неправильных глаголов V2 меняется обратно на V1: went ➔ didn\'t go.',
+              formula: 'went ➔ didn\'t go  |  saw ➔ didn\'t see  |  bought ➔ didn\'t buy',
+              example: 'I didn\'t buy the ticket. She didn\'t see the movie.',
+              exampleRu: 'I didn\'t buy the ticket. She didn\'t see the movie.',
+            },
+            exercises: [
+              { text: 'I ___ him yesterday.', options: ["didn't see", "didn't saw", "don't saw"], correct: 0, explanation: "didn't + see (V1)." },
+              { text: 'He ___ breakfast this morning.', options: ["didn't have", "didn't had", "not had"], correct: 0, explanation: "didn't + have (V1)." },
+            ],
+          },
+          {
+            teach: {
+              rule: "Eng ko'p uchraydigan 2 ta xato: 1) didn't went ❌ ➔ didn't go ✅  2) didn't worked ❌ ➔ didn't work ✅.",
+              ruleRu: '2 частые ошибки: 1) didn\'t went ❌ ➔ didn\'t go ✅  2) didn\'t worked ❌ ➔ didn\'t work ✅.',
+              formula: 'REMEMBER: didn\'t ALWAYS takes V1 (base form)',
+              example: 'Correct: I didn\'t know. (NOT: I didn\'t knew.)',
+              exampleRu: 'Correct: I didn\'t know.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I didn\'t go to the party.', 'I didn\'t went to the party.'], correct: 0, explanation: "didn't + go." },
+              { text: 'Choose the correct sentence:', options: ['She didn\'t write the email.', 'She didn\'t wrote the email.'], correct: 0, explanation: "didn't + write." },
+            ],
+          },
+          {
+            teach: {
+              rule: "Past Simple inkor shakllarini birlashtiramiz.",
+              ruleRu: 'Обобщим все знания об отрицаниях в Past Simple.',
+              formula: 'Subject + didn\'t + V1 (for all pronouns: I/you/he/she/it/we/they)',
+              example: 'We didn\'t stay home, but we didn\'t spend much money.',
+              exampleRu: 'We didn\'t stay home, but we didn\'t spend much money.',
+            },
+            exercises: [
+              { text: 'Select the correct sentence:', options: ['They didn\'t enjoy the movie.', 'They didn\'t enjoyed the movie.'], correct: 0, explanation: "didn't + enjoy." },
+              { text: 'Select the correct sentence:', options: ['He didn\'t sleep well last night.', 'He didn\'t slept well last night.'], correct: 0, explanation: "didn't + sleep." },
+              { text: 'Choose the correct form: I ___ my keys yesterday.', options: ["didn't find", "didn't found"], correct: 0, explanation: "didn't + find (V1)." },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-simple-l4',
+        order: 4,
+        title: 'Savol shakli: "Did ... + V1?"',
+        titleRu: 'Вопросительная форма: "Did ... + V1?"',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Past Simple savollarida "Did" eganing oldiga o\'tadi. Fe\'l esa doim bosh (V1) shaklda bo\'ladi.',
+              ruleRu: 'В вопросах "Did" ставится перед подлежащим. Глагол идет в начальной форме (V1).',
+              formula: 'Did + Subject + V1 (base verb) ?',
+              example: 'Did you work yesterday? (Siz kecha ishladingizmi?) Did he go to school?',
+              exampleRu: 'Did you work yesterday? Did he go to school?',
+            },
+            exercises: [
+              { text: '___ you watch the game last night?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'O\'tgan zamon savolida "Did" ishlatiladi.' },
+              { text: 'Did she ___ you yesterday?', options: ['call', 'called', 'calling'], correct: 0, explanation: 'Did borligi uchun fe\'l V1 shaklda: call.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa javoblar: Yes, I did. / No, I didn\'t.',
+              ruleRu: 'Краткие ответы: Yes, I did. / No, I didn\'t.',
+              formula: 'Yes, + Subject + did.  |  No, + Subject + didn\'t.',
+              example: '— Did you sleep well? — Yes, I did. / No, I didn\'t.',
+              exampleRu: '— Did you sleep well? — Yes, I did. / No, I didn\'t.',
+            },
+            exercises: [
+              { text: '— Did he pass the exam? — Yes, he ___ .', options: ['did', 'does', 'was'], correct: 0, explanation: 'Yes, he did.' },
+              { text: '— Did they come on time? — No, they ___ .', options: ["didn't", "don't", "weren't"], correct: 0, explanation: 'No, they didn\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maxsus savollar (Wh- questions): Where / What / When / Why / Who + did + subject + V1?',
+              ruleRu: 'Специальные вопросы: Wh- word + did + Subject + V1?',
+              formula: 'Wh- word + did + Subject + V1 ?',
+              example: 'What did you buy yesterday? Where did they go last week?',
+              exampleRu: 'What did you buy yesterday? Where did they go last week?',
+            },
+            exercises: [
+              { text: 'Where ___ you go last weekend?', options: ['did', 'do', 'were'], correct: 0, explanation: 'Where + did + you + go.' },
+              { text: 'What did she ___ yesterday?', options: ['say', 'said', 'says'], correct: 0, explanation: 'did dan keyin fe\'l V1: say.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ega so\'ralganda "Who / What" dan keyin "did" ishlatilmaydi, fe\'l to\'g\'ridan-to\'g\'ri V2 (-ed) shaklida keladi!',
+              ruleRu: 'В вопросах к подлежащему (Who/What) "did" не используется, глагол ставится в V2 (-ed).',
+              formula: 'Who + V2 (-ed / irregular) ?',
+              example: 'Who broke the window? (Kim derazani sindirdi?) Who came first?',
+              exampleRu: 'Who broke the window? Who came first?',
+            },
+            exercises: [
+              { text: 'Who ___ the cake yesterday?', options: ['ate', 'did eat', 'eated'], correct: 0, explanation: 'Ega so\'ralganda: Who + ate (V2).' },
+              { text: 'Who ___ you yesterday?', options: ['called', 'did call', 'calls'], correct: 0, explanation: 'Who + called.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Simple savol shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все вопросительные формы в Past Simple.',
+              formula: 'Did + Subject + V1 ?  |  Wh- + did + Subject + V1 ?',
+              example: 'Did you see Tom, and what did he tell you?',
+              exampleRu: 'Did you see Tom, and what did he tell you?',
+            },
+            exercises: [
+              { text: 'Choose the correct question:', options: ['Did you like the concert?', 'Did you liked the concert?'], correct: 0, explanation: 'Did + like (V1).' },
+              { text: 'Choose the correct question:', options: ['Where did you buy this shirt?', 'Where did you bought this shirt?'], correct: 0, explanation: 'did + buy (V1).' },
+              { text: 'Select the correct question:', options: ['Why did she leave so early?', 'Why did she left so early?'], correct: 0, explanation: 'did + leave (V1).' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-simple-l5',
+        order: 5,
+        title: 'Present Simple vs Past Simple Taqqoslash',
+        titleRu: 'Сравнение Present Simple и Past Simple',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Present Simple (odatiy, doimiy harakatlar) va Past Simple (o\'tib ketgan, tugagan harakatlar) ni vaqt ko\'rsatkichlaridan ajratamiz.',
+              ruleRu: 'Present Simple (регулярные действия) vs Past Simple (завершенные действия в прошлом).',
+              formula: 'Present: every day, usually, often  |  Past: yesterday, last week, ago',
+              example: 'I play tennis every Sunday. I played tennis yesterday.',
+              exampleRu: 'I play tennis every Sunday. I played tennis yesterday.',
+            },
+            exercises: [
+              { text: 'I usually ___ coffee in the morning, but yesterday I ___ tea.', options: ['drink / drank', 'drank / drink', 'drink / drink'], correct: 0, explanation: 'usually -> drink / yesterday -> drank.' },
+              { text: 'She ___ to work every day, but last week she ___ at home.', options: ['goes / stayed', 'went / stays', 'goes / stay'], correct: 0, explanation: 'every day -> goes / last week -> stayed.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Yordamchi fe\'llar taqqoslamasi: Present Simple ➔ don\'t / doesn\'t  |  Past Simple ➔ didn\'t.',
+              ruleRu: 'Отрицания: Present Simple ➔ don\'t/doesn\'t  |  Past Simple ➔ didn\'t.',
+              formula: 'Present Negative: don\'t / doesn\'t + V1  |  Past Negative: didn\'t + V1',
+              example: 'He doesn\'t like milk now. He didn\'t like milk as a child.',
+              exampleRu: 'He doesn\'t like milk now. He didn\'t like milk as a child.',
+            },
+            exercises: [
+              { text: 'I ___ like horror movies now, and I ___ like them before either.', options: ["don't / didn't", "didn't / don't", "don't / don't"], correct: 0, explanation: 'now -> don\'t / before -> didn\'t.' },
+              { text: 'Choose the correct sentence:', options: ['He didn\'t call me yesterday.', 'He doesn\'t called me yesterday.'], correct: 0, explanation: 'yesterday -> didn\'t call.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Savollar taqqoslamasi: Present Simple ➔ Do / Does ... ?  |  Past Simple ➔ Did ... ?',
+              ruleRu: 'Вопросы: Present Simple ➔ Do / Does ... ?  |  Past Simple ➔ Did ... ?',
+              formula: 'Present Question: Do/Does + Subject + V1 ?  |  Past Question: Did + Subject + V1 ?',
+              example: 'Do you live here? Did you live here 5 years ago?',
+              exampleRu: 'Do you live here? Did you live here 5 years ago?',
+            },
+            exercises: [
+              { text: '___ you watch TV every evening?', options: ['Do', 'Did', 'Does'], correct: 0, explanation: 'every evening -> Do.' },
+              { text: '___ you watch the news yesterday?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'yesterday -> Did.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hozirgi va o\'tgan zamon gaplarini bir matnda bog\'lash amaliyoti.',
+              ruleRu: 'Связывание настоящего и прошедшего времени в контексте.',
+              formula: 'Check time adverb ➔ Choose Present (V1/-s, don\'t/does) or Past (V2/-ed, didn\'t)',
+              example: 'Last year I worked in a school, but now I work in a bank.',
+              exampleRu: 'Last year I worked in a school, but now I work in a bank.',
+            },
+            exercises: [
+              { text: 'In 2019 we ___ in Tashkent, but now we ___ in London.', options: ['lived / live', 'live / lived', 'lived / lived'], correct: 0, explanation: '2019 -> lived / now -> live.' },
+              { text: 'Select the correct sentence:', options: ['He bought a laptop last week and uses it every day.', 'He buys a laptop last week and used it every day.'], correct: 0, explanation: 'last week -> bought / every day -> uses.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Present vs Past Simple taqqoslamasini birlashtiramiz.',
+              ruleRu: 'Обобщим сравнение Present Simple и Past Simple.',
+              formula: 'Present (habits, now) vs Past (completed actions)',
+              example: 'I always buy bread here, but yesterday I bought fruit.',
+              exampleRu: 'I always buy bread here, but yesterday I bought fruit.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She visited her grandma last Sunday.', 'She visits her grandma last Sunday.'], correct: 0, explanation: 'last Sunday -> visited.' },
+              { text: 'Choose the correct sentence:', options: ['Do you usually get up early?', 'Did you usually get up early?'], correct: 0, explanation: 'usually -> Do.' },
+              { text: 'Select the correct sentence:', options: ['I didn\'t go to work yesterday because I was sick.', 'I don\'t go to work yesterday because I was sick.'], correct: 0, explanation: 'yesterday -> didn\'t go.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-simple-l6',
+        order: 6,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (Past Simple)',
+        titleRu: 'Смешанная практика и Исправление ошибок (Past Simple)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta xato: 1) I didn\'t went ❌ ➔ I didn\'t go ✅  2) Did you bought ❌ ➔ Did you buy ✅  3) He goed ❌ ➔ He went ✅.',
+              ruleRu: '3 частые ошибки: 1) didn\'t went ❌ ➔ didn\'t go ✅  2) Did you bought ❌ ➔ Did you buy ✅  3) He goed ❌ ➔ He went ✅.',
+              formula: 'Check list: 1) Statement=V2/-ed | 2) Negative=didn\'t+V1 | 3) Question=Did+V1',
+              example: 'I went to school. I didn\'t go to school. Did you go to school?',
+              exampleRu: 'I went to school. I didn\'t go to school. Did you go to school?',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['They didn\'t know the answer.', 'They didn\'t knew the answer.'], correct: 0, explanation: "didn't + know (V1)." },
+              { text: 'Choose the correct sentence:', options: ['Did you lose your keys?', 'Did you lost your keys?'], correct: 0, explanation: 'Did + lose (V1).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hikoya va dialoglarda o\'tgan zamon fe\'llarini qo\'llash.',
+              ruleRu: 'Использование Past Simple в историях и диалогах.',
+              formula: 'Past Narrative: V2/-ed in statements, didn\'t+V1 in negatives, Did+V1 in questions',
+              example: '— What did you do yesterday? — I met my friends and we played football.',
+              exampleRu: '— What did you do yesterday? — I met my friends and we played football.',
+            },
+            exercises: [
+              { text: '— Where ___ you yesterday? — I ___ to the zoo.', options: ['were / went', 'was / go', 'did / went'], correct: 0, explanation: 'Where were you / I went.' },
+              { text: '— ___ you clean your room? — Yes, I ___ .', options: ['Did / cleaned', 'Did / did', 'Do / did'], correct: 1, explanation: 'Did you / Yes, I did.' },
+            ],
+          },
+          {
+            teach: {
+              rule: "Muntazam (-ed) va Noto'g'ri (V2) fe'llarni birga ishlatish mashqlari.",
+              ruleRu: 'Практика применения правильных (-ed) и неправильных (V2) глаголов вместе.',
+              formula: 'Mix: regular (work➔worked) + irregular (see➔saw)',
+              example: 'I walked to the station and caught the train.',
+              exampleRu: 'I walked to the station and caught the train.',
+            },
+            exercises: [
+              { text: 'She ___ her bag and ___ out of the room.', options: ['took / walked', 'taked / walked', 'took / walk'], correct: 0, explanation: 'take -> took (irregular) / walk -> walked (regular).' },
+              { text: 'We ___ the car and ___ home.', options: ['washed / drove', 'wash / drived', 'washed / drive'], correct: 0, explanation: 'wash -> washed / drive -> drove.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Mantiqiy zanjir va voqealar ketma-ketligi (sequence of past events).',
+              ruleRu: 'Последовательность событий в прошлом (Sequence of events).',
+              formula: 'First event (V2) ➔ then event (V2) ➔ finally event (V2)',
+              example: 'First I opened the door, then I saw a cat, and finally I smiled.',
+              exampleRu: 'First I opened the door, then I saw a cat, and finally I smiled.',
+            },
+            exercises: [
+              { text: 'He ___ up at 7:00, ___ a cup of coffee, and ___ to work.', options: ['woke / drank / went', 'waked / drinked / goed', 'woke / drink / go'], correct: 0, explanation: 'wake -> woke / drink -> drank / go -> went.' },
+              { text: 'Select the correct sentence:', options: ['She closed her book, turned off the light, and fell asleep.', 'She closed her book, turn off the light, and fall asleep.'], correct: 0, explanation: 'Barcha fe\'llar o\'tgan zamonda: closed, turned off, fell asleep.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Section 12 Past Simple bo\'yicha yakuniy master formula.',
+              ruleRu: 'Итоговая главная формула Past Simple.',
+              formula: 'Master Past Simple Rule: Statement = V2 / -ed | Negative = didn\'t + V1 | Question = Did + V1 ?',
+              example: 'I played. I didn\'t play. Did you play? / I went. I didn\'t go. Did you go?',
+              exampleRu: 'I played. I didn\'t play. Did you play? / I went. I didn\'t go. Did you go?',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['Did you understand the lesson?', 'Did you understood the lesson?'], correct: 0, explanation: 'Did + understand (V1).' },
+              { text: 'Choose the correct sentence:', options: ['I didn\'t forget your birthday.', 'I didn\'t forgot your birthday.'], correct: 0, explanation: "didn't + forget (V1)." },
+              { text: 'Select the correct sentence:', options: ['She wrote a book and published it last year.', 'She write a book and publish it last year.'], correct: 0, explanation: 'Past Simple: wrote, published.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Past Simple — muntazam va noto'g'ri fe'llar",
+      titleRu: 'Тест раздела: Past Simple — правильные и неправильные глаголы',
+      exercises: [
+        { text: 'I ___ a great movie yesterday evening.', options: ['watched', 'watch', 'watching'], correct: 0, explanation: 'yesterday -> watched.' },
+        { text: 'Past Simple form of "go":', options: ['went', 'goed', 'goes'], correct: 0, explanation: 'go -> went.' },
+        { text: 'Past Simple form of "buy":', options: ['bought', 'buyed', 'buys'], correct: 0, explanation: 'buy -> bought.' },
+        { text: 'Past Simple form of "study":', options: ['studied', 'studyed', 'studyd'], correct: 0, explanation: 'study -> studied.' },
+        { text: 'We ___ to the cinema last night.', options: ["didn't go", "didn't went", "not go"], correct: 0, explanation: "didn't + go." },
+        { text: 'She ___ her homework yesterday.', options: ["didn't finish", "didn't finished", "not finish"], correct: 0, explanation: "didn't + finish." },
+        { text: '___ you see my phone this morning?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'Past question -> Did.' },
+        { text: '— Did they win the game? — Yes, they ___ .', options: ['did', 'do', 'were'], correct: 0, explanation: 'Yes, they did.' },
+        { text: 'Where ___ you buy this nice bag?', options: ['did', 'do', 'were'], correct: 0, explanation: 'Where + did + buy.' },
+        { text: 'Who ___ the window yesterday?', options: ['broke', 'did break', 'breaked'], correct: 0, explanation: 'Who + broke (V2).' },
+        { text: 'Usually I ___ by bus, but yesterday I ___ by train.', options: ['travel / traveled', 'traveled / travel', 'travel / travel'], correct: 0, explanation: 'Usually -> travel / yesterday -> traveled.' },
+        { text: 'Choose the correct sentence:', options: ['He didn\'t tell me the secret.', 'He didn\'t told me the secret.'], correct: 0, explanation: "didn't + tell." },
+        { text: 'Choose the correct sentence:', options: ['They bought a house two years ago.', 'They buyed a house two years ago.'], correct: 0, explanation: 'buy -> bought.' },
+        { text: 'Select the correct sentence:', options: ['What did you do last weekend?', 'What did you did last weekend?'], correct: 0, explanation: 'did + do (V1).' },
+        { text: 'Select the correct sentence:', options: ['I woke up, ate breakfast, and went to work.', 'I waked up, eated breakfast, and goed to work.'], correct: 0, explanation: 'woke, ate, went.' },
+      ],
+    },
+  },
+  {
+    id: 'sec-past-continuous',
+    order: 13,
+    title: "Past Continuous — o'tgan davomli zamon",
+    titleRu: 'Past Continuous — прошедшее длительное время',
+    icon: '⏱️',
+    lessons: [
+      {
+        id: 'sec-past-continuous-l1',
+        order: 1,
+        title: 'Tasdiq shakllar: "was/were + V-ing"',
+        titleRu: 'Утвердительные формы: "was/were + V-ing"',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: "Past Continuous (O'tgan davomli zamon) — o'tmishdagi ma'lum bir vaqtda (masalan, kecha soat 5 da) davom etayotgan harakatlarni ifodalash uchun ishlatiladi.",
+              ruleRu: 'Past Continuous используется для действий, происходивших в определенный момент в прошлом.',
+              formula: 'Subject + was / were + Verb-ing',
+              example: 'I was reading a book at 5 PM yesterday. (Men kecha soat 5 da kitob o\'qiyotgan edim.)',
+              exampleRu: 'I was reading a book at 5 PM yesterday. (Я читал книгу вчера в 5 часов.)',
+            },
+            exercises: [
+              { text: 'I ___ a book yesterday at 7 PM.', options: ['was reading', 'were reading', 'readed'], correct: 0, explanation: '"I" bilan "was reading" ishlatiladi.' },
+              { text: 'They ___ football all afternoon yesterday.', options: ['were playing', 'was playing', 'played'], correct: 0, explanation: '"They" bilan "were playing".' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Birlik shaxslar bilan "was + V-ing": I was, He was, She was, It was.',
+              ruleRu: 'Для единственного числа используется "was + V-ing": I / He / She / It + was + V-ing.',
+              formula: 'I / He / She / It + was + Verb-ing',
+              example: 'She was sleeping when I came. It was raining at 8 o\'clock.',
+              exampleRu: 'She was sleeping when I came. It was raining at 8 o\'clock.',
+            },
+            exercises: [
+              { text: 'He ___ his homework at 9 PM.', options: ['was doing', 'were doing', 'did'], correct: 0, explanation: 'He + was doing.' },
+              { text: 'She ___ TV yesterday evening.', options: ['was watching', 'were watching', 'watches'], correct: 0, explanation: 'She + was watching.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ko\'plik shaxslar va "you" bilan "were + V-ing": You were, We were, They were.',
+              ruleRu: 'Для множественного числа и "you" используется "were + V-ing": You / We / They + were + V-ing.',
+              formula: 'You / We / They + were + Verb-ing',
+              example: 'We were cooking dinner at 6 PM. They were dancing at the party.',
+              exampleRu: 'We were cooking dinner at 6 PM. They were dancing at the party.',
+            },
+            exercises: [
+              { text: 'We ___ for the bus at 8:00 AM.', options: ['were waiting', 'was waiting', 'waited'], correct: 0, explanation: 'We + were waiting.' },
+              { text: 'You ___ a movie when I called.', options: ['were watching', 'was watching', 'watched'], correct: 0, explanation: 'You + were watching.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '-ing qo\'shish yozilish qoidalari: 1) write ➔ writing (-e tushadi). 2) run ➔ running (oxirgi undosh ikkilanadi). 3) die ➔ dying (-ie ➔ -y).',
+              ruleRu: 'Правила добавления -ing: write➔writing, run➔running, die➔dying.',
+              formula: 'write ➔ writing  |  run ➔ running  |  swim ➔ swimming',
+              example: 'He was writing an email. She was running in the park.',
+              exampleRu: 'He was writing an email. She was running in the park.',
+            },
+            exercises: [
+              { text: 'Past Continuous form of "swim" with "I":', options: ['was swimming', 'was swiming', 'were swimming'], correct: 0, explanation: 'swim -> swimming (m ikkilanadi), I -> was swimming.' },
+              { text: 'Past Continuous form of "write" with "They":', options: ['were writing', 'were writeing', 'was writing'], correct: 0, explanation: 'write -> writing (-e tushadi), They -> were writing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Continuous tasdiq shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все утвердительные формы Past Continuous.',
+              formula: 'I/He/She/It WAS + V-ing  |  You/We/They WERE + V-ing',
+              example: 'While I was studying, my brother was playing games.',
+              exampleRu: 'While I was studying, my brother was playing games.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I was working at 10 AM yesterday.', 'I were working at 10 AM yesterday.'], correct: 0, explanation: 'I + was working.' },
+              { text: 'Choose the correct sentence:', options: ['My friends were having lunch when I arrived.', 'My friends was having lunch when I arrived.'], correct: 0, explanation: 'My friends (they) + were having.' },
+              { text: 'Select the correct sentence:', options: ['The sun was shining all day yesterday.', 'The sun were shining all day yesterday.'], correct: 0, explanation: 'The sun (it) + was shining.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-continuous-l2',
+        order: 2,
+        title: 'Inkor shakllar: "wasn\'t / weren\'t + V-ing"',
+        titleRu: 'Отрицательные формы: "wasn\'t / weren\'t + V-ing"',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Past Continuous inkor shaklida "was not" ➔ "wasn\'t" va "were not" ➔ "weren\'t" ishlatiladi. Fe\'lga doim "-ing" qo\'shilganicha qoladi!',
+              ruleRu: 'Для отрицания используйте "wasn\'t" или "weren\'t". Окончание -ing СОХРАНЯЕТСЯ!',
+              formula: 'Subject + wasn\'t / weren\'t + Verb-ing',
+              example: 'I wasn\'t sleeping at 11 PM. (Men soat 11 da uxlamayotgan edim.)',
+              exampleRu: 'I wasn\'t sleeping at 11 PM. (Я не спал в 11 вечера.)',
+            },
+            exercises: [
+              { text: 'I ___ TV at 8 PM yesterday.', options: ["wasn't watching", "weren't watching", "didn't watching"], correct: 0, explanation: '"I" inkorida: wasn\'t watching.' },
+              { text: 'They ___ football at that time.', options: ["weren't playing", "wasn't playing", "don't playing"], correct: 0, explanation: '"They" inkorida: weren\'t playing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Birlik shaxslar inkori: I wasn\'t, He wasn\'t, She wasn\'t, It wasn\'t + V-ing.',
+              ruleRu: 'Отрицание для единственного числа: I / He / She / It + wasn\'t + V-ing.',
+              formula: 'I / He / She / It + wasn\'t + Verb-ing',
+              example: 'He wasn\'t driving fast. She wasn\'t listening to music.',
+              exampleRu: 'He wasn\'t driving fast. She wasn\'t listening to music.',
+            },
+            exercises: [
+              { text: 'She ___ attention during the lesson.', options: ["wasn't paying", "weren't paying", "not paying"], correct: 0, explanation: 'She + wasn\'t paying.' },
+              { text: 'It ___ at 5 o\'clock yesterday.', options: ["wasn't raining", "weren't raining", "didn't raining"], correct: 0, explanation: 'It + wasn\'t raining.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ko\'plik shaxslar inkori: You weren\'t, We weren\'t, They weren\'t + V-ing.',
+              ruleRu: 'Отрицание для множественного числа: You / We / They + weren\'t + V-ing.',
+              formula: 'You / We / They + weren\'t + Verb-ing',
+              example: 'We weren\'t expecting guests. They weren\'t talking loud.',
+              exampleRu: 'We weren\'t expecting guests. They weren\'t talking loud.',
+            },
+            exercises: [
+              { text: 'We ___ loud music late at night.', options: ["weren't playing", "wasn't playing", "aren't playing"], correct: 0, explanation: 'We + weren\'t playing.' },
+              { text: 'You ___ attention when I spoke.', options: ["weren't paying", "wasn't paying", "don't paying"], correct: 0, explanation: 'You + weren\'t paying.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 2 ta xato: 1) wasn\'t sleep ❌ ➔ wasn\'t sleeping ✅  2) didn\'t working ❌ ➔ wasn\'t working ✅.',
+              ruleRu: '2 частые ошибки: 1) wasn\'t sleep ❌ ➔ wasn\'t sleeping ✅  2) didn\'t working ❌ ➔ wasn\'t working ✅.',
+              formula: 'REMEMBER: wasn\'t / weren\'t + ALWAYS Verb-ing',
+              example: 'Correct: He wasn\'t listening. (NOT: He didn\'t listening.)',
+              exampleRu: 'Correct: He wasn\'t listening.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I wasn\'t sleeping when you called.', 'I didn\'t sleeping when you called.'], correct: 0, explanation: 'Past Continuous inkorida: wasn\'t sleeping.' },
+              { text: 'Choose the correct sentence:', options: ['They weren\'t working yesterday at 4 PM.', 'They wasn\'t working yesterday at 4 PM.'], correct: 0, explanation: 'They + weren\'t working.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Continuous inkor shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все отрицательные формы Past Continuous.',
+              formula: 'Subject + wasn\'t / weren\'t + V-ing',
+              example: 'It wasn\'t snowing, so we weren\'t wearing heavy coats.',
+              exampleRu: 'It wasn\'t snowing, so we weren\'t wearing heavy coats.',
+            },
+            exercises: [
+              { text: 'Select the correct sentence:', options: ['He wasn\'t feeling well yesterday.', 'He weren\'t feeling well yesterday.'], correct: 0, explanation: 'He + wasn\'t feeling.' },
+              { text: 'Select the correct sentence:', options: ['We weren\'t waiting for you at 5:00.', 'We didn\'t waiting for you at 5:00.'], correct: 0, explanation: 'We + weren\'t waiting.' },
+              { text: 'Choose the correct form: She ___ at that moment.', options: ["wasn't listening", "wasn't listen"], correct: 0, explanation: 'wasn\'t + V-ing: wasn\'t listening.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-continuous-l3',
+        order: 3,
+        title: 'Savol shakli: "Was / Were ... + V-ing?"',
+        titleRu: 'Вопросительная форма: "Was / Were ... + V-ing?"',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Past Continuous savollarida "Was" yoki "Were" eganing oldiga chiqadi. Fe\'lga "-ing" qo\'shiladi.',
+              ruleRu: 'В вопросах "Was" или "Were" ставится перед подлежащим. Глагол идет с -ing.',
+              formula: 'Was / Were + Subject + Verb-ing ?',
+              example: 'Was he sleeping at 10 PM? (U soat 10 da uxlayotgan edimi?) Were you working?',
+              exampleRu: 'Was he sleeping at 10 PM? Were you working?',
+            },
+            exercises: [
+              { text: '___ you sleeping when I called you?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: '"You" savolida "Were" oldinga chiqadi.' },
+              { text: '___ she reading a book at 5 PM?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: '"She" savolida "Was".' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa javoblar: Yes, I was. / No, I wasn\'t. | Yes, we were. / No, we weren\'t.',
+              ruleRu: 'Краткие ответы: Yes, I was / No, I wasn\'t | Yes, we were / No, we weren\'t.',
+              formula: 'Yes, + Subject + was/were.  |  No, + Subject + wasn\'t/weren\'t.',
+              example: '— Were you studying? — Yes, I was. / No, I wasn\'t.',
+              exampleRu: '— Were you studying? — Yes, I was. / No, I wasn\'t.',
+            },
+            exercises: [
+              { text: '— Was it raining yesterday afternoon? — Yes, it ___ .', options: ['was', 'were', 'is'], correct: 0, explanation: 'Yes, it was.' },
+              { text: '— Were they listening to music? — No, they ___ .', options: ["weren't", "wasn't", "didn't"], correct: 0, explanation: 'No, they weren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maxsus savollar (Wh- questions): What / Where / Why / Who + Was/Were + Subject + V-ing?',
+              ruleRu: 'Специальные вопросы: Wh- word + Was/Were + Subject + V-ing?',
+              formula: 'Wh- word + Was / Were + Subject + Verb-ing ?',
+              example: 'What were you doing yesterday at 6 PM? Where was he going?',
+              exampleRu: 'What were you doing yesterday at 6 PM? Where was he going?',
+            },
+            exercises: [
+              { text: 'What ___ you doing yesterday at this time?', options: ['were', 'was', 'did'], correct: 0, explanation: 'What + were you doing.' },
+              { text: 'Where ___ she going when you saw her?', options: ['was', 'were', 'did'], correct: 0, explanation: 'Where + was she going.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Dialoglarda Past Continuous savollarini qo\'llash amaliyoti.',
+              ruleRu: 'Практика использования вопросов Past Continuous в диалогах.',
+              formula: 'Dialogue Drill: — What were you doing? — I was V-ing.',
+              example: '— What were you doing at 9 PM? — I was doing my homework.',
+              exampleRu: '— What were you doing at 9 PM? — I was doing my homework.',
+            },
+            exercises: [
+              { text: '— Why ___ you crying yesterday? — I ___ watching a sad movie.', options: ['were / was', 'was / were', 'did / was'], correct: 0, explanation: 'Why were you / I was watching.' },
+              { text: '— ___ Tom playing games? — No, he ___ studying.', options: ['Was / was', 'Were / were', 'Did / was'], correct: 0, explanation: 'Was Tom / he was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Continuous savol shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все вопросительные формы Past Continuous.',
+              formula: 'Was/Were + Subject + V-ing ?  |  Wh- + Was/Were + Subject + V-ing ?',
+              example: 'Were you sleeping when the bell rang, and what was your sister doing?',
+              exampleRu: 'Were you sleeping when the bell rang, and what was your sister doing?',
+            },
+            exercises: [
+              { text: 'Choose the correct question:', options: ['Were you watching the game at 8:00?', 'Did you watching the game at 8:00?'], correct: 0, explanation: 'Were you watching...' },
+              { text: 'Choose the correct question:', options: ['What was she doing when you arrived?', 'What did she doing when you arrived?'], correct: 0, explanation: 'What was she doing...' },
+              { text: 'Select the correct question:', options: ['Why were they driving so fast?', 'Why was they driving so fast?'], correct: 0, explanation: 'Why were they...' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-continuous-l4',
+        order: 4,
+        title: '"When" va "While" bilan qo\'llanishi',
+        titleRu: 'Использование с "When" и "While"',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'O\'tgan zamonda davom etayotgan harakatni (Past Continuous) to\'satdan qisqa harakat (Past Simple) bo\'lganda "WHEN" ishlatiladi.',
+              ruleRu: 'Past Continuous + WHEN + Past Simple (длительное действие прерывается кратким).',
+              formula: 'Past Continuous + WHEN + Past Simple',
+              example: 'I was reading a book when the phone rang. (Telefon chalinganda men kitob o\'qiyotgan edim.)',
+              exampleRu: 'I was reading a book when the phone rang.',
+            },
+            exercises: [
+              { text: 'I was sleeping when my friend ___ .', options: ['called', 'was calling', 'calls'], correct: 0, explanation: 'when + Past Simple (called).' },
+              { text: 'She was cooking when the lights ___ out.', options: ['went', 'were going', 'go'], correct: 0, explanation: 'when + Past Simple (went).' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"WHILE" (yo\'l-yo\'lakay / mobaynida) dan keyin ko\'pincha Past Continuous keladi.',
+              ruleRu: 'WHILE + Past Continuous, Past Simple (Пока / во время того как...).',
+              formula: 'WHILE + Past Continuous , Past Simple',
+              example: 'While I was walking in the park, I met my teacher.',
+              exampleRu: 'While I was walking in the park, I met my teacher.',
+            },
+            exercises: [
+              { text: 'While we ___ in the garden, it started to rain.', options: ['were working', 'worked', 'are working'], correct: 0, explanation: 'While + Past Continuous (were working).' },
+              { text: 'While he ___ to school, he saw an accident.', options: ['was walking', 'walked', 'walks'], correct: 0, explanation: 'While + Past Continuous (was walking).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bir vaqtning o\'zida davom etayotgan ikkita uzun harakat uchun ikkala tomonda ham Past Continuous + WHILE qo\'llanadi.',
+              ruleRu: 'Два параллельных длительных действия: Past Continuous + WHILE + Past Continuous.',
+              formula: 'Past Continuous + WHILE + Past Continuous',
+              example: 'I was studying while my brother was listening to music.',
+              exampleRu: 'I was studying while my brother was listening to music.',
+            },
+            exercises: [
+              { text: 'While I was cooking, my sister ___ the table.', options: ['was setting', 'setted', 'set'], correct: 0, explanation: 'Ikki paralel davomli harakat: was setting.' },
+              { text: 'They were playing games while their parents ___ TV.', options: ['were watching', 'watched', 'watch'], correct: 0, explanation: 'were watching.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"When" va "While" farqi: WHEN + qisqa harakat (Past Simple) | WHILE + uzun harakat (Past Continuous).',
+              ruleRu: 'Различие: WHEN + краткое действие (Past Simple) | WHILE + длительное действие (Past Continuous).',
+              formula: 'when + Past Simple (arrived)  |  while + Past Continuous (was studying)',
+              example: 'He called me WHEN I was cooking. / WHILE I was cooking, he called me.',
+              exampleRu: 'He called me WHEN I was cooking. / WHILE I was cooking, he called me.',
+            },
+            exercises: [
+              { text: '___ I was walking home, it started to snow.', options: ['While', 'When', 'During'], correct: 0, explanation: 'Uzun harakat oldidan: While.' },
+              { text: 'She was driving ___ she saw a cat on the road.', options: ['when', 'while', 'for'], correct: 0, explanation: 'Qisqa kutilmagan voqea oldidan: when.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"When" va "While" qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила работы с When и While.',
+              formula: 'Past Cont + WHEN + Past Simple  |  WHILE + Past Cont, Past Simple',
+              example: 'While we were sleeping, someone knocked when the night was quiet.',
+              exampleRu: 'While we were sleeping, someone knocked when the night was quiet.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I was taking a shower when the phone rang.', 'I took a shower while the phone was ringing.'], correct: 0, explanation: 'was taking a shower when the phone rang.' },
+              { text: 'Choose the correct sentence:', options: ['While she was reading, her dog barked.', 'When she readed, her dog was barking.'], correct: 0, explanation: 'While she was reading...' },
+              { text: 'Select the correct sentence:', options: ['We were watching a movie when the power went off.', 'We watched a movie while the power went off.'], correct: 0, explanation: 'were watching ... when ... went off.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-continuous-l5',
+        order: 5,
+        title: 'Past Simple vs Past Continuous Taqqoslash',
+        titleRu: 'Сравнение Past Simple и Past Continuous',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Tugallangan muayyan o\'tgan harakat ➔ Past Simple (I wrote a letter). O\'tmishdagi jarayon/davomiylik ➔ Past Continuous (I was writing a letter).',
+              ruleRu: 'Завершенное действие ➔ Past Simple | Процесс в прошлом ➔ Past Continuous.',
+              formula: 'Past Simple (Completed) vs Past Continuous (Process/Duration)',
+              example: 'Yesterday I painted a wall. (Bo\'yab bo\'ldim.) Yesterday I was painting a wall. (Bo\'yayotgan edim.)',
+              exampleRu: 'Yesterday I painted a wall. Yesterday I was painting a wall.',
+            },
+            exercises: [
+              { text: 'At 3 PM yesterday, I ___ in the library.', options: ['was studying', 'studied', 'study'], correct: 0, explanation: 'Muayyan soatda jarayon: was studying.' },
+              { text: 'Yesterday I ___ my homework and went to bed.', options: ['finished', 'was finishing', 'finishes'], correct: 0, explanation: 'Tugallangan ketma-ket harakat: finished.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqt ko\'rsatkichlari: yesterday at 5 PM, all day yesterday, at that moment ➔ Past Continuous | yesterday, 2 days ago, last night ➔ Past Simple.',
+              ruleRu: 'Маркеры: yesterday at 5 PM, all evening (Past Continuous) vs yesterday, ago (Past Simple).',
+              formula: 'Specific time point / duration ➔ Past Continuous',
+              example: 'I was working all day yesterday.',
+              exampleRu: 'I was working all day yesterday.',
+            },
+            exercises: [
+              { text: 'What were you doing all evening yesterday? — I ___ TV.', options: ['was watching', 'watched', 'watch'], correct: 0, explanation: 'all evening -> was watching.' },
+              { text: 'I ___ a new bike two days ago.', options: ['bought', 'was buying', 'buys'], correct: 0, explanation: 'two days ago -> bought.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Holat fe\'llari (Stative verbs: know, love, want, understand, like, remember) odatda davomli (-ing) zamonlarda ishlatilmaydi!',
+              ruleRu: 'Глаголы состояния (know, want, like...) OБЫЧНО НЕ используются в -ing!',
+              formula: 'Stative Verbs (know, want, like...) ➔ Past Simple ONLY (knew, wanted, liked)',
+              example: 'I knew the answer. (I was knowing EMAS!)',
+              exampleRu: 'I knew the answer. (НЕ I was knowing!)',
+            },
+            exercises: [
+              { text: 'I ___ the truth yesterday.', options: ['knew', 'was knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li, -ing olmaydi: knew.' },
+              { text: 'She ___ to go home early.', options: ['wanted', 'was wanting', 'wants'], correct: 0, explanation: 'want - holat fe\'li: wanted.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hikoyalarda zamin (background) yaratish: Past Continuous fon (zamin) uchun, Past Simple esa asosiy tezkor voqealar uchun ishlatiladi.',
+              ruleRu: 'В историях: Past Continuous создает фон (background), Past Simple — основные события.',
+              formula: 'Background setting (Past Cont) ➔ Main events (Past Simple)',
+              example: 'The sun was shining and birds were singing. Suddenly, a man opened the door.',
+              exampleRu: 'The sun was shining and birds were singing. Suddenly, a man opened the door.',
+            },
+            exercises: [
+              { text: 'The wind ___ and the rain ___ when we left the house.', options: ['was blowing / was falling', 'blew / fell', 'is blowing / is falling'], correct: 0, explanation: 'Fon (background): was blowing / was falling.' },
+              { text: 'Select the correct sentence:', options: ['While I was walking, I lost my wallet.', 'While I walked, I was losing my wallet.'], correct: 0, explanation: 'Fon: was walking / Asosiy voqea: lost.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Simple va Past Continuous farqini birlashtiramiz.',
+              ruleRu: 'Обобщим различие между Past Simple и Past Continuous.',
+              formula: 'Past Cont (was/were V-ing) = ongoing  |  Past Simple (V2/-ed) = completed',
+              example: 'I was sleeping at midnight, but I woke up at 7 AM.',
+              exampleRu: 'I was sleeping at midnight, but I woke up at 7 AM.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['He was writing a letter when his laptop died.', 'He wrote a letter when his laptop was dying.'], correct: 0, explanation: 'was writing ... when ... died.' },
+              { text: 'Choose the correct sentence:', options: ['We didn\'t know about the party.', 'We weren\'t knowing about the party.'], correct: 0, explanation: 'know - holat fe\'li: didn\'t know.' },
+              { text: 'Select the correct sentence:', options: ['They were playing chess at 4 PM yesterday.', 'They played chess at 4 PM yesterday.'], correct: 0, explanation: 'at 4 PM yesterday -> were playing.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-past-continuous-l6',
+        order: 6,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (Past Continuous)',
+        titleRu: 'Смешанная практика и Исправление ошибок (Past Continuous)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta xato: 1) He was sleep ❌ ➔ He was sleeping ✅  2) While I walked ❌ ➔ While I was walking ✅  3) I was knowing ❌ ➔ I knew ✅.',
+              ruleRu: '3 частые ошибки: 1) was sleep ❌ ➔ was sleeping ✅  2) While I walked ❌ ➔ While I was walking ✅  3) was knowing ❌ ➔ knew ✅.',
+              formula: 'Check list: 1) was/were + V-ing | 2) while + Past Cont | 3) Stative verb = Past Simple',
+              example: 'I was sleeping. While I was walking. I knew the truth.',
+              exampleRu: 'I was sleeping. While I was walking. I knew the truth.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I was reading when you called.', 'I was read when you called.'], correct: 0, explanation: 'was + V-ing: was reading.' },
+              { text: 'Choose the correct sentence:', options: ['While they were eating, someone knocked.', 'While they ate, someone was knocking.'], correct: 0, explanation: 'While + were eating.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Continuous bilan qisqa hikoyalarni o\'qish va tushunish mashqlari.',
+              ruleRu: 'Практика чтения и понимания коротких историй в Past Continuous.',
+              formula: 'Narrative context: combine continuous background and simple actions',
+              example: 'At 8 PM, Tom was studying, his mother was cooking, and his father was watching TV.',
+              exampleRu: 'At 8 PM, Tom was studying, his mother was cooking, and his father was watching TV.',
+            },
+            exercises: [
+              { text: 'Yesterday at 3 PM, my sister ___ music and I ___ a book.', options: ['was listening to / was reading', 'listened to / readed', 'were listening to / were reading'], correct: 0, explanation: 'sister was listening / I was reading.' },
+              { text: 'Select the correct sentence:', options: ['What were you doing when the fire started?', 'What did you doing when the fire started?'], correct: 0, explanation: 'What were you doing...' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Simple va Past Continuous shakllarini bitta gapda to\'g\'ri joylashtirish mashqlari.',
+              ruleRu: 'Упражнения на правильную расстановку времен в одном предложении.',
+              formula: 'Long action = was/were V-ing | Short interrupt = V2/-ed',
+              example: 'The snow was falling heavily when we arrived at the chalet.',
+              exampleRu: 'The snow was falling heavily when we arrived at the chalet.',
+            },
+            exercises: [
+              { text: 'She ___ her leg while she ___ on ice.', options: ['broke / was skating', 'was breaking / skated', 'broke / skated'], correct: 0, explanation: 'broke (short) / was skating (long).' },
+              { text: 'The phone ___ while I ___ a shower.', options: ['rang / was taking', 'was ringing / took', 'rang / took'], correct: 0, explanation: 'rang (short) / was taking (long).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Mantiqiy dialoglar va savol-javob mashqlari.',
+              ruleRu: 'Диалоги и построение пар вопрос-ответ.',
+              formula: 'Q: What were you V-ing when X happened? ➔ A: I was V-ing.',
+              example: '— What were you doing when I saw you? — I was running to catch the bus.',
+              exampleRu: '— What were you doing when I saw you? — I was running to catch the bus.',
+            },
+            exercises: [
+              { text: '— Were you sleeping at 11 PM? — No, I ___ a film.', options: ['was watching', 'watched', 'am watching'], correct: 0, explanation: 'I was watching.' },
+              { text: '— Why was he running? — Because he ___ late for the flight.', options: ['was running', 'was being', 'was'], correct: 2, explanation: 'be -> was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Section 13 Past Continuous bo\'yicha yakuniy master formula.',
+              ruleRu: 'Итоговая главная формула Past Continuous.',
+              formula: 'Master Past Continuous Rule: Subject + was/were + V-ing | Negative: wasn\'t/weren\'t + V-ing | Question: Was/Were + Subject + V-ing ?',
+              example: 'I was working. I wasn\'t working. Were you working?',
+              exampleRu: 'I was working. I wasn\'t working. Were you working?',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['They were walking home when it started to rain.', 'They were walk home when it started to rain.'], correct: 0, explanation: 'were walking.' },
+              { text: 'Choose the correct sentence:', options: ['What were you doing yesterday at 5 PM?', 'What was you doing yesterday at 5 PM?'], correct: 0, explanation: 'What were you doing...' },
+              { text: 'Select the correct sentence:', options: ['She wasn\'t sleeping when I called her.', 'She wasn\'t slept when I called her.'], correct: 0, explanation: 'wasn\'t sleeping.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Past Continuous — o'tgan davomli zamon",
+      titleRu: 'Тест раздела: Past Continuous — прошедшее длительное время',
+      exercises: [
+        { text: 'I ___ a book yesterday at 8 PM.', options: ['was reading', 'were reading', 'readed'], correct: 0, explanation: 'I + was reading.' },
+        { text: 'They ___ football when it started to rain.', options: ['were playing', 'was playing', 'played'], correct: 0, explanation: 'They + were playing.' },
+        { text: 'She ___ TV when I arrived.', options: ["wasn't watching", "weren't watching", "didn't watching"], correct: 0, explanation: 'She + wasn\'t watching.' },
+        { text: 'We ___ for the exam all day yesterday.', options: ['were studying', 'was studying', 'studied'], correct: 0, explanation: 'We + were studying.' },
+        { text: '___ you sleeping when I called?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: 'Were you sleeping...' },
+        { text: '___ it raining at 6 o\'clock this morning?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: 'Was it raining...' },
+        { text: 'What ___ she doing yesterday afternoon?', options: ['was', 'were', 'did'], correct: 0, explanation: 'What was she doing...' },
+        { text: 'Where ___ they going when you met them?', options: ['were', 'was', 'did'], correct: 0, explanation: 'Where were they going...' },
+        { text: 'I was reading a book ___ the phone rang.', options: ['when', 'while', 'during'], correct: 0, explanation: 'when + Past Simple.' },
+        { text: '___ I was walking home, I saw a puppy.', options: ['While', 'When', 'Since'], correct: 0, explanation: 'While + Past Continuous.' },
+        { text: 'She was cooking while her husband ___ the room.', options: ['was cleaning', 'cleaned', 'cleans'], correct: 0, explanation: 'was cleaning (parallel action).' },
+        { text: 'I ___ the answer to your question yesterday.', options: ['knew', 'was knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li: knew.' },
+        { text: 'Choose the correct sentence:', options: ['He wasn\'t driving fast when the accident happened.', 'He didn\'t driving fast when the accident happened.'], correct: 0, explanation: 'wasn\'t driving.' },
+        { text: 'Choose the correct sentence:', options: ['While we were sleeping, someone knocked on the door.', 'While we slept, someone was knocking on the door.'], correct: 0, explanation: 'While we were sleeping...' },
+        { text: 'Select the correct sentence:', options: ['What were you doing yesterday at 10 PM?', 'What did you doing yesterday at 10 PM?'], correct: 0, explanation: 'What were you doing...' },
+      ],
+    },
+  },
+  {
+    id: 'sec-future-will-goingto',
+    order: 14,
+    title: 'Future: "going to" va "will"',
+    titleRu: 'Будущее время: "going to" и "will"',
+    icon: '🚀',
+    lessons: [
+      {
+        id: 'sec-future-will-goingto-l1',
+        order: 1,
+        title: 'be going to (Rejalar va Alomatlar)',
+        titleRu: 'be going to (Планы и Очевидные признаки)',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"be going to" iborasi kelajakda bajarish rejalashtirilgan niyatlar va ko\'rinib turgan alomatlar (evidence) uchun ishlatiladi.',
+              ruleRu: '"be going to" используется для заранее запланированных намерений и очевидных предсказаний.',
+              formula: 'Subject + am / is / are + going to + Verb1',
+              example: 'I am going to study English tonight. (Men bugun kechqurun ingliz tilini o\'rganmoqchiman.)',
+              exampleRu: 'I am going to study English tonight. (Я собираюсь учить английский сегодня вечером.)',
+            },
+            exercises: [
+              { text: 'I ___ buy a new laptop next month. I saved money for it.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan o\'ylangan reja: am going to.' },
+              { text: 'She ___ visit her grandmother this weekend.', options: ['is going to', 'are going to', 'will to'], correct: 0, explanation: 'She + is going to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Gapda hozirgi vaziyatda alomat/isbot (evidence) bo\'lsa "be going to" ishlatiladi.',
+              ruleRu: 'Если есть очевидный признак в настоящем — используйте "be going to".',
+              formula: 'Look at [Evidence]! ➔ Subject + am/is/are + going to + V1',
+              example: 'Look at those dark clouds! It is going to rain. (Qora bulutlarga qara! Yombir yog\'ayotir.)',
+              exampleRu: 'Look at those dark clouds! It is going to rain.',
+            },
+            exercises: [
+              { text: 'Look at the sky! It ___ rain.', options: ['is going to', 'will', 'is raining'], correct: 0, explanation: 'Qora bulutlar — alomat: is going to rain.' },
+              { text: 'Be careful! You ___ drop that glass!', options: ['are going to', 'will', 'going to'], correct: 0, explanation: 'Hozirgi xavf/alomat: are going to drop.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor shakl: am not / is not (isn\'t) / are not (aren\'t) + going to + V1.',
+              ruleRu: 'Отрицание: am/is/are + not + going to + V1.',
+              formula: 'Subject + am not / isn\'t / aren\'t + going to + V1',
+              example: 'I am not going to buy that coat. He isn\'t going to work tomorrow.',
+              exampleRu: 'I am not going to buy that coat. He isn\'t going to work tomorrow.',
+            },
+            exercises: [
+              { text: 'He ___ sell his car. He changed his mind.', options: ["isn't going to", "won't to", "not going to"], correct: 0, explanation: 'He + isn\'t going to.' },
+              { text: 'We ___ stay in a hotel. We booked an apartment.', options: ["aren't going to", "isn't going to", "won't going to"], correct: 0, explanation: 'We + aren\'t going to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Savol shakli: Am / Is / Are + Subject + going to + V1 ?',
+              ruleRu: 'Вопрос: Am/Is/Are + Subject + going to + V1 ?',
+              formula: 'Am / Is / Are + Subject + going to + V1 ?',
+              example: 'Are you going to attend the party? Is she going to move to London?',
+              exampleRu: 'Are you going to attend the party? Is she going to move to London?',
+            },
+            exercises: [
+              { text: '___ you going to travel this summer?', options: ['Are', 'Is', 'Will'], correct: 0, explanation: 'You savolida: Are you going to...' },
+              { text: '___ he going to apply for that job?', options: ['Is', 'Are', 'Does'], correct: 0, explanation: 'He savolida: Is he going to...' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"be going to" iborasi bo\'yicha bilganlarimizni birlashtiramiz.',
+              ruleRu: 'Обобщим все знания о "be going to".',
+              formula: 'Plan / Evidence ➔ am/is/are + going to + V1',
+              example: 'I am going to cook dinner because I bought all the vegetables.',
+              exampleRu: 'I am going to cook dinner because I bought all the vegetables.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['They are going to build a new bridge next year.', 'They will to build a new bridge next year.'], correct: 0, explanation: 'Reja: are going to build.' },
+              { text: 'Choose the correct sentence:', options: ['Is she going to start her course tomorrow?', 'Does she going to start her course tomorrow?'], correct: 0, explanation: 'Is she going to...' },
+              { text: 'Select the correct sentence:', options: ['I am not going to waste my time.', 'I not am going to waste my time.'], correct: 0, explanation: 'I am not going to...' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-will-goingto-l2',
+        order: 2,
+        title: 'will (Kutilmagan qarorlar va Va\'dalar)',
+        titleRu: 'will (Спонтанные решения и Обещания)',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"will" kelasi zamon fe\'li — suhbat paytida qilingan kutilmagan (spontaneous) qarorlar va va\'dalar uchun ishlatiladi. Fe\'l o\'zgarmaydi (V1).',
+              ruleRu: '"will" используется для спонтанных решений (принятых в момент речи), обещаний и предложений помощи.',
+              formula: 'Subject + will + Verb1',
+              example: 'The phone is ringing. — I will answer it! (Telefon chalinyapti. — Men javob beraman!)',
+              exampleRu: 'The phone is ringing. — I will answer it!',
+            },
+            exercises: [
+              { text: '— It is cold in here. — I ___ close the window.', options: ['will', 'am going to', 'am closing'], correct: 0, explanation: 'Shu zahoti kutilmagan qaror: I will close.' },
+              { text: '— I don\'t have money. — Don\'t worry, I ___ pay for you.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Taklif/yordam: I will pay.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Va\'da (promises), takliflar (offers) va iltimoslar uchun "will" ishlatiladi.',
+              ruleRu: 'Для обещаний (promises) и предложений (offers) всегда используется "will".',
+              formula: 'I promise ➔ I will + V1  |  I offer ➔ I will + V1',
+              example: 'I promise I will call you as soon as I arrive.',
+              exampleRu: 'I promise I will call you as soon as I arrive.',
+            },
+            exercises: [
+              { text: 'I promise I ___ tell anyone your secret.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da berish: I won\'t tell (will not).' },
+              { text: 'Don\'t worry, I ___ help you with your homework.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Yordam berish va\'dasi: I will help.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Fikr, ishonch va shaxsiy tahminlar (I think, I believe, I hope, probably) bilan "will" keladi.',
+              ruleRu: 'С глаголами мнения (I think, I hope, probably) используется "will".',
+              formula: 'I think / I hope / Probably ➔ Subject + will + V1',
+              example: 'I think it will be sunny tomorrow. I hope you will pass the exam.',
+              exampleRu: 'I think it will be sunny tomorrow. I hope you will pass the exam.',
+            },
+            exercises: [
+              { text: 'I think our team ___ win the match.', options: ['will', 'is going to', 'is winning'], correct: 0, explanation: 'I think -> will win.' },
+              { text: 'I hope she ___ feel better soon.', options: ['will', 'is going to', 'goes to'], correct: 0, explanation: 'I hope -> will.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"will" qisqartmasi: \'ll (I\'ll, you\'ll, he\'ll, she\'ll, we\'ll, they\'ll).',
+              ruleRu: 'Сокращение "will": \'ll (I\'ll, you\'ll, he\'ll, she\'ll, we\'ll, they\'ll).',
+              formula: 'Subject + \'ll + Verb1',
+              example: 'I\'ll see you tomorrow. He\'ll be back soon.',
+              exampleRu: 'I\'ll see you tomorrow. He\'ll be back soon.',
+            },
+            exercises: [
+              { text: 'Choose the contraction of "I will":', options: ["I'll", "I'w", "Iw'll"], correct: 0, explanation: 'I will -> I\'ll.' },
+              { text: '___ meet you at the cafe at 5:00.', options: ["We'll", "We'going to", "We'will"], correct: 0, explanation: 'We will -> We\'ll.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"will" fe\'li bo\'yicha bilganlarimizni birlashtiramiz.',
+              ruleRu: 'Обобщим все случаи использования "will".',
+              formula: 'Instant decision / Promise / Opinion (think) ➔ will + V1',
+              example: 'I\'ll help you carry those bags because they look heavy.',
+              exampleRu: 'I\'ll help you carry those bags because they look heavy.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I think he will succeed in business.', 'I think he is going to succeed in business.'], correct: 0, explanation: 'I think + will.' },
+              { text: 'Choose the correct sentence:', options: ['I\'ll call you later tonight.', 'I\'ll to call you later tonight.'], correct: 0, explanation: 'I\'ll call (to siz).' },
+              { text: 'Select the correct sentence:', options: ['Wait! I\'ll open the door for you.', 'Wait! I am going to open the door for you.'], correct: 0, explanation: 'Spontan qaror: I\'ll open.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-will-goingto-l3',
+        order: 3,
+        title: 'will ning inkor ("won\'t") va savol shakli',
+        titleRu: 'Отрицание ("won\'t") и вопрос с "will"',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"will not" ning qisqartmasi "won\'t" /woʊnt/. Undan keyin ham fe\'l bosh (V1) shaklda bo\'ladi.',
+              ruleRu: 'Сокращение от "will not" — "won\'t". После него глагол идет в форме V1.',
+              formula: 'Subject + won\'t (will not) + Verb1',
+              example: 'I won\'t tell your secret to anyone. (Men siringni hech kimga aytmayman.)',
+              exampleRu: 'I won\'t tell your secret to anyone.',
+            },
+            exercises: [
+              { text: 'He ___ come to the party tonight. He is sick.', options: ["won't", "doesn't going to", "isn't will"], correct: 0, explanation: 'will not -> won\'t.' },
+              { text: 'I ___ forget your help.', options: ["won't", "not will", "won't to"], correct: 0, explanation: 'won\'t + V1 (forget).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Savol shaklida "Will" eganing oldiga o\'tadi: Will + Subject + V1 ?',
+              ruleRu: 'В вопросе "Will" ставится перед подлежащим: Will + Subject + V1 ?',
+              formula: 'Will + Subject + Verb1 ?',
+              example: 'Will you help me with this box? Will they come tomorrow?',
+              exampleRu: 'Will you help me with this box? Will they come tomorrow?',
+            },
+            exercises: [
+              { text: '___ you pass me the salt, please?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Iltimos/so\'rov: Will you pass...' },
+              { text: '___ it rain tomorrow?', options: ['Will', 'Is', 'Does'], correct: 0, explanation: 'Will it rain...' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa javoblar: Yes, I will. / No, I won\'t.',
+              ruleRu: 'Краткие ответы: Yes, I will. / No, I won\'t.',
+              formula: 'Yes, + Subject + will.  |  No, + Subject + won\'t.',
+              example: '— Will you come tomorrow? — Yes, I will. / No, I won\'t.',
+              exampleRu: '— Will you come tomorrow? — Yes, I will. / No, I won\'t.',
+            },
+            exercises: [
+              { text: '— Will she be at home tonight? — Yes, she ___ .', options: ['will', 'is', 'does'], correct: 0, explanation: 'Yes, she will.' },
+              { text: '— Will they arrive on time? — No, they ___ .', options: ["won't", "aren't", "don't"], correct: 0, explanation: 'No, they won\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maxsus savollar (Wh- questions): Where / What / When / Who / Why + will + subject + V1?',
+              ruleRu: 'Специальные вопросы: Wh- word + will + Subject + V1?',
+              formula: 'Wh- word + will + Subject + Verb1 ?',
+              example: 'Where will you live in the future? What will you do tomorrow?',
+              exampleRu: 'Where will you live in the future? What will you do tomorrow?',
+            },
+            exercises: [
+              { text: 'Where ___ you go after school?', options: ['will', 'are', 'do'], correct: 0, explanation: 'Where + will + you + go.' },
+              { text: 'What ___ happen next?', options: ['will', 'is', 'does'], correct: 0, explanation: 'What + will + happen.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"won\'t" va "Will...?" shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все формы "won\'t" и вопросы с "will".',
+              formula: 'Statement: will V1 | Negative: won\'t V1 | Question: Will S V1?',
+              example: 'I won\'t be late, and will you wait for me?',
+              exampleRu: 'I won\'t be late, and will you wait for me?',
+            },
+            exercises: [
+              { text: 'Choose the correct question:', options: ['Will you come to my birthday party?', 'Will you to come to my birthday party?'], correct: 0, explanation: 'Will + V1 (to siz).' },
+              { text: 'Choose the correct sentence:', options: ['She won\'t agree to this plan.', 'She won\'t agrees to this plan.'], correct: 0, explanation: 'won\'t + V1 (agree).' },
+              { text: 'Select the correct sentence:', options: ['When will the movie start?', 'When the movie will start?'], correct: 0, explanation: 'When will the movie start?' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-will-goingto-l4',
+        order: 4,
+        title: '"be going to" vs "will" Farqi (Taqqoslash)',
+        titleRu: 'Различие "be going to" и "will"',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Qaror qabul qilish vaqti: Oldindan o\'ylangan REJA ➔ be going to | Suhbat paytidagi KUTILMAGAN QAROR ➔ will.',
+              ruleRu: 'Время принятия решения: Заранее ➔ be going to | В момент речи ➔ will.',
+              formula: 'Prior plan = be going to  |  Instant decision = will',
+              example: 'I bought flour because I am going to bake a cake. / — There is no milk! — Oh, I will buy some!',
+              exampleRu: 'I am going to bake (reja) vs I will buy (kutilmagan).',
+            },
+            exercises: [
+              { text: '— Why did you buy sugar? — Because I ___ make jam.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan reja: am going to.' },
+              { text: '— I can\'t carry this bag. — Don\'t worry, I ___ help you!', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Shu zahoti kutilmagan taklif: will help.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bashorat asosi: Hozirgi ko\'rinib turgan ALOMAT ➔ be going to | Shaxsiy FIKR (I think) ➔ will.',
+              ruleRu: 'Основание предсказания: Очевидный факт/признак ➔ be going to | Личное мнение ➔ will.',
+              formula: 'Evidence now = be going to  |  Personal opinion (think) = will',
+              example: 'Look at the timer! It is going to explode. / I think robots will do everything in 2050.',
+              exampleRu: 'Evidence ➔ going to / Opinion ➔ will.',
+            },
+            exercises: [
+              { text: 'Look at that runner! He ___ win the race.', options: ['is going to', 'will', 'wins'], correct: 0, explanation: 'Ko\'rinib turgan alomat (oldinda ketmoqda): is going to.' },
+              { text: 'I think people ___ live on Mars one day.', options: ['will', 'are going to', 'going to'], correct: 0, explanation: 'I think -> will.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Va\'dalar (promises), takliflar (offers), tahdidlar (threats) va so\'rovlar (requests) har doim "WILL" bilan bo\'ladi.',
+              ruleRu: 'Обещания, предложения помощи и просьбы ВСЕГДА идут с "WILL".',
+              formula: 'Promise / Offer / Request ➔ WILL ONLY',
+              example: 'I will help you. / Will you open the door? / I won\'t tell anyone.',
+              exampleRu: 'I will help you. / Will you open the door?',
+            },
+            exercises: [
+              { text: 'I promise I ___ be late again.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da: won\'t.' },
+              { text: '___ you please turn off the light?', options: ['Will', 'Are going to', 'Do'], correct: 0, explanation: 'Iltimos/so\'rov: Will you...' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Dialoglarda "be going to" va "will" ni to\'g\'ri tanlash mashqlari.',
+              ruleRu: 'Практика выбора между be going to и will в диалогах.',
+              formula: 'Read context ➔ Check: Plan/Evidence (going to) OR Instant/Promise/Opinion (will)',
+              example: 'A: Are you going to the party? B: Yes, I am going to wear my new dress. / A: Oh no, I lost my keys! B: I\'ll help you find them.',
+              exampleRu: 'Context determines going to vs will.',
+            },
+            exercises: [
+              { text: '— What are your plans for tomorrow? — I ___ visit my dentist.', options: ['am going to', 'will', 'going to'], correct: 0, explanation: 'Reja: am going to.' },
+              { text: '— Someone is at the door. — I ___ see who it is.', options: ['will', 'am going to', 'go to'], correct: 0, explanation: 'Kutilmagan qaror: will see.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"be going to" vs "will" taqqoslamasini birlashtiramiz.',
+              ruleRu: 'Обобщим все различия между be going to и will.',
+              formula: 'going to (reja, alomat) vs will (tezkor qaror, va\'da, think)',
+              example: 'I am going to study medicine (reja), and I think I will be a good doctor (fikr).',
+              exampleRu: 'I am going to study medicine, and I think I will be a good doctor.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I am going to buy a car next month because I saved money.', 'I will buy a car next month because I saved money.'], correct: 0, explanation: 'Tayyorgarlik ko\'rilgan reja: am going to.' },
+              { text: 'Choose the correct sentence:', options: ['I think it will rain tomorrow.', 'I think it is going to rain tomorrow.'], correct: 0, explanation: 'I think -> will.' },
+              { text: 'Select the correct sentence:', options: ['Look at the baby! He is going to fall!', 'Look at the baby! He will fall!'], correct: 0, explanation: 'Ko\'rinib turgan alomat: is going to fall!' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-will-goingto-l5',
+        order: 5,
+        title: 'Present Continuous for Future (Aniq Kelasi Uchrashtiruvlar)',
+        titleRu: 'Present Continuous для будущего (Запланированные встречи)',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Vaqti va joyi ancha ilgari aniq kelishib qo\'yilgan kelajakdagi tadbirlar (arrangements) uchun Present Continuous (am/is/are + V-ing) ishlatiladi.',
+              ruleRu: 'Present Continuous (am/is/are + V-ing) используется для точных договоренностей на будущее (время и место определены).',
+              formula: 'Subject + am / is / are + Verb-ing + Future time',
+              example: 'I am meeting my boss tomorrow at 10 AM. (Men ertaga soat 10 da boshlig\'im bilan uchrashyapman.)',
+              exampleRu: 'I am meeting my boss tomorrow at 10 AM.',
+            },
+            exercises: [
+              { text: 'We ___ to Paris tomorrow. We bought our plane tickets.', options: ['are flying', 'will fly', 'fly'], correct: 0, explanation: 'Chiptalar olingan aniq reja: are flying.' },
+              { text: 'She ___ the doctor at 3 PM on Monday.', options: ['is seeing', 'will see', 'sees'], correct: 0, explanation: 'Aniq belgilangan uchrashuv: is seeing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Uchta shakl farqi: 1) Present Continuous: aniq vaqti/joyi kelishilgan (arranged). 2) be going to: shunchaki niyat/reja (intended). 3) will: kutilmagan qaror (spontaneous).',
+              ruleRu: '3 формы будущего: Present Cont (договоренность) vs be going to (намерение) vs will (спонтанно).',
+              formula: 'Arrangement (Present Cont) | Intention (going to) | Spontaneous (will)',
+              example: 'I am flying to Rome on Friday (chipta bor) vs I am going to learn Italian (niyat) vs I will help you (taklif).',
+              exampleRu: 'Arranged vs Intended vs Spontaneous.',
+            },
+            exercises: [
+              { text: 'I ___ my doctor tomorrow at 9:00. (Appointment is booked)', options: ['am visiting', 'will visit', 'visit'], correct: 0, explanation: 'Aniq uchrashuv belgilangan: am visiting.' },
+              { text: 'They ___ married next month. (Invitations are sent out)', options: ['are getting', 'will get', 'get'], correct: 0, explanation: 'Taklifnomalar tarqatilgan aniq tadbir: are getting.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kelasi zamon vaqt ko\'rsatkichlari: tomorrow (ertaga), tonight (bugun kechqurun), next week/month/year (kelasi hafta/oy/yil), in two days (ikki kundan keyin).',
+              ruleRu: 'Маркеры будущего: tomorrow, tonight, next week, in 2 days.',
+              formula: 'Verb form + tomorrow / next week / tonight / in X days',
+              example: 'What are you doing tonight? We will finish the project next week.',
+              exampleRu: 'What are you doing tonight? We will finish the project next week.',
+            },
+            exercises: [
+              { text: 'What ___ you doing tonight?', options: ['are', 'will', 'do'], correct: 0, explanation: 'What are you doing tonight?' },
+              { text: 'He will start his new job ___ week.', options: ['next', 'last', 'yesterday'], correct: 0, explanation: 'Kelasi zamon: next week.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kundalik suhbat va uchrashuvlar konteksti mashqlari.',
+              ruleRu: 'Практика в контексте повседневных встреч и планов.',
+              formula: 'Future arrangement context',
+              example: '— Are you free on Friday? — No, I am playing tennis with Ali.',
+              exampleRu: '— Are you free on Friday? — No, I am playing tennis with Ali.',
+            },
+            exercises: [
+              { text: '— Are you coming to dinner tonight? — Yes, I ___ at 7:00.', options: ['am arriving', 'will arrive', 'arrived'], correct: 0, explanation: 'Aniq belgilangan kelish: am arriving.' },
+              { text: 'Select the correct sentence:', options: ['I am leaving for London tomorrow morning.', 'I will to leave for London tomorrow morning.'], correct: 0, explanation: 'am leaving tomorrow morning.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kelasi zamon barcha shakllarini (will, going to, Present Continuous) birlashtiramiz.',
+              ruleRu: 'Обобщим все формы будущего времени.',
+              formula: 'Arrangement (Present Cont) | Intention (going to) | Instant/Promise (will)',
+              example: 'I am flying to Madrid tomorrow (arrangement), I am going to buy souvenirs (intention), and I\'ll call you (promise).',
+              exampleRu: 'Three future forms combined.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['We are having a party on Saturday; everything is ready.', 'We will have a party on Saturday; everything is ready.'], correct: 0, explanation: 'Tayyorgarlik ko\'rib qo\'yilgan: are having.' },
+              { text: 'Choose the correct sentence:', options: ['I\'m going to learn Spanish next year.', 'I am will learn Spanish next year.'], correct: 0, explanation: 'Niyat: am going to learn.' },
+              { text: 'Select the correct sentence:', options: ['I think you will enjoy the movie.', 'I think you are enjoying the movie.'], correct: 0, explanation: 'I think -> will enjoy.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-will-goingto-l6',
+        order: 6,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (Future)',
+        titleRu: 'Смешанная практика и Исправление ошибок (Future)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta xato: 1) I will going to ❌ ➔ I am going to ✅  2) I am will ❌ ➔ I will ✅  3) won\'t to go ❌ ➔ won\'t go ✅.',
+              ruleRu: '3 частые ошибки: 1) I will going to ❌ ➔ I am going to ✅  2) I am will ❌ ➔ I will ✅  3) won\'t to go ❌ ➔ won\'t go ✅.',
+              formula: 'Check list: 1) am/is/are + going to + V1 | 2) will + V1 (NO to) | 3) won\'t + V1 (NO to)',
+              example: 'I am going to eat. I will eat. I won\'t eat.',
+              exampleRu: 'I am going to eat. I will eat. I won\'t eat.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I am going to study medicine.', 'I will going to study medicine.'], correct: 0, explanation: 'am going to study.' },
+              { text: 'Choose the correct sentence:', options: ['She won\'t come to the lesson.', 'She won\'t to come to the lesson.'], correct: 0, explanation: 'won\'t + V1 (to siz).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Real dialoglarda kelasi zamon iboralarini to\'g\'ri moslashtirish.',
+              ruleRu: 'Практика подбора форм будущего времени в диалогах.',
+              formula: 'Dialogue context ➔ evaluate arrangement vs intention vs instant decision',
+              example: '— What would you like to drink? — I\'ll have water, please.',
+              exampleRu: '— What would you like to drink? — I\'ll have water, please.',
+            },
+            exercises: [
+              { text: '— Did you phone Peter? — Oh no, I forgot! I ___ him now.', options: ['will call', 'am going to call', 'call'], correct: 0, explanation: 'Shu zahoti kutilmagan qaror: will call.' },
+              { text: '— Why are you turning on the TV? — I ___ watch the news.', options: ['am going to', 'will', 'am will'], correct: 0, explanation: 'Televizor yoqishdan avvalgi niyat: am going to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Shaxsiy rejalar va kelajakdagi niyatlar haqida matn tuzish mashqlari.',
+              ruleRu: 'Составление текстов о личных планах и намерениях.',
+              formula: 'Future Narrative: express plans (going to) and predictions/hopes (will)',
+              example: 'Next year I am going to graduate. I hope I will find a good job.',
+              exampleRu: 'Next year I am going to graduate. I hope I will find a good job.',
+            },
+            exercises: [
+              { text: 'Next summer we ___ to Italy. We already saved money.', options: ['are going to travel', 'will travel', 'traveled'], correct: 0, explanation: 'Niyat/tayyorgarlik: are going to travel.' },
+              { text: 'I hope everything ___ be fine in the end.', options: ['will', 'is going to', 'going to'], correct: 0, explanation: 'I hope -> will.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Mantiqiy savol-javob va vaziyatlar zanjiri.',
+              ruleRu: 'Построение логических цепочек вопрос-ответ.',
+              formula: 'Q: What will you do if...? / What are you going to do when...?',
+              example: 'What will you do if it rains tomorrow?',
+              exampleRu: 'What will you do if it rains tomorrow?',
+            },
+            exercises: [
+              { text: 'What ___ you do if you pass the test?', options: ['will', 'are going to', 'do'], correct: 0, explanation: 'What will you do...' },
+              { text: 'Select the correct sentence:', options: ['I\'m sure you will do great on the test!', 'I\'m sure you are going to do great on the test!'], correct: 0, explanation: 'I\'m sure -> will.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Section 14 Future ("going to" & "will") bo\'yicha yakuniy master formula.',
+              ruleRu: 'Итоговая главная формула Future (going to & will).',
+              formula: 'Master Future Rule: Plan/Evidence = am/is/are going to V1 | Instant/Promise/Think = will V1 | Arrangement = Present Cont',
+              example: 'I am going to work. I will work. I am working tomorrow.',
+              exampleRu: 'I am going to work. I will work. I am working tomorrow.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I am going to buy a laptop next week.', 'I am will buy a laptop next week.'], correct: 0, explanation: 'am going to buy.' },
+              { text: 'Choose the correct sentence:', options: ['I\'ll help you carry these heavy boxes.', 'I\'m going to help you carry these heavy boxes.'], correct: 0, explanation: 'Kutilmagan yordam: I\'ll help.' },
+              { text: 'Select the correct sentence:', options: ['Look at those clouds! It is going to rain.', 'Look at those clouds! It will rain.'], correct: 0, explanation: 'Alomat: is going to rain.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Future — \"going to\" va \"will\"",
+      titleRu: 'Тест раздела: Будущее время — "going to" и "will"',
+      exercises: [
+        { text: 'I ___ study English tonight. I planned it yesterday.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan reja: am going to.' },
+        { text: 'Look at the dark clouds! It ___ rain.', options: ['is going to', 'will', 'is raining'], correct: 0, explanation: 'Alomat (evidence): is going to rain.' },
+        { text: '— The phone is ringing. — I ___ answer it!', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Kutilmagan qaror: will.' },
+        { text: 'I promise I ___ tell your secret.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da: won\'t.' },
+        { text: 'I think our team ___ win the match.', options: ['will', 'is going to', 'going to'], correct: 0, explanation: 'I think -> will.' },
+        { text: '___ you help me with this box, please?', options: ['Will', 'Are going to', 'Do'], correct: 0, explanation: 'So\'rov: Will you...' },
+        { text: 'He ___ come to the party tonight. He feels sick.', options: ["won't", "isn't going to", "doesn't"], correct: 0, explanation: 'won\'t come.' },
+        { text: 'We ___ to London tomorrow morning. We have tickets.', options: ['are flying', 'will fly', 'fly'], correct: 0, explanation: 'Chiptasi bor aniq uchrashtiruv: are flying.' },
+        { text: '— Why did you buy flour? — Because I ___ bake a cake.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Niyat: am going to.' },
+        { text: '— I don\'t have money. — Don\'t worry, I ___ lend you some.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Yordam taklifi: will.' },
+        { text: 'Where ___ you go after school today?', options: ['will', 'are', 'do'], correct: 0, explanation: 'Where + will + you + go.' },
+        { text: 'Choose the correct sentence:', options: ['I hope you will feel better soon.', 'I hope you are going to feel better soon.'], correct: 0, explanation: 'I hope -> will.' },
+        { text: 'Choose the correct sentence:', options: ['She is not going to buy that expensive dress.', 'She is not will buy that expensive dress.'], correct: 0, explanation: 'is not going to buy.' },
+        { text: 'Select the correct sentence:', options: ['Wait! I\'ll open the door for you.', 'Wait! I am going to open the door for you.'], correct: 0, explanation: 'Spontan qaror: I\'ll open.' },
+        { text: 'Select the correct sentence:', options: ['We are meeting the manager at 2 PM on Tuesday.', 'We will meet the manager at 2 PM on Tuesday.'], correct: 0, explanation: 'Vaqti belgilangan majlis: are meeting.' },
+      ],
+    },
+  },
+  {
+    id: 'sec-future-continuous',
+    order: 15,
+    title: "Future Continuous — kelasi davomli zamon",
+    titleRu: 'Future Continuous — будущее длительное время',
+    icon: '⏳',
+    lessons: [
+      {
+        id: 'sec-future-continuous-l1',
+        order: 1,
+        title: 'Tasdiq shakllar: "will be + V-ing"',
+        titleRu: 'Утвердительные формы: "will be + V-ing"',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Future Continuous — kelajakdagi ma\'lum bir aniq vaqtda (masalan, ertaga soat 5 da) davom etayotgan bo\'ladigan harakatlarni ifodalash uchun ishlatiladi.',
+              ruleRu: 'Future Continuous используется для действий, которые будут происходить в определенный момент в будущем.',
+              formula: 'Subject + will be + Verb-ing',
+              example: 'At 5 PM tomorrow, I will be playing football. (Ertaga soat 5 da men futbol o\'ynayotgan bo\'laman.)',
+              exampleRu: 'At 5 PM tomorrow, I will be playing football.',
+            },
+            exercises: [
+              { text: 'At 10:00 tomorrow morning, I ___ an exam.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'Aniq kelasi vaqtda jarayon: will be taking.' },
+              { text: 'Don\'t call her at 8 PM. She ___ dinner.', options: ['will be having', 'will have', 'is have'], correct: 0, explanation: 'Soat 8 da kechki ovqat tanavvul qilayotgan bo\'ladi: will be having.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha egalar (I, you, he, she, it, we, they) uchun o\'zgarmasdan "will be + V-ing" ishlatiladi.',
+              ruleRu: 'Для всех местоимений (I, you, he, she, it, we, they) используется одинаковая форма "will be + V-ing".',
+              formula: 'All Subjects + will be + Verb-ing',
+              example: 'He will be working. They will be studying. We will be traveling.',
+              exampleRu: 'He will be working. They will be studying. We will be traveling.',
+            },
+            exercises: [
+              { text: 'They ___ to Tashkent at this time tomorrow.', options: ['will be flying', 'will flying', 'are fly'], correct: 0, explanation: 'They + will be flying.' },
+              { text: 'She ___ in the library all afternoon tomorrow.', options: ['will be studying', 'will studying', 'is study'], correct: 0, explanation: 'She + will be studying.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqt ko\'rsatkichlari: tomorrow at 5 PM (ertaga soat 5 da), at this time tomorrow (ertaga shu vaqtda), all day tomorrow (ertaga kun bo\'yi).',
+              ruleRu: 'Маркеры времени: at this time tomorrow, tomorrow at 5 PM, all day tomorrow.',
+              formula: 'will be + V-ing + at this time tomorrow / at 5 PM tomorrow',
+              example: 'This time next week, we will be relaxing on the beach.',
+              exampleRu: 'This time next week, we will be relaxing on the beach.',
+            },
+            exercises: [
+              { text: 'This time next week, I ___ on the beach.', options: ['will be lying', 'will lie', 'am lie'], correct: 0, explanation: 'This time next week -> will be lying.' },
+              { text: 'They will be working on the project ___ tomorrow.', options: ['all day', 'yesterday', 'ago'], correct: 0, explanation: 'all day tomorrow.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"will be + V-ing" odatiy xushmuomalalik so\'rovlarida ham qo\'llaniladi (polite questions about someone\'s plans).',
+              ruleRu: 'Future Continuous используется для вежливого расспроса о чьих-либо планах.',
+              formula: 'Will you be + Verb-ing + time ?',
+              example: 'Will you be using your computer later? (Keyinroq kompyuteringizdan foydalanasizmi?)',
+              exampleRu: 'Will you be using your computer later?',
+            },
+            exercises: [
+              { text: '___ you be passing the post office today?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Xushmuomalalik so\'rovi: Will you be passing...' },
+              { text: 'Will she be ___ the car tonight?', options: ['using', 'use', 'used'], correct: 0, explanation: 'Will she be + V-ing (using).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Future Continuous tasdiq shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все утвердительные формы Future Continuous.',
+              formula: 'Subject + will be + Verb-ing + specific future time',
+              example: 'Don\'t visit me at 9 PM because I will be sleeping.',
+              exampleRu: 'Don\'t visit me at 9 PM because I will be sleeping.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['At 8 PM tonight, I will be watching the football match.', 'At 8 PM tonight, I will watching the football match.'], correct: 0, explanation: 'will be watching (be shart).' },
+              { text: 'Choose the correct sentence:', options: ['She will be working in London next month.', 'She will is working in London next month.'], correct: 0, explanation: 'will be working.' },
+              { text: 'Select the correct sentence:', options: ['This time tomorrow, we will be swimming in the sea.', 'This time tomorrow, we are swim in the sea.'], correct: 0, explanation: 'will be swimming.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-continuous-l2',
+        order: 2,
+        title: 'Inkor shakli: "won\'t be + V-ing"',
+        titleRu: 'Отрицательная форма: "won\'t be + V-ing"',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Future Continuous inkor shakli: "will not be" ➔ "won\'t be + V-ing". Barcha shaxslar uchun bir xil.',
+              ruleRu: 'Отрицательная форма: "won\'t be + V-ing" (will not be). Одинакова для всех лиц.',
+              formula: 'Subject + won\'t be + Verb-ing',
+              example: 'I won\'t be working at 6 PM tomorrow. (Men ertaga soat 6 da ishlamayotgan bo\'laman.)',
+              exampleRu: 'I won\'t be working at 6 PM tomorrow.',
+            },
+            exercises: [
+              { text: 'I ___ using the car tomorrow morning, so you can take it.', options: ["won't be", "won't", "not be"], correct: 0, explanation: 'Inkor shakli: won\'t be using.' },
+              { text: 'She ___ sleeping at 10 PM. She usually stays up late.', options: ["won't be", "isn't be", "won't"], correct: 0, explanation: 'She + won\'t be sleeping.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 2 ta xato: 1) won\'t working ❌ ➔ won\'t be working ✅  2) won\'t be work ❌ ➔ won\'t be working ✅.',
+              ruleRu: '2 частые ошибки: 1) won\'t working ❌ ➔ won\'t be working ✅  2) won\'t be work ❌ ➔ won\'t be working ✅.',
+              formula: 'REMEMBER: won\'t + BE + Verb-ing',
+              example: 'Correct: They won\'t be coming tonight. (NOT: They won\'t coming.)',
+              exampleRu: 'Correct: They won\'t be coming tonight.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['They won\'t be studying at midnight.', 'They won\'t studying at midnight.'], correct: 0, explanation: 'won\'t be studying.' },
+              { text: 'Choose the correct sentence:', options: ['He won\'t be driving during the snowstorm.', 'He won\'t be drive during the snowstorm.'], correct: 0, explanation: 'won\'t be driving.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaziyatli inkor mashqlari (sabab va imkoniyat berish).',
+              ruleRu: 'Ситуационные отрицания (объяснение причины/освобождения).',
+              formula: 'Subject + won\'t be + V-ing + so / because...',
+              example: 'I won\'t be using my printer tomorrow, so you can borrow it.',
+              exampleRu: 'I won\'t be using my printer tomorrow, so you can borrow it.',
+            },
+            exercises: [
+              { text: 'We ___ playing tennis tomorrow because of the rain.', options: ["won't be", "aren't be", "won't"], correct: 0, explanation: 'We + won\'t be playing.' },
+              { text: 'Tom ___ attending the meeting tomorrow at 3:00.', options: ["won't be", "doesn't be", "not will be"], correct: 0, explanation: 'Tom + won\'t be attending.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hozirgi inkor (isn\'t/aren\'t V-ing) va Kelasi davomli inkor (won\'t be V-ing) taqqoslamasi.',
+              ruleRu: 'Сравнение отрицаний: isn\'t/aren\'t V-ing (сейчас) vs won\'t be V-ing (в будущем).',
+              formula: 'Now ➔ isn\'t/aren\'t V-ing  |  Future specific time ➔ won\'t be V-ing',
+              example: 'He isn\'t working now. He won\'t be working tomorrow at 5 PM.',
+              exampleRu: 'He isn\'t working now. He won\'t be working tomorrow at 5 PM.',
+            },
+            exercises: [
+              { text: 'I am not busy now, and I ___ working tomorrow at 4 PM either.', options: ["won't be", "am not", "don't"], correct: 0, explanation: 'tomorrow at 4 PM -> won\'t be.' },
+              { text: 'Select the correct sentence:', options: ['She won\'t be teaching at 2 PM tomorrow.', 'She is not teaching at 2 PM tomorrow.'], correct: 0, explanation: 'won\'t be teaching.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Future Continuous inkor shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все отрицательные формы Future Continuous.',
+              formula: 'Subject + won\'t be + Verb-ing',
+              example: 'They won\'t be staying at a hotel; they booked an apartment.',
+              exampleRu: 'They won\'t be staying at a hotel; they booked an apartment.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I won\'t be using the room tomorrow, feel free to use it.', 'I won\'t use the room tomorrow at 5 PM ongoing.'], correct: 0, explanation: 'won\'t be using.' },
+              { text: 'Select the correct sentence:', options: ['He won\'t be wearing a suit to the beach.', 'He won\'t wearing a suit to the beach.'], correct: 0, explanation: 'won\'t be wearing.' },
+              { text: 'Choose the correct form: We ___ traveling next week.', options: ["won't be", "won't"], correct: 0, explanation: 'won\'t be + V-ing.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-continuous-l3',
+        order: 3,
+        title: 'Savol shakli: "Will ... be + V-ing?"',
+        titleRu: 'Вопросительная форма: "Will ... be + V-ing?"',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Future Continuous savollarida "Will" eganing oldiga o\'tadi, "be + V-ing" esa egadan keyin saqlanadi.',
+              ruleRu: 'В вопросах "Will" выносится перед подлежащим, а "be + V-ing" остается после подлежащего.',
+              formula: 'Will + Subject + be + Verb-ing ?',
+              example: 'Will you be working at 8 PM tomorrow? (Ertaga soat 8 da ishlayotgan bo\'lasizmi?)',
+              exampleRu: 'Will you be working at 8 PM tomorrow?',
+            },
+            exercises: [
+              { text: '___ you be sleeping when I arrive tonight?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will + you + be sleeping.' },
+              { text: '___ she be using her car tomorrow morning?', options: ['Will', 'Is', 'Does'], correct: 0, explanation: 'Will + she + be using.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa javoblar: Yes, I will. / No, I won\'t. | Yes, they will. / No, they won\'t.',
+              ruleRu: 'Краткие ответы: Yes, I will / No, I won\'t | Yes, they will / No, they won\'t.',
+              formula: 'Yes, + Subject + will.  |  No, + Subject + won\'t.',
+              example: '— Will you be watching the game at 9 PM? — Yes, I will. / No, I won\'t.',
+              exampleRu: '— Will you be watching the game at 9 PM? — Yes, I will. / No, I won\'t.',
+            },
+            exercises: [
+              { text: '— Will he be studying at 10 PM? — Yes, he ___ .', options: ['will', 'be', 'is'], correct: 0, explanation: 'Yes, he will.' },
+              { text: '— Will they be traveling all day tomorrow? — No, they ___ .', options: ["won't", "aren't", "don't"], correct: 0, explanation: 'No, they won\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maxsus savollar (Wh- questions): What / Where / Why + will + subject + be + V-ing?',
+              ruleRu: 'Специальные вопросы: Wh- word + will + Subject + be + V-ing?',
+              formula: 'Wh- word + will + Subject + be + Verb-ing ?',
+              example: 'What will you be doing tomorrow at this time? Where will he be staying in Rome?',
+              exampleRu: 'What will you be doing tomorrow at this time?',
+            },
+            exercises: [
+              { text: 'What ___ you be doing at 7 PM tomorrow?', options: ['will', 'are', 'do'], correct: 0, explanation: 'What + will + you + be doing.' },
+              { text: 'Where ___ she be living next year?', options: ['will', 'is', 'does'], correct: 0, explanation: 'Where + will + she + be living.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Xushmuomalalik bilan so\'rash (Polite requests & inquiries) mashqlari.',
+              ruleRu: 'Практика вежливых расспросов с помощью Future Continuous.',
+              formula: 'Will you be + V-ing + (time/place) ?',
+              example: 'Will you be passing by the supermarket? Could you buy some milk?',
+              exampleRu: 'Will you be passing by the supermarket? Could you buy some milk?',
+            },
+            exercises: [
+              { text: '___ you be using the printer this afternoon?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will you be using...' },
+              { text: '— Will you be staying at home tonight? — Yes, I ___ .', options: ['will', 'am', 'do'], correct: 0, explanation: 'Yes, I will.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Future Continuous savol shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все вопросительные формы Future Continuous.',
+              formula: 'Will + Subject + be + V-ing ?  |  Wh- + will + Subject + be + V-ing ?',
+              example: 'Where will you be working next year, and will you be living alone?',
+              exampleRu: 'Where will you be working next year, and will you be living alone?',
+            },
+            exercises: [
+              { text: 'Choose the correct question:', options: ['Will you be attending the seminar tomorrow at 10 AM?', 'Will you attending the seminar tomorrow at 10 AM?'], correct: 0, explanation: 'Will you be attending...' },
+              { text: 'Choose the correct question:', options: ['What will they be doing during the break?', 'What will they doing during the break?'], correct: 0, explanation: 'What will they be doing...' },
+              { text: 'Select the correct question:', options: ['Why will he be driving all night?', 'Why he will be driving all night?'], correct: 0, explanation: 'Why will he be driving...' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-continuous-l4',
+        order: 4,
+        title: 'Future Simple vs Future Continuous Taqqoslash',
+        titleRu: 'Сравнение Future Simple и Future Continuous',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Tugallanadigan kelajak harakat ➔ Future Simple (I will call you tomorrow). Aniq vaqtdagi davomiylik/jarayon ➔ Future Continuous (I will be waiting for you at 5 PM).',
+              ruleRu: 'Завершенное действие в будущем ➔ Future Simple | Процесс в определенный момент будущего ➔ Future Continuous.',
+              formula: 'Future Simple (will + V1) vs Future Continuous (will be + V-ing)',
+              example: 'Tomorrow I will write a report. (Ertaga hisobot yozaman.) / Tomorrow at 3 PM I will be writing a report. (Ertaga soat 3 da hisobot yozayotgan bo\'laman.)',
+              exampleRu: 'Future Simple vs Future Continuous.',
+            },
+            exercises: [
+              { text: 'I ___ you tomorrow morning.', options: ['will call', 'will be calling', 'am call'], correct: 0, explanation: 'Oddiy kelajak harakat: will call.' },
+              { text: 'Don\'t phone me at 3 PM. I ___ an exam then.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'O\'sha soatdagi jarayon: will be taking.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqt ko\'rsatkichlari: tomorrow, next week ➔ Future Simple | tomorrow at 5 PM, this time tomorrow, all day tomorrow ➔ Future Continuous.',
+              ruleRu: 'Маркеры: tomorrow (Future Simple) vs tomorrow at 5 PM / at this time tomorrow (Future Continuous).',
+              formula: 'Check time precision ➔ General time = will V1 | Specific time point = will be V-ing',
+              example: 'We will meet tomorrow. / Tomorrow at 2 PM we will be discussing the project.',
+              exampleRu: 'General vs Specific time point.',
+            },
+            exercises: [
+              { text: 'We ___ to Samarkand tomorrow.', options: ['will go', 'will be going', 'go'], correct: 0, explanation: 'Oddiy kelasi reja: will go.' },
+              { text: 'At 10:00 AM tomorrow, we ___ on the train.', options: ['will be travelling', 'will travel', 'travel'], correct: 0, explanation: 'Soat 10 da poyezdda ketayotgan bo\'lamiz: will be travelling.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Holat fe\'llari (Stative verbs: know, want, love, understand, like) kelasi davomli zamonda ham (-ing) olmasdan Future Simple (will + V1) ishlatiladi.',
+              ruleRu: 'Глаголы состояния (know, want, like...) HE используются в Future Continuous — только Future Simple.',
+              formula: 'Stative Verbs (know, want...) ➔ will + V1 ONLY (will know, will want)',
+              example: 'I will know the test results tomorrow. (I will be knowing EMAS!)',
+              exampleRu: 'I will know the test results tomorrow.',
+            },
+            exercises: [
+              { text: 'I ___ the answer tomorrow morning.', options: ['will know', 'will be knowing', 'know'], correct: 0, explanation: 'know - holat fe\'li: will know.' },
+              { text: 'She ___ to join us for dinner.', options: ['will want', 'will be wanting', 'wants'], correct: 0, explanation: 'want - holat fe\'li: will want.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Yonma-yon taqqoslash mashqlari (bitta gap yoki matn ichida).',
+              ruleRu: 'Упражнения на параллельное сравнение времен.',
+              formula: 'Contextual choice: will + V1 OR will be + V-ing',
+              example: 'He will start work at 9 AM, so at 9:30 AM he will be working.',
+              exampleRu: 'He will start work at 9 AM, so at 9:30 AM he will be working.',
+            },
+            exercises: [
+              { text: 'The movie starts at 8 PM, so at 8:30 PM we ___ it.', options: ['will be watching', 'will watch', 'watch'], correct: 0, explanation: '8:30 da ko\'rayotgan bo\'lamiz: will be watching.' },
+              { text: 'Select the correct sentence:', options: ['I will meet you tomorrow at 5 PM, and we will be drinking coffee.', 'I will be meeting you tomorrow at 5 PM, and we will drink coffee.'], correct: 0, explanation: 'will meet / will be drinking.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Future Simple va Future Continuous farqini birlashtiramiz.',
+              ruleRu: 'Обобщим различие между Future Simple и Future Continuous.',
+              formula: 'will V1 = simple action | will be V-ing = action in progress at a moment',
+              example: 'I will arrive at 7:00, and at 7:30 I will be having dinner.',
+              exampleRu: 'I will arrive at 7:00, and at 7:30 I will be having dinner.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['At 6 PM tomorrow, she will be practicing piano.', 'At 6 PM tomorrow, she will practice piano.'], correct: 0, explanation: 'At 6 PM tomorrow -> will be practicing.' },
+              { text: 'Choose the correct sentence:', options: ['I will understand the rule after the lesson.', 'I will be understanding the rule after the lesson.'], correct: 0, explanation: 'understand - holat fe\'li: will understand.' },
+              { text: 'Select the correct sentence:', options: ['Don\'t call him at 11 PM; he will be sleeping.', 'Don\'t call him at 11 PM; he will sleep.'], correct: 0, explanation: 'will be sleeping.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-continuous-l5',
+        order: 5,
+        title: 'Parallel Harakatlar va Ketma-ketlik',
+        titleRu: 'Параллельные действия и Последовательность',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Kelajakdagi shart/vaqt elanchiklarida (when, while, if) vaqt ergash gapida Present Simple, bosh gapda Future Continuous keladi.',
+              ruleRu: 'В придаточных времени (when/while): Present Simple в придаточном, Future Continuous в главном.',
+              formula: 'When + Subject + Present Simple (V1/-s) , Subject + will be + V-ing',
+              example: 'When you arrive tomorrow, I will be waiting for you. (Sen kelganingda men seni kutayotgan bo\'laman.)',
+              exampleRu: 'When you arrive tomorrow, I will be waiting for you.',
+            },
+            exercises: [
+              { text: 'When you ___ home tomorrow, I will be watching TV.', options: ['come', 'will come', 'are coming'], correct: 0, explanation: 'When elanchigidan keyin Present Simple: come.' },
+              { text: 'If it rains tomorrow, we ___ staying indoors.', options: ['will be', 'are', 'will'], correct: 0, explanation: 'If it rains -> we will be staying.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bir vaqtning o\'zida kelajakda davom etadigan ikkita uzluksiz harakat (WHILE bilan).',
+              ruleRu: 'Два параллельных длительных действия в будущем с WHILE.',
+              formula: 'Future Continuous + WHILE + Present Continuous / Future Continuous',
+              example: 'While I am studying tomorrow, my sister will be playing video games.',
+              exampleRu: 'While I am studying tomorrow, my sister will be playing video games.',
+            },
+            exercises: [
+              { text: 'While you are working tomorrow, I ___ on the beach.', options: ['will be relaxing', 'will relax', 'relax'], correct: 0, explanation: 'While ... -> I will be relaxing.' },
+              { text: 'They will be dancing while the band ___ .', options: ['is playing', 'will play', 'played'], correct: 0, explanation: 'while the band is playing (Present Continuous).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ertangi kun jadvali va vaqt zanjirini tuzish mashqlari.',
+              ruleRu: 'Составление расписания и временных цепочек на завтра.',
+              formula: 'Future timeline: At 8:00 I will be V-ing ➔ At 12:00 I will be V-ing',
+              example: 'At 8 AM I will be having breakfast, and at 10 AM I will be sitting in a lecture.',
+              exampleRu: 'At 8 AM I will be having breakfast, and at 10 AM I will be sitting in a lecture.',
+            },
+            exercises: [
+              { text: 'At 9:00 AM tomorrow I ___ breakfast, and at 11:00 AM I ___ tennis.', options: ['will be having / will be playing', 'will have / will play', 'am having / am playing'], correct: 0, explanation: 'Jadvaldagi davomiy nuqtalar: will be having / will be playing.' },
+              { text: 'Select the correct sentence:', options: ['When the train arrives, we will be waiting on the platform.', 'When the train will arrive, we will be waiting on the platform.'], correct: 0, explanation: 'When the train arrives...' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kelajakdagi davomiy harakatlarni dialogik savol-javoblarda qo\'llash.',
+              ruleRu: 'Практика диалогов с Future Continuous.',
+              formula: 'Dialogue Drill: — What will you be doing when I call? — I will be V-ing.',
+              example: '— What will you be doing at 6 PM? — I will be cooking dinner.',
+              exampleRu: '— What will you be doing at 6 PM? — I will be cooking dinner.',
+            },
+            exercises: [
+              { text: '— What ___ you be doing at 3 PM tomorrow? — I ___ taking an exam.', options: ['will / will be', 'are / am', 'do / will'], correct: 0, explanation: 'What will you be doing / I will be taking.' },
+              { text: '— Will he be sleeping at midnight? — Yes, he ___ .', options: ['will', 'will be', 'is'], correct: 0, explanation: 'Yes, he will.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Parallel va ketma-ket kelasi zamon qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила параллельных действий в будущем.',
+              formula: 'When + Present Simple , Subject + will be + V-ing',
+              example: 'When the clock strikes midnight, people around the world will be celebrating.',
+              exampleRu: 'When the clock strikes midnight, people around the world will be celebrating.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['When you get off the plane, I will be standing near the exit.', 'When you will get off the plane, I will be standing near the exit.'], correct: 0, explanation: 'When you get off...' },
+              { text: 'Choose the correct sentence:', options: ['While the teacher is explaining, the students will be listening carefully.', 'While the teacher will explain, the students will be listening carefully.'], correct: 0, explanation: 'While the teacher is explaining...' },
+              { text: 'Select the correct sentence:', options: ['At 7 PM tomorrow, we will be having dinner together.', 'At 7 PM tomorrow, we will have dinner together ongoing.'], correct: 0, explanation: 'will be having dinner.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-future-continuous-l6',
+        order: 6,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (Future Continuous)',
+        titleRu: 'Смешанная практика и Исправление ошибок (Future Continuous)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta xato: 1) I will sleeping ❌ ➔ I will be sleeping ✅  2) won\'t be study ❌ ➔ won\'t be studying ✅  3) when you will arrive ❌ ➔ when you arrive ✅.',
+              ruleRu: '3 частые ошибки: 1) will sleeping ❌ ➔ will be sleeping ✅  2) won\'t be study ❌ ➔ won\'t be studying ✅  3) when you will arrive ❌ ➔ when you arrive ✅.',
+              formula: 'Check list: 1) will + BE + V-ing | 2) won\'t + BE + V-ing | 3) when + Present Simple',
+              example: 'I will be sleeping. I won\'t be studying. When you arrive.',
+              exampleRu: 'I will be sleeping. I won\'t be studying. When you arrive.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['This time tomorrow I will be flying to Rome.', 'This time tomorrow I will flying to Rome.'], correct: 0, explanation: 'will be flying.' },
+              { text: 'Choose the correct sentence:', options: ['When I arrive home, my mom will be cooking.', 'When I will arrive home, my mom will be cooking.'], correct: 0, explanation: 'When I arrive home...' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kunlik reja va vaqt jadvallari bo\'yicha hikoya mashqlari.',
+              ruleRu: 'Составление рассказов по временным расписаниям.',
+              formula: 'Future timeline narrative using will be + V-ing',
+              example: 'Tomorrow is a busy day. At 9 AM I will be sitting in class, at 1 PM I will be having lunch.',
+              exampleRu: 'Tomorrow is a busy day. At 9 AM I will be sitting in class.',
+            },
+            exercises: [
+              { text: 'Tomorrow at 10 AM, we ___ an important test.', options: ['will be writing', 'will writeing', 'will be write'], correct: 0, explanation: 'will be writing.' },
+              { text: 'Select the correct sentence:', options: ['Don\'t call her at 11 PM; she will be sleeping soundly.', 'Don\'t call her at 11 PM; she will sleeping soundly.'], correct: 0, explanation: 'will be sleeping soundly.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Gaplarni tarjima va mantiqan moslashtirish mashqlari.',
+              ruleRu: 'Упражнения на перевод и логическое согласование.',
+              formula: 'English Future Cont ➔ Uzbek/Russian ongoing future action',
+              example: 'At 5 PM tomorrow, I will be repairing my car.',
+              exampleRu: 'At 5 PM tomorrow, I will be repairing my car.',
+            },
+            exercises: [
+              { text: 'Ertaga soat 4 da men kitob o\'qiyotgan bo\'laman:', options: ['Tomorrow at 4 o\'clock I will be reading a book.', 'Tomorrow at 4 o\'clock I will read a book.'], correct: 0, explanation: 'Davomli jarayon: will be reading.' },
+              { text: 'Ertaga bu vaqtda ular suzishayotgan bo\'lishadi:', options: ['At this time tomorrow they will be swimming.', 'At this time tomorrow they swim.'], correct: 0, explanation: 'will be swimming.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Dialoglar va interfaol savol-javob mashqlari.',
+              ruleRu: 'Диалоги и интерактивная практика.',
+              formula: 'Q: Will you be V-ing at (time)? ➔ A: Yes, I will. / No, I won\'t.',
+              example: '— Will you be using the room at 4:00? — No, I won\'t. You can use it.',
+              exampleRu: '— Will you be using the room at 4:00? — No, I won\'t.',
+            },
+            exercises: [
+              { text: '— Will you be staying long at the party? — No, I ___ home early.', options: ['will be going', 'will go', 'go'], correct: 0, explanation: 'will be going.' },
+              { text: 'Select the correct sentence:', options: ['What will you be doing when the new year starts?', 'What will you doing when the new year starts?'], correct: 0, explanation: 'What will you be doing...' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Section 15 Future Continuous bo\'yicha yakuniy master formula.',
+              ruleRu: 'Итоговая главная формула Future Continuous.',
+              formula: 'Master Future Continuous Rule: Subject + will be + V-ing | Negative: won\'t be + V-ing | Question: Will + Subject + be + V-ing ?',
+              example: 'I will be working. I won\'t be working. Will you be working?',
+              exampleRu: 'I will be working. I won\'t be working. Will you be working?',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['At 9 PM tomorrow, I will be watching a movie.', 'At 9 PM tomorrow, I will be watch a movie.'], correct: 0, explanation: 'will be watching.' },
+              { text: 'Choose the correct sentence:', options: ['She won\'t be using the printer tomorrow, so you can take it.', 'She won\'t using the printer tomorrow, so you can take it.'], correct: 0, explanation: 'won\'t be using.' },
+              { text: 'Select the correct sentence:', options: ['When you arrive tomorrow, we will be waiting for you.', 'When you will arrive tomorrow, we will be waiting for you.'], correct: 0, explanation: 'When you arrive tomorrow...' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Future Continuous — kelasi davomli zamon",
+      titleRu: 'Тест раздела: Future Continuous — будущее длительное время',
+      exercises: [
+        { text: 'At 10 PM tonight, I ___ sleeping.', options: ['will be', 'will', 'am'], correct: 0, explanation: 'I + will be sleeping.' },
+        { text: 'Don\'t phone me at 3 PM tomorrow. I ___ an exam.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'will be taking.' },
+        { text: 'This time next week, we ___ on the beach.', options: ['will be lying', 'will lie', 'are lie'], correct: 0, explanation: 'will be lying.' },
+        { text: 'She ___ using her computer tomorrow morning, so you can borrow it.', options: ["won't be", "won't", "isn't"], correct: 0, explanation: 'won\'t be using.' },
+        { text: '___ you be attending the conference tomorrow at 9:00?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will you be attending...' },
+        { text: 'What ___ you be doing tomorrow at this time?', options: ['will', 'are', 'do'], correct: 0, explanation: 'What will you be doing...' },
+        { text: 'When you arrive tomorrow, I ___ for you at the station.', options: ['will be waiting', 'will wait', 'am wait'], correct: 0, explanation: 'will be waiting.' },
+        { text: 'I ___ the answer to your question tomorrow.', options: ['will know', 'will be knowing', 'know'], correct: 0, explanation: 'know - holat fe\'li: will know.' },
+        { text: 'Choose the correct sentence:', options: ['They won\'t be studying at midnight.', 'They won\'t studying at midnight.'], correct: 0, explanation: 'won\'t be studying.' },
+        { text: 'Choose the correct sentence:', options: ['Will she be using her car tonight?', 'Will she using her car tonight?'], correct: 0, explanation: 'Will she be using...' },
+        { text: 'Select the correct sentence:', options: ['When he arrives tomorrow, we will be eating dinner.', 'When he will arrive tomorrow, we will be eating dinner.'], correct: 0, explanation: 'When he arrives...' },
+        { text: 'Select the correct sentence:', options: ['At 8 AM tomorrow, I will be driving to work.', 'At 8 AM tomorrow, I will drive to work.'], correct: 0, explanation: 'At 8 AM tomorrow -> will be driving.' },
+        { text: 'Choose the correct sentence:', options: ['While you are working tomorrow, I will be relaxing.', 'While you will work tomorrow, I will relax.'], correct: 0, explanation: 'While you are working... I will be relaxing.' },
+        { text: 'Choose the correct sentence:', options: ['I will be passing by the post office tomorrow. Can I post your letter?', 'I will pass by the post office tomorrow. Can I post your letter?'], correct: 0, explanation: 'Xushmuomalalik so\'rovi: will be passing.' },
+        { text: 'Select the correct sentence:', options: ['Don\'t call them at 11 PM; they will be sleeping.', 'Don\'t call them at 11 PM; they will sleep.'], correct: 0, explanation: 'will be sleeping.' },
+      ],
+    },
+  },
+  {
+    id: 'sec-present-perfect-and-continuous',
+    order: 16,
+    title: 'Present Perfect va Present Perfect Continuous',
+    titleRu: 'Present Perfect и Present Perfect Continuous',
+    icon: '🎯',
+    lessons: [
+      {
+        id: 'sec-present-perfect-l1',
+        order: 1,
+        title: 'Present Perfect Simple: Tasdiq, Inkor va Savol',
+        titleRu: 'Present Perfect Simple: Утверждение, Отрицание и Вопрос',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Present Perfect (Hozirgi tugallangan zamon) — o\'tmishda sodir bo\'lgan, lekin natijasi ayni damda ko\'rinib turgan harakatlar yoki tajribalar uchun ishlatiladi.',
+              ruleRu: 'Present Perfect используется для действий в прошлом, результат которых виден или важен сейчас.',
+              formula: 'Subject + have / has + Verb3 (V-ed / Irregular V3)',
+              example: 'I have finished my homework. (Men uy vazifamni bajarib bo\'ldim.) She has lost her key.',
+              exampleRu: 'I have finished my homework. She has lost her key.',
+            },
+            exercises: [
+              { text: 'I ___ my key. I can\'t open the door.', options: ['have lost', 'losted', 'has lost'], correct: 0, explanation: 'I + have lost.' },
+              { text: 'She ___ her lunch, so she isn\'t hungry.', options: ['has eaten', 'have eaten', 'eated'], correct: 0, explanation: 'She + has eaten.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ega bilan moslashuvi: I / You / We / They ➔ HAVE + V3  |  He / She / It ➔ HAS + V3.',
+              ruleRu: 'Согласование: I/You/We/They ➔ HAVE + V3 | He/She/It ➔ HAS + V3.',
+              formula: 'I/You/We/They HAVE + V3  |  He/She/It HAS + V3',
+              example: 'We have seen this movie. He has bought a car.',
+              exampleRu: 'We have seen this movie. He has bought a car.',
+            },
+            exercises: [
+              { text: 'They ___ a new house.', options: ['have bought', 'has bought', 'buys'], correct: 0, explanation: 'They + have bought.' },
+              { text: 'My brother ___ his exam.', options: ['has passed', 'have passed', 'passed'], correct: 0, explanation: 'My brother (he) + has passed.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor: haven\'t / hasn\'t + V3. Savol: Have / Has + Subject + V3 ?',
+              ruleRu: 'Отрицание: haven\'t / hasn\'t + V3. Вопрос: Have / Has + Subject + V3 ?',
+              formula: 'Negative: haven\'t/hasn\'t + V3  |  Question: Have/Has + S + V3 ?',
+              example: 'I haven\'t seen him today. Have you finished yet?',
+              exampleRu: 'I haven\'t seen him today. Have you finished yet?',
+            },
+            exercises: [
+              { text: 'I ___ my breakfast yet.', options: ["haven't had", "hasn't had", "don't have"], correct: 0, explanation: 'I + haven\'t had.' },
+              { text: '___ you ever visited London?', options: ['Have', 'Has', 'Did'], correct: 0, explanation: 'You savolida: Have you ever visited...' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqt ko\'rsatkichlari: already (allaqachon), just (xotirgina/hina), yet (hali - inkor/savol), ever (xech), never (hech qachon).',
+              ruleRu: 'Маркеры времени: already, just, yet, ever, never.',
+              formula: 'have/has + just/already/ever/never + V3  |  ... + yet (end of sentence)',
+              example: 'I have just arrived. She has never tried sushi. Have you finished yet?',
+              exampleRu: 'I have just arrived. She has never tried sushi.',
+            },
+            exercises: [
+              { text: 'She has ___ finished her report.', options: ['already', 'yet', 'ever'], correct: 0, explanation: 'have/has va V3 orasida: already.' },
+              { text: 'I haven\'t read this book ___ .', options: ['yet', 'already', 'just'], correct: 0, explanation: 'Inkor gap oxirida: yet.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Present Perfect Simple tasdiq, inkor va savollarini birlashtiramiz.',
+              ruleRu: 'Обобщим все формы Present Perfect Simple.',
+              formula: 'have/has + V3  |  haven\'t/hasn\'t + V3  |  Have/Has + S + V3 ?',
+              example: 'I have already done my homework, but I haven\'t sent it yet.',
+              exampleRu: 'I have already done my homework, but I haven\'t sent it yet.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['Have you ever flown in a helicopter?', 'Has you ever flown in a helicopter?'], correct: 0, explanation: 'Have you ever flown...' },
+              { text: 'Choose the correct sentence:', options: ['He has already cleaned his room.', 'He have already cleaned his room.'], correct: 0, explanation: 'He + has already cleaned.' },
+              { text: 'Select the correct sentence:', options: ['We haven\'t decided what to do yet.', 'We hasn\'t decided what to do yet.'], correct: 0, explanation: 'We + haven\'t decided.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-perfect-l2',
+        order: 2,
+        title: 'FOR va SINCE bilan qo\'llanishi',
+        titleRu: 'Использование с FOR и SINCE',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'FOR — harakat qancha vaqt (davomiylik/davomiylik muddati) davom etganini ko\'rsatadi: for 2 hours, for 5 years, for 3 days, for a long time.',
+              ruleRu: 'FOR используется для указания длительности периода времени (for 2 hours, for 5 years).',
+              formula: 'FOR + Period of time (duration)',
+              example: 'I have lived here for 10 years. (Men bu yerda 10 yildan beri yashayman.)',
+              exampleRu: 'I have lived here for 10 years.',
+            },
+            exercises: [
+              { text: 'I have known him ___ 5 years.', options: ['for', 'since', 'during'], correct: 0, explanation: 'Vaqt oralig\'i (5 years) -> for.' },
+              { text: 'She has been sick ___ three days.', options: ['for', 'since', 'from'], correct: 0, explanation: '3 kun davomida -> for.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'SINCE — harakatning boshlangan anil vaqtini/nuqtasini ko\'rsatadi: since morning, since 2015, since Monday, since I was a child.',
+              ruleRu: 'SINCE указывает на начальную точку времени (since 2015, since morning).',
+              formula: 'SINCE + Starting point in time',
+              example: 'He has worked here since 2018. (U 2018 yildan beri bu yerda ishlaydi.)',
+              exampleRu: 'He has worked here since 2018.',
+            },
+            exercises: [
+              { text: 'We have lived in Tashkent ___ 2020.', options: ['since', 'for', 'from'], correct: 0, explanation: 'Boshlanish yili (2020) -> since.' },
+              { text: 'She hasn\'t eaten anything ___ this morning.', options: ['since', 'for', 'ago'], correct: 0, explanation: 'Bugun ertalabdan beri -> since.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'FOR vs SINCE taqqoslamasi: FOR + vaqt miqdori (2 hours) | SINCE + soat/sana/boshlanish nuqtasi (2 o\'clock).',
+              ruleRu: 'FOR + количество времени | SINCE + точное время начала.',
+              formula: 'FOR 2 hours / 3 days / 5 years  |  SINCE 2 o\'clock / Monday / 2015',
+              example: 'for 6 months  vs  since June',
+              exampleRu: 'for 6 months vs since June',
+            },
+            exercises: [
+              { text: 'Choose the correct preposition: They have been friends ___ a long time.', options: ['for', 'since'], correct: 0, explanation: 'a long time -> for.' },
+              { text: 'Choose the correct preposition: I haven\'t seen her ___ last week.', options: ['since', 'for'], correct: 0, explanation: 'last week -> since.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"How long have you ...?" — "Qancha vaqtdan beri ... san?" so\'rovi.',
+              ruleRu: '"How long have you ...?" — вопрос о продолжительности.',
+              formula: 'How long + have/has + Subject + V3 (or been V-ing) ?',
+              example: 'How long have you known each other? — We have been friends for 3 years.',
+              exampleRu: 'How long have you known each other?',
+            },
+            exercises: [
+              { text: '___ have you worked in this company?', options: ['How long', 'How many', 'How much'], correct: 0, explanation: 'Davomiylik so\'rovi: How long...' },
+              { text: '— How long has she lived here? — She has lived here ___ 2010.', options: ['since', 'for', 'from'], correct: 0, explanation: '2010 yildan beri -> since.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'FOR va SINCE qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила использования FOR и SINCE.',
+              formula: 'for + duration  |  since + starting point',
+              example: 'I have studied English for 3 years, ever since 2021.',
+              exampleRu: 'I have studied English for 3 years, ever since 2021.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I have known my best friend for 10 years.', 'I have known my best friend since 10 years.'], correct: 0, explanation: '10 years -> for.' },
+              { text: 'Choose the correct sentence:', options: ['She has worked here since 2018.', 'She has worked here for 2018.'], correct: 0, explanation: '2018 -> since.' },
+              { text: 'Select the correct sentence:', options: ['How long have you had this phone?', 'How long do you have this phone?'], correct: 0, explanation: 'How long have you had...' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-perfect-l3',
+        order: 3,
+        title: 'Present Perfect Continuous (have/has been + V-ing)',
+        titleRu: 'Present Perfect Continuous (have/has been + V-ing)',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Present Perfect Continuous — o\'tmishda boshlanib, hozir ham davom etayotgan yoki yangigina tugab, izi/natijasi hozir ko\'rinib turgan jarayonlar uchun ishlatiladi.',
+              ruleRu: 'Present Perfect Continuous используется для процессов, начавшихся в прошлом и продолжающихся до сих пор или только что закончившихся.',
+              formula: 'Subject + have / has been + Verb-ing',
+              example: 'I have been waiting for 2 hours. (Men 2 soatdan beri kutayapman.)',
+              exampleRu: 'I have been waiting for 2 hours.',
+            },
+            exercises: [
+              { text: 'I ___ English for two years now.', options: ['have been learning', 'has been learning', 'am learning'], correct: 0, explanation: 'I + have been learning.' },
+              { text: 'It ___ all morning.', options: ['has been raining', 'have been raining', 'is raining'], correct: 0, explanation: 'It + has been raining.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Egalar bilan moslashuvi: I/You/We/They ➔ HAVE BEEN + V-ing  |  He/She/It ➔ HAS BEEN + V-ing.',
+              ruleRu: 'I/You/We/They ➔ HAVE BEEN + V-ing | He/She/It ➔ HAS BEEN + V-ing.',
+              formula: 'I/You/We/They HAVE BEEN + V-ing  |  He/She/It HAS BEEN + V-ing',
+              example: 'They have been playing football. She has been cooking for 3 hours.',
+              exampleRu: 'They have been playing football. She has been cooking for 3 hours.',
+            },
+            exercises: [
+              { text: 'They ___ tennis since 9 o\'clock.', options: ['have been playing', 'has been playing', 'are playing'], correct: 0, explanation: 'They + have been playing.' },
+              { text: 'He ___ for the exam all week.', options: ['has been studying', 'have been studying', 'studies'], correct: 0, explanation: 'He + has been studying.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor: haven\'t / hasn\'t been + V-ing. Savol: Have / Has + Subject + been + V-ing ?',
+              ruleRu: 'Отрицание: haven\'t/hasn\'t been + V-ing. Вопрос: Have/Has + Subject + been + V-ing ?',
+              formula: 'haven\'t/hasn\'t been + V-ing  |  Have/Has + S + been + V-ing ?',
+              example: 'I haven\'t been sleeping well lately. Have you been waiting long?',
+              exampleRu: 'I haven\'t been sleeping well lately. Have you been waiting long?',
+            },
+            exercises: [
+              { text: 'She ___ feeling well recently.', options: ["hasn't been", "haven't been", "isn't been"], correct: 0, explanation: 'She + hasn\'t been feeling.' },
+              { text: '___ you been working out?', options: ['Have', 'Has', 'Are'], correct: 0, explanation: 'You savolida: Have you been working...' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"How long have you been ...-ing?" — necha vaqtdan beri bu jarayon bajarilayotganini so\'rash.',
+              ruleRu: '"How long have you been ...-ing?" — вопрос о продолжительности процесса.',
+              formula: 'How long + have/has + Subject + been + Verb-ing ?',
+              example: 'How long have you been learning French? — I have been learning it for 6 months.',
+              exampleRu: 'How long have you been learning French?',
+            },
+            exercises: [
+              { text: 'How long ___ she been living in London?', options: ['has', 'have', 'is'], correct: 0, explanation: 'She bilan: How long has she been living...' },
+              { text: '— How long have you been waiting? — I ___ waiting since 3:00.', options: ['have been', 'has been', 'am'], correct: 0, explanation: 'I have been waiting.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Present Perfect Continuous shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все формы Present Perfect Continuous.',
+              formula: 'have/has been + V-ing',
+              example: 'Look at his clothes! He has been working in the garden.',
+              exampleRu: 'Look at his clothes! He has been working in the garden.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I have been reading this book for two hours.', 'I have reading this book for two hours.'], correct: 0, explanation: 'have been reading (been shart).' },
+              { text: 'Choose the correct sentence:', options: ['Why are your hands dirty? — I have been fixing my bike.', 'Why are your hands dirty? — I have fixing my bike.'], correct: 0, explanation: 'have been fixing.' },
+              { text: 'Select the correct sentence:', options: ['She has been crying because of the sad film.', 'She has crying because of the sad film.'], correct: 0, explanation: 'has been crying.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-perfect-l4',
+        order: 4,
+        title: 'Present Perfect Simple vs Present Perfect Continuous (Farqlari)',
+        titleRu: 'Различие Present Perfect Simple и Present Perfect Continuous',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Diqqat markazi: NATIJA yoki MIQDOR (nechta/qancha bajarildi) ➔ Simple | JARAYON yoki DAVOMIYLIK (necha vaqt davom etdi) ➔ Continuous.',
+              ruleRu: 'Фокус: Результат/Количество ➔ Simple | Процесс/Длительность ➔ Continuous.',
+              formula: 'Completed result (How many/much) = Simple  |  Ongoing process (How long) = Continuous',
+              example: 'I have painted 3 rooms. (3 ta xonani bo\'yab bo\'ldim - Simple) / I have been painting all morning. (Ertalabdan beri bo\'yayapman - Continuous)',
+              exampleRu: 'I have painted 3 rooms vs I have been painting all morning.',
+            },
+            exercises: [
+              { text: 'I ___ 5 letters this morning.', options: ['have written', 'have been writing', 'wrote'], correct: 0, explanation: 'Miqdor (5 letters) -> Present Perfect Simple (have written).' },
+              { text: 'I ___ letters all morning.', options: ['have been writing', 'have written', 'am writing'], correct: 0, explanation: 'Davomiylik (all morning) -> Present Perfect Continuous.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'How many / How much / How many times ➔ Simple | How long ➔ Continuous.',
+              ruleRu: 'How many/much/times ➔ Simple | How long ➔ Continuous.',
+              formula: 'How many times ➔ Present Perfect Simple  |  How long ➔ Present Perfect Continuous',
+              example: 'How many cups of coffee have you drunk today? / How long have you been drinking coffee?',
+              exampleRu: 'How many times -> Simple / How long -> Continuous.',
+            },
+            exercises: [
+              { text: 'How many times ___ you visited Japan?', options: ['have', 'have been', 'did'], correct: 0, explanation: 'How many times -> have you visited.' },
+              { text: 'How long ___ you been reading this book?', options: ['have', 'has', 'did'], correct: 0, explanation: 'How long -> have you been reading.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Doimiy/Uzun muddatli holat ➔ Simple (I have lived here for 20 years) | Vaqtinchalik holat ➔ Continuous (I have been staying at a hotel for 3 days).',
+              ruleRu: 'Постоянное состояние ➔ Simple | Временная ситуация ➔ Continuous.',
+              formula: 'Permanent = Simple  |  Temporary = Continuous',
+              example: 'My father has worked in a bank all his life. / I have been working here for 2 weeks.',
+              exampleRu: 'Permanent vs Temporary.',
+            },
+            exercises: [
+              { text: 'I ___ in Tashkent all my life.', options: ['have lived', 'have been living', 'am living'], correct: 0, explanation: 'Umrbod doimiy holat: have lived.' },
+              { text: 'I ___ at my friend\'s house for a few days while my flat is decorated.', options: ['have been staying', 'have stayed', 'stayed'], correct: 0, explanation: 'Vaqtinchalik holat: have been staying.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Holat fe\'llari (Stative verbs: know, understand, believe, love, like, remember) HECH QACHON davomli (-ing) zamonda ishlatilmaydi ➔ faqat Present Perfect Simple!',
+              ruleRu: 'Глаголы состояния (know, like...) НЕ используются в Continuous ➔ только Present Perfect Simple!',
+              formula: 'Stative Verbs ➔ Present Perfect Simple ONLY (have known, have liked)',
+              example: 'I have known him for 10 years. (I have been knowing EMAS!)',
+              exampleRu: 'I have known him for 10 years.',
+            },
+            exercises: [
+              { text: 'I ___ him since childhood.', options: ['have known', 'have been knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li: have known.' },
+              { text: 'She ___ this car for 5 years.', options: ['has had', 'has been having', 'had'], correct: 0, explanation: 'have (ega bo\'lmoq) - holat fe\'li: has had.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Simple va Continuous farqini birlashtiramiz.',
+              ruleRu: 'Обобщим различие между Present Perfect Simple и Continuous.',
+              formula: 'Simple = Result/Count/Stative  |  Continuous = Duration/Process/Temporary',
+              example: 'I have been baking cookies all morning, and I have baked 40 cookies so far.',
+              exampleRu: 'I have been baking all morning, and I have baked 40 cookies so far.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I have read 50 pages of the book.', 'I have been reading 50 pages of the book.'], correct: 0, explanation: 'Natija/miqdor: have read 50 pages.' },
+              { text: 'Choose the correct sentence:', options: ['My eyes hurt because I have been reading all day.', 'My eyes hurt because I have read all day.'], correct: 0, explanation: 'Jarayon: have been reading all day.' },
+              { text: 'Select the correct sentence:', options: ['We have known each other for 3 years.', 'We have been knowing each other for 3 years.'], correct: 0, explanation: 'know - holat fe\'li: have known.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-perfect-l5',
+        order: 5,
+        title: 'Past Simple vs Present Perfect (Taqqoslash)',
+        titleRu: 'Сравнение Past Simple и Present Perfect',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Aniq ko\'rsatilgan o\'tgan vaqt (yesterday, 2 days ago, in 2018) ➔ Past Simple | Aniq bo\'lmagan vaqt / hozirgi alaqadorlik ➔ Present Perfect.',
+              ruleRu: 'Точное прошедшее время (yesterday, ago) ➔ Past Simple | Точное время не указано / связь с настоящим ➔ Present Perfect.',
+              formula: 'Specified Past Time ➔ Past Simple (V2)  |  Unspecified / Present Result ➔ Present Perfect (have/has V3)',
+              example: 'I visited Paris in 2019. (Past Simple) / I have visited Paris twice. (Present Perfect)',
+              exampleRu: 'I visited Paris in 2019 vs I have visited Paris.',
+            },
+            exercises: [
+              { text: 'I ___ to London last year.', options: ['went', 'have gone', 'have been'], correct: 0, explanation: 'Aniq o\'tgan vaqt (last year) -> Past Simple (went).' },
+              { text: 'I ___ to London several times.', options: ['have been', 'went', 'go'], correct: 0, explanation: 'Tajriba ( several times) -> Present Perfect (have been).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqt ko\'rsatkichlari: yesterday, ago, last week, in 2010 ➔ Past Simple | ever, never, just, already, yet, so far, since ➔ Present Perfect.',
+              ruleRu: 'Маркеры: yesterday, ago (Past Simple) vs ever, never, just, already, yet (Present Perfect).',
+              formula: 'Check time signals ➔ Select Past Simple or Present Perfect',
+              example: 'Did you see Tom yesterday? / Have you seen Tom today?',
+              exampleRu: 'Did you see Tom yesterday? vs Have you seen Tom today?',
+            },
+            exercises: [
+              { text: '___ you ever eaten Mexican food?', options: ['Have', 'Did', 'Do'], correct: 0, explanation: 'ever -> Present Perfect (Have you ever eaten).' },
+              { text: '___ you eat Mexican food yesterday?', options: ['Did', 'Have', 'Do'], correct: 0, explanation: 'yesterday -> Past Simple (Did you eat).' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"GONE TO" vs "BEEN TO": has gone to (ketgan va hali qaytmagan) vs has been to (borib kelgan/tajriba bor).',
+              ruleRu: '"gone to" (ушел и еще там) vs "been to" (побывал и вернулся).',
+              formula: 'has GONE to = still there  |  has BEEN to = visited and returned',
+              example: 'Tom has gone to Italy. (U hozir Italiyada.) / Tom has been to Italy. (U Italiyada bo\'lgan va qaytgan.)',
+              exampleRu: 'gone to (still there) vs been to (returned).',
+            },
+            exercises: [
+              { text: 'Where is Mary? — She has ___ to the supermarket. She will be back in 20 minutes.', options: ['gone', 'been', 'went'], correct: 0, explanation: 'Hali u yerda, qaytmagan: has gone.' },
+              { text: 'I have ___ to Spain three times in my life.', options: ['been', 'gone', 'went'], correct: 0, explanation: 'Hayotiy tajriba, borib kelgan: have been.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Simple va Present Perfect o\'rtasidagi mantiqiy bog\'liqlik mashqlari.',
+              ruleRu: 'Практика логического разграничения Past Simple и Present Perfect.',
+              formula: 'Action finished in dead time = Past Simple | Action connected to present = Present Perfect',
+              example: 'Shakespeare wrote many plays. (Past Simple - u vafot etgan) / J.K. Rowling has written many books.',
+              exampleRu: 'Finished period vs Unfinished/Present connected.',
+            },
+            exercises: [
+              { text: 'Shakespeare ___ Hamlet.', options: ['wrote', 'has written', 'writes'], correct: 0, explanation: 'Tarixiy shaxs, o\'tgan zamon: wrote.' },
+              { text: 'She ___ her leg, so she can\'t play tennis today.', options: ['has broken', 'broke', 'breaks'], correct: 0, explanation: 'Hozirgi natija (o\'ynay olmaydi): has broken.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Past Simple va Present Perfect taqqoslamasini birlashtiramiz.',
+              ruleRu: 'Обобщим сравнение Past Simple и Present Perfect.',
+              formula: 'Past Simple (specific time) vs Present Perfect (result/experience)',
+              example: 'I lost my keys yesterday, but I have found them today.',
+              exampleRu: 'I lost my keys yesterday, but I have found them today.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I have bought a new car yesterday.', 'I bought a new car yesterday.'], correct: 1, explanation: 'yesterday -> Past Simple (bought).' },
+              { text: 'Choose the correct sentence:', options: ['Have you ever visited Uzbekistan?', 'Did you ever visit Uzbekistan?'], correct: 0, explanation: 'ever -> Have you ever visited.' },
+              { text: 'Select the correct sentence:', options: ['Where is Tom? — He has gone to the shop.', 'Where is Tom? — He has been to the shop.'], correct: 0, explanation: 'Hozir do\'konda: has gone to.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-present-perfect-l6',
+        order: 6,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (Present Perfect)',
+        titleRu: 'Смешанная практика и Исправление ошибок (Present Perfect)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta xato: 1) I have saw ❌ ➔ I have seen ✅  2) I am living here since 2020 ❌ ➔ I have been living here since 2020 ✅  3) I have been knowing ❌ ➔ I have known ✅.',
+              ruleRu: '3 частые ошибки: 1) have saw ❌ ➔ have seen ✅  2) am living since ❌ ➔ have been living since ✅  3) have been knowing ❌ ➔ have known ✅.',
+              formula: 'Check list: 1) have/has + V3 | 2) since/for = Present Perfect | 3) Stative verb = Simple',
+              example: 'I have seen it. I have been living here since 2020. I have known her for years.',
+              exampleRu: 'I have seen it. I have been living here since 2020. I have known her for years.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I have seen that movie twice.', 'I have saw that movie twice.'], correct: 0, explanation: 'have + V3 (seen).' },
+              { text: 'Choose the correct sentence:', options: ['She has been working here since Monday.', 'She is working here since Monday.'], correct: 0, explanation: 'since Monday -> has been working.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Real dialog va muloqotlarda Present Perfect Simple va Continuous qo\'llash.',
+              ruleRu: 'Практика диалогов с Present Perfect Simple и Continuous.',
+              formula: 'Dialogue context: Experience/Result vs Ongoing duration',
+              example: '— You look tired! — Yes, I have been running. — How far have you run? — 5 kilometers!',
+              exampleRu: 'Continuous (duration) vs Simple (result).',
+            },
+            exercises: [
+              { text: '— Why are your clothes dirty? — I ___ the car.', options: ['have been cleaning', 'have cleaned', 'cleaned'], correct: 0, explanation: 'Yangi tugagan va izi bor jarayon: have been cleaning.' },
+              { text: '— How many pages have you read? — I ___ 30 pages so far.', options: ['have read', 'have been reading', 'readed'], correct: 0, explanation: 'Miqdor (30 pages): have read.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hayotiy tajriba va davomiyliklar haqida matn tuzish mashqlari.',
+              ruleRu: 'Составление рассказов об опыте и длительности.',
+              formula: 'Experience (have V3) + Duration (have been V-ing for/since)',
+              example: 'I have lived in London for 3 years. I have met many interesting people.',
+              exampleRu: 'I have lived in London for 3 years. I have met many interesting people.',
+            },
+            exercises: [
+              { text: 'I ___ in this company for 5 years, and I ___ three promotions.', options: ['have been working / have received', 'am working / received', 'worked / have received'], correct: 0, explanation: 'have been working / have received.' },
+              { text: 'Select the correct sentence:', options: ['He has been learning English since last year.', 'He is learning English since last year.'], correct: 0, explanation: 'since last year -> has been learning.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Gaplarni to\'g\'ri tarjima va shakllantirish mashqlari.',
+              ruleRu: 'Упражнения на перевод и правильно образование форм.',
+              formula: 'Match meaning ➔ Select Simple (result/count) or Continuous (duration/process)',
+              example: 'Men ko\'pdan beri kutayapman: I have been waiting for a long time.',
+              exampleRu: 'I have been waiting for a long time.',
+            },
+            exercises: [
+              { text: 'Men bu kitobni 2 soatdan beri o\'qiyapman:', options: ['I have been reading this book for 2 hours.', 'I am reading this book since 2 hours.'], correct: 0, explanation: 'have been reading ... for 2 hours.' },
+              { text: 'U allaqachon uy vazifasini bajarib bo\'lgan:', options: ['He has already done his homework.', 'He has already been doing his homework.'], correct: 0, explanation: 'has already done (natija).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Section 16 Present Perfect (Simple & Continuous) bo\'yicha yakuniy master formula.',
+              ruleRu: 'Итоговая главная формула Present Perfect.',
+              formula: 'Master Present Perfect Rule: Result/Count = have/has V3 | Duration/Process = have/has been V-ing | Specified past time = V2',
+              example: 'I have done it. I have been doing it for 2 hours. I did it yesterday.',
+              exampleRu: 'I have done it. I have been doing it for 2 hours. I did it yesterday.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I have been studying for the exam all day.', 'I have studied for the exam all day ongoing.'], correct: 0, explanation: 'have been studying.' },
+              { text: 'Choose the correct sentence:', options: ['She has visited 10 countries so far.', 'She has been visiting 10 countries so far.'], correct: 0, explanation: 'Miqdor (10 countries): has visited.' },
+              { text: 'Select the correct sentence:', options: ['We have lived in this town since 2015.', 'We are living in this town since 2015.'], correct: 0, explanation: 'since 2015 -> have lived.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Present Perfect va Present Perfect Continuous",
+      titleRu: 'Тест раздела: Present Perfect и Present Perfect Continuous',
+      exercises: [
+        { text: 'I ___ my homework already.', options: ['have finished', 'finished', 'have been finishing'], correct: 0, explanation: 'already -> have finished.' },
+        { text: 'She ___ in Tashkent since 2018.', options: ['has lived', 'lives', 'is living'], correct: 0, explanation: 'since 2018 -> has lived.' },
+        { text: 'We have been waiting for the bus ___ 40 minutes.', options: ['for', 'since', 'from'], correct: 0, explanation: '40 minutes -> for.' },
+        { text: 'I haven\'t seen my uncle ___ last year.', options: ['since', 'for', 'ago'], correct: 0, explanation: 'last year -> since.' },
+        { text: 'How long ___ you been learning English?', options: ['have', 'has', 'are'], correct: 0, explanation: 'How long have you been...' },
+        { text: 'Look at her! She is wet because she ___ in the rain.', options: ['has been walking', 'has walked', 'walks'], correct: 0, explanation: 'Izi bor jarayon: has been walking.' },
+        { text: 'I have ___ 4 cups of coffee today.', options: ['drunk', 'been drinking', 'drinked'], correct: 0, explanation: 'Miqdor (4 cups): have drunk.' },
+        { text: 'I ___ him since we were at university.', options: ['have known', 'have been knowing', 'knew'], correct: 0, explanation: 'know - holat fe\'li: have known.' },
+        { text: 'I ___ to London in 2021.', options: ['went', 'have gone', 'have been'], correct: 0, explanation: 'Aniq vaqt (in 2021) -> Past Simple (went).' },
+        { text: 'Where is John? — She has ___ to the bank.', options: ['gone', 'been', 'went'], correct: 0, explanation: 'Hali u yerda: has gone.' },
+        { text: 'Choose the correct sentence:', options: ['She has lived here for 5 years.', 'She has lived here since 5 years.'], correct: 0, explanation: '5 years -> for.' },
+        { text: 'Choose the correct sentence:', options: ['Have you ever been to Japan?', 'Did you ever been to Japan?'], correct: 0, explanation: 'Have you ever been...' },
+        { text: 'Select the correct sentence:', options: ['My hands are covered in paint because I have been painting the kitchen.', 'My hands are covered in paint because I have painted the kitchen.'], correct: 0, explanation: 'Izi bor jarayon: have been painting.' },
+        { text: 'Select the correct sentence:', options: ['I bought this car 2 years ago.', 'I have bought this car 2 years ago.'], correct: 0, explanation: '2 years ago -> Past Simple (bought).' },
+        { text: 'Select the correct sentence:', options: ['How many times have you seen this movie?', 'How long have you seen this movie?'], correct: 0, explanation: 'How many times have you seen...' },
+      ],
+    },
+  },
+  {
+    id: 'sec-adjectives-comparison',
+    order: 17,
+    title: 'Sifat darajalari — Comparative, Superlative va As...as',
+    titleRu: 'Степени сравнения прилагательных — Comparative, Superlative и As...as',
+    icon: '📊',
+    lessons: [
+      {
+        id: 'sec-adj-l1',
+        order: 1,
+        title: 'Oddiy daraja va As...as / Not as...as',
+        titleRu: 'Положительная степень и As...as / Not as...as',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Oddiy daraja (Positive degree) — sifatning hech qanday qo\'shimchasiz o\'z shakli: tall (baland), fast (tez), expensive (qimmat).',
+              ruleRu: 'Положительная степень (Positive degree) — исходная форма прилагательного без добавок: tall, fast, expensive.',
+              formula: 'Subject + be + Adjective',
+              example: 'This car is fast. (Bu mashina tez.) She is tall. (U baland bo\'yli.)',
+              exampleRu: 'This car is fast. She is tall.',
+            },
+            exercises: [
+              { text: 'This house is ___.', options: ['big', 'bigger', 'biggest'], correct: 0, explanation: 'Oddiy sifat shakli: big.' },
+              { text: 'She is a ___ girl.', options: ['smart', 'smarter', 'smartest'], correct: 0, explanation: 'Oddiy sifat: smart.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Tenglik darajasi: AS + Adjective + AS ("...dek / ... kabi ..."). Ikki narsa yoki shaxs bir xil teng ekanligini ko\'rsatadi.',
+              ruleRu: 'Сравнение равенства: AS + Adjective + AS ("такой же ... как"). Показывает равенство признаков.',
+              formula: 'Subject + be + AS + Adjective + AS + Object',
+              example: 'Tom is as tall as Bob. (Tom Bob kabi baland bo\'yli.)',
+              exampleRu: 'Tom is as tall as Bob.',
+            },
+            exercises: [
+              { text: 'He is as ___ as his father.', options: ['tall', 'taller', 'tallest'], correct: 0, explanation: 'as ... as orasida oddiy sifat turadi: tall.' },
+              { text: 'My phone is ___ expensive as yours.', options: ['as', 'more', 'so'], correct: 0, explanation: 'Tenglik strukturasi: as expensive as.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Tengsizlik / Inkor: NOT AS + Adjective + AS ("...chalik emas / ...dek emas").',
+              ruleRu: 'Отрицательное сравнение: NOT AS + Adjective + AS ("не такой ... как").',
+              formula: 'Subject + be NOT + AS + Adjective + AS + Object',
+              example: 'This car is not as fast as a train. (Bu mashina poezdchalik tez emas.)',
+              exampleRu: 'This car is not as fast as a train.',
+            },
+            exercises: [
+              { text: 'Silver is not ___ expensive as gold.', options: ['as', 'more', 'than'], correct: 0, explanation: 'not as ... as tengsizlik strukturasi.' },
+              { text: 'Choose the correct sentence:', options: ['Today is not as cold as yesterday.', 'Today is not cold than yesterday.'], correct: 0, explanation: 'Inkor tenglikda: not as cold as.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'as...as birikmasidan keyin kishilik olmoshining obyekt shakli (me, him, her, us, them) yoki ega + fe\'l (he is, I am) keladi.',
+              ruleRu: 'После as...as используется объектное местоимение (me, him) или подлежащее + глагол (he is).',
+              formula: 'as ... as + me / him / her  OR  as ... as + he is / I am',
+              example: 'She is as old as me. / She is as old as I am.',
+              exampleRu: 'She is as old as me. / She is as old as I am.',
+            },
+            exercises: [
+              { text: 'He runs as fast as ___.', options: ['me', 'my', 'mine'], correct: 0, explanation: 'as fast as me (obyekt olmoshi).' },
+              { text: 'She is as smart as ___.', options: ['he is', 'he does', 'his'], correct: 0, explanation: 'as smart as he is.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'as...as va not as...as qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила использования as...as и not as...as.',
+              formula: 'as + adjective + as  |  not as + adjective + as',
+              example: 'My car is as new as yours, but it is not as fast.',
+              exampleRu: 'My car is as new as yours, but it is not as fast.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['English is as easy as German.', 'English is as easier as German.'], correct: 0, explanation: 'as...as orasida oddiy sifat: easy.' },
+              { text: 'Choose the correct sentence:', options: ['He is not as tall as his brother.', 'He is not as taller as his brother.'], correct: 0, explanation: 'not as tall as (oddiy sifat).' },
+              { text: 'Select the correct sentence:', options: ['This test was as hard as the last one.', 'This test was as harder than the last one.'], correct: 0, explanation: 'as hard as.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-adj-l2',
+        order: 2,
+        title: 'Comparative Degree — Qisqa sifatlar (-er + than)',
+        titleRu: 'Сравнительная степень — Короткие прилагательные (-er + than)',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Qiyosiy daraja (Comparative degree) — ikki narsa/shaxsni taqqoslashda ishlatiladi. Bir bo\'g\'inli qisqa sifatlarga "-er" qo\'shiladi va qiyoslash so\'zi "than" (...dan ko\'ra) ishlatiladi.',
+              ruleRu: 'Сравнительная степень для односложных прилагательных образуется с помощью окончания "-er" и слова "than" (чем).',
+              formula: 'Short Adjective + -ER + THAN',
+              example: 'Tom is taller than Bob. (Tom Bobdan ko\'ra baland bo\'yli.)',
+              exampleRu: 'Tom is taller than Bob.',
+            },
+            exercises: [
+              { text: 'A train is ___ than a car.', options: ['faster', 'fast', 'fastest'], correct: 0, explanation: 'Qiyosiy daraja: fast + er ➔ faster.' },
+              { text: 'Mount Everest is ___ than K2.', options: ['higher', 'high', 'highest'], correct: 0, explanation: 'high + er ➔ higher.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Imlo qoidasi 1: Sifat "-e" bilan tugasa, faqat "-r" qo\'shiladi (nice ➔ nicer, large ➔ larger). Undosh + unli + undosh bilan tugasa, oxirgi undosh ikkilanadi (big ➔ bigger, hot ➔ hotter).',
+              ruleRu: 'Правило орфографии 1: если -e, добавляем -r (nicer). Если гласная + согласная, удваиваем (bigger, hotter).',
+              formula: 'nice ➔ nicer  |  big ➔ bigger  |  hot ➔ hotter',
+              example: 'Russia is bigger than China. Summer is hotter than winter.',
+              exampleRu: 'Russia is bigger than China. Summer is hotter than winter.',
+            },
+            exercises: [
+              { text: 'An elephant is ___ than a horse.', options: ['bigger', 'biger', 'more big'], correct: 0, explanation: 'big ➔ bigger (g ikkilanadi).' },
+              { text: 'Today is ___ than yesterday.', options: ['hotter', 'hoter', 'more hot'], correct: 0, explanation: 'hot ➔ hotter (t ikkilanadi).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Imlo qoidasi 2: Sifat 2 bo\'g\'inli bo\'lib, "-y" bilan tugasa, "-y" tushib qolib, "-ier" qo\'shiladi: happy ➔ happier, easy ➔ easier, heavy ➔ heavier.',
+              ruleRu: 'Правило орфографии 2: двусложные на "-y" меняют "-y" на "-ier": happy ➔ happier, easy ➔ easier.',
+              formula: 'Adjective ending in -y ➔ -IER + THAN',
+              example: 'English is easier than Chinese. She looks happier today.',
+              exampleRu: 'English is easier than Chinese.',
+            },
+            exercises: [
+              { text: 'This exam was ___ than the last one.', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier (y ➔ ier).' },
+              { text: 'Health is ___ than wealth.', options: ['heavier', 'heavier than', 'more heavy'], correct: 0, explanation: 'heavy ➔ heavier.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qiyoslashda taqqoslanayotgan ikkinchi obyekt oldidan doim "THAN" ishlatiladi.',
+              ruleRu: 'В сравнении перед вторым объектом всегда используется "THAN".',
+              formula: 'Comparative Adjective + THAN + Object',
+              example: 'He is younger than me. (U mendan yoshroq.)',
+              exampleRu: 'He is younger than me.',
+            },
+            exercises: [
+              { text: 'She is older ___ her sister.', options: ['than', 'then', 'that'], correct: 0, explanation: 'Qiyoslashda: than.' },
+              { text: 'Choose the correct sentence:', options: ['My room is cleaner than yours.', 'My room is cleaner then yours.'], correct: 0, explanation: 'To\'g\'ri so\'z: than.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa sifatlarning qiyosiy darajasini birlashtiramiz.',
+              ruleRu: 'Обобщим сравнительную степень коротких прилагательных.',
+              formula: 'Adjective + -er/-ier + THAN',
+              example: 'A plane is faster, bigger, and higher than a helicopter.',
+              exampleRu: 'A plane is faster, bigger, and higher than a helicopter.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['This suitcase is heavier than that one.', 'This suitcase is more heavy than that one.'], correct: 0, explanation: 'heavy ➔ heavier.' },
+              { text: 'Choose the correct sentence:', options: ['My brother is taller than me.', 'My brother is more tall than me.'], correct: 0, explanation: 'tall ➔ taller.' },
+              { text: 'Select the correct sentence:', options: ['Yesterday was colder than today.', 'Yesterday was coldier than today.'], correct: 0, explanation: 'cold ➔ colder.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-adj-l3',
+        order: 3,
+        title: 'Comparative Degree — Uzun sifatlar (more / less + than)',
+        titleRu: 'Сравнительная степень — Длинные прилагательные (more / less + than)',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Ikki yoki undan ortiq bo\'g\'inli uzun sifatlarda "-er" qo\'shilmaydi. Ularning oldiga "MORE" (ko\'proq) qo\'yiladi: more expensive, more beautiful, more interesting.',
+              ruleRu: 'Для многосложных прилагательных используется слово "MORE" (более): more expensive, more beautiful.',
+              formula: 'MORE + Long Adjective + THAN',
+              example: 'A sports car is more expensive than a regular car.',
+              exampleRu: 'A sports car is more expensive than a regular car.',
+            },
+            exercises: [
+              { text: 'This book is ___ than the film.', options: ['more interesting', 'interesting er', 'interestinger'], correct: 0, explanation: 'Uzun sifat: more interesting.' },
+              { text: 'Paris is ___ than my hometown.', options: ['more beautiful', 'beautifuler', 'beautifuler than'], correct: 0, explanation: 'Uzun sifat: more beautiful.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Kamroq" ma\'nosida "LESS" so\'zi qo\'llaniladi: less expensive (kamroq qimmat / arzonroq), less difficult (kamroq qiyin).',
+              ruleRu: 'В значении "менее" используется слово "LESS": less expensive, less difficult.',
+              formula: 'LESS + Adjective + THAN',
+              example: 'This test is less difficult than the previous one.',
+              exampleRu: 'This test is less difficult than the previous one.',
+            },
+            exercises: [
+              { text: 'Walking is ___ dangerous than riding a motorcycle.', options: ['less', 'least', 'fewer'], correct: 0, explanation: 'Kamroq xavfli: less dangerous.' },
+              { text: 'Choose the correct sentence:', options: ['This task is less complicated than that one.', 'This task is more less complicated than that one.'], correct: 0, explanation: 'less complicated.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qiyosiy darajani kuchaytirish uchun oldidan MUCH, A LOT, FAR qo\'yiladi: much bigger (ancha kattaroq), a lot more expensive (juda ko\'p qimmatroq).',
+              ruleRu: 'Усиление сравнения: MUCH, A LOT, FAR (намного): much bigger, a lot more expensive.',
+              formula: 'MUCH / A LOT / FAR + Comparative Adjective',
+              example: 'China is much bigger than Italy. This computer is a lot more expensive.',
+              exampleRu: 'China is much bigger than Italy.',
+            },
+            exercises: [
+              { text: 'An airplane is ___ faster than a car.', options: ['much', 'more', 'very'], correct: 0, explanation: 'Qiyosiylikni kuchaytirish: much faster (very faster bo\'lmaydi!).' },
+              { text: 'Living in London is ___ more expensive than in my town.', options: ['a lot', 'very', 'many'], correct: 0, explanation: 'a lot more expensive.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Borgan sari oshib borish: "... va ..." (colder and colder, more and more expensive).',
+              ruleRu: 'Постепенное изменение: colder and colder, more and more expensive.',
+              formula: 'Comparative AND Comparative  |  MORE AND MORE + Adjective',
+              example: 'It is getting colder and colder. Life is becoming more and more expensive.',
+              exampleRu: 'It is getting colder and colder.',
+            },
+            exercises: [
+              { text: 'The weather is getting ___ and colder.', options: ['colder', 'cold', 'coldest'], correct: 0, explanation: 'colder and colder.' },
+              { text: 'English is becoming ___ popular around the world.', options: ['more and more', 'more and most', 'most and most'], correct: 0, explanation: 'more and more popular.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Uzun sifatlar qiyosiy darajasini birlashtiramiz.',
+              ruleRu: 'Обобщим сравнительную степень длинных прилагательных.',
+              formula: 'more / less + Adjective + THAN  |  much / a lot + Comparative',
+              example: 'This method is much more effective than the old one.',
+              exampleRu: 'This method is much more effective than the old one.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['Health is much more important than money.', 'Health is very more important than money.'], correct: 0, explanation: 'much more important (very qullanilmaydi).' },
+              { text: 'Choose the correct sentence:', options: ['This apartment is more comfortable than that house.', 'This apartment is comfortabler than that house.'], correct: 0, explanation: 'more comfortable.' },
+              { text: 'Select the correct sentence:', options: ['Computers are getting cheaper and cheaper.', 'Computers are getting more cheap and more cheap.'], correct: 0, explanation: 'cheaper and cheaper.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-adj-l4',
+        order: 4,
+        title: 'Superlative Degree — Orttirma daraja (the -est / the most)',
+        titleRu: 'Превосходная степень — Superlative (the -est / the most)',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Orttirma daraja (Superlative degree) — 3 yoki undan ortiq narsalar ichida eng ustunini ko\'rsatadi. Doim "THE" artikli bilan ishlatiladi! Qisqa sifatlarga "-est" qo\'shiladi: the tallest, the fastest, the happiest.',
+              ruleRu: 'Превосходная степень сравнения 3 и более объектов. Всегда с артиклем "THE"! Окончание "-est": the tallest, the biggest.',
+              formula: 'THE + Short Adjective + -EST',
+              example: 'Mount Everest is the highest mountain in the world.',
+              exampleRu: 'Mount Everest is the highest mountain in the world.',
+            },
+            exercises: [
+              { text: 'Cheetah is ___ land animal in the world.', options: ['the fastest', 'fastest', 'faster'], correct: 0, explanation: 'Orttirma darajada artikl shart: the fastest.' },
+              { text: 'Jupiter is ___ planet in our solar system.', options: ['the biggest', 'the bigest', 'more big'], correct: 0, explanation: 'the biggest (g ikkilanadi).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Uzun sifatlarda orttirma daraja: "THE MOST" + sifat: the most beautiful, the most expensive, the most famous.',
+              ruleRu: 'Для длинных прилагательных превосходная степень: "THE MOST" + прилагательное: the most expensive.',
+              formula: 'THE MOST + Long Adjective',
+              example: 'Dubai has some of the most expensive hotels.',
+              exampleRu: 'Dubai has some of the most expensive hotels.',
+            },
+            exercises: [
+              { text: 'What is ___ city in the world?', options: ['the most expensive', 'most expensive', 'the expensivest'], correct: 0, explanation: 'the most expensive.' },
+              { text: 'She is ___ student in our class.', options: ['the most intelligent', 'the intelligentest', 'more intelligent'], correct: 0, explanation: 'the most intelligent.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Eng kam" ma\'nosida "THE LEAST" so\'zi ishlatiladi: the least expensive (eng kam qimmat / eng arzon).',
+              ruleRu: 'В значении "наименее / меньше всего" используется "THE LEAST": the least expensive.',
+              formula: 'THE LEAST + Adjective',
+              example: 'This is the least difficult exam of all.',
+              exampleRu: 'This is the least difficult exam of all.',
+            },
+            exercises: [
+              { text: 'It was ___ interesting movie I have ever watched.', options: ['the least', 'less', 'the most least'], correct: 0, explanation: 'the least interesting.' },
+              { text: 'Choose the correct sentence:', options: ['This option is the least risky.', 'This option is least risky.'], correct: 0, explanation: 'the least risky.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Superlative bilan predloglar: JOY bo\'lsa "IN" (in the world, in the class), GURUH bo\'lsa "OF" (of all, of the three). Shuningdek Present Perfect bilan tez-tez keladi (*the best movie I have ever seen*).',
+              ruleRu: 'Предлоги: IN для мест (in the world), OF для групп (of all). Часто с Present Perfect (the best... I have ever seen).',
+              formula: 'the -est / the most ... IN + Place  |  OF + Group  |  I have EVER + V3',
+              example: 'He is the tallest boy in the class. It is the best food I have ever eaten.',
+              exampleRu: 'He is the tallest boy in the class.',
+            },
+            exercises: [
+              { text: 'She is the smartest girl ___ our school.', options: ['in', 'of', 'at'], correct: 0, explanation: 'Joy/muassasa uchun: in our school.' },
+              { text: 'This is the best book I have ___ read.', options: ['ever', 'never', 'already'], correct: 0, explanation: 'Superlative tajribasida: ever.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Orttirma daraja (Superlative) qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила превосходной степени.',
+              formula: 'THE + -est  |  THE MOST + Adjective  |  THE LEAST + Adjective',
+              example: 'It was the most exciting trip of my life, and the cheapest one in history.',
+              exampleRu: 'It was the most exciting trip of my life.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She is the most popular singer in Uzbekistan.', 'She is most popular singer in Uzbekistan.'], correct: 0, explanation: 'THE most popular.' },
+              { text: 'Choose the correct sentence:', options: ['Who is the oldest person in your family?', 'Who is the older person in your family?'], correct: 0, explanation: 'Orttirma daraja: the oldest.' },
+              { text: 'Select the correct sentence:', options: ['This is the worst mistake of all.', 'This is the baddest mistake of all.'], correct: 0, explanation: 'bad ➔ worst.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-adj-l5',
+        order: 5,
+        title: 'Noto\'g\'ri (Irregular) sifatlar va Maxsus tuzilmalar',
+        titleRu: 'Исключения (Irregular adjectives) и Особые конструкции',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Asosiy noto\'g\'ri sifatlar: GOOD (yaxshi) ➔ BETTER ➔ THE BEST | BAD (yomon) ➔ WORSE ➔ THE WORST.',
+              ruleRu: 'Главные исключения: GOOD ➔ BETTER ➔ THE BEST | BAD ➔ WORSE ➔ THE WORST.',
+              formula: 'good ➔ better ➔ best  |  bad ➔ worse ➔ worst',
+              example: 'My score is better than yours. This is the best pizza ever. Yesterday was bad, but today is worse.',
+              exampleRu: 'My score is better than yours.',
+            },
+            exercises: [
+              { text: 'Your English is ___ than last year.', options: ['better', 'gooder', 'more good'], correct: 0, explanation: 'good ➔ better.' },
+              { text: 'This is ___ film I have ever seen.', options: ['the best', 'the goodest', 'the better'], correct: 0, explanation: 'good ➔ the best.' },
+              { text: 'The weather today is ___ than yesterday.', options: ['worse', 'badder', 'more bad'], correct: 0, explanation: 'bad ➔ worse.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Boshqa noto\'g\'ri sifatlar: FAR (uzoq) ➔ FARTHER/FURTHER ➔ THE FARTHEST/FURTHEST | LITTLE (oz) ➔ LESS ➔ THE LEAST | MANY/MUCH (ko\'p) ➔ MORE ➔ THE MOST.',
+              ruleRu: 'Другие исключения: FAR ➔ FURTHER/FARTHER ➔ FURTHEST | LITTLE ➔ LESS ➔ LEAST | MUCH/MANY ➔ MORE ➔ MOST.',
+              formula: 'far ➔ further ➔ furthest  |  little ➔ less ➔ least  |  many/much ➔ more ➔ most',
+              example: 'I need further information. He has less money than me.',
+              exampleRu: 'I need further information.',
+            },
+            exercises: [
+              { text: 'I have ___ free time than you.', options: ['less', 'littler', 'least'], correct: 0, explanation: 'little ➔ less.' },
+              { text: 'For ___ details, please visit our website.', options: ['further', 'farthest', 'farer'], correct: 0, explanation: 'qo\'shimcha tafsilotlar: further.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"FURTHER" masofadan tashqari "qo\'shimcha / yana" degan ma\'noni ham bildiradi: further notice (keyingi e\'longacha), further questions (qo\'shimcha savollar).',
+              ruleRu: '"FURTHER" означает также "дополнительный": further information, further questions.',
+              formula: 'FURTHER + Noun = additional noun',
+              example: 'Do you have any further questions?',
+              exampleRu: 'Do you have any further questions?',
+            },
+            exercises: [
+              { text: 'If you have any ___ questions, let me know.', options: ['further', 'farther', 'farthest'], correct: 0, explanation: 'Qo\'shimcha savollar: further.' },
+              { text: 'The shop is closed until ___ notice.', options: ['further', 'farther', 'more far'], correct: 0, explanation: 'further notice.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"THE ... THE ..." iborasi ("Qanchalik ... shanchalik ..."): The more you learn, the smarter you become. The colder it is, the warmer you should dress.',
+              ruleRu: 'Конструкция "THE ... THE ..." ("Чем ... тем ..."): The more you study, the better your results.',
+              formula: 'THE + Comparative ... THE + Comparative',
+              example: 'The sooner, the better. (Qancha erta bo\'lsa, shuncha yaxshi.)',
+              exampleRu: 'The sooner, the better.',
+            },
+            exercises: [
+              { text: 'The more you practice, ___ you speak.', options: ['the better', 'the best', 'better'], correct: 0, explanation: 'The ... the ... iborasi: the better.' },
+              { text: 'The higher you climb, ___ cold it gets.', options: ['the more', 'the most', 'more'], correct: 0, explanation: 'the more cold / the colder.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Noto\'g\'ri sifatlar va maxsus iboralarni birlashtiramiz.',
+              ruleRu: 'Обобщим исключения и особые конструкции.',
+              formula: 'good/better/best  |  bad/worse/worst  |  the... the...',
+              example: 'The earlier we start, the better the result will be.',
+              exampleRu: 'The earlier we start, the better the result will be.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['Prevention is better than cure.', 'Prevention is gooder than cure.'], correct: 0, explanation: 'good ➔ better.' },
+              { text: 'Choose the correct sentence:', options: ['This is the worst day of my life.', 'This is the baddest day of my life.'], correct: 0, explanation: 'bad ➔ worst.' },
+              { text: 'Select the correct sentence:', options: ['The more I know him, the more I like him.', 'The more I know him, more I like him.'], correct: 0, explanation: 'The more ... the more ...' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-adj-l6',
+        order: 6,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (Sifat darajalari)',
+        titleRu: 'Смешанная практика и Исправление ошибок (Степени сравнения)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 4 ta xato: 1) more taller ❌ ➔ taller ✅  2) the most highest ❌ ➔ the highest ✅  3) more good ❌ ➔ better ✅  4) taller then ❌ ➔ taller than ✅.',
+              ruleRu: '4 частые ошибки: 1) more taller ❌ ➔ taller ✅  2) most highest ❌ ➔ highest ✅  3) more good ❌ ➔ better ✅  4) then ❌ ➔ than ✅.',
+              formula: 'Never double comparison! (NO more -er / NO most -est)',
+              example: 'He is taller than me. (NOT more taller). It is the highest peak (NOT most highest).',
+              exampleRu: 'He is taller than me. It is the highest peak.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She is smarter than her brother.', 'She is more smarter than her brother.'], correct: 0, explanation: 'Ikkilamchi qiyoslash mumkin emas: smarter than.' },
+              { text: 'Choose the correct sentence:', options: ['This is the highest building in town.', 'This is the most highest building in town.'], correct: 0, explanation: 'the highest.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Mezon tanlash: 2 ta narsa bo\'lsa ➔ Comparative (-er / more) | 3 va undan ortiq narsa bo\'lsa ➔ Superlative (-est / the most).',
+              ruleRu: 'Выбор степени: 2 объекта ➔ Comparative | 3 и более объектов ➔ Superlative.',
+              formula: '2 Objects ➔ Comparative  |  3+ Objects ➔ Superlative',
+              example: 'Of the two brothers, Tom is taller. / Of all the students, Tom is the tallest.',
+              exampleRu: 'Of the two brothers, Tom is taller. Of all students, Tom is the tallest.',
+            },
+            exercises: [
+              { text: 'Between football and tennis, I think football is ___ .', options: ['more exciting', 'the most exciting', 'most exciting'], correct: 0, explanation: '2 ta sport turi taqqoslanmoqda: more exciting.' },
+              { text: 'Of all sports, football is ___ .', options: ['the most popular', 'more popular', 'popularer'], correct: 0, explanation: 'Barcha sport turlari ichida: the most popular.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'as...as, comparative va superlative ni aralash kontekstlarda to\'g\'ri qo\'llash.',
+              ruleRu: 'Использование as...as, comparative и superlative в смешанных контекстах.',
+              formula: 'as...as (equal) vs -er/more (unequal 2) vs the -est/most (top of 3+)',
+              example: 'She is as smart as her sister, but her brother is the smartest of all.',
+              exampleRu: 'She is as smart as her sister, but her brother is the smartest of all.',
+            },
+            exercises: [
+              { text: 'My laptop is fast, but yours is ___ .', options: ['faster', 'fastest', 'more fast'], correct: 0, explanation: 'Ikki kompyuter taqqoslanmoqda: faster.' },
+              { text: 'My laptop is not as ___ as yours.', options: ['fast', 'faster', 'fastest'], correct: 0, explanation: 'not as ... as orasida: fast.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Real dialog va matnlardagi qiyosiy shakllar.',
+              ruleRu: 'Практика диалогов и текстов.',
+              formula: 'Context analysis ➔ Choose correct degree of comparison',
+              example: '— Which car is better? — The red one is cheaper, but the blue one is safer.',
+              exampleRu: 'The red one is cheaper, but the blue one is safer.',
+            },
+            exercises: [
+              { text: '— How was your exam? — It was ___ than I expected!', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier.' },
+              { text: '— Is your house far? — Yes, it is ___ away than yours.', options: ['farther', 'farer', 'more far'], correct: 0, explanation: 'far ➔ farther / further.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Section 17 (Sifat darajalari) bo\'yicha yakuniy master formula.',
+              ruleRu: 'Итоговая главная формула степеней сравнения.',
+              formula: 'Equal = as adj as  |  2 objects = adj-er / more adj THAN  |  3+ objects = THE adj-est / THE MOST adj',
+              example: 'as fast as / faster than / the fastest',
+              exampleRu: 'as fast as / faster than / the fastest',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['This is the best day of my life.', 'This is the most good day of my life.'], correct: 0, explanation: 'good ➔ the best.' },
+              { text: 'Choose the correct sentence:', options: ['She is as tall as her mother.', 'She is as taller as her mother.'], correct: 0, explanation: 'as tall as.' },
+              { text: 'Select the correct sentence:', options: ['My phone is much more expensive than yours.', 'My phone is very more expensive than yours.'], correct: 0, explanation: 'much more expensive.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Sifat darajalari (Comparative, Superlative, As...as)",
+      titleRu: 'Тест раздела: Степени сравнения (Comparative, Superlative, As...as)',
+      exercises: [
+        { text: 'Tom is as ___ as Bob.', options: ['tall', 'taller', 'tallest'], correct: 0, explanation: 'as...as orasida oddiy sifat: tall.' },
+        { text: 'My phone is not as ___ as yours.', options: ['expensive', 'more expensive', 'most expensive'], correct: 0, explanation: 'not as...as orasida: expensive.' },
+        { text: 'A plane is ___ than a train.', options: ['faster', 'fast', 'fastest'], correct: 0, explanation: 'Qisqa sifat + er + than: faster.' },
+        { text: 'This exam was ___ than I thought.', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier.' },
+        { text: 'London is ___ than my city.', options: ['more expensive', 'expensivest', 'expensiver'], correct: 0, explanation: 'Uzun sifat: more expensive.' },
+        { text: 'Health is ___ important than money.', options: ['more', 'most', 'as'], correct: 0, explanation: 'more important than.' },
+        { text: 'Mount Everest is ___ mountain in the world.', options: ['the highest', 'highest', 'higher'], correct: 0, explanation: 'the highest.' },
+        { text: 'What is ___ city in Uzbekistan?', options: ['the largest', 'the larger', 'largest'], correct: 0, explanation: 'the largest.' },
+        { text: 'This is ___ film I have ever watched.', options: ['the most interesting', 'the interestingest', 'more interesting'], correct: 0, explanation: 'the most interesting.' },
+        { text: 'Your result is ___ than mine.', options: ['better', 'gooder', 'more good'], correct: 0, explanation: 'good ➔ better.' },
+        { text: 'Yesterday was bad, but today is ___ .', options: ['worse', 'badder', 'more bad'], correct: 0, explanation: 'bad ➔ worse.' },
+        { text: 'Do you have any ___ questions?', options: ['further', 'farther', 'farer'], correct: 0, explanation: 'further questions.' },
+        { text: 'The sooner, the ___ .', options: ['better', 'best', 'good'], correct: 0, explanation: 'The sooner, the better.' },
+        { text: 'Select the correct sentence:', options: ['She is taller than her sister.', 'She is more taller than her sister.'], correct: 0, explanation: 'taller than.' },
+        { text: 'Select the correct sentence:', options: ['This car is much more expensive than that one.', 'This car is very more expensive than that one.'], correct: 0, explanation: 'much more expensive.' },
+      ],
+    },
+  },
 ];
+
