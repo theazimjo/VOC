@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { useAvatar } from '../../hooks/useAvatar';
-import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical, User } from 'lucide-react';
 import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
@@ -43,7 +43,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
 
   const handleProfileClick = (e) => {
     e.stopPropagation();
-    if (collapsed) {
+    if (collapsed && onToggle) {
       onToggle();
     }
     navigate('/profile');
@@ -77,27 +77,10 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
           <div 
             className="sidebar-logo-wrapper" 
             title={collapsed ? t('nav.expand') : t('nav.collapse')}
+            style={{ cursor: 'pointer' }}
           >
             <VocLogo collapsed={collapsed} onClick={onToggle} />
           </div>
-
-          <motion.button
-            className="sidebar-edge-toggle-btn"
-            onClick={onToggle}
-            aria-label={collapsed ? t('nav.expand') : t('nav.collapse')}
-            title={collapsed ? t('nav.expand') : t('nav.collapse')}
-            whileHover={{ scale: 1.14 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-          >
-            <motion.span
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              animate={{ rotate: collapsed ? 180 : 0 }}
-              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <ChevronLeft size={15} strokeWidth={2.4} />
-            </motion.span>
-          </motion.button>
         </div>
 
         {/* Navigation */}
