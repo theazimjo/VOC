@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { grammarPathSections } from '../../data/grammarPathData';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { isPassed, saveReviewComplete } from '../../utils/grammarPathProgress';
+import { getFormattedExplanation } from '../../utils/grammarExplanationTranslator';
+import { formatQuestionText, formatOptionText } from '../../utils/grammarQuestionTranslator';
 import './GrammarTopic.css';
 import './GrammarPath.css';
 
@@ -27,7 +29,8 @@ function shuffleOptions(question) {
 export default function GrammarPathReview() {
   const { sectionId } = useParams();
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isRu = language === 'ru';
 
   const section = grammarPathSections.find((s) => s.id === sectionId);
 
@@ -73,11 +76,11 @@ export default function GrammarPathReview() {
     setAnswers((prev) => [
       ...prev,
       {
-        questionText: question.text,
+        questionText: formatQuestionText(question.text, language),
         selected: idx,
         correct: shuffled.correct,
         isCorrect,
-        explanation: question.explanation,
+        explanation: question.explanationRu || getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz'),
         options: shuffled.options,
       },
     ]);
@@ -158,8 +161,8 @@ export default function GrammarPathReview() {
                 <div key={i} className="review-item">
                   <p className="review-question">{a.questionText}</p>
                   <div className="review-options-row">
-                    <span className="review-wrong-answer">✗ {a.options[a.selected]}</span>
-                    <span className="review-correct-answer">✓ {a.options[a.correct]}</span>
+                    <span className="review-wrong-answer">✗ {formatOptionText(a.options[a.selected], language)}</span>
+                    <span className="review-correct-answer">✓ {formatOptionText(a.options[a.correct], language)}</span>
                   </div>
                   {a.explanation && <p className="review-explanation">💡 {a.explanation}</p>}
                 </div>
@@ -186,7 +189,7 @@ export default function GrammarPathReview() {
       </div>
 
       <div className="clean-quiz-body">
-        <p className="clean-question-text">{question.text}</p>
+        <p className="clean-question-text">{formatQuestionText(question.text, language)}</p>
         <div className="clean-options-list">
           {(shuffled?.options || []).map((opt, idx) => {
             let cls = 'clean-option-btn';
@@ -200,7 +203,7 @@ export default function GrammarPathReview() {
             return (
               <button key={idx} className={cls} onClick={() => handleSelect(idx)} disabled={answered}>
                 <span className="option-left-group">
-                  <span className="option-text-only">{opt}</span>
+                  <span className="option-text-only">{formatOptionText(opt, language)}</span>
                 </span>
                 {answered && idx === shuffled.correct && <span className="option-badge-icon correct-badge">✓</span>}
                 {answered && idx === selected && idx !== shuffled.correct && <span className="option-badge-icon wrong-badge">✗</span>}
@@ -211,7 +214,7 @@ export default function GrammarPathReview() {
 
         {answered && question.explanation && (
           <p className="clean-explanation-text" style={{ marginBottom: 'var(--space-lg)' }}>
-            💡 {question.explanation}
+            💡 {question.explanationRu || getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz')}
           </p>
         )}
 

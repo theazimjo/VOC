@@ -5,6 +5,7 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import { isPassed, saveLessonComplete } from '../../utils/grammarPathProgress';
 import { speakWord } from '../../utils/helpers';
 import { getFormattedExplanation } from '../../utils/grammarExplanationTranslator';
+import { formatQuestionText, formatOptionText } from '../../utils/grammarQuestionTranslator';
 import './GrammarTopic.css';
 import './GrammarPath.css';
 
@@ -158,34 +159,7 @@ function translateExampleTranslation(translation, isRu) {
   return map[translation] || getFormattedExplanation(translation, 'ru');
 }
 
-function formatQuestionText(text, lang) {
-  if (!text) return text;
-  let formatted = text;
-  if (lang === 'ru') {
-    formatted = formatted
-      .replace(/^"Men" so'zini ingliz tilida qanday aytamiz\?/i, 'Как сказать "я" по-английски?')
-      .replace(/^"Sen" \/ "Siz" so'zini ingliz tilida qanday aytamiz\?/i, 'Как сказать "ты / вы" по-английски?')
-      .replace(/^"U" \(erkak\) so'zini ingliz tilida qanday aytamiz\?/i, 'Как сказать "он" (для мужчин) по-английски?')
-      .replace(/^"U" \(ayol\) so'zini ingliz tilida qanday aytamiz\?/i, 'Как сказать "она" (для женщин) по-английски?')
-      .replace(/^"U" \(narsa\/hayvon\) so'zini ingliz tilida qanday aytamiz\?/i, 'Как сказать "оно/он" (предмет/животное) по-английски?')
-      .replace(/^"Biz" so'zini ingliz tilida qanday aytamiz\?/i, 'Как сказать "мы" по-английски?')
-      .replace(/^"Ular" so'zini ingliz tilida qanday aytamiz\?/i, 'Как сказать "они" по-английски?')
-      .replace(/Agar o'zingiz haqingizda gapirsangiz, qaysi olmoshni ishlatasiz\?/i, 'Какое местоимение вы используете, когда говорите о себе?')
-      .replace(/Suhbatdoshingizga to'g'ridan-to'g'ri murojaat qilsangiz, qaysi olmoshni ishlatasiz\?/i, 'Какое местоимение вы используете при прямом обращении к собеседнику?')
-      .replace(/Tom haqida gapirsangiz \(Tom — erkak ism\), qaysi olmoshni ishlatasiz\?/i, 'Какое местоимение вы используете для Тома (мужское имя)?')
-      .replace(/Anna haqida gapirsangiz \(Anna — ayol ism\), qaysi olmoshni ishlatasiz\?/i, 'Какое местоимение вы используете для Анны (женское имя)?')
-      .replace(/Bir kitob haqida gapirsangiz, qaysi olmoshni ishlatasiz\?/i, 'Какое местоимение вы используете для одной книги?')
-      .replace(/O'zingiz va sinfdoshlaringiz haqida gapirsangiz, qaysi olmoshni ishlatasiz\?/i, 'Какое местоимение вы используете для себя и одноклассников?')
-      .replace(/Tom va Ali haqida gapirsangiz, qaysi olmoshni ishlatasiz\?/i, 'Какое местоимение вы используете для Тома и Али?')
-      .replace(/Choose the correct sentence:/i, 'Выберите правильное предложение:')
-      .replace(/Choose the correct question:/i, 'Выберите правильный вопрос:');
-  } else {
-    formatted = formatted
-      .replace(/Choose the correct sentence:/i, 'To\'g\'ri gapni tanlang:')
-      .replace(/Choose the correct question:/i, 'To\'g\'ri savolni tanlang:');
-  }
-  return formatted;
-}
+
 
 function formatRuleText(text) {
   if (!text) return text;
@@ -523,8 +497,8 @@ export default function GrammarPathLesson() {
                 <div key={i} className="review-item">
                   <p className="review-question">{a.questionText}</p>
                   <div className="review-options-row">
-                    <span className="review-wrong-answer">✗ {a.options[a.selected]}</span>
-                    <span className="review-correct-answer">✓ {a.options[a.correct]}</span>
+                    <span className="review-wrong-answer">✗ {formatOptionText(a.options[a.selected], language)}</span>
+                    <span className="review-correct-answer">✓ {formatOptionText(a.options[a.correct], language)}</span>
                   </div>
                   {a.explanation && <p className="review-explanation">💡 {a.explanation}</p>}
                 </div>
@@ -566,7 +540,7 @@ export default function GrammarPathLesson() {
             return (
               <button key={idx} className={cls} onClick={() => handleSelect(idx)} disabled={answered}>
                 <span className="option-left-group">
-                  <span className="option-text-only">{opt}</span>
+                  <span className="option-text-only">{formatOptionText(opt, language)}</span>
                 </span>
                 {answered && idx === shuffled.correct && <span className="option-badge-icon correct-badge">✓</span>}
                 {answered && idx === selected && idx !== shuffled.correct && <span className="option-badge-icon wrong-badge">✗</span>}
