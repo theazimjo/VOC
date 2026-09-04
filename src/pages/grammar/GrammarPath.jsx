@@ -87,8 +87,8 @@ function buildNodes(sections, progress) {
       const lessonCompleted = !!progress.completedLessons[lesson.id];
       const practiceCompleted = !!progress.completedPractices[lesson.id];
       const practiceData = progress.completedPractices[lesson.id];
-      // A lesson node is considered completed when its theory/lesson is completed
-      const isBothDone = lessonCompleted;
+      // A lesson node is considered completed ONLY when BOTH theory and practice are completed
+      const isBothDone = lessonCompleted && practiceCompleted;
 
       nodes.push({
         kind: 'hub',

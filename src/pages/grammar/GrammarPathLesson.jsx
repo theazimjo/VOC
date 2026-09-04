@@ -250,11 +250,7 @@ export default function GrammarPathLesson() {
           handleStartUnit();
         } else if (phase === 'passed') {
           e.preventDefault();
-          if (nextLesson) {
-            navigate(`/grammar/path/lesson/${nextLesson.id}`);
-          } else {
-            handleExit();
-          }
+          navigate(`/grammar/path/practice/${lesson.id}`);
         } else if (phase === 'failed') {
           e.preventDefault();
           handleRetry();
@@ -501,13 +497,9 @@ export default function GrammarPathLesson() {
 
           <div className="results-actions">
             {passed ? (
-              nextLesson ? (
-                <button className="btn btn-primary" onClick={() => navigate(`/grammar/path/lesson/${nextLesson.id}`)}>
-                  {t('grammar.pathNextLesson')}
-                </button>
-              ) : (
-                <button className="btn btn-primary" onClick={handleExit}>{t('grammar.pathBackToPath')}</button>
-              )
+              <button className="btn btn-primary" onClick={() => navigate(`/grammar/path/practice/${lesson.id}`)}>
+                {isRu ? '🎯 Начать практику' : '🎯 Mashqni bajarish'} →
+              </button>
             ) : (
               <button className="btn btn-primary" onClick={handleRetry}>{t('grammar.tryAgain')}</button>
             )}
