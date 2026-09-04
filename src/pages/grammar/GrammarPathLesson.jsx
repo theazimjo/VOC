@@ -315,7 +315,7 @@ export default function GrammarPathLesson() {
         selected: idx,
         correct: shuffled.correct,
         isCorrect,
-        explanation: getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz'),
+        explanation: question.explanationRu || getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz'),
         options: shuffled.options,
       },
     ]);
@@ -450,7 +450,9 @@ export default function GrammarPathLesson() {
               <div className="gpl-points-list">
                 {unit.teach.points.map((pt, idx) => (
                   <div key={idx} className="gpl-point-item">
-                    <span className="gpl-point-rule">{formatRuleText(isRu ? getFormattedExplanation(pt.rule, 'ru') : pt.rule)}</span>
+                    <span className="gpl-point-rule">
+                      {formatRuleText(isRu ? (pt.ruleRu || getFormattedExplanation(pt.rule, 'ru')) : pt.rule)}
+                    </span>
                     {pt.example && <span className="gpl-point-example">{pt.example}</span>}
                   </div>
                 ))}
@@ -575,7 +577,7 @@ export default function GrammarPathLesson() {
 
         {answered && question.explanation && (
           <p className="clean-explanation-text" style={{ marginBottom: 'var(--space-lg)' }}>
-            💡 {getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz')}
+            💡 {question.explanationRu || getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz')}
           </p>
         )}
 

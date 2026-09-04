@@ -228,11 +228,11 @@ export default function GrammarPathPractice() {
     setAnswers((prev) => [
       ...prev,
       {
-        questionText: formatQuestionText(question.text, isRu),
+        questionText: formatQuestionText(question.text, language),
         selected: idx,
         correct: shuffled.correct,
         isCorrect,
-        explanation: getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz'),
+        explanation: question.explanationRu || getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz'),
         options: shuffled.options,
       },
     ]);
@@ -346,7 +346,7 @@ export default function GrammarPathPractice() {
       </div>
 
       <div className="clean-quiz-body">
-        <p className="clean-question-text">{formatQuestionText(question.text, isRu)}</p>
+        <p className="clean-question-text">{formatQuestionText(question.text, language)}</p>
         <div className="clean-options-list">
           {(shuffled?.options || []).map((opt, idx) => {
             let cls = 'clean-option-btn';
@@ -371,7 +371,7 @@ export default function GrammarPathPractice() {
 
         {answered && question.explanation && (
           <p className="clean-explanation-text" style={{ marginBottom: 'var(--space-lg)' }}>
-            💡 {getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz')}
+            💡 {question.explanationRu || getFormattedExplanation(question.explanation, isRu ? 'ru' : 'uz')}
           </p>
         )}
 

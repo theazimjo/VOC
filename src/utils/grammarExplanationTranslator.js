@@ -324,6 +324,84 @@ const EXACT_MAP_RU = {
   '"They" inkorida: do not (don\'t).': 'В отрицании с "They": do not (don\'t).',
   '"They" savolida: Do they...?': 'В вопросе с "They": Do they...?',
   '"They" inkorida: don\'t.': 'В отрицании с "They": don\'t.',
+
+  // Grammar Path - additional rule & exercise translations
+  'Savolda "is" oldinga chiqadi: Is she happy?': 'В вопросе "is" выносится вперед: Is she happy?',
+  'Savolda "am" oldinga chiqadi: Am I late?': 'В вопросе "am" выносится вперед: Am I late?',
+  '"to be" "What" dan keyin darrov keladi: What is this?': '"to be" идет сразу после "What": What is this?',
+  '"to be" "How" dan keyin darrov keladi: How is the weather?': '"to be" идет сразу после "How": How is the weather?',
+  'Ko\'pchilik otlarga shunchaki -s qo\'shiladi: books.': 'К большинству существительных просто добавляется -s: books.',
+  '"cars" ko\'plikda bo\'lgani uchun "are" keladi.': 'Поскольку "cars" во множественном числе, используется "are".',
+  '-s bilan tugagani uchun -es qo\'shiladi: buses.': 'Так как оканчивается на -s, добавляется -es: buses.',
+  '-x bilan tugagani uchun -es qo\'shiladi: boxes.': 'Так как оканчивается на -x, добавляется -es: boxes.',
+  '-sh bilan tugagani uchun -es qo\'shiladi: dishes.': 'Так как оканчивается на -sh, добавляется -es: dishes.',
+  '-ch bilan tugagani uchun -es qo\'shiladi: watches.': 'Так как оканчивается на -ch, добавляется -es: watches.',
+  '-es qoidasidagi so\'zlarda -es [iz] tovushini beradi.': 'В словах с правилом -es окончание произносится как [iz].',
+  '-ss bilan tugagan: glasses.': 'Оканчивается на -ss: glasses.',
+  '-ss bilan tugagani uchun: classes.': 'Так как оканчивается на -ss: classes.',
+  '-ch bilan tugagani uchun: sandwiches.': 'Так как оканчивается на -ch: sandwiches.',
+  'unli (o) + y bo\'lgani uchun shunchaki -s: boys.': 'Так как гласная (o) + y, просто добавляется -s: boys.',
+  '-fe bilan tugagan: knives.': 'Оканчивается на -fe: knives.',
+  'roof — istisno so\'z, shunchaki -s qo\'shiladi: roofs.': 'roof — слово-исключение, просто добавляется -s: roofs.',
+  'chef — istisno so\'z: chefs.': 'chef — слово-исключение: chefs.',
+  'Doimiy ko\'plik otlar bilan "are" ishlatiladi.': 'С существительными, употребляемыми только во множественном числе, используется "are".',
+  'qaychi uchun: a pair of scissors.': 'для ножниц: a pair of scissors.',
+  'book [b] undosh tovush bilan boshlanadi: a book.': 'book начинается со согласного звука [b]: a book.',
+  'dog [d] undosh tovush bilan boshlangani uchun "a" qo\'yiladi.': 'Поскольку dog начинается со согласного звука [d], ставится "a".',
+  'pen undosh tovush [p] bilan boshlanadi: a pen.': 'pen начинается со согласного звука [p]: a pen.',
+  'doctor [d] undosh tovush: a doctor.': 'doctor согласный звук [d]: a doctor.',
+  'big [b] undosh tovush bilan boshlangani uchun "a" qo\'yiladi.': 'Поскольку big начинается со согласного звука [b], ставится "a".',
+  'apple [æ] unli tovush bilan boshlanadi: an apple.': 'apple начинается с гласного звука [æ]: an apple.',
+  'egg [e] unli tovush: an egg.': 'egg гласный звук [e]: an egg.',
+  'honest [onist] unli tovush bilan boshlanadi: an honest boy.': 'honest [onist] начинается с гласного звука: an honest boy.',
+  'university [yu] undosh tovush bilan boshlanadi: a university.': 'university [yu] начинается со согласного звука: a university.',
+  'uniform [yu] undosh tovush: a uniform.': 'uniform [yu] согласный звук: a uniform.',
+  'umbrella [ʌ] unli tovush: an umbrella.': 'umbrella [ʌ] гласный звук: an umbrella.',
+  'actor [æ] unli tovush: an actor.': 'actor [æ] гласный звук: an actor.',
+  'interesting [i] unli tovush: an interesting book.': 'interesting [i] гласный звук: an interesting book.',
+  'Dog ikkinchi marta aytilgani uchun u aniq: The dog.': 'Так как Dog упоминается второй раз, оно конкретно: The dog.',
+  'Musiqa asbobi bilan: play the piano.': 'С музыкальным инструментом: play the piano.',
+  'Musiqa asbobi bilan: play the guitar.': 'С музыкальным инструментом: play the guitar.',
+  'honest [o] unli tovush: an honest person.': 'honest [o] гласный звук: an honest person.',
+  'Yaqindagi birlik narsa uchun: this.': 'Для близкого предмета в единственном числе: this.',
+  'Uzoqdagi birlik narsa uchun: that.': 'Для удаленного предмета в единственном числе: that.',
+  'Yaqindagi narsa uchun: This.': 'Для близкого предмета: This.',
+  'Yaqindagi ko\'plik uchun: these.': 'Для близких предметов во множественном числе: these.',
+  'Uzoqdagi ko\'plik uchun: those.': 'Для удаленных предметов во множественном числе: those.',
+  'Egalik uchun "my" ishlatiladi.': 'Для выражения принадлежности используется "my".',
+  'Egalik uchun apostrofsiz "its" ishlatiladi.': 'Для выражения принадлежности используется "its" без апострофа.',
+  'birlik uchun: It is.': 'для единственного числа: It is.',
+  'ko\'plik uchun: They are.': 'для множественного числа: They are.',
+  'apple [æ] unli tovush: an apple.': 'apple гласный звук [æ]: an apple.',
+  'phone [f] undosh tovush: a phone.': 'phone согласный звук [f]: a phone.',
+  'I, you, we, they bilan fe\'l o\'zgarishsiz keladi.': 'С I, you, we, they глагол употребляется без изменений.',
+  'Ravishlar asosiy fe\'ldan OLDIN keladi.': 'Наречия ставятся ПЕРЕД основным глаголом.',
+  'sifat (tired) bilan: am.': 'с прилагательным (tired): am.',
+  'She bilan "is" ishlatiladi.': 'С местоимением She используется "is".',
+  'They bilan "are" ishlatiladi.': 'С местоимением They используется "are".',
+  'Aniq soat vaqti bilan "at" ishlatiladi.': 'С точным временем используется "at".',
+  'Hafta kuni bilan "on" keladi.': 'С днями недели используется "on".',
+  'Aniq sana bilan "on" keladi.': 'С точной датой используется "on".',
+  'Fasl bilan "in" keladi: in summer.': 'С временами года используется "in": in summer.',
+  'Uy raqami borligi uchun "at" ishlatiladi.': 'При наличии номера дома используется "at".',
+  'Sirt (poll) bilan "on" ishlatiladi.': 'С поверхностями (пол) используется "on".',
+  'Faqat ko\'cha nomi bilan "on" ishlatiladi.': 'Только с названием улицы используется "on".',
+  'Qavat bilan "on" ishlatiladi.': 'С этажом используется "on".',
+  'Shahar nomi bilan "in" keladi.': 'С названиями городов используется "in".',
+  'Hafta kuni bilan "on" ishlatiladi.': 'С днями недели используется "on".',
+  '"I" bilan o\'tgan zamonda "was" ishlatiladi.': 'С "I" в прошедшем времени используется "was".',
+  '"I" bilan "was" keladi.': 'С "I" используется "was".',
+  '"We" bilan o\'tgan zamonda "were" ishlatiladi.': 'С "We" в прошедшем времени используется "were".',
+  '"You" bilan doim "were" ishlatiladi.': 'С "You" всегда используется "were".',
+  '"She" savolida "Was" oldinga chiqadi.': 'В вопросе с "She" выносится вперед "Was".',
+  '"You" savolida "Were" oldinga chiqadi.': 'В вопросе с "You" выносится вперед "Were".',
+  'Past Simple da muntazam fe\'lga -ed qo\'shiladi: watched.': 'В Past Simple к правильным глаголам добавляется -ed: watched.',
+  't bilan tugagani uchun wanted /ɪd/ deb o\'qiladi.': 'Так как оканчивается на t, wanted произносится как /ɪd/.',
+  'Did borligi uchun fe\'l V1 shaklda: call.': 'При наличии Did глагол используется в форме V1: call.',
+  '"I" bilan "was reading" ishlatiladi.': 'С "I" используется "was reading".',
+  '"They" bilan "were playing".': 'С "They" используется "were playing".',
+  'She bilan: How long has she been living...': 'С местоимением She: How long has she been living...',
+  'Joy/muassasa uchun: in our school.': 'Для места/учреждения: in our school.',
 };
 
 export function getFormattedExplanation(explanation, lang = 'uz') {
@@ -339,6 +417,17 @@ export function getFormattedExplanation(explanation, lang = 'uz') {
 
   // 2. Pattern replacements for Uzbek explanations
   text = text
+    .replace(/Savolda "(.*?)" oldinga chiqadi:\s*(.*)/gi, 'В вопросе "$1" выносится вперед: $2')
+    .replace(/(.*?) undosh tovush bilan boshlangani uchun "(.*?)" qo'yiladi\./gi, 'Поскольку $1 начинается со согласного звука, ставится "$2".')
+    .replace(/(.*?) undosh tovush bilan boshlanadi:\s*(.*)/gi, '$1 начинается со согласного звука: $2')
+    .replace(/(.*?) unli tovush bilan boshlanadi:\s*(.*)/gi, '$1 начинается с гласного звука: $2')
+    .replace(/(.*?) unli tovush:\s*(.*)/gi, '$1 гласный звук: $2')
+    .replace(/(.*?) undosh tovush:\s*(.*)/gi, '$1 согласный звук: $2')
+    .replace(/(.*?) bilan tugagani uchun -es qo'shiladi:\s*(.*)/gi, 'Так как оканчивается на $1, добавляется -es: $2')
+    .replace(/(.*?) bilan tugagani uchun:\s*(.*)/gi, 'Так как оканчивается на $1: $2')
+    .replace(/(.*?) bilan tugagan:\s*(.*)/gi, 'Оканчивается на $1: $2')
+    .replace(/(.*?) — istisno so'z, shunchaki -s qo'shiladi:\s*(.*)/gi, '$1 — слово-исключение, просто добавляется -s: $2')
+    .replace(/(.*?) — istisno so'z:\s*(.*)/gi, '$1 — слово-исключение: $2')
     .replace(/^"wonder" \+ ha\/yo[ʻ']q noaniqlik:\s*whether\/if ishlatiladi,\s*"that" emas\./gi, 'После "wonder" для выражения сомнений (да/нет) используется "whether/if", а не "that".')
     .replace(/Noun clause ichida to[ʻ']gri gap tartibi \(S\+V\) ishlatiladi:\s*(.*)/gi, 'В придаточных предложениях (Noun clause) используется прямой порядок слов (S+V): $1')
     .replace(/Bilvosita ha\/yo[ʻ']q savollarda "(.*?)" ishlatiladi\./gi, 'В косвенных вопросах (да/нет) используется "$1".')
