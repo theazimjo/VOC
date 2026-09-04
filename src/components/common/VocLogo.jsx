@@ -13,12 +13,22 @@ export default function VocLogo({
     <motion.div 
       className={`voc-logo-brand voc-logo--${size} ${collapsed ? 'collapsed' : ''} ${className}`}
       onClick={onClick}
-      whileTap={{ scale: 0.94 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+      initial="initial"
+      whileHover="hover"
+      whileTap="tap"
     >
-      <div className="voc-logo-img-wrap" title="VOCABRY">
+      <motion.div 
+        className="voc-logo-img-wrap" 
+        title="VOCABRY"
+        variants={{
+          initial: { scale: 1, rotate: 0, y: 0 },
+          hover: { scale: 1.15, rotate: -8, y: -2 },
+          tap: { scale: 0.94, rotate: 0, y: 0 }
+        }}
+        transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+      >
         <img src="/logo.png" alt="VOCABRY" className="voc-logo-img" />
-      </div>
+      </motion.div>
       <AnimatePresence initial={false}>
         {!collapsed && (
           <motion.div 
@@ -28,7 +38,17 @@ export default function VocLogo({
             exit={{ opacity: 0, x: -8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
           >
-            <span className="voc-logo-title">VOCABRY</span>
+            <motion.span 
+              className="voc-logo-title"
+              variants={{
+                initial: { x: 0 },
+                hover: { x: 5 },
+                tap: { x: 0 }
+              }}
+              transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+            >
+              VOCABRY
+            </motion.span>
             {subTitle && <span className="voc-logo-subtitle">{subTitle}</span>}
           </motion.div>
         )}

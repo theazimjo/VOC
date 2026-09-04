@@ -17,13 +17,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 16px rgba(168, 85, 247, 0.25);
   flex-shrink: 0;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.35s ease,
-              border-color 0.35s ease;
-  background: #0b0f19;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  transition: box-shadow 0.35s ease,
+              border-color 0.35s ease,
+              background 0.35s ease;
 }
 
 .voc-logo-img {
@@ -31,7 +28,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .voc-logo-text-group {
@@ -39,6 +35,7 @@
   flex-direction: column;
   justify-content: center;
   line-height: 1.1;
+  overflow: visible;
 }
 
 .voc-logo-title {
@@ -46,15 +43,10 @@
   font-size: 1.28rem;
   font-weight: 850;
   letter-spacing: 0.07em;
-  background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 40%, #60a5fa 70%, #f3e8ff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 24px rgba(192, 132, 252, 0.25);
   display: inline-block;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-              letter-spacing 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+  overflow: visible;
+  padding-right: 6px;
+  transition: letter-spacing 0.35s ease,
               background-position 0.5s ease;
 }
 
@@ -62,36 +54,112 @@
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.05em;
-  color: #94a3b8;
   text-transform: uppercase;
   margin-top: 2px;
   transition: color 0.3s ease;
 }
 
-/* Hover effects (Gated for fine pointers) */
+/* ==========================================================================
+   THEME STYLES (Black / Dark, Sepia, Light)
+   ========================================================================== */
+
+/* 1. DARK / BLACK THEME (Android / Default) */
+[data-theme="android"] .voc-logo-img-wrap,
+:root:not([data-theme="sepia"]):not([data-theme="ios"]) .voc-logo-img-wrap {
+  background: #0b0f19;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.25);
+}
+
+[data-theme="android"] .voc-logo-title,
+:root:not([data-theme="sepia"]):not([data-theme="ios"]) .voc-logo-title {
+  background: linear-gradient(135deg, #f3e8ff 0%, #c084fc 40%, #60a5fa 70%, #f3e8ff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 24px rgba(192, 132, 252, 0.25);
+}
+
+[data-theme="android"] .voc-logo-subtitle,
+:root:not([data-theme="sepia"]):not([data-theme="ios"]) .voc-logo-subtitle {
+  color: #94a3b8;
+}
+
 @media (hover: hover) and (pointer: fine) {
-  .voc-logo-brand:hover .voc-logo-img-wrap {
-    transform: translateY(-2px) scale(1.08) rotate(-4deg);
-    box-shadow: 0 4px 22px rgba(168, 85, 247, 0.45), 0 0 32px rgba(96, 165, 250, 0.3);
-    border-color: rgba(192, 132, 252, 0.5);
+  [data-theme="android"] .voc-logo-brand:hover .voc-logo-img-wrap,
+  :root:not([data-theme="sepia"]):not([data-theme="ios"]) .voc-logo-brand:hover .voc-logo-img-wrap {
+    box-shadow: 0 4px 24px rgba(168, 85, 247, 0.5), 0 0 32px rgba(96, 165, 250, 0.35);
+    border-color: rgba(192, 132, 252, 0.6);
   }
 
-  .voc-logo-brand:hover .voc-logo-img {
-    transform: scale(1.06);
-  }
-
-  .voc-logo-brand:hover .voc-logo-title {
-    transform: translateX(2px) scale(1.03);
-    letter-spacing: 0.09em;
-    background-position: right center;
-  }
-
-  .voc-logo-brand:hover .voc-logo-subtitle {
+  [data-theme="android"] .voc-logo-brand:hover .voc-logo-subtitle,
+  :root:not([data-theme="sepia"]):not([data-theme="ios"]) .voc-logo-brand:hover .voc-logo-subtitle {
     color: #c084fc;
   }
+}
 
-  .voc-logo-brand:active {
-    transform: scale(0.96);
+
+/* 2. SEPIA THEME */
+[data-theme="sepia"] .voc-logo-img-wrap {
+  background: #4a3525;
+  border: 1px solid rgba(200, 100, 20, 0.35);
+  box-shadow: 0 2px 14px rgba(200, 100, 20, 0.2);
+}
+
+[data-theme="sepia"] .voc-logo-title {
+  background: linear-gradient(135deg, #3b2d1f 0%, #8c4a1b 45%, #c86414 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+[data-theme="sepia"] .voc-logo-subtitle {
+  color: #8c735b;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="sepia"] .voc-logo-brand:hover .voc-logo-img-wrap {
+    box-shadow: 0 4px 18px rgba(200, 100, 20, 0.4);
+    border-color: rgba(200, 100, 20, 0.6);
+  }
+
+  [data-theme="sepia"] .voc-logo-brand:hover .voc-logo-subtitle {
+    color: #c86414;
+  }
+}
+
+
+/* 3. LIGHT THEME (iOS) */
+[data-theme="ios"] .voc-logo-img-wrap {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+}
+
+[data-theme="ios"] .voc-logo-title {
+  background: linear-gradient(135deg, #0f172a 0%, #1e40af 55%, #007aff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+}
+
+[data-theme="ios"] .voc-logo-subtitle {
+  color: #64748b;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="ios"] .voc-logo-brand:hover .voc-logo-img-wrap {
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.35);
+    border-color: rgba(0, 122, 255, 0.5);
+  }
+
+  [data-theme="ios"] .voc-logo-brand:hover .voc-logo-subtitle {
+    color: #007aff;
   }
 }
 

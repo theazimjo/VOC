@@ -7,6 +7,8 @@ import { LayoutDashboard, BookOpen, GraduationCap, LogOut, Shield, FlaskConical,
 import VocLogo from '../common/VocLogo';
 import './Sidebar.css';
 
+const MotionNavLink = motion(NavLink);
+
 export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
@@ -88,7 +90,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
           {navItems.map((item) => {
             const IconComponent = item.icon;
             return (
-              <NavLink
+              <MotionNavLink
                 key={item.to}
                 to={item.to}
                 end={item.to === '/'}
@@ -97,6 +99,9 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                 }
                 onClick={onMobileClose}
                 title={collapsed ? item.label : undefined}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
               >
                 {({ isActive }) => (
                   <>
@@ -109,8 +114,11 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                     )}
                     <motion.span 
                       className="sidebar-link-icon"
-                      whileHover={{ scale: 1.15, rotate: -4 }}
-                      whileTap={{ scale: 0.9 }}
+                      variants={{
+                        initial: { scale: 1, rotate: 0, y: 0 },
+                        hover: { scale: 1.18, rotate: -8, y: -1 },
+                        tap: { scale: 0.92, rotate: 0, y: 0 }
+                      }}
                       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                     >
                       <IconComponent size={20} strokeWidth={2.2} />
@@ -124,13 +132,23 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                           exit={{ opacity: 0, x: -8 }}
                           transition={{ duration: 0.18, ease: 'easeOut' }}
                         >
-                          {item.label}
+                          <motion.span
+                            style={{ display: 'inline-block' }}
+                            variants={{
+                              initial: { x: 0 },
+                              hover: { x: 5 },
+                              tap: { x: 0 }
+                            }}
+                            transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                          >
+                            {item.label}
+                          </motion.span>
                         </motion.span>
                       )}
                     </AnimatePresence>
                   </>
                 )}
-              </NavLink>
+              </MotionNavLink>
             );
           })}
         </nav>
@@ -141,15 +159,18 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
             className="sidebar-profile-card"
             onClick={handleProfileClick}
             title={collapsed ? `${t('nav.profile')} (${t('nav.expand')})` : t('nav.profile')}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
           >
             <motion.div 
               className="sidebar-avatar"
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              variants={{
+                initial: { scale: 1, rotate: 0 },
+                hover: { scale: 1.14, rotate: -6 },
+                tap: { scale: 0.94, rotate: 0 }
+              }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
               {avatarSrc && !avatarError ? (
                 <img src={avatarSrc} alt={user?.displayName || 'Avatar'} />
@@ -167,10 +188,19 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                   exit={{ opacity: 0, x: -8 }}
                   transition={{ duration: 0.18, ease: 'easeOut' }}
                 >
-                  <div className="sidebar-user-name">
-                    {user?.displayName || t('nav.user')}
-                  </div>
-                  <div className="sidebar-user-email">{user?.email}</div>
+                  <motion.div
+                    variants={{
+                      initial: { x: 0 },
+                      hover: { x: 5 },
+                      tap: { x: 0 }
+                    }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                  >
+                    <div className="sidebar-user-name">
+                      {user?.displayName || t('nav.user')}
+                    </div>
+                    <div className="sidebar-user-email">{user?.email}</div>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -183,7 +213,7 @@ export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose
                 onClick={(e) => { e.stopPropagation(); handleLogout(); }}
                 aria-label={t('nav.logout')}
                 title={t('nav.logout')}
-                whileHover={{ scale: 1.12, rotate: -6 }}
+                whileHover={{ scale: 1.15, rotate: -8 }}
                 whileTap={{ scale: 0.9 }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
