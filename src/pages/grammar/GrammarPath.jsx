@@ -131,19 +131,18 @@ function buildNodes(sections, progress) {
     });
   });
 
-  // Step 2: Strict Sequential Unlocking (Chain)
-  // Index 0 is always unlocked. Each subsequent node (k) is unlocked ONLY IF node (k-1) is completed.
-  let canUnlock = true;
-
+  // Step 2: Unlocking Logic
+  // The first lesson of EVERY section (orderInSection === 1) is unlocked by default,
+  // allowing users to jump directly to any topic. Additionally, completing a node
+  // unlocks the next sequential node in the path.
   for (let k = 0; k < nodes.length; k++) {
     const node = nodes[k];
-    if (canUnlock) {
+    const isFirstLessonOfSection = node.kind === 'hub' && node.orderInSection === 1;
+    const isPrevNodeCompleted = k > 0 && nodes[k - 1].isCompleted;
+
+    if (k === 0 || isFirstLessonOfSection || isPrevNodeCompleted) {
       node.isLocked = false;
       node.isNext = !node.isCompleted;
-      // Stop unlocking future nodes as soon as an incomplete node is encountered
-      if (!node.isCompleted) {
-        canUnlock = false;
-      }
     } else {
       node.isLocked = true;
       node.isNext = false;
