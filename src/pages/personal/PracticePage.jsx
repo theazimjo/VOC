@@ -199,6 +199,25 @@ export default function PracticePage({ embedded = false, initialSource = null, i
     return () => clearTimeout(timerId);
   }, [step]);
 
+  // Handle keyboard Enter key on results and intro screens to click the primary action button
+  useEffect(() => {
+    if (step !== 'results' && step !== 'intro') return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (step === 'results') {
+          handleReset();
+        } else if (step === 'intro') {
+          setStep('practice');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [step]);
+
   const handleSelectSource = async (source) => {
     setSelectedSource(source);
     if (!user) return;

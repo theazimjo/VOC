@@ -171,6 +171,23 @@ export default function GrammarPathPractice() {
     }
   }, [finished, score, questions.length, lessonId]);
 
+  // Handle Enter key shortcut for answered questions and results screen
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        if (finished) {
+          e.preventDefault();
+          handleRetry();
+        } else if (answered) {
+          e.preventDefault();
+          handleNext();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [finished, answered, exIndex, questions.length]);
+
   if (!lesson) {
     return (
       <div className="grammar-topic-error">

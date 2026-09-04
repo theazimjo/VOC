@@ -241,6 +241,33 @@ export default function GrammarPathLesson() {
     }
   }, [phase]);
 
+  // Handle Enter key shortcut for teach, answered questions, and results screens
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        if (phase === 'teach') {
+          e.preventDefault();
+          handleStartUnit();
+        } else if (phase === 'passed') {
+          e.preventDefault();
+          if (nextLesson) {
+            navigate(`/grammar/path/lesson/${nextLesson.id}`);
+          } else {
+            handleExit();
+          }
+        } else if (phase === 'failed') {
+          e.preventDefault();
+          handleRetry();
+        } else if (phase === 'practice' && answered) {
+          e.preventDefault();
+          handleNext();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [phase, answered, nextLesson, exIndex, exercises.length, unitIndex, lesson]);
+
   if (!lesson) {
     return (
       <div className="grammar-topic-error">
