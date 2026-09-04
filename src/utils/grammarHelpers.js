@@ -53,3 +53,37 @@ export function getExerciseType(exerciseId, t) {
   };
   return types[parseInt(exerciseId, 10)] || types[1];
 }
+
+import { grammarData } from '../data/grammarData';
+import { russianGrammarData } from '../data/russianGrammarData';
+import { sicilianGrammarData } from '../data/sicilianGrammarData';
+import { greekGrammarData } from '../data/greekGrammarData';
+
+export function findGrammarTopic(level, topicId) {
+  if (!topicId) return null;
+  const datasets = [grammarData, russianGrammarData, sicilianGrammarData, greekGrammarData];
+
+  // 1. Try finding in the specified level across datasets
+  if (level) {
+    for (const ds of datasets) {
+      if (ds?.[level]?.topics) {
+        const found = ds[level].topics.find((t) => t?.id === topicId);
+        if (found) return found;
+      }
+    }
+  }
+
+  // 2. Search across ALL levels in ALL datasets (fallback)
+  for (const ds of datasets) {
+    if (!ds) continue;
+    for (const lvl of Object.keys(ds)) {
+      if (ds[lvl]?.topics) {
+        const found = ds[lvl].topics.find((t) => t?.id === topicId);
+        if (found) return found;
+      }
+    }
+  }
+
+  return null;
+}
+

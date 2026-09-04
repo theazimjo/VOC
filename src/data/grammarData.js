@@ -6741,7 +6741,7 @@ Agar reporting fe'l **o'tgan zamonda** bo'lsa (said, told), asosiy gapdagi zamon
         id: "relative-clauses",
         title: "Relative Clauses",
         icon: "🔗",
-        guide: `## Relative Clauses (Aniqlovchi ergash gaplar) — Sodiqjon darsligi bo'yicha to'liq qo'llanma
+        guide: `## Relative Clauses (Aniqlovchi ergash gaplar) — To'liq qo'llanma
 
 Relative clause — otdan keyin kelib, o'sha otni (**antecedent**) aniqlab yoki izohlab keladigan ergash gap.
 
@@ -8653,7 +8653,7 @@ Preposition'dan keyin doim -ing keladi, infinitive emas:
         id: "noun-clauses",
         title: "Noun Clauses",
         icon: "🔗",
-        guide: `## Noun Clauses (Ot ergash gaplar) — Sodiqjon darsligi bo'yicha to'liq qo'llanma
+        guide: `## Noun Clauses (Ot ergash gaplar) — To'liq qo'llanma
 
 Noun clause — gap ichida **OT (noun)** vazifasini bajaradigan ergash gap. Relative clause otni aniqlaydi, noun clause esa otning o'rnida turadi. Bu ikkisining eng asosiy farqi.
 
@@ -8688,7 +8688,7 @@ Manba savol turi qanday bo'lsa, bog'lovchi ham shunga mos bo'ladi:
 |---|---|---|
 | **that-clause** | that (tushishi mumkin) | I think **(that) she is right**. |
 | **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
-| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
+| **yes/no clause** | whether, if | I wonder **whether he passes the exam**. |
 
 ▸ *Where does he live?* → I don't know **where he lives**.
 ▸ *Does he live here?* → I don't know **whether he lives here**.
@@ -8907,7 +8907,7 @@ Noun clause никогда не выделяется запятыми и не м
 |---|---|---|
 | **that-clause** | that (может опускаться) | I think **(that) she is right**. |
 | **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
-| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
+| **yes/no clause** | whether, if | I wonder **whether he passes the exam**. |
 
 ▸ *Where does he live?* → I don't know **where he lives**.
 ▸ *Does he live here?* → I don't know **whether he lives here**.
@@ -10358,10 +10358,10 @@ Noun clause никогда не выделяется запятыми и не м
       }
 ,
 {
-        id: "sodiqjon-lesson-1",
+        id: "clauses-lesson-1",
         title: "Clauses & Sentences (Lesson 1)",
         icon: "🧩",
-        guide: `## 🧩 Lesson 1: Clauses & Sentence Structures (Gap turlari va tuzilishi) — Sodiqjon darsligi bo'yicha
+        guide: `## 🧩 Lesson 1: Clauses & Sentence Structures (Gap turlari va tuzilishi)
 
 Gap (Sentence) ning eng asosiy qurilish bloki bu **Clause (Ega va Kesimga ega ibora/gap bo'lagi)**. 
 
@@ -10430,7 +10430,7 @@ Clause — bu o'z ichida kamida **Subject (Ega)** va **Verb (Kesim)** tutgan so'
 | *The boy who won the prize is my friend.* | The boy / who | is / won | Complex Sentence (Adjective Clause) |
 | *She cooked, and he washed the dishes.* | She / he | cooked / washed | Compound Sentence |
 `,
-        guideRu: `## 🧩 Урок 1: Введение в предложения и придаточные части (Clauses) — По материалам Sodiqjon
+        guideRu: `## 🧩 Урок 1: Введение в предложения и придаточные части (Clauses)
 
 Основным строительным блоком предложения в английском языке является **Clause (придаточная или независимая часть предложения)**, содержащая подлежащее и сказуемое.
 
@@ -11646,10 +11646,10 @@ Clause — это группа слов, содержащая как миним�
 ]
       },
 {
-        id: "sodiqjon-lesson-2",
+        id: "clauses-lesson-2",
         title: "Relative Clauses Basics (Lesson 2)",
         icon: "🔗",
-        guide: `## 🔗 Lesson 2: Relative Clauses / Adjective Clauses Basics — Sodiqjon darsligi bo'yicha
+        guide: `## 🔗 Lesson 2: Relative Clauses / Adjective Clauses Basics
 
 **Adjective Clause (Relative Clause)** — otdan keyin kelib, o'sha ot haqida qo'shimcha ma'lumot beruvchi ergash gap. U sifat (adjective) kabi otni aniqlaydi.
 
@@ -11715,7 +11715,7 @@ Fe'lli birikmalarni qisqartirish mumkin:
 • *The man **standing** near the door is my uncle.* (= *who is standing*)
 • *The book **written** by Tom is popular.* (= *that was written*)
 `,
-        guideRu: `## 🔗 Урок 2: Основы относительных придаточных предложений (Relative / Adjective Clauses) — По материалам Sodiqjon
+        guideRu: `## 🔗 Урок 2: Основы относительных придаточных предложений (Relative / Adjective Clauses)
 
 **Adjective Clause (Relative Clause)** — это придаточное предложение, которое описывает существительное и стоит сразу после него.
 
@@ -12947,10 +12947,10 @@ Fe'lli birikmalarni qisqartirish mumkin:
 ]
       },
 {
-        id: "sodiqjon-lesson-3",
+        id: "clauses-lesson-3",
         title: "Omission & Prepositions (Lesson 3)",
         icon: "✂️",
-        guide: `## ✂️ Lesson 3: Omission of Relative Pronouns & Prepositions — Sodiqjon darsligi bo'yicha
+        guide: `## ✂️ Lesson 3: Omission of Relative Pronouns & Prepositions
 
 **Omission** — nisbiy olmoshlarni (*who, whom, which, that*) gapdan tushirib qoldirish.
 
@@ -13009,7 +13009,7 @@ Predlog gapda 2 xil o'rinda kelishi mumkin:
 | **Formal (Rasmiy)** | Preposition + whom / which | The friend **with whom** I traveled speaks French. |
 | **Everyday (Og'zaki)** | Pronoun omitted + Preposition at end | The friend **I traveled with** speaks French. |
 `,
-        guideRu: `## ✂️ Урок 3: Опущение относительных местоимений и предлоги — По материалам Sodiqjon
+        guideRu: `## ✂️ Урок 3: Опущение относительных местоимений и предлоги
 
 **Omission (Опущение)** — это исключение относительного местоимения (*who, whom, which, that*) из предложения без изменения его смысла.
 
@@ -14242,10 +14242,10 @@ Predlog gapda 2 xil o'rinda kelishi mumkin:
 ]
       },
 {
-        id: "sodiqjon-lesson-4",
+        id: "clauses-lesson-4",
         title: "Defining & Non-Defining (Lesson 4)",
         icon: "🌟",
-        guide: `## 🌟 Lesson 4: Defining & Non-Defining Relative Clauses — Sodiqjon darsligi bo'yicha
+        guide: `## 🌟 Lesson 4: Defining & Non-Defining Relative Clauses
 
 Ergash gaplar beradigan ma'lumotining muhimligiga ko'ra **Defining (Aniqlovchi)** va **Non-Defining (Izohlovchi)** turlarga bo'linadi.
 
@@ -14310,7 +14310,7 @@ Rasmiy va akademik ingliz tilida takrorlanishning oldini olish uchun miqdor so'z
 | **Defining** | ❌ No | ✅ Yes | Muhim ma'lumot (Essential) |
 | **Non-Defining** | ✅ Yes | ❌ NO! | Qo'shimcha ma'lumot (Extra) |
 `,
-        guideRu: `## 🌟 Урок 4: Определительные и нераспространяющие придаточные предложения — По материалам Sodiqjon
+        guideRu: `## 🌟 Урок 4: Определительные и нераспространяющие придаточные предложения
 
 В зависимости от важности предоставляемой информации относительные придаточные предложения делятся на **Defining (Определительные)** и **Non-Defining (Нераспространяющие / Изъяснительные)**.
 
@@ -15553,8 +15553,1155 @@ Rasmiy va akademik ingliz tilida takrorlanishning oldini olish uchun miqdor so'z
 ]
       }
 ,
+{
+  id: "clauses-subjunctive-master",
+  guideRu: `## 📋 Комплексное руководство: Придаточные предложения, Сослагательное наклонение и Анализ ошибок
 
+Данный урок содержит полный теоретический и практический разбор комплексных грамматических тем уровня **Intermediate 1 → Intermediate 2** (Worksheet Parts 1-6).
+
+---
+
+### 1. Noun Clauses (Придаточные изъяснительные)
+• **Порядок слов**: В придаточном изъяснительном предложении порядок слов **всегда как в утвердительном предложении** (Подлежащее + Сказуемое).
+  - *Неправильно*: I wonder where **does he live**.
+  - *Правильно*: I wonder where **he lives**.
+• **Косвенные вопросы (Да/Нет)**: При переводе вопроса типа "Да/Нет" в придаточное предложение используются союзы **if** или **whether**.
+  - *Did she accept the offer?* → Nobody knows **whether / if she accepted** the offer.
+
+---
+
+### 2. Subjunctive Form (Сослагательное наклонение / Наклонение требования)
+После определенных глаголов (*suggest, recommend, demand, insist, advise, request, propose, order*) и прилагательных (*essential, important, vital, crucial, necessary*) в придаточном предложении с **that** глагол всегда употребляется в **базовой форме (bare infinitive)**:
+• **Правило**: Глагол не принимает окончаний -s, -ed. Вместо форм am/is/are/was/were используется только **be**.
+  - The doctor advised that she **take** (не takes!) more rest.
+  - It is essential that every applicant **submit** (не submits!) their form.
+  - It is important that every member **be** (не is!) informed.
+  - It is vital that he **not forget** (не doesn't forget!) his passport.
+
+---
+
+### 3. Relative Clauses (Относительные придаточные предложения)
+• **who**: для людей (в роли подлежащего) — *The teacher who inspired me retired.*
+• **whom**: для людей (в роли дополнения) — *The suspect whom the police arrested was released.*
+• **whose**: принадлежность — *The woman whose daughter studies medicine is my aunt.*
+• **which**: для предметов и животных — *The novel which I borrowed was fascinating.*
+• **where**: для мест — *This is the park where we used to play.* (лишнее слово *there* использовать нельзя!)
+• **when**: для времени — *The year when I graduated was unforgettable.*
+• **why**: для причин — *The reason why he resigned is unknown.*
+
+---
+
+### 4. Adverb Clauses (Придаточные обстоятельственные)
+• **Уступка (Concession)**: *although, even though* (+ предложение), *despite, in spite of* (+ существительное/герундий)
+• **Причина (Reason)**: *because, since, as*
+• **Условие (Condition)**: *unless* (= если не), *provided that* (= только если)
+• **Цель (Purpose)**: *so that* (+ can/could/would)
+• **Время (Time)**: *as soon as, until, while*`,
+  title: "Clauses, Subjunctive & Error Master ",
+  icon: "📋",
+  guide: `## 📋 Clauses, Subjunctive & Error Correction
+
+Ushbu dars **Intermediate 1 → Intermediate 2** mashqlar to'plamining (Worksheet Parts 1-6) to'liq nazariy va amaliy tahlili hamda barcha qismlarga doir mashqlardan tashkil topgan.
+
+---
+
+### 1. Noun Clauses (Ega va To'ldiruvchi Ergash Gaplar)
+• **So'z tartibi**: Noun clause tarkibida so'z tartibi har doim **tasdiq gap** kabi bo'ladi (Ega + Fe'l).
+  - *Noto'g'ri*: I wonder where **does he live**.
+  - *To'g'ri*: I wonder where **he lives**.
+• **Ha/Yo'q savollari**: So'roq gap to'ldiruvchi ergash gapga aylanganda **if** yoki **whether** ishlatiladi.
+  - *Did she accept the offer?* → Nobody knows **whether / if she accepted** the offer.
+
+---
+
+### 2. Subjunctive Form (Gipotetik / Buyruq Mayli)
+Muayyan fe'llar (*suggest, recommend, demand, insist, advise, request, propose, order*) va sifatlar (*essential, important, vital, crucial, necessary*) dan keyin **that-clause** kelsa, fe'l har doim **asosiy shaklda (bare infinitive)** keladi:
+• **Qoida**: Fe'lga -s, -ed qo'shilmaydi. "To be" o'rniga faqat **be** ishlatiladi.
+  - The doctor advised that she **take** (takes emas!) more rest.
+  - It is essential that every applicant **submit** (submits emas!) their form.
+  - It is important that every member **be** (is emas!) informed.
+  - It is vital that he **not forget** (doesn't forget emas!) his passport.
+
+---
+
+### 3. Relative Clauses (Aniqlovchi Ergash Gaplar)
+• **who**: odamlar uchun (ega shaklida) — *The teacher who inspired me retired.*
+• **whom**: odamlar uchun (to'ldiruvchi shaklida) — *The suspect whom the police arrested was released.*
+• **whose**: tegishlilik/egalik — *The woman whose daughter studies medicine is my aunt.*
+• **which**: narsalar va hayvonlar uchun — *The novel which I borrowed was fascinating.*
+• **where**: joylar uchun — *This is the park where we used to play.* (ortiqcha *there* so'zi ishlatilmaydi!)
+• **when**: vaqt uchun — *The year when I graduated was unforgettable.*
+• **why**: sabab uchun — *The reason why he resigned is unknown.*
+
+---
+
+### 4. Adverb Clauses (Hollik Ergash Gaplar)
+• **Ziddiyat (Concession)**: *although, even though* (+ gap), *despite, in spite of* (+ ot/ing)
+• **Sabab (Reason)**: *because, since, as*
+• **Shart (Condition)**: *unless* (= if not), *provided that* (= only if)
+• **Maqsad (Purpose)**: *so that* (+ can/could/would)
+• **Vaqt (Time)**: *as soon as, until, while*`,
+  "questions": [
+    {
+      "id": 1,
+      "text": "___ he was ill, he went to work.",
+      "options": [
+        "Although",
+        "Because",
+        "Unless",
+        "Despite"
+      ],
+      "correct": 0,
+      "explanation": "'Although' is used for contrast before a full clause (subject + verb)."
+    },
+    {
+      "id": 2,
+      "text": "I will text you ___ I reach home.",
+      "options": [
+        "as soon as",
+        "despite",
+        "while",
+        "whereas"
+      ],
+      "correct": 0,
+      "explanation": "'As soon as' introduces a time clause."
+    },
+    {
+      "id": 3,
+      "text": "They stayed inside ___ the weather was terrible.",
+      "options": [
+        "because",
+        "whereas",
+        "however",
+        "despite"
+      ],
+      "correct": 0,
+      "explanation": "'Because' gives the reason for an action."
+    },
+    {
+      "id": 4,
+      "text": "___ you study harder, you won't improve.",
+      "options": [
+        "Unless",
+        "Since",
+        "While",
+        "Although"
+      ],
+      "correct": 0,
+      "explanation": "'Unless' means 'if you do not'."
+    },
+    {
+      "id": 5,
+      "text": "She practiced every day ___ she could win the competition.",
+      "options": [
+        "so that",
+        "although",
+        "despite",
+        "because of"
+      ],
+      "correct": 0,
+      "explanation": "'So that' expresses purpose (followed by subject + modal verb)."
+    },
+    {
+      "id": 6,
+      "text": "___ I was waiting for the bus, I met an old friend.",
+      "options": [
+        "While",
+        "Unless",
+        "Because of",
+        "Despite"
+      ],
+      "correct": 0,
+      "explanation": "'While' introduces a continuous background action."
+    },
+    {
+      "id": 7,
+      "text": "You may use my laptop ___ you return it tomorrow.",
+      "options": [
+        "provided that",
+        "whereas",
+        "despite",
+        "in spite of"
+      ],
+      "correct": 0,
+      "explanation": "'Provided that' means 'on condition that'."
+    },
+    {
+      "id": 8,
+      "text": "___ she lacks experience, she learns quickly.",
+      "options": [
+        "Although",
+        "Because",
+        "So that",
+        "Unless"
+      ],
+      "correct": 0,
+      "explanation": "'Although' introduces a clause of contrast."
+    },
+    {
+      "id": 9,
+      "text": "We waited there ___ the rain stopped.",
+      "options": [
+        "until",
+        "unless",
+        "despite",
+        "so that"
+      ],
+      "correct": 0,
+      "explanation": "'Until' indicates up to the time when."
+    },
+    {
+      "id": 10,
+      "text": "He whispered ___ nobody else could hear him.",
+      "options": [
+        "so that",
+        "such that",
+        "even though",
+        "despite"
+      ],
+      "correct": 0,
+      "explanation": "'So that' expresses purpose."
+    },
+    {
+      "id": 11,
+      "text": "Which sentence correctly uses the Subjunctive mood?",
+      "options": [
+        "The doctor advised that she takes rest.",
+        "The doctor advised that she take rest.",
+        "The doctor advised that she took rest.",
+        "The doctor advised that she taking rest."
+      ],
+      "correct": 1,
+      "explanation": "Subjunctive requires the base form of the verb: \"take\"."
+    },
+    {
+      "id": 12,
+      "text": "Choose the correct sentence:",
+      "options": [
+        "I wonder where does he live.",
+        "I wonder where he lives.",
+        "I wonder where lives he.",
+        "I wonder where do he live."
+      ],
+      "correct": 1,
+      "explanation": "Indirect questions/noun clauses use statement word order: \"where he lives\"."
+    },
+    {
+      "id": 13,
+      "text": "Identify the correct sentence with relative clause:",
+      "options": [
+        "The hotel where we stayed there was nice.",
+        "The hotel where we stayed was nice.",
+        "The hotel where stayed was nice.",
+        "The hotel which we stayed there was nice."
+      ],
+      "correct": 1,
+      "explanation": "Do not repeat \"there\" when using the relative adverb \"where\"."
+    },
+    {
+      "id": 14,
+      "text": "It is essential that every applicant ___ their form on time.",
+      "options": [
+        "submit",
+        "submits",
+        "submitted",
+        "submitting"
+      ],
+      "correct": 0,
+      "explanation": "After \"essential that\", use the base form of the verb (\"submit\")."
+    },
+    {
+      "id": 15,
+      "text": "The teacher insisted that all phones ___ off.",
+      "options": [
+        "be switched",
+        "are switched",
+        "switch",
+        "switched"
+      ],
+      "correct": 0,
+      "explanation": "Passive subjunctive uses \"be + past participle\": \"be switched\"."
+    },
+    {
+      "id": 16,
+      "text": "Choose the correct form:",
+      "options": [
+        "It is vital that he doesn't forget his passport.",
+        "It is vital that he not forget his passport.",
+        "It is vital that he won't forget his passport.",
+        "It is vital that he isn't forgetting his passport."
+      ],
+      "correct": 1,
+      "explanation": "Negative subjunctive uses \"not + base verb\": \"not forget\"."
+    },
+    {
+      "id": 17,
+      "text": "The woman ___ daughter studies medicine is my aunt.",
+      "options": [
+        "whose",
+        "who",
+        "whom",
+        "which"
+      ],
+      "correct": 0,
+      "explanation": "'Whose' indicates possession (her daughter)."
+    },
+    {
+      "id": 18,
+      "text": "The suspect ___ the police arrested was released later.",
+      "options": [
+        "whom",
+        "whose",
+        "where",
+        "when"
+      ],
+      "correct": 0,
+      "explanation": "'Whom' is used as the object of the relative clause."
+    },
+    {
+      "id": 19,
+      "text": "She explained ___ she was absent from lesson.",
+      "options": [
+        "to me why",
+        "me why",
+        "why to me",
+        "me that why"
+      ],
+      "correct": 0,
+      "explanation": "'Explain' takes 'to + person': explained to me why."
+    },
+    {
+      "id": 20,
+      "text": "The manager requested that the report ___ today.",
+      "options": [
+        "be submitted",
+        "is submitted",
+        "submits",
+        "submitted"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive passive: \"be submitted\"."
+    }
+  ],
+  "fillBlanks": [
+    {
+      "id": 1,
+      "text": "The teacher ___ inspired me retired last year.",
+      "options": [
+        "who",
+        "which",
+        "where",
+        "whose"
+      ],
+      "correct": 0,
+      "explanation": "'Who' refers to people (the teacher)."
+    },
+    {
+      "id": 2,
+      "text": "This is the park ___ we used to play as children.",
+      "options": [
+        "where",
+        "when",
+        "which",
+        "whose"
+      ],
+      "correct": 0,
+      "explanation": "'Where' refers to places."
+    },
+    {
+      "id": 3,
+      "text": "The novel ___ I borrowed from the library was fascinating.",
+      "options": [
+        "which",
+        "who",
+        "where",
+        "whose"
+      ],
+      "correct": 0,
+      "explanation": "'Which' refers to things."
+    },
+    {
+      "id": 4,
+      "text": "The woman ___ daughter studies medicine is my aunt.",
+      "options": [
+        "whose",
+        "who",
+        "whom",
+        "which"
+      ],
+      "correct": 0,
+      "explanation": "'Whose' indicates possession."
+    },
+    {
+      "id": 5,
+      "text": "The phone ___ he bought recently is already broken.",
+      "options": [
+        "which",
+        "who",
+        "where",
+        "whose"
+      ],
+      "correct": 0,
+      "explanation": "'Which' refers to objects."
+    },
+    {
+      "id": 6,
+      "text": "Winter is the season ___ many birds migrate south.",
+      "options": [
+        "when",
+        "where",
+        "which",
+        "whose"
+      ],
+      "correct": 0,
+      "explanation": "'When' refers to time periods."
+    },
+    {
+      "id": 7,
+      "text": "The researcher ___ discoveries changed science became famous.",
+      "options": [
+        "whose",
+        "who",
+        "which",
+        "where"
+      ],
+      "correct": 0,
+      "explanation": "'Whose' indicates possession of discoveries."
+    },
+    {
+      "id": 8,
+      "text": "The reason ___ he resigned is still unknown.",
+      "options": [
+        "why",
+        "where",
+        "when",
+        "which"
+      ],
+      "correct": 0,
+      "explanation": "'Why' refers to reasons."
+    },
+    {
+      "id": 9,
+      "text": "My cousin, ___ works in Germany, is visiting next month.",
+      "options": [
+        "who",
+        "which",
+        "whose",
+        "where"
+      ],
+      "correct": 0,
+      "explanation": "'Who' introduces non-defining relative clause about a person."
+    },
+    {
+      "id": 10,
+      "text": "The suspect ___ the police arrested was released later.",
+      "options": [
+        "whom",
+        "whose",
+        "where",
+        "when"
+      ],
+      "correct": 0,
+      "explanation": "'Whom' is the object pronoun."
+    },
+    {
+      "id": 11,
+      "text": "The doctor advised that she ___ (take) more rest.",
+      "options": [
+        "take",
+        "takes",
+        "took",
+        "taking"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive: base verb \"take\"."
+    },
+    {
+      "id": 12,
+      "text": "It is important that every member ___ (be) informed.",
+      "options": [
+        "be",
+        "is",
+        "was",
+        "being"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive to be: \"be\"."
+    },
+    {
+      "id": 13,
+      "text": "The manager requested that the report ___ (submit) today.",
+      "options": [
+        "be submitted",
+        "is submitted",
+        "submits",
+        "submitted"
+      ],
+      "correct": 0,
+      "explanation": "Passive subjunctive: \"be submitted\"."
+    },
+    {
+      "id": 14,
+      "text": "They recommended that he ___ (apply) immediately.",
+      "options": [
+        "apply",
+        "applies",
+        "applied",
+        "applying"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive: base verb \"apply\"."
+    },
+    {
+      "id": 15,
+      "text": "It is crucial that she ___ (arrive) early.",
+      "options": [
+        "arrive",
+        "arrives",
+        "arrived",
+        "arriving"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive: base verb \"arrive\"."
+    },
+    {
+      "id": 16,
+      "text": "The teacher insisted that all phones ___ (switch) off.",
+      "options": [
+        "be switched",
+        "are switched",
+        "switch",
+        "switched"
+      ],
+      "correct": 0,
+      "explanation": "Passive subjunctive: \"be switched\"."
+    },
+    {
+      "id": 17,
+      "text": "I suggest that the company ___ (expand) its services.",
+      "options": [
+        "expand",
+        "expands",
+        "expanded",
+        "expanding"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive: base verb \"expand\"."
+    },
+    {
+      "id": 18,
+      "text": "It is vital that he ___ (not / forget) his passport.",
+      "options": [
+        "not forget",
+        "doesn't forget",
+        "won't forget",
+        "not forgetting"
+      ],
+      "correct": 0,
+      "explanation": "Negative subjunctive: \"not forget\"."
+    },
+    {
+      "id": 19,
+      "text": "The judge ordered that the defendant ___ (appear) in court.",
+      "options": [
+        "appear",
+        "appears",
+        "appeared",
+        "appearing"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive: base verb \"appear\"."
+    },
+    {
+      "id": 20,
+      "text": "The committee proposed that new measures ___ (implement).",
+      "options": [
+        "be implemented",
+        "are implemented",
+        "implement",
+        "implemented"
+      ],
+      "correct": 0,
+      "explanation": "Passive subjunctive: \"be implemented\"."
+    }
+  ],
+  "scrambled": [
+    {
+      "id": 1,
+      "words": [
+        "nobody",
+        "knows",
+        "where",
+        "she",
+        "has",
+        "gone"
+      ],
+      "answer": "Nobody knows where she has gone.",
+      "explanation": "Noun clause with statement word order: where + subject + verb."
+    },
+    {
+      "id": 2,
+      "words": [
+        "we",
+        "do",
+        "not",
+        "know",
+        "why",
+        "they",
+        "canceled",
+        "the",
+        "meeting"
+      ],
+      "answer": "We do not know why they canceled the meeting.",
+      "explanation": "Indirect question: why + subject + verb."
+    },
+    {
+      "id": 3,
+      "words": [
+        "it",
+        "is",
+        "uncertain",
+        "whether",
+        "he",
+        "will",
+        "accept",
+        "the",
+        "offer"
+      ],
+      "answer": "It is uncertain whether he will accept the offer.",
+      "explanation": "Yes/no indirect question uses whether."
+    },
+    {
+      "id": 4,
+      "words": [
+        "the",
+        "manager",
+        "wants",
+        "to",
+        "know",
+        "who",
+        "made",
+        "this",
+        "mistake"
+      ],
+      "answer": "The manager wants to know who made this mistake.",
+      "explanation": "Noun clause with who as subject."
+    },
+    {
+      "id": 5,
+      "words": [
+        "they",
+        "are",
+        "investigating",
+        "what",
+        "caused",
+        "the",
+        "delay"
+      ],
+      "answer": "They are investigating what caused the delay.",
+      "explanation": "Noun clause: what + verb."
+    },
+    {
+      "id": 6,
+      "words": [
+        "I",
+        "wonder",
+        "if",
+        "she",
+        "completed",
+        "the",
+        "report"
+      ],
+      "answer": "I wonder if she completed the report.",
+      "explanation": "Indirect yes/no question using if."
+    },
+    {
+      "id": 7,
+      "words": [
+        "everyone",
+        "is",
+        "asking",
+        "when",
+        "the",
+        "project",
+        "will",
+        "begin"
+      ],
+      "answer": "Everyone is asking when the project will begin.",
+      "explanation": "Noun clause statement order: when + project + will begin."
+    },
+    {
+      "id": 8,
+      "words": [
+        "nobody",
+        "understands",
+        "why",
+        "the",
+        "prices",
+        "are",
+        "increasing"
+      ],
+      "answer": "Nobody understands why the prices are increasing.",
+      "explanation": "Noun clause: why + prices + are increasing."
+    },
+    {
+      "id": 9,
+      "words": [
+        "the",
+        "question",
+        "is",
+        "whether",
+        "this",
+        "problem",
+        "can",
+        "be",
+        "solved"
+      ],
+      "answer": "The question is whether this problem can be solved.",
+      "explanation": "Noun clause as subject complement."
+    },
+    {
+      "id": 10,
+      "words": [
+        "we",
+        "are",
+        "curious",
+        "how",
+        "he",
+        "learned",
+        "English",
+        "so",
+        "quickly"
+      ],
+      "answer": "We are curious how he learned English so quickly.",
+      "explanation": "Noun clause: how + subject + verb."
+    }
+  ],
+  "errorCorrection": [
+    {
+      "id": 1,
+      "text": "The student which won the competitions are my neighbor.",
+      "options": [
+        "which / are",
+        "who / is",
+        "whom / is",
+        "whose / are"
+      ],
+      "correct": 1,
+      "wrongPart": "which ... are",
+      "correction": "who won the competition is",
+      "explanation": "'Who' for people and 'is' for singular subject 'the student'."
+    },
+    {
+      "id": 2,
+      "text": "My father suggested that he takes a short break before the next lesson.",
+      "options": [
+        "takes",
+        "take",
+        "took",
+        "taking"
+      ],
+      "correct": 1,
+      "wrongPart": "takes",
+      "correction": "take",
+      "explanation": "Subjunctive mood after \"suggested that\" requires base verb \"take\"."
+    },
+    {
+      "id": 3,
+      "text": "A article who I read yesterday was extremely informative.",
+      "options": [
+        "A article who",
+        "An article which",
+        "An article who",
+        "An article whose"
+      ],
+      "correct": 1,
+      "wrongPart": "A article who",
+      "correction": "An article which",
+      "explanation": "'An' before vowel and 'which' for objects/articles."
+    },
+    {
+      "id": 4,
+      "text": "I wonder where does he live now.",
+      "options": [
+        "where does he live",
+        "where he lives",
+        "where do he live",
+        "where is he live"
+      ],
+      "correct": 1,
+      "wrongPart": "where does he live",
+      "correction": "where he lives",
+      "explanation": "Noun clauses use statement word order: where + subject + verb."
+    },
+    {
+      "id": 5,
+      "text": "Employees, who arrive late, must report to the manager.",
+      "options": [
+        ", who arrive late,",
+        "who arrive late",
+        "whom arrive late",
+        "which arrive late"
+      ],
+      "correct": 1,
+      "wrongPart": ", who arrive late,",
+      "correction": "who arrive late",
+      "explanation": "Defining relative clauses should not have commas."
+    },
+    {
+      "id": 6,
+      "text": "The hotel where we stayed there last summer was wonderful.",
+      "options": [
+        "where we stayed there",
+        "where we stayed",
+        "which we stayed there",
+        "when we stayed there"
+      ],
+      "correct": 1,
+      "wrongPart": "where we stayed there",
+      "correction": "where we stayed",
+      "explanation": "Remove redundant adverb \"there\" when using relative adverb \"where\"."
+    },
+    {
+      "id": 7,
+      "text": "It is essential that every applicant submits their form on time.",
+      "options": [
+        "submits",
+        "submit",
+        "submitted",
+        "submitting"
+      ],
+      "correct": 1,
+      "wrongPart": "submits",
+      "correction": "submit",
+      "explanation": "Subjunctive mood after \"essential that\": use base verb \"submit\"."
+    },
+    {
+      "id": 8,
+      "text": "Anyone which wishes to apply should fill out this form.",
+      "options": [
+        "which",
+        "who",
+        "whom",
+        "whose"
+      ],
+      "correct": 1,
+      "wrongPart": "which",
+      "correction": "who",
+      "explanation": "Use \"who\" for people (\"Anyone who...\")."
+    },
+    {
+      "id": 9,
+      "text": "The man whom bicycle was stolen reported it immediately.",
+      "options": [
+        "whom",
+        "whose",
+        "who",
+        "which"
+      ],
+      "correct": 1,
+      "wrongPart": "whom",
+      "correction": "whose",
+      "explanation": "Use \"whose\" for possession (his bicycle)."
+    },
+    {
+      "id": 10,
+      "text": "She explained me why she was absent from my lesson that day.",
+      "options": [
+        "explained me",
+        "explained to me",
+        "explains me",
+        "explaining me"
+      ],
+      "correct": 1,
+      "wrongPart": "explained me",
+      "correction": "explained to me",
+      "explanation": "Verb \"explain\" requires preposition \"to\" before the indirect object."
+    },
+    {
+      "id": 11,
+      "text": "The principal demanded that every student attends the meeting.",
+      "options": [
+        "attends",
+        "attend",
+        "attended",
+        "attending"
+      ],
+      "correct": 1,
+      "wrongPart": "attends",
+      "correction": "attend",
+      "explanation": "Subjunctive mood after \"demanded that\": use base verb \"attend\"."
+    },
+    {
+      "id": 12,
+      "text": "He asked me what did I want for dinner.",
+      "options": [
+        "what did I want",
+        "what I wanted",
+        "what do I want",
+        "what I want"
+      ],
+      "correct": 1,
+      "wrongPart": "what did I want",
+      "correction": "what I wanted",
+      "explanation": "Indirect question noun clause uses statement order and past tense harmony."
+    }
+  ],
+  "transform": [
+    {
+      "id": 1,
+      "text": "Combine using \"who\": \"The woman is my aunt. She is talking to the receptionist.\"",
+      "options": [
+        "The woman who is talking to the receptionist is my aunt.",
+        "The woman is my aunt who talking to receptionist.",
+        "The woman who talking is my aunt.",
+        "The woman is talking to receptionist who is my aunt."
+      ],
+      "correct": 0,
+      "explanation": "Relative clause \"who is talking to the receptionist\" modifies \"The woman\"."
+    },
+    {
+      "id": 2,
+      "text": "Combine using \"where\": \"I remember the place. We had lunch there.\"",
+      "options": [
+        "I remember the place where we had lunch.",
+        "I remember the place where we had lunch there.",
+        "I remember where place we had lunch.",
+        "I remember the place we had lunch there."
+      ],
+      "correct": 0,
+      "explanation": "Replace \"there\" with relative adverb \"where\"."
+    },
+    {
+      "id": 3,
+      "text": "Combine using \"although\": \"He was exhausted. He continued working.\"",
+      "options": [
+        "Although he was exhausted, he continued working.",
+        "He was exhausted although he continued working.",
+        "Although exhausted he was working.",
+        "He continued working although exhausted he was."
+      ],
+      "correct": 0,
+      "explanation": "Concession clause starting with \"Although\"."
+    },
+    {
+      "id": 4,
+      "text": "Combine using \"that\": \"Nobody understands the problem. It is frustrating.\"",
+      "options": [
+        "That nobody understands the problem is frustrating.",
+        "Nobody understands that the problem is frustrating.",
+        "It is frustrating that nobody understand problem.",
+        "That problem is frustrating nobody understands."
+      ],
+      "correct": 0,
+      "explanation": "Subject noun clause: \"That nobody understands the problem is frustrating.\""
+    },
+    {
+      "id": 5,
+      "text": "Combine using \"because\": \"The company expanded rapidly. It invested heavily in technology.\"",
+      "options": [
+        "The company expanded rapidly because it invested heavily in technology.",
+        "Because the company expanded rapidly it invested in technology.",
+        "The company invested in technology because expanded.",
+        "Because technology invested company expanded."
+      ],
+      "correct": 0,
+      "explanation": "Adverb clause of reason introduced by \"because\"."
+    },
+    {
+      "id": 6,
+      "text": "Combine using \"whose\": \"The boy won the prize. His invention impressed everyone.\"",
+      "options": [
+        "The boy whose invention impressed everyone won the prize.",
+        "The boy who invention impressed everyone won the prize.",
+        "The boy whose prize won impressed everyone.",
+        "The boy invention whose impressed everyone won prize."
+      ],
+      "correct": 0,
+      "explanation": "Possessive relative pronoun \"whose invention\"."
+    },
+    {
+      "id": 7,
+      "text": "Combine using \"whether\": \"I don't know. Has she accepted the offer?\"",
+      "options": [
+        "I don't know whether she has accepted the offer.",
+        "I don't know whether has she accepted the offer.",
+        "I don't know whether she accepted has offer.",
+        "Whether she accepted offer I don't know."
+      ],
+      "correct": 0,
+      "explanation": "Indirect question with whether + subject + verb."
+    },
+    {
+      "id": 8,
+      "text": "Combine using \"so that\": \"They left early. They wanted to catch the first train.\"",
+      "options": [
+        "They left early so that they could catch the first train.",
+        "They left early so that catch first train.",
+        "So that left early they caught first train.",
+        "They wanted catch first train so that left early."
+      ],
+      "correct": 0,
+      "explanation": "Adverb clause of purpose with \"so that\"."
+    },
+    {
+      "id": 9,
+      "text": "Combine using \"even though\": \"The restaurant was expensive. We ate there anyway.\"",
+      "options": [
+        "We ate at the restaurant even though it was expensive.",
+        "Even though we ate at restaurant it was expensive.",
+        "The restaurant was expensive even though we ate.",
+        "We ate expensive restaurant even though there."
+      ],
+      "correct": 0,
+      "explanation": "Adverb clause of contrast with \"even though\"."
+    },
+    {
+      "id": 10,
+      "text": "Combine using \"who\": \"The teacher congratulated the student. The student had achieved the highest score.\"",
+      "options": [
+        "The teacher congratulated the student who had achieved the highest score.",
+        "The teacher who congratulated student achieved highest score.",
+        "The student who teacher congratulated achieved score.",
+        "The teacher congratulated student who achieved."
+      ],
+      "correct": 0,
+      "explanation": "Relative clause \"who had achieved the highest score\"."
+    }
+  ],
+  "dialogue": [
+    {
+      "id": 1,
+      "situation": "In a staff meeting about upcoming changes.",
+      "dialogue": "A: Has the manager decided on the proposal?\nB: It is essential that the manager ___ the team before deciding.",
+      "options": [
+        "consult",
+        "consults",
+        "consulted",
+        "consulting"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive mood: \"essential that the manager consult\"."
+    },
+    {
+      "id": 2,
+      "situation": "Talking about a colleague who was absent.",
+      "dialogue": "A: Why wasn't Sara at work yesterday?\nB: Nobody knows ___.",
+      "options": [
+        "why she was absent",
+        "why was she absent",
+        "why she absent was",
+        "why is she absent"
+      ],
+      "correct": 0,
+      "explanation": "Noun clause statement word order: why she was absent."
+    },
+    {
+      "id": 3,
+      "situation": "Discussing a patient in a medical clinic.",
+      "dialogue": "A: What did the specialist say?\nB: The doctor recommended that the patient ___ in hospital.",
+      "options": [
+        "remain",
+        "remains",
+        "remained",
+        "remaining"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive mood: \"recommended that the patient remain\"."
+    },
+    {
+      "id": 4,
+      "situation": "Chatting about an old restaurant.",
+      "dialogue": "A: Do you remember this place?\nB: Yes, this is the restaurant ___ we celebrated your graduation.",
+      "options": [
+        "where",
+        "when",
+        "which",
+        "whose"
+      ],
+      "correct": 0,
+      "explanation": "Relative adverb \"where\" for places."
+    },
+    {
+      "id": 5,
+      "situation": "Discussing travel plans during bad weather.",
+      "dialogue": "A: Are we still going hiking tomorrow?\nB: We will go ___ it rains heavily.",
+      "options": [
+        "unless",
+        "because",
+        "although",
+        "so that"
+      ],
+      "correct": 0,
+      "explanation": "'Unless' means 'if it does not'."
+    },
+    {
+      "id": 6,
+      "situation": "A student asking the teacher about the test results.",
+      "dialogue": "A: When will our grades be published?\nB: The principal requested that all results ___ by Friday.",
+      "options": [
+        "be submitted",
+        "are submitted",
+        "submit",
+        "submitted"
+      ],
+      "correct": 0,
+      "explanation": "Passive subjunctive: \"be submitted\"."
+    },
+    {
+      "id": 7,
+      "situation": "Two friends talking about a new employee.",
+      "dialogue": "A: Who is that man over there?\nB: He is the scientist ___ discovery won the international award.",
+      "options": [
+        "whose",
+        "who",
+        "whom",
+        "which"
+      ],
+      "correct": 0,
+      "explanation": "Possessive relative pronoun \"whose discovery\"."
+    },
+    {
+      "id": 8,
+      "situation": "In an interview room.",
+      "dialogue": "A: Is the candidate ready?\nB: Yes, it is crucial that he ___ calm during the interview.",
+      "options": [
+        "remain",
+        "remains",
+        "remained",
+        "remaining"
+      ],
+      "correct": 0,
+      "explanation": "Subjunctive mood: \"crucial that he remain\"."
+    },
+    {
+      "id": 9,
+      "situation": "Discussing a technical glitch on a website.",
+      "dialogue": "A: Why is the page not loading?\nB: The IT team is investigating ___ caused the server crash.",
+      "options": [
+        "what",
+        "why",
+        "where",
+        "how"
+      ],
+      "correct": 0,
+      "explanation": "Noun clause with subject \"what\"."
+    },
+    {
+      "id": 10,
+      "situation": "Talking about a flight delay.",
+      "dialogue": "A: Did the airline explain the delay?\nB: Yes, they explained ___ the flight was rescheduled.",
+      "options": [
+        "to us why",
+        "us why",
+        "why to us",
+        "us that why"
+      ],
+      "correct": 0,
+      "explanation": "Structure: explained to us why."
+    }
+  ]
+}
     ]
   }
 };
-

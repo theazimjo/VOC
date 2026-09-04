@@ -1,12 +1,8 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { grammarData } from '../../data/grammarData';
-import { russianGrammarData } from '../../data/russianGrammarData';
-import { sicilianGrammarData } from '../../data/sicilianGrammarData';
-import { greekGrammarData } from '../../data/greekGrammarData';
+import { findGrammarTopic, getExerciseType } from '../../utils/grammarHelpers';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
-import { getExerciseType } from '../../utils/grammarHelpers';
 import { useLanguage } from '../../contexts/LanguageContext';
 import IosSpinner from '../../components/common/IosSpinner';
 import './GrammarExercises.css';
@@ -17,10 +13,7 @@ export default function GrammarExercises() {
   const { t } = useLanguage();
   const { stats: grammarStats, loading } = useGrammarStats();
 
-  const topic = grammarData[level]?.topics?.find((t) => t?.id === topicId) ||
-                russianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
-                sicilianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
-                greekGrammarData[level]?.topics?.find((t) => t?.id === topicId);
+  const topic = findGrammarTopic(level, topicId);
 
   useEffect(() => {
     window.scrollTo(0, 0);

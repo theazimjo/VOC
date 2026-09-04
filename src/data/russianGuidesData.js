@@ -1,5 +1,48 @@
 export const russianGuidesData = {
-  'sodiqjon-lesson-1': `## 🧩 Урок 1: Введение в предложения и придаточные части (Clauses) — По материалам Sodiqjon
+  'clauses-subjunctive-master': `## 📋 Комплексное руководство: Придаточные предложения, Сослагательное наклонение и Анализ ошибок
+
+Данный урок содержит полный теоретический и практический разбор комплексных грамматических тем уровня **Intermediate 1 → Intermediate 2** (Worksheet Parts 1-6).
+
+---
+
+### 1. Noun Clauses (Придаточные изъяснительные)
+• **Порядок слов**: В придаточном изъяснительном предложении порядок слов **всегда как в утвердительном предложении** (Подлежащее + Сказуемое).
+  - *Неправильно*: I wonder where **does he live**.
+  - *Правильно*: I wonder where **he lives**.
+• **Косвенные вопросы (Да/Нет)**: При переводе вопроса типа "Да/Нет" в придаточное предложение используются союзы **if** или **whether**.
+  - *Did she accept the offer?* → Nobody knows **whether / if she accepted** the offer.
+
+---
+
+### 2. Subjunctive Form (Сослагательное наклонение / Наклонение требования)
+После определенных глаголов (*suggest, recommend, demand, insist, advise, request, propose, order*) и прилагательных (*essential, important, vital, crucial, necessary*) в придаточном предложении с **that** глагол всегда употребляется в **базовой форме (bare infinitive)**:
+• **Правило**: Глагол не принимает окончаний -s, -ed. Вместо форм am/is/are/was/were используется только **be**.
+  - The doctor advised that she **take** (не takes!) more rest.
+  - It is essential that every applicant **submit** (не submits!) their form.
+  - It is important that every member **be** (не is!) informed.
+  - It is vital that he **not forget** (не doesn't forget!) his passport.
+
+---
+
+### 3. Relative Clauses (Относительные придаточные предложения)
+• **who**: для людей (в роли подлежащего) — *The teacher who inspired me retired.*
+• **whom**: для людей (в роли дополнения) — *The suspect whom the police arrested was released.*
+• **whose**: принадлежность — *The woman whose daughter studies medicine is my aunt.*
+• **which**: для предметов и животных — *The novel which I borrowed was fascinating.*
+• **where**: для мест — *This is the park where we used to play.* (лишнее слово *there* использовать нельзя!)
+• **when**: для времени — *The year when I graduated was unforgettable.*
+• **why**: для причин — *The reason why he resigned is unknown.*
+
+---
+
+### 4. Adverb Clauses (Придаточные обстоятельственные)
+• **Уступка (Concession)**: *although, even though* (+ предложение), *despite, in spite of* (+ существительное/герундий)
+• **Причина (Reason)**: *because, since, as*
+• **Условие (Condition)**: *unless* (= если не), *provided that* (= только если)
+• **Цель (Purpose)**: *so that* (+ can/could/would)
+• **Время (Time)**: *as soon as, until, while*`,
+
+  'clauses-lesson-1': `## 🧩 Урок 1: Введение в предложения и придаточные части (Clauses)
 
 Основным строительным блоком предложения в английском языке является **Clause (придаточная или независимая часть предложения)**, содержащая подлежащее и сказуемое.
 
@@ -59,7 +102,7 @@ Clause — это группа слов, содержащая как миним�
    • Минимум два главных предложения + минимум одно придаточное.
    • Пример: *I wanted to go outside, **but** it was raining **because the storm had started**.*
 `,
-  'sodiqjon-lesson-2': `## 🔗 Урок 2: Основы относительных придаточных предложений (Relative / Adjective Clauses) — По материалам Sodiqjon
+  'clauses-lesson-2': `## 🔗 Урок 2: Основы относительных придаточных предложений (Relative / Adjective Clauses)
 
 **Adjective Clause (Relative Clause)** — это придаточное предложение, которое описывает существительное и стоит сразу после него.
 
@@ -121,7 +164,7 @@ Clause — это группа слов, содержащая как миним�
 • Active (V-ing): *The man **standing** near the door...* (= *who is standing*)
 • Passive (V3): *The book **written** by Tom...* (= *that was written*)
 `,
-  'sodiqjon-lesson-3': `## ✂️ Урок 3: Опущение относительных местоимений и предлоги — По материалам Sodiqjon
+  'clauses-lesson-3': `## ✂️ Урок 3: Опущение относительных местоимений и предлоги
 
 **Omission (Опущение)** — это исключение относительного местоимения (*who, whom, which, that*) из предложения без изменения его смысла.
 
@@ -178,7 +221,7 @@ Clause — это группа слов, содержащая как миним�
 | **Formal (Официальный)** | Предлог + whom / which | The friend **with whom** I traveled speaks French. |
 | **Everyday (Разговорный)** | Без местоимения + Предлог в конце | The friend **I traveled with** speaks French. |
 `,
-  'sodiqjon-lesson-4': `## 🌟 Урок 4: Определительные и нераспространяющие придаточные предложения — По материалам Sodiqjon
+  'clauses-lesson-4': `## 🌟 Урок 4: Определительные и нераспространяющие придаточные предложения
 
 В зависимости от важности предоставляемой информации относительные придаточные предложения делятся на **Defining (Определительные)** и **Non-Defining (Нераспространяющие / Изъяснительные)**.
 
@@ -1316,7 +1359,7 @@ Noun clause никогда не выделяется запятыми и не м
 |---|---|---|
 | **that-clause** | that (может опускаться) | I think **(that) she is right**. |
 | **wh-clause** | what, who, whose, which, when, where, why, how... | I don't know **where she lives**. / Tell me **why he left**. |
-| **yes/no clause** | whether, if | I wonder **whether Sodiqjon passes the exam**. |
+| **yes/no clause** | whether, if | I wonder **whether he passes the exam**. |
 
 ▸ *Where does he live?* → I don't know **where he lives**.
 ▸ *Does he live here?* → I don't know **whether he lives here**.

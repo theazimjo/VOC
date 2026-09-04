@@ -34,7 +34,8 @@ const parseTableRow = (line) =>
 
 export function parseGuide(guideText) {
   if (!guideText) return [];
-  const rawLines = guideText.split('\n');
+  const normalizedText = guideText.replace(/\\n/g, '\n');
+  const rawLines = normalizedText.split('\n');
   const blocks = [];
   let i = 0;
 

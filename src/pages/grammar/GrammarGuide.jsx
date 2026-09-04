@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { grammarData } from '../../data/grammarData';
-import { russianGrammarData } from '../../data/russianGrammarData';
-import { sicilianGrammarData } from '../../data/sicilianGrammarData';
-import { greekGrammarData } from '../../data/greekGrammarData';
+import { findGrammarTopic } from '../../utils/grammarHelpers';
 import { russianGuidesData } from '../../data/russianGuidesData';
 import { parseGuide } from '../../utils/grammarGuideParser';
 import { GuideBlocks } from '../../components/grammar/GuideRenderer';
@@ -33,10 +30,7 @@ export default function GrammarGuide() {
     localStorage.setItem('grammar_guide_manual_lang', lang);
   };
 
-  const topic = grammarData[level]?.topics?.find((t) => t?.id === topicId) ||
-                russianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
-                sicilianGrammarData[level]?.topics?.find((t) => t?.id === topicId) ||
-                greekGrammarData[level]?.topics?.find((t) => t?.id === topicId);
+  const topic = findGrammarTopic(level, topicId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
