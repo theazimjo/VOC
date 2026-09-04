@@ -4445,4 +4445,1040 @@ export const grammarPathSections = [
       ],
     },
   },
+  {
+    id: 'sec-prepositions',
+    order: 10,
+    title: 'Joy va vaqt predloglari (in / on / at)',
+    titleRu: 'Предлоги места и времени (in / on / at)',
+    icon: '📍',
+    lessons: [
+      {
+        id: 'sec-prepositions-l1',
+        order: 1,
+        title: 'Vaqt predlogi: "at" (Soat, aniq vaqt va bayramlar)',
+        titleRu: 'Предлог времени: "at" (Время, часы, праздники)',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Vaqtni ko\'rsatganda "at" predlogi aniq soat vaqtlari bilan ishlatiladi.',
+              ruleRu: 'Предлог "at" используется с точным временем на часах.',
+              formula: 'at + specific time / clock time (e.g. at 5 o\'clock)',
+              example: 'I wake up at 7 o\'clock every morning. (Men har kuni soat 7 da uyg\'onaman.)',
+              exampleRu: 'I wake up at 7 o\'clock every morning. (Я просыпаюсь в 7 часов каждое утро.)',
+            },
+            exercises: [
+              { text: 'The lesson starts ___ 9:00 AM.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Aniq soat vaqti bilan "at" ishlatiladi.' },
+              { text: 'I usually eat lunch ___ 1 o\'clock.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Soat ko\'rsatilganda -> at 1 o\'clock.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"at" predlogi kunning muayyan qismlari va iboralar bilan ishlatiladi: at night (tunda), at noon (peshinda), at midnight (yarim tunda), at the moment (ayni damda).',
+              ruleRu: 'Предлог "at" используется в выражениях: at night, at noon, at midnight, at the moment.',
+              formula: 'at + night / noon / midnight / the moment',
+              example: 'Stars shine at night. (Yulduzlar tunda porlaydi.)',
+              exampleRu: 'Stars shine at night. (Звёзды светят ночью.)',
+            },
+            exercises: [
+              { text: 'I like to read books ___ night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at night (tunda).' },
+              { text: 'He is busy ___ the moment.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the moment (ayni damda).' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"at" predlogi bayram kunlari va dam olish kunlari davrida ishlatiladi: at the weekend (dam olish kunlarida), at Christmas (Mavlut bayramida).',
+              ruleRu: 'Предлог "at" используется с праздниками и выходными: at the weekend, at Christmas.',
+              formula: 'at + the weekend / holiday period',
+              example: 'We visit our grandparents at the weekend.',
+              exampleRu: 'We visit our grandparents at the weekend.',
+            },
+            exercises: [
+              { text: 'What do you usually do ___ the weekend?', options: ['at', 'in', 'to'], correct: 0, explanation: 'at the weekend.' },
+              { text: 'We give presents ___ Christmas.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Bayram davri -> at Christmas.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Soat vaqtlari, tunda va dam olish kunlaridagi "at" qoidasini mustahkamlaymiz.',
+              ruleRu: 'Закрепим использование "at" с часами, ночью и выходными.',
+              formula: 'at + clock time / night / weekend',
+              example: 'The train arrives at 6:30 PM. I sleep at night.',
+              exampleRu: 'The train arrives at 6:30 PM. I sleep at night.',
+            },
+            exercises: [
+              { text: 'The movie finishes ___ 10 PM.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Soat vaqti -> at 10 PM.' },
+              { text: 'Select the correct sentence:', options: ['He goes to bed at midnight.', 'He goes to bed in midnight.'], correct: 0, explanation: 'at midnight (yarim tunda).' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"at" vaqt predlogining barcha qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим все правила использования "at" для времени.',
+              formula: 'at ➔ clock time (at 5:00) | night/noon | at the weekend',
+              example: 'We meet at 3 o\'clock at the weekend.',
+              exampleRu: 'We meet at 3 o\'clock at the weekend.',
+            },
+            exercises: [
+              { text: 'Choose the correct preposition: ___ 8:00 AM', options: ['at', 'in', 'on'], correct: 0, explanation: 'at 8:00 AM.' },
+              { text: 'Choose the correct preposition: ___ night', options: ['at', 'on', 'in'], correct: 0, explanation: 'at night.' },
+              { text: 'Select the correct sentence:', options: ['See you at 4 o\'clock!', 'See you in 4 o\'clock!'], correct: 0, explanation: 'at 4 o\'clock.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-prepositions-l2',
+        order: 2,
+        title: 'Vaqt predlogi: "on" (Kunlar, sanalar va haftaning kunlari)',
+        titleRu: 'Предлог времени: "on" (Дни, даты, дни недели)',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Haftaning kunlari bilan doim "on" predlogi ishlatiladi: on Monday, on Tuesday, on Friday.',
+              ruleRu: 'С днями недели всегда используется предлог "on": on Monday, on Tuesday.',
+              formula: 'on + day of the week (e.g. on Monday, on Sunday)',
+              example: 'I play football on Sunday. (Men yakshanba kuni futbol o\'ynayman.)',
+              exampleRu: 'I play football on Sunday. (Я играю в футбол в воскресенье.)',
+            },
+            exercises: [
+              { text: 'We have an English test ___ Monday.', options: ['on', 'at', 'in'], correct: 0, explanation: 'Hafta kuni bilan "on" keladi.' },
+              { text: 'They don\'t work ___ Saturdays.', options: ['on', 'in', 'at'], correct: 0, explanation: 'on Saturdays.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Aniq sanalar (kalendar kunlari) bilan "on" predlogi ishlatiladi: on 1st January, on 15th May.',
+              ruleRu: 'С конкретными датами используется предлог "on": on 1st January.',
+              formula: 'on + specific date (e.g. on 25th December)',
+              example: 'My birthday is on 12th August. (Mening tug\'ilgan kunim 12-avgustda.)',
+              exampleRu: 'My birthday is on 12th August. (Мой день рождения 12 августа.)',
+            },
+            exercises: [
+              { text: 'The party is ___ 25th October.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Aniq sana bilan "on" keladi.' },
+              { text: 'Uzbekistan Independence Day is ___ 1st September.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on 1st September.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maxsus kunlar va kun qismlari bilan "on" predlogi ishlatiladi: on my birthday, on Friday morning, on New Year\'s Day.',
+              ruleRu: 'С особыми днями и частями дней: on my birthday, on Friday morning.',
+              formula: 'on + special day / specific day + morning/evening',
+              example: 'We got presents on New Year\'s Day. We met on Friday morning.',
+              exampleRu: 'We got presents on New Year\'s Day. We met on Friday morning.',
+            },
+            exercises: [
+              { text: 'What do you do ___ your birthday?', options: ['on', 'at', 'in'], correct: 0, explanation: 'on your birthday.' },
+              { text: 'I have a meeting ___ Tuesday morning.', options: ['on', 'in', 'at'], correct: 0, explanation: 'on Tuesday morning.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"at" (soat/tunda) va "on" (kunlar/sanalar) farqini taqqoslaymiz.',
+              ruleRu: 'Сравним "at" (часы/ночь) и "on" (дни/даты).',
+              formula: 'Clock time ➔ at (at 5 PM)  |  Days & Dates ➔ on (on Monday / on 5th May)',
+              example: 'The match is at 3 PM on Saturday. (O\'yin shanba kuni soat 3 da.)',
+              exampleRu: 'The match is at 3 PM on Saturday.',
+            },
+            exercises: [
+              { text: 'The meeting starts ___ 9 o\'clock ___ Friday.', options: ['at / on', 'on / at', 'in / on'], correct: 0, explanation: 'at 9 o\'clock / on Friday.' },
+              { text: 'Choose the correct sentence:', options: ['I will call you on Monday.', 'I will call you at Monday.'], correct: 0, explanation: 'on Monday.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"on" vaqt predlogining barcha qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим все правила использования "on" для времени.',
+              formula: 'on ➔ Days of week | Specific dates | Special days (on my birthday)',
+              example: 'He was born on 10th March on a Tuesday.',
+              exampleRu: 'He was born on 10th March on a Tuesday.',
+            },
+            exercises: [
+              { text: 'Choose the correct preposition: ___ 5th July', options: ['on', 'in', 'at'], correct: 0, explanation: 'on 5th July.' },
+              { text: 'Choose the correct preposition: ___ Sunday afternoon', options: ['on', 'at', 'in'], correct: 0, explanation: 'on Sunday afternoon.' },
+              { text: 'Select the correct sentence:', options: ['School reopens on September 1st.', 'School reopens in September 1st.'], correct: 0, explanation: 'on September 1st.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-prepositions-l3',
+        order: 3,
+        title: 'Vaqt predlogi: "in" (Oylar, yillar, fasllar va uzoq davrlar)',
+        titleRu: 'Предлог времени: "in" (Месяцы, года, времена года, века)',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Oylar va fasllar bilan doim "in" predlogi ishlatiladi: in May, in July, in summer, in winter.',
+              ruleRu: 'С месяца и временами года используется "in": in May, in summer.',
+              formula: 'in + month / season (e.g. in May, in summer)',
+              example: 'It is very hot in summer. My birthday is in April.',
+              exampleRu: 'It is very hot in summer. My birthday is in April.',
+            },
+            exercises: [
+              { text: 'We go to the beach ___ summer.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Fasl bilan "in" keladi: in summer.' },
+              { text: 'Flowers bloom ___ spring.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in spring.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Yillar, asrlar va uzoq davrlar bilan "in" predlogi ishlatiladi: in 2026, in the 21st century, in the past.',
+              ruleRu: 'С годами, веками и эпохами используется "in": in 2026, in the 21st century.',
+              formula: 'in + year / century / long period (e.g. in 2026, in the past)',
+              example: 'He was born in 2010. Computers developed fast in the 20th century.',
+              exampleRu: 'He was born in 2010. Computers developed fast in the 20th century.',
+            },
+            exercises: [
+              { text: 'I started school ___ 2018.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Yil bilan "in" ishlatiladi.' },
+              { text: 'People lived differently ___ the past.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the past (o\'tmishda).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kunning uchta asosiy qismi bilan "in the" ishlatiladi: in the morning, in the afternoon, in the evening. (ESLAB QOLING: at night!)',
+              ruleRu: 'С частями дня: in the morning, in the afternoon, in the evening. (НО: at night!)',
+              formula: 'in + the morning / afternoon / evening  (BUT: at night!)',
+              example: 'I drink coffee in the morning. (LEKIN: I sleep at night.)',
+              exampleRu: 'I drink coffee in the morning. (НО: I sleep at night.)',
+            },
+            exercises: [
+              { text: 'I play video games ___ the evening.', options: ['in', 'at', 'on'], correct: 0, explanation: 'in the evening.' },
+              { text: 'She goes running ___ the morning.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the morning.' },
+              { text: 'Choose the correct pair: ___ the morning / ___ night', options: ['in / at', 'at / in', 'on / at'], correct: 0, explanation: 'in the morning / at night.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"in" predlogi kelajakdagi muddatni bildiradi: in 5 minutes (5 daqiqadan so\'ng), in two days (ikki kundan so\'ng).',
+              ruleRu: 'Предлог "in" обозначает период времени в будущем: in 5 minutes (через 5 минут).',
+              formula: 'in + amount of time (e.g. in 10 minutes = 10 daqiqadan so\'ng)',
+              example: 'The bus leaves in 5 minutes. (Avtobus 5 daqiqadan so\'ng jo\'naydi.)',
+              exampleRu: 'The bus leaves in 5 minutes. (Автобус уезжает через 5 минут.)',
+            },
+            exercises: [
+              { text: 'I will finish my work ___ 10 minutes.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in 10 minutes (10 daqiqadan so\'ng).' },
+              { text: 'The movie will start ___ a few moments.', options: ['in', 'at', 'on'], correct: 0, explanation: 'in a few moments.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqt predloglari piramidasi: at (aniq nuqta/soat) ➔ on (kunlar/sanalar) ➔ in (oylar/yillar/davrlar).',
+              ruleRu: 'Пирамида времени: at (часы) ➔ on (дни/даты) ➔ in (месяцы/года/века).',
+              formula: 'Specific Time (at) ➔ Days & Dates (on) ➔ Months, Years & Seasons (in)',
+              example: 'at 5 PM on Monday in May 2026.',
+              exampleRu: 'at 5 PM on Monday in May 2026.',
+            },
+            exercises: [
+              { text: 'He was born ___ July, ___ Monday ___ 6:00 AM.', options: ['in / on / at', 'at / on / in', 'on / in / at'], correct: 0, explanation: 'in July / on Monday / at 6:00 AM.' },
+              { text: 'Choose the correct sentence:', options: ['We go on vacation in August.', 'We go on vacation at August.'], correct: 0, explanation: 'in August (oy nomi).' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-prepositions-l4',
+        order: 4,
+        title: 'Joy predlogi: "at" (Aniq nuqta, bino va manzil)',
+        titleRu: 'Предлог места: "at" (Точка, здание, адрес)',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Joylashuv nuqtasi (exact point) uchun "at" ishlatiladi: at the bus stop, at the door, at the crossroad.',
+              ruleRu: 'Для точной точки местоположения используется "at": at the bus stop, at the door.',
+              formula: 'at + exact point / location (e.g. at the door, at the bus stop)',
+              example: 'Someone is standing at the door. I am waiting at the bus stop.',
+              exampleRu: 'Someone is standing at the door. I am waiting at the bus stop.',
+            },
+            exercises: [
+              { text: 'Turn left ___ the traffic lights.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Nuqta ko\'rsatilganda "at" ishlatiladi.' },
+              { text: 'She is waiting for you ___ the bus stop.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the bus stop.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Muassasalar va tadbirlar bilan "at" ishlatiladi: at home, at work, at school, at university, at a party, at a concert.',
+              ruleRu: 'С учреждениями и мероприятиями: at home, at work, at school, at a party.',
+              formula: 'at + home / work / school / university / party / concert',
+              example: 'My mother is at work. I stay at home on Sundays.',
+              exampleRu: 'My mother is at work. I stay at home on Sundays.',
+            },
+            exercises: [
+              { text: 'Is your father ___ home?', options: ['at', 'in', 'on'], correct: 0, explanation: 'at home (uyda).' },
+              { text: 'We met ___ a concert last night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at a concert.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Aniq ko\'cha manzillari (uy raqami ko\'rsatilgan) bilan "at" ishlatiladi: at 45 Navoi Street.',
+              ruleRu: 'С точным адресом (с номером дома) используется "at": at 45 Navoi Street.',
+              formula: 'at + house number + street name (e.g. at 10 Baker Street)',
+              example: 'He lives at 12 Pushkin Street. (U Pushkin ko\'chasi 12-uyda yashaydi.)',
+              exampleRu: 'He lives at 12 Pushkin Street. (Он живёт на улице Пушкина, дом 12.)',
+            },
+            exercises: [
+              { text: 'She lives ___ 45 Amir Temur Street.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Uy raqami borligi uchun "at" ishlatiladi.' },
+              { text: 'The office is ___ 100 Broadway.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at 100 Broadway.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"at" bilan keladigan boshqa mashhur iboralar: at the top of (tepasida), at the bottom of (tagida), at the end of (oxirida).',
+              ruleRu: 'Популярные выражения с "at": at the top of, at the bottom of, at the end of.',
+              formula: 'at the top / bottom / end + of something',
+              example: 'Write your name at the top of the page. The shop is at the end of the street.',
+              exampleRu: 'Write your name at the top of the page.',
+            },
+            exercises: [
+              { text: 'Write your name ___ the top of the page.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the top of.' },
+              { text: 'There is a café ___ the end of the street.', options: ['at', 'on', 'in'], correct: 0, explanation: 'at the end of.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"at" joy predlogining barcha qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим все правила использования "at" для места.',
+              formula: 'at ➔ exact point (at the door) | at home/work/school | at 12 Main St',
+              example: 'I am at school at 8:00 AM every day.',
+              exampleRu: 'I am at school at 8:00 AM every day.',
+            },
+            exercises: [
+              { text: 'Choose the correct preposition: ___ home', options: ['at', 'in', 'on'], correct: 0, explanation: 'at home.' },
+              { text: 'Choose the correct preposition: ___ the entrance', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the entrance.' },
+              { text: 'Select the correct sentence:', options: ['She is at work right now.', 'She is in work right now.'], correct: 0, explanation: 'at work.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-prepositions-l5',
+        order: 5,
+        title: 'Joy predlogi: "on" (Yuza, sirt, ko\'cha va qavatlar)',
+        titleRu: 'Предлог места: "on" (Поверхность, улица, этажи)',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Tekislik va sirtlar ustida bo\'lsa "on" ishlatiladi: on the table, on the wall, on the floor, on the ceiling.',
+              ruleRu: 'Для поверхностей используется предлог "on": on the table, on the wall.',
+              formula: 'on + surface / flat area (e.g. on the table, on the floor)',
+              example: 'The book is on the table. There is a picture on the wall.',
+              exampleRu: 'The book is on the table. There is a picture on the wall.',
+            },
+            exercises: [
+              { text: 'Don\'t leave your clothes ___ the floor!', options: ['on', 'in', 'at'], correct: 0, explanation: 'Sirt (poll) bilan "on" ishlatiladi.' },
+              { text: 'There is a beautiful painting ___ the wall.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on the wall.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ko\'cha va shoh ko\'cha nomlari bilan (uy raqamisiz!) "on" ishlatiladi: on Navoi Street, on Fifth Avenue.',
+              ruleRu: 'С названиями улиц (без номера дома) используется "on": on Navoi Street.',
+              formula: 'on + street name (without house number, e.g. on Broadway)',
+              example: 'Our shop is on Amir Temur Street. (Bizning do\'konimiz Amir Temur ko\'chasida.)',
+              exampleRu: 'Our shop is on Amir Temur Street.',
+            },
+            exercises: [
+              { text: 'He lives ___ Broadway.', options: ['on', 'at', 'in'], correct: 0, explanation: 'Faqat ko\'cha nomi bilan "on" ishlatiladi.' },
+              { text: 'Choose the correct pair: ___ 15 Navoi Street / ___ Navoi Street', options: ['at / on', 'on / at', 'in / on'], correct: 0, explanation: 'at 15 Navoi Street (raqam bor) / on Navoi Street (raqamsiz).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bino qavatlari va yo\'nalishlar bilan "on" ishlatiladi: on the first floor, on the second floor, on the left, on the right.',
+              ruleRu: 'С этажами и сторонами: on the first floor, on the left, on the right.',
+              formula: 'on + floor number / side (e.g. on the 3rd floor, on the left)',
+              example: 'My apartment is on the second floor. Turn on the left.',
+              exampleRu: 'My apartment is on the second floor.',
+            },
+            exercises: [
+              { text: 'Our office is ___ the 4th floor.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Qavat bilan "on" ishlatiladi.' },
+              { text: 'The supermarket is ___ the right.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on the right (o\'ng tomonda).' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Jamoat transport vositalarida "on" ishlatiladi: on the bus, on the train, on a plane, on a ship. (LEKIN kichik mashinada: in a car, in a taxi!)',
+              ruleRu: 'В общественном транспорте: on the bus, on the train. (НО: in a car, in a taxi!)',
+              formula: 'on + public transport (bus/train/plane)  |  BUT: in + car / taxi',
+              example: 'I am on the bus right now. (LEKIN: I am in a taxi.)',
+              exampleRu: 'I am on the bus right now. (НО: I am in a taxi.)',
+            },
+            exercises: [
+              { text: 'I saw him ___ the train.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Poezdda -> on the train.' },
+              { text: 'He is traveling ___ a car.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Kichik shaxsiy mashinada -> in a car.' },
+              { text: 'Choose the correct pair: ___ the bus / ___ a taxi', options: ['on / in', 'in / on', 'at / in'], correct: 0, explanation: 'on the bus / in a taxi.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"on" joy predlogining barcha qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим все правила использования "on" для места.',
+              formula: 'on ➔ Surface (table/wall) | Street name | Floor (on 1st floor) | Public transport (bus/train)',
+              example: 'I am sitting on the bus on Navoi Street.',
+              exampleRu: 'I am sitting on the bus on Navoi Street.',
+            },
+            exercises: [
+              { text: 'Choose the correct preposition: ___ the table', options: ['on', 'in', 'at'], correct: 0, explanation: 'on the table.' },
+              { text: 'Choose the correct preposition: ___ the second floor', options: ['on', 'in', 'at'], correct: 0, explanation: 'on the second floor.' },
+              { text: 'Select the correct sentence:', options: ['The cup is on the table.', 'The cup is in the table.'], correct: 0, explanation: 'on the table.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-prepositions-l6',
+        order: 6,
+        title: 'Joy predlogi: "in" (Yopiq hudud, shahar va mamlakatlar)',
+        titleRu: 'Предлог места: "in" (Закрытое пространство, город, страна)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Yopiq xona, bo\'shliq va idishlar ichida bo\'lsa "in" ishlatiladi: in the room, in the kitchen, in a box, in the garden.',
+              ruleRu: 'Внутри закрытых пространств используется "in": in the room, in a box.',
+              formula: 'in + enclosed space / room / container / building (e.g. in the kitchen)',
+              example: 'She is in the kitchen. The keys are in the box.',
+              exampleRu: 'She is in the kitchen. The keys are in the box.',
+            },
+            exercises: [
+              { text: 'Where is Mum? — She is ___ the living room.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Xona ichida -> in the living room.' },
+              { text: 'Put these shoes ___ the box.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the box.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Shaharlar, mamlakatlar, viloyatlar va qit\'alar bilan "in" ishlatiladi: in Tashkent, in Uzbekistan, in London, in Asia.',
+              ruleRu: 'С городами, странами и континентами используется "in": in Tashkent, in Uzbekistan.',
+              formula: 'in + city / country / region / continent (e.g. in Tashkent, in London)',
+              example: 'I live in Tashkent. Tashkent is in Uzbekistan.',
+              exampleRu: 'I live in Tashkent. Tashkent is in Uzbekistan.',
+            },
+            exercises: [
+              { text: 'He was born ___ Samarkand.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar nomi bilan "in" keladi.' },
+              { text: 'Paris is ___ France.', options: ['in', 'at', 'on'], correct: 0, explanation: 'Mamlakat bilan "in" keladi.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kitob, rasm, oyna va gazetalar ichida deb aytganda "in" ishlatiladi: in a book, in a picture, in a photo, in the newspaper, in the mirror.',
+              ruleRu: 'В книгах, картинах, фото и газетах: in a book, in a picture, in the newspaper.',
+              formula: 'in + book / photo / picture / newspaper / mirror',
+              example: 'I saw your photo in the newspaper. Look at yourself in the mirror.',
+              exampleRu: 'I saw your photo in the newspaper.',
+            },
+            exercises: [
+              { text: 'Who is the man ___ this picture?', options: ['in', 'on', 'at'], correct: 0, explanation: 'Rasm ichida -> in this picture.' },
+              { text: 'I read about the news ___ a book.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in a book.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Joy predloglari piramidasi: at (nuqta/at home) ➔ on (sirt/ko\'cha/on the table) ➔ in (yopiq joy/shahar/in Tashkent).',
+              ruleRu: 'Пирамида места: at (точка) ➔ on (поверхность/улица) ➔ in (закрытое место/город).',
+              formula: 'Point (at) ➔ Surface / Line (on) ➔ Enclosed Area / City (in)',
+              example: 'at the bus stop on Navoi Street in Tashkent.',
+              exampleRu: 'at the bus stop on Navoi Street in Tashkent.',
+            },
+            exercises: [
+              { text: 'We live ___ Tashkent, ___ Pushkin Street.', options: ['in / on', 'at / in', 'on / at'], correct: 0, explanation: 'in Tashkent / on Pushkin Street.' },
+              { text: 'Choose the correct sentence:', options: ['I am sitting in a coffee shop in London.', 'I am sitting on a coffee shop at London.'], correct: 0, explanation: 'in a coffee shop in London.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"in" joy predlogining barcha qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим все правила использования "in" для места.',
+              formula: 'in ➔ Room / Box | City / Country | Book / Photo | Car / Taxi',
+              example: 'He is sitting in his room in Tashkent.',
+              exampleRu: 'He is sitting his room in Tashkent.',
+            },
+            exercises: [
+              { text: 'Choose the correct preposition: ___ Uzbekistan', options: ['in', 'on', 'at'], correct: 0, explanation: 'in Uzbekistan.' },
+              { text: 'Choose the correct preposition: ___ the kitchen', options: ['in', 'at', 'on'], correct: 0, explanation: 'in the kitchen.' },
+              { text: 'Select the correct sentence:', options: ['She is sitting in her car.', 'She is sitting on her car.'], correct: 0, explanation: 'in her car.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-prepositions-l7',
+        order: 7,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (at vs on vs in)',
+        titleRu: 'Смешанная практика и Исправление ошибок (at vs on vs in)',
+        icon: '7️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta xato: 1) in Monday ❌ ➔ on Monday ✅ 2) at morning ❌ ➔ in the morning ✅ 3) in home ❌ ➔ at home ✅.',
+              ruleRu: '3 частые ошибки: 1) in Monday ❌ ➔ on Monday ✅ 2) at morning ❌ ➔ in the morning ✅ 3) in home ❌ ➔ at home ✅.',
+              formula: 'Check Preposition Errors: 1. on Monday 2. in the morning 3. at home',
+              example: 'I stay at home on Monday in the morning. (Manbada barcha 3 ta predlog to\'g\'ri ishlatilgan.)',
+              exampleRu: 'I stay at home on Monday in the morning.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I will see you on Monday.', 'I will see you in Monday.'], correct: 0, explanation: 'Hafta kuni bilan "on" ishlatiladi.' },
+              { text: 'Choose the correct sentence:', options: ['My brother is at home.', 'My brother is in home.'], correct: 0, explanation: 'at home.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Vaqt predloglari aralash testi: at (soat/tunda) | on (kun/sana) | in (oy/yil/fasl).',
+              ruleRu: 'Смешанный тест предлогов времени: at | on | in.',
+              formula: 'at 5 PM | on Friday | in July | in 2026',
+              example: 'Our party is at 7 PM on Friday in December.',
+              exampleRu: 'Our party is at 7 PM on Friday in December.',
+            },
+            exercises: [
+              { text: 'The museum opens ___ 9 o\'clock ___ Tuesday ___ spring.', options: ['at / on / in', 'in / on / at', 'on / at / in'], correct: 0, explanation: 'at 9 o\'clock / on Tuesday / in spring.' },
+              { text: 'We go skiing ___ winter.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Fasl -> in winter.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Joy predloglari aralash testi: at (nuqta/uyda) | on (sirt/ko\'cha/qavat) | in (yopiq joy/shahar).',
+              ruleRu: 'Смешанный тест предлогов места: at | on | in.',
+              formula: 'at the station | on the table | in Tashkent',
+              example: 'I left my bag on the table in my room at home.',
+              exampleRu: 'I left my bag on the table in my room at home.',
+            },
+            exercises: [
+              { text: 'He is waiting ___ the entrance ___ the second floor.', options: ['at / on', 'in / at', 'on / in'], correct: 0, explanation: 'at the entrance / on the second floor.' },
+              { text: 'My friend lives ___ London.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar -> in London.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Dialog va matnlarda predloglarni to\'g\'ri uyg\'unlashtirish.',
+              ruleRu: 'Практика применения предлогов в диалогах и контексте.',
+              formula: 'Read context ➔ apply at / on / in correctly',
+              example: '— Where are you? — I am on the bus in Tashkent, arriving at 5 PM.',
+              exampleRu: '— Where are you? — I am on the bus in Tashkent, arriving at 5 PM.',
+            },
+            exercises: [
+              { text: '— Where is your office? — It is ___ 3rd floor ___ Amir Temur Street.', options: ['on the / on', 'in the / at', 'at the / in'], correct: 0, explanation: 'on the 3rd floor / on Amir Temur Street.' },
+              { text: '— When is the concert? — It is ___ 8:00 PM ___ Saturday.', options: ['at / on', 'in / at', 'on / in'], correct: 0, explanation: 'at 8:00 PM / on Saturday.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bo\'limning barcha predloglar (in / on / at) qoidalarining yakuniy sarhisobi.',
+              ruleRu: 'Итоговое обобщение всех правил предлогов места и времени.',
+              formula: 'Master Preposition Rule: at (exact time / point) | on (day / date / surface) | in (month / year / enclosed area)',
+              example: 'I was born at 3 PM on 10th May in 2005 in Tashkent.',
+              exampleRu: 'I was born at 3 PM on 10th May in 2005 in Tashkent.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I will meet you at the station at 6 PM on Friday.', 'I will meet you in the station in 6 PM in Friday.'], correct: 0, explanation: 'at the station / at 6 PM / on Friday.' },
+              { text: 'Choose the correct sentence:', options: ['She put her phone on the desk in her bedroom.', 'She put her phone at the desk at her bedroom.'], correct: 0, explanation: 'on the desk / in her bedroom.' },
+              { text: 'Select the correct sentence:', options: ['The train leaves at 10:30 in the morning.', 'The train leaves on 10:30 at the morning.'], correct: 0, explanation: 'at 10:30 / in the morning.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Joy va vaqt predloglari (in / on / at)",
+      titleRu: 'Тест раздела: Предлоги места и времени (in / on / at)',
+      exercises: [
+        { text: 'The concert starts ___ 7:30 PM.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Aniq soat vaqti -> at.' },
+        { text: 'We don\'t go to school ___ Sundays.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Hafta kuni -> on.' },
+        { text: 'My birthday is ___ July.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Oy nomi -> in.' },
+        { text: 'He was born ___ 2012.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Yil -> in.' },
+        { text: 'I love watching movies ___ night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at night.' },
+        { text: 'She is waiting for you ___ the bus stop.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the bus stop.' },
+        { text: 'The laptop is ___ the table.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Sirt -> on the table.' },
+        { text: 'We live ___ Tashkent.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar -> in Tashkent.' },
+        { text: 'Our apartment is ___ the third floor.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Qavat -> on the third floor.' },
+        { text: 'She is traveling ___ the train.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Jamoat transporti -> on the train.' },
+        { text: 'Choose the correct sentence:', options: ['He is at home right now.', 'He is in home right now.'], correct: 0, explanation: 'at home.' },
+        { text: 'Choose the correct sentence:', options: ['The meeting is on Friday morning.', 'The meeting is at Friday morning.'], correct: 0, explanation: 'on Friday morning.' },
+        { text: 'Choose the correct sentence:', options: ['Write your name at the top of the paper.', 'Write your name in the top of the paper.'], correct: 0, explanation: 'at the top of.' },
+        { text: 'Select the correct sentence:', options: ['The bus leaves in 10 minutes.', 'The bus leaves at 10 minutes.'], correct: 0, explanation: 'in 10 minutes (10 daqiqadan so\'ng).' },
+        { text: 'Select the correct sentence:', options: ['They live at 25 Navoi Street in Tashkent.', 'They live in 25 Navoi Street on Tashkent.'], correct: 0, explanation: 'at 25 Navoi Street / in Tashkent.' },
+      ],
+    },
+  },
+  {
+    id: 'sec-tobe-past',
+    order: 11,
+    title: '"To be" — o\'tgan zamon (was / were)',
+    titleRu: 'Глагол "to be" в прошедшем времени (was / were)',
+    icon: '⏳',
+    lessons: [
+      {
+        id: 'sec-tobe-past-l1',
+        order: 1,
+        title: 'Tasdiq shakllar: "was" (I / he / she / it)',
+        titleRu: 'Утвердительные формы: "was" (I / he / she / it)',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"to be" fe\'lining o\'tgan zamon shakllaridan biri "was" hisoblanadi. U birlikdagi shaxslar (I, he, she, it) bilan ishlatiladi.',
+              ruleRu: 'В прошедшем времени "am" и "is" превращаются в "was" для местоимений I, he, she, it.',
+              formula: 'I / He / She / It + was + Noun / Adjective / Place',
+              example: 'I was a student. (Men talaba edim.) He was happy. (U xursand edi.)',
+              exampleRu: 'I was a student. (Я был студентом.) He was happy. (Он был счастлив.)',
+            },
+            exercises: [
+              { text: 'I ___ at home yesterday.', options: ['was', 'were', 'am'], correct: 0, explanation: '"I" bilan o\'tgan zamonda "was" ishlatiladi.' },
+              { text: 'He ___ tired last night.', options: ['was', 'were', 'is'], correct: 0, explanation: '"He" + was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"I was" — "men edim" degan ma\'noni bildiradi. Hozirgi "I am" ning o\'tgan zamoni.',
+              ruleRu: '"I was" означает "я был/была". Прошедшая форма от "I am".',
+              formula: 'Present: I am  ➔  Past: I was',
+              example: 'I am in Tashkent now. I was in Samarkand yesterday.',
+              exampleRu: 'I am in Tashkent now. I was in Samarkand yesterday.',
+            },
+            exercises: [
+              { text: 'Yesterday I ___ very busy.', options: ['was', 'were', 'am'], correct: 0, explanation: 'Yesterday (kecha) -> I was.' },
+              { text: 'Select the correct sentence:', options: ['I was at school yesterday.', 'I were at school yesterday.'], correct: 0, explanation: '"I" bilan "was" keladi.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"He was", "She was", "It was" — "u edi" degan ma\'noni bildiradi (is ➔ was).',
+              ruleRu: '"He was", "She was", "It was" — прошедшие формы от is.',
+              formula: 'He / She / It + was + Adjective / Place / Time',
+              example: 'She was ill last week. It was cold yesterday.',
+              exampleRu: 'She was ill last week. It was cold yesterday.',
+            },
+            exercises: [
+              { text: 'She ___ a teacher 5 years ago.', options: ['was', 'were', 'is'], correct: 0, explanation: '"She" + was.' },
+              { text: 'The weather ___ nice yesterday.', options: ['was', 'were', 'are'], correct: 0, explanation: 'The weather (it) -> was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'O\'tgan zamon kalit so\'zlari: yesterday (kecha), last night/week/year (o\'tgan tun/hafta/yil), two days ago (ikki kun avval).',
+              ruleRu: 'Маркеры прошедшего времени: yesterday, last night, 2 days ago.',
+              formula: 'Subject + was + Place/State + yesterday / last week / ago',
+              example: 'Tom was in London last month. My dog was sleeping 2 hours ago.',
+              exampleRu: 'Tom was in London last month.',
+            },
+            exercises: [
+              { text: 'My father ___ at work yesterday morning.', options: ['was', 'were', 'is'], correct: 0, explanation: 'My father (he) + yesterday -> was.' },
+              { text: 'It ___ hot last summer.', options: ['was', 'were', 'are'], correct: 0, explanation: 'last summer -> was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"was" shaklining barcha birlik egalari bilan qo\'llanishini birlashtiramiz.',
+              ruleRu: 'Обобщим использование "was" с I, he, she, it.',
+              formula: 'I / He / She / It ➔ was (Past of am/is)',
+              example: 'I was late, but she was on time yesterday.',
+              exampleRu: 'I was late, but she was on time yesterday.',
+            },
+            exercises: [
+              { text: 'Choose the correct form: My phone ___ on the table.', options: ['was', 'were'], correct: 0, explanation: 'My phone (it) -> was.' },
+              { text: 'Choose the correct form: She ___ at the concert last night.', options: ['was', 'were'], correct: 0, explanation: 'She -> was.' },
+              { text: 'Select the correct sentence:', options: ['He was my best friend.', 'He were my best friend.'], correct: 0, explanation: 'He + was.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-past-l2',
+        order: 2,
+        title: 'Tasdiq shakllar: "were" (you / we / they)',
+        titleRu: 'Утвердительные формы: "were" (you / we / they)',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"to be" fe\'lining o\'tgan zamondagi ikkinchi shakli "were" hisoblanadi. U ko\'plik egalari (we, they) va "you" bilan ishlatiladi.',
+              ruleRu: 'В прошедшем времени "are" превращается в "were" для местоимений you, we, they.',
+              formula: 'You / We / They + were + Noun / Adjective / Place',
+              example: 'We were happy. (Biz xursand edik.) They were at home. (Ular uyda edi.)',
+              exampleRu: 'We were happy. (Мы были счастливы.) They were at home. (Они были дома.)',
+            },
+            exercises: [
+              { text: 'We ___ in Samarkand last weekend.', options: ['were', 'was', 'are'], correct: 0, explanation: '"We" bilan o\'tgan zamonda "were" ishlatiladi.' },
+              { text: 'They ___ very tired after work.', options: ['were', 'was', 'is'], correct: 0, explanation: '"They" + were.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"You were" — "sen eding / siz edingiz" degan ma\'noni bildiradi (are ➔ were).',
+              ruleRu: '"You were" означает "ты был / вы были". Прошедшая форма от "You are".',
+              formula: 'Present: You are  ➔  Past: You were',
+              example: 'You were late for school yesterday.',
+              exampleRu: 'You were late for school yesterday.',
+            },
+            exercises: [
+              { text: 'You ___ right about the movie.', options: ['were', 'was', 'am'], correct: 0, explanation: '"You" bilan doim "were" ishlatiladi.' },
+              { text: 'Select the correct sentence:', options: ['You were very helpful yesterday.', 'You was very helpful yesterday.'], correct: 0, explanation: 'You + were.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"We were" (biz edik) va "They were" (ular edi).',
+              ruleRu: '"We were" (мы были) и "They were" (они были).',
+              formula: 'We / They + were + Adjective / Location',
+              example: 'We were classmates in 2020. They were in the park yesterday.',
+              exampleRu: 'We were classmates in 2020. They were in the park yesterday.',
+            },
+            exercises: [
+              { text: 'My friends ___ at my house yesterday.', options: ['were', 'was', 'is'], correct: 0, explanation: 'My friends (they) -> were.' },
+              { text: 'We ___ in the garden 2 hours ago.', options: ['were', 'was', 'am'], correct: 0, explanation: 'We + were.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"was" (birlik) va "were" (ko\'plik va you) shakllarini ajratish.',
+              ruleRu: 'Различение "was" (единственное число) и "were" (множественное число и you).',
+              formula: 'I / He / She / It ➔ WAS  |  You / We / They ➔ WERE',
+              example: 'I was at home, but my brothers were at school.',
+              exampleRu: 'I was at home, but my brothers were at school.',
+            },
+            exercises: [
+              { text: 'He ___ at home, but we ___ at the cinema.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'He was / we were.' },
+              { text: 'Choose the correct pair: She ___ / They ___', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'She was / They were.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"were" shaklining barcha ko\'plik egalari bilan qo\'llanishini birlashtiramiz.',
+              ruleRu: 'Обобщим использование "were" с you, we, they.',
+              formula: 'You / We / They ➔ WERE (Past of are)',
+              example: 'We were at the stadium and they were there too.',
+              exampleRu: 'We were at the stadium and they were there too.',
+            },
+            exercises: [
+              { text: 'Choose the correct form: The children ___ in the yard.', options: ['were', 'was'], correct: 0, explanation: 'The children (they) -> were.' },
+              { text: 'Choose the correct form: You and I ___ in Tashkent.', options: ['were', 'was'], correct: 0, explanation: 'You and I (we) -> were.' },
+              { text: 'Select the correct sentence:', options: ['They were happy to see us.', 'They was happy to see us.'], correct: 0, explanation: 'They + were.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-past-l3',
+        order: 3,
+        title: 'Inkor shakllar: "wasn\'t" va "weren\'t"',
+        titleRu: 'Отрицательные формы: "wasn\'t" и "weren\'t"',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"was" ning inkori: was not ➔ wasn\'t (I, he, she, it wasn\'t). "u / men emas edim".',
+              ruleRu: 'Отрицание от "was": was not ➔ wasn\'t.',
+              formula: 'I / He / She / It + wasn\'t (was not) + State / Place',
+              example: 'I wasn\'t at home yesterday. (Men kecha uyda emas edim.)',
+              exampleRu: 'I wasn\'t at home yesterday. (Я не был дома вчера.)',
+            },
+            exercises: [
+              { text: 'He ___ at work yesterday.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: '"He" inkorida: wasn\'t.' },
+              { text: 'She ___ hungry last night.', options: ["wasn't", "weren't", "aren't"], correct: 0, explanation: '"She" inkorida: wasn\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"were" ning inkori: were not ➔ weren\'t (you, we, they weren\'t). "sizlar / bizlar emas edik".',
+              ruleRu: 'Отрицание от "were": were not ➔ weren\'t.',
+              formula: 'You / We / They + weren\'t (were not) + State / Place',
+              example: 'We weren\'t late. They weren\'t ready.',
+              exampleRu: 'We weren\'t late. They weren\'t ready.',
+            },
+            exercises: [
+              { text: 'They ___ at the meeting.', options: ["weren't", "wasn't", "isn't"], correct: 0, explanation: '"They" inkorida: weren\'t.' },
+              { text: 'You ___ at school yesterday.', options: ["weren't", "wasn't", "am not"], correct: 0, explanation: '"You" inkorida: weren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'O\'tgan zamon inkor gaplarini vaqt ko\'rsatkichlari bilan ishlatish mashqlari.',
+              ruleRu: 'Отрицательные предложения с маркерами времени.',
+              formula: 'Subject + wasn\'t / weren\'t + Place/Adjective + past time marker',
+              example: 'It wasn\'t rainy yesterday. We weren\'t tired last night.',
+              exampleRu: 'It wasn\'t rainy yesterday. We weren\'t tired last night.',
+            },
+            exercises: [
+              { text: 'The exam ___ difficult last week.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: 'The exam (it) -> wasn\'t.' },
+              { text: 'My parents ___ at home 2 hours ago.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'My parents (they) -> weren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Hozirgi zamon inkori (isn\'t / aren\'t) va O\'tgan zamon inkori (wasn\'t / weren\'t) taqqoslamasi.',
+              ruleRu: 'Сравнение отрицаний: isn\'t/aren\'t (сейчас) vs wasn\'t/weren\'t (в прошлом).',
+              formula: 'Now ➔ isn\'t / aren\'t  |  Past ➔ wasn\'t / weren\'t',
+              example: 'He isn\'t at home now. He wasn\'t at home yesterday.',
+              exampleRu: 'He isn\'t at home now. He wasn\'t at home yesterday.',
+            },
+            exercises: [
+              { text: 'She ___ here now, but she ___ here yesterday.', options: ["isn't / was", "wasn't / is", "isn't / is"], correct: 0, explanation: 'now -> isn\'t / yesterday -> was.' },
+              { text: 'Choose the correct sentence:', options: ['We weren\'t busy yesterday.', 'We isn\'t busy yesterday.'], correct: 0, explanation: 'yesterday + We -> weren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha inkor shakllarini (wasn\'t / weren\'t) birlashtiramiz.',
+              ruleRu: 'Обобщим все отрицательные формы (wasn\'t / weren\'t).',
+              formula: 'I/He/She/It wasn\'t  |  You/We/They weren\'t',
+              example: 'I wasn\'t ready and they weren\'t ready either.',
+              exampleRu: 'I wasn\'t ready and they weren\'t ready either.',
+            },
+            exercises: [
+              { text: 'Choose the correct form: It ___ cold yesterday.', options: ["wasn't", "weren't"], correct: 0, explanation: 'It -> wasn\'t.' },
+              { text: 'Choose the correct form: You ___ at the party.', options: ["weren't", "wasn't"], correct: 0, explanation: 'You -> weren\'t.' },
+              { text: 'Select the correct sentence:', options: ['The shops weren\'t open on Sunday.', 'The shops wasn\'t open on Sunday.'], correct: 0, explanation: 'The shops (they) -> weren\'t.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-past-l4',
+        order: 4,
+        title: 'Savol shakllari: "Was ...?" va "Were ...?"',
+        titleRu: 'Вопросительные формы: "Was ...?" и "Were ...?"',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'O\'tgan zamonda savol yasash uchun "Was" (birlik shaxslar uchun) eganing oldiga o\'tadi.',
+              ruleRu: 'В вопросах "Was" ставится перед подлежащим (I, he, she, it).',
+              formula: 'Was + I / he / she / it + Noun / Adjective / Place ?',
+              example: 'Was he at home yesterday? (U kecha uyda edimi?) Was it cold?',
+              exampleRu: 'Was he at home yesterday? (Он был дома вчера?) Was it cold?',
+            },
+            exercises: [
+              { text: '___ she at school yesterday?', options: ['Was', 'Were', 'Is'], correct: 0, explanation: '"She" savolida "Was" oldinga chiqadi.' },
+              { text: '___ the movie interesting?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: 'The movie (it) -> Was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'O\'tgan zamonda savol yasash uchun "Were" (ko\'plik shaxslar va you uchun) eganing oldiga o\'tadi.',
+              ruleRu: 'В вопросах "Were" ставится перед подлежащим (you, we, they).',
+              formula: 'Were + you / we / they + Noun / Adjective / Place ?',
+              example: 'Were you at the party? Were they happy?',
+              exampleRu: 'Were you at the party? Were they happy?',
+            },
+            exercises: [
+              { text: '___ you tired last night?', options: ['Were', 'Was', 'Are'], correct: 0, explanation: '"You" savolida "Were" oldinga chiqadi.' },
+              { text: '___ they at home yesterday?', options: ['Were', 'Was', 'Do'], correct: 0, explanation: '"They" savolida "Were".' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Qisqa javoblar: Yes, I was / No, I wasn\'t | Yes, they were / No, they weren\'t.',
+              ruleRu: 'Краткие ответы: Yes, I was / No, I wasn\'t | Yes, they were / No, they weren\'t.',
+              formula: 'Yes, + Subject + was/were.  |  No, + Subject + wasn\'t/weren\'t.',
+              example: '— Were you at school? — Yes, I was. / No, I wasn\'t.',
+              exampleRu: '— Were you at school? — Yes, I was. / No, I wasn\'t.',
+            },
+            exercises: [
+              { text: '— Was he at home? — Yes, he ___.', options: ['was', 'were', 'is'], correct: 0, explanation: 'Yes, he was.' },
+              { text: '— Were they happy? — No, they ___.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'No, they weren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maxsus savollar (Wh- questions): Where / Why / When / How + was / were + subject?',
+              ruleRu: 'Специальные вопросы: Wh- word + Was/Were + Subject?',
+              formula: 'Wh- word (Where/Why/When) + Was / Were + Subject ?',
+              example: 'Where were you yesterday? Why was he late?',
+              exampleRu: 'Where were you yesterday? Why was he late?',
+            },
+            exercises: [
+              { text: 'Where ___ you yesterday afternoon?', options: ['were', 'was', 'are'], correct: 0, explanation: 'Where + were you.' },
+              { text: 'Why ___ she late for school?', options: ['was', 'were', 'is'], correct: 0, explanation: 'Why + was she.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Was" va "Were" savol shakllarini birlashtiramiz.',
+              ruleRu: 'Обобщим все вопросительные формы с Was и Were.',
+              formula: 'Was (I/he/she/it) ?  |  Were (you/we/they) ?',
+              example: 'Where were you last night and why was Tom with you?',
+              exampleRu: 'Where were you last night and why was Tom with you?',
+            },
+            exercises: [
+              { text: 'Choose the correct question: ___ you at home?', options: ['Were', 'Was'], correct: 0, explanation: 'Were you...' },
+              { text: 'Choose the correct question: ___ it rainy yesterday?', options: ['Was', 'Were'], correct: 0, explanation: 'Was it...' },
+              { text: 'Select the correct question:', options: ['Where was your phone?', 'Where were your phone?'], correct: 0, explanation: 'your phone (it) -> Where was.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-past-l5',
+        order: 5,
+        title: 'Present (am/is/are) vs Past (was/were) Taqqoslash',
+        titleRu: 'Сравнение Present (am/is/are) и Past (was/were)',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Hozirgi va O\'tgan zamon to be shakllarini har doim vaqt belgilariga qarab ajrating!',
+              ruleRu: 'Различайте формы to be по маркерам времени: сейчас vs в прошлом.',
+              formula: 'Present: am / is / are (now, today)  |  Past: was / were (yesterday, last week)',
+              example: 'I am a doctor now. I was a student 5 years ago.',
+              exampleRu: 'I am a doctor now. I was a student 5 years ago.',
+            },
+            exercises: [
+              { text: 'Today I ___ happy, but yesterday I ___ sad.', options: ['am / was', 'was / am', 'am / am'], correct: 0, explanation: 'Today -> am / yesterday -> was.' },
+              { text: 'Now they ___ in Tashkent, but last week they ___ in Bukhara.', options: ['are / were', 'were / are', 'are / are'], correct: 0, explanation: 'Now -> are / last week -> were.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kalit so\'zlar taqqoslamasi: now, today, at the moment (Present) vs yesterday, last night, in 2015, ago (Past).',
+              ruleRu: 'Маркеры времени: now/today (Present) vs yesterday/last year (Past).',
+              formula: 'Check time signal ➔ Select am/is/are or was/were',
+              example: 'Where are you now? Where were you yesterday?',
+              exampleRu: 'Where are you now? Where were you yesterday?',
+            },
+            exercises: [
+              { text: 'The weather ___ very cold yesterday.', options: ['was', 'is', 'are'], correct: 0, explanation: 'yesterday -> was.' },
+              { text: 'The weather ___ very nice today.', options: ['is', 'was', 'were'], correct: 0, explanation: 'today -> is.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"... before, but now ..." — ilgari qanday edi va hozir qanday iborasi.',
+              ruleRu: 'Выражение типа "... раньше, но сейчас ...".',
+              formula: 'Past state (was/were) + but now + Present state (am/is/are)',
+              example: 'This house was old before, but now it is new and clean.',
+              exampleRu: 'This house was old before, but now it is new and clean.',
+            },
+            exercises: [
+              { text: 'I ___ small 10 years ago, but now I ___ tall.', options: ['was / am', 'am / was', 'was / was'], correct: 0, explanation: '10 years ago -> was / now -> am.' },
+              { text: 'Choose the correct sentence:', options: ['He was poor before, but now he is rich.', 'He is poor before, but now he was rich.'], correct: 0, explanation: 'before -> was / now -> is.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Gap ichida bir nechta zamon shakllarini moslashtirish.',
+              ruleRu: 'Согласование форм времени в контексте.',
+              formula: 'Match subject & time frame ➔ Correct form',
+              example: 'We were at the restaurant last night, and the food was delicious.',
+              exampleRu: 'We were at the restaurant last night, and the food was delicious.',
+            },
+            exercises: [
+              { text: 'Where ___ you last night? — I ___ at home.', options: ['were / was', 'was / were', 'are / am'], correct: 0, explanation: 'were you / I was.' },
+              { text: 'Select the correct sentence:', options: ['She is 20 now; last year she was 19.', 'She was 20 now; last year she is 19.'], correct: 0, explanation: 'now -> is / last year -> was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Present va Past to be taqqoslamasini birlashtiramiz.',
+              ruleRu: 'Обобщим сравнение Present и Past to be.',
+              formula: 'Now ➔ am / is / are  |  Past ➔ was / were',
+              example: 'I am ready today, but I was not ready yesterday.',
+              exampleRu: 'I am ready today, but I was not ready yesterday.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['They were in London last month.', 'They are in London last month.'], correct: 0, explanation: 'last month -> were.' },
+              { text: 'Choose the correct sentence:', options: ['I am at work right now.', 'I was at work right now.'], correct: 0, explanation: 'right now -> am.' },
+              { text: 'Select the correct sentence:', options: ['It was sunny yesterday, but it is rainy today.', 'It is sunny yesterday, but it was rainy today.'], correct: 0, explanation: 'yesterday -> was / today -> is.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-tobe-past-l6',
+        order: 6,
+        title: 'Aralash amaliyot va Xatolarni tuzatish (was / were)',
+        titleRu: 'Смешанная практика и Исправление ошибок (was / were)',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan 3 ta xato: 1) They was ❌ ➔ They were ✅ 2) I were ❌ ➔ I was ✅ 3) We wasn\'t ❌ ➔ We weren\'t ✅.',
+              ruleRu: '3 частые ошибки: 1) They was ❌ ➔ They were ✅ 2) I were ❌ ➔ I was ✅ 3) We wasn\'t ❌ ➔ We weren\'t ✅.',
+              formula: 'Check Errors: I/He/She/It ➔ was | You/We/They ➔ were',
+              example: 'They were happy. I was tired. We weren\'t late.',
+              exampleRu: 'They were happy. I was tired. We weren\'t late.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['They were at the museum.', 'They was at the museum.'], correct: 0, explanation: 'They + were.' },
+              { text: 'Choose the correct sentence:', options: ['We weren\'t late for class.', 'We wasn\'t late for class.'], correct: 0, explanation: 'We + weren\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Dialoglarda "was/were" shakllarini ishlatish amaliyoti.',
+              ruleRu: 'Практика применения was/were в диалогах.',
+              formula: 'Dialogue Context: — Was/Were...? — Yes, ... / No, ...',
+              example: '— Was it cold yesterday? — Yes, it was very cold.',
+              exampleRu: '— Was it cold yesterday? — Yes, it was very cold.',
+            },
+            exercises: [
+              { text: '— ___ you at the concert? — Yes, I ___ !', options: ['Were / was', 'Was / were', 'Are / am'], correct: 0, explanation: 'Were you / I was.' },
+              { text: '— ___ he late? — No, he ___ on time.', options: ['Was / was', 'Were / was', 'Was / were'], correct: 0, explanation: 'Was he / he was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Matn va hikoyalarda o\'tgan zamon to be shakllarini to\'g\'ri qo\'llash.',
+              ruleRu: 'Применение was/were в контексте коротких историй.',
+              formula: 'Story Context: Check subject ➔ apply was / were / wasn\'t / weren\'t',
+              example: 'Yesterday was Sunday. The weather was warm. We were at the park.',
+              exampleRu: 'Yesterday was Sunday. The weather was warm. We were at the park.',
+            },
+            exercises: [
+              { text: 'Yesterday ___ my birthday. All my friends ___ at my house.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'birthday (it) was / friends (they) were.' },
+              { text: 'The movie ___ short, but the songs ___ great.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'movie was / songs were.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha shakllarni (darak, inkor, savol) bir joyda takrorlash.',
+              ruleRu: 'Повторение всех типов предложений (утверждение, отрицание, вопрос).',
+              formula: 'Full Was/Were Integration: Statement | Negative | Question',
+              example: 'I was there. I wasn\'t alone. Were you there too?',
+              exampleRu: 'I was there. I wasn\'t alone. Were you there too?',
+            },
+            exercises: [
+              { text: 'Select the correct sentence:', options: ['Where were you when the bell rang?', 'Where was you when the bell rang?'], correct: 0, explanation: 'Where were you...' },
+              { text: 'Select the correct sentence:', options: ['She wasn\'t happy because she was tired.', 'She weren\'t happy because she were tired.'], correct: 0, explanation: 'She wasn\'t / she was.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Section 11 bo\'yicha yakuniy master formula va sarhisob.',
+              ruleRu: 'Итоговое главная формула для Was и Were.',
+              formula: 'Master Was/Were Rule: I / He / She / It ➔ WAS | You / We / They ➔ WERE',
+              example: 'I was, he was, she was, it was. You were, we were, they were.',
+              exampleRu: 'I was, he was, she was, it was. You were, we were, they were.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['I was at home, and my parents were at work.', 'I were at home, and my parents was at work.'], correct: 0, explanation: 'I was / parents (they) were.' },
+              { text: 'Choose the correct sentence:', options: ['Why were you absent yesterday?', 'Why was you absent yesterday?'], correct: 0, explanation: 'Why were you...' },
+              { text: 'Select the correct sentence:', options: ['It was a great day, and we were happy.', 'It were a great day, and we was happy.'], correct: 0, explanation: 'It was / we were.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: 'To be' — o'tgan zamon (was / were)",
+      titleRu: 'Тест раздела: Глагол "to be" в прошедшем времени (was / were)',
+      exercises: [
+        { text: 'I ___ at home yesterday evening.', options: ['was', 'were', 'am'], correct: 0, explanation: 'I + was.' },
+        { text: 'They ___ at the cinema last night.', options: ['were', 'was', 'are'], correct: 0, explanation: 'They + were.' },
+        { text: 'She ___ very tired after the trip.', options: ['was', 'were', 'is'], correct: 0, explanation: 'She + was.' },
+        { text: 'We ___ classmates 3 years ago.', options: ['were', 'was', 'am'], correct: 0, explanation: 'We + were.' },
+        { text: 'He ___ at work yesterday because he was sick.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: 'He + wasn\'t.' },
+        { text: 'The students ___ ready for the test.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'The students (they) + weren\'t.' },
+        { text: '___ you at school yesterday?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: 'Were you...' },
+        { text: '___ it cold last winter?', options: ['Was', 'Were', 'Is'], correct: 0, explanation: 'Was it...' },
+        { text: 'Where ___ your brother yesterday?', options: ['was', 'were', 'is'], correct: 0, explanation: 'Where was your brother (he)...' },
+        { text: '— Were you happy? — Yes, I ___.', options: ['was', 'were', 'am'], correct: 0, explanation: 'Yes, I was.' },
+        { text: 'Today is warm, but yesterday ___ very cold.', options: ['was', 'is', 'were'], correct: 0, explanation: 'yesterday -> was.' },
+        { text: 'Choose the correct sentence:', options: ['We were in Samarkand last month.', 'We was in Samarkand last month.'], correct: 0, explanation: 'We + were.' },
+        { text: 'Choose the correct sentence:', options: ['She wasn\'t late for the meeting.', 'She weren\'t late for the meeting.'], correct: 0, explanation: 'She + wasn\'t.' },
+        { text: 'Select the correct sentence:', options: ['Why was he so angry yesterday?', 'Why were he so angry yesterday?'], correct: 0, explanation: 'Why was he...' },
+        { text: 'Select the correct sentence:', options: ['My sister and I were at home last night.', 'My sister and I was at home last night.'], correct: 0, explanation: 'My sister and I (we) -> were.' },
+      ],
+    },
+  },
 ];
