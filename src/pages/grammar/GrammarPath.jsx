@@ -80,25 +80,15 @@ function getSectionTitle(node, lang) {
 
 function buildNodes(sections, progress) {
   const nodes = [];
-  let sectionUnlocked = true;
 
+  // Step 1: Flatten all lessons and section reviews in exact chronological order
   sections.forEach((section) => {
-    let lessonUnlockCursor = sectionUnlocked;
-    let allLessonsDone = true;
-
     section.lessons.forEach((lesson, i) => {
       const lessonCompleted = !!progress.completedLessons[lesson.id];
       const practiceCompleted = !!progress.completedPractices[lesson.id];
       const practiceData = progress.completedPractices[lesson.id];
-
-      const isUnlocked = true;
-      const isLocked = false;
-
-      const isBothDone = lessonCompleted && practiceCompleted;
-      if (!isBothDone) allLessonsDone = false;
-
-      // Next lesson unlocks ONLY after THIS lesson's PRACTICE is completed!
-      lessonUnlockCursor = practiceCompleted;
+      // A lesson node is considered completed when its theory/lesson is completed
+      const isBothDone = lessonCompleted;
 
       nodes.push({
         kind: 'hub',
@@ -117,14 +107,12 @@ function buildNodes(sections, progress) {
         practiceScore: practiceData?.score || 0,
         practiceTotal: practiceData?.total || 0,
         isCompleted: isBothDone,
-        isNext: !isBothDone,
-        isLocked,
+        isLocked: true,
+        isNext: false,
       });
     });
 
     const reviewCompleted = !!progress.completedReviews[section.id];
-    const reviewUnlocked = true;
-
     nodes.push({
       kind: 'review',
       sectionId: section.id,
@@ -138,12 +126,29 @@ function buildNodes(sections, progress) {
       icon: '🏆',
       orderInSection: section.lessons.length + 1,
       isCompleted: reviewCompleted,
-      isNext: !reviewCompleted,
-      isLocked: false,
+      isLocked: true,
+      isNext: false,
     });
-
-    sectionUnlocked = reviewCompleted;
   });
+
+  // Step 2: Strict Sequential Unlocking (Chain)
+  // Index 0 is always unlocked. Each subsequent node (k) is unlocked ONLY IF node (k-1) is completed.
+  let canUnlock = true;
+
+  for (let k = 0; k < nodes.length; k++) {
+    const node = nodes[k];
+    if (canUnlock) {
+      node.isLocked = false;
+      node.isNext = !node.isCompleted;
+      // Stop unlocking future nodes as soon as an incomplete node is encountered
+      if (!node.isCompleted) {
+        canUnlock = false;
+      }
+    } else {
+      node.isLocked = true;
+      node.isNext = false;
+    }
+  }
 
   return nodes;
 }
