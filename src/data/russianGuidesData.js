@@ -1541,4 +1541,89 @@ Noun clause никогда не выделяется запятыми и не м
 | Подлежащие совпадают? | wh-слово + to-infinitive | *I don't know what to do.* |
 `,
 
+  'deduction-and-assumption': `## Deduction and Assumption (Вывод и предположение) — настоящее и прошедшее время
+
+Эта тема объединяет в одну систему уже изученные **выводы о настоящем** (must be, might be, could be, can't be) и **выводы о прошлом** (must have + V3, might have + V3, could have + V3, can't have + V3) — закрепляя умение делать вывод и строить предположение на основе фактов.
+
+## 1. Таблица степеней уверенности (настоящее и прошлое)
+• 100% уверенность (положительная): **must be** / **must have + V3**
+• Предположение (разная степень уверенности): **may / might / could be** / **may / might / could have + V3**
+• 100% уверенность (отрицательная): **can't be** / **can't have + V3**
+• Ожидаемый результат: **should be** / **should have + V3**
+
+## 2. Вывод о настоящем (Present Deduction)
+Формула: Подлежащее + модальный глагол + начальная форма глагола (или модальный + be + V-ing — для длящегося действия)
+• The lights are off — they **must be** out.
+• Someone **must be cooking** dinner. (длительная форма: модальный + be + V-ing)
+• She **might be** busy.
+• This key **could be** for the garage.
+• You **can't be** hungry already.
+
+## 3. Вывод о прошлом (Past Deduction)
+Формула: Подлежащее + модальный глагол + have + V3 (причастие прошедшего времени) — **have** никогда не меняется на **has/had**!
+• It **must have escaped**.
+• They **might have gone** home.
+• We **could have caught** the train.
+• That **can't have happened**.
+
+## 4. Ожидаемый результат: should / should have
+• It **should be** here by tomorrow. (ожидание в настоящем/будущем)
+• Everyone **should have arrived** by now. (ожидание по отношению к прошлому)
+
+## 5. Самые частые ошибки
+• После модального глагола не используется "to": ~~could to be~~ → **could be**
+• "have" никогда не меняется на "has": ~~must has been~~ → **must have been**
+• После "have" глагол должен быть в форме V3 (причастие прошедшего времени): ~~must have find~~ → **must have found**, ~~might have went~~ → **might have gone**
+
+## 6. Ключевые слова
+• must, must have (уверенный положительный вывод)
+• might, may, could, might have, may have, could have (предположение)
+• can't, can't have (уверенный отрицательный вывод)
+• should, should have (ожидаемый результат)`,
+
+  'be-get-used-to': `## Be Used To, Get Used To, Become Used To & Would (Привыкание и прошлые привычки)
+
+Эта тема помогает чётко отличить **прошлые привычки**, выраженные через "used to" / "would", от понятия **привыкания / адаптации к чему-либо**, выраженного через "be used to" / "get used to" / "become used to" — внешне похожие, но совершенно разные по смыслу конструкции!
+
+## 1. Главное отличие
+• **used to + V1** — регулярная ПРИВЫЧКА в прошлом, которая сейчас прекратилась (действие изменилось):
+  - I **used to smoke**. (раньше курил, сейчас не курю)
+• **be used to + V-ing / существительное** — состояние ПРИВЫКАНИЯ, комфорта (не действие, а СОСТОЯНИЕ):
+  - I **am used to** the cold weather. (я привык к холодной погоде)
+
+## 2. be used to (текущее состояние — привыкание)
+Формула: **be (am/is/are/was/were) + used to + существительное / V-ing**
+• She **is used to** working long hours. (привыкла много работать)
+• We **are used to** the noise now.
+• He **isn't used to** cold weather — he grew up in the tropics.
+• **Are** you **used to** the new schedule yet?
+
+## 3. get used to (процесс привыкания)
+Формула: **get + used to + существительное / V-ing** — "привыкает / привык" (процесс)
+• I **am getting used to** the new software. (сейчас постепенно привыкаю)
+• It took months, but he finally **got used to** the cold winters.
+• You'll need time **to get used to** the new system.
+
+## 4. become used to (то же самое, что get used to, но более формально)
+Формула: **become + used to + существительное / V-ing**
+• Over time, employees usually **become used to** the strict rules.
+• She **became used to** the noise from the airport.
+
+## 5. used to vs would (краткое напоминание)
+• **used to** — используется как для ПРИВЫЧКИ, так и для СОСТОЯНИЯ (be, have, like, know).
+• **would** — ТОЛЬКО для повторяющейся ПРИВЫЧКИ (действия), с глаголами состояния не используется.
+  - I **used to have** little money. (have — глагол состояния, would здесь невозможно!)
+  - Every Friday, he **would take** us fishing. (действие — подходят и would, и used to)
+
+## 6. Самые частые ошибки
+• "I am used to smoke" — НЕПРАВИЛЬНО; правильно "I am used to smoking" (нужен V-ing, а не V1).
+• "I used to living here" — НЕПРАВИЛЬНО; правильно "I used to live here" (не путайте used to + V1 и be used to + V-ing).
+• "would have / like / know" — с глаголами состояния would не используется; только used to.
+
+## 7. Ключевые слова
+• used to + V1 (привычка в прошлом)
+• would + V1 (повторяющееся действие в прошлом)
+• be used to + V-ing / существительное (привыкание)
+• get / become used to + V-ing / существительное (процесс привыкания)`,
+
 };

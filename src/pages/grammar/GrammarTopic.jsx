@@ -190,7 +190,7 @@ function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz', lan
             {isCorrect ? t('grammar.correctBadge') : t('grammar.wrongBadge', { answer: question.answer })}
 
           </span>
-          {question.explanation && <p className="scrambled-explanation">{getFormattedExplanation(question.explanation, guideLang)}</p>}
+          {question.explanation && <p className="scrambled-explanation">{(guideLang === 'ru' && question.explanationRu) ? question.explanationRu : getFormattedExplanation(question.explanation, guideLang)}</p>}
         </div>
       )}
 
@@ -321,6 +321,7 @@ export default function GrammarTopic() {
         correct: shuffled.correct,
         isCorrect,
         explanation: question.explanation,
+        explanationRu: question.explanationRu,
         options: shuffled.options,
       },
     ]);
@@ -424,7 +425,7 @@ export default function GrammarTopic() {
                     </span>
                   </div>
                   {a.explanation && (
-                    <p className="review-explanation">💡 {getFormattedExplanation(a.explanation, activeGuideLang)}</p>
+                    <p className="review-explanation">💡 {(activeGuideLang === 'ru' && a.explanationRu) ? a.explanationRu : getFormattedExplanation(a.explanation, activeGuideLang)}</p>
                   )}
                 </div>
               ))}
@@ -504,6 +505,7 @@ export default function GrammarTopic() {
                 correct: 0,
                 isCorrect,
                 explanation: question.explanation,
+                explanationRu: question.explanationRu,
                 options: [question.answer],
               }]);
             }}
@@ -552,7 +554,7 @@ export default function GrammarTopic() {
               {showExplanation ? t('grammar.hideExplanation') : t('grammar.showExplanation')}
             </button>
             {showExplanation && (
-              <p className="clean-explanation-text">{getFormattedExplanation(question.explanation, activeGuideLang)}</p>
+              <p className="clean-explanation-text">{(activeGuideLang === 'ru' && question.explanationRu) ? question.explanationRu : getFormattedExplanation(question.explanation, activeGuideLang)}</p>
             )}
           </div>
         )}
