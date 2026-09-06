@@ -596,7 +596,7 @@ export const grammarPathSections = [
               exampleRu: 'I am hungry.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I are hungry.', 'I is hungry.', 'I am hungry.'], correct: 2, explanation: '"I" faqat "am" bilan keladi.', explanationRu: "\"I\" используется только с \"am\"." },
+              { text: 'Choose the correct sentence:', options: ['I are ready.', 'I is ready.', 'I am ready.'], correct: 2, explanation: '"I" faqat "am" bilan keladi.', explanationRu: "\"I\" используется только с \"am\"." },
               { text: 'Which subject uses "am"?', options: ['I', 'You', 'We'], correct: 0, explanation: '"am" faqat "I" bilan ishlatiladi.', explanationRu: "\"am\" используется только с \"I\"." },
             ],
           },
@@ -666,7 +666,7 @@ export const grammarPathSections = [
               exampleRu: "Yes, I am. (Не Yes, I'm.)",
             },
             exercises: [
-              { text: 'Choose the correct short answer:', options: ['Yes, I am.', "Yes, I'm."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, I am.', explanationRu: "В коротком ответе сокращение не используется: Yes, I am." },
+              { text: 'Choose the correct short answer:', options: ['Yes, she is.', "Yes, she's."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, she is.', explanationRu: "В коротком ответе сокращение не используется: Yes, she is." },
               { text: 'Choose the correct sentence:', options: ["She's my sister.", "She is' my sister."], correct: 0, explanation: 'Gap ichida qisqartma to\'g\'ri: She\'s my sister.', explanationRu: "Внутри предложения сокращение верно: She's my sister." },
             ],
           },
@@ -724,7 +724,7 @@ export const grammarPathSections = [
               exampleRu: "I'm not tired.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ["I amn't tired.", "I'm not tired."], correct: 1, explanation: '"am not" ning qisqartmasi yo\'q: I\'m not.', explanationRu: "У \"am not\" нет сокращения: I'm not." },
+              { text: 'Choose the correct sentence:', options: ["I amn't busy.", "I'm not busy."], correct: 1, explanation: '"am not" ning qisqartmasi yo\'q: I\'m not.', explanationRu: "У \"am not\" нет сокращения: I'm not." },
               { text: "I ___ ready yet.", options: ["'m not", "isn't", "aren't"], correct: 0, explanation: '"I" inkorida: \'m not.', explanationRu: "В отрицании с \"I\": 'm not." },
             ],
           },
@@ -783,7 +783,7 @@ export const grammarPathSections = [
             },
             exercises: [
               { text: '___ I right?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.', explanationRu: "В вопросе с \"I\": Am." },
-              { text: 'Choose the correct question:', options: ['Am I late?', 'I am late?'], correct: 0, explanation: 'Savolda "am" oldinga chiqadi: Am I late?', explanationRu: "В вопросе \"am\" выносится вперёд: Am I late?" },
+              { text: 'Choose the correct question:', options: ['Am I next?', 'I am next?'], correct: 0, explanation: 'Savolda "am" oldinga chiqadi: Am I next?', explanationRu: "В вопросе \"am\" выносится вперёд: Am I next?" },
             ],
           },
           {
@@ -864,7 +864,7 @@ export const grammarPathSections = [
               exampleRu: 'Are you a teacher? Yes, I am.',
             },
             exercises: [
-              { text: 'Choose the correct short answer:', options: ['Yes, I am.', 'Yes, I am a student.'], correct: 0, explanation: 'Qisqa javob qisqa bo\'ladi: Yes, I am.', explanationRu: "Короткий ответ короткий: Yes, I am." },
+              { text: 'Choose the correct short answer:', options: ['Yes, she is.', 'Yes, she is a nurse.'], correct: 0, explanation: 'Qisqa javob qisqa bo\'ladi: Yes, she is.', explanationRu: "Короткий ответ короткий: Yes, she is." },
               { text: 'Am I right? Yes, ___.', options: ['you are', 'you am'], correct: 0, explanation: '"You" + are.', explanationRu: "\"You\" + are." },
             ],
           },
@@ -981,7 +981,7 @@ export const grammarPathSections = [
             },
             exercises: [
               { text: 'He ___ angry.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.', explanationRu: "\"He\" + is." },
-              { text: 'Choose the correct sentence:', options: ['I am tired.', 'I tired.'], correct: 0, explanation: 'Sifat oldidan "to be" kerak: I am tired.', explanationRu: "Перед прилагательным нужен \"to be\": I am tired." },
+              { text: 'Choose the correct sentence:', options: ['He is sad.', 'He sad.'], correct: 0, explanation: 'Sifat oldidan "to be" kerak: He is sad.', explanationRu: "Перед прилагательным нужен \"to be\": He is sad." },
             ],
           },
           {
