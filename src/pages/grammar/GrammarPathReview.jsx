@@ -76,7 +76,7 @@ export default function GrammarPathReview() {
     setAnswers((prev) => [
       ...prev,
       {
-        questionText: formatQuestionText(question.text, language),
+        questionText: isRu && question.textRu ? question.textRu : formatQuestionText(question.text, language),
         selected: idx,
         correct: shuffled.correct,
         isCorrect,
@@ -189,7 +189,7 @@ export default function GrammarPathReview() {
       </div>
 
       <div className="clean-quiz-body">
-        <p className="clean-question-text">{formatQuestionText(question.text, language)}</p>
+        <p className="clean-question-text">{isRu && question.textRu ? question.textRu : formatQuestionText(question.text, language)}</p>
         <div className="clean-options-list">
           {(shuffled?.options || []).map((opt, idx) => {
             let cls = 'clean-option-btn';

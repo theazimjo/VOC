@@ -37,8 +37,8 @@ export const grammarPathSections = [
               exampleRu: 'I am a student. (Я студент.)',
             },
             exercises: [
-              { text: '"Men" so\'zini ingliz tilida qanday aytamiz?', options: ['I', 'You', 'He', 'It'], correct: 0, explanation: '"Men" = I.' },
-              { text: 'Agar o\'zingiz haqingizda gapirsangiz, qaysi olmoshni ishlatasiz?', options: ['I', 'She', 'We', 'They'], correct: 0, explanation: 'O\'zingiz haqingizda gapirganda "I" ishlatiladi.' },
+              { text: '"Men" so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"я\" по-английски?", options: ['I', 'You', 'He', 'It'], correct: 0, explanation: '"Men" = I.', explanationRu: "\"Я\" = I." },
+              { text: 'Agar o\'zingiz haqingizda gapirsangiz, qaysi olmoshni ishlatasiz?', textRu: "Какое местоимение вы используете, когда говорите о себе?", options: ['I', 'She', 'We', 'They'], correct: 0, explanation: 'O\'zingiz haqingizda gapirganda "I" ishlatiladi.', explanationRu: "Когда вы говорите о себе, используется \"I\"." },
             ],
           },
           {
@@ -49,8 +49,8 @@ export const grammarPathSections = [
               exampleRu: 'I am happy. (Я счастлив.)',
             },
             exercises: [
-              { text: 'I ___ a teacher.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" faqat "am" bilan keladi.' },
-              { text: '___ am ready.', options: ['I', 'He', 'We'], correct: 0, explanation: '"am" faqat "I" bilan ishlatiladi.' },
+              { text: 'I ___ a teacher.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" faqat "am" bilan keladi.', explanationRu: "\"I\" используется только с \"am\"." },
+              { text: '___ am ready.', options: ['I', 'He', 'We'], correct: 0, explanation: '"am" faqat "I" bilan ishlatiladi.', explanationRu: "\"am\" используется только с \"I\"." },
             ],
           },
           {
@@ -61,8 +61,8 @@ export const grammarPathSections = [
               exampleRu: 'I like pizza. (Я люблю пиццу.)',
             },
             exercises: [
-              { text: 'I ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"I" bilan fe\'lga -s qo\'shilmaydi: like.' },
-              { text: 'Choose the correct sentence:', options: ['I likes music.', 'I like music.', 'I liking music.'], correct: 1, explanation: '"I" + like (qo\'shimchasiz).' },
+              { text: 'I ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"I" bilan fe\'lga -s qo\'shilmaydi: like.', explanationRu: "С местоимением \"I\" к глаголу не добавляется -s: like." },
+              { text: 'Choose the correct sentence:', options: ['I likes music.', 'I like music.', 'I liking music.'], correct: 1, explanation: '"I" + like (qo\'shimchasiz).', explanationRu: "\"I\" + like (без окончания)." },
             ],
           },
           {
@@ -73,8 +73,8 @@ export const grammarPathSections = [
               exampleRu: "I don't like coffee. Do I know you?",
             },
             exercises: [
-              { text: 'I ___ not like coffee.', options: ['am', 'do', 'does'], correct: 1, explanation: '"I" inkorida: do not (don\'t).' },
-              { text: '___ I know you?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"I" savolida: Do I...?' },
+              { text: 'I ___ not like coffee.', options: ['am', 'do', 'does'], correct: 1, explanation: '"I" inkorida: do not (don\'t).', explanationRu: "В отрицании с \"I\": do not (don't)." },
+              { text: '___ I know you?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"I" savolida: Do I...?', explanationRu: "В вопросе с \"I\": Do I...?" },
             ],
           },
           {
@@ -85,9 +85,9 @@ export const grammarPathSections = [
               exampleRu: "I am busy, but I don't like waiting.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I is a doctor.', 'I am a doctor.', 'I are a doctor.'], correct: 1, explanation: '"I" + am.' },
-              { text: 'Choose the correct sentence:', options: ["I doesn't like tea.", "I don't like tea.", 'I not like tea.'], correct: 1, explanation: '"I" inkorida: don\'t.' },
-              { text: 'Choose the correct question:', options: ['Do I look tired?', 'Does I look tired?', 'Am I look tired?'], correct: 0, explanation: '"I" savolida: Do I...?' },
+              { text: 'Choose the correct sentence:', options: ['I is a doctor.', 'I am a doctor.', 'I are a doctor.'], correct: 1, explanation: '"I" + am.', explanationRu: "\"I\" + am." },
+              { text: 'Choose the correct sentence:', options: ["I doesn't like tea.", "I don't like tea.", 'I not like tea.'], correct: 1, explanation: '"I" inkorida: don\'t.', explanationRu: "В отрицании с \"I\": don't." },
+              { text: 'Choose the correct question:', options: ['Do I look tired?', 'Does I look tired?', 'Am I look tired?'], correct: 0, explanation: '"I" savolida: Do I...?', explanationRu: "В вопросе с \"I\": Do I...?" },
             ],
           },
         ],
@@ -107,8 +107,8 @@ export const grammarPathSections = [
               exampleRu: 'You are my friend. (Ты мой друг.)',
             },
             exercises: [
-              { text: '"Sen" / "Siz" so\'zini ingliz tilida qanday aytamiz?', options: ['I', 'You', 'He', 'We'], correct: 1, explanation: '"Sen/Siz" = You.' },
-              { text: 'Suhbatdoshingizga to\'g\'ridan-to\'g\'ri murojaat qilsangiz, qaysi olmoshni ishlatasiz?', options: ['I', 'You', 'She', 'They'], correct: 1, explanation: 'Suhbatdoshga murojaatda "You" ishlatiladi.' },
+              { text: '"Sen" / "Siz" so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"ты / вы\" по-английски?", options: ['I', 'You', 'He', 'We'], correct: 1, explanation: '"Sen/Siz" = You.', explanationRu: "\"Ты/Вы\" = You." },
+              { text: 'Suhbatdoshingizga to\'g\'ridan-to\'g\'ri murojaat qilsangiz, qaysi olmoshni ishlatasiz?', textRu: "Какое местоимение вы используете при прямом обращении к собеседнику?", options: ['I', 'You', 'She', 'They'], correct: 1, explanation: 'Suhbatdoshga murojaatda "You" ishlatiladi.', explanationRu: "При обращении к собеседнику используется \"You\"." },
             ],
           },
           {
@@ -119,8 +119,8 @@ export const grammarPathSections = [
               exampleRu: 'You are smart. (Ты умный.)',
             },
             exercises: [
-              { text: 'You ___ my best friend.', options: ['am', 'is', 'are'], correct: 2, explanation: '"You" + are.' },
-              { text: '___ are late.', options: ['You', 'He', 'I'], correct: 0, explanation: '"are" — "You" bilan mos keladi.' },
+              { text: 'You ___ my best friend.', options: ['am', 'is', 'are'], correct: 2, explanation: '"You" + are.', explanationRu: "\"You\" + are." },
+              { text: '___ are late.', options: ['You', 'He', 'I'], correct: 0, explanation: '"are" — "You" bilan mos keladi.', explanationRu: "\"are\" сочетается с \"You\"." },
             ],
           },
           {
@@ -131,8 +131,8 @@ export const grammarPathSections = [
               exampleRu: 'You like pizza. (Ты любишь пиццу.)',
             },
             exercises: [
-              { text: 'You ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"You" bilan fe\'lga -s qo\'shilmaydi.' },
-              { text: 'Choose the correct sentence:', options: ['You likes music.', 'You like music.'], correct: 1, explanation: '"You" + like (qo\'shimchasiz).' },
+              { text: 'You ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"You" bilan fe\'lga -s qo\'shilmaydi.', explanationRu: "С местоимением \"You\" к глаголу не добавляется -s." },
+              { text: 'Choose the correct sentence:', options: ['You likes music.', 'You like music.'], correct: 1, explanation: '"You" + like (qo\'shimchasiz).', explanationRu: "\"You\" + like (без окончания)." },
             ],
           },
           {
@@ -143,8 +143,8 @@ export const grammarPathSections = [
               exampleRu: "You don't like coffee. Do you know me?",
             },
             exercises: [
-              { text: 'You ___ not like coffee.', options: ['am', 'do', 'does'], correct: 1, explanation: '"You" inkorida: do not (don\'t).' },
-              { text: '___ you know me?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"You" savolida: Do you...?' },
+              { text: 'You ___ not like coffee.', options: ['am', 'do', 'does'], correct: 1, explanation: '"You" inkorida: do not (don\'t).', explanationRu: "В отрицании с \"You\": do not (don't)." },
+              { text: '___ you know me?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"You" savolida: Do you...?', explanationRu: "В вопросе с \"You\": Do you...?" },
             ],
           },
           {
@@ -155,9 +155,9 @@ export const grammarPathSections = [
               exampleRu: "You are kind, but you don't listen.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['You is my friend.', 'You are my friend.'], correct: 1, explanation: '"You" + are.' },
-              { text: 'Choose the correct sentence:', options: ["You don't like tea.", "You doesn't like tea."], correct: 0, explanation: '"You" inkorida: don\'t.' },
-              { text: 'Choose the correct question:', options: ['Do you look tired?', 'Does you look tired?'], correct: 0, explanation: '"You" savolida: Do you...?' },
+              { text: 'Choose the correct sentence:', options: ['You is my friend.', 'You are my friend.'], correct: 1, explanation: '"You" + are.', explanationRu: "\"You\" + are." },
+              { text: 'Choose the correct sentence:', options: ["You don't like tea.", "You doesn't like tea."], correct: 0, explanation: '"You" inkorida: don\'t.', explanationRu: "В отрицании с \"You\": don't." },
+              { text: 'Choose the correct question:', options: ['Do you look tired?', 'Does you look tired?'], correct: 0, explanation: '"You" savolida: Do you...?', explanationRu: "В вопросе с \"You\": Do you...?" },
             ],
           },
         ],
@@ -177,8 +177,8 @@ export const grammarPathSections = [
               exampleRu: 'He is my brother. (Он мой брат.)',
             },
             exercises: [
-              { text: '"U" (erkak) so\'zini ingliz tilida qanday aytamiz?', options: ['She', 'He', 'It', 'They'], correct: 1, explanation: 'Erkak kishi uchun: He.' },
-              { text: 'Tom haqida gapirsangiz (Tom — erkak ism), qaysi olmoshni ishlatasiz?', options: ['She', 'He', 'It'], correct: 1, explanation: 'Tom — erkak ism, shuning uchun He.' },
+              { text: '"U" (erkak) so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"он\" (мужской род) по-английски?", options: ['She', 'He', 'It', 'They'], correct: 1, explanation: 'Erkak kishi uchun: He.', explanationRu: "Для мужчин: He." },
+              { text: 'Tom haqida gapirsangiz (Tom — erkak ism), qaysi olmoshni ishlatasiz?', textRu: "Какое местоимение вы используете для Тома (мужское имя)?", options: ['She', 'He', 'It'], correct: 1, explanation: 'Tom — erkak ism, shuning uchun He.', explanationRu: "Том — мужское имя, поэтому He." },
             ],
           },
           {
@@ -189,8 +189,8 @@ export const grammarPathSections = [
               exampleRu: 'He is tall. (Он высокий.)',
             },
             exercises: [
-              { text: 'He ___ a doctor.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
-              { text: '___ is my father.', options: ['He', 'You', 'We'], correct: 0, explanation: '"is" — "He" bilan mos keladi.' },
+              { text: 'He ___ a doctor.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.', explanationRu: "\"He\" + is." },
+              { text: '___ is my father.', options: ['He', 'You', 'We'], correct: 0, explanation: '"is" — "He" bilan mos keladi.', explanationRu: "\"is\" сочетается с \"He\"." },
             ],
           },
           {
@@ -201,8 +201,8 @@ export const grammarPathSections = [
               exampleRu: 'He likes pizza. (Он любит пиццу.)',
             },
             exercises: [
-              { text: 'He ___ pizza.', options: ['like', 'likes', 'liking'], correct: 1, explanation: '"He/She/It" bilan fe\'lga -s qo\'shiladi.' },
-              { text: 'Choose the correct sentence:', options: ['He like music.', 'He likes music.'], correct: 1, explanation: '"He" + likes (-s bilan).' },
+              { text: 'He ___ pizza.', options: ['like', 'likes', 'liking'], correct: 1, explanation: '"He/She/It" bilan fe\'lga -s qo\'shiladi.', explanationRu: "С He/She/It к глаголу добавляется -s." },
+              { text: 'Choose the correct sentence:', options: ['He like music.', 'He likes music.'], correct: 1, explanation: '"He" + likes (-s bilan).', explanationRu: "\"He\" + likes (с окончанием -s)." },
             ],
           },
           {
@@ -213,9 +213,9 @@ export const grammarPathSections = [
               exampleRu: "He doesn't like coffee. Does he know you?",
             },
             exercises: [
-              { text: 'He ___ not like coffee.', options: ["don't", "doesn't", "isn't"], correct: 1, explanation: '"He" inkorida: doesn\'t.' },
-              { text: '___ he know you?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: '"He" savolida: Does he...?' },
-              { text: "He doesn't ___ coffee.", options: ['like', 'likes'], correct: 0, explanation: "\"doesn't\" dan keyin fe'l -s olmaydi: like." },
+              { text: 'He ___ not like coffee.', options: ["don't", "doesn't", "isn't"], correct: 1, explanation: '"He" inkorida: doesn\'t.', explanationRu: "В отрицании с \"He\": doesn't." },
+              { text: '___ he know you?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: '"He" savolida: Does he...?', explanationRu: "В вопросе с \"He\": Does he...?" },
+              { text: "He doesn't ___ coffee.", options: ['like', 'likes'], correct: 0, explanation: "\"doesn't\" dan keyin fe'l -s olmaydi: like.", explanationRu: "После \"doesn't\" глагол идёт без -s: like." },
             ],
           },
           {
@@ -226,9 +226,9 @@ export const grammarPathSections = [
               exampleRu: "He is busy, but he doesn't like waiting.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['He is a teacher.', 'He are a teacher.'], correct: 0, explanation: '"He" + is.' },
-              { text: 'Choose the correct sentence:', options: ["He doesn't like tea.", "He don't like tea."], correct: 0, explanation: '"He" inkorida: doesn\'t.' },
-              { text: 'Choose the correct question:', options: ['Does he look tired?', 'Do he look tired?'], correct: 0, explanation: '"He" savolida: Does he...?' },
+              { text: 'Choose the correct sentence:', options: ['He is a teacher.', 'He are a teacher.'], correct: 0, explanation: '"He" + is.', explanationRu: "\"He\" + is." },
+              { text: 'Choose the correct sentence:', options: ["He doesn't like tea.", "He don't like tea."], correct: 0, explanation: '"He" inkorida: doesn\'t.', explanationRu: "В отрицании с \"He\": doesn't." },
+              { text: 'Choose the correct question:', options: ['Does he look tired?', 'Do he look tired?'], correct: 0, explanation: '"He" savolida: Does he...?', explanationRu: "В вопросе с \"He\": Does he...?" },
             ],
           },
         ],
@@ -248,8 +248,8 @@ export const grammarPathSections = [
               exampleRu: 'She is my sister. (Она моя сестра.)',
             },
             exercises: [
-              { text: '"U" (ayol) so\'zini ingliz tilida qanday aytamiz?', options: ['She', 'He', 'It', 'They'], correct: 0, explanation: 'Ayol kishi uchun: She.' },
-              { text: 'Anna haqida gapirsangiz (Anna — ayol ism), qaysi olmoshni ishlatasiz?', options: ['She', 'He', 'It'], correct: 0, explanation: 'Anna — ayol ism, shuning uchun She.' },
+              { text: '"U" (ayol) so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"она\" (женский род) по-английски?", options: ['She', 'He', 'It', 'They'], correct: 0, explanation: 'Ayol kishi uchun: She.', explanationRu: "Для женщин: She." },
+              { text: 'Anna haqida gapirsangiz (Anna — ayol ism), qaysi olmoshni ishlatasiz?', textRu: "Какое местоимение вы используете для Анны (женское имя)?", options: ['She', 'He', 'It'], correct: 0, explanation: 'Anna — ayol ism, shuning uchun She.', explanationRu: "Анна — женское имя, поэтому She." },
             ],
           },
           {
@@ -260,8 +260,8 @@ export const grammarPathSections = [
               exampleRu: 'She is smart. (Она умная.)',
             },
             exercises: [
-              { text: 'She ___ a nurse.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.' },
-              { text: '___ is my mother.', options: ['She', 'You', 'We'], correct: 0, explanation: '"is" — "She" bilan mos keladi.' },
+              { text: 'She ___ a nurse.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.', explanationRu: "\"She\" + is." },
+              { text: '___ is my mother.', options: ['She', 'You', 'We'], correct: 0, explanation: '"is" — "She" bilan mos keladi.', explanationRu: "\"is\" сочетается с \"She\"." },
             ],
           },
           {
@@ -272,8 +272,8 @@ export const grammarPathSections = [
               exampleRu: 'She likes pizza. (Она любит пиццу.)',
             },
             exercises: [
-              { text: 'She ___ pizza.', options: ['like', 'likes', 'liking'], correct: 1, explanation: '"She" bilan fe\'lga -s qo\'shiladi.' },
-              { text: 'Choose the correct sentence:', options: ['She like music.', 'She likes music.'], correct: 1, explanation: '"She" + likes (-s bilan).' },
+              { text: 'She ___ pizza.', options: ['like', 'likes', 'liking'], correct: 1, explanation: '"She" bilan fe\'lga -s qo\'shiladi.', explanationRu: "С местоимением \"She\" к глаголу добавляется -s." },
+              { text: 'Choose the correct sentence:', options: ['She like music.', 'She likes music.'], correct: 1, explanation: '"She" + likes (-s bilan).', explanationRu: "\"She\" + likes (с окончанием -s)." },
             ],
           },
           {
@@ -284,9 +284,9 @@ export const grammarPathSections = [
               exampleRu: "She doesn't like coffee. Does she know you?",
             },
             exercises: [
-              { text: 'She ___ not like coffee.', options: ["don't", "doesn't", "isn't"], correct: 1, explanation: '"She" inkorida: doesn\'t.' },
-              { text: '___ she know you?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: '"She" savolida: Does she...?' },
-              { text: "She doesn't ___ coffee.", options: ['like', 'likes'], correct: 0, explanation: "\"doesn't\" dan keyin fe'l -s olmaydi: like." },
+              { text: 'She ___ not like coffee.', options: ["don't", "doesn't", "isn't"], correct: 1, explanation: '"She" inkorida: doesn\'t.', explanationRu: "В отрицании с \"She\": doesn't." },
+              { text: '___ she know you?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: '"She" savolida: Does she...?', explanationRu: "В вопросе с \"She\": Does she...?" },
+              { text: "She doesn't ___ coffee.", options: ['like', 'likes'], correct: 0, explanation: "\"doesn't\" dan keyin fe'l -s olmaydi: like.", explanationRu: "После \"doesn't\" глагол идёт без -s: like." },
             ],
           },
           {
@@ -297,9 +297,9 @@ export const grammarPathSections = [
               exampleRu: "She is busy, but she doesn't like waiting.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She is a teacher.', 'She are a teacher.'], correct: 0, explanation: '"She" + is.' },
-              { text: 'Choose the correct sentence:', options: ["She doesn't like tea.", "She don't like tea."], correct: 0, explanation: '"She" inkorida: doesn\'t.' },
-              { text: 'Choose the correct question:', options: ['Does she look tired?', 'Do she look tired?'], correct: 0, explanation: '"She" savolida: Does she...?' },
+              { text: 'Choose the correct sentence:', options: ['She is a teacher.', 'She are a teacher.'], correct: 0, explanation: '"She" + is.', explanationRu: "\"She\" + is." },
+              { text: 'Choose the correct sentence:', options: ["She doesn't like tea.", "She don't like tea."], correct: 0, explanation: '"She" inkorida: doesn\'t.', explanationRu: "В отрицании с \"She\": doesn't." },
+              { text: 'Choose the correct question:', options: ['Does she look tired?', 'Do she look tired?'], correct: 0, explanation: '"She" savolida: Does she...?', explanationRu: "В вопросе с \"She\": Does she...?" },
             ],
           },
         ],
@@ -319,8 +319,8 @@ export const grammarPathSections = [
               exampleRu: 'It is a cat. (Это кошка.)',
             },
             exercises: [
-              { text: '"U" (narsa/hayvon) so\'zini ingliz tilida qanday aytamiz?', options: ['She', 'He', 'It', 'They'], correct: 2, explanation: 'Narsa/hayvon uchun: It.' },
-              { text: 'Bir kitob haqida gapirsangiz, qaysi olmoshni ishlatasiz?', options: ['She', 'He', 'It'], correct: 2, explanation: 'Kitob — jonsiz narsa, shuning uchun It.' },
+              { text: '"U" (narsa/hayvon) so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"оно/он\" (предмет/животное) по-английски?", options: ['She', 'He', 'It', 'They'], correct: 2, explanation: 'Narsa/hayvon uchun: It.', explanationRu: "Для предметов/животных: It." },
+              { text: 'Bir kitob haqida gapirsangiz, qaysi olmoshni ishlatasiz?', textRu: "Какое местоимение вы используете для одной книги?", options: ['She', 'He', 'It'], correct: 2, explanation: 'Kitob — jonsiz narsa, shuning uchun It.', explanationRu: "Книга — неодушевлённый предмет, поэтому It." },
             ],
           },
           {
@@ -331,8 +331,8 @@ export const grammarPathSections = [
               exampleRu: 'It is small. (Оно маленькое.)',
             },
             exercises: [
-              { text: 'It ___ cold today.', options: ['am', 'is', 'are'], correct: 1, explanation: '"It" + is.' },
-              { text: '___ is my phone.', options: ['It', 'You', 'We'], correct: 0, explanation: '"is" — "It" bilan mos keladi.' },
+              { text: 'It ___ cold today.', options: ['am', 'is', 'are'], correct: 1, explanation: '"It" + is.', explanationRu: "\"It\" + is." },
+              { text: '___ is my phone.', options: ['It', 'You', 'We'], correct: 0, explanation: '"is" — "It" bilan mos keladi.', explanationRu: "\"is\" сочетается с \"It\"." },
             ],
           },
           {
@@ -343,8 +343,8 @@ export const grammarPathSections = [
               exampleRu: 'The cat likes milk. = It likes milk.',
             },
             exercises: [
-              { text: 'It ___ milk. (about a cat)', options: ['like', 'likes', 'liking'], correct: 1, explanation: '"It" bilan fe\'lga -s qo\'shiladi.' },
-              { text: 'Choose the correct sentence:', options: ['It bark loudly.', 'It barks loudly.'], correct: 1, explanation: '"It" + barks (-s bilan).' },
+              { text: 'It ___ milk. (about a cat)', options: ['like', 'likes', 'liking'], correct: 1, explanation: '"It" bilan fe\'lga -s qo\'shiladi.', explanationRu: "С местоимением \"It\" к глаголу добавляется -s." },
+              { text: 'Choose the correct sentence:', options: ['It bark loudly.', 'It barks loudly.'], correct: 1, explanation: '"It" + barks (-s bilan).', explanationRu: "\"It\" + barks (с окончанием -s)." },
             ],
           },
           {
@@ -355,9 +355,9 @@ export const grammarPathSections = [
               exampleRu: "It doesn't work. Does it need water?",
             },
             exercises: [
-              { text: 'It ___ not work.', options: ["don't", "doesn't", "isn't"], correct: 1, explanation: '"It" inkorida: doesn\'t.' },
-              { text: '___ it need water?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: '"It" savolida: Does it...?' },
-              { text: "It doesn't ___ well.", options: ['work', 'works'], correct: 0, explanation: "\"doesn't\" dan keyin fe'l -s olmaydi: work." },
+              { text: 'It ___ not work.', options: ["don't", "doesn't", "isn't"], correct: 1, explanation: '"It" inkorida: doesn\'t.', explanationRu: "В отрицании с \"It\": doesn't." },
+              { text: '___ it need water?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: '"It" savolida: Does it...?', explanationRu: "В вопросе с \"It\": Does it...?" },
+              { text: "It doesn't ___ well.", options: ['work', 'works'], correct: 0, explanation: "\"doesn't\" dan keyin fe'l -s olmaydi: work.", explanationRu: "После \"doesn't\" глагол идёт без -s: work." },
             ],
           },
           {
@@ -368,9 +368,9 @@ export const grammarPathSections = [
               exampleRu: "It is broken, and it doesn't work.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['It is my bag.', 'It are my bag.'], correct: 0, explanation: '"It" + is.' },
-              { text: 'Choose the correct sentence:', options: ["It doesn't work.", "It don't work."], correct: 0, explanation: '"It" inkorida: doesn\'t.' },
-              { text: 'Choose the correct question:', options: ['Does it work?', 'Do it work?'], correct: 0, explanation: '"It" savolida: Does it...?' },
+              { text: 'Choose the correct sentence:', options: ['It is my bag.', 'It are my bag.'], correct: 0, explanation: '"It" + is.', explanationRu: "\"It\" + is." },
+              { text: 'Choose the correct sentence:', options: ["It doesn't work.", "It don't work."], correct: 0, explanation: '"It" inkorida: doesn\'t.', explanationRu: "В отрицании с \"It\": doesn't." },
+              { text: 'Choose the correct question:', options: ['Does it work?', 'Do it work?'], correct: 0, explanation: '"It" savolida: Does it...?', explanationRu: "В вопросе с \"It\": Does it...?" },
             ],
           },
         ],
@@ -390,8 +390,8 @@ export const grammarPathSections = [
               exampleRu: 'We are friends. (Мы друзья.)',
             },
             exercises: [
-              { text: '"Biz" so\'zini ingliz tilida qanday aytamiz?', options: ['I', 'You', 'We', 'They'], correct: 2, explanation: '"Biz" = We.' },
-              { text: 'O\'zingiz va sinfdoshlaringiz haqida gapirsangiz, qaysi olmoshni ishlatasiz?', options: ['I', 'We', 'They'], correct: 1, explanation: 'O\'zingiz shu guruh ichida bo\'lsangiz: We.' },
+              { text: '"Biz" so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"мы\" по-английски?", options: ['I', 'You', 'We', 'They'], correct: 2, explanation: '"Biz" = We.', explanationRu: "\"Мы\" = We." },
+              { text: 'O\'zingiz va sinfdoshlaringiz haqida gapirsangiz, qaysi olmoshni ishlatasiz?', textRu: "Какое местоимение вы используете для себя и одноклассников?", options: ['I', 'We', 'They'], correct: 1, explanation: 'O\'zingiz shu guruh ichida bo\'lsangiz: We.', explanationRu: "Если вы сами входите в эту группу: We." },
             ],
           },
           {
@@ -402,8 +402,8 @@ export const grammarPathSections = [
               exampleRu: 'We are ready. (Мы готовы.)',
             },
             exercises: [
-              { text: 'We ___ happy.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.' },
-              { text: '___ are classmates.', options: ['We', 'He', 'I'], correct: 0, explanation: '"are" — "We" bilan mos keladi.' },
+              { text: 'We ___ happy.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.', explanationRu: "\"We\" + are." },
+              { text: '___ are classmates.', options: ['We', 'He', 'I'], correct: 0, explanation: '"are" — "We" bilan mos keladi.', explanationRu: "\"are\" сочетается с \"We\"." },
             ],
           },
           {
@@ -414,8 +414,8 @@ export const grammarPathSections = [
               exampleRu: 'We like pizza. (Мы любим пиццу.)',
             },
             exercises: [
-              { text: 'We ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"We" bilan fe\'lga -s qo\'shilmaydi.' },
-              { text: 'Choose the correct sentence:', options: ['We likes music.', 'We like music.'], correct: 1, explanation: '"We" + like (qo\'shimchasiz).' },
+              { text: 'We ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"We" bilan fe\'lga -s qo\'shilmaydi.', explanationRu: "С местоимением \"We\" к глаголу не добавляется -s." },
+              { text: 'Choose the correct sentence:', options: ['We likes music.', 'We like music.'], correct: 1, explanation: '"We" + like (qo\'shimchasiz).', explanationRu: "\"We\" + like (без окончания)." },
             ],
           },
           {
@@ -426,8 +426,8 @@ export const grammarPathSections = [
               exampleRu: "We don't know. Do we have time?",
             },
             exercises: [
-              { text: 'We ___ not know.', options: ['am', 'do', 'does'], correct: 1, explanation: '"We" inkorida: do not (don\'t).' },
-              { text: '___ we have time?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"We" savolida: Do we...?' },
+              { text: 'We ___ not know.', options: ['am', 'do', 'does'], correct: 1, explanation: '"We" inkorida: do not (don\'t).', explanationRu: "В отрицании с \"We\": do not (don't)." },
+              { text: '___ we have time?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"We" savolida: Do we...?', explanationRu: "В вопросе с \"We\": Do we...?" },
             ],
           },
           {
@@ -438,9 +438,9 @@ export const grammarPathSections = [
               exampleRu: "We are tired, but we don't want to stop.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['We is friends.', 'We are friends.'], correct: 1, explanation: '"We" + are.' },
-              { text: 'Choose the correct sentence:', options: ["We don't like tea.", "We doesn't like tea."], correct: 0, explanation: '"We" inkorida: don\'t.' },
-              { text: 'Choose the correct question:', options: ['Do we look tired?', 'Does we look tired?'], correct: 0, explanation: '"We" savolida: Do we...?' },
+              { text: 'Choose the correct sentence:', options: ['We is friends.', 'We are friends.'], correct: 1, explanation: '"We" + are.', explanationRu: "\"We\" + are." },
+              { text: 'Choose the correct sentence:', options: ["We don't like tea.", "We doesn't like tea."], correct: 0, explanation: '"We" inkorida: don\'t.', explanationRu: "В отрицании с \"We\": don't." },
+              { text: 'Choose the correct question:', options: ['Do we look tired?', 'Does we look tired?'], correct: 0, explanation: '"We" savolida: Do we...?', explanationRu: "В вопросе с \"We\": Do we...?" },
             ],
           },
         ],
@@ -460,8 +460,8 @@ export const grammarPathSections = [
               exampleRu: 'They are students. (Они студенты.)',
             },
             exercises: [
-              { text: '"Ular" so\'zini ingliz tilida qanday aytamiz?', options: ['We', 'You', 'They', 'It'], correct: 2, explanation: '"Ular" = They.' },
-              { text: 'Tom va Ali haqida gapirsangiz, qaysi olmoshni ishlatasiz?', options: ['We', 'They', 'It'], correct: 1, explanation: 'Ikkalasi ham siz emassiz: They.' },
+              { text: '"Ular" so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"они\" по-английски?", options: ['We', 'You', 'They', 'It'], correct: 2, explanation: '"Ular" = They.', explanationRu: "\"Они\" = They." },
+              { text: 'Tom va Ali haqida gapirsangiz, qaysi olmoshni ishlatasiz?', textRu: "Какое местоимение вы используете для Тома и Али?", options: ['We', 'They', 'It'], correct: 1, explanation: 'Ikkalasi ham siz emassiz: They.', explanationRu: "Оба они не вы: They." },
             ],
           },
           {
@@ -472,8 +472,8 @@ export const grammarPathSections = [
               exampleRu: 'They are teachers. (Они учителя.)',
             },
             exercises: [
-              { text: 'They ___ at school.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.' },
-              { text: '___ are my neighbors.', options: ['They', 'He', 'I'], correct: 0, explanation: '"are" — "They" bilan mos keladi.' },
+              { text: 'They ___ at school.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.', explanationRu: "\"They\" + are." },
+              { text: '___ are my neighbors.', options: ['They', 'He', 'I'], correct: 0, explanation: '"are" — "They" bilan mos keladi.', explanationRu: "\"are\" сочетается с \"They\"." },
             ],
           },
           {
@@ -484,8 +484,8 @@ export const grammarPathSections = [
               exampleRu: 'They like pizza. (Они любят пиццу.)',
             },
             exercises: [
-              { text: 'They ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"They" bilan fe\'lga -s qo\'shilmaydi.' },
-              { text: 'Choose the correct sentence:', options: ['They likes music.', 'They like music.'], correct: 1, explanation: '"They" + like (qo\'shimchasiz).' },
+              { text: 'They ___ pizza.', options: ['like', 'likes', 'liking'], correct: 0, explanation: '"They" bilan fe\'lga -s qo\'shilmaydi.', explanationRu: "С местоимением \"They\" к глаголу не добавляется -s." },
+              { text: 'Choose the correct sentence:', options: ['They likes music.', 'They like music.'], correct: 1, explanation: '"They" + like (qo\'shimchasiz).', explanationRu: "\"They\" + like (без окончания)." },
             ],
           },
           {
@@ -496,8 +496,8 @@ export const grammarPathSections = [
               exampleRu: "They don't live here. Do they know you?",
             },
             exercises: [
-              { text: 'They ___ not live here.', options: ['am', 'do', 'does'], correct: 1, explanation: '"They" inkorida: do not (don\'t).' },
-              { text: '___ they know you?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"They" savolida: Do they...?' },
+              { text: 'They ___ not live here.', options: ['am', 'do', 'does'], correct: 1, explanation: '"They" inkorida: do not (don\'t).', explanationRu: "В отрицании с \"They\": do not (don't)." },
+              { text: '___ they know you?', options: ['Am', 'Do', 'Does'], correct: 1, explanation: '"They" savolida: Do they...?', explanationRu: "В вопросе с \"They\": Do they...?" },
             ],
           },
           {
@@ -508,9 +508,9 @@ export const grammarPathSections = [
               exampleRu: "They are busy, but they don't complain.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They is students.', 'They are students.'], correct: 1, explanation: '"They" + are.' },
-              { text: 'Choose the correct sentence:', options: ["They don't like tea.", "They doesn't like tea."], correct: 0, explanation: '"They" inkorida: don\'t.' },
-              { text: 'Choose the correct question:', options: ['Do they look tired?', 'Does they look tired?'], correct: 0, explanation: '"They" savolida: Do they...?' },
+              { text: 'Choose the correct sentence:', options: ['They is students.', 'They are students.'], correct: 1, explanation: '"They" + are.', explanationRu: "\"They\" + are." },
+              { text: 'Choose the correct sentence:', options: ["They don't like tea.", "They doesn't like tea."], correct: 0, explanation: '"They" inkorida: don\'t.', explanationRu: "В отрицании с \"They\": don't." },
+              { text: 'Choose the correct question:', options: ['Do they look tired?', 'Does they look tired?'], correct: 0, explanation: '"They" savolida: Do they...?', explanationRu: "В вопросе с \"They\": Do they...?" },
             ],
           },
         ],
@@ -520,21 +520,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Shaxs olmoshlari",
       titleRu: "Тест раздела: Личные местоимения",
       exercises: [
-        { text: '"U" (erkak) so\'zini ingliz tilida qanday aytamiz?', options: ['She', 'He', 'It'], correct: 1, explanation: 'Erkak kishi uchun: He.' },
-        { text: '"U" (ayol) so\'zini ingliz tilida qanday aytamiz?', options: ['She', 'He', 'It'], correct: 0, explanation: 'Ayol kishi uchun: She.' },
-        { text: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.' },
-        { text: 'You ___ my friend.', options: ['am', 'is', 'are'], correct: 2, explanation: '"You" + are.' },
-        { text: 'He ___ a doctor.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
-        { text: 'We ___ ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.' },
-        { text: 'They ___ students.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.' },
-        { text: 'She ___ pizza.', options: ['like', 'likes'], correct: 1, explanation: '"She" bilan fe\'lga -s qo\'shiladi: likes.' },
-        { text: 'It ___ milk.', options: ['like', 'likes'], correct: 1, explanation: '"It" bilan fe\'lga -s qo\'shiladi: likes.' },
-        { text: 'They ___ pizza.', options: ['like', 'likes'], correct: 0, explanation: '"They" bilan fe\'lga -s qo\'shilmaydi: like.' },
-        { text: 'He ___ not like coffee.', options: ["don't", "doesn't"], correct: 1, explanation: '"He" inkorida: doesn\'t.' },
-        { text: 'They ___ not like coffee.', options: ["don't", "doesn't"], correct: 0, explanation: '"They" inkorida: don\'t.' },
-        { text: '___ she know you?', options: ['Do', 'Does'], correct: 1, explanation: '"She" savolida: Does.' },
-        { text: '___ we have time?', options: ['Do', 'Does'], correct: 0, explanation: '"We" savolida: Do.' },
-        { text: 'Choose the correct sentence:', options: ["It don't work.", "It doesn't work."], correct: 1, explanation: '"It" inkorida: doesn\'t.' },
+        { text: '"U" (erkak) so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"он\" (мужской род) по-английски?", options: ['She', 'He', 'It'], correct: 1, explanation: 'Erkak kishi uchun: He.', explanationRu: "Для мужчин: He." },
+        { text: '"U" (ayol) so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"она\" (женский род) по-английски?", options: ['She', 'He', 'It'], correct: 0, explanation: 'Ayol kishi uchun: She.', explanationRu: "Для женщин: She." },
+        { text: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.', explanationRu: "\"I\" + am." },
+        { text: 'You ___ my friend.', options: ['am', 'is', 'are'], correct: 2, explanation: '"You" + are.', explanationRu: "\"You\" + are." },
+        { text: 'He ___ a doctor.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.', explanationRu: "\"He\" + is." },
+        { text: 'We ___ ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.', explanationRu: "\"We\" + are." },
+        { text: 'They ___ students.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.', explanationRu: "\"They\" + are." },
+        { text: 'She ___ pizza.', options: ['like', 'likes'], correct: 1, explanation: '"She" bilan fe\'lga -s qo\'shiladi: likes.', explanationRu: "С местоимением \"She\" к глаголу добавляется -s: likes." },
+        { text: 'It ___ milk.', options: ['like', 'likes'], correct: 1, explanation: '"It" bilan fe\'lga -s qo\'shiladi: likes.', explanationRu: "С местоимением \"It\" к глаголу добавляется -s: likes." },
+        { text: 'They ___ pizza.', options: ['like', 'likes'], correct: 0, explanation: '"They" bilan fe\'lga -s qo\'shilmaydi: like.', explanationRu: "С местоимением \"They\" к глаголу не добавляется -s: like." },
+        { text: 'He ___ not like coffee.', options: ["don't", "doesn't"], correct: 1, explanation: '"He" inkorida: doesn\'t.', explanationRu: "В отрицании с \"He\": doesn't." },
+        { text: 'They ___ not like coffee.', options: ["don't", "doesn't"], correct: 0, explanation: '"They" inkorida: don\'t.', explanationRu: "В отрицании с \"They\": don't." },
+        { text: '___ she know you?', options: ['Do', 'Does'], correct: 1, explanation: '"She" savolida: Does.', explanationRu: "В вопросе с \"She\": Does." },
+        { text: '___ we have time?', options: ['Do', 'Does'], correct: 0, explanation: '"We" savolida: Do.', explanationRu: "В вопросе с \"We\": Do." },
+        { text: 'Choose the correct sentence:', options: ["It don't work.", "It doesn't work."], correct: 1, explanation: '"It" inkorida: doesn\'t.', explanationRu: "В отрицании с \"It\": doesn't." },
       ],
     },
   },
@@ -560,8 +560,8 @@ export const grammarPathSections = [
               exampleRu: 'I am, you are, he is. (Я есть, ты есть, он есть.)',
             },
             exercises: [
-              { text: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.' },
-              { text: 'They ___ teachers.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.' },
+              { text: 'I ___ a student.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.', explanationRu: "\"I\" + am." },
+              { text: 'They ___ teachers.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.', explanationRu: "\"They\" + are." },
             ],
           },
           {
@@ -572,8 +572,8 @@ export const grammarPathSections = [
               exampleRu: 'He is tall. She is tall. It is small.',
             },
             exercises: [
-              { text: 'The cat ___ small.', options: ['am', 'is', 'are'], correct: 1, explanation: '"The cat" = it = is.' },
-              { text: 'My brother ___ busy.', options: ['am', 'is', 'are'], correct: 1, explanation: '"My brother" = he = is.' },
+              { text: 'The cat ___ small.', options: ['am', 'is', 'are'], correct: 1, explanation: '"The cat" = it = is.', explanationRu: "\"The cat\" = it = is." },
+              { text: 'My brother ___ busy.', options: ['am', 'is', 'are'], correct: 1, explanation: '"My brother" = he = is.', explanationRu: "\"My brother\" = he = is." },
             ],
           },
           {
@@ -584,8 +584,8 @@ export const grammarPathSections = [
               exampleRu: 'You are kind. We are ready. They are here.',
             },
             exercises: [
-              { text: 'My friends ___ here.', options: ['am', 'is', 'are'], correct: 2, explanation: '"My friends" = they = are.' },
-              { text: 'You and I ___ classmates.', options: ['am', 'is', 'are'], correct: 2, explanation: '"You and I" = we = are.' },
+              { text: 'My friends ___ here.', options: ['am', 'is', 'are'], correct: 2, explanation: '"My friends" = they = are.', explanationRu: "\"My friends\" = they = are." },
+              { text: 'You and I ___ classmates.', options: ['am', 'is', 'are'], correct: 2, explanation: '"You and I" = we = are.', explanationRu: "\"You and I\" = we = are." },
             ],
           },
           {
@@ -596,8 +596,8 @@ export const grammarPathSections = [
               exampleRu: 'I am hungry.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I are hungry.', 'I is hungry.', 'I am hungry.'], correct: 2, explanation: '"I" faqat "am" bilan keladi.' },
-              { text: 'Which subject uses "am"?', options: ['I', 'You', 'We'], correct: 0, explanation: '"am" faqat "I" bilan ishlatiladi.' },
+              { text: 'Choose the correct sentence:', options: ['I are hungry.', 'I is hungry.', 'I am hungry.'], correct: 2, explanation: '"I" faqat "am" bilan keladi.', explanationRu: "\"I\" используется только с \"am\"." },
+              { text: 'Which subject uses "am"?', options: ['I', 'You', 'We'], correct: 0, explanation: '"am" faqat "I" bilan ishlatiladi.', explanationRu: "\"am\" используется только с \"I\"." },
             ],
           },
           {
@@ -608,9 +608,9 @@ export const grammarPathSections = [
               exampleRu: 'I am busy. She is busy. We are busy.',
             },
             exercises: [
-              { text: 'She ___ my teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.' },
-              { text: 'We ___ friends.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.' },
-              { text: 'I ___ ready.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.' },
+              { text: 'She ___ my teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.', explanationRu: "\"She\" + is." },
+              { text: 'We ___ friends.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.', explanationRu: "\"We\" + are." },
+              { text: 'I ___ ready.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.', explanationRu: "\"I\" + am." },
             ],
           },
         ],
@@ -630,8 +630,8 @@ export const grammarPathSections = [
               exampleRu: "I'm tired.",
             },
             exercises: [
-              { text: 'Choose the contraction of "I am":', options: ["I'm", "I's", "I'am"], correct: 0, explanation: '"I am" -> I\'m.' },
-              { text: 'Choose the correct sentence:', options: ["I'm happy.", 'Im happy.', "I'am happy."], correct: 0, explanation: 'To\'g\'ri qisqartma: I\'m.' },
+              { text: 'Choose the contraction of "I am":', options: ["I'm", "I's", "I'am"], correct: 0, explanation: '"I am" -> I\'m.', explanationRu: "\"I am\" -> I'm." },
+              { text: 'Choose the correct sentence:', options: ["I'm happy.", 'Im happy.', "I'am happy."], correct: 0, explanation: 'To\'g\'ri qisqartma: I\'m.', explanationRu: "Верное сокращение: I'm." },
             ],
           },
           {
@@ -642,8 +642,8 @@ export const grammarPathSections = [
               exampleRu: "You're welcome. We're ready. They're here.",
             },
             exercises: [
-              { text: 'Choose the contraction of "They are":', options: ["They're", "They's", "Theyr'e"], correct: 0, explanation: '"They are" -> They\'re.' },
-              { text: 'Choose the contraction of "We are":', options: ["We're", "We's", "Wer'e"], correct: 0, explanation: '"We are" -> We\'re.' },
+              { text: 'Choose the contraction of "They are":', options: ["They're", "They's", "Theyr'e"], correct: 0, explanation: '"They are" -> They\'re.', explanationRu: "\"They are\" -> They're." },
+              { text: 'Choose the contraction of "We are":', options: ["We're", "We's", "Wer'e"], correct: 0, explanation: '"We are" -> We\'re.', explanationRu: "\"We are\" -> We're." },
             ],
           },
           {
@@ -654,8 +654,8 @@ export const grammarPathSections = [
               exampleRu: "He's tall. She's smart. It's cold.",
             },
             exercises: [
-              { text: 'Choose the contraction of "She is":', options: ["She's", "She'is", "Shes'"], correct: 0, explanation: '"She is" -> She\'s.' },
-              { text: 'Choose the contraction of "It is":', options: ["It's", "Its'", "I'ts"], correct: 0, explanation: '"It is" -> It\'s.' },
+              { text: 'Choose the contraction of "She is":', options: ["She's", "She'is", "Shes'"], correct: 0, explanation: '"She is" -> She\'s.', explanationRu: "\"She is\" -> She's." },
+              { text: 'Choose the contraction of "It is":', options: ["It's", "Its'", "I'ts"], correct: 0, explanation: '"It is" -> It\'s.', explanationRu: "\"It is\" -> It's." },
             ],
           },
           {
@@ -666,8 +666,8 @@ export const grammarPathSections = [
               exampleRu: "Yes, I am. (Не Yes, I'm.)",
             },
             exercises: [
-              { text: 'Choose the correct short answer:', options: ['Yes, I am.', "Yes, I'm."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, I am.' },
-              { text: 'Choose the correct sentence:', options: ["She's my sister.", "She is' my sister."], correct: 0, explanation: 'Gap ichida qisqartma to\'g\'ri: She\'s my sister.' },
+              { text: 'Choose the correct short answer:', options: ['Yes, I am.', "Yes, I'm."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, I am.', explanationRu: "В коротком ответе сокращение не используется: Yes, I am." },
+              { text: 'Choose the correct sentence:', options: ["She's my sister.", "She is' my sister."], correct: 0, explanation: 'Gap ichida qisqartma to\'g\'ri: She\'s my sister.', explanationRu: "Внутри предложения сокращение верно: She's my sister." },
             ],
           },
           {
@@ -678,9 +678,9 @@ export const grammarPathSections = [
               exampleRu: "He's my friend, and they're my classmates.",
             },
             exercises: [
-              { text: 'Choose the contraction of "He is":', options: ["He's", "He'is"], correct: 0, explanation: '"He is" -> He\'s.' },
-              { text: 'Choose the contraction of "You are":', options: ["You're", "You'is"], correct: 0, explanation: '"You are" -> You\'re.' },
-              { text: 'Choose the correct short answer:', options: ['Yes, they are.', "Yes, they're."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, they are.' },
+              { text: 'Choose the contraction of "He is":', options: ["He's", "He'is"], correct: 0, explanation: '"He is" -> He\'s.', explanationRu: "\"He is\" -> He's." },
+              { text: 'Choose the contraction of "You are":', options: ["You're", "You'is"], correct: 0, explanation: '"You are" -> You\'re.', explanationRu: "\"You are\" -> You're." },
+              { text: 'Choose the correct short answer:', options: ['Yes, they are.', "Yes, they're."], correct: 0, explanation: 'Qisqa javobda qisqartma ishlatilmaydi: Yes, they are.', explanationRu: "В коротком ответе сокращение не используется: Yes, they are." },
             ],
           },
         ],
@@ -700,8 +700,8 @@ export const grammarPathSections = [
               exampleRu: 'He is not ready.',
             },
             exercises: [
-              { text: 'She ___ not busy.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is not.' },
-              { text: 'They ___ not ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are not.' },
+              { text: 'She ___ not busy.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is not.', explanationRu: "\"She\" + is not." },
+              { text: 'They ___ not ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are not.', explanationRu: "\"They\" + are not." },
             ],
           },
           {
@@ -712,8 +712,8 @@ export const grammarPathSections = [
               exampleRu: "He isn't here. They aren't ready.",
             },
             exercises: [
-              { text: 'Choose the contraction of "is not":', options: ["isn't", "is'nt"], correct: 0, explanation: '"is not" -> isn\'t.' },
-              { text: 'Choose the contraction of "are not":', options: ["aren't", "are'nt"], correct: 0, explanation: '"are not" -> aren\'t.' },
+              { text: 'Choose the contraction of "is not":', options: ["isn't", "is'nt"], correct: 0, explanation: '"is not" -> isn\'t.', explanationRu: "\"is not\" -> isn't." },
+              { text: 'Choose the contraction of "are not":', options: ["aren't", "are'nt"], correct: 0, explanation: '"are not" -> aren\'t.', explanationRu: "\"are not\" -> aren't." },
             ],
           },
           {
@@ -724,8 +724,8 @@ export const grammarPathSections = [
               exampleRu: "I'm not tired.",
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ["I amn't tired.", "I'm not tired."], correct: 1, explanation: '"am not" ning qisqartmasi yo\'q: I\'m not.' },
-              { text: "I ___ ready yet.", options: ["'m not", "isn't", "aren't"], correct: 0, explanation: '"I" inkorida: \'m not.' },
+              { text: 'Choose the correct sentence:', options: ["I amn't tired.", "I'm not tired."], correct: 1, explanation: '"am not" ning qisqartmasi yo\'q: I\'m not.', explanationRu: "У \"am not\" нет сокращения: I'm not." },
+              { text: "I ___ ready yet.", options: ["'m not", "isn't", "aren't"], correct: 0, explanation: '"I" inkorida: \'m not.', explanationRu: "В отрицании с \"I\": 'm not." },
             ],
           },
           {
@@ -736,8 +736,8 @@ export const grammarPathSections = [
               exampleRu: "It isn't working. We aren't late.",
             },
             exercises: [
-              { text: 'It ___ working.', options: ["isn't", "aren't", "'m not"], correct: 0, explanation: '"It" inkorida: isn\'t.' },
-              { text: 'We ___ late.', options: ["isn't", "aren't", "'m not"], correct: 1, explanation: '"We" inkorida: aren\'t.' },
+              { text: 'It ___ working.', options: ["isn't", "aren't", "'m not"], correct: 0, explanation: '"It" inkorida: isn\'t.', explanationRu: "В отрицании с \"It\": isn't." },
+              { text: 'We ___ late.', options: ["isn't", "aren't", "'m not"], correct: 1, explanation: '"We" inkorida: aren\'t.', explanationRu: "В отрицании с \"We\": aren't." },
             ],
           },
           {
@@ -748,9 +748,9 @@ export const grammarPathSections = [
               exampleRu: "He isn't ready, and I'm not either.",
             },
             exercises: [
-              { text: 'He ___ my brother.', options: ["isn't", "aren't"], correct: 0, explanation: '"He" inkorida: isn\'t.' },
-              { text: 'You ___ wrong.', options: ["isn't", "aren't"], correct: 1, explanation: '"You" inkorida: aren\'t.' },
-              { text: 'Choose the correct sentence:', options: ["She isn't home.", 'She not is home.'], correct: 0, explanation: 'To\'g\'ri inkor: She isn\'t home.' },
+              { text: 'He ___ my brother.', options: ["isn't", "aren't"], correct: 0, explanation: '"He" inkorida: isn\'t.', explanationRu: "В отрицании с \"He\": isn't." },
+              { text: 'You ___ wrong.', options: ["isn't", "aren't"], correct: 1, explanation: '"You" inkorida: aren\'t.', explanationRu: "В отрицании с \"You\": aren't." },
+              { text: 'Choose the correct sentence:', options: ["She isn't home.", 'She not is home.'], correct: 0, explanation: 'To\'g\'ri inkor: She isn\'t home.', explanationRu: "Верное отрицание: She isn't home." },
             ],
           },
         ],
@@ -770,8 +770,8 @@ export const grammarPathSections = [
               exampleRu: 'Is he ready?',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Is she happy?', 'She is happy?'], correct: 0, explanation: 'Savolda "is" oldinga chiqadi: Is she happy?' },
-              { text: '___ you tired?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.' },
+              { text: 'Choose the correct question:', options: ['Is she happy?', 'She is happy?'], correct: 0, explanation: 'Savolda "is" oldinga chiqadi: Is she happy?', explanationRu: "В вопросе \"is\" выносится вперёд: Is she happy?" },
+              { text: '___ you tired?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.', explanationRu: "В вопросе с \"You\": Are." },
             ],
           },
           {
@@ -782,8 +782,8 @@ export const grammarPathSections = [
               exampleRu: 'Am I late?',
             },
             exercises: [
-              { text: '___ I right?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.' },
-              { text: 'Choose the correct question:', options: ['Am I late?', 'I am late?'], correct: 0, explanation: 'Savolda "am" oldinga chiqadi: Am I late?' },
+              { text: '___ I right?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.', explanationRu: "В вопросе с \"I\": Am." },
+              { text: 'Choose the correct question:', options: ['Am I late?', 'I am late?'], correct: 0, explanation: 'Savolda "am" oldinga chiqadi: Am I late?', explanationRu: "В вопросе \"am\" выносится вперёд: Am I late?" },
             ],
           },
           {
@@ -794,8 +794,8 @@ export const grammarPathSections = [
               exampleRu: 'Is it cold?',
             },
             exercises: [
-              { text: '___ it raining?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"It" savolida: Is.' },
-              { text: '___ she a teacher?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"She" savolida: Is.' },
+              { text: '___ it raining?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"It" savolida: Is.', explanationRu: "В вопросе с \"It\": Is." },
+              { text: '___ she a teacher?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"She" savolida: Is.', explanationRu: "В вопросе с \"She\": Is." },
             ],
           },
           {
@@ -806,8 +806,8 @@ export const grammarPathSections = [
               exampleRu: 'Are they ready?',
             },
             exercises: [
-              { text: '___ we late?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"We" savolida: Are.' },
-              { text: '___ they students?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"They" savolida: Are.' },
+              { text: '___ we late?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"We" savolida: Are.', explanationRu: "В вопросе с \"We\": Are." },
+              { text: '___ they students?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"They" savolida: Are.', explanationRu: "В вопросе с \"They\": Are." },
             ],
           },
           {
@@ -818,9 +818,9 @@ export const grammarPathSections = [
               exampleRu: 'Are you okay? Is he your friend?',
             },
             exercises: [
-              { text: '___ you okay?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.' },
-              { text: '___ he your friend?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"He" savolida: Is.' },
-              { text: '___ I wrong?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.' },
+              { text: '___ you okay?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.', explanationRu: "В вопросе с \"You\": Are." },
+              { text: '___ he your friend?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: '"He" savolida: Is.', explanationRu: "В вопросе с \"He\": Is." },
+              { text: '___ I wrong?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.', explanationRu: "В вопросе с \"I\": Am." },
             ],
           },
         ],
@@ -840,8 +840,8 @@ export const grammarPathSections = [
               exampleRu: 'Are you ready? Yes, I am.',
             },
             exercises: [
-              { text: 'Is she a doctor? Yes, ___.', options: ['she is', 'she are', 'she am'], correct: 0, explanation: '"She" + is.' },
-              { text: 'Are they students? Yes, ___.', options: ['they are', 'they is'], correct: 0, explanation: '"They" + are.' },
+              { text: 'Is she a doctor? Yes, ___.', options: ['she is', 'she are', 'she am'], correct: 0, explanation: '"She" + is.', explanationRu: "\"She\" + is." },
+              { text: 'Are they students? Yes, ___.', options: ['they are', 'they is'], correct: 0, explanation: '"They" + are.', explanationRu: "\"They\" + are." },
             ],
           },
           {
@@ -852,8 +852,8 @@ export const grammarPathSections = [
               exampleRu: "Is he here? No, he isn't.",
             },
             exercises: [
-              { text: 'Is it cold? No, ___.', options: ["it isn't", "it aren't"], correct: 0, explanation: '"It" inkorida: isn\'t.' },
-              { text: 'Are you tired? No, ___.', options: ["I'm not", 'I not'], correct: 0, explanation: '"I" inkorida: \'m not.' },
+              { text: 'Is it cold? No, ___.', options: ["it isn't", "it aren't"], correct: 0, explanation: '"It" inkorida: isn\'t.', explanationRu: "В отрицании с \"It\": isn't." },
+              { text: 'Are you tired? No, ___.', options: ["I'm not", 'I not'], correct: 0, explanation: '"I" inkorida: \'m not.', explanationRu: "В отрицании с \"I\": 'm not." },
             ],
           },
           {
@@ -864,8 +864,8 @@ export const grammarPathSections = [
               exampleRu: 'Are you a teacher? Yes, I am.',
             },
             exercises: [
-              { text: 'Choose the correct short answer:', options: ['Yes, I am.', 'Yes, I am a student.'], correct: 0, explanation: 'Qisqa javob qisqa bo\'ladi: Yes, I am.' },
-              { text: 'Am I right? Yes, ___.', options: ['you are', 'you am'], correct: 0, explanation: '"You" + are.' },
+              { text: 'Choose the correct short answer:', options: ['Yes, I am.', 'Yes, I am a student.'], correct: 0, explanation: 'Qisqa javob qisqa bo\'ladi: Yes, I am.', explanationRu: "Короткий ответ короткий: Yes, I am." },
+              { text: 'Am I right? Yes, ___.', options: ['you are', 'you am'], correct: 0, explanation: '"You" + are.', explanationRu: "\"You\" + are." },
             ],
           },
           {
@@ -876,8 +876,8 @@ export const grammarPathSections = [
               exampleRu: "Is she happy? No, she isn't.",
             },
             exercises: [
-              { text: 'Is she happy? No, ___.', options: ["she isn't", "she aren't"], correct: 0, explanation: '"She" inkorida: isn\'t.' },
-              { text: 'Are we late? Yes, ___.', options: ['we are', 'we is'], correct: 0, explanation: '"We" + are.' },
+              { text: 'Is she happy? No, ___.', options: ["she isn't", "she aren't"], correct: 0, explanation: '"She" inkorida: isn\'t.', explanationRu: "В отрицании с \"She\": isn't." },
+              { text: 'Are we late? Yes, ___.', options: ['we are', 'we is'], correct: 0, explanation: '"We" + are.', explanationRu: "\"We\" + are." },
             ],
           },
           {
@@ -888,9 +888,9 @@ export const grammarPathSections = [
               exampleRu: "Is it Monday? Yes, it is. Are they here? No, they aren't.",
             },
             exercises: [
-              { text: 'Is it Monday? Yes, ___.', options: ['it is', 'it are'], correct: 0, explanation: '"It" + is.' },
-              { text: 'Are they here? No, ___.', options: ["they aren't", "they isn't"], correct: 0, explanation: '"They" inkorida: aren\'t.' },
-              { text: 'Are you ready? No, ___.', options: ["I'm not", "I isn't"], correct: 0, explanation: '"I" inkorida: \'m not.' },
+              { text: 'Is it Monday? Yes, ___.', options: ['it is', 'it are'], correct: 0, explanation: '"It" + is.', explanationRu: "\"It\" + is." },
+              { text: 'Are they here? No, ___.', options: ["they aren't", "they isn't"], correct: 0, explanation: '"They" inkorida: aren\'t.', explanationRu: "В отрицании с \"They\": aren't." },
+              { text: 'Are you ready? No, ___.', options: ["I'm not", "I isn't"], correct: 0, explanation: '"I" inkorida: \'m not.', explanationRu: "В отрицании с \"I\": 'm not." },
             ],
           },
         ],
@@ -910,8 +910,8 @@ export const grammarPathSections = [
               exampleRu: 'What is your name?',
             },
             exercises: [
-              { text: '___ is your name?', options: ['What', 'Who', 'Where'], correct: 0, explanation: 'Narsa/ism so\'ralganda: What.' },
-              { text: 'Choose the correct question:', options: ['What is this?', 'What this is?'], correct: 0, explanation: '"to be" "What" dan keyin darrov keladi: What is this?' },
+              { text: '___ is your name?', options: ['What', 'Who', 'Where'], correct: 0, explanation: 'Narsa/ism so\'ralganda: What.', explanationRu: "При вопросе о предмете/имени: What." },
+              { text: 'Choose the correct question:', options: ['What is this?', 'What this is?'], correct: 0, explanation: '"to be" "What" dan keyin darrov keladi: What is this?', explanationRu: "\"to be\" идёт сразу после \"What\": What is this?" },
             ],
           },
           {
@@ -922,8 +922,8 @@ export const grammarPathSections = [
               exampleRu: 'Who is she?',
             },
             exercises: [
-              { text: '___ is that man?', options: ['What', 'Who', 'Where'], correct: 1, explanation: 'Kim ekani so\'ralganda: Who.' },
-              { text: '___ are they?', options: ['What', 'Who', 'Where'], correct: 1, explanation: 'Kim ekanlari so\'ralganda: Who.' },
+              { text: '___ is that man?', options: ['What', 'Who', 'Where'], correct: 1, explanation: 'Kim ekani so\'ralganda: Who.', explanationRu: "При вопросе о том, кто это: Who." },
+              { text: '___ are they?', options: ['What', 'Who', 'Where'], correct: 1, explanation: 'Kim ekanlari so\'ralganda: Who.', explanationRu: "При вопросе о том, кто они: Who." },
             ],
           },
           {
@@ -934,8 +934,8 @@ export const grammarPathSections = [
               exampleRu: 'Where is the book?',
             },
             exercises: [
-              { text: '___ is my phone?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Joy so\'ralganda: Where.' },
-              { text: '___ are you from?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Kelib chiqish joyi so\'ralganda: Where.' },
+              { text: '___ is my phone?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Joy so\'ralganda: Where.', explanationRu: "При вопросе о месте: Where." },
+              { text: '___ are you from?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Kelib chiqish joyi so\'ralganda: Where.', explanationRu: "При вопросе о месте происхождения: Where." },
             ],
           },
           {
@@ -946,8 +946,8 @@ export const grammarPathSections = [
               exampleRu: 'How are you?',
             },
             exercises: [
-              { text: '___ are you today?', options: ['What', 'How', 'Where'], correct: 1, explanation: 'Holat so\'ralganda: How.' },
-              { text: 'Choose the correct question:', options: ['How is the weather?', 'How weather is?'], correct: 0, explanation: '"to be" "How" dan keyin darrov keladi: How is the weather?' },
+              { text: '___ are you today?', options: ['What', 'How', 'Where'], correct: 1, explanation: 'Holat so\'ralganda: How.', explanationRu: "При вопросе о состоянии: How." },
+              { text: 'Choose the correct question:', options: ['How is the weather?', 'How weather is?'], correct: 0, explanation: '"to be" "How" dan keyin darrov keladi: How is the weather?', explanationRu: "\"to be\" идёт сразу после \"How\": How is the weather?" },
             ],
           },
           {
@@ -958,9 +958,9 @@ export const grammarPathSections = [
               exampleRu: 'Who is your teacher? Where is the station? How are you?',
             },
             exercises: [
-              { text: '___ is your teacher?', options: ['Who', 'Where', 'How'], correct: 0, explanation: 'Kim ekani so\'ralganda: Who.' },
-              { text: '___ is the station?', options: ['Who', 'Where', 'How'], correct: 1, explanation: 'Joy so\'ralganda: Where.' },
-              { text: '___ are you?', options: ['Who', 'Where', 'How'], correct: 2, explanation: 'Holat so\'ralganda: How.' },
+              { text: '___ is your teacher?', options: ['Who', 'Where', 'How'], correct: 0, explanation: 'Kim ekani so\'ralganda: Who.', explanationRu: "При вопросе о том, кто это: Who." },
+              { text: '___ is the station?', options: ['Who', 'Where', 'How'], correct: 1, explanation: 'Joy so\'ralganda: Where.', explanationRu: "При вопросе о месте: Where." },
+              { text: '___ are you?', options: ['Who', 'Where', 'How'], correct: 2, explanation: 'Holat so\'ralganda: How.', explanationRu: "При вопросе о состоянии: How." },
             ],
           },
         ],
@@ -980,8 +980,8 @@ export const grammarPathSections = [
               exampleRu: 'She is happy. I am tired.',
             },
             exercises: [
-              { text: 'He ___ angry.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
-              { text: 'Choose the correct sentence:', options: ['I am tired.', 'I tired.'], correct: 0, explanation: 'Sifat oldidan "to be" kerak: I am tired.' },
+              { text: 'He ___ angry.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.', explanationRu: "\"He\" + is." },
+              { text: 'Choose the correct sentence:', options: ['I am tired.', 'I tired.'], correct: 0, explanation: 'Sifat oldidan "to be" kerak: I am tired.', explanationRu: "Перед прилагательным нужен \"to be\": I am tired." },
             ],
           },
           {
@@ -992,8 +992,8 @@ export const grammarPathSections = [
               exampleRu: 'He is a doctor. I am a student.',
             },
             exercises: [
-              { text: 'She ___ a nurse.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.' },
-              { text: 'They ___ engineers.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.' },
+              { text: 'She ___ a nurse.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is.', explanationRu: "\"She\" + is." },
+              { text: 'They ___ engineers.', options: ['am', 'is', 'are'], correct: 2, explanation: '"They" + are.', explanationRu: "\"They\" + are." },
             ],
           },
           {
@@ -1004,8 +1004,8 @@ export const grammarPathSections = [
               exampleRu: 'The book is on the table. We are at home.',
             },
             exercises: [
-              { text: 'The keys ___ in my bag.', options: ['am', 'is', 'are'], correct: 2, explanation: '"The keys" = they = are.' },
-              { text: 'My mother ___ at work.', options: ['am', 'is', 'are'], correct: 1, explanation: '"My mother" = she = is.' },
+              { text: 'The keys ___ in my bag.', options: ['am', 'is', 'are'], correct: 2, explanation: '"The keys" = they = are.', explanationRu: "\"The keys\" = they = are." },
+              { text: 'My mother ___ at work.', options: ['am', 'is', 'are'], correct: 1, explanation: '"My mother" = she = is.', explanationRu: "\"My mother\" = she = is." },
             ],
           },
           {
@@ -1016,8 +1016,8 @@ export const grammarPathSections = [
               exampleRu: 'I am 20 years old. She is 15.',
             },
             exercises: [
-              { text: 'He ___ 30 years old.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
-              { text: 'My grandparents ___ 70 years old.', options: ['am', 'is', 'are'], correct: 2, explanation: '"My grandparents" = they = are.' },
+              { text: 'He ___ 30 years old.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.', explanationRu: "\"He\" + is." },
+              { text: 'My grandparents ___ 70 years old.', options: ['am', 'is', 'are'], correct: 2, explanation: '"My grandparents" = they = are.', explanationRu: "\"My grandparents\" = they = are." },
             ],
           },
           {
@@ -1028,9 +1028,9 @@ export const grammarPathSections = [
               exampleRu: 'She is a teacher. She is kind. She is at school. She is 28.',
             },
             exercises: [
-              { text: 'She ___ a teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is (kasb).' },
-              { text: 'The cat ___ under the table.', options: ['am', 'is', 'are'], correct: 1, explanation: '"The cat" = it = is (joy).' },
-              { text: 'We ___ 18 years old.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are (yosh).' },
+              { text: 'She ___ a teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is (kasb).', explanationRu: "\"She\" + is (профессия)." },
+              { text: 'The cat ___ under the table.', options: ['am', 'is', 'are'], correct: 1, explanation: '"The cat" = it = is (joy).', explanationRu: "\"The cat\" = it = is (место)." },
+              { text: 'We ___ 18 years old.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are (yosh).', explanationRu: "\"We\" + are (возраст)." },
             ],
           },
         ],
@@ -1040,21 +1040,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: 'To be' fe'li",
       titleRu: 'Тест раздела: Глагол "to be"',
       exercises: [
-        { text: 'He ___ a doctor.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.' },
-        { text: 'We ___ ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.' },
-        { text: 'I ___ tired.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.' },
-        { text: 'Choose the contraction of "They are":', options: ["They're", "They's"], correct: 0, explanation: '"They are" -> They\'re.' },
-        { text: 'Choose the contraction of "She is":', options: ["She's", "She'is"], correct: 0, explanation: '"She is" -> She\'s.' },
-        { text: 'He ___ not ready.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is not.' },
-        { text: 'Choose the contraction of "is not":', options: ["isn't", "is'nt"], correct: 0, explanation: '"is not" -> isn\'t.' },
-        { text: '___ you tired?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.' },
-        { text: '___ I late?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.' },
-        { text: 'Is she a doctor? Yes, ___.', options: ['she is', 'she are'], correct: 0, explanation: '"She" + is.' },
-        { text: 'Are they ready? No, ___.', options: ["they aren't", "they isn't"], correct: 0, explanation: '"They" inkorida: aren\'t.' },
-        { text: '___ is your name?', options: ['What', 'Who', 'Where'], correct: 0, explanation: 'Ism so\'ralganda: What.' },
-        { text: '___ is the book?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Joy so\'ralganda: Where.' },
-        { text: '___ are you?', options: ['Who', 'Where', 'How'], correct: 2, explanation: 'Holat so\'ralganda: How.' },
-        { text: 'She ___ a teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is (kasb).' },
+        { text: 'He ___ a doctor.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is.', explanationRu: "\"He\" + is." },
+        { text: 'We ___ ready.', options: ['am', 'is', 'are'], correct: 2, explanation: '"We" + are.', explanationRu: "\"We\" + are." },
+        { text: 'I ___ tired.', options: ['am', 'is', 'are'], correct: 0, explanation: '"I" + am.', explanationRu: "\"I\" + am." },
+        { text: 'Choose the contraction of "They are":', options: ["They're", "They's"], correct: 0, explanation: '"They are" -> They\'re.', explanationRu: "\"They are\" -> They're." },
+        { text: 'Choose the contraction of "She is":', options: ["She's", "She'is"], correct: 0, explanation: '"She is" -> She\'s.', explanationRu: "\"She is\" -> She's." },
+        { text: 'He ___ not ready.', options: ['am', 'is', 'are'], correct: 1, explanation: '"He" + is not.', explanationRu: "\"He\" + is not." },
+        { text: 'Choose the contraction of "is not":', options: ["isn't", "is'nt"], correct: 0, explanation: '"is not" -> isn\'t.', explanationRu: "\"is not\" -> isn't." },
+        { text: '___ you tired?', options: ['Am', 'Is', 'Are'], correct: 2, explanation: '"You" savolida: Are.', explanationRu: "В вопросе с \"You\": Are." },
+        { text: '___ I late?', options: ['Am', 'Is', 'Are'], correct: 0, explanation: '"I" savolida: Am.', explanationRu: "В вопросе с \"I\": Am." },
+        { text: 'Is she a doctor? Yes, ___.', options: ['she is', 'she are'], correct: 0, explanation: '"She" + is.', explanationRu: "\"She\" + is." },
+        { text: 'Are they ready? No, ___.', options: ["they aren't", "they isn't"], correct: 0, explanation: '"They" inkorida: aren\'t.', explanationRu: "В отрицании с \"They\": aren't." },
+        { text: '___ is your name?', options: ['What', 'Who', 'Where'], correct: 0, explanation: 'Ism so\'ralganda: What.', explanationRu: "При вопросе об имени: What." },
+        { text: '___ is the book?', options: ['What', 'Who', 'Where'], correct: 2, explanation: 'Joy so\'ralganda: Where.', explanationRu: "При вопросе о месте: Where." },
+        { text: '___ are you?', options: ['Who', 'Where', 'How'], correct: 2, explanation: 'Holat so\'ralganda: How.', explanationRu: "При вопросе о состоянии: How." },
+        { text: 'She ___ a teacher.', options: ['am', 'is', 'are'], correct: 1, explanation: '"She" + is (kasb).', explanationRu: "\"She\" + is (профессия)." },
       ],
     },
   },
@@ -1080,8 +1080,8 @@ export const grammarPathSections = [
               exampleRu: 'cat → cats (кошка → кошки), book → books (книга → книги)',
             },
             exercises: [
-              { text: '"book" (kitob) so\'zining ko\'plik shakli qaysi?', options: ['bookes', 'books', 'bookies'], correct: 1, explanation: 'Ko\'pchilik otlarga shunchaki -s qo\'shiladi: books.' },
-              { text: '"cat" (mushuk) so\'zini ko\'plikka aylantiring:', options: ['cats', 'cates', 'caties'], correct: 0, explanation: 'cat + s = cats.' },
+              { text: '"book" (kitob) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"book\" (книга)?", options: ['bookes', 'books', 'bookies'], correct: 1, explanation: 'Ko\'pchilik otlarga shunchaki -s qo\'shiladi: books.', explanationRu: "К большинству существительных просто добавляется -s: books." },
+              { text: '"cat" (mushuk) so\'zini ko\'plikka aylantiring:', textRu: "Образуйте множественное число слова \"cat\" (кошка):", options: ['cats', 'cates', 'caties'], correct: 0, explanation: 'cat + s = cats.', explanationRu: "cat + s = cats." },
             ],
           },
           {
@@ -1092,8 +1092,8 @@ export const grammarPathSections = [
               exampleRu: 'a dog (собака) → dogs (собаки), a pen → pens',
             },
             exercises: [
-              { text: 'To\'g\'ri birikmani tanlang:', options: ['a dogs', 'dogs', 'an dogs'], correct: 1, explanation: 'Ko\'plikdagi otlar oldidan a/an ishlatilmaydi: dogs.' },
-              { text: 'Choose the correct option:', options: ['I have two dogs.', 'I have a two dogs.'], correct: 0, explanation: 'Son va ko\'plik oti kelganda "a" artikli qo\'yilmaydi.' },
+              { text: 'To\'g\'ri birikmani tanlang:', textRu: "Выберите правильное сочетание:", options: ['a dogs', 'dogs', 'an dogs'], correct: 1, explanation: 'Ko\'plikdagi otlar oldidan a/an ishlatilmaydi: dogs.', explanationRu: "Перед существительными во множественном числе a/an не используется: dogs." },
+              { text: 'Choose the correct option:', options: ['I have two dogs.', 'I have a two dogs.'], correct: 0, explanation: 'Son va ko\'plik oti kelganda "a" artikli qo\'yilmaydi.', explanationRu: "При числительном и существительном во множественном числе артикль \"a\" не ставится." },
             ],
           },
           {
@@ -1104,8 +1104,8 @@ export const grammarPathSections = [
               exampleRu: 'one apple → three apples',
             },
             exercises: [
-              { text: 'I have two ___ .', options: ['car', 'cars', 'cares'], correct: 1, explanation: 'two (ikkita) dan keyin ko\'plik shakli: cars.' },
-              { text: 'There are five ___ in the room.', options: ['chair', 'chairs', 'chaires'], correct: 1, explanation: 'five (beshta) dan keyin ko\'plik shakli: chairs.' },
+              { text: 'I have two ___ .', options: ['car', 'cars', 'cares'], correct: 1, explanation: 'two (ikkita) dan keyin ko\'plik shakli: cars.', explanationRu: "После two (два) — форма множественного числа: cars." },
+              { text: 'There are five ___ in the room.', options: ['chair', 'chairs', 'chaires'], correct: 1, explanation: 'five (beshta) dan keyin ko\'plik shakli: chairs.', explanationRu: "После five (пять) — форма множественного числа: chairs." },
             ],
           },
           {
@@ -1116,8 +1116,8 @@ export const grammarPathSections = [
               exampleRu: 'The book is new. → The books are new.',
             },
             exercises: [
-              { text: 'The cars ___ red.', options: ['is', 'are', 'am'], correct: 1, explanation: '"cars" ko\'plikda bo\'lgani uchun "are" keladi.' },
-              { text: 'Choose the correct sentence:', options: ['The pens is on the table.', 'The pens are on the table.'], correct: 1, explanation: 'pens (ko\'plik) + are.' },
+              { text: 'The cars ___ red.', options: ['is', 'are', 'am'], correct: 1, explanation: '"cars" ko\'plikda bo\'lgani uchun "are" keladi.', explanationRu: "Так как \"cars\" во множественном числе, используется \"are\"." },
+              { text: 'Choose the correct sentence:', options: ['The pens is on the table.', 'The pens are on the table.'], correct: 1, explanation: 'pens (ko\'plik) + are.', explanationRu: "pens (мн. ч.) + are." },
             ],
           },
           {
@@ -1128,9 +1128,9 @@ export const grammarPathSections = [
               exampleRu: 'I have three books. The books are heavy.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I see two cat.', 'I see two cats.'], correct: 1, explanation: 'two + cats (ko\'plik).' },
-              { text: 'Choose the correct sentence:', options: ['The dogs are running.', 'The dogs is running.'], correct: 0, explanation: 'dogs (ko\'plik) + are.' },
-              { text: 'Select the plural of "bag":', options: ['bags', 'bages', 'bagies'], correct: 0, explanation: 'bag + s = bags.' },
+              { text: 'Choose the correct sentence:', options: ['I see two cat.', 'I see two cats.'], correct: 1, explanation: 'two + cats (ko\'plik).', explanationRu: "two + cats (мн. ч.)." },
+              { text: 'Choose the correct sentence:', options: ['The dogs are running.', 'The dogs is running.'], correct: 0, explanation: 'dogs (ko\'plik) + are.', explanationRu: "dogs (мн. ч.) + are." },
+              { text: 'Select the plural of "bag":', options: ['bags', 'bages', 'bagies'], correct: 0, explanation: 'bag + s = bags.', explanationRu: "bag + s = bags." },
             ],
           },
         ],
@@ -1150,8 +1150,8 @@ export const grammarPathSections = [
               exampleRu: 'bus → buses, box → boxes',
             },
             exercises: [
-              { text: '"bus" (avtobus) so\'zining ko\'plik shakli qaysi?', options: ['buss', 'buses', 'busis'], correct: 1, explanation: '-s bilan tugagani uchun -es qo\'shiladi: buses.' },
-              { text: '"box" (quti) so\'zining ko\'plik shakli qaysi?', options: ['boxs', 'boxes', 'boxies'], correct: 1, explanation: '-x bilan tugagani uchun -es qo\'shiladi: boxes.' },
+              { text: '"bus" (avtobus) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"bus\" (автобус)?", options: ['buss', 'buses', 'busis'], correct: 1, explanation: '-s bilan tugagani uchun -es qo\'shiladi: buses.', explanationRu: "Так как оканчивается на -s, добавляется -es: buses." },
+              { text: '"box" (quti) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"box\" (коробка)?", options: ['boxs', 'boxes', 'boxies'], correct: 1, explanation: '-x bilan tugagani uchun -es qo\'shiladi: boxes.', explanationRu: "Так как оканчивается на -x, добавляется -es: boxes." },
             ],
           },
           {
@@ -1162,8 +1162,8 @@ export const grammarPathSections = [
               exampleRu: 'dish → dishes, watch → watches',
             },
             exercises: [
-              { text: '"dish" (idish) so\'zini ko\'plikka aylantiring:', options: ['dishs', 'dishes', 'dishies'], correct: 1, explanation: '-sh bilan tugagani uchun -es qo\'shiladi: dishes.' },
-              { text: '"watch" (soat) so\'zining ko\'pligi qaysi?', options: ['watchs', 'watches', 'watchies'], correct: 1, explanation: '-ch bilan tugagani uchun -es qo\'shiladi: watches.' },
+              { text: '"dish" (idish) so\'zini ko\'plikka aylantiring:', textRu: "Образуйте множественное число слова \"dish\" (тарелка):", options: ['dishs', 'dishes', 'dishies'], correct: 1, explanation: '-sh bilan tugagani uchun -es qo\'shiladi: dishes.', explanationRu: "Так как оканчивается на -sh, добавляется -es: dishes." },
+              { text: '"watch" (soat) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"watch\" (часы)?", options: ['watchs', 'watches', 'watchies'], correct: 1, explanation: '-ch bilan tugagani uchun -es qo\'shiladi: watches.', explanationRu: "Так как оканчивается на -ch, добавляется -es: watches." },
             ],
           },
           {
@@ -1174,8 +1174,8 @@ export const grammarPathSections = [
               exampleRu: 'tomato → tomatoes, potato → potatoes',
             },
             exercises: [
-              { text: '"tomato" so\'zining ko\'plik shaklini toping:', options: ['tomatos', 'tomatoes', 'tomatoies'], correct: 1, explanation: 'tomato + es = tomatoes.' },
-              { text: '"potato" so\'zining ko\'plik shakli qaysi?', options: ['potatoes', 'potatos', 'potatose'], correct: 0, explanation: 'potato + es = potatoes.' },
+              { text: '"tomato" so\'zining ko\'plik shaklini toping:', textRu: "Найдите форму множественного числа слова \"tomato\":", options: ['tomatos', 'tomatoes', 'tomatoies'], correct: 1, explanation: 'tomato + es = tomatoes.', explanationRu: "tomato + es = tomatoes." },
+              { text: '"potato" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"potato\"?", options: ['potatoes', 'potatos', 'potatose'], correct: 0, explanation: 'potato + es = potatoes.', explanationRu: "potato + es = potatoes." },
             ],
           },
           {
@@ -1186,8 +1186,8 @@ export const grammarPathSections = [
               exampleRu: 'buses [басиз], boxes [боксиз]',
             },
             exercises: [
-              { text: '"buses" va "boxes" so\'zlarida -es qanday talaffuz qilinadi?', options: ['[s]', '[z]', '[iz]'], correct: 2, explanation: '-es qoidasidagi so\'zlarda -es [iz] tovushini beradi.' },
-              { text: 'Choose the correct plural for "glass" (stakan):', options: ['glasss', 'glasses', 'glassies'], correct: 1, explanation: '-ss bilan tugagan: glasses.' },
+              { text: '"buses" va "boxes" so\'zlarida -es qanday talaffuz qilinadi?', textRu: "Как произносится -es в словах \"buses\" и \"boxes\"?", options: ['[s]', '[z]', '[iz]'], correct: 2, explanation: '-es qoidasidagi so\'zlarda -es [iz] tovushini beradi.', explanationRu: "В словах с окончанием -es оно произносится как [iz]." },
+              { text: 'Choose the correct plural for "glass" (stakan):', options: ['glasss', 'glasses', 'glassies'], correct: 1, explanation: '-ss bilan tugagan: glasses.', explanationRu: "Оканчивается на -ss: glasses." },
             ],
           },
           {
@@ -1198,9 +1198,9 @@ export const grammarPathSections = [
               exampleRu: 'She has two watches. The boxes are big.',
             },
             exercises: [
-              { text: 'Choose the correct plural of "class":', options: ['classs', 'classes'], correct: 1, explanation: '-ss bilan tugagani uchun: classes.' },
-              { text: 'Choose the correct sentence:', options: ['The boxes are on the floor.', 'The boxs are on the floor.'], correct: 0, explanation: 'box + es = boxes.' },
-              { text: 'Select the plural of "sandwich":', options: ['sandwichs', 'sandwiches'], correct: 1, explanation: '-ch bilan tugagani uchun: sandwiches.' },
+              { text: 'Choose the correct plural of "class":', options: ['classs', 'classes'], correct: 1, explanation: '-ss bilan tugagani uchun: classes.', explanationRu: "Так как оканчивается на -ss: classes." },
+              { text: 'Choose the correct sentence:', options: ['The boxes are on the floor.', 'The boxs are on the floor.'], correct: 0, explanation: 'box + es = boxes.', explanationRu: "box + es = boxes." },
+              { text: 'Select the plural of "sandwich":', options: ['sandwichs', 'sandwiches'], correct: 1, explanation: '-ch bilan tugagani uchun: sandwiches.', explanationRu: "Так как оканчивается на -ch: sandwiches." },
             ],
           },
         ],
@@ -1220,8 +1220,8 @@ export const grammarPathSections = [
               exampleRu: 'baby → babies, city → cities',
             },
             exercises: [
-              { text: '"baby" so\'zining ko\'plik shakli qaysi?', options: ['babys', 'babies', 'babyes'], correct: 1, explanation: 'undosh (b) + y -> y o\'zgarib -ies bo\'ladi: babies.' },
-              { text: '"city" (shahar) so\'zini ko\'plikka aylantiring:', options: ['citys', 'cities', 'cityes'], correct: 1, explanation: 'undosh (t) + y -> cities.' },
+              { text: '"baby" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"baby\"?", options: ['babys', 'babies', 'babyes'], correct: 1, explanation: 'undosh (b) + y -> y o\'zgarib -ies bo\'ladi: babies.', explanationRu: "Согласная (b) + y -> y меняется на -ies: babies." },
+              { text: '"city" (shahar) so\'zini ko\'plikka aylantiring:', textRu: "Образуйте множественное число слова \"city\" (город):", options: ['citys', 'cities', 'cityes'], correct: 1, explanation: 'undosh (t) + y -> cities.', explanationRu: "Согласная (t) + y -> cities." },
             ],
           },
           {
@@ -1232,8 +1232,8 @@ export const grammarPathSections = [
               exampleRu: 'boy → boys, key → keys, day → days',
             },
             exercises: [
-              { text: '"boy" so\'zining ko\'plik shakli qaysi?', options: ['boies', 'boys', 'boyes'], correct: 1, explanation: 'unli (o) + y bo\'lgani uchun shunchaki -s: boys.' },
-              { text: '"key" (kalit) so\'zini ko\'plikka aylantiring:', options: ['keies', 'keys', 'keyes'], correct: 1, explanation: 'unli (e) + y -> keys.' },
+              { text: '"boy" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"boy\"?", options: ['boies', 'boys', 'boyes'], correct: 1, explanation: 'unli (o) + y bo\'lgani uchun shunchaki -s: boys.', explanationRu: "Так как гласная (o) + y, просто добавляется -s: boys." },
+              { text: '"key" (kalit) so\'zini ko\'plikka aylantiring:', textRu: "Образуйте множественное число слова \"key\" (ключ):", options: ['keies', 'keys', 'keyes'], correct: 1, explanation: 'unli (e) + y -> keys.', explanationRu: "Гласная (e) + y -> keys." },
             ],
           },
           {
@@ -1244,8 +1244,8 @@ export const grammarPathSections = [
               exampleRu: 'party → parties, toy → toys',
             },
             exercises: [
-              { text: '"party" so\'zining ko\'pligi qaysi?', options: ['partys', 'parties'], correct: 1, explanation: 't + y (undosh+y) -> parties.' },
-              { text: '"toy" (o\'yinchoq) so\'zining ko\'pligi qaysi?', options: ['toys', 'toies'], correct: 0, explanation: 'o + y (unli+y) -> toys.' },
+              { text: '"party" so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"party\"?", options: ['partys', 'parties'], correct: 1, explanation: 't + y (undosh+y) -> parties.', explanationRu: "t + y (согласная+y) -> parties." },
+              { text: '"toy" (o\'yinchoq) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"toy\" (игрушка)?", options: ['toys', 'toies'], correct: 0, explanation: 'o + y (unli+y) -> toys.', explanationRu: "o + y (гласная+y) -> toys." },
             ],
           },
           {
@@ -1256,8 +1256,8 @@ export const grammarPathSections = [
               exampleRu: 'The babies are sleeping. The keys are here.',
             },
             exercises: [
-              { text: 'The ___ are on the table. (key)', options: ['keies', 'keys'], correct: 1, explanation: 'key -> keys.' },
-              { text: 'Many ___ live in big cities. (family)', options: ['families', 'familys'], correct: 0, explanation: 'family (undosh l+y) -> families.' },
+              { text: 'The ___ are on the table. (key)', options: ['keies', 'keys'], correct: 1, explanation: 'key -> keys.', explanationRu: "key -> keys." },
+              { text: 'Many ___ live in big cities. (family)', options: ['families', 'familys'], correct: 0, explanation: 'family (undosh l+y) -> families.', explanationRu: "family (согласная l+y) -> families." },
             ],
           },
           {
@@ -1268,9 +1268,9 @@ export const grammarPathSections = [
               exampleRu: 'The boys have many toys and stories.',
             },
             exercises: [
-              { text: 'Select the plural of "story":', options: ['storys', 'stories'], correct: 1, explanation: 'r + y -> stories.' },
-              { text: 'Select the plural of "day":', options: ['daies', 'days'], correct: 1, explanation: 'a + y -> days.' },
-              { text: 'Choose the correct sentence:', options: ['The cities are beautiful.', 'The citys are beautiful.'], correct: 0, explanation: 'city -> cities.' },
+              { text: 'Select the plural of "story":', options: ['storys', 'stories'], correct: 1, explanation: 'r + y -> stories.', explanationRu: "r + y -> stories." },
+              { text: 'Select the plural of "day":', options: ['daies', 'days'], correct: 1, explanation: 'a + y -> days.', explanationRu: "a + y -> days." },
+              { text: 'Choose the correct sentence:', options: ['The cities are beautiful.', 'The citys are beautiful.'], correct: 0, explanation: 'city -> cities.', explanationRu: "city -> cities." },
             ],
           },
         ],
@@ -1290,8 +1290,8 @@ export const grammarPathSections = [
               exampleRu: 'knife → knives, leaf → leaves, life → lives',
             },
             exercises: [
-              { text: '"knife" (pichoq) so\'zining ko\'plik shakli qaysi?', options: ['knifes', 'knives', 'knifeies'], correct: 1, explanation: '-fe bilan tugagan: knives.' },
-              { text: '"leaf" (barg) so\'zini ko\'plikka aylantiring:', options: ['leafs', 'leaves', 'leafes'], correct: 1, explanation: '-f o\'zgarib -ves bo\'ladi: leaves.' },
+              { text: '"knife" (pichoq) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"knife\" (нож)?", options: ['knifes', 'knives', 'knifeies'], correct: 1, explanation: '-fe bilan tugagan: knives.', explanationRu: "Оканчивается на -fe: knives." },
+              { text: '"leaf" (barg) so\'zini ko\'plikka aylantiring:', textRu: "Образуйте множественное число слова \"leaf\" (лист):", options: ['leafs', 'leaves', 'leafes'], correct: 1, explanation: '-f o\'zgarib -ves bo\'ladi: leaves.', explanationRu: "-f меняется на -ves: leaves." },
             ],
           },
           {
@@ -1302,8 +1302,8 @@ export const grammarPathSections = [
               exampleRu: 'shelf → shelves, wolf → wolves',
             },
             exercises: [
-              { text: '"shelf" (tokcha) so\'zining ko\'plik shakli qaysi?', options: ['shelfs', 'shelves', 'shelfes'], correct: 1, explanation: 'shelf -> shelves.' },
-              { text: '"wife" (xotin/ayol) so\'zining ko\'pligi qaysi?', options: ['wifes', 'wives'], correct: 1, explanation: 'wife -> wives.' },
+              { text: '"shelf" (tokcha) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"shelf\" (полка)?", options: ['shelfs', 'shelves', 'shelfes'], correct: 1, explanation: 'shelf -> shelves.', explanationRu: "shelf -> shelves." },
+              { text: '"wife" (xotin/ayol) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"wife\" (жена)?", options: ['wifes', 'wives'], correct: 1, explanation: 'wife -> wives.', explanationRu: "wife -> wives." },
             ],
           },
           {
@@ -1314,8 +1314,8 @@ export const grammarPathSections = [
               exampleRu: 'roof → roofs, chef → chefs',
             },
             exercises: [
-              { text: '"roof" (tom) so\'zining ko\'plik shakli qaysi? (istisno)', options: ['rooves', 'roofs'], correct: 1, explanation: 'roof — istisno so\'z, shunchaki -s qo\'shiladi: roofs.' },
-              { text: '"chef" (oshpaz) so\'zining ko\'pligi qaysi?', options: ['chefs', 'cheves'], correct: 0, explanation: 'chef — istisno so\'z: chefs.' },
+              { text: '"roof" (tom) so\'zining ko\'plik shakli qaysi? (istisno)', textRu: "Какова форма множественного числа слова \"roof\" (крыша)? (исключение)", options: ['rooves', 'roofs'], correct: 1, explanation: 'roof — istisno so\'z, shunchaki -s qo\'shiladi: roofs.', explanationRu: "roof — слово-исключение, просто добавляется -s: roofs." },
+              { text: '"chef" (oshpaz) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"chef\" (повар)?", options: ['chefs', 'cheves'], correct: 0, explanation: 'chef — istisno so\'z: chefs.', explanationRu: "chef — слово-исключение: chefs." },
             ],
           },
           {
@@ -1326,8 +1326,8 @@ export const grammarPathSections = [
               exampleRu: 'The knives are sharp. The leaves are red.',
             },
             exercises: [
-              { text: 'The ___ are falling from the trees.', options: ['leafs', 'leaves'], correct: 1, explanation: 'leaf -> leaves.' },
-              { text: 'The books are on the ___ .', options: ['shelfs', 'shelves'], correct: 1, explanation: 'shelf -> shelves.' },
+              { text: 'The ___ are falling from the trees.', options: ['leafs', 'leaves'], correct: 1, explanation: 'leaf -> leaves.', explanationRu: "leaf -> leaves." },
+              { text: 'The books are on the ___ .', options: ['shelfs', 'shelves'], correct: 1, explanation: 'shelf -> shelves.', explanationRu: "shelf -> shelves." },
             ],
           },
           {
@@ -1338,9 +1338,9 @@ export const grammarPathSections = [
               exampleRu: 'The wolves are in the forest. The roofs of houses are red.',
             },
             exercises: [
-              { text: 'Select the plural of "wolf":', options: ['wolfs', 'wolves'], correct: 1, explanation: 'wolf -> wolves.' },
-              { text: 'Select the plural of "life":', options: ['lifes', 'lives'], correct: 1, explanation: 'life -> lives.' },
-              { text: 'Choose the correct sentence:', options: ['The knives are sharp.', 'The knifes are sharp.'], correct: 0, explanation: 'knife -> knives.' },
+              { text: 'Select the plural of "wolf":', options: ['wolfs', 'wolves'], correct: 1, explanation: 'wolf -> wolves.', explanationRu: "wolf -> wolves." },
+              { text: 'Select the plural of "life":', options: ['lifes', 'lives'], correct: 1, explanation: 'life -> lives.', explanationRu: "life -> lives." },
+              { text: 'Choose the correct sentence:', options: ['The knives are sharp.', 'The knifes are sharp.'], correct: 0, explanation: 'knife -> knives.', explanationRu: "knife -> knives." },
             ],
           },
         ],
@@ -1360,8 +1360,8 @@ export const grammarPathSections = [
               exampleRu: 'man → men, woman → women',
             },
             exercises: [
-              { text: '"man" (erkak) so\'zining ko\'plik shakli qaysi?', options: ['mans', 'men', 'manes'], correct: 1, explanation: 'man ko\'pligi - s emas, men bo\'ladi.' },
-              { text: '"woman" (ayol) so\'zining ko\'plik shakli qaysi?', options: ['womans', 'women', 'womenes'], correct: 1, explanation: 'woman ko\'pligi: women.' },
+              { text: '"man" (erkak) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"man\" (мужчина)?", options: ['mans', 'men', 'manes'], correct: 1, explanation: 'man ko\'pligi - s emas, men bo\'ladi.', explanationRu: "Множественное число от man — не -s, а men." },
+              { text: '"woman" (ayol) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"woman\" (женщина)?", options: ['womans', 'women', 'womenes'], correct: 1, explanation: 'woman ko\'pligi: women.', explanationRu: "Множественное число от woman: women." },
             ],
           },
           {
@@ -1372,8 +1372,8 @@ export const grammarPathSections = [
               exampleRu: 'child → children, person → people',
             },
             exercises: [
-              { text: '"child" (bitta bola) so\'zining ko\'pligi qaysi?', options: ['childs', 'children', 'childrens'], correct: 1, explanation: 'child -> children.' },
-              { text: '"person" (odam) so\'zining ko\'pligi qaysi?', options: ['persons', 'people', 'peoples'], correct: 1, explanation: 'person -> people.' },
+              { text: '"child" (bitta bola) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"child\" (ребёнок)?", options: ['childs', 'children', 'childrens'], correct: 1, explanation: 'child -> children.', explanationRu: "child -> children." },
+              { text: '"person" (odam) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"person\" (человек)?", options: ['persons', 'people', 'peoples'], correct: 1, explanation: 'person -> people.', explanationRu: "person -> people." },
             ],
           },
           {
@@ -1384,8 +1384,8 @@ export const grammarPathSections = [
               exampleRu: 'tooth → teeth, foot → feet',
             },
             exercises: [
-              { text: '"tooth" (tish) so\'zining ko\'pligi qaysi?', options: ['tooths', 'teeth', 'teethes'], correct: 1, explanation: 'tooth -> teeth.' },
-              { text: '"foot" (oyoq kafti) so\'zining ko\'pligi qaysi?', options: ['foots', 'feet', 'feets'], correct: 1, explanation: 'foot -> feet.' },
+              { text: '"tooth" (tish) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"tooth\" (зуб)?", options: ['tooths', 'teeth', 'teethes'], correct: 1, explanation: 'tooth -> teeth.', explanationRu: "tooth -> teeth." },
+              { text: '"foot" (oyoq kafti) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"foot\" (стопа)?", options: ['foots', 'feet', 'feets'], correct: 1, explanation: 'foot -> feet.', explanationRu: "foot -> feet." },
             ],
           },
           {
@@ -1396,8 +1396,8 @@ export const grammarPathSections = [
               exampleRu: 'mouse → mice, goose → geese',
             },
             exercises: [
-              { text: '"mouse" (sichqon) so\'zining ko\'pligi qaysi?', options: ['mouses', 'mice', 'mices'], correct: 1, explanation: 'mouse -> mice.' },
-              { text: '"goose" (g\'oz) so\'zining ko\'pligi qaysi?', options: ['gooses', 'geese'], correct: 1, explanation: 'goose -> geese.' },
+              { text: '"mouse" (sichqon) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"mouse\" (мышь)?", options: ['mouses', 'mice', 'mices'], correct: 1, explanation: 'mouse -> mice.', explanationRu: "mouse -> mice." },
+              { text: '"goose" (g\'oz) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"goose\" (гусь)?", options: ['gooses', 'geese'], correct: 1, explanation: 'goose -> geese.', explanationRu: "goose -> geese." },
             ],
           },
           {
@@ -1408,9 +1408,9 @@ export const grammarPathSections = [
               exampleRu: 'The children are playing. Many people are in the park.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['The children are happy.', 'The childrens are happy.'], correct: 0, explanation: 'children o\'zi ko\'plik, -s qo\'shilmaydi.' },
-              { text: 'Three ___ are sitting on the bench. (man)', options: ['mans', 'men'], correct: 1, explanation: 'man -> men.' },
-              { text: 'Wash your ___ before bed. (tooth)', options: ['tooths', 'teeth'], correct: 1, explanation: 'tooth -> teeth.' },
+              { text: 'Choose the correct sentence:', options: ['The children are happy.', 'The childrens are happy.'], correct: 0, explanation: 'children o\'zi ko\'plik, -s qo\'shilmaydi.', explanationRu: "children уже во множественном числе, -s не добавляется." },
+              { text: 'Three ___ are sitting on the bench. (man)', options: ['mans', 'men'], correct: 1, explanation: 'man -> men.', explanationRu: "man -> men." },
+              { text: 'Wash your ___ before bed. (tooth)', options: ['tooths', 'teeth'], correct: 1, explanation: 'tooth -> teeth.', explanationRu: "tooth -> teeth." },
             ],
           },
         ],
@@ -1430,8 +1430,8 @@ export const grammarPathSections = [
               exampleRu: 'one sheep → two sheep, one fish → two fish',
             },
             exercises: [
-              { text: '"sheep" (qo\'y) so\'zining ko\'plik shakli qaysi?', options: ['sheeps', 'sheep', 'sheepes'], correct: 1, explanation: 'sheep o\'zgarmaydi: one sheep, two sheep.' },
-              { text: 'I caught three ___ . (fish)', options: ['fishes', 'fish', 'fishs'], correct: 1, explanation: 'fish ko\'plikda ham fish bo\'lib qoladi.' },
+              { text: '"sheep" (qo\'y) so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"sheep\" (овца)?", options: ['sheeps', 'sheep', 'sheepes'], correct: 1, explanation: 'sheep o\'zgarmaydi: one sheep, two sheep.', explanationRu: "sheep не меняется: one sheep, two sheep." },
+              { text: 'I caught three ___ . (fish)', options: ['fishes', 'fish', 'fishs'], correct: 1, explanation: 'fish ko\'plikda ham fish bo\'lib qoladi.', explanationRu: "fish во множественном числе остаётся fish." },
             ],
           },
           {
@@ -1442,8 +1442,8 @@ export const grammarPathSections = [
               exampleRu: 'glasses, trousers, scissors',
             },
             exercises: [
-              { text: 'Qaysi so\'z doim ko\'plikda ishlatiladi?', options: ['book', 'trousers', 'pen'], correct: 1, explanation: 'trousers (shim) — juft narsa, doim ko\'plikda.' },
-              { text: '"scissors" (qaychi) so\'zi qaysi fe\'l bilan keladi?', options: ['is', 'are'], correct: 1, explanation: 'Doimiy ko\'plik otlar bilan "are" ishlatiladi.' },
+              { text: 'Qaysi so\'z doim ko\'plikda ishlatiladi?', textRu: "Какое слово всегда употребляется во множественном числе?", options: ['book', 'trousers', 'pen'], correct: 1, explanation: 'trousers (shim) — juft narsa, doim ko\'plikda.', explanationRu: "trousers (брюки) — парный предмет, всегда во множественном числе." },
+              { text: '"scissors" (qaychi) so\'zi qaysi fe\'l bilan keladi?', textRu: "С каким глаголом употребляется слово \"scissors\" (ножницы)?", options: ['is', 'are'], correct: 1, explanation: 'Doimiy ko\'plik otlar bilan "are" ishlatiladi.', explanationRu: "С существительными, употребляемыми только во множественном числе, используется \"are\"." },
             ],
           },
           {
@@ -1454,8 +1454,8 @@ export const grammarPathSections = [
               exampleRu: 'My glasses are new. These trousers are blue.',
             },
             exercises: [
-              { text: 'My glasses ___ on the table.', options: ['is', 'are', 'am'], correct: 1, explanation: 'glasses (doimiy ko\'plik) + are.' },
-              { text: 'Choose the correct sentence:', options: ['The scissors are sharp.', 'The scissors is sharp.'], correct: 0, explanation: 'scissors + are.' },
+              { text: 'My glasses ___ on the table.', options: ['is', 'are', 'am'], correct: 1, explanation: 'glasses (doimiy ko\'plik) + are.', explanationRu: "glasses (всегда мн. ч.) + are." },
+              { text: 'Choose the correct sentence:', options: ['The scissors are sharp.', 'The scissors is sharp.'], correct: 0, explanation: 'scissors + are.', explanationRu: "scissors + are." },
             ],
           },
           {
@@ -1466,8 +1466,8 @@ export const grammarPathSections = [
               exampleRu: 'a pair of glasses, two pairs of trousers',
             },
             exercises: [
-              { text: 'I need a pair of ___ .', options: ['glass', 'glasses'], correct: 1, explanation: 'a pair of + glasses.' },
-              { text: 'He bought two ___ of pants.', options: ['pair', 'pairs'], correct: 1, explanation: 'two + pairs of pants.' },
+              { text: 'I need a pair of ___ .', options: ['glass', 'glasses'], correct: 1, explanation: 'a pair of + glasses.', explanationRu: "a pair of + glasses." },
+              { text: 'He bought two ___ of pants.', options: ['pair', 'pairs'], correct: 1, explanation: 'two + pairs of pants.', explanationRu: "two + pairs of pants." },
             ],
           },
           {
@@ -1478,9 +1478,9 @@ export const grammarPathSections = [
               exampleRu: 'There are ten sheep in the field. My trousers are clean.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['Look at those sheep!', 'Look at those sheeps!'], correct: 0, explanation: 'sheep ko\'pligi ham sheep.' },
-              { text: 'Where ___ my glasses?', options: ['is', 'are'], correct: 1, explanation: 'glasses + are.' },
-              { text: 'Select the correct phrase:', options: ['a pair of scissors', 'a scissor'], correct: 0, explanation: 'qaychi uchun: a pair of scissors.' },
+              { text: 'Choose the correct sentence:', options: ['Look at those sheep!', 'Look at those sheeps!'], correct: 0, explanation: 'sheep ko\'pligi ham sheep.', explanationRu: "Множественное число от sheep тоже sheep." },
+              { text: 'Where ___ my glasses?', options: ['is', 'are'], correct: 1, explanation: 'glasses + are.', explanationRu: "glasses + are." },
+              { text: 'Select the correct phrase:', options: ['a pair of scissors', 'a scissor'], correct: 0, explanation: 'qaychi uchun: a pair of scissors.', explanationRu: "для ножниц: a pair of scissors." },
             ],
           },
         ],
@@ -1490,21 +1490,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Otlar ko'plik soni",
       titleRu: 'Тест раздела: Множественное число существительных',
       exercises: [
-        { text: '"book" so\'zining ko\'plik shakli qaysi?', options: ['bookes', 'books', 'bookies'], correct: 1, explanation: 'Odatiy ko\'plik: books.' },
-        { text: '"box" so\'zining ko\'plik shakli qaysi?', options: ['boxs', 'boxes'], correct: 1, explanation: '-x bilan tugagan: boxes.' },
-        { text: '"watch" so\'zining ko\'plik shakli qaysi?', options: ['watchs', 'watches'], correct: 1, explanation: '-ch bilan tugagan: watches.' },
-        { text: '"baby" so\'zining ko\'plik shakli qaysi?', options: ['babys', 'babies'], correct: 1, explanation: 'undosh+y -> babies.' },
-        { text: '"boy" so\'zining ko\'plik shakli qaysi?', options: ['boys', 'boies'], correct: 0, explanation: 'unli+y -> boys.' },
-        { text: '"knife" (pichoq) so\'zining ko\'pligi qaysi?', options: ['knifes', 'knives'], correct: 1, explanation: '-fe -> knives.' },
-        { text: '"roof" (tom) so\'zining ko\'pligi qaysi? (istisno)', options: ['rooves', 'roofs'], correct: 1, explanation: 'roof — istisno: roofs.' },
-        { text: '"man" so\'zining ko\'plik shakli qaysi?', options: ['mans', 'men'], correct: 1, explanation: 'man -> men.' },
-        { text: '"child" so\'zining ko\'plik shakli qaysi?', options: ['childs', 'children'], correct: 1, explanation: 'child -> children.' },
-        { text: '"person" so\'zining ko\'plik shakli qaysi?', options: ['persons', 'people'], correct: 1, explanation: 'person -> people.' },
-        { text: '"tooth" so\'zining ko\'plik shakli qaysi?', options: ['tooths', 'teeth'], correct: 1, explanation: 'tooth -> teeth.' },
-        { text: '"mouse" so\'zining ko\'plik shakli qaysi?', options: ['mouses', 'mice'], correct: 1, explanation: 'mouse -> mice.' },
-        { text: '"sheep" so\'zining ko\'plik shakli qaysi?', options: ['sheeps', 'sheep'], correct: 1, explanation: 'sheep o\'zgarmaydi: sheep.' },
-        { text: 'Where ___ my glasses?', options: ['is', 'are'], correct: 1, explanation: 'glasses (doimiy ko\'plik) + are.' },
-        { text: 'Choose the correct sentence:', options: ['The children are in the park.', 'The childrens are in the park.'], correct: 0, explanation: 'children o\'zi ko\'plik.' },
+        { text: '"book" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"book\"?", options: ['bookes', 'books', 'bookies'], correct: 1, explanation: 'Odatiy ko\'plik: books.', explanationRu: "Обычное множественное число: books." },
+        { text: '"box" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"box\"?", options: ['boxs', 'boxes'], correct: 1, explanation: '-x bilan tugagan: boxes.', explanationRu: "Оканчивается на -x: boxes." },
+        { text: '"watch" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"watch\"?", options: ['watchs', 'watches'], correct: 1, explanation: '-ch bilan tugagan: watches.', explanationRu: "Оканчивается на -ch: watches." },
+        { text: '"baby" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"baby\"?", options: ['babys', 'babies'], correct: 1, explanation: 'undosh+y -> babies.', explanationRu: "согласная+y -> babies." },
+        { text: '"boy" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"boy\"?", options: ['boys', 'boies'], correct: 0, explanation: 'unli+y -> boys.', explanationRu: "гласная+y -> boys." },
+        { text: '"knife" (pichoq) so\'zining ko\'pligi qaysi?', textRu: "Какова форма множественного числа слова \"knife\" (нож)?", options: ['knifes', 'knives'], correct: 1, explanation: '-fe -> knives.', explanationRu: "-fe -> knives." },
+        { text: '"roof" (tom) so\'zining ko\'pligi qaysi? (istisno)', textRu: "Какова форма множественного числа слова \"roof\" (крыша)? (исключение)", options: ['rooves', 'roofs'], correct: 1, explanation: 'roof — istisno: roofs.', explanationRu: "roof — исключение: roofs." },
+        { text: '"man" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"man\"?", options: ['mans', 'men'], correct: 1, explanation: 'man -> men.', explanationRu: "man -> men." },
+        { text: '"child" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"child\"?", options: ['childs', 'children'], correct: 1, explanation: 'child -> children.', explanationRu: "child -> children." },
+        { text: '"person" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"person\"?", options: ['persons', 'people'], correct: 1, explanation: 'person -> people.', explanationRu: "person -> people." },
+        { text: '"tooth" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"tooth\"?", options: ['tooths', 'teeth'], correct: 1, explanation: 'tooth -> teeth.', explanationRu: "tooth -> teeth." },
+        { text: '"mouse" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"mouse\"?", options: ['mouses', 'mice'], correct: 1, explanation: 'mouse -> mice.', explanationRu: "mouse -> mice." },
+        { text: '"sheep" so\'zining ko\'plik shakli qaysi?', textRu: "Какова форма множественного числа слова \"sheep\"?", options: ['sheeps', 'sheep'], correct: 1, explanation: 'sheep o\'zgarmaydi: sheep.', explanationRu: "sheep не меняется: sheep." },
+        { text: 'Where ___ my glasses?', options: ['is', 'are'], correct: 1, explanation: 'glasses (doimiy ko\'plik) + are.', explanationRu: "glasses (всегда мн. ч.) + are." },
+        { text: 'Choose the correct sentence:', options: ['The children are in the park.', 'The childrens are in the park.'], correct: 0, explanation: 'children o\'zi ko\'plik.', explanationRu: "children уже во множественном числе." },
       ],
     },
   },
@@ -1530,8 +1530,8 @@ export const grammarPathSections = [
               exampleRu: 'a book (книга), a car (машина)',
             },
             exercises: [
-              { text: '"bitta kitob" birikmasini to\'g\'ri tanlang:', options: ['a book', 'an book', 'the books'], correct: 0, explanation: 'book [b] undosh tovush bilan boshlanadi: a book.' },
-              { text: 'I have ___ dog.', options: ['a', 'an', '-'], correct: 0, explanation: 'dog [d] undosh tovush bilan boshlangani uchun "a" qo\'yiladi.' },
+              { text: '"bitta kitob" birikmasini to\'g\'ri tanlang:', textRu: "Выберите правильное сочетание для \"одна книга\":", options: ['a book', 'an book', 'the books'], correct: 0, explanation: 'book [b] undosh tovush bilan boshlanadi: a book.', explanationRu: "book начинается с согласного звука [b]: a book." },
+              { text: 'I have ___ dog.', options: ['a', 'an', '-'], correct: 0, explanation: 'dog [d] undosh tovush bilan boshlangani uchun "a" qo\'yiladi.', explanationRu: "Так как dog начинается с согласного звука [d], ставится \"a\"." },
             ],
           },
           {
@@ -1542,8 +1542,8 @@ export const grammarPathSections = [
               exampleRu: 'a cat, a pen, a house',
             },
             exercises: [
-              { text: 'Qaysi so\'z oldidan "a" qo\'yiladi?', options: ['apple', 'pen', 'egg'], correct: 1, explanation: 'pen undosh tovush [p] bilan boshlanadi: a pen.' },
-              { text: 'She is ___ doctor.', options: ['a', 'an', 'the'], correct: 0, explanation: 'doctor [d] undosh tovush: a doctor.' },
+              { text: 'Qaysi so\'z oldidan "a" qo\'yiladi?', textRu: "Перед каким словом ставится \"a\"?", options: ['apple', 'pen', 'egg'], correct: 1, explanation: 'pen undosh tovush [p] bilan boshlanadi: a pen.', explanationRu: "pen начинается с согласного звука [p]: a pen." },
+              { text: 'She is ___ doctor.', options: ['a', 'an', 'the'], correct: 0, explanation: 'doctor [d] undosh tovush: a doctor.', explanationRu: "doctor — согласный звук [d]: a doctor." },
             ],
           },
           {
@@ -1554,8 +1554,8 @@ export const grammarPathSections = [
               exampleRu: 'a big apple, a red car',
             },
             exercises: [
-              { text: 'This is ___ big apple.', options: ['a', 'an', 'the'], correct: 0, explanation: 'big [b] undosh tovush bilan boshlangani uchun "a" qo\'yiladi.' },
-              { text: 'Choose the correct phrase:', options: ['a new phone', 'an new phone'], correct: 0, explanation: 'new [n] undosh: a new phone.' },
+              { text: 'This is ___ big apple.', options: ['a', 'an', 'the'], correct: 0, explanation: 'big [b] undosh tovush bilan boshlangani uchun "a" qo\'yiladi.', explanationRu: "Так как big начинается с согласного звука [b], ставится \"a\"." },
+              { text: 'Choose the correct phrase:', options: ['a new phone', 'an new phone'], correct: 0, explanation: 'new [n] undosh: a new phone.', explanationRu: "new — согласный звук [n]: a new phone." },
             ],
           },
           {
@@ -1566,8 +1566,8 @@ export const grammarPathSections = [
               exampleRu: 'books (не a books), water (не a water)',
             },
             exercises: [
-              { text: 'Choose the correct option:', options: ['a books', 'books'], correct: 1, explanation: 'Ko\'plikdagi otlar oldida "a" ishlatilmaydi: books.' },
-              { text: 'I drink ___ water.', options: ['a', 'an', '- (no article)'], correct: 2, explanation: 'water sanalmaydi, noaniq artikl qo\'yilmaydi.' },
+              { text: 'Choose the correct option:', options: ['a books', 'books'], correct: 1, explanation: 'Ko\'plikdagi otlar oldida "a" ishlatilmaydi: books.', explanationRu: "Перед существительными во множественном числе \"a\" не используется: books." },
+              { text: 'I drink ___ water.', options: ['a', 'an', '- (no article)'], correct: 2, explanation: 'water sanalmaydi, noaniq artikl qo\'yilmaydi.', explanationRu: "water — неисчисляемое существительное, неопределённый артикль не ставится." },
             ],
           },
           {
@@ -1578,9 +1578,9 @@ export const grammarPathSections = [
               exampleRu: 'I have a car and a small cat.',
             },
             exercises: [
-              { text: 'He is ___ teacher.', options: ['a', 'an', '-'], correct: 0, explanation: 'teacher [t] undosh: a teacher.' },
-              { text: 'Select the correct phrase:', options: ['a new car', 'an new car'], correct: 0, explanation: 'new [n] undosh: a new car.' },
-              { text: 'Choose the correct option:', options: ['a computers', 'computers'], correct: 1, explanation: 'Ko\'plikda "a" bo\'lmaydi.' },
+              { text: 'He is ___ teacher.', options: ['a', 'an', '-'], correct: 0, explanation: 'teacher [t] undosh: a teacher.', explanationRu: "teacher — согласный звук [t]: a teacher." },
+              { text: 'Select the correct phrase:', options: ['a new car', 'an new car'], correct: 0, explanation: 'new [n] undosh: a new car.', explanationRu: "new — согласный звук [n]: a new car." },
+              { text: 'Choose the correct option:', options: ['a computers', 'computers'], correct: 1, explanation: 'Ko\'plikda "a" bo\'lmaydi.', explanationRu: "Во множественном числе \"a\" не используется." },
             ],
           },
         ],
@@ -1600,8 +1600,8 @@ export const grammarPathSections = [
               exampleRu: 'an apple, an egg, an orange',
             },
             exercises: [
-              { text: '"an" artikli qaysi so\'z oldidan qo\'yiladi?', options: ['book', 'apple', 'car'], correct: 1, explanation: 'apple [æ] unli tovush bilan boshlanadi: an apple.' },
-              { text: 'I eat ___ egg every morning.', options: ['a', 'an', 'the'], correct: 1, explanation: 'egg [e] unli tovush: an egg.' },
+              { text: '"an" artikli qaysi so\'z oldidan qo\'yiladi?', textRu: "Перед каким словом ставится артикль \"an\"?", options: ['book', 'apple', 'car'], correct: 1, explanation: 'apple [æ] unli tovush bilan boshlanadi: an apple.', explanationRu: "apple начинается с гласного звука [æ]: an apple." },
+              { text: 'I eat ___ egg every morning.', options: ['a', 'an', 'the'], correct: 1, explanation: 'egg [e] unli tovush: an egg.', explanationRu: "egg — гласный звук [e]: an egg." },
             ],
           },
           {
@@ -1612,8 +1612,8 @@ export const grammarPathSections = [
               exampleRu: 'an hour, an honest man',
             },
             exercises: [
-              { text: 'I will be there in ___ hour.', options: ['a', 'an', '-'], correct: 1, explanation: 'hour so\'zida [h] o\'qilmaydi, unli [auə] eshitiladi: an hour.' },
-              { text: 'He is ___ honest boy.', options: ['a', 'an', '-'], correct: 1, explanation: 'honest [onist] unli tovush bilan boshlanadi: an honest boy.' },
+              { text: 'I will be there in ___ hour.', options: ['a', 'an', '-'], correct: 1, explanation: 'hour so\'zida [h] o\'qilmaydi, unli [auə] eshitiladi: an hour.', explanationRu: "В слове hour буква [h] не читается, слышен гласный звук [auə]: an hour." },
+              { text: 'He is ___ honest boy.', options: ['a', 'an', '-'], correct: 1, explanation: 'honest [onist] unli tovush bilan boshlanadi: an honest boy.', explanationRu: "honest [onist] начинается с гласного звука: an honest boy." },
             ],
           },
           {
@@ -1624,8 +1624,8 @@ export const grammarPathSections = [
               exampleRu: 'a university, a uniform',
             },
             exercises: [
-              { text: 'This is ___ university.', options: ['a', 'an', '-'], correct: 0, explanation: 'university [yu] undosh tovush bilan boshlanadi: a university.' },
-              { text: 'He wears ___ uniform.', options: ['a', 'an', 'the'], correct: 0, explanation: 'uniform [yu] undosh tovush: a uniform.' },
+              { text: 'This is ___ university.', options: ['a', 'an', '-'], correct: 0, explanation: 'university [yu] undosh tovush bilan boshlanadi: a university.', explanationRu: "university начинается с согласного звука [yu]: a university." },
+              { text: 'He wears ___ uniform.', options: ['a', 'an', 'the'], correct: 0, explanation: 'uniform [yu] undosh tovush: a uniform.', explanationRu: "uniform — согласный звук [yu]: a uniform." },
             ],
           },
           {
@@ -1636,8 +1636,8 @@ export const grammarPathSections = [
               exampleRu: 'a pen vs an umbrella; a cat vs an elephant',
             },
             exercises: [
-              { text: 'Choose the correct option:', options: ['an umbrella', 'a umbrella'], correct: 0, explanation: 'umbrella [ʌ] unli tovush: an umbrella.' },
-              { text: 'She is ___ actor.', options: ['a', 'an'], correct: 1, explanation: 'actor [æ] unli tovush: an actor.' },
+              { text: 'Choose the correct option:', options: ['an umbrella', 'a umbrella'], correct: 0, explanation: 'umbrella [ʌ] unli tovush: an umbrella.', explanationRu: "umbrella — гласный звук [ʌ]: an umbrella." },
+              { text: 'She is ___ actor.', options: ['a', 'an'], correct: 1, explanation: 'actor [æ] unli tovush: an actor.', explanationRu: "actor — гласный звук [æ]: an actor." },
             ],
           },
           {
@@ -1648,9 +1648,9 @@ export const grammarPathSections = [
               exampleRu: 'I have an apple, an umbrella, and a book.',
             },
             exercises: [
-              { text: 'Choose the correct phrase:', options: ['an interesting book', 'a interesting book'], correct: 0, explanation: 'interesting [i] unli tovush: an interesting book.' },
-              { text: 'He left ___ hour ago.', options: ['a', 'an'], correct: 1, explanation: 'an hour.' },
-              { text: 'Choose the correct option:', options: ['an actor', 'a actor'], correct: 0, explanation: 'an actor.' },
+              { text: 'Choose the correct phrase:', options: ['an interesting book', 'a interesting book'], correct: 0, explanation: 'interesting [i] unli tovush: an interesting book.', explanationRu: "interesting — гласный звук [i]: an interesting book." },
+              { text: 'He left ___ hour ago.', options: ['a', 'an'], correct: 1, explanation: 'an hour.', explanationRu: "an hour." },
+              { text: 'Choose the correct option:', options: ['an actor', 'a actor'], correct: 0, explanation: 'an actor.', explanationRu: "an actor." },
             ],
           },
         ],
@@ -1670,8 +1670,8 @@ export const grammarPathSections = [
               exampleRu: 'Open the door. (Открой дверь — конкретную дверь)',
             },
             exercises: [
-              { text: '___ sun is bright today.', options: ['A', 'An', 'The'], correct: 2, explanation: 'sun (quyosh) aniq va yagona: The sun.' },
-              { text: 'Please close ___ window.', options: ['a', 'the', 'an'], correct: 1, explanation: 'Xonadagi aniq o\'sha deraza nazarda tutilmoqda: the window.' },
+              { text: '___ sun is bright today.', options: ['A', 'An', 'The'], correct: 2, explanation: 'sun (quyosh) aniq va yagona: The sun.', explanationRu: "sun (солнце) — конкретный и единственный в своём роде: The sun." },
+              { text: 'Please close ___ window.', options: ['a', 'the', 'an'], correct: 1, explanation: 'Xonadagi aniq o\'sha deraza nazarda tutilmoqda: the window.', explanationRu: "Имеется в виду то самое, конкретное окно в комнате: the window." },
             ],
           },
           {
@@ -1682,8 +1682,8 @@ export const grammarPathSections = [
               exampleRu: 'I bought a book. The book is very interesting.',
             },
             exercises: [
-              { text: 'I saw a dog. ___ dog was black.', options: ['A', 'An', 'The'], correct: 2, explanation: 'Dog ikkinchi marta aytilgani uchun u aniq: The dog.' },
-              { text: 'She has a car. ___ car is red.', options: ['A', 'The', 'An'], correct: 1, explanation: 'Qayta tilga olinganda: The car.' },
+              { text: 'I saw a dog. ___ dog was black.', options: ['A', 'An', 'The'], correct: 2, explanation: 'Dog ikkinchi marta aytilgani uchun u aniq: The dog.', explanationRu: "Так как dog упоминается второй раз, оно уже конкретно: The dog." },
+              { text: 'She has a car. ___ car is red.', options: ['A', 'The', 'An'], correct: 1, explanation: 'Qayta tilga olinganda: The car.', explanationRu: "При повторном упоминании: The car." },
             ],
           },
           {
@@ -1694,8 +1694,8 @@ export const grammarPathSections = [
               exampleRu: 'the book → the books',
             },
             exercises: [
-              { text: '___ books on the table are mine.', options: ['A', 'An', 'The'], correct: 2, explanation: 'Ko\'plikdagi aniq kitoblar: The books.' },
-              { text: 'Look at ___ children over there!', options: ['a', 'the', 'an'], correct: 1, explanation: 'Aniq ko\'rinib turgan bolalar: the children.' },
+              { text: '___ books on the table are mine.', options: ['A', 'An', 'The'], correct: 2, explanation: 'Ko\'plikdagi aniq kitoblar: The books.', explanationRu: "Конкретные книги во множественном числе: The books." },
+              { text: 'Look at ___ children over there!', options: ['a', 'the', 'an'], correct: 1, explanation: 'Aniq ko\'rinib turgan bolalar: the children.', explanationRu: "Конкретные, видимые дети: the children." },
             ],
           },
           {
@@ -1706,8 +1706,8 @@ export const grammarPathSections = [
               exampleRu: 'the moon, the sky, the earth',
             },
             exercises: [
-              { text: 'Look at ___ sky!', options: ['a', 'an', 'the'], correct: 2, explanation: 'sky yagona: the sky.' },
-              { text: '___ moon is white tonight.', options: ['A', 'The', 'An'], correct: 1, explanation: 'moon yagona: The moon.' },
+              { text: 'Look at ___ sky!', options: ['a', 'an', 'the'], correct: 2, explanation: 'sky yagona: the sky.', explanationRu: "sky — единственное в своём роде: the sky." },
+              { text: '___ moon is white tonight.', options: ['A', 'The', 'An'], correct: 1, explanation: 'moon yagona: The moon.', explanationRu: "moon — единственная в своём роде: The moon." },
             ],
           },
           {
@@ -1718,9 +1718,9 @@ export const grammarPathSections = [
               exampleRu: 'I have a pen. The pen is blue. Look at the sky.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have a cat. The cat is white.', 'I have a cat. A cat is white.'], correct: 0, explanation: 'Qayta aytilganda: The cat.' },
-              { text: 'Turn off ___ light, please.', options: ['a', 'the'], correct: 1, explanation: 'Aniq shu xonadagi chiroq: the light.' },
-              { text: '___ earth goes around the sun.', options: ['The', 'A'], correct: 0, explanation: 'The earth, the sun.' },
+              { text: 'Choose the correct sentence:', options: ['I have a cat. The cat is white.', 'I have a cat. A cat is white.'], correct: 0, explanation: 'Qayta aytilganda: The cat.', explanationRu: "При повторном упоминании: The cat." },
+              { text: 'Turn off ___ light, please.', options: ['a', 'the'], correct: 1, explanation: 'Aniq shu xonadagi chiroq: the light.', explanationRu: "Конкретная лампа именно в этой комнате: the light." },
+              { text: '___ earth goes around the sun.', options: ['The', 'A'], correct: 0, explanation: 'The earth, the sun.', explanationRu: "The earth, the sun." },
             ],
           },
         ],
@@ -1740,8 +1740,8 @@ export const grammarPathSections = [
               exampleRu: 'play the piano, play the guitar',
             },
             exercises: [
-              { text: 'She can play ___ piano.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi bilan: play the piano.' },
-              { text: 'He is learning to play ___ guitar.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi bilan: play the guitar.' },
+              { text: 'She can play ___ piano.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi bilan: play the piano.', explanationRu: "С музыкальным инструментом: play the piano." },
+              { text: 'He is learning to play ___ guitar.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi bilan: play the guitar.', explanationRu: "С музыкальным инструментом: play the guitar." },
             ],
           },
           {
@@ -1752,8 +1752,8 @@ export const grammarPathSections = [
               exampleRu: 'the best, the tallest, the most beautiful',
             },
             exercises: [
-              { text: 'He is ___ tallest boy in the class.', options: ['a', 'an', 'the'], correct: 2, explanation: 'Orttirma daraja (tallest) oldidan: the tallest.' },
-              { text: 'This is ___ best movie ever!', options: ['a', 'the', '-'], correct: 1, explanation: 'Orttirma daraja: the best.' },
+              { text: 'He is ___ tallest boy in the class.', options: ['a', 'an', 'the'], correct: 2, explanation: 'Orttirma daraja (tallest) oldidan: the tallest.', explanationRu: "Перед превосходной степенью (tallest): the tallest." },
+              { text: 'This is ___ best movie ever!', options: ['a', 'the', '-'], correct: 1, explanation: 'Orttirma daraja: the best.', explanationRu: "Превосходная степень: the best." },
             ],
           },
           {
@@ -1764,8 +1764,8 @@ export const grammarPathSections = [
               exampleRu: 'the first lesson, the second floor',
             },
             exercises: [
-              { text: 'We live on ___ third floor.', options: ['a', 'the', '-'], correct: 1, explanation: 'Tartib son (third) oldidan: the third.' },
-              { text: 'Today is ___ first day of school.', options: ['a', 'the', 'an'], correct: 1, explanation: 'Tartib son: the first.' },
+              { text: 'We live on ___ third floor.', options: ['a', 'the', '-'], correct: 1, explanation: 'Tartib son (third) oldidan: the third.', explanationRu: "Перед порядковым числительным (third): the third." },
+              { text: 'Today is ___ first day of school.', options: ['a', 'the', 'an'], correct: 1, explanation: 'Tartib son: the first.', explanationRu: "Порядковое числительное: the first." },
             ],
           },
           {
@@ -1776,8 +1776,8 @@ export const grammarPathSections = [
               exampleRu: 'the Pacific Ocean, the Nile',
             },
             exercises: [
-              { text: '___ Nile is a long river.', options: ['A', 'The', '-'], correct: 1, explanation: 'Daryo nomlari oldidan: The Nile.' },
-              { text: 'They sailed across ___ Atlantic Ocean.', options: ['a', 'the', '-'], correct: 1, explanation: 'Okean nomlari oldidan: the Atlantic Ocean.' },
+              { text: '___ Nile is a long river.', options: ['A', 'The', '-'], correct: 1, explanation: 'Daryo nomlari oldidan: The Nile.', explanationRu: "Перед названиями рек: The Nile." },
+              { text: 'They sailed across ___ Atlantic Ocean.', options: ['a', 'the', '-'], correct: 1, explanation: 'Okean nomlari oldidan: the Atlantic Ocean.', explanationRu: "Перед названиями океанов: the Atlantic Ocean." },
             ],
           },
           {
@@ -1788,9 +1788,9 @@ export const grammarPathSections = [
               exampleRu: 'He is the best player, and he plays the guitar.',
             },
             exercises: [
-              { text: 'She is ___ most talented student.', options: ['a', 'the'], correct: 1, explanation: 'Orttirma daraja: the most.' },
-              { text: 'Do you play ___ violin?', options: ['a', 'the'], correct: 1, explanation: 'Musiqa asbobi: the violin.' },
-              { text: 'It is ___ second time I call you.', options: ['the', 'a'], correct: 0, explanation: 'Tartib son: the second.' },
+              { text: 'She is ___ most talented student.', options: ['a', 'the'], correct: 1, explanation: 'Orttirma daraja: the most.', explanationRu: "Превосходная степень: the most." },
+              { text: 'Do you play ___ violin?', options: ['a', 'the'], correct: 1, explanation: 'Musiqa asbobi: the violin.', explanationRu: "Музыкальный инструмент: the violin." },
+              { text: 'It is ___ second time I call you.', options: ['the', 'a'], correct: 0, explanation: 'Tartib son: the second.', explanationRu: "Порядковое числительное: the second." },
             ],
           },
         ],
@@ -1810,8 +1810,8 @@ export const grammarPathSections = [
               exampleRu: 'Tom, Tashkent, Uzbekistan, London',
             },
             exercises: [
-              { text: 'I live in ___ Tashkent.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Shahar nomlari oldidan artikl qo\'yilmaydi.' },
-              { text: '___ Alex is my friend.', options: ['A', 'The', '- (no article)'], correct: 2, explanation: 'Kishi ismlari oldidan artikl ishlatilmaydi.' },
+              { text: 'I live in ___ Tashkent.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Shahar nomlari oldidan artikl qo\'yilmaydi.', explanationRu: "Перед названиями городов артикль не ставится." },
+              { text: '___ Alex is my friend.', options: ['A', 'The', '- (no article)'], correct: 2, explanation: 'Kishi ismlari oldidan artikl ishlatilmaydi.', explanationRu: "Перед именами людей артикль не используется." },
             ],
           },
           {
@@ -1822,8 +1822,8 @@ export const grammarPathSections = [
               exampleRu: 'I like cats. Water is good for health.',
             },
             exercises: [
-              { text: 'I like ___ apples. (in general)', options: ['an', 'the', '- (no article)'], correct: 2, explanation: 'Umumiy ma\'nodagi ko\'plik otlar oldida artikl bo\'lmaydi.' },
-              { text: '___ milk is good for kids.', options: ['A', 'The', '- (no article)'], correct: 2, explanation: 'Umumiy ma\'nodagi sanalmaydigan ot: milk.' },
+              { text: 'I like ___ apples. (in general)', options: ['an', 'the', '- (no article)'], correct: 2, explanation: 'Umumiy ma\'nodagi ko\'plik otlar oldida artikl bo\'lmaydi.', explanationRu: "Перед существительными во множественном числе в общем значении артикля нет." },
+              { text: '___ milk is good for kids.', options: ['A', 'The', '- (no article)'], correct: 2, explanation: 'Umumiy ma\'nodagi sanalmaydigan ot: milk.', explanationRu: "Неисчисляемое существительное в общем значении: milk." },
             ],
           },
           {
@@ -1834,8 +1834,8 @@ export const grammarPathSections = [
               exampleRu: 'have breakfast, on Monday, in July',
             },
             exercises: [
-              { text: 'We have ___ breakfast at 8 AM.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Ovqat vaqti (breakfast) oldida artikl bo\'lmaydi.' },
-              { text: 'See you on ___ Monday!', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Hafta kunlari oldida artikl ishlatilmaydi.' },
+              { text: 'We have ___ breakfast at 8 AM.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Ovqat vaqti (breakfast) oldida artikl bo\'lmaydi.', explanationRu: "Перед названием приёма пищи (breakfast) артикля нет." },
+              { text: 'See you on ___ Monday!', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Hafta kunlari oldida artikl ishlatilmaydi.', explanationRu: "Перед днями недели артикль не используется." },
             ],
           },
           {
@@ -1846,8 +1846,8 @@ export const grammarPathSections = [
               exampleRu: 'speak English, study Maths, play football',
             },
             exercises: [
-              { text: 'I speak ___ English.', options: ['an', 'the', '- (no article)'], correct: 2, explanation: 'Til nomlari oldidan artikl qo\'yilmaydi.' },
-              { text: 'They play ___ football after school.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Sport turlari oldidan artikl ishlatilmaydi.' },
+              { text: 'I speak ___ English.', options: ['an', 'the', '- (no article)'], correct: 2, explanation: 'Til nomlari oldidan artikl qo\'yilmaydi.', explanationRu: "Перед названиями языков артикль не ставится." },
+              { text: 'They play ___ football after school.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Sport turlari oldidan artikl ishlatilmaydi.', explanationRu: "Перед видами спорта артикль не используется." },
             ],
           },
           {
@@ -1858,9 +1858,9 @@ export const grammarPathSections = [
               exampleRu: 'Tom lives in Tashkent, speaks English, and plays football.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I like football.', 'I like the football.'], correct: 0, explanation: 'Sport nomlarida artikl ishlatilmaydi.' },
-              { text: 'She studies ___ history.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Fan nomida artikl bo\'lmaydi.' },
-              { text: 'Choose the correct sentence:', options: ['We live in Uzbekistan.', 'We live in a Uzbekistan.'], correct: 0, explanation: 'Mamlakat nomida artikl bo\'lmaydi.' },
+              { text: 'Choose the correct sentence:', options: ['I like football.', 'I like the football.'], correct: 0, explanation: 'Sport nomlarida artikl ishlatilmaydi.', explanationRu: "В названиях видов спорта артикль не используется." },
+              { text: 'She studies ___ history.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Fan nomida artikl bo\'lmaydi.', explanationRu: "В названии учебного предмета артикля нет." },
+              { text: 'Choose the correct sentence:', options: ['We live in Uzbekistan.', 'We live in a Uzbekistan.'], correct: 0, explanation: 'Mamlakat nomida artikl bo\'lmaydi.', explanationRu: "В названии страны артикля нет." },
             ],
           },
         ],
@@ -1880,8 +1880,8 @@ export const grammarPathSections = [
               exampleRu: 'I saw a dog. The dog barked at me.',
             },
             exercises: [
-              { text: 'Give me ___ apple from that basket.', options: ['an', 'the'], correct: 0, explanation: 'Istalgan bitta olma: an apple.' },
-              { text: '___ apple you gave me was sweet.', options: ['An', 'The'], correct: 1, explanation: 'Aynan sen bergan o\'sha olma: The apple.' },
+              { text: 'Give me ___ apple from that basket.', options: ['an', 'the'], correct: 0, explanation: 'Istalgan bitta olma: an apple.', explanationRu: "Любое одно яблоко: an apple." },
+              { text: '___ apple you gave me was sweet.', options: ['An', 'The'], correct: 1, explanation: 'Aynan sen bergan o\'sha olma: The apple.', explanationRu: "Именно то яблоко, которое ты дал: The apple." },
             ],
           },
           {
@@ -1892,8 +1892,8 @@ export const grammarPathSections = [
               exampleRu: 'I like music vs The music in this room is loud.',
             },
             exercises: [
-              { text: 'I love ___ music.', options: ['the', '- (no article)'], correct: 1, explanation: 'Umuman musiqa haqida: no article.' },
-              { text: '___ music of this movie is great.', options: ['The', '- (no article)'], correct: 0, explanation: 'Aynan shu kinoning musiqasi: The music.' },
+              { text: 'I love ___ music.', options: ['the', '- (no article)'], correct: 1, explanation: 'Umuman musiqa haqida: no article.', explanationRu: "О музыке в общем: без артикля." },
+              { text: '___ music of this movie is great.', options: ['The', '- (no article)'], correct: 0, explanation: 'Aynan shu kinoning musiqasi: The music.', explanationRu: "Музыка именно этого фильма: The music." },
             ],
           },
           {
@@ -1904,8 +1904,8 @@ export const grammarPathSections = [
               exampleRu: 'a cat, an egg, the sun, live in Paris',
             },
             exercises: [
-              { text: 'He is ___ honest person.', options: ['a', 'an', 'the', '-'], correct: 1, explanation: 'honest [o] unli tovush: an honest person.' },
-              { text: '___ sun rises in the east.', options: ['A', 'An', 'The', '-'], correct: 2, explanation: 'The sun.' },
+              { text: 'He is ___ honest person.', options: ['a', 'an', 'the', '-'], correct: 1, explanation: 'honest [o] unli tovush: an honest person.', explanationRu: "honest — гласный звук [o]: an honest person." },
+              { text: '___ sun rises in the east.', options: ['A', 'An', 'The', '-'], correct: 2, explanation: 'The sun.', explanationRu: "The sun." },
             ],
           },
           {
@@ -1916,8 +1916,8 @@ export const grammarPathSections = [
               exampleRu: 'She plays the piano and speaks English.',
             },
             exercises: [
-              { text: 'She plays ___ guitar very well.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi: the guitar.' },
-              { text: 'We had ___ lunch at school.', options: ['a', 'the', '-'], correct: 2, explanation: 'Ovqat vaqti (lunch): no article.' },
+              { text: 'She plays ___ guitar very well.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi: the guitar.', explanationRu: "Музыкальный инструмент: the guitar." },
+              { text: 'We had ___ lunch at school.', options: ['a', 'the', '-'], correct: 2, explanation: 'Ovqat vaqti (lunch): no article.', explanationRu: "Приём пищи (lunch): без артикля." },
             ],
           },
           {
@@ -1928,9 +1928,9 @@ export const grammarPathSections = [
               exampleRu: 'I have a dog. The dog likes playing football.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have a car. The car is red.', 'I have the car. A car is red.'], correct: 0, explanation: 'Birinchi a car, ikkinchi The car.' },
-              { text: 'Choose the correct sentence:', options: ['He is an university student.', 'He is a university student.'], correct: 1, explanation: 'university [yu] undosh: a university.' },
-              { text: 'Choose the correct sentence:', options: ['She lives in London.', 'She lives in the London.'], correct: 0, explanation: 'Shahar nomi: no article.' },
+              { text: 'Choose the correct sentence:', options: ['I have a car. The car is red.', 'I have the car. A car is red.'], correct: 0, explanation: 'Birinchi a car, ikkinchi The car.', explanationRu: "Первый раз a car, второй раз The car." },
+              { text: 'Choose the correct sentence:', options: ['He is an university student.', 'He is a university student.'], correct: 1, explanation: 'university [yu] undosh: a university.', explanationRu: "university — согласный звук [yu]: a university." },
+              { text: 'Choose the correct sentence:', options: ['She lives in London.', 'She lives in the London.'], correct: 0, explanation: 'Shahar nomi: no article.', explanationRu: "Название города: без артикля." },
             ],
           },
         ],
@@ -1940,21 +1940,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Artikllar (a / an / the)",
       titleRu: 'Тест раздела: Артикли (a / an / the)',
       exercises: [
-        { text: 'I have ___ book.', options: ['a', 'an', 'the'], correct: 0, explanation: 'book [b] undosh tovush: a book.' },
-        { text: 'She ate ___ apple.', options: ['a', 'an', 'the'], correct: 1, explanation: 'apple [æ] unli tovush: an apple.' },
-        { text: 'I stayed for ___ hour.', options: ['a', 'an', '-'], correct: 1, explanation: 'hour [auə] unli tovush: an hour.' },
-        { text: 'This is ___ university.', options: ['a', 'an', 'the'], correct: 0, explanation: 'university [yu] undosh tovush: a university.' },
-        { text: 'I saw a dog. ___ dog was white.', options: ['A', 'An', 'The'], correct: 2, explanation: 'Qayta tilga olinganda: The dog.' },
-        { text: 'Look at ___ sun!', options: ['a', 'an', 'the'], correct: 2, explanation: 'Dunyoda yagona: the sun.' },
-        { text: 'She plays ___ piano.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi: the piano.' },
-        { text: 'He is ___ best student.', options: ['a', 'the', '-'], correct: 1, explanation: 'Orttirma daraja: the best.' },
-        { text: 'We live on ___ second floor.', options: ['a', 'the', '-'], correct: 1, explanation: 'Tartib son: the second.' },
-        { text: 'I live in ___ Tashkent.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Shahar nomida artikl bo\'lmaydi.' },
-        { text: 'I like ___ cats. (in general)', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Umumiy ma\'nodagi ko\'plik: no article.' },
-        { text: 'We speak ___ English.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Til nomlarida artikl bo\'lmaydi.' },
-        { text: 'They play ___ football.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Sport nomlarida artikl bo\'lmaydi.' },
-        { text: 'We have ___ breakfast at 8 AM.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Ovqat vaqtida artikl bo\'lmaydi.' },
-        { text: 'Choose the correct sentence:', options: ['The earth goes around the sun.', 'An earth goes around a sun.'], correct: 0, explanation: 'The earth, the sun.' },
+        { text: 'I have ___ book.', options: ['a', 'an', 'the'], correct: 0, explanation: 'book [b] undosh tovush: a book.', explanationRu: "book — согласный звук [b]: a book." },
+        { text: 'She ate ___ apple.', options: ['a', 'an', 'the'], correct: 1, explanation: 'apple [æ] unli tovush: an apple.', explanationRu: "apple — гласный звук [æ]: an apple." },
+        { text: 'I stayed for ___ hour.', options: ['a', 'an', '-'], correct: 1, explanation: 'hour [auə] unli tovush: an hour.', explanationRu: "hour — гласный звук [auə]: an hour." },
+        { text: 'This is ___ university.', options: ['a', 'an', 'the'], correct: 0, explanation: 'university [yu] undosh tovush: a university.', explanationRu: "university — согласный звук [yu]: a university." },
+        { text: 'I saw a dog. ___ dog was white.', options: ['A', 'An', 'The'], correct: 2, explanation: 'Qayta tilga olinganda: The dog.', explanationRu: "При повторном упоминании: The dog." },
+        { text: 'Look at ___ sun!', options: ['a', 'an', 'the'], correct: 2, explanation: 'Dunyoda yagona: the sun.', explanationRu: "Единственное в мире: the sun." },
+        { text: 'She plays ___ piano.', options: ['a', 'the', '-'], correct: 1, explanation: 'Musiqa asbobi: the piano.', explanationRu: "Музыкальный инструмент: the piano." },
+        { text: 'He is ___ best student.', options: ['a', 'the', '-'], correct: 1, explanation: 'Orttirma daraja: the best.', explanationRu: "Превосходная степень: the best." },
+        { text: 'We live on ___ second floor.', options: ['a', 'the', '-'], correct: 1, explanation: 'Tartib son: the second.', explanationRu: "Порядковое числительное: the second." },
+        { text: 'I live in ___ Tashkent.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Shahar nomida artikl bo\'lmaydi.', explanationRu: "В названии города артикля нет." },
+        { text: 'I like ___ cats. (in general)', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Umumiy ma\'nodagi ko\'plik: no article.', explanationRu: "Множественное число в общем значении: без артикля." },
+        { text: 'We speak ___ English.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Til nomlarida artikl bo\'lmaydi.', explanationRu: "В названиях языков артикля нет." },
+        { text: 'They play ___ football.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Sport nomlarida artikl bo\'lmaydi.', explanationRu: "В названиях видов спорта артикля нет." },
+        { text: 'We have ___ breakfast at 8 AM.', options: ['a', 'the', '- (no article)'], correct: 2, explanation: 'Ovqat vaqtida artikl bo\'lmaydi.', explanationRu: "При названии приёма пищи артикля нет." },
+        { text: 'Choose the correct sentence:', options: ['The earth goes around the sun.', 'An earth goes around a sun.'], correct: 0, explanation: 'The earth, the sun.', explanationRu: "The earth, the sun." },
       ],
     },
   },
@@ -1980,8 +1980,8 @@ export const grammarPathSections = [
               exampleRu: 'This is my book. (Это моя книга.)',
             },
             exercises: [
-              { text: 'Yaqiningizda turgan bitta narsani ko\'rsatsangiz, qaysi so\'zni ishlatasiz?', options: ['this', 'that', 'these'], correct: 0, explanation: 'Yaqindagi birlik narsa uchun: this.' },
-              { text: '___ is a new phone. (holding in hand)', options: ['This', 'That', 'Those'], correct: 0, explanation: 'Qo\'lda ushlab turilgan (yaqin) narsa: This.' },
+              { text: 'Yaqiningizda turgan bitta narsani ko\'rsatsangiz, qaysi so\'zni ishlatasiz?', textRu: "Какое слово использовать, чтобы указать на один близкий предмет?", options: ['this', 'that', 'these'], correct: 0, explanation: 'Yaqindagi birlik narsa uchun: this.', explanationRu: "Для близкого предмета в единственном числе: this." },
+              { text: '___ is a new phone. (holding in hand)', options: ['This', 'That', 'Those'], correct: 0, explanation: 'Qo\'lda ushlab turilgan (yaqin) narsa: This.', explanationRu: "Предмет, который держат в руках (близко): This." },
             ],
           },
           {
@@ -1992,8 +1992,8 @@ export const grammarPathSections = [
               exampleRu: 'That is a car over there. (Вон та машина.)',
             },
             exercises: [
-              { text: 'Uzoqroqda turgan bitta narsani ko\'rsatsangiz, qaysi so\'zni ishlatasiz?', options: ['this', 'that', 'these'], correct: 1, explanation: 'Uzoqdagi birlik narsa uchun: that.' },
-              { text: 'Look at ___ star in the sky!', options: ['this', 'that', 'these'], correct: 1, explanation: 'Osmondagi (uzoqdagi) yulduz: that.' },
+              { text: 'Uzoqroqda turgan bitta narsani ko\'rsatsangiz, qaysi so\'zni ishlatasiz?', textRu: "Какое слово использовать, чтобы указать на один далёкий предмет?", options: ['this', 'that', 'these'], correct: 1, explanation: 'Uzoqdagi birlik narsa uchun: that.', explanationRu: "Для далёкого предмета в единственном числе: that." },
+              { text: 'Look at ___ star in the sky!', options: ['this', 'that', 'these'], correct: 1, explanation: 'Osmondagi (uzoqdagi) yulduz: that.', explanationRu: "Звезда в небе (далеко): that." },
             ],
           },
           {
@@ -2004,8 +2004,8 @@ export const grammarPathSections = [
               exampleRu: 'This is a pen. That is a house.',
             },
             exercises: [
-              { text: 'This ___ my house.', options: ['am', 'is', 'are'], correct: 1, explanation: 'This + is.' },
-              { text: 'That ___ a big tree.', options: ['am', 'is', 'are'], correct: 1, explanation: 'That + is.' },
+              { text: 'This ___ my house.', options: ['am', 'is', 'are'], correct: 1, explanation: 'This + is.', explanationRu: "This + is." },
+              { text: 'That ___ a big tree.', options: ['am', 'is', 'are'], correct: 1, explanation: 'That + is.', explanationRu: "That + is." },
             ],
           },
           {
@@ -2016,8 +2016,8 @@ export const grammarPathSections = [
               exampleRu: 'Is this your pen? Is that your car?',
             },
             exercises: [
-              { text: '___ this your bag?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: 'Is this...?' },
-              { text: '___ that a new building?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: 'Is that...?' },
+              { text: '___ this your bag?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: 'Is this...?', explanationRu: "Is this...?" },
+              { text: '___ that a new building?', options: ['Am', 'Is', 'Are'], correct: 1, explanation: 'Is that...?', explanationRu: "Is that...?" },
             ],
           },
           {
@@ -2028,9 +2028,9 @@ export const grammarPathSections = [
               exampleRu: 'This is my pen, and that is your pen.',
             },
             exercises: [
-              { text: 'Choose the correct sentence for something near you:', options: ['This is my computer.', 'That is my computer.'], correct: 0, explanation: 'Yaqindagi narsa uchun: This.' },
-              { text: 'Is ___ your jacket over there?', options: ['this', 'that'], correct: 1, explanation: 'over there (uzoqda): that.' },
-              { text: 'Select the correct sentence:', options: ['That is a nice car.', 'That are a nice car.'], correct: 0, explanation: 'That + is.' },
+              { text: 'Choose the correct sentence for something near you:', options: ['This is my computer.', 'That is my computer.'], correct: 0, explanation: 'Yaqindagi narsa uchun: This.', explanationRu: "Для близкого предмета: This." },
+              { text: 'Is ___ your jacket over there?', options: ['this', 'that'], correct: 1, explanation: 'over there (uzoqda): that.', explanationRu: "over there (далеко): that." },
+              { text: 'Select the correct sentence:', options: ['That is a nice car.', 'That are a nice car.'], correct: 0, explanation: 'That + is.', explanationRu: "That + is." },
             ],
           },
         ],
@@ -2050,8 +2050,8 @@ export const grammarPathSections = [
               exampleRu: 'These are my books. (Это мои книги.)',
             },
             exercises: [
-              { text: 'Yaqiningizdagi ko\'p narsalarni ko\'rsatish uchun qaysi so\'z ishlatiladi?', options: ['this', 'these', 'those'], correct: 1, explanation: 'Yaqindagi ko\'plik uchun: these.' },
-              { text: '___ are my keys. (in my hand)', options: ['This', 'These', 'Those'], correct: 1, explanation: 'Qo\'lda turgan ko\'plik narsalar: These.' },
+              { text: 'Yaqiningizdagi ko\'p narsalarni ko\'rsatish uchun qaysi so\'z ishlatiladi?', textRu: "Какое слово используется для указания на несколько близких предметов?", options: ['this', 'these', 'those'], correct: 1, explanation: 'Yaqindagi ko\'plik uchun: these.', explanationRu: "Для близких предметов во множественном числе: these." },
+              { text: '___ are my keys. (in my hand)', options: ['This', 'These', 'Those'], correct: 1, explanation: 'Qo\'lda turgan ko\'plik narsalar: These.', explanationRu: "Предметы во множественном числе, которые держат в руках: These." },
             ],
           },
           {
@@ -2062,8 +2062,8 @@ export const grammarPathSections = [
               exampleRu: 'Those are birds in the sky. (Вон те птицы.)',
             },
             exercises: [
-              { text: 'Uzoqdagi ko\'p narsalarni ko\'rsatish uchun qaysi so\'z ishlatiladi?', options: ['this', 'these', 'those'], correct: 2, explanation: 'Uzoqdagi ko\'plik uchun: those.' },
-              { text: 'Look at ___ cars over there!', options: ['these', 'those', 'this'], correct: 1, explanation: 'Uzoqdagi ko\'plik: those.' },
+              { text: 'Uzoqdagi ko\'p narsalarni ko\'rsatish uchun qaysi so\'z ishlatiladi?', textRu: "Какое слово используется для указания на несколько далёких предметов?", options: ['this', 'these', 'those'], correct: 2, explanation: 'Uzoqdagi ko\'plik uchun: those.', explanationRu: "Для далёких предметов во множественном числе: those." },
+              { text: 'Look at ___ cars over there!', options: ['these', 'those', 'this'], correct: 1, explanation: 'Uzoqdagi ko\'plik: those.', explanationRu: "Далёкие предметы во множественном числе: those." },
             ],
           },
           {
@@ -2074,8 +2074,8 @@ export const grammarPathSections = [
               exampleRu: 'These are my friends. Those are old houses.',
             },
             exercises: [
-              { text: 'These ___ my shoes.', options: ['is', 'are', 'am'], correct: 1, explanation: 'These + are.' },
-              { text: 'Those ___ high mountains.', options: ['is', 'are', 'am'], correct: 1, explanation: 'Those + are.' },
+              { text: 'These ___ my shoes.', options: ['is', 'are', 'am'], correct: 1, explanation: 'These + are.', explanationRu: "These + are." },
+              { text: 'Those ___ high mountains.', options: ['is', 'are', 'am'], correct: 1, explanation: 'Those + are.', explanationRu: "Those + are." },
             ],
           },
           {
@@ -2086,8 +2086,8 @@ export const grammarPathSections = [
               exampleRu: 'Are these your glasses? Are those your books?',
             },
             exercises: [
-              { text: '___ these your keys?', options: ['Is', 'Are', 'Am'], correct: 1, explanation: 'Are these...?' },
-              { text: '___ those children playing?', options: ['Is', 'Are', 'Am'], correct: 1, explanation: 'Are those...?' },
+              { text: '___ these your keys?', options: ['Is', 'Are', 'Am'], correct: 1, explanation: 'Are these...?', explanationRu: "Are these...?" },
+              { text: '___ those children playing?', options: ['Is', 'Are', 'Am'], correct: 1, explanation: 'Are those...?', explanationRu: "Are those...?" },
             ],
           },
           {
@@ -2098,9 +2098,9 @@ export const grammarPathSections = [
               exampleRu: 'This book, that book, these books, those books.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['These are my shoes.', 'This are my shoes.'], correct: 0, explanation: 'shoes ko\'plik: These are.' },
-              { text: 'Look at ___ birds over there in the tree.', options: ['these', 'those'], correct: 1, explanation: 'over there (uzoqda): those.' },
-              { text: 'Select the correct question:', options: ['Are those your books?', 'Is those your books?'], correct: 0, explanation: 'those + Are.' },
+              { text: 'Choose the correct sentence:', options: ['These are my shoes.', 'This are my shoes.'], correct: 0, explanation: 'shoes ko\'plik: These are.', explanationRu: "shoes во множественном числе: These are." },
+              { text: 'Look at ___ birds over there in the tree.', options: ['these', 'those'], correct: 1, explanation: 'over there (uzoqda): those.', explanationRu: "over there (далеко): those." },
+              { text: 'Select the correct question:', options: ['Are those your books?', 'Is those your books?'], correct: 0, explanation: 'those + Are.', explanationRu: "those + Are." },
             ],
           },
         ],
@@ -2120,8 +2120,8 @@ export const grammarPathSections = [
               exampleRu: 'my name, your bag',
             },
             exercises: [
-              { text: '"mening" so\'zini ingliz tilida qanday aytamiz?', options: ['I', 'my', 'me'], correct: 1, explanation: '"mening" = my.' },
-              { text: 'What is ___ name? (sizning)', options: ['you', 'your', 'yours'], correct: 1, explanation: '"sizning" = your.' },
+              { text: '"mening" so\'zini ingliz tilida qanday aytamiz?', textRu: "Как сказать \"мой / моя\" по-английски?", options: ['I', 'my', 'me'], correct: 1, explanation: '"mening" = my.', explanationRu: "\"мой/моя\" = my." },
+              { text: 'What is ___ name? (sizning)', options: ['you', 'your', 'yours'], correct: 1, explanation: '"sizning" = your.', explanationRu: "\"твой/ваш\" = your." },
             ],
           },
           {
@@ -2132,8 +2132,8 @@ export const grammarPathSections = [
               exampleRu: 'his car, her book',
             },
             exercises: [
-              { text: 'Tom and ___ father. (Tom va uning otasi)', options: ['his', 'her', 'its'], correct: 0, explanation: 'Tom (erkak) -> his.' },
-              { text: 'Anna lost ___ phone. (Anna va uning telefoni)', options: ['his', 'her', 'its'], correct: 1, explanation: 'Anna (ayol) -> her.' },
+              { text: 'Tom and ___ father. (Tom va uning otasi)', options: ['his', 'her', 'its'], correct: 0, explanation: 'Tom (erkak) -> his.', explanationRu: "Tom (мужчина) -> his." },
+              { text: 'Anna lost ___ phone. (Anna va uning telefoni)', options: ['his', 'her', 'its'], correct: 1, explanation: 'Anna (ayol) -> her.', explanationRu: "Anna (женщина) -> her." },
             ],
           },
           {
@@ -2144,8 +2144,8 @@ export const grammarPathSections = [
               exampleRu: 'my book, your car, his house',
             },
             exercises: [
-              { text: 'Choose the correct option:', options: ['This is my bag.', 'This is I bag.'], correct: 0, explanation: 'Egalik uchun "my" ishlatiladi.' },
-              { text: 'He likes ___ job.', options: ['he', 'his'], correct: 1, explanation: '"his job" (uning ishi).' },
+              { text: 'Choose the correct option:', options: ['This is my bag.', 'This is I bag.'], correct: 0, explanation: 'Egalik uchun "my" ishlatiladi.', explanationRu: "Для принадлежности используется \"my\"." },
+              { text: 'He likes ___ job.', options: ['he', 'his'], correct: 1, explanation: '"his job" (uning ishi).', explanationRu: "\"his job\" (его работа)." },
             ],
           },
           {
@@ -2156,8 +2156,8 @@ export const grammarPathSections = [
               exampleRu: 'my book, her car',
             },
             exercises: [
-              { text: 'To\'g\'ri birikmani tanlang:', options: ['my car', 'my a car', 'a my car'], correct: 0, explanation: 'Egalik olmoshi yonida artikl ishlatilmaydi.' },
-              { text: 'Choose the correct sentence:', options: ['This is her house.', 'This is her a house.'], correct: 0, explanation: 'her house.' },
+              { text: 'To\'g\'ri birikmani tanlang:', textRu: "Выберите правильное сочетание:", options: ['my car', 'my a car', 'a my car'], correct: 0, explanation: 'Egalik olmoshi yonida artikl ishlatilmaydi.', explanationRu: "Рядом с притяжательным местоимением артикль не используется." },
+              { text: 'Choose the correct sentence:', options: ['This is her house.', 'This is her a house.'], correct: 0, explanation: 'her house.', explanationRu: "her house." },
             ],
           },
           {
@@ -2168,9 +2168,9 @@ export const grammarPathSections = [
               exampleRu: 'My name is Alex. This is my friend, and his name is John.',
             },
             exercises: [
-              { text: 'She is driving ___ car.', options: ['his', 'her', 'its'], correct: 1, explanation: 'She (ayol) -> her car.' },
-              { text: 'He loves ___ dog.', options: ['his', 'her', 'my'], correct: 0, explanation: 'He (erkak) -> his dog.' },
-              { text: 'Select the correct sentence:', options: ['Your room is big.', 'You room is big.'], correct: 0, explanation: 'Your room (sizning xonangiz).' },
+              { text: 'She is driving ___ car.', options: ['his', 'her', 'its'], correct: 1, explanation: 'She (ayol) -> her car.', explanationRu: "She (женщина) -> her car." },
+              { text: 'He loves ___ dog.', options: ['his', 'her', 'my'], correct: 0, explanation: 'He (erkak) -> his dog.', explanationRu: "He (мужчина) -> his dog." },
+              { text: 'Select the correct sentence:', options: ['Your room is big.', 'You room is big.'], correct: 0, explanation: 'Your room (sizning xonangiz).', explanationRu: "Your room (ваша комната)." },
             ],
           },
         ],
@@ -2190,8 +2190,8 @@ export const grammarPathSections = [
               exampleRu: 'The cat is drinking its milk.',
             },
             exercises: [
-              { text: 'The dog is playing with ___ ball.', options: ['his', 'her', 'its'], correct: 2, explanation: 'dog (hayvon) -> its ball.' },
-              { text: 'The city is famous for ___ parks.', options: ['his', 'its', 'their'], correct: 1, explanation: 'city (narsa/shahar) -> its parks.' },
+              { text: 'The dog is playing with ___ ball.', options: ['his', 'her', 'its'], correct: 2, explanation: 'dog (hayvon) -> its ball.', explanationRu: "dog (животное) -> its ball." },
+              { text: 'The city is famous for ___ parks.', options: ['his', 'its', 'their'], correct: 1, explanation: 'city (narsa/shahar) -> its parks.', explanationRu: "city (предмет/город) -> its parks." },
             ],
           },
           {
@@ -2202,8 +2202,8 @@ export const grammarPathSections = [
               exampleRu: 'Its tail is long vs It\'s a cat.',
             },
             exercises: [
-              { text: 'The bird is in ___ nest.', options: ['its', "it's"], correct: 0, explanation: 'Egalik uchun apostrofsiz "its" ishlatiladi.' },
-              { text: '___ cold today.', options: ['Its', "It's"], correct: 1, explanation: 'It\'s cold (It is cold).' },
+              { text: 'The bird is in ___ nest.', options: ['its', "it's"], correct: 0, explanation: 'Egalik uchun apostrofsiz "its" ishlatiladi.', explanationRu: "Для принадлежности используется \"its\" без апострофа." },
+              { text: '___ cold today.', options: ['Its', "It's"], correct: 1, explanation: 'It\'s cold (It is cold).', explanationRu: "It's cold (It is cold)." },
             ],
           },
           {
@@ -2214,8 +2214,8 @@ export const grammarPathSections = [
               exampleRu: 'our house, our school',
             },
             exercises: [
-              { text: 'We love ___ country.', options: ['we', 'our', 'us'], correct: 1, explanation: '"bizning" = our.' },
-              { text: 'This is ___ classroom. (We study here)', options: ['our', 'their', 'your'], correct: 0, explanation: 'We study -> our classroom.' },
+              { text: 'We love ___ country.', options: ['we', 'our', 'us'], correct: 1, explanation: '"bizning" = our.', explanationRu: "\"наш/наша/наше/наши\" = our." },
+              { text: 'This is ___ classroom. (We study here)', options: ['our', 'their', 'your'], correct: 0, explanation: 'We study -> our classroom.', explanationRu: "We study -> our classroom." },
             ],
           },
           {
@@ -2226,8 +2226,8 @@ export const grammarPathSections = [
               exampleRu: 'their parents, their car',
             },
             exercises: [
-              { text: 'They are doing ___ homework.', options: ['them', 'their', 'they'], correct: 1, explanation: '"ularning" = their.' },
-              { text: 'The students love ___ teacher.', options: ['our', 'their', 'his'], correct: 1, explanation: 'students (they) -> their teacher.' },
+              { text: 'They are doing ___ homework.', options: ['them', 'their', 'they'], correct: 1, explanation: '"ularning" = their.', explanationRu: "\"их\" = their." },
+              { text: 'The students love ___ teacher.', options: ['our', 'their', 'his'], correct: 1, explanation: 'students (they) -> their teacher.', explanationRu: "students (they) -> their teacher." },
             ],
           },
           {
@@ -2238,9 +2238,9 @@ export const grammarPathSections = [
               exampleRu: 'We like our house. They like their house.',
             },
             exercises: [
-              { text: 'We are clean. ___ hands are clean.', options: ['Our', 'Their'], correct: 0, explanation: 'We -> Our.' },
-              { text: 'They are happy. ___ test results are great.', options: ['Our', 'Their'], correct: 1, explanation: 'They -> Their.' },
-              { text: 'The tree lost ___ leaves.', options: ['its', "it's"], correct: 0, explanation: 'tree -> its leaves.' },
+              { text: 'We are clean. ___ hands are clean.', options: ['Our', 'Their'], correct: 0, explanation: 'We -> Our.', explanationRu: "We -> Our." },
+              { text: 'They are happy. ___ test results are great.', options: ['Our', 'Their'], correct: 1, explanation: 'They -> Their.', explanationRu: "They -> Their." },
+              { text: 'The tree lost ___ leaves.', options: ['its', "it's"], correct: 0, explanation: 'tree -> its leaves.', explanationRu: "tree -> its leaves." },
             ],
           },
         ],
@@ -2260,8 +2260,8 @@ export const grammarPathSections = [
               exampleRu: 'I have a cat -> my cat; She has a car -> her car.',
             },
             exercises: [
-              { text: 'She has a dog. It is ___ dog.', options: ['she', 'her', 'hers'], correct: 1, explanation: 'She -> her.' },
-              { text: 'They have a house. It is ___ house.', options: ['they', 'them', 'their'], correct: 2, explanation: 'They -> their.' },
+              { text: 'She has a dog. It is ___ dog.', options: ['she', 'her', 'hers'], correct: 1, explanation: 'She -> her.', explanationRu: "She -> her." },
+              { text: 'They have a house. It is ___ house.', options: ['they', 'them', 'their'], correct: 2, explanation: 'They -> their.', explanationRu: "They -> their." },
             ],
           },
           {
@@ -2272,8 +2272,8 @@ export const grammarPathSections = [
               exampleRu: 'Whose book is this?',
             },
             exercises: [
-              { text: '___ phone is this?', options: ['Who', 'Whose', 'What'], correct: 1, explanation: 'Kimning ekanini so\'rashda: Whose.' },
-              { text: '___ glasses are these?', options: ['Who', 'Whose', 'Where'], correct: 1, explanation: 'Kimning ko\'zoynagi: Whose.' },
+              { text: '___ phone is this?', options: ['Who', 'Whose', 'What'], correct: 1, explanation: 'Kimning ekanini so\'rashda: Whose.', explanationRu: "При вопросе о том, чей это: Whose." },
+              { text: '___ glasses are these?', options: ['Who', 'Whose', 'Where'], correct: 1, explanation: 'Kimning ko\'zoynagi: Whose.', explanationRu: "Чьи это очки: Whose." },
             ],
           },
           {
@@ -2284,8 +2284,8 @@ export const grammarPathSections = [
               exampleRu: 'Whose car is this? It\'s his car.',
             },
             exercises: [
-              { text: 'Whose cat is this? It is ___ cat.', options: ['my', 'me', 'I'], correct: 0, explanation: 'my cat.' },
-              { text: 'Whose shoes are these? They are ___ shoes.', options: ['he', 'his', 'him'], correct: 1, explanation: 'his shoes.' },
+              { text: 'Whose cat is this? It is ___ cat.', options: ['my', 'me', 'I'], correct: 0, explanation: 'my cat.', explanationRu: "my cat." },
+              { text: 'Whose shoes are these? They are ___ shoes.', options: ['he', 'his', 'him'], correct: 1, explanation: 'his shoes.', explanationRu: "his shoes." },
             ],
           },
           {
@@ -2296,8 +2296,8 @@ export const grammarPathSections = [
               exampleRu: 'This is my bag. Those are her clothes.',
             },
             exercises: [
-              { text: '___ is my new car.', options: ['This', 'These'], correct: 0, explanation: 'car (birlik) -> This is.' },
-              { text: '___ are our bags.', options: ['This', 'These'], correct: 1, explanation: 'bags (ko\'plik) -> These are.' },
+              { text: '___ is my new car.', options: ['This', 'These'], correct: 0, explanation: 'car (birlik) -> This is.', explanationRu: "car (ед. ч.) -> This is." },
+              { text: '___ are our bags.', options: ['This', 'These'], correct: 1, explanation: 'bags (ko\'plik) -> These are.', explanationRu: "bags (мн. ч.) -> These are." },
             ],
           },
           {
@@ -2308,9 +2308,9 @@ export const grammarPathSections = [
               exampleRu: 'Whose keys are these? They are my keys.',
             },
             exercises: [
-              { text: 'Whose house is that? It is ___ house.', options: ['our', 'us'], correct: 0, explanation: 'our house.' },
-              { text: 'Choose the correct question:', options: ['Whose pen is this?', 'Who pen is this?'], correct: 0, explanation: 'Whose pen...' },
-              { text: 'Select the correct sentence:', options: ['Those are their books.', 'That are their books.'], correct: 0, explanation: 'books (ko\'plik) -> Those are.' },
+              { text: 'Whose house is that? It is ___ house.', options: ['our', 'us'], correct: 0, explanation: 'our house.', explanationRu: "our house." },
+              { text: 'Choose the correct question:', options: ['Whose pen is this?', 'Who pen is this?'], correct: 0, explanation: 'Whose pen...', explanationRu: "Whose pen..." },
+              { text: 'Select the correct sentence:', options: ['Those are their books.', 'That are their books.'], correct: 0, explanation: 'books (ko\'plik) -> Those are.', explanationRu: "books (мн. ч.) -> Those are." },
             ],
           },
         ],
@@ -2330,8 +2330,8 @@ export const grammarPathSections = [
               exampleRu: 'She is a doctor. Her bag is brown.',
             },
             exercises: [
-              { text: '___ is a good student.', options: ['She', 'Her'], correct: 0, explanation: 'Fe\'l (is) kelmoqda: She is.' },
-              { text: '___ book is on the table.', options: ['She', 'Her'], correct: 1, explanation: 'Ot (book) kelmoqda: Her book.' },
+              { text: '___ is a good student.', options: ['She', 'Her'], correct: 0, explanation: 'Fe\'l (is) kelmoqda: She is.', explanationRu: "Идёт глагол (is): She is." },
+              { text: '___ book is on the table.', options: ['She', 'Her'], correct: 1, explanation: 'Ot (book) kelmoqda: Her book.', explanationRu: "Идёт существительное (book): Her book." },
             ],
           },
           {
@@ -2342,8 +2342,8 @@ export const grammarPathSections = [
               exampleRu: 'His name is Tom (правильно).',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['His name is Mark.', 'Him name is Mark.'], correct: 0, explanation: 'His name.' },
-              { text: 'Choose the correct sentence:', options: ['Her is a teacher.', 'She is a teacher.'], correct: 1, explanation: 'She is.' },
+              { text: 'Choose the correct sentence:', options: ['His name is Mark.', 'Him name is Mark.'], correct: 0, explanation: 'His name.', explanationRu: "His name." },
+              { text: 'Choose the correct sentence:', options: ['Her is a teacher.', 'She is a teacher.'], correct: 1, explanation: 'She is.', explanationRu: "She is." },
             ],
           },
           {
@@ -2354,8 +2354,8 @@ export const grammarPathSections = [
               exampleRu: 'What is this? It\'s a pen. What are these? They are pens.',
             },
             exercises: [
-              { text: 'What is this? ___ is a new laptop.', options: ['It', 'They'], correct: 0, explanation: 'birlik uchun: It is.' },
-              { text: 'What are these? ___ are my keys.', options: ['It', 'They'], correct: 1, explanation: 'ko\'plik uchun: They are.' },
+              { text: 'What is this? ___ is a new laptop.', options: ['It', 'They'], correct: 0, explanation: 'birlik uchun: It is.', explanationRu: "для единственного числа: It is." },
+              { text: 'What are these? ___ are my keys.', options: ['It', 'They'], correct: 1, explanation: 'ko\'plik uchun: They are.', explanationRu: "для множественного числа: They are." },
             ],
           },
           {
@@ -2366,8 +2366,8 @@ export const grammarPathSections = [
               exampleRu: 'This is my brother. His name is Alex.',
             },
             exercises: [
-              { text: '___ is my sister. ___ name is Sarah.', options: ['She / Her', 'Her / She'], correct: 0, explanation: 'She is my sister. Her name is Sarah.' },
-              { text: 'Look at ___ trees over there.', options: ['these', 'those'], correct: 1, explanation: 'over there (uzoqda): those.' },
+              { text: '___ is my sister. ___ name is Sarah.', options: ['She / Her', 'Her / She'], correct: 0, explanation: 'She is my sister. Her name is Sarah.', explanationRu: "She is my sister. Her name is Sarah." },
+              { text: 'Look at ___ trees over there.', options: ['these', 'those'], correct: 1, explanation: 'over there (uzoqda): those.', explanationRu: "over there (далеко): those." },
             ],
           },
           {
@@ -2378,9 +2378,9 @@ export const grammarPathSections = [
               exampleRu: 'This is our house, and that is their car.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['This is my phone.', 'These is my phone.'], correct: 0, explanation: 'phone (birlik) -> This is.' },
-              { text: 'Choose the correct sentence:', options: ['They love their school.', 'They love our school.'], correct: 0, explanation: 'They -> their.' },
-              { text: 'Choose the correct sentence:', options: ['Whose book is this?', 'Who book is this?'], correct: 0, explanation: 'Whose book...' },
+              { text: 'Choose the correct sentence:', options: ['This is my phone.', 'These is my phone.'], correct: 0, explanation: 'phone (birlik) -> This is.', explanationRu: "phone (ед. ч.) -> This is." },
+              { text: 'Choose the correct sentence:', options: ['They love their school.', 'They love our school.'], correct: 0, explanation: 'They -> their.', explanationRu: "They -> their." },
+              { text: 'Choose the correct sentence:', options: ['Whose book is this?', 'Who book is this?'], correct: 0, explanation: 'Whose book...', explanationRu: "Whose book..." },
             ],
           },
         ],
@@ -2390,21 +2390,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Ko'rsatish va Egalik olmoshlari",
       titleRu: 'Тест раздела: Указательные и притяжательные местоимения',
       exercises: [
-        { text: '___ is my book. (in my hand)', options: ['This', 'That', 'Those'], correct: 0, explanation: 'Yaqindagi birlik: This.' },
-        { text: 'Look at ___ star in the sky!', options: ['this', 'that', 'these'], correct: 1, explanation: 'Uzoqdagi birlik: that.' },
-        { text: '___ are my keys. (holding in hand)', options: ['This', 'These', 'Those'], correct: 1, explanation: 'Yaqindagi ko\'plik: These.' },
-        { text: 'Look at ___ cars over there!', options: ['these', 'those'], correct: 1, explanation: 'Uzoqdagi ko\'plik: those.' },
-        { text: 'What is ___ name? (sizning)', options: ['you', 'your'], correct: 1, explanation: 'your name.' },
-        { text: 'Tom and ___ father.', options: ['his', 'her'], correct: 0, explanation: 'Tom (erkak) -> his.' },
-        { text: 'Anna lost ___ keys.', options: ['his', 'her'], correct: 1, explanation: 'Anna (ayol) -> her.' },
-        { text: 'The dog is playing with ___ tail.', options: ['his', 'its', "it's"], correct: 1, explanation: 'dog -> its.' },
-        { text: 'We love ___ school.', options: ['our', 'their'], correct: 0, explanation: 'We -> our.' },
-        { text: 'They are doing ___ homework.', options: ['our', 'their'], correct: 1, explanation: 'They -> their.' },
-        { text: '___ phone is this?', options: ['Who', 'Whose'], correct: 1, explanation: 'Kimning narsasi: Whose.' },
-        { text: 'Choose the correct sentence:', options: ['This is my bag.', 'This is a my bag.'], correct: 0, explanation: 'Egalik olmoshi yonida artikl bo\'lmaydi.' },
-        { text: 'Choose the correct sentence:', options: ['She is a doctor.', 'Her is a doctor.'], correct: 0, explanation: 'She is.' },
-        { text: 'Choose the correct sentence:', options: ['Its name is Max.', "It's name is Max."], correct: 0, explanation: 'its name (egalik).' },
-        { text: 'Choose the correct question:', options: ['Are those your books?', 'Is those your books?'], correct: 0, explanation: 'Are those.' },
+        { text: '___ is my book. (in my hand)', options: ['This', 'That', 'Those'], correct: 0, explanation: 'Yaqindagi birlik: This.', explanationRu: "Близкий предмет в ед. числе: This." },
+        { text: 'Look at ___ star in the sky!', options: ['this', 'that', 'these'], correct: 1, explanation: 'Uzoqdagi birlik: that.', explanationRu: "Далёкий предмет в ед. числе: that." },
+        { text: '___ are my keys. (holding in hand)', options: ['This', 'These', 'Those'], correct: 1, explanation: 'Yaqindagi ko\'plik: These.', explanationRu: "Близкие предметы во мн. числе: These." },
+        { text: 'Look at ___ cars over there!', options: ['these', 'those'], correct: 1, explanation: 'Uzoqdagi ko\'plik: those.', explanationRu: "Далёкие предметы во множественном числе: those." },
+        { text: 'What is ___ name? (sizning)', options: ['you', 'your'], correct: 1, explanation: 'your name.', explanationRu: "your name." },
+        { text: 'Tom and ___ father.', options: ['his', 'her'], correct: 0, explanation: 'Tom (erkak) -> his.', explanationRu: "Tom (мужчина) -> his." },
+        { text: 'Anna lost ___ keys.', options: ['his', 'her'], correct: 1, explanation: 'Anna (ayol) -> her.', explanationRu: "Anna (женщина) -> her." },
+        { text: 'The dog is playing with ___ tail.', options: ['his', 'its', "it's"], correct: 1, explanation: 'dog -> its.', explanationRu: "dog -> its." },
+        { text: 'We love ___ school.', options: ['our', 'their'], correct: 0, explanation: 'We -> our.', explanationRu: "We -> our." },
+        { text: 'They are doing ___ homework.', options: ['our', 'their'], correct: 1, explanation: 'They -> their.', explanationRu: "They -> their." },
+        { text: '___ phone is this?', options: ['Who', 'Whose'], correct: 1, explanation: 'Kimning narsasi: Whose.', explanationRu: "Чья это вещь: Whose." },
+        { text: 'Choose the correct sentence:', options: ['This is my bag.', 'This is a my bag.'], correct: 0, explanation: 'Egalik olmoshi yonida artikl bo\'lmaydi.', explanationRu: "Рядом с притяжательным местоимением артикля нет." },
+        { text: 'Choose the correct sentence:', options: ['She is a doctor.', 'Her is a doctor.'], correct: 0, explanation: 'She is.', explanationRu: "She is." },
+        { text: 'Choose the correct sentence:', options: ['Its name is Max.', "It's name is Max."], correct: 0, explanation: 'its name (egalik).', explanationRu: "its name (притяжательное)." },
+        { text: 'Choose the correct question:', options: ['Are those your books?', 'Is those your books?'], correct: 0, explanation: 'Are those.', explanationRu: "Are those." },
       ],
     },
   },
@@ -2430,8 +2430,8 @@ export const grammarPathSections = [
               exampleRu: 'Call me. I see you.',
             },
             exercises: [
-              { text: 'Can you help ___? (menga)', options: ['I', 'me', 'my'], correct: 1, explanation: 'Fe\'ldan keyin "me" ishlatiladi.' },
-              { text: 'I am talking to ___. (senga)', options: ['you', 'your', 'yours'], correct: 0, explanation: 'To\'ldiruvchi olmoshi: you.' },
+              { text: 'Can you help ___? (menga)', options: ['I', 'me', 'my'], correct: 1, explanation: 'Fe\'ldan keyin "me" ishlatiladi.', explanationRu: "После глагола используется \"me\"." },
+              { text: 'I am talking to ___. (senga)', options: ['you', 'your', 'yours'], correct: 0, explanation: 'To\'ldiruvchi olmoshi: you.', explanationRu: "Объектное местоимение: you." },
             ],
           },
           {
@@ -2442,8 +2442,8 @@ export const grammarPathSections = [
               exampleRu: 'Look at him. Listen to her.',
             },
             exercises: [
-              { text: 'Do you know Tom? I know ___.', options: ['he', 'him', 'his'], correct: 1, explanation: 'Tom (erkak kishi, fe\'ldan keyin): him.' },
-              { text: 'I like Sarah. I invited ___.', options: ['she', 'her', 'hers'], correct: 1, explanation: 'Sarah (ayol kishi, fe\'ldan keyin): her.' },
+              { text: 'Do you know Tom? I know ___.', options: ['he', 'him', 'his'], correct: 1, explanation: 'Tom (erkak kishi, fe\'ldan keyin): him.', explanationRu: "Tom (мужской род, после глагола): him." },
+              { text: 'I like Sarah. I invited ___.', options: ['she', 'her', 'hers'], correct: 1, explanation: 'Sarah (ayol kishi, fe\'ldan keyin): her.', explanationRu: "Sarah (женский род, после глагола): her." },
             ],
           },
           {
@@ -2454,8 +2454,8 @@ export const grammarPathSections = [
               exampleRu: 'I bought a new book. I read it every day.',
             },
             exercises: [
-              { text: 'Where is your bag? I cannot find ___.', options: ['he', 'her', 'it'], correct: 2, explanation: 'bag (narsa) -> it.' },
-              { text: 'The cake is delicious. Try ___!', options: ['it', 'him', 'them'], correct: 0, explanation: 'cake -> it.' },
+              { text: 'Where is your bag? I cannot find ___.', options: ['he', 'her', 'it'], correct: 2, explanation: 'bag (narsa) -> it.', explanationRu: "bag (предмет) -> it." },
+              { text: 'The cake is delicious. Try ___!', options: ['it', 'him', 'them'], correct: 0, explanation: 'cake -> it.', explanationRu: "cake -> it." },
             ],
           },
           {
@@ -2466,8 +2466,8 @@ export const grammarPathSections = [
               exampleRu: 'Give me the pen. Help him with homework.',
             },
             exercises: [
-              { text: 'Please give ___ a glass of water. (menga)', options: ['I', 'me', 'my'], correct: 1, explanation: 'give me.' },
-              { text: 'He needs help. Please help ___. (unga - erkak)', options: ['he', 'him', 'his'], correct: 1, explanation: 'help him.' },
+              { text: 'Please give ___ a glass of water. (menga)', options: ['I', 'me', 'my'], correct: 1, explanation: 'give me.', explanationRu: "give me." },
+              { text: 'He needs help. Please help ___. (unga - erkak)', options: ['he', 'him', 'his'], correct: 1, explanation: 'help him.', explanationRu: "help him." },
             ],
           },
           {
@@ -2478,9 +2478,9 @@ export const grammarPathSections = [
               exampleRu: 'I see him, she sees me, and we love it.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['Call me later.', 'Call I later.'], correct: 0, explanation: 'Call me.' },
-              { text: 'Select the correct option:', options: ['Listen to her.', 'Listen to she.'], correct: 0, explanation: 'Listen to her.' },
-              { text: 'Where is my pen? Give ___ to me.', options: ['it', 'him'], correct: 0, explanation: 'pen -> it.' },
+              { text: 'Choose the correct sentence:', options: ['Call me later.', 'Call I later.'], correct: 0, explanation: 'Call me.', explanationRu: "Call me." },
+              { text: 'Select the correct option:', options: ['Listen to her.', 'Listen to she.'], correct: 0, explanation: 'Listen to her.', explanationRu: "Listen to her." },
+              { text: 'Where is my pen? Give ___ to me.', options: ['it', 'him'], correct: 0, explanation: 'pen -> it.', explanationRu: "pen -> it." },
             ],
           },
         ],
@@ -2500,8 +2500,8 @@ export const grammarPathSections = [
               exampleRu: 'Join us. He told us a story.',
             },
             exercises: [
-              { text: 'Come with ___! (biz bilan)', options: ['we', 'us', 'our'], correct: 1, explanation: 'with us.' },
-              { text: 'They gave ___ some food. (bizga)', options: ['we', 'us', 'our'], correct: 1, explanation: 'gave us.' },
+              { text: 'Come with ___! (biz bilan)', options: ['we', 'us', 'our'], correct: 1, explanation: 'with us.', explanationRu: "with us." },
+              { text: 'They gave ___ some food. (bizga)', options: ['we', 'us', 'our'], correct: 1, explanation: 'gave us.', explanationRu: "gave us." },
             ],
           },
           {
@@ -2512,8 +2512,8 @@ export const grammarPathSections = [
               exampleRu: 'Look at them. I want them.',
             },
             exercises: [
-              { text: 'I have two brothers. I love ___.', options: ['they', 'them', 'their'], correct: 1, explanation: 'brothers -> them.' },
-              { text: 'Where are the keys? I can\'t see ___.', options: ['they', 'them', 'it'], correct: 1, explanation: 'keys (ko\'plik) -> them.' },
+              { text: 'I have two brothers. I love ___.', options: ['they', 'them', 'their'], correct: 1, explanation: 'brothers -> them.', explanationRu: "brothers -> them." },
+              { text: 'Where are the keys? I can\'t see ___.', options: ['they', 'them', 'it'], correct: 1, explanation: 'keys (ko\'plik) -> them.', explanationRu: "keys (мн. ч.) -> them." },
             ],
           },
           {
@@ -2524,8 +2524,8 @@ export const grammarPathSections = [
               exampleRu: 'He loves her. She loves him.',
             },
             exercises: [
-              { text: '___ calls ___ every day. (U (erkak) unga (ayol) qo\'ng\'iroq qiladi)', options: ['He / her', 'Him / she', 'He / she'], correct: 0, explanation: 'Ega: He, To\'ldiruvchi: her.' },
-              { text: '___ know ___. (Biz ularni taniymiz)', options: ['We / them', 'Us / them', 'We / they'], correct: 0, explanation: 'Ega: We, To\'ldiruvchi: them.' },
+              { text: '___ calls ___ every day. (U (erkak) unga (ayol) qo\'ng\'iroq qiladi)', options: ['He / her', 'Him / she', 'He / she'], correct: 0, explanation: 'Ega: He, To\'ldiruvchi: her.', explanationRu: "Подлежащее: He, дополнение: her." },
+              { text: '___ know ___. (Biz ularni taniymiz)', options: ['We / them', 'Us / them', 'We / they'], correct: 0, explanation: 'Ega: We, To\'ldiruvchi: them.', explanationRu: "Подлежащее: We, дополнение: them." },
             ],
           },
           {
@@ -2536,8 +2536,8 @@ export const grammarPathSections = [
               exampleRu: 'with me, for him, about her, to us, from them',
             },
             exercises: [
-              { text: 'This present is for ___. (sen uchun)', options: ['you', 'your'], correct: 0, explanation: 'for you.' },
-              { text: 'She is talking about ___. (u haqda - erkak)', options: ['he', 'him'], correct: 1, explanation: 'about him.' },
+              { text: 'This present is for ___. (sen uchun)', options: ['you', 'your'], correct: 0, explanation: 'for you.', explanationRu: "for you." },
+              { text: 'She is talking about ___. (u haqda - erkak)', options: ['he', 'him'], correct: 1, explanation: 'about him.', explanationRu: "about him." },
             ],
           },
           {
@@ -2548,9 +2548,9 @@ export const grammarPathSections = [
               exampleRu: 'Look at us. Listen to them. Help me.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She works with us.', 'She works with we.'], correct: 0, explanation: 'with us.' },
-              { text: 'I bought chocolates for ___. (ular uchun)', options: ['them', 'they'], correct: 0, explanation: 'for them.' },
-              { text: 'Choose the correct option:', options: ['Wait for me!', 'Wait for I!'], correct: 0, explanation: 'for me.' },
+              { text: 'Choose the correct sentence:', options: ['She works with us.', 'She works with we.'], correct: 0, explanation: 'with us.', explanationRu: "with us." },
+              { text: 'I bought chocolates for ___. (ular uchun)', options: ['them', 'they'], correct: 0, explanation: 'for them.', explanationRu: "for them." },
+              { text: 'Choose the correct option:', options: ['Wait for me!', 'Wait for I!'], correct: 0, explanation: 'for me.', explanationRu: "for me." },
             ],
           },
         ],
@@ -2570,8 +2570,8 @@ export const grammarPathSections = [
               exampleRu: 'There is a book on the table.',
             },
             exercises: [
-              { text: 'Stol ustida bitta kompyuter borligini aytish uchun qaysi birini ishlatamiz?', options: ['There is', 'There are', 'It is'], correct: 0, explanation: 'Birlikdagi narsa borligida: There is.' },
-              { text: '___ a cat in the garden.', options: ['There is', 'There are'], correct: 0, explanation: 'a cat (birlik) -> There is.' },
+              { text: 'Stol ustida bitta kompyuter borligini aytish uchun qaysi birini ishlatamiz?', textRu: "Что использовать, чтобы сказать, что на столе есть один компьютер?", options: ['There is', 'There are', 'It is'], correct: 0, explanation: 'Birlikdagi narsa borligida: There is.', explanationRu: "При наличии одного предмета: There is." },
+              { text: '___ a cat in the garden.', options: ['There is', 'There are'], correct: 0, explanation: 'a cat (birlik) -> There is.', explanationRu: "a cat (ед. ч.) -> There is." },
             ],
           },
           {
@@ -2582,8 +2582,8 @@ export const grammarPathSections = [
               exampleRu: 'There is an apple on the plate.',
             },
             exercises: [
-              { text: 'There is ___ apple in the basket.', options: ['a', 'an', 'the'], correct: 1, explanation: 'apple [æ] unli tovush: an apple.' },
-              { text: 'There is ___ phone on the desk.', options: ['a', 'an'], correct: 0, explanation: 'phone [f] undosh tovush: a phone.' },
+              { text: 'There is ___ apple in the basket.', options: ['a', 'an', 'the'], correct: 1, explanation: 'apple [æ] unli tovush: an apple.', explanationRu: "apple — гласный звук [æ]: an apple." },
+              { text: 'There is ___ phone on the desk.', options: ['a', 'an'], correct: 0, explanation: 'phone [f] undosh tovush: a phone.', explanationRu: "phone — согласный звук [f]: a phone." },
             ],
           },
           {
@@ -2594,8 +2594,8 @@ export const grammarPathSections = [
               exampleRu: 'There is water in the bottle.',
             },
             exercises: [
-              { text: '___ water in the glass.', options: ['There is', 'There are'], correct: 0, explanation: 'water sanalmaydi -> There is.' },
-              { text: '___ milk in the fridge.', options: ['There is', 'There are'], correct: 0, explanation: 'milk sanalmaydi -> There is.' },
+              { text: '___ water in the glass.', options: ['There is', 'There are'], correct: 0, explanation: 'water sanalmaydi -> There is.', explanationRu: "water — неисчисляемое -> There is." },
+              { text: '___ milk in the fridge.', options: ['There is', 'There are'], correct: 0, explanation: 'milk sanalmaydi -> There is.', explanationRu: "milk — неисчисляемое -> There is." },
             ],
           },
           {
@@ -2606,8 +2606,8 @@ export const grammarPathSections = [
               exampleRu: 'There isn\'t a computer here.',
             },
             exercises: [
-              { text: '___ a TV in this room. (Televizor yo\'q)', options: ["There isn't", "There aren't"], correct: 0, explanation: 'birlik inkor: There isn\'t.' },
-              { text: 'There ___ any sugar left.', options: ['is not', 'are not'], correct: 0, explanation: 'sugar sanalmaydi -> is not.' },
+              { text: '___ a TV in this room. (Televizor yo\'q)', options: ["There isn't", "There aren't"], correct: 0, explanation: 'birlik inkor: There isn\'t.', explanationRu: "отрицание в ед. числе: There isn't." },
+              { text: 'There ___ any sugar left.', options: ['is not', 'are not'], correct: 0, explanation: 'sugar sanalmaydi -> is not.', explanationRu: "sugar — неисчисляемое -> is not." },
             ],
           },
           {
@@ -2618,9 +2618,9 @@ export const grammarPathSections = [
               exampleRu: 'There is a book on the desk, but there isn\'t a pen.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['There is a car in front of the house.', 'There are a car in front of the house.'], correct: 0, explanation: 'a car -> There is.' },
-              { text: 'There ___ some tea in the cup.', options: ['is', 'are'], correct: 0, explanation: 'tea sanalmaydi -> is.' },
-              { text: 'Select the correct negative sentence:', options: ["There isn't a park here.", "There aren't a park here."], correct: 0, explanation: 'a park -> There isn\'t.' },
+              { text: 'Choose the correct sentence:', options: ['There is a car in front of the house.', 'There are a car in front of the house.'], correct: 0, explanation: 'a car -> There is.', explanationRu: "a car -> There is." },
+              { text: 'There ___ some tea in the cup.', options: ['is', 'are'], correct: 0, explanation: 'tea sanalmaydi -> is.', explanationRu: "tea — неисчисляемое -> is." },
+              { text: 'Select the correct negative sentence:', options: ["There isn't a park here.", "There aren't a park here."], correct: 0, explanation: 'a park -> There isn\'t.', explanationRu: "a park -> There isn't." },
             ],
           },
         ],
@@ -2640,8 +2640,8 @@ export const grammarPathSections = [
               exampleRu: 'There are three cars in the yard.',
             },
             exercises: [
-              { text: 'Xonada ikkita deraza borligini aytish uchun qaysi birini ishlatamiz?', options: ['There is', 'There are'], correct: 1, explanation: 'Ko\'plikdagi narsalar borligida: There are.' },
-              { text: '___ many students in the library.', options: ['There is', 'There are'], correct: 1, explanation: 'many students (ko\'plik) -> There are.' },
+              { text: 'Xonada ikkita deraza borligini aytish uchun qaysi birini ishlatamiz?', textRu: "Что использовать, чтобы сказать, что в комнате два окна?", options: ['There is', 'There are'], correct: 1, explanation: 'Ko\'plikdagi narsalar borligida: There are.', explanationRu: "При наличии нескольких предметов: There are." },
+              { text: '___ many students in the library.', options: ['There is', 'There are'], correct: 1, explanation: 'many students (ko\'plik) -> There are.', explanationRu: "many students (мн. ч.) -> There are." },
             ],
           },
           {
@@ -2652,8 +2652,8 @@ export const grammarPathSections = [
               exampleRu: 'There are two chairs.',
             },
             exercises: [
-              { text: 'There are five ___ in the box.', options: ['apple', 'apples'], correct: 1, explanation: 'There are + ko\'plik: apples.' },
-              { text: 'There are two ___ in the kitchen.', options: ['person', 'people'], correct: 1, explanation: 'person ning ko\'pligi: people.' },
+              { text: 'There are five ___ in the box.', options: ['apple', 'apples'], correct: 1, explanation: 'There are + ko\'plik: apples.', explanationRu: "There are + множественное число: apples." },
+              { text: 'There are two ___ in the kitchen.', options: ['person', 'people'], correct: 1, explanation: 'person ning ko\'pligi: people.', explanationRu: "Множественное число от person: people." },
             ],
           },
           {
@@ -2664,8 +2664,8 @@ export const grammarPathSections = [
               exampleRu: 'There are some books on the shelf.',
             },
             exercises: [
-              { text: '___ some apples on the table.', options: ['There is', 'There are'], correct: 1, explanation: 'apples (ko\'plik) -> There are.' },
-              { text: 'There are ___ interesting pictures here.', options: ['some', 'a'], correct: 0, explanation: 'pictures ko\'plik -> some.' },
+              { text: '___ some apples on the table.', options: ['There is', 'There are'], correct: 1, explanation: 'apples (ko\'plik) -> There are.', explanationRu: "apples (мн. ч.) -> There are." },
+              { text: 'There are ___ interesting pictures here.', options: ['some', 'a'], correct: 0, explanation: 'pictures ko\'plik -> some.', explanationRu: "pictures во мн. ч. -> some." },
             ],
           },
           {
@@ -2676,8 +2676,8 @@ export const grammarPathSections = [
               exampleRu: 'There aren\'t any books here.',
             },
             exercises: [
-              { text: '___ any cars in the street.', options: ["There isn't", "There aren't"], correct: 1, explanation: 'cars ko\'plik inkor: There aren\'t.' },
-              { text: 'There ___ any shops nearby.', options: ['are not', 'is not'], correct: 0, explanation: 'shops ko\'plik -> are not.' },
+              { text: '___ any cars in the street.', options: ["There isn't", "There aren't"], correct: 1, explanation: 'cars ko\'plik inkor: There aren\'t.', explanationRu: "cars — отрицание во мн. ч.: There aren't." },
+              { text: 'There ___ any shops nearby.', options: ['are not', 'is not'], correct: 0, explanation: 'shops ko\'plik -> are not.', explanationRu: "shops во мн. ч. -> are not." },
             ],
           },
           {
@@ -2688,9 +2688,9 @@ export const grammarPathSections = [
               exampleRu: 'There are 20 students in the class, but there aren\'t any teachers.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['There are two cats in the yard.', 'There is two cats in the yard.'], correct: 0, explanation: 'two cats -> There are.' },
-              { text: 'There ___ many trees in the park.', options: ['are', 'is'], correct: 0, explanation: 'many trees -> are.' },
-              { text: 'Select the correct negative sentence:', options: ["There aren't any chairs.", "There isn't any chairs."], correct: 0, explanation: 'chairs -> There aren\'t.' },
+              { text: 'Choose the correct sentence:', options: ['There are two cats in the yard.', 'There is two cats in the yard.'], correct: 0, explanation: 'two cats -> There are.', explanationRu: "two cats -> There are." },
+              { text: 'There ___ many trees in the park.', options: ['are', 'is'], correct: 0, explanation: 'many trees -> are.', explanationRu: "many trees -> are." },
+              { text: 'Select the correct negative sentence:', options: ["There aren't any chairs.", "There isn't any chairs."], correct: 0, explanation: 'chairs -> There aren\'t.', explanationRu: "chairs -> There aren't." },
             ],
           },
         ],
@@ -2710,8 +2710,8 @@ export const grammarPathSections = [
               exampleRu: 'Is there a park near here?',
             },
             exercises: [
-              { text: '___ a bank near your house?', options: ['Is there', 'Are there'], correct: 0, explanation: 'a bank (birlik) -> Is there...?' },
-              { text: 'Is there a phone on the desk? — Yes, ___ .', options: ['there is', 'there are'], correct: 0, explanation: 'Birlik savolga javob: there is.' },
+              { text: '___ a bank near your house?', options: ['Is there', 'Are there'], correct: 0, explanation: 'a bank (birlik) -> Is there...?', explanationRu: "a bank (ед. ч.) -> Is there...?" },
+              { text: 'Is there a phone on the desk? — Yes, ___ .', options: ['there is', 'there are'], correct: 0, explanation: 'Birlik savolga javob: there is.', explanationRu: "Ответ на вопрос в ед. числе: there is." },
             ],
           },
           {
@@ -2722,8 +2722,8 @@ export const grammarPathSections = [
               exampleRu: 'Are there any apples in the fridge?',
             },
             exercises: [
-              { text: '___ any shops near here?', options: ['Is there', 'Are there'], correct: 1, explanation: 'shops (ko\'plik) -> Are there...?' },
-              { text: 'Are there any chairs? — No, ___ .', options: ["there isn't", "there aren't"], correct: 1, explanation: 'Ko\'plik savolga inkor: there aren\'t.' },
+              { text: '___ any shops near here?', options: ['Is there', 'Are there'], correct: 1, explanation: 'shops (ko\'plik) -> Are there...?', explanationRu: "shops (мн. ч.) -> Are there...?" },
+              { text: 'Are there any chairs? — No, ___ .', options: ["there isn't", "there aren't"], correct: 1, explanation: 'Ko\'plik savolga inkor: there aren\'t.', explanationRu: "Отрицание на вопрос во мн. числе: there aren't." },
             ],
           },
           {
@@ -2734,8 +2734,8 @@ export const grammarPathSections = [
               exampleRu: 'There is a key under the mat.',
             },
             exercises: [
-              { text: 'There is a cat ___ the chair. (stul tagida)', options: ['under', 'on', 'in'], correct: 0, explanation: 'tagida = under.' },
-              { text: 'There are books ___ the table. (stol ustida)', options: ['on', 'under', 'behind'], correct: 0, explanation: 'ustida = on.' },
+              { text: 'There is a cat ___ the chair. (stul tagida)', options: ['under', 'on', 'in'], correct: 0, explanation: 'tagida = under.', explanationRu: "tagida (под) = under." },
+              { text: 'There are books ___ the table. (stol ustida)', options: ['on', 'under', 'behind'], correct: 0, explanation: 'ustida = on.', explanationRu: "ustida (на) = on." },
             ],
           },
           {
@@ -2746,8 +2746,8 @@ export const grammarPathSections = [
               exampleRu: 'There is a book on the table. It is very interesting.',
             },
             exercises: [
-              { text: 'Look! ___ a new restaurant. ___ is very beautiful.', options: ['There is / It', 'It is / There'], correct: 0, explanation: 'Birinchi borligi (There is), ikkinchi sifatlanishi (It is).' },
-              { text: '___ two cars in the street. ___ are white.', options: ['There are / They', 'They are / There'], correct: 0, explanation: 'There are (bor) / They (ular).' },
+              { text: 'Look! ___ a new restaurant. ___ is very beautiful.', options: ['There is / It', 'It is / There'], correct: 0, explanation: 'Birinchi borligi (There is), ikkinchi sifatlanishi (It is).', explanationRu: "Сначала наличие (There is), затем описание (It is)." },
+              { text: '___ two cars in the street. ___ are white.', options: ['There are / They', 'They are / There'], correct: 0, explanation: 'There are (bor) / They (ular).', explanationRu: "There are (есть) / They (они)." },
             ],
           },
           {
@@ -2758,9 +2758,9 @@ export const grammarPathSections = [
               exampleRu: 'Is there any milk? Yes, there is.',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Is there a computer in the office?', 'Are there a computer in the office?'], correct: 0, explanation: 'a computer -> Is there...?' },
-              { text: 'Choose the correct question:', options: ['Are there any questions?', 'Is there any questions?'], correct: 0, explanation: 'questions -> Are there...?' },
-              { text: 'Select the correct answer: Is there a hotel near here?', options: ['Yes, there is.', 'Yes, there are.'], correct: 0, explanation: 'Birlik savolga: Yes, there is.' },
+              { text: 'Choose the correct question:', options: ['Is there a computer in the office?', 'Are there a computer in the office?'], correct: 0, explanation: 'a computer -> Is there...?', explanationRu: "a computer -> Is there...?" },
+              { text: 'Choose the correct question:', options: ['Are there any questions?', 'Is there any questions?'], correct: 0, explanation: 'questions -> Are there...?', explanationRu: "questions -> Are there...?" },
+              { text: 'Select the correct answer: Is there a hotel near here?', options: ['Yes, there is.', 'Yes, there are.'], correct: 0, explanation: 'Birlik savolga: Yes, there is.', explanationRu: "На вопрос в ед. числе: Yes, there is." },
             ],
           },
         ],
@@ -2780,8 +2780,8 @@ export const grammarPathSections = [
               exampleRu: 'This is my book. Give it to me.',
             },
             exercises: [
-              { text: 'This is ___ cat. I love ___. (mening / uni)', options: ['my / it', 'me / it', 'my / its'], correct: 0, explanation: 'my cat / love it.' },
-              { text: '___ name is Tom. Do you know ___? (uning / uni)', options: ['His / him', 'He / him', 'His / his'], correct: 0, explanation: 'His name / know him.' },
+              { text: 'This is ___ cat. I love ___. (mening / uni)', options: ['my / it', 'me / it', 'my / its'], correct: 0, explanation: 'my cat / love it.', explanationRu: "my cat / love it." },
+              { text: '___ name is Tom. Do you know ___? (uning / uni)', options: ['His / him', 'He / him', 'His / his'], correct: 0, explanation: 'His name / know him.', explanationRu: "His name / know him." },
             ],
           },
           {
@@ -2792,8 +2792,8 @@ export const grammarPathSections = [
               exampleRu: 'There are 2 dogs. There is a car.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['There are three books on the desk.', 'There is three books on the desk.'], correct: 0, explanation: 'three books -> There are.' },
-              { text: 'Choose the correct sentence:', options: ['There is a lot of water in the bottle.', 'There are a lot of water in the bottle.'], correct: 0, explanation: 'water sanalmaydi -> There is.' },
+              { text: 'Choose the correct sentence:', options: ['There are three books on the desk.', 'There is three books on the desk.'], correct: 0, explanation: 'three books -> There are.', explanationRu: "three books -> There are." },
+              { text: 'Choose the correct sentence:', options: ['There is a lot of water in the bottle.', 'There are a lot of water in the bottle.'], correct: 0, explanation: 'water sanalmaydi -> There is.', explanationRu: "water — неисчисляемое -> There is." },
             ],
           },
           {
@@ -2804,8 +2804,8 @@ export const grammarPathSections = [
               exampleRu: 'There is a cat in the garden. Look at it!',
             },
             exercises: [
-              { text: 'There are two boys outside. Do you see ___?', options: ['them', 'they', 'him'], correct: 0, explanation: 'two boys -> them.' },
-              { text: 'There is a nice girl here. Ask ___ name.', options: ['her', 'she', 'him'], correct: 0, explanation: 'girl -> her name.' },
+              { text: 'There are two boys outside. Do you see ___?', options: ['them', 'they', 'him'], correct: 0, explanation: 'two boys -> them.', explanationRu: "two boys -> them." },
+              { text: 'There is a nice girl here. Ask ___ name.', options: ['her', 'she', 'him'], correct: 0, explanation: 'girl -> her name.', explanationRu: "girl -> her name." },
             ],
           },
           {
@@ -2816,8 +2816,8 @@ export const grammarPathSections = [
               exampleRu: '— Is there any coffee? — Yes, there is. Drink it!',
             },
             exercises: [
-              { text: '— Are there any apples? — No, ___ aren\'t. Eat a banana instead.', options: ['there', 'they'], correct: 0, explanation: 'there aren\'t.' },
-              { text: '— Where is Alex? — I am waiting for ___ .', options: ['him', 'he'], correct: 0, explanation: 'for him.' },
+              { text: '— Are there any apples? — No, ___ aren\'t. Eat a banana instead.', options: ['there', 'they'], correct: 0, explanation: 'there aren\'t.', explanationRu: "there aren't." },
+              { text: '— Where is Alex? — I am waiting for ___ .', options: ['him', 'he'], correct: 0, explanation: 'for him.', explanationRu: "for him." },
             ],
           },
           {
@@ -2828,9 +2828,9 @@ export const grammarPathSections = [
               exampleRu: 'There is a book on the table. Give it to me.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['There are many trees in our yard.', 'There is many trees in our yard.'], correct: 0, explanation: 'many trees -> There are.' },
-              { text: 'Choose the correct sentence:', options: ['Listen to him.', 'Listen to he.'], correct: 0, explanation: 'Listen to him.' },
-              { text: 'Choose the correct sentence:', options: ['Is there a phone on the table?', 'Are there a phone on the table?'], correct: 0, explanation: 'a phone -> Is there...?' },
+              { text: 'Choose the correct sentence:', options: ['There are many trees in our yard.', 'There is many trees in our yard.'], correct: 0, explanation: 'many trees -> There are.', explanationRu: "many trees -> There are." },
+              { text: 'Choose the correct sentence:', options: ['Listen to him.', 'Listen to he.'], correct: 0, explanation: 'Listen to him.', explanationRu: "Listen to him." },
+              { text: 'Choose the correct sentence:', options: ['Is there a phone on the table?', 'Are there a phone on the table?'], correct: 0, explanation: 'a phone -> Is there...?', explanationRu: "a phone -> Is there...?" },
             ],
           },
         ],
@@ -2840,21 +2840,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: To'ldiruvchi olmoshlar va There is / There are",
       titleRu: 'Тест раздела: Объектные местоимения и There is / There are',
       exercises: [
-        { text: 'Please call ___. (menga)', options: ['me', 'I', 'my'], correct: 0, explanation: 'Call me.' },
-        { text: 'Do you know Tom? I like ___.', options: ['he', 'him', 'his'], correct: 1, explanation: 'Tom -> him.' },
-        { text: 'I bought a new book. I read ___ every day.', options: ['it', 'him', 'her'], correct: 0, explanation: 'book -> it.' },
-        { text: 'Come with ___! (biz bilan)', options: ['we', 'us', 'our'], correct: 1, explanation: 'with us.' },
-        { text: 'Where are the keys? I cannot find ___.', options: ['they', 'them', 'their'], correct: 1, explanation: 'keys -> them.' },
-        { text: '___ a cat on the roof.', options: ['There is', 'There are'], correct: 0, explanation: 'a cat -> There is.' },
-        { text: '___ three apples in the fridge.', options: ['There is', 'There are'], correct: 1, explanation: 'three apples -> There are.' },
-        { text: '___ water in the glass.', options: ['There is', 'There are'], correct: 0, explanation: 'water (sanalmaydi) -> There is.' },
-        { text: '___ a computer in the room. (yo\'q)', options: ["There isn't", "There aren't"], correct: 0, explanation: 'a computer -> There isn\'t.' },
-        { text: 'There aren\'t ___ chairs in this classroom.', options: ['any', 'a'], correct: 0, explanation: 'ko\'plik inkor: any chairs.' },
-        { text: '___ a bank near here?', options: ['Is there', 'Are there'], correct: 0, explanation: 'a bank -> Is there...?' },
-        { text: '___ any questions?', options: ['Is there', 'Are there'], correct: 1, explanation: 'questions -> Are there...?' },
-        { text: 'This present is for ___. (u uchun - ayol)', options: ['her', 'she'], correct: 0, explanation: 'for her.' },
-        { text: 'Choose the correct sentence:', options: ['There are two dogs in the garden.', 'There is two dogs in the garden.'], correct: 0, explanation: 'two dogs -> There are.' },
-        { text: 'Choose the correct sentence:', options: ['Look at them!', 'Look at they!'], correct: 0, explanation: 'Look at them.' },
+        { text: 'Please call ___. (menga)', options: ['me', 'I', 'my'], correct: 0, explanation: 'Call me.', explanationRu: "Call me." },
+        { text: 'Do you know Tom? I like ___.', options: ['he', 'him', 'his'], correct: 1, explanation: 'Tom -> him.', explanationRu: "Tom -> him." },
+        { text: 'I bought a new book. I read ___ every day.', options: ['it', 'him', 'her'], correct: 0, explanation: 'book -> it.', explanationRu: "book -> it." },
+        { text: 'Come with ___! (biz bilan)', options: ['we', 'us', 'our'], correct: 1, explanation: 'with us.', explanationRu: "with us." },
+        { text: 'Where are the keys? I cannot find ___.', options: ['they', 'them', 'their'], correct: 1, explanation: 'keys -> them.', explanationRu: "keys -> them." },
+        { text: '___ a cat on the roof.', options: ['There is', 'There are'], correct: 0, explanation: 'a cat -> There is.', explanationRu: "a cat -> There is." },
+        { text: '___ three apples in the fridge.', options: ['There is', 'There are'], correct: 1, explanation: 'three apples -> There are.', explanationRu: "three apples -> There are." },
+        { text: '___ water in the glass.', options: ['There is', 'There are'], correct: 0, explanation: 'water (sanalmaydi) -> There is.', explanationRu: "water (неисчисляемое) -> There is." },
+        { text: '___ a computer in the room. (yo\'q)', options: ["There isn't", "There aren't"], correct: 0, explanation: 'a computer -> There isn\'t.', explanationRu: "a computer -> There isn't." },
+        { text: 'There aren\'t ___ chairs in this classroom.', options: ['any', 'a'], correct: 0, explanation: 'ko\'plik inkor: any chairs.', explanationRu: "отрицание во мн. числе: any chairs." },
+        { text: '___ a bank near here?', options: ['Is there', 'Are there'], correct: 0, explanation: 'a bank -> Is there...?', explanationRu: "a bank -> Is there...?" },
+        { text: '___ any questions?', options: ['Is there', 'Are there'], correct: 1, explanation: 'questions -> Are there...?', explanationRu: "questions -> Are there...?" },
+        { text: 'This present is for ___. (u uchun - ayol)', options: ['her', 'she'], correct: 0, explanation: 'for her.', explanationRu: "for her." },
+        { text: 'Choose the correct sentence:', options: ['There are two dogs in the garden.', 'There is two dogs in the garden.'], correct: 0, explanation: 'two dogs -> There are.', explanationRu: "two dogs -> There are." },
+        { text: 'Choose the correct sentence:', options: ['Look at them!', 'Look at they!'], correct: 0, explanation: 'Look at them.', explanationRu: "Look at them." },
       ],
     },
   },
@@ -2881,8 +2881,8 @@ export const grammarPathSections = [
               exampleRu: 'I work every day. We live in Tashkent.',
             },
             exercises: [
-              { text: '"I, you, we, they" bilan fe\'l qanday ko\'rinishda keladi?', options: ['Bosh shaklida (V1)', '-s qo\'shimchasi bilan', '-ing qo\'shimchasi bilan'], correct: 0, explanation: 'I, you, we, they bilan fe\'l o\'zgarishsiz keladi.' },
-              { text: 'I ___ English every evening.', options: ['study', 'studies', 'studying'], correct: 0, explanation: 'I + study (bosh shakl).' },
+              { text: '"I, you, we, they" bilan fe\'l qanday ko\'rinishda keladi?', textRu: "В какой форме употребляется глагол с \"I, you, we, they\"?", options: ['Bosh shaklida (V1)', '-s qo\'shimchasi bilan', '-ing qo\'shimchasi bilan'], correct: 0, explanation: 'I, you, we, they bilan fe\'l o\'zgarishsiz keladi.', explanationRu: "С I, you, we, they глагол употребляется без изменений." },
+              { text: 'I ___ English every evening.', options: ['study', 'studies', 'studying'], correct: 0, explanation: 'I + study (bosh shakl).', explanationRu: "I + study (начальная форма)." },
             ],
           },
           {
@@ -2894,8 +2894,8 @@ export const grammarPathSections = [
               exampleRu: 'They play football on Sundays.',
             },
             exercises: [
-              { text: 'We ___ coffee every morning.', options: ['drink', 'drinks', 'drinking'], correct: 0, explanation: 'We + drink.' },
-              { text: 'They ___ in Tashkent.', options: ['live', 'lives'], correct: 0, explanation: 'They + live.' },
+              { text: 'We ___ coffee every morning.', options: ['drink', 'drinks', 'drinking'], correct: 0, explanation: 'We + drink.', explanationRu: "We + drink." },
+              { text: 'They ___ in Tashkent.', options: ['live', 'lives'], correct: 0, explanation: 'They + live.', explanationRu: "They + live." },
             ],
           },
           {
@@ -2907,8 +2907,8 @@ export const grammarPathSections = [
               exampleRu: 'You speak English very well. I get up at 7 AM.',
             },
             exercises: [
-              { text: 'You ___ English very well.', options: ['speak', 'speaks'], correct: 0, explanation: 'You + speak.' },
-              { text: 'I ___ up at 7 o\'clock every day.', options: ['get', 'gets'], correct: 0, explanation: 'I + get.' },
+              { text: 'You ___ English very well.', options: ['speak', 'speaks'], correct: 0, explanation: 'You + speak.', explanationRu: "You + speak." },
+              { text: 'I ___ up at 7 o\'clock every day.', options: ['get', 'gets'], correct: 0, explanation: 'I + get.', explanationRu: "I + get." },
             ],
           },
           {
@@ -2920,8 +2920,8 @@ export const grammarPathSections = [
               exampleRu: 'They read books. We go to school.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They like music.', 'They likes music.'], correct: 0, explanation: 'They + like.' },
-              { text: 'Choose the correct sentence:', options: ['We go to school by bus.', 'We goes to school by bus.'], correct: 0, explanation: 'We + go.' },
+              { text: 'Choose the correct sentence:', options: ['They like music.', 'They likes music.'], correct: 0, explanation: 'They + like.', explanationRu: "They + like." },
+              { text: 'Choose the correct sentence:', options: ['We go to school by bus.', 'We goes to school by bus.'], correct: 0, explanation: 'We + go.', explanationRu: "We + go." },
             ],
           },
           {
@@ -2933,9 +2933,9 @@ export const grammarPathSections = [
               exampleRu: 'I get up early, we drink tea, and they play football.',
             },
             exercises: [
-              { text: 'I ___ in a big company.', options: ['work', 'works'], correct: 0, explanation: 'I work.' },
-              { text: 'You ___ fast.', options: ['run', 'runs'], correct: 0, explanation: 'You run.' },
-              { text: 'Choose the correct sentence:', options: ['They eat breakfast at 8 AM.', 'They eats breakfast at 8 AM.'], correct: 0, explanation: 'They eat.' },
+              { text: 'I ___ in a big company.', options: ['work', 'works'], correct: 0, explanation: 'I work.', explanationRu: "I work." },
+              { text: 'You ___ fast.', options: ['run', 'runs'], correct: 0, explanation: 'You run.', explanationRu: "You run." },
+              { text: 'Choose the correct sentence:', options: ['They eat breakfast at 8 AM.', 'They eats breakfast at 8 AM.'], correct: 0, explanation: 'They eat.', explanationRu: "They eat." },
             ],
           },
         ],
@@ -2956,8 +2956,8 @@ export const grammarPathSections = [
               exampleRu: 'He works in a bank. She lives in London.',
             },
             exercises: [
-              { text: 'He ___ in a bank.', options: ['work', 'works', 'working'], correct: 1, explanation: 'He (3-shaxs) -> works.' },
-              { text: 'She ___ English.', options: ['know', 'knows'], correct: 1, explanation: 'She (3-shaxs) -> knows.' },
+              { text: 'He ___ in a bank.', options: ['work', 'works', 'working'], correct: 1, explanation: 'He (3-shaxs) -> works.', explanationRu: "He (3-е лицо) -> works." },
+              { text: 'She ___ English.', options: ['know', 'knows'], correct: 1, explanation: 'She (3-shaxs) -> knows.', explanationRu: "She (3-е лицо) -> knows." },
             ],
           },
           {
@@ -2969,8 +2969,8 @@ export const grammarPathSections = [
               exampleRu: 'watch -> watches, go -> goes',
             },
             exercises: [
-              { text: 'He ___ TV every evening. (watch)', options: ['watchs', 'watches', 'watch'], correct: 1, explanation: 'watch + -es -> watches.' },
-              { text: 'She ___ to school by bus. (go)', options: ['gos', 'goes', 'go'], correct: 1, explanation: 'go + -es -> goes.' },
+              { text: 'He ___ TV every evening. (watch)', options: ['watchs', 'watches', 'watch'], correct: 1, explanation: 'watch + -es -> watches.', explanationRu: "watch + -es -> watches." },
+              { text: 'She ___ to school by bus. (go)', options: ['gos', 'goes', 'go'], correct: 1, explanation: 'go + -es -> goes.', explanationRu: "go + -es -> goes." },
             ],
           },
           {
@@ -2982,8 +2982,8 @@ export const grammarPathSections = [
               exampleRu: 'study -> studies; play -> plays',
             },
             exercises: [
-              { text: 'Tom ___ history at university. (study)', options: ['studys', 'studies', 'study'], correct: 1, explanation: 'study -> studies.' },
-              { text: 'He ___ tennis on Saturdays. (play)', options: ['plays', 'plaies', 'play'], correct: 0, explanation: 'play unli+y -> plays.' },
+              { text: 'Tom ___ history at university. (study)', options: ['studys', 'studies', 'study'], correct: 1, explanation: 'study -> studies.', explanationRu: "study -> studies." },
+              { text: 'He ___ tennis on Saturdays. (play)', options: ['plays', 'plaies', 'play'], correct: 0, explanation: 'play unli+y -> plays.', explanationRu: "play гласная+y -> plays." },
             ],
           },
           {
@@ -2995,8 +2995,8 @@ export const grammarPathSections = [
               exampleRu: 'He has a car. She has a cat.',
             },
             exercises: [
-              { text: 'She ___ a new computer.', options: ['have', 'has', 'haves'], correct: 1, explanation: 'She (3-shaxs) -> has.' },
-              { text: 'Tom ___ a big house.', options: ['has', 'have'], correct: 0, explanation: 'Tom -> has.' },
+              { text: 'She ___ a new computer.', options: ['have', 'has', 'haves'], correct: 1, explanation: 'She (3-shaxs) -> has.', explanationRu: "She (3-е лицо) -> has." },
+              { text: 'Tom ___ a big house.', options: ['has', 'have'], correct: 0, explanation: 'Tom -> has.', explanationRu: "Tom -> has." },
             ],
           },
           {
@@ -3008,9 +3008,9 @@ export const grammarPathSections = [
               exampleRu: 'He works hard, she goes to school, and he has a car.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She lives in Tashkent.', 'She live in Tashkent.'], correct: 0, explanation: 'She lives.' },
-              { text: 'Choose the correct sentence:', options: ['He washes his car.', 'He washs his car.'], correct: 0, explanation: 'wash -> washes.' },
-              { text: 'Choose the correct sentence:', options: ['Anna has two brothers.', 'Anna haves two brothers.'], correct: 0, explanation: 'Anna has.' },
+              { text: 'Choose the correct sentence:', options: ['She lives in Tashkent.', 'She live in Tashkent.'], correct: 0, explanation: 'She lives.', explanationRu: "She lives." },
+              { text: 'Choose the correct sentence:', options: ['He washes his car.', 'He washs his car.'], correct: 0, explanation: 'wash -> washes.', explanationRu: "wash -> washes." },
+              { text: 'Choose the correct sentence:', options: ['Anna has two brothers.', 'Anna haves two brothers.'], correct: 0, explanation: 'Anna has.', explanationRu: "Anna has." },
             ],
           },
         ],
@@ -3031,8 +3031,8 @@ export const grammarPathSections = [
               exampleRu: 'I don\'t like coffee.',
             },
             exercises: [
-              { text: 'I ___ eat meat.', options: ["don't", "doesn't", "not"], correct: 0, explanation: 'I + don\'t.' },
-              { text: 'We ___ live in London.', options: ["don't", "doesn't"], correct: 0, explanation: 'We + don\'t.' },
+              { text: 'I ___ eat meat.', options: ["don't", "doesn't", "not"], correct: 0, explanation: 'I + don\'t.', explanationRu: "I + don't." },
+              { text: 'We ___ live in London.', options: ["don't", "doesn't"], correct: 0, explanation: 'We + don\'t.', explanationRu: "We + don't." },
             ],
           },
           {
@@ -3044,8 +3044,8 @@ export const grammarPathSections = [
               exampleRu: 'They don\'t work on Sundays.',
             },
             exercises: [
-              { text: 'They don\'t ___ football.', options: ['play', 'plays', 'playing'], correct: 0, explanation: 'don\'t + play (bosh shakl).' },
-              { text: 'You don\'t ___ early.', options: ['wake up', 'wakes up'], correct: 0, explanation: 'don\'t + wake up.' },
+              { text: 'They don\'t ___ football.', options: ['play', 'plays', 'playing'], correct: 0, explanation: 'don\'t + play (bosh shakl).', explanationRu: "don't + play (начальная форма)." },
+              { text: 'You don\'t ___ early.', options: ['wake up', 'wakes up'], correct: 0, explanation: 'don\'t + wake up.', explanationRu: "don't + wake up." },
             ],
           },
           {
@@ -3057,8 +3057,8 @@ export const grammarPathSections = [
               exampleRu: 'I don\'t smoke. We don\'t have a dog.',
             },
             exercises: [
-              { text: 'I don\'t ___ a car.', options: ['have', 'has'], correct: 0, explanation: 'don\'t + have.' },
-              { text: 'We don\'t ___ TV.', options: ['watch', 'watches'], correct: 0, explanation: 'don\'t + watch.' },
+              { text: 'I don\'t ___ a car.', options: ['have', 'has'], correct: 0, explanation: 'don\'t + have.', explanationRu: "don't + have." },
+              { text: 'We don\'t ___ TV.', options: ['watch', 'watches'], correct: 0, explanation: 'don\'t + watch.', explanationRu: "don't + watch." },
             ],
           },
           {
@@ -3070,8 +3070,8 @@ export const grammarPathSections = [
               exampleRu: 'I like tea, but I don\'t like coffee.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I don\'t speak Spanish.', 'I not speak Spanish.'], correct: 0, explanation: 'don\'t speak.' },
-              { text: 'Choose the correct sentence:', options: ['They don\'t understand.', 'They doesn\'t understand.'], correct: 0, explanation: 'They don\'t.' },
+              { text: 'Choose the correct sentence:', options: ['I don\'t speak Spanish.', 'I not speak Spanish.'], correct: 0, explanation: 'don\'t speak.', explanationRu: "don't speak." },
+              { text: 'Choose the correct sentence:', options: ['They don\'t understand.', 'They doesn\'t understand.'], correct: 0, explanation: 'They don\'t.', explanationRu: "They don't." },
             ],
           },
           {
@@ -3083,9 +3083,9 @@ export const grammarPathSections = [
               exampleRu: 'I don\'t drink coffee, and we don\'t work on weekends.',
             },
             exercises: [
-              { text: 'We ___ know the answer.', options: ["don't", "doesn't"], correct: 0, explanation: 'We don\'t.' },
-              { text: 'They ___ like fast food.', options: ["don't", "doesn't"], correct: 0, explanation: 'They don\'t.' },
-              { text: 'Select the correct sentence:', options: ['I don\'t have time.', 'I no have time.'], correct: 0, explanation: 'I don\'t have time.' },
+              { text: 'We ___ know the answer.', options: ["don't", "doesn't"], correct: 0, explanation: 'We don\'t.', explanationRu: "We don't." },
+              { text: 'They ___ like fast food.', options: ["don't", "doesn't"], correct: 0, explanation: 'They don\'t.', explanationRu: "They don't." },
+              { text: 'Select the correct sentence:', options: ['I don\'t have time.', 'I no have time.'], correct: 0, explanation: 'I don\'t have time.', explanationRu: "I don't have time." },
             ],
           },
         ],
@@ -3106,8 +3106,8 @@ export const grammarPathSections = [
               exampleRu: 'He doesn\'t work here.',
             },
             exercises: [
-              { text: 'He ___ like milk.', options: ["don't", "doesn't", "not"], correct: 1, explanation: 'He + doesn\'t.' },
-              { text: 'She ___ live in Paris.', options: ["don't", "doesn't"], correct: 1, explanation: 'She + doesn\'t.' },
+              { text: 'He ___ like milk.', options: ["don't", "doesn't", "not"], correct: 1, explanation: 'He + doesn\'t.', explanationRu: "He + doesn't." },
+              { text: 'She ___ live in Paris.', options: ["don't", "doesn't"], correct: 1, explanation: 'She + doesn\'t.', explanationRu: "She + doesn't." },
             ],
           },
           {
@@ -3119,8 +3119,8 @@ export const grammarPathSections = [
               exampleRu: 'He works -> He doesn\'t work.',
             },
             exercises: [
-              { text: 'She doesn\'t ___ TV.', options: ['watch', 'watches'], correct: 0, explanation: 'doesn\'t dan keyin fe\'lda -es bo\'lmaydi: watch.' },
-              { text: 'He doesn\'t ___ fast.', options: ['run', 'runs'], correct: 0, explanation: 'doesn\'t + run.' },
+              { text: 'She doesn\'t ___ TV.', options: ['watch', 'watches'], correct: 0, explanation: 'doesn\'t dan keyin fe\'lda -es bo\'lmaydi: watch.', explanationRu: "После doesn't у глагола нет -es: watch." },
+              { text: 'He doesn\'t ___ fast.', options: ['run', 'runs'], correct: 0, explanation: 'doesn\'t + run.', explanationRu: "doesn't + run." },
             ],
           },
           {
@@ -3132,8 +3132,8 @@ export const grammarPathSections = [
               exampleRu: 'He doesn\'t have a car.',
             },
             exercises: [
-              { text: 'Tom doesn\'t ___ a bicycle.', options: ['have', 'has'], correct: 0, explanation: 'doesn\'t + have.' },
-              { text: 'She doesn\'t ___ any money.', options: ['have', 'has'], correct: 0, explanation: 'doesn\'t + have.' },
+              { text: 'Tom doesn\'t ___ a bicycle.', options: ['have', 'has'], correct: 0, explanation: 'doesn\'t + have.', explanationRu: "doesn't + have." },
+              { text: 'She doesn\'t ___ any money.', options: ['have', 'has'], correct: 0, explanation: 'doesn\'t + have.', explanationRu: "doesn't + have." },
             ],
           },
           {
@@ -3145,8 +3145,8 @@ export const grammarPathSections = [
               exampleRu: 'I don\'t know, but he doesn\'t care.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['He doesn\'t like tea.', 'He don\'t like tea.'], correct: 0, explanation: 'He doesn\'t.' },
-              { text: 'Choose the correct sentence:', options: ['She doesn\'t work on Saturdays.', 'She doesn\'t works on Saturdays.'], correct: 0, explanation: 'doesn\'t work (qo\'shimchasiz).' },
+              { text: 'Choose the correct sentence:', options: ['He doesn\'t like tea.', 'He don\'t like tea.'], correct: 0, explanation: 'He doesn\'t.', explanationRu: "He doesn't." },
+              { text: 'Choose the correct sentence:', options: ['She doesn\'t work on Saturdays.', 'She doesn\'t works on Saturdays.'], correct: 0, explanation: 'doesn\'t work (qo\'shimchasiz).', explanationRu: "doesn't work (без окончания)." },
             ],
           },
           {
@@ -3158,9 +3158,9 @@ export const grammarPathSections = [
               exampleRu: 'She doesn\'t speak French, and he doesn\'t have a car.',
             },
             exercises: [
-              { text: 'Sarah ___ drink coffee.', options: ["doesn't", "don't"], correct: 0, explanation: 'Sarah (she) -> doesn\'t.' },
-              { text: 'The cat ___ eat cheese.', options: ["doesn't", "don't"], correct: 0, explanation: 'cat (it) -> doesn\'t.' },
-              { text: 'Select the correct sentence:', options: ['He doesn\'t study at night.', 'He doesn\'t studies at night.'], correct: 0, explanation: 'doesn\'t study.' },
+              { text: 'Sarah ___ drink coffee.', options: ["doesn't", "don't"], correct: 0, explanation: 'Sarah (she) -> doesn\'t.', explanationRu: "Sarah (she) -> doesn't." },
+              { text: 'The cat ___ eat cheese.', options: ["doesn't", "don't"], correct: 0, explanation: 'cat (it) -> doesn\'t.', explanationRu: "cat (it) -> doesn't." },
+              { text: 'Select the correct sentence:', options: ['He doesn\'t study at night.', 'He doesn\'t studies at night.'], correct: 0, explanation: 'doesn\'t study.', explanationRu: "doesn't study." },
             ],
           },
         ],
@@ -3181,8 +3181,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you speak English? Do they live here?',
             },
             exercises: [
-              { text: '___ you like music?', options: ['Do', 'Does', 'Are'], correct: 0, explanation: 'Do you...?' },
-              { text: '___ they work together?', options: ['Do', 'Does'], correct: 0, explanation: 'Do they...?' },
+              { text: '___ you like music?', options: ['Do', 'Does', 'Are'], correct: 0, explanation: 'Do you...?', explanationRu: "Do you...?" },
+              { text: '___ they work together?', options: ['Do', 'Does'], correct: 0, explanation: 'Do they...?', explanationRu: "Do they...?" },
             ],
           },
           {
@@ -3194,8 +3194,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you speak English? — Yes, I do.',
             },
             exercises: [
-              { text: 'Do you like pizza? — Yes, I ___ .', options: ['do', 'does', 'am'], correct: 0, explanation: 'Yes, I do.' },
-              { text: 'Do they live in London? — No, they ___ .', options: ["don't", "doesn't"], correct: 0, explanation: 'No, they don\'t.' },
+              { text: 'Do you like pizza? — Yes, I ___ .', options: ['do', 'does', 'am'], correct: 0, explanation: 'Yes, I do.', explanationRu: "Yes, I do." },
+              { text: 'Do they live in London? — No, they ___ .', options: ["don't", "doesn't"], correct: 0, explanation: 'No, they don\'t.', explanationRu: "No, they don't." },
             ],
           },
           {
@@ -3207,8 +3207,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you know Alex? Do you have a pen?',
             },
             exercises: [
-              { text: 'Do you ___ a car?', options: ['have', 'has'], correct: 0, explanation: 'Do you + have.' },
-              { text: 'Do we ___ time?', options: ['have', 'has'], correct: 0, explanation: 'Do we + have.' },
+              { text: 'Do you ___ a car?', options: ['have', 'has'], correct: 0, explanation: 'Do you + have.', explanationRu: "Do you + have." },
+              { text: 'Do we ___ time?', options: ['have', 'has'], correct: 0, explanation: 'Do we + have.', explanationRu: "Do we + have." },
             ],
           },
           {
@@ -3220,8 +3220,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you study every day?',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Do you play football?', 'You do play football?'], correct: 0, explanation: 'Do + ega + fe\'l.' },
-              { text: 'Choose the correct question:', options: ['Do they understand?', 'Does they understand?'], correct: 0, explanation: 'Do they.' },
+              { text: 'Choose the correct question:', options: ['Do you play football?', 'You do play football?'], correct: 0, explanation: 'Do + ega + fe\'l.', explanationRu: "Do + подлежащее + глагол." },
+              { text: 'Choose the correct question:', options: ['Do they understand?', 'Does they understand?'], correct: 0, explanation: 'Do they.', explanationRu: "Do they." },
             ],
           },
           {
@@ -3233,9 +3233,9 @@ export const grammarPathSections = [
               exampleRu: 'Do you work here? Yes, I do.',
             },
             exercises: [
-              { text: '___ you drink tea in the morning?', options: ['Do', 'Does'], correct: 0, explanation: 'Do you...' },
-              { text: 'Do they know the rules? — Yes, they ___ .', options: ['do', 'does'], correct: 0, explanation: 'Yes, they do.' },
-              { text: 'Select the correct question:', options: ['Do we need help?', 'Does we need help?'], correct: 0, explanation: 'Do we...' },
+              { text: '___ you drink tea in the morning?', options: ['Do', 'Does'], correct: 0, explanation: 'Do you...', explanationRu: "Do you..." },
+              { text: 'Do they know the rules? — Yes, they ___ .', options: ['do', 'does'], correct: 0, explanation: 'Yes, they do.', explanationRu: "Yes, they do." },
+              { text: 'Select the correct question:', options: ['Do we need help?', 'Does we need help?'], correct: 0, explanation: 'Do we...', explanationRu: "Do we..." },
             ],
           },
         ],
@@ -3256,8 +3256,8 @@ export const grammarPathSections = [
               exampleRu: 'Does he work here? Does she speak English?',
             },
             exercises: [
-              { text: '___ he live in Tashkent?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: 'Does he...?' },
-              { text: '___ she like coffee?', options: ['Do', 'Does'], correct: 1, explanation: 'Does she...?' },
+              { text: '___ he live in Tashkent?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: 'Does he...?', explanationRu: "Does he...?" },
+              { text: '___ she like coffee?', options: ['Do', 'Does'], correct: 1, explanation: 'Does she...?', explanationRu: "Does she...?" },
             ],
           },
           {
@@ -3269,8 +3269,8 @@ export const grammarPathSections = [
               exampleRu: 'Does she like...? Does he go...?',
             },
             exercises: [
-              { text: 'Does he ___ here?', options: ['work', 'works'], correct: 0, explanation: 'Does dan keyin fe\'lda -s bo\'lmaydi: work.' },
-              { text: 'Does she ___ English?', options: ['speak', 'speaks'], correct: 0, explanation: 'Does + speak.' },
+              { text: 'Does he ___ here?', options: ['work', 'works'], correct: 0, explanation: 'Does dan keyin fe\'lda -s bo\'lmaydi: work.', explanationRu: "После Does у глагола нет -s: work." },
+              { text: 'Does she ___ English?', options: ['speak', 'speaks'], correct: 0, explanation: 'Does + speak.', explanationRu: "Does + speak." },
             ],
           },
           {
@@ -3281,8 +3281,8 @@ export const grammarPathSections = [
               exampleRu: 'Does Tom play tennis? — Yes, he does.',
             },
             exercises: [
-              { text: 'Does she like music? — Yes, she ___ .', options: ['does', 'do', 'is'], correct: 0, explanation: 'Yes, she does.' },
-              { text: 'Does it rain a lot? — No, it ___ .', options: ["doesn't", "don't"], correct: 0, explanation: 'No, it doesn\'t.' },
+              { text: 'Does she like music? — Yes, she ___ .', options: ['does', 'do', 'is'], correct: 0, explanation: 'Yes, she does.', explanationRu: "Yes, she does." },
+              { text: 'Does it rain a lot? — No, it ___ .', options: ["doesn't", "don't"], correct: 0, explanation: 'No, it doesn\'t.', explanationRu: "No, it doesn't." },
             ],
           },
           {
@@ -3293,8 +3293,8 @@ export const grammarPathSections = [
               exampleRu: 'Does he have a car?',
             },
             exercises: [
-              { text: 'Does Mark ___ a computer?', options: ['have', 'has'], correct: 0, explanation: 'Does + have.' },
-              { text: 'Does she ___ any sisters?', options: ['have', 'has'], correct: 0, explanation: 'Does + have.' },
+              { text: 'Does Mark ___ a computer?', options: ['have', 'has'], correct: 0, explanation: 'Does + have.', explanationRu: "Does + have." },
+              { text: 'Does she ___ any sisters?', options: ['have', 'has'], correct: 0, explanation: 'Does + have.', explanationRu: "Does + have." },
             ],
           },
           {
@@ -3305,9 +3305,9 @@ export const grammarPathSections = [
               exampleRu: 'Does he work hard? Yes, he does.',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Does she like apples?', 'Does she likes apples?'], correct: 0, explanation: 'Does she like...' },
-              { text: 'Choose the correct question:', options: ['Does Tom speak French?', 'Do Tom speak French?'], correct: 0, explanation: 'Tom (he) -> Does.' },
-              { text: 'Select the correct answer: Does he live here?', options: ['No, he doesn\'t.', 'No, he don\'t.'], correct: 0, explanation: 'No, he doesn\'t.' },
+              { text: 'Choose the correct question:', options: ['Does she like apples?', 'Does she likes apples?'], correct: 0, explanation: 'Does she like...', explanationRu: "Does she like..." },
+              { text: 'Choose the correct question:', options: ['Does Tom speak French?', 'Do Tom speak French?'], correct: 0, explanation: 'Tom (he) -> Does.', explanationRu: "Tom (he) -> Does." },
+              { text: 'Select the correct answer: Does he live here?', options: ['No, he doesn\'t.', 'No, he don\'t.'], correct: 0, explanation: 'No, he doesn\'t.', explanationRu: "No, he doesn't." },
             ],
           },
         ],
@@ -3328,8 +3328,8 @@ export const grammarPathSections = [
               exampleRu: 'Where do you live? What time does he wake up?',
             },
             exercises: [
-              { text: 'Where ___ you live?', options: ['do', 'does', 'are'], correct: 0, explanation: 'Where do you live?' },
-              { text: 'What time ___ she get up?', options: ['does', 'do'], correct: 0, explanation: 'she -> does.' },
+              { text: 'Where ___ you live?', options: ['do', 'does', 'are'], correct: 0, explanation: 'Where do you live?', explanationRu: "Where do you live?" },
+              { text: 'What time ___ she get up?', options: ['does', 'do'], correct: 0, explanation: 'she -> does.', explanationRu: "she -> does." },
             ],
           },
           {
@@ -3341,8 +3341,8 @@ export const grammarPathSections = [
               exampleRu: 'I always wake up at 7 AM. She never drinks coffee.',
             },
             exercises: [
-              { text: 'Takroriylik ravishlari fe\'ldan qayerda keladi?', options: ['Fe\'ldan OLDIN', 'Fe\'ldan KEYIN', 'Gap oxirida'], correct: 0, explanation: 'Ravishlar asosiy fe\'ldan OLDIN keladi.' },
-              { text: 'I ___ drink tea in the morning. (doim)', options: ['always', 'never'], correct: 0, explanation: 'doim = always.' },
+              { text: 'Takroriylik ravishlari fe\'ldan qayerda keladi?', options: ['Fe\'ldan OLDIN', 'Fe\'ldan KEYIN', 'Gap oxirida'], correct: 0, explanation: 'Ravishlar asosiy fe\'ldan OLDIN keladi.', explanationRu: "Наречия ставятся ПЕРЕД основным глаголом." },
+              { text: 'I ___ drink tea in the morning. (doim)', options: ['always', 'never'], correct: 0, explanation: 'doim = always.', explanationRu: "doim (всегда) = always." },
             ],
           },
           {
@@ -3354,8 +3354,8 @@ export const grammarPathSections = [
               exampleRu: 'He always arrives on time.',
             },
             exercises: [
-              { text: 'She usually ___ early. (come)', options: ['comes', 'come'], correct: 0, explanation: 'She + comes.' },
-              { text: 'He never ___ fast food. (eat)', options: ['eats', 'eat'], correct: 0, explanation: 'He + eats.' },
+              { text: 'She usually ___ early. (come)', options: ['comes', 'come'], correct: 0, explanation: 'She + comes.', explanationRu: "She + comes." },
+              { text: 'He never ___ fast food. (eat)', options: ['eats', 'eat'], correct: 0, explanation: 'He + eats.', explanationRu: "He + eats." },
             ],
           },
           {
@@ -3367,8 +3367,8 @@ export const grammarPathSections = [
               exampleRu: 'How often do you play football?',
             },
             exercises: [
-              { text: '___ often do you read books?', options: ['How', 'What', 'Where'], correct: 0, explanation: 'How often...?' },
-              { text: 'How often ___ she visit her grandma?', options: ['does', 'do'], correct: 0, explanation: 'she -> does.' },
+              { text: '___ often do you read books?', options: ['How', 'What', 'Where'], correct: 0, explanation: 'How often...?', explanationRu: "How often...?" },
+              { text: 'How often ___ she visit her grandma?', options: ['does', 'do'], correct: 0, explanation: 'she -> does.', explanationRu: "she -> does." },
             ],
           },
           {
@@ -3380,9 +3380,9 @@ export const grammarPathSections = [
               exampleRu: 'Where do you work? I usually work at home.',
             },
             exercises: [
-              { text: 'What ___ you usually eat for breakfast?', options: ['do', 'does'], correct: 0, explanation: 'What do you...' },
-              { text: 'Choose the correct sentence:', options: ['He always drinks milk.', 'He drinks always milk.'], correct: 0, explanation: 'He always drinks...' },
-              { text: 'Select the correct sentence:', options: ['Where does he live?', 'Where he lives?'], correct: 0, explanation: 'Where does he live?' },
+              { text: 'What ___ you usually eat for breakfast?', options: ['do', 'does'], correct: 0, explanation: 'What do you...', explanationRu: "What do you..." },
+              { text: 'Choose the correct sentence:', options: ['He always drinks milk.', 'He drinks always milk.'], correct: 0, explanation: 'He always drinks...', explanationRu: "He always drinks..." },
+              { text: 'Select the correct sentence:', options: ['Where does he live?', 'Where he lives?'], correct: 0, explanation: 'Where does he live?', explanationRu: "Where does he live?" },
             ],
           },
         ],
@@ -3403,8 +3403,8 @@ export const grammarPathSections = [
               exampleRu: 'I am a doctor vs I work in a hospital.',
             },
             exercises: [
-              { text: 'I ___ tired today.', options: ['am', 'do', 'work'], correct: 0, explanation: 'sifat (tired) bilan: am.' },
-              { text: 'I ___ in a bank.', options: ['work', 'am', 'is'], correct: 0, explanation: 'harakat fe\'li: work.' },
+              { text: 'I ___ tired today.', options: ['am', 'do', 'work'], correct: 0, explanation: 'sifat (tired) bilan: am.', explanationRu: "с прилагательным (tired): am." },
+              { text: 'I ___ in a bank.', options: ['work', 'am', 'is'], correct: 0, explanation: 'harakat fe\'li: work.', explanationRu: "глагол действия: work." },
             ],
           },
           {
@@ -3416,8 +3416,8 @@ export const grammarPathSections = [
               exampleRu: 'He is not happy vs He does not play tennis.',
             },
             exercises: [
-              { text: 'She ___ a student. She ___ work.', options: ['is / doesn\'t', 'does / isn\'t'], correct: 0, explanation: 'is a student / doesn\'t work.' },
-              { text: 'They ___ at home. They ___ go out.', options: ['are / don\'t', 'do / aren\'t'], correct: 0, explanation: 'are at home / don\'t go.' },
+              { text: 'She ___ a student. She ___ work.', options: ['is / doesn\'t', 'does / isn\'t'], correct: 0, explanation: 'is a student / doesn\'t work.', explanationRu: "is a student / doesn't work." },
+              { text: 'They ___ at home. They ___ go out.', options: ['are / don\'t', 'do / aren\'t'], correct: 0, explanation: 'are at home / don\'t go.', explanationRu: "are at home / don't go." },
             ],
           },
           {
@@ -3429,8 +3429,8 @@ export const grammarPathSections = [
               exampleRu: 'He works. Does she like? He doesn\'t have.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['Does she have a car?', 'Does she has a car?'], correct: 0, explanation: 'Does + have.' },
-              { text: 'Choose the correct sentence:', options: ['He doesn\'t like coffee.', 'He don\'t likes coffee.'], correct: 0, explanation: 'He doesn\'t like.' },
+              { text: 'Choose the correct sentence:', options: ['Does she have a car?', 'Does she has a car?'], correct: 0, explanation: 'Does + have.', explanationRu: "Does + have." },
+              { text: 'Choose the correct sentence:', options: ['He doesn\'t like coffee.', 'He don\'t likes coffee.'], correct: 0, explanation: 'He doesn\'t like.', explanationRu: "He doesn't like." },
             ],
           },
           {
@@ -3442,8 +3442,8 @@ export const grammarPathSections = [
               exampleRu: '— Where do you live? — I live in Tashkent.',
             },
             exercises: [
-              { text: '— ___ your brother speak English? — Yes, he ___ .', options: ['Does / does', 'Do / do'], correct: 0, explanation: 'Does your brother / he does.' },
-              { text: '— What do you do? — I ___ at school.', options: ['teach', 'teaches'], correct: 0, explanation: 'I teach.' },
+              { text: '— ___ your brother speak English? — Yes, he ___ .', options: ['Does / does', 'Do / do'], correct: 0, explanation: 'Does your brother / he does.', explanationRu: "Does your brother / he does." },
+              { text: '— What do you do? — I ___ at school.', options: ['teach', 'teaches'], correct: 0, explanation: 'I teach.', explanationRu: "I teach." },
             ],
           },
           {
@@ -3455,9 +3455,9 @@ export const grammarPathSections = [
               exampleRu: 'I work, he works, she doesn\'t like.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['He plays tennis every Sunday.', 'He play tennis every Sunday.'], correct: 0, explanation: 'He + plays.' },
-              { text: 'Choose the correct sentence:', options: ['Where does she work?', 'Where she works?'], correct: 0, explanation: 'Where does she work?' },
-              { text: 'Choose the correct sentence:', options: ['They don\'t have a car.', 'They doesn\'t have a car.'], correct: 0, explanation: 'They don\'t.' },
+              { text: 'Choose the correct sentence:', options: ['He plays tennis every Sunday.', 'He play tennis every Sunday.'], correct: 0, explanation: 'He + plays.', explanationRu: "He + plays." },
+              { text: 'Choose the correct sentence:', options: ['Where does she work?', 'Where she works?'], correct: 0, explanation: 'Where does she work?', explanationRu: "Where does she work?" },
+              { text: 'Choose the correct sentence:', options: ['They don\'t have a car.', 'They doesn\'t have a car.'], correct: 0, explanation: 'They don\'t.', explanationRu: "They don't." },
             ],
           },
         ],
@@ -3467,21 +3467,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Present Simple Zamoni",
       titleRu: 'Тест раздела: Настоящее простое время (Present Simple)',
       exercises: [
-        { text: 'I ___ in Tashkent.', options: ['live', 'lives', 'living'], correct: 0, explanation: 'I + live.' },
-        { text: 'He ___ in a big hospital.', options: ['work', 'works', 'working'], correct: 1, explanation: 'He (3-shaxs) -> works.' },
-        { text: 'She ___ to school by bus. (go)', options: ['gos', 'goes', 'go'], correct: 1, explanation: 'go -> goes.' },
-        { text: 'Tom ___ history at university.', options: ['studys', 'studies'], correct: 1, explanation: 'study -> studies.' },
-        { text: 'Sarah ___ a new car.', options: ['have', 'has'], correct: 1, explanation: 'Sarah (she) -> has.' },
-        { text: 'I ___ eat fast food.', options: ["don't", "doesn't"], correct: 0, explanation: 'I + don\'t.' },
-        { text: 'He ___ like cold weather.', options: ["don't", "doesn't"], correct: 1, explanation: 'He + doesn\'t.' },
-        { text: 'She doesn\'t ___ tea.', options: ['drink', 'drinks'], correct: 0, explanation: 'doesn\'t + drink (qo\'shimchasiz).' },
-        { text: 'He doesn\'t ___ a bicycle.', options: ['have', 'has'], correct: 0, explanation: 'doesn\'t + have.' },
-        { text: '___ you speak English?', options: ['Do', 'Does', 'Are'], correct: 0, explanation: 'Do you...?' },
-        { text: '___ she live near here?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: 'Does she...?' },
-        { text: 'Does he like tennis? — Yes, he ___ .', options: ['does', 'do', 'is'], correct: 0, explanation: 'Yes, he does.' },
-        { text: 'Where ___ you work?', options: ['do', 'does'], correct: 0, explanation: 'Where do you...?' },
-        { text: 'He ___ drinks coffee in the evening. (hech qachon)', options: ['never', 'always'], correct: 0, explanation: 'hech qachon = never.' },
-        { text: 'Choose the correct sentence:', options: ['Does she have a cat?', 'Does she has a cat?'], correct: 0, explanation: 'Does + have.' },
+        { text: 'I ___ in Tashkent.', options: ['live', 'lives', 'living'], correct: 0, explanation: 'I + live.', explanationRu: "I + live." },
+        { text: 'He ___ in a big hospital.', options: ['work', 'works', 'working'], correct: 1, explanation: 'He (3-shaxs) -> works.', explanationRu: "He (3-е лицо) -> works." },
+        { text: 'She ___ to school by bus. (go)', options: ['gos', 'goes', 'go'], correct: 1, explanation: 'go -> goes.', explanationRu: "go -> goes." },
+        { text: 'Tom ___ history at university.', options: ['studys', 'studies'], correct: 1, explanation: 'study -> studies.', explanationRu: "study -> studies." },
+        { text: 'Sarah ___ a new car.', options: ['have', 'has'], correct: 1, explanation: 'Sarah (she) -> has.', explanationRu: "Sarah (she) -> has." },
+        { text: 'I ___ eat fast food.', options: ["don't", "doesn't"], correct: 0, explanation: 'I + don\'t.', explanationRu: "I + don't." },
+        { text: 'He ___ like cold weather.', options: ["don't", "doesn't"], correct: 1, explanation: 'He + doesn\'t.', explanationRu: "He + doesn't." },
+        { text: 'She doesn\'t ___ tea.', options: ['drink', 'drinks'], correct: 0, explanation: 'doesn\'t + drink (qo\'shimchasiz).', explanationRu: "doesn't + drink (без окончания)." },
+        { text: 'He doesn\'t ___ a bicycle.', options: ['have', 'has'], correct: 0, explanation: 'doesn\'t + have.', explanationRu: "doesn't + have." },
+        { text: '___ you speak English?', options: ['Do', 'Does', 'Are'], correct: 0, explanation: 'Do you...?', explanationRu: "Do you...?" },
+        { text: '___ she live near here?', options: ['Do', 'Does', 'Is'], correct: 1, explanation: 'Does she...?', explanationRu: "Does she...?" },
+        { text: 'Does he like tennis? — Yes, he ___ .', options: ['does', 'do', 'is'], correct: 0, explanation: 'Yes, he does.', explanationRu: "Yes, he does." },
+        { text: 'Where ___ you work?', options: ['do', 'does'], correct: 0, explanation: 'Where do you...?', explanationRu: "Where do you...?" },
+        { text: 'He ___ drinks coffee in the evening. (hech qachon)', options: ['never', 'always'], correct: 0, explanation: 'hech qachon = never.', explanationRu: "никогда = never." },
+        { text: 'Choose the correct sentence:', options: ['Does she have a cat?', 'Does she has a cat?'], correct: 0, explanation: 'Does + have.', explanationRu: "Does + have." },
       ],
     },
   },
@@ -3508,8 +3508,8 @@ export const grammarPathSections = [
               exampleRu: 'I am reading a book now. She is sleeping.',
             },
             exercises: [
-              { text: 'Present Continuous da fe\'ldan oldin nima keladi?', options: ['am / is / are', 'do / does', 'have / has'], correct: 0, explanation: 'Present Continuous da to be (am/is/are) yordamchi fe\'li ishlatiladi.' },
-              { text: 'I ___ reading a book right now.', options: ['am', 'is', 'are'], correct: 0, explanation: 'I bilan "am" ishlatiladi.' },
+              { text: 'Present Continuous da fe\'ldan oldin nima keladi?', textRu: "Что стоит перед глаголом в Present Continuous?", options: ['am / is / are', 'do / does', 'have / has'], correct: 0, explanation: 'Present Continuous da to be (am/is/are) yordamchi fe\'li ishlatiladi.', explanationRu: "В Present Continuous используется вспомогательный глагол to be (am/is/are)." },
+              { text: 'I ___ reading a book right now.', options: ['am', 'is', 'are'], correct: 0, explanation: 'I bilan "am" ishlatiladi.', explanationRu: "С I используется \"am\"." },
             ],
           },
           {
@@ -3521,8 +3521,8 @@ export const grammarPathSections = [
               exampleRu: 'He is working. They are playing football.',
             },
             exercises: [
-              { text: 'She ___ watching TV at the moment.', options: ['is', 'are', 'am'], correct: 0, explanation: 'She bilan "is" ishlatiladi.' },
-              { text: 'They ___ playing football in the yard.', options: ['are', 'is', 'am'], correct: 0, explanation: 'They bilan "are" ishlatiladi.' },
+              { text: 'She ___ watching TV at the moment.', options: ['is', 'are', 'am'], correct: 0, explanation: 'She bilan "is" ishlatiladi.', explanationRu: "С She используется \"is\"." },
+              { text: 'They ___ playing football in the yard.', options: ['are', 'is', 'am'], correct: 0, explanation: 'They bilan "are" ishlatiladi.', explanationRu: "С They используется \"are\"." },
             ],
           },
           {
@@ -3534,8 +3534,8 @@ export const grammarPathSections = [
               exampleRu: 'Look! The bus is coming. Listen! Someone is singing.',
             },
             exercises: [
-              { text: 'Look! The train ___ .', options: ['is coming', 'comes', 'come'], correct: 0, explanation: 'Look! -> Hozir sodir bo\'layotgan harakat (is coming).' },
-              { text: 'Listen! The baby ___ .', options: ['is crying', 'cries', 'cry'], correct: 0, explanation: 'Listen! -> is crying.' },
+              { text: 'Look! The train ___ .', options: ['is coming', 'comes', 'come'], correct: 0, explanation: 'Look! -> Hozir sodir bo\'layotgan harakat (is coming).', explanationRu: "Look! -> действие, происходящее сейчас (is coming)." },
+              { text: 'Listen! The baby ___ .', options: ['is crying', 'cries', 'cry'], correct: 0, explanation: 'Listen! -> is crying.', explanationRu: "Listen! -> is crying." },
             ],
           },
           {
@@ -3547,8 +3547,8 @@ export const grammarPathSections = [
               exampleRu: 'I\'m learning English. They\'re coming home.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I\'m writing an email now.', 'I writing an email now.'], correct: 0, explanation: 'I\'m writing (am shart!).' },
-              { text: 'Choose the correct sentence:', options: ['They\'re listening to music.', 'They listening to music.'], correct: 0, explanation: 'They\'re listening.' },
+              { text: 'Choose the correct sentence:', options: ['I\'m writing an email now.', 'I writing an email now.'], correct: 0, explanation: 'I\'m writing (am shart!).', explanationRu: "I'm writing (am обязателен!)." },
+              { text: 'Choose the correct sentence:', options: ['They\'re listening to music.', 'They listening to music.'], correct: 0, explanation: 'They\'re listening.', explanationRu: "They're listening." },
             ],
           },
           {
@@ -3560,9 +3560,9 @@ export const grammarPathSections = [
               exampleRu: 'I am studying, he is eating, and they are dancing.',
             },
             exercises: [
-              { text: 'We ___ for the bus right now.', options: ['are waiting', 'is waiting', 'wait'], correct: 0, explanation: 'We + are waiting.' },
-              { text: 'Tom ___ his car now.', options: ['is washing', 'are washing', 'washes'], correct: 0, explanation: 'Tom (he) + is washing.' },
-              { text: 'Select the correct sentence:', options: ['She is reading a magazine.', 'She reading a magazine.'], correct: 0, explanation: 'She is reading.' },
+              { text: 'We ___ for the bus right now.', options: ['are waiting', 'is waiting', 'wait'], correct: 0, explanation: 'We + are waiting.', explanationRu: "We + are waiting." },
+              { text: 'Tom ___ his car now.', options: ['is washing', 'are washing', 'washes'], correct: 0, explanation: 'Tom (he) + is washing.', explanationRu: "Tom (he) + is washing." },
+              { text: 'Select the correct sentence:', options: ['She is reading a magazine.', 'She reading a magazine.'], correct: 0, explanation: 'She is reading.', explanationRu: "She is reading." },
             ],
           },
         ],
@@ -3583,8 +3583,8 @@ export const grammarPathSections = [
               exampleRu: 'do -> doing, speak -> speaking',
             },
             exercises: [
-              { text: '"read" fe\'liga -ing qo\'shilsa qanday bo\'ladi?', options: ['reading', 'readed', 'readings'], correct: 0, explanation: 'read + ing -> reading.' },
-              { text: '"play" fe\'liga -ing qo\'shilishi:', options: ['playing', 'plaing', 'playng'], correct: 0, explanation: 'play + ing -> playing.' },
+              { text: '"read" fe\'liga -ing qo\'shilsa qanday bo\'ladi?', textRu: "Как выглядит глагол \"read\" с окончанием -ing?", options: ['reading', 'readed', 'readings'], correct: 0, explanation: 'read + ing -> reading.', explanationRu: "read + ing -> reading." },
+              { text: '"play" fe\'liga -ing qo\'shilishi:', options: ['playing', 'plaing', 'playng'], correct: 0, explanation: 'play + ing -> playing.', explanationRu: "play + ing -> playing." },
             ],
           },
           {
@@ -3596,8 +3596,8 @@ export const grammarPathSections = [
               exampleRu: 'write -> writing, come -> coming',
             },
             exercises: [
-              { text: '"write" fe\'liga -ing qo\'shilganda qanday yoziladi?', options: ['writing', 'writeing', 'writting'], correct: 0, explanation: 'e tushib qoladi: writing.' },
-              { text: '"make" fe\'lining -ing shakli:', options: ['making', 'makeing'], correct: 0, explanation: 'make -> making.' },
+              { text: '"write" fe\'liga -ing qo\'shilganda qanday yoziladi?', textRu: "Как пишется глагол \"write\" с окончанием -ing?", options: ['writing', 'writeing', 'writting'], correct: 0, explanation: 'e tushib qoladi: writing.', explanationRu: "гласная e опускается: writing." },
+              { text: '"make" fe\'lining -ing shakli:', options: ['making', 'makeing'], correct: 0, explanation: 'make -> making.', explanationRu: "make -> making." },
             ],
           },
           {
@@ -3609,8 +3609,8 @@ export const grammarPathSections = [
               exampleRu: 'swim -> swimming, stop -> stopping',
             },
             exercises: [
-              { text: '"run" fe\'liga -ing qo\'shilsa qanday yoziladi?', options: ['running', 'runing', 'runed'], correct: 0, explanation: 'undosh ikkilanadi: running.' },
-              { text: '"swim" fe\'lining -ing shakli:', options: ['swimming', 'swiming'], correct: 0, explanation: 'swim -> swimming.' },
+              { text: '"run" fe\'liga -ing qo\'shilsa qanday yoziladi?', textRu: "Как пишется глагол \"run\" с окончанием -ing?", options: ['running', 'runing', 'runed'], correct: 0, explanation: 'undosh ikkilanadi: running.', explanationRu: "согласная удваивается: running." },
+              { text: '"swim" fe\'lining -ing shakli:', options: ['swimming', 'swiming'], correct: 0, explanation: 'swim -> swimming.', explanationRu: "swim -> swimming." },
             ],
           },
           {
@@ -3622,8 +3622,8 @@ export const grammarPathSections = [
               exampleRu: 'die -> dying, lie -> lying',
             },
             exercises: [
-              { text: '"lie" fe\'lining -ing shaklini toping:', options: ['lying', 'lieing', 'ling'], correct: 0, explanation: 'lie -> lying.' },
-              { text: '"die" fe\'liga -ing qo\'shilishi:', options: ['dying', 'dieing'], correct: 0, explanation: 'die -> dying.' },
+              { text: '"lie" fe\'lining -ing shaklini toping:', textRu: "Найдите форму глагола \"lie\" с -ing:", options: ['lying', 'lieing', 'ling'], correct: 0, explanation: 'lie -> lying.', explanationRu: "lie -> lying." },
+              { text: '"die" fe\'liga -ing qo\'shilishi:', options: ['dying', 'dieing'], correct: 0, explanation: 'die -> dying.', explanationRu: "die -> dying." },
             ],
           },
           {
@@ -3635,9 +3635,9 @@ export const grammarPathSections = [
               exampleRu: 'playing, dancing, swimming, dying',
             },
             exercises: [
-              { text: 'Choose the correct form of "dance":', options: ['dancing', 'danceing'], correct: 0, explanation: 'dance -> dancing (-e tushadi).' },
-              { text: 'Choose the correct form of "sit":', options: ['sitting', 'siting'], correct: 0, explanation: 'sit -> sitting (undosh ikkilanadi).' },
-              { text: 'Choose the correct sentence:', options: ['He is running in the park.', 'He is runing in the park.'], correct: 0, explanation: 'running.' },
+              { text: 'Choose the correct form of "dance":', options: ['dancing', 'danceing'], correct: 0, explanation: 'dance -> dancing (-e tushadi).', explanationRu: "dance -> dancing (-e опускается)." },
+              { text: 'Choose the correct form of "sit":', options: ['sitting', 'siting'], correct: 0, explanation: 'sit -> sitting (undosh ikkilanadi).', explanationRu: "sit -> sitting (согласная удваивается)." },
+              { text: 'Choose the correct sentence:', options: ['He is running in the park.', 'He is runing in the park.'], correct: 0, explanation: 'running.', explanationRu: "running." },
             ],
           },
         ],
@@ -3658,8 +3658,8 @@ export const grammarPathSections = [
               exampleRu: 'I am not working now. She is not reading.',
             },
             exercises: [
-              { text: 'I ___ working right now.', options: ["am not", "is not", "don't"], correct: 0, explanation: 'I + am not working.' },
-              { text: 'He ___ sleeping at the moment.', options: ["isn't", "aren't", "doesn't"], correct: 0, explanation: 'He + isn\'t sleeping.' },
+              { text: 'I ___ working right now.', options: ["am not", "is not", "don't"], correct: 0, explanation: 'I + am not working.', explanationRu: "I + am not working." },
+              { text: 'He ___ sleeping at the moment.', options: ["isn't", "aren't", "doesn't"], correct: 0, explanation: 'He + isn\'t sleeping.', explanationRu: "He + isn't sleeping." },
             ],
           },
           {
@@ -3671,8 +3671,8 @@ export const grammarPathSections = [
               exampleRu: 'We aren\'t playing. He isn\'t listening.',
             },
             exercises: [
-              { text: 'They ___ coming with us today.', options: ["aren't", "isn't", "don't"], correct: 0, explanation: 'They + aren\'t.' },
-              { text: 'She ___ listening to you.', options: ["isn't", "aren't"], correct: 0, explanation: 'She + isn\'t.' },
+              { text: 'They ___ coming with us today.', options: ["aren't", "isn't", "don't"], correct: 0, explanation: 'They + aren\'t.', explanationRu: "They + aren't." },
+              { text: 'She ___ listening to you.', options: ["isn't", "aren't"], correct: 0, explanation: 'She + isn\'t.', explanationRu: "She + isn't." },
             ],
           },
           {
@@ -3684,8 +3684,8 @@ export const grammarPathSections = [
               exampleRu: 'It isn\'t raining now. You aren\'t concentrating.',
             },
             exercises: [
-              { text: 'It ___ raining right now. The sun is shining.', options: ["isn't", "aren't", "not"], correct: 0, explanation: 'It + isn\'t raining.' },
-              { text: 'We ___ watching TV now. We are studying.', options: ["aren't", "isn't"], correct: 0, explanation: 'We + aren\'t watching.' },
+              { text: 'It ___ raining right now. The sun is shining.', options: ["isn't", "aren't", "not"], correct: 0, explanation: 'It + isn\'t raining.', explanationRu: "It + isn't raining." },
+              { text: 'We ___ watching TV now. We are studying.', options: ["aren't", "isn't"], correct: 0, explanation: 'We + aren\'t watching.', explanationRu: "We + aren't watching." },
             ],
           },
           {
@@ -3697,8 +3697,8 @@ export const grammarPathSections = [
               exampleRu: 'I\'m not eating, I\'m drinking water.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She isn\'t working today.', 'She not working today.'], correct: 0, explanation: 'She isn\'t working.' },
-              { text: 'Choose the correct sentence:', options: ['They aren\'t playing football.', 'They don\'t playing football.'], correct: 0, explanation: 'aren\'t playing.' },
+              { text: 'Choose the correct sentence:', options: ['She isn\'t working today.', 'She not working today.'], correct: 0, explanation: 'She isn\'t working.', explanationRu: "She isn't working." },
+              { text: 'Choose the correct sentence:', options: ['They aren\'t playing football.', 'They don\'t playing football.'], correct: 0, explanation: 'aren\'t playing.', explanationRu: "aren't playing." },
             ],
           },
           {
@@ -3710,9 +3710,9 @@ export const grammarPathSections = [
               exampleRu: 'I\'m not sleeping, he isn\'t working.',
             },
             exercises: [
-              { text: 'Tom ___ driving a car right now.', options: ["isn't", "aren't"], correct: 0, explanation: 'Tom (he) + isn\'t.' },
-              { text: 'You ___ listening to the teacher.', options: ["aren't", "isn't"], correct: 0, explanation: 'You + aren\'t.' },
-              { text: 'Select the correct sentence:', options: ['I\'m not crying.', 'I am no crying.'], correct: 0, explanation: 'I\'m not crying.' },
+              { text: 'Tom ___ driving a car right now.', options: ["isn't", "aren't"], correct: 0, explanation: 'Tom (he) + isn\'t.', explanationRu: "Tom (he) + isn't." },
+              { text: 'You ___ listening to the teacher.', options: ["aren't", "isn't"], correct: 0, explanation: 'You + aren\'t.', explanationRu: "You + aren't." },
+              { text: 'Select the correct sentence:', options: ['I\'m not crying.', 'I am no crying.'], correct: 0, explanation: 'I\'m not crying.', explanationRu: "I'm not crying." },
             ],
           },
         ],
@@ -3733,8 +3733,8 @@ export const grammarPathSections = [
               exampleRu: 'Are you reading? Is he sleeping?',
             },
             exercises: [
-              { text: '___ you working right now?', options: ['Are', 'Is', 'Do'], correct: 0, explanation: 'Are you working...?' },
-              { text: '___ she cooking dinner at the moment?', options: ['Is', 'Are', 'Does'], correct: 0, explanation: 'Is she cooking...?' },
+              { text: '___ you working right now?', options: ['Are', 'Is', 'Do'], correct: 0, explanation: 'Are you working...?', explanationRu: "Are you working...?" },
+              { text: '___ she cooking dinner at the moment?', options: ['Is', 'Are', 'Does'], correct: 0, explanation: 'Is she cooking...?', explanationRu: "Is she cooking...?" },
             ],
           },
           {
@@ -3746,8 +3746,8 @@ export const grammarPathSections = [
               exampleRu: 'Are you listening? — Yes, I am.',
             },
             exercises: [
-              { text: 'Is Tom sleeping? — Yes, he ___ .', options: ['is', 'does', 'am'], correct: 0, explanation: 'Yes, he is.' },
-              { text: 'Are they coming? — No, they ___ .', options: ["aren't", "don't"], correct: 0, explanation: 'No, they aren\'t.' },
+              { text: 'Is Tom sleeping? — Yes, he ___ .', options: ['is', 'does', 'am'], correct: 0, explanation: 'Yes, he is.', explanationRu: "Yes, he is." },
+              { text: 'Are they coming? — No, they ___ .', options: ["aren't", "don't"], correct: 0, explanation: 'No, they aren\'t.', explanationRu: "No, they aren't." },
             ],
           },
           {
@@ -3759,8 +3759,8 @@ export const grammarPathSections = [
               exampleRu: 'What are you doing? Where is he going?',
             },
             exercises: [
-              { text: 'What ___ you doing right now?', options: ['are', 'is', 'do'], correct: 0, explanation: 'What are you doing?' },
-              { text: 'Where ___ she going at this hour?', options: ['is', 'are', 'does'], correct: 0, explanation: 'Where is she going?' },
+              { text: 'What ___ you doing right now?', options: ['are', 'is', 'do'], correct: 0, explanation: 'What are you doing?', explanationRu: "What are you doing?" },
+              { text: 'Where ___ she going at this hour?', options: ['is', 'are', 'does'], correct: 0, explanation: 'Where is she going?', explanationRu: "Where is she going?" },
             ],
           },
           {
@@ -3772,8 +3772,8 @@ export const grammarPathSections = [
               exampleRu: 'Is it raining outside?',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Are you studying English?', 'You are studying English?'], correct: 0, explanation: 'Are + subject + V-ing.' },
-              { text: 'Choose the correct question:', options: ['Why is he crying?', 'Why he is crying?'], correct: 0, explanation: 'Why is he crying?' },
+              { text: 'Choose the correct question:', options: ['Are you studying English?', 'You are studying English?'], correct: 0, explanation: 'Are + subject + V-ing.', explanationRu: "Are + подлежащее + глагол-ing." },
+              { text: 'Choose the correct question:', options: ['Why is he crying?', 'Why he is crying?'], correct: 0, explanation: 'Why is he crying?', explanationRu: "Why is he crying?" },
             ],
           },
           {
@@ -3785,9 +3785,9 @@ export const grammarPathSections = [
               exampleRu: 'Are you listening? What are you reading?',
             },
             exercises: [
-              { text: '___ they playing tennis in the court?', options: ['Are', 'Is'], correct: 0, explanation: 'Are they playing...?' },
-              { text: 'Is Anna writing a letter? — No, she ___ .', options: ["isn't", "doesn't"], correct: 0, explanation: 'No, she isn\'t.' },
-              { text: 'Select the correct question:', options: ['Where are we going?', 'Where we are going?'], correct: 0, explanation: 'Where are we going?' },
+              { text: '___ they playing tennis in the court?', options: ['Are', 'Is'], correct: 0, explanation: 'Are they playing...?', explanationRu: "Are they playing...?" },
+              { text: 'Is Anna writing a letter? — No, she ___ .', options: ["isn't", "doesn't"], correct: 0, explanation: 'No, she isn\'t.', explanationRu: "No, she isn't." },
+              { text: 'Select the correct question:', options: ['Where are we going?', 'Where we are going?'], correct: 0, explanation: 'Where are we going?', explanationRu: "Where are we going?" },
             ],
           },
         ],
@@ -3808,8 +3808,8 @@ export const grammarPathSections = [
               exampleRu: 'I drink coffee every day vs I am drinking tea now.',
             },
             exercises: [
-              { text: 'I usually ___ tea, but today I ___ coffee.', options: ['drink / am drinking', 'am drinking / drink'], correct: 0, explanation: 'usually drink (PS) / today am drinking (PC).' },
-              { text: 'He ___ football every Sunday, but now he ___ books.', options: ['plays / is reading', 'is playing / reads'], correct: 0, explanation: 'every Sunday plays / now is reading.' },
+              { text: 'I usually ___ tea, but today I ___ coffee.', options: ['drink / am drinking', 'am drinking / drink'], correct: 0, explanation: 'usually drink (PS) / today am drinking (PC).', explanationRu: "usually drink (PS) / today am drinking (PC)." },
+              { text: 'He ___ football every Sunday, but now he ___ books.', options: ['plays / is reading', 'is playing / reads'], correct: 0, explanation: 'every Sunday plays / now is reading.', explanationRu: "every Sunday plays / now is reading." },
             ],
           },
           {
@@ -3821,8 +3821,8 @@ export const grammarPathSections = [
               exampleRu: 'She drives to work every day. She is driving now.',
             },
             exercises: [
-              { text: 'Look! The sun ___ . (shine)', options: ['is shining', 'shines'], correct: 0, explanation: 'Look! -> Present Continuous (is shining).' },
-              { text: 'The sun ___ in the east. (rise)', options: ['rises', 'is rising'], correct: 0, explanation: 'Umumiy haqiqat -> Present Simple (rises).' },
+              { text: 'Look! The sun ___ . (shine)', options: ['is shining', 'shines'], correct: 0, explanation: 'Look! -> Present Continuous (is shining).', explanationRu: "Look! -> Present Continuous (is shining)." },
+              { text: 'The sun ___ in the east. (rise)', options: ['rises', 'is rising'], correct: 0, explanation: 'Umumiy haqiqat -> Present Simple (rises).', explanationRu: "Общий факт -> Present Simple (rises)." },
             ],
           },
           {
@@ -3834,8 +3834,8 @@ export const grammarPathSections = [
               exampleRu: 'I live in Tashkent vs I am staying at a hotel this week.',
             },
             exercises: [
-              { text: 'I ___ with my friend this week.', options: ['am staying', 'stay'], correct: 0, explanation: 'this week (vaqtinchalik) -> am staying.' },
-              { text: 'She usually ___ in London, but this month she ___ in Paris.', options: ['lives / is living', 'is living / lives'], correct: 0, explanation: 'usually lives / this month is living.' },
+              { text: 'I ___ with my friend this week.', options: ['am staying', 'stay'], correct: 0, explanation: 'this week (vaqtinchalik) -> am staying.', explanationRu: "this week (временно) -> am staying." },
+              { text: 'She usually ___ in London, but this month she ___ in Paris.', options: ['lives / is living', 'is living / lives'], correct: 0, explanation: 'usually lives / this month is living.', explanationRu: "usually lives / this month is living." },
             ],
           },
           {
@@ -3847,8 +3847,8 @@ export const grammarPathSections = [
               exampleRu: 'He doesn\'t usually wear glasses, but he is wearing them today.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['He works every day, but today he is resting.', 'He is working every day, but today he rests.'], correct: 0, explanation: 'works every day / today is resting.' },
-              { text: 'Choose the correct sentence:', options: ['I don\'t usually drink milk, but I\'m drinking it now.', 'I\'m not usually drinking milk, but I drink it now.'], correct: 0, explanation: 'don\'t usually drink / drinking it now.' },
+              { text: 'Choose the correct sentence:', options: ['He works every day, but today he is resting.', 'He is working every day, but today he rests.'], correct: 0, explanation: 'works every day / today is resting.', explanationRu: "works every day / today is resting." },
+              { text: 'Choose the correct sentence:', options: ['I don\'t usually drink milk, but I\'m drinking it now.', 'I\'m not usually drinking milk, but I drink it now.'], correct: 0, explanation: 'don\'t usually drink / drinking it now.', explanationRu: "don't usually drink / drinking it now." },
             ],
           },
           {
@@ -3860,9 +3860,9 @@ export const grammarPathSections = [
               exampleRu: 'I learn English every day, and I am studying grammar now.',
             },
             exercises: [
-              { text: '— What are you doing? — I ___ an essay.', options: ['am writing', 'write'], correct: 0, explanation: 'Savol "doing?" -> am writing.' },
-              { text: '— What do you do? — I ___ a teacher.', options: ['am', 'am being'], correct: 0, explanation: 'Kasb/Har doim -> am a teacher.' },
-              { text: 'Select the correct sentence:', options: ['Listen! Somebody is playing the piano.', 'Listen! Somebody plays the piano.'], correct: 0, explanation: 'Listen! -> is playing.' },
+              { text: '— What are you doing? — I ___ an essay.', options: ['am writing', 'write'], correct: 0, explanation: 'Savol "doing?" -> am writing.', explanationRu: "Вопрос \"doing?\" -> am writing." },
+              { text: '— What do you do? — I ___ a teacher.', options: ['am', 'am being'], correct: 0, explanation: 'Kasb/Har doim -> am a teacher.', explanationRu: "Профессия/всегда -> am a teacher." },
+              { text: 'Select the correct sentence:', options: ['Listen! Somebody is playing the piano.', 'Listen! Somebody plays the piano.'], correct: 0, explanation: 'Listen! -> is playing.', explanationRu: "Listen! -> is playing." },
             ],
           },
         ],
@@ -3883,8 +3883,8 @@ export const grammarPathSections = [
               exampleRu: 'I want ice cream. I know the answer.',
             },
             exercises: [
-              { text: 'Qaysi fe\'l Present Continuous da ishlatilmaydi?', options: ['know (bilmoq)', 'run (yugurmoq)', 'read (o\'qimoq)'], correct: 0, explanation: 'know (holat fe\'li) Continuous bo\'lmaydi.' },
-              { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'I know (am knowing xato!).' },
+              { text: 'Qaysi fe\'l Present Continuous da ishlatilmaydi?', textRu: "Какой глагол не используется в Present Continuous?", options: ['know (bilmoq)', 'run (yugurmoq)', 'read (o\'qimoq)'], correct: 0, explanation: 'know (holat fe\'li) Continuous bo\'lmaydi.', explanationRu: "know (глагол состояния) не бывает в Continuous." },
+              { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'I know (am knowing xato!).', explanationRu: "I know (am knowing — ошибка!)." },
             ],
           },
           {
@@ -3896,8 +3896,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you understand? She likes chocolate.',
             },
             exercises: [
-              { text: 'She ___ a cup of tea now.', options: ['wants', 'is wanting'], correct: 0, explanation: 'want -> Present Simple (wants).' },
-              { text: 'Do you ___ me?', options: ['understand', 'understanding'], correct: 0, explanation: 'Do you understand?' },
+              { text: 'She ___ a cup of tea now.', options: ['wants', 'is wanting'], correct: 0, explanation: 'want -> Present Simple (wants).', explanationRu: "want -> Present Simple (wants)." },
+              { text: 'Do you ___ me?', options: ['understand', 'understanding'], correct: 0, explanation: 'Do you understand?', explanationRu: "Do you understand?" },
             ],
           },
           {
@@ -3909,8 +3909,8 @@ export const grammarPathSections = [
               exampleRu: 'I love this song! I remember his name.',
             },
             exercises: [
-              { text: 'I ___ this movie!', options: ['love', 'am loving'], correct: 0, explanation: 'I love.' },
-              { text: 'He ___ his phone number.', options: ['remembers', 'is remembering'], correct: 0, explanation: 'He remembers.' },
+              { text: 'I ___ this movie!', options: ['love', 'am loving'], correct: 0, explanation: 'I love.', explanationRu: "I love." },
+              { text: 'He ___ his phone number.', options: ['remembers', 'is remembering'], correct: 0, explanation: 'He remembers.', explanationRu: "He remembers." },
             ],
           },
           {
@@ -3922,8 +3922,8 @@ export const grammarPathSections = [
               exampleRu: 'I think it is good vs I am thinking about holiday.',
             },
             exercises: [
-              { text: 'I ___ he is a great doctor.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr bildirish -> think.' },
-              { text: 'Be quiet! I ___ about a problem.', options: ['am thinking', 'think'], correct: 0, explanation: 'Hozirgi fikrlash jarayoni -> am thinking.' },
+              { text: 'I ___ he is a great doctor.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr bildirish -> think.', explanationRu: "Выражение мнения -> think." },
+              { text: 'Be quiet! I ___ about a problem.', options: ['am thinking', 'think'], correct: 0, explanation: 'Hozirgi fikrlash jarayoni -> am thinking.', explanationRu: "Текущий процесс размышления -> am thinking." },
             ],
           },
           {
@@ -3935,9 +3935,9 @@ export const grammarPathSections = [
               exampleRu: 'I am eating pizza and I love it.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I need help right now.', 'I am needing help right now.'], correct: 0, explanation: 'need -> Present Simple (I need).' },
-              { text: 'Choose the correct sentence:', options: ['She is reading a book and she likes it.', 'She is reading a book and she is liking it.'], correct: 0, explanation: 'likes it.' },
-              { text: 'Select the correct sentence:', options: ['Do you know the answer?', 'Are you knowing the answer?'], correct: 0, explanation: 'Do you know...?' },
+              { text: 'Choose the correct sentence:', options: ['I need help right now.', 'I am needing help right now.'], correct: 0, explanation: 'need -> Present Simple (I need).', explanationRu: "need -> Present Simple (I need)." },
+              { text: 'Choose the correct sentence:', options: ['She is reading a book and she likes it.', 'She is reading a book and she is liking it.'], correct: 0, explanation: 'likes it.', explanationRu: "likes it." },
+              { text: 'Select the correct sentence:', options: ['Do you know the answer?', 'Are you knowing the answer?'], correct: 0, explanation: 'Do you know...?', explanationRu: "Do you know...?" },
             ],
           },
         ],
@@ -3947,21 +3947,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Present Continuous Zamoni",
       titleRu: 'Тест раздела: Настоящее длительное время (Present Continuous)',
       exercises: [
-        { text: 'I ___ reading a newspaper right now.', options: ['am', 'is', 'are'], correct: 0, explanation: 'I + am.' },
-        { text: 'She ___ sleeping at the moment.', options: ['is', 'are', 'am'], correct: 0, explanation: 'She + is.' },
-        { text: 'They ___ playing football in the yard.', options: ['are', 'is', 'am'], correct: 0, explanation: 'They + are.' },
-        { text: 'Look! The bus ___ .', options: ['is coming', 'comes', 'come'], correct: 0, explanation: 'Look! -> is coming.' },
-        { text: 'Choose the correct -ing form of "write":', options: ['writing', 'writeing'], correct: 0, explanation: 'write -> writing.' },
-        { text: 'Choose the correct -ing form of "run":', options: ['running', 'runing'], correct: 0, explanation: 'run -> running.' },
-        { text: 'Choose the correct -ing form of "lie":', options: ['lying', 'lieing'], correct: 0, explanation: 'lie -> lying.' },
-        { text: 'He ___ working today. He is ill.', options: ["isn't", "aren't", "don't"], correct: 0, explanation: 'He + isn\'t.' },
-        { text: 'We ___ watching TV now.', options: ["aren't", "isn't", "don't"], correct: 0, explanation: 'We + aren\'t.' },
-        { text: '___ you listening to music right now?', options: ['Are', 'Is', 'Do'], correct: 0, explanation: 'Are you listening...?' },
-        { text: 'Is Tom playing games? — Yes, he ___ .', options: ['is', 'does', 'am'], correct: 0, explanation: 'Yes, he is.' },
-        { text: 'What ___ she doing at the moment?', options: ['is', 'are', 'does'], correct: 0, explanation: 'What is she doing?' },
-        { text: 'I usually ___ coffee, but today I ___ tea.', options: ['drink / am drinking', 'am drinking / drink'], correct: 0, explanation: 'usually drink / today am drinking.' },
-        { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'know -> Stative Verb (Present Simple).' },
-        { text: 'Choose the correct sentence:', options: ['She is reading and she likes the book.', 'She is reading and she is liking the book.'], correct: 0, explanation: 'likes (Stative verb).' },
+        { text: 'I ___ reading a newspaper right now.', options: ['am', 'is', 'are'], correct: 0, explanation: 'I + am.', explanationRu: "I + am." },
+        { text: 'She ___ sleeping at the moment.', options: ['is', 'are', 'am'], correct: 0, explanation: 'She + is.', explanationRu: "She + is." },
+        { text: 'They ___ playing football in the yard.', options: ['are', 'is', 'am'], correct: 0, explanation: 'They + are.', explanationRu: "They + are." },
+        { text: 'Look! The bus ___ .', options: ['is coming', 'comes', 'come'], correct: 0, explanation: 'Look! -> is coming.', explanationRu: "Look! -> is coming." },
+        { text: 'Choose the correct -ing form of "write":', options: ['writing', 'writeing'], correct: 0, explanation: 'write -> writing.', explanationRu: "write -> writing." },
+        { text: 'Choose the correct -ing form of "run":', options: ['running', 'runing'], correct: 0, explanation: 'run -> running.', explanationRu: "run -> running." },
+        { text: 'Choose the correct -ing form of "lie":', options: ['lying', 'lieing'], correct: 0, explanation: 'lie -> lying.', explanationRu: "lie -> lying." },
+        { text: 'He ___ working today. He is ill.', options: ["isn't", "aren't", "don't"], correct: 0, explanation: 'He + isn\'t.', explanationRu: "He + isn't." },
+        { text: 'We ___ watching TV now.', options: ["aren't", "isn't", "don't"], correct: 0, explanation: 'We + aren\'t.', explanationRu: "We + aren't." },
+        { text: '___ you listening to music right now?', options: ['Are', 'Is', 'Do'], correct: 0, explanation: 'Are you listening...?', explanationRu: "Are you listening...?" },
+        { text: 'Is Tom playing games? — Yes, he ___ .', options: ['is', 'does', 'am'], correct: 0, explanation: 'Yes, he is.', explanationRu: "Yes, he is." },
+        { text: 'What ___ she doing at the moment?', options: ['is', 'are', 'does'], correct: 0, explanation: 'What is she doing?', explanationRu: "What is she doing?" },
+        { text: 'I usually ___ coffee, but today I ___ tea.', options: ['drink / am drinking', 'am drinking / drink'], correct: 0, explanation: 'usually drink / today am drinking.', explanationRu: "usually drink / today am drinking." },
+        { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'know -> Stative Verb (Present Simple).', explanationRu: "know -> глагол состояния (Present Simple)." },
+        { text: 'Choose the correct sentence:', options: ['She is reading and she likes the book.', 'She is reading and she is liking the book.'], correct: 0, explanation: 'likes (Stative verb).', explanationRu: "likes (глагол состояния)." },
       ],
     },
   },
@@ -3988,8 +3988,8 @@ export const grammarPathSections = [
               exampleRu: 'I drink coffee every morning vs I am drinking tea now.',
             },
             exercises: [
-              { text: 'Har kuni takrorlanadigan odat uchun qaysi zamon ishlatiladi?', options: ['Present Simple', 'Present Continuous'], correct: 0, explanation: 'Odatlar va kun tartibi -> Present Simple.' },
-              { text: 'I usually ___ at 7 AM, but today I ___ at 8 AM.', options: ['wake up / am waking up', 'am waking up / wake up'], correct: 0, explanation: 'usually wake up (PS) / today am waking up (PC).' },
+              { text: 'Har kuni takrorlanadigan odat uchun qaysi zamon ishlatiladi?', textRu: "Какое время используется для повторяющихся повседневных действий?", options: ['Present Simple', 'Present Continuous'], correct: 0, explanation: 'Odatlar va kun tartibi -> Present Simple.', explanationRu: "Привычки и распорядок дня -> Present Simple." },
+              { text: 'I usually ___ at 7 AM, but today I ___ at 8 AM.', options: ['wake up / am waking up', 'am waking up / wake up'], correct: 0, explanation: 'usually wake up (PS) / today am waking up (PC).', explanationRu: "usually wake up (PS) / today am waking up (PC)." },
             ],
           },
           {
@@ -4001,8 +4001,8 @@ export const grammarPathSections = [
               exampleRu: 'He works in a bank vs He is working now.',
             },
             exercises: [
-              { text: 'She ___ English books every week.', options: ['reads', 'is reading'], correct: 0, explanation: 'every week (odat) -> reads.' },
-              { text: 'She ___ an English book right now.', options: ['is reading', 'reads'], correct: 0, explanation: 'right now (hozir) -> is reading.' },
+              { text: 'She ___ English books every week.', options: ['reads', 'is reading'], correct: 0, explanation: 'every week (odat) -> reads.', explanationRu: "every week (привычка) -> reads." },
+              { text: 'She ___ an English book right now.', options: ['is reading', 'reads'], correct: 0, explanation: 'right now (hozir) -> is reading.', explanationRu: "right now (сейчас) -> is reading." },
             ],
           },
           {
@@ -4014,8 +4014,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you play tennis? vs Are you playing tennis now?',
             },
             exercises: [
-              { text: '— ___ you speak French? — Yes, I do.', options: ['Do', 'Are'], correct: 0, explanation: 'Umumiy savol -> Do you speak...?' },
-              { text: '— ___ you speaking French to Alex right now? — Yes, I am.', options: ['Are', 'Do'], correct: 0, explanation: 'right now -> Are you speaking...?' },
+              { text: '— ___ you speak French? — Yes, I do.', options: ['Do', 'Are'], correct: 0, explanation: 'Umumiy savol -> Do you speak...?', explanationRu: "Общий вопрос -> Do you speak...?" },
+              { text: '— ___ you speaking French to Alex right now? — Yes, I am.', options: ['Are', 'Do'], correct: 0, explanation: 'right now -> Are you speaking...?', explanationRu: "right now -> Are you speaking...?" },
             ],
           },
           {
@@ -4027,8 +4027,8 @@ export const grammarPathSections = [
               exampleRu: 'I don\'t eat meat vs I\'m not eating meat today.',
             },
             exercises: [
-              { text: 'He ___ watch TV on weekdays.', options: ["doesn't", "isn't"], correct: 0, explanation: 'on weekdays (odat) -> doesn\'t watch.' },
-              { text: 'He ___ watching TV now. He is asleep.', options: ["isn't", "doesn't"], correct: 0, explanation: 'now (hozir) -> isn\'t watching.' },
+              { text: 'He ___ watch TV on weekdays.', options: ["doesn't", "isn't"], correct: 0, explanation: 'on weekdays (odat) -> doesn\'t watch.', explanationRu: "on weekdays (привычка) -> doesn't watch." },
+              { text: 'He ___ watching TV now. He is asleep.', options: ["isn't", "doesn't"], correct: 0, explanation: 'now (hozir) -> isn\'t watching.', explanationRu: "now (сейчас) -> isn't watching." },
             ],
           },
           {
@@ -4040,9 +4040,9 @@ export const grammarPathSections = [
               exampleRu: 'They live in Tashkent, but they are visiting Samarkand.',
             },
             exercises: [
-              { text: 'Tom ___ to school by bus every day.', options: ['goes', 'is going'], correct: 0, explanation: 'every day -> goes.' },
-              { text: 'Listen! Tom ___ the piano in the room.', options: ['is playing', 'plays'], correct: 0, explanation: 'Listen! -> is playing.' },
-              { text: 'Choose the correct sentence:', options: ['I work every day, but now I am sleeping.', 'I am working every day, but now I sleep.'], correct: 0, explanation: 'work every day / am sleeping now.' },
+              { text: 'Tom ___ to school by bus every day.', options: ['goes', 'is going'], correct: 0, explanation: 'every day -> goes.', explanationRu: "every day -> goes." },
+              { text: 'Listen! Tom ___ the piano in the room.', options: ['is playing', 'plays'], correct: 0, explanation: 'Listen! -> is playing.', explanationRu: "Listen! -> is playing." },
+              { text: 'Choose the correct sentence:', options: ['I work every day, but now I am sleeping.', 'I am working every day, but now I sleep.'], correct: 0, explanation: 'work every day / am sleeping now.', explanationRu: "work every day / am sleeping now." },
             ],
           },
         ],
@@ -4063,8 +4063,8 @@ export const grammarPathSections = [
               exampleRu: 'My mother works as a doctor vs She is working on a new project this month.',
             },
             exercises: [
-              { text: 'Vaqtinchalik (this week, these days) holatlar uchun qaysi zamon ishlatiladi?', options: ['Present Continuous', 'Present Simple'], correct: 0, explanation: 'Vaqtinchalik vaziyatlar -> Present Continuous.' },
-              { text: 'Where do you live? — I ___ in Tashkent.', options: ['live', 'am living'], correct: 0, explanation: 'Doimiy yashash joyi -> live.' },
+              { text: 'Vaqtinchalik (this week, these days) holatlar uchun qaysi zamon ishlatiladi?', textRu: "Какое время используется для временных ситуаций (this week, these days)?", options: ['Present Continuous', 'Present Simple'], correct: 0, explanation: 'Vaqtinchalik vaziyatlar -> Present Continuous.', explanationRu: "Временные ситуации -> Present Continuous." },
+              { text: 'Where do you live? — I ___ in Tashkent.', options: ['live', 'am living'], correct: 0, explanation: 'Doimiy yashash joyi -> live.', explanationRu: "Постоянное место жительства -> live." },
             ],
           },
           {
@@ -4076,8 +4076,8 @@ export const grammarPathSections = [
               exampleRu: 'He is living with his friends this month.',
             },
             exercises: [
-              { text: 'She ___ a French course this month.', options: ['is taking', 'takes'], correct: 0, explanation: 'this month (vaqtinchalik) -> is taking.' },
-              { text: 'My dad ___ a lot of hours this week.', options: ['is working', 'works'], correct: 0, explanation: 'this week -> is working.' },
+              { text: 'She ___ a French course this month.', options: ['is taking', 'takes'], correct: 0, explanation: 'this month (vaqtinchalik) -> is taking.', explanationRu: "this month (временно) -> is taking." },
+              { text: 'My dad ___ a lot of hours this week.', options: ['is working', 'works'], correct: 0, explanation: 'this week -> is working.', explanationRu: "this week -> is working." },
             ],
           },
           {
@@ -4089,8 +4089,8 @@ export const grammarPathSections = [
               exampleRu: 'The weather is getting colder. Your English is improving.',
             },
             exercises: [
-              { text: 'Your English ___ better and better!', options: ['is getting', 'gets'], correct: 0, explanation: 'O\'zgarib borayotgan jarayon -> is getting.' },
-              { text: 'The city ___ very fast.', options: ['is growing', 'grows'], correct: 0, explanation: 'Rivojlanayotgan jarayon -> is growing.' },
+              { text: 'Your English ___ better and better!', options: ['is getting', 'gets'], correct: 0, explanation: 'O\'zgarib borayotgan jarayon -> is getting.', explanationRu: "Меняющийся процесс -> is getting." },
+              { text: 'The city ___ very fast.', options: ['is growing', 'grows'], correct: 0, explanation: 'Rivojlanayotgan jarayon -> is growing.', explanationRu: "Развивающийся процесс -> is growing." },
             ],
           },
           {
@@ -4102,8 +4102,8 @@ export const grammarPathSections = [
               exampleRu: 'He usually drives a car, but this week he is riding a bike.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I live in Tashkent, but I am staying in Samarkand this week.', 'I am living in Tashkent, but I stay in Samarkand this week.'], correct: 0, explanation: 'live in Tashkent (permanent) / staying this week (temporary).' },
-              { text: 'Choose the correct sentence:', options: ['She usually eats at home, but today she is eating at a restaurant.', 'She is usually eating at home, but today she eats at a restaurant.'], correct: 0, explanation: 'usually eats / today is eating.' },
+              { text: 'Choose the correct sentence:', options: ['I live in Tashkent, but I am staying in Samarkand this week.', 'I am living in Tashkent, but I stay in Samarkand this week.'], correct: 0, explanation: 'live in Tashkent (permanent) / staying this week (temporary).', explanationRu: "live in Tashkent (постоянно) / staying this week (временно)." },
+              { text: 'Choose the correct sentence:', options: ['She usually eats at home, but today she is eating at a restaurant.', 'She is usually eating at home, but today she eats at a restaurant.'], correct: 0, explanation: 'usually eats / today is eating.', explanationRu: "usually eats / today is eating." },
             ],
           },
           {
@@ -4115,9 +4115,9 @@ export const grammarPathSections = [
               exampleRu: 'I work at a school, but today I am resting at home.',
             },
             exercises: [
-              { text: 'The climate ___ warmer every year.', options: ['is becoming', 'becomes'], correct: 0, explanation: 'O\'zgarayotgan jarayon -> is becoming.' },
-              { text: 'They ___ in London permanently.', options: ['live', 'are living'], correct: 0, explanation: 'Permanently -> live.' },
-              { text: 'Select the correct sentence:', options: ['He is taking driving lessons this month.', 'He takes driving lessons this month.'], correct: 0, explanation: 'this month -> is taking.' },
+              { text: 'The climate ___ warmer every year.', options: ['is becoming', 'becomes'], correct: 0, explanation: 'O\'zgarayotgan jarayon -> is becoming.', explanationRu: "Меняющийся процесс -> is becoming." },
+              { text: 'They ___ in London permanently.', options: ['live', 'are living'], correct: 0, explanation: 'Permanently -> live.', explanationRu: "Постоянно -> live." },
+              { text: 'Select the correct sentence:', options: ['He is taking driving lessons this month.', 'He takes driving lessons this month.'], correct: 0, explanation: 'this month -> is taking.', explanationRu: "this month -> is taking." },
             ],
           },
         ],
@@ -4138,8 +4138,8 @@ export const grammarPathSections = [
               exampleRu: 'I always do homework vs Look! She is doing homework.',
             },
             exercises: [
-              { text: '"Look!" kalit so\'zidan so\'ng qaysi zamon keladi?', options: ['Present Continuous', 'Present Simple'], correct: 0, explanation: 'Look! -> Present Continuous.' },
-              { text: '"usually" kalit so\'zi qaysi zamonga xos?', options: ['Present Simple', 'Present Continuous'], correct: 0, explanation: 'usually -> Present Simple.' },
+              { text: '"Look!" kalit so\'zidan so\'ng qaysi zamon keladi?', textRu: "Какое время используется после ключевого слова \"Look!\"?", options: ['Present Continuous', 'Present Simple'], correct: 0, explanation: 'Look! -> Present Continuous.', explanationRu: "Look! -> Present Continuous." },
+              { text: '"usually" kalit so\'zi qaysi zamonga xos?', textRu: "Для какого времени характерно ключевое слово \"usually\"?", options: ['Present Simple', 'Present Continuous'], correct: 0, explanation: 'usually -> Present Simple.', explanationRu: "usually -> Present Simple." },
             ],
           },
           {
@@ -4151,8 +4151,8 @@ export const grammarPathSections = [
               exampleRu: 'He often plays chess on Sundays. We never eat fast food.',
             },
             exercises: [
-              { text: 'She ___ comes late. (hech qachon)', options: ['never', 'now'], correct: 0, explanation: 'never comes.' },
-              { text: 'We go to the park ___ .', options: ['every weekend', 'right now'], correct: 0, explanation: 'go (Simple) -> every weekend.' },
+              { text: 'She ___ comes late. (hech qachon)', options: ['never', 'now'], correct: 0, explanation: 'never comes.', explanationRu: "never comes." },
+              { text: 'We go to the park ___ .', options: ['every weekend', 'right now'], correct: 0, explanation: 'go (Simple) -> every weekend.', explanationRu: "go (Simple) -> every weekend." },
             ],
           },
           {
@@ -4164,8 +4164,8 @@ export const grammarPathSections = [
               exampleRu: 'Listen! The phone is ringing. I am working at the moment.',
             },
             exercises: [
-              { text: 'Listen! Someone ___ at the door.', options: ['is knocking', 'knocks'], correct: 0, explanation: 'Listen! -> is knocking.' },
-              { text: 'What are you reading ___ ?', options: ['right now', 'every day'], correct: 0, explanation: 'are you reading -> right now.' },
+              { text: 'Listen! Someone ___ at the door.', options: ['is knocking', 'knocks'], correct: 0, explanation: 'Listen! -> is knocking.', explanationRu: "Listen! -> is knocking." },
+              { text: 'What are you reading ___ ?', options: ['right now', 'every day'], correct: 0, explanation: 'are you reading -> right now.', explanationRu: "are you reading -> right now." },
             ],
           },
           {
@@ -4177,8 +4177,8 @@ export const grammarPathSections = [
               exampleRu: 'I study English every day. I am studying right now.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['He always drinks tea in the morning.', 'He is always drinking tea in the morning.'], correct: 0, explanation: 'always in the morning -> drinks.' },
-              { text: 'Choose the correct sentence:', options: ['Look! The cat is jumping on the sofa.', 'Look! The cat jumps on the sofa.'], correct: 0, explanation: 'Look! -> is jumping.' },
+              { text: 'Choose the correct sentence:', options: ['He always drinks tea in the morning.', 'He is always drinking tea in the morning.'], correct: 0, explanation: 'always in the morning -> drinks.', explanationRu: "always in the morning -> drinks." },
+              { text: 'Choose the correct sentence:', options: ['Look! The cat is jumping on the sofa.', 'Look! The cat jumps on the sofa.'], correct: 0, explanation: 'Look! -> is jumping.', explanationRu: "Look! -> is jumping." },
             ],
           },
           {
@@ -4190,9 +4190,9 @@ export const grammarPathSections = [
               exampleRu: 'They usually play football, but today they are playing basketball.',
             },
             exercises: [
-              { text: 'Anna ___ her grandma every Sunday.', options: ['visits', 'is visiting'], correct: 0, explanation: 'every Sunday -> visits.' },
-              { text: 'Anna ___ her grandma at the moment.', options: ['is visiting', 'visits'], correct: 0, explanation: 'at the moment -> is visiting.' },
-              { text: 'Select the correct sentence:', options: ['Listen! The teacher is speaking.', 'Listen! The teacher speaks.'], correct: 0, explanation: 'Listen! -> is speaking.' },
+              { text: 'Anna ___ her grandma every Sunday.', options: ['visits', 'is visiting'], correct: 0, explanation: 'every Sunday -> visits.', explanationRu: "every Sunday -> visits." },
+              { text: 'Anna ___ her grandma at the moment.', options: ['is visiting', 'visits'], correct: 0, explanation: 'at the moment -> is visiting.', explanationRu: "at the moment -> is visiting." },
+              { text: 'Select the correct sentence:', options: ['Listen! The teacher is speaking.', 'Listen! The teacher speaks.'], correct: 0, explanation: 'Listen! -> is speaking.', explanationRu: "Listen! -> is speaking." },
             ],
           },
         ],
@@ -4213,8 +4213,8 @@ export const grammarPathSections = [
               exampleRu: 'I understand you now. She wants tea now.',
             },
             exercises: [
-              { text: 'I ___ what you mean right now.', options: ['understand', 'am understanding'], correct: 0, explanation: 'understand -> Stative Verb (Simple).' },
-              { text: 'She ___ a cup of coffee right now.', options: ['wants', 'is wanting'], correct: 0, explanation: 'want -> Stative Verb (Simple).' },
+              { text: 'I ___ what you mean right now.', options: ['understand', 'am understanding'], correct: 0, explanation: 'understand -> Stative Verb (Simple).', explanationRu: "understand -> глагол состояния (Simple)." },
+              { text: 'She ___ a cup of coffee right now.', options: ['wants', 'is wanting'], correct: 0, explanation: 'want -> Stative Verb (Simple).', explanationRu: "want -> глагол состояния (Simple)." },
             ],
           },
           {
@@ -4226,8 +4226,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you believe him? I remember your name.',
             },
             exercises: [
-              { text: 'Do you ___ him?', options: ['believe', 'believing'], correct: 0, explanation: 'Do you believe?' },
-              { text: 'He ___ help right now.', options: ['needs', 'is needing'], correct: 0, explanation: 'need -> Present Simple (needs).' },
+              { text: 'Do you ___ him?', options: ['believe', 'believing'], correct: 0, explanation: 'Do you believe?', explanationRu: "Do you believe?" },
+              { text: 'He ___ help right now.', options: ['needs', 'is needing'], correct: 0, explanation: 'need -> Present Simple (needs).', explanationRu: "need -> Present Simple (needs)." },
             ],
           },
           {
@@ -4239,8 +4239,8 @@ export const grammarPathSections = [
               exampleRu: 'I hear a strange noise. This soup tastes delicious.',
             },
             exercises: [
-              { text: 'I ___ a noise outside right now.', options: ['hear', 'am hearing'], correct: 0, explanation: 'hear -> Present Simple.' },
-              { text: 'This coffee ___ great.', options: ['tastes', 'is tasting'], correct: 0, explanation: 'taste -> Present Simple.' },
+              { text: 'I ___ a noise outside right now.', options: ['hear', 'am hearing'], correct: 0, explanation: 'hear -> Present Simple.', explanationRu: "hear -> Present Simple." },
+              { text: 'This coffee ___ great.', options: ['tastes', 'is tasting'], correct: 0, explanation: 'taste -> Present Simple.', explanationRu: "taste -> Present Simple." },
             ],
           },
           {
@@ -4252,8 +4252,8 @@ export const grammarPathSections = [
               exampleRu: 'I am eating pizza vs I like pizza.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I know the answer right now.', 'I am knowing the answer right now.'], correct: 0, explanation: 'know -> Present Simple.' },
-              { text: 'Choose the correct sentence:', options: ['She is drinking water because she likes it.', 'She is drinking water because she is liking it.'], correct: 0, explanation: 'likes it (Stative).' },
+              { text: 'Choose the correct sentence:', options: ['I know the answer right now.', 'I am knowing the answer right now.'], correct: 0, explanation: 'know -> Present Simple.', explanationRu: "know -> Present Simple." },
+              { text: 'Choose the correct sentence:', options: ['She is drinking water because she likes it.', 'She is drinking water because she is liking it.'], correct: 0, explanation: 'likes it (Stative).', explanationRu: "likes it (глагол состояния)." },
             ],
           },
           {
@@ -4265,9 +4265,9 @@ export const grammarPathSections = [
               exampleRu: 'I am studying now and I understand everything.',
             },
             exercises: [
-              { text: 'I ___ you are right.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr -> think.' },
-              { text: 'She ___ two sisters.', options: ['has', 'is having'], correct: 0, explanation: 'Egalik -> has.' },
-              { text: 'Select the correct sentence:', options: ['Do you remember my phone number?', 'Are you remembering my phone number?'], correct: 0, explanation: 'remember -> Simple.' },
+              { text: 'I ___ you are right.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr -> think.', explanationRu: "Мнение -> think." },
+              { text: 'She ___ two sisters.', options: ['has', 'is having'], correct: 0, explanation: 'Egalik -> has.', explanationRu: "Принадлежность -> has." },
+              { text: 'Select the correct sentence:', options: ['Do you remember my phone number?', 'Are you remembering my phone number?'], correct: 0, explanation: 'remember -> Simple.', explanationRu: "remember -> Simple." },
             ],
           },
         ],
@@ -4288,8 +4288,8 @@ export const grammarPathSections = [
               exampleRu: 'I think he is nice vs I am thinking about the exam.',
             },
             exercises: [
-              { text: 'I ___ he is right. (fikrimcha)', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr bildirish -> think.' },
-              { text: 'Quiet! I ___ about a difficult question.', options: ['am thinking', 'think'], correct: 0, explanation: 'Jarayon/O\'ylash -> am thinking.' },
+              { text: 'I ___ he is right. (fikrimcha)', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr bildirish -> think.', explanationRu: "Выражение мнения -> think." },
+              { text: 'Quiet! I ___ about a difficult question.', options: ['am thinking', 'think'], correct: 0, explanation: 'Jarayon/O\'ylash -> am thinking.', explanationRu: "Процесс размышления -> am thinking." },
             ],
           },
           {
@@ -4301,8 +4301,8 @@ export const grammarPathSections = [
               exampleRu: 'She has a big house vs She is having a shower now.',
             },
             exercises: [
-              { text: 'Tom ___ a nice bicycle.', options: ['has', 'is having'], correct: 0, explanation: 'Egalik -> has.' },
-              { text: 'Look! They ___ lunch in the kitchen.', options: ['are having', 'have'], correct: 0, explanation: 'Tushlik qilish (harakat) -> are having.' },
+              { text: 'Tom ___ a nice bicycle.', options: ['has', 'is having'], correct: 0, explanation: 'Egalik -> has.', explanationRu: "Принадлежность -> has." },
+              { text: 'Look! They ___ lunch in the kitchen.', options: ['are having', 'have'], correct: 0, explanation: 'Tushlik qilish (harakat) -> are having.', explanationRu: "Обед (действие) -> are having." },
             ],
           },
           {
@@ -4314,8 +4314,8 @@ export const grammarPathSections = [
               exampleRu: 'I see what you mean vs I am seeing my boss today.',
             },
             exercises: [
-              { text: 'I ___ a bird in the tree right now.', options: ['see', 'am seeing'], correct: 0, explanation: 'Ko\'rish sezgisi -> see.' },
-              { text: 'She ___ her dentist tomorrow afternoon.', options: ['is seeing', 'sees'], correct: 0, explanation: 'Uchrashuv rejasi -> is seeing.' },
+              { text: 'I ___ a bird in the tree right now.', options: ['see', 'am seeing'], correct: 0, explanation: 'Ko\'rish sezgisi -> see.', explanationRu: "Зрительное восприятие -> see." },
+              { text: 'She ___ her dentist tomorrow afternoon.', options: ['is seeing', 'sees'], correct: 0, explanation: 'Uchrashuv rejasi -> is seeing.', explanationRu: "Планируемая встреча -> is seeing." },
             ],
           },
           {
@@ -4327,8 +4327,8 @@ export const grammarPathSections = [
               exampleRu: 'This flower smells nice vs She is smelling the rose.',
             },
             exercises: [
-              { text: 'This cake ___ delicious!', options: ['tastes', 'is tasting'], correct: 0, explanation: 'Maza xususiyati -> tastes.' },
-              { text: 'Look! The cook ___ the sauce.', options: ['is tasting', 'tastes'], correct: 0, explanation: 'Tatib ko\'rish harakati -> is tasting.' },
+              { text: 'This cake ___ delicious!', options: ['tastes', 'is tasting'], correct: 0, explanation: 'Maza xususiyati -> tastes.', explanationRu: "Вкусовое свойство -> tastes." },
+              { text: 'Look! The cook ___ the sauce.', options: ['is tasting', 'tastes'], correct: 0, explanation: 'Tatib ko\'rish harakati -> is tasting.', explanationRu: "Процесс пробования на вкус -> is tasting." },
             ],
           },
           {
@@ -4340,9 +4340,9 @@ export const grammarPathSections = [
               exampleRu: 'I have a car and I am having a great time.',
             },
             exercises: [
-              { text: 'I ___ a great time at the party right now!', options: ['am having', 'have'], correct: 0, explanation: 'Vaqt o\'tkazish harakati -> am having.' },
-              { text: 'Do you ___ a pen?', options: ['have', 'having'], correct: 0, explanation: 'Egalik -> have.' },
-              { text: 'Select the correct sentence:', options: ['I think she is friendly.', 'I am thinking she is friendly.'], correct: 0, explanation: 'Fikr -> think.' },
+              { text: 'I ___ a great time at the party right now!', options: ['am having', 'have'], correct: 0, explanation: 'Vaqt o\'tkazish harakati -> am having.', explanationRu: "Процесс времяпрепровождения -> am having." },
+              { text: 'Do you ___ a pen?', options: ['have', 'having'], correct: 0, explanation: 'Egalik -> have.', explanationRu: "Принадлежность -> have." },
+              { text: 'Select the correct sentence:', options: ['I think she is friendly.', 'I am thinking she is friendly.'], correct: 0, explanation: 'Fikr -> think.', explanationRu: "Мнение -> think." },
             ],
           },
         ],
@@ -4363,8 +4363,8 @@ export const grammarPathSections = [
               exampleRu: 'I know. She is working. He is playing now.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I know the answer.', 'I am knowing the answer.'], correct: 0, explanation: 'know -> Present Simple.' },
-              { text: 'Choose the correct sentence:', options: ['Look! He is running fast.', 'Look! He running fast.'], correct: 0, explanation: 'is running (is yordamchi fe\'li shart!).' },
+              { text: 'Choose the correct sentence:', options: ['I know the answer.', 'I am knowing the answer.'], correct: 0, explanation: 'know -> Present Simple.', explanationRu: "know -> Present Simple." },
+              { text: 'Choose the correct sentence:', options: ['Look! He is running fast.', 'Look! He running fast.'], correct: 0, explanation: 'is running (is yordamchi fe\'li shart!).', explanationRu: "is running (вспомогательный is обязателен!)." },
             ],
           },
           {
@@ -4376,8 +4376,8 @@ export const grammarPathSections = [
               exampleRu: '— What are you doing? — I am reading. — Do you read every day? — Yes, I do.',
             },
             exercises: [
-              { text: '— What ___ you doing? — I ___ my homework.', options: ['are / am doing', 'do / do'], correct: 0, explanation: 'Hozirgi mashg\'ulot -> are you doing / am doing.' },
-              { text: '— Where ___ your brother work? — He ___ in a bank.', options: ['does / works', 'is / working'], correct: 0, explanation: 'Doimiy ish joyi -> does / works.' },
+              { text: '— What ___ you doing? — I ___ my homework.', options: ['are / am doing', 'do / do'], correct: 0, explanation: 'Hozirgi mashg\'ulot -> are you doing / am doing.', explanationRu: "Текущее занятие -> are you doing / am doing." },
+              { text: '— Where ___ your brother work? — He ___ in a bank.', options: ['does / works', 'is / working'], correct: 0, explanation: 'Doimiy ish joyi -> does / works.', explanationRu: "Постоянное место работы -> does / works." },
             ],
           },
           {
@@ -4389,8 +4389,8 @@ export const grammarPathSections = [
               exampleRu: 'She usually plays tennis, but today she is playing golf.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I don\'t understand this rule.', 'I am not understanding this rule.'], correct: 0, explanation: 'understand -> Present Simple.' },
-              { text: 'Choose the correct sentence:', options: ['Listen! The birds are singing.', 'Listen! The birds sing.'], correct: 0, explanation: 'Listen! -> are singing.' },
+              { text: 'Choose the correct sentence:', options: ['I don\'t understand this rule.', 'I am not understanding this rule.'], correct: 0, explanation: 'understand -> Present Simple.', explanationRu: "understand -> Present Simple." },
+              { text: 'Choose the correct sentence:', options: ['Listen! The birds are singing.', 'Listen! The birds sing.'], correct: 0, explanation: 'Listen! -> are singing.', explanationRu: "Listen! -> are singing." },
             ],
           },
           {
@@ -4402,8 +4402,8 @@ export const grammarPathSections = [
               exampleRu: 'Mark is an engineer. He designs bridges. Currently, he is building a new tower.',
             },
             exercises: [
-              { text: 'Mark is a pilot. He ___ planes, but today he ___ at home.', options: ['flies / is resting', 'is flying / rests'], correct: 0, explanation: 'flies (kasb) / today is resting (hozir).' },
-              { text: 'Sarah ___ Spanish. She ___ a book right now.', options: ['speaks / is reading', 'is speaking / reads'], correct: 0, explanation: 'speaks (til bilish) / right now is reading.' },
+              { text: 'Mark is a pilot. He ___ planes, but today he ___ at home.', options: ['flies / is resting', 'is flying / rests'], correct: 0, explanation: 'flies (kasb) / today is resting (hozir).', explanationRu: "flies (профессия) / today is resting (сейчас)." },
+              { text: 'Sarah ___ Spanish. She ___ a book right now.', options: ['speaks / is reading', 'is speaking / reads'], correct: 0, explanation: 'speaks (til bilish) / right now is reading.', explanationRu: "speaks (знание языка) / right now is reading." },
             ],
           },
           {
@@ -4415,9 +4415,9 @@ export const grammarPathSections = [
               exampleRu: 'I live in Tashkent, I know English, and right now I am mastering grammar!',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She is a teacher and she is teaching now.', 'She is a teacher and she teaches now.'], correct: 0, explanation: 'teaches (kasb) / is teaching now.' },
-              { text: 'Choose the correct sentence:', options: ['I understand the lesson now.', 'I am understanding the lesson now.'], correct: 0, explanation: 'understand.' },
-              { text: 'Select the correct sentence:', options: ['They are playing football in the garden at the moment.', 'They play football in the garden at the moment.'], correct: 0, explanation: 'at the moment -> are playing.' },
+              { text: 'Choose the correct sentence:', options: ['She is a teacher and she is teaching now.', 'She is a teacher and she teaches now.'], correct: 0, explanation: 'teaches (kasb) / is teaching now.', explanationRu: "teaches (профессия) / is teaching now." },
+              { text: 'Choose the correct sentence:', options: ['I understand the lesson now.', 'I am understanding the lesson now.'], correct: 0, explanation: 'understand.', explanationRu: "understand." },
+              { text: 'Select the correct sentence:', options: ['They are playing football in the garden at the moment.', 'They play football in the garden at the moment.'], correct: 0, explanation: 'at the moment -> are playing.', explanationRu: "at the moment -> are playing." },
             ],
           },
         ],
@@ -4427,21 +4427,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Present Simple vs Present Continuous",
       titleRu: 'Тест раздела: Present Simple vs Present Continuous',
       exercises: [
-        { text: 'I usually ___ coffee in the morning.', options: ['drink', 'am drinking'], correct: 0, explanation: 'usually -> drink.' },
-        { text: 'Look! She ___ a red dress today.', options: ['is wearing', 'wears'], correct: 0, explanation: 'Look! -> is wearing.' },
-        { text: 'Where ___ you live?', options: ['do', 'are'], correct: 0, explanation: 'Doimiy yashash joyi -> do you live?' },
-        { text: 'What ___ you doing right now?', options: ['are', 'do'], correct: 0, explanation: 'right now -> are you doing?' },
-        { text: 'I ___ with my uncle this week.', options: ['am staying', 'stay'], correct: 0, explanation: 'this week (vaqtinchalik) -> am staying.' },
-        { text: 'The weather ___ warmer these days.', options: ['is getting', 'gets'], correct: 0, explanation: 'O\'zgarayotgan jarayon -> is getting.' },
-        { text: 'He ___ drinks alcohol. (hech qachon)', options: ['never', 'now'], correct: 0, explanation: 'never drinks.' },
-        { text: 'Listen! Somebody ___ at the door.', options: ['is knocking', 'knocks'], correct: 0, explanation: 'Listen! -> is knocking.' },
-        { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'know -> Stative Verb (Present Simple).' },
-        { text: 'She ___ a new laptop today.', options: ['needs', 'is needing'], correct: 0, explanation: 'need -> Present Simple (needs).' },
-        { text: 'I ___ he is a smart guy.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr -> think.' },
-        { text: 'Look! They ___ lunch in the cafe.', options: ['are having', 'have'], correct: 0, explanation: 'Lanch qilish harakati -> are having.' },
-        { text: 'Choose the correct sentence:', options: ['I don\'t understand this question.', 'I am not understanding this question.'], correct: 0, explanation: 'understand.' },
-        { text: 'Choose the correct sentence:', options: ['He works every day, but today he is resting.', 'He is working every day, but today he rests.'], correct: 0, explanation: 'works every day / today is resting.' },
-        { text: 'Select the correct sentence:', options: ['Listen! The telephone is ringing.', 'Listen! The telephone rings.'], correct: 0, explanation: 'Listen! -> is ringing.' },
+        { text: 'I usually ___ coffee in the morning.', options: ['drink', 'am drinking'], correct: 0, explanation: 'usually -> drink.', explanationRu: "usually -> drink." },
+        { text: 'Look! She ___ a red dress today.', options: ['is wearing', 'wears'], correct: 0, explanation: 'Look! -> is wearing.', explanationRu: "Look! -> is wearing." },
+        { text: 'Where ___ you live?', options: ['do', 'are'], correct: 0, explanation: 'Doimiy yashash joyi -> do you live?', explanationRu: "Постоянное место жительства -> do you live?" },
+        { text: 'What ___ you doing right now?', options: ['are', 'do'], correct: 0, explanation: 'right now -> are you doing?', explanationRu: "right now -> are you doing?" },
+        { text: 'I ___ with my uncle this week.', options: ['am staying', 'stay'], correct: 0, explanation: 'this week (vaqtinchalik) -> am staying.', explanationRu: "this week (временно) -> am staying." },
+        { text: 'The weather ___ warmer these days.', options: ['is getting', 'gets'], correct: 0, explanation: 'O\'zgarayotgan jarayon -> is getting.', explanationRu: "Меняющийся процесс -> is getting." },
+        { text: 'He ___ drinks alcohol. (hech qachon)', options: ['never', 'now'], correct: 0, explanation: 'never drinks.', explanationRu: "never drinks." },
+        { text: 'Listen! Somebody ___ at the door.', options: ['is knocking', 'knocks'], correct: 0, explanation: 'Listen! -> is knocking.', explanationRu: "Listen! -> is knocking." },
+        { text: 'I ___ the answer right now.', options: ['know', 'am knowing'], correct: 0, explanation: 'know -> Stative Verb (Present Simple).', explanationRu: "know -> глагол состояния (Present Simple)." },
+        { text: 'She ___ a new laptop today.', options: ['needs', 'is needing'], correct: 0, explanation: 'need -> Present Simple (needs).', explanationRu: "need -> Present Simple (needs)." },
+        { text: 'I ___ he is a smart guy.', options: ['think', 'am thinking'], correct: 0, explanation: 'Fikr -> think.', explanationRu: "Мнение -> think." },
+        { text: 'Look! They ___ lunch in the cafe.', options: ['are having', 'have'], correct: 0, explanation: 'Lanch qilish harakati -> are having.', explanationRu: "Действие обеда -> are having." },
+        { text: 'Choose the correct sentence:', options: ['I don\'t understand this question.', 'I am not understanding this question.'], correct: 0, explanation: 'understand.', explanationRu: "understand." },
+        { text: 'Choose the correct sentence:', options: ['He works every day, but today he is resting.', 'He is working every day, but today he rests.'], correct: 0, explanation: 'works every day / today is resting.', explanationRu: "works every day / today is resting." },
+        { text: 'Select the correct sentence:', options: ['Listen! The telephone is ringing.', 'Listen! The telephone rings.'], correct: 0, explanation: 'Listen! -> is ringing.', explanationRu: "Listen! -> is ringing." },
       ],
     },
   },
@@ -4468,8 +4468,8 @@ export const grammarPathSections = [
               exampleRu: 'I wake up at 7 o\'clock every morning. (Я просыпаюсь в 7 часов каждое утро.)',
             },
             exercises: [
-              { text: 'The lesson starts ___ 9:00 AM.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Aniq soat vaqti bilan "at" ishlatiladi.' },
-              { text: 'I usually eat lunch ___ 1 o\'clock.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Soat ko\'rsatilganda -> at 1 o\'clock.' },
+              { text: 'The lesson starts ___ 9:00 AM.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Aniq soat vaqti bilan "at" ishlatiladi.', explanationRu: "С точным временем на часах используется \"at\"." },
+              { text: 'I usually eat lunch ___ 1 o\'clock.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Soat ko\'rsatilganda -> at 1 o\'clock.', explanationRu: "Когда указан час -> at 1 o'clock." },
             ],
           },
           {
@@ -4481,8 +4481,8 @@ export const grammarPathSections = [
               exampleRu: 'Stars shine at night. (Звёзды светят ночью.)',
             },
             exercises: [
-              { text: 'I like to read books ___ night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at night (tunda).' },
-              { text: 'He is busy ___ the moment.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the moment (ayni damda).' },
+              { text: 'I like to read books ___ night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at night (tunda).', explanationRu: "at night (ночью)." },
+              { text: 'He is busy ___ the moment.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the moment (ayni damda).', explanationRu: "at the moment (в данный момент)." },
             ],
           },
           {
@@ -4494,8 +4494,8 @@ export const grammarPathSections = [
               exampleRu: 'We visit our grandparents at the weekend.',
             },
             exercises: [
-              { text: 'What do you usually do ___ the weekend?', options: ['at', 'in', 'to'], correct: 0, explanation: 'at the weekend.' },
-              { text: 'We give presents ___ Christmas.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Bayram davri -> at Christmas.' },
+              { text: 'What do you usually do ___ the weekend?', options: ['at', 'in', 'to'], correct: 0, explanation: 'at the weekend.', explanationRu: "at the weekend." },
+              { text: 'We give presents ___ Christmas.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Bayram davri -> at Christmas.', explanationRu: "Период праздника -> at Christmas." },
             ],
           },
           {
@@ -4507,8 +4507,8 @@ export const grammarPathSections = [
               exampleRu: 'The train arrives at 6:30 PM. I sleep at night.',
             },
             exercises: [
-              { text: 'The movie finishes ___ 10 PM.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Soat vaqti -> at 10 PM.' },
-              { text: 'Select the correct sentence:', options: ['He goes to bed at midnight.', 'He goes to bed in midnight.'], correct: 0, explanation: 'at midnight (yarim tunda).' },
+              { text: 'The movie finishes ___ 10 PM.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Soat vaqti -> at 10 PM.', explanationRu: "Время на часах -> at 10 PM." },
+              { text: 'Select the correct sentence:', options: ['He goes to bed at midnight.', 'He goes to bed in midnight.'], correct: 0, explanation: 'at midnight (yarim tunda).', explanationRu: "at midnight (в полночь)." },
             ],
           },
           {
@@ -4520,9 +4520,9 @@ export const grammarPathSections = [
               exampleRu: 'We meet at 3 o\'clock at the weekend.',
             },
             exercises: [
-              { text: 'Choose the correct preposition: ___ 8:00 AM', options: ['at', 'in', 'on'], correct: 0, explanation: 'at 8:00 AM.' },
-              { text: 'Choose the correct preposition: ___ night', options: ['at', 'on', 'in'], correct: 0, explanation: 'at night.' },
-              { text: 'Select the correct sentence:', options: ['See you at 4 o\'clock!', 'See you in 4 o\'clock!'], correct: 0, explanation: 'at 4 o\'clock.' },
+              { text: 'Choose the correct preposition: ___ 8:00 AM', options: ['at', 'in', 'on'], correct: 0, explanation: 'at 8:00 AM.', explanationRu: "at 8:00 AM." },
+              { text: 'Choose the correct preposition: ___ night', options: ['at', 'on', 'in'], correct: 0, explanation: 'at night.', explanationRu: "at night." },
+              { text: 'Select the correct sentence:', options: ['See you at 4 o\'clock!', 'See you in 4 o\'clock!'], correct: 0, explanation: 'at 4 o\'clock.', explanationRu: "at 4 o'clock." },
             ],
           },
         ],
@@ -4543,8 +4543,8 @@ export const grammarPathSections = [
               exampleRu: 'I play football on Sunday. (Я играю в футбол в воскресенье.)',
             },
             exercises: [
-              { text: 'We have an English test ___ Monday.', options: ['on', 'at', 'in'], correct: 0, explanation: 'Hafta kuni bilan "on" keladi.' },
-              { text: 'They don\'t work ___ Saturdays.', options: ['on', 'in', 'at'], correct: 0, explanation: 'on Saturdays.' },
+              { text: 'We have an English test ___ Monday.', options: ['on', 'at', 'in'], correct: 0, explanation: 'Hafta kuni bilan "on" keladi.', explanationRu: "С днём недели используется \"on\"." },
+              { text: 'They don\'t work ___ Saturdays.', options: ['on', 'in', 'at'], correct: 0, explanation: 'on Saturdays.', explanationRu: "on Saturdays." },
             ],
           },
           {
@@ -4556,8 +4556,8 @@ export const grammarPathSections = [
               exampleRu: 'My birthday is on 12th August. (Мой день рождения 12 августа.)',
             },
             exercises: [
-              { text: 'The party is ___ 25th October.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Aniq sana bilan "on" keladi.' },
-              { text: 'Uzbekistan Independence Day is ___ 1st September.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on 1st September.' },
+              { text: 'The party is ___ 25th October.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Aniq sana bilan "on" keladi.', explanationRu: "С точной датой используется \"on\"." },
+              { text: 'Uzbekistan Independence Day is ___ 1st September.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on 1st September.', explanationRu: "on 1st September." },
             ],
           },
           {
@@ -4569,8 +4569,8 @@ export const grammarPathSections = [
               exampleRu: 'We got presents on New Year\'s Day. We met on Friday morning.',
             },
             exercises: [
-              { text: 'What do you do ___ your birthday?', options: ['on', 'at', 'in'], correct: 0, explanation: 'on your birthday.' },
-              { text: 'I have a meeting ___ Tuesday morning.', options: ['on', 'in', 'at'], correct: 0, explanation: 'on Tuesday morning.' },
+              { text: 'What do you do ___ your birthday?', options: ['on', 'at', 'in'], correct: 0, explanation: 'on your birthday.', explanationRu: "on your birthday." },
+              { text: 'I have a meeting ___ Tuesday morning.', options: ['on', 'in', 'at'], correct: 0, explanation: 'on Tuesday morning.', explanationRu: "on Tuesday morning." },
             ],
           },
           {
@@ -4582,8 +4582,8 @@ export const grammarPathSections = [
               exampleRu: 'The match is at 3 PM on Saturday.',
             },
             exercises: [
-              { text: 'The meeting starts ___ 9 o\'clock ___ Friday.', options: ['at / on', 'on / at', 'in / on'], correct: 0, explanation: 'at 9 o\'clock / on Friday.' },
-              { text: 'Choose the correct sentence:', options: ['I will call you on Monday.', 'I will call you at Monday.'], correct: 0, explanation: 'on Monday.' },
+              { text: 'The meeting starts ___ 9 o\'clock ___ Friday.', options: ['at / on', 'on / at', 'in / on'], correct: 0, explanation: 'at 9 o\'clock / on Friday.', explanationRu: "at 9 o'clock / on Friday." },
+              { text: 'Choose the correct sentence:', options: ['I will call you on Monday.', 'I will call you at Monday.'], correct: 0, explanation: 'on Monday.', explanationRu: "on Monday." },
             ],
           },
           {
@@ -4595,9 +4595,9 @@ export const grammarPathSections = [
               exampleRu: 'He was born on 10th March on a Tuesday.',
             },
             exercises: [
-              { text: 'Choose the correct preposition: ___ 5th July', options: ['on', 'in', 'at'], correct: 0, explanation: 'on 5th July.' },
-              { text: 'Choose the correct preposition: ___ Sunday afternoon', options: ['on', 'at', 'in'], correct: 0, explanation: 'on Sunday afternoon.' },
-              { text: 'Select the correct sentence:', options: ['School reopens on September 1st.', 'School reopens in September 1st.'], correct: 0, explanation: 'on September 1st.' },
+              { text: 'Choose the correct preposition: ___ 5th July', options: ['on', 'in', 'at'], correct: 0, explanation: 'on 5th July.', explanationRu: "on 5th July." },
+              { text: 'Choose the correct preposition: ___ Sunday afternoon', options: ['on', 'at', 'in'], correct: 0, explanation: 'on Sunday afternoon.', explanationRu: "on Sunday afternoon." },
+              { text: 'Select the correct sentence:', options: ['School reopens on September 1st.', 'School reopens in September 1st.'], correct: 0, explanation: 'on September 1st.', explanationRu: "on September 1st." },
             ],
           },
         ],
@@ -4618,8 +4618,8 @@ export const grammarPathSections = [
               exampleRu: 'It is very hot in summer. My birthday is in April.',
             },
             exercises: [
-              { text: 'We go to the beach ___ summer.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Fasl bilan "in" keladi: in summer.' },
-              { text: 'Flowers bloom ___ spring.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in spring.' },
+              { text: 'We go to the beach ___ summer.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Fasl bilan "in" keladi: in summer.', explanationRu: "С временем года используется \"in\": in summer." },
+              { text: 'Flowers bloom ___ spring.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in spring.', explanationRu: "in spring." },
             ],
           },
           {
@@ -4631,8 +4631,8 @@ export const grammarPathSections = [
               exampleRu: 'He was born in 2010. Computers developed fast in the 20th century.',
             },
             exercises: [
-              { text: 'I started school ___ 2018.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Yil bilan "in" ishlatiladi.' },
-              { text: 'People lived differently ___ the past.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the past (o\'tmishda).' },
+              { text: 'I started school ___ 2018.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Yil bilan "in" ishlatiladi.', explanationRu: "С годом используется \"in\"." },
+              { text: 'People lived differently ___ the past.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the past (o\'tmishda).', explanationRu: "in the past (в прошлом)." },
             ],
           },
           {
@@ -4644,9 +4644,9 @@ export const grammarPathSections = [
               exampleRu: 'I drink coffee in the morning. (НО: I sleep at night.)',
             },
             exercises: [
-              { text: 'I play video games ___ the evening.', options: ['in', 'at', 'on'], correct: 0, explanation: 'in the evening.' },
-              { text: 'She goes running ___ the morning.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the morning.' },
-              { text: 'Choose the correct pair: ___ the morning / ___ night', options: ['in / at', 'at / in', 'on / at'], correct: 0, explanation: 'in the morning / at night.' },
+              { text: 'I play video games ___ the evening.', options: ['in', 'at', 'on'], correct: 0, explanation: 'in the evening.', explanationRu: "in the evening." },
+              { text: 'She goes running ___ the morning.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the morning.', explanationRu: "in the morning." },
+              { text: 'Choose the correct pair: ___ the morning / ___ night', options: ['in / at', 'at / in', 'on / at'], correct: 0, explanation: 'in the morning / at night.', explanationRu: "in the morning / at night." },
             ],
           },
           {
@@ -4658,8 +4658,8 @@ export const grammarPathSections = [
               exampleRu: 'The bus leaves in 5 minutes. (Автобус уезжает через 5 минут.)',
             },
             exercises: [
-              { text: 'I will finish my work ___ 10 minutes.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in 10 minutes (10 daqiqadan so\'ng).' },
-              { text: 'The movie will start ___ a few moments.', options: ['in', 'at', 'on'], correct: 0, explanation: 'in a few moments.' },
+              { text: 'I will finish my work ___ 10 minutes.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in 10 minutes (10 daqiqadan so\'ng).', explanationRu: "in 10 minutes (через 10 минут)." },
+              { text: 'The movie will start ___ a few moments.', options: ['in', 'at', 'on'], correct: 0, explanation: 'in a few moments.', explanationRu: "in a few moments." },
             ],
           },
           {
@@ -4671,8 +4671,8 @@ export const grammarPathSections = [
               exampleRu: 'at 5 PM on Monday in May 2026.',
             },
             exercises: [
-              { text: 'He was born ___ July, ___ Monday ___ 6:00 AM.', options: ['in / on / at', 'at / on / in', 'on / in / at'], correct: 0, explanation: 'in July / on Monday / at 6:00 AM.' },
-              { text: 'Choose the correct sentence:', options: ['We go on vacation in August.', 'We go on vacation at August.'], correct: 0, explanation: 'in August (oy nomi).' },
+              { text: 'He was born ___ July, ___ Monday ___ 6:00 AM.', options: ['in / on / at', 'at / on / in', 'on / in / at'], correct: 0, explanation: 'in July / on Monday / at 6:00 AM.', explanationRu: "in July / on Monday / at 6:00 AM." },
+              { text: 'Choose the correct sentence:', options: ['We go on vacation in August.', 'We go on vacation at August.'], correct: 0, explanation: 'in August (oy nomi).', explanationRu: "in August (название месяца)." },
             ],
           },
         ],
@@ -4693,8 +4693,8 @@ export const grammarPathSections = [
               exampleRu: 'Someone is standing at the door. I am waiting at the bus stop.',
             },
             exercises: [
-              { text: 'Turn left ___ the traffic lights.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Nuqta ko\'rsatilganda "at" ishlatiladi.' },
-              { text: 'She is waiting for you ___ the bus stop.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the bus stop.' },
+              { text: 'Turn left ___ the traffic lights.', options: ['at', 'in', 'on'], correct: 0, explanation: 'Nuqta ko\'rsatilganda "at" ishlatiladi.', explanationRu: "При указании точки используется \"at\"." },
+              { text: 'She is waiting for you ___ the bus stop.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the bus stop.', explanationRu: "at the bus stop." },
             ],
           },
           {
@@ -4706,8 +4706,8 @@ export const grammarPathSections = [
               exampleRu: 'My mother is at work. I stay at home on Sundays.',
             },
             exercises: [
-              { text: 'Is your father ___ home?', options: ['at', 'in', 'on'], correct: 0, explanation: 'at home (uyda).' },
-              { text: 'We met ___ a concert last night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at a concert.' },
+              { text: 'Is your father ___ home?', options: ['at', 'in', 'on'], correct: 0, explanation: 'at home (uyda).', explanationRu: "at home (дома)." },
+              { text: 'We met ___ a concert last night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at a concert.', explanationRu: "at a concert." },
             ],
           },
           {
@@ -4719,8 +4719,8 @@ export const grammarPathSections = [
               exampleRu: 'He lives at 12 Pushkin Street. (Он живёт на улице Пушкина, дом 12.)',
             },
             exercises: [
-              { text: 'She lives ___ 45 Amir Temur Street.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Uy raqami borligi uchun "at" ishlatiladi.' },
-              { text: 'The office is ___ 100 Broadway.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at 100 Broadway.' },
+              { text: 'She lives ___ 45 Amir Temur Street.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Uy raqami borligi uchun "at" ishlatiladi.', explanationRu: "При наличии номера дома используется \"at\"." },
+              { text: 'The office is ___ 100 Broadway.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at 100 Broadway.', explanationRu: "at 100 Broadway." },
             ],
           },
           {
@@ -4732,8 +4732,8 @@ export const grammarPathSections = [
               exampleRu: 'Write your name at the top of the page.',
             },
             exercises: [
-              { text: 'Write your name ___ the top of the page.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the top of.' },
-              { text: 'There is a café ___ the end of the street.', options: ['at', 'on', 'in'], correct: 0, explanation: 'at the end of.' },
+              { text: 'Write your name ___ the top of the page.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the top of.', explanationRu: "at the top of." },
+              { text: 'There is a café ___ the end of the street.', options: ['at', 'on', 'in'], correct: 0, explanation: 'at the end of.', explanationRu: "at the end of." },
             ],
           },
           {
@@ -4745,9 +4745,9 @@ export const grammarPathSections = [
               exampleRu: 'I am at school at 8:00 AM every day.',
             },
             exercises: [
-              { text: 'Choose the correct preposition: ___ home', options: ['at', 'in', 'on'], correct: 0, explanation: 'at home.' },
-              { text: 'Choose the correct preposition: ___ the entrance', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the entrance.' },
-              { text: 'Select the correct sentence:', options: ['She is at work right now.', 'She is in work right now.'], correct: 0, explanation: 'at work.' },
+              { text: 'Choose the correct preposition: ___ home', options: ['at', 'in', 'on'], correct: 0, explanation: 'at home.', explanationRu: "at home." },
+              { text: 'Choose the correct preposition: ___ the entrance', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the entrance.', explanationRu: "at the entrance." },
+              { text: 'Select the correct sentence:', options: ['She is at work right now.', 'She is in work right now.'], correct: 0, explanation: 'at work.', explanationRu: "at work." },
             ],
           },
         ],
@@ -4768,8 +4768,8 @@ export const grammarPathSections = [
               exampleRu: 'The book is on the table. There is a picture on the wall.',
             },
             exercises: [
-              { text: 'Don\'t leave your clothes ___ the floor!', options: ['on', 'in', 'at'], correct: 0, explanation: 'Sirt (poll) bilan "on" ishlatiladi.' },
-              { text: 'There is a beautiful painting ___ the wall.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on the wall.' },
+              { text: 'Don\'t leave your clothes ___ the floor!', options: ['on', 'in', 'at'], correct: 0, explanation: 'Sirt (poll) bilan "on" ishlatiladi.', explanationRu: "С поверхностью (пол) используется \"on\"." },
+              { text: 'There is a beautiful painting ___ the wall.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on the wall.', explanationRu: "on the wall." },
             ],
           },
           {
@@ -4781,8 +4781,8 @@ export const grammarPathSections = [
               exampleRu: 'Our shop is on Amir Temur Street.',
             },
             exercises: [
-              { text: 'He lives ___ Broadway.', options: ['on', 'at', 'in'], correct: 0, explanation: 'Faqat ko\'cha nomi bilan "on" ishlatiladi.' },
-              { text: 'Choose the correct pair: ___ 15 Navoi Street / ___ Navoi Street', options: ['at / on', 'on / at', 'in / on'], correct: 0, explanation: 'at 15 Navoi Street (raqam bor) / on Navoi Street (raqamsiz).' },
+              { text: 'He lives ___ Broadway.', options: ['on', 'at', 'in'], correct: 0, explanation: 'Faqat ko\'cha nomi bilan "on" ishlatiladi.', explanationRu: "Только с названием улицы используется \"on\"." },
+              { text: 'Choose the correct pair: ___ 15 Navoi Street / ___ Navoi Street', options: ['at / on', 'on / at', 'in / on'], correct: 0, explanation: 'at 15 Navoi Street (raqam bor) / on Navoi Street (raqamsiz).', explanationRu: "at 15 Navoi Street (с номером) / on Navoi Street (без номера)." },
             ],
           },
           {
@@ -4794,8 +4794,8 @@ export const grammarPathSections = [
               exampleRu: 'My apartment is on the second floor.',
             },
             exercises: [
-              { text: 'Our office is ___ the 4th floor.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Qavat bilan "on" ishlatiladi.' },
-              { text: 'The supermarket is ___ the right.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on the right (o\'ng tomonda).' },
+              { text: 'Our office is ___ the 4th floor.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Qavat bilan "on" ishlatiladi.', explanationRu: "С этажом используется \"on\"." },
+              { text: 'The supermarket is ___ the right.', options: ['on', 'at', 'in'], correct: 0, explanation: 'on the right (o\'ng tomonda).', explanationRu: "on the right (справа)." },
             ],
           },
           {
@@ -4807,9 +4807,9 @@ export const grammarPathSections = [
               exampleRu: 'I am on the bus right now. (НО: I am in a taxi.)',
             },
             exercises: [
-              { text: 'I saw him ___ the train.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Poezdda -> on the train.' },
-              { text: 'He is traveling ___ a car.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Kichik shaxsiy mashinada -> in a car.' },
-              { text: 'Choose the correct pair: ___ the bus / ___ a taxi', options: ['on / in', 'in / on', 'at / in'], correct: 0, explanation: 'on the bus / in a taxi.' },
+              { text: 'I saw him ___ the train.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Poezdda -> on the train.', explanationRu: "В поезде -> on the train." },
+              { text: 'He is traveling ___ a car.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Kichik shaxsiy mashinada -> in a car.', explanationRu: "В личной машине -> in a car." },
+              { text: 'Choose the correct pair: ___ the bus / ___ a taxi', options: ['on / in', 'in / on', 'at / in'], correct: 0, explanation: 'on the bus / in a taxi.', explanationRu: "on the bus / in a taxi." },
             ],
           },
           {
@@ -4821,9 +4821,9 @@ export const grammarPathSections = [
               exampleRu: 'I am sitting on the bus on Navoi Street.',
             },
             exercises: [
-              { text: 'Choose the correct preposition: ___ the table', options: ['on', 'in', 'at'], correct: 0, explanation: 'on the table.' },
-              { text: 'Choose the correct preposition: ___ the second floor', options: ['on', 'in', 'at'], correct: 0, explanation: 'on the second floor.' },
-              { text: 'Select the correct sentence:', options: ['The cup is on the table.', 'The cup is in the table.'], correct: 0, explanation: 'on the table.' },
+              { text: 'Choose the correct preposition: ___ the table', options: ['on', 'in', 'at'], correct: 0, explanation: 'on the table.', explanationRu: "on the table." },
+              { text: 'Choose the correct preposition: ___ the second floor', options: ['on', 'in', 'at'], correct: 0, explanation: 'on the second floor.', explanationRu: "on the second floor." },
+              { text: 'Select the correct sentence:', options: ['The cup is on the table.', 'The cup is in the table.'], correct: 0, explanation: 'on the table.', explanationRu: "on the table." },
             ],
           },
         ],
@@ -4844,8 +4844,8 @@ export const grammarPathSections = [
               exampleRu: 'She is in the kitchen. The keys are in the box.',
             },
             exercises: [
-              { text: 'Where is Mum? — She is ___ the living room.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Xona ichida -> in the living room.' },
-              { text: 'Put these shoes ___ the box.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the box.' },
+              { text: 'Where is Mum? — She is ___ the living room.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Xona ichida -> in the living room.', explanationRu: "Внутри комнаты -> in the living room." },
+              { text: 'Put these shoes ___ the box.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in the box.', explanationRu: "in the box." },
             ],
           },
           {
@@ -4857,8 +4857,8 @@ export const grammarPathSections = [
               exampleRu: 'I live in Tashkent. Tashkent is in Uzbekistan.',
             },
             exercises: [
-              { text: 'He was born ___ Samarkand.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar nomi bilan "in" keladi.' },
-              { text: 'Paris is ___ France.', options: ['in', 'at', 'on'], correct: 0, explanation: 'Mamlakat bilan "in" keladi.' },
+              { text: 'He was born ___ Samarkand.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar nomi bilan "in" keladi.', explanationRu: "С названием города используется \"in\"." },
+              { text: 'Paris is ___ France.', options: ['in', 'at', 'on'], correct: 0, explanation: 'Mamlakat bilan "in" keladi.', explanationRu: "С названием страны используется \"in\"." },
             ],
           },
           {
@@ -4870,8 +4870,8 @@ export const grammarPathSections = [
               exampleRu: 'I saw your photo in the newspaper.',
             },
             exercises: [
-              { text: 'Who is the man ___ this picture?', options: ['in', 'on', 'at'], correct: 0, explanation: 'Rasm ichida -> in this picture.' },
-              { text: 'I read about the news ___ a book.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in a book.' },
+              { text: 'Who is the man ___ this picture?', options: ['in', 'on', 'at'], correct: 0, explanation: 'Rasm ichida -> in this picture.', explanationRu: "На картинке -> in this picture." },
+              { text: 'I read about the news ___ a book.', options: ['in', 'on', 'at'], correct: 0, explanation: 'in a book.', explanationRu: "in a book." },
             ],
           },
           {
@@ -4883,8 +4883,8 @@ export const grammarPathSections = [
               exampleRu: 'at the bus stop on Navoi Street in Tashkent.',
             },
             exercises: [
-              { text: 'We live ___ Tashkent, ___ Pushkin Street.', options: ['in / on', 'at / in', 'on / at'], correct: 0, explanation: 'in Tashkent / on Pushkin Street.' },
-              { text: 'Choose the correct sentence:', options: ['I am sitting in a coffee shop in London.', 'I am sitting on a coffee shop at London.'], correct: 0, explanation: 'in a coffee shop in London.' },
+              { text: 'We live ___ Tashkent, ___ Pushkin Street.', options: ['in / on', 'at / in', 'on / at'], correct: 0, explanation: 'in Tashkent / on Pushkin Street.', explanationRu: "in Tashkent / on Pushkin Street." },
+              { text: 'Choose the correct sentence:', options: ['I am sitting in a coffee shop in London.', 'I am sitting on a coffee shop at London.'], correct: 0, explanation: 'in a coffee shop in London.', explanationRu: "in a coffee shop in London." },
             ],
           },
           {
@@ -4896,9 +4896,9 @@ export const grammarPathSections = [
               exampleRu: 'He is sitting his room in Tashkent.',
             },
             exercises: [
-              { text: 'Choose the correct preposition: ___ Uzbekistan', options: ['in', 'on', 'at'], correct: 0, explanation: 'in Uzbekistan.' },
-              { text: 'Choose the correct preposition: ___ the kitchen', options: ['in', 'at', 'on'], correct: 0, explanation: 'in the kitchen.' },
-              { text: 'Select the correct sentence:', options: ['She is sitting in her car.', 'She is sitting on her car.'], correct: 0, explanation: 'in her car.' },
+              { text: 'Choose the correct preposition: ___ Uzbekistan', options: ['in', 'on', 'at'], correct: 0, explanation: 'in Uzbekistan.', explanationRu: "in Uzbekistan." },
+              { text: 'Choose the correct preposition: ___ the kitchen', options: ['in', 'at', 'on'], correct: 0, explanation: 'in the kitchen.', explanationRu: "in the kitchen." },
+              { text: 'Select the correct sentence:', options: ['She is sitting in her car.', 'She is sitting on her car.'], correct: 0, explanation: 'in her car.', explanationRu: "in her car." },
             ],
           },
         ],
@@ -4919,8 +4919,8 @@ export const grammarPathSections = [
               exampleRu: 'I stay at home on Monday in the morning.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I will see you on Monday.', 'I will see you in Monday.'], correct: 0, explanation: 'Hafta kuni bilan "on" ishlatiladi.' },
-              { text: 'Choose the correct sentence:', options: ['My brother is at home.', 'My brother is in home.'], correct: 0, explanation: 'at home.' },
+              { text: 'Choose the correct sentence:', options: ['I will see you on Monday.', 'I will see you in Monday.'], correct: 0, explanation: 'Hafta kuni bilan "on" ishlatiladi.', explanationRu: "С днём недели используется \"on\"." },
+              { text: 'Choose the correct sentence:', options: ['My brother is at home.', 'My brother is in home.'], correct: 0, explanation: 'at home.', explanationRu: "at home." },
             ],
           },
           {
@@ -4932,8 +4932,8 @@ export const grammarPathSections = [
               exampleRu: 'Our party is at 7 PM on Friday in December.',
             },
             exercises: [
-              { text: 'The museum opens ___ 9 o\'clock ___ Tuesday ___ spring.', options: ['at / on / in', 'in / on / at', 'on / at / in'], correct: 0, explanation: 'at 9 o\'clock / on Tuesday / in spring.' },
-              { text: 'We go skiing ___ winter.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Fasl -> in winter.' },
+              { text: 'The museum opens ___ 9 o\'clock ___ Tuesday ___ spring.', options: ['at / on / in', 'in / on / at', 'on / at / in'], correct: 0, explanation: 'at 9 o\'clock / on Tuesday / in spring.', explanationRu: "at 9 o'clock / on Tuesday / in spring." },
+              { text: 'We go skiing ___ winter.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Fasl -> in winter.', explanationRu: "Время года -> in winter." },
             ],
           },
           {
@@ -4945,8 +4945,8 @@ export const grammarPathSections = [
               exampleRu: 'I left my bag on the table in my room at home.',
             },
             exercises: [
-              { text: 'He is waiting ___ the entrance ___ the second floor.', options: ['at / on', 'in / at', 'on / in'], correct: 0, explanation: 'at the entrance / on the second floor.' },
-              { text: 'My friend lives ___ London.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar -> in London.' },
+              { text: 'He is waiting ___ the entrance ___ the second floor.', options: ['at / on', 'in / at', 'on / in'], correct: 0, explanation: 'at the entrance / on the second floor.', explanationRu: "at the entrance / on the second floor." },
+              { text: 'My friend lives ___ London.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar -> in London.', explanationRu: "Город -> in London." },
             ],
           },
           {
@@ -4958,8 +4958,8 @@ export const grammarPathSections = [
               exampleRu: '— Where are you? — I am on the bus in Tashkent, arriving at 5 PM.',
             },
             exercises: [
-              { text: '— Where is your office? — It is ___ 3rd floor ___ Amir Temur Street.', options: ['on the / on', 'in the / at', 'at the / in'], correct: 0, explanation: 'on the 3rd floor / on Amir Temur Street.' },
-              { text: '— When is the concert? — It is ___ 8:00 PM ___ Saturday.', options: ['at / on', 'in / at', 'on / in'], correct: 0, explanation: 'at 8:00 PM / on Saturday.' },
+              { text: '— Where is your office? — It is ___ 3rd floor ___ Amir Temur Street.', options: ['on the / on', 'in the / at', 'at the / in'], correct: 0, explanation: 'on the 3rd floor / on Amir Temur Street.', explanationRu: "on the 3rd floor / on Amir Temur Street." },
+              { text: '— When is the concert? — It is ___ 8:00 PM ___ Saturday.', options: ['at / on', 'in / at', 'on / in'], correct: 0, explanation: 'at 8:00 PM / on Saturday.', explanationRu: "at 8:00 PM / on Saturday." },
             ],
           },
           {
@@ -4971,9 +4971,9 @@ export const grammarPathSections = [
               exampleRu: 'I was born at 3 PM on 10th May in 2005 in Tashkent.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I will meet you at the station at 6 PM on Friday.', 'I will meet you in the station in 6 PM in Friday.'], correct: 0, explanation: 'at the station / at 6 PM / on Friday.' },
-              { text: 'Choose the correct sentence:', options: ['She put her phone on the desk in her bedroom.', 'She put her phone at the desk at her bedroom.'], correct: 0, explanation: 'on the desk / in her bedroom.' },
-              { text: 'Select the correct sentence:', options: ['The train leaves at 10:30 in the morning.', 'The train leaves on 10:30 at the morning.'], correct: 0, explanation: 'at 10:30 / in the morning.' },
+              { text: 'Choose the correct sentence:', options: ['I will meet you at the station at 6 PM on Friday.', 'I will meet you in the station in 6 PM in Friday.'], correct: 0, explanation: 'at the station / at 6 PM / on Friday.', explanationRu: "at the station / at 6 PM / on Friday." },
+              { text: 'Choose the correct sentence:', options: ['She put her phone on the desk in her bedroom.', 'She put her phone at the desk at her bedroom.'], correct: 0, explanation: 'on the desk / in her bedroom.', explanationRu: "on the desk / in her bedroom." },
+              { text: 'Select the correct sentence:', options: ['The train leaves at 10:30 in the morning.', 'The train leaves on 10:30 at the morning.'], correct: 0, explanation: 'at 10:30 / in the morning.', explanationRu: "at 10:30 / in the morning." },
             ],
           },
         ],
@@ -4983,21 +4983,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Joy va vaqt predloglari (in / on / at)",
       titleRu: 'Тест раздела: Предлоги места и времени (in / on / at)',
       exercises: [
-        { text: 'The concert starts ___ 7:30 PM.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Aniq soat vaqti -> at.' },
-        { text: 'We don\'t go to school ___ Sundays.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Hafta kuni -> on.' },
-        { text: 'My birthday is ___ July.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Oy nomi -> in.' },
-        { text: 'He was born ___ 2012.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Yil -> in.' },
-        { text: 'I love watching movies ___ night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at night.' },
-        { text: 'She is waiting for you ___ the bus stop.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the bus stop.' },
-        { text: 'The laptop is ___ the table.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Sirt -> on the table.' },
-        { text: 'We live ___ Tashkent.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar -> in Tashkent.' },
-        { text: 'Our apartment is ___ the third floor.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Qavat -> on the third floor.' },
-        { text: 'She is traveling ___ the train.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Jamoat transporti -> on the train.' },
-        { text: 'Choose the correct sentence:', options: ['He is at home right now.', 'He is in home right now.'], correct: 0, explanation: 'at home.' },
-        { text: 'Choose the correct sentence:', options: ['The meeting is on Friday morning.', 'The meeting is at Friday morning.'], correct: 0, explanation: 'on Friday morning.' },
-        { text: 'Choose the correct sentence:', options: ['Write your name at the top of the paper.', 'Write your name in the top of the paper.'], correct: 0, explanation: 'at the top of.' },
-        { text: 'Select the correct sentence:', options: ['The bus leaves in 10 minutes.', 'The bus leaves at 10 minutes.'], correct: 0, explanation: 'in 10 minutes (10 daqiqadan so\'ng).' },
-        { text: 'Select the correct sentence:', options: ['They live at 25 Navoi Street in Tashkent.', 'They live in 25 Navoi Street on Tashkent.'], correct: 0, explanation: 'at 25 Navoi Street / in Tashkent.' },
+        { text: 'The concert starts ___ 7:30 PM.', options: ['at', 'on', 'in'], correct: 0, explanation: 'Aniq soat vaqti -> at.', explanationRu: "Точное время на часах -> at." },
+        { text: 'We don\'t go to school ___ Sundays.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Hafta kuni -> on.', explanationRu: "День недели -> on." },
+        { text: 'My birthday is ___ July.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Oy nomi -> in.', explanationRu: "Название месяца -> in." },
+        { text: 'He was born ___ 2012.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Yil -> in.', explanationRu: "Год -> in." },
+        { text: 'I love watching movies ___ night.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at night.', explanationRu: "at night." },
+        { text: 'She is waiting for you ___ the bus stop.', options: ['at', 'in', 'on'], correct: 0, explanation: 'at the bus stop.', explanationRu: "at the bus stop." },
+        { text: 'The laptop is ___ the table.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Sirt -> on the table.', explanationRu: "Поверхность -> on the table." },
+        { text: 'We live ___ Tashkent.', options: ['in', 'on', 'at'], correct: 0, explanation: 'Shahar -> in Tashkent.', explanationRu: "Город -> in Tashkent." },
+        { text: 'Our apartment is ___ the third floor.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Qavat -> on the third floor.', explanationRu: "Этаж -> on the third floor." },
+        { text: 'She is traveling ___ the train.', options: ['on', 'in', 'at'], correct: 0, explanation: 'Jamoat transporti -> on the train.', explanationRu: "Общественный транспорт -> on the train." },
+        { text: 'Choose the correct sentence:', options: ['He is at home right now.', 'He is in home right now.'], correct: 0, explanation: 'at home.', explanationRu: "at home." },
+        { text: 'Choose the correct sentence:', options: ['The meeting is on Friday morning.', 'The meeting is at Friday morning.'], correct: 0, explanation: 'on Friday morning.', explanationRu: "on Friday morning." },
+        { text: 'Choose the correct sentence:', options: ['Write your name at the top of the paper.', 'Write your name in the top of the paper.'], correct: 0, explanation: 'at the top of.', explanationRu: "at the top of." },
+        { text: 'Select the correct sentence:', options: ['The bus leaves in 10 minutes.', 'The bus leaves at 10 minutes.'], correct: 0, explanation: 'in 10 minutes (10 daqiqadan so\'ng).', explanationRu: "in 10 minutes (через 10 минут)." },
+        { text: 'Select the correct sentence:', options: ['They live at 25 Navoi Street in Tashkent.', 'They live in 25 Navoi Street on Tashkent.'], correct: 0, explanation: 'at 25 Navoi Street / in Tashkent.', explanationRu: "at 25 Navoi Street / in Tashkent." },
       ],
     },
   },
@@ -5024,8 +5024,8 @@ export const grammarPathSections = [
               exampleRu: 'I was a student. (Я был студентом.) He was happy. (Он был счастлив.)',
             },
             exercises: [
-              { text: 'I ___ at home yesterday.', options: ['was', 'were', 'am'], correct: 0, explanation: '"I" bilan o\'tgan zamonda "was" ishlatiladi.' },
-              { text: 'He ___ tired last night.', options: ['was', 'were', 'is'], correct: 0, explanation: '"He" + was.' },
+              { text: 'I ___ at home yesterday.', options: ['was', 'were', 'am'], correct: 0, explanation: '"I" bilan o\'tgan zamonda "was" ishlatiladi.', explanationRu: "С \"I\" в прошедшем времени используется \"was\"." },
+              { text: 'He ___ tired last night.', options: ['was', 'were', 'is'], correct: 0, explanation: '"He" + was.', explanationRu: "\"He\" + was." },
             ],
           },
           {
@@ -5037,8 +5037,8 @@ export const grammarPathSections = [
               exampleRu: 'I am in Tashkent now. I was in Samarkand yesterday.',
             },
             exercises: [
-              { text: 'Yesterday I ___ very busy.', options: ['was', 'were', 'am'], correct: 0, explanation: 'Yesterday (kecha) -> I was.' },
-              { text: 'Select the correct sentence:', options: ['I was at school yesterday.', 'I were at school yesterday.'], correct: 0, explanation: '"I" bilan "was" keladi.' },
+              { text: 'Yesterday I ___ very busy.', options: ['was', 'were', 'am'], correct: 0, explanation: 'Yesterday (kecha) -> I was.', explanationRu: "Yesterday (вчера) -> I was." },
+              { text: 'Select the correct sentence:', options: ['I was at school yesterday.', 'I were at school yesterday.'], correct: 0, explanation: '"I" bilan "was" keladi.', explanationRu: "С \"I\" используется \"was\"." },
             ],
           },
           {
@@ -5050,8 +5050,8 @@ export const grammarPathSections = [
               exampleRu: 'She was ill last week. It was cold yesterday.',
             },
             exercises: [
-              { text: 'She ___ a teacher 5 years ago.', options: ['was', 'were', 'is'], correct: 0, explanation: '"She" + was.' },
-              { text: 'The weather ___ nice yesterday.', options: ['was', 'were', 'are'], correct: 0, explanation: 'The weather (it) -> was.' },
+              { text: 'She ___ a teacher 5 years ago.', options: ['was', 'were', 'is'], correct: 0, explanation: '"She" + was.', explanationRu: "\"She\" + was." },
+              { text: 'The weather ___ nice yesterday.', options: ['was', 'were', 'are'], correct: 0, explanation: 'The weather (it) -> was.', explanationRu: "The weather (it) -> was." },
             ],
           },
           {
@@ -5063,8 +5063,8 @@ export const grammarPathSections = [
               exampleRu: 'Tom was in London last month.',
             },
             exercises: [
-              { text: 'My father ___ at work yesterday morning.', options: ['was', 'were', 'is'], correct: 0, explanation: 'My father (he) + yesterday -> was.' },
-              { text: 'It ___ hot last summer.', options: ['was', 'were', 'are'], correct: 0, explanation: 'last summer -> was.' },
+              { text: 'My father ___ at work yesterday morning.', options: ['was', 'were', 'is'], correct: 0, explanation: 'My father (he) + yesterday -> was.', explanationRu: "My father (he) + yesterday -> was." },
+              { text: 'It ___ hot last summer.', options: ['was', 'were', 'are'], correct: 0, explanation: 'last summer -> was.', explanationRu: "last summer -> was." },
             ],
           },
           {
@@ -5076,9 +5076,9 @@ export const grammarPathSections = [
               exampleRu: 'I was late, but she was on time yesterday.',
             },
             exercises: [
-              { text: 'Choose the correct form: My phone ___ on the table.', options: ['was', 'were'], correct: 0, explanation: 'My phone (it) -> was.' },
-              { text: 'Choose the correct form: She ___ at the concert last night.', options: ['was', 'were'], correct: 0, explanation: 'She -> was.' },
-              { text: 'Select the correct sentence:', options: ['He was my best friend.', 'He were my best friend.'], correct: 0, explanation: 'He + was.' },
+              { text: 'Choose the correct form: My phone ___ on the table.', options: ['was', 'were'], correct: 0, explanation: 'My phone (it) -> was.', explanationRu: "My phone (it) -> was." },
+              { text: 'Choose the correct form: She ___ at the concert last night.', options: ['was', 'were'], correct: 0, explanation: 'She -> was.', explanationRu: "She -> was." },
+              { text: 'Select the correct sentence:', options: ['He was my best friend.', 'He were my best friend.'], correct: 0, explanation: 'He + was.', explanationRu: "He + was." },
             ],
           },
         ],
@@ -5099,8 +5099,8 @@ export const grammarPathSections = [
               exampleRu: 'We were happy. (Мы были счастливы.) They were at home. (Они были дома.)',
             },
             exercises: [
-              { text: 'We ___ in Samarkand last weekend.', options: ['were', 'was', 'are'], correct: 0, explanation: '"We" bilan o\'tgan zamonda "were" ishlatiladi.' },
-              { text: 'They ___ very tired after work.', options: ['were', 'was', 'is'], correct: 0, explanation: '"They" + were.' },
+              { text: 'We ___ in Samarkand last weekend.', options: ['were', 'was', 'are'], correct: 0, explanation: '"We" bilan o\'tgan zamonda "were" ishlatiladi.', explanationRu: "С \"We\" в прошедшем времени используется \"were\"." },
+              { text: 'They ___ very tired after work.', options: ['were', 'was', 'is'], correct: 0, explanation: '"They" + were.', explanationRu: "\"They\" + were." },
             ],
           },
           {
@@ -5112,8 +5112,8 @@ export const grammarPathSections = [
               exampleRu: 'You were late for school yesterday.',
             },
             exercises: [
-              { text: 'You ___ right about the movie.', options: ['were', 'was', 'am'], correct: 0, explanation: '"You" bilan doim "were" ishlatiladi.' },
-              { text: 'Select the correct sentence:', options: ['You were very helpful yesterday.', 'You was very helpful yesterday.'], correct: 0, explanation: 'You + were.' },
+              { text: 'You ___ right about the movie.', options: ['were', 'was', 'am'], correct: 0, explanation: '"You" bilan doim "were" ishlatiladi.', explanationRu: "С \"You\" всегда используется \"were\"." },
+              { text: 'Select the correct sentence:', options: ['You were very helpful yesterday.', 'You was very helpful yesterday.'], correct: 0, explanation: 'You + were.', explanationRu: "You + were." },
             ],
           },
           {
@@ -5125,8 +5125,8 @@ export const grammarPathSections = [
               exampleRu: 'We were classmates in 2020. They were in the park yesterday.',
             },
             exercises: [
-              { text: 'My friends ___ at my house yesterday.', options: ['were', 'was', 'is'], correct: 0, explanation: 'My friends (they) -> were.' },
-              { text: 'We ___ in the garden 2 hours ago.', options: ['were', 'was', 'am'], correct: 0, explanation: 'We + were.' },
+              { text: 'My friends ___ at my house yesterday.', options: ['were', 'was', 'is'], correct: 0, explanation: 'My friends (they) -> were.', explanationRu: "My friends (they) -> were." },
+              { text: 'We ___ in the garden 2 hours ago.', options: ['were', 'was', 'am'], correct: 0, explanation: 'We + were.', explanationRu: "We + were." },
             ],
           },
           {
@@ -5138,8 +5138,8 @@ export const grammarPathSections = [
               exampleRu: 'I was at home, but my brothers were at school.',
             },
             exercises: [
-              { text: 'He ___ at home, but we ___ at the cinema.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'He was / we were.' },
-              { text: 'Choose the correct pair: She ___ / They ___', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'She was / They were.' },
+              { text: 'He ___ at home, but we ___ at the cinema.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'He was / we were.', explanationRu: "He was / we were." },
+              { text: 'Choose the correct pair: She ___ / They ___', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'She was / They were.', explanationRu: "She was / They were." },
             ],
           },
           {
@@ -5151,9 +5151,9 @@ export const grammarPathSections = [
               exampleRu: 'We were at the stadium and they were there too.',
             },
             exercises: [
-              { text: 'Choose the correct form: The children ___ in the yard.', options: ['were', 'was'], correct: 0, explanation: 'The children (they) -> were.' },
-              { text: 'Choose the correct form: You and I ___ in Tashkent.', options: ['were', 'was'], correct: 0, explanation: 'You and I (we) -> were.' },
-              { text: 'Select the correct sentence:', options: ['They were happy to see us.', 'They was happy to see us.'], correct: 0, explanation: 'They + were.' },
+              { text: 'Choose the correct form: The children ___ in the yard.', options: ['were', 'was'], correct: 0, explanation: 'The children (they) -> were.', explanationRu: "The children (they) -> were." },
+              { text: 'Choose the correct form: You and I ___ in Tashkent.', options: ['were', 'was'], correct: 0, explanation: 'You and I (we) -> were.', explanationRu: "You and I (we) -> were." },
+              { text: 'Select the correct sentence:', options: ['They were happy to see us.', 'They was happy to see us.'], correct: 0, explanation: 'They + were.', explanationRu: "They + were." },
             ],
           },
         ],
@@ -5174,8 +5174,8 @@ export const grammarPathSections = [
               exampleRu: 'I wasn\'t at home yesterday. (Я не был дома вчера.)',
             },
             exercises: [
-              { text: 'He ___ at work yesterday.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: '"He" inkorida: wasn\'t.' },
-              { text: 'She ___ hungry last night.', options: ["wasn't", "weren't", "aren't"], correct: 0, explanation: '"She" inkorida: wasn\'t.' },
+              { text: 'He ___ at work yesterday.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: '"He" inkorida: wasn\'t.', explanationRu: "В отрицании с \"He\": wasn't." },
+              { text: 'She ___ hungry last night.', options: ["wasn't", "weren't", "aren't"], correct: 0, explanation: '"She" inkorida: wasn\'t.', explanationRu: "В отрицании с \"She\": wasn't." },
             ],
           },
           {
@@ -5187,8 +5187,8 @@ export const grammarPathSections = [
               exampleRu: 'We weren\'t late. They weren\'t ready.',
             },
             exercises: [
-              { text: 'They ___ at the meeting.', options: ["weren't", "wasn't", "isn't"], correct: 0, explanation: '"They" inkorida: weren\'t.' },
-              { text: 'You ___ at school yesterday.', options: ["weren't", "wasn't", "am not"], correct: 0, explanation: '"You" inkorida: weren\'t.' },
+              { text: 'They ___ at the meeting.', options: ["weren't", "wasn't", "isn't"], correct: 0, explanation: '"They" inkorida: weren\'t.', explanationRu: "В отрицании с \"They\": weren't." },
+              { text: 'You ___ at school yesterday.', options: ["weren't", "wasn't", "am not"], correct: 0, explanation: '"You" inkorida: weren\'t.', explanationRu: "В отрицании с \"You\": weren't." },
             ],
           },
           {
@@ -5200,8 +5200,8 @@ export const grammarPathSections = [
               exampleRu: 'It wasn\'t rainy yesterday. We weren\'t tired last night.',
             },
             exercises: [
-              { text: 'The exam ___ difficult last week.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: 'The exam (it) -> wasn\'t.' },
-              { text: 'My parents ___ at home 2 hours ago.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'My parents (they) -> weren\'t.' },
+              { text: 'The exam ___ difficult last week.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: 'The exam (it) -> wasn\'t.', explanationRu: "The exam (it) -> wasn't." },
+              { text: 'My parents ___ at home 2 hours ago.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'My parents (they) -> weren\'t.', explanationRu: "My parents (they) -> weren't." },
             ],
           },
           {
@@ -5213,8 +5213,8 @@ export const grammarPathSections = [
               exampleRu: 'He isn\'t at home now. He wasn\'t at home yesterday.',
             },
             exercises: [
-              { text: 'She ___ here now, but she ___ here yesterday.', options: ["isn't / was", "wasn't / is", "isn't / is"], correct: 0, explanation: 'now -> isn\'t / yesterday -> was.' },
-              { text: 'Choose the correct sentence:', options: ['We weren\'t busy yesterday.', 'We isn\'t busy yesterday.'], correct: 0, explanation: 'yesterday + We -> weren\'t.' },
+              { text: 'She ___ here now, but she ___ here yesterday.', options: ["isn't / was", "wasn't / is", "isn't / is"], correct: 0, explanation: 'now -> isn\'t / yesterday -> was.', explanationRu: "now -> isn't / yesterday -> was." },
+              { text: 'Choose the correct sentence:', options: ['We weren\'t busy yesterday.', 'We isn\'t busy yesterday.'], correct: 0, explanation: 'yesterday + We -> weren\'t.', explanationRu: "yesterday + We -> weren't." },
             ],
           },
           {
@@ -5226,9 +5226,9 @@ export const grammarPathSections = [
               exampleRu: 'I wasn\'t ready and they weren\'t ready either.',
             },
             exercises: [
-              { text: 'Choose the correct form: It ___ cold yesterday.', options: ["wasn't", "weren't"], correct: 0, explanation: 'It -> wasn\'t.' },
-              { text: 'Choose the correct form: You ___ at the party.', options: ["weren't", "wasn't"], correct: 0, explanation: 'You -> weren\'t.' },
-              { text: 'Select the correct sentence:', options: ['The shops weren\'t open on Sunday.', 'The shops wasn\'t open on Sunday.'], correct: 0, explanation: 'The shops (they) -> weren\'t.' },
+              { text: 'Choose the correct form: It ___ cold yesterday.', options: ["wasn't", "weren't"], correct: 0, explanation: 'It -> wasn\'t.', explanationRu: "It -> wasn't." },
+              { text: 'Choose the correct form: You ___ at the party.', options: ["weren't", "wasn't"], correct: 0, explanation: 'You -> weren\'t.', explanationRu: "You -> weren't." },
+              { text: 'Select the correct sentence:', options: ['The shops weren\'t open on Sunday.', 'The shops wasn\'t open on Sunday.'], correct: 0, explanation: 'The shops (they) -> weren\'t.', explanationRu: "The shops (they) -> weren't." },
             ],
           },
         ],
@@ -5249,8 +5249,8 @@ export const grammarPathSections = [
               exampleRu: 'Was he at home yesterday? (Он был дома вчера?) Was it cold?',
             },
             exercises: [
-              { text: '___ she at school yesterday?', options: ['Was', 'Were', 'Is'], correct: 0, explanation: '"She" savolida "Was" oldinga chiqadi.' },
-              { text: '___ the movie interesting?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: 'The movie (it) -> Was.' },
+              { text: '___ she at school yesterday?', options: ['Was', 'Were', 'Is'], correct: 0, explanation: '"She" savolida "Was" oldinga chiqadi.', explanationRu: "В вопросе с \"She\" выносится вперёд \"Was\"." },
+              { text: '___ the movie interesting?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: 'The movie (it) -> Was.', explanationRu: "The movie (it) -> Was." },
             ],
           },
           {
@@ -5262,8 +5262,8 @@ export const grammarPathSections = [
               exampleRu: 'Were you at the party? Were they happy?',
             },
             exercises: [
-              { text: '___ you tired last night?', options: ['Were', 'Was', 'Are'], correct: 0, explanation: '"You" savolida "Were" oldinga chiqadi.' },
-              { text: '___ they at home yesterday?', options: ['Were', 'Was', 'Do'], correct: 0, explanation: '"They" savolida "Were".' },
+              { text: '___ you tired last night?', options: ['Were', 'Was', 'Are'], correct: 0, explanation: '"You" savolida "Were" oldinga chiqadi.', explanationRu: "В вопросе с \"You\" выносится вперёд \"Were\"." },
+              { text: '___ they at home yesterday?', options: ['Were', 'Was', 'Do'], correct: 0, explanation: '"They" savolida "Were".', explanationRu: "В вопросе с \"They\": Were." },
             ],
           },
           {
@@ -5275,8 +5275,8 @@ export const grammarPathSections = [
               exampleRu: '— Were you at school? — Yes, I was. / No, I wasn\'t.',
             },
             exercises: [
-              { text: '— Was he at home? — Yes, he ___.', options: ['was', 'were', 'is'], correct: 0, explanation: 'Yes, he was.' },
-              { text: '— Were they happy? — No, they ___.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'No, they weren\'t.' },
+              { text: '— Was he at home? — Yes, he ___.', options: ['was', 'were', 'is'], correct: 0, explanation: 'Yes, he was.', explanationRu: "Yes, he was." },
+              { text: '— Were they happy? — No, they ___.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'No, they weren\'t.', explanationRu: "No, they weren't." },
             ],
           },
           {
@@ -5288,8 +5288,8 @@ export const grammarPathSections = [
               exampleRu: 'Where were you yesterday? Why was he late?',
             },
             exercises: [
-              { text: 'Where ___ you yesterday afternoon?', options: ['were', 'was', 'are'], correct: 0, explanation: 'Where + were you.' },
-              { text: 'Why ___ she late for school?', options: ['was', 'were', 'is'], correct: 0, explanation: 'Why + was she.' },
+              { text: 'Where ___ you yesterday afternoon?', options: ['were', 'was', 'are'], correct: 0, explanation: 'Where + were you.', explanationRu: "Where + were you." },
+              { text: 'Why ___ she late for school?', options: ['was', 'were', 'is'], correct: 0, explanation: 'Why + was she.', explanationRu: "Why + was she." },
             ],
           },
           {
@@ -5301,9 +5301,9 @@ export const grammarPathSections = [
               exampleRu: 'Where were you last night and why was Tom with you?',
             },
             exercises: [
-              { text: 'Choose the correct question: ___ you at home?', options: ['Were', 'Was'], correct: 0, explanation: 'Were you...' },
-              { text: 'Choose the correct question: ___ it rainy yesterday?', options: ['Was', 'Were'], correct: 0, explanation: 'Was it...' },
-              { text: 'Select the correct question:', options: ['Where was your phone?', 'Where were your phone?'], correct: 0, explanation: 'your phone (it) -> Where was.' },
+              { text: 'Choose the correct question: ___ you at home?', options: ['Were', 'Was'], correct: 0, explanation: 'Were you...', explanationRu: "Were you..." },
+              { text: 'Choose the correct question: ___ it rainy yesterday?', options: ['Was', 'Were'], correct: 0, explanation: 'Was it...', explanationRu: "Was it..." },
+              { text: 'Select the correct question:', options: ['Where was your phone?', 'Where were your phone?'], correct: 0, explanation: 'your phone (it) -> Where was.', explanationRu: "your phone (it) -> Where was." },
             ],
           },
         ],
@@ -5324,8 +5324,8 @@ export const grammarPathSections = [
               exampleRu: 'I am a doctor now. I was a student 5 years ago.',
             },
             exercises: [
-              { text: 'Today I ___ happy, but yesterday I ___ sad.', options: ['am / was', 'was / am', 'am / am'], correct: 0, explanation: 'Today -> am / yesterday -> was.' },
-              { text: 'Now they ___ in Tashkent, but last week they ___ in Bukhara.', options: ['are / were', 'were / are', 'are / are'], correct: 0, explanation: 'Now -> are / last week -> were.' },
+              { text: 'Today I ___ happy, but yesterday I ___ sad.', options: ['am / was', 'was / am', 'am / am'], correct: 0, explanation: 'Today -> am / yesterday -> was.', explanationRu: "Today -> am / yesterday -> was." },
+              { text: 'Now they ___ in Tashkent, but last week they ___ in Bukhara.', options: ['are / were', 'were / are', 'are / are'], correct: 0, explanation: 'Now -> are / last week -> were.', explanationRu: "Now -> are / last week -> were." },
             ],
           },
           {
@@ -5337,8 +5337,8 @@ export const grammarPathSections = [
               exampleRu: 'Where are you now? Where were you yesterday?',
             },
             exercises: [
-              { text: 'The weather ___ very cold yesterday.', options: ['was', 'is', 'are'], correct: 0, explanation: 'yesterday -> was.' },
-              { text: 'The weather ___ very nice today.', options: ['is', 'was', 'were'], correct: 0, explanation: 'today -> is.' },
+              { text: 'The weather ___ very cold yesterday.', options: ['was', 'is', 'are'], correct: 0, explanation: 'yesterday -> was.', explanationRu: "yesterday -> was." },
+              { text: 'The weather ___ very nice today.', options: ['is', 'was', 'were'], correct: 0, explanation: 'today -> is.', explanationRu: "today -> is." },
             ],
           },
           {
@@ -5350,8 +5350,8 @@ export const grammarPathSections = [
               exampleRu: 'This house was old before, but now it is new and clean.',
             },
             exercises: [
-              { text: 'I ___ small 10 years ago, but now I ___ tall.', options: ['was / am', 'am / was', 'was / was'], correct: 0, explanation: '10 years ago -> was / now -> am.' },
-              { text: 'Choose the correct sentence:', options: ['He was poor before, but now he is rich.', 'He is poor before, but now he was rich.'], correct: 0, explanation: 'before -> was / now -> is.' },
+              { text: 'I ___ small 10 years ago, but now I ___ tall.', options: ['was / am', 'am / was', 'was / was'], correct: 0, explanation: '10 years ago -> was / now -> am.', explanationRu: "10 years ago -> was / now -> am." },
+              { text: 'Choose the correct sentence:', options: ['He was poor before, but now he is rich.', 'He is poor before, but now he was rich.'], correct: 0, explanation: 'before -> was / now -> is.', explanationRu: "before -> was / now -> is." },
             ],
           },
           {
@@ -5363,8 +5363,8 @@ export const grammarPathSections = [
               exampleRu: 'We were at the restaurant last night, and the food was delicious.',
             },
             exercises: [
-              { text: 'Where ___ you last night? — I ___ at home.', options: ['were / was', 'was / were', 'are / am'], correct: 0, explanation: 'were you / I was.' },
-              { text: 'Select the correct sentence:', options: ['She is 20 now; last year she was 19.', 'She was 20 now; last year she is 19.'], correct: 0, explanation: 'now -> is / last year -> was.' },
+              { text: 'Where ___ you last night? — I ___ at home.', options: ['were / was', 'was / were', 'are / am'], correct: 0, explanation: 'were you / I was.', explanationRu: "were you / I was." },
+              { text: 'Select the correct sentence:', options: ['She is 20 now; last year she was 19.', 'She was 20 now; last year she is 19.'], correct: 0, explanation: 'now -> is / last year -> was.', explanationRu: "now -> is / last year -> was." },
             ],
           },
           {
@@ -5376,9 +5376,9 @@ export const grammarPathSections = [
               exampleRu: 'I am ready today, but I was not ready yesterday.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They were in London last month.', 'They are in London last month.'], correct: 0, explanation: 'last month -> were.' },
-              { text: 'Choose the correct sentence:', options: ['I am at work right now.', 'I was at work right now.'], correct: 0, explanation: 'right now -> am.' },
-              { text: 'Select the correct sentence:', options: ['It was sunny yesterday, but it is rainy today.', 'It is sunny yesterday, but it was rainy today.'], correct: 0, explanation: 'yesterday -> was / today -> is.' },
+              { text: 'Choose the correct sentence:', options: ['They were in London last month.', 'They are in London last month.'], correct: 0, explanation: 'last month -> were.', explanationRu: "last month -> were." },
+              { text: 'Choose the correct sentence:', options: ['I am at work right now.', 'I was at work right now.'], correct: 0, explanation: 'right now -> am.', explanationRu: "right now -> am." },
+              { text: 'Select the correct sentence:', options: ['It was sunny yesterday, but it is rainy today.', 'It is sunny yesterday, but it was rainy today.'], correct: 0, explanation: 'yesterday -> was / today -> is.', explanationRu: "yesterday -> was / today -> is." },
             ],
           },
         ],
@@ -5399,8 +5399,8 @@ export const grammarPathSections = [
               exampleRu: 'They were happy. I was tired. We weren\'t late.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They were at the museum.', 'They was at the museum.'], correct: 0, explanation: 'They + were.' },
-              { text: 'Choose the correct sentence:', options: ['We weren\'t late for class.', 'We wasn\'t late for class.'], correct: 0, explanation: 'We + weren\'t.' },
+              { text: 'Choose the correct sentence:', options: ['They were at the museum.', 'They was at the museum.'], correct: 0, explanation: 'They + were.', explanationRu: "They + were." },
+              { text: 'Choose the correct sentence:', options: ['We weren\'t late for class.', 'We wasn\'t late for class.'], correct: 0, explanation: 'We + weren\'t.', explanationRu: "We + weren't." },
             ],
           },
           {
@@ -5412,8 +5412,8 @@ export const grammarPathSections = [
               exampleRu: '— Was it cold yesterday? — Yes, it was very cold.',
             },
             exercises: [
-              { text: '— ___ you at the concert? — Yes, I ___ !', options: ['Were / was', 'Was / were', 'Are / am'], correct: 0, explanation: 'Were you / I was.' },
-              { text: '— ___ he late? — No, he ___ on time.', options: ['Was / was', 'Were / was', 'Was / were'], correct: 0, explanation: 'Was he / he was.' },
+              { text: '— ___ you at the concert? — Yes, I ___ !', options: ['Were / was', 'Was / were', 'Are / am'], correct: 0, explanation: 'Were you / I was.', explanationRu: "Were you / I was." },
+              { text: '— ___ he late? — No, he ___ on time.', options: ['Was / was', 'Were / was', 'Was / were'], correct: 0, explanation: 'Was he / he was.', explanationRu: "Was he / he was." },
             ],
           },
           {
@@ -5425,8 +5425,8 @@ export const grammarPathSections = [
               exampleRu: 'Yesterday was Sunday. The weather was warm. We were at the park.',
             },
             exercises: [
-              { text: 'Yesterday ___ my birthday. All my friends ___ at my house.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'birthday (it) was / friends (they) were.' },
-              { text: 'The movie ___ short, but the songs ___ great.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'movie was / songs were.' },
+              { text: 'Yesterday ___ my birthday. All my friends ___ at my house.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'birthday (it) was / friends (they) were.', explanationRu: "birthday (it) was / friends (they) were." },
+              { text: 'The movie ___ short, but the songs ___ great.', options: ['was / were', 'were / was', 'was / was'], correct: 0, explanation: 'movie was / songs were.', explanationRu: "movie was / songs were." },
             ],
           },
           {
@@ -5438,8 +5438,8 @@ export const grammarPathSections = [
               exampleRu: 'I was there. I wasn\'t alone. Were you there too?',
             },
             exercises: [
-              { text: 'Select the correct sentence:', options: ['Where were you when the bell rang?', 'Where was you when the bell rang?'], correct: 0, explanation: 'Where were you...' },
-              { text: 'Select the correct sentence:', options: ['She wasn\'t happy because she was tired.', 'She weren\'t happy because she were tired.'], correct: 0, explanation: 'She wasn\'t / she was.' },
+              { text: 'Select the correct sentence:', options: ['Where were you when the bell rang?', 'Where was you when the bell rang?'], correct: 0, explanation: 'Where were you...', explanationRu: "Where were you..." },
+              { text: 'Select the correct sentence:', options: ['She wasn\'t happy because she was tired.', 'She weren\'t happy because she were tired.'], correct: 0, explanation: 'She wasn\'t / she was.', explanationRu: "She wasn't / she was." },
             ],
           },
           {
@@ -5451,9 +5451,9 @@ export const grammarPathSections = [
               exampleRu: 'I was, he was, she was, it was. You were, we were, they were.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I was at home, and my parents were at work.', 'I were at home, and my parents was at work.'], correct: 0, explanation: 'I was / parents (they) were.' },
-              { text: 'Choose the correct sentence:', options: ['Why were you absent yesterday?', 'Why was you absent yesterday?'], correct: 0, explanation: 'Why were you...' },
-              { text: 'Select the correct sentence:', options: ['It was a great day, and we were happy.', 'It were a great day, and we was happy.'], correct: 0, explanation: 'It was / we were.' },
+              { text: 'Choose the correct sentence:', options: ['I was at home, and my parents were at work.', 'I were at home, and my parents was at work.'], correct: 0, explanation: 'I was / parents (they) were.', explanationRu: "I was / parents (they) were." },
+              { text: 'Choose the correct sentence:', options: ['Why were you absent yesterday?', 'Why was you absent yesterday?'], correct: 0, explanation: 'Why were you...', explanationRu: "Why were you..." },
+              { text: 'Select the correct sentence:', options: ['It was a great day, and we were happy.', 'It were a great day, and we was happy.'], correct: 0, explanation: 'It was / we were.', explanationRu: "It was / we were." },
             ],
           },
         ],
@@ -5463,21 +5463,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: 'To be' — o'tgan zamon (was / were)",
       titleRu: 'Тест раздела: Глагол "to be" в прошедшем времени (was / were)',
       exercises: [
-        { text: 'I ___ at home yesterday evening.', options: ['was', 'were', 'am'], correct: 0, explanation: 'I + was.' },
-        { text: 'They ___ at the cinema last night.', options: ['were', 'was', 'are'], correct: 0, explanation: 'They + were.' },
-        { text: 'She ___ very tired after the trip.', options: ['was', 'were', 'is'], correct: 0, explanation: 'She + was.' },
-        { text: 'We ___ classmates 3 years ago.', options: ['were', 'was', 'am'], correct: 0, explanation: 'We + were.' },
-        { text: 'He ___ at work yesterday because he was sick.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: 'He + wasn\'t.' },
-        { text: 'The students ___ ready for the test.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'The students (they) + weren\'t.' },
-        { text: '___ you at school yesterday?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: 'Were you...' },
-        { text: '___ it cold last winter?', options: ['Was', 'Were', 'Is'], correct: 0, explanation: 'Was it...' },
-        { text: 'Where ___ your brother yesterday?', options: ['was', 'were', 'is'], correct: 0, explanation: 'Where was your brother (he)...' },
-        { text: '— Were you happy? — Yes, I ___.', options: ['was', 'were', 'am'], correct: 0, explanation: 'Yes, I was.' },
-        { text: 'Today is warm, but yesterday ___ very cold.', options: ['was', 'is', 'were'], correct: 0, explanation: 'yesterday -> was.' },
-        { text: 'Choose the correct sentence:', options: ['We were in Samarkand last month.', 'We was in Samarkand last month.'], correct: 0, explanation: 'We + were.' },
-        { text: 'Choose the correct sentence:', options: ['She wasn\'t late for the meeting.', 'She weren\'t late for the meeting.'], correct: 0, explanation: 'She + wasn\'t.' },
-        { text: 'Select the correct sentence:', options: ['Why was he so angry yesterday?', 'Why were he so angry yesterday?'], correct: 0, explanation: 'Why was he...' },
-        { text: 'Select the correct sentence:', options: ['My sister and I were at home last night.', 'My sister and I was at home last night.'], correct: 0, explanation: 'My sister and I (we) -> were.' },
+        { text: 'I ___ at home yesterday evening.', options: ['was', 'were', 'am'], correct: 0, explanation: 'I + was.', explanationRu: "I + was." },
+        { text: 'They ___ at the cinema last night.', options: ['were', 'was', 'are'], correct: 0, explanation: 'They + were.', explanationRu: "They + were." },
+        { text: 'She ___ very tired after the trip.', options: ['was', 'were', 'is'], correct: 0, explanation: 'She + was.', explanationRu: "She + was." },
+        { text: 'We ___ classmates 3 years ago.', options: ['were', 'was', 'am'], correct: 0, explanation: 'We + were.', explanationRu: "We + were." },
+        { text: 'He ___ at work yesterday because he was sick.', options: ["wasn't", "weren't", "isn't"], correct: 0, explanation: 'He + wasn\'t.', explanationRu: "He + wasn't." },
+        { text: 'The students ___ ready for the test.', options: ["weren't", "wasn't", "don't"], correct: 0, explanation: 'The students (they) + weren\'t.', explanationRu: "The students (they) + weren't." },
+        { text: '___ you at school yesterday?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: 'Were you...', explanationRu: "Were you..." },
+        { text: '___ it cold last winter?', options: ['Was', 'Were', 'Is'], correct: 0, explanation: 'Was it...', explanationRu: "Was it..." },
+        { text: 'Where ___ your brother yesterday?', options: ['was', 'were', 'is'], correct: 0, explanation: 'Where was your brother (he)...', explanationRu: "Where was your brother (he)..." },
+        { text: '— Were you happy? — Yes, I ___.', options: ['was', 'were', 'am'], correct: 0, explanation: 'Yes, I was.', explanationRu: "Yes, I was." },
+        { text: 'Today is warm, but yesterday ___ very cold.', options: ['was', 'is', 'were'], correct: 0, explanation: 'yesterday -> was.', explanationRu: "yesterday -> was." },
+        { text: 'Choose the correct sentence:', options: ['We were in Samarkand last month.', 'We was in Samarkand last month.'], correct: 0, explanation: 'We + were.', explanationRu: "We + were." },
+        { text: 'Choose the correct sentence:', options: ['She wasn\'t late for the meeting.', 'She weren\'t late for the meeting.'], correct: 0, explanation: 'She + wasn\'t.', explanationRu: "She + wasn't." },
+        { text: 'Select the correct sentence:', options: ['Why was he so angry yesterday?', 'Why were he so angry yesterday?'], correct: 0, explanation: 'Why was he...', explanationRu: "Why was he..." },
+        { text: 'Select the correct sentence:', options: ['My sister and I were at home last night.', 'My sister and I was at home last night.'], correct: 0, explanation: 'My sister and I (we) -> were.', explanationRu: "My sister and I (we) -> were." },
       ],
     },
   },
@@ -5504,8 +5504,8 @@ export const grammarPathSections = [
               exampleRu: 'I worked yesterday. (Я работал вчера.) She played tennis. (Она играла в теннис.)',
             },
             exercises: [
-              { text: 'I ___ TV yesterday evening.', options: ['watched', 'watch', 'watching'], correct: 0, explanation: 'Past Simple da muntazam fe\'lga -ed qo\'shiladi: watched.' },
-              { text: 'They ___ football last Sunday.', options: ['played', 'play', 'plays'], correct: 0, explanation: 'last Sunday -> played.' },
+              { text: 'I ___ TV yesterday evening.', options: ['watched', 'watch', 'watching'], correct: 0, explanation: 'Past Simple da muntazam fe\'lga -ed qo\'shiladi: watched.', explanationRu: "В Past Simple к правильным глаголам добавляется -ed: watched." },
+              { text: 'They ___ football last Sunday.', options: ['played', 'play', 'plays'], correct: 0, explanation: 'last Sunday -> played.', explanationRu: "last Sunday -> played." },
             ],
           },
           {
@@ -5517,8 +5517,8 @@ export const grammarPathSections = [
               exampleRu: 'He lived in Tashkent. She studied English. The car stopped.',
             },
             exercises: [
-              { text: 'Past Simple form of "study":', options: ['studied', 'studyed', 'studyd'], correct: 0, explanation: 'study -> studied (y ➔ ied).' },
-              { text: 'Past Simple form of "stop":', options: ['stopped', 'stoped', 'stopping'], correct: 0, explanation: 'stop -> stopped (p ikkilanadi).' },
+              { text: 'Past Simple form of "study":', options: ['studied', 'studyed', 'studyd'], correct: 0, explanation: 'study -> studied (y ➔ ied).', explanationRu: "study -> studied (y ➔ ied)." },
+              { text: 'Past Simple form of "stop":', options: ['stopped', 'stoped', 'stopping'], correct: 0, explanation: 'stop -> stopped (p ikkilanadi).', explanationRu: "stop -> stopped (p удваивается)." },
             ],
           },
           {
@@ -5530,8 +5530,8 @@ export const grammarPathSections = [
               exampleRu: 'I wanted ice cream. He walked home. We played games.',
             },
             exercises: [
-              { text: 'Which word has the /ɪd/ sound for "-ed"?', options: ['wanted', 'worked', 'played'], correct: 0, explanation: 't bilan tugagani uchun wanted /ɪd/ deb o\'qiladi.' },
-              { text: 'Past Simple form of "live":', options: ['lived', 'livede', 'livet'], correct: 0, explanation: 'live -> lived.' },
+              { text: 'Which word has the /ɪd/ sound for "-ed"?', options: ['wanted', 'worked', 'played'], correct: 0, explanation: 't bilan tugagani uchun wanted /ɪd/ deb o\'qiladi.', explanationRu: "Так как оканчивается на t, wanted произносится как /ɪd/." },
+              { text: 'Past Simple form of "live":', options: ['lived', 'livede', 'livet'], correct: 0, explanation: 'live -> lived.', explanationRu: "live -> lived." },
             ],
           },
           {
@@ -5543,8 +5543,8 @@ export const grammarPathSections = [
               exampleRu: 'We visited Samarkand last month. He called me 2 hours ago.',
             },
             exercises: [
-              { text: 'She ___ her room yesterday.', options: ['cleaned', 'cleans', 'cleaning'], correct: 0, explanation: 'yesterday -> cleaned.' },
-              { text: 'We ___ in London in 2020.', options: ['lived', 'live', 'lives'], correct: 0, explanation: 'in 2020 -> lived.' },
+              { text: 'She ___ her room yesterday.', options: ['cleaned', 'cleans', 'cleaning'], correct: 0, explanation: 'yesterday -> cleaned.', explanationRu: "yesterday -> cleaned." },
+              { text: 'We ___ in London in 2020.', options: ['lived', 'live', 'lives'], correct: 0, explanation: 'in 2020 -> lived.', explanationRu: "in 2020 -> lived." },
             ],
           },
           {
@@ -5556,9 +5556,9 @@ export const grammarPathSections = [
               exampleRu: 'I studied hard and passed the exam yesterday.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They cooked dinner last night.', 'They cook dinner last night.'], correct: 0, explanation: 'last night -> cooked.' },
-              { text: 'Choose the correct sentence:', options: ['He walked to school yesterday.', 'He walk to school yesterday.'], correct: 0, explanation: 'yesterday -> walked.' },
-              { text: 'Select the correct sentence:', options: ['My sister invited me to the party.', 'My sister invite me to the party.'], correct: 0, explanation: 'Past Simple: invited.' },
+              { text: 'Choose the correct sentence:', options: ['They cooked dinner last night.', 'They cook dinner last night.'], correct: 0, explanation: 'last night -> cooked.', explanationRu: "last night -> cooked." },
+              { text: 'Choose the correct sentence:', options: ['He walked to school yesterday.', 'He walk to school yesterday.'], correct: 0, explanation: 'yesterday -> walked.', explanationRu: "yesterday -> walked." },
+              { text: 'Select the correct sentence:', options: ['My sister invited me to the party.', 'My sister invite me to the party.'], correct: 0, explanation: 'Past Simple: invited.', explanationRu: "Past Simple: invited." },
             ],
           },
         ],
@@ -5579,8 +5579,8 @@ export const grammarPathSections = [
               exampleRu: 'I went to school yesterday. (Я пошел в школу вчера.)',
             },
             exercises: [
-              { text: 'Past Simple form of "go":', options: ['went', 'goed', 'goes'], correct: 0, explanation: 'go ning Past Simple shakli: went.' },
-              { text: 'Yesterday I ___ my friend in the park.', options: ['saw', 'see', 'seed'], correct: 0, explanation: 'see -> saw.' },
+              { text: 'Past Simple form of "go":', options: ['went', 'goed', 'goes'], correct: 0, explanation: 'go ning Past Simple shakli: went.', explanationRu: "Форма Past Simple от go: went." },
+              { text: 'Yesterday I ___ my friend in the park.', options: ['saw', 'see', 'seed'], correct: 0, explanation: 'see -> saw.', explanationRu: "see -> saw." },
             ],
           },
           {
@@ -5592,8 +5592,8 @@ export const grammarPathSections = [
               exampleRu: 'We had lunch at 1 PM. He took a taxi yesterday.',
             },
             exercises: [
-              { text: 'Past Simple form of "have":', options: ['had', 'haved', 'has'], correct: 0, explanation: 'have -> had.' },
-              { text: 'He ___ his homework last night.', options: ['did', 'doed', 'does'], correct: 0, explanation: 'do -> did.' },
+              { text: 'Past Simple form of "have":', options: ['had', 'haved', 'has'], correct: 0, explanation: 'have -> had.', explanationRu: "have -> had." },
+              { text: 'He ___ his homework last night.', options: ['did', 'doed', 'does'], correct: 0, explanation: 'do -> did.', explanationRu: "do -> did." },
             ],
           },
           {
@@ -5605,8 +5605,8 @@ export const grammarPathSections = [
               exampleRu: 'She bought a new phone yesterday. My friend came to visit.',
             },
             exercises: [
-              { text: 'Past Simple form of "buy":', options: ['bought', 'buyed', 'buys'], correct: 0, explanation: 'buy -> bought.' },
-              { text: 'She ___ me a present last week.', options: ['gave', 'gived', 'gives'], correct: 0, explanation: 'give -> gave.' },
+              { text: 'Past Simple form of "buy":', options: ['bought', 'buyed', 'buys'], correct: 0, explanation: 'buy -> bought.', explanationRu: "buy -> bought." },
+              { text: 'She ___ me a present last week.', options: ['gave', 'gived', 'gives'], correct: 0, explanation: 'give -> gave.', explanationRu: "give -> gave." },
             ],
           },
           {
@@ -5618,8 +5618,8 @@ export const grammarPathSections = [
               exampleRu: 'I read a great book yesterday. He put the key on the table.',
             },
             exercises: [
-              { text: 'Past Simple form of "put":', options: ['put', 'puted', 'putton'], correct: 0, explanation: 'put ning o\'tgan zamon shakli o\'zgarmaydi: put.' },
-              { text: 'Yesterday I ___ an interesting news article.', options: ['read', 'readed', 'reading'], correct: 0, explanation: 'read ning Past Simple shakli read yoziladi (/red/ o\'qiladi).' },
+              { text: 'Past Simple form of "put":', options: ['put', 'puted', 'putton'], correct: 0, explanation: 'put ning o\'tgan zamon shakli o\'zgarmaydi: put.', explanationRu: "Форма прошедшего времени от put не меняется: put." },
+              { text: 'Yesterday I ___ an interesting news article.', options: ['read', 'readed', 'reading'], correct: 0, explanation: 'read ning Past Simple shakli read yoziladi (/red/ o\'qiladi).', explanationRu: "Форма Past Simple от read пишется read (произносится /red/)." },
             ],
           },
           {
@@ -5631,9 +5631,9 @@ export const grammarPathSections = [
               exampleRu: 'I woke up early, had breakfast, and went to work.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She wrote a letter yesterday.', 'She writed a letter yesterday.'], correct: 0, explanation: 'write -> wrote.' },
-              { text: 'Choose the correct sentence:', options: ['We ate pizza last night.', 'We eated pizza last night.'], correct: 0, explanation: 'eat -> ate.' },
-              { text: 'Select the correct sentence:', options: ['He came home late last night.', 'He comed home late last night.'], correct: 0, explanation: 'come -> came.' },
+              { text: 'Choose the correct sentence:', options: ['She wrote a letter yesterday.', 'She writed a letter yesterday.'], correct: 0, explanation: 'write -> wrote.', explanationRu: "write -> wrote." },
+              { text: 'Choose the correct sentence:', options: ['We ate pizza last night.', 'We eated pizza last night.'], correct: 0, explanation: 'eat -> ate.', explanationRu: "eat -> ate." },
+              { text: 'Select the correct sentence:', options: ['He came home late last night.', 'He comed home late last night.'], correct: 0, explanation: 'come -> came.', explanationRu: "come -> came." },
             ],
           },
         ],
@@ -5654,8 +5654,8 @@ export const grammarPathSections = [
               exampleRu: 'I didn\'t work yesterday. She didn\'t go.',
             },
             exercises: [
-              { text: 'I ___ to school yesterday.', options: ["didn't go", "didn't went", "not go"], correct: 0, explanation: "didn't dan keyin fe'l bosh shaklda: didn't go." },
-              { text: 'She ___ TV last night.', options: ["didn't watch", "didn't watched", "not watched"], correct: 0, explanation: "didn't + V1: didn't watch." },
+              { text: 'I ___ to school yesterday.', options: ["didn't go", "didn't went", "not go"], correct: 0, explanation: "didn't dan keyin fe'l bosh shaklda: didn't go.", explanationRu: "После didn't глагол в начальной форме: didn't go." },
+              { text: 'She ___ TV last night.', options: ["didn't watch", "didn't watched", "not watched"], correct: 0, explanation: "didn't + V1: didn't watch.", explanationRu: "didn't + V1: didn't watch." },
             ],
           },
           {
@@ -5667,8 +5667,8 @@ export const grammarPathSections = [
               exampleRu: 'He didn\'t call me yesterday.',
             },
             exercises: [
-              { text: 'They ___ football yesterday.', options: ["didn't play", "didn't played", "don't played"], correct: 0, explanation: "didn't + play (-ed siz)." },
-              { text: 'We ___ the car last week.', options: ["didn't clean", "didn't cleaned", "not clean"], correct: 0, explanation: "didn't + clean." },
+              { text: 'They ___ football yesterday.', options: ["didn't play", "didn't played", "don't played"], correct: 0, explanation: "didn't + play (-ed siz).", explanationRu: "didn't + play (без -ed)." },
+              { text: 'We ___ the car last week.', options: ["didn't clean", "didn't cleaned", "not clean"], correct: 0, explanation: "didn't + clean.", explanationRu: "didn't + clean." },
             ],
           },
           {
@@ -5680,8 +5680,8 @@ export const grammarPathSections = [
               exampleRu: 'I didn\'t buy the ticket. She didn\'t see the movie.',
             },
             exercises: [
-              { text: 'I ___ him yesterday.', options: ["didn't see", "didn't saw", "don't saw"], correct: 0, explanation: "didn't + see (V1)." },
-              { text: 'He ___ breakfast this morning.', options: ["didn't have", "didn't had", "not had"], correct: 0, explanation: "didn't + have (V1)." },
+              { text: 'I ___ him yesterday.', options: ["didn't see", "didn't saw", "don't saw"], correct: 0, explanation: "didn't + see (V1).", explanationRu: "didn't + see (V1)." },
+              { text: 'He ___ breakfast this morning.', options: ["didn't have", "didn't had", "not had"], correct: 0, explanation: "didn't + have (V1).", explanationRu: "didn't + have (V1)." },
             ],
           },
           {
@@ -5693,8 +5693,8 @@ export const grammarPathSections = [
               exampleRu: 'Correct: I didn\'t know.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I didn\'t go to the party.', 'I didn\'t went to the party.'], correct: 0, explanation: "didn't + go." },
-              { text: 'Choose the correct sentence:', options: ['She didn\'t write the email.', 'She didn\'t wrote the email.'], correct: 0, explanation: "didn't + write." },
+              { text: 'Choose the correct sentence:', options: ['I didn\'t go to the party.', 'I didn\'t went to the party.'], correct: 0, explanation: "didn't + go.", explanationRu: "didn't + go." },
+              { text: 'Choose the correct sentence:', options: ['She didn\'t write the email.', 'She didn\'t wrote the email.'], correct: 0, explanation: "didn't + write.", explanationRu: "didn't + write." },
             ],
           },
           {
@@ -5706,9 +5706,9 @@ export const grammarPathSections = [
               exampleRu: 'We didn\'t stay home, but we didn\'t spend much money.',
             },
             exercises: [
-              { text: 'Select the correct sentence:', options: ['They didn\'t enjoy the movie.', 'They didn\'t enjoyed the movie.'], correct: 0, explanation: "didn't + enjoy." },
-              { text: 'Select the correct sentence:', options: ['He didn\'t sleep well last night.', 'He didn\'t slept well last night.'], correct: 0, explanation: "didn't + sleep." },
-              { text: 'Choose the correct form: I ___ my keys yesterday.', options: ["didn't find", "didn't found"], correct: 0, explanation: "didn't + find (V1)." },
+              { text: 'Select the correct sentence:', options: ['They didn\'t enjoy the movie.', 'They didn\'t enjoyed the movie.'], correct: 0, explanation: "didn't + enjoy.", explanationRu: "didn't + enjoy." },
+              { text: 'Select the correct sentence:', options: ['He didn\'t sleep well last night.', 'He didn\'t slept well last night.'], correct: 0, explanation: "didn't + sleep.", explanationRu: "didn't + sleep." },
+              { text: 'Choose the correct form: I ___ my keys yesterday.', options: ["didn't find", "didn't found"], correct: 0, explanation: "didn't + find (V1).", explanationRu: "didn't + find (V1)." },
             ],
           },
         ],
@@ -5729,8 +5729,8 @@ export const grammarPathSections = [
               exampleRu: 'Did you work yesterday? Did he go to school?',
             },
             exercises: [
-              { text: '___ you watch the game last night?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'O\'tgan zamon savolida "Did" ishlatiladi.' },
-              { text: 'Did she ___ you yesterday?', options: ['call', 'called', 'calling'], correct: 0, explanation: 'Did borligi uchun fe\'l V1 shaklda: call.' },
+              { text: '___ you watch the game last night?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'O\'tgan zamon savolida "Did" ishlatiladi.', explanationRu: "В вопросе прошедшего времени используется \"Did\"." },
+              { text: 'Did she ___ you yesterday?', options: ['call', 'called', 'calling'], correct: 0, explanation: 'Did borligi uchun fe\'l V1 shaklda: call.', explanationRu: "Из-за наличия Did глагол в форме V1: call." },
             ],
           },
           {
@@ -5742,8 +5742,8 @@ export const grammarPathSections = [
               exampleRu: '— Did you sleep well? — Yes, I did. / No, I didn\'t.',
             },
             exercises: [
-              { text: '— Did he pass the exam? — Yes, he ___ .', options: ['did', 'does', 'was'], correct: 0, explanation: 'Yes, he did.' },
-              { text: '— Did they come on time? — No, they ___ .', options: ["didn't", "don't", "weren't"], correct: 0, explanation: 'No, they didn\'t.' },
+              { text: '— Did he pass the exam? — Yes, he ___ .', options: ['did', 'does', 'was'], correct: 0, explanation: 'Yes, he did.', explanationRu: "Yes, he did." },
+              { text: '— Did they come on time? — No, they ___ .', options: ["didn't", "don't", "weren't"], correct: 0, explanation: 'No, they didn\'t.', explanationRu: "No, they didn't." },
             ],
           },
           {
@@ -5755,8 +5755,8 @@ export const grammarPathSections = [
               exampleRu: 'What did you buy yesterday? Where did they go last week?',
             },
             exercises: [
-              { text: 'Where ___ you go last weekend?', options: ['did', 'do', 'were'], correct: 0, explanation: 'Where + did + you + go.' },
-              { text: 'What did she ___ yesterday?', options: ['say', 'said', 'says'], correct: 0, explanation: 'did dan keyin fe\'l V1: say.' },
+              { text: 'Where ___ you go last weekend?', options: ['did', 'do', 'were'], correct: 0, explanation: 'Where + did + you + go.', explanationRu: "Where + did + you + go." },
+              { text: 'What did she ___ yesterday?', options: ['say', 'said', 'says'], correct: 0, explanation: 'did dan keyin fe\'l V1: say.', explanationRu: "После did глагол в V1: say." },
             ],
           },
           {
@@ -5768,8 +5768,8 @@ export const grammarPathSections = [
               exampleRu: 'Who broke the window? Who came first?',
             },
             exercises: [
-              { text: 'Who ___ the cake yesterday?', options: ['ate', 'did eat', 'eated'], correct: 0, explanation: 'Ega so\'ralganda: Who + ate (V2).' },
-              { text: 'Who ___ you yesterday?', options: ['called', 'did call', 'calls'], correct: 0, explanation: 'Who + called.' },
+              { text: 'Who ___ the cake yesterday?', options: ['ate', 'did eat', 'eated'], correct: 0, explanation: 'Ega so\'ralganda: Who + ate (V2).', explanationRu: "При вопросе к подлежащему: Who + ate (V2)." },
+              { text: 'Who ___ you yesterday?', options: ['called', 'did call', 'calls'], correct: 0, explanation: 'Who + called.', explanationRu: "Who + called." },
             ],
           },
           {
@@ -5781,9 +5781,9 @@ export const grammarPathSections = [
               exampleRu: 'Did you see Tom, and what did he tell you?',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Did you like the concert?', 'Did you liked the concert?'], correct: 0, explanation: 'Did + like (V1).' },
-              { text: 'Choose the correct question:', options: ['Where did you buy this shirt?', 'Where did you bought this shirt?'], correct: 0, explanation: 'did + buy (V1).' },
-              { text: 'Select the correct question:', options: ['Why did she leave so early?', 'Why did she left so early?'], correct: 0, explanation: 'did + leave (V1).' },
+              { text: 'Choose the correct question:', options: ['Did you like the concert?', 'Did you liked the concert?'], correct: 0, explanation: 'Did + like (V1).', explanationRu: "Did + like (V1)." },
+              { text: 'Choose the correct question:', options: ['Where did you buy this shirt?', 'Where did you bought this shirt?'], correct: 0, explanation: 'did + buy (V1).', explanationRu: "did + buy (V1)." },
+              { text: 'Select the correct question:', options: ['Why did she leave so early?', 'Why did she left so early?'], correct: 0, explanation: 'did + leave (V1).', explanationRu: "did + leave (V1)." },
             ],
           },
         ],
@@ -5804,8 +5804,8 @@ export const grammarPathSections = [
               exampleRu: 'I play tennis every Sunday. I played tennis yesterday.',
             },
             exercises: [
-              { text: 'I usually ___ coffee in the morning, but yesterday I ___ tea.', options: ['drink / drank', 'drank / drink', 'drink / drink'], correct: 0, explanation: 'usually -> drink / yesterday -> drank.' },
-              { text: 'She ___ to work every day, but last week she ___ at home.', options: ['goes / stayed', 'went / stays', 'goes / stay'], correct: 0, explanation: 'every day -> goes / last week -> stayed.' },
+              { text: 'I usually ___ coffee in the morning, but yesterday I ___ tea.', options: ['drink / drank', 'drank / drink', 'drink / drink'], correct: 0, explanation: 'usually -> drink / yesterday -> drank.', explanationRu: "usually -> drink / yesterday -> drank." },
+              { text: 'She ___ to work every day, but last week she ___ at home.', options: ['goes / stayed', 'went / stays', 'goes / stay'], correct: 0, explanation: 'every day -> goes / last week -> stayed.', explanationRu: "every day -> goes / last week -> stayed." },
             ],
           },
           {
@@ -5817,8 +5817,8 @@ export const grammarPathSections = [
               exampleRu: 'He doesn\'t like milk now. He didn\'t like milk as a child.',
             },
             exercises: [
-              { text: 'I ___ like horror movies now, and I ___ like them before either.', options: ["don't / didn't", "didn't / don't", "don't / don't"], correct: 0, explanation: 'now -> don\'t / before -> didn\'t.' },
-              { text: 'Choose the correct sentence:', options: ['He didn\'t call me yesterday.', 'He doesn\'t called me yesterday.'], correct: 0, explanation: 'yesterday -> didn\'t call.' },
+              { text: 'I ___ like horror movies now, and I ___ like them before either.', options: ["don't / didn't", "didn't / don't", "don't / don't"], correct: 0, explanation: 'now -> don\'t / before -> didn\'t.', explanationRu: "now -> don't / before -> didn't." },
+              { text: 'Choose the correct sentence:', options: ['He didn\'t call me yesterday.', 'He doesn\'t called me yesterday.'], correct: 0, explanation: 'yesterday -> didn\'t call.', explanationRu: "yesterday -> didn't call." },
             ],
           },
           {
@@ -5830,8 +5830,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you live here? Did you live here 5 years ago?',
             },
             exercises: [
-              { text: '___ you watch TV every evening?', options: ['Do', 'Did', 'Does'], correct: 0, explanation: 'every evening -> Do.' },
-              { text: '___ you watch the news yesterday?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'yesterday -> Did.' },
+              { text: '___ you watch TV every evening?', options: ['Do', 'Did', 'Does'], correct: 0, explanation: 'every evening -> Do.', explanationRu: "every evening -> Do." },
+              { text: '___ you watch the news yesterday?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'yesterday -> Did.', explanationRu: "yesterday -> Did." },
             ],
           },
           {
@@ -5843,8 +5843,8 @@ export const grammarPathSections = [
               exampleRu: 'Last year I worked in a school, but now I work in a bank.',
             },
             exercises: [
-              { text: 'In 2019 we ___ in Tashkent, but now we ___ in London.', options: ['lived / live', 'live / lived', 'lived / lived'], correct: 0, explanation: '2019 -> lived / now -> live.' },
-              { text: 'Select the correct sentence:', options: ['He bought a laptop last week and uses it every day.', 'He buys a laptop last week and used it every day.'], correct: 0, explanation: 'last week -> bought / every day -> uses.' },
+              { text: 'In 2019 we ___ in Tashkent, but now we ___ in London.', options: ['lived / live', 'live / lived', 'lived / lived'], correct: 0, explanation: '2019 -> lived / now -> live.', explanationRu: "2019 -> lived / now -> live." },
+              { text: 'Select the correct sentence:', options: ['He bought a laptop last week and uses it every day.', 'He buys a laptop last week and used it every day.'], correct: 0, explanation: 'last week -> bought / every day -> uses.', explanationRu: "last week -> bought / every day -> uses." },
             ],
           },
           {
@@ -5856,9 +5856,9 @@ export const grammarPathSections = [
               exampleRu: 'I always buy bread here, but yesterday I bought fruit.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She visited her grandma last Sunday.', 'She visits her grandma last Sunday.'], correct: 0, explanation: 'last Sunday -> visited.' },
-              { text: 'Choose the correct sentence:', options: ['Do you usually get up early?', 'Did you usually get up early?'], correct: 0, explanation: 'usually -> Do.' },
-              { text: 'Select the correct sentence:', options: ['I didn\'t go to work yesterday because I was sick.', 'I don\'t go to work yesterday because I was sick.'], correct: 0, explanation: 'yesterday -> didn\'t go.' },
+              { text: 'Choose the correct sentence:', options: ['She visited her grandma last Sunday.', 'She visits her grandma last Sunday.'], correct: 0, explanation: 'last Sunday -> visited.', explanationRu: "last Sunday -> visited." },
+              { text: 'Choose the correct sentence:', options: ['Do you usually get up early?', 'Did you usually get up early?'], correct: 0, explanation: 'usually -> Do.', explanationRu: "usually -> Do." },
+              { text: 'Select the correct sentence:', options: ['I didn\'t go to work yesterday because I was sick.', 'I don\'t go to work yesterday because I was sick.'], correct: 0, explanation: 'yesterday -> didn\'t go.', explanationRu: "yesterday -> didn't go." },
             ],
           },
         ],
@@ -5879,8 +5879,8 @@ export const grammarPathSections = [
               exampleRu: 'I went to school. I didn\'t go to school. Did you go to school?',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They didn\'t know the answer.', 'They didn\'t knew the answer.'], correct: 0, explanation: "didn't + know (V1)." },
-              { text: 'Choose the correct sentence:', options: ['Did you lose your keys?', 'Did you lost your keys?'], correct: 0, explanation: 'Did + lose (V1).' },
+              { text: 'Choose the correct sentence:', options: ['They didn\'t know the answer.', 'They didn\'t knew the answer.'], correct: 0, explanation: "didn't + know (V1).", explanationRu: "didn't + know (V1)." },
+              { text: 'Choose the correct sentence:', options: ['Did you lose your keys?', 'Did you lost your keys?'], correct: 0, explanation: 'Did + lose (V1).', explanationRu: "Did + lose (V1)." },
             ],
           },
           {
@@ -5892,8 +5892,8 @@ export const grammarPathSections = [
               exampleRu: '— What did you do yesterday? — I met my friends and we played football.',
             },
             exercises: [
-              { text: '— Where ___ you yesterday? — I ___ to the zoo.', options: ['were / went', 'was / go', 'did / went'], correct: 0, explanation: 'Where were you / I went.' },
-              { text: '— ___ you clean your room? — Yes, I ___ .', options: ['Did / cleaned', 'Did / did', 'Do / did'], correct: 1, explanation: 'Did you / Yes, I did.' },
+              { text: '— Where ___ you yesterday? — I ___ to the zoo.', options: ['were / went', 'was / go', 'did / went'], correct: 0, explanation: 'Where were you / I went.', explanationRu: "Where were you / I went." },
+              { text: '— ___ you clean your room? — Yes, I ___ .', options: ['Did / cleaned', 'Did / did', 'Do / did'], correct: 1, explanation: 'Did you / Yes, I did.', explanationRu: "Did you / Yes, I did." },
             ],
           },
           {
@@ -5905,8 +5905,8 @@ export const grammarPathSections = [
               exampleRu: 'I walked to the station and caught the train.',
             },
             exercises: [
-              { text: 'She ___ her bag and ___ out of the room.', options: ['took / walked', 'taked / walked', 'took / walk'], correct: 0, explanation: 'take -> took (irregular) / walk -> walked (regular).' },
-              { text: 'We ___ the car and ___ home.', options: ['washed / drove', 'wash / drived', 'washed / drive'], correct: 0, explanation: 'wash -> washed / drive -> drove.' },
+              { text: 'She ___ her bag and ___ out of the room.', options: ['took / walked', 'taked / walked', 'took / walk'], correct: 0, explanation: 'take -> took (irregular) / walk -> walked (regular).', explanationRu: "take -> took (неправильный) / walk -> walked (правильный)." },
+              { text: 'We ___ the car and ___ home.', options: ['washed / drove', 'wash / drived', 'washed / drive'], correct: 0, explanation: 'wash -> washed / drive -> drove.', explanationRu: "wash -> washed / drive -> drove." },
             ],
           },
           {
@@ -5918,8 +5918,8 @@ export const grammarPathSections = [
               exampleRu: 'First I opened the door, then I saw a cat, and finally I smiled.',
             },
             exercises: [
-              { text: 'He ___ up at 7:00, ___ a cup of coffee, and ___ to work.', options: ['woke / drank / went', 'waked / drinked / goed', 'woke / drink / go'], correct: 0, explanation: 'wake -> woke / drink -> drank / go -> went.' },
-              { text: 'Select the correct sentence:', options: ['She closed her book, turned off the light, and fell asleep.', 'She closed her book, turn off the light, and fall asleep.'], correct: 0, explanation: 'Barcha fe\'llar o\'tgan zamonda: closed, turned off, fell asleep.' },
+              { text: 'He ___ up at 7:00, ___ a cup of coffee, and ___ to work.', options: ['woke / drank / went', 'waked / drinked / goed', 'woke / drink / go'], correct: 0, explanation: 'wake -> woke / drink -> drank / go -> went.', explanationRu: "wake -> woke / drink -> drank / go -> went." },
+              { text: 'Select the correct sentence:', options: ['She closed her book, turned off the light, and fell asleep.', 'She closed her book, turn off the light, and fall asleep.'], correct: 0, explanation: 'Barcha fe\'llar o\'tgan zamonda: closed, turned off, fell asleep.', explanationRu: "Все глаголы в прошедшем времени: closed, turned off, fell asleep." },
             ],
           },
           {
@@ -5931,9 +5931,9 @@ export const grammarPathSections = [
               exampleRu: 'I played. I didn\'t play. Did you play? / I went. I didn\'t go. Did you go?',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['Did you understand the lesson?', 'Did you understood the lesson?'], correct: 0, explanation: 'Did + understand (V1).' },
-              { text: 'Choose the correct sentence:', options: ['I didn\'t forget your birthday.', 'I didn\'t forgot your birthday.'], correct: 0, explanation: "didn't + forget (V1)." },
-              { text: 'Select the correct sentence:', options: ['She wrote a book and published it last year.', 'She write a book and publish it last year.'], correct: 0, explanation: 'Past Simple: wrote, published.' },
+              { text: 'Choose the correct sentence:', options: ['Did you understand the lesson?', 'Did you understood the lesson?'], correct: 0, explanation: 'Did + understand (V1).', explanationRu: "Did + understand (V1)." },
+              { text: 'Choose the correct sentence:', options: ['I didn\'t forget your birthday.', 'I didn\'t forgot your birthday.'], correct: 0, explanation: "didn't + forget (V1).", explanationRu: "didn't + forget (V1)." },
+              { text: 'Select the correct sentence:', options: ['She wrote a book and published it last year.', 'She write a book and publish it last year.'], correct: 0, explanation: 'Past Simple: wrote, published.', explanationRu: "Past Simple: wrote, published." },
             ],
           },
         ],
@@ -5943,21 +5943,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Past Simple — muntazam va noto'g'ri fe'llar",
       titleRu: 'Тест раздела: Past Simple — правильные и неправильные глаголы',
       exercises: [
-        { text: 'I ___ a great movie yesterday evening.', options: ['watched', 'watch', 'watching'], correct: 0, explanation: 'yesterday -> watched.' },
-        { text: 'Past Simple form of "go":', options: ['went', 'goed', 'goes'], correct: 0, explanation: 'go -> went.' },
-        { text: 'Past Simple form of "buy":', options: ['bought', 'buyed', 'buys'], correct: 0, explanation: 'buy -> bought.' },
-        { text: 'Past Simple form of "study":', options: ['studied', 'studyed', 'studyd'], correct: 0, explanation: 'study -> studied.' },
-        { text: 'We ___ to the cinema last night.', options: ["didn't go", "didn't went", "not go"], correct: 0, explanation: "didn't + go." },
-        { text: 'She ___ her homework yesterday.', options: ["didn't finish", "didn't finished", "not finish"], correct: 0, explanation: "didn't + finish." },
-        { text: '___ you see my phone this morning?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'Past question -> Did.' },
-        { text: '— Did they win the game? — Yes, they ___ .', options: ['did', 'do', 'were'], correct: 0, explanation: 'Yes, they did.' },
-        { text: 'Where ___ you buy this nice bag?', options: ['did', 'do', 'were'], correct: 0, explanation: 'Where + did + buy.' },
-        { text: 'Who ___ the window yesterday?', options: ['broke', 'did break', 'breaked'], correct: 0, explanation: 'Who + broke (V2).' },
-        { text: 'Usually I ___ by bus, but yesterday I ___ by train.', options: ['travel / traveled', 'traveled / travel', 'travel / travel'], correct: 0, explanation: 'Usually -> travel / yesterday -> traveled.' },
-        { text: 'Choose the correct sentence:', options: ['He didn\'t tell me the secret.', 'He didn\'t told me the secret.'], correct: 0, explanation: "didn't + tell." },
-        { text: 'Choose the correct sentence:', options: ['They bought a house two years ago.', 'They buyed a house two years ago.'], correct: 0, explanation: 'buy -> bought.' },
-        { text: 'Select the correct sentence:', options: ['What did you do last weekend?', 'What did you did last weekend?'], correct: 0, explanation: 'did + do (V1).' },
-        { text: 'Select the correct sentence:', options: ['I woke up, ate breakfast, and went to work.', 'I waked up, eated breakfast, and goed to work.'], correct: 0, explanation: 'woke, ate, went.' },
+        { text: 'I ___ a great movie yesterday evening.', options: ['watched', 'watch', 'watching'], correct: 0, explanation: 'yesterday -> watched.', explanationRu: "yesterday -> watched." },
+        { text: 'Past Simple form of "go":', options: ['went', 'goed', 'goes'], correct: 0, explanation: 'go -> went.', explanationRu: "go -> went." },
+        { text: 'Past Simple form of "buy":', options: ['bought', 'buyed', 'buys'], correct: 0, explanation: 'buy -> bought.', explanationRu: "buy -> bought." },
+        { text: 'Past Simple form of "study":', options: ['studied', 'studyed', 'studyd'], correct: 0, explanation: 'study -> studied.', explanationRu: "study -> studied." },
+        { text: 'We ___ to the cinema last night.', options: ["didn't go", "didn't went", "not go"], correct: 0, explanation: "didn't + go.", explanationRu: "didn't + go." },
+        { text: 'She ___ her homework yesterday.', options: ["didn't finish", "didn't finished", "not finish"], correct: 0, explanation: "didn't + finish.", explanationRu: "didn't + finish." },
+        { text: '___ you see my phone this morning?', options: ['Did', 'Do', 'Does'], correct: 0, explanation: 'Past question -> Did.', explanationRu: "Вопрос в прошедшем времени -> Did." },
+        { text: '— Did they win the game? — Yes, they ___ .', options: ['did', 'do', 'were'], correct: 0, explanation: 'Yes, they did.', explanationRu: "Yes, they did." },
+        { text: 'Where ___ you buy this nice bag?', options: ['did', 'do', 'were'], correct: 0, explanation: 'Where + did + buy.', explanationRu: "Where + did + buy." },
+        { text: 'Who ___ the window yesterday?', options: ['broke', 'did break', 'breaked'], correct: 0, explanation: 'Who + broke (V2).', explanationRu: "Who + broke (V2)." },
+        { text: 'Usually I ___ by bus, but yesterday I ___ by train.', options: ['travel / traveled', 'traveled / travel', 'travel / travel'], correct: 0, explanation: 'Usually -> travel / yesterday -> traveled.', explanationRu: "Usually -> travel / yesterday -> traveled." },
+        { text: 'Choose the correct sentence:', options: ['He didn\'t tell me the secret.', 'He didn\'t told me the secret.'], correct: 0, explanation: "didn't + tell.", explanationRu: "didn't + tell." },
+        { text: 'Choose the correct sentence:', options: ['They bought a house two years ago.', 'They buyed a house two years ago.'], correct: 0, explanation: 'buy -> bought.', explanationRu: "buy -> bought." },
+        { text: 'Select the correct sentence:', options: ['What did you do last weekend?', 'What did you did last weekend?'], correct: 0, explanation: 'did + do (V1).', explanationRu: "did + do (V1)." },
+        { text: 'Select the correct sentence:', options: ['I woke up, ate breakfast, and went to work.', 'I waked up, eated breakfast, and goed to work.'], correct: 0, explanation: 'woke, ate, went.', explanationRu: "woke, ate, went." },
       ],
     },
   },
@@ -5984,8 +5984,8 @@ export const grammarPathSections = [
               exampleRu: 'I was reading a book at 5 PM yesterday. (Я читал книгу вчера в 5 часов.)',
             },
             exercises: [
-              { text: 'I ___ a book yesterday at 7 PM.', options: ['was reading', 'were reading', 'readed'], correct: 0, explanation: '"I" bilan "was reading" ishlatiladi.' },
-              { text: 'They ___ football all afternoon yesterday.', options: ['were playing', 'was playing', 'played'], correct: 0, explanation: '"They" bilan "were playing".' },
+              { text: 'I ___ a book yesterday at 7 PM.', options: ['was reading', 'were reading', 'readed'], correct: 0, explanation: '"I" bilan "was reading" ishlatiladi.', explanationRu: "С \"I\" используется \"was reading\"." },
+              { text: 'They ___ football all afternoon yesterday.', options: ['were playing', 'was playing', 'played'], correct: 0, explanation: '"They" bilan "were playing".', explanationRu: "С \"They\" используется \"were playing\"." },
             ],
           },
           {
@@ -5997,8 +5997,8 @@ export const grammarPathSections = [
               exampleRu: 'She was sleeping when I came. It was raining at 8 o\'clock.',
             },
             exercises: [
-              { text: 'He ___ his homework at 9 PM.', options: ['was doing', 'were doing', 'did'], correct: 0, explanation: 'He + was doing.' },
-              { text: 'She ___ TV yesterday evening.', options: ['was watching', 'were watching', 'watches'], correct: 0, explanation: 'She + was watching.' },
+              { text: 'He ___ his homework at 9 PM.', options: ['was doing', 'were doing', 'did'], correct: 0, explanation: 'He + was doing.', explanationRu: "He + was doing." },
+              { text: 'She ___ TV yesterday evening.', options: ['was watching', 'were watching', 'watches'], correct: 0, explanation: 'She + was watching.', explanationRu: "She + was watching." },
             ],
           },
           {
@@ -6010,8 +6010,8 @@ export const grammarPathSections = [
               exampleRu: 'We were cooking dinner at 6 PM. They were dancing at the party.',
             },
             exercises: [
-              { text: 'We ___ for the bus at 8:00 AM.', options: ['were waiting', 'was waiting', 'waited'], correct: 0, explanation: 'We + were waiting.' },
-              { text: 'You ___ a movie when I called.', options: ['were watching', 'was watching', 'watched'], correct: 0, explanation: 'You + were watching.' },
+              { text: 'We ___ for the bus at 8:00 AM.', options: ['were waiting', 'was waiting', 'waited'], correct: 0, explanation: 'We + were waiting.', explanationRu: "We + were waiting." },
+              { text: 'You ___ a movie when I called.', options: ['were watching', 'was watching', 'watched'], correct: 0, explanation: 'You + were watching.', explanationRu: "You + were watching." },
             ],
           },
           {
@@ -6023,8 +6023,8 @@ export const grammarPathSections = [
               exampleRu: 'He was writing an email. She was running in the park.',
             },
             exercises: [
-              { text: 'Past Continuous form of "swim" with "I":', options: ['was swimming', 'was swiming', 'were swimming'], correct: 0, explanation: 'swim -> swimming (m ikkilanadi), I -> was swimming.' },
-              { text: 'Past Continuous form of "write" with "They":', options: ['were writing', 'were writeing', 'was writing'], correct: 0, explanation: 'write -> writing (-e tushadi), They -> were writing.' },
+              { text: 'Past Continuous form of "swim" with "I":', options: ['was swimming', 'was swiming', 'were swimming'], correct: 0, explanation: 'swim -> swimming (m ikkilanadi), I -> was swimming.', explanationRu: "swim -> swimming (m удваивается), I -> was swimming." },
+              { text: 'Past Continuous form of "write" with "They":', options: ['were writing', 'were writeing', 'was writing'], correct: 0, explanation: 'write -> writing (-e tushadi), They -> were writing.', explanationRu: "write -> writing (-e опускается), They -> were writing." },
             ],
           },
           {
@@ -6036,9 +6036,9 @@ export const grammarPathSections = [
               exampleRu: 'While I was studying, my brother was playing games.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I was working at 10 AM yesterday.', 'I were working at 10 AM yesterday.'], correct: 0, explanation: 'I + was working.' },
-              { text: 'Choose the correct sentence:', options: ['My friends were having lunch when I arrived.', 'My friends was having lunch when I arrived.'], correct: 0, explanation: 'My friends (they) + were having.' },
-              { text: 'Select the correct sentence:', options: ['The sun was shining all day yesterday.', 'The sun were shining all day yesterday.'], correct: 0, explanation: 'The sun (it) + was shining.' },
+              { text: 'Choose the correct sentence:', options: ['I was working at 10 AM yesterday.', 'I were working at 10 AM yesterday.'], correct: 0, explanation: 'I + was working.', explanationRu: "I + was working." },
+              { text: 'Choose the correct sentence:', options: ['My friends were having lunch when I arrived.', 'My friends was having lunch when I arrived.'], correct: 0, explanation: 'My friends (they) + were having.', explanationRu: "My friends (they) + were having." },
+              { text: 'Select the correct sentence:', options: ['The sun was shining all day yesterday.', 'The sun were shining all day yesterday.'], correct: 0, explanation: 'The sun (it) + was shining.', explanationRu: "The sun (it) + was shining." },
             ],
           },
         ],
@@ -6059,8 +6059,8 @@ export const grammarPathSections = [
               exampleRu: 'I wasn\'t sleeping at 11 PM. (Я не спал в 11 вечера.)',
             },
             exercises: [
-              { text: 'I ___ TV at 8 PM yesterday.', options: ["wasn't watching", "weren't watching", "didn't watching"], correct: 0, explanation: '"I" inkorida: wasn\'t watching.' },
-              { text: 'They ___ football at that time.', options: ["weren't playing", "wasn't playing", "don't playing"], correct: 0, explanation: '"They" inkorida: weren\'t playing.' },
+              { text: 'I ___ TV at 8 PM yesterday.', options: ["wasn't watching", "weren't watching", "didn't watching"], correct: 0, explanation: '"I" inkorida: wasn\'t watching.', explanationRu: "В отрицании с \"I\": wasn't watching." },
+              { text: 'They ___ football at that time.', options: ["weren't playing", "wasn't playing", "don't playing"], correct: 0, explanation: '"They" inkorida: weren\'t playing.', explanationRu: "В отрицании с \"They\": weren't playing." },
             ],
           },
           {
@@ -6072,8 +6072,8 @@ export const grammarPathSections = [
               exampleRu: 'He wasn\'t driving fast. She wasn\'t listening to music.',
             },
             exercises: [
-              { text: 'She ___ attention during the lesson.', options: ["wasn't paying", "weren't paying", "not paying"], correct: 0, explanation: 'She + wasn\'t paying.' },
-              { text: 'It ___ at 5 o\'clock yesterday.', options: ["wasn't raining", "weren't raining", "didn't raining"], correct: 0, explanation: 'It + wasn\'t raining.' },
+              { text: 'She ___ attention during the lesson.', options: ["wasn't paying", "weren't paying", "not paying"], correct: 0, explanation: 'She + wasn\'t paying.', explanationRu: "She + wasn't paying." },
+              { text: 'It ___ at 5 o\'clock yesterday.', options: ["wasn't raining", "weren't raining", "didn't raining"], correct: 0, explanation: 'It + wasn\'t raining.', explanationRu: "It + wasn't raining." },
             ],
           },
           {
@@ -6085,8 +6085,8 @@ export const grammarPathSections = [
               exampleRu: 'We weren\'t expecting guests. They weren\'t talking loud.',
             },
             exercises: [
-              { text: 'We ___ loud music late at night.', options: ["weren't playing", "wasn't playing", "aren't playing"], correct: 0, explanation: 'We + weren\'t playing.' },
-              { text: 'You ___ attention when I spoke.', options: ["weren't paying", "wasn't paying", "don't paying"], correct: 0, explanation: 'You + weren\'t paying.' },
+              { text: 'We ___ loud music late at night.', options: ["weren't playing", "wasn't playing", "aren't playing"], correct: 0, explanation: 'We + weren\'t playing.', explanationRu: "We + weren't playing." },
+              { text: 'You ___ attention when I spoke.', options: ["weren't paying", "wasn't paying", "don't paying"], correct: 0, explanation: 'You + weren\'t paying.', explanationRu: "You + weren't paying." },
             ],
           },
           {
@@ -6098,8 +6098,8 @@ export const grammarPathSections = [
               exampleRu: 'Correct: He wasn\'t listening.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I wasn\'t sleeping when you called.', 'I didn\'t sleeping when you called.'], correct: 0, explanation: 'Past Continuous inkorida: wasn\'t sleeping.' },
-              { text: 'Choose the correct sentence:', options: ['They weren\'t working yesterday at 4 PM.', 'They wasn\'t working yesterday at 4 PM.'], correct: 0, explanation: 'They + weren\'t working.' },
+              { text: 'Choose the correct sentence:', options: ['I wasn\'t sleeping when you called.', 'I didn\'t sleeping when you called.'], correct: 0, explanation: 'Past Continuous inkorida: wasn\'t sleeping.', explanationRu: "В отрицании Past Continuous: wasn't sleeping." },
+              { text: 'Choose the correct sentence:', options: ['They weren\'t working yesterday at 4 PM.', 'They wasn\'t working yesterday at 4 PM.'], correct: 0, explanation: 'They + weren\'t working.', explanationRu: "They + weren't working." },
             ],
           },
           {
@@ -6111,9 +6111,9 @@ export const grammarPathSections = [
               exampleRu: 'It wasn\'t snowing, so we weren\'t wearing heavy coats.',
             },
             exercises: [
-              { text: 'Select the correct sentence:', options: ['He wasn\'t feeling well yesterday.', 'He weren\'t feeling well yesterday.'], correct: 0, explanation: 'He + wasn\'t feeling.' },
-              { text: 'Select the correct sentence:', options: ['We weren\'t waiting for you at 5:00.', 'We didn\'t waiting for you at 5:00.'], correct: 0, explanation: 'We + weren\'t waiting.' },
-              { text: 'Choose the correct form: She ___ at that moment.', options: ["wasn't listening", "wasn't listen"], correct: 0, explanation: 'wasn\'t + V-ing: wasn\'t listening.' },
+              { text: 'Select the correct sentence:', options: ['He wasn\'t feeling well yesterday.', 'He weren\'t feeling well yesterday.'], correct: 0, explanation: 'He + wasn\'t feeling.', explanationRu: "He + wasn't feeling." },
+              { text: 'Select the correct sentence:', options: ['We weren\'t waiting for you at 5:00.', 'We didn\'t waiting for you at 5:00.'], correct: 0, explanation: 'We + weren\'t waiting.', explanationRu: "We + weren't waiting." },
+              { text: 'Choose the correct form: She ___ at that moment.', options: ["wasn't listening", "wasn't listen"], correct: 0, explanation: 'wasn\'t + V-ing: wasn\'t listening.', explanationRu: "wasn't + V-ing: wasn't listening." },
             ],
           },
         ],
@@ -6134,8 +6134,8 @@ export const grammarPathSections = [
               exampleRu: 'Was he sleeping at 10 PM? Were you working?',
             },
             exercises: [
-              { text: '___ you sleeping when I called you?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: '"You" savolida "Were" oldinga chiqadi.' },
-              { text: '___ she reading a book at 5 PM?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: '"She" savolida "Was".' },
+              { text: '___ you sleeping when I called you?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: '"You" savolida "Were" oldinga chiqadi.', explanationRu: "В вопросе с \"You\" выносится вперёд \"Were\"." },
+              { text: '___ she reading a book at 5 PM?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: '"She" savolida "Was".', explanationRu: "В вопросе с \"She\": Was." },
             ],
           },
           {
@@ -6147,8 +6147,8 @@ export const grammarPathSections = [
               exampleRu: '— Were you studying? — Yes, I was. / No, I wasn\'t.',
             },
             exercises: [
-              { text: '— Was it raining yesterday afternoon? — Yes, it ___ .', options: ['was', 'were', 'is'], correct: 0, explanation: 'Yes, it was.' },
-              { text: '— Were they listening to music? — No, they ___ .', options: ["weren't", "wasn't", "didn't"], correct: 0, explanation: 'No, they weren\'t.' },
+              { text: '— Was it raining yesterday afternoon? — Yes, it ___ .', options: ['was', 'were', 'is'], correct: 0, explanation: 'Yes, it was.', explanationRu: "Yes, it was." },
+              { text: '— Were they listening to music? — No, they ___ .', options: ["weren't", "wasn't", "didn't"], correct: 0, explanation: 'No, they weren\'t.', explanationRu: "No, they weren't." },
             ],
           },
           {
@@ -6160,8 +6160,8 @@ export const grammarPathSections = [
               exampleRu: 'What were you doing yesterday at 6 PM? Where was he going?',
             },
             exercises: [
-              { text: 'What ___ you doing yesterday at this time?', options: ['were', 'was', 'did'], correct: 0, explanation: 'What + were you doing.' },
-              { text: 'Where ___ she going when you saw her?', options: ['was', 'were', 'did'], correct: 0, explanation: 'Where + was she going.' },
+              { text: 'What ___ you doing yesterday at this time?', options: ['were', 'was', 'did'], correct: 0, explanation: 'What + were you doing.', explanationRu: "What + were you doing." },
+              { text: 'Where ___ she going when you saw her?', options: ['was', 'were', 'did'], correct: 0, explanation: 'Where + was she going.', explanationRu: "Where + was she going." },
             ],
           },
           {
@@ -6173,8 +6173,8 @@ export const grammarPathSections = [
               exampleRu: '— What were you doing at 9 PM? — I was doing my homework.',
             },
             exercises: [
-              { text: '— Why ___ you crying yesterday? — I ___ watching a sad movie.', options: ['were / was', 'was / were', 'did / was'], correct: 0, explanation: 'Why were you / I was watching.' },
-              { text: '— ___ Tom playing games? — No, he ___ studying.', options: ['Was / was', 'Were / were', 'Did / was'], correct: 0, explanation: 'Was Tom / he was.' },
+              { text: '— Why ___ you crying yesterday? — I ___ watching a sad movie.', options: ['were / was', 'was / were', 'did / was'], correct: 0, explanation: 'Why were you / I was watching.', explanationRu: "Why were you / I was watching." },
+              { text: '— ___ Tom playing games? — No, he ___ studying.', options: ['Was / was', 'Were / were', 'Did / was'], correct: 0, explanation: 'Was Tom / he was.', explanationRu: "Was Tom / he was." },
             ],
           },
           {
@@ -6186,9 +6186,9 @@ export const grammarPathSections = [
               exampleRu: 'Were you sleeping when the bell rang, and what was your sister doing?',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Were you watching the game at 8:00?', 'Did you watching the game at 8:00?'], correct: 0, explanation: 'Were you watching...' },
-              { text: 'Choose the correct question:', options: ['What was she doing when you arrived?', 'What did she doing when you arrived?'], correct: 0, explanation: 'What was she doing...' },
-              { text: 'Select the correct question:', options: ['Why were they driving so fast?', 'Why was they driving so fast?'], correct: 0, explanation: 'Why were they...' },
+              { text: 'Choose the correct question:', options: ['Were you watching the game at 8:00?', 'Did you watching the game at 8:00?'], correct: 0, explanation: 'Were you watching...', explanationRu: "Were you watching..." },
+              { text: 'Choose the correct question:', options: ['What was she doing when you arrived?', 'What did she doing when you arrived?'], correct: 0, explanation: 'What was she doing...', explanationRu: "What was she doing..." },
+              { text: 'Select the correct question:', options: ['Why were they driving so fast?', 'Why was they driving so fast?'], correct: 0, explanation: 'Why were they...', explanationRu: "Why were they..." },
             ],
           },
         ],
@@ -6209,8 +6209,8 @@ export const grammarPathSections = [
               exampleRu: 'I was reading a book when the phone rang.',
             },
             exercises: [
-              { text: 'I was sleeping when my friend ___ .', options: ['called', 'was calling', 'calls'], correct: 0, explanation: 'when + Past Simple (called).' },
-              { text: 'She was cooking when the lights ___ out.', options: ['went', 'were going', 'go'], correct: 0, explanation: 'when + Past Simple (went).' },
+              { text: 'I was sleeping when my friend ___ .', options: ['called', 'was calling', 'calls'], correct: 0, explanation: 'when + Past Simple (called).', explanationRu: "when + Past Simple (called)." },
+              { text: 'She was cooking when the lights ___ out.', options: ['went', 'were going', 'go'], correct: 0, explanation: 'when + Past Simple (went).', explanationRu: "when + Past Simple (went)." },
             ],
           },
           {
@@ -6222,8 +6222,8 @@ export const grammarPathSections = [
               exampleRu: 'While I was walking in the park, I met my teacher.',
             },
             exercises: [
-              { text: 'While we ___ in the garden, it started to rain.', options: ['were working', 'worked', 'are working'], correct: 0, explanation: 'While + Past Continuous (were working).' },
-              { text: 'While he ___ to school, he saw an accident.', options: ['was walking', 'walked', 'walks'], correct: 0, explanation: 'While + Past Continuous (was walking).' },
+              { text: 'While we ___ in the garden, it started to rain.', options: ['were working', 'worked', 'are working'], correct: 0, explanation: 'While + Past Continuous (were working).', explanationRu: "While + Past Continuous (were working)." },
+              { text: 'While he ___ to school, he saw an accident.', options: ['was walking', 'walked', 'walks'], correct: 0, explanation: 'While + Past Continuous (was walking).', explanationRu: "While + Past Continuous (was walking)." },
             ],
           },
           {
@@ -6235,8 +6235,8 @@ export const grammarPathSections = [
               exampleRu: 'I was studying while my brother was listening to music.',
             },
             exercises: [
-              { text: 'While I was cooking, my sister ___ the table.', options: ['was setting', 'setted', 'set'], correct: 0, explanation: 'Ikki paralel davomli harakat: was setting.' },
-              { text: 'They were playing games while their parents ___ TV.', options: ['were watching', 'watched', 'watch'], correct: 0, explanation: 'were watching.' },
+              { text: 'While I was cooking, my sister ___ the table.', options: ['was setting', 'setted', 'set'], correct: 0, explanation: 'Ikki paralel davomli harakat: was setting.', explanationRu: "Два параллельных длительных действия: was setting." },
+              { text: 'They were playing games while their parents ___ TV.', options: ['were watching', 'watched', 'watch'], correct: 0, explanation: 'were watching.', explanationRu: "were watching." },
             ],
           },
           {
@@ -6248,8 +6248,8 @@ export const grammarPathSections = [
               exampleRu: 'He called me WHEN I was cooking. / WHILE I was cooking, he called me.',
             },
             exercises: [
-              { text: '___ I was walking home, it started to snow.', options: ['While', 'When', 'During'], correct: 0, explanation: 'Uzun harakat oldidan: While.' },
-              { text: 'She was driving ___ she saw a cat on the road.', options: ['when', 'while', 'for'], correct: 0, explanation: 'Qisqa kutilmagan voqea oldidan: when.' },
+              { text: '___ I was walking home, it started to snow.', options: ['While', 'When', 'During'], correct: 0, explanation: 'Uzun harakat oldidan: While.', explanationRu: "Перед длительным действием: While." },
+              { text: 'She was driving ___ she saw a cat on the road.', options: ['when', 'while', 'for'], correct: 0, explanation: 'Qisqa kutilmagan voqea oldidan: when.', explanationRu: "Перед кратким неожиданным событием: when." },
             ],
           },
           {
@@ -6261,9 +6261,9 @@ export const grammarPathSections = [
               exampleRu: 'While we were sleeping, someone knocked when the night was quiet.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I was taking a shower when the phone rang.', 'I took a shower while the phone was ringing.'], correct: 0, explanation: 'was taking a shower when the phone rang.' },
-              { text: 'Choose the correct sentence:', options: ['While she was reading, her dog barked.', 'When she readed, her dog was barking.'], correct: 0, explanation: 'While she was reading...' },
-              { text: 'Select the correct sentence:', options: ['We were watching a movie when the power went off.', 'We watched a movie while the power went off.'], correct: 0, explanation: 'were watching ... when ... went off.' },
+              { text: 'Choose the correct sentence:', options: ['I was taking a shower when the phone rang.', 'I took a shower while the phone was ringing.'], correct: 0, explanation: 'was taking a shower when the phone rang.', explanationRu: "was taking a shower when the phone rang." },
+              { text: 'Choose the correct sentence:', options: ['While she was reading, her dog barked.', 'When she readed, her dog was barking.'], correct: 0, explanation: 'While she was reading...', explanationRu: "While she was reading..." },
+              { text: 'Select the correct sentence:', options: ['We were watching a movie when the power went off.', 'We watched a movie while the power went off.'], correct: 0, explanation: 'were watching ... when ... went off.', explanationRu: "were watching ... when ... went off." },
             ],
           },
         ],
@@ -6284,8 +6284,8 @@ export const grammarPathSections = [
               exampleRu: 'Yesterday I painted a wall. Yesterday I was painting a wall.',
             },
             exercises: [
-              { text: 'At 3 PM yesterday, I ___ in the library.', options: ['was studying', 'studied', 'study'], correct: 0, explanation: 'Muayyan soatda jarayon: was studying.' },
-              { text: 'Yesterday I ___ my homework and went to bed.', options: ['finished', 'was finishing', 'finishes'], correct: 0, explanation: 'Tugallangan ketma-ket harakat: finished.' },
+              { text: 'At 3 PM yesterday, I ___ in the library.', options: ['was studying', 'studied', 'study'], correct: 0, explanation: 'Muayyan soatda jarayon: was studying.', explanationRu: "Процесс в определённый час: was studying." },
+              { text: 'Yesterday I ___ my homework and went to bed.', options: ['finished', 'was finishing', 'finishes'], correct: 0, explanation: 'Tugallangan ketma-ket harakat: finished.', explanationRu: "Завершённое последовательное действие: finished." },
             ],
           },
           {
@@ -6297,8 +6297,8 @@ export const grammarPathSections = [
               exampleRu: 'I was working all day yesterday.',
             },
             exercises: [
-              { text: 'What were you doing all evening yesterday? — I ___ TV.', options: ['was watching', 'watched', 'watch'], correct: 0, explanation: 'all evening -> was watching.' },
-              { text: 'I ___ a new bike two days ago.', options: ['bought', 'was buying', 'buys'], correct: 0, explanation: 'two days ago -> bought.' },
+              { text: 'What were you doing all evening yesterday? — I ___ TV.', options: ['was watching', 'watched', 'watch'], correct: 0, explanation: 'all evening -> was watching.', explanationRu: "all evening -> was watching." },
+              { text: 'I ___ a new bike two days ago.', options: ['bought', 'was buying', 'buys'], correct: 0, explanation: 'two days ago -> bought.', explanationRu: "two days ago -> bought." },
             ],
           },
           {
@@ -6310,8 +6310,8 @@ export const grammarPathSections = [
               exampleRu: 'I knew the answer. (НЕ I was knowing!)',
             },
             exercises: [
-              { text: 'I ___ the truth yesterday.', options: ['knew', 'was knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li, -ing olmaydi: knew.' },
-              { text: 'She ___ to go home early.', options: ['wanted', 'was wanting', 'wants'], correct: 0, explanation: 'want - holat fe\'li: wanted.' },
+              { text: 'I ___ the truth yesterday.', options: ['knew', 'was knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li, -ing olmaydi: knew.', explanationRu: "know — глагол состояния, не берёт -ing: knew." },
+              { text: 'She ___ to go home early.', options: ['wanted', 'was wanting', 'wants'], correct: 0, explanation: 'want - holat fe\'li: wanted.', explanationRu: "want — глагол состояния: wanted." },
             ],
           },
           {
@@ -6323,8 +6323,8 @@ export const grammarPathSections = [
               exampleRu: 'The sun was shining and birds were singing. Suddenly, a man opened the door.',
             },
             exercises: [
-              { text: 'The wind ___ and the rain ___ when we left the house.', options: ['was blowing / was falling', 'blew / fell', 'is blowing / is falling'], correct: 0, explanation: 'Fon (background): was blowing / was falling.' },
-              { text: 'Select the correct sentence:', options: ['While I was walking, I lost my wallet.', 'While I walked, I was losing my wallet.'], correct: 0, explanation: 'Fon: was walking / Asosiy voqea: lost.' },
+              { text: 'The wind ___ and the rain ___ when we left the house.', options: ['was blowing / was falling', 'blew / fell', 'is blowing / is falling'], correct: 0, explanation: 'Fon (background): was blowing / was falling.', explanationRu: "Фон (background): was blowing / was falling." },
+              { text: 'Select the correct sentence:', options: ['While I was walking, I lost my wallet.', 'While I walked, I was losing my wallet.'], correct: 0, explanation: 'Fon: was walking / Asosiy voqea: lost.', explanationRu: "Фон: was walking / Основное событие: lost." },
             ],
           },
           {
@@ -6336,9 +6336,9 @@ export const grammarPathSections = [
               exampleRu: 'I was sleeping at midnight, but I woke up at 7 AM.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['He was writing a letter when his laptop died.', 'He wrote a letter when his laptop was dying.'], correct: 0, explanation: 'was writing ... when ... died.' },
-              { text: 'Choose the correct sentence:', options: ['We didn\'t know about the party.', 'We weren\'t knowing about the party.'], correct: 0, explanation: 'know - holat fe\'li: didn\'t know.' },
-              { text: 'Select the correct sentence:', options: ['They were playing chess at 4 PM yesterday.', 'They played chess at 4 PM yesterday.'], correct: 0, explanation: 'at 4 PM yesterday -> were playing.' },
+              { text: 'Choose the correct sentence:', options: ['He was writing a letter when his laptop died.', 'He wrote a letter when his laptop was dying.'], correct: 0, explanation: 'was writing ... when ... died.', explanationRu: "was writing ... when ... died." },
+              { text: 'Choose the correct sentence:', options: ['We didn\'t know about the party.', 'We weren\'t knowing about the party.'], correct: 0, explanation: 'know - holat fe\'li: didn\'t know.', explanationRu: "know — глагол состояния: didn't know." },
+              { text: 'Select the correct sentence:', options: ['They were playing chess at 4 PM yesterday.', 'They played chess at 4 PM yesterday.'], correct: 0, explanation: 'at 4 PM yesterday -> were playing.', explanationRu: "at 4 PM yesterday -> were playing." },
             ],
           },
         ],
@@ -6359,8 +6359,8 @@ export const grammarPathSections = [
               exampleRu: 'I was sleeping. While I was walking. I knew the truth.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I was reading when you called.', 'I was read when you called.'], correct: 0, explanation: 'was + V-ing: was reading.' },
-              { text: 'Choose the correct sentence:', options: ['While they were eating, someone knocked.', 'While they ate, someone was knocking.'], correct: 0, explanation: 'While + were eating.' },
+              { text: 'Choose the correct sentence:', options: ['I was reading when you called.', 'I was read when you called.'], correct: 0, explanation: 'was + V-ing: was reading.', explanationRu: "was + V-ing: was reading." },
+              { text: 'Choose the correct sentence:', options: ['While they were eating, someone knocked.', 'While they ate, someone was knocking.'], correct: 0, explanation: 'While + were eating.', explanationRu: "While + were eating." },
             ],
           },
           {
@@ -6372,8 +6372,8 @@ export const grammarPathSections = [
               exampleRu: 'At 8 PM, Tom was studying, his mother was cooking, and his father was watching TV.',
             },
             exercises: [
-              { text: 'Yesterday at 3 PM, my sister ___ music and I ___ a book.', options: ['was listening to / was reading', 'listened to / readed', 'were listening to / were reading'], correct: 0, explanation: 'sister was listening / I was reading.' },
-              { text: 'Select the correct sentence:', options: ['What were you doing when the fire started?', 'What did you doing when the fire started?'], correct: 0, explanation: 'What were you doing...' },
+              { text: 'Yesterday at 3 PM, my sister ___ music and I ___ a book.', options: ['was listening to / was reading', 'listened to / readed', 'were listening to / were reading'], correct: 0, explanation: 'sister was listening / I was reading.', explanationRu: "sister was listening / I was reading." },
+              { text: 'Select the correct sentence:', options: ['What were you doing when the fire started?', 'What did you doing when the fire started?'], correct: 0, explanation: 'What were you doing...', explanationRu: "What were you doing..." },
             ],
           },
           {
@@ -6385,8 +6385,8 @@ export const grammarPathSections = [
               exampleRu: 'The snow was falling heavily when we arrived at the chalet.',
             },
             exercises: [
-              { text: 'She ___ her leg while she ___ on ice.', options: ['broke / was skating', 'was breaking / skated', 'broke / skated'], correct: 0, explanation: 'broke (short) / was skating (long).' },
-              { text: 'The phone ___ while I ___ a shower.', options: ['rang / was taking', 'was ringing / took', 'rang / took'], correct: 0, explanation: 'rang (short) / was taking (long).' },
+              { text: 'She ___ her leg while she ___ on ice.', options: ['broke / was skating', 'was breaking / skated', 'broke / skated'], correct: 0, explanation: 'broke (short) / was skating (long).', explanationRu: "broke (краткое) / was skating (длительное)." },
+              { text: 'The phone ___ while I ___ a shower.', options: ['rang / was taking', 'was ringing / took', 'rang / took'], correct: 0, explanation: 'rang (short) / was taking (long).', explanationRu: "rang (краткое) / was taking (длительное)." },
             ],
           },
           {
@@ -6398,8 +6398,8 @@ export const grammarPathSections = [
               exampleRu: '— What were you doing when I saw you? — I was running to catch the bus.',
             },
             exercises: [
-              { text: '— Were you sleeping at 11 PM? — No, I ___ a film.', options: ['was watching', 'watched', 'am watching'], correct: 0, explanation: 'I was watching.' },
-              { text: '— Why was he running? — Because he ___ late for the flight.', options: ['was running', 'was being', 'was'], correct: 2, explanation: 'be -> was.' },
+              { text: '— Were you sleeping at 11 PM? — No, I ___ a film.', options: ['was watching', 'watched', 'am watching'], correct: 0, explanation: 'I was watching.', explanationRu: "I was watching." },
+              { text: '— Why was he running? — Because he ___ late for the flight.', options: ['was running', 'was being', 'was'], correct: 2, explanation: 'be -> was.', explanationRu: "be -> was." },
             ],
           },
           {
@@ -6411,9 +6411,9 @@ export const grammarPathSections = [
               exampleRu: 'I was working. I wasn\'t working. Were you working?',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They were walking home when it started to rain.', 'They were walk home when it started to rain.'], correct: 0, explanation: 'were walking.' },
-              { text: 'Choose the correct sentence:', options: ['What were you doing yesterday at 5 PM?', 'What was you doing yesterday at 5 PM?'], correct: 0, explanation: 'What were you doing...' },
-              { text: 'Select the correct sentence:', options: ['She wasn\'t sleeping when I called her.', 'She wasn\'t slept when I called her.'], correct: 0, explanation: 'wasn\'t sleeping.' },
+              { text: 'Choose the correct sentence:', options: ['They were walking home when it started to rain.', 'They were walk home when it started to rain.'], correct: 0, explanation: 'were walking.', explanationRu: "were walking." },
+              { text: 'Choose the correct sentence:', options: ['What were you doing yesterday at 5 PM?', 'What was you doing yesterday at 5 PM?'], correct: 0, explanation: 'What were you doing...', explanationRu: "What were you doing..." },
+              { text: 'Select the correct sentence:', options: ['She wasn\'t sleeping when I called her.', 'She wasn\'t slept when I called her.'], correct: 0, explanation: 'wasn\'t sleeping.', explanationRu: "wasn't sleeping." },
             ],
           },
         ],
@@ -6423,21 +6423,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Past Continuous — o'tgan davomli zamon",
       titleRu: 'Тест раздела: Past Continuous — прошедшее длительное время',
       exercises: [
-        { text: 'I ___ a book yesterday at 8 PM.', options: ['was reading', 'were reading', 'readed'], correct: 0, explanation: 'I + was reading.' },
-        { text: 'They ___ football when it started to rain.', options: ['were playing', 'was playing', 'played'], correct: 0, explanation: 'They + were playing.' },
-        { text: 'She ___ TV when I arrived.', options: ["wasn't watching", "weren't watching", "didn't watching"], correct: 0, explanation: 'She + wasn\'t watching.' },
-        { text: 'We ___ for the exam all day yesterday.', options: ['were studying', 'was studying', 'studied'], correct: 0, explanation: 'We + were studying.' },
-        { text: '___ you sleeping when I called?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: 'Were you sleeping...' },
-        { text: '___ it raining at 6 o\'clock this morning?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: 'Was it raining...' },
-        { text: 'What ___ she doing yesterday afternoon?', options: ['was', 'were', 'did'], correct: 0, explanation: 'What was she doing...' },
-        { text: 'Where ___ they going when you met them?', options: ['were', 'was', 'did'], correct: 0, explanation: 'Where were they going...' },
-        { text: 'I was reading a book ___ the phone rang.', options: ['when', 'while', 'during'], correct: 0, explanation: 'when + Past Simple.' },
-        { text: '___ I was walking home, I saw a puppy.', options: ['While', 'When', 'Since'], correct: 0, explanation: 'While + Past Continuous.' },
-        { text: 'She was cooking while her husband ___ the room.', options: ['was cleaning', 'cleaned', 'cleans'], correct: 0, explanation: 'was cleaning (parallel action).' },
-        { text: 'I ___ the answer to your question yesterday.', options: ['knew', 'was knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li: knew.' },
-        { text: 'Choose the correct sentence:', options: ['He wasn\'t driving fast when the accident happened.', 'He didn\'t driving fast when the accident happened.'], correct: 0, explanation: 'wasn\'t driving.' },
-        { text: 'Choose the correct sentence:', options: ['While we were sleeping, someone knocked on the door.', 'While we slept, someone was knocking on the door.'], correct: 0, explanation: 'While we were sleeping...' },
-        { text: 'Select the correct sentence:', options: ['What were you doing yesterday at 10 PM?', 'What did you doing yesterday at 10 PM?'], correct: 0, explanation: 'What were you doing...' },
+        { text: 'I ___ a book yesterday at 8 PM.', options: ['was reading', 'were reading', 'readed'], correct: 0, explanation: 'I + was reading.', explanationRu: "I + was reading." },
+        { text: 'They ___ football when it started to rain.', options: ['were playing', 'was playing', 'played'], correct: 0, explanation: 'They + were playing.', explanationRu: "They + were playing." },
+        { text: 'She ___ TV when I arrived.', options: ["wasn't watching", "weren't watching", "didn't watching"], correct: 0, explanation: 'She + wasn\'t watching.', explanationRu: "She + wasn't watching." },
+        { text: 'We ___ for the exam all day yesterday.', options: ['were studying', 'was studying', 'studied'], correct: 0, explanation: 'We + were studying.', explanationRu: "We + were studying." },
+        { text: '___ you sleeping when I called?', options: ['Were', 'Was', 'Did'], correct: 0, explanation: 'Were you sleeping...', explanationRu: "Were you sleeping..." },
+        { text: '___ it raining at 6 o\'clock this morning?', options: ['Was', 'Were', 'Did'], correct: 0, explanation: 'Was it raining...', explanationRu: "Was it raining..." },
+        { text: 'What ___ she doing yesterday afternoon?', options: ['was', 'were', 'did'], correct: 0, explanation: 'What was she doing...', explanationRu: "What was she doing..." },
+        { text: 'Where ___ they going when you met them?', options: ['were', 'was', 'did'], correct: 0, explanation: 'Where were they going...', explanationRu: "Where were they going..." },
+        { text: 'I was reading a book ___ the phone rang.', options: ['when', 'while', 'during'], correct: 0, explanation: 'when + Past Simple.', explanationRu: "when + Past Simple." },
+        { text: '___ I was walking home, I saw a puppy.', options: ['While', 'When', 'Since'], correct: 0, explanation: 'While + Past Continuous.', explanationRu: "While + Past Continuous." },
+        { text: 'She was cooking while her husband ___ the room.', options: ['was cleaning', 'cleaned', 'cleans'], correct: 0, explanation: 'was cleaning (parallel action).', explanationRu: "was cleaning (параллельное действие)." },
+        { text: 'I ___ the answer to your question yesterday.', options: ['knew', 'was knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li: knew.', explanationRu: "know — глагол состояния: knew." },
+        { text: 'Choose the correct sentence:', options: ['He wasn\'t driving fast when the accident happened.', 'He didn\'t driving fast when the accident happened.'], correct: 0, explanation: 'wasn\'t driving.', explanationRu: "wasn't driving." },
+        { text: 'Choose the correct sentence:', options: ['While we were sleeping, someone knocked on the door.', 'While we slept, someone was knocking on the door.'], correct: 0, explanation: 'While we were sleeping...', explanationRu: "While we were sleeping..." },
+        { text: 'Select the correct sentence:', options: ['What were you doing yesterday at 10 PM?', 'What did you doing yesterday at 10 PM?'], correct: 0, explanation: 'What were you doing...', explanationRu: "What were you doing..." },
       ],
     },
   },
@@ -6464,8 +6464,8 @@ export const grammarPathSections = [
               exampleRu: 'I am going to study English tonight. (Я собираюсь учить английский сегодня вечером.)',
             },
             exercises: [
-              { text: 'I ___ buy a new laptop next month. I saved money for it.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan o\'ylangan reja: am going to.' },
-              { text: 'She ___ visit her grandmother this weekend.', options: ['is going to', 'are going to', 'will to'], correct: 0, explanation: 'She + is going to.' },
+              { text: 'I ___ buy a new laptop next month. I saved money for it.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan o\'ylangan reja: am going to.', explanationRu: "Заранее продуманный план: am going to." },
+              { text: 'She ___ visit her grandmother this weekend.', options: ['is going to', 'are going to', 'will to'], correct: 0, explanation: 'She + is going to.', explanationRu: "She + is going to." },
             ],
           },
           {
@@ -6477,8 +6477,8 @@ export const grammarPathSections = [
               exampleRu: 'Look at those dark clouds! It is going to rain.',
             },
             exercises: [
-              { text: 'Look at the sky! It ___ rain.', options: ['is going to', 'will', 'is raining'], correct: 0, explanation: 'Qora bulutlar — alomat: is going to rain.' },
-              { text: 'Be careful! You ___ drop that glass!', options: ['are going to', 'will', 'going to'], correct: 0, explanation: 'Hozirgi xavf/alomat: are going to drop.' },
+              { text: 'Look at the sky! It ___ rain.', options: ['is going to', 'will', 'is raining'], correct: 0, explanation: 'Qora bulutlar — alomat: is going to rain.', explanationRu: "Тёмные тучи — признак: is going to rain." },
+              { text: 'Be careful! You ___ drop that glass!', options: ['are going to', 'will', 'going to'], correct: 0, explanation: 'Hozirgi xavf/alomat: are going to drop.', explanationRu: "Явный признак сейчас: are going to drop." },
             ],
           },
           {
@@ -6490,8 +6490,8 @@ export const grammarPathSections = [
               exampleRu: 'I am not going to buy that coat. He isn\'t going to work tomorrow.',
             },
             exercises: [
-              { text: 'He ___ sell his car. He changed his mind.', options: ["isn't going to", "won't to", "not going to"], correct: 0, explanation: 'He + isn\'t going to.' },
-              { text: 'We ___ stay in a hotel. We booked an apartment.', options: ["aren't going to", "isn't going to", "won't going to"], correct: 0, explanation: 'We + aren\'t going to.' },
+              { text: 'He ___ sell his car. He changed his mind.', options: ["isn't going to", "won't to", "not going to"], correct: 0, explanation: 'He + isn\'t going to.', explanationRu: "He + isn't going to." },
+              { text: 'We ___ stay in a hotel. We booked an apartment.', options: ["aren't going to", "isn't going to", "won't going to"], correct: 0, explanation: 'We + aren\'t going to.', explanationRu: "We + aren't going to." },
             ],
           },
           {
@@ -6503,8 +6503,8 @@ export const grammarPathSections = [
               exampleRu: 'Are you going to attend the party? Is she going to move to London?',
             },
             exercises: [
-              { text: '___ you going to travel this summer?', options: ['Are', 'Is', 'Will'], correct: 0, explanation: 'You savolida: Are you going to...' },
-              { text: '___ he going to apply for that job?', options: ['Is', 'Are', 'Does'], correct: 0, explanation: 'He savolida: Is he going to...' },
+              { text: '___ you going to travel this summer?', options: ['Are', 'Is', 'Will'], correct: 0, explanation: 'You savolida: Are you going to...', explanationRu: "В вопросе с You: Are you going to..." },
+              { text: '___ he going to apply for that job?', options: ['Is', 'Are', 'Does'], correct: 0, explanation: 'He savolida: Is he going to...', explanationRu: "В вопросе с He: Is he going to..." },
             ],
           },
           {
@@ -6516,9 +6516,9 @@ export const grammarPathSections = [
               exampleRu: 'I am going to cook dinner because I bought all the vegetables.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They are going to build a new bridge next year.', 'They will to build a new bridge next year.'], correct: 0, explanation: 'Reja: are going to build.' },
-              { text: 'Choose the correct sentence:', options: ['Is she going to start her course tomorrow?', 'Does she going to start her course tomorrow?'], correct: 0, explanation: 'Is she going to...' },
-              { text: 'Select the correct sentence:', options: ['I am not going to waste my time.', 'I not am going to waste my time.'], correct: 0, explanation: 'I am not going to...' },
+              { text: 'Choose the correct sentence:', options: ['They are going to build a new bridge next year.', 'They will to build a new bridge next year.'], correct: 0, explanation: 'Reja: are going to build.', explanationRu: "План: are going to build." },
+              { text: 'Choose the correct sentence:', options: ['Is she going to start her course tomorrow?', 'Does she going to start her course tomorrow?'], correct: 0, explanation: 'Is she going to...', explanationRu: "Is she going to..." },
+              { text: 'Select the correct sentence:', options: ['I am not going to waste my time.', 'I not am going to waste my time.'], correct: 0, explanation: 'I am not going to...', explanationRu: "I am not going to..." },
             ],
           },
         ],
@@ -6539,8 +6539,8 @@ export const grammarPathSections = [
               exampleRu: 'The phone is ringing. — I will answer it!',
             },
             exercises: [
-              { text: '— It is cold in here. — I ___ close the window.', options: ['will', 'am going to', 'am closing'], correct: 0, explanation: 'Shu zahoti kutilmagan qaror: I will close.' },
-              { text: '— I don\'t have money. — Don\'t worry, I ___ pay for you.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Taklif/yordam: I will pay.' },
+              { text: '— It is cold in here. — I ___ close the window.', options: ['will', 'am going to', 'am closing'], correct: 0, explanation: 'Shu zahoti kutilmagan qaror: I will close.', explanationRu: "Спонтанное решение прямо сейчас: I will close." },
+              { text: '— I don\'t have money. — Don\'t worry, I ___ pay for you.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Taklif/yordam: I will pay.', explanationRu: "Предложение помощи: I will pay." },
             ],
           },
           {
@@ -6552,8 +6552,8 @@ export const grammarPathSections = [
               exampleRu: 'I promise I will call you as soon as I arrive.',
             },
             exercises: [
-              { text: 'I promise I ___ tell anyone your secret.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da berish: I won\'t tell (will not).' },
-              { text: 'Don\'t worry, I ___ help you with your homework.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Yordam berish va\'dasi: I will help.' },
+              { text: 'I promise I ___ tell anyone your secret.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da berish: I won\'t tell (will not).', explanationRu: "Обещание: I won't tell (will not)." },
+              { text: 'Don\'t worry, I ___ help you with your homework.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Yordam berish va\'dasi: I will help.', explanationRu: "Обещание помочь: I will help." },
             ],
           },
           {
@@ -6565,8 +6565,8 @@ export const grammarPathSections = [
               exampleRu: 'I think it will be sunny tomorrow. I hope you will pass the exam.',
             },
             exercises: [
-              { text: 'I think our team ___ win the match.', options: ['will', 'is going to', 'is winning'], correct: 0, explanation: 'I think -> will win.' },
-              { text: 'I hope she ___ feel better soon.', options: ['will', 'is going to', 'goes to'], correct: 0, explanation: 'I hope -> will.' },
+              { text: 'I think our team ___ win the match.', options: ['will', 'is going to', 'is winning'], correct: 0, explanation: 'I think -> will win.', explanationRu: "I think -> will win." },
+              { text: 'I hope she ___ feel better soon.', options: ['will', 'is going to', 'goes to'], correct: 0, explanation: 'I hope -> will.', explanationRu: "I hope -> will." },
             ],
           },
           {
@@ -6578,8 +6578,8 @@ export const grammarPathSections = [
               exampleRu: 'I\'ll see you tomorrow. He\'ll be back soon.',
             },
             exercises: [
-              { text: 'Choose the contraction of "I will":', options: ["I'll", "I'w", "Iw'll"], correct: 0, explanation: 'I will -> I\'ll.' },
-              { text: '___ meet you at the cafe at 5:00.', options: ["We'll", "We'going to", "We'will"], correct: 0, explanation: 'We will -> We\'ll.' },
+              { text: 'Choose the contraction of "I will":', options: ["I'll", "I'w", "Iw'll"], correct: 0, explanation: 'I will -> I\'ll.', explanationRu: "I will -> I'll." },
+              { text: '___ meet you at the cafe at 5:00.', options: ["We'll", "We'going to", "We'will"], correct: 0, explanation: 'We will -> We\'ll.', explanationRu: "We will -> We'll." },
             ],
           },
           {
@@ -6591,9 +6591,9 @@ export const grammarPathSections = [
               exampleRu: 'I\'ll help you carry those bags because they look heavy.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I think he will succeed in business.', 'I think he is going to succeed in business.'], correct: 0, explanation: 'I think + will.' },
-              { text: 'Choose the correct sentence:', options: ['I\'ll call you later tonight.', 'I\'ll to call you later tonight.'], correct: 0, explanation: 'I\'ll call (to siz).' },
-              { text: 'Select the correct sentence:', options: ['Wait! I\'ll open the door for you.', 'Wait! I am going to open the door for you.'], correct: 0, explanation: 'Spontan qaror: I\'ll open.' },
+              { text: 'Choose the correct sentence:', options: ['I think he will succeed in business.', 'I think he is going to succeed in business.'], correct: 0, explanation: 'I think + will.', explanationRu: "I think + will." },
+              { text: 'Choose the correct sentence:', options: ['I\'ll call you later tonight.', 'I\'ll to call you later tonight.'], correct: 0, explanation: 'I\'ll call (to siz).', explanationRu: "I'll call (без to)." },
+              { text: 'Select the correct sentence:', options: ['Wait! I\'ll open the door for you.', 'Wait! I am going to open the door for you.'], correct: 0, explanation: 'Spontan qaror: I\'ll open.', explanationRu: "Спонтанное решение: I'll open." },
             ],
           },
         ],
@@ -6614,8 +6614,8 @@ export const grammarPathSections = [
               exampleRu: 'I won\'t tell your secret to anyone.',
             },
             exercises: [
-              { text: 'He ___ come to the party tonight. He is sick.', options: ["won't", "doesn't going to", "isn't will"], correct: 0, explanation: 'will not -> won\'t.' },
-              { text: 'I ___ forget your help.', options: ["won't", "not will", "won't to"], correct: 0, explanation: 'won\'t + V1 (forget).' },
+              { text: 'He ___ come to the party tonight. He is sick.', options: ["won't", "doesn't going to", "isn't will"], correct: 0, explanation: 'will not -> won\'t.', explanationRu: "will not -> won't." },
+              { text: 'I ___ forget your help.', options: ["won't", "not will", "won't to"], correct: 0, explanation: 'won\'t + V1 (forget).', explanationRu: "won't + V1 (forget)." },
             ],
           },
           {
@@ -6627,8 +6627,8 @@ export const grammarPathSections = [
               exampleRu: 'Will you help me with this box? Will they come tomorrow?',
             },
             exercises: [
-              { text: '___ you pass me the salt, please?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Iltimos/so\'rov: Will you pass...' },
-              { text: '___ it rain tomorrow?', options: ['Will', 'Is', 'Does'], correct: 0, explanation: 'Will it rain...' },
+              { text: '___ you pass me the salt, please?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Iltimos/so\'rov: Will you pass...', explanationRu: "Просьба: Will you pass..." },
+              { text: '___ it rain tomorrow?', options: ['Will', 'Is', 'Does'], correct: 0, explanation: 'Will it rain...', explanationRu: "Will it rain..." },
             ],
           },
           {
@@ -6640,8 +6640,8 @@ export const grammarPathSections = [
               exampleRu: '— Will you come tomorrow? — Yes, I will. / No, I won\'t.',
             },
             exercises: [
-              { text: '— Will she be at home tonight? — Yes, she ___ .', options: ['will', 'is', 'does'], correct: 0, explanation: 'Yes, she will.' },
-              { text: '— Will they arrive on time? — No, they ___ .', options: ["won't", "aren't", "don't"], correct: 0, explanation: 'No, they won\'t.' },
+              { text: '— Will she be at home tonight? — Yes, she ___ .', options: ['will', 'is', 'does'], correct: 0, explanation: 'Yes, she will.', explanationRu: "Yes, she will." },
+              { text: '— Will they arrive on time? — No, they ___ .', options: ["won't", "aren't", "don't"], correct: 0, explanation: 'No, they won\'t.', explanationRu: "No, they won't." },
             ],
           },
           {
@@ -6653,8 +6653,8 @@ export const grammarPathSections = [
               exampleRu: 'Where will you live in the future? What will you do tomorrow?',
             },
             exercises: [
-              { text: 'Where ___ you go after school?', options: ['will', 'are', 'do'], correct: 0, explanation: 'Where + will + you + go.' },
-              { text: 'What ___ happen next?', options: ['will', 'is', 'does'], correct: 0, explanation: 'What + will + happen.' },
+              { text: 'Where ___ you go after school?', options: ['will', 'are', 'do'], correct: 0, explanation: 'Where + will + you + go.', explanationRu: "Where + will + you + go." },
+              { text: 'What ___ happen next?', options: ['will', 'is', 'does'], correct: 0, explanation: 'What + will + happen.', explanationRu: "What + will + happen." },
             ],
           },
           {
@@ -6666,9 +6666,9 @@ export const grammarPathSections = [
               exampleRu: 'I won\'t be late, and will you wait for me?',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Will you come to my birthday party?', 'Will you to come to my birthday party?'], correct: 0, explanation: 'Will + V1 (to siz).' },
-              { text: 'Choose the correct sentence:', options: ['She won\'t agree to this plan.', 'She won\'t agrees to this plan.'], correct: 0, explanation: 'won\'t + V1 (agree).' },
-              { text: 'Select the correct sentence:', options: ['When will the movie start?', 'When the movie will start?'], correct: 0, explanation: 'When will the movie start?' },
+              { text: 'Choose the correct question:', options: ['Will you come to my birthday party?', 'Will you to come to my birthday party?'], correct: 0, explanation: 'Will + V1 (to siz).', explanationRu: "Will + V1 (без to)." },
+              { text: 'Choose the correct sentence:', options: ['She won\'t agree to this plan.', 'She won\'t agrees to this plan.'], correct: 0, explanation: 'won\'t + V1 (agree).', explanationRu: "won't + V1 (agree)." },
+              { text: 'Select the correct sentence:', options: ['When will the movie start?', 'When the movie will start?'], correct: 0, explanation: 'When will the movie start?', explanationRu: "When will the movie start?" },
             ],
           },
         ],
@@ -6689,8 +6689,8 @@ export const grammarPathSections = [
               exampleRu: 'I am going to bake (reja) vs I will buy (kutilmagan).',
             },
             exercises: [
-              { text: '— Why did you buy sugar? — Because I ___ make jam.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan reja: am going to.' },
-              { text: '— I can\'t carry this bag. — Don\'t worry, I ___ help you!', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Shu zahoti kutilmagan taklif: will help.' },
+              { text: '— Why did you buy sugar? — Because I ___ make jam.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan reja: am going to.', explanationRu: "Заранее продуманный план: am going to." },
+              { text: '— I can\'t carry this bag. — Don\'t worry, I ___ help you!', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Shu zahoti kutilmagan taklif: will help.', explanationRu: "Спонтанное предложение прямо сейчас: will help." },
             ],
           },
           {
@@ -6702,8 +6702,8 @@ export const grammarPathSections = [
               exampleRu: 'Evidence ➔ going to / Opinion ➔ will.',
             },
             exercises: [
-              { text: 'Look at that runner! He ___ win the race.', options: ['is going to', 'will', 'wins'], correct: 0, explanation: 'Ko\'rinib turgan alomat (oldinda ketmoqda): is going to.' },
-              { text: 'I think people ___ live on Mars one day.', options: ['will', 'are going to', 'going to'], correct: 0, explanation: 'I think -> will.' },
+              { text: 'Look at that runner! He ___ win the race.', options: ['is going to', 'will', 'wins'], correct: 0, explanation: 'Ko\'rinib turgan alomat (oldinda ketmoqda): is going to.', explanationRu: "Явный видимый признак (идёт впереди): is going to." },
+              { text: 'I think people ___ live on Mars one day.', options: ['will', 'are going to', 'going to'], correct: 0, explanation: 'I think -> will.', explanationRu: "I think -> will." },
             ],
           },
           {
@@ -6715,8 +6715,8 @@ export const grammarPathSections = [
               exampleRu: 'I will help you. / Will you open the door?',
             },
             exercises: [
-              { text: 'I promise I ___ be late again.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da: won\'t.' },
-              { text: '___ you please turn off the light?', options: ['Will', 'Are going to', 'Do'], correct: 0, explanation: 'Iltimos/so\'rov: Will you...' },
+              { text: 'I promise I ___ be late again.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da: won\'t.', explanationRu: "Обещание: won't." },
+              { text: '___ you please turn off the light?', options: ['Will', 'Are going to', 'Do'], correct: 0, explanation: 'Iltimos/so\'rov: Will you...', explanationRu: "Просьба: Will you..." },
             ],
           },
           {
@@ -6728,8 +6728,8 @@ export const grammarPathSections = [
               exampleRu: 'Context determines going to vs will.',
             },
             exercises: [
-              { text: '— What are your plans for tomorrow? — I ___ visit my dentist.', options: ['am going to', 'will', 'going to'], correct: 0, explanation: 'Reja: am going to.' },
-              { text: '— Someone is at the door. — I ___ see who it is.', options: ['will', 'am going to', 'go to'], correct: 0, explanation: 'Kutilmagan qaror: will see.' },
+              { text: '— What are your plans for tomorrow? — I ___ visit my dentist.', options: ['am going to', 'will', 'going to'], correct: 0, explanation: 'Reja: am going to.', explanationRu: "План: am going to." },
+              { text: '— Someone is at the door. — I ___ see who it is.', options: ['will', 'am going to', 'go to'], correct: 0, explanation: 'Kutilmagan qaror: will see.', explanationRu: "Спонтанное решение: will see." },
             ],
           },
           {
@@ -6741,9 +6741,9 @@ export const grammarPathSections = [
               exampleRu: 'I am going to study medicine, and I think I will be a good doctor.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I am going to buy a car next month because I saved money.', 'I will buy a car next month because I saved money.'], correct: 0, explanation: 'Tayyorgarlik ko\'rilgan reja: am going to.' },
-              { text: 'Choose the correct sentence:', options: ['I think it will rain tomorrow.', 'I think it is going to rain tomorrow.'], correct: 0, explanation: 'I think -> will.' },
-              { text: 'Select the correct sentence:', options: ['Look at the baby! He is going to fall!', 'Look at the baby! He will fall!'], correct: 0, explanation: 'Ko\'rinib turgan alomat: is going to fall!' },
+              { text: 'Choose the correct sentence:', options: ['I am going to buy a car next month because I saved money.', 'I will buy a car next month because I saved money.'], correct: 0, explanation: 'Tayyorgarlik ko\'rilgan reja: am going to.', explanationRu: "Заранее подготовленный план: am going to." },
+              { text: 'Choose the correct sentence:', options: ['I think it will rain tomorrow.', 'I think it is going to rain tomorrow.'], correct: 0, explanation: 'I think -> will.', explanationRu: "I think -> will." },
+              { text: 'Select the correct sentence:', options: ['Look at the baby! He is going to fall!', 'Look at the baby! He will fall!'], correct: 0, explanation: 'Ko\'rinib turgan alomat: is going to fall!', explanationRu: "Явный признак: is going to fall!" },
             ],
           },
         ],
@@ -6764,8 +6764,8 @@ export const grammarPathSections = [
               exampleRu: 'I am meeting my boss tomorrow at 10 AM.',
             },
             exercises: [
-              { text: 'We ___ to Paris tomorrow. We bought our plane tickets.', options: ['are flying', 'will fly', 'fly'], correct: 0, explanation: 'Chiptalar olingan aniq reja: are flying.' },
-              { text: 'She ___ the doctor at 3 PM on Monday.', options: ['is seeing', 'will see', 'sees'], correct: 0, explanation: 'Aniq belgilangan uchrashuv: is seeing.' },
+              { text: 'We ___ to Paris tomorrow. We bought our plane tickets.', options: ['are flying', 'will fly', 'fly'], correct: 0, explanation: 'Chiptalar olingan aniq reja: are flying.', explanationRu: "Точный план — билеты куплены: are flying." },
+              { text: 'She ___ the doctor at 3 PM on Monday.', options: ['is seeing', 'will see', 'sees'], correct: 0, explanation: 'Aniq belgilangan uchrashuv: is seeing.', explanationRu: "Точно назначенная встреча: is seeing." },
             ],
           },
           {
@@ -6777,8 +6777,8 @@ export const grammarPathSections = [
               exampleRu: 'Arranged vs Intended vs Spontaneous.',
             },
             exercises: [
-              { text: 'I ___ my doctor tomorrow at 9:00. (Appointment is booked)', options: ['am visiting', 'will visit', 'visit'], correct: 0, explanation: 'Aniq uchrashuv belgilangan: am visiting.' },
-              { text: 'They ___ married next month. (Invitations are sent out)', options: ['are getting', 'will get', 'get'], correct: 0, explanation: 'Taklifnomalar tarqatilgan aniq tadbir: are getting.' },
+              { text: 'I ___ my doctor tomorrow at 9:00. (Appointment is booked)', options: ['am visiting', 'will visit', 'visit'], correct: 0, explanation: 'Aniq uchrashuv belgilangan: am visiting.', explanationRu: "Назначена точная встреча: am visiting." },
+              { text: 'They ___ married next month. (Invitations are sent out)', options: ['are getting', 'will get', 'get'], correct: 0, explanation: 'Taklifnomalar tarqatilgan aniq tadbir: are getting.', explanationRu: "Точное мероприятие с разосланными приглашениями: are getting." },
             ],
           },
           {
@@ -6790,8 +6790,8 @@ export const grammarPathSections = [
               exampleRu: 'What are you doing tonight? We will finish the project next week.',
             },
             exercises: [
-              { text: 'What ___ you doing tonight?', options: ['are', 'will', 'do'], correct: 0, explanation: 'What are you doing tonight?' },
-              { text: 'He will start his new job ___ week.', options: ['next', 'last', 'yesterday'], correct: 0, explanation: 'Kelasi zamon: next week.' },
+              { text: 'What ___ you doing tonight?', options: ['are', 'will', 'do'], correct: 0, explanation: 'What are you doing tonight?', explanationRu: "What are you doing tonight?" },
+              { text: 'He will start his new job ___ week.', options: ['next', 'last', 'yesterday'], correct: 0, explanation: 'Kelasi zamon: next week.', explanationRu: "Будущее время: next week." },
             ],
           },
           {
@@ -6803,8 +6803,8 @@ export const grammarPathSections = [
               exampleRu: '— Are you free on Friday? — No, I am playing tennis with Ali.',
             },
             exercises: [
-              { text: '— Are you coming to dinner tonight? — Yes, I ___ at 7:00.', options: ['am arriving', 'will arrive', 'arrived'], correct: 0, explanation: 'Aniq belgilangan kelish: am arriving.' },
-              { text: 'Select the correct sentence:', options: ['I am leaving for London tomorrow morning.', 'I will to leave for London tomorrow morning.'], correct: 0, explanation: 'am leaving tomorrow morning.' },
+              { text: '— Are you coming to dinner tonight? — Yes, I ___ at 7:00.', options: ['am arriving', 'will arrive', 'arrived'], correct: 0, explanation: 'Aniq belgilangan kelish: am arriving.', explanationRu: "Точно назначенное прибытие: am arriving." },
+              { text: 'Select the correct sentence:', options: ['I am leaving for London tomorrow morning.', 'I will to leave for London tomorrow morning.'], correct: 0, explanation: 'am leaving tomorrow morning.', explanationRu: "am leaving tomorrow morning." },
             ],
           },
           {
@@ -6816,9 +6816,9 @@ export const grammarPathSections = [
               exampleRu: 'Three future forms combined.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['We are having a party on Saturday; everything is ready.', 'We will have a party on Saturday; everything is ready.'], correct: 0, explanation: 'Tayyorgarlik ko\'rib qo\'yilgan: are having.' },
-              { text: 'Choose the correct sentence:', options: ['I\'m going to learn Spanish next year.', 'I am will learn Spanish next year.'], correct: 0, explanation: 'Niyat: am going to learn.' },
-              { text: 'Select the correct sentence:', options: ['I think you will enjoy the movie.', 'I think you are enjoying the movie.'], correct: 0, explanation: 'I think -> will enjoy.' },
+              { text: 'Choose the correct sentence:', options: ['We are having a party on Saturday; everything is ready.', 'We will have a party on Saturday; everything is ready.'], correct: 0, explanation: 'Tayyorgarlik ko\'rib qo\'yilgan: are having.', explanationRu: "Заранее подготовлено: are having." },
+              { text: 'Choose the correct sentence:', options: ['I\'m going to learn Spanish next year.', 'I am will learn Spanish next year.'], correct: 0, explanation: 'Niyat: am going to learn.', explanationRu: "Намерение: am going to learn." },
+              { text: 'Select the correct sentence:', options: ['I think you will enjoy the movie.', 'I think you are enjoying the movie.'], correct: 0, explanation: 'I think -> will enjoy.', explanationRu: "I think -> will enjoy." },
             ],
           },
         ],
@@ -6839,8 +6839,8 @@ export const grammarPathSections = [
               exampleRu: 'I am going to eat. I will eat. I won\'t eat.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I am going to study medicine.', 'I will going to study medicine.'], correct: 0, explanation: 'am going to study.' },
-              { text: 'Choose the correct sentence:', options: ['She won\'t come to the lesson.', 'She won\'t to come to the lesson.'], correct: 0, explanation: 'won\'t + V1 (to siz).' },
+              { text: 'Choose the correct sentence:', options: ['I am going to study medicine.', 'I will going to study medicine.'], correct: 0, explanation: 'am going to study.', explanationRu: "am going to study." },
+              { text: 'Choose the correct sentence:', options: ['She won\'t come to the lesson.', 'She won\'t to come to the lesson.'], correct: 0, explanation: 'won\'t + V1 (to siz).', explanationRu: "won't + V1 (без to)." },
             ],
           },
           {
@@ -6852,8 +6852,8 @@ export const grammarPathSections = [
               exampleRu: '— What would you like to drink? — I\'ll have water, please.',
             },
             exercises: [
-              { text: '— Did you phone Peter? — Oh no, I forgot! I ___ him now.', options: ['will call', 'am going to call', 'call'], correct: 0, explanation: 'Shu zahoti kutilmagan qaror: will call.' },
-              { text: '— Why are you turning on the TV? — I ___ watch the news.', options: ['am going to', 'will', 'am will'], correct: 0, explanation: 'Televizor yoqishdan avvalgi niyat: am going to.' },
+              { text: '— Did you phone Peter? — Oh no, I forgot! I ___ him now.', options: ['will call', 'am going to call', 'call'], correct: 0, explanation: 'Shu zahoti kutilmagan qaror: will call.', explanationRu: "Спонтанное решение прямо сейчас: will call." },
+              { text: '— Why are you turning on the TV? — I ___ watch the news.', options: ['am going to', 'will', 'am will'], correct: 0, explanation: 'Televizor yoqishdan avvalgi niyat: am going to.', explanationRu: "Намерение перед тем, как включить телевизор: am going to." },
             ],
           },
           {
@@ -6865,8 +6865,8 @@ export const grammarPathSections = [
               exampleRu: 'Next year I am going to graduate. I hope I will find a good job.',
             },
             exercises: [
-              { text: 'Next summer we ___ to Italy. We already saved money.', options: ['are going to travel', 'will travel', 'traveled'], correct: 0, explanation: 'Niyat/tayyorgarlik: are going to travel.' },
-              { text: 'I hope everything ___ be fine in the end.', options: ['will', 'is going to', 'going to'], correct: 0, explanation: 'I hope -> will.' },
+              { text: 'Next summer we ___ to Italy. We already saved money.', options: ['are going to travel', 'will travel', 'traveled'], correct: 0, explanation: 'Niyat/tayyorgarlik: are going to travel.', explanationRu: "Намерение/подготовка: are going to travel." },
+              { text: 'I hope everything ___ be fine in the end.', options: ['will', 'is going to', 'going to'], correct: 0, explanation: 'I hope -> will.', explanationRu: "I hope -> will." },
             ],
           },
           {
@@ -6878,8 +6878,8 @@ export const grammarPathSections = [
               exampleRu: 'What will you do if it rains tomorrow?',
             },
             exercises: [
-              { text: 'What ___ you do if you pass the test?', options: ['will', 'are going to', 'do'], correct: 0, explanation: 'What will you do...' },
-              { text: 'Select the correct sentence:', options: ['I\'m sure you will do great on the test!', 'I\'m sure you are going to do great on the test!'], correct: 0, explanation: 'I\'m sure -> will.' },
+              { text: 'What ___ you do if you pass the test?', options: ['will', 'are going to', 'do'], correct: 0, explanation: 'What will you do...', explanationRu: "What will you do..." },
+              { text: 'Select the correct sentence:', options: ['I\'m sure you will do great on the test!', 'I\'m sure you are going to do great on the test!'], correct: 0, explanation: 'I\'m sure -> will.', explanationRu: "I'm sure -> will." },
             ],
           },
           {
@@ -6891,9 +6891,9 @@ export const grammarPathSections = [
               exampleRu: 'I am going to work. I will work. I am working tomorrow.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I am going to buy a laptop next week.', 'I am will buy a laptop next week.'], correct: 0, explanation: 'am going to buy.' },
-              { text: 'Choose the correct sentence:', options: ['I\'ll help you carry these heavy boxes.', 'I\'m going to help you carry these heavy boxes.'], correct: 0, explanation: 'Kutilmagan yordam: I\'ll help.' },
-              { text: 'Select the correct sentence:', options: ['Look at those clouds! It is going to rain.', 'Look at those clouds! It will rain.'], correct: 0, explanation: 'Alomat: is going to rain.' },
+              { text: 'Choose the correct sentence:', options: ['I am going to buy a laptop next week.', 'I am will buy a laptop next week.'], correct: 0, explanation: 'am going to buy.', explanationRu: "am going to buy." },
+              { text: 'Choose the correct sentence:', options: ['I\'ll help you carry these heavy boxes.', 'I\'m going to help you carry these heavy boxes.'], correct: 0, explanation: 'Kutilmagan yordam: I\'ll help.', explanationRu: "Спонтанная помощь: I'll help." },
+              { text: 'Select the correct sentence:', options: ['Look at those clouds! It is going to rain.', 'Look at those clouds! It will rain.'], correct: 0, explanation: 'Alomat: is going to rain.', explanationRu: "Признак: is going to rain." },
             ],
           },
         ],
@@ -6903,21 +6903,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Future — \"going to\" va \"will\"",
       titleRu: 'Тест раздела: Будущее время — "going to" и "will"',
       exercises: [
-        { text: 'I ___ study English tonight. I planned it yesterday.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan reja: am going to.' },
-        { text: 'Look at the dark clouds! It ___ rain.', options: ['is going to', 'will', 'is raining'], correct: 0, explanation: 'Alomat (evidence): is going to rain.' },
-        { text: '— The phone is ringing. — I ___ answer it!', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Kutilmagan qaror: will.' },
-        { text: 'I promise I ___ tell your secret.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da: won\'t.' },
-        { text: 'I think our team ___ win the match.', options: ['will', 'is going to', 'going to'], correct: 0, explanation: 'I think -> will.' },
-        { text: '___ you help me with this box, please?', options: ['Will', 'Are going to', 'Do'], correct: 0, explanation: 'So\'rov: Will you...' },
-        { text: 'He ___ come to the party tonight. He feels sick.', options: ["won't", "isn't going to", "doesn't"], correct: 0, explanation: 'won\'t come.' },
-        { text: 'We ___ to London tomorrow morning. We have tickets.', options: ['are flying', 'will fly', 'fly'], correct: 0, explanation: 'Chiptasi bor aniq uchrashtiruv: are flying.' },
-        { text: '— Why did you buy flour? — Because I ___ bake a cake.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Niyat: am going to.' },
-        { text: '— I don\'t have money. — Don\'t worry, I ___ lend you some.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Yordam taklifi: will.' },
-        { text: 'Where ___ you go after school today?', options: ['will', 'are', 'do'], correct: 0, explanation: 'Where + will + you + go.' },
-        { text: 'Choose the correct sentence:', options: ['I hope you will feel better soon.', 'I hope you are going to feel better soon.'], correct: 0, explanation: 'I hope -> will.' },
-        { text: 'Choose the correct sentence:', options: ['She is not going to buy that expensive dress.', 'She is not will buy that expensive dress.'], correct: 0, explanation: 'is not going to buy.' },
-        { text: 'Select the correct sentence:', options: ['Wait! I\'ll open the door for you.', 'Wait! I am going to open the door for you.'], correct: 0, explanation: 'Spontan qaror: I\'ll open.' },
-        { text: 'Select the correct sentence:', options: ['We are meeting the manager at 2 PM on Tuesday.', 'We will meet the manager at 2 PM on Tuesday.'], correct: 0, explanation: 'Vaqti belgilangan majlis: are meeting.' },
+        { text: 'I ___ study English tonight. I planned it yesterday.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Oldindan reja: am going to.', explanationRu: "Заранее продуманный план: am going to." },
+        { text: 'Look at the dark clouds! It ___ rain.', options: ['is going to', 'will', 'is raining'], correct: 0, explanation: 'Alomat (evidence): is going to rain.', explanationRu: "Признак (evidence): is going to rain." },
+        { text: '— The phone is ringing. — I ___ answer it!', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Kutilmagan qaror: will.', explanationRu: "Спонтанное решение: will." },
+        { text: 'I promise I ___ tell your secret.', options: ["won't", "am not going to", "don't"], correct: 0, explanation: 'Va\'da: won\'t.', explanationRu: "Обещание: won't." },
+        { text: 'I think our team ___ win the match.', options: ['will', 'is going to', 'going to'], correct: 0, explanation: 'I think -> will.', explanationRu: "I think -> will." },
+        { text: '___ you help me with this box, please?', options: ['Will', 'Are going to', 'Do'], correct: 0, explanation: 'So\'rov: Will you...', explanationRu: "Просьба: Will you..." },
+        { text: 'He ___ come to the party tonight. He feels sick.', options: ["won't", "isn't going to", "doesn't"], correct: 0, explanation: 'won\'t come.', explanationRu: "won't come." },
+        { text: 'We ___ to London tomorrow morning. We have tickets.', options: ['are flying', 'will fly', 'fly'], correct: 0, explanation: 'Chiptasi bor aniq uchrashtiruv: are flying.', explanationRu: "Точная договорённость с билетами: are flying." },
+        { text: '— Why did you buy flour? — Because I ___ bake a cake.', options: ['am going to', 'will', 'go to'], correct: 0, explanation: 'Niyat: am going to.', explanationRu: "Намерение: am going to." },
+        { text: '— I don\'t have money. — Don\'t worry, I ___ lend you some.', options: ['will', 'am going to', 'going to'], correct: 0, explanation: 'Yordam taklifi: will.', explanationRu: "Предложение помощи: will." },
+        { text: 'Where ___ you go after school today?', options: ['will', 'are', 'do'], correct: 0, explanation: 'Where + will + you + go.', explanationRu: "Where + will + you + go." },
+        { text: 'Choose the correct sentence:', options: ['I hope you will feel better soon.', 'I hope you are going to feel better soon.'], correct: 0, explanation: 'I hope -> will.', explanationRu: "I hope -> will." },
+        { text: 'Choose the correct sentence:', options: ['She is not going to buy that expensive dress.', 'She is not will buy that expensive dress.'], correct: 0, explanation: 'is not going to buy.', explanationRu: "is not going to buy." },
+        { text: 'Select the correct sentence:', options: ['Wait! I\'ll open the door for you.', 'Wait! I am going to open the door for you.'], correct: 0, explanation: 'Spontan qaror: I\'ll open.', explanationRu: "Спонтанное решение: I'll open." },
+        { text: 'Select the correct sentence:', options: ['We are meeting the manager at 2 PM on Tuesday.', 'We will meet the manager at 2 PM on Tuesday.'], correct: 0, explanation: 'Vaqti belgilangan majlis: are meeting.', explanationRu: "Собрание с назначенным временем: are meeting." },
       ],
     },
   },
@@ -6944,8 +6944,8 @@ export const grammarPathSections = [
               exampleRu: 'At 5 PM tomorrow, I will be playing football.',
             },
             exercises: [
-              { text: 'At 10:00 tomorrow morning, I ___ an exam.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'Aniq kelasi vaqtda jarayon: will be taking.' },
-              { text: 'Don\'t call her at 8 PM. She ___ dinner.', options: ['will be having', 'will have', 'is have'], correct: 0, explanation: 'Soat 8 da kechki ovqat tanavvul qilayotgan bo\'ladi: will be having.' },
+              { text: 'At 10:00 tomorrow morning, I ___ an exam.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'Aniq kelasi vaqtda jarayon: will be taking.', explanationRu: "Процесс в точный момент будущего: will be taking." },
+              { text: 'Don\'t call her at 8 PM. She ___ dinner.', options: ['will be having', 'will have', 'is have'], correct: 0, explanation: 'Soat 8 da kechki ovqat tanavvul qilayotgan bo\'ladi: will be having.', explanationRu: "В 8 часов будем ужинать: will be having." },
             ],
           },
           {
@@ -6957,8 +6957,8 @@ export const grammarPathSections = [
               exampleRu: 'He will be working. They will be studying. We will be traveling.',
             },
             exercises: [
-              { text: 'They ___ to Tashkent at this time tomorrow.', options: ['will be flying', 'will flying', 'are fly'], correct: 0, explanation: 'They + will be flying.' },
-              { text: 'She ___ in the library all afternoon tomorrow.', options: ['will be studying', 'will studying', 'is study'], correct: 0, explanation: 'She + will be studying.' },
+              { text: 'They ___ to Tashkent at this time tomorrow.', options: ['will be flying', 'will flying', 'are fly'], correct: 0, explanation: 'They + will be flying.', explanationRu: "They + will be flying." },
+              { text: 'She ___ in the library all afternoon tomorrow.', options: ['will be studying', 'will studying', 'is study'], correct: 0, explanation: 'She + will be studying.', explanationRu: "She + will be studying." },
             ],
           },
           {
@@ -6970,8 +6970,8 @@ export const grammarPathSections = [
               exampleRu: 'This time next week, we will be relaxing on the beach.',
             },
             exercises: [
-              { text: 'This time next week, I ___ on the beach.', options: ['will be lying', 'will lie', 'am lie'], correct: 0, explanation: 'This time next week -> will be lying.' },
-              { text: 'They will be working on the project ___ tomorrow.', options: ['all day', 'yesterday', 'ago'], correct: 0, explanation: 'all day tomorrow.' },
+              { text: 'This time next week, I ___ on the beach.', options: ['will be lying', 'will lie', 'am lie'], correct: 0, explanation: 'This time next week -> will be lying.', explanationRu: "This time next week -> will be lying." },
+              { text: 'They will be working on the project ___ tomorrow.', options: ['all day', 'yesterday', 'ago'], correct: 0, explanation: 'all day tomorrow.', explanationRu: "all day tomorrow." },
             ],
           },
           {
@@ -6983,8 +6983,8 @@ export const grammarPathSections = [
               exampleRu: 'Will you be using your computer later?',
             },
             exercises: [
-              { text: '___ you be passing the post office today?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Xushmuomalalik so\'rovi: Will you be passing...' },
-              { text: 'Will she be ___ the car tonight?', options: ['using', 'use', 'used'], correct: 0, explanation: 'Will she be + V-ing (using).' },
+              { text: '___ you be passing the post office today?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Xushmuomalalik so\'rovi: Will you be passing...', explanationRu: "Вежливая просьба: Will you be passing..." },
+              { text: 'Will she be ___ the car tonight?', options: ['using', 'use', 'used'], correct: 0, explanation: 'Will she be + V-ing (using).', explanationRu: "Will she be + V-ing (using)." },
             ],
           },
           {
@@ -6996,9 +6996,9 @@ export const grammarPathSections = [
               exampleRu: 'Don\'t visit me at 9 PM because I will be sleeping.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['At 8 PM tonight, I will be watching the football match.', 'At 8 PM tonight, I will watching the football match.'], correct: 0, explanation: 'will be watching (be shart).' },
-              { text: 'Choose the correct sentence:', options: ['She will be working in London next month.', 'She will is working in London next month.'], correct: 0, explanation: 'will be working.' },
-              { text: 'Select the correct sentence:', options: ['This time tomorrow, we will be swimming in the sea.', 'This time tomorrow, we are swim in the sea.'], correct: 0, explanation: 'will be swimming.' },
+              { text: 'Choose the correct sentence:', options: ['At 8 PM tonight, I will be watching the football match.', 'At 8 PM tonight, I will watching the football match.'], correct: 0, explanation: 'will be watching (be shart).', explanationRu: "will be watching (be обязательно)." },
+              { text: 'Choose the correct sentence:', options: ['She will be working in London next month.', 'She will is working in London next month.'], correct: 0, explanation: 'will be working.', explanationRu: "will be working." },
+              { text: 'Select the correct sentence:', options: ['This time tomorrow, we will be swimming in the sea.', 'This time tomorrow, we are swim in the sea.'], correct: 0, explanation: 'will be swimming.', explanationRu: "will be swimming." },
             ],
           },
         ],
@@ -7019,8 +7019,8 @@ export const grammarPathSections = [
               exampleRu: 'I won\'t be working at 6 PM tomorrow.',
             },
             exercises: [
-              { text: 'I ___ using the car tomorrow morning, so you can take it.', options: ["won't be", "won't", "not be"], correct: 0, explanation: 'Inkor shakli: won\'t be using.' },
-              { text: 'She ___ sleeping at 10 PM. She usually stays up late.', options: ["won't be", "isn't be", "won't"], correct: 0, explanation: 'She + won\'t be sleeping.' },
+              { text: 'I ___ using the car tomorrow morning, so you can take it.', options: ["won't be", "won't", "not be"], correct: 0, explanation: 'Inkor shakli: won\'t be using.', explanationRu: "Отрицательная форма: won't be using." },
+              { text: 'She ___ sleeping at 10 PM. She usually stays up late.', options: ["won't be", "isn't be", "won't"], correct: 0, explanation: 'She + won\'t be sleeping.', explanationRu: "She + won't be sleeping." },
             ],
           },
           {
@@ -7032,8 +7032,8 @@ export const grammarPathSections = [
               exampleRu: 'Correct: They won\'t be coming tonight.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['They won\'t be studying at midnight.', 'They won\'t studying at midnight.'], correct: 0, explanation: 'won\'t be studying.' },
-              { text: 'Choose the correct sentence:', options: ['He won\'t be driving during the snowstorm.', 'He won\'t be drive during the snowstorm.'], correct: 0, explanation: 'won\'t be driving.' },
+              { text: 'Choose the correct sentence:', options: ['They won\'t be studying at midnight.', 'They won\'t studying at midnight.'], correct: 0, explanation: 'won\'t be studying.', explanationRu: "won't be studying." },
+              { text: 'Choose the correct sentence:', options: ['He won\'t be driving during the snowstorm.', 'He won\'t be drive during the snowstorm.'], correct: 0, explanation: 'won\'t be driving.', explanationRu: "won't be driving." },
             ],
           },
           {
@@ -7045,8 +7045,8 @@ export const grammarPathSections = [
               exampleRu: 'I won\'t be using my printer tomorrow, so you can borrow it.',
             },
             exercises: [
-              { text: 'We ___ playing tennis tomorrow because of the rain.', options: ["won't be", "aren't be", "won't"], correct: 0, explanation: 'We + won\'t be playing.' },
-              { text: 'Tom ___ attending the meeting tomorrow at 3:00.', options: ["won't be", "doesn't be", "not will be"], correct: 0, explanation: 'Tom + won\'t be attending.' },
+              { text: 'We ___ playing tennis tomorrow because of the rain.', options: ["won't be", "aren't be", "won't"], correct: 0, explanation: 'We + won\'t be playing.', explanationRu: "We + won't be playing." },
+              { text: 'Tom ___ attending the meeting tomorrow at 3:00.', options: ["won't be", "doesn't be", "not will be"], correct: 0, explanation: 'Tom + won\'t be attending.', explanationRu: "Tom + won't be attending." },
             ],
           },
           {
@@ -7058,8 +7058,8 @@ export const grammarPathSections = [
               exampleRu: 'He isn\'t working now. He won\'t be working tomorrow at 5 PM.',
             },
             exercises: [
-              { text: 'I am not busy now, and I ___ working tomorrow at 4 PM either.', options: ["won't be", "am not", "don't"], correct: 0, explanation: 'tomorrow at 4 PM -> won\'t be.' },
-              { text: 'Select the correct sentence:', options: ['She won\'t be teaching at 2 PM tomorrow.', 'She is not teaching at 2 PM tomorrow.'], correct: 0, explanation: 'won\'t be teaching.' },
+              { text: 'I am not busy now, and I ___ working tomorrow at 4 PM either.', options: ["won't be", "am not", "don't"], correct: 0, explanation: 'tomorrow at 4 PM -> won\'t be.', explanationRu: "tomorrow at 4 PM -> won't be." },
+              { text: 'Select the correct sentence:', options: ['She won\'t be teaching at 2 PM tomorrow.', 'She is not teaching at 2 PM tomorrow.'], correct: 0, explanation: 'won\'t be teaching.', explanationRu: "won't be teaching." },
             ],
           },
           {
@@ -7071,9 +7071,9 @@ export const grammarPathSections = [
               exampleRu: 'They won\'t be staying at a hotel; they booked an apartment.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I won\'t be using the room tomorrow, feel free to use it.', 'I won\'t use the room tomorrow at 5 PM ongoing.'], correct: 0, explanation: 'won\'t be using.' },
-              { text: 'Select the correct sentence:', options: ['He won\'t be wearing a suit to the beach.', 'He won\'t wearing a suit to the beach.'], correct: 0, explanation: 'won\'t be wearing.' },
-              { text: 'Choose the correct form: We ___ traveling next week.', options: ["won't be", "won't"], correct: 0, explanation: 'won\'t be + V-ing.' },
+              { text: 'Choose the correct sentence:', options: ['I won\'t be using the room tomorrow, feel free to use it.', 'I won\'t use the room tomorrow at 5 PM ongoing.'], correct: 0, explanation: 'won\'t be using.', explanationRu: "won't be using." },
+              { text: 'Select the correct sentence:', options: ['He won\'t be wearing a suit to the beach.', 'He won\'t wearing a suit to the beach.'], correct: 0, explanation: 'won\'t be wearing.', explanationRu: "won't be wearing." },
+              { text: 'Choose the correct form: We ___ traveling next week.', options: ["won't be", "won't"], correct: 0, explanation: 'won\'t be + V-ing.', explanationRu: "won't be + V-ing." },
             ],
           },
         ],
@@ -7094,8 +7094,8 @@ export const grammarPathSections = [
               exampleRu: 'Will you be working at 8 PM tomorrow?',
             },
             exercises: [
-              { text: '___ you be sleeping when I arrive tonight?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will + you + be sleeping.' },
-              { text: '___ she be using her car tomorrow morning?', options: ['Will', 'Is', 'Does'], correct: 0, explanation: 'Will + she + be using.' },
+              { text: '___ you be sleeping when I arrive tonight?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will + you + be sleeping.', explanationRu: "Will + you + be sleeping." },
+              { text: '___ she be using her car tomorrow morning?', options: ['Will', 'Is', 'Does'], correct: 0, explanation: 'Will + she + be using.', explanationRu: "Will + she + be using." },
             ],
           },
           {
@@ -7107,8 +7107,8 @@ export const grammarPathSections = [
               exampleRu: '— Will you be watching the game at 9 PM? — Yes, I will. / No, I won\'t.',
             },
             exercises: [
-              { text: '— Will he be studying at 10 PM? — Yes, he ___ .', options: ['will', 'be', 'is'], correct: 0, explanation: 'Yes, he will.' },
-              { text: '— Will they be traveling all day tomorrow? — No, they ___ .', options: ["won't", "aren't", "don't"], correct: 0, explanation: 'No, they won\'t.' },
+              { text: '— Will he be studying at 10 PM? — Yes, he ___ .', options: ['will', 'be', 'is'], correct: 0, explanation: 'Yes, he will.', explanationRu: "Yes, he will." },
+              { text: '— Will they be traveling all day tomorrow? — No, they ___ .', options: ["won't", "aren't", "don't"], correct: 0, explanation: 'No, they won\'t.', explanationRu: "No, they won't." },
             ],
           },
           {
@@ -7120,8 +7120,8 @@ export const grammarPathSections = [
               exampleRu: 'What will you be doing tomorrow at this time?',
             },
             exercises: [
-              { text: 'What ___ you be doing at 7 PM tomorrow?', options: ['will', 'are', 'do'], correct: 0, explanation: 'What + will + you + be doing.' },
-              { text: 'Where ___ she be living next year?', options: ['will', 'is', 'does'], correct: 0, explanation: 'Where + will + she + be living.' },
+              { text: 'What ___ you be doing at 7 PM tomorrow?', options: ['will', 'are', 'do'], correct: 0, explanation: 'What + will + you + be doing.', explanationRu: "What + will + you + be doing." },
+              { text: 'Where ___ she be living next year?', options: ['will', 'is', 'does'], correct: 0, explanation: 'Where + will + she + be living.', explanationRu: "Where + will + she + be living." },
             ],
           },
           {
@@ -7133,8 +7133,8 @@ export const grammarPathSections = [
               exampleRu: 'Will you be passing by the supermarket? Could you buy some milk?',
             },
             exercises: [
-              { text: '___ you be using the printer this afternoon?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will you be using...' },
-              { text: '— Will you be staying at home tonight? — Yes, I ___ .', options: ['will', 'am', 'do'], correct: 0, explanation: 'Yes, I will.' },
+              { text: '___ you be using the printer this afternoon?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will you be using...', explanationRu: "Will you be using..." },
+              { text: '— Will you be staying at home tonight? — Yes, I ___ .', options: ['will', 'am', 'do'], correct: 0, explanation: 'Yes, I will.', explanationRu: "Yes, I will." },
             ],
           },
           {
@@ -7146,9 +7146,9 @@ export const grammarPathSections = [
               exampleRu: 'Where will you be working next year, and will you be living alone?',
             },
             exercises: [
-              { text: 'Choose the correct question:', options: ['Will you be attending the seminar tomorrow at 10 AM?', 'Will you attending the seminar tomorrow at 10 AM?'], correct: 0, explanation: 'Will you be attending...' },
-              { text: 'Choose the correct question:', options: ['What will they be doing during the break?', 'What will they doing during the break?'], correct: 0, explanation: 'What will they be doing...' },
-              { text: 'Select the correct question:', options: ['Why will he be driving all night?', 'Why he will be driving all night?'], correct: 0, explanation: 'Why will he be driving...' },
+              { text: 'Choose the correct question:', options: ['Will you be attending the seminar tomorrow at 10 AM?', 'Will you attending the seminar tomorrow at 10 AM?'], correct: 0, explanation: 'Will you be attending...', explanationRu: "Will you be attending..." },
+              { text: 'Choose the correct question:', options: ['What will they be doing during the break?', 'What will they doing during the break?'], correct: 0, explanation: 'What will they be doing...', explanationRu: "What will they be doing..." },
+              { text: 'Select the correct question:', options: ['Why will he be driving all night?', 'Why he will be driving all night?'], correct: 0, explanation: 'Why will he be driving...', explanationRu: "Why will he be driving..." },
             ],
           },
         ],
@@ -7169,8 +7169,8 @@ export const grammarPathSections = [
               exampleRu: 'Future Simple vs Future Continuous.',
             },
             exercises: [
-              { text: 'I ___ you tomorrow morning.', options: ['will call', 'will be calling', 'am call'], correct: 0, explanation: 'Oddiy kelajak harakat: will call.' },
-              { text: 'Don\'t phone me at 3 PM. I ___ an exam then.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'O\'sha soatdagi jarayon: will be taking.' },
+              { text: 'I ___ you tomorrow morning.', options: ['will call', 'will be calling', 'am call'], correct: 0, explanation: 'Oddiy kelajak harakat: will call.', explanationRu: "Простое будущее действие: will call." },
+              { text: 'Don\'t phone me at 3 PM. I ___ an exam then.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'O\'sha soatdagi jarayon: will be taking.', explanationRu: "Процесс в тот час: will be taking." },
             ],
           },
           {
@@ -7182,8 +7182,8 @@ export const grammarPathSections = [
               exampleRu: 'General vs Specific time point.',
             },
             exercises: [
-              { text: 'We ___ to Samarkand tomorrow.', options: ['will go', 'will be going', 'go'], correct: 0, explanation: 'Oddiy kelasi reja: will go.' },
-              { text: 'At 10:00 AM tomorrow, we ___ on the train.', options: ['will be travelling', 'will travel', 'travel'], correct: 0, explanation: 'Soat 10 da poyezdda ketayotgan bo\'lamiz: will be travelling.' },
+              { text: 'We ___ to Samarkand tomorrow.', options: ['will go', 'will be going', 'go'], correct: 0, explanation: 'Oddiy kelasi reja: will go.', explanationRu: "Простой будущий план: will go." },
+              { text: 'At 10:00 AM tomorrow, we ___ on the train.', options: ['will be travelling', 'will travel', 'travel'], correct: 0, explanation: 'Soat 10 da poyezdda ketayotgan bo\'lamiz: will be travelling.', explanationRu: "В 10 часов будем ехать на поезде: will be travelling." },
             ],
           },
           {
@@ -7195,8 +7195,8 @@ export const grammarPathSections = [
               exampleRu: 'I will know the test results tomorrow.',
             },
             exercises: [
-              { text: 'I ___ the answer tomorrow morning.', options: ['will know', 'will be knowing', 'know'], correct: 0, explanation: 'know - holat fe\'li: will know.' },
-              { text: 'She ___ to join us for dinner.', options: ['will want', 'will be wanting', 'wants'], correct: 0, explanation: 'want - holat fe\'li: will want.' },
+              { text: 'I ___ the answer tomorrow morning.', options: ['will know', 'will be knowing', 'know'], correct: 0, explanation: 'know - holat fe\'li: will know.', explanationRu: "know — глагол состояния: will know." },
+              { text: 'She ___ to join us for dinner.', options: ['will want', 'will be wanting', 'wants'], correct: 0, explanation: 'want - holat fe\'li: will want.', explanationRu: "want — глагол состояния: will want." },
             ],
           },
           {
@@ -7208,8 +7208,8 @@ export const grammarPathSections = [
               exampleRu: 'He will start work at 9 AM, so at 9:30 AM he will be working.',
             },
             exercises: [
-              { text: 'The movie starts at 8 PM, so at 8:30 PM we ___ it.', options: ['will be watching', 'will watch', 'watch'], correct: 0, explanation: '8:30 da ko\'rayotgan bo\'lamiz: will be watching.' },
-              { text: 'Select the correct sentence:', options: ['I will meet you tomorrow at 5 PM, and we will be drinking coffee.', 'I will be meeting you tomorrow at 5 PM, and we will drink coffee.'], correct: 0, explanation: 'will meet / will be drinking.' },
+              { text: 'The movie starts at 8 PM, so at 8:30 PM we ___ it.', options: ['will be watching', 'will watch', 'watch'], correct: 0, explanation: '8:30 da ko\'rayotgan bo\'lamiz: will be watching.', explanationRu: "В 8:30 будем смотреть: will be watching." },
+              { text: 'Select the correct sentence:', options: ['I will meet you tomorrow at 5 PM, and we will be drinking coffee.', 'I will be meeting you tomorrow at 5 PM, and we will drink coffee.'], correct: 0, explanation: 'will meet / will be drinking.', explanationRu: "will meet / will be drinking." },
             ],
           },
           {
@@ -7221,9 +7221,9 @@ export const grammarPathSections = [
               exampleRu: 'I will arrive at 7:00, and at 7:30 I will be having dinner.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['At 6 PM tomorrow, she will be practicing piano.', 'At 6 PM tomorrow, she will practice piano.'], correct: 0, explanation: 'At 6 PM tomorrow -> will be practicing.' },
-              { text: 'Choose the correct sentence:', options: ['I will understand the rule after the lesson.', 'I will be understanding the rule after the lesson.'], correct: 0, explanation: 'understand - holat fe\'li: will understand.' },
-              { text: 'Select the correct sentence:', options: ['Don\'t call him at 11 PM; he will be sleeping.', 'Don\'t call him at 11 PM; he will sleep.'], correct: 0, explanation: 'will be sleeping.' },
+              { text: 'Choose the correct sentence:', options: ['At 6 PM tomorrow, she will be practicing piano.', 'At 6 PM tomorrow, she will practice piano.'], correct: 0, explanation: 'At 6 PM tomorrow -> will be practicing.', explanationRu: "At 6 PM tomorrow -> will be practicing." },
+              { text: 'Choose the correct sentence:', options: ['I will understand the rule after the lesson.', 'I will be understanding the rule after the lesson.'], correct: 0, explanation: 'understand - holat fe\'li: will understand.', explanationRu: "understand — глагол состояния: will understand." },
+              { text: 'Select the correct sentence:', options: ['Don\'t call him at 11 PM; he will be sleeping.', 'Don\'t call him at 11 PM; he will sleep.'], correct: 0, explanation: 'will be sleeping.', explanationRu: "will be sleeping." },
             ],
           },
         ],
@@ -7244,8 +7244,8 @@ export const grammarPathSections = [
               exampleRu: 'When you arrive tomorrow, I will be waiting for you.',
             },
             exercises: [
-              { text: 'When you ___ home tomorrow, I will be watching TV.', options: ['come', 'will come', 'are coming'], correct: 0, explanation: 'When elanchigidan keyin Present Simple: come.' },
-              { text: 'If it rains tomorrow, we ___ staying indoors.', options: ['will be', 'are', 'will'], correct: 0, explanation: 'If it rains -> we will be staying.' },
+              { text: 'When you ___ home tomorrow, I will be watching TV.', options: ['come', 'will come', 'are coming'], correct: 0, explanation: 'When elanchigidan keyin Present Simple: come.', explanationRu: "После союза when — Present Simple: come." },
+              { text: 'If it rains tomorrow, we ___ staying indoors.', options: ['will be', 'are', 'will'], correct: 0, explanation: 'If it rains -> we will be staying.', explanationRu: "If it rains -> we will be staying." },
             ],
           },
           {
@@ -7257,8 +7257,8 @@ export const grammarPathSections = [
               exampleRu: 'While I am studying tomorrow, my sister will be playing video games.',
             },
             exercises: [
-              { text: 'While you are working tomorrow, I ___ on the beach.', options: ['will be relaxing', 'will relax', 'relax'], correct: 0, explanation: 'While ... -> I will be relaxing.' },
-              { text: 'They will be dancing while the band ___ .', options: ['is playing', 'will play', 'played'], correct: 0, explanation: 'while the band is playing (Present Continuous).' },
+              { text: 'While you are working tomorrow, I ___ on the beach.', options: ['will be relaxing', 'will relax', 'relax'], correct: 0, explanation: 'While ... -> I will be relaxing.', explanationRu: "While ... -> I will be relaxing." },
+              { text: 'They will be dancing while the band ___ .', options: ['is playing', 'will play', 'played'], correct: 0, explanation: 'while the band is playing (Present Continuous).', explanationRu: "while the band is playing (Present Continuous)." },
             ],
           },
           {
@@ -7270,8 +7270,8 @@ export const grammarPathSections = [
               exampleRu: 'At 8 AM I will be having breakfast, and at 10 AM I will be sitting in a lecture.',
             },
             exercises: [
-              { text: 'At 9:00 AM tomorrow I ___ breakfast, and at 11:00 AM I ___ tennis.', options: ['will be having / will be playing', 'will have / will play', 'am having / am playing'], correct: 0, explanation: 'Jadvaldagi davomiy nuqtalar: will be having / will be playing.' },
-              { text: 'Select the correct sentence:', options: ['When the train arrives, we will be waiting on the platform.', 'When the train will arrive, we will be waiting on the platform.'], correct: 0, explanation: 'When the train arrives...' },
+              { text: 'At 9:00 AM tomorrow I ___ breakfast, and at 11:00 AM I ___ tennis.', options: ['will be having / will be playing', 'will have / will play', 'am having / am playing'], correct: 0, explanation: 'Jadvaldagi davomiy nuqtalar: will be having / will be playing.', explanationRu: "Пункты расписания: will be having / will be playing." },
+              { text: 'Select the correct sentence:', options: ['When the train arrives, we will be waiting on the platform.', 'When the train will arrive, we will be waiting on the platform.'], correct: 0, explanation: 'When the train arrives...', explanationRu: "When the train arrives..." },
             ],
           },
           {
@@ -7283,8 +7283,8 @@ export const grammarPathSections = [
               exampleRu: '— What will you be doing at 6 PM? — I will be cooking dinner.',
             },
             exercises: [
-              { text: '— What ___ you be doing at 3 PM tomorrow? — I ___ taking an exam.', options: ['will / will be', 'are / am', 'do / will'], correct: 0, explanation: 'What will you be doing / I will be taking.' },
-              { text: '— Will he be sleeping at midnight? — Yes, he ___ .', options: ['will', 'will be', 'is'], correct: 0, explanation: 'Yes, he will.' },
+              { text: '— What ___ you be doing at 3 PM tomorrow? — I ___ taking an exam.', options: ['will / will be', 'are / am', 'do / will'], correct: 0, explanation: 'What will you be doing / I will be taking.', explanationRu: "What will you be doing / I will be taking." },
+              { text: '— Will he be sleeping at midnight? — Yes, he ___ .', options: ['will', 'will be', 'is'], correct: 0, explanation: 'Yes, he will.', explanationRu: "Yes, he will." },
             ],
           },
           {
@@ -7296,9 +7296,9 @@ export const grammarPathSections = [
               exampleRu: 'When the clock strikes midnight, people around the world will be celebrating.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['When you get off the plane, I will be standing near the exit.', 'When you will get off the plane, I will be standing near the exit.'], correct: 0, explanation: 'When you get off...' },
-              { text: 'Choose the correct sentence:', options: ['While the teacher is explaining, the students will be listening carefully.', 'While the teacher will explain, the students will be listening carefully.'], correct: 0, explanation: 'While the teacher is explaining...' },
-              { text: 'Select the correct sentence:', options: ['At 7 PM tomorrow, we will be having dinner together.', 'At 7 PM tomorrow, we will have dinner together ongoing.'], correct: 0, explanation: 'will be having dinner.' },
+              { text: 'Choose the correct sentence:', options: ['When you get off the plane, I will be standing near the exit.', 'When you will get off the plane, I will be standing near the exit.'], correct: 0, explanation: 'When you get off...', explanationRu: "When you get off..." },
+              { text: 'Choose the correct sentence:', options: ['While the teacher is explaining, the students will be listening carefully.', 'While the teacher will explain, the students will be listening carefully.'], correct: 0, explanation: 'While the teacher is explaining...', explanationRu: "While the teacher is explaining..." },
+              { text: 'Select the correct sentence:', options: ['At 7 PM tomorrow, we will be having dinner together.', 'At 7 PM tomorrow, we will have dinner together ongoing.'], correct: 0, explanation: 'will be having dinner.', explanationRu: "will be having dinner." },
             ],
           },
         ],
@@ -7319,8 +7319,8 @@ export const grammarPathSections = [
               exampleRu: 'I will be sleeping. I won\'t be studying. When you arrive.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['This time tomorrow I will be flying to Rome.', 'This time tomorrow I will flying to Rome.'], correct: 0, explanation: 'will be flying.' },
-              { text: 'Choose the correct sentence:', options: ['When I arrive home, my mom will be cooking.', 'When I will arrive home, my mom will be cooking.'], correct: 0, explanation: 'When I arrive home...' },
+              { text: 'Choose the correct sentence:', options: ['This time tomorrow I will be flying to Rome.', 'This time tomorrow I will flying to Rome.'], correct: 0, explanation: 'will be flying.', explanationRu: "will be flying." },
+              { text: 'Choose the correct sentence:', options: ['When I arrive home, my mom will be cooking.', 'When I will arrive home, my mom will be cooking.'], correct: 0, explanation: 'When I arrive home...', explanationRu: "When I arrive home..." },
             ],
           },
           {
@@ -7332,8 +7332,8 @@ export const grammarPathSections = [
               exampleRu: 'Tomorrow is a busy day. At 9 AM I will be sitting in class.',
             },
             exercises: [
-              { text: 'Tomorrow at 10 AM, we ___ an important test.', options: ['will be writing', 'will writeing', 'will be write'], correct: 0, explanation: 'will be writing.' },
-              { text: 'Select the correct sentence:', options: ['Don\'t call her at 11 PM; she will be sleeping soundly.', 'Don\'t call her at 11 PM; she will sleeping soundly.'], correct: 0, explanation: 'will be sleeping soundly.' },
+              { text: 'Tomorrow at 10 AM, we ___ an important test.', options: ['will be writing', 'will writeing', 'will be write'], correct: 0, explanation: 'will be writing.', explanationRu: "will be writing." },
+              { text: 'Select the correct sentence:', options: ['Don\'t call her at 11 PM; she will be sleeping soundly.', 'Don\'t call her at 11 PM; she will sleeping soundly.'], correct: 0, explanation: 'will be sleeping soundly.', explanationRu: "will be sleeping soundly." },
             ],
           },
           {
@@ -7345,8 +7345,8 @@ export const grammarPathSections = [
               exampleRu: 'At 5 PM tomorrow, I will be repairing my car.',
             },
             exercises: [
-              { text: 'Ertaga soat 4 da men kitob o\'qiyotgan bo\'laman:', options: ['Tomorrow at 4 o\'clock I will be reading a book.', 'Tomorrow at 4 o\'clock I will read a book.'], correct: 0, explanation: 'Davomli jarayon: will be reading.' },
-              { text: 'Ertaga bu vaqtda ular suzishayotgan bo\'lishadi:', options: ['At this time tomorrow they will be swimming.', 'At this time tomorrow they swim.'], correct: 0, explanation: 'will be swimming.' },
+              { text: 'Ertaga soat 4 da men kitob o\'qiyotgan bo\'laman:', options: ['Tomorrow at 4 o\'clock I will be reading a book.', 'Tomorrow at 4 o\'clock I will read a book.'], correct: 0, explanation: 'Davomli jarayon: will be reading.', explanationRu: "Длительный процесс: will be reading." },
+              { text: 'Ertaga bu vaqtda ular suzishayotgan bo\'lishadi:', options: ['At this time tomorrow they will be swimming.', 'At this time tomorrow they swim.'], correct: 0, explanation: 'will be swimming.', explanationRu: "will be swimming." },
             ],
           },
           {
@@ -7358,8 +7358,8 @@ export const grammarPathSections = [
               exampleRu: '— Will you be using the room at 4:00? — No, I won\'t.',
             },
             exercises: [
-              { text: '— Will you be staying long at the party? — No, I ___ home early.', options: ['will be going', 'will go', 'go'], correct: 0, explanation: 'will be going.' },
-              { text: 'Select the correct sentence:', options: ['What will you be doing when the new year starts?', 'What will you doing when the new year starts?'], correct: 0, explanation: 'What will you be doing...' },
+              { text: '— Will you be staying long at the party? — No, I ___ home early.', options: ['will be going', 'will go', 'go'], correct: 0, explanation: 'will be going.', explanationRu: "will be going." },
+              { text: 'Select the correct sentence:', options: ['What will you be doing when the new year starts?', 'What will you doing when the new year starts?'], correct: 0, explanation: 'What will you be doing...', explanationRu: "What will you be doing..." },
             ],
           },
           {
@@ -7371,9 +7371,9 @@ export const grammarPathSections = [
               exampleRu: 'I will be working. I won\'t be working. Will you be working?',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['At 9 PM tomorrow, I will be watching a movie.', 'At 9 PM tomorrow, I will be watch a movie.'], correct: 0, explanation: 'will be watching.' },
-              { text: 'Choose the correct sentence:', options: ['She won\'t be using the printer tomorrow, so you can take it.', 'She won\'t using the printer tomorrow, so you can take it.'], correct: 0, explanation: 'won\'t be using.' },
-              { text: 'Select the correct sentence:', options: ['When you arrive tomorrow, we will be waiting for you.', 'When you will arrive tomorrow, we will be waiting for you.'], correct: 0, explanation: 'When you arrive tomorrow...' },
+              { text: 'Choose the correct sentence:', options: ['At 9 PM tomorrow, I will be watching a movie.', 'At 9 PM tomorrow, I will be watch a movie.'], correct: 0, explanation: 'will be watching.', explanationRu: "will be watching." },
+              { text: 'Choose the correct sentence:', options: ['She won\'t be using the printer tomorrow, so you can take it.', 'She won\'t using the printer tomorrow, so you can take it.'], correct: 0, explanation: 'won\'t be using.', explanationRu: "won't be using." },
+              { text: 'Select the correct sentence:', options: ['When you arrive tomorrow, we will be waiting for you.', 'When you will arrive tomorrow, we will be waiting for you.'], correct: 0, explanation: 'When you arrive tomorrow...', explanationRu: "When you arrive tomorrow..." },
             ],
           },
         ],
@@ -7383,21 +7383,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Future Continuous — kelasi davomli zamon",
       titleRu: 'Тест раздела: Future Continuous — будущее длительное время',
       exercises: [
-        { text: 'At 10 PM tonight, I ___ sleeping.', options: ['will be', 'will', 'am'], correct: 0, explanation: 'I + will be sleeping.' },
-        { text: 'Don\'t phone me at 3 PM tomorrow. I ___ an exam.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'will be taking.' },
-        { text: 'This time next week, we ___ on the beach.', options: ['will be lying', 'will lie', 'are lie'], correct: 0, explanation: 'will be lying.' },
-        { text: 'She ___ using her computer tomorrow morning, so you can borrow it.', options: ["won't be", "won't", "isn't"], correct: 0, explanation: 'won\'t be using.' },
-        { text: '___ you be attending the conference tomorrow at 9:00?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will you be attending...' },
-        { text: 'What ___ you be doing tomorrow at this time?', options: ['will', 'are', 'do'], correct: 0, explanation: 'What will you be doing...' },
-        { text: 'When you arrive tomorrow, I ___ for you at the station.', options: ['will be waiting', 'will wait', 'am wait'], correct: 0, explanation: 'will be waiting.' },
-        { text: 'I ___ the answer to your question tomorrow.', options: ['will know', 'will be knowing', 'know'], correct: 0, explanation: 'know - holat fe\'li: will know.' },
-        { text: 'Choose the correct sentence:', options: ['They won\'t be studying at midnight.', 'They won\'t studying at midnight.'], correct: 0, explanation: 'won\'t be studying.' },
-        { text: 'Choose the correct sentence:', options: ['Will she be using her car tonight?', 'Will she using her car tonight?'], correct: 0, explanation: 'Will she be using...' },
-        { text: 'Select the correct sentence:', options: ['When he arrives tomorrow, we will be eating dinner.', 'When he will arrive tomorrow, we will be eating dinner.'], correct: 0, explanation: 'When he arrives...' },
-        { text: 'Select the correct sentence:', options: ['At 8 AM tomorrow, I will be driving to work.', 'At 8 AM tomorrow, I will drive to work.'], correct: 0, explanation: 'At 8 AM tomorrow -> will be driving.' },
-        { text: 'Choose the correct sentence:', options: ['While you are working tomorrow, I will be relaxing.', 'While you will work tomorrow, I will relax.'], correct: 0, explanation: 'While you are working... I will be relaxing.' },
-        { text: 'Choose the correct sentence:', options: ['I will be passing by the post office tomorrow. Can I post your letter?', 'I will pass by the post office tomorrow. Can I post your letter?'], correct: 0, explanation: 'Xushmuomalalik so\'rovi: will be passing.' },
-        { text: 'Select the correct sentence:', options: ['Don\'t call them at 11 PM; they will be sleeping.', 'Don\'t call them at 11 PM; they will sleep.'], correct: 0, explanation: 'will be sleeping.' },
+        { text: 'At 10 PM tonight, I ___ sleeping.', options: ['will be', 'will', 'am'], correct: 0, explanation: 'I + will be sleeping.', explanationRu: "I + will be sleeping." },
+        { text: 'Don\'t phone me at 3 PM tomorrow. I ___ an exam.', options: ['will be taking', 'will take', 'am take'], correct: 0, explanation: 'will be taking.', explanationRu: "will be taking." },
+        { text: 'This time next week, we ___ on the beach.', options: ['will be lying', 'will lie', 'are lie'], correct: 0, explanation: 'will be lying.', explanationRu: "will be lying." },
+        { text: 'She ___ using her computer tomorrow morning, so you can borrow it.', options: ["won't be", "won't", "isn't"], correct: 0, explanation: 'won\'t be using.', explanationRu: "won't be using." },
+        { text: '___ you be attending the conference tomorrow at 9:00?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Will you be attending...', explanationRu: "Will you be attending..." },
+        { text: 'What ___ you be doing tomorrow at this time?', options: ['will', 'are', 'do'], correct: 0, explanation: 'What will you be doing...', explanationRu: "What will you be doing..." },
+        { text: 'When you arrive tomorrow, I ___ for you at the station.', options: ['will be waiting', 'will wait', 'am wait'], correct: 0, explanation: 'will be waiting.', explanationRu: "will be waiting." },
+        { text: 'I ___ the answer to your question tomorrow.', options: ['will know', 'will be knowing', 'know'], correct: 0, explanation: 'know - holat fe\'li: will know.', explanationRu: "know — глагол состояния: will know." },
+        { text: 'Choose the correct sentence:', options: ['They won\'t be studying at midnight.', 'They won\'t studying at midnight.'], correct: 0, explanation: 'won\'t be studying.', explanationRu: "won't be studying." },
+        { text: 'Choose the correct sentence:', options: ['Will she be using her car tonight?', 'Will she using her car tonight?'], correct: 0, explanation: 'Will she be using...', explanationRu: "Will she be using..." },
+        { text: 'Select the correct sentence:', options: ['When he arrives tomorrow, we will be eating dinner.', 'When he will arrive tomorrow, we will be eating dinner.'], correct: 0, explanation: 'When he arrives...', explanationRu: "When he arrives..." },
+        { text: 'Select the correct sentence:', options: ['At 8 AM tomorrow, I will be driving to work.', 'At 8 AM tomorrow, I will drive to work.'], correct: 0, explanation: 'At 8 AM tomorrow -> will be driving.', explanationRu: "At 8 AM tomorrow -> will be driving." },
+        { text: 'Choose the correct sentence:', options: ['While you are working tomorrow, I will be relaxing.', 'While you will work tomorrow, I will relax.'], correct: 0, explanation: 'While you are working... I will be relaxing.', explanationRu: "While you are working... I will be relaxing." },
+        { text: 'Choose the correct sentence:', options: ['I will be passing by the post office tomorrow. Can I post your letter?', 'I will pass by the post office tomorrow. Can I post your letter?'], correct: 0, explanation: 'Xushmuomalalik so\'rovi: will be passing.', explanationRu: "Вежливая просьба: will be passing." },
+        { text: 'Select the correct sentence:', options: ['Don\'t call them at 11 PM; they will be sleeping.', 'Don\'t call them at 11 PM; they will sleep.'], correct: 0, explanation: 'will be sleeping.', explanationRu: "will be sleeping." },
       ],
     },
   },
@@ -7424,8 +7424,8 @@ export const grammarPathSections = [
               exampleRu: 'I have finished my homework. She has lost her key.',
             },
             exercises: [
-              { text: 'I ___ my key. I can\'t open the door.', options: ['have lost', 'losted', 'has lost'], correct: 0, explanation: 'I + have lost.' },
-              { text: 'She ___ her lunch, so she isn\'t hungry.', options: ['has eaten', 'have eaten', 'eated'], correct: 0, explanation: 'She + has eaten.' },
+              { text: 'I ___ my key. I can\'t open the door.', options: ['have lost', 'losted', 'has lost'], correct: 0, explanation: 'I + have lost.', explanationRu: "I + have lost." },
+              { text: 'She ___ her lunch, so she isn\'t hungry.', options: ['has eaten', 'have eaten', 'eated'], correct: 0, explanation: 'She + has eaten.', explanationRu: "She + has eaten." },
             ],
           },
           {
@@ -7437,8 +7437,8 @@ export const grammarPathSections = [
               exampleRu: 'We have seen this movie. He has bought a car.',
             },
             exercises: [
-              { text: 'They ___ a new house.', options: ['have bought', 'has bought', 'buys'], correct: 0, explanation: 'They + have bought.' },
-              { text: 'My brother ___ his exam.', options: ['has passed', 'have passed', 'passed'], correct: 0, explanation: 'My brother (he) + has passed.' },
+              { text: 'They ___ a new house.', options: ['have bought', 'has bought', 'buys'], correct: 0, explanation: 'They + have bought.', explanationRu: "They + have bought." },
+              { text: 'My brother ___ his exam.', options: ['has passed', 'have passed', 'passed'], correct: 0, explanation: 'My brother (he) + has passed.', explanationRu: "My brother (he) + has passed." },
             ],
           },
           {
@@ -7450,8 +7450,8 @@ export const grammarPathSections = [
               exampleRu: 'I haven\'t seen him today. Have you finished yet?',
             },
             exercises: [
-              { text: 'I ___ my breakfast yet.', options: ["haven't had", "hasn't had", "don't have"], correct: 0, explanation: 'I + haven\'t had.' },
-              { text: '___ you ever visited London?', options: ['Have', 'Has', 'Did'], correct: 0, explanation: 'You savolida: Have you ever visited...' },
+              { text: 'I ___ my breakfast yet.', options: ["haven't had", "hasn't had", "don't have"], correct: 0, explanation: 'I + haven\'t had.', explanationRu: "I + haven't had." },
+              { text: '___ you ever visited London?', options: ['Have', 'Has', 'Did'], correct: 0, explanation: 'You savolida: Have you ever visited...', explanationRu: "В вопросе с You: Have you ever visited..." },
             ],
           },
           {
@@ -7463,8 +7463,8 @@ export const grammarPathSections = [
               exampleRu: 'I have just arrived. She has never tried sushi.',
             },
             exercises: [
-              { text: 'She has ___ finished her report.', options: ['already', 'yet', 'ever'], correct: 0, explanation: 'have/has va V3 orasida: already.' },
-              { text: 'I haven\'t read this book ___ .', options: ['yet', 'already', 'just'], correct: 0, explanation: 'Inkor gap oxirida: yet.' },
+              { text: 'She has ___ finished her report.', options: ['already', 'yet', 'ever'], correct: 0, explanation: 'have/has va V3 orasida: already.', explanationRu: "между have/has и V3: already." },
+              { text: 'I haven\'t read this book ___ .', options: ['yet', 'already', 'just'], correct: 0, explanation: 'Inkor gap oxirida: yet.', explanationRu: "В конце отрицательного предложения: yet." },
             ],
           },
           {
@@ -7476,9 +7476,9 @@ export const grammarPathSections = [
               exampleRu: 'I have already done my homework, but I haven\'t sent it yet.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['Have you ever flown in a helicopter?', 'Has you ever flown in a helicopter?'], correct: 0, explanation: 'Have you ever flown...' },
-              { text: 'Choose the correct sentence:', options: ['He has already cleaned his room.', 'He have already cleaned his room.'], correct: 0, explanation: 'He + has already cleaned.' },
-              { text: 'Select the correct sentence:', options: ['We haven\'t decided what to do yet.', 'We hasn\'t decided what to do yet.'], correct: 0, explanation: 'We + haven\'t decided.' },
+              { text: 'Choose the correct sentence:', options: ['Have you ever flown in a helicopter?', 'Has you ever flown in a helicopter?'], correct: 0, explanation: 'Have you ever flown...', explanationRu: "Have you ever flown..." },
+              { text: 'Choose the correct sentence:', options: ['He has already cleaned his room.', 'He have already cleaned his room.'], correct: 0, explanation: 'He + has already cleaned.', explanationRu: "He + has already cleaned." },
+              { text: 'Select the correct sentence:', options: ['We haven\'t decided what to do yet.', 'We hasn\'t decided what to do yet.'], correct: 0, explanation: 'We + haven\'t decided.', explanationRu: "We + haven't decided." },
             ],
           },
         ],
@@ -7499,8 +7499,8 @@ export const grammarPathSections = [
               exampleRu: 'I have lived here for 10 years.',
             },
             exercises: [
-              { text: 'I have known him ___ 5 years.', options: ['for', 'since', 'during'], correct: 0, explanation: 'Vaqt oralig\'i (5 years) -> for.' },
-              { text: 'She has been sick ___ three days.', options: ['for', 'since', 'from'], correct: 0, explanation: '3 kun davomida -> for.' },
+              { text: 'I have known him ___ 5 years.', options: ['for', 'since', 'during'], correct: 0, explanation: 'Vaqt oralig\'i (5 years) -> for.', explanationRu: "Промежуток времени (5 years) -> for." },
+              { text: 'She has been sick ___ three days.', options: ['for', 'since', 'from'], correct: 0, explanation: '3 kun davomida -> for.', explanationRu: "В течение 3 дней -> for." },
             ],
           },
           {
@@ -7512,8 +7512,8 @@ export const grammarPathSections = [
               exampleRu: 'He has worked here since 2018.',
             },
             exercises: [
-              { text: 'We have lived in Tashkent ___ 2020.', options: ['since', 'for', 'from'], correct: 0, explanation: 'Boshlanish yili (2020) -> since.' },
-              { text: 'She hasn\'t eaten anything ___ this morning.', options: ['since', 'for', 'ago'], correct: 0, explanation: 'Bugun ertalabdan beri -> since.' },
+              { text: 'We have lived in Tashkent ___ 2020.', options: ['since', 'for', 'from'], correct: 0, explanation: 'Boshlanish yili (2020) -> since.', explanationRu: "Год начала (2020) -> since." },
+              { text: 'She hasn\'t eaten anything ___ this morning.', options: ['since', 'for', 'ago'], correct: 0, explanation: 'Bugun ertalabdan beri -> since.', explanationRu: "С сегодняшнего утра -> since." },
             ],
           },
           {
@@ -7525,8 +7525,8 @@ export const grammarPathSections = [
               exampleRu: 'for 6 months vs since June',
             },
             exercises: [
-              { text: 'Choose the correct preposition: They have been friends ___ a long time.', options: ['for', 'since'], correct: 0, explanation: 'a long time -> for.' },
-              { text: 'Choose the correct preposition: I haven\'t seen her ___ last week.', options: ['since', 'for'], correct: 0, explanation: 'last week -> since.' },
+              { text: 'Choose the correct preposition: They have been friends ___ a long time.', options: ['for', 'since'], correct: 0, explanation: 'a long time -> for.', explanationRu: "a long time -> for." },
+              { text: 'Choose the correct preposition: I haven\'t seen her ___ last week.', options: ['since', 'for'], correct: 0, explanation: 'last week -> since.', explanationRu: "last week -> since." },
             ],
           },
           {
@@ -7538,8 +7538,8 @@ export const grammarPathSections = [
               exampleRu: 'How long have you known each other?',
             },
             exercises: [
-              { text: '___ have you worked in this company?', options: ['How long', 'How many', 'How much'], correct: 0, explanation: 'Davomiylik so\'rovi: How long...' },
-              { text: '— How long has she lived here? — She has lived here ___ 2010.', options: ['since', 'for', 'from'], correct: 0, explanation: '2010 yildan beri -> since.' },
+              { text: '___ have you worked in this company?', options: ['How long', 'How many', 'How much'], correct: 0, explanation: 'Davomiylik so\'rovi: How long...', explanationRu: "Вопрос о длительности: How long..." },
+              { text: '— How long has she lived here? — She has lived here ___ 2010.', options: ['since', 'for', 'from'], correct: 0, explanation: '2010 yildan beri -> since.', explanationRu: "С 2010 года -> since." },
             ],
           },
           {
@@ -7551,9 +7551,9 @@ export const grammarPathSections = [
               exampleRu: 'I have studied English for 3 years, ever since 2021.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have known my best friend for 10 years.', 'I have known my best friend since 10 years.'], correct: 0, explanation: '10 years -> for.' },
-              { text: 'Choose the correct sentence:', options: ['She has worked here since 2018.', 'She has worked here for 2018.'], correct: 0, explanation: '2018 -> since.' },
-              { text: 'Select the correct sentence:', options: ['How long have you had this phone?', 'How long do you have this phone?'], correct: 0, explanation: 'How long have you had...' },
+              { text: 'Choose the correct sentence:', options: ['I have known my best friend for 10 years.', 'I have known my best friend since 10 years.'], correct: 0, explanation: '10 years -> for.', explanationRu: "10 years -> for." },
+              { text: 'Choose the correct sentence:', options: ['She has worked here since 2018.', 'She has worked here for 2018.'], correct: 0, explanation: '2018 -> since.', explanationRu: "2018 -> since." },
+              { text: 'Select the correct sentence:', options: ['How long have you had this phone?', 'How long do you have this phone?'], correct: 0, explanation: 'How long have you had...', explanationRu: "How long have you had..." },
             ],
           },
         ],
@@ -7574,8 +7574,8 @@ export const grammarPathSections = [
               exampleRu: 'I have been waiting for 2 hours.',
             },
             exercises: [
-              { text: 'I ___ English for two years now.', options: ['have been learning', 'has been learning', 'am learning'], correct: 0, explanation: 'I + have been learning.' },
-              { text: 'It ___ all morning.', options: ['has been raining', 'have been raining', 'is raining'], correct: 0, explanation: 'It + has been raining.' },
+              { text: 'I ___ English for two years now.', options: ['have been learning', 'has been learning', 'am learning'], correct: 0, explanation: 'I + have been learning.', explanationRu: "I + have been learning." },
+              { text: 'It ___ all morning.', options: ['has been raining', 'have been raining', 'is raining'], correct: 0, explanation: 'It + has been raining.', explanationRu: "It + has been raining." },
             ],
           },
           {
@@ -7587,8 +7587,8 @@ export const grammarPathSections = [
               exampleRu: 'They have been playing football. She has been cooking for 3 hours.',
             },
             exercises: [
-              { text: 'They ___ tennis since 9 o\'clock.', options: ['have been playing', 'has been playing', 'are playing'], correct: 0, explanation: 'They + have been playing.' },
-              { text: 'He ___ for the exam all week.', options: ['has been studying', 'have been studying', 'studies'], correct: 0, explanation: 'He + has been studying.' },
+              { text: 'They ___ tennis since 9 o\'clock.', options: ['have been playing', 'has been playing', 'are playing'], correct: 0, explanation: 'They + have been playing.', explanationRu: "They + have been playing." },
+              { text: 'He ___ for the exam all week.', options: ['has been studying', 'have been studying', 'studies'], correct: 0, explanation: 'He + has been studying.', explanationRu: "He + has been studying." },
             ],
           },
           {
@@ -7600,8 +7600,8 @@ export const grammarPathSections = [
               exampleRu: 'I haven\'t been sleeping well lately. Have you been waiting long?',
             },
             exercises: [
-              { text: 'She ___ feeling well recently.', options: ["hasn't been", "haven't been", "isn't been"], correct: 0, explanation: 'She + hasn\'t been feeling.' },
-              { text: '___ you been working out?', options: ['Have', 'Has', 'Are'], correct: 0, explanation: 'You savolida: Have you been working...' },
+              { text: 'She ___ feeling well recently.', options: ["hasn't been", "haven't been", "isn't been"], correct: 0, explanation: 'She + hasn\'t been feeling.', explanationRu: "She + hasn't been feeling." },
+              { text: '___ you been working out?', options: ['Have', 'Has', 'Are'], correct: 0, explanation: 'You savolida: Have you been working...', explanationRu: "В вопросе с You: Have you been working..." },
             ],
           },
           {
@@ -7613,8 +7613,8 @@ export const grammarPathSections = [
               exampleRu: 'How long have you been learning French?',
             },
             exercises: [
-              { text: 'How long ___ she been living in London?', options: ['has', 'have', 'is'], correct: 0, explanation: 'She bilan: How long has she been living...' },
-              { text: '— How long have you been waiting? — I ___ waiting since 3:00.', options: ['have been', 'has been', 'am'], correct: 0, explanation: 'I have been waiting.' },
+              { text: 'How long ___ she been living in London?', options: ['has', 'have', 'is'], correct: 0, explanation: 'She bilan: How long has she been living...', explanationRu: "С She: How long has she been living..." },
+              { text: '— How long have you been waiting? — I ___ waiting since 3:00.', options: ['have been', 'has been', 'am'], correct: 0, explanation: 'I have been waiting.', explanationRu: "I have been waiting." },
             ],
           },
           {
@@ -7626,9 +7626,9 @@ export const grammarPathSections = [
               exampleRu: 'Look at his clothes! He has been working in the garden.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have been reading this book for two hours.', 'I have reading this book for two hours.'], correct: 0, explanation: 'have been reading (been shart).' },
-              { text: 'Choose the correct sentence:', options: ['Why are your hands dirty? — I have been fixing my bike.', 'Why are your hands dirty? — I have fixing my bike.'], correct: 0, explanation: 'have been fixing.' },
-              { text: 'Select the correct sentence:', options: ['She has been crying because of the sad film.', 'She has crying because of the sad film.'], correct: 0, explanation: 'has been crying.' },
+              { text: 'Choose the correct sentence:', options: ['I have been reading this book for two hours.', 'I have reading this book for two hours.'], correct: 0, explanation: 'have been reading (been shart).', explanationRu: "have been reading (been обязательно)." },
+              { text: 'Choose the correct sentence:', options: ['Why are your hands dirty? — I have been fixing my bike.', 'Why are your hands dirty? — I have fixing my bike.'], correct: 0, explanation: 'have been fixing.', explanationRu: "have been fixing." },
+              { text: 'Select the correct sentence:', options: ['She has been crying because of the sad film.', 'She has crying because of the sad film.'], correct: 0, explanation: 'has been crying.', explanationRu: "has been crying." },
             ],
           },
         ],
@@ -7649,8 +7649,8 @@ export const grammarPathSections = [
               exampleRu: 'I have painted 3 rooms vs I have been painting all morning.',
             },
             exercises: [
-              { text: 'I ___ 5 letters this morning.', options: ['have written', 'have been writing', 'wrote'], correct: 0, explanation: 'Miqdor (5 letters) -> Present Perfect Simple (have written).' },
-              { text: 'I ___ letters all morning.', options: ['have been writing', 'have written', 'am writing'], correct: 0, explanation: 'Davomiylik (all morning) -> Present Perfect Continuous.' },
+              { text: 'I ___ 5 letters this morning.', options: ['have written', 'have been writing', 'wrote'], correct: 0, explanation: 'Miqdor (5 letters) -> Present Perfect Simple (have written).', explanationRu: "Количество (5 letters) -> Present Perfect Simple (have written)." },
+              { text: 'I ___ letters all morning.', options: ['have been writing', 'have written', 'am writing'], correct: 0, explanation: 'Davomiylik (all morning) -> Present Perfect Continuous.', explanationRu: "Длительность (all morning) -> Present Perfect Continuous." },
             ],
           },
           {
@@ -7662,8 +7662,8 @@ export const grammarPathSections = [
               exampleRu: 'How many times -> Simple / How long -> Continuous.',
             },
             exercises: [
-              { text: 'How many times ___ you visited Japan?', options: ['have', 'have been', 'did'], correct: 0, explanation: 'How many times -> have you visited.' },
-              { text: 'How long ___ you been reading this book?', options: ['have', 'has', 'did'], correct: 0, explanation: 'How long -> have you been reading.' },
+              { text: 'How many times ___ you visited Japan?', options: ['have', 'have been', 'did'], correct: 0, explanation: 'How many times -> have you visited.', explanationRu: "How many times -> have you visited." },
+              { text: 'How long ___ you been reading this book?', options: ['have', 'has', 'did'], correct: 0, explanation: 'How long -> have you been reading.', explanationRu: "How long -> have you been reading." },
             ],
           },
           {
@@ -7675,8 +7675,8 @@ export const grammarPathSections = [
               exampleRu: 'Permanent vs Temporary.',
             },
             exercises: [
-              { text: 'I ___ in Tashkent all my life.', options: ['have lived', 'have been living', 'am living'], correct: 0, explanation: 'Umrbod doimiy holat: have lived.' },
-              { text: 'I ___ at my friend\'s house for a few days while my flat is decorated.', options: ['have been staying', 'have stayed', 'stayed'], correct: 0, explanation: 'Vaqtinchalik holat: have been staying.' },
+              { text: 'I ___ in Tashkent all my life.', options: ['have lived', 'have been living', 'am living'], correct: 0, explanation: 'Umrbod doimiy holat: have lived.', explanationRu: "Постоянное состояние всю жизнь: have lived." },
+              { text: 'I ___ at my friend\'s house for a few days while my flat is decorated.', options: ['have been staying', 'have stayed', 'stayed'], correct: 0, explanation: 'Vaqtinchalik holat: have been staying.', explanationRu: "Временная ситуация: have been staying." },
             ],
           },
           {
@@ -7688,8 +7688,8 @@ export const grammarPathSections = [
               exampleRu: 'I have known him for 10 years.',
             },
             exercises: [
-              { text: 'I ___ him since childhood.', options: ['have known', 'have been knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li: have known.' },
-              { text: 'She ___ this car for 5 years.', options: ['has had', 'has been having', 'had'], correct: 0, explanation: 'have (ega bo\'lmoq) - holat fe\'li: has had.' },
+              { text: 'I ___ him since childhood.', options: ['have known', 'have been knowing', 'knowed'], correct: 0, explanation: 'know - holat fe\'li: have known.', explanationRu: "know — глагол состояния: have known." },
+              { text: 'She ___ this car for 5 years.', options: ['has had', 'has been having', 'had'], correct: 0, explanation: 'have (ega bo\'lmoq) - holat fe\'li: has had.', explanationRu: "have (иметь) — глагол состояния: has had." },
             ],
           },
           {
@@ -7701,9 +7701,9 @@ export const grammarPathSections = [
               exampleRu: 'I have been baking all morning, and I have baked 40 cookies so far.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have read 50 pages of the book.', 'I have been reading 50 pages of the book.'], correct: 0, explanation: 'Natija/miqdor: have read 50 pages.' },
-              { text: 'Choose the correct sentence:', options: ['My eyes hurt because I have been reading all day.', 'My eyes hurt because I have read all day.'], correct: 0, explanation: 'Jarayon: have been reading all day.' },
-              { text: 'Select the correct sentence:', options: ['We have known each other for 3 years.', 'We have been knowing each other for 3 years.'], correct: 0, explanation: 'know - holat fe\'li: have known.' },
+              { text: 'Choose the correct sentence:', options: ['I have read 50 pages of the book.', 'I have been reading 50 pages of the book.'], correct: 0, explanation: 'Natija/miqdor: have read 50 pages.', explanationRu: "Результат/количество: have read 50 pages." },
+              { text: 'Choose the correct sentence:', options: ['My eyes hurt because I have been reading all day.', 'My eyes hurt because I have read all day.'], correct: 0, explanation: 'Jarayon: have been reading all day.', explanationRu: "Процесс: have been reading all day." },
+              { text: 'Select the correct sentence:', options: ['We have known each other for 3 years.', 'We have been knowing each other for 3 years.'], correct: 0, explanation: 'know - holat fe\'li: have known.', explanationRu: "know — глагол состояния: have known." },
             ],
           },
         ],
@@ -7724,8 +7724,8 @@ export const grammarPathSections = [
               exampleRu: 'I visited Paris in 2019 vs I have visited Paris.',
             },
             exercises: [
-              { text: 'I ___ to London last year.', options: ['went', 'have gone', 'have been'], correct: 0, explanation: 'Aniq o\'tgan vaqt (last year) -> Past Simple (went).' },
-              { text: 'I ___ to London several times.', options: ['have been', 'went', 'go'], correct: 0, explanation: 'Tajriba ( several times) -> Present Perfect (have been).' },
+              { text: 'I ___ to London last year.', options: ['went', 'have gone', 'have been'], correct: 0, explanation: 'Aniq o\'tgan vaqt (last year) -> Past Simple (went).', explanationRu: "Точное прошедшее время (last year) -> Past Simple (went)." },
+              { text: 'I ___ to London several times.', options: ['have been', 'went', 'go'], correct: 0, explanation: 'Tajriba ( several times) -> Present Perfect (have been).', explanationRu: "Опыт (several times) -> Present Perfect (have been)." },
             ],
           },
           {
@@ -7737,8 +7737,8 @@ export const grammarPathSections = [
               exampleRu: 'Did you see Tom yesterday? vs Have you seen Tom today?',
             },
             exercises: [
-              { text: '___ you ever eaten Mexican food?', options: ['Have', 'Did', 'Do'], correct: 0, explanation: 'ever -> Present Perfect (Have you ever eaten).' },
-              { text: '___ you eat Mexican food yesterday?', options: ['Did', 'Have', 'Do'], correct: 0, explanation: 'yesterday -> Past Simple (Did you eat).' },
+              { text: '___ you ever eaten Mexican food?', options: ['Have', 'Did', 'Do'], correct: 0, explanation: 'ever -> Present Perfect (Have you ever eaten).', explanationRu: "ever -> Present Perfect (Have you ever eaten)." },
+              { text: '___ you eat Mexican food yesterday?', options: ['Did', 'Have', 'Do'], correct: 0, explanation: 'yesterday -> Past Simple (Did you eat).', explanationRu: "yesterday -> Past Simple (Did you eat)." },
             ],
           },
           {
@@ -7750,8 +7750,8 @@ export const grammarPathSections = [
               exampleRu: 'gone to (still there) vs been to (returned).',
             },
             exercises: [
-              { text: 'Where is Mary? — She has ___ to the supermarket. She will be back in 20 minutes.', options: ['gone', 'been', 'went'], correct: 0, explanation: 'Hali u yerda, qaytmagan: has gone.' },
-              { text: 'I have ___ to Spain three times in my life.', options: ['been', 'gone', 'went'], correct: 0, explanation: 'Hayotiy tajriba, borib kelgan: have been.' },
+              { text: 'Where is Mary? — She has ___ to the supermarket. She will be back in 20 minutes.', options: ['gone', 'been', 'went'], correct: 0, explanation: 'Hali u yerda, qaytmagan: has gone.', explanationRu: "Ещё там, не вернулся: has gone." },
+              { text: 'I have ___ to Spain three times in my life.', options: ['been', 'gone', 'went'], correct: 0, explanation: 'Hayotiy tajriba, borib kelgan: have been.', explanationRu: "Жизненный опыт, съездил и вернулся: have been." },
             ],
           },
           {
@@ -7763,8 +7763,8 @@ export const grammarPathSections = [
               exampleRu: 'Finished period vs Unfinished/Present connected.',
             },
             exercises: [
-              { text: 'Shakespeare ___ Hamlet.', options: ['wrote', 'has written', 'writes'], correct: 0, explanation: 'Tarixiy shaxs, o\'tgan zamon: wrote.' },
-              { text: 'She ___ her leg, so she can\'t play tennis today.', options: ['has broken', 'broke', 'breaks'], correct: 0, explanation: 'Hozirgi natija (o\'ynay olmaydi): has broken.' },
+              { text: 'Shakespeare ___ Hamlet.', options: ['wrote', 'has written', 'writes'], correct: 0, explanation: 'Tarixiy shaxs, o\'tgan zamon: wrote.', explanationRu: "Историческая личность, прошедшее время: wrote." },
+              { text: 'She ___ her leg, so she can\'t play tennis today.', options: ['has broken', 'broke', 'breaks'], correct: 0, explanation: 'Hozirgi natija (o\'ynay olmaydi): has broken.', explanationRu: "Текущий результат (не может играть): has broken." },
             ],
           },
           {
@@ -7776,9 +7776,9 @@ export const grammarPathSections = [
               exampleRu: 'I lost my keys yesterday, but I have found them today.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have bought a new car yesterday.', 'I bought a new car yesterday.'], correct: 1, explanation: 'yesterday -> Past Simple (bought).' },
-              { text: 'Choose the correct sentence:', options: ['Have you ever visited Uzbekistan?', 'Did you ever visit Uzbekistan?'], correct: 0, explanation: 'ever -> Have you ever visited.' },
-              { text: 'Select the correct sentence:', options: ['Where is Tom? — He has gone to the shop.', 'Where is Tom? — He has been to the shop.'], correct: 0, explanation: 'Hozir do\'konda: has gone to.' },
+              { text: 'Choose the correct sentence:', options: ['I have bought a new car yesterday.', 'I bought a new car yesterday.'], correct: 1, explanation: 'yesterday -> Past Simple (bought).', explanationRu: "yesterday -> Past Simple (bought)." },
+              { text: 'Choose the correct sentence:', options: ['Have you ever visited Uzbekistan?', 'Did you ever visit Uzbekistan?'], correct: 0, explanation: 'ever -> Have you ever visited.', explanationRu: "ever -> Have you ever visited." },
+              { text: 'Select the correct sentence:', options: ['Where is Tom? — He has gone to the shop.', 'Where is Tom? — He has been to the shop.'], correct: 0, explanation: 'Hozir do\'konda: has gone to.', explanationRu: "Сейчас в магазине: has gone to." },
             ],
           },
         ],
@@ -7799,8 +7799,8 @@ export const grammarPathSections = [
               exampleRu: 'I have seen it. I have been living here since 2020. I have known her for years.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have seen that movie twice.', 'I have saw that movie twice.'], correct: 0, explanation: 'have + V3 (seen).' },
-              { text: 'Choose the correct sentence:', options: ['She has been working here since Monday.', 'She is working here since Monday.'], correct: 0, explanation: 'since Monday -> has been working.' },
+              { text: 'Choose the correct sentence:', options: ['I have seen that movie twice.', 'I have saw that movie twice.'], correct: 0, explanation: 'have + V3 (seen).', explanationRu: "have + V3 (seen)." },
+              { text: 'Choose the correct sentence:', options: ['She has been working here since Monday.', 'She is working here since Monday.'], correct: 0, explanation: 'since Monday -> has been working.', explanationRu: "since Monday -> has been working." },
             ],
           },
           {
@@ -7812,8 +7812,8 @@ export const grammarPathSections = [
               exampleRu: 'Continuous (duration) vs Simple (result).',
             },
             exercises: [
-              { text: '— Why are your clothes dirty? — I ___ the car.', options: ['have been cleaning', 'have cleaned', 'cleaned'], correct: 0, explanation: 'Yangi tugagan va izi bor jarayon: have been cleaning.' },
-              { text: '— How many pages have you read? — I ___ 30 pages so far.', options: ['have read', 'have been reading', 'readed'], correct: 0, explanation: 'Miqdor (30 pages): have read.' },
+              { text: '— Why are your clothes dirty? — I ___ the car.', options: ['have been cleaning', 'have cleaned', 'cleaned'], correct: 0, explanation: 'Yangi tugagan va izi bor jarayon: have been cleaning.', explanationRu: "Только что завершившийся процесс со следом: have been cleaning." },
+              { text: '— How many pages have you read? — I ___ 30 pages so far.', options: ['have read', 'have been reading', 'readed'], correct: 0, explanation: 'Miqdor (30 pages): have read.', explanationRu: "Количество (30 pages): have read." },
             ],
           },
           {
@@ -7825,8 +7825,8 @@ export const grammarPathSections = [
               exampleRu: 'I have lived in London for 3 years. I have met many interesting people.',
             },
             exercises: [
-              { text: 'I ___ in this company for 5 years, and I ___ three promotions.', options: ['have been working / have received', 'am working / received', 'worked / have received'], correct: 0, explanation: 'have been working / have received.' },
-              { text: 'Select the correct sentence:', options: ['He has been learning English since last year.', 'He is learning English since last year.'], correct: 0, explanation: 'since last year -> has been learning.' },
+              { text: 'I ___ in this company for 5 years, and I ___ three promotions.', options: ['have been working / have received', 'am working / received', 'worked / have received'], correct: 0, explanation: 'have been working / have received.', explanationRu: "have been working / have received." },
+              { text: 'Select the correct sentence:', options: ['He has been learning English since last year.', 'He is learning English since last year.'], correct: 0, explanation: 'since last year -> has been learning.', explanationRu: "since last year -> has been learning." },
             ],
           },
           {
@@ -7838,8 +7838,8 @@ export const grammarPathSections = [
               exampleRu: 'I have been waiting for a long time.',
             },
             exercises: [
-              { text: 'Men bu kitobni 2 soatdan beri o\'qiyapman:', options: ['I have been reading this book for 2 hours.', 'I am reading this book since 2 hours.'], correct: 0, explanation: 'have been reading ... for 2 hours.' },
-              { text: 'U allaqachon uy vazifasini bajarib bo\'lgan:', options: ['He has already done his homework.', 'He has already been doing his homework.'], correct: 0, explanation: 'has already done (natija).' },
+              { text: 'Men bu kitobni 2 soatdan beri o\'qiyapman:', options: ['I have been reading this book for 2 hours.', 'I am reading this book since 2 hours.'], correct: 0, explanation: 'have been reading ... for 2 hours.', explanationRu: "have been reading ... for 2 hours." },
+              { text: 'U allaqachon uy vazifasini bajarib bo\'lgan:', options: ['He has already done his homework.', 'He has already been doing his homework.'], correct: 0, explanation: 'has already done (natija).', explanationRu: "has already done (результат)." },
             ],
           },
           {
@@ -7851,9 +7851,9 @@ export const grammarPathSections = [
               exampleRu: 'I have done it. I have been doing it for 2 hours. I did it yesterday.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['I have been studying for the exam all day.', 'I have studied for the exam all day ongoing.'], correct: 0, explanation: 'have been studying.' },
-              { text: 'Choose the correct sentence:', options: ['She has visited 10 countries so far.', 'She has been visiting 10 countries so far.'], correct: 0, explanation: 'Miqdor (10 countries): has visited.' },
-              { text: 'Select the correct sentence:', options: ['We have lived in this town since 2015.', 'We are living in this town since 2015.'], correct: 0, explanation: 'since 2015 -> have lived.' },
+              { text: 'Choose the correct sentence:', options: ['I have been studying for the exam all day.', 'I have studied for the exam all day ongoing.'], correct: 0, explanation: 'have been studying.', explanationRu: "have been studying." },
+              { text: 'Choose the correct sentence:', options: ['She has visited 10 countries so far.', 'She has been visiting 10 countries so far.'], correct: 0, explanation: 'Miqdor (10 countries): has visited.', explanationRu: "Количество (10 countries): has visited." },
+              { text: 'Select the correct sentence:', options: ['We have lived in this town since 2015.', 'We are living in this town since 2015.'], correct: 0, explanation: 'since 2015 -> have lived.', explanationRu: "since 2015 -> have lived." },
             ],
           },
         ],
@@ -7863,21 +7863,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Present Perfect va Present Perfect Continuous",
       titleRu: 'Тест раздела: Present Perfect и Present Perfect Continuous',
       exercises: [
-        { text: 'I ___ my homework already.', options: ['have finished', 'finished', 'have been finishing'], correct: 0, explanation: 'already -> have finished.' },
-        { text: 'She ___ in Tashkent since 2018.', options: ['has lived', 'lives', 'is living'], correct: 0, explanation: 'since 2018 -> has lived.' },
-        { text: 'We have been waiting for the bus ___ 40 minutes.', options: ['for', 'since', 'from'], correct: 0, explanation: '40 minutes -> for.' },
-        { text: 'I haven\'t seen my uncle ___ last year.', options: ['since', 'for', 'ago'], correct: 0, explanation: 'last year -> since.' },
-        { text: 'How long ___ you been learning English?', options: ['have', 'has', 'are'], correct: 0, explanation: 'How long have you been...' },
-        { text: 'Look at her! She is wet because she ___ in the rain.', options: ['has been walking', 'has walked', 'walks'], correct: 0, explanation: 'Izi bor jarayon: has been walking.' },
-        { text: 'I have ___ 4 cups of coffee today.', options: ['drunk', 'been drinking', 'drinked'], correct: 0, explanation: 'Miqdor (4 cups): have drunk.' },
-        { text: 'I ___ him since we were at university.', options: ['have known', 'have been knowing', 'knew'], correct: 0, explanation: 'know - holat fe\'li: have known.' },
-        { text: 'I ___ to London in 2021.', options: ['went', 'have gone', 'have been'], correct: 0, explanation: 'Aniq vaqt (in 2021) -> Past Simple (went).' },
-        { text: 'Where is John? — She has ___ to the bank.', options: ['gone', 'been', 'went'], correct: 0, explanation: 'Hali u yerda: has gone.' },
-        { text: 'Choose the correct sentence:', options: ['She has lived here for 5 years.', 'She has lived here since 5 years.'], correct: 0, explanation: '5 years -> for.' },
-        { text: 'Choose the correct sentence:', options: ['Have you ever been to Japan?', 'Did you ever been to Japan?'], correct: 0, explanation: 'Have you ever been...' },
-        { text: 'Select the correct sentence:', options: ['My hands are covered in paint because I have been painting the kitchen.', 'My hands are covered in paint because I have painted the kitchen.'], correct: 0, explanation: 'Izi bor jarayon: have been painting.' },
-        { text: 'Select the correct sentence:', options: ['I bought this car 2 years ago.', 'I have bought this car 2 years ago.'], correct: 0, explanation: '2 years ago -> Past Simple (bought).' },
-        { text: 'Select the correct sentence:', options: ['How many times have you seen this movie?', 'How long have you seen this movie?'], correct: 0, explanation: 'How many times have you seen...' },
+        { text: 'I ___ my homework already.', options: ['have finished', 'finished', 'have been finishing'], correct: 0, explanation: 'already -> have finished.', explanationRu: "already -> have finished." },
+        { text: 'She ___ in Tashkent since 2018.', options: ['has lived', 'lives', 'is living'], correct: 0, explanation: 'since 2018 -> has lived.', explanationRu: "since 2018 -> has lived." },
+        { text: 'We have been waiting for the bus ___ 40 minutes.', options: ['for', 'since', 'from'], correct: 0, explanation: '40 minutes -> for.', explanationRu: "40 minutes -> for." },
+        { text: 'I haven\'t seen my uncle ___ last year.', options: ['since', 'for', 'ago'], correct: 0, explanation: 'last year -> since.', explanationRu: "last year -> since." },
+        { text: 'How long ___ you been learning English?', options: ['have', 'has', 'are'], correct: 0, explanation: 'How long have you been...', explanationRu: "How long have you been..." },
+        { text: 'Look at her! She is wet because she ___ in the rain.', options: ['has been walking', 'has walked', 'walks'], correct: 0, explanation: 'Izi bor jarayon: has been walking.', explanationRu: "Процесс со следом: has been walking." },
+        { text: 'I have ___ 4 cups of coffee today.', options: ['drunk', 'been drinking', 'drinked'], correct: 0, explanation: 'Miqdor (4 cups): have drunk.', explanationRu: "Количество (4 cups): have drunk." },
+        { text: 'I ___ him since we were at university.', options: ['have known', 'have been knowing', 'knew'], correct: 0, explanation: 'know - holat fe\'li: have known.', explanationRu: "know — глагол состояния: have known." },
+        { text: 'I ___ to London in 2021.', options: ['went', 'have gone', 'have been'], correct: 0, explanation: 'Aniq vaqt (in 2021) -> Past Simple (went).', explanationRu: "Точное время (in 2021) -> Past Simple (went)." },
+        { text: 'Where is John? — She has ___ to the bank.', options: ['gone', 'been', 'went'], correct: 0, explanation: 'Hali u yerda: has gone.', explanationRu: "Ещё там: has gone." },
+        { text: 'Choose the correct sentence:', options: ['She has lived here for 5 years.', 'She has lived here since 5 years.'], correct: 0, explanation: '5 years -> for.', explanationRu: "5 years -> for." },
+        { text: 'Choose the correct sentence:', options: ['Have you ever been to Japan?', 'Did you ever been to Japan?'], correct: 0, explanation: 'Have you ever been...', explanationRu: "Have you ever been..." },
+        { text: 'Select the correct sentence:', options: ['My hands are covered in paint because I have been painting the kitchen.', 'My hands are covered in paint because I have painted the kitchen.'], correct: 0, explanation: 'Izi bor jarayon: have been painting.', explanationRu: "Процесс со следом: have been painting." },
+        { text: 'Select the correct sentence:', options: ['I bought this car 2 years ago.', 'I have bought this car 2 years ago.'], correct: 0, explanation: '2 years ago -> Past Simple (bought).', explanationRu: "2 years ago -> Past Simple (bought)." },
+        { text: 'Select the correct sentence:', options: ['How many times have you seen this movie?', 'How long have you seen this movie?'], correct: 0, explanation: 'How many times have you seen...', explanationRu: "How many times have you seen..." },
       ],
     },
   },
@@ -7904,8 +7904,8 @@ export const grammarPathSections = [
               exampleRu: 'This car is fast. She is tall.',
             },
             exercises: [
-              { text: 'This house is ___.', options: ['big', 'bigger', 'biggest'], correct: 0, explanation: 'Oddiy sifat shakli: big.' },
-              { text: 'She is a ___ girl.', options: ['smart', 'smarter', 'smartest'], correct: 0, explanation: 'Oddiy sifat: smart.' },
+              { text: 'This house is ___.', options: ['big', 'bigger', 'biggest'], correct: 0, explanation: 'Oddiy sifat shakli: big.', explanationRu: "Простая форма прилагательного: big." },
+              { text: 'She is a ___ girl.', options: ['smart', 'smarter', 'smartest'], correct: 0, explanation: 'Oddiy sifat: smart.', explanationRu: "Простая форма прилагательного: smart." },
             ],
           },
           {
@@ -7917,8 +7917,8 @@ export const grammarPathSections = [
               exampleRu: 'Tom is as tall as Bob.',
             },
             exercises: [
-              { text: 'He is as ___ as his father.', options: ['tall', 'taller', 'tallest'], correct: 0, explanation: 'as ... as orasida oddiy sifat turadi: tall.' },
-              { text: 'My phone is ___ expensive as yours.', options: ['as', 'more', 'so'], correct: 0, explanation: 'Tenglik strukturasi: as expensive as.' },
+              { text: 'He is as ___ as his father.', options: ['tall', 'taller', 'tallest'], correct: 0, explanation: 'as ... as orasida oddiy sifat turadi: tall.', explanationRu: "Между as ... as стоит простая форма прилагательного: tall." },
+              { text: 'My phone is ___ expensive as yours.', options: ['as', 'more', 'so'], correct: 0, explanation: 'Tenglik strukturasi: as expensive as.', explanationRu: "Конструкция равенства: as expensive as." },
             ],
           },
           {
@@ -7930,8 +7930,8 @@ export const grammarPathSections = [
               exampleRu: 'This car is not as fast as a train.',
             },
             exercises: [
-              { text: 'Silver is not ___ expensive as gold.', options: ['as', 'more', 'than'], correct: 0, explanation: 'not as ... as tengsizlik strukturasi.' },
-              { text: 'Choose the correct sentence:', options: ['Today is not as cold as yesterday.', 'Today is not cold than yesterday.'], correct: 0, explanation: 'Inkor tenglikda: not as cold as.' },
+              { text: 'Silver is not ___ expensive as gold.', options: ['as', 'more', 'than'], correct: 0, explanation: 'not as ... as tengsizlik strukturasi.', explanationRu: "Конструкция неравенства not as ... as." },
+              { text: 'Choose the correct sentence:', options: ['Today is not as cold as yesterday.', 'Today is not cold than yesterday.'], correct: 0, explanation: 'Inkor tenglikda: not as cold as.', explanationRu: "Отрицательное сравнение: not as cold as." },
             ],
           },
           {
@@ -7943,8 +7943,8 @@ export const grammarPathSections = [
               exampleRu: 'She is as old as me. / She is as old as I am.',
             },
             exercises: [
-              { text: 'He runs as fast as ___.', options: ['me', 'my', 'mine'], correct: 0, explanation: 'as fast as me (obyekt olmoshi).' },
-              { text: 'She is as smart as ___.', options: ['he is', 'he does', 'his'], correct: 0, explanation: 'as smart as he is.' },
+              { text: 'He runs as fast as ___.', options: ['me', 'my', 'mine'], correct: 0, explanation: 'as fast as me (obyekt olmoshi).', explanationRu: "as fast as me (объектное местоимение)." },
+              { text: 'She is as smart as ___.', options: ['he is', 'he does', 'his'], correct: 0, explanation: 'as smart as he is.', explanationRu: "as smart as he is." },
             ],
           },
           {
@@ -7956,9 +7956,9 @@ export const grammarPathSections = [
               exampleRu: 'My car is as new as yours, but it is not as fast.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['English is as easy as German.', 'English is as easier as German.'], correct: 0, explanation: 'as...as orasida oddiy sifat: easy.' },
-              { text: 'Choose the correct sentence:', options: ['He is not as tall as his brother.', 'He is not as taller as his brother.'], correct: 0, explanation: 'not as tall as (oddiy sifat).' },
-              { text: 'Select the correct sentence:', options: ['This test was as hard as the last one.', 'This test was as harder than the last one.'], correct: 0, explanation: 'as hard as.' },
+              { text: 'Choose the correct sentence:', options: ['English is as easy as German.', 'English is as easier as German.'], correct: 0, explanation: 'as...as orasida oddiy sifat: easy.', explanationRu: "Между as...as простая форма прилагательного: easy." },
+              { text: 'Choose the correct sentence:', options: ['He is not as tall as his brother.', 'He is not as taller as his brother.'], correct: 0, explanation: 'not as tall as (oddiy sifat).', explanationRu: "not as tall as (простая форма)." },
+              { text: 'Select the correct sentence:', options: ['This test was as hard as the last one.', 'This test was as harder than the last one.'], correct: 0, explanation: 'as hard as.', explanationRu: "as hard as." },
             ],
           },
         ],
@@ -7979,8 +7979,8 @@ export const grammarPathSections = [
               exampleRu: 'Tom is taller than Bob.',
             },
             exercises: [
-              { text: 'A train is ___ than a car.', options: ['faster', 'fast', 'fastest'], correct: 0, explanation: 'Qiyosiy daraja: fast + er ➔ faster.' },
-              { text: 'Mount Everest is ___ than K2.', options: ['higher', 'high', 'highest'], correct: 0, explanation: 'high + er ➔ higher.' },
+              { text: 'A train is ___ than a car.', options: ['faster', 'fast', 'fastest'], correct: 0, explanation: 'Qiyosiy daraja: fast + er ➔ faster.', explanationRu: "Сравнительная степень: fast + er ➔ faster." },
+              { text: 'Mount Everest is ___ than K2.', options: ['higher', 'high', 'highest'], correct: 0, explanation: 'high + er ➔ higher.', explanationRu: "high + er ➔ higher." },
             ],
           },
           {
@@ -7992,8 +7992,8 @@ export const grammarPathSections = [
               exampleRu: 'Russia is bigger than China. Summer is hotter than winter.',
             },
             exercises: [
-              { text: 'An elephant is ___ than a horse.', options: ['bigger', 'biger', 'more big'], correct: 0, explanation: 'big ➔ bigger (g ikkilanadi).' },
-              { text: 'Today is ___ than yesterday.', options: ['hotter', 'hoter', 'more hot'], correct: 0, explanation: 'hot ➔ hotter (t ikkilanadi).' },
+              { text: 'An elephant is ___ than a horse.', options: ['bigger', 'biger', 'more big'], correct: 0, explanation: 'big ➔ bigger (g ikkilanadi).', explanationRu: "big ➔ bigger (g удваивается)." },
+              { text: 'Today is ___ than yesterday.', options: ['hotter', 'hoter', 'more hot'], correct: 0, explanation: 'hot ➔ hotter (t ikkilanadi).', explanationRu: "hot ➔ hotter (t удваивается)." },
             ],
           },
           {
@@ -8005,8 +8005,8 @@ export const grammarPathSections = [
               exampleRu: 'English is easier than Chinese.',
             },
             exercises: [
-              { text: 'This exam was ___ than the last one.', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier (y ➔ ier).' },
-              { text: 'Health is ___ than wealth.', options: ['heavier', 'heavier than', 'more heavy'], correct: 0, explanation: 'heavy ➔ heavier.' },
+              { text: 'This exam was ___ than the last one.', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier (y ➔ ier).', explanationRu: "easy ➔ easier (y ➔ ier)." },
+              { text: 'Health is ___ than wealth.', options: ['heavier', 'heavier than', 'more heavy'], correct: 0, explanation: 'heavy ➔ heavier.', explanationRu: "heavy ➔ heavier." },
             ],
           },
           {
@@ -8018,8 +8018,8 @@ export const grammarPathSections = [
               exampleRu: 'He is younger than me.',
             },
             exercises: [
-              { text: 'She is older ___ her sister.', options: ['than', 'then', 'that'], correct: 0, explanation: 'Qiyoslashda: than.' },
-              { text: 'Choose the correct sentence:', options: ['My room is cleaner than yours.', 'My room is cleaner then yours.'], correct: 0, explanation: 'To\'g\'ri so\'z: than.' },
+              { text: 'She is older ___ her sister.', options: ['than', 'then', 'that'], correct: 0, explanation: 'Qiyoslashda: than.', explanationRu: "В сравнении: than." },
+              { text: 'Choose the correct sentence:', options: ['My room is cleaner than yours.', 'My room is cleaner then yours.'], correct: 0, explanation: 'To\'g\'ri so\'z: than.', explanationRu: "Правильное слово: than." },
             ],
           },
           {
@@ -8031,9 +8031,9 @@ export const grammarPathSections = [
               exampleRu: 'A plane is faster, bigger, and higher than a helicopter.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['This suitcase is heavier than that one.', 'This suitcase is more heavy than that one.'], correct: 0, explanation: 'heavy ➔ heavier.' },
-              { text: 'Choose the correct sentence:', options: ['My brother is taller than me.', 'My brother is more tall than me.'], correct: 0, explanation: 'tall ➔ taller.' },
-              { text: 'Select the correct sentence:', options: ['Yesterday was colder than today.', 'Yesterday was coldier than today.'], correct: 0, explanation: 'cold ➔ colder.' },
+              { text: 'Choose the correct sentence:', options: ['This suitcase is heavier than that one.', 'This suitcase is more heavy than that one.'], correct: 0, explanation: 'heavy ➔ heavier.', explanationRu: "heavy ➔ heavier." },
+              { text: 'Choose the correct sentence:', options: ['My brother is taller than me.', 'My brother is more tall than me.'], correct: 0, explanation: 'tall ➔ taller.', explanationRu: "tall ➔ taller." },
+              { text: 'Select the correct sentence:', options: ['Yesterday was colder than today.', 'Yesterday was coldier than today.'], correct: 0, explanation: 'cold ➔ colder.', explanationRu: "cold ➔ colder." },
             ],
           },
         ],
@@ -8054,8 +8054,8 @@ export const grammarPathSections = [
               exampleRu: 'A sports car is more expensive than a regular car.',
             },
             exercises: [
-              { text: 'This book is ___ than the film.', options: ['more interesting', 'interesting er', 'interestinger'], correct: 0, explanation: 'Uzun sifat: more interesting.' },
-              { text: 'Paris is ___ than my hometown.', options: ['more beautiful', 'beautifuler', 'beautifuler than'], correct: 0, explanation: 'Uzun sifat: more beautiful.' },
+              { text: 'This book is ___ than the film.', options: ['more interesting', 'interesting er', 'interestinger'], correct: 0, explanation: 'Uzun sifat: more interesting.', explanationRu: "Длинное прилагательное: more interesting." },
+              { text: 'Paris is ___ than my hometown.', options: ['more beautiful', 'beautifuler', 'beautifuler than'], correct: 0, explanation: 'Uzun sifat: more beautiful.', explanationRu: "Длинное прилагательное: more beautiful." },
             ],
           },
           {
@@ -8067,8 +8067,8 @@ export const grammarPathSections = [
               exampleRu: 'This test is less difficult than the previous one.',
             },
             exercises: [
-              { text: 'Walking is ___ dangerous than riding a motorcycle.', options: ['less', 'least', 'fewer'], correct: 0, explanation: 'Kamroq xavfli: less dangerous.' },
-              { text: 'Choose the correct sentence:', options: ['This task is less complicated than that one.', 'This task is more less complicated than that one.'], correct: 0, explanation: 'less complicated.' },
+              { text: 'Walking is ___ dangerous than riding a motorcycle.', options: ['less', 'least', 'fewer'], correct: 0, explanation: 'Kamroq xavfli: less dangerous.', explanationRu: "Менее опасно: less dangerous." },
+              { text: 'Choose the correct sentence:', options: ['This task is less complicated than that one.', 'This task is more less complicated than that one.'], correct: 0, explanation: 'less complicated.', explanationRu: "less complicated." },
             ],
           },
           {
@@ -8080,8 +8080,8 @@ export const grammarPathSections = [
               exampleRu: 'China is much bigger than Italy.',
             },
             exercises: [
-              { text: 'An airplane is ___ faster than a car.', options: ['much', 'more', 'very'], correct: 0, explanation: 'Qiyosiylikni kuchaytirish: much faster (very faster bo\'lmaydi!).' },
-              { text: 'Living in London is ___ more expensive than in my town.', options: ['a lot', 'very', 'many'], correct: 0, explanation: 'a lot more expensive.' },
+              { text: 'An airplane is ___ faster than a car.', options: ['much', 'more', 'very'], correct: 0, explanation: 'Qiyosiylikni kuchaytirish: much faster (very faster bo\'lmaydi!).', explanationRu: "Усиление сравнения: much faster (не бывает very faster!)." },
+              { text: 'Living in London is ___ more expensive than in my town.', options: ['a lot', 'very', 'many'], correct: 0, explanation: 'a lot more expensive.', explanationRu: "a lot more expensive." },
             ],
           },
           {
@@ -8093,8 +8093,8 @@ export const grammarPathSections = [
               exampleRu: 'It is getting colder and colder.',
             },
             exercises: [
-              { text: 'The weather is getting ___ and colder.', options: ['colder', 'cold', 'coldest'], correct: 0, explanation: 'colder and colder.' },
-              { text: 'English is becoming ___ popular around the world.', options: ['more and more', 'more and most', 'most and most'], correct: 0, explanation: 'more and more popular.' },
+              { text: 'The weather is getting ___ and colder.', options: ['colder', 'cold', 'coldest'], correct: 0, explanation: 'colder and colder.', explanationRu: "colder and colder." },
+              { text: 'English is becoming ___ popular around the world.', options: ['more and more', 'more and most', 'most and most'], correct: 0, explanation: 'more and more popular.', explanationRu: "more and more popular." },
             ],
           },
           {
@@ -8106,9 +8106,9 @@ export const grammarPathSections = [
               exampleRu: 'This method is much more effective than the old one.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['Health is much more important than money.', 'Health is very more important than money.'], correct: 0, explanation: 'much more important (very qullanilmaydi).' },
-              { text: 'Choose the correct sentence:', options: ['This apartment is more comfortable than that house.', 'This apartment is comfortabler than that house.'], correct: 0, explanation: 'more comfortable.' },
-              { text: 'Select the correct sentence:', options: ['Computers are getting cheaper and cheaper.', 'Computers are getting more cheap and more cheap.'], correct: 0, explanation: 'cheaper and cheaper.' },
+              { text: 'Choose the correct sentence:', options: ['Health is much more important than money.', 'Health is very more important than money.'], correct: 0, explanation: 'much more important (very qullanilmaydi).', explanationRu: "much more important (very не используется)." },
+              { text: 'Choose the correct sentence:', options: ['This apartment is more comfortable than that house.', 'This apartment is comfortabler than that house.'], correct: 0, explanation: 'more comfortable.', explanationRu: "more comfortable." },
+              { text: 'Select the correct sentence:', options: ['Computers are getting cheaper and cheaper.', 'Computers are getting more cheap and more cheap.'], correct: 0, explanation: 'cheaper and cheaper.', explanationRu: "cheaper and cheaper." },
             ],
           },
         ],
@@ -8129,8 +8129,8 @@ export const grammarPathSections = [
               exampleRu: 'Mount Everest is the highest mountain in the world.',
             },
             exercises: [
-              { text: 'Cheetah is ___ land animal in the world.', options: ['the fastest', 'fastest', 'faster'], correct: 0, explanation: 'Orttirma darajada artikl shart: the fastest.' },
-              { text: 'Jupiter is ___ planet in our solar system.', options: ['the biggest', 'the bigest', 'more big'], correct: 0, explanation: 'the biggest (g ikkilanadi).' },
+              { text: 'Cheetah is ___ land animal in the world.', options: ['the fastest', 'fastest', 'faster'], correct: 0, explanation: 'Orttirma darajada artikl shart: the fastest.', explanationRu: "В превосходной степени артикль обязателен: the fastest." },
+              { text: 'Jupiter is ___ planet in our solar system.', options: ['the biggest', 'the bigest', 'more big'], correct: 0, explanation: 'the biggest (g ikkilanadi).', explanationRu: "the biggest (g удваивается)." },
             ],
           },
           {
@@ -8142,8 +8142,8 @@ export const grammarPathSections = [
               exampleRu: 'Dubai has some of the most expensive hotels.',
             },
             exercises: [
-              { text: 'What is ___ city in the world?', options: ['the most expensive', 'most expensive', 'the expensivest'], correct: 0, explanation: 'the most expensive.' },
-              { text: 'She is ___ student in our class.', options: ['the most intelligent', 'the intelligentest', 'more intelligent'], correct: 0, explanation: 'the most intelligent.' },
+              { text: 'What is ___ city in the world?', options: ['the most expensive', 'most expensive', 'the expensivest'], correct: 0, explanation: 'the most expensive.', explanationRu: "the most expensive." },
+              { text: 'She is ___ student in our class.', options: ['the most intelligent', 'the intelligentest', 'more intelligent'], correct: 0, explanation: 'the most intelligent.', explanationRu: "the most intelligent." },
             ],
           },
           {
@@ -8155,8 +8155,8 @@ export const grammarPathSections = [
               exampleRu: 'This is the least difficult exam of all.',
             },
             exercises: [
-              { text: 'It was ___ interesting movie I have ever watched.', options: ['the least', 'less', 'the most least'], correct: 0, explanation: 'the least interesting.' },
-              { text: 'Choose the correct sentence:', options: ['This option is the least risky.', 'This option is least risky.'], correct: 0, explanation: 'the least risky.' },
+              { text: 'It was ___ interesting movie I have ever watched.', options: ['the least', 'less', 'the most least'], correct: 0, explanation: 'the least interesting.', explanationRu: "the least interesting." },
+              { text: 'Choose the correct sentence:', options: ['This option is the least risky.', 'This option is least risky.'], correct: 0, explanation: 'the least risky.', explanationRu: "the least risky." },
             ],
           },
           {
@@ -8168,8 +8168,8 @@ export const grammarPathSections = [
               exampleRu: 'He is the tallest boy in the class.',
             },
             exercises: [
-              { text: 'She is the smartest girl ___ our school.', options: ['in', 'of', 'at'], correct: 0, explanation: 'Joy/muassasa uchun: in our school.' },
-              { text: 'This is the best book I have ___ read.', options: ['ever', 'never', 'already'], correct: 0, explanation: 'Superlative tajribasida: ever.' },
+              { text: 'She is the smartest girl ___ our school.', options: ['in', 'of', 'at'], correct: 0, explanation: 'Joy/muassasa uchun: in our school.', explanationRu: "Для места/учреждения: in our school." },
+              { text: 'This is the best book I have ___ read.', options: ['ever', 'never', 'already'], correct: 0, explanation: 'Superlative tajribasida: ever.', explanationRu: "В опыте с превосходной степенью: ever." },
             ],
           },
           {
@@ -8181,9 +8181,9 @@ export const grammarPathSections = [
               exampleRu: 'It was the most exciting trip of my life.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She is the most popular singer in Uzbekistan.', 'She is most popular singer in Uzbekistan.'], correct: 0, explanation: 'THE most popular.' },
-              { text: 'Choose the correct sentence:', options: ['Who is the oldest person in your family?', 'Who is the older person in your family?'], correct: 0, explanation: 'Orttirma daraja: the oldest.' },
-              { text: 'Select the correct sentence:', options: ['This is the worst mistake of all.', 'This is the baddest mistake of all.'], correct: 0, explanation: 'bad ➔ worst.' },
+              { text: 'Choose the correct sentence:', options: ['She is the most popular singer in Uzbekistan.', 'She is most popular singer in Uzbekistan.'], correct: 0, explanation: 'THE most popular.', explanationRu: "THE most popular." },
+              { text: 'Choose the correct sentence:', options: ['Who is the oldest person in your family?', 'Who is the older person in your family?'], correct: 0, explanation: 'Orttirma daraja: the oldest.', explanationRu: "Превосходная степень: the oldest." },
+              { text: 'Select the correct sentence:', options: ['This is the worst mistake of all.', 'This is the baddest mistake of all.'], correct: 0, explanation: 'bad ➔ worst.', explanationRu: "bad ➔ worst." },
             ],
           },
         ],
@@ -8204,9 +8204,9 @@ export const grammarPathSections = [
               exampleRu: 'My score is better than yours.',
             },
             exercises: [
-              { text: 'Your English is ___ than last year.', options: ['better', 'gooder', 'more good'], correct: 0, explanation: 'good ➔ better.' },
-              { text: 'This is ___ film I have ever seen.', options: ['the best', 'the goodest', 'the better'], correct: 0, explanation: 'good ➔ the best.' },
-              { text: 'The weather today is ___ than yesterday.', options: ['worse', 'badder', 'more bad'], correct: 0, explanation: 'bad ➔ worse.' },
+              { text: 'Your English is ___ than last year.', options: ['better', 'gooder', 'more good'], correct: 0, explanation: 'good ➔ better.', explanationRu: "good ➔ better." },
+              { text: 'This is ___ film I have ever seen.', options: ['the best', 'the goodest', 'the better'], correct: 0, explanation: 'good ➔ the best.', explanationRu: "good ➔ the best." },
+              { text: 'The weather today is ___ than yesterday.', options: ['worse', 'badder', 'more bad'], correct: 0, explanation: 'bad ➔ worse.', explanationRu: "bad ➔ worse." },
             ],
           },
           {
@@ -8218,8 +8218,8 @@ export const grammarPathSections = [
               exampleRu: 'I need further information.',
             },
             exercises: [
-              { text: 'I have ___ free time than you.', options: ['less', 'littler', 'least'], correct: 0, explanation: 'little ➔ less.' },
-              { text: 'For ___ details, please visit our website.', options: ['further', 'farthest', 'farer'], correct: 0, explanation: 'qo\'shimcha tafsilotlar: further.' },
+              { text: 'I have ___ free time than you.', options: ['less', 'littler', 'least'], correct: 0, explanation: 'little ➔ less.', explanationRu: "little ➔ less." },
+              { text: 'For ___ details, please visit our website.', options: ['further', 'farthest', 'farer'], correct: 0, explanation: 'qo\'shimcha tafsilotlar: further.', explanationRu: "Дополнительные подробности: further." },
             ],
           },
           {
@@ -8231,8 +8231,8 @@ export const grammarPathSections = [
               exampleRu: 'Do you have any further questions?',
             },
             exercises: [
-              { text: 'If you have any ___ questions, let me know.', options: ['further', 'farther', 'farthest'], correct: 0, explanation: 'Qo\'shimcha savollar: further.' },
-              { text: 'The shop is closed until ___ notice.', options: ['further', 'farther', 'more far'], correct: 0, explanation: 'further notice.' },
+              { text: 'If you have any ___ questions, let me know.', options: ['further', 'farther', 'farthest'], correct: 0, explanation: 'Qo\'shimcha savollar: further.', explanationRu: "Дополнительные вопросы: further." },
+              { text: 'The shop is closed until ___ notice.', options: ['further', 'farther', 'more far'], correct: 0, explanation: 'further notice.', explanationRu: "further notice." },
             ],
           },
           {
@@ -8244,8 +8244,8 @@ export const grammarPathSections = [
               exampleRu: 'The sooner, the better.',
             },
             exercises: [
-              { text: 'The more you practice, ___ you speak.', options: ['the better', 'the best', 'better'], correct: 0, explanation: 'The ... the ... iborasi: the better.' },
-              { text: 'The higher you climb, ___ cold it gets.', options: ['the more', 'the most', 'more'], correct: 0, explanation: 'the more cold / the colder.' },
+              { text: 'The more you practice, ___ you speak.', options: ['the better', 'the best', 'better'], correct: 0, explanation: 'The ... the ... iborasi: the better.', explanationRu: "Конструкция The ... the ...: the better." },
+              { text: 'The higher you climb, ___ cold it gets.', options: ['the more', 'the most', 'more'], correct: 0, explanation: 'the more cold / the colder.', explanationRu: "the more cold / the colder." },
             ],
           },
           {
@@ -8257,9 +8257,9 @@ export const grammarPathSections = [
               exampleRu: 'The earlier we start, the better the result will be.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['Prevention is better than cure.', 'Prevention is gooder than cure.'], correct: 0, explanation: 'good ➔ better.' },
-              { text: 'Choose the correct sentence:', options: ['This is the worst day of my life.', 'This is the baddest day of my life.'], correct: 0, explanation: 'bad ➔ worst.' },
-              { text: 'Select the correct sentence:', options: ['The more I know him, the more I like him.', 'The more I know him, more I like him.'], correct: 0, explanation: 'The more ... the more ...' },
+              { text: 'Choose the correct sentence:', options: ['Prevention is better than cure.', 'Prevention is gooder than cure.'], correct: 0, explanation: 'good ➔ better.', explanationRu: "good ➔ better." },
+              { text: 'Choose the correct sentence:', options: ['This is the worst day of my life.', 'This is the baddest day of my life.'], correct: 0, explanation: 'bad ➔ worst.', explanationRu: "bad ➔ worst." },
+              { text: 'Select the correct sentence:', options: ['The more I know him, the more I like him.', 'The more I know him, more I like him.'], correct: 0, explanation: 'The more ... the more ...', explanationRu: "The more ... the more ..." },
             ],
           },
         ],
@@ -8280,8 +8280,8 @@ export const grammarPathSections = [
               exampleRu: 'He is taller than me. It is the highest peak.',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['She is smarter than her brother.', 'She is more smarter than her brother.'], correct: 0, explanation: 'Ikkilamchi qiyoslash mumkin emas: smarter than.' },
-              { text: 'Choose the correct sentence:', options: ['This is the highest building in town.', 'This is the most highest building in town.'], correct: 0, explanation: 'the highest.' },
+              { text: 'Choose the correct sentence:', options: ['She is smarter than her brother.', 'She is more smarter than her brother.'], correct: 0, explanation: 'Ikkilamchi qiyoslash mumkin emas: smarter than.', explanationRu: "Двойное сравнение недопустимо: smarter than." },
+              { text: 'Choose the correct sentence:', options: ['This is the highest building in town.', 'This is the most highest building in town.'], correct: 0, explanation: 'the highest.', explanationRu: "the highest." },
             ],
           },
           {
@@ -8293,8 +8293,8 @@ export const grammarPathSections = [
               exampleRu: 'Of the two brothers, Tom is taller. Of all students, Tom is the tallest.',
             },
             exercises: [
-              { text: 'Between football and tennis, I think football is ___ .', options: ['more exciting', 'the most exciting', 'most exciting'], correct: 0, explanation: '2 ta sport turi taqqoslanmoqda: more exciting.' },
-              { text: 'Of all sports, football is ___ .', options: ['the most popular', 'more popular', 'popularer'], correct: 0, explanation: 'Barcha sport turlari ichida: the most popular.' },
+              { text: 'Between football and tennis, I think football is ___ .', options: ['more exciting', 'the most exciting', 'most exciting'], correct: 0, explanation: '2 ta sport turi taqqoslanmoqda: more exciting.', explanationRu: "Сравниваются 2 вида спорта: more exciting." },
+              { text: 'Of all sports, football is ___ .', options: ['the most popular', 'more popular', 'popularer'], correct: 0, explanation: 'Barcha sport turlari ichida: the most popular.', explanationRu: "Среди всех видов спорта: the most popular." },
             ],
           },
           {
@@ -8306,8 +8306,8 @@ export const grammarPathSections = [
               exampleRu: 'She is as smart as her sister, but her brother is the smartest of all.',
             },
             exercises: [
-              { text: 'My laptop is fast, but yours is ___ .', options: ['faster', 'fastest', 'more fast'], correct: 0, explanation: 'Ikki kompyuter taqqoslanmoqda: faster.' },
-              { text: 'My laptop is not as ___ as yours.', options: ['fast', 'faster', 'fastest'], correct: 0, explanation: 'not as ... as orasida: fast.' },
+              { text: 'My laptop is fast, but yours is ___ .', options: ['faster', 'fastest', 'more fast'], correct: 0, explanation: 'Ikki kompyuter taqqoslanmoqda: faster.', explanationRu: "Сравниваются два компьютера: faster." },
+              { text: 'My laptop is not as ___ as yours.', options: ['fast', 'faster', 'fastest'], correct: 0, explanation: 'not as ... as orasida: fast.', explanationRu: "Между not as ... as: fast." },
             ],
           },
           {
@@ -8319,8 +8319,8 @@ export const grammarPathSections = [
               exampleRu: 'The red one is cheaper, but the blue one is safer.',
             },
             exercises: [
-              { text: '— How was your exam? — It was ___ than I expected!', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier.' },
-              { text: '— Is your house far? — Yes, it is ___ away than yours.', options: ['farther', 'farer', 'more far'], correct: 0, explanation: 'far ➔ farther / further.' },
+              { text: '— How was your exam? — It was ___ than I expected!', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier.', explanationRu: "easy ➔ easier." },
+              { text: '— Is your house far? — Yes, it is ___ away than yours.', options: ['farther', 'farer', 'more far'], correct: 0, explanation: 'far ➔ farther / further.', explanationRu: "far ➔ farther / further." },
             ],
           },
           {
@@ -8332,9 +8332,9 @@ export const grammarPathSections = [
               exampleRu: 'as fast as / faster than / the fastest',
             },
             exercises: [
-              { text: 'Choose the correct sentence:', options: ['This is the best day of my life.', 'This is the most good day of my life.'], correct: 0, explanation: 'good ➔ the best.' },
-              { text: 'Choose the correct sentence:', options: ['She is as tall as her mother.', 'She is as taller as her mother.'], correct: 0, explanation: 'as tall as.' },
-              { text: 'Select the correct sentence:', options: ['My phone is much more expensive than yours.', 'My phone is very more expensive than yours.'], correct: 0, explanation: 'much more expensive.' },
+              { text: 'Choose the correct sentence:', options: ['This is the best day of my life.', 'This is the most good day of my life.'], correct: 0, explanation: 'good ➔ the best.', explanationRu: "good ➔ the best." },
+              { text: 'Choose the correct sentence:', options: ['She is as tall as her mother.', 'She is as taller as her mother.'], correct: 0, explanation: 'as tall as.', explanationRu: "as tall as." },
+              { text: 'Select the correct sentence:', options: ['My phone is much more expensive than yours.', 'My phone is very more expensive than yours.'], correct: 0, explanation: 'much more expensive.', explanationRu: "much more expensive." },
             ],
           },
         ],
@@ -8344,21 +8344,21 @@ export const grammarPathSections = [
       title: "Bo'lim testi: Sifat darajalari (Comparative, Superlative, As...as)",
       titleRu: 'Тест раздела: Степени сравнения (Comparative, Superlative, As...as)',
       exercises: [
-        { text: 'Tom is as ___ as Bob.', options: ['tall', 'taller', 'tallest'], correct: 0, explanation: 'as...as orasida oddiy sifat: tall.' },
-        { text: 'My phone is not as ___ as yours.', options: ['expensive', 'more expensive', 'most expensive'], correct: 0, explanation: 'not as...as orasida: expensive.' },
-        { text: 'A plane is ___ than a train.', options: ['faster', 'fast', 'fastest'], correct: 0, explanation: 'Qisqa sifat + er + than: faster.' },
-        { text: 'This exam was ___ than I thought.', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier.' },
-        { text: 'London is ___ than my city.', options: ['more expensive', 'expensivest', 'expensiver'], correct: 0, explanation: 'Uzun sifat: more expensive.' },
-        { text: 'Health is ___ important than money.', options: ['more', 'most', 'as'], correct: 0, explanation: 'more important than.' },
-        { text: 'Mount Everest is ___ mountain in the world.', options: ['the highest', 'highest', 'higher'], correct: 0, explanation: 'the highest.' },
-        { text: 'What is ___ city in Uzbekistan?', options: ['the largest', 'the larger', 'largest'], correct: 0, explanation: 'the largest.' },
-        { text: 'This is ___ film I have ever watched.', options: ['the most interesting', 'the interestingest', 'more interesting'], correct: 0, explanation: 'the most interesting.' },
-        { text: 'Your result is ___ than mine.', options: ['better', 'gooder', 'more good'], correct: 0, explanation: 'good ➔ better.' },
-        { text: 'Yesterday was bad, but today is ___ .', options: ['worse', 'badder', 'more bad'], correct: 0, explanation: 'bad ➔ worse.' },
-        { text: 'Do you have any ___ questions?', options: ['further', 'farther', 'farer'], correct: 0, explanation: 'further questions.' },
-        { text: 'The sooner, the ___ .', options: ['better', 'best', 'good'], correct: 0, explanation: 'The sooner, the better.' },
-        { text: 'Select the correct sentence:', options: ['She is taller than her sister.', 'She is more taller than her sister.'], correct: 0, explanation: 'taller than.' },
-        { text: 'Select the correct sentence:', options: ['This car is much more expensive than that one.', 'This car is very more expensive than that one.'], correct: 0, explanation: 'much more expensive.' },
+        { text: 'Tom is as ___ as Bob.', options: ['tall', 'taller', 'tallest'], correct: 0, explanation: 'as...as orasida oddiy sifat: tall.', explanationRu: "Между as...as простая форма прилагательного: tall." },
+        { text: 'My phone is not as ___ as yours.', options: ['expensive', 'more expensive', 'most expensive'], correct: 0, explanation: 'not as...as orasida: expensive.', explanationRu: "Между not as...as: expensive." },
+        { text: 'A plane is ___ than a train.', options: ['faster', 'fast', 'fastest'], correct: 0, explanation: 'Qisqa sifat + er + than: faster.', explanationRu: "Короткое прилагательное + er + than: faster." },
+        { text: 'This exam was ___ than I thought.', options: ['easier', 'easyer', 'more easy'], correct: 0, explanation: 'easy ➔ easier.', explanationRu: "easy ➔ easier." },
+        { text: 'London is ___ than my city.', options: ['more expensive', 'expensivest', 'expensiver'], correct: 0, explanation: 'Uzun sifat: more expensive.', explanationRu: "Длинное прилагательное: more expensive." },
+        { text: 'Health is ___ important than money.', options: ['more', 'most', 'as'], correct: 0, explanation: 'more important than.', explanationRu: "more important than." },
+        { text: 'Mount Everest is ___ mountain in the world.', options: ['the highest', 'highest', 'higher'], correct: 0, explanation: 'the highest.', explanationRu: "the highest." },
+        { text: 'What is ___ city in Uzbekistan?', options: ['the largest', 'the larger', 'largest'], correct: 0, explanation: 'the largest.', explanationRu: "the largest." },
+        { text: 'This is ___ film I have ever watched.', options: ['the most interesting', 'the interestingest', 'more interesting'], correct: 0, explanation: 'the most interesting.', explanationRu: "the most interesting." },
+        { text: 'Your result is ___ than mine.', options: ['better', 'gooder', 'more good'], correct: 0, explanation: 'good ➔ better.', explanationRu: "good ➔ better." },
+        { text: 'Yesterday was bad, but today is ___ .', options: ['worse', 'badder', 'more bad'], correct: 0, explanation: 'bad ➔ worse.', explanationRu: "bad ➔ worse." },
+        { text: 'Do you have any ___ questions?', options: ['further', 'farther', 'farer'], correct: 0, explanation: 'further questions.', explanationRu: "further questions." },
+        { text: 'The sooner, the ___ .', options: ['better', 'best', 'good'], correct: 0, explanation: 'The sooner, the better.', explanationRu: "The sooner, the better." },
+        { text: 'Select the correct sentence:', options: ['She is taller than her sister.', 'She is more taller than her sister.'], correct: 0, explanation: 'taller than.', explanationRu: "taller than." },
+        { text: 'Select the correct sentence:', options: ['This car is much more expensive than that one.', 'This car is very more expensive than that one.'], correct: 0, explanation: 'much more expensive.', explanationRu: "much more expensive." },
       ],
     },
   },
