@@ -8362,5 +8362,1280 @@ export const grammarPathSections = [
       ],
     },
   },
+  {
+    id: 'sec-modals-1',
+    order: 18,
+    title: "Modal fe'llar 1: Qobiliyat va ruxsat",
+    titleRu: 'Модальные глаголы 1: Способность и разрешение',
+    icon: '💪',
+    lessons: [
+      {
+        id: 'sec-modals-1-l1',
+        order: 1,
+        title: '"Can" — qobiliyat',
+        titleRu: '"Can" — способность',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"can" — biror narsani bajara olish qobiliyatini bildiradi ("a olmoq").',
+              ruleRu: '"can" выражает способность что-либо делать ("уметь/мочь").',
+              example: 'I can swim. (Men suza olaman.)',
+              exampleRu: 'I can swim. (Я умею плавать.)',
+            },
+            exercises: [
+              { text: '"Suza olaman" so\'zini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "я умею плавать" по-английски?', options: ['I can swim', 'I cans swim', 'I canning swim'], correct: 0, explanation: '"can" barcha shaxslar bilan bir xil, -s qo\'shilmaydi.', explanationRu: '"can" одинаков для всех лиц, -s не добавляется.' },
+              { text: 'She ___ speak three languages.', options: ['can', 'cans', 'canning'], correct: 0, explanation: '"can" -s olmaydi: can.', explanationRu: '"can" не принимает -s: can.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"can" fe\'lga -s qo\'shilmaydi, hatto he/she/it bilan ham.',
+              ruleRu: 'К "can" никогда не добавляется -s, даже с he/she/it.',
+              example: 'He can drive. She can cook. It can fly.',
+              exampleRu: 'He can drive. She can cook. It can fly.',
+            },
+            exercises: [
+              { text: 'He ___ drive a car.', options: ['can', 'cans', 'is can'], correct: 0, explanation: '"can" -s olmaydi: can.', explanationRu: '"can" без -s: can.' },
+              { text: 'This bird ___ fly very fast.', options: ['can', 'cans', 'is can'], correct: 0, explanation: '"can" barcha egalar bilan bir xil.', explanationRu: '"can" одинаков со всеми подлежащими.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor uchun "cannot" yoki qisqartma "can\'t" ishlatiladi.',
+              ruleRu: 'Отрицание: "cannot" или сокращённо "can\'t".',
+              example: "I can't sing. (Men qo'shiq ayta olmayman.)",
+              exampleRu: "I can't sing. (Я не умею петь.)",
+            },
+            exercises: [
+              { text: 'He ___ swim; he never learned.', options: ["can't", 'cans not', 'not can'], correct: 0, explanation: 'Inkor: can\'t.', explanationRu: 'Отрицание: can\'t.' },
+              { text: 'Choose the correct sentence:', options: ["I can't cook.", 'I not can cook.', "I cann't cook."], correct: 0, explanation: 'To\'g\'ri inkor shakli: can\'t.', explanationRu: 'Правильная форма отрицания: can\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Savol yasashda "Can" eganing oldiga chiqadi: Can + Subject + V1?',
+              ruleRu: 'В вопросе "Can" выносится перед подлежащим: Can + подлежащее + V1?',
+              example: 'Can you drive? Can she swim?',
+              exampleRu: 'Can you drive? Can she swim?',
+            },
+            exercises: [
+              { text: '___ you help me, please?', options: ['Can', 'Do', 'Are'], correct: 0, explanation: 'Savol: Can + subject + V1?', explanationRu: 'Вопрос: Can + подлежащее + V1?' },
+              { text: '___ he play the guitar?', options: ['Can', 'Does', 'Is'], correct: 0, explanation: 'Savol: Can + subject + V1?', explanationRu: 'Вопрос: Can + подлежащее + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"can" haqida bilganlarimizni birlashtiramiz: can + V1 / can\'t / Can...?',
+              ruleRu: 'Обобщим всё о "can": can + V1 / can\'t / Can...?',
+              example: "I can cook, but I can't bake. Can you help me?",
+              exampleRu: "I can cook, but I can't bake. Can you help me?",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She can play the piano.', 'She cans play the piano.', 'She can plays the piano.'], correct: 0, explanation: '"can" + bosh fe\'l (play).', explanationRu: '"can" + начальная форма глагола (play).' },
+              { text: 'Choose the correct question:', options: ['Can they swim?', 'Do they can swim?', 'Are they can swim?'], correct: 0, explanation: 'Savol: Can + subject + V1?', explanationRu: 'Вопрос: Can + подлежащее + V1?' },
+              { text: 'Choose the correct negative:', options: ["I can't dance.", "I don't can dance.", "I amn't can dance."], correct: 0, explanation: 'Inkor: can\'t.', explanationRu: 'Отрицание: can\'t.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-1-l2',
+        order: 2,
+        title: '"Could" — o\'tmishdagi qobiliyat',
+        titleRu: '"Could" — способность в прошлом',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"could" — o\'tmishda umumiy qobiliyatni bildiradi ("qila olardim").',
+              ruleRu: '"could" выражает общую способность в прошлом ("умел/мог").',
+              example: 'I could swim when I was five. (Men besh yoshimda suza olardim.)',
+              exampleRu: 'I could swim when I was five. (Я умел плавать в пять лет.)',
+            },
+            exercises: [
+              { text: 'She ___ read when she was four.', options: ['could', 'can', 'cans'], correct: 0, explanation: 'O\'tmishdagi qobiliyat: could.', explanationRu: 'Способность в прошлом: could.' },
+              { text: '"Suza olardim" so\'zini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "я умел плавать" по-английски?', options: ['I could swim', 'I can swim', 'I coulds swim'], correct: 0, explanation: 'O\'tmish: could.', explanationRu: 'Прошедшее время: could.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"could" ham "can" kabi barcha shaxslar bilan bir xil, -s qo\'shilmaydi.',
+              ruleRu: '"could", как и "can", одинаков для всех лиц, -s не добавляется.',
+              example: 'He could run fast. They could sing well.',
+              exampleRu: 'He could run fast. They could sing well.',
+            },
+            exercises: [
+              { text: 'He ___ run very fast as a child.', options: ['could', 'coulds', 'can'], correct: 0, explanation: '"could" -s olmaydi.', explanationRu: '"could" без -s.' },
+              { text: 'They ___ sing beautifully when they were young.', options: ['could', 'coulds', 'can'], correct: 0, explanation: 'O\'tmishdagi qobiliyat: could.', explanationRu: 'Способность в прошлом: could.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor uchun "could not" yoki qisqartma "couldn\'t" ishlatiladi.',
+              ruleRu: 'Отрицание: "could not" или сокращённо "couldn\'t".',
+              example: "I couldn't walk until I was one. (Bir yoshgacha yura olmasdim.)",
+              exampleRu: "I couldn't walk until I was one. (Я не мог ходить, пока мне не исполнился год.)",
+            },
+            exercises: [
+              { text: 'She ___ speak English before she moved abroad.', options: ["couldn't", "can't", 'not could'], correct: 0, explanation: 'O\'tmish inkori: couldn\'t.', explanationRu: 'Отрицание в прошлом: couldn\'t.' },
+              { text: 'Choose the correct sentence:', options: ["We couldn't afford a car.", "We can't afford a car before.", "We not could afford a car."], correct: 0, explanation: 'To\'g\'ri inkor: couldn\'t.', explanationRu: 'Правильное отрицание: couldn\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Savol: Could + Subject + V1?',
+              ruleRu: 'Вопрос: Could + подлежащее + V1?',
+              example: 'Could you swim as a child?',
+              exampleRu: 'Could you swim as a child?',
+            },
+            exercises: [
+              { text: '___ you ride a bike when you were young?', options: ['Could', 'Can', 'Did could'], correct: 0, explanation: 'Savol: Could + subject + V1?', explanationRu: 'Вопрос: Could + подлежащее + V1?' },
+              { text: '___ she cook well before the course?', options: ['Could', 'Can', 'Does'], correct: 0, explanation: 'Savol: Could + subject + V1?', explanationRu: 'Вопрос: Could + подлежащее + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"can" — hozirgi qobiliyat, "could" — o\'tmishdagi qobiliyat.',
+              ruleRu: '"can" — способность в настоящем, "could" — способность в прошлом.',
+              example: "I can swim now, but I couldn't swim as a baby.",
+              exampleRu: "I can swim now, but I couldn't swim as a baby.",
+            },
+            exercises: [
+              { text: "Now, she ___ drive, but as a teenager she ___.", options: ["can / couldn't", "could / can't", 'can / can'], correct: 0, explanation: 'Hozirgi: can, o\'tmish: couldn\'t.', explanationRu: 'Настоящее: can, прошлое: couldn\'t.' },
+              { text: 'Choose the correct pair:', options: ["I can cook now, but I couldn't cook as a child.", "I could cook now, but I can't cook as a child."], correct: 0, explanation: 'Hozirgi — can, o\'tmish — could.', explanationRu: 'Настоящее — can, прошлое — could.' },
+              { text: 'Choose the correct sentence:', options: ['When I was young, I could climb trees easily.', 'When I was young, I can climb trees easily.'], correct: 0, explanation: 'O\'tmishdagi qobiliyat: could.', explanationRu: 'Способность в прошлом: could.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-1-l3',
+        order: 3,
+        title: '"Be able to" — barcha zamonlarda',
+        titleRu: '"Be able to" — во всех временах',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"be able to" — "can/could"ning muqobili, u barcha zamonlarda (hozirgi, o\'tgan, kelasi) ishlatilishi mumkin.',
+              ruleRu: '"be able to" — альтернатива "can/could", используется в любом времени (настоящем, прошедшем, будущем).',
+              example: 'I am able to swim. (= I can swim.)',
+              exampleRu: 'I am able to swim. (= I can swim.)',
+            },
+            exercises: [
+              { text: 'She ___ speak French fluently.', options: ['is able to', 'are able to', 'be able to'], correct: 0, explanation: '"be" — egaga mos: is.', explanationRu: '"be" согласуется с подлежащим: is.' },
+              { text: '"Suza olaman" iborasini "be able to" bilan qanday aytamiz?', textRu: 'Как сказать "я умею плавать" с помощью "be able to"?', options: ['I am able to swim', 'I is able to swim', 'I able to swim'], correct: 0, explanation: '"I" bilan: am.', explanationRu: 'С "I": am.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kelasi zamonda "can" ishlatilmaydi, o\'rniga "will be able to" ishlatiladi.',
+              ruleRu: 'В будущем времени "can" не используется, вместо него — "will be able to".',
+              example: 'I will be able to help you tomorrow.',
+              exampleRu: 'I will be able to help you tomorrow.',
+            },
+            exercises: [
+              { text: 'She ___ finish the project by Friday.', options: ['will be able to', 'will can', 'can'], correct: 0, explanation: 'Kelasi zamon: will be able to.', explanationRu: 'Будущее время: will be able to.' },
+              { text: 'Choose the correct sentence:', options: ['We will be able to travel next year.', 'We will can travel next year.'], correct: 0, explanation: '"can" kelasi zamonda ishlatilmaydi.', explanationRu: '"can" не используется в будущем времени.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bir martalik, muvaffaqiyatli bajarilgan o\'tmishdagi harakat uchun "was/were able to" ko\'proq ishlatiladi ("could" ko\'proq umumiy qobiliyat uchun).',
+              ruleRu: 'Для однократного, успешно выполненного действия в прошлом чаще используется "was/were able to" (а "could" — для общей способности).',
+              example: 'The fire was big, but the firefighters were able to put it out.',
+              exampleRu: 'The fire was big, but the firefighters were able to put it out.',
+            },
+            exercises: [
+              { text: 'The exam was hard, but she ___ pass it.', options: ['was able to', 'could', 'can'], correct: 0, explanation: 'Bir martalik muvaffaqiyat: was able to.', explanationRu: 'Однократный успех: was able to.' },
+              { text: 'Choose the correct sentence:', options: ["Despite the traffic, we were able to arrive on time.", "Despite the traffic, we could arrive on time."], correct: 0, explanation: 'Bir martalik natija: were able to.', explanationRu: 'Однократный результат: were able to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor: wasn\'t/weren\'t able to. Savol: Will + Subject + be able to + V1?',
+              ruleRu: 'Отрицание: wasn\'t/weren\'t able to. Вопрос: Will + подлежащее + be able to + V1?',
+              example: "He wasn't able to come. Will you be able to join us?",
+              exampleRu: "He wasn't able to come. Will you be able to join us?",
+            },
+            exercises: [
+              { text: 'I ___ finish the report yesterday; I ran out of time.', options: ["wasn't able to", "didn't able to", "can't"], correct: 0, explanation: 'Inkor: wasn\'t able to.', explanationRu: 'Отрицание: wasn\'t able to.' },
+              { text: '___ you be able to attend the meeting tomorrow?', options: ['Will', 'Are', 'Do'], correct: 0, explanation: 'Savol: Will + subject + be able to?', explanationRu: 'Вопрос: Will + подлежащее + be able to?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"can", "could" va "be able to" qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила "can", "could" и "be able to".',
+              example: "I can swim now. I could swim as a child. I will be able to swim better after lessons.",
+              exampleRu: "I can swim now. I could swim as a child. I will be able to swim better after lessons.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['Next year, I will be able to speak Spanish.', 'Next year, I will can speak Spanish.'], correct: 0, explanation: 'Kelasi zamon: will be able to.', explanationRu: 'Будущее время: will be able to.' },
+              { text: 'Choose the correct sentence:', options: ['She was able to solve the puzzle quickly.', 'She could able to solve the puzzle quickly.'], correct: 0, explanation: '"was able to" — to\'g\'ri shakl.', explanationRu: '"was able to" — правильная форма.' },
+              { text: 'Choose the correct sentence:', options: ['They are able to finish it today.', 'They are able finish it today.'], correct: 0, explanation: '"be able to" + V1.', explanationRu: '"be able to" + V1.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-1-l4',
+        order: 4,
+        title: '"Can/Could" — ruxsat so\'rash',
+        titleRu: '"Can/Could" — просьба разрешения',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"Can I...?" — norasmiy ruxsat so\'rash uchun ishlatiladi.',
+              ruleRu: '"Can I...?" используется для неформальной просьбы разрешения.',
+              example: 'Can I open the window?',
+              exampleRu: 'Can I open the window?',
+            },
+            exercises: [
+              { text: '___ I borrow your pen?', options: ['Can', 'Am', 'Do'], correct: 0, explanation: 'Ruxsat so\'rash: Can I...?', explanationRu: 'Просьба разрешения: Can I...?' },
+              { text: '"Chiqsam maylimi?" iborasini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "можно мне выйти?" по-английски?', options: ['Can I go out?', 'Can I to go out?', 'I can go out?'], correct: 0, explanation: 'Can I + V1?', explanationRu: 'Can I + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Could I...?" — "Can I...?"ga qaraganda rasmiyroq va xushmuomalaroq ruxsat so\'rash.',
+              ruleRu: '"Could I...?" звучит более формально и вежливо, чем "Can I...?".',
+              example: 'Could I use your phone, please?',
+              exampleRu: 'Could I use your phone, please?',
+            },
+            exercises: [
+              { text: '___ I ask you a question, please?', options: ['Could', 'Can', 'Do'], correct: 0, explanation: 'Xushmuomala so\'rov: Could I...?', explanationRu: 'Вежливая просьба: Could I...?' },
+              { text: 'Choose the most polite question:', options: ['Could I possibly borrow your car?', 'Can I borrow your car?'], correct: 0, explanation: '"Could" — eng xushmuomala shakl.', explanationRu: '"Could" — самая вежливая форма.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Can you...?" — boshqa birovdan yordam yoki iltimos so\'rash uchun ishlatiladi.',
+              ruleRu: '"Can you...?" используется, чтобы попросить кого-то о помощи.',
+              example: 'Can you help me with this bag?',
+              exampleRu: 'Can you help me with this bag?',
+            },
+            exercises: [
+              { text: '___ you pass the salt, please?', options: ['Can', 'Am', 'Could is'], correct: 0, explanation: 'Iltimos: Can you...?', explanationRu: 'Просьба: Can you...?' },
+              { text: 'Choose the correct request:', options: ['Can you open the door for me?', 'Can you to open the door for me?'], correct: 0, explanation: 'Can you + V1?', explanationRu: 'Can you + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ruxsat so\'roviga javob: Yes, of course. / Sure. Rad etish: I\'m sorry, you can\'t. / No, you can\'t.',
+              ruleRu: 'Ответ на просьбу разрешения: Yes, of course. / Sure. Отказ: I\'m sorry, you can\'t.',
+              example: "Can I leave early? — Yes, of course you can.",
+              exampleRu: "Can I leave early? — Yes, of course you can.",
+            },
+            exercises: [
+              { text: "Can I sit here? — Yes, ___.", options: ['of course', 'of the course', 'yes course'], correct: 0, explanation: 'Ijobiy javob: of course.', explanationRu: 'Положительный ответ: of course.' },
+              { text: 'Choose the correct refusal:', options: ["I'm sorry, you can't park here.", "I'm sorry, you not can park here."], correct: 0, explanation: 'Rad etish: you can\'t.', explanationRu: 'Отказ: you can\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ruxsat va so\'rov shakllarini birlashtiramiz: Can I? / Could I? / Can you?',
+              ruleRu: 'Обобщим формы разрешения и просьбы: Can I? / Could I? / Can you?',
+              example: "Could I ask a favor? Can you help me, please?",
+              exampleRu: "Could I ask a favor? Can you help me, please?",
+            },
+            exercises: [
+              { text: 'Choose the most polite option:', options: ['Could I possibly use your laptop?', 'Can I use your laptop?', 'I can use your laptop?'], correct: 0, explanation: 'Eng xushmuomala: Could I.', explanationRu: 'Самое вежливое: Could I.' },
+              { text: 'Choose the correct request for help:', options: ['Can you help me carry this?', 'Can you to help me carry this?'], correct: 0, explanation: 'Can you + V1?', explanationRu: 'Can you + V1?' },
+              { text: 'Choose the correct permission question:', options: ['Can I use the bathroom?', 'Can I using the bathroom?'], correct: 0, explanation: 'Can I + V1?', explanationRu: 'Can I + V1?' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-1-l5',
+        order: 5,
+        title: '"Can" — taklif va ruxsat berish',
+        titleRu: '"Can" — предложение и разрешение',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"Can I help you?" — birovga yordam taklif qilish uchun ishlatiladi.',
+              ruleRu: '"Can I help you?" используется, чтобы предложить кому-то помощь.',
+              example: 'Can I help you with your bags?',
+              exampleRu: 'Can I help you with your bags?',
+            },
+            exercises: [
+              { text: '___ I help you find something?', options: ['Can', 'Do', 'Am'], correct: 0, explanation: 'Taklif: Can I help you?', explanationRu: 'Предложение: Can I help you?' },
+              { text: '"Sizga yordam bera olamanmi?" iborasini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "могу я вам помочь?" по-английски?', options: ['Can I help you?', 'Can I to help you?', 'I can help you?'], correct: 0, explanation: 'Can I + V1?', explanationRu: 'Can I + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Can I get/offer you...?" — mehmonga biror narsa taklif qilishda ishlatiladi.',
+              ruleRu: '"Can I get/offer you...?" используется, чтобы предложить гостю что-либо.',
+              example: 'Can I get you a cup of tea?',
+              exampleRu: 'Can I get you a cup of tea?',
+            },
+            exercises: [
+              { text: '___ I get you something to drink?', options: ['Can', 'Do', 'Am'], correct: 0, explanation: 'Taklif: Can I get you...?', explanationRu: 'Предложение: Can I get you...?' },
+              { text: 'Choose the correct offer:', options: ['Can I offer you some cake?', 'Can I offering you some cake?'], correct: 0, explanation: 'Can I + V1?', explanationRu: 'Can I + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"You can..." — birovga ruxsat berish uchun ishlatiladi.',
+              ruleRu: '"You can..." используется, чтобы дать кому-то разрешение.',
+              example: 'You can sit here if you want.',
+              exampleRu: 'You can sit here if you want.',
+            },
+            exercises: [
+              { text: '___ leave early today if you finish your work.', options: ['You can', 'You cans', 'You is can'], correct: 0, explanation: 'Ruxsat berish: You can.', explanationRu: 'Предоставление разрешения: You can.' },
+              { text: 'Choose the correct sentence:', options: ['You can use my car today.', 'You can using my car today.'], correct: 0, explanation: 'can + V1.', explanationRu: 'can + V1.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"There can be..." — biror narsa mumkinligini umumiy tarzda bildiradi.',
+              ruleRu: '"There can be..." выражает общую возможность существования чего-либо.',
+              example: 'There can be traffic jams in the morning.',
+              exampleRu: 'There can be traffic jams in the morning.',
+            },
+            exercises: [
+              { text: '___ several reasons for this problem.', options: ['There can be', 'There cans be', 'It can be'], correct: 0, explanation: '"There can be" — umumiy mumkinlik.', explanationRu: '"There can be" — общая возможность.' },
+              { text: 'Choose the correct sentence:', options: ['There can be a lot of traffic on Fridays.', 'There can a lot of traffic on Fridays.'], correct: 0, explanation: '"There can be" + noun.', explanationRu: '"There can be" + существительное.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Can" ning turli qo\'llanilishlarini birlashtiramiz: taklif, ruxsat berish, imkoniyat.',
+              ruleRu: 'Обобщим разные случаи использования "can": предложение, разрешение, возможность.',
+              example: "Can I help you? You can sit anywhere. There can be delays.",
+              exampleRu: "Can I help you? You can sit anywhere. There can be delays.",
+            },
+            exercises: [
+              { text: 'Choose the correct offer:', options: ['Can I carry that for you?', 'Can I carrying that for you?'], correct: 0, explanation: 'Taklif: Can I + V1?', explanationRu: 'Предложение: Can I + V1?' },
+              { text: 'Choose the correct permission:', options: ['You can borrow my umbrella.', 'You can borrowing my umbrella.'], correct: 0, explanation: 'Ruxsat: can + V1.', explanationRu: 'Разрешение: can + V1.' },
+              { text: 'Choose the correct sentence:', options: ['There can be problems if we rush.', 'There can problems if we rush.'], correct: 0, explanation: '"There can be" + noun.', explanationRu: '"There can be" + существительное.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-1-l6',
+        order: 6,
+        title: 'Taqqoslash va yakuniy mustahkamlash',
+        titleRu: 'Сравнение и итоговое закрепление',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"can" (hozirgi), "could" (o\'tmishdagi umumiy qobiliyat), "was/were able to" (o\'tmishdagi bir martalik muvaffaqiyat) farqini mustahkamlaymiz.',
+              ruleRu: 'Закрепим разницу: "can" (настоящее), "could" (общая способность в прошлом), "was/were able to" (однократный успех в прошлом).',
+              example: "I can drive now. I could read at four. I was able to fix the car yesterday.",
+              exampleRu: "I can drive now. I could read at four. I was able to fix the car yesterday.",
+            },
+            exercises: [
+              { text: 'Even though it was difficult, she ___ finish the marathon.', options: ['was able to', 'could', 'can'], correct: 0, explanation: 'Bir martalik muvaffaqiyat: was able to.', explanationRu: 'Однократный успех: was able to.' },
+              { text: 'As a child, he ___ read very well.', options: ['could', 'was able to', 'can'], correct: 0, explanation: 'Umumiy qobiliyat: could.', explanationRu: 'Общая способность: could.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"can" ikki xil ma\'noda ishlatilishi mumkin: qobiliyat ("uddalay olish") va ruxsat ("mumkinlik").',
+              ruleRu: '"can" может иметь два значения: способность и разрешение.',
+              example: "I can swim (qobiliyat). Can I swim here? (ruxsat)",
+              exampleRu: "I can swim (способность). Can I swim here? (разрешение)",
+            },
+            exercises: [
+              { text: '"Can I leave now?" gapida "can" nimani bildiradi?', textRu: 'Что означает "can" в предложении "Can I leave now?"', options: ['Ruxsat', 'Qobiliyat', 'Taklif'], correct: 0, explanation: 'Bu yerda "can" ruxsat so\'rash uchun.', explanationRu: 'Здесь "can" используется для просьбы разрешения.' },
+              { text: '"She can play the violin" gapida "can" nimani bildiradi?', textRu: 'Что означает "can" в предложении "She can play the violin"?', options: ['Qobiliyat', 'Ruxsat', 'Taklif'], correct: 0, explanation: 'Bu yerda "can" qobiliyatni bildiradi.', explanationRu: 'Здесь "can" выражает способность.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha inkor shakllarini birlashtiramiz: can\'t, couldn\'t, won\'t be able to, wasn\'t able to.',
+              ruleRu: 'Обобщим все отрицательные формы: can\'t, couldn\'t, won\'t be able to, wasn\'t able to.',
+              example: "I can't come today. I couldn't come yesterday. I won't be able to come tomorrow.",
+              exampleRu: "I can't come today. I couldn't come yesterday. I won't be able to come tomorrow.",
+            },
+            exercises: [
+              { text: 'Tomorrow, I ___ attend the meeting because of a conflict.', options: ["won't be able to", "can't", "couldn't"], correct: 0, explanation: 'Kelasi zamon inkori: won\'t be able to.', explanationRu: 'Отрицание в будущем: won\'t be able to.' },
+              { text: 'Yesterday, she ___ finish the report on time.', options: ["wasn't able to", "can't", "won't be able to"], correct: 0, explanation: 'O\'tmish inkori: wasn\'t able to.', explanationRu: 'Отрицание в прошлом: wasn\'t able to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha savol shakllarini birlashtiramiz: Can...? Could...? Will...be able to...?',
+              ruleRu: 'Обобщим все вопросительные формы: Can...? Could...? Will...be able to...?',
+              example: "Can you swim? Could you swim as a child? Will you be able to swim next week?",
+              exampleRu: "Can you swim? Could you swim as a child? Will you be able to swim next week?",
+            },
+            exercises: [
+              { text: '___ you be able to come to the party next week?', options: ['Will', 'Can', 'Could'], correct: 0, explanation: 'Kelasi zamon savoli: Will...be able to?', explanationRu: 'Вопрос в будущем времени: Will...be able to?' },
+              { text: '___ you speak English when you were ten?', options: ['Could', 'Can', 'Will'], correct: 0, explanation: 'O\'tmish savoli: Could?', explanationRu: 'Вопрос о прошлом: Could?' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bo\'lim bo\'yicha barcha qoidalarning yakuniy sinovi.',
+              ruleRu: 'Итоговое обобщение всех правил раздела.',
+              example: "Can you help me? I could swim as a child, and I'll be able to swim even better after lessons.",
+              exampleRu: "Can you help me? I could swim as a child, and I'll be able to swim even better after lessons.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She could play chess when she was six.', 'She can played chess when she was six.'], correct: 0, explanation: 'O\'tmishdagi qobiliyat: could.', explanationRu: 'Способность в прошлом: could.' },
+              { text: 'Choose the correct sentence:', options: ['We will be able to finish by Monday.', 'We can be able to finish by Monday.'], correct: 0, explanation: 'Kelasi zamon: will be able to.', explanationRu: 'Будущее время: will be able to.' },
+              { text: 'Choose the correct sentence:', options: ['Could I borrow your umbrella, please?', 'Could I to borrow your umbrella, please?'], correct: 0, explanation: 'Xushmuomala so\'rov: Could I + V1?', explanationRu: 'Вежливая просьба: Could I + V1?' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Modal fe'llar 1 (Qobiliyat va ruxsat)",
+      titleRu: 'Тест раздела: Модальные глаголы 1 (Способность и разрешение)',
+      exercises: [
+        { text: 'She ___ speak four languages.', options: ['can', 'cans', 'is can'], correct: 0, explanation: '"can" -s olmaydi.', explanationRu: '"can" без -s.' },
+        { text: 'He ___ swim; he never learned.', options: ["can't", 'cans not'], correct: 0, explanation: 'Inkor: can\'t.', explanationRu: 'Отрицание: can\'t.' },
+        { text: '___ you help me carry this?', options: ['Can', 'Do'], correct: 0, explanation: 'So\'rov: Can you...?', explanationRu: 'Просьба: Can you...?' },
+        { text: 'As a child, I ___ climb trees easily.', options: ['could', 'can'], correct: 0, explanation: 'O\'tmishdagi qobiliyat: could.', explanationRu: 'Способность в прошлом: could.' },
+        { text: 'She ___ speak English before moving abroad.', options: ["couldn't", "can't"], correct: 0, explanation: 'O\'tmish inkori: couldn\'t.', explanationRu: 'Отрицание в прошлом: couldn\'t.' },
+        { text: '___ you ride a bike as a child?', options: ['Could', 'Can'], correct: 0, explanation: 'O\'tmish savoli: Could?', explanationRu: 'Вопрос о прошлом: Could?' },
+        { text: 'Next year, she ___ speak Spanish fluently.', options: ['will be able to', 'will can'], correct: 0, explanation: 'Kelasi zamon: will be able to.', explanationRu: 'Будущее время: will be able to.' },
+        { text: 'The exam was hard, but he ___ pass it.', options: ['was able to', 'could'], correct: 0, explanation: 'Bir martalik muvaffaqiyat: was able to.', explanationRu: 'Однократный успех: was able to.' },
+        { text: 'I ___ finish the report yesterday.', options: ["wasn't able to", "can't"], correct: 0, explanation: 'O\'tmish inkori: wasn\'t able to.', explanationRu: 'Отрицание в прошлом: wasn\'t able to.' },
+        { text: 'Choose the most polite question:', options: ['Could I possibly borrow your car?', 'Can I borrow your car?'], correct: 0, explanation: 'Eng xushmuomala: Could I.', explanationRu: 'Самое вежливое: Could I.' },
+        { text: '___ I open the window, please?', options: ['Can', 'Am'], correct: 0, explanation: 'Ruxsat so\'rash: Can I...?', explanationRu: 'Просьба разрешения: Can I...?' },
+        { text: '___ I help you with your bags?', options: ['Can', 'Do'], correct: 0, explanation: 'Taklif: Can I help you?', explanationRu: 'Предложение: Can I help you?' },
+        { text: 'You ___ leave early if you finish your work.', options: ['can', 'cans'], correct: 0, explanation: 'Ruxsat berish: You can.', explanationRu: 'Предоставление разрешения: You can.' },
+        { text: "___ be a lot of traffic on Fridays.", options: ['There can', 'There is can'], correct: 0, explanation: '"There can be" — umumiy mumkinlik.', explanationRu: '"There can be" — общая возможность.' },
+        { text: 'Choose the correct sentence:', options: ['We will be able to finish by Monday.', 'We can be able to finish by Monday.'], correct: 0, explanation: 'Kelasi zamon: will be able to.', explanationRu: 'Будущее время: will be able to.' },
+        { text: 'Choose the correct sentence:', options: ['She could play chess when she was six.', 'She can played chess when she was six.'], correct: 0, explanation: 'O\'tmishdagi qobiliyat: could.', explanationRu: 'Способность в прошлом: could.' },
+      ],
+    },
+  },
+  {
+    id: 'sec-modals-2',
+    order: 19,
+    title: "Modal fe'llar 2: Majburiyat va maslahat",
+    titleRu: 'Модальные глаголы 2: Обязанность и совет',
+    icon: '📋',
+    lessons: [
+      {
+        id: 'sec-modals-2-l1',
+        order: 1,
+        title: '"Must" — shaxsiy majburiyat',
+        titleRu: '"Must" — личная необходимость',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"must" — so\'zlovchining o\'zi tomonidan qat\'iy zarur deb hisoblangan ichki majburiyatni bildiradi.',
+              ruleRu: '"must" выражает сильную личную необходимость, которую говорящий сам считает важной.',
+              example: 'I must finish this today. (Buni bugun tugatishim shart.)',
+              exampleRu: 'I must finish this today. (Я должен закончить это сегодня.)',
+            },
+            exercises: [
+              { text: 'I ___ study harder before the exam.', options: ['must', 'musts', 'musting'], correct: 0, explanation: '"must" barcha shaxslar bilan bir xil.', explanationRu: '"must" одинаков для всех лиц.' },
+              { text: 'She ___ call her mother tonight; she promised.', options: ['must', 'musts', 'must to'], correct: 0, explanation: '"must" -s olmaydi, "to" kerak emas.', explanationRu: '"must" не принимает -s, "to" не нужен.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must" fe\'lga -s qo\'shilmaydi va undan keyin doim bosh fe\'l (V1) keladi.',
+              ruleRu: 'К "must" не добавляется -s, и после него всегда идёт начальная форма глагола (V1).',
+              example: 'He must go now. They must be careful.',
+              exampleRu: 'He must go now. They must be careful.',
+            },
+            exercises: [
+              { text: 'He ___ leave immediately.', options: ['must', 'musts', 'must to'], correct: 0, explanation: '"must" + bosh fe\'l.', explanationRu: '"must" + начальная форма глагола.' },
+              { text: 'Choose the correct sentence:', options: ['We must be quiet in the library.', 'We must to be quiet in the library.'], correct: 0, explanation: '"must" dan keyin "to" kerak emas.', explanationRu: 'После "must" не нужно "to".' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"mustn\'t" — biror ishni qilish qat\'iyan taqiqlanganligini bildiradi ("qilma!").',
+              ruleRu: '"mustn\'t" выражает строгий запрет ("нельзя!").',
+              example: "You mustn't smoke here. (Bu yerda chekish taqiqlanadi.)",
+              exampleRu: "You mustn't smoke here. (Здесь нельзя курить.)",
+            },
+            exercises: [
+              { text: "You ___ touch that; it's dangerous.", options: ["mustn't", "don't must", 'not must'], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+              { text: 'Choose the correct sentence:', options: ["Students mustn't cheat in exams.", "Students don't must cheat in exams."], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"Must I...?" — kamdan-kam ishlatiladi, ko\'proq "Do I have to...?" afzal ko\'riladi.',
+              ruleRu: '"Must I...?" используется редко, чаще предпочитают "Do I have to...?".',
+              example: 'Must I attend the meeting? (= Do I have to attend the meeting?)',
+              exampleRu: 'Must I attend the meeting? (= Do I have to attend the meeting?)',
+            },
+            exercises: [
+              { text: '___ I sign this form right now?', options: ['Must', 'Musts', 'Am must'], correct: 0, explanation: 'Savol: Must + subject + V1?', explanationRu: 'Вопрос: Must + подлежащее + V1?' },
+              { text: 'Choose the correct question:', options: ['Must we wear a uniform?', 'Do we must wear a uniform?'], correct: 0, explanation: 'Savol: Must + subject + V1?', explanationRu: 'Вопрос: Must + подлежащее + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must" haqida bilganlarimizni birlashtiramiz: must + V1 / mustn\'t / Must...?',
+              ruleRu: 'Обобщим всё о "must": must + V1 / mustn\'t / Must...?',
+              example: "I must finish this. You mustn't be late. Must I come too?",
+              exampleRu: "I must finish this. You mustn't be late. Must I come too?",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['You must wear a seatbelt.', 'You must wearing a seatbelt.'], correct: 0, explanation: '"must" + V1.', explanationRu: '"must" + V1.' },
+              { text: 'Choose the correct sentence:', options: ["You mustn't park here.", "You don't must park here."], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-2-l2',
+        order: 2,
+        title: '"Have to" — tashqi majburiyat',
+        titleRu: '"Have to" — внешняя необходимость',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"have to" — tashqi qoidalar yoki holatlar tufayli yuzaga kelgan majburiyatni bildiradi.',
+              ruleRu: '"have to" выражает необходимость, вызванную внешними правилами или обстоятельствами.',
+              example: 'I have to wear a uniform at work. (Ishda forma kiyishim kerak — qoida shunday.)',
+              exampleRu: 'I have to wear a uniform at work. (Я должен носить форму на работе — так требуют правила.)',
+            },
+            exercises: [
+              { text: "She ___ work on Saturdays; it's company policy.", options: ['has to', 'have to', 'having to'], correct: 0, explanation: '3-shaxs birlik: has to.', explanationRu: '3-е лицо ед. числа: has to.' },
+              { text: "I ___ finish this report by 5 PM; it's the deadline.", options: ['have to', 'has to', 'having to'], correct: 0, explanation: '"I" bilan: have to.', explanationRu: 'С "I": have to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '3-shaxs birlik (he/she/it) bilan "have to" — "has to" ga aylanadi.',
+              ruleRu: 'В 3-м лице ед. числа (he/she/it) "have to" превращается в "has to".',
+              example: 'He has to leave early today.',
+              exampleRu: 'He has to leave early today.',
+            },
+            exercises: [
+              { text: 'The doctor ___ see many patients every day.', options: ['has to', 'have to', 'had to'], correct: 0, explanation: '"He/She/It" bilan: has to.', explanationRu: 'С He/She/It: has to.' },
+              { text: 'Choose the correct sentence:', options: ['She has to wake up early.', 'She have to wake up early.'], correct: 0, explanation: '3-shaxs: has to.', explanationRu: '3-е лицо: has to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"don\'t/doesn\'t have to" — biror ish qilish shart emasligini bildiradi (ixtiyoriy), taqiq emas!',
+              ruleRu: '"don\'t/doesn\'t have to" означает, что делать что-то НЕ ОБЯЗАТЕЛЬНО (по желанию), это НЕ запрет!',
+              example: "You don't have to come if you're busy. (Kelishing shart emas.)",
+              exampleRu: "You don't have to come if you're busy. (Тебе необязательно приходить.)",
+            },
+            exercises: [
+              { text: 'You ___ pay for the tickets; they are free.', options: ["don't have to", 'must not', "mustn't"], correct: 0, explanation: 'Ixtiyoriy: don\'t have to.', explanationRu: 'Необязательно: don\'t have to.' },
+              { text: "He ___ come to the party; it's optional.", options: ["doesn't have to", "mustn't", "don't have to"], correct: 0, explanation: '3-shaxs inkori: doesn\'t have to.', explanationRu: 'Отрицание 3-го лица: doesn\'t have to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Savol: Do/Does + Subject + have to + V1?',
+              ruleRu: 'Вопрос: Do/Does + подлежащее + have to + V1?',
+              example: 'Do you have to work on Sundays? Does she have to wear a uniform?',
+              exampleRu: 'Do you have to work on Sundays? Does she have to wear a uniform?',
+            },
+            exercises: [
+              { text: '___ you have to finish this today?', options: ['Do', 'Does', 'Are'], correct: 0, explanation: 'Savol: Do + subject + have to?', explanationRu: 'Вопрос: Do + подлежащее + have to?' },
+              { text: '___ he have to wear a tie at work?', options: ['Does', 'Do', 'Is'], correct: 0, explanation: 'Savol: Does + subject + have to?', explanationRu: 'Вопрос: Does + подлежащее + have to?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"have to" haqida bilganlarimizni birlashtiramiz: have to / has to / don\'t have to / Do...have to?',
+              ruleRu: 'Обобщим всё о "have to": have to / has to / don\'t have to / Do...have to?',
+              example: "I have to work today, but you don't have to. Does she have to come too?",
+              exampleRu: "I have to work today, but you don't have to. Does she have to come too?",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['We have to check in before 10 AM.', 'We has to check in before 10 AM.'], correct: 0, explanation: '"We" bilan: have to.', explanationRu: 'С "We": have to.' },
+              { text: 'Choose the correct sentence:', options: ["She doesn't have to cook tonight.", "She don't have to cook tonight."], correct: 0, explanation: '3-shaxs inkori: doesn\'t have to.', explanationRu: 'Отрицание 3-го лица: doesn\'t have to.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-2-l3',
+        order: 3,
+        title: '"Must" vs "have to" — farqi',
+        titleRu: '"Must" vs "have to" — разница',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"must" — so\'zlovchining shaxsiy fikri/qarori; "have to" — tashqi qoida yoki boshqa birov tomonidan qo\'yilgan talab.',
+              ruleRu: '"must" — личное мнение/решение говорящего; "have to" — внешнее правило или требование, установленное кем-то другим.',
+              example: "I must call my mom (shaxsiy qaror). I have to wear a uniform (ish qoidasi).",
+              exampleRu: "I must call my mom (личное решение). I have to wear a uniform (правило работы).",
+            },
+            exercises: [
+              { text: "(Doctor's rule) Patients ___ take this medicine twice a day.", options: ['have to', 'must', "mustn't"], correct: 0, explanation: 'Tashqi qoida: have to.', explanationRu: 'Внешнее правило: have to.' },
+              { text: '(Personal feeling) I really ___ apologize to her; I feel terrible.', options: ['must', 'have to', 'has to'], correct: 0, explanation: 'Shaxsiy qaror: must.', explanationRu: 'Личное решение: must.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'O\'tgan zamonda "must" ishlatilmaydi, faqat "had to" ishlatiladi.',
+              ruleRu: 'В прошедшем времени "must" не используется, используется только "had to".',
+              example: "Yesterday, I had to work late. (must emas!)",
+              exampleRu: "Yesterday, I had to work late. (не must!)",
+            },
+            exercises: [
+              { text: 'Last week, she ___ finish the project alone.', options: ['had to', 'must', 'musted'], correct: 0, explanation: 'O\'tgan zamon: had to.', explanationRu: 'Прошедшее время: had to.' },
+              { text: 'Choose the correct sentence:', options: ['We had to leave early yesterday.', 'We must leave early yesterday.'], correct: 0, explanation: 'O\'tgan zamon: had to.', explanationRu: 'Прошедшее время: had to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kelasi zamonda "must" o\'rniga "will have to" ishlatiladi.',
+              ruleRu: 'В будущем времени вместо "must" используется "will have to".',
+              example: "Next year, we will have to move to a new office.",
+              exampleRu: "Next year, we will have to move to a new office.",
+            },
+            exercises: [
+              { text: 'Next month, they ___ find a new apartment.', options: ['will have to', 'must', 'has to'], correct: 0, explanation: 'Kelasi zamon: will have to.', explanationRu: 'Будущее время: will have to.' },
+              { text: 'Choose the correct sentence:', options: ['You will have to show your passport.', 'You will must show your passport.'], correct: 0, explanation: '"must" kelasi zamonda ishlatilmaydi.', explanationRu: '"must" не используется в будущем времени.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must" va "have to" ni kontekstga qarab farqlashni mustahkamlaymiz.',
+              ruleRu: 'Закрепим различение "must" и "have to" по контексту.',
+              example: "The sign says visitors must sign in. Employees have to wear badges.",
+              exampleRu: "The sign says visitors must sign in. Employees have to wear badges.",
+            },
+            exercises: [
+              { text: '(Company rule) All staff ___ clock in by 9 AM.', options: ['have to', 'must', "mustn't"], correct: 0, explanation: 'Qoida: have to.', explanationRu: 'Правило: have to.' },
+              { text: "(Speaker's own decision) I ___ start eating healthier; I promised myself.", options: ['must', 'have to', 'has to'], correct: 0, explanation: 'Shaxsiy qaror: must.', explanationRu: 'Личное решение: must.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must" va "have to" farqini yakunlaymiz: hozirgi — ikkalasi ham, o\'tgan/kelasi — faqat have to shakllari.',
+              ruleRu: 'Закрепим разницу: в настоящем — обе формы, в прошлом/будущем — только формы have to.',
+              example: "I must go now. Yesterday I had to go early. Tomorrow I will have to go again.",
+              exampleRu: "I must go now. Yesterday I had to go early. Tomorrow I will have to go again.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['Last year, I had to travel a lot for work.', 'Last year, I must travel a lot for work.'], correct: 0, explanation: 'O\'tgan zamon: had to.', explanationRu: 'Прошедшее время: had to.' },
+              { text: 'Choose the correct sentence:', options: ['Tomorrow, we will have to wake up early.', 'Tomorrow, we must to wake up early.'], correct: 0, explanation: 'Kelasi zamon: will have to.', explanationRu: 'Будущее время: will have to.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-2-l4',
+        order: 4,
+        title: '"Mustn\'t" vs "don\'t have to"',
+        titleRu: '"Mustn\'t" vs "don\'t have to"',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'MUHIM FARQ! "mustn\'t" — TAQIQ ("qilish mumkin emas"). "don\'t have to" — IXTIYORIY ("qilish shart emas, lekin mumkin").',
+              ruleRu: 'ВАЖНОЕ РАЗЛИЧИЕ! "mustn\'t" — ЗАПРЕТ ("нельзя"). "don\'t have to" — НЕОБЯЗАТЕЛЬНО ("не нужно, но можно").',
+              example: "You mustn't smoke here (taqiq). You don't have to smoke if you don't want to (ixtiyoriy).",
+              exampleRu: "You mustn't smoke here (запрет). You don't have to come if you don't want to (необязательно).",
+            },
+            exercises: [
+              { text: '(No parking allowed) You ___ park here.', options: ["mustn't", "don't have to", "doesn't have to"], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+              { text: "(Optional, free choice) You ___ wear a uniform; it's up to you.", options: ["don't have to", "mustn't", 'must not to'], correct: 0, explanation: 'Ixtiyoriy: don\'t have to.', explanationRu: 'Необязательно: don\'t have to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Har bir holatda "mustn\'t" (taqiq) yoki "don\'t have to" (ixtiyoriy) ekanini kontekstdan aniqlaymiz.',
+              ruleRu: 'Определяем по контексту, "mustn\'t" (запрет) это или "don\'t have to" (необязательно).',
+              example: "Passengers mustn't smoke on the plane. Passengers don't have to bring their own food (it's provided).",
+              exampleRu: "Passengers mustn't smoke on the plane. Passengers don't have to bring their own food (it's provided).",
+            },
+            exercises: [
+              { text: '(It is provided for free) You ___ bring your own lunch.', options: ["don't have to", "mustn't", "doesn't have to"], correct: 0, explanation: 'Ixtiyoriy: don\'t have to.', explanationRu: 'Необязательно: don\'t have to.' },
+              { text: '(Strictly forbidden) You ___ use your phone during the exam.', options: ["mustn't", "don't have to", 'not must'], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '3-shaxs birlik bilan ixtiyoriylik: doesn\'t have to.',
+              ruleRu: 'Необязательность в 3-м лице ед. числа: doesn\'t have to.',
+              example: "She doesn't have to attend if she's busy.",
+              exampleRu: "She doesn't have to attend if she's busy.",
+            },
+            exercises: [
+              { text: 'He ___ finish it today; the deadline is next week.', options: ["doesn't have to", "mustn't", "don't have to"], correct: 0, explanation: '3-shaxs: doesn\'t have to.', explanationRu: '3-е лицо: doesn\'t have to.' },
+              { text: 'Choose the correct sentence:', options: ["She doesn't have to pay; it's free.", "She mustn't pay; it's free."], correct: 0, explanation: 'Ixtiyoriy: doesn\'t have to.', explanationRu: 'Необязательно: doesn\'t have to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Mustn\'t va don\'t/doesn\'t have to ni aralash matnlarda qo\'llash.',
+              ruleRu: 'Применение mustn\'t и don\'t/doesn\'t have to в смешанных текстах.',
+              example: "You mustn't be late. You don't have to bring a gift, but you can if you want.",
+              exampleRu: "You mustn't be late. You don't have to bring a gift, but you can if you want.",
+            },
+            exercises: [
+              { text: '(Rule: strictly forbidden) Visitors ___ touch the paintings.', options: ["mustn't", "don't have to"], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+              { text: "(No obligation) We ___ decide today; we have until Friday.", options: ["don't have to", "mustn't"], correct: 0, explanation: 'Ixtiyoriy: don\'t have to.', explanationRu: 'Необязательно: don\'t have to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Eng ko\'p uchraydigan xato: "mustn\'t" va "don\'t have to" ni bir-biriga aralashtirib yubormaslik.',
+              ruleRu: 'Самая частая ошибка: не путать "mustn\'t" и "don\'t have to".',
+              example: "You mustn't cheat (taqiq). You don't have to answer every question (ixtiyoriy).",
+              exampleRu: "You mustn't cheat (запрет). You don't have to answer every question (необязательно).",
+            },
+            exercises: [
+              { text: 'Choose the correct meaning of "mustn\'t":', options: ['Taqiqlangan', 'Ixtiyoriy', 'Maslahat'], correct: 0, explanation: '"mustn\'t" = taqiq.', explanationRu: '"mustn\'t" = запрет.' },
+              { text: 'Choose the correct meaning of "don\'t have to":', options: ['Ixtiyoriy', 'Taqiqlangan', 'Maslahat'], correct: 0, explanation: '"don\'t have to" = ixtiyoriy.', explanationRu: '"don\'t have to" = необязательно.' },
+              { text: 'Choose the correct sentence:', options: ["You mustn't run near the pool; it's dangerous.", "You don't have to run near the pool; it's dangerous."], correct: 0, explanation: 'Xavfli — taqiq: mustn\'t.', explanationRu: 'Опасно — запрет: mustn\'t.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-2-l5',
+        order: 5,
+        title: '"Should"/"Shouldn\'t" — maslahat',
+        titleRu: '"Should"/"Shouldn\'t" — совет',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"should" — maslahat berish yoki tavsiya qilish uchun ishlatiladi ("qilgan ma\'qul").',
+              ruleRu: '"should" используется для совета или рекомендации ("стоило бы").',
+              example: 'You should see a doctor. (Shifokorga borganing ma\'qul.)',
+              exampleRu: 'You should see a doctor. (Тебе стоит сходить к врачу.)',
+            },
+            exercises: [
+              { text: 'You look tired. You ___ get some rest.', options: ['should', 'shoulds', 'should to'], correct: 0, explanation: 'Maslahat: should.', explanationRu: 'Совет: should.' },
+              { text: '"Ko\'proq suv ichgan ma\'qul" iborasini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "тебе стоит пить больше воды" по-английски?', options: ['You should drink more water', 'You should to drink more water', 'You shoulds drink more water'], correct: 0, explanation: '"should" + bosh fe\'l.', explanationRu: '"should" + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"shouldn\'t" — biror ishni qilmaslikni maslahat beradi.',
+              ruleRu: '"shouldn\'t" советует не делать что-либо.',
+              example: "You shouldn't eat so much sugar.",
+              exampleRu: "You shouldn't eat so much sugar.",
+            },
+            exercises: [
+              { text: "You ___ stay up so late; you have an early meeting.", options: ["shouldn't", "don't should", 'not should'], correct: 0, explanation: 'Salbiy maslahat: shouldn\'t.', explanationRu: 'Отрицательный совет: shouldn\'t.' },
+              { text: 'Choose the correct sentence:', options: ["He shouldn't smoke; it's bad for his health.", "He should not to smoke; it's bad for his health."], correct: 0, explanation: '"shouldn\'t" + bosh fe\'l.', explanationRu: '"shouldn\'t" + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Maslahat so\'rash: Should + Subject + V1?',
+              ruleRu: 'Просьба совета: Should + подлежащее + V1?',
+              example: 'Should I tell her the truth?',
+              exampleRu: 'Should I tell her the truth?',
+            },
+            exercises: [
+              { text: '___ I take an umbrella? It looks like rain.', options: ['Should', 'Must', 'Am'], correct: 0, explanation: 'Maslahat so\'rash: Should I...?', explanationRu: 'Просьба совета: Should I...?' },
+              { text: 'Choose the correct question:', options: ['What should I do?', 'What I should do?'], correct: 0, explanation: 'Wh-savol: What should + subject + V1?', explanationRu: 'Wh-вопрос: What should + подлежащее + V1?' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"should have + V3" — o\'tmishda qilinishi kerak bo\'lgan, lekin qilinmagan ish haqida afsus bildiradi.',
+              ruleRu: '"should have + V3" выражает сожаление о том, что нужно было сделать в прошлом, но не сделали.',
+              example: "I should have studied harder. (O'qishim kerak edi, lekin o'qimadim.)",
+              exampleRu: "I should have studied harder. (Мне следовало больше учиться, но я не учился.)",
+            },
+            exercises: [
+              { text: 'He failed the test. He ___ studied more.', options: ['should have', 'should', 'shoulds have'], correct: 0, explanation: 'Afsus: should have + V3.', explanationRu: 'Сожаление: should have + V3.' },
+              { text: 'Choose the correct sentence:', options: ["I should have called you earlier.", "I should have call you earlier."], correct: 0, explanation: 'should have + V3 (called).', explanationRu: 'should have + V3 (called).' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"should" bo\'yicha bilganlarimizni birlashtiramiz: should / shouldn\'t / Should...? / should have + V3.',
+              ruleRu: 'Обобщим всё о "should": should / shouldn\'t / Should...? / should have + V3.',
+              example: "You should rest. You shouldn't worry. Should I call her? I should have told her sooner.",
+              exampleRu: "You should rest. You shouldn't worry. Should I call her? I should have told her sooner.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['You should apologize to her.', 'You should apologizing to her.'], correct: 0, explanation: 'should + V1.', explanationRu: 'should + V1.' },
+              { text: 'Choose the correct sentence:', options: ["We shouldn't waste food.", "We don't should waste food."], correct: 0, explanation: 'Salbiy maslahat: shouldn\'t.', explanationRu: 'Отрицательный совет: shouldn\'t.' },
+              { text: 'Choose the correct sentence:', options: ["I should have listened to my parents.", "I should listened to my parents."], correct: 0, explanation: 'Afsus: should have + V3.', explanationRu: 'Сожаление: should have + V3.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-2-l6',
+        order: 6,
+        title: 'Barchasini birlashtirish',
+        titleRu: 'Обобщение всего раздела',
+        icon: '6️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"must" — kuchli majburiyat; "should" — shunchaki maslahat/tavsiya (kuchsizroq).',
+              ruleRu: '"must" — сильная необходимость; "should" — просто совет/рекомендация (слабее).',
+              example: "You must wear a seatbelt (qonun). You should eat more vegetables (maslahat).",
+              exampleRu: "You must wear a seatbelt (закон). You should eat more vegetables (совет).",
+            },
+            exercises: [
+              { text: '(Legal requirement) Drivers ___ stop at a red light.', options: ['must', 'should', 'has to'], correct: 0, explanation: 'Qat\'iy qoida: must.', explanationRu: 'Строгое правило: must.' },
+              { text: '(Just friendly advice) You ___ try the new restaurant downtown.', options: ['should', 'must', 'have to'], correct: 0, explanation: 'Yumshoq maslahat: should.', explanationRu: 'Мягкий совет: should.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kuch darajasi bo\'yicha: must/have to (majburiy) > should (tavsiya) > don\'t have to (ixtiyoriy) > mustn\'t (taqiq).',
+              ruleRu: 'По силе: must/have to (обязательно) > should (совет) > don\'t have to (необязательно) > mustn\'t (запрет).',
+              example: "You must have a visa. You should book early. You don't have to pay now. You mustn't forget your passport.",
+              exampleRu: "You must have a visa. You should book early. You don't have to pay now. You mustn't forget your passport.",
+            },
+            exercises: [
+              { text: '(Absolutely required for entry) You ___ have a valid passport.', options: ['must', 'should', "don't have to"], correct: 0, explanation: 'Majburiy: must.', explanationRu: 'Обязательно: must.' },
+              { text: '(Just a suggestion) You ___ arrive a bit early to get good seats.', options: ['should', 'must', "mustn't"], correct: 0, explanation: 'Tavsiya: should.', explanationRu: 'Рекомендация: should.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha inkor shakllarini farqlaymiz: mustn\'t (taqiq), don\'t/doesn\'t have to (ixtiyoriy), shouldn\'t (salbiy maslahat).',
+              ruleRu: 'Различаем все отрицательные формы: mustn\'t (запрет), don\'t/doesn\'t have to (необязательно), shouldn\'t (отрицательный совет).',
+              example: "You mustn't lie. You don't have to answer. You shouldn't shout.",
+              exampleRu: "You mustn't lie. You don't have to answer. You shouldn't shout.",
+            },
+            exercises: [
+              { text: '(Forbidden) You ___ enter this room.', options: ["mustn't", "don't have to", "shouldn't"], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+              { text: "(Just advice, not a rule) You ___ stay out so late; it's not good for you.", options: ["shouldn't", "mustn't", "don't have to"], correct: 0, explanation: 'Salbiy maslahat: shouldn\'t.', explanationRu: 'Отрицательный совет: shouldn\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha majburiyat/maslahat modallarini real vaziyatlarda qo\'llash.',
+              ruleRu: 'Применение всех модальных глаголов необходимости/совета в реальных ситуациях.',
+              example: "Passengers must fasten their seatbelts. They don't have to stay awake. They shouldn't leave their seats during landing.",
+              exampleRu: "Passengers must fasten their seatbelts. They don't have to stay awake. They shouldn't leave their seats during landing.",
+            },
+            exercises: [
+              { text: '(Airline rule) Passengers ___ turn off their phones during takeoff.', options: ['must', 'should', "don't have to"], correct: 0, explanation: 'Qat\'iy qoida: must.', explanationRu: 'Строгое правило: must.' },
+              { text: "(Optional) Passengers ___ order a meal in advance; it's available on board too.", options: ["don't have to", "mustn't", "shouldn't"], correct: 0, explanation: 'Ixtiyoriy: don\'t have to.', explanationRu: 'Необязательно: don\'t have to.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bo\'lim bo\'yicha barcha qoidalarning yakuniy sinovi.',
+              ruleRu: 'Итоговое обобщение всех правил раздела.',
+              example: "You must have a ticket. You don't have to print it. You shouldn't lose it. You mustn't share it.",
+              exampleRu: "You must have a ticket. You don't have to print it. You shouldn't lose it. You mustn't share it.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She has to submit the form by Friday.', 'She must to submit the form by Friday.'], correct: 0, explanation: 'Tashqi talab: has to.', explanationRu: 'Внешнее требование: has to.' },
+              { text: 'Choose the correct sentence:', options: ["You mustn't share your password with anyone.", "You don't have to share your password with anyone."], correct: 0, explanation: 'Taqiq (xavfsizlik uchun): mustn\'t.', explanationRu: 'Запрет (для безопасности): mustn\'t.' },
+              { text: 'Choose the correct sentence:', options: ['You should back up your files regularly.', 'You should backing up your files regularly.'], correct: 0, explanation: 'Maslahat: should + V1.', explanationRu: 'Совет: should + V1.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Modal fe'llar 2 (Majburiyat va maslahat)",
+      titleRu: 'Тест раздела: Модальные глаголы 2 (Обязанность и совет)',
+      exercises: [
+        { text: 'I ___ finish this today; I promised.', options: ['must', 'have to', 'should'], correct: 0, explanation: 'Shaxsiy qaror: must.', explanationRu: 'Личное решение: must.' },
+        { text: '(Company policy) Employees ___ wear a badge.', options: ['have to', 'must', 'should'], correct: 0, explanation: 'Tashqi qoida: have to.', explanationRu: 'Внешнее правило: have to.' },
+        { text: "You ___ touch that; it's dangerous.", options: ["mustn't", "don't have to"], correct: 0, explanation: 'Taqiq: mustn\'t.', explanationRu: 'Запрет: mustn\'t.' },
+        { text: 'You ___ pay; the tickets are free.', options: ["don't have to", "mustn't"], correct: 0, explanation: 'Ixtiyoriy: don\'t have to.', explanationRu: 'Необязательно: don\'t have to.' },
+        { text: 'Last week, she ___ finish the project alone.', options: ['had to', 'must'], correct: 0, explanation: 'O\'tgan zamon: had to.', explanationRu: 'Прошедшее время: had to.' },
+        { text: 'Next month, they ___ find a new apartment.', options: ['will have to', 'must'], correct: 0, explanation: 'Kelasi zamon: will have to.', explanationRu: 'Будущее время: will have to.' },
+        { text: 'You look tired. You ___ get some rest.', options: ['should', 'must'], correct: 0, explanation: 'Maslahat: should.', explanationRu: 'Совет: should.' },
+        { text: "You ___ eat so much sugar; it's not healthy.", options: ["shouldn't", "mustn't"], correct: 0, explanation: 'Salbiy maslahat: shouldn\'t.', explanationRu: 'Отрицательный совет: shouldn\'t.' },
+        { text: '___ I take an umbrella?', options: ['Should', 'Must'], correct: 0, explanation: 'Maslahat so\'rash: Should I...?', explanationRu: 'Просьба совета: Should I...?' },
+        { text: 'He failed the test. He ___ studied more.', options: ['should have', 'should'], correct: 0, explanation: 'Afsus: should have + V3.', explanationRu: 'Сожаление: should have + V3.' },
+        { text: 'The doctor ___ see many patients every day.', options: ['has to', 'have to'], correct: 0, explanation: '3-shaxs: has to.', explanationRu: '3-е лицо: has to.' },
+        { text: '___ he have to wear a tie at work?', options: ['Does', 'Do'], correct: 0, explanation: 'Savol: Does + subject + have to?', explanationRu: 'Вопрос: Does + подлежащее + have to?' },
+        { text: '(Absolutely required) Drivers ___ stop at a red light.', options: ['must', 'should'], correct: 0, explanation: 'Qat\'iy qoida: must.', explanationRu: 'Строгое правило: must.' },
+        { text: 'Choose the correct sentence:', options: ["You mustn't share your password.", "You don't have to share your password."], correct: 0, explanation: 'Taqiq (xavfsizlik): mustn\'t.', explanationRu: 'Запрет (безопасность): mustn\'t.' },
+        { text: 'Choose the correct sentence:', options: ['You should back up your files regularly.', 'You should backing up your files regularly.'], correct: 0, explanation: 'Maslahat: should + V1.', explanationRu: 'Совет: should + V1.' },
+        { text: 'Choose the correct sentence:', options: ["She doesn't have to cook tonight.", "She don't have to cook tonight."], correct: 0, explanation: '3-shaxs inkori: doesn\'t have to.', explanationRu: 'Отрицание 3-го лица: doesn\'t have to.' },
+      ],
+    },
+  },
+  {
+    id: 'sec-modals-3',
+    order: 20,
+    title: "Modal fe'llar 3: Ehtimollik va xulosa",
+    titleRu: 'Модальные глаголы 3: Вероятность и вывод',
+    icon: '🔮',
+    lessons: [
+      {
+        id: 'sec-modals-3-l1',
+        order: 1,
+        title: '"May/Might" — ehtimollik',
+        titleRu: '"May/Might" — вероятность',
+        icon: '1️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"may" — biror narsa mumkinligini bildiradi (o\'rtacha ishonch bilan ehtimollik).',
+              ruleRu: '"may" выражает вероятность чего-либо (со средней степенью уверенности).',
+              example: "It may rain later. (Keyinroq yomg'ir yog'ishi mumkin.)",
+              exampleRu: 'It may rain later. (Позже, возможно, пойдёт дождь.)',
+            },
+            exercises: [
+              { text: "She ___ be at home; I'm not fully sure.", options: ['may', 'musts', 'cans'], correct: 0, explanation: 'Ehtimollik: may.', explanationRu: 'Вероятность: may.' },
+              { text: '"Yomg\'ir yog\'ishi mumkin" iborasini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "возможно, пойдёт дождь" по-английски?', options: ['It may rain', 'It mays rain', 'It is may rain'], correct: 0, explanation: '"may" -s olmaydi.', explanationRu: '"may" не принимает -s.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"might" — "may" bilan deyarli bir xil, biroz kamroq ishonch bilan ehtimollikni bildiradi.',
+              ruleRu: '"might" почти совпадает по значению с "may", но выражает чуть меньшую уверенность.',
+              example: "He might come to the party, but I'm not sure.",
+              exampleRu: "He might come to the party, but I'm not sure.",
+            },
+            exercises: [
+              { text: "I'm not certain, but we ___ go to the beach this weekend.", options: ['might', 'musts', 'cans'], correct: 0, explanation: 'Noaniq ehtimollik: might.', explanationRu: 'Неуверенное предположение: might.' },
+              { text: 'Choose the correct sentence:', options: ['She might be busy right now.', 'She mights be busy right now.'], correct: 0, explanation: '"might" -s olmaydi.', explanationRu: '"might" не принимает -s.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Inkor: "may not" / "might not" — bular odatda qisqartirilmaydi.',
+              ruleRu: 'Отрицание: "may not" / "might not" — обычно не сокращаются.',
+              example: 'It may not rain today. She might not come.',
+              exampleRu: 'It may not rain today. She might not come.',
+            },
+            exercises: [
+              { text: "He ___ be home; his car is gone.", options: ['might not', "mightn't", "might don't"], correct: 0, explanation: 'Inkor: might not.', explanationRu: 'Отрицание: might not.' },
+              { text: 'Choose the correct sentence:', options: ['They may not know about the change.', "They mayn't know about the change."], correct: 0, explanation: '"may not" qisqarmaydi.', explanationRu: '"may not" не сокращается.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"may/might" ko\'pincha "perhaps", "maybe" so\'zlari bilan bir xil ma\'noni beradi.',
+              ruleRu: '"may/might" часто выражают тот же смысл, что и слова "perhaps", "maybe".',
+              example: 'Maybe she is tired. = She may be tired.',
+              exampleRu: 'Maybe she is tired. = She may be tired.',
+            },
+            exercises: [
+              { text: '"Balki u charchagandir" gapini "may" bilan qanday aytamiz?', textRu: 'Как сказать "возможно, она устала" с помощью "may"?', options: ['She may be tired', 'She may is tired', 'She mays be tired'], correct: 0, explanation: 'may + bosh fe\'l.', explanationRu: 'may + начальная форма глагола.' },
+              { text: 'Choose the correct sentence:', options: ['They might be at the office now.', 'They might being at the office now.'], correct: 0, explanation: 'might + bosh fe\'l.', explanationRu: 'might + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"may" va "might" qoidalarini birlashtiramiz.',
+              ruleRu: 'Обобщим правила "may" и "might".',
+              example: 'It may rain. She might be late. They may not come.',
+              exampleRu: 'It may rain. She might be late. They may not come.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['He may be at work.', 'He may being at work.'], correct: 0, explanation: 'may + bosh fe\'l.', explanationRu: 'may + начальная форма глагола.' },
+              { text: 'Choose the correct sentence:', options: ["I might not be free tomorrow.", "I mightn't not be free tomorrow."], correct: 0, explanation: 'Inkor: might not.', explanationRu: 'Отрицание: might not.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-3-l2',
+        order: 2,
+        title: '"Could" — ehtimollik',
+        titleRu: '"Could" — вероятность',
+        icon: '2️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"could" ham ehtimollikni bildiradi, "may/might" bilan deyarli bir xil.',
+              ruleRu: '"could" тоже выражает вероятность, почти как "may/might".',
+              example: "That could be true. (Bu haqiqat bo'lishi mumkin.)",
+              exampleRu: 'That could be true. (Это может быть правдой.)',
+            },
+            exercises: [
+              { text: "This restaurant ___ be good; I've heard great things.", options: ['could', 'coulds', 'can'], correct: 0, explanation: 'Ehtimollik: could.', explanationRu: 'Вероятность: could.' },
+              { text: '"Bu to\'g\'ri bo\'lishi mumkin" iborasini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "это может быть правдой" по-английски?', options: ['That could be true', 'That coulds be true', 'That is could true'], correct: 0, explanation: 'could + bosh fe\'l.', explanationRu: 'could + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"could" o\'z fikringiz noaniq ekanini bildirish uchun ham ishlatiladi.',
+              ruleRu: '"could" также используется, чтобы показать неуверенность в собственном мнении.',
+              example: 'I could be wrong, but I think the shop is closed.',
+              exampleRu: 'I could be wrong, but I think the shop is closed.',
+            },
+            exercises: [
+              { text: 'I ___ be mistaken, but I think we met before.', options: ['could', 'musts', 'cans'], correct: 0, explanation: 'O\'z fikri haqida noaniqlik: could.', explanationRu: 'Неуверенность в своём мнении: could.' },
+              { text: 'Choose the correct sentence:', options: ['I could be wrong about this.', 'I could being wrong about this.'], correct: 0, explanation: 'could + bosh fe\'l.', explanationRu: 'could + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'DIQQAT! "could" ikki xil ma\'noda: (1) o\'tmishdagi qobiliyat (oldingi bo\'limda o\'rgangan), (2) hozirgi ehtimollik (bu yerda).',
+              ruleRu: 'ВНИМАНИЕ! "could" имеет два значения: (1) способность в прошлом (из предыдущего раздела), (2) вероятность в настоящем (здесь).',
+              example: "I could swim at five (qobiliyat). This could be true (ehtimollik).",
+              exampleRu: 'I could swim at five (способность). This could be true (вероятность).',
+            },
+            exercises: [
+              { text: '"She could be at home now" gapida "could" nimani bildiradi?', textRu: 'Что означает "could" в предложении "She could be at home now"?', options: ['Ehtimollik', "O'tmishdagi qobiliyat", 'Taklif'], correct: 0, explanation: 'Hozirgi ehtimollik: could.', explanationRu: 'Вероятность в настоящем: could.' },
+              { text: '"I could swim when I was five" gapida "could" nimani bildiradi?', textRu: 'Что означает "could" в предложении "I could swim when I was five"?', options: ["O'tmishdagi qobiliyat", 'Ehtimollik', 'Taklif'], correct: 0, explanation: 'O\'tmishdagi qobiliyat: could.', explanationRu: 'Способность в прошлом: could.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"could be + V-ing" — hozir davom etayotgan harakat haqidagi ehtimollikni bildiradi.',
+              ruleRu: '"could be + V-ing" выражает вероятность о действии, происходящем прямо сейчас.',
+              example: 'She could be sleeping right now.',
+              exampleRu: 'She could be sleeping right now.',
+            },
+            exercises: [
+              { text: "He isn't answering; he ___ sleeping.", options: ['could be', 'could', 'coulds be'], correct: 0, explanation: 'Davomiy ehtimollik: could be + V-ing.', explanationRu: 'Вероятность о длящемся действии: could be + V-ing.' },
+              { text: 'Choose the correct sentence:', options: ['They could be waiting outside.', 'They could waiting outside.'], correct: 0, explanation: '"could be" + V-ing.', explanationRu: '"could be" + V-ing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"could" ehtimollik ma\'nosini birlashtiramiz.',
+              ruleRu: 'Обобщим значение вероятности у "could".',
+              example: 'That could be true. I could be wrong. She could be working late.',
+              exampleRu: 'That could be true. I could be wrong. She could be working late.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['This could be a mistake.', 'This could being a mistake.'], correct: 0, explanation: 'could + bosh fe\'l.', explanationRu: 'could + начальная форма глагола.' },
+              { text: 'Choose the correct sentence:', options: ['He could be traveling for work.', 'He could traveling for work.'], correct: 0, explanation: '"could be" + V-ing.', explanationRu: '"could be" + V-ing.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-3-l3',
+        order: 3,
+        title: '"Must be" — kuchli ijobiy xulosa',
+        titleRu: '"Must be" — уверенный положительный вывод',
+        icon: '3️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"must be" — mavjud dalillarga asoslanib, kuchli ishonch bilan xulosa chiqarish uchun ishlatiladi.',
+              ruleRu: '"must be" используется для уверенного вывода на основе имеющихся доказательств.',
+              example: 'The lights are on — she must be home. (U albatta uyda.)',
+              exampleRu: 'The lights are on — she must be home. (Она точно дома.)',
+            },
+            exercises: [
+              { text: "He's wearing a chef's hat — he ___ be a cook.", options: ['must', 'musts', 'can'], correct: 0, explanation: 'Kuchli xulosa: must be.', explanationRu: 'Уверенный вывод: must be.' },
+              { text: '"U albatta charchagandir" gapini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "она наверняка устала" по-английски?', options: ['She must be tired', 'She musts be tired', 'She is must tired'], correct: 0, explanation: 'must + bosh fe\'l.', explanationRu: 'must + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must be + V-ing" — hozir davom etayotgan harakat haqida kuchli xulosa.',
+              ruleRu: '"must be + V-ing" — уверенный вывод о действии, происходящем прямо сейчас.',
+              example: 'The kitchen smells great — someone must be cooking.',
+              exampleRu: 'The kitchen smells great — someone must be cooking.',
+            },
+            exercises: [
+              { text: "The music is so loud — they ___ having a party.", options: ['must be', 'must', 'musts be'], correct: 0, explanation: 'Davomiy xulosa: must be + V-ing.', explanationRu: 'Вывод о длящемся действии: must be + V-ing.' },
+              { text: 'Choose the correct sentence:', options: ['She must be studying for the exam.', 'She must studying for the exam.'], correct: 0, explanation: '"must be" + V-ing.', explanationRu: '"must be" + V-ing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must be" eng kuchli ishonchni bildiradi; "may/might/could be" — o\'rtacha yoki kamroq ishonch.',
+              ruleRu: '"must be" выражает наивысшую степень уверенности; "may/might/could be" — среднюю или меньшую.',
+              example: "She must be home (aniq dalil bor). She might be home (aniq emas).",
+              exampleRu: 'She must be home (есть чёткое доказательство). She might be home (неточно).',
+            },
+            exercises: [
+              { text: '(Strong evidence: his car is here, lights on) He ___ be home.', options: ['must', 'might', 'could'], correct: 0, explanation: 'Aniq dalil: must.', explanationRu: 'Чёткое доказательство: must.' },
+              { text: "(No real evidence, just a guess) She ___ be at the gym; I'm not sure.", options: ['might', 'must', 'can'], correct: 0, explanation: 'Aniq dalilsiz taxmin: might.', explanationRu: 'Предположение без чётких доказательств: might.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must be" barcha egalar bilan bir xil shaklda ishlatiladi.',
+              ruleRu: '"must be" используется в одной и той же форме со всеми подлежащими.',
+              example: 'They must be tired. It must be expensive.',
+              exampleRu: 'They must be tired. It must be expensive.',
+            },
+            exercises: [
+              { text: "This bag is so heavy — it ___ be full of books.", options: ['must', 'musts', 'is must'], correct: 0, explanation: 'must + bosh fe\'l (be).', explanationRu: 'must + начальная форма глагола (be).' },
+              { text: 'Choose the correct sentence:', options: ['They must be exhausted after the trip.', 'They must being exhausted after the trip.'], correct: 0, explanation: 'must + bosh fe\'l.', explanationRu: 'must + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must be" haqida bilganlarimizni birlashtiramiz.',
+              ruleRu: 'Обобщим всё о "must be".',
+              example: 'He must be tired. She must be working. It must be true.',
+              exampleRu: 'He must be tired. She must be working. It must be true.',
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['This must be the right address.', 'This must the right address.'], correct: 0, explanation: 'must + be.', explanationRu: 'must + be.' },
+              { text: 'Choose the correct sentence:', options: ['He must be waiting for us outside.', 'He must waiting for us outside.'], correct: 0, explanation: '"must be" + V-ing.', explanationRu: '"must be" + V-ing.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-3-l4',
+        order: 4,
+        title: '"Can\'t be" — kuchli salbiy xulosa',
+        titleRu: '"Can\'t be" — уверенный отрицательный вывод',
+        icon: '4️⃣',
+        units: [
+          {
+            teach: {
+              rule: '"can\'t be" — biror narsa mumkin emasligiga qattiq ishonch bilan xulosa chiqarish uchun ishlatiladi.',
+              ruleRu: '"can\'t be" используется для уверенного отрицательного вывода ("этого не может быть").',
+              example: "That can't be true! (Bu haqiqat bo'lishi mumkin emas!)",
+              exampleRu: "That can't be true! (Это не может быть правдой!)",
+            },
+            exercises: [
+              { text: "He said he finished in five minutes — that ___ be true.", options: ["can't", 'musts', 'mights'], correct: 0, explanation: 'Kuchli salbiy xulosa: can\'t be.', explanationRu: 'Уверенный отрицательный вывод: can\'t be.' },
+              { text: '"Bu u bo\'lishi mumkin emas" gapini ingliz tilida qanday aytamiz?', textRu: 'Как сказать "это не может быть он" по-английски?', options: ["That can't be him", "That cant be him", "That is can't him"], correct: 0, explanation: 'can\'t + bosh fe\'l.', explanationRu: 'can\'t + начальная форма глагола.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"can\'t be + V-ing" — hozir sodir bo\'layotgan deb aytilgan narsaning mumkin emasligini bildiradi.',
+              ruleRu: '"can\'t be + V-ing" выражает невозможность того, что якобы происходит сейчас.',
+              example: "She can't be sleeping; I just saw her outside.",
+              exampleRu: "She can't be sleeping; I just saw her outside.",
+            },
+            exercises: [
+              { text: 'He ___ be joking — he never jokes about serious things.', options: ["can't be", "can't", 'musts be'], correct: 0, explanation: '"can\'t be" + V-ing.', explanationRu: '"can\'t be" + V-ing.' },
+              { text: 'Choose the correct sentence:', options: ["They can't be waiting outside; it's freezing!", "They can't waiting outside; it's freezing!"], correct: 0, explanation: '"can\'t be" + V-ing.', explanationRu: '"can\'t be" + V-ing.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"must be" (ijobiy xulosa) va "can\'t be" (salbiy xulosa) bir-biriga qarama-qarshi.',
+              ruleRu: '"must be" (положительный вывод) и "can\'t be" (отрицательный вывод) противоположны друг другу.',
+              example: "She must be tired (ijobiy). This can't be right (salbiy).",
+              exampleRu: "She must be tired (положительный). This can't be right (отрицательный).",
+            },
+            exercises: [
+              { text: "(Certain it is NOT possible) That price ___ be correct — it's way too low.", options: ["can't", 'must', 'might'], correct: 0, explanation: 'Salbiy xulosa: can\'t.', explanationRu: 'Отрицательный вывод: can\'t.' },
+              { text: '(Certain it IS the case) The door is locked — she ___ be inside.', options: ['must', "can't", 'might'], correct: 0, explanation: 'Ijobiy xulosa: must.', explanationRu: 'Положительный вывод: must.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha ishonch darajalarini farqlaymiz: must (100% ijobiy), may/might/could (ehtimollik), can\'t (100% salbiy).',
+              ruleRu: 'Различаем все степени уверенности: must (100% положительный), may/might/could (вероятность), can\'t (100% отрицательный).',
+              example: "He must be right (aniq). He might be right (noaniq). He can't be right (aniq emas).",
+              exampleRu: "He must be right (точно). He might be right (не совсем ясно). He can't be right (точно не так).",
+            },
+            exercises: [
+              { text: "(No doubt at all, impossible otherwise) She ___ be the manager; her name is on the door.", options: ['must', 'might', "can't"], correct: 0, explanation: 'Aniq xulosa: must.', explanationRu: 'Уверенный вывод: must.' },
+              { text: '(No doubt it is impossible) He ___ be at work; I just saw him at the beach.', options: ["can't", 'must', 'might'], correct: 0, explanation: 'Mumkin emas: can\'t.', explanationRu: 'Невозможно: can\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: '"can\'t be" haqida bilganlarimizni birlashtiramiz.',
+              ruleRu: 'Обобщим всё о "can\'t be".',
+              example: "That can't be true. He can't be serious. This can't be right.",
+              exampleRu: "That can't be true. He can't be serious. This can't be right.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ["This can't be correct.", "This can't correct."], correct: 0, explanation: 'can\'t + be.', explanationRu: 'can\'t + be.' },
+              { text: 'Choose the correct sentence:', options: ["He can't be telling the truth.", "He can't telling the truth."], correct: 0, explanation: '"can\'t be" + V-ing.', explanationRu: '"can\'t be" + V-ing.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'sec-modals-3-l5',
+        order: 5,
+        title: 'Taqqoslash va yakuniy mustahkamlash',
+        titleRu: 'Сравнение и итоговое закрепление',
+        icon: '5️⃣',
+        units: [
+          {
+            teach: {
+              rule: 'Ishonch darajalari: must (100% ijobiy) > may/could (ehtimollik) > might (kamroq ehtimollik) > can\'t (100% salbiy).',
+              ruleRu: 'Степени уверенности: must (100% положительно) > may/could (вероятно) > might (менее вероятно) > can\'t (100% отрицательно).',
+              example: "He must be tired. He may be tired. He might be tired. He can't be tired.",
+              exampleRu: "He must be tired. He may be tired. He might be tired. He can't be tired.",
+            },
+            exercises: [
+              { text: '(Strong evidence) The streets are wet — it ___ be raining outside.', options: ['must', 'might', "can't"], correct: 0, explanation: 'Kuchli dalil: must be.', explanationRu: 'Явное доказательство: must be.' },
+              { text: "(No real evidence, just guessing) It ___ be raining; I haven't checked.", options: ['might', 'must', "can't"], correct: 0, explanation: 'Taxmin: might.', explanationRu: 'Предположение: might.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Kontekstga qarab to\'g\'ri ishonch darajasini tanlashni mustahkamlaymiz.',
+              ruleRu: 'Закрепим выбор правильной степени уверенности по контексту.',
+              example: "The lights are off — she must be out. She could be inside resting too, but it's unlikely.",
+              exampleRu: "The lights are off — she must be out. She could be inside resting too, but it's unlikely.",
+            },
+            exercises: [
+              { text: '(Definitely true) Look at the smoke — there ___ be a fire somewhere.', options: ['must', 'might', "can't"], correct: 0, explanation: 'Kuchli xulosa: must.', explanationRu: 'Уверенный вывод: must.' },
+              { text: '(Definitely impossible) He ___ be the thief; he was with me all night.', options: ["can't", 'must', 'may'], correct: 0, explanation: 'Mumkin emas: can\'t.', explanationRu: 'Невозможно: can\'t.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Ehtimollikni so\'rashda ko\'pincha "Do you think...?" tuzilmasi ishlatiladi, chunki "May/Might/Could" savolda deduksiya uchun kam ishlatiladi.',
+              ruleRu: 'Для вопроса о вероятности часто используется "Do you think...?", так как "May/Might/Could" редко используются в вопросе для вывода.',
+              example: 'Do you think she is home?',
+              exampleRu: 'Do you think she is home?',
+            },
+            exercises: [
+              { text: '___ you think it will rain tomorrow?', options: ['Do', 'Are', 'Can'], correct: 0, explanation: 'Ehtimollik so\'rash: Do you think...?', explanationRu: 'Вопрос о вероятности: Do you think...?' },
+              { text: 'Choose the correct question:', options: ['Do you think he is at home?', 'Might he is at home?'], correct: 0, explanation: '"Do you think...?" — ehtimollik so\'rash uchun.', explanationRu: '"Do you think...?" — для вопроса о вероятности.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Barcha ishonch darajalarini (must/may/might/could/can\'t) haqiqiy vaziyatlarda qo\'llash.',
+              ruleRu: 'Применение всех степеней уверенности (must/may/might/could/can\'t) в реальных ситуациях.',
+              example: "The bell is ringing — someone must be at the door. It could be the postman. It can't be my brother; he's at work.",
+              exampleRu: "The bell is ringing — someone must be at the door. It could be the postman. It can't be my brother; he's at work.",
+            },
+            exercises: [
+              { text: '(Very confident) Look at those dark clouds — it ___ rain soon.', options: ['must', 'might', "can't"], correct: 0, explanation: 'Kuchli xulosa: must.', explanationRu: 'Уверенный вывод: must.' },
+              { text: "(Just a guess, not sure) That noise ___ be the neighbors, but I'm not sure.", options: ['might', 'must', "can't"], correct: 0, explanation: 'Noaniq taxmin: might.', explanationRu: 'Неуверенное предположение: might.' },
+            ],
+          },
+          {
+            teach: {
+              rule: 'Bo\'lim bo\'yicha barcha qoidalarning yakuniy sinovi.',
+              ruleRu: 'Итоговое обобщение всех правил раздела.',
+              example: "She must be busy. He might be late. That can't be right.",
+              exampleRu: "She must be busy. He might be late. That can't be right.",
+            },
+            exercises: [
+              { text: 'Choose the correct sentence:', options: ['She must be the new manager.', 'She must the new manager.'], correct: 0, explanation: 'must + be.', explanationRu: 'must + be.' },
+              { text: 'Choose the correct sentence:', options: ["That can't be correct.", "That can't correct."], correct: 0, explanation: 'can\'t + be.', explanationRu: 'can\'t + be.' },
+              { text: 'Choose the correct sentence:', options: ['He might be running late.', 'He might running late.'], correct: 0, explanation: 'might be + V-ing.', explanationRu: 'might be + V-ing.' },
+            ],
+          },
+        ],
+      },
+    ],
+    review: {
+      title: "Bo'lim testi: Modal fe'llar 3 (Ehtimollik va xulosa)",
+      titleRu: 'Тест раздела: Модальные глаголы 3 (Вероятность и вывод)',
+      exercises: [
+        { text: "She ___ be at home; I'm not fully sure.", options: ['may', 'must'], correct: 0, explanation: 'Ehtimollik: may.', explanationRu: 'Вероятность: may.' },
+        { text: "I'm not certain, but we ___ go to the beach.", options: ['might', 'must'], correct: 0, explanation: 'Noaniq ehtimollik: might.', explanationRu: 'Неуверенное предположение: might.' },
+        { text: 'He ___ be home; his car is gone.', options: ['might not', "mightn't"], correct: 0, explanation: 'Inkor: might not.', explanationRu: 'Отрицание: might not.' },
+        { text: "This restaurant ___ be good; I've heard great things.", options: ['could', 'musts'], correct: 0, explanation: 'Ehtimollik: could.', explanationRu: 'Вероятность: could.' },
+        { text: 'I ___ be mistaken, but I think we met before.', options: ['could', 'must'], correct: 0, explanation: 'O\'z fikri haqida noaniqlik: could.', explanationRu: 'Неуверенность в своём мнении: could.' },
+        { text: "He isn't answering; he ___ sleeping.", options: ['could be', 'could'], correct: 0, explanation: 'Davomiy ehtimollik: could be + V-ing.', explanationRu: 'Вероятность о длящемся действии: could be + V-ing.' },
+        { text: "He's wearing a chef's hat — he ___ be a cook.", options: ['must', 'might'], correct: 0, explanation: 'Kuchli xulosa: must be.', explanationRu: 'Уверенный вывод: must be.' },
+        { text: "The music is so loud — they ___ having a party.", options: ['must be', 'must'], correct: 0, explanation: 'Davomiy xulosa: must be + V-ing.', explanationRu: 'Вывод о длящемся действии: must be + V-ing.' },
+        { text: '(Strong evidence) He ___ be home.', options: ['must', 'might'], correct: 0, explanation: 'Aniq dalil: must.', explanationRu: 'Чёткое доказательство: must.' },
+        { text: "He said he finished in five minutes — that ___ be true.", options: ["can't", 'must'], correct: 0, explanation: 'Kuchli salbiy xulosa: can\'t be.', explanationRu: 'Уверенный отрицательный вывод: can\'t be.' },
+        { text: "They ___ be waiting outside; it's freezing!", options: ["can't be", "must be"], correct: 0, explanation: '"can\'t be" + V-ing.', explanationRu: '"can\'t be" + V-ing.' },
+        { text: '(Certain it is NOT possible) That price ___ be correct.', options: ["can't", 'must'], correct: 0, explanation: 'Salbiy xulosa: can\'t.', explanationRu: 'Отрицательный вывод: can\'t.' },
+        { text: '(No doubt it is impossible) He ___ be at work; I just saw him at the beach.', options: ["can't", 'must'], correct: 0, explanation: 'Mumkin emas: can\'t.', explanationRu: 'Невозможно: can\'t.' },
+        { text: "(Just a guess, not sure) That noise ___ be the neighbors.", options: ['might', 'must'], correct: 0, explanation: 'Noaniq taxmin: might.', explanationRu: 'Неуверенное предположение: might.' },
+        { text: 'Choose the correct sentence:', options: ['He might be running late.', 'He might running late.'], correct: 0, explanation: 'might be + V-ing.', explanationRu: 'might be + V-ing.' },
+      ],
+    },
+  },
 ];
 
