@@ -1109,18 +1109,29 @@
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.scrambled-built-area.drag-over-container {
+  border-color: var(--accent-1);
+  background: rgba(234, 88, 12, 0.08);
+  box-shadow: 0 0 16px rgba(234, 88, 12, 0.25);
 }
 
 .scrambled-placeholder {
   color: var(--text-muted);
   font-size: 0.9rem;
   font-style: italic;
+  pointer-events: none;
 }
 
 .scrambled-word-bank {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  min-height: 44px;
 }
 
 .scrambled-word {
@@ -1130,9 +1141,16 @@
   padding: 8px 14px;
   color: var(--text-primary);
   font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  cursor: grab;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   font-family: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.scrambled-word:active {
+  cursor: grabbing;
 }
 
 .scrambled-word:hover:not(:disabled) {
@@ -1146,9 +1164,50 @@
   color: var(--accent-1);
 }
 
+.scrambled-word.is-dragging {
+  opacity: 0.3;
+  transform: scale(0.94);
+  border-style: dashed;
+}
+
+.scrambled-word.drop-target-active {
+  border-color: var(--accent-1) !important;
+  box-shadow: 0 0 0 2px var(--accent-1), 0 4px 12px rgba(234, 88, 12, 0.3);
+  transform: scale(1.08);
+}
+
 .scrambled-word.used {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.scrambled-word-slot {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1.5px dashed var(--border-light);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: transparent;
+  font-size: 0.95rem;
+  font-family: inherit;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.scrambled-drag-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  background: #ea580c;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  opacity: 0.92;
 }
 
 .scrambled-result {

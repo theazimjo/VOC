@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { generalGrammarTestQuestions } from '../../data/generalGrammarTestData';
 import { useLanguage } from '../../contexts/LanguageContext';
@@ -39,18 +40,61 @@ function buildRound() {
 function FormulaBuildStep({ question, onAnswer, t }) {
   const [builtTiles, setBuiltTiles] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [dragOverIdx, setDragOverIdx] = useState(null);
+  const [draggingId, setDraggingId] = useState(null);
+  const [ghostPos, setGhostPos] = useState(null);
+
+  const touchStateRef = useRef(null);
+
   const [tileBank] = useState(() =>
     shuffleArray([...question.sequence, ...question.distractors].map((text, idx) => ({ id: idx, text })))
   );
 
   const handleTapBank = (tile) => {
     if (isCorrect !== null) return;
-    setBuiltTiles((prev) => [...prev, tile]);
+    setBuiltTiles((prev) => {
+      if (prev.some(tl => tl.id === tile.id)) return prev;
+      return [...prev, tile];
+    });
   };
 
   const handleTapBuilt = (tile) => {
     if (isCorrect !== null) return;
     setBuiltTiles((prev) => prev.filter((tl) => tl.id !== tile.id));
+  };
+
+  const handleInsertTile = (tile, targetIndex) => {
+    if (isCorrect !== null) return;
+    setBuiltTiles((prev) => {
+      const existingIdx = prev.findIndex(tl => tl.id === tile.id);
+      if (existingIdx !== -1) {
+        if (existingIdx === targetIndex) return prev;
+        const updated = [...prev];
+        const [removed] = updated.splice(existingIdx, 1);
+        const insertAt = existingIdx < targetIndex ? targetIndex - 1 : targetIndex;
+        updated.splice(Math.max(0, Math.min(insertAt, updated.length)), 0, removed);
+        return updated;
+      } else {
+        const updated = [...prev];
+        updated.splice(Math.max(0, Math.min(targetIndex, updated.length)), 0, tile);
+        return updated;
+      }
+    });
+  };
+
+  const moveTileToEnd = (tile) => {
+    if (isCorrect !== null) return;
+    setBuiltTiles((prev) => {
+      const existingIdx = prev.findIndex(tl => tl.id === tile.id);
+      if (existingIdx !== -1) {
+        const updated = [...prev];
+        const [removed] = updated.splice(existingIdx, 1);
+        updated.push(removed);
+        return updated;
+      } else {
+        return [...prev, tile];
+      }
+    });
   };
 
   const checkAnswer = () => {
@@ -62,34 +106,249 @@ function FormulaBuildStep({ question, onAnswer, t }) {
     onAnswer(match);
   };
 
+  // HTML5 Mouse Drag & Drop
+  const handleDragStart = (e, tile, source, index) => {
+    if (isCorrect !== null) return;
+    setDraggingId(tile.id);
+    e.dataTransfer.setData('application/json', JSON.stringify({ tile, source, index }));
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragEnd = () => {
+    setDraggingId(null);
+    setDragOverIdx(null);
+  };
+
+  const handleDragOverContainer = (e) => {
+    if (isCorrect !== null) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if (dragOverIdx !== 'container') setDragOverIdx('container');
+  };
+
+  const handleDragOverTile = (e, idx) => {
+    if (isCorrect !== null) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'move';
+    if (dragOverIdx !== idx) setDragOverIdx(idx);
+  };
+
+  const handleDropTile = (e, targetIdx) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragOverIdx(null);
+    setDraggingId(null);
+    try {
+      const data = JSON.parse(e.dataTransfer.getData('application/json'));
+      if (data && data.tile) {
+        handleInsertTile(data.tile, targetIdx);
+      }
+    } catch (err) {}
+  };
+
+  const handleDropContainer = (e) => {
+    e.preventDefault();
+    setDragOverIdx(null);
+    setDraggingId(null);
+    try {
+      const data = JSON.parse(e.dataTransfer.getData('application/json'));
+      if (data && data.tile) {
+        moveTileToEnd(data.tile);
+      }
+    } catch (err) {}
+  };
+
+  const handleDropBankArea = (e) => {
+    e.preventDefault();
+    setDragOverIdx(null);
+    setDraggingId(null);
+    try {
+      const data = JSON.parse(e.dataTransfer.getData('application/json'));
+      if (data && data.source === 'built') {
+        handleTapBuilt(data.tile);
+      }
+    } catch (err) {}
+  };
+
+  // Touch Drag Handlers
+  const handleTouchStart = (e, tile, source, index) => {
+    if (isCorrect !== null) return;
+    const touch = e.touches[0];
+    touchStateRef.current = {
+      tile,
+      source,
+      index,
+      startX: touch.clientX,
+      startY: touch.clientY,
+      isDragging: false,
+    };
+  };
+
+  const handleTouchMove = (e) => {
+    const ts = touchStateRef.current;
+    if (!ts || isCorrect !== null) return;
+
+    const touch = e.touches[0];
+    const dx = touch.clientX - ts.startX;
+    const dy = touch.clientY - ts.startY;
+    const dist = Math.hypot(dx, dy);
+
+    if (dist > 7 && !ts.isDragging) {
+      ts.isDragging = true;
+      setDraggingId(ts.tile.id);
+    }
+
+    if (ts.isDragging) {
+      if (e.cancelable) e.preventDefault();
+      setGhostPos({ text: ts.tile.text, x: touch.clientX, y: touch.clientY });
+
+      const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (targetEl) {
+        const wordEl = targetEl.closest('[data-built-idx]');
+        if (wordEl) {
+          const idx = parseInt(wordEl.getAttribute('data-built-idx'), 10);
+          setDragOverIdx(idx);
+          return;
+        }
+        const areaEl = targetEl.closest('[data-built-area="true"]');
+        if (areaEl) {
+          setDragOverIdx('container');
+          return;
+        }
+      }
+      setDragOverIdx(null);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    const ts = touchStateRef.current;
+    if (!ts) return;
+
+    if (ts.isDragging) {
+      const touch = e.changedTouches[0];
+      const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (targetEl) {
+        const wordEl = targetEl.closest('[data-built-idx]');
+        const areaEl = targetEl.closest('[data-built-area="true"]');
+        const bankEl = targetEl.closest('[data-bank-area="true"]');
+
+        if (wordEl) {
+          const targetIdx = parseInt(wordEl.getAttribute('data-built-idx'), 10);
+          handleInsertTile(ts.tile, targetIdx);
+        } else if (areaEl) {
+          moveTileToEnd(ts.tile);
+        } else if (bankEl && ts.source === 'built') {
+          handleTapBuilt(ts.tile);
+        }
+      }
+    } else {
+      if (ts.source === 'bank') {
+        handleTapBank(ts.tile);
+      } else {
+        handleTapBuilt(ts.tile);
+      }
+    }
+
+    touchStateRef.current = null;
+    setGhostPos(null);
+    setDraggingId(null);
+    setDragOverIdx(null);
+  };
+
   return (
-    <div className="scrambled-exercise">
+    <div
+      className="scrambled-exercise"
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
+    >
       <p className="scrambled-instruction">{t('grammar.generalTestBuildInstruction')}</p>
 
-      <div className="scrambled-built-area">
-        {builtTiles.length === 0 ? (
-          <span className="scrambled-placeholder">{t('grammar.scrambledPlaceholder')}</span>
-        ) : (
-          builtTiles.map((tile) => (
-            <button key={tile.id} className="scrambled-word selected" onClick={() => handleTapBuilt(tile)}>
-              {tile.text}
-            </button>
-          ))
-        )}
+      {ghostPos && (
+        <div
+          className="scrambled-drag-ghost"
+          style={{ left: `${ghostPos.x}px`, top: `${ghostPos.y}px` }}
+        >
+          {ghostPos.text}
+        </div>
+      )}
+
+      <div
+        data-built-area="true"
+        className={`scrambled-built-area ${dragOverIdx === 'container' ? 'drag-over-container' : ''}`}
+        onDragOver={handleDragOverContainer}
+        onDrop={handleDropContainer}
+      >
+        <AnimatePresence mode="popLayout">
+          {builtTiles.length === 0 ? (
+            <motion.span
+              key="placeholder"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="scrambled-placeholder"
+            >
+              {t('grammar.scrambledPlaceholder')}
+            </motion.span>
+          ) : (
+            builtTiles.map((tile, idx) => (
+              <motion.button
+                key={tile.id}
+                layoutId={`formula-tile-${tile.id}`}
+                layout
+                transition={{ type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.28 }}
+                data-built-idx={idx}
+                draggable={isCorrect === null}
+                className={`scrambled-word selected ${draggingId === tile.id ? 'is-dragging' : ''} ${dragOverIdx === idx ? 'drop-target-active' : ''}`}
+                onClick={() => handleTapBuilt(tile)}
+                onDragStart={(e) => handleDragStart(e, tile, 'built', idx)}
+                onDragEnd={handleDragEnd}
+                onDragOver={(e) => handleDragOverTile(e, idx)}
+                onDrop={(e) => handleDropTile(e, idx)}
+                onTouchStart={(e) => handleTouchStart(e, tile, 'built', idx)}
+              >
+                {tile.text}
+              </motion.button>
+            ))
+          )}
+        </AnimatePresence>
       </div>
 
-      <div className="scrambled-word-bank">
+      <div
+        data-bank-area="true"
+        className="scrambled-word-bank"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDropBankArea}
+      >
         {tileBank.map((tile) => {
           const isUsed = builtTiles.some((tl) => tl.id === tile.id);
+          if (isUsed) {
+            return (
+              <div
+                key={`slot-${tile.id}`}
+                className="scrambled-word-slot"
+              >
+                {tile.text}
+              </div>
+            );
+          }
           return (
-            <button
+            <motion.button
               key={tile.id}
-              className={`scrambled-word ${isUsed ? 'used' : ''}`}
-              onClick={() => !isUsed && handleTapBank(tile)}
-              disabled={isUsed}
+              layoutId={`formula-tile-${tile.id}`}
+              layout
+              transition={{ type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.28 }}
+              draggable={isCorrect === null}
+              className={`scrambled-word ${draggingId === tile.id ? 'is-dragging' : ''}`}
+              onClick={() => handleTapBank(tile)}
+              onDragStart={(e) => handleDragStart(e, tile, 'bank')}
+              onDragEnd={handleDragEnd}
+              onTouchStart={(e) => handleTouchStart(e, tile, 'bank')}
             >
               {tile.text}
-            </button>
+            </motion.button>
           );
         })}
       </div>

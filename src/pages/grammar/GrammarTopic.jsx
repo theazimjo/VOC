@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import { grammarData } from '../../data/grammarData';
 import { russianGrammarData } from '../../data/russianGrammarData';
@@ -111,6 +112,11 @@ function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz', lan
   const { t } = useLanguage();
   const [selected, setSelected] = useState([]);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [dragOverIdx, setDragOverIdx] = useState(null);
+  const [draggingId, setDraggingId] = useState(null);
+  const [ghostPos, setGhostPos] = useState(null);
+
+  const touchStateRef = useRef(null);
 
   // Generate words from the correct answer with unique IDs to handle duplicate words cleanly
   const [shuffledWords] = useState(() => {
@@ -125,12 +131,51 @@ function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz', lan
 
   const handleSelectWord = (item) => {
     if (answered || isCorrect !== null) return;
-    setSelected(prev => [...prev, item]);
+    setSelected(prev => {
+      if (prev.some(w => w.id === item.id)) return prev;
+      return [...prev, item];
+    });
   };
 
   const handleRemoveWord = (item) => {
     if (answered || isCorrect !== null) return;
     setSelected(prev => prev.filter(w => w.id !== item.id));
+  };
+
+  const handleInsertWord = (item, targetIndex) => {
+    if (answered || isCorrect !== null) return;
+    setSelected(prev => {
+      const existingIdx = prev.findIndex(w => w.id === item.id);
+      if (existingIdx !== -1) {
+        // Reordering inside built area
+        if (existingIdx === targetIndex) return prev;
+        const updated = [...prev];
+        const [removed] = updated.splice(existingIdx, 1);
+        const insertAt = existingIdx < targetIndex ? targetIndex - 1 : targetIndex;
+        updated.splice(Math.max(0, Math.min(insertAt, updated.length)), 0, removed);
+        return updated;
+      } else {
+        // Adding from bank to specific position
+        const updated = [...prev];
+        updated.splice(Math.max(0, Math.min(targetIndex, updated.length)), 0, item);
+        return updated;
+      }
+    });
+  };
+
+  const moveWordToEnd = (item) => {
+    if (answered || isCorrect !== null) return;
+    setSelected(prev => {
+      const existingIdx = prev.findIndex(w => w.id === item.id);
+      if (existingIdx !== -1) {
+        const updated = [...prev];
+        const [removed] = updated.splice(existingIdx, 1);
+        updated.push(removed);
+        return updated;
+      } else {
+        return [...prev, item];
+      }
+    });
   };
 
   const checkAnswer = () => {
@@ -149,36 +194,263 @@ function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz', lan
     onAnswer(correct);
   };
 
+  // ─── HTML5 Mouse Drag & Drop ───
+  const handleDragStart = (e, item, source, index) => {
+    if (answered || isCorrect !== null) return;
+    setDraggingId(item.id);
+    e.dataTransfer.setData('application/json', JSON.stringify({ item, source, index }));
+    e.dataTransfer.effectAllowed = 'move';
+  };
+
+  const handleDragEnd = () => {
+    setDraggingId(null);
+    setDragOverIdx(null);
+  };
+
+  const handleDragOverContainer = (e) => {
+    if (answered || isCorrect !== null) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if (dragOverIdx !== 'container') {
+      setDragOverIdx('container');
+    }
+  };
+
+  const handleDragOverWord = (e, idx) => {
+    if (answered || isCorrect !== null) return;
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'move';
+    if (dragOverIdx !== idx) {
+      setDragOverIdx(idx);
+    }
+  };
+
+  const handleDropWord = (e, targetIdx) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragOverIdx(null);
+    setDraggingId(null);
+    try {
+      const data = JSON.parse(e.dataTransfer.getData('application/json'));
+      if (data && data.item) {
+        handleInsertWord(data.item, targetIdx);
+      }
+    } catch (err) {
+      // fallback
+    }
+  };
+
+  const handleDropContainer = (e) => {
+    e.preventDefault();
+    setDragOverIdx(null);
+    setDraggingId(null);
+    try {
+      const data = JSON.parse(e.dataTransfer.getData('application/json'));
+      if (data && data.item) {
+        moveWordToEnd(data.item);
+      }
+    } catch (err) {
+      // fallback
+    }
+  };
+
+  const handleDropBankArea = (e) => {
+    e.preventDefault();
+    setDragOverIdx(null);
+    setDraggingId(null);
+    try {
+      const data = JSON.parse(e.dataTransfer.getData('application/json'));
+      if (data && data.source === 'built') {
+        handleRemoveWord(data.item);
+      }
+    } catch (err) {
+      // fallback
+    }
+  };
+
+  // ─── Touch Drag Handlers (Mobile / Touch Devices) ───
+  const handleTouchStart = (e, item, source, index) => {
+    if (answered || isCorrect !== null) return;
+    const touch = e.touches[0];
+    touchStateRef.current = {
+      item,
+      source,
+      index,
+      startX: touch.clientX,
+      startY: touch.clientY,
+      isDragging: false,
+    };
+  };
+
+  const handleTouchMove = (e) => {
+    const ts = touchStateRef.current;
+    if (!ts || answered || isCorrect !== null) return;
+
+    const touch = e.touches[0];
+    const dx = touch.clientX - ts.startX;
+    const dy = touch.clientY - ts.startY;
+    const dist = Math.hypot(dx, dy);
+
+    if (dist > 7 && !ts.isDragging) {
+      ts.isDragging = true;
+      setDraggingId(ts.item.id);
+    }
+
+    if (ts.isDragging) {
+      if (e.cancelable) e.preventDefault();
+      setGhostPos({ text: ts.item.text, x: touch.clientX, y: touch.clientY });
+
+      const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (targetEl) {
+        const wordEl = targetEl.closest('[data-built-idx]');
+        if (wordEl) {
+          const idx = parseInt(wordEl.getAttribute('data-built-idx'), 10);
+          setDragOverIdx(idx);
+          return;
+        }
+        const areaEl = targetEl.closest('[data-built-area="true"]');
+        if (areaEl) {
+          setDragOverIdx('container');
+          return;
+        }
+      }
+      setDragOverIdx(null);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    const ts = touchStateRef.current;
+    if (!ts) return;
+
+    if (ts.isDragging) {
+      const touch = e.changedTouches[0];
+      const targetEl = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (targetEl) {
+        const wordEl = targetEl.closest('[data-built-idx]');
+        const areaEl = targetEl.closest('[data-built-area="true"]');
+        const bankEl = targetEl.closest('[data-bank-area="true"]');
+
+        if (wordEl) {
+          const targetIdx = parseInt(wordEl.getAttribute('data-built-idx'), 10);
+          handleInsertWord(ts.item, targetIdx);
+        } else if (areaEl) {
+          moveWordToEnd(ts.item);
+        } else if (bankEl && ts.source === 'built') {
+          handleRemoveWord(ts.item);
+        }
+      }
+    } else {
+      // Tap (no drag)
+      if (ts.source === 'bank') {
+        handleSelectWord(ts.item);
+      } else {
+        handleRemoveWord(ts.item);
+      }
+    }
+
+    touchStateRef.current = null;
+    setGhostPos(null);
+    setDraggingId(null);
+    setDragOverIdx(null);
+  };
+
   return (
-    <div className="scrambled-exercise">
+    <div
+      className="scrambled-exercise"
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
+    >
       <p className="scrambled-instruction">{t('grammar.scrambledInstruction')}</p>
 
+      {/* Floating Ghost Element for Touch Dragging */}
+      {ghostPos && (
+        <div
+          className="scrambled-drag-ghost"
+          style={{ left: `${ghostPos.x}px`, top: `${ghostPos.y}px` }}
+        >
+          {ghostPos.text}
+        </div>
+      )}
+
       {/* Built sentence area */}
-      <div className="scrambled-built-area">
-        {selected.length === 0 ? (
-          <span className="scrambled-placeholder">{t('grammar.scrambledPlaceholder')}</span>
-        ) : (
-          selected.map((item) => (
-            <button key={item.id} className="scrambled-word selected" onClick={() => handleRemoveWord(item)}>
-              {item.text}
-            </button>
-          ))
-        )}
+      <div
+        data-built-area="true"
+        className={`scrambled-built-area ${dragOverIdx === 'container' ? 'drag-over-container' : ''}`}
+        onDragOver={handleDragOverContainer}
+        onDrop={handleDropContainer}
+      >
+        <AnimatePresence mode="popLayout">
+          {selected.length === 0 ? (
+            <motion.span
+              key="placeholder"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="scrambled-placeholder"
+            >
+              {t('grammar.scrambledPlaceholder')}
+            </motion.span>
+          ) : (
+            selected.map((item, idx) => (
+              <motion.button
+                key={item.id}
+                layoutId={`scrambled-word-${item.id}`}
+                layout
+                transition={{ type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.28 }}
+                data-built-idx={idx}
+                draggable={!answered && isCorrect === null}
+                className={`scrambled-word selected ${draggingId === item.id ? 'is-dragging' : ''} ${dragOverIdx === idx ? 'drop-target-active' : ''}`}
+                onClick={() => handleRemoveWord(item)}
+                onDragStart={(e) => handleDragStart(e, item, 'built', idx)}
+                onDragEnd={handleDragEnd}
+                onDragOver={(e) => handleDragOverWord(e, idx)}
+                onDrop={(e) => handleDropWord(e, idx)}
+                onTouchStart={(e) => handleTouchStart(e, item, 'built', idx)}
+              >
+                {item.text}
+              </motion.button>
+            ))
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Word bank */}
-      <div className="scrambled-word-bank">
+      <div
+        data-bank-area="true"
+        className="scrambled-word-bank"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDropBankArea}
+      >
         {shuffledWords.map((item) => {
           const isUsed = selected.some(s => s.id === item.id);
+          if (isUsed) {
+            return (
+              <div
+                key={`slot-${item.id}`}
+                className="scrambled-word-slot"
+              >
+                {item.text}
+              </div>
+            );
+          }
           return (
-            <button
+            <motion.button
               key={item.id}
-              className={`scrambled-word ${isUsed ? 'used' : ''}`}
-              onClick={() => !isUsed && handleSelectWord(item)}
-              disabled={isUsed}
+              layoutId={`scrambled-word-${item.id}`}
+              layout
+              transition={{ type: 'tween', ease: [0.22, 1, 0.36, 1], duration: 0.28 }}
+              draggable={!answered && isCorrect === null}
+              className={`scrambled-word ${draggingId === item.id ? 'is-dragging' : ''}`}
+              onClick={() => handleSelectWord(item)}
+              onDragStart={(e) => handleDragStart(e, item, 'bank')}
+              onDragEnd={handleDragEnd}
+              onTouchStart={(e) => handleTouchStart(e, item, 'bank')}
             >
               {item.text}
-            </button>
+            </motion.button>
           );
         })}
       </div>
@@ -188,9 +460,14 @@ function ScrambledExercise({ question, answered, onAnswer, guideLang = 'uz', lan
         <div className={`scrambled-result ${isCorrect ? 'correct' : 'wrong'}`}>
           <span className="scrambled-result-row">
             {isCorrect ? t('grammar.correctBadge') : t('grammar.wrongBadge', { answer: question.answer })}
-
           </span>
-          {question.explanation && <p className="scrambled-explanation">{(guideLang === 'ru' && question.explanationRu) ? question.explanationRu : getFormattedExplanation(question.explanation, guideLang)}</p>}
+          {question.explanation && (
+            <p className="scrambled-explanation">
+              {(guideLang === 'ru' && question.explanationRu)
+                ? question.explanationRu
+                : getFormattedExplanation(question.explanation, guideLang)}
+            </p>
+          )}
         </div>
       )}
 
