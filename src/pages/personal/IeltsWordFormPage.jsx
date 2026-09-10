@@ -154,23 +154,6 @@ export default function IeltsWordFormPage() {
     }
   };
 
-  const lastAutoLookupRef = useRef('');
-  useEffect(() => {
-    const wordVal = formData.word.trim();
-    const translationVal = formData.translation.trim();
-    const hasExactlyOne = Boolean(wordVal) !== Boolean(translationVal);
-    if (!hasExactlyOne || isLookingUp) return;
-    const source = wordVal ? 'word' : 'translation';
-    const key = `${source}:${(wordVal || translationVal).toLowerCase()}`;
-    if (key === lastAutoLookupRef.current) return;
-    const timer = setTimeout(() => {
-      lastAutoLookupRef.current = key;
-      handleDictionaryLookup(source);
-    }, 700);
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.word, formData.translation, isLookingUp]);
-
   const trimmedWord = formData.word.trim().toLowerCase();
   const isDuplicate = !isEdit && trimmedWord.length > 0
     && words.some(w => (w.word || '').trim().toLowerCase() === trimmedWord);

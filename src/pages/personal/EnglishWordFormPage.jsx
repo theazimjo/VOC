@@ -110,20 +110,6 @@ export default function EnglishWordFormPage() {
     }
   };
 
-  const lastAutoLookupRef = useRef('');
-  useEffect(() => {
-    const wordVal = formData.word.trim();
-    if (!wordVal || formData.definition.trim() || isLookingUp) return;
-    const key = wordVal.toLowerCase();
-    if (key === lastAutoLookupRef.current) return;
-    const timer = setTimeout(() => {
-      lastAutoLookupRef.current = key;
-      handleDictionaryLookup();
-    }, 700);
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.word, formData.definition, isLookingUp]);
-
   const trimmedWord = formData.word.trim().toLowerCase();
   const isDuplicate = !isEdit && trimmedWord.length > 0
     && words.some(w => (w.word || '').trim().toLowerCase() === trimmedWord);

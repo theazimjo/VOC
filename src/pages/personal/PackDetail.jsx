@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Brain, AlertTriangle } from 'lucide-react';
+import { motion, Reorder } from 'framer-motion';
+import { Brain, AlertTriangle, Edit2, Trash2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { usePacks } from '../../hooks/usePacks';
@@ -38,6 +38,10 @@ export default function PackDetail() {
   const [showAddChapterModal, setShowAddChapterModal] = useState(false);
   const [newChapterName, setNewChapterName] = useState('');
 
+  const [contextMenu, setContextMenu] = useState(null); // { x, y, topic }
+  const [renameModal, setRenameModal] = useState(null); // { oldName, newName }
+  const [deleteModal, setDeleteModal] = useState(null); // { topic }
+
   const [confusionPairs, setConfusionPairs] = useState([]);
   const marketSyncCheckedRef = useRef(false);
   const topicRowRef = useRef(null);
@@ -55,17 +59,14 @@ export default function PackDetail() {
   };
 
   // Distinct topics present among this pack's words, for the optional
-  // study-grouping filter chips - shown for any pack whose words carry a
-  // topic (IELTS packs group by theme; the Science market pack groups by
-  // book chapter), and only once at least one word has a topic set. Also
-  // folds in `pack.chapters` - chapters the user created via "Add chapter"
-  // before adding any words to them yet, so a brand-new empty chapter shows
-  // up as a chip immediately instead of only appearing once it has a word.
+  // study-grouping filter chips. Retains explicit order defined in pack.chapters.
   const topics = useMemo(() => {
     if (!pack) return [];
     const fromWords = words.map(w => w.topic).filter(Boolean);
     const fromPack = pack.chapters || [];
-    return [...new Set([...fromWords, ...fromPack])].sort();
+    const uniqueFromWords = [...new Set(fromWords)];
+    const remaining = uniqueFromWords.filter(t => !fromPack.includes(t)).sort();
+    return [...new Set([...fromPack, ...remaining])];
   }, [pack, words]);
 
   // Restore the last chapter/topic the user was on for this pack, once, the
@@ -256,6 +257,75 @@ export default function PackDetail() {
     setShowAddChapterModal(false);
     setNewChapterName('');
     setTopicFilter(name);
+  };
+
+  const handleReorderChapters = async (newOrder) => {
+    await updatePack(packId, { chapters: newOrder });
+    setPack(prev => (prev ? { ...prev, chapters: newOrder } : prev));
+  };
+
+  const handleContextMenu = (e, topic) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const adjustedX = Math.min(e.clientX, window.innerWidth - 190);
+    const adjustedY = Math.min(e.clientY, window.innerHeight - 130);
+    setContextMenu({ x: Math.max(10, adjustedX), y: Math.max(10, adjustedY), topic });
+  };
+
+  const executeRenameChapter = async () => {
+    if (!renameModal) return;
+    const { oldName, newName } = renameModal;
+    const trimmedNewName = newName.trim();
+    if (!trimmedNewName || trimmedNewName === oldName) {
+      setRenameModal(null);
+      return;
+    }
+
+    const currentChapters = pack.chapters || [];
+    let updatedChapters;
+    if (currentChapters.includes(oldName)) {
+      updatedChapters = currentChapters.map(c => c === oldName ? trimmedNewName : c);
+    } else {
+      updatedChapters = [...currentChapters, trimmedNewName];
+    }
+    updatedChapters = [...new Set(updatedChapters)];
+
+    // Update words topic matching oldName
+    const matchingWords = words.filter(w => w.topic === oldName);
+    for (const w of matchingWords) {
+      await updateWord(w.id, { topic: trimmedNewName });
+    }
+
+    await updatePack(packId, { chapters: updatedChapters });
+    setPack(prev => (prev ? { ...prev, chapters: updatedChapters } : prev));
+
+    if (topicFilter === oldName) {
+      setTopicFilter(trimmedNewName);
+    }
+
+    setRenameModal(null);
+  };
+
+  const executeDeleteChapter = async () => {
+    if (!deleteModal) return;
+    const { topic } = deleteModal;
+
+    const currentChapters = pack.chapters || [];
+    const updatedChapters = currentChapters.filter(c => c !== topic);
+
+    const matchingWords = words.filter(w => w.topic === topic);
+    for (const w of matchingWords) {
+      await updateWord(w.id, { topic: '' });
+    }
+
+    await updatePack(packId, { chapters: updatedChapters });
+    setPack(prev => (prev ? { ...prev, chapters: updatedChapters } : prev));
+
+    if (topicFilter === topic) {
+      setTopicFilter(null);
+    }
+
+    setDeleteModal(null);
   };
 
   // The word-edit pages AND Practice are separate routes, so this page fully
@@ -482,26 +552,43 @@ export default function PackDetail() {
           >
             {t('packDetail.allTopics')}
           </button>
-          {topics.map(topic => {
-            const pageRangeStr = formatPageRange(topic);
-            return (
-              <button
-                key={topic}
-                type="button"
-                className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
-                style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
-                onClick={() => setTopicFilter(topic)}
-              >
-                {topicMastery[topic] !== undefined && (
-                  <span className="ielts-topic-chip-fill" aria-hidden="true" />
-                )}
-                <span className="ielts-topic-chip-label">
-                  {topic}
-                  {pageRangeStr && <span className="ielts-topic-chip-pages"> ({pageRangeStr})</span>}
-                </span>
-              </button>
-            );
-          })}
+          <Reorder.Group
+            axis="x"
+            values={topics}
+            onReorder={handleReorderChapters}
+            className="ielts-topic-reorder-group"
+            as="div"
+          >
+            {topics.map(topic => {
+              const pageRangeStr = formatPageRange(topic);
+              return (
+                <Reorder.Item
+                  key={topic}
+                  value={topic}
+                  as="div"
+                  className="ielts-topic-chip-item"
+                  onContextMenu={(e) => handleContextMenu(e, topic)}
+                  whileDrag={{ scale: 1.05, zIndex: 20 }}
+                >
+                  <button
+                    type="button"
+                    className={`ielts-topic-chip ${topicFilter === topic ? 'active' : ''}`}
+                    style={topicMastery[topic] !== undefined ? { '--chip-mastery': `${topicMastery[topic]}%` } : undefined}
+                    onClick={() => setTopicFilter(topic)}
+                    title={t('packDetail.chapterChipHint')}
+                  >
+                    {topicMastery[topic] !== undefined && (
+                      <span className="ielts-topic-chip-fill" aria-hidden="true" />
+                    )}
+                    <span className="ielts-topic-chip-label">
+                      {topic}
+                      {pageRangeStr && <span className="ielts-topic-chip-pages"> ({pageRangeStr})</span>}
+                    </span>
+                  </button>
+                </Reorder.Item>
+              );
+            })}
+          </Reorder.Group>
         </div>
       )}
 
@@ -595,6 +682,117 @@ export default function PackDetail() {
             <h3>{t('packDetail.newWordsAddedTitle')}</h3>
             <p>{t('packDetail.newWordsAddedMsg', { count: newWordsAddedCount })}</p>
             <button className="ios-alert-btn" onClick={() => setNewWordsAddedCount(null)}>{t('packDetail.ok')}</button>
+          </motion.div>
+        </div>
+      )}
+
+      {contextMenu && (
+        <>
+          <div
+            className="wfp-context-menu-overlay"
+            onClick={() => setContextMenu(null)}
+            onContextMenu={(e) => { e.preventDefault(); setContextMenu(null); }}
+          />
+          <div
+            className="wfp-context-menu"
+            style={{ left: contextMenu.x, top: contextMenu.y }}
+          >
+            <button
+              type="button"
+              className="wfp-context-menu-item"
+              onClick={() => {
+                setRenameModal({ oldName: contextMenu.topic, newName: contextMenu.topic });
+                setContextMenu(null);
+              }}
+            >
+              <Edit2 size={14} />
+              <span>{t('packDetail.renameChapter')}</span>
+            </button>
+            <button
+              type="button"
+              className="wfp-context-menu-item danger"
+              onClick={() => {
+                setDeleteModal({ topic: contextMenu.topic });
+                setContextMenu(null);
+              }}
+            >
+              <Trash2 size={14} />
+              <span>{t('packDetail.deleteChapter')}</span>
+            </button>
+          </div>
+        </>
+      )}
+
+      {renameModal && (
+        <div className="ios-alert-overlay" onClick={() => setRenameModal(null)}>
+          <motion.div
+            className="ios-alert-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="ios-alert-icon">✏️</div>
+            <h3>{t('packDetail.renameChapterTitle')}</h3>
+            <p>{t('packDetail.renameChapterMsg', { name: renameModal.oldName })}</p>
+            <input
+              type="text"
+              className="input"
+              style={{ width: '100%', marginBottom: 'var(--space-lg)' }}
+              value={renameModal.newName}
+              onChange={e => setRenameModal(prev => ({ ...prev, newName: e.target.value }))}
+              onKeyDown={e => { if (e.key === 'Enter') executeRenameChapter(); }}
+              maxLength={120}
+              autoFocus
+            />
+            <div style={{ display: 'flex', gap: 'var(--space-sm)', width: '100%' }}>
+              <button
+                className="ios-alert-btn"
+                style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+                onClick={() => setRenameModal(null)}
+              >
+                {t('wordCard.cancel')}
+              </button>
+              <button
+                className="ios-alert-btn"
+                disabled={!renameModal.newName.trim()}
+                onClick={executeRenameChapter}
+              >
+                {t('common.save') || 'Save'}
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {deleteModal && (
+        <div className="ios-alert-overlay" onClick={() => setDeleteModal(null)}>
+          <motion.div
+            className="ios-alert-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.2 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="ios-alert-icon" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444' }}>🗑️</div>
+            <h3>{t('packDetail.deleteChapterTitle')}</h3>
+            <p>{t('packDetail.deleteChapterMsg', { topic: deleteModal.topic })}</p>
+            <div style={{ display: 'flex', gap: 'var(--space-sm)', width: '100%' }}>
+              <button
+                className="ios-alert-btn"
+                style={{ background: 'var(--bg-tertiary)', color: 'var(--text-primary)' }}
+                onClick={() => setDeleteModal(null)}
+              >
+                {t('wordCard.cancel')}
+              </button>
+              <button
+                className="ios-alert-btn"
+                style={{ background: '#ef4444' }}
+                onClick={executeDeleteChapter}
+              >
+                {t('packDetail.deleteChapterConfirm')}
+              </button>
+            </div>
           </motion.div>
         </div>
       )}

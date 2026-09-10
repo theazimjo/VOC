@@ -1,6 +1,19 @@
-﻿/**
+/**
  * Utility for fetching dictionary definitions and translations.
  */
+async function fetchWithTimeout(url, timeoutMs = 2500) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    return res.ok ? await res.json() : null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function lookupWord(word) {
   if (!word || !word.trim()) return null;
   const cleanWord = word.trim().toLowerCase();
@@ -15,14 +28,10 @@ export async function lookupWord(word) {
 
   try {
     // 1. Fetch details from Free Dictionary API
-    const dictPromise = fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${cleanWord}`)
-      .then(res => res.ok ? res.json() : null)
-      .catch(() => null);
+    const dictPromise = fetchWithTimeout(`https://api.dictionaryapi.dev/api/v2/entries/en/${cleanWord}`, 2500);
 
-    // 2. Fetch Uzbek translation from MyMemory API
-    const transPromise = fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanWord)}&langpair=en|uz`)
-      .then(res => res.ok ? res.json() : null)
-      .catch(() => null);
+    // 2. Fetch Uzbek translation from MyMemory API (1.2s max)
+    const transPromise = fetchWithTimeout(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanWord)}&langpair=en|uz`, 1200);
 
     const [dictData, transData] = await Promise.all([dictPromise, transPromise]);
 

@@ -39,6 +39,7 @@ export default function WordFormPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [isCustomTopic, setIsCustomTopic] = useState(false);
   const [isLookingUp, setIsLookingUp] = useState(false);
   const [lookupError, setLookupError] = useState(null);
   const [saveError, setSaveError] = useState(null);
@@ -257,31 +258,6 @@ export default function WordFormPage() {
     });
   };
 
-  // Auto-fills the moment the user stops typing whichever of the two
-  // fields they filled in first - word or translation - so neither
-  // direction needs a click. Fires only while exactly one of the two is
-  // filled (the other is what's being looked up), keyed on source+value so
-  // a lookup that comes back empty doesn't refire every 700ms unchanged.
-  const lastAutoLookupRef = useRef('');
-  useEffect(() => {
-    const wordVal = formData.word.trim();
-    const translationVal = formData.translation.trim();
-    const hasExactlyOne = Boolean(wordVal) !== Boolean(translationVal);
-    if (!hasExactlyOne || isLookingUp) return;
-    const source = wordVal ? 'word' : 'translation';
-    // Keyed on the target language too, so switching the translation
-    // language while the word field is already filled re-triggers a lookup
-    // into the newly selected language instead of leaving a stale result.
-    const key = `${source}:${(wordVal || translationVal).toLowerCase()}:${translationLangCode}`;
-    if (key === lastAutoLookupRef.current) return;
-    const timer = setTimeout(() => {
-      lastAutoLookupRef.current = key;
-      handleDictionaryLookup(source);
-    }, 700);
-    return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.word, formData.translation, isLookingUp, translationLangCode]);
-
   const [isMeaningsDropdownOpen, setIsMeaningsDropdownOpen] = useState(false);
   const meaningsDropdownRef = useRef(null);
 
@@ -324,7 +300,6 @@ export default function WordFormPage() {
         setOtherMeanings([]);
         setMeaningsChecked(false);
         setSelectedMeaningId(null);
-        lastAutoLookupRef.current = '';
         wordInputRef.current?.focus();
       }
     } catch (err) {
@@ -510,27 +485,46 @@ export default function WordFormPage() {
 
           <div className="input-group wfp-chapter-group">
             <label>{t('wordForm.chapterLabel')}</label>
-            <input
-              type="text"
-              className="input"
-              value={formData.topic}
-              onChange={e => setFormData({ ...formData, topic: e.target.value })}
-              placeholder={t('wordForm.chapterPlaceholder')}
-              maxLength={120}
-            />
-            {existingTopics.length > 0 && (
-              <div className="wfp-chapter-chips">
-                {existingTopics.map(topic => (
-                  <button
-                    type="button"
-                    key={topic}
-                    className={`wfp-chapter-chip ${formData.topic === topic ? 'active' : ''}`}
-                    onClick={() => setFormData(prev => ({ ...prev, topic: prev.topic === topic ? '' : topic }))}
-                  >
-                    {topic}
-                  </button>
-                ))}
-              </div>
+            <select
+              className="select"
+              value={
+                isCustomTopic
+                  ? '__custom__'
+                  : formData.topic && !existingTopics.includes(formData.topic)
+                  ? '__custom__'
+                  : formData.topic
+              }
+              onChange={e => {
+                const val = e.target.value;
+                if (val === '__custom__') {
+                  setIsCustomTopic(true);
+                  if (existingTopics.includes(formData.topic)) {
+                    setFormData(prev => ({ ...prev, topic: '' }));
+                  }
+                } else {
+                  setIsCustomTopic(false);
+                  setFormData(prev => ({ ...prev, topic: val }));
+                }
+              }}
+            >
+              <option value="">{t('wordForm.selectChapter') || t('wordForm.chapterPlaceholder')}</option>
+              {existingTopics.map(topic => (
+                <option key={topic} value={topic}>{topic}</option>
+              ))}
+              <option value="__custom__">{t('wordForm.newChapterOption') || '+ Yangi chapter qo\'shish...'}</option>
+            </select>
+
+            {(isCustomTopic || (formData.topic && !existingTopics.includes(formData.topic))) && (
+              <input
+                type="text"
+                className="input"
+                style={{ marginTop: '8px' }}
+                value={formData.topic}
+                onChange={e => setFormData(prev => ({ ...prev, topic: e.target.value }))}
+                placeholder={t('wordForm.chapterPlaceholder')}
+                maxLength={120}
+                autoFocus
+              />
             )}
           </div>
 

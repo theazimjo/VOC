@@ -94,7 +94,8 @@
   flex-wrap: nowrap;
   align-items: center;
   gap: 8px;
-  margin: var(--space-sm) 0;
+  margin: var(--space-xs) 0;
+  padding: 8px 4px;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
@@ -519,3 +520,89 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+/* Chapter Drag and Context Menu Styles */
+.ielts-topic-reorder-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 2px 0;
+}
+
+.ielts-topic-chip-item {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  touch-action: pan-y;
+  cursor: grab;
+  padding: 2px 0;
+}
+
+.ielts-topic-chip-item:active {
+  cursor: grabbing;
+}
+
+.wfp-context-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3999;
+}
+
+.wfp-context-menu {
+  position: fixed;
+  z-index: 4000;
+  background: var(--bg-glass-strong, #1e1e24);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.15));
+  border-radius: var(--radius-md, 12px);
+  padding: 6px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  min-width: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: contextMenuPop 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes contextMenuPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.wfp-context-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary, #ffffff);
+  font-size: var(--font-xs, 0.82rem);
+  font-weight: 600;
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease;
+}
+
+.wfp-context-menu-item:hover {
+  background: var(--bg-tertiary, rgba(255, 255, 255, 0.1));
+}
+
+.wfp-context-menu-item.danger {
+  color: var(--danger, #ef4444);
+}
+
+.wfp-context-menu-item.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+
