@@ -59,9 +59,8 @@ export default function BottomNav() {
         <motion.div
           className="personal-bottom-nav-pill"
           initial={false}
-          animate={{ x: pillRect.left }}
-          transition={{ type: 'spring', bounce: 0, duration: 0.4 }}
-          style={{ width: pillRect.width }}
+          animate={{ x: pillRect.left, width: pillRect.width }}
+          transition={{ type: 'spring', stiffness: 420, damping: 30, mass: 0.7 }}
         />
       )}
       {NAV_ITEMS.map((item, index) => {

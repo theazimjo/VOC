@@ -74,15 +74,19 @@
   left: 0;
   top: 5px;
   bottom: 5px;
-  border-radius: 18px;
-  background: var(--accent-1-dim);
+  border-radius: 20px;
+  background: var(--accent-1-dim, rgba(59, 130, 246, 0.18));
+  border: 1.5px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
   z-index: 0;
   pointer-events: none;
-  /* Slid via transform (GPU-composited), never left/width — animating
-     those forces a synchronous layout recalc on every frame, which is
-     what caused the freeze when this competed with a route transition's
-     own layout work. */
-  will-change: transform;
+  will-change: transform, width;
+}
+
+[data-theme='light'] .personal-bottom-nav-pill {
+  background: rgba(0, 122, 255, 0.12);
+  border: 1.5px solid rgba(0, 122, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 122, 255, 0.15);
 }
 
 /* ── Each Nav Item ───────────────────────── */
@@ -94,15 +98,20 @@
   align-items: center;
   justify-content: center;
   gap: 3px;
-  color: var(--text-muted);
+  color: var(--text-muted, rgba(255, 255, 255, 0.45));
   text-decoration: none;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   flex: 1;
   height: 52px;
-  border-radius: 18px;
+  border-radius: 20px;
+  transition: color 0.2s ease, transform 0.15s ease;
   -webkit-tap-highlight-color: transparent;
+}
+
+.personal-bottom-nav-link:active {
+  transform: scale(0.95);
 }
 
 /* ── Icon Wrapper ─────────────────────────── */
@@ -136,12 +145,12 @@
 /* ── Active State — color/weight/scale only; the background lives in the
    sliding pill above, not per-item. ─────────── */
 .personal-bottom-nav-link.active {
-  color: var(--accent-1);
+  color: var(--accent-1, #007AFF);
   font-weight: 700;
 }
 
 .personal-bottom-nav-link.active .personal-bottom-nav-icon {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 /* ── Show on Mobile + Tablet ──────────────────
