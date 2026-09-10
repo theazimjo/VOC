@@ -15127,5 +15127,1745 @@ export const marketPacks = [
       { word: "menu", translation: "kamroq", definition: "Miqdor yoki darajaning kamligini bildiruvchi ravish.", example: "Aju menu tempu ora.", partOfSpeech: "adverb", topic: "Bog'lovchilar va ravishlar" },
       { word: "tantu", translation: "juda, ko'p", definition: "Katta miqdor yoki darajani bildiruvchi ravish.", example: "Ti vogghiu tantu beni.", partOfSpeech: "adverb", topic: "Bog'lovchilar va ravishlar" }
     ]
-  }
+  },
+  {
+  "id": "russian-essentials",
+  "name": "Rus tili — Erkin so'zlashuv (200+ so'z va iboralar)",
+  "description": "Rus tilida bemalol va erkin muloqot qilish uchun eng zarur 200 dan ortiq so'z va iboralar to'plami. Tanishuv, transport, xaridlar, restoran, mehmonxona, ish, vaqt, fe'llar, sifatlar va favqulodda holatlar bo'yicha 14 ta bobga ajratilgan.",
+  "icon": "🇷🇺",
+  "color": "linear-gradient(135deg, #1E40AF 0%, #DC2626 100%)",
+  "level": "beginner",
+  "category": "Til",
+  "language": "ru-RU",
+  "chapters": [
+    "1-bob: Salomlashuv va Tanishuv",
+    "2-bob: Muhim Muloqot Iboralari va Savollar",
+    "3-bob: Shahar, Transport va Yo'nalishlar",
+    "4-bob: Do'kon, Bozor va Xaridlar",
+    "5-bob: Restoran, Kafe va Ovqatlar",
+    "6-bob: Mehmonxona va Joylashuv",
+    "7-bob: Ish, O'qish va Kasblar",
+    "8-bob: Oila, Do'stlar va Insonlar",
+    "9-bob: Vaqt, Sana va Raqamlar",
+    "10-bob: Ob-havo, Tabiat va Uy",
+    "11-bob: Muhim Fe'llar",
+    "12-bob: Sifatlar va Holatlar",
+    "13-bob: Sog'liq va Dorixona",
+    "14-bob: Favqulodda Holatlar va Yordam"
+  ],
+  "words": [
+    {
+      "word": "Здравствуйте",
+      "translation": "Assalomu alaykum / Salom (rasmiy)",
+      "definition": "Rasmiy salomlashuv iborasi.",
+      "example": "Здравствуйте, как ваши дела?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Привет",
+      "translation": "Salom (norasmiy)",
+      "definition": "Tanishlar va do'stlar orasidagi salomlashuv.",
+      "example": "Привет! Рад тебя видеть.",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Доброе утро",
+      "translation": "Xayrli tong",
+      "definition": "Ertalabki salomlashuv.",
+      "example": "Доброе утро, как вам спалось?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Добрый день",
+      "translation": "Xayrli kun",
+      "definition": "Kunduzgi salomlashuv.",
+      "example": "Добрый день, чем могу помочь?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Добрый вечер",
+      "translation": "Xayrli kech",
+      "definition": "Kechki salomlashuv.",
+      "example": "Добрый вечер, добро пожаловать!",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Добро пожаловать",
+      "translation": "Xush kelibsiz",
+      "definition": "Mehmonni kutib olish iborasi.",
+      "example": "Добро пожаловать в наш город!",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Рад вас видеть",
+      "translation": "Sizni ko'rganimdan xursandman",
+      "definition": "Uchrashganda xursandchilik bildirish.",
+      "example": "Здравствуйте! Очень рад вас видеть.",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Как ваши дела?",
+      "translation": "Ishlaringiz qanday?",
+      "definition": "Ahvol so'rash (rasmiy).",
+      "example": "Как ваши дела? Всё в порядке?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Всё хорошо, спасибо",
+      "translation": "Hammasi yaxshi, rahmat",
+      "definition": "Ahvol so'roviga ijobiy javob.",
+      "example": "Всё хорошо, спасибо, а у вас?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "А у вас?",
+      "translation": "Sizda-chi?",
+      "definition": "Qaytma savol berish.",
+      "example": "У меня всё отлично. А у вас?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "До свидания",
+      "translation": "Xayr, ko'rishguncha (rasmiy)",
+      "definition": "Rasmiy xayrlashuv iborasi.",
+      "example": "До свидания, до завтра!",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "До встречи",
+      "translation": "Ko'rishguncha",
+      "definition": "Yaqin orada ko'rishish niyati bilan xayrlashuv.",
+      "example": "До встречи вечером!",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "До завтра",
+      "translation": "Ertagacha xayr",
+      "definition": "Ertangi kunga xayrlashuv.",
+      "example": "Хорошего вечера, до завтра!",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Пока",
+      "translation": "Xayr (norasmiy)",
+      "definition": "Yaqinlar bilan xayrlashuv.",
+      "example": "Ну всё, пока! На связи.",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Счастливого пути",
+      "translation": "Oq yo'l",
+      "definition": "Yo'lga chiqayotgan insonga tilak.",
+      "example": "Счастливого пути и мягкой посадки!",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Меня зовут...",
+      "translation": "Mening ismim...",
+      "definition": "O'zini tanishtirish iborasi.",
+      "example": "Меня зовут Азимжон.",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Как вас зовут?",
+      "translation": "Ismingiz nima?",
+      "definition": "Suhbatdoshning ismini so'rash (rasmiy).",
+      "example": "Извините, как вас зовут?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Очень приятно",
+      "translation": "Juda mamnunman",
+      "definition": "Tanishgandagi hurmat iborasi.",
+      "example": "Очень приятно с вами познакомиться.",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Познакомьтесь, это...",
+      "translation": "Tanishib qo'ying, bu...",
+      "definition": "Boshqa insonni tanishtirish.",
+      "example": "Познакомьтесь, это мой коллега.",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Откуда вы?",
+      "translation": "Qayerdansiz?",
+      "definition": "Kelib chiqish joyini so'rash.",
+      "example": "Откуда вы приехали?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Я из Узбекистана",
+      "translation": "Men O'zbekistondanman",
+      "definition": "Qayerdanligini aytish.",
+      "example": "Я из Узбекистана, из Ташкента.",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Сколько вам лет?",
+      "translation": "Yoshingiz nechida?",
+      "definition": "Yoshni so'rash.",
+      "example": "Разрешите спросить, сколько вам лет?",
+      "partOfSpeech": "phrase",
+      "topic": "1-bob: Salomlashuv va Tanishuv"
+    },
+    {
+      "word": "Спасибо",
+      "translation": "Rahmat",
+      "definition": "Minnatdorchilik bildirish.",
+      "example": "Большое спасибо за помощь!",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Большое спасибо",
+      "translation": "Katta rahmat",
+      "definition": "Chuqur minnatdorchilik bildirish.",
+      "example": "Большое спасибо за ваше гостеприимство!",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Пожалуйста",
+      "translation": "Arzimaydi / Marhamat / Iltimos",
+      "definition": "Minnatdorchilikka javob yoki iltimos.",
+      "example": "Вот ваш кофе. — Пожалуйста!",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Не за что",
+      "translation": "Arzimaydi",
+      "definition": "Rahmatga javob.",
+      "example": "Спасибо за помощь! — Не за что!",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Извините",
+      "translation": "Kechirasiz",
+      "definition": "Uzr so'rash yoki e'tiborni qaratish.",
+      "example": "Извините, вы не подскажете время?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Простите",
+      "translation": "Kechiring",
+      "definition": "Xato uchun uzr so'rash.",
+      "example": "Простите меня за задержку.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Ничего страшного",
+      "translation": "Hech qisi yo'q / Zarari yo'q",
+      "definition": "Kechirimga javoban ko'ngil ko'tarish.",
+      "example": "Извините за опоздание. — Ничего страшного!",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Да / Нет",
+      "translation": "Ha / Yo'q",
+      "definition": "Tasdiq va inkor javoblari.",
+      "example": "Да, конечно. / Нет, спасибо.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Возможно",
+      "translation": "Ehtimol / Balki",
+      "definition": "Ehtimollikni bildirish.",
+      "example": "Возможно, я приеду завтра.",
+      "partOfSpeech": "adverb",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Конечно",
+      "translation": "Albatta",
+      "definition": "Rozilik bildirish.",
+      "example": "Вы поможете мне? — Конечно!",
+      "partOfSpeech": "adverb",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Согласен",
+      "translation": "Roziman",
+      "definition": "Fikrga qo'shilish (erkak).",
+      "example": "Я полностью с вами согласен.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Вы говорите по-узбекски?",
+      "translation": "O'zbekcha gapirasizmi?",
+      "definition": "Til bilishini so'rash.",
+      "example": "Извините, вы говорите по-узбекски?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Я немного говорю по-русски",
+      "translation": "Men ruscha biroz gapiraman",
+      "definition": "Til darajasini aytish.",
+      "example": "Я только учусь, немного говорю по-русски.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Я не понимаю",
+      "translation": "Men tushunmayapman",
+      "definition": "Tushunmaganini bildirish.",
+      "example": "Повторите, пожалуйста, я не понимаю.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Вы понимаете?",
+      "translation": "Tushunyapsizmi?",
+      "definition": "Suhbatdosh tushunganini bilish.",
+      "example": "Я объяснил правильное решение. Вы понимаете?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Повторите, пожалуйста",
+      "translation": "Takrorlang, iltimos",
+      "definition": "Qayta aytishni so'rash.",
+      "example": "Я не расслышал, повторите, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Говорите медленнее",
+      "translation": "Sekinroq gapiring",
+      "definition": "Nutq tezligini sekinlashtirishni iltimos qilish.",
+      "example": "Пожалуйста, говорите чуть медленнее.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Напишите это",
+      "translation": "Buni yozib bering",
+      "definition": "Yozib berishni so'rash.",
+      "example": "Напишите это имя на бумаге, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Что это значит?",
+      "translation": "Bu nimani anglatadi?",
+      "definition": "Ma'nosini so'rash.",
+      "example": "Что значит это слово?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Как это по-русски?",
+      "translation": "Bu rus tilida nima deyiladi?",
+      "definition": "Narsaning ruscha nomini so'rash.",
+      "example": "Подскажите, как это сказать по-русски?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Где...?",
+      "translation": "Qayerda...?",
+      "definition": "Joy so'rash uchun so'z.",
+      "example": "Где вы сейчас находитесь?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Когда...?",
+      "translation": "Qachon...?",
+      "definition": "Vaqt so'rash so'zi.",
+      "example": "Когда начинается фильм?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Почему...?",
+      "translation": "Nega / Nimaga...?",
+      "definition": "Sabab so'rash so'zi.",
+      "example": "Почему вы опоздали?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Кто...?",
+      "translation": "Kim...?",
+      "definition": "Shaxs so'rash so'zi.",
+      "example": "Кто этот человек?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Что...?",
+      "translation": "Nima...?",
+      "definition": "Narsa yoki voqeani so'rash.",
+      "example": "Что случилось?",
+      "partOfSpeech": "phrase",
+      "topic": "2-bob: Muhim Muloqot Iboralari va Savollar"
+    },
+    {
+      "word": "Где находится...?",
+      "translation": "... qayerda joylashgan?",
+      "definition": "Joylashuvni so'rash iborasi.",
+      "example": "Где находится ближайшее метро?",
+      "partOfSpeech": "phrase",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Как пройти к...?",
+      "translation": "Qanday boriladi (piyoda)?",
+      "definition": "Piyoda borish yo'nalishini so'rash.",
+      "example": "Подскажите, как пройти к парку?",
+      "partOfSpeech": "phrase",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Как доехать до...?",
+      "translation": "Qanday borish mumkin (transportda)?",
+      "definition": "Transport yo'nalishini so'rash.",
+      "example": "Как доехать до центра города?",
+      "partOfSpeech": "phrase",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Это далеко отсюда?",
+      "translation": "Bu yerdan uzoqmi?",
+      "definition": "Masofani bilish savoli.",
+      "example": "Скажите, это далеко отсюда?",
+      "partOfSpeech": "phrase",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Направо",
+      "translation": "O'ngga",
+      "definition": "O'ng tomonga burilish.",
+      "example": "Поверните направо на светофоре.",
+      "partOfSpeech": "adverb",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Налево",
+      "translation": "Chapga",
+      "definition": "Chap tomonga burilish.",
+      "example": "Идите прямо, затем налево.",
+      "partOfSpeech": "adverb",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Прямо",
+      "translation": "To'g'riga",
+      "definition": "To'g'ri yo'nalish bo'ylab yurish.",
+      "example": "Идите всё время прямо.",
+      "partOfSpeech": "adverb",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Напротив",
+      "translation": "Qarshisida / Ro'parasida",
+      "definition": "Qarama-qarshi tomon.",
+      "example": "Аптека находится напротив банка.",
+      "partOfSpeech": "preposition",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Рядом",
+      "translation": "Yonida",
+      "definition": "Yaqin joylashuv.",
+      "example": "Отель находится рядом со станцией.",
+      "partOfSpeech": "adverb",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Остановка",
+      "translation": "Bekat",
+      "definition": "Jamoat transporti bekati.",
+      "example": "Где здесь автобусная остановка?",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Автобус",
+      "translation": "Avtobus",
+      "definition": "Jamoat avtobusi.",
+      "example": "На какой автобус мне сесть?",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Метро",
+      "translation": "Metro",
+      "definition": "Yer osti transporti.",
+      "example": "Встретимся возле метро.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Станция",
+      "translation": "Stansiya",
+      "definition": "Metro yoki poyezd bekati.",
+      "example": "Следующая станция — Центральная.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Такси",
+      "translation": "Taksi",
+      "definition": "Yengil taksi avtomobili.",
+      "example": "Вызовите, пожалуйста, такси.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Поезд",
+      "translation": "Poyezd",
+      "definition": "Temir yo'l transporti.",
+      "example": "Поезд отправляется через десять минут.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Самолет",
+      "translation": "Samolyot",
+      "definition": "Havo transporti.",
+      "example": "Самолет прилетает вовремя.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Аэропорт",
+      "translation": "Aeroport",
+      "definition": "Samolyotlar majmuasi.",
+      "example": "Сколько ехать до аэропорта?",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Вокзал",
+      "translation": "Vokzal",
+      "definition": "Temir yo'l vokzali.",
+      "example": "Нам нужно успеть на вокзал.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Билет",
+      "translation": "Chipta",
+      "definition": "Yo'l chiptasi.",
+      "example": "Один билет до станции, пожалуйста.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Сколько стоит проезд?",
+      "translation": "Yo'l haqi qancha?",
+      "definition": "Transport haqi narxini so'rash.",
+      "example": "Подскажите, сколько стоит проезд?",
+      "partOfSpeech": "phrase",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Мне нужно выйти",
+      "translation": "Men tushishim kerak",
+      "definition": "Transportdan tushish niyatini aytish.",
+      "example": "На следующей остановке мне нужно выйти.",
+      "partOfSpeech": "phrase",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Улица",
+      "translation": "Ko'cha",
+      "definition": "Shahar ko'chasi.",
+      "example": "На какой улице находится магазин?",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Центр города",
+      "translation": "Shahar markazi",
+      "definition": "Markaziy hudud.",
+      "example": "Мы гуляем по центру города.",
+      "partOfSpeech": "noun",
+      "topic": "3-bob: Shahar, Transport va Yo'nalishlar"
+    },
+    {
+      "word": "Сколько это стоит?",
+      "translation": "Bu qancha turadi?",
+      "definition": "Narx so'rash savoli.",
+      "example": "Извините, сколько это стоит?",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Сколько стоит килограмм?",
+      "translation": "Bir kilosi qancha?",
+      "definition": "Og'irlik bo'yicha narx so'rash.",
+      "example": "Сколько стоит килограмм яблок?",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Я хочу купить...",
+      "translation": "Men ... sotib olmoqchiman",
+      "definition": "Xarid niyati.",
+      "example": "Я хочу купить свежий хлеб.",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Покажите мне это",
+      "translation": "Menga buni ko'rsating",
+      "definition": "Mahsulotni ko'rishni so'rash.",
+      "example": "Покажите мне ту куртку, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "У вас есть...?",
+      "translation": "Sizda ... bormi?",
+      "definition": "Mahsulot borligini surishtirish.",
+      "example": "У вас есть свежее молоко?",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Дайте мне, пожалуйста",
+      "translation": "Menga bering, iltimos",
+      "definition": "Mahsulot berishni so'rash.",
+      "example": "Дайте мне одну воду, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Скидка",
+      "translation": "Chegirma",
+      "definition": "Narx pasayishi.",
+      "example": "Есть ли у вас скидка?",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Сделайте скидку",
+      "translation": "Chegirma qilib bering",
+      "definition": "Bozorda narxni tushirishni iltimos qilish.",
+      "example": "Сделайте небольшую скидку, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Наличные",
+      "translation": "Naqd pul",
+      "definition": "Naqd to'lov.",
+      "example": "Вы принимаете наличные?",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Оплата картой",
+      "translation": "Karta orqali to'lov",
+      "definition": "Bank kartasidan to'lash.",
+      "example": "Можно оплатить картой?",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Чек",
+      "translation": "Chek",
+      "definition": "Xarid cheki.",
+      "example": "Ваш чек и сдача, пожалуйста.",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Пакет",
+      "translation": "Xalta / Paket",
+      "definition": "Mahsulot xaltasi.",
+      "example": "Вам нужен пакет?",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Дорого",
+      "translation": "Qimmat",
+      "definition": "Yuqori narx bahosi.",
+      "example": "Это очень дорого для меня.",
+      "partOfSpeech": "adjective",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Дешево",
+      "translation": "Arzon",
+      "definition": "Hamyonbop narx.",
+      "example": "Здесь всё продается очень дешево.",
+      "partOfSpeech": "adjective",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Размер",
+      "translation": "O'lcham",
+      "definition": "Kiyim o'lchami.",
+      "example": "Какой у вас размер одежды?",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Можно примерить?",
+      "translation": "Kiyib ko'rsam bo'ladimi?",
+      "definition": "Kiyimni o'lchab ko'rishni so'rash.",
+      "example": "Где примерочная? Можно примерить?",
+      "partOfSpeech": "phrase",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Магазин",
+      "translation": "Do'kon",
+      "definition": "Savdo do'koni.",
+      "example": "Магазин работает до десяти вечера.",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Рынок / Базар",
+      "translation": "Bozor",
+      "definition": "Ochiq savdo bozori.",
+      "example": "На рынке всегда свежие фрукты.",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Сдача",
+      "translation": "Qaytim puli",
+      "definition": "To'lovdan ortgan qaytim.",
+      "example": "Возьмите вашу сдачу.",
+      "partOfSpeech": "noun",
+      "topic": "4-bob: Do'kon, Bozor va Xaridlar"
+    },
+    {
+      "word": "Ресторан / Кафе",
+      "translation": "Restoran / Kafe",
+      "definition": "Ovqatlanish maskani.",
+      "example": "Пойдем сегодня в хороший ресторан.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Столик на двоих",
+      "translation": "Ikki kishilik stol",
+      "definition": "Joy band qilish.",
+      "example": "Нам нужен столик на двоих, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Меню, пожалуйста",
+      "translation": "Menyu bering, iltimos",
+      "definition": "Menyu so'rash.",
+      "example": "Принесите меню и карту вин, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Я буду...",
+      "translation": "Men ... olaman",
+      "definition": "Buyurtma berish iborasi.",
+      "example": "Я буду чай с лимоном и пирог.",
+      "partOfSpeech": "phrase",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Что вы посоветуете?",
+      "translation": "Nima maslahat berasiz?",
+      "definition": "Tavsiya so'rash.",
+      "example": "Какой салат вы посоветуете?",
+      "partOfSpeech": "phrase",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Завтрак",
+      "translation": "Nonushta",
+      "definition": "Ertalabki ovqat.",
+      "example": "Завтрак подается с 8 до 10 утра.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Обед",
+      "translation": "Tushlik",
+      "definition": "Tushdagi taom.",
+      "example": "Приглашаю тебя на обед.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Ужин",
+      "translation": "Kechki ovqat",
+      "definition": "Kechki taom.",
+      "example": "Ужин готов, садитесь за стол.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Хлеб",
+      "translation": "Non",
+      "definition": "Asosiy non mahsuloti.",
+      "example": "Купи свежий хлеб по дороге.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Вода",
+      "translation": "Suv",
+      "definition": "Ichimlik suvi.",
+      "example": "Бутылку воды без газа, пожалуйста.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Чай / Кофе",
+      "translation": "Choy / Kofe",
+      "definition": "Issiq ichimliklar.",
+      "example": "Вам чай или кофе?",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Сок",
+      "translation": "Sharbat",
+      "definition": "Meva sharbati.",
+      "example": "Яблочный сок, пожалуйста.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Мясо",
+      "translation": "Go'sht",
+      "definition": "Go'sht mahsulotlari.",
+      "example": "Мы заказали жареное мясо.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Курица",
+      "translation": "Tovuq go'shti",
+      "definition": "Tovuq taomi.",
+      "example": "Курица с рисом — очень вкусное блюдо.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Рыба",
+      "translation": "Baliq",
+      "definition": "Baliq mahsuloti.",
+      "example": "Свежая рыба, запеченная в духовке.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Суп",
+      "translation": "Sho'rva / Sup",
+      "definition": "Suyuq osh taomi.",
+      "example": "Горячий суп в холодный день.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Салат",
+      "translation": "Salat",
+      "definition": "Sabzavotli salat.",
+      "example": "Свежий овощной салат.",
+      "partOfSpeech": "noun",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Без сахара",
+      "translation": "Shakarsiz",
+      "definition": "Shakar qo'shmasdan.",
+      "example": "Мне кофе без сахара, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Очень вкусно",
+      "translation": "Juda maza",
+      "definition": "Taomga yuqori baho berish.",
+      "example": "Спасибо шеф-повару, всё очень вкусно!",
+      "partOfSpeech": "phrase",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Счёт, пожалуйста",
+      "translation": "Hisobni keltiring, iltimos",
+      "definition": "To'lov hisobini so'rash.",
+      "example": "Мы закончили. Принесите счёт, пожалуйста.",
+      "partOfSpeech": "phrase",
+      "topic": "5-bob: Restoran, Kafe va Ovqatlar"
+    },
+    {
+      "word": "Отель / Гостиница",
+      "translation": "Mehmonxona",
+      "definition": "Mehmonlar turar joyi.",
+      "example": "Мы остановились в центре в хорошем отеле.",
+      "partOfSpeech": "noun",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Забронировать номер",
+      "translation": "Xona band qilish",
+      "definition": "Oldindan xona buyurtma berish.",
+      "example": "Я хочу забронировать номер на три дня.",
+      "partOfSpeech": "phrase",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Свободные номера",
+      "translation": "Bo'sh xonalar",
+      "definition": "Band qilinmagan xonalar.",
+      "example": "У вас есть свободные номера?",
+      "partOfSpeech": "phrase",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Ключ от номера",
+      "translation": "Xona kaliti",
+      "definition": "Mehmonxona xonasi kaliti.",
+      "example": "Вот ваш ключ от номера 304.",
+      "partOfSpeech": "phrase",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "На каком этаже?",
+      "translation": "Qaysi qavatda?",
+      "definition": "Qavatni surishtirish.",
+      "example": "Подскажите, на каком этаже наш номер?",
+      "partOfSpeech": "phrase",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Лифт",
+      "translation": "Lift",
+      "definition": "Qavatlararo lift.",
+      "example": "Лифт находится справа от ресепшн.",
+      "partOfSpeech": "noun",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Какой пароль от вай-фая?",
+      "translation": "Wi-Fi paroli nima?",
+      "definition": "Internet parolini so'rash.",
+      "example": "Скажите, пожалуйста, какой пароль от вай-фая?",
+      "partOfSpeech": "phrase",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Кондиционер",
+      "translation": "Konditsioner",
+      "definition": "Havo sovutgich.",
+      "example": "В номере работает кондиционер.",
+      "partOfSpeech": "noun",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Полотенце",
+      "translation": "Sochiq",
+      "definition": "Yuvinish sochiqi.",
+      "example": "Принесите дополнительные полотенца, пожалуйста.",
+      "partOfSpeech": "noun",
+      "topic": "6-bob: Mehmonxona va Joylashuv"
+    },
+    {
+      "word": "Работа",
+      "translation": "Ish",
+      "definition": "Mehnat faoliyati.",
+      "example": "Я иду на работу.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Где вы работаете?",
+      "translation": "Qayerda ishlaysiz?",
+      "definition": "Ish joyini so'rash.",
+      "example": "Разрешите спросить, где вы работаете?",
+      "partOfSpeech": "phrase",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Профессия",
+      "translation": "Kasb",
+      "definition": "Mutaxassislik.",
+      "example": "Какая у вас профессия?",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Учитель",
+      "translation": "O'qituvchi",
+      "definition": "Ta'lim beruvchi shaxs.",
+      "example": "Моя мама работает учителем математики.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Врач / Доктор",
+      "translation": "Shifokor",
+      "definition": "Tibbiyot xodimi.",
+      "example": "Врач осмотрел пациента.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Инженер",
+      "translation": "Muhandis",
+      "definition": "Texnik mutaxassis.",
+      "example": "Он работает инженером на заводе.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Программист",
+      "translation": "Dasturchi",
+      "definition": "Dasturiy ta'minot mutaxassisi.",
+      "example": "Программисты создают новые приложения.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Предприниматель",
+      "translation": "Tadbirkor",
+      "definition": "Biznes egasi.",
+      "example": "Успешный предприниматель открыл новый филиал.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Студент",
+      "translation": "Talaba",
+      "definition": "Oliy o'quv yurti o'quvchisi.",
+      "example": "Я студент второго курса.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Университет",
+      "translation": "Universitet",
+      "definition": "Oliy ta'lim muassasasi.",
+      "example": "Университет находится в центре.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Офис",
+      "translation": "Ofis",
+      "definition": "Ish xonasi.",
+      "example": "Наш офис работает с девяти утра.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Зарплата",
+      "translation": "Oylik maosh",
+      "definition": "Mehnat haqi.",
+      "example": "Выплата зарплаты в конце месяца.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Документы",
+      "translation": "Hujjatlar",
+      "definition": "Rasmiy qog'ozlar.",
+      "example": "Подготовьте все документы для встречи.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Встреча",
+      "translation": "Uchrashuv",
+      "definition": "Muzokara yoki ko'rishuv.",
+      "example": "У нас запланирована важная встреча.",
+      "partOfSpeech": "noun",
+      "topic": "7-bob: Ish, O'qish va Kasblar"
+    },
+    {
+      "word": "Семья",
+      "translation": "Oila",
+      "definition": "Yaqin qarindoshlar jamoasi.",
+      "example": "Моя семья очень дружная.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Родители",
+      "translation": "Ota-ona",
+      "definition": "Ota va ona.",
+      "example": "Мои родители живут в Самарканде.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Отец / Папа",
+      "translation": "Ota / Dada",
+      "definition": "Ota.",
+      "example": "Папа пришел домой с работы.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Мать / Мама",
+      "translation": "Ona / Oyi",
+      "definition": "Ona.",
+      "example": "Мама приготовила вкусный ужин.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Сын / Дочь",
+      "translation": "O'g'il / Qiz",
+      "definition": "Farzandlar.",
+      "example": "У них есть сын и дочь.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Брат / Сестра",
+      "translation": "Aka-uka / Opa-singil",
+      "definition": "Jigarlar.",
+      "example": "Мой младший брат учится в школе.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Муж / Жена",
+      "translation": "Er / Xotin",
+      "definition": "Turmush o'rtoqlari.",
+      "example": "Мой муж работает архитектором.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Ребёнок / Дети",
+      "translation": "Bola / Bolalar",
+      "definition": "Yosh bolalar.",
+      "example": "Дети играют во дворе.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Друг / Подруга",
+      "translation": "Do'st / Dugona",
+      "definition": "Yaqin o'rtoq.",
+      "example": "Мы с другом пошли в кино.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Человек / Люди",
+      "translation": "Odam / Odamlar",
+      "definition": "Insonlar.",
+      "example": "На площади было много людей.",
+      "partOfSpeech": "noun",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Добрый",
+      "translation": "Mehribon / Xushfe'l",
+      "definition": "Samimiy xarakter.",
+      "example": "Он очень добрый и отзывчивый человек.",
+      "partOfSpeech": "adjective",
+      "topic": "8-bob: Oila, Do'stlar va Insonlar"
+    },
+    {
+      "word": "Который час?",
+      "translation": "Soat necha bo'ldi?",
+      "definition": "Vaqtni so'rash.",
+      "example": "Извините, который час сейчас?",
+      "partOfSpeech": "phrase",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Час / Минута",
+      "translation": "Soat / Daqiqa",
+      "definition": "Vaqt birliklari.",
+      "example": "Осталась одна минута.",
+      "partOfSpeech": "noun",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Сегодня",
+      "translation": "Bugun",
+      "definition": "Shu kun.",
+      "example": "Сегодня замечательная погода.",
+      "partOfSpeech": "adverb",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Вчера",
+      "translation": "Kecha",
+      "definition": "O'tgan kun.",
+      "example": "Вчера мы были в театре.",
+      "partOfSpeech": "adverb",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Завтра",
+      "translation": "Ertaga",
+      "definition": "Kelgusi kun.",
+      "example": "Завтра у нас выходной.",
+      "partOfSpeech": "adverb",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Сейчас",
+      "translation": "Hozir",
+      "definition": "Aynan shu lahzada.",
+      "example": "Я сейчас немного занят.",
+      "partOfSpeech": "adverb",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Позже",
+      "translation": "Keyinroq",
+      "definition": "Birozdan so'ng.",
+      "example": "Перезвоните мне чуть позже.",
+      "partOfSpeech": "adverb",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Утром / Днём / Вечером / Ночью",
+      "translation": "Ertalab / Kunduzi / Kechqurun / Kechasi",
+      "definition": "Sutka vaqtlari.",
+      "example": "Мы встречаемся завтра вечером.",
+      "partOfSpeech": "adverb",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Понедельник",
+      "translation": "Dushanba",
+      "definition": "Haftaning 1-kuni.",
+      "example": "В понедельник начинается новая неделя.",
+      "partOfSpeech": "noun",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Пятница",
+      "translation": "Juma",
+      "definition": "Haftaning 5-kuni.",
+      "example": "В пятницу мы идём в гости.",
+      "partOfSpeech": "noun",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Суббота / Воскресенье",
+      "translation": "Shanba / Yakshanba",
+      "definition": "Dam olish kunlari.",
+      "example": "В субботу и воскресенье мы отдыхаем.",
+      "partOfSpeech": "noun",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Выходные",
+      "translation": "Dam olish kunlari",
+      "definition": "Hafta oxiri.",
+      "example": "Желаю хороших выходных!",
+      "partOfSpeech": "noun",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Один, два, три, четыре, пять",
+      "translation": "1, 2, 3, 4, 5",
+      "definition": "Sanoq sonlar.",
+      "example": "Один, два, три, четырёх, пять — посчитал ребенок.",
+      "partOfSpeech": "number",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Десять / Сто / Тысяча",
+      "translation": "10 / 100 / 1000",
+      "definition": "Raqamlar.",
+      "example": "Сто рублей, одна тысяча сум.",
+      "partOfSpeech": "number",
+      "topic": "9-bob: Vaqt, Sana va Raqamlar"
+    },
+    {
+      "word": "Какая сегодня погода?",
+      "translation": "Bugun ob-havo qanday?",
+      "definition": "Ob-havoni so'rash.",
+      "example": "Подскажите, какая сегодня погода?",
+      "partOfSpeech": "phrase",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Солнечно",
+      "translation": "Quyoshli",
+      "definition": "Ochiq ob-havo.",
+      "example": "Сегодня на улице солнечно и тепло.",
+      "partOfSpeech": "adverb",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Дождь",
+      "translation": "Yomg'ir",
+      "definition": "Yomg'irli havo.",
+      "example": "Идёт сильный дождь, возьми зонт.",
+      "partOfSpeech": "noun",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Снег",
+      "translation": "Qor",
+      "definition": "Qorli ob-havo.",
+      "example": "Зимой выпадает белый снег.",
+      "partOfSpeech": "noun",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Тепло / Холодно",
+      "translation": "Issiq / Sovuq",
+      "definition": "Harorat darajasi.",
+      "example": "Летом тепло, а зимой холодно.",
+      "partOfSpeech": "adverb",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Дом / Квартира",
+      "translation": "Uy / Xonadon",
+      "definition": "Yashash joyi.",
+      "example": "Мы купили уютную квартиру.",
+      "partOfSpeech": "noun",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Комната",
+      "translation": "Xona",
+      "definition": "Uy xonasi.",
+      "example": "Моя комната очень светлая.",
+      "partOfSpeech": "noun",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Кухня",
+      "translation": "Oshxona",
+      "definition": "Ovqat tayyorlash xonasi.",
+      "example": "На кухне пахнет свежим кофе.",
+      "partOfSpeech": "noun",
+      "topic": "10-bob: Ob-havo, Tabiat va Uy"
+    },
+    {
+      "word": "Быть",
+      "translation": "Bo'lmoq",
+      "definition": "Mavjud bo'lish fe'li.",
+      "example": "Я хочу быть счастливым.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Хотеть",
+      "translation": "Xohlamoq",
+      "definition": "Istak bildirish.",
+      "example": "Что вы хотите сделать?",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Мочь",
+      "translation": "Qila olmoq",
+      "definition": "Imkoniyat fe'li.",
+      "example": "Я могу вам помочь.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Знать",
+      "translation": "Bilmoq",
+      "definition": "Bilimga ega bo'lish.",
+      "example": "Я не знаю ответ.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Понимать",
+      "translation": "Tushunmoq",
+      "definition": "Anglash fe'li.",
+      "example": "Вы понимаете русский язык?",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Говорить",
+      "translation": "Gapirmoq",
+      "definition": "Nutq so'zlash.",
+      "example": "Говорите, я вас слушаю.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Думать",
+      "translation": "O'ylamoq",
+      "definition": "Fikr yuritish.",
+      "example": "Я думаю, всё получится.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Видеть",
+      "translation": "Ko'rmoq",
+      "definition": "Ko'z bilan ilg'ash.",
+      "example": "Я вижу прекрасный пейзаж.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Слышать",
+      "translation": "Eshitmoq",
+      "definition": "Quloq bilan eshitish.",
+      "example": "Вы слышите этот звук?",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Идти / Ехать",
+      "translation": "Bormoq (piyoda / transportda)",
+      "definition": "Harakat fe'llari.",
+      "example": "Я иду пешком. / Мы едем на машине.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Приходить / Приехать",
+      "translation": "Kelmoq",
+      "definition": "Manzilga yetib kelish.",
+      "example": "Приходите к нам в гости!",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Делать",
+      "translation": "Bajarmoq / Qilmoq",
+      "definition": "Harakat bajarish.",
+      "example": "Что вы делаете сегодня вечером?",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Работать",
+      "translation": "Ishlamoq",
+      "definition": "Mehnat qilish.",
+      "example": "Он работает каждый день.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Жить",
+      "translation": "Yashamoq",
+      "definition": "Istiqomat qilish.",
+      "example": "Где вы сейчас живете?",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Покупать",
+      "translation": "Sotib olmoq",
+      "definition": "Xarid qilish.",
+      "example": "Мы покупаем продукты на неделю.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Платить",
+      "translation": "To'lamoq",
+      "definition": "Pul to'lash.",
+      "example": "Где можно заплатить за услугу?",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Искать",
+      "translation": "Qidirmoq",
+      "definition": "Qidiruv o'tkazish.",
+      "example": "Я ищу свои ключи.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Найти",
+      "translation": "Topmoq",
+      "definition": "Natijaga erishish.",
+      "example": "Я наконец нашел нужную улицу.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Ждать",
+      "translation": "Kutmoq",
+      "definition": "Kutish harakati.",
+      "example": "Подождите меня, пожалуйста.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Помочь",
+      "translation": "Yordam bermoq",
+      "definition": "Ko'mak berish.",
+      "example": "Чем я могу вам помочь?",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Отдыхать",
+      "translation": "Dam olmoq",
+      "definition": "Hordiq chiqarish.",
+      "example": "На выходных мы отдыхаем на природе.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Читать / Писать",
+      "translation": "O'qimoq / Yozmoq",
+      "definition": "Mutolaa va yozish.",
+      "example": "Я люблю читать книги и писать статьи.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Звонить",
+      "translation": "Qo'ng'iroq qilmoq",
+      "definition": "Telefon qilish.",
+      "example": "Позвоните мне завтра утром.",
+      "partOfSpeech": "verb",
+      "topic": "11-bob: Muhim Fe'llar"
+    },
+    {
+      "word": "Хороший / Плохой",
+      "translation": "Yaxshi / Yomon",
+      "definition": "Sifat baholari.",
+      "example": "Это очень хороший фильм.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Большой / Маленький",
+      "translation": "Katta / Kichik",
+      "definition": "Hajm ko'rsatkichlari.",
+      "example": "Большой дом с маленьким садом.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Новый / Старый",
+      "translation": "Yangi / Eski",
+      "definition": "Yangi va eski tushunchalari.",
+      "example": "У него новый телефон.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Быстрый / Медленный",
+      "translation": "Tez / Sekin",
+      "definition": "Tezlik ko'rsatkichlari.",
+      "example": "Быстрый поезд едет вовремя.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Вкусный",
+      "translation": "Mazali / Maza",
+      "definition": "Mazali taom.",
+      "example": "Очень вкусный обед!",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Красивый",
+      "translation": "Chiroyli",
+      "definition": "Go'zal va ko'rkam.",
+      "example": "Ташкент — очень красивый город.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Простой / Сложный",
+      "translation": "Oson / Qiyin",
+      "definition": "Murakkablik darajasi.",
+      "example": "Это простой вопрос.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Занятый",
+      "translation": "Band",
+      "definition": "Vaqti cheklanganlik.",
+      "example": "Я сегодня очень занят.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Готовый",
+      "translation": "Tayyor",
+      "definition": "Tayyor holat.",
+      "example": "Заказ уже готов.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Устал / Устала",
+      "translation": "Charchagan",
+      "definition": "Charchoq holati.",
+      "example": "Я очень устал после работы.",
+      "partOfSpeech": "adjective",
+      "topic": "12-bob: Sifatlar va Holatlar"
+    },
+    {
+      "word": "Как вы себя чувствуете?",
+      "translation": "O'zingizni qanday his qilyapsiz?",
+      "definition": "Sog'liqni so'rash.",
+      "example": "Здравствуйте! Как вы себя чувствуете?",
+      "partOfSpeech": "phrase",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Мне плохо",
+      "translation": "Menga yomon bo'lyapti",
+      "definition": "Tobingiz qochganda aytiladigan ibora.",
+      "example": "Помогите, мне плохо.",
+      "partOfSpeech": "phrase",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "У меня болит...",
+      "translation": "Mening ... og'riyapti",
+      "definition": "Og'riq o'chog'ini ko'rsatish.",
+      "example": "У меня болит голова.",
+      "partOfSpeech": "phrase",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Голова / Живот / Зуб",
+      "translation": "Bosh / Qorin / Tish",
+      "definition": "Tana a'zolari og'rig'i.",
+      "example": "У меня болит зуб, нужен стоматолог.",
+      "partOfSpeech": "noun",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Температура",
+      "translation": "Isitma / Harorat",
+      "definition": "Tana harorati ko'tarilishi.",
+      "example": "У ребенка высокая температура.",
+      "partOfSpeech": "noun",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Простуда / Грипп",
+      "translation": "Shamollash / Grip",
+      "definition": "Mavsumiy xastalik.",
+      "example": "У меня обычная простуда.",
+      "partOfSpeech": "noun",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Аптека",
+      "translation": "Dorixona",
+      "definition": "Dori-darmon do'koni.",
+      "example": "Где находится ближайшая аптека?",
+      "partOfSpeech": "noun",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Лекарство / Таблетки",
+      "translation": "Dori / Haplar",
+      "definition": "Davolanish vositalari.",
+      "example": "Дайте лекарство от головной боли.",
+      "partOfSpeech": "noun",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Больница",
+      "translation": "Shifoxona",
+      "definition": "Davolash muassasasi.",
+      "example": "Пациента отвезли в больницу.",
+      "partOfSpeech": "noun",
+      "topic": "13-bob: Sog'liq va Dorixona"
+    },
+    {
+      "word": "Помогите!",
+      "translation": "Yordam bering!",
+      "definition": "Favqulodda chaqiriq.",
+      "example": "Помогите, пожалуйста! Срочно!",
+      "partOfSpeech": "interjection",
+      "topic": "14-bob: Favqulodda Holatlar va Yordam"
+    },
+    {
+      "word": "Мне нужна помощь",
+      "translation": "Menga yordam kerak",
+      "definition": "Yordam so'rash iborasi.",
+      "example": "Помогите мне, мне нужна помощь.",
+      "partOfSpeech": "phrase",
+      "topic": "14-bob: Favqulodda Holatlar va Yordam"
+    },
+    {
+      "word": "Вызовите скорую!",
+      "translation": "Tez yordam chaqiring!",
+      "definition": "Tibbiy shoshilinch chaqiruv.",
+      "example": "Человеку плохо, вызовите скорую!",
+      "partOfSpeech": "phrase",
+      "topic": "14-bob: Favqulodda Holatlar va Yordam"
+    },
+    {
+      "word": "Вызовите полицию!",
+      "translation": "Politsiya chaqiring!",
+      "definition": "Huquq-tartibot chaqiruvi.",
+      "example": "Срочно вызовите полицию!",
+      "partOfSpeech": "phrase",
+      "topic": "14-bob: Favqulodda Holatlar va Yordam"
+    },
+    {
+      "word": "Я потерялся / Потерялась",
+      "translation": "Adashib qoldim",
+      "definition": "Yo'l yo'qotganda aytiladi.",
+      "example": "Извините, я потерялся, где я находитесь?",
+      "partOfSpeech": "verb",
+      "topic": "14-bob: Favqulodda Holatlar va Yordam"
+    },
+    {
+      "word": "Я потерял документы",
+      "translation": "Hujjatlarimni yo'qotib qo'ydim",
+      "definition": "Yo'qotish haqida bildirish.",
+      "example": "Я потерял документы и кошелёк.",
+      "partOfSpeech": "phrase",
+      "topic": "14-bob: Favqulodda Holatlar va Yordam"
+    },
+    {
+      "word": "Осторожно!",
+      "translation": "Ehtiyot bo'ling!",
+      "definition": "Ogohlantirish iborasi.",
+      "example": "Осторожно, здесь скользко!",
+      "partOfSpeech": "interjection",
+      "topic": "14-bob: Favqulodda Holatlar va Yordam"
+    }
+  ]
+}
 ];
