@@ -5,7 +5,6 @@ import { grammarData } from '../../data/grammarData';
 import { useGrammarStats } from '../../hooks/useGrammarStats';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './GrammarPage.css';
-import './GeneralGrammarTest.css';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -61,40 +60,41 @@ export default function GrammarPage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Main Header / Title */}
+      {/* Main Header / Hero Section */}
       <motion.div
         className="grammar-header"
         variants={headerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="grammar-header-top-row">
-          <div className="grammar-header-titles-left">
-            <div className="grammar-header-icon">📖</div>
-            <h1 className="grammar-title">{t('grammar.title')}</h1>
+        <div className="grammar-header-content">
+          <div className="grammar-header-main">
+            <div className="grammar-header-icon-container">
+              <span className="grammar-header-icon">📖</span>
+            </div>
+            <div className="grammar-header-info">
+              <h1 className="grammar-title">{t('grammar.title')}</h1>
+              <p className="grammar-subtitle">
+                {t('grammar.pathEntryDesc') || "Ingliz tili qoidalari va interaktiv mashqlar"}
+              </p>
+            </div>
           </div>
 
-          <div className="grammar-header-actions">
-            <motion.button
-              className="grammar-action-btn grammar-path-action-btn"
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => navigate('/grammar/path')}
-            >
-              <span className="grammar-action-icon">🧗</span>
-              <span className="grammar-action-text">{t('grammar.pathTitle')}</span>
-            </motion.button>
-
-            <motion.button
-              className="grammar-action-btn grammar-test-action-btn"
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => navigate('/grammar/general-test')}
-            >
-              <span className="grammar-action-icon">🧠</span>
-              <span className="grammar-action-text">{t('grammar.generalTestTitle')}</span>
-            </motion.button>
-          </div>
+          <motion.button
+            className="grammar-path-hero-btn"
+            whileHover={{ scale: 1.03, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => navigate('/grammar/path')}
+          >
+            <div className="grammar-path-hero-left">
+              <span className="grammar-path-hero-icon">🧗</span>
+              <div className="grammar-path-hero-text">
+                <span className="grammar-path-hero-title">{t('grammar.pathTitle')}</span>
+                <span className="grammar-path-hero-badge">Step-by-step</span>
+              </div>
+            </div>
+            <span className="grammar-path-hero-arrow">→</span>
+          </motion.button>
         </div>
       </motion.div>
 
