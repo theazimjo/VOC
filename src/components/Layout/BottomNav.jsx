@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, BookOpen, GraduationCap, FlaskConical } from 'lucide-react';
+import { LayoutDashboard, BookOpen, GraduationCap, User } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './PersonalBottomNav.css';
 
@@ -17,7 +17,7 @@ export default function BottomNav() {
     { to: '/', icon: LayoutDashboard, label: t('nav.dashboard'), end: true },
     { to: '/library', icon: BookOpen, label: t('nav.library'), end: false },
     { to: '/grammar', icon: GraduationCap, label: t('nav.grammar'), end: false },
-    { to: '/experiment', icon: FlaskConical, label: t('nav.lab'), end: false },
+    { to: '/profile', icon: User, label: t('nav.profile'), end: false },
   ];
   const itemRefs = useRef([]);
   // Measured in real pixels from the rendered tabs, not guessed via CSS
