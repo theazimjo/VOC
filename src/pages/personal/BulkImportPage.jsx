@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Upload, Copy, Check, AlertTriangle, FileText } from 'lucide-react';
 import { usePacks } from '../../hooks/usePacks';
@@ -169,8 +169,9 @@ async function resolveEntry(item, wordLangCode, isEnglishPack) {
 export default function BulkImportPage() {
   const { packId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { t } = useLanguage();
-  const { getPack } = usePacks();
+  const { getPack, updatePack } = usePacks();
   const { words: existingWords, bulkAddWords, loading: wordsLoading } = useWords('packs', packId);
 
   const [pack, setPack] = useState(null);
@@ -179,6 +180,11 @@ export default function BulkImportPage() {
   const [jsonText, setJsonText] = useState('');
   const [copiedSample, setCopiedSample] = useState(false);
   const [autoResolveMissing, setAutoResolveMissing] = useState(true);
+
+  const initialTopic = searchParams.get('topic') || '';
+  const [selectedChapter, setSelectedChapter] = useState(initialTopic);
+  const [isCustomChapter, setIsCustomChapter] = useState(false);
+  const [customChapterName, setCustomChapterName] = useState('');
 
   const [isImporting, setIsImporting] = useState(false);
   const [progress, setProgress] = useState(null);
@@ -199,6 +205,12 @@ export default function BulkImportPage() {
   const wordLangCode = toShortLangCode(packLanguage);
   const isEnglishPack = pack?.type === 'english';
   const sampleJson = useMemo(() => buildSampleJson(wordLangCode, pack?.type), [wordLangCode, pack?.type]);
+
+  const existingTopics = useMemo(() => {
+    const fromWords = (existingWords || []).map(w => w.topic).filter(Boolean);
+    const fromPack = pack?.chapters || [];
+    return [...new Set([...fromWords, ...fromPack])].sort();
+  }, [existingWords, pack]);
 
   const handleCopySample = () => {
     navigator.clipboard.writeText(sampleJson);
@@ -266,6 +278,8 @@ export default function BulkImportPage() {
         return;
       }
 
+      const targetChapter = (isCustomChapter ? customChapterName : selectedChapter).trim();
+
       const existingSet = new Set((existingWords || []).map(w => (w.word || '').trim().toLowerCase()));
       const uniqueWords = [];
       let duplicateCount = 0;
@@ -276,7 +290,10 @@ export default function BulkImportPage() {
           duplicateCount++;
         } else {
           existingSet.add(key);
-          uniqueWords.push(w);
+          uniqueWords.push({
+            ...w,
+            topic: w.topic || targetChapter || ''
+          });
         }
       }
 
@@ -296,12 +313,20 @@ export default function BulkImportPage() {
         return;
       }
 
+      if (targetChapter && pack) {
+        const currentChapters = pack.chapters || [];
+        if (!currentChapters.includes(targetChapter)) {
+          const updatedChapters = [...currentChapters, targetChapter];
+          await updatePack(packId, { chapters: updatedChapters });
+        }
+      }
+
       setProgress({ current: 0, total: uniqueWords.length, stage: 'saving' });
       await bulkAddWords(uniqueWords, (addedCount, totalCount) => {
         setProgress({ current: addedCount, total: totalCount, stage: 'saving' });
       });
 
-      navigate(`/packs/${packId}`);
+      navigate(`/packs/${packId}${targetChapter ? `?topic=${encodeURIComponent(targetChapter)}` : ''}`);
     } catch (err) {
       setImportError('Import failed: ' + err.message);
     } finally {
@@ -359,6 +384,56 @@ export default function BulkImportPage() {
             {copiedSample ? <Check size={14} /> : <Copy size={14} />}
             <span>{copiedSample ? t('bulkImport.copiedSample') : t('bulkImport.copySample')}</span>
           </button>
+        </div>
+
+        <div className="input-group bip-chapter-group">
+          <label>{t('bulkImport.selectChapterLabel') || t('wordForm.chapterLabel')}</label>
+          <select
+            className="select"
+            value={
+              isCustomChapter
+                ? '__custom__'
+                : selectedChapter && !existingTopics.includes(selectedChapter)
+                ? '__custom__'
+                : selectedChapter
+            }
+            onChange={e => {
+              const val = e.target.value;
+              if (val === '__custom__') {
+                setIsCustomChapter(true);
+                if (existingTopics.includes(selectedChapter)) {
+                  setSelectedChapter('');
+                }
+              } else {
+                setIsCustomChapter(false);
+                setSelectedChapter(val);
+              }
+            }}
+            disabled={isImporting}
+          >
+            <option value="">{t('bulkImport.noChapterOption') || '-- Chapter tanlanmagan --'}</option>
+            {existingTopics.map(ch => (
+              <option key={ch} value={ch}>{ch}</option>
+            ))}
+            <option value="__custom__">{t('bulkImport.newChapterOption') || '+ Yangi chapter qo\'shish...'}</option>
+          </select>
+
+          {(isCustomChapter || (selectedChapter && !existingTopics.includes(selectedChapter))) && (
+            <input
+              type="text"
+              className="input"
+              style={{ marginTop: '8px' }}
+              value={isCustomChapter ? customChapterName : selectedChapter}
+              onChange={e => {
+                const val = e.target.value;
+                if (isCustomChapter) setCustomChapterName(val);
+                setSelectedChapter(val);
+              }}
+              placeholder={t('bulkImport.customChapterPlaceholder') || t('wordForm.chapterPlaceholder')}
+              maxLength={120}
+              disabled={isImporting}
+            />
+          )}
         </div>
 
         <div className="input-group">

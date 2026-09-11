@@ -616,7 +616,7 @@ export default function PackDetail() {
               : pack.type === 'english' ? `/packs/${packId}/word/english/new`
                 : `/packs/${packId}/word/new${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`
           )}
-          onImportJson={() => navigate(`/packs/${packId}/import-json`)}
+          onImportJson={() => navigate(`/packs/${packId}/import-json${topicFilter ? `?topic=${encodeURIComponent(topicFilter)}` : ''}`)}
           onExtractPhoto={() => setShowPhotoExtractorModal(true)}
           onAddChapter={
             pack.type === 'ielts' || pack.type === 'english'
