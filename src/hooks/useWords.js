@@ -316,5 +316,32 @@ export function useWords(collectionType, collectionId) {
     [getWordsRef, getWordCountRef]
   );
 
-  return { words, loading, addWord, updateWord, deleteWord, getWord, bulkAddWords };
+  // Delete multiple words in batch
+  const bulkDeleteWords = useCallback(
+    async (wordIds) => {
+      if (!user || !collectionType || !collectionId || !wordIds || wordIds.length === 0) return;
+
+      const wordsRef = getWordsRef();
+      if (!wordsRef) return;
+
+      const updates = {};
+      wordIds.forEach(id => {
+        updates[`${id}`] = null;
+      });
+
+      await update(wordsRef, updates);
+
+      try {
+        const wordCountRef = getWordCountRef();
+        if (wordCountRef) {
+          await runTransaction(wordCountRef, (count) => Math.max(0, (count || 0) - wordIds.length));
+        }
+      } catch (err) {
+        console.warn("Failed to update pack wordCount after bulk delete:", err);
+      }
+    },
+    [user, collectionType, collectionId, getWordsRef, getWordCountRef]
+  );
+
+  return { words, loading, addWord, updateWord, deleteWord, getWord, bulkAddWords, bulkDeleteWords };
 }

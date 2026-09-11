@@ -14,7 +14,152 @@
 
 .word-list-filters {
   display: flex;
+  align-items: center;
   gap: var(--space-sm);
+}
+
+/* ---------- Selection Bar Sticky Floating Banner ---------- */
+.word-selection-toolbar {
+  position: sticky;
+  top: 12px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--bg-tertiary, #2c2c2e);
+  border: 1px solid #a855f7;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(168, 85, 247, 0.3);
+  margin-bottom: var(--space-md);
+  backdrop-filter: blur(16px);
+  animation: selection-bar-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes selection-bar-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.word-selection-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-close-selection {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.btn-close-selection:hover {
+  background: var(--bg-primary);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.word-selection-count {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.word-selection-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-select-all {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-select-all:hover {
+  background: var(--bg-primary);
+  border-color: #a855f7;
+  color: #c084fc;
+}
+
+.btn-bulk-delete {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+  white-space: nowrap;
+}
+
+.btn-bulk-delete:hover:not(:disabled) {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.btn-bulk-delete:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Filter controls multi-select toggle button */
+.btn-toggle-select-mode {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-toggle-select-mode:hover,
+.btn-toggle-select-mode.active {
+  background: rgba(168, 85, 247, 0.14);
+  border-color: rgba(168, 85, 247, 0.5);
+  color: #c084fc;
 }
 
 .word-list-grid {
@@ -49,7 +194,7 @@
   color: var(--text-muted);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
   .word-list-controls {
     flex-direction: column;
     align-items: stretch;
@@ -60,5 +205,9 @@
   }
   .word-list-filters select {
     flex: 1;
+  }
+  .word-selection-toolbar {
+    flex-wrap: wrap;
+    padding: 10px 12px;
   }
 }

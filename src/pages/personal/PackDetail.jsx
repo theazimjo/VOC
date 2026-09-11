@@ -26,7 +26,7 @@ export default function PackDetail() {
   const { user } = useAuth();
   const { t, language } = useLanguage();
   const { getPack, updatePack } = usePacks();
-  const { words, loading, addWord, updateWord, deleteWord, bulkAddWords } = useWords('packs', packId);
+  const { words, loading, addWord, updateWord, deleteWord, bulkAddWords, bulkDeleteWords } = useWords('packs', packId);
   const { limit: dailyWordLimit, todayCount } = useDailyNewWordLimit();
 
   const [pack, setPack] = useState(null);
@@ -398,6 +398,11 @@ export default function PackDetail() {
     await deleteWord(wordId);
   };
 
+  const handleBulkDeleteWords = async (wordIds) => {
+    if (pack?.name === 'Irregular Verbs') return;
+    await bulkDeleteWords(wordIds);
+  };
+
   if (!pack) {
     return (
       <div className="ios-activity-indicator" style={{ marginTop: '100px' }}>
@@ -596,6 +601,7 @@ export default function PackDetail() {
         words={displayedWords}
         onEdit={handleEditWord}
         onDelete={handleDeleteWord}
+        onBulkDelete={handleBulkDeleteWords}
         loading={loading}
         readOnly={pack.name === 'Irregular Verbs'}
         groupFn={pack.name === 'Irregular Verbs' ? getIrregularVerbGroup : undefined}

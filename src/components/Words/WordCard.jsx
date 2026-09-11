@@ -2,11 +2,21 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getMasteryLevel } from '../../utils/spacedRepetition';
 import { partOfSpeechOptions, speakWord } from '../../utils/helpers';
-import { Volume2, Edit2, Trash2, MoreVertical } from 'lucide-react';
+import { Volume2, Edit2, Trash2, MoreVertical, Check } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './WordCard.css';
 
-export default function WordCard({ word, onEdit, onDelete, readOnly, language = 'en-US' }) {
+export default function WordCard({
+  word,
+  onEdit,
+  onDelete,
+  readOnly,
+  language = 'en-US',
+  isSelectionMode = false,
+  isSelected = false,
+  onToggleSelect,
+  onPointerDownCard
+}) {
   const { t } = useLanguage();
   const masteryLevels = t('wordCard.masteryLevels');
   const masteryInfo = getMasteryLevel(word.mastery || 0);
@@ -34,21 +44,42 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
 
   return (
     <motion.div
-      className="word-card"
+      className={`word-card${isSelectionMode ? ' selection-mode' : ''}${isSelected ? ' selected' : ''}`}
+      data-word-id={word.id}
       layout
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+      onPointerDown={(e) => {
+        if (!readOnly && onPointerDownCard) {
+          onPointerDownCard(word.id, e);
+        }
+      }}
+      onClick={(e) => {
+        if (isSelectionMode) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }}
     >
       {/* Card Header Row: Word Title + Speak Button on Left; POS badge, Mastery, Actions on Right */}
       <div className="word-card-header">
+        {isSelectionMode && (
+          <div className="word-card-select-checkbox" aria-hidden="true">
+            {isSelected && <Check size={14} strokeWidth={3} />}
+          </div>
+        )}
+
         <div className="word-title-group">
           <span className="word-english-text">{word.word}</span>
           <button
             type="button"
             className="btn-speak"
-            onClick={() => speakWord(word.word, language)}
+            onClick={(e) => {
+              e.stopPropagation();
+              speakWord(word.word, language);
+            }}
             title={t('wordCard.pronounce')}
             aria-label="Pronounce"
           >
@@ -75,13 +106,13 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
             ))}
           </div>
 
-          {!readOnly && (
-            <div className="word-actions-wrap">
+          {!readOnly && !isSelectionMode && (
+            <div className="word-actions-wrap" onClick={(e) => e.stopPropagation()}>
               <div className="word-actions">
                 <button
                   type="button"
                   className="btn-action-icon edit"
-                  onClick={() => onEdit(word)}
+                  onClick={(e) => { e.stopPropagation(); onEdit(word); }}
                   title={t('wordCard.edit')}
                 >
                   <Edit2 size={14} strokeWidth={2.5} />
@@ -89,7 +120,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
                 <button
                   type="button"
                   className="btn-action-icon delete"
-                  onClick={() => setShowDeleteConfirm(true)}
+                  onClick={(e) => { e.stopPropagation(); setShowDeleteConfirm(true); }}
                   title={t('wordCard.delete')}
                 >
                   <Trash2 size={14} strokeWidth={2.5} />
@@ -100,7 +131,7 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
                 <button
                   type="button"
                   className="word-options-btn"
-                  onClick={() => setMenuOpen(o => !o)}
+                  onClick={(e) => { e.stopPropagation(); setMenuOpen(o => !o); }}
                   aria-label={t('wordCard.options')}
                   title={t('wordCard.options')}
                 >
@@ -111,14 +142,14 @@ export default function WordCard({ word, onEdit, onDelete, readOnly, language = 
                     <button
                       type="button"
                       className="word-options-item"
-                      onClick={() => { setMenuOpen(false); onEdit(word); }}
+                      onClick={(e) => { e.stopPropagation(); setMenuOpen(false); onEdit(word); }}
                     >
                       <Edit2 size={15} strokeWidth={2.3} /> {t('wordCard.edit')}
                     </button>
                     <button
                       type="button"
                       className="word-options-item delete"
-                      onClick={() => { setMenuOpen(false); setShowDeleteConfirm(true); }}
+                      onClick={(e) => { e.stopPropagation(); setMenuOpen(false); setShowDeleteConfirm(true); }}
                     >
                       <Trash2 size={15} strokeWidth={2.3} /> {t('wordCard.delete')}
                     </button>
