@@ -11,6 +11,8 @@
   width: 100%;
   margin: 0 auto;
   gap: var(--space-lg);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ─── Progress ─── */
@@ -39,6 +41,8 @@
   height: 320px;
   perspective: 1200px;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .flashcard {
